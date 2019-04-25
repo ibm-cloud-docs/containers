@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-24"
+lastupdated: "2019-04-25"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -30,7 +30,7 @@ subcollection: containers
 Create private clusters and add worker nodes to increase cluster capacity in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Not sure which cluster setup to choose? See [Planning your private cluster and worker node setup](/docs/containers?topic=containers-cs_private_planning).
+Not sure which cluster setup to choose? See [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_private_clusters).
 {: tip}
 
 Have you created a cluster before and are just looking for a quick example command? Try this example to create a standard private cluster that uses the private service endpoint only:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-24"
+lastupdated: "2019-04-25"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -29,6 +29,9 @@ subcollection: containers
 
 You might want to create a private cluster for security or compliance requirements. Design your private cluster for maximum availability and capacity for your app with {{site.data.keyword.containerlong}}.
 {: shortdesc}
+
+First time creating a cluster? Try out our [tutorial](/docs/containers?topic=containers-cs_cluster_tutorial) first and come back here when you’re ready to plan out your production-ready clusters.
+{: tip}
 
 ## Private cluster network setups
 {: #private_setups}
@@ -188,7 +191,7 @@ To improve availability for your app and to allow failover for the case that one
 
 <img src="images/cs_cluster_singlezone.png" alt="High availability for clusters in a single zone" width="230" style="width:230px; border-style: none"/>
 
-By default, your single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](#resize_pool) or by [adding a new worker pool](#add_pool).
+By default, your single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-cs_clusters_private#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-cs_clusters_private#add_pool).
 
 When you add more worker nodes, app instances can be distributed across multiple worker nodes. If one worker node goes down, app instances on available worker nodes continue to run. Kubernetes automatically reschedules pods from unavailable worker nodes to ensure performance and capacity for your app. To ensure that your pods are evenly distributed across worker nodes, implement [pod affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
 
@@ -212,7 +215,7 @@ With {{site.data.keyword.containerlong_notm}}, you can create multizone clusters
 A worker pool is a collection of worker nodes with the same flavor, such as machine type, CPU, and memory. When you create a cluster, a default worker pool is automatically created for you. To spread the worker nodes in your pool across zones, add worker nodes to the pool, or update worker nodes, you can use new `ibmcloud ks worker-pool` commands.
 
 **Can I still use stand-alone worker nodes?**</br>
-The previous cluster setup of stand-alone worker nodes is supported, but deprecated. Be sure to [add a worker pool to your cluster](#add_pool), and then [use worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool) to organize your worker nodes instead of stand-alone worker nodes.
+The previous cluster setup of stand-alone worker nodes is supported, but deprecated. Be sure to [add a worker pool to your cluster](/docs/containers?topic=containers-cs_clusters_private#add_pool), and then [use worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool) to organize your worker nodes instead of stand-alone worker nodes.
 
 **Can I convert my single zone cluster to a multizone cluster?**</br>
 If the cluster is in one of the [supported multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones), yes. See [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
@@ -257,7 +260,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 {: pre}
 
 **I created my multizone cluster. Why is there still only one zone? How do I add zones to my cluster?**</br>
-If you [create your multizone cluster with the CLI](#create-private), the cluster is created, but you must add zones to the worker pool to complete the process. To span across multiple zones, your cluster must be in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones). To add a zone to your cluster and spread worker nodes across zones, see [Adding a zone to your cluster](#add_zone).
+If you [create your multizone cluster with the CLI](/docs/containers?topic=containers-cs_clusters_private#create-private), the cluster is created, but you must add zones to the worker pool to complete the process. To span across multiple zones, your cluster must be in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones). To add a zone to your cluster and spread worker nodes across zones, see [Adding a zone to your cluster](/docs/containers?topic=containers-cs_clusters_private#add_zone).
 
 ### What are some changes from how I currently manage my clusters?
 {: #mz_new_ways}
