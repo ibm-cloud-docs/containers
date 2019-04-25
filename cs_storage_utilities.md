@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-22"
+lastupdated: "2019-04-25"
 
 keywords: kubernetes, iks, local persistent storage
 
