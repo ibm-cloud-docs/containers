@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-26"
 
 keywords: kubernetes, iks
 
@@ -981,7 +981,7 @@ When you assign the **Super User** infrastructure role to the admin who sets the
 
 For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.Bluemix_notm}} IAM platform roles to control users' infrastructure access, you must set specific IBM Cloud infrastructure (SoftLayer) permissions for users.
 
-If you have multizone clusters, your IBM Cloud infrastructure (SoftLayer) account owner needs to turn on VLAN spanning so that the nodes in different zones can communicate within the cluster. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
+If your account is not VRF-enabled, your IBM Cloud infrastructure (SoftLayer) account owner must turn on VLAN spanning. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. For more information, see [VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation).
 {: tip}
 
 Before you begin, make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
@@ -990,7 +990,7 @@ Before you begin, make sure that you are the account owner or have **Super User*
 
 2. Click the **Users** page, and then click the name of the user that you want to set permissions for.
 
-3. Click **Classic infrastructure** tab, and then click **Permissions** tab.
+3. Click the **Classic infrastructure** tab, and then click the **Permissions** tab.
 
 4. Customize the user's access. The permissions that users need depend on what infrastructure resources they need to use. You have two options for assigning access:
     * Use the **Permission sets** drop-down list to assign one of the following predefined roles. After selecting a role, click **Set**.
@@ -1008,6 +1008,13 @@ Before you begin, make sure that you are the account owner or have **Super User*
     * In the table of devices, make sure that the appropriate devices are selected.
 
 7. To save your changes, click **Set**.
+
+8. **Important**: If you are assigning permissions so that a user can manage clusters and worker nodes, you must assign the user access for working with support cases.
+  1. Click the **Access policies** tab, and then click **Assign access**.
+  2. Click the **Assign access to account management services** card.
+  3. Select **Support Center**.
+  4. To allow the user to view, add, and edit support cases, select **Administrator**.
+  5. Click **Assign**.
 
 Downgrading permissions? The action can take a few minutes to complete.
 {: tip}

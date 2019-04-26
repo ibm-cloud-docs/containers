@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-23"
+lastupdated: "2019-04-26"
 
 keywords: kubernetes, iks
 
@@ -1137,7 +1137,7 @@ The following table shows the infrastructure permissions required to complete gr
   <li>View VLANs.</li>
   <li>Create subnets.</li>
   <li>Deploy pods and load balancer services.</li></ul>
-</td><td>
+  </td><td>
 <strong>Account</strong>:<ul>
   <li>Add Server</li>
   <li>Cancel Server</li></ul>
@@ -1148,6 +1148,7 @@ The following table shows the infrastructure permissions required to complete gr
   <li>View Virtual Server Details</li></ul>
 <strong>Network</strong>:<ul>
   <li>Add Compute with Public Network Port</li></ul>
+**Important**: You must also assign the user the ability to manage support cases. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
 </td>
 </tr>
 <tr>
