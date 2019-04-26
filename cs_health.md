@@ -60,6 +60,8 @@ To get started, see [Understanding cluster and app log forwarding](#logging).
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
 <dd>To monitor user-initiated administrative activity made in your cluster, you can collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}. Clusters generate two types of {{site.data.keyword.cloudaccesstrailshort}} events.
 
+<p class="deprecated">{{site.data.keyword.cloudaccesstrailfull_notm}}, which is built on {{site.data.keyword.loganalysisfull_notm}}, is deprecated. As of 9 May 2019, you cannot provision new {{site.data.keyword.cloudaccesstrailshort}} instances, and access to Lite plan instances will be removed. Existing premium plan instances are supported until 30 September 2019. To continue monitoring cluster management events, [provision an instance of {{site.data.keyword.at_full_notm}}](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started). To continue monitoring Kubernetes API server audit events, create a logging configuration to [forward logs to an external server](#logging).</p>
+
 <ul><li>Cluster management events are automatically generated and forwarded to {{site.data.keyword.cloudaccesstrailshort}}.</li>
 
 <li>Kubernetes API server audit events are automatically generated, but you must [create a logging configuration](#api_forward) so that Fluentd can forward these logs to {{site.data.keyword.cloudaccesstrailshort}}.</li></ul>
