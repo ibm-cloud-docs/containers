@@ -59,12 +59,10 @@ To get started, see [Understanding cluster and app log forwarding](#logging).
 
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
 <dd>To monitor user-initiated administrative activity made in your cluster, you can collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}. Clusters generate two types of {{site.data.keyword.cloudaccesstrailshort}} events.
-
 <ul><li>Cluster management events are automatically generated and forwarded to {{site.data.keyword.cloudaccesstrailshort}}.</li>
-
 <li>Kubernetes API server audit events are automatically generated, but you must [create a logging configuration](#api_forward) so that Fluentd can forward these logs to {{site.data.keyword.cloudaccesstrailshort}}.</li></ul>
-
 For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events). For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) documentation.
+<p class="note">{{site.data.keyword.containerlong_notm}} is currently not configured to use {{site.data.keyword.at_full}}. To manage cluster management events and Kubernetes API audit logs, continue to use {{site.data.keyword.cloudaccesstrailfull_notm}}.</p>
 </dd>
 
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
@@ -537,6 +535,9 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * Currently, filters are not supported.
 * There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.cloudaccesstrailshort}} and an external server by creating a logging configuration and a webhook.
 * You must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+
+{{site.data.keyword.containerlong_notm}} is currently not configured to use {{site.data.keyword.at_full}}. To manage Kubernetes API audit logs, continue to use {{site.data.keyword.cloudaccesstrailfull_notm}}.
+{: note}
 
 ### Forwarding audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}
 {: #audit_enable_loganalysis}
