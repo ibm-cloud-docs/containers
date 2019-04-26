@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-04-26"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -1084,7 +1084,7 @@ Before you begin:
 * Review the following considerations and limitations.
   * You can create host names for public version 1.0 and 2.0 NLBs.
   * You currently cannot create host names for private NLBs.
-  * You can register up to 128 host names. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+  * You can register up to 128 host names. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support).
 * [Create an NLB for your app in a single-zone cluster](#lb_config) or [create NLBs in each zone of a multizone cluster](#multi_zone_config).
 
 To create a host name for one or more NLB IP addresses:

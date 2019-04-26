@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-26"
 
 keywords: kubernetes, iks
 
@@ -84,7 +84,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Persistent storage</td>
  <td>Use [dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) or [static provisioning](/docs/containers?topic=containers-kube_concepts#static_provisioning) of volumes.</td>
- <td>Use [dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) of volumes. [Open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
+ <td>Use [dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) of volumes. [Open a support case](/docs/get-support?topic=get-support-getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
  </tr>
  <tr>
  <td>Image registry URL in {{site.data.keyword.registryshort_notm}}</td>
@@ -382,7 +382,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     {: pre}
 
     * For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
-    * If you see the following error message, [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+    * If you see the following error message, [open a support case](/docs/get-support?topic=get-support-getting-customer-support).
         ```
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.
         ```
@@ -501,7 +501,7 @@ Requirements:
 
 Before you begin: Configure the routing of network traffic into and out of your enterprise network to the {{site.data.keyword.Bluemix_dedicated_notm}} network that will use the user-managed subnet.
 
-1. To use your own subnet, [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) and provide the list of subnet CIDRs that you want to use. **Note**: The way that the ALB and load balancers are managed for on-premises and internal account connectivity differs depending on the format of the subnet CIDR. See the final step for configuration differences.
+1. To use your own subnet, [open a support case](/docs/get-support?topic=get-support-getting-customer-support) and provide the list of subnet CIDRs that you want to use. **Note**: The way that the ALB and load balancers are managed for on-premises and internal account connectivity differs depending on the format of the subnet CIDR. See the final step for configuration differences.
 
 2. After {{site.data.keyword.IBM_notm}} provisions the user-managed subnets, make the subnet available to your Kubernetes cluster.
 
@@ -566,19 +566,19 @@ For {{site.data.keyword.Bluemix_dedicated_notm}} environments, public primary IP
 #### Configuring access to an app by using the load balancer service type
 {: #dedicated_apps_public_load_balancer}
 
-If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Basic and DSR load balancing with network load balancers (NLB)](/docs/containers?topic=containers-loadbalancer).
+If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Basic and DSR load balancing with network load balancers (NLB)](/docs/containers?topic=containers-loadbalancer).
 {: shortdesc}
 
 #### Configuring public access to an app by using Ingress
 {: #dedicated_apps_public_ingress}
 
-If you want to use public IP addresses for the Ingress ALB, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps to the public](/docs/containers?topic=containers-ingress#ingress_expose_public).
+If you want to use public IP addresses for the Ingress ALB, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps to the public](/docs/containers?topic=containers-ingress#ingress_expose_public).
 {: shortdesc}
 
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see Persistent data storage options for high availability](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+To review options for creating persistent storage, see Persistent data storage options for high availability](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support?topic=get-support-getting-customer-support).
 {: shortdesc}
 
 If you choose to provision [file storage](/docs/containers?topic=containers-file_storage#file_predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support case.
