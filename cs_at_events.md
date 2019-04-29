@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-04-26"
+lastupdated: "2019-04-29"
 
 keywords: kubernetes, iks, audit
 
@@ -40,7 +40,7 @@ The {{site.data.keyword.containershort_notm}} generates two types of {{site.data
     * These events are automatically generated, but you must configure your cluster to forward these events to the {{site.data.keyword.cloudaccesstrailshort}} service.
     * You can configure your cluster to send events to the {{site.data.keyword.cloudaccesstrailshort}} **account domain** or to a **space domain**. For more information, see [Sending audit logs](/docs/containers?topic=containers-health#api_forward).
 
-For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla). For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
+For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started). For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
 
 ## Finding information for events
 {: #kube-find}
