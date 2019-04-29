@@ -72,7 +72,6 @@ IBM Cloud Kubernetes Service
 
     cs_images.md
     cs_app.md
-
     {: .topicgroup}
     Networking to expose apps
         cs_network_planning.md
