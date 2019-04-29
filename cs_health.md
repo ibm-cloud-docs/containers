@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-26"
+lastupdated: "2019-04-29"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
