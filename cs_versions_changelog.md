@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-29"
 
 keywords: kubernetes, iks
 
@@ -47,6 +47,38 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+### Changelog for worker node fix pack 1.13.5_1519, released 29 April 2019
+{: #1135_1519}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.5_1519.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.5_1518">
+<caption>Changes since version 1.13.5_1518</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.5</td>
+<td>1.2.6</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.6).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.13.5_1518, released 15 April 2019
 {: #1135_1518}
@@ -548,6 +580,39 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.7_1550, released 29 April 2019
+{: #1127_1550}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.7_1550.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.7_1549">
+<caption>Changes since version 1.12.7_1549</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.12.7_1549, released 15 April 2019
 {: #1127_1549}
@@ -1360,6 +1425,39 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019
+{: #1119_1556}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.9_1556.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.9_1555">
+<caption>Changes since version 1.11.9_1555</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019
 {: #1119_1555}
@@ -2522,6 +2620,33 @@ Review the version 1.10 changelog.
 
 Kubernetes version 1.10 is deprecated and becomes unsupported on 15 May 2019. [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.10.13_1557, released 29 April 2019
+{: #11013_1557}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.13_1557.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.13_1556">
+<caption>Changes since 1.10.13_1556</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.10.13_1556, released 15 April 2019
 {: #11013_1556}
