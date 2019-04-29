@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
+
+subcollection: containers
 
 ---
 
@@ -21,15 +25,11 @@ lastupdated: "2018-12-05"
 
 
 
-
 # CLI 및 API 설정
 {: #cs_cli_install}
 
 {{site.data.keyword.containerlong}} CLI 또는 API를 사용하여 Kubernetes 클러스터를 작성하고 관리할 수 있습니다.
 {:shortdesc}
-
-<br />
-
 
 ## CLI 설치
 {: #cs_cli_install_steps}
@@ -44,12 +44,14 @@ lastupdated: "2018-12-05"
 -   클러스터의 `major.minor` 버전과 일치하는 Kubernetes CLI 버전
 -   선택사항: {{site.data.keyword.registryshort_notm}} 플러그인
 
+
+
 <br>
 CLI를 설치하려면 다음을 수행하십시오.
 
-1.  {{site.data.keyword.containerlong_notm}} 플러그인의 필수 소프트웨어로서 [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](../cli/index.html#overview)를 설치하십시오. {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 명령을 실행하기 위한 접두부는 `ibmcloud`입니다.
+1.  {{site.data.keyword.containerlong_notm}} 플러그인의 필수 소프트웨어로서 [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-ibmcloud-cli)를 설치하십시오. {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 명령을 실행하기 위한 접두부는 `ibmcloud`입니다.
 
-    CLI를 많이 사용할 계획입니까? [{{site.data.keyword.Bluemix_notm}} CLI에 대한 쉘 자동 완성 기능을 사용(Linux/MacOS에만 해당)](/docs/cli/reference/ibmcloud/enable_cli_autocompletion.html#enabling-shell-autocompletion-for-ibm-cloud-cli-linux-macos-only-)해 보십시오.
+    CLI를 많이 사용할 계획입니까? [{{site.data.keyword.Bluemix_notm}} CLI에 대한 쉘 자동 완성 기능을 사용(Linux/MacOS에만 해당)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)해 보십시오.
     {: tip}
 
 2.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오.
@@ -65,7 +67,7 @@ CLI를 설치하려면 다음을 수행하십시오.
 3.  Kubernetes 클러스터를 작성하고 작업자 노드를 관리하려면 {{site.data.keyword.containerlong_notm}} 플러그인을 설치하십시오. {{site.data.keyword.containerlong_notm}} 플러그인을 사용하여 명령을 실행하기 위한 접두부는 `ibmcloud ks`입니다.
 
     ```
-    ibmcloud plugin install container-service 
+    ibmcloud plugin install container-service
     ```
     {: pre}
 
@@ -76,20 +78,20 @@ CLI를 설치하려면 다음을 수행하십시오.
     ```
     {: pre}
 
-    {{site.data.keyword.containerlong_notm}} 플러그인은 container-service로 결과에 표시됩니다.
+    {{site.data.keyword.containerlong_notm}} 플러그인은 **container-service**로 결과에 표시됩니다.
 
 4.  {: #kubectl}Kubernetes 대시보드의 로컬 버전을 보고 클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하기 위한 접두부는 `kubectl`입니다.
 
-    1.  사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.10.11입니다.
+    1.  사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.12.6입니다.
 
         최소한 클러스터의 `major.minor` 버전과 일치하지 않는 `kubectl` CLI 버전을 사용하면 예상치 못한 결과가 발생할 수 있습니다. Kubernetes 클러스터 및 CLI 버전을 최신 상태로 유지해야 합니다.
         {: note}
 
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘n")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe)
 
-    2.  **OSX 및 Linux의 경우**: 다음 단계를 완료하십시오.
+    2.  **OS X 및 Linux의 경우**: 다음 단계를 완료하십시오.
         1.  실행 파일을 `/usr/local/bin` 디렉토리로 이동하십시오.
 
             ```
@@ -136,14 +138,14 @@ CLI를 설치하려면 다음을 수행하십시오.
 
     플러그인이 container-registry로서 결과에 표시됩니다.
 
-다음으로 [{{site.data.keyword.containerlong_notm}}의 CLI에서 Kubernetes 클러스터 작성](cs_clusters.html#clusters_cli)을 시작하십시오.
+다음으로 [{{site.data.keyword.containerlong_notm}}의 CLI에서 Kubernetes 클러스터 작성](/docs/containers?topic=containers-clusters#clusters_cli)을 시작하십시오.
 
 이러한 CLI에 대한 참조 정보는 해당 도구의 문서를 참조하십시오.
 
--   [`ibmcloud` 명령](../cli/reference/ibmcloud/bx_cli.html#ibmcloud_cli)
--   [`ibmcloud ks` 명령](cs_cli_reference.html#cs_cli_reference)
+-   [`ibmcloud` 명령](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
+-   [`ibmcloud ks` 명령](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
 -   [`kubectl` 명령 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [`ibmcloud cr` 명령](/docs/container-registry-cli-plugin/container-registry-cli.html#containerregcli)
+-   [`ibmcloud cr` 명령](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
 
 <br />
 
@@ -184,15 +186,16 @@ CLI를 설치하려면 다음을 수행하십시오.
 Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다.
 {:shortdesc}
 
-Kubernetes 1.10.11에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터에서 사용이 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
+Kubernetes 1.12.6에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터에서 사용이 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
 
 `kubectl` 명령을 실행하려면 우선 다음을 수행하십시오.
 * [필수 CLI를 설치](#cs_cli_install)하십시오.
-* [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
+* [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_cli)하십시오.
+* Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오. 서비스 역할이 있지만 플랫폼 역할이 없는 경우 클러스터를 나열하려면 클러스터 관리자에게 클러스터 이름과 ID, 또는 **뷰어** 플랫폼 역할을 제공받아야 합니다.
 
 `kubectl` 명령을 사용하려면 다음을 수행하십시오.
 
-1.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오. {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트를 포함](cs_regions.html#bluemix_regions)하십시오.
+1.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오. {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트를 포함](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)하십시오.
 
     ```
     ibmcloud login
@@ -204,7 +207,7 @@ Kubernetes 1.10.11에서 사용 가능한 모든 `kubectl` 명령은 {{site.data
 
 2.  {{site.data.keyword.Bluemix_notm}} 계정을 선택하십시오. 여러 {{site.data.keyword.Bluemix_notm}} 조직에 지정된 경우에는 Kubernetes 클러스터가 작성된 조직을 선택하십시오. 클러스터는 조직마다 고유하지만 {{site.data.keyword.Bluemix_notm}} 영역에는 독립적입니다. 따라서 영역을 선택할 필요가 없습니다.
 
-3.  기본 외의 리소스 그룹에 클러스터를 작성하고 이에 대해 작업하려면 해당 리소스 그룹을 대상으로 지정하십시오. 각 클러스터가 속하는 리소스 그룹을 보려면 `ibmcloud ks clusters`를 실행하십시오. **참고**: 해당 리소스 그룹에 대해 [**Viewer** 액세스 권한](cs_users.html#platform)을 갖고 있어야 합니다.
+3.  기본 외의 리소스 그룹에 클러스터를 작성하고 이에 대해 작업하려면 해당 리소스 그룹을 대상으로 지정하십시오. 각 클러스터가 속하는 리소스 그룹을 보려면 `ibmcloud ks clusters`를 실행하십시오. **참고**: 해당 리소스 그룹에 대해 [**Viewer** 액세스 권한](/docs/containers?topic=containers-users#platform)을 갖고 있어야 합니다.
     ```
     ibmcloud target -g <resource_group_name>
     ```
@@ -216,7 +219,7 @@ ibmcloud ks region-set
     ```
     {: pre}
 
-5.  클러스터의 이름을 가져오려면 계정에 있는 모든 클러스터를 나열하십시오.
+5.  클러스터의 이름을 가져오려면 계정에 있는 모든 클러스터를 나열하십시오. {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할만 있고 클러스터를 볼 수 없는 경우 클러스터 관리자에게 IAM 플랫폼 **뷰어** 역할 또는 클러스터 이름과 ID를 요청하십시오.
 
     ```
     ibmcloud ks clusters
@@ -242,7 +245,10 @@ ibmcloud ks region-set
 
     2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하여 붙여넣기하십시오.
 
-        **Mac 또는 Linux 사용자**: `ibmcloud ks cluster-config` 명령을 실행하고 `KUBECONFIG` 환경 변수를 복사하는 대신에 `(ibmcloud ks cluster-config "<cluster-name>" | grep export)`를 실행할 수 있습니다.
+        **Mac 또는 Linux 사용자**: `ibmcloud ks cluster-config` 명령을 실행하고 `KUBECONFIG` 환경 변수를 복사하는 대신에 `ibmcloud ks cluster-config --export <cluster-name>을 실행할 수 있습니다`. 쉘에 따라 다음 명령을 실행하여 쉘을 설정할 수 있습니다. `eval $(ibmcloud ks cluster-config --export <cluster-name>)`.
+        {: tip}
+
+        **Windows PowerShell 사용자**: `ibmcloud ks cluster-config` 출력에서 `SET` 명령을 복사하여 붙여넣는 대신, 다음을 실행하여 `KUBECONFIG` 환경 변수를 설정해야 합니다. 예: `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`.
         {:tip}
 
     3.  `KUBECONFIG` 환경 변수가 올바르게 설정되었는지 확인하십시오.
@@ -270,8 +276,8 @@ ibmcloud ks region-set
     출력 예:
 
     ```
-    Client Version: v1.10.11
-    Server Version: v1.10.11
+    Client Version: v1.12.6
+    Server Version: v1.12.6
     ```
     {: screen}
 
@@ -293,15 +299,15 @@ ibmcloud ks region-set
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 버전 0.8.0 이상
 -   {{site.data.keyword.containerlong_notm}} 플러그인
--   Kubernetes CLI 버전 1.10.11 이상
+-   Kubernetes CLI 버전 1.12.6 이상
 -   {{site.data.keyword.registryshort_notm}} 플러그인
 
 <br>
 CLI를 업데이트하려면 다음을 수행하십시오.
 
-1.  {{site.data.keyword.Bluemix_notm}} CLI를 업데이트하십시오. [최신 버전 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](../cli/index.html#overview)을 다운로드하고 설치 프로그램을 실행하십시오.
+1.  {{site.data.keyword.Bluemix_notm}} CLI를 업데이트하십시오. [최신 버전 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-ibmcloud-cli)을 다운로드하고 설치 프로그램을 실행하십시오.
 
-2. {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오. {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트를 포함](cs_regions.html#bluemix_regions)하십시오.
+2. {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오. {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트를 포함](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)하십시오.
 
     ```
     ibmcloud login
@@ -398,17 +404,19 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 <br />
 
 
+
+
 ## API로 클러스터 배치 자동화
 {: #cs_api}
 
 {{site.data.keyword.containerlong_notm}} API를 사용하여 Kubernetes 클러스터의 작성, 배치 및 관리를 자동화할 수 있습니다.
 {:shortdesc}
 
-{{site.data.keyword.containerlong_notm}} API는 헤더 정보가 필요합니다. 이 헤더 정보는 API 요청에 사용자가 제공해야 하며 사용하려는 API에 따라 다를 수 있습니다. API에 헤더 정보가 필요한지 판별하려면 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-api)를 참조하십시오.
+{{site.data.keyword.containerlong_notm}} API는 헤더 정보가 필요합니다. 이 헤더 정보는 API 요청에 사용자가 제공해야 하며 사용하려는 API에 따라 다를 수 있습니다. API에 헤더 정보가 필요한지 판별하려면 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.cloud.ibm.com/swagger-api)를 참조하십시오.
 
 {{site.data.keyword.containerlong_notm}}의 인증을 수행하려면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 사용하여 생성되었으며 클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 계정 ID가 포함된 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) 토큰을 제공해야 합니다. {{site.data.keyword.Bluemix_notm}}의 인증 방법에 따라 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 작성을 자동화하기 위한 다음 옵션 중에서 선택할 수 있습니다.
 
-[API Swagger JSON 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api-json)을 사용하여 자동화 작업의 일부로서 API와 상호 작용할 수 있는 클라이언트를 생성할 수 있습니다.
+[API Swagger JSON 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-api-json)을 사용하여 자동화 작업의 일부로서 API와 상호 작용할 수 있는 클라이언트를 생성할 수 있습니다.
 {: tip}
 
 <table>
@@ -421,20 +429,20 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 <tr>
 <td>비연합 ID</td>
 <td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호:</strong> 이 주제의 단계에 따라 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰의 작성을 완전히 자동화할 수 있습니다.</li>
-<li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> {{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호 사용의 대안으로 <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키를 사용</a>할 수 있습니다. {{site.data.keyword.Bluemix_notm}} API 키는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다. </li></ul></tr>
+<li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> {{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호 사용의 대안으로 <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키를 사용</a>할 수 있습니다. {{site.data.keyword.Bluemix_notm}} API 키는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다. </li></ul></tr>
 <tr>
 <td>연합 ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키</a>는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다. </li><li>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키</a>는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다. </li><li>
 <strong>일회성 패스코드 사용: </strong> 일회성 패스코드를 사용하여 {{site.data.keyword.Bluemix_notm}}의 인증을 수행하는 경우에는 일회성 패스코드의 검색을 위해 웹 브라우저와의 수동 상호작용이 필요하므로 {{site.data.keyword.Bluemix_notm}} IAM 토큰 작성을 완전히 자동화할 수 없습니다. {{site.data.keyword.Bluemix_notm}} IAM 토큰 작성을 완전히 자동화하려면 대신 {{site.data.keyword.Bluemix_notm}} API 키를 작성해야 합니다. </ul></td>
 </tr>
 </tbody>
 </table>
 
 1.  {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰을 작성하십시오. 요청에 포함되는 본문 정보는 사용하는 {{site.data.keyword.Bluemix_notm}} 인증 방법에 따라 다릅니다. 다음 값을 대체하십시오.
-  - _&lt;username&gt;_: 사용자의 {{site.data.keyword.Bluemix_notm}} 사용자 이름입니다.
-  - _&lt;password&gt;_: 사용자의 {{site.data.keyword.Bluemix_notm}} 비밀번호입니다.
-  - _&lt;api_key&gt;_: 사용자의 {{site.data.keyword.Bluemix_notm}} API 키입니다.
-  - _&lt;passcode&gt;_: 사용자의 {{site.data.keyword.Bluemix_notm}} 일회성 패스코드입니다. `ibmcloud login --sso`를 실행하고 CLI 출력의 지시사항에 따라 웹 브라우저를 사용하여 일회성 패스코드를 검색하십시오.
+  - `<username>`: {{site.data.keyword.Bluemix_notm}} 사용자 이름입니다.
+  - `<password>`: {{site.data.keyword.Bluemix_notm}} 비밀번호입니다.
+  - `<api_key>`: {{site.data.keyword.Bluemix_notm}} API 키입니다.
+  - `<passcode>`: {{site.data.keyword.Bluemix_notm}} 일회성 패스코드입니다. `ibmcloud login --sso`를 실행하고 CLI 출력의 지시사항에 따라 웹 브라우저를 사용하여 일회성 패스코드를 검색하십시오.
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -447,7 +455,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     ```
     {: codeblock}
 
-    {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트에서 사용되는 지역 약어를 검토](cs_regions.html#bluemix_regions)하십시오.
+    {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트에서 사용되는 지역 약어를 검토](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)하십시오.
 
     <table summary-"Input parameters to retrieve tokens">
     <caption>토큰을 가져오는 입력 매개변수</caption>
@@ -458,35 +466,35 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     <tbody>
     <tr>
     <td>헤더</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>참고</strong>: <code>Yng6Yng=</code>은 사용자 이름 <strong>bx</strong>와 비밀번호 <strong>bx</strong>에 대한 URL 인코딩된 권한과 동일합니다.</p></li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>참고</strong>: <code>Yng6Yng=</code>는 사용자 이름 <strong>bx</strong> 및 비밀번호 <strong>bx</strong>에 대한 URL 인코딩된 권한과 동일합니다.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호에 대한 본문</td>
-    <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>username: <em>&lt;username&gt;</em></li>
-    <li>password: <em>&lt;password&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li></ul>
+    <td><ul><li>`grant_type: password`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`username: <em>&lt;username&gt;</em>`</li>
+    <li>`password: <em>&lt;password&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:`</li></ul>
     <strong>참고</strong>: 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 키에 대한 본문</td>
-    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:apikey</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>apikey: <em>&lt;api_key&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li></ul>
+    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:``</li></ul>
     <strong>참고</strong>: 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 일회성 패스코드에 대한 본문</td>
-    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:passcode</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>passcode: <em>&lt;passcode&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li></ul>
+    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:`</li></ul>
     <strong>참고</strong>: 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
     </tr>
     </tbody>
@@ -510,7 +518,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 
     API 출력의 **access_token** 필드에서 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 찾을 수 있습니다. 다음 단계에서 추가 헤더 정보를 검색할 수 있도록 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 기록해 두십시오.
 
-2.  클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 계정의 ID를 검색하십시오. _&lt;iam_token&gt;_을 이전 단계에서 검색한 {{site.data.keyword.Bluemix_notm}} IAM 토큰으로 대체하십시오.
+2.  클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 계정의 ID를 검색하십시오. `<iam_token>`을 이전 단계에서 검색한 {{site.data.keyword.Bluemix_notm}} IAM 토큰으로 대체하십시오.
 
     ```
     GET https://accountmanagement.<region>.bluemix.net/v1/accounts
@@ -526,9 +534,9 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     <tbody>
   	<tr>
   		<td>헤더</td>
-  		<td><ul><li>Content-Type: application/json</li>
-      <li>Authorization: bearer &lt;iam_token&gt;</li>
-      <li>Accept: application/json</li></ul></td>
+  		<td><ul><li>`Content-Type: application/json`</li>
+      <li>`Authorization: bearer &lt;iam_token&gt;`</li>
+      <li>`Accept: application/json`</li></ul></td>
   	</tr>
     </tbody>
     </table>
@@ -555,7 +563,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 
     API 출력의 **resources/metadata/guid** 필드에서 {{site.data.keyword.Bluemix_notm}} 계정의 ID를 찾을 수 있습니다.
 
-3.  사용자의 {{site.data.keyword.Bluemix_notm}} 인증 정보 및 클러스터가 작성된 계정 ID가 포함된 새 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 작성하십시오. _&lt;account_ID&gt;_를 이전 단계에서 검색한 {{site.data.keyword.Bluemix_notm}} 계정의 ID로 대체하십시오.
+3.  사용자의 {{site.data.keyword.Bluemix_notm}} 인증 정보 및 클러스터가 작성된 계정 ID가 포함된 새 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 작성하십시오. `<account_ID>`를 이전 단계에서 검색한 {{site.data.keyword.Bluemix_notm}} 계정의 ID로 대체하십시오.
 
     {{site.data.keyword.Bluemix_notm}} API 키를 사용 중인 경우에는 API 키가 작성된 {{site.data.keyword.Bluemix_notm}} 계정 ID를 사용해야 합니다. 다른 계정에서 클러스터에 액세스하려면 이 계정에 로그인하고 이 계정을 기반으로 하는 {{site.data.keyword.Bluemix_notm}} API 키를 작성하십시오.
     {: note}
@@ -571,7 +579,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     ```
     {: codeblock}
 
-    {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트에서 사용되는 지역 약어를 검토](cs_regions.html#bluemix_regions)하십시오.
+    {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트에서 사용되는 지역 약어를 검토](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)하십시오.
 
     <table summary-"Input parameters to retrieve tokens">
     <caption>토큰을 가져오는 입력 매개변수</caption>
@@ -582,38 +590,38 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     <tbody>
     <tr>
     <td>헤더</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>참고</strong>: <code>Yng6Yng=</code>은 사용자 이름 <strong>bx</strong>와 비밀번호 <strong>bx</strong>에 대한 URL 인코딩된 권한과 동일합니다.</p></li></ul>
+    <td><ul><li>`Content-Type:application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`<p><strong>참고</strong>: <code>Yng6Yng=</code>는 사용자 이름 <strong>bx</strong> 및 비밀번호 <strong>bx</strong>에 대한 URL 인코딩된 권한과 동일합니다.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호에 대한 본문</td>
-    <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>username: <em>&lt;username&gt;</em></li>
-    <li>password: <em>&lt;password&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul>
+    <td><ul><li>`grant_type: password`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`username: <em>&lt;username&gt;</em>`</li>
+    <li>`password: <em>&lt;password&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:``</li>
+    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
     <strong>참고</strong>: 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 키에 대한 본문</td>
-    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:apikey</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>apikey: <em>&lt;api_key&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul>
+    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:``</li>
+    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
       <strong>참고</strong>: 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 일회성 패스코드에 대한 본문</td>
-    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:passcode</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>passcode: <em>&lt;passcode&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul><strong>참고</strong>: 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
+    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:`</li>
+    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>참고</strong>: 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
     </tr>
     </tbody>
     </table>
@@ -639,7 +647,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 4.  계정의 모든 Kubernetes 클러스터를 나열하십시오. 사용자의 헤더 정보를 빌드하기 위해 이전 단계에서 검색한 정보를 사용하십시오.
 
      ```
-     GET https://containers.bluemix.net/v1/clusters
+     GET https://containers.cloud.ibm.com/v1/clusters
      ```
      {: codeblock}
 
@@ -652,13 +660,13 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
      <tbody>
      <tr>
      <td>헤더</td>
-     <td><ul><li>Authorization: bearer <em>&lt;iam_token&gt;</em></li>
-     <li>X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em></li></ul></td>
+     <td><ul><li>`Authorization: bearer <em>&lt;iam_token&gt;</em>`</li>
+     <li>`X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em>`</li></ul></td>
      </tr>
      </tbody>
      </table>
 
-5.  지원되는 API 목록은 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api)를 검토하십시오.
+5.  지원되는 API 목록은 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-api)를 검토하십시오.
 
 <br />
 
@@ -671,10 +679,11 @@ API를 통해 발행된 모든 {{site.data.keyword.Bluemix_notm}} IAM(Identity a
 
 시작하기 전에, 새 액세스 토큰의 요청에 사용할 수 있는 {{site.data.keyword.Bluemix_notm}} API 키 또는 {{site.data.keyword.Bluemix_notm}} IAM 새로 고치기 토큰이 있는지 확인하십시오.
 - **새로 고치기 토큰:** [{{site.data.keyword.Bluemix_notm}} API로 클러스터 작성 및 관리 프로세스 자동화](#cs_api)의 지시사항을 따르십시오.
-- **API 키:** 다음과 같이 [{{site.data.keyword.Bluemix_notm}} ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/) API 키를 검색하십시오.
-   1. 메뉴 표시줄에서 **관리** > **보안** > **플랫폼 API 키**를 클릭하십시오.
-   2. **작성**을 클릭하십시오.
-   3. API 키의 **이름** 및 **설명**을 입력하고 **작성**을 클릭하십시오.
+- **API 키:** 다음과 같이 [{{site.data.keyword.Bluemix_notm}} ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/) API 키를 검색하십시오.
+   1. 메뉴 표시줄에서 **관리** > **액세스(IAM)**를 클릭하십시오.
+   2. **사용자** 페이지를 클릭한 후 자신을 선택하십시오.
+   3. **API 키** 분할창에서 **IBM Cloud API 키 작성**을 클릭하십시오.
+   4. API 키의 **이름** 및 **설명**을 입력하고 **작성**을 클릭하십시오.
    4. **표시**를 클릭하여 생성된 API를 보십시오.
    5. 새 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰의 검색에 사용할 수 있도록 API 키를 복사하십시오.
 
@@ -695,25 +704,25 @@ API를 통해 발행된 모든 {{site.data.keyword.Bluemix_notm}} IAM(Identity a
     <tbody>
     <tr>
     <td>헤더</td>
-    <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-      <li>Authorization: Basic Yng6Yng=</br></br><strong>참고:</strong> <code>Yng6Yng=</code>은 사용자 이름 <strong>bx</strong>와 비밀번호 <strong>bx</strong>에 대한 URL 인코딩된 권한과 동일합니다.</li></ul></td>
+    <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li>
+      <li>`Authorization: Basic Yng6Yng=`</br></br><strong>참고:</strong> <code>Yng6Yng=</code>은 사용자 이름 <strong>bx</strong>와 비밀번호 <strong>bx</strong>에 대한 URL 인코딩된 권한과 동일합니다.</li></ul></td>
     </tr>
     <tr>
     <td>새로 고치기 토큰을 사용하는 경우의 본문</td>
-    <td><ul><li>grant_type: refresh_token</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul><strong>참고</strong>: 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
+    <td><ul><li>`grant_type: refresh_token`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`refresh_token: <em>&lt;iam_refresh_token&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:`</li>
+    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>참고</strong>: 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
     </tr>
     <tr>
       <td>{{site.data.keyword.Bluemix_notm}} API 키를 사용하는 경우의 본문</td>
-      <td><ul><li>grant_type: <code>urn:ibm:params:oauth:grant-type:apikey</code></li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>apikey: <em>&lt;api_key&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-        <li>uaa_client_secret:</li></ul><strong>참고:</strong> 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
+      <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+        <li>`uaa_client_secret:`</li></ul><strong>참고:</strong> 지정된 값이 없는 <code>uaa_client_secret</code> 키를 추가하십시오.</td>
     </tr>
     </tbody>
     </table>
@@ -736,7 +745,7 @@ API를 통해 발행된 모든 {{site.data.keyword.Bluemix_notm}} IAM(Identity a
 
     **access_token**에서 새 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 찾고 API 출력의 **refresh_token** 필드에서 새로 고치기 토큰을 찾을 수 있습니다.
 
-2.  이전 단계의 토큰을 사용하여 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api)에 대한 작업을 진행하십시오.
+2.  이전 단계의 토큰을 사용하여 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-api)에 대한 작업을 진행하십시오.
 
 <br />
 

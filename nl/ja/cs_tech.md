@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, docker
+
+subcollection: containers
 
 ---
 
@@ -17,7 +21,6 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # {{site.data.keyword.containerlong_notm}} テクノロジー
@@ -62,9 +65,9 @@ Docker の基本概念についての説明:
   </ul>
   </dd>
 
-<p>コンテナー・イメージを使用する際の[個人情報の保護](cs_secure.html#pi)の詳細を確認してください。</p>
+<p>コンテナー・イメージを使用する際の[個人情報の保護](/docs/containers?topic=containers-security#pi)の詳細を確認してください。</p>
 
-<p>Docker に関する知識をさらに深める準備ができましたか? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">このコースを受講して、Docker と {{site.data.keyword.containerlong_notm}} が連携する仕組みを学習しましょう。</a></p>
+<p>Docker に関する知識をさらに深める準備ができましたか? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">このコースを受講して、Docker と {{site.data.keyword.containerlong_notm}} が連携する仕組みを学習しましょう。</a></p>
 
 </dl>
 
@@ -79,7 +82,7 @@ Docker の基本概念についての説明:
 
 以下の図に示されている、Kubernetes の基本概念の一部について説明します。
 
-![デプロイメントのセットアップ](images/cs_app_tutorial_components1.png)
+![デプロイメントのセットアップ](images/cs_app_tutorial_mz-components1.png)
 
 <dl>
 <dt>アカウント</dt>
@@ -103,11 +106,11 @@ Docker の基本概念についての説明:
 <dt>アプリ</dt>
 <dd>アプリとは、完全に機能する 1 つのアプリ全体を指す場合もありますし、アプリのコンポーネントを指す場合もあります。 アプリのコンポーネントは、別々のポッドまたは別々のワーカー・ノードにデプロイできます。</dd>
 
-<p>Kubernetes リソースを処理する際の[個人情報の保護](cs_secure.html#pi)の詳細を確認してください。</p>
+<p>Kubernetes リソースを処理する際の[個人情報の保護](/docs/containers?topic=containers-security#pi)の詳細を確認してください。</p>
 
 <p>Kubernetes に関する知識をさらに深める準備ができましたか?</p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">クラスターの作成チュートリアルを利用して、用語の理解をさらに深めてください</a>。</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">このコースを受講して、Kubernetes と {{site.data.keyword.containerlong_notm}} が連携する仕組みを学習しましょう。</a></li></ul>
+<ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">クラスターの作成チュートリアルを利用して、用語の理解をさらに深めてください</a>。</li>
+<li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">このコースを受講して、Kubernetes と {{site.data.keyword.containerlong_notm}} が連携する仕組みを学習しましょう。</a></li></ul>
 
 
 </dl>
@@ -118,14 +121,23 @@ Docker の基本概念についての説明:
 ## サービス・アーキテクチャー
 {: #architecture}
 
-{{site.data.keyword.containerlong_notm}} 上で実行される Kubernetes クラスターでは、コンテナー化アプリは、ワーカー・ノードと呼ばれるコンピュート・ホスト上でホストされます。 具体的には、これらのアプリはポッド内で実行され、ポッドがワーカー・ノード上でホストされます。 ワーカー・ノードは Kubernetes マスターによって管理されます。 Kubernetes マスターとワーカー・ノードは、安全な TLS 証明書と openVPN 接続を使用して相互に通信し、クラスター構成を調整します。
+{{site.data.keyword.containerlong_notm}} 上で実行される Kubernetes クラスターでは、コンテナー化アプリは、ワーカー・ノードと呼ばれるコンピュート・ホスト上でホストされます。 これらのアプリはポッド内で実行され、ポッドがワーカー・ノード上でホストされます。 ワーカー・ノードは Kubernetes マスターによって管理されます。 Kubernetes マスターとワーカー・ノードの間の通信セットアップは、IBM Cloud インフラストラクチャー (SoftLayer) ネットワークのセットアップ方法に依存します。つまり、パブリック・サービス・エンドポイントを使用したアカウントなのか、パブリックおよびプライベート・サービス・エンドポイントを使用した VRF 対応アカウントなのかによって異なります。
 {: shortdesc}
 
-次のイメージ図は、クラスターの各コンポーネントと、それらのコンポーネントがどのように対話するかを示しています。
+次の図は、[パブリック・サービス・エンドポイントのみが有効化](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)されている場合のアカウントで、クラスターの各コンポーネントがどのように相互作用するのかを示しています。
 <p>
 <figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes アーキテクチャー">
- <figcaption>{{site.data.keyword.containerlong_notm}} アーキテクチャー</figcaption>
+ <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes アーキテクチャー">
+ <figcaption>パブリック・サービス・エンドポイントのみが有効化されている場合の {{site.data.keyword.containerlong_notm}} アーキテクチャー</figcaption>
+</figure>
+</p>
+
+次の図は、[パブリックおよびプライベート・サービス・エンドポイントが有効化](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)されている場合の VRF 対応アカウントで、クラスターの各コンポーネントがどのように相互作用するのかを示しています。
+
+<p>
+<figure>
+ <img src="images/cs_org_ov_both_ses.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes アーキテクチャー">
+ <figcaption>パブリックおよびプライベート・サービス・エンドポイントが有効化されている場合の {{site.data.keyword.containerlong_notm}} アーキテクチャー</figcaption>
 </figure>
 </p>
 
@@ -159,11 +171,11 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     </tr>
     <tr>
     <td>kube-controller-manager</td>
-    <td>Kubernetes コントローラー・マネージャーは、レプリカ・セットなどのクラスター・リソースの状態を監視するデーモンです。 リソースの状態が変化する (例えば、レプリカ・セット内のポッドがダウンする) と、コントローラー・マネージャーは、望ましい状態を実現するための修正アクションを開始します。</td>
+    <td>Kubernetes コントローラー・マネージャーは、レプリカ・セットなどのクラスター・リソースの状態を監視するデーモンです。 リソースの状態が変化する (例えば、レプリカ・セット内のポッドがダウンする) と、コントローラー・マネージャーは、必要な状態を実現するための修正アクションを開始します。</td>
     </tr>
     </tbody></table></dd>
   <dt>ワーカー・ノード</dt>
-    <dd>各ワーカー・ノードは、物理マシン (ベア・メタル) であるか、クラウド環境内の物理ハードウェアで実行される仮想マシンです。 ワーカー・ノードをプロビジョンする際に、そのワーカー・ノード上でホストされるコンテナーで使用できるリソースを決定します。 すぐに使用できるように、ワーカー・ノードには、{{site.data.keyword.IBM_notm}} 管理の Docker エンジン、別個のコンピュート・リソース、ネットワーキング、ボリューム・サービスがセットアップされます。 標準装備のセキュリティー機能は、分離機能、リソース管理機能、そしてワーカー・ノードのセキュリティー・コンプライアンスを提供します。</br></br>次の表に、ワーカー・ノードの各コンポーネントについての説明を記載しています。
+    <dd>各ワーカー・ノードは、物理マシン (ベア・メタル) であるか、クラウド環境内の物理ハードウェアで実行される仮想マシンです。 ワーカー・ノードをプロビジョンする際に、そのワーカー・ノード上でホストされるコンテナーで使用できるリソースを決定します。 すぐに使用できるように、ワーカー・ノードには、{{site.data.keyword.IBM_notm}} 管理の Docker エンジン、別個のコンピュート・リソース、ネットワーキング、ボリューム・サービスがセットアップされます。 標準装備のセキュリティー機能は、分離機能、リソース管理機能、そしてワーカー・ノードのセキュリティー・コンプライアンスを提供します。</br></br><p class="note">デフォルト・ワーカー・ノード・コンポーネント (`kubelet` など) の変更はサポートされていないため、これらのコンポーネントを変更すると予期せぬ結果が生じる可能性があります。</p>次の表に、ワーカー・ノードの各コンポーネントについての説明を記載しています。
     <table>
     <caption>ワーカー・ノードのコンポーネント</caption>
     <thead>
@@ -173,47 +185,47 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     </thead>
     <tbody>
     <tr>
-    <td>ibm-master-proxy</td>
+    <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
     <td>Kubernetes バージョン 1.10 以降を実行するクラスターでは、`ibm-master-proxy` が、ワーカー・ノードからの要求を、可用性の高い複数のマスター・レプリカの各 IP アドレスに転送します。 単一ゾーン・クラスターのマスターの場合は、別々のホスト上に 3 つのレプリカが存在しますが、マスターの IP アドレスとドメイン名は 1 つです。 複数ゾーン対応ゾーンにあるクラスターの場合、マスターの 3 つのレプリカがゾーン間に分散されます。 そのため、ドメイン・ネームはクラスター・マスター全体で 1 つですが、IP アドレスはマスターごとに独自のものが登録されます。</td>
     </tr>
     <tr>
-    <td>openvpn-client</td>
+    <td>`openvpn-client`</td>
     <td>kube-system</td>
     <td>OpenVPN クライアントは、マスターをワーカー・ノードに安全に接続するために OpenVPN サーバーと連携します。 この接続は、ポッドやサービスに対する `apiserver proxy` 呼び出しと、kubelet に対する `kubectl exec`、`attach`、`logs` 呼び出しをサポートしています。</td>
     </tr>
     <tr>
-    <td>kubelet</td>
+    <td>`kubelet`</td>
     <td>kube-system</td>
     <td>kubelet は、ワーカー・ノードごとに実行されるポッドで、ワーカー・ノードで実行される各ポッドの正常性のモニタリングと、Kubernetes API サーバーが送信するイベントの監視を行うポッドです。 イベントに基づいて、kubelet は、ポッドを作成または削除し、Liveness Probe と Readiness Probe を確保し、Kubernetes API サーバーに応答としてポッドの状況を報告します。</td>
     </tr>
     <tr>
-    <td>kube-dns</td>
+    <td>`coredns`</td>
     <td>kube-system</td>
-    <td>Kubernetes DNS は、クラスター上の DNS のポッドとサービスをスケジュールします。 コンテナーは、DNS サービスの IP を自動的に使用して、そのコンテナーによる他のポッドとサービスの検索で DNS 名を解決します。</td>
+    <td>デフォルトでは、Kubernetes は CoreDNS のポッド (またはバージョン 1.12 以前の KubeDNS ポッド) とサービスをクラスター上でスケジュールします。コンテナーは、DNS サービスの IP を自動的に使用して、そのコンテナーによる他のポッドとサービスの検索で DNS 名を解決します。</td>
     </tr>
     <tr>
-    <td>calico</td>
+    <td>`calico`</td>
     <td>kube-system</td>
     <td>Calico はクラスターのネットワーク・ポリシーを管理し、以下のようないくつかのコンポーネントで構成されています。
     <ul>
-    <li>**calico-cni**: Calico コンテナー・ネットワーク・インターフェース (CNI) では、コンテナーのネットワーク接続を管理し、コンテナーが削除される際に割り振られているリソースを削除します。</li>
-    <li>**calico-ipam**: Calico IPAM は、コンテナーの IP アドレス割り当てを管理します。</li>
-    <li>**calico-node**: Calico ノードは、Calico が含まれたネットワーキング・コンテナーに必要な各種コンポーネントをバンドルしてまとめるコンテナーです。</li>
-    <li>**calico-policy-controller**: Calico ポリシー・コントローラーは、インバウンドとアウトバウンドのネットワーク・トラフィックが設定されたネットワーク・ポリシーに準拠しているか監視します。 トラフィックがクラスター内で許可されていない場合は、クラスターへのアクセスはブロックされます。 Calico ポリシー・コントローラーは、クラスターのネットワーク・ポリシーを作成および設定するためにも使用されます。</li></ul></td>
+    <li>**`calico-cni`**: Calico コンテナー・ネットワーク・インターフェース (CNI) では、コンテナーのネットワーク接続を管理し、コンテナーが削除される際に割り振られているリソースを削除します。</li>
+    <li>**`calico-ipam`**: Calico IPAM は、コンテナーの IP アドレス割り当てを管理します。</li>
+    <li>**`calico-node`**: Calico ノードは、Calico が含まれたネットワーキング・コンテナーに必要な各種コンポーネントをバンドルしてまとめるコンテナーです。</li>
+    <li>**`calico-policy-controller`**: Calico ポリシー・コントローラーは、インバウンドとアウトバウンドのネットワーク・トラフィックが設定されたネットワーク・ポリシーに準拠しているか監視します。 トラフィックがクラスター内で許可されていない場合は、クラスターへのアクセスはブロックされます。 Calico ポリシー・コントローラーは、クラスターのネットワーク・ポリシーを作成および設定するためにも使用されます。</li></ul></td>
     </tr>
     <tr>
-    <td>kube-proxy</td>
+    <td>`kube-proxy`</td>
     <td>kube-system</td>
     <td>Kubernetes ネットワーク・プロキシーは、ワーカー・ノードごとに実行され、クラスター内で実行される各サービスの TCP および UDP のネットワーク・トラフィックの転送やロード・バランシングを行うデーモンです。</td>
     </tr>
     <tr>
-    <td>kube-dashboard</td>
+    <td>`kube-dashboard`</td>
     <td>kube-system</td>
     <td>Kubernetes ダッシュボードは、クラスター内で実行中のアプリケーションとクラスターをユーザーが管理およびトラブルシューティングできるようにする Web ベースの GUI です。</td>
     </tr>
     <tr>
-    <td>heapster</td>
+    <td>`heapster`</td>
     <td>kube-system</td>
     <td>Heapster は、モニタリングとイベント・データのクラスター全体の統合機能です。 Heapster ポッドは、クラスター内のすべてのノードを検出し、各ノードの kubelet から使用量情報を照会します。 Kubernetes ダッシュボードに各種使用状況グラフがあります。</td>
     </tr>
@@ -245,5 +257,5 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     </tbody></table></dd>
 </dl>
 
-{{site.data.keyword.containerlong_notm}} を他の製品やサービスと一緒に使用する方法をご覧になりたいですか? こちらで[統合](cs_integrations.html#integrations)についていくつか紹介しています。
+{{site.data.keyword.containerlong_notm}} を他の製品やサービスと一緒に使用する方法をご覧になりたいですか? こちらで[統合](/docs/containers?topic=containers-integrations#integrations)についていくつか紹介しています。
 {: tip}

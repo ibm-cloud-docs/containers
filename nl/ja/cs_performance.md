@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -35,12 +39,12 @@ lastupdated: "2018-12-05"
 
 ワーカー・ノードは、カーネル・パフォーマンスが最適になるようにして自動的にプロビジョンされますが、カスタム [Kubernetes `DaemonSet` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) オブジェクトをクラスターに適用してデフォルト設定を変更することができます。 デーモン・セットは、既存のすべてのワーカー・ノードの設定を変更し、クラスター内でプロビジョンされている新規ワーカー・ノードに設定を適用します。 ポッドは影響を受けません。
 
-サンプルの特権 initContainer を実行するには、クラスターの[**管理者** {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)が必要です。 デプロイメントのコンテナーが初期化された後、特権は除去されます。
+この例の特権的な `initContainer` を実行するには、すべての名前空間に対して[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っている必要があります。デプロイメントのコンテナーが初期化された後、特権は除去されます。
 {: note}
 
 1. 以下のデーモン・セットを `worker-node-kernel-settings.yaml` という名前のファイルに保存します。 `spec.template.spec.initContainers` セクションで、調整する `sysctl` パラメーターのフィールドと値を追加します。 このサンプルのデーモン・セットでは、環境に許可するデフォルトの最大接続数を `net.core.somaxconn` 設定を使用して変更し、一時ポート範囲を `net.ipv4.ip_local_port_range` 設定を使用して変更しています。
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: kernel-optimization
@@ -103,13 +107,13 @@ lastupdated: "2018-12-05"
 
 ワーカー・ノードの `sysctl` パラメーターを {{site.data.keyword.containerlong_notm}} によって設定されたデフォルト値に戻すには、以下のようにします。
 
-1. デーモン・セットを削除します。 カスタム設定を適用した initContainers が削除されます。
+1. デーモン・セットを削除します。 カスタム設定を適用した `initContainers` が削除されます。
     ```
     kubectl delete ds kernel-optimization
     ```
     {: pre}
 
-2. [クラスター内のすべてのワーカー・ノードをリブートします](cs_cli_reference.html#cs_worker_reboot)。 ワーカー・ノードは、デフォルト値が適用された状態でオンラインに戻ります。
+2. [クラスター内のすべてのワーカー・ノードをリブートします](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)。 ワーカー・ノードは、デフォルト値が適用された状態でオンラインに戻ります。
 
 <br />
 
@@ -120,11 +124,11 @@ lastupdated: "2018-12-05"
 特定のパフォーマンス・ワークロードの要件がある場合は、ポッドのネットワーク名前空間で、Linux カーネルの `sysctl` パラメーターのデフォルト設定を変更します。
 {: shortdesc}
 
-アプリ・ポッドのカーネル設定を最適化するには、各デプロイメントの `pod/ds/rs/deployment` YAML に [initContainer ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) パッチを挿入します。 パフォーマンスを最適化したいポッドのネットワーク名前空間にある各アプリ・デプロイメントに initContainer が追加されます。
+アプリ・ポッドのカーネル設定を最適化するには、各デプロイメントの `pod/ds/rs/deployment` YAML に [`initContainer ` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) パッチを挿入します。 パフォーマンスを最適化したいポッドのネットワーク名前空間にある各アプリ・デプロイメントに `initContainer` が追加されます。
 
-開始する前に、サンプルの特権 initContainer を実行するために、クラスターに対する[**管理者** の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)を持っていることを確認してください。 デプロイメントのコンテナーが初期化された後、特権は除去されます。
+開始する前に、この例の特権的な `initContainer` を実行するために、すべての名前空間に対して[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。デプロイメントのコンテナーが初期化された後、特権は除去されます。
 
-1. 以下の initContainer パッチを `pod-patch.yaml` という名前のファイルに保存し、調整する `sysctl` パラメーターのフィールドと値を追加します。 このサンプルの initContainer は、環境に許可するデフォルトの最大接続数を `net.core.somaxconn` 設定を使用して変更し、 一時ポート範囲を `net.ipv4.ip_local_port_range` 設定を使用して変更します。
+1. 以下の `initContainer` パッチを `pod-patch.yaml` という名前のファイルに保存し、調整する `sysctl` パラメーターのフィールドと値を追加します。 このサンプルの `initContainer` は、環境に許可するデフォルトの最大接続数を `net.core.somaxconn` 設定を使用して変更し、 一時ポート範囲を `net.ipv4.ip_local_port_range` 設定を使用して変更します。
     ```
     spec:
       template:
@@ -161,7 +165,7 @@ lastupdated: "2018-12-05"
 
 メトリック・プロバイダー・ポッドには、クラスター内のワーカー・ノードの数に応じて `metrics-server` または `heapster` メイン・コンテナーのリソース要求および制限をスケーリングする `nanny` コンテナーもあります。 メトリック・プロバイダーの構成マップを編集して、デフォルトのリソースを変更できます。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  クラスターのメトリック・プロバイダーの構成マップ YAML を開きます。
     *  `metrics-server` の場合:

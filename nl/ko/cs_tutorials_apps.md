@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # 튜토리얼: Kubernetes 클러스터에 앱 배치
 {: #cs_apps_tutorial}
 
@@ -29,9 +34,9 @@ lastupdated: "2018-12-05"
 
 PR 회사의 앱 개발자가 지난 튜토리얼에서 작성된 Kubernetes 클러스터를 사용하여 앱의 Hello World 버전을 배치합니다. 앱 개발자는 이 튜토리얼의 각 학습을 기반으로 동일한 앱의 더 복잡한 버전을 점진적으로 배치합니다. 다음 다이어그램은 학습별 각 배치의 컴포넌트를 보여줍니다.
 
-![학습 컴포넌트](images/cs_app_tutorial_mz-roadmap.png)
+<img src="images/cs_app_tutorial_mz-roadmap.png" width="700" alt="학습 컴포넌트" style="width:700px; border-style: none"/>
 
-다이어그램에 표시된 것처럼 Kubernetes는 여러 다양한 유형의 리소스를 사용하여 클러스터에서 앱을 시작하고 실행합니다. Kubernetes에서는 배치와 서비스가 함께 작동합니다. 배치에는 앱에 대한 정의가 포함됩니다. 예를 들어, 컨테이너에 사용할 이미지와 앱용으로 노출되어야 하는 포트입니다. 배치를 작성할 때 배치에서 정의한 각 컨테이너마다 Kubernetes 팟(Pod)이 작성됩니다. 앱의 복원성을 높이기 위해, 배치에서 동일 앱의 다중 인스턴스를 정의하고 Kubernetes가 사용자를 위해 복제본 세트를 자동 작성하도록 허용할 수 있습니다. 복제본 세트는 팟(Pod)을 모니터하며 항상 지정된 수의 팟(Pod)이 시작되어 실행되도록 보장합니다. 팟(Pod) 중 하나가 응답하지 않으면 팟(Pod)이 자동으로 다시 작성됩니다.
+다이어그램에 표시된 것처럼 Kubernetes는 여러 다양한 유형의 리소스를 사용하여 클러스터에서 앱을 시작하고 실행합니다. Kubernetes에서는 배치와 서비스가 함께 작동합니다. 배치에는 앱에 대한 정의가 포함됩니다. 예를 들어, 컨테이너에 사용할 이미지와 앱용으로 노출되어야 하는 포트입니다. 배치를 작성할 때 배치에서 정의한 각 컨테이너마다 Kubernetes 팟(Pod)이 작성됩니다. 앱의 복원성을 높이기 위해, 배치에서 동일 앱의 다중 인스턴스를 정의하고 Kubernetes가 사용자를 위해 복제본 세트를 자동 작성하도록 허용할 수 있습니다. 복제본 세트는 팟(Pod)을 모니터링하며 항상 지정된 수의 팟(Pod)이 시작되어 실행되도록 보장합니다. 팟(Pod) 중 하나가 응답하지 않으면 팟(Pod)이 자동으로 다시 작성됩니다.
 
 서비스는 팟(Pod) 세트를 그룹화하며, 각 팟(Pod)의 실제 사설 IP 주소를 노출함이 없이 클러스터의 기타 서비스에 대해 이러한 팟(Pod)으로의 네트워크 연결을 제공합니다. Kubernetes 서비스를 사용하면 클러스터 내의 기타 팟(Pod)이 앱을 사용할 수 있도록 하거나 인터넷에 앱을 노출할 수 있습니다. 이 튜토리얼에서는 Kubernetes 서비스를 사용하여 공용 포트 및 작업자 노드에 자동으로 지정되는 공인 IP 주소를 사용하여 인터넷에서 실행 중인 앱에 액세스할 수 있습니다.
 
@@ -40,6 +45,7 @@ PR 회사의 앱 개발자가 지난 튜토리얼에서 작성된 Kubernetes 클
 학습 중 오직 하나에서만 앱에서 {{site.data.keyword.Bluemix_notm}} 서비스를 통합하는 내용을 포함하지만, 단순하거나 복잡한 앱에서 원하는 대로 이를 사용할 수 있습니다.
 
 ## 목표
+{: #apps_objectives}
 
 * 기본 Kubernetes 용어 이해
 * {{site.data.keyword.registryshort_notm}}의 레지스트리 네임스페이스에 이미지 푸시
@@ -49,17 +55,20 @@ PR 회사의 앱 개발자가 지난 튜토리얼에서 작성된 Kubernetes 클
 * {{site.data.keyword.Bluemix_notm}} 서비스의 기능을 사용하는 앱 배치
 
 ## 소요 시간
+{: #apps_time}
 
 40분
 
 ## 대상
+{: #apps_audience}
 
 처음으로 Kubernetes 클러스터에 앱을 배치하는 소프트웨어 개발자와 네트워크 관리자.
 
 ## 전제조건
+{: #apps_prereqs}
 
-* [튜토리얼: Kubernetes 클러스터 작성](cs_tutorials.html#cs_cluster_tutorial).
-* [container-registry 플러그인](/docs/services/Registry/index.html#registry_cli_install) 설치
+* [튜토리얼: Kubernetes 클러스터 작성](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
+* [container-registry 플러그인](/docs/services/Registry?topic=registry-index#registry_cli_install) 설치
 
 
 ## 학습 1: Kubernetes 클러스터에 단일 인스턴스 앱 배치
@@ -91,7 +100,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
-3. [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+3. [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 5.  {{site.data.keyword.registryshort_notm}} CLI에 로그인하십시오.
 
@@ -107,9 +116,10 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
         {: pre}
 
 6.  `Lab 1` 디렉토리의 앱 파일이 포함된 Docker 이미지를 빌드하고, 해당 이미지를 이전 튜토리얼에서 작성한 {{site.data.keyword.registryshort_notm}} 네임스페이스로 푸시하십시오. 향후 앱을 변경해야 하는 경우에는 다음 단계를 반복하여 이미지의 다른 버전을 작성하십시오. 
-**참고**: 컨테이너 이미지에 대해 작업하는 경우에는 [개인 정보 보호](cs_secure.html#pi)에 대해 자세히 알아보십시오.
+**참고**: 컨테이너 이미지에 대해 작업하는 경우에는 [개인 정보 보호](/docs/containers?topic=containers-security#pi)에 대해 자세히 알아보십시오.
 
-    이미지 이름에서는 소문자 영숫자 문자나 밑줄(`_`)만 사용하십시오. 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오. 마침표는 이미지를 빌드하기 위한 빌드 아티팩트 및 Dockerfile을 현재 디렉토리 내에서 찾도록 Docker에 지시합니다.
+    이미지 이름에서는 소문자 영숫자 문자나 밑줄(`_`)만 사용하십시오. 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오. 마침표는 이미지를 빌드하기 위한
+빌드 아티팩트 및 Dockerfile을 현재 디렉토리 내에서 찾도록 Docker에 지시합니다. 현재 자신이 있는 지역의 지역 접두부를 가져오려면 `ibmcloud api`를 실행하십시오. 예를 들어, 댈러스 위치인 미국 남부 지역 접두부는 `ng`입니다.
 
     ```
     ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
@@ -146,7 +156,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: screen}
 
-    Kubernetes 리소스에 대해 작업할 때 [개인 정보 보호](cs_secure.html#pi)에 대해 자세히 알아보십시오.
+    Kubernetes 리소스에 대해 작업할 때 [개인 정보 보호](/docs/containers?topic=containers-security#pi)에 대해 자세히 알아보십시오.
 
 8.  NodePort 서비스로서 배치를 노출하여 외부에서 앱에 액세스할 수 있도록 하십시오. Cloud Foundry 앱에 대한 포트를 노출하는 것과 같이 노출하는 NodePort는 작업자 노드가 트래픽을 청취하는 포트입니다.
 
@@ -224,18 +234,18 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
     2.  클러스터의 작업자 노드에 대한 공인 IP 주소를 가져오십시오.
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
         출력 예:
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        ibmcloud ks workers --cluster pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
         ```
         {: screen}
 
@@ -249,14 +259,14 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
     앱이 공용으로 사용 가능한지 확인하려면 휴대전화에서 브라우저에 앱을 입력해 보십시오.
     {: tip}
 
-11. [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오.
+11. [Kubernetes 대시보드를 실행](/docs/containers?topic=containers-app#cli_dashboard)하십시오.
 
-    [{{site.data.keyword.Bluemix_notm}} 콘솔](https://console.bluemix.net/)에서 클러스터를 선택하는 경우, **Kubernetes 대시보드** 단추를 사용하여 한 번의 클릭으로 대시보드를 실행할 수 있습니다.
+    [{{site.data.keyword.Bluemix_notm}} 콘솔](https://cloud.ibm.com/)에서 클러스터를 선택하는 경우, **Kubernetes 대시보드** 단추를 사용하여 한 번의 클릭으로 대시보드를 실행할 수 있습니다.
     {: tip}
 
 12. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다.
 
-축하합니다! 앱의 첫 번째 버전이 배치되었습니다.
+수고하셨습니다! 앱의 첫 번째 버전이 배치되었습니다.
 
 이 학습에서 너무 많은 명령이 사용되었다고 생각하십니까? 맞습니다. 사용자를 대신하여 일부 작업을 수행하도록 구성 스크립트를 사용해 보시는 건 어떻습니까? 앱의 두 번째 버전에 대한 구성 스크립트를 사용하고 해당 앱의 다중 인스턴스를 배치하여 보다 높은 가용성을 만들려면 다음 학습을 계속하십시오.
 
@@ -356,7 +366,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 6.  이제 배치 작업이 완료되었으므로 브라우저를 열고 앱을 체크아웃할 수 있습니다. URL을 형성하려면 이전 학습에서 작업자 노드에 대해 사용한 것과 동일한 공인 IP 주소를 가져와서 구성 스크립트에 지정된 NodePort와 결합하십시오. 작업자 노드의 공인 IP 주소를 가져오려면 다음을 수행하십시오.
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -378,7 +388,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
   ```
   {: screen}
 
-7.  팟(Pod) 상태를 검사하여 Kubernetes에서 앱의 상태를 모니터하십시오. CLI 또는 Kubernetes 대시보드에서 상태를 확인할 수 있습니다.
+7.  팟(Pod) 상태를 검사하여 Kubernetes에서 앱의 상태를 모니터링하십시오. CLI 또는 Kubernetes 대시보드에서 상태를 확인할 수 있습니다.
 
     *  **CLI에서**: 상태가 변경될 때 팟(Pod)에 무슨 일이 발생하는지 지켜보십시오.
        ```
@@ -388,7 +398,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 
     *  **Kubernetes 대시보드에서**:
 
-       1.  [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오.
+       1.  [Kubernetes 대시보드를 실행](/docs/containers?topic=containers-app#cli_dashboard)하십시오.
        2.  **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다. 이 탭에서 새로 고치기를 계속 수행하여 상태 검사가 작동 중인지 볼 수 있습니다. **팟(Pod)** 섹션에서는 내부의 컨테이너가 재작성될 때 팟(Pod)이 다시 시작되는 횟수를 볼 수 있습니다. 대시보드에서 다음 오류를 발견하는 경우, 이 메시지는 상태 검사에서 문제점을 발견했음을 표시합니다. 잠시 기다린 후에 새로 고치기를 다시 수행하십시오. 각 팟(Pod)마다 재시작 횟수가 변경됨을 볼 수 있습니다.
 
        ```
@@ -398,7 +408,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
        ```
        {: screen}
 
-축하합니다! 앱의 두 번째 버전을 배치했습니다. 보다 적은 명령을 사용해야 했고, 상태 검사의 작동 방법을 알았으며, 배치를 편집했습니다. 대단합니다! Hello world 앱이 PR 회사의 테스트를 통과했습니다. 이제 PR 회사가 보도 자료의 분석을 시작하도록 보다 유용한 앱을 배치할 수 있습니다.
+수고하셨습니다! 앱의 두 번째 버전을 배치했습니다. 보다 적은 명령을 사용해야 했고, 상태 검사의 작동 방법을 알았으며, 배치를 편집했습니다. 대단합니다! Hello world 앱이 PR 회사의 테스트를 통과했습니다. 이제 PR 회사가 보도 자료의 분석을 시작하도록 보다 유용한 앱을 배치할 수 있습니다.
 
 계속하기 전에 작성한 내용을 삭제할 준비가 되었습니까? 지금 동일한 구성 스크립트를 사용하여 작성된 두 리소스를 모두 삭제할 수 있습니다.
 
@@ -527,7 +537,7 @@ Listing images...
         ```
         {: codeblock}
 
-    2.  Watson 배치의 볼륨 섹션에서, 이전 튜토리얼에서 작성한 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿의 이름을 업데이트하십시오. 배치에 볼륨으로서 Kubernetes 시크릿을 마운트하면 팟(Pod)에서 실행 중인 컨테이너가 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키를 사용할 수 있습니다. 이 튜토리얼의 {{site.data.keyword.watson}} 앱 컴포넌트는 볼륨 마운트 경로를 사용하여 API 키를 찾도록 구성되어 있습니다.
+    2.  Watson 배치의 볼륨 섹션에서, 이전 [Kubernetes 클러스터 작성 튜토리얼](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)에서 작성한 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿의 이름을 업데이트하십시오. 배치에 볼륨으로서 Kubernetes 시크릿을 마운트하면 팟(Pod)에서 실행 중인 컨테이너가 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키를 사용할 수 있습니다. 이 튜토리얼의 {{site.data.keyword.watson}} 앱 컴포넌트는 볼륨 마운트 경로를 사용하여 API 키를 찾도록 구성되어 있습니다.
 
         ```
 volumes:
@@ -603,7 +613,7 @@ volumes:
 
     브라우저에서 사용자는 입력한 텍스트의 JSON 응답을 볼 수 있습니다.
 
-10. [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오.
+10. [Kubernetes 대시보드를 실행](/docs/containers?topic=containers-app#cli_dashboard)하십시오.
 
 11. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다.
 
@@ -611,6 +621,7 @@ volumes:
 {: #lesson3b}
 
 배치가 실행 중인 동안에 팟(Pod) 템플리트에서 배치를 편집하여 값을 변경할 수 있습니다. 이 학습에는 사용된 이미지 업데이트가 포함됩니다. PR 회사는 배치에서 앱을 변경하려고 합니다.
+{: shortdesc}
 
 이미지의 이름을 변경하십시오.
 
@@ -650,9 +661,9 @@ volumes:
 
     롤아웃을 변경하면 다른 팟(Pod)이 작성되고 Kubernetes에서 테스트합니다. 테스트를 통과하면 이전 팟(Pod)은 제거됩니다.
 
+[배운 내용을 테스트하고 퀴즈를 풀어보십시오! ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-
-축하합니다! {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 앱을 배치했습니다. PR 회사가 이 배치를 사용하여 보도 자료의 분석을 시작할 수 있습니다.
+수고하셨습니다! {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 앱을 배치했습니다. PR 회사가 이 배치를 사용하여 보도 자료의 분석을 시작할 수 있습니다.
 
 작성한 내용을 삭제할 준비가 되었습니까? 구성 스크립트를 사용하여 작성한 리소스를 삭제할 수 있습니다.
 
@@ -674,15 +685,15 @@ service "watson-talk-service" deleted
   클러스터를 유지하기를 원하지 않으면 삭제할 수도 있습니다.
 
   ```
-  ibmcloud ks cluster-rm <cluster_name_or_ID>
+  ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
 ## 다음 단계
-{: #next}
+{: #apps_next}
 
 이제 기본사항을 습득했으므로 고급 활동으로 이동할 수 있습니다. 다음 중 하나를 시도해 보십시오.
 
 - 저장소에서 [더 복잡한 실험 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) 수행
-- {{site.data.keyword.containerlong_notm}}를 사용하여 [자동으로 앱 스케일링](cs_app.html#app_scaling)
-- [IBM 개발자 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/code/technologies/container-orchestration/)에서 컨테이너 오케스트레이션 코드 패턴 탐색
+- {{site.data.keyword.containerlong_notm}}를 사용하여 [자동으로 앱 스케일링](/docs/containers?topic=containers-app#app_scaling)
+- [IBM 개발자 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/technologies/containers/)에서 컨테이너 오케스트레이션 코드 패턴 탐색

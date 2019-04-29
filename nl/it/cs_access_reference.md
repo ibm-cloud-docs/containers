@@ -1,9 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
 
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,132 +22,1004 @@ lastupdated: "2018-12-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
+
 # Autorizzazioni di accesso utente
-{: #understanding}
+{: #access_reference}
 
-
-
-Quando [assegni le autorizzazioni del cluster](cs_users.html), può essere difficile valutare quale ruolo devi assegnare a un utente. Utilizza le tabelle riportate nelle seguenti sezioni per determinare il livello minimo di autorizzazioni necessarie per eseguire attività comuni in {{site.data.keyword.containerlong}}.
+Quando [assegni le autorizzazioni del cluster](/docs/containers?topic=containers-users), può essere difficile valutare quale ruolo devi assegnare a un utente. Utilizza le tabelle riportate nelle seguenti sezioni per determinare il livello minimo di autorizzazioni necessarie per eseguire attività comuni in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-## Piattaforma {{site.data.keyword.Bluemix_notm}} IAM e RBAC Kubernetes
-{: #platform}
+A partire dal 30 gennaio 2019, {{site.data.keyword.containerlong_notm}} ha introdotto un nuovo modo per autorizzare gli utenti con {{site.data.keyword.Bluemix_notm}} IAM: [i ruoli di accesso al servizio](#service). Questi ruoli del servizio vengono utilizzati per concedere l'accesso alle risorse all'interno del cluster, come gli spazi dei nomi Kubernetes. Per ulteriori informazioni, consulta il blog [Introducing service roles and namespaces in IAM for more granular control of cluster access ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
+{: note}
 
-{{site.data.keyword.containerlong_notm}} è configurato per utilizzare i ruoli {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management). I ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM determinano le azioni che gli utenti possono eseguire su un cluster. A ogni utente a cui viene assegnato un ruolo della piattaforma viene assegnato automaticamente anche un ruolo RBAC (role-based access control) di Kubernetes corrispondente nello spazio dei nomi predefinito. Inoltre, i ruoli della piattaforma impostano automaticamente le autorizzazioni di infrastruttura di base per gli utenti. Per impostare le politiche, vedi [Assegnazione delle autorizzazioni della piattaforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform). Per ulteriori informazioni sui ruoli RBAC, vedi [Assegnazione delle autorizzazioni RBAC](cs_users.html#role-binding).
+## Ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM
+{: #iam_platform}
+
+{{site.data.keyword.containerlong_notm}} è configurato per utilizzare i ruoli {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management). I ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM determinano le azioni che gli utenti possono eseguire sulle risorse {{site.data.keyword.Bluemix_notm}} come i cluster, i nodi di lavoro e gli ALB (application load balancer) Ingress. I ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM inoltre impostano automaticamente le autorizzazioni di infrastruttura di base per gli utenti. Per impostare i ruoli della piattaforma, vedi [Assegnazione delle autorizzazioni della piattaforma {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
 {: shortdesc}
 
-La seguente tabella mostra le autorizzazioni di gestione del cluster concesse da ciascun ruolo della piattaforma e le autorizzazioni delle risorse Kubernetes per i ruoli RBAC corrispondenti.
+In ciascuna delle seguenti sezioni, le tabelle mostrano le autorizzazioni di gestione del cluster, di registrazione e di Ingress concesse da ciascun ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM. Le tabelle sono organizzate in ordine alfabetico in base al nome del comando della CLI.
 
-<table summary="La tabella mostra le autorizzazioni utente per i ruoli della piattaforma IAM e le politiche RBAC corrispondenti. Le righe devono essere lette da sinistra a destra, con il ruolo della piattaforma IAM nella colonna uno, l'autorizzazione cluster nella colonna due e il ruolo RBAC corrispondente nella colonna tre.">
-<caption>Autorizzazioni di gestione del cluster per piattaforma e ruolo RBAC</caption>
+* [Azioni che non richiedono autorizzazioni](#none-actions)
+* [Azioni del visualizzatore](#view-actions)
+* [Azioni dell'editor](#editor-actions)
+* [Azioni dell'operatore](#operator-actions)
+* [Azioni dell'amministratore](#admin-actions)
+
+### Azioni che non richiedono autorizzazioni
+{: #none-actions}
+
+Qualsiasi utente nel tuo account che esegue il comando della CLI o effettua la chiamata API per l'azione indicata nella seguente tabella vede il risultato, anche se l'utente non ha autorizzazioni assegnate.
+{: shortdesc}
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API che non richiedono autorizzazioni in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-    <th>Ruolo piattaforma</th>
-    <th>Autorizzazioni di gestione del cluster</th>
-    <th>Ruolo RBAC corrispondente e autorizzazioni delle risorse</th>
+<th id="none-actions-action">Azione di gestione del cluster</th>
+<th id="none-actions-cli">Comando della CLI</th>
+<th id="none-actions-api">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Specifica o visualizza l'endpoint API per {{site.data.keyword.containerlong_notm}}.</td>
+<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_api)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Visualizza un elenco di comandi e parametri supportati.</td>
+<td><code>[ibmcloud ks help](/docs/containers?topic=containers-cs_cli_reference#cs_help)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Inizializza il plugin {{site.data.keyword.containerlong_notm}} o specifica la regione in cui desideri creare o accedere ai cluster Kubernetes.</td>
+<td><code>[ibmcloud ks init](/docs/containers?topic=containers-cs_cli_reference#cs_init)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Visualizza un elenco di versioni di Kubernetes supportate in {{site.data.keyword.containerlong_notm}}. </td><td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
+<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetKubeVersions)</code></td>
+</tr>
+<tr>
+<td>Visualizza un elenco di tipi di macchina disponibili per i tuoi nodi di lavoro.</td>
+<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/swagger-api/#!/util/GetDatacenterMachineTypes)</code></td>
+</tr>
+<tr>
+<td>Visualizza i messaggi correnti dell'utente ID IBM.</td>
+<td><code>[ibmcloud ks messages](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
+<td><code>[GET /v1/messages](https://containers.cloud.ibm.com/swagger-api/#!/util/GetMessages)</code></td>
+</tr>
+<tr>
+<td>Trova la regione {{site.data.keyword.containerlong_notm}} in cui sei al momento.</td>
+<td><code>[ibmcloud ks region](/docs/containers?topic=containers-cs_cli_reference#cs_region)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Imposta la regione per {{site.data.keyword.containerlong_notm}}.</td>
+<td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cs_cli_reference#cs_region-set)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Elenca le regioni disponibili.</td>
+<td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cs_cli_reference#cs_regions)</code></td>
+<td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
+</tr>
+<tr>
+<td>Visualizza un elenco delle zone disponibili in cui puoi creare un cluster.</td>
+<td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cs_cli_reference#cs_datacenters)</code></td>
+<td><code>[GET /v1/zones](https://containers.cloud.ibm.com/swagger-api/#!/util/GetZones)</code></td>
+</tr>
+</tbody>
+</table>
+
+### Azioni del visualizzatore
+{: #view-actions}
+
+Il ruolo della piattaforma **Visualizzatore** include le [azioni che non richiedono autorizzazioni](#none-actions), oltre alle autorizzazioni mostrate nella seguente tabella.
+{: shortdesc}
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di gestione del cluster che richiedono il ruolo della piattaforma Visualizzatore in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="view-actions-mngt">Azione di gestione del cluster</th>
+<th id="view-actions-cli">Comando della CLI</th>
+<th id="view-actions-api">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Visualizza il nome e l'indirizzo e-mail del proprietario della chiave API {{site.data.keyword.Bluemix_notm}} IAM per un gruppo di risorse e una regione.</td>
+<td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetClusterKeyOwner)</code></td>
+</tr>
+<tr>
+<td>Scarica i dati di configurazione e i certificati di Kubernetes per connetterti al tuo cluster ed eseguire i comandi `kubectl`.</td>
+<td><code>[ibmcloud ks cluster-config](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterConfig)</code></td>
+</tr>
+<tr>
+<td>Visualizza le informazioni per un cluster.</td>
+<td><code>[ibmcloud ks cluster-get](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetCluster)</code></td>
+</tr>
+<tr>
+<td>Elenca tutti i servizi in tutti gli spazi dei nomi associati a un cluster.</td>
+<td><code>[ibmcloud ks cluster-services](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_services)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesForAllNamespaces)</code></td>
+</tr>
+<tr>
+<td>Elenca tutti i cluster.</td>
+<td><code>[ibmcloud ks clusters](/docs/containers?topic=containers-cs_cli_reference#cs_clusters)</code></td>
+<td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusters)</code></td>
+</tr>
+<tr>
+<td>Ottieni le credenziali dell'infrastruttura per l'account {{site.data.keyword.Bluemix_notm}} per accedere a un diverso portfolio dell'infrastruttura IBM Cloud (SoftLayer).</td>
+<td><code>[        ibmcloud ks credential-get
+        ](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetUserCredentials)</code></td>
+</tr>
+<tr>
+<td>Elenca tutti i servizi associati a uno specifico spazio dei nomi.</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesInNamespace)</code></td>
+</tr>
+<tr>
+<td>Elenca tutte le sottoreti gestite dall'utente associate a un cluster.</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterUserSubnet)</code></td>
+</tr>
+<tr>
+<td>Elenca le sottoreti disponibili nell'account dell'infrastruttura.</td>
+<td><code>[ibmcloud ks subnets](/docs/containers?topic=containers-cs_cli_reference#cs_subnets)</code></td>
+<td><code>[GET /v1/subnets](https://containers.cloud.ibm.com/swagger-api/#!/properties/ListSubnets)</code></td>
+</tr>
+<tr>
+<td>Visualizza lo stato di spanning della VLAN per l'account dell'infrastruttura.</td>
+<td><code>[ibmcloud ks vlan-spanning-get](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)</code></td>
+<td><code>[GET /v1/subnets/vlan-spanning](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetVlanSpanning)</code></td>
+</tr>
+<tr>
+<td>Quando impostato per un solo cluster: elenca le VLAN a cui è connesso il cluster in una zona.</br>Quando impostato per tutti i cluster nell'account: elenca tutte le VLAN disponibili in una zona.</td>
+<td><code>[ibmcloud ks vlans](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/vlans](https://containers.cloud.ibm.com/swagger-api/#!/properties/GetDatacenterVLANs)</code></td>
+</tr>
+<tr>
+<td>Elenca tutti i webhook per un cluster.</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWebhooks)</code></td>
+</tr>
+<tr>
+<td>Visualizza le informazioni per un nodo di lavoro.</td>
+<td><code>[ibmcloud ks worker-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkers)</code></td>
+</tr>
+<tr>
+<td>Visualizza le informazioni per un pool di nodi di lavoro.</td>
+<td><code>[ibmcloud ks worker-pool-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPool)</code></td>
+</tr>
+<tr>
+<td>Elenca tutti i pool di nodi di lavoro in un cluster.</td>
+<td><code>[ibmcloud ks worker-pools](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pools)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPools)</code></td>
+</tr>
+<tr>
+<td>Elenca tutti i nodi di lavoro in un cluster.</td>
+<td><code>[ibmcloud ks workers](/docs/containers?topic=containers-cs_cli_reference#cs_workers)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWorkers)</code></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di Ingress che richiedono il ruolo della piattaforma Visualizzatore in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="view-actions-ingress">Azione di Ingress</th>
+<th id="view-actions-cli2">Comando della CLI</th>
+<th id="view-actions-api2">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Visualizza le informazioni per un ALB Ingress.</td>
+<td><code>[ibmcloud ks alb-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_get)</code></td>
+<td><code>[GET /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALB)</code></td>
+</tr>
+<tr>
+<td>Visualizza i tipi di ALB supportati nella regione.</td>
+<td><code>[ibmcloud ks alb-types](/docs/containers?topic=containers-cs_cli_reference#cs_alb_types)</code></td>
+<td><code>[GET /albtypes](https://containers.cloud.ibm.com/swagger-alb-api/#!/util/GetAvailableALBTypes)</code></td>
+</tr>
+<tr>
+<td>Elenca tutti gli ALB Ingress in un cluster.</td>
+<td><code>[ibmcloud ks albs](/docs/containers?topic=containers-cs_cli_reference#cs_albs)</code></td>
+<td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALBs)</code></td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di registrazione che richiedono il ruolo della piattaforma Visualizzatore in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="view-actions-log">Azione di registrazione</th>
+<th id="view-actions-cli3">Comando della CLI</th>
+<th id="view-actions-api3">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Visualizza lo stato per gli aggiornamenti automatici del componente aggiuntivo Fluentd.</td>
+<td><code>[ibmcloud ks logging-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Visualizza l'endpoint di registrazione predefinito per la regione di destinazione.</td>
+<td>-</td>
+<td><code>[GET /v1/logging/{idOrName}/default](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetDefaultLoggingEndpoint)</code></td>
+</tr>
+<tr>
+<td>Elenca tutte le configurazioni di inoltro dei log nel cluster o per una specifica origine del log nel cluster.</td>
+<td><code>[ibmcloud ks logging-config-get](/docs/containers?topic=containers-cs_cli_reference#cs_logging_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigs) and [GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigsForSource)</code></td>
+</tr>
+<tr>
+<td>Visualizza le informazioni per una configurazione di filtraggio log.</td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfig)</code></td>
+</tr>
+<tr>
+<td>Elenca tutte le configurazione del filtro di registrazione nel cluster</td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfigs)</code></td>
+</tr>
+</tbody>
+</table>
+
+### Azioni dell'editor
+{: #editor-actions}
+
+Il ruolo della piattaforma **Editor** include le autorizzazioni concesse dal **Visualizzatore**, oltre alle seguenti. **Suggerimento**: utilizza questo ruolo per gli sviluppatori dell'applicazione e assegna il ruolo <a href="#cloud-foundry">Cloud Foundry</a> di **Sviluppatore**.
+{: shortdesc}
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di gestione del cluster che richiedono il ruolo della piattaforma Editor in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="editor-actions-mngt">Azione di gestione del cluster</th>
+<th id="editor-actions-cli">Comando della CLI</th>
+<th id="editor-actions-api">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Esegui il bind di un servizio a un cluster. **Nota**: è richiesto anche il ruolo Cloud Foundry di Sviluppatore nello spazio in cui si trova il servizio.</td>
+<td><code>[ibmcloud ks cluster-service-bind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/BindServiceToNamespace)</code></td>
+</tr>
+<tr>
+<td>Annulla il bind di un servizio da un cluster. **Nota**: è richiesto anche il ruolo Cloud Foundry di Sviluppatore nello spazio in cui si trova il servizio.</td>
+<td><code>[ibmcloud ks cluster-service-unbind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_unbind)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UnbindServiceFromNamespace)</code></td>
+</tr>
+<tr>
+<td>Crea un webhook in un cluster.</td>
+<td><code>[ibmcloud ks webhook-create](/docs/containers?topic=containers-cs_cli_reference#cs_webhook_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWebhooks)</code></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di Ingress che richiedono il ruolo della piattaforma Editor in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="editor-actions-ingress">Azione di Ingress</th>
+<th id="editor-actions-cli2">Comando della CLI</th>
+<th id="editor-actions-api2">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Disabilita gli aggiornamenti automatici per il componente aggiuntivo ALB Ingress.</td>
+<td><code>[ibmcloud ks alb-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Abilita gli aggiornamenti automatici per il componente aggiuntivo ALB Ingress.</td>
+<td><code>[ibmcloud ks alb-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Controlla se sono abilitati gli aggiornamenti automatici per il componente aggiuntivo ALB Ingress.</td>
+<td><code>[ibmcloud ks alb-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Abilita o disabilita un ALB Ingress.</td>
+<td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</code></td>
+<td><code>[POST /albs](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/EnableALB) and [DELETE /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#/)</code></td>
+</tr>
+<tr>
+<td>Esegui il rollback di un aggiornamento del componente aggiuntivo ALB Ingress alla build in cui i tuoi pod ALB erano precedentemente in esecuzione.</td>
+<td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cs_cli_reference#cs_alb_rollback)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/RollbackUpdate)</code></td>
+</tr>
+<tr>
+<td>Forza un aggiornamento una tantum dei tuoi pod ALB aggiornando manualmente il componente aggiuntivo ALB Ingress.</td>
+<td><code>[ibmcloud ks alb-update](/docs/containers?topic=containers-cs_cli_reference#cs_alb_update)</code></td>
+<td><code>[PUT /clusters/{idOrName}/update](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBs)</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di registrazione che richiedono il ruolo della piattaforma Editor in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="editor-log">Azione di registrazione</th>
+<th id="editor-cli3">Comando della CLI</th>
+<th id="editor-api3">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Crea un webhook di controllo del server API.</td>
+<td><code>[ibmcloud ks apiserver-config-set](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_set)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/clusters/apiserverconfigs/UpdateAuditWebhook)</code></td>
+</tr>
+<tr>
+<td>Elimina un webhook di controllo del server API.</td>
+<td><code>[ibmcloud ks apiserver-config-unset](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_unset)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/apiserverconfigs/DeleteAuditWebhook)</code></td>
+</tr>
+<tr>
+<td>Crea una configurazione di inoltro dei log per tutte le origini log eccetto <code>kube-audit</code>.</td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+</tr>
+<tr>
+<td>Aggiorna una configurazione di inoltro dei log.</td>
+<td><code>[ibmcloud ks logging-config-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_logging_refresh)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/refresh](https://containers.cloud.ibm.com/swagger-logging/#!/logging/RefreshLoggingConfig)</code></td>
+</tr>
+<tr>
+<td>Elimina una configurazione di inoltro dei log per tutte le origini log eccetto <code>kube-audit</code>.</td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+</tr>
+<tr>
+<td>Elimina tutte le configurazioni di inoltro dei log per un cluster.</td>
+<td>-</td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfigs)</code></td>
+</tr>
+<tr>
+<td>Aggiorna una configurazione di inoltro dei log.</td>
+<td><code>[ibmcloud ks logging-config-update](/docs/containers?topic=containers-cs_cli_reference#cs_logging_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/UpdateLoggingConfig)</code></td>
+</tr>
+<tr>
+<td>Crea una configurazione di filtraggio log.</td>
+<td><code>[ibmcloud ks logging-filter-create](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/CreateFilterConfig)</code></td>
+</tr>
+<tr>
+<td>Elimina una configurazione di filtraggio log.</td>
+<td><code>[ibmcloud ks logging-filter-rm](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_delete)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfig)</code></td>
+</tr>
+<tr>
+<td>Elimina tutte le configurazione del filtro di registrazione per il cluster Kubernetes.</td>
+<td>-</td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfigs)</code></td>
+</tr>
+<tr>
+<td>Aggiorna una configurazione di filtraggio log.</td>
+<td><code>[ibmcloud ks logging-filter-update](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/UpdateFilterConfig)</code></td>
+</tr>
+</tbody>
+</table>
+
+### Azioni dell'operatore
+{: #operator-actions}
+
+Il ruolo della piattaforma **Operatore** include le autorizzazioni concesse dal **Visualizzatore**, oltre alle autorizzazioni mostrate nella seguente tabella.
+{: shortdesc}
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di gestione del cluster che richiedono il ruolo della piattaforma Operatore in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="operator-mgmt">Azione di gestione del cluster</th>
+<th id="operator-cli">Comando della CLI</th>
+<th id="operator-api">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Aggiorna il master Kubernetes.</td>
+<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
+</tr>
+<tr>
+<td>Crea un ID del servizio {{site.data.keyword.Bluemix_notm}} IAM per il cluster, crea una politica per l'ID servizio che assegna il ruolo di accesso al servizio **Lettore** in {{site.data.keyword.registrylong_notm}}, quindi crea una chiave API per l'ID servizio.</td>
+<td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_pull_secret_apply)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Riavvia i nodi master del cluster per applicare le nuove modifiche alla configurazione dell'API Kubernetes.</td>
+<td><code>[ibmcloud ks cluster-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
+</tr>
+<tr>
+<td>Aggiungi una sottorete a un cluster.</td>
+<td><code>[ibmcloud ks cluster-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterSubnet)</code></td>
+</tr>
+<tr>
+<td>Crea una sottorete.</td>
+<td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateClusterSubnet)</code></td>
+</tr>
+<tr>
+<td>Aggiorna un cluster.</td>
+<td><code>[ibmcloud ks cluster-update](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateCluster)</code></td>
+</tr>
+<tr>
+<td>Aggiungi una sottorete gestita dall'utente a un cluster.</td>
+<td><code>[ibmcloud ks cluster-user-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterUserSubnet)</code></td>
+</tr>
+<tr>
+<td>Rimuovi una sottorete gestita dall'utente da un cluster.</td>
+<td><code>[ibmcloud ks cluster-user-subnet-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/usersubnets/{subnetId}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterUserSubnet)</code></td>
+</tr>
+<tr>
+<td>Aggiungi nodi di lavoro.</td>
+<td><code>[ibmcloud ks worker-add (deprecated)](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWorkers)</code></td>
+</tr>
+<tr>
+<td>Crea un pool di nodi di lavoro.</td>
+<td><code>[ibmcloud ks worker-pool-create](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateWorkerPool)</code></td>
+</tr>
+<tr>
+<td>Ribilancia un pool di nodi di lavoro.</td>
+<td><code>[ibmcloud ks worker-pool-rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+</tr>
+<tr>
+<td>Ridimensiona un pool di nodi di lavoro.</td>
+<td><code>[ibmcloud ks worker-pool-resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+</tr>
+<tr>
+<td>Elimina un pool di nodi di lavoro.</td>
+<td><code>[ibmcloud ks worker-pool-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPool)</code></td>
+</tr>
+<tr>
+<td>Riavvia un nodo di lavoro.</td>
+<td><code>[ibmcloud ks worker-reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+</tr>
+<tr>
+<td>Ricarica un nodo di lavoro.</td>
+<td><code>[ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+</tr>
+<tr>
+<td>Rimuovi un nodo di lavoro.</td>
+<td><code>[ibmcloud ks worker-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterWorker)</code></td>
+</tr>
+<tr>
+<td>Aggiorna un nodo di lavoro.</td>
+<td><code>[ibmcloud ks worker-update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+</tr>
+<tr>
+<td>Aggiungi una zona a un pool di nodi di lavoro.</td>
+<td><code>[ibmcloud ks zone-add](/docs/containers?topic=containers-cs_cli_reference#cs_zone_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZone)</code></td>
+</tr>
+<tr>
+<td>Aggiorna la configurazione di rete per una determinata zona in un pool di nodi di lavoro.</td>
+<td><code>[ibmcloud ks zone-network-set](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZoneNetwork)</code></td>
+</tr>
+<tr>
+<td>Rimuovi una zona da un pool di nodi di lavoro.</td>
+<td><code>[ibmcloud ks zone-rm](/docs/containers?topic=containers-cs_cli_reference#cs_zone_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPoolZone)</code></td>
+</tr>
+</tbody>
+</table>
+
+### Azioni dell'amministratore
+{: #admin-actions}
+
+Il ruolo della piattaforma **Amministratore** include tutte le autorizzazioni concesse dai ruoli **Visualizzatore**, **Editor** e **Operatore**, oltre alle seguenti. Per creare risorse come macchine, VLAN e sottoreti, gli utenti Amministratore devono disporre del <a href="#infra">ruolo dell'infrastruttura</a> **Super utente**.
+{: shortdesc}
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di gestione del cluster che richiedono il ruolo della piattaforma Amministratore in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="admin-mgmt">Azione di gestione del cluster</th>
+<th id="admin-cli">Comando della CLI</th>
+<th id="admin-api">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Imposta la chiave API per l'account {{site.data.keyword.Bluemix_notm}} per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) collegato.</td>
+<td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset)</code></td>
+<td><code>[POST /v1/keys](https://containers.cloud.ibm.com/swagger-api/#!/accounts/ResetUserAPIKey)</code></td>
+</tr>
+<tr>
+<td>Disabilita un componente aggiuntivo gestito, come Istio o Knative, in un cluster.</td>
+<td><code>[ibmcloud ks cluster-addon-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_disable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+</tr>
+<tr>
+<td>Abilita un componente aggiuntivo gestito, come Istio o Knative, in un cluster.</td>
+<td><code>[ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+</tr>
+<tr>
+<td>Elenca i componenti aggiuntivi gestiti, come Istio o Knative, che sono abilitati in un cluster.</td>
+<td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addons)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterAddons)</code></td>
+</tr>
+<tr>
+<td>Crea un cluster gratuito o standard. **Nota**: sono richiesti anche il ruolo della piattaforma di Amministratore per {{site.data.keyword.registrylong_notm}} e il ruolo dell'infrastruttura Super utente.</td>
+<td><code>[ibmcloud ks cluster-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)</code></td>
+<td><code>[POST /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateCluster)</code></td>
+</tr>
+<tr>
+<td>Disabilita una funzione specificata per un cluster, come l'endpoint del servizio pubblico per il master cluster.</td>
+<td><code>[ibmcloud ks cluster-feature-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Abilita una funzione specificata per un cluster, come l'endpoint del servizio privato per il master cluster.</td>
+<td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Elenca le funzioni abilitate in un cluster.</td>
+<td><code>[ibmcloud ks cluster-features](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Elimina un cluster.</td>
+<td><code>[ibmcloud ks cluster-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveCluster)</code></td>
+</tr>
+<tr>
+<td>Imposta le credenziali dell'infrastruttura per l'account {{site.data.keyword.Bluemix_notm}} per accedere a un diverso portfolio dell'infrastruttura IBM Cloud (SoftLayer).</td>
+<td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)</code></td>
+<td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/StoreUserCredentials)</code></td>
+</tr>
+<tr>
+<td>Rimuovi le credenziali dell'infrastruttura per l'account {{site.data.keyword.Bluemix_notm}} per accedere a un diverso portfolio dell'infrastruttura IBM Cloud (SoftLayer).</td>
+<td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset)</code></td>
+<td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/RemoveUserCredentials)</code></td>
+</tr>
+<tr>
+<td>Crittografa i segreti Kubernetes utilizzando {{site.data.keyword.keymanagementservicefull}}.</td>
+<td><code>[ibmcloud ks key-protect-enable](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/kms](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateKMSConfig)</code></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di Ingress che richiedono il ruolo della piattaforma Amministratore in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="admin-ingress">Azione di Ingress</th>
+<th id="admin-cli2">Comando della CLI</th>
+<th id="admin-api2">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Distribuisci o aggiorna un certificato dalla tua istanza {{site.data.keyword.cloudcerts_long_notm}} a un ALB.</td>
+<td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_deploy)</code></td>
+<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/CreateALBSecret) or [PUT /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBSecret)</code></td>
+</tr>
+<tr>
+<td>Visualizza i dettagli per un segreto ALB in un cluster.</td>
+<td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ViewClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>Rimuovi un segreto ALB da un cluster.</td>
+<td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/DeleteClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>Elenca tutti i segreti ALB in un cluster.</td>
+<td><code>[ibmcloud ks alb-certs](/docs/containers?topic=containers-cs_cli_reference#cs_alb_certs)</code></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>Panoramica dei comandi della CLI e delle chiamate API di registrazione che richiedono il ruolo della piattaforma Amministratore in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="admin-log">Azione di registrazione</th>
+<th id="admin-cli3">Comando della CLI</th>
+<th id="admin-api3">Chiamata API</th>
+</thead>
+<tbody>
+<tr>
+<td>Disabilita gli aggiornamenti automatici per il componente aggiuntivo del cluster Fluentd.</td>
+<td><code>[ibmcloud ks logging-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Abilita gli aggiornamenti automatici per il componente aggiuntivo del cluster Fluentd.</td>
+<td><code>[ibmcloud ks logging-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_enable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Raccogli un'istantanea dei log del server API in un bucket di {{site.data.keyword.cos_full_notm}}.</td>
+<td><code>[ibmcloud ks logging-collect](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Visualizza lo stato della richiesta di istantanea del log del server API.</td>
+<td><code>[ibmcloud ks logging-collect-status](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect_status)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Crea una configurazione di inoltro dei log per l'origine log <code>kube-audit</code>.</td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+</tr>
+<tr>
+<td>Elimina una configurazione di inoltro dei log per l'origine log <code>kube-audit</code>.</td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
+## Ruoli del servizio {{site.data.keyword.Bluemix_notm}} IAM
+{: #service}
+
+A ogni utente a cui viene assegnato un ruolo di accesso al servizio {{site.data.keyword.Bluemix_notm}} IAM viene assegnato automaticamente anche un ruolo RBAC (role-based access control) di Kubernetes corrispondente in uno specifico spazio dei nomi. Per ulteriori informazioni sui ruoli di accesso al servizio, vedi [Ruoli del servizio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform). Per ulteriori informazioni sui ruoli RBAC, vedi [Assegnazione delle autorizzazioni RBAC](/docs/containers?topic=containers-users#role-binding).
+{: shortdesc}
+
+Stai cercando le azioni Kubernetes concesse da ogni ruolo del servizio tramite RBAC? Vedi [Autorizzazioni delle risorse Kubernetes per ogni ruolo RBAC](#rbac).
+{: tip}
+
+La seguente tabella mostra le autorizzazioni delle risorse Kubernetes concesse da ciascun ruolo del servizio e il ruolo RBAC corrispondente.
+
+<table>
+<caption>Autorizzazioni delle risorse Kubernetes per servizio e ruoli RBAC corrispondenti</caption>
+<thead>
+    <th id="service-role">Ruolo del servizio</th>
+    <th id="rbac-role">Ruolo RBAC corrispondente, bind e ambito</th>
+    <th id="kube-perm">Autorizzazioni delle risorse Kubernetes</th>
 </thead>
 <tbody>
   <tr>
-    <td>**Visualizzatore**</td>
-    <td>
-      Cluster:<ul>
-        <li>Visualizzare il nome e l'indirizzo e-mail del proprietario della chiave API {{site.data.keyword.Bluemix_notm}} IAM per un gruppo di risorse e una regione</li>
-        <li>Se il tuo account {{site.data.keyword.Bluemix_notm}} utilizza credenziali diverse per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer), visualizzare il nome utente dell'infrastruttura</li>
-        <li>Elencare o visualizzare i dettagli per i cluster, i nodi di lavoro , i pool di nodi di lavoro, i servizi in un cluster e i webhook</li>
-        <li>Visualizzare lo stato di spanning della VLAN per l'account dell'infrastruttura</li>
-        <li>Elencare le sottoreti disponibili nell'account dell'infrastruttura</li>
-        <li>Quando impostato per un solo cluster: elencare le VLAN a cui è connesso il cluster in una zona</li>
-        <li>Quando impostato per tutti i cluster nell'account: elencare tutte le VLAN disponibili in una zona</li></ul>
-      Registrazione:<ul>
-        <li>Visualizzare l'endpoint di registrazione predefinito per la regione di destinazione</li>
-        <li>Elencare o visualizzare i dettagli per le configurazioni di inoltro e filtraggio log</li>
-        <li>Visualizzare lo stato per gli aggiornamenti automatici del componente aggiuntivo Fluentd</li></ul>
-      Ingress:<ul>
-        <li>Elencare o visualizzare i dettagli per gli ALB in un cluster</li>
-        <li>Visualizzare i tipi di ALB supportati nella regione</li></ul>
-    </td>
-    <td>Il ruolo cluster <code>view</code> viene applicato mediante il bind del ruolo <code>ibm-view</code>, che fornisce le seguenti autorizzazioni nello spazio dei nomi <code>default</code>:<ul>
-      <li>Accesso in lettura alle risorse nello spazio dei nomi predefinito</li>
-      <li>Nessun accesso in lettura ai segreti Kubernetes</li></ul>
+    <td id="service-role-reader" headers="service-role">Ruolo lettore</td>
+    <td headers="service-role-reader rbac-role">Quando l'ambito è delimitato a un solo spazio dei nomi: ruolo cluster <strong><code>view</code></strong> applicato dal bind del ruolo <strong><code>ibm-view</code></strong> in quello spazio dei nomi</br><br>Quando l'ambito è dedicato a tutti gli spazi dei nomi: ruolo cluster <strong><code>view</code></strong> applicato dal bind del ruolo <strong><code>ibm-view</code></strong> in ogni spazio dei nomi del cluster</td>
+    <td headers="service-role-reader kube-perm"><ul>
+      <li>Accesso in lettura alle risorse in uno spazio dei nomi</li>
+      <li>Nessun accesso in lettura ai ruoli e ai bind del ruolo o ai segreti Kubernetes</li>
+      <li>Accesso al dashboard Kubernetes per visualizzare le risorse in uno spazio dei nomi</li></ul>
     </td>
   </tr>
   <tr>
-    <td>**Editor** <br/><br/><strong>Suggerimento</strong>: utilizza questo ruolo per gli sviluppatori dell'applicazione e assegna il ruolo **Sviluppatore** di <a href="#cloud-foundry">Cloud Foundry</a>.</td>
-    <td>Questo ruolo ha tutte le autorizzazioni del ruolo Visualizzatore, oltre alle seguenti:</br></br>
-      Cluster:<ul>
-        <li>Eseguire il bind e l'annullamento del bind dei servizi {{site.data.keyword.Bluemix_notm}} a un cluster</li></ul>
-      Registrazione:<ul>
-        <li>Creare, aggiornare ed eliminare i webhook di controllo del server API</li>
-        <li>Creare webhook del cluster</li>
-        <li>Creare ed eliminare le configurazioni di inoltro log per tutti i tipi tranne `kube-audit`</li>
-        <li>Aggiornare le configurazioni di inoltro log</li>
-        <li>Creare, aggiornare ed eliminare le configurazioni di filtraggio log</li></ul>
-      Ingress:<ul>
-        <li>Abilitare o disabilitare gli ALB</li></ul>
+    <td id="service-role-writer" headers="service-role">Ruolo scrittore</td>
+    <td headers="service-role-writer rbac-role">Quando l'ambito è dedicato a un solo spazio dei nomi: ruolo cluster <strong><code>edit</code></strong> applicato dal bind del ruolo <strong><code>ibm-edit</code></strong> in quello spazio dei nomi</br><br>Quando l'ambito è dedicato a tutti gli spazi dei nomi: ruolo cluster <strong><code>edit</code></strong> applicato dal bind del ruolo <strong><code>ibm-edit</code></strong> in ogni spazio dei nomi del cluster</td>
+    <td headers="service-role-writer kube-perm"><ul><li>Accesso in lettura/scrittura alle risorse in uno spazio dei nomi</li>
+    <li>Nessun accesso in lettura/scrittura ai ruoli e ai bind del ruolo</li>
+    <li>Accesso al dashboard Kubernetes per visualizzare le risorse in uno spazio dei nomi</li></ul>
     </td>
-    <td>Il ruolo cluster <code>edit</code> viene applicato mediante il bind del ruolo <code>ibm-edit</code>, che fornisce le seguenti autorizzazioni nello spazio dei nomi <code>default</code>:
-      <ul><li>Accesso in lettura/scrittura alle risorse nello spazio dei nomi predefinito</li></ul></td>
   </tr>
   <tr>
-    <td>**Operatore**</td>
-    <td>Questo ruolo ha tutte le autorizzazioni del ruolo Visualizzatore, oltre alle seguenti:</br></br>
-      Cluster:<ul>
-        <li>Aggiornare un cluster</li>
-        <li>Aggiornare il master Kubernetes</li>
-        <li>Aggiungere e rimuovere i nodi di lavoro</li>
-        <li>Riavviare, ricaricare e aggiornare i nodi di lavoro</li>
-        <li>Creare ed eliminare i pool di nodi di lavoro</li>
-        <li>Aggiungere e rimuovere zone dai pool di nodi di lavoro</li>
-        <li>Aggiornare la configurazione di rete per una determinata zona nei pool di nodi di lavoro</li>
-        <li>Ridimensionare e riequilibrare i pool di nodi di lavoro</li>
-        <li>Creare e aggiungere sottoreti a un cluster</li>
-        <li>Aggiungere e rimuovere le sottoreti gestite dall'utente in un cluster</li></ul>
-    </td>
-    <td>Il ruolo cluster <code>admin</code> viene applicato mediante il bind del ruolo cluster <code>ibm-operate</code>, che fornisce le seguenti autorizzazioni:<ul>
-      <li>Accesso in lettura/scrittura alle risorse all'interno di uno spazio dei nomi ma non allo spazio dei nomi stesso</li>
-      <li>Creare ruoli RBAC all'interno di uno spazio dei nomi</li></ul></td>
-  </tr>
-  <tr>
-    <td>**Amministratore**</td>
-    <td>Questo ruolo ha tutte le autorizzazioni dei ruoli editor, operatore e visualizzatore per tutti i cluster in questo account, oltre alle seguenti:</br></br>
-      Cluster:<ul>
-        <li>Creare cluster gratuiti o standard</li>
-        <li>Eliminare i cluster</li>
-        <li>Crittografare i segreti Kubernetes utilizzando {{site.data.keyword.keymanagementservicefull}}</li>
-        <li>Impostare la chiave API per l'account {{site.data.keyword.Bluemix_notm}} per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) collegato</li>
-        <li>Impostare, visualizzare e rimuovere le credenziali dell'infrastruttura per l'account {{site.data.keyword.Bluemix_notm}} per accedere a un portfolio dell'infrastruttura IBM Cloud (SoftLayer) diverso</li>
-        <li>Assegnare e modificare i ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM per altri utenti esistenti nell'account</li>
-        <li>Quando impostato per tutte le istanze (cluster) {{site.data.keyword.containerlong_notm}} in tutte le regioni: elencare tutte le VLAN disponibili nell'account</ul>
-      Registrazione:<ul>
-        <li>Creare e aggiornare le configurazioni di inoltro log per il tipo `kube-audit`</li>
-        <li>Raccogliere un'istantanea dei log del server API in un bucket di {{site.data.keyword.cos_full_notm}}</li>
-        <li>Abilitare e disabilitare gli aggiornamenti automatici per il componente aggiuntivo del cluster Fluentd</li></ul>
-      Ingress:<ul>
-        <li>Elencare o visualizzare i dettagli per i segreti ALB in un cluster</li>
-        <li>Distribuire un certificato dalla tua istanza {{site.data.keyword.cloudcerts_long_notm}} a un ALB</li>
-        <li>Aggiornare o rimuovere i segreti ALB da un cluster</li></ul>
-      <p class="note">Per creare risorse come macchine, VLAN e sottoreti, gli utenti Amministratore devono disporre del ruolo dell'infrastruttura **Super utente**.</p>
-    </td>
-    <td>Il ruolo cluster <code>cluster-admin</code> viene applicato mediante il bind del ruolo cluster <code>ibm-admin</code>, che fornisce le seguenti autorizzazioni:
-      <ul><li>Accesso in lettura/scrittura alle risorse in ogni spazio dei nomi</li>
-      <li>Creare ruoli RBAC all'interno di uno spazio dei nomi</li>
-      <li>Accedere al dashboard Kubernetes</li>
-      <li>Creare una risorsa Ingress che rende le applicazioni disponibili al pubblico</li></ul>
+    <td id="service-role-manager" headers="service-role">Ruolo gestore</td>
+    <td headers="service-role-manager rbac-role">Quando l'ambito è dedicato a un solo spazio dei nomi: ruolo cluster <strong><code>admin</code></strong> applicato dal bind del ruolo <strong><code>ibm-operate</code></strong> in quello spazio dei nomi</br><br>Quando l'ambito è dedicato a tutti gli spazi dei nomi: ruolo cluster <strong><code>cluster-admin</code></strong> applicato dal bind del ruolo cluster <strong><code>ibm-admin</code></strong></td> che si applica a tutti gli spazi dei nomi
+    <td headers="service-role-manager kube-perm">Quando l'ambito è dedicato a un solo spazio dei nomi:
+      <ul><li>Accesso in lettura/scrittura a tutte le risorse in uno spazio dei nomi ma non alla quota della risorsa o allo spazio dei nomi stesso</li>
+      <li>Creare ruoli RBAC e bind del ruolo in uno spazio dei nomi</li>
+      <li>Accedere al dashboard Kubernetes per visualizzare tutte le risorse in uno spazio dei nomi</li></ul>
+    </br>Quando l'ambito è dedicato a tutti gli spazi dei nomi:
+        <ul><li>Accesso in lettura/scrittura a tutte risorse in ogni spazio dei nomi</li>
+        <li>Creare ruoli RBAC e bind del ruolo in uno spazio dei nomi oppure ruoli cluster e bind del ruolo cluster in tutti gli spazi dei nomi</li>
+        <li>Accedere al dashboard Kubernetes</li>
+        <li>Creare una risorsa Ingress che rende le applicazioni disponibili al pubblico</li>
+        <li>Esaminare le metriche del cluster, ad esempio, con i comandi <code>kubectl top pods</code>, <code>kubectl top nodes</code> o <code>kubectl get nodes</code></li></ul>
     </td>
   </tr>
-  </tbody>
+</tbody>
 </table>
 
+<br />
+
+
+## Autorizzazioni delle risorse Kubernetes per ogni ruolo RBAC
+{: #rbac}
+
+A ogni utente a cui viene assegnato un ruolo di accesso al servizio {{site.data.keyword.Bluemix_notm}} IAM viene assegnato automaticamente anche un ruolo RBAC (role-based access control) di Kubernetes predefinito corrispondente. Se intendi gestire i tuoi propri ruoli RBAC Kubernetes personalizzati, vedi [Creazione di autorizzazioni RBAC personalizzate per utenti, gruppi o account di servizio](/docs/containers?topic=containers-users#rbac).
+{: shortdesc}
+
+Ti chiedi se hai le autorizzazioni corrette per eseguire un determinato comando `kubectl` su una risorsa in uno spazio dei nomi? Prova il comando [`kubectl auth can-i` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-can-i-em-).
+{: tip}
+
+La seguente tabella mostra le autorizzazioni concesse da ciascun ruolo RBAC alle singole risorse Kubernetes. Le autorizzazioni sono mostrate come verbi che un utente con quel ruolo può completare sulla risorsa, ad esempio "get", "list", "describe", "create" o "delete".
+
+<table>
+ <caption>Autorizzazioni delle risorse Kubernetes concesse da ciascun ruolo RBAC predefinito</caption>
+ <thead>
+  <th>Risorsa Kubernetes</th>
+  <th><code>view</code></th>
+  <th><code>edit</code></th>
+  <th><code>admin</code> e <code>cluster-admin</code></th>
+ </thead>
+<tbody>
+<tr>
+  <td>bindings</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+</tr><tr>
+  <td>configmaps</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>cronjobs.batch</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>daemonsets.apps </td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>daemonsets.extensions</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>deployments.apps</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>deployments.apps/rollback</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>deployments.apps/scale</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>deployments.extensions</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>deployments.extensions/rollback</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>deployments.extensions/scale</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>endpoints</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>events</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+</tr><tr>
+  <td>horizontalpodautoscalers.autoscaling</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>ingresses.extensions</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>jobs.batch</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>limitranges</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+</tr><tr>
+  <td>localsubjectaccessreviews</td>
+  <td>-</td>
+  <td>-</td>
+  <td><code>create</code></td>
+</tr><tr>
+  <td>namespaces</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></br>**Solo amministratore cluster:** <code>create</code>, <code>delete</code></td>
+</tr><tr>
+  <td>namespaces/status</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+</tr><tr>
+  <td>networkpolicies</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>networkpolicies.extensions</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>persistentvolumeclaims</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>poddisruptionbudgets.policy</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>pods</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>top</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>pods/attach</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>pods/exec</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>pods/log</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+</tr><tr>
+  <td>pods/portforward</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>pods/proxy</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>pods/status</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+</tr><tr>
+  <td>replicasets.apps</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>replicasets.apps/scale</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>replicasets.extensions</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>replicasets.extensions/scale</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>replicationcontrollers</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>replicationcontrollers/scale</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>replicationcontrollers/status</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+</tr><tr>
+  <td>replicationcontrollers.extensions/scale</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>resourcequotas</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+</tr><tr>
+  <td>resourcequotas/status</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+</tr><tr>
+  <td>rolebindings</td>
+  <td>-</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>roles</td>
+  <td>-</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>secrets</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>serviceaccounts</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code>, <code>impersonate</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code>, <code>impersonate</code></td>
+</tr><tr>
+  <td>services</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>services/proxy</td>
+  <td>-</td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>statefulsets.apps</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr><tr>
+  <td>statefulsets.apps/scale</td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+</tr>
+</tbody>
+</table>
+
+<br />
 
 
 ## Ruoli Cloud Foundry
 {: #cloud-foundry}
 
-I ruoli di Cloud Foundry concedono l'accesso a organizzazioni e spazi all'interno dell'account. Per visualizzare l'elenco dei servizi basati su Cloud Foundry in {{site.data.keyword.Bluemix_notm}}, esegui `ibmcloud service list`. Per ulteriori informazioni, vedi tutti i [ruoli disponibili per l'organizzazione e lo spazio](/docs/iam/cfaccess.html) o la procedura per la [gestione dell'accesso a Cloud Foundry](/docs/iam/mngcf.html) nella documentazione di {{site.data.keyword.Bluemix_notm}} IAM.
+I ruoli di Cloud Foundry concedono l'accesso a organizzazioni e spazi all'interno dell'account. Per visualizzare l'elenco dei servizi basati su Cloud Foundry in {{site.data.keyword.Bluemix_notm}}, esegui `ibmcloud service list`. Per ulteriori informazioni, vedi tutti i [ruoli disponibili per l'organizzazione e lo spazio](/docs/iam?topic=iam-cfaccess) o la procedura per la [gestione dell'accesso a Cloud Foundry](/docs/iam?topic=iam-mngcf) nella documentazione di {{site.data.keyword.Bluemix_notm}} IAM.
 {: shortdesc}
 
 La seguente tabella mostra i ruoli di Cloud Foundry richiesti per le autorizzazioni all'azione nel cluster.
 
-<table summary="La tabella mostra le autorizzazioni utente per Cloud Foundry. Le righe devono essere lette da sinistra a destra, con il ruolo Cloud Foundry nella colonna uno e l'autorizzazione cluster nella colonna due.">
+<table>
   <caption>Autorizzazioni di gestione del cluster per ruolo Cloud Foundry</caption>
   <thead>
     <th>Ruolo Cloud Foundry</th>
@@ -170,16 +1045,16 @@ ai cluster</li>
 ## Ruoli dell'infrastruttura
 {: #infra}
 
-Quando un utente con il ruolo di accesso all'infrastruttura **Super utente** [imposta la chiave API per una regione e un gruppo di risorse](cs_users.html#api_key), le autorizzazioni dell'infrastruttura per gli altri utenti dell'account sono impostate dai ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM. Non dovrai modificare le autorizzazioni dell'infrastruttura IBM Cloud (SoftLayer) degli altri utenti. Utilizza la seguente tabella solo per personalizzare le autorizzazioni dell'infrastruttura IBM Cloud (SoftLayer) degli utenti quando non puoi assegnare il ruolo **Super utente** all'utente che imposta la chiave API. Per ulteriori informazioni, vedi [Personalizzazione delle autorizzazioni di infrastruttura](cs_users.html#infra_access).
+Quando un utente con il ruolo di accesso all'infrastruttura **Super utente** [imposta la chiave API per una regione e un gruppo di risorse](/docs/containers?topic=containers-users#api_key), le autorizzazioni dell'infrastruttura per gli altri utenti dell'account sono impostate dai ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM. Non dovrai modificare le autorizzazioni dell'infrastruttura IBM Cloud (SoftLayer) degli altri utenti. Utilizza la seguente tabella solo per personalizzare le autorizzazioni dell'infrastruttura IBM Cloud (SoftLayer) degli utenti quando non puoi assegnare il ruolo **Super utente** all'utente che imposta la chiave API. Per ulteriori informazioni, vedi [Personalizzazione delle autorizzazioni di infrastruttura](/docs/containers?topic=containers-users#infra_access).
 {: shortdesc}
 
 La seguente tabella mostra le autorizzazioni dell'infrastruttura richieste per completare gruppi di attività comuni.
 
-<table summary="Autorizzazioni dell'infrastruttura per scenari comuni di {{site.data.keyword.containerlong_notm}}.">
+<table>
  <caption>Autorizzazioni dell'infrastruttura comunemente richieste per {{site.data.keyword.containerlong_notm}}</caption>
  <thead>
   <th>Attività comuni in {{site.data.keyword.containerlong_notm}}</th>
-  <th>Autorizzazioni dell'infrastruttura richieste per scheda</th>
+  <th>Autorizzazioni dell'infrastruttura richieste per categoria</th>
  </thead>
  <tbody>
    <tr>

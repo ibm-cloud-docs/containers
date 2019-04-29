@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -17,6 +21,7 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Planification de stockage persistant à haute disponibilité
@@ -65,8 +70,8 @@ Avant de décider du type de stockage qui vous convient le mieux, vous devez con
 5. Déterminez si vos données doivent être partagées entre plusieurs instances d'application, plusieurs zones ou plusieurs régions.
    - **Accès entre les pods :** lorsque vous utilisez des volumes persistants Kubernetes pour accéder à votre stockage, vous pouvez déterminer le nombre de pods pouvant monter le volume en même temps. Certaines solutions de stockage, telles que le stockage par blocs, sont accessibles à un pod à la fois uniquement. D'autres solutions de stockage vous permettent de partager le même volume entre plusieurs pods.
    - **Accès entre les zones et les régions :** vos données devront parfois être accessibles entre plusieurs zones ou régions. Certaines solutions de stockage, par exemple le stockage de fichiers ou le stockage par blocs, sont spécifiques à un centre de données et ne peuvent pas être partagées entre plusieurs zones dans une configuration de cluster à zones multiples.
-   
-   Si vous souhaitez rendre vos données accessibles dans les différentes zones ou régions, veillez à consulter votre service juridique pour vérifier que vos données peuvent être stockées dans plusieurs zones ou dans un autre pays. 
+
+   Si vous souhaitez rendre vos données accessibles dans les différentes zones ou régions, veillez à consulter votre service juridique pour vérifier que vos données peuvent être stockées dans plusieurs zones ou dans un autre pays.
    {: note}
 
 6. Familiarisez-vous avec d'autres caractéristiques de stockage pouvant influencer votre choix.
@@ -86,9 +91,9 @@ Avant de décider du type de stockage qui vous convient le mieux, vous devez con
 Vous pouvez utiliser des options de stockage non persistant si vos données n'ont pas besoin d'être stockées de manière permanente ou pour les tests d'unité des composants de votre application.
 {: shortdesc}
 
-L'illustration suivante présente les options de stockage de données non persistant disponibles dans {{site.data.keyword.containerlong_notm}}. Ces options sont disponibles pour les clusters gratuits et standard.
+L'image suivante présente les options de stockage de données non persistant disponibles dans {{site.data.keyword.containerlong_notm}}. Ces options sont disponibles pour les clusters gratuits et standard.
 <p>
-<img src="images/cs_storage_nonpersistent.png" alt="Options de stockage de données non persistant" width="500" style="width: 500px; border-style: none"/></p>
+<img src="images/cs_storage_nonpersistent.png" alt="Options de stockage de données non persistant" width="550" style="width: 550px; border-style: none"/></p>
 
 <table>
 <thead>
@@ -110,7 +115,7 @@ L'illustration suivante présente les options de stockage de données non persis
 <tr>
 <td style="text-align:left">Capacité</td>
 <td style="text-align:left">Limitée au disque secondaire disponible du noeud worker. Pour limiter la quantité de stockage secondaire consommée par votre pod, utilisez les limites et les demandes de ressources de [stockage éphémère ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
-<td style="text-align:left">Limitée à l'espace disponible du noeud worker sur le disque principal (hostPath) ou secondaire (emptyDir). Pour limiter la quantité de stockage secondaire consommée par votre pod, utilisez les limites et les demandes de ressources de [stockage éphémère ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
+<td style="text-align:left">Limitée à l'espace disponible du noeud worker sur le disque principal (`hostPath`) ou secondaire (`emptyDir`). Pour limiter la quantité de stockage secondaire consommée par votre pod, utilisez les limites et les demandes de ressources de [stockage éphémère ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
 </tr>
 <tr>
 <td style="text-align:left">Modèle d'accès aux données</td>
@@ -166,133 +171,208 @@ L'illustration suivante présente les options de stockage de données non persis
 </table>
 
 
+## Comparaison des options de stockage persistant pour les clusters à zone unique
+{: #single_zone_persistent_storage}
 
-## Comparaison des options de stockage persistant
-{: #persistent_storage_overview}
-
-Utilisez des options de stockage persistant pour toutes les données que vous souhaitez conserver de manière permanente, même en cas de retrait du conteneur, du noeud worker ou du cluster.
+Si vous disposez d'un cluster à zone unique, vous pouvez choisir entre les options suivantes dans {{site.data.keyword.containerlong_notm}} qui permettent un accès rapide à vos données. Pour une haute disponibilité accrue, utilisez une option de stockage conçue pour des [données réparties géographiquement](#persistent_storage_overview) et, si possible en fonction de vos exigences, créez un cluster à zones multiples.
 {: shortdesc}
 
 Les options de stockage persistant sont disponibles uniquement pour les clusters standard.
+{: note}
 
-Vous envisagez de connecter votre cluster à une base de données sur site à la place ? Voir [Configuration de la connectivité VPN dans votre cluster](cs_vpn.html#vpn).
-{: tip}
+L'image suivante présente les options disponibles dans {{site.data.keyword.containerlong_notm}} pour stocker vos données de manière permanente dans un cluster à zone unique.
 
-L'illustration suivante présente les options disponibles dans {{site.data.keyword.containerlong_notm}} pour stocker vos données de manière permanente et assurer la haute disponibilité de vos données dans un cluster.
-
-<img src="images/cs_storage_mz-ha.png" alt="Options de haute disponibilité pour stockage persistant"/>
+<img src="images/cs_storage_single_zone.png" alt="Options de stockage persistant pour un cluster à zone unique"  width="300" style="width: 300px; border-style: none"/>
 
 <table>
 <thead>
 <th style="text-align:left">Caractéristiques</th>
 <th style="text-align:left">Stockage de fichiers</th>
 <th style="text-align:left">Stockage par blocs</th>
-<th style="text-align:left">Stockage d'objets</th>
-<th style="text-align:left">Base de données sous forme de service (DBaaS)</th>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">Compatible avec plusieurs zones</td>
 <td style="text-align:left">Non, car spécifique à un centre de données. Les données ne peuvent pas être partagées entre plusieurs zones, sauf si vous implémentez votre propre réplication de données.</td>
 <td style="text-align:left">Non, car spécifique à un centre de données. Les données ne peuvent pas être partagées entre plusieurs zones, sauf si vous implémentez votre propre réplication de données.</td>
-<td style="text-align:left">Oui</td>
-<td style="text-align:left">Oui</td>
 </tr>
 <tr>
 <td style="text-align:left">Types de données idéaux</td>
 <td style="text-align:left">Tous</td>
 <td style="text-align:left">Tous</td>
-<td style="text-align:left">Données semi-structurées et non structurées</td>
-<td style="text-align:left">Selon la base de données sous forme de service (DBaaS)</td>
 </tr>
 <tr>
 <td style="text-align:left">Modèle d'utilisation des données</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Opérations de lecture-écriture aléatoire</li><li style="margin:0px; padding:0px">Opérations de lecture-écriture séquentielle</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Opérations de lecture-écriture aléatoire</li><li style="margin:0px; padding:0px">Charges de travail à écriture intensive</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à lecture intensive</li><li style="margin:0px; padding:0px">Peu ou pas du tout d'opérations d'écriture</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à lecture-écriture intensive</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Accès</td>
 <td style="text-align:left">Via le système de fichiers sur le volume monté</td>
 <td style="text-align:left">Via le système de fichiers sur le volume monté</td>
-<td style="text-align:left">Via le système de fichiers sur le volume monté (plug-in) ou via l'API REST de votre application</td>
-<td style="text-align:left">Via l'API REST de votre application</td>
 </tr>
 <tr>
 <td style="text-align:left">Accès en écriture pris en charge par Kubernetes</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">N/A car accès direct dans l'application</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Performances</td>
 <td style="text-align:left">Prévisibles en raison des opérations d'entrée-sortie par seconde (IOPS) affectées et de la taille. Les IOPS sont partagées entre les pods qui accèdent au volume.</td>
 <td style="text-align:left">Prévisibles en raison des opérations d'entrée-sortie par seconde (IOPS) affectées et de la taille. Les IOPS ne sont pas partagées entre les pods. </td>
-<td style="text-align:left">Hautes pour les opérations de lecture. Non prévisibles pour les opérations d'écriture.</td>
-<td style="text-align:left">Hautes si elle est déployée dans le même centre de données que votre application.</td>
 </tr>
 <tr>
 <td style="text-align:left">Cohérence</td>
 <td style="text-align:left">Forte</td>
 <td style="text-align:left">Forte</td>
-<td style="text-align:left">Finale</td>
-<td style="text-align:left">Selon la base de données sous forme de service (DBaaS)</td>
 </tr>
 <tr>
 <td style="text-align:left">Durabilité</td>
 <td style="text-align:left">Haute</td>
-<td style="text-align:left">Haute</td>
-<td style="text-align:left">Très haute car les tranches de données sont réparties sur un cluster de noeuds
-de stockage. Chaque noeud stocke uniquement une partie des données. </td>
 <td style="text-align:left">Haute</td>
 </tr>
 <tr>
 <td style="text-align:left">Résilience</td>
 <td style="text-align:left">Moyenne car spécifique à un centre de données. Le serveur de stockage de fichiers est clustérisé par IBM avec une mise en réseau redondante.</td>
 <td style="text-align:left">Moyenne car spécifique à un centre de données. Le serveur de stockage par blocs est clustérisé par IBM avec une mise en réseau redondante.</td>
-<td style="text-align:left">Haute car les tranches de données sont réparties sur 3 zones ou régions. Moyenne, lorsqu'elle est configurée dans une seule zone.</td>
-<td style="text-align:left">Selon la base de données sous forme de service (DBaaS) et votre configuration </td>
 </tr>
 <tr>
 <td style="text-align:left">Disponibilité</td>
 <td style="text-align:left">Moyenne car spécifique à un centre de données.</td>
 <td style="text-align:left">Moyenne car spécifique à un centre de données.</td>
-<td style="text-align:left">Haute en raison de la répartition entre plusieurs zones ou régions. </td>
-<td style="text-align:left">Haute si vous avez configuré plusieurs instances. </td>
 </tr>
 <tr>
 <td style="text-align:left">Evolutivité</td>
 <td style="text-align:left">Extension difficile au-delà du centre de données. Vous ne pouvez pas modifier un niveau de stockage existant. </td>
 <td style="text-align:left">Extension difficile au-delà du centre de données. Vous ne pouvez pas modifier un niveau de stockage existant.</td>
-<td style="text-align:left">Mise à l'échelle facile.</td>
-<td style="text-align:left">Mise à l'échelle facile.</td>
 </tr>
 <tr>
 <td style="text-align:left">Chiffrement</td>
 <td style="text-align:left">Au repos</td>
-<td style="text-align:left">Au repos</td>
-<td style="text-align:left">En transit et au repos</td>
 <td style="text-align:left">Au repos</td>
 </tr>
 <tr>
 <td style="text-align:left">Cas d'utilisation courants</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stockage de masse ou de fichier unique</li><li style="margin:0px; padding:0px">Partage de fichiers dans un cluster à zone unique</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Objets StatefulSet</li><li style="margin:0px; padding:0px">Stockage de secours lors de l'exécution de votre propre base de données</li><li style="margin:0px; padding:0px">Accès à hautes performances pour des pods uniques</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li><li style="margin:0px; padding:0px">Big Data statiques</li><li style="margin:0px; padding:0px">Contenu multimédia statique</li><li style="margin:0px; padding:0px">Applications Web</li><li style="margin:0px; padding:0px">Sauvegardes</li><li style="margin:0px; padding:0px">Archives</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Bases de données relationnelles et non relationnelles</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Cas d'utilisation qui ne sont pas idéaux</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li><li style="margin:0px; padding:0px">Partage de données entre plusieurs instances d'application</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à écriture intensive</li><li style="margin:0px; padding:0px">Opérations d'écriture aléatoire</li><li style="margin:0px; padding:0px">Mises à jour de données incrémentielles</li><li style="margin:0px; padding:0px">Bases de données transactionnelles</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Application conçue pour effectuer des opérations d'écriture dans un système de fichiers</li></ul></td>
 </tr>
 </tbody>
 </table>
 
 
 
+## Comparaison des options de stockage persistant pour les clusters à zones multiples
+{: #persistent_storage_overview}
 
+Si vous disposez d'un cluster à zones multiples, choisissez entre les options de stockage persistant suivantes pour accéder à vos données à partir de noeuds worker répartis dans les différentes zones.
+{: shortdesc}
+
+Les options de stockage persistant sont disponibles uniquement pour les clusters standard.
+
+Vous envisagez de connecter votre cluster à une base de données sur site à la place ? Voir [Configuration de la connectivité VPN dans votre cluster](/docs/containers?topic=containers-vpn#vpn).
+{: tip}
+
+L'image suivante présente les options disponibles dans {{site.data.keyword.containerlong_notm}} pour stocker vos données de manière permanente dans un cluster à zones multiples et assurer ainsi la haute disponibilité de vos données. Vous pouvez utiliser ces options dans un cluster à zone unique mais vous risquez de ne pas obtenir les avantages requis par votre application en termes de haute disponibilité.
+
+<img src="images/cs_storage_options_multizone.png" alt="Options pour assurer la haute disponibilité du stockage persistant dans un cluster à zones multiples"/>
+
+<table>
+<thead>
+<th style="text-align:left">Caractéristiques</th>
+<th style="text-align:left">Stockage d'objets</th>
+<th style="text-align:left">SDS (Portworx)</th>
+<th style="text-align:left">Bases de données {{site.data.keyword.Bluemix_notm}}</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Compatible avec plusieurs zones</td>
+<td style="text-align:left">Oui</td>
+<td style="text-align:left">Oui</td>
+<td style="text-align:left">Oui</td>
+</tr>
+<tr>
+<td style="text-align:left">Types de données idéaux</td>
+<td style="text-align:left">Données semi-structurées et non structurées</td>
+<td style="text-align:left">Tous</td>
+<td style="text-align:left">Selon la base de données sous forme de service (DBaaS)</td>
+</tr>
+<tr>
+<td style="text-align:left">Modèle d'utilisation des données</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à lecture intensive</li><li style="margin:0px; padding:0px">Peu ou pas du tout d'opérations d'écriture</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à écriture intensive</li><li style="margin:0px; padding:0px">Opérations de lecture-écriture aléatoire</li><li style="margin:0px; padding:0px">Opérations de lecture-écriture séquentielle</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à lecture-écriture intensive</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Accès</td>
+<td style="text-align:left">Via le système de fichiers sur le volume monté (plug-in) ou via l'API REST de votre application</td>
+<td style="text-align:left">Via le système de fichiers sur le volume monté ou accès client NFS au volume</td>
+<td style="text-align:left">Via l'API REST de votre application</td>
+</tr>
+<tr>
+<td style="text-align:left">Accès en écriture pris en charge par Kubernetes</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left">Tous</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">N/A car accès direct depuis l'application</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Performances</td>
+<td style="text-align:left">Hautes pour les opérations de lecture. Prévisibles en raison des opérations d'entrée-sortie par seconde (IOPS) affectées et de la taille lors de l'utilisation de machines non SDS. </td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Proches des performances bare metal pour les opérations de lecture-écriture séquentielle lors de l'utilisation de machines SDS. </li><li style="margin:0px; padding:0px">Fourniture de [profils ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) pour l'exécution de bases de données hautes performances</li><li style="margin:0px; padding:0px">Possibilité de créer une couche de stockage avec différents profils de performance que votre application peut sélectionner.</li></ul> </td>
+<td style="text-align:left">Hautes si la base de données est déployée dans le même centre de données que votre application.</td>
+</tr>
+<tr>
+<td style="text-align:left">Cohérence</td>
+<td style="text-align:left">Finale</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Selon la base de données sous forme de service (DBaaS)</td>
+</tr>
+<tr>
+<td style="text-align:left">Durabilité</td>
+<td style="text-align:left">Très haute car les tranches de données sont réparties sur un cluster de noeuds
+de stockage. Chaque noeud stocke uniquement une partie des données. </td>
+<td style="text-align:left">Très haute car trois copies de vos données sont conservées en permanence.</td>
+<td style="text-align:left">Haute</td>
+</tr>
+<tr>
+<td style="text-align:left">Résilience</td>
+<td style="text-align:left">Haute car les tranches de données sont réparties sur 3 zones ou régions. Moyenne, lorsqu'elle est configurée dans une seule zone.</td>
+<td style="text-align:left">Haute lorsque la configuration comporte une réplication sur 3 zones. Moyenne, lorsque le stockage des données s'effectue dans une seule zone.</td>
+<td style="text-align:left">Selon la base de données sous forme de service (DBaaS) et votre configuration </td>
+</tr>
+<tr>
+<td style="text-align:left">Disponibilité</td>
+<td style="text-align:left">Haute en raison de la répartition entre plusieurs zones ou régions. </td>
+<td style="text-align:left">Haute lors de la réplication des données sur 3 noeuds worker dans différentes zones.</td>
+<td style="text-align:left">Haute si vous avez configuré plusieurs instances. </td>
+</tr>
+<tr>
+<td style="text-align:left">Evolutivité</td>
+<td style="text-align:left">Mise à l'échelle automatique</td>
+<td style="text-align:left">Augmente la capacité du volume en le redimensionnant. Pour augmenter la capacité de la couche de stockage globale, vous devez ajouter des noeuds worker ou supprimer du stockage par blocs. Ces deux scénarios nécessitent que la capacité soit surveillée par l'utilisateur. </td>
+<td style="text-align:left">Mise à l'échelle automatique</td>
+</tr>
+<tr>
+<td style="text-align:left">Chiffrement</td>
+<td style="text-align:left">En transit et au repos</td>
+<td style="text-align:left">Fournissez votre propre clé pour protéger vos données en transit et au repos avec {{site.data.keyword.keymanagementservicelong_notm}}. </td>
+<td style="text-align:left">Au repos</td>
+</tr>
+<tr>
+<td style="text-align:left">Cas d'utilisation courants</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li><li style="margin:0px; padding:0px">Big Data statiques</li><li style="margin:0px; padding:0px">Contenu multimédia statique</li><li style="margin:0px; padding:0px">Applications Web</li><li style="margin:0px; padding:0px">Sauvegardes</li><li style="margin:0px; padding:0px">Archives</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Objets StatefulSet</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li><li style="margin:0px; padding:0px">Solution de stockage courante lors de l'exécution d'applications sur plusieurs fournisseurs de cloud</li><li style="margin:0px; padding:0px">Stockage de secours lors de l'exécution de votre propre base de données</li><li style="margin:0px; padding:0px">Accès à hautes performances pour des pods uniques</li><li style="margin:0px; padding:0px">Accès au stockage partagé sur plusieurs pods et noeuds worker</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Bases de données relationnelles et non relationnelles</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Cas d'utilisation qui ne sont pas idéaux</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à écriture intensive</li><li style="margin:0px; padding:0px">Opérations d'écriture aléatoire</li><li style="margin:0px; padding:0px">Mises à jour de données incrémentielles</li><li style="margin:0px; padding:0px">Bases de données transactionnelles</li></ul></td>
+<td style="text-align:left">N/A</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Application conçue pour effectuer des opérations d'écriture dans un système de fichiers</li></ul></td>
+</tr>
+</tbody>
+</table>

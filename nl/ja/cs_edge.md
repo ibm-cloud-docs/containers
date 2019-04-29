@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -39,17 +43,19 @@ lastupdated: "2018-12-05"
 
 開始前に、以下のことを行います。
 
-1. いずれかの {{site.data.keyword.Bluemix_notm}} IAM [プラットフォーム役割](cs_users.html#platform)があることを確認してください。
-2. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+1. 以下の [{{site.data.keyword.Bluemix_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
+  * クラスターに対するプラットフォームの役割
+  * すべての名前空間に対する**ライター**または**管理者**のサービス役割
+2. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 3. クラスターに 1 つ以上のパブリック VLAN があることを確認してください。 エッジ・ワーカー・ノードは、プライベート VLAN だけがあるクラスターには使用できません。
-4. クラスター内のすべてのゾーンにかかる[新しいワーカー・プールを作成](cs_clusters.html#add_pool)し、ゾーンごとに少なく少なくとも 2 つのワーカーがあるようにします。
+4. クラスター内のすべてのゾーンにかかる[新しいワーカー・プールを作成](/docs/containers?topic=containers-clusters#add_pool)し、ゾーンごとに少なく少なくとも 2 つのワーカーがあるようにします。
 
 ワーカー・ノードにエッジ・ノードとしてラベル付けするには、以下のようにします。
 
 1. エッジ・ノード・ワーカー・プール内にあるワーカー・ノードをリストします。 **プライベート IP** アドレスを使用して、ノードを識別します。
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
+  ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
@@ -95,7 +101,7 @@ lastupdated: "2018-12-05"
   ```
   {: screen}
 
-ワーカー・ノードに `dedicated=edge` のラベルを付け、既存のロード・バランサーのすべてと Ingress をエッジ・ワーカー・ノードに再デプロイしました。 次に、他の[ワークロードがエッジ・ワーカー・ノード上で実行されないようにして](#edge_workloads)、[ワーカー・ノード上の NodePort へのインバウンド・トラフィックをブロックします](cs_network_policy.html#block_ingress)。
+ワーカー・ノードに `dedicated=edge` のラベルを付け、既存のロード・バランサーのすべてと Ingress をエッジ・ワーカー・ノードに再デプロイしました。 次に、他の[ワークロードがエッジ・ワーカー・ノード上で実行されないようにして](#edge_workloads)、[ワーカー・ノード上の NodePort へのインバウンド・トラフィックをブロックします](/docs/containers?topic=containers-network_policies#block_ingress)。
 
 <br />
 
@@ -108,7 +114,11 @@ lastupdated: "2018-12-05"
 
 `dedicated=edge` 耐障害性の使用は、すべてのロード・バランサーと Ingress サービスが、ラベルの付けられたワーカー・ノードにのみデプロイされることを意味します。 ただし、他のワークロードがエッジ・ワーカー・ノード上で実行されてワーカー・ノードのリソースを消費することがないようにするため、[Kubernetes テイント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を使用する必要があります。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。
+- すべての名前空間に対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認します。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+
+他のワークロードがエッジ・ワーカー・ノード上で実行されないようにするには、以下のようにします。
 
 1. `dedicated=edge` ラベルの付いたワーカー・ノードをすべてリストします。
 
@@ -125,4 +135,10 @@ lastupdated: "2018-12-05"
   {: pre}
   これで、`dedicated=edge` 耐障害性のあるポッドだけがエッジ・ワーカー・ノードにデプロイされます。
 
-3. [ロード・バランサー 1.0 サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。 着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。
+3. [ロード・バランサー 1.0 サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](/docs/containers?topic=containers-loadbalancer#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。 着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。
+
+4. テイントを削除するには、以下のコマンドを実行します。
+    ```
+    kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
+    ```
+    {: pre}

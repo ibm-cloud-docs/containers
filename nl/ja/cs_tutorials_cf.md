@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # チュートリアル: Cloud Foundry からクラスターへのアプリのマイグレーション
 {: #cf_tutorial}
 
@@ -28,25 +31,32 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
 
 ## 達成目標
+{: #cf_objectives}
 
 - コンテナー内のアプリを Kubernetes クラスターにデプロイする一般的なプロセスを学習します。
 - コンテナー・イメージを構築するための Dockerfile をアプリ・コードから作成します。
 - そのイメージからコンテナーを Kubernetes クラスターにデプロイします。
 
 ## 所要時間
+{: #cf_time}
+
 30 分
 
 ## 対象読者
+{: #cf_audience}
+
 このチュートリアルは、Cloud Foundry アプリの開発者を対象にしています。
 
 ## 前提条件
+{: #cf_prereqs}
 
-- [プライベート・イメージ・レジストリーを {{site.data.keyword.registrylong_notm}} に作成します](../services/Registry/index.html)。
-- [クラスターを作成します](cs_clusters.html#clusters_ui)。
-- [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
+- [プライベート・イメージ・レジストリーを {{site.data.keyword.registrylong_notm}} に作成します](/docs/services/Registry?topic=registry-index)。
+- [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
+- [CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 - {{site.data.keyword.containerlong_notm}}に対する以下の {{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシーがあることを確認します。
-    - [任意のプラットフォーム役割](cs_users.html#platform)
-- [Docker および Kubernetes の用語について学習します](cs_tech.html)。
+    - [任意のプラットフォーム役割](/docs/containers?topic=containers-users#platform)
+    - [**ライター**または**管理者**のサービス役割](/docs/containers?topic=containers-users#platform)
+- [Docker および Kubernetes の用語について学習します](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology)。
 
 
 <br />
@@ -54,6 +64,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
 
 ## レッスン 1: アプリのコードをダウンロードする
+{: #cf_1}
 
 コードを準備します。 コードを持っていない場合は、 このチュートリアルで使用するスターター・コードをダウンロードできます。
 {: shortdesc}
@@ -79,7 +90,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     c. コンソールの指示のステップ 1 で、**「スターター・コードをダウンロードする」**をクリックします。
 
-    d. .zip ファイルを解凍し、その内容を `cf-py` ディレクトリーに保存します。
+    d. `.zip` ファイルを解凍し、その内容を `cf-py` ディレクトリーに保存します。
 
 これで、アプリのコードをコンテナー化する用意ができました。
 
@@ -89,6 +100,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
 
 ## レッスン 2: アプリのコードを使用して Docker イメージを作成する
+{: #cf_2}
 
 アプリのコードとコンテナーに必要な構成を含む Dockerfile を作成します。 その後、その Dockerfile から Docker イメージをビルドし、それをプライベート・イメージ・レジストリーにプッシュします。
 {: shortdesc}
@@ -175,6 +187,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
 
 ## レッスン 3: イメージからコンテナーをデプロイする
+{: #cf_3}
 
 アプリを Kubernetes クラスターのコンテナーとしてデプロイします。
 {: shortdesc}
@@ -182,7 +195,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 1. `cf-py.yaml` という名前の構成 YAML ファイルを作成し、`<registry_namespace>` をプライベート・イメージ・レジストリーの名前に更新します。 この構成ファイルは、直前のレッスンで作成したイメージからのコンテナー・デプロイメント、およびアプリを一般に公開するためのサービスを定義します。
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -255,7 +268,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
     a.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -263,7 +276,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 
@@ -271,11 +284,11 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     <img src="images/python_flask.png" alt="デプロイされたボイラープレート Python Flask アプリの画面キャプチャー。" />
 
-5.  [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。
+5.  [Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#cli_dashboard)します。
 
-    [{{site.data.keyword.Bluemix_notm}} コンソール](https://console.bluemix.net/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
+    [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
     {: tip}
 
 6. **「ワークロード」**タブで、作成したリソースを表示します。
 
-これで完了です。 アプリがコンテナーにデプロイされました。
+お疲れさまでした。アプリがコンテナーにデプロイされました。

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -17,6 +21,8 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
 
 
 
@@ -29,35 +35,37 @@ lastupdated: "2018-12-05"
 
 **一般**
 
-- [叢集的成本預估器 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
+- [預估成本](/docs/billing-usage?topic=billing-usage-cost#cost)。
 
 <br />
 
 
 **REST API**
 
-- [叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.bluemix.net/swagger-api/)
-- [叢集的 REST API JSON ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.bluemix.net/swagger-api/swagger.json)
-- [用於登入叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger-logging/)
-- [用於管理叢集裡 Ingress 應用程式負載平衡器的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger-alb-api/)
+- [叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api/)
+- [叢集的 REST API JSON ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
+- [用於登入叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-logging/)
+- [用於管理叢集裡 Ingress 應用程式負載平衡器的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-alb-api/)
 
 <br />
 
 
 **指導教學、展示及課程**
 
-- [現代化及擴充現有 Java Web 應用程式 (JPetStore) ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
+- [現代化及擴充現有 Java Web 應用程式 (`JPetStore`) ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
 - [{{site.data.keyword.containerlong_notm}} 認知類別學習路徑 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
-- [如何在 IKS 上建置 Web 應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
-- [使用 Cloud Internet Service (CIS) 保護多地區叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
-- [使用 {{site.data.keyword.containerlong_notm}}、{{site.data.keyword.keymanagementservicelong_notm}}、{{site.data.keyword.appid_full_notm}} 及 {{site.data.keyword.cos_full_notm}} 將端對端安全套用至雲端應用程式](https://console.bluemix.net/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)
-- [分析日誌以及監視應用程式的性能 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)
-- [設定 {{site.data.keyword.containerlong}} 的 Continuous Integration/Continuous Delivery ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
-- [將 VM 應用程式移轉至雲端 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/docs/tutorials/vm-to-containers-and-kubernetes.html#moving-a-vm-based-app-to-kubernetes)
-- [將 CF 應用程式移轉至雲端 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/docs/containers/cs_tutorials_cf.html#cf_tutorial)
-- [使用 Apache Kafka 型傳訊服務編排應用程式的長時間執行工作負載 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
-- [使用 Terraform 在叢集裡自動化部署 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/docs/tutorials/plan-create-update-deployments.html#plan-create-and-update-deployment-environments)
-- [組織使用者及團隊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/docs/tutorials/users-teams-applications.html#best-practices-for-organizing-users-teams-applications)
+- [如何在 {{site.data.keyword.containerlong_notm}} 上建置 Web 應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-scalable-webapp-kubernetes#scalable-webapp-kubernetes)
+- [使用 Cloud Internet Service (CIS) 保護多地區叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+- [使用 {{site.data.keyword.containerlong_notm}}、{{site.data.keyword.keymanagementservicelong_notm}}、{{site.data.keyword.appid_full_notm}} 及 {{site.data.keyword.cos_full_notm}} 將端對端安全套用至雲端應用程式](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security)
+- [使用 LogDNA 分析叢集日誌 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube)
+- [使用 Sysdig 監視叢集性能 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)
+- [設定 {{site.data.keyword.containerlong}} 的 Continuous Integration/Continuous Delivery ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+- [將 VM 應用程式移轉至雲端 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
+- [將 CF 應用程式移轉至雲端 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
+- [使用 Knative 在叢集中執行無伺服器應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [使用 Apache Kafka 型傳訊服務編排應用程式的長時間執行工作負載 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
+- [使用 Terraform 在叢集裡自動化部署 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
+- [組織使用者及團隊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)
 - [搭配使用 Logistics Wizard 與 Istio 及 {{site.data.keyword.containerlong}} ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/logistics-wizard-kubernetes)
 - [使用進階資料流量管理啟用微服務，以及使用 Istio 要求追蹤功能 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/code/patterns/manage-microservices-traffic-using-istio/)
 
@@ -67,6 +75,7 @@ lastupdated: "2018-12-05"
 **整合式開放程式碼技術**
 
 - [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/)
+- [Knative 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/knative/docs)
 - [Docker 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/engine/)
 - Kubernetes 套件管理用的 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>
 - 用來連接、管理及保護微服務安全的 [Istio ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/) 平台
@@ -77,7 +86,7 @@ lastupdated: "2018-12-05"
 
 **名詞解釋**
 
-- [{{site.data.keyword.Bluemix_notm}} 名詞解釋](/docs/overview/glossary/glossary.html#glossary)
+- [{{site.data.keyword.Bluemix_notm}} 名詞解釋](/docs/overview/glossary?topic=overview-glossary#glossary)
 - [Kubernetes 名詞解釋 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Docker 名詞解釋 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/glossary/)
 
@@ -87,9 +96,9 @@ lastupdated: "2018-12-05"
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [{{site.data.keyword.registryshort_notm}} 文件](/docs/services/Registry/index.html)
-- [{{site.data.keyword.registryshort_notm}}REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/apidocs/container-registry)
-- [漏洞警告器 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/apidocs/container-registry/va)
+- [{{site.data.keyword.registryshort_notm}} 文件](/docs/services/Registry?topic=registry-index)
+- [{{site.data.keyword.registryshort_notm}}REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://{DomainName}/apidocs/container-registry)
+- [漏洞警告器 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://{DomainName}/apidocs/container-registry/va)
 
 <br />
 

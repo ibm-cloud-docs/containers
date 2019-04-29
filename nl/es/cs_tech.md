@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, docker
+
+subcollection: containers
 
 ---
 
@@ -17,7 +21,6 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Tecnología {{site.data.keyword.containerlong_notm}}
@@ -62,9 +65,9 @@ Obtenga información acerca de algunos aspectos básicos de Docker:
   </ul>
   </dd>
 
-<p>Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja con imágenes de contenedor.</p>
+<p>Obtenga más información sobre cómo [proteger su información personal](/docs/containers?topic=containers-security#pi) cuando se trabaja con imágenes de contenedor.</p>
 
-<p>¿Listo para conocer Docker en más profundidad? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Complete este curso para conocer cómo Docker y {{site.data.keyword.containerlong_notm}} funcionan conjuntamente.</a></p>
+<p>¿Listo para conocer Docker en más profundidad? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">Complete este curso para conocer cómo Docker y {{site.data.keyword.containerlong_notm}} funcionan conjuntamente.</a></p>
 
 </dl>
 
@@ -79,7 +82,7 @@ Obtenga información acerca de algunos aspectos básicos de Docker:
 
 Conozca algunos conceptos básicos de Kubernetes que se muestran en el diagrama siguiente.
 
-![Configuración del despliegue](images/cs_app_tutorial_components1.png)
+![Configuración del despliegue](images/cs_app_tutorial_mz-components1.png)
 
 <dl>
 <dt>Cuenta</dt>
@@ -104,11 +107,11 @@ Defina estrategias para la app que incluyan el número de pods que desea añadir
 <dt>App</dt>
 <dd>Una app puede hacer referencia a una app completa o al componente de una app. Puede desplegar componentes de una app en pods o nodos trabajadores independientes.</dd>
 
-<p>Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja recursos de Kubernetes.</p>
+<p>Obtenga más información sobre cómo [proteger su información personal](/docs/containers?topic=containers-security#pi) cuando se trabaja recursos de Kubernetes.</p>
 
 <p>¿Listo para conocer Kubernetes en más profundidad?</p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Amplíe su conocimiento terminológico con la guía de aprendizaje de creación de clústeres</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Complete este curso para conocer cómo Kubernetes y {{site.data.keyword.containerlong_notm}} funcionan conjuntamente.</a></li></ul>
+<ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">Amplíe su conocimiento terminológico con la guía de aprendizaje de creación de clústeres</a>.</li>
+<li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">Complete este curso para conocer cómo Kubernetes y {{site.data.keyword.containerlong_notm}} funcionan conjuntamente.</a></li></ul>
 
 
 </dl>
@@ -119,14 +122,22 @@ Defina estrategias para la app que incluyan el número de pods que desea añadir
 ## Arquitectura del servicio
 {: #architecture}
 
-En un clúster de Kubernetes que se ejecuta en {{site.data.keyword.containerlong_notm}}, las apps contenerizadas se alojan en hosts de cálculo que se denominan nodos trabajadores. En realidad, para ser más específicos, las apps se ejecutan en pods, y los pods se alojan en nodos trabajadores. Los nodos trabajadores están gestionados por el maestro de Kubernetes. El maestro de Kubernetes y los nodos trabajadores se comunican entre sí mediante certificados TLS seguros y una conexión openVPN para organizar sus configuraciones de clúster.
+En un clúster de Kubernetes que se ejecuta en {{site.data.keyword.containerlong_notm}}, las apps contenerizadas se alojan en hosts de cálculo que se denominan nodos trabajadores. Para ser más específicos, las apps se ejecutan en pods, y los pods se alojan en nodos trabajadores. Los nodos trabajadores están gestionados por el maestro de Kubernetes. La configuración de la comunicación entre el maestro de Kubernetes y los nodos trabajadores depende de cómo se configure la red de la infraestructura de IBM Cloud (SoftLayer): una cuenta con un punto final de servicio público o una cuenta habilitada para VRF con puntos finales de servicio público y privado.
 {: shortdesc}
 
-En la imagen siguiente se muestran los componentes del clúster y la forma en que interactúan.
+En la imagen siguiente se muestran los componentes del clúster y la forma en que interactúan en una cuenta cuando solo se habilita el [punto final de servicio público](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
 <p>
 <figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} - Arquitectura Kubernetes">
- <figcaption>{{site.data.keyword.containerlong_notm}} - Arquitectura</figcaption>
+ <img src="images/cs_org_ov_public_se.png" alt="Arquitectura de Kubernetes de {{site.data.keyword.containerlong_notm}}">
+ <figcaption>Arquitectura de {{site.data.keyword.containerlong_notm}} cuando solo está habilitado el punto final de servicio público</figcaption> </figure>
+</p>
+
+En la imagen siguiente se muestran los componentes del clúster y la forma en que interactúan en una cuenta habilitada para VRF cuando [están habilitados los puntos finales de servicio público y privado](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
+
+<p>
+<figure>
+ <img src="images/cs_org_ov_both_ses.png" alt="Arquitectura de Kubernetes de {{site.data.keyword.containerlong_notm}}">
+ <figcaption>Arquitectura de {{site.data.keyword.containerlong_notm}} cuando están habilitados los puntos finales de servicio público y privado</figcaption>
 </figure>
 </p>
 
@@ -160,11 +171,11 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     </tr>
     <tr>
     <td>kube-controller-manager</td>
-    <td>El gestor de controlador de Kubernetes es un daemon que observa el estado de los recursos del clúster, como por ejemplo los conjuntos de réplicas. Cuando cambia el estado de un recurso, por ejemplo si cae un pod de un conjunto de réplicas, el gestor del controlador inicia acciones de corrección para conseguir el estado deseado.</td>
+    <td>El gestor de controlador de Kubernetes es un daemon que observa el estado de los recursos del clúster, como por ejemplo los conjuntos de réplicas. Cuando cambia el estado de un recurso, por ejemplo si cae un pod de un conjunto de réplicas, el gestor del controlador inicia acciones de corrección para conseguir el estado necesario.</td>
     </tr>
     </tbody></table></dd>
   <dt>Nodo trabajador</dt>
-    <dd>Cada nodo trabajador es una máquina física (nativa) o una máquina virtual que se ejecuta en hardware físico en el entorno de nube. Al suministrar un nodo trabajador, puede determinar los recursos que están disponibles para los contenedores alojados en dicho nodo trabajador. De forma predeterminada, los nodos trabajadores están configurados con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y un servicio de volúmenes. Las características integradas de seguridad proporcionan aislamiento, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores.</br></br>En la tabla siguiente se describen los componentes de un nodo trabajador.
+    <dd>Cada nodo trabajador es una máquina física (nativa) o una máquina virtual que se ejecuta en hardware físico en el entorno de nube. Al suministrar un nodo trabajador, puede determinar los recursos que están disponibles para los contenedores alojados en dicho nodo trabajador. De forma predeterminada, los nodos trabajadores están configurados con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y un servicio de volúmenes. Las características integradas de seguridad proporcionan aislamiento, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores.</br></br><p class="note">No se da soporte a la modificación de componentes de nodo trabajador predeterminado, `kubelet`, y puede provocar resultados inesperados.</p>En la tabla siguiente se describen los componentes de un nodo trabajador.
     <table>
     <caption>Componentes de los nodos trabajadores</caption>
     <thead>
@@ -174,47 +185,47 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     </thead>
     <tbody>
     <tr>
-    <td>ibm-master-proxy</td>
+    <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
     <td>Para clústeres que ejecutan Kubernetes versión 1.10 o posterior, el `ibm-master-proxy` reenvía solicitudes desde el nodo trabajador a las direcciones IP de las réplicas del maestro de alta disponibilidad. En clústeres de una sola zona, el maestro tiene tres réplicas en hosts independientes con un nombre de dominio y una dirección IP de maestro. Para clústeres que se encuentran en una zona con capacidad multizona, el maestro tiene tres réplicas que se dispersan entre zonas. Como tal, cada maestro tiene su propia dirección IP que se registra con DNS, con un nombre de dominio para el maestro de clúster completo.</td>
     </tr>
     <tr>
-    <td>openvpn-client</td>
+    <td>`openvpn-client`</td>
     <td>kube-system</td>
     <td>El cliente OpenVPN funciona con el servidor OpenVPN para conectar de forma segura el nodo maestro con el nodo trabajador. Esta conexión admite llamadas `apiserver proxy` a los pods y servicios, y llamadas `kubectl exec`, `attach` y `logs` a kubelet.</td>
     </tr>
     <tr>
-    <td>kubelet</td>
+    <td>`kubelet`</td>
     <td>kube-system</td>
     <td>El kubelet es un pod que se ejecuta en cada nodo trabajador y que es el responsable de supervisar el estado de los pods que se ejecutan en el nodo trabajador y de ver los sucesos que envía el servidor de API de Kubernetes. Basándose en los sucesos, el kubelet crea o elimina pods, garantiza sondeos de actividad y de preparación e informa sobre el estado de los pods al servidor de API de Kubernetes.</td>
     </tr>
     <tr>
-    <td>kube-dns</td>
+    <td>`coredns`</td>
     <td>kube-system</td>
-    <td>Kubernetes DNS planifica un servicio y pod DNS en el clúster. Los contenedores utilizan automáticamente la IP del servicio DNS para resolver nombres de DNS en sus búsquedas de otros pods y servicios.</td>
+    <td>De forma predeterminada, Kubernetes planifica un pod CoreDNS (o un pod de KubeDNS en la versión 1.12 y anteriores) y el servicio en el clúster. Los contenedores utilizan automáticamente la IP del servicio DNS para resolver nombres de DNS en sus búsquedas de otros pods y servicios.</td>
     </tr>
     <tr>
-    <td>calico</td>
+    <td>`calico`</td>
     <td>kube-system</td>
     <td>Calico gestiona las políticas de red del clúster y consta de varios componentes, indicados a continuación.
     <ul>
-    <li>**calico-cni**: La interfaz de red de contenedor de Calico (CNI) gestiona la conectividad de red de los contenedores y elimina los recursos asignados cuando se suprime un contenedor.</li>
-    <li>**calico-ipam**: Calico IPAM gestiona la asignación de direcciones IP a contenedores.</li>
-    <li>**calico-node**: El nodo Calico es un contenedor que agrupa los distintos componentes necesarios para los contenedores de red con Calico.</li>
-    <li>**calico-policy-controller**: El controlador de políticas de Calico observa el tráfico de red de entrada y de salida para comprobar la conformidad con las políticas de red establecidas. Si el tráfico no está permitido en el clúster, se bloquea el acceso al clúster. El controlador de políticas de Calico también se utiliza para crear y establecer políticas de red para un clúster.</li></ul></td>
+    <li>**`calico-cni`**: La interfaz de red de contenedor de Calico (CNI) gestiona la conectividad de red de los contenedores y elimina los recursos asignados cuando se suprime un contenedor.</li>
+    <li>**`calico-ipam`**: Calico IPAM gestiona la asignación de direcciones IP a contenedores.</li>
+    <li>**`calico-node`**: El nodo Calico es un contenedor que agrupa los distintos componentes necesarios para los contenedores de red con Calico.</li>
+    <li>**`calico-policy-controller`**: El controlador de políticas de Calico observa el tráfico de red de entrada y de salida para comprobar la conformidad con las políticas de red establecidas. Si el tráfico no está permitido en el clúster, se bloquea el acceso al clúster. El controlador de políticas de Calico también se utiliza para crear y establecer políticas de red para un clúster.</li></ul></td>
     </tr>
     <tr>
-    <td>kube-proxy</td>
+    <td>`kube-proxy`</td>
     <td>kube-system</td>
     <td>El proxy de red de Kubernetes es un daemon que se ejecuta en cada nodo trabajador y que reenvía o equilibra la carga del tráfico de red TCP y UDP para los servicios que se ejecutan en el clúster.</td>
     </tr>
     <tr>
-    <td>kube-dashboard</td>
+    <td>`kube-dashboard`</td>
     <td>kube-system</td>
     <td>El panel de control de Kubernetes es una GUI basada en web que permite a los usuarios gestionar y resolver problemas en el clúster y en las aplicaciones que se ejecutan en el clúster.</td>
     </tr>
     <tr>
-    <td>heapster</td>
+    <td>`heapster`</td>
     <td>kube-system</td>
     <td>Heapster es un agregador a nivel de clúster de datos de supervisión y de sucesos. El pod Heapster descubre todos los nodos del clúster y consulta información de uso del kubelet de cada nodo. En el panel de control de Kubernetes encontrará gráficos de utilización.</td>
     </tr>
@@ -246,5 +257,5 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     </tbody></table></dd>
 </dl>
 
-¿Desea ver cómo se puede utilizar {{site.data.keyword.containerlong_notm}} con otros productos y servicios? Compruebe algunas de las [integraciones](cs_integrations.html#integrations).
+¿Desea ver cómo se puede utilizar {{site.data.keyword.containerlong_notm}} con otros productos y servicios? Compruebe algunas de las [integraciones](/docs/containers?topic=containers-integrations#integrations).
 {: tip}

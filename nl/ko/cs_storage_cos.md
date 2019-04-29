@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,18 +23,28 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # IBM Cloud Object Storage에 데이터 저장
 {: #object_storage}
+
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)는 {{site.data.keyword.cos_full_notm}} 플러그인을 사용하여 Kubernetes 클러스터에서 실행되는 앱에 마운트할 수 있는 지속적 고가용성 스토리지 입니다. 플러그인은 Cloud {{site.data.keyword.cos_short}} 버킷을 클러스터의 팟(pod)에 연결하는 Kubernetes Flex-Volume 플러그인입니다. {{site.data.keyword.cos_full_notm}}에 저장된 정보는 전환하고 저장하는 상태에서 암호화되어 여러 지리적 위치에 분산되며 REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다.
+
+{{site.data.keyword.cos_full_notm}}에 연결하려면 클러스터에는 {{site.data.keyword.Bluemix_notm}} Identity and Access Management로 인증하기 위한 공용 네트워크 액세스 권한이 필요합니다. 개인 전용 클러스터가 있는 경우 플러그인 버전 `1.0.3` 이상을 설치하고 HMAC 인증용 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 설정하면 {{site.data.keyword.cos_full_notm}} 개인 서비스 엔드포인트와 통신할 수 있습니다. HMAC 인증을 사용하지 않으려는 경우, 사설 클러스터에서 플러그인이 제대로 작동하려면 포트 443의 모든 아웃바운드 네트워크 트래픽을 열어야 합니다.
+{: important}
 
 ## 오브젝트 스토리지 서비스 인스턴스 작성
 {: #create_cos_service}
 
-클러스터에서 {{site.data.keyword.cos_full_notm}} 사용을 시작하려면 우선 계정에서 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 프로비저닝해야 합니다.
+클러스터에서 오브젝트 스토리지 사용을 시작하려면 우선 계정에서 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 프로비저닝해야 합니다.
 {: shortdesc}
 
+{{site.data.keyword.cos_full_notm}} 플러그인은 s3 API 엔드포인트와 함께 작동하도록 구성되어 있습니다. 예를 들어, [Minio](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore)와 같은 로컬 Cloud Object Storage 서버를 사용하거나 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 사용하는 대신 다른 클라우드 제공자에서 설정한 s3 API 엔드포인트에 연결할 수 있습니다.
+
+다음 단계를 수행하여 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 작성하십시오. 로컬 Cloud Object Storage 서버 또는 다른 서비스 API 엔드포인트를 사용하려는 경우, 제공자 문서를 참조하여 Cloud Object Storage를 설정하십시오.
+
 1. {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 배치하십시오.
-   1.  [{{site.data.keyword.cos_full_notm}} 카탈로그 페이지](https://console.bluemix.net/catalog/services/cloud-object-storage)를 여십시오.
-   2.  서비스 인스턴스의 이름(예: `cos-backup`)을 입력하고 클러스터가 속한 것과 동일한 리소스 그룹을 선택하십시오. 클러스터의 리소스 그룹을 보려면 `[bxcs] cluster-get --cluster <cluster_name_or_ID>`.   
+   1.  [{{site.data.keyword.cos_full_notm}} 카탈로그 페이지](https://cloud.ibm.com/catalog/services/cloud-object-storage)를 여십시오.
+   2.  서비스 인스턴스의 이름(예: `cos-backup`)을 입력하고 클러스터가 속한 것과 동일한 리소스 그룹을 선택하십시오. 클러스터의 리소스 그룹을 보려면 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`를 실행하십시오.   
    3.  가격 정보에 대해 [플랜 옵션 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)을 검토하고 플랜을 선택하십시오.
    4.  **작성**을 클릭하십시오. 서비스 세부사항 페이지가 열립니다.
 2. {: #service_credentials}{{site.data.keyword.cos_full_notm}} 서비스 인증 정보를 검색하십시오.
@@ -38,7 +52,7 @@ lastupdated: "2018-12-05"
    2.  **새 인증 정보**를 클릭하십시오. 대화 상자가 표시됩니다.
    3.  인증 정보의 이름을 입력하십시오.
    4.  **역할** 드롭 다운에서 `Writer` 또는 `Manager`를 선택하십시오. `Reader`를 선택하면 인증 정보를 사용하여 {{site.data.keyword.cos_full_notm}}에서 버킷을 작성하고 이에 데이터를 쓸 수 없습니다.
-   5.  선택사항: **인라인 구성 매개변수 추가(선택사항)**에서 `{"HMAC":true}`를 입력하여 {{site.data.keyword.cos_full_notm}} 서비스에 대한 추가 HMAC 인증 정보를 작성하십시오. HMAC 인증은 만료되거나 무작위로 작성된 OAuth2 토큰의 오용을 방지함으로써 OAuth2 인증에 보안 계층을 추가합니다.
+   5.  선택사항: **인라인 구성 매개변수 추가(선택사항)**에서 `{"HMAC":true}`를 입력하여 {{site.data.keyword.cos_full_notm}} 서비스에 대한 추가 HMAC 인증 정보를 작성하십시오. HMAC 인증은 만료되거나 무작위로 작성된 OAuth2 토큰의 오용을 방지함으로써 OAuth2 인증에 보안 계층을 추가합니다. **중요**: 공용 액세스가 없는 개인 전용 클러스터가 있는 경우, 사설 네트워크를 통해 {{site.data.keyword.cos_full_notm}} 서비스에 액세스할 수 있도록 HMAC 인증을 사용해야 합니다.
    6.  **추가**를 클릭하십시오. 새 인증 정보가 **서비스 인증 정보** 테이블에 나열됩니다.
    7.  **인증 정보 보기**를 클릭하십시오.
    8.  {{site.data.keyword.cos_full_notm}} 서비스의 인증에 OAuth2 토큰을 사용하려면 **apikey**를 기록해 두십시오. HMAC 인증의 경우에는 **cos_hmac_keys** 섹션에서 **access_key_id** 및 **secret_access_key**를 기록해 두십시오.
@@ -50,7 +64,9 @@ lastupdated: "2018-12-05"
 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에 액세스하여 데이터를 읽고 쓰려면 Kubernetes 시크릿에 서비스 인증 정보를 안전하게 저장해야 합니다. {{site.data.keyword.cos_full_notm}} 플러그인은 버킷에 대한 모든 읽기 또는 쓰기 오퍼레이션에 이러한 인증 정보를 사용합니다.
 {: shortdesc}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+다음 단계를 수행하여 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 인증 정보에 대한 Kubernetes 시크릿을 작성하십시오. 로컬 Cloud Object Storage 서버 또는 다른 s3 API 엔드포인트를 사용하려는 경우 적절한 인증 정보를 사용하여 Kubernetes 시크릿을 작성하십시오.
+
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1. [{{site.data.keyword.cos_full_notm}} 서비스 인증 정보](#service_credentials)의 **apikey** 또는 **access_key_id** 및 **secret_access_key**를 검색하십시오.
 
@@ -93,7 +109,6 @@ lastupdated: "2018-12-05"
    data:
      access-key: <base64_access_key_id>
      secret-key: <base64_secret_access_key>
-     service-instance-id: <base64_guid>
    ```
    {: codeblock}
 
@@ -153,53 +168,68 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 {{site.data.keyword.cos_full_notm}} 플러그인의 업데이트 또는 제거 방법에 대한 지시사항을 찾으십니까? [플러그인 업데이트](#update_cos_plugin) 및 [플러그인 제거](#remove_cos_plugin)를 참조하십시오.
 {: tip}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-1. 작업자 노드가 부 버전에 대한 최신 패치를 적용하는지 확인하십시오. 
-   1. 작업자 노드의 현재 패치 버전을 나열하십시오. 
+1. 작업자 노드가 부 버전에 대한 최신 패치를 적용하는지 확인하십시오.
+   1. 작업자 노드의 현재 패치 버전을 나열하십시오.
       ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
       {: pre}
-      
-      출력 예: 
+
+      출력 예:
       ```
       OK
-      ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.11_1523* 
+      ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
       ```
       {: screen}
-      
-      작업자 노드가 최신 패치 버전을 적용하지 않는 경우에는 CLI 출력의 **Version** 열에 별표(`*`)가 표시됩니다. 
-      
-   2. 최신 패치 버전에 포함된 변경사항을 찾으려면 [버전 변경 로그](cs_versions_changelog.html#changelog)를 검토하십시오. 
-   
-   3. 작업자 노드를 다시 로드하여 최신 패치 버전을 적용하십시오. 작업자 노드를 다시 로드하기 전에 작업자 노드에서 실행 중인 팟(Pod)을 단계적으로 다시 스케줄하려면 [ibmcloud ks worker-reload 명령](cs_cli_reference.html#cs_worker_reload)의 지시사항을 따르십시오. 다시 로드하는 중에 작업자 노드 머신은 최신 이미지로 업데이트되며 [작업자 노드의 외부에 저장](cs_storage_planning.html#persistent_storage_overview)되지 않은 경우 데이터가 삭제됨을 유념하십시오.
 
-2. [지시사항](cs_integrations.html#helm)에 따라 로컬 머신에 Helm 클라이언트를 설치하고 클러스터에 Helm 서버(Tiller)를 설치한 후에 {{site.data.keyword.Bluemix_notm}} Helm 차트 저장소를 {{site.data.keyword.cos_full_notm}} 플러그인이 사용될 클러스터에 추가하십시오.
+      작업자 노드가 최신 패치 버전을 적용하지 않는 경우에는 CLI 출력의 **Version** 열에 별표(`*`)가 표시됩니다.
 
-    Helm 버전 2.9 이상을 사용 중이면 [서비스 계정](cs_integrations.html#helm)으로 Tiller를 설치했는지 확인하십시오.
-    {: important}
+   2. 최신 패치 버전에 포함된 변경사항을 찾으려면 [버전 변경 로그](/docs/containers?topic=containers-changelog#changelog)를 검토하십시오.
 
-3. 클러스터에 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오.
+   3. 작업자 노드를 다시 로드하여 최신 패치 버전을 적용하십시오. 작업자 노드를 다시 로드하기 전에 작업자 노드에서 실행 중인 팟(Pod)을 단계적으로 다시 스케줄하려면 [ibmcloud ks worker-reload 명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)의 지시사항을 따르십시오. 다시 로드하는 중에 작업자 노드 머신은 최신 이미지로 업데이트되며 [작업자 노드의 외부에 저장](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)되지 않은 경우 데이터가 삭제됨을 유념하십시오.
+
+2.  [지시사항에 따라](/docs/containers?topic=containers-integrations#helm) 로컬 시스템에 Helm 클라이언트를 설치하고 클러스터에 서비스 계정이 있는 Helm 서버(tiller)를 설치하십시오.
+
+    Helm 서버 Tiller를 설치하려면 공용 Google Container Registry에 대한 공용 네트워크 연결이 필요합니다. 클러스터가 방화벽으로 보호되는 사설 클러스터 또는 개인 서비스 엔드포인트가 사용으로 설정된 클러스터와 같이 공용 네트워크에 액세스할 수 없는 경우 [Tiller 이미지를 로컬 시스템으로 가져와 해당 이미지를 {{site.data.keyword.registryshort_notm}}의 네임스페이스에 푸시](/docs/containers?topic=containers-integrations#private_local_tiller)하거나 [Tiller를 사용하지 않고 Helm 차트를 설치](/docs/containers?topic=containers-integrations#private_install_without_tiller)할 수 있습니다.
+    {: note}
+
+3.  Tiller에 서비스 계정이 설치되어 있는지 확인하십시오.
+
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    출력 예:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+4. 클러스터에 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오.
    ```
    helm repo add ibm https://registry.bluemix.net/helm/ibm
    ```
    {: pre}
 
-4. Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
+5. Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
    ```
    helm repo update
    ```
    {: pre}
 
-5. Helm 차트를 다운로드하고 현재 디렉토리에서 차트의 압축을 푸십시오.
+6. Helm 차트를 다운로드하고 현재 디렉토리에서 차트의 압축을 푸십시오.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
    {: pre}
 
-6. macOS 또는 Linux 배포판을 사용하는 경우에는 {{site.data.keyword.cos_full_notm}} Helm 플러그인 `ibmc`를 설치하십시오. 플러그인을 사용하면 클러스터 위치를 자동 검색하고 스토리지 클래스의 {{site.data.keyword.cos_full_notm}} 버킷에 대한 API 엔드포인트를 설정할 수 있습니다. Windows를 운영 체제로 사용하는 경우에는 다음 단계로 진행하십시오.
+7. macOS 또는 Linux 배포판을 사용하는 경우에는 {{site.data.keyword.cos_full_notm}} Helm 플러그인 `ibmc`를 설치하십시오. 플러그인을 사용하면 클러스터 위치를 자동 검색하고 스토리지 클래스의 {{site.data.keyword.cos_full_notm}} 버킷에 대한 API 엔드포인트를 설정할 수 있습니다. Windows를 운영 체제로 사용하는 경우에는 다음 단계로 진행하십시오.
    1. Helm 플러그인을 설치하십시오.
       ```
       helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
@@ -237,7 +267,10 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
       ```
       {: screen}
 
-7. 선택사항: {{site.data.keyword.cos_full_notm}} 서비스 인증 정보가 보관된 Kubernetes 시크릿만 액세스하도록 {{site.data.keyword.cos_full_notm}} 플러그인을 제한하십시오. 기본적으로, 플러그인은 클러스터의 모든 Kubernetes 시크릿에 액세스할 권한이 있습니다.
+      출력에 `Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission denied` 오류가 표시되면 `chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh`를 실행하십시오. 그런 다음, `helm ibmc --help`를 다시 실행하십시오.
+      {: tip}
+
+8. 선택사항: {{site.data.keyword.cos_full_notm}} 서비스 인증 정보가 보관된 Kubernetes 시크릿만 액세스하도록 {{site.data.keyword.cos_full_notm}} 플러그인을 제한하십시오. 기본적으로, 플러그인은 클러스터의 모든 Kubernetes 시크릿에 액세스할 권한이 있습니다.
    1. [{{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 작성](#create_cos_service)하십시오.
    2. [Kubernetes 시크릿에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보를 저장](#create_cos_secret)하십시오.
    3. `templates` 디렉토리로 이동하여 사용 가능한 파일을 나열하십시오.  
@@ -246,7 +279,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
       ```
       {: pre}
 
-   4. `provisioner-sa.yaml` 파일을 열고 `ibmcloud-object-storage-secret-reader` ClusterRole 정의를 찾으십시오.
+   4. `provisioner-sa.yaml` 파일을 열고 `ibmcloud-object-storage-secret-reader` `ClusterRole` 정의를 찾으십시오.
    6. `resourceNames` 섹션에서 플러그인이 액세스할 수 있는 시크릿의 목록에 이전에 작성한 시크릿의 이름을 추가하십시오.
       ```
       kind: ClusterRole
@@ -262,18 +295,18 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
       {: codeblock}
    7. 변경사항을 저장하십시오.
 
-8. {{site.data.keyword.cos_full_notm}} 플러그인을 설치하십시오. 플러그인을 설치하면 사전 정의된 스토리지 클래스가 클러스터에 추가됩니다.
+9. {{site.data.keyword.cos_full_notm}} 플러그인을 설치하십시오. 플러그인을 설치하면 사전 정의된 스토리지 클래스가 클러스터에 추가됩니다.
 
    - **macOS 및 Linux의 경우:**
      - 이전 단계를 건너뛴 경우에는 특정 Kubernetes secret에 대한 제한사항 없이 설치하십시오.
        ```
-   helm ibmc install ibm/ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install ibm/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
      - 이전 단계를 완료한 경우에는 특정 Kubernetes secret에 대한 제한사항을 적용하여 설치하십시오.
        ```
-   helm ibmc install ./ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install ./ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
@@ -366,7 +399,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    ```
    {: screen}
 
-8. 플러그인이 올바르게 설치되었는지 확인하십시오.
+10. 플러그인이 올바르게 설치되었는지 확인하십시오.
    ```
    kubectl get pod -n kube-system -o wide | grep object
    ```
@@ -381,15 +414,15 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
    하나의 `ibmcloud-object-storage-plugin` 팟(Pod)과 하나 이상의 `ibmcloud-object-storage-driver` 팟(Pod)이 나타나면 설치가 완료된 것입니다. `ibmcloud-object-storage-driver` 팟(Pod)의 수는 클러스터의 작업자 노드 수와 동일합니다. 플러그인이 제대로 작동하려면 모든 팟(Pod)이 `Running` 상태여야 합니다. 팟(Pod)이 실패하는 경우에는 `kubectl describe pod -n kube-system <pod_name>`을 실행하여 실패의 근본 원인을 찾으십시오.
 
-9. 스토리지 클래스가 성공적으로 작성되었는지 확인하십시오.
-   ```
+11. 스토리지 클래스가 성공적으로 작성되었는지 확인하십시오.
+    ```
    kubectl get storageclass | grep s3
-   ```
-   {: pre}
+    ```
+    {: pre}
 
-   출력 예:
-   ```
-   ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
+    출력 예:
+    ```
+       ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
@@ -401,10 +434,10 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
-   ```
-   {: screen}
+    ```
+    {: screen}
 
-10. 사용자가 {{site.data.keyword.cos_full_notm}} 버킷에 액세스할 모든 클러스터에 대해 단계를 반복하십시오.
+12. 사용자가 {{site.data.keyword.cos_full_notm}} 버킷에 액세스할 모든 클러스터에 대해 단계를 반복하십시오.
 
 ### IBM Cloud Object Storage 플러그인 업데이트
 {: #update_cos_plugin}
@@ -412,18 +445,24 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 기존 {{site.data.keyword.cos_full_notm}} 플러그인을 후속 버전으로 업그레이드할 수 있습니다.
 {: shortdesc}
 
-1. Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
+1. macOS 또는 Linux 배포판을 사용하는 경우에는 {{site.data.keyword.cos_full_notm}} `ibmc` Helm 플러그인을 최신 버전으로 업데이트하십시오.
+   ```
+   helm ibmc --update
+   ```
+   {: pre}
+
+2. {{site.data.keyword.Bluemix_notm}} Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
    ```
    helm repo update
    ```
    {: pre}
 
-2. 최신 Helm 차트를 로컬 머신에 다운로드하고 패키지의 압축을 푼 후에 `release.md` 파일을 검토하여 최신 릴리스 정보를 찾으십시오.
+3. 최신 {{site.data.keyword.cos_full_notm}} Helm 차트를 로컬 머신에 다운로드하고 패키지의 압축을 푼 후에 `release.md` 파일을 검토하여 최신 릴리스 정보를 찾으십시오.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
 
-3. Helm 차트의 설치 이름을 찾으십시오.
+4. Helm 차트의 설치 이름을 찾으십시오.
    ```
    helm ls | grep ibmcloud-object-storage-plugin
    ```
@@ -435,13 +474,13 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    ```
    {: screen}
 
-4. {{site.data.keyword.cos_full_notm}} 플러그인을 최신 버전으로 업그레이드하십시오.
+5. {{site.data.keyword.cos_full_notm}} Helm 차트를 최신 버전으로 업그레이드하십시오.
    ```   
    helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
    ```
    {: pre}
 
-5. `ibmcloud-object-storage-plugin`이 성공적으로 업그레이드되었는지 확인하십시오.  
+6. `ibmcloud-object-storage-plugin`이 성공적으로 업그레이드되었는지 확인하십시오.  
    ```
    kubectl rollout status deployment/ibmcloud-object-storage-plugin -n kube-system
    ```
@@ -449,7 +488,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
    CLI 출력에 `deployment "ibmcloud-object-storage-plugin" successfully rolled out`이 나타나면 플러그인의 업그레이드가 완료된 것입니다.
 
-6. `ibmcloud-object-storage-driver`가 성공적으로 업그레이드되었는지 확인하십시오.
+7. `ibmcloud-object-storage-driver`가 성공적으로 업그레이드되었는지 확인하십시오.
    ```
    kubectl rollout status ds/ibmcloud-object-storage-driver -n kube-system
    ```
@@ -457,7 +496,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
    CLI 출력에 `daemon set "ibmcloud-object-storage-driver" successfully rolled out`이 나타나면 플러그인의 업그레이드가 완료된 것입니다.
 
-7. {{site.data.keyword.cos_full_notm}} 팟(Pod)이 `Running` 상태인지 확인하십시오.
+8. {{site.data.keyword.cos_full_notm}} 팟(Pod)이 `Running` 상태인지 확인하십시오.
    ```
    kubectl get pods -n kube-system -o wide | grep object-storage
    ```
@@ -468,13 +507,14 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 {: #remove_cos_plugin}
 
 클러스터에서 {{site.data.keyword.cos_full_notm}}의 프로비저닝과 사용을 원하지 않으면 Helm 차트를 설치 제거할 수 있습니다.
+{: shortdesc}
 
 이 플러그인을 제거해도 기존 PVC, PV 또는 데이터는 제거되지 않습니다. 플러그인을 제거할 때는 모든 관련 팟(Pod) 및 디먼 세트만 클러스터에서 제거됩니다. {{site.data.keyword.cos_full_notm}} API를 직접 사용하도록 앱을 구성하지 않는 한, 플러그인 제거 이후에 기존 PVC 및 PV를 사용하거나 클러스터의 새 {{site.data.keyword.cos_full_notm}}를 프로비저닝할 수 없습니다.
 {: important}
 
 시작하기 전에:
 
-- [CLI에 클러스터를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+- [CLI에 클러스터를 대상으로 지정](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)하십시오.
 - {{site.data.keyword.cos_full_notm}}를 사용하는 클러스터에 PVC 또는 PV가 없는지 확인하십시오. 특정 PVC를 마운트하는 모든 팟(Pod)을 나열하려면 다음을 실행하십시오. `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`
 
 플러그인을 제거하려면 다음을 수행하십시오.
@@ -539,6 +579,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 {: #configure_cos}
 
 {{site.data.keyword.containerlong_notm}}는 특정 구성의 버킷을 작성하는 데 사용할 수 있는 사전 정의된 스토리지 클래스를 제공합니다.
+{: shortdesc}
 
 1. {{site.data.keyword.containerlong_notm}}에서 사용 가능한 스토리지 클래스를 나열하십시오.
    ```
@@ -571,8 +612,8 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 **팁:** 일반 스토리지 계층과 비교하여 Flex 스토리지 클래스의 작동 방법에 대해 알아보려면 이 [블로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/)를 확인하십시오.   
 
 3. 버킷에 저장된 데이터의 복원성 레벨을 결정하십시오.
-   - **교차 지역(Cross-region)**: 이 옵션을 사용하면 데이터가 고가용성을 위해 지리적 위치 내의 3개 지역에 걸쳐 저장됩니다. 지역 간에 분산된 워크로드가 있으면 최인접 지역 엔드포인트로 요청이 라우트됩니다. 지리적 위치에 대한 API 엔드포인트는 클러스터가 있는 위치를 기반으로 이전에 설치된 `ibmc` Helm 플러그인에 의해 자동으로 설정됩니다. 예를 들어, 클러스터가 `US South`에 있으면 버킷에 대해 `US GEO` API 엔드포인트를 사용하도록 스토리지 클래스가 구성됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오.  
-   - **지역적(Regional)**: 이 옵션을 사용하면 데이터가 한 지역 내의 다중 구역 간에 복제됩니다. 동일한 지역에 있는 워크로드가 있는 경우에는 교차 지역 설정보다 낮은 대기 시간과 더 높은 성능이 나타납니다. 지역적 엔드포인트는 클러스터가 있는 위치를 기반으로 이전에 설치된 `ibm` Helm 플러그인에 의해 자동으로 설정됩니다. 예를 들어, 클러스터가 `US South`에 있으면 버킷의 지역적 엔드포인트로서 `US South`를 사용하도록 스토리지 클래스가 구성됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오.
+   - **교차 지역(Cross-region)**: 이 옵션을 사용하면 데이터가 고가용성을 위해 지리적 위치 내의 3개 지역에 걸쳐 저장됩니다. 지역 간에 분산된 워크로드가 있으면 최인접 지역 엔드포인트로 요청이 라우트됩니다. 지리적 위치에 대한 API 엔드포인트는 클러스터가 있는 위치를 기반으로 이전에 설치된 `ibmc` Helm 플러그인에 의해 자동으로 설정됩니다. 예를 들어, 클러스터가 `US South`에 있으면 버킷에 대해 `US GEO` API 엔드포인트를 사용하도록 스토리지 클래스가 구성됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)를 참조하십시오.  
+   - **지역적(Regional)**: 이 옵션을 사용하면 데이터가 한 지역 내의 다중 구역 간에 복제됩니다. 동일한 지역에 있는 워크로드가 있는 경우에는 교차 지역 설정보다 낮은 대기 시간과 더 높은 성능이 나타납니다. 지역적 엔드포인트는 클러스터가 있는 위치를 기반으로 이전에 설치된 `ibm` Helm 플러그인에 의해 자동으로 설정됩니다. 예를 들어, 클러스터가 `US South`에 있으면 버킷의 지역적 엔드포인트로서 `US South`를 사용하도록 스토리지 클래스가 구성됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)를 참조하십시오.
 
 4. 스토리지 클래스의 세부 {{site.data.keyword.cos_full_notm}} 버킷 구성을 검토하십시오.
    ```
@@ -607,7 +648,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    </tr>
    <tr>
    <td><code>ibm.io/curl-debug</code></td>
-   <td>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스로 전송된 요청의 로깅을 사용합니다. 이를 사용하면 로그가 `syslog`로 전송되며 사용자가 [로그를 외부 로깅 서버로 전달](cs_health.html#logging)할 수 있습니다. 기본적으로 모든 스토리지 클래스는 이 로깅 기능을 사용하지 않도록 <strong>false</strong>로 설정됩니다. </td>
+   <td>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스로 전송된 요청의 로깅을 사용합니다. 이를 사용하면 로그가 `syslog`로 전송되며 사용자가 [로그를 외부 로깅 서버로 전달](/docs/containers?topic=containers-health#logging)할 수 있습니다. 기본적으로 모든 스토리지 클래스는 이 로깅 기능을 사용하지 않도록 <strong>false</strong>로 설정됩니다. </td>
    </tr>
    <tr>
    <td><code>ibm.io/debug-level</code></td>
@@ -627,7 +668,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    </tr>
    <tr>
    <td><code>ibm.io/object-store-endpoint</code></td>
-   <td>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 버킷에 액세스하는 데 사용할 API 엔드포인트입니다. 엔드포인트는 클러스터의 지역에 따라 자동으로 설정됩니다. **참고**: 클러스터가 있는 지역이 아닌 다른 지역에 있는 기존 버킷에 액세스하려면 [사용자 정의 스토리지 클래스](cs_storage_basics.html#customized_storageclass)를 작성하고 버킷의 API 엔드포인트를 사용해야 합니다.</td>
+   <td>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 버킷에 액세스하는 데 사용할 API 엔드포인트입니다. 엔드포인트는 클러스터의 지역에 따라 자동으로 설정됩니다. **참고**: 클러스터가 있는 지역이 아닌 다른 지역에 있는 기존 버킷에 액세스하려면 [사용자 정의 스토리지 클래스](/docs/containers?topic=containers-kube_concepts#customized_storageclass)를 작성하고 버킷의 API 엔드포인트를 사용해야 합니다.</td>
    </tr>
    <tr>
    <td><code>ibm.io/object-store-storage-class</code></td>
@@ -647,12 +688,12 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    </tr>
    <tr>
    <td><code>ibm.io/tls-cipher-suite</code></td>
-   <td>{{site.data.keyword.cos_full_notm}}에 대한 연결이 HTTPS 엔드포인트를 통해 설정될 때 사용되어야 하는 TLS 암호 스위트입니다. 암호 스위트의 값은 [OpenSSL 형식 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html)을 따라야 합니다. 모든 스토리지 클래스는 기본적으로 <strong>AESGCM</strong> 암호 스위트를 사용합니다.  </td>
+   <td>{{site.data.keyword.cos_full_notm}}에 대한 연결이 HTTPS 엔드포인트를 통해 설정될 때 사용되어야 하는 TLS 암호 스위트입니다. 암호 스위트의 값은 [OpenSSL 형식 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html)을 따라야 합니다. 모든 스토리지 클래스는 기본적으로 <strong><code>AESGCM</code></strong> 암호 스위트를 사용합니다.  </td>
    </tr>
    </tbody>
    </table>
 
-   각 스토리지 클래스에 대한 자세한 정보는 [스토리지 클래스 참조](#storageclass_reference)를 참조하십시오. 사전 설정된 값을 변경하려면 자체 [사용자 정의된 스토리지 클래스](cs_storage_basics.html#customized_storageclass)를 작성하십시오.
+   각 스토리지 클래스에 대한 자세한 정보는 [스토리지 클래스 참조](#cos_storageclass_reference)를 참조하십시오. 사전 설정된 값을 변경하려면 자체 [사용자 정의된 스토리지 클래스](/docs/containers?topic=containers-kube_concepts#customized_storageclass)를 작성하십시오.
    {: tip}
 
 5. 버킷의 이름을 결정하십시오. 버킷 이름은 {{site.data.keyword.cos_full_notm}}에서 고유해야 합니다. {{site.data.keyword.cos_full_notm}} 플러그인에 의한 버킷 이름 자동 작성을 선택할 수도 있습니다. 버킷의 데이터를 구성하기 위해 서브디렉토리를 작성할 수 있습니다.
@@ -671,8 +712,8 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 {: shortdesc}
 
 PVC에서 선택하는 설정에 따라 다음 방법으로 {{site.data.keyword.cos_full_notm}}를 프로비저닝할 수 있습니다.
-- [동적 프로비저닝](cs_storage_basics.html#dynamic_provisioning): PVC를 작성하면 일치하는 지속적 볼륨(PV) 및 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 버킷이 자동으로 작성됩니다.
-- [정적 프로비저닝](cs_storage_basics.html#static_provisioning): PVC의 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에서 기존 버킷을 참조할 수 있습니다. PVC를 작성하면 일치하는 PV만 자동으로 작성되며 {{site.data.keyword.cos_full_notm}}의 기존 버킷에 링크됩니다.
+- [동적 프로비저닝](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning): PVC를 작성하면 일치하는 지속적 볼륨(PV) 및 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 버킷이 자동으로 작성됩니다.
+- [정적 프로비저닝](/docs/containers?topic=containers-kube_concepts#static_provisioning): PVC의 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에서 기존 버킷을 참조할 수 있습니다. PVC를 작성하면 일치하는 PV만 자동으로 작성되며 {{site.data.keyword.cos_full_notm}}의 기존 버킷에 링크됩니다.
 
 시작하기 전에:
 - [{{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 작성하고 준비](#create_cos_service)하십시오.
@@ -689,7 +730,6 @@ PVC에서 선택하는 설정에 따라 다음 방법으로 {{site.data.keyword.
      name: <pvc_name>
      namespace: <namespace>
      annotations:
-       volume.beta.kubernetes.io/storage-class: "<storage_class>"
        ibm.io/auto-create-bucket: "<true_or_false>"
        ibm.io/auto-delete-bucket: "<true_or_false>"
        ibm.io/bucket: "<bucket_name>"
@@ -701,6 +741,7 @@ PVC에서 선택하는 설정에 따라 다음 방법으로 {{site.data.keyword.
      resources:
        requests:
          storage: 8Gi # Enter a fictitious value
+     storageClassName: <storage_class>
    ```
    {: codeblock}
 
@@ -717,10 +758,6 @@ PVC에서 선택하는 설정에 따라 다음 방법으로 {{site.data.keyword.
    <tr>
    <td><code>metadata.namespace</code></td>
    <td>PVC가 작성될 네임스페이스를 입력하십시오. {{site.data.keyword.cos_full_notm}} 서비스 인증 정보의 Kubernetes 시크릿이 작성되었으며 팟(Pod)이 실행될 동일 네임스페이스에서 PVC를 작성해야 합니다. </td>
-   </tr>
-   <tr>
-   <td><code>volume.beta.kubernetes.io/storage-class</code></td>
-   <td>다음 선택사항 중 하나를 선택하십시오. <ul><li><code>ibm.io/auto-create-bucket</code>이 <strong>true</strong>로 설정된 경우: 새 버킷에 사용할 스토리지 클래스를 입력하십시오. </li><li><code>ibm.io/auto-create-bucket</code>이 <strong>false</strong>로 설정된 경우: 기존 버킷의 작성에 사용된 스토리지 클래스를 입력하십시오. </br></br>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스에서 버킷을 수동으로 작성한 경우 또는 사용하던 스토리지 클래스가 기억나지 않는 경우에는 {{site.data.keyword.Bluemix}} 대시보드에서 서비스 인스턴스를 찾고 기존 버킷의 <strong>클래스</strong> 및 <strong>위치</strong>를 검토하십시오. 그리고 적합한 [스토리지 클래스](#storageclass_reference)를 사용하십시오. <p class="note">스토리지 클래스에서 설정된 {{site.data.keyword.cos_full_notm}} API 엔드포인트는 클러스터가 있는 지역을 기반으로 합니다. 클러스터가 있는 지역이 아닌 다른 지역에 있는 버킷에 액세스하려면 [사용자 정의 스토리지 클래스](cs_storage_basics.html#customized_storageclass)를 작성하고 버킷에 대한 적합한 API 엔드포인트를 사용해야 합니다.</p></li></ul>  </td>
    </tr>
    <tr>
    <td><code>ibm.io/auto-create-bucket</code></td>
@@ -746,6 +783,10 @@ PVC에서 선택하는 설정에 따라 다음 방법으로 {{site.data.keyword.
    <td><code>resources.requests.storage</code></td>
    <td>{{site.data.keyword.cos_full_notm}} 버킷의 가상 크기(기가바이트)입니다. Kubernetes에서는 이 크기가 필요하지만, {{site.data.keyword.cos_full_notm}}에서는 무시됩니다. 원하는 크기를 입력할 수 있습니다. {{site.data.keyword.cos_full_notm}}에서 사용되는 실제 영역은 다를 수 있으며, [가격 테이블 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)을 기반으로 비용이 청구됩니다. </td>
    </tr>
+   <tr>
+   <td><code>spec.storageClassName</code></td>
+   <td>다음 선택사항 중 하나를 선택하십시오. <ul><li><code>ibm.io/auto-create-bucket</code>이 <strong>true</strong>로 설정된 경우: 새 버킷에 사용할 스토리지 클래스를 입력하십시오. </li><li><code>ibm.io/auto-create-bucket</code>이 <strong>false</strong>로 설정된 경우: 기존 버킷의 작성에 사용된 스토리지 클래스를 입력하십시오. </br></br>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스에서 버킷을 수동으로 작성한 경우 또는 사용하던 스토리지 클래스가 기억나지 않는 경우에는 {{site.data.keyword.Bluemix}} 대시보드에서 서비스 인스턴스를 찾고 기존 버킷의 <strong>클래스</strong> 및 <strong>위치</strong>를 검토하십시오. 그리고 적합한 [스토리지 클래스](#cos_storageclass_reference)를 사용하십시오. <p class="note">스토리지 클래스에서 설정된 {{site.data.keyword.cos_full_notm}} API 엔드포인트는 클러스터가 있는 지역을 기반으로 합니다. 클러스터가 있는 지역이 아닌 다른 지역에 있는 버킷에 액세스하려면 [사용자 정의 스토리지 클래스](/docs/containers?topic=containers-kube_concepts#customized_storageclass)를 작성하고 버킷에 대한 적합한 API 엔드포인트를 사용해야 합니다.</p></li></ul>  </td>
+   </tr>
    </tbody>
    </table>
 
@@ -768,12 +809,12 @@ kubectl get pvc
    ```
    {: screen}
 
-4. 선택사항: 비-루트 사용자로 데이터에 액세스할 계획이거나 콘솔 또는 API를 사용하여 기존 {{site.data.keyword.cos_full_notm}} 버킷에 직접 파일을 추가한 경우에는 필요 시에 앱이 파일을 성공적으로 읽고 업데이트할 수 있도록 [파일에 올바른 권한이 지정되어 있는지](cs_troubleshoot_storage.html#cos_nonroot_access) 확인하십시오.
+4. 선택사항: 비-루트 사용자로 데이터에 액세스할 계획이거나 콘솔 또는 API를 사용하여 기존 {{site.data.keyword.cos_full_notm}} 버킷에 직접 파일을 추가한 경우에는 필요 시에 앱이 파일을 성공적으로 읽고 업데이트할 수 있도록 [파일에 올바른 권한이 지정되어 있는지](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access) 확인하십시오.
 
 4.  {: #app_volume_mount}PV를 배치에 마운트하려면 구성 `.yaml` 파일을 작성하고 PV를 바인드하는 PVC를 지정하십시오.
 
     ```
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: <deployment_name>
@@ -835,7 +876,7 @@ kubectl get pvc
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>컨테이너 내에서 볼륨이 마운트되는 디렉토리의 절대 경로입니다.</td>
+    <td>컨테이너 내에서 볼륨이 마운트되는 디렉토리의 절대 경로입니다. 다른 앱 간에 볼륨을 공유하려는 경우 각각의 앱에 대해 [볼륨 하위 경로![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath)를 지정할 수 있습니다.</td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>
@@ -902,6 +943,7 @@ kubectl get pvc
 {: #cos_statefulset}
 
 데이터베이스와 같은 stateful 앱이 있는 경우에는 앱의 데이터를 저장하기 위해 {{site.data.keyword.cos_full_notm}}를 사용하는 Stateful 세트를 작성할 수 있습니다. 또는, {{site.data.keyword.cloudant_short_notm}}와 같은 {{site.data.keyword.Bluemix_notm}} DBaaS(Database-as-a-Service)를 사용하여 데이터를 클라우드에 저장할 수 있습니다.
+{: shortdesc}
 
 시작하기 전에:
 - [{{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 작성하고 준비](#create_cos_service)하십시오.
@@ -910,7 +952,7 @@ kubectl get pvc
 
 오브젝트 스토리지를 사용하는 Stateful 세트를 배치하려면 다음 작업을 수행하십시오.
 
-1. Stateful 세트에 대한 구성 파일과 이 Stateful 세트를 노출하는 데 사용하는 서비스를 작성하십시오. 다음 예는 nginx를 3개의 복제본을 포함하는 Stateful 세트(각 복제본이 별도의 버킷을 사용하거나 모든 복제본이 동일한 버킷을 공유)로 배치하는 방법을 보여줍니다.
+1. Stateful 세트에 대한 구성 파일과 이 Stateful 세트를 노출하는 데 사용하는 서비스를 작성하십시오. 다음 예는 NGINX를 3개의 복제본을 포함하는 Stateful 세트(각 복제본이 별도의 버킷을 사용하거나 모든 복제본이 동일한 버킷을 공유)로 배치하는 방법을 보여줍니다.
 
    **3개의 복제본을 포함하는 Stateful 세트 작성 예(각 복제본이 별도의 버킷 사용)**:
    ```
@@ -1103,7 +1145,7 @@ kubectl get pvc
 
 
 ## 데이터 백업 및 복원
-{: #backup_restore}
+{: #cos_backup_restore}
 
 {{site.data.keyword.cos_full_notm}}가 데이터에 대한 높은 내구성을 제공하도록 설정되어 있으므로, 이는 데이터가 유실되지 않도록 방지합니다. [{{site.data.keyword.cos_full_notm}} 서비스 이용 약관 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www-03.ibm.com/software/sla/sladb.nsf/sla/bm-7857-03)에서 SLA를 찾을 수 있습니다.
 {: shortdesc}
@@ -1112,7 +1154,7 @@ kubectl get pvc
 {: note}
 
 ## 스토리지 클래스 참조
-{: #storageclass_reference}
+{: #cos_storageclass_reference}
 
 ### 표준
 {: #standard}
@@ -1130,7 +1172,7 @@ kubectl get pvc
 </tr>
 <tr>
 <td>기본 복원성 엔드포인트</td>
-<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오. </td>
+<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)를 참조하십시오. </td>
 </tr>
 <tr>
 <td>청크 크기</td>
@@ -1167,7 +1209,7 @@ kubectl get pvc
 </tr>
 <tr>
 <td>기본 복원성 엔드포인트</td>
-<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오. </td>
+<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)를 참조하십시오. </td>
 </tr>
 <tr>
 <td>청크 크기</td>
@@ -1204,7 +1246,7 @@ kubectl get pvc
 </tr>
 <tr>
 <td>기본 복원성 엔드포인트</td>
-<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오. </td>
+<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)를 참조하십시오. </td>
 </tr>
 <tr>
 <td>청크 크기</td>
@@ -1241,7 +1283,7 @@ kubectl get pvc
 </tr>
 <tr>
 <td>기본 복원성 엔드포인트</td>
-<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오. </td>
+<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)를 참조하십시오. </td>
 </tr>
 <tr>
 <td>청크 크기</td>

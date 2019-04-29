@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # Tutorial: Migrando um app do Cloud Foundry para um cluster
 {: #cf_tutorial}
 
@@ -28,25 +31,32 @@ lastupdated: "2018-12-05"
 
 
 ## Objetivos
+{: #cf_objectives}
 
 - Conhecer o processo geral de implementação de apps em contêineres para um cluster do Kubernetes.
 - Criar um Dockerfile de seu app código para construir uma imagem de contêiner.
 - Implementar um contêiner dessa imagem em um cluster do Kubernetes.
 
 ## Tempo Necessário
+{: #cf_time}
+
 30 minutos
 
 ## Público
+{: #cf_audience}
+
 Este tutorial é destinado a desenvolvedores de apps Cloud Foundry.
 
 ## Pré-requisitos
+{: #cf_prereqs}
 
-- [Criar um registro de imagem privada no {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
-- [Criar um cluster](cs_clusters.html#clusters_ui).
-- [Destinar sua CLI para o cluster](cs_cli_install.html#cs_cli_configure).
+- [ Crie um registro de imagem privada no  {{site.data.keyword.registrylong_notm}} ](/docs/services/Registry?topic=registry-index).
+- [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_ui).
+- [Destinar sua CLI para o cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Assegure-se de que tenha as políticas de acesso do IAM do {{site.data.keyword.Bluemix_notm}} para o {{site.data.keyword.containerlong_notm}}:
-    - [Qualquer função de plataforma](cs_users.html#platform)
-- [Conhecer a terminologia do Docker e do Kubernetes](cs_tech.html).
+    - [Qualquer função da plataforma](/docs/containers?topic=containers-users#platform)
+    - A função de serviço  [ ** Writer **  ou  ** Manager **  ](/docs/containers?topic=containers-users#platform)
+- [ Saiba mais sobre a terminologia Docker e Kubernetes ](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
 
 
 <br />
@@ -54,6 +64,7 @@ Este tutorial é destinado a desenvolvedores de apps Cloud Foundry.
 
 
 ## Lição 1: Fazer download do código do app
+{: #cf_1}
 
 Pegue seu código pronto para ir. Não tem nenhum código ainda? É possível fazer download do código de início para usar neste tutorial.
 {: shortdesc}
@@ -79,7 +90,7 @@ Pegue seu código pronto para ir. Não tem nenhum código ainda? É possível fa
 
     c. Na etapa 1 nas instruções do console, clique em **DOWNLOAD STARTER CODE**.
 
-    d. Extraia o arquivo .zip e salve seu conteúdo no diretório `cf-py`.
+    d. Extraia o arquivo `.zip` e salve seu conteúdo em seu diretório `cf-py`.
 
 Seu código de app está pronto para ser conteinerizado!
 
@@ -89,6 +100,7 @@ Seu código de app está pronto para ser conteinerizado!
 
 
 ## Lição 2: Criando uma imagem do Docker com seu código de app
+{: #cf_2}
 
 Crie um Dockerfile que inclua seu código de app e as configurações necessárias para seu contêiner. Em seguida, construa uma imagem do Docker desse Dockerfile e envie-a por push para seu registro de imagem privada.
 {: shortdesc}
@@ -177,6 +189,7 @@ inclui o Dockerfile, insira um ponto (.). Caso contrário, use o caminho relativ
 
 
 ## Lição 3: Implementar um contêiner a partir de sua imagem
+{: #cf_3}
 
 Implemente seu app como um contêiner em um cluster do Kubernetes.
 {: shortdesc}
@@ -184,7 +197,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 1. Crie um arquivo YAML de configuração denominado `cf-py.yaml` e atualize `<registry_namespace>` com o nome de seu registro de imagem privada. Esse arquivo de configuração define uma implementação de contêiner da imagem criada na lição anterior e um serviço para expor o app ao público.
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -257,7 +270,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
     a.  Obtenha o endereço IP público para o nó do trabalhador no cluster.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -265,7 +278,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 
@@ -273,11 +286,11 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
     <img src="images/python_flask.png" alt="Uma captura de tela do app Python Flask de modelo implementado." />
 
-5.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
+5.  [ Ativar o painel do Kubernetes ](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Se você selecionar seu cluster no [console do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
+    Se você selecionar seu cluster no [console do {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
     {: tip}
 
 6. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
 
-Parabéns! Seu app está implementado em um contêiner!
+Bom trabalho! Seu app está implementado em um contêiner!

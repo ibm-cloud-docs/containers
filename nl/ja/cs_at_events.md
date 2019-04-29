@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2017, 2018
-lastupdated: "2018-12-05"
+  years: 2017, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, audit
+
+subcollection: containers
 
 ---
 
@@ -33,9 +37,9 @@ lastupdated: "2018-12-05"
 
 * **Kubernetes API サーバー監査イベント**:
     * これらのイベントは自動的に生成されますが、これらのイベントを {{site.data.keyword.cloudaccesstrailshort}} サービスに転送するようにクラスターを構成する必要があります。
-    * イベントを {{site.data.keyword.cloudaccesstrailshort}} **アカウント・ドメイン**に送信するように、または、**スペース・ドメイン**に送信するように、クラスターを構成できます。 詳しくは、[監査ログの送信](/docs/containers/cs_health.html#api_forward)を参照してください。
+    * イベントを {{site.data.keyword.cloudaccesstrailshort}} **アカウント・ドメイン**に送信するように、または、**スペース・ドメイン**に送信するように、クラスターを構成できます。 詳しくは、[監査ログの送信](/docs/containers?topic=containers-health#api_forward)を参照してください。
 
-サービスの仕組みについて詳しくは、[{{site.data.keyword.cloudaccesstrailshort}} の資料](/docs/services/cloud-activity-tracker/index.html)を参照してください。 追跡される Kubernetes アクションについて詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/home/) を参照してください。
+サービスの仕組みについて詳しくは、[{{site.data.keyword.cloudaccesstrailshort}} の資料](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla)を参照してください。 追跡される Kubernetes アクションについて詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/home/) を参照してください。
 
 ## イベントの情報の検出
 {: #kube-find}
@@ -54,7 +58,7 @@ Kibana ダッシュボードでログを参照して、クラスター内のア�
 5. ログを表示する時間フレームを設定します。 デフォルトは 24 時間です。
 6. 検索を絞り込むには、`ActivityTracker_Account_Search_in_24h` の編集アイコンをクリックして、**「使用可能なフィールド」**列にフィールドを追加します。
 
-他のユーザーがアカウントとスペースのイベントを表示できるようにするには、[Granting permissions to see account events](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions) を参照してください。
+他のユーザーがアカウントとスペースのイベントを表示できるようにするには、[Granting permissions to see account events](/docs/services/cloud-activity-tracker/how-to?topic=cloud-activity-tracker-grant_permissions#grant_permissions) を参照してください。
 {: tip}
 
 ## クラスター管理イベントの追跡
@@ -145,7 +149,7 @@ Kibana ダッシュボードでログを参照して、クラスター内のア�
 {{site.data.keyword.cloudaccesstrailshort}} に送信される Kubernetes API サーバー監査イベントのリストについては、以下の表を確認してください。
 {: shortdesc}
 
-始める前に: [Kubernetes API 監査イベント](cs_health.html#api_forward)を転送するようにクラスターを構成しておいてください。
+始める前に: [Kubernetes API 監査イベント](/docs/containers?topic=containers-health#api_forward)を転送するようにクラスターを構成しておいてください。
 
 <table>
   <tr>

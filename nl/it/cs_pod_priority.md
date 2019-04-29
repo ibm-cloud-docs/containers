@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -25,11 +29,11 @@ Con la priorità e la prevenzione di pod Kubernetes, puoi configurare delle clas
 {: shortdesc}
 
 **Come imposto la priorità dei pod?**</br>
-In quanto amministratore del cluster, voi controllare quali pod sono più critici per il carico di lavoro del tuo cluster. Le classi di priorità possono aiutarti a controllare le decisioni del programma di pianificazione Kubernetes per favorire i pod con priorità più elevata rispetto a quelli con priorità più bassa. Il programma di pianificazione può anche prevenire (rimuovere) i pod con priorità più bassa che sono in esecuzione in modo da rendere possibile la pianificazione dei pod con priorità più elevata in sospeso.
+Come amministratore del cluster, vuoi controllare quali pod sono più critici per il carico di lavoro del tuo cluster. Le classi di priorità possono aiutarti a controllare le decisioni del programma di pianificazione Kubernetes per favorire i pod con priorità più elevata rispetto a quelli con priorità più bassa. Il programma di pianificazione può anche prevenire (rimuovere) i pod con priorità più bassa che sono in esecuzione in modo da rendere possibile la pianificazione dei pod con priorità più elevata in sospeso.
 
 Impostando la priorità dei pod, puoi aiutare a evitare che carichi di lavoro con priorità più bassa abbiano delle ripercussioni sui carichi di lavoro critici nel tuo cluster, in particolare nei casi in cui il cluster inizi a raggiungere la sua capacità di risorse.
 
-Assicurati di avere [configurato un accesso utente appropriato](cs_users.html#users) al tuo cluster e, se applicabile, [le politiche di sicurezza dei pod](cs_psp.html#psp). Le politiche di sicurezza dei pod e di accesso possono aiutare a evitare che utenti non ritenuti attendibili distribuiscano pod con alta priorità che impediscono la pianificazione di altri pod.
+Assicurati di avere [configurato un accesso utente appropriato](/docs/containers?topic=containers-users#users) al tuo cluster e, se applicabile, [le politiche di sicurezza dei pod](/docs/containers?topic=containers-psp#psp). Le politiche di sicurezza dei pod e di accesso possono aiutare a evitare che utenti non ritenuti attendibili distribuiscano pod con alta priorità che impediscono la pianificazione di altri pod.
 {: tip}
 
 {: #priority_scheduling}
@@ -40,8 +44,9 @@ Se non specifichi una priorità per la tua distribuzione dei pod, il valore pred
 
 Per comprendere come la priorità dei pod e il programma di pianificazione funzionano insieme, considera gli scenari nella seguente figura. Devi posizionare i pod prioritari sui nodi di lavoro con le risorse disponibili. In caso contrario, i pod ad alta priorità nel cluster possono rimanere in sospeso nello stesso momento in cui vengono rimossi i pod esistenti, come nello scenario 3.
 
-_Figura: Scenari di priorità dei pod_
-![Scenari di priorità dei pod](images/pod-priority.png)
+_Figura: scenari di priorità dei pod_
+<img src="images/pod-priority.png" width="500" alt="Scenari di priorità dei pod" style="width:500px; border-style: none"/>
+
 1.  Tre pod con priorità alta, media e bassa sono con la pianificazione in sospeso. Il programma di pianificazione trova un nodo di lavoro disponibile con spazio per tutti e 3 i pod e li pianifica in ordine di priorità con il pod con la priorità più alta pianificato per primo.
 2.  Tre pod con priorità alta, media e bassa sono con la pianificazione in sospeso. Il programma di pianificazione trova un nodo di lavoro disponibile ma il nodo di lavoro ha solo risorse sufficienti a supportare i pod con priorità alta e media. Il pod con bassa priorità non viene pianificato e rimane in sospeso.
 3.  Due pod con priorità alta e media sono in attesa di pianificazione. Un terzo pod con bassa priorità è presente su un nodo di lavoro disponibile. Tuttavia, il nodo di lavoro non ha risorse sufficienti per pianificare nessuno dei pod in sospeso. Il programma di pianificazione previene, o rimuove, il pod con bassa priorità, che riporta il pod a uno stato in sospeso. Quindi, il programma di pianificazione prova a pianificare il pod con alta priorità. Tuttavia, il nodo di lavoro non ha risorse sufficienti per pianificare il pod con alta priorità e pianifica invece il pod con media priorità.
@@ -86,8 +91,9 @@ Per impostare la priorità dei pod, devi utilizzare una classe di priorità.
 {: shortdesc}
 
 Prima di iniziare:
-* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
-* [Crea](cs_clusters.html#clusters_ui) o [aggiorna](cs_cluster_update.html#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
+* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `default`.
+* [Crea](/docs/containers?topic=containers-clusters#clusters_ui) o [aggiorna](/docs/containers?topic=containers-update#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
 
 Per utilizzare una classe di priorità:
 
@@ -167,8 +173,9 @@ Assegna una classe di priorità alla tua specifica di pod per impostare la prior
 {: shortdesc}
 
 Prima di iniziare:
-* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
-* [Crea](cs_clusters.html#clusters_ui) o [aggiorna](cs_cluster_update.html#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
+* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) nello spazio dei nomi in cui vuoi distribuire i pod.
+* [Crea](/docs/containers?topic=containers-clusters#clusters_ui) o [aggiorna](/docs/containers?topic=containers-update#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
 * [Comprendi come funziona la pianificazione delle priorità](#priority_scheduling), poiché la priorità può prevenire i pod esistenti e influenzare il modo in cui vengono utilizzate le risorse del tuo cluster.
 
 Per assegnare la priorità ai tuoi pod:
@@ -199,7 +206,7 @@ Per assegnare la priorità ai tuoi pod:
 3.  Nella tua specifica del pod, aggiungi il campo `priorityClassName` con il nome della classe di priorità che hai richiamato nel passo precedente.
 
     ```yaml
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty

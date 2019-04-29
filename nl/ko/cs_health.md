@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-06"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, logmet, logs, metrics
+
+subcollection: containers
 
 ---
 
@@ -19,35 +23,67 @@ lastupdated: "2018-12-06"
 {:download: .download}
 
 
+
 # 로깅 및 모니터링
 {: #health}
 
 {{site.data.keyword.containerlong}}의 로깅 및 모니터링을 설정하면 문제를 해결하고 Kubernetes 클러스터 및 앱의 상태와 성능을 향상시킬 수 있습니다.
 {: shortdesc}
 
-클러스터에 추가할 수 있는 기타 {{site.data.keyword.Bluemix_notm}} 또는 서드파티 로깅 서비스를 찾으십니까? [LogDNA의 {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)도 포함하여 [통합 로깅 및 모니터링](cs_integrations.html#health_services)을 확인하십시오
-{: note}
+지속적 모니터링과 로깅은 클러스터에 대한 공격을 감지하고 이의 발생 시에 문제를 해결하는 열쇠입니다. 클러스터를 지속적으로 모니터링함으로써 사용자는 클러스터의 용량은 물론 앱에 사용 가능한 리소스의 가용성을 보다 잘 파악할 수 있습니다. 이 인사이트를 사용하면 가동 중단 시에 앱을 보호할 수 있도록 준비할 수 있습니다. **참고**: 로깅 및 모니터링를 구성하려면 {{site.data.keyword.containerlong_notm}}에서 표준 클러스터를 사용해야 합니다.
+
+## 로깅 솔루션 선택
+{: #logging_overview}
+
+기본적으로 로그는 다음의 모든 {{site.data.keyword.containerlong_notm}} 클러스터 컴포넌트에 대해 로컬로 생성되고 기록됩니다. 작업자 노드, 컨테이너, 애플리케이션, 지속적 스토리지, Ingress 애플리케이션 로드 밸런서, Kubernetes API 및 `kube-system-system` 네임스페이스. 이러한 로그를 수집, 전달 및 볼 수 있는 여러 가지 로깅 솔루션을 사용할 수 있습니다.
+{: shortdesc}
+
+로그를 수집해야 하는 클러스터 컴포넌트를 기준으로 로깅 솔루션을 선택할 수 있습니다. 일반적인 구현은 분석 및 인터페이스 기능(예: {{site.data.keyword.loganalysisfull}}, {{site.data.keyword.la_full}} 또는 서드파티 서비스)에 따라 원하는 로깅 서비스를 선택하는 것입니다. 그런 다음 {{site.data.keyword.cloudaccesstrailfull}}를 사용하여 클러스터의 사용자 활동을 감사하고 클러스터 마스터 로그를 {{site.data.keyword.cos_full}}에 백업할 수 있습니다. **참고**: 로깅을 구성하려면 표준 Kubernetes 클러스터가 있어야 합니다.
+
+<dl>
+
+<dt>{{site.data.keyword.loganalysisfull_notm}} 또는 syslog를 사용하는 Fluentd</dt>
+<dd>클러스터 컴포넌트의 로그를 수집, 전달 및 보기 위해 Fluentd를 사용하여 로깅 구성을 작성할 수 있습니다. 로깅 구성을 작성하면 [Fluentd ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.fluentd.org/) 클러스터 추가 기능이 특정 소스의 경로에서 로그를 수집합니다. 그런 다음 Fluentd는 이 로그를 {{site.data.keyword.loganalysisfull_notm}} 또는 외부 syslog에 전달합니다.
+
+<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov)는 로그 콜렉션, 보존 및 검색 기능을 확장합니다. 소스의 로그를 {{site.data.keyword.loganalysisfull_notm}}에 전달하는 로깅 구성을 작성하면 Kibana 대시보드에서 로그를 볼 수 있습니다.</li>
+
+<li><strong>외부 syslog 서버</strong>: syslog 프로토콜을 허용하는 외부 서버를 설정합니다. 그러면 클러스터의 소스에 대한 로깅 구성을 작성하여 해당 외부 서버에 로그를 전달할 수 있습니다.</li></ul>
+
+시작하려면 [클러스터 및 앱 로그 전달 이해](#logging)를 참조하십시오.
+</dd>
+
+<dt>{{site.data.keyword.la_full_notm}}</dt>
+<dd>LogDNA를 클러스터에 서드파티 서비스로 배치하여 팟(Pod) 컨테이너 로그를 관리합니다. {{site.data.keyword.la_full_notm}}를 사용하려면 클러스터의 모든 작업자 노드에 로깅 에이전트를 배치해야 합니다. 이 에이전트는 `kube-system`을 포함하여 모든 네임스페이스에서 팟(Pod)의 `/var/log` 디렉토리에 저장되는 `*.log` 확장자와 확장자 없는 파일을 사용하여 로그를 수집합니다. 그런 다음 에이전트는 로그를 {{site.data.keyword.la_full_notm}} 서비스에 전달합니다.서비스에 대한 자세한 정보는 [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) 문서를 참조하십시오. 시작하려면 [LogDNA로 {{site.data.keyword.loganalysisfull_notm}}에서 Kubernetes 클러스터 로그 관리](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube)를 참조하십시오.</dd>
+
+<dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
+<dd>클러스터에서 작성된 사용자 시작 관리 활동을 모니터링하려면 감사 로그를 수집하고 {{site.data.keyword.cloudaccesstrailfull_notm}}에 전달할 수 있습니다. 클러스터는 두 가지 유형의 {{site.data.keyword.cloudaccesstrailshort}} 이벤트를 생성합니다.
+
+<ul><li>클러스터 관리 이벤트는 자동으로 생성되며 {{site.data.keyword.cloudaccesstrailshort}}에 전달됩니다.</li>
+
+<li>Kubernetes API 서버 감사 이벤트가 자동으로 생성되지만 Fluentd가 이 로그를 {{site.data.keyword.loganalysisshort}}에 전달할 수 있도록 [로깅 구성을 작성](#api_forward)해야 합니다. 그런 다음 {{site.data.keyword.cloudaccesstrailshort}}가 이 로그를 {{site.data.keyword.loganalysisshort}}에서 가져옵니다.</li></ul>
+
+추적할 수 있는 {{site.data.keyword.containerlong_notm}} 이벤트의 유형에 대한 자세한 정보는 [활동 트래커 이벤트](/docs/containers?topic=containers-at_events)를 참조하십시오. 서비스에 대한 자세한 정보는 [활동 트래커](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla) 문서를 참조하십시오.
+</dd>
+
+<dt>{{site.data.keyword.cos_full_notm}}</dt>
+<dd>클러스터의 Kubernetes 마스터의 로그를 수집하고 전달하며 보려면, 특정 시점에서 마스터 로그의 스냅샷을 작성하여 {{site.data.keyword.cos_full_notm}} 버킷에 수집할 수 있습니다. 이 스냅샷은 팟(Pod) 스케줄링, 배치 또는 RBAC 정책과 같이 API 서버를 통해 전송된 모든 항목을 포함합니다. 시작하려면 [마스터 로그 수집](#collect_master)을 참조하십시오.</dd>
+
+<dt>서드파티 서비스</dt>
+<dd>특별 요구사항이 있는 경우에는 자체 로깅 솔루션을 설정할 수 있습니다. [ 로깅 및 모니터링 통합](/docs/containers?topic=containers-integrations#health_services)에서 클러스터에 추가할 수 있는 서드파티 로깅 서비스를 확인하십시오. Kubernetes 버전 1.11 이상을 실행하는 클러스터에서는 `/var/log/pods/` 경로에서 컨테이너 로그를 수집할 수 있습니다. Kubernetes 버전 1.10 이하를 실행하는 클러스터에서는 `/var/lib/docker/containers/` 경로에서 컨테이너 로그를 수집할 수 있습니다.</dd>
+
+</dl>
 
 ## 클러스터 및 앱 로그 전달 이해
 {: #logging}
 
-지속적 모니터링과 로깅은 클러스터에 대한 공격을 감지하고 이의 발생 시에 문제를 해결하는 열쇠입니다. 클러스터를 지속적으로 모니터링함으로써 사용자는 클러스터의 용량은 물론 앱에 사용 가능한 리소스의 가용성을 보다 잘 파악할 수 있습니다. 이를 이용하면 가동 중단 시에 앱을 보호할 수 있도록 적절하게 준비할 수 있습니다. 로깅을 구성하려면 {{site.data.keyword.containerlong_notm}}에서 표준 Kubernetes 클러스터 관련 작업을 수행해야 합니다.
+기본적으로, 로그는 클러스터의 [Fluentd ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.fluentd.org/) 추가 기능에 의해 수집됩니다. 컨테이너와 같은 클러스터의 소스에 대한 로깅 구성을 작성하는 경우, 해당 소스의 경로에서 Fluentd가 수집한 로그는 {{site.data.keyword.loganalysisshort_notm}} 또는 외부 syslog 서버로 전달됩니다. 소스에서 로깅 서비스로의 트래픽은 유입 포트에서 암호화됩니다.
 {: shortdesc}
 
-
-**IBM에서 내 클러스터를 모니터합니까?**
-
-모든 Kubernetes 마스터는 IBM에 의해 지속적으로 모니터됩니다. {{site.data.keyword.containerlong_notm}}는 Kubernetes 마스터가 배치된 모든 노드를 자동으로 스캔하여 Kubernetes 및 OS 특정 보안 수정사항에서 발견된 취약성을 찾습니다. 취약성이 발견된 경우 {{site.data.keyword.containerlong_notm}}에서 자동으로 수정사항을 적용하고 사용자 대신 취약성을 해결하여 마스터 노드 보호를 보장합니다. 사용자는 나머지 클러스터에 대한 로그를 모니터하고 분석하는 일을 담당합니다.
-
-**로그는 어떻게 수집됩니까?**
-
-로그는 클러스터의 [Fluentd ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.fluentd.org/) 추가 기능에 의해 수집됩니다. 클러스터에 소스에 대한 로깅 구성을 작성하면 Fluentd 추가 기능이 해당 소스의 경로에서 로그를 수집합니다. 그 후 로그는 {{site.data.keyword.loganalysisshort_notm}} 또는 외부 syslog 서버에 전달됩니다.
-
-**해당 로깅을 구성할 수 있는 소스는 무엇입니까?**
+**해당 로그 전달을 구성할 수 있는 소스는 무엇입니까?**
 
 다음 이미지에서 해당 로깅을 구성할 수 있는 소스의 위치를 확인할 수 있습니다.
 
-<img src="images/log_sources.png" width="550" alt="클러스터에 있는 로그 소스" style="width:550px; border-style: none"/>
+<img src="images/log_sources.png" width="600" alt="클러스터의 로그 소스" style="width:600px; border-style: none"/>
 
 1. `worker`: 작업자 노드에 대해 보유하고 있는 인프라 구성에 특정한 정보입니다. 작업자 로그는 syslog에서 캡처되며 이에는 운영 체제 이벤트가 포함됩니다. `auth.log`에서는 OS에 대해 작성된 인증 요청에 대한 정보를 찾을 수 있습니다.</br>**경로**:
     * `/var/log/syslog`
@@ -75,7 +111,7 @@ lastupdated: "2018-12-06"
 
 6. `kube-audit`: 시간, 사용자 및 영향을 받은 리소스를 포함하여 Kubernetes API 서버로 전송된 클러스터 관련 조치에 대한 정보입니다.
 
-7. `ingress`: Ingress 애플리케이션 로드 밸런서를 통해 클러스터로 유입되는 네트워크 트래픽에 대한 정보입니다. 특정 구성 정보는 [Ingress 문서](cs_ingress_health.html#ingress_logs)를 확인하십시오.</br>**경로**:
+7. `ingress`: Ingress 애플리케이션 로드 밸런서를 통해 클러스터로 유입되는 네트워크 트래픽에 대한 정보입니다. 특정 구성 정보는 [Ingress 문서](/docs/containers?topic=containers-ingress_health#ingress_logs)를 확인하십시오.</br>**경로**:
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
@@ -112,7 +148,7 @@ lastupdated: "2018-12-06"
     </tr>
     <tr>
       <td><code><em>--hostname</em></code></td>
-      <td><p>{{site.data.keyword.loganalysisshort_notm}}의 경우 [유입 URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)을 사용하십시오. 유입 URL을 지정하지 않으면 클러스터가 작성된 지역의 엔드포인트가 사용됩니다.</p>
+      <td><p>{{site.data.keyword.loganalysisshort_notm}}의 경우 [유입 URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls)을 사용하십시오. 유입 URL을 지정하지 않으면 클러스터가 작성된 지역의 엔드포인트가 사용됩니다.</p>
       <p>syslog의 경우 로그 콜렉터 서비스의 호스트 이름 또는 IP 주소를 지정하십시오.</p></td>
     </tr>
     <tr>
@@ -155,35 +191,43 @@ lastupdated: "2018-12-06"
   </tbody>
 </table>
 
-**업데이트된 로깅에 대해 Fluentd를 유지해야 합니까?**
+**업데이트된 Fluentd를 유지해야 합니까?**
 
-로깅 또는 필터 구성을 변경하려면 Fluentd 로깅 추가 기능이 최신 버전이어야 합니다. 기본적으로는 추가 기능에 대한 자동 업데이트가 사용됩니다. 자동 업데이트를 사용하지 않으려면 [클러스터 추가 기능 업데이트: 로깅을 위한 Fluentd](cs_cluster_update.html#logging)를 참조하십시오.
+로깅 또는 필터 구성을 변경하려면 Fluentd 로깅 추가 기능이 최신 버전이어야 합니다. 기본적으로는 추가 기능에 대한 자동 업데이트가 사용됩니다. 자동 업데이트를 사용하지 않으려면 [클러스터 추가 기능 업데이트: 로깅을 위한 Fluentd](/docs/containers?topic=containers-update#logging)를 참조하십시오.
 
-**보유하고 있는 자체 로깅 솔루션을 사용할 수도 있습니까?**
+**클러스터에 있는 하나의 소스에서 일부 로그만 전달할 수 있습니까?**
 
-특별 요구사항이 있는 경우에는 클러스터에 자체 로깅 솔루션을 설정할 수 있습니다. Kubernetes 버전 1.11 이상을 실행하는 클러스터에서는 `/var/log/pods/` 경로에서 컨테이너 로그를 수집할 수 있습니다. Kubernetes 버전 1.10 이하를 실행하는 클러스터에서는 `/var/lib/docker/containers/` 경로에서 컨테이너 로그를 수집할 수 있습니다.
+예. 예를 들어, 특별히 로그가 많이 생성되는 팟(Pod)이 있는 경우에는 해당 팟(Pod)이 로그 스토리지 공간을 차지하지 않도록 하면서 다른 팟(Pod)의 로그는 전달되도록 할 수 있습니다. 특정 팟(Pod)의 로그가 전달되지 않도록 하려면 [로그 필터링](#filter-logs)을 참조하십시오.
+
+**여러 개의 팀이 하나의 클러스터에서 작업합니다. 팀별로 로그를 구분하는 방법은 무엇입니까?**
+
+컨테이너 로그를 하나의 네임스페이스에서 하나의 Cloud Foundry 영역으로 전달하고 컨테이너 로그를 다른 네임스페이스에서 다른 Cloud Foundry 영역으로 전달할 수 있습니다. 각 네임스페이스에 대해 `container` 로그 소스에 대한 로그 전달 구성을 작성하십시오. 구성을 적용할 팀의 네임스페이스를 `--namespace` 플래그로 지정하고 로그가 전달되는 팀의 영역을 `--space` 플래그로 지정하십시오. 또한 선택적으로 영역 내의 Cloud Foundry 조직을 `--org` 플래그로 지정할 수도 있습니다.
 
 <br />
 
 
-## 로그 전달 구성
+## 클러스터 및 앱 로그 전달 구성
 {: #configuring}
 
-콘솔 또는 CLI를 통해 {{site.data.keyword.containerlong_notm}}에 대한 로깅을 구성할 수 있습니다.
+콘솔 또는 CLI를 통해 {{site.data.keyword.containerlong_notm}} 표준 클러스터에 대한 로깅을 구성할 수 있습니다.
 {: shortdesc}
 
 ### {{site.data.keyword.Bluemix_notm}} 콘솔을 사용하여 로그 전달 사용
 {: #enable-forwarding-ui}
 
 {{site.data.keyword.containerlong_notm}} 대시보드에서 로그 전달을 구성할 수 있습니다. 이 프로세스를 완료하는 데 몇 분 정도 걸릴 수 있으므로 로그가 즉시 표시되지 않으면 몇 분 동안 기다린 후 다시 확인하십시오.
+{: shortdesc}
 
 계정 레벨에서 구성을 작성하려면 특정 컨테이너 네임스페이스에 대해 또는 앱 로깅에 대해 CLI를 사용하십시오.
 {: tip}
 
-1. 대시보드의 **개요** 탭으로 이동하십시오.
-2. 로그를 전달할 Cloud Foundry 조직 및 영역을 선택하십시오. 대시보드에서 로그 전달을 구성하면 로그가 클러스터의 기본 {{site.data.keyword.loganalysisshort_notm}} 엔드포인트에 전송됩니다. 로그를 외부 서버 또는 다른 {{site.data.keyword.loganalysisshort_notm}} 엔드포인트에 전달하려면 CLI를 사용하여 로깅을 구성하십시오.
-3. 로그를 전달할 로그 소스를 선택하십시오.
-4. **작성**을 클릭하십시오.
+시작하기 전에 사용할 표준 클러스터를 [작성](/docs/containers?topic=containers-clusters#clusters)하거나 식별하십시오.
+
+1. [{{site.data.keyword.Bluemix_notm}} 콘솔](https://cloud.ibm.com/containers-kubernetes/clusters)에 로그인하여 **Kubernetes > 클러스터**로 이동하십시오.
+2. 표준 클러스터를 선택하고 **개요** 탭의 **로그** 필드에서 **사용**을 클릭하십시오.
+3. 로그를 전달할 **Cloud Foundry 조직g** 및 **영역**을 선택하십시오. 대시보드에서 로그 전달을 구성하면 로그가 클러스터의 기본 {{site.data.keyword.loganalysisshort_notm}} 엔드포인트에 전송됩니다. 로그를 외부 서버 또는 다른 {{site.data.keyword.loganalysisshort_notm}} 엔드포인트에 전달하려면 CLI를 사용하여 로깅을 구성하십시오.
+4. 로그를 전달할 **로그 소스**를 선택하십시오.
+5. **작성**을 클릭하십시오.
 
 </br>
 </br>
@@ -192,24 +236,27 @@ lastupdated: "2018-12-06"
 {: #enable-forwarding}
 
 클러스터 로깅에 대한 구성을 작성할 수 있습니다. 플래그를 사용하여 서로 다른 로깅 옵션 간에 구분할 수 있습니다.
+{: shortdesc}
+
+시작하기 전에 사용할 표준 클러스터를 [작성](/docs/containers?topic=containers-clusters#clusters)하거나 식별하십시오.
 
 **IBM에 로그 전달**
 
 1. 권한을 확인하십시오.
-    1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
-    2. 클러스터를 작성할 때 영역을 지정한 경우, 사용자와 {{site.data.keyword.containerlong_notm}} API 키 소유자 모두는 해당 영역의 [**개발자** Cloud Foundry 역할](/docs/iam/mngcf.html)이 필요합니다.
+    1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
+    2. 클러스터를 작성할 때 영역을 지정한 경우, 사용자와 {{site.data.keyword.containerlong_notm}} API 키 소유자 모두는 해당 영역의 [**개발자** Cloud Foundry 역할](/docs/iam?topic=iam-mngcf)이 필요합니다.
       * {{site.data.keyword.containerlong_notm}} API 키 소유자가 누구인지 모르는 경우에는 다음 명령을 실행하십시오.
           ```
-      ibmcloud ks api-key-info <cluster_name>
+          ibmcloud ks api-key-info --cluster <cluster_name>
           ```
           {: pre}
-      * 변경사항을 즉시 적용하려면 다음 명령을 실행하십시오.
+      * 권한을 변경하는 경우, 다음 명령을 실행하여 즉시 변경사항을 적용할 수 있습니다.
           ```
-      ibmcloud ks logging-config-refresh <cluster_name>
+          ibmcloud ks logging-config-refresh --cluster <cluster_name>
           ```
           {: pre}
 
-2.  로그 소스가 있는 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+2.  로그 소스가 있는 표준 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
     데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 퍼블릭 조직 및 영역을 대상으로 지정해야 합니다.
     {: tip}
@@ -251,9 +298,9 @@ lastupdated: "2018-12-06"
 
 **`udp` 또는 `tcp` 프로토콜을 통해 사용자의 자체 서버로 로그 전달**
 
-1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
+1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
 
-2. 로그 소스가 있는 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
+2. 로그 소스가 있는 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
 
 3. 로그를 syslog에 전달하려면 다음 두 가지 방법 중 하나를 사용하여 syslog 프로토콜을 허용하는 서버를 설정하십시오.
   * 자체 서버를 설정하여 관리하거나 제공자가 관리하도록 하십시오. 제공자가 사용자 대신 서버를 관리하는 경우 로깅 제공자로부터 로깅 엔드포인트를 가져오십시오.
@@ -278,9 +325,11 @@ lastupdated: "2018-12-06"
 다음 단계는 일반 지시사항입니다. 프로덕션 환경에서 컨테이너를 사용하기 전에 필요한 보안 요구사항이 충족되었는지 확인하십시오.
 {: tip}
 
-1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
+1. 다음 [{{site.data.keyword.Bluemix_notm}} IAM 역할](/docs/containers?topic=containers-users#platform)을 보유하고 있는지 확인하십시오.
+    * 클러스터에 대한 **편집자** 또는 **관리자** 플랫폼 역할
+    * `kube-system` 네임스페이스에 대한 **작성자** 또는 **관리자** 서비스 역할
 
-2. 로그 소스가 있는 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
+2. 로그 소스가 있는 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
 
 3. 다음 두 가지 방법 중 하나로 syslog 프로토콜을 허용하는 서버를 설정하십시오.
   * 자체 서버를 설정하여 관리하거나 제공자가 관리하도록 하십시오. 제공자가 사용자 대신 서버를 관리하는 경우 로깅 제공자로부터 로깅 엔드포인트를 가져오십시오.
@@ -312,27 +361,27 @@ lastupdated: "2018-12-06"
 
 * 클러스터의 모든 로깅 구성을 나열하려면 다음을 실행하십시오.
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 * 로그 소스의 한 가지 유형에 대한 로깅 구성을 나열하려면 다음을 실행하십시오.
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID> --logsource <source>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
 
-</br>
-</br>
+</br></br>
 
 ### 로그 전달 업데이트
 {: #updating-forwarding}
 
 이미 작성한 로깅 구성을 업데이트할 수 있습니다.
+{: shortdesc}
 
 1. 로그 전달 구성을 업데이트하십시오.
     ```
-    ibmcloud ks logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+    ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
     ```
     {: pre}
 
@@ -345,14 +394,14 @@ lastupdated: "2018-12-06"
 클러스터에 대한 하나 또는 모든 로깅 구성의 로그 전달을 중지할 수 있습니다.
 {: shortdesc}
 
-1. 로그 소스가 있는 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+1. 로그 소스가 있는 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 2. 로깅 구성을 삭제하십시오.
   <ul>
   <li>하나의 로깅 구성을 삭제하려면 다음을 수행하십시오.</br>
-    <pre><code>ibmcloud ks logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
+    <pre><code>ibmcloud ks logging-config-rm --cluster &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
   <li>모든 로깅 구성을 삭제하려면 다음을 수행하십시오.</br>
-    <pre><code>ibmcloud ks logging-config-rm <my_cluster> --all</pre></code></li>
+    <pre><code>ibmcloud ks logging-config-rm --cluster <my_cluster> --all</pre></code></li>
   </ul>
 
 </br>
@@ -370,21 +419,21 @@ lastupdated: "2018-12-06"
 Kibana 대시보드를 통해 {{site.data.keyword.loganalysislong_notm}}에 전달한 로그를 볼 수 있습니다.
 {: shortdesc}
 
-구성 파일을 작성하는 데 기본값을 사용한 경우 클러스터가 작성된 계정 또는 조직 및 영역에서 로그를 찾을 수 있습니다. 구성 파일에서 조직 및 영역을 지정한 경우 해당 영역에서 로그를 찾을 수 있습니다. 로깅에 대한 자세한 정보는 [{{site.data.keyword.containerlong_notm}}에 대한 로깅](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)을 참조하십시오.
+구성 파일을 작성하는 데 기본값을 사용한 경우 클러스터가 작성된 계정 또는 조직 및 영역에서 로그를 찾을 수 있습니다. 구성 파일에서 조직 및 영역을 지정한 경우 해당 영역에서 로그를 찾을 수 있습니다. 로깅에 대한 자세한 정보는 [{{site.data.keyword.containerlong_notm}}에 대한 로깅](/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kubernetes#containers_kubernetes)을 참조하십시오.
 
 Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 클러스터에 대한 로그 전달을 구성한 {{site.data.keyword.Bluemix_notm}} 계정 또는 영역을 선택하십시오.
-- 미국 남부 및 미국 동부: https://logging.ng.bluemix.net
-- 영국 남부: https://logging.eu-gb.bluemix.net
-- 중앙 유럽: https://logging.eu-fra.bluemix.net
-- 아시아/태평양 남부 및 아시아/태평양 북부: https://logging.au-syd.bluemix.net
+- 미국 남부 및 미국 동부: `https://logging.ng.bluemix.net`
+- 영국 남부: `https://logging.eu-gb.bluemix.net`
+- 중앙 유럽: `https://logging.eu-fra.bluemix.net`
+- 아시아/태평양 남부 및 아시아/태평양 북부: `https://logging.au-syd.bluemix.net`
 
-로그 보기에 대한 자세한 정보는 [웹 브라우저에서 Kibana로 이동](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser)을 참조하십시오.
+로그 보기에 대한 자세한 정보는 [웹 브라우저에서 Kibana로 이동](/docs/services/CloudLogAnalysis/kibana?topic=cloudloganalysis-launch#launch_Kibana_from_browser)을 참조하십시오.
 
 </br>
 
 **컨테이너 로그**
 
-기본 제공 컨테이너 런타임 로깅 기능을 활용하여 표준 STDOUT 및 STDERR 출력 스트림에서 활동을 검토할 수 있습니다. 자세한 정보는 [Kubernetes 클러스터에서 실행되는 컨테이너에 대한 컨테이너 로그 보기](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)를 참조하십시오.
+기본 제공 컨테이너 런타임 로깅 기능을 활용하여 표준 STDOUT 및 STDERR 출력 스트림에서 활동을 검토할 수 있습니다. 자세한 정보는 [Kubernetes 클러스터에서 실행되는 컨테이너에 대한 컨테이너 로그 보기](/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kubernetes#containers_kubernetes)를 참조하십시오.
 
 <br />
 
@@ -393,6 +442,7 @@ Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 
 {: #filter-logs}
 
 일정 기간 동안의 특정 로그를 필터링하여 전달하는 로그를 선택할 수 있습니다. 플래그를 사용하여 서로 다른 필터링 옵션 간에 구분할 수 있습니다.
+{: shortdesc}
 
 <table>
 <caption>로그 필터링에 대한 옵션 이해</caption>
@@ -443,7 +493,6 @@ Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 
   </tbody>
 </table>
 
-
 1. 로깅 필터를 작성하십시오.
   ```
   ibmcloud ks logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
@@ -453,20 +502,20 @@ Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 
 2. 작성한 로그 필터를 보십시오.
 
   ```
-  ibmcloud ks logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ibmcloud ks logging-filter-get --cluster <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
   ```
   {: pre}
 
 3. 작성한 로그 필터를 업데이트하십시오.
   ```
-  ibmcloud ks logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  ibmcloud ks logging-filter-update --cluster <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
 
 4. 작성한 로그 필터를 삭제하십시오.
 
   ```
-  ibmcloud ks logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
+  ibmcloud ks logging-filter-rm --cluster <cluster_name_or_ID> --id <filter_ID> [--all]
   ```
   {: pre}
 
@@ -483,23 +532,23 @@ Kubernetes가 API 서버를 통해 전달된 모든 이벤트를 자동으로 �
 
 Kubernetes 감사 로그에 대한 자세한 정보는 Kubernetes 문서에서 <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">감사 주제<img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.
 
-* Kubernetes API 감사 로그의 전달은 Kubernetes 버전 1.9 이상에서만 지원됩니다.
 * 현재 이 로깅 구성의 모든 클러스터에 대해 기본 감사 정책이 사용됩니다.
 * 현재는 필터가 지원되지 않습니다.
 * 클러스터당 하나의 `kube-audit` 구성만 있을 수 있지만 로깅 구성과 웹훅을 작성하여 로그를 {{site.data.keyword.loganalysisshort_notm}} 및 외부 서버로 전달할 수 있습니다.
-* 클러스터에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있어야 합니다.
+* 클러스터에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](/docs/containers?topic=containers-users#platform)이 있어야 합니다.
 
 
 ### 감사 로그를 {{site.data.keyword.loganalysisshort_notm}}에 전송
 {: #audit_enable_loganalysis}
 
 Kubernetes API 서버 감사 로그를 {{site.data.keyword.loganalysisshort_notm}}로 전달할 수 있습니다.
+{: shortdesc}
 
 **시작하기 전에**
 
 1. 권한을 확인하십시오. 클러스터 또는 로깅 구성을 작성할 때 영역을 지정한 경우 계정 소유자 및 {{site.data.keyword.containerlong_notm}} 키 소유자 모두에 해당 영역의 관리자, 개발자 또는 감사자 권한이 필요합니다.
 
-2. API 서버 감사 로그를 수집할 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
+2. API 서버 감사 로그를 수집할 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
 
 **로그 전달**
 
@@ -536,7 +585,7 @@ Kubernetes API 서버 감사 로그를 {{site.data.keyword.loganalysisshort_notm
         </tr>
         <tr>
           <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
-          <td>로그를 전달할 엔드포인트입니다. [유입 URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)을 지정하지 않으면 클러스터를 작성한 지역의 엔드포인트가 사용됩니다.</td>
+          <td>로그를 전달할 엔드포인트입니다. [유입 URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls)을 지정하지 않으면 클러스터를 작성한 지역의 엔드포인트가 사용됩니다.</td>
         </tr>
         <tr>
           <td><code><em>&lt;cluster_space&gt;</em></code></td>
@@ -552,13 +601,13 @@ Kubernetes API 서버 감사 로그를 {{site.data.keyword.loganalysisshort_notm
 2. 계획한 대로 구현되었는지 확인하려면 클러스터 로깅 구성을 보십시오.
 
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
     예제 명령 및 출력:
     ```
-    ibmcloud ks logging-config-get myCluster
+    ibmcloud ks logging-config-get --cluster myCluster
     Retrieving cluster myCluster logging configurations...
     OK
     Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
@@ -580,7 +629,7 @@ Kubernetes API 서버 감사 로그를 {{site.data.keyword.loganalysisshort_notm
 
 1. 로그를 전달할 수 있는 원격 로깅 서버를 설정하십시오. 예를 들어, [Logstash를 Kubernetes와 함께 사용![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend)하여 감사 이벤트를 수집할 수 있습니다.
 
-2. API 서버 감사 로그를 수집할 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
+2. API 서버 감사 로그를 수집할 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
 
 Kubernetes API 감사 로그를 전달하려면 다음을 수행하십시오.
 
@@ -637,12 +686,12 @@ Kubernetes API 감사 로그를 전달하려면 다음을 수행하십시오.
 3. Kubernetes 마스터를 다시 시작하여 구성 업데이트를 적용하십시오.
 
     ```
-    ibmcloud ks apiserver-refresh <cluster_name_or_ID>
+    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 4. 선택사항: 감사 로그 전달을 중지하려는 경우 구성을 사용 안함으로 설정할 수 있습니다.
-    1. API 서버 감사 로그를 수집 중단할 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+    1. API 서버 감사 로그를 수집 중단할 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
     2. 클러스터의 API 서버에 대해 웹훅 백엔드 구성을 사용하지 않도록 설정하십시오.
 
         ```
@@ -653,7 +702,7 @@ Kubernetes API 감사 로그를 전달하려면 다음을 수행하십시오.
     3. Kubernetes 마스터를 다시 시작하여 구성 업데이트를 적용하십시오.
 
         ```
-        ibmcloud ks apiserver-refresh <cluster_name_or_ID>
+        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -670,14 +719,14 @@ Kubernetes API 서버 로그는 자동으로 스트리밍되므로, 입력되는
 
 **시작하기 전에**
 
-* {{site.data.keyword.Bluemix_notm}} 카탈로그에서 {{site.data.keyword.cos_short}}의 [인스턴스를 프로비저닝](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage)하십시오.
-* 클러스터에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
+* {{site.data.keyword.Bluemix_notm}} 카탈로그에서 {{site.data.keyword.cos_short}}의 [인스턴스를 프로비저닝](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-for-developers#provision-an-instance-of-ibm-cloud-object-storage)하십시오.
+* 클러스터에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
 
 **스냅샷 작성**
 
-1. [이 시작하기 튜토리얼](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets)에 따라 {{site.data.keyword.Bluemix_notm}} 콘솔을 통해 오브젝트 스토리지 버킷을 작성하십시오.
+1. [이 시작하기 튜토리얼](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started-console-#create-buckets)에 따라 {{site.data.keyword.Bluemix_notm}} 콘솔을 통해 오브젝트 스토리지 버킷을 작성하십시오.
 
-2. 작성한 버킷에 [HMAC 서비스 인증 정보](/docs/services/cloud-object-storage/iam/service-credentials.html)를 생성하십시오.
+2. 작성한 버킷에 [HMAC 서비스 인증 정보](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials)를 생성하십시오.
   1. {{site.data.keyword.cos_short}} 대시보드의 **서비스 인증 정보** 탭에서 **새 인증 정보**를 클릭하십시오.
   2. HMAC 인증 정보에 `Writer` 서비스 역할을 부여하십시오.
   3. **인라인 구성 매개변수 추가** 필드에 `{"HMAC":true}`를 지정하십시오.
@@ -723,41 +772,48 @@ Kubernetes API 서버 로그는 자동으로 스트리밍되므로, 입력되는
 <br />
 
 
-## 메트릭 보기
+## 모니터링 솔루션 선택
 {: #view_metrics}
 
-메트릭은 클러스터의 상태와 성능을 모니터하는 데 도움이 됩니다. 표준 Kubernetes 및 컨테이너 런타임 기능을 사용하여 클러스터와 앱의 상태를 모니터할 수 있습니다. **참고**: 모니터링은 표준 클러스터에서만 지원됩니다.
+메트릭은 클러스터의 상태와 성능을 모니터링하는 데 도움이 됩니다. 표준 Kubernetes 및 컨테이너 런타임 기능을 사용하여 클러스터와 앱의 상태를 모니터링할 수 있습니다. **참고**: 모니터링은 표준 클러스터에서만 지원됩니다.
 {:shortdesc}
+
+**IBM에서 내 클러스터를 모니터링합니까?**
+
+모든 Kubernetes 마스터는 IBM에 의해 지속적으로 모니터링됩니다. {{site.data.keyword.containerlong_notm}}는 Kubernetes 마스터가 배치된 모든 노드를 자동으로 스캔하여 Kubernetes 및 OS 특정 보안 수정사항에서 발견된 취약성을 찾습니다. 취약성이 발견된 경우 {{site.data.keyword.containerlong_notm}}에서 자동으로 수정사항을 적용하고 사용자 대신 취약성을 해결하여 마스터 노드 보호를 보장합니다. 사용자는 나머지 클러스터 컴포넌트에 대한 로그를 모니터링하고 분석하는 일을 담당합니다.
+
+메트릭 서비스를 사용할 때 충돌을 피하려면 리소스 그룹 및 지역 전체에서 클러스터가 고유한 이름을 갖도록 하십시오.
+{: tip}
 
 <dl>
   <dt>{{site.data.keyword.Bluemix_notm}}의 클러스터 세부사항 페이지</dt>
     <dd>{{site.data.keyword.containerlong_notm}}는 클러스터의 상태와 용량 및 클러스터 리소스의 사용에 대한 정보를 제공합니다. 이 콘솔을 사용하면 클러스터를 확장하고 지속적 스토리지 관련 작업을 수행하며 {{site.data.keyword.Bluemix_notm}} 서비스 바인딩을 통해 클러스터에 기능을 더 추가할 수 있습니다. 클러스터 세부사항 페이지를 보려면 **{{site.data.keyword.Bluemix_notm}}대시보드**로 이동하고 클러스터를 선택하십시오.</dd>
   <dt>Kubernetes 대시보드</dt>
-    <dd>Kubernetes 대시보드는 작업자 노드의 상태를 검토하고 Kubernetes 리소스를 찾으며 컨테이너화된 앱을 배치하고 로깅 및 모니터링 정보를 사용하여 앱의 문제점을 해결할 수 있는 관리 웹 인터페이스입니다. Kubernetes 대시보드에 액세스하는 방법에 대한 자세한 정보는 [{{site.data.keyword.containerlong_notm}}의 Kubernetes 대시보드 시작](cs_app.html#cli_dashboard)을 참조하십시오.</dd>
+    <dd>Kubernetes 대시보드는 작업자 노드의 상태를 검토하고 Kubernetes 리소스를 찾으며 컨테이너화된 앱을 배치하고 로깅 및 모니터링 정보를 사용하여 앱의 문제점을 해결할 수 있는 관리 웹 인터페이스입니다. Kubernetes 대시보드에 대한 자세한 정보는 [{{site.data.keyword.containerlong_notm}}의 Kubernetes 대시보드 시작](/docs/containers?topic=containers-app#cli_dashboard)을 참조하십시오.</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>표준 클러스터의 메트릭은 Kubernetes 클러스터가 작성될 때 로그인된 {{site.data.keyword.Bluemix_notm}} 계정에 위치합니다. 클러스터를 작성할 때 {{site.data.keyword.Bluemix_notm}} 영역을 지정한 경우 메트릭은 해당 영역에 위치합니다. 컨테이너 메트릭은 클러스터에 배치된 모든 컨테이너에 대해 자동으로 수집됩니다. 이러한 메트릭이 전송되고
-Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 정보는 [{{site.data.keyword.containerlong_notm}}에 대한 모니터링](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov)을 참조하십시오.</p>
+Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 정보는 [{{site.data.keyword.containerlong_notm}}에 대한 모니터링](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
     <p>Grafana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 클러스터를 작성한 {{site.data.keyword.Bluemix_notm}} 계정 또는 영역을 선택하십시오.</p> <table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다. ">
   <caption>모니터링 트래픽을 위해 열리는 IP 주소</caption>
         <thead>
         <th>{{site.data.keyword.containerlong_notm}} 지역</th>
         <th>모니터링 주소</th>
-        <th>모니터링 IP 주소</th>
+        <th>서브넷 모니터링</th>
         </thead>
       <tbody>
         <tr>
          <td>중앙 유럽</td>
-         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>metrics.eu-de.bluemix.net</code></td>
          <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
          <td>영국 남부</td>
-         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>metrics.eu-gb.bluemix.net</code></td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
           <td>미국 동부, 미국 남부, AP 북부, AP 남부</td>
-          <td>metrics.ng.bluemix.net</td>
+          <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
          
@@ -765,11 +821,8 @@ Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 �
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>메트릭을 {{site.data.keyword.monitoringlong}}에 전달할 수 있도록 서드파티 서비스로서 Sysdig를 작업자 노드에 배치하여 앱의 성능과 상태에 대한 운영상의 가시성을 확보하십시오. 자세한 정보는 [Kubernetes 클러스터에 배치된 앱의 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)을 참조하십시오. **참고**: {{site.data.keyword.mon_full_notm}}에서는 `containerd` 컨테이너 런타임을 지원하지 않습니다. 버전 1.11 이상 클러스터의 {{site.data.keyword.mon_full_notm}} 사용 시에 일부 컨테이너 메트릭은 수집되지 않습니다.</dd>
+  <dd>메트릭을 {{site.data.keyword.monitoringlong}}에 전달하기 위해 Sysdig를 작업자 노드에 서드파티의 서비스로 배치하여 앱의 성능과 상태에 대한 작동 가시성을 얻을 수 있습니다. 자세한 정보는 [Kubernetes 클러스터에서 앱에 대한 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)을 참조하십시오. **참고**: {{site.data.keyword.mon_full_notm}}에서는 `containerd` 컨테이너 런타임을 지원하지 않습니다. 버전 1.11 이상 클러스터의 {{site.data.keyword.mon_full_notm}} 사용 시에 일부 컨테이너 메트릭은 수집되지 않습니다.</dd>
 </dl>
-
-기본 제공 메트릭 서비스를 사용할 때 충돌을 피하려면 리소스 그룹 및 지역 전체에서 클러스터가 고유한 이름을 갖도록 하십시오.
-{: tip}
 
 ### 기타 상태 모니터링 도구
 {: #health_tools}
@@ -777,7 +830,7 @@ Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 �
 추가 모니터링 기능을 위해 다른 도구를 구성할 수 있습니다.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus는 Kubernetes에 맞게 디자인된 오픈 소스 모니터링, 로깅 및 경보 도구입니다. 도구는 클러스터, 작업자 노드 및 Kubernetes 로깅 정보를 기반으로 한 배치 상태에 대한 자세한 정보를 검색합니다. 설정 정보는 [{{site.data.keyword.containerlong_notm}}와 서비스 통합](cs_integrations.html#integrations)을 참조하십시오.</dd>
+    <dd>Prometheus는 Kubernetes에 맞게 디자인된 오픈 소스 모니터링, 로깅 및 경보 도구입니다. 도구는 클러스터, 작업자 노드 및 Kubernetes 로깅 정보를 기반으로 한 배치 상태에 대한 자세한 정보를 검색합니다. 설정 정보는 [{{site.data.keyword.containerlong_notm}}과 서비스 통합](/docs/containers?topic=containers-integrations#integrations)을 참조하십시오.</dd>
 </dl>
 
 <br />
@@ -786,21 +839,39 @@ Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 �
 ## 자동 복구를 통해 작업자 노드의 상태 모니터링 구성
 {: #autorecovery}
 
-{{site.data.keyword.containerlong_notm}} 자동 복구 시스템은 Kubernetes 버전 1.9 이상의 기존 클러스터에 배치할 수 있습니다.
+자동 복구 시스템은 다양한 검사를 통해 작업자 노드 상태를 조회합니다. 자동 복구는 구성된 검사에 따라 비정상적인 작업자 노드를 발견하면 작업자 노드에서 OS 다시 로드와 같은 정정 조치를 트리거합니다. 한 번에 하나의 작업자 노드에서만 정정 조치가 이루어집니다. 다른 작업자 노드에서 정정 조치가 이루어지려면 먼저 현재 작업자 노드가 정정 조치를 완료해야 합니다. 자세한 정보는 이 [자동 복구 블로그 게시물![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)을 참조하십시오.
 {: shortdesc}
-
-자동 복구 시스템은 다양한 검사를 통해 작업자 노드 상태를 조회합니다. 자동 복구는 구성된 검사에 따라 비정상적인 작업자 노드를 발견하면 작업자 노드에서 OS 다시 로드와 같은 정정 조치를 트리거합니다. 한 번에 하나의 작업자 노드에서만 정정 조치가 이루어집니다. 다른 작업자 노드에서 정정 조치가 이루어지려면 먼저 현재 작업자 노드가 정정 조치를 완료해야 합니다. 자세한 정보는 이 [자동 복구 블로그 게시물![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)을 참조하십시오.</br> </br>
+</br> </br>
 
 자동 복구를 위해서는 하나 이상의 정상 노드가 올바르게 작동해야 합니다. 둘 이상의 작업자 노드가 있는 클러스터에서만 활성 검사를 통한 자동 복구를 구성하십시오.
 {: note}
 
 시작하기 전에:
-- [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+- 다음 [{{site.data.keyword.Bluemix_notm}} IAM 역할](/docs/containers?topic=containers-users#platform)을 보유하고 있는지 확인하십시오.
+    - 클러스터에 대한 **관리자** 플랫폼 역할
+    - `kube-system` 네임스페이스에 대한 **작성자** 또는 **관리자** 서비스 역할
+- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-1. [클러스터를 위해 Helm을 설치하고 {{site.data.keyword.Bluemix_notm}} 저장소를 Helm 인스턴스에 추가](cs_integrations.html#helm)하십시오.
+자동 복구를 구성하려면 다음을 수행하십시오.
 
-2. 검사를 JSON 형식으로 정의하는 구성 맵 파일을 작성하십시오. 예를 들어, 다음 YAML 파일은 세 가지 검사(하나의 HTTP 검사와 두 개의 Kubernetes API 서버 검사)를 정의합니다. 세 가지 유형의 검사에 대한 정보와 검사의 개별 컴포넌트에 대한 정보는 예제 YAML 파일 다음에 나오는 표를 참조하십시오.
+1.  [지시사항에 따라](/docs/containers?topic=containers-integrations#helm) 로컬 시스템에 Helm 클라이언트를 설치하고 서비스 계정이 있는 Helm 서버(tiller)를 설치한 후 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오.
+
+2.  Tiller에 서비스 계정이 설치되어 있는지 확인하십시오.
+
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    출력 예:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. 검사를 JSON 형식으로 정의하는 구성 맵 파일을 작성하십시오. 예를 들어, 다음 YAML 파일은 세 가지 검사(하나의 HTTP 검사와 두 개의 Kubernetes API 서버 검사)를 정의합니다. 세 가지 유형의 검사에 대한 정보와 검사의 개별 컴포넌트에 대한 정보는 예제 YAML 파일 다음에 나오는 표를 참조하십시오.
 </br>
    **팁**: 구성 맵의 `data` 섹션에서 각 검사를 고유 키로 정의하십시오.
 
@@ -876,7 +947,7 @@ Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 �
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
-   <td>작업자 노드에서 실행되는 HTTP 서버가 정상인지 검사하는 HTTP 검사를 정의합니다. 이 검사를 사용하려면 [DaemonSet ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)을 사용하여 클러스터 내의 모든 작업자 노드에 HTTP 서버를 배치해야 합니다. <code>/myhealth</code> 경로에서 사용 가능하며 HTTP 서버가 정상인지 확인할 수 있는 상태 검사를 구현해야 합니다. <strong>Route</strong> 매개변수를 변경하여 다른 경로를 정의할 수 있습니다. HTTP 서버가 정상인 경우에는 <strong>ExpectedStatus</strong>에 정의된 HTTP 응답 코드를 리턴해야 합니다. HTTP 서버는 작업자 노드의 사설 IP 주소를 청취하도록 구성되어야 합니다. 이 사설 IP 주소는 <code>kubectl get nodes</code>를 실행하여 찾을 수 있습니다.<br></br>
+   <td>작업자 노드에서 실행되는 HTTP 서버가 정상인지 검사하는 HTTP 검사를 정의합니다. 이 검사를 사용하려면 [디먼 세트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 를 사용하여 클러스터 내의 모든 작업자 노드에 HTTP 서버를 배치해야 합니다. <code>/myhealth</code> 경로에서 사용 가능하며 HTTP 서버가 정상인지 확인할 수 있는 상태 검사를 구현해야 합니다. <strong>Route</strong> 매개변수를 변경하여 다른 경로를 정의할 수 있습니다. HTTP 서버가 정상인 경우에는 <strong><code>ExpectedStatus</code></strong>에 정의된 HTTP 응답 코드를 리턴해야 합니다. HTTP 서버는 작업자 노드의 사설 IP 주소를 청취하도록 구성되어야 합니다. 이 사설 IP 주소는 <code>kubectl get nodes</code>를 실행하여 찾을 수 있습니다.<br></br>
    예를 들면, 클러스터에 사설 IP 주소 10.10.10.1 및 10.10.10.2를 사용하는 두 개의 노드가 있다고 가정합니다. 이 예에서는 두 개의 라우트 <code>http://10.10.10.1:80/myhealth</code> 및 <code>http://10.10.10.2:80/myhealth</code>가 200 HTTP 응답을 리턴하는지 검사됩니다.
    예제의 검사에서는 3분마다 YAML이 실행됩니다. 3회 연속 실패 시, 작업자 노드가 다시 부팅됩니다. 이 조치는 <code>ibmcloud ks worker-reboot</code>를 실행하는 것과 같습니다.<br></br>HTTP 검사는 <b>Enabled</b> 필드를 <code>true</code>로 설정할 때까지 비활성화됩니다.</td>
    </tr>
@@ -903,7 +974,7 @@ Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 �
    </tr>
    <tr>
    <td><code>PodFailureThresholdPercent</code></td>
-   <td>리소스 유형이 <code>POD</code>인 경우 [NotReady ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) 상태인 작업자 노드의 팟(Pod) 백분율에 대한 임계값을 입력하십시오. 이 백분율은 작업자 노드에 대해 스케줄된 총 팟(Pod) 수를 기준으로 합니다. 검사에서 비정상 팟(Pod)의 백분율이 임계값을 초과한다고 판별되면 하나의 오류로 계수합니다.</td>
+   <td>리소스 유형이 <code>POD</code>인 경우 [<strong><code>NotReady </code></strong> ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) 상태인 작업자 노드의 팟(Pod) 백분율에 대한 임계값을 입력하십시오. 이 백분율은 작업자 노드에 대해 스케줄된 총 팟(Pod) 수를 기준으로 합니다. 검사에서 비정상 팟(Pod)의 백분율이 임계값을 초과한다고 판별되면 하나의 오류로 계수합니다.</td>
    </tr>
    <tr>
    <td><code>CorrectiveAction</code></td>
@@ -923,7 +994,7 @@ Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 �
    </tr>
    <tr>
    <td><code>Port</code></td>
-   <td>검사 유형이 <code>HTTP</code>인 경우 HTTP 서버가 작업자 노드에서 바인딩해야 하는 포트를 입력하십시오. 이 포트는 클러스터에 있는 모든 작업자 노드의 IP에 노출되어야 합니다. 자동 복구에는 서버 검사를 위해 모든 노드에서 일정한 포트 번호가 필요합니다. 사용자 정의 서버를 클러스터에 배치할 때 [DaemonSet ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)를 사용하십시오.</td>
+   <td>검사 유형이 <code>HTTP</code>인 경우 HTTP 서버가 작업자 노드에서 바인딩해야 하는 포트를 입력하십시오. 이 포트는 클러스터에 있는 모든 작업자 노드의 IP에 노출되어야 합니다. 자동 복구에는 서버 검사를 위해 모든 노드에서 일정한 포트 번호가 필요합니다. 사용자 정의 서버를 클러스터에 배치할 때 [디먼 세트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)를 사용하십시오.</td>
    </tr>
    <tr>
    <td><code>ExpectedStatus</code></td>
@@ -944,35 +1015,35 @@ Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 �
    </tbody>
    </table>
 
-3. 클러스터에서 구성 맵을 작성하십시오.
+4. 클러스터에서 구성 맵을 작성하십시오.
 
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
-3. 적절한 검사를 통해 `kube-system` 네임스페이스에서 이름이 `ibm-worker-recovery-checks`인 구성 맵을 작성했는지 확인하십시오.
+5. 적절한 검사를 통해 `kube-system` 네임스페이스에서 이름이 `ibm-worker-recovery-checks`인 구성 맵을 작성했는지 확인하십시오.
 
     ```
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
-4. `ibm-worker-recovery` Helm 차트를 설치하여 클러스터에 자동 복구를 배치하십시오.
+6. `ibm-worker-recovery` Helm 차트를 설치하여 클러스터에 자동 복구를 배치하십시오.
 
     ```
     helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
-5. 몇 분 후에 다음 명령의 출력에서 `Events` 섹션을 확인하여 자동 복구 배치의 활동을 볼 수 있습니다.
+7. 몇 분 후에 다음 명령의 출력에서 `Events` 섹션을 확인하여 자동 복구 배치의 활동을 볼 수 있습니다.
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
-6. 자동 복구 배치에 대한 활동이 표시되지 않는 경우 자동 복구 차트 정의에 포함된 테스트를 실행하여 Helm 배치를 확인할 수 있습니다.
+8. 자동 복구 배치에 대한 활동이 표시되지 않는 경우 자동 복구 차트 정의에 포함된 테스트를 실행하여 Helm 배치를 확인할 수 있습니다.
 
     ```
     helm test ibm-worker-recovery

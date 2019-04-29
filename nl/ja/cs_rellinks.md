@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -17,6 +21,8 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
 
 
 
@@ -29,35 +35,37 @@ lastupdated: "2018-12-05"
 
 **一般**
 
-- [クラスターのコスト見積もりツール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
+- [コストの見積もり](/docs/billing-usage?topic=billing-usage-cost#cost)。
 
 <br />
 
 
 **REST API**
 
-- [クラスター用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api/)
-- [クラスター用の REST API JSON ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api/swagger.json)
-- [クラスターでのロギング用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-logging/)
-- [クラスターでの Ingress アプリケーション・ロード・バランサーの管理用 REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-alb-api/)
+- [クラスター用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-api/)
+- [クラスター用の REST API JSON ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
+- [クラスターでのロギング用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-logging/)
+- [クラスターでの Ingress アプリケーション・ロード・バランサーの管理用 REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-alb-api/)
 
 <br />
 
 
 **チュートリアル、デモ、およびコース**
 
-- [既存の Java Web アプリ (JPetStore) のモダナイズと拡張 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
+- [既存の Java Web アプリ (`JPetStore`) のモダナイズと拡張 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
 - [{{site.data.keyword.containerlong_notm}} Cognitive Class の学習パス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
-- [IKS で Web アプリを作成する方法 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
-- [複数地域にまたがるクラスターを Cloud Internet Service (CIS) によって保護する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
-- [{{site.data.keyword.containerlong_notm}}、{{site.data.keyword.keymanagementservicelong_notm}}、{{site.data.keyword.appid_full_notm}}、{{site.data.keyword.cos_full_notm}} を使用してエンドツーエンド・セキュリティーをクラウド・アプリケーションに適用する](https://console.bluemix.net/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)
-- [アプリのログを分析し、正常性をモニターする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)
-- [{{site.data.keyword.containerlong}} の継続的統合/継続的デリバリーをセットアップする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
-- [VM アプリをクラウドにマイグレーションする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/vm-to-containers-and-kubernetes.html#moving-a-vm-based-app-to-kubernetes)
-- [CF アプリをクラウドにマイグレーションする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/containers/cs_tutorials_cf.html#cf_tutorial)
-- [実行時間が長いアプリのワークロードを Apache Kafka ベースのメッセージング・サービスを使用してオーケストレーションする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
-- [Terraform によってクラスターへのデプロイメントを自動化する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/plan-create-update-deployments.html#plan-create-and-update-deployment-environments)
-- [ユーザーとチームを編成する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/users-teams-applications.html#best-practices-for-organizing-users-teams-applications)
+- [{{site.data.keyword.containerlong_notm}} で Web アプリを作成する方法 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-scalable-webapp-kubernetes#scalable-webapp-kubernetes)
+- [複数地域にまたがるクラスターを Cloud Internet Service (CIS) によって保護する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+- [{{site.data.keyword.containerlong_notm}}、{{site.data.keyword.keymanagementservicelong_notm}}、{{site.data.keyword.appid_full_notm}}、{{site.data.keyword.cos_full_notm}} を使用してエンドツーエンド・セキュリティーをクラウド・アプリケーションに適用する](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security)
+- [LogDNA を使用してクラスター・ログを分析する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube)
+- [Sysdig を使用してクラスターの正常性をモニターする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)
+- [{{site.data.keyword.containerlong}} の継続的統合/継続的デリバリーをセットアップする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+- [VM アプリをクラウドにマイグレーションする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
+- [CF アプリをクラウドにマイグレーションする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
+- [Knative を使用してクラスター内でサーバーレス・アプリを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [実行時間が長いアプリのワークロードを Apache Kafka ベースのメッセージング・サービスを使用してオーケストレーションする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
+- [Terraform によってクラスターへのデプロイメントを自動化する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
+- [ユーザーとチームを編成する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)
 - [Logistics Wizard を Istio および {{site.data.keyword.containerlong}} で使用する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/logistics-wizard-kubernetes)
 - [Istio を使用してマイクロサービスの高度なトラフィック管理機能と要求トレース機能を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/code/patterns/manage-microservices-traffic-using-istio/)
 
@@ -67,6 +75,7 @@ lastupdated: "2018-12-05"
 **統合されたオープン・ソース・テクノロジー**
 
 - [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/)
+- [Knative の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/knative/docs)
 - [Docker の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/engine/)
 - Kubernetes パッケージ管理のための <a href="https://docs.helm.sh/helm/" target="_blank">Helm の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a>
 - マイクロサービスを接続、管理、および保護するための [Istio ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/) プラットフォーム
@@ -77,7 +86,7 @@ lastupdated: "2018-12-05"
 
 **用語集**
 
-- [{{site.data.keyword.Bluemix_notm}} 用語集](/docs/overview/glossary/glossary.html#glossary)
+- [{{site.data.keyword.Bluemix_notm}} 用語集](/docs/overview/glossary?topic=overview-glossary#glossary)
 - [Kubernetes 用語集![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Docker 用語集![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/glossary/)
 
@@ -87,9 +96,9 @@ lastupdated: "2018-12-05"
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [{{site.data.keyword.registryshort_notm}} の資料](/docs/services/Registry/index.html)
-- [{{site.data.keyword.registryshort_notm}}REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/apidocs/container-registry)
-- [脆弱性アドバイザー REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/apidocs/container-registry/va)
+- [{{site.data.keyword.registryshort_notm}} の資料](/docs/services/Registry?topic=registry-index)
+- [{{site.data.keyword.registryshort_notm}}REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://{DomainName}/apidocs/container-registry)
+- [脆弱性アドバイザー REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://{DomainName}/apidocs/container-registry/va)
 
 <br />
 

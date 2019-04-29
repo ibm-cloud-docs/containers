@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # Guía de aprendizaje: Utilización de políticas de red de Calico para bloquear el tráfico
 {: #policy_tutorial}
 
@@ -31,25 +34,32 @@ Sin embargo, por motivos de seguridad, es posible que tenga que permitir el trá
 En este caso de ejemplo, el usuario adopta el rol de administrador de una empresa de relaciones públicas (PR) y observa un tráfico poco habitual que afecta a sus apps. Las lecciones de esta guía de aprendizaje le guían a través de la creación de una app de servidor web de ejemplo, la exposición la app mediante un servicio equilibrador de carga y la protección de la app frente a un tráfico no deseado con políticas de Calico de lista blanca y de lista negra.
 
 ## Objetivos
+{: #policies_objectives}
 
 - Aprender a bloquear todo el tráfico entrante a todos los puertos de nodo creando una política de Pre-DNAT de orden superior.
 - Aprender a permitir el acceso de las direcciones IP de origen de la lista blanca a la IP pública del equilibrador de carga y al puerto creando una política Pre-DNAT de orden inferior. Las políticas de orden inferior tienen preferencia sobre las políticas de orden superior.
 - Aprender a bloquear el acceso de las direcciones IP de origen de la lista negra a la IP pública del equilibrador de carga y al puerto creando una política Pre-DNAT de orden inferior.
 
 ## Tiempo necesario
+{: #policies_time}
+
 1 hora
 
 ## Público
+{: #policies_audience}
+
 Esta guía de aprendizaje está destinada a los desarrolladores de software y administradores de la red que gestionan el tráfico de red a una app.
 
 ## Requisitos previos
+{: #policies_prereqs}
 
-- [Cree un clúster de la versión 1.10 o posterior](cs_clusters.html#clusters_ui) o [actualice un clúster existente a la versión 1.10](cs_versions.html#cs_v110). Se necesita un clúster de Kubernetes versión 1.10 o posterior para poder utilizar la CLI de Calico 3.3.1. o la sintaxis de la política de Calico v3 en esta guía de aprendizaje.
-- [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure).
-- [Instale y configure la CLI de Calico](cs_network_policy.html#1.10_install).
+- [Cree un clúster de la versión 1.10 o posterior](/docs/containers?topic=containers-clusters#clusters_ui) o [actualice un clúster existente a la versión 1.10](/docs/containers?topic=containers-cs_versions#cs_v110). Se necesita un clúster de Kubernetes versión 1.10 o posterior para poder utilizar la CLI de Calico 3.3.1. o la sintaxis de la política de Calico v3 en esta guía de aprendizaje.
+- [Defina su clúster como destino de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Instale y configure la CLI de Calico](/docs/containers?topic=containers-network_policies#cli_install).
 - Asegúrese de tener las políticas de acceso de {{site.data.keyword.Bluemix_notm}} IAM siguientes para
 {{site.data.keyword.containerlong_notm}}:
-    - [Cualquier rol de plataforma](cs_users.html#platform)
+    - [Cualquier rol de plataforma](/docs/containers?topic=containers-users#platform)
+    - [El rol de servicio de **Escritor** o de **Gestor**](/docs/containers?topic=containers-users#platform)
 
 <br />
 
@@ -60,15 +70,14 @@ Esta guía de aprendizaje está destinada a los desarrolladores de software y ad
 En la primera lección se muestra cómo se expone la app desde varias direcciones IP y puertos y de dónde procede el tráfico público que entra en el clúster.
 {: shortdesc}
 
-Empiece desplegando una app de servidor web de ejemplo para utilizarla en la guía de aprendizaje. El servidor web `echoserver` muestra datos sobre la conexión que se establece con el clúster desde el cliente y le deja probar el acceso al clúster de la empresa PR. A continuación, exponga la app creando un servicio equilibrador de carga 2.0. Un servicio equilibrador de carga 2.0 hace que la app esté disponible a través de la dirección IP del servicio equilibrador de carga y de los puertos de nodo de los nodos trabajadores.
+Empiece desplegando una app de servidor web de ejemplo para utilizarla en la guía de aprendizaje. El servidor web `echoserver` muestra datos sobre la conexión que se establece con el clúster desde el cliente y le deja probar el acceso al clúster de la empresa PR. A continuación, exponga la app creando un servicio equilibrador de carga 1.0. Un servicio equilibrador de carga 1.0 hace que la app esté disponible a través de la dirección IP del servicio equilibrador de carga y de los puertos de nodo de los nodos trabajadores.
 
-¿Desea utilizar un [equilibrador de carga de aplicación (ALB) de Ingress](cs_ingress.html) en su lugar? Omita la creación del equilibrador de carga de en los pasos 3 y 4. En su lugar, obtenga las direcciones IP públicas de los ALB ejecutando
-`ibmcloud ks albs --cluster <cluster_name>` y utilice estas IP a lo largo de la guía de aprendizaje en lugar de la `<loadbalancer_IP>.`
+¿Desea utilizar un equilibrador de carga de aplicación (ALB) de Ingress? En lugar de crear un equilibrador de carga en los pasos 3 y 4, [cree un servicio para la app de servidor web](/docs/containers?topic=containers-ingress#public_inside_1) y [cree un recurso de Ingress para la app de servidor web](/docs/containers?topic=containers-ingress#public_inside_4). Luego obtenga las direcciones IP públicas de los ALB ejecutando `ibmcloud ks albs --cluster <cluster_name>` y utilice estas IP a lo largo de la guía de aprendizaje en lugar de la `<loadbalancer_IP>.`
 {: tip}
 
-En la siguiente imagen se muestra cómo la app de servidor web estará expuesta a Internet por el puerto de nodo público y el equilibrador de carga público al final de la Lección 1:
+En la siguiente imagen se muestra cómo la app de servidor web se expone a Internet mediante el puerto de nodo público y el equilibrador de carga público al final de la Lección 1:
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="Al final de la Lección 1, la app del servidor web se expone a Internet mediante el puerto de nodo público y el equilibrador de carga público." style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="Al final de la Lección 1, la app de servidor web se expone a internet mediante el puerto de nodo público y el equilibrador de carga público." style="width:450px; border-style: none"/>
 
 1. Despliegue la app de servidor web de ejemplo. Cuando se establece una conexión con la app de servidor web, la app responde con las cabeceras HTTP que ha recibido en la conexión.
     ```
@@ -91,7 +100,7 @@ En la siguiente imagen se muestra cómo la app de servidor web estará expuesta 
     ```
     {: screen}
 
-3. Para exponer la app a internet público, cree un archivo de configuración de servicio equilibrador de carga 2.0 denominado `webserver-lb.yaml` en un editor de texto.
+3. Para exponer la app a internet público, cree un archivo de configuración de servicio equilibrador de carga 1.0 denominado `webserver-lb.yaml` en un editor de texto.
     ```
     apiVersion: v1
     kind: Service
@@ -99,8 +108,6 @@ En la siguiente imagen se muestra cómo la app de servidor web estará expuesta 
       labels:
         run: webserver
       name: webserver-lb
-      annotations:
-        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
       type: LoadBalancer
       selector:
@@ -110,7 +117,6 @@ En la siguiente imagen se muestra cómo la app de servidor web estará expuesta 
         port: 80
         protocol: TCP
         targetPort: 8080
-      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -184,16 +190,16 @@ En la siguiente imagen se muestra cómo la app de servidor web estará expuesta 
 
     2. Obtenga la dirección **IP pública** de un nodo trabajador.
         ```
-        ibmcloud ks workers <cluster_name>
+        ibmcloud ks workers --cluster <cluster_name>
         ```
         {: pre}
 
         Salida de ejemplo:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
         ```
         {: screen}
 
@@ -236,7 +242,10 @@ A continuación, puede empezar a crear y aplicar políticas de Calico para bloqu
 ## Lección 2: Bloquear todo el tráfico de entrada a todos los puertos de nodo
 {: #lesson2}
 
-Para proteger el clúster de la empresa PR, debe bloquear el acceso público tanto al servicio equilibrador de carga como a los puertos de nodo que exponen la app. Empiece bloqueando el acceso a los puertos de nodo. En la imagen siguiente se muestra cómo se permitirá el tráfico al equilibrador de carga pero no a los puertos de nodo al final de la Lección 2:
+Para proteger el clúster de la empresa PR, debe bloquear el acceso público tanto al servicio equilibrador de carga como a los puertos de nodo que exponen la app. Empiece bloqueando el acceso a los puertos de nodo.
+{: shortdesc}
+
+En la imagen siguiente se muestra cómo se permitirá el tráfico al equilibrador de carga pero no a los puertos de nodo al final de la Lección 2:
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="Al final de la Lección 2, la app de servidor web quedará expuesta a Internet solo mediante el equilibrador de carga público." style="width:425px; border-style: none"/>
 
@@ -248,7 +257,7 @@ Para proteger el clúster de la empresa PR, debe bloquear el acceso público tan
       name: deny-nodeports
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
             destination:
@@ -345,6 +354,7 @@ Supongamos que ahora decide bloquear por completo el tráfico al clúster de la 
 {: shortdesc}
 
 En primer lugar, además de los puertos de nodo, debe bloquear todo el tráfico entrante al equilibrador de carga que expone la app. A continuación, puede crear una política que contenga la dirección IP de su sistema en la lista blanca. Al final de la Lección 3, todo el tráfico dirigido a los puertos de nodo públicos y al equilibrador de carga se bloqueará y solo se permitirá el tráfico desde la IP del sistema de la lista blanca:
+
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="La app de servidor web se solo expone mediante el equilibrador de carga público a la IP del sistema." style="width:500px; border-style: none"/>
 
 1. En un editor de texto, cree una política Pre-DNAT de orden superior denominada `deny-lb-port-80.yaml` para denegar todo el tráfico TCP y UDP entrante procedente de cualquier IP de origen a la dirección IP y puerto del equilibrador de carga. Sustituya `<loadbalancer_IP>` por la dirección IP pública del equilibrador de carga de la hoja de apuntes.
@@ -356,7 +366,7 @@ En primer lugar, además de los puertos de nodo, debe bloquear todo el tráfico 
       name: deny-lb-port-80
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -410,7 +420,7 @@ En primer lugar, además de los puertos de nodo, debe bloquear todo el tráfico 
       name: whitelist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Allow
         destination:
@@ -464,8 +474,10 @@ En este punto, todo el tráfico dirigido al equilibrador de carga y los puertos 
 {: #lesson4}
 
 En la lección anterior, ha bloqueado todo el tráfico y solo ha colocado en la lista blanca unas pocas IP. Este caso de ejemplo funciona bien para fines de prueba cuando se desea limitar el acceso a unas pocas direcciones IP de origen controladas. Sin embargo, la empresa PR tiene apps que tienen que estar ampliamente disponibles para el público. Debe asegurarse de que se permita todo el tráfico, excepto el tráfico inusual que ve desde unas pocas direcciones IP. La creación de una lista negra resulta útil en un escenario como este, porque puede ayudarle a evitar un ataque desde un pequeño conjunto de direcciones IP.
+{: shortdesc}
 
 En esta lección, probará la creación de una lista negra que bloquee el tráfico procedente de la dirección IP de origen de su propio sistema. Al final de la Lección 4, todo el tráfico dirigido a los puertos de nodo públicos se bloqueará y se permitirá todo el tráfico dirigido al equilibrador de carga. Solo se bloqueará el tráfico procedente de la IP del sistema en la lista negra al equilibrador de carga:
+
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="La app del servidor web se expone mediante el equilibrador de carga público a Internet. Solo el tráfico procedente de la IP del sistema se bloquea." style="width:550px; border-style: none"/>
 
 1. Limpie las políticas de la lista blanca que ha creado en la lección anterior.
@@ -499,7 +511,7 @@ En esta lección, probará la creación de una lista negra que bloquee el tráfi
       name: blacklist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -570,5 +582,5 @@ En esta lección, probará la creación de una lista negra que bloquee el tráfi
 ## ¿Qué es lo siguiente?
 {: #whats_next}
 
-* Obtenga más información sobre [ cómo controlar el tráfico con políticas de red](cs_network_policy.html).
+* Obtenga más información sobre [cómo controlar el tráfico con políticas de red](/docs/containers?topic=containers-network_policies).
 * Para ver más ejemplos de políticas de red de Calico que controlan el tráfico procedente y destinado a su clúster, puede consultar la [demostración de política inicial ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) y la [política de red avanzada ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).

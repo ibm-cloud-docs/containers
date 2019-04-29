@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -20,7 +24,6 @@ lastupdated: "2018-12-05"
 
 
 
-
 # {{site.data.keyword.cloud_notm}}의 의료 유스 케이스
 {: #cs_uc_health}
 
@@ -31,15 +34,17 @@ lastupdated: "2018-12-05"
 {: #uc_migrate}
 
 의료 제공업체의 IT 책임자가 온프레미스 비즈니스 보고 및 환자 시스템을 보유하고 있습니다. 이러한 시스템은 느린 개선 주기를 거치며 이는 환자 서비스 수준의 정체로 이어집니다.
+{: shortdesc}
 
 {{site.data.keyword.cloud_notm}}를 사용해야 하는 이유: 환자 서비스를 개선하기 위해, 제공업체는 {{site.data.keyword.containerlong_notm}} 및 {{site.data.keyword.contdelivery_full}}를 도입하여 안전한 플랫폼에서 IT 비용을 줄이고 개발을 가속화하고자 합니다. 이 제공업체에서 많이 사용되고 있으며 환자 기록 시스템과 비즈니스 보고 앱을 포함하고 있는 SaaS 시스템은 빈번한 업데이트를 필요로 합니다. 그러나 온프레미스 환경이 Agile 개발을 저해하고 있습니다. 또한 제공업체는 증가하는 인건비와 예산 감소에 대처하려 합니다.
 
-주요 기술:    
-* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](cs_clusters_planning.html#shared_dedicated_node)
-* [수평적 확장](cs_app.html#highly_available_apps)
-* [컨테이너 보안 및 격리](cs_secure.html#security)
+주요 기술:
+* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [수평적 확장](/docs/containers?topic=containers-app#highly_available_apps)
+* [컨테이너 보안 및 격리](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [{{site.data.keyword.appid_short_notm}}를 사용하여 앱 코드를 변경하지 않는 사인온 기능](/docs/services/appid?topic=appid-getting-started)
 
 제공업체는 SaaS 시스템을 컨테이너화하여 클라우드에 배치하는 것으로 작업을 시작합니다. 이 첫 번째 단계에서, 제공업체는 환경을 사내 데이터 센터에 있는 지나치게 높은 스펙의 하드웨어로부터 IT 운영, 유지보수 및 에너지 비용을 줄여주는, 사용자 정의할 수 있는 컴퓨팅 인프라로 옮깁니다. 제공업체는 SaaS 시스템을 호스팅하기 위해 CPU, RAM 및 스토리지 요구사항에 부합하는 Kubernetes 클러스터를 쉽게 디자인할 수 있습니다. 인건비 절감의 또 다른 요인은 제공업체가 더 나은 고객 서비스를 제공하는 데 집중할 수 있도록 IBM이 Kubernetes를 관리하는 것입니다.
 
@@ -64,12 +69,13 @@ lastupdated: "2018-12-05"
 
 **솔루션 모델**
 
-온프레미스 엔터프라이즈 자산에 안전하게 액세스할 수 있는, 퍼블릭 클라우드에서 실행되는 요청 시 컴퓨팅, 스토리지 및 입출력 서비스. 제공 주기를 획기적으로 줄이기 위해 CI/CD 프로세스와 IBM Garage Method의 기타 부분을 구현합니다.
+온프레미스 엔터프라이즈 자산에 안전하게 액세스할 수 있는, 퍼블릭 클라우드에서 실행되는 요청 시 컴퓨팅, 스토리지 및 I/O 서비스. 제공 주기를 획기적으로 줄이기 위해 CI/CD 프로세스와 IBM Garage Method의 기타 부분을 구현합니다.
 
 **1단계: 컴퓨팅 플랫폼 보호**
 * 신뢰할 수 있는 컴퓨팅을 위해 베어메탈에서 실행되는 {{site.data.keyword.containerlong_notm}}로 매우 민감한 환자 데이터를 관리하는 앱을 다시 호스팅할 수 있습니다.
 * 신뢰할 수 있는 컴퓨팅은 기반 하드웨어의 변조 여부를 확인할 수 있습니다.
 * Vulnerability Advisor는 이 코어에서 이미지, 정책, 컨테이너 및 패키지에 대해 악성코드에 대한 취약성 스캔 기능을 제공합니다.
+* 간단한 Ingress 어노테이션을 사용하여 정책 기반 인증을 서비스와 API에 일관되게 적용합니다. 선언적 보안으로 {{site.data.keyword.appid_short_notm}}를 사용하여 사용자 인증 및 토큰 유효성 검증을 보장할 수 있습니다.
 
 **2단계: 리프트 앤 시프트(lift and shift)**
 * 가상 머신 이미지를 퍼블릭 클라우드의 {{site.data.keyword.containerlong_notm}}에서 실행되는 컨테이너 이미지로 마이그레이션합니다.
@@ -81,17 +87,18 @@ lastupdated: "2018-12-05"
 **3단계: 마이크로서비스와 Garage Method**
 * 앱을 협업 마이크로서비스의 세트로 다시 구성합니다. 이 세트는 품질 문제점이 가장 큰 앱의 기능 영역을 기반으로 하는 {{site.data.keyword.containerlong_notm}} 내에서 실행됩니다.
 * {{site.data.keyword.cloudant}}를 클라우드 내 데이터의 캐싱을 위해 고객이 제공한 키와 함께 사용합니다.
-* Continuous Integration 및 Delivery(CI/CD) 방법을 채택하여 개발자가 필요에 따라 고유한 스케줄로 마이크로서비스를 버전화하고 릴리스하도록 합니다. {{site.data.keyword.contdelivery_full}}는 CI/CD 프로세스를 위한 워크플로우 도구 체인, 이미지 작성 및 컨테이너 이미지에 대한 취약성 스캔을 제공합니다.
+* Continuous Integration 및 Continuous Delivery(CI/CD) 방법을 채택하여 개발자가 필요에 따라 고유한 스케줄로 마이크로서비스를 버전화하고 릴리스하도록 합니다. {{site.data.keyword.contdelivery_full}}는 CI/CD 프로세스를 위한 워크플로우 도구 체인, 이미지 작성 및 컨테이너 이미지에 대한 취약성 스캔을 제공합니다.
 * IBM Garage Method의 반복적인 Agile 개발 방법을 채택하여 작동 중단 시간이 없는 새 기능, 패치 및 수정사항 릴리스를 가능하게 합니다.
 
 **기술적 솔루션**
 * {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
+* {{site.data.keyword.appid_short_notm}}
 
 가장 민감한 워크로드의 경우에는 클러스터를 베어메탈의 {{site.data.keyword.containerlong_notm}}에서 호스팅할 수 있습니다.  이는 하드웨어 및 런타임 코드에서 취약성을 자동으로 스캔하는 신뢰할 수 있는 컴퓨팅 플랫폼을 제공합니다. 업계 표준 컨테이너 기술을 사용하여, 처음에 앱을 주요 아키텍처 변경 없이 빠르게 {{site.data.keyword.containerlong_notm}}에서 다시 호스팅할 수 있습니다. 이 변경은 확장성에 대해 즉각적인 이점을 제공합니다.
 
-정의된 규칙 및 자동화된 Kubernetes 오케스트레이터를 사용하여 앱을 복제하고 스케일링할 수도 있습니다. {{site.data.keyword.containerlong_notm}}는 앱 및 서비스를 요청 시 작성, 스케일링 및 제거할 수 있도록 스케일링 가능한 컴퓨팅 리소스 및 연관 DevOps 대시보드를 제공합니다. 제공업체는 Kubernetes의 배치 및 런타임 오브젝트를 사용하여 앱에 대한 업그레이드를 안정적으로 모니터하고 관리할 수 있습니다.
+정의된 규칙 및 자동화된 Kubernetes 오케스트레이터를 사용하여 앱을 복제하고 스케일링할 수도 있습니다. {{site.data.keyword.containerlong_notm}}는 앱 및 서비스를 요청 시 작성, 스케일링 및 제거할 수 있도록 스케일링 가능한 컴퓨팅 리소스 및 연관 DevOps 대시보드를 제공합니다. 제공업체는 Kubernetes의 배치 및 런타임 오브젝트를 사용하여 앱에 대한 업그레이드를 안정적으로 모니터링하고 관리할 수 있습니다.
 
 {{site.data.keyword.SecureGatewayfull}}는 {{site.data.keyword.containerlong_notm}}에서 실행되도록 다시 호스팅된 앱을 위해 온프레미스 데이터베이스 및 문서에 대한 안전한 파이프라인을 작성하는 데 사용됩니다.
 
@@ -114,12 +121,12 @@ lastupdated: "2018-12-05"
 
 {{site.data.keyword.cloud_notm}}를 사용해야 하는 이유: {{site.data.keyword.containerlong_notm}}는 공개된 플랫폼에서 민감한 데이터를 호스팅하며 우수한 데이터 처리 능력을 제공하는 안전한 컴퓨팅 인프라를 제공합니다. 이 글로벌 플랫폼은 가까운 지역에서 호스팅됩니다. 따라서 여기에는 지역 규제가 적용되며, 이러한 규제는 환자와 연구자 모두에게 자신의 데이터가 해당 지역에서 보호되며 의료 발전에 도움을 줄 것이라는 믿음을 줍니다.
 
-주요 기술:    
-* [필요한 위치에 워크로드를 배치하는 지능형 스케줄링](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
-* [앱 간에 데이터를 지속시키고 동기화하는 데 필요한 {{site.data.keyword.cloudant}}](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [워크로드에 대한 취약성 스캔 및 격리](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+주요 기술:
+* [필요한 위치에 워크로드를 배치하는 지능형 스케줄링](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [앱 간에 데이터를 지속시키고 동기화하는 데 필요한 {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [워크로드에 대한 취약성 스캔 및 격리](/docs/services/Registry?topic=va-va_index#va_index)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
-* [데이터에서 민감한 부분을 제거하고 연구자에게 데이터 구조 변경에 대해 알리는 {{site.data.keyword.openwhisk}}](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [데이터에서 민감한 부분을 제거하고 연구자에게 데이터 구조 변경에 대해 알리는 {{site.data.keyword.openwhisk}}](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
 
 **컨텍스트: 비영리 연구기관의 질병 데이터를 안전하게 호스팅하고 공유함**
 

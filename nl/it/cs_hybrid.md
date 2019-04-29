@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -28,7 +32,7 @@ lastupdated: "2018-12-05"
 Se hai un account {{site.data.keyword.Bluemix}} privato, puoi usarlo con i servizi {{site.data.keyword.Bluemix_notm}} di selezione, incluso {{site.data.keyword.containerlong}}. Per ulteriori informazioni, consulta il blog sull'argomento [Hybrid experience across {{site.data.keyword.Bluemix_notm}} Private and IBM Public Cloud![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](http://ibm.biz/hybridJune2018).
 {: shortdesc}
 
-Hai compreso le offerte [{{site.data.keyword.Bluemix_notm}}](cs_why.html#differentiation). Ora puoi [connettere il tuo cloud pubblico e privato](#hybrid_vpn) e [riutilizzare i tuoi pacchetti privati per i contenitori pubblici](#hybrid_ppa_importer).
+Conosci le [offerte {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_ov#differentiation). Ora puoi [connettere il tuo cloud pubblico e privato](#hybrid_vpn) e [riutilizzare i tuoi pacchetti privati per i contenitori pubblici](#hybrid_ppa_importer).
 
 ## Connessione del tuo cloud pubblico e privato con la VPN strongSwan
 {: #hybrid_vpn}
@@ -36,20 +40,20 @@ Hai compreso le offerte [{{site.data.keyword.Bluemix_notm}}](cs_why.html#differe
 Stabilisci una connettività VPN tra il tuo cluster Kubernetes pubblico e la tua istanza {{site.data.keyword.Bluemix}} privato per consentire una comunicazione bidirezionale.
 {: shortdesc}
 
-1.  Crea un cluster standard con {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_notm}} pubblico oppure usane uno esistente. Per creare un cluster, scegli tra le seguenti opzioni: 
-    - [Crea un cluster standard dalla console](cs_clusters.html#clusters_ui). 
-    - [Crea un cluster standard dalla CLI](cs_clusters.html#clusters_cli). 
+1.  Crea un cluster standard con {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_notm}} pubblico oppure usane uno esistente. Per creare un cluster, scegli tra le seguenti opzioni:
+    - [Crea un cluster standard dalla console](/docs/containers?topic=containers-clusters#clusters_ui).
+    - [Crea un cluster standard dalla CLI](/docs/containers?topic=containers-clusters#clusters_cli).
     - [Usa CAM (Cloud Automation Manager) per creare un cluster utilizzando un template predefinito![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). Quando distribuisci un cluster con CAM, viene installato automaticamente il tiller Helm.
 
-2.  Nel tuo cluster {{site.data.keyword.containerlong_notm}}, [attieniti alle istruzioni per configurare il servizio VPN IPSec strongSwan](cs_vpn.html#vpn_configure). 
+2.  Nel tuo cluster {{site.data.keyword.containerlong_notm}}, [attieniti alle istruzioni per configurare il servizio VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn_configure).
 
-    *  Per il [Passo 2](cs_vpn.html#strongswan_2), nota che:
+    *  Per il [Passo 2](/docs/containers?topic=containers-vpn#strongswan_2), nota che:
 
-       * Il `local.id` che imposti nel tuo cluster {{site.data.keyword.containerlong_notm}} deve corrispondere a quello che imposti successivamente come `remote.id` nel tuo cluster {{site.data.keyword.Bluemix}} privato. 
+       * Il `local.id` che imposti nel tuo cluster {{site.data.keyword.containerlong_notm}} deve corrispondere a quello che imposti successivamente come `remote.id` nel tuo cluster {{site.data.keyword.Bluemix}} privato.
        * Il `remote.id` che imposti nel tuo cluster {{site.data.keyword.containerlong_notm}} deve corrispondere a quello che imposti successivamente come `local.id` nel tuo cluster {{site.data.keyword.Bluemix}} privato.
        * Il `preshared.secret` che imposti nel tuo cluster {{site.data.keyword.containerlong_notm}} deve corrispondere a quello che imposti successivamente come `preshared.secret` nel tuo cluster {{site.data.keyword.Bluemix}} privato.
 
-    *  Per il [Passo 3](cs_vpn.html#strongswan_3), configura strongSwan per una connessione VPN **in entrata**.
+    *  Per il [Passo 3](/docs/containers?topic=containers-vpn#strongswan_3), configura strongSwan per una connessione VPN **in entrata**.
 
        ```
        ipsec.auto: add
@@ -68,12 +72,12 @@ Stabilisci una connettività VPN tra il tuo cluster Kubernetes pubblico e la tua
 
 5.  Nel tuo cluster {{site.data.keyword.Bluemix_notm}} privato, distribuisci il servizio VPN IPSec strongSwan.
 
-    1.  [Completa le soluzioni temporanee della VPN IPSec strongSwan ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html). 
+    1.  [Completa le soluzioni temporanee della VPN IPSec strongSwan ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html).
 
-    2.  [Configura il grafico Helm VPN strongSwan![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html) nel tuo cluster privato. 
-    
+    2.  [Configura il grafico Helm VPN strongSwan![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html) nel tuo cluster privato.
+
         *  Nei parametri di configurazione, imposta il campo **Remote gateway** sul valore dell'indirizzo IP pubblico portatile che hai impostato come `loadbalancerIP` del tuo cluster {{site.data.keyword.containerlong_notm}}.
-    
+
            ```
            Operation at startup: start
            ...
@@ -81,14 +85,14 @@ Stabilisci una connettività VPN tra il tuo cluster Kubernetes pubblico e la tua
            ...
            ```
            {: codeblock}
-    
+
         *  Ricordati che il `local.id` privato deve corrispondere al `remote.id`pubblico, il `remote.id` privato deve corrispondere al `local.id` pubblico e i valori `preshared.secret` per pubblico e privato devono corrispondere.
-        
+
         Ora puoi avviare una connessione dal cluster {{site.data.keyword.Bluemix_notm}} privato al cluster {{site.data.keyword.containerlong_notm}}.
 
-7.  [Verifica la connessione VPN](cs_vpn.html#vpn_test) tra i cluster.
+7.  [Verifica la connessione VPN](/docs/containers?topic=containers-vpn#vpn_test) tra i cluster.
 
-8.  Ripeti questi passi per ciascun cluster che vuoi collegare. 
+8.  Ripeti questi passi per ciascun cluster che vuoi collegare.
 
 
 ## Esecuzione delle immagini di {{site.data.keyword.Bluemix_notm}} privato in contenitori Kubernetes pubblici
@@ -97,7 +101,7 @@ Stabilisci una connettività VPN tra il tuo cluster Kubernetes pubblico e la tua
 Puoi eseguire i prodotti IBM su licenza di selezione forniti per {{site.data.keyword.Bluemix_notm}} privato in un cluster in {{site.data.keyword.Bluemix_notm}} pubblico.  
 {: shortdesc}
 
-Il software su licenza è disponibile in [IBM Passport Advantage ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www-01.ibm.com/software/passportadvantage/index.html). Per usare questo software in un cluster in {{site.data.keyword.Bluemix_notm}} pubblico, devi scaricarlo, estrarre l'immagine e caricarla nel tuo spazio dei nomi in {{site.data.keyword.registryshort}}. Indipendentemente dall'ambiente in cui intendi usare il software, devi ottenere innanzitutto la licenza richiesta per il prodotto. 
+Il software su licenza è disponibile in [IBM Passport Advantage ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www-01.ibm.com/software/passportadvantage/index.html). Per usare questo software in un cluster in {{site.data.keyword.Bluemix_notm}} pubblico, devi scaricarlo, estrarre l'immagine e caricarla nel tuo spazio dei nomi in {{site.data.keyword.registryshort}}. Indipendentemente dall'ambiente in cui intendi usare il software, devi ottenere innanzitutto la licenza richiesta per il prodotto.
 
 La seguente tabella è una panoramica dei prodotti {{site.data.keyword.Bluemix_notm}} privato disponibili che puoi usare nel tuo cluster in {{site.data.keyword.Bluemix_notm}} pubblico.
 
@@ -109,30 +113,30 @@ La seguente tabella è una panoramica dei prodotti {{site.data.keyword.Bluemix_n
 | IBM WebSphere Application Server Liberty | 16.0.0.3 | immagine Docker Hub |
 {: caption="Tabella. Prodotti {{site.data.keyword.Bluemix_notm}} privato supportati da usare in {{site.data.keyword.Bluemix_notm}} pubblico." caption-side="top"}
 
-Prima di iniziare: 
-- [Installa il plugin della CLI {{site.data.keyword.registryshort}} (`ibmcloud cr`)](/docs/services/Registry/registry_setup_cli_namespace.html#registry_cli_install). 
-- [Configura lo spazio dei nomi in {{site.data.keyword.registryshort}}](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add) o recupera il tuo spazio dei nomi esistente eseguendo `ibmcloud cr namespaces`. 
-- [Indirizza la tua CLI `kubectl` al tuo cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). 
-- [Installa la CLI Helm e imposta tiller nel tuo cluster](/docs/containers/cs_integrations.html#helm). 
+Prima di iniziare:
+- [Installa il plugin della CLI {{site.data.keyword.registryshort}} (`ibmcloud cr`)](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install).
+- [Configura lo spazio dei nomi in {{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup) o recupera il tuo spazio dei nomi esistente eseguendo `ibmcloud cr namespaces`.
+- [Indirizza la tua CLI `kubectl` al tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Installa la CLI Helm e imposta tiller nel tuo cluster](/docs/containers?topic=containers-integrations#helm).
 
 Per distribuire un'immagine di {{site.data.keyword.Bluemix_notm}} privato in un cluster in {{site.data.keyword.Bluemix_notm}} pubblico:
 
-1.  Segui i passi presenti nella [documentazione di {{site.data.keyword.registryshort}}](/docs/services/Registry/ts_index.html#ts_ppa) per scaricare il software su licenza da IBM Passport Advantage, invia l'immagine al tuo spazio dei nomi e installa il grafico Helm nel tuo cluster. 
+1.  Segui le procedure descritte nella [documentazione di {{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-ts_index#ts_ppa) per scaricare il software su licenza da IBM Passport Advantage, inviare l'immagine al tuo spazio dei nomi e installare il grafico Helm nel tuo cluster.
 
     **Per IBM WebSphere Application Server Liberty**:
-    
+
     1.  Invece di ottenere l'immagine da IBM Passport Advantage, usa l'[immagine Docker Hub ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://hub.docker.com/_/websphere-liberty/). Per istruzioni su come ottenere una licenza, vedi [Upgrading the image from Docker Hub to a production image![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade).
-    
-    2.  Segui le [istruzioni del grafico Helm Liberty![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html). 
+
+    2.  Segui le [istruzioni del grafico Helm Liberty![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html).
 
 2.  Verifica che lo **STATO** del grafico Helm mostri `DISTRIBUITO`. Nel caso in cui non lo sia, attendi alcuni minuti e ritenta.
     ```
     helm status <helm_chart_name>
     ```
     {: pre}
-   
-3.  Consulta la documentazione specifica del prodotto per ulteriori informazioni su come configurare e usare il prodotto con il tuo cluster. 
 
-    - [IBM Db2 Direct Advanced Edition Server ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.licensing.doc/doc/c0070181.html) 
+3.  Consulta la documentazione specifica del prodotto per ulteriori informazioni su come configurare e usare il prodotto con il tuo cluster.
+
+    - [IBM Db2 Direct Advanced Edition Server ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.licensing.doc/doc/c0070181.html)
     - [IBM MQ Advanced ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.html)
     - [IBM WebSphere Application Server Liberty ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html)

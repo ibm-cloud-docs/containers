@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -29,7 +33,7 @@ Kubernetes 팟(Pod) 우선순위 및 선취를 사용하여 팟(Pod)의 상대�
 
 팟(Pod) 우선순위를 설정하면 낮은 우선순위 워크로드가 클러스터의 중요 워크로드에 영향을 주지 못하도록 방지하는 데 도움이 됩니다(특히, 클러스터가 자체 리소스 용량에 도달하기 시작하는 경우).
 
-클러스터에 대한 [적절한 사용자 액세스 권한을 설정](cs_users.html#users)했으며 [팟(Pod) 보안 정책](cs_psp.html#psp)(해당되는 경우)이 있는지 확인하십시오. 액세스 및 팟(Pod) 보안 정책은 신뢰할 수 없는 사용자가 기타 팟(Pod)의 스케줄링을 막는 높은 우선순위 팟(Pod)을 배치하지 못하도록 방지하는 데 도움이 될 수 있습니다.
+클러스터에 대한 [적절한 사용자 액세스 권한을 설정](/docs/containers?topic=containers-users#users)했으며 [팟(Pod) 보안 정책](/docs/containers?topic=containers-psp#psp)(해당되는 경우)이 있는지 확인하십시오. 액세스 및 팟(Pod) 보안 정책은 신뢰할 수 없는 사용자가 기타 팟(Pod)의 스케줄링을 막는 높은 우선순위 팟(Pod)을 배치하지 못하도록 방지하는 데 도움이 될 수 있습니다.
 {: tip}
 
 {: #priority_scheduling}
@@ -41,7 +45,8 @@ Kubernetes 팟(Pod) 우선순위 및 선취를 사용하여 팟(Pod)의 상대�
 팟(Pod) 우선순위와 스케줄러가 함께 작동되는 방법을 이해하려면 다음 그림에 있는 시나리오를 고려하십시오. 사용 가능한 리소스의 작업자 노드에 우선순위가 지정된 팟(Pod)을 두어야 합니다. 그렇지 않으면, 시나리오 3에서와 같이 기존 팟(Pod)이 제거됨과 동시에 클러스터의 높은 우선순위 팟(Pod)이 보류 중 상태를 유지할 수 있습니다.
 
 _그림: 팟(Pod) 우선순위 시나리오_
-![팟(Pod) 우선순위 시나리오](images/pod-priority.png)
+<img src="images/pod-priority.png" width="500" alt="팟(Pod) 우선순위 시나리오" style="width:500px; border-style: none"/>
+
 1.  높은, 중간 및 낮은 우선순위의 3개 팟(Pod)이 스케줄링을 보류 중입니다. 스케줄러는 모든 3개 팟(Pod)에 대한 공간이 마련된 사용 가능한 작업자 노드를 찾으며, 우선순위에 따라 이를 스케줄합니다(가장 높은 우선순위 팟(Pod)이 첫 번째로 스케줄됨).
 2.  높은, 중간 및 낮은 우선순위의 3개 팟(Pod)이 스케줄링을 보류 중입니다. 스케줄러는 사용 가능한 작업자 노드를 찾지만, 작업자 노드에는 높은 우선순위와 중간 우선순위 팟(Pod)을 지원하기 위해 마련된 리소스만 있습니다. 낮은 우선순위 팟(Pod)은 스케줄되지 않으며 이는 보류 중 상태로 남아 있습니다.
 3.  높은 및 중간 우선순위의 2개 팟(Pod)이 스케줄링을 보류 중입니다. 낮은 우선순위의 세 번째 팟(Pod)은 사용 가능한 작업자 노드에 존재합니다. 그러나 작업자 노드에 보류 중인 팟(Pod)을 스케줄할 수 있는 충분한 리소스가 없습니다. 스케줄러는 우선순위가 낮은 팟(Pod)을 선취 또는 제거하며, 이는 팟(Pod)을 보류 상태로 리턴합니다. 그리고 스케줄러는 높은 우선순위 팟(Pod)을 스케줄하려고 시도합니다. 그러나 작업자 노드에 높은 우선순위 팟(Pod)을 스케줄할 수 있는 충분한 리소스가 없으며, 대신 스케줄러는 중간 우선순위 팟(Pod)을 스케줄합니다.
@@ -86,8 +91,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 시작하기 전에:
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
-* 클러스터를 Kubernetes 버전 1.11로 [작성](cs_clusters.html#clusters_ui)하거나 [업데이트](cs_cluster_update.html#update)하십시오.
+* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* `default` 네임스페이스에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
+* 클러스터를 Kubernetes 버전 1.11로 [작성](/docs/containers?topic=containers-clusters#clusters_ui)하거나 [업데이트](/docs/containers?topic=containers-update#update)하십시오.
 
 우선 순위 클래스를 사용하려면 다음을 수행하십시오.
 
@@ -167,8 +173,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 시작하기 전에:
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
-* 클러스터를 Kubernetes 버전 1.11로 [작성](cs_clusters.html#clusters_ui)하거나 [업데이트](cs_cluster_update.html#update)하십시오.
+* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* 팟(Pod)을 배치할 네임스페이스에 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
+* 클러스터를 Kubernetes 버전 1.11로 [작성](/docs/containers?topic=containers-clusters#clusters_ui)하거나 [업데이트](/docs/containers?topic=containers-update#update)하십시오.
 * 우선순위가 기존 팟(Pod)을 선취하고 클러스터의 리소스가 이용되는 방법에 영향을 줄 수 있으므로 [우선순위 스케줄링이 작동하는 방법을 이해](#priority_scheduling)하십시오.
 
 팟(Pod)에 우선순위를 지정하려면 다음을 수행하십시오.
@@ -199,7 +206,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 3.  팟(Pod) 스펙에서, 이전 단계에서 검색한 우선순위 클래스의 이름으로 `priorityClassName` 필드를 추가하십시오.
 
     ```yaml
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty

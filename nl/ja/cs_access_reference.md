@@ -1,9 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
 
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,132 +22,1005 @@ lastupdated: "2018-12-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
+
 # ユーザー・アクセス許可
-{: #understanding}
+{: #access_reference}
 
-
-
-[クラスター許可を割り当てる](cs_users.html)とき、ユーザーにどの役割を割り当てる必要があるか判断が難しい場合があります。 以下のセクションの表を使用して、{{site.data.keyword.containerlong}} で一般的な作業を実行するために最低限必要な許可レベルを判別してください。
+[クラスター許可を割り当てる](/docs/containers?topic=containers-users)とき、ユーザーにどの役割を割り当てる必要があるか判断が難しい場合があります。 以下のセクションの表を使用して、{{site.data.keyword.containerlong}} で一般的な作業を実行するために最低限必要な許可レベルを判別してください。
 {: shortdesc}
 
-## {{site.data.keyword.Bluemix_notm}} IAM プラットフォームと Kubernetes RBAC
-{: #platform}
+2019 年 1 月 30 日現在、{{site.data.keyword.containerlong_notm}} には、{{site.data.keyword.Bluemix_notm}} IAM: [サービス・アクセス役割](#service)を使用した新しいユーザー許可方法があります。これらのサービス役割は、Kubernetes 名前空間など、クラスター内のリソースにアクセス権限を付与する場合に使用します。詳しくは、ブログ [Introducing service roles and namespaces in IAM for more granular control of cluster access ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/) を参照してください。
+{: note}
 
-{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.Bluemix_notm}} の IAM (ID およびアクセス管理) 役割を使用するように構成されています。 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって、クラスターでユーザーが実行できるアクションが決まります。 プラットフォーム役割が割り当てられたユーザーには必ず、デフォルトの名前空間での対応する Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。 さらに、プラットフォーム役割により、ユーザーの基本的なインフラストラクチャー許可が自動的に設定されます。 ポリシーを設定するには、[{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム許可の割り当て](cs_users.html#platform)を参照してください。 RBAC 役割について詳しくは、[RBAC 許可の割り当て](cs_users.html#role-binding)を参照してください。
+## {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割
+{: #iam_platform}
+
+{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.Bluemix_notm}} の IAM (ID およびアクセス管理) 役割を使用するように構成されています。 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって、クラスター、ワーカー・ノード、および Ingress アプリケーション・ロード・バランサーなどの {{site.data.keyword.Bluemix_notm}} リソースでユーザーが実行できるアクションが決まります。また、{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割により、ユーザーの基本的なインフラストラクチャー許可も自動的に設定されます。プラットフォーム役割を設定するには、[{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム許可の割り当て](/docs/containers?topic=containers-users#platform)を参照してください。
 {: shortdesc}
 
-次の表は、各プラットフォーム役割によって付与されるクラスター管理許可と、対応する RBAC 役割での Kubernetes リソース許可を示しています。
+以下の各セクションの表に、各 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割が付与するクラスター管理許可、ロギング許可、および Ingress 許可が示されています。表は CLI コマンド名のアルファベット順に編成されています。
 
-<table summary="この表は、IAM プラットフォーム役割でのユーザー許可と、対応する RBAC ポリシーを示しています。行は左から右へ読みます。1 列目は IAM プラットフォーム役割、2 列目はクラスター許可、3 列目は対応する RBAC 役割です。">
-<caption>プラットフォーム別のクラスター管理許可と RBAC 役割</caption>
+* [許可を必要としないアクション](#none-actions)
+* [ビューアーのアクション](#view-actions)
+* [エディターのアクション](#editor-actions)
+* [オペレーターのアクション](#operator-actions)
+* [管理者のアクション](#admin-actions)
+
+### 許可を必要としないアクション
+{: #none-actions}
+
+ご使用のアカウントのうち、以下の表のアクションに関して CLI コマンドを実行するか API 呼び出しをするユーザーには、そのユーザーに許可が割り当てられていなくても結果が表示されます。
+{: shortdesc}
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} で許可を必要としない CLI コマンドおよび API 呼び出しの概要</caption>
 <thead>
-    <th>プラットフォームの役割</th>
-    <th>クラスター管理許可</th>
-    <th>対応する RBAC 役割とリソース許可</th>
+<th id="none-actions-action">クラスター管理アクション</th>
+<th id="none-actions-cli">CLI コマンド</th>
+<th id="none-actions-api">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.containerlong_notm}} の API エンドポイントをターゲットに設定するか表示します。</td>
+<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_api)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>サポートされるコマンドとパラメーターのリストを表示します。</td>
+<td><code>[ibmcloud ks help](/docs/containers?topic=containers-cs_cli_reference#cs_help)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.containerlong_notm}} プラグインを初期化するか、Kubernetes クラスターを作成またはアクセスする地域を指定します。</td>
+<td><code>[ibmcloud ks init](/docs/containers?topic=containers-cs_cli_reference#cs_init)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.containerlong_notm}} でサポートされている Kubernetes のバージョンのリストを表示します。 </td><td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
+<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetKubeVersions)</code></td>
+</tr>
+<tr>
+<td>ワーカー・ノードのために使用できるマシン・タイプのリストを表示します。</td>
+<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/swagger-api/#!/util/GetDatacenterMachineTypes)</code></td>
+</tr>
+<tr>
+<td>IBMid ユーザーに対する現在のメッセージを表示します。</td>
+<td><code>[ibmcloud ks messages](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
+<td><code>[GET /v1/messages](https://containers.cloud.ibm.com/swagger-api/#!/util/GetMessages)</code></td>
+</tr>
+<tr>
+<td>現在自分が属している {{site.data.keyword.containerlong_notm}} 地域を見つけます。</td>
+<td><code>[ibmcloud ks region](/docs/containers?topic=containers-cs_cli_reference#cs_region)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.containerlong_notm}} の地域を設定します。</td>
+<td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cs_cli_reference#cs_region-set)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>選択可能な地域をリストします。</td>
+<td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cs_cli_reference#cs_regions)</code></td>
+<td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
+</tr>
+<tr>
+<td>クラスターを作成するために使用できるゾーンのリストを表示します。</td>
+<td><code>[   ibmcloud ks zones
+   ](/docs/containers?topic=containers-cs_cli_reference#cs_datacenters)</code></td>
+<td><code>[GET /v1/zones](https://containers.cloud.ibm.com/swagger-api/#!/util/GetZones)</code></td>
+</tr>
+</tbody>
+</table>
+
+### ビューアーのアクション
+{: #view-actions}
+
+**ビューアー**・プラットフォーム役割には、[許可を必要としないアクション](#none-actions)、および以下の表に示された許可が含まれます。
+{: shortdesc}
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} でビューアー・プラットフォーム役割を必要とするクラスター管理 CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="view-actions-mngt">クラスター管理アクション</th>
+<th id="view-actions-cli">CLI コマンド</th>
+<th id="view-actions-api">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>リソース・グループおよび地域の {{site.data.keyword.Bluemix_notm}} IAM API キーの所有者の名前と E メール・アドレスを表示します。</td>
+<td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetClusterKeyOwner)</code></td>
+</tr>
+<tr>
+<td>クラスターに接続して `kubectl` コマンドを実行するための Kubernetes 構成データと証明書をダウンロードします。</td>
+<td><code>[ibmcloud ks cluster-config](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterConfig)</code></td>
+</tr>
+<tr>
+<td>クラスターの情報を表示します。</td>
+<td><code>[ibmcloud ks cluster-get](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetCluster)</code></td>
+</tr>
+<tr>
+<td>クラスターにバインドされているすべての名前空間のすべてのサービスをリストします。</td>
+<td><code>[ibmcloud ks cluster-services](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_services)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesForAllNamespaces)</code></td>
+</tr>
+<tr>
+<td>すべてのクラスターをリストします。</td>
+<td><code>[ibmcloud ks clusters](/docs/containers?topic=containers-cs_cli_reference#cs_clusters)</code></td>
+<td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusters)</code></td>
+</tr>
+<tr>
+<td>別の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントに対して設定されているインフラストラクチャー資格情報を取得します。</td>
+<td><code>[        ibmcloud ks credential-get
+        ](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetUserCredentials)</code></td>
+</tr>
+<tr>
+<td>特定の名前空間にバインドされているすべてのサービスをリストします。</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesInNamespace)</code></td>
+</tr>
+<tr>
+<td>クラスターにバインドされているすべてのユーザー管理サブネットをリストします。</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterUserSubnet)</code></td>
+</tr>
+<tr>
+<td>インフラストラクチャー・アカウントで使用可能なサブネットのリストを表示します。</td>
+<td><code>[ibmcloud ks subnets](/docs/containers?topic=containers-cs_cli_reference#cs_subnets)</code></td>
+<td><code>[GET /v1/subnets](https://containers.cloud.ibm.com/swagger-api/#!/properties/ListSubnets)</code></td>
+</tr>
+<tr>
+<td>インフラストラクチャー・アカウントの VLAN スパンニング状況を表示します。</td>
+<td><code>[ibmcloud ks vlan-spanning-get](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)</code></td>
+<td><code>[GET /v1/subnets/vlan-spanning](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetVlanSpanning)</code></td>
+</tr>
+<tr>
+<td>1 つのクラスターに対して設定された場合: ゾーン内のクラスター接続先 VLAN のリストを表示します。</br>このアカウントに属するすべてのクラスターに対して設定された場合: ゾーン内の使用可能なすべての VLAN のリストを表示します。</td>
+<td><code>[ibmcloud ks vlans](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/vlans](https://containers.cloud.ibm.com/swagger-api/#!/properties/GetDatacenterVLANs)</code></td>
+</tr>
+<tr>
+<td>クラスターのすべての Web フックをリストします。</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWebhooks)</code></td>
+</tr>
+<tr>
+<td>ワーカー・ノードの情報を表示します。</td>
+<td><code>[ibmcloud ks worker-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkers)</code></td>
+</tr>
+<tr>
+<td>ワーカー・プールの情報を表示します。</td>
+<td><code>[ibmcloud ks worker-pool-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPool)</code></td>
+</tr>
+<tr>
+<td>クラスター内のすべてのワーカー・プールをリストします。</td>
+<td><code>[ibmcloud ks worker-pools](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pools)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPools)</code></td>
+</tr>
+<tr>
+<td>クラスター内のすべてのワーカー・ノードをリストします。</td>
+<td><code>[ibmcloud ks workers](/docs/containers?topic=containers-cs_cli_reference#cs_workers)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWorkers)</code></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} でビューアー・プラットフォーム役割を必要とするIngress CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="view-actions-ingress">Ingress アクション</th>
+<th id="view-actions-cli2">CLI コマンド</th>
+<th id="view-actions-api2">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>Ingress ALB の情報を表示します。</td>
+<td><code>[ibmcloud ks alb-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_get)</code></td>
+<td><code>[GET /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALB)</code></td>
+</tr>
+<tr>
+<td>この地域でサポートされている ALB のタイプを表示します。</td>
+<td><code>[ibmcloud ks alb-types](/docs/containers?topic=containers-cs_cli_reference#cs_alb_types)</code></td>
+<td><code>[GET /albtypes](https://containers.cloud.ibm.com/swagger-alb-api/#!/util/GetAvailableALBTypes)</code></td>
+</tr>
+<tr>
+<td>クラスター内のすべての Ingress ALB をリストします。</td>
+<td><code>[ibmcloud ks albs](/docs/containers?topic=containers-cs_cli_reference#cs_albs)</code></td>
+<td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALBs)</code></td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} でビューアー・プラットフォーム役割を必要とするロギング CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="view-actions-log">ロギングのアクション</th>
+<th id="view-actions-cli3">CLI コマンド</th>
+<th id="view-actions-api3">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>Fluentd アドオンの自動更新の状況を表示します。</td>
+<td><code>[ibmcloud ks logging-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>ターゲット地域のデフォルトのロギング・エンドポイントを表示します。</td>
+<td>-</td>
+<td><code>[GET /v1/logging/{idOrName}/default](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetDefaultLoggingEndpoint)</code></td>
+</tr>
+<tr>
+<td>クラスターまたはクラスター内の特定のログ・ソースのすべてのログ転送構成をリストします。</td>
+<td><code>[ibmcloud ks logging-config-get](/docs/containers?topic=containers-cs_cli_reference#cs_logging_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigs) および [GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigsForSource)</code></td>
+</tr>
+<tr>
+<td>ログ・フィルター構成の情報を表示します。</td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfig)</code></td>
+</tr>
+<tr>
+<td>クラスター内のすべてのロギング・フィルター構成をリストします。</td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfigs)</code></td>
+</tr>
+</tbody>
+</table>
+
+### エディターのアクション
+{: #editor-actions}
+
+**エディター**・プラットフォーム役割には、**ビューアー**により付与される許可、および以下が含まれます。**ヒント**: アプリ開発者にはこの役割を使用し、<a href="#cloud-foundry">Cloud Foundry</a> **Developer** 役割を割り当ててください。
+{: shortdesc}
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} でエディター・プラットフォーム役割を必要とするクラスター管理 CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="editor-actions-mngt">クラスター管理アクション</th>
+<th id="editor-actions-cli">CLI コマンド</th>
+<th id="editor-actions-api">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>サービスをクラスターにバインドします。 **注**: サービスがあるスペースの開発者の Cloud Foundry 役割も必要です。</td>
+<td><code>[ibmcloud ks cluster-service-bind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/BindServiceToNamespace)</code></td>
+</tr>
+<tr>
+<td>クラスターからサービスをアンバインドします。**注**: サービスがあるスペースの開発者の Cloud Foundry 役割も必要です。</td>
+<td><code>[ibmcloud ks cluster-service-unbind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_unbind)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UnbindServiceFromNamespace)</code></td>
+</tr>
+<tr>
+<td>クラスター内に Web フックを作成します。</td>
+<td><code>[ibmcloud ks webhook-create](/docs/containers?topic=containers-cs_cli_reference#cs_webhook_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWebhooks)</code></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} でエディター・プラットフォーム役割を必要とするIngress CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="editor-actions-ingress">Ingress アクション</th>
+<th id="editor-actions-cli2">CLI コマンド</th>
+<th id="editor-actions-api2">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>Ingress ALB アドオンの自動更新を無効にします。</td>
+<td><code>[ibmcloud ks alb-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Ingress ALB アドオンの自動更新を有効にします。</td>
+<td><code>[ibmcloud ks alb-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Ingress ALB アドオンの自動更新が有効になっているか検査します。</td>
+<td><code>[ibmcloud ks alb-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Ingress ALB を有効化または無効化します。</td>
+<td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</code></td>
+<td><code>[POST /albs](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/EnableALB) および [DELETE /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#/)</code></td>
+</tr>
+<tr>
+<td>Ingress ALB アドオン更新を、以前 ALB ポッドが実行されていたビルドにロールバックします。</td>
+<td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cs_cli_reference#cs_alb_rollback)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/RollbackUpdate)</code></td>
+</tr>
+<tr>
+<td>手動で Ingress ALB アドオンを更新することにより、一回限りの ALB ポッド更新を強制実行します。</td>
+<td><code>[ibmcloud ks alb-update](/docs/containers?topic=containers-cs_cli_reference#cs_alb_update)</code></td>
+<td><code>[PUT /clusters/{idOrName}/update](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBs)</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} でエディター・プラットフォーム役割を必要とするロギング CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="editor-log">ロギングのアクション</th>
+<th id="editor-cli3">CLI コマンド</th>
+<th id="editor-api3">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>API サーバーの監査 Web フックを作成します。</td>
+<td><code>[ibmcloud ks apiserver-config-set](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_set)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/clusters/apiserverconfigs/UpdateAuditWebhook)</code></td>
+</tr>
+<tr>
+<td>API サーバーの監査 Web フックを削除します。</td>
+<td><code>[ibmcloud ks apiserver-config-unset](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_unset)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/apiserverconfigs/DeleteAuditWebhook)</code></td>
+</tr>
+<tr>
+<td><code>kube-audit</code> 以外のすべてのログ・ソースのログ転送構成を作成します。</td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+</tr>
+<tr>
+<td>ログ転送構成をリフレッシュします。</td>
+<td><code>[ibmcloud ks logging-config-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_logging_refresh)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/refresh](https://containers.cloud.ibm.com/swagger-logging/#!/logging/RefreshLoggingConfig)</code></td>
+</tr>
+<tr>
+<td><code>kube-audit</code> 以外のすべてのログ・ソースのログ転送構成を削除します。</td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+</tr>
+<tr>
+<td>クラスターのすべてのログ転送構成を削除します。</td>
+<td>-</td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfigs)</code></td>
+</tr>
+<tr>
+<td>ログ転送構成を更新します。</td>
+<td><code>[ibmcloud ks logging-config-update](/docs/containers?topic=containers-cs_cli_reference#cs_logging_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/UpdateLoggingConfig)</code></td>
+</tr>
+<tr>
+<td>ログ・フィルター操作構成を作成します。</td>
+<td><code>[ibmcloud ks logging-filter-create](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/CreateFilterConfig)</code></td>
+</tr>
+<tr>
+<td>ログ・フィルター操作構成を削除します。</td>
+<td><code>[ibmcloud ks logging-filter-rm](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_delete)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfig)</code></td>
+</tr>
+<tr>
+<td>Kubernetes クラスターのすべてのロギング・フィルター構成を削除します。</td>
+<td>-</td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfigs)</code></td>
+</tr>
+<tr>
+<td>ログ・フィルター操作構成を更新します。</td>
+<td><code>[ibmcloud ks logging-filter-update](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/UpdateFilterConfig)</code></td>
+</tr>
+</tbody>
+</table>
+
+### オペレーターのアクション
+{: #operator-actions}
+
+**オペレーター**・プラットフォーム役割には、**ビューアー**により付与される許可、および以下の表に示されている許可が含まれます。
+{: shortdesc}
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} でオペレーター・プラットフォーム役割を必要とするクラスター管理 CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="operator-mgmt">クラスター管理アクション</th>
+<th id="operator-cli">CLI コマンド</th>
+<th id="operator-api">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes マスターをリフレッシュします。</td>
+<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
+</tr>
+<tr>
+<td>クラスターの {{site.data.keyword.Bluemix_notm}} IAM サービス ID を作成し、{{site.data.keyword.registrylong_notm}} で**リーダー**・サービス・アクセス役割を割り当てるサービス ID のポリシーを作成してから、サービス ID の API キーを作成します。</td>
+<td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_pull_secret_apply)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>クラスター・マスター・ノードを再始動して、新しい Kubernetes API 構成変更を適用します。</td>
+<td><code>[ibmcloud ks cluster-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
+</tr>
+<tr>
+<td>クラスターにサブネットを追加します。</td>
+<td><code>[ibmcloud ks cluster-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterSubnet)</code></td>
+</tr>
+<tr>
+<td>サブネットを作成します。</td>
+<td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateClusterSubnet)</code></td>
+</tr>
+<tr>
+<td>クラスターを更新します。</td>
+<td><code>[ibmcloud ks cluster-update](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateCluster)</code></td>
+</tr>
+<tr>
+<td>クラスターにユーザー管理のサブネットを追加します。</td>
+<td><code>[ibmcloud ks cluster-user-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterUserSubnet)</code></td>
+</tr>
+<tr>
+<td>クラスターからユーザー管理のサブネットを削除します。</td>
+<td><code>[ibmcloud ks cluster-user-subnet-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/usersubnets/{subnetId}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterUserSubnet)</code></td>
+</tr>
+<tr>
+<td>ワーカー・ノードを追加します。</td>
+<td><code>[ibmcloud ks worker-add (非推奨)](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWorkers)</code></td>
+</tr>
+<tr>
+<td>ワーカー・プールを作成します。</td>
+<td><code>[ibmcloud ks worker-pool-create](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateWorkerPool)</code></td>
+</tr>
+<tr>
+<td>ワーカー・プールのバランスを再調整します。</td>
+<td><code>[ibmcloud ks worker-pool-rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+</tr>
+<tr>
+<td>ワーカー・プールをサイズ変更します。</td>
+<td><code>[ibmcloud ks worker-pool-resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+</tr>
+<tr>
+<td>ワーカー・プールを削除します。</td>
+<td><code>[ibmcloud ks worker-pool-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPool)</code></td>
+</tr>
+<tr>
+<td>ワーカー・ノードをリブートします。</td>
+<td><code>[ibmcloud ks worker-reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+</tr>
+<tr>
+<td>ワーカー・ノードを再ロードします。</td>
+<td><code>[ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+</tr>
+<tr>
+<td>ワーカー・ノードを削除します。</td>
+<td><code>[ibmcloud ks worker-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterWorker)</code></td>
+</tr>
+<tr>
+<td>ワーカー・ノードを更新します。</td>
+<td><code>[ibmcloud ks worker-update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+</tr>
+<tr>
+<td>ワーカー・プールにゾーンを追加します。</td>
+<td><code>[ibmcloud ks zone-add](/docs/containers?topic=containers-cs_cli_reference#cs_zone_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZone)</code></td>
+</tr>
+<tr>
+<td>ワーカー・プール内の特定のゾーンのネットワーク構成を更新します。</td>
+<td><code>[ibmcloud ks zone-network-set](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZoneNetwork)</code></td>
+</tr>
+<tr>
+<td>ワーカー・プールからゾーンを削除します。</td>
+<td><code>[ibmcloud ks zone-rm](/docs/containers?topic=containers-cs_cli_reference#cs_zone_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPoolZone)</code></td>
+</tr>
+</tbody>
+</table>
+
+### 管理者のアクション
+{: #admin-actions}
+
+**管理者**プラットフォーム役割には、**ビューアー**役割、**エディター**役割、および**オペレーター**役割により付与されるすべての許可、および以下が含まれます。マシン、VLAN、サブネットなどのリソースを作成するには、管理者ユーザーに**スーパーユーザー**・<a href="#infra">インフラストラクチャー役割</a>が必要です。
+{: shortdesc}
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} で管理者プラットフォーム役割を必要とするクラスター管理 CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="admin-mgmt">クラスター管理アクション</th>
+<th id="admin-cli">CLI コマンド</th>
+<th id="admin-api">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>リンクされた IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントの API キーを設定します。</td>
+<td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset)</code></td>
+<td><code>[POST /v1/keys](https://containers.cloud.ibm.com/swagger-api/#!/accounts/ResetUserAPIKey)</code></td>
+</tr>
+<tr>
+<td>クラスター内の、Istio や Knative などの管理対象アドオンを無効化します。</td>
+<td><code>[ibmcloud ks cluster-addon-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_disable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+</tr>
+<tr>
+<td>クラスター内の、Istio や Knative などの管理対象アドオンを有効化します。</td>
+<td><code>[ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+</tr>
+<tr>
+<td>クラスター内で有効化されている、Istio や Knative などの管理対象アドオンをリストします。</td>
+<td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addons)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterAddons)</code></td>
+</tr>
+<tr>
+<td>フリー・クラスターまたは標準クラスターを作成します。 **注**: {{site.data.keyword.registrylong_notm}} の管理者プラットフォーム役割、およびスーパーユーザー・インフラストラクチャー役割も必要です。</td>
+<td><code>[ibmcloud ks cluster-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)</code></td>
+<td><code>[POST /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateCluster)</code></td>
+</tr>
+<tr>
+<td>クラスター・マスターのパブリック・サービス・エンドポイントなどの、クラスターの指定された機能を無効化します。</td>
+<td><code>[ibmcloud ks cluster-feature-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>クラスター・マスターのプライベート・サービス・エンドポイントなどの、クラスターの指定された機能を有効化します。</td>
+<td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>クラスター内の有効な機能をリストします。</td>
+<td><code>[ibmcloud ks cluster-features](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>クラスターを削除します。</td>
+<td><code>[ibmcloud ks cluster-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveCluster)</code></td>
+</tr>
+<tr>
+<td>別の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントのインフラストラクチャー資格情報を設定します。</td>
+<td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)</code></td>
+<td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/StoreUserCredentials)</code></td>
+</tr>
+<tr>
+<td>別の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントのインフラストラクチャー資格情報を削除します。</td>
+<td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset)</code></td>
+<td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/RemoveUserCredentials)</code></td>
+</tr>
+<tr>
+<td>{{site.data.keyword.keymanagementservicefull}} を使用した Kubernetes シークレットを暗号化します。</td>
+<td><code>[ibmcloud ks key-protect-enable](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/kms](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateKMSConfig)</code></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} で管理者プラットフォーム役割を必要とするIngress CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="admin-ingress">Ingress アクション</th>
+<th id="admin-cli2">CLI コマンド</th>
+<th id="admin-api2">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.cloudcerts_long_notm}} インスタンスから ALB への証明書をデプロイまたは更新します。</td>
+<td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_deploy)</code></td>
+<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/CreateALBSecret) または [PUT /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBSecret)</code></td>
+</tr>
+<tr>
+<td>クラスター内の ALB シークレットの詳細を表示します。</td>
+<td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ViewClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>クラスターから ALB シークレットを削除します。</td>
+<td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/DeleteClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>クラスター内のすべての ALB シークレットをリストします。</td>
+<td><code>[ibmcloud ks alb-certs](/docs/containers?topic=containers-cs_cli_reference#cs_alb_certs)</code></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>{{site.data.keyword.containerlong_notm}} で管理者プラットフォーム役割を必要とするロギング CLI コマンドおよび API 呼び出しの概要</caption>
+<thead>
+<th id="admin-log">ロギングのアクション</th>
+<th id="admin-cli3">CLI コマンド</th>
+<th id="admin-api3">API 呼び出し</th>
+</thead>
+<tbody>
+<tr>
+<td>Fluentd クラスター・アドオンの自動更新を無効にします。</td>
+<td><code>[ibmcloud ks logging-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>Fluentd クラスター・アドオンの自動更新を有効にします。</td>
+<td><code>[ibmcloud ks logging-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_enable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cos_full_notm}} バケット内の API サーバー・ログのスナップショットを収集します。</td>
+<td><code>[ibmcloud ks logging-collect](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>API サーバー・ログのスナップショット要求の状況を表示します。</td>
+<td><code>[ibmcloud ks logging-collect-status](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect_status)</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>kube-audit</code> ログ・ソースのログ転送構成を作成します。</td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+</tr>
+<tr>
+<td><code>kube-audit</code> ログ・ソースのログ転送構成を削除します。</td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
+## {{site.data.keyword.Bluemix_notm}} IAM サービス役割
+{: #service}
+
+{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割が割り当てられたユーザーには必ず、特定の名前空間での対応する Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。 サービス・アクセス役割について詳しくは、[{{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を参照してください。RBAC 役割について詳しくは、[RBAC 許可の割り当て](/docs/containers?topic=containers-users#role-binding)を参照してください。
+{: shortdesc}
+
+RBAC を介して各サービス役割が付与する Kubernetes アクションについて詳しくは、[RBAC 役割ごとの Kubernetes リソース許可](#rbac)を参照してください。
+{: tip}
+
+以下の表は、各サービス役割およびそれに対応する RBAC 役割によって付与される Kubernetes リソース許可を示しています。
+
+<table>
+<caption>サービス役割および対応する RBAC 役割別の Kubernetes リソース許可</caption>
+<thead>
+    <th id="service-role">サービス役割</th>
+    <th id="rbac-role">対応する RBAC 役割、バインディング、およびスコープ</th>
+    <th id="kube-perm">Kubernetes リソース許可</th>
 </thead>
 <tbody>
   <tr>
-    <td>**Viewer**</td>
-    <td>
-      クラスター:<ul>
-        <li>リソース・グループおよび地域の {{site.data.keyword.Bluemix_notm}} IAM API キーの所有者の名前と E メール・アドレスの表示</li>
-        <li>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするために {{site.data.keyword.Bluemix_notm}} アカウントで複数の異なる資格情報を使用する場合は、インフラストラクチャー・ユーザー名の表示</li>
-        <li>すべてのクラスター、ワーカー・ノード、ワーカー・プール、クラスター内のサービス、Webhook のリスト表示または詳細の表示</li>
-        <li>インフラストラクチャー・アカウントの VLAN スパンニング状況の表示</li>
-        <li>インフラストラクチャー・アカウントで使用可能なサブネットのリスト表示</li>
-        <li>1 つのクラスターに対して設定された場合: ゾーン内のクラスター接続先 VLAN のリスト表示</li>
-        <li>このアカウントに属するすべてのクラスターに対して設定された場合: ゾーン内の使用可能なすべての VLAN のリスト表示</li></ul>
-      ロギング:<ul>
-        <li>ターゲット地域のデフォルトのロギング・エンドポイントの表示</li>
-        <li>ログ転送構成とログ・フィルタリング構成のリスト表示または詳細の表示</li>
-        <li>Fluentd アドオンの自動更新の状況の表示</li></ul>
-      Ingress:<ul>
-        <li>クラスター内のすべての ALB のリスト表示または詳細の表示</li>
-        <li>この地域でサポートされている ALB のタイプを表示します</li></ul>
-    </td>
-    <td><code>ibm-view</code> 役割バインディングによって <code>view</code> クラスター役割が適用され、<code>default</code> 名前空間で以下の許可が付与されます。<ul>
-      <li>デフォルトの名前空間内にあるリソースに対する読み取りアクセス</li>
-      <li>Kubernetes シークレットに対する読み取りアクセス権限はなし</li></ul>
+    <td id="service-role-reader" headers="service-role">リーダー役割</td>
+    <td headers="service-role-reader rbac-role">有効範囲を 1 つの名前空間に設定する場合: <strong><code>ibm-view</code></strong> 役割バインディングによってその名前空間で適用される <strong><code>view</code></strong> クラスター役割</br><br>有効範囲をすべての名前空間に設定する場合: <strong><code>ibm-view</code></strong> 役割バインディングによってクラスターの各名前空間で適用される <strong><code>view</code></strong> クラスター役割</td>
+    <td headers="service-role-reader kube-perm"><ul>
+      <li>名前空間内にあるリソースに対する読み取りアクセス</li>
+      <li>役割および役割バインディングまたは Kubernetes シークレットに対する読み取りアクセス権限はなし</li>
+      <li>Kubernetes ダッシュボードにアクセスして名前空間内のリソースを表示する</li></ul>
     </td>
   </tr>
   <tr>
-    <td>**Editor** <br/><br/><strong>ヒント</strong>: アプリ開発者にはこの役割を使用し、<a href="#cloud-foundry">Cloud Foundry</a> **Developer** 役割を割り当ててください。</td>
-    <td>この役割には、ビューアー役割におけるすべての許可に加えて、以下が許可されます。</br></br>
-      クラスター:<ul>
-        <li>クラスターへの {{site.data.keyword.Bluemix_notm}} サービスのバインドとアンバインド</li></ul>
-      ロギング:<ul>
-        <li>API サーバー監査 Webhook の作成、更新、削除</li>
-        <li>クラスター Webhook の作成</li>
-        <li>`kube-audit` を除くすべてのタイプのログ転送構成の作成と削除</li>
-        <li>ログ転送構成の更新とリフレッシュ</li>
-        <li>ログ・フィルタリング構成の作成、更新、削除</li></ul>
-      Ingress:<ul>
-        <li>ALB の有効化または無効化</li></ul>
+    <td id="service-role-writer" headers="service-role">ライター役割 </td>
+    <td headers="service-role-writer rbac-role">有効範囲を 1 つの名前空間に設定する場合: <strong><code>ibm-edit</code></strong> 役割バインディングによってその名前空間で適用される <strong><code>edit</code></strong> クラスター役割</br><br>有効範囲をすべての名前空間に設定する場合: <strong><code>ibm-edit</code></strong> 役割バインディングによってクラスターの各名前空間で適用される <strong><code>edit</code></strong> クラスター役割</td>
+    <td headers="service-role-writer kube-perm"><ul><li>名前空間内にあるリソースに対する読み取り/書き込みアクセス</li>
+    <li>役割および役割バインディングに対する読み取り/書き込みアクセス権限はなし</li>
+    <li>Kubernetes ダッシュボードにアクセスして名前空間内のリソースを表示する</li></ul>
     </td>
-    <td><code>ibm-edit</code> 役割バインディングによって <code>edit</code> クラスター役割が適用され、<code>default</code> 名前空間で以下の許可が付与されます。
-      <ul><li>デフォルトの名前空間内にあるリソースに対する読み取り/書き込みアクセス</li></ul></td>
   </tr>
   <tr>
-    <td>**Operator**</td>
-    <td>この役割には、ビューアー役割におけるすべての許可に加えて、以下が許可されます。</br></br>
-      クラスター:<ul>
-        <li>クラスターの更新</li>
-        <li>Kubernetes マスターのリフレッシュ</li>
-        <li>ワーカー・ノードを追加および削除する</li>
-        <li>ワーカー・ノードのリブート、再ロード、更新</li>
-        <li>ワーカー・プールの作成と削除</li>
-        <li>ワーカー・プール内のゾーンの追加と削除</li>
-        <li>ワーカー・プール内のある特定のゾーンのネットワーク構成の更新</li>
-        <li>ワーカー・プールのサイズ変更と再バランス</li>
-        <li>クラスター内のサブネットの作成と追加</li>
-        <li>クラスター内のユーザー管理サブネットの追加と削除</li></ul>
-    </td>
-    <td><code>ibm-operate</code> クラスター役割バインディングによって <code>admin</code> クラスター役割が適用され、以下の許可が付与されます。<ul>
-      <li>名前空間自体ではなく、名前空間内にあるリソースに対する読み取り/書き込みアクセス</li>
-      <li>名前空間内で RBAC 役割を作成する</li></ul></td>
-  </tr>
-  <tr>
-    <td>**管理者**</td>
-    <td>この役割には、このアカウントに属するすべてのクラスターに対するエディター、オペレーター、ビューアーの役割におけるすべての許可に加えて、以下が許可されます。</br></br>
-      クラスター:<ul>
-        <li>フリー・クラスターと標準クラスターの作成</li>
-        <li>クラスターの削除</li>
-        <li>{{site.data.keyword.keymanagementservicefull}} を使用した Kubernetes シークレットの暗号化</li>
-        <li>リンクされた IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントの API キーの設定</li>
-        <li>別の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントのインフラストラクチャー資格情報の設定、表示、削除</li>
-        <li>このアカウントに属する他の既存ユーザーの {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割の割り当てと変更</li>
-        <li>すべての地域のすべての {{site.data.keyword.containerlong_notm}} インスタンス (クラスター) に対して設定された場合: このアカウントに属する使用可能なすべての VLAN のリスト表示</ul>
-      ロギング:<ul>
-        <li>`kube-audit` タイプのログ転送構成の作成と更新</li>
-        <li>{{site.data.keyword.cos_full_notm}} バケット内の API サーバー・ログのスナップショットの収集</li>
-        <li>Fluentd クラスター・アドオンの自動更新の有効化と無効化</li></ul>
-      Ingress:<ul>
-        <li>クラスター内のすべての ALB シークレットのリスト表示または詳細の表示</li>
-        <li>{{site.data.keyword.cloudcerts_long_notm}} インスタンスから ALB への証明書のデプロイ</li>
-        <li>クラスター内の ALB シークレットの更新または削除</li></ul>
-      <p class="note">マシン、VLAN、サブネットなどのリソースを作成するには、管理者ユーザーに**スーパーユーザー**・インフラストラクチャー役割が必要です。</p>
-    </td>
-    <td><code>ibm-admin</code> クラスター役割バインディングによって <code>cluster-admin</code> クラスター役割が適用され、以下の許可が付与されます。
-      <ul><li>すべての名前空間内にあるリソースに対する読み取り/書き込みアクセス</li>
-      <li>名前空間内で RBAC 役割を作成する</li>
-      <li>Kubernetes ダッシュボードにアクセスする</li>
-      <li>アプリをだれでも利用できるようにする Ingress リソースを作成する</li></ul>
+    <td id="service-role-manager" headers="service-role">マネージャー役割</td>
+    <td headers="service-role-manager rbac-role">有効範囲を 1 つの名前空間に設定する場合: <strong><code>ibm-operate</code></strong> 役割バインディングによってその名前空間で適用される <strong><code>admin</code></strong> クラスター役割</br><br>有効範囲をすべての名前空間に設定する場合: すべての名前空間に適用される <strong><code>ibm-admin</code></strong> クラスター役割バインディングによって適用される <strong><code>cluster-admin</code></strong> クラスター役割</td>
+    <td headers="service-role-manager kube-perm">有効範囲を 1 つの名前空間に設定する場合:
+      <ul><li>名前空間内のすべてのリソースに対する読み取り/書き込みアクセス、ただしリソース・クォータまたは名前空間自体への読み取り/書き込みアクセス権限はなし</li>
+      <li>名前空間内で RBAC 役割および役割バインディングを作成する</li>
+      <li>Kubernetes ダッシュボードにアクセスして名前空間内のすべてのリソースを表示する</li></ul>
+    </br>有効範囲をすべての名前空間に設定する場合:
+        <ul><li>すべての名前空間内にあるすべてのリソースに対する読み取り/書き込みアクセス</li>
+        <li>名前空間内で RBAC 役割および役割バインディングを作成する、またはすべての名前空間内でクラスター役割およびクラスター役割バインディングを作成する</li>
+        <li>Kubernetes ダッシュボードにアクセスする</li>
+        <li>アプリをだれでも利用できるようにする Ingress リソースを作成する</li>
+        <li><code>kubectl top pods</code>、<code>kubectl top nodes</code>、または <code>kubectl get nodes</code> コマンドを使用した場合などのクラスター・メトリックを確認する</li></ul>
     </td>
   </tr>
-  </tbody>
+</tbody>
 </table>
 
+<br />
+
+
+## RBAC 役割ごとの Kubernetes リソース許可
+{: #rbac}
+
+{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割が割り当てられたユーザーには必ず、対応する事前定義の Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。独自のカスタム Kubernetes RBAC 役割を管理する場合は、[ユーザー、グループ、またはサービス・アカウントに対するカスタム RBAC 許可の作成](/docs/containers?topic=containers-users#rbac)を参照してください。
+{: shortdesc}
+
+名前空間内のリソースに対して特定の `kubectl` コマンドを実行する正しい許可があるかどうか不明な場合は、[`kubectl auth can-i` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-can-i-em-) を試行してください。
+{: tip}
+
+以下の表は、各 RBAC 役割によって個々の Kubernetes リソースに付与される許可を示しています。許可は、その役割を持つユーザーがリソースに対して実行できる verbs ("get"、"list"、"describe"、"create"、または "delete" など) として示されています。
+
+<table>
+ <caption>各事前定義 RBAC 役割によって付与される Kubernetes リソース許可</caption>
+ <thead>
+  <th>Kubernetes リソース</th>
+  <th><code>view</code></th>
+  <th><code>edit</code></th>
+  <th><code>admin</code> および <code>cluster-admin</code></th>
+ </thead>
+<tbody>
+<tr>
+  <td>bindings</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+</tr><tr>
+  <td>configmaps</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>cronjobs.batch</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>daemonsets.apps </td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>daemonsets.extensions</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>deployments.apps</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>deployments.apps/rollback</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>deployments.apps/scale</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>deployments.extensions</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>deployments.extensions/rollback</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>deployments.extensions/scale</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>endpoints</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>events</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+</tr><tr>
+  <td>horizontalpodautoscalers.autoscaling</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>ingresses.extensions</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>jobs.batch</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>limitranges</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+</tr><tr>
+  <td>localsubjectaccessreviews</td>
+  <td>-</td>
+  <td>-</td>
+  <td><code>create</code></td>
+</tr><tr>
+  <td>namespaces</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></br>**cluster-admin のみ:** <code>create</code>、<code>delete</code></td>
+</tr><tr>
+  <td>namespaces/status</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+</tr><tr>
+  <td>networkpolicies</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>networkpolicies.extensions</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>persistentvolumeclaims</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>poddisruptionbudgets.policy</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>pods</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>top</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>pods/attach</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>pods/exec</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>pods/log</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+</tr><tr>
+  <td>pods/portforward</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>pods/proxy</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>pods/status</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+</tr><tr>
+  <td>replicasets.apps</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>replicasets.apps/scale</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>replicasets.extensions</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>replicasets.extensions/scale</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>replicationcontrollers</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>replicationcontrollers/scale</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>replicationcontrollers/status</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+</tr><tr>
+  <td>replicationcontrollers.extensions/scale</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>resourcequotas</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+</tr><tr>
+  <td>resourcequotas/status</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+</tr><tr>
+  <td>rolebindings</td>
+  <td>-</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>roles</td>
+  <td>-</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>シークレット</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>serviceaccounts</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code>、<code>impersonate</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code>、<code>impersonate</code></td>
+</tr><tr>
+  <td>サービス</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>services/proxy</td>
+  <td>-</td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>statefulsets.apps</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr><tr>
+  <td>statefulsets.apps/scale</td>
+  <td><code>get</code>、<code>list</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code></td>
+</tr>
+</tbody>
+</table>
+
+<br />
 
 
 ## Cloud Foundry の役割
 {: #cloud-foundry}
 
-Cloud Foundry の役割は、このアカウントに属する組織およびスペースにアクセス権限を付与します。 {{site.data.keyword.Bluemix_notm}} の Cloud Foundry ベースのサービスのリストを表示するには、`ibmcloud service list` を実行します。 詳しくは、{{site.data.keyword.Bluemix_notm}} IAM 資料に記載されている、使用可能なすべての[組織およびスペース役割](/docs/iam/cfaccess.html)、または [Cloud Foundry アクセス権限を管理する](/docs/iam/mngcf.html)ためのステップを参照してください。
+Cloud Foundry の役割は、このアカウントに属する組織およびスペースにアクセス権限を付与します。 {{site.data.keyword.Bluemix_notm}} の Cloud Foundry ベースのサービスのリストを表示するには、`ibmcloud service list` を実行します。 詳しくは、{{site.data.keyword.Bluemix_notm}} IAM 資料に記載されている、使用可能なすべての[組織およびスペース役割](/docs/iam?topic=iam-cfaccess)、または [Cloud Foundry アクセス権限を管理する](/docs/iam?topic=iam-mngcf)ためのステップを参照してください。
 {: shortdesc}
 
 次の表は、クラスター・アクション許可に必要な Cloud Foundry 役割を示しています。
 
-<table summary="次の表は、Cloud Foundry でのユーザー許可を示しています。行は左から右へ読みます。1 列目は Cloud Foundry 役割、2 列目はクラスター許可です。">
+<table>
   <caption>Cloud Foundry 役割別のクラスター管理許可</caption>
   <thead>
     <th>Cloud Foundry 役割</th>
@@ -169,16 +1045,16 @@ Cloud Foundry の役割は、このアカウントに属する組織およびス
 ## インフラストラクチャー役割
 {: #infra}
 
-**スーパーユーザー**・インフラストラクチャー・アクセス役割を持つユーザーが[地域とリソース・グループの API キーを設定する](cs_users.html#api_key)と、このアカウントに属する他のユーザーのインフラストラクチャー許可が {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって設定されます。 他のユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可を編集する必要はありません。 API キーを設定するユーザーに**スーパーユーザー**を割り当てることができない場合のみ、次の表を使用して、ユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可をカスタマイズしてください。 詳しくは、[インフラストラクチャー許可のカスタマイズ](cs_users.html#infra_access)を参照してください。
+**スーパーユーザー**・インフラストラクチャー・アクセス役割を持つユーザーが[地域とリソース・グループの API キーを設定する](/docs/containers?topic=containers-users#api_key)と、このアカウントに属する他のユーザーのインフラストラクチャー許可が {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって設定されます。 他のユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可を編集する必要はありません。 API キーを設定するユーザーに**スーパーユーザー**を割り当てることができない場合のみ、次の表を使用して、ユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可をカスタマイズしてください。 詳しくは、[インフラストラクチャー許可のカスタマイズ](/docs/containers?topic=containers-users#infra_access)を参照してください。
 {: shortdesc}
 
 次の表は、一般的な作業グループを完了するために必要なインフラストラクチャー許可を示しています。
 
-<table summary="一般的な {{site.data.keyword.containerlong_notm}} シナリオに必要なインフラストラクチャー許可。">
+<table>
  <caption>一般的に必要な {{site.data.keyword.containerlong_notm}} のインフラストラクチャー許可</caption>
  <thead>
   <th>{{site.data.keyword.containerlong_notm}} の一般的な作業</th>
-  <th>必要なインフラストラクチャー許可 (タブ別)</th>
+  <th>必要なインフラストラクチャー許可 (カテゴリー別)</th>
  </thead>
  <tbody>
    <tr>

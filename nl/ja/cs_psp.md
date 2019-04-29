@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -22,24 +26,20 @@ lastupdated: "2018-12-05"
 {: #psp}
 
 [ポッド・セキュリティー・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) により、
-{{site.data.keyword.containerlong}} のポッドの作成および更新をユーザーに許可するポリシーを構成できます。 Kubernetes バージョン 1.10.3、1.9.8、1.8.13 以降のフィックスパックを実行するクラスターは、これらのポリシーを適用する `PodSecurityPolicy` アドミッション・コントローラーをサポートします。
-{: shortdesc}
-
-古いバージョンの Kubernetes を使用していますか? 今日こそ[クラスターを更新](cs_cluster_update.html)してください。
-{: tip}
+{{site.data.keyword.containerlong}} のポッドの作成および更新をユーザーに許可するポリシーを構成できます。
 
 **なぜポッド・セキュリティー・ポリシーを設定するのですか?**</br>
 クラスター管理者は、クラスター内で行われること (特に、クラスターのセキュリティーや作動可能性に影響を与える操作) を制御する必要があります。 ポッド・セキュリティー・ポリシーにより、特権コンテナー、ルート名前空間、ホスト・ネットワーキングとポート、ボリューム・タイプ、ホスト・ファイル・システム、読み取り専用などの Linux 権限やグループ ID、その他の多くのものの使用を制御できます。
 
-`PodSecurityPolicy` アドミッション・コントローラーにより、クラスター管理者が[ポリシーを許可](#customize_psp)しないとポッドは作成できません。 ポッド・セキュリティー・ポリシーをセットアップすると意図しない副次的影響が生じる可能性があるため、ポリシーを変更した後は、必ず、デプロイメントをテストしてください。 アプリをデプロイするには、ポッドをデプロイするために必要なポッド・セキュリティー・ポリシーで、ユーザーおよびサービス・アカウントをすべて許可しておく必要があります。 例えば、[Helm](cs_integrations.html#helm_links) を使用してアプリをインストールするには、Helm tiller コンポーネントがポッドを作成するので、ポッド・セキュリティー・ポリシーで正しい許可を受けておく必要があります。
+`PodSecurityPolicy` アドミッション・コントローラーにより、クラスター管理者が[ポリシーを許可](#customize_psp)しないとポッドは作成できません。 ポッド・セキュリティー・ポリシーをセットアップすると意図しない副次的影響が生じる可能性があるため、ポリシーを変更した後は、必ず、デプロイメントをテストしてください。 アプリをデプロイするには、ポッドをデプロイするために必要なポッド・セキュリティー・ポリシーで、ユーザーおよびサービス・アカウントをすべて許可しておく必要があります。 例えば、[Helm](/docs/containers?topic=containers-integrations#helm_links) を使用してアプリをインストールするには、Helm tiller コンポーネントがポッドを作成するので、ポッド・セキュリティー・ポリシーで正しい許可を受けておく必要があります。
 
-{{site.data.keyword.containerlong_notm}} にアクセスするユーザーを制御しようとしていますか? [クラスター・アクセス権限の割り当て](cs_users.html#users)を参照して、{{site.data.keyword.Bluemix_notm}} IAM とインフラストラクチャーの権限を設定してください。
+{{site.data.keyword.containerlong_notm}} にアクセスするユーザーを制御しようとしていますか? [クラスター・アクセス権限の割り当て](/docs/containers?topic=containers-users#users)を参照して、{{site.data.keyword.Bluemix_notm}} IAM とインフラストラクチャーの権限を設定してください。
 {: tip}
 
 **デフォルトで設定されているポリシーはあります? 何を追加できますか? **</br>
 デフォルトで、{{site.data.keyword.containerlong_notm}} は、削除も変更もできない [{{site.data.keyword.IBM_notm}} クラスター管理のためのリソース](#ibm_psp)を `PodSecurityPolicy` アドミッション・コントローラーに構成しています。 アドミッション・コントローラーを無効にすることもできません。
 
-デフォルトでは、ポッド操作はロックされていません。 代わりに、クラスターには役割ベース・アクセス制御 (RBAC) のリソースが 2 つあり、これらのリソースにより、すべての管理者、ユーザー、サービス、ノードに特権ポッドと非特権ポッドの作成が許可されています。 [ハイブリッド・デプロイメント](cs_hybrid.html#hybrid_iks_icp)に使用される {{site.data.keyword.Bluemix_notm}} Private パッケージの移植性のために、追加の RBAC リソースが含められています。
+デフォルトでは、ポッド操作はロックされていません。 代わりに、クラスターには役割ベース・アクセス制御 (RBAC) のリソースが 2 つあり、これらのリソースにより、すべての管理者、ユーザー、サービス、ノードに特権ポッドと非特権ポッドの作成が許可されています。 [ハイブリッド・デプロイメント](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)に使用される {{site.data.keyword.Bluemix_notm}} Private パッケージの移植性のために、追加の RBAC リソースが含められています。
 
 特定のユーザーにポッドの作成または更新を禁止したい場合は、[これらの RBAC リソースを変更するか、独自のリソースを作成する](#customize_psp)ことができます。
 
@@ -48,7 +48,7 @@ lastupdated: "2018-12-05"
 
 デプロイメントなどのリソース・コントローラーを使用してポッドを作成する場合は、Kubernetes により、ポッドのサービス・アカウントの資格情報が、そのサービス・アカウントに使用許可を与えられているポッド・セキュリティー・ポリシーに照らして検証されます。 ポッド・セキュリティー要件をサポートするポリシーがない場合、コントローラーは正常に終了しますが、ポッドは作成されません。
 
-一般的なエラー・メッセージについては、[ポッド・セキュリティー・ポリシーが原因でポッドをデプロイできない](cs_troubleshoot_clusters.html#cs_psp)を参照してください。
+一般的なエラー・メッセージについては、[ポッド・セキュリティー・ポリシーが原因でポッドをデプロイできない](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp)を参照してください。
 
 ## ポッド・セキュリティー・ポリシーのカスタマイズ
 {: #customize_psp}
@@ -69,8 +69,9 @@ lastupdated: "2018-12-05"
 これらの RBAC ロールを変更して、管理者、ユーザー、サービス、またはノードを、ポリシーから削除したりポリシーに追加したりできます。
 
 開始前に、以下のことを行います。
-*  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
-*  RBAC 役割の使用方法を理解します。 詳しくは、[カスタム Kubernetes RBAC 役割によるユーザーの許可](cs_users.html#rbac)または [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview) を参照してください。
+*  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*  RBAC 役割の使用方法を理解します。 詳しくは、[カスタム Kubernetes RBAC 役割によるユーザーの許可](/docs/containers?topic=containers-users#rbac)または [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview) を参照してください。
+* すべての名前空間に対して[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。
 
 デフォルト構成を変更すると、ポッドのデプロイメントやクラスターの更新などの重要なクラスター操作を禁止できます。 他のチームが依存していない非実稼働クラスターで変更内容をテストしてください。
 {: important}
@@ -197,7 +198,7 @@ lastupdated: "2018-12-05"
 |---|---|---|---|
 | `ibm-anyuid-hostaccess-psp` | クラスター全体 | `PodSecurityPolicy` | フル・ホスト・アクセスのポッド作成用のポリシー。 |
 | `ibm-anyuid-hostaccess-psp-user` | クラスター全体 | `ClusterRole` | `ibm-anyuid-hostaccess-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
-| `ibm-anyuid-hostpath-psp` | クラスター全体 | `PodSecurityPolicy` | ホストパス・アクセスのポッド作成用のポリシー。 |
+| `ibm-anyuid-hostpath-psp` | クラスター全体 | `PodSecurityPolicy` | ホスト・パス・アクセス・ポッド作成用のポリシー。 |
 | `ibm-anyuid-hostpath-psp-user` | クラスター全体 | `ClusterRole` | `ibm-anyuid-hostpath-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
 | `ibm-anyuid-psp` | クラスター全体 | `PodSecurityPolicy` | UID/GID 実行可能ファイルのポッド作成用のポリシー。 |
 | `ibm-anyuid-psp-user` | クラスター全体 | `ClusterRole` | `ibm-anyuid-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |

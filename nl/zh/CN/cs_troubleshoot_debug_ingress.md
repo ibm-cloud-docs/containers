@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, nginx, ingress controller
+
+subcollection: containers
 
 ---
 
@@ -34,10 +38,42 @@ lastupdated: "2018-12-05"
 确保一个主机仅在一个 Ingress 资源中进行定义。如果一个主机在多个 Ingress 资源中进行定义，那么 ALB 可能无法正确转发流量，并且您可能会遇到错误。
 {: tip}
 
-开始之前，请确保您具有以下 [{{site.data.keyword.Bluemix_notm}} IAM 访问策略](cs_users.html#platform)：
+开始之前，请确保您具有以下 [{{site.data.keyword.Bluemix_notm}} IAM 访问策略](/docs/containers?topic=containers-users#platform)：
   - 对集群的**编辑者**或**管理员**平台角色
+  - **写入者**或**管理者**服务角色
 
-## 步骤 1：检查 Ingress 部署和 ALB pod 日志中的错误消息
+## 步骤 1：在 {{site.data.keyword.containerlong_notm}} 诊断和调试工具中运行 Ingress 测试
+
+进行故障诊断时，可以使用 {{site.data.keyword.containerlong_notm}} 诊断和调试工具来运行 Ingress 测试并从集群收集相关 Ingress 信息。要使用调试工具，请安装 [`ibmcloud-iks-debug` Helm chart ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
+{: shortdesc}
+
+
+1. [在集群中设置 Helm，为 Tiller 创建服务帐户，然后将 `ibm` 存储库添加到 Helm 实例](/docs/containers?topic=containers-integrations#helm)。
+
+2. 将 Helm chart 安装到集群。
+  ```
+  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  ```
+  {: pre}
+
+
+3. 启动代理服务器以显示调试工具接口。
+  ```
+  kubectl proxy --port 8080
+  ```
+  {: pre}
+
+4. 在 Web 浏览器中，打开调试工具接口 URL：http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
+
+5. 选择 **ingress** 测试组。一些测试检查是否存在潜在警告、错误或问题，一些测试仅收集在故障诊断期间可以参考的信息。有关每个测试的功能的更多信息，请单击测试名称旁边的“信息”图标。
+
+6. 单击**运行**。
+
+7. 检查每个测试的结果。
+  * 如果任何测试失败，请单击左侧列中测试名称旁边的“信息”图标，以获取有关如何解决此问题的信息。
+  * 对于仅用于在以下各部分中调试 Ingress 服务期间收集信息的测试，还可以使用这些测试的结果。
+
+## 步骤 2：检查 Ingress 部署和 ALB pod 日志中的错误消息
 {: #errors}
 
 首先检查 Ingress 资源部署事件和 ALB pod 日志中的错误消息。这些错误消息可帮助您找到故障的根本原因，并在后续各部分中进一步调试 Ingress 设置。
@@ -49,7 +85,7 @@ lastupdated: "2018-12-05"
   ```
     {: pre}
 
-    在输出的 **Events** 部分中，您可能会看到警告消息，提醒您所使用的 Ingress 资源或某些注释中有无效的值。请检查 [Ingress 资源配置文档](cs_ingress.html#public_inside_4)或[注释文档](cs_annotations.html)。
+    在输出的 **Events** 部分中，您可能会看到警告消息，提醒您所使用的 Ingress 资源或某些注释中有无效的值。请检查 [Ingress 资源配置文档](/docs/containers?topic=containers-ingress#public_inside_4)或[注释文档](/docs/containers?topic=containers-ingress_annotation)。
 
     ```
     Name:             myingress
@@ -80,8 +116,8 @@ lastupdated: "2018-12-05"
 2. 检查 ALB pod 的状态。
     1. 获取正在集群中运行的 ALB pod。
         ```
-kubectl get pods -n kube-system | grep alb
-      ```
+        kubectl get pods -n kube-system | grep alb
+        ```
         {: pre}
 
     2. 通过检查 **STATUS** 列来确保所有 pod 都在运行。
@@ -100,8 +136,8 @@ kubectl get pods -n kube-system | grep alb
 3. 检查 ALB 的日志。
     1.  获取正在集群中运行的 ALB pod 的标识。
         ```
-kubectl get pods -n kube-system | grep alb
-      ```
+        kubectl get pods -n kube-system | grep alb
+        ```
         {: pre}
 
     3. 获取每个 ALB pod 上 `nginx-ingress` 容器的日志。
@@ -112,7 +148,7 @@ kubectl get pods -n kube-system | grep alb
 
     4. 在 ALB 日志中查找错误消息。
 
-## 步骤 2：对 ALB 子域和公共 IP 地址执行 ping 操作
+## 步骤 3：对 ALB 子域和公共 IP 地址执行 ping 操作
 {: #ping}
 
 检查 Ingress 子域和 ALB 的公共 IP 地址的可用性。
@@ -120,7 +156,7 @@ kubectl get pods -n kube-system | grep alb
 
 1. 获取公共 ALB 正在侦听的 IP 地址。
     ```
-    ibmcloud ks albs --cluster <cluster_name_or_ID>
+ibmcloud ks albs --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -135,7 +171,7 @@ kubectl get pods -n kube-system | grep alb
     ```
     {: screen}
 
-    * 如果公共 ALB 没有 IP 地址，请参阅 [Ingress ALB 未部署在专区中](cs_troubleshoot_network.html#cs_multizone_subnet_limit)。
+    * 如果公共 ALB 没有 IP 地址，请参阅 [Ingress ALB 未部署在专区中](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit)。
 
 2. 检查 ALB IP 的运行状况。
 
@@ -145,10 +181,10 @@ ping <ALB_IP>
       ```
         {: pre}
 
-        * 如果 CLI 返回超时并且您具有保护工作程序节点的定制防火墙，请确保在[防火墙](cs_troubleshoot_clusters.html#cs_firewall)中允许 ICMP。
+        * 如果 CLI 返回超时并且您具有保护工作程序节点的定制防火墙，请确保在[防火墙](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)中允许 ICMP。
         * 如果没有防火墙阻止 ping 操作，并且 ping 操作一直运行到超时，请[检查 ALB pod 的状态](#check_pods)。
 
-    * 仅多专区集群：可以使用 MZLB 运行状况检查来确定 ALB IP 的阶段状态。有关 MZLB 的更多信息，请参阅[多专区负载均衡器 (MZLB)](cs_ingress.html#planning)。MZLB 运行状况检查仅可用于具有以下格式的新 Ingress 子域的集群：`<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。如果集群仍使用旧格式的 `<cluster_name>.<region>.containers.mybluemix.net`，请[将单专区集群转换为多专区集群](cs_clusters.html#add_zone)。将为集群分配采用新格式的子域，但也可以继续使用较旧的子域格式。或者，可以对自动分配了新的子域格式的新集群进行排序。
+    * 仅多专区集群：可以使用 MZLB 运行状况检查来确定 ALB IP 的阶段状态。有关 MZLB 的更多信息，请参阅[多专区负载均衡器 (MZLB)](/docs/containers?topic=containers-ingress#planning)。MZLB 运行状况检查仅可用于具有以下格式的新 Ingress 子域的集群：`<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。如果集群仍使用旧格式的 `<cluster_name>.<region>.containers.mybluemix.net`，请[将单专区集群转换为多专区集群](/docs/containers?topic=containers-clusters#add_zone)。将为集群分配采用新格式的子域，但也可以继续使用较旧的子域格式。或者，可以对自动分配了新的子域格式的新集群进行排序。
     
 
     以下 HTTP cURL 命令使用 `albhealth` 主机，该主机由 {{site.data.keyword.containerlong_notm}} 配置为返回 ALB IP 的 `healthy` 或 `unhealthy` 阶段状态。
@@ -166,7 +202,7 @@ ping <ALB_IP>
 
 3. 获取 IBM 提供的 Ingress 子域。
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
@@ -191,8 +227,8 @@ ping <ALB_IP>
     ```
     {: screen}
 
-## 步骤 3：检查域映射和 Ingress 资源配置
-{: #config}
+## 步骤 4：检查域映射和 Ingress 资源配置
+{: #ts_ingress_config}
 
 1. 如果使用定制域，请验证是否使用了 DNS 提供程序将该定制域映射到 IBM 提供的子域或 ALB 的公共 IP 地址。请注意，使用 CNAME 是首选项，因为 IBM 会在 IBM 子域上提供自动运行状况检查，并从 DNS 响应中除去任何失败的 IP。
     * IBM 提供的子域：检查定制域是否映射到规范名称记录 (CNAME) 中集群的 IBM 提供的子域。
@@ -231,9 +267,9 @@ ping <ALB_IP>
     1. 确保一个主机仅在一个 Ingress 资源中进行定义。如果一个主机在多个 Ingress 资源中进行定义，那么 ALB 可能无法正确转发流量，并且您可能会遇到错误。
 
 
-    2. 检查子域和 TLS 证书是否正确。要查找 IBM 提供的 Ingress 子域和 TLS 证书，请运行 `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+    2. 检查子域和 TLS 证书是否正确。要查找 IBM 提供的 Ingress 子域和 TLS 证书，请运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`。
 
-    3.  确保应用程序侦听的是在 Ingress 的 **path** 部分中配置的路径。如果应用程序设置为侦听根路径，请使用 `/` 作为路径。如果流至此路径的入局流量必须路由到应用程序侦听的其他路径，请使用[重写路径](cs_annotations.html#rewrite-path)注释。
+    3.  确保应用程序侦听的是在 Ingress 的 **path** 部分中配置的路径。如果应用程序设置为侦听根路径，请使用 `/` 作为路径。如果流至此路径的入局流量必须路由到应用程序侦听的其他路径，请使用[重写路径](/docs/containers?topic=containers-ingress_annotation#rewrite-path)注释。
 
     4. 根据需要编辑资源配置 YAML。关闭编辑器时，会保存并自动应用更改。
         ```
@@ -281,7 +317,7 @@ ping <ALB_IP>
         ```
         {: pre}
 
-        以下示例输出确认 ALB pod 已使用正确的运行状况检查主机名 `albhealth.<domain>`:
+        以下示例输出确认 ALB pod 已使用正确的运行状况检查主机名 `albhealth.<domain>`：
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```
@@ -351,7 +387,7 @@ ping <ALB_IP>
     {: pre}
 
     * 如果已正确配置所有内容，那么您将获得从应用程序返回的预期响应。
-    * 如果在响应中获得错误，说明应用程序中或仅适用于此特定 ALB 的配置中可能存在错误。请检查应用程序代码、[Ingress 资源配置文件](cs_ingress.html#public_inside_4)或仅应用于此 ALB 的其他任何配置。
+    * 如果在响应中获得错误，说明应用程序中或仅适用于此特定 ALB 的配置中可能存在错误。请检查应用程序代码、[Ingress 资源配置文件](/docs/containers?topic=containers-ingress#public_inside_4)或仅应用于此 ALB 的其他任何配置。
 
 7. 完成调试后，请对 ALB pod 复原运行状况检查。对每个 ALB pod 重复这些步骤。
   1. 登录到 ALB pod，并从 `server_name` 中除去 `#`。
@@ -389,19 +425,20 @@ ping <ALB_IP>
 
 
 ## 获取帮助和支持
-{: #ts_getting_help}
+{: #ingress_getting_help}
 
 集群仍然有问题吗？
 {: shortdesc}
 
 -  在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
--   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/bluemix/support/#status)。
--   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
+-   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/status?selected=status)。
+-   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
+    如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
     {: tip}
 -   请复查论坛，以查看是否有其他用户遇到相同的问题。使用论坛进行提问时，请使用适当的标记来标注您的问题，以方便 {{site.data.keyword.Bluemix_notm}} 开发团队识别。
     -   如果您有关于使用 {{site.data.keyword.containerlong_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
     -   有关服务的问题和入门指示信息，请使用 [IBM Developer Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
-    有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support/howtogetsupport.html#using-avatar)。
--   通过开具用例，与 IBM 支持人员联系。要了解有关开具 IBM 支持用例或有关支持级别和用例严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
+    有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)。
+-   通过开具案例来联系 IBM 支持人员。要了解有关开具 IBM 支持案例或有关支持级别和案例严重性的信息，请参阅[联系支持人员](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。您还可以使用 [{{site.data.keyword.containerlong_notm}} 诊断和调试工具](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)从集群收集相关信息并导出这些信息，以便与 IBM 支持人员共享。
 {: tip}
 

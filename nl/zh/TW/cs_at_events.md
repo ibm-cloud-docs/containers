@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2017, 2018
-lastupdated: "2018-12-05"
+  years: 2017, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, audit
+
+subcollection: containers
 
 ---
 
@@ -33,9 +37,9 @@ lastupdated: "2018-12-05"
 
 * **Kubernetes API 伺服器審核事件**：
     * 這些事件會自動產生，但您必須配置叢集，以將這些事件轉遞至 {{site.data.keyword.cloudaccesstrailshort}} 服務。
-    * 您可以配置叢集，以將事件傳送至 {{site.data.keyword.cloudaccesstrailshort}} **帳戶網域**或傳送至**空間網域**。如需相關資訊，請參閱[傳送審核日誌](/docs/containers/cs_health.html#api_forward)。
+    * 您可以配置叢集，以將事件傳送至 {{site.data.keyword.cloudaccesstrailshort}} **帳戶網域**或傳送至**空間網域**。如需相關資訊，請參閱[傳送審核日誌](/docs/containers?topic=containers-health#api_forward)。
 
-如需服務運作方式的相關資訊，請參閱 [{{site.data.keyword.cloudaccesstrailshort}} 文件](/docs/services/cloud-activity-tracker/index.html)。如需所追蹤 Kubernetes 動作的相關資訊，請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/home/)。
+如需服務運作方式的相關資訊，請參閱 [{{site.data.keyword.cloudaccesstrailshort}} 文件](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla)。如需所追蹤 Kubernetes 動作的相關資訊，請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/home/)。
 
 ## 尋找事件的資訊
 {: #kube-find}
@@ -54,7 +58,7 @@ lastupdated: "2018-12-05"
 5. 設定您要檢視其日誌的時間範圍。預設值為 24 小時。
 6. 若要縮小搜尋範圍，您可以按一下 `ActivityTracker_Account_Search_in_24h` 的編輯圖示，並在**可用欄位**直欄中新增欄位。
 
-若要讓其他使用者檢視帳戶及空間事件，請參閱[授與許可權來查看帳戶事件](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions)。
+若要讓其他使用者檢視帳戶及空間事件，請參閱[授與許可權來查看帳戶事件](/docs/services/cloud-activity-tracker/how-to?topic=cloud-activity-tracker-grant_permissions#grant_permissions)。
 {: tip}
 
 ## 追蹤叢集管理事件
@@ -145,7 +149,7 @@ lastupdated: "2018-12-05"
 請查看下列表格，以取得傳送至 {{site.data.keyword.cloudaccesstrailshort}} 之 Kubernetes API 伺服器審核事件的清單。
 {: shortdesc}
 
-開始之前：請確定您的叢集已配置為轉遞 [Kubernetes API 審核事件](cs_health.html#api_forward)。
+開始之前：請確定您的叢集已配置為轉遞 [Kubernetes API 審核事件](/docs/containers?topic=containers-health#api_forward)。
 
 <table>
   <tr>
@@ -170,7 +174,7 @@ lastupdated: "2018-12-05"
   </tr>
   <tr>
     <td><code>certificatesigningrequests.update</code></td>
-    <td>已更新簽署憑證要求。</td>
+    <td>已更新簽署憑證的要求。</td>
   </tr>
   <tr>
     <td><code>clusterbindings.create</code></td>

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -18,199 +22,351 @@ lastupdated: "2018-12-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
-# Planificación de las redes privadas y en clúster
-{: #planning}
+# Configuración de la red de clúster
+{: #cs_network_cluster}
 
-Planifique una configuración de red para el clúster de {{site.data.keyword.containerlong}}.
-{: shortdesc}
+Configure un sistema de red en el clúster de {{site.data.keyword.containerlong}}.
+{:shortdesc}
 
-## Descripción de las redes en clúster
-{: #in-cluster}
+Esta página le ayuda a crear la configuración de red del clúster. ¿No está seguro de qué configuración elegir? Consulte el apartado sobre [Planificación de la red de clúster](/docs/containers?topic=containers-cs_network_ov).
+{: tip}
 
-A todas las pods que se despliegan en un nodo trabajador se les asigna una dirección IP privada en el rango 172.30.0.0/16 y se direccionan únicamente entre nodos trabajadores. Para evitar conflictos, no utilice este rango de IP en ningún otro nodo que se vaya a comunicar con los nodos trabajadores. Los nodos trabajadores y los pods pueden comunicarse de forma segura a través de la red privada utilizando direcciones IP privadas. Sin embargo, cuando un pod se cuelga o cuando es necesario volver a crear un nodo trabajador, se signa una nueva dirección IP privada.
-
-De forma predetermina, es difícil realizar un seguimiento de direcciones IP privadas que cambian para las apps que deben ofrecer una alta disponibilidad. En su lugar, puede utilizar las características incorporadas de descubrimiento de servicios de Kubernetes para exponer las apps como servicios IP del clúster en la red privada. Un servicio de Kubernetes agrupa un conjunto de pods y proporciona una conexión de red a estos pods. Esta conexión proporciona conectividad a otros servicios del clúster sin exponer la dirección IP privada real de cada pod. A los servicios se les asigna una dirección IP interna del clúster a la que solo se puede acceder dentro del clúster.
-* Clústeres antiguos: en los clústeres creados antes de febrero de 2018 en la zona dal13 o antes de octubre de 2017 en cualquier otra zona, se asigna a los servicios una IP de entre las 254 IP del rango 10.10.10.0/24. Si ha alcanzado el límite de 254 servicios y necesita más servicios, debe crear un nuevo clúster.
-* Clústeres nuevos: en los clústeres creados después de febrero de 2018 en la zona dal13 o después de octubre de 2017 en cualquier otra zona, a los servicios se les asigna una IP de entre una de las 65.000 IP del rango 172.21.0.0/16.
-
-Para evitar conflictos, no utilice este rango de IP en ningún otro nodo que se vaya a comunicar con los nodos trabajadores. También se crea una entrada de búsqueda de DNS para el servicio y se almacena en el componente `kube-dns` del clúster. La entrada DNS contiene el nombre del servicio, el espacio de nombres en el que se ha creado el servicio y el enlace a la dirección IP asignada interna del clúster.
-
-Para acceder a un pod detrás de un servicio de clúster, la app puede utilizar la dirección IP interna del clúster o puede enviar una solicitud utilizando el nombre del servicio. Cuando se utiliza el nombre del servicio, el nombre se busca en el componente `kube-dns`
-y se direcciona a la dirección IP del clúster del servicio. Cuando llega una solicitud al servicio, el servicio reenvía las solicitudes a los pods, independientemente de las direcciones IP internas de clúster de los pods y del nodo trabajador en el que estén desplegadas.
-
-<br />
-
-
-## Descripción de las conexiones VLAN y las interfaces de red
-{: #interfaces}
-
-{{site.data.keyword.containerlong_notm}} proporciona VLAN de infraestructura de IBM Cloud (SoftLayer) que garantizan un rendimiento de red de calidad y el aislamiento de red de los nodos trabajadores. Una VLAN configura un grupo de nodos trabajadores y pods como si estuvieran conectadas a la misma conexión física. Las VLAN están dedicadas a su
-cuenta de {{site.data.keyword.Bluemix_notm}} y no se comparten entre los clientes de IBM.
-
-De forma predeterminada, todos los clústeres están conectados a una VLAN privada. La VLAN privada determina la dirección IP privada que se asigna a cada nodo trabajador. Los trabajadores tienen una interfaz de red privada y son accesibles a través de la red privada. Cuando se crea un clúster que también está conectado a una VLAN pública, el clúster también tiene una interfaz de red pública. La VLAN pública permite que los nodos trabajadores se conecten de forma automática y segura con el maestro. Para obtener más información sobre las VLAN predeterminadas para el clúster, consulte [VLAN, subredes y direcciones IP predeterminadas para clústeres](cs_subnets.html#default_vlans_subnets).
-
-Las configuraciones de red de clúster se pueden definir mediante las interfaces de red del clúster:
-
-* **Redes de clúster predeterminadas**: un clúster con una interfaz de red privada y pública
-* **Redes de clúster predeterminadas personalizadas**: un clúster con una interfaz de red privada y pública y políticas de red de Calico para bloquear el tráfico público entrante
-* **Redes de clúster solo privadas**: un clúster con solo una interfaz de red privada
-
-Pulse una de las configuraciones siguientes para planificar las redes para el clúster:
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/network_imagemap.png" width="575" alt="Pulse una tarjeta para planificar la configuración de redes del clúster." style="width:575px;" />
-<map name="home_map" id="home_map">
-<area href="#both_vlans" alt="Planificación de redes de clúster predeterminadas" title="Planificación de redes de clúster predeterminadas" shape="rect" coords="-7, -8, 149, 211" />
-<area href="#both_vlans_private" alt="Planificación de redes de clúster predeterminadas personalizadas" title="Planificación de redes de clúster predeterminadas personalizadas" shape="rect" coords="196, -1, 362, 210" />
-<area href="#private_vlan" alt="Planificación de redes de clúster solo privadas" title="Planificación de redes de clúster solo privadas" shape="rect" coords="409, -10, 572, 218" />
-</map>
-
-<br />
-
-
-## Planificación de redes de clúster predeterminadas
+## Configuración de la red de clúster con una VLAN pública y una privada
 {: #both_vlans}
 
-De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el clúster con acceso a una VLAN pública y a una VLAN privada.
-{:shortdesc}
+Configure el clúster con acceso a [una VLAN pública y a una VLAN privada](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options). En la imagen siguiente se muestran las opciones de red que puede configurar para el clúster con esta configuración.
+{: shortdesc}
 
+Esta configuración de red se compone de las siguientes configuraciones de red necesarias durante la creación del clúster y las configuraciones de red opcionales después de la creación del clúster.
 
+1. Si crea el clúster en un entorno detrás de un cortafuegos, [permita el tráfico de red de salida a las IP públicas y privadas](/docs/containers?topic=containers-firewall#firewall_outbound) para los servicios de {{site.data.keyword.Bluemix_notm}} que tiene previsto utilizar.
 
-**¿Qué obtiene mi clúster con esta configuración?**
-* Una dirección IP pública para cada nodo trabajador, que proporciona a los nodos trabajadores una interfaz de red pública
-* Una dirección IP privada para cada nodo trabajador, que proporciona a los nodos trabajadores una interfaz de red privada
-* Una conexión OpenVPN automática y segura entre todos los nodos trabajadores y el maestro
+2. Cree un clúster que esté conectado a una VLAN pública y una VLAN privada. Si crea un clúster multizona, puede elegir los pares de VLAN para cada zona.
 
-**¿Para qué puedo utilizar esta configuración?**
+3. Elija cómo se comunican los nodos maestro y trabajador de Kubernetes.
+  * Si VRF está habilitado en la cuenta de {{site.data.keyword.Bluemix_notm}}, habilite puntos finales de servicio [solo públicos](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public), [públicos y privados](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both) o [solo privados.](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private).
+  * Si no puede o no desea habilitar VRF, habilite [solo el punto final de servicio público](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
 
-* Tiene una app que debe ser accesible para el Internet público en un clúster de una sola zona.
-* Tiene una app que debe ser accesible para el Internet público en un clúster multizona. Puesto que debe habilitar la [expansión de VLAN](cs_subnets.html#subnet-routing) para crear un clúster multizona, el clúster se puede comunicar con otros sistemas que están conectados a cualquier VLAN privada en la misma cuenta de IBM Cloud. Para aislar el clúster multizona en la red privada, puede utilizar las [políticas de red de Calico](cs_network_policy.html#isolate_workers).
-
-**¿Cuáles son mis opciones para gestionar el acceso público y privado a mi clúster?**
-</br>En las secciones siguientes se describen las funciones de {{site.data.keyword.containerlong_notm}} que puede utilizar para configurar las redes para clústeres conectados a una VLAN pública y una VLAN privada.
-
-### Exponga sus apps con servicios de red
-{: #both_vlans_services}
-
-La interfaz de red pública de los nodos trabajadores está protegida por [valores predefinidos de política de red de Calico](cs_network_policy.html#default_policy) que se configuran en cada nodo trabajador durante la creación del clúster. De forma predeterminada, todo el tráfico de red de salida está permitido para todos los nodos trabajadores. El tráfico de red de entrada está bloqueado, excepto en algunos puertos. Estos puertos están abiertos para que IBM pueda supervisar el tráfico de red e instalar automáticamente actualizaciones de seguridad para el maestro de Kubernetes.
-
-Si desea exponer sus apps al público o a una red privada, puede crear servicios de NodePort, LoadBalancer o Ingress públicos o privados. Para obtener más información sobre cada servicio, consulte [Elección de un servicio de NodePort, LoadBalancer o Ingress](cs_network_planning.html#external).
-
-### Opcional: aísle las cargas de trabajo de red en nodos trabajadores de extremo
-{: #both_vlans_edge}
-
-Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster al permitir el acceso externo a un número inferior de nodos trabajadores y aislar la carga de trabajo en red. Para asegurarse de que Ingress y los pods de equilibrador de carga se despliegan solo en los nodos trabajadores especificados, [etiquete los nodos trabajadores como nodos de extremo](cs_edge.html#edge_nodes). Para evitar también que se ejecuten otras cargas de trabajo en los nodos de extremo, [marque los nodos de extremo](cs_edge.html#edge_workloads).
-
-
-### Opcional: Conéctese a una red local o a IBM Cloud Private utilizando la VPN de strongSwan
-{: #both_vlans_vpn}
-
-Para conectar de forma segura sus nodos trabajadores y apps a una red local, puede configurar un [servicio VPN strongSwan IPSec ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.strongswan.org/about.html). El servicio VPN IPSec de strongSwan proporciona un canal de comunicaciones de extremo a extremo seguro sobre Internet que está basado en la suite de protocolos
-Internet Protocol Security (IPSec) estándar del sector.
-* Para configurar una conexión segura entre el clúster y una red local, [configure y despliegue el servicio VPN IPSec strongSwan](cs_vpn.html#vpn-setup) directamente en un pod del clúster.
-* Para configurar una conexión segura entre el clúster y una instancia privada de IBM Cloud, consulte [Conexión de la nube pública y privada con la VPN de strongSwan](cs_hybrid.html#hybrid_vpn).
-
+4. Después de crear el clúster, puede configurar las siguientes opciones de red:
+  * Configure un [servicio de conexión VPN de strongSwan](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public) para permitir la comunicación entre el clúster y una red local o {{site.data.keyword.icpfull_notm}}.
+  * Cree [servicios de descubrimiento de Kubernetes](/docs/containers?topic=containers-cs_network_planning#in-cluster) para permitir la comunicación en el clúster entre los pods.
+  * Cree servicios Ingress [público](/docs/containers?topic=containers-cs_network_planning#public_access), equilibrador de carga o de puerto de nodo para exponer las apps a las redes públicas.
+  * Cree servicios Ingress [privado](/docs/containers?topic=containers-cs_network_planning#private_both_vlans), equilibrador de carga o de puerto de nodo para exponer las apps a las redes privadas y crear políticas de red Calico para proteger el clúster del acceso público.
+  * Aísle las cargas de trabajo de la red en [nodos trabajadores de extremo](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge).
+  * [Aísle el clúster en la red privada](/docs/containers?topic=containers-cs_network_planning#isolate).
 
 <br />
 
 
-## Planificación de redes de clúster predeterminadas personalizadas
-{: #both_vlans_private}
+## Configuración de la red de clúster solo con una VLAN privada
+{: #setup_private_vlan}
 
-De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el clúster con acceso a una VLAN pública y a una VLAN privada. Sin embargo, puede personalizar la configuración de red predeterminada utilizando políticas de red para bloquear el acceso público.
-{:shortdesc}
+Si tiene requisitos de seguridad específicos o tiene que crear políticas de red y reglas de direccionamiento personalizadas para proporcionar seguridad de red dedicada, configure el clúster con acceso [solo a una VLAN privada](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options). En la imagen siguiente se muestran las opciones de red que puede configurar para el clúster con esta configuración.
+{: shortdesc}
 
+Esta configuración de red se compone de las siguientes configuraciones de red necesarias durante la creación del clúster y las configuraciones de red opcionales después de la creación del clúster.
 
+1. Si crea el clúster en un entorno detrás de un cortafuegos, [permita el tráfico de red de salida a las IP públicas y privadas](/docs/containers?topic=containers-firewall#firewall_outbound) para los servicios de {{site.data.keyword.Bluemix_notm}} que tiene previsto utilizar.
 
-**¿Qué obtiene mi clúster con esta configuración?**
-* Una dirección IP pública para cada nodo trabajador, que proporciona a los nodos trabajadores una interfaz de red pública
-* Una dirección IP privada para cada nodo trabajador, que proporciona a los nodos trabajadores una interfaz de red privada
-* Una conexión OpenVPN automática y segura entre todos los nodos trabajadores y el maestro
+2. Cree un clúster que esté conectado [solo a una VLAN privada](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options). Si crea un clúster multizona, puede elegir una VLAN privada para cada zona.
 
-**¿Para qué puedo utilizar esta configuración?**
+3. Elija cómo se comunican los nodos maestro y trabajador de Kubernetes.
+  * Si VRF está habilitado en la cuenta de {{site.data.keyword.Bluemix_notm}}, [habilite un punto final de servicio privado](#set-up-private-se).
+  * Si no puede o no desea habilitar VRF, los nodos maestro y trabajador de Kubernetes no se pueden conectar automáticamente al maestro. Debe configurar el clúster con un [dispositivo de pasarela](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private).
 
-* Tiene una app en un clúster de una sola zona. Desea exponer la app solo a los pods dentro del clúster o en otros clústeres que están conectados a la misma VLAN privada.
-* Tiene una app en un clúster multizona. Desea exponer la app solo a los pods dentro del clúster o en otros clústeres que están conectados a las mismas VLAN privadas que el clúster. Sin embargo, como la [expansión de VLAN](cs_subnets.html#subnet-routing) debe estar habilitada para los clústeres multizona, otros sistemas conectados a cualquier VLAN privada en la misma cuenta de IBM Cloud pueden acceder al clúster. Desea aislar su clúster multizona de otros sistemas.
-
-**¿Cuáles son mis opciones para gestionar el acceso público y privado a mi clúster?**</br>En las secciones siguientes se describen las funciones de {{site.data.keyword.containerlong_notm}} que puede utilizar para configurar las redes solo privadas y bloquear las redes públicas para clústeres conectados a una VLAN pública y una VLAN privada.
-
-### Exponga sus apps con servicios de red privados y proteja su clúster del acceso público con las políticas de red de Calico
-{: #both_vlans_private_services}
-
-La interfaz de red pública de los nodos trabajadores está protegida por [valores predefinidos de política de red de Calico](cs_network_policy.html#default_policy) que se configuran en cada nodo trabajador durante la creación del clúster. De forma predeterminada, todo el tráfico de red de salida está permitido para todos los nodos trabajadores. El tráfico de red de entrada está bloqueado, excepto en algunos puertos. Estos puertos están abiertos para que IBM pueda supervisar el tráfico de red e instalar automáticamente actualizaciones de seguridad para el maestro de Kubernetes.
-
-Si desea exponer sus apps sólo a través de una red privada, puede crear servicios de NodePort, LoadBalancer o Ingress privados. Para obtener más información sobre la planificación de redes externas privadas, consulte [Planificación del sistema de red externo privado para una configuración de VLAN pública y privada](cs_network_planning.html#private_both_vlans).
-
-Sin embargo, las políticas de red de Calico predeterminadas también permiten el tráfico de red pública entrante desde Internet a estos servicios. Puede crear políticas de Calico para bloquear todo el tráfico público a los servicios. Por ejemplo, un servicio NodePort abre un puerto en un nodo trabajador sobre la dirección IP privada y pública del nodo trabajador. Un servicio de equilibrador de carga con una dirección IP privada portátil abre un NodePort público en cada nodo trabajador. Debe crear una [política de red preDNAT de Calico](cs_network_policy.html#block_ingress) para bloquear los NodePorts públicos.
-
-Como ejemplo, supongamos que ha creado un servicio de equilibrador de carga privado. También ha creado una política de preDNAT de Calico para evitar que el tráfico público llegue a los NodePorts públicos abiertos por el equilibrador de carga. A este equilibrador de carga privado se puede acceder mediante:
-* [Cualquier pod en ese mismo clúster](#in-cluster)
-* Cualquier pod en cualquier clúster que esté conectado a la misma VLAN privada
-* Si tiene la [expansión de VLAN habilitada](cs_subnets.html#subnet-routing), cualquier sistema que esté conectado a cualquiera de las VLAN privadas en la misma cuenta de IBM Cloud
-* Si no está en la cuenta de IBM Cloud pero sí detrás del cortafuegos de la empresa, cualquier sistema a través de una conexión VPN con la subred en la que se encuentra la IP del equilibrador de carga
-* Si está en una cuenta de IBM Cloud distinta, cualquier sistema a través de una conexión VPN con la subred en la que se encuentra la IP del equilibrador de carga
-
-### Aislar el clúster en la red privada
-{: #isolate}
-
-Si tiene un clúster multizona, varias VLAN para un clúster de una sola zona o varias subredes en la misma VLAN, debe [habilitar la expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Sin embargo, cuando la expansión de VLAN está habilitada, cualquier sistema que esté conectado a cualquiera de las VLAN privadas en la misma cuenta de IBM Cloud puede acceder a los trabajadores. Puede aislar el clúster multizona de otros sistemas de la red privada utilizando [Políticas de red de Calico](cs_network_policy.html#isolate_workers). Estas políticas también permiten la entrada y la salida de los rangos de IP y puertos privados que ha abierto en el cortafuegos privado.
-
-### Opcional: aísle las cargas de trabajo de red en nodos trabajadores de extremo
-{: #both_vlans_private_edge}
-
-Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster al permitir el acceso externo a un número inferior de nodos trabajadores y aislar la carga de trabajo en red. Para asegurarse de que Ingress y los pods de equilibrador de carga se despliegan solo en los nodos trabajadores especificados, [etiquete los nodos trabajadores como nodos de extremo](cs_edge.html#edge_nodes). Para evitar también que se ejecuten otras cargas de trabajo en los nodos de extremo, [marque los nodos de extremo](cs_edge.html#edge_workloads).
-
-
-A continuación, utilice una [política de red preDNAT de Calico](cs_network_policy.html#block_ingress) para bloquear el tráfico a los NodePorts públicos de los clústeres que se ejecutan en nodos trabajadores de extremo. El bloqueo de los puertos de los nodos garantiza que los nodos trabajadores de extremo sean los únicos nodos trabajadores que manejen el tráfico entrante.
-
-### Opcional: Conéctese a una red local o a IBM Cloud Private utilizando la VPN de strongSwan
-{: #both_vlans_private_vpn}
-
-Para conectar de forma segura sus nodos trabajadores y apps a una red local, puede configurar un [servicio VPN strongSwan IPSec ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.strongswan.org/about.html). El servicio VPN IPSec de strongSwan proporciona un canal de comunicaciones de extremo a extremo seguro sobre Internet que está basado en la suite de protocolos
-Internet Protocol Security (IPSec) estándar del sector.
-* Para configurar una conexión segura entre el clúster y una red local, [configure y despliegue el servicio VPN IPSec strongSwan](cs_vpn.html#vpn-setup) directamente en un pod del clúster.
-* Para configurar una conexión segura entre el clúster y una instancia privada de IBM Cloud, consulte [Conexión de la nube pública y privada con la VPN de strongSwan](cs_hybrid.html#hybrid_vpn).
-
+4. Después de crear el clúster, puede configurar las siguientes opciones de red:
+  * [Configure una pasarela VPN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private) para permitir la comunicación entre el clúster y una red local o {{site.data.keyword.icpfull_notm}}. Si ya ha configurado un VRA o un FSA para permitir la comunicación entre los nodos maestro y trabajador, puede configurar un punto final VPN de IPSec en el VRA o FSA.
+  * Cree [servicios de descubrimiento de Kubernetes](/docs/containers?topic=containers-cs_network_planning#in-cluster) para permitir la comunicación en el clúster entre los pods.
+  * Cree servicios Ingress [privado](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan), equilibrador de carga o de puerto de nodo para exponer las apps en redes privadas.
+  * Aísle las cargas de trabajo de la red en [nodos trabajadores de extremo](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge).
+  * [Aísle el clúster en la red privada](/docs/containers?topic=containers-cs_network_planning#isolate).
 
 <br />
 
 
-## Planificación de redes de clúster solo privadas
-{: #private_vlan}
+## Cambio de las conexiones de VLAN de nodo trabajador
+{: #change-vlans}
 
-Puede optar por [crear un clúster solo de VLAN privada](cs_clusters.html#clusters_cli) incluyendo el distintivo `--private-only` en la CLI. Cuando los nodos trabajadores están conectados únicamente a una VLAN privada, los nodos trabajadores no se pueden conectar automáticamente al nodo maestro. Debe utilizar un dispositivo de pasarela para conectar los nodos trabajadores con el nodo maestro. También puede utilizar el dispositivo de pasarela como cortafuegos para proteger el clúster del acceso no deseado.
-{:shortdesc}
+Cuando cree un clúster, debe elegir si desea conectar los nodos trabajadores a una VLAN privada y pública o solo a una VLAN privada. Los nodos trabajadores forman parte de agrupaciones de nodos trabajadores, que almacenan metadatos de red que incluyen las VLAN que se utilizarán para suministrar nodos trabajadores futuros en la agrupación. Es posible que desee cambiar posteriormente la configuración de la conectividad de VLAN del clúster, en casos como los siguientes.
+{: shortdesc}
+
+* Las VLAN de la agrupación de nodos trabajadores de una zona se han quedado sin capacidad y es necesario suministrar una nueva VLAN para que los nodos trabajadores de clúster la utilicen.
+* Tiene un clúster con nodos trabajadores que están en VLAN públicas y privadas, pero desea cambiar a un [clúster solo privado](#setup_private_vlan).
+* Tiene un clúster solo privado, pero desea que algunos nodos trabajadores, como por ejemplo una agrupación de nodos trabajadores de [nodos de extremo](/docs/containers?topic=containers-edge#edge) en la VLAN pública, expongan las apps en Internet.
+
+¿Está intentando cambiar el punto final de servicio para la comunicación entre maestro y trabajador? Consulte los temas para configurar puntos finales de servicio [públicos](#set-up-public-se) y [privados](#set-up-private-se).
+{: tip}
+
+Antes de empezar:
+* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* Si los nodos trabajadores son autónomos (no forman parte de una agrupación de nodos trabajadores), [actualícelos a agrupaciones de nodos trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool).
+
+Para cambiar las VLAN que utiliza una agrupación de nodos trabajadores para suministrar nodos trabajadores:
+
+1. Obtenga una lista de los nombres de las agrupaciones de nodos trabajadores del clúster.
+  ```
+  ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+2. Determine las zonas para una de las agrupaciones de nodos trabajadores. En la salida, busque el campo **Zones**.
+  ```
+  ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+  ```
+  {: pre}
+
+3. Para cada zona que haya encontrado en el paso anterior, obtenga una VLAN pública y una privada disponibles que sean compatibles entre sí.
+
+  1. Examine las VLAN públicas y privadas disponibles que se muestran bajo **Type** en la salida.
+    ```
+    ibmcloud ks vlans --zone <zone>
+    ```
+    {: pre}
+
+  2. Compruebe que las VLAN públicas y privadas de la zona son compatibles. Para que sean compatibles, el **Router** debe tener el mismo ID de pod. En esta salida de ejemplo, los ID de pod de **Router** coinciden: `01a` y `01a`. Si un ID de pod fuese `01a` y el otro fuese `02a`, no se podrían establecer estos ID de VLAN pública y privada para la agrupación de trabajadores.
+    ```
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    229xxxx          1234     private   bcr01a.dal12   true
+    229xxxx          5678     public    fcr01a.dal12   true
+    ```
+    {: screen}
+
+  3. Si necesita solicitar una nueva VLAN pública o privada para la zona, puede hacerlo en la [consola de {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) o puede utilizar el mandato siguiente. Recuerde que las VLAN deben ser compatibles, con ID de pod de **Router** coincidentes como en el paso anterior. Si va a crear un par de nuevas VLAN pública y privada, estas deben ser compatibles entre sí.
+    ```
+    ibmcloud sl vlan create -t [public|private] -d <zone> -r <compatible_router>
+    ```
+    {: pre}
+
+  4. Anote los ID de las VLAN compatibles.
+
+4. Configure una agrupación de nodos trabajadores con los nuevos metadatos de red de VLAN para cada zona. Puede crear una nueva agrupación de nodos trabajadores o puede modificar una existente.
+
+  * **Cree una nueva agrupación de trabajadores**: Consulte [adición de nodos trabajadores mediante la creación de una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-clusters#add_pool).
+
+  * **Modifique una agrupación de nodos trabajadores existente**: Establezca los metadatos de red de la agrupación de nodos trabajadores de modo que utilicen la VLAN para cada zona. Los nodos trabajadores que ya se han creado en la agrupación siguen utilizando las VLAN anteriores, pero los nuevos nodos trabajadores de la agrupación utilizan los nuevos metadatos de VLAN que ha definido.
+
+    * Ejemplo para añadir VLAN tanto pública como privada, como en el caso de que se pase de solo privada a privada y pública:
+      ```
+      ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
+      ```
+      {: pre}
+
+    * Ejemplo para añadir solo una VLAN privada, como en el caso de que se pase de VLAN pública y privada a solo privada cuando se dispone de una [cuenta habilitada para VRF que utiliza puntos finales de servicio](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started):
+      ```
+      ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
+      ```
+      {: pre}
+
+5. Añada nodos trabajadores a la agrupación de nodos trabajadores cambiando el tamaño de la agrupación.
+  ```
+  ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <pool_name> --size-per-zone <number_of_workers_per_zone>
+  ```
+  {: pre}
+
+  Si desea eliminar los nodos trabajadores que utilizan los metadatos de red anteriores, cambie el número de nodos trabajadores por zona para duplicar la cantidad anterior de nodos trabajadores por zona. Más adelante en estos pasos, puede delimitar, drenar y eliminar los nodos trabajadores anteriores.
+  {: tip}
+
+6. Verifique que los nuevos nodos trabajadores se crean con la **IP pública** y la **IP privada** adecua das en la salida. Por ejemplo, si cambia la agrupación de nodos trabajadores de una VLAN pública y privada a solo privada, los nuevos nodos trabajadores solo tendrán una IP privada. Si cambia la agrupación de nodos trabajadores de solo privada a VLAN pública y privada, los nuevos nodos trabajadores tienen IP tanto públicas como privadas.
+  ```
+  ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+  ```
+  {: pre}
+
+7. Opcional: Elimine los nodos trabajadores con los metadatos de red anteriores de la agrupación de nodos trabajadores.
+  1. En la salida del paso anterior, anote el **ID** y la **IP privada** de los nodos trabajadores que desea eliminar de la agrupación de nodos trabajadores.
+  2. Marque el nodo trabajador como no programable en un proceso que se conoce como acordonamiento. Cuando se acordona un nodo trabajador, deja de estar disponible para programar pods en el futuro.
+    ```
+    kubectl cordon <worker_private_ip>
+    ```
+    {: pre}
+  3. Verifique que la planificación de pods está inhabilitada en el nodo trabajador.
+    ```
+    kubectl get nodes
+    ```
+    {: pre}
+     La planificación de pods está inhabilitada en el nodo trabajador si el estado es **`SchedulingDisabled`**.
+  4. Fuerce la eliminación de los pods del nodo trabajador y vuelva a programarlos en los demás nodos trabajadores del clúster.
+    ```
+    kubectl drain <worker_private_ip>
+    ```
+    {: pre}
+     Este proceso puede tardar unos minutos.
+  5. Elimine el nodo trabajador. Utilice el ID de nodo trabajador que ha recuperado anteriormente.
+    ```
+    ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
+    ```
+    {: pre}
+  6. Verifique que se ha eliminado el nodo trabajador.
+    ```
+    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ```
+    {: pre}
+
+8. Opcional: Puede repetir los pasos del 2 al 7 correspondientes a cada agrupación de nodos trabajadores del clúster. Después de completar estos pasos, todos los nodos trabajadores del clúster estarán configurados con las nuevas VLAN.
+
+9. Los ALB predeterminados en el clúster siguen enlazados a la VLAN antigua porque sus direcciones IP son de una subred de dicha VLAN. Puesto que los ALB no se pueden mover entre distingas VLAN, puede [crear ALB en las VLAN nuevas e inhabilitar los ALB de las VLAN antiguas](/docs/containers?topic=containers-ingress#migrate-alb-vlan).
+
+<br />
 
 
+## Configuración del punto final de servicio privado
+{: #set-up-private-se}
 
-**¿Qué obtiene mi clúster con esta configuración?**
-* Una dirección IP privada para cada nodo trabajador, que proporciona a los nodos trabajadores una interfaz de red privada
+En los clústeres que ejecutan Kubernetes versión 1.11 o posteriores, habilite o inhabilite el punto final de servicio privado para el clúster.
+{: shortdesc}
 
-**¿Qué no obtiene mi clúster con esta configuración?**
-* Una dirección IP pública para cada nodo trabajador, que proporciona a los nodos trabajadores una interfaz de red pública. El clúster nunca está disponible para el público.
-* Una conexión automática entre todos los nodos trabajadores y el maestro. Debe proporcionar esta conexión [configurando un dispositivo de pasarela](#private_vlan_gateway).
+El punto final de servicio privado hace que el maestro de Kubernetes sea de acceso privado. Los nodos trabajadores y los usuarios autorizados del clúster se pueden comunicar con el maestro de Kubernetes a través de la red privada. Para determinar si puede habilitar el punto final de servicio privado, consulte [Planificación de la comunicación entre el maestro y el trabajador](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master). Tenga en cuenta que no puede inhabilitar el punto final de servicio privado después de habilitarlo.
 
-**¿Para qué puedo utilizar esta configuración?**
-</br>Tiene requisitos de seguridad específicos o necesita crear reglas de direccionamiento y políticas de red personalizadas para ofrecer seguridad de red dedicada. Tenga en cuenta que el uso de un dispositivo de pasarela genera costes por separado. Para obtener detalles, consulte la [documentación](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
+**Pasos para habilitarlo durante la creación del clúster**</br>
+1. Habilite [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) en la cuenta de la infraestructura de IBM Cloud (SoftLayer).
+2. [Habilite la cuenta de {{site.data.keyword.Bluemix_notm}} para que utilice puntos finales de servicio](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
+3. Si crea el clúster en un entorno detrás de un cortafuegos, [permita el tráfico de red de salida a las IP públicas y privadas](/docs/containers?topic=containers-firewall#firewall_outbound) para los recursos de la infraestructura y para los servicios de {{site.data.keyword.Bluemix_notm}} que tiene previsto utilizar.
+4. Cree un clúster:
+  * [Cree un clúster con la CLI](/docs/containers?topic=containers-clusters#clusters_cli) y utilice el distintivo `--private-service-endpoint`. Si también desea habilitar el punto final de servicio público, utilice también el distintivo `--public-service-endpoint`.
+  * [Cree un clúster con la IU](/docs/containers?topic=containers-clusters#clusters_ui_standard) y seleccione **Solo punto final privado**. Si desea habilitar también el punto final de servicio público, seleccione **Puntos finales público y privado**.
+5. Si habilita el solo punto final de servicio privado para un clúster en un entorno detrás de un cortafuegos:
+  1. Verifique que están en la red privada de {{site.data.keyword.Bluemix_notm}} o que está conectado a la red privada a través de una conexión VPN.
+  2. [Permita a los usuarios autorizados del clúster ejecutar mandatos `kubectl`](/docs/containers?topic=containers-firewall#firewall_kubectl) para acceder al maestro a través del punto final de servicio privado. Los usuarios del clúster deben estar en la red privada de {{site.data.keyword.Bluemix_notm}} o se deben conectar a la red privada mediante una conexión VPN para poder ejecutar mandatos `kubectl`.
+  3. Si el acceso de red está protegido por un cortafuegos de la empresa, debe [permitir el acceso a los puntos finales públicos para la API `ibmcloud` y la API `ibmcloud ks` en el cortafuegos](/docs/containers?topic=containers-firewall#firewall_bx). Aunque toda la comunicación con el maestro pasa por la red privada, los mandatos `ibmcloud` e `ibmcloud ks` deben
+pasar por los puntos finales de la API pública.
 
-**¿Cuáles son mis opciones para gestionar el acceso público y privado a mi clúster?**
-</br>En las secciones siguientes se describen las funciones de {{site.data.keyword.containerlong_notm}} que puede utilizar para configurar las redes para clústeres conectados únicamente a una VLAN privada.
+  </br>
 
-### Configure un dispositivo de pasarela
-{: #private_vlan_gateway}
+**Pasos para habilitarlo después de la creación del clúster**</br>
+1. Habilite [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) en la cuenta de la infraestructura de IBM Cloud (SoftLayer).
+2. [Habilite la cuenta de {{site.data.keyword.Bluemix_notm}} para que utilice puntos finales de servicio](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
+3. Habilite el punto final de servicio privado.
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+4. Renueve el servidor de API del maestro de Kubernetes para que utilice el punto final de servicio privado. Puede seguir la indicación en la CLI o puede ejecutar manualmente el mandato siguiente.
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
 
-Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red entre los nodos trabajadores y el maestro. Puede configurar un cortafuegos con políticas de red personalizadas para proporcionar seguridad de red dedicada para el clúster estándar y para detectar y solucionar problemas de intrusión en la red. Por ejemplo, puede configurar un [dispositivo direccionador virtual](/docs/infrastructure/virtual-router-appliance/about.html) o un [dispositivo de seguridad Fortigate](/docs/infrastructure/fortigate-10g/about.html) para que actúe como cortafuegos y bloquee el tráfico no deseado. Si configura un cortafuegos, también debe [abrir los puertos y direcciones IP necesarios](cs_firewall.html#firewall_outbound) para cada región para que los nodos maestro y trabajador se puedan comunicar.
+5. [Cree un mapa de configuración](/docs/containers?topic=containers-update#worker-up-configmap) para controlar el número máximo de nodos trabajadores que pueden no estar disponibles a la vez en el clúster. Cuando actualiza los nodos trabajadores, el mapa de correlación ayuda a evitar tiempo de inactividad para las apps a medida que las apps se replanifican de forma ordenada en los nodos trabajadores disponibles.
+6. Actualice todos los nodos trabajadores del clúster para que adopten la configuración de punto final de servicio privado.
 
-Si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN mediante la [habilitación de la expansión de VLAN](cs_subnets.html#vra-routing).
-{: important}
+  <p class="important">Con el siguiente mandato de actualización, los nodos trabajadores se vuelven a cargar para que adopten la configuración de punto final de servicio. Si no hay ninguna actualización de nodo trabajador disponible, debe [volver a cargar manualmente los nodos trabajadores](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference). Si los vuelve a cargar, asegúrese de delimitar, drenar y gestionar el orden para controlar el número máximo de nodos trabajadores que no están disponibles a la vez.</p>
+  ```
+  ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+  ```
+  {: pre}
 
-### Exponga sus apps con servicios de red privados
-{: #private_vlan_services}
+8. Si el clúster se encuentra en un entorno detrás de un cortafuegos:
+  * [Permita a los usuarios autorizados del clúster ejecutar mandatos `kubectl` para acceder al maestro a través del punto final de servicio privado.](/docs/containers?topic=containers-firewall#firewall_kubectl)
+  * [Permita el tráfico de red de salida a las IP privadas](/docs/containers?topic=containers-firewall#firewall_outbound) para los recursos de la infraestructura y para los servicios de {{site.data.keyword.Bluemix_notm}} que tiene previsto utilizar.
 
-Para hacer que solo se pueda acceder a la app desde una red privada, puede utilizar los servicios privados NodePort, LoadBalancer o Ingress. Puesto que los nodos trabajadores no están conectados a una VLAN pública, no se direcciona ningún tráfico público a estos servicios. También debe [abrir las direcciones IP y los puertos necesarios](cs_firewall.html#firewall_inbound) para permitir el tráfico de entrada a estos servicios.
+9. Opcional: Para utilizar solo el punto final de servicio privado, inhabilite el punto final de servicio público.
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+  </br>
 
-Para obtener más información sobre cada servicio, consulte [Elección de un servicio de NodePort, LoadBalancer o Ingress](cs_network_planning.html#external).
+**Pasos para inhabilitar**</br>
+El punto final de servicio privado no se puede inhabilitar.
 
-### Opcional: conéctese a una base de datos local utilizando el dispositivo de pasarela
-{: #private_vlan_vpn}
+## Configuración de punto final de servicio público
+{: #set-up-public-se}
 
-Para conectar de forma segura sus nodos trabajadores y apps a una red local, puede configurar una pasarela VPN. Puede utilizar el VRA o el FSA que ha configurado anteriormente para configurar también un punto final VPN IPSec. Para configurar un VRA, consulte [Configuración de la conectividad de VPN con un VRA](cs_vpn.html#vyatta).
+Habilite o inhabilite el punto final de servicio público para el clúster.
+{: shortdesc}
+
+El punto final de servicio público hace que el maestro de Kubernetes sea de acceso público. Los nodos trabajadores y los usuarios autorizados del clúster se pueden comunicar de forma segura con el maestro de Kubernetes a través de la red pública. Para determinar si puede habilitar el punto final de servicio público, consulte [Planificación de la comunicación entre nodos trabajadores y el maestro de Kubernetes](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master).
+
+**Pasos para habilitarlo durante la creación del clúster**</br>
+
+1. Si crea el clúster en un entorno detrás de un cortafuegos, [permita el tráfico de red de salida a las IP públicas y privadas](/docs/containers?topic=containers-firewall#firewall_outbound) para los servicios de {{site.data.keyword.Bluemix_notm}} que tiene previsto utilizar.
+
+2. Cree un clúster:
+  * [Cree un clúster con la CLI](/docs/containers?topic=containers-clusters#clusters_cli) y utilice el distintivo `--public-service-endpoint`. Si también desea habilitar el punto final de servicio privado, utilice también el distintivo `--private-service-endpoint`.
+  * [Cree un clúster con la IU](/docs/containers?topic=containers-clusters#clusters_ui_standard) y seleccione **Solo punto final público**. Si desea habilitar también el punto final de servicio privado, seleccione **Puntos finales público y privado**.
+
+3. Si crea el clúster en un entorno detrás de un cortafuegos, [permita que los usuarios autorizados del clúster ejecuten mandatos `kubectl` para acceder al maestro solo a través del punto final de servicio público o a través de los puntos finales de servicio público y privado.](/docs/containers?topic=containers-firewall#firewall_kubectl)
+
+  </br>
+
+**Pasos para habilitarlo después de la creación del clúster**</br>
+Si ya ha inhabilitado el punto final público, puede volver a habilitarlo.
+1. Habilite el punto final de servicio público.
+  ```
+  ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+2. Renueve el servidor de API del maestro de Kubernetes para que utilice el punto final de servicio público. Puede seguir la indicación en la CLI o puede ejecutar manualmente el mandato siguiente.
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  </br>
+
+**Pasos para inhabilitar**</br>
+Para inhabilitar el punto final de servicio público, primero debe habilitar el punto final de servicio privado para que los nodos trabajadores se puedan comunicar con el maestro de Kubernetes.
+1. Habilite el punto final de servicio privado.
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+2. Renueve el servidor de API del maestro de Kubernetes para que utilice el punto final de servicio privado siguiendo la indicación de la CLI o ejecutando manualmente el mandato siguiente.
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+3. [Cree un mapa de configuración](/docs/containers?topic=containers-update#worker-up-configmap) para controlar el número máximo de nodos trabajadores que pueden no estar disponibles a la vez en el clúster. Cuando actualiza los nodos trabajadores, el mapa de correlación ayuda a evitar tiempo de inactividad para las apps a medida que las apps se replanifican de forma ordenada en los nodos trabajadores disponibles.
+
+4. Actualice todos los nodos trabajadores del clúster para que adopten la configuración de punto final de servicio privado.
+
+  <p class="important">Con el siguiente mandato de actualización, los nodos trabajadores se vuelven a cargar para que adopten la configuración de punto final de servicio. Si no hay ninguna actualización de nodo trabajador disponible, debe [volver a cargar manualmente los nodos trabajadores](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference). Si los vuelve a cargar, asegúrese de delimitar, drenar y gestionar el orden para controlar el número máximo de nodos trabajadores que no están disponibles a la vez.</p>
+  ```
+  ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+  ```
+  {: pre}
+5. Inhabilite el punto final de servicio público.
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+## Cómo pasar de un punto final de servicio público a un punto final de servicio privado
+{: #migrate-to-private-se}
+
+En clústeres que ejecutan Kubernetes versión 1.11 o posteriores, habilite los nodos trabajadores para que se comuniquen con el maestro a través de la red privada en lugar de la red pública habilitando el punto final de servicio privado.
+{: shortdesc}
+
+Todos los clústeres que están conectados a una VLAN pública y a una privada utilizan de forma predeterminada el punto final de servicio público. Los nodos trabajadores y los usuarios autorizados del clúster se pueden comunicar de forma segura con el maestro de Kubernetes a través de la red pública. Para permitir que los nodos trabajadores se comuniquen con el maestro de Kubernetes a través de la red privada en lugar de hacerlo a través de la red pública, puede habilitar el punto final de servicio privado. A continuación, puede inhabilitar si lo desea el punto final de servicio público.
+* Si habilita el punto final de servicio privado y mantiene el punto final de servicio público también habilitado, los nodos trabajadores siempre se comunican con el maestro a través de la red privada, pero los usuarios se pueden comunicar con el maestro a través de la red pública o privada.
+* Si habilita el punto final de servicio privado pero inhabilita el punto final de servicio público, los nodos trabajadores y los usuarios deben comunicarse con el maestro a través de la red privada.
+
+Tenga en cuenta que no puede inhabilitar el punto final de servicio privado después de habilitarlo.
+
+1. Habilite [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) en la cuenta de la infraestructura de IBM Cloud (SoftLayer).
+2. [Habilite la cuenta de {{site.data.keyword.Bluemix_notm}} para que utilice puntos finales de servicio](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
+3. Habilite el punto final de servicio privado.
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+4. Renueve el servidor de API del maestro de Kubernetes para que utilice el punto final de servicio privado siguiendo la indicación de la CLI o ejecutando manualmente el mandato siguiente.
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+5. [Cree un mapa de configuración](/docs/containers?topic=containers-update#worker-up-configmap) para controlar el número máximo de nodos trabajadores que pueden no estar disponibles a la vez en el clúster. Cuando actualiza los nodos trabajadores, el mapa de correlación ayuda a evitar tiempo de inactividad para las apps a medida que las apps se replanifican de forma ordenada en los nodos trabajadores disponibles.
+
+6.  Actualice todos los nodos trabajadores del clúster para que adopten la configuración de punto final de servicio privado.
+
+    <p class="important">Con el siguiente mandato de actualización, los nodos trabajadores se vuelven a cargar para que adopten la configuración de punto final de servicio. Si no hay ninguna actualización de nodo trabajador disponible, debe [volver a cargar manualmente los nodos trabajadores](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference). Si los vuelve a cargar, asegúrese de delimitar, drenar y gestionar el orden para controlar el número máximo de nodos trabajadores que no están disponibles a la vez.</p>
+    ```
+    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+    ```
+    {: pre}
+
+7. Opcional: Inhabilite el punto final de servicio público.
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}

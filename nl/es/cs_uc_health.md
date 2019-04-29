@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -20,7 +24,6 @@ lastupdated: "2018-12-05"
 
 
 
-
 # Casos de uso de {{site.data.keyword.cloud_notm}} en el sector sanitario
 {: #cs_uc_health}
 
@@ -31,15 +34,17 @@ En estos casos de uso se describe cómo las cargas de trabajo de {{site.data.key
 {: #uc_migrate}
 
 Un ejecutivo de TI de un proveedor de atención sanitaria tiene sistemas locales de informes del negocio y de pacientes. Estos sistemas pasan por ciclos lentos de mejora, lo que hace que se estanquen los niveles de servicio al paciente.
+{: shortdesc}
 
 Por qué {{site.data.keyword.cloud_notm}}: para mejorar el servicio al paciente, el proveedor pensó en {{site.data.keyword.containerlong_notm}} y {{site.data.keyword.contdelivery_full}} para reducir el gasto en TI y acelerar el desarrollo, todo ello en una plataforma segura. Los sistemas SaaS del proveedor, que albergaban tanto los sistemas de registros de pacientes como las apps de informes de la empresa, necesitaban actualizaciones frecuentes. Sin embargo, el entorno local obstaculiza el desarrollo ágil. El proveedor también quería reducir los crecientes costes laborales y el presupuesto.
 
-Tecnologías clave:    
-* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](cs_clusters_planning.html#shared_dedicated_node)
-* [Escalado horizontal](cs_app.html#highly_available_apps)
-* [Seguridad y aislamiento de contenedores](cs_secure.html#security)
+Tecnologías clave:
+* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Escalado horizontal](/docs/containers?topic=containers-app#highly_available_apps)
+* [Seguridad y aislamiento de contenedores](/docs/containers?topic=containers-security#security)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [Capacidad de inicio de sesión sin cambiar el código de la app mediante {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
 
 Empezaron por contenerizar sus sistemas SaaS y colocarlos en la nube. Desde este primer paso, pasaron de un hardware sobredimensionado en un centro de datos privado a un cálculo personalizable que reduce las operaciones de TI, el mantenimiento y la energía. Para alojar los sistemas SaaS, diseñaron fácilmente clústeres de Kubernetes que se ajustaran a sus necesidades de CPU, RAM y almacenamiento. Otro factor para reducir los costes de personal es que IBM gestiona Kubernetes, de modo que el proveedor puede centrarse en ofrecer un mejor servicio al cliente.
 
@@ -70,6 +75,7 @@ Servicios de cálculo según demanda, almacenamiento y E/S que se ejecutan en la
 * Las apps que gestionan datos muy confidenciales de los pacientes se pueden realojar en {{site.data.keyword.containerlong_notm}} que se ejecuta en un entorno nativo para Trusted Compute.
 * Trusted Compute puede verificar el hardware subyacente para protegerlo frente a una posible manipulación.
 * Desde ese punto de partida, Vulnerability Advisor proporciona funciones de exploración de imágenes, políticas, contenedores y vulnerabilidades de exploración de paquetes en busca de software malicioso conocido.
+* Aplique de forma coherente la autenticación controlada por políticas a los servicios y las API con una anotación de Ingress simple. Con la seguridad declarativa, puede garantizar la autenticación de usuarios y la validación de señales mediante {{site.data.keyword.appid_short_notm}}.
 
 **Paso 2: Transformación**
 * Migrar las imágenes de máquina virtual a imágenes de contenedor que se ejecutan en {{site.data.keyword.containerlong_notm}} a la nube pública.
@@ -88,6 +94,7 @@ Servicios de cálculo según demanda, almacenamiento y E/S que se ejecutan en la
 * {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
+* {{site.data.keyword.appid_short_notm}}
 
 Para las cargas de trabajo más confidenciales, los clústeres se pueden alojar en {{site.data.keyword.containerlong_notm}} para el entorno nativo.  Proporciona una plataforma de cálculo fiable que explora automáticamente el hardware y el código de tiempo de ejecución para detectar vulnerabilidades. Mediante el uso de la tecnología contenedores estándar del sector, las apps se pueden realojar inicialmente en {{site.data.keyword.containerlong_notm}} de forma rápida sin tener que realizar cambios arquitectónicos importantes. Este cambio proporciona la ventaja inmediata de la escalabilidad.
 
@@ -114,12 +121,12 @@ Un ejecutivo de desarrollo de una organización sin ánimo de lucro de investiga
 
 Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} proporciona un cálculo seguro que puede alojar el proceso de datos confidenciales de alto rendimiento en una plataforma abierta. Esa plataforma global se encuentra en regiones cercanas. De modo que cumple con las normativas locales, lo que inspira confianza a los pacientes y a los investigadores sobre la protección local de sus datos y genera mejores resultados.
 
-Tecnologías clave:    
-* [Una planificación inteligente coloca las cargas de trabajo donde se necesitan](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
-* [{{site.data.keyword.cloudant}} para almacenar datos de forma permanente y sincronizarlos entre apps](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [Exploración y aislamiento de vulnerabilidades de las cargas de trabajo ](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+Tecnologías clave:
+* [Una planificación inteligente coloca las cargas de trabajo donde se necesitan](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [{{site.data.keyword.cloudant}} para almacenar datos de forma permanente y sincronizarlos entre apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [Exploración y aislamiento de vulnerabilidades de las cargas de trabajo](/docs/services/Registry?topic=va-va_index#va_index)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} para sanear los datos y notificar a los investigadores sobre cambios en la estructura de datos](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} para sanear los datos y notificar a los investigadores sobre cambios en la estructura de datos](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
 
 **Contexto: alojamiento y compartición seguros de datos sobre enfermedades para la organización de investigación sin ánimo de lucro**
 
@@ -181,7 +188,7 @@ Solución técnica:
 
 **Paso 1: Contenerizar las apps mediante el uso de microservicios**
 * Utilizar el kit de inicio Node.js de IBM para el desarrollo inicial.
-* Organizar las apps en un conjunto de microservicios cooperativos que se ejecuten en {{site.data.keyword.containerlong_notm}} en función de las áreas funcionales de la app y sus dependencias.
+* Estructurar las apps en un conjunto de microservicios cooperativos que se ejecuten en {{site.data.keyword.containerlong_notm}} en función de las áreas funcionales de la app y sus dependencias.
 * Desplegar las apps de investigación en contenedores en {{site.data.keyword.containerlong_notm}}.
 * Proporcionar paneles de control de DevOps estandarizados a través de Kubernetes.
 * Habilitar el escalado según demanda de la capacidad de cálculo para cargas de trabajo de proceso por lotes y otras cargas de trabajo de investigación que se ejecutan con poca frecuencia.

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,18 +23,28 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # Armazenando dados no IBM Cloud Object Storage
 {: #object_storage}
+
+O [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage) é um armazenamento persistente e altamente disponível que você pode montar para apps que são executados em um cluster do Kubernetes usando o plug-in do {{site.data.keyword.cos_full_notm}}. O plug-in é um plug-in Flex-Volume do Kubernetes que conecta os depósitos do Cloud {{site.data.keyword.cos_short}} aos pods em seu cluster. As informações que são armazenadas com o {{site.data.keyword.cos_full_notm}} são criptografadas em trânsito e em repouso, dispersas em múltiplas localizações geográficas e acessadas por meio de HTTP usando uma API de REST.
+
+Para se conectar ao {{site.data.keyword.cos_full_notm}}, seu cluster requer acesso de rede pública para autenticar com o {{site.data.keyword.Bluemix_notm}} Identity and Access Management. Se você tiver um cluster somente privado, será possível se comunicar com o terminal em serviço privado do {{site.data.keyword.cos_full_notm}} se você instalar o plug-in versão `1.0.3` ou mais recente e configurar sua instância de serviço do {{site.data.keyword.cos_full_notm}} para autenticação HMAC. Se você não desejar usar a autenticação HMAC, deverá abrir todo o tráfego de rede de saída na porta 443 para que o plug-in funcione corretamente em um cluster privado.
+{: important}
 
 ## Criando a sua instância de serviço de armazenamento de objeto
 {: #create_cos_service}
 
-Antes de poder começar a usar o {{site.data.keyword.cos_full_notm}} em seu cluster, deve-se provisionar uma instância de serviço do {{site.data.keyword.cos_full_notm}} em sua conta.
+Antes de poder começar a usar o armazenamento de objeto em seu cluster, deve-se fornecer uma instância de serviço do {{site.data.keyword.cos_full_notm}} em sua conta.
 {: shortdesc}
 
+O plug-in do {{site.data.keyword.cos_full_notm}} está configurado para funcionar com qualquer terminal de API s3. Por exemplo, você pode desejar usar um servidor Cloud Object Storage local, como o [Minio](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore) ou conectar-se a um terminal de API s3 que você configurou em um provedor em nuvem diferente em vez de usar uma instância de serviço do {{site.data.keyword.cos_full_notm}}.
+
+Siga estas etapas para criar uma instância de serviço do {{site.data.keyword.cos_full_notm}}. Se você planeja usar um servidor Cloud Object Storage local ou um terminal de API s3 diferente, consulte a documentação do provedor para configurar sua instância do Cloud Object Storage.
+
 1. Implementar uma instância de serviço do  {{site.data.keyword.cos_full_notm}}.
-   1.  Abra a [{{site.data.keyword.cos_full_notm}} página do catálogo](https://console.bluemix.net/catalog/services/cloud-object-storage).
-   2.  Insira um nome para a sua instância de serviço (como `cos-backup`) e selecione o mesmo grupo de recursos em que seu cluster está. Para visualizar o grupo de recursos de seu cluster, execute `[bxcs] cluster-get --cluster <cluster_name_or_ID>`.   
+   1.  Abra a  [ página do catálogo do {{site.data.keyword.cos_full_notm}}  ](https://cloud.ibm.com/catalog/services/cloud-object-storage).
+   2.  Insira um nome para a sua instância de serviço (como `cos-backup`) e selecione o mesmo grupo de recursos em que seu cluster está. Para visualizar o grupo de recursos de seu cluster, execute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.   
    3.  Revise as [opções de plano ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) para obter informações de precificação e selecionar um plano.
    4.  Clique em **Criar**. A página de detalhes do serviço é aberta.
 2. {: #service_credentials}Recupere as credenciais de serviço do {{site.data.keyword.cos_full_notm}}.
@@ -38,7 +52,7 @@ Antes de poder começar a usar o {{site.data.keyword.cos_full_notm}} em seu clus
    2.  Clique em **Nova credencial**. Uma caixa de diálogo é exibida.
    3.  Insira um nome para suas credenciais.
    4.  Na lista suspensa **Função**, selecione `Writer` ou `Manager`. Quando você seleciona `Reader`, não é possível usar as credenciais para criar buckets no {{site.data.keyword.cos_full_notm}} e gravar dados nele.
-   5.  Opcional: em **Incluir parâmetros de configuração sequenciais (opcional)**, insira `{"HMAC":true}` para criar credenciais adicionais do HMAC para o serviço {{site.data.keyword.cos_full_notm}}. A autenticação HMAC inclui uma camada extra de segurança para a autenticação OAuth2, evitando o uso indevido de tokens OAuth2 expirados ou criados aleatoriamente.
+   5.  Opcional: em **Incluir parâmetros de configuração sequenciais (opcional)**, insira `{"HMAC":true}` para criar credenciais adicionais do HMAC para o serviço {{site.data.keyword.cos_full_notm}}. A autenticação HMAC inclui uma camada extra de segurança para a autenticação OAuth2, evitando o uso indevido de tokens OAuth2 expirados ou criados aleatoriamente. **Importante**: se você tiver um cluster somente privado sem acesso público, será necessário usar a autenticação HMAC para que seja possível acessar o serviço {{site.data.keyword.cos_full_notm}} por meio da rede privada.
    6.  Clique em **Incluir**. Suas novas credenciais são listadas na tabela **Credenciais de serviço**.
    7.  Clique em **Visualizar credenciais**.
    8.  Anote o **apikey** para usar tokens OAuth2 para autenticar com o serviço {{site.data.keyword.cos_full_notm}}. Para autenticação do HMAC, na seção **cos_hmac_keys**, anote o **access_key_id** e o **secret_access_key**.
@@ -50,7 +64,9 @@ Antes de poder começar a usar o {{site.data.keyword.cos_full_notm}} em seu clus
 Para acessar sua instância de serviço do {{site.data.keyword.cos_full_notm}} para ler e gravar dados, deve-se armazenar com segurança as credenciais de serviço em um segredo do Kubernetes. O plug-in do {{site.data.keyword.cos_full_notm}} usa essas credenciais para cada operação de leitura ou gravação em seu bucket.
 {: shortdesc}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+Siga estas etapas para criar um segredo do Kubernetes para as credenciais de uma instância de serviço do {{site.data.keyword.cos_full_notm}}. Se você planeja usar um servidor Cloud Object Storage local ou um terminal de API s3 diferente, crie um segredo do Kubernetes com as credenciais apropriadas.
+
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1. Recupere o **apikey** ou o **access_key_id** e o **secret_access_key** de suas credenciais de serviço do [{{site.data.keyword.cos_full_notm}}](#service_credentials).
 
@@ -93,7 +109,6 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
    data:
      access-key: <base64_access_key_id>
      secret-key: <base64_secret_access_key>
-     service-instance-id: <base64_guid>
    ```
    {: codeblock}
 
@@ -153,53 +168,65 @@ Instale o plug-in do {{site.data.keyword.cos_full_notm}} com um gráfico Helm pa
 Procurando instruções sobre como atualizar ou remover o plug-in do {{site.data.keyword.cos_full_notm}}? Consulte [Atualizando o plug-in](#update_cos_plugin) e [Removendo o plug-in](#remove_cos_plugin).
 {: tip}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-1. Certifique-se de que o nó do trabalhador aplique a correção mais recente para sua versão secundária. 
-   1. Liste a versão de correção atual de seus nós do trabalhador. 
+1. Certifique-se de que o nó do trabalhador aplique a correção mais recente para sua versão secundária.
+   1. Liste a versão de correção atual de seus nós do trabalhador.
       ```
       ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
       {: pre}
-      
-      Saída de exemplo: 
+
+      Saída de exemplo:
       ```
-      OK
-      ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26 169.xx.xxx.xxx 10.xxx.xx.xxx b2c.4x16.encrypted normal Ready dal10 1.10.11_1523* 
+      OK ID Public IP Private IP Machine Type State Status Zone Version kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26 169.xx.xxx.xxx 10.xxx.xx.xxx b2c.4x16.encrypted normal Ready dal10 1.12.6_1523*
       ```
       {: screen}
-      
-      Se o nó do trabalhador não aplicar a versão de correção mais recente, você verá um asterisco (`*`) na coluna **Versão** da saída da CLI. 
-      
-   2. Revise o [log de mudanças de versão](cs_versions_changelog.html#changelog) para localizar as mudanças incluídas na versão de correção mais recente. 
-   
-   3. Aplique a versão de correção mais recente recarregando seu nó do trabalhador. Siga as instruções no [comando ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) para reagendar normalmente quaisquer pods em execução no nó do trabalhador antes de recarregar o nó do trabalhador. Observe que durante o recarregamento, a máquina do nó do trabalhador será atualizada com a imagem mais recente e os dados serão excluídos se não forem [armazenados fora do nó do trabalhador](cs_storage_planning.html#persistent_storage_overview).
 
-2. Siga as [instruções](cs_integrations.html#helm) para instalar o cliente do Helm em sua máquina local, instalar o servidor Helm (tiller) em seu cluster e incluir o repositório do gráfico Helm do {{site.data.keyword.Bluemix_notm}} no cluster no qual você deseja usar o plug-in do {{site.data.keyword.cos_full_notm}}.
+      Se o nó do trabalhador não aplicar a versão de correção mais recente, você verá um asterisco (`*`) na coluna **Versão** da saída da CLI.
 
-    Se você usar o Helm versão 2.9 ou superior, certifique-se de que tenha instalado o tiller com uma [conta de serviço](cs_integrations.html#helm).
-    {: important}
+   2. Revise o [log de mudanças de versão](/docs/containers?topic=containers-changelog#changelog) para localizar as mudanças incluídas na versão de correção mais recente.
 
-3. Inclua o repositório do Helm do {{site.data.keyword.Bluemix_notm}} em seu cluster.
+   3. Aplique a versão de correção mais recente recarregando seu nó do trabalhador. Siga as instruções no [comando ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) para reagendar normalmente quaisquer pods em execução em seu nó do trabalhador antes de recarregá-lo. Observe que durante o recarregamento, a máquina do nó do trabalhador será atualizada com a imagem mais recente e os dados serão excluídos se não forem [armazenados fora do nó do trabalhador](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+
+2.  [Siga as instruções](/docs/containers?topic=containers-integrations#helm) para instalar o cliente Helm em sua máquina local e instale o servidor Helm (tiller) com uma conta do serviço em seu cluster.
+
+    A instalação do Tiller do servidor Helm requer uma conexão de rede pública com o Google Container Registry público. Se o seu cluster não puder acessar a rede pública, como um cluster privado atrás de um firewall ou um cluster com somente o terminal em serviço privado ativado, será possível escolher [puxar a imagem do Tiller para sua máquina local e enviar por push a imagem para o seu namespace no {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-integrations#private_local_tiller) ou [instalar o gráfico do Helm sem usar o Tiller](/docs/containers?topic=containers-integrations#private_install_without_tiller).
+    {: note}
+
+3.  Verifique se o tiller está instalado com uma conta do serviço.
+
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    Saída de exemplo:
+
+    ```
+    NAME SECRETS AGE tiller 1 2m
+    ```
+    {: screen}
+
+4. Inclua o repositório do Helm do {{site.data.keyword.Bluemix_notm}} em seu cluster.
    ```
    helm repo add ibm https://registry.bluemix.net/helm/ibm
    ```
    {: pre}
 
-4. Atualize o repositório Helm para recuperar a versão mais recente de todos os gráficos Helm nesse repositório.
+5. Atualize o repositório Helm para recuperar a versão mais recente de todos os gráficos Helm nesse repositório.
    ```
    helm repo update
    ```
    {: pre}
 
-5. Faça download dos gráficos Helm e descompacte os gráficos em seu diretório atual.
+6. Faça download dos gráficos Helm e descompacte os gráficos em seu diretório atual.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
    {: pre}
 
-6. Se você usar macOS ou uma distribuição Linux, instale o plug-in Helm do {{site.data.keyword.cos_full_notm}} `ibmc`. O plug-in é usado para recuperar automaticamente o local do cluster e para configurar o terminal de API para os buckets do {{site.data.keyword.cos_full_notm}} em suas classes de armazenamento. Se você usar o Windows como seu sistema operacional, continue com a próxima etapa.
+7. Se você usar macOS ou uma distribuição Linux, instale o plug-in Helm do {{site.data.keyword.cos_full_notm}} `ibmc`. O plug-in é usado para recuperar automaticamente o local do cluster e para configurar o terminal de API para os buckets do {{site.data.keyword.cos_full_notm}} em suas classes de armazenamento. Se você usar o Windows como seu sistema operacional, continue com a próxima etapa.
    1. Instale o plug-in Helm.
       ```
       helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
@@ -237,7 +264,10 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
       ```
       {: screen}
 
-7. Opcional: limite o plug-in do {{site.data.keyword.cos_full_notm}} para acessar somente os segredos do Kubernetes que contêm as credenciais de serviço do {{site.data.keyword.cos_full_notm}}. Por padrão, o plug-in está autorizado a acessar todos os segredos do Kubernetes em seu cluster.
+      Se a saída mostrar o erro `Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission denied`, execute `chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh`. Em seguida, reexecute `helm ibmc -- help`.
+      {: tip}
+
+8. Opcional: limite o plug-in do {{site.data.keyword.cos_full_notm}} para acessar somente os segredos do Kubernetes que contêm as credenciais de serviço do {{site.data.keyword.cos_full_notm}}. Por padrão, o plug-in está autorizado a acessar todos os segredos do Kubernetes em seu cluster.
    1. [Crie sua instância de serviço {{site.data.keyword.cos_full_notm}}](#create_cos_service).
    2. [Armazene suas credenciais de serviço do {{site.data.keyword.cos_full_notm}} em um segredo do Kubernetes](#create_cos_secret).
    3. Navegue para o diretório `templates` e liste os arquivos disponíveis.  
@@ -246,7 +276,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
       ```
       {: pre}
 
-   4. Abra o arquivo `provisioner-sa.yaml` e procure a definição de ClusterRole `ibmcloud-object-storage-secret-storage-secret-reader`.
+   4. Abra o arquivo `provisioner-sa.yaml` e procure a definição `ibmcloud-object-storage-secret-reader` de `ClusterRole`.
    6. Inclua o nome do segredo que você criou anteriormente para a lista de segredos que o plug-in está autorizado a acessar na seção `resourceNames`.
       ```
       kind: ClusterRole
@@ -262,18 +292,18 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
       {: codeblock}
    7. Salve as suas mudanças.
 
-8. Instale o plug-in do {{site.data.keyword.cos_full_notm}}. Quando você instala o plug-in, as classes de armazenamento predefinidas são incluídas em seu cluster.
+9. Instale o plug-in do {{site.data.keyword.cos_full_notm}}. Quando você instala o plug-in, as classes de armazenamento predefinidas são incluídas em seu cluster.
 
    - **Para macOS e Linux:**
      - Se você tiver ignorado a etapa anterior, instale sem uma limitação para segredos específicos do Kubernetes.
        ```
-       helm ibmc install ibm/ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install ibm/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
      - Se você tiver concluído a etapa anterior, instale com uma limitação para segredos específicos do Kubernetes.
        ```
-       helm ibmc install ./ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install ./ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
@@ -366,7 +396,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
    ```
    {: screen}
 
-8. Verifique se o plug-in está instalado corretamente.
+10. Verifique se o plug-in está instalado corretamente.
    ```
    kubectl get pod -n kube-system -o wide | grep object
    ```
@@ -381,15 +411,15 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 
    A instalação é bem-sucedida quando você vê um pod `ibmcloud-object-storage-plugin` e um ou mais pods `ibmcloud-storage-object-storage-driver`. O número de pods `ibmcloud-object-storage-driver` é igual ao número de nós do trabalhador em seu cluster. Todos os pods devem estar em um estado `Running` para que o plug-in funcione de forma adequada. Se os pods falharem, execute `kubectl describe pod -n kube-system <pod_name>` para localizar a causa raiz para a falha.
 
-9. Verifique se as classes de armazenamento foram criadas com êxito.
-   ```
-   kubectl get storageclass | grep s3
-   ```
-   {: pre}
+11. Verifique se as classes de armazenamento foram criadas com êxito.
+    ```
+    kubectl get storageclass | grep s3
+    ```
+    {: pre}
 
-   Saída de exemplo:
-   ```
-   ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
+    Saída de exemplo:
+    ```
+    ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
@@ -401,10 +431,10 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
    ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
-   ```
-   {: screen}
+    ```
+    {: screen}
 
-10. Repita as etapas para todos os clusters nos quais você deseja acessar os buckets do {{site.data.keyword.cos_full_notm}}.
+12. Repita as etapas para todos os clusters nos quais você deseja acessar os buckets do {{site.data.keyword.cos_full_notm}}.
 
 ### Atualizando o plug-in do IBM Cloud Object Storage
 {: #update_cos_plugin}
@@ -412,18 +442,24 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 É possível fazer upgrade do plug-in do {{site.data.keyword.cos_full_notm}} existente para a versão mais recente.
 {: shortdesc}
 
-1. Atualize o repositório Helm para recuperar a versão mais recente de todos os gráficos Helm nesse repositório.
+1. Se você usar macOS ou uma distribuição Linux, atualize o plug-in do Helm `ibmc` do {{site.data.keyword.cos_full_notm}} para a versão mais recente.
+   ```
+   helm ibmc -- update
+   ```
+   {: pre}
+
+2. Atualize o repositório do Helm do {{site.data.keyword.Bluemix_notm}} para recuperar a versão mais recente de todos os gráficos do Helm nesse repositório.
    ```
    helm repo update
    ```
    {: pre}
 
-2. Faça download do gráfico Helm mais recente para sua máquina local e descompacte o arquivo ZIP do pacote para revisar o arquivo `release.md` para localizar as informações mais recentes sobre a liberação.
+3. Faça download do gráfico do Helm do {{site.data.keyword.cos_full_notm}} mais recente em sua máquina local e extraia o pacote para revisar o arquivo `release.md` para localizar as informações de liberação mais recentes.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
 
-3. Localize o nome da instalação do seu gráfico helm.
+4. Localize o nome da instalação do gráfico do Helm.
    ```
    helm ls | grep ibmcloud-object-storage-plugin
    ```
@@ -435,13 +471,13 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
    ```
    {: screen}
 
-4. Faça upgrade do plug-in do {{site.data.keyword.cos_full_notm}} para a versão mais recente.
+5. Faça upgrade do gráfico do Helm do {{site.data.keyword.cos_full_notm}} para a versão mais recente.
    ```   
    helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
    ```
    {: pre}
 
-5. Verifique se o `ibmcloud-object-storage-plugin` foi submetido a upgrade com êxito.  
+6. Verifique se o `ibmcloud-object-storage-plugin` foi submetido a upgrade com êxito.  
    ```
    kubectl rollout status deployment/ibmcloud-object-storage-plugin -n kube-system
    ```
@@ -449,7 +485,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 
    O upgrade do plug-in é bem-sucedido quando você vê `deployment "ibmcloud-object-storage-plugin" successfully rolled out` em sua saída da CLI.
 
-6. Verifique se o `ibmcloud-object-storage-driver` foi submetido a upgrade com êxito.
+7. Verifique se o `ibmcloud-object-storage-driver` foi submetido a upgrade com êxito.
    ```
    kubectl rollout status ds/ibmcloud-object-storage-driver -n kube-system
    ```
@@ -457,7 +493,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 
    O upgrade é bem-sucedido quando você vê `daemon set "ibmcloud-object-storage-driver" successfully rolled out` em sua saída da CLI.
 
-7. Verifique se os pods do {{site.data.keyword.cos_full_notm}} estão em um estado `Running`.
+8. Verifique se os pods do {{site.data.keyword.cos_full_notm}} estão em um estado `Running`.
    ```
    kubectl get pods -n kube-system -o wide | grep object-storage
    ```
@@ -468,13 +504,14 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 {: #remove_cos_plugin}
 
 Se você não desejar provisionar e usar o {{site.data.keyword.cos_full_notm}} em seu cluster, será possível desinstalar os gráficos helm.
+{: shortdesc}
 
 A remoção do plug-in não remove os PVCs, PVs ou dados existentes. Quando você remove o plug-in, todos os pods e conjuntos de daemon relacionados são removidos do cluster. Não é possível provisionar um novo {{site.data.keyword.cos_full_notm}} para seu cluster ou usar PVCs e PVs existentes depois de remover o plug-in, a menos que você configure seu app para usar a API do {{site.data.keyword.cos_full_notm}} diretamente.
 {: important}
 
 Antes de iniciar:
 
-- [Destinar sua CLI para o cluster](cs_cli_install.html#cs_cli_configure).
+- [Destinar sua CLI para o cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Certifique-se de que você não tenha nenhum PVC ou PV no cluster que use o {{site.data.keyword.cos_full_notm}}. Para listar todos os pods que montam um PVC específico, execute `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`.
 
 Para remover o plug-in:
@@ -539,6 +576,7 @@ Para remover o plug-in:
 {: #configure_cos}
 
 O {{site.data.keyword.containerlong_notm}} fornece classes de armazenamento predefinidas que podem ser usadas para criar buckets com uma configuração específica.
+{: shortdesc}
 
 1. Liste as classes de armazenamento disponíveis no  {{site.data.keyword.containerlong_notm}}.
    ```
@@ -570,8 +608,8 @@ O {{site.data.keyword.containerlong_notm}} fornece classes de armazenamento pred
    - **Flex**: essa opção é usada para cargas de trabalho e dados que não seguem um padrão de uso específico ou que são muito grandes para determinar ou prever um padrão de uso. **Dica:** verifique este [blog ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/) para saber como a classe de armazenamento Flex funciona em comparação com as camadas de armazenamento tradicionais.   
 
 3. Decida sobre o nível de resiliência para os dados que estão armazenados em seu bucket.
-   - **Região cruzada**: com essa opção, seus dados são armazenados em três regiões dentro de uma localização geográfica para a maior disponibilidade. Se você tiver cargas de trabalho que estão distribuídas entre regiões, as solicitações serão roteadas para o terminal regional mais próximo. O terminal de API para a localização geográfica é configurado automaticamente pelo plug-in do Helm `ibmc` que você instalou anteriormente com base no local em que o seu cluster está. Por exemplo, se seu cluster está em `US South`, suas classes de armazenamento são configuradas para usar o terminal de API `US GEO` para seus buckets. Veja [Regiões e terminais](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) para obter mais informações.  
-   - **Regional**: com essa opção, seus dados são replicados em múltiplas zonas dentro de uma região. Se tiver cargas de trabalho que estão localizadas na mesma região, você verá latência inferior e melhor desempenho do que em uma configuração entre regiões. O terminal regional é configurado automaticamente pelo plug-in do Helm `ibm` que você instalou anteriormente com base no local em que seu cluster está. Por exemplo, se seu cluster está em `US South`, suas classes de armazenamento foram configuradas para usar `US South` como o terminal regional para seus buckets. Veja [Regiões e terminais](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) para obter mais informações.
+   - **Região cruzada**: com essa opção, seus dados são armazenados em três regiões dentro de uma localização geográfica para a maior disponibilidade. Se você tiver cargas de trabalho que estão distribuídas entre regiões, as solicitações serão roteadas para o terminal regional mais próximo. O terminal de API para a localização geográfica é configurado automaticamente pelo plug-in do Helm `ibmc` que você instalou anteriormente com base no local em que o seu cluster está. Por exemplo, se seu cluster está em `US South`, suas classes de armazenamento são configuradas para usar o terminal de API `US GEO` para seus buckets. Consulte [Regiões e terminais](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) para obter mais informações.  
+   - **Regional**: com essa opção, seus dados são replicados em múltiplas zonas dentro de uma região. Se tiver cargas de trabalho que estão localizadas na mesma região, você verá latência inferior e melhor desempenho do que em uma configuração entre regiões. O terminal regional é configurado automaticamente pelo plug-in do Helm `ibm` que você instalou anteriormente com base no local em que seu cluster está. Por exemplo, se seu cluster está em `US South`, suas classes de armazenamento foram configuradas para usar `US South` como o terminal regional para seus buckets. Consulte [Regiões e terminais](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) para obter mais informações.
 
 4. Revise a configuração detalhada do bucket do {{site.data.keyword.cos_full_notm}} para uma classe de armazenamento.
    ```
@@ -606,7 +644,7 @@ O {{site.data.keyword.containerlong_notm}} fornece classes de armazenamento pred
    </tr>
    <tr>
    <td><code>ibm.io/curl-debug</code></td>
-   <td>Ative a criação de log de solicitações que são enviadas para a instância de serviço do {{site.data.keyword.cos_full_notm}}. Se ativado, os logs são enviados para `syslog` e é possível [encaminhar os logs para um servidor de criação de log externo](cs_health.html#logging). Por padrão, todas as classes de armazenamento são configuradas como <strong>false</strong> para desativar esse recurso de criação de log. </td>
+   <td>Ative a criação de log de solicitações que são enviadas para a instância de serviço do {{site.data.keyword.cos_full_notm}}. Se ativado, os logs são enviados para `syslog` e é possível [encaminhar os logs para um servidor de criação de log externo](/docs/containers?topic=containers-health#logging). Por padrão, todas as classes de armazenamento são configuradas como <strong>false</strong> para desativar esse recurso de criação de log. </td>
    </tr>
    <tr>
    <td><code>ibm.io/debug-level</code></td>
@@ -626,7 +664,7 @@ O {{site.data.keyword.containerlong_notm}} fornece classes de armazenamento pred
    </tr>
    <tr>
    <td><code>ibm.io/object-store-endpoint</code></td>
-   <td>O terminal de API a ser usado para acessar o bucket em sua instância de serviço do {{site.data.keyword.cos_full_notm}}. O terminal é configurado automaticamente com base na região de seu cluster. **Nota**: se você desejar acessar um depósito existente que está localizado em uma região diferente daquela em que seu cluster está, deve-se criar uma [classe de armazenamento customizada](cs_storage_basics.html#customized_storageclass) e usar o terminal de API para seu depósito.</td>
+   <td>O terminal de API a ser usado para acessar o bucket em sua instância de serviço do {{site.data.keyword.cos_full_notm}}. O terminal é configurado automaticamente com base na região de seu cluster. **Nota**: se você desejar acessar um depósito existente que está localizado em uma região diferente daquela em que seu cluster está, deve-se criar uma [classe de armazenamento customizada](/docs/containers?topic=containers-kube_concepts#customized_storageclass) e usar o terminal de API para seu depósito.</td>
    </tr>
    <tr>
    <td><code>ibm.io/object-store-storage-class</code></td>
@@ -646,12 +684,12 @@ O {{site.data.keyword.containerlong_notm}} fornece classes de armazenamento pred
    </tr>
    <tr>
    <td><code>ibm.io/tls-cipher-suite</code></td>
-   <td>O conjunto de cifras do TLS que deve ser usado quando uma conexão com o {{site.data.keyword.cos_full_notm}} é estabelecida por meio do terminal HTTPS. O valor para o conjunto de cifras deve seguir o [formato OpenSSL ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html). Todas as classes de armazenamento usam o conjunto de cifras <strong>AESGCM</strong> por padrão.  </td>
+   <td>O conjunto de cifras do TLS que deve ser usado quando uma conexão com o {{site.data.keyword.cos_full_notm}} é estabelecida por meio do terminal HTTPS. O valor para o conjunto de cifras deve seguir o [formato OpenSSL ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html). Todas as classes de armazenamento usam o conjunto de cifras <strong><code>AESGCM</code></strong> por padrão.  </td>
    </tr>
    </tbody>
    </table>
 
-   Para obter mais informações sobre cada classe de armazenamento, consulte a [referência de classe de armazenamento](#storageclass_reference). Se você desejar mudar qualquer um dos valores pré-configurados, crie sua própria [classe de armazenamento customizada](cs_storage_basics.html#customized_storageclass).
+   Para obter mais informações sobre cada classe de armazenamento, consulte a [referência de classe de armazenamento](#cos_storageclass_reference). Se você desejar mudar qualquer um dos valores pré-configurados, crie sua própria [classe de armazenamento customizada](/docs/containers?topic=containers-kube_concepts#customized_storageclass).
    {: tip}
 
 5. Decida sobre um nome para o seu bucket. O nome de um bucket deve ser exclusivo no {{site.data.keyword.cos_full_notm}}. Também é possível criar automaticamente um nome para seu bucket pelo plug-in do {{site.data.keyword.cos_full_notm}}. Para organizar dados em um bucket, é possível criar subdiretórios.
@@ -670,8 +708,8 @@ Crie uma solicitação de volume persistente (PVC) para provisionar o {{site.dat
 {: shortdesc}
 
 Dependendo das configurações que você escolher em seu PVC, é possível provisionar o {{site.data.keyword.cos_full_notm}} das maneiras a seguir:
-- [Fornecimento dinâmico](cs_storage_basics.html#dynamic_provisioning): quando você cria o PVC, o volume persistente (PV) correspondente e o bucket em sua instância de serviço do {{site.data.keyword.cos_full_notm}} são criados automaticamente.
-- [Fornecimento estático](cs_storage_basics.html#static_provisioning): é possível referenciar um bucket existente em sua instância de serviço do {{site.data.keyword.cos_full_notm}} em seu PVC. Quando você cria o PVC, somente o PV correspondente é criado e vinculado automaticamente ao seu bucket existente no {{site.data.keyword.cos_full_notm}}.
+- [Fornecimento dinâmico](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning): quando você cria o PVC, o volume persistente (PV) correspondente e o bucket em sua instância de serviço do {{site.data.keyword.cos_full_notm}} são criados automaticamente.
+- [Fornecimento estático](/docs/containers?topic=containers-kube_concepts#static_provisioning): é possível referenciar um bucket existente em sua instância de serviço do {{site.data.keyword.cos_full_notm}} em seu PVC. Quando você cria o PVC, somente o PV correspondente é criado e vinculado automaticamente ao seu bucket existente no {{site.data.keyword.cos_full_notm}}.
 
 Antes de iniciar:
 - [ Crie e prepare sua  {{site.data.keyword.cos_full_notm}}  instância de serviço ](#create_cos_service).
@@ -688,7 +726,6 @@ Para incluir o  {{site.data.keyword.cos_full_notm}}  em seu cluster:
      name: <pvc_name>
      namespace: <namespace>
      annotations:
-       volume.beta.kubernetes.io/storage-class: "<storage_class>"
        ibm.io/auto-create-bucket: "<true_or_false>"
        ibm.io/auto-delete-bucket: "<true_or_false>"
        ibm.io/bucket: "<bucket_name>"
@@ -700,6 +737,7 @@ Para incluir o  {{site.data.keyword.cos_full_notm}}  em seu cluster:
      resources:
        requests:
          storage: 8Gi # Enter a fictitious value
+     storageClassName: <storage_class>
    ```
    {: codeblock}
 
@@ -716,10 +754,6 @@ Para incluir o  {{site.data.keyword.cos_full_notm}}  em seu cluster:
    <tr>
    <td><code>metadata.namespace</code></td>
    <td>Insira o namespace no qual você deseja criar o PVC. O PVC deve ser criado no mesmo namespace no qual você criou o segredo do Kubernetes para as suas credenciais de serviço do {{site.data.keyword.cos_full_notm}} e no local em que deseja executar o seu pod. </td>
-   </tr>
-   <tr>
-   <td><code> volume.beta.kubernetes.io/storage-class </code></td>
-   <td>Escolha entre as opções a seguir: <ul><li>Se <code>ibm.io/auto-create-bucket</code> estiver configurado como <strong>true</strong>: insira a classe de armazenamento que você deseja usar para seu novo bucket. </li><li>Se <code>ibm.io/auto-create-bucket</code> estiver configurado como <strong>false</strong>: insira a classe de armazenamento que você usou para criar seu bucket existente. </br></br>Se você criou manualmente o bucket em sua instância de serviço do {{site.data.keyword.cos_full_notm}} ou não pode se lembrar da classe de armazenamento que usou, localize sua instância de serviço no painel do {{site.data.keyword.Bluemix}} e revise a <strong>Classe</strong> e o <strong>Local</strong> do bucket existente. Em seguida, use a  [ classe de armazenamento ](#storageclass_reference) apropriada. <p class="note">O terminal de API do {{site.data.keyword.cos_full_notm}} que está configurado em sua classe de armazenamento se baseia na região em que seu cluster está. Se você desejar acessar um bucket que está localizado em uma região diferente daquela em que seu cluster está, deve-se criar uma [classe de armazenamento customizada](cs_storage_basics.html#customized_storageclass) e usar o terminal de API apropriado para seu bucket.</p></li></ul>  </td>
    </tr>
    <tr>
    <td><code>ibm.io/auto-create-bucket</code></td>
@@ -744,6 +778,10 @@ Para incluir o  {{site.data.keyword.cos_full_notm}}  em seu cluster:
    <td><code>resources.requests.storage</code></td>
    <td>Um tamanho fictício para o seu bucket do {{site.data.keyword.cos_full_notm}} em gigabytes. O tamanho é necessário para o Kubernetes, mas não é respeitado no {{site.data.keyword.cos_full_notm}}. É possível inserir qualquer tamanho que desejar. O espaço real que você usa no {{site.data.keyword.cos_full_notm}} pode ser diferente e é faturado com base na [tabela de precificação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api). </td>
    </tr>
+   <tr>
+   <td><code> spec.storageClassName </code></td>
+   <td>Escolha entre as opções a seguir: <ul><li>Se <code>ibm.io/auto-create-bucket</code> estiver configurado como <strong>true</strong>: insira a classe de armazenamento que você deseja usar para seu novo bucket. </li><li>Se <code>ibm.io/auto-create-bucket</code> estiver configurado como <strong>false</strong>: insira a classe de armazenamento que você usou para criar seu bucket existente. </br></br>Se você criou manualmente o bucket em sua instância de serviço do {{site.data.keyword.cos_full_notm}} ou não pode se lembrar da classe de armazenamento que usou, localize sua instância de serviço no painel do {{site.data.keyword.Bluemix}} e revise a <strong>Classe</strong> e o <strong>Local</strong> do bucket existente. Em seguida, use a  [ classe de armazenamento ](#cos_storageclass_reference) apropriada. <p class="note">O terminal de API do {{site.data.keyword.cos_full_notm}} que está configurado em sua classe de armazenamento se baseia na região em que seu cluster está. Se você desejar acessar um bucket que está localizado em uma região diferente daquela em que seu cluster está, deve-se criar uma [classe de armazenamento customizada](/docs/containers?topic=containers-kube_concepts#customized_storageclass) e usar o terminal de API apropriado para seu bucket.</p></li></ul>  </td>
+   </tr>
    </tbody>
    </table>
 
@@ -766,27 +804,12 @@ Para incluir o  {{site.data.keyword.cos_full_notm}}  em seu cluster:
    ```
    {: screen}
 
-4. Opcional: se você planejar acessar seus dados com um usuário não raiz ou arquivos incluídos em um depósito do {{site.data.keyword.cos_full_notm}} existente usando o console ou a API diretamente, certifique-se de que os [arquivos tenham a permissão correta](cs_troubleshoot_storage.html#cos_nonroot_access) designada para que seu app possa ler e atualizar com êxito os arquivos, conforme necessário.
+4. Opcional: se você planejar acessar seus dados com um usuário não raiz ou arquivos incluídos em um depósito do {{site.data.keyword.cos_full_notm}} existente usando o console ou a API diretamente, certifique-se de que os [arquivos tenham a permissão correta](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access) designada para que seu app possa ler e atualizar com êxito os arquivos, conforme necessário.
 
 4.  {: #app_volume_mount}Para montar o PV em sua implementação, crie um arquivo de configuração `.yaml` e especifique o PVC que liga o PV.
 
     ```
-    apiVersion: apps/v1beta1
-    kind: Deployment
-    metadata:
-      name: <deployment_name>
-      labels:
-        app: <deployment_label>
-    spec:
-      selector:
-        matchLabels:
-          app: <app_name>
-      template:
-        metadata:
-          labels:
-            app: <app_name>
-        spec:
-          containers:
+    apiVersion: apps/v1 kind: Deployment metadata: name: <deployment_name> labels: app: <deployment_label> spec: selector: matchLabels: app: <app_name> template: metadata: labels: app: <app_name> spec: containers:
           - image: <image_name>
             name: <container_name>
             securityContext:
@@ -833,7 +856,7 @@ Para incluir o  {{site.data.keyword.cos_full_notm}}  em seu cluster:
     </tr>
     <tr>
     <td><code> spec.containers.volumeMounts.mountPath </code></td>
-    <td>O caminho absoluto do diretório no qual o volume está montado dentro do contêiner.</td>
+    <td>O caminho absoluto do diretório no qual o volume está montado dentro do contêiner. Se você desejar compartilhar um volume entre apps diferentes, será possível especificar [subcaminhos do volume ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) para cada um de seus apps.</td>
     </tr>
     <tr>
     <td><code> spec.containers.volumeMounts.name </code></td>
@@ -900,6 +923,7 @@ Para incluir o  {{site.data.keyword.cos_full_notm}}  em seu cluster:
 {: #cos_statefulset}
 
 Se você tiver um app stateful, como um banco de dados, será possível criar conjuntos stateful que usam o {{site.data.keyword.cos_full_notm}} para armazenar os dados de seu app. Como alternativa, é possível usar um banco de dados como um serviço do {{site.data.keyword.Bluemix_notm}} (tal como o {{site.data.keyword.cloudant_short_notm}}) e armazenar seus dados na nuvem.
+{: shortdesc}
 
 Antes de iniciar:
 - [ Crie e prepare sua  {{site.data.keyword.cos_full_notm}}  instância de serviço ](#create_cos_service).
@@ -908,7 +932,7 @@ Antes de iniciar:
 
 Para implementar um conjunto stateful que usa armazenamento de objetos:
 
-1. Crie um arquivo de configuração para seu conjunto stateful e o serviço usado para expor o conjunto stateful. Os exemplos a seguir mostram como implementar o nginx como um conjunto stateful com 3 réplicas, com cada réplica usando um bucket separado ou com todas as réplicas compartilhando o mesmo bucket.
+1. Crie um arquivo de configuração para seu conjunto stateful e o serviço usado para expor o conjunto stateful. Os exemplos a seguir mostram como implementar NGINX como um conjunto stateful com 3 réplicas com cada réplica usando um depósito separado ou com todas as réplicas compartilhando o mesmo depósito.
 
    **Exemplo para criar um conjunto stateful com 3 réplicas, com cada réplica usando um bucket separado**:
    ```
@@ -1101,7 +1125,7 @@ Para implementar um conjunto stateful que usa armazenamento de objetos:
 
 
 ## Backup e restauração de dados
-{: #backup_restore}
+{: #cos_backup_restore}
 
 O {{site.data.keyword.cos_full_notm}} é configurado para fornecer alta durabilidade para seus dados para que eles sejam protegidos contra perda. É possível localizar o SLA nos [termos de serviço do {{site.data.keyword.cos_full_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www-03.ibm.com/software/sla/sladb.nsf/sla/bm-7857-03).
 {: shortdesc}
@@ -1110,7 +1134,7 @@ O {{site.data.keyword.cos_full_notm}} não fornece um histórico de versão para
 {: note}
 
 ## Referência de classe de armazenamento
-{: #storageclass_reference}
+{: #cos_storageclass_reference}
 
 ### Padrão
 {: #standard}
@@ -1128,7 +1152,7 @@ O {{site.data.keyword.cos_full_notm}} não fornece um histórico de versão para
 </tr>
 <tr>
 <td>Terminal de resiliência padrão</td>
-<td>O terminal de resiliência é configurado automaticamente com base no local em que seu cluster está. Veja [Regiões e terminais](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) para obter mais informações. </td>
+<td>O terminal de resiliência é configurado automaticamente com base no local em que seu cluster está. Consulte [Regiões e terminais](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) para obter mais informações. </td>
 </tr>
 <tr>
 <td>Tamanho do chunk</td>
@@ -1165,7 +1189,7 @@ O {{site.data.keyword.cos_full_notm}} não fornece um histórico de versão para
 </tr>
 <tr>
 <td>Terminal de resiliência padrão</td>
-<td>O terminal de resiliência é configurado automaticamente com base no local em que seu cluster está. Veja [Regiões e terminais](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) para obter mais informações. </td>
+<td>O terminal de resiliência é configurado automaticamente com base no local em que seu cluster está. Consulte [Regiões e terminais](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) para obter mais informações. </td>
 </tr>
 <tr>
 <td>Tamanho do chunk</td>
@@ -1202,7 +1226,7 @@ O {{site.data.keyword.cos_full_notm}} não fornece um histórico de versão para
 </tr>
 <tr>
 <td>Terminal de resiliência padrão</td>
-<td>O terminal de resiliência é configurado automaticamente com base no local em que seu cluster está. Veja [Regiões e terminais](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) para obter mais informações. </td>
+<td>O terminal de resiliência é configurado automaticamente com base no local em que seu cluster está. Consulte [Regiões e terminais](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) para obter mais informações. </td>
 </tr>
 <tr>
 <td>Tamanho do chunk</td>
@@ -1239,7 +1263,7 @@ O {{site.data.keyword.cos_full_notm}} não fornece um histórico de versão para
 </tr>
 <tr>
 <td>Terminal de resiliência padrão</td>
-<td>O terminal de resiliência é configurado automaticamente com base no local em que seu cluster está. Veja [Regiões e terminais](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) para obter mais informações. </td>
+<td>O terminal de resiliência é configurado automaticamente com base no local em que seu cluster está. Consulte [Regiões e terminais](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) para obter mais informações. </td>
 </tr>
 <tr>
 <td>Tamanho do chunk</td>

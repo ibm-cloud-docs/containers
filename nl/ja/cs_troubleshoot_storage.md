@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -22,14 +26,13 @@ lastupdated: "2018-12-05"
 {:tsResolve: .tsResolve}
 
 
-
 # クラスターのストレージのトラブルシューティング
 {: #cs_troubleshoot_storage}
 
 {{site.data.keyword.containerlong}} を使用する際は、ここに示すクラスターのストレージのトラブルシューティング手法を検討してください。
 {: shortdesc}
 
-より一般的な問題が起きている場合は、[クラスターのデバッグ](cs_troubleshoot.html)を試してください。
+より一般的な問題が起きている場合は、[クラスターのデバッグ](/docs/containers?topic=containers-cs_troubleshoot)を試してください。
 {: tip}
 
 ## 複数ゾーン・クラスターで、永続ボリュームをポッドにマウントできない
@@ -46,7 +49,7 @@ lastupdated: "2018-12-05"
 複数のゾーンにまたがることが可能なワーカー・プールを持つ新しいクラスターは、デフォルトで PV にラベルを付けます。 ワーカー・プールが導入されたときよりも前に、クラスターを作成していた場合、ラベルを手動で追加する必要があります。
 
 {: tsResolve}
-[クラスター内の PV を地域ラベルとゾーン・ラベルで更新します](cs_storage_basics.html#multizone)。
+[クラスター内の PV を地域ラベルとゾーン・ラベルで更新します](/docs/containers?topic=containers-kube_concepts#storage_multizone)。
 
 <br />
 
@@ -66,9 +69,9 @@ lastupdated: "2018-12-05"
 {: tsResolve}
 1.  ワーカー・ノード上またはコンテナー内に保管されている可能性のあるデータをバックアップします。
 2.  既存のワーカー・ノードに対する短期的な解決策としては、ワーカー・ノードを再ロードします。
-    <pre class="pre"><code>ibmcloud ks worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
+    <pre class="pre"><code>ibmcloud ks worker-reload --cluster &lt;cluster_name&gt; --worker &lt;worker_ID&gt;</code></pre>
 
-長期的な修正としては、[ワーカー・プールのマシン・タイプを更新します](cs_cluster_update.html#machine_type)。
+長期的な修正としては、[ワーカー・プールのマシン・タイプを更新します](/docs/containers?topic=containers-update#machine_type)。
 
 <br />
 
@@ -78,7 +81,22 @@ lastupdated: "2018-12-05"
 {: #nonroot}
 
 {: tsSymptoms}
-デプロイメントに [NFS ストレージを追加](cs_storage_file.html#app_volume_mount)した後に、コンテナーのデプロイメントが失敗します。 コンテナーのログを取得すると、「書き込み権限」や「必要な権限がない」などのエラーが表示されることがあります。 ポッドが失敗し、再ロードが繰り返されます。
+デプロイメントに [NFS ストレージを追加](/docs/containers?topic=containers-file_storage#app_volume_mount)した後に、コンテナーのデプロイメントが失敗します。 コンテナーのログを取得すると、以下のようなエラーが表示されることがあります。ポッドが失敗し、再ロードが繰り返されます。
+
+```
+write-permission
+```
+{: screen}
+
+```
+do not have required permission
+```
+{: screen}
+
+```
+cannot create directory '/bitnami/mariadb/data': Permission denied
+```
+{: screen}
 
 {: tsCauses}
 デフォルトでは、非 root ユーザーには、NFS ベースのストレージのボリューム・マウント・パスに対する書き込み権限がありません。 一部の一般的なアプリのイメージ (Jenkins や Nexus3 など) は、マウント・パスを所有する非 root ユーザーを Dockerfile に指定しています。 この Dockerfile からコンテナーを作成すると、マウント・パスに対する非 root ユーザーの権限が不十分なために、コンテナーの作成は失敗します。 書き込み権限を付与するには、Dockerfile を変更して非 root ユーザーを root ユーザー・グループに一時的に追加してから、マウント・パスの権限を変更するか、または init コンテナーを使用します。
@@ -92,7 +110,7 @@ Helm チャートを使用してイメージをデプロイする場合は、ini
 デプロイメントに [init コンテナー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) を指定すると、Dockerfile に指定された非 root ユーザーに、コンテナー内のボリューム・マウント・パスに対する書き込み権限を付与できます。 init コンテナーは、アプリ・コンテナーが開始される前に開始されます。 init コンテナーは、コンテナーの内部にボリューム・マウント・パスを作成し、そのマウント・パスを正しい (非 root) ユーザーが所有するように変更してから、クローズします。 その後、マウント・パスに書き込む必要がある非 root ユーザーでアプリ・コンテナーが開始されます。 パスは既に非 root ユーザーによって所有されているため、マウント・パスへの書き込みは成功します。 init コンテナーを使用したくない場合は、Dockerfile を変更して、非 root ユーザーに NFS ファイル・ストレージへのアクセス権限を追加できます。
 
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  アプリの Dockerfile を開き、ボリューム・マウント・パスに対する書き込み権限を付与するユーザーのユーザー ID (UID) とグループ ID (GID) を取得します。 Jenkins Dockerfile の例では、情報は以下のとおりです。
     - UID: `1000`
@@ -147,7 +165,7 @@ Helm チャートを使用してイメージをデプロイする場合は、ini
 
     ```
     initContainers:
-    - name: initContainer # Or you can replace with any name
+    - name: initcontainer # Or replace the name
       image: alpine:latest
       command: ["/bin/sh", "-c"]
       args:
@@ -284,11 +302,62 @@ Helm チャートを使用してイメージをデプロイする場合は、ini
 デプロイメント構成または Helm チャートの構成で、ポッドの `fsGroup` (グループ ID) と `runAsUser` (ユーザー ID) に対して[セキュリティー・コンテキスト](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)が指定されています。 現在、{{site.data.keyword.containerlong_notm}} では `fsGroup` の指定をサポートしていません。`0` (ルート権限) に設定された `runAsUser` だけをサポートしています。
 
 {: tsResolve}
-イメージ、デプロイメント、または Helm チャートの構成ファイルから構成の `fsGroup` と `runAsUser` の `securityContext` フィールドを削除してから、再デプロイします。 マウント・パスの所有権を `nobody` から変更する必要がある場合は、[非 root ユーザー・アクセスを追加します](#nonroot)。 [非 root の initContainer](#nonroot) を追加した後、ポッド・レベルではなくコンテナー・レベルで `runAsUser` を設定します。
+イメージ、デプロイメント、または Helm チャートの構成ファイルから構成の `fsGroup` と `runAsUser` の `securityContext` フィールドを削除してから、再デプロイします。 マウント・パスの所有権を `nobody` から変更する必要がある場合は、[非 root ユーザー・アクセスを追加します](#nonroot)。 [非 root の `initContainer`](#nonroot) を追加した後、ポッド・レベルではなくコンテナー・レベルで `runAsUser` を設定します。
 
 <br />
 
 
+
+
+## ブロック・ストレージ: ブロック・ストレージが読み取り専用に変更される
+{: #readonly_block}
+
+{: tsSymptoms}
+以下の症状が見られることがあります。
+- `kubectl get pods -o wide` を実行すると、同じワーカー・ノードの複数のポッドが `ContainerCreating` または `CrashLoopBackOff` 状態で停滞していることが判明します。これらのポッドはすべて、同じブロック・ストレージ・インスタンスを使用しています。
+- `kubectl describe pod` コマンドを実行すると、**Events** セクションに `MountVolume.SetUp failed for volume ... read-only` というエラーが表示されます。
+
+{: tsCauses}
+ポッドのボリュームへの書き込み中にネットワーク・エラーが発生した場合、IBM Cloud インフラストラクチャー (SoftLayer) によってボリュームが読み取り専用モードに変更され、ボリュームのデータが破損から保護されます。このボリュームを使用しているポッドは、ボリュームへの書き込みを継続できず、失敗します。
+
+{: tsResolve}
+1. クラスターにインストールされている {{site.data.keyword.Bluemix_notm}} Block Storage プラグインのバージョンを確認します。
+   ```
+   helm ls
+   ```
+   {: pre}
+
+2. [{{site.data.keyword.Bluemix_notm}} Block Storage プラグインの最新バージョン](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)を使用していることを確認します。そうでない場合は、[プラグインを更新します](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)。
+3. ポッドに Kubernetes デプロイメントを使用している場合は、失敗するポッドを削除して Kubernetes でポッドを再作成し、ポッドを再始動します。デプロイメントを使用していない場合は、`kubectl get pod <pod_name> -o yaml >pod.yaml` を実行して、ポッドの作成に使用された YAML ファイルを取得します。その後、ポッドを削除して、手動でポッドを再作成します。
+    ```
+    kubectl delete pod <pod_name>
+    ```
+    {: pre}
+
+4. ポッドの再作成によって問題が解決されたかどうかを確認します。解決されていない場合は、ワーカー・ノードを再ロードします。
+   1. ポッドが実行されているワーカー・ノードを見つけて、ワーカー・ノードに割り当てられているプライベート IP アドレスをメモします。
+      ```
+      kubectl describe pod <pod_name> | grep Node
+      ```
+      {: pre}
+
+      出力例:
+      ```
+      Node:               10.75.XX.XXX/10.75.XX.XXX
+      Node-Selectors:  <none>
+      ```
+      {: screen}
+
+   2. 前のステップでメモしたプライベート IP アドレスを使用して、ワーカー・ノードの **ID** を取得します。
+      ```
+      ibmcloud ks workers --cluster <cluster_name_or_ID>
+      ```
+      {: pre}
+
+   3. 安全な方法で、[ワーカー・ノードを再ロードします](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)。
+
+
+<br />
 
 
 ## ブロック・ストレージ: ファイル・システムが正しくないため、既存のブロック・ストレージをポッドにマウントできない
@@ -302,7 +371,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-`XFS` ファイル・システムでセットアップされている、既存のブロック・ストレージ・デバイスがあります。 このデバイスをポッドにマウントするために、`spec/flexVolume/fsType` セクションでファイル・システムとして `ext4` を指定しているか、またはファイル・システムを指定していない [PV を作成](cs_storage_block.html#existing_block)しました。 ファイル・システムが定義されていない場合、PV はデフォルトで `ext4` に設定されます。
+`XFS` ファイル・システムでセットアップされている、既存のブロック・ストレージ・デバイスがあります。 このデバイスをポッドにマウントするために、`spec/flexVolume/fsType` セクションでファイル・システムとして `ext4` を指定しているか、またはファイル・システムを指定していない [PV を作成](/docs/containers?topic=containers-block_storage#existing_block)しました。 ファイル・システムが定義されていない場合、PV はデフォルトで `ext4` に設定されます。
 PV は正常に作成され、既存のブロック・ストレージ・インスタンスにリンクされました。 ところが、対応する PVC を使用してクラスターに PV をマウントしようとすると、ボリュームのマウントが失敗します。 `ext4` ファイル・システムが指定された `XFS` ブロック・ストレージ・インスタンスをポッドにマウントすることができません。
 
 {: tsResolve}
@@ -314,13 +383,13 @@ PV は正常に作成され、既存のブロック・ストレージ・イン�
    ```
    {: pre}
 
-2. ローカル・マシンに PV yaml を保存します。
+2. ローカル・マシンに PV YAML を保存します。
    ```
    kubectl get pv <pv_name> -o yaml > <filepath/xfs_pv.yaml>
    ```
    {: pre}
 
-3. yaml ファイルを開き、`fsType` を `ext4` から `xfs` に変更します。
+3. YAML ファイルを開き、`fsType` を `ext4` から `xfs` に変更します。
 4. クラスター内の PV を置き換えます。
    ```
    kubectl replace --force -f <filepath/xfs_pv.yaml>
@@ -369,7 +438,7 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
    ```
    {: pre}
 
-2. [{{site.data.keyword.cos_full_notm}} をインストールします](cs_storage_cos.html#install_cos)。
+2. [{{site.data.keyword.cos_full_notm}} をインストールします](/docs/containers?topic=containers-object_storage#install_cos)。
 
 <br />
 
@@ -396,7 +465,7 @@ PVC を作成するか、PVC をマウントするポッドをデプロイする
 {{site.data.keyword.cos_full_notm}} サービス資格情報を保管する Kubernetes シークレット、PVC、およびポッドのすべてが、同じ Kubernetes 名前空間に含まれていません。 シークレットが PVC またはポッドとは異なる名前空間にデプロイされた場合、そのシークレットにはアクセスできません。
 
 {: tsResolve}
-
+このタスクには、すべての名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)が必要です。
 
 1. クラスター内のシークレットをリストし、{{site.data.keyword.cos_full_notm}} サービス・インスタンスの Kubernetes シークレットが作成される Kubernetes 名前空間を確認します。 シークレットには、`ibm/ibmc-s3fs` が **Type** として表示される必要があります。
    ```
@@ -404,9 +473,9 @@ PVC を作成するか、PVC をマウントするポッドをデプロイする
    ```
    {: pre}
 
-2. ご使用の PVC およびポッドの YAML 構成ファイルを確認して、同じ名前空間を使用したことを確認します。 シークレットが存在する名前空間とは異なる名前空間にポッドをデプロイする場合は、目的の名前空間に[別のシークレットを作成](cs_storage_cos.html#create_cos_secret)します。
+2. ご使用の PVC およびポッドの YAML 構成ファイルを確認して、同じ名前空間を使用したことを確認します。 シークレットが存在する名前空間とは異なる名前空間にポッドをデプロイする場合は、その名前空間に[別のシークレットを作成](/docs/containers?topic=containers-object_storage#create_cos_secret)します。
 
-3. 目的の名前空間に PVC を作成するか、ポッドをデプロイします。
+3. 該当の名前空間に PVC を作成するか、ポッドをデプロイします。
 
 <br />
 
@@ -452,7 +521,7 @@ CredentialsEndpointError: failed to load credentials
       ```
       {: pre}
 
-4. **iam_role_crn** セクションで、`Writer` または `Manager` の役割があることを確認します。 正しい役割を持っていない場合は、[正しい権限で新しい {{site.data.keyword.cos_full_notm}} サービス資格情報を作成する](cs_storage_cos.html#create_cos_service)必要があります。 その後、新しいサービス資格情報を使用して既存のシークレットを更新するか、[新しいシークレットを作成](cs_storage_cos.html#create_cos_secret)します。
+4. **iam_role_crn** セクションで、`Writer` または `Manager` の役割があることを確認します。 正しい役割を持っていない場合は、[正しい権限で新しい {{site.data.keyword.cos_full_notm}} サービス資格情報を作成する](/docs/containers?topic=containers-object_storage#create_cos_service)必要があります。 その後、新しいサービス資格情報を使用して既存のシークレットを更新するか、[新しいシークレットを作成](/docs/containers?topic=containers-object_storage#create_cos_secret)します。
 
 <br />
 
@@ -471,10 +540,10 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 既存のバケットへのアクセスに正しくないストレージ・クラスを使用していたか、作成していないバケットにアクセスしようとした可能性があります。
 
 {: tsResolve}
-1. [{{site.data.keyword.Bluemix_notm}} ダッシュボード ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/dashboard/apps) から、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを選択します。
+1. [{{site.data.keyword.Bluemix_notm}} ダッシュボード ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/) から、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを選択します。
 2. **「バケット」**を選択します。
 3. 既存のバケットの**クラス**および**場所**の情報を確認します。
-4. 該当する[ストレージ・クラス](cs_storage_cos.html#storageclass_reference)を選択します。
+4. 該当する[ストレージ・クラス](/docs/containers?topic=containers-object_storage#cos_storageclass_reference)を選択します。
 
 <br />
 
@@ -637,21 +706,21 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
 
 
 ## ヘルプとサポートの取得
-{: #ts_getting_help}
+{: #storage_getting_help}
 
 まだクラスターに問題がありますか?
 {: shortdesc}
 
 -  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
--   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
+-   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を確認します](https://cloud.ibm.com/status?selected=status)。
 -   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
     {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
     {: tip}
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
-    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support/howtogetsupport.html#using-avatar)を参照してください。
--   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
-問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。
+    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)を参照してください。
+-   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を参照してください。
+問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。 また、[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) を使用して、クラスターから関連情報を収集してエクスポートし、IBM サポートと情報を共有することができます。
 {: tip}
 

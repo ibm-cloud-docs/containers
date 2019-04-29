@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,24 +23,27 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
-
 # Stockage de données sur IBM File Storage pour IBM Cloud
 {: #file_storage}
 
+{{site.data.keyword.Bluemix_notm}} File Storage est une solution de stockage de fichiers NFS persistant, rapide et flexible en réseau que vous pouvez ajouter à vos applications en utilisant des volumes persistants (PV) Kubernetes. Vous pouvez choisir entre des niveaux de stockage prédéfinis avec des tailles en gigaoctets (Go) et un nombre d'opérations d'entrée-sortie par seconde (IOPS) répondant aux exigences de vos charges de travail. Pour déterminer si {{site.data.keyword.Bluemix_notm}} File Storage est l'option de stockage qui vous convient le mieux, voir [Choix d'une solution de stockage](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Pour obtenir les informations de tarification, voir [Facturation](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
+{: shortdesc}
+
+{{site.data.keyword.Bluemix_notm}} File Storage est disponible uniquement pour les clusters standard qui sont configurés avec une connectivité de réseau public. Si votre cluster n'a pas accès au réseau public, par exemple s'il s'agit d'un cluster privé derrière un pare-feu ou d'un cluster avec uniquement le noeud final de service privé activé, vous ne pouvez pas mettre à disposition du stockage de fichiers. Les instances de stockage de fichiers NFS sont spécifiques à une seule zone. Si vous disposez d'un cluster à zones multiples, tenez compte des [options de stockage persistant dans les zones multiples](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{: important}
 
 ## Détermination de la configuration de stockage de fichiers
-{: #predefined_storageclass}
+{: #file_predefined_storageclass}
 
 {{site.data.keyword.containerlong}} fournit des classes de stockage prédéfinies pour le stockage de fichiers que vous pouvez utiliser pour mettre à disposition du stockage de fichiers avec une configuration spécifique.
 {: shortdesc}
 
 Toutes les classes de stockage indiquent le type de stockage de fichiers à mettre à disposition, y compris la taille disponible, les opérations d'entrée-sortie par seconde (IOPS), le système de fichiers, ainsi que la règle de conservation.  
 
-Après avoir mis à disposition un type de stockage spécifique en utilisant une classe de stockage, vous ne pouvez plus modifier le type ou la règle de conservation de l'unité de stockage. Vous pouvez toutefois [modifier la taille et le nombre d'IOPS](#change_storage_configuration) si vous souhaitez augmenter la capacité de stockage ou les performances. Pour modifier le type et la règle de conservation de votre stockage, vous devez [créer une nouvelle instance de stockage et copier les données](cs_storage_basics.html#update_storageclass) de l'ancienne instance de stockage vers la nouvelle.
+Après avoir mis à disposition un type de stockage spécifique en utilisant une classe de stockage, vous ne pouvez plus modifier le type ou la règle de conservation de l'unité de stockage. Vous pouvez toutefois [modifier la taille et le nombre d'IOPS](#file_change_storage_configuration) si vous souhaitez augmenter la capacité de stockage ou les performances. Pour modifier le type et la règle de conservation de votre stockage, vous devez [créer une nouvelle instance de stockage et copier les données](/docs/containers?topic=containers-kube_concepts#update_storageclass) de l'ancienne instance de stockage vers la nouvelle.
 {: important}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Pour déterminer une configuration de stockage :
 
@@ -67,12 +74,12 @@ Pour déterminer une configuration de stockage :
    ```
    {: pre}
 
-   Pour plus d'informations sur chaque classe de stockage, voir [Référence des classes de stockage](#storageclass_reference). Si vous ne trouvez pas ce que vous cherchez, envisagez de créer votre propre classe de stockage personnalisée. Pour commencer, consultez les [exemples de classes de stockage personnalisées](#custom_storageclass).
+   Pour plus d'informations sur chaque classe de stockage, voir [Référence des classes de stockage](#file_storageclass_reference). Si vous ne trouvez pas ce que vous cherchez, envisagez de créer votre propre classe de stockage personnalisée. Pour commencer, consultez les [exemples de classes de stockage personnalisées](#file_custom_storageclass).
    {: tip}
 
 3. Sélectionnez le type de stockage de fichiers que vous désirez mettre à disposition.
-   - **Classes de stockage Bronze, Silver et Gold :** ces classes de stockage mettent à disposition du [stockage Endurance](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers). Le stockage Endurance vous permet de choisir la taille de stockage en gigaoctets à des niveaux d'opérations d'entrée-sortie par seconde prédéfinis.
-   - **Classe de stockage personnalisée :** cette classe de stockage met à disposition du [stockage Performance](/docs/infrastructure/FileStorage/index.html#provisioning-with-performance). Avec le stockage Performance, vous disposez d'un contrôle accru sur la taille de stockage et les opérations d'entrée-sortie par seconde.
+   - **Classes de stockage Bronze, Silver et Gold :** ces classes de stockage mettent à disposition du [stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers). Le stockage Endurance vous permet de choisir la taille de stockage en gigaoctets à des niveaux d'opérations d'entrée-sortie par seconde prédéfinis.
+   - **Classe de stockage personnalisée :** cette classe de stockage met à disposition du [stockage Performance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance). Avec le stockage Performance, vous disposez d'un contrôle accru sur la taille de stockage et les opérations d'entrée-sortie par seconde.
 
 4. Choisissez la taille et le nombre d'IOPS de votre stockage de fichiers. La taille et le nombre d'IOPS définissent le nombre total d'IOPS (opérations d'entrée-sortie par seconde) qui sert d'indicateur pour mesurer la rapidité de votre stockage. Plus votre stockage comporte d'IOPS, plus il traite rapidement les opérations de lecture/écriture.
    - **Classes de stockage Bronze, Silver et Gold :** ces classes de stockage sont fournies avec un nombre fixe d'IOPS par gigaoctet et sont mises à disposition sur des disques durs SSD. Le nombre total d'IOPS dépend de la taille de stockage que vous choisissez. Vous pouvez sélectionner tout nombre entier représentant la taille en gigaoctets dans la plage de taille autorisée, par exemple 20 Gi, 256 Gi ou 11854 Gi. Pour déterminer le nombre total d'IOPS, vous devez multiplier les IOPS par la taille sélectionnée. Par exemple, si vous sélectionnez une taille de stockage de fichiers de 1000 Gi dans la classe de stockage Silver offrant 4 IOPS par Go, votre stockage dispose d'un total de 4000 IOPS.
@@ -100,7 +107,7 @@ Pour déterminer une configuration de stockage :
          <td>20-4000 Gi</td>
          </tr>
          </tbody></table>
-   - **Classe de stockage personnalisée :** lorsque vous choisissez cette classe de stockage, vous disposez d'un contrôle accru sur la taille et les IOPS que vous souhaitez. En ce qui concerne la taille, vous pouvez sélectionner n'importe quel nombre entier comme valeur de gigaoctets dans la plage de tailles autorisée. La taille que vous choisissez détermine la plage d'IOPS dont vous pourrez bénéficier. Vous pouvez choisir une valeur d'IOPS multiple de 100 comprise dans la plage spécifiée. Le nombre d'IOPS que vous choisissez est statique et ne s'adapte pas à la taille du stockage. Par exemple, si vous choisissez 40Gi avec 100 IOPS, le nombre total d'IOPS restera 100. </br></br> Le rapport IOPS/gigaoctets détermine le type de disque dur mis à votre disposition. Par exemple, si vous avez 500Gi à 100 IOPS, votre rapport IOPS/gigaoctet est 0,2. Un stockage avec un rapport inférieur ou égal à 0,3 est fourni sur des disques durs SATA. Si votre rapport est supérieur à 0,3, votre stockage est fourni sur des disques durs SSD.  
+   - **Classe de stockage personnalisée :** lorsque vous choisissez cette classe de stockage, vous disposez d'un contrôle accru sur la taille et les IOPS que vous souhaitez. En ce qui concerne la taille, vous pouvez sélectionner n'importe quel nombre entier comme valeur de gigaoctets dans la plage de tailles autorisée. La taille que vous choisissez détermine la plage d'IOPS dont vous pourrez bénéficier. Vous pouvez choisir une valeur d'IOPS multiple de 100 comprise dans la plage spécifiée. Le nombre d'IOPS que vous choisissez est statique et ne s'adapte pas à la taille du stockage. Par exemple, si vous choisissez 40Gi avec 100 IOPS, le nombre total d'IOPS restera 100. </br></br> Le rapport IOPS/gigaoctet détermine le type de disque dur mis à votre disposition. Par exemple, si vous avez 500Gi à 100 IOPS, votre rapport IOPS/gigaoctet est 0,2. Un stockage avec un rapport inférieur ou égal à 0,3 est fourni sur des disques durs SATA. Si votre rapport est supérieur à 0,3, votre stockage est fourni sur des disques durs SSD.  
      <table>
          <caption>Tableau des plages de tailles de classe de stockage personnalisée et nombre d'opérations d'entrée-sortie par seconde (IOPS)</caption>
          <thead>
@@ -155,7 +162,7 @@ Pour déterminer une configuration de stockage :
          </tbody></table>
 
 5. Déterminez si vous voulez conserver vos données après la suppression du cluster ou de la réservation de volume persistant (PVC).
-   - Pour conserver vos données, choisissez une classe de stockage `retain`. Lorsque vous supprimez la réservation PVC, seule la PVC est supprimée. Le volume persistant (PV), l'unité de stockage physique dans votre compte d'infrastructure IBM Cloud (SoftLayer), ainsi que vous données existent toujours. Pour récupérer le stockage et l'utiliser à nouveau dans votre cluster, vous devez supprimer le volume persistant et suivre les étapes pour [utiliser du stockage de fichiers existant](#existing_file).
+   - Pour conserver vos données, choisissez une classe de stockage `retain`. Lorsque vous supprimez la réservation PVC, seule la PVC est supprimée. Le volume persistant (PV), l'unité de stockage physique dans votre compte d'infrastructure IBM Cloud (SoftLayer), ainsi que vos données existent toujours. Pour récupérer le stockage et l'utiliser à nouveau dans votre cluster, vous devez supprimer le volume persistant et suivre les étapes pour [utiliser du stockage de fichiers existant](#existing_file).
    - Si vous souhaitez que le volume persistant, les données et votre unité de stockage de fichiers physique soient supprimés en même temps que la réservation PVC, choisissez une classe de stockage sans `retain`. **Remarque** : si vous disposez d'un compte Dedicated, choisissez une classe de stockage sans `retain` pour éviter les volumes orphelins dans l'infrastructure IBM Cloud (SoftLayer).
 
 6. Choisissez une facturation à l'heure ou mensuelle. Pour plus d'informations, consultez la [tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing). Par défaut, toutes les unités de stockage de fichiers sont mises à disposition avec une facturation à l'heure.
@@ -169,12 +176,12 @@ Pour déterminer une configuration de stockage :
 ## Ajout de stockage de fichiers à des applications
 {: #add_file}
 
-Créez une réservation de volume persistant (PVC) pour le [provisionnement dynamique](cs_storage_basics.html#dynamic_provisioning) de stockage de fichiers pour votre cluster. Le provisionnement dynamique crée automatiquement le volume persistant (PV) correspondant et commande l'unité de stockage physique dans votre compte d'infrastructure IBM Cloud (SoftLayer).
+Créez une réservation de volume persistant (PVC) pour le [provisionnement dynamique](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) de stockage de fichiers pour votre cluster. Le provisionnement dynamique crée automatiquement le volume persistant (PV) correspondant et commande l'unité de stockage physique dans votre compte d'infrastructure IBM Cloud (SoftLayer).
 {:shortdesc}
 
 Avant de commencer :
-- Si vous disposez d'un pare-feu, [autorisez l'accès sortant](cs_firewall.html#pvc) pour les plages d'adresses IP de l'infrastructure IBM Cloud (SoftLayer) des zones dans lesquelles résident vos clusters, de manière à pouvoir créer des réservations de volume persistant (PVC).
-- [Optez pour une classe de stockage prédéfinie](#predefined_storageclass) ou créez une [classe de stockage personnalisée](#custom_storageclass).
+- Si vous disposez d'un pare-feu, [autorisez l'accès sortant](/docs/containers?topic=containers-firewall#pvc) pour les plages d'adresses IP de l'infrastructure IBM Cloud (SoftLayer) des zones dans lesquelles résident vos clusters, de manière à pouvoir créer des réservations de volume persistant (PVC).
+- [Optez pour une classe de stockage prédéfinie](#file_predefined_storageclass) ou créez une [classe de stockage personnalisée](#file_custom_storageclass).
 
 Vous cherchez à déployer du stockage de fichiers dans un ensemble avec état (StatefulSet) ? Voir [Utilisation de stockage de fichiers dans un ensemble avec état](#file_statefulset) pour plus d'informations.
 {: tip}
@@ -191,8 +198,6 @@ Pour ajouter du stockage de fichiers :
        kind: PersistentVolumeClaim
        metadata:
          name: mypvc
-         annotations:
-           volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
          labels:
            billingType: "monthly"
            region: us-south
@@ -203,6 +208,7 @@ Pour ajouter du stockage de fichiers :
          resources:
            requests:
              storage: 24Gi
+         storageClassName: ibmc-file-silver
        ```
        {: codeblock}
 
@@ -214,8 +220,6 @@ Pour ajouter du stockage de fichiers :
        kind: PersistentVolumeClaim
        metadata:
          name: mypvc
-         annotations:
-           volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
          labels:
            billingType: "hourly"
            region: us-south
@@ -227,6 +231,7 @@ Pour ajouter du stockage de fichiers :
            requests:
              storage: 45Gi
              iops: "300"
+         storageClassName: ibmc-file-retain-custom
        ```
        {: codeblock}
 
@@ -241,20 +246,18 @@ Pour ajouter du stockage de fichiers :
        <td>Entrez le nom de la réservation de volume persistant (PVC).</td>
        </tr>
        <tr>
-       <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/</code></br><code>storage-class</code></td>
-       <td>Nom de la classe de stockage que vous envisagez d'utiliser pour mettre à disposition du stockage de fichiers. </br> Si vous n'indiquez pas de classe de stockage, le volume persistant (PV) est créé avec la classe de stockage par défaut <code>ibmc-file-bronze</code>. </br></br><strong>Astuce :</strong> pour modifier la classe de stockage par défaut, exécutez la commande <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> et remplacez <code>&lt;storageclass&gt;</code> par le nom de la classe de stockage.</td>
-       </tr>
-       <tr>
          <td><code>metadata.labels.billingType</code></td>
           <td>Indiquez la fréquence de calcul de votre facture de stockage, au mois ("monthly") ou à l'heure ("hourly"). Si vous ne précisez pas de type de facturation, le stockage est mis à disposition avec un type de facturation à l'heure. </td>
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>Facultatif : indiquez la région dans laquelle vous souhaitez mettre à disposition votre stockage de fichiers. Pour vous connecter à votre stockage, créez le stockage dans la région où se trouve votre cluster. Si vous spécifiez la région, vous devez également indiquer une zone. Si vous n'indiquez pas de région, ou si la région indiquée est introuvable, le stockage est créé dans la même région que votre cluster. </br></br><strong>Astuce : </strong>au lieu de spécifier une région et une zone dans la réservation de volume persistant (PVC), vous pouvez également spécifier ces valeurs dans une [classe de stockage personnalisée](#multizone_yaml). Utilisez ensuite votre classe de stockage dans la section <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> de votre PVC. Si la région et la zone sont spécifiées dans la classe de stockage et dans la PVC, les valeurs dans la PVC sont prioritaires. </td>
+       <td>Facultatif : indiquez la région dans laquelle vous souhaitez mettre à disposition votre stockage de fichiers. Pour vous connecter à votre stockage, créez le stockage dans la région où se trouve votre cluster. Si vous spécifiez la région, vous devez également indiquer une zone. Si vous n'indiquez pas de région, ou si la région indiquée est introuvable, le stockage est créé dans la même région que votre cluster.
+       </br></br>Pour obtenir la région dans laquelle se trouve votre cluster, exécutez la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` et recherchez le préfixe de la région dans la zone **Master URL**, par exemple `eu-de` dans l'URL `https://c2.eu-de.containers.cloud.ibm.com:11111`.
+       </br></br><strong>Astuce : </strong>au lieu de spécifier une région et une zone dans la réservation de volume persistant (PVC), vous pouvez également spécifier ces valeurs dans une [classe de stockage personnalisée](#file_multizone_yaml). Utilisez ensuite votre classe de stockage dans la section <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> de votre PVC. Si la région et la zone sont spécifiées dans la classe de stockage et dans la PVC, les valeurs dans la PVC sont prioritaires. </td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-       <td>Facultatif : indiquez la zone dans laquelle vous souhaitez mettre à disposition votre stockage de fichiers. Pour utiliser votre stockage dans une application, créez le stockage dans la zone où se trouve votre noeud worker. Pour afficher la zone de votre noeud worker, exécutez la commande <code>ibmcloud ks workers --cluster &lt;cluster_name_or_ID&gt;</code> et examinez la colonne <strong>Zone</strong> de la sortie de l'interface de ligne de commande. Si vous spécifiez la zone, vous devez également indiquer une région. Si vous n'indiquez pas de zone, ou si la zone indiquée est introuvable dans un cluster à zones multiples, la zone est sélectionnée en mode circulaire. </br></br><strong>Astuce : </strong>au lieu de spécifier une région et une zone dans la réservation de volume persistant (PVC), vous pouvez également spécifier ces valeurs dans une [classe de stockage personnalisée](#multizone_yaml). Utilisez ensuite votre classe de stockage dans la section <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> de votre PVC. Si la région et la zone sont spécifiées dans la classe de stockage et dans la PVC, les valeurs dans la PVC sont prioritaires.
+       <td>Facultatif : indiquez la zone dans laquelle vous souhaitez mettre à disposition votre stockage de fichiers. Pour utiliser votre stockage dans une application, créez le stockage dans la zone où se trouve votre noeud worker. Pour afficher la zone de votre noeud worker, exécutez la commande <code>ibmcloud ks workers --cluster &lt;cluster_name_or_ID&gt;</code> et examinez la colonne <strong>Zone</strong> de la sortie de l'interface de ligne de commande. Si vous spécifiez la zone, vous devez également indiquer une région. Si vous n'indiquez pas de zone, ou si la zone indiquée est introuvable dans un cluster à zones multiples, la zone est sélectionnée en mode circulaire. </br></br><strong>Astuce : </strong>au lieu de spécifier une région et une zone dans la réservation de volume persistant (PVC), vous pouvez également spécifier ces valeurs dans une [classe de stockage personnalisée](#file_multizone_yaml). Utilisez ensuite votre classe de stockage dans la section <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> de votre PVC. Si la région et la zone sont spécifiées dans la classe de stockage et dans la PVC, les valeurs dans la PVC sont prioritaires.
 </td>
        </tr>
        <tr>
@@ -268,6 +271,10 @@ Pour ajouter du stockage de fichiers :
        <tr>
        <td><code>spec.resources.requests.iops</code></td>
        <td>Cette option est disponible uniquement pour les classes de stockage personnalisées (`ibmc-file-custom / ibmc-file-retain-custom`). Indiquez le nombre total d'opérations d'entrée-sortie par seconde (IOPS) pour le stockage, en sélectionnant un multiple de 100 dans la plage autorisée. Si vous choisissez une valeur IOPS autre que celle répertoriée, la valeur IOPS est arrondie à la valeur supérieure.</td>
+       </tr>
+       <tr>
+       <td><code>spec.storageClassName</code></td>
+       <td>Nom de la classe de stockage que vous envisagez d'utiliser pour mettre à disposition du stockage de fichiers. Vous pouvez choisir l'une des [classes de stockage fournies par IBM](#file_storageclass_reference) ou [créer votre propre classe de stockage](#file_custom_storageclass). </br> Si vous n'indiquez pas de classe de stockage, le volume persistant (PV) est créé avec la classe de stockage par défaut <code>ibmc-file-bronze</code>. </br></br><strong>Astuce :</strong> pour modifier la classe de stockage par défaut, exécutez la commande <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> et remplacez <code>&lt;storageclass&gt;</code> par le nom de la classe de stockage.</td>
        </tr>
        </tbody></table>
 
@@ -311,11 +318,11 @@ Pour ajouter du stockage de fichiers :
 
 4.  {: #app_volume_mount}Pour monter le stockage sur votre déploiement, créez un fichier de configuration `.yaml` et spécifiez la réservation de volume persistant (PVC) associée au PV.
 
-    Si vous disposez d'une application qui nécessite l'écriture de stockage persistant par un utilisateur non root ou d'une application qui nécessite que le chemin de montage appartiennent à l'utilisateur root, voir [Ajout d'un accès d'utilisateur non root au stockage de fichiers NFS](cs_troubleshoot_storage.html#nonroot) ou [Activation des droits root pour stockage de fichiers NFS](cs_troubleshoot_storage.html#nonroot).
+    Si vous disposez d'une application qui nécessite l'écriture de stockage persistant par un utilisateur non root ou d'une application qui nécessite que le chemin de montage appartiennent à l'utilisateur root, voir [Ajout d'un accès d'utilisateur non root au stockage de fichiers NFS](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot) ou [Activation des droits root pour stockage de fichiers NFS](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot).
     {: tip}
 
     ```
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: <deployment_name>
@@ -371,7 +378,7 @@ Pour ajouter du stockage de fichiers :
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>Chemin absolu du répertoire où est monté le volume dans le conteneur. Les données écrites dans le chemin de montage sont stockées sous le répertoire <code>root</code> dans votre instance de stockage de fichiers physique. Pour créer des répertoires dans cette instance, vous devez créer des sous-répertoires dans le chemin de montage. </td>
+    <td>Chemin absolu du répertoire où est monté le volume dans le conteneur. Les données écrites dans le chemin de montage sont stockées sous le répertoire <code>root</code> dans votre instance de stockage de fichiers physique. Si vous souhaitez partager un volume entre différentes applications, vous pouvez spécifier des [sous-chemins (subPaths) de volume ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) pour chacune de vos applications.</td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>
@@ -421,15 +428,17 @@ Pour ajouter du stockage de fichiers :
 ## Utilisation de stockage de fichiers existant dans votre cluster
 {: #existing_file}
 
-Si vous disposez déjà d'une unité de stockage physique que vous souhaitez utiliser dans votre cluster, vous pouvez créer le volume persistant (PV) et la réservation de volume persistant (PVC) manuellement pour un [provisionnement statique](cs_storage_basics.html#static_provisioning) du stockage.
+Si vous disposez déjà d'une unité de stockage physique que vous souhaitez utiliser dans votre cluster, vous pouvez créer le volume persistant (PV) et la réservation de volume persistant (PVC) manuellement pour un [provisionnement statique](/docs/containers?topic=containers-kube_concepts#static_provisioning) du stockage.
+{: shortdesc}
 
 Avant de commencer :
 - Vérifiez que vous disposez d'au moins un noeud worker présent dans la même zone que votre instance de stockage de fichiers existante.
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 ### Etape 1 : Préparation de votre stockage existant.
 
 Avant de commencer à monter votre stockage existant sur une application, vous devez obtenir toutes les informations nécessaires pour votre volume persistant (PV) et préparer le stockage pour le rendre accessible dans votre cluster.  
+{: shortdesc}
 
 **Pour du stockage mis à disposition avec une classe de stockage `retain` :** </br>
 Si vous avez mis à disposition du stockage avec une classe de stockage `retain`, lorsque vous supprimez la réservation de volume persistant (PVC), le volume persistant (PV) et l'unité de stockage physique ne sont pas supprimés automatiquement. Pour réutiliser le stockage dans votre cluster, vous devez d'abord supprimer le volume persistant restant.
@@ -470,13 +479,13 @@ Pour utiliser du stockage existant dans un cluster différent de celui où vous 
 **Pour le stockage persistant mis à disposition en dehors du cluster :** </br>
 Si vous envisagez d'utiliser du stockage existant que vous avez mis à disposition auparavant mais que vous n'avez encore jamais utilisé dans votre cluster, vous devez le rendre accessible dans le même sous-réseau que vos noeuds worker.
 
-Si vous disposez d'un compte Dedicated, vous devez [ouvrir un cas de support](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Si vous disposez d'un compte Dedicated, vous devez [ouvrir un cas de support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
 {: note}
 
-1.  {: #external_storage}Dans le [portail de l'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://control.bluemix.net/), cliquez sur **Stockage**.
+1.  {: #external_storage}Dans le [portail de l'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/classic?), cliquez sur **Stockage**.
 2.  Cliquez sur **Stockage de fichiers** et, dans le menu **Actions**, sélectionnez **Autoriser l'hôte**.
 3.  Sélectionnez **Sous-réseaux**.
-4.  Dans la liste déroulante, sélectionnez le sous-réseau de VLAN privé auquel est connecté votre noeud worker. Pour trouver le sous-réseau de votre noeud worker, exécutez la commande `ibmcloud ks workers <cluster_name>` et comparez l'adresse IP privée (`Private IP`) de votre noeud worker au sous-réseau que vous avez trouvé dans la liste déroulante.
+4.  Dans la liste déroulante, sélectionnez le sous-réseau de VLAN privé auquel est connecté votre noeud worker. Pour trouver le sous-réseau de votre noeud worker, exécutez la commande `ibmcloud ks workers --cluster <cluster_name>` et comparez l'adresse IP privée (`Private IP`) de votre noeud worker au sous-réseau que vous avez trouvé dans la liste déroulante.
 5.  Cliquez sur **Soumettre**.
 6.  Cliquez sur le nom du stockage de fichiers.
 7.  Notez les zones de point de montage (`Mount Point`), de taille (`size`) et d'emplacement (`Location`). La zone `Mount Point` s'affiche sous la forme `<nfs_server>:<file_storage_path>`.
@@ -516,7 +525,7 @@ Si vous disposez d'un compte Dedicated, vous devez [ouvrir un cas de support](/d
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
-    <td>Entrez la région et la zone que vous avez récupérées précédemment. Vous devez disposer d'au moins un noeud worker dans la même région et dans la même zone que votre stockage persistant pour monter le stockage sur votre cluster. S'il existe déjà un volume persistant pour votre stockage, [ajoutez un libellé de zone et de région](cs_storage_basics.html#multizone) à votre volume persistant.
+    <td>Entrez la région et la zone que vous avez récupérées précédemment. Vous devez disposer d'au moins un noeud worker dans la même région et dans la même zone que votre stockage persistant pour monter le stockage sur votre cluster. S'il existe déjà un volume persistant pour votre stockage, [ajoutez un libellé de zone et de région](/docs/containers?topic=containers-kube_concepts#storage_multizone) à votre volume persistant.
     </tr>
     <tr>
     <td><code>spec.capacity.storage</code></td>
@@ -550,21 +559,20 @@ Si vous disposez d'un compte Dedicated, vous devez [ouvrir un cas de support](/d
     ```
     {: pre}
 
-5.  Créez un autre fichier de configuration pour créer votre réservation de volume persistant (PVC). Pour que cette réservation corresponde au volume persistant que vous avez créé auparavant, vous devez sélectionner la même valeur pour `storage` et `accessMode`. La zone `storage-class` doit être vide. Si une de ces zones ne correspond pas au volume persistant (PV), un nouveau PV et une nouvelle instance de stockage physique sont [provisionnés dynamiquement](cs_storage_basics.html#dynamic_provisioning).
+5.  Créez un autre fichier de configuration pour créer votre réservation de volume persistant (PVC). Pour que cette réservation corresponde au volume persistant que vous avez créé auparavant, vous devez sélectionner la même valeur pour `storage` et `accessMode`. La zone `storage-class` doit être vide. Si une de ces zones ne correspond pas au volume persistant (PV), un nouveau PV et une nouvelle instance de stockage physique sont [provisionnés dynamiquement](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning).
 
     ```
     kind: PersistentVolumeClaim
     apiVersion: v1
     metadata:
      name: mypvc
-     annotations:
-       volume.beta.kubernetes.io/storage-class: ""
     spec:
      accessModes:
        - ReadWriteMany
      resources:
        requests:
          storage: "<size>"
+     storageClassName:
     ```
     {: codeblock}
 
@@ -603,7 +611,7 @@ Si vous disposez d'un compte Dedicated, vous devez [ouvrir un cas de support](/d
     {: screen}
 
 
-Vous venez de créer un objet PV que vous avez lié à une réservation PVC. Les utilisateurs du cluster peuvent désormais [monter la PVC](#app_volume_mount) sur leurs déploiements et commencer à effectuer des opérations de lecture et d'écriture sur l'objet PV.
+Vous venez de créer un volume persistant que vous avez lié à une réservation PVC. Les utilisateurs du cluster peuvent désormais [monter la PVC](#app_volume_mount) sur leurs déploiements et commencer à effectuer des opérations de lecture et d'écriture sur l'objet PV.
 
 <br />
 
@@ -622,18 +630,21 @@ Vous ne pouvez pas déployer deux ensembles avec état en même temps. Si vous e
 {: important}
 
 **Comment créer mon ensemble avec état dans une zone spécifique ?** </br>
-Dans un cluster à zones multiples, vous pouvez spécifier la zone et la région dans lesquelles créer votre ensemble avec état dans les sections `spec.selector.matchLabels` et `spec.template.metadata.labels` du fichier YAML de votre ensemble avec état. Sinon, vous pouvez ajouter ces libellés dans une [classe de stockage personnalisée](cs_storage_basics.html#customized_storageclass) et utiliser cette classe de stockage dans la section `volumeClaimTemplates` de votre ensemble avec état.
+Dans un cluster à zones multiples, vous pouvez spécifier la zone et la région dans lesquelles créer votre ensemble avec état dans les sections `spec.selector.matchLabels` et `spec.template.metadata.labels` du fichier YAML de votre ensemble avec état. Sinon, vous pouvez ajouter ces libellés dans une [classe de stockage personnalisée](/docs/containers?topic=containers-kube_concepts#customized_storageclass) et utiliser cette classe de stockage dans la section `volumeClaimTemplates` de votre ensemble avec état.
+
+**Puis-je retarder la liaison d'un volume persistant à mon pod avec état en attendant que le pod soit prêt ?**<br>
+Oui, vous pouvez [créer une classe de stockage personnalisée](#file-topology) pour votre PVC et y inclure la zone [`volumeBindingMode: WaitForFirstConsumer` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode).
 
 **Quelles sont les options possibles pour ajouter du stockage de fichiers à un ensemble avec état ?** </br>
-Si vous souhaitez créer automatiquement votre PVC lorsque vous créez l'ensemble avec état, utilisez la [mise à disposition dynamique](#dynamic_statefulset). Vous pouvez également opter pour une [mise à disposition anticipée de vos PVC ou utiliser des PVC existantes](#static_statefulset) avec votre ensemble avec état.  
+Si vous souhaitez créer automatiquement votre PVC lorsque vous créez l'ensemble avec état, utilisez la [mise à disposition dynamique](#file_dynamic_statefulset). Vous pouvez également opter pour une [mise à disposition anticipée de vos PVC ou utiliser des PVC existantes](#file_static_statefulset) avec votre ensemble avec état.  
 
-### Mise à disposition dynamique de la PVC lorsque vous créez un ensemble avec état
-{: #dynamic_statefulset}
+### Mise à disposition dynamique : Création de la PVC lorsque vous créez un ensemble avec état (statefulset)
+{: #file_dynamic_statefulset}
 
 Utilisez cette option pour créer automatiquement la PVC lorsque vous créez l'ensemble avec état.
 {: shortdesc}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1. Vérifiez que tous les ensembles avec état existants de votre cluster sont entièrement déployés. Si un ensemble avec état est en cours de déploiement, vous ne pouvez pas lancer la création de votre ensemble avec état. Vous devez attendre jusqu'à ce que tous les ensembles avec état de votre cluster soient entièrement déployés pour éviter d'obtenir des résultats imprévisibles.
    1. Répertoriez les ensembles avec état existants dans votre cluster.
@@ -665,7 +676,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
                           billingType=hourly
                           region=us-south
                           zone=dal10
-      Annotations:        kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"apps/v1beta1","kind":"StatefulSet","metadata":{"annotations":{},"name":"nginx","namespace":"default"},"spec":{"podManagementPolicy":"Par...
+      Annotations:        kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"name":"nginx","namespace":"default"},"spec":{"podManagementPolicy":"Par...
       Replicas:           3 desired | 3 total
       Pods Status:        0 Running / 3 Waiting / 0 Succeeded / 0 Failed
       Pod Template:
@@ -679,70 +690,167 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 
       Un ensemble avec état est entièrement déployé lorsque le nombre de répliques que vous trouvez dans la section **Replicas** de la sortie de l'interface de ligne de commande est égale au nombre de pods en cours d'exécution (**Running**) dans la section **Pods Status**. Si un ensemble avec état n'est pas tout à fait déployé, patientez jusqu'à ce que le déploiement soit terminé avant de poursuivre.
 
-3. Créez un fichier de configuration pour votre ensemble avec état et le service que vous utilisez pour exposer cet ensemble. L'exemple suivant illustre comment déployer nginx en tant qu'ensemble avec état comportant 3 répliques. Pour chaque réplique, une unité de stockage de fichiers de 20 gigaoctets est mise à disposition en fonction des spécifications définies dans la classe de stockage `ibmc-file-retain-bronze`. Toutes les unités de stockage sont mises à disposition dans la zone `dal10`. Comme le stockage de fichiers n'est pas accessible à partir d'autres zones, toutes les répliques de l'ensemble avec état sont également déployées sur un noeud worker qui se trouve dans la zone `dal10`.
+2. Créez un fichier de configuration pour votre ensemble avec état et le service que vous utilisez pour exposer cet ensemble.
 
-   ```
-   apiVersion: v1
-   kind: Service
-   metadata:
-    name: nginx
-    labels:
-      app: nginx
-   spec:
-    ports:
-    - port: 80
-      name: web
-    clusterIP: None
-    selector:
-      app: nginx
-   ---
-   apiVersion: apps/v1beta1
-   kind: StatefulSet
-   metadata:
-    name: nginx
-   spec:
-    serviceName: "nginx"
-    replicas: 3
-    podManagementPolicy: Parallel
-    selector:
-      matchLabels:
+  - **Exemple d'ensemble avec état qui spécifie une zone :**
+
+    L'exemple suivant montre comment déployer NGINX sous forme d'ensemble avec état avec 3 répliques. Pour chaque réplique, une unité de stockage de fichiers de 20 gigaoctets est mise à disposition en fonction des spécifications indiquées dans la classe de stockage `ibmc-file-retain-bronze`. Toutes les unités de stockage sont mises à disposition dans la zone `dal10`. Comme le stockage de fichiers n'est pas accessible à partir d'autres zones, toutes les répliques de l'ensemble avec état sont également déployées sur des noeuds worker qui se trouvent dans la zone `dal10`.
+
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+     name: nginx
+     labels:
+       app: nginx
+    spec:
+     ports:
+     - port: 80
+       name: web
+     clusterIP: None
+     selector:
+       app: nginx
+    ---
+    apiVersion: apps/v1
+    kind: StatefulSet
+    metadata:
+     name: nginx
+    spec:
+     serviceName: "nginx"
+     replicas: 3
+     podManagementPolicy: Parallel
+     selector:
+       matchLabels:
+         app: nginx
+         billingType: "hourly"
+         region: "us-south"
+         zone: "dal10"
+     template:
+       metadata:
+         labels:
+           app: nginx
+           billingType: "hourly"
+           region: "us-south"
+           zone: "dal10"
+       spec:
+         containers:
+         - name: nginx
+           image: k8s.gcr.io/nginx-slim:0.8
+           ports:
+           - containerPort: 80
+             name: web
+           volumeMounts:
+           - name: myvol
+             mountPath: /usr/share/nginx/html
+     volumeClaimTemplates:
+     - metadata:
+         name: myvol
+       spec:
+         accessModes:
+         - ReadWriteOnce
+         resources:
+           requests:
+             storage: 20Gi
+             iops: "300" #required only for performance storage
+         storageClassName: ibmc-file-retain-bronze
+    ```
+    {: codeblock}
+
+  - **Exemple d'ensemble avec état avec une règle d'anti-affinité et création de stockage de fichiers différée :**
+
+    L'exemple suivant montre comment déployer NGINX sous forme d'ensemble avec état avec 3 répliques. L'ensemble avec état n'indique pas la région et la zone où est créé le stockage de fichiers. A la place, l'ensemble avec état utilise une règle d'anti-affinité pour garantir que les pods sont répartis sur les noeuds worker et les zones. L'anti-affinité des noeuds worker est assurée en définissant le libellé `app: nginx`. Ce libellé indique au planificateur Kubernetes de ne pas planifier de pod sur un noeud worker si un pod ayant le même libellé s'exécute déjà sur ce noeud worker. Le libellé `topologykey: failure-domain.beta.kubernetes.io/zone` limite davantage cette règle d'anti-affinité et empêche la planification du pod sur un noeud worker qui se trouve dans la même zone qu'un noeud worker qui exécute déjà un pod avec le libellé `app: nginx`. Pour chaque pod d'ensemble avec état, deux PVC sont créées selon la définition indiquée à la section `volumeClaimTemplates`, mais la création des instances de stockage de fichiers est retardée jusqu'à ce qu'un pod d'ensemble avec état qui utilise le stockage soit planifié. Cette configuration est appelée [planification de volume tenant compte de la topologie (topology-aware)](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
+
+    ```
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: ibmc-file-bronze-delayed
+    parameters:
+      billingType: hourly
+      classVersion: "2"
+      iopsPerGB: "2"
+      sizeRange: '[20-12000]Gi'
+      type: Endurance
+    provisioner: ibm.io/ibmc-file
+    reclaimPolicy: Delete
+    volumeBindingMode: WaitForFirstConsumer
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: nginx
+      labels:
         app: nginx
-        billingType: "hourly"
-        region: "us-south"
-        zone: "dal10"
-    template:
-      metadata:
-        labels:
+    spec:
+      ports:
+      - port: 80
+        name: web
+      clusterIP: None
+      selector:
+        app: nginx
+    ---
+    apiVersion: apps/v1
+    kind: StatefulSet
+    metadata:
+      name: web
+    spec:
+      serviceName: "nginx"
+      replicas: 3
+      podManagementPolicy: "Parallel"
+      selector:
+        matchLabels:
           app: nginx
-          billingType: "hourly"
-          region: "us-south"
-          zone: "dal10"
-      spec:
-        containers:
-        - name: nginx
-          image: k8s.gcr.io/nginx-slim:0.8
-          ports:
-          - containerPort: 80
-            name: web
-          volumeMounts:
-          - name: myvol
-            mountPath: /usr/share/nginx/html
-    volumeClaimTemplates:
-    - metadata:
-        annotations:
-          volume.beta.kubernetes.io/storage-class: ibmc-file-retain-bronze
-        name: myvol
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 20Gi
-            iops: "300" #required only for performance storage
-   ```
-   {: codeblock}
+      template:
+        metadata:
+          labels:
+            app: nginx
+        spec:
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+                    - key: app
+              operator: In
+              values:
+                      - nginx
+                  topologyKey: failure-domain.beta.kubernetes.io/zone
+          containers:
+          - name: nginx
+            image: k8s.gcr.io/nginx-slim:0.8
+            ports:
+            - containerPort: 80
+              name: web
+            volumeMounts:
+            - name: www
+              mountPath: /usr/share/nginx/html
+            - name: wwwww
+              mountPath: /tmp1
+      volumeClaimTemplates:
+      - metadata:
+          name: myvol1
+        spec:
+          accessModes:
+          - ReadWriteMany # access mode
+          resources:
+            requests:
+              storage: 20Gi
+          storageClassName: ibmc-file-bronze-delayed
+      - metadata:
+          name: myvol2
+        spec:
+          accessModes:
+          - ReadWriteMany # access mode
+          resources:
+            requests:
+              storage: 20Gi
+          storageClassName: ibmc-file-bronze-delayed
+    ```
+    {: codeblock}
 
-   <table>
+    <table>
     <caption>Description des composants du fichier YAML de l'ensemble avec état</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML de l'ensemble avec état</th>
@@ -762,7 +870,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.podManagementPolicy</code></td>
-    <td style="text-align:left">Entrez la règle de gestion de pod que vous souhaitez utiliser pour votre ensemble avec état. Sélectionnez l'une des options suivantes : <ul><li><strong>OrderedReady : </strong>avec cette option, les répliques de l'ensemble avec état sont déployées l'une après l'autre. Par exemple, si vous avez spécifié 3 répliques, Kubernetes crée la PVC pour la première réplique, attend jusqu'à ce que la PVC soit liée, déploie la réplique de l'ensemble avec état et monte la PVC sur la réplique. Une fois le déploiement terminé, la deuxième réplique est déployée. Pour plus d'informations sur cette option, voir [OrderedReady Pod Management ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel : </strong>avec cette option, le déploiement de toutes les répliques de l'ensemble avec état démarre en même temps. Si votre application prend en charge le déploiement parallèle des répliques, utilisez cette option pour gagner du temps pour le déploiement de vos PVC et des répliques de l'ensemble avec état. </li></ul></td>
+    <td style="text-align:left">Entrez la règle de gestion de pod que vous souhaitez utiliser pour votre ensemble avec état. Sélectionnez l'une des options suivantes : <ul><li><strong><code>OrderedReady</code></strong> : avec cette option, les répliques de l'ensemble avec état sont déployées l'une après l'autre. Par exemple, si vous avez spécifié 3 répliques, Kubernetes crée la PVC pour la première réplique, attend jusqu'à ce que la PVC soit liée, déploie la réplique de l'ensemble avec état et monte la PVC sur la réplique. Une fois le déploiement terminé, la deuxième réplique est déployée. Pour plus d'informations sur cette option, voir [`OrderedReady` Pod Management ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel : </strong>avec cette option, le déploiement de toutes les répliques de l'ensemble avec état démarre en même temps. Si votre application prend en charge le déploiement parallèle des répliques, utilisez cette option pour gagner du temps pour le déploiement de vos PVC et des répliques de l'ensemble avec état. </li></ul></td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
@@ -773,8 +881,8 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     <td style="text-align:left">Entrez les mêmes libellés que vous avez ajoutés dans la section <code>spec.selector.matchLabels</code>. </td>
     </tr>
     <tr>
-    <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">Entrez la classe de stockage de votre choix. Pour répertorier les classes de stockage existantes, exécutez la commande <code>kubectl get storageclasses | grep file</code>. Si vous n'indiquez pas de classe de stockage, la PVC est créée avec la classe de stockage par défaut définie dans votre cluster. Vérifiez que la classe de stockage par défaut comporte <code>ibm.io/ibmc-file</code> dans la section 'provisioner' de sorte que votre ensemble avec état soit mis à disposition avec du stockage de fichiers.</td>
+    <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
+    <td style="text-align:left">Spécifiez votre règle d'anti-affinité pour garantir que les pods de votre ensemble avec état sont répartis sur les noeuds worker et les zones. L'exemple montre une règle d'anti-affinité dans laquelle le pod de l'ensemble avec état préfère ne pas être planifié sur un noeud worker où s'exécute un pod avec le libellé `app: nginx`. La section `topologykey: failure-domain.beta.kubernetes.io/zone` limite davantage cette règle d'anti-affinité et empêche la planification du pod sur un noeud worker si ce noeud figure dans la même zone que le pod ayant le libellé `app: nignx`. En utilisant cette règle d'anti-affinité, vous pouvez appliquer l'anti-affinité aux différents noeuds worker et aux différentes zones. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
@@ -786,7 +894,11 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.iops</code></td>
-    <td style="text-align:left">Pour mettre à disposition du [stockage Performance](#predefined_storageclass), entrez le nombre d'opérations d'entrée-sortie par seconde (IOPS). Si vous utilisez une classe de stockage Endurance et que vous indiquez un nombre d'IOPS, le nombre d'IOPS est ignoré. Le nombre d'IOPS indiqué dans votre classe de stockage est utilisé à la place.  </td>
+    <td style="text-align:left">Pour mettre à disposition du [stockage Performance](#file_predefined_storageclass), entrez le nombre d'opérations d'entrée-sortie par seconde (IOPS). Si vous utilisez une classe de stockage Endurance et que vous indiquez un nombre d'IOPS, le nombre d'IOPS est ignoré. Le nombre d'IOPS indiqué dans votre classe de stockage est utilisé à la place.  </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>spec.storageClassName</code></td>
+    <td style="text-align:left">Entrez la classe de stockage de votre choix. Pour répertorier les classes de stockage existantes, exécutez la commande <code>kubectl get storageclasses | grep file</code>. Si vous n'indiquez pas de classe de stockage, la PVC est créée avec la classe de stockage par défaut définie dans votre cluster. Vérifiez que la classe de stockage par défaut comporte <code>ibm.io/ibmc-file</code> dans la section 'provisioner' de sorte que votre ensemble avec état soit mis à disposition avec du stockage de fichiers.</td>
     </tr>
     </tbody></table>
 
@@ -805,29 +917,32 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
    Pour voir le statut actuel de vos PVC, exécutez la commande `kubectl get pvc`. Le nom de votre PVC est au format : `<volume_name>-<statefulset_name>-<replica_number>`.
    {: tip}
 
-### Mise à disposition anticipée de la PVC avant la création de l'ensemble avec état
-{: #static_statefulset}
+### Mise à disposition statique : Utilisation d'une PVC existante avec votre ensemble avec état
+{: #file_static_statefulset}
 
 Vous pouvez mettre à disposition vos PVC de manière anticipée avant de créer votre ensemble avec état ou utiliser des PVC existantes avec votre ensemble avec état.
 {: shortdesc}
 
-Lorsque vous [effectuez une mise à disposition dynamique de vos PVC lors de la création de l'ensemble avec état](#dynamic_statefulset), le nom de la PVC est affecté en fonction des valeurs que vous avez utilisées dans le fichier YAML de l'ensemble avec état. Pour que l'ensemble avec état utilise des PVC existantes, le nom de vos PVC doit correspondre à celui qui serait automatiquement créé via une mise à disposition dynamique.
+Lorsque vous [effectuez une mise à disposition dynamique de vos PVC lors de la création de l'ensemble avec état](#file_dynamic_statefulset), le nom de la PVC est affecté en fonction des valeurs que vous avez utilisées dans le fichier YAML de l'ensemble avec état. Pour que l'ensemble avec état utilise des PVC existantes, le nom de vos PVC doit correspondre à celui qui serait automatiquement créé via une mise à disposition dynamique.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-1. Suivez les étapes 1 à 3 de la section [Ajout de stockage de fichiers à des applications](#add_file) pour créer une PVC pour chaque réplique de l'ensemble avec état. Veillez à créer votre PVC avec un nom respectant le format suivant : `<volume_name>-<statefulset_name>-<replica_number>`.
+1. Si vous souhaitez effectuer une mise à disposition préalable de votre PVC avant de créer l'ensemble avec état, suivez les étapes 1 à 3 de la section [Ajout de stockage de fichiers à des applications](#add_file) pour créer une PVC pour chaque réplique de l'ensemble avec état. Veillez à créer votre PVC avec un nom respectant le format suivant : `<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`** : utilisez le nom de volume que vous souhaitez indiquer dans la section `spec.volumeClaimTemplates.metadata.name` de votre ensemble avec état, par exemple `nginxvol`.
    - **`<statefulset_name>`** : utilisez le nom d'ensemble avec état que vous souhaitez indiquer dans la section `metadata.name` de votre ensemble avec état, par exemple `nginx_statefulset`.
    - **`<replica_number>`** : entrez le nombre de répliques à partir de 0.
 
    Par exemple, si vous devez créer 3 répliques de l'ensemble avec état, créez 3 PVC avec les noms suivants : `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1` et `nginxvol-nginx_statefulset-2`.  
 
-2. Suivez les étapes indiquées dans [Mise à disposition dynamique de la PVC lorsque vous créez un ensemble avec état](#dynamic_statefulset) pour créer votre ensemble avec état. Veillez à utiliser les valeurs des noms de vos PVC dans la spécification de l'ensemble avec état :
-   - **`spec.volumeClaimTemplates.metadata.name`** : Entrez le nom de volume (`<volume_name>`) que vous avez utilisé à l'étape précédente.
-   - **`metadata.name`** : entrez le nom de l'ensemble avec état (`<statefulset_name>`) que vous avez utilisé à l'étape précédente.
+   Vous envisagez de créer une PVC et un volume persistant pour une instance de stockage de fichiers existante ? Créez votre PVC et le volume persistant en utilisant une [mise à disposition statique](#existing_file).
+   {: tip}
+
+2. Suivez les étapes indiquées à la section [Mise à disposition dynamique : Création de la PVC lorsque vous créez un ensemble avec état](#file_dynamic_statefulset) pour créer votre ensemble avec état. Le nom de votre PVC respecte le format `<volume_name>-<statefulset_name>-<replica_number>`. Veillez à utiliser les valeurs suivantes pour le nom de votre PVC dans la spécification de l'ensemble avec état :
+   - **`spec.volumeClaimTemplates.metadata.name`** : Entrez le nom de volume (`<volume_name>`) du nom de votre PVC.
+   - **`metadata.name`** : entrez le nom de l'ensemble avec état (`<statefulset_name>`) du nom de votre PVC.
    - **`spec.replicas`** : entrez le nombre de répliques que vous souhaitez créer pour votre ensemble avec état. Le nombre de répliques doit être égal au nombre de PVC que vous avez créées précédemment.
 
-   Si vous avez créé vos PVC dans différentes zones, n'incluez pas de libellé de région ou de zone dans votre ensemble avec état.
+   Si vos PVC se trouvent dans des zones différentes, n'incluez pas de libellé de région ou de zone dans votre ensemble avec état.
    {: note}
 
 3. Vérifiez que les PVC sont utilisées dans les pods de réplique de votre ensemble avec état.
@@ -837,7 +952,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
       ```
       {: pre}
 
-   2. Vérifiez que votre PVC existante est montée sur la réplique de votre ensemble avec état. Examinez la valeur de **ClaimName** dans la section **Volumes** de la sortie de l'interface de ligne de commande.
+   2. Vérifiez que votre PVC existante est montée sur la réplique de votre ensemble avec état. Examinez la valeur de **`ClaimName`** dans la section **`Volumes`** de la sortie de l'interface de ligne de commande.
       ```
       kubectl describe pod <pod_name>
       ```
@@ -862,34 +977,34 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 
 
 ## Modification de la taille et du nombre d'opérations d'entrée-sortie par seconde (IOPS) de votre unité de stockage
-{: #change_storage_configuration}
+{: #file_change_storage_configuration}
 
-Si vous envisagez d'augmenter la capacité de stockage ou les performances, vous pouvez modifier votre volume existant. 
+Si vous envisagez d'augmenter la capacité de stockage ou les performances, vous pouvez modifier votre volume existant.
 {: shortdesc}
 
-Pour toute question concernant la facturation ou la procédure à suivre pour modifier votre stockage en utilisant la console {{site.data.keyword.Bluemix_notm}}, voir [Extension de la capacité de partage de fichiers](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity). 
+Pour toute question concernant la facturation ou la procédure à suivre pour modifier votre stockage en utilisant la console {{site.data.keyword.Bluemix_notm}}, voir [Extension de la capacité de partage de fichiers](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
 {: tip}
 
-1. Répertoriez les réservations de volume persistant (PVC) et notez le nom du volume persistant (PV) associé indiqué dans la colonne **VOLUME**. 
+1. Répertoriez les réservations de volume persistant (PVC) et notez le nom du volume persistant (PV) associé indiqué dans la colonne **VOLUME**.
    ```
    kubectl get pvc
    ```
    {: pre}
-   
-   Exemple de sortie : 
+
+   Exemple de sortie :
    ```
    NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
    myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-file-bronze    147d
    ```
    {: screen}
-   
-2. Extrayez le type de stockage (**StorageType**), l'ID de volume (**volumeId**) et le serveur (**server**) du stockage de fichiers physique associé à votre PVC en affichant les détails du volume persistant auquel est liée votre PVC. Remplacez `<pv_name>` par le nom du volume persistant que vous avez obtenu à l'étape précédente. Le type de stockage, l'ID du volume et le nom du serveur sont affichés dans la section **Labels** de la sortie de l'interface de ligne de commande. 
+
+2. Extrayez le type de stockage (**`StorageType`**), l'ID de volume (**`volumeId`**) et le serveur (**`server`**) du stockage de fichiers physique associé à votre PVC en affichant les détails du volume persistant auquel est liée votre PVC. Remplacez `<pv_name>` par le nom du volume persistant que vous avez obtenu à l'étape précédente. Le type de stockage, l'ID du volume et le nom du serveur sont affichés dans la section **`Labels`** de la sortie de l'interface de ligne de commande.
    ```
    kubectl describe pv <pv_name>
    ```
    {: pre}
-   
-   Exemple de sortie : 
+
+   Exemple de sortie :
    ```
    Name:            pvc-4b62c704-5f77-11e8-8a75-b229c11ba64a
    Labels:          CapacityGb=20
@@ -907,20 +1022,20 @@ Pour toute question concernant la facturation ou la procédure à suivre pour mo
    ```
    {: screen}
 
-3. Modifiez la taille ou le nombre d'IOPS de votre volume dans votre compte d'infrastructure IBM Cloud (SoftLayer). 
+3. Modifiez la taille ou le nombre d'IOPS de votre volume dans votre compte d'infrastructure IBM Cloud (SoftLayer).
 
-   Exemple pour du stockage Performance : 
+   Exemple pour du stockage Performance :
    ```
    ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-iops <iops>
    ```
    {: pre}
-   
-   Exemple pour du stockage Endurance : 
+
+   Exemple pour du stockage Endurance :
    ```
    ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-tier <iops>
    ```
    {: pre}
-   
+
    <table>
    <caption>Description des composants de la commande</caption>
    <thead>
@@ -933,20 +1048,20 @@ Pour toute question concernant la facturation ou la procédure à suivre pour mo
    </tr>
    <tr>
    <td><code>&lt;new-size&gt;</code></td>
-   <td>Entrez la nouvelle taille en gigaoctets (Gi) de votre volume. Pour obtenir les tailles valides, voir [Détermination de la configuration de stockage de fichiers](#predefined_storageclass). La taille que vous entrez doit être supérieure ou égale à la taille actuelle de votre volume. Si vous n'indiquez pas de nouvelle taille, la taille actuelle du volume est utilisée. </td>
+   <td>Entrez la nouvelle taille en gigaoctets (Gi) de votre volume. Pour obtenir les tailles valides, voir [Détermination de la configuration de stockage de fichiers](#file_predefined_storageclass). La taille que vous entrez doit être supérieure ou égale à la taille actuelle de votre volume. Si vous n'indiquez pas de nouvelle taille, la taille actuelle du volume est utilisée. </td>
    </tr>
    <tr>
    <td><code>&lt;new-iops&gt;</code></td>
-   <td>Pour du stockage Performance uniquement. Entrez le nouveau nombre d'IOPS de votre choix. Pour obtenir les nombres d'IOPS valides, voir [Détermination de la configuration de stockage de fichiers](#predefined_storageclass). Si vous n'indiquez pas de nombre d'IOPS, le nombre d'IOPS actuel est utilisé. <p class="note">Si le rapport IOPS/Go d'origine du volume est inférieur à 0,3, le nouveau rapport IOPS/Go doit être inférieur à ratio 0,3. Si le rapport IOPS/Go d'origine du volume est supérieur ou égal à 0,3, le nouveau rapport IOPS/Go du volume doit être supérieur ou égal à 0,3.</p> </td>
+   <td>Pour du stockage Performance uniquement. Entrez le nouveau nombre d'IOPS de votre choix. Pour obtenir les nombres d'IOPS valides, voir [Détermination de la configuration de stockage de fichiers](#file_predefined_storageclass). Si vous n'indiquez pas de nombre d'IOPS, le nombre d'IOPS actuel est utilisé. <p class="note">Si le rapport IOPS/Go d'origine du volume est inférieur à 0,3, le nouveau rapport IOPS/Go doit être inférieur à ratio 0,3. Si le rapport IOPS/Go d'origine du volume est supérieur ou égal à 0,3, le nouveau rapport IOPS/Go du volume doit être supérieur ou égal à 0,3.</p> </td>
    </tr>
    <tr>
    <td><code>&lt;new-tier&gt;</code></td>
-   <td>Pour stockage Endurance uniquement. Entrez le nouveau nombre d'IOPS par Go de votre choix. Pour obtenir les nombres d'IOPS valides, voir [Détermination de la configuration de stockage de fichiers](#predefined_storageclass). Si vous n'indiquez pas de nombre d'IOPS, le nombre d'IOPS actuel est utilisé. <p class="note">Si le rapport IOPS/Go d'origine du volume est inférieur à 0,25, le nouveau rapport IOPS/Go doit être inférieur à 0,25. Si le rapport IOPS/Go d'origine du volume est supérieur ou égal à 0,25, le nouveau rapport IOPS/Go du volume doit être supérieur ou égal à 0,25.</p> </td>
+   <td>Pour du stockage Endurance uniquement. Entrez le nouveau nombre d'IOPS par Go de votre choix. Pour obtenir les nombres d'IOPS valides, voir [Détermination de la configuration de stockage de fichiers](#file_predefined_storageclass). Si vous n'indiquez pas de nombre d'IOPS, le nombre d'IOPS actuel est utilisé. <p class="note">Si le rapport IOPS/Go d'origine du volume est inférieur à 0,25, le nouveau rapport IOPS/Go doit être inférieur à 0,25. Si le rapport IOPS/Go d'origine du volume est supérieur ou égal à 0,25, le nouveau rapport IOPS/Go du volume doit être supérieur ou égal à 0,25.</p> </td>
    </tr>
    </tbody>
    </table>
-   
-   Exemple de sortie : 
+
+   Exemple de sortie :
    ```
    Order 31020713 was placed successfully!.
    > Storage as a Service
@@ -960,28 +1075,28 @@ Pour toute question concernant la facturation ou la procédure à suivre pour mo
    You may run 'ibmcloud sl file volume-list --order 12345667' to find this file volume after it is ready.
    ```
    {: screen}
-   
-4. Si vous avez modifié la taille de votre volume et que vous utilisez le volume dans un pod, connectez-vous à votre pod pour vérifier la nouvelle taille. 
+
+4. Si vous avez modifié la taille de votre volume et que vous utilisez le volume dans un pod, connectez-vous à votre pod pour vérifier la nouvelle taille.
    1. Répertoriez tous les pod utilisant une PVC.
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
       ```
       {: pre}
-      
-      Les pods sont renvoyés au format : `<pod_name>: <pvc_name>`. 
-   2. Connectez-vous à votre pod. 
+
+      Les pods sont renvoyés au format : `<pod_name>: <pvc_name>`.
+   2. Connectez-vous à votre pod.
       ```
       kubectl exec -it <pod_name> bash
       ```
       {: pre}
-      
-   3. Affichez les statistiques d'utilisation du disque et recherchez le chemin d'accès au serveur que vous avez récupéré précédemment. 
+
+   3. Affichez les statistiques d'utilisation du disque et recherchez le chemin d'accès au serveur que vous avez récupéré précédemment.
       ```
       df -h
       ```
       {: pre}
-      
-      Exemple de sortie : 
+
+      Exemple de sortie :
       ```
       Filesystem                                                      Size  Used Avail Use% Mounted on
       overlay                                                          99G  4.8G   89G   6% /
@@ -990,7 +1105,7 @@ Pour toute question concernant la facturation ou la procédure à suivre pour mo
       fsf-dal1001g-fz.adn.networklayer.com:/IBM01SEV1234567_6/data01   40G     0   40G   0% /myvol
       ```
       {: screen}
-   
+
 
 ## Modification de la version NFS par défaut
 {: #nfs_version}
@@ -1003,7 +1118,7 @@ Pour modifier la version NFS par défaut, vous pouvez créer une nouvelle classe
 Pour appliquer les mises à jour de sécurité les plus récentes et obtenir de meilleures performances, utilisez la version NFS par défaut et ne revenez pas à une version NFS antérieure.
 {: important}
 
-**Pour créer une classe de stockage personnalisée avec la version NFS désirée :**
+**Pour créer une classe de stockage personnalisée avec une version NFS spécifique :**
 1. Créez une [classe de stockage personnalisée](#nfs_version_class) avec la version NFS que vous voulez mettre à disposition.
 2. Créez la classe de stockage dans votre cluster.
    ```
@@ -1082,7 +1197,7 @@ Pour appliquer les mises à jour de sécurité les plus récentes et obtenir de 
 
 
 ## Sauvegarde et restauration des données
-{: #backup_restore}
+{: #file_backup_restore}
 
 Le stockage de fichiers est mis à disposition au même emplacement que les noeuds worker dans votre cluster. Le stockage est hébergé par IBM sur des serveurs en cluster pour qu'il soit disponible si un serveur tombe en panne. Cependant, le stockage de fichiers n'est pas sauvegardé automatiquement et risque d'être inaccessible en cas de défaillance de l'emplacement global. Pour éviter que vos données soient perdues ou endommagées, vous pouvez configurer des sauvegardes régulières que vous pourrez utiliser pour récupérer vos données si nécessaire.
 {: shortdesc}
@@ -1091,18 +1206,18 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 
 <dl>
   <dt>Configurer la prise d'instantanés régulière</dt>
-  <dd><p>Vous pouvez [configurer la prise d'instantanés régulière de votre stockage de fichiers](/docs/infrastructure/FileStorage/snapshots.html). Un instantané est une image en lecture seule qui capture l'état de l'instance à un moment donné. Pour stocker l'instantané, vous devez demander de l'espace d'image instantanée dans votre stockage de fichiers. Les instantanés sont stockés dans l'instance de stockage existante figurant dans la même zone. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume. <p class="note">: si vous disposez d'un compte Dedicated, vous devez [ouvrir un cas de support](/docs/get-support/howtogetsupport.html#getting-customer-support).</p></br> <strong>Pour créer un instantané de votre volume :</strong><ol><li>[Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).</li><li>Connectez-vous à l'interface de ligne de commande `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Vous pouvez [configurer la prise d'instantanés régulière de votre stockage de fichiers](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots). Un instantané est une image en lecture seule qui capture l'état de l'instance à un moment donné. Pour stocker l'instantané, vous devez demander de l'espace d'image instantanée dans votre stockage de fichiers. Les instantanés sont stockés dans l'instance de stockage existante figurant dans la même zone. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume. <p class="note">: si vous disposez d'un compte Dedicated, vous devez [ouvrir un cas de support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p></br> <strong>Pour créer un instantané de votre volume :</strong><ol><li>[Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).</li><li>Connectez-vous à l'interface de ligne de commande `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Répertoriez les volumes persistants (PV) existants dans votre cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenez les détails du volume persistant pour lequel vous voulez créer un espace d'instantané et notez l'ID du volume, la taille et le nombre d'entrées-sorties par seconde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> L'ID du volume, la taille et le nombre d'IOPS se trouvent dans la section <strong>Labels</strong> dans la sortie de l'interface CLI. </li><li>Créez la taille de l'instantané pour le volume existant avec les paramètres que vous avez récupérés à l'étape précédente. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Attendez que la taille de l'instantané soit créée. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>La taille de l'instantané est mise à disposition lorsque la section <strong>Snapshot Size (GB)</strong> de la sortie de l'interface CLI passe de 0 à la taille que vous avez commandée. </li><li>Créez l'instantané de votre volume et notez l'ID de l'instantané qui a été créé pour vous. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Vérifiez que la création de l'instantané a abouti. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Pour restaurer les données d'un instantané sur un volume existant : </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Répliquer les instantanés dans une autre zone</dt>
- <dd><p>Pour protéger vos données en cas de défaillance d'une zone, vous pouvez [répliquer des instantanés](/docs/infrastructure/FileStorage/replication.html#replicating-data) sur une instance de stockage de fichiers configurée dans une autre zone. Les données peuvent être répliquées du stockage principal uniquement vers le stockage de sauvegarde. Vous ne pouvez pas monter une instance de stockage de fichiers répliquée dans un cluster. En cas de défaillance de votre stockage principal, vous pouvez manuellement définir votre stockage de sauvegarde répliqué comme stockage principal. Vous pouvez ensuite le monter sur votre cluster. Une fois votre stockage principal restauré, vous pouvez récupérer les données dans le stockage de sauvegarde. <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous ne pouvez pas répliquer des instantanés sur une autre zone.</p></dd>
+ <dd><p>Pour protéger vos données en cas de défaillance d'une zone, vous pouvez [répliquer des instantanés](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication) sur une instance de stockage de fichiers configurée dans une autre zone. Les données peuvent être répliquées du stockage principal uniquement vers le stockage de sauvegarde. Vous ne pouvez pas monter une instance de stockage de fichiers répliquée dans un cluster. En cas de défaillance de votre stockage principal, vous pouvez manuellement définir votre stockage de sauvegarde répliqué comme stockage principal. Vous pouvez ensuite le monter sur votre cluster. Une fois votre stockage principal restauré, vous pouvez récupérer les données dans le stockage de sauvegarde. <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous ne pouvez pas répliquer des instantanés sur une autre zone.</p></dd>
  <dt>Dupliquer le stockage</dt>
- <dd><p>Vous pouvez [dupliquer votre instance de stockage de fichiers](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage) dans la même zone que l'instance de stockage d'origine. Un doublon contient les même données que l'instance de stockage d'origine au moment où vous créez le doublon. Contrairement aux répliques, le doublon s'utilise comme une instance de stockage indépendante de l'original. Pour effectuer la duplication, commencez par [configurer des instantanés pour le volume](/docs/infrastructure/FileStorage/snapshots.html). <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous devez <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">ouvrir un cas de support</a>.</p></dd>
+ <dd><p>Vous pouvez [dupliquer votre instance de stockage de fichiers](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume) dans la même zone que l'instance de stockage d'origine. Un doublon contient les même données que l'instance de stockage d'origine au moment où vous créez le doublon. Contrairement aux répliques, le doublon s'utilise comme une instance de stockage indépendante de l'original. Pour effectuer la duplication, commencez par [configurer des instantanés pour le volume](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots). <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous devez <a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">ouvrir un cas de support</a>.</p></dd>
   <dt>Sauvegarder les données dans {{site.data.keyword.cos_full}}</dt>
-  <dd><p>Vous pouvez utiliser l'[**image ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) pour constituer un pod de sauvegarde et de restauration dans votre cluster. Ce pod contient un script pour exécuter une sauvegarde unique ou régulière d'une réservation de volume persistant (PVC) dans votre cluster. Les données sont stockées dans votre instance {{site.data.keyword.cos_full}} que vous avez configurée dans une zone.</p>
+  <dd><p>Vous pouvez utiliser l'[**image ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter) pour constituer un pod de sauvegarde et de restauration dans votre cluster. Ce pod contient un script pour exécuter une sauvegarde unique ou régulière d'une réservation de volume persistant (PVC) dans votre cluster. Les données sont stockées dans votre instance {{site.data.keyword.cos_full}} que vous avez configurée dans une zone.</p>
   <p>Pour rendre vos données hautement disponibles et protéger votre application en cas de défaillance d'une zone, configurez une deuxième instance {{site.data.keyword.cos_full}} et répliquez les données entre les différentes zones. Si vous devez restaurer des données à partir de votre instance {{site.data.keyword.cos_full}}, utilisez le script de restauration fourni avec l'image.</p></dd>
 <dt>Copier les données depuis et vers des pods et des conteneurs</dt>
 <dd><p>Vous pouvez utiliser la [commande![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) `kubectl cp` pour copier des fichiers et des répertoires depuis et vers des pods ou des conteneurs spécifiques dans votre cluster.</p>
-<p>Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure). Si vous n'indiquez pas de conteneur avec <code>-c</code>, la commande utilise le premier conteneur disponible dans le pod.</p>
+<p>Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Si vous n'indiquez pas de conteneur avec <code>-c</code>, la commande utilise le premier conteneur disponible dans le pod.</p>
 <p>Vous pouvez utiliser la commande de plusieurs manières :</p>
 <ul>
 <li>Copier les données de votre machine locale vers un pod dans votre cluster : <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -1115,10 +1230,10 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 
 
 ## Référence des classes de stockage
-{: #storageclass_reference}
+{: #file_storageclass_reference}
 
 ### Bronze
-{: #bronze}
+{: #file_bronze}
 
 <table>
 <caption>Classe de stockage de fichiers : bronze</caption>
@@ -1133,7 +1248,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 </tr>
 <tr>
 <td>Type</td>
-<td>[Stockage Endurance](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)</td>
+<td>[Stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>Système de fichiers</td>
@@ -1164,7 +1279,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 
 
 ### Silver
-{: #silver}
+{: #file_silver}
 
 <table>
 <caption>Classe de stockage de fichiers : silver</caption>
@@ -1179,7 +1294,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 </tr>
 <tr>
 <td>Type</td>
-<td>[Stockage Endurance](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)</td>
+<td>[Stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>Système de fichiers</td>
@@ -1209,7 +1324,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 </table>
 
 ### Gold
-{: #gold}
+{: #block_gold}
 
 <table>
 <caption>Classe de stockage de fichiers : gold</caption>
@@ -1224,7 +1339,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 </tr>
 <tr>
 <td>Type</td>
-<td>[Stockage Endurance](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)</td>
+<td>[Stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>Système de fichiers</td>
@@ -1254,7 +1369,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 </table>
 
 ### Custom
-{: #custom}
+{: #file_custom}
 
 <table>
 <caption>Classe de stockage de fichiers : custom</caption>
@@ -1269,7 +1384,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 </tr>
 <tr>
 <td>Type</td>
-<td>[Performances](/docs/infrastructure/FileStorage/index.html#provisioning-with-performance)</td>
+<td>[Performances](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)</td>
 </tr>
 <tr>
 <td>Système de fichiers</td>
@@ -1281,7 +1396,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 </tr>
 <tr>
 <td>Disque dur</td>
-<td>Rapport IOPS/gigaoctets qui détermine le type de disque dur mis à disposition. Pour déterminer ce rapport, divisez la valeur des IOPS par la taille de votre stockage. </br></br>Exemple : </br>Vous avez choisi 500Gi de stockage avec 100 IOPS. Votre rapport est 0,2 (100 IOPS/500Gi). </br></br><strong>Présentation des types de disque dur en fonction du rapport :</strong><ul><li>Inférieur ou égal à 0,3 : SATA</li><li>Supérieur à 0,3 : SSD</li></ul></td>
+<td>Rapport IOPS/gigaoctet qui détermine le type de disque dur mis à disposition. Pour déterminer ce rapport, divisez la valeur des IOPS par la taille de votre stockage. </br></br>Exemple : </br>Vous avez choisi 500Gi de stockage avec 100 IOPS. Votre rapport est 0,2 (100 IOPS/500Gi). </br></br><strong>Présentation des types de disque dur en fonction du rapport :</strong><ul><li>Inférieur ou égal à 0,3 : SATA</li><li>Supérieur à 0,3 : SSD</li></ul></td>
 </tr>
 <tr>
 <td>Facturation</td>
@@ -1298,59 +1413,190 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 
 
 ## Exemples de classes de stockage personnalisées
-{: #custom_storageclass}
+{: #file_custom_storageclass}
 
 Vous pouvez créer une classe de stockage personnalisée et l'utiliser dans votre PVC.
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}} fournit des [classes de stockage prédéfinies](#storageclass_reference) pour mettre à disposition du stockage de fichiers avec une configuration et un niveau particuliers. Dans certains cas, vous envisagerez de mettre à disposition du stockage avec une autre configuration qui n'est pas couverte dans les classes de stockage prédéfinies. Vous pouvez utiliser les exemples de cette rubrique pour trouver des modèles de classes de stockage personnalisées.
+{{site.data.keyword.containerlong_notm}} fournit des [classes de stockage prédéfinies](#file_storageclass_reference) pour mettre à disposition du stockage de fichiers avec une configuration et un niveau particuliers. Dans certains cas, vous envisagerez de mettre à disposition du stockage avec une autre configuration qui n'est pas couverte dans les classes de stockage prédéfinies. Vous pouvez utiliser les exemples de cette rubrique pour trouver des modèles de classes de stockage personnalisées.
 
-Pour créer votre classe de stockage personnalisée, voir [Personnalisation d'une classe de stockage](cs_storage_basics.html#customized_storageclass). [Utilisez ensuite votre classe de stockage personnalisée dans votre PVC](#add_file).
+Pour créer votre classe de stockage personnalisée, voir [Personnalisation d'une classe de stockage](/docs/containers?topic=containers-kube_concepts#customized_storageclass). [Utilisez ensuite votre classe de stockage personnalisée dans votre PVC](#add_file).
+
+### Création de stockage tenant compte de la topologie
+{: #file-topology}
+
+Pour utiliser du stockage de fichiers dans un cluster à zones multiples, votre pod doit être planifié dans la même zone que votre instance de stockage de fichiers pour que vous puissiez effectuer des opérations de lecture et d'écriture dans le volume. Avant l'introduction de ce type de planification par Kubernetes, la mise à disposition dynamique de votre stockage créait automatiquement l'instance de stockage de fichiers dès qu'une PVC était créée. Ensuite, lorsque vous créiez votre pod, le planificateur Kubernetes essayait de déployer le pod sur un noeud worker dans le même centre de données que votre instance de stockage de fichiers.
+{: shortdesc}
+
+La création de l'instance de stockage de fichiers sans connaître les contraintes liées au pod peut entraîner des résultats indésirables. Par exemple, il peut arriver que votre pod ne puisse pas être planifié sur le même noeud worker que votre stockage car ce noeud ne dispose pas de ressources suffisantes ou qu'il comporte l'annotation taint et n'autorise pas la planification du pod. Avec une planification de volume tenant compte de la topologie, la création de l'instance de stockage de fichiers est différée jusqu'à ce que le premier pod utilisant le stockage soit créé.
+
+La planification de volume tenant compte de la topologie est prise en charge uniquement sur les clusters exécutant Kubernetes version 1.12 ou ultérieure.
+{: note}
+
+Les exemples suivants montrent comment créer des classes de stockage qui retardent la création de l'instance de stockage de fichiers jusqu'à ce que le premier pod utilisant ce stockage soit prêt à être planifié. Pour différer la création, vous devez inclure l'option `volumeBindingMode: WaitForFirstConsumer`. Si vous omettez cette option, le paramètre `volumeBindingMode` est automatiquement défini avec `Immediate` et l'instance de stockage de fichiers est créée lorsque vous créez la PVC.
+
+- **Exemple pour du stockage de fichiers de type Endurance :**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ibmc-file-bronze-delayed
+  parameters:
+    billingType: hourly
+    classVersion: "2"
+    iopsPerGB: "2"
+    sizeRange: '[20-12000]Gi'
+    type: Endurance
+  provisioner: ibm.io/ibmc-file
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
+  ```
+  {: codeblock}
+
+- **Exemple pour du stockage de fichiers de type Performance :**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+   name: ibmc-file-performance-storageclass
+   labels:
+     kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+   billingType: "hourly"
+   classVersion: "2"
+   sizeIOPSRange: |-
+     "[20-39]Gi:[100-1000]"
+     "[40-79]Gi:[100-2000]"
+     "[80-99]Gi:[100-4000]"
+     "[100-499]Gi:[100-6000]"
+     "[500-999]Gi:[100-10000]"
+     "[1000-1999]Gi:[100-20000]"
+     "[2000-2999]Gi:[200-40000]"
+     "[3000-3999]Gi:[200-48000]"
+     "[4000-7999]Gi:[300-48000]"
+     "[8000-9999]Gi:[500-48000]"
+     "[10000-12000]Gi:[1000-48000]"
+   type: "Performance"
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
+  ```
+  {: codeblock}
 
 ### Spécification de zone pour les clusters à zones multiples
-{: #multizone_yaml}
+{: #file_multizone_yaml}
 
-Le fichier `.yaml` suivant personnalise une classe de stockage basée sur la classe de stockage `ibm-file-silver` sans retain : le `type` est `"Endurance"`, la valeur de `iopsPerGB` est `4`, la valeur de `sizeRange` est `"[20-12000]Gi"` et la valeur de `reclaimPolicy` est définie avec `"Delete"`. La zone indiquée est `dal12`. Vous pouvez consulter les informations précédentes sur les classes de stockage `ibmc` pour vous aider à choisir des valeurs acceptables pour ces éléments. </br>
+Si vous souhaitez créer votre stockage de fichiers dans une zone précise, vous pouvez spécifier la zone et la région dans une classe de stockage personnalisée.
+{: shortdesc}
 
-```
-apiVersion: storage.k8s.io/v1beta1
-kind: StorageClass
-metadata:
-  name: ibmc-file-silver-mycustom-storageclass
-  labels:
-    kubernetes.io/cluster-service: "true"
-provisioner: ibm.io/ibmc-file
-parameters:
-  zone: "dal12"
-  region: "us-south"
-  type: "Endurance"
-  iopsPerGB: "4"
-  sizeRange: "[20-12000]Gi"
-  reclaimPolicy: "Delete"
-  classVersion: "2"
-```
-{: codeblock}
+Utilisez la classe de stockage personnalisée si vous souhaitez [effectuer une mise à disposition statique de stockage de fichiers](#existing_file) dans une zone spécifique. Dans tous les autres cas, [indiquez la zone directement dans votre PVC](#add_file).
+{: note}
+
+Lorsque vous créez la classe de stockage personnalisée, indiquez la même région et la même zone dans lesquelles se trouvent votre cluster et les noeuds worker. Pour obtenir la région dans laquelle se trouve votre cluster, exécutez la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` et recherchez le préfixe de la région dans la zone **Master URL**, par exemple `eu-de` dans l'URL `https://c2.eu-de.containers.cloud.ibm.com:11111`. Pour obtenir la zone dans laquelle se trouve votre noeud worker, exécutez la commande `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
+
+- **Exemple pour du stockage de fichiers de type Endurance :**
+  ```
+  apiVersion: storage.k8s.io/v1beta1
+  kind: StorageClass
+  metadata:
+    name: ibmc-file-silver-mycustom-storageclass
+    labels:
+      kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+    zone: "dal12"
+    region: "us-south"
+    type: "Endurance"
+    iopsPerGB: "4"
+    sizeRange: "[20-12000]Gi"
+    reclaimPolicy: "Delete"
+    classVersion: "2"
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+  ```
+  {: codeblock}
+
+- **Exemple pour du stockage de fichiers de type Performance :**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+   name: ibmc-file-performance-storageclass
+   labels:
+     kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+   zone: "dal12"
+   region: "us-south"
+   billingType: "hourly"
+   classVersion: "2"
+   sizeIOPSRange: |-
+     "[20-39]Gi:[100-1000]"
+     "[40-79]Gi:[100-2000]"
+     "[80-99]Gi:[100-4000]"
+     "[100-499]Gi:[100-6000]"
+     "[500-999]Gi:[100-10000]"
+     "[1000-1999]Gi:[100-20000]"
+     "[2000-2999]Gi:[200-40000]"
+     "[3000-3999]Gi:[200-48000]"
+     "[4000-7999]Gi:[300-48000]"
+     "[8000-9999]Gi:[500-48000]"
+     "[10000-12000]Gi:[1000-48000]"
+   type: "Performance"
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+  ```
+  {: codeblock}
 
 ### Modification de la version NFS par défaut
 {: #nfs_version_class}
 
-La classe de stockage personnalisée suivante est basée sur la [classe de stockage `ibmc-file-bronze`](#bronze) et vous permet de définir la version NFS que vous souhaitez mettre à disposition. Par exemple, pour mettre à disposition NFS version 3.0, remplacez `<nfs_version>` par **3.0**.
-```
-apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     name: ibmc-file-mount
-     #annotations:
-     #  storageclass.beta.kubernetes.io/is-default-class: "true"
-     labels:
-       kubernetes.io/cluster-service: "true"
-   provisioner: ibm.io/ibmc-file
-   parameters:
-     type: "Endurance"
-     iopsPerGB: "2"
-     sizeRange: "[1-12000]Gi"
-     reclaimPolicy: "Delete"
-     classVersion: "2"
-     mountOptions: nfsvers=<nfs_version>
-```
-{: codeblock}
+La classe de stockage personnalisée suivante vous permet de définir la version NFS que vous désirez mettre à disposition. Par exemple, pour mettre à disposition NFS version 3.0, remplacez `<nfs_version>` par **3.0**.
+{: shortdesc}
+
+- **Exemple pour du stockage de fichiers de type Endurance :**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ibmc-file-mount
+    labels:
+      kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+    type: "Endurance"
+    iopsPerGB: "2"
+    sizeRange: "[1-12000]Gi"
+    reclaimPolicy: "Delete"
+    classVersion: "2"
+    mountOptions: nfsvers=<nfs_version>
+  ```
+  {: codeblock}
+
+- **Exemple pour du stockage de fichiers de type Performance :**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ibmc-file-mount
+    labels:
+      kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+   type: "Performance"
+   classVersion: "2"
+   sizeIOPSRange: |-
+     "[20-39]Gi:[100-1000]"
+     "[40-79]Gi:[100-2000]"
+     "[80-99]Gi:[100-4000]"
+     "[100-499]Gi:[100-6000]"
+     "[500-999]Gi:[100-10000]"
+     "[1000-1999]Gi:[100-20000]"
+     "[2000-2999]Gi:[200-40000]"
+     "[3000-3999]Gi:[200-48000]"
+     "[4000-7999]Gi:[300-48000]"
+     "[8000-9999]Gi:[500-48000]"
+     "[10000-12000]Gi:[1000-48000]"
+   mountOptions: nfsvers=<nfs_version>
+  ```
+  {: codeblock}

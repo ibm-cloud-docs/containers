@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -26,25 +30,793 @@ lastupdated: "2018-12-05"
 Visualize informações de mudanças de versão para atualizações principais, secundárias e de correção que estão disponíveis para os clusters do Kubernetes do {{site.data.keyword.containerlong}}. As mudanças incluem atualizações para o Kubernetes e componentes do Provedor do {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
-Para obter mais informações sobre versões principais, secundárias e de correção e ações de preparação entre versões secundárias, consulte [Versões do Kubernetes](cs_versions.html). 
+Para obter mais informações sobre versões principais, secundárias e de correção e ações de preparação entre versões secundárias, consulte [Versões do Kubernetes](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
 Para obter informações sobre mudanças desde a versão anterior, veja os logs de mudanças a seguir.
+-  Versão 1.13  [ changelog ](#113_changelog).
 -  [Log de mudanças](#112_changelog) da Versão 1.12.
 -  Versão 1.11  [ changelog ](#111_changelog).
--  Version 1.10 [changelog](#110_changelog).
--  [Archive](#changelog_archive) de logs de mudanças para versões descontinuadas ou não suportadas.
+-  ** Descontinuado **: Versão 1.10  [ changelog ](#110_changelog).
+-  [ Archive ](#changelog_archive)  de changelogs para versões não suportadas.
 
-Alguns logs de mudanças são para _fix packs do nó do trabalhador_ e se aplicam somente aos nós do trabalhador. Deve-se [aplicar essas correções](cs_cli_reference.html#cs_worker_update) para assegurar a conformidade de segurança para seus nós do trabalhador. Outros logs de mudanças são para _fix packs de mestre_ e se aplicam somente ao cluster mestre. Os fix packs de mestre podem não ser aplicados automaticamente. É possível escolher [aplicá-los manualmente](cs_cli_reference.html#cs_cluster_update). Para obter mais informações sobre tipos de correção, veja [Tipos de atualização](cs_versions.html#update_types).
+Alguns logs de mudanças são para _fix packs do nó do trabalhador_ e se aplicam somente aos nós do trabalhador. Deve-se [aplicar essas correções](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) para assegurar a conformidade de segurança para seus nós do trabalhador. Esses fix packs do nó do trabalhador podem estar em uma versão mais alta do que o mestre porque alguns fix packs de construção são específicos para nós do trabalhador. Outros logs de mudanças são para _fix packs de mestre_ e se aplicam somente ao cluster mestre. Os fix packs de mestre podem não ser aplicados automaticamente. É possível optar por [aplicá-las manualmente](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update). Para obter mais informações sobre tipos de correção, veja [Tipos de atualização](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
 </br>
 
+## Versão 1.13 changelog
+{: #113_changelog}
+
+### Log de mudanças para 1.13.4_1513, liberado em 20 de março de 2019
+{: #1134_1513}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.13.4_1513.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.13.4_1510">
+<caption>Mudanças desde a versão 1.13.4_1510</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuração de DNS do cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Corrigido um erro que pode fazer com que operações do cluster mestre, como `refresh` ou `update`, falhem quando deve ser feita a redução de escala do DNS do cluster não usado.</td>
+</tr>
+<tr>
+<td>Configuração do proxy do mestre de alta disponibilidade</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizada a configuração para manipular melhor as falhas na conexão intermitente para o cluster mestre.</td>
+</tr>
+<tr>
+<td>Configuração de CoreDNS</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizada a configuração do CoreDNS para suportar [múltiplos Corefiles ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://coredns.io/2017/07/23/corefile-explained/) após atualizar a versão do cluster Kubernetes de 1.12.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.4</td>
+<td>1.2.5</td>
+<td>Veja as [notas sobre a liberação de containerd![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/containerd/containerd/releases/tag/v1.2.5). A atualização inclui a correção melhorada para [CVE-2019-5736 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Atualizados os drivers de GPU para [418.43 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.nvidia.com/object/unix.html). A atualização inclui correção para [CVE-2019-9741 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>344</td>
+<td>345</td>
+<td>Incluído suporte para  [ terminais em serviço privado ](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2019-6133 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>136</td>
+<td>166</td>
+<td>Atualizada a imagem para [CVE-2018-16890 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) e [CVE-2019-3823 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Agente de cálculo confiável</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Atualizada a imagem para [CVE-2018-10779 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) e [CVE-2019-7663 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.13.4_1510, liberado em 4 de março de 2019
+{: #1134_1510}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.13.4_1510.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.13.2_1509">
+<caption>Mudanças desde a versão 1.13.2_1509</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provedor DNS do cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Aumentado o limite de memória de pod do Kubernetes DNS e do CoreDNS de `170Mi` para `400Mi` para manipular mais serviços de cluster.</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Atualizadas as imagens para [CVE-2019-6454 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.13.2-62</td>
+<td>v1.13.4-86</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.13.4. Corrigidos problemas de conectividade periódica para balanceadores de carga da versão 1.0 que configuram `externalTrafficPolicy` como `local`. Atualizados os eventos de balanceador de carga versão 1.0 e 2.0 para usar os links da documentação mais recente do {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>342</td>
+<td>344</td>
+<td>Mudado o sistema operacional de base para a imagem de Fedora para Alpine. Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>122.</td>
+<td>136</td>
+<td>Tempo limite do cliente aumentado para  {{site.data.keyword.keymanagementservicefull_notm}}. Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.2</td>
+<td>v1.13.4</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.4). A atualização resolve [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) e [CVE-2019-1002100 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Incluído  ` ExperimentalCriticalPodAnnotation = true `  para a opção  ` -- feature-gates ` . Essa configuração ajuda a migrar os pods da anotação `scheduler.alpha.kubernetes.io/critical-pod` descontinuada para [Suporte de prioridade de pod do Kubernetes](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>Balanceador de carga e monitor de balanceador de carga para o {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Cliente e servidor OpenVPN</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Atualizada a imagem para [CVE-2019-1559 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Agente de cálculo confiável</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Atualizada a imagem para [CVE-2019-6454 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.13.2_1509, liberado em 27 de fevereiro de 2019
+{: #1132_1509}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do trabalhador do nó 1.13.2_1509.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.13.2_1508">
+<caption>Mudanças desde a versão 1.13.2_1508</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2018-19407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.13.2_1508, liberado em 15 de fevereiro de 2019
+{: #1132_1508}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do trabalhador do nó 1.13.2_1508.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.13.2_1507">
+<caption>Mudanças desde a versão 1.13.2_1507</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuração do proxy do mestre de alta disponibilidade</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mudado o valor de configuração do pod `spec.priorityClassName` para `system-node-critical` e configurado o valor `spec.priority` para `2000001000`.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.2</td>
+<td>1.2.4</td>
+<td>Veja as [notas sobre a liberação de containerd![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/containerd/containerd/releases/tag/v1.2.4). A atualização resolve [CVE-2019-5736 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes  ` kubelet `</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Ativada a porta do recurso `ExperimentalCriticalPodAnnotation` para evitar despejo crítico de pod estático. Configure a opção `event-qps` como `0` para evitar a criação de eventos de limite de taxa.</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.13.2_1507, liberado em 5 de fevereiro de 2019
+{: #1132_1507}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.13.2_1507.
+{: shortdesc}
+
+<table summary="Mudanças que foram feitas desde a versão 1.12.4_1535">
+<caption>Mudanças desde a versão 1.12.4_1535</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.3.1</td>
+<td>v3.4.0</td>
+<td>Consulte as [notas sobre a liberação do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.4/releases/#v340).</td>
+</tr>
+<tr>
+<td>Provedor DNS do cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Agora, CoreDNS é o provedor DNS de cluster padrão para novos clusters. Se você atualizar um cluster existente para 1.13 que usa KubeDNS como o provedor DNS do cluster, o KubeDNS continuará a ser o provedor DNS do cluster. No entanto, é possível escolher [usar o CoreDNS no lugar](/docs/containers?topic=containers-cluster_dns#dns_set).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.2.2</td>
+<td>Veja as [notas sobre a liberação de containerd![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/containerd/containerd/releases/tag/v1.2.2).</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.2</td>
+<td>1.2.6</td>
+<td>Consulte as [notas sobre a liberação do CoreDNS ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/coredns/coredns/releases/tag/v1.2.6). Além disso, a configuração do CoreDNS é atualizada para [suportar diversos Corefiles ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://coredns.io/2017/07/23/corefile-explained/).</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>Consulte as [notas sobre a liberação do etcd ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/coreos/etcd/releases/v3.3.11). Além disso, os conjuntos de cifras suportados para etcd são agora restritos a um subconjunto com criptografia de alta segurança (128 bits ou mais).</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Atualizadas as imagens para [CVE-2019-3462 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) e [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.12.4-118</td>
+<td>v1.13.2-62</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.13.2. Além disso, a versão `calicoctl` é atualizada para 3.4.0. Corrigidas atualizações de configuração desnecessárias para balanceadores de carga da versão 2.0 em mudanças de status do nó do trabalhador.</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>338</td>
+<td>342</td>
+<td>O plug-in de armazenamento de arquivo é atualizado conforme a seguir:
+<ul><li>Suporta o fornecimento dinâmico com [planejamento com reconhecimento de topologia do volume](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<li>Ignora a solicitação de volume persistente (PVC) para excluir erros se o armazenamento já tiver sido excluído.</li>
+<li>Inclui uma anotação de mensagem de erro em PVCs com falha.</li>
+<li>Otimiza as configurações de eleição de líder do controlador do fornecedor de armazenamento e de período de ressincronização e aumenta o tempo limite de fornecimento de 30 minutos para 1 hora.</li>
+<li>Verifica as permissões de usuário antes de iniciar o fornecimento.</li>
+<li>Inclui uma tolerância `CriticalAddonsOnly` com as implementações `ibm-file-plugin` e `ibm-storage-watcher` no namespace `kube-system`.</li></ul></td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>111</td>
+<td>122.</td>
+<td>Incluída a lógica de nova tentativa para evitar falhas temporárias quando os segredos do Kubernetes são gerenciados pelo {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.4</td>
+<td>v1.13.2</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.2).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>A configuração de política de auditoria do servidor de API do Kubernetes é atualizada para incluir o registro de metadados para solicitações `cluster-admin` e o registro do corpo da solicitação de solicitações `create`, `update` e `patch` da carga de trabalho.</td>
+</tr>
+<tr>
+<td>Autoscaler de DNS do Kubernetes</td>
+<td>1.2.0</td>
+<td>1.3.0</td>
+<td>Veja as [notas sobre a liberação do escalador automático de DNS do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.3.0).</td>
+</tr>
+<tr>
+<td>Cliente OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Atualizada a imagem para [CVE-2018-0734 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) e [CVE-2018-5407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Incluída a tolerância `CriticalAddonsOnly` para a implementação `vpn` no namespace `kube-system`. Além disso, a configuração do pod é agora obtida de um segredo em vez de um configmap.</td>
+</tr>
+<tr>
+<td>Servidor OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Atualizada a imagem para [CVE-2018-0734 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) e [CVE-2018-5407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Correção de segurança para [CVE-2018-16864 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
 ## Log de mudanças da Versão 1.12
 {: #112_changelog}
 
-Revise o log de mudanças da versão 1.12. 
+Revise o log de mudanças da versão 1.12.
 {: shortdesc}
+
+### Log de mudanças para 1.12.6_1544, liberado em 20 de março de 2019
+{: #1126_1544}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.6_1544.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.12.6_1541">
+<caption>Mudanças desde a versão 1.12.6_1541</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuração de DNS do cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Corrigido um erro que pode fazer com que operações do cluster mestre, como `refresh` ou `update`, falhem quando deve ser feita a redução de escala do DNS do cluster não usado.</td>
+</tr>
+<tr>
+<td>Configuração do proxy do mestre de alta disponibilidade</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizada a configuração para manipular melhor as falhas na conexão intermitente para o cluster mestre.</td>
+</tr>
+<tr>
+<td>Configuração de CoreDNS</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizada a configuração do CoreDNS para suportar [múltiplos Corefiles ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://coredns.io/2017/07/23/corefile-explained/).</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Atualizados os drivers de GPU para [418.43 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.nvidia.com/object/unix.html). A atualização inclui correção para [CVE-2019-9741 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>344</td>
+<td>345</td>
+<td>Incluído suporte para  [ terminais em serviço privado ](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2019-6133 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>136</td>
+<td>166</td>
+<td>Atualizada a imagem para [CVE-2018-16890 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) e [CVE-2019-3823 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Agente de cálculo confiável</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Atualizada a imagem para [CVE-2018-10779 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) e [CVE-2019-7663 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.12.6_1541, liberado em 4 de março de 2019
+{: #1126_1541}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.6_1541.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.12.5_1540">
+<caption>Mudanças desde a versão 1.12.5_1540</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provedor DNS do cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Aumentado o limite de memória de pod do Kubernetes DNS e do CoreDNS de `170Mi` para `400Mi` para manipular mais serviços de cluster.</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Atualizadas as imagens para [CVE-2019-6454 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.12.5-137</td>
+<td>v1.12.6-157</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.12.6. Corrigidos problemas de conectividade periódica para balanceadores de carga da versão 1.0 que configuram `externalTrafficPolicy` como `local`. Atualizados os eventos de balanceador de carga versão 1.0 e 2.0 para usar os links da documentação mais recente do {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>342</td>
+<td>344</td>
+<td>Mudado o sistema operacional de base para a imagem de Fedora para Alpine. Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>122.</td>
+<td>136</td>
+<td>Tempo limite do cliente aumentado para  {{site.data.keyword.keymanagementservicefull_notm}}. Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.5</td>
+<td>v1.12.6</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.6). A atualização resolve [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) e [CVE-2019-1002100 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Incluído  ` ExperimentalCriticalPodAnnotation = true `  para a opção  ` -- feature-gates ` . Essa configuração ajuda a migrar os pods da anotação `scheduler.alpha.kubernetes.io/critical-pod` descontinuada para [Suporte de prioridade de pod do Kubernetes](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>Balanceador de carga e monitor de balanceador de carga para o {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Cliente e servidor OpenVPN</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Atualizada a imagem para [CVE-2019-1559 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Agente de cálculo confiável</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Atualizada a imagem para [CVE-2019-6454 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.12.5_1540, liberado em 27 de fevereiro de 2019
+{: #1125_1540}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.12.5_1540.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.12.5_1540">
+<caption>Mudanças desde a versão 1.12.5_1538</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2018-19407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.12.5_1538, liberado em 15 de fevereiro de 2019
+{: #1125_1538}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.12.5_1538.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.12.5_1537">
+<caption>Mudanças desde a versão 1.12.5_1537</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuração do proxy do mestre de alta disponibilidade</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mudado o valor de configuração do pod `spec.priorityClassName` para `system-node-critical` e configurado o valor `spec.priority` para `2000001000`.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.1.6</td>
+<td>Veja as [notas sobre a liberação de containerd![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/containerd/containerd/releases/tag/v1.1.6). A atualização resolve [CVE-2019-5736 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes  ` kubelet `</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Ativada a porta do recurso `ExperimentalCriticalPodAnnotation` para evitar despejo crítico de pod estático.</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.12.5_1537, liberado em 5 de fevereiro de 2019
+{: #1125_1537}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.5_1537.
+{: shortdesc}
+
+<table summary="Mudanças que foram feitas desde a versão 1.12.4_1535">
+<caption>Mudanças desde a versão 1.12.4_1535</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>Consulte as [notas sobre a liberação do etcd ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/coreos/etcd/releases/v3.3.11). Além disso, os conjuntos de cifras suportados para etcd são agora restritos a um subconjunto com criptografia de alta segurança (128 bits ou mais).</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Atualizadas as imagens para [CVE-2019-3462 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) e [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.12.4-118</td>
+<td>v1.12.5-137</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.12.5. Além disso, a versão `calicoctl` é atualizada para 3.3.1. Corrigidas atualizações de configuração desnecessárias para balanceadores de carga da versão 2.0 em mudanças de status do nó do trabalhador.</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>338</td>
+<td>342</td>
+<td>O plug-in de armazenamento de arquivo é atualizado conforme a seguir:
+<ul><li>Suporta o fornecimento dinâmico com [planejamento com reconhecimento de topologia do volume](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<li>Ignora a solicitação de volume persistente (PVC) para excluir erros se o armazenamento já tiver sido excluído.</li>
+<li>Inclui uma anotação de mensagem de erro em PVCs com falha.</li>
+<li>Otimiza as configurações de eleição de líder do controlador do fornecedor de armazenamento e de período de ressincronização e aumenta o tempo limite de fornecimento de 30 minutos para 1 hora.</li>
+<li>Verifica as permissões de usuário antes de iniciar o fornecimento.</li></ul></td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>111</td>
+<td>122.</td>
+<td>Incluída a lógica de nova tentativa para evitar falhas temporárias quando os segredos do Kubernetes são gerenciados pelo {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.4</td>
+<td>v1.12.5</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.5).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>A configuração de política de auditoria do servidor de API do Kubernetes é atualizada para incluir o registro de metadados para solicitações `cluster-admin` e o registro do corpo da solicitação de solicitações `create`, `update` e `patch` da carga de trabalho.</td>
+</tr>
+<tr>
+<td>Cliente OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Atualizada a imagem para [CVE-2018-0734 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) e [CVE-2018-5407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Além disso, a configuração do pod é agora obtida de um segredo em vez de um configmap.</td>
+</tr>
+<tr>
+<td>Servidor OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Atualizada a imagem para [CVE-2018-0734 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) e [CVE-2018-5407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Correção de segurança para [CVE-2018-16864 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.12.4_1535, liberado em 28 de janeiro de 2019
+{: #1124_1535}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.12.4_1535.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.12.5_1537">
+<caption>Mudanças desde a versão 1.12.4_1534</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualiza para os pacotes Ubuntu instalados, incluindo `apt` para [CVE-2019-3462 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) e [USN-3863-1 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://usn.ubuntu.com/3863-1).</td>
+</tr>
+</tbody>
+</table>
+
+
+### Log de mudanças para 1.12.4_1534, liberado em 21 de janeiro de 2019
+{: #1124_1534}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.3_1534.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.12.3_1533">
+<caption>Mudanças desde a versão 1.12.3_1533</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.12.3-91</td>
+<td>v1.12.4-118</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.12.4.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.3</td>
+<td>v1.12.4</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.4).</td>
+</tr>
+<tr>
+<td>Resgador de complemento do Kubernetes</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>Consulte as [Notas sobre a liberação do redimensionador de complemento do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+</tr>
+<tr>
+<td>Painel do Kubernetes</td>
+<td>v1.8.3</td>
+<td>v1.10.1</td>
+<td>Consulte as [Notas sobre a liberação do painel do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). A atualização resolve [CVE-2018-18264 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).</td>
+</tr>
+<tr>
+<td>Instalador do GPU</td>
+<td>390.12</td>
+<td>410,79</td>
+<td>Atualizados os drivers de GPU instalados para 410.79.</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.12.3_1533, liberado em 7 de janeiro de 2019
+{: #1123_1533}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.12.3_1533.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.12.3_1533">
+<caption>Mudanças desde a versão 1.12.3_1532</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-139</td>
+<td>4.4.0-141</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2017-5753, CVE-2018-18690 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog para o nó do trabalhador fix pack 1.12.3_1532, liberado em 17 de dezembro de 2018
+{: #1123_1532}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.12.2_1532.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.12.3_1531">
+<caption>Mudanças desde a versão 1.12.3_1531</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizações para pacotes do Ubuntu instalados.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Log de mudanças para 1.12.3_1531, liberado em 5 de dezembro de 2018
 {: #1123_1531}
@@ -99,7 +871,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>Utilização do recurso do nó do trabalhador</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluídos cgroups dedicados para o kubelet e o containerd para evitar que esses componentes sejam executados sem recursos. Para obter mais informações, consulte [Reservas de recursos do nó do trabalhador](cs_clusters_planning.html#resource_limit_node).</td>
+<td>Incluídos cgroups dedicados para o kubelet e o containerd para evitar que esses componentes sejam executados sem recursos. Para obter mais informações, consulte [Reservas de recursos do nó do trabalhador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -153,7 +925,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.2
 ### Log de mudanças para o fix pack do nó do trabalhador 1.12.2_1528, liberado em 19 de novembro de 2018
 {: #1122_1528}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.12.2_1528. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.12.2_1528.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.12.2_1527">
@@ -180,7 +952,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.12.2_1527, liberado em 7 de novembro de 2018
 {: #1122_1527}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.2_1527. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.2_1527.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1533">
@@ -204,13 +976,13 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.2
 <td>Provedor DNS do cluster</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>O DNS do Kubernetes (KubeDNS) permanece o provedor DNS padrão do cluster. No entanto, você agora tem a opção de [mudar o provedor DNS do cluster para CoreDNS](cs_cluster_update.html#dns).</td>
+<td>O DNS do Kubernetes (KubeDNS) permanece o provedor DNS padrão do cluster. No entanto, você agora tem a opção de [mudar o provedor DNS do cluster para CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set).</td>
 </tr>
 <tr>
 <td>Provedor de métricas do cluster</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>O Kubernetes Metrics Server substitui o Kubernetes Heapster (descontinuado desde o Kubernetes versão 1.8) como o provedor de métricas do cluster. Para itens de ação, consulte [a ação de preparação `metrics-server`](cs_versions.html#metrics-server).</td>
+<td>O Kubernetes Metrics Server substitui o Kubernetes Heapster (descontinuado desde o Kubernetes versão 1.8) como o provedor de métricas do cluster. Para itens de ação, consulte [a ação de preparação `metrics-server`](/docs/containers?topic=containers-cs_versions#metrics-server).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -234,14 +1006,14 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.2
 <td>Configuração do Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluídas três novas políticas de segurança do pod da IBM e suas funções de cluster associadas. Para obter mais informações, consulte [Entendendo os recursos padrão para o gerenciamento de cluster da IBM](cs_psp.html#ibm_psp).</td>
+<td>Incluídas três novas políticas de segurança do pod da IBM e suas funções de cluster associadas. Para obter mais informações, consulte [Entendendo os recursos padrão para o gerenciamento de cluster da IBM](/docs/containers?topic=containers-psp#ibm_psp).</td>
 </tr>
 <tr>
 <td>Painel do Kubernetes</td>
 <td>v1.8.3</td>
 <td>v1.10.0</td>
 <td>Veja as [Notas sobre a liberação do Painel do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0).<br><br>
-Se você acessar o painel por meio de `kubectl proxy`, o botão **SKIP** na página de login será removido. Em vez disso, use um **Token** para efetuar login. Além disso, agora é possível aumentar a capacidade do número de pods do Painel do Kubernetes executando `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.</td>
+Se você acessar o painel por meio de `kubectl proxy`, o botão **SKIP** na página de login será removido. Em vez disso, [use um **Token** para efetuar login](/docs/containers?topic=containers-app#cli_dashboard). Além disso, agora é possível aumentar a capacidade do número de pods do Painel do Kubernetes executando `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.</td>
 </tr>
 <tr>
 <td>DNS do Kubernetes</td>
@@ -262,7 +1034,7 @@ Se você acessar o painel por meio de `kubectl proxy`, o botão **SKIP** na pág
 <td>Atualizado para suportar a liberação do Kubernetes 1.12. As mudanças adicionais incluem o seguinte:
 <ul><li>Os pods do balanceador de carga (`ibm-cloud-provider-ip-*` no namespace `ibm-system`) agora configuram as solicitações de recurso de CPU e de memória.</li>
 <li>A anotação `service.kubernetes.io/ibm-load-balancecer-cloud-provider-vlan` é incluída para especificar a VLAN na qual o serviço de balanceador de carga é implementado. Para ver VLANs disponíveis em seu cluster, execute `ibmcloud ks vlans --zone <zone>`.</li>
-<li>Um novo [balanceador de carga 2.0](cs_loadbalancer.html#planning_ipvs) está disponível como um beta.</li></ul></td>
+<li>Um novo [balanceador de carga 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) está disponível como um beta.</li></ul></td>
 </tr>
 <tr>
 <td>Configuração do cliente OpenVPN</td>
@@ -277,6 +1049,419 @@ Se você acessar o painel por meio de `kubectl proxy`, o botão **SKIP** na pág
 {: #111_changelog}
 
 Revise o log de mudanças da versão 1.11.
+
+### Log de mudanças para 1.11.8_1550, liberado em 20 de março de 2019
+{: #1118_1550}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.8_1550.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.11.8_1547">
+<caption>Mudanças desde a versão 1.11.8_1547</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuração do proxy do mestre de alta disponibilidade</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizada a configuração para manipular melhor as falhas na conexão intermitente para o cluster mestre.</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Atualizados os drivers de GPU para [418.43 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.nvidia.com/object/unix.html). A atualização inclui correção para [CVE-2019-9741 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>344</td>
+<td>345</td>
+<td>Incluído suporte para  [ terminais em serviço privado ](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2019-6133 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>136</td>
+<td>166</td>
+<td>Atualizada a imagem para [CVE-2018-16890 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) e [CVE-2019-3823 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Agente de cálculo confiável</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Atualizada a imagem para [CVE-2018-10779 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) e [CVE-2019-7663 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.11.8_1547, liberado em 4 de março de 2019
+{: #1118_1547}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.8_1547.
+{: shortdesc}
+
+<table summary="Mudanças que foram feitas desde a versão 1.11.7_1546">
+<caption>Mudanças desde a versão 1.11.7_1546</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Atualizadas as imagens para [CVE-2019-6454 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.11.7-198</td>
+<td>v1.11.8-219</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.11.8. Corrigidos problemas de conectividade periódica para balanceadores de carga que configuram `externalTrafficPolicy` como `local`. Atualizados os eventos de balanceador de carga para usar os links da documentação mais recente do {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>342</td>
+<td>344</td>
+<td>Mudado o sistema operacional de base para a imagem de Fedora para Alpine. Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>122.</td>
+<td>136</td>
+<td>Tempo limite do cliente aumentado para  {{site.data.keyword.keymanagementservicefull_notm}}. Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.7</td>
+<td>v1.11.8</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.8). A atualização resolve [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) e [CVE-2019-1002100 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Incluído  ` ExperimentalCriticalPodAnnotation = true `  para a opção  ` -- feature-gates ` . Essa configuração ajuda a migrar os pods da anotação `scheduler.alpha.kubernetes.io/critical-pod` descontinuada para [Suporte de prioridade de pod do Kubernetes](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>DNS do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Aumentado o limite de memória de pod do Kubernetes DNS de `170Mi` para `400Mi` para manipular mais serviços de cluster.</td>
+</tr>
+<tr>
+<td>Balanceador de carga e monitor de balanceador de carga para o {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Cliente e servidor OpenVPN</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Atualizada a imagem para [CVE-2019-1559 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Agente de cálculo confiável</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Atualizada a imagem para [CVE-2019-6454 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.11.7_1546, liberado em 27 de fevereiro de 2019
+{: #1117_1546}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do trabalhador do nó 1.11.7_1546.
+{: shortdesc}
+
+<table summary="Mudanças que foram feitas desde a versão 1.11.7_1546">
+<caption>Mudanças desde a versão 1.11.7_1546</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2018-19407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.11.7_1544, liberado em 15 de fevereiro de 2019
+{: #1117_1544}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do trabalhador do trabalhador 1.11.7_1544.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.11.7_1543">
+<caption>Mudanças desde a versão 1.11.7_1543</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuração do proxy do mestre de alta disponibilidade</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mudado o valor de configuração do pod `spec.priorityClassName` para `system-node-critical` e configurado o valor `spec.priority` para `2000001000`.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.1.6</td>
+<td>Veja as [notas sobre a liberação de containerd![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/containerd/containerd/releases/tag/v1.1.6). A atualização resolve [CVE-2019-5736 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes  ` kubelet `</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Ativada a porta do recurso `ExperimentalCriticalPodAnnotation` para evitar despejo crítico de pod estático.</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.11.7_1543, liberado em 5 de fevereiro de 2019
+{: #1117_1543}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.7_1543.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.11.6_1541">
+<caption>Mudanças desde a versão 1.11.6_1541</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>Consulte as [notas sobre a liberação do etcd ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/coreos/etcd/releases/v3.3.11). Além disso, os conjuntos de cifras suportados para etcd são agora restritos a um subconjunto com criptografia de alta segurança (128 bits ou mais).</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Atualizadas as imagens para [CVE-2019-3462 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) e [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.11.6-180</td>
+<td>v1.11.7-198</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.11.7. Além disso, a versão `calicoctl` é atualizada para 3.3.1. Corrigidas atualizações de configuração desnecessárias para balanceadores de carga da versão 2.0 em mudanças de status do nó do trabalhador.</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>338</td>
+<td>342</td>
+<td>O plug-in de armazenamento de arquivo é atualizado conforme a seguir:
+<ul><li>Suporta o fornecimento dinâmico com [planejamento com reconhecimento de topologia do volume](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<li>Ignora a solicitação de volume persistente (PVC) para excluir erros se o armazenamento já tiver sido excluído.</li>
+<li>Inclui uma anotação de mensagem de erro em PVCs com falha.</li>
+<li>Otimiza as configurações de eleição de líder do controlador do fornecedor de armazenamento e de período de ressincronização e aumenta o tempo limite de fornecimento de 30 minutos para 1 hora.</li>
+<li>Verifica as permissões de usuário antes de iniciar o fornecimento.</li></ul></td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>111</td>
+<td>122.</td>
+<td>Incluída a lógica de nova tentativa para evitar falhas temporárias quando os segredos do Kubernetes são gerenciados pelo {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.6</td>
+<td>v1.11.7</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>A configuração de política de auditoria do servidor de API do Kubernetes é atualizada para incluir o registro de metadados para solicitações `cluster-admin` e o registro do corpo da solicitação de solicitações `create`, `update` e `patch` da carga de trabalho.</td>
+</tr>
+<tr>
+<td>Cliente OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Atualizada a imagem para [CVE-2018-0734 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) e [CVE-2018-5407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Além disso, a configuração do pod é agora obtida de um segredo em vez de um configmap.</td>
+</tr>
+<tr>
+<td>Servidor OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Atualizada a imagem para [CVE-2018-0734 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) e [CVE-2018-5407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Correção de segurança para [CVE-2018-16864 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.11.6_1541, liberado em 28 de janeiro de 2019
+{: #1116_1541}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.6_1541.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.11.6_1540">
+<caption>Mudanças desde a versão 1.11.6_1540</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizações para os pacotes Ubuntu instalados, incluindo `apt` para [CVE-2019-3462 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) / [USN-3863-1 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://usn.ubuntu.com/3863-1).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog para 1.11.6_1540, liberado 21 de janeiro de 2019
+{: #1116_1540}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.6_1540.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.11.5_1539">
+<caption>Mudanças desde a versão 1.11.5_1539</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.11.5-152</td>
+<td>v1.11.6-180</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.11.6.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.5</td>
+<td>v1.11.6</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6).</td>
+</tr>
+<tr>
+<td>Resgador de complemento do Kubernetes</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>Consulte as [Notas sobre a liberação do redimensionador de complemento do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+</tr>
+<tr>
+<td>Painel do Kubernetes</td>
+<td>v1.8.3</td>
+<td>v1.10.1</td>
+<td>Consulte as [Notas sobre a liberação do painel do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). A atualização resolve [CVE-2018-18264 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>Se você acessar o painel por meio de `kubectl proxy`, o botão **SKIP** na página de login será removido. Em vez disso, [use um **Token** para efetuar login](/docs/containers?topic=containers-app#cli_dashboard).</td>
+</tr>
+<tr>
+<td>Instalador do GPU</td>
+<td>390.12</td>
+<td>410,79</td>
+<td>Atualizados os drivers de GPU instalados para 410.79.</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.11.5_1539, liberado em 7 de janeiro de 2019
+{: #1115_1539}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.5_1539.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.11.5_1538">
+<caption>Mudanças desde a versão 1.11.5_1538</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-139</td>
+<td>4.4.0-141</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2017-5753, CVE-2018-18690 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog para o nó do trabalhador fix pack 1.11.5_1538, liberado em 17 de dezembro de 2018
+{: #1115_1538}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.5_1538.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.11.5_1537">
+<caption>Mudanças desde a versão 1.11.5_1537</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizações para pacotes do Ubuntu instalados.</td>
+</tr>
+</tbody>
+</table>
 
 ### Log de mudanças para 1.11.5_1537, liberado em 5 de dezembro de 2018
 {: #1115_1537}
@@ -331,7 +1516,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>Utilização do recurso do nó do trabalhador</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluídos cgroups dedicados para o kubelet e o containerd para evitar que esses componentes sejam executados sem recursos. Para obter mais informações, consulte [Reservas de recursos do nó do trabalhador](cs_clusters_planning.html#resource_limit_node).</td>
+<td>Incluídos cgroups dedicados para o kubelet e o containerd para evitar que esses componentes sejam executados sem recursos. Para obter mais informações, consulte [Reservas de recursos do nó do trabalhador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -389,7 +1574,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.4
 ### Log de mudanças para o fix pack do nó do trabalhador 1.11.3_1534, liberado em 19 de novembro de 2018
 {: #1113_1534}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1534. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1534.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1533">
@@ -416,7 +1601,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.11.3_1533, liberado em 7 de novembro de 2018
 {: #1113_1533}
 
-A tabela a seguir mostra as mudanças incluídas na correção 1.11.3_1533. 
+A tabela a seguir mostra as mudanças incluídas na correção 1.11.3_1533.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1531">
@@ -434,7 +1619,7 @@ A tabela a seguir mostra as mudanças incluídas na correção 1.11.3_1533.
 <td>Atualização de alta disponibilidade do cluster mestre</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Foram corrigidos os mestres altamente disponíveis (HA) para clusters que usam webhooks de admissão, como `initializerconfigurations`, `mutatingwebhookconfigurations` ou `validatingwebhookconfigurations`. É possível usar esses webhooks com gráficos Helm, como para [Cumprimento de segurança de imagem de contêiner](/docs/services/Registry/registry_security_enforce.html#security_enforce).</td>
+<td>Foram corrigidos os mestres altamente disponíveis (HA) para clusters que usam webhooks de admissão, como `initializerconfigurations`, `mutatingwebhookconfigurations` ou `validatingwebhookconfigurations`. É possível usar esses webhooks com gráficos Helm, como para [Cumprimento de segurança de imagem de contêiner](/docs/services/Registry?topic=registry-security_enforce#security_enforce).</td>
 </tr>
 <tr>
 <td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
@@ -446,7 +1631,7 @@ A tabela a seguir mostra as mudanças incluídas na correção 1.11.3_1533.
 <td>Kernel ativado por TPM</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Os nós do trabalhador do bare metal com chips TPM para Computação confiável usam o kernel Ubuntu padrão até que a confiança seja ativada. Se você [ativar a confiança](cs_cli_reference.html#cs_cluster_feature_enable) em um cluster existente, será necessário [recarregar](cs_cli_reference.html#cs_worker_reload) quaisquer nós do trabalhador do bare metal existentes com chips TPM. Para verificar se um nó do trabalhador bare metal tem um chip TPM, revise o campo **Confiável** depois de executar o [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+<td>Os nós do trabalhador do bare metal com chips TPM para Computação confiável usam o kernel Ubuntu padrão até que a confiança seja ativada. Se você [ativar a confiança](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) em um cluster existente, será necessário [recarregar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) quaisquer nós do trabalhador do bare metal existentes com chips TPM. Para verificar se um nó do trabalhador bare metal tem um chip TPM, revise o campo **Confiável** depois de executar o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types -- zone`.</td>
 </tr>
 </tbody>
 </table>
@@ -454,7 +1639,7 @@ A tabela a seguir mostra as mudanças incluídas na correção 1.11.3_1533.
 ### Log de mudanças para fix pack do mestre 1.11.3_1531, liberado em 1 de novembro de 2018
 {: #1113_1531_ha-master}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.11.3_1531. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.11.3_1531.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1527">
@@ -472,7 +1657,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestr
 <td>Cluster mestre</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Atualizada a configuração do cluster mestre para aumentar a alta disponibilidade (HA). Os clusters agora têm três réplicas principais do Kubernetes configuradas com uma configuração altamente disponível (HA), com cada mestre implementado em hosts físicos separados. Além disso, se o cluster estiver em uma zona com capacidade para múltiplas zonas, os mestres serão difundidos pelas zonas.<br>Para ações que devem ser executadas, consulte [Atualizando para os clusters mestres altamente disponíveis](cs_versions.html#ha-masters). Estas ações de preparação se aplicam:<ul>
+<td>Atualizada a configuração do cluster mestre para aumentar a alta disponibilidade (HA). Os clusters agora têm três réplicas principais do Kubernetes configuradas com uma configuração altamente disponível (HA), com cada mestre implementado em hosts físicos separados. Além disso, se o cluster estiver em uma zona com capacidade para múltiplas zonas, os mestres serão difundidos pelas zonas.<br>Para ações que devem ser executadas, consulte [Atualizando para os clusters mestres altamente disponíveis](/docs/containers?topic=containers-cs_versions#ha-masters). Estas ações de preparação se aplicam:<ul>
 <li>Se você tiver um firewall ou políticas de rede customizadas do Calico.</li>
 <li>Se você estiver usando as portas do host `2040` ou `2041` nos nós do trabalhador.</li>
 <li>Se você usou o endereço IP do cluster mestre para acesso no cluster ao mestre.</li>
@@ -495,7 +1680,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestr
 <td>Criptografando dados em etcd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Anteriormente, os dados etcd eram armazenados em uma instância de armazenamento de arquivo NFS do mestre que está criptografada em repouso. Agora, os dados etcd são armazenados no disco local do mestre e submetidos a backup no {{site.data.keyword.cos_full_notm}}. Os dados são criptografados durante o trânsito para o {{site.data.keyword.cos_full_notm}} e em repouso. No entanto, os dados etcd no disco local do mestre não são criptografados. Se você desejar que os dados etcd locais do mestre sejam criptografados, [ative o {{site.data.keyword.keymanagementservicelong_notm}} em seu cluster](cs_encrypt.html#keyprotect).</td>
+<td>Anteriormente, os dados etcd eram armazenados em uma instância de armazenamento de arquivo NFS do mestre que está criptografada em repouso. Agora, os dados etcd são armazenados no disco local do mestre e submetidos a backup no {{site.data.keyword.cos_full_notm}}. Os dados são criptografados durante o trânsito para o {{site.data.keyword.cos_full_notm}} e em repouso. No entanto, os dados etcd no disco local do mestre não são criptografados. Se você desejar que os dados etcd locais do mestre sejam criptografados, [ative o {{site.data.keyword.keymanagementservicelong_notm}} em seu cluster](/docs/containers?topic=containers-encryption#keyprotect).</td>
 </tr>
 </tbody>
 </table>
@@ -503,7 +1688,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestr
 ### Log de mudanças para o fix pack do nó do trabalhador 1.11.3_1531, liberado em 26 de outubro de 2018
 {: #1113_1531}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1531. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1531.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1525">
@@ -529,7 +1714,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack de mestre 1.11.3_1527, liberado em 15 de outubro de 2018
 {: #1113_1527}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.11.3_1527. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.11.3_1527.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1524">
@@ -561,7 +1746,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestr
 ### Log de mudanças para o fix pack 1.11.3_1525 do nó do trabalhador, liberado em 10 de outubro de 2018
 {: #1113_1525}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1525. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1525.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1524">
@@ -594,7 +1779,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.11.3_1524, liberado em 2 de outubro de 2018
 {: #1113_1524}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.3_1524. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.3_1524.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1521">
@@ -633,7 +1818,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 ### Log de mudanças para 1.11.3_1521, liberado em 20 de setembro de 2018
 {: #1113_1521}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.3_1521. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.3_1521.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.2_1516">
@@ -664,7 +1849,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 <td>Provedor de serviço de gerenciamento de chaves</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluída a capacidade de usar o provedor de serviço de gerenciamento de chave (KMS) do Kubernetes no cluster, para suportar o {{site.data.keyword.keymanagementservicefull}}. Quando você [ativar o {{site.data.keyword.keymanagementserviceshort}} no cluster](cs_encrypt.html#keyprotect), todos os segredos do Kubernetes serão criptografados.</td>
+<td>Incluída a capacidade de usar o provedor de serviço de gerenciamento de chave (KMS) do Kubernetes no cluster, para suportar o {{site.data.keyword.keymanagementservicefull}}. Quando você [ativa o {{site.data.keyword.keymanagementserviceshort}} em seu cluster](/docs/containers?topic=containers-encryption#keyprotect), todos os seus segredos do Kubernetes são criptografados.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -682,13 +1867,13 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 <td>Girar log</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Alternado para usar os cronômetros `systemd` em vez de `cronjobs` para evitar que `logrotate` falhe nos nós do trabalhador que não sejam recarregados ou atualizados em 90 dias. **Nota**: em todas as versões anteriores dessa liberação secundária, o disco primário é preenchido após a falha da tarefa cron porque os logs não são girados. A tarefa cron falha depois que o nó do trabalhador fica ativo por 90 dias sem ser atualizado ou recarregado. Se os logs preencherem o disco primário inteiro, o nó do trabalhador entrará em um estado de falha. O nó do trabalhador pode ser corrigido usando o [comando](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update`.</td>
+<td>Alternado para usar os cronômetros `systemd` em vez de `cronjobs` para evitar que `logrotate` falhe nos nós do trabalhador que não sejam recarregados ou atualizados em 90 dias. **Nota**: em todas as versões anteriores dessa liberação secundária, o disco primário é preenchido após a falha da tarefa cron porque os logs não são girados. A tarefa cron falha depois que o nó do trabalhador fica ativo por 90 dias sem ser atualizado ou recarregado. Se os logs preencherem o disco primário inteiro, o nó do trabalhador entrará em um estado de falha. O nó do trabalhador pode ser corrigido usando o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Expiração de senha raiz</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>As senhas raiz dos nós do trabalhador expiram depois de 90 dias por motivos de conformidade. Se o seu conjunto de ferramentas de automação precisar efetuar login no nó do trabalhador como raiz ou depender de tarefas cron executadas como raiz, será possível desativar a expiração de senha efetuando login no nó do trabalhador e executando `chage -M -1 root`. **Nota**: se você tiver requisitos de conformidade de segurança que evitem a execução como raiz ou a remoção da expiração de senha, não desative a expiração. Em vez disso, é possível [atualizar](cs_cli_reference.html#cs_worker_update) ou [recarregar](cs_cli_reference.html#cs_worker_reload) seus nós do trabalhador pelo menos a cada 90 dias.</td>
+<td>As senhas raiz dos nós do trabalhador expiram depois de 90 dias por motivos de conformidade. Se o seu conjunto de ferramentas de automação precisar efetuar login no nó do trabalhador como raiz ou depender de tarefas cron executadas como raiz, será possível desativar a expiração de senha efetuando login no nó do trabalhador e executando `chage -M -1 root`. **Nota**: se você tiver requisitos de conformidade de segurança que evitem a execução como raiz ou a remoção da expiração de senha, não desative a expiração. Em vez disso, é possível [atualizar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) ou [recarregar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) seus nós do trabalhador pelo menos a cada 90 dias.</td>
 </tr>
 <tr>
 <td>Componentes de tempo de execução do nó do trabalhador (`kubelet`, `kube-proxy`, `containerd`)</td>
@@ -697,7 +1882,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 <td>Dependências de componentes de tempo de execução removidas no disco primário. Esse aprimoramento evita que os nós do trabalhador falhem quando o disco primário é preenchido.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Limpar periodicamente unidades de montagem transientes para evitar que se tornem sem limites. Essa ação trata do [Problema 57345 do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -708,7 +1893,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 ### Log de mudanças para 1.11.2_1516, liberado em 4 de setembro de 2018
 {: #1112_1516}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2_1516. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2_1516.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.2_1514">
@@ -741,10 +1926,10 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2
 <td>A configuração do provedor em nuvem mudou para manipular melhor as atualizações para serviços do balanceador de carga com `externalTrafficPolicy` configurado como `local`.</td>
 </tr>
 <tr>
-<td>Configuração do plug-in de armazenamento de arquivo IBM</td>
+<td>{{site.data.keyword.Bluemix_notm}}  Configuração de plug-in de armazenamento de arquivo</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Removida a versão do NFS padrão das opções de montagem nas classes de armazenamento de arquivo fornecidas pela IBM. O sistema operacional do host agora negocia a versão do NFS com o servidor NFS da infraestrutura do IBM Cloud (SoftLayer). Para configurar manualmente uma versão específica do NFS ou para mudar a versão do NFS de seu PV que foi negociada pelo sistema operacional do host, veja [Mudando a versão padrão do NFS](cs_storage_file.html#nfs_version_class).</td>
+<td>Removida a versão do NFS padrão das opções de montagem nas classes de armazenamento de arquivo fornecidas pela IBM. O sistema operacional do host agora negocia a versão do NFS com o servidor NFS da infraestrutura do IBM Cloud (SoftLayer). Para configurar manualmente uma versão específica do NFS ou para mudar a versão do NFS de seu PV que foi negociada pelo sistema operacional do host, veja [Mudando a versão padrão do NFS](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 </tbody>
 </table>
@@ -752,7 +1937,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2
 ### Log de mudanças para o fix pack 1.11.2_1514 do nó do trabalhador, liberado em 23 de agosto de 2018
 {: #1112_1514}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.2_1514. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.2_1514.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.2_1513">
@@ -767,7 +1952,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 </thead>
 <tbody>
 <tr>
-<td>` systemd `</td>
+<td>`systemd`</td>
 <td>229</td>
 <td>230</td>
 <td>` systemd `  atualizado para corrigir o vazamento  ` cgroup ` .</td>
@@ -784,7 +1969,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.11.2_1513, liberado em 14 de agosto de 2018
 {: #1112_1513}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2_1513. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2_1513.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.5_1518">
@@ -802,13 +1987,13 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2
 <td>containerd</td>
 <td>N/A</td>
 <td>1.1.2</td>
-<td>O `containerd` substitui o Docker como o novo tempo de execução do contêiner para Kubernetes. Consulte as [notas sobre a liberação do `containerd` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/containerd/containerd/releases/tag/v1.1.2). Para ações que devem ser executadas, consulte [Atualizando para `containerd` como o tempo de execução do contêiner](cs_versions.html#containerd).</td>
+<td>O `containerd` substitui o Docker como o novo tempo de execução do contêiner para Kubernetes. Consulte as [notas sobre a liberação do `containerd` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/containerd/containerd/releases/tag/v1.1.2). Para ações que devem ser executadas, consulte [Atualizando para `containerd` como o tempo de execução do contêiner](/docs/containers?topic=containers-cs_versions#containerd).</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>O `containerd` substitui o Docker como o novo tempo de execução do contêiner para Kubernetes, para aprimorar o desempenho. Para ações que devem ser executadas, consulte [Atualizando para `containerd` como o tempo de execução do contêiner](cs_versions.html#containerd).</td>
+<td>O `containerd` substitui o Docker como o novo tempo de execução do contêiner para Kubernetes, para aprimorar o desempenho. Para ações que devem ser executadas, consulte [Atualizando para `containerd` como o tempo de execução do contêiner](/docs/containers?topic=containers-cs_versions#containerd).</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -823,10 +2008,10 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2
 <td>Atualizado para suportar a liberação do Kubernetes 1.11. Além disso, os pods do balanceador de carga agora usam a nova classe de prioridade do pod `ibm-app-cluster-critical`.</td>
 </tr>
 <tr>
-<td>Plug-in de armazenamento de arquivo IBM</td>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
 <td>334</td>
 <td>338</td>
-<td>Atualizada a versão do `incubator` para 1.8. O armazenamento de arquivo é provisionado para a zona específica que você seleciona. Não é possível atualizar os rótulos de uma instância de PV existente (estática), a menos que você esteja usando um cluster de múltiplas zonas e precise [incluir os rótulos de região e zona](cs_storage_basics.html#multizone).</td>
+<td>Atualizada a versão do `incubator` para 1.8. O armazenamento de arquivo é provisionado para a zona específica que você seleciona. Não é possível atualizar os rótulos de uma instância de PV existente (estática), a menos que você esteja usando um cluster de múltiplas zonas e precise [incluir os rótulos de região e zona](/docs/containers?topic=containers-kube_concepts#storage_multizone).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -839,8 +2024,8 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2
 <td>N/A</td>
 <td>N/A</td>
 <td>Atualizada a configuração do OpenID Connect para o servidor da API do Kubernetes do cluster para suportar os grupos de acesso do {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM). `Priority` foi incluído na opção `--enable-admission-plugins` para o servidor da API do Kubernetes do cluster e o cluster foi configurado para suportar de pod. Para obter informações adicionais, veja:
-<ul><li>[{{site.data.keyword.Bluemix_notm}} Grupos de acesso do IAM ](cs_users.html#rbac)</li>
-<li>[ Configurando a prioridade do pod ](cs_pod_priority.html#pod_priority)</li></ul></td>
+<ul><li>[{{site.data.keyword.Bluemix_notm}} Grupos de acesso do IAM ](/docs/containers?topic=containers-users#rbac)</li>
+<li>[ Configurando a prioridade do pod ](/docs/containers?topic=containers-pod_priority#pod_priority)</li></ul></td>
 </tr>
 <tr>
 <td>Kubernetes Heapster</td>
@@ -860,10 +2045,404 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2
 <br />
 
 
-## Version 1.10 log
+## Descontinuado: Versão 1.10 changelog
 {: #110_changelog}
 
 Revise o log de mudanças da versão 1.10.
+{: shortdesc}
+
+O Kubernetes versão 1.10 foi descontinuado e torna-se não suportado em 30 de abril de 2019 (tentativa). [Revise o impacto potencial ](/docs/containers?topic=containers-cs_versions#cs_versions) de cada atualização de versão do Kubernetes e, em seguida, [atualize seus clusters](/docs/containers?topic=containers-update#update) imediatamente para pelo menos 1.11.
+{: deprecated}
+
+### Log de mudanças para 1.10.13_1551, liberado em 20 de março de 2019
+{: #11013_1551}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.13_1551.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.10.13_1548">
+<caption>Mudanças desde a versão 1.10.13_1548</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuração do proxy do mestre de alta disponibilidade</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizada a configuração para manipular melhor as falhas na conexão intermitente para o cluster mestre.</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Atualizados os drivers de GPU para [418.43 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.nvidia.com/object/unix.html). A atualização inclui correção para [CVE-2019-9741 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>344</td>
+<td>345</td>
+<td>Incluído suporte para  [ terminais em serviço privado ](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2019-6133 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>136</td>
+<td>166</td>
+<td>Atualizada a imagem para [CVE-2018-16890 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) e [CVE-2019-3823 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Agente de cálculo confiável</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Atualizada a imagem para [CVE-2018-10779 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) e [CVE-2019-7663 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.10.13_1548, liberado em 4 de março de 2019
+{: #11013_1548}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.13_1548.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.10.12_1546">
+<caption>Mudanças desde a versão 1.10.12_1546</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Atualizadas as imagens para [CVE-2019-6454 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.10.12-252</td>
+<td>v1.10.13-288</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.10.13. Corrigidos problemas de conectividade periódica para balanceadores de carga que configuram `externalTrafficPolicy` como `local`. Atualizados os eventos de balanceador de carga para usar os links da documentação mais recente do {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>342</td>
+<td>344</td>
+<td>Mudado o sistema operacional de base para a imagem de Fedora para Alpine. Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>122.</td>
+<td>136</td>
+<td>Tempo limite do cliente aumentado para  {{site.data.keyword.keymanagementservicefull_notm}}. Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.12</td>
+<td>v1.10.13</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13).</td>
+</tr>
+<tr>
+<td>DNS do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Aumentado o limite de memória de pod do Kubernetes DNS de `170Mi` para `400Mi` para manipular mais serviços de cluster.</td>
+</tr>
+<tr>
+<td>Balanceador de carga e monitor de balanceador de carga para o {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Atualizada a imagem para [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Cliente e servidor OpenVPN</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Atualizada a imagem para [CVE-2019-1559 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Agente de cálculo confiável</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Atualizada a imagem para [CVE-2019-6454 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.10.12_1546, liberado em 27 de fevereiro de 2019
+{: #11012_1546}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.12_1546.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.10.12_1544">
+<caption>Mudanças desde a versão 1.10.12_1544</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2018-19407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog para o nó do trabalhador fix pack 1.10.12_1544, liberado 15 de fevereiro de 2019
+{: #11012_1544}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.12_1544.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.10.12_1543">
+<caption>Mudanças desde a versão 1.10.12_1543</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>18.06.1-ce</td>
+<td>18.06.2-ce</td>
+<td>Consulte as notas sobre a liberação do [Docker Community Edition ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/docker/docker-ce/releases/tag/v18.06.2-ce). A atualização resolve [CVE-2019-5736 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes  ` kubelet `</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Ativada a porta do recurso `ExperimentalCriticalPodAnnotation` para evitar despejo crítico de pod estático.</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.10.12_1543, liberado em 5 de fevereiro de 2019
+{: #11012_1543}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.12_1543.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.10.12_1541">
+<caption>Mudanças desde a versão 1.10.12_1541</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>Consulte as [notas sobre a liberação do etcd ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/coreos/etcd/releases/v3.3.11). Além disso, os conjuntos de cifras suportados para etcd são agora restritos a um subconjunto com criptografia de alta segurança (128 bits ou mais).</td>
+</tr>
+<tr>
+<td>Plug-in e instalador do dispositivo GPU</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Atualizadas as imagens para [CVE-2019-3462 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) e [CVE-2019-6486 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
+<td>338</td>
+<td>342</td>
+<td>O plug-in de armazenamento de arquivo é atualizado conforme a seguir:
+<ul><li>Suporta o fornecimento dinâmico com [planejamento com reconhecimento de topologia do volume](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<li>Ignora a solicitação de volume persistente (PVC) para excluir erros se o armazenamento já tiver sido excluído.</li>
+<li>Inclui uma anotação de mensagem de erro em PVCs com falha.</li>
+<li>Otimiza as configurações de eleição de líder do controlador do fornecedor de armazenamento e de período de ressincronização e aumenta o tempo limite de fornecimento de 30 minutos para 1 hora.</li>
+<li>Verifica as permissões de usuário antes de iniciar o fornecimento.</li></ul></td>
+</tr>
+<tr>
+<td>Provedor do Key Management Service</td>
+<td>111</td>
+<td>122.</td>
+<td>Incluída a lógica de nova tentativa para evitar falhas temporárias quando os segredos do Kubernetes são gerenciados pelo {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>A configuração de política de auditoria do servidor de API do Kubernetes é atualizada para incluir o registro de metadados para solicitações `cluster-admin` e o registro do corpo da solicitação de solicitações `create`, `update` e `patch` da carga de trabalho.</td>
+</tr>
+<tr>
+<td>Cliente OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Atualizada a imagem para [CVE-2018-0734 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) e [CVE-2018-5407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Além disso, a configuração do pod é agora obtida de um segredo em vez de um configmap.</td>
+</tr>
+<tr>
+<td>Servidor OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Atualizada a imagem para [CVE-2018-0734 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) e [CVE-2018-5407 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Correção de segurança para [CVE-2018-16864 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.10.12_1541, liberado em 28 de janeiro de 2019
+{: #11012_1541}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.12_1541.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.10.12_1540">
+<caption>Mudanças desde a versão 1.10.12_1540</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualiza para os pacotes Ubuntu instalados, incluindo `apt` para [CVE-2019-3462 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) e [USN-3863-1 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://usn.ubuntu.com/3863-1).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.10.12_1540, liberado em 21 de janeiro de 2019
+{: #11012_1540}
+
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.12_1540.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.10.11_1538">
+<caption>Mudanças desde a versão 1.10.11_1538</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.10.11-219</td>
+<td>v1.10.12-252</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.10.12.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.11</td>
+<td>v1.10.12</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.12).</td>
+</tr>
+<tr>
+<td>Resgador de complemento do Kubernetes</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>Consulte as [Notas sobre a liberação do redimensionador de complemento do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+</tr>
+<tr>
+<td>Painel do Kubernetes</td>
+<td>v1.8.3</td>
+<td>v1.10.1</td>
+<td>Consulte as [Notas sobre a liberação do painel do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). A atualização resolve [CVE-2018-18264 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>Se você acessar o painel por meio de `kubectl proxy`, o botão **SKIP** na página de login será removido. Em vez disso, [use um **Token** para efetuar login](/docs/containers?topic=containers-app#cli_dashboard).</td>
+</tr>
+<tr>
+<td>Instalador do GPU</td>
+<td>390.12</td>
+<td>410,79</td>
+<td>Atualizados os drivers de GPU instalados para 410.79.</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.10.11_1538, liberado em 7 de janeiro de 2019
+{: #11011_1538}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do trabalhador do fix pack 1.10.11_1538.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.10.11_1537">
+<caption>Mudanças desde a versão 1.10.11_1537</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-139</td>
+<td>4.4.0-141</td>
+<td>Atualizadas as imagens do nó do trabalhador com a atualização do kernel para [CVE-2017-5753, CVE-2018-18690 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.10.11_1537, liberado em 17 de dezembro de 2018
+{: #11011_1537}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.11_1537.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.10.11_1536">
+<caption>Mudanças desde a versão 1.10.11_1536</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizações para pacotes do Ubuntu instalados.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Log de mudanças para 1.10.11_1536, liberado em 4 de dezembro de 2018
 {: #11011_1536}
@@ -910,7 +2489,7 @@ A tabela a seguir mostra as mudanças incluídas na correção 1.10.11_1536.
 <td>Utilização do recurso do nó do trabalhador</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluídos cgroups dedicados para o kubelet e o docker para evitar que esses componentes sejam executados sem recursos. Para obter mais informações, consulte [Reservas de recursos do nó do trabalhador](cs_clusters_planning.html#resource_limit_node).</td>
+<td>Incluídos cgroups dedicados para o kubelet e o docker para evitar que esses componentes sejam executados sem recursos. Para obter mais informações, consulte [Reservas de recursos do nó do trabalhador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -944,7 +2523,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack do nó do trabalhador 1.10.8_1531, liberado em 19 de novembro de 2018
 {: #1108_1531}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1531. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1531.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1530">
@@ -970,7 +2549,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.8_1530, liberado em 7 de novembro de 2018
 {: #1108_1530_ha-master}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.8_1530. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.8_1530.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1528">
@@ -988,7 +2567,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.8
 <td>Cluster mestre</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Atualizada a configuração do cluster mestre para aumentar a alta disponibilidade (HA). Os clusters agora têm três réplicas principais do Kubernetes configuradas com uma configuração altamente disponível (HA), com cada mestre implementado em hosts físicos separados. Além disso, se o cluster estiver em uma zona com capacidade para múltiplas zonas, os mestres serão difundidos pelas zonas.<br>Para ações que devem ser executadas, consulte [Atualizando para os clusters mestres altamente disponíveis](cs_versions.html#ha-masters). Estas ações de preparação se aplicam:<ul>
+<td>Atualizada a configuração do cluster mestre para aumentar a alta disponibilidade (HA). Os clusters agora têm três réplicas principais do Kubernetes configuradas com uma configuração altamente disponível (HA), com cada mestre implementado em hosts físicos separados. Além disso, se o cluster estiver em uma zona com capacidade para múltiplas zonas, os mestres serão difundidos pelas zonas.<br>Para ações que devem ser executadas, consulte [Atualizando para os clusters mestres altamente disponíveis](/docs/containers?topic=containers-cs_versions#ha-masters). Estas ações de preparação se aplicam:<ul>
 <li>Se você tiver um firewall ou políticas de rede customizadas do Calico.</li>
 <li>Se você estiver usando as portas do host `2040` ou `2041` nos nós do trabalhador.</li>
 <li>Se você usou o endereço IP do cluster mestre para acesso no cluster ao mestre.</li>
@@ -1011,7 +2590,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.8
 <td>Criptografando dados em etcd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Anteriormente, os dados etcd eram armazenados em uma instância de armazenamento de arquivo NFS do mestre que está criptografada em repouso. Agora, os dados etcd são armazenados no disco local do mestre e submetidos a backup no {{site.data.keyword.cos_full_notm}}. Os dados são criptografados durante o trânsito para o {{site.data.keyword.cos_full_notm}} e em repouso. No entanto, os dados etcd no disco local do mestre não são criptografados. Se você desejar que os dados etcd locais do mestre sejam criptografados, [ative o {{site.data.keyword.keymanagementservicelong_notm}} em seu cluster](cs_encrypt.html#keyprotect).</td>
+<td>Anteriormente, os dados etcd eram armazenados em uma instância de armazenamento de arquivo NFS do mestre que está criptografada em repouso. Agora, os dados etcd são armazenados no disco local do mestre e submetidos a backup no {{site.data.keyword.cos_full_notm}}. Os dados são criptografados durante o trânsito para o {{site.data.keyword.cos_full_notm}} e em repouso. No entanto, os dados etcd no disco local do mestre não são criptografados. Se você desejar que os dados etcd locais do mestre sejam criptografados, [ative o {{site.data.keyword.keymanagementservicelong_notm}} em seu cluster](/docs/containers?topic=containers-encryption#keyprotect).</td>
 </tr>
 <tr>
 <td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
@@ -1023,7 +2602,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.8
 <td>Kernel ativado por TPM</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Os nós do trabalhador do bare metal com chips TPM para Computação confiável usam o kernel Ubuntu padrão até que a confiança seja ativada. Se você [ativar a confiança](cs_cli_reference.html#cs_cluster_feature_enable) em um cluster existente, será necessário [recarregar](cs_cli_reference.html#cs_worker_reload) quaisquer nós do trabalhador do bare metal existentes com chips TPM. Para verificar se um nó do trabalhador bare metal tem um chip TPM, revise o campo **Confiável** depois de executar o [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+<td>Os nós do trabalhador do bare metal com chips TPM para Computação confiável usam o kernel Ubuntu padrão até que a confiança seja ativada. Se você [ativar a confiança](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) em um cluster existente, será necessário [recarregar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) quaisquer nós do trabalhador do bare metal existentes com chips TPM. Para verificar se um nó do trabalhador bare metal tem um chip TPM, revise o campo **Confiável** depois de executar o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types -- zone`.</td>
 </tr>
 </tbody>
 </table>
@@ -1031,7 +2610,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.8
 ### Log de mudanças para o fix pack do nó do trabalhador 1.10.8_1528, liberado em 26 de outubro de 2018
 {: #1108_1528}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1528. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1528.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1527">
@@ -1057,7 +2636,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack de mestre 1.10.8_1527, liberado em 15 de outubro de 2018
 {: #1108_1527}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.10.8_1527. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.10.8_1527.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1524">
@@ -1089,7 +2668,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestr
 ### Log de mudanças para o fix pack 1.10.8_1525 do nó do trabalhador, liberado em 10 de outubro de 2018
 {: #1108_1525}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1525. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1525.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1524">
@@ -1122,7 +2701,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.8_1524, liberado em 2 de outubro de 2018
 {: #1108_1524}
 
-A tabela a seguir mostra as mudanças incluídas na correção 1.10.8_1524. 
+A tabela a seguir mostra as mudanças incluídas na correção 1.10.8_1524.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.7_1520">
@@ -1140,7 +2719,7 @@ A tabela a seguir mostra as mudanças incluídas na correção 1.10.8_1524.
 <td>Provedor de serviço de gerenciamento de chaves</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluída a capacidade de usar o provedor de serviço de gerenciamento de chave (KMS) do Kubernetes no cluster, para suportar o {{site.data.keyword.keymanagementservicefull}}. Quando você [ativar o {{site.data.keyword.keymanagementserviceshort}} no cluster](cs_encrypt.html#keyprotect), todos os segredos do Kubernetes serão criptografados.</td>
+<td>Incluída a capacidade de usar o provedor de serviço de gerenciamento de chave (KMS) do Kubernetes no cluster, para suportar o {{site.data.keyword.keymanagementservicefull}}. Quando você [ativa o {{site.data.keyword.keymanagementserviceshort}} em seu cluster](/docs/containers?topic=containers-encryption#keyprotect), todos os seus segredos do Kubernetes são criptografados.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1173,7 +2752,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 ### Log de mudanças para o fix pack 1.10.7_1521 do nó do trabalhador, liberado em 20 de setembro de 2018
 {: #1107_1521}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.7_1521. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.7_1521.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.7_1520">
@@ -1191,7 +2770,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>Girar log</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Alternado para usar os cronômetros `systemd` em vez de `cronjobs` para evitar que `logrotate` falhe nos nós do trabalhador que não sejam recarregados ou atualizados em 90 dias. **Nota**: em todas as versões anteriores dessa liberação secundária, o disco primário é preenchido após a falha da tarefa cron porque os logs não são girados. A tarefa cron falha depois que o nó do trabalhador fica ativo por 90 dias sem ser atualizado ou recarregado. Se os logs preencherem o disco primário inteiro, o nó do trabalhador entrará em um estado de falha. O nó do trabalhador pode ser corrigido usando o [comando](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update`.</td>
+<td>Alternado para usar os cronômetros `systemd` em vez de `cronjobs` para evitar que `logrotate` falhe nos nós do trabalhador que não sejam recarregados ou atualizados em 90 dias. **Nota**: em todas as versões anteriores dessa liberação secundária, o disco primário é preenchido após a falha da tarefa cron porque os logs não são girados. A tarefa cron falha depois que o nó do trabalhador fica ativo por 90 dias sem ser atualizado ou recarregado. Se os logs preencherem o disco primário inteiro, o nó do trabalhador entrará em um estado de falha. O nó do trabalhador pode ser corrigido usando o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Componentes de tempo de execução do nó do trabalhador (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -1203,10 +2782,10 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>Expiração de senha raiz</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>As senhas raiz dos nós do trabalhador expiram depois de 90 dias por motivos de conformidade. Se o seu conjunto de ferramentas de automação precisar efetuar login no nó do trabalhador como raiz ou depender de tarefas cron executadas como raiz, será possível desativar a expiração de senha efetuando login no nó do trabalhador e executando `chage -M -1 root`. **Nota**: se você tiver requisitos de conformidade de segurança que evitem a execução como raiz ou a remoção da expiração de senha, não desative a expiração. Em vez disso, é possível [atualizar](cs_cli_reference.html#cs_worker_update) ou [recarregar](cs_cli_reference.html#cs_worker_reload) seus nós do trabalhador pelo menos a cada 90 dias.</td>
+<td>As senhas raiz dos nós do trabalhador expiram depois de 90 dias por motivos de conformidade. Se o seu conjunto de ferramentas de automação precisar efetuar login no nó do trabalhador como raiz ou depender de tarefas cron executadas como raiz, será possível desativar a expiração de senha efetuando login no nó do trabalhador e executando `chage -M -1 root`. **Nota**: se você tiver requisitos de conformidade de segurança que evitem a execução como raiz ou a remoção da expiração de senha, não desative a expiração. Em vez disso, é possível [atualizar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) ou [recarregar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) seus nós do trabalhador pelo menos a cada 90 dias.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Limpar periodicamente unidades de montagem transientes para evitar que se tornem sem limites. Essa ação trata do [Problema 57345 do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -1217,7 +2796,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>N/A</td>
 <td>Desativada a ponte de Docker padrão para que o intervalo de IP `172.17.0.0/16` seja agora usado para rotas privadas. Se você depender da construção de contêineres do Docker em nós do trabalhador executando comandos `docker` no host diretamente ou usando um pod que monta o soquete do Docker, escolha entre as opções a seguir.<ul><li>Para assegurar a conectividade de rede externa ao construir o contêiner, execute `docker build. -- host de rede `.</li>
 <li>Para criar explicitamente uma rede a ser usada ao construir o contêiner, execute `docker network create` e, em seguida, use essa rede.</li></ul>
-**Nota**: tem dependências no soquete do Docker ou no Docker diretamente? [Atualize para `containerd` em vez de `docker` como o tempo de execução do contêiner](cs_versions.html#containerd) para que seus clusters estejam preparados para executar o Kubernetes versão 1.11 ou mais recente.</td>
+**Nota**: tem dependências no soquete do Docker ou no Docker diretamente? [Atualize para `containerd` em vez de `docker` como o tempo de execução do contêiner](/docs/containers?topic=containers-cs_versions#containerd) para que seus clusters estejam preparados para executar o Kubernetes versão 1.11 ou mais recente.</td>
 </tr>
 </tbody>
 </table>
@@ -1225,7 +2804,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.7_1520, liberado em 4 de setembro de 2018
 {: #1107_1520}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.7_1520. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.7_1520.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.5_1519">
@@ -1252,10 +2831,10 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.7
 <td>Atualizado para suportar a liberação do Kubernetes 1.10.7. Além disso, a configuração do provedor em nuvem foi mudada para manipular melhor as atualizações para serviços de balanceador de carga com `externalTrafficPolicy` configurado como `local`.</td>
 </tr>
 <tr>
-<td>Plug-in de armazenamento de arquivo IBM</td>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
 <td>334</td>
 <td>338</td>
-<td>Atualizada a versão de incubadora para 1.8. O armazenamento de arquivo é provisionado para a zona específica que você seleciona. Não é possível atualizar os rótulos de uma instância de PV existente (estática), a menos que você esteja usando um cluster multizona e precise incluir os rótulos de região e zona.<br><br> Removida a versão do NFS padrão das opções de montagem nas classes de armazenamento de arquivo fornecidas pela IBM. O sistema operacional do host agora negocia a versão do NFS com o servidor NFS da infraestrutura do IBM Cloud (SoftLayer). Para configurar manualmente uma versão específica do NFS ou para mudar a versão do NFS de seu PV que foi negociada pelo sistema operacional do host, veja [Mudando a versão padrão do NFS](cs_storage_file.html#nfs_version_class).</td>
+<td>Atualizada a versão de incubadora para 1.8. O armazenamento de arquivo é provisionado para a zona específica que você seleciona. Não é possível atualizar os rótulos de uma instância de PV existente (estática), a menos que você esteja usando um cluster de múltiplas zonas e precise incluir os rótulos de região e zona.<br><br> Removida a versão do NFS padrão das opções de montagem nas classes de armazenamento de arquivo fornecidas pela IBM. O sistema operacional do host agora negocia a versão do NFS com o servidor NFS da infraestrutura do IBM Cloud (SoftLayer). Para configurar manualmente uma versão específica do NFS ou para mudar a versão do NFS de seu PV que foi negociada pelo sistema operacional do host, veja [Mudando a versão padrão do NFS](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1275,7 +2854,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.7
 ### Log de mudanças para o fix pack 1.10.5_1519 do nó do trabalhador, liberado em 23 de agosto de 2018
 {: #1105_1519}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.5_1519. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.5_1519.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.5_1518">
@@ -1290,7 +2869,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 </thead>
 <tbody>
 <tr>
-<td>` systemd `</td>
+<td>`systemd`</td>
 <td>229</td>
 <td>230</td>
 <td>` systemd `  atualizado para corrigir o vazamento  ` cgroup ` .</td>
@@ -1308,7 +2887,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.10.5_1518 do nó do trabalhador, liberado em 13 de agosto de 2018
 {: #1105_1518}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.5_1518. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.5_1518.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.5_1517">
@@ -1334,7 +2913,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.5_1517, liberado em 27 de julho de 2018
 {: #1105_1517}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.5_1517. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.5_1517.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.3_1514">
@@ -1361,7 +2940,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.5
 <td>Atualizado para suportar a liberação do Kubernetes 1.10.5. Além disso, os eventos `create failure` do serviço do LoadBalancer agora incluem qualquer erro de sub-rede móvel.</td>
 </tr>
 <tr>
-<td>Plug-in de armazenamento de arquivo IBM</td>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
 <td>320</td>
 <td>334</td>
 <td>Foi aumentado o tempo limite para criação de volume persistente de 15 a 30 minutos. Mudado o tipo de faturamento padrão para `hourly`. Incluídas opções de montagem nas classes de armazenamento predefinidas. Na instância de armazenamento de arquivo do NFS em sua conta de infraestrutura do IBM Cloud (SoftLayer), foi mudado o campo **Notas** para o formato da JSON e foi incluído o namespace do Kubernetes no qual o PV está implementado. Para suportar clusters de múltiplas zonas, inclua rótulos de zona e região em volumes persistentes.</td>
@@ -1390,7 +2969,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.5
 ### Log de mudanças para o fix pack do nó do trabalhador 1.10.3_1514, liberado em 3 de julho de 2018
 {: #1103_1514}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.3_1514. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.3_1514.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.3_1513">
@@ -1417,7 +2996,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack do nó do trabalhador 1.10.3_1513, liberado em 21 de junho de 2018
 {: #1103_1513}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.3_1513. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.3_1513.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.3_1512">
@@ -1443,7 +3022,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.3_1512, liberado em 12 de junho de 2018
 {: #1103_1512}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.3_1512. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.3_1512.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.1_1510">
@@ -1467,7 +3046,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.3
 <td>Configuração do Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluído `PodSecurityPolicy` na opção `--enable-admission-plugins` para o servidor de API do Kubernetes do cluster e configurado o cluster para suportar políticas de segurança de pod. Para obter mais informações, consulte [Configurando políticas de segurança do pod](cs_psp.html).</td>
+<td>Incluído `PodSecurityPolicy` na opção `--enable-admission-plugins` para o servidor de API do Kubernetes do cluster e configurado o cluster para suportar políticas de segurança de pod. Para obter mais informações, consulte [Configurando políticas de segurança de pod](/docs/containers?topic=containers-psp).</td>
 </tr>
 <tr>
 <td>Configuração do Kubelet</td>
@@ -1501,7 +3080,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.3
 ### Log de mudanças para o fix pack 1.10.1_1510 do nó do trabalhador, liberado em 18 de maio de 2018
 {: #1101_1510}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.1_1510. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.1_1510.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.1_1509">
@@ -1527,7 +3106,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.10.1_1509 do nó do trabalhador, liberado em 16 de maio de 2018
 {: #1101_1509}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.1_1509. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.1_1509.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.1_1508">
@@ -1553,7 +3132,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.1_1508, liberado em 1º de maio de 2018
 {: #1101_1508}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.1_1508. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.1_1508.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1510">
@@ -1607,7 +3186,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.1
 <td>Suporte de GPU</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>O suporte para as [cargas de trabalho do contêiner de unidade de processamento de gráfico (GPU)](cs_app.html#gpu_app) está agora disponível para planejamento e execução. Para obter uma lista de tipos de máquina de GPU disponíveis, veja [Hardware para nós do trabalhador](cs_clusters_planning.html#shared_dedicated_node). Para obter mais informações, veja a documentação do Kubernetes para [Planejar GPUs ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>O suporte para as [cargas de trabalho do contêiner de unidade de processamento de gráfico (GPU)](/docs/containers?topic=containers-app#gpu_app) está agora disponível para planejamento e execução. Para obter uma lista de tipos de máquina de GPU disponíveis, veja [Hardware para nós do trabalhador](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). Para obter mais informações, veja a documentação do Kubernetes para [Planejar GPUs ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
@@ -1623,10 +3202,36 @@ Versões do Kubernetes não suportadas:
 *  [Versão 1.8](#18_changelog)
 *  [Versão 1.7](#17_changelog)
 
-### Log de mudanças da versão 1.9 (descontinuado, não suportado em 27 de dezembro de 2018)
+### Log de mudanças da versão 1.9 (não suportado a partir de 27 de dezembro de 2018)
 {: #19_changelog}
 
 Revise o log de mudanças da versão 1.9.
+
+### Log de mudanças para o fix pack do nó do trabalhador 1.9.11_1539, liberado em 17 de dezembro de 2018
+{: #1911_1539}
+
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do trabalhador do fix pack 1.9.11_1539.
+{: shortdesc}
+
+<table summary="Mudanças feitas desde a versão 1.9.11_1538">
+<caption>Mudanças desde a versão 1.9.11_1538</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizações para pacotes do Ubuntu instalados.</td>
+</tr>
+</tbody>
+</table>
 
 ### Log de mudanças para o fix pack do nó do trabalhador 1.9.11_1538, liberado em 4 de dezembro de 2018
 {: #1911_1538}
@@ -1649,7 +3254,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>Utilização do recurso do nó do trabalhador</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluídos cgroups dedicados para o kubelet e o docker para evitar que esses componentes sejam executados sem recursos. Para obter mais informações, consulte [Reservas de recursos do nó do trabalhador](cs_clusters_planning.html#resource_limit_node).</td>
+<td>Incluídos cgroups dedicados para o kubelet e o docker para evitar que esses componentes sejam executados sem recursos. Para obter mais informações, consulte [Reservas de recursos do nó do trabalhador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1683,7 +3288,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.11_1536, liberado em 19 de novembro de 2018
 {: #1911_1536}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.11_1536. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.11_1536.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1532">
@@ -1733,7 +3338,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.11
 ### Log de mudanças para a correção do nó do trabalhador 1.9.10_1532, liberado em 7 de novembro de 2018
 {: #1910_1532}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.11_1532. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.11_1532.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1531">
@@ -1751,7 +3356,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>Kernel ativado por TPM</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Os nós do trabalhador do bare metal com chips TPM para Computação confiável usam o kernel Ubuntu padrão até que a confiança seja ativada. Se você [ativar a confiança](cs_cli_reference.html#cs_cluster_feature_enable) em um cluster existente, será necessário [recarregar](cs_cli_reference.html#cs_worker_reload) quaisquer nós do trabalhador do bare metal existentes com chips TPM. Para verificar se um nó do trabalhador bare metal tem um chip TPM, revise o campo **Confiável** depois de executar o [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+<td>Os nós do trabalhador do bare metal com chips TPM para Computação confiável usam o kernel Ubuntu padrão até que a confiança seja ativada. Se você [ativar a confiança](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) em um cluster existente, será necessário [recarregar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) quaisquer nós do trabalhador do bare metal existentes com chips TPM. Para verificar se um nó do trabalhador bare metal tem um chip TPM, revise o campo **Confiável** depois de executar o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types -- zone`.</td>
 </tr>
 </tbody>
 </table>
@@ -1759,7 +3364,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack do nó do trabalhador 1.9.10_1531, liberado em 26 de outubro de 2018
 {: #1910_1531}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1531. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1531.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1530">
@@ -1785,7 +3390,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack de mestre 1.9.10_1530 liberado em 15 de outubro de 2018
 {: #1910_1530}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1530. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1530.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1527">
@@ -1811,7 +3416,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.9.10_1528 do nó do trabalhador, liberado em 10 de outubro de 2018
 {: #1910_1528}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1528. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1528.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1527">
@@ -1844,7 +3449,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.10_1527, liberado em 2 de outubro de 2018
 {: #1910_1527}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10_1527. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10_1527.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1523">
@@ -1877,7 +3482,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 ### Log de mudanças para o fix pack 1.9.10_1524 do nó do trabalhador, liberado em 20 de setembro de 2018
 {: #1910_1524}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1524. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1524.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1523">
@@ -1895,7 +3500,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>Girar log</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Alternado para usar os cronômetros `systemd` em vez de `cronjobs` para evitar que `logrotate` falhe nos nós do trabalhador que não sejam recarregados ou atualizados em 90 dias. **Nota**: em todas as versões anteriores dessa liberação secundária, o disco primário é preenchido após a falha da tarefa cron porque os logs não são girados. A tarefa cron falha depois que o nó do trabalhador fica ativo por 90 dias sem ser atualizado ou recarregado. Se os logs preencherem o disco primário inteiro, o nó do trabalhador entrará em um estado de falha. O nó do trabalhador pode ser corrigido usando o [comando](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update`.</td>
+<td>Alternado para usar os cronômetros `systemd` em vez de `cronjobs` para evitar que `logrotate` falhe nos nós do trabalhador que não sejam recarregados ou atualizados em 90 dias. **Nota**: em todas as versões anteriores dessa liberação secundária, o disco primário é preenchido após a falha da tarefa cron porque os logs não são girados. A tarefa cron falha depois que o nó do trabalhador fica ativo por 90 dias sem ser atualizado ou recarregado. Se os logs preencherem o disco primário inteiro, o nó do trabalhador entrará em um estado de falha. O nó do trabalhador pode ser corrigido usando o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Componentes de tempo de execução do nó do trabalhador (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -1907,10 +3512,10 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>Expiração de senha raiz</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>As senhas raiz dos nós do trabalhador expiram depois de 90 dias por motivos de conformidade. Se o seu conjunto de ferramentas de automação precisar efetuar login no nó do trabalhador como raiz ou depender de tarefas cron executadas como raiz, será possível desativar a expiração de senha efetuando login no nó do trabalhador e executando `chage -M -1 root`. **Nota**: se você tiver requisitos de conformidade de segurança que evitem a execução como raiz ou a remoção da expiração de senha, não desative a expiração. Em vez disso, é possível [atualizar](cs_cli_reference.html#cs_worker_update) ou [recarregar](cs_cli_reference.html#cs_worker_reload) seus nós do trabalhador pelo menos a cada 90 dias.</td>
+<td>As senhas raiz dos nós do trabalhador expiram depois de 90 dias por motivos de conformidade. Se o seu conjunto de ferramentas de automação precisar efetuar login no nó do trabalhador como raiz ou depender de tarefas cron executadas como raiz, será possível desativar a expiração de senha efetuando login no nó do trabalhador e executando `chage -M -1 root`. **Nota**: se você tiver requisitos de conformidade de segurança que evitem a execução como raiz ou a remoção da expiração de senha, não desative a expiração. Em vez disso, é possível [atualizar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) ou [recarregar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) seus nós do trabalhador pelo menos a cada 90 dias.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Limpar periodicamente unidades de montagem transientes para evitar que se tornem sem limites. Essa ação trata do [Problema 57345 do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -1921,7 +3526,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 <td>N/A</td>
 <td>Desativada a ponte de Docker padrão para que o intervalo de IP `172.17.0.0/16` seja agora usado para rotas privadas. Se você depender da construção de contêineres do Docker em nós do trabalhador executando comandos `docker` no host diretamente ou usando um pod que monta o soquete do Docker, escolha entre as opções a seguir.<ul><li>Para assegurar a conectividade de rede externa ao construir o contêiner, execute `docker build. -- host de rede `.</li>
 <li>Para criar explicitamente uma rede a ser usada ao construir o contêiner, execute `docker network create` e, em seguida, use essa rede.</li></ul>
-**Nota**: tem dependências no soquete do Docker ou no Docker diretamente? [Atualize para `containerd` em vez de `docker` como o tempo de execução do contêiner](cs_versions.html#containerd) para que seus clusters estejam preparados para executar o Kubernetes versão 1.11 ou mais recente.</td>
+**Nota**: tem dependências no soquete do Docker ou no Docker diretamente? [Atualize para `containerd` em vez de `docker` como o tempo de execução do contêiner](/docs/containers?topic=containers-cs_versions#containerd) para que seus clusters estejam preparados para executar o Kubernetes versão 1.11 ou mais recente.</td>
 </tr>
 </tbody>
 </table>
@@ -1929,7 +3534,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.10_1523, liberado em 4 de setembro de 2018
 {: #1910_1523}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10_1523. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10_1523.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.9_1522">
@@ -1950,10 +3555,10 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10
 <td>Atualizado para suportar a liberação do Kubernetes 1.9.10. Além disso, a configuração do provedor em nuvem foi mudada para manipular melhor as atualizações para serviços de balanceador de carga com `externalTrafficPolicy` configurado como `local`.</td>
 </tr>
 <tr>
-<td>Plug-in de armazenamento de arquivo IBM</td>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
 <td>334</td>
 <td>338</td>
-<td>Atualizada a versão de incubadora para 1.8. O armazenamento de arquivo é provisionado para a zona específica que você seleciona. Não é possível atualizar os rótulos de uma instância de PV existente (estática), a menos que você esteja usando um cluster multizona e precise incluir os rótulos de região e zona.<br><br>Removida a versão do NFS padrão das opções de montagem nas classes de armazenamento de arquivo fornecidas pela IBM. O sistema operacional do host agora negocia a versão do NFS com o servidor NFS da infraestrutura do IBM Cloud (SoftLayer). Para configurar manualmente uma versão específica do NFS ou para mudar a versão do NFS de seu PV que foi negociada pelo sistema operacional do host, veja [Mudando a versão padrão do NFS](cs_storage_file.html#nfs_version_class).</td>
+<td>Atualizada a versão de incubadora para 1.8. O armazenamento de arquivo é provisionado para a zona específica que você seleciona. Não é possível atualizar os rótulos de uma instância de PV existente (estática), a menos que você esteja usando um cluster de múltiplas zonas e precise incluir os rótulos de região e zona.<br><br>Removida a versão do NFS padrão das opções de montagem nas classes de armazenamento de arquivo fornecidas pela IBM. O sistema operacional do host agora negocia a versão do NFS com o servidor NFS da infraestrutura do IBM Cloud (SoftLayer). Para configurar manualmente uma versão específica do NFS ou para mudar a versão do NFS de seu PV que foi negociada pelo sistema operacional do host, veja [Mudando a versão padrão do NFS](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1973,7 +3578,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10
 ### Log de mudanças para o fix pack 1.9.9_1522 do nó do trabalhador, liberado em 23 de agosto de 2018
 {: #199_1522}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.9_1522. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.9_1522.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.9_1521">
@@ -1988,7 +3593,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 </thead>
 <tbody>
 <tr>
-<td>` systemd `</td>
+<td>`systemd`</td>
 <td>229</td>
 <td>230</td>
 <td>` systemd `  atualizado para corrigir o vazamento  ` cgroup ` .</td>
@@ -2006,7 +3611,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.9.9_1521 do nó do trabalhador, liberado em 13 de agosto de 2018
 {: #199_1521}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.9_1521. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.9_1521.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.9_1520">
@@ -2032,7 +3637,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.9_1520, liberado em 27 de julho de 2018
 {: #199_1520}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.9_1520. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.9_1520.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.8_1517">
@@ -2053,7 +3658,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.9_
 <td>Atualizado para suportar a liberação do Kubernetes 1.9.9. Além disso, os eventos `create failure` do serviço do LoadBalancer agora incluem qualquer erro de sub-rede móvel.</td>
 </tr>
 <tr>
-<td>Plug-in de armazenamento de arquivo IBM</td>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
 <td>320</td>
 <td>334</td>
 <td>Foi aumentado o tempo limite para criação de volume persistente de 15 a 30 minutos. Mudado o tipo de faturamento padrão para `hourly`. Incluídas opções de montagem nas classes de armazenamento predefinidas. Na instância de armazenamento de arquivo do NFS em sua conta de infraestrutura do IBM Cloud (SoftLayer), foi mudado o campo **Notas** para o formato da JSON e foi incluído o namespace do Kubernetes no qual o PV está implementado. Para suportar clusters de múltiplas zonas, inclua rótulos de zona e região em volumes persistentes.</td>
@@ -2082,7 +3687,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.9_
 ### Log de mudanças para o fix pack do nó do trabalhador 1.9.8_1517, liberado em 3 de julho de 2018
 {: #198_1517}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.8_1517. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.8_1517.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.8_1516">
@@ -2109,7 +3714,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack do nó do trabalhador 1.9.8_1516, liberado em 21 de junho de 2018
 {: #198_1516}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.8_1516. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.8_1516.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.8_1515">
@@ -2135,7 +3740,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.8_1515, liberado em 19 de junho de 2018
 {: #198_1515}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.8_1515. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.8_1515.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1513">
@@ -2159,7 +3764,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.8_
 <td>Configuração do Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluída PodSecurityPolicy na opção --admission-control para o servidor da API do Kubernetes do cluster e configurado o cluster para suportar políticas de segurança do pod. Para obter mais informações, consulte [Configurando políticas de segurança do pod](cs_psp.html).</td>
+<td>Incluído `PodSecurityPolicy` na opção `--admission-control` para o servidor de API do Kubernetes do cluster e configurado para suportar políticas de segurança de pod. Para obter mais informações, consulte [Configurando políticas de segurança de pod](/docs/containers?topic=containers-psp).</td>
 </tr>
 <tr>
 <td>Provedor do IBM Cloud</td>
@@ -2180,7 +3785,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.8_
 ### Log de mudanças para o fix pack do trabalhador do trabalhador 1.9.7_1513, liberado em 11 de junho de 2018
 {: #197_1513}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1513. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1513.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1512">
@@ -2206,7 +3811,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.9.7_1512 do nó do trabalhador, liberado em 18 de maio de 2018
 {: #197_1512}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1512. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1512.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1511">
@@ -2232,7 +3837,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.9.7_1511 nó do trabalhador, liberado em 16 de maio de 2018
 {: #197_1511}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1511. 
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1511.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1510">
@@ -2258,7 +3863,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.7_1510, liberado em 30 de abril de 2018
 {: #197_1510}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.7_1510. 
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.7_1510.
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.3_1506">
@@ -2288,13 +3893,13 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.7_
 <td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
 <td>v1.9.3-71</td>
 <td>v1.9.7-102</td>
-<td>Os serviços `NodePort` e `LoadBalancer` agora suportam [preservar o IP de origem do cliente](cs_loadbalancer.html#node_affinity_tolerations) configurando `service.spec.externalTrafficPolicy` como `Local`.</td>
+<td>Os serviços `NodePort` e `LoadBalancer` agora suportam [preservar o IP de origem do cliente](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) configurando `service.spec.externalTrafficPolicy` como `Local`.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Corrija a configuração de tolerância do [nó de borda](cs_edge.html#edge) para clusters mais velhos.</td>
+<td>Corrija a configuração de tolerância de [nó de borda](/docs/containers?topic=containers-edge#edge) para clusters mais antigos.</td>
 </tr>
 </tbody>
 </table>
@@ -2325,7 +3930,7 @@ Revise as mudanças a seguir.
 <td>Girar log</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Alternado para usar os cronômetros `systemd` em vez de `cronjobs` para evitar que `logrotate` falhe nos nós do trabalhador que não sejam recarregados ou atualizados em 90 dias. **Nota**: em todas as versões anteriores dessa liberação secundária, o disco primário é preenchido após a falha da tarefa cron porque os logs não são girados. A tarefa cron falha depois que o nó do trabalhador fica ativo por 90 dias sem ser atualizado ou recarregado. Se os logs preencherem o disco primário inteiro, o nó do trabalhador entrará em um estado de falha. O nó do trabalhador pode ser corrigido usando o [comando](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update`.</td>
+<td>Alternado para usar os cronômetros `systemd` em vez de `cronjobs` para evitar que `logrotate` falhe nos nós do trabalhador que não sejam recarregados ou atualizados em 90 dias. **Nota**: em todas as versões anteriores dessa liberação secundária, o disco primário é preenchido após a falha da tarefa cron porque os logs não são girados. A tarefa cron falha depois que o nó do trabalhador fica ativo por 90 dias sem ser atualizado ou recarregado. Se os logs preencherem o disco primário inteiro, o nó do trabalhador entrará em um estado de falha. O nó do trabalhador pode ser corrigido usando o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Componentes de tempo de execução do nó do trabalhador (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -2337,10 +3942,10 @@ Revise as mudanças a seguir.
 <td>Expiração de senha raiz</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>As senhas raiz dos nós do trabalhador expiram depois de 90 dias por motivos de conformidade. Se o seu conjunto de ferramentas de automação precisar efetuar login no nó do trabalhador como raiz ou depender de tarefas cron executadas como raiz, será possível desativar a expiração de senha efetuando login no nó do trabalhador e executando `chage -M -1 root`. **Nota**: se você tiver requisitos de conformidade de segurança que evitem a execução como raiz ou a remoção da expiração de senha, não desative a expiração. Em vez disso, é possível [atualizar](cs_cli_reference.html#cs_worker_update) ou [recarregar](cs_cli_reference.html#cs_worker_reload) seus nós do trabalhador pelo menos a cada 90 dias.</td>
+<td>As senhas raiz dos nós do trabalhador expiram depois de 90 dias por motivos de conformidade. Se o seu conjunto de ferramentas de automação precisar efetuar login no nó do trabalhador como raiz ou depender de tarefas cron executadas como raiz, será possível desativar a expiração de senha efetuando login no nó do trabalhador e executando `chage -M -1 root`. **Nota**: se você tiver requisitos de conformidade de segurança que evitem a execução como raiz ou a remoção da expiração de senha, não desative a expiração. Em vez disso, é possível [atualizar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) ou [recarregar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) seus nós do trabalhador pelo menos a cada 90 dias.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Limpar periodicamente unidades de montagem transientes para evitar que se tornem sem limites. Essa ação trata do [Problema 57345 do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -2363,7 +3968,7 @@ Revise as mudanças a seguir.
 </thead>
 <tbody>
 <tr>
-<td>` systemd `</td>
+<td>`systemd`</td>
 <td>229</td>
 <td>230</td>
 <td>` systemd `  atualizado para corrigir o vazamento  ` cgroup ` .</td>
@@ -2421,7 +4026,7 @@ Revise as mudanças a seguir.
 <td>Atualizado para suportar a liberação do Kubernetes 1.8.15. Além disso, os eventos `create failure` do serviço do LoadBalancer agora incluem qualquer erro de sub-rede móvel.</td>
 </tr>
 <tr>
-<td>Plug-in de armazenamento de arquivo IBM</td>
+<td>Plug-in do {{site.data.keyword.Bluemix_notm}}  File Storage</td>
 <td>320</td>
 <td>334</td>
 <td>Foi aumentado o tempo limite para criação de volume persistente de 15 a 30 minutos. Mudado o tipo de faturamento padrão para `hourly`. Incluídas opções de montagem nas classes de armazenamento predefinidas. Na instância de armazenamento de arquivo do NFS em sua conta de infraestrutura do IBM Cloud (SoftLayer), foi mudado o campo **Notas** para o formato da JSON e foi incluído o namespace do Kubernetes no qual o PV está implementado. Para suportar clusters de múltiplas zonas, inclua rótulos de zona e região em volumes persistentes.</td>
@@ -2518,7 +4123,7 @@ Revise as mudanças a seguir.
 <td>Configuração do Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Incluída PodSecurityPolicy na opção --admission-control para o servidor da API do Kubernetes do cluster e configurado o cluster para suportar políticas de segurança do pod. Para obter mais informações, consulte [Configurando políticas de segurança do pod](cs_psp.html).</td>
+<td>Incluído `PodSecurityPolicy` na opção `--admission-control` para o servidor de API do Kubernetes do cluster e configurado para suportar políticas de segurança de pod. Para obter mais informações, consulte [Configurando políticas de segurança de pod](/docs/containers?topic=containers-psp).</td>
 </tr>
 <tr>
 <td>Provedor do IBM Cloud</td>
@@ -2637,13 +4242,13 @@ Revise as mudanças a seguir.
 <td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
 <td>v1.8.8-86</td>
 <td>v1.8.11-126</td>
-<td>Os serviços `NodePort` e `LoadBalancer` agora suportam [preservar o IP de origem do cliente](cs_loadbalancer.html#node_affinity_tolerations) configurando `service.spec.externalTrafficPolicy` como `Local`.</td>
+<td>Os serviços `NodePort` e `LoadBalancer` agora suportam [preservar o IP de origem do cliente](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) configurando `service.spec.externalTrafficPolicy` como `Local`.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Corrija a configuração de tolerância do [nó de borda](cs_edge.html#edge) para clusters mais velhos.</td>
+<td>Corrija a configuração de tolerância de [nó de borda](/docs/containers?topic=containers-edge#edge) para clusters mais antigos.</td>
 </tr>
 </tbody>
 </table>
@@ -2748,13 +4353,13 @@ Revise as mudanças a seguir.
 <td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
 <td>v1.7.4-133</td>
 <td>v1.7.16-17</td>
-<td>Os serviços `NodePort` e `LoadBalancer` agora suportam [preservar o IP de origem do cliente](cs_loadbalancer.html#node_affinity_tolerations) configurando `service.spec.externalTrafficPolicy` como `Local`.</td>
+<td>Os serviços `NodePort` e `LoadBalancer` agora suportam [preservar o IP de origem do cliente](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) configurando `service.spec.externalTrafficPolicy` como `Local`.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Corrija a configuração de tolerância do [nó de borda](cs_edge.html#edge) para clusters mais velhos.</td>
+<td>Corrija a configuração de tolerância de [nó de borda](/docs/containers?topic=containers-edge#edge) para clusters mais antigos.</td>
 </tr>
 </tbody>
 </table>

@@ -2,17 +2,28 @@
 {:topicgroup: .topicgroup}
 
 {: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
-IBM Cloud Kubernetes 서비스
+IBM Cloud Kubernetes Service
 
     container_index.md
+    cs_cli_reference.md
 
     {: .navgroup id="learn"}
     getting-started.md
+    
 
     {: .topicgroup}
     정보
         cs_why.md
         cs_tech.md
+
+    {: .topicgroup}
+    유스 케이스
+        cs_uc_intro.md
+        cs_uc_finance.md
+        cs_uc_health.md
+        cs_uc_retail.md
+        cs_uc_transport.md
+        cs_uc_gov.md
 
     {: .topicgroup}
     클러스터 전략
@@ -24,11 +35,13 @@ IBM Cloud Kubernetes 서비스
     튜토리얼
         cs_tutorials.md
         cs_tutorials_apps.md
+        cs_tutorials_knative.md
         cs_tutorials_istio.md
-        cs_tutorials_cf.md
         cs_tutorials_policies.md
-        [튜토리얼: Kubernetes로 VM 기반 애플리케이션 이동](../tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
-        [튜토리얼: Cloud Internet Services를 사용하여 다중 지역 클러스터 작성](../tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+        cs_tutorials_cf.md
+        [튜토리얼: Kubernetes로 VM 기반 애플리케이션 이동](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
+        [튜토리얼: Cloud Internet Services를 사용하여 다중 지역 클러스터 작성](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+        [튜토리얼: Kubernetes에서 실행되는 컨테이너화된 앱에 대해 Continuous Integration 및 Continuous Delivery 파이프라인 설정](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -48,7 +61,7 @@ IBM Cloud Kubernetes 서비스
         cs_performance.md
 
     {: .topicgroup}
-    Setting up cluster networking
+    클러스터 네트워킹 설정
         cs_network_ov.md
         cs_network_cluster.md
         cs_firewall.md
@@ -70,8 +83,6 @@ IBM Cloud Kubernetes 서비스
         cs_ingress.md
         cs_annotations.md
         cs_ingress_health.md
-        cs_vpn.md
-        cs_subnets.md
 
     {: .topicgroup}
     지속적 스토리지에 데이터 저장
@@ -91,14 +102,14 @@ IBM Cloud Kubernetes 서비스
     cs_at_events.md
 
     {: .topicgroup}
-    더 이상 사용되지 않음: 데디케이티드 클라우드
+    데디케이티드 클라우드
         cs_dedicated.md
         [더 이상 사용되지 않음: 단일 및 확장 가능 컨테이너 실행](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
     cs_hybrid.md
 
     {: .topicgroup}
-    IBM Cloud Kubernetes Service CLI plug-in reference
+    IBM Cloud Kubernetes Service CLI 플러그인 참조
         /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
         cs_cli_changelog.md
 
@@ -111,16 +122,40 @@ IBM Cloud Kubernetes 서비스
     cs_regions.md
     cs_access_reference.md
     {: .navgroup-end}
-    
+
     {: .navgroup id="help"}
+    faqs.md
+
     {: .topicgroup}
     클러스터 문제점 해결
         cs_troubleshoot.md
         cs_troubleshoot_clusters.md
         cs_troubleshoot_storage.md
         cs_troubleshoot_health.md
+        cs_troubleshoot_debug_ingress.md
         cs_troubleshoot_network.md
 
     cs_popular_topics.md
     cs_rellinks.md
+    cs_sitemap.md
     {: .navgroup-end}
+
+    container_cli_cfic.md
+    container_cli_cfic_install.md
+    container_cli_reference_cfic.md
+    container_cli_reference_cfic_quick.md
+    container_ha.md
+    container_images.md
+    container_images_adding_ov.md
+    container_images_building.md
+    container_integrations.md
+    container_ov.md
+    container_planning.md
+    container_security.md
+    container_single_ui.md
+    container_troubleshoot.md
+    container_volumes_ov.md
+    cs_classic.md
+    cs_cli_devtools.md
+    transcript_autorecovery.md
+    transcript_loadbalancing.md

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # 教程：将应用程序部署到 Kubernetes 集群
 {: #cs_apps_tutorial}
 
@@ -30,7 +35,7 @@ lastupdated: "2018-12-05"
 
 公关公司的应用程序开发者使用最后一个教程中创建的 Kubernetes 集群，部署 Hello World 版本的应用程序。通过在此教程中的每一课上进行构建，应用程序开发者可通过渐进方式部署同一应用程序的更复杂版本。下图按课程显示每个部署的组件。
 
-![课程组成部分](images/cs_app_tutorial_mz-roadmap.png)
+<img src="images/cs_app_tutorial_mz-roadmap.png" width="700" alt="课程组成部分" style="width:700px; border-style: none"/>
 
 如图中所示，Kubernetes 使用多种不同类型的资源使应用程序在集群中启动并开始运行。在 Kubernetes 中，部署与服务一起工作。部署包含应用程序的定义。例如，要用于容器的映像以及必须为应用程序公开的端口。创建部署时，会为部署中定义的每个容器创建一个 Kubernetes pod。要使应用程序更具弹性，可以在部署中定义同一应用程序的多个实例，并允许 Kubernetes 自动为您创建副本集。副本集用于监视 pod，并确保始终有指定数量的 pod 启动并在运行。如果其中一个 pod 无响应，那么会自动重新创建该 pod。
 
@@ -41,6 +46,7 @@ lastupdated: "2018-12-05"
 虽然只有其中一课涉及将 {{site.data.keyword.Bluemix_notm}} 服务集成到应用程序中，但您可以将这些服务用于任何复杂程度的应用程序。
 
 ## 目标
+{: #apps_objectives}
 
 * 了解基本 Kubernetes 术语
 * 将映像推送到 {{site.data.keyword.registryshort_notm}} 中的注册表名称空间
@@ -50,17 +56,20 @@ lastupdated: "2018-12-05"
 * 部署使用 {{site.data.keyword.Bluemix_notm}} 服务中功能的应用程序
 
 ## 所需时间
+{: #apps_time}
 
 40 分钟
 
 ## 受众
+{: #apps_audience}
 
 首次将应用程序部署到 Kubernetes 集群的软件开发者和网络管理员。
 
 ## 先决条件
+{: #apps_prereqs}
 
-* [教程：创建 Kubernetes 集群](cs_tutorials.html#cs_cluster_tutorial)。
-* 安装 [container-registry 插件](/docs/services/Registry/index.html#registry_cli_install)。
+* [教程：创建 Kubernetes 集群](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)。
+* 安装 [container-registry 插件](/docs/services/Registry?topic=registry-index#registry_cli_install)。
 
 
 ## 第 1 课：将单实例应用程序部署到 Kubernetes 集群
@@ -94,7 +103,7 @@ lastupdated: "2018-12-05"
     ```
     {: pre}
 
-3. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+3. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 5.  登录到 {{site.data.keyword.registryshort_notm}} CLI。
 
@@ -109,9 +118,9 @@ lastupdated: "2018-12-05"
         ```
         {: pre}
 
-6.  构建包含 `Lab 1` 目录中应用程序文件的 Docker 映像，然后将该映像推送到在先前教程中创建的 {{site.data.keyword.registryshort_notm}} 名称空间。如果未来需要对应用程序进行更改，请重复这些步骤以创建映像的另一个版本。**注**：使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
+6.  构建包含 `Lab 1` 目录中应用程序文件的 Docker 映像，然后将该映像推送到在先前教程中创建的 {{site.data.keyword.registryshort_notm}} 名称空间。如果未来需要对应用程序进行更改，请重复这些步骤以创建映像的另一个版本。**注**：使用容器映像时，请了解有关[确保个人信息安全](/docs/containers?topic=containers-security#pi)的更多信息。
 
-    在映像名称中仅使用小写字母数字字符或下划线 (`_`)。不要忘记在命令末尾输入句点 (`.`)。句点将通知 Docker 在当前目录内查找用于构建映像的 Dockerfile 和构建工件。
+    在映像名称中仅使用小写字母数字字符或下划线 (`_`)。不要忘记在命令末尾输入句点 (`.`)。句点将通知 Docker 在当前目录内查找用于构建映像的 Dockerfile 和构建工件。要获取您当前所在区域的区域前缀，请运行 `ibmcloud api`。例如，对于达拉斯位置，美国南部区域的前缀为 `ng`。
 
     ```
     ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
@@ -149,7 +158,7 @@ kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namesp
     ```
     {: screen}
 
-    使用 Kubernetes 资源时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
+    使用 Kubernetes 资源时，请了解有关[确保个人信息安全](/docs/containers?topic=containers-security#pi)的更多信息。
 
 8.  通过将部署公开为 NodePort 服务，使应用程序可供公共访问。正如您可能会公开 Cloud Foundry 应用程序的端口，您公开的 NodePort 就是工作程序节点用于侦听流量的端口。
 
@@ -227,18 +236,18 @@ Name:                   hello-world-service
     2.  获取集群中工作程序节点的公共 IP 地址。
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
-        ```
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
+   ```
         {: pre}
 
         输出示例：
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        ibmcloud ks workers --cluster pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
         ```
         {: screen}
 
@@ -253,14 +262,14 @@ Name:                   hello-world-service
     要查看该应用程序是否公开可用，请尝试在手机上的浏览器中输入该应用程序。
     {: tip}
 
-11. [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
+11. [启动 Kubernetes 仪表板](/docs/containers?topic=containers-app#cli_dashboard)。
 
-    如果在 [{{site.data.keyword.Bluemix_notm}} 控制台](https://console.bluemix.net/)中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
+    如果在 [{{site.data.keyword.Bluemix_notm}} 控制台](https://cloud.ibm.com/)中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
     {: tip}
 
 12. 在**工作负载**选项卡中，可以查看已创建的资源。
 
-祝贺您！您已部署了应用程序的第一个版本。
+非常好！您已部署了应用程序的第一个版本。
 
 本课中的命令太多？没错。那么使用配置脚本为您执行其中一些工作怎么样？要为应用程序的第二个版本使用配置脚本，并要通过部署该应用程序的多个实例来创建更高可用性，请继续学习下一课。
 
@@ -361,8 +370,8 @@ livenessProbe:
 6.  现在，部署工作已完成，您可以打开浏览器并检查应用程序。要构成 URL，请采用上一课中用于工作程序节点的公共 IP 地址，并将其与配置脚本中指定的 NodePort 组合在一起。要获取工作程序节点的公共 IP 地址，请执行以下操作：
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
-  ```
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
+   ```
   {: pre}
 
   使用示例值时，URL 为 `http://169.xx.xxx.xxx:30072`。在浏览器中，可能会看到以下文本。如果未看到此文本，也不必担心。此应用程序本来就是要让文本时而显示时而隐藏的。
@@ -394,7 +403,7 @@ livenessProbe:
 
     *  **通过 Kubernetes 仪表板**：
 
-       1.  [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
+       1.  [启动 Kubernetes 仪表板](/docs/containers?topic=containers-app#cli_dashboard)。
        2.  在**工作负载**选项卡中，可以查看已创建的资源。在此选项卡中，可以持续刷新并查看运行状况检查是否在运行。在 **Pod** 部分中，可以查看在重新创建 pod 中的容器时，pod 重新启动的次数。如果在仪表板中偶然遇到以下错误，此消息指示运行状况检查遇到问题。请等待几分钟，然后重新刷新。您会看到每个 pod 的重新启动次数发生变化。
 
 
@@ -405,7 +414,7 @@ Liveness probe failed: HTTP probe failed with statuscode: 500
     ```
        {: screen}
 
-祝贺您！您已部署了应用程序的第二个版本。您在此过程中必须使用更少的命令，学习了运行状况检查如何运行，并编辑了部署，非常不错！Hello World 应用程序已通过公关公司的测试。现在，您可以为公关公司部署更有用的应用程序，以开始分析新闻稿。
+非常好！您已部署了应用程序的第二个版本。您在此过程中必须使用更少的命令，学习了运行状况检查如何运行，并编辑了部署，非常不错！Hello World 应用程序已通过公关公司的测试。现在，您可以为公关公司部署更有用的应用程序，以开始分析新闻稿。
 
 继续之前，准备好删除已创建的内容了吗？现在，您可以使用相同的配置脚本来删除已创建的两个资源。
 
@@ -536,7 +545,7 @@ image: "registry.<region>.bluemix.net/namespace/watson-talk"
         ```
         {: codeblock}
 
-    2.  在 watson 部署的 volumes 部分中，更新在先前教程中创建的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 私钥的名称。通过将 Kubernetes 私钥作为卷安装到您的部署，可使 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 密钥可用于在 pod 中运行的容器。本教程中的 {{site.data.keyword.watson}} 应用程序组件配置为使用卷安装路径来查找 API 密钥。
+    2.  在 watson 部署的 volumes 部分中，更新在先前[创建 Kubernetes 集群教程](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)中创建的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 私钥的名称。通过将 Kubernetes 私钥作为卷安装到您的部署，可使 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 密钥可用于在 pod 中运行的容器。本教程中的 {{site.data.keyword.watson}} 应用程序组件配置为使用卷安装路径来查找 API 密钥。
 
         ```
 volumes:
@@ -568,7 +577,7 @@ volumes:
     1.  要获取 watson pod 的名称，请运行以下命令。
 
         ```
-kubectl get pods
+        kubectl get pods
         ```
         {: pre}
 
@@ -612,7 +621,7 @@ http://169.xx.xxx.xxx:30080/analyze/"Today is a beautiful day"
 
     在浏览器中，可以看到对所输入文本的 JSON 响应。
 
-10. [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
+10. [启动 Kubernetes 仪表板](/docs/containers?topic=containers-app#cli_dashboard)。
 
 11. 在**工作负载**选项卡中，可以查看已创建的资源。
 
@@ -620,6 +629,7 @@ http://169.xx.xxx.xxx:30080/analyze/"Today is a beautiful day"
 {: #lesson3b}
 
 部署正在运行时，可以编辑部署以更改 pod 模板中的值。本课程包含如何更新使用的映像。公关公司希望在部署中更改应用程序。
+{: shortdesc}
 
 更改映像的名称：
 
@@ -660,9 +670,9 @@ deployment "watson-talk-pod" successfully rolled out
 
     推广更改时，Kubernetes 会创建并测试另一个 pod。测试成功后，将除去原先的 pod。
 
+[测试您的掌握情况并进行测验！![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-
-祝贺您！您已部署了 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 应用程序。公关公司可以开始使用这一部署来着手分析其新闻稿。
+非常好！您已部署了 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 应用程序。公关公司可以开始使用这一部署来着手分析其新闻稿。
 
 准备好删除已创建的内容了吗？您可以使用配置脚本删除已创建的资源。
 
@@ -685,15 +695,15 @@ deployment "watson-talk-pod" successfully rolled out
   如果不希望保留集群，还可以删除该集群。
 
   ```
-  ibmcloud ks cluster-rm <cluster_name_or_ID>
+  ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
 ## 接下来要做什么？
-{: #next}
+{: #apps_next}
 
 现在，您已掌握了基础知识，可以移至更高级的活动。请考虑尝试下列其中一项：
 
 - 完成存储库中[更复杂的实验 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM/container-service-getting-started-wt#lab-overview)
-- 使用 {{site.data.keyword.containerlong_notm}} [自动缩放应用程序](cs_app.html#app_scaling)
-- 在 [IBM Developer ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/technologies/container-orchestration/) 上探索容器编排代码模式
+- 使用 {{site.data.keyword.containerlong_notm}} [自动缩放应用程序](/docs/containers?topic=containers-app#app_scaling)
+- 在 [IBM Developer ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/technologies/containers/) 上探索容器编排代码模式

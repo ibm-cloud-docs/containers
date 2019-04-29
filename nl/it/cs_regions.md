@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -17,6 +21,8 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
+
 
 # Regioni e zone
 {: #regions-and-zones}
@@ -41,7 +47,7 @@ Puoi creare dei cluster standard in ogni regione {{site.data.keyword.containerlo
 | Regno Unito Sud | Londra |
 | Stati Uniti Est (solo cluster standard) | Washington DC |
 | Stati Uniti Sud | Dallas |
-{: caption="Tabella: regioni del servizio Kubernetes supportate e ubicazioni IBM Cloud corrispondenti." caption-side="top"}
+{: caption="Regioni del servizio Kubernetes supportate e ubicazioni IBM Cloud corrispondenti." caption-side="top"}
 
 <br />
 
@@ -52,41 +58,62 @@ Puoi creare dei cluster standard in ogni regione {{site.data.keyword.containerlo
 Puoi organizzare le tue risorse tra i servizi {{site.data.keyword.Bluemix_notm}} utilizzando le ubicazioni {{site.data.keyword.Bluemix_notm}}, chiamate anche regioni. Ad esempio, puoi creare un cluster Kubernetes utilizzando un'immagine Docker privata memorizzata nel tuo {{site.data.keyword.registryshort_notm}} della stessa ubicazione.
 {:shortdesc}
 
-Per verificare in quale ubicazione {{site.data.keyword.Bluemix_notm}} ti trovi attualmente, esegui `ibmcloud info` e controlla il campo **Regione**.
+Puoi specificare una regione {{site.data.keyword.Bluemix_notm}} quando esegui l'accesso all'endpoint API globale. Per elencare le regioni disponibili, esegui `ibmcloud regions`. Per verificare in quale ubicazione {{site.data.keyword.Bluemix_notm}} ti trovi attualmente, esegui `ibmcloud target` e controlla il campo **Regione**.Se non specifichi una regione, ti viene richiesto di selezionare una regione.
 
-È possibile accedere alle ubicazioni {{site.data.keyword.Bluemix_notm}} specificando l'endpoint API della regioni quando esegui l'accesso. Se non specifichi un endpoint di regione, accedi automaticamente alla regione a te più vicina.
+Ad esempio, per eseguire l'accesso all'endpoint API globale nella regione Dallas (`us-south`):
+```
+ibmcloud login -a https://cloud.ibm.com -r us-south
+```
+{: pre}
 
-Ad esempio, puoi utilizzare i seguenti comandi per accedere agli endpoint API della regione {{site.data.keyword.Bluemix_notm}}:
+Per eseguire l'accesso all'endpoint API globale e selezionare una regione:
+```
+ibmcloud login -a https://cloud.ibm.com
+```
+{: pre}
 
-  * Dallas
-      ```
-      ibmcloud login -a api.ng.bluemix.net
-      ```
-      {: pre}
+Output di esempio:
+```
+API endpoint: cloud.ibm.com
 
-  * Washington DC
-      ```
-      ibmcloud login -a api.us-east.bluemix.net
-      ```
-      {: pre}
+Get One Time Code from https://identity-2.eu-central.iam.cloud.ibm.com/identity/passcode to proceed.
+Open the URL in the default browser? [Y/n]> y
+One Time Code >
+Authenticating...
+OK
 
-  * Sydney e Tokyo
-      ```
-      ibmcloud login -a api.au-syd.bluemix.net
-      ```
-      {: pre}
+Select an account:
+1. MyAccount (00a11aa1a11aa11a1111a1111aaa11aa) <-> 1234567
+2. TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
+Enter a number> 2
+Targeted account TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
 
-  * Francoforte
-      ```
-      ibmcloud login -a api.eu-de.bluemix.net
-      ```
-      {: pre}
 
-  * Londra
-      ```
-      ibmcloud login -a api.eu-gb.bluemix.net
-      ```
-      {: pre}
+Targeted resource group default
+
+Select a region (or press enter to skip):
+1. au-syd
+2. jp-tok
+3. eu-de
+4. eu-gb
+5. us-south
+6. us-east
+Enter a number> 5
+Targeted region us-south
+
+
+API endpoint:      https://cloud.ibm.com
+Region:            us-south
+User:              first.last@email.com
+Account:           TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
+Resource group:    default
+CF API endpoint:
+Org:
+Space:
+
+...
+```
+{: screen}
 
 <br />
 
@@ -110,7 +137,7 @@ Regioni {{site.data.keyword.containerlong_notm}} supportate:
   * Stati Uniti Est (solo cluster standard)
   * Stati Uniti Sud
 
-Puoi accedere a {{site.data.keyword.containerlong_notm}} tramite un endpoint globale: `https://containers.bluemix.net/v1`.
+Puoi accedere a {{site.data.keyword.containerlong_notm}} tramite un singolo endpoint globale: `https://containers.cloud.ibm.com/v1`.
 * Per verificare in quale regione {{site.data.keyword.containerlong_notm}} sei al momento, esegui `ibmcloud ks region`.
 * Per richiamare un elenco di regioni disponibili e i relativi endpoint, esegui `ibmcloud ks regions`.
 
@@ -127,7 +154,7 @@ Potresti voler accedere a un'altra regione {{site.data.keyword.containerlong_not
   * Hai creato i servizi {{site.data.keyword.Bluemix_notm}} o le immagini Docker private in una regione e desideri utilizzarle con {{site.data.keyword.containerlong_notm}} in un'altra regione.
   * Vuoi accedere a un cluster in una regione diversa dalla regione {{site.data.keyword.Bluemix_notm}} predefinita a cui hai eseguito l'accesso.
 
-Per selezionare velocemente la regione, esegui [`ibmcloud ks region-set`](cs_cli_reference.html#cs_region-set).
+Per selezionare velocemente la regione, esegui [`ibmcloud ks region-set`](/docs/containers?topic=containers-cs_cli_reference#cs_region-set).
 
 ### Utilizzo dei comandi API {{site.data.keyword.containerlong_notm}}
 {: #containers_api}
@@ -137,7 +164,7 @@ Per interagire con l'API {{site.data.keyword.containerlong_notm}}, immetti il ti
 
 Esempio di API `GET /clusters`:
   ```
-  GET https://containers.bluemix.net/v1/clusters
+  GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
@@ -146,7 +173,7 @@ Esempio di API `GET /clusters`:
 Per utilizzare l'API con l'endpoint globale, in tutte le richieste, trasmetti il nome della regione nell'intestazione `X-Region`. Per elencare le regioni disponibili, esegui `ibmcloud ks regions`.
 {: tip}
 
-Per visualizzare la documentazione sui comandi API, vedi [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
+Per visualizzare la documentazione sui comandi API, vedi [https://containers.cloud.ibm.com/swagger-api/](https://containers.cloud.ibm.com/swagger-api/).
 
 ## Zone in {{site.data.keyword.containerlong_notm}}
 {: #zones}
@@ -154,8 +181,8 @@ Per visualizzare la documentazione sui comandi API, vedi [https://containers.blu
 Le zone sono data center fisici che sono disponibili in una regione {{site.data.keyword.Bluemix_notm}}. Le regioni sono uno strumento concettuale per organizzare le zone e possono includere zone (data center) in diversi paesi. La seguente tabella visualizza le zone disponibili per regione.
 {:shortdesc}
 
-* **Città metropolitana multizona**: i nodi di lavoro nei cluster creati in una città metropolitana multizona possono essere distribuiti tra le zone. Inoltre, se crei un cluster Kubernetes versione 1.10 o successive in una città metropolitana multizona, i master altamente disponibili vengono estesi tra le zone.
-* **Città a zona singola**: i nodi di lavoro nei cluster creati in una città a singola zona rimangono in una singola zona. Non è possibile distribuire i nodi di lavoro tra più zone. Il master altamente disponibile include tre repliche su host separati, ma non viene esteso tra le zone.
+* **Città metropolitana multizona**: se crei un cluster in una città metropolitana multizona **ad eccezione di Sydney (Asia Pacifico Sud)**, le repliche del tuo master Kubernetes altamente disponibile vengono diffuse automaticamente tra le zone. Hai l'opzione di diffondere i tuoi nodi di lavoro tra le zone per proteggere le tue applicazioni dal malfunzionamento di una zona.
+* **Città a zona singola**: se crei un cluster in una città a zona singola, puoi creare più nodi di lavoro ma non puoi diffonderli tra le zone. Il master altamente disponibile include tre repliche su host separati, ma non viene esteso tra le zone.
 
 <table summary="La tabella mostra le zone disponibili in base alle regioni. Le righe sono da leggere da sinistra a destra, con la regione nella colonna uno, le città metropolitane multizona nella colonna due e le città a zona singola nella colonna tre.">
 <caption>Zone singole e multizona disponibili per regione.</caption>
@@ -175,9 +202,8 @@ Le zone sono data center fisici che sono disponibili in una regione {{site.data.
     </tr>
     <tr>
       <td>Asia Pacifico Sud</td>
-      <td>Nessuno</td>
-      <td><p>Sydney: syd01, syd04</p>
-      <p>Melbourne: mel01</p></td>
+      <td>Sydney: syd01, syd04, syd05</td>
+      <td>Melbourne: mel01</td>
     </tr>
     <tr>
       <td>Europa Centrale</td>
@@ -190,7 +216,7 @@ Le zone sono data center fisici che sono disponibili in una regione {{site.data.
     </tr>
     <tr>
       <td>Regno Unito Sud</td>
-      <td>Londra: lon04, lon05, lon06 **Nota**: lon05 sostituisce lon02. I nuovi cluster devono utilizzare lon05 e solo lon05 supporta i master altamente disponibili estesi tra le zone.</td>
+      <td>Londra: lon04, lon05`*`, lon06</td>
       <td></td>
     </tr>
     <tr>
@@ -202,17 +228,20 @@ Le zone sono data center fisici che sono disponibili in una regione {{site.data.
     <tr>
       <td>Stati Uniti Sud</td>
       <td>Dallas: dal10, dal12, dal13</td>
-      <td><p>San Jose: sjc03, sjc04</p><p>São Paulo: sao01</p></td>
+      <td><p>Messico: mex01</p><p>San Jose: sjc03, sjc04</p><p>São Paulo: sao01</p></td>
     </tr>
   </tbody>
 </table>
 
+`*` lon05 sostituisce lon02. I nuovi cluster devono utilizzare lon05 e solo lon05 supporta i master altamente disponibili estesi tra le zone.
+{: note}
+
 ### Cluster a zona singola
-{: #single_zone}
+{: #regions_single_zone}
 
 In un cluster a zona singola, le risorse del tuo cluster rimangono nella zona in cui viene distribuito il cluster. La seguente immagine evidenzia la relazione dei componenti del cluster a zona singola in una regione di esempio degli Stati Uniti Est:
 
-![Descrizione della posizione in cui risiedono le risorse del cluster](/images/region-cluster-resources.png)
+<img src="/images/region-cluster-resources.png" width="650" alt="Descrizione della posizione in cui risiedono le risorse del cluster" style="width:650px; border-style: none"/>
 
 _Descrizione della posizione in cui risiedono le risorse del cluster a zona singola._
 
@@ -223,16 +252,20 @@ _Descrizione della posizione in cui risiedono le risorse del cluster a zona sing
 3.  Quando avvii azioni di gestione del cluster, utilizzando ad esempio i comandi `ibmcloud ks`, le informazioni di base sul cluster (come nome, ID, utente, comando) vengono instradate tramite un endpoint regionale.
 
 ### Cluster multizona
-{: #multizone}
+{: #regions_multizone}
 
 In un cluster multizona, il nodo master viene distribuito in una zona con supporto multizona e le risorse del tuo cluster vengono distribuite tra più zone.
 
 1.  I nodi di lavoro vengono distribuiti tra più zone in una singola regione per fornire maggiore disponibilità per il tuo cluster. Il master rimane nella stessa zona con supporto multizona in cui avevi distribuito il cluster. Quando avvii le azioni di orchestrazione del contenitore locali, quali i comandi `kubectl`, le informazioni vengono scambiate tra i tuoi nodi master e di lavoro tramite un endpoint regionale.
 
 2.  La modalità di distribuzione nelle zone nel tuo cluster multizona di altre risorse del cluster, quali l'archiviazione, la rete, il calcolo o le applicazioni in esecuzione nei pod, varia. Per ulteriori informazioni, consulta questi argomenti:
-    * Configurazione di [archiviazione file](cs_storage_file.html#add_file) e [archiviazione blocco](cs_storage_block.html#add_block) nei cluster multizona.
-    * [Abilitazione dell'accesso pubblico o privato a un'applicazione utilizzando un servizio LoadBalancer in un cluster multizona](cs_loadbalancer.html#multi_zone_config)
-    * [Gestione del traffico di rete utilizzando Ingress](cs_ingress.html#planning)
-    * [Aumento della disponibilità della tua applicazione](cs_app.html#increase_availability)
+    * Configurazione di [archiviazione file](/docs/containers?topic=containers-file_storage#add_file) e [archiviazione blocco](/docs/containers?topic=containers-block_storage#add_block) nei cluster multizona.
+    * [Abilitazione dell'accesso pubblico o privato a un'applicazione utilizzando un servizio LoadBalancer in un cluster multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+    * [Gestione del traffico di rete utilizzando Ingress](/docs/containers?topic=containers-ingress#planning)
+    * [Aumento della disponibilità della tua applicazione](/docs/containers?topic=containers-app#increase_availability)
 
-3.  Quando avvii azioni di gestione del cluster, utilizzando ad esempio i comandi [`ibmcloud ks`](cs_cli_reference.html#cs_cli_reference), le informazioni di base sul cluster (come nome, ID, utente, comando) vengono instradate tramite un endpoint regionale.
+3.  Quando avvii azioni di gestione del cluster, utilizzando ad esempio i comandi [`ibmcloud ks`](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), le informazioni di base sul cluster (come nome, ID, utente, comando) vengono instradate tramite un endpoint regionale.
+
+
+
+

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, docker
+
+subcollection: containers
 
 ---
 
@@ -17,7 +21,6 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Tecnologia {{site.data.keyword.containerlong_notm}}
@@ -64,9 +67,9 @@ ambienti standardizzati alle distribuzioni di sviluppo e produzione. Il runtime 
   </ul>
   </dd>
 
-<p>Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le immagini del contenitore.</p>
+<p>Ulteriori informazioni sulla [protezione delle tue informazioni personali](/docs/containers?topic=containers-security#pi) quando utilizzi le immagini del contenitore.</p>
 
-<p>Pronto per approfondire le informazioni su Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Impara come Docker e {{site.data.keyword.containerlong_notm}} funzionano insieme completando questo corso.</a></p>
+<p>Pronto per approfondire le informazioni su Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">Impara come Docker e {{site.data.keyword.containerlong_notm}} funzionano insieme completando questo corso.</a></p>
 
 </dl>
 
@@ -81,7 +84,7 @@ ambienti standardizzati alle distribuzioni di sviluppo e produzione. Il runtime 
 
 Ulteriori informazioni su alcuni concetti Kubernetes di base sono mostrate nel seguente diagramma.
 
-![Impostazioni di distribuzione](images/cs_app_tutorial_components1.png)
+![Impostazioni di distribuzione](images/cs_app_tutorial_mz-components1.png)
 
 <dl>
 <dt>Account</dt>
@@ -110,11 +113,11 @@ in un pod, in modo che tali contenitori possano essere indirizzati utilizzando l
 <dt>Applicazione</dt>
 <dd>Un'applicazione può far riferimento a un'applicazione completa o a un componente di un'applicazione. Potresti distribuire i componenti di un'applicazione in pod o nodi di lavoro separati.</dd>
 
-<p>Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le risorse Kubernetes.</p>
+<p>Ulteriori informazioni sulla [protezione delle tue informazioni personali](/docs/containers?topic=containers-security#pi) quando utilizzi le risorse Kubernetes.</p>
 
 <p>Pronto per approfondire le informazioni su Kubernetes?</p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Amplia la tua conoscenza della terminologia con l'esercitazione Creazione dei cluster</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Impara come Kubernetes e {{site.data.keyword.containerlong_notm}} funzionano insieme completando questo corso.</a></li></ul>
+<ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">Amplia la tua conoscenza della terminologia con l'esercitazione Creazione dei cluster</a>.</li>
+<li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">Impara come Kubernetes e {{site.data.keyword.containerlong_notm}} funzionano insieme completando questo corso.</a></li></ul>
 
 
 </dl>
@@ -125,15 +128,22 @@ in un pod, in modo che tali contenitori possano essere indirizzati utilizzando l
 ## Architettura del servizio
 {: #architecture}
 
-In un cluster Kubernetes eseguito su {{site.data.keyword.containerlong_notm}}, le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo denominati nodi di lavoro. Per essere più specifici, le applicazioni vengono eseguite nei pod e i pod sono ospitati sui nodi di lavoro. I nodi di lavoro sono gestiti dal master Kubernetes. Il master Kubernetes e i nodi di lavoro comunicano tra loro tramite certificati TLS protetti e una connessione openVPN per orchestrare le configurazioni del tuo cluster.
+In un cluster Kubernetes eseguito su {{site.data.keyword.containerlong_notm}}, le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo denominati nodi di lavoro. Per essere più specifici, le applicazioni vengono eseguite nei pod e i pod sono ospitati sui nodi di lavoro. I nodi di lavoro sono gestiti dal master Kubernetes. La configurazione delle comunicazioni tra il master Kubernetes e i nodi di lavoro dipende da come configuri la tua infrastruttura IBM Cloud (SoftLayer): un account con un endpoint del servizio pubblico o un account abilitato a VRF con endpoint del servizio pubblico e di servizio privato.
 {: shortdesc}
 
-La seguente immagine mostra i componenti del tuo cluster e il modo in cui interagiscono.
+La seguente immagine mostra i componenti del tuo cluster e come interagiscono in un account quando è [abilitato un endpoint del servizio pubblico](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public) solamente.
 <p>
 <figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
- <figcaption>{{site.data.keyword.containerlong_notm}} architecture</figcaption>
-</figure>
+ <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} - architettura Kubernetes">
+ <figcaption>Architettura di {{site.data.keyword.containerlong_notm}} quando è abilitato solo l'endpoint del servizio pubblico</figcaption> </figure>
+</p>
+
+La seguente immagine mostra i componenti del tuo cluster e come interagiscono in un account abilitato a VRF quando [sono abilitati gli endpoint del servizio pubblico e di servizio privato](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
+
+<p>
+<figure>
+ <img src="images/cs_org_ov_both_ses.png" alt="{{site.data.keyword.containerlong_notm}} - architettura Kubernetes">
+ <figcaption>Architettura di {{site.data.keyword.containerlong_notm}} quando sono abilitati gli endpoint del servizio pubblico e di servizio privato</figcaption> </figure>
 </p>
 
 Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di averlo chiesto.
@@ -166,11 +176,11 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     </tr>
     <tr>
     <td>kube-controller-manager</td>
-    <td>Il gestore controller Kubernetes è un daemon che controlla lo stato delle risorse del cluster, quali le serie di repliche. Quando lo stato di una risorsa viene modificato, ad esempio se si verifica un'interruzione di un pod in una serie di repliche, il gestore controller avvia le azioni correttive per raggiungere lo stato desiderato.</td>
+    <td>Il gestore controller Kubernetes è un daemon che controlla lo stato delle risorse del cluster, quali le serie di repliche. Quando lo stato di una risorsa viene modificato, ad esempio se si verifica un'interruzione di un pod in una serie di repliche, il gestore controller avvia le azioni correttive per raggiungere lo stato richiesto.</td>
     </tr>
     </tbody></table></dd>
   <dt>Nodo di lavoro</dt>
-    <dd>Ogni nodo di lavoro è una macchina fisica (bare metal) o una macchina virtuale che viene eseguita su hardware fisico nell'ambiente cloud. Quando esegui il provisioning di un nodo di lavoro, determini le risorse disponibili per i contenitori ospitati su quel nodo di lavoro. Per impostazione predefinita, i tuoi nodi di lavoro sono configurati con un motore Docker gestito da {{site.data.keyword.IBM_notm}}, risorse di calcolo separate, collegamento di rete e un servizio di volume. Le funzioni di sicurezza integrate forniscono isolamento, funzionalità di gestione delle risorse e conformità di sicurezza dei nodi di lavoro.</br></br>La seguente tabella descrive i componenti di un nodo di lavoro.
+    <dd>Ogni nodo di lavoro è una macchina fisica (bare metal) o una macchina virtuale che viene eseguita su hardware fisico nell'ambiente cloud. Quando esegui il provisioning di un nodo di lavoro, determini le risorse disponibili per i contenitori ospitati su quel nodo di lavoro. Per impostazione predefinita, i tuoi nodi di lavoro sono configurati con un motore Docker gestito da {{site.data.keyword.IBM_notm}}, risorse di calcolo separate, collegamento di rete e un servizio di volume. Le funzioni di sicurezza integrate forniscono isolamento, funzionalità di gestione delle risorse e conformità di sicurezza dei nodi di lavoro.</br></br><p class="note">La modifica dei componenti di nodo di lavoro predefiniti come ad esempio `kubelet` non è supportata e potrebbe causare dei risultati imprevisti.</p>La seguente tabella descrive i componenti di un nodo di lavoro.
     <table>
     <caption>Componenti dei nodi di lavoro</caption>
     <thead>
@@ -180,47 +190,47 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     </thead>
     <tbody>
     <tr>
-    <td>ibm-master-proxy</td>
+    <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
     <td>Per i cluster che eseguono Kubernetes versione 1.10 o successive, `ibm-master-proxy` inoltra le richieste dal nodo di lavoro agli indirizzi IP delle repliche dei master altamente disponibili. Nei cluster a zona singola, il master ha tre repliche su host separati con un indirizzo IP e un nome di dominio del master. Per i cluster che si trovano in una zona che supporta il multizona, il master ha tre repliche che vengono estese tra le zone. In quanto tale, ogni master ha il proprio indirizzo IP registrato con DNS, con un nome di dominio per l'intero master del cluster.</td>
     </tr>
     <tr>
-    <td>openvpn-client</td>
+    <td>`openvpn-client`</td>
     <td>kube-system</td>
     <td>Il client OpenVPN funziona con il server OpenVPN per connettere in modo protetto il master al nodo di lavoro. Questa connessione supporta le chiamate `apiserver proxy` ai tuoi pod e servizi e le chiamate `kubectl exec`, `attach` e `logs` a kubelet.</td>
     </tr>
     <tr>
-    <td>kubelet</td>
+    <td>`kubelet`</td>
     <td>kube-system</td>
     <td>Il kubelet è un pod che viene eseguito su ogni nodo di lavoro ed è responsabile del monitoraggio dell'integrità dei pod in esecuzione sul nodo di lavoro e del controllo degli eventi inviati dal server API Kubernetes. In base agli eventi, il kubelet crea o rimuove i pod, garantisce i probe di attività e disponibilità e segnala in risposta lo stato dei pod al server API Kubernetes.</td>
     </tr>
     <tr>
-    <td>kube-dns</td>
+    <td>`coredns`</td>
     <td>kube-system</td>
-    <td>Il DNS Kubernetes pianifica un servizio e un pod DNS sul cluster. I contenitori utilizzano automaticamente l'IP del servizio DNS per risolvere i nomi DNS nelle loro ricerche di altri pod e servizi.</td>
+    <td>Per impostazione predefinita, Kubernetes pianifica un pod CoreDNS (o un pod KubeDNS nella versione 1.12 e precedenti) e il servizio sul cluster. I contenitori utilizzano automaticamente l'IP del servizio DNS per risolvere i nomi DNS nelle loro ricerche di altri pod e servizi.</td>
     </tr>
     <tr>
-    <td>calico</td>
+    <td>`calico`</td>
     <td>kube-system</td>
     <td>Calico gestisce le politiche di rete per il tuo cluster e comprende alcuni componenti come i seguenti.
     <ul>
-    <li>**calico-cni**: la CNI (container network interface) Calico gestisce la connettività di rete dei contenitori e rimuove le risorse assegnate quando un contenitore viene eliminato.</li>
-    <li>**calico-ipam**: l'IPAM Calico gestisce l'assegnazione degli indirizzi IP per i contenitori.</li>
-    <li>**calico-node**: il nodo Calico è un contenitore che riunisce i vari componenti necessari per i contenitori di rete con Calico.</li>
-    <li>**calico-policy-controller**: il controller politiche Calico controlla il traffico di rete in entrata e in uscita per la conformità alle politiche di rete impostate. Se il traffico non è consentito nel cluster, l'accesso al cluster viene bloccato. Il controller politiche Calico viene inoltre utilizzato per creare e impostare le politiche di rete per un cluster.</li></ul></td>
+    <li>**`calico-cni`**: la CNI (container network interface) Calico gestisce la connettività di rete dei contenitori e rimuove le risorse assegnate quando un contenitore viene eliminato.</li>
+    <li>**`calico-ipam`**: l'IPAM Calico gestisce l'assegnazione degli indirizzi IP per i contenitori.</li>
+    <li>**`calico-node`**: il nodo Calico è un contenitore che riunisce i vari componenti necessari per i contenitori di rete con Calico.</li>
+    <li>**`calico-policy-controller`**: il controller politiche Calico controlla il traffico di rete in entrata e in uscita per la conformità alle politiche di rete impostate. Se il traffico non è consentito nel cluster, l'accesso al cluster viene bloccato. Il controller politiche Calico viene inoltre utilizzato per creare e impostare le politiche di rete per un cluster.</li></ul></td>
     </tr>
     <tr>
-    <td>kube-proxy</td>
+    <td>`kube-proxy`</td>
     <td>kube-system</td>
     <td>Il proxy di rete Kubernetes è un daemon che viene eseguito su ogni nodo di lavoro e che inoltra o che bilancia il carico del traffico di rete TCP e UDP per i servizi eseguiti nel cluster.</td>
     </tr>
     <tr>
-    <td>kube-dashboard</td>
+    <td>`kube-dashboard`</td>
     <td>kube-system</td>
     <td>Il dashboard Kubernetes è una GUI basata sul web che consente agli utenti di gestire e risolvere i problemi relativi al cluster e alle applicazioni in esecuzione nel cluster.</td>
     </tr>
     <tr>
-    <td>heapster</td>
+    <td>`heapster`</td>
     <td>kube-system</td>
     <td>Heapster è un aggregatore a livello di cluster di dati di monitoraggio e di evento. Il pod Heapster rileva tutti i nodi nel cluster e interroga le informazioni sull'utilizzo dal kubelet di ciascun nodo. Puoi trovare i grafici di utilizzo nel dashboard Kubernetes.</td>
     </tr>
@@ -252,5 +262,5 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     </tbody></table></dd>
 </dl>
 
-Vuoi vedere in che modo {{site.data.keyword.containerlong_notm}} può essere utilizzato con altri prodotti e servizi? Controlla alcune delle [integrazioni](cs_integrations.html#integrations).
+Vuoi vedere in che modo {{site.data.keyword.containerlong_notm}} può essere utilizzato con altri prodotti e servizi? Controlla alcune delle [integrazioni](/docs/containers?topic=containers-integrations#integrations).
 {: tip}

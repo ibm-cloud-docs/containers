@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # 使用網路原則控制資料流量
 {: #network_policies}
 
@@ -31,7 +36,7 @@ lastupdated: "2018-12-05"
   <li>
   [Kubernetes 網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)：這些原則指定 Pod 如何與其他 Pod 及外部端點通訊。自 Kubernetes 1.8 版開始，可根據通訊協定、埠及來源或目的地 IP 位址，容許或封鎖送入及送出的網路資料流量。也可以根據 Pod 及名稱空間標籤來過濾資料流量。您可以使用 `kubectl` 指令或 Kubernetes API 來套用 Kubernetes 網路原則。這些原則在套用時會自動轉換為 Calico 網路原則，而 Calico 會強制執行這些原則。</li>
   <li>
-  Kubernetes [1.10 版以及更新版本叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) 或 [1.9 版以及更早版本叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) 的 Calico 網路原則：這些原則是 Kubernetes 網路原則的超集，並使用 `calicoctl` 指令來套用。Calico 原則新增下列特性。
+  [Calico 網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)：這些原則是 Kubernetes 網路原則的超集，並且使用 `calicoctl` 指令予以套用。Calico 原則新增下列特性。
     <ul>
     <li>不論 Kubernetes Pod 來源或目的地 IP 位址或 CIDR，都容許或封鎖特定網路介面上的網路資料流量。</li>
     <li>容許或封鎖名稱空間的 Pod 之間的網路資料流量。</li>
@@ -42,7 +47,7 @@ lastupdated: "2018-12-05"
 
 Calico 藉由在 Kubernetes 工作者節點上設定 Linux Iptables 規則，來強制執行這些原則（包括任何會自動轉換為 Calico 原則的 Kubernetes 網路原則）。iptables 規則作為工作者節點的防火牆，以定義網路資料流量必須符合才能轉遞至目標資源的特徵。
 
-若要使用 Ingress 及負載平衡器服務，請使用 Calico 及 Kubernetes 原則來管理進出叢集的網路資料流量。請不要使用 IBM Cloud 基礎架構 (SoftLayer) [安全群組](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups)。IBM Cloud 基礎架構 (SoftLayer) 安全群組會套用至單一虛擬伺服器的網路介面，以過濾 Hypervisor 層次的資料流量。不過，安全群組不支援 VRRP 通訊協定，而 {{site.data.keyword.containerlong_notm}} 使用此通訊協定來管理負載平衡器 IP 位址。如果沒有 VRRP 通訊協定可以管理負載平衡器 IP，則 Ingress 及負載平衡器服務無法正常運作。
+若要使用 Ingress 及負載平衡器服務，請使用 Calico 及 Kubernetes 原則來管理進出叢集的網路資料流量。請不要使用 IBM Cloud 基礎架構 (SoftLayer) [安全群組](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups)。IBM Cloud 基礎架構 (SoftLayer) 安全群組會套用至單一虛擬伺服器的網路介面，以過濾 Hypervisor 層次的資料流量。不過，安全群組不支援 VRRP 通訊協定，而 {{site.data.keyword.containerlong_notm}} 使用此通訊協定來管理負載平衡器 IP 位址。如果沒有 VRRP 通訊協定可以管理負載平衡器 IP，則 Ingress 及負載平衡器服務無法正常運作。
 {: tip}
 
 <br />
@@ -51,7 +56,7 @@ Calico 藉由在 Kubernetes 工作者節點上設定 Linux Iptables 規則，來
 ## 預設 Calico 及 Kubernetes 網路原則
 {: #default_policy}
 
-建立具有公用 VLAN 的叢集時，會針對每一個工作者節點及其公用網路介面，自動建立具有 `ibm.role: worker_public` 標籤的 HostEndpoint 資源。若要保護工作者節點的公用網路介面，預設 Calico 原則會套用至任何具有 `ibm.role: worker_public` 標籤的主機端點。
+建立具有公用 VLAN 的叢集時，會針對每個工作者節點及其公用網路介面，自動建立具有 `ibm.role: worker_public` 標籤的 `HostEndpoint` 資源。若要保護工作者節點的公用網路介面，預設 Calico 原則會套用至任何具有 `ibm.role: worker_public` 標籤的主機端點。
 {:shortdesc}
 
 這些預設 Calico 原則容許所有出埠網路資料流量，並容許特定叢集元件（例如 Kubernetes NodePort、LoadBalancer 及 Ingress 服務）的入埠資料流量。會封鎖從網際網路至工作者節點的任何其他入埠網路資料流量（預設原則中未指定的）。預設原則不會影響 Pod 至 Pod 的資料流量。
@@ -94,7 +99,7 @@ Calico 藉由在 Kubernetes 工作者節點上設定 Linux Iptables 規則，來
   </tbody>
 </table>
 
-在 Kibernetes 1.10 版以及更新版本的叢集裡，還建立了預設 Kubernetes 原則，用來限制對「Kubernetes 儀表板」的存取。Kubernetes 原則不適用於主機端點，反而適用於 `kube-dashboard` Pod。此原則適用於僅連接至專用 VLAN 的叢集，以及連接至公用及專用 VLAN 的叢集。
+在 Kubernetes 1.10 版以及更新版本的叢集中，還建立了預設 Kubernetes 原則，用來限制對「Kubernetes 儀表板」的存取權。Kubernetes 原則不適用於主機端點，反而適用於 `kube-dashboard` Pod。此原則適用於僅連接至專用 VLAN 的叢集，以及連接至公用及專用 VLAN 的叢集。
 
 <table>
 <caption>每一個叢集的預設 Kubernetes 原則</caption>
@@ -104,7 +109,7 @@ Calico 藉由在 Kubernetes 工作者節點上設定 Linux Iptables 規則，來
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>僅限在 Kubernetes 1.10 版或更新版本</b>（於 <code>kube-system</code> 名稱空間中提供）：封鎖所有 Pod 存取「Kubernetes 儀表板」。此原則不會影響從 {{site.data.keyword.Bluemix_notm}} 主控台，或使用 <code>kubectl proxy</code> 存取儀表板。如果 Pod 需要存取儀表板，請在名稱空間中部署具有 <code>kubernetes-dashboard-policy: allow</code> 標籤的 Pod。</td>
+  <td>僅限在 Kubernetes 1.10 版或更新版本（於 <code>kube-system</code> 名稱空間中提供）：封鎖所有 Pod 存取「Kubernetes 儀表板」。此原則不會影響從 {{site.data.keyword.Bluemix_notm}} 主控台，或使用 <code>kubectl proxy</code> 存取儀表板。如果 Pod 需要存取儀表板，請在名稱空間中部署具有 <code>kubernetes-dashboard-policy: allow</code> 標籤的 Pod。</td>
  </tr>
 </tbody>
 </table>
@@ -118,31 +123,14 @@ Calico 藉由在 Kubernetes 工作者節點上設定 Linux Iptables 規則，來
 若要檢視、管理及新增 Calico 原則，請安裝並配置 Calico CLI。
 {:shortdesc}
 
-CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes 版本而不同。若要安裝並配置 Calico CLI，請根據您的叢集版本按一下下列其中一個鏈結：
-
-* [Kubernetes 1.10 版或更新版本的叢集](#1.10_install)
-* [Kubernetes 1.9 版或更早版本的叢集（已淘汰）](#1.9_install)
-
-在您將叢集從 Kubernetes 1.9 版或更早版本更新至 1.10 版或更新版本之前，請檢閱[準備更新至 Calico 第 3 版](cs_versions.html#110_calicov3)。
-{: tip}
-
-### 針對執行 Kubernets 1.10 版或更新版本的叢集，安裝並配置 3.3.1 版 Calico CLI
-{: #1.10_install}
-
-1. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
+1. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。請包括 `--admin` 及 `--network` 選項與 `ibmcloud ks cluster-config` 指令。`--admin` 會下載金鑰，以存取基礎架構組合以及在工作者節點上執行 Calico 指令。`--network` 會下載 Calico 配置檔，以執行所有 Calico 指令。
 
   ```
-  ibmcloud ks cluster-config <cluster_name> --admin
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
   ```
   {: pre}
 
-2. 下載 Calico 配置檔，以執行所有 Calico 指令。
-    ```
-    ibmcloud ks cluster-config <cluster_name_or_ID> --network
-    ```
-    {: pre}
-
-3. 若為 OSX 及 Linux 使用者，請完成下列步驟。
+3. 若為 OS X 及 Linux 使用者，請完成下列步驟。
     1. 建立 `/etc/calico` 目錄。
         ```
         sudo mkdir /etc/calico
@@ -157,10 +145,10 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
 
 4. [下載 Calico CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/projectcalico/calicoctl/releases/tag/v3.3.1)。
 
-    如果您使用的是 OSX，請下載 `-darwin-amd64` 版本。如果您使用的是 Windows，請將 Calico CLI 安裝在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。請務必將檔案儲存為 `calicoctl.exe`。
+    如果您使用 OS X，請下載 `-darwin-amd64` 版本。如果您使用的是 Windows，請將 Calico CLI 安裝在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。請務必將檔案儲存為 `calicoctl.exe`。
     {: tip}
 
-5. 若為 OSX 及 Linux 使用者，請完成下列步驟。
+5. 若為 OS X 及 Linux 使用者，請完成下列步驟。
     1. 將執行檔移至 _/usr/local/bin_ 目錄。
         - Linux：
 
@@ -183,7 +171,7 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
         ```
         {: pre}
 
-6. 如果組織網路原則使用 Proxy 或防火牆，來阻止從本端系統存取公用端點，請[容許 Calico 指令的 TCP 存取](cs_firewall.html#firewall)。
+6. 如果組織網路原則使用 Proxy 或防火牆，來阻止從本端系統存取公用端點，請[容許 Calico 指令的 TCP 存取](/docs/containers?topic=containers-firewall#firewall)。
 
 7. 驗證 Calico 配置正確運作。
 
@@ -194,7 +182,7 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
       ```
       {: pre}
 
-    - Windows：使用 `--config` 旗標來指向您在步驟 1 中取得的網路配置檔。每次執行 `calicoctl` 指令時都包括此旗標。
+    - Windows：使用 `--config` 旗標來指向您在步驟 1 中取得的網路配置檔。每次執行 `calicoctl` 指令時，都包括此旗標。
 
       ```
       calicoctl get nodes --config=filepath/calicoctl.cfg
@@ -211,160 +199,6 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
       ```
       {: screen}
 
-
-### 針對執行 Kubernets 1.9 版或更早版本的叢集（已淘汰），安裝並配置 1.6.3 版 Calico CLI
-{: #1.9_install}
-
-Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。
-{: note}
-
-1. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
-
-  ```
-  ibmcloud ks cluster-config <cluster_name> --admin
-  ```
-  {: pre}
-
-
-2. [下載 Calico CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.3)。
-
-    如果您使用的是 OSX，請下載 `-darwin-amd64` 版本。如果您使用的是 Windows，請將 Calico CLI 安裝在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。
-    {: tip}
-
-3. 若為 OSX 及 Linux 使用者，請完成下列步驟。
-    1. 將執行檔移至 _/usr/local/bin_ 目錄。
-        - Linux：
-          ```
-          mv filepath/calicoctl /usr/local/bin/calicoctl
-          ```
-          {: pre}
-
-        - OS X：
-          ```
-          mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
-          ```
-          {: pre}
-
-    2. 讓檔案成為可執行檔。
-        ```
-        chmod +x /usr/local/bin/calicoctl
-        ```
-        {: pre}
-
-4. 檢查 Calico CLI 用戶端版本，驗證已適當地執行 `calicoctl` 指令。
-    ```
-    calicoctl version
-    ```
-    {: pre}
-
-5. 如果組織網路原則使用 Proxy 或防火牆，來阻止從本端系統存取公用端點：請參閱[從防火牆後面執行 `calicoctl` 指令](cs_firewall.html#firewall)，以取得如何容許 Calico 指令的 TCP 存取的指示。
-
-6. 若為 Linux 及 OS X，請建立 `/etc/calico` 目錄。若為 Windows，任何目錄皆可使用。
-    ```
-    sudo mkdir -p /etc/calico/
-    ```
-    {: pre}
-
-7. 建立 `calicoctl.cfg` 檔案。
-    - Linux 及 OS X：
-      ```
-      sudo vi /etc/calico/calicoctl.cfg
-      ```
-      {: pre}
-
-    - Windows：使用文字編輯器建立檔案。
-
-8. 在 <code>calicoctl.cfg</code> 檔案中，輸入下列資訊。
-
-    ```
-    apiVersion: v1
-    kind: calicoApiConfig
-    metadata:
-    spec:
-        etcdEndpoints: https://<ETCD_HOST>:<ETCD_PORT>
-        etcdKeyFile: <CERTS_DIR>/admin-key.pem
-        etcdCertFile: <CERTS_DIR>/admin.pem
-        etcdCACertFile: <CERTS_DIR>/<ca-*pem_file>
-    ```
-    {: codeblock}
-
-    1. 擷取 `<ETCD_HOST>` 及 `<ETCD_PORT>`。
-        1. 從 `cluster-info` ConfigMap 取得 Calico 配置值。
-            ```
-            kubectl get cm -n kube-system cluster-info -o yaml
-            ```
-            {: pre}
-
-        2. 在 `data` 區段中，找出 `etcd_host` 和 `etcd_port` 值。
-
-    2. 擷取 `<CERTS_DIR>`，這是將 Kubernetes 憑證下載至其中的目錄。
-
-        - Linux 及 OS X：
-          ```
-          dirname $KUBECONFIG
-          ```
-          {: pre}
-
-          輸出範例：
-          ```
-          /home/sysadmin/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/
-          ```
-          {: screen}
-
-        - Windows：
-          ```
-          ECHO %KUBECONFIG%
-          ```
-          {: pre}
-
-          輸出範例：
-          ```
-          C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
-          ```
-          {: screen}
-
-        若要取得目錄路徑，請移除輸出尾端的檔名 `kube-config-prod-<zone>-<cluster_name>.yml`。
-
-    3. 擷取 `ca-*pem_file`。
-
-        - Linux 及 OS X：
-          ```
-          ls `dirname $KUBECONFIG` | grep "ca-"
-          ```
-          {: pre}
-
-        - Windows：
-          1. 開啟您在最後一個步驟中擷取的目錄。
-              ```
-              C:\Users\<user>\.bluemix\plugins\container-service\<cluster_name>-admin\
-              ```
-              {: pre}
-
-          2. 找出 `ca-*pem_file` 檔案。
-
-    4. 驗證 Calico 配置正確運作。
-
-        - Linux 及 OS X：
-          ```
-          calicoctl get nodes
-          ```
-          {: pre}
-
-        - Windows：使用 `--config` 旗標來指向您所建立的網路配置檔。每次執行 `calicoctl` 指令時都包括此旗標。
-          ```
-          calicoctl get nodes --config=filepath/calicoctl.cfg
-          ```
-          {: pre}
-
-          輸出：
-          ```
-          NAME
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w3.cloud.ibm
-          ```
-          {: screen}
-
 <br />
 
 
@@ -376,22 +210,14 @@ Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不
 
 開始之前：
 1. [安裝並配置 Calico CLI。](#cli_install)
-2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
+2. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。請包括 `--admin` 及 `--network` 選項與 `ibmcloud ks cluster-config` 指令。`--admin` 會下載金鑰，以存取基礎架構組合以及在工作者節點上執行 Calico 指令。`--network` 會下載 Calico 配置檔，以執行所有 Calico 指令。
 
-CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes 版本而不同。若要安裝並配置 Calico CLI，請根據您的叢集版本按一下下列其中一個鏈結：
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
-* [Kubernetes 1.10 版或更新版本的叢集](#1.10_examine_policies)
-* [Kubernetes 1.9 版或更早版本的叢集（已淘汰）](#1.9_examine_policies)
-
-Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。在您將叢集從 Kubernetes 1.9 版或更早版本更新至 1.10 版或更新版本之前，請檢閱[準備更新至 Calico 第 3 版](cs_versions.html#110_calicov3)。
-{: note}
-
-### 檢視執行 Kubernetes 1.10 版或更新版本之叢集裡的網路原則
-{: #1.10_examine_policies}
+**若要檢視叢集中的網路原則**，請執行下列動作：
 
 Linux 和 Mac 使用者不需要在 `calicoctl` 指令中包括 `--config=filepath/calicoctl.cfg` 旗標。
 {: tip}
@@ -431,43 +257,6 @@ Linux 和 Mac 使用者不需要在 `calicoctl` 指令中包括 `--config=filepa
     ```
     {: pre}
 
-### 檢視執行 Kubernetes 1.9 版或更早版本之叢集（已淘汰）中的網路原則
-{: #1.9_examine_policies}
-
-Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。
-{: note}
-
-Linux 使用者不需要在 `calicoctl` 指令中包括 `--config=filepath/calicoctl.cfg` 旗標。
-{: tip}
-
-1. 檢視 Calico 主機端點。
-
-    ```
-    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-2. 檢視已為叢集建立的所有 Calico 及 Kubernetes 網路原則。這份清單包括可能尚未套用至任何 Pod 或主機的原則。若要強制執行網路原則，則必須找到符合 Calico 網路原則中所定義之選取器的 Kubernetes 資源。
-
-    ```
-    calicoctl get policy -o wide --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-3. 檢視網路原則的詳細資料。
-
-    ```
-    calicoctl get policy -o yaml <policy_name> --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-4. 檢視叢集的所有網路原則的詳細資料。
-
-    ```
-    calicoctl get policy -o yaml --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
 <br />
 
 
@@ -479,60 +268,19 @@ Linux 使用者不需要在 `calicoctl` 指令中包括 `--config=filepath/calic
 
 若要建立 Kubernetes 網路原則，請參閱 [Kubernetes 網路原則文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)。
 
-若要建立 Calico 原則，請使用下列步驟。CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes 版本而不同。根據您的叢集版本，按一下下列其中一個鏈結：
+若要建立 Calico 原則，請使用下列步驟。
 
-* [Kubernetes 1.10 版或更新版本的叢集](#1.10_create_new)
-* [Kubernetes 1.9 版或更早版本的叢集（已淘汰）](#1.9_create_new)
-
-Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。在您將叢集從 Kubernetes 1.9 版或更早版本更新至 1.10 版或更新版本之前，請檢閱[準備更新至 Calico 第 3 版](cs_versions.html#110_calicov3)。
-{: tip}
-
-### 在執行 Kubernetes 1.10 版或更新版本的叢集裡新增 Calico 原則
-{: #1.10_create_new}
-
-開始之前：
 1. [安裝並配置 Calico CLI。](#cli_install)
-2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
+2. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。請包括 `--admin` 及 `--network` 選項與 `ibmcloud ks cluster-config` 指令。`--admin` 會下載金鑰，以存取基礎架構組合以及在工作者節點上執行 Calico 指令。`--network` 會下載 Calico 配置檔，以執行所有 Calico 指令。
 
-1. 定義您的 Calico [網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 或 [廣域網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy)，方法為建立配置 Script (`.yaml`)。這些配置檔包含選取器，其說明這些原則適用的 Pod、名稱空間或主機。請參閱這些 [Calico 原則範例 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)，以協助您建立自己的原則。請注意，Kubernetes 1.10 版或更新版本的叢集必須使用 Calico 第 3 版原則語法。
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
-2. 將原則套用至叢集。
-    - Linux 及 OS X：
+3. 定義您的 Calico [網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 或 [廣域網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy)，方法為建立配置 Script (`.yaml`)。這些配置檔包含選取器，其說明這些原則適用的 Pod、名稱空間或主機。請參閱這些 [Calico 原則範例 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)，以協助您建立自己的原則。請注意，Kubernetes 1.10 版或更新版本的叢集必須使用 Calico 第 3 版原則語法。
 
-      ```
-      calicoctl apply -f policy.yaml
-      ```
-      {: pre}
-
-    - Windows：
-
-      ```
-      calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
-
-### 在執行 Kubernetes 1.9 版或更早版本的叢集（已淘汰）中新增 Calico 原則
-{: #1.9_create_new}
-
-Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。
-{: note}
-
-開始之前：
-1. [安裝並配置 Calico CLI。](#cli_install)
-2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
-
-1. 定義您的 [Calico 網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)，方法為建立配置 Script (`.yaml`)。這些配置檔包含選取器，其說明這些原則適用的 Pod、名稱空間或主機。請參閱這些 [Calico 原則範例 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)，以協助您建立自己的原則。請注意，Kubernetes 1.9 版或更早版本的叢集必須使用 Calico 第 2 版原則語法。
-
-
-2. 將原則套用至叢集。
+4. 將原則套用至叢集。
     - Linux 及 OS X：
 
       ```
@@ -561,15 +309,27 @@ Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不
 Calico DNAT 前網路原則的一些常見用途：
 
   - 封鎖資料流量傳輸至專用負載平衡器服務的公用節點埠：負載平衡器服務可讓您的應用程式透過負載平衡器 IP 位址及埠提供使用，並讓您的應用程式可透過服務的節點埠提供使用。叢集裡每個節點的每個 IP 位址（公開和專用）上都可以存取節點埠。
-  - 封鎖資料流量傳輸至叢集上正在執行[邊緣工作者節點](cs_edge.html#edge)的公用節點埠：封鎖節點埠可確保邊緣工作者節點是處理送入資料流量的唯一工作者節點。
+  - 封鎖資料流量傳輸至叢集上正在執行[邊緣工作者節點](/docs/containers?topic=containers-edge#edge)的公用節點埠：封鎖節點埠可確保邊緣工作者節點是處理送入資料流量的唯一工作者節點。
   - 封鎖來自特定來源 IP 位址或 CIDR（黑名單）的資料流量
   - 只容許來自特定來源 IP 位址或 CIDR（白名單）的資料流量，並封鎖所有其他資料流量
 
-若要查看如何將來源 IP 位址列入白名單或黑名單，請嘗試[使用 Calico 網路原則封鎖資料流量指導教學](cs_tutorials_policies.html#policy_tutorial)。如需其他控制資料流量進出叢集的範例 Calico 網路原則，請參閱[主要原則展示 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) 及[進階網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)。
+若要查看如何將來源 IP 位址列入白名單或黑名單，請嘗試[使用 Calico 網路原則封鎖資料流量指導教學](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)。如需其他控制資料流量進出叢集的範例 Calico 網路原則，請參閱[主要原則展示 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) 及[進階網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)。
 {: tip}
 
+開始之前：
+1. [安裝並配置 Calico CLI。](#cli_install)
+2. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。請包括 `--admin` 及 `--network` 選項與 `ibmcloud ks cluster-config` 指令。`--admin` 會下載金鑰，以存取基礎架構組合以及在工作者節點上執行 Calico 指令。`--network` 會下載 Calico 配置檔，以執行所有 Calico 指令。
+
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+若要建立 DNAT 前原則，請執行下列動作：
+
 1. 針對 Kubernetes 服務的 Ingress（入埠資料流量）存取，定義 Calico DNAT 前網路原則。
-    * Kubernetes 1.10 版或更新版本的叢集必須使用 [Calico 第 3 版原則語法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy)。Kubernetes 1.9 版或更舊版本的叢集必須使用 [Calico 第 2 版原則語法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)。
+    * Kubernetes 1.10 版或更新版本的叢集必須使用 [Calico 第 3 版原則語法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy)。
+    * 如果您管理 [2.0 版負載平衡器服務](/docs/containers?topic=containers-loadbalancer#planning_ipvs)的資料流量，則必須將 `applyOnForward: true` 和 `doNotTrack: true` 欄位併入原則的 `spec` 區段。
 
         封鎖所有節點埠的資源範例：
 
@@ -580,6 +340,7 @@ Calico DNAT 前網路原則的一些常見用途：
           name: deny-nodeports
         spec:
           applyOnForward: true
+          preDNAT: true
           ingress:
           - action: Deny
             destination:
@@ -591,12 +352,67 @@ Calico DNAT 前網路原則的一些常見用途：
             destination:
               ports:
               - 30000:32767
-            protocol: UDP
-            source: {}
+        protocol: UDP
+        source: {}
+      selector: ibm.role=='worker_public'
+      order: 1100
+      types:
+          - Ingress
+        ```
+        {: codeblock}
+
+        只將來自指定來源 CIDR 的資料流量設為負載平衡器 2.0 白名單的資源範例：
+
+        ```
+apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+      name: whitelist
+    spec:
+      applyOnForward: true
+      doNotTrack: true
+      ingress:
+          - action: Allow
+        destination:
+          nets:
+              - <loadbalancer_IP>/32
+          ports:
+              - 80
+        protocol: TCP
+        source:
+          nets:
+              - <client_address>/32
+      selector: ibm.role=='worker_public'
+      order: 500
+      types:
+          - Ingress
+        ```
+        {: codeblock}
+
+        只將來自指定來源 CIDR 的資料流量設為負載平衡器 1.0 白名單的資源範例：
+
+        ```
+        apiVersion: projectcalico.org/v3
+        kind: GlobalNetworkPolicy
+        metadata:
+          name: whitelist
+        spec:
+          applyOnForward: true
           preDNAT: true
-          selector: ibm.role=='worker_public'
-          order: 1100
-          types:
+          ingress:
+          - action: Allow
+        destination:
+          nets:
+              - <loadbalancer_IP>/32
+          ports:
+              - 80
+        protocol: TCP
+        source:
+          nets:
+              - <client_address>/32
+      selector: ibm.role=='worker_public'
+      order: 500
+      types:
           - Ingress
         ```
         {: codeblock}
@@ -617,12 +433,13 @@ Calico DNAT 前網路原則的一些常見用途：
     ```
     {: pre}
 
-3. 選用項目：在多區域叢集裡，多區域負載平衡器 (MZLB) 會對叢集的每一個區域中的 Ingress 應用程式負載平衡器 (ALB) 進行性能檢查，並根據這些性能檢查來持續更新 DNS 查閱結果。如果您使用 DNAT 前原則封鎖 Ingress 服務的所有送入資料流量，則也必須將用來檢查 ALB 性能的 [Cloudflare 的 IPv4 IP ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.cloudflare.com/ips/) 列入白名單。如需如何建立 Calico DNAT 前原則以將這些 IP 列入白名單的步驟，請參閱 [Calico 網路原則指導教學](cs_tutorials_policies.html#lesson3)的課程 3。
+3. 選用項目：在多區域叢集中，多區域負載平衡器 (MZLB) 會對叢集的每個區域中的 Ingress 應用程式負載平衡器 (ALB) 進行性能檢查，並根據這些性能檢查來持續更新 DNS 查閱結果。如果您使用 DNAT 前原則封鎖 Ingress 服務的所有送入資料流量，則也必須將用來檢查 ALB 性能的 [Cloudflare 的 IPv4 IP ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.cloudflare.com/ips/) 列入白名單。如需如何建立 Calico DNAT 前原則以將這些 IP 列入白名單的步驟，請參閱 [Calico 網路原則指導教學](/docs/containers?topic=containers-policy_tutorial#lesson3)的課程 3。
 
 ## 隔離專用網路上的叢集
 {: #isolate_workers}
 
-如果您有多區域叢集、單一區域叢集的多個 VLAN，或相同 VLAN 上的多個子網路，則必須[啟用 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。不過，當啟用 VLAN Spanning 時，任何已連接至相同 IBM Cloud 帳戶中的任何專用 VLAN 的系統都可以與工作者節點通訊。
+如果您有多區域叢集、單一區域叢集的多個 VLAN，或相同 VLAN 上的多個子網路，則必須[啟用 VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。不過，當啟用 VLAN Spanning 時，任何已連接至相同 IBM Cloud 帳戶中的任何專用 VLAN 的系統都可以與工作者節點通訊。
+{: shortdesc}
 
 您可以套用 [Calico 專用網路原則![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation)，將您的叢集與專用網路上的其他系統隔離。這一組 Calico 原則和主機端點隔離叢集的專用網路資料流量與該帳戶的專用網路中的其他資源。
 
@@ -640,11 +457,12 @@ Calico DNAT 前網路原則的一些常見用途：
 
 開始之前：
 1. [安裝並配置 Calico CLI。](#cli_install)
-2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
+2. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。請包括 `--admin` 及 `--network` 選項與 `ibmcloud ks cluster-config` 指令。`--admin` 會下載金鑰，以存取基礎架構組合以及在工作者節點上執行 Calico 指令。`--network` 會下載 Calico 配置檔，以執行所有 Calico 指令。
+
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
 若要使用 Calico 原則隔離專用網路上的叢集，請執行下列動作：
 
@@ -655,23 +473,20 @@ Calico DNAT 前網路原則的一些常見用途：
     {: pre}
 
 2. 導覽至與您的叢集版本相容的 Calico 版本的專用原則目錄。
-    * Kubernetes 1.10 版或更新版本的叢集：
-      ```
+   ```
       cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
       ```
-      {: pre}
-
-    * Kubernetes 1.9 版或更舊版本的叢集：
-      ```
-      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v2
-      ```
-      {: pre}
+   {: pre}
 
 3. 設定專用主機端點的原則。
     1. 開啟 `generic-privatehostendpoint.yaml` 原則。
-    2. 將 `<worker_name>` 取代為工作者節點的名稱，並將 `<worker-node-private-ip>` 取代為工作者節點的專用 IP 位址。若要查看工作者節點專用 IP，請執行 `ibmcloud ks workers --cluster <my_cluster>`.
-    3. 在新的一節針對叢集裡的每一個工作者節點重複此步驟。
-    **附註**：每次將工作者節點新增至叢集時，您必須使用新項目來更新主機端點檔案。
+    2. 將 `<worker_name>` 取代為工作者節點的名稱。**重要事項**：部分工作者節點必須遵循 Calico 原則的不同命名結構。您必須使用採用下列指令所傳回格式的工作者節點名稱。
+      ```
+      ibmcloud ks calicoctl get nodes --config==filepath/calicoctl.cfg
+      ```
+      {: pre}
+    3. 將 `<worker-node-private-ip>` 取代為工作者節點的專用 IP 位址。若要查看工作者節點專用 IP，請執行 `ibmcloud ks workers --cluster <my_cluster>`.
+    4. 在新的一節針對叢集中的每個工作者節點重複這組步驟。**附註**：每次將工作者節點新增至叢集時，您必須使用新項目來更新主機端點檔案。
 
 4. 將所有原則套用至叢集。
     - Linux 及 OS X：
@@ -712,7 +527,7 @@ Kubernetes 原則保護 Pod 沒有內部網路資料流量。您可以建立簡�
 
 下列情境示範如何管理某個名稱空間內應用程式微服務之間的資料流量。
 
-Accounts 團隊會在一個名稱空間中部署多個應用程式服務，但需要隔離，只允許公用網路上的微服務之間進行必要通訊。針對應用程式 Srv1，團隊具有前端、後端及資料庫服務。他們會將每個服務都標上 `app: Srv1` 標籤，以及 `tier: frontend`、`tier: backend` 或 `tier: db` 標籤。
+Accounts 團隊會在一個名稱空間中部署多個應用程式服務，但需要隔離，只允許公用網路上的微服務之間進行必要通訊。針對應用程式 `Srv1`，團隊具有前端、後端及資料庫服務。他們會將每個服務都標上 `app: Srv1` 標籤，以及 `tier: frontend`、`tier: backend` 或 `tier: db` 標籤。
 
 <img src="images/cs_network_policy_single_ns.png" width="200" alt="使用網路原則管理跨名稱空間資料流量。" style="width:200px; border-style: none"/>
 
@@ -739,7 +554,7 @@ spec:
 ```
 {: codeblock}
 
-`spec.podSelector.matchLabels` 區段列出 Srv1 後端服務的標籤，因此原則只會套用_至_ 這些 Pod。`spec.ingress.from.podSelector.matchLabels` 區段列出 Srv1 前端服務的標籤，因此只允許_來自_ 這些 Pod 的進入。
+`spec.podSelector.matchLabels` 區段列出 Srv1 後端服務的標籤，因此原則只會套用_至_ 這些 Pod。`spec.ingress.from.podSelector.matchLabels` 區段列出 Srv1 前端服務的標籤，因此只允許_來自_ 這些 Pod 的 Ingress。
 
 然後，他們會建立類似的 Kubernetes 網路原則，以容許從後端到資料庫的資料流量：
 
@@ -762,9 +577,9 @@ spec:
   ```
   {: codeblock}
 
-`spec.podSelector.matchLabels` 區段列出 Srv1 資料庫服務的標籤，因此原則只會套用_至_ 這些 Pod。`spec.ingress.from.podSelector.matchLabels` 區段列出 Srv1 後端服務的標籤，因此只允許_來自_ 這些 Pod 的進入。
+`spec.podSelector.matchLabels` 區段列出 Srv1 資料庫服務的標籤，因此原則只會套用_至_ 這些 Pod。`spec.ingress.from.podSelector.matchLabels` 區段列出 Srv1 前端服務的標籤，因此只允許_來自_ 這些 Pod 的 Ingress。
 
-資料流量現在可以從前端流向後端，以及從後端流向資料庫。資料庫可以回應後端，而後端可以回應前端，但無法建立反向資料流量連線。
+資料流量現在可以從前端到後端，以及從後端到資料庫。資料庫可以回應後端，而後端可以回應前端，但無法建立反向資料流量連線。
 
 ### 隔離名稱空間之間的應用程式服務
 {: #services_across_ns}
@@ -813,10 +628,10 @@ spec:
 當您設定網路原則來限制應用程式 Pod 的資料流量時，這些原則所不允許的資料流量要求會遭到拒絕及捨棄。在某些情況下，您可能想要取得被拒絕之資料流量要求的相關資訊。例如，您可能會注意到不斷被您的其中一個網路原則拒絕的一些異常資料流量。若要監視潛在的安全威脅，您可以設定記載，在每次原則拒絕所指定的應用程式 Pod 的嘗試動作時就進行記錄。
 
 開始之前：
-1. [安裝及配置 Calico CLI。](#cli_install)**附註**：這些步驟中的原則使用與執行 Kubernets 1.10 版或更新版本的叢集相容的 Calico 第 3 版語法。對於執行 Kgbernets 1.9 版或更舊版本的叢集，您必須使用 [Calico 第 2 版原則語法![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)。
-2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
+1. [安裝並配置 Calico CLI。](#cli_install)
+2. [將 Kubernetes CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
     ```
-    ibmcloud ks cluster-config <cluster_name> --admin
+    ibmcloud ks cluster-config --cluster <cluster_name> --admin
     ```
     {: pre}
 
@@ -825,7 +640,7 @@ spec:
 1. 建立或使用現有的 Kubernetes 或 Calico 網路原則，以封鎖或限制送入的資料流量。例如，若要控制 Pod 之間的資料流量，您可以使用限制存取 NGINX 應用程式的下列 Kubernetes 原則範例，名稱為 `access-nginx`。具有 "run=nginx" 標籤的 Pod 的送入資料流量，只能是來自具有 "run=access" 標籤的 Pod。"run=nginx" 應用程式 Pod 的所有其他送入的資料流量會遭到封鎖。
     ```
     kind: NetworkPolicy
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     metadata:
       name: access-nginx
     spec:
@@ -846,7 +661,7 @@ spec:
         kubectl apply -f <policy_name>.yaml
         ```
         {: pre}
-        Kubernetes 原則會自動轉換為 Calico NetworkPolicy，所以 Calico 可以將其套用為 Iptables 規則。
+        Kubernetes 原則會自動轉換為 Calico `NetworkPolicy`，所以 Calico 可以將其套用為 Iptables 規則。
 
     * 若要套用 Calico 原則：
         ```
@@ -879,7 +694,7 @@ spec:
         ```
     {: screen}
 
-4. 若要記載您先前建立的 Calico 原則所拒絕的所有資料流量，請建立一個名稱為 `log-denied-packets` 的 Calico NetworkPolicy。例如，使用下列原則來記載您在步驟 1 定義的網路原則所拒絕的所有封包。日誌原則會使用與範例 `access-nginx` 原則相同的 Pod 選取器，而將此原則新增至 Calico Iptables 規則鏈。透過使用更高的順序號碼（例如 `3000`），您可確保將此規則新增至 Iptables 規則鏈的尾端。來自 "run=access" Pod 的任何要求封包若符合 `access-nginx` 原則規則，即為 "run=nginx" Pod 所接受。但是，當來自任何其他來源的封包嘗試符合低順序 `access-nginx` 原則規則時，就會遭到拒絕。之後，這些封包會嘗試符合高順序 `log-denied-packets` 原則規則。`log-denied-packets` 會記載所有到達它的封包，因此只會記載 "run=nginx" Pod 所拒絕的封包。在記載封包的嘗試之後，即捨棄封包。
+4. 若要記載您先前建立的 Calico 原則所拒絕的所有資料流量，請建立一個名為 `log-denied-packets` 的 Calico `NetworkPolicy`。例如，使用下列原則來記載您在步驟 1 定義的網路原則所拒絕的所有封包。日誌原則會使用與範例 `access-nginx` 原則相同的 Pod 選取器，而將此原則新增至 Calico Iptables 規則鏈。透過使用更高的順序號碼（例如 `3000`），您可確保將此規則新增至 Iptables 規則鏈的尾端。來自 "run=access" Pod 的任何要求封包若符合 `access-nginx` 原則規則，即為 "run=nginx" Pod 所接受。但是，當來自任何其他來源的封包嘗試符合低順序 `access-nginx` 原則規則時，就會遭到拒絕。之後，這些封包會嘗試符合高順序 `log-denied-packets` 原則規則。`log-denied-packets` 會記載所有到達它的封包，因此只會記載 "run=nginx" Pod 所拒絕的封包。在記載封包的嘗試之後，即捨棄封包。
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy
@@ -928,4 +743,4 @@ spec:
     ```
     {: pre}
 
-6. [轉遞日誌](cs_health.html#configuring)，從 `/var/log/syslog` 到 {{site.data.keyword.loganalysislong}}，或到外部 syslog 伺服器。
+6. [轉遞日誌](/docs/containers?topic=containers-health#configuring)，從 `/var/log/syslog` 到 {{site.data.keyword.loganalysislong}}，或到外部 syslog 伺服器。

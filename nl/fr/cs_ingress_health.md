@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -18,6 +22,7 @@ lastupdated: "2018-12-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
+
 # Consignation et surveillance d'Ingress
 {: #ingress_health}
 
@@ -27,9 +32,12 @@ Personnalisez la consignation dans les journaux et configurez la surveillance po
 ## Affichage des journaux Ingress
 {: #ingress_logs}
 
+Si vous souhaitez traiter les incidents liés à la ressource Ingress ou gérer l'activité d'Ingress, vous pouvez examiner les journaux Ingress.
+{: shortdesc}
+
 Les journaux sont automatiquement collectés pour vos équilibreurs de charge d'application (ALB) Ingress. Pour afficher les journaux de l'ALB, vous avez le choix entre deux options :
-* [Créer une configuration de consignation pour le service Ingress](cs_health.html#configuring) dans votre cluster.
-* Consulter les journaux à partir de l'interface de ligne de commande (CLI).
+* [Créer une configuration de consignation pour le service Ingress](/docs/containers?topic=containers-health#configuring) dans votre cluster.
+* Consulter les journaux à partir de l'interface de ligne de commande (CLI). **Remarque** : vous devez disposer au moins du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Lecteur**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `kube-system`.
     1. Obtenez l'ID d'un pod pour un équilibreur de charge ALB.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -61,11 +69,11 @@ Les journaux sont automatiquement collectés pour vos équilibreurs de charge d'
 </tr>
 <tr>
 <td><code>"client": "$remote_addr"</code></td>
-<td>Adresse IP du package de demande que le client a envoyé à votre application. Cette adresse IP change en fonction des situations suivantes :<ul><li>Lorsqu'une demande client vers votre application est envoyée à votre cluster, elle est acheminée à un pod pour le service d'équilibreur de charge qui expose l'équilibreur de charge d'application (ALB). S'il n'existe aucun pod d'application sur le même noeud worker que le pod de service d'équilibreur de charge, l'équilibreur de charge transmet la demande à un pod d'application sur un autre noeud worker. L'adresse IP source du package de demande est remplacée par l'adresse IP publique du noeud worker sur lequel s'exécute le pod d'application.</li><li>Si la [conservation de l'adresse IP source est activée](cs_ingress.html#preserve_source_ip), l'adresse IP d'origine de la demande du client à votre application est enregistrée à la place.</li></ul></td>
+<td>Adresse IP du package de demande que le client a envoyé à votre application. Cette adresse IP change en fonction des situations suivantes :<ul><li>Lorsqu'une demande client vers votre application est envoyée à votre cluster, elle est acheminée à un pod pour le service d'équilibreur de charge qui expose l'équilibreur de charge d'application (ALB). S'il n'existe aucun pod d'application sur le même noeud worker que le pod de service d'équilibreur de charge, l'équilibreur de charge transmet la demande à un pod d'application sur un autre noeud worker. L'adresse IP source du package de demande est remplacée par l'adresse IP publique du noeud worker sur lequel s'exécute le pod d'application.</li><li>Si la [conservation de l'adresse IP source est activée](/docs/containers?topic=containers-ingress#preserve_source_ip), l'adresse IP d'origine de la demande du client à votre application est enregistrée à la place.</li></ul></td>
 </tr>
 <tr>
 <td><code>"host": "$http_host"</code></td>
-<td>Hôte ou sous-domaine, via lequel vos applications sont accessibles. Cet hôte est configuré dans les fichiers de la ressource Ingress pour vos équilibreurs de charge d'application (ALB).</td>
+<td>Hôte ou sous-domaine, via lequel vos applications sont accessibles. Ce sous-domaine est configuré dans les fichiers de ressource Ingress de vos équilibreurs de charge d'application (ALB).</td>
 </tr>
 <tr>
 <td><code>"scheme": "$scheme"</code></td>
@@ -126,8 +134,538 @@ Les journaux sont automatiquement collectés pour vos équilibreurs de charge d'
 Vous pouvez personnaliser le contenu et le format des journaux collectés par l'équilibreur de charge d'application (ALB) Ingress.
 {:shortdesc}
 
-Par défaut, les journaux Ingress sont au format JSON et affichent des zones de journal courantes. Vous pouvez toutefois créer un format personnalisé pour les journaux.
+Par défaut, les journaux Ingress sont au format JSON et affichent des zones de journal courantes. Vous pouvez toutefois créer un format personnalisé pour les journaux en choisissant les composants de journaux qui sont acheminés et comment sont organisés ces composants dans la sortie du journal.
 
+Avant de commencer, vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `kube-system`.
+
+1. Editez le fichier de configuration correspondant à la ressource configmap `ibm-cloud-provider-ingress-cm`.
+
+    ```
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    ```
+    {: pre}
+
+2. Ajoutez une section <code>data</code>. Ajoutez la zone `log-format` et, éventuellement, la zone `log-format-escape-json`.
+
+    ```
+    apiVersion: v1
+    data:
+      log-format: '{<key1>: <log_variable1>, <key2>: <log_variable2>, <key3>: <log_variable3>}'
+      log-format-escape-json: "true"
+    kind: ConfigMap
+    metadata:
+      name: ibm-cloud-provider-ingress-cm
+      namespace: kube-system
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>Composants du fichier YAML</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description de la configuration de la zone log-format</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>log-format</code></td>
+    <td>Remplacez <code>&lt;key&gt;</code> par le nom du composant de journal et <code>&lt;log_variable&gt;</code> par une variable pour le composant de journal que vous voulez collecter dans les entrées de journal. Vous pouvez inclure du texte et la ponctuation que vous voulez dans l'entrée du journal, par exemple entourer les valeurs de chaîne par des guillemets ou utiliser des virgules pour séparer les noms des composants de journal. Par exemple, le formatage d'un composant <code>request: "$request"</code> génère le résultat suivant dans une entrée de journal : <code>request: "GET / HTTP/1.1"</code>. Pour obtenir une liste de toutes les variables que vous pouvez utiliser, voir l'<a href="http://nginx.org/en/docs/varindex.html">index des variables NGINX</a>.<br><br>Pour consigner un en-tête supplémentaire, tel que <em>x-custom-ID</em>, ajoutez la paire clé-valeur suivante au contenu de journal personnalisé : <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>Les traits d'union (<code>-</code>) sont convertis en traits de soulignement (<code>_</code>) et <code>$http_</code> doit être ajouté en préfixe au nom de l'en-tête personnalisé.</td>
+    </tr>
+    <tr>
+    <td><code>log-format-escape-json</code></td>
+    <td>Facultatif : par défaut, les journaux sont générés au format texte. Pour générer des journaux au format JSON, ajoutez la zone <code>log-format-escape-json</code> et utilisez la valeur <code>true</code>.</td>
+    </tr>
+    </tbody></table>
+
+    Par exemple, votre format de journal peut contenir les variables suivantes :
+    ```
+    apiVersion: v1
+    data:
+      log-format: '{remote_address: $remote_addr, remote_user: "$remote_user",
+                    time_date: [$time_local], request: "$request",
+                    status: $status, http_referer: "$http_referer",
+                    http_user_agent: "$http_user_agent",
+                    request_id: $request_id}'
+    kind: ConfigMap
+    metadata:
+      name: ibm-cloud-provider-ingress-cm
+      namespace: kube-system
+    ```
+    {: screen}
+
+    Selon ce format, une entrée de journal ressemblera à l'exemple suivant :
+    ```
+    remote_address: 127.0.0.1, remote_user: "dbmanager", time_date: [30/Mar/2018:18:52:17 +0000], request: "GET / HTTP/1.1", status: 401, http_referer: "-", http_user_agent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0", request_id: a02b2dea9cf06344a25611c1d7ad72db
+    ```
+    {: screen}
+
+    Pour créer un format de journal personnalisé basé sur le format par défaut des journaux d'ALB, modifiez la section suivante selon les besoins et ajoutez-la dans votre configmap :
+    ```
+    apiVersion: v1
+    data:
+      log-format: '{"time_date": "$time_iso8601", "client": "$remote_addr",
+                    "host": "$http_host", "scheme": "$scheme",
+                    "request_method": "$request_method", "request_uri": "$uri",
+                    "request_id": "$request_id", "status": $status,
+                    "upstream_addr": "$upstream_addr", "upstream_status":
+                    $upstream_status, "request_time": $request_time,
+                    "upstream_response_time": $upstream_response_time,
+                    "upstream_connect_time": $upstream_connect_time,
+                    "upstream_header_time": $upstream_header_time}'
+      log-format-escape-json: "true"
+    kind: ConfigMap
+    metadata:
+      name: ibm-cloud-provider-ingress-cm
+      namespace: kube-system
+    ```
+    {: codeblock}
+
+4. Sauvegardez le fichier de configuration.
+
+5. Vérifiez que les modifications apportées à configmap ont été appliquées.
+
+   ```
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
+
+4. Pour afficher les journaux de l'ALB Ingress, vous avez le choix entre deux options :
+    * [Créer une configuration de consignation pour le service Ingress](/docs/containers?topic=containers-health#logging) dans votre cluster.
+    * Consulter les journaux à partir de l'interface de ligne de commande (CLI).
+        1. Obtenez l'ID d'un pod pour un équilibreur de charge ALB.
+            ```
+            kubectl get pods -n kube-system | grep alb
+            ```
+            {: pre}
+
+        2. Ouvrez les journaux correspondant à ce pod d'ALB. Vérifiez que les journaux sont conformes au nouveau format.
+            ```
+            kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+            ```
+            {: pre}
+
+<br />
+
+
+## Surveillance de l'ALB Ingress
+{: #ingress_monitoring}
+
+Surveillez vos ALB en déployant dans votre cluster un exportateur de métriques et un agent Prometheus.
+{: shortdesc}
+
+L'exportateur de métriques d'ALB utilise la directive NGINX, `vhost_traffic_status_zone`, pour collecter des données de métriques à partir du noeud final `/status/format/json` sur chaque pod d'ALB Ingress. L'exportateur de métriques reformate automatiquement chaque zone de données dans le fichier JSON en métrique que peut lire Prometheus. Ensuite, un agent Prometheus récupère les métriques produites par l'exportateur et les rend visibles sur un tableau de bord Prometheus.
+
+Les pods d'exportateur de métriques d'ALB doivent se déployer sur les mêmes noeuds worker où sont déployés vos ALB. Si vos ALB s'exécutent sur des noeuds worker de périphérie, et que ces noeuds worker ont l'annotation taint pour empêcher d'autres déploiements de charge de travail, les pods d'exportateur de métriques ne peuvent pas être planifiés. Vous devez supprimer les annotations taint en exécutant la commande `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
+{: note}
+
+Pour installer l'exportateur de métriques et l'agent Prometheus pour l'ALB dans votre cluster :
+
+1.  [Suivez les instructions](/docs/containers?topic=containers-integrations#helm) d'installation du client Helm sur votre machine locale, installez le serveur Helm (Tiller) avec un compte de service et ajoutez le référentiel Helm {{site.data.keyword.Bluemix_notm}}.
+
+2.  Vérifiez que Tiller est installé avec un compte de service.
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    Exemple de sortie :
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. Installez la charte Helm `ibmcloud-alb-metrics-exporter` dans votre cluster. Cette charte Helm déploie un exportateur de métriques d'ALB et crée un compte de service nommé `alb-metrics-service-account` dans l'espace de nom `kube-system`. Remplacez <alb-ID> par l'ID de l'ALB pour lequel vous souhaitez collecter les métriques. Pour afficher les ID des ALB dans votre cluster, exécutez la commande <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>. Notez que vous devez déployer une charte pour chaque ALB que vous désirez surveiller.
+
+    ```
+    helm install ibm/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+    ```
+    {: pre}
+
+4. Vérifiez le statut de déploiement de la charte. Lorsque la charte est prête, la zone **STATUS** près du début de la sortie a la valeur `DEPLOYED`.
+    ```
+    helm status ibmcloud-alb-metrics-exporter
+    ```
+    {: pre}
+
+5. Installez la sous-charte `ibmcloud-alb-metrics-exporter/subcharts/prometheus` dans votre cluster. Cette sous-charte déploie un agent Prometheus pour collecter et afficher les métriques d'ALB sur le tableau de bord Prometheus. Remplacez <ingress_subdomain> par le sous-domaine Ingress de votre cluster. L'URL d'accès au tableau de bord Prometheus est une combinaison comprenant le sous-domaine `prom-dash` et votre sous-domaine Ingress, par exemple `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Pour obtenir le sous-domaine Ingress correspondant à votre cluster, exécutez la commande <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
+
+    ```
+    helm install ibm/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
+    ```
+    {: pre}
+
+6. Vérifiez le statut de déploiement de la charte. Lorsque la charte est prête, la zone **STATUS** vers le haut de la sortie a la valeur `DEPLOYED`.
+
+    ```
+    helm status prometheus
+    ```
+    {: pre}
+
+7. Vérifiez que les pods `ibmcloud-alb-metrics-exporter` et `prometheus` sont en cours d'exécution (Running).
+    ```
+    kubectl get pods -n kube-system -o wide
+    ```
+    {:pre}
+
+    Exemple de sortie :
+    ```
+    NAME                                             READY     STATUS      RESTARTS   AGE       IP               NODE
+    alb-metrics-exporter-868fddf777-d49l5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+    alb-metrics-exporter-868fddf777-pf7x5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+    prometheus-9fbcc8bc7-2wvbk                       1/1       Running     0          1m        172.30.xxx.xxx   10.xxx.xx.xxx
+    ```
+    {:screen}
+
+8. Dans un navigateur, entrez l'URL d'accès au tableau de bord Prometheus. Ce nom d'hôte est au format `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Le tableau de bord Prometheus de votre ALB s'ouvre.
+
+9. Consultez les informations sur les métriques d'[ALB](#alb_metrics), les métriques de [serveur](#server_metrics), et les métriques [en amont](#upstream_metrics) répertoriées dans le tableau de bord.
+
+### Métriques d'ALB
+{: #alb_metrics}
+
+L'exportateur de métriques `alb-metrics-exporter` reformate automatiquement chaque zone de données dans le fichier JSON en métrique que peut lire Prometheus. Les métriques d'ALB collectent des données sur les connexions et les réponses traitées par l'ALB.
+{: shortdesc}
+
+Les métriques d'ALB sont au format `kube_system_<ALB-ID>_<METRIC-NAME> <VALUE>`. Par exemple, si un ALB reçoit 23 réponses avec des codes de statut 2xx-level, la métrique sera au format `kube_system_public_crf02710f54fcc40889c301bfd6d5b77fe_alb1_totalHandledRequest {.. metric="2xx"} 23`, où `metric` représente le libellé Prometheus.
+
+Le tableau suivant présente la liste des noms de métriques d'ALB prises en charge avec les libellés de métrique au format `<ALB_metric_name>_<metric_label>`
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Métriques d'ALB prises en charge</th>
+</thead>
+<tbody>
+<tr>
+<td><code>connections_reading</code></td>
+<td>Nombre total de connexions client en lecture.</td>
+</tr>
+<tr>
+<td><code>connections_accepted</code></td>
+<td>Nombre total de connexions client acceptées.</td>
+</tr>
+<tr>
+<td><code>connections_active</code></td>
+<td>Nombre total de connexions client actives.</td>
+</tr>
+<tr>
+<td><code>connections_handled</code></td>
+<td>Nombre total de connexions client traitées.</td>
+</tr>
+<tr>
+<td><code>connections_requests</code></td>
+<td>Nombre total de connexions client demandées.</td>
+</tr>
+<tr>
+<td><code>connections_waiting</code></td>
+<td>Nombre total de connexions client en attente.</td>
+</tr>
+<tr>
+<td><code>connections_writing</code></td>
+<td>Nombre total de connexions clients en écriture.</td>
+</tr>
+<tr>
+<td><code>totalHandledRequest_1xx</code></td>
+<td>Nombre de réponses avec des codes de statut 1xx.</td>
+</tr>
+<tr>
+<td><code>totalHandledRequest_2xx</code></td>
+<td>Nombre de réponses avec des codes de statut 2xx.</td>
+</tr>
+<tr>
+<td><code>totalHandledRequest_3xx</code></td>
+<td>Nombre de réponses avec des codes de statut 3xx.</td>
+</tr>
+<tr>
+<td><code>totalHandledRequest_4xx</code></td>
+<td>Nombre de réponses avec des codes de statut 4xx.</td>
+</tr>
+<tr>
+<td><code>totalHandledRequest_5xx</code></td>
+<td>Nombre de réponses avec des codes de statut 5xx.</td>
+</tr>
+<tr>
+<td><code>totalHandledRequest_total</code></td>
+<td>Nombre total de demandes client reçues des clients.</td>
+</tr>
+</tbody>
+</table>
+
+### Métriques de serveur
+{: #server_metrics}
+
+L'exportateur de métriques `alb-metrics-exporter` reformate automatiquement chaque zone de données dans le fichier JSON en métrique que peut lire Prometheus. Les métriques de serveur collectent des données sur le sous-domaine défini dans une ressource Ingress, par exemple, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
+{: shortdesc}
+
+Les métriques de serveur sont au format `kube_system_server_<ALB-ID>_<SUB-TYPE>_<SERVER-NAME>_<METRIC-NAME> <VALUE>`.
+
+Les valeurs de `<SERVER-NAME>_<METRIC-NAME>` sont formatées sous forme de libellés. Par exemple, `albId="dev_demostg1_us-south_containers_appdomain_cloud",metric="out"`
+
+Par exemple, si le serveur envoie 22319 octets au total aux clients, la métrique sera au format :
+```
+kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="dev_demostg1_us-south_containers_appdomain_cloud",app="alb-metrics-exporter",instance="172.30.140.68:9913",job="kubernetes-pods",kubernetes_namespace="kube-system",kubernetes_pod_name="alb-metrics-exporter-7d495d785c-8wfw4",metric="out",pod_template_hash="3805183417"} 22319
+```
+{: screen}
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description du format des métriques de serveur</th>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;ALB-ID&gt;</code></td>
+<td>ID de l'ALB. Dans l'exemple ci-dessus, l'ID de l'ALB est <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;SUB-TYPE&gt;</code></td>
+<td>Sous-type de métrique. Chaque sous-type correspond à un ou plusieurs noms de métrique.
+<ul>
+<li><code>bytes</code> et <code>processing\_time</code> correspondent aux métriques <code>in</code> et <code>out</code>.</li>
+<li><code>cache</code> correspond aux métriques <code>bypass</code>, <code>expired</code>, <code>hit</code>, <code>miss</code>, <code>revalidated</code>, <code>scare</code>, <code>stale</code> et <code>updating</code>.</li>
+<li><code>requests</code> correspond aux métriques <code>requestMsec</code>, <code>1xx</code>, <code>2xx</code>, <code>3xx</code>, <code>4xx</code>, <code>5xx</code> et <code>total</code>.</li></ul>
+Dans l'exemple ci-dessus, le sous-type est <code>bytes</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;SERVER-NAME&gt;</code></td>
+<td>Nom du serveur défini dans la ressource Ingress. Pour assurer la compatibilité avec Prometheus, les points (<code>.</code>) sont remplacés par des traits de soulignement <code>(\_)</code>. Dans l'exemple ci-dessus, le nom du serveur est <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;METRIC_NAME&gt;</code></td>
+<td>Nom du type de métrique collectée. Pour obtenir une liste de noms de métrique, voir le tableau suivant : "Métriques de serveur prises en charge". Dans l'exemple ci-dessus, le nom de métrique est <code>out</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;VALUE&gt;</code></td>
+<td>Valeur de la métrique collectée. Dans l'exemple ci-dessus, la valeur est <code>22319</code>.</td>
+</tr>
+</tbody></table>
+
+Le tableau suivant présente la liste des noms de métriques prises en charge.
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Métriques de serveur prises en charge</th>
+</thead>
+<tbody>
+<tr>
+<td><code>in</code></td>
+<td>Nombre total d'octets reçus des clients.</td>
+</tr>
+<tr>
+<td><code>out</code></td>
+<td>Nombre total d'octets envoyés aux clients.</td>
+</tr>
+<tr>
+<td><code>bypass</code></td>
+<td>Nombre de fois qu'un élément pouvant être mis en cache a été extrait du serveur d'origine car il ne respectait pas le seuil nécessaire pour figurer dans le cache (par exemple, le nombre de demandes).</td>
+</tr>
+<tr>
+<td><code>expired</code></td>
+<td>Nombre de fois qu'un élément en cache n'a pas été sélectionné car il était arrivé à expiration.</td>
+</tr>
+<tr>
+<td><code>hit</code></td>
+<td>Nombre de fois qu'un élément valide a été sélectionné dans le cache.</td>
+</tr>
+<tr>
+<td><code>miss</code></td>
+<td>Nombre de fois qu'aucun élément de cache valide n'a été trouvé dans le cache et que le serveur a extrait l'élément du serveur d'origine.</td>
+</tr>
+<tr>
+<td><code>revalidated</code></td>
+<td>Nombre de fois qu'un élément arrivé à expiration dans le cache a été revalidé.</td>
+</tr>
+<tr>
+<td><code>scarce</code></td>
+<td>Nombre de fois que le cache a supprimé des éléments rarement utilisés ou de faible priorité pour libérer un peu de mémoire.</td>
+</tr>
+<tr>
+<td><code>stale</code></td>
+<td>Nombre de fois qu'un élément arrivé à expiration a été trouvé en cache, mais comme une autre demande a entraîné l'extraction de cet élément par le serveur à partir du serveur d'origine, l'élément a été sélectionné dans le cache.</td>
+</tr>
+<tr>
+<td><code>updating</code></td>
+<td>Nombre de fois qu'un contenu périmé a été mis à jour.</td>
+</tr>
+<tr>
+<td><code>requestMsec</code></td>
+<td>Temps de traitement moyen de la demande en millisecondes.</td>
+</tr>
+<tr>
+<td><code>1xx</code></td>
+<td>Nombre de réponses avec des codes de statut 1xx.</td>
+</tr>
+<tr>
+<td><code>2xx</code></td>
+<td>Nombre de réponses avec des codes de statut 2xx.</td>
+</tr>
+<tr>
+<td><code>3xx</code></td>
+<td>Nombre de réponses avec des codes de statut 3xx.</td>
+</tr>
+<tr>
+<td><code>4xx</code></td>
+<td>Nombre de réponses avec des codes de statut 4xx.</td>
+</tr>
+<tr>
+<td><code>5xx</code></td>
+<td>Nombre de réponses avec des codes de statut 5xx.</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td>Nombre total de réponses avec des codes de statut.</td>
+</tr>
+</tbody>
+</table>
+
+### Métriques en amont
+{: #upstream_metrics}
+
+L'exportateur de métriques `alb-metrics-exporter` reformate automatiquement chaque zone de données dans le fichier JSON en métrique que peut lire Prometheus. Les métriques en amont collectent des données sur le service de back end défini dans une ressource Ingress.
+{: shortdesc}
+
+Les métriques en amont sont formatées de deux manières.
+* [Type 1](#type_one) avec le nom du service en amont.
+* [Type 2](#type_two) avec le nom du service en amont et une adresse IP de pod en amont spécifique.
+
+#### Métriques en amont de type 1
+{: #type_one}
+
+Les métriques de type 1 en amont sont au format `kube_system_upstream_<ALB-ID>_<SUB-TYPE>_<UPSTREAM-NAME>_<METRIC-NAME> <VALUE>`.
+{: shortdesc}
+
+Les valeurs de `<UPSTREAM-NAME>_<METRIC-NAME>` sont formatées sous forme de libellés. Par exemple, `albId="default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc",metric="in"`
+
+Par exemple, si le service en amont a reçu 1227 octets au total de l'ALB, la métrique est au format :
+```
+kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc",app="alb-metrics-exporter",instance="172.30.140.68:9913",job="kubernetes-pods",kubernetes_namespace="kube-system",kubernetes_pod_name="alb-metrics-exporter-7d495d785c-8wfw4",metric="in",pod_template_hash="3805183417"} 1227
+```
+{: screen}
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description du format des métriques de type 1 en amont</th>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;ALB-ID&gt;</code></td>
+<td>ID de l'ALB. Dans l'exemple ci-dessus, l'ID de l'ALB est <code>public\_crf02710f54fcc40889c301bfd6d5b77fe\_alb1</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;SUB-TYPE&gt;</code></td>
+<td>Sous-type de métrique. Les valeurs prises en charge sont <code>bytes</code>, <code>processing\_time</code> et <code>requests</code>. Dans l'exemple ci-dessus, le sous-type est <code>bytes</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;UPSTREAM-NAME&gt;</code></td>
+<td>Nom du service en amont défini dans la ressource Ingress. Pour assurer la compatibilité avec Prometheus, les points (<code>.</code>) sont remplacés par des traits de soulignement <code>(\_)</code>. Dans l'exemple ci-dessus le nom du service en amont est <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;METRIC_NAME&gt;</code></td>
+<td>Nom du type de métrique collectée. Pour obtenir une liste de noms de métrique, voir le tableau suivant "Métriques de type 1 en amont prises en charge". Dans l'exemple ci-dessus, le nom de métrique est <code>in</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;VALUE&gt;</code></td>
+<td>Valeur de la métrique collectée. Dans l'exemple ci-dessus, la valeur est <code>1227</code>.</td>
+</tr>
+</tbody></table>
+
+Le tableau suivant présente la liste des noms de métriques de type 1 en amont prises en charge.
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Métriques de type 1 en amont prises en charge</th>
+</thead>
+<tbody>
+<tr>
+<td><code>in</code></td>
+<td>Nombre total d'octets reçus du serveur d'ALB.</td>
+</tr>
+<tr>
+<td><code>out</code></td>
+<td>Nombre total d'octets envoyés au serveur d'ALB.</td>
+</tr>
+<tr>
+<td><code>1xx</code></td>
+<td>Nombre de réponses avec des codes de statut 1xx.</td>
+</tr>
+<tr>
+<td><code>2xx</code></td>
+<td>Nombre de réponses avec des codes de statut 2xx.</td>
+</tr>
+<tr>
+<td><code>3xx</code></td>
+<td>Nombre de réponses avec des codes de statut 3xx.</td>
+</tr>
+<tr>
+<td><code>4xx</code></td>
+<td>Nombre de réponses avec des codes de statut 4xx.</td>
+</tr>
+<tr>
+<td><code>5xx</code></td>
+<td>Nombre de réponses avec des codes de statut 5xx.</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td>Nombre total de réponses avec des codes de statut.</td>
+</tr></tbody>
+</table>
+
+#### Métriques en amont de type 2
+{: #type_two}
+
+Les métriques de type 2 en amont sont au format `kube_system_upstream_<ALB-ID>_<METRIC-NAME>_<UPSTREAM-NAME>_<POD-IP> <VALUE>`.
+{: shortdesc}
+
+Les valeurs de `<UPSTREAM-NAME>_<POD-IP>` sont formatées sous forme de libellés. Par exemple, `albId="default-cafe-ingress-dev_dev_demostg1_us-south_containers_appdomain_cloud-tea-svc",backend="172_30_75_6_80"`
+
+Par exemple, si le service en amont a un temps moyen de traitement des demandes (y compris en amont) de 40 millisecondes, la métrique est au format :
+```
+kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{albId="default-cafe-ingress-dev_dev_demostg1_us-south_containers_appdomain_cloud-tea-svc",app="alb-metrics-exporter",backend="172_30_75_6_80",instance="172.30.75.3:9913",job="kubernetes-pods",kubernetes_namespace="kube-system",kubernetes_pod_name="alb-metrics-exporter-7d495d785c-swkls",pod_template_hash="3805183417"} 40
+```
+
+{: screen}
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description du format de métrique de type 2 en amont</th>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;ALB-ID&gt;</code></td>
+<td>ID de l'ALB. Dans l'exemple ci-dessus, l'ID de l'ALB est <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
+</tr>
+<td><code>&lt;UPSTREAM-NAME&gt;</code></td>
+<td>Nom du service en amont défini dans la ressource Ingress. Pour assurer la compatibilité avec Prometheus, les points (<code>.</code>) sont remplacés par des traits de soulignement (<code>\_</code>). Dans l'exemple ci-dessus, le nom du service en amont est <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;POD\_IP&gt;</code></td>
+<td>Adresse IP et port d'un pod de service en amont spécifique. Pour assurer la compatibilité avec Prometheus, les points (<code>.</code>) et les signes deux-points (<code>:</code>) sont remplacés par des traits de soulignement <code>(_)</code>. Dans l'exemple ci-dessus, l'adresse IP du pod en amont est <code>172_30_75_6_80</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;METRIC_NAME&gt;</code></td>
+<td>Nom du type de métrique collectée. Pour obtenir une liste de noms de métrique, voir le tableau suivant "Métriques de type 2 en amont prises en charge". Dans l'exemple ci-dessus, le nom de métrique est <code>requestMsec</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;VALUE&gt;</code></td>
+<td>Valeur de la métrique collectée. Dans l'exemple ci-dessus, la valeur est <code>40</code>.</td>
+</tr>
+</tbody></table>
+
+Le tableau suivant présente la liste des noms de métriques de type 2 en amont prises en charge.
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Métriques de type 2 en amont prises en charge</th>
+</thead>
+<tbody>
+<tr>
+<td><code>requestMsec</code></td>
+<td>Temps moyen de traitement des demandes, y compris en amont, en millisecondes.</td>
+</tr>
+<tr>
+<td><code>responseMsec</code></td>
+<td>Temps de traitement moyen des réponses en amont uniquement, en millisecondes.</td>
+</tr></tbody>
+</table>
+
+<br />
 
 
 ## Augmentation de la taille de zone de mémoire partagée pour la collecte des données de mesure d'Ingress
@@ -138,9 +676,9 @@ Les zones de mémoire partagée sont définies pour que les processus de noeud w
 
 Dans la ressource configmap `ibm-cloud-provider-ingress-cm` d'Ingress, la zone `vts-status-zone-size` définit la taille de la zone de mémoire partagée pour la collecte des données de mesure. Par défaut, la valeur de `vts-status-zone-size` est définie à `10m`. Si vous disposez d'un environnement plus important qui nécessite davantage de mémoire pour la collecte des données de mesure, vous pouvez remplacer la valeur par défaut par une valeur plus élevée en procédant comme suit :
 
-Avant de commencer, vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](cs_users.html#platform) pour l'espace de nom `kube-system`.
+Avant de commencer, vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `kube-system`.
 
-1. Créez et ouvrez une version locale du fichier de configuration pour la ressource configmap `ibm-cloud-provider-ingress-cm`.
+1. Editez le fichier de configuration correspondant à la ressource configmap `ibm-cloud-provider-ingress-cm`.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # Guía de aprendizaje: Migración de una app desde Cloud Foundry a un clúster
 {: #cf_tutorial}
 
@@ -28,27 +31,34 @@ Puede tomar una app que haya desplegado anteriormente utilizando Cloud Foundry y
 
 
 ## Objetivos
+{: #cf_objectives}
 
 - Conocer el proceso general de desplegar apps en contenedores en un clúster de Kubernetes.
 - Crear un Dockerfile con el código de su app para crear una imagen de contenedor.
 - Desplegar un contenedor desde dicha imagen en un clúster de Kubernetes.
 
 ## Tiempo necesario
+{: #cf_time}
+
 30
 minutos
 
 ## Público
+{: #cf_audience}
+
 Esta guía de aprendizaje está destinada a los desarrolladores de app de Cloud Foundry.
 
 ## Requisitos previos
+{: #cf_prereqs}
 
-- [Cree un registro de imágenes privadas en {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
-- [Cree un clúster](cs_clusters.html#clusters_ui).
-- [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure).
+- [Cree un registro de imágenes privadas en {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-index).
+- [Cree un clúster](/docs/containers?topic=containers-clusters#clusters_ui).
+- [Defina su clúster como destino de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Asegúrese de tener las políticas de acceso de {{site.data.keyword.Bluemix_notm}} IAM siguientes para
 {{site.data.keyword.containerlong_notm}}:
-    - [Cualquier rol de plataforma](cs_users.html#platform)
-- [Obtenga más información sobre la terminología de Docker y Kubernetes](cs_tech.html).
+    - [Cualquier rol de plataforma](/docs/containers?topic=containers-users#platform)
+    - El [rol de servicio de **Escritor** o de **Gestor**](/docs/containers?topic=containers-users#platform)
+- [Obtenga más información sobre la terminología de Docker y Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
 
 
 <br />
@@ -56,6 +66,7 @@ Esta guía de aprendizaje está destinada a los desarrolladores de app de Cloud 
 
 
 ## Lección 1: Descarga del código de la app
+{: #cf_1}
 
 Obtenga su código ya listo para ser utilizado. ¿Aún no tiene un código? Puede descargar el código de inicio para utilizarlo en esta guía de aprendizaje.
 {: shortdesc}
@@ -71,9 +82,9 @@ Obtenga su código ya listo para ser utilizado. ¿Aún no tiene un código? Pued
 
     Para descargar el código de app de Python Flask:
 
-    a. En el catálogo, en **Modelos**, pulse **Python Flask**. Este modelo incluye un entorno de ejecución Python 2 y Python 3 para las apps.
+    a. En el catálogo, en **Modelos**, pulse **Python Flask**. Este modelo incluye un tiempo de ejecución Python 2 y Python 3 para las apps.
 
-    b. Especifique el nombre de la app `cf-py-<name>` y pulse **CREAR**. Para acceder al código de la app para el modelo, primero debe desplegar la app CF en la nube. Puede utilizar cualquier nombre para la app. Si utiliza el nombre del ejemplo, sustituya `<name>` con un identificador exclusivo como, por ejemplo, `cf-py-msx`.
+    b. Especifique el nombre de la app `cf-py-<name>` y pulse **CREAR**. Para acceder al código de la app para el modelo, primero debe desplegar la app CF en la nube. Puede utilizar cualquier nombre para la app. Si utiliza el nombre del ejemplo, sustituya `<name>` por un identificador exclusivo como, por ejemplo, `cf-py-msx`.
 
     **Atención**: No utilice información personal en las apps, las imágenes de contenedor o los nombres de recursos de Kubernetes.
 
@@ -81,7 +92,7 @@ Obtenga su código ya listo para ser utilizado. ¿Aún no tiene un código? Pued
 
     c. En el paso 1 de las instrucciones de la consola, pulse **DESCARGAR CÓDIGO DE INICIADOR**.
 
-    d. Extraiga el archivo .zip y guarde su contenido en su directorio `cf-py`.
+    d. Extraiga el archivo `.zip` y guarde su contenido en su directorio `cf-py`.
 
 Su app estará lista para ser contenerizada.
 
@@ -91,6 +102,7 @@ Su app estará lista para ser contenerizada.
 
 
 ## Lección 2: Creación de una imagen de Docker con el código de su app
+{: #cf_2}
 
 Cree un Dockerfile que incluya el código de la app y las configuraciones necesarias para el contenedor. A continuación, cree una imagen de Docker desde dicho Dockerfile y envíela por push a su registro privado de imágenes.
 {: shortdesc}
@@ -179,14 +191,15 @@ el Dockerfile, escriba un punto (.). De lo contrario, utilice la vía de acceso 
 
 
 ## Lección 3: Despliegue de un contenedor desde la imagen
+{: #cf_3}
 
 Despliegue su app como un contenedor en un clúster de Kubernetes.
 {: shortdesc}
 
-1. Cree un archivo YAML de configuración que se denomine `cf-py.yaml` y actualice `<registry_namespace>` con el nombre de su registro de imágenes privado. Este archivo de configuración define un despliegue de contenedores desde la imagen que ha creado en la lección anterior y un servicio para exponer la app al público.
+1. Cree un archivo YAML de configuración que se denomine `cf-py.yaml` y actualice `<registry_namespace>` por el nombre de su registro de imágenes privado. Este archivo de configuración define un despliegue de contenedores desde la imagen que ha creado en la lección anterior y un servicio para exponer la app al público.
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -259,7 +272,7 @@ Despliegue su app como un contenedor en un clúster de Kubernetes.
     a.  Obtenga la dirección IP pública del nodo trabajador en el clúster.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -267,7 +280,7 @@ Despliegue su app como un contenedor en un clúster de Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 
@@ -275,11 +288,11 @@ Despliegue su app como un contenedor en un clúster de Kubernetes.
 
     <img src="images/python_flask.png" alt="Captura de pantalla del modelo desplegado de la app Python Flask. " />
 
-5.  [Inicie el panel de control de Kubernetes](cs_app.html#cli_dashboard).
+5.  [Inicie el panel de control de Kubernetes](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Si selecciona su clúster en la [consola de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), utilice el botón del **Panel de control de Kubernetes** para iniciar el panel de control con una pulsación.
+    Si selecciona su clúster en la [consola de {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), utilice el botón del **Panel de control de Kubernetes** para iniciar el panel de control con una pulsación.
     {: tip}
 
 6. En el separador **Cargas de trabajo**, verá los recursos que ha creado.
 
-¡Enhorabuena! La app se despliega en un contenedor.
+¡Buen trabajo! La app se despliega en un contenedor.

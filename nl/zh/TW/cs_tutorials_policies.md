@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # 指導教學：使用 Calico 網路原則來封鎖資料流量
 {: #policy_tutorial}
 
@@ -31,24 +34,31 @@ lastupdated: "2018-12-05"
 在此情境中，您扮演公關公司網路管理者的角色，並注意到一些不尋常的資料流量正在攻擊您的應用程式。本指導教學中的課程將逐步引導您建立範例 Web 伺服器應用程式、使用負載平衡器服務公開應用程式，以及同時使用白名單及黑名單 Calico 原則來保護應用程式避開不需要且不尋常的資料流量。
 
 ## 目標
+{: #policies_objectives}
 
 - 學習藉由建立高階 DNAT 前原則，以封鎖送入所有節點埠的所有資料流量。
 - 學習藉由建立低階 DNAT 前原則，以容許列入白名單的來源 IP 位址存取負載平衡器公用 IP 及埠。低階原則會置換高階原則。
 - 學習藉由建立低階 DNAT 前原則，以封鎖列入黑名單的來源 IP 位址，讓它們無法存取負載平衡器公用 IP 及埠。
 
 ## 所需時間
+{: #policies_time}
+
 1 小時
 
 ## 適用對象
+{: #policies_audience}
+
 本指導教學的適用對象是想要管理送至應用程式之網路資料流量的軟體開發人員及網路管理者。
 
 ## 必要條件
+{: #policies_prereqs}
 
-- [建立 1.10 版或更新版本的叢集](cs_clusters.html#clusters_ui)或[將現有叢集更新為 1.10 版](cs_versions.html#cs_v110)。若要在本指導教學中使用 3.3.1 Calico CLI 及 Calico 第 3 版原則語法，則需要有 Kubernetes 1.10 版或更新版本的叢集。
-- [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
-- [安裝並配置 Calico CLI](cs_network_policy.html#1.10_install)。
+- [建立 1.10 版或更新版本的叢集](/docs/containers?topic=containers-clusters#clusters_ui)或[將現有叢集更新為 1.10 版](/docs/containers?topic=containers-cs_versions#cs_v110)。若要在本指導教學中使用 3.3.1 Calico CLI 及 Calico 第 3 版原則語法，則需要有 Kubernetes 1.10 版或更新版本的叢集。
+- [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [安裝並配置 Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)。
 - 確定您具有 {{site.data.keyword.containerlong_notm}} 的下列 {{site.data.keyword.Bluemix_notm}} IAM 存取原則：
-    - [任何平台角色](cs_users.html#platform)
+    - [任何平台角色](/docs/containers?topic=containers-users#platform)
+    - [**撰寫者**或**管理員**服務角色](/docs/containers?topic=containers-users#platform)
 
 <br />
 
@@ -59,14 +69,14 @@ lastupdated: "2018-12-05"
 第一課告訴您如何從多個 IP 位址及埠公開您的應用程式，以及公用資料流量是從哪裡進入您的叢集。
 {: shortdesc}
 
-開始部署要在整個指導教學中使用的範例 Web 伺服器應用程式。`echoserver` Web 伺服器會顯示有關建立用戶端與叢集之連線的資料，並讓您測試對公關公司叢集的存取。然後，藉由建立負載平衡器 2.0 服務來公開應用程式。負載平衡器 2.0 服務可讓您的應用程式透過負載平衡器服務 IP 位址及工作者節點的節點埠提供使用。
+開始部署要在整個指導教學中使用的範例 Web 伺服器應用程式。`echoserver` Web 伺服器會顯示有關建立用戶端與叢集之連線的資料，並讓您測試對公關公司叢集的存取。然後，透過建立負載平衡器 1.0 服務來公開應用程式。負載平衡器 1.0 服務可讓您的應用程式透過負載平衡器服務 IP 位址及工作者節點的節點埠來使用。
 
-想要改用 [Ingress 應用程式負載平衡器 (ALB)](cs_ingress.html) 嗎？請跳過步驟 3 和 4 中的負載平衡器建立作業。改為執行 `ibmcloud ks albs --cluster <cluster_name>`，以取得 ALB 的公用 IP，並在整個指導教學中使用這些 IP 來取代 `<loadbalancer_IP>。`
+想要使用 Ingress 應用程式負載平衡器 (ALB) 嗎？[建立 Web 伺服器應用程式的服務](/docs/containers?topic=containers-ingress#public_inside_1)以及[建立 Web 伺服器應用程式的 Ingress 資源](/docs/containers?topic=containers-ingress#public_inside_4)，而非在步驟 3 及 4 中的建立負載平衡器。然後，執行下列指令來取得 ALB 的公用 IP：`ibmcloud ks albs --cluster <cluster_name>`，並在整個指導教學中使用這些 IP 來取代 `<loadbalancer_IP>.`
 {: tip}
 
-下圖顯示在第 1 課結束時如何藉由公用節點埠及公用負載平衡器，在網際網路公開 Web 伺服器應用程式：
+下圖顯示在課程 1 結束時如何藉由公用節點埠及公用負載平衡器，在網際網路上公開 Web 伺服器應用程式：
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="在第 1 課結束時，藉由公用節點埠及公用負載平衡器，在網際網路公開 Web 伺服器應用程式。" style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="在課程 1 結束時，藉由公用節點埠及公用負載平衡器，在網際網路上公開 Web 伺服器應用程式。" style="width:450px; border-style: none"/>
 
 1. 部署範例 Web 伺服器應用程式。與 Web 伺服器應用程式建立連線時，應用程式會以其在連線中收到的 HTTP 標頭回應。
     ```
@@ -89,7 +99,7 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-3. 若要在公用網際網路公開應用程式，請在文字編輯器中建立一個稱為 `webserver-lb.yaml` 的負載平衡器 2.0 服務配置檔。
+3. 若要在公用網際網路上公開應用程式，請在文字編輯器中建立一個稱為 `webserver-lb.yaml` 的負載平衡器 1.0 服務配置檔。
     ```
     apiVersion: v1
     kind: Service
@@ -97,8 +107,6 @@ lastupdated: "2018-12-05"
       labels:
         run: webserver
       name: webserver-lb
-      annotations:
-        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
       type: LoadBalancer
       selector:
@@ -108,7 +116,6 @@ lastupdated: "2018-12-05"
         port: 80
         protocol: TCP
         targetPort: 8080
-      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -126,8 +133,8 @@ lastupdated: "2018-12-05"
         ```
         {: pre}
 
-        輸出範例：
-        ```
+          輸出範例：
+  ```
         NAME           CLUSTER-IP       EXTERNAL-IP        PORT(S)        AGE       SELECTOR
         webserver-lb   172.21.xxx.xxx   169.xx.xxx.xxx     80:31024/TCP   2m        run=webserver
         ```
@@ -182,16 +189,16 @@ lastupdated: "2018-12-05"
 
     2. 取得工作者節點的**公用 IP** 位址。
         ```
-        ibmcloud ks workers <cluster_name>
+        ibmcloud ks workers --cluster <cluster_name>
         ```
         {: pre}
 
-        輸出範例：
-        ```
+          輸出範例：
+  ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
         ```
         {: screen}
 
@@ -234,7 +241,10 @@ lastupdated: "2018-12-05"
 ## 第 2 課：封鎖送入所有節點埠的所有資料流量
 {: #lesson2}
 
-若要保護公關公司的叢集，您必須封鎖對公開您應用程式之負載平衡器服務及節點埠兩者的公開存取。首先，封鎖對節點埠的存取。下圖顯示在第 2 課結束時如何允許資料流量傳送至負載平衡器，但不傳送至節點埠：
+若要保護公關公司的叢集，您必須封鎖對公開您應用程式之負載平衡器服務及節點埠兩者的公開存取。首先，封鎖對節點埠的存取。
+{: shortdesc}
+
+下圖顯示在第 2 課結束時如何允許資料流量傳送至負載平衡器，但不傳送至節點埠：
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="在第 2 課結束時，僅會透過公用負載平衡器將 Web 伺服器應用程式公開至網際網路。" style="width:425px; border-style: none"/>
 
@@ -246,7 +256,7 @@ lastupdated: "2018-12-05"
       name: deny-nodeports
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
             destination:
@@ -281,8 +291,8 @@ lastupdated: "2018-12-05"
       calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
-  輸出範例：
-  ```
+輸出範例：
+    ```
   Successfully applied 1 'GlobalNetworkPolicy' resource(s)
   ```
   {: screen}
@@ -343,6 +353,7 @@ lastupdated: "2018-12-05"
 {: shortdesc}
 
 首先，除了節點埠之外，您必須封鎖所有資料流量送入公開應用程式的負載平衡器。然後，您可以建立一個原則，將系統的 IP 位址列入白名單。在第 3 課結束時，將封鎖所有送至公用節點埠及負載平衡器的資料流量，而且僅容許來自列入白名單之系統 IP 的資料流量：
+
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="Web 伺服器應用程式僅由公用負載平衡器在您的系統 IP 公開。" style="width:500px; border-style: none"/>
 
 1. 在文字編輯器中，建立一個稱為 `deny-lb-port-80.yaml` 的高階 DNAT 前原則，來拒絕將 TCP 及 UDP 資料流量從任何來源 IP 送入負載平衡器 IP 位址及埠。將 `<loadbalancer_IP>` 取代為來自提要的負載平衡器公用 IP 位址。
@@ -354,7 +365,7 @@ lastupdated: "2018-12-05"
       name: deny-lb-port-80
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -408,7 +419,7 @@ lastupdated: "2018-12-05"
       name: whitelist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Allow
         destination:
@@ -462,8 +473,10 @@ lastupdated: "2018-12-05"
 {: #lesson4}
 
 在前一課中，您已封鎖所有資料流量，並只將少數 IP 列入白名單。當您想要限制只存取少數受管制的來源 IP 位址時，該情境適用於測試目的。不過，公關公司具有需要大眾可以廣泛使用的應用程式。您需要確定允許所有資料流量，但您從少數 IP 位址看到的不尋常資料流量除外。黑名單有助於這類情境，因為它可以協助您防止來自小型 IP 位址集的攻擊。
+{: shortdesc}
 
 在本課程中，您將藉由封鎖來自您自己系統之來源 IP 位址的資料流量，來測試黑名單。在第 4 課結束時，將封鎖所有送至公用節點埠的資料流量，而且將容許所有送至公用負載平衡器的資料流量。只會封鎖從列入黑名單之系統 IP 送至負載平衡器的資料流量：
+
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web 伺服器應用程式是由公用負載平衡器在網際網路公開。只封鎖來自您系統 IP 的資料流量。" style="width:550px; border-style: none"/>
 
 1. 清除您在前一課中建立的白名單原則。
@@ -498,7 +511,7 @@ lastupdated: "2018-12-05"
       name: blacklist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -569,5 +582,5 @@ lastupdated: "2018-12-05"
 ## 下一步為何？
 {: #whats_next}
 
-* 深入閱讀[使用網路原則控制資料流量](cs_network_policy.html)。
+* 深入閱讀[使用網路原則控制資料流量](/docs/containers?topic=containers-network_policies)。
 * 如需其他控制資料流量進出叢集的範例 Calico 網路原則，請參閱[主要原則展示 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) 及[進階網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)。

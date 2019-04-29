@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -29,7 +33,7 @@ Kubernetes のポッドの優先度と回避により、ポッドの相対的な
 
 ポッドの優先度を設定することによって、低優先度のワークロードがクラスター内の重要なワークロードに影響を与えるのを防ぐことができます (特に、クラスターがそのリソース容量に達し始めている場合)。
 
-クラスターへの[適切なユーザー・アクセスがセットアップされている](cs_users.html#users)こと、および該当する場合は、[ポッドのセキュリティー・ポリシー](cs_psp.html#psp)があることを確認します。 アクセスおよびポッドのセキュリティー・ポリシーにより、信頼できないユーザーが高優先度のポッドをデプロイして他のポッドのスケジューリングを妨げることがないようにすることができます。
+クラスターへの[適切なユーザー・アクセスがセットアップされている](/docs/containers?topic=containers-users#users)こと、および該当する場合は、[ポッドのセキュリティー・ポリシー](/docs/containers?topic=containers-psp#psp)があることを確認します。 アクセスおよびポッドのセキュリティー・ポリシーにより、信頼できないユーザーが高優先度のポッドをデプロイして他のポッドのスケジューリングを妨げることがないようにすることができます。
 {: tip}
 
 {: #priority_scheduling}
@@ -40,7 +44,9 @@ Kubernetes のポッドの優先度と回避により、ポッドの相対的な
 
 ポッドの優先度とスケジューラーがどのように機能するかを理解するために、以下の図のシナリオについて考えみましょう。 使用可能なリソースが存在するワーカー・ノードには、優先するポッドを配置する必要があります。 そうでない場合は、シナリオ 3 のように、既存のポッドが削除されたときにクラスターの優先度の高いポッドが保留状態で残ることがあります。
 
-_図: ポッドの優先度のシナリオ_ ![ポッドの優先度のシナリオ](images/pod-priority.png)
+_図: ポッドの優先度のシナリオ_
+<img src="images/pod-priority.png" width="500" alt="ポッドの優先度のシナリオ" style="width:500px; border-style: none"/>
+
 1.  優先度が高、中、低の 3 つのポッドが、スケジュール保留中です。 スケジューラーは、3 つのすべてのポッドのためのスペースがある使用可能なワーカー・ノードを見つけ、高優先度のポッドが先にスケジュールされるように優先度の順にポッドをスケジュールします。
 2.  優先度が高、中、低の 3 つのポッドが、スケジュール保留中です。 スケジューラーは、使用可能なワーカー・ノードを見つけますが、ワーカー・ノードには優先度が高と中のポッドをサポートするのに十分なリソースしかありません。 低優先度のポッドはスケジュールされず、保留中のままとなります。
 3.  優先度が高と中の 2 つのポッドが、スケジュール保留中です。 低優先度の 3 番目のポッドが使用可能なワーク・ノード上に存在します。 ただし、ワーカー・ノードには、保留中のポッドをスケジュールするための十分なリソースがありません。 スケジューラーは、低優先度のポッドを回避 (削除) して、このポッドを保留状態に戻します。 次に、スケジューラーは、高優先度のポッドのスケジュールを試みます。 ただし、ワーカー・ノードには、高優先度のポッドをスケジュールするための十分なリソースがないため、スケジューラーは中優先度のポッドをスケジュールします。
@@ -85,8 +91,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始前に、以下のことを行います。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
-* Kubernetes バージョン 1.11 以降のクラスターを[作成](cs_clusters.html#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](cs_cluster_update.html#update)します。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+* Kubernetes バージョン 1.11 以降のクラスターを[作成](/docs/containers?topic=containers-clusters#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](/docs/containers?topic=containers-update#update)します。
 
 優先度クラスを使用する場合:
 
@@ -166,8 +173,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始前に、以下のことを行います。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
-* Kubernetes バージョン 1.11 以降のクラスターを[作成](cs_clusters.html#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](cs_cluster_update.html#update)します。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* ポッドをデプロイする名前空間に対して[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。
+* Kubernetes バージョン 1.11 以降のクラスターを[作成](/docs/containers?topic=containers-clusters#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](/docs/containers?topic=containers-update#update)します。
 * 優先度によって既存のポッドが回避され、クラスターのリソースの消費方法に影響を与える可能性があるため、[優先度スケジューリングの仕組みを理解](#priority_scheduling)します。
 
 ポッドに優先度を割り当てるには、以下のようにします。
@@ -198,7 +206,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 3.  ポッドの仕様で、前のステップで取得した優先度クラスの名前を持つ `priorityClassName` フィールドを追加します。
 
     ```yaml
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty

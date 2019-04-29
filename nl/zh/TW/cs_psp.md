@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -21,24 +25,20 @@ lastupdated: "2018-12-05"
 # 配置 Pod 安全原則
 {: #psp}
 
-使用 [Pod 安全原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)，您可以配置原則來授權誰可以在 {{site.data.keyword.containerlong}} 中建立及更新 Pod。執行 Kubernetes 1.10.3、1.9.8 及 1.8.13 版或更新版本的修正套件的叢集，支援強制執行這些原則的 `PodSecurityPolicy` 許可控制器。
-{: shortdesc}
-
-使用舊版 Kubernetes 嗎？立即[更新叢集](cs_cluster_update.html)。
-{: tip}
+使用 [Pod 安全原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)，您可以配置原則來授權誰可以在 {{site.data.keyword.containerlong}} 中建立及更新 Pod。
 
 **為什麼要設定 Pod 安全原則？**</br>
 當您作為叢集管理者時，您要控制叢集裡發生的情況，特別是影響叢集的安全或準備情形的動作。Pod 安全原則可協助您控制特許容器、root 名稱空間、主機網路及埠、磁區類型、主機檔案系統、Linux 許可權（例如唯讀或群組 ID）等等的使用。
 
-使用 `PodSecurityPolicy` 許可控制器，要到您[授權原則](#customize_psp)之後，才能建立 Pod。設定 Pod 安全原則可能會有非預期的副作用，因此請務必在變更原則之後測試部署。若要部署應用程式，部署 Pod 所需的 Pod 安全原則必須全部授權使用者及服務帳戶。例如，如果您使用 [Helm](cs_integrations.html#helm_links) 來安裝應用程式，則 Helm tiller 元件會建立 Pod，因此，您必須有正確的 Pod 安全原則授權。
+使用 `PodSecurityPolicy` 許可控制器，要到您[授權原則](#customize_psp)之後，才能建立 Pod。設定 Pod 安全原則可能會有非預期的副作用，因此請務必在變更原則之後測試部署。若要部署應用程式，部署 Pod 所需的 Pod 安全原則必須全部授權使用者及服務帳戶。例如，如果您使用 [Helm](/docs/containers?topic=containers-integrations#helm_links) 來安裝應用程式，則 Helm tiller 元件會建立 Pod，因此，您必須有正確的 Pod 安全原則授權。
 
-要嘗試控制哪些使用者可以存取 {{site.data.keyword.containerlong_notm}} 嗎？請參閱[指派叢集存取](cs_users.html#users)，以設定 {{site.data.keyword.Bluemix_notm}} IAM 及基礎架構許可權。
+要嘗試控制哪些使用者可以存取 {{site.data.keyword.containerlong_notm}} 嗎？請參閱[指派叢集存取](/docs/containers?topic=containers-users#users)，以設定 {{site.data.keyword.Bluemix_notm}} IAM 及基礎架構許可權。
 {: tip}
 
 **依預設會設定任何原則嗎？我可以新增哪些原則？**</br>
 依預設，{{site.data.keyword.containerlong_notm}} 會使用您無法刪除或修改的 [{{site.data.keyword.IBM_notm}} 叢集管理的資源](#ibm_psp)來配置 `PodSecurityPolicy` 許可控制器。您也無法停用許可控制器。
 
-依預設，不會鎖定 Pod 動作。相反地，叢集裡的兩個角色型存取控制 (RBAC) 資源會授權所有管理者、使用者、服務及節點來建立特許及非特許 Pod。為了可攜性，包括其他 RBAC 資源，搭配用於[混合式部署](cs_hybrid.html#hybrid_iks_icp)的「{{site.data.keyword.Bluemix_notm}} 專用」套件。
+依預設，不會鎖定 Pod 動作。相反地，叢集中的兩個角色型存取控制 (RBAC) 資源會授權所有管理者、使用者、服務及節點來建立特許及非特許 Pod。為了可攜性，包括其他 RBAC 資源，搭配用於[混合式部署](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)的「{{site.data.keyword.Bluemix_notm}} 專用」套件。
 
 如果您要防止特定使用者建立或更新 Pod，則可以[修改這些 RBAC 資源或建立自己的 RBAC 資源](#customize_psp)。
 
@@ -47,7 +47,7 @@ lastupdated: "2018-12-05"
 
 當您使用資源控制器（例如部署）來建立 Pod 時，Kubernetes 會根據服務帳戶獲授權使用的 Pod 安全原則來驗證 Pod 的服務帳戶認證。如果原則不支援 Pod 安全需求，則控制器會成功，但不會建立 Pod。
 
-如需一般錯誤訊息，請參閱[因為 Pod 安全原則，Pod 無法部署](cs_troubleshoot_clusters.html#cs_psp)。
+如需一般錯誤訊息，請參閱[因為 Pod 安全原則，Pod 無法部署](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp)。
 
 ## 自訂 Pod 安全原則
 {: #customize_psp}
@@ -67,8 +67,9 @@ lastupdated: "2018-12-05"
 您可以修改這些 RBAC 角色，以在原則中移除或新增管理者、使用者、服務或節點。
 
 開始之前：
-*  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
-*  瞭解使用 RBAC 角色。如需相關資訊，請參閱[使用自訂 Kubernetes RBAC 角色授權使用者](cs_users.html#rbac)或 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview)。
+*  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*  瞭解使用 RBAC 角色。如需相關資訊，請參閱[使用自訂 Kubernetes RBAC 角色授權使用者](/docs/containers?topic=containers-users#rbac)或 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview)。
+* 確定您具有所有名稱空間的 [**Manager** {{site.data.keyword.Bluemix_notm}} IAM 服務存取角色](/docs/containers?topic=containers-users#platform)。
 
 當您修改預設配置時，可以防止重要叢集動作（例如 Pod 部署或叢集更新）。測試其他團隊未依賴的非正式作業叢集裡的變更。
 {: important}
@@ -195,7 +196,7 @@ lastupdated: "2018-12-05"
 |---|---|---|---|
 | `ibm-anyuid-hostaccess-psp` | cluster-wide | `PodSecurityPolicy` | 用於完整主機存取 Pod 建立的原則。|
 | `ibm-anyuid-hostaccess-psp-user` | cluster-wide | `ClusterRole` | 容許使用 `ibm-anyuid-hostaccess-psp` Pod 安全原則的叢集角色。|
-| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | 用於 hostpath 存取 Pod 建立的原則。|
+| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | 用於主機路徑存取 Pod 建立的原則。|
 | `ibm-anyuid-hostpath-psp-user` | cluster-wide | `ClusterRole` | 容許使用 `ibm-anyuid-hostpath-psp` Pod 安全原則的叢集角色。|
 | `ibm-anyuid-psp` | cluster-wide | `PodSecurityPolicy` | 用於任何 UID/GID 執行檔 Pod 建立的原則。|
 | `ibm-anyuid-psp-user` | cluster-wide | `ClusterRole` | 容許使用 `ibm-anyuid-psp` Pod 安全原則的叢集角色。|

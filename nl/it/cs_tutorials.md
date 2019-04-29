@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # Esercitazione: Creazione dei cluster Kubernetes
 {: #cs_cluster_tutorial}
 
@@ -31,6 +34,7 @@ per distribuire un'applicazione in un contenitore in {{site.data.keyword.Bluemix
 
 
 ## Obiettivi
+{: #tutorials_objectives}
 
 In questa prima esercitazione, agisci come l'amministratore di rete della società di PR. Configuri un cluster Kubernetes personalizzato utilizzato per distribuire e testare una versione Hello World dell'applicazione in {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
@@ -42,21 +46,24 @@ In questa prima esercitazione, agisci come l'amministratore di rete della societ
 
 
 ## Tempo richiesto
+{: #tutorials_time}
 
 40 minuti
 
 
 ## Destinatari
+{: #tutorials_audience}
 
 Questa esercitazione è destinata agli sviluppatori software e agli amministratori di rete che stanno creando un cluster Kubernetes per la prima volta.
 {: shortdesc}
 
 ## Prerequisiti
+{: #tutorials_prereqs}
 
--  Controlla i passi che devi seguire per [prepararti a creare un cluster](cs_clusters.html#cluster_prepare).
+-  Controlla i passi che devi seguire per [prepararti a creare un cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
 -  Assicurati di disporre delle seguenti politiche di accesso:
-    - Il [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Amministratore**](cs_users.html#platform) per {{site.data.keyword.containerlong_notm}}
-    -  Il ruolo di [**Sviluppatore**](/docs/iam/mngcf.html#mngcf) di Cloud Foundry nello spazio del cluster in cui vuoi lavorare
+    - [**Amministratore** come ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) per {{site.data.keyword.containerlong_notm}}
+    - [**Scrittore** o **Gestore** come ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) per {{site.data.keyword.containerlong_notm}}
 
 
 ## Lezione 1: Creazione di un cluster e configurazione della CLI
@@ -69,21 +76,23 @@ Crea il tuo cluster Kubernetes nella console {{site.data.keyword.Bluemix_notm}} 
 
 Poiché servono alcuni minuti per eseguire il provisioning, crea il tuo cluster prima di installare le CLI.
 
-1.  [Nella console {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create), crea un cluster gratuito o standard con 1 pool di nodi di lavoro contenente 1 nodo di lavoro.
+1.  [Nella console {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/containers-kubernetes/catalog/cluster/create), crea un cluster gratuito o standard con 1 pool di nodi di lavoro contenente 1 nodo di lavoro.
 
-    Puoi anche creare un [cluster nella CLI](cs_clusters.html#clusters_cli).
+    Puoi anche creare un [cluster nella CLI](/docs/containers?topic=containers-clusters#clusters_cli).
     {: tip}
 
 Come viene eseguito il provisioning del tuo cluster, installa le seguenti CLI che vengono utilizzate per gestire i cluster:
 -   CLI {{site.data.keyword.Bluemix_notm}}
--   Plug-in {{site.data.keyword.containerlong_notm}}
+-   Plugin {{site.data.keyword.containerlong_notm}}
 -   CLI Kubernetes
--   Plug-in {{site.data.keyword.registryshort_notm}}
+-   Plugin {{site.data.keyword.registryshort_notm}}
+
+
 
 </br>
 **Per installare le CLI e i loro prerequisiti**
 
-1.  Come prerequisito per il plug-in {{site.data.keyword.containerlong_notm}}, installa la CLI [{{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://clis.ng.bluemix.net/ui/home.html). Per eseguire i comandi CLI {{site.data.keyword.Bluemix_notm}}, utilizza il prefisso `ibmcloud`.
+1.  Come prerequisito per il plug-in {{site.data.keyword.containerlong_notm}}, installa la [CLI {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli). Per eseguire i comandi CLI {{site.data.keyword.Bluemix_notm}}, utilizza il prefisso `ibmcloud`.
 2.  Segui le istruzioni per selezionare un account e un'organizzazione {{site.data.keyword.Bluemix_notm}}. I cluster sono specifici di un account, ma sono indipendenti da un'organizzazione o uno spazio {{site.data.keyword.Bluemix_notm}}.
 
 4.  Installa il plug-in {{site.data.keyword.containerlong_notm}} per creare i cluster Kubernetes e gestire i nodi di lavoro. Per eseguire i comandi del plug-in {{site.data.keyword.containerlong_notm}}, utilizza il prefisso `ibmcloud ks`.
@@ -94,15 +103,15 @@ Come viene eseguito il provisioning del tuo cluster, installa le seguenti CLI ch
     {: pre}
 
 5.  Per distribuire le applicazioni nei tuoi cluster, [installa la CLI Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Per eseguire i comandi utilizzando la CLI Kubernetes, utilizza il prefisso `kubectl`.
-    1.  Per una compatibilità funzionale completa, scarica la versione della CLI Kubernetes che corrisponde alla versione del cluster Kubernetes che vuoi utilizzare. L'attuale versione Kubernetes predefinita per {{site.data.keyword.containerlong_notm}} è la 1.10.11.
+    1.  Per una compatibilità funzionale completa, scarica la versione della CLI Kubernetes che corrisponde alla versione del cluster Kubernetes che vuoi utilizzare. L'attuale versione Kubernetes predefinita per {{site.data.keyword.containerlong_notm}} è la 1.12.6.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe)
 
-          **Suggerimento:** se stai utilizzando Windows, installa la CLI Kubernetes nella stessa directory della CLI {{site.data.keyword.Bluemix_notm}}. Questa configurazione salva alcune modifiche al percorso file quando esegui il comando in un secondo momento.
+          **Suggerimento:** se stai utilizzando Windows, installa la CLI Kubernetes nella stessa directory della CLI {{site.data.keyword.Bluemix_notm}}. Questa configurazione ti consente di ridurre le modifiche al percorso file quando esegui i comandi in un secondo momento.
 
     2.  Se stai utilizzando OS X o Linux, completa la seguente procedura.
         1.  Sposta il file eseguibile nella directory `/usr/local/bin`.
@@ -153,7 +162,7 @@ sarà simile al seguente.
     ```
     {: pre}
 
-Congratulazioni! Hai installato correttamente le CLI per le seguenti esercitazioni e lezioni. Successivamente, configura il tuo ambiente cluster e aggiungi il servizio {{site.data.keyword.toneanalyzershort}}.
+Ottimo lavoro! Hai installato correttamente le CLI per le seguenti esercitazioni e lezioni. Successivamente, configura il tuo ambiente cluster e aggiungi il servizio {{site.data.keyword.toneanalyzershort}}.
 
 
 ## Lezione 2: Configurazione del tuo registro privato
@@ -179,26 +188,26 @@ in modo che l'applicazione possa accedere al servizio {{site.data.keyword.tonean
    ```
    {: pre}
 
-2.  Configura il tuo proprio repository delle immagini privato in {{site.data.keyword.registryshort_notm}} per condividere ed archiviare in modo sicuro le immagini Docker
+3.  Configura il tuo proprio repository delle immagini privato in {{site.data.keyword.registryshort_notm}} per condividere ed archiviare in modo sicuro le immagini Docker
 con tutti gli utenti del cluster. Un repository delle immagini privato in {{site.data.keyword.Bluemix_notm}} viene
 identificato da uno spazio dei nomi. Lo spazio dei nomi viene utilizzato per creare un URL univoco per il tuo repository delle immagini
 che gli sviluppatori possono utilizzare per accedere alle immagini Docker private.
 
-    Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le immagini del contenitore.
+    Ulteriori informazioni sulla [protezione delle tue informazioni personali](/docs/containers?topic=containers-security#pi) quando utilizzi le immagini del contenitore.
 
     In questo esempio, l'agenzia di PR vuole creare solo
 un repository delle immagini in {{site.data.keyword.registryshort_notm}}, per cui sceglie
-_agenzia_PR_ come proprio spazio dei nomi per raggruppare tutte le immagini nel suo account. Sostituisci _&lt;namespace&gt;_ con uno spazio dei nomi di tua scelta che non sia correlato all'esercitazione.
+`agenzia_PR` come proprio spazio dei nomi per raggruppare tutte le immagini nel suo account. Sostituisci &lt;namespace&gt; con uno spazio dei nomi di tua scelta che non sia correlato all'esercitazione.
 
     ```
     ibmcloud cr namespace-add <namespace>
     ```
     {: pre}
 
-3.  Prima di continuare con il prossimo passo, verifica che la distribuzione del tuo nodo di lavoro sia completa.
+4.  Prima di continuare con il prossimo passo, verifica che la distribuzione del tuo nodo di lavoro sia completa.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -206,7 +215,7 @@ _agenzia_PR_ come proprio spazio dei nomi per raggruppare tutte le immagini nel 
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.11
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.6
     ```
     {: screen}
 
@@ -224,7 +233,7 @@ cluster in {{site.data.keyword.Bluemix_notm}}.
 1.  Richiama il comando per impostare la variabile di ambiente e scaricare i file di configurazione Kubernetes.
 
     ```
-    ibmcloud ks cluster-config <cluster_name_or_ID>
+    ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -238,6 +247,9 @@ cluster in {{site.data.keyword.Bluemix_notm}}.
     {: screen}
 
 2.  Copia e incolla il comando visualizzato nel tuo terminale per impostare la variabile di ambiente `KUBECONFIG`.
+
+    **Utenti Windows PowerShell**: invece di copiare e incollare il comando `SET` dall'output di `ibmcloud ks cluster-config`, devi impostare la variabile di ambiente `KUBECONFIG` eseguendo, ad esempio, `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`.
+        {: note}
 
 3.  Verifica che la variabile di ambiente `KUBECONFIG` sia impostata correttamente.
 
@@ -266,8 +278,8 @@ Kubernetes.
     Output di esempio:
 
     ```
-    Client Version: v1.10.11
-    Server Version: v1.10.11
+    Client Version: v1.12.6
+    Server Version: v1.12.6
     ```
     {: screen}
 
@@ -282,7 +294,7 @@ servizio {{site.data.keyword.Bluemix_notm}} che desideri utilizzare con le tue a
 
 1.  Aggiungi il servizio {{site.data.keyword.toneanalyzershort}} al tuo account {{site.data.keyword.Bluemix_notm}}. Sostituisci <service_name> con un nome per la tua istanza di servizio.
 
-    Quando aggiungi il servizio {{site.data.keyword.toneanalyzershort}} al tuo account, viene visualizzato un messaggio che indica che il servizio non è gratuito. Se limiti la tua chiamata API, per questa esercitazione non sarà addebitato nulla dal tuo servizio {{site.data.keyword.watson}}. [Rivedi le informazioni sul prezzo per il servizio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/catalog/services/tone-analyzer).
+    Quando aggiungi il servizio {{site.data.keyword.toneanalyzershort}} al tuo account, viene visualizzato un messaggio che indica che il servizio non è gratuito. Se limiti la tua chiamata API, per questa esercitazione non sarà addebitato nulla dal tuo servizio {{site.data.keyword.watson}}. [Rivedi le informazioni sul prezzo per il servizio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/catalog/services/tone-analyzer).
     {: note}
 
     ```
@@ -331,8 +343,8 @@ Kubernetes. In questo esempio, il segreto include la chiave API per l'accesso al
 Ottimo lavoro! Il tuo cluster è configurato e il tuo ambiente locale è pronto per iniziare a distribuire le applicazioni nel cluster.
 
 ## Operazioni successive
-{: #next}
+{: #tutorials_next}
 
-
-* Prova l'[Esercitazione: Distribuzione delle applicazioni nei cluster Kubernetes](cs_tutorials_apps.html#cs_apps_tutorial) per distribuire l'applicazione dell'agenzia di PR
+* Verifica le tue conoscenze e [fai un quiz ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)!
+* Prova l'[Esercitazione: Distribuzione delle applicazioni nei cluster Kubernetes](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial) per distribuire l'applicazione dell'agenzia di PR
 nel cluster che hai creato.

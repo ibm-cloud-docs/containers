@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -33,14 +37,14 @@ Se scegli di modificare le impostazioni predefinite, lo fai a tuo proprio rischi
 Se hai specifici requisiti di ottimizzazione delle prestazioni, puoi modificare le impostazioni predefinite per i parametri `sysctl` del kernel Linux sui nodi di lavoro.
 {: shortdesc}
 
-I nodi di lavoro vengono automaticamente forniti con prestazioni kernel ottimizzate, ma puoi modificare le impostazioni predefinite applicando un oggetto [`DaemonSet` Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) personalizzato al tuo cluster. La serie di daemon modifica le impostazioni per tutti i nodi di lavoro esistenti e applica le impostazioni a qualsiasi nuovo nodo di lavoro che viene fornito nel cluster. Nessun pod è interessato.
+I nodi di lavoro vengono automaticamente forniti con prestazioni kernel ottimizzate, ma puoi modificare le impostazioni predefinite applicando un oggetto [`DaemonSet` Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) personalizzato al tuo cluster. La serie di daemon modifica le impostazioni per tutti i nodi di lavoro esistenti e applica le impostazioni a qualsiasi nuovo nodo di lavoro di cui viene eseguito il provisioning nel cluster. Nessun pod è interessato.
 
-Devi disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Amministratore**](cs_users.html#platform) per il cluster per eseguire l'initContainer privilegiato di esempio. Dopo che i contenitori per le distribuzioni sono stati inizializzati, i privilegi vengono eliminati.
+Devi disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Gestore**](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi per eseguire l'`initContainer` privilegiato di esempio. Dopo che i contenitori per le distribuzioni sono stati inizializzati, i privilegi vengono eliminati.
 {: note}
 
 1. Salva la seguente serie di daemon in un file denominato `worker-node-kernel-settings.yaml`. Nella sezione `spec.template.spec.initContainers`, aggiungi i campi e i valori per i parametri `sysctl` che vuoi ottimizzare. Questa serie di daemon di esempio modifica il numero massimo predefinito di connessioni consentite nell'ambiente tramite l'impostazione `net.core.somaxconn` e l'intervallo di porte temporanee tramite l'impostazione `net.ipv4.ip_local_port_range`.
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: kernel-optimization
@@ -103,13 +107,13 @@ Devi disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IA
 
 Per ripristinare i parametri `sysctl` dei tuoi nodi di lavoro ai valori predefiniti impostati da {{site.data.keyword.containerlong_notm}}:
 
-1. Elimina la serie di daemon. Gli initContainer che si applicavano alle impostazioni personalizzate vengono rimossi.
+1. Elimina la serie di daemon. Gli `initContainer` che applicavano le impostazioni personalizzate vengono rimossi.
     ```
     kubectl delete ds kernel-optimization
     ```
     {: pre}
 
-2. [Riavvia tutti i nodi di lavoro nel cluster](cs_cli_reference.html#cs_worker_reboot). I nodi di lavoro tornano online con i valori predefiniti applicati.
+2. [Riavvia tutti i nodi di lavoro nel cluster](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). I nodi di lavoro tornano online con i valori predefiniti applicati.
 
 <br />
 
@@ -120,11 +124,11 @@ Per ripristinare i parametri `sysctl` dei tuoi nodi di lavoro ai valori predefin
 Se hai richieste di carico di lavoro specifiche per le prestazioni, puoi modificare le impostazioni predefinite per i parametri `sysctl` del kernel Linux sugli spazi dei nomi della rete di pod.
 {: shortdesc}
 
-Per ottimizzare le impostazioni del kernel per i pod dell'applicazione, puoi inserire una patch [initContainer ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) nello YALM `pod/ds/rs/deployment` per ciascuna distribuzione. L'initContainer viene aggiunto a ciascuna distribuzione dell'applicazione che si trova nello spazio dei nomi della rete di pod per cui vuoi ottimizzare le prestazioni.
+Per ottimizzare le impostazioni del kernel per i pod dell'applicazione, puoi inserire una patch [`initContainer ` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) nello YALM `pod/ds/rs/deployment` per ciascuna distribuzione. L'`initContainer` viene aggiunto a ciascuna distribuzione dell'applicazione che si trova nello spazio dei nomi della rete di pod per cui vuoi ottimizzare le prestazioni.
 
-Prima di iniziare, assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Amministratore**](cs_users.html#platform) per il cluster per eseguire l'initContainer privilegiato di esempio. Dopo che i contenitori per le distribuzioni sono stati inizializzati, i privilegi vengono eliminati.
+Prima di iniziare, assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Gestore**](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi per eseguire l'`initContainer` privilegiato di esempio. Dopo che i contenitori per le distribuzioni sono stati inizializzati, i privilegi vengono eliminati.
 
-1. Salva la seguente patch initContainer in un file denominato `pod-patch.yaml` e aggiungi i campi e i valori per i parametri `sysctl` che vuoi ottimizzare. Questo initContainer di esempio modifica il numero massimo predefinito di connessioni consentite nell'ambiente tramite l'impostazione `net.core.somaxconn` e l'intervallo di porte temporanee tramite l'impostazione `net.ipv4.ip_local_port_range`.
+1. Salva la seguente patch `initContainer` in un file denominato `pod-patch.yaml` e aggiungi i campi e i valori per i parametri `sysctl` che vuoi ottimizzare. Questo `initContainer` di esempio modifica il numero massimo predefinito di connessioni consentite nell'ambiente tramite l'impostazione `net.core.somaxconn` e l'intervallo di porte temporanee tramite l'impostazione `net.ipv4.ip_local_port_range`.
     ```
     spec:
       template:
@@ -161,7 +165,7 @@ Le configurazione del provider di metriche del tuo cluster (`metrics-server` in 
 
 Il pod del provider di metriche ha anche un contenitore `nanny` che ridimensiona le richieste e i limiti delle risorse del contenitore principale `metrics-server` o `heapster` in risposta al numero di nodi di lavoro nel cluster. Puoi modificare le risorse predefinite modificando la mappa di configurazione del provider di metriche.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Apri il file YALM di mappa di configurazione del provider di metriche del cluster.
     *  Per `metrics-server`:

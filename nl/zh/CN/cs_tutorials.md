@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # 教程：创建 Kubernetes 集群
 {: #cs_cluster_tutorial}
 
@@ -30,6 +33,7 @@ lastupdated: "2018-12-05"
 
 
 ## 目标
+{: #tutorials_objectives}
 
 在第一个教程中，您将充当 PR 公司的网络管理员。您可在 {{site.data.keyword.containerlong_notm}} 中配置定制 Kubernetes 集群，以用于部署和测试应用程序的 Hello World 版本。
 {:shortdesc}
@@ -41,21 +45,24 @@ lastupdated: "2018-12-05"
 
 
 ## 所需时间
+{: #tutorials_time}
 
 40 分钟
 
 
 ## 受众
+{: #tutorials_audience}
 
 本教程适用于首次创建 Kubernetes 集群的软件开发者和网络管理员。
 {: shortdesc}
 
 ## 先决条件
+{: #tutorials_prereqs}
 
--  查看[准备创建集群](cs_clusters.html#cluster_prepare)时需要执行的步骤。
+-  查看[准备创建集群](/docs/containers?topic=containers-clusters#cluster_prepare)时需要执行的步骤。
 -  确保您具有以下访问策略：
-    - {{site.data.keyword.containerlong_notm}} 的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)
-    -  要在其中工作的集群空间中的 [Cloud Foundry **开发者**角色](/docs/iam/mngcf.html#mngcf)。
+    - 对 {{site.data.keyword.containerlong_notm}} 的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](/docs/containers?topic=containers-users#platform)
+    - 对 {{site.data.keyword.containerlong_notm}} 的[{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)
 
 
 ## 第 1 课：创建集群并设置 CLI
@@ -68,9 +75,9 @@ lastupdated: "2018-12-05"
 
 集群可能需要几分钟时间进行供应，因此请在安装 CLI 之前创建集群。
 
-1.  [在 {{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) 中，创建免费或标准集群，其中包含具有 1 个工作程序节点的 1 个工作程序池。
+1.  [在 {{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/containers-kubernetes/catalog/cluster/create) 中，创建免费或标准集群，其中包含具有 1 个工作程序节点的 1 个工作程序池。
 
-    您还可以[在 CLI 中创建集群](cs_clusters.html#clusters_cli)。
+    您还可以[在 CLI 中创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
     {: tip}
 
 集群供应后，请安装用于管理集群的以下 CLI：
@@ -79,10 +86,12 @@ lastupdated: "2018-12-05"
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} 插件
 
+
+
 </br>
 **安装 CLI 及其必备软件**
 
-1.  作为 {{site.data.keyword.containerlong_notm}} 插件的必备软件，请安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://clis.ng.bluemix.net/ui/home.html)。要运行 {{site.data.keyword.Bluemix_notm}} CLI 命令，请使用前缀 `ibmcloud`。
+1.  作为 {{site.data.keyword.containerlong_notm}} 插件的必备软件，请安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli)。要运行 {{site.data.keyword.Bluemix_notm}} CLI 命令，请使用前缀 `ibmcloud`。
 2.  遵循提示来选择帐户和 {{site.data.keyword.Bluemix_notm}} 组织。集群是特定于帐户的，但又独立于 {{site.data.keyword.Bluemix_notm}} 组织或空间。
 
 4.  安装 {{site.data.keyword.containerlong_notm}} 插件以创建 Kubernetes 集群并管理工作程序节点。要运行 {{site.data.keyword.containerlong_notm}} 插件命令，请使用前缀 `ibmcloud ks`。
@@ -93,15 +102,15 @@ lastupdated: "2018-12-05"
     {: pre}
 
 5.  要将应用程序部署到集群中，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。要使用 Kubernetes CLI 运行命令，请使用前缀 `kubectl`。
-    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.10.11。
+    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.12.6。
 
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
+        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl)
 
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
+        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl)
 
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
+        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe)
 
-          **提示：**如果使用的是 Windows，请将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。此安装将在您以后运行命令时减少一些文件路径更改操作。
+          **提示：**如果使用的是 Windows，请将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。通过此设置，您在以后运行命令时，可减少一些文件路径更改操作。
 
     2.  如果使用的是 OS X 或 Linux，请完成以下步骤。
         1.  将可执行文件移至 `/usr/local/bin` 目录。
@@ -146,7 +155,7 @@ lastupdated: "2018-12-05"
     ```
     {: pre}
 
-祝贺您！您已成功安装了以下课程和教程的 CLI。接下来，设置集群环境并添加 {{site.data.keyword.toneanalyzershort}} 服务。
+非常好！您已成功安装了以下课程和教程的 CLI。接下来，设置集群环境并添加 {{site.data.keyword.toneanalyzershort}} 服务。
 
 
 ## 第 2 课：设置专用注册表
@@ -171,29 +180,29 @@ lastupdated: "2018-12-05"
    ```
    {: pre}
 
-2.  在 {{site.data.keyword.registryshort_notm}} 中设置您自己的专用映像存储库，以安全地存储 Docker 映像并与所有集群用户共享这些映像。{{site.data.keyword.Bluemix_notm}} 中的专用映像存储库由名称空间标识。名称空间用于创建映像存储库的唯一 URL，开发者可使用此 URL 来访问专用 Docker 映像。
+3.  在 {{site.data.keyword.registryshort_notm}} 中设置您自己的专用映像存储库，以安全地存储 Docker 映像并与所有集群用户共享这些映像。{{site.data.keyword.Bluemix_notm}} 中的专用映像存储库由名称空间标识。名称空间用于创建映像存储库的唯一 URL，开发者可使用此 URL 来访问专用 Docker 映像。
 
-    使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
+    使用容器映像时，请了解有关[确保个人信息安全](/docs/containers?topic=containers-security#pi)的更多信息。
 
-    在此示例中，公关公司希望在 {{site.data.keyword.registryshort_notm}} 中仅创建一个映像存储库，所以他们选择 _pr_firm_ 作为其名称空间，用于对其帐户中的所有映像分组。将 _&lt;namespace&gt;_ 替换为您所选择的与教程无关的名称空间。
+    在此示例中，公关公司希望在 {{site.data.keyword.registryshort_notm}} 中仅创建一个映像存储库，所以他们选择 `pr_firm` 作为其名称空间，用于对其帐户中的所有映像分组。将 &lt;namespace&gt; 替换为您所选择的与教程无关的名称空间。
 
     ```
     ibmcloud cr namespace-add <namespace>
     ```
     {: pre}
 
-3.  继续执行下一步之前，请验证工作程序节点的部署是否已完成。
+4.  继续执行下一步之前，请验证工作程序节点的部署是否已完成。
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
-    ```
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
+   ```
     {: pre}
 
     工作程序节点供应完成时，状态会更改为 **Ready**，这时可以开始绑定 {{site.data.keyword.Bluemix_notm}} 服务。
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.11
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.6
     ```
     {: screen}
 
@@ -208,7 +217,7 @@ lastupdated: "2018-12-05"
 1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
 
     ```
-    ibmcloud ks cluster-config <cluster_name_or_ID>
+    ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -222,6 +231,9 @@ lastupdated: "2018-12-05"
     {: screen}
 
 2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
+
+    **Windows PowerShell 用户**：不要从 `ibmcloud ks cluster-config` 的输出中复制并粘贴 `SET` 命令，您必须改为运行相关命令来设置 `KUBECONFIG` 环境变量，例如运行 `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`。
+        {: note}
 
 3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
 
@@ -249,8 +261,8 @@ lastupdated: "2018-12-05"
     输出示例：
 
     ```
-    Client Version: v1.10.11
-    Server Version: v1.10.11
+    Client Version: v1.12.6
+    Server Version: v1.12.6
     ```
     {: screen}
 
@@ -262,7 +274,7 @@ lastupdated: "2018-12-05"
 
 1.  将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的 {{site.data.keyword.Bluemix_notm}} 帐户。将 <service_name> 替换为服务实例的名称。
 
-    将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的帐户时，将显示一条消息表明该服务不是免费的。如果限制 API 调用，那么本教程不会导致 {{site.data.keyword.watson}} 服务收取费用。[查看 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的定价信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/catalog/services/tone-analyzer)。
+    将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的帐户时，将显示一条消息表明该服务不是免费的。如果限制 API 调用，那么本教程不会导致 {{site.data.keyword.watson}} 服务收取费用。[查看 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的定价信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/catalog/services/tone-analyzer)。
     {: note}
 
     ```
@@ -309,7 +321,7 @@ lastupdated: "2018-12-05"
 非常好！您的集群已配置，并且您的本地环境已准备就绪，可以开始将应用程序部署到集群中。
 
 ## 接下来要做什么？
-{: #next}
+{: #tutorials_next}
 
-
-* 尝试[教程：将应用程序部署到 Kubernetes 集群](cs_tutorials_apps.html#cs_apps_tutorial)，以将公关公司的应用程序部署到已创建的集群。
+* 测试您的掌握情况并[进行测验 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)！
+* 尝试[教程：将应用程序部署到 Kubernetes 集群](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)，以将公关公司的应用程序部署到已创建的集群。

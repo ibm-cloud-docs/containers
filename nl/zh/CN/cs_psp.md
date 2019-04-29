@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -21,24 +25,20 @@ lastupdated: "2018-12-05"
 # 配置 pod 安全策略
 {: #psp}
 
-通过 [pod 安全策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)，可以配置策略以授权谁可以在 {{site.data.keyword.containerlong}} 中创建和更新 pod。运行 Kubernetes V1.10.3、V1.9.8 和 V1.8.13 或更高版本修订包的集群支持用于强制实施这些策略的 `PodSecurityPolicy` 许可控制器。
-{: shortdesc}
-
-使用的是旧版本的 Kubernetes？请立即[更新集群](cs_cluster_update.html)。
-{: tip}
+通过 [pod 安全策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)，可以配置策略以授权谁可以在 {{site.data.keyword.containerlong}} 中创建和更新 pod。
 
 **为什么要设置 pod 安全策略？**</br>
 作为集群管理员，您希望控制集群中发生的情况，尤其是影响集群安全性或就绪性的操作。pod 安全策略可以帮助控制有特权容器、根名称空间、主机联网和端口、卷类型、主机文件系统、Linux 许可权（例如，只读或组标识）等的使用。
 
-通过 `PodSecurityPolicy` 许可控制器，在[授权策略](#customize_psp)之后，才能创建 pod。设置 pod 安全策略可能会产生意外的副作用，因此请确保在更改策略后测试部署。要部署应用程序，用户和服务帐户必须全部由部署 pod 所需的 pod 安全策略授权。例如，如果是使用 [Helm](cs_integrations.html#helm_links) 安装的应用程序，那么 Helm Tiller 组件会创建 pod，因此您必须具有正确的 pod 安全策略授权。
+通过 `PodSecurityPolicy` 许可控制器，在[授权策略](#customize_psp)之后，才能创建 pod。设置 pod 安全策略可能会产生意外的副作用，因此请确保在更改策略后测试部署。要部署应用程序，用户和服务帐户必须全部由部署 pod 所需的 pod 安全策略授权。例如，如果是使用 [Helm](/docs/containers?topic=containers-integrations#helm_links) 安装的应用程序，那么 Helm Tiller 组件会创建 pod，因此您必须具有正确的 pod 安全策略授权。
 
-要尝试控制有权访问 {{site.data.keyword.containerlong_notm}} 的用户？请参阅[分配集群访问权](cs_users.html#users)以设置 {{site.data.keyword.Bluemix_notm}} IAM 和基础架构许可权。
+要尝试控制有权访问 {{site.data.keyword.containerlong_notm}} 的用户？请参阅[分配集群访问权](/docs/containers?topic=containers-users#users)以设置 {{site.data.keyword.Bluemix_notm}} IAM 和基础架构许可权。
 {: tip}
 
 **缺省情况下设置了任何策略吗？我可以添加哪些策略？**</br>
 缺省情况下，{{site.data.keyword.containerlong_notm}} 将 `PodSecurityPolicy` 许可控制器配置为使用[用于 {{site.data.keyword.IBM_notm}} 集群管理的资源](#ibm_psp)，您无法删除也无法修改这些资源。您也无法禁用该许可控制器。
 
-缺省情况下，pod 操作不会锁定。取而代之的是，集群中有两个基于角色的访问控制 (RBAC) 资源，用于授权所有管理员、用户、服务和节点创建有特权 pod 和无特权 pod。用于[混合部署](cs_hybrid.html#hybrid_iks_icp)的 {{site.data.keyword.Bluemix_notm}} Private 包随附更多支持可移植性的 RBAC 资源。
+缺省情况下，pod 操作不会锁定。取而代之的是，集群中有两个基于角色的访问控制 (RBAC) 资源，用于授权所有管理员、用户、服务和节点创建有特权 pod 和无特权 pod。用于[混合部署](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)的 {{site.data.keyword.Bluemix_notm}} Private 包随附更多支持可移植性的 RBAC 资源。
 
 如果要阻止特定用户创建或更新 pod，可以[修改这些 RBAC 资源或创建您自己的资源](#customize_psp)。
 
@@ -47,7 +47,7 @@ lastupdated: "2018-12-05"
 
 使用资源控制器（如部署）创建 pod 时，Kubernetes 会根据服务帐户有权使用的 pod 安全策略来验证该 pod 的服务帐户凭证。如果没有策略支持 pod 安全需求，控制器会成功执行，但不会创建 pod。
 
-有关常见错误消息，请参阅[因 pod 安全策略导致 pod 部署失败](cs_troubleshoot_clusters.html#cs_psp)。
+有关常见错误消息，请参阅[因 pod 安全策略导致 pod 部署失败](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp)。
 
 ## 定制 pod 安全策略
 {: #customize_psp}
@@ -67,8 +67,9 @@ lastupdated: "2018-12-05"
 可以修改这些 RBAC 角色，以在策略中除去或添加管理员、用户、服务或节点。
 
 开始之前：
-*  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
-*  了解如何使用 RBAC 角色。有关更多信息，请参阅[使用定制 Kubernetes RBAC 角色授权用户](cs_users.html#rbac)或 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview)。
+*  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*  了解如何使用 RBAC 角色。有关更多信息，请参阅[使用定制 Kubernetes RBAC 角色授权用户](/docs/containers?topic=containers-users#rbac)或 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview)。
+* 确保您对所有名称空间具有 [{{site.data.keyword.Bluemix_notm}} IAM **管理者**服务访问角色](/docs/containers?topic=containers-users#platform)。
 
 修改缺省配置后，可能会阻止重要的集群操作，例如 pod 部署或集群更新。请在其他团队不依赖的非生产集群中测试您的更改。
 {: important}
@@ -195,7 +196,7 @@ lastupdated: "2018-12-05"
 |---|---|---|---|
 |`ibm-anyuid-hostaccess-psp`|cluster-wide|`PodSecurityPolicy`|用于创建完整主机访问权 pod 的策略。|
 |`ibm-anyuid-hostaccess-psp-user`|cluster-wide|`ClusterRole`|允许使用 `ibm-anyuid-hostaccess-psp` pod 安全策略的集群角色。|
-|`ibm-anyuid-hostpath-psp`|cluster-wide|`PodSecurityPolicy`|用于创建主机路径访问权 pod 的策略。|
+|`ibm-anyuid-hostpath-psp`|cluster-wide|`PodSecurityPolicy`|用于创建主机路径访问 pod 的策略。|
 |`ibm-anyuid-hostpath-psp-user`|cluster-wide|`ClusterRole`|允许使用 `ibm-anyuid-hostpath-psp` pod 安全策略的集群角色。|
 |`ibm-anyuid-psp`|cluster-wide|`PodSecurityPolicy`|用于创建任何 UID/GID 可执行 pod 的策略。|
 |`ibm-anyuid-psp-user`|cluster-wide|`ClusterRole`|允许使用 `ibm-anyuid-psp` pod 安全策略的集群角色。|

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -26,25 +30,791 @@ lastupdated: "2018-12-05"
 查看可用于 {{site.data.keyword.containerlong}} Kubernetes 集群的主要更新、次要更新和补丁更新的版本更改信息。更改包括对 Kubernetes 和 {{site.data.keyword.Bluemix_notm}} Provider 组件的更新。
 {:shortdesc}
 
-有关主版本、次版本和补丁版本以及次版本之间的准备操作的更多信息，请参阅 [Kubernetes 版本](cs_versions.html)。
+有关主版本、次版本和补丁版本以及次版本之间的准备操作的更多信息，请参阅 [Kubernetes 版本](/docs/containers?topic=containers-cs_versions)。
 {: tip}
 
 有关自上一个版本以来的更改的信息，请参阅以下更改日志。
+-  V1.13 [更改日志](#113_changelog)。
 -  V1.12 [更改日志](#112_changelog)。
 -  V1.11 [更改日志](#111_changelog)。
--  V1.10 [更改日志](#110_changelog)。
--  对不推荐使用或不受支持的版本的更改日志[归档](#changelog_archive)。
+-  **不推荐**：V1.10 [更改日志](#110_changelog)。
+-  对不受支持版本的更改日志[归档](#changelog_archive)。
 
-一些更改日志针对_工作程序节点修订包_，仅适用于工作程序节点。您必须[应用这些补丁](cs_cli_reference.html#cs_worker_update)才能确保工作程序节点的安全合规性。另一些更改日志针对_主节点修订包_，仅适用于集群主节点。主节点修订包可能不会自动应用。您可以选择[手动进行应用](cs_cli_reference.html#cs_cluster_update)。有关补丁类型的更多信息，请参阅[更新类型](cs_versions.html#update_types)。
+一些更改日志针对_工作程序节点修订包_，仅适用于工作程序节点。您必须[应用这些补丁](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)才能确保工作程序节点的安全合规性。这些工作程序节点修订包的版本可能高于主节点，因为某些构建修订包特定于工作程序节点。另一些更改日志针对_主节点修订包_，仅适用于集群主节点。主节点修订包可能不会自动应用。您可以选择[手动进行应用](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)。有关补丁类型的更多信息，请参阅[更新类型](/docs/containers?topic=containers-cs_versions#update_types)。
 {: note}
 
 </br>
+
+## V1.13 更改日志
+{: #113_changelog}
+
+### 2019 年 3 月 20 日发布的 1.13.4_1513 的更改日志
+{: #1134_1513}
+
+下表显示了补丁 1.13.4_1513 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.4_1510 以来进行的更改">
+<caption>自 V1.13.4_1510 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群 DNS 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>修复了必须缩减未使用的集群 DNS 时，可能导致集群主节点操作（例如，`refresh` 或 `update`）失败的错误。</td>
+</tr>
+<tr>
+<td>集群主节点 HA 代理配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了配置，以更好地处理集群主节点的间歇性连接失败。</td>
+</tr>
+<tr>
+<td>CoreDNS 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>从 1.12 更新集群 Kubernetes 版本后，CoreDNS 配置更新为支持[多个 Corefile ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/2017/07/23/corefile-explained/)。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.4</td>
+<td>1.2.5</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.2.5)。更新包含针对 [CVE-2019-5736 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736) 的改进修订。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>GPU 驱动程序更新为 [418.43 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.nvidia.com/object/unix.html)。更新包含针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html) 的修订。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>344</td>
+<td>345</td>
+<td>添加了对[专用服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)的支持。</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>通过 [CVE-2019-6133 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>136</td>
+<td>166</td>
+<td>针对 [CVE-2018-16890 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890)、[CVE-2019-3822 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) 和 [CVE-2019-3823 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823)，更新了映像。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>针对 [CVE-2018-10779 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779)、[CVE-2018-12900 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900)、[CVE-2018-17000 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000)、[CVE-2018-19210 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210)、[CVE-2019-6128 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 和 [CVE-2019-7663 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 3 月 4 日发布的 1.13.4_1510 的更改日志
+{: #1134_1510}
+
+下表显示了补丁 1.13.4_1510 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.2_1509 以来进行的更改">
+<caption>自 V1.13.2_1509 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群 DNS 提供程序</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>将 Kubernetes DNS 和 CoreDNS pod 内存限制从 `170Mi` 增加到了 `400Mi`，以便处理更多集群服务。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>针对 [CVE-2019-6454 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.13.2-62</td>
+<td>V1.13.4-86</td>
+<td>更新为支持 Kubernetes 1.13.4 发行版。修复了 V1.0 负载均衡器将 `externalTrafficPolicy` 设置为 `local` 时的定期连接问题。更新了 LoadBalancer V1.0 和 V2.0 事件，以使用最新的 {{site.data.keyword.Bluemix_notm}} 文档链接。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>342</td>
+<td>344</td>
+<td>将映像的基本操作系统从 Fedora 更改为 Alpine。针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>122</td>
+<td>136</td>
+<td>将客户机超时增加到 {{site.data.keyword.keymanagementservicefull_notm}}。针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.13.2</td>
+<td>V1.13.4</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.4)。更新解决了 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) 和 [CVE-2019-1002100 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>向 `--feature-gates` 选项添加了 `ExperimentalCriticalPodAnnotation=true`。此设置可帮助将 pod 从不推荐使用的 `scheduler.alpha.kubernetes.io/critical-pod` 注释迁移到 [Kubernetes pod 优先级支持](/docs/containers?topic=containers-pod_priority#pod_priority)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider 的负载均衡器和负载均衡器监视器</td>
+<td>132</td>
+<td>143</td>
+<td>针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机和服务器</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>针对 [CVE-2019-1559 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)，更新了映像。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>针对 [CVE-2019-6454 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 27 日发布的工作程序节点 FP1.13.2_1509 的更改日志
+{: #1132_1509}
+
+下表显示了工作程序节点 FP1.13.2_1509 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.2_1508 以来进行的更改">
+<caption>自 V1.13.2_1508 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>通过 [CVE-2018-19407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 15 日发布的工作程序节点 FP1.13.2_1508 的更改日志
+{: #1132_1508}
+
+下表显示了工作程序节点 FP1.13.2_1508 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.2_1507 以来进行的更改">
+<caption>自 V1.13.2_1507 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>将 pod 配置 `spec.priorityClassName` 值更改为 `system-node-critical`，并将 `spec.priority` 值设置为 `2000001000`。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.2</td>
+<td>1.2.4</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.2.4)。更新解决了 [CVE-2019-5736 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)。</td>
+</tr>
+<tr>
+<td>Kubernetes `kubelet` 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>启用了 `ExperimentalCriticalPodAnnotation` 功能检测点，以防止关键静态 pod 逐出。将 `event-qps` 选项设置为 `0` 可阻止创建速率限制事件。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 5 日发布的 1.13.2_1507 的更改日志
+{: #1132_1507}
+
+下表显示了补丁 1.13.2_1507 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.4_1535 以来进行的更改">
+<caption>自 V1.12.4_1535 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V3.3.1</td>
+<td>V3.4.0</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.4/releases/#v340)。</td>
+</tr>
+<tr>
+<td>集群 DNS 提供程序</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>现在，CoreDNS 是新集群的缺省集群 DNS 提供程序。如果将使用 KubeDNS 作为集群 DNS 提供程序的现有集群更新为 1.13，那么 KubeDNS 会继续作为集群 DNS 提供程序。但是，您可以选择[改为使用 CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set)。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.2.2</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.2.2)。</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.2</td>
+<td>1.2.6</td>
+<td>请参阅 [CoreDNS 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coredns/coredns/releases/tag/v1.2.6)。此外，CoreDNS 配置更新为[支持多个 Corefile ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/2017/07/23/corefile-explained/)。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>V3.3.1</td>
+<td>V3.3.11</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.11)。此外，支持用于 etcd 的密码套件现在仅限于具有高强度加密的子集（128 位或更多位）。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>针对 [CVE-2019-3462 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) 和 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.12.4-118</td>
+<td>V1.13.2-62</td>
+<td>更新为支持 Kubernetes 1.13.2 发行版。此外，`calicoctl` 版本更新为 3.4.0。修复了在发生工作程序节点状态更改时，对 V2.0 负载均衡器的不必要的配置更新。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>338</td>
+<td>342</td>
+<td>File Storage 插件按如下所示进行更新：<ul><li>支持使用[卷拓扑感知安排](/docs/containers?topic=containers-file_storage#file-topology)进行动态供应。</li>
+<li>忽略存储器已删除时的持久卷声明 (PVC) 删除错误。</li>
+<li>向失败的 PVC 添加了失败消息注释。</li>
+<li>优化了存储供应程序控制器的领导者选举和再同步时间段设置，并将供应超时从 30 分钟增加到 1 小时。</li>
+<li>在开始供应之前检查用户许可权。</li>
+<li>向 `kube-system` 名称空间中的 `ibm-file-plugin` 和 `ibm-storage-watcher` 部署添加了 `CriticalAddonsOnly` 容忍度。</li></ul></td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>111</td>
+<td>122</td>
+<td>添加了重试逻辑，以避免在 {{site.data.keyword.keymanagementservicefull_notm}} 管理 Kubernetes 私钥时发生临时故障。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.12.4</td>
+<td>V1.13.2</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.2)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes API 服务器审计策略配置更新为包含 `cluster-admin` 请求的日志记录元数据，并记录工作负载 `create`、`update` 和 `patch` 请求的请求主体。</td>
+</tr>
+<tr>
+<td>Kubernetes DNS Autoscaler</td>
+<td>1.2.0</td>
+<td>1.3.0</td>
+<td>请参阅 [Kubernetes DNS Autoscaler 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.3.0)。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>针对 [CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) 和 [CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)，更新了映像。向 `kube-system` 名称空间中的 `vpn` 部署添加了 `CriticalAddonsOnly` 容忍度。此外，现在 pod 配置将从私钥获取，而不是从配置映射获取。</td>
+</tr>
+<tr>
+<td>OpenVPN 服务器</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>针对 [CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) 和 [CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)，更新了映像。</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>[CVE-2018-16864 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864) 的安全补丁。</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## V1.12 更改日志
 {: #112_changelog}
 
 查看 V1.12 更改日志。
 {: shortdesc}
+
+### 2019 年 3 月 20 日发布的 1.12.6_1544 的更改日志
+{: #1126_1544}
+
+下表显示了补丁 1.12.6_1544 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.6_1541 以来进行的更改">
+<caption>自 V1.12.6_1541 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群 DNS 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>修复了必须缩减未使用的集群 DNS 时，可能导致集群主节点操作（例如，`refresh` 或 `update`）失败的错误。</td>
+</tr>
+<tr>
+<td>集群主节点 HA 代理配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了配置，以更好地处理集群主节点的间歇性连接失败。</td>
+</tr>
+<tr>
+<td>CoreDNS 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>CoreDNS 配置更新为支持[多个 Corefile ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/2017/07/23/corefile-explained/)。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>GPU 驱动程序更新为 [418.43 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.nvidia.com/object/unix.html)。更新包含针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html) 的修订。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>344</td>
+<td>345</td>
+<td>添加了对[专用服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)的支持。</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>通过 [CVE-2019-6133 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>136</td>
+<td> 166</td>
+<td>针对 [CVE-2018-16890 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890)、[CVE-2019-3822 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) 和 [CVE-2019-3823 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823)，更新了映像。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>针对 [CVE-2018-10779 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779)、[CVE-2018-12900 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900)、[CVE-2018-17000 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000)、[CVE-2018-19210 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210)、[CVE-2019-6128 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 和 [CVE-2019-7663 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 3 月 4 日发布的 1.12.6_1541 的更改日志
+{: #1126_1541}
+
+下表显示了补丁 1.12.6_1541 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.5_1540 以来进行的更改">
+<caption>自 V1.12.5_1540 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群 DNS 提供程序</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>将 Kubernetes DNS 和 CoreDNS pod 内存限制从 `170Mi` 增加到了 `400Mi`，以便处理更多集群服务。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>针对 [CVE-2019-6454 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.12.5-137</td>
+<td>V1.12.6-157</td>
+<td>更新为支持 Kubernetes 1.12.6 发行版。修复了 V1.0 负载均衡器将 `externalTrafficPolicy` 设置为 `local` 时的定期连接问题。更新了 LoadBalancer V1.0 和 V2.0 事件，以使用最新的 {{site.data.keyword.Bluemix_notm}} 文档链接。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>342</td>
+<td>344</td>
+<td>将映像的基本操作系统从 Fedora 更改为 Alpine。针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>122</td>
+<td>136</td>
+<td>将客户机超时增加到 {{site.data.keyword.keymanagementservicefull_notm}}。针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.12.5</td>
+<td>V1.12.6</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.6)。更新解决了 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) 和 [CVE-2019-1002100 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>向 `--feature-gates` 选项添加了 `ExperimentalCriticalPodAnnotation=true`。此设置可帮助将 pod 从不推荐使用的 `scheduler.alpha.kubernetes.io/critical-pod` 注释迁移到 [Kubernetes pod 优先级支持](/docs/containers?topic=containers-pod_priority#pod_priority)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider 的负载均衡器和负载均衡器监视器</td>
+<td>132</td>
+<td>143</td>
+<td>针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机和服务器</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>针对 [CVE-2019-1559 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)，更新了映像。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>针对 [CVE-2019-6454 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 27 日发布的工作程序节点 FP1.12.5_1540 的更改日志
+{: #1125_1540}
+
+下表显示了工作程序节点 FP1.12.5_1540 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.5_1538 以来进行的更改">
+<caption>自 V1.12.5_1538 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>通过 [CVE-2018-19407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 15 日发布的工作程序节点 FP1.12.5_1538 的更改日志
+{: #1125_1538}
+
+下表显示了工作程序节点 FP1.12.5_1538 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.5_1537 以来进行的更改">
+<caption>自 V1.12.5_1537 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>将 pod 配置 `spec.priorityClassName` 值更改为 `system-node-critical`，并将 `spec.priority` 值设置为 `2000001000`。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.1.6</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.6)。更新解决了 [CVE-2019-5736 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)。</td>
+</tr>
+<tr>
+<td>Kubernetes `kubelet` 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>启用了 `ExperimentalCriticalPodAnnotation` 功能检测点，以防止关键静态 pod 逐出。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 5 日发布的 1.12.5_1537 的更改日志
+{: #1125_1537}
+
+下表显示了补丁 1.12.5_1537 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.4_1535 以来进行的更改">
+<caption>自 V1.12.4_1535 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>V3.3.1</td>
+<td>V3.3.11</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.11)。此外，支持用于 etcd 的密码套件现在仅限于具有高强度加密的子集（128 位或更多位）。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>针对 [CVE-2019-3462 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) 和 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.12.4-118</td>
+<td>V1.12.5-137</td>
+<td>更新为支持 Kubernetes 1.12.5 发行版。此外，`calicoctl` 版本更新为 3.3.1。修复了在发生工作程序节点状态更改时，对 V2.0 负载均衡器的不必要的配置更新。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>338</td>
+<td>342</td>
+<td>File Storage 插件按如下所示进行更新：<ul><li>支持使用[卷拓扑感知安排](/docs/containers?topic=containers-file_storage#file-topology)进行动态供应。</li>
+<li>忽略存储器已删除时的持久卷声明 (PVC) 删除错误。</li>
+<li>向失败的 PVC 添加了失败消息注释。</li>
+<li>优化了存储供应程序控制器的领导者选举和再同步时间段设置，并将供应超时从 30 分钟增加到 1 小时。</li>
+<li>在开始供应之前检查用户许可权。</li></ul></td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>111</td>
+<td>122</td>
+<td>添加了重试逻辑，以避免在 {{site.data.keyword.keymanagementservicefull_notm}} 管理 Kubernetes 私钥时发生临时故障。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.12.4</td>
+<td>V1.12.5</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.5)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes API 服务器审计策略配置更新为包含 `cluster-admin` 请求的日志记录元数据，并记录工作负载 `create`、`update` 和 `patch` 请求的请求主体。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>针对 [CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) 和 [CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)，更新了映像。此外，现在 pod 配置将从私钥获取，而不是从配置映射获取。</td>
+</tr>
+<tr>
+<td>OpenVPN 服务器</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>针对 [CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) 和 [CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)，更新了映像。</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>[CVE-2018-16864 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864) 的安全补丁。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 1 月 28 日发布的工作程序节点 FP1.12.4_1535 的更改日志
+{: #1124_1535}
+
+下表显示了工作程序节点 FP1.12.4_1535 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.4_1534 以来进行的更改">
+<caption>自 V1.12.4_1534 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了安装的 Ubuntu 软件包，包括针对 [CVE-2019-3462 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) 和 [USN-3863-1 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://usn.ubuntu.com/3863-1)，更新了 `apt`。</td>
+</tr>
+</tbody>
+</table>
+
+
+### 2019 年 1 月 21 日发布的 1.12.4_1534 的更改日志
+{: #1124_1534}
+
+下表显示了补丁 1.12.3_1534 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.3_1533 以来进行的更改">
+<caption>自 V1.12.3_1533 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.12.3-91</td>
+<td>V1.12.4-118</td>
+<td>更新为支持 Kubernetes 1.12.4 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.12.3</td>
+<td>V1.12.4</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.4)。</td>
+</tr>
+<tr>
+<td>Kubernetes add-on resizer</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>请参阅 [Kubernetes add-on resizer 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4)。</td>
+</tr>
+<tr>
+<td>Kubernetes 仪表板</td>
+<td>V1.8.3</td>
+<td>V1.10.1</td>
+<td>请参阅 [Kubernetes 仪表板发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1)。更新解决了 [CVE-2018-18264 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264)。</td>
+</tr>
+<tr>
+<td>GPU 安装程序</td>
+<td>390.12</td>
+<td>410.79</td>
+<td>将安装的 GPU 驱动程序更新为 410.79。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 1 月 7 日发布的工作程序节点 FP1.12.3_1533 的更改日志
+{: #1123_1533}
+
+下表显示了工作程序节点 FP1.12.3_1533 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.3_1532 以来进行的更改">
+<caption>自 V1.12.3_1532 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-139</td>
+<td>4.4.0-141</td>
+<td>使用 [CVE-2017-5753 和 CVE-2018-18690 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 12 月 17 日发布的工作程序节点 FP1.12.3_1532 的更改日志
+{: #1123_1532}
+
+下表显示了工作程序节点 FP1.12.2_1532 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.3_1531 以来进行的更改">
+<caption>自 V1.12.3_1531 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+</tbody>
+</table>
+
 
 ### 2018 年 12 月 5 日发布的 1.12.3_1531 的更改日志
 {: #1123_1531}
@@ -99,7 +869,7 @@ lastupdated: "2018-12-05"
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](cs_clusters_planning.html#resource_limit_node)。</td>
+<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
@@ -145,7 +915,7 @@ lastupdated: "2018-12-05"
 <td>OpenVPN 客户机和服务器</td>
 <td>2.4.4-r1-6</td>
 <td>2.4.6-r3-IKS-8</td>
-<td>更新了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) 的映像。</td>
+<td>针对 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)，更新了映像。</td>
 </tr>
 </tbody>
 </table>
@@ -204,13 +974,13 @@ lastupdated: "2018-12-05"
 <td>集群 DNS 提供程序</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>Kubernetes DNS (KubeDNS) 仍然是缺省集群 DNS 提供程序。但是，现在可以选择[将集群 DNS 提供程序更改为 CoreDNS](cs_cluster_update.html#dns)。</td>
+<td>Kubernetes DNS (KubeDNS) 仍然是缺省集群 DNS 提供程序。但是，现在可以选择[将集群 DNS 提供程序更改为 CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set)。</td>
 </tr>
 <tr>
 <td>集群度量值提供程序</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>Kubernetes Metrics Server 将替换作为集群度量值提供程序的 Kubernetes Heapster（自 Kubernetes V1.8 开始不推荐使用）。有关操作项，请参阅 [`metrics-server` 准备操作](cs_versions.html#metrics-server)。</td>
+<td>Kubernetes Metrics Server 将替换作为集群度量值提供程序的 Kubernetes Heapster（自 Kubernetes V1.8 开始不推荐使用）。有关操作项，请参阅 [`metrics-server` 准备操作](/docs/containers?topic=containers-cs_versions#metrics-server)。</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -234,14 +1004,14 @@ lastupdated: "2018-12-05"
 <td>Kubernetes 配置</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了三个新的 IBM pod 安全策略及其关联的集群角色。有关更多信息，请参阅[了解 IBM 集群管理的缺省资源](cs_psp.html#ibm_psp)。</td>
+<td>添加了三个新的 IBM pod 安全策略及其关联的集群角色。有关更多信息，请参阅[了解 IBM 集群管理的缺省资源](/docs/containers?topic=containers-psp#ibm_psp)。</td>
 </tr>
 <tr>
 <td>Kubernetes 仪表板</td>
 <td>V1.8.3</td>
 <td>V1.10.0</td>
 <td>请参阅 [Kubernetes 仪表板发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0)。<br><br>
-如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为使用**令牌**进行登录。此外，现在可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来缩放 Kubernetes 仪表板 pod 的数量。</td>
+如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为[使用**令牌**进行登录](/docs/containers?topic=containers-app#cli_dashboard)。此外，现在可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来缩放 Kubernetes 仪表板 pod 的数量。</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
@@ -262,7 +1032,7 @@ lastupdated: "2018-12-05"
 <td>更新为支持 Kubernetes 1.12 发行版。其他更改包括以下内容：
 <ul><li>现在，负载均衡器 pod（在 `ibm-system` 名称空间中为 `ibm-cloud-provider-ip-*`）可设置 CPU 和内存资源请求。</li>
 <li>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`.</li>
-<li>新的[负载均衡器 2.0](cs_loadbalancer.html#planning_ipvs) 作为 Beta 提供。</li></ul></td>
+<li>新的[负载均衡器 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) 作为 Beta 提供。</li></ul></td>
 </tr>
 <tr>
 <td>OpenVPN 客户机配置</td>
@@ -277,6 +1047,418 @@ lastupdated: "2018-12-05"
 {: #111_changelog}
 
 查看 V1.11 更改日志。
+
+### 2019 年 3 月 20 日发布的 1.11.8_1550 的更改日志
+{: #1118_1550}
+
+下表显示了补丁 1.11.8_1550 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.8_1547 以来进行的更改">
+<caption>自 V1.11.8_1547 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了配置，以更好地处理集群主节点的间歇性连接失败。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>GPU 驱动程序更新为 [418.43 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.nvidia.com/object/unix.html)。更新包含针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html) 的修订。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>344</td>
+<td>345</td>
+<td>添加了对[专用服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)的支持。</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>通过 [CVE-2019-6133 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>136</td>
+<td> 166</td>
+<td>针对 [CVE-2018-16890 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890)、[CVE-2019-3822 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) 和 [CVE-2019-3823 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823)，更新了映像。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>针对 [CVE-2018-10779 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779)、[CVE-2018-12900 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900)、[CVE-2018-17000 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000)、[CVE-2018-19210 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210)、[CVE-2019-6128 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 和 [CVE-2019-7663 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 3 月 4 日发布的 1.11.8_1547 的更改日志
+{: #1118_1547}
+
+下表显示了补丁 1.11.8_1547 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.7_1546 以来进行的更改">
+<caption>自 V1.11.7_1546 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>针对 [CVE-2019-6454 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.7-198</td>
+<td>V1.11.8-219</td>
+<td>更新为支持 Kubernetes 1.11.8 发行版。修复了负载均衡器将 `externalTrafficPolicy` 设置为 `local` 时的定期连接问题。更新了负载均衡器事件，以使用最新的 {{site.data.keyword.Bluemix_notm}} 文档链接。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>342</td>
+<td>344</td>
+<td>将映像的基本操作系统从 Fedora 更改为 Alpine。针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>122</td>
+<td>136</td>
+<td>将客户机超时增加到 {{site.data.keyword.keymanagementservicefull_notm}}。针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.11.7</td>
+<td>V1.11.8</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.8)。更新解决了 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) 和 [CVE-2019-1002100 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>向 `--feature-gates` 选项添加了 `ExperimentalCriticalPodAnnotation=true`。此设置可帮助将 pod 从不推荐使用的 `scheduler.alpha.kubernetes.io/critical-pod` 注释迁移到 [Kubernetes pod 优先级支持](/docs/containers?topic=containers-pod_priority#pod_priority)。</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>将 Kubernetes DNS pod 内存限制从 `170Mi` 增加到了 `400Mi`，以便处理更多集群服务。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider 的负载均衡器和负载均衡器监视器</td>
+<td>132</td>
+<td>143</td>
+<td>针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机和服务器</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>针对 [CVE-2019-1559 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)，更新了映像。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>针对 [CVE-2019-6454 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 27 日发布的工作程序节点 FP1.11.7_1546 的更改日志
+{: #1117_1546}
+
+下表显示了工作程序节点 FP1.11.7_1546 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.7_1546 以来进行的更改">
+<caption>自 V1.11.7_1546 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>通过 [CVE-2018-19407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 15 日发布的工作程序节点 FP1.11.7_1544 的更改日志
+{: #1117_1544}
+
+下表显示了工作程序节点 FP1.11.7_1544 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.7_1543 以来进行的更改">
+<caption>自 V1.11.7_1543 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>将 pod 配置 `spec.priorityClassName` 值更改为 `system-node-critical`，并将 `spec.priority` 值设置为 `2000001000`。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.1.6</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.6)。更新解决了 [CVE-2019-5736 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)。</td>
+</tr>
+<tr>
+<td>Kubernetes `kubelet` 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>启用了 `ExperimentalCriticalPodAnnotation` 功能检测点，以防止关键静态 pod 逐出。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 5 日发布的 1.11.7_1543 的更改日志
+{: #1117_1543}
+
+下表显示了补丁 1.11.7_1543 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.6_1541 以来进行的更改">
+<caption>自 V1.11.6_1541 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>V3.3.1</td>
+<td>V3.3.11</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.11)。此外，支持用于 etcd 的密码套件现在仅限于具有高强度加密的子集（128 位或更多位）。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>针对 [CVE-2019-3462 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) 和 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.6-180</td>
+<td>V1.11.7-198</td>
+<td>更新为支持 Kubernetes 1.11.7 发行版。此外，`calicoctl` 版本更新为 3.3.1。修复了在发生工作程序节点状态更改时，对 V2.0 负载均衡器的不必要的配置更新。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>338</td>
+<td>342</td>
+<td>File Storage 插件按如下所示进行更新：<ul><li>支持使用[卷拓扑感知安排](/docs/containers?topic=containers-file_storage#file-topology)进行动态供应。</li>
+<li>忽略存储器已删除时的持久卷声明 (PVC) 删除错误。</li>
+<li>向失败的 PVC 添加了失败消息注释。</li>
+<li>优化了存储供应程序控制器的领导者选举和再同步时间段设置，并将供应超时从 30 分钟增加到 1 小时。</li>
+<li>在开始供应之前检查用户许可权。</li></ul></td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>111</td>
+<td>122</td>
+<td>添加了重试逻辑，以避免在 {{site.data.keyword.keymanagementservicefull_notm}} 管理 Kubernetes 私钥时发生临时故障。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.11.6</td>
+<td>V1.11.7</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes API 服务器审计策略配置更新为包含 `cluster-admin` 请求的日志记录元数据，并记录工作负载 `create`、`update` 和 `patch` 请求的请求主体。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>针对 [CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) 和 [CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)，更新了映像。此外，现在 pod 配置将从私钥获取，而不是从配置映射获取。</td>
+</tr>
+<tr>
+<td>OpenVPN 服务器</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>针对 [CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) 和 [CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)，更新了映像。</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>[CVE-2018-16864 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864) 的安全补丁。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 1 月 28 日发布的工作程序节点 FP1.11.6_1541 的更改日志
+{: #1116_1541}
+
+下表显示了工作程序节点 FP1.11.6_1541 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.6_1540 以来进行的更改">
+<caption>自 V1.11.6_1540 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了安装的 Ubuntu 软件包，包括针对 [CVE-2019-3462 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462)/[USN-3863-1 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://usn.ubuntu.com/3863-1)，更新了 `apt`。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 1 月 21 日发布的 1.11.6_1540 的更改日志
+{: #1116_1540}
+
+下表显示了补丁 1.11.6_1540 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.5_1539 以来进行的更改">
+<caption>自 V1.11.5_1539 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.5-152</td>
+<td>V1.11.6-180</td>
+<td>更新为支持 Kubernetes 1.11.6 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.11.5</td>
+<td>V1.11.6</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6)。</td>
+</tr>
+<tr>
+<td>Kubernetes add-on resizer</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>请参阅 [Kubernetes add-on resizer 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4)。</td>
+</tr>
+<tr>
+<td>Kubernetes 仪表板</td>
+<td>V1.8.3</td>
+<td>V1.10.1</td>
+<td>请参阅 [Kubernetes 仪表板发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1)。更新解决了 [CVE-2018-18264 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264)。<br><br>如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为[使用**令牌**进行登录](/docs/containers?topic=containers-app#cli_dashboard)。</td>
+</tr>
+<tr>
+<td>GPU 安装程序</td>
+<td>390.12</td>
+<td>410.79</td>
+<td>将安装的 GPU 驱动程序更新为 410.79。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 1 月 7 日发布的工作程序节点 FP1.11.5_1539 的更改日志
+{: #1115_1539}
+
+下表显示了工作程序节点 FP1.11.5_1539 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.5_1538 以来进行的更改">
+<caption>自 V1.11.5_1538 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-139</td>
+<td>4.4.0-141</td>
+<td>使用 [CVE-2017-5753 和 CVE-2018-18690 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 12 月 17 日发布的工作程序节点 FP1.11.5_1538 的更改日志
+{: #1115_1538}
+
+下表显示了工作程序节点 FP1.11.5_1538 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.5_1537 以来进行的更改">
+<caption>自 V1.11.5_1537 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2018 年 12 月 5 日发布的 1.11.5_1537 的更改日志
 {: #1115_1537}
@@ -331,7 +1513,7 @@ lastupdated: "2018-12-05"
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](cs_clusters_planning.html#resource_limit_node)。</td>
+<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
@@ -381,7 +1563,7 @@ lastupdated: "2018-12-05"
 <td>OpenVPN 客户机和服务器</td>
 <td>2.4.4-r1-6</td>
 <td>2.4.6-r3-IKS-8</td>
-<td>更新了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) 的映像。</td>
+<td>针对 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)，更新了映像。</td>
 </tr>
 </tbody>
 </table>
@@ -434,7 +1616,7 @@ lastupdated: "2018-12-05"
 <td>集群主节点 HA 更新</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>对于使用许可 Webhook（例如，`initializerconfigurations`、`mutatingwebhookconfigurations` 或 `validatingwebhookconfigurations`）的集群，修复了对其高可用性 (HA) 主节点的更新。您可以将这些 Webhook 与 Helm 图表配合使用，例如用于 [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce)。</td>
+<td>对于使用许可 Webhook（例如，`initializerconfigurations`、`mutatingwebhookconfigurations` 或 `validatingwebhookconfigurations`）的集群，修复了对其高可用性 (HA) 主节点的更新。您可以将这些 Webhook 与 Helm chart 配合使用，例如用于 [Container Image Security Enforcement](/docs/services/Registry?topic=registry-security_enforce#security_enforce)。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -446,7 +1628,7 @@ lastupdated: "2018-12-05"
 <td>启用 TPM 的内核</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](cs_cli_reference.html#cs_cluster_feature_enable)，那么需要[重新装入](cs_cli_reference.html#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](cs_cli_reference.html#cs_machine_types)后查看 **Trustable** 字段。</td>
+<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)，那么需要[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)后查看 **Trustable** 字段。</td>
 </tr>
 </tbody>
 </table>
@@ -472,7 +1654,7 @@ lastupdated: "2018-12-05"
 <td>集群主节点</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>更新了集群主节点配置以提高高可用性 (HA)。集群现在有三个 Kubernetes 主节点副本，设置为使用高可用性 (HA) 配置，其中每个主节点副本部署到单独的物理主机上。此外，如果集群位于支持多专区的专区中，那么这些主节点还将在各专区中进行分布。<br>有关必须执行的操作，请参阅[更新为高可用性集群主节点](cs_versions.html#ha-masters)。这些准备操作适用于以下情况：<ul>
+<td>更新了集群主节点配置以提高高可用性 (HA)。集群现在有三个 Kubernetes 主节点副本，设置为使用高可用性 (HA) 配置，其中每个主节点副本部署到单独的物理主机上。此外，如果集群位于支持多专区的专区中，那么这些主节点还将在各专区中进行分布。<br>有关必须执行的操作，请参阅[更新为高可用性集群主节点](/docs/containers?topic=containers-cs_versions#ha-masters)。这些准备操作适用于以下情况：<ul>
 <li>如果具有防火墙或定制 Calico 网络策略。</li>
 <li>如果在工作程序节点上使用的主机端口是 `2040` 或 `2041`。</li>
 <li>如果使用了集群主节点 IP 地址对主节点进行集群内访问。</li>
@@ -495,7 +1677,7 @@ lastupdated: "2018-12-05"
 <td>加密 etcd 中的数据</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>先前，etcd 数据存储在静态加密的主节点 NFS 文件存储器实例上。现在，etcd 数据存储在主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。但是，不会对主节点本地磁盘上的 etcd 数据进行加密。如果要对主节点的本地 etcd 数据进行加密，请[在集群中启用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
+<td>先前，etcd 数据存储在静态加密的主节点 NFS 文件存储器实例上。现在，etcd 数据存储在主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。但是，不会对主节点本地磁盘上的 etcd 数据进行加密。如果要对主节点的本地 etcd 数据进行加密，请[在集群中启用 {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-encryption#keyprotect)。</td>
 </tr>
 </tbody>
 </table>
@@ -664,7 +1846,7 @@ lastupdated: "2018-12-05"
 <td>密钥管理服务提供程序</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了在集群中使用 Kubernetes 密钥管理服务 (KMS) 提供程序的功能，以支持 {{site.data.keyword.keymanagementservicefull}}。[在集群中启用 {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect) 时，会对所有 Kubernetes 私钥进行加密。</td>
+<td>添加了在集群中使用 Kubernetes 密钥管理服务 (KMS) 提供程序的功能，以支持 {{site.data.keyword.keymanagementservicefull}}。[在集群中启用 {{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect) 时，会对所有 Kubernetes 私钥进行加密。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -682,13 +1864,13 @@ lastupdated: "2018-12-05"
 <td>日志循环</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](cs_cli_reference.html#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](cs_cli_reference.html#cs_worker_update)可以修复工作程序节点。</td>
+<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)可以修复工作程序节点。</td>
 </tr>
 <tr>
 <td>root 用户密码到期</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](cs_cli_reference.html#cs_worker_update)或[重新装入](cs_cli_reference.html#cs_worker_reload)一次工作程序节点。</td>
+<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)一次工作程序节点。</td>
 </tr>
 <tr>
 <td>工作程序节点运行时组件（`kubelet`、`kube-proxy` 和 `containerd`）</td>
@@ -697,7 +1879,7 @@ lastupdated: "2018-12-05"
 <td>除去了运行时组件对主磁盘的依赖关系。此增强功能可防止工作程序节点在主磁盘填满时发生故障。</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>不适用</td>
 <td>不适用</td>
 <td>定期清除瞬态安装单元，以防止它们变得不受控制。此操作解决了 [Kubernetes 问题 57345 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/57345)。</td>
@@ -741,10 +1923,10 @@ lastupdated: "2018-12-05"
 <td>通过将 `externalTrafficPolicy` 设置为 `local`，更改了 Cloud Provider 配置以更好地处理负载均衡器服务的更新。</td>
 </tr>
 <tr>
-<td>IBM File Storage 插件配置</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件配置</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>已从 IBM 提供的文件存储类的安装选项中除去缺省 NFS 版本。主机的操作系统现在与 IBM Cloud infrastructure (SoftLayer) NFS 服务器协商 NFS 版本。要手动设置特定 NFS 版本，或者更改主机操作系统协商的 PV 的 NFS 版本，请参阅[更改缺省 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
+<td>已从 IBM 提供的文件存储类的安装选项中除去缺省 NFS 版本。主机的操作系统现在与 IBM Cloud infrastructure (SoftLayer) NFS 服务器协商 NFS 版本。要手动设置特定 NFS 版本，或者更改主机操作系统协商的 PV 的 NFS 版本，请参阅[更改缺省 NFS 版本](/docs/containers?topic=containers-file_storage#nfs_version_class)。</td>
 </tr>
 </tbody>
 </table>
@@ -802,13 +1984,13 @@ lastupdated: "2018-12-05"
 <td>containerd</td>
 <td>不适用</td>
 <td>1.1.2</td>
-<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时。请参阅 [`containerd` 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.2)。有关必须执行的操作，请参阅[更新为 `containerd` 作为容器运行时](cs_versions.html#containerd)。</td>
+<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时。请参阅 [`containerd` 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.2)。有关必须执行的操作，请参阅[更新为 `containerd` 作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)。</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时以增强性能。有关必须执行的操作，请参阅[更新为 `containerd` 作为容器运行时](cs_versions.html#containerd)。</td>
+<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时以增强性能。有关必须执行的操作，请参阅[更新为 `containerd` 作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)。</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -823,10 +2005,10 @@ lastupdated: "2018-12-05"
 <td>更新为支持 Kubernetes 1.11 发行版。此外，负载均衡器 pod 现在使用新的 `ibm-app-cluster-critical` pod 优先级类。</td>
 </tr>
 <tr>
-<td>IBM File Storage 插件</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
 <td>334</td>
 <td>338</td>
-<td>已将 `incubator` 版本更新为 1.8。将向选择的特定专区供应文件存储。您无法更新现有（静态）PV 实例标签，除非使用多专区集群并且需要[添加区域和专区标签](cs_storage_basics.html#multizone)。</td>
+<td>已将 `incubator` 版本更新为 1.8。将向选择的特定专区供应文件存储。您无法更新现有（静态）PV 实例标签，除非使用多专区集群并且需要[添加区域和专区标签](/docs/containers?topic=containers-kube_concepts#storage_multizone)。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -838,8 +2020,8 @@ lastupdated: "2018-12-05"
 <td>Kubernetes 配置</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>更新了集群的 Kubernetes API 服务器的 OpenID Connect 配置以支持 {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) 访问组。向集群的 Kubernetes API 服务器的 `--enable-admission-plugins` 选项添加了 `Priority`，并将集群配置为支持 pod 优先级。有关更多信息，请参阅：<ul><li>[{{site.data.keyword.Bluemix_notm}}IAM 访问组](cs_users.html#rbac)</li>
-<li>[配置 pod 优先级](cs_pod_priority.html#pod_priority)</li></ul></td>
+<td>更新了集群的 Kubernetes API 服务器的 OpenID Connect 配置以支持 {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) 访问组。向集群的 Kubernetes API 服务器的 `--enable-admission-plugins` 选项添加了 `Priority`，并将集群配置为支持 pod 优先级。有关更多信息，请参阅：<ul><li>[{{site.data.keyword.Bluemix_notm}}IAM 访问组](/docs/containers?topic=containers-users#rbac)</li>
+<li>[配置 pod 优先级](/docs/containers?topic=containers-pod_priority#pod_priority)</li></ul></td>
 </tr>
 <tr>
 <td>Kubernetes Heapster</td>
@@ -859,10 +2041,403 @@ lastupdated: "2018-12-05"
 <br />
 
 
-## V1.10 更改日志
+## 不推荐：V1.10 更改日志
 {: #110_changelog}
 
 查看 V1.10 更改日志。
+{: shortdesc}
+
+Kubernetes V1.10 已不推荐使用，到 2019 年 4 月 30 日（暂定）将不再予以支持。对于每个 Kubernetes 版本更新，请[查看潜在影响](/docs/containers?topic=containers-cs_versions#cs_versions)，然后立即[更新集群](/docs/containers?topic=containers-update#update)，并且至少更新到 1.11。
+{: deprecated}
+
+### 2019 年 3 月 20 日发布的 1.10.13_1551 的更改日志
+{: #11013_1551}
+
+下表显示了补丁 1.10.13_1551 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.13_1548 以来进行的更改">
+<caption>自 V1.10.13_1548 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了配置，以更好地处理集群主节点的间歇性连接失败。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>GPU 驱动程序更新为 [418.43 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.nvidia.com/object/unix.html)。更新包含针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html) 的修订。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>344</td>
+<td>345</td>
+<td>添加了对[专用服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)的支持。</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>通过 [CVE-2019-6133 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>136</td>
+<td> 166</td>
+<td>针对 [CVE-2018-16890 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890)、[CVE-2019-3822 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) 和 [CVE-2019-3823 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823)，更新了映像。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>针对 [CVE-2018-10779 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779)、[CVE-2018-12900 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900)、[CVE-2018-17000 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000)、[CVE-2018-19210 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210)、[CVE-2019-6128 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 和 [CVE-2019-7663 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 3 月 4 日发布的 1.10.13_1548 的更改日志
+{: #11013_1548}
+
+下表显示了补丁 1.10.13_1548 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.12_1546 以来进行的更改">
+<caption>自 V1.10.12_1546 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>针对 [CVE-2019-6454 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.10.12-252</td>
+<td>V1.10.13-288</td>
+<td>更新为支持 Kubernetes 1.10.13 发行版。修复了负载均衡器将 `externalTrafficPolicy` 设置为 `local` 时的定期连接问题。更新了负载均衡器事件，以使用最新的 {{site.data.keyword.Bluemix_notm}} 文档链接。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>342</td>
+<td>344</td>
+<td>将映像的基本操作系统从 Fedora 更改为 Alpine。针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>122</td>
+<td>136</td>
+<td>将客户机超时增加到 {{site.data.keyword.keymanagementservicefull_notm}}。针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.10.12</td>
+<td>V1.10.13</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13)。</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>将 Kubernetes DNS pod 内存限制从 `170Mi` 增加到了 `400Mi`，以便处理更多集群服务。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider 的负载均衡器和负载均衡器监视器</td>
+<td>132</td>
+<td>143</td>
+<td>针对 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机和服务器</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>针对 [CVE-2019-1559 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)，更新了映像。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>针对 [CVE-2019-6454 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 27 日发布的工作程序节点 FP1.10.12_1546 的更改日志
+{: #11012_1546}
+
+下表显示了工作程序节点 FP1.10.12_1546 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.12_1544 以来进行的更改">
+<caption>自 V1.10.12_1544 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>通过 [CVE-2018-19407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 15 日发布的工作程序节点 FP1.10.12_1544 的更改日志
+{: #11012_1544}
+
+下表显示了工作程序节点 FP1.10.12_1544 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.12_1543 以来进行的更改">
+<caption>自 V1.10.12_1543 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>18.06.1-ce</td>
+<td>18.06.2-ce</td>
+<td>请参阅 [Docker Community Edition 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/docker/docker-ce/releases/tag/v18.06.2-ce)。更新解决了 [CVE-2019-5736 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)。</td>
+</tr>
+<tr>
+<td>Kubernetes `kubelet` 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>启用了 `ExperimentalCriticalPodAnnotation` 功能检测点，以防止关键静态 pod 逐出。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 2 月 5 日发布的 1.10.12_1543 的更改日志
+{: #11012_1543}
+
+下表显示了补丁 1.10.12_1543 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.12_1541 以来进行的更改">
+<caption>自 V1.10.12_1541 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>V3.3.1</td>
+<td>V3.3.11</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.11)。此外，支持用于 etcd 的密码套件现在仅限于具有高强度加密的子集（128 位或更多位）。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>针对 [CVE-2019-3462 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) 和 [CVE-2019-6486 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>338</td>
+<td>342</td>
+<td>File Storage 插件按如下所示进行更新：<ul><li>支持使用[卷拓扑感知安排](/docs/containers?topic=containers-file_storage#file-topology)进行动态供应。</li>
+<li>忽略存储器已删除时的持久卷声明 (PVC) 删除错误。</li>
+<li>向失败的 PVC 添加了失败消息注释。</li>
+<li>优化了存储供应程序控制器的领导者选举和再同步时间段设置，并将供应超时从 30 分钟增加到 1 小时。</li>
+<li>在开始供应之前检查用户许可权。</li></ul></td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>111</td>
+<td>122</td>
+<td>添加了重试逻辑，以避免在 {{site.data.keyword.keymanagementservicefull_notm}} 管理 Kubernetes 私钥时发生临时故障。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes API 服务器审计策略配置更新为包含 `cluster-admin` 请求的日志记录元数据，并记录工作负载 `create`、`update` 和 `patch` 请求的请求主体。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>针对 [CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) 和 [CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)，更新了映像。此外，现在 pod 配置将从私钥获取，而不是从配置映射获取。</td>
+</tr>
+<tr>
+<td>OpenVPN 服务器</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>针对 [CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) 和 [CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)，更新了映像。</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>[CVE-2018-16864 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864) 的安全补丁。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 1 月 28 日发布的工作程序节点 FP1.10.12_1541 的更改日志
+{: #11012_1541}
+
+下表显示了工作程序节点 FP1.10.12_1541 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.12_1540 以来进行的更改">
+<caption>自 V1.10.12_1540 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了安装的 Ubuntu 软件包，包括针对 [CVE-2019-3462 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) 和 [USN-3863-1 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://usn.ubuntu.com/3863-1)，更新了 `apt`。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 1 月 21 日发布的 1.10.12_1540 的更改日志
+{: #11012_1540}
+
+下表显示了补丁 1.10.12_1540 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.11_1538 以来进行的更改">
+<caption>自 V1.10.11_1538 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.10.11-219</td>
+<td>V1.10.12-252</td>
+<td>更新为支持 Kubernetes 1.10.12 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.10.11</td>
+<td>V1.10.12</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.12)。</td>
+</tr>
+<tr>
+<td>Kubernetes add-on resizer</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>请参阅 [Kubernetes add-on resizer 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4)。</td>
+</tr>
+<tr>
+<td>Kubernetes 仪表板</td>
+<td>V1.8.3</td>
+<td>V1.10.1</td>
+<td>请参阅 [Kubernetes 仪表板发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1)。更新解决了 [CVE-2018-18264 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264)。<br><br>如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为[使用**令牌**进行登录](/docs/containers?topic=containers-app#cli_dashboard)。</td>
+</tr>
+<tr>
+<td>GPU 安装程序</td>
+<td>390.12</td>
+<td>410.79</td>
+<td>将安装的 GPU 驱动程序更新为 410.79。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 1 月 7 日发布的工作程序节点 FP1.10.11_1538 的更改日志
+{: #11011_1538}
+
+下表显示了工作程序节点 FP1.10.11_1538 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.11_1537 以来进行的更改">
+<caption>自 V1.10.11_1537 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-139</td>
+<td>4.4.0-141</td>
+<td>使用 [CVE-2017-5753 和 CVE-2018-18690 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 12 月 17 日发布的工作程序节点 FP1.10.11_1537 的更改日志
+{: #11011_1537}
+
+下表显示了工作程序节点 FP1.10.11_1537 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.11_1536 以来进行的更改">
+<caption>自 V1.10.11_1536 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+</tbody>
+</table>
+
 
 ### 2018 年 12 月 4 日发布的 1.10.11_1536 的更改日志
 {: #11011_1536}
@@ -903,13 +2478,13 @@ lastupdated: "2018-12-05"
 <td>OpenVPN 客户机和服务器</td>
 <td>2.4.4-r1-6</td>
 <td>2.4.6-r3-IKS-8</td>
-<td>更新了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) 的映像。</td>
+<td>针对 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)，更新了映像。</td>
 </tr>
 <tr>
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](cs_clusters_planning.html#resource_limit_node)。</td>
+<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
@@ -987,7 +2562,7 @@ lastupdated: "2018-12-05"
 <td>集群主节点</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>更新了集群主节点配置以提高高可用性 (HA)。集群现在有三个 Kubernetes 主节点副本，设置为使用高可用性 (HA) 配置，其中每个主节点副本部署到单独的物理主机上。此外，如果集群位于支持多专区的专区中，那么这些主节点还将在各专区中进行分布。<br>有关必须执行的操作，请参阅[更新为高可用性集群主节点](cs_versions.html#ha-masters)。这些准备操作适用于以下情况：<ul>
+<td>更新了集群主节点配置以提高高可用性 (HA)。集群现在有三个 Kubernetes 主节点副本，设置为使用高可用性 (HA) 配置，其中每个主节点副本部署到单独的物理主机上。此外，如果集群位于支持多专区的专区中，那么这些主节点还将在各专区中进行分布。<br>有关必须执行的操作，请参阅[更新为高可用性集群主节点](/docs/containers?topic=containers-cs_versions#ha-masters)。这些准备操作适用于以下情况：<ul>
 <li>如果具有防火墙或定制 Calico 网络策略。</li>
 <li>如果在工作程序节点上使用的主机端口是 `2040` 或 `2041`。</li>
 <li>如果使用了集群主节点 IP 地址对主节点进行集群内访问。</li>
@@ -1010,7 +2585,7 @@ lastupdated: "2018-12-05"
 <td>加密 etcd 中的数据</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>先前，etcd 数据存储在静态加密的主节点 NFS 文件存储器实例上。现在，etcd 数据存储在主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。但是，不会对主节点本地磁盘上的 etcd 数据进行加密。如果要对主节点的本地 etcd 数据进行加密，请[在集群中启用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
+<td>先前，etcd 数据存储在静态加密的主节点 NFS 文件存储器实例上。现在，etcd 数据存储在主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。但是，不会对主节点本地磁盘上的 etcd 数据进行加密。如果要对主节点的本地 etcd 数据进行加密，请[在集群中启用 {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-encryption#keyprotect)。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -1022,7 +2597,7 @@ lastupdated: "2018-12-05"
 <td>启用 TPM 的内核</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](cs_cli_reference.html#cs_cluster_feature_enable)，那么需要[重新装入](cs_cli_reference.html#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](cs_cli_reference.html#cs_machine_types)后查看 **Trustable** 字段。</td>
+<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)，那么需要[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)后查看 **Trustable** 字段。</td>
 </tr>
 </tbody>
 </table>
@@ -1139,7 +2714,7 @@ lastupdated: "2018-12-05"
 <td>密钥管理服务提供程序</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了在集群中使用 Kubernetes 密钥管理服务 (KMS) 提供程序的功能，以支持 {{site.data.keyword.keymanagementservicefull}}。[在集群中启用 {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect) 时，会对所有 Kubernetes 私钥进行加密。</td>
+<td>添加了在集群中使用 Kubernetes 密钥管理服务 (KMS) 提供程序的功能，以支持 {{site.data.keyword.keymanagementservicefull}}。[在集群中启用 {{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect) 时，会对所有 Kubernetes 私钥进行加密。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1190,7 +2765,7 @@ lastupdated: "2018-12-05"
 <td>日志循环</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](cs_cli_reference.html#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](cs_cli_reference.html#cs_worker_update)可以修复工作程序节点。</td>
+<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)可以修复工作程序节点。</td>
 </tr>
 <tr>
 <td>工作程序节点运行时组件（`kubelet`、`kube-proxy` 和 `docker`）</td>
@@ -1202,10 +2777,10 @@ lastupdated: "2018-12-05"
 <td>root 用户密码到期</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](cs_cli_reference.html#cs_worker_update)或[重新装入](cs_cli_reference.html#cs_worker_reload)一次工作程序节点。</td>
+<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)一次工作程序节点。</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>不适用</td>
 <td>不适用</td>
 <td>定期清除瞬态安装单元，以防止它们变得不受控制。此操作解决了 [Kubernetes 问题 57345 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/57345)。</td>
@@ -1216,7 +2791,7 @@ lastupdated: "2018-12-05"
 <td>不适用</td>
 <td>禁用了缺省 Docker 网桥，以便 `172.17.0.0/16` IP 范围现在可用于专用路由。如果通过直接在主机上执行 `docker` 命令或使用安装了 Docker 套接字的 pod 来依赖于在工作程序节点中构建 Docker 容器，请从以下选项中进行选择。<ul><li>要确保构建容器时的外部网络连接，请运行 `docker build . --network host`。</li>
 <li>要显式创建在构建容器时要使用的网络，请运行 `docker network create`，然后使用此网络。</li></ul>
-**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为 `containerd`（而不是 `docker`）作为容器运行时](cs_versions.html#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
+**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为 `containerd`（而不是 `docker`）作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
 </tr>
 </tbody>
 </table>
@@ -1251,10 +2826,10 @@ lastupdated: "2018-12-05"
 <td>更新为支持 Kubernetes 1.10.7 发行版。此外，通过将 `externalTrafficPolicy` 设置为 `local`，更改了 Cloud Provider 配置以更好地处理负载均衡器服务的更新。</td>
 </tr>
 <tr>
-<td>IBM File Storage 插件</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
 <td>334</td>
 <td>338</td>
-<td>已将 incubator 版本更新为 1.8。将向选择的特定专区供应文件存储。您无法更新现有（静态）PV 实例的标签，除非使用多专区集群并且需要添加区域和专区标签。<br><br> 已从 IBM 提供的文件存储类的安装选项中除去缺省 NFS 版本。主机的操作系统现在与 IBM Cloud infrastructure (SoftLayer) NFS 服务器协商 NFS 版本。要手动设置特定 NFS 版本，或者更改主机操作系统协商的 PV 的 NFS 版本，请参阅[更改缺省 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
+<td>已将 incubator 版本更新为 1.8。将向选择的特定专区供应文件存储。您无法更新现有（静态）PV 实例的标签，除非使用多专区集群并且需要添加区域和专区标签。<br><br> 已从 IBM 提供的文件存储类的安装选项中除去缺省 NFS 版本。主机的操作系统现在与 IBM Cloud infrastructure (SoftLayer) NFS 服务器协商 NFS 版本。要手动设置特定 NFS 版本，或者更改主机操作系统协商的 PV 的 NFS 版本，请参阅[更改缺省 NFS 版本](/docs/containers?topic=containers-file_storage#nfs_version_class)。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1360,10 +2935,10 @@ lastupdated: "2018-12-05"
 <td>更新为支持 Kubernetes 1.10.5 发行版。此外，LoadBalancer 服务 `create failure` 事件现在包含任何可移植子网错误。</td>
 </tr>
 <tr>
-<td>IBM File Storage 插件</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
 <td>320</td>
 <td>334</td>
-<td>将创建持久性卷的超时从 15 分钟增加到 30 分钟。将缺省计费类型更改为 `hourly`。向预定义存储类添加了安装选项。在 IBM Cloud Infrastructure (SoftLayer) 帐户的 NFS 文件存储器实例中，已将**注释**字段更改为 JSON 格式，并添加了 PV 部署到的 Kubernetes 名称空间。为了支持多专区集群，向持久性卷添加了专区和区域标签。</td>
+<td>将创建持久卷的超时从 15 分钟增加到 30 分钟。将缺省计费类型更改为 `hourly`。向预定义存储类添加了安装选项。在 IBM Cloud Infrastructure (SoftLayer) 帐户的 NFS 文件存储器实例中，已将**注释**字段更改为 JSON 格式，并添加了 PV 部署到的 Kubernetes 名称空间。为了支持多专区集群，向持久卷添加了专区和区域标签。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1466,7 +3041,7 @@ lastupdated: "2018-12-05"
 <td>Kubernetes 配置</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>向集群的 Kubernetes API 服务器的 `--enable-admission-plugins` 选项添加了 `PodSecurityPolicy`，并将集群配置为支持 pod 安全策略。有关更多信息，请参阅[配置 pod 安全策略](cs_psp.html)。</td>
+<td>向集群的 Kubernetes API 服务器的 `--enable-admission-plugins` 选项添加了 `PodSecurityPolicy`，并将集群配置为支持 pod 安全策略。有关更多信息，请参阅[配置 pod 安全策略](/docs/containers?topic=containers-psp)。</td>
 </tr>
 <tr>
 <td>Kubelet 配置</td>
@@ -1606,7 +3181,7 @@ lastupdated: "2018-12-05"
 <td>GPU 支持</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>现在，可支持[图形处理单元 (GPU) 容器工作负载](cs_app.html#gpu_app)进行安排和执行。有关可用 GPU 机器类型的列表，请参阅[工作程序节点的硬件](cs_clusters_planning.html#shared_dedicated_node)。有关更多信息，请参阅 Kubernetes 文档以[安排 GPU ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)。</td>
+<td>现在，可支持[图形处理单元 (GPU) 容器工作负载](/docs/containers?topic=containers-app#gpu_app)进行安排和执行。有关可用 GPU 机器类型的列表，请参阅[工作程序节点的硬件](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)。有关更多信息，请参阅 Kubernetes 文档以[安排 GPU ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)。</td>
 </tr>
 </tbody>
 </table>
@@ -1622,10 +3197,36 @@ lastupdated: "2018-12-05"
 *  [V1.8](#18_changelog)
 *  [V1.7](#17_changelog)
 
-### V1.9 更改日志（不推荐使用，自 2018 年 12 月 27 日起不再支持）
+### V1.9 更改日志（自 2018 年 12 月 27 日起不再支持）
 {: #19_changelog}
 
 查看 V1.9 更改日志。
+
+### 2018 年 12 月 17 日发布的工作程序节点 FP1.9.11_1539 的更改日志
+{: #1911_1539}
+
+下表显示了工作程序节点 FP1.9.11_1539 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.9.11_1538 以来进行的更改">
+<caption>自 V1.9.11_1538 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2018 年 12 月 4 日发布的工作程序节点 FP1.9.11_1538 的更改日志
 {: #1911_1538}
@@ -1648,7 +3249,7 @@ lastupdated: "2018-12-05"
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](cs_clusters_planning.html#resource_limit_node)。</td>
+<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
@@ -1724,7 +3325,7 @@ lastupdated: "2018-12-05"
 <td>OpenVPN 客户机和服务器</td>
 <td>2.4.4-r2</td>
 <td>2.4.6-r3-IKS-8</td>
-<td>更新了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) 的映像。</td>
+<td>针对 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)，更新了映像。</td>
 </tr>
 </tbody>
 </table>
@@ -1750,7 +3351,7 @@ lastupdated: "2018-12-05"
 <td>启用 TPM 的内核</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](cs_cli_reference.html#cs_cluster_feature_enable)，那么需要[重新装入](cs_cli_reference.html#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](cs_cli_reference.html#cs_machine_types)后查看 **Trustable** 字段。</td>
+<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)，那么需要[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)后查看 **Trustable** 字段。</td>
 </tr>
 </tbody>
 </table>
@@ -1894,7 +3495,7 @@ lastupdated: "2018-12-05"
 <td>日志循环</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](cs_cli_reference.html#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](cs_cli_reference.html#cs_worker_update)可以修复工作程序节点。</td>
+<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)可以修复工作程序节点。</td>
 </tr>
 <tr>
 <td>工作程序节点运行时组件（`kubelet`、`kube-proxy` 和 `docker`）</td>
@@ -1906,10 +3507,10 @@ lastupdated: "2018-12-05"
 <td>root 用户密码到期</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](cs_cli_reference.html#cs_worker_update)或[重新装入](cs_cli_reference.html#cs_worker_reload)一次工作程序节点。</td>
+<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)一次工作程序节点。</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>不适用</td>
 <td>不适用</td>
 <td>定期清除瞬态安装单元，以防止它们变得不受控制。此操作解决了 [Kubernetes 问题 57345 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/57345)。</td>
@@ -1920,7 +3521,7 @@ lastupdated: "2018-12-05"
 <td>不适用</td>
 <td>禁用了缺省 Docker 网桥，以便 `172.17.0.0/16` IP 范围现在可用于专用路由。如果通过直接在主机上执行 `docker` 命令或使用安装了 Docker 套接字的 pod 来依赖于在工作程序节点中构建 Docker 容器，请从以下选项中进行选择。<ul><li>要确保构建容器时的外部网络连接，请运行 `docker build . --network host`。</li>
 <li>要显式创建在构建容器时要使用的网络，请运行 `docker network create`，然后使用此网络。</li></ul>
-**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为 `containerd`（而不是 `docker`）作为容器运行时](cs_versions.html#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
+**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为 `containerd`（而不是 `docker`）作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
 </tr>
 </tbody>
 </table>
@@ -1949,10 +3550,10 @@ lastupdated: "2018-12-05"
 <td>更新为支持 Kubernetes 1.9.10 发行版。此外，通过将 `externalTrafficPolicy` 设置为 `local`，更改了 Cloud Provider 配置以更好地处理负载均衡器服务的更新。</td>
 </tr>
 <tr>
-<td>IBM File Storage 插件</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
 <td>334</td>
 <td>338</td>
-<td>已将 incubator 版本更新为 1.8。将向选择的特定专区供应文件存储。您无法更新现有（静态）PV 实例的标签，除非使用多专区集群并且需要添加区域和专区标签。<br><br>已从 IBM 提供的文件存储类的安装选项中除去缺省 NFS 版本。主机的操作系统现在与 IBM Cloud infrastructure (SoftLayer) NFS 服务器协商 NFS 版本。要手动设置特定 NFS 版本，或者更改主机操作系统协商的 PV 的 NFS 版本，请参阅[更改缺省 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
+<td>已将 incubator 版本更新为 1.8。将向选择的特定专区供应文件存储。您无法更新现有（静态）PV 实例的标签，除非使用多专区集群并且需要添加区域和专区标签。<br><br>已从 IBM 提供的文件存储类的安装选项中除去缺省 NFS 版本。主机的操作系统现在与 IBM Cloud infrastructure (SoftLayer) NFS 服务器协商 NFS 版本。要手动设置特定 NFS 版本，或者更改主机操作系统协商的 PV 的 NFS 版本，请参阅[更改缺省 NFS 版本](/docs/containers?topic=containers-file_storage#nfs_version_class)。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -2052,10 +3653,10 @@ lastupdated: "2018-12-05"
 <td>更新为支持 Kubernetes 1.9.9 发行版。此外，LoadBalancer 服务 `create failure` 事件现在包含任何可移植子网错误。</td>
 </tr>
 <tr>
-<td>IBM File Storage 插件</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
 <td>320</td>
 <td>334</td>
-<td>将创建持久性卷的超时从 15 分钟增加到 30 分钟。将缺省计费类型更改为 `hourly`。向预定义存储类添加了安装选项。在 IBM Cloud Infrastructure (SoftLayer) 帐户的 NFS 文件存储器实例中，已将**注释**字段更改为 JSON 格式，并添加了 PV 部署到的 Kubernetes 名称空间。为了支持多专区集群，向持久性卷添加了专区和区域标签。</td>
+<td>将创建持久卷的超时从 15 分钟增加到 30 分钟。将缺省计费类型更改为 `hourly`。向预定义存储类添加了安装选项。在 IBM Cloud Infrastructure (SoftLayer) 帐户的 NFS 文件存储器实例中，已将**注释**字段更改为 JSON 格式，并添加了 PV 部署到的 Kubernetes 名称空间。为了支持多专区集群，向持久卷添加了专区和区域标签。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -2158,7 +3759,7 @@ lastupdated: "2018-12-05"
 <td>Kubernetes 配置</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>向集群的 Kubernetes API 服务器的 --admission-control 选项添加了 PodSecurityPolicy，并将集群配置为支持 pod 安全策略。有关更多信息，请参阅[配置 pod 安全策略](cs_psp.html)。</td>
+<td>向集群的 Kubernetes API 服务器的 `--admission-control` 选项添加了 `PodSecurityPolicy`，并将集群配置为支持 pod 安全策略。有关更多信息，请参阅[配置 pod 安全策略](/docs/containers?topic=containers-psp)。</td>
 </tr>
 <tr>
 <td>IBM Cloud Provider</td>
@@ -2287,13 +3888,13 @@ lastupdated: "2018-12-05"
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>V1.9.3-71</td>
 <td>V1.9.7-102</td>
-<td>`NodePort` 和 `LoadBalancer` 服务现在通过将 `service.spec.externalTrafficPolicy` 设置为 `Local` 来支持[保留客户机源 IP](cs_loadbalancer.html#node_affinity_tolerations)。</td>
+<td>`NodePort` 和 `LoadBalancer` 服务现在通过将 `service.spec.externalTrafficPolicy` 设置为 `Local` 来支持[保留客户机源 IP](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)。</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>修正旧集群的[边缘节点](cs_edge.html#edge)容忍度设置。</td>
+<td>修正旧集群的[边缘节点](/docs/containers?topic=containers-edge#edge)容忍度设置。</td>
 </tr>
 </tbody>
 </table>
@@ -2324,7 +3925,7 @@ lastupdated: "2018-12-05"
 <td>日志循环</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](cs_cli_reference.html#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](cs_cli_reference.html#cs_worker_update)可以修复工作程序节点。</td>
+<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)可以修复工作程序节点。</td>
 </tr>
 <tr>
 <td>工作程序节点运行时组件（`kubelet`、`kube-proxy` 和 `docker`）</td>
@@ -2336,10 +3937,10 @@ lastupdated: "2018-12-05"
 <td>root 用户密码到期</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](cs_cli_reference.html#cs_worker_update)或[重新装入](cs_cli_reference.html#cs_worker_reload)一次工作程序节点。</td>
+<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)一次工作程序节点。</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>不适用</td>
 <td>不适用</td>
 <td>定期清除瞬态安装单元，以防止它们变得不受控制。此操作解决了 [Kubernetes 问题 57345 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/57345)。</td>
@@ -2420,10 +4021,10 @@ lastupdated: "2018-12-05"
 <td>更新为支持 Kubernetes 1.8.15 发行版。此外，LoadBalancer 服务 `create failure` 事件现在包含任何可移植子网错误。</td>
 </tr>
 <tr>
-<td>IBM File Storage 插件</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
 <td>320</td>
 <td>334</td>
-<td>将创建持久性卷的超时从 15 分钟增加到 30 分钟。将缺省计费类型更改为 `hourly`。向预定义存储类添加了安装选项。在 IBM Cloud Infrastructure (SoftLayer) 帐户的 NFS 文件存储器实例中，已将**注释**字段更改为 JSON 格式，并添加了 PV 部署到的 Kubernetes 名称空间。为了支持多专区集群，向持久性卷添加了专区和区域标签。</td>
+<td>将创建持久卷的超时从 15 分钟增加到 30 分钟。将缺省计费类型更改为 `hourly`。向预定义存储类添加了安装选项。在 IBM Cloud Infrastructure (SoftLayer) 帐户的 NFS 文件存储器实例中，已将**注释**字段更改为 JSON 格式，并添加了 PV 部署到的 Kubernetes 名称空间。为了支持多专区集群，向持久卷添加了专区和区域标签。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -2517,7 +4118,7 @@ lastupdated: "2018-12-05"
 <td>Kubernetes 配置</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>向集群的 Kubernetes API 服务器的 --admission-control 选项添加了 PodSecurityPolicy，并将集群配置为支持 pod 安全策略。有关更多信息，请参阅[配置 pod 安全策略](cs_psp.html)。</td>
+<td>向集群的 Kubernetes API 服务器的 `--admission-control` 选项添加了 `PodSecurityPolicy`，并将集群配置为支持 pod 安全策略。有关更多信息，请参阅[配置 pod 安全策略](/docs/containers?topic=containers-psp)。</td>
 </tr>
 <tr>
 <td>IBM Cloud Provider</td>
@@ -2636,13 +4237,13 @@ lastupdated: "2018-12-05"
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>V1.8.8-86</td>
 <td>V1.8.11-126</td>
-<td>`NodePort` 和 `LoadBalancer` 服务现在通过将 `service.spec.externalTrafficPolicy` 设置为 `Local` 来支持[保留客户机源 IP](cs_loadbalancer.html#node_affinity_tolerations)。</td>
+<td>`NodePort` 和 `LoadBalancer` 服务现在通过将 `service.spec.externalTrafficPolicy` 设置为 `Local` 来支持[保留客户机源 IP](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)。</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>修正旧集群的[边缘节点](cs_edge.html#edge)容忍度设置。</td>
+<td>修正旧集群的[边缘节点](/docs/containers?topic=containers-edge#edge)容忍度设置。</td>
 </tr>
 </tbody>
 </table>
@@ -2747,13 +4348,13 @@ lastupdated: "2018-12-05"
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>V1.7.4-133</td>
 <td>V1.7.16-17</td>
-<td>`NodePort` 和 `LoadBalancer` 服务现在通过将 `service.spec.externalTrafficPolicy` 设置为 `Local` 来支持[保留客户机源 IP](cs_loadbalancer.html#node_affinity_tolerations)。</td>
+<td>`NodePort` 和 `LoadBalancer` 服务现在通过将 `service.spec.externalTrafficPolicy` 设置为 `Local` 来支持[保留客户机源 IP](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)。</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>修正旧集群的[边缘节点](cs_edge.html#edge)容忍度设置。</td>
+<td>修正旧集群的[边缘节点](/docs/containers?topic=containers-edge#edge)容忍度设置。</td>
 </tr>
 </tbody>
 </table>

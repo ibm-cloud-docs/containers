@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -29,7 +33,7 @@ lastupdated: "2018-12-05"
 
 通过设置 pod 优先级，可以帮助防止较低优先级的工作负载影响集群中的关键工作负载，尤其是集群即将达到其资源容量的情况下。
 
-确保已针对集群[设置正确的用户访问权](cs_users.html#users)，如果适用，还请确保设置了 [pod 安全策略](cs_psp.html#psp)。访问权和 pod 安全策略可以帮助防止不可信用户部署高优先级的 pod 而阻止调度其他 pod。
+确保已针对集群[设置正确的用户访问权](/docs/containers?topic=containers-users#users)，如果适用，还请确保设置了 [pod 安全策略](/docs/containers?topic=containers-psp#psp)。访问权和 pod 安全策略可以帮助防止不可信用户部署高优先级的 pod 而阻止调度其他 pod。
 {: tip}
 
 {: #priority_scheduling}
@@ -41,7 +45,8 @@ lastupdated: "2018-12-05"
 要了解 pod 优先级和调度程序如何一起工作，请考虑下图中的场景。您必须将已划分优先级的 pod 置于具有可用资源的工作程序节点上。否则，在除去现有 pod 的同时，集群中的高优先级 pod 可能保持暂挂状态，例如在场景 3 中那样。
 
 _图：pod 优先级场景_
-![pod 优先级场景](images/pod-priority.png)
+<img src="images/pod-priority.png" width="500" alt="pod 优先级场景" style="width:500px; border-style: none"/>
+
 1.  具有高、中和低优先级的三个 pod 正在等待安排。调度程序找到了一个可用的工作程序节点，该节点有容纳所有 3 个 pod 的空间，并按优先级顺序安排这 3 个 pod，首先安排最高优先级的 pod。
 2.  具有高、中和低优先级的三个 pod 正在等待安排。调度程序找到了一个可用的工作程序节点，但该工作程序节点只有足够的资源支持高优先级和中等优先级 pod。因此并未安排低优先级 pod，该 pod 仍处于暂挂状态。
 3.  具有高优先级和中等优先级的两个 pod 处于等待安排状态。具有低优先级的第三个 pod 存在于一个可用工作程序节点上。但是，该工作程序节点没有足够的资源来安排任何暂挂的 pod。因此，调度程序会抢占或除去低优先级 pod，这将使该 pod 恢复为暂挂状态。然后，调度程序会尝试调度高优先级 pod。但是，该工作程序节点没有足够的资源来调度高优先级 pod，因此调度程序改为调度中等优先级 pod。
@@ -86,8 +91,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 开始之前：
-* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
-* [创建](cs_clusters.html#clusters_ui) Kubernetes V1.11 或更高版本的集群，或将集群[更新](cs_cluster_update.html#update)到 Kubernetes V1.11 或更高版本。
+* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* 确保您具有对 `default` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
+* [创建](/docs/containers?topic=containers-clusters#clusters_ui) Kubernetes V1.11 或更高版本的集群，或将集群[更新](/docs/containers?topic=containers-update#update)到 Kubernetes V1.11 或更高版本。
 
 要使用优先级类，请执行以下操作：
 
@@ -167,8 +173,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 开始之前：
-* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
-* [创建](cs_clusters.html#clusters_ui) Kubernetes V1.11 或更高版本的集群，或将集群[更新](cs_cluster_update.html#update)到 Kubernetes V1.11 或更高版本。
+* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* 确保您在要将 pod 部署到的名称空间中具有 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
+* [创建](/docs/containers?topic=containers-clusters#clusters_ui) Kubernetes V1.11 或更高版本的集群，或将集群[更新](/docs/containers?topic=containers-update#update)到 Kubernetes V1.11 或更高版本。
 * [了解优先级安排的运作方式](#priority_scheduling)，因为优先级可以抢占现有 pod，并影响如何使用集群的资源。
 
 要为 pod 分配优先级，请执行以下操作：
@@ -199,7 +206,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 3.  在 pod spec 中，为 `priorityClassName` 字段添加在上一步中检索到的优先级类的名称。
 
     ```yaml
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty

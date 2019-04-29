@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, compliance, security standards
+
+subcollection: containers
 
 ---
 
@@ -33,41 +37,41 @@ Per ulteriori informazioni su Kubernetes, vedi la [documentazione di Kubernetes 
 {: #kubernetes_service}
 {: faq}
 
-Con {{site.data.keyword.containerlong_notm}}, puoi creare il tuo proprio cluster Kubernetes per distribuire e gestire le applicazioni inserite in un contenitore su {{site.data.keyword.Bluemix_notm}}. Le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo dell'infrastruttura IBM Cloud (SoftLayer) denominati nodi di lavoro. Puoi scegliere di eseguire il provisioning dei tuoi host di calcolo come [macchine virtuali](cs_clusters_planning.html#vm) con risorse condivise o dedicate oppure come [macchine bare metal](cs_clusters_planning.html#bm) che possono essere ottimizzate per l'utilizzo di GPU ed SDS (software-defined storage). I tuoi nodi di lavoro sono controllati da un master Kubernetes altamente disponibile che è configurato, monitorato e gestito da IBM. Puoi utilizzare l'API o la CLI di {{site.data.keyword.containerlong_notm}} per lavorare con le risorse dell'infrastruttura del cluster e l'API o la CLI di Kubernetes per gestire le tue distribuzioni e i tuoi servizi. 
+Con {{site.data.keyword.containerlong_notm}}, puoi creare il tuo proprio cluster Kubernetes per distribuire e gestire le applicazioni inserite in un contenitore su {{site.data.keyword.Bluemix_notm}}. Le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo dell'infrastruttura IBM Cloud (SoftLayer) denominati nodi di lavoro. Puoi scegliere di eseguire il provisioning dei tuoi host di calcolo come [macchine virtuali](/docs/containers?topic=containers-plan_clusters#vm) con risorse condivise o dedicate oppure come [macchine bare metal](/docs/containers?topic=containers-plan_clusters#bm) che possono essere ottimizzate per l'utilizzo di GPU ed SDS (software-defined storage). I tuoi nodi di lavoro sono controllati da un master Kubernetes altamente disponibile che è configurato, monitorato e gestito da IBM. Puoi utilizzare l'API o la CLI di {{site.data.keyword.containerlong_notm}} per lavorare con le risorse dell'infrastruttura del cluster e l'API o la CLI di Kubernetes per gestire le tue distribuzioni e i tuoi servizi. 
 
-Per ulteriori informazioni su come vengono configurate le tue risorse del cluster, vedi [Architettura del servizio](cs_tech.html#architecture). Per trovare un elenco di funzionalità e vantaggi, vedi [Perché {{site.data.keyword.containerlong_notm}}](cs_why.html#cs_ov).
+Per ulteriori informazioni su come vengono configurate le tue risorse del cluster, vedi [Architettura del servizio](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture). Per trovare un elenco di funzionalità e vantaggi, vedi [Perché {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov).
 
 ## Perché dovrei utilizzare il servizio IBM Cloud Kubernetes?
-{: #benefits}
+{: #faq_benefits}
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} è un'offerta di Kubernetes gestito che offre potenti strumenti, un'esperienza utente intuitiva e sicurezza integrata per la rapida consegna di applicazioni che puoi associare ai servizi cloud relativi a IBM Watson®, AI, IoT, DevOps, sicurezza e analisi dei dati. Come fornitore certificato di Kubernetes, {{site.data.keyword.containerlong_notm}} fornisce funzioni di pianificazione intelligente, riparazione automatica, adattamento orizzontale, rilevamento di servizi e bilanciamento del carico, rollout e rollback automatizzati e gestione dei segreti e della configurazione. Il servizio ha anche funzionalità avanzate per la gestione semplificata dei cluster, le politiche di sicurezza e isolamento dei contenitori, la capacità di progettare il tuo proprio cluster e strumenti operativi integrati per la coerenza nella distribuzione.
 
-Per una panoramica dettagliata di funzionalità e vantaggi, vedi [Perché {{site.data.keyword.containerlong_notm}}](cs_why.html#cs_ov). 
+Per una panoramica dettagliata di funzionalità e vantaggi, vedi [Perché {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov). 
 
 ## Il servizio viene fornito con un master Kubernetes gestito e nodi di lavoro?
 {: #managed_master_worker}
 {: faq}
 
-Ogni cluster Kubernetes in {{site.data.keyword.containerlong_notm}} è controllato da un master Kubernetes dedicato che viene gestito da IBM in un account dell'infrastruttura {{site.data.keyword.Bluemix_notm}} di proprietà di IBM. Il master Kubernetes, inclusi tutti componenti del master, le risorse di calcolo, di rete e di archiviazione, viene continuamente monitorato dagli SRE (Site Reliability Engineer) IBM. Gli SRE applicano i più recenti standard di sicurezza, rilevano e correggono le attività dannose e operano per garantire l'affidabilità e la disponibilità di {{site.data.keyword.containerlong_notm}}. I componenti aggiuntivi, come Fluentd per la registrazione, che vengono installati automaticamente quando esegui il provisioning del cluster vengono aggiornati automaticamente da IBM. Tuttavia, puoi scegliere di disabilitare gli aggiornamenti automatici per alcuni componenti aggiuntivi e aggiornarli manualmente e separatamente dai nodi master e di lavoro. Per ulteriori informazioni, vedi [Aggiornamento dei componenti aggiuntivi del cluster](cs_cluster_update.html#addons). 
+Ogni cluster Kubernetes in {{site.data.keyword.containerlong_notm}} è controllato da un master Kubernetes dedicato che viene gestito da IBM in un account dell'infrastruttura {{site.data.keyword.Bluemix_notm}} di proprietà di IBM. Il master Kubernetes, inclusi tutti componenti del master, le risorse di calcolo, di rete e di archiviazione, viene continuamente monitorato dagli SRE (Site Reliability Engineer) IBM. Gli SRE applicano i più recenti standard di sicurezza, rilevano e correggono le attività dannose e operano per garantire l'affidabilità e la disponibilità di {{site.data.keyword.containerlong_notm}}. I componenti aggiuntivi, come Fluentd per la registrazione, che vengono installati automaticamente quando esegui il provisioning del cluster vengono aggiornati automaticamente da IBM. Tuttavia, puoi scegliere di disabilitare gli aggiornamenti automatici per alcuni componenti aggiuntivi e aggiornarli manualmente e separatamente dai nodi master e di lavoro. Per ulteriori informazioni, vedi [Aggiornamento dei componenti aggiuntivi del cluster](/docs/containers?topic=containers-update#addons). 
 
-Periodicamente, Kubernetes rilascia [aggiornamenti principali, secondari o patch](cs_versions.html#version_types). Questi aggiornamenti possono influire sulla versione del server API Kubernetes o su altri componenti nel tuo master Kubernetes. IBM aggiorna automaticamente la versione patch, ma devi aggiornare la versione principale e quella secondaria del master. Per ulteriori informazioni, vedi [Aggiornamento del master Kubernetes](cs_cluster_update.html#master). 
+Periodicamente, Kubernetes rilascia [aggiornamenti principali, secondari o patch](/docs/containers?topic=containers-cs_versions#version_types). Questi aggiornamenti possono influire sulla versione del server API Kubernetes o su altri componenti nel tuo master Kubernetes. IBM aggiorna automaticamente la versione patch, ma devi aggiornare la versione principale e quella secondaria del master. Per ulteriori informazioni, vedi [Aggiornamento del master Kubernetes](/docs/containers?topic=containers-update#master). 
 
-Il provisioning dei nodi di lavoro nei cluster standard viene eseguito nel tuo account dell'infrastruttura {{site.data.keyword.Bluemix_notm}}. I nodi di lavoro sono dedicati al tuo account ed è una tua responsabilità richiedere degli aggiornamenti tempestivi ai nodi di lavoro per garantire che i componenti {{site.data.keyword.containerlong_notm}} e il sistema operativo dei nodi di lavoro siano applicati con gli aggiornamenti e le patch di sicurezza più recenti. Gli aggiornamenti e le patch di sicurezza sono resi disponibili dagli SRE (Site Reliability Engineer) IBM che monitorano continuamente l'immagine Linux installata sui tuoi nodi di lavoro per rilevare vulnerabilità e problemi di conformità della sicurezza. Per ulteriori informazioni, vedi [Aggiornamento dei nodi di lavoro](cs_cluster_update.html#worker_node). 
+Il provisioning dei nodi di lavoro nei cluster standard viene eseguito nel tuo account dell'infrastruttura {{site.data.keyword.Bluemix_notm}}. I nodi di lavoro sono dedicati al tuo account ed è una tua responsabilità richiedere degli aggiornamenti tempestivi ai nodi di lavoro per garantire che i componenti {{site.data.keyword.containerlong_notm}} e il sistema operativo dei nodi di lavoro siano applicati con gli aggiornamenti e le patch di sicurezza più recenti. Gli aggiornamenti e le patch di sicurezza sono resi disponibili dagli SRE (Site Reliability Engineer) IBM che monitorano continuamente l'immagine Linux installata sui tuoi nodi di lavoro per rilevare vulnerabilità e problemi di conformità della sicurezza. Per ulteriori informazioni, vedi [Aggiornamento dei nodi di lavoro](/docs/containers?topic=containers-update#worker_node). 
 
 ## I nodi master e di lavoro Kubernetes sono altamente disponibili?
-{: #ha}
+{: #faq_ha}
 {: faq}
 
 L'architettura e l'infrastruttura di {{site.data.keyword.containerlong_notm}} sono progettate per garantire affidabilità, bassa latenza di elaborazione e una massima operatività del servizio. Per impostazione predefinita, ogni cluster in {{site.data.keyword.containerlong_notm}} che esegue Kubernetes versione 1.10 o superiore è configurato con più istanze del master Kubernetes per garantire la disponibilità e l'accessibilità delle risorse del cluster, anche se una o più istanze del master Kubernetes non sono disponibili. 
 
-Puoi rendere il tuo cluster ancora più altamente disponibile e proteggere la tua applicazione da tempi di inattività, estendendo i tuoi carichi di lavoro tra più nodi di lavoro in più zone di una regione. Questa configurazione viene chiamata [cluster multizona](cs_clusters_planning.html#multizone) e garantisce che la tua applicazione sia accessibile, anche se un nodo di lavoro o un'intera zona non è disponibile. 
+Puoi rendere il tuo cluster ancora più altamente disponibile e proteggere la tua applicazione da tempi di inattività, estendendo i tuoi carichi di lavoro tra più nodi di lavoro in più zone di una regione. Questa configurazione viene chiamata [cluster multizona](/docs/containers?topic=containers-plan_clusters#multizone) e garantisce che la tua applicazione sia accessibile, anche se un nodo di lavoro o un'intera zona non è disponibile. 
 
-Per proteggerti da un malfunzionamento di un'intera regione, crea [più cluster ed estendili tra le regioni {{site.data.keyword.containerlong_notm}}](cs_clusters_planning.html#multiple_clusters). Configurando un programma di bilanciamento del carico per i tuoi cluster, puoi ottenere il bilanciamento del carico tra regioni e la rete tra regioni per i cluster. 
+Per proteggerti da un malfunzionamento di un'intera regione, crea [più cluster ed diffondili tra le regioni {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_clusters#multiple_clusters). Configurando un programma di bilanciamento del carico per i tuoi cluster, puoi ottenere il bilanciamento del carico tra regioni e la rete tra regioni per i cluster. 
 
-Se hai dei dati che devono essere disponibili, anche se si verifica un'interruzione, assicurati di memorizzare i tuoi dati nell'[archiviazione persistente](cs_storage_planning.html#storage_planning). 
+Se hai dei dati che devono essere disponibili, anche se si verifica un'interruzione, assicurati di memorizzare i tuoi dati nell'[archiviazione persistente](/docs/containers?topic=containers-storage_planning#storage_planning). 
 
-Per ulteriori informazioni su come ottenere l'alta disponibilità per il tuo cluster, vedi [Alta disponibilità per {{site.data.keyword.containerlong_notm}}](cs_ha.html#ha). 
+Per ulteriori informazioni su come ottenere l'alta disponibilità per il tuo cluster, vedi [Alta disponibilità per {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#ha). 
 
 ## Quali opzioni ho per proteggere il mio cluster?
 {: #secure_cluster}
@@ -75,7 +79,15 @@ Per ulteriori informazioni su come ottenere l'alta disponibilità per il tuo clu
 
 Puoi utilizzare le funzioni di sicurezza integrate in {{site.data.keyword.containerlong_notm}} per proteggere i componenti nel tuo cluster, i tuoi dati e le distribuzioni dell'applicazione per garantire la conformità della sicurezza e l'integrità dei dati. Utilizza queste funzioni per proteggere il server API Kubernetes, l'archivio dati etcd, il nodo di lavoro, la rete, l'archiviazione, le immagini e le distribuzioni da attacchi dolosi. Puoi anche avvalerti degli strumenti di registrazione e monitoraggio integrati per rilevare attacchi dolosi e modelli di utilizzo sospetti. 
 
-Per ulteriori informazioni sui componenti del tuo cluster e su come proteggere ciascun componente, vedi [Sicurezza per {{site.data.keyword.containerlong_notm}}](cs_secure.html#security). 
+Per ulteriori informazioni sui componenti del tuo cluster e su come proteggere ciascun componente, vedi [Sicurezza per {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security). 
+
+## Dove posso trovare un elenco dei bollettini di sicurezza che interessano il mio cluster? 
+{: #faq_security_bulletins}
+{: faq}
+
+Se vengono rilevate delle vulnerabilità in Kubernetes, quest'ultima rilascia delle CVE in bollettini di sicurezza per informare gli utenti e descrivere le azioni che devono eseguire per ovviare alla vulnerabilità. I bollettini di sicurezza di Kubernetes che interessano gli utenti {{site.data.keyword.containerlong_notm}} o la piattaforma {{site.data.keyword.Bluemix_notm}} sono pubblicati nei [Bollettini di sicurezza di {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security). 
+
+Alcune CVE richiedono l'aggiornamento patch più recente per una versione Kubernetes che puoi installare come parte del regolare [processo di aggiornamento del cluster](/docs/containers?topic=containers-update#update) in {{site.data.keyword.containerlong_notm}}. Assicurati di applicare le patch di sicurezza in tempo per proteggere il tuo cluster da attacchi dolosi. Per informazioni su cosa è incluso in una patch di sicurezza, fai riferimento a [Changelog versione](/docs/containers?topic=containers-changelog#changelog). 
 
 ## Il servizio offre supporto per bare metal e GPU? 
 {: #bare_metal_gpu}
@@ -83,7 +95,7 @@ Per ulteriori informazioni sui componenti del tuo cluster e su come proteggere c
 
 Sì, puoi eseguire il provisioning del tuo nodo di lavoro come server bare metal fisico a singolo tenant. I server bare metal offrono vantaggi ad alte prestazioni per carichi di lavoro come dati, intelligenza artificiale e GPU. Inoltre, tutte le risorse hardware sono dedicate ai tuoi carichi di lavoro, quindi non devi preoccuparti degli "elementi di disturbo".
 
-Per ulteriori informazioni sulle varietà bare metal disponibili e su come il bare metal è diverso dalle macchine virtuali, vedi [Macchine fisiche (bare metal)](cs_clusters_planning.html#bm).
+Per ulteriori informazioni sulle varietà bare metal disponibili e su come il bare metal è diverso dalle macchine virtuali, vedi [Macchine fisiche (bare metal)](/docs/containers?topic=containers-plan_clusters#bm).
 
 ## Quali versioni di Kubernetes sono supportate dal servizio? 
 {: #supported_kube_versions}
@@ -91,11 +103,11 @@ Per ulteriori informazioni sulle varietà bare metal disponibili e su come il ba
 
 {{site.data.keyword.containerlong_notm}} supporta contemporaneamente più versioni di Kubernetes. Quando viene rilasciata una versione più recente (n), sono supportate fino a 2 versioni precedenti (n-2). Le versioni che sono più di 2 precedenti rispetto all'ultima (n-3) sono prima dichiarate obsolete e quindi non più supportate. Attualmente sono supportate le seguenti versioni: 
 
-- Più recente: 1.12.3
-- Predefinita: 1.10.11
-- Altre: 1.11.5
+- Più recente: 1.13.4
+- Predefinita: 1.12.6
+- Altra: 1.11.8
 
-Per ulteriori informazioni sulle versioni supportate e sulle azioni di aggiornamento che devi eseguire per passare da una versione all'altra, vedi [Informazioni sulla versione e azioni di aggiornamento](cs_versions.html#cs_versions).
+Per ulteriori informazioni sulle versioni supportate e sulle azioni di aggiornamento che devi eseguire per passare da una versione all'altra, vedi [Informazioni sulla versione e azioni di aggiornamento](/docs/containers?topic=containers-cs_versions#cs_versions).
 
 ## Dove è disponibile il servizio?
 {: #supported_regions}
@@ -103,28 +115,26 @@ Per ulteriori informazioni sulle versioni supportate e sulle azioni di aggiornam
 
 {{site.data.keyword.containerlong_notm}} è disponibile in tutto il mondo. Puoi creare dei cluster standard in ogni regione {{site.data.keyword.containerlong_notm}} supportata. I cluster gratuiti sono disponibili solo in regioni selezionate.
 
-Per ulteriori informazioni sulle regioni supportate, vedi [Regioni e zone](cs_regions.html#regions-and-zones).
+Per ulteriori informazioni sulle regioni supportate, vedi [Regioni e zone](/docs/containers?topic=containers-regions-and-zones#regions-and-zones).
 
 ## A quali standard è conforme il servizio? 
 {: #standards}
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} implementa controlli commisurati ai seguenti standard: 
-- HIPAA
-- SOC1
-- SOC2 Tipo 1
-- ISAE 3402
-- ISO 27001
-- ISO 27017
-- ISO 27018
+- HIPAA (Health Insurance Portability and Accountability Act)
+- Standard Service Organization Control (SOC 1, SOC 2 Type 1)
+- International Standard on Assurance Engagements 3402 (ISAE 3402), Assurance Reports on Controls at a Service Organization
+- International Organization for Standardization (ISO 27001, ISO 27017, ISO 27018)
+- Payment Card Industry Data Security Standard (PCI DSS)
 
 ## Posso utilizzare IBM Cloud e altri servizi con il mio cluster?
-{: #integrations}
+{: #faq_integrations}
 {: faq}
 
 Puoi aggiungere i servizi di infrastruttura e piattaforma {{site.data.keyword.Bluemix_notm}} e i servizi di fornitori di terze parti al tuo cluster {{site.data.keyword.containerlong_notm}} per abilitare l'automazione, aumentare la sicurezza o migliorare le capacità di monitoraggio e registrazione nel cluster.
 
-Per un elenco di servizi supportati, vedi [Integrazione dei servizi](cs_integrations.html#integrations).
+Per un elenco di servizi supportati, vedi [Integrazione dei servizi](/docs/containers?topic=containers-integrations#integrations).
 
 ## Posso connettere il mio cluster in IBM Cloud pubblico con applicazioni eseguite nel mio data center in loco?
 {: #hybrid}
@@ -134,9 +144,9 @@ Puoi connettere i servizi in {{site.data.keyword.Bluemix_notm}} pubblico con il 
 - Crei un cluster con {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} pubblico o dedicato, ma vuoi connettere il tuo cluster con un database installato in loco.
 - Crei un cluster Kubernetes in {{site.data.keyword.Bluemix_notm}} privato nel tuo data center e distribuisci le applicazioni nel tuo cluster. Tuttavia, la tua applicazione potrebbe utilizzare un servizio {{site.data.keyword.ibmwatson_notm}}, ad esempio Tone Analyzer, in {{site.data.keyword.Bluemix_notm}} pubblico.
 
-Per abilitare la comunicazione tra i servizi eseguiti in {{site.data.keyword.Bluemix_notm}} pubblico o dedicato e i servizi eseguiti in loco, devi [configurare una connessione VPN](cs_vpn.html#vpn). Per connettere il tuo ambiente {{site.data.keyword.Bluemix_notm}} pubblico o dedicato con un ambiente {{site.data.keyword.Bluemix_notm}} privato, vedi [Utilizzo di {{site.data.keyword.containerlong_notm}} con {{site.data.keyword.Bluemix_notm}} privato](cs_hybrid.html#hybrid_iks_icp).
+Per abilitare la comunicazione tra i servizi eseguiti in {{site.data.keyword.Bluemix_notm}} pubblico o dedicato e i servizi eseguiti in loco, devi [configurare una connessione VPN](/docs/containers?topic=containers-vpn#vpn). Per connettere il tuo ambiente {{site.data.keyword.Bluemix_notm}} pubblico o dedicato con un ambiente {{site.data.keyword.Bluemix_notm}} privato, vedi [Utilizzo di {{site.data.keyword.containerlong_notm}} con {{site.data.keyword.Bluemix_notm}} privato](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
 
-Per una panoramica delle offerte {{site.data.keyword.containerlong_notm}} supportate, vedi [Confronto delle offerte e le loro combinazioni](cs_why.html#differentiation).
+Per una panoramica delle offerte {{site.data.keyword.containerlong_notm}} supportate, vedi [Confronto delle offerte e le loro combinazioni](/docs/containers?topic=containers-cs_ov#differentiation).
 
 ## Posso distribuire il servizio IBM Cloud Kubernetes nel mio data center?
 {: #private}
@@ -150,7 +160,7 @@ Per ulteriori informazioni, consulta la [documentazione del prodotto {{site.data
 {: #charges}
 {: faq}
 
-Con i cluster {{site.data.keyword.containerlong_notm}}, puoi utilizzare le risorse di calcolo, rete e archiviazione dell'infrastruttura IBM Cloud (SoftLayer) con i servizi di piattaforma come Watson AI o Compose Database-as-a-Service. Ogni risorsa potrebbe comportare i propri addebiti che possono essere [fissi, a consumo, a livelli o riservati](/docs/billing-usage/how_charged.html#charges). 
+Con i cluster {{site.data.keyword.containerlong_notm}}, puoi utilizzare le risorse di calcolo, rete e archiviazione dell'infrastruttura IBM Cloud (SoftLayer) con i servizi di piattaforma come Watson AI o Compose Database-as-a-Service. Ogni risorsa potrebbe comportare i propri addebiti che possono essere [fissi, a consumo, a livelli o riservati](/docs/billing-usage?topic=billing-usage-charges#charges). 
 * [Nodi di lavoro](#nodes)
 * [Rete in uscita](#bandwidth)
 * [Indirizzi IP della sottorete](#subnets)
@@ -166,11 +176,11 @@ Con i cluster {{site.data.keyword.containerlong_notm}}, puoi utilizzare le risor
   <li><strong>Livelli di ore al mese</strong>: la fatturazione oraria è a livelli. Poiché la tua VM rimane ordinata per un certo livello di ore entro un mese di fatturazione, la tariffa oraria che ti viene addebitata diminuisce. I livelli di ore sono i seguenti: 0 - 150 ore, 151 - 290 ore, 291 - 540 ore e 541+ ore.</li></ul>
   <p>Le <strong>macchine fisiche (bare metal)</strong> offrono prestazioni elevate per carichi di lavoro come dati, intelligenza artificiale e GPU. Inoltre, tutte le risorse hardware sono dedicate ai tuoi carichi di lavoro, quindi non hai "elementi di disturbo". Tieni presente questi fattori che influiscono sui costi della tua macchina bare metal:</p>
   <ul><li><strong>Solo fatturazione mensile</strong>: tutte le macchine bare metal vengono addebitate mensilmente.</li>
-  <li><strong>Processo di ordine più lungo</strong>:  poiché l'ordine e l'annullamento dei server bare metal è un processo manuale attraverso l'account dell'infrastruttura IBM Cloud (SoftLayer), il suo completamento può richiedere più di un giorno lavorativo.</li></ul>
-  <p>Per i dettagli sulle specifiche delle macchine, vedi [Hardware disponibile per i nodi di lavoro](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).</p></dd>
+  <li><strong>Processo di ordinazione più lungo</strong>:  dopo che hai ordinato o annullato un server bare metal, il processo viene completato manualmente nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Pertanto, ci vuole più di un giorno lavorativo per completare questo processo.</li></ul>
+  <p>Per i dettagli sulle specifiche delle macchine, vedi [Hardware disponibile per i nodi di lavoro](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).</p></dd>
 
 <dt id="bandwidth">Larghezza di banda pubblica</dt>
-  <dd><p>La larghezza di banda si riferisce al trasferimento di dati pubblici del traffico di rete in entrata e in uscita, sia da che verso le risorse {{site.data.keyword.Bluemix_notm}} nei data center in tutto il mondo. La larghezza di banda pubblica viene addebitata per GB. Puoi rivedere il tuo riepilogo di larghezza di banda corrente accedendo alla [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), selezionando dal menu ![Icona Menu](../icons/icon_hamburger.svg "Icona Menu") **Infrastruttura** e selezionando quindi la pagina **Rete > Larghezza di banda > Riepilogo**.
+  <dd><p>La larghezza di banda si riferisce al trasferimento di dati pubblici del traffico di rete in entrata e in uscita, sia da che verso le risorse {{site.data.keyword.Bluemix_notm}} nei data center in tutto il mondo. La larghezza di banda pubblica viene addebitata per GB. Puoi rivedere il tuo riepilogo di larghezza di banda corrente accedendo alla [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), dal menu ![Icona menu](../icons/icon_hamburger.svg "Icona Menu") selezionando **Infrastruttura classica** e selezionando quindi la pagina **Rete > Larghezza di banda> Riepilogo**.
   <p>Esamina i seguenti fattori che influiscono sui costi della larghezza di banda pubblica:</p>
   <ul><li><strong>Ubicazione</strong>: come per i nodi di lavoro, gli addebiti variano a seconda della zona in cui vengono distribuite le tue risorse.</li>
   <li><strong>Larghezza di banda inclusa o a pagamento</strong>: le macchine del tuo nodo di lavoro potrebbero essere dotate di una determinata assegnazione di rete in uscita al mese, come 250 GB per le VM o 500 GB per bare metal. Oppure, l'assegnazione potrebbe essere a consumo, in base all'utilizzo di GB.</li>
@@ -178,17 +188,17 @@ Con i cluster {{site.data.keyword.containerlong_notm}}, puoi utilizzare le risor
   <p>Per ulteriori informazioni, vedi [Pacchetti di larghezza di banda ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/bandwidth).</p></dd>
 
 <dt id="subnets">Indirizzi IP della sottorete</dt>
-  <dd><p>Quando crei un cluster standard, viene ordinata una sottorete pubblica portatile con 8 indirizzi IP pubblici che viene addebitata mensilmente al tuo account.</p><p>Se hai già sottoreti disponibili nel tuo account dell'infrastruttura, puoi invece utilizzare queste sottoreti. Crea il cluster con l'[indicatore](cs_cli_reference.html#cs_cluster_create) `--no-subnets` e [riutilizza le tue sottoreti](cs_subnets.html#custom).</p>
+  <dd><p>Quando crei un cluster standard, viene ordinata una sottorete pubblica portatile con 8 indirizzi IP pubblici che viene addebitata mensilmente al tuo account.</p><p>Se hai già sottoreti disponibili nel tuo account dell'infrastruttura, puoi invece utilizzare queste sottoreti. Crea il cluster con l'[indicatore](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) `--no-subnets` e [riutilizza quindi le tue sottoreti](/docs/containers?topic=containers-subnets#subnets_custom).</p>
   </dd>
 
 <dt id="storage">Archiviazione</dt>
-  <dd>Quando esegui il provisioning dell'archiviazione, puoi scegliere il tipo di archiviazione e la classe di archiviazione più adatti al tuo caso di utilizzo. Gli addebiti variano in base al tipo di archiviazione, all'ubicazione e alle specifiche dell'istanza di archiviazione. Alcune soluzioni di archiviazione, come l'archiviazione file e blocchi, offrono piani orari e mensili tra cui puoi scegliere. Per scegliere la giusta soluzione di archiviazione, vedi [Pianificazione di archiviazione persistente altamente disponibile](cs_storage_planning.html#storage_planning). Per ulteriori informazioni, consulta:
+  <dd>Quando esegui il provisioning dell'archiviazione, puoi scegliere il tipo di archiviazione e la classe di archiviazione più adatti al tuo caso di utilizzo. Gli addebiti variano in base al tipo di archiviazione, all'ubicazione e alle specifiche dell'istanza di archiviazione. Alcune soluzioni di archiviazione, come l'archiviazione file e blocchi, offrono piani orari e mensili tra cui puoi scegliere. Per scegliere la giusta soluzione di archiviazione, vedi [Pianificazione di archiviazione persistente altamente disponibile](/docs/containers?topic=containers-storage_planning#storage_planning). Per ulteriori informazioni, consulta:
   <ul><li>[Prezzi dell'archiviazione file NFS![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing)</li>
   <li>[Prezzi dell'archiviazione blocchi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/block-storage/pricing)</li>
   <li>[Piani di archiviazione oggetti![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
 
 <dt id="services">Servizi {{site.data.keyword.Bluemix_notm}}</dt>
-  <dd>Ogni servizio che integri con il tuo cluster ha il proprio modello di prezzo. Per ulteriori informazioni, consulta la documentazione di ogni prodotto e lo [stimatore del costo ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/pricing/).</dd>
+  <dd>Ogni servizio che integri con il tuo cluster ha il proprio modello di prezzo. Consola la documentazione di ciascun prodotto e utilizza la console {{site.data.keyword.Bluemix_notm}} per [stimare i costi](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
 
 </dl>
 
@@ -200,17 +210,16 @@ Le risorse mensili vengono fatturate in base al primo giorno del mese per l'util
 {: faq}
 
 Quando utilizzi un account {{site.data.keyword.Bluemix_notm}} fatturabile, le risorse di piattaforma e infrastruttura sono riepilogate in una sola fattura.
-Se hai collegato i tuoi account di {{site.data.keyword.Bluemix_notm}} e dell'infrastruttura IBM Cloud (SoftLayer), ricevi una [fattura consolidata](/docs/customer-portal/linking_accounts.html#unifybillaccounts) per le tue risorse di piattaforma e infrastruttura {{site.data.keyword.Bluemix_notm}}. 
+Se hai collegato i tuoi account di {{site.data.keyword.Bluemix_notm}} e dell'infrastruttura IBM Cloud (SoftLayer), ricevi una [fattura consolidata](/docs/customer-portal?topic=customer-portal-unifybillaccounts#unifybillaccounts) per le tue risorse di piattaforma e infrastruttura {{site.data.keyword.Bluemix_notm}}. 
 
 ## Posso stimare i miei costi?
 {: #cost_estimate}
 {: faq}
 
-Sì, vedi [Stima dei costi](/docs/billing-usage/estimating_costs.html#cost) e lo strumento [stimatore del costo ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/pricing/) per ulteriori informazioni. 
+Sì, vedi [Stima dei costi](/docs/billing-usage?topic=billing-usage-cost#cost). Tieni presente che alcuni costi non sono riflessi nella stima, come ad esempio il prezzo a livelli per un utilizzo orario aumentato. Per ulteriori informazioni, vedi [Cosa mi viene addebitato quando utilizzo {{site.data.keyword.containerlong_notm}}?](#charges).
 
 ## Posso visualizzare il mio utilizzo corrente? 
 {: #usage}
 {: faq}
 
-Puoi controllare il tuo utilizzo corrente e i totali mensili stimati per le tue risorse di piattaforma e infrastruttura {{site.data.keyword.Bluemix_notm}}. Per ulteriori informazioni, vedi [Visualizzazione del tuo utilizzo](/docs/billing-usage/viewing_usage.html#viewingusage). Per organizzare la tua fatturazione, puoi raggruppare le tue risorse con i [gruppi di risorse](/docs/resources/bestpractice_rgs.html#bp_resourcegroups). 
-
+Puoi controllare il tuo utilizzo corrente e i totali mensili stimati per le tue risorse di piattaforma e infrastruttura {{site.data.keyword.Bluemix_notm}}. Per ulteriori informazioni, vedi [Visualizzazione del tuo utilizzo](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage). Per organizzare la tua fatturazione, puoi raggruppare le tue risorse con i [gruppi di risorse](/docs/resources?topic=resources-bp_resourcegroups#bp_resourcegroups). 

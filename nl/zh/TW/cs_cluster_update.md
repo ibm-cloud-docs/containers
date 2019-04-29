@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-06"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-06"
 {:download: .download}
 
 
-
 # 更新叢集、工作者節點及附加程式
 {: #update}
 
@@ -29,24 +32,26 @@ lastupdated: "2018-12-06"
 ## 更新 Kubernetes 主節點
 {: #master}
 
-Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.html#version_types)。更新會影響 Kubernetes API 伺服器版本或 Kubernetes 主節點的其他元件。IBM 會更新修補程式版本，但您必須更新主節點的主要及次要版本。
+Kubernetes 會定期發行[主要、次要或修補程式更新](/docs/containers?topic=containers-cs_versions#version_types)。更新會影響 Kubernetes API 伺服器版本或 Kubernetes 主節點的其他元件。IBM 會更新修補程式版本，但您必須更新主節點的主要及次要版本。
 {:shortdesc}
 
 **如何知道何時更新主節點？**</br>
-在更新可用時，您會於 {{site.data.keyword.Bluemix_notm}} 主控台及 CLI 中收到通知，也可以檢查[支援的版本](cs_versions.html)頁面。
+在更新可用時，您會於 {{site.data.keyword.Bluemix_notm}} 主控台及 CLI 中收到通知，也可以檢查[支援的版本](/docs/containers?topic=containers-cs_versions)頁面。
 
 **主節點在最新版本後面可以有多少版本？**</br>
 IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kubernetes API 伺服器更新超過其現行版本的 2 個版本。
 
-例如，如果現行 Kubernetes API 伺服器版本是 1.7，而您要更新至 1.10，則必須先更新至 1.9。您可以強制進行更新，但更新三個以上次要版本可能會造成非預期結果或失敗。
+例如，如果現行 Kubernetes API 伺服器版本為 1.8，而您想要更新為 1.11，則必須先更新至 1.10。您可以強制進行更新，但更新三個以上次要版本可能會造成非預期結果或失敗。
 
 如果您的叢集是執行不受支援的 Kubernetes 版本，則可能需要強制更新。因此，請讓叢集保持最新狀態，以避免作業影響。
 
 **工作者節點所執行的版本可以比主節點還要新嗎？**</br>
-否。首先，[更新主節點](#update_master)為最新 Kubernetes 版本。然後，在叢集裡[更新工作者節點](#worker_node)。
+您的工作者節點無法執行比主節點更新的 `major.minor` Kubernetes 版本。首先，[更新主節點](#update_master)為最新 Kubernetes 版本。然後，在叢集裡[更新工作者節點](#worker_node)。
+
+工作者節點可以執行比主節點更新的修補程式版本，例如針對安全更新項目的工作者節點專用修補程式版本。
 
 **如何套用修補程式更新？**</br>
-依預設，主節點的修補程式更新會在幾天內自動套用，因此，主節點修補程式版本可能會先顯示為可用，再將它套用至您的主節點。更新自動化也會跳過處於性能不佳狀態或目前正在進行作業的叢集。有時，IBM 可能會停用特定主節點修正套件的自動更新，例如只有在主節點從某個次要版本更新為另一個次要版本時才需要的修補程式。在其中任何情況下，您可以[檢查版本變更日誌](cs_versions_changelog.html)，以找出任何潛在的影響，並選擇自行安全地使用 `ibmcloud ks cluster-update` [指令](cs_cli_reference.html#cs_cluster_update)，而不需要等待套用更新自動化。
+依預設，主節點的修補程式更新會在幾天內自動套用，因此，主節點修補程式版本可能會先顯示為可用，再將它套用至您的主節點。更新自動化也會跳過處於性能不佳狀態或目前正在進行作業的叢集。有時，IBM 可能會停用特定主節點修正套件的自動更新，例如只有在主節點從某個次要版本更新為另一個次要版本時才需要的修補程式。在其中任何情況下，您可以[檢查版本變更日誌](/docs/containers?topic=containers-changelog)，以找出任何潛在的影響，並選擇自行安全地使用 `ibmcloud ks cluster-update` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)，而不需要等待套用更新自動化。
 
 與主節點不同，您必須更新每個修補程式版本的工作者節點。
 
@@ -66,17 +71,17 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 圖 1. 更新 Kubernetes 主節點程序圖
 
 {: #update_master}
-開始之前，請確定您具有[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
+開始之前，請確定您具有[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-users#platform)。
 
 若要更新 Kubernetes 主節點的_主要_ 或_次要_ 版本，請執行下列動作：
 
-1.  檢閱 [Kubernetes 變更](cs_versions.html)，並更新標示為_在主節點之前更新_ 的任何項目。
+1.  檢閱 [Kubernetes 變更](/docs/containers?topic=containers-cs_versions)，並更新標示為_在主節點之前更新_ 的任何項目。
 
-2.  使用 {{site.data.keyword.Bluemix_notm}} 主控台或執行 CLI `ibmcloud ks cluster-update` [指令](cs_cli_reference.html#cs_cluster_update)，來更新 Kubernetes API 伺服器及關聯的 Kubernetes 主節點元件。
+2.  使用 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/login)或執行 CLI `ibmcloud ks cluster-update` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)，來更新 Kubernetes API 伺服器及關聯的 Kubernetes 主節點元件。
 
-3.  等待幾分鐘，然後確認更新已完成。請檢閱「{{site.data.keyword.Bluemix_notm}} 儀表板」上的 Kubernetes API 伺服器版本，或執行 `ibmcloud ks clusters`。
+3.  等待幾分鐘，然後確認更新已完成。在 {{site.data.keyword.Bluemix_notm}} 叢集儀表板上檢閱 Kubernetes API 伺服器版本，或執行 `ibmcloud ks clusters`。
 
-4.  安裝符合在 Kubernetes 主節點中執行的 Kubernetes API 伺服器版本的 [`kibectl cli`](cs_cli_install.html#kubectl) 版本。
+4.  安裝符合在 Kubernetes 主節點中執行的 Kubernetes API 伺服器版本的 [`kibectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) 版本。
 
 當 Kubernetes API 伺服器更新完成時，您可以更新工作者節點。
 
@@ -92,31 +97,32 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 **應用程式在更新期間會發生什麼情況？**</br>
 如果您在更新的工作者節點上進行部署時執行應用程式，則會將應用程式重新排定至叢集裡的其他工作者節點。這些工作者節點可能位於不同的工作者節點儲存區中，或者，如果您有獨立式工作者節點，則可能會將應用程式排定至獨立式工作者節點。若要避免應用程式關閉，您必須確定叢集裡有足夠的容量可以執行工作負載。
 
-**如何控制更新期間的給定時間有多少個工作者節點關閉？**
-如果您需要啟動並執行所有工作者節點，請考慮[調整工作者節點儲存區大小](cs_cli_reference.html#cs_worker_pool_resize)或[新增獨立式工作者節點](cs_cli_reference.html#cs_worker_add)以新增更多工作者節點。更新完成之後，即可移除其他工作者節點。
+**如何控制更新期間的給定時間有多少個工作者節點關閉？**</br>
+如果您需要啟動並執行所有工作者節點，請考慮[調整工作者節點儲存區大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[新增獨立式工作者節點](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add)以新增更多工作者節點。更新完成之後，即可移除其他工作者節點。
 
 此外，您可以建立 Kubernetes 配置對映，以指定在更新期間的某個時間可能無法使用的工作者節點數目上限。工作者節點是透過工作者節點標籤所識別。您可以使用已新增至工作者節點的 IBM 提供的標籤或自訂標籤。
 
 **我選擇不要定義配置對映的話，會發生什麼情況？**</br>
-未定義配置對映時，會使用預設值。依預設，在每個叢集裡，您所有的工作者節點最多會有 20% 在更新處理程序期間無法使用。
+未定義配置對映時，會使用預設值。依預設，在每個叢集中，您所有的工作者節點最多會有 20% 在更新處理程序期間無法使用。
 
 **開始之前**：
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 - [更新 Kubernetes 主節點](#master)。工作者節點 Kubernetes 版本不得高於在 Kubernetes 主節點中執行的 Kubernetes API 伺服器版本。
-- 進行 [Kubernetes 變更](cs_versions.html)中標示為_在主節點之後更新_ 的所有變更。
-- 如果您要套用修補程式更新，請檢閱 [Kubernetes 版本變更日誌](cs_versions_changelog.html#changelog)。
-- 確定您具有[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。</br>
+- 進行 [Kubernetes 變更](/docs/containers?topic=containers-cs_versions)中標示為_在主節點之後更新_ 的所有變更。
+- 如果您要套用修補程式更新，請檢閱 [Kubernetes 版本變更日誌](/docs/containers?topic=containers-changelog#changelog)。
+- 確定您具有[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-users#platform)。</br>
 
-更新工作者節點可能會導致應用程式及服務關閉。您的工作者節點機器會重新安裝映像，而且如果資料不是[儲存在 Pod 之外](cs_storage_planning.html#persistent_storage_overview)即會被刪除。
+更新工作者節點可能會導致應用程式及服務關閉。您的工作者節點機器會重新安裝映像，而且如果資料不是[儲存在 Pod 之外](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)即會被刪除。
 {: important}
 
+{: #worker-up-configmap}
 **若要建立配置對映以及更新工作者節點**，請執行下列動作：
 
 1.  列出可用的工作者節點，並記下其專用 IP 位址。
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
-    ```
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
+        ```
     {: pre}
 
 2. 檢視工作者節點的標籤。您可以在 CLI 輸出的 **Labels** 區段中找到工作者節點標籤。每個標籤都包含 `NodeSelectorKey` 及 `NodeSelectorValue`。
@@ -226,16 +232,16 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
    ```
    {: pre}
 
-5. 驗證已建立配置對映。
-   ```
-   kubectl get configmap --namespace kube-system
-   ```
-   {: pre}
+5.  驗證已建立配置對映。
+    ```
+    kubectl get configmap --namespace kube-system
+    ```
+    {: pre}
 
 6.  更新工作者節點。
 
     ```
-    ibmcloud ks worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
+    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -251,12 +257,35 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
    ```
    {: pre}
 
-9. 驗證您沒有重複的工作者節點。在部分情況下，較舊的叢集可能在更新之後將重複的工作者節點列為 **NotReady** 狀態。若要移除重複項目，請參閱[疑難排解](cs_troubleshoot_clusters.html#cs_duplicate_nodes)。
+9. 驗證您沒有重複的工作者節點。在部分情況下，較舊的叢集可能在更新之後將重複的工作者節點列為 **`NotReady`** 狀態。若要移除重複項目，請參閱[疑難排解](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes)。
 
 後續步驟：
-  - 對其他工作者節點儲存區重複更新處理程序。
-  - 通知在叢集內工作的開發人員，將 `kubectl` CLI 更新至 Kubernetes 主節點的版本。
-  - 如果 Kubernetes 儀表板未顯示使用率圖形，則會[刪除 `kudbe-dashboard` Pod](cs_troubleshoot_health.html#cs_dashboard_graphs)。
+-   對其他工作者節點儲存區重複更新處理程序。
+-   通知在叢集內工作的開發人員，將 `kubectl` CLI 更新至 Kubernetes 主節點的版本。
+-   如果 Kubernetes 儀表板未顯示使用率圖形，則會[刪除 `kudbe-dashboard` Pod](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs)。
+
+
+### 在主控台更新工作者節點
+{: #worker_up_console}
+
+第一次設定配置對映之後，您可以接著使用 {{site.data.keyword.Bluemix_notm}} 主控台來更新工作者節點。
+{: shortdesc}
+
+開始之前：
+*   [設定配置對映](#worker_node)以控制如何更新工作者節點。
+*   [更新 Kubernetes 主節點](#master)。工作者節點 Kubernetes 版本不得高於在 Kubernetes 主節點中執行的 Kubernetes API 伺服器版本。
+*   進行 [Kubernetes 變更](/docs/containers?topic=containers-cs_versions)中標示為_在主節點之後更新_ 的所有變更。
+*   如果您要套用修補程式更新，請檢閱 [Kubernetes 版本變更日誌](/docs/containers?topic=containers-changelog#changelog)。
+*   確定您具有[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-users#platform)。</br>
+
+更新工作者節點可能會導致應用程式及服務關閉。您的工作者節點機器會重新安裝映像，而且如果資料不是[儲存在 Pod 之外](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)即會被刪除。
+{: important}
+
+若要從主控台更新工作者節點，請執行下列動作：
+1.  從 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/)功能表 ![功能表圖示](../icons/icon_hamburger.svg "功能表圖示") 中，按一下 **Kubernetes**。
+2.  從**叢集**頁面中，按一下您的叢集。
+3.  從**工作者節點**標籤中，選取您要更新的每一個工作者節點的勾選框。動作列顯示在表格標頭列上方。
+4.  從動作列中，按一下**更新 Kubernetes**。
 
 <br />
 
@@ -269,9 +298,11 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 {: shortdesc}
 
 開始之前：
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
-- 如果您在工作者節點上儲存資料，則如果資料不是[儲存在工作者節點之外](cs_storage_planning.html#persistent_storage_overview)即會被刪除。
-- 確定您具有[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- 如果您在工作者節點上儲存資料，則如果資料不是[儲存在工作者節點之外](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)即會被刪除。
+- 確定您具有[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-users#platform)。
+
+若要更新機型，請執行下列動作：
 
 1. 列出可用的工作者節點，並記下其專用 IP 位址。
    - **針對工作者節點儲存區中的工作者節點**：
@@ -283,26 +314,26 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 
      2. 列出工作者節點儲存區中的工作者節點。
         ```
-        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <pool_name>
+        ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
         ```
         {: pre}
 
      3. 取得工作者節點的詳細資料，並記下區域、專用及公用 VLAN ID。
         ```
-        ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> <worker_ID>
         ```
         {: pre}
 
    - **已淘汰：針對獨立式工作者節點**：
      1. 列出可用的工作者節點。
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
      2. 取得工作者節點的詳細資料，並記下區域、專用及公用 VLAN ID。
         ```
-        ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_ID>
         ```
         {: pre}
 
@@ -326,7 +357,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
         ```
         {: pre}
 
-     3. 將區域新增至您先前擷取的工作者節點儲存區。當您新增區域時，會在區域中佈建工作者節點儲存區中所定義的工作者節點，並考慮用於排定未來的工作負載。如果您要將工作者節點分散到多個區域，請選擇[具有多區域功能的區域](cs_regions.html#zones)。
+     3. 將區域新增至您先前擷取的工作者節點儲存區。當您新增區域時，會在區域中佈建工作者節點儲存區中所定義的工作者節點，並考慮用於排定未來的工作負載。如果您要將工作者節點分散到多個區域，請選擇[具有多區域功能的區域](/docs/containers?topic=containers-regions-and-zones#zones)。
         ```
         ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
         ```
@@ -340,7 +371,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 
 4. 等待部署工作者節點。
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -362,13 +393,13 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 
    - **已淘汰：針對獨立式工作者節點**：
        ```
-      ibmcloud ks worker-rm <cluster_name> <worker_node>
+      ibmcloud ks worker-rm --cluster <cluster_name> --worker <worker_node>
       ```
       {: pre}
 
 6. 驗證已從叢集移除工作者節點。
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -409,7 +440,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **是否可以安裝預設值以外的其他附加程式？**</br>
-是。{{site.data.keyword.containerlong_notm}} 提供可從中選擇的其他附加程式，以將功能新增至叢集。例如，您可能要[使用 Helm 圖表](cs_integrations.html#helm)來安裝[區塊儲存空間外掛程式](cs_storage_block.html#install_block)、[Istio](cs_tutorials_istio.html#istio_tutorial) 或 [strongSwan VPN](cs_vpn.html#vpn-setup)。您必須遵循 Helm 圖表的更新指示，分別更新每個附加程式。
+是。{{site.data.keyword.containerlong_notm}} 提供可從中選擇的其他附加程式，以將功能新增至叢集。例如，您可能要[使用 Helm 圖表](/docs/containers?topic=containers-integrations#helm)來安裝[區塊儲存空間外掛程式](/docs/containers?topic=containers-block_storage#install_block)、[Istio](/docs/containers?topic=containers-istio) 或 [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup)。您必須遵循 Helm 圖表的更新指示，分別更新每個附加程式。
 
 ### 管理用於記載附加程式之 Fluentd 的自動更新
 {: #logging}
@@ -417,10 +448,10 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 若要變更記載或過濾器配置，Fluentd 附加程式必須為最新版本。依預設，會啟用自動更新附加程式。
 {: shortdesc}
 
-您可以使用下列方式，管理 Fluentd 附加程式的自動更新。**附註**：若要執行下列指令，您必須具有叢集的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
+您可以使用下列方式，管理 Fluentd 附加程式的自動更新。**附註**：若要執行下列指令，您必須具有叢集的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-users#platform)。
 
-* 執行 `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [指令](cs_cli_reference.html#cs_log_autoupdate_get)，檢查是否已啟用自動更新。
-* 執行 `ibmcloud ks logging-autoupdate-disable` [指令](cs_cli_reference.html#cs_log_autoupdate_disable)，來停用自動更新。
+* 執行 `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)，檢查是否已啟用自動更新。
+* 執行 `ibmcloud ks logging-autoupdate-disable` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable)，來停用自動更新。
 * 如果自動更新已停用，但您需要變更配置，則有兩個選項：
     * 開啟 Fluentd Pod 的自動更新。
         ```
@@ -491,18 +522,18 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
     private-crb110acca09414e88a44227b87576ceea-alb1   enabled   private   10.130.5.78    mex01   ingress:350/ingress-auth:192*
     public-crb110acca09414e88a44227b87576ceea-alb1    enabled   public    169.57.1.110   mex01   ingress:350/ingress-auth:192*
 
-    * 有 ALB Pod 的更新可供使用。在更新之前，請檢查最新版本的任何可能的非連續變更：https://console.bluemix.net/docs/containers/cs_cluster_update.html#alb
+    * 有 ALB Pod 的更新可供使用。在更新之前，請檢閱最新版本任何可能的非連續變更：https://cloud.ibm.com/docs/containers?topic=containers-update#alb
     ```
     {: screen}
 
-您可以使用下列方式，管理 Ingress ALB 附加程式的自動更新。**附註**：若要執行下列指令，您必須具有叢集的[**編輯者**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
+您可以使用下列方式，管理 Ingress ALB 附加程式的自動更新。**附註**：若要執行下列指令，您必須具有叢集的[**編輯者**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-users#platform)。
 * 停用自動更新。
     ```
     ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
     ```
     {: pre}
 * 手動更新 Ingress ALB 附加程式。
-    1. 如果有可用的更新項目，且您要更新附加程式，請先檢查[最新版 Ingress ALB 附加程式的變更日誌](cs_versions_addons.html#alb_changelog)，以驗證任何可能的非連續變更。
+    1. 如果有可用的更新項目，且您要更新附加程式，請先檢查[最新版 Ingress ALB 附加程式的變更日誌](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)，以驗證任何可能的非連續變更。
     2. 強制一次性更新 ALB Pod。叢集裡的所有 ALB Pod 都會更新至最新的建置版本。您無法更新個別 ALB，也無法選擇要將附加程式更新至哪個建置。自動更新會保留停用狀態。
         ```
         ibmcloud ks alb-update --cluster <cluster_name_or_ID>
@@ -517,7 +548,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
         ```
         ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
         ```
-        {: pre}
+    {: pre}
 
 <br />
 
@@ -538,12 +569,14 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 <img src="images/cs_cluster_migrate.png" alt="將叢集從獨立式工作者節點更新為工作者節點儲存區" width="600" style="width:600px; border-style: none"/>
 
 開始之前：
-- 確定您具有叢集的[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+- 確定您具有叢集的[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-users#platform)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+
+若要將獨立式工作者節點更新至工作者節點儲存區，請執行下列動作：
 
 1. 列出叢集裡的現有獨立式工作者節點，並記下 **ID**、**機型**及**專用 IP**。
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -553,7 +586,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
    ```
    {: pre}
 
-3. 列出可用的區域，並決定要在哪裏佈建工作者節點儲存區中的工作者節點。若要檢視在其中佈建獨立式工作者節點的區域，請執行 `ibmcloud ks cluster-get <cluster_name_or_ID>`。如果您要將工作者節點分散到多個區域，請選擇[具有多區域功能的區域](cs_regions.html#zones)。
+3. 列出可用的區域，並決定要在哪裏佈建工作者節點儲存區中的工作者節點。若要檢視在其中佈建獨立式工作者節點的區域，請執行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`。如果您要將工作者節點分散到多個區域，請選擇[具有多區域功能的區域](/docs/containers?topic=containers-regions-and-zones#zones)。
    ```
    ibmcloud ks zones
    ```
@@ -561,7 +594,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 
 4. 列出您在前一個步驟中選擇的區域的可用 VLAN。如果您在該區域中還沒有 VLAN，則會在將區域新增至工作者節點儲存區時自動為您建立 VLAN。
    ```
-   ibmcloud ks vlans <zone>
+   ibmcloud ks vlans --zone <zone>
    ```
    {: pre}
 
@@ -574,17 +607,17 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
       ```
       {: pre}
 
-   2. **將區域新增至多個工作者節點儲存區**：將多個工作者節點儲存區新增至 `ibmcloud ks zone-add` 指令。若要將多個工作者節點儲存區新增至區域，您在該區域中必須要有現有專用及公用 VLAN。如果您在該區域中沒有公用及專用 VLAN，請考慮先將該區域新增至一個工作者節點儲存區，以為您建立公用及專用 VLAN。然後，您可以將該區域新增至其他工作者節點儲存區。</br></br>請務必將所有工作者節點儲存區中的工作者節點佈建至所有區域，以確保您的叢集在各區域之間保持平衡。如果您要對不同的工作者節點儲存區使用不同的 VLAN，則請針對要用於工作者節點儲存區的 VLAN 重複這個指令。如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
-      ```
+   2. **將區域新增至多個工作者節點儲存區**：將多個工作者節點儲存區新增至 `ibmcloud ks zone-add` 指令。若要將多個工作者節點儲存區新增至區域，您在該區域中必須要有現有專用及公用 VLAN。如果您在該區域中沒有公用及專用 VLAN，請考慮先將該區域新增至一個工作者節點儲存區，以為您建立公用及專用 VLAN。然後，您可以將該區域新增至其他工作者節點儲存區。</br></br>請務必將所有工作者節點儲存區中的工作者節點佈建至所有區域，以確保您的叢集在各區域之間保持平衡。如果您要對不同的工作者節點儲存區使用不同的 VLAN，則請針對要用於工作者節點儲存區的 VLAN 重複這個指令。如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **將多個區域新增至工作者節點儲存區**：向不同的區域重複 `ibmcloud ks zone-add` 指令，並指定您要在該區域中佈建的工作者節點儲存區。將其他區域新增至叢集，即可將叢集從單一區域叢集變更為[多區域叢集](cs_clusters_planning.html#multizone)。
+   3. **將多個區域新增至工作者節點儲存區**：向不同的區域重複 `ibmcloud ks zone-add` 指令，並指定您要在該區域中佈建的工作者節點儲存區。將其他區域新增至叢集，即可將叢集從單一區域叢集變更為[多區域叢集](/docs/containers?topic=containers-plan_clusters#multizone)。
 
 6. 等待在每個區域中部署工作者節點。
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
    工作者節點狀況變更為**正常**時，部署已完成。
@@ -605,7 +638,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
       kubectl get nodes
       ```
       {: pre}
-      如果狀態顯示 **SchedulingDisabled**，表示工作者節點已停用 Pod 排程。
+如果狀態顯示 **`SchedulingDisabled`**，表示工作者節點已停用 Pod 排程。
    4. 強制從獨立式工作者節點移除 Pod，並將其重新排定至其餘 uncordon 處理過的獨立式工作者節點以及工作者節點儲存區中的工作者節點。
       ```
       kubectl drain <worker_name> --ignore-daemonsets
@@ -615,7 +648,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 
    5. 移除獨立式工作者節點。使用利用 `ibmcloud ks workers <cluster_name_or_ID>` 指令擷取到的工作者節點 ID。
       ```
-      ibmcloud ks worker-rm <cluster_name_or_ID> <worker_ID>
+      ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_ID>
       ```
       {: pre}
    6. 重複這些步驟，直到移除所有獨立式工作者節點。
@@ -623,111 +656,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 
 **下一步為何？**
 </br>
-既然您已將叢集更新成使用工作者節點儲存區，則可以藉由將其他區域新增至叢集來改善可用性。將其他區域新增至叢集，即可將叢集從單一區域叢集變更為[多區域叢集](cs_clusters_planning.html#ha_clusters)。當您將單一區域叢集變更為多區域叢集時，Ingress 網域會從 `<cluster_name>.<region>.containers.mybluemix.net` 變更為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。現有 Ingress 網域仍然有效，而且可以用來將要求傳送至應用程式。
+既然您已將叢集更新成使用工作者節點儲存區，則可以藉由將其他區域新增至叢集來改善可用性。將其他區域新增至叢集，即可將叢集從單一區域叢集變更為[多區域叢集](/docs/containers?topic=containers-plan_clusters#ha_clusters)。當您將單一區域叢集變更為多區域叢集時，Ingress 網域會從 `<cluster_name>.<region>.containers.mybluemix.net` 變更為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。現有 Ingress 網域仍然有效，而且可以用來將要求傳送至應用程式。
 
 <br />
 
-
-## 將叢集 DNS 提供者設為 CoreDNS
-{: #dns}
-
-叢集裡的每個服務都會獲指派「網域名稱系統 (DNS)」名稱，而叢集 DNS 提供者會登錄此名稱，以解析 DNS 要求。預設叢集 DNS 提供者為 Kubernetes DNS (KubeDNS)。不過，對於執行 Kuberneges 1.12 版或更新版本的叢集，您可以改為選擇使用 [CoreDNS ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://coredns.io/)。您可能會使用 CoreDNS 作為早期採用者，或在 Kubernetes 專案移動，以將 KubeDNS 取代為 CoreDNS 時，測試出潛在的影響。如需服務和 Pod 之 DNS 的相關資訊，請參閱 [ Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)。
-{: shortdesc}
-
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
-
-1.  判定現行叢集 DNS 提供者。在下列範例中，KubeDNS 是現行叢集 DNS 提供者。
-    ```
-    kubectl cluster-info
-    ```
-    {: pre}
-
-輸出範例：
-        ```
-    ...
-    KubeDNS is running at https://c2.us-south.containers.cloud.ibm.com:20190/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-    ...
-    ```
-    {: screen}
-2.  將 CoreDNS 設為叢集 DNS 提供者。
-
-    1.  **選用**：如果您已在 `koky-system` 名稱空間中自訂 `kuxed-dns` ConfigMap，請將任何自訂作業傳送至 `kube-system` 名稱空間中的 `coredfns` ConfigMap。請注意，語法不同於 `kube-dns` 和 `coredns` ConfigMap。如需範例，請參閱 CoreDNS 文件中的[透過 Kubeadm 安裝 CoreDNS ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/)。
-
-    2.  縮減 KubeDNS autoscaler 部署。
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
-        ```
-        {: pre}
-
-    3.  檢查並等待刪除 Pod。
-        ```
-        kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
-        ```
-        {: pre}
-
-    4.  縮減 KubeDNS 部署。
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
-        ```
-        {: pre}
-
-    5.  擴增 CoreDNS autoscaler 部署。
-        ```
-        kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
-        ```
-        {: pre}
-
-    6.  標示並註釋 CoreDNS 的叢集 DNS 服務。
-        ```
-        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port=9153
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
-        ```
-        {: pre}
-3.  **選用**：反轉先前的步驟，以切換回 KebeDNS 作為叢集 DNS 提供者。
-
-    1.  **選用**：如果您已在 `koky-system` 名稱空間中自訂 `coredns` ConfigMap，請將任何自訂作業傳送至 `kube-system` 名稱空間中的 `kube-dns` ConfigMap。請注意，語法不同於 `kube-dns` 和 `coredns` ConfigMap。如需範例，請參閱 CoreDNS 文件中的[透過 Kubeadm 安裝 CoreDNS ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/)。
-
-    2.  縮減 CoreDNS autoscaler 部署。
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
-        ```
-        {: pre}
-
-    3.  檢查並等待刪除 Pod。
-        ```
-        kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
-        ```
-        {: pre}
-
-    4.  縮減 CoreDNS 部署。
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 coredns
-        ```
-        {: pre}
-
-    5.  擴增 KubeDNS autoscaler 部署。
-        ```
-        kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
-        ```
-        {: pre}
-
-    6.  標示並註釋 KubeDNS 的叢集 DNS 服務。
-        ```
-        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port-
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape-
-        ```
-        {: pre}

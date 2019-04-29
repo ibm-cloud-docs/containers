@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # Descrizione dei principi di base dell'archiviazione Kubernetes
 {: #kube_concepts}
 
@@ -30,13 +35,13 @@ Prima di iniziare con il provisioning di archiviazione, è importante comprender
 
 La seguente immagine mostra i componenti di archiviazione in un cluster Kubernetes.
 
-<img src="images/cs_storage_pvc_pv.png" alt="Componenti di archiviazione in un cluster" width="300" style="width: 300px; border-style: none"/>
+<img src="images/cs_storage_pvc_pv.png" alt="Componenti di archiviazione in un cluster" width="275" style="width: 275px; border-style: none"/>
 
-- **Cluster**</br> Per impostazione predefinita, ogni cluster è configurato con un plug-in per [eseguire il provisioning di archiviazione file](cs_storage_file.html#add_file). Puoi scegliere di installare altri componenti aggiuntivi, come quello per l'[archiviazione blocchi](cs_storage_block.html). Per utilizzare l'archiviazione in un cluster, devi creare una attestazione del volume persistente (o PVC, persistent volume claim), un volume persistente e un'istanza di archiviazione fisica. Quando elimini il cluster, hai l'opzione di eliminare le istanze di archiviazione correlate.
+- **Cluster**</br> Per impostazione predefinita, ogni cluster è configurato con un plug-in per [eseguire il provisioning di archiviazione file](/docs/containers?topic=containers-file_storage#add_file). Puoi scegliere di installare altri componenti aggiuntivi, come quello per l'[archiviazione blocchi](/docs/containers?topic=containers-block_storage). Per utilizzare l'archiviazione in un cluster, devi creare una attestazione del volume persistente (o PVC, persistent volume claim), un volume persistente e un'istanza di archiviazione fisica. Quando elimini il cluster, hai l'opzione di eliminare le istanze di archiviazione correlate.
 - **Applicazione**</br> Per leggere dalla, e scrivere nella, tua istanza di archiviazione, devi montare l'attestazione del volume persistente (o PVC, persistent volume claim) nella tua applicazione. Tipi di archiviazione differenti hanno regole di lettura-scrittura differenti. Ad esempio, puoi montare più pod nella stessa PVC per l'archiviazione file. L'archiviazione blocchi è fornita con una modalità di accesso RWO (ReadWriteOnce) e quindi puoi montare l'archiviazione solo in un singolo pod.
 - **PVC (ossia persistent volume claim, attestazione del volume persistente)** </br> Una PVC è una richiesta di eseguire il provisioning dell'archiviazione persistente con un tipo e a una configurazione specifici. Per specificare la varietà di archiviazione persistente che desideri, utilizzi le [classi di archiviazione Kubernetes](#storageclasses). L'amministratore del cluster può definire le classi di archiviazione oppure puoi scegliere da una delle classi di archiviazione predefinite in {{site.data.keyword.containerlong_notm}}. Quando crei una PVC, la richiesta viene inviata al provider di archiviazione {{site.data.keyword.Bluemix}}. A seconda della configurazione definita nella classe di archiviazione, il dispositivo di archiviazione fisico viene ordinato e ne viene eseguito il provisioning nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Se la configurazione richiesta non esiste, l'archiviazione non viene creata.
 - **PV (ossia persistent volume, volume persistente)** </br> Un PV è un'istanza di archiviazione virtuale che viene aggiunta come un volume al cluster. Il PV punta a un dispositivo di archiviazione fisico nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) e astrae l'API utilizzata per comunicare con il dispositivo di archiviazione. Per montare un PV in un'applicazione, devi disporre di una PVC corrispondente. I PV montati si presentano come una cartella all'interno del file system del contenitore.
-- **Archiviazione fisica** </br> Un'istanza di archiviazione fisica che puoi utilizzare per conservare i tuoi dati. {{site.data.keyword.containerlong_notm}} fornisce l'alta disponibilità per le istanze di archiviazione fisica. Tuttavia, dei dati archiviati in un'istanza di archiviazione fisica non viene eseguito il backup automaticamente. A seconda del tipo di archiviazione che usi, esistono metodi differenti per configurare le soluzioni di backup e ripristino.
+- **Archiviazione fisica** </br> Un'istanza di archiviazione fisica che puoi utilizzare per conservare i tuoi dati. Degli esempi di archiviazione fisica in {{site.data.keyword.Bluemix_notm}} includono [File Storage](/docs/containers?topic=containers-file_storage#file_storage), [Block Storage](/docs/containers?topic=containers-block_storage#block_storage), [Object Storage](/docs/containers?topic=containers-object_storage#object_storage) e l'archiviazione di nodo di lavoro locale che puoi utilizzare come un'archiviazione SDS con [Portworx](/docs/containers?topic=containers-portworx#portworx). {{site.data.keyword.Bluemix_notm}} fornisce l'alta disponibilità per le istanze di archiviazione fisica. Tuttavia, dei dati archiviati in un'istanza di archiviazione fisica non viene eseguito il backup automaticamente. A seconda del tipo di archiviazione che usi, esistono metodi differenti per configurare le soluzioni di backup e ripristino.
 
 Per ulteriori informazioni su come creare e utilizzare le PVC, i PV e il dispositivo di archiviazione fisica, consulta:
 - [Provisioning dinamico](#dynamic_provisioning)
@@ -50,7 +55,7 @@ Utilizza il provisioning dinamico se vuoi concedere agli sviluppatori la libert�
 
 **Come funziona?**</br>
 
-Il provisioning dinamico è una funzione nativa per Kubernetes e che consente a uno sviluppatore di cluster di ordinare archiviazione con un tipo e una configurazione predefiniti senza conoscere tutti i dettagli relativi alla modalità di provisioning del dispositivo di archiviazione fisico. Per astrarre i dettagli per lo specifico tipo di archiviazione, l'amministratore del cluster deve creare delle [classi di archiviazione](#storageclasses), che possono essere utilizzate dallo sviluppatore, oppure utilizzare le classi di archiviazione fornite con i plug-in di archiviazione {{site.data.keyword.Bluemix}}.
+Il provisioning dinamico è una funzione nativa per Kubernetes che consente a uno sviluppatore di cluster di ordinare archiviazione con un tipo e una configurazione predefiniti senza conoscere tutti i dettagli relativi alla modalità di provisioning del dispositivo di archiviazione fisico. Per astrarre i dettagli per lo specifico tipo di archiviazione, l'amministratore del cluster deve creare delle [classi di archiviazione](#storageclasses), che possono essere utilizzate dallo sviluppatore, oppure utilizzare le classi di archiviazione fornite con i plug-in di archiviazione {{site.data.keyword.Bluemix}}.
 
 Per ordinare l'archiviazione, devi creare una PVC. La PVC determina la specifica per l'archiviazione di cui vuoi eseguire il provisioning. Dopo che la PVC è stata creata, il dispositivo di archiviazione e il PV vengono creati automaticamente per tuo conto.  
 
@@ -73,8 +78,8 @@ Esamina i seguenti casi d'uso comuni per il provisioning dinamico.
 3. **Crea ed elimina l'archiviazione frequentemente:** hai un'applicazione oppure hai configurato una pipeline di fornitura continua che crea e rimuove regolarmente l'archiviazione persistente. L'archiviazione persistente di cui viene eseguito il provisioning in modo dinamico con una classe di archiviazione di non conservazione può essere rimossa eliminando la PVC.
 
 Per ulteriori informazioni su come eseguire dinamicamente il provisioning dell'archiviazione persistente, vedi:
-- [Archiviazione file](cs_storage_file.html#add_file)
-- [Archiviazione blocchi](cs_storage_block.html#add_block)
+- [Archiviazione file](/docs/containers?topic=containers-file_storage#add_file)
+- [Archiviazione blocchi](/docs/containers?topic=containers-block_storage#add_block)
 
 ## Provisioning statico
 {: #static_provisioning}
@@ -84,7 +89,7 @@ Se hai un dispositivo di archiviazione persistente esistente nel tuo account del
 
 **Come funziona?**</br>
 
-Il provisioning statico è una funzione nativa per Kubernetes e che consente agli amministratori del cluster di rendere i dispositivi di archiviazione esistenti disponibili per un cluster. In qualità di amministratore del cluster, devi conoscere i dettagli del dispositivo di archiviazione, le sue configurazioni supportate e le opzioni di montaggio.  
+Il provisioning statico è una funzione nativa per Kubernetes che consente agli amministratori del cluster di rendere i dispositivi di archiviazione esistenti disponibili per un cluster. In qualità di amministratore del cluster, devi conoscere i dettagli del dispositivo di archiviazione, le sue configurazioni supportate e le opzioni di montaggio.  
 
 Per rendere disponibile l'archiviazione esistente per un utente del cluster, devi creare manualmente il dispositivo di archiviazione, un PV e una PVC.  
 
@@ -104,12 +109,12 @@ La seguente immagine mostra come eseguire in modo statico il provisioning di arc
 Esamina i seguenti casi di utilizzo comuni per il provisioning statico di archiviazione persistente:
 1. **Rendi disponibili i dati conservati per il cluster:** hai eseguito il provisioning dell'archiviazione persistente con una classe di archiviazione retain utilizzando il provisioning dinamico. Hai rimosso la PVC ma il PV, l'archiviazione fisica nell'infrastruttura IBM Cloud (SoftLayer) e i dati continuano ad esistere. Vuoi accedere ai dati conservati da un'applicazione nel tuo cluster.
 2. **Utilizza un dispositivo di archiviazione esistente:** hai eseguito il provisioning dell'archiviazione persistente direttamente nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) e vuoi utilizzare questo dispositivo di archiviazione nel tuo cluster.
-3. **Condividi l'archiviazione persistente tra i cluster nella stessa zona:** hai eseguito il provisioning dell'archiviazione persistente per il tuo cluster. Per condividere la stessa istanza di archiviazione persistente con altri cluster nella stessa zona, devi creare manualmente il PV e la PVC corrispondente nell'altro cluster. **Nota:** la condivisione dell'archiviazione persistente tra i cluster è disponibile solo se il cluster e l'istanza di archiviazione si trovano nella stessa zona. 
+3. **Condividi l'archiviazione persistente tra i cluster nella stessa zona:** hai eseguito il provisioning dell'archiviazione persistente per il tuo cluster. Per condividere la stessa istanza di archiviazione persistente con altri cluster nella stessa zona, devi creare manualmente il PV e la PVC corrispondente nell'altro cluster. **Nota:** la condivisione dell'archiviazione persistente tra i cluster è disponibile solo se il cluster e l'istanza di archiviazione si trovano nella stessa zona.
 4. **Condividi l'archiviazione persistente tra gli spazi dei nomi nello stesso cluster:** hai eseguito il provisioning dell'archiviazione persistente in uno spazio dei nomi del tuo cluster. Vuoi utilizzare la stessa istanza di archiviazione per un pod dell'applicazione distribuito in uno spazio dei nomi differente nel tuo cluster.
 
 Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione in modo statico, vedi:
-- [Archiviazione file](cs_storage_file.html#predefined_storageclass)
-- [Archiviazione blocchi](cs_storage_block.html#predefined_storageclass)
+- [Archiviazione file](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
+- [Archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 
 ## Classi di archiviazione
 {: #storageclasses}
@@ -117,11 +122,11 @@ Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione i
 Per eseguire il provisioning dell'archiviazione persistente in modo dinamico, devi definire il tipo e la configurazione dell'archiviazione che desideri.
 {: shortdesc}
 
-Una classe di archiviazione Kubernetes viene utilizzata per astrarre la piattaforma di archiviazione sottostante supportata in {{site.data.keyword.Bluemix_notm}} in modo che non sia necessario conoscere tutti i dettagli relativi alle dimensioni, all'IOPS o alle politiche di conservazione supportati per eseguire correttamente il provisioning dell'archiviazione persistente in un cluster. {{site.data.keyword.containerlong_notm}} fornisce classi di archiviazione predefinite per ogni tipo di archiviazione supportato. Ogni classe di archiviazione è progettata per astrarre il livello di archiviazione supportato fornendoti al tempo stesso la possibilità di decidere la dimensione, l'IOPS e la politica di conservazione che desideri.
+Una [classe di archiviazione Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/storage/storage-classes/) viene utilizzata per astrarre la piattaforma di archiviazione sottostante supportata in {{site.data.keyword.Bluemix_notm}} in modo che non sia necessario conoscere tutti i dettagli relativi alle dimensioni, all'IOPS o alle politiche di conservazione supportati per eseguire correttamente il provisioning dell'archiviazione persistente in un cluster. {{site.data.keyword.containerlong_notm}} fornisce classi di archiviazione predefinite per ogni tipo di archiviazione supportato. Ogni classe di archiviazione è progettata per astrarre il livello di archiviazione supportato fornendoti al tempo stesso la possibilità di decidere la dimensione, l'IOPS e la politica di conservazione che desideri.
 
 Per le specifiche della classe di archiviazione predefinite, vedi:
-- [Archiviazione file](cs_storage_file.html#storageclass_reference)
-- [Archiviazione blocchi](cs_storage_block.html#storageclass_reference)
+- [Archiviazione file](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+- [Archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
 
 Non trovi quello che stai cercando? Puoi anche creare la tua classe di archiviazione personalizzata per eseguire il provisioning del tipo di archiviazione che desideri.
 {: tip}
@@ -129,16 +134,16 @@ Non trovi quello che stai cercando? Puoi anche creare la tua classe di archiviaz
 ### Personalizzazione di una classe di archiviazione
 {: #customized_storageclass}
 
-Se non puoi utilizzare una delle classi di archiviazione fornite, puoi creare una tua classe di archiviazione personalizzata.
+Se non puoi utilizzare una delle classi di archiviazione fornite, puoi creare una tua classe di archiviazione personalizzata. Potresti voler personalizzare una classe di archiviazione per specificare configurazioni quali le opzioni di zona, il tipo di file system, il tipo di server o la [modalità di esecuzione del bind dei volumi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) (solo archiviazione blocchi).
 {: shortdesc}
 
 1. Crea una classe di archiviazione personalizzata. Puoi iniziare utilizzando una delle classi di archiviazione predefinite oppure controlla le nostre classi di archiviazione personalizzate di esempio.
    - Classi di archiviazione predefinite:
-     - [Archiviazione file](cs_storage_file.html#storageclass_reference)
-     - [Archiviazione blocchi](cs_storage_block.html#storageclass_reference)
+     - [Archiviazione file](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+     - [Archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
    - Classi di archiviazione personalizzate di esempio:
-     - [Archiviazione file](cs_storage_file.html#custom_storageclass)
-     - [Archiviazione blocchi](cs_storage_block.html#custom_storageclass)
+     - [Archiviazione file](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
+     - [Archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
 
 2. Crea la classe di archiviazione personalizzata.
    ```
@@ -153,8 +158,8 @@ Se non puoi utilizzare una delle classi di archiviazione fornite, puoi creare un
     {: pre}
 
 4. Crea un'attestazione del volume persistente (o PVC, persistent volume claim) per eseguire in modo dinamico il provisioning della tua classe di archiviazione personalizzata.
-   - [Archiviazione file](cs_storage_file.html#add_file)
-   - [Archiviazione blocchi](cs_storage_block.html#add_block)
+   - [Archiviazione file](/docs/containers?topic=containers-file_storage#add_file)
+   - [Archiviazione blocchi](/docs/containers?topic=containers-block_storage#add_block)
 
 5. Verifica che la tua PVC sia stata creata e associata a un volume persistente (o PV, persistent volume). Il completamento di questo processo potrebbe impiegare alcuni minuti.
    ```
@@ -165,10 +170,10 @@ Se non puoi utilizzare una delle classi di archiviazione fornite, puoi creare un
 ### Modifica o aggiornamento a una classe di archiviazione differente
 {: #update_storageclass}
 
-Quando esegui dinamicamente il provisioning dell'archiviazione persistente utilizzando una classe di archiviazione, esegui il provisioning dell'archiviazione persistente con una configurazione specifica. Non puoi modificare il nome della classe di archiviazione o il tipo di archiviazione di cui hai eseguito il provisioning. Tuttavia, hai la possibilità di ridimensionare la tua archiviazione come mostrato nella seguente tabella. 
+Quando esegui dinamicamente il provisioning dell'archiviazione persistente utilizzando una classe di archiviazione, esegui il provisioning dell'archiviazione persistente con una configurazione specifica. Non puoi modificare il nome della classe di archiviazione o il tipo di archiviazione di cui hai eseguito il provisioning. Tuttavia, hai la possibilità di ridimensionare la tua archiviazione come mostrato nella seguente tabella.
 {: shortdesc}
 
-<table> 
+<table>
 <caption>Panoramica delle opzioni di ridimensionamento per le soluzioni di archiviazione {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th>Soluzione di archiviazione</th>
@@ -177,11 +182,11 @@ Quando esegui dinamicamente il provisioning dell'archiviazione persistente utili
 <tbody>
 <tr>
 <td>Archiviazione file</td>
-<td>Puoi aumentare la dimensione di archiviazione e l'IOPS assegnato [modificando il tuo volume esistente](cs_storage_file.html#change_storage_configuration). </td>
+<td>Puoi aumentare la dimensione di archiviazione e l'IOPS assegnato [modificando il tuo volume esistente](/docs/containers?topic=containers-file_storage#file_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Archiviazione blocchi</td>
-<td>Puoi aumentare la dimensione di archiviazione e l'IOPS assegnato [modificando il tuo volume esistente](cs_storage_block.html#change_storage_configuration). </td>
+<td>Puoi aumentare la dimensione di archiviazione e l'IOPS assegnato [modificando il tuo volume esistente](/docs/containers?topic=containers-block_storage#block_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Archiviazione oggetti</td>
@@ -192,7 +197,7 @@ Quando esegui dinamicamente il provisioning dell'archiviazione persistente utili
 
 
 ## Preparazione dell'archiviazione esistente per l'utilizzo multizona con le etichette Kubernetes
-{: #multizone}
+{: #storage_multizone}
 
 Se hai aggiornato il tuo cluster da un cluster a zona singola a un cluster multizona e avevi dei volumi persistenti (o PV, persistent volume) esistenti, aggiungi le etichette di zona e regione Kubernetes ai tuoi PV. Le etichette garantiscono che i pod che montano questa archiviazione vengano distribuiti nella zona in cui si trova l'archiviazione persistente.
 {:shortdesc}
@@ -204,8 +209,8 @@ Utilizza uno script per trovare tutti i PV nel tuo cluster e applicare le etiche
 
 Prima di iniziare:
 - [Indirizza la CLI Kubernetes al
-cluster](cs_cli_install.html#cs_cli_configure).
-- Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
+cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Per aggiornare i PV esistenti:
 
@@ -277,5 +282,5 @@ Per aggiornare i PV esistenti:
 **Operazioni successive**
 
 Ora che hai etichettato i tuoi PV esistenti, puoi montare il PV al tuo cluster multizona. Per ulteriori informazioni, vedi i seguenti link.
-- Utilizza l'[archiviazione file NFS esistente](cs_storage_file.html#existing_file)
-- Utilizza l'[archiviazione blocchi esistente](cs_storage_block.html#existing_block)
+- Utilizza l'[archiviazione file NFS esistente](/docs/containers?topic=containers-file_storage#existing_file)
+- Utilizza l'[archiviazione blocchi esistente](/docs/containers?topic=containers-block_storage#existing_block)

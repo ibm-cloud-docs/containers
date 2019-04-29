@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -22,14 +26,13 @@ lastupdated: "2018-12-05"
 {:tsResolve: .tsResolve}
 
 
-
 # Resolución de problemas del almacenamiento del clúster
 {: #cs_troubleshoot_storage}
 
 Si utiliza {{site.data.keyword.containerlong}}, tenga en cuenta estas técnicas para solucionar problemas relacionados con el almacenamiento del clúster.
 {: shortdesc}
 
-Si tiene un problema más general, pruebe la [depuración del clúster](cs_troubleshoot.html).
+Si tiene un problema más general, pruebe la [depuración del clúster](/docs/containers?topic=containers-cs_troubleshoot).
 {: tip}
 
 ## En un clúster multizona, un volumen persistente no se puede montar en un pod
@@ -46,7 +49,7 @@ Para los clústeres multizona, los PV deben tener las siguientes etiquetas para 
 Los nuevos clústeres con agrupaciones de nodos trabajadores que pueden abarcar varias zonas etiquetan los PV de forma predeterminada. Si ha creado clústeres antes de que se hayan incorporado las agrupaciones de nodos trabajadores, debe añadir las etiquetas manualmente.
 
 {: tsResolve}
-[Actualice los PV en el clúster con las etiquetas de región y de zona](cs_storage_basics.html#multizone).
+[Actualice los PV en el clúster con las etiquetas de región y de zona](/docs/containers?topic=containers-kube_concepts#storage_multizone).
 
 <br />
 
@@ -66,9 +69,9 @@ El sistema de archivos del nodo trabajador es de sólo lectura.
 {: tsResolve}
 1.  Haga una copia de seguridad de los datos que puedan estar almacenados en el nodo trabajador o en los contenedores.
 2.  Para un arreglo a corto plazo para el nodo trabajador existente, recargue el nodo trabajador.
-    <pre class="pre"><code>ibmcloud ks worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
+    <pre class="pre"><code>ibmcloud ks worker-reload --cluster &lt;cluster_name&gt; --worker &lt;worker_ID&gt;</code></pre>
 
-Para un arreglo a largo plazo, [actualice el tipo de máquina de la agrupación de nodos trabajadores](cs_cluster_update.html#machine_type).
+Para un arreglo a largo plazo, [actualice el tipo de máquina de la agrupación de nodos trabajadores](/docs/containers?topic=containers-update#machine_type).
 
 <br />
 
@@ -78,7 +81,22 @@ Para un arreglo a largo plazo, [actualice el tipo de máquina de la agrupación 
 {: #nonroot}
 
 {: tsSymptoms}
-Después de [añadir almacenamiento NFS](cs_storage_file.html#app_volume_mount) a su despliegue, el despliegue de su contenedor falla. Al recuperar los registros del contenedor, podría ver errores como, "write-permission" o "do not have required permission". El pod falla y queda atascado en un ciclo de recarga.
+Después de [añadir almacenamiento NFS](/docs/containers?topic=containers-file_storage#app_volume_mount) a su despliegue, el despliegue de su contenedor falla. Al recuperar los registros del contenedor, podría ver errores como los siguientes. El pod falla y queda atascado en un ciclo de recarga.
+
+```
+write-permission
+```
+{: screen}
+
+```
+no tiene el permiso necesario
+```
+{: screen}
+
+```
+no se puede crear el directorio '/bitnami/mariadb/data': Permiso denegado
+```
+{: screen}
 
 {: tsCauses}
 De forma predeterminada, los usuarios no root no tienen permiso de escritura sobre la vía de acceso de montaje del volumen para el almacenamiento respaldado por NFS. Algunas imágenes comunes de app, como por ejemplo Jenkins y Nexus3, especifican un usuario no root que posee la vía de acceso de montaje en Dockerfile. Cuando se crea un contenedor desde este Dockerfile, la creación del contenedor falla debido a permisos insuficientes del usuario no root en la vía de acceso de montaje. Para otorgar permiso de escritura, puede modificar el Dockerfile para añadir temporalmente el usuario no root al grupo de usuarios root antes de cambiar los permisos de la vía de acceso de montaje, o utilizar un contenedor de inicialización.
@@ -92,7 +110,7 @@ Si utiliza un diagrama de Helm para desplegar la imagen, edite el despliegue de 
 Cuando se incluye un [contenedor de inicialización ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) en el despliegue, puede dar a un usuario no root especificado en el Dockerfile permisos de escritura para la vía de acceso de montaje del volumen dentro del contenedor. El contenedor de inicialización de inicia antes que el contenedor de la app. El contenedor de inicialización crea la vía de acceso de montaje del volumen dentro del contenedor, cambia la propiedad de la vía de acceso de montaje al usuario (no root) correcto y se cierra. A continuación, se inicia el contenedor de la app con el usuario no root que debe escribir en la vía de acceso de montaje. Dado que la vía de acceso ya es propiedad del usuario no root, la escritura en la vía de acceso de montaje se realiza correctamente. Si no desea utilizar un contenedor de inicialización, puede modificar el Dockerfile para añadir acceso de usuario no root al almacenamiento de archivos NFS.
 
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Abra el Dockerfile para la app y obtenga el ID de usuario (UID) y el ID de grupo (GID) del usuario al que desea dar permiso de escritura en la vía de acceso de montaje del volumen. En el ejemplo de un Dockerfile de Jenkins, la información es la siguiente:
     - UID: `1000`
@@ -147,7 +165,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
 
     ```
     initContainers:
-    - name: initContainer # Or you can replace with any name
+    - name: initcontainer # Or replace the name
       image: alpine:latest
       command: ["/bin/sh", "-c"]
       args:
@@ -278,17 +296,69 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
-Después de [añadir acceso de usuario no root al almacenamiento persistente](#nonroot) o desplegar un diagrama de Helm con un ID de usuario no root especificado, el usuario no puede grabar en el almacenamiento montado.
+Después de [añadir acceso de usuario no root al almacenamiento persistente](#nonroot) o de desplegar un diagrama de Helm con un ID de usuario no root especificado, el usuario no puede grabar en el almacenamiento montado.
 
 {: tsCauses}
 En la configuración del diagrama de Helm o el despliegue se especifica el [contexto de seguridad](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) para el ID de grupo (`fsGroup`) y el ID de usuario (`runAsUser`) del pod. Actualmente, {{site.data.keyword.containerlong_notm}} no soporta la especificación de `fsGroup` y sólo soporta que `runAsUser` se establezca como `0` (permisos root).
 
 {: tsResolve}
-Elimine los campos `securityContext` de la configuración para `fsGroup` y `runAsUser` de la imagen, despliegue o archivo de configuración de diagrama de Helm y vuelva a desplegar. Si tiene que cambiar la propiedad de la vía de acceso de montaje de `nobody`, [añada acceso de usuario non-root](#nonroot). Después de añadir [non-root initContainer](#nonroot), establezca `runAsUser` al nivel del contenedor, no a nivel de pod.
+Elimine los campos `securityContext` de la configuración para `fsGroup` y `runAsUser` de la imagen, despliegue o archivo de configuración de diagrama de Helm y vuelva a desplegar. Si tiene que cambiar la propiedad de la vía de acceso de montaje de `nobody`, [añada acceso de usuario non-root](#nonroot). Después de añadir [non-root `initContainer`](#nonroot), establezca `runAsUser` al nivel del contenedor, no a nivel de pod.
 
 <br />
 
 
+
+
+## Almacenamiento en bloque: cambio del almacenamiento en bloque a solo lectura
+{: #readonly_block}
+
+{: tsSymptoms}
+Es posible que
+note los siguientes síntomas:
+- Cuando ejecuta `kubectl get pods -o wide`, ve que varios pods del mismo nodo trabajador quedan bloqueados en el estado `ContainerCreating` o `CrashLoopBackOff`. Todos estos pods utilizan la misma instancia de almacenamiento en bloque.
+- Cuando ejecuta un mandato `kubectl describe pod`, ve el siguiente error en la sección **Events**: `MountVolume.SetUp failed for volume ... read-only`.
+
+{: tsCauses}
+Si se produce un error de red mientras un pod escribe en un volumen, la infraestructura de IBM Cloud (SoftLayer) protege los datos del volumen para que no resulten dañados cambiando el volumen a una modalidad de solo lectura. Los pods que utilizan este volumen no pueden seguir grabando en el volumen y dan un error.
+
+{: tsResolve}
+1. Compruebe la versión del plugin {{site.data.keyword.Bluemix_notm}} Block Storage que está instalado en el clúster.
+   ```
+   helm ls
+   ```
+   {: pre}
+
+2. Compruebe que utiliza la [versión más reciente del plugin {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). Si no es así, [actualice el plugin](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
+3. Si ha utilizado un despliegue de Kubernetes para el pod, reinicie el pod que está fallando eliminando el pod y dejando que Kubernetes lo vuelva a crear. Si no ha utilizado un despliegue, recupere el archivo YAML que se ha utilizado para crear el pod con el mandato `kubectl get pod <pod_name> -o yaml >pod.yaml`. A continuación, suprima y vuelva a crear manualmente el pod.
+    ```
+    kubectl delete pod <pod_name>
+    ```
+    {: pre}
+
+4. Compruebe si volver a crear el pod ha resuelto el problema. Si no es así, vuelva a cargar el nodo trabajador.
+   1. Busque el nodo trabajador en el que se ejecuta el pod y anote la dirección IP privada asignada al nodo trabajador.
+      ```
+      kubectl describe pod <pod_name> | grep Node
+      ```
+      {: pre}
+
+      Salida de ejemplo:
+      ```
+      Node:               10.75.XX.XXX/10.75.XX.XXX
+      Node-Selectors:  <none>
+      ```
+      {: screen}
+
+   2. Recupere el **ID** del nodo trabajador utilizando la dirección IP privada del paso anterior.
+      ```
+      ibmcloud ks workers --cluster <cluster_name_or_ID>
+      ```
+      {: pre}
+
+   3. [Vuelva a cargar el nodo trabajador](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload).
+
+
+<br />
 
 
 ## Almacenamiento en bloque: el montaje del almacenamiento en bloques existente en un pod falla debido al sistema de archivos incorrecto
@@ -302,7 +372,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-Puede tener un dispositivo de almacenamiento en bloques configurado con un sistema de archivos `XFS`. Para montar este dispositivo en el pod, [creó un PV](cs_storage_block.html#existing_block) que especificaba `ext4` como su sistema de archivos o bien no se especificaba ningún sistema de archivos en la sección `spec/flexVolume/fsType`. Si no se define un sistema de archivos, el valor predeterminado para el PV es `ext4`.
+Puede tener un dispositivo de almacenamiento en bloques configurado con un sistema de archivos `XFS`. Para montar este dispositivo en el pod, [creó un PV](/docs/containers?topic=containers-block_storage#existing_block) que especificaba `ext4` como su sistema de archivos o bien no se especificaba ningún sistema de archivos en la sección `spec/flexVolume/fsType`. Si no se define un sistema de archivos, el valor predeterminado para el PV es `ext4`.
 El PV se creó satisfactoriamente y se enlazó a la instancia de almacenamiento en bloques existente. Sin embargo, cuando se intentó montar el PV a su clúster mediante una PVC coincidente, el volumen no se pudo montar. No se puede montar una instancia de almacenamiento en bloques `XFS` con un sistema de archivos `ext4` en el pod.
 
 {: tsResolve}
@@ -314,13 +384,13 @@ Actualice el sistema de archivos en el PV existente de `ext4` a `XFS`.
    ```
    {: pre}
 
-2. Guarde el yaml del PV en su máquina local.
+2. Guarde el archivo YAML del PV en la máquina local.
    ```
    kubectl get pv <pv_name> -o yaml > <filepath/xfs_pv.yaml>
    ```
    {: pre}
 
-3. Abra el archivo yaml y cambie el `fsType` de `ext4` a `xfs`.
+3. Abra el archivo YAML y cambie el `fsType` de `ext4` a `xfs`.
 4. Sustituya el PV en el clúster.
    ```
    kubectl replace --force -f <filepath/xfs_pv.yaml>
@@ -369,7 +439,7 @@ Cuando se instala el plugin `ibmc` Helm, se crea un enlace simbólico desde el d
    ```
    {: pre}
 
-2. [Instale {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos).
+2. [Instale {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#install_cos).
 
 <br />
 
@@ -396,7 +466,7 @@ Cuando se crea la PVC o se despliega un pod que monta la PVC, la creación o el 
 El secreto de Kubernetes donde se almacenan las credenciales de servicio de {{site.data.keyword.cos_full_notm}}, la PVC y el pod no están en el mismo espacio de nombres de Kubernetes. Cuando se despliega el secreto en un espacio de nombres distinto que la PVC o el pod, no se puede acceder al secreto.
 
 {: tsResolve}
-
+Esta tarea requiere el [rol de servicio de {{site.data.keyword.Bluemix_notm}} IAM de **Escritor** o de **Gestor**](/docs/containers?topic=containers-users#platform) sobre todos los espacios de nombres.
 
 1. Liste los secretos del clúster y revise el espacio de nombres de Kubernetes en el que se ha creado el secreto de Kubernetes para la instancia de servicio de {{site.data.keyword.cos_full_notm}}. El secreto debe mostrar `ibm/ibmc-s3fs` como **Tipo**.
    ```
@@ -404,9 +474,9 @@ El secreto de Kubernetes donde se almacenan las credenciales de servicio de {{si
    ```
    {: pre}
 
-2. Compruebe el archivo de configuración YAML para la PVC y el pod para verificar que ha utilizado el mismo espacio de nombres. Si desea desplegar un pod en un espacio de nombres distinto al del secreto, [cree otro secreto](cs_storage_cos.html#create_cos_secret) en el espacio de nombres deseado.
+2. Compruebe el archivo de configuración YAML para la PVC y el pod para verificar que ha utilizado el mismo espacio de nombres. Si desea desplegar un pod en un espacio de nombres distinto al del secreto, [cree otro secreto](/docs/containers?topic=containers-object_storage#create_cos_secret) en dicho espacio de nombres.
 
-3. Cree la PVC o despliegue el pod en el espacio de nombres deseado.
+3. Cree la PVC o despliegue el pod en el espacio de nombres adecuado.
 
 <br />
 
@@ -452,7 +522,7 @@ Las credenciales de servicio de {{site.data.keyword.cos_full_notm}} que utiliza 
       ```
       {: pre}
 
-4. En la sección **iam_role_crn**, verifique que tiene el rol de `Escritor` o `Gestor`. Si no tiene el rol correcto, debe [crear nuevas credenciales de servicio de {{site.data.keyword.cos_full_notm}} con el permiso correcto](cs_storage_cos.html#create_cos_service). A continuación, actualice el secreto existente o [cree un nuevo secreto](cs_storage_cos.html#create_cos_secret) con las nuevas credenciales de servicio.
+4. En la sección **iam_role_crn**, verifique que tiene el rol de `Escritor` o `Gestor`. Si no tiene el rol correcto, debe [crear nuevas credenciales de servicio de {{site.data.keyword.cos_full_notm}} con el permiso correcto](/docs/containers?topic=containers-object_storage#create_cos_service). A continuación, actualice el secreto existente o [cree un nuevo secreto](/docs/containers?topic=containers-object_storage#create_cos_secret) con las nuevas credenciales de servicio.
 
 <br />
 
@@ -471,10 +541,10 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 Es posible que haya utilizado la clase de almacenamiento errónea para acceder al grupo, o que haya intentado acceder a un grupo que no ha creado.
 
 {: tsResolve}
-1. Desde el [panel de control de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/dashboard/apps), seleccione la instancia de servicio de {{site.data.keyword.cos_full_notm}}.
+1. Desde el [panel de control de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/), seleccione la instancia de servicio de {{site.data.keyword.cos_full_notm}}.
 2. Seleccione **Grupos**.
 3. Revise la información de **Clase** y **Ubicación** para el grupo existente.
-4. Elija la [clase de almacenamiento](cs_storage_cos.html#storageclass_reference) adecuada.
+4. Elija la [clase de almacenamiento](/docs/containers?topic=containers-object_storage#cos_storageclass_reference) adecuada.
 
 <br />
 
@@ -637,21 +707,21 @@ Después de establecer los permisos de archivo correctos en la instancia de serv
 
 
 ## Obtención de ayuda y soporte
-{: #ts_getting_help}
+{: #storage_getting_help}
 
 ¿Sigue teniendo problemas con su clúster?
 {: shortdesc}
 
--  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plug-ins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
--   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/bluemix/support/#status).
+-  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plugins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
+-   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/status?selected=status).
 -   Publique una pregunta en [Slack de {{site.data.keyword.containerlong_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
     Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
     {: tip}
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
-    -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
-    Consulte [Obtención de ayuda](/docs/get-support/howtogetsupport.html#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
--   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
-Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.
+    -   Para formular preguntas sobre el servicio y obtener instrucciones de iniciación, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
+    Consulte [Obtención de ayuda](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
+-   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`. También puede utilizar la [herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) para recopilar y exportar la información pertinente del clúster que se va a compartir con el servicio de soporte de IBM.
 {: tip}
 

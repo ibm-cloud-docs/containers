@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,75 +23,30 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # Configurazione delle sottoreti per i cluster
 {: #subnets}
 
 Modifica il pool di indirizzi IP pubblici e privati portatili disponibili per i servizi del programma di bilanciamento del carico aggiungendo sottoreti al tuo cluster Kubernetes.
 {:shortdesc}
 
-## VLAN, sottoreti e IP predefiniti per i cluster
-{: #default_vlans_subnets}
-
-Durante la creazione del cluster, i nodi di lavoro del cluster e le sottoreti predefinite vengono automaticamente connessi a una VLAN.
-
-### VLAN
-{: #vlans}
-
-Quando crei un cluster, i nodi di lavoro del cluster vengono connessi automaticamente a una VLAN. Una VLAN configura un gruppo di nodi di lavoro e pod come se fossero collegati allo stesso cavo fisico e fornisce un canale per la connettività tra i nodi di lavoro e i pod.
-
-<dl>
-<dt>VLAN per i cluster gratuiti</dt>
-<dd>Per i cluster gratuiti, i nodi di lavoro del cluster sono connessi a una VLAN privata e a una VLAN pubblica di proprietà di IBM per impostazione predefinita. Poiché IBM controlla le VLAN, le sottoreti e gli indirizzi IP, non puoi creare dei cluster multizona o aggiungere sottoreti al tuo cluster e puoi solo utilizzare i servizi NodePort per esporre la tua applicazione.</dd>
-<dt>VLAN per i cluster standard</dt>
-<dd>Nei cluster standard, la prima volta che crei un cluster in una zona, viene automaticamente eseguito il provisioning di una VLAN pubblica e di una VLAN privata in tale zona per tuo conto nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per ogni cluster successivo che crei in tale zona, devi specificare la coppia di VLAN che vuoi usare nella zona. Puoi riutilizzare le stesse VLAN pubbliche e private che sono state create per te perché più cluster possono condividere VLAN.</br></br>Puoi collegare i tuoi nodi di lavoro a una VLAN pubblica e alla VLAN privata o solo alla VLAN privata. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, puoi utilizzare l'ID di una VLAN privata esistente o [creare una VLAN privata](/docs/cli/reference/ibmcloud/cli_vlan.html#ibmcloud-sl-vlan-create) e utilizzare l'ID durante la creazione del cluster.</dd></dl>
-
-Per visualizzare le VLAN di cui viene eseguito il provisioning in ciascuna zona per il tuo account, esegui `ibmcloud ks vlans <zone>.` Per visualizzare le VLAN su cui viene eseguito il provisioning di un singolo cluster, esegui `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` e cerca la sezione **Subnet VLANs**.
-
-L'infrastruttura IBM Cloud (SoftLayer) gestisce le VLAN di cui viene eseguito automaticamente il provisioning quando crei il tuo primo cluster in una zona. Se lasci che una VLAN diventi inutilizzata, come ad esempio rimuovendo tutti i nodi di lavoro da essa, l'infrastruttura IBM Cloud (SoftLayer) la reclama. In seguito, se hai bisogno di una nuova VLAN, [contatta il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans).
-
-Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
-{: important}
-
-### Sottoreti e indirizzi IP
-{: #subnets_ips}
-
-In aggiunta ai nodi di lavoro e ai pod, sulle VLAN viene eseguito automaticamente anche il provisioning delle sottoreti. Le sottoreti forniscono la connettività di rete ai tuoi componenti del cluster assegnando loro degli indirizzi IP.
-
-Delle seguenti reti viene eseguito automaticamente il provisioning sulle VLAN pubbliche e private predefinite:
-
-**Sottoreti VLAN pubbliche**
-* La sottorete pubblica primaria determina gli indirizzi IP pubblici che vengono assegnati ai nodi di lavoro durante la creazione del cluster. Più cluster nella stessa VLAN possono condividere una sottorete pubblica primaria.
-* La sottorete pubblica portatile è associata solo a un singolo cluster e fornisce al cluster 8 indirizzi IP pubblici. 3 IP sono riservati per le funzioni dell'infrastruttura Cloud IBM (SoftLayer). 1 IP viene utilizzato dall'ALB Ingress pubblico predefinito e 4 IP possono essere utilizzati per creare servizi di rete del programma di bilanciamento del carico pubblico. Gli IP pubblici portatili sono indirizzi IP fissi e permanenti che possono essere utilizzati per accedere ai servizi del programma di bilanciamento del carico su Internet. Se hai bisogno di più di 4 IP per i programmi di bilanciamento del carico pubblico, vedi [Aggiunta di indirizzi IP portatili](#adding_ips).
-
-**Sottoreti VLAN private**
-* La sottorete privata primaria determina gli indirizzi IP privati che vengono assegnati ai nodi di lavoro durante la creazione del cluster. Più cluster nella stessa VLAN possono condividere una sottorete privata primaria.
-* La sottorete privata portatile è associata solo a un singolo cluster e fornisce al cluster 8 indirizzi IP privati. 3 IP sono riservati per le funzioni dell'infrastruttura Cloud IBM (SoftLayer). 1 IP viene utilizzato dall'ALB Ingress privato predefinito e 4 IP possono essere utilizzati per creare servizi di rete del programma di bilanciamento del carico privato. Gli IP privati portatili sono indirizzi IP fissi e permanenti che possono essere utilizzati per accedere ai servizi del programma di bilanciamento del carico su Internet. Se hai bisogno di più di 4 IP per i programmi di bilanciamento del carico privato, vedi [Aggiunta di indirizzi IP portatili](#adding_ips).
-
-Per visualizzare tutte le sottoreti di cui viene eseguito il provisioning nel tuo account, esegui `ibmcloud ks subnets`. Per visualizzare le sottoreti private portatili e le sottoreti pubbliche portatili associate a un singolo cluster, puoi eseguire `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` e cerca la sezione **Subnet VLANs**.
-
-In {{site.data.keyword.containerlong_notm}}, le VLAN hanno un limite di 40 sottoreti. Se raggiungi questo limite, controlla prima se puoi [riutilizzare le sottoreti nella VLAN per creare nuovi cluster](#custom). Se hai bisogno di una nuova VLAN, ordinane una [contattando il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Quindi [crea un cluster](cs_cli_reference.html#cs_cluster_create) che utilizzi questa nuova VLAN.
-{: note}
-
-<br />
-
-
-## Utilizzo di sottoreti personalizzate o esistenti per creare un cluster
-{: #custom}
+## Utilizzo delle sottoreti dell'infrastruttura IBM Cloud (SoftLayer) esistenti o personalizzate per creare un cluster
+{: #subnets_custom}
 
 Quando crei un cluster standard, le sottoreti vengono create automaticamente per tuo conto. Tuttavia, invece di utilizzare le sottoreti di cui viene eseguito il provisioning automaticamente, puoi utilizzare le sottoreti portatili esistenti dal tuo account dell'infrastruttura IBM Cloud (SoftLayer) oppure riutilizzare le sottoreti da un cluster eliminato.
 {:shortdesc}
 
-Utilizza questa opzione per mantenere stabili gli indirizzi IP statici tra le rimozioni e le creazioni di cluster o per ordinare blocchi di indirizzi IP più grandi.
+Utilizza questa opzione per mantenere stabili gli indirizzi IP statici tra le rimozioni e le creazioni di cluster o per ordinare blocchi di indirizzi IP più grandi. Se invece vuoi ottenere più indirizzi IP privati portatili per i tuoi servizi del programma di bilanciamento del carico del cluster utilizzando la tua sottorete della rete in loco, vedi [Aggiunta di IP privati portatili aggiungendo sottoreti gestite dall'utente alle VLAN private](#user_managed).
 
 Gli indirizzi IP pubblici portatili vengono addebitati mensilmente. Se rimuovi gli indirizzi IP pubblici portatili dopo aver eseguito il provisioning del tuo cluster, devi comunque pagare l'addebito mensile anche se li hai utilizzati solo per un breve periodo di tempo.
 {: note}
 
 Prima di iniziare:
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Per riutilizzare le sottoreti da un cluster di cui non hai più bisogno, elimina il cluster non necessario. Crea il nuovo cluster immediatamente perché le sottoreti vengono eliminate entro 24 ore se non le riutilizzi.
 
    ```
-   ibmcloud ks cluster-rm <cluster_name_or_ID>
+   ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -110,13 +69,13 @@ Per utilizzare una sottorete esistente nel tuo portfolio dell'infrastruttura IBM
     ```
     {: screen}
 
-2. [Crea un cluster](cs_clusters.html#clusters_cli) utilizzando l'ID VLAN che hai identificato. Includi l'indicatore `--no-subnet` per impedire la creazione automatica di una nuova sottorete IP pubblica portatile e di una nuova sottorete IP privata portatile.
+2. [Crea un cluster](/docs/containers?topic=containers-clusters#clusters_cli) utilizzando l'ID VLAN che hai identificato. Includi l'indicatore `--no-subnet` per impedire la creazione automatica di una nuova sottorete IP pubblica portatile e di una nuova sottorete IP privata portatile.
 
     ```
     ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
-    Se non riesci a ricordare qual è la zona in cui si trova la VLAN per l'indicatore `--zone`, puoi controllare se la VLAN si trova in una specifica zona eseguendo `ibmcloud ks vlans <zone>`.
+    Se non riesci a ricordare qual è la zona in cui si trova la VLAN per l'indicatore `--zone`, puoi controllare se la VLAN si trova in una specifica zona eseguendo `ibmcloud ks vlans --zone <zone>`.
     {: tip}
 
 3.  Verifica che il cluster sia stato creato. Possono essere necessari fino a 15 minuti per l'ordine delle macchine del nodo di lavoro e per la configurazione e il provisioning del cluster nel tuo account.
@@ -130,31 +89,37 @@ Per utilizzare una sottorete esistente nel tuo portfolio dell'infrastruttura IBM
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.10.11      Default
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.12.6      Default
     ```
     {: screen}
 
 4.  Controlla lo stato dei nodi di lavoro.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
     Prima di continuare al passo successivo, i nodi di lavoro devono essere pronti. Lo stato (**State**) cambia in `normal` e la condizione (**Status**) è `Ready`.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.11
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone     Version
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.12.6
     ```
     {: screen}
 
 5.  Aggiungi la sottorete al tuo cluster specificando l'ID sottorete. Quando rendi disponibile una sottorete a un cluster, per te viene creata una mappa di configurazione Kubernetes che include tutti gli indirizzi IP pubblici portatili che puoi utilizzare. Se non esiste alcun ALB Ingress nella zona dove si trova la VLAN della sottorete, vengono automaticamente utilizzati un indirizzo IP privato e uno pubblico portatili per creare gli ALB pubblico e privato per tale zona. Puoi utilizzare tutti gli altri indirizzi IP pubblici e privati portatili dalla sottorete per creare i servizi del programma di bilanciamento del carico per le tue applicazioni.
 
-    ```
-    ibmcloud ks cluster-subnet-add mycluster 807861
-    ```
-    {: pre}
+  ```
+  ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
+  ```
+  {: pre}
+
+  Comando di esempio:
+  ```
+  ibmcloud ks cluster-subnet-add --cluster mycluster --subnet-id 807861
+  ```
+  {: screen}
 
 6. **Importante**: per abilitare le comunicazioni tra i nodi di lavoro che si trovano su sottoreti differenti nella stessa VLAN, devi [abilitare l'instradamento tra le sottoreti sulla stessa VLAN](#subnet-routing).
 
@@ -164,12 +129,14 @@ Per utilizzare una sottorete esistente nel tuo portfolio dell'infrastruttura IBM
 ## Gestione degli indirizzi IP portatili esistenti
 {: #managing_ips}
 
-Per impostazione predefinita, 4 indirizzi IP pubblici portatili e 4 privati portatili possono essere utilizzati per esporre le singole applicazioni alla rete pubblica o privata [creando un servizio di programma di bilanciamento del carico](cs_loadbalancer.html). Per creare un servizio di programma di bilanciamento del carico, devi avere almeno un (1) indirizzo IP portatile del tipo corretto disponibile. Puoi visualizzare gli indirizzi IP portatili disponibili oppure liberare un indirizzo IP portatile utilizzato.
+Per impostazione predefinita, 4 indirizzi IP pubblici portatili e 4 privati portatili possono essere utilizzati per esporre le singole applicazioni alla rete pubblica o privata [creando un servizio di programma di bilanciamento del carico](/docs/containers?topic=containers-loadbalancer). Per creare un servizio di programma di bilanciamento del carico, devi avere almeno un (1) indirizzo IP portatile del tipo corretto disponibile. Puoi visualizzare gli indirizzi IP portatili disponibili oppure liberare un indirizzo IP portatile utilizzato.
+{: shortdesc}
 
 ### Visualizzazione degli indirizzi IP pubblici portatili disponibili
 {: #review_ip}
 
-Per elencare tutti gli indirizzi IP portatili nel tuo cluster, sia quelli usati che quelli disponibili, puoi eseguire:
+Per elencare tutti gli indirizzi IP portatili nel tuo cluster, sia quelli usati che quelli disponibili, puoi eseguire questo comando:
+{: shortdesc}
 
 ```
 kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
@@ -178,12 +145,13 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 
 Per elencare solo gli indirizzi IP pubblici portatili disponibili per creare i programmi di bilanciamento del carico, puoi utilizzare la seguente procedura:
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+Prima di iniziare:
+-  Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `default`.
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-1.  Crea un file di configurazione del servizio Kubernetes denominato
-`myservice.yaml` e definisci un servizio di tipo `LoadBalancer` con
-un indirizzo IP del programma di bilanciamento del carico fittizio. Il seguente esempio utilizza l'indirizzo IP 1.1.1.1 come
-indirizzo IP del programma di bilanciamento del carico.
+Per elencare gli indirizzi IP pubblici portatili che sono disponibili:
+
+1.  Crea un file di configurazione del servizio Kubernetes denominato `myservice.yaml` e definisci un servizio di tipo `LoadBalancer` con un indirizzo IP del programma di bilanciamento del carico fittizio. Il seguente esempio utilizza l'indirizzo IP 1.1.1.1 come indirizzo IP del programma di bilanciamento del carico. Sostituisci `<zone>` con la zona dove desideri controllare l'eventuale presenza di IP disponibili.
 
     ```
     apiVersion: v1
@@ -193,6 +161,8 @@ indirizzo IP del programma di bilanciamento del carico.
         run: myservice
       name: myservice
       namespace: default
+      annotations:
+        service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"
     spec:
       ports:
       - port: 80
@@ -237,7 +207,11 @@ Puoi liberare un indirizzo IP portatile utilizzato eliminando il servizio di bil
 che utilizza tale indirizzo IP.
 {:shortdesc}
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+Prima di iniziare:
+-  Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `default`.
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+
+Per eliminare un programma di bilanciamento del carico:
 
 1.  Elenca i servizi disponibili nel tuo cluster.
 
@@ -259,7 +233,8 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 ## Aggiunta di indirizzi IP portatili
 {: #adding_ips}
 
-Per impostazione predefinita, 4 indirizzi IP pubblici portatili e 4 privati portatili possono essere utilizzati per esporre le singole applicazioni alla rete pubblica o privata [creando un servizio di programma di bilanciamento del carico](cs_loadbalancer.html). Per creare più di 4 programmi di bilanciamento del carico pubblici e 4 privati, puoi ottenere ulteriori indirizzi IP portatili aggiungendo delle sottoreti di rete al cluster.
+Per impostazione predefinita, 4 indirizzi IP pubblici portatili e 4 privati portatili possono essere utilizzati per esporre le singole applicazioni alla rete pubblica o privata [creando un servizio di programma di bilanciamento del carico](/docs/containers?topic=containers-loadbalancer). Per creare più di 4 programmi di bilanciamento del carico pubblici e 4 privati, puoi ottenere ulteriori indirizzi IP portatili aggiungendo delle sottoreti di rete al cluster.
+{: shortdesc}
 
 Quando rendi disponibile una sottorete a un cluster, gli indirizzi IP di questa sottorete vengono utilizzati per scopi di rete del cluster. Per evitare conflitti di indirizzi IP, assicurati di utilizzare una sottorete con un solo cluster. Non utilizzare una sottorete per più cluster o per altri
 scopi al di fuori di {{site.data.keyword.containerlong_notm}}
@@ -276,8 +251,8 @@ Puoi ottenere più indirizzi IP portatili per i servizi di programma di bilancia
 {:shortdesc}
 
 Prima di iniziare:
--  Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](cs_users.html#platform) per il cluster.
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+-  Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform) per il cluster.
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Per ordinare una sottorete:
 
@@ -308,7 +283,7 @@ Per ordinare una sottorete:
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td>Sostituisci <code>&lt;VLAN_ID&gt;</code> con l'ID della VLAN pubblica o privata su cui vuoi assegnare gli indirizzi IP pubblici o privati portatili. Devi selezionare la VLAN pubblica o privata a cui è connesso un nodo di lavoro esistente. Per esaminare la VLAN pubblica o privata per un nodo di lavoro, esegui il comando <code>ibmcloud ks worker-get &lt;worker_id&gt;</code>. <Il provisioning della sottorete viene eseguito nella stessa zona in cui si trova la VLAN.</td>
+    <td>Sostituisci <code>&lt;VLAN_ID&gt;</code> con l'ID della VLAN pubblica o privata su cui vuoi assegnare gli indirizzi IP pubblici o privati portatili. Devi selezionare la VLAN pubblica o privata a cui è connesso un nodo di lavoro esistente. Per esaminare la VLAN pubblica o privata per un nodo di lavoro, esegui il comando <code>ibmcloud ks worker-get --worker &lt;worker_id&gt;</code>. <Il provisioning della sottorete viene eseguito nella stessa zona in cui si trova la VLAN.</td>
     </tr>
     </tbody></table>
 
@@ -334,11 +309,14 @@ Per ordinare una sottorete:
 <br />
 
 
-### Aggiunta di IP privati portatili utilizzando le sottoreti gestite dall'utente
+### Aggiunta di IP privati portatili aggiungendo sottoreti gestite dall'utente alle VLAN private
 {: #user_managed}
 
-Puoi ottenere più IP privati portatili per i servizi di programma di bilanciamento del carico rendendo una sottorete per una rete in loco disponibile al tuo cluster specificato.
+Puoi ottenere più IP privati portatili per i servizi di programma di bilanciamento del carico rendendo una sottorete da una rete in loco disponibile al tuo cluster.
 {:shortdesc}
+
+Vuoi invece riutilizzare le sottoreti portatili esistenti nella tuo account dell'infrastruttura IBM Cloud (SoftLayer)? Vedi [Utilizzo delle sottoreti dell'infrastruttura IBM Cloud (SoftLayer) esistenti o personalizzate per creare un cluster](#subnets_custom).
+{: tip}
 
 Requisiti:
 - Le sottoreti gestite dall'utente possono essere aggiunte solo a VLAN private.
@@ -347,9 +325,9 @@ Requisiti:
 
 Prima di iniziare:
 - Configura l'instradamento del traffico di rete in entrata e in uscita della sottorete esterna.
-- Conferma di disporre di connettività VPN tra il gateway di rete del data center in loco e la VRA (Virtual Router Appliance) di rete privata o il servizio VPN strongSwan in esecuzione nel tuo cluster. Per ulteriori informazioni, vedi [Configurazione della connettività VPN](cs_vpn.html).
--  Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](cs_users.html#platform) per il cluster.
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+- Conferma di disporre di connettività VPN tra il gateway di rete del data center in loco e la VRA (Virtual Router Appliance) di rete privata o il servizio VPN strongSwan in esecuzione nel tuo cluster. Per ulteriori informazioni, vedi [Configurazione della connettività VPN](/docs/containers?topic=containers-vpn).
+-  Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform) per il cluster.
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 
 Per aggiungere una sottorete da una rete in loco:
@@ -402,7 +380,7 @@ Per aggiungere una sottorete da una rete in loco:
 
 4. [Abilita l'instradamento tra sottoreti sulla stessa VLAN](#subnet-routing).
 
-5. Aggiungi un [servizio di programma di bilanciamento del carico privato](cs_loadbalancer.html) oppure abilita un [ALB Ingress privato](cs_ingress.html#private_ingress) per accedere alla tua applicazione sulla rete privata. Per utilizzare un indirizzo IP privato dalla sottorete che hai aggiunto, devi specificare un indirizzo IP dal CIDR della sottorete. Diversamente, viene scelto a caso un indirizzo IP dalle sottoreti dell'infrastruttura IBM Cloud (SoftLayer) o dalle sottoreti fornite dall'utente sulla VLAN privata.
+5. Aggiungi un [servizio di programma di bilanciamento del carico privato](/docs/containers?topic=containers-loadbalancer) oppure abilita un [ALB Ingress privato](/docs/containers?topic=containers-ingress#private_ingress) per accedere alla tua applicazione sulla rete privata. Per utilizzare un indirizzo IP privato dalla sottorete che hai aggiunto, devi specificare un indirizzo IP dal CIDR della sottorete. Diversamente, viene scelto a caso un indirizzo IP dalle sottoreti dell'infrastruttura IBM Cloud (SoftLayer) o dalle sottoreti fornite dall'utente sulla VLAN privata.
 
 <br />
 
@@ -410,29 +388,29 @@ Per aggiungere una sottorete da una rete in loco:
 ## Gestione dell'instradamento di sottorete
 {: #subnet-routing}
 
-Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
+Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Esamina i seguenti scenari in cui è richiesto anche lo spanning delle VLAN.
 
 ### Abilitazione dell'instradamento tra sottoreti primarie sulla stessa VLAN
 {: #vlan-spanning}
 
-Quando crei un cluster, viene eseguito il provisioning di una sottorete che termina per `/26` sulla VLAN primaria privata predefinita. Una sottorete primaria privata può fornire gli IP per un massimo di 62 nodi di lavoro.
-{:shortdesc}
+Quando crei un cluster, viene eseguito il provisioning della sottorete pubblica e di quella privata primarie sulla VLAN pubbliche e private. La sottorete pubblica primaria termina in `/28` e fornisce 14 IP pubblici per i nodi di lavoro. La sottorete privata primaria termina in `/26` e fornisce gli IP privati per un massimo di 62 nodi di lavoro.{:shortdesc}
 
-Questo limite di 62 nodi di lavoro potrebbe essere superato da un cluster di grandi dimensioni o da diversi cluster più piccoli di una singola regione che si trovano sulla stessa VLAN. Quando viene raggiunto il limite di 62 nodi di lavoro, viene ordinata una seconda sottorete primaria privata nella stessa VLAN.
+Potresti superare i 14 IP pubblici e i 62 privati iniziali per i nodi di lavoro disponendo di un cluster di grandi dimensioni o di diversi cluster più piccoli nella stessa ubicazione sulla stessa VLAN. Quando una sottorete pubblica o privata raggiunge il limite di nodi di lavoro, viene ordinata un'altra sottorete primaria nella stessa VLAN.
 
-Per garantire che i nodi di lavoro in queste sottoreti primarie sulla stessa VLAN possano comunicare, devi attivare lo spanning delle VLAN. Per istruzioni, vedi [Abilita o disabilita lo spanning delle VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+Per garantire che i nodi di lavoro in queste sottoreti primarie sulla stessa VLAN possano comunicare, devi attivare lo spanning delle VLAN. Per istruzioni, vedi [Abilita o disabilita lo spanning delle VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
-Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 {: tip}
 
 ### Gestione dell'instradamento di sottorete per le applicazioni gateway
 {: #vra-routing}
 
 Quando crei un cluster, vengono ordinate una sottorete pubblica e una privata portatili sulle VLAN a cui è connesso il cluster. Queste sottoreti forniscono gli indirizzi IP per i servizi di rete di programma di bilanciamento del carico e Ingress.
+{: shortdesc}
 
-Tuttavia, se hai un'applicazione router esistente, come ad esempio una [VRA (Virtual Router Appliance)](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra), le sottoreti portatili appena aggiunte dalle VLAN a cui è connesso il cluster non sono configurate sul router. Per utilizzare i servizi di rete di programma di bilanciamento del carico o Ingress, devi assicurarti che i dispositivi di rete possano eseguire l'instradamento tra sottoreti differenti sulla stessa VLAN [abilitando lo spanning delle VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+Tuttavia, se hai un'applicazione router esistente, come ad esempio una [VRA (Virtual Router Appliance)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra#about-the-vra), le sottoreti portatili appena aggiunte dalle VLAN a cui è connesso il cluster non sono configurate sul router. Per utilizzare i servizi di rete di programma di bilanciamento del carico o Ingress, devi assicurarti che i dispositivi di rete possano eseguire l'instradamento tra sottoreti differenti sulla stessa VLAN [abilitando lo spanning delle VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
-Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 {: tip}

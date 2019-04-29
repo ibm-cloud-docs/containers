@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, nginx, ingress controller
+
+subcollection: containers
 
 ---
 
@@ -34,10 +38,42 @@ Vous avez exposé votre application au public en créant une ressource Ingress p
 Veillez à définir un hôte dans une seule ressource Ingress. Si un hôte est défini dans plusieurs ressources Ingress, l'ALB risque de ne pas acheminer le trafic correctement et vous pourrez obtenir des erreurs.
 {: tip}
 
-Avant de commencer, vérifiez que vous disposez des [règles d'accès {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) :
+Avant de commencer, vérifiez que vous disposez des [règles d'accès {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) suivantes :
   - Rôle de plateforme **Editeur** ou **Administrateur** pour le cluster
+  - Rôle de service **Auteur** ou **Responsable**
 
-## Etape 1 : Recherchez les messages d'erreur dans le déploiement de votre ressource Ingress et dans les journaux de pod de l'équilibreur de charge d'application (ALB)
+## Etape 1 : Exécution de tests Ingress dans l'outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}}
+
+Lorsque vous traitez les incidents, vous pouvez utiliser l'outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}} pour exécuter des tests Ingress et regrouper des informations pertinentes sur Ingress. Pour utiliser l'outil de débogage, installez la [charte Helm `ibmcloud-iks-debug` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug) :
+{: shortdesc}
+
+
+1. [Configurez Helm dans votre cluster, créez un compte de service pour Tiller et ajoutez le référentiel `ibm` dans votre instance Helm](/docs/containers?topic=containers-integrations#helm).
+
+2. Installez la charte Helm dans votre cluster.
+  ```
+  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  ```
+  {: pre}
+
+
+3. Démarrez un serveur proxy pour afficher l'interface de l'outil de débogage.
+  ```
+  kubectl proxy --port 8080
+  ```
+  {: pre}
+
+4. Dans un navigateur Web, ouvrez l'URL de l'interface de l'outil de débogage : http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
+
+5. Sélectionnez la série de tests **ingress**. Certains tests vérifient les avertissements, erreurs ou problèmes potentiels, d'autres se contentent de rassembler des informations que vous pouvez utiliser comme référence lorsque vous traitez les incidents. Pour plus d'informations sur la fonction de chaque test, cliquez sur l'icône d'information en regard du nom du test.
+
+6. Cliquez sur **Exécuter**.
+
+7. Vérifiez les résultats de chaque test.
+  * Si un test échoue, cliquez sur l'icône d'information à côté du nom du test dans la colonne de gauche pour plus d'informations sur la manière de résoudre le problème.
+  * Vous pouvez également utiliser les résultats des tests uniquement pour recueillir des informations lors du débogage de votre service Ingress dans les sections suivantes.
+
+## Etape 2 : Recherche de messages d'erreur dans le déploiement de votre ressource Ingress et dans les journaux de pod de l'équilibreur de charge d'application (ALB)
 {: #errors}
 
 Commencez par vérifier les messages d'erreur dans les événements de déploiement de la ressource Ingress et les journaux de pod d'ALB. Ces messages d'erreur peuvent vous aider à trouver la cause première des erreurs, puis à déboguer votre configuration Ingress dans les sections suivantes.
@@ -49,7 +85,7 @@ Commencez par vérifier les messages d'erreur dans les événements de déploiem
     ```
     {: pre}
 
-    Dans la section **Events** de la sortie, vous pourrez voir des messages d'avertissement signalant des valeurs non valides dans votre ressource Ingress ou dans certaines annotations que vous avez utilisées. Consultez la [documentation sur la configuration de la ressource Ingress](cs_ingress.html#public_inside_4) ou la [documentation sur les annotations](cs_annotations.html).
+    Dans la section **Events** de la sortie, vous pourrez voir des messages d'avertissement signalant des valeurs non valides dans votre ressource Ingress ou dans certaines annotations que vous avez utilisées. Consultez la [documentation sur la configuration de la ressource Ingress](/docs/containers?topic=containers-ingress#public_inside_4) ou la [documentation sur les annotations](/docs/containers?topic=containers-ingress_annotation).
 
     ```
     Name:             myingress
@@ -113,7 +149,7 @@ Commencez par vérifier les messages d'erreur dans les événements de déploiem
 
     4. Recherchez les messages d'erreur dans les journaux de l'équilibreur de charge ALB.
 
-## Etape 2 : Effectuez une commande ping sur le sous-domaine et les adresses IP publiques de l'ALB
+## Etape 3 : Exécution d'une commande ping sur le sous-domaine et les adresses IP publiques de l'ALB
 {: #ping}
 
 Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques des ALB.
@@ -136,7 +172,7 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
     ```
     {: screen}
 
-    * Si un ALB public n'a pas d'adresse IP, voir [L'ALB Ingress ne se déploie pas dans une zone](cs_troubleshoot_network.html#cs_multizone_subnet_limit).
+    * Si un ALB public n'a pas d'adresse IP, voir [L'ALB Ingress ne se déploie pas dans une zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit).
 
 2. Vérifiez l'intégrité des adresses IP de votre ALB.
 
@@ -146,10 +182,10 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
         ```
         {: pre}
 
-        * Si l'interface CLI renvoie un dépassement de délai et que vous disposez d'un pare-feu personnalisé pour protéger vos noeuds worker, vérifiez que vous avez autorisé ICMP dans votre [pare-feu](cs_troubleshoot_clusters.html#cs_firewall).
+        * Si l'interface CLI renvoie un dépassement de délai et que vous disposez d'un pare-feu personnalisé pour protéger vos noeuds worker, vérifiez que vous avez autorisé ICMP dans votre [pare-feu](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).
         * S'il n'y a aucun pare-feu bloquant les commandes ping et que ces commandes s'exécutent puis renvoient un dépassement de délai, [vérifiez le statut de vos pods d'ALB](#check_pods).
 
-    * Clusters à zones multiples uniquement : vous pouvez utiliser le diagnostic d'intégrité de l'équilibreur de charge MZLB pour déterminer le statut des adresses IP de votre ALB. Pour plus d'informations sur l'équilibreur de charge MZLB, voir [Equilibreur de charge pour zones multiples (MZLB)](cs_ingress.html#planning). Le diagnostic d'intégrité de l'équilibreur de charge MZLB est disponible uniquement pour les clusters dont le nouveau sous-domaine Ingress est au format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si votre cluster utilise encore l'ancien format `<cluster_name>.<region>.containers.mybluemix.net`, [convertissez votre cluster à zone unique en cluster à zones multiples](cs_clusters.html#add_zone). Un sous-domaine au nouveau format est affecté à votre cluster, mais celui-ci peut continuer à utiliser l'ancien format de sous-domaine. Vous pouvez aussi commander un nouveau cluster auquel le nouveau format de sous-domaine sera automatiquement affecté.
+    * Clusters à zones multiples uniquement : vous pouvez utiliser le diagnostic d'intégrité de l'équilibreur de charge MZLB pour déterminer le statut des adresses IP de votre ALB. Pour plus d'informations sur l'équilibreur de charge MZLB, voir [Equilibreur de charge pour zones multiples (MZLB)](/docs/containers?topic=containers-ingress#planning). Le diagnostic d'intégrité de l'équilibreur de charge MZLB est disponible uniquement pour les clusters dont le nouveau sous-domaine Ingress est au format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si votre cluster utilise encore l'ancien format `<cluster_name>.<region>.containers.mybluemix.net`, [convertissez votre cluster à zone unique en cluster à zones multiples](/docs/containers?topic=containers-clusters#add_zone). Un sous-domaine au nouveau format est affecté à votre cluster, mais celui-ci peut continuer à utiliser l'ancien format de sous-domaine. Vous pouvez aussi commander un nouveau cluster auquel le nouveau format de sous-domaine sera automatiquement affecté.
 
     La commande curl HTTP suivante utilise l'hôte `albhealth`, qui est configuré par {{site.data.keyword.containerlong_notm}} de sorte à renvoyer le statut `healthy` ou `unhealthy` pour une adresse IP d'ALB.
         ```
@@ -166,7 +202,7 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
 
 3. Obtenez le sous-domaine Ingress fourni par IBM.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
@@ -191,8 +227,8 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
     ```
     {: screen}
 
-## Etape 3 : Vérifiez vos mappages de domaine et la configuration de la ressource Ingress
-{: #config}
+## Etape 4 : Vérification de vos mappages de domaine et de la configuration de la ressource Ingress
+{: #ts_ingress_config}
 
 1. Si vous utilisez un domaine personnalisé, vérifiez que vous avez utilisé votre fournisseur de DNS pour mapper le domaine personnalisé au sous-domaine fourni par IBM ou à l'adresse IP publique de l'ALB. Notez que l'utilisation de CNAME est privilégiée car IBM fournit des diagnostics d'intégrité automatiques sur le sous-domaine IBM et retire toutes les adresses IP défaillantes dans la réponse DNS.
     * Sous-domaine fourni par IBM : vérifiez que votre domaine personnalisé est mappé au sous domaine fourni par IBM du cluster dans l'enregistrement CNAME (Canonical Name).
@@ -230,9 +266,9 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
 
     1. Veillez à définir un hôte dans une seule ressource Ingress. Si un hôte est défini dans plusieurs ressources Ingress, l'ALB risque de ne pas acheminer le trafic correctement et vous pourrez obtenir des erreurs.
 
-    2. Vérifiez que le sous-domaine et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine Ingress fournis par IBM, exécutez la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+    2. Vérifiez que le sous-domaine et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine Ingress fournis par IBM, exécutez la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
 
-    3.  Assurez-vous que votre application est en mode écoute sur le même chemin que celui qui est configuré dans la section **path** de votre ressource Ingress. Si votre application est configurée pour être en mode écoute à la racine, utilisez `/` comme chemin. Si le trafic entrant dans ce chemin doit être acheminé vers un autre chemin que celui où votre application est à l'écoute, utilisez l'annotation des [chemins de redirection (rewrite path)](cs_annotations.html#rewrite-path).
+    3.  Assurez-vous que votre application est en mode écoute sur le même chemin que celui qui est configuré dans la section **path** de votre ressource Ingress. Si votre application est configurée pour être en mode écoute à la racine, utilisez `/` comme chemin. Si le trafic entrant dans ce chemin doit être acheminé vers un autre chemin que celui où votre application est à l'écoute, utilisez l'annotation des [chemins de redirection (rewrite path)](/docs/containers?topic=containers-ingress_annotation#rewrite-path).
 
     4. Editez le fichier YAML de configuration de votre ressource selon les besoins. Lorsque vous fermez l'éditeur, vos modifications sont sauvegardées et automatiquement appliquées.
         ```
@@ -350,7 +386,7 @@ Par exemple, admettons que vous disposez d'un cluster à zones multiples dans 2 
     {: pre}
 
     * Si tout est configuré correctement, vous obtenez la réponse prévue de votre application.
-    * Si vous obtenez une erreur en réponse, une erreur a pu se produire dans votre application ou dans une configuration qui ne s'applique qu'à cet ALB spécifique. Vérifiez le code de votre application, les [fichiers de configuration de votre ressource Ingress](cs_ingress.html#public_inside_4) ou toute autre configuration ayant été appliquée uniquement à cet ALB.
+    * Si vous obtenez une erreur en réponse, une erreur a pu se produire dans votre application ou dans une configuration qui ne s'applique qu'à cet ALB spécifique. Vérifiez le code de votre application, les [fichiers de configuration de votre ressource Ingress](/docs/containers?topic=containers-ingress#public_inside_4) ou toute autre configuration ayant été appliquée uniquement à cet ALB.
 
 7. Après avoir terminé le débogage, rétablissez le diagnostic d'intégrité sur tous les pods d'ALB. Répétez ces étapes pour chaque pod d'ALB.
   1. Connectez-vous au pod d'ALB et supprimez le signe `#` de `server_name`.
@@ -388,21 +424,21 @@ Par exemple, admettons que vous disposez d'un cluster à zones multiples dans 2 
 
 
 ## Aide et assistance
-{: #ts_getting_help}
+{: #ingress_getting_help}
 
 Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
 -  Dans le terminal, vous êtes averti des mises à jour disponibles pour l'interface de ligne de commande `ibmcloud` et les plug-ins. Veillez à maintenir votre interface de ligne de commande à jour pour pouvoir utiliser l'ensemble des commandes et des indicateurs.
--   Pour déterminer si {{site.data.keyword.Bluemix_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
+-   Pour voir si {{site.data.keyword.Bluemix_notm}} est disponible, [vérifiez la page Statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/status?selected=status).
 -   Publiez une question sur le site [{{site.data.keyword.containerlong_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
     Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
     {: tip}
 -   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containerlong_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour toute question sur le service et les instructions de mise en route, utilisez le forum [IBM Developer Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
-    Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar) pour plus d'informations sur l'utilisation des forums.
--   Contactez le support IBM en ouvrant un cas. Pour savoir comment ouvrir un cas de support IBM ou obtenir les niveaux de support et la gravité des cas, voir [Contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
-Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `ibmcloud ks clusters`.
+    Voir [Comment obtenir de l'aide](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) pour plus d'informations sur l'utilisation des forums.
+-   Contactez le support IBM en ouvrant un cas. Pour savoir comment ouvrir un cas de support IBM ou obtenir les niveaux de support et la gravité des cas, voir [Contacter le support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `ibmcloud ks clusters`. Vous pouvez également utiliser l'[outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) pour regrouper et exporter des informations pertinentes de votre cluster à partager avec le support IBM.
 {: tip}
 

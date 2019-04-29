@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, compliance, security standards
+
+subcollection: containers
 
 ---
 
@@ -33,42 +37,42 @@ Kubernetes 是一個開放程式碼平台，用於管理跨多個主機的容器
 {: #kubernetes_service}
 {: faq}
 
-使用 {{site.data.keyword.containerlong_notm}}，您可以建立自己的 Kubneges 叢集，以在 {{site.data.keyword.Bluemix_notm}} 上部署及管理容器化應用程式。您的容器化應用程式是在稱為工作者節點的 IBM Cloud 基礎架構 (SoftLayer) 運算主機上進行管理。您可以選擇將運算主機佈建為具有共用或專用資源的[虛擬機器](cs_clusters_planning.html#vm)，也可以佈建為[裸機機器](cs_clusters_planning.html#bm)，其可最佳化以供 GPU 與軟體定義的儲存空間 (SDS) 使用。您的工作者節點是由 IBM 配置、監視及管理的高可用性 Kubernetes 主節點來控制的。您可以使用 {{site.data.keyword.containerlong_notm}} API 或 CLI 來處理叢集基礎架構資源，以及使用 Kubernetes API 或 CLI 來管理您的部署與服務。 
+使用 {{site.data.keyword.containerlong_notm}}，您可以建立自己的 Kubneges 叢集，以在 {{site.data.keyword.Bluemix_notm}} 上部署及管理容器化應用程式。您的容器化應用程式是在稱為工作者節點的 IBM Cloud 基礎架構 (SoftLayer) 運算主機上進行管理。您可以選擇將運算主機佈建為具有共用或專用資源的[虛擬機器](/docs/containers?topic=containers-plan_clusters#vm)，也可以佈建為[裸機機器](/docs/containers?topic=containers-plan_clusters#bm)，其可最佳化以供 GPU 與軟體定義的儲存空間 (SDS) 使用。您的工作者節點是由 IBM 配置、監視及管理的高可用性 Kubernetes 主節點來控制的。您可以使用 {{site.data.keyword.containerlong_notm}} API 或 CLI 來處理叢集基礎架構資源，以及使用 Kubernetes API 或 CLI 來管理您的部署與服務。 
 
-如需如何設定叢集資源的相關資訊，請參閱[服務架構](cs_tech.html#architecture)。若要尋找功能和好處的清單，請參閱[為何要用 {{site.data.keyword.containerlong_notm}}](cs_why.html#cs_ov)。
+如需如何設定叢集資源的相關資訊，請參閱[服務架構](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)。若要尋找功能和好處的清單，請參閱[為何要用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)。
 
 ## 為何應該使用 IBM Cloud Kubernetes Service？
-{: #benefits}
+{: #faq_benefits}
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} 是一個受管理的 Kubernetes 供應項目，可提供功能強大的工具、直覺式使用者體驗及內建安全，以快速遞送各種應用程式，您可以將其連結至與 IBM Watson®、AI、IoT、DevOps、安全及資料分析相關的雲端服務。作為認證的 Kibernees 提供者，{{site.data.keyword.containerlong_notm}} 提供智慧型排程、自我修復、水平調整、服務探索與負載平衡、自動化推出與回復，以及密碼與配置管理。該服務還具有依循簡化叢集管理、容器安全及隔離原則的進階功能、設計專屬叢集的能力，以及用於部署一致性的整合作業工具。
 
-如需功能和好處的詳細概觀，請參閱[為何要用 {{site.data.keyword.containerlong_notm}}](cs_why.html#cs_ov)。 
+如需功能和好處的詳細概觀，請參閱[為何要用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)。 
 
 ## 服務是否隨附受管理的 Kubernetes 主節點和工作者節點？
 {: #managed_master_worker}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} 中的每個 Kubernetes 叢集都是由 IBM 透過 IBM 擁有的 {{site.data.keyword.Bluemix_notm}} 基礎架構帳戶所管理的專用 Kubernetes 主節點予以控制。IBM Site Reliability Engineer (SRE) 會持續監視 Kubernetes 主節點（包括所有主節點元件、運算、網路及儲存空間資源）。SRE 會套用最新的安全標準、偵測並重新修補惡意活動，並且努力確保 {{site.data.keyword.containerlong_notm}} 的可靠性及可用性。當您佈建叢集時自動安裝的附加程式（例如 Fluentd 以進行記載）是由 IBM 自動更新。不過，您可以選擇停用部分附加程式的自動更新，並從主節點及工作者節點分別進行手動更新。如需相關資訊，請參閱[更新叢集附加程式](cs_cluster_update.html#addons)。 
+{{site.data.keyword.containerlong_notm}} 中的每個 Kubernetes 叢集都是由 IBM 透過 IBM 擁有的 {{site.data.keyword.Bluemix_notm}} 基礎架構帳戶所管理的專用 Kubernetes 主節點予以控制。IBM Site Reliability Engineer (SRE) 會持續監視 Kubernetes 主節點（包括所有主節點元件、運算、網路及儲存空間資源）。SRE 會套用最新的安全標準、偵測並重新修補惡意活動，並且努力確保 {{site.data.keyword.containerlong_notm}} 的可靠性及可用性。當您佈建叢集時自動安裝的附加程式（例如 Fluentd 以進行記載）是由 IBM 自動更新。不過，您可以選擇停用部分附加程式的自動更新，並從主節點及工作者節點分別進行手動更新。如需相關資訊，請參閱[更新叢集附加程式](/docs/containers?topic=containers-update#addons)。 
 
-Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.html#version_types)。這些更新會影響 Kubernetes API 伺服器版本或 Kubernetes 主節點的其他元件。IBM 會自動更新修補程式版本，但您必須更新主節點的主要及次要版本。
-如需相關資訊，請參閱[更新 Kubernetes 主節點](cs_cluster_update.html#master)。 
+Kubernetes 會定期發行[主要、次要或修補程式更新](/docs/containers?topic=containers-cs_versions#version_types)。這些更新會影響 Kubernetes API 伺服器版本或 Kubernetes 主節點的其他元件。IBM 會自動更新修補程式版本，但您必須更新主節點的主要及次要版本。
+如需相關資訊，請參閱[更新 Kubernetes 主節點](/docs/containers?topic=containers-update#master)。 
 
-標準叢集裡的工作者節點會佈建至您的 {{site.data.keyword.Bluemix_notm}} 基礎架構帳戶。工作者節點為您的帳戶所專用，而且您負責向工作者節點要求及時更新，以確保工作者節點 OS 和 {{site.data.keyword.containerlong_notm}} 元件套用最新的安全更新及修補程式。IBM Site Reliability Engineer (SRE) 會提供安全更新項目與修補程式，也會持續監視工作者節點上所安裝的 Linux 映像檔，以偵測漏洞及安全規範問題。如需相關資訊，請參閱[更新工作者節點](cs_cluster_update.html#worker_node)。 
+標準叢集裡的工作者節點會佈建至您的 {{site.data.keyword.Bluemix_notm}} 基礎架構帳戶。工作者節點為您的帳戶所專用，而且您負責向工作者節點要求及時更新，以確保工作者節點 OS 和 {{site.data.keyword.containerlong_notm}} 元件套用最新的安全更新及修補程式。IBM Site Reliability Engineer (SRE) 會提供安全更新項目與修補程式，也會持續監視工作者節點上所安裝的 Linux 映像檔，以偵測漏洞及安全規範問題。如需相關資訊，請參閱[更新工作者節點](/docs/containers?topic=containers-update#worker_node)。 
 
 ## Kubernetes 主節點與工作者節點具有高可用性嗎？
-{: #ha}
+{: #faq_ha}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} 架構及基礎架構的設計旨在確保可靠性、縮短處理延遲時間及服務執行時間最大化。依預設，{{site.data.keyword.containerlong_notm}} 中每個執行 Kibernetes 1.10 版或更新版本的叢集，都是使用多個 Kubernetes 主節點實例來設定，以確保叢集資源的可用性及可存取性，即使 Kubernetes 主節點的一個以上實例無法使用。 
+{{site.data.keyword.containerlong_notm}} 架構及基礎架構的設計旨在確保可靠性、縮短處理延遲時間及服務執行時間最大化。依預設，{{site.data.keyword.containerlong_notm}} 中每個執行 Kibernetes 1.10 版或更新版本的叢集，都是使用多個 Kubernetes 主節點實例來設定，以確保叢集資源的可用性及可存取性，即使 Kubernetes 主節點的一個以上的實例無法使用。 
 
-您可以讓叢集具有更高可用性，並藉由將工作負載分散在某個地區的多個區域中的多個工作者節點之中，來保護應用程式免於關閉。此設定稱為[多區域叢集](cs_clusters_planning.html#multizone)，並確保您的應用程式可存取，即使工作者節點或整個區域無法使用。 
+您可以讓叢集具有更高可用性，並藉由將工作負載分散在某個地區的多個區域中的多個工作者節點之中，來保護應用程式免於關閉。此設定稱為[多區域叢集](/docs/containers?topic=containers-plan_clusters#multizone)，並確保您的應用程式可存取，即使工作者節點或整個區域無法使用。 
 
-若要防範整個地區失敗，請建立[多個叢集，並將它們分散在各 {{site.data.keyword.containerlong_notm}} 地區](cs_clusters_planning.html#multiple_clusters)之中。藉由設定叢集的負載平衡器，您可以達到叢集的跨地區負載平衡及跨地區網路。 
+若要防範整個地區失敗，請建立[多個叢集，並將它們分散在各 {{site.data.keyword.containerlong_notm}} 地區](/docs/containers?topic=containers-plan_clusters#multiple_clusters)之中。藉由設定叢集的負載平衡器，您可以達到叢集的跨地區負載平衡及跨地區網路。 
 
-如果您具有必須可供使用的資料，則即使運作中斷，也請務必將您的資料儲存在[持續性儲存空間](cs_storage_planning.html#storage_planning)中。 
+如果您具有必須可供使用的資料，則即使運作中斷，也請務必將您的資料儲存在[持續性儲存空間](/docs/containers?topic=containers-storage_planning#storage_planning)中。 
 
-如需如何達到叢集高可用性的相關資訊，請參閱 [{{site.data.keyword.containerlong_notm}} 的高可用性](cs_ha.html#ha)。 
+如需如何達到叢集高可用性的相關資訊，請參閱 [{{site.data.keyword.containerlong_notm}} 的高可用性](/docs/containers?topic=containers-ha#ha)。 
 
 ## 我有哪些可用來保護叢集的選項？
 {: #secure_cluster}
@@ -76,7 +80,15 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 
 您可以使用 {{site.data.keyword.containerlong_notm}} 中的內建安全特性，來保護叢集裡的元件、資料及應用程式部署，以確保安全規範及資料完整性。請使用這些特性來保護 Kubernetes API 伺服器、etcd 資料儲存庫、工作者節點、儲存空間、映像檔及部署，免於惡意攻擊。您也可以運用內建的記載和監視工具，來偵測惡意攻擊和可疑的使用型樣。 
 
-如需叢集元件以及如何保護每一個元件的相關資訊，請參閱 [{{site.data.keyword.containerlong_notm}} 的安全](cs_secure.html#security)。 
+如需叢集元件以及如何保護每個元件的相關資訊，請參閱 [{{site.data.keyword.containerlong_notm}} 的安全](/docs/containers?topic=containers-security#security)。 
+
+## 何處可以找到影響我的叢集的安全公告清單？ 
+{: #faq_security_bulletins}
+{: faq}
+
+如果在 Kubernetes 中找到漏洞，則 Kubernetes 會在安全公告中發行 CVE，以通知使用者，並說明使用者補救漏洞必須採取的動作。影響 {{site.data.keyword.containerlong_notm}} 使用者或 {{site.data.keyword.Bluemix_notm}} 平台的 Kubernetes 安全公告會發佈在 [{{site.data.keyword.Bluemix_notm}} 安全公告](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security)中。 
+
+部分 CVE 需要 Kubernetes 版本的最新修補程式更新，您可以在 {{site.data.keyword.containerlong_notm}} 中的一般[叢集更新處理程序](/docs/containers?topic=containers-update#update)過程中安裝。請確定及時套用安全修補程式，保護您的叢集免於發生惡意攻擊。如需安全修補程式所含內容的相關資訊，請參閱[版本變更日誌](/docs/containers?topic=containers-changelog#changelog)。 
 
 ## 服務是否提供裸機和 GPU 的支援？ 
 {: #bare_metal_gpu}
@@ -84,7 +96,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 
 是，您可以將工作者節點佈建為單一承租戶實體裸機伺服器。裸機伺服器隨附工作負載的高效能好處，例如資料、AI 及 GPU。此外，所有硬體資源都為您的工作負載專用，因此您不必擔心「吵雜的鄰居」。
 
-如需可用裸機特性以及裸機與虛擬機器有何不同的相關資訊，請參閱[實體機器（裸機）](cs_clusters_planning.html#bm)。
+如需可用裸機特性以及裸機與虛擬機器有何不同的相關資訊，請參閱[實體機器（裸機）](/docs/containers?topic=containers-plan_clusters#bm)。
 
 ## 服務支援哪些 Kubernet 版本？ 
 {: #supported_kube_versions}
@@ -93,11 +105,11 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 {{site.data.keyword.containerlong_notm}} 同時支援多個 Kubernetes 版本。發行最新版本 (n) 時，最多支援到前 2 個 (n-2) 版本。超過最新版本前 2 個版本的版本 (n-3) 會先被淘汰，然後不受支援。
 目前支援下列版本： 
 
-- 最新：1.12.3
-- 預設：1.10.11
-- 其他：1.11.5
+- 最新：1.13.4
+- 預設：1.12.6
+- 其他：1.11.8
 
-如需支援的版本，以及您必須採取以從某個版本移至另一個版本之更新動作的相關資訊，請參閱[版本資訊與更新動作](cs_versions.html#cs_versions)。
+如需支援的版本，以及您必須採取以從某個版本移至另一個版本之更新動作的相關資訊，請參閱[版本資訊與更新動作](/docs/containers?topic=containers-cs_versions#cs_versions)。
 
 ## 可在何處使用服務？
 {: #supported_regions}
@@ -105,28 +117,26 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 
 {{site.data.keyword.containerlong_notm}} 可在全球使用。您可以在每個支援的 {{site.data.keyword.containerlong_notm}} 地區建立標準叢集。免費叢集僅適用於選取地區。
 
-如需支援地區的相關資訊，請參閱[地區與區域](cs_regions.html#regions-and-zones)。
+如需支援地區的相關資訊，請參閱[地區與區域](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)。
 
 ## 服務符合哪些標準？ 
 {: #standards}
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} 實作控制項與下列標準相稱： 
-- HIPAA
-- SOC1
-- SOC2 類型 1
-- ISAE 3402
-- ISO 27001
-- ISO 27017
-- ISO 27018
+- 醫療保險轉移和責任法 (Health Insurance Portability and Accountability Act, HIPAA)
+- Service Organization Control 標準（SOC 1、SOC 2 Type 1）
+- International Standard on Assurance Engagements 3402 (ISAE 3402)、Assurance Reports on Controls at a Service Organization
+- 國際標準組織 (International Organization for Standardization, ISO 27001, ISO 27017, ISO 27018)
+- 支付卡產業資料安全標準 (Payment Card Industry Data Security Standard, PCI DSS)
 
 ## 我可以使用 IBM Cloud 及其他服務與叢集搭配嗎？
-{: #integrations}
+{: #faq_integrations}
 {: faq}
 
 您可以將 {{site.data.keyword.Bluemix_notm}} 平台及基礎架構服務，以及來自協力廠商供應商的服務新增至 {{site.data.keyword.containerlong_notm}}叢集，以啟用自動化、提高安全，或加強叢集裡的監視和記載功能。
 
-如需支援服務的清單，請參閱[整合服務](cs_integrations.html#integrations)。
+如需支援服務的清單，請參閱[整合服務](/docs/containers?topic=containers-integrations#integrations)。
 
 ## 我可以連接 IBM Cloud Public 中的叢集與在內部部署資料中心內執行的應用程式嗎？
 {: #hybrid}
@@ -136,9 +146,9 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 - 您在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 中使用 {{site.data.keyword.containerlong_notm}} 來建立叢集，但想要連接叢集與內部部署資料庫。
 - 您可以在自己的資料中心的 {{site.data.keyword.Bluemix_notm}} Private 中建立 Kubernets 叢集，並將應用程式部署至您的叢集。不過，您的應用程式可能會在 {{site.data.keyword.Bluemix_notm}} Public 中使用 {{site.data.keyword.ibmwatson_notm}} 服務，例如 Tone Analyzer。
 
-若要啟用在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 執行的服務與執行內部部署的服務之間的通訊，您必須[設定 VPN 連線](cs_vpn.html#vpn)。若要連接 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 環境與 {{site.data.keyword.Bluemix_notm}} Private 環境，請參閱[使用 {{site.data.keyword.containerlong_notm}} 與 {{site.data.keyword.Bluemix_notm}} Private 搭配](cs_hybrid.html#hybrid_iks_icp)。
+若要啟用在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 執行的服務與執行內部部署的服務之間的通訊，您必須[設定 VPN 連線](/docs/containers?topic=containers-vpn#vpn)。若要連接 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 環境與 {{site.data.keyword.Bluemix_notm}} Private 環境，請參閱[使用 {{site.data.keyword.containerlong_notm}} 與 {{site.data.keyword.Bluemix_notm}} Private 搭配](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)。
 
-如需支援的 {{site.data.keyword.containerlong_notm}} 供應項目的概觀，請參閱[供應項目與其組合的比較](cs_why.html#differentiation)。
+如需支援的 {{site.data.keyword.containerlong_notm}} 供應項目的概觀，請參閱[供應項目與其組合的比較](/docs/containers?topic=containers-cs_ov#differentiation)。
 
 ## 我可以在自己的資料中心內部署 IBM Cloud Kubernetes Service 嗎？
 {: #private}
@@ -153,7 +163,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 {: #charges}
 {: faq}
 
-使用 {{site.data.keyword.containerlong_notm}} 叢集，您可以搭配使用 IBM Cloud 基礎架構 (SoftLayer) 運算、網路及儲存空間資源與平台服務（例如 Watson AI 或 Compose Database-as-a-Service）。每個資源都可能會有自己的費用，其可以是[固定、計量、分層或保留](/docs/billing-usage/how_charged.html#charges)。 
+使用 {{site.data.keyword.containerlong_notm}} 叢集，您可以搭配使用 IBM Cloud 基礎架構 (SoftLayer) 運算、網路及儲存空間資源與平台服務（例如 Watson AI 或 Compose Database-as-a-Service）。每個資源都可能會有自己的費用，其可以是[固定、計量、分層或保留](/docs/billing-usage?topic=billing-usage-charges#charges)。 
 * [工作者節點](#nodes)
 * [出埠網路](#bandwidth)
 * [子網路 IP 位址](#subnets)
@@ -169,28 +179,27 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
   <li><strong>每個月的分層時數</strong>：將按小時計費分層。因為針對計費月份內的小時層級訂購您的 VM，所以向您收取的每小時費率會較低。小時的層級如下：0 - 150 小時、151 - 290 小時、291 - 540 小時及 541+ 小時。</li></ul>
   <p><strong>實體機器（裸機）</strong>會為資料、AI 及 GPU 等工作負載帶來高效能優點。此外，所有硬體資源都為您的工作負載專用，因此您沒有「吵雜的鄰居」。請記住下列影響裸機成本的因素：</p>
   <ul><li><strong>僅限按月計費</strong>：所有裸機都是按月計費。</li>
-  <li><strong>較長的訂購處理程序</strong>：因為訂購及取消裸機伺服器是透過 IBM Cloud 基礎架構 (SoftLayer) 帳戶的手動處理程序，所以可能需要超過一個營業日才能完成。</li></ul>
-  <p>如需機器規格的詳細資料，請參閱[工作者節點的可用硬體](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)。</p></dd>
+  <li><strong>較長訂購程序</strong>：訂購或取消裸機伺服器之後，會以手動方式，在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中完成處理程序。因此，可能需要多個營業日才能完成。</li></ul>
+  <p>如需機器規格的詳細資料，請參閱[工作者節點的可用硬體](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)。</p></dd>
 
 <dt id="bandwidth">公用頻寬</dt>
-  <dd><p>頻寬指的是入埠及出埠網路資料流量的公用資料傳送，即進出全球資料中心之 {{site.data.keyword.Bluemix_notm}} 資源的網路資料流量。公用頻寬是按每 GB 收費。您可以檢閱現行頻寬摘要，方法是登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://console.bluemix.net/)，並從功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中選取**基礎架構**，然後選取**網路 > 頻寬 > 摘要**頁面。
-  <p>檢閱下列影響公用頻寬費用的因素：</p>
+  <dd><p>頻寬指的是入埠及出埠網路資料流量的公用資料傳送，即進出全球資料中心之 {{site.data.keyword.Bluemix_notm}} 資源的網路資料流量。公用頻寬是按每 GB 收費。您可以檢閱目前的頻寬摘要，只要登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/)，從功能表 ![功能表圖示](../icons/icon_hamburger.svg "功能表圖示") 中選取**標準基礎架構**，然後選取**網路 > 頻寬 > 摘要**頁面即可。<p>檢閱下列影響公用頻寬費用的因素：</p>
   <ul><li><strong>位置</strong>：與使用工作者節點相同，費用會視資源部署所在的區域而不同。</li>
   <li><strong>已包括頻寬或隨收隨付制</strong>：您的工作者節點機器可能會隨附每個月出埠網路的特定配置（例如 250GB 用於 VM 或 500GB 用於裸機）。或者，根據 GB 用量，配置可能是「隨收隨付制」。</li>
   <li><strong>分層套件</strong>：在您超出任何已包括的頻寬之後，會根據依位置而異的分層用量方法向您收費。如果您超出層級分配，則也可能會向您收取標準資料傳送費用。</li></ul>
   <p>如需相關資訊，請參閱[頻寬套件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/bandwidth)。</p></dd>
 
 <dt id="subnets">子網路 IP 位址</dt>
-  <dd><p>當您建立標準叢集時，會訂購 1 個可攜式公用子網路（含 8 個公用 IP 位址），並每月向您的帳戶收費。</p><p>如果您的基礎架構帳戶中已有可用的子網路，則您可以改為使用這些子網路。使用 `--no-subnets` [旗標](cs_cli_reference.html#cs_cluster_create)建立叢集，然後[重複使用子網路](cs_subnets.html#custom)。</p>
+  <dd><p>當您建立標準叢集時，會訂購 1 個可攜式公用子網路（含 8 個公用 IP 位址），並每月向您的帳戶收費。</p><p>如果您的基礎架構帳戶中已有可用的子網路，則您可以改為使用這些子網路。使用 `--no-subnets` [旗標](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)建立叢集，然後[重複使用子網路](/docs/containers?topic=containers-subnets#subnets_custom)。</p>
   </dd>
 
 <dt id="storage">儲存空間</dt>
-  <dd>當您佈建儲存空間時，可以為您的使用案例選擇適合的儲存空間類型及儲存空間類別。費用會視儲存空間類型、位置及儲存空間實例規格而不同。部分儲存空間解決方案（例如檔案及區塊儲存空間）提供您可以從中選擇的每小時及每月方案。若要選擇正確的儲存空間解決方案，請參閱[規劃高度可用的持續性儲存空間](cs_storage_planning.html#storage_planning)。如需相關資訊，請參閱：<ul><li>[NFS 檔案儲存空間定價 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/file-storage/pricing)</li>
+  <dd>當您佈建儲存空間時，可以為您的使用案例選擇適合的儲存空間類型及儲存空間類別。費用會視儲存空間類型、位置及儲存空間實例規格而不同。部分儲存空間解決方案（例如檔案及區塊儲存空間）提供您可以從中選擇的每小時及每月方案。若要選擇正確的儲存空間解決方案，請參閱[規劃高度可用的持續性儲存空間](/docs/containers?topic=containers-storage_planning#storage_planning)。如需相關資訊，請參閱：<ul><li>[NFS 檔案儲存空間定價 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/file-storage/pricing)</li>
   <li>[區塊儲存空間定價 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/block-storage/pricing)</li>
   <li>[物件儲存空間方案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
 
 <dt id="services">{{site.data.keyword.Bluemix_notm}} 服務</dt>
-  <dd>與您的叢集整合的每個服務都有自己的定價模型。如需相關資訊，請參閱每個產品說明文件及[成本預估器 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/pricing/)。</dd>
+  <dd>與您的叢集整合的每個服務都有自己的定價模型。請參考每個產品文件，並使用 {{site.data.keyword.Bluemix_notm}} 主控台來[預估成本](/docs/billing-usage?topic=billing-usage-cost#cost)。</dd>
 
 </dl>
 
@@ -201,17 +210,16 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 {: #bill}
 {: faq}
 
-使用 {{site.data.keyword.Bluemix_notm}} 計費帳戶時，會在一個帳單中彙總平台及基礎架構資源。如果您已鏈結 {{site.data.keyword.Bluemix_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則會收到 {{site.data.keyword.Bluemix_notm}} 平台與基礎架構資源的[合併帳單](/docs/customer-portal/linking_accounts.html#unifybillaccounts)。 
+使用 {{site.data.keyword.Bluemix_notm}} 計費帳戶時，會在一個帳單中彙總平台及基礎架構資源。如果您已鏈結 {{site.data.keyword.Bluemix_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則會收到 {{site.data.keyword.Bluemix_notm}} 平台與基礎架構資源的[合併帳單](/docs/customer-portal?topic=customer-portal-unifybillaccounts#unifybillaccounts)。 
 
 ## 是否可以預估成本？
 {: #cost_estimate}
 {: faq}
 
-是，如需相關資訊，請參閱[預估成本](/docs/billing-usage/estimating_costs.html#cost)及[成本預估器 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/pricing/) 工具。 
+是，請參閱[預估成本](/docs/billing-usage?topic=billing-usage-cost#cost)。請記住，某些費用不會反映在預估中，例如，已增加之每小時用量的分層計價。如需相關資訊，請參閱[使用 {{site.data.keyword.containerlong_notm}} 時，我要支付哪些項目的費用？](#charges)。
 
 ## 是否可以檢視現行用量？ 
 {: #usage}
 {: faq}
 
-您可以檢查 {{site.data.keyword.Bluemix_notm}} 平台及基礎架構資源的現行用量及每月預估總計。如需相關資訊，請參閱[檢視用量](/docs/billing-usage/viewing_usage.html#viewingusage)。若要組織您的計費，您可以使用[資源群組](/docs/resources/bestpractice_rgs.html#bp_resourcegroups)將資源分組。 
-
+您可以檢查 {{site.data.keyword.Bluemix_notm}} 平台及基礎架構資源的現行用量及每月預估總計。如需相關資訊，請參閱[檢視用量](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage)。若要組織您的計費，您可以使用[資源群組](/docs/resources?topic=resources-bp_resourcegroups#bp_resourcegroups)將資源分組。 

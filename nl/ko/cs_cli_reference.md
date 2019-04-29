@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, ibmcloud, ic, ks
+
+subcollection: containers
 
 ---
 
@@ -20,18 +24,61 @@ lastupdated: "2018-12-05"
 
 
 
-# 명령 참조
+# IBM Cloud Kubernetes Service CLI
 {: #cs_cli_reference}
 
 {{site.data.keyword.containerlong}}에서 Kubernetes 클러스터를 작성하고 관리하려면 다음 명령을 참조하십시오.
 {:shortdesc}
 
-CLI 플러그인을 설치하려면 [CLI 설치](cs_cli_install.html#cs_cli_install_steps)를 참조하십시오.
+CLI 플러그인을 설치하려면 [CLI 설치](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)를 참조하십시오.
 
 터미널에서 `ibmcloud` CLI 및 플러그인에 대한 업데이트가 사용 가능한 시점을 사용자에게 알려줍니다. 사용 가능한 모든 명령과 플래그를 사용할 수 있도록 반드시 CLI를 최신 상태로 유지하십시오.
 
-`ibmcloud cr` 명령을 찾고 계십니까? [{{site.data.keyword.registryshort_notm}} CLI 참조](/docs/container-registry-cli-plugin/container-registry-cli.html#containerregcli)를 확인하십시오. `kubectl` 명령을 찾고 계십니까? [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/kubectl/overview/)를 참조하십시오.
+`ibmcloud cr` 명령을 찾고 계십니까? [{{site.data.keyword.registryshort_notm}} CLI 참조](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)를 확인하십시오. `kubectl` 명령을 찾고 계십니까? [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/kubectl/overview/)를 참조하십시오.
 {:tip}
+
+## 베타 명령 구조 사용
+{: #cs_beta}
+
+다시 디자인된 버전의 {{site.data.keyword.containerlong_notm}} 플러그인을 베타로서 사용할 수 있습니다. 다시 디자인된 {{site.data.keyword.containerlong_notm}} 플러그인은 명령을 카테고리로 그룹화하고 하이픈으로 연결된 구조에서 명령을 일정 간격이 있는 구조로 변경합니다.
+{: shortdesc}
+
+다시 디자인된 {{site.data.keyword.containerlong_notm}} 플러그인을 사용하려면 `IKS_BETA_VERSION` 환경 변수를 사용하려는 베타 버전으로 설정하십시오.
+
+```
+export IKS_BETA_VERSION=<beta_version>
+```
+{: pre}
+
+다시 디자인된 {{site.data.keyword.containerlong_notm}} 플러그인의 다음 베타 버전을 사용할 수 있습니다. 기본 작동은 `0.2`입니다.
+
+<table>
+<caption>다시 디자인된 {{site.data.keyword.containerlong_notm}} 플러그인의 베타 버전</caption>
+  <thead>
+    <th>베타 버전</th>
+    <th>`ibmcloud ks help` 출력 구조</th>
+    <th>명령 구조</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>0.2</code>(기본값)</td>
+      <td>레거시: 명령은 하이픈으로 연결된 구조로 표시되며 알파벳순으로 나열됩니다.</td>
+      <td>레거시 및 베타: 레거시 하이픈으로 연결된 구조(`ibmcloud ks alb-cert-get`) 또는 베타 간격이 있는 구조(`ibmcloud ks alb cert get`)의 명령을 실행할 수 있습니다.</td>
+  </tr>
+    <tr>
+      <td><code>0.3</code></td>
+      <td>베타: 명령은 간격이 있는 구조로 표시되며 카테고리로 나열됩니다.</td>
+      <td>레거시 및 베타: 레거시 하이픈으로 연결된 구조(`ibmcloud ks alb-cert-get`) 또는 베타 간격이 있는 구조(`ibmcloud ks alb cert get`)의 명령을 실행할 수 있습니다.</td>
+    </tr>
+    <tr>
+      <td><code>1.0</code></td>
+      <td>베타: 명령은 간격이 있는 구조로 표시되며 카테고리로 나열됩니다.</td>
+      <td>베타: 베타 간격이 있는 구조(`ibmcloud ks alb cert get`)의 명령만 실행할 수 있습니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+
 
 ## ibmcloud ks 명령
 {: #cs_commands}
@@ -42,8 +89,6 @@ CLI 플러그인을 설치하려면 [CLI 설치](cs_cli_install.html#cs_cli_inst
 ibmcloud plugin list
 ```
 {: pre}
-
-
 
 <table summary="API 명령 표">
 <caption>API 명령</caption>
@@ -101,21 +146,27 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
+    <td>[ibmcloud ks cluster-addon-disable](#cs_cluster_addon_disable)</td>
+    <td>[ibmcloud ks cluster-addon-enable](#cs_cluster_addon_enable)</td>
+    <td>[ibmcloud ks cluster-addons](#cs_cluster_addons)</td>
     <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
-    <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
-    <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
-    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
   </tr>
   <tr>
+    <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
+    <td>[ibmcloud ks cluster-feature-disable](#cs_cluster_feature_disable)</td>
+    <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
+    <td>[ibmcloud ks cluster-feature-ls](#cs_cluster_feature_ls)</td>
+  </tr>
+  <tr>
+    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
+    <td>[ibmcloud ks cluster-pull-secret-apply](#cs_cluster_pull_secret_apply)</td>
     <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
-    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
-    <td>[ibmcloud ks clusters](#cs_clusters)</td>
   </tr>
   <tr>
+    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
+    <td>[ibmcloud ks clusters](#cs_clusters)</td>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
-    <td> </td>
-    <td> </td>
     <td> </td>
   </tr>
 </tbody>
@@ -353,10 +404,16 @@ ibmcloud plugin list
 ## API 명령
 {: #api_commands}
 
-### ibmcloud ks api --endpoint ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
+### ibmcloud ks api
 {: #cs_api}
 
 {{site.data.keyword.containerlong_notm}}에 대한 API 엔드포인트를 대상으로 지정합니다. 엔드포인트를 지정하지 않으면 대상으로 지정된 현재 엔드포인트에 대한 정보를 볼 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
+```
+{: pre}
 
 지역을 전환하려면 대신 `ibmcloud ks region-set` [명령](#cs_region-set)을 사용하십시오.
 {: tip}
@@ -368,13 +425,13 @@ ibmcloud plugin list
    <dl>
    <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
    <dd>{{site.data.keyword.containerlong_notm}} API 엔드포인트입니다. 이 엔드포인트는 {{site.data.keyword.Bluemix_notm}} 엔드포인트와 다릅니다. 이 값은 API 엔드포인트를 설정하는 데 필요합니다. 허용되는 값은 다음과 같습니다.<ul>
-   <li>글로벌 엔드포인트: https://containers.bluemix.net</li>
-   <li>AP 북부 엔드포인트: https://ap-north.containers.bluemix.net</li>
-   <li>AP 남부 엔드포인트: https://ap-south.containers.bluemix.net</li>
-   <li>중앙 유럽 엔드포인트: https://eu-central.containers.bluemix.net</li>
-   <li>영국 남부 엔드포인트: https://uk-south.containers.bluemix.net</li>
-   <li>미국 동부 엔드포인트: https://us-east.containers.bluemix.net</li>
-   <li>미국 남부 엔드포인트: https://us-south.containers.bluemix.net</li></ul>
+   <li>글로벌 엔드포인트: https://containers.cloud.ibm.com</li>
+   <li>AP 북부 엔드포인트: https://ap-north.containers.cloud.ibm.com</li>
+   <li>AP 남부 엔드포인트: https://ap-south.containers.cloud.ibm.com</li>
+   <li>중앙 유럽 엔드포인트: https://eu-central.containers.cloud.ibm.com</li>
+   <li>영국 남부 엔드포인트: https://uk-south.containers.cloud.ibm.com</li>
+   <li>미국 동부 엔드포인트: https://us-east.containers.cloud.ibm.com</li>
+   <li>미국 남부 엔드포인트: https://us-south.containers.cloud.ibm.com</li></ul>
    </dd>
 
    <dt><code>--insecure</code></dt>
@@ -398,22 +455,28 @@ ibmcloud ks api
 {: pre}
 
 ```
-API Endpoint:          https://containers.bluemix.net   
-API Version:           v1   
-Skip SSL Validation:   false   
+API Endpoint:          https://containers.cloud.ibm.com
+API Version:           v1
+Skip SSL Validation:   false
 Region:                us-south
 ```
 {: screen}
 
 
-### ibmcloud ks api-key-info --cluster CLUSTER [--json][-s]
+### ibmcloud ks api-key-info
 {: #cs_api_key_info}
 
 {{site.data.keyword.containerlong_notm}} 리소스 그룹 및 지역에 있는 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키의 소유자에 대한 이름과 이메일 주소를 봅니다.
+{: shortdesc}
+
+```
+ibmcloud ks api-key-info --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 {{site.data.keyword.Bluemix_notm}} API 키는 {{site.data.keyword.containerlong_notm}} 관리자 액세스 정책이 필요한 첫 번째 조치가 수행될 때 리소스 그룹 및 지역에 대해 자동으로 설정됩니다. 예를 들어, 관리자 중 한 명이 `us-south` 지역의 `default` 리소스 그룹에 첫 번째 클러스터를 작성합니다. 이를 수행하면 이 사용자의 {{site.data.keyword.Bluemix_notm}} IAM API 키가 이 리소스 그룹 및 지역에 대해 계정에 저장됩니다. API 키는 새 작업자 노드 또는 VLAN과 같은 IBM Cloud 인프라(SoftLayer)에서 리소스를 정렬하는 데 사용됩니다. 리소스 그룹 내 각 지역에 대해서는 다른 API 키를 설정할 수 있습니다.
 
-다른 사용자가 이 리소스 그룹 및 지역에서 새 클러스터 작성 또는 작업자 노드 다시 로드와 같이 IBM Cloud 인프라(SoftLayer) 포트폴리오와의 상호작용이 필요한 조치를 수행하는 경우, 저장된 API 키가 해당 조치를 수행하는 데 충분한 권한이 있는지 판별하는 데 사용됩니다. 클러스터의 인프라 관련 조치를 수행할 수 있는지 확인하려면 {{site.data.keyword.containerlong_notm}} 관리 사용자에게 **수퍼유저** 인프라 액세스 정책을 지정하십시오. 자세한 정보는 [사용자 액세스 관리](cs_users.html#infra_access)를 참조하십시오.
+다른 사용자가 이 리소스 그룹 및 지역에서 새 클러스터 작성 또는 작업자 노드 다시 로드와 같이 IBM Cloud 인프라(SoftLayer) 포트폴리오와의 상호작용이 필요한 조치를 수행하는 경우, 저장된 API 키가 해당 조치를 수행하는 데 충분한 권한이 있는지 판별하는 데 사용됩니다. 클러스터의 인프라 관련 조치를 수행할 수 있는지 확인하려면 {{site.data.keyword.containerlong_notm}} 관리 사용자에게 **수퍼유저** 인프라 액세스 정책을 지정하십시오. 자세한 정보는 [사용자 액세스 관리](/docs/containers?topic=containers-users#infra_access)를 참조하십시오.
 
 리소스 그룹 및 지역에 대해 저장된 API 키를 업데이트해야 한다고 판단하는 경우에는 [ibmcloud ks api-key-reset](#cs_api_key_reset) 명령을 사용하여 이를 수행할 수 있습니다. 이 명령은 {{site.data.keyword.containerlong_notm}} 관리자 액세스 정책이 필요하고 계정에서 이 명령을 실행하는 사용자의 API 키를 저장합니다.
 
@@ -443,15 +506,20 @@ Region:                us-south
   {: pre}
 
 
-### ibmcloud ks api-key-reset [-s]
+###         ibmcloud ks api-key-reset
 {: #cs_api_key_reset}
 
 {{site.data.keyword.containerlong_notm}} 지역의 현재 {{site.data.keyword.Bluemix_notm}} IAM API 키를 대체합니다.
 {: shortdesc}
 
+```
+ibmcloud ks api-key-reset [-s]
+```
+{: pre}
+
 이 명령은 {{site.data.keyword.containerlong_notm}} 관리자 액세스 정책이 필요하고 계정에서 이 명령을 실행하는 사용자의 API 키를 저장합니다. {{site.data.keyword.Bluemix_notm}} IAM API 키는 IBM Cloud 인프라(SoftLayer) 포트폴리오에서 인프라를 주문하는 데 필요합니다. 저장되면, API 키는 이 명령을 실행하는 사용자와 무관하게 인프라 권한이 필요한 지역의 모든 조치에 사용됩니다. {{site.data.keyword.Bluemix_notm}} IAM API 키의 작동 방법에 대한 자세한 정보는 [`ibmcloud ks api-key-info` 명령](#cs_api_key_info)을 참조하십시오.
 
-이 명령을 시작하기 전에 이 명령을 실행하는 사용자가 필수 [{{site.data.keyword.containerlong_notm}} 및 IBM Cloud 인프라(SoftLayer) 권한](cs_users.html#users)을 보유하고 있는지 확인하십시오.
+이 명령을 시작하기 전에 이 명령을 실행하는 사용자가 필수 [{{site.data.keyword.containerlong_notm}} 및 IBM Cloud 인프라(SoftLayer) 권한](/docs/containers?topic=containers-users#users)을 보유하고 있는지 확인하십시오.
 {: important}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
@@ -472,15 +540,23 @@ Region:                us-south
   {: pre}
 
 
+
 ### ibmcloud ks apiserver-config-get
 {: #cs_apiserver_config_get}
 
 클러스터의 Kubernetes API 서버 구성 옵션에 대한 정보를 가져옵니다. 이 명령은 정보를 원하는 구성 옵션에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
+{: shortdesc}
 
-#### ibmcloud ks apiserver-config-get audit-webhook --cluster CLUSTER
+#### ibmcloud ks apiserver-config-get audit-webhook
 {: #cs_apiserver_config_get_audit_webhook}
 
 API 서버 감사 로그를 전송 중인 원격 로깅 서비스의 URL을 봅니다. URL은 API 서버 구성을 위한 웹훅 백엔드를 작성할 때 지정되었습니다.
+{: shortdesc}
+
+```
+ibmcloud ks apiserver-config-get audit-webhook --cluster CLUSTER
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -498,15 +574,26 @@ API 서버 감사 로그를 전송 중인 원격 로깅 서비스의 URL을 봅�
   ```
   {: pre}
 
+
 ### ibmcloud ks apiserver-config-set
 {: #cs_apiserver_config_set}
 
 클러스터의 Kubernetes API 서버 구성에 대한 한 옵션을 설정합니다. 이 명령은 설정할 구성 옵션에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
+{: shortdesc}
 
-#### ibmcloud ks apiserver-config-set audit-webhook --cluster CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
+#### ibmcloud ks apiserver-config-set audit-webhook
 {: #cs_apiserver_set}
 
 API 서버 구성을 위한 웹훅 백엔드를 설정합니다. 웹훅 백엔드는 API 서버 감사 로그를 원격 서버로 전달합니다. 웹훅 구성은 사용자가 이 명령의 플래그에 제공하는 정보를 기반으로 작성됩니다. 이 플래그에 정보를 제공하지 않은 경우에는 기본 웹훅 구성이 사용됩니다.
+{: shortdesc}
+
+```
+ibmcloud ks apiserver-config-set audit-webhook --cluster CLUSTER [--remoteServer SERVER_URL_OR_IP] [--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH] [--clientKey CLIENT_KEY_PATH]
+```
+{: pre}
+
+웹훅을 설정하면 `ibmcloud ks apiserver-refresh` 명령을 실행하여 Kubernetes 마스터에 변경사항을 적용해야 합니다.
+{: note}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -541,11 +628,21 @@ API 서버 구성을 위한 웹훅 백엔드를 설정합니다. 웹훅 백엔�
 {: #cs_apiserver_config_unset}
 
 클러스터의 Kubernetes API 서버 구성에 대한 옵션을 사용 안함으로 설정합니다. 이 명령은 설정 해제할 구성 옵션에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
+{: shortdesc}
 
-#### ibmcloud ks apiserver-config-unset audit-webhook --cluster CLUSTER
+#### ibmcloud ks apiserver-config-unset audit-webhook
 {: #cs_apiserver_unset}
 
 클러스터의 API 서버를 위한 웹훅 백엔드 구성을 사용 안함으로 설정합니다. 웹훅 백엔드가 사용되지 않으면 원격 서버로의 API 서버 감사 로그 전달이 중지됩니다.
+{: shortdesc}
+
+```
+ibmcloud ks apiserver-config-unset audit-webhook --cluster CLUSTER
+```
+{: pre}
+
+웹훅을 사용 안함으로 설정하면 `ibmcloud ks apiserver-refresh` 명령을 실행하여 Kubernetes 마스터에 변경사항을 적용해야 합니다.
+{: note}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -563,11 +660,16 @@ API 서버 구성을 위한 웹훅 백엔드를 설정합니다. 웹훅 백엔�
   ```
   {: pre}
 
-### ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
+###     ibmcloud ks apiserver-refresh
 {: #cs_apiserver_refresh}
 
-새 Kubernetes API 구성 변경사항을 적용하기 위해 클러스터 마스터를 다시 시작합니다. 작업자 노드, 앱 및 리소스는 수정되지 않고 계속 실행됩니다.
+`ibmcloud ks apiserver-config-set`, `apiserver-config-unset`, `cluster-feature-enable` 또는 `cluster-feature-disable` 명령으로 요청된 Kubernetes 마스터에 대한 구성 변경사항을 적용합니다. 구성 변경에 다시 시작이 필요한 경우 영향을 받은 Kubernetes 마스터 컴포넌트가 다시 시작됩니다. 다시 시작하지 않고 구성 변경사항을 적용할 수 있는 경우에는 Kubernetes 마스터 컴포넌트가 재시작되지 않습니다. 작업자 노드, 앱 및 리소스는 수정되지 않고 계속 실행됩니다.
 {: shortdesc}
+
+```
+ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -600,26 +702,28 @@ API 서버 구성을 위한 웹훅 백엔드를 설정합니다. 웹훅 백엔�
 {: #cs_help}
 
 지원되는 명령 및 매개변수의 목록을 봅니다.
+{: shortdesc}
+
+```
+  ibmcloud ks help
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: 없음
 
-<strong>명령 옵션</strong>:
-
-   없음
-
-**예제**:
-
-  ```
-  ibmcloud ks help
-  ```
-  {: pre}
+<strong>명령 옵션</strong>: 없음
 
 
-### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
+### ibmcloud ks init [--host HOST]
 {: #cs_init}
 
 {{site.data.keyword.containerlong_notm}} 플러그인을 초기화하거나 Kubernetes 클러스터를 작성 또는 액세스할 지역을 지정합니다.
 {: shortdesc}
+
+```
+ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: 없음
 
@@ -627,7 +731,7 @@ API 서버 구성을 위한 웹훅 백엔드를 설정합니다. 웹훅 백엔�
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>사용할 {{site.data.keyword.containerlong_notm}} API 엔드포인트입니다.  이 값은 선택사항입니다. [사용 가능한 API 엔드포인트 값을 보십시오.](cs_regions.html#container_regions)</dd>
+   <dd>사용할 {{site.data.keyword.containerlong_notm}} API 엔드포인트입니다.  이 값은 선택사항입니다. [사용 가능한 API 엔드포인트 값을 보십시오.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>비보안 HTTP 연결을 허용합니다.</dd>
@@ -644,13 +748,10 @@ API 서버 구성을 위한 웹훅 백엔드를 설정합니다. 웹훅 백엔�
    </dl>
 
 **예제**:
-
-
 ```
-ibmcloud ks init --host https://uk-south.containers.bluemix.net
+ibmcloud ks init --host https://uk-south.containers.cloud.ibm.com
 ```
 {: pre}
-
 
 ### ibmcloud ks messages
 {: #cs_messages}
@@ -658,15 +759,12 @@ ibmcloud ks init --host https://uk-south.containers.bluemix.net
 IBM ID 사용자에 대한 현재 메시지를 봅니다.
 {: shortdesc}
 
-<strong>최소 필요 권한</strong>: 없음
-
-**예제**:
-
 ```
 ibmcloud ks messages
 ```
 {: pre}
 
+<strong>최소 필요 권한</strong>: 없음
 
 <br />
 
@@ -674,15 +772,287 @@ ibmcloud ks messages
 ## 클러스터 명령: 관리
 {: #cluster_mgmt_commands}
 
+### ibmcloud ks cluster-addon-disable
+{: #cs_cluster_addon_disable}
 
+기존 클러스터에서 관리 추가 기능을 사용 안함으로 설정합니다. 이 명령은 사용 안함으로 설정할 관리 추가 기능에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
+{: shortdesc}
 
-### ibmcloud ks cluster-config --cluster CLUSTER [--admin][--export] [--network][-s] [--yaml]
+#### ibmcloud ks cluster-addon-disable <ph class="ignoreSpelling">istio</ph>
+{: #cs_cluster_addon_disable_istio}
+
+관리 Istio 추가 기능을 사용 안함으로 설정합니다. Prometheus를 포함하여 클러스터에서 모든 lstio 핵심 컴포넌트를 제거합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable istio --cluster CLUSTER [-f]
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+   <dt><code>-f</code></dt>
+   <dd>선택 사항: 이 추가 기능은 <code>istio-extras</code>, <code>istio-sample-bookinfo</code> 및 <code>knative</code> 관리 추가 기능에 대한 종속 항목입니다. 해당 추가 기능을 사용 안함으로 설정하려면 이 플래그를 포함하십시오.</dd>
+</dl>
+
+**예제**:
+
+  ```
+  ibmcloud ks cluster-addon-disable istio --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable istio-extras
+{: #cs_cluster_addon_disable_istio_extras}
+
+관리 Istio extras 추가 기능을 사용 안함으로 설정합니다. 클러스터에서 Grafana, Jeager 및 Kiali를 제거합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable istio-extras --cluster CLUSTER [-f]
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>선택 사항: 이 추가 기능은 <code>istio-sample-bookinfo</code> 관리 추가 기능에 대한 종속 항목입니다. 해당 추가 기능을 사용 안함으로 설정하려면 이 플래그를 포함하십시오.</dd>
+</dl>
+
+**예제**:
+
+  ```
+  ibmcloud ks cluster-addon-disable istio-extras --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable istio-sample-bookinfo
+{: #cs_cluster_addon_disable_istio_sample_bookinfo}
+
+관리 Istio BookInfo 추가 기능을 사용 안함으로 설정합니다. 클러스터에서 모든 배치, 팟(Pod) 및 기타 BookInfo 앱 리소스를 제거합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster CLUSTER
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+</dl>
+
+**예제**:
+
+  ```
+  ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable <ph class="ignoreSpelling">knative</ph>
+{: #cs_cluster_addon_disable_knative}
+
+관리 Knative 추가 기능을 사용 안함으로 설정하여 클러스터에서 Knative 서버리스 프레임워크를 제거합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+</dl>
+
+**예제**:
+
+  ```
+  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-addon-enable
+{: #cs_cluster_addon_enable}
+
+기존 클러스터에서 관리 추가 기능을 사용으로 설정합니다. 이 명령은 사용으로 설정할 관리 추가 기능에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
+{: shortdesc}
+
+#### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">istio</ph>
+{: #cs_cluster_addon_enable_istio}
+
+관리 [Istio 추가 기능](/docs/containers?topic=containers-istio)을 사용으로 설정합니다. Prometheus를 포함하여 Istio 버전 1.0.5의 핵심 컴포넌트를 설치합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+</dl>
+
+**예제**:
+
+  ```
+  ibmcloud ks cluster-addon-enable istio --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable istio-extras
+{: #cs_cluster_addon_enable_istio_extras}
+
+관리 Istio extras 추가 기능을 사용으로 설정합니다. Grafana, Jeager 및 Kiali를 설치하여 Istio에 대한 추가 모니터링, 추적 및 시각화를 제공합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>선택사항: <code>istio</code> 추가 기능 종속성을 사용으로 설정합니다.</dd>
+</dl>
+
+**예제**:
+
+  ```
+  ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable istio-sample-bookinfo
+{: #cs_cluster_addon_enable_istio_sample_bookinfo}
+
+관리 Istio BookInfo 추가 기능을 사용으로 설정합니다. [Istio의 BookInfo 샘플 애플리케이션 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/examples/bookinfo/)을 <code>default</code> 네임스페이스에 배치합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>선택사항: <code>istio</code> 및 <code>istio-extras</code> 추가 기능 종속성을 사용으로 설정합니다.</dd>
+</dl>
+
+**예제**:
+
+  ```
+  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
+{: #cs_cluster_addon_enable_knative}
+
+관리[Knative 추가 기능](/docs/containers?topic=containers-knative_tutorial)을 사용으로 설정하여 Knative 서버리스 프레임워크를 설치합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>선택사항: <code>istio</code> 추가 기능 종속성을 사용으로 설정합니다.</dd>
+</dl>
+
+**예제**:
+
+  ```
+  ibmcloud ks cluster-addon-enable knative --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-addons
+{: #cs_cluster_addons}
+
+클러스터에서 사용으로 설정된 관리 추가 기능을 나열합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addons --cluster CLUSTER
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+</dl>
+
+**예제**:
+
+  ```
+  ibmcloud ks cluster-addons --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-config
 {: #cs_cluster_config}
 
 로그인한 후 클러스터에 연결하는 데 필요한 Kubernetes 구성 데이터 및 인증서를 다운로드하고 `kubectl` 명령을 실행합니다. 파일은 `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`에 다운로드됩니다.
 {: shortdesc}
 
-**최소 필요 권한**: 없음
+```
+ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [--skip-rbac] [-s] [--yaml]
+```
+{: pre}
+
+**최소 필수 권한**:  {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 또는 **독자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할. 또한 플랫폼 역할만 있거나 서비스 역할만 있는 경우 추가 제한조건이 적용됩니다.
+* **플랫폼**: 플랫폼 역할만 있는 경우 이 명령을 수행할 수 있지만 클러스터에서 Kubernetes 조치를 수행하려면 [서비스 역할](/docs/containers?topic=containers-users#platform) 또는 [사용자 정의 RBAC 정책](/docs/containers?topic=containers-users#role-binding)이 필요합니다.
+* **서비스**: 서비스 역할만 있는 경우 이 명령을 수행할 수 있습니다. 그러나 `ibmcloud ks clusters` 명령을 실행하거나 {{site.data.keyword.containerlong_notm}} 콘솔을 시작하여 클러스터를 볼 수 없으므로 클러스터 관리자가 클러스터 이름과 ID를 사용자에게 제공해야 합니다. 그런 다음 [CLI에서 Kubernetes 대시보드를 시작](/docs/containers?topic=containers-app#db_cli)하여 Kubernetes로 작업할 수 있습니다.
 
 **명령 옵션**:
 
@@ -698,6 +1068,9 @@ ibmcloud ks messages
 
    <dt><code>--export</code></dt>
    <dd>내보내기 명령 이외의 다른 메시지 없이 Kubernetes 구성 데이터와 인증서를 다운로드합니다. 메시지가 표시되지 않으므로 자동화된 스크립트를 작성할 때 이 플래그를 사용할 수 있습니다.  이 값은 선택사항입니다.</dd>
+
+   <dt><code>--skip-rbac</code></dt>
+   <dd>{{site.data.keyword.Bluemix_notm}} IAM 서비스 액세스 역할을 기반으로 한 사용자 Kubernetes RBAC 역할을 클러스터 구성에 추가하는 것을 건너뜁니다. [사용자 고유의 Kubernetes RBAC 역할을 관리](/docs/containers?topic=containers-users#rbac)하는 경우에만 이 옵션을 포함합니다. [{{site.data.keyword.Bluemix_notm}} IAM 서비스 액세스 역할](/docs/containers?topic=containers-access_reference#service)을 사용하여 모든 RBAC 사용자를 관리하는 경우 이 옵션을 포함하지 마십시오.</dd>
 
   <dt><code>-s</code></dt>
   <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
@@ -715,10 +1088,16 @@ ibmcloud ks cluster-config --cluster my_cluster
 {: pre}
 
 
-### ibmcloud ks cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--private-only][--workers WORKER] [--disable-disk-encrypt][--trusted] [-s]
+### ibmcloud ks cluster-create
 {: #cs_cluster_create}
 
 조직에 클러스터를 작성합니다. 무료 클러스터의 경우 클러스터 이름을 지정합니다. 그 외에는 모두 기본값으로 설정됩니다. 무료 클러스터는 30일 후에 자동으로 삭제됩니다. 한 번에 하나의 무료 클러스터가 제공됩니다. Kubernetes의 전체 기능을 활용하려면 표준 클러스터를 작성하십시오.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>:
 * 계정 레벨에서 {{site.data.keyword.containerlong_notm}}에 대한 **관리자** 플랫폼 역할
@@ -730,7 +1109,7 @@ ibmcloud ks cluster-config --cluster my_cluster
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
-<dd>표준 클러스터를 작성하기 위한 YAML 파일의 경로입니다. 이 명령에 제공된 옵션을 사용하여 클러스터의 특징을 정의하지 않고 YAML 파일을 사용할 수 있습니다.  이 값은 표준 클러스터의 경우 선택사항이며 무료 클러스터에는 사용할 수 없습니다.
+<dd>표준 클러스터를 작성하기 위한 YAML 파일의 경로입니다. 이 명령에 제공된 옵션을 사용하여 클러스터의 특징을 정의하지 않고 YAML 파일을 사용할 수 있습니다. 이 값은 표준 클러스터의 경우 선택사항이며 무료 클러스터에는 사용할 수 없습니다.
 
 <p class="note">YAML 파일의 매개변수와 동일한 옵션을 명령에서 제공하면 명령의 값이 YAML의 값에 우선합니다. 예를 들어, YAML 파일의 위치를 정의하고 명령에서 <code>--zone</code> 옵션을 사용하면 명령 옵션에 입력한 값이 YAML 파일의 값을 대체합니다.</p>
 
@@ -770,7 +1149,7 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td><code><em>&lt;machine_type&gt;</em></code>을 작업자 노드를 배치하려는 머신 유형으로 대체합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-type` [명령](cs_cli_reference.html#cs_machine_types)에 대한 문서를 참조하십시오.</td>
+     <td><code><em>&lt;machine_type&gt;</em></code>을 작업자 노드를 배치하려는 머신 유형으로 대체합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-type` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)에 대한 문서를 참조하십시오.</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
@@ -791,29 +1170,29 @@ trusted: <em>true</em>
      <tr>
       <td><code><em>kube-version</em></code></td>
       <td>클러스터 마스터 노드를 위한 Kubernetes 버전입니다. 이 값은 선택사항입니다. 버전이 지정되지 않은 경우에는 클러스터가 지원되는 Kubernetes 버전의 기본값으로 작성됩니다. 사용 가능한 버전을 보려면 <code>ibmcloud ks kube-versions</code>를 실행하십시오.
-</td></tr> 
+</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>작업자 노드는 기본적으로 디스크 암호화 기능을 합니다. [자세히 보기](cs_secure.html#encrypted_disk). 암호화를 사용 안함으로 설정하려면 이 옵션을 포함하고 값을 <code>false</code>로 설정하십시오.</td></tr>
+      <td>작업자 노드는 기본적으로 AES 256비트 디스크 암호화 기능을 합니다. [자세히 보기](/docs/containers?topic=containers-security#encrypted_disk). 암호화를 사용 안함으로 설정하려면 이 옵션을 포함하고 값을 <code>false</code>로 설정하십시오.</td></tr>
       <tr>
       <td><code>trusted: <em>true</em></code></td>
-      <td>**베어메탈 전용**: [신뢰할 수 있는 컴퓨팅](cs_secure.html#trusted_compute)을 사용하여 베어메탈 작업자 노드의 변조 여부를 확인합니다. 클러스터 작성 중에 신뢰 사용을 설정하지 않고 나중에 이를 수행하려면 `ibmcloud ks feature-enable` [명령](cs_cli_reference.html#cs_cluster_feature_enable)을 사용할 수 있습니다. 신뢰를 사용하도록 설정한 후에는 나중에 사용하지 않도록 설정할 수 없습니다.</td></tr>
+      <td>**베어메탈 전용**: [신뢰할 수 있는 컴퓨팅](/docs/containers?topic=containers-security#trusted_compute)을 사용하여 베어메탈 작업자 노드의 변조 여부를 확인합니다. 클러스터 작성 중에 신뢰 사용을 설정하지 않고 나중에 이를 수행하려면 `ibmcloud ks feature-enable` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)을 사용할 수 있습니다. 신뢰를 사용하도록 설정한 후에는 나중에 사용하지 않도록 설정할 수 없습니다.</td></tr>
      </tbody></table>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>작업자 노드에 대한 하드웨어 격리의 레벨입니다. 사용자 전용으로만 실제 리소스를 사용 가능하게 하려면 dedicated를 사용하고, 실제 리소스를 다른 IBM 고객과 공유하도록 허용하려면 shared를 사용하십시오. 기본값은 shared입니다.  이 값은 표준 클러스터의 경우 선택사항이며 무료 클러스터에는 사용할 수 없습니다.</dd>
+<dd>작업자 노드에 대한 하드웨어 격리의 레벨입니다. 사용자 전용으로만 실제 리소스를 사용 가능하게 하려면 dedicated를 사용하고, 실제 리소스를 다른 IBM 고객과 공유하도록 허용하려면 shared를 사용하십시오. 기본값은 shared입니다. 이 값은 VM 표준 클러스터의 경우 선택사항이며 무료 클러스터에는 사용할 수 없습니다. 베어메탈 머신 유형의 경우에는 `dedicated`를 지정하십시오.</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>클러스터가 작성될 구역입니다. 사용 가능한 구역은 사용자가 로그인한 {{site.data.keyword.Bluemix_notm}} 지역에 따라 다릅니다. 최고의 성능을 위해서는 실제로 사용자와 가장 가까운 지역을 선택하십시오. 이 값은 표준 클러스터의 경우 필수이며 무료 클러스터의 경우 선택사항입니다.
 
-<p>[사용 가능한 구역](cs_regions.html#zones)을 검토하십시오.</p>
+<p>[사용 가능한 구역](/docs/containers?topic=containers-regions-and-zones#zones)을 검토하십시오.</p>
 
 <p class="note">자국 외에 있는 구역을 선택하는 경우에는 외국에서 데이터를 실제로 저장하기 전에 법적 인가를 받아야 할 수 있음을 유념하십시오.</p>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>머신 유형을 선택합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-types` [명령](cs_cli_reference.html#cs_machine_types)에 대한 문서를 참조하십시오. 이 값은 표준 클러스터의 경우 필수이며 무료 클러스터에는 사용할 수 없습니다.</dd>
+<dd>머신 유형을 선택합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-types` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)에 대한 문서를 참조하십시오. 이 값은 표준 클러스터의 경우 필수이며 무료 클러스터에는 사용할 수 없습니다.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>클러스터의 이름입니다.  이 값은 필수입니다. 이름은 문자로 시작해야 하며 35자 이하의 문자, 숫자 및 하이픈(-)을 포함할 수 있습니다. 클러스터 이름과 클러스터가 배치된 지역이 Ingress 하위 도메인의 완전한 이름을 형성합니다. 특정 Ingress 하위 도메인이 지역 내에서 고유하도록 하기 위해 클러스터 이름을 자르고 Ingress 도메인 이름 내의 무작위 값을 추가할 수 있습니다.
@@ -848,7 +1227,13 @@ trusted: <em>true</em>
 <p>특정 구역에 대한 공용 VLAN을 이미 보유하고 있는지 알아내거나 기존 공용 VLAN의 이름을 찾으려면 <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>을 실행하십시오.</p></dd>
 
 <dt><code>--private-only </code></dt>
-  <dd>공용 VLAN이 작성되지 않도록 하려면 이 옵션을 사용하십시오. `--private-vlan` 플래그를 지정하고 `--public-vlan` 플래그를 포함하지 않은 경우에만 필요합니다.  <p class="note">개인 전용 클러스터를 원하는 경우에는 네트워크 연결에 대한 게이트웨이 어플라이언스를 구성해야 합니다. 자세한 정보는 [개인용 클러스터](cs_clusters_planning.html#private_clusters)를 참조하십시오.</p></dd>
+  <dd>공용 VLAN이 작성되지 않도록 하려면 이 옵션을 사용하십시오. `--private-vlan` 플래그를 지정하고 `--public-vlan` 플래그를 포함하지 않은 경우에만 필요합니다.  <p class="note">작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 개인 서비스 엔드포인트를 사용으로 설정하거나 게이트웨이 디바이스를 구성해야 합니다. 자세한 정보는 [사설 클러스터](/docs/containers?topic=containers-plan_clusters#private_clusters)를 참조하십시오.</p></dd>
+
+<dt><code>--private-service-endpoint</code></dt>
+  <dd>**[VRF 사용 계정](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)으로 Kubernetes 버전 1.11 이상을 실행하는 표준 클러스터**: Kubernetes 마스터와 작업자 노드가 사설 VLAN을 통해 통신하도록 [개인 서비스 엔드포인트](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)를 활성화합니다. 또한 `--public-service-endpoint` 플래그를 사용하여 공용 서비스 엔드포인트를 사용하도록 선택하여 인터넷을 통해 클러스터에 액세스할 수 있습니다. 개인 서비스 엔드포인트만 사용으로 설정한 경우 사설 VLAN에 연결되어 Kubernetes 마스터와 통신해야 합니다. 개인 서비스 엔드포인트를 사용으로 설정한 후에는 나중에 사용 안함으로 설정할 수 없습니다. <br><br>클러스터를 작성한 후 다음 명령을 실행하여 엔드포인트를 가져올 수 있습니다. `ibmcloud ks cluster-get <cluster_name_or_ID>`.</dd>
+
+<dt><code>--public-service-endpoint</code></dt>
+  <dd>**Kubernetes 버전 1.11 이상을 실행하는 표준 클러스터**: 공용 네트워크를 통해 Kubernetes 마스터에 액세스할 수 있도록 [공용 서비스 엔드포인트](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)를 사용으로 설정합니다(예: 터미널에서 `kubectl` 명령 실행). [VRF 사용 계정](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)이 있고 `--private-service-endpoint` 플래그도 포함하고 있는 경우 [마스터와 작업자 노드 간 통신](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)은 사설 네트워크에서 수행됩니다. 개인 전용 클러스터가 필요한 경우 나중에 공용 서비스 엔드포인트를 사용 안함으로 설정할 수 있습니다. <br><br>클러스터를 작성한 후 다음 명령을 실행하여 엔드포인트를 가져올 수 있습니다. `ibmcloud ks cluster-get <cluster_name_or_ID>`.</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>클러스터에 배치하려는 작업자 노드의 수입니다. 이 옵션을 지정하지 않으면 1개의 작업자 노드가 있는 클러스터가 작성됩니다. 이 값은 표준 클러스터의 경우 선택사항이며 무료 클러스터에는 사용할 수 없습니다.
@@ -856,10 +1241,10 @@ trusted: <em>true</em>
 <p class="important">모든 작업자 노드에는 클러스터가 작성된 이후 수동으로 변경될 수 없는 고유 작업자 노드 ID 및 도메인 이름이 지정됩니다. ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터를 관리할 수 없습니다.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>작업자 노드는 기본적으로 디스크 암호화 기능을 합니다. [자세히 보기](cs_secure.html#encrypted_disk). 암호화를 사용 안함으로 설정하려면 이 옵션을 포함하십시오.</dd>
+<dd>작업자 노드는 기본적으로 AES 256비트 디스크 암호화 기능을 합니다. [자세히 보기](/docs/containers?topic=containers-security#encrypted_disk). 암호화를 사용 안함으로 설정하려면 이 옵션을 포함하십시오.</dd>
 
 <dt><code>--trusted</code></dt>
-<dd><p>**베어메탈 전용**: [신뢰할 수 있는 컴퓨팅](cs_secure.html#trusted_compute)을 사용하여 베어메탈 작업자 노드의 변조 여부를 확인합니다. 클러스터 작성 중에 신뢰 사용을 설정하지 않고 나중에 이를 수행하려면 `ibmcloud ks feature-enable` [명령](cs_cli_reference.html#cs_cluster_feature_enable)을 사용할 수 있습니다. 신뢰를 사용하도록 설정한 후에는 나중에 사용하지 않도록 설정할 수 없습니다.</p>
+<dd><p>**베어메탈 전용**: [신뢰할 수 있는 컴퓨팅](/docs/containers?topic=containers-security#trusted_compute)을 사용하여 베어메탈 작업자 노드의 변조 여부를 확인합니다. 클러스터 작성 중에 신뢰 사용을 설정하지 않고 나중에 이를 수행하려면 `ibmcloud ks feature-enable` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)을 사용할 수 있습니다. 신뢰를 사용하도록 설정한 후에는 나중에 사용하지 않도록 설정할 수 없습니다.</p>
 <p>베어메탈 머신 유형의 신뢰 지원 여부를 확인하려면 `ibmcloud ks machine-types <zone>` [명령](#cs_machine_types)의 출력에서 **Trustable** 필드를 확인하십시오. 클러스터에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks cluster-get` [명령](#cs_cluster_get)의 출력에서 **Trust ready** 필드를 보십시오. 베어메탈 작업자 노드에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks worker-get` [명령](#cs_worker_get)의 출력에서 **Trust** 필드를 보십시오.</p></dd>
 
 <dt><code>-s</code></dt>
@@ -867,8 +1252,6 @@ trusted: <em>true</em>
 </dl>
 
 **예제**:
-
-  
 
   **무료 클러스터 작성**: 클러스터 이름만 지정하십시오. 그 외에는 모두 기본값으로 설정됩니다. 무료 클러스터는 30일 후에 자동으로 삭제됩니다. 한 번에 하나의 무료 클러스터가 제공됩니다. Kubernetes의 전체 기능을 활용하려면 표준 클러스터를 작성하십시오.
 
@@ -899,11 +1282,21 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-### ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted][-s]
-{: #cs_cluster_feature_enable}
+### ibmcloud ks cluster-feature-disable public-service-endpoint
+{: #cs_cluster_feature_disable}
 
-기존 클러스터에서 기능을 사용으로 설정합니다.
+**Kubernetes 버전 1.11 이상을 실행하는 클러스터의 경우**: 클러스터의 공용 서비스 엔드포인트를 사용 안함으로 설정합니다.
 {: shortdesc}
+
+```
+ibmcloud ks cluster-feature-disable public-service-endpoint --cluster CLUSTER [-s] [-f]
+```
+{: pre}
+
+**중요**: 공용 엔드포인트를 사용 안함으로 설정하기 전에 먼저 다음 단계를 완료하여 개인 서비스 엔드포인트를 사용으로 설정해야 합니다.
+1. `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>`개인 서비스 엔드포인트를 사용으로 설정하십시오.
+2. CLI의 프롬프트에 따라 Kubernetes 마스터 API 서버를 새로 고치십시오.
+3. [클러스터의 모든 작업자 노드를 다시 로드하여 개인 엔드포인트 구성을 선택하십시오.](#cs_worker_reload)
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -913,29 +1306,165 @@ trusted: <em>true</em>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
 
-   <dt><code>-f</code></dt>
-   <dd>사용자 프롬프트를 표시하지 않고 <code>--trusted</code> 옵션을 강제로 적용하려면 이 옵션을 사용하십시오.  이 값은 선택사항입니다.</dd>
+  <dt><code>-s</code></dt>
+   <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
+</dl>
 
-   <dt><code><em>--trusted</em></code></dt>
-   <dd><p>클러스터에 있는 모든 지원되는 베어메탈 작업자 노드에서 [신뢰할 수 있는 컴퓨팅](cs_secure.html#trusted_compute)을 사용으로 설정하기 위한 플래그를 포함시킵니다. 신뢰를 사용하도록 설정한 후에는 나중에 클러스터에 대해 이를 사용하지 않도록 설정할 수 없습니다.</p>
-   <p>베어메탈 머신 유형의 신뢰 지원 여부를 확인하려면 `ibmcloud ks machine-types <zone>` [명령](#cs_machine_types)의 출력에서 **Trustable** 필드를 확인하십시오. 클러스터에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks cluster-get` [명령](#cs_cluster_get)의 출력에서 **Trust ready** 필드를 보십시오. 베어메탈 작업자 노드에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks worker-get` [명령](#cs_worker_get)의 출력에서 **Trust** 필드를 보십시오.</p></dd>
+**예제**:
+
+```
+ibmcloud ks cluster-feature-disable public-service-endpoint --cluster my_cluster
+```
+{: pre}
+
+
+### ibmcloud ks cluster-feature-enable
+{: #cs_cluster_feature_enable}
+
+기존 클러스터에서 기능을 사용으로 설정합니다. 이 명령은 사용으로 설정할 기능에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
+{: shortdesc}
+
+#### ibmcloud ks cluster-feature-enable private-service-endpoint
+{: #cs_cluster_feature_enable_private_service_endpoint}
+
+**Kubernetes 버전 1.11 이상을 실행하는 클러스터의 경우**: [개인 서비스 엔드포인트](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)를 사용으로 설정하여 클러스터 마스터를 개인용으로 액세스 가능하도록 하십시오.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-feature-enable private-service-endpoint --cluster CLUSTER [-s]
+```
+{: pre}
+
+이 명령을 실행하려면 다음을 수행하십시오.
+1. IBM Cloud infrastructure (SoftLayer) 계정에서 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)를 사용으로 설정하십시오.
+2. [{{site.data.keyword.Bluemix_notm}} 계정에서 서비스 엔드포인트를 사용하도록 하십시오](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
+3. `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>`을 실행하십시오.
+4. CLI의 프롬프트에 따라 Kubernetes 마스터 API 서버를 새로 고치십시오.
+5. 클러스터에서 [모든 작업자 노드를 다시 로드](#cs_worker_reload)하여 개인 엔드포인트 구성을 선택하십시오.
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
 
   <dt><code>-s</code></dt>
    <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
 </dl>
 
-**명령 예**:
+**예제**:
 
-  ```
-  ibmcloud ks cluster-feature-enable --cluster my_cluster --trusted=true
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-feature-enable private-service-endpoint --cluster my_cluster
+```
+{: pre}
 
-### ibmcloud ks cluster-get --cluster CLUSTER [--json][--showResources] [-s]
+#### ibmcloud ks cluster-feature-enable public-service-endpoint
+{: #cs_cluster_feature_enable_public_service_endpoint}
+
+**Kubernetes 버전 1.11 이상을 실행하는 클러스터의 경우**: [공용 서비스 엔드포인트](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)를 사용으로 설정하여 클러스터 마스터를 공용으로 액세스 가능하도록 하십시오.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-feature-enable public-service-endpoint --cluster CLUSTER [-s]
+```
+{: pre}
+
+이 명령을 실행한 후에는 CLI의 프롬프트에 따라 서비스 엔드포인트를 사용하도록 API 서버를 새로 고쳐야 합니다.
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+  <dt><code>-s</code></dt>
+   <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
+</dl>
+
+**예제**:
+
+```
+ibmcloud ks cluster-feature-enable public-service-endpoint --cluster my_cluster
+```
+{: pre}
+
+#### ibmcloud ks cluster-feature-enable trusted
+{: #cs_cluster_feature_enable_trusted}
+
+클러스터에 있는 모든 지원되는 베어메탈 작업자 노드에 대해 [신뢰할 수 있는 컴퓨팅](/docs/containers?topic=containers-security#trusted_compute)을 사용으로 설정합니다. 신뢰를 사용하도록 설정한 후에는 나중에 클러스터에 대해 이를 사용하지 않도록 설정할 수 없습니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-feature-enable trusted --cluster CLUSTER [-s] [-f]
+```
+{: pre}
+
+베어메탈 머신 유형의 신뢰 지원 여부를 확인하려면 `ibmcloud ks machine-types <zone>` [명령](#cs_machine_types)의 출력에서 **Trustable** 필드를 확인하십시오. 클러스터에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks cluster get` [명령](#cs_cluster_get)의 출력에서 **Trust ready** 필드를 보십시오. 베어메탈 작업자 노드에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks worker get` [명령](#cs_worker_get)의 출력에서 **Trust** 필드를 보십시오.
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>사용자 프롬프트를 표시하지 않고 <code>--trusted</code> 옵션을 강제로 적용하려면 이 옵션을 사용하십시오.  이 값은 선택사항입니다.</dd>
+
+  <dt><code>-s</code></dt>
+   <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
+</dl>
+
+**예제**:
+
+```
+ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
+```
+{: pre}
+
+### ibmcloud ks cluster-feature-ls
+{: #cs_cluster_feature_ls}
+
+클러스터에서 사용 가능 또는 사용 불가능한 기능을 나열합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-feature-ls --cluster CLUSTER [-s]
+```
+{: pre}
+
+<strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+  <dt><code>-s</code></dt>
+   <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
+</dl>
+
+**예제**:
+
+```
+ibmcloud ks cluster-feature-ls --cluster my_cluster
+```
+{: pre}
+
+### ibmcloud ks cluster-get
 {: #cs_cluster_get}
 
 조직의 클러스터에 대한 정보를 봅니다.
 {: shortdesc}
+
+```
+ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -956,7 +1485,7 @@ trusted: <em>true</em>
   <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
   </dl>
 
-**명령 예**:
+**예제**:
 
   ```
   ibmcloud ks cluster-get --cluster my_cluster --showResources
@@ -965,44 +1494,85 @@ trusted: <em>true</em>
 
 **출력 예**:
 
-  ```
-  Name:                   mycluster
-  ID:                     df253b6025d64944ab99ed63bb4567b6
-  State:                  normal
-  Created:                2018-09-28T15:43:15+0000
-  Location:               dal10
-  Master URL:             https://169.xx.xxx.xxx:30426
-  Master Location:        Dallas
-  Master Status:          Ready (21 hours ago)
-  Ingress Subdomain:      ...
-  Ingress Secret:         mycluster
-  Workers:                6
-  Worker Zones:           dal10, dal12
-  Version:                1.11.3_1524
-  Owner:                  owner@email.com
-  Monitoring Dashboard:   ...
-  Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
-  Resource Group Name:    Default
+```
+Name:                           mycluster
+ID:                             df253b6025d64944ab99ed63bb4567b6
+State:                          normal
+Created:                        2018-09-28T15:43:15+0000
+Location:                       dal10
+Master URL:                     https://c3.<region>.containers.cloud.ibm.com:30426
+Public Service Endpoint URL:    https://c3.<region>.containers.cloud.ibm.com:30426
+Private Service Endpoint URL:   https://c3-private.<region>.containers.cloud.ibm.com:31140
+Master Location:                Dallas
+Master Status:                  Ready (21 hours ago)
+Ingress Subdomain:              mycluster.us-south.containers.appdomain.cloud
+Ingress Secret:                 mycluster
+Workers:                        6
+Worker Zones:                   dal10, dal12
+Version:                        1.11.3_1524
+Owner:                          owner@email.com
+Monitoring Dashboard:           ...
+Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
+Resource Group Name:            Default
 
-  Addons
-  Name                   Enabled
-  customer-storage-pod   true
-  basic-ingress-v2       true
-  storage-watcher-pod    true
-
-  Subnet VLANs
+Subnet VLANs
   VLAN ID   Subnet CIDR         Public   User-managed
   2234947   10.xxx.xx.xxx/29    false    false
   2234945   169.xx.xxx.xxx/29  true    false
 
-  ```
-  {: screen}
+```
+{: screen}
 
-### ibmcloud ks cluster-refresh --cluster CLUSTER [-f][-s]
+### ibmcloud ks cluster-pull-secret-apply
+{: #cs_cluster_pull_secret_apply}
+
+클러스터의 {{site.data.keyword.Bluemix_notm}} IAM 서비스 ID를 작성하고 {{site.data.keyword.registrylong_notm}}에서 **독자** 서비스 액세스 역할을 지정하는 서비스 ID에 대해 정책을 작성한 다음 서비스 ID의 API 키를 작성합니다. 그런 다음 API 키는 `default` Kubernetes 네임스페이스에 있는 컨테이너의 {{site.data.keyword.registryshort_notm}} 네임스페이스에서 이미지를 가져올 수 있도록 Kubernetes `imagePullSecret`에 저장됩니다. 이 프로세스는 클러스터를 작성할 때 자동으로 발생합니다. 클러스터 작성 프로세스 중에 오류가 발생하거나 기존 클러스터가 있는 경우 이 명령을 사용하여 프로세스를 다시 적용할 수 있습니다.
+{: shortdesc}
+
+이 명령을 실행하면 IAM 인증 정보 및 이미지 풀 시크릿의 작성이 초기화되며 완료하는 데 약간의 시간이 소요될 수 있습니다. 이미지 풀 시크릿이 작성될 때까지 {{site.data.keyword.registrylong_notm}} `icr.io` 도메인에서 이미지를 가져오는 컨테이너를 배치할 수 없습니다. 이미지 풀 시크릿을 확인하려면 `kubectl get secrets | grep icr`을 실행하십시오.
+{: important}
+
+```
+ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
+```
+{: pre}
+
+이 API 키 메소드는 [토큰](/docs/services/Registry?topic=registry-registry_access#registry_tokens)을 자동으로 작성하고 토큰을 이미지 풀 시크릿에 저장하여 클러스터의 권한을 부여하는 이전 방법을 대체하여 {{site.data.keyword.registrylong_notm}}에 액세스합니다. 이제 IAM API 키를 사용하여 {{site.data.keyword.registrylong_notm}}에 액세스하여 네임스페이스나 특정 이미지에 대한 액세스를 제한하기 위해 서비스 ID에 대한 IAM 정책을 사용자 정의할 수 있습니다. 예를 들어, 특정 레지스트리 지역 또는 네임스페이스에서만 이미지를 가져오도록 클러스터의 이미지 풀 시크릿에서 서비스 ID 정책을 변경할 수 있습니다. IAM 정책을 사용자 정의하기 전에 [{{site.data.keyword.registrylong_notm}}에 대한 {{site.data.keyword.Bluemix_notm}} IAM 정책을 사용으로 설정해야 합니다](/docs/services/Registry?topic=registry-user#existing_users).
+
+자세한 정보는 [{{site.data.keyword.registrylong_notm}}에서 이미지를 가져올 수 있는 권한을 클러스터에 부여하는 방법 이해](/docs/containers?topic=containers-images#cluster_registry_auth)를 참조하십시오.
+
+IAM 정책을 기존 서비스 ID에 추가한 경우(예: 지역 레지스트리에 대한 액세스를 제한하기 위해), 이미지 풀 시크릿에 대한 서비스 ID, IAM 정책 및 API 키가 이 명령으로 재설정됩니다.
+{: important}
+
+<strong>최소 필요 권한</strong>:
+*  {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자 또는 관리자** 플랫폼 역할
+*  {{site.data.keyword.registrylong_notm}}의 **관리자** 플랫폼 역할
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+   </dl>
+
+**예제**:
+
+```
+ibmcloud ks cluster-pull-secret-apply --cluster my_cluster
+```
+{: pre}
+
+### ibmcloud ks cluster-refresh
 {: #cs_cluster_refresh}
 
 새 Kubernetes API 구성 변경사항을 적용하기 위해 클러스터 마스터 노드를 다시 시작합니다. 작업자 노드, 앱 및 리소스는 수정되지 않고 계속 실행됩니다.
 {: shortdesc}
+
+```
+ibmcloud ks cluster-refresh --cluster CLUSTER [-f] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -1027,11 +1597,16 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-### ibmcloud ks cluster-rm --cluster CLUSTER [--force-delete-storage][-f] [-s]
+### ibmcloud ks cluster-rm
 {: #cs_cluster_rm}
 
 조직에서 클러스터를 제거합니다.
 {: shortdesc}
+
+```
+ibmcloud ks cluster-rm --cluster CLUSTER [--force-delete-storage] [-f] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -1060,13 +1635,18 @@ trusted: <em>true</em>
   {: pre}
 
 
-### ibmcloud ks cluster-update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update] [-f][-s]
+### ibmcloud ks cluster-update
 {: #cs_cluster_update}
 
 Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이트 중에는 클러스터에 액세스하거나 클러스터를 변경할 수 없습니다. 사용자가 배치한 작업자 노드, 앱 및 리소스는 수정되지 않고 계속 실행됩니다.
 {: shortdesc}
 
-차후 배치를 위해 YAML 파일을 변경해야 할 수도 있습니다. 세부사항은 이 [릴리스 정보](cs_versions.html)를 검토하십시오.
+```
+ibmcloud ks cluster-update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-f] [-s]
+```
+{: pre}
+
+차후 배치를 위해 YAML 파일을 변경해야 할 수도 있습니다. 세부사항은 이 [릴리스 정보](/docs/containers?topic=containers-cs_versions)를 검토하십시오.
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -1097,11 +1677,16 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
   {: pre}
 
 
-### ibmcloud ks clusters [--json][-s]
+###         ibmcloud ks clusters
 {: #cs_clusters}
 
 조직에서 클러스터의 목록을 봅니다.
 {: shortdesc}
+
+```
+ibmcloud ks clusters [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -1123,11 +1708,16 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
   {: pre}
 
 
-### ibmcloud ks kube-versions [--json][-s]
+###   ibmcloud ks kube-versions
 {: #cs_kube_versions}
 
-{{site.data.keyword.containerlong_notm}}에서 지원되는 Kubernetes 버전 목록을 봅니다. [클러스터 마스터](#cs_cluster_update) 및 [작업자 노드](cs_cli_reference.html#cs_worker_update)를 안정적인 최신 기능을 위한 기본 버전으로 업데이트합니다.
+{{site.data.keyword.containerlong_notm}}에서 지원되는 Kubernetes 버전 목록을 봅니다. [클러스터 마스터](#cs_cluster_update) 및 [작업자 노드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)를 안정적인 최신 기능을 위한 기본 버전으로 업데이트합니다.
 {: shortdesc}
+
+```
+ibmcloud ks kube-versions [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: 없음
 
@@ -1156,11 +1746,16 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
 {: #cluster_services_commands}
 
 
-### ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_NAME [-s]
+### ibmcloud ks cluster-service-bind
 {: #cs_cluster_service_bind}
 
 클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스를 추가합니다. {{site.data.keyword.Bluemix_notm}} 카탈로그에서 사용 가능한 {{site.data.keyword.Bluemix_notm}} 서비스를 보려면 `ibmcloud service offerings`를 실행하십시오. **참고**: 서비스 키를 지원하는 {{site.data.keyword.Bluemix_notm}} 서비스만 추가할 수 있습니다.
 {: shortdesc}
+
+```
+ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [--key SERVICE_INSTANCE_KEY] [--role IAM_ROLE] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할 및 **개발자** Cloud Foundry 역할
 
@@ -1170,11 +1765,18 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
 
+   <dt><code>--key <em>SERVICE_INSTANCE_KEY</em></code></dt>
+   <dd>서비스 키의 이름 또는 GUID입니다. 이 값은 선택사항입니다. 새 서비스 키를 작성하는 대신 기존 서비스 키를 사용하려면 이 값을 포함합니다.</dd>
+
    <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>Kubernetes 네임스페이스의 이름입니다. 이 값은 필수입니다.</dd>
 
-   <dt><code>--service <em>SERVICE_INSTANCE_NAME</em></code></dt>
-   <dd>바인딩하려는 {{site.data.keyword.Bluemix_notm}} 서비스 인스턴스의 이름입니다. 서비스 인스턴스의 이름을 찾으려면 <code>ibmcloud service list</code>를 실행하십시오. 계정에서 두 개 이상의 인스턴스에 동일한 이름이 있는 경우 이름 대신 서비스 인스턴스 ID를 사용하십시오. ID를 찾으려면 <code>ibmcloud service show <service instance name> --guid</code>를 실행하십시오. 이러한 값 중 하나가 필수입니다.</dd>
+   <dt><code>--service <em>SERVICE_INSTANCE_GUID</em></code></dt>
+   <dd>바인드하려는 {{site.data.keyword.Bluemix_notm}} 서비스 인스턴스의 ID입니다. ID를 찾으려면 <code>ibmcloud service show <service_instance_name> --guid</code>를 실행하십시오. 이 값은 필수입니다. </dd>
+
+   <dt><code>--role <em>IAM_ROLE</em></code></dt>
+   <dd>서비스 키에 필요한 {{site.data.keyword.Bluemix_notm}} IAM 역할입니다. 기본값은 IAM 서비스 역할 `Writer`입니다. 기존 서비스 키를 사용하거나 Cloud Foundry 서비스와 같이 IAM을 사용하도록 설정되지 않은 서비스에 대해서는 이 값을 포함하지 마십시오.<br><br>
+   서비스에 대해 사용 가능한 역할을 나열하려면 다음 명령을 실행하십시오. `ibmcloud iam roles --service <service_name>`. 서비스 이름은 `ibmcloud catalog search`를 실행하여 얻을 수 있는 카탈로그의 서비스 이름입니다.</dd>
 
    <dt><code>-s</code></dt>
    <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
@@ -1189,11 +1791,16 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
   {: pre}
 
 
-### ibmcloud ks cluster-service-unbind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [-s]
+### ibmcloud ks cluster-service-unbind
 {: #cs_cluster_service_unbind}
 
 클러스터에서 {{site.data.keyword.Bluemix_notm}} 서비스를 제거합니다.
 {: shortdesc}
+
+```
+ibmcloud ks cluster-service-unbind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [-s]
+```
+{: pre}
 
 {{site.data.keyword.Bluemix_notm}} 서비스를 제거하면 서비스 인증 정보도 클러스터에서 제거됩니다. 팟(Pod)에서 서비스를 계속 사용 중인 경우, 서비스 인증 정보를 찾을 수 없기 때문에 실패합니다.
 {: note}
@@ -1225,10 +1832,16 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
   {: pre}
 
 
-### ibmcloud ks cluster-services --cluster CLUSTER [--namespace KUBERNETES_NAMESPACE][--all-namespaces] [--json][-s]
+### ibmcloud ks cluster-services
 {: #cs_cluster_services}
 
 클러스터에서 한 개 또는 모든 Kubernetes 네임스페이스에 바인딩된 서비스를 나열합니다. 옵션이 지정되지 않은 경우 기본 네임스페이스를 위한 서비스가 표시됩니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-services --cluster CLUSTER [--namespace KUBERNETES_NAMESPACE] [--all-namespaces] [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -1258,10 +1871,17 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
   ```
   {: pre}
 
-### ibmcloud ks va --container CONTAINER_ID [--extended][--vulnerabilities] [--configuration-issues][--json]
+
+### ibmcloud ks va
 {: #cs_va}
 
-[컨테이너 스캐너를 설치](/docs/services/va/va_index.html#va_install_container_scanner)한 후에 클러스터의 컨테이너에 대한 상세 취약성 평가 보고서를 보십시오.
+[컨테이너 스캐너를 설치](/docs/services/va?topic=va-va_index#va_install_container_scanner)한 후에 클러스터의 컨테이너에 대한 상세 취약성 평가 보고서를 보십시오.
+{: shortdesc}
+
+```
+ibmcloud ks va --container CONTAINER_ID [--extended] [--vulnerabilities] [--configuration-issues] [--json]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.registrylong_notm}}에 대한 **독자** 서비스 액세스 역할. **참고**: 리소스 그룹 레벨에서 {{site.data.keyword.registryshort_notm}}에 대한 정책을 지정하지 마십시오.
 
@@ -1270,7 +1890,7 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
 <dl>
 <dt><code>--container CONTAINER_ID</code></dt>
 <dd><p>컨테이너의 ID입니다. 이 값은 필수입니다.</p>
-<p>컨테이너의 ID를 찾으려면 다음을 수행하십시오.<ol><li>[클러스터에 Kubernetes CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.</li><li>`kubectl get pods`를 실행하여 팟(Pod)을 나열하십시오.</li><li>`kubectl describe pod <pod_name>` 명령의 출력에서 **컨테이너 ID** 필드를 찾으십시오. 예: `Container ID: containerd://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>`ibmcloud ks va` 명령에 대해 컨테이너 ID를 사용하기 전에 ID에서 `containerd://` 접두부를 제거하십시오. 예: `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+<p>컨테이너의 ID를 찾으려면 다음을 수행하십시오.<ol><li>[클러스터에 Kubernetes CLI를 대상으로 지정](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)하십시오.</li><li>`kubectl get pods`를 실행하여 팟(Pod)을 나열하십시오.</li><li>`kubectl describe pod <pod_name>` 명령의 출력에서 **컨테이너 ID** 필드를 찾으십시오. 예: `Container ID: containerd://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>`ibmcloud ks va` 명령에 대해 컨테이너 ID를 사용하기 전에 ID에서 `containerd://` 접두부를 제거하십시오. 예: `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>명령 출력을 확장하여 취약한 패키지에 대한 추가 수정사항 정보를 표시합니다.  이 값은 선택사항입니다.</p>
@@ -1293,11 +1913,16 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ```
 {: pre}
 
-### ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url ENDPOINT --key-protect-instance INSTANCE_GUID --crk ROOT_KEY_ID
+### ibmcloud ks key-protect-enable
 {: #cs_key_protect}
 
-[{{site.data.keyword.keymanagementservicefull}} ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/services/key-protect/index.html#getting-started-with-key-protect)를 클러스터의 [키 관리 서비스(KMS) 제공자 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/)로 사용하여 Kubernetes secret을 암호화합니다.
+[{{site.data.keyword.keymanagementservicefull}} ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial)를 클러스터의 [키 관리 서비스(KMS) 제공자 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/)로 사용하여 Kubernetes secret을 암호화합니다.
 {: shortdesc}
+
+```
+ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url ENDPOINT --key-protect-instance INSTANCE_GUID --crk ROOT_KEY_ID
+```
+{: pre}
 
 {{site.data.keyword.keymanagementserviceshort}} 인스턴스의 루트 키를 삭제하면 클러스터에서 시크릿의 데이터에 액세스하거나 이를 제거할 수 없습니다.
 {: important}
@@ -1311,13 +1936,13 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 <dd>클러스터의 이름 또는 ID입니다.</dd>
 
 <dt><code>--key-protect-url ENDPOINT</code></dt>
-<dd>클러스터 인스턴스의 {{site.data.keyword.keymanagementserviceshort}} 엔드포인트입니다. 이 엔드포인트를 얻으려면 [지역별 서비스 엔드포인트](/docs/services/key-protect/regions.html#endpoints)를 참조하십시오.</dd>
+<dd>클러스터 인스턴스의 {{site.data.keyword.keymanagementserviceshort}} 엔드포인트입니다. 이 엔드포인트를 얻으려면 [지역별 서비스 엔드포인트](/docs/services/key-protect?topic=key-protect-regions#service-endpoints)를 참조하십시오.</dd>
 
 <dt><code>--key-protect-instance INSTANCE_GUID</code></dt>
 <dd>{{site.data.keyword.keymanagementserviceshort}} 인스턴스 GUID입니다. 이 인스턴스 GUID를 얻으려면 <code>ibmcloud resource service-instance SERVICE_INSTANCE_NAME --id</code>를 실행하고 두 번째 값(전체 CRN이 아님)을 복사하십시오.</dd>
 
 <dt><code>--crk ROOT_KEY_ID</code></dt>
-<dd>{{site.data.keyword.keymanagementserviceshort}} 루트 키 ID입니다. CRK를 얻으려면 [키 보기](/docs/services/key-protect/view-keys.html#view-keys)를 참조하십시오.</dd>
+<dd>{{site.data.keyword.keymanagementserviceshort}} 루트 키 ID입니다. CRK를 얻으려면 [키 보기](/docs/services/key-protect?topic=key-protect-view-keys#view-keys)를 참조하십시오.</dd>
 </dl>
 
 **예제**:
@@ -1328,10 +1953,16 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 {: pre}
 
 
-### ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
+### ibmcloud ks webhook-create
 {: #cs_webhook_create}
 
 웹훅을 등록합니다.
+{: shortdesc}
+
+```
+ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -1368,15 +1999,20 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 ## 클러스터 명령: 서브넷
 {: #cluster_subnets_commands}
 
-### ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
+### ibmcloud ks cluster-subnet-add
 {: #cs_cluster_subnet_add}
 
 IBM Cloud 인프라(SoftLayer) 계정의 기존 포터블 공인 또는 사설 서브넷을 Kubernetes 클러스터에 추가하거나, 자동으로 프로비저닝된 서브넷을 사용하는 대신 삭제된 클러스터의 서브넷을 재사용할 수 있습니다.
 {: shortdesc}
 
+```
+ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
+```
+{: pre}
+
 <p class="important">포터블 공인 IP 주소는 매월 비용이 청구됩니다. 클러스터가 프로비저닝된 후 포터블 공인 IP 주소를 제거한 경우, 짧은 시간 동안만 사용한 경우에도 월별 비용은 여전히 지불해야 합니다.</br>
 </br>클러스터에 서브넷을 사용 가능하게 하면 이 서브넷의 IP 주소가 클러스터 네트워킹 목적으로 사용됩니다. IP 주소 충돌을 피하려면 한 개의 클러스터만 있는 서브넷을 사용해야 합니다. 동시에 {{site.data.keyword.containerlong_notm}}의 외부에서 다른 목적으로 또는 다중 클러스터에 대한 서브넷으로 사용하지 마십시오.</br>
-</br>동일한 VLAN의 서로 다른 서브넷에 있는 작업자 간에 통신을 사용 가능하게 하려면 [동일한 VLAN의 서브넷 간에 라우팅 사용](cs_subnets.html#subnet-routing)을 설정해야 합니다.</p>
+</br>동일한 VLAN의 서로 다른 서브넷에 있는 작업자 간에 통신을 사용 가능하게 하려면 [동일한 VLAN의 서브넷 간에 라우팅 사용](/docs/containers?topic=containers-subnets#subnet-routing)을 설정해야 합니다.</p>
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -1402,13 +2038,19 @@ IBM Cloud 인프라(SoftLayer) 계정의 기존 포터블 공인 또는 사설 �
   {: pre}
 
 
-### ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [-s]
+### ibmcloud ks cluster-subnet-create
 {: #cs_cluster_subnet_create}
 
 IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 {{site.data.keyword.containerlong_notm}}의 지정된 클러스터에 사용 가능하도록 설정합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [-s]
+```
+{: pre}
 
 <p class="important">클러스터에 서브넷을 사용 가능하게 하면 이 서브넷의 IP 주소가 클러스터 네트워킹 목적으로 사용됩니다. IP 주소 충돌을 피하려면 한 개의 클러스터만 있는 서브넷을 사용해야 합니다. 동시에 {{site.data.keyword.containerlong_notm}}의 외부에서 다른 목적으로 또는 다중 클러스터에 대한 서브넷으로 사용하지 마십시오.</br>
-</br>클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오.</p>
+</br>클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.</p>
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -1436,15 +2078,21 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 {{site.dat
   {: pre}
 
 
-### ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
+### ibmcloud ks cluster-user-subnet-add
 {: #cs_cluster_user_subnet_add}
 
 고유한 사설 서브넷을 {{site.data.keyword.containerlong_notm}} 클러스터로 가져옵니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
+```
+{: pre}
 
 이 사설 서브넷은 IBM Cloud 인프라(SoftLayer)에서 제공되는 서브넷이 아닙니다. 따라서 서브넷에 대한 인바운드 및 아웃바운드 네트워크 트래픽 라우팅을 구성해야 합니다. IBM Cloud 인프라(SoftLayer) 서브넷을 추가하려면 `ibmcloud ks cluster-subnet-add` [명령](#cs_cluster_subnet_add)을 사용하십시오.
 
 <p class="important">클러스터에 서브넷을 사용 가능하게 하면 이 서브넷의 IP 주소가 클러스터 네트워킹 목적으로 사용됩니다. IP 주소 충돌을 피하려면 한 개의 클러스터만 있는 서브넷을 사용해야 합니다. 동시에 {{site.data.keyword.containerlong_notm}}의 외부에서 다른 목적으로 또는 다중 클러스터에 대한 서브넷으로 사용하지 마십시오.</br>
-</br>클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오.</p>
+</br>클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.</p>
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -1471,10 +2119,16 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 {{site.dat
   {: pre}
 
 
-### ibmcloud ks cluster-user-subnet-rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
+### ibmcloud ks cluster-user-subnet-rm
 {: #cs_cluster_user_subnet_rm}
 
 지정된 클러스터에서 고유한 사설 서브넷을 제거합니다. 고유한 사설 서브넷에서 IP 주소에 배치된 서비스는 서브넷이 제거된 후에도 활성 상태를 유지합니다.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-user-subnet-rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -1498,10 +2152,17 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 {{site.dat
   ```
   {: pre}
 
-### ibmcloud ks subnets [--json][-s]
+
+###     ibmcloud ks subnets
 {: #cs_subnets}
 
 IBM Cloud 인프라(SoftLayer) 계정에서 사용 가능한 서브넷의 목록을 봅니다.
+{: shortdesc}
+
+```
+ibmcloud ks subnets [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -1529,12 +2190,18 @@ IBM Cloud 인프라(SoftLayer) 계정에서 사용 가능한 서브넷의 목록
 ## Ingress 애플리케이션 로드 밸런서(ALB) 명령
 {: #alb_commands}
 
-### ibmcloud ks alb-autoupdate-disable --cluster CLUSTER
+### ibmcloud ks alb-autoupdate-disable
 {: #cs_alb_autoupdate_disable}
 
 기본적으로, Ingress 애플리케이션 로드 밸런서(ALB) 추가 기능에 대한 자동 업데이트는 사용으로 설정되어 있습니다. ALB 팟(Pod)은 새 빌드 버전이 사용 가능할 때 자동으로 업데이트됩니다. 대신에 추가 기능을 수동으로 업데이트하려면 이 명령을 사용하여 자동 업데이트를 사용 안함으로 설정하십시오. 그리고 [`ibmcloud ks alb-update` 명령](#cs_alb_update)을 실행하여 ALB 팟(Pod)을 업데이트할 수 있습니다.
+{: shortdesc}
 
-클러스터의 주 또는 부 Kubernetes 버전을 업데이트하는 경우, IBM은 Ingress 배치에 대한 필수 변경사항을 자동으로 작성하지만 Ingress ALB 추가 기능의 빌드 버전은 변경하지 않습니다. 사용자는 최신 Kubernetes 버전 및 Ingress ALB 추가 기능 이미지의 호환성을 확인해야 합니다.
+```
+ibmcloud ks alb-autoupdate-disable --cluster CLUSTER
+```
+{: pre}
+
+클러스터의 Kubernetes 주 버전 또는 부 버전을 업데이트할 경우 IBM에서 Ingress 배치를 필요에 따라 자동으로 변경하지만, Ingress ALB 추가 기능의 빌드 버전은 변경하지 않습니다. 사용자는 최신 Kubernetes 버전 및 Ingress ALB 추가 기능 이미지의 호환성을 확인해야 합니다.
 
 **최소 필요 권한**: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -1545,10 +2212,16 @@ ibmcloud ks alb-autoupdate-disable --cluster mycluster
 ```
 {: pre}
 
-### ibmcloud ks alb-autoupdate-enable --cluster CLUSTER
+### ibmcloud ks alb-autoupdate-enable
 {: #cs_alb_autoupdate_enable}
 
 Ingress ALB 추가 기능에 대한 자동 업데이트가 사용 안함으로 설정된 경우에는 자동 업데이트를 다시 사용으로 설정할 수 있습니다. 다음의 빌드 버전이 사용 가능할 때마다 ALB는 최신 빌드로 자동 업데이트됩니다.
+{: shortdesc}
+
+```
+ibmcloud ks alb-autoupdate-enable --cluster CLUSTER
+```
+{: pre}
 
 **최소 필요 권한**: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -1559,10 +2232,16 @@ ibmcloud ks alb-autoupdate-enable --cluster mycluster
 ```
 {: pre}
 
-### ibmcloud ks alb-autoupdate-get --cluster CLUSTER
+### ibmcloud ks alb-autoupdate-get
 {: #cs_alb_autoupdate_get}
 
 Ingress ALB 추가 기능에 대한 자동 업데이트가 사용으로 설정되어 있는지와 ALB가 최신 빌드 버전으로 업데이트되었는지 확인하십시오.
+{: shortdesc}
+
+```
+ibmcloud ks alb-autoupdate-get --cluster CLUSTER
+```
+{: pre}
 
 **최소 필요 권한**: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -1573,10 +2252,21 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
 ```
 {: pre}
 
-### ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update][-s]
+### ibmcloud ks alb-cert-deploy
 {: #cs_alb_cert_deploy}
 
 {{site.data.keyword.cloudcerts_long_notm}} 인스턴스의 인증서를 클러스터의 ALB에 배치하거나 업데이트합니다. 같은 {{site.data.keyword.cloudcerts_long_notm}} 인스턴스에서 가져온 인증서만 업데이트할 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update] [-s]
+```
+{: pre}
+
+이 명령으로 사용하여 인증서를 가져오면 인증서 시크릿이 `ibm-cert-store`라는 네임스페이스에 작성됩니다. 그런 다음 이 시크릿에 대한 참조는 네임스페이스의 모든 Ingress 리소스가 액세스할 수 있는 `default` 네임스페이스에 작성됩니다. ALB에서 요청을 처리하는 동안 이 참조를 따라 `ibm-cert-store` 네임스페이스에서 인증서 시크릿을 선택하여 사용합니다.
+
+{{site.data.keyword.cloudcerts_short}}로 설정된 [속도 제한](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) 내에서 유지하려면 연속적인 `alb-cert-deploy` 및 `alb-cert-deploy --update` 명령 사이에 45초 이상 기다리십시오.
+{: note}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -1616,10 +2306,16 @@ ALB 시크릿 배치 예:
  {: pre}
 
 
-### ibmcloud ks alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN] [--json][-s]
+### ibmcloud ks alb-cert-get
 {: #cs_alb_cert_get}
 
-클러스터의 ALB 시크릿에 관한 정보를 봅니다.
+인증서를 {{site.data.keyword.cloudcerts_short}}에서 클러스터의 ALB로 가져온 경우 TLS 인증서 정보(예: TLS 인증서와 연관된 시크릿)를 봅니다.
+{: shortdesc}
+
+```
+ibmcloud ks alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -1659,10 +2355,19 @@ ALB 시크릿 배치 예:
  {: pre}
 
 
-### ibmcloud ks alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN] [-s]
+### ibmcloud ks alb-cert-rm
 {: #cs_alb_cert_rm}
 
-클러스터의 ALB 시크릿을 제거합니다.
+인증서를 {{site.data.keyword.cloudcerts_short}}에서 클러스터의 ALB로 가져온 경우 클러스터에서 시크릿을 제거합니다.
+{: shortdesc}
+
+```
+ibmcloud ks alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [-s]
+```
+{: pre}
+
+{{site.data.keyword.cloudcerts_short}}로 설정된 [속도 제한](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) 내에서 유지하려면 연속적인 `alb-cert-rm` 명령 사이에 45초 이상 기다리십시오.
+{: note}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -1700,10 +2405,16 @@ ALB 시크릿 배치 예:
  {: pre}
 
 
-### ibmcloud ks alb-certs --cluster CLUSTER [--json][-s]
+### ibmcloud ks alb-certs
 {: #cs_alb_certs}
 
-클러스터의 ALB 시크릿 목록을 봅니다.
+{{site.data.keyword.cloudcerts_long_notm}} 인스턴스에서 클러스터의 ALB로 가져온 인증서를 나열합니다.
+{: shortdesc}
+
+```
+ibmcloud ks alb-certs --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -1725,10 +2436,16 @@ ALB 시크릿 배치 예:
  ```
  {: pre}
 
-### ibmcloud ks alb-configure --albID ALB_ID [--enable][--user-ip USERIP] [--disable][--disable-deployment] [-s]
+### ibmcloud ks alb-configure
 {: #cs_alb_configure}
 
 표준 클러스터에서 ALB를 사용 또는 사용 안함으로 설정합니다. 기본적으로 공용 ALB는 사용 가능합니다.
+{: shortdesc}
+
+```
+ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disable] [--disable-deployment] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -1784,10 +2501,17 @@ ALB 시크릿 배치 예:
   ```
   {: pre}
 
-### ibmcloud ks alb-get --albID ALB_ID [--json][-s]
+
+### ibmcloud ks alb-get
 {: #cs_alb_get}
 
 ALB의 세부사항을 봅니다.
+{: shortdesc}
+
+```
+ibmcloud ks alb-get --albID ALB_ID [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -1812,10 +2536,16 @@ ALB의 세부사항을 봅니다.
   ```
   {: pre}
 
-### ibmcloud ks alb-rollback --cluster CLUSTER
+### ibmcloud ks alb-rollback
 {: #cs_alb_rollback}
 
-ALB 팟(Pod)이 최근에 업데이트되었지만 ALB의 사용자 정의 구성이 최신 빌드의 영향을 받은 경우에는 ALB 팟(Pod)이 이전에 실행 중이던 빌드로 업데이트를 롤백할 수 있습니다. 업데이트를 롤백하면 ALB 팟(Pod)의 자동 업데이트가 사용 안함으로 설정됩니다. 자동 업데이트를 다시 사용으로 설정하려면 [`alb-autoupdate-enable` 명령](#cs_alb_autoupdate_enable)을 사용하십시오.
+ALB 팟(Pod)이 최근에 업데이트되었지만 ALB의 사용자 정의 구성이 최신 빌드의 영향을 받는 경우, ALB 팟(Pod)이 실행되던 이전 빌드로 업데이트를 롤백할 수 있습니다. 업데이트를 롤백하면 ALB 팟(Pod)의 자동 업데이트가 사용 안함으로 설정됩니다. 자동 업데이트를 다시 사용으로 설정하려면 [`alb-autoupdate-enable` 명령](#cs_alb_autoupdate_enable)을 사용하십시오.
+{: shortdesc}
+
+```
+ibmcloud ks alb-rollback --cluster CLUSTER
+```
+{: pre}
 
 **최소 필요 권한**: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -1826,10 +2556,16 @@ ibmcloud ks alb-rollback --cluster mycluster
 ```
 {: pre}
 
-### ibmcloud ks alb-types [--json][-s]
+###   ibmcloud ks alb-types
 {: #cs_alb_types}
 
 지역에서 지원되는 ALB 유형을 봅니다.
+{: shortdesc}
+
+```
+ibmcloud ks alb-types [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -1850,12 +2586,18 @@ ibmcloud ks alb-rollback --cluster mycluster
   ```
   {: pre}
 
-### ibmcloud ks alb-update --cluster CLUSTER
+### ibmcloud ks alb-update
 {: #cs_alb_update}
 
-Ingress ALB 추가 기능의 자동 업데이트가 사용 안함으로 설정되어 있으며 추가 기능을 업데이트하고자 하는 경우에는 ALB 팟(Pod)의 일회성 업데이트를 강제 실행할 수 있습니다. 추가 기능의 수동 업데이트를 선택하는 경우에는 클러스터의 모든 ALB 팟(Pod)이 최신 빌드로 업데이트됩니다. 개별 ALB를 업데이트하거나 추가 기능을 업데이트할 빌드를 선택할 수는 없습니다. 자동 업데이트는 사용 안함 상태를 유지합니다.
+Ingress ALB 추가 기능의 자동 업데이트가 사용 안함으로 설정되어 있으며 추가 기능을 업데이트하고자 하는 경우에는 ALB 팟(Pod)의 일회성 업데이트를 강제 실행할 수 있습니다. 추가 기능의 수동 업데이트를 선택하는 경우에는 클러스터의 모든 ALB 팟(Pod)이 최신 빌드로 업데이트됩니다. 개별 ALB를 업데이트하거나 추가 기능을 업데이트할 빌드를 선택할 수는 없습니다. 자동 업데이트는 사용 안함으로 계속 설정됩니다.
+{: shortdesc}
 
-클러스터의 주 또는 부 Kubernetes 버전을 업데이트하는 경우, IBM은 Ingress 배치에 대한 필수 변경사항을 자동으로 작성하지만 Ingress ALB 추가 기능의 빌드 버전은 변경하지 않습니다. 사용자는 최신 Kubernetes 버전 및 Ingress ALB 추가 기능 이미지의 호환성을 확인해야 합니다.
+```
+ibmcloud ks alb-update --cluster CLUSTER
+```
+{: pre}
+
+클러스터의 Kubernetes 주 버전 또는 부 버전을 업데이트할 경우 IBM에서 Ingress 배치를 필요에 따라 자동으로 변경하지만, Ingress ALB 추가 기능의 빌드 버전은 변경하지 않습니다. 사용자는 최신 Kubernetes 버전 및 Ingress ALB 추가 기능 이미지의 호환성을 확인해야 합니다.
 
 **최소 필요 권한**: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -1866,10 +2608,16 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-### ibmcloud ks albs --cluster CLUSTER [--json][-s]
+###     ibmcloud ks albs
 {: #cs_albs}
 
 클러스터에서 모든 ALB의 상태를 봅니다. ALB ID가 리턴되지 않으면 클러스터에 포터블 서브넷이 없습니다. 서브넷을 [작성](#cs_cluster_subnet_create)하거나 클러스터에 [추가](#cs_cluster_subnet_add)할 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks albs --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -1898,13 +2646,20 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
 <br />
 
 
+
 ## 인프라 명령
 {: #infrastructure_commands}
 
-### ibmcloud ks credential-get [-s][--json]
+### ibmcloud ks
 {: #cs_credential_get}
 
 서로 다른 인증 정보를 사용하여 IBM Cloud 인프라 포트폴리오에 액세스하도록 IBM Cloud 계정을 설정한 경우에는 현재 대상으로 지정된 지역 및 리소스 그룹에 대한 인프라 사용자 이름을 가져오십시오.
+{: shortdesc}
+
+```
+ibmcloud ks credential-get [-s] [--json]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -1928,10 +2683,16 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
         Infrastructure credentials for user name user@email.com set for resource group default.
 ```
 
-### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credential-set
 {: #cs_credentials_set}
 
 {{site.data.keyword.containerlong_notm}} 리소스 그룹 및 지역에 대한 IBM Cloud 인프라(SoftLayer) 계정 인증 정보를 설정합니다.
+{: shortdesc}
+
+```
+ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+```
+{: pre}
 
 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정이 있는 경우 기본적으로 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한이 제공됩니다. 그러나 인프라를 정렬하기 위해 이미 보유하고 있는 다른 IBM Cloud 인프라(SoftLayer) 계정을 사용하려고 할 수 있습니다. 이 명령을 사용하여 인프라 계정을 {{site.data.keyword.Bluemix_notm}} 계정에 연결할 수 있습니다.
 
@@ -1939,7 +2700,7 @@ IBM Cloud 인프라(SoftLayer) 인증 정보가 지역 및 리소스 그룹에 �
 
 동일한 {{site.data.keyword.containerlong_notm}} 리소스 그룹 및 지역에 대해서는 여러 인증 정보를 설정할 수 없습니다.
 
-이 명령을 사용하기 전에, 해당 인증 정보가 사용되는 사용자에게 필수 [{{site.data.keyword.containerlong_notm}} 및 IBM Cloud 인프라(SoftLayer) 권한](cs_users.html#users)이 있는지 확인하십시오.
+이 명령을 사용하기 전에, 해당 인증 정보가 사용되는 사용자에게 필수 [{{site.data.keyword.containerlong_notm}} 및 IBM Cloud 인프라(SoftLayer) 권한](/docs/containers?topic=containers-users#users)이 있는지 확인하십시오.
 {: important}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
@@ -1949,35 +2710,25 @@ IBM Cloud 인프라(SoftLayer) 인증 정보가 지역 및 리소스 그룹에 �
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud 인프라(SoftLayer) 계정 API 사용자 이름입니다. 이 값은 필수입니다. 참고로, 인프라 API 사용자 이름은 IBM ID와 동일하지 않습니다. 인프라 API 사용자 이름을 보려면 다음을 수행하십시오.
-   <ol><li>[{{site.data.keyword.Bluemix_notm}} 포털 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/)에 로그인하십시오.</li>
-   <li>메뉴 ![메뉴 아이콘](../icons/icon_hamburger.svg "메뉴 아이콘")에서 **인프라**를 선택하십시오.</li>
-   <li>메뉴 표시줄에서 **계정** > **사용자** > **사용자 목록**을 선택하십시오.</li>
-   <li>보고자 하는 사용자에 대해 **IBM ID 또는 사용자 이름**을 클릭하십시오.</li>
-   <li>**API 액세스 정보** 섹션에서 **API 사용자 이름**을 보십시오.</li>
+   <ol>
+   <li>[{{site.data.keyword.Bluemix_notm}} 콘솔![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com)에 로그인하십시오.
+   <li>메뉴 표시줄에서 **관리 > 액세스(IAM)**를 선택하십시오.
+   <li>**사용자** 탭을 선택한 후 사용자 이름을 클릭하십시오.
+   <li>**API 키** 분할창에서 **클래식 인프라 API 키** 항목을 찾고 **조치 메뉴** ![조치 메뉴 아이콘](../icons/action-menu-icon.svg "조치 메뉴 아이콘") **> 세부사항**을 클릭하십시오.
+   <li>API 사용자 이름을 복사하십시오.
    </ol></dd>
 
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
-   <dd>IBM Cloud 인프라(SoftLayer) 계정 API 키입니다. 이 값은 필수입니다.
-
- <p>
-  API 키를 생성하려면 다음을 수행하십시오.
-
-  <ol>
-  <li>[IBM Cloud 인프라(SoftLayer) 포털 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://control.bluemix.net/)에 로그인하십시오.</li>
-  <li><strong>계정</strong>을 선택한 후에 <strong>사용자</strong>를 선택하십시오.</li>
-  <li><strong>생성</strong>을 클릭하여 사용자 계정에 대한 IBM Cloud 인프라(SoftLayer) API 키를 생성하십시오.</li>
-  <li>이 명령에서 사용할 API 키를 복사하십시오.</li>
+   <dd>IBM Cloud 인프라(SoftLayer) 계정 API 키입니다. 이 값은 필수입니다. 인프라 API 키를 보거나 생성하려면 다음을 수행하십시오.
+  <li>[{{site.data.keyword.Bluemix_notm}} 콘솔![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com)에 로그인하십시오.
+  <li>메뉴 표시줄에서 **관리 > 액세스(IAM)**를 선택하십시오.
+  <li>**사용자** 탭을 선택한 후 사용자 이름을 클릭하십시오.
+  <li>**API 키** 분할창에서 **클래식 인프라 API 키** 항목을 찾고 **조치 메뉴** ![조치 메뉴 아이콘](../icons/action-menu-icon.svg "조치 메뉴 아이콘") **> 세부사항**을 클릭하십시오.
+   클래식 인프라 API 키가 표시되지 않으면 **{{site.data.keyword.Bluemix_notm}} API 키 작성**을 클릭하여 이를 생성하십시오.
+  <li>API 사용자 이름을 복사하십시오.
   </ol>
-
-  기존 API 키를 보려면 다음을 수행하십시오.
-  <ol>
-  <li>[IBM Cloud 인프라(SoftLayer) 포털 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://control.bluemix.net/)에 로그인하십시오.</li>
-  <li><strong>계정</strong>을 선택한 후에 <strong>사용자</strong>를 선택하십시오.</li>
-  <li><strong>보기</strong>를 클릭하여 기존 API 키를 확인하십시오.</li>
-  <li>이 명령에서 사용할 API 키를 복사하십시오.</li>
-  </ol>
-  </p></dd>
+  </dd>
 
   <dt><code>-s</code></dt>
   <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
@@ -1991,10 +2742,17 @@ IBM Cloud 인프라(SoftLayer) 인증 정보가 지역 및 리소스 그룹에 �
   ```
   {: pre}
 
+
 ### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 {{site.data.keyword.containerlong_notm}} 지역에서 IBM Cloud 인프라(SoftLayer) 계정 인증 정보를 제거하십시오.
+{: shortdesc}
+
+```
+  ibmcloud ks credential-unset
+```
+{: pre}
 
 인증 정보를 제거한 후에는 [{{site.data.keyword.Bluemix_notm}}IAM API 키](#cs_api_key_info)가 IBM Cloud 인프라(SoftLayer)에서 리소스를 정렬하는 데 사용됩니다.
 
@@ -2007,21 +2765,19 @@ IBM Cloud 인프라(SoftLayer) 인증 정보가 지역 및 리소스 그룹에 �
   <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
   </dl>
 
-**예제**:
 
-  ```
-  ibmcloud ks credential-unset
-  ```
-  {: pre}
-
-
-### ibmcloud ks machine-types --zone ZONE [--json][-s]
+### ibmcloud ks machine-types
 {: #cs_machine_types}
 
-작업자 노드에 대해 사용 가능한 머신 유형의 목록을 봅니다. 머신 유형은 구역에 따라 다릅니다. 각각의 머신 유형에는 클러스터의 각 작업자 노드에 대한 가상 CPU, 메모리 및 디스크 공간의 양이 포함됩니다. 기본적으로, 모든 컨테이너 데이터가 저장된 보조 스토리지 디스크 디렉토리는 LUKS 암호화를 통해 암호화됩니다. `disable-disk-encrypt` 옵션이 클러스터 작성 중에 포함된 경우에는 호스트의 컨테이너 런타임 데이터가 암호화되지 않습니다. [암호화에 대해 자세히 알아보십시오](cs_secure.html#encrypted_disk).
+작업자 노드에 대해 사용 가능한 머신 유형의 목록을 봅니다. 머신 유형은 구역에 따라 다릅니다. 각각의 머신 유형에는 클러스터의 각 작업자 노드에 대한 가상 CPU, 메모리 및 디스크 공간의 양이 포함됩니다. 기본적으로, 모든 컨테이너 데이터가 저장된 보조 스토리지 디스크 디렉토리는 AES 256비트 LUKS 암호화를 통해 암호화됩니다. `disable-disk-encrypt` 옵션이 클러스터 작성 중에 포함된 경우에는 호스트의 컨테이너 런타임 데이터가 암호화되지 않습니다. [암호화에 대해 자세히 알아보십시오](/docs/containers?topic=containers-security#encrypted_disk).
 {:shortdesc}
 
-공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 프로비저닝할 수 있습니다. [머신 유형 옵션에 대해 자세히 알아보십시오](cs_clusters_planning.html#shared_dedicated_node).
+```
+ibmcloud ks machine-types --zone ZONE [--json] [-s]
+```
+{: pre}
+
+공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 프로비저닝할 수 있습니다. [머신 유형 옵션에 대해 자세히 알아보십시오](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
 
 <strong>최소 필요 권한</strong>: 없음
 
@@ -2029,7 +2785,7 @@ IBM Cloud 인프라(SoftLayer) 인증 정보가 지역 및 리소스 그룹에 �
 
    <dl>
    <dt><code>--zone <em>ZONE</em></code></dt>
-   <dd>사용 가능한 머신 유형을 나열하려는 구역을 입력하십시오. 이 값은 필수입니다. [사용 가능한 구역](cs_regions.html#zones)을 검토하십시오.</dd>
+   <dd>사용 가능한 머신 유형을 나열하려는 구역을 입력하십시오. 이 값은 필수입니다. [사용 가능한 구역](/docs/containers?topic=containers-regions-and-zones#zones)을 검토하십시오.</dd>
 
    <dt><code>--json</code></dt>
   <dd>명령 출력을 JSON 형식으로 인쇄합니다.  이 값은 선택사항입니다.</dd>
@@ -2038,17 +2794,25 @@ IBM Cloud 인프라(SoftLayer) 인증 정보가 지역 및 리소스 그룹에 �
   <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
   </dl>
 
-**명령 예**:
+**예제**:
 
   ```
   ibmcloud ks machine-types --zone dal10
   ```
   {: pre}
 
-### ibmcloud ks vlans --zone ZONE [--all][--json] [-s]
+
+
+### ibmcloud ks <ph class="ignoreSpelling">vlans</ph>
 {: #cs_vlans}
 
 IBM Cloud 인프라(SoftLayer) 계정에서 구역에 대해 사용 가능한 공용 및 사설 VLAN을 나열합니다. 사용 가능한 VLAN을 나열하려면 유료 계정이 있어야 합니다.
+{: shortdesc}
+
+```
+ibmcloud ks vlans --zone ZONE [--all] [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>:
 * 구역에서 클러스터가 연결된 VLAN 보기: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
@@ -2058,7 +2822,7 @@ IBM Cloud 인프라(SoftLayer) 계정에서 구역에 대해 사용 가능한 �
 
    <dl>
    <dt><code>--zone <em>ZONE</em></code></dt>
-   <dd>사설 및 공용 VLAN을 나열하려는 구역을 입력하십시오. 이 값은 필수입니다. [사용 가능한 구역](cs_regions.html#zones)을 검토하십시오.</dd>
+   <dd>사설 및 공용 VLAN을 나열하려는 구역을 입력하십시오. 이 값은 필수입니다. [사용 가능한 구역](/docs/containers?topic=containers-regions-and-zones#zones)을 검토하십시오.</dd>
 
    <dt><code>--all</code></dt>
    <dd>사용 가능한 모든 VLAN을 나열합니다. 기본적으로 VLAN은 유효한 VLAN만 표시되도록 필터링됩니다. 올바른 상태가 되려면 VLAN은 로컬 디스크 스토리지로 작업자를 호스팅할 수 있는 인프라와 연관되어야 합니다.</dd>
@@ -2078,10 +2842,16 @@ IBM Cloud 인프라(SoftLayer) 계정에서 구역에 대해 사용 가능한 �
   {: pre}
 
 
-### ibmcloud ks vlan-spanning-get [--json][-s]
+###   ibmcloud ks vlan-spanning-get
 {: #cs_vlan_spanning_get}
 
 IBM Cloud 인프라(SoftLayer) 계정에 대한 VLAN Spanning 상태를 보십시오. VLAN Spanning은 지정된 VLAN과는 무관하게 사설 네트워크를 통해 계정의 모든 디바이스가 서로 간에 통신할 수 있도록 합니다.
+{: shortdesc}
+
+```
+ibmcloud ks vlan-spanning-get [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -2108,10 +2878,16 @@ IBM Cloud 인프라(SoftLayer) 계정에 대한 VLAN Spanning 상태를 보십�
 ## 로깅 명령
 {: #logging_commands}
 
-### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
+### ibmcloud ks logging-autoupdate-disable
 {: #cs_log_autoupdate_disable}
 
 특정 클러스터에서 Fluentd 팟(Pod)의 자동 업데이트를 사용 안함으로 설정합니다. 클러스터의 주 또는 부 Kubernetes 버전을 업데이트하는 경우, IBM은 Fluentd configmap에 대한 필수 변경사항을 자동으로 작성하지만 로깅 추가 기능에 대한 Fluentd의 빌드 버전은 변경하지 않습니다. 사용자는 최신 Kubernetes 버전 및 추가 기능 이미지의 호환성을 확인해야 합니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
+```
+{: pre}
 
 <strong>명령 옵션</strong>:
 
@@ -2120,10 +2896,16 @@ IBM Cloud 인프라(SoftLayer) 계정에 대한 VLAN Spanning 상태를 보십�
     <dd>Fluentd 추가 기능의 자동 업데이트를 사용 안함으로 설정할 클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
 </dl>
 
-### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
+### ibmcloud ks logging-autoupdate-enable
 {: #cs_log_autoupdate_enable}
 
 특정 클러스터에서 Fluentd 팟(Pod)의 자동 업데이트를 사용으로 설정합니다. Fluentd 팟(Pod)은 새 빌드 버전이 사용 가능할 때 자동으로 업데이트됩니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
+```
+{: pre}
 
 <strong>명령 옵션</strong>:
 
@@ -2132,10 +2914,16 @@ IBM Cloud 인프라(SoftLayer) 계정에 대한 VLAN Spanning 상태를 보십�
     <dd>Fluentd 추가 기능의 자동 업데이트를 사용으로 설정할 클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
 </dl>
 
-### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
+### ibmcloud ks logging-autoupdate-get
 {: #cs_log_autoupdate_get}
 
 Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되었는지 여부를 확인합니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-autoupdate-get --cluster CLUSTER
+```
+{: pre}
 
 <strong>명령 옵션</strong>:
 
@@ -2144,10 +2932,16 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
     <dd>Fluentd 추가 기능의 자동 업데이트가 사용으로 설정되었는지 여부를 확인할 클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
 </dl>
 
-### ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS][--syslog-protocol PROTOCOL]  [--json][--skip-validation] [--force-update][-s]
+### ibmcloud ks logging-config-create
 {: #cs_logging_create}
 
 로깅 구성을 작성합니다. 이 명령을 사용하여 컨테이너, 애플리케이션, 작업자 노드, Kubernetes 클러스터 및 Ingress 애플리케이션 로드 밸런서에 대한 로그를 {{site.data.keyword.loganalysisshort_notm}} 또는 외부 syslog 서버로 전달할 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL]  [--json] [--skip-validation] [--force-update][-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: `kube-audit`을 제외한 모든 로그 소스의 경우 클러스터에 대한 **편집자** 플랫폼 역할 또는 `kube-audit` 로그 소스의 경우 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -2157,7 +2951,7 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>클러스터의 이름 또는 ID입니다.</dd>
 
-  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>    
+  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
     <dd>로그 전달을 사용할 로그 소스입니다. 이 인수는 구성을 적용할 로그 소스의 쉼표로 구분된 목록을 지원합니다. 허용되는 값은 <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>storage</code>, <code>ingress</code> 및 <code>kube-audit</code>입니다. 로그 소스를 제공하지 않으면 구성이 <code>container</code> 및 <code>ingress</code>에 대해 작성됩니다.</dd>
 
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
@@ -2167,7 +2961,7 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
     <dd>로그를 전달할 Kubernetes 네임스페이스입니다. <code>ibm-system</code> 및 <code>kube-system</code> Kubernetes 네임스페이스의 경우 로그 전달이 지원되지 않습니다. 이 값은 container 로그 소스에 대해서만 유효하며 선택사항입니다. 네임스페이스를 지정하지 않으면 컨테이너의 모든 네임스페이스가 이 구성을 사용합니다.</dd>
 
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-    <dd>로깅 유형이 <code>syslog</code>인 경우 로그 콜렉터 서버의 호스트 이름 또는 IP 주소입니다. 이 값은 <code>syslog</code>에 필수입니다. 로깅 유형이 <code>ibm</code>인 경우 {{site.data.keyword.loganalysislong_notm}} 유입 URL입니다. 사용 가능한 유입 URL 목록은 [여기](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)에서 찾을 수 있습니다. 유입 URL을 지정하지 않으면 클러스터가 작성된 지역의 엔드포인트가 사용됩니다.</dd>
+    <dd>로깅 유형이 <code>syslog</code>인 경우 로그 콜렉터 서버의 호스트 이름 또는 IP 주소입니다. 이 값은 <code>syslog</code>에 필수입니다. 로깅 유형이 <code>ibm</code>인 경우 {{site.data.keyword.loganalysislong_notm}} 유입 URL입니다. 사용 가능한 유입 URL 목록은 [여기](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls)에서 찾을 수 있습니다. 유입 URL을 지정하지 않으면 클러스터가 작성된 지역의 엔드포인트가 사용됩니다.</dd>
 
   <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
     <dd>로그 콜렉터 서버의 포트입니다. 이 값은 선택사항입니다. 포트를 지정하지 않으면 표준 포트 <code>514</code>가 <code>syslog</code>에 사용되고 표준 포트 <code>9091</code>이 <code>ibm</code>에 사용됩니다.</dd>
@@ -2223,10 +3017,17 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
   ```
   {: pre}
 
-### ibmcloud ks logging-config-get --cluster CLUSTER [--logsource LOG_SOURCE][--json] [-s]
+
+### ibmcloud ks logging-config-get
 {: #cs_logging_get}
 
 클러스터에 대한 모든 로그 전달 구성을 보거나 로그 소스를 기반으로 로깅 구성을 필터링합니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-get --cluster CLUSTER [--logsource LOG_SOURCE] [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -2257,10 +3058,16 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
   {: pre}
 
 
-### ibmcloud ks logging-config-refresh --cluster CLUSTER  [--force-update]  [-s]
+### ibmcloud ks logging-config-refresh
 {: #cs_logging_refresh}
 
 클러스터의 로깅 구성을 새로 고칩니다. 이렇게 하면 클러스터의 영역 레벨에 전달되는 모든 로깅 구성의 로깅 토큰이 새로 고쳐집니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-refresh --cluster CLUSTER [--force-update] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -2285,10 +3092,17 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
   {: pre}
 
 
-### ibmcloud ks logging-config-rm --cluster CLUSTER [--id LOG_CONFIG_ID][--all] [--force-update][-s]
+
+### ibmcloud ks logging-config-rm
 {: #cs_logging_rm}
 
 클러스터에 대한 한 개의 로그 전달 구성을 삭제하거나 모든 로깅 구성을 삭제합니다. 이렇게 하면 원격 syslog 서버 또는 {{site.data.keyword.loganalysisshort_notm}}로의 로그 전달이 중지됩니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-rm --cluster CLUSTER [--id LOG_CONFIG_ID] [--all] [--force-update] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: `kube-audit`을 제외한 모든 로그 소스의 경우 클러스터에 대한 **편집자** 플랫폼 역할 또는 `kube-audit` 로그 소스의 경우 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -2319,10 +3133,16 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
   {: pre}
 
 
-### ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-paths PATH] [--app-containers PATH][--json] [--skipValidation][--force-update] [-s]
+### ibmcloud ks logging-config-update
 {: #cs_logging_update}
 
 로그 전달 구성의 세부사항을 업데이트합니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] [--json] [--skipValidation] [--force-update] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -2342,7 +3162,7 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
     <dd>로그를 전달할 Kubernetes 네임스페이스입니다. <code>ibm-system</code> 및 <code>kube-system</code> Kubernetes 네임스페이스의 경우 로그 전달이 지원되지 않습니다. 이 값은 <code>container</code> 로그 소스에 대해서만 유효합니다. 네임스페이스를 지정하지 않으면 컨테이너의 모든 네임스페이스가 이 구성을 사용합니다.</dd>
 
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-   <dd>로깅 유형이 <code>syslog</code>인 경우 로그 콜렉터 서버의 호스트 이름 또는 IP 주소입니다. 이 값은 <code>syslog</code>에 필수입니다. 로깅 유형이 <code>ibm</code>인 경우 {{site.data.keyword.loganalysislong_notm}} 유입 URL입니다. 사용 가능한 유입 URL 목록은 [여기](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)에서 찾을 수 있습니다. 유입 URL을 지정하지 않으면 클러스터가 작성된 지역의 엔드포인트가 사용됩니다.</dd>
+   <dd>로깅 유형이 <code>syslog</code>인 경우 로그 콜렉터 서버의 호스트 이름 또는 IP 주소입니다. 이 값은 <code>syslog</code>에 필수입니다. 로깅 유형이 <code>ibm</code>인 경우 {{site.data.keyword.loganalysislong_notm}} 유입 URL입니다. 사용 가능한 유입 URL 목록은 [여기](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls)에서 찾을 수 있습니다. 유입 URL을 지정하지 않으면 클러스터가 작성된 지역의 엔드포인트가 사용됩니다.</dd>
 
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>로그 콜렉터 서버의 포트입니다. 로깅 유형이 <code>syslog</code>인 경우 이 값은 선택사항입니다. 포트를 지정하지 않으면 표준 포트 <code>514</code>가 <code>syslog</code>에 사용되고 <code>9091</code>이 <code>ibm</code>에 사용됩니다.</dd>
@@ -2387,10 +3207,17 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
   {: pre}
 
 
-### ibmcloud ks logging-filter-create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--message MESSAGE][--regex-message MESSAGE] [--force-update][--json] [-s]
+
+### ibmcloud ks logging-filter-create
 {: #cs_log_filter_create}
 
 로깅 필터를 작성합니다. 이 명령을 사용하여 로깅 구성에 의해 전달되는 로그를 필터링할 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-filter-create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -2440,7 +3267,7 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
   ```
   {: pre}
 
-이 예는 특정 클러스터에서 전달되는, info 레벨 이하의 모든 로그를 필터링합니다. 출력은 JSON으로 리턴됩니다.
+이 예는 특정 클러스터에서 전달되는, `info` 레벨 이하의 모든 로그를 필터링합니다. 출력은 JSON으로 리턴됩니다.
 
   ```
   ibmcloud ks logging-filter-create --cluster example-cluster --type all --level info --json
@@ -2449,10 +3276,16 @@ Fluentd 팟(Pod)이 특정 클러스터에서 자동 업데이트로 설정되�
 
 
 
-### ibmcloud ks logging-filter-get --cluster CLUSTER [--id FILTER_ID][--show-matching-configs] [--show-covering-filters][--json] [-s]
+### ibmcloud ks logging-filter-get
 {: #cs_log_filter_view}
 
 로깅 필터 구성을 봅니다. 이 명령을 사용하여 작성한 로깅 필터를 볼 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-filter-get --cluster CLUSTER [--id FILTER_ID] [--show-matching-configs] [--show-covering-filters] [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -2485,10 +3318,16 @@ ibmcloud ks logging-filter-get mycluster --id 885732 --show-matching-configs
 ```
 {: pre}
 
-### ibmcloud ks logging-filter-rm --cluster CLUSTER [--id FILTER_ID][--all] [--force-update][-s]
+### ibmcloud ks logging-filter-rm
 {: #cs_log_filter_delete}
 
 로깅 필터를 삭제합니다. 이 명령을 사용하여 작성한 로깅 필터를 제거할 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-filter-rm --cluster CLUSTER [--id FILTER_ID] [--all] [--force-update] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -2518,10 +3357,16 @@ ibmcloud ks logging-filter-rm mycluster --id 885732
 ```
 {: pre}
 
-### ibmcloud ks logging-filter-update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--message MESSAGE][--regex-message MESSAGE] [--force-update][--json] [-s]
+### ibmcloud ks logging-filter-update
 {: #cs_log_filter_update}
 
 로깅 필터를 업데이트합니다. 이 명령을 사용하여 작성한 로깅 필터를 업데이트할 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-filter-update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **편집자** 플랫폼 역할
 
@@ -2574,17 +3419,23 @@ ibmcloud ks logging-filter-rm mycluster --id 885732
   ```
   {: pre}
 
-이 예는 특정 클러스터에서 전달되는, info 레벨 이하의 모든 로그를 필터링합니다. 출력은 JSON으로 리턴됩니다.
+이 예는 특정 클러스터에서 전달되는, `info` 레벨 이하의 모든 로그를 필터링합니다. 출력은 JSON으로 리턴됩니다.
 
   ```
   ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type all --level info --json
   ```
   {: pre}
 
-### ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-s]
+### ibmcloud ks logging-collect
 {: #cs_log_collect}
 
 특정 시점의 로그에 대한 스냅샷을 요청하고 로그를 {{site.data.keyword.cos_full_notm}} 버킷에 저장합니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -2630,10 +3481,17 @@ ibmcloud ks logging-filter-rm mycluster --id 885732
   ```
   {: screen}
 
-### ibmcloud ks logging-collect-status --cluster CLUSTER [--json][-s]
+
+### ibmcloud ks logging-collect-status
 {: #cs_log_collect_status}
 
 클러스터에 대한 로그 콜렉션 스냅샷 요청의 상태입니다.
+{: shortdesc}
+
+```
+ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **관리자** 플랫폼 역할
 
@@ -2679,26 +3537,25 @@ ibmcloud ks logging-filter-rm mycluster --id 885732
 {: #cs_region}
 
 사용자가 현재 있는 {{site.data.keyword.containerlong_notm}} 지역을 찾습니다. 사용자는 영역에 특정한 클러스터를 작성하고 관리합니다. `ibmcloud ks region-set` 명령을 사용하여 지역을 변경할 수 있습니다.
-
-<strong>최소 필요 권한</strong>: 없음
-
-**예제**:
+{: shortdesc}
 
 ```
 ibmcloud ks region
 ```
 {: pre}
 
-**출력**:
-```
-Region: us-south
-```
-{: screen}
+<strong>최소 필요 권한</strong>: 없음
 
-### ibmcloud ks region-set [--region REGION]
+###         ibmcloud ks region-set
 {: #cs_region-set}
 
 {{site.data.keyword.containerlong_notm}}의 지역을 설정합니다. 사용자는 지역에 특정한 클러스터를 작성 및 관리하며, 고가용성을 위해 여러 지역에서 클러스터를 원할 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks region-set [--region REGION]
+```
+{: pre}
 
 예를 들어, 미국 남부 지역에서 {{site.data.keyword.Bluemix_notm}}에 로그인하고 클러스터를 작성할 수 있습니다. 그 다음에는 `ibmcloud ks region-set eu-central`을 사용하여 EU 중앙 지역을 대상으로 지정하고 다른 클러스터를 작성할 수 있습니다. 최종적으로는 `ibmcloud ks region-set us-south`를 사용하여 미국 남부로 돌아가서 해당 지역의 클러스터를 관리할 수 있습니다.
 
@@ -2710,7 +3567,7 @@ Region: us-south
 <dt><code>--region <em>REGION</em></code></dt>
 <dd>대상으로 할 지역을 입력하십시오. 이 값은 선택사항입니다. 지역을 제공하지 않은 경우 출력의 목록에서 선택할 수 있습니다.
 
-사용 가능한 지역의 목록을 보려면 [지역 및 구역](cs_regions.html)을 검토하거나 `ibmcloud ks regions` [명령](#cs_regions)을 사용하십시오.</dd></dl>
+사용 가능한 지역의 목록을 보려면 [지역 및 구역](/docs/containers?topic=containers-regions-and-zones)을 검토하거나 `ibmcloud ks regions` [명령](#cs_regions)을 사용하십시오.</dd></dl>
 
 **예제**:
 
@@ -2738,12 +3595,11 @@ OK
 ```
 {: screen}
 
-
-
 ### ibmcloud ks regions
 {: #cs_regions}
 
 사용 가능한 지역을 나열합니다. `Region Name`은 {{site.data.keyword.containerlong_notm}} 이름이고 `Region Alias`는 해당 지역의 일반 {{site.data.keyword.Bluemix_notm}} 이름입니다.
+{: shortdesc}
 
 <strong>최소 필요 권한</strong>: 없음
 
@@ -2766,10 +3622,16 @@ us-south      us-south
 ```
 {: screen}
 
-### ibmcloud ks zones [--region-only][--json] [-s]
+###         ibmcloud ks zones
 {: #cs_datacenters}
 
 사용자가 클러스터를 작성하기 위해 사용할 수 있는 구역의 목록을 봅니다. 사용 가능한 구역은 사용자가 로그인한 지역에 따라 다릅니다. 지역을 전환하려면 `ibmcloud ks region-set`를 실행하십시오.
+{: shortdesc}
+
+```
+ibmcloud ks zones [--region-only] [--json] [-s]
+```
+{: pre}
 
 <strong>명령 옵션</strong>:
 
@@ -2794,15 +3656,21 @@ us-south      us-south
 <br />
 
 
+
 ## 작업자 노드 명령
 {: worker_node_commands}
 
 
-### 더 이상 사용되지 않음: ibmcloud ks worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt][-s]
+### 더 이상 사용되지 않음: ibmcloud ks worker-add
 {: #cs_worker_add}
 
-독립형 작업자 노드를 작업자 풀에 없는 표준 클러스터에 추가하십시오.
+독립형 작업자 노드를 작업자 풀에 없는 표준 클러스터에 추가합니다.
 {: deprecated}
+
+```
+ibmcloud ks worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -2843,7 +3711,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td><code><em>&lt;machine_type&gt;</em></code>을 작업자 노드를 배치하려는 머신 유형으로 대체합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-types` [명령](cs_cli_reference.html#cs_machine_types)을 참조하십시오.</td>
+<td><code><em>&lt;machine_type&gt;</em></code>을 작업자 노드를 배치하려는 머신 유형으로 대체합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-types` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)을 참조하십시오.</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
@@ -2851,7 +3719,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td><code>&lt;public_VLAN&gt;</code>을 작업자 노드에 사용할 공용 VLAN의 ID로 대체합니다. 사용 가능한 VLAN을 나열하려면 <code>ibmcloud ks vlans &lt;zone&gt;</code>을 실행하고 <code>fcr</code>(프론트 엔드 라우터)로 시작하는 VLAN 라우터를 찾으십시오. <br><strong>참고</strong>: 작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 네트워크 연결에 대해 대체 솔루션을 구성해야 합니다. 자세한 정보는 [개인 전용 클러스터 네트워킹 계획](cs_network_cluster.html#private_vlan)을 참조하십시오.</td>
+<td><code>&lt;public_VLAN&gt;</code>을 작업자 노드에 사용할 공용 VLAN의 ID로 대체합니다. 사용 가능한 VLAN을 나열하려면 <code>ibmcloud ks vlans &lt;zone&gt;</code>을 실행하고 <code>fcr</code>(프론트 엔드 라우터)로 시작하는 VLAN 라우터를 찾으십시오. <br><strong>참고</strong>: 작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 [개인 서비스 엔드포인트를 사용으로 설정](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)하거나 [게이트웨이 디바이스를 구성](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)하여 작업자 노드와 클러스터 마스터가 통신할 수 있도록 해야 합니다.</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -2863,14 +3731,14 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>작업자 노드는 기본적으로 디스크 암호화 기능을 합니다. [자세히 보기](cs_secure.html#encrypted_disk). 암호화를 사용 안함으로 설정하려면 이 옵션을 포함하고 값을 <code>false</code>로 설정하십시오.</td></tr>
+<td>작업자 노드는 기본적으로 AES 256비트 디스크 암호화 기능을 합니다. [자세히 보기](/docs/containers?topic=containers-security#encrypted_disk). 암호화를 사용 안함으로 설정하려면 이 옵션을 포함하고 값을 <code>false</code>로 설정하십시오.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>작업자 노드에 대한 하드웨어 격리의 레벨입니다. 사용자 전용으로만 실제 리소스를 사용 가능하게 하려면 dedicated를 사용하고, 실제 리소스를 다른 IBM 고객과 공유하도록 허용하려면 shared를 사용하십시오. 기본값은 shared입니다.  이 값은 선택사항입니다.</dd>
+<dd>작업자 노드에 대한 하드웨어 격리의 레벨입니다. 사용자 전용으로만 실제 리소스를 사용 가능하게 하려면 dedicated를 사용하고, 실제 리소스를 다른 IBM 고객과 공유하도록 허용하려면 shared를 사용하십시오. 기본값은 shared입니다. 이 값은 선택사항입니다. 베어메탈 머신 유형의 경우에는 `dedicated`를 지정하십시오.</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>머신 유형을 선택합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-types` [명령](cs_cli_reference.html#cs_machine_types)에 대한 문서를 참조하십시오. 이 값은 표준 클러스터의 경우 필수이며 무료 클러스터에는 사용할 수 없습니다.</dd>
+<dd>머신 유형을 선택합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-types` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)에 대한 문서를 참조하십시오. 이 값은 표준 클러스터의 경우 필수이며 무료 클러스터에는 사용할 수 없습니다.</dd>
 
 <dt><code>--workers <em>NUMBER</em></code></dt>
 <dd>클러스터에서 작성할 작업자 노드의 수를 표시하는 정수입니다. 기본값은 1입니다. 이 값은 선택사항입니다.</dd>
@@ -2879,10 +3747,10 @@ diskEncryption: <em>false</em></code></pre>
 <dd>클러스터가 작성될 때 지정된 사설 VLAN입니다. 이 값은 필수입니다. 사설 VLAN 라우터는 항상 <code>bcr</code>(벡엔드 라우터)로 시작하고 공용 VLAN 라우터는 항상 <code>fcr</code>(프론트 엔드 라우터)로 시작합니다. 클러스터를 작성하고 공인 및 사설 VLAN을 지정할 때는 이러한 접두부 뒤의 숫자 및 문자 조합이 일치해야 합니다.</dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>클러스터가 작성될 때 지정된 공용 VLAN입니다. 이 값은 선택사항입니다. 작업자 노드가 사설 VLAN에만 존재하도록 하려는 경우 공용 VLAN ID를 제공하지 마십시오. 사설 VLAN 라우터는 항상 <code>bcr</code>(벡엔드 라우터)로 시작하고 공용 VLAN 라우터는 항상 <code>fcr</code>(프론트 엔드 라우터)로 시작합니다. 클러스터를 작성하고 공인 및 사설 VLAN을 지정할 때는 이러한 접두부 뒤의 숫자 및 문자 조합이 일치해야 합니다.<p class="note">작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 네트워크 연결에 대해 대체 솔루션을 구성해야 합니다. 자세한 정보는 [개인 전용 클러스터 네트워킹 계획](cs_network_cluster.html#private_vlan)을 참조하십시오.</p></dd>
+<dd>클러스터가 작성될 때 지정된 공용 VLAN입니다. 이 값은 선택사항입니다. 작업자 노드가 사설 VLAN에만 존재하도록 하려는 경우 공용 VLAN ID를 제공하지 마십시오. 사설 VLAN 라우터는 항상 <code>bcr</code>(벡엔드 라우터)로 시작하고 공용 VLAN 라우터는 항상 <code>fcr</code>(프론트 엔드 라우터)로 시작합니다. 클러스터를 작성하고 공인 및 사설 VLAN을 지정할 때는 이러한 접두부 뒤의 숫자 및 문자 조합이 일치해야 합니다.<p class="note">작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 [개인 서비스 엔드포인트를 사용으로 설정](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)하거나 [게이트웨이 디바이스를 구성](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)하여 작업자 노드와 클러스터 마스터가 통신할 수 있도록 해야 합니다.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>작업자 노드는 기본적으로 디스크 암호화 기능을 합니다. [자세히 보기](cs_secure.html#encrypted_disk). 암호화를 사용 안함으로 설정하려면 이 옵션을 포함하십시오.</dd>
+<dd>작업자 노드는 기본적으로 AES 256비트 디스크 암호화 기능을 합니다. [자세히 보기](/docs/containers?topic=containers-security#encrypted_disk). 암호화를 사용 안함으로 설정하려면 이 옵션을 포함하십시오.</dd>
 
 <dt><code>-s</code></dt>
 <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
@@ -2903,10 +3771,16 @@ diskEncryption: <em>false</em></code></pre>
   ```
   {: pre}
 
-### ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [--json][-s]
+### ibmcloud ks worker-get
 {: #cs_worker_get}
 
 작업자 노드의 세부사항을 봅니다.
+{: shortdesc}
+
+```
+ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -2926,7 +3800,7 @@ diskEncryption: <em>false</em></code></pre>
    <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
    </dl>
 
-**명령 예**:
+**예제**:
 
   ```
   ibmcloud ks worker-get --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
@@ -2950,10 +3824,16 @@ diskEncryption: <em>false</em></code></pre>
   ```
   {: screen}
 
-### ibmcloud ks worker-reboot [-f][--hard] --cluster CLUSTER --worker WORKER [WORKER][--skip-master-healthcheck] [-s]
+### ibmcloud ks worker-reboot
 {: #cs_worker_reboot}
 
-클러스터에서 작업자 노드를 다시 부팅합니다. 다시 부팅 중에 작업자 노드의 상태가 변경되지 않습니다. 예를 들어, IBM Cloud 인프라(SoftLayer)의 작업자 노드 상태가 `Powered Off`이며 사용자가 작업자 노드를 켜야 하는 경우에는 재부팅을 사용할 수 있습니다.
+클러스터에서 작업자 노드를 다시 부팅합니다. 다시 부팅 중에 작업자 노드의 상태가 변경되지 않습니다. 예를 들어, IBM Cloud 인프라(SoftLayer)의 작업자 노드 상태가 `Powered Off`이며 사용자가 작업자 노드를 켜야 하는 경우에는 재부팅을 사용할 수 있습니다. 재부팅은 임시 디렉토리를 지우지만 전체 파일 시스템을 지우거나 디스크를 다시 포맷하지는 않습니다.
+{: shortdesc}
+
+```
+ibmcloud ks worker-reboot [-f] [--hard] --cluster CLUSTER --worker WORKER [WORKER] [--skip-master-healthcheck] [-s]
+```
+{: pre}
 
 **주의:** 작업자 노드를 다시 부팅하면 작업자 노드에서 데이터 손상이 발생할 수 있습니다. 이 명령은 다시 부팅하면 작업자 노드를 복구하는 데 도움이 된다고 알고 있는 경우에 주의하여 사용하십시오. 다른 모든 경우에는 대신 [작업자 노드를 다시 로드](#cs_worker_reload)하십시오.
 
@@ -2978,7 +3858,7 @@ kubectl get nodes
 kubectl get nodes
    ```
    {: pre}
-   상태가 **SchedulingDisabled**로 표시되는 경우 작업자 노드가 팟(Pod) 스케줄링에 사용 불가능합니다.
+상태가 **`SchedulingDisabled`**로 표시되는 경우 작업자 노드가 팟(Pod) 스케줄링에 사용 불가능합니다.
  4. 작업자 노드에서 팟(Pod)을 제거하고 클러스터에 남아 있는 작업자 노드로 다시 스케줄하도록 강제 실행하십시오.
     ```
     kubectl drain <worker_name>
@@ -3029,13 +3909,19 @@ kubectl get nodes
   {: pre}
 
 
-### ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER][--skip-master-healthcheck] [-s]
+
+### ibmcloud ks worker-reload
 {: #cs_worker_reload}
 
-작업자 노드의 구성을 다시 로드합니다. 다시 로드는 작업자 노드에 성능 저하와 같은 문제점이 발생하거나 작업자 노드가 비정상적인 상태인 경우 유용할 수 있습니다. 다시 로드하는 중에 작업자 노드 머신은 최신 이미지로 업데이트되며 [작업자 노드의 외부에 저장](cs_storage_planning.html#persistent_storage_overview)되지 않은 경우 데이터가 삭제됨을 유념하십시오.
+작업자 노드의 구성을 다시 로드합니다. 다시 로드는 작업자 노드에 성능 저하와 같은 문제점이 발생하거나 작업자 노드가 비정상적인 상태인 경우 유용할 수 있습니다. 다시 로드하는 중에 작업자 노드 머신은 최신 이미지로 업데이트되며 [작업자 노드의 외부에 저장](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)되지 않은 경우 데이터가 삭제됨을 유념하십시오.
 {: shortdesc}
 
-작업자 노드를 다시 로드하면 작업자 노드에 패치 버전 업데이트가 적용되지만 주 버전 또는 부 버전 업데이트는 적용되지 않습니다. 한 패치 버전에서 다음 패치 버전으로의 변경사항을 보려면 [버전 변경 로그](cs_versions_changelog.html#changelog) 문서를 검토하십시오.
+```
+ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER] [--skip-master-healthcheck] [-s]
+```
+{: pre}
+
+작업자 노드를 다시 로드하면 작업자 노드에 패치 버전 업데이트가 적용되지만 주 버전 또는 부 버전 업데이트는 적용되지 않습니다. 한 패치 버전에서 다음 패치 버전으로의 변경사항을 보려면 [버전 변경 로그](/docs/containers?topic=containers-changelog#changelog) 문서를 검토하십시오.
 {: tip}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
@@ -3058,7 +3944,7 @@ kubectl get nodes
 kubectl get nodes
    ```
    {: pre}
-   상태가 **SchedulingDisabled**로 표시되는 경우 작업자 노드가 팟(Pod) 스케줄링에 사용 불가능합니다.
+상태가 **`SchedulingDisabled`**로 표시되는 경우 작업자 노드가 팟(Pod) 스케줄링에 사용 불가능합니다.
  4. 작업자 노드에서 팟(Pod)을 제거하고 클러스터에 남아 있는 작업자 노드로 다시 스케줄하도록 강제 실행하십시오.
     ```
     kubectl drain <worker_name>
@@ -3103,10 +3989,16 @@ kubectl get nodes
   {: pre}
 
 
-### ibmcloud ks worker-rm [-f] --cluster CLUSTER --workers WORKER[,WORKER][-s]
+### ibmcloud ks worker-rm
 {: #cs_worker_rm}
 
 클러스터에서 하나 이상의 작업자 노드를 제거합니다. 작업자 노드를 제거하면 클러스터가 불균형 상태가 됩니다. `ibmcloud ks worker-pool-rebalance` [명령](#cs_rebalance)을 실행하여 작업자 풀을 자동으로 리밸런싱할 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks worker-rm [-f] --cluster CLUSTER --workers WORKER[,WORKER] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -3117,6 +4009,7 @@ kubectl get nodes
    ```
 kubectl get nodes
    ```
+   {: pre}
    이 명령에서 리턴되는 **이름**은 작업자 노드에 지정된 사설 IP 주소입니다. `ibmcloud ks workers <cluster_name_or_ID>` 명령을 실행하고 동일한 **사설 IP** 주소로 작업자 노드를 검색하면 작업자 노드에 대한 추가 정보를 찾을 수 있습니다.
 2. 유출(cordoning)이라고 알려진 프로세스에서 작업자 노드를 스케줄 불가능으로 표시하십시오. 작업자 노드를 유출할 때 이후 팟(Pod) 스케줄링에서 사용할 수 없도록 합니다. 이전 단계에서 검색한 작업자 노드의 **이름**을 사용하십시오.
    ```
@@ -3129,7 +4022,7 @@ kubectl get nodes
 kubectl get nodes
    ```
    {: pre}
-   상태가 **SchedulingDisabled**로 표시되는 경우 작업자 노드가 팟(Pod) 스케줄링에 사용 불가능합니다.
+상태가 **`SchedulingDisabled`**로 표시되는 경우 작업자 노드가 팟(Pod) 스케줄링에 사용 불가능합니다.
 4. 작업자 노드에서 팟(Pod)을 제거하고 클러스터에 남아 있는 작업자 노드로 다시 스케줄하도록 강제 실행하십시오.
    ```
    kubectl drain <worker_name>
@@ -3146,6 +4039,7 @@ kubectl get nodes
    ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
+   {: pre}
 </br>
 <strong>명령 옵션</strong>:
 
@@ -3171,17 +4065,24 @@ kubectl get nodes
   {: pre}
 
 
-### ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER][--force-update] [-s]
+
+### ibmcloud ks worker-update
 {: #cs_worker_update}
 
-작업자 노드를 업데이트하여 운영 체제에 최신 보안 업데이트 및 패치를 적용하고, Kubernetes 마스터의 버전과 일치하도록 Kubernetes 버전을 업데이트합니다. `ibmcloud ks cluster-update` [명령](cs_cli_reference.html#cs_cluster_update)으로 마스터 Kubernetes 버전을 업데이트할 수 있습니다.
+작업자 노드를 업데이트하여 운영 체제에 최신 보안 업데이트 및 패치를 적용하고, Kubernetes 마스터의 버전과 일치하도록 Kubernetes 버전을 업데이트합니다. `ibmcloud ks cluster-update` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)으로 마스터 Kubernetes 버전을 업데이트할 수 있습니다.
+{: shortdesc}
+
+```
+ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [--force-update] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
-`ibmcloud ks worker-update`를 실행하면 앱과 서비스의 가동 중단이 발생할 수 있습니다. 업데이트 중에 모든 팟(Pod)은 기타 작업자 노드로 다시 스케줄되고 작업 노드의 이미지가 재작성되며 팟(Pod) 외부에 저장되지 않은 경우 데이터가 삭제됩니다. 가동 중단을 방지하려면 [선택한 작업자 노드가 업데이트되는 동안 워크로드를 처리하기에 충분한 작업자 노드가 있는지 확인](cs_cluster_update.html#worker_node)하십시오.
+`ibmcloud ks worker-update`를 실행하면 앱과 서비스의 가동 중단이 발생할 수 있습니다. 업데이트 중에 모든 팟(Pod)은 기타 작업자 노드로 다시 스케줄되고 작업 노드의 이미지가 재작성되며 팟(Pod) 외부에 저장되지 않은 경우 데이터가 삭제됩니다. 가동 중단을 방지하려면 [선택한 작업자 노드가 업데이트되는 동안 워크로드를 처리하기에 충분한 작업자 노드가 있는지 확인](/docs/containers?topic=containers-update#worker_node)하십시오.
 {: important}
 
-업데이트하기 전에 배치를 위해 YAML 파일을 변경해야 할 수도 있습니다. 세부사항은 이 [릴리스 정보](cs_versions.html)를 검토하십시오.
+업데이트하기 전에 배치를 위해 YAML 파일을 변경해야 할 수도 있습니다. 세부사항은 이 [릴리스 정보](/docs/containers?topic=containers-cs_versions)를 검토하십시오.
 
 <strong>명령 옵션</strong>:
 
@@ -3211,10 +4112,17 @@ kubectl get nodes
   ```
   {: pre}
 
-### ibmcloud ks workers --cluster CLUSTER [--worker-pool POOL][--show-pools] [--show-deleted][--json] [-s]
+
+### ibmcloud ks workers
 {: #cs_workers}
 
 작업자 노드의 목록과 클러스터에서 각각의 상태(status)를 봅니다.
+{: shortdesc}
+
+```
+ibmcloud ks workers --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--show-deleted] [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -3250,13 +4158,20 @@ kubectl get nodes
 <br />
 
 
+
 ## 작업자 풀 명령
 {: #worker-pool}
 
-### ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--labels LABELS][--disable-disk-encrypt] [-s][--json]
+### ibmcloud ks worker-pool-create
 {: #cs_worker_pool_create}
 
 클러스터에서 작업자 풀을 작성할 수 있습니다. 작업자 풀을 추가할 때 이에는 기본적으로 구역이 지정되지 않습니다. 작업자에 대한 머신 유형 및 각 구역에서 원하는 작업자의 수는 사용자가 지정합니다. 작업자 풀에는 기본 Kubernetes 버전이 부여됩니다. 작업자 작성을 완료하려면 풀에 [하나 이상의 구역을 추가](#cs_zone_add)하십시오.
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--labels LABELS] [--disable-disk-encrypt] [-s] [--json]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -3270,7 +4185,7 @@ kubectl get nodes
     <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
 
   <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-    <dd>머신 유형을 선택합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-types` [명령](cs_cli_reference.html#cs_machine_types)에 대한 문서를 참조하십시오. 이 값은 표준 클러스터의 경우 필수이며 무료 클러스터에는 사용할 수 없습니다.</dd>
+    <dd>머신 유형을 선택합니다. 공유 또는 전용 하드웨어에서 가상 머신으로서 또는 베어메탈에서 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-types` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)에 대한 문서를 참조하십시오. 이 값은 표준 클러스터의 경우 필수이며 무료 클러스터에는 사용할 수 없습니다.</dd>
 
   <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
     <dd>각 구역에 작성할 작업자의 수입니다. 이 값은 필수이며 1 이상이어야 합니다.</dd>
@@ -3291,17 +4206,24 @@ kubectl get nodes
     <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
 </dl>
 
-**명령 예**:
+**예제**:
 
   ```
   ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
   ```
   {: pre}
 
-### ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s][--json]
+
+### ibmcloud ks worker-pool-get
 {: #cs_worker_pool_get}
 
 작업자 풀의 세부사항을 봅니다.
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--json]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -3320,7 +4242,7 @@ kubectl get nodes
     <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
 </dl>
 
-**명령 예**:
+**예제**:
 
   ```
   ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
@@ -3330,22 +4252,28 @@ kubectl get nodes
 **출력 예**:
 
   ```
-  Name:               pool   
-  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g   
-  State:              active   
-  Hardware:           shared   
-  Zones:              dal10,dal12   
-  Workers per zone:   3   
-  Machine type:       b2c.4x16.encrypted   
-  Labels:             -   
-  Version:            1.10.11_1512
+  Name:               pool
+  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g
+  State:              active
+  Hardware:           shared
+  Zones:              dal10,dal12
+  Workers per zone:   3
+  Machine type:       b2c.4x16.encrypted
+  Labels:             -
+  Version:            1.12.6_1512
   ```
   {: screen}
 
-### ibmcloud ks worker-pool-rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
+### ibmcloud ks worker-pool-rebalance
 {: #cs_rebalance}
 
 작업자 노드를 삭제한 후에 작업자 풀을 리밸런싱할 수 있습니다. 이 명령을 실행하면 하나 이상의 새 작업자가 작업자 풀에 추가됩니다.
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -3367,10 +4295,16 @@ kubectl get nodes
   ```
   {: pre}
 
-### ibmcloud ks worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE [-s]
+### ibmcloud ks worker-pool-resize
 {: #cs_worker_pool_resize}
 
 작업자 풀의 크기를 조정하여 클러스터의 각 구역에 있는 작업자 노드의 수를 늘리거나 줄입니다. 작업자 풀에는 최소한 1개의 작업자 노드가 있어야 합니다.
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -3391,17 +4325,23 @@ kubectl get nodes
 
 </dl>
 
-**명령 예**:
+**예제**:
 
   ```
   ibmcloud ks worker-pool-resize --cluster my_cluster --worker-pool my_pool --size-per-zone 3
   ```
   {: pre}
 
-### ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-s]
+### ibmcloud ks worker-pool-rm
 {: #cs_worker_pool_rm}
 
 클러스터에서 작업자 풀을 제거합니다. 풀에 있는 모든 작업자 노드가 삭제됩니다. 삭제 시 팟(Pod)이 다시 스케줄됩니다. 작동 중단을 방지하려면 워크로드를 실행하기에 충분한 작업자가 있는지 확인하십시오.
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-f] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -3412,21 +4352,29 @@ kubectl get nodes
     <dd>제거하려는 작업자 노드 풀의 이름입니다. 이 값은 필수입니다.</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>작업자 풀을 제거하려는 클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+  <dt><code>-f</code></dt>
+    <dd>사용자 프롬프트를 표시하지 않고 명령을 강제 실행합니다.  이 값은 선택사항입니다.</dd>
   <dt><code>-s</code></dt>
     <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
 </dl>
 
-**명령 예**:
+**예제**:
 
   ```
   ibmcloud ks worker-pool-rm --cluster my_cluster --worker-pool pool1
   ```
   {: pre}
 
-### ibmcloud ks worker-pools --cluster CLUSTER [--json][-s]
+###         ibmcloud ks worker-pools
 {: #cs_worker_pools}
 
 클러스터에 있는 작업자 풀을 봅니다.
+{: shortdesc}
+
+```
+ibmcloud ks worker-pools --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **뷰어** 플랫폼 역할
 
@@ -3441,17 +4389,23 @@ kubectl get nodes
     <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다.  이 값은 선택사항입니다.</dd>
 </dl>
 
-**명령 예**:
+**예제**:
 
   ```
   ibmcloud ks worker-pools --cluster my_cluster
   ```
   {: pre}
 
-### ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN][--private-only] [--json][-s]
+### ibmcloud ks zone-add
 {: #cs_zone_add}
 
 **다중 구역 클러스터에만 해당**: 클러스터 또는 작업자 풀을 작성한 후에 구역을 추가할 수 있습니다. 구역을 추가하면 작업자 풀에 대해 지정한 구역당 작업자 수와 일치하도록 작업자 노드가 새 구역에 추가됩니다.
+{: shortdesc}
+
+```
+ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [--json] [-s]
+```
+{: pre}
 
 <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -3459,7 +4413,7 @@ kubectl get nodes
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>추가하려는 구역입니다. 이는 클러스터의 지역 내에 있는 [다중 구역 가능 구역](cs_regions.html#zones)이어야 합니다. 이 값은 필수입니다.</dd>
+    <dd>추가하려는 구역입니다. 이는 클러스터의 지역 내에 있는 [다중 구역 가능 구역](/docs/containers?topic=containers-regions-and-zones#zones)이어야 합니다. 이 값은 필수입니다.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
@@ -3471,15 +4425,15 @@ kubectl get nodes
     <dd><p>사설 VLAN의 ID입니다. 이 값은 조건부입니다.</p>
     <p>구역에 사설 VLAN이 있는 경우, 이 값은 클러스터에 있는 하나 이상의 작업자 노드의 사설 VLAN ID와 일치해야 합니다. 사용 가능한 VLAN을 보려면 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>를 실행하십시오. 지정된 VLAN에 임의의 새 작업자 노드가 추가되지만, 기존 작업자 노드에 대한 VLAN은 변경되지 않습니다.</p>
     <p>해당 구역에 사설 또는 공용 VLAN이 없는 경우에는 이 옵션을 지정하지 마십시오. 사설 및 공용 VLAN은 초기에 작업자 풀에 새 구역을 추가할 때 사용자를 위해 자동으로 작성됩니다.</p>
-    <p>클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오.</p></dd>
+    <p>클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd><p>공용 VLAN의 ID입니다. 클러스터를 작성한 후에 노드의 워크로드를 공용으로 노출하려면 이 값이 필요합니다. 이는 해당 구역의 클러스터에 있는 하나 이상의 작업자 노드의 공용 VLAN ID와 일치해야 합니다. 사용 가능한 VLAN을 보려면 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>를 실행하십시오. 지정된 VLAN에 임의의 새 작업자 노드가 추가되지만, 기존 작업자 노드에 대한 VLAN은 변경되지 않습니다.</p>
     <p>해당 구역에 사설 또는 공용 VLAN이 없는 경우에는 이 옵션을 지정하지 마십시오. 사설 및 공용 VLAN은 초기에 작업자 풀에 새 구역을 추가할 때 사용자를 위해 자동으로 작성됩니다.</p>
-    <p>클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오.</p></dd>
+    <p>클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.</p></dd>
 
   <dt><code>--private-only </code></dt>
-    <dd>공용 VLAN이 작성되지 않도록 하려면 이 옵션을 사용하십시오. `--private-vlan` 플래그를 지정하고 `--public-vlan` 플래그를 포함하지 않은 경우에만 필요합니다.<p class="note">개인 전용 클러스터를 원하는 경우에는 네트워크 연결에 대한 게이트웨이 어플라이언스를 구성해야 합니다. 자세한 정보는 [개인용 클러스터](cs_clusters_planning.html#private_clusters)를 참조하십시오.</p></dd>
+    <dd>공용 VLAN이 작성되지 않도록 하려면 이 옵션을 사용하십시오. `--private-vlan` 플래그를 지정하고 `--public-vlan` 플래그를 포함하지 않은 경우에만 필요합니다.<p class="note">작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 개인 서비스 엔드포인트를 사용으로 설정하거나 게이트웨이 디바이스를 구성해야 합니다. 자세한 정보는 [사설 클러스터](/docs/containers?topic=containers-plan_clusters#private_clusters)를 참조하십시오.</p></dd>
 
   <dt><code>--json</code></dt>
     <dd>명령 출력을 JSON 형식으로 인쇄합니다.  이 값은 선택사항입니다.</dd>
@@ -3495,10 +4449,16 @@ kubectl get nodes
   ```
   {: pre}
 
-  ### ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN][-f] [-s]
-  {: #cs_zone_network_set}
+### ibmcloud ks zone-network-set
+{: #cs_zone_network_set}
 
-  **다중 구역 클러스터에만 해당**: 구역에 대해 이전에 사용했던 것과 다른 공용 또는 사설 VLAN을 사용하도록 작업자 풀에 대한 네트워크 메타데이터를 설정하십시오. 풀에서 이미 작성된 작업자 노드는 계속해서 이전 공용 또는 사설 VLAN을 사용하지만, 풀의 새 작업자 노드는 새 네트워크 데이터를 사용합니다.
+**다중 구역 클러스터에만 해당**: 구역에 대해 이전에 사용했던 것과 다른 공용 또는 사설 VLAN을 사용하도록 작업자 풀에 대한 네트워크 메타데이터를 설정하십시오. 풀에서 이미 작성된 작업자 노드는 계속해서 이전 공용 또는 사설 VLAN을 사용하지만, 풀의 새 작업자 노드는 새 네트워크 데이터를 사용합니다.
+{: shortdesc}
+
+```
+ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [-f] [-s]
+```
+{: pre}
 
   <strong>최소 필요 권한</strong>: {{site.data.keyword.containerlong_notm}}의 클러스터에 대한 **운영자** 플랫폼 역할
 
@@ -3512,13 +4472,13 @@ VLAN ID   Subnet CIDR         Public   User-managed
   <pre class="screen"><code>ID        Name   Number   Type      Router         Supports Virtual Workers
 229xxxx          1234     private   bcr01a.dal12   true
 229xxxx          5678     public    fcr01a.dal12   true</code></pre><p><strong>라우터</strong> 팟(Pod) ID가 일치함(`01a` 및 `01a`)을 유의하십시오. 하나의 팟(Pod) ID가 `01a`이고 다른 팟(Pod) ID가 `02a`인 경우에는 작업자 풀에 대해 이러한 공용 및 사설 VLAN ID를 설정할 수 없습니다.</p></li>
-  <li>사용 가능한 VLAN이 없는 경우에는 <a href="/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans">새 VLAN을 주문</a>할 수 있습니다.</li></ol>
+  <li>사용 가능한 VLAN이 없는 경우에는 <a href="/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans">새 VLAN을 주문</a>할 수 있습니다.</li></ol>
 
   <strong>명령 옵션</strong>:
 
   <dl>
     <dt><code>--zone <em>ZONE</em></code></dt>
-      <dd>추가하려는 구역입니다. 이는 클러스터의 지역 내에 있는 [다중 구역 가능 구역](cs_regions.html#zones)이어야 합니다. 이 값은 필수입니다.</dd>
+      <dd>추가하려는 구역입니다. 이는 클러스터의 지역 내에 있는 [다중 구역 가능 구역](/docs/containers?topic=containers-regions-and-zones#zones)이어야 합니다. 이 값은 필수입니다.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
@@ -3546,10 +4506,16 @@ VLAN ID   Subnet CIDR         Public   User-managed
   ```
   {: pre}
 
-### ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f][-s]
+### ibmcloud ks zone-rm
 {: #cs_zone_rm}
 
 **다중 구역 클러스터에만 해당**: 클러스터의 모든 작업자 풀에서 구역을 제거하십시오. 이 구역에 대한 작업자 풀의 모든 작업자 노드가 삭제됩니다.
+{: shortdesc}
+
+```
+ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f] [-s]
+```
+{: pre}
 
 구역을 제거하기 전에, 작업자 노드에서 앱 또는 데이터 손상에 대한 작동 중지 시간의 방지를 돕기 위해 팟(Pod)의 재스케줄링이 가능하도록 클러스터의 기타 구역에 충분한 작업자 노드가 있는지 확인하십시오.
 {: tip}
@@ -3560,7 +4526,7 @@ VLAN ID   Subnet CIDR         Public   User-managed
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>추가하려는 구역입니다. 이는 클러스터의 지역 내에 있는 [다중 구역 가능 구역](cs_regions.html#zones)이어야 합니다. 이 값은 필수입니다.</dd>
+    <dd>추가하려는 구역입니다. 이는 클러스터의 지역 내에 있는 [다중 구역 가능 구역](/docs/containers?topic=containers-regions-and-zones#zones)이어야 합니다. 이 값은 필수입니다.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
@@ -3578,3 +4544,5 @@ VLAN ID   Subnet CIDR         Public   User-managed
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
+
+

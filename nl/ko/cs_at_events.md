@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2017, 2018
-lastupdated: "2018-12-05"
+  years: 2017, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, audit
+
+subcollection: containers
 
 ---
 
@@ -33,9 +37,9 @@ lastupdated: "2018-12-05"
 
 * **Kubernetes API 서버 감사 이벤트**:
     * 이러한 이벤트는 자동으로 생성되지만, 이러한 이벤트를 {{site.data.keyword.cloudaccesstrailshort}} 서비스로 전달하기 위해서는 사용자가 클러스터를 구성해야 합니다.
-    * 사용자는 이벤트를 {{site.data.keyword.cloudaccesstrailshort}} **계정 도메인** 또는 **영역 도메인**으로 전송하도록 클러스터를 구성할 수 있습니다. 자세한 정보는 [감사 로그 전송](/docs/containers/cs_health.html#api_forward)을 참조하십시오.
+    * 사용자는 이벤트를 {{site.data.keyword.cloudaccesstrailshort}} **계정 도메인** 또는 **영역 도메인**으로 전송하도록 클러스터를 구성할 수 있습니다. 자세한 정보는 [감사 로그 전송](/docs/containers?topic=containers-health#api_forward)을 참조하십시오.
 
-서비스가 작동하는 방식에 대한 자세한 정보는 [{{site.data.keyword.cloudaccesstrailshort}} 문서](/docs/services/cloud-activity-tracker/index.html)를 참조하십시오. 추적되는 Kubernetes 조치에 대한 자세한 정보는 [Kubernetes 문서 ![추적 외부 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/home/)를 참조하십시오.
+서비스가 작동하는 방식에 대한 자세한 정보는 [{{site.data.keyword.cloudaccesstrailshort}} 문서](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla)를 참조하십시오. 추적되는 Kubernetes 조치에 대한 자세한 정보는 [Kubernetes 문서 ![추적 외부 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/home/)를 참조하십시오.
 
 ## 이벤트에 대한 정보 찾기
 {: #kube-find}
@@ -43,7 +47,7 @@ lastupdated: "2018-12-05"
 Kibana 대시보드에서 로그를 확인하여 클러스터의 활동을 모니터링할 수 있습니다. 
 {: shortdesc}
 
-관리 활동을 모니터하려면 다음을 수행하십시오.
+관리 활동을 모니터링하려면 다음을 수행하십시오.
 
 1. {{site.data.keyword.Bluemix_notm}} 계정에 로그인하십시오.
 2. 카탈로그에서 {{site.data.keyword.containerlong_notm}}의 인스턴스와 동일한 계정으로 {{site.data.keyword.cloudaccesstrailshort}} 서비스의 인스턴스를 프로비저닝하십시오.
@@ -54,7 +58,7 @@ Kibana 대시보드에서 로그를 확인하여 클러스터의 활동을 모�
 5. 해당 로그를 보고자 하는 시간 범위를 설정하십시오. 기본값은 24시간입니다.
 6. 검색 결과를 좁히기 위해 `ActivityTracker_Account_Search_in_24h`의 편집 아이콘을 클릭하고 **사용 가능한 필드** 컬럼에 필드를 추가할 수 있습니다.
 
-다른 사용자가 계정 및 영역 이벤트를 볼 수 있도록 허용하려면 [계정 이벤트를 볼 수 있도록 권한 부여](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions)를 참조하십시오.
+다른 사용자가 계정 및 영역 이벤트를 볼 수 있도록 허용하려면 [계정 이벤트를 볼 수 있도록 권한 부여](/docs/services/cloud-activity-tracker/how-to?topic=cloud-activity-tracker-grant_permissions#grant_permissions)를 참조하십시오.
 {: tip}
 
 ## 클러스터 관리 이벤트 추적
@@ -145,7 +149,7 @@ Kibana 대시보드에서 로그를 확인하여 클러스터의 활동을 모�
 {{site.data.keyword.cloudaccesstrailshort}}에 전송되는 Kubernetes API 서버 감사 이벤트의 목록은 다음 표를 확인하십시오.
 {: shortdesc}
 
-시작하기 전에: 클러스터가 [Kubernetes API 감사 이벤트](cs_health.html#api_forward)를 전달하도록 구성되어 있는지 확인하십시오.
+시작하기 전에: 클러스터가 [Kubernetes API 감사 이벤트](/docs/containers?topic=containers-health#api_forward)를 전달하도록 구성되어 있는지 확인하십시오.
 
 <table>
   <tr>

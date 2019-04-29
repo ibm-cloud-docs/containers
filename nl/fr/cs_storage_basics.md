@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # Description des concepts de base du stockage Kubernetes
 {: #kube_concepts}
 
@@ -30,13 +35,13 @@ Avant de commencer à mettre à disposition du stockage, il est important de con
 
 L'image suivante présente les composants de stockage dans un cluster Kubernetes.
 
-<img src="images/cs_storage_pvc_pv.png" alt="Composants de stockage dans un cluster" width="300" style="width: 300px; border-style: none"/>
+<img src="images/cs_storage_pvc_pv.png" alt="Composants de stockage dans un cluster" width="275" style="width: 275px; border-style: none"/>
 
-- **Cluster**</br> Par défaut, chaque cluster est configuré avec un plug-in pour [mettre à disposition du stockage de fichiers](cs_storage_file.html#add_file). Vous pouvez opter pour l'installation d'autres modules complémentaires, tels que celui destiné au [stockage par blocs](cs_storage_block.html). Pour utiliser du stockage dans un cluster, vous devez créer une réservation de volume persistant et une instance de stockage physique. Lorsque vous supprimez le cluster, vous pouvez éventuellement supprimer les instances de stockage associées.
+- **Cluster**</br> Par défaut, chaque cluster est configuré avec un plug-in pour [mettre à disposition du stockage de fichiers](/docs/containers?topic=containers-file_storage#add_file). Vous pouvez opter pour l'installation d'autres modules complémentaires, tels que celui destiné au [stockage par blocs](/docs/containers?topic=containers-block_storage). Pour utiliser du stockage dans un cluster, vous devez créer une réservation de volume persistant et une instance de stockage physique. Lorsque vous supprimez le cluster, vous pouvez éventuellement supprimer les instances de stockage associées.
 - **Application**</br> Pour effectuer des opérations de lecture/écriture dans votre instance de stockage, vous devez monter la réservation de volume persistant (PVC) sur votre application. Les différents types de stockage disposent de règles de lecture-écriture différentes. Par exemple, vous pouvez monter plusieurs pods sur la même PVC pour le stockage de fichiers. Le stockage par blocs est fourni avec un mode d'accès RWO (ReadWriteOnce) de sorte que vous puissiez monter le stockage sur un seul pod.
 - **Réservation de volume persistant (PVC)** </br> Une PVC est une demande permettant de mettre à disposition du stockage avec un type et une configuration spécifiques. Pour spécifier le modèle de stockage persistant que vous souhaitez, vous utilisez des [classes de stockage Kubernetes](#storageclasses). L'administrateur du cluster peut définir des classes de stockage ou vous pouvez effectuer une sélection parmi les classes de stockage prédéfinies dans {{site.data.keyword.containerlong_notm}}. Lorsque vous créez une PVC, la demande est envoyée à {{site.data.keyword.Bluemix}} Storage Provider. En fonction de la configuration définie dans la classe de stockage, l'unité de stockage physique est commandée et mise à disposition dans votre compte d'infrastructure IBM Cloud (SoftLayer). Si la configuration demandée n'existe pas, le stockage n'est pas créé.
 - **Volume persistant (PV)** </br> Un PV est une instance de stockage virtuel qui est ajoutée sous forme de volume dans le cluster. Le PV pointe vers une unité de stockage physique dans votre compte d'infrastructure IBM Cloud (SoftLayer) et abstrait l'API qui est utilisée pour communiquer avec l'unité de stockage. Pour monter un volume persistant (PV) sur une application vous devez disposer d'une réservation de volume persistant (PVC) correspondante. Les PV montés apparaissent dans un dossier au sein du système de fichiers du conteneur.
-- **Stockage physique** </br> Instance de stockage physique que vous pouvez utiliser pour conserver vos données. {{site.data.keyword.containerlong_notm}} offre la haute disponibilité aux instances de stockage physique. Cependant, les données stockées sur une instance de stockage physique ne sont pas sauvegardées automatiquement. En fonction du type de stockage que vous utilisez, il existe différentes méthodes de configuration des solutions de sauvegarde et de restauration.
+- **Stockage physique** </br> Instance de stockage physique que vous pouvez utiliser pour conserver vos données. Exemples de stockage physique dans {{site.data.keyword.Bluemix_notm}} : [stockage de fichiers](/docs/containers?topic=containers-file_storage#file_storage), [stockage par blocs](/docs/containers?topic=containers-block_storage#block_storage), [stockage d'objets](/docs/containers?topic=containers-object_storage#object_storage) et stockage de noeuds worker local que vous pouvez utiliser comme stockage défini par logiciel (SDS) avec [Portworx](/docs/containers?topic=containers-portworx#portworx). {{site.data.keyword.Bluemix_notm}} offre la haute disponibilité aux instances de stockage physique. Cependant, les données stockées sur une instance de stockage physique ne sont pas sauvegardées automatiquement. En fonction du type de stockage que vous utilisez, il existe différentes méthodes de configuration des solutions de sauvegarde et de restauration.
 
 Pour en savoir plus sur comment créer et utiliser des PVC, des PV et l'unité de stockage physique, voir :
 - [Provisionnement dynamique](#dynamic_provisioning)
@@ -73,8 +78,8 @@ Examinez les cas d'utilisation courants de provisionnement dynamique :
 3. **Création et suppression de stockage fréquentes :** vous disposez d'une application ou configurez un pipeline de distribution continue qui crée et retire régulièrement du stockage persistant. Le stockage persistant mis à disposition avec le provisionnement dynamique avec une classe de stockage sans retain peut être retiré en supprimant la PVC.
 
 Pour plus d'informations sur le provisionnement dynamique de stockage persistant, voir :
-- [Stockage de fichiers](cs_storage_file.html#add_file)
-- [Stockage par blocs](cs_storage_block.html#add_block)
+- [Stockage de fichiers](/docs/containers?topic=containers-file_storage#add_file)
+- [Stockage par blocs](/docs/containers?topic=containers-block_storage#add_block)
 
 ## Provisionnement statique
 {: #static_provisioning}
@@ -97,19 +102,19 @@ L'image suivante montre comment fonctionne le provisionnement statique de stocka
 1. L'administrateur du cluster rassemble tous les détails sur l'unité de stockage existante et crée un volume persistant (PV) dans le cluster.
 2. En fonction des détails du stockage dans le volume persistant (PV), le plug-in de stockage connecte le PV à l'unité de stockage dans votre compte d'infrastructure IBM Cloud (SoftLayer).
 3. L'administrateur du cluster ou un développeur crée une réservation de volume persistant (PVC). Comme le PV et l'unité de stockage existent déjà, aucune classe de stockage n'est spécifiée dans la réservation PVC.
-4. Une fois la réservation PVC créée, le plug-in de stockage essaie de corréler cette PVC à un volume persistant existant. La PVC et le PV correspondent lorsqu'ils utilisent les mêmes valeurs de taille, d'IOPS et de mode d'accès. Lorsque la PVC et le PV correspondent, Le statut de la PVC et du PV passe à `Bound`. Vous pouvez désormais utiliser la PVC pour monter le stockage persistant sur votre application. Lorsque vous supprimez la PVC, le PV et l'instance de stockage physique ne sont pas retirés. Vous devez retirer la PVC, le PV et l'instance de stockage physique séparément.  </br>
+4. Une fois la réservation PVC créée, le plug-in de stockage essaie de corréler cette PVC à un volume persistant existant. La PVC et le PV correspondent lorsqu'ils utilisent les mêmes valeurs de taille, d'IOPS et de mode d'accès. Lorsque la PVC et le PV correspondent, le statut de la PVC et du PV passe à `Bound`. Vous pouvez désormais utiliser la PVC pour monter le stockage persistant sur votre application. Lorsque vous supprimez la PVC, le PV et l'instance de stockage physique ne sont pas retirés. Vous devez retirer la PVC, le PV et l'instance de stockage physique séparément.  </br>
 
 **Dans quels cas utiliser le provisionnement statique ?**</br>
 
 Examinez les cas d'utilisation courants de provisionnement statique de stockage persistant :
 1. **Mise à disposition de données conservées dans le cluster :** vous avez mis à disposition du stockage persistant avec une classe de stockage retain en utilisant un provisionnement dynamique. Vous avez supprimé la PVC, mais le PV, le stockage physique dans l'infrastructure IBM Cloud (SoftLayer), ainsi que les données existent toujours. Vous souhaitez accéder aux données conservées à partir d'une application dans votre cluster.
-2. **Utilisation d'une unité de stockage existante :** Vous avez mis à disposition du stockage persistant directement dans votre compte d'infrastructure IBM Cloud (SoftLayer) et souhaitez utiliser cette unité de stockage dans votre cluster.
-3. **Partage de stockage persistant entre différents clusters situés dans la même zone :** vous avez mis à disposition du stockage persistant pour votre cluster. Pour partager la même instance de stockage persistant avec d'autres clusters dans la même zone, vous devez créer manuellement le volume persistant et la réservation de volume persistant correspondante dans les autres clusters. **Remarque :** le partage de stockage persistant entre différents clusters est disponible uniquement si le cluster et l'instance de stockage se trouvent dans la même zone. 
+2. **Utilisation d'une unité de stockage existante :** vous avez mis à disposition du stockage persistant directement dans votre compte d'infrastructure IBM Cloud (SoftLayer) et souhaitez utiliser cette unité de stockage dans votre cluster.
+3. **Partage de stockage persistant entre différents clusters situés dans la même zone :** vous avez mis à disposition du stockage persistant pour votre cluster. Pour partager la même instance de stockage persistant avec d'autres clusters dans la même zone, vous devez créer manuellement le volume persistant et la réservation de volume persistant correspondante dans les autres clusters. **Remarque :** le partage de stockage persistant entre différents clusters est disponible uniquement si le cluster et l'instance de stockage se trouvent dans la même zone.
 4. **Partage de stockage persistant entre différents espaces de nom dans le même cluster :** vous avez mis à disposition du stockage persistant dans un espace de nom de votre cluster. Vous souhaitez utiliser la même instance de stockage pour un pod d'application déployé dans un autre espace de nom de votre cluster.
 
 Pour plus d'informations sur le provisionnement statique de stockage persistant, voir :
-- [Stockage de fichiers](cs_storage_file.html#predefined_storageclass)
-- [Stockage par blocs](cs_storage_block.html#predefined_storageclass)
+- [Stockage de fichiers](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
+- [Stockage par blocs](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 
 ## Classes de stockage
 {: #storageclasses}
@@ -117,11 +122,11 @@ Pour plus d'informations sur le provisionnement statique de stockage persistant,
 Pour utiliser le provisionnement dynamique de stockage persistant, vous devez définir le type et la configuration de stockage de votre choix.
 {: shortdesc}
 
-Une classe de stockage Kubernetes est utilisée pour faire abstraction de la plateforme de stockage sous-jacente prise en charge dans {{site.data.keyword.Bluemix_notm}} de sorte que vous n'ayez pas besoin de connaître tous les détails sur les tailles, les opérations d'entrée-sortie par seconde (IOPS) ou les règles de conservation prises en charge pour réussir à mettre à disposition du stockage persistant dans un cluster. {{site.data.keyword.containerlong_notm}} fournit des classes de stockage prédéfinies pour tous les types de stockage pris en charge. Chaque classe de stockage est conçue pour faire abstraction du niveau de stockage pris en charge tout en vous laissant le choix de décider de la taille, du nombre d'IOPS et de la règle de conservation que vous souhaitez utiliser.
+Une [classe de stockage Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/storage-classes/) est utilisée pour faire abstraction de la plateforme de stockage sous-jacente prise en charge dans {{site.data.keyword.Bluemix_notm}} de sorte que vous n'ayez pas besoin de connaître tous les détails sur les tailles, les opérations d'entrée-sortie par seconde (IOPS) ou les règles de conservation prises en charge pour réussir à mettre à disposition du stockage persistant dans un cluster. {{site.data.keyword.containerlong_notm}} fournit des classes de stockage prédéfinies pour tous les types de stockage pris en charge. Chaque classe de stockage est conçue pour faire abstraction du niveau de stockage pris en charge tout en vous laissant le choix de décider de la taille, du nombre d'IOPS et de la règle de conservation que vous souhaitez utiliser.
 
 Pour obtenir les spécifications des classes de stockage prédéfinies, voir :
-- [Stockage de fichiers](cs_storage_file.html#storageclass_reference)
-- [Stockage par blocs](cs_storage_block.html#storageclass_reference)
+- [Stockage de fichiers](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+- [Stockage par blocs](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
 
 Vous ne trouvez pas ce que vous cherchez ? Vous pouvez également créer votre propre classe de stockage pour mettre à disposition le type de stockage de votre choix.
 {: tip}
@@ -129,16 +134,16 @@ Vous ne trouvez pas ce que vous cherchez ? Vous pouvez également créer votre p
 ### Personnalisation d'une classe de stockage
 {: #customized_storageclass}
 
-Si vous ne pouvez pas utiliser l'une des classes de stockage fournies, vous pouvez créer votre propre classe de stockage personnalisée.
+Si vous ne pouvez pas utiliser l'une des classes de stockage fournies, vous pouvez créer votre propre classe de stockage personnalisée. Vous souhaitez peut-être personnaliser une classe de stockage pour spécifier des configurations d'options de zone, de type de système de fichiers, de type de serveur ou de [mode de liaison de volume ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) (stockage par blocs uniquement).
 {: shortdesc}
 
 1. Créez une classe de stockage personnalisée. Vous pouvez commencer par utiliser une des classes prédéfinies ou consulter les exemples de classes de stockage personnalisées.
    - Classes de stockage prédéfinies :
-     - [Stockage de fichiers](cs_storage_file.html#storageclass_reference)
-     - [Stockage par blocs](cs_storage_block.html#storageclass_reference)
+     - [Stockage de fichiers](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+     - [Stockage par blocs](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
    - Exemples de classes de stockage personnalisées :
-     - [Stockage de fichiers](cs_storage_file.html#custom_storageclass)
-     - [Stockage par blocs](cs_storage_block.html#custom_storageclass)
+     - [Stockage de fichiers](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
+     - [Stockage par blocs](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
 
 2. Créez la classe de stockage personnalisée.
    ```
@@ -153,8 +158,8 @@ Si vous ne pouvez pas utiliser l'une des classes de stockage fournies, vous pouv
     {: pre}
 
 4. Créez une réservation de volume persistant (PVC) pour effectuer le provisionnement dynamique du stockage avec votre classe de stockage personnalisée.
-   - [Stockage de fichiers](cs_storage_file.html#add_file)
-   - [Stockage par blocs](cs_storage_block.html#add_block)
+   - [Stockage de fichiers](/docs/containers?topic=containers-file_storage#add_file)
+   - [Stockage par blocs](/docs/containers?topic=containers-block_storage#add_block)
 
 5. Vérifiez que votre PVC est créée et liée à un volume persistant (PV). L'exécution de ce processus peut prendre quelques minutes.
    ```
@@ -165,10 +170,10 @@ Si vous ne pouvez pas utiliser l'une des classes de stockage fournies, vous pouv
 ### Modification ou mise à jour pour passer à une autre classe de stockage
 {: #update_storageclass}
 
-Avec le provisionnement dynamique de stockage persistant à l'aide d'une classe de stockage, vous mettez à disposition le stockage persistant avec une configuration spécifique. Vous ne pouvez pas modifier le nom de la classe de stockage ou le type de stockage que vous avez mis à disposition. Cependant, vous avez la possibilité d'effectuer une mise à l'échelle de votre stockage comme indiqué dans le tableau suivant. 
+Avec le provisionnement dynamique de stockage persistant à l'aide d'une classe de stockage, vous mettez à disposition le stockage persistant avec une configuration spécifique. Vous ne pouvez pas modifier le nom de la classe de stockage ou le type de stockage que vous avez mis à disposition. Cependant, vous avez la possibilité d'effectuer une mise à l'échelle de votre stockage comme indiqué dans le tableau suivant.
 {: shortdesc}
 
-<table> 
+<table>
 <caption>Présentation des options de mise à l'échelle pour les solutions de stockage {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th>Solution de stockage</th>
@@ -177,11 +182,11 @@ Avec le provisionnement dynamique de stockage persistant à l'aide d'une classe 
 <tbody>
 <tr>
 <td>Stockage de fichiers</td>
-<td>Vous pouvez augmenter la taille de votre stockage et affecter des opérations d'entrée-sortie par seconde (IOPS) en [modifiant votre volume existant](cs_storage_file.html#change_storage_configuration). </td>
+<td>Vous pouvez augmenter la taille de votre stockage et affecter des opérations d'entrée-sortie par seconde (IOPS) en [modifiant votre volume existant](/docs/containers?topic=containers-file_storage#file_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Stockage par blocs</td>
-<td>Vous pouvez augmenter la taille de votre stockage et affecter des opérations d'entrée-sortie par seconde (IOPS) en [modifiant votre volume existant](cs_storage_block.html#change_storage_configuration). </td>
+<td>Vous pouvez augmenter la taille de votre stockage et affecter des opérations d'entrée-sortie par seconde (IOPS) en [modifiant votre volume existant](/docs/containers?topic=containers-block_storage#block_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Stockage d'objets</td>
@@ -192,7 +197,7 @@ Avec le provisionnement dynamique de stockage persistant à l'aide d'une classe 
 
 
 ## Préparation du stockage existant pour une utilisation sur plusieurs zones avec des libellés Kubernetes
-{: #multizone}
+{: #storage_multizone}
 
 Si vous avez mis à jour votre cluster pour passer d'un cluster à zone unique à un cluster à zones multiples et que vous disposiez déjà de volumes persistants (PV), ajoutez les libellés de zone et de région Kubernetes à ces volumes. Ces libellés garantissent que les pods qui montent ce stockage sont déployés dans la zone dans laquelle se trouve le stockage persistant.
 {:shortdesc}
@@ -203,8 +208,8 @@ Ces étapes sont nécessaires uniquement si vous disposiez déjà de volumes per
 Utilisez un script pour rechercher tous les volumes persistants présents dans votre cluster et appliquer les libellés Kubernetes `failure-domain.beta.kubernetes.io/region` et `failure-domain.beta.kubernetes.io/zone`. Si le volume persistant contient déjà ces libellés, le script ne remplace pas les valeurs existantes.
 
 Avant de commencer :
-- [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure).
-- Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).
+- [Ciblez l'interface CLI de Kubernetes sur le cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Pour mettre à jour des volumes persistants (PV) existants :
 
@@ -276,5 +281,5 @@ Pour mettre à jour des volumes persistants (PV) existants :
 **Etape suivante ?**
 
 Maintenant que vous avez ajouté des libellés à vos volumes persistants, vous pouvez les monter sur votre cluster à zones multiples. Reportez-vous aux liens suivants pour plus d'informations.
-- Utilisation de [stockage de fichiers NFS existant](cs_storage_file.html#existing_file)
-- Utilisation de [stockage par blocs existant](cs_storage_block.html#existing_block)
+- Utilisation de [stockage de fichiers NFS existant](/docs/containers?topic=containers-file_storage#existing_file)
+- Utilisation de [stockage par blocs existant](/docs/containers?topic=containers-block_storage#existing_block)

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, docker
+
+subcollection: containers
 
 ---
 
@@ -17,7 +21,6 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Tecnologia do {{site.data.keyword.containerlong_notm}}
@@ -64,9 +67,9 @@ uma máquina virtual.</dd>
   </ul>
   </dd>
 
-<p>Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com imagens de contêiner.</p>
+<p>Saiba mais sobre [como proteger suas informações pessoais](/docs/containers?topic=containers-security#pi) quando trabalhar com imagens de contêiner.</p>
 
-<p>Pronto para obter um conhecimento mais profundo do Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Saiba como o Docker e o {{site.data.keyword.containerlong_notm}} trabalham juntos concluindo este curso.</a></p>
+<p>Pronto para obter um conhecimento mais profundo do Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">Saiba como o Docker e o {{site.data.keyword.containerlong_notm}} trabalham juntos concluindo este curso.</a></p>
 
 </dl>
 
@@ -81,7 +84,7 @@ uma máquina virtual.</dd>
 
 Aprenda alguns conceitos básicos do Kubernetes conforme mostrado no diagrama a seguir.
 
-![Configuração de implementação](images/cs_app_tutorial_components1.png)
+![Configuração de implementação](images/cs_app_tutorial_mz-components1.png)
 
 <dl>
 <dt>Conta</dt>
@@ -107,11 +110,11 @@ Defina as estratégias de atualização para seu app, incluindo o número de pod
 <dt>App</dt>
 <dd>Um app pode se referir a um app completo ou um componente de um app. Você pode implementar componentes de um app em pods separados ou nós do trabalhador separados.</dd>
 
-<p>Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com recursos do Kubernetes.</p>
+<p>Saiba mais sobre [como proteger suas informações pessoais](/docs/containers?topic=containers-security#pi) quando trabalhar com recursos do Kubernetes.</p>
 
 <p>Pronto para obter um conhecimento mais profundo do Kubernetes?</p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Expanda seu conhecimento de terminologia com o tutorial Criando clusters</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Saiba como o Kubernetes e o {{site.data.keyword.containerlong_notm}} trabalham juntos concluindo este curso.</a></li></ul>
+<ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">Expanda seu conhecimento de terminologia com o tutorial Criando clusters</a>.</li>
+<li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">Saiba como o Kubernetes e o {{site.data.keyword.containerlong_notm}} trabalham juntos concluindo este curso.</a></li></ul>
 
 
 </dl>
@@ -122,14 +125,23 @@ Defina as estratégias de atualização para seu app, incluindo o número de pod
 ## Arquitetura de serviço
 {: #architecture}
 
-Em um cluster do Kubernetes que é executado no {{site.data.keyword.containerlong_notm}}, seus apps conteinerizados são hospedados em hosts de cálculo que são chamados de nós do trabalhador. Bem, para ser mais específico, os apps são executados em pods e os pods são hospedados em nós do trabalhador. Os nós do trabalhador são gerenciados pelo mestre do Kubernetes. O mestre do Kubernetes e os nós do trabalhador se comunicam entre si por meio de certificados TLS seguros e uma conexão openVPN para orquestrar suas configurações de cluster.
+Em um cluster do Kubernetes que é executado no {{site.data.keyword.containerlong_notm}}, seus apps conteinerizados são hospedados em hosts de cálculo que são chamados de nós do trabalhador. Para ser mais específico, os apps são executados em pods e os pods são hospedados em nós do trabalhador. Os nós do trabalhador são gerenciados pelo mestre do Kubernetes. A configuração de comunicação entre o mestre do Kubernetes e os nós do trabalhador depende de como você configura a rede da infraestrutura do IBM Cloud (SoftLayer): uma conta com um terminal em serviço público ou uma conta ativada para VRF com terminais em serviço públicos e privados.
 {: shortdesc}
 
-A imagem a seguir mostra os componentes de seu cluster e como eles interagem.
+A imagem a seguir mostra os componentes de seu cluster e como eles interagem em uma conta quando apenas o [terminal em serviço público está ativado](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
 <p>
 <figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
- <figcaption>{{site.data.keyword.containerlong_notm}} architecture</figcaption>
+ <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes - arquitetura">
+ <figcaption>{{site.data.keyword.containerlong_notm}} arquitetura quando apenas o terminal em serviço público está ativado</figcaption>
+</figure>
+</p>
+
+A imagem a seguir mostra os componentes de seu cluster e como eles interagem em uma conta ativada para VRF quando os [terminais em serviço público e privado são ativados](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
+
+<p>
+<figure>
+ <img src="images/cs_org_ov_both_ses.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes - arquitetura">
+ <figcaption>{{site.data.keyword.containerlong_notm}} arquitetura quando os terminais em serviço público e privado são ativados</figcaption>
 </figure>
 </p>
 
@@ -164,11 +176,11 @@ no cluster.</td>
     </tr>
     <tr>
     <td>kube-controller-manager</td>
-    <td>O gerenciador de controlador do Kubernetes é um daemon que observa o estado de recursos de cluster, como conjuntos de réplicas. Quando o estado de um recurso é mudado, por exemplo, se um pod em um conjunto de réplicas fica inativo, o gerenciador do controlador inicia ações de correção para atingir o estado desejado.</td>
+    <td>O gerenciador de controlador do Kubernetes é um daemon que observa o estado de recursos de cluster, como conjuntos de réplicas. Quando o estado de um recurso for alterado, por exemplo, se um pod em um conjunto de réplicas ficar inativo, o gerenciador do controlador iniciará as ações de correção para atingir o estado necessário.</td>
     </tr>
     </tbody></table></dd>
   <dt>Nó do trabalhador</dt>
-    <dd>Cada nó do trabalhador é uma máquina física (bare metal) ou uma máquina virtual que é executada em hardware físico no ambiente de nuvem. Ao provisionar um nó do trabalhador, você determina os recursos que estão disponíveis para os contêineres hospedados nesse nó do trabalhador. Prontos para utilização, os nós do trabalhador são configurados com um mecanismo de Docker gerenciado pela {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e um serviço de volume. Os recursos de segurança integrada fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador.</br></br>A tabela a seguir descreve os componentes de um nó do trabalhador.
+    <dd>Cada nó do trabalhador é uma máquina física (bare metal) ou uma máquina virtual que é executada em hardware físico no ambiente de nuvem. Ao provisionar um nó do trabalhador, você determina os recursos que estão disponíveis para os contêineres hospedados nesse nó do trabalhador. Prontos para utilização, os nós do trabalhador são configurados com um mecanismo de Docker gerenciado pela {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e um serviço de volume. Os recursos de segurança integrada fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador.</br></br><p class="note">A modificação de componentes do nó do trabalhador padrão, como `kubelet`, não é suportada e pode causar resultados inesperados.</p>A tabela a seguir descreve os componentes de um nó do trabalhador.
     <table>
     <caption>Componentes de nós do trabalhador</caption>
     <thead>
@@ -178,47 +190,47 @@ no cluster.</td>
     </thead>
     <tbody>
     <tr>
-    <td>ibm-master-proxy</td>
+    <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
     <td>Para clusters que executam o Kubernetes versão 1.10 ou mais recente, o `ibm-master-proxy` encaminha solicitações do nó do trabalhador para os endereços IP das réplicas do mestre altamente disponíveis. Em clusters de zona única, o principal tem três réplicas em hosts separados com um endereço IP principal e um nome de domínio. Para clusters que estão em uma zona com capacidade para várias zonas, o mestre tem três réplicas que são difundidas entre as zonas. Dessa forma, cada mestre tem seu próprio endereço IP que é registrado com o DNS, com um nome de domínio para o cluster mestre inteiro.</td>
     </tr>
     <tr>
-    <td>openvpn-client</td>
+    <td>`openvpn-client`</td>
     <td>kube-system</td>
     <td>O cliente OpenVPN trabalha com o servidor OpenVPN para conectar com segurança o mestre ao nó do trabalhador. Essa conexão suporta chamadas `apiserver proxy` para seus pods e serviços e chamadas `kubectl exec`, `attach` e `logs` para o kubelet.</td>
     </tr>
     <tr>
-    <td>kubelet</td>
+    <td>`kubelet`</td>
     <td>kube-system</td>
     <td>O kubelet é um pod que é executado em cada nó do trabalhador e é responsável por monitorar o funcionamento de pods que são executados no nó do trabalhador e por observar os eventos que o servidor de API do Kubernetes envia. Com base nos eventos, o kubelet cria ou remove pods, assegura as análises de vivacidade e prontidão e relata de volta o status dos pods para o servidor de API do Kubernetes.</td>
     </tr>
     <tr>
-    <td>kube-dns</td>
+    <td>`coredns`</td>
     <td>kube-system</td>
-    <td>O DNS do Kubernetes planeja um pod e serviço do DNS no cluster. Os contêineres usam automaticamente o IP do serviço DNS para resolver nomes do DNS em suas procuras para outros pods e serviços.</td>
+    <td>Por padrão, o Kubernetes planeja um pod CoreDNS (ou pod KubeDNS na versão 1.12 e anterior) e um serviço no cluster. Os contêineres usam automaticamente o IP do serviço DNS para resolver nomes do DNS em suas procuras para outros pods e serviços.</td>
     </tr>
     <tr>
-    <td>calico</td>
+    <td>`calico`</td>
     <td>kube-system</td>
     <td>O Calico gerencia políticas de rede para seu cluster e compreende alguns componentes conforme a seguir.
     <ul>
-    <li>**calico-cni**: a interface de rede de contêiner do Calico (CNI) gerencia a conectividade de rede de contêineres e remove os recursos alocados quando um contêiner é excluído.</li>
-    <li>**calico-ipam**: o Calico IPAM gerencia a designação de endereço IP para contêineres.</li>
-    <li>**calico-node**: o nó do Calico é um contêiner que agrupa os vários componentes necessários para contêineres de rede com o Calico.</li>
-    <li>**calico-policy-controller**: o controlador de política do Calico observa o tráfego de rede de entrada e de saída para conformidade com as políticas de rede configuradas. Se o tráfego não for permitido no cluster, o acesso ao cluster será bloqueado. O controlador de política do Calico também é usado para criar e configurar políticas de rede para um cluster.</li></ul></td>
+    <li>**`calico-cni`**: a interface de rede de contêiner do Calico (CNI) gerencia a conectividade de rede de contêineres e remove os recursos alocados quando um contêiner é excluído.</li>
+    <li>**`calico-ipam`**: o Calico IPAM gerencia a designação de endereço IP para contêineres.</li>
+    <li>**`calico-node`**: o nó do Calico é um contêiner que agrupa os vários componentes necessários para contêineres de rede com o Calico.</li>
+    <li>**`calico-policy-controller`**: o controlador de política do Calico observa o tráfego de rede de entrada e de saída para conformidade com as políticas de rede configuradas. Se o tráfego não for permitido no cluster, o acesso ao cluster será bloqueado. O controlador de política do Calico também é usado para criar e configurar políticas de rede para um cluster.</li></ul></td>
     </tr>
     <tr>
-    <td>kube-proxy</td>
+    <td>`kube-proxy`</td>
     <td>kube-system</td>
     <td>O proxy de rede do Kubernetes é um daemon que é executado em cada nó do trabalhador e que encaminha ou balanceia a carga do tráfego de rede TCP e UDP para serviços que são executados no cluster.</td>
     </tr>
     <tr>
-    <td>kube-dashboard</td>
+    <td>`kube-dashboard`</td>
     <td>kube-system</td>
     <td>O painel do Kubernetes é uma GUI baseada na web que permite que os usuários gerenciem e solucionem problemas do cluster e aplicativos em execução no cluster.</td>
     </tr>
     <tr>
-    <td>heapster</td>
+    <td>`heapster`</td>
     <td>kube-system</td>
     <td>O Heapster é um agregador em todo o cluster de monitoramento e dados do evento. O pod Heapster descobre todos os nós no cluster e consulta as informações de uso do kubelet de cada nó. É possível localizar gráficos de utilização no painel do Kubernetes.</td>
     </tr>
@@ -250,5 +262,5 @@ no cluster.</td>
     </tbody></table></dd>
 </dl>
 
-Quer ver como o {{site.data.keyword.containerlong_notm}} pode ser usado com outros produtos e serviços? Confira algumas das [integrações](cs_integrations.html#integrations).
+Quer ver como o {{site.data.keyword.containerlong_notm}} pode ser usado com outros produtos e serviços? Confira algumas das [integrações](/docs/containers?topic=containers-integrations#integrations).
 {: tip}

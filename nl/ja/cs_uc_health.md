@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -20,7 +24,6 @@ lastupdated: "2018-12-05"
 
 
 
-
 # {{site.data.keyword.cloud_notm}} の医療ユース・ケース
 {: #cs_uc_health}
 
@@ -31,15 +34,17 @@ lastupdated: "2018-12-05"
 {: #uc_migrate}
 
 ある医療機関の IT 責任者は、業務報告システムと患者システムをオンプレミスで管理しています。 これらのシステムの機能拡張サイクルは遅いので、患者へのサービス・レベルが向上しない原因になっています。
+{: shortdesc}
 
 {{site.data.keyword.cloud_notm}} を使用する理由: この医療機関は、患者サービスを向上させるために、{{site.data.keyword.containerlong_notm}} と {{site.data.keyword.contdelivery_full}} を活用することにしました。これなら、すべてをセキュアなプラットフォーム上で IT 費用を削減し、開発を加速できるからです。 この医療機関で使用度が高い SaaS システム (患者記録システムと業務報告アプリの両方で構成される) は更新を頻繁に必要としていました。 しかし、オンプレミス環境で運用されていたので、アジャイル開発が進みませんでした。 また、この医療機関は、増加し続ける人件費と減少し続ける予算への対応策も必要としていました。
 
-主要なテクノロジー:    
-* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](cs_clusters_planning.html#shared_dedicated_node)
-* [水平スケーリング](cs_app.html#highly_available_apps)
-* [コンテナーのセキュリティーと分離](cs_secure.html#security)
+主要なテクノロジー:
+* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [水平スケーリング](/docs/containers?topic=containers-app#highly_available_apps)
+* [コンテナーのセキュリティーと分離](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.contdelivery_full}} のオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [アプリ・コードを変更しなくても {{site.data.keyword.appid_short_notm}} を使用してサインオンできる機能](/docs/services/appid?topic=appid-getting-started)
 
 この医療機関はまず、自社の SaaS システムをコンテナー化し、それをクラウド内に配置しました。 その最初のステップから、プライベート・データ・センター内の過剰に構築されたハードウェアからカスタマイズ可能なコンピュートへと移行したので、IT の運用、保守、労力が削減されます。 SaaS システムをホストするために、自社の CPU、RAM、ストレージのニーズに合うように、簡単に設計できる Kubernetes クラスターを使用しました。 人件費削減に貢献した別の要因は、IBM が Kubernetes を管理していることです。これによって、この医療機関はより良い顧客サービスの提供に注意を集中できるようになりました。
 
@@ -64,12 +69,13 @@ lastupdated: "2018-12-05"
 
 **ソリューション・モデル**
 
-オンデマンドのコンピュート・サービス、ストレージ・サービス、IO サービスは、オンプレミスのエンタープライズ・アセットへのセキュアなアクセスが可能なパブリック・クラウドで実行されます。 CI/CD プロセスと IBM Garage Method の他のパーツを実装して、配信サイクルを劇的に短縮します。
+オンプレミスのエンタープライズ資産に安全にアクセスできるパブリック・クラウドで、オンデマンドにコンピュート・サービス、ストレージ・サービス、I/O サービスを実行します。CI/CD プロセスと IBM Garage Method の他のパーツを実装して、配信サイクルを劇的に短縮します。
 
 **ステップ 1: コンピュート・プラットフォームを保護する**
 * 非常に機密性の高い患者データを管理するアプリは、トラステッド・コンピューティングのためにベアメタル上で実行される {{site.data.keyword.containerlong_notm}} 上で再ホストすることができます。
 * トラステッド・コンピューティングでは、基盤となるハードウェアが悪用されていないことを検証できます。
 * そのコアから、脆弱性アドバイザーが既知のマルウェアに対して、イメージ、ポリシー、コンテナー、パッケージのスキャンと、脆弱性スキャンを行います。
+* シンプルな Ingress アノテーションを使用して、サービスと API に対するポリシー駆動型の認証を一貫して実施します。宣言型セキュリティーでは、{{site.data.keyword.appid_short_notm}} を使用してユーザー認証とトークン検証を保証できます。
 
 **ステップ 2: リフト・アンド・シフトを行う**
 * パブリック・クラウド内の {{site.data.keyword.containerlong_notm}} で実行されるコンテナー・イメージに仮想マシン・イメージをマイグレーションします。
@@ -88,6 +94,7 @@ lastupdated: "2018-12-05"
 * {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
+* {{site.data.keyword.appid_short_notm}}
 
 最も機密性の高いワークロードについては、クラスターをベアメタル用の {{site.data.keyword.containerlong_notm}} 内でホストすることができます。  このサービスは、ハードウェアとランタイム・コードに脆弱性がないかを自動的にスキャンするトラステッド・コンピューティング・プラットフォームを提供します。 業界標準のコンテナー・テクノロジーを使用することで、アーキテクチャーを大幅に変更することなく、アプリを最初から {{site.data.keyword.containerlong_notm}} 上で迅速に再ホストすることができます。 この変更は、スケーラビリティー上のメリットを即座にもたらします。
 
@@ -114,12 +121,12 @@ CI/CD プロセス自体の多くは、IBM のクラウド内の継続的デリ�
 
 {{site.data.keyword.cloud_notm}} を使用する理由: {{site.data.keyword.containerlong_notm}} は、オープン・プラットフォーム上で機密性の高い高性能のデータ処理をホストできるセキュアなコンピュートを提供します。 そのグローバル・プラットフォームは、近くの地域でホストされています。 それで、データは現地の法規制に準拠しているため、患者と研究者は、自分たちのデータが現地で保護されていて、健康の向上に役立つという安心感を得ることができます。
 
-主要なテクノロジー:    
-* [インテリジェント・スケジューリングによってワークロードが必要な場所に配置される](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
-* [アプリ間でデータを永続化および同期化する {{site.data.keyword.cloudant}}](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [脆弱性スキャンとワークロードの分離](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+主要なテクノロジー:
+* [インテリジェント・スケジューリングによってワークロードが必要な場所に配置される](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [アプリ間でデータを永続化および同期化する {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [脆弱性スキャンとワークロードの分離](/docs/services/Registry?topic=va-va_index#va_index)
 * [{{site.data.keyword.contdelivery_full}} のオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
-* [データをサニタイズして、研究者にデータ構造の変更について通知する {{site.data.keyword.openwhisk}}](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [データをサニタイズして、研究者にデータ構造の変更について通知する {{site.data.keyword.openwhisk}}](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
 
 **コンテキスト: 非営利研究機関の疾患データを安全にホストして共有する**
 
@@ -181,7 +188,7 @@ CI/CD プロセス自体の多くは、IBM のクラウド内の継続的デリ�
 
 **ステップ 1: マイクロサービスを使用してアプリをコンテナー化する**
 * IBM が提供する Node.js スターター・キットを使用して、開発をすぐに開始します。
-* 各アプリを連携マイクロサービスのセットにまとめるように設計します。このセットは、アプリの機能領域とその依存関係に基づき、{{site.data.keyword.containerlong_notm}} 内に置かれます。
+* アプリを、アプリの機能領域とその従属関係に基づいて、{{site.data.keyword.containerlong_notm}} 内で実行される一連の連携マイクロサービスとして構成します。
 * 研究用アプリを {{site.data.keyword.containerlong_notm}} 内のコンテナーにデプロイします。
 * 標準化された DevOps のダッシュボードを Kubernetes を介して提供します。
 * 実行頻度が低いバッチと他の研究用のワークロードに対して、コンピュートのオンデマンド・スケーリングを可能にします。

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # 教程：使用 Calico 网络策略阻止流量
 {: #policy_tutorial}
 
@@ -31,24 +34,31 @@ lastupdated: "2018-12-05"
 在此场景中，您扮演的是公关公司的网络管理员角色，并且您注意到应用程序遇到一些异常流量。本教程中的课程将全程指导您创建样本 Web 服务器应用程序，使用 LoadBalancer 服务公开应用程序，以及使用白名单和黑名单 Calico 策略保护应用程序不受不需要的异常流量的影响。
 
 ## 目标
+{: #policies_objectives}
 
 - 了解如何通过创建高位 DNAT 前策略，阻止流至所有节点端口的所有入局流量。
 - 了解如何通过创建低位 DNAT 前策略，允许列入白名单的源 IP 地址访问负载均衡器公共 IP 和端口。低位策略会覆盖高位策略。
 - 了解如何通过创建低位 DNAT 前策略，阻止列入黑名单的源 IP 地址访问负载均衡器公共 IP 和端口。
 
 ## 所需时间
+{: #policies_time}
+
 1 小时
 
 ## 受众
+{: #policies_audience}
+
 本教程适用于希望管理应用程序的网络流量的软件开发者和网络管理员。
 
 ## 先决条件
+{: #policies_prereqs}
 
-- [创建 V1.10 或更高版本的集群](cs_clusters.html#clusters_ui)或者[将现有集群更新到 V1.10](cs_versions.html#cs_v110)。在本教程中，需要 Kubernetes V1.10 或更高版本的集群才能使用 3.3.1 Calico CLI 和 Calico V3 策略语法。
-- [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
-- [安装和配置 Calico CLI](cs_network_policy.html#1.10_install)。
+- [创建 V1.10 或更高版本的集群](/docs/containers?topic=containers-clusters#clusters_ui)或者[将现有集群更新到 V1.10](/docs/containers?topic=containers-cs_versions#cs_v110)。在本教程中，需要 Kubernetes V1.10 或更高版本的集群才能使用 3.3.1 Calico CLI 和 Calico V3 策略语法。
+- [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [安装和配置 Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)。
 - 确保您具有用于 {{site.data.keyword.containerlong_notm}} 的以下 {{site.data.keyword.Bluemix_notm}} IAM 访问策略：
-    - [任何平台角色](cs_users.html#platform)
+    - [任何平台角色](/docs/containers?topic=containers-users#platform)
+    - [**写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)
 
 <br />
 
@@ -59,14 +69,14 @@ lastupdated: "2018-12-05"
 第一课说明如何从多个 IP 地址和端口公开应用程序，以及公共流量进入集群的位置。
 {: shortdesc}
 
-首先，部署要在整个教程中使用的样本 Web 服务器应用程序。`echoserver` Web 服务器显示有关从客户机与集群建立的连接的数据，并允许您测试对公关公司集群的访问。然后，通过创建 LoadBalancer 2.0 服务公开应用程序。LoadBalancer 2.0 服务通过 LoadBalancer 服务 IP 地址和工作程序节点的节点端口使应用程序可用。
+首先，部署要在整个教程中使用的样本 Web 服务器应用程序。`echoserver` Web 服务器显示有关从客户机与集群建立的连接的数据，并允许您测试对公关公司集群的访问。然后，通过创建 Load Balancer 1.0 服务来公开应用程序。Load Balancer 1.0 服务通过 Load Balancer 服务 IP 地址和工作程序节点的节点端口使应用程序可用。
 
-要改用使用 [Ingress 应用程序负载均衡器 (ALB)](cs_ingress.html)？请跳过步骤 3 和步骤 4 中的负载均衡器创建，而改为通过运行 `ibmcloud ks albs --cluster <cluster_name>` 来获取 ALB 的公共 IP，然后在本教程中使用这些 IP 来替代 `<loadbalancer_IP>.`
+要使用 Ingress 应用程序负载均衡器 (ALB) 吗？请改为在步骤 3 和 4 中创建负载均衡器，然后[为 Web 服务器应用程序创建服务](/docs/containers?topic=containers-ingress#public_inside_1)，并[为 Web 服务器应用程序创建 Ingress 资源](/docs/containers?topic=containers-ingress#public_inside_4)。接着，通过运行 `ibmcloud ks albs --cluster <cluster_name>` 来获取 ALB 的公共 IP，然后在本教程中使用这些 IP 来替代 `<loadbalancer_IP>`。
 {: tip}
 
 下图显示了在第 1 课结束时，Web 服务器应用程序如何通过公共节点端口和公共负载均衡器公开到因特网：
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="在第 1 课结束时，Web 服务器应用程序会通过公共节点端口和公共负载均衡器公开到因特网。" style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="在第 1 课结束时，Web 服务器应用程序已通过公共节点端口和公共负载均衡器公开到因特网。" style="width:450px; border-style: none"/>
 
 1. 部署样本 Web 服务器应用程序。连接到该 Web 服务器应用程序时，应用程序会使用在连接中接收到的 HTTP 头进行响应。
     ```
@@ -89,7 +99,7 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-3. 要将应用程序公开到公用因特网，请在文本编辑器中创建名为 `webserver-lb.yaml` 的 LoadBalancer 2.0 服务配置文件。
+3. 要将应用程序公开到公用因特网，请在文本编辑器中创建名为 `webserver-lb.yaml` 的 Load Balancer 1.0 服务配置文件。
     ```
     apiVersion: v1
     kind: Service
@@ -97,8 +107,6 @@ lastupdated: "2018-12-05"
       labels:
         run: webserver
       name: webserver-lb
-      annotations:
-        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
       type: LoadBalancer
       selector:
@@ -108,7 +116,6 @@ lastupdated: "2018-12-05"
         port: 80
         protocol: TCP
         targetPort: 8080
-      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -182,16 +189,16 @@ lastupdated: "2018-12-05"
 
     2. 获取工作程序节点的 **Public IP** 地址。
         ```
-        ibmcloud ks workers <cluster_name>
+        ibmcloud ks workers --cluster <cluster_name>
         ```
         {: pre}
 
         输出示例：
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
         ```
         {: screen}
 
@@ -234,7 +241,10 @@ lastupdated: "2018-12-05"
 ## 第 2 课：阻止流至所有节点端口的所有入局流量
 {: #lesson2}
 
-要保护公关公司的集群，必须阻止对 LoadBalancer 服务以及公开应用程序的节点端口的公共访问。首先是阻止对节点端口的访问。下图显示了在第 2 课结束时，如何允许流量流至负载均衡器，但不允许流至节点端口：
+要保护公关公司的集群，必须阻止对 LoadBalancer 服务以及公开应用程序的节点端口的公共访问。首先是阻止对节点端口的访问。
+{: shortdesc}
+
+下图显示了在第 2 课结束时，如何允许流量流至负载均衡器，但不允许流至节点端口：
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="在第 2 课结束时，Web 服务器应用程序会仅通过公共负载均衡器公开给因特网。" style="width:425px; border-style: none"/>
 
@@ -246,7 +256,7 @@ lastupdated: "2018-12-05"
       name: deny-nodeports
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
             destination:
@@ -344,6 +354,7 @@ lastupdated: "2018-12-05"
 {: shortdesc}
 
 首先，除了节点端口外，还必须阻止流至公开应用程序的负载均衡器的所有入局流量。然后，可以创建一个策略，用于将系统的 IP 地址列入白名单。在第 3 课结束时，将阻止流至公共节点端口和负载均衡器的所有流量，并且只允许来自列入白名单的系统 IP 的流量：
+
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="Web 服务器应用程序通过公共负载均衡器仅公开到系统 IP。" style="width:500px; border-style: none"/>
 
 1. 在文本编辑器中，创建名为 `deny-lb-port-80.yaml` 的高位 DNAT 前策略，以拒绝来自任何源 IP 的所有入局 TCP 和 UDP 流量流至负载均衡器 IP 地址和端口。将 `<loadbalancer_IP>` 替换为备忘单中的负载均衡器公共 IP 地址。
@@ -356,7 +367,7 @@ lastupdated: "2018-12-05"
       name: deny-lb-port-80
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -411,7 +422,7 @@ lastupdated: "2018-12-05"
       name: whitelist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Allow
         destination:
@@ -466,13 +477,15 @@ lastupdated: "2018-12-05"
 {: #lesson4}
 
 在上一课中，您阻止了所有流量，并且只将若干 IP 列入了白名单。针对您希望将访问仅限于若干个受控源 IP 地址的测试目的，该场景非常适用。但是，公关公司拥有需要可供公众广泛使用的应用程序。因此，除了发现的来自若干 IP 地址的异常流量外，您需要确保允许其他所有流量。黑名单在像这样的场景中非常有用，因为它可以帮助您阻止来自一小组 IP 地址的攻击。
+{: shortdesc}
 
 在本课程中，您将通过阻止来自自己系统的源 IP 地址的流量来测试黑名单功能。在第 4 课结束时，将阻止流至公共节点端口的所有流量，但允许流至公共负载均衡器的所有流量。只阻止来自列入黑名单的系统 IP 的流量流至负载均衡器：
+
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web 服务器应用程序通过公共负载均衡器公开到因特网。只阻止来自系统 IP 的流量。" style="width:550px; border-style: none"/>
 
 1. 清除上一课中创建的白名单策略。
     
-    - Linux:
+    - Linux：
       ```
       calicoctl delete GlobalNetworkPolicy deny-lb-port-80
       ```
@@ -502,7 +515,7 @@ lastupdated: "2018-12-05"
       name: blacklist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -559,7 +572,7 @@ lastupdated: "2018-12-05"
     
 
     - Linux：
-```
+      ```
     calicoctl delete GlobalNetworkPolicy blacklist
     ```
       {: pre}
@@ -575,5 +588,5 @@ lastupdated: "2018-12-05"
 ## 接下来要做什么？
 {: #whats_next}
 
-* 请阅读有关[使用网络策略控制流量](cs_network_policy.html)的更多信息。
+* 请阅读有关[使用网络策略控制流量](/docs/containers?topic=containers-network_policies)的更多信息。
 * 有关用于控制流入和流出集群的流量的更多示例 Calico 网络策略，可以查看 [Stars Policy Demo ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) 和 [Advanced Network Policy ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)。

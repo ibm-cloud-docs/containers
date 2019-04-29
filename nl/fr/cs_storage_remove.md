@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -22,7 +26,7 @@ lastupdated: "2018-12-05"
 # Suppression de stockage persistant dans un cluster
 {: #cleanup}
 
-Lorsque vous configurez du stockage persistant dans votre cluster, vous disposez de trois composants principaux : la réservation de volume persistant (PVC) Kubernetes qui sollicite le stockage, le volume persistant (PV) Kubernetes monté sur un pod et décrit dans la PVC et l'instance de stockage de l'infrastructure IBM Cloud (SoftLayer), comme par exemple stockage de fichiers NFS ou stockage par blocs. Selon comment vous avez créé ces composants, il vous faudra peut-être les supprimer tous les trois séparément.
+Lorsque vous configurez du stockage persistant dans votre cluster, vous disposez de trois composants principaux : la réservation de volume persistant (PVC) Kubernetes qui sollicite le stockage, le volume persistant (PV) Kubernetes monté sur un pod et décrit dans la PVC, et l'instance de stockage de l'infrastructure IBM Cloud (SoftLayer), comme par exemple du stockage de fichiers NFS ou du stockage par blocs. Selon comment vous avez créé ces composants, il vous faudra peut-être les supprimer tous les trois séparément.
 {:shortdesc}
 
 ## Nettoyage de stockage persistant
@@ -33,8 +37,8 @@ Description de vos options de suppression :
 **J'ai supprimé mon cluster. Dois-je supprimer autre chose pour supprimer du stockage persistant ?**</br>
 Ça dépend. Lorsque vous supprimez un cluster, la réservation de volume persistant (PVC) et le volume persistant (PV) sont supprimés. Cependant, c'est à vous de choisir si vous supprimez l'instance de stockage associée dans l'infrastructure IBM Cloud (SoftLayer). Si vous choisissez de ne pas la supprimer, elle existe toujours. Par ailleurs, si vous avez supprimé votre cluster alors qu'il n'était pas à l'état sain, le stockage peut encore exister, même si vous choisissez de le supprimer. Suivez les instructions, notamment l'étape permettant de [supprimer votre instance de stockage](#sl_delete_storage) dans l'infrastructure IBM Cloud (SoftLayer).
 
-**Puis-je supprimer la PVC pour supprimer tout mon stockage ?**</br>
-C'est possible. Si vous [créez le stockage persistant de manière dynamique](cs_storage_basics.html#dynamic_provisioning) et que vous sélectionnez une classe de stockage dont le nom ne contient pas `retain`, lorsque vous supprimez la PVC, le volume persistant et l'instance de stockage de l'infrastructure IBM Cloud (SoftLayer) sont également supprimés.
+**Puis-je supprimer la PVC pour supprimer l'intégralité de mon stockage ?**</br>
+C'est possible. Si vous [créez le stockage persistant de manière dynamique](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) et que vous sélectionnez une classe de stockage dont le nom ne contient pas `retain`, lorsque vous supprimez la PVC, le volume persistant et l'instance de stockage de l'infrastructure IBM Cloud (SoftLayer) sont également supprimés.
 
 Dans tous les autres cas, suivez les instructions permettant de vérifier le statut de la réservation de volume persistant (PVC), du volume persistant (PV) et de l'unité de stockage physique et supprimez-les séparément si nécessaire.
 
@@ -42,14 +46,14 @@ Dans tous les autres cas, suivez les instructions permettant de vérifier le sta
 Tout dépend de ce que vous supprimez et du type de facturation. Si vous supprimez la réservation de volume persistant et le volume persistant, mais pas l'instance dans votre compte d'infrastructure IBM Cloud (SoftLayer), cette instance continue à exister et vous êtes facturé pour son utilisation. Vous devez tout supprimer pour ne plus être facturé. De plus, lorsque vous spécifiez le type de facturation (`billingType`) dans la PVC, vous pouvez choisir entre une facturation à l'heure (`hourly`) ou au mois (`monthly`). Si vous avez choisi `monthly`, votre instance est facturée tous les mois. Lorsque vous supprimez l'instance, vous êtes facturé jusqu'à la fin du mois en cours.
 
 
-<p class="important">Lorsque vous nettoyez du stockage persistant, vous supprimez toutes les données qui y sont stockées. Si vous avez besoin d'une copie des données, effectuez une sauvegarde de [stockage de fichiers](cs_storage_file.html#backup_restore) ou de [stockage par blocs](cs_storage_block.html#backup_restore).</br>
-</br>Si vous utilisez un compte {{site.data.keyword.Bluemix_dedicated}}, vous devez demander la suppression du volume en [ouvrant un cas de support](/docs/get-support/howtogetsupport.html#getting-customer-support).</p>
+<p class="important">Lorsque vous nettoyez du stockage persistant, vous supprimez toutes les données qui y sont stockées. Si vous avez besoin d'une copie des données, effectuez une sauvegarde de [stockage de fichiers](/docs/containers?topic=containers-file_storage#file_backup_restore) ou de [stockage par blocs](/docs/containers?topic=containers-block_storage#block_backup_restore).</br>
+</br>Si vous utilisez un compte {{site.data.keyword.Bluemix_dedicated}}, vous devez demander la suppression du volume en [ouvrant un cas de support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Pour nettoyer des données persistantes :
 
-1.  Répertoriez les réservations de volume persistant (PVC) figurant dans votre cluster et notez le nom de la PVC (**NAME**), la classe de stockage (**STORAGECLASS**) et le nom du volume persistant lié à la PVC indiqué sous **VOLUME**.
+1.  Répertoriez les réservations de volume persistant (PVC) figurant dans votre cluster et notez le nom de la PVC (**`NAME`**), la classe de stockage (**`STORAGECLASS`**) et le nom du volume persistant lié à la PVC indiqué sous **`VOLUME`**.
     ```
     kubectl get pvc
     ```
@@ -64,7 +68,7 @@ Pour nettoyer des données persistantes :
     ```
     {: screen}
 
-2. Passez en revue la **règle de récupération** et le **type de facturation** correspondant à la classe de stockage.
+2. Passez en revue la **`règle de récupération`** et le **`type de facturation`** correspondant à la classe de stockage.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
@@ -108,7 +112,7 @@ Pour nettoyer des données persistantes :
    ```
    {: pre}
 
-5. Examinez le statut de votre volume persistant. Utilisez le nom du PV (pv_name) que vous avez récupéré dans la section **VOLUME**.
+5. Examinez le statut de votre volume persistant. Utilisez le nom du volume persistant que vous avez récupéré précédemment sous **`VOLUME`**.
    ```
    kubectl get pv <pv_name>
    ```
@@ -128,7 +132,7 @@ Pour nettoyer des données persistantes :
    ```
    {: pre}
 
-8. {: #sl_delete_storage}Répertoriez l'instance de stockage physique vers laquelle pointait votre volume persistant et notez l'**id** de cette instance.
+8. {: #sl_delete_storage}Répertoriez l'instance de stockage physique vers laquelle pointait votre volume persistant et notez l'**`id`** de cette instance.
 
    **Stockage de fichiers :**
    ```
@@ -147,18 +151,19 @@ Pour nettoyer des données persistantes :
    Exemple de sortie :
    ```
    id         notes   
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z
+   12345678   {"plugin":"ibm-file-plugin-5b55b7b77b-55bb7","region":"us-south","cluster":"aa1a11a1a11b2b2bb22b22222c3c3333","type":"Endurance","ns":"default","pvc":"mypvc","pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7","storageclass":"ibmc-file-gold"}
    ```
    {: screen}
 
    Description des informations indiquées sous **notes** :
-   *  **`:`** : signe deux-points (`:`) utilisé pour séparer les informations.
-   *  **` ibmcloud-block-storage-plugin-7566ccb8d-44nff`** : plug-in de stockage utilisé par le cluster.
-   *  **`us-south`** : région dans laquelle réside le cluster.
-   *  **`aa1a11a1a11b2b2bb22b22222c3c3333`** : ID du cluster associé à l'instance de stockage.
-   *  **`Performance`** : Type de stockage de fichiers ou de stockage par blocs, `Endurance` ou `Performance`.
-   *  **`mypvc`** : nom de la réservation de volume persistant (PVC) associée à l'instance de stockage.
-   *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`** : volume persistant associé à l'instance de stockage.
+   *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`** : plug-in de stockage utilisé par le cluster.
+   *  **`"region":"us-south"`** : région dans laquelle se trouve votre cluster.
+   *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`** : ID du cluster associé à l'instance de stockage.
+   *  **`"type":"Endurance"`** : type de stockage de fichiers ou de stockage par blocs (`Endurance` ou `Performance`).
+   *  **`"ns":"default"`** : espace de nom dans lequel est déployée l'instance de stockage.
+   *  **`"pvc":"mypvc"`** : nom de la réservation de volume persistant (PVC) associée à l'instance de stockage.
+   *  **`"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`** : volume persistant (PV) associé à l'instance de stockage.
+   *  **`"storageclass":"ibmc-file-gold"`** : type de classe de stockage : bronze, silver, gold ou custom.
 
 9. Supprimez l'instance de stockage physique.
 

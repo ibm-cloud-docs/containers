@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # 튜토리얼: Cloud Foundry에서 클러스터로 앱 마이그레이션
 {: #cf_tutorial}
 
@@ -28,25 +31,32 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
 
 ## 목표
+{: #cf_objectives}
 
 - 컨테이너 내 앱을 Kubernetes 클러스터에 배치하는 일반 프로세스를 학습하십시오.
 - 앱 코드로부터 컨테이너 이미지를 빌드하는 데 필요한 Dockerfile을 작성하십시오.
 - 이 이미지로부터 컨테이너를 Kubernetes 클러스터에 배치하십시오.
 
 ## 소요 시간
+{: #cf_time}
+
 30분
 
 ## 대상
+{: #cf_audience}
+
 이 튜토리얼은 Cloud Foundry 앱 개발자를 위한 것입니다.
 
 ## 전제조건
+{: #cf_prereqs}
 
-- [{{site.data.keyword.registrylong_notm}}에서 개인용 이미지 레지스트리를 작성](../services/Registry/index.html)하십시오.
-- [클러스터를 작성](cs_clusters.html#clusters_ui)하십시오.
-- [CLI에 클러스터를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+- [{{site.data.keyword.registrylong_notm}}에서 개인용 이미지 레지스트리를 작성](/docs/services/Registry?topic=registry-index)하십시오.
+- [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui)하십시오.
+- [CLI에 클러스터를 대상으로 지정](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)하십시오.
 - {{site.data.keyword.containerlong_notm}}에 대해 다음의 {{site.data.keyword.Bluemix_notm}} IAM 액세스 정책이 있는지 확인하십시오.
-    - [임의의 플랫폼 역할](cs_users.html#platform)
-- [Docker 및 Kubernetes 용어에 대해 학습](cs_tech.html)하십시오.
+    - [임의의 플랫폼 역할](/docs/containers?topic=containers-users#platform)
+    - [**작성자** 또는 **관리자** 서비스 역할](/docs/containers?topic=containers-users#platform)
+- [Docker 및 Kubernetes 용어에 대해 학습](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology)하십시오.
 
 
 <br />
@@ -54,6 +64,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
 
 ## 학습 1: 앱 코드 다운로드
+{: #cf_1}
 
 이동할 수 있도록 코드를 준비하십시오. 코드가 아직 없습니까? 이 경우에는 이 튜토리얼에서 사용할 수 있는 스타터 코드를 다운로드할 수 있습니다.
 {: shortdesc}
@@ -79,7 +90,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     c. 콘솔 지시사항의 1단계에서 **스타터 코드 다운로드**를 클릭하십시오.
 
-    d. .zip 파일의 압축을 풀어 컨텐츠를 `cf-py` 디렉토리에 저장하십시오.
+    d. `.zip` 파일의 압축을 풀고 `cf-py` 디렉토리에 저장하십시오.
 
 앱 코드를 컨테이너화할 준비가 되었습니다.
 
@@ -89,6 +100,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
 
 ## 학습 2: 앱 코드를 포함하는 Docker 이미지 작성
+{: #cf_2}
 
 앱 코드 및 컨테이너에 필요한 구성을 포함하는 Dockerfile을 작성하십시오. 그 후 이 Dockerfile로부터 Docker 이미지를 빌드하고 이 이미지를 개인용 이미지 레지스트리에 푸시하십시오.
 {: shortdesc}
@@ -175,6 +187,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
 
 ## 학습 3: 이미지로부터 컨테이너 배치
+{: #cf_3}
 
 앱을 컨테이너로서 Kubernetes 클러스터에 배치하십시오.
 {: shortdesc}
@@ -182,7 +195,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 1. `cf-py.yaml`이라는 구성 YAML 파일을 작성하고 `<registry_namespace>`를 개인용 이미지 레지스트리의 이름으로 업데이트하십시오. 이 구성 파일은 이전 학습에서 작성한 이미지로부터의 컨테이너 배치와 앱을 공용으로 노출시키는 서비스를 정의합니다.
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -255,7 +268,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
     a.  클러스터의 작업자 노드에 대한 공인 IP 주소를 가져오십시오.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -263,7 +276,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 
@@ -271,11 +284,11 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     <img src="images/python_flask.png" alt="배치된 표준 유형 Python Flask 앱의 화면 캡처입니다. " />
 
-5.  [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오.
+5.  [Kubernetes 대시보드를 실행](/docs/containers?topic=containers-app#cli_dashboard)하십시오.
 
-    [{{site.data.keyword.Bluemix_notm}} 콘솔](https://console.bluemix.net/)에서 클러스터를 선택하는 경우, **Kubernetes 대시보드** 단추를 사용하여 한 번의 클릭으로 대시보드를 실행할 수 있습니다.
+    [{{site.data.keyword.Bluemix_notm}} 콘솔](https://cloud.ibm.com/)에서 클러스터를 선택하는 경우, **Kubernetes 대시보드** 단추를 사용하여 한 번의 클릭으로 대시보드를 실행할 수 있습니다.
     {: tip}
 
 6. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다.
 
-축하합니다! 앱이 컨테이너에 배치되었습니다.
+수고하셨습니다! 앱이 컨테이너에 배치되었습니다.

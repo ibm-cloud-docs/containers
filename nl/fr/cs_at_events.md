@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2017, 2018
-lastupdated: "2018-12-05"
+  years: 2017, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, audit
+
+subcollection: containers
 
 ---
 
@@ -33,9 +37,9 @@ Vous pouvez afficher et gérer des activités initiées par l'utilisateur ou eff
 
 * **Evénements d'audit du serveur d'API Kubernetes** :
     * Ces événements sont automatiquement générés, mais vous devez configurer votre cluster pour les transférer au service {{site.data.keyword.cloudaccesstrailshort}}.
-    * Vous pouvez configurer votre cluster pour l'envoi d'événements au **domaine de compte** {{site.data.keyword.cloudaccesstrailshort}} ou à un **domaine d'espace**. Pour plus d'informations, voir [Envoi de journaux d'audit](/docs/containers/cs_health.html#api_forward).
+    * Vous pouvez configurer votre cluster pour l'envoi d'événements au **domaine de compte** {{site.data.keyword.cloudaccesstrailshort}} ou à un **domaine d'espace**. Pour plus d'informations, voir [Envoi de journaux d'audit](/docs/containers?topic=containers-health#api_forward).
 
-Pour plus d'informations sur le fonctionnement de ce service, voir la [documentation {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html). Pour plus d'informations sur les actions de Kubernetes suivies, consultez la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/home/).
+Pour plus d'informations sur le fonctionnement de ce service, voir la [documentation {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla). Pour plus d'informations sur les actions de Kubernetes suivies, consultez la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/home/).
 
 ## Recherche d'informations pour les événements
 {: #kube-find}
@@ -54,7 +58,7 @@ Pour surveiller les activités d'administration :
 5. Définissez la période pour laquelle vous désirez consulter les journaux. La valeur par défaut est 24 heures.
 6. Pour affiner votre recherche, vous pouvez cliquer sur l'icône d'édition du paramètre `ActivityTracker_Account_Search_in_24h` et ajouter des zones dans la colonne **Zones disponibles**.
 
-Pour laisser d'autres utilisateurs afficher les événements liés aux espaces et aux comptes, voir [octroi de droits pour afficher les événements de compte](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+Pour laisser d'autres utilisateurs afficher les événements liés aux espaces et aux comptes, voir [octroi de droits pour afficher les événements de compte](/docs/services/cloud-activity-tracker/how-to?topic=cloud-activity-tracker-grant_permissions#grant_permissions).
 {: tip}
 
 ## Suivi des événements de gestion de cluster
@@ -124,7 +128,7 @@ Consultez la liste suivante d'événements de gestion de cluster envoyés à {{s
 <td><code>containers-kubernetes.usersubnet.delete</code></td>
 <td>Un sous-réseau géré par l'utilisateur est retiré d'un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.version.update</code></td>
-<td>La version Kubernetes d'un noeud maître de cluster est mise à jour.</td></tr><tr>
+<td>La version Kubernetes d'un noeud de maître cluster est mise à jour.</td></tr><tr>
 <td><code>containers-kubernetes.worker.create</code></td>
 <td>Un noeud worker est créé.</td></tr><tr>
 <td><code>containers-kubernetes.worker.delete</code></td>
@@ -145,7 +149,7 @@ Consultez la liste suivante d'événements de gestion de cluster envoyés à {{s
 Consultez le tableau suivant pour obtenir la liste des événements d'audit de serveur d'API Kubernetes envoyés à {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-Avant de commencer : veillez à ce que votre cluster soit configuré pour transférer les [événements d'audit d'API Kubernetes](cs_health.html#api_forward).
+Avant de commencer : veillez à ce que votre cluster soit configuré pour transférer les [événements d'audit d'API Kubernetes](/docs/containers?topic=containers-health#api_forward).
 
 <table>
   <tr>
@@ -370,19 +374,19 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.create</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de mutation est créée.</td>
+    <td>Dans Kubernetes versions 1.9 et ultérieures, une configuration de webhook de mutation est créée.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.delete</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de mutation est supprimée.</td>
+    <td>Dans Kubernetes versions 1.9 et ultérieures, une configuration de webhook de mutation est supprimée.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.patch</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, un correctif est appliqué à une configuration de webhook de mutation.</td>
+    <td>Dans Kubernetes versions 1.9 et ultérieures, un correctif est appliqué à une configuration de webhook de mutation.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.update</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de mutation est mise à jour.</td>
+    <td>Dans Kubernetes versions 1.9 et ultérieures, une configuration de webhook de mutation est mise à jour.</td>
   </tr>
   <tr>
     <td><code>namespaces.create</code></td>
@@ -514,19 +518,19 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>Pour Kubernetes version 1.10 et ultérieure, une politique de sécurité de pod est créée.</td>
+    <td>Pour Kubernetes versions 1.10 et ultérieures, une politique de sécurité de pod est créée.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>Pour Kubernetes version 1.10 et ultérieure, une politique de sécurité de pod est supprimée.</td>
+    <td>Pour Kubernetes versions 1.10 et ultérieures, une politique de sécurité de pod est supprimée.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>Pour Kubernetes version 1.10 et ultérieure, un correctif est appliqué à une politique de sécurité de pod.</td>
+    <td>Pour Kubernetes versions 1.10 et ultérieures, un correctif est appliqué à une politique de sécurité de pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Pour Kubernetes version 1.10 et ultérieure, une politique de sécurité de pod est mise à jour.</td>
+    <td>Pour Kubernetes versions 1.10 et ultérieures, une politique de sécurité de pod est mise à jour.</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>
@@ -710,18 +714,18 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.create</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une validation de configuration de webhook est créée.</td>
+    <td>Dans Kubernetes versions 1.9 et ultérieures, une validation de configuration de webhook est créée.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.delete</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une validation de configuration de webhook est supprimée.</td>
+    <td>Dans Kubernetes versions 1.9 et ultérieures, une validation de configuration de webhook est supprimée.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.patch</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, un correctif a été appliqué à une validation de configuration de webhook.</td>
+    <td>Dans Kubernetes versions 1.9 et ultérieures, un correctif a été appliqué à une validation de configuration de webhook.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.update</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une validation de configuration de webhook est mise à jour.</td>
+    <td>Dans Kubernetes versions 1.9 et ultérieures, une validation de configuration de webhook est mise à jour.</td>
   </tr>
 </table>

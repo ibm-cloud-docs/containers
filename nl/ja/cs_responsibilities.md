@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -34,6 +38,7 @@ lastupdated: "2018-12-05"
 
 - クラスター作成時に、マスター、ワーカー・ノード、管理コンポーネント (Ingress アプリケーション・ロード・バランサーなど) をクラスター内にデプロイする
 - クラスターの Kubernetes マスターのセキュリティー更新、モニタリング、分離、リカバリーを提供する
+- バージョン更新とセキュリティー・パッチをクラスター・ワーカー・ノードに適用できるようにする
 - ワーカー・ノードの正常性をモニタリングし、それらのワーカー・ノードの更新とリカバリーの自動化を提供する
 - ワーカー・ノードの追加、ワーカー・ノードの削除、デフォルト・サブネットの作成などの、インフラストラクチャー・アカウントに対する自動化タスクを実行する
 - クラスター内の運用コンポーネント (Ingress アプリケーション・ロード・バランサーやストレージ・プラグインなど) を管理、更新、リカバリーする
@@ -44,21 +49,23 @@ lastupdated: "2018-12-05"
 
 **お客様は以下について責任を持ちます。**
 
-- [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオと他の {{site.data.keyword.Bluemix_notm}} サービスにアクセスするために、適切な権限を使用して {{site.data.keyword.containerlong_notm}} API キーを構成する](cs_users.html#api_key)
-- [Kubernetes リソース (ポッド、サービス、デプロイメントなど) をクラスター内にデプロイして管理する](cs_app.html#app_cli)
-- [アプリの高可用性が確保されるように、サービスと Kubernetes の機能を活用する](cs_app.html#highly_available_apps)
-- [ワーカー・プールのサイズを変更することで、クラスターの容量を追加または削除する](cs_clusters.html#add_workers)
-- [VLAN のスパンニングを有効にし、ゾーン間で複数ゾーン・ワーカー・プールのバランスを維持する](cs_clusters_planning.html#ha_clusters)
-- [クラスターのネットワーク分離のために IBM Cloud インフラストラクチャー (SoftLayer) でパブリック VLAN とプライベート VLAN を作成する ](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_firewall.html#firewall) <p class="note">ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。 詳しくは、[プライベート専用クラスター・ネットワーキングの計画](cs_network_cluster.html#private_vlan)を参照してください。 </p>
-- [Kubernetes バージョンの更新が利用可能になったら、マスター kube-apiserver を更新する](cs_cluster_update.html#master)
-- [ワーカー・ノードをメジャー・バージョン、マイナー・バージョン、およびパッチ・バージョンについて常に最新の状態に保持する](cs_cluster_update.html#worker_node)
-- [トラブルが発生したワーカー・ノードをリカバリーする。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`ibmcloud ks` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](cs_cli_reference.html#cs_worker_reboot)
-- [IBM Cloud インフラストラクチャー (SoftLayer) 内のサブネットを必要に応じて追加または解除する](cs_subnets.html#subnets)
-- [IBM Cloud インフラストラクチャー (SoftLayer) で永続ストレージのデータのバックアップとリストアを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../services/RegistryImages/ibm-backup-restore/index.html)
-- クラスターの正常性とパフォーマンスをサポートするために[ロギング](cs_health.html#logging)・サービスと[モニタリング](cs_health.html#view_metrics)・サービスをセットアップする
-- [Autorecovery を使用したワーカー・ノードの正常性モニタリングの構成](cs_health.html#autorecovery)
-- クラスター内のリソースを変更するイベントを監査する。例えば [{{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events) を使用して、ユーザーによって開始された {{site.data.keyword.containerlong_notm}} インスタンスの状態を変更するアクティビティーを確認したりする
+- [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオと他の {{site.data.keyword.Bluemix_notm}} サービスにアクセスするために、適切な権限を使用して {{site.data.keyword.containerlong_notm}} API キーを構成する](/docs/containers?topic=containers-users#api_key)
+- [Kubernetes リソース (ポッド、サービス、デプロイメントなど) をクラスター内にデプロイして管理する](/docs/containers?topic=containers-app#app_cli)
+- [アプリの高可用性が確保されるように、サービスと Kubernetes の機能を活用する](/docs/containers?topic=containers-app#highly_available_apps)
+- [ワーカー・プールのサイズを変更することで、クラスターの容量を追加または削除する](/docs/containers?topic=containers-clusters#add_workers)
+- [VLAN のスパンニングを有効にし、ゾーン間で複数ゾーン・ワーカー・プールのバランスを維持する](/docs/containers?topic=containers-plan_clusters#ha_clusters)
+- [クラスターのネットワーク分離のために IBM Cloud インフラストラクチャー (SoftLayer) でパブリック VLAN とプライベート VLAN を作成する ](/docs/infrastructure/vlans?topic=vlans-getting-started-with-vlans#getting-started-with-vlans)
+- [すべてのワーカー・ノードに、Kubernetes サービス・エンドポイント URL へのネットワーク接続を設定する](/docs/containers?topic=containers-firewall#firewall)
+<p class="note">ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、[プライベート・サービス・エンドポイントを有効にする](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)か、[ゲートウェイ・デバイスを構成する](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)ことによって、ワーカー・ノードとクラスター・マスターが通信できるようにする必要があります。ファイアウォールをセットアップする場合は、クラスターと併用する {{site.data.keyword.containerlong_notm}} および他の {{site.data.keyword.Bluemix_notm}} サービスに関するアクセスを許可するように、ファイアウォールの設定を管理したり構成したりする必要があります。</p>
+- [Kubernetes バージョンの更新が利用可能になったら、マスター kube-apiserver を更新する](/docs/containers?topic=containers-update#master)
+- [ワーカー・ノードをメジャー・バージョン、マイナー・バージョン、およびパッチ・バージョンについて常に最新の状態に保持する](/docs/containers?topic=containers-update#worker_node) <p class="note">ワーカー・ノードのオペレーティング・システムを変更したり、ワーカー・ノードにログインしたりすることはできません。最新のセキュリティー・パッチが含まれる完全なワーカー・ノードのイメージとして、ワーカー・ノードの更新が IBM により提供されています。更新を適用するには、ワーカー・ノードのイメージを再作成し、新しいイメージを使ってワーカー・ノードを再ロードする必要があります。ワーカー・ノードの再ロード時に、root ユーザーの鍵は自動的に交替されます。</p>
+- [クラスター・コンポーネント用にログ転送をセットアップして、クラスターの正常性をモニターする](/docs/containers?topic=containers-health#health)。   
+- [トラブルが発生したワーカー・ノードをリカバリーする。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`ibmcloud ks` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)
+- [IBM Cloud インフラストラクチャー (SoftLayer) 内のサブネットを必要に応じて追加または解除する](/docs/containers?topic=containers-subnets#subnets)
+- [IBM Cloud インフラストラクチャー (SoftLayer) で永続ストレージのデータのバックアップとリストアを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter)
+- クラスターの正常性とパフォーマンスをサポートするために[ロギング](/docs/containers?topic=containers-health#logging)・サービスと[モニタリング](/docs/containers?topic=containers-health#view_metrics)・サービスをセットアップする
+- [Autorecovery を使用したワーカー・ノードの正常性モニタリングの構成](/docs/containers?topic=containers-health#autorecovery)
+- クラスター内のリソースを変更するイベントを監査する。例えば [{{site.data.keyword.cloudaccesstrailfull}}](/docs/containers?topic=containers-at_events#at_events) を使用して、ユーザーによって開始された {{site.data.keyword.containerlong_notm}} インスタンスの状態を変更するアクティビティーを確認したりする
 
 <br />
 
@@ -79,5 +86,4 @@ lastupdated: "2018-12-05"
 *   サービスまたはシステムに対する無許可の変更
 *   他のお客様の権利を侵害すること
 
-
-すべての使用条件については、[クラウド・サービスのご利用条件](https://console.bluemix.net/docs/overview/terms-of-use/notices.html#terms)を参照してください。
+すべての使用条件については、[クラウド・サービスのご利用条件](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms)を参照してください。

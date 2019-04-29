@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-06"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, logmet, logs, metrics
+
+subcollection: containers
 
 ---
 
@@ -19,35 +23,67 @@ lastupdated: "2018-12-06"
 {:download: .download}
 
 
+
 # ロギングとモニタリング
 {: #health}
 
 {{site.data.keyword.containerlong}} でロギングとモニタリングをセットアップすると、問題のトラブルシューティングや、Kubernetes クラスターとアプリの正常性とパフォーマンスの改善に役立ちます。
 {: shortdesc}
 
-クラスターに追加できる {{site.data.keyword.Bluemix_notm}} やサード・パーティーの他のロギング・サービスをお探しですか? [{{site.data.keyword.la_full_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube) を含め、[ロギングとモニタリングの統合](cs_integrations.html#health_services)を参照してください。
-{: note}
+継続的なモニタリングとロギングは、クラスターへの攻撃を検出し、問題が発生したときに問題をトラブルシューティングするために重要です。 クラスターを継続的にモニターすることによって、クラスターの容量、およびアプリで使用可能なリソースの可用性をよく把握することができます。 この情報があれば、アプリのダウン時間の発生を防ぐために準備できます。**注**: ロギングとモニタリングを構成するには、{{site.data.keyword.containerlong_notm}} で標準クラスターを使用する必要があります。
+
+## ロギング・ソリューションの選択
+{: #logging_overview}
+
+デフォルトでは、{{site.data.keyword.containerlong_notm}} クラスター・コンポーネント (ワーカー・ノード、コンテナー、アプリケーション、永続ストレージ、Ingress アプリケーション・ロード・バランサー、Kubernetes API、`kube-system` 名前空間) のすべてのログは、ローカルで生成され、書き込まれます。これらのログを収集し、転送して表示するために提供されているロギング・ソリューションが複数あります。
+{: shortdesc}
+
+ロギング・ソリューションは、ログを収集するクラスター・コンポーネントに応じて選択できます。一般的には、分析機能やインターフェース機能に基づいて好みのロギング・サービス ({{site.data.keyword.loganalysisfull}}、{{site.data.keyword.la_full}}、サード・パーティー・サービスなど) を選択します。それから、{{site.data.keyword.cloudaccesstrailfull}} を使用して、クラスター内のユーザー・アクティビティーを監査したり、クラスターのマスター・ログを {{site.data.keyword.cos_full}} にバックアップしたりします。**注**: ロギングを構成するには、標準 Kubernetes クラスターを使用する必要があります。
+
+<dl>
+
+<dt>Fluentd と {{site.data.keyword.loganalysisfull_notm}} または syslog</dt>
+<dd>クラスター・コンポーネントのログの収集、転送、表示のために、Fluentd を使用してロギング構成を作成できます。ロギング構成を作成すると、[Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) クラスター・アドオンが、指定されたソースのパスからログを収集します。その後、Fluentd がそのログを {{site.data.keyword.loganalysisfull_notm}} または外部 syslog サーバーに転送します。
+
+<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) を使用すると、ログの収集、保存、検索の機能を拡張できます。ソースのログを {{site.data.keyword.loganalysisfull_notm}} に転送するロギング構成を作成すると、Kibana ダッシュボードでログを表示できるようになります。</li>
+
+<li><strong>外部 syslog サーバー</strong>: syslog プロトコルを受け入れる外部サーバーをセットアップします。その後、ログをその外部サーバーに転送するロギング構成をクラスター内のソースに対して作成できます。</li></ul>
+
+始めに、[クラスターおよびアプリのログ転送について](#logging)を参照してください。
+</dd>
+
+<dt>{{site.data.keyword.la_full_notm}}</dt>
+<dd>サード・パーティー・サービスとして LogDNA をクラスターにデプロイして、ポッド・コンテナーのログを管理します。{{site.data.keyword.la_full_notm}} を使用するには、クラスター内のすべてのワーカー・ノードにロギング・エージェントをデプロイする必要があります。このエージェントは、`kube-system` などのすべての名前空間から、ポッドの `/var/log` ディレクトリーに保管されている拡張子のないファイルと拡張子が `*.log` のログを収集します。そして、それらのログを {{site.data.keyword.la_full_notm}} サービスに転送します。このサービスについて詳しくは、[{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) の資料を参照してください。 始めに、[{{site.data.keyword.loganalysisfull_notm}} with LogDNA による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube)を参照してください。</dd>
+
+<dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
+<dd>クラスター内でユーザーによって開始された管理アクティビティーをモニターするには、監査ログを収集して {{site.data.keyword.cloudaccesstrailfull_notm}} に転送します。クラスターでは、2 種類の {{site.data.keyword.cloudaccesstrailshort}} イベントが生成されます。
+
+<ul><li>クラスター管理イベントは自動的に生成され、{{site.data.keyword.cloudaccesstrailshort}} に転送されます。</li>
+
+<li>Kubernetes API サーバー監査イベントは自動的に生成されますが、そのログを Fluentd で {{site.data.keyword.loganalysisshort}} に転送するには、[ロギング構成を作成](#api_forward)する必要があります。{{site.data.keyword.loganalysisshort}} に転送されたログを、{{site.data.keyword.cloudaccesstrailshort}} はプルします。</li></ul>
+
+追跡できる {{site.data.keyword.containerlong_notm}} イベントのタイプについて詳しくは、[Activity Tracker イベント](/docs/containers?topic=containers-at_events)を参照してください。 このサービスについて詳しくは、[Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla) の資料を参照してください。
+</dd>
+
+<dt>{{site.data.keyword.cos_full_notm}}</dt>
+<dd>クラスターの Kubernetes マスターのログを収集し、転送して表示するために、任意の時点のマスター・ログのスナップショットを取得して {{site.data.keyword.cos_full_notm}} バケット内に収集することができます。このスナップショットには、ポッドのスケジューリング、デプロイメント、RBAC ポリシーなどの、API サーバー経由で送信されるすべてのものが含まれます。 始めに、[マスター・ログの収集](#collect_master)を参照してください。</dd>
+
+<dt>サード・パーティー・サービス</dt>
+<dd>特別な要件がある場合は、独自のロギング・ソリューションをセットアップできます。 クラスターに追加できるサード・パーティー・ロギング・サービスを[ロギングとモニタリングの統合](/docs/containers?topic=containers-integrations#health_services)で確認してください。Kubernetes バージョン 1.11 以降を実行するクラスターでは、`/var/log/pods/` パスからコンテナー・ログを収集できます。 Kubernetes バージョン 1.10 以前を実行するクラスターでは、`/var/lib/docker/containers/` パスからコンテナー・ログを収集できます。</dd>
+
+</dl>
 
 ## クラスターおよびアプリのログ転送について
 {: #logging}
 
-継続的なモニタリングとロギングは、クラスターへの攻撃を検出し、問題が発生したときに問題をトラブルシューティングするために重要です。 クラスターを継続的にモニターすることによって、クラスターの容量、およびアプリで使用可能なリソースの可用性をよく把握することができます。 そうすることで、状態に応じて、ダウン時にアプリを保護する備えができます。 ロギングを構成するには、{{site.data.keyword.containerlong_notm}} 内の標準 Kubernetes クラスターで作業している必要があります。
+デフォルトでは、ログはクラスター内の [Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) アドオンによって収集されます。 クラスター内のソース (コンテナーなど) に対してロギング構成を作成すると、Fluentd によってそのソースのパスから収集されたログが、{{site.data.keyword.loganalysisshort_notm}} または外部 syslog サーバーに転送されます。ソースからロギング・サービスの取り込みポートへのトラフィックは暗号化されます。
 {: shortdesc}
 
-
-**IBM は個々の利用者のクラスターをモニターしますか?**
-
-Kubernetes マスターはすべて IBM によって継続的にモニターされます。 {{site.data.keyword.containerlong_notm}} は、Kubernetes マスターがデプロイされたすべてのノードにおいて、Kubernetes および OS 固有のセキュリティー修正で検出された脆弱性を自動的にスキャンします。 脆弱性が見つかった場合、{{site.data.keyword.containerlong_notm}} はユーザーに代わって自動的に修正を適用し、脆弱性を解決して、マスター・ノードが確実に保護されるようにします。 残りのクラスターのログのモニターと分析は、お客様が行う必要があります。
-
-**ログはどのように収集されますか?**
-
-ログはクラスター内の [Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) アドオンによって収集されます。 クラスター内のソースに関するロギング構成を作成する際に、Fluentd アドオンはそのソースのパスからログを収集します。 それから {{site.data.keyword.loganalysisshort_notm}} または外部の syslog サーバーにログが転送されます。
-
-**どのソースのロギングを構成できますか?**
+**ログ転送を構成できるソースは何ですか?**
 
 ロギングを構成できるソースの場所は、次の図のとおりです。
 
-<img src="images/log_sources.png" width="550" alt="クラスター内のログ・ソース" style="width:550px; border-style: none"/>
+<img src="images/log_sources.png" width="600" alt="クラスター内のログ・ソース" style="width:600px; border-style: none"/>
 
 1. `ワーカー`: ユーザーがワーカー・ノードに指定したインフラストラクチャー構成に固有の情報。 ワーカー・ログは syslog に取り込まれ、オペレーティング・システムのイベントが含まれます。 `auth.log` には、OS に対して行われた認証要求に関する情報が含まれます。</br>**パス**:
     * `/var/log/syslog`
@@ -75,7 +111,7 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 
 6. `kube-audit`: Kubernetes API サーバーに送信されるクラスター関連アクションに関する情報。時間、ユーザー、および影響を受けるリソースを含みます。
 
-7. `ingress`: Ingress アプリケーション・ロード・バランサーを介してクラスターに伝送されるネットワーク・トラフィックに関する情報。 特定の構成情報については、[Ingress の資料](cs_ingress_health.html#ingress_logs)を確認してください。</br>**パス**:
+7. `ingress`: Ingress アプリケーション・ロード・バランサーを介してクラスターに伝送されるネットワーク・トラフィックに関する情報。 特定の構成情報については、[Ingress の資料](/docs/containers?topic=containers-ingress_health#ingress_logs)を確認してください。</br>**パス**:
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
@@ -112,7 +148,7 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
     </tr>
     <tr>
       <td><code><em>--hostname</em></code></td>
-      <td><p>{{site.data.keyword.loganalysisshort_notm}} の場合は、[取り込み URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)を使用します。 取り込み URL を指定しない場合、クラスターを作成した地域のエンドポイントが使用されます。</p>
+      <td><p>{{site.data.keyword.loganalysisshort_notm}} の場合は、[取り込み URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls)を使用します。 取り込み URL を指定しない場合、クラスターを作成した地域のエンドポイントが使用されます。</p>
       <p>syslog の場合は、ログ・コレクター・サービスのホスト名または IP アドレスを指定します。</p></td>
     </tr>
     <tr>
@@ -155,35 +191,43 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
   </tbody>
 </table>
 
-**ロギング用の Fluentd は自分で更新し続ける必要がありますか?**
+**Fluentd は自分で更新し続ける必要がありますか?**
 
-ロギングまたはフィルター構成を変更するには、Fluentd ロギング・アドオンが最新バージョンである必要があります。 デフォルトでは、このアドオンに対する自動更新が有効になっています。 自動更新を使用不可にするには、[クラスターのアドオンの更新: ロギング用の Fluentd](cs_cluster_update.html#logging)を参照してください。
+ロギングまたはフィルター構成を変更するには、Fluentd ロギング・アドオンが最新バージョンである必要があります。 デフォルトでは、このアドオンに対する自動更新が有効になっています。 自動更新を使用不可にするには、[クラスターのアドオンの更新: ロギング用の Fluentd](/docs/containers?topic=containers-update#logging)を参照してください。
 
-**独自のロギング・ソリューションを使用できますか?**
+**クラスター内の 1 つのソースから、一部のログだけを転送し、その他のログは転送しないようにすることは可能ですか?**
 
-特別な要件がある場合は、クラスター内で独自のロギング・ソリューションをセットアップできます。 Kubernetes バージョン 1.11 以降を実行するクラスターでは、`/var/log/pods/` パスからコンテナー・ログを収集できます。 Kubernetes バージョン 1.10 以前を実行するクラスターでは、`/var/lib/docker/containers/` パスからコンテナー・ログを収集できます。
+はい。 例えば、特にログ量の多いポッドがある場合に、そのポッドのログでログ・ストレージ・スペースが占有されないようにして、他のポッドのログを転送したいことがあります。特定のポッドのログを転送しないようにする方法については、[ログのフィルタリング](#filter-logs)を参照してください。
+
+**1 つのクラスターで複数のチームが作業しています。チームごとにログを分離するにはどうしたらよいですか?**
+
+名前空間ごとに別の Cloud Foundry スペースにコンテナー・ログを転送できます。名前空間ごとに、`コンテナー`・ログ・ソースに対してログ転送構成を作成してください。その構成を適用するチームの名前空間を `--namespace` フラグで指定し、ログの転送先にするチームのスペースを `--space` フラグで指定します。そのスペース内の Cloud Foundry 組織を `--org` フラグで指定することもできます。
 
 <br />
 
 
-## ログ転送の構成
+## クラスターおよびアプリのログ転送の構成
 {: #configuring}
 
-コンソールまたは CLI を使用して、{{site.data.keyword.containerlong_notm}} のロギングを構成できます。
+コンソールまたは CLI を使用して、{{site.data.keyword.containerlong_notm}} 標準クラスターのロギングを構成できます。
 {: shortdesc}
 
 ### {{site.data.keyword.Bluemix_notm}} コンソールを使用したログ転送の有効化
 {: #enable-forwarding-ui}
 
 {{site.data.keyword.containerlong_notm}} ダッシュボードでログ転送を構成できます。 この処理が完了するまで数分かかることがあるため、すぐにログが表示されない場合は、数分待ってから再度確認してください。
+{: shortdesc}
 
 アカウント・レベルで特定のコンテナー名前空間用またはアプリ・ロギング用の構成を作成するには、CLI を使用します。
 {: tip}
 
-1. ダッシュボードの**「概要」**タブにナビゲートします。
-2. ログの転送元となる Cloud Foundry 組織とスペースを選択します。 ダッシュボードでログ転送を構成すると、クラスターのデフォルトの {{site.data.keyword.loganalysisshort_notm}} エンドポイントにログが送信されます。 外部サーバーまたは別の {{site.data.keyword.loganalysisshort_notm}} エンドポイントにログを転送するには、CLI を使用してロギングを構成します。
-3. ログの転送元となるログ・ソースを選択します。
-4. **「作成」**をクリックします。
+始める前に、使用する標準クラスターを[作成](/docs/containers?topic=containers-clusters#clusters)するか、決定します。
+
+1. [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/containers-kubernetes/clusters)にログインして、**「Kubernetes」>「クラスター」**にナビゲートします。
+2. 標準クラスターを選択し、**「概要」**タブの**「ログ」**フィールドで**「有効」**をクリックします。
+3. ログの転送元の **Cloud Foundry 組織**と**スペース**を選択します。ダッシュボードでログ転送を構成すると、クラスターのデフォルトの {{site.data.keyword.loganalysisshort_notm}} エンドポイントにログが送信されます。 外部サーバーまたは別の {{site.data.keyword.loganalysisshort_notm}} エンドポイントにログを転送するには、CLI を使用してロギングを構成します。
+4. ログの転送元の**ログ・ソース**を選択します。
+5. **「作成」**をクリックします。
 
 </br>
 </br>
@@ -192,24 +236,27 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 {: #enable-forwarding}
 
 クラスター・ロギングの構成を作成できます。 フラグを使用することによって、異なるロギング・オプションを区別できます。
+{: shortdesc}
+
+始める前に、使用する標準クラスターを[作成](/docs/containers?topic=containers-clusters#clusters)するか、決定します。
 
 **IBM へのログの転送**
 
 1. 権限を確認してください。
-    1. [**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)があることを確認してください。
-    2. クラスターの作成時にスペースを指定した場合は、作成ユーザーと {{site.data.keyword.containerlong_notm}} API 鍵所有者の両方に、そのスペースにおける[**開発者** の Cloud Foundry 役割](/docs/iam/mngcf.html)が必要です。
+    1. [**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+    2. クラスターの作成時にスペースを指定した場合は、作成ユーザーと {{site.data.keyword.containerlong_notm}} API 鍵所有者の両方に、そのスペースにおける[**開発者** の Cloud Foundry 役割](/docs/iam?topic=iam-mngcf)が必要です。
       * {{site.data.keyword.containerlong_notm}} API 鍵所有者が不明な場合は、以下のコマンドを実行します。
           ```
-          ibmcloud ks api-key-info <cluster_name>
+          ibmcloud ks api-key-info --cluster <cluster_name>
           ```
           {: pre}
-      * 行った変更を即時に適用するには、以下のコマンドを実行します。
+      * アクセス権を変更した場合は、以下のコマンドを実行して変更をすぐに適用できます。
           ```
-          ibmcloud ks logging-config-refresh <cluster_name>
+          ibmcloud ks logging-config-refresh --cluster <cluster_name>
           ```
           {: pre}
 
-2.  ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+2.  ログ・ソースがある標準クラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
     専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
     {: tip}
@@ -251,9 +298,9 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 
 **`udp` または `tcp` プロトコルを介してユーザー自身のサーバーにログを転送する**
 
-1. [**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)があることを確認してください。
+1. [**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
-2. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
+2. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
 
 3. ログを syslog に転送するには、以下の 2 つの方法のいずれかで、syslog プロトコルを受け入れるサーバーをセットアップします。
   * 独自のサーバーをセットアップして管理するか、プロバイダーが管理するサーバーを使用します。 プロバイダーがサーバーを管理する場合は、ロギング・プロバイダーからロギング・エンドポイントを取得します。
@@ -278,9 +325,11 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 以下のステップは、一般的な説明です。 実稼働環境でコンテナーを使用する前に、必要なセキュリティー条件を満たしていることを確認してください。
 {: tip}
 
-1. [**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)があることを確認してください。
+1. 以下の [{{site.data.keyword.Bluemix_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
+    * クラスターに対する**エディター**または**管理者**のプラットフォーム役割
+    * `kube-system` 名前空間に対する**ライター**または**管理者**のサービス役割
 
-2. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
+2. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
 
 3. 以下の 2 つの方法のいずれかで、syslog プロトコルを受け入れるサーバーをセットアップします。
   * 独自のサーバーをセットアップして管理するか、プロバイダーが管理するサーバーを使用します。 プロバイダーがサーバーを管理する場合は、ロギング・プロバイダーからロギング・エンドポイントを取得します。
@@ -312,27 +361,27 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 
 * クラスター内のすべてのロギング構成をリスト表示する場合には、以下のようにします。
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 * 1 つのタイプのログ・ソースのロギング構成をリストする場合には、以下のようにします。
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID> --logsource <source>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
 
-</br>
-</br>
+</br></br>
 
 ### ログ転送の更新
 {: #updating-forwarding}
 
 既に作成したロギング構成を更新することができます。
+{: shortdesc}
 
 1. ログ転送構成を更新します。
     ```
-    ibmcloud ks logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+    ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
     ```
     {: pre}
 
@@ -345,14 +394,14 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 クラスターの 1 つまたはすべてのロギング構成によるログの転送を停止できます。
 {: shortdesc}
 
-1. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+1. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 2. ロギング構成を削除します。
   <ul>
   <li>1 つのロギング構成を削除するには、以下のようにします。</br>
-    <pre><code>ibmcloud ks logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
+    <pre><code>ibmcloud ks logging-config-rm --cluster &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
   <li>すべてのロギング構成を削除するには、以下のようにします。</br>
-    <pre><code>ibmcloud ks logging-config-rm <my_cluster> --all</pre></code></li>
+    <pre><code>ibmcloud ks logging-config-rm --cluster <my_cluster> --all</pre></code></li>
   </ul>
 
 </br>
@@ -370,21 +419,21 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 Kibana ダッシュボードで、{{site.data.keyword.loganalysislong_notm}} に転送したログを参照できます。
 {: shortdesc}
 
-デフォルト値を使用して構成ファイルを作成した場合は、クラスターが作成されたアカウント (または組織とスペース) にログがあります。 構成ファイルに組織とスペースを指定した場合は、そのスペースにログがあります。 ロギングについて詳しくは、[{{site.data.keyword.containerlong_notm}} のロギング](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)を参照してください。
+デフォルト値を使用して構成ファイルを作成した場合は、クラスターが作成されたアカウント (または組織とスペース) にログがあります。 構成ファイルに組織とスペースを指定した場合は、そのスペースにログがあります。 ロギングについて詳しくは、[{{site.data.keyword.containerlong_notm}} のロギング](/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kubernetes#containers_kubernetes)を参照してください。
 
 Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターのログ転送を構成した {{site.data.keyword.Bluemix_notm}} アカウントまたはスペースを選択します。
-- 米国南部および米国東部: https://logging.ng.bluemix.net
-- 英国南部: https://logging.eu-gb.bluemix.net
-- EU 中央: https://logging.eu-fra.bluemix.net
-- 南アジア太平洋地域と北アジア太平洋地域: https://logging.au-syd.bluemix.net
+- 米国南部および米国東部: `https://logging.ng.bluemix.net`
+- 英国南部: `https://logging.eu-gb.bluemix.net`
+- EU 中央: `https://logging.eu-fra.bluemix.net`
+- 南アジア太平洋地域と北アジア太平洋地域: `https://logging.au-syd.bluemix.net`
 
-ログの表示について詳しくは、[Web ブラウザーから Kibana へのナビゲート](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser)を参照してください。
+ログの表示について詳しくは、[Web ブラウザーから Kibana へのナビゲート](/docs/services/CloudLogAnalysis/kibana?topic=cloudloganalysis-launch#launch_Kibana_from_browser)を参照してください。
 
 </br>
 
 **コンテナー・ログ**
 
-組み込みのコンテナー・ランタイム・ロギング機能を活用して、標準の STDOUT と STDERR 出力ストリームでアクティビティーを確認することができます。 詳しくは、[Kubernetes クラスターで実行されるコンテナーのコンテナー・ログの表示](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)を参照してください。
+組み込みのコンテナー・ランタイム・ロギング機能を活用して、標準の STDOUT と STDERR 出力ストリームでアクティビティーを確認することができます。 詳しくは、[Kubernetes クラスターで実行されるコンテナーのコンテナー・ログの表示](/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kubernetes#containers_kubernetes)を参照してください。
 
 <br />
 
@@ -393,6 +442,7 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
 {: #filter-logs}
 
 一定期間における特定のログをフィルターで除外して、転送するログを選択することができます。 フラグを使用することによって、異なるフィルター操作オプションを区別できます。
+{: shortdesc}
 
 <table>
 <caption>ログ・フィルター操作のオプションについて</caption>
@@ -443,7 +493,6 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
   </tbody>
 </table>
 
-
 1. ロギング・フィルターを作成します。
   ```
   ibmcloud ks logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
@@ -453,20 +502,20 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
 2. 作成したログ・フィルターを表示します。
 
   ```
-  ibmcloud ks logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ibmcloud ks logging-filter-get --cluster <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
   ```
   {: pre}
 
 3. 作成したログ・フィルターを更新します。
   ```
-  ibmcloud ks logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  ibmcloud ks logging-filter-update --cluster <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
 
 4. 作成したログ・フィルターを削除します。
 
   ```
-  ibmcloud ks logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
+  ibmcloud ks logging-filter-rm --cluster <cluster_name_or_ID> --id <filter_ID> [--all]
   ```
   {: pre}
 
@@ -477,29 +526,29 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
 ## Kubernetes API 監査ログのログ転送の構成
 {: #api_forward}
 
-Kubernetes は、apiserver を通るすべてのイベントを自動的に監査します。 {{site.data.keyword.loganalysisshort_notm}} または外部サーバーにイベントを転送できます。
+Kubernetes は、Kubernetes API サーバーを通るすべてのイベントを自動的に監査します。 {{site.data.keyword.loganalysisshort_notm}} または外部サーバーにイベントを転送できます。
 {: shortdesc}
 
 
 Kubernetes 監査ログについて詳しくは、Kubernetes 資料の<a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">監査トピック <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。
 
-* Kubernetes API 監査ログの転送は、Kubernetes バージョン 1.9 以降でのみサポートされています。
 * 現在は、このロギング構成のすべてのクラスターで、デフォルトの監査ポリシーが使用されます。
 * 現在、フィルターはサポートされていません。
 * クラスターごとに 1 つの `kube-audit` 構成しか設定できませんが、ロギング構成と Webhook を作成することで、{{site.data.keyword.loganalysisshort_notm}} と外部サーバーにログを転送できます。
-* クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)が必要です。
+* クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
 
 
 ### {{site.data.keyword.loganalysisshort_notm}} への監査ログの送信
 {: #audit_enable_loganalysis}
 
 Kubernetes API サーバーの監査ログを {{site.data.keyword.loganalysisshort_notm}} に転送できます。
+{: shortdesc}
 
 **始める前に**
 
 1. 権限を確認してください。 クラスターまたはロギング構成の作成時にスペースを指定した場合は、アカウント所有者と {{site.data.keyword.containerlong_notm}} 鍵所有者の両方に、そのスペースの管理者権限、開発者権限、または監査員権限が必要です。
 
-2. API サーバー監査ログの収集元にするクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
+2. API サーバー監査ログの収集元にするクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
 
 **ログの転送**
 
@@ -536,7 +585,7 @@ Kubernetes API サーバーの監査ログを {{site.data.keyword.loganalysissho
         </tr>
         <tr>
           <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
-          <td>ログの転送先となるエンドポイント。 [取り込み URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls) を指定しない場合、クラスターを作成した地域のエンドポイントが使用されます。</td>
+          <td>ログの転送先となるエンドポイント。 [取り込み URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls) を指定しない場合、クラスターを作成した地域のエンドポイントが使用されます。</td>
         </tr>
         <tr>
           <td><code><em>&lt;cluster_space&gt;</em></code></td>
@@ -552,13 +601,13 @@ Kubernetes API サーバーの監査ログを {{site.data.keyword.loganalysissho
 2. クラスター・ロギング構成を表示して、意図したとおりに実装されたことを確認します。
 
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
     コマンドと出力の例:
     ```
-    ibmcloud ks logging-config-get myCluster
+    ibmcloud ks logging-config-get --cluster myCluster
     Retrieving cluster myCluster logging configurations...
     OK
     Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
@@ -580,7 +629,7 @@ Kubernetes API サーバーの監査ログを {{site.data.keyword.loganalysissho
 
 1. ログを転送できるリモート・ロギング・サーバーをセットアップします。 例えば、[Logstash と Kubernetes を使用して ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend)、監査イベントを収集できます。
 
-2. API サーバー監査ログの収集元にするクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
+2. API サーバー監査ログの収集元にするクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
 
 Kubernetes API 監査ログを転送するには、以下のようにします。
 
@@ -637,12 +686,12 @@ Kubernetes API 監査ログを転送するには、以下のようにします�
 3. Kubernetes マスターを再始動して、構成の更新を適用します。
 
     ```
-    ibmcloud ks apiserver-refresh <cluster_name_or_ID>
+    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 4. オプション: 監査ログの転送を停止するには、構成を無効にします。
-    1. API サーバー監査ログの収集を停止するクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+    1. API サーバー監査ログの収集を停止するクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
     2. クラスターの API サーバーの Web フック・バックエンド構成を無効にします。
 
         ```
@@ -653,7 +702,7 @@ Kubernetes API 監査ログを転送するには、以下のようにします�
     3. Kubernetes マスターを再始動して、構成の更新を適用します。
 
         ```
-        ibmcloud ks apiserver-refresh <cluster_name_or_ID>
+        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -670,14 +719,14 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
 
 **始める前に**
 
-* {{site.data.keyword.Bluemix_notm}} カタログから {{site.data.keyword.cos_short}} の[インスタンスをプロビジョンします](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage)。
-* クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)があることを確認してください。
+* {{site.data.keyword.Bluemix_notm}} カタログから {{site.data.keyword.cos_short}} の[インスタンスをプロビジョンします](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-for-developers#provision-an-instance-of-ibm-cloud-object-storage)。
+* クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
 **スナップショットの作成**
 
-1. [この入門チュートリアル](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets)に従って、{{site.data.keyword.Bluemix_notm}} コンソールを使用して Object Storage バケットを作成します。
+1. [この入門チュートリアル](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started-console-#create-buckets)に従って、{{site.data.keyword.Bluemix_notm}} コンソールを使用して Object Storage バケットを作成します。
 
-2. 作成したバケット内で [HMAC サービス資格情報](/docs/services/cloud-object-storage/iam/service-credentials.html)を生成します。
+2. 作成したバケット内で [HMAC サービス資格情報](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials)を生成します。
   1. {{site.data.keyword.cos_short}} ダッシュボードの**「サービス資格情報」**タブで、**「新規資格情報」**をクリックします。
   2. HMAC 資格情報に`ライター`のサービス役割を付与します。
   3. **「インラインの構成パラメーターの追加」**フィールドで `{"HMAC":true}` を指定します。
@@ -723,40 +772,47 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
 <br />
 
 
-## メトリックの表示
+## モニタリング・ソリューションの選択
 {: #view_metrics}
 
 メトリックは、クラスターの正常性とパフォーマンスをモニターするのに役立ちます。 Kubernetes とコンテナー・ランタイムの標準機能を使用して、クラスターとアプリの正常性をモニターできます。 **注**: モニタリングは標準クラスターでのみサポートされています。
 {:shortdesc}
 
+**IBM は個々の利用者のクラスターをモニターしますか?**
+
+Kubernetes マスターはすべて IBM によって継続的にモニターされます。 {{site.data.keyword.containerlong_notm}} は、Kubernetes マスターがデプロイされたすべてのノードにおいて、Kubernetes および OS 固有のセキュリティー修正で検出された脆弱性を自動的にスキャンします。 脆弱性が見つかった場合、{{site.data.keyword.containerlong_notm}} はユーザーに代わって自動的に修正を適用し、脆弱性を解決して、マスター・ノードが確実に保護されるようにします。 残りのクラスター・コンポーネントのログのモニターと分析は、お客様が行う必要があります。
+
+メトリック・サービスの使用時に競合を回避するには、リソース・グループと地域の間でクラスターの名前が固有であることを確認してください。
+{: tip}
+
 <dl>
   <dt>{{site.data.keyword.Bluemix_notm}} のクラスター詳細ページ</dt>
     <dd>{{site.data.keyword.containerlong_notm}} には、クラスターの正常性と能力、そしてクラスター・リソースの使用方法に関する情報が表示されます。 このコンソールを使用して、クラスターのスケールアウト、永続ストレージの作業、{{site.data.keyword.Bluemix_notm}} サービス・バインディングによるクラスターへの機能の追加を行うことができます。 クラスターの詳細ページを表示するには、**{{site.data.keyword.Bluemix_notm}} の「ダッシュボード」**に移動して、クラスターを選択します。</dd>
   <dt>Kubernetes ダッシュボード</dt>
-    <dd>Kubernetes ダッシュボードは、ワーカー・ノードの正常性の確認、Kubernetes リソースの検索、コンテナー化アプリのデプロイ、ロギングとモニタリング情報を使用したアプリのトラブルシューティングを行える管理 Web インターフェースです。 Kubernetes ダッシュボードにアクセスする方法について詳しくは、[{{site.data.keyword.containerlong_notm}} での Kubernetes ダッシュボードの起動](cs_app.html#cli_dashboard)を参照してください。</dd>
+    <dd>Kubernetes ダッシュボードは、ワーカー・ノードの正常性の確認、Kubernetes リソースの検索、コンテナー化アプリのデプロイ、ロギングとモニタリング情報を使用したアプリのトラブルシューティングを行える管理 Web インターフェースです。 Kubernetes ダッシュボードにアクセスする方法について詳しくは、[{{site.data.keyword.containerlong_notm}} での Kubernetes ダッシュボードの起動](/docs/containers?topic=containers-app#cli_dashboard)を参照してください。</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>標準クラスターのメトリックは、Kubernetes クラスターを作成したときにログインした {{site.data.keyword.Bluemix_notm}} アカウントにあります。 クラスターの作成時に {{site.data.keyword.Bluemix_notm}} スペースを指定した場合、メトリックはそのスペースに配置されます。 コンテナーのメトリックはクラスターにデプロイされたすべてのコンテナーについて自動的に収集されます。 これらのメトリックが送信され、Grafana で使用できるようになります。 メトリックについて詳しくは、[{{site.data.keyword.containerlong_notm}} のモニター](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov)を参照してください。</p>
+    <dd><p>標準クラスターのメトリックは、Kubernetes クラスターを作成したときにログインした {{site.data.keyword.Bluemix_notm}} アカウントにあります。 クラスターの作成時に {{site.data.keyword.Bluemix_notm}} スペースを指定した場合、メトリックはそのスペースに配置されます。 コンテナーのメトリックはクラスターにデプロイされたすべてのコンテナーについて自動的に収集されます。 これらのメトリックが送信され、Grafana で使用できるようになります。 メトリックについて詳しくは、[{{site.data.keyword.containerlong_notm}}　のモニター](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov)を参照してください。</p>
     <p>Grafana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントまたはスペースを選択します。</p> <table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
   <caption>モニター・トラフィック用に開く IP アドレス</caption>
         <thead>
         <th>{{site.data.keyword.containerlong_notm}} 地域</th>
         <th>モニタリング・アドレス</th>
-        <th>モニタリング IP アドレス</th>
+        <th>モニタリング・サブネット</th>
         </thead>
       <tbody>
         <tr>
          <td>中欧</td>
-         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>metrics.eu-de.bluemix.net</code></td>
          <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
          <td>英国南部</td>
-         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>metrics.eu-gb.bluemix.net</code></td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
           <td>米国東部、米国南部、北アジア太平洋地域、南アジア太平洋地域</td>
-          <td>metrics.ng.bluemix.net</td>
+          <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
          
@@ -764,11 +820,8 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。 詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)を参照してください。 **注**: {{site.data.keyword.mon_full_notm}} は `containerd` コンテナー・ランタイムをサポートしていません。 バージョン 1.11 以降のクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、一部のコンテナー・メトリックは収集されません。</dd>
+  <dd>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。 詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)を参照してください。 **注**: {{site.data.keyword.mon_full_notm}} は `containerd` コンテナー・ランタイムをサポートしていません。 バージョン 1.11 以降のクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、一部のコンテナー・メトリックは収集されません。</dd>
 </dl>
-
-メトリック・サービスでのビルドの使用時に競合しないようにするには、リソース・グループと地域間でクラスターの名前が固有であることを確認してください。
-{: tip}
 
 ### その他のヘルス・モニター・ツール
 {: #health_tools}
@@ -776,7 +829,7 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
 他のツールを構成してモニター機能を追加することができます。
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus は、Kubernetes のために設計されたモニタリング、ロギング、アラートのためのオープン・ソースのツールです。 このツールは、Kubernetes のロギング情報に基づいてクラスター、ワーカー・ノード、デプロイメントの正常性に関する詳細情報を取得します。 セットアップ方法について詳しくは、[{{site.data.keyword.containerlong_notm}} とのサービスの統合](cs_integrations.html#integrations)を参照してください。</dd>
+    <dd>Prometheus は、Kubernetes のために設計されたモニタリング、ロギング、アラートのためのオープン・ソースのツールです。 このツールは、Kubernetes のロギング情報に基づいてクラスター、ワーカー・ノード、デプロイメントの正常性に関する詳細情報を取得します。 セットアップ方法について詳しくは、[{{site.data.keyword.containerlong_notm}} とのサービスの統合](/docs/containers?topic=containers-integrations#integrations)を参照してください。</dd>
 </dl>
 
 <br />
@@ -785,21 +838,38 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
 ## Autorecovery を使用したワーカー・ノードの正常性モニタリングの構成
 {: #autorecovery}
 
-{{site.data.keyword.containerlong_notm}} Autorecovery システムは、Kubernetes バージョン 1.9 以降の既存のクラスターにデプロイできます。
-{: shortdesc}
-
-Autorecovery システムは、さまざまな検査機能を使用してワーカー・ノードの正常性状況を照会します。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 修正アクションは、一度に 1 つのワーカー・ノードに対してのみ実行されます。 1 つのワーカー・ノードの修正アクションが正常に完了してからでないと、別のワーカー・ノードの修正アクションは実行されません。 詳しくは、[Autorecovery に関するブログ投稿 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。</br> </br>
+Autorecovery システムは、さまざまな検査機能を使用してワーカー・ノードの正常性状況を照会します。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 修正アクションは、一度に 1 つのワーカー・ノードに対してのみ実行されます。 1 つのワーカー・ノードの修正アクションが正常に完了してからでないと、別のワーカー・ノードの修正アクションは実行されません。 詳しくは、[Autorecovery に関するブログ投稿 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
+{: shortdesc}</br> </br>
 
 Autorecovery が正常に機能するためには、1 つ以上の正常なノードが必要です。 Autorecovery でのアクティブな検査は、複数のワーカー・ノードが存在するクラスターでのみ構成します。
 {: note}
 
 開始前に、以下のことを行います。
-- [**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)があることを確認してください。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+- 以下の [{{site.data.keyword.Bluemix_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
+    - クラスターに対する**管理者**のプラットフォーム役割
+    - `kube-system` 名前空間に対する**ライター**または**管理者**のサービス役割
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
-1. [クラスター用の Helm をインストールし、Helm インスタンスに {{site.data.keyword.Bluemix_notm}} リポジトリーを追加します](cs_integrations.html#helm)。
+自動リカバリーを構成するには、以下のようにします。
 
-2. 検査を JSON 形式で定義する構成マップ・ファイルを作成します。 例えば、次の YAML ファイルでは、3 つの検査 (1 つの HTTP 検査と 2 つの Kubernetes API サーバー検査) を定義しています。 この 3 種類の検査とそれらの検査の個々の構成要素については、YAML ファイルの例に続く表を参照してください。
+1.  [手順に従って](/docs/containers?topic=containers-integrations#helm)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。
+
+2.  tiller がサービス・アカウントでインストールされていることを確認します。
+
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    出力例:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. 検査を JSON 形式で定義する構成マップ・ファイルを作成します。 例えば、次の YAML ファイルでは、3 つの検査 (1 つの HTTP 検査と 2 つの Kubernetes API サーバー検査) を定義しています。 この 3 種類の検査とそれらの検査の個々の構成要素については、YAML ファイルの例に続く表を参照してください。
 </br>
    **ヒント:** 構成マップの `data` セクションに、各検査を固有キーとして定義します。
 
@@ -875,7 +945,7 @@ Autorecovery が正常に機能するためには、1 つ以上の正常なノ�
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
-   <td>ワーカー・ノードで稼働している HTTP サーバーが正常かどうかを検査する HTTP 検査を定義します。 この検査を使用するには、[デーモン・セット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) を使用して、クラスター内のすべてのワーカー・ノードに HTTP サーバーをデプロイする必要があります。 HTTP サーバーが正常かどうかを検証できるヘルス・チェックを、<code>/myhealth</code> パスで利用できるように実装する必要があります。 他のパスを定義するには、<strong>Route</strong> パラメーターを変更します。 HTTP サーバーが正常である場合は、<strong>ExpectedStatus</strong> で定義されている HTTP 応答コードを返す必要があります。 HTTP サーバーは、ワーカー・ノードのプライベート IP アドレスで listen するように構成する必要があります。 プライベート IP アドレスを調べるには、<code>kubectl get nodes</code> ノードを実行します。<br></br>
+   <td>ワーカー・ノードで稼働している HTTP サーバーが正常かどうかを検査する HTTP 検査を定義します。 この検査を使用するには、[デーモン・セット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) を使用して、クラスター内のすべてのワーカー・ノードに HTTP サーバーをデプロイする必要があります。 HTTP サーバーが正常かどうかを検証できるヘルス・チェックを、<code>/myhealth</code> パスで利用できるように実装する必要があります。 他のパスを定義するには、<strong>Route</strong> パラメーターを変更します。 HTTP サーバーが正常である場合は、<strong><code>ExpectedStatus</code></strong> で定義されている HTTP 応答コードを返す必要があります。 HTTP サーバーは、ワーカー・ノードのプライベート IP アドレスで listen するように構成する必要があります。 プライベート IP アドレスを調べるには、<code>kubectl get nodes</code> ノードを実行します。<br></br>
    例えば、プライベート IP アドレスが 10.10.10.1 および 10.10.10.2 の 2 つのノードがクラスターにあるとします。 この例では、<code>http://10.10.10.1:80/myhealth</code> および <code>http://10.10.10.2:80/myhealth</code> の 2 つのルートの 200 HTTP 応答を検査します。
    サンプル YAML では、検査が 3 分ごとに実行されます。 連続して 3 回失敗すると、ワーカー・ノードはリブートされます。 この操作は、<code>ibmcloud ks worker-reboot</code> を実行することと同等です。<br></br><b>「有効」</b>フィールドを <code>true</code> に設定するまで、HTTP 検査は無効になります。</td>
    </tr>
@@ -902,7 +972,7 @@ Autorecovery が正常に機能するためには、1 つ以上の正常なノ�
    </tr>
    <tr>
    <td><code>PodFailureThresholdPercent</code></td>
-   <td>リソース・タイプが <code>POD</code> である場合は、[NotReady ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) 状態になることができるワーカー・ノード上のポッドのしきい値 (パーセンテージ) を入力します。 このパーセンテージは、ワーカー・ノードにスケジュールされているポッドの合計数に基づきます。 検査の結果、正常でないポッドのパーセンテージがしきい値を超えていることが判別されると、1 回の失敗としてカウントされます。</td>
+   <td>リソース・タイプが <code>POD</code> である場合は、[<strong><code>NotReady </code></strong> ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) 状態になることができるワーカー・ノード上のポッドのしきい値 (パーセンテージ) を入力します。 このパーセンテージは、ワーカー・ノードにスケジュールされているポッドの合計数に基づきます。 検査の結果、正常でないポッドのパーセンテージがしきい値を超えていることが判別されると、1 回の失敗としてカウントされます。</td>
    </tr>
    <tr>
    <td><code>CorrectiveAction</code></td>
@@ -943,35 +1013,35 @@ Autorecovery が正常に機能するためには、1 つ以上の正常なノ�
    </tbody>
    </table>
 
-3. クラスター内に構成マップを作成します。
+4. クラスター内に構成マップを作成します。
 
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
-3. 適切な検査を実行して、`kube-system` 名前空間内に `ibm-worker-recovery-checks` という名前の構成マップが作成されていることを確認します。
+5. 適切な検査を実行して、`kube-system` 名前空間内に `ibm-worker-recovery-checks` という名前の構成マップが作成されていることを確認します。
 
     ```
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
-4. `ibm-worker-recovery` Helm チャートをインストールして、クラスターに Autorecovery をデプロイします。
+6. `ibm-worker-recovery` Helm チャートをインストールして、クラスターに Autorecovery をデプロイします。
 
     ```
     helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
-5. 数分後に、次のコマンドの出力にある `Events` セクションを確認して、Autorecovery のデプロイメントのアクティビティーを確認できます。
+7. 数分後に、次のコマンドの出力にある `Events` セクションを確認して、Autorecovery のデプロイメントのアクティビティーを確認できます。
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
-6. Autorecovery デプロイメントでアクティビティーが表示されない場合は、Autorecovery チャート定義に含まれているテストを実行して、Helm デプロイメントを確認することができます。
+8. Autorecovery デプロイメントでアクティビティーが表示されない場合は、Autorecovery チャート定義に含まれているテストを実行して、Helm デプロイメントを確認することができます。
 
     ```
     helm test ibm-worker-recovery

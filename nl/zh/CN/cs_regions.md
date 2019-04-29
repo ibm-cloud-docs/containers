@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -18,6 +22,8 @@ lastupdated: "2018-12-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
+
+
 # 区域和专区
 {: #regions-and-zones}
 
@@ -32,7 +38,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
 在 {{site.data.keyword.containerlong_notm}} 中创建 Kubernetes 集群时，其资源仍保留在将集群部署到的区域中。
 
 
-您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
+您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在精选区域中可用。
 {: note}
 
 |{{site.data.keyword.containerlong_notm}} 区域|相应的 {{site.data.keyword.Bluemix_notm}} 位置|
@@ -44,7 +50,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
 |美国东部（仅限标准集群）|华盛顿|
 |美国南部
       |达拉斯|
-{: caption="表：支持的 Kubernetes 服务区域和相应的 IBM Cloud 位置。" caption-side="top"}
+{: caption="支持的 Kubernetes Service 区域和相应的 IBM Cloud 位置。" caption-side="top"}
 
 <br />
 
@@ -55,41 +61,62 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
 您可以使用 {{site.data.keyword.Bluemix_notm}} 位置（也称为区域）在 {{site.data.keyword.Bluemix_notm}} 服务之间组织资源。例如，您可以通过使用存储在同一位置的 {{site.data.keyword.registryshort_notm}} 中的专用 Docker 映像来创建 Kubernetes 集群。
 {:shortdesc}
 
-要检查您当前所在的 {{site.data.keyword.Bluemix_notm}} 位置，请运行 `ibmcloud info` 并查看 **Region** 字段。
+您可以在登录到全局 API 端点时指定 {{site.data.keyword.Bluemix_notm}} 区域。要列出可用区域，请运行 `ibmcloud regions`。要检查您当前所在的 {{site.data.keyword.Bluemix_notm}} 位置，请运行 `ibmcloud target` 并查看 **Region** 字段。如果未指定区域，系统将提示您选择区域。
 
-可以通过在登录时指定区域 API 端点来访问 {{site.data.keyword.Bluemix_notm}} 位置。如果未指定区域端点，那么您会自动登录到离您最近的区域。
+例如，要登录到达拉斯 (`us-south`) 区域中的全局 API 端点，请运行以下命令：
+```
+ibmcloud login -a https://cloud.ibm.com -r us-south
+```
+{: pre}
 
-例如，可以使用以下命令来登录到 {{site.data.keyword.Bluemix_notm}} 区域 API 端点：
+要登录到全局 API 端点并选择区域，请运行以下命令：
+```
+ibmcloud login -a https://cloud.ibm.com
+```
+{: pre}
 
-  * 达拉斯
-      ```
-      ibmcloud login -a api.ng.bluemix.net
-      ```
-      {: pre}
+输出示例：
+```
+API endpoint: cloud.ibm.com
 
-  * 华盛顿
-      ```
-      ibmcloud login -a api.us-east.bluemix.net
-      ```
-      {: pre}
+Get One Time Code from https://identity-2.eu-central.iam.cloud.ibm.com/identity/passcode to proceed.
+Open the URL in the default browser? [Y/n]> y
+One Time Code > 
+Authenticating...
+OK
 
-  * 悉尼和东京
-      ```
-      ibmcloud login -a api.au-syd.bluemix.net
-      ```
-      {: pre}
+Select an account:
+1. MyAccount (00a11aa1a11aa11a1111a1111aaa11aa) <-> 1234567
+2. TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
+Enter a number> 2
+Targeted account TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
 
-  * 法兰克福
-      ```
-      ibmcloud login -a api.eu-de.bluemix.net
-      ```
-      {: pre}
 
-  * 伦敦
-      ```
-      ibmcloud login -a api.eu-gb.bluemix.net
-      ```
-      {: pre}
+Targeted resource group default
+
+Select a region (or press enter to skip):
+1. au-syd
+2. jp-tok
+3. eu-de
+4. eu-gb
+5. us-south
+6. us-east
+Enter a number> 5
+Targeted region us-south
+
+                      
+API endpoint:      https://cloud.ibm.com   
+Region:            us-south   
+User:              first.last@email.com   
+Account:           TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321  
+Resource group:    default   
+CF API endpoint:      
+Org:                  
+Space:                
+
+...
+```
+{: screen}
 
 <br />
 
@@ -101,7 +128,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
 {{site.data.keyword.containerlong_notm}} 区域端点具体参考 {{site.data.keyword.containerlong_notm}}，而不是作为一个整体参考 {{site.data.keyword.Bluemix_notm}}。
 {:shortdesc}
 
-您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
+您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在精选区域中可用。
 {: note}
 
 支持的 {{site.data.keyword.containerlong_notm}} 区域：
@@ -112,7 +139,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
   * 美国东部（仅限标准集群）
   * 美国南部
 
-您可以通过一个全局端点来访问 {{site.data.keyword.containerlong_notm}}：`https://containers.bluemix.net/v1`。
+您可以通过一个全局端点来访问 {{site.data.keyword.containerlong_notm}}：`https://containers.cloud.ibm.com/v1`。
 * 要检查您当前所在的 {{site.data.keyword.containerlong_notm}} 区域，请运行 `ibmcloud ks region`。
 * 要检索可用区域及其端点的列表，请运行 `ibmcloud ks regions`。
 
@@ -129,7 +156,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
   * 您在一个区域中创建了 {{site.data.keyword.Bluemix_notm}} 服务或专用 Docker 映像，并希望将其用于另一个区域中的 {{site.data.keyword.containerlong_notm}}。
   * 您希望访问与登录到的缺省 {{site.data.keyword.Bluemix_notm}} 区域不同的区域中的集群。
 
-要快速切换区域，请运行 [`ibmcloud ks region-set`](cs_cli_reference.html#cs_region-set)。
+要快速切换区域，请运行 [`ibmcloud ks region-set`](/docs/containers?topic=containers-cs_cli_reference#cs_region-set)。
 
 ### 使用 {{site.data.keyword.containerlong_notm}} API 命令
 {: #containers_api}
@@ -139,7 +166,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
 
 `GET /clusters` API 的示例：
   ```
-  GET https://containers.bluemix.net/v1/clusters
+  GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
@@ -148,7 +175,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
 要将 API 用于全球端点，请在所有请求的 `X-Region` 头中传递区域名称。要列出可用区域，请运行 `ibmcloud ks regions`。
 {: tip}
 
-要查看有关 API 命令的文档，请查看 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)。
+要查看有关 API 命令的文档，请查看 [https://containers.cloud.ibm.com/swagger-api/](https://containers.cloud.ibm.com/swagger-api/)。
 
 ## {{site.data.keyword.containerlong_notm}} 中的专区
 {: #zones}
@@ -156,8 +183,8 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
 专区是 {{site.data.keyword.Bluemix_notm}} 区域内可用的物理数据中心。区域是用于组织专区的概念工具，可以包含不同国家或地区中的专区（数据中心）。下表按区域显示可用的专区。
 {:shortdesc}
 
-* **多专区大城市**：在多专区大城市中创建的集群中的工作程序节点可以跨专区分布。此外，如果在多专区大城市中创建 Kubernetes V1.10 或更高版本的集群，那么高可用性主节点会在各专区中分布。
-* **单专区城市**：在单专区城市中创建的集群中的工作程序节点只能保留在一个专区中。不能跨多个专区分布工作程序节点。高可用性主节点包含三个副本，分别位于不同的主机上，但主节点不会在各专区中分布。
+* **多专区大城市**：如果在多专区大城市（**悉尼（亚太地区南部）除外）**中创建集群，那么高可用性 Kubernetes 主节点的副本会在各专区中分布。您可以选择在各专区中分布工作程序节点，以保护应用程序不受专区故障的影响。
+* **单专区城市**：如果在单专区城市中创建了集群，那么可以创建多个工作程序节点，但不能在各专区之间分布这些节点。高可用性主节点包含三个副本，分别位于不同的主机上，但主节点不会在各专区中分布。
 
 <table summary="该表显示了按区域列出的可用专区。每行从左到右阅读，其中第一列是区域，第二列是多专区大城市，第三列是单专区城市。">
 <caption>按区域列出的可用单专区和多专区。</caption>
@@ -177,9 +204,8 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
     </tr>
     <tr>
       <td>亚太地区南部</td>
-      <td>无</td>
-      <td><p>悉尼：syd01、syd04</p>
-      <p>墨尔本：mel01</p></td>
+      <td>悉尼：syd01、syd04、syd05</td>
+      <td>墨尔本：mel01</td>
     </tr>
     <tr>
       <td>欧洲中部</td>
@@ -192,7 +218,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
     </tr>
     <tr>
       <td>英国南部</td>
-      <td>伦敦：lon04、lon05、lon06 **注**：lon05 替换了 lon02。新集群必须使用 lon05，并且只有 lon05 支持高可用性主节点在各专区中分布。</td>
+      <td>伦敦：lon04、lon05`*`、lon06</td>
       <td></td>
     </tr>
     <tr>
@@ -204,17 +230,20 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
     <tr>
       <td>美国南部</td>
       <td>达拉斯：dal10、dal12、dal13</td>
-      <td><p>圣何塞：sjc03、sjc04</p><p>圣保罗：sao01</p></td>
+      <td><p>墨西哥：mex01</p><p>圣何塞：sjc03、sjc04</p><p>圣保罗：sao01</p></td>
     </tr>
   </tbody>
 </table>
 
+`*` lon05 已替换 lon02。新集群必须使用 lon05，并且只有 lon05 支持高可用性主节点在各专区中分布。
+{: note}
+
 ### 单专区集群
-{: #single_zone}
+{: #regions_single_zone}
 
 在单专区集群中，集群的资源会保留在部署集群的专区中。下图突出显示了单专区集群组件在美国东部示例区域中的关系：
 
-![了解集群资源的位置](/images/region-cluster-resources.png)
+<img src="/images/region-cluster-resources.png" width="650" alt="了解集群资源所在的位置" style="width:650px; border-style: none"/>
 
 _了解单专区集群资源的位置。_
 
@@ -225,16 +254,20 @@ _了解单专区集群资源的位置。_
 3.  启动集群管理操作（例如，使用 `ibmcloud ks` 命令）时，有关集群的基本信息（如名称、标识、用户和命令）会通过区域端点进行路由。
 
 ### 多专区集群
-{: #multizone}
+{: #regions_multizone}
 
 在多专区集群中，主节点部署在支持多专区的专区中，并且集群的资源会跨多个专区进行分布。
 
 1.  工作程序节点跨一个区域中的多个专区进行分布，从而为集群提供更高可用性。主节点保留在将集群部署到的支持多专区的专区中。启动本地容器编排操作（例如，`kubectl` 命令）时，将通过区域端点在主节点与工作程序节点之间交换信息。
 
 2.  其他集群资源（例如，存储器、联网、计算或在 pod 中运行的应用程序）在多专区集群内的专区中的部署方式各不相同。有关更多信息，请查看以下主题：
-    * 在多专区集群中设置[文件存储器](cs_storage_file.html#add_file)和[块存储器](cs_storage_block.html#add_block)
-    * [在多专区集群中使用 LoadBalancer 服务启用对应用程序的公共或专用访问权](cs_loadbalancer.html#multi_zone_config)
-    * [使用 Ingress 管理网络流量](cs_ingress.html#planning)
-    * [提高应用程序的可用性](cs_app.html#increase_availability)
+    * 在多专区集群中设置[文件存储器](/docs/containers?topic=containers-file_storage#add_file)和[块存储器](/docs/containers?topic=containers-block_storage#add_block)
+    * [在多专区集群中使用 LoadBalancer 服务启用对应用程序的公共或专用访问权](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+    * [使用 Ingress 管理网络流量](/docs/containers?topic=containers-ingress#planning)
+    * [提高应用程序的可用性](/docs/containers?topic=containers-app#increase_availability)
 
-3.  启动集群管理操作（例如，使用 [`ibmcloud ks` 命令](cs_cli_reference.html#cs_cli_reference)）时，将通过区域端点传递有关集群（例如，名称、标识、用户和命令）的基本信息。
+3.  启动集群管理操作（例如，使用 [`ibmcloud ks` 命令](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)）时，将通过区域端点传递有关集群（例如，名称、标识、用户和命令）的基本信息。
+
+
+
+

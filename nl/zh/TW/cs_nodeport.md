@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -28,16 +32,16 @@ lastupdated: "2018-12-05"
 {:shortdesc}
 
 ## 使用 NodePort 管理網路資料流量
-{: #planning}
+{: #nodeport_planning}
 
 公開工作者節點上的公用埠，並使用工作者節點的公用 IP 位址，從網際網路中公開存取您在叢集裡的服務。
 {:shortdesc}
 
-當您建立 Kubernetes NodePort 類型服務來公開應用程式時，會將 30000 到 32767 範圍內的 NodePort 及內部叢集 IP 位址指派給服務。NodePort 服務是作為應用程式送入要求的外部進入點。所指派的 NodePort 會公開於叢集裡每一個工作者節點的 kubeproxy 設定。每個工作者節點都會開始接聽所指派的 NodePort，來取得服務的送入要求。若要從網際網路存取服務，您可以使用在建立叢集期間所指派的任何工作者節點的公用 IP 位址，以及 `<IP_address>:<nodeport>` 格式的 NodePort。除了公用 IP 位址之外，在工作者節點的專用 IP 位址上，也可以使用 NodePort 服務。
+當您建立 Kubernetes NodePort 類型服務來公開應用程式時，會將 30000 到 32767 範圍內的 NodePort 及內部叢集 IP 位址指派給服務。NodePort 服務是作為應用程式送入要求的外部進入點。所指派的 NodePort 會公然地公開於叢集中每個工作者節點的 `kubeproxy` 設定。每個工作者節點都會開始接聽所指派的 NodePort，來取得服務的送入要求。若要從網際網路存取服務，您可以使用在建立叢集期間所指派的任何工作者節點的公用 IP 位址，以及 `<IP_address>:<nodeport>` 格式的 NodePort。除了公用 IP 位址之外，在工作者節點的專用 IP 位址上，也可以使用 NodePort 服務。
 
 下圖顯示配置 NodePort 服務時，通訊如何從網際網路導向應用程式：
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="使用 NodePort 在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="600" alt="使用 NodePort 在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:600px; border-style: none"/>
 
 1. 使用工作者節點的公用 IP 位址以及工作者節點上的 NodePort，將要求傳送至應用程式。
 
@@ -47,14 +51,14 @@ lastupdated: "2018-12-05"
 
 4. 要求會轉遞至應用程式部署所在 Pod 的專用 IP 位址。如果叢集裡已部署多個應用程式實例，則 NodePort 服務會在應用程式 Pod 之間遞送要求。
 
-工作者節點的公用 IP 位址不是永久性的。移除或重建工作者節點時，會將新的公用 IP 位址指派給工作者節點。NodePort 服務可以用於測試應用程式的公用存取，也可以用於僅短時間需要公用存取時。當您需要服務有穩定的公用 IP 位址及更高可用性時，請使用 [LoadBalancer 服務](cs_loadbalancer.html)或 [Ingress](cs_ingress.html) 來公開應用程式。
+工作者節點的公用 IP 位址不是永久性的。移除或重建工作者節點時，會將新的公用 IP 位址指派給工作者節點。NodePort 服務可以用於測試應用程式的公用存取，也可以用於僅短時間需要公用存取時。當您需要服務有穩定的公用 IP 位址及更高可用性時，請使用 [LoadBalancer 服務](/docs/containers?topic=containers-loadbalancer)或 [Ingress](/docs/containers?topic=containers-ingress) 來公開應用程式。
 {: note}
 
 <br />
 
 
 ## 使用 NodePort 服務來啟用應用程式的存取
-{: #config}
+{: #nodeport_config}
 
 對於免費或標準叢集，您可以將應用程式公開為 Kubernetes NodePort 服務。
 {:shortdesc}
@@ -94,7 +98,7 @@ lastupdated: "2018-12-05"
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td>將 <code><em>&lt;my-nodeport-service&gt;</em></code> 取代為 NodePort 服務的名稱。<p>進一步瞭解使用 Kubernetes 資源時如何[保護個人資訊安全](cs_secure.html#pi)。</p></td>
+    <td>將 <code><em>&lt;my-nodeport-service&gt;</em></code> 取代為 NodePort 服務的名稱。<p>進一步瞭解使用 Kubernetes 資源時如何[保護個人資訊安全](/docs/containers?topic=containers-security#pi)。</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
@@ -102,7 +106,7 @@ lastupdated: "2018-12-05"
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td>將 <code><em>&lt;my-selector-key&gt;</em></code> 及 <code><em>&lt;my-selector-value&gt;</em></code> 取代為您在部署 yaml 的 <code>spec.template.metadata.labels</code> 區段中所使用的鍵值組。若要建立服務與部署的關聯，選取器必須符合部署標籤。
+      <td>將 <code><em>&lt;my-selector-key&gt;</em></code> 和 <code><em>&lt;my-selector-value&gt;</em></code> 取代為您在部署 YAML 的 <code>spec.template.metadata.labels</code> 區段中所使用的鍵值組。若要建立服務與部署的關聯，選取器必須符合部署標籤。
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -125,7 +129,7 @@ lastupdated: "2018-12-05"
 1.  取得叢集裡工作者節點的公用 IP 位址。如果您要存取專用網路上的工作者節點，請改為取得專用 IP 位址。
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -164,7 +168,7 @@ lastupdated: "2018-12-05"
 
     在此範例中，NodePort 是 `30872`。
 
-    如果**端點**區段顯示 `<none>`，請檢查您在 NodePort 服務的 `spec.selector` 區段中使用的 `<selectorkey>` 及 `<selectorvalue>`。確定它與您在部署 yaml 的 `spec.template.metadata.labels` 區段中所使用的_鍵值組_ 相同。
+    如果**端點**區段顯示 `<none>`，請檢查您在 NodePort 服務的 `spec.selector` 區段中使用的 `<selectorkey>` 及 `<selectorvalue>`。確定它與您在部署 YAML 的 `spec.template.metadata.labels` 區段中所使用的_鍵值組_ 相同。
     {: note}
 
 3.  形成具有其中一個工作者節點 IP 位址及 NodePort 的 URL。範例：`http://192.0.2.23:30872`

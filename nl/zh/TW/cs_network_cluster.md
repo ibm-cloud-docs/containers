@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -18,195 +22,350 @@ lastupdated: "2018-12-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
-# 規劃叢集內網路及專用網路
-{: #planning}
+# 設定叢集網路
+{: #cs_network_cluster}
 
-為 {{site.data.keyword.containerlong}} 叢集規劃網路設定。
-{: shortdesc}
+在 {{site.data.keyword.containerlong}} 叢集中設定網路配置。
+{:shortdesc}
 
-## 瞭解叢集內網路
-{: #in-cluster}
+此頁面可協助您設定叢集的網路配置。不確定要選擇哪個設定？請參閱[規劃叢集網路](/docs/containers?topic=containers-cs_network_ov)。
+{: tip}
 
-所有已部署至工作者節點的 Pod 會獲指派 172.30.0.0/16 範圍中的專用 IP 位址，並且只在工作者節點之間遞送。為了避免衝突，請勿在與工作者節點進行通訊的任何節點上使用此 IP 範圍。使用專用 IP 位址，工作者節點及 Pod 可以在專用網路上安全地進行通訊。不過，Pod 損毀或需要重建工作者節點時，會指派新的專用 IP 位址。
-
-依預設，對必須為高可用性的應用程式，很難追蹤其變更中的專用 IP 位址。相反地，您可以使用內建 Kubernetes 服務探索特性，將應用程式公開為專用網路上的叢集 IP 服務。Kubernetes 服務會將一組 Pod 分組並提供這些 Pod 的網路連線。此連線提供與叢集裡其他服務的連線功能，而不會公開每一個 Pod 的實際專用 IP 位址。服務會獲指派只能在叢集內部存取的叢集內 IP 位址。
-* 較舊的叢集：在 2018 年 2 月之前在 dal13 區域或在 2017 年 10 月之前在任何其他區域建立的叢集裡，服務從 10.10.10.0/24 範圍中的 254 個 IP 當中獲指派其中一個 IP。如果您已達 254 個服務的限制，而且需要更多服務，則必須建立新的叢集。
-* 較新的叢集：在 2018 年 2 月之後在 dal13 區域或在 2017 年 10 月之後在任何其他區域建立的叢集裡，服務從 172.21.0.0/16 範圍中的 65,000 個 IP 當中獲指派其中一個 IP。
-
-為了避免衝突，請勿在與工作者節點進行通訊的任何節點上使用此 IP 範圍。也會建立服務的 DNS 查閱項目，並將其儲存在叢集的 `kube-dns` 元件中。DNS 項目包含服務的名稱、已建立服務的名稱空間，以及已指派叢集內 IP 位址的鏈結。
-
-若要存取叢集服務背後的 Pod，應用程式可以使用服務的叢集內 IP 位址，或使用服務名稱來傳送要求。當您使用服務的名稱時，會在 `kube-dns` 元件中查閱該名稱，並將其遞送至服務的叢集內 IP 位址。當要求到達服務時，服務會將要求平均轉遞至 Pod，並與 Pod 的叢集內 IP 位址及其部署至的工作者節點無關。
-
-<br />
-
-
-## 瞭解 VLAN 連線及網路介面
-{: #interfaces}
-
-{{site.data.keyword.containerlong_notm}} 提供 IBM Cloud 基礎架構 (SoftLayer) VLAN，確保工作者節點上的優質網路效能及網路隔離。VLAN 會配置一組工作者節點及 Pod，就像它們已連接至相同的實體佈線。VLAN 為您的 {{site.data.keyword.Bluemix_notm}} 帳戶所專用，不會在 IBM 客戶之間共用。
-
-依預設，所有叢集都連接至專用 VLAN。專用 VLAN 會決定指派給每一個工作者節點的專用 IP 位址。工作者節點具有專用網路介面，可透過專用網路進行存取。當您建立的叢集也連接至公用 VLAN 時，您的叢集也有公用網路介面。公用 VLAN 容許工作者節點自動及安全地連接至主節點。如需叢集的預設 VLAN 的相關資訊，請參閱[叢集的預設 VLAN、子網路及 IP](cs_subnets.html#default_vlans_subnets)。
-
-叢集網路功能設定可由叢集的網路介面定義：
-
-* **預設叢集網路功能**：同時具有專用和公用網路介面的叢集
-* **自訂的預設叢集網路功能**：同時具有專用和公用網路介面的叢集，並以 Calico 網路原則來封鎖送入的公用資料流量
-* **僅限專用叢集網路功能**：僅具有專用網路介面的叢集
-
-按下列其中一項設定以規劃叢集的網路功能：
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/network_imagemap.png" width="575" alt="按一下卡片，以規劃叢集網路功能設定。" style="width:575px;" />
-<map name="home_map" id="home_map">
-<area href="#both_vlans" alt="規劃預設叢集網路功能" title="規劃預設叢集網路功能" shape="rect" coords="-7, -8, 149, 211" />
-<area href="#both_vlans_private" alt="規劃自訂的預設叢集網路功能" title="規劃自訂的預設叢集網路功能" shape="rect" coords="196, -1, 362, 210" />
-<area href="#private_vlan" alt="規劃僅限專用叢集網路功能" title="規劃僅限專用叢集網路功能" shape="rect" coords="409, -10, 572, 218" />
-</map>
-
-<br />
-
-
-## 規劃預設叢集網路功能
+## 設定具有公用和專用 VLAN 的叢集網路
 {: #both_vlans}
 
-依預設，{{site.data.keyword.containerlong_notm}} 設定叢集能夠存取公用 VLAN 和專用 VLAN。
-{:shortdesc}
+設定叢集能夠存取[公用 VLAN 和專用 VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options)。下圖顯示您可以使用此設定為叢集配置的網路選項。
+{: shortdesc}
 
+此網路設定包含建立叢集期間的下列必要網路配置，以及建立叢集之後的選用網路配置。
 
+1. 如果您在受防火牆保護的環境中建立叢集，請針對您計劃使用的 {{site.data.keyword.Bluemix_notm}} 服務，[容許公用和專用 IP 的出埠網路資料流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
-**透過此設定我的叢集可以獲得什麼？**
-* 每一個工作者節點的公用 IP 位址，其為工作者節點提供公用網路介面
-* 每一個工作者節點的專用 IP 位址，其為工作者節點提供專用網路介面
-* 所有工作者節點與主節點之間的自動安全 OpenVPN 連線
+2. 建立已連接至公用和專用 VLAN 的叢集。如果您建立多區域叢集，則可以為每個區域選擇 VLAN 配對。
 
-**為何我可能使用此設定？**
+3. 選擇 Kubernetes 主節點與工作者節點的通訊方式。
+  * 如果已在 {{site.data.keyword.Bluemix_notm}} 帳戶中啟用 VRF，請啟用[僅限公用](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)、[公用和專用](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)或[僅限專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)。
+  * 如果您無法或不要啟用 VRF，請啟用[僅限公用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)。
 
-* 您有一個應用程式必須可供單一區域叢集裡的公用網際網路存取。
-* 您有一個應用程式必須可供多區域叢集裡的公用網際網路存取。因為您必須啟用 [VLAN Spanning](cs_subnets.html#subnet-routing) 來建立多區域叢集，叢集才可以與連接至相同 IBM Cloud 帳戶中之任何專用 VLAN 的其他系統進行通訊。若要在專用網路上隔離多區域叢集，您可以使用 [Calico 網路原則](cs_network_policy.html#isolate_workers)。
-
-**我要管理叢集的公用和專用存取權時有哪些選項？**
-</br>下列各節說明跨越 {{site.data.keyword.containerlong_notm}} 的功能，您可以使用這些功能來設定連接至公用及專用 VLAN 之叢集的網路功能。
-
-### 透過網路服務來公開您的應用程式
-{: #both_vlans_services}
-
-工作者節點的公用網路介面受到[預先定義的 Calico 網路原則設定](cs_network_policy.html#default_policy)所保護，這些設定是在建立叢集期間配置於每個工作者節點上。依預設，所有工作者節點都允許所有出埠網路資料流量。除了少數埠之外，入埠網路資料流量會遭到封鎖。會開啟這些埠讓 IBM 可以監視網路資料流量，並自動安裝 Kubernetes 主節點的安全更新項目。
-
-如果您要向公用或專用網路公開您的應用程式，您可以建立公用或專用 NodePort、LoadBalancer 或 Ingress 服務。如需每一個服務的相關資訊，請參閱[選擇 NodePort、LoadBalancer 或 Ingress 服務](cs_network_planning.html#external)。
-
-### 選用項目：將網路工作負載隔離至邊緣工作者節點
-{: #both_vlans_edge}
-
-邊緣工作者節點可以藉由容許較少的工作者節點可在外部進行存取，以及隔離網路工作負載，來增進叢集的安全。若要確定只將 Ingress 及負載平衡器 Pod 部署至指定的工作者節點，請[將工作者節點標示為邊緣節點](cs_edge.html#edge_nodes)。若也要防止在邊緣節點上執行其他工作負載，請[污染邊緣節點](cs_edge.html#edge_workloads)。
-
-
-### 選用項目：使用 strongSwan VP，連接至內部部署網路或 IBM Cloud Private
-{: #both_vlans_vpn}
-
-若要將工作者節點及應用程式安全地連接至內部部署網路，您可以設定 [strongSwan IPSec VPN 服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.strongswan.org/about.html)。在根據業界標準網際網路通訊協定安全 (IPSec) 通訊協定套組的網際網路上，strongsWan IPSec VPN 服務提供安全的端對端通訊通道。
-* 若要設定叢集與內部部署網路之間的安全連線，請直接在叢集的 Pod 中[配置及部署 strongSwan IPSec VPN 服務](cs_vpn.html#vpn-setup)。
-* 若要設定叢集與 IBM Cloud Private 實例之間的安全連線，請參閱[使用 strongSwan VPN 來連接公用和專用雲端](cs_hybrid.html#hybrid_vpn)。
-
+4. 建立叢集之後，您可以配置下列網路選項：
+  * 設定 [strongSwan VPN 連線服務](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)，以容許在叢集與內部部署網路或 {{site.data.keyword.icpfull_notm}} 之間進行通訊。
+  * 建立 [Kubernetes Discovery Service](/docs/containers?topic=containers-cs_network_planning#in-cluster)，以容許在 Pod 之間進行叢集內通訊。
+  * 建立[公用](/docs/containers?topic=containers-cs_network_planning#public_access) Ingress、負載平衡器或節點埠服務，以將應用程式公開到公用網路。
+  * 建立[專用](/docs/containers?topic=containers-cs_network_planning#private_both_vlans) Ingress、負載平衡器或節點埠服務，以將應用程式公開到專用網路，並建立 Calico 網路原則來保護叢集不受公用存取。
+  * 將網路工作負載隔離至[邊緣工作者節點](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)。
+  * [在專用網路上隔離叢集](/docs/containers?topic=containers-cs_network_planning#isolate)。
 
 <br />
 
 
-## 規劃自訂的預設叢集網路功能
-{: #both_vlans_private}
+## 設定具有僅限專用 VLAN 的叢集網路
+{: #setup_private_vlan}
 
-依預設，{{site.data.keyword.containerlong_notm}} 設定叢集能夠存取公用 VLAN 和專用 VLAN。不過，您可以使用網路原則來封鎖公用存取，以自訂預設網路功能設定。
-{:shortdesc}
+如果您具有特定安全需求，或需要建立自訂網路原則及遞送規則來提供專用網路安全，請設定叢集能夠存取[僅限專用 VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options)。下圖顯示您可以使用此設定為叢集配置的網路選項。
+{: shortdesc}
 
+此網路設定包含建立叢集期間的下列必要網路配置，以及建立叢集之後的選用網路配置。
 
+1. 如果您在受防火牆保護的環境中建立叢集，請針對您計劃使用的 {{site.data.keyword.Bluemix_notm}} 服務，[容許公用和專用 IP 的出埠網路資料流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
-**透過此設定我的叢集可以獲得什麼？**
-* 每一個工作者節點的公用 IP 位址，其為工作者節點提供公用網路介面
-* 每一個工作者節點的專用 IP 位址，其為工作者節點提供專用網路介面
-* 所有工作者節點與主節點之間的自動安全 OpenVPN 連線
+2. 建立已連接至[僅限專用 VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) 的叢集。如果您建立多區域叢集，則可以在每個區域中選擇專用 VLAN。
 
-**為何我可能使用此設定？**
+3. 選擇 Kubernetes 主節點與工作者節點的通訊方式。
+  * 如果已在 {{site.data.keyword.Bluemix_notm}} 帳戶中啟用 VRF，則會[啟用專用服務端點](#set-up-private-se)。
+  * 如果您無法或不要啟用 VRF，則 Kubernetes 主節點和工作者節點無法自動連接至主節點。您必須使用[閘道應用裝置](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)來配置叢集。
 
-* 您在單一區域叢集裡具有一個應用程式。您只想要將應用程式公開給該叢集內或連接至相同專用 VLAN 的其他叢集裡的 Pod。
-* 您在多區域叢集裡具有一個應用程式。您只想要將應用程式公開給該叢集內或連接至與您叢集相同的專用 VLAN 的其他叢集裡的 Pod。不過，因為必須對多區域叢集啟用 [VLAN Spanning](cs_subnets.html#subnet-routing)，所以連接至相同 IBM Cloud 帳戶中任何專用 VLAN 的其他系統都可以存取叢集。您想要將多區域叢集與其他系統隔離。
-
-**我要管理叢集的公用和專用存取權時有哪些選項？**</br>下列各節說明跨越 {{site.data.keyword.containerlong_notm}} 的功能，您可以使用這些功能來設定連接至公用及專用 VLAN 之叢集的僅限專用網路功能及鎖定公用網路功能。
-
-### 使用專用網路服務公開您的應用程式，並使用 Calico 網路原則保護您的叢集免於遭到公用存取
-{: #both_vlans_private_services}
-
-工作者節點的公用網路介面受到[預先定義的 Calico 網路原則設定](cs_network_policy.html#default_policy)所保護，這些設定是在建立叢集期間配置於每個工作者節點上。依預設，所有工作者節點都允許所有出埠網路資料流量。除了少數埠之外，入埠網路資料流量會遭到封鎖。會開啟這些埠讓 IBM 可以監視網路資料流量，並自動安裝 Kubernetes 主節點的安全更新項目。
-
-如果您只想在專用網路上公開應用程式，您可以建立專用 NodePort、LoadBalancer 或 Ingress 服務。如需規劃專用外部網路功能的相關資訊，請參閱[為公用及專用 VLAN 設定規劃專用外部網路功能](cs_network_planning.html#private_both_vlans)。
-
-不過，預設 Calico 網路原則也容許從網際網路到這些服務的入埠公用網路資料流量。您可以建立 Calico 原則，改為封鎖服務的所有公用資料流量。例如，NodePort 服務會在工作者節點的專用及公用 IP 位址上開啟工作者節點上的埠。具有可攜式專用 IP 位址的負載平衡器服務會在每個工作者節點上開啟一個公用 NodePort。您必須建立 [Calico DNAT 前網路原則](cs_network_policy.html#block_ingress)，以封鎖公用 NodePort。
-
-舉例來說，假設您已建立專用負載平衡器服務。您也建立了 Calico DNAT 前原則來封鎖公用資料流量，使其無法到達負載平衡器所開啟的公用 NodePort。可以透過下列方式存取此專用負載平衡器：
-* [相同叢集裡的任何 Pod](#in-cluster)
-* 已連接至相同專用 VLAN 的任何叢集裡的任何 Pod
-* 如果您[已啟用 VLAN Spanning](cs_subnets.html#subnet-routing)，則為任何已連接至位於相同 IBM Cloud 帳戶中之任何專用 VLAN 的系統
-* 如果您不屬於 IBM Cloud 帳戶，而仍然在公司防火牆背後，則為透過 VPN 連線連至負載平衡器 IP 所在的子網路的任何系統
-* 如果您屬於不同的 IBM Cloud 帳戶，則為透過 VPN 連線連至負載平衡器 IP 所在的子網路的任何系統
-
-### 在專用網路上隔離叢集
-{: #isolate}
-
-如果您有多區域叢集、單一區域叢集的多個 VLAN，或相同 VLAN 上的多個子網路，則必須[啟用 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。不過，當啟用 VLAN Spanning 時，任何已連接至相同 IBM Cloud 帳戶中的任何專用 VLAN 的系統都可以存取您的工作者節點。您可以使用 [Calico 網路原則](cs_network_policy.html#isolate_workers)，將多區域叢集與專用網路上的其他系統隔離。這些原則也容許您在專用防火牆中開啟的 IP 範圍和埠進行 ingress 和 egress。
-
-### 選用項目：將網路工作負載隔離至邊緣工作者節點
-{: #both_vlans_private_edge}
-
-邊緣工作者節點可以藉由容許較少的工作者節點可在外部進行存取，以及隔離網路工作負載，來增進叢集的安全。若要確定只將 Ingress 及負載平衡器 Pod 部署至指定的工作者節點，請[將工作者節點標示為邊緣節點](cs_edge.html#edge_nodes)。若也要防止在邊緣節點上執行其他工作負載，請[污染邊緣節點](cs_edge.html#edge_workloads)。
-
-
-然後，使用 [Calico DNAT 前網路原則](cs_network_policy.html#block_ingress)，封鎖對執行邊緣工作者節點的叢集上的公用 NodePort 的資料流量。封鎖節點埠可確保邊緣工作者節點是處理送入資料流量的唯一工作者節點。
-
-### 選用項目：使用 strongSwan VP，連接至內部部署網路或 IBM Cloud Private
-{: #both_vlans_private_vpn}
-
-若要將工作者節點及應用程式安全地連接至內部部署網路，您可以設定 [strongSwan IPSec VPN 服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.strongswan.org/about.html)。在根據業界標準網際網路通訊協定安全 (IPSec) 通訊協定套組的網際網路上，strongsWan IPSec VPN 服務提供安全的端對端通訊通道。
-* 若要設定叢集與內部部署網路之間的安全連線，請直接在叢集的 Pod 中[配置及部署 strongSwan IPSec VPN 服務](cs_vpn.html#vpn-setup)。
-* 若要設定叢集與 IBM Cloud Private 實例之間的安全連線，請參閱[使用 strongSwan VPN 來連接公用和專用雲端](cs_hybrid.html#hybrid_vpn)。
-
+4. 建立叢集之後，您可以配置下列網路選項：
+  * [設定 VPN 閘道](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)，以容許在叢集與內部部署網路或 {{site.data.keyword.icpfull_notm}} 之間進行通訊。如果您先前已設定 VRA 或 FSA 以容許主節點與工作者節點之間進行通訊，則可以在 VRA 或 FSA 上配置 IPSec VPN 端點。
+  * 建立 [Kubernetes Discovery Service](/docs/containers?topic=containers-cs_network_planning#in-cluster)，以容許在 Pod 之間進行叢集內通訊。
+  * 建立[專用](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) Ingress、負載平衡器或節點埠服務，以在專用網路上公開應用程式。
+  * 將網路工作負載隔離至[邊緣工作者節點](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)。
+  * [在專用網路上隔離叢集](/docs/containers?topic=containers-cs_network_planning#isolate)。
 
 <br />
 
 
-## 規劃僅限專用叢集網路功能
-{: #private_vlan}
+## 變更工作者節點 VLAN 連線
+{: #change-vlans}
 
-透過在 CLI 中包含 `--private-only` 旗標，您可以選擇[建立僅限專用 VLAN 叢集](cs_clusters.html#clusters_cli)。當您的工作者節點連接至僅限專用 VLAN 時，工作者節點無法自動連接至主節點。您必須使用閘道應用裝置將工作者節點連接至主節點。您也可以使用閘道應用裝置作為防火牆，保護叢集免於遭受有害的存取。
-{:shortdesc}
+建立叢集時，您可以選擇要將工作者節點連接至專用和公用 VLAN，還是要連接至僅限專用 VLAN。工作者節點是儲存網路 meta 資料的工作者節點儲存區一部分，而網路 meta 資料包括用來佈建儲存區中未來工作者節點的 VLAN。建議您稍後變更叢集的 VLAN 連線功能設定，如下所示。
+{: shortdesc}
+
+* 區域中的工作者節點儲存區 VLAN 已耗盡容量，而且您需要針對要使用的叢集工作者節點佈建新的 VLAN。
+* 您叢集的工作者節點同時位於公用和專用 VLAN，但您要變更為[僅限專用叢集](#setup_private_vlan)。
+* 您具有僅限專用叢集，但想要一些工作者節點（例如公用 VLAN 上[邊緣節點](/docs/containers?topic=containers-edge#edge)的工作者節點儲存區），以在網際網路上公開應用程式。
+
+嘗試改為變更服務端點以進行主節點與工作者節點的通訊嗎？請參閱[公用](#set-up-public-se)和[專用](#set-up-private-se)服務端點的設定主題。
+{: tip}
+
+開始之前：
+* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* 如果工作者節點是獨立式（不屬於工作者節點儲存區的一部分），請[將它們更新為工作者節點儲存區](/docs/containers?topic=containers-update#standalone_to_workerpool)。
+
+若要變更工作者節點儲存區用來佈建工作者節點的 VLAN，請執行下列動作：
+
+1. 列出叢集中工作者節點儲存區的名稱。
+  ```
+   ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+   ```
+  {: pre}
+
+2. 判定其中一個工作者節點儲存區的區域。在輸出中，尋找**區域**欄位。
+  ```
+  ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+  ```
+  {: pre}
+
+3. 針對您在前一個步驟中找到的每個區域，取得彼此相容的可用公用和專用 VLAN。
+
+  1. 檢查輸出中**類型**下所列出的可用公用和專用 VLAN。
+    ```
+    ibmcloud ks vlans --zone <zone>
+    ```
+    {: pre}
+
+  2. 確認區域中的公用和專用 VLAN 是相容的。為了能夠相容，**路由器**必須具有相同的 Pod ID。在此範例輸出中，**路由器** Pod ID 相符：`01a` 和 `01a`。如果有一個 Pod ID 是 `01a`，而另一個是 `02a`，則您無法對工作者節點儲存區設定這些公用及專用 VLAN ID。
+    ```
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    229xxxx          1234     private   bcr01a.dal12   true
+    229xxxx          5678     public    fcr01a.dal12   true
+    ```
+    {: screen}
+
+  3. 如果您需要訂購區域的新公用或專用 VLAN，則可以在 [{{site.data.keyword.Bluemix_notm}} 主控台](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)中訂購，或使用下列指令。請記住，VLAN 必須與前一個步驟中的相符**路由器** Pod ID 相容。如果您建立一對新的公用和專用 VLAN，則它們必須彼此相容。
+    ```
+    ibmcloud sl vlan create -t [public|private] -d <zone> -r <compatible_router>
+    ```
+    {: pre}
+
+  4. 記下相容 VLAN 的 ID。
+
+4. 針對每個區域，使用新的 VLAN 網路 meta 資料來設定工作者節點儲存區。您可以建立新的工作者節點儲存區，或修改現有的工作者節點儲存區。
+
+  * **建立新的工作者節點儲存區**：請參閱[建立新工作者節點儲存區來新增工作者節點](/docs/containers?topic=containers-clusters#add_pool).
+
+  * **修改現有的工作者節點儲存區**：針對每個區域，設定工作者節點儲存區的網路 meta 資料以使用 VLAN。已在儲存區中建立的工作者節點會繼續使用前一個 VLAN，但儲存區中的新工作者節點會使用您設定的新 VLAN meta 資料。
+
+    * 同時新增公用和專用 VLAN 的範例，例如，如果您從僅限專用變更為專用及公用：
+      ```
+      ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
+      ```
+      {: pre}
+
+    * 僅新增專用 VLAN 的範例，例如，如果您在具有[已啟用 VRF 且使用服務端點的帳戶](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)時從公用和專用 VLAN 變更為僅限專用：
+      ```
+      ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
+      ```
+      {: pre}
+
+5. 重新調整工作者節點儲存區大小，以將工作者節點新增至該儲存區。
+  ```
+    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <pool_name>  --size-per-zone <number_of_workers_per_zone>
+    ```
+  {: pre}
+
+  如果您要移除使用前一個網路 meta 資料的工作者節點，請將每個區域的工作者節點數目變更為每個區域的先前工作者節點數量的兩倍。稍後，您可以在這些步驟中隔離、排除及移除先前的工作者節點。
+  {: tip}
+
+6. 驗證使用輸出中的適當**公用 IP** 和**專用 IP** 來建立新的工作者節點。例如，如果您將工作者節點儲存區從公用和專用 VLAN 變更為僅限專用，則新的工作者節點只有專用 IP。如果您將工作者節點儲存區從僅限專用變更為公用和專用 VLAN，則新的工作者節點同時具有公用和專用 IP。
+  ```
+  ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+  ```
+  {: pre}
+
+7. 選用項目：從工作者節點儲存區中移除具有先前網路 meta 資料的工作者節點。
+  1. 在前一個步驟的輸出中，記下您要從工作者節點儲存區中移除之工作者節點的 **ID** 和**專用 IP**。
+  2. 在一個稱為隔離的處理程序中，將工作者節點標示為無法排程。當您隔離工作者節點時，會使它無法用於未來 Pod 排程。
+    ```
+    kubectl cordon <worker_private_ip>
+    ```
+    {: pre}
+  3. 驗證已停用工作者節點的 Pod 排程。
+    ```
+    kubectl get nodes
+    ```
+    {: pre}
+     如果狀態顯示 **`SchedulingDisabled`**，表示工作者節點已停用 Pod 排程。
+  4. 強制從工作者節點移除 Pod，並將其重新排程至叢集裡的其餘工作者節點。
+    ```
+    kubectl drain <worker_private_ip>
+    ```
+    {: pre}
+      此處理程序可能需要幾分鐘的時間。
+  5. 移除工作者節點。使用您先前擷取的工作者節點 ID。
+   ```
+   ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
+   ```
+    {: pre}
+  6. 驗證已移除工作者節點。
+    ```
+    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ```
+    {: pre}
+
+8. 選用項目：您可以針對叢集中的每個工作者節點儲存區重複步驟 2 - 7。完成這些步驟之後，就會使用新的 VLAN 來設定叢集中的所有工作者節點。
+
+9. 叢集中的預設 ALB 仍然會連結至舊的 VLAN，因為其 IP 位址來自該 VLAN 上的子網路。因為無法跨 VLAN 移動 ALB，所以您可以改為[在新的 VLAN 上建立 ALB，並在舊的 VLAN 上停用 ALB](/docs/containers?topic=containers-ingress#migrate-alb-vlan)。
+
+<br />
 
 
+## 設定專用服務端點
+{: #set-up-private-se}
 
-**透過此設定我的叢集可以獲得什麼？**
-* 每一個工作者節點的專用 IP 位址，其為工作者節點提供專用網路介面
+在執行 Kubernetes 1.11 版或更新版本的叢集中，啟用或停用叢集的專用服務端點。
+{: shortdesc}
 
-**透過此設定我的叢集無法獲得什麼？**
-* 每一個工作者節點的公用 IP 位址，其為工作者節點提供公用網路介面。叢集永不提供公用。
-* 所有工作者節點與主節點之間的自動連線。您必須透過[配置閘道應用裝置](#private_vlan_gateway)來提供此連線。
+專用服務端點讓您的 Kubernetes 主節點可供專用存取。工作者節點和授權叢集使用者可以透過專用網路與 Kubernetes 主節點通訊。若要判斷是否可以啟用專用服務端點，請參閱[規劃主節點與工作者節點的通訊](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)。請注意，專用服務端點在啟用之後，就無法予以停用。
 
-**為何我可能使用此設定？**
-</br>您具有特定的安全需求或需要建立自訂網路原則及遞送規則，以提供專用網路安全。請注意，使用閘道應用裝置會產生個別費用。如需詳細資料，請參閱[文件](/docs/infrastructure/fortigate-10g/explore-firewalls.html)。
+**要在建立叢集期間啟用的步驟**</br>
+1. 在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中啟用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)。
+2. [啟用 {{site.data.keyword.Bluemix_notm}} 帳戶，以使用服務端點](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+3. 如果您在受防火牆保護的環境中建立叢集，請針對基礎架構資源以及您計劃使用的 {{site.data.keyword.Bluemix_notm}} 服務，[容許公用和專用 IP 的出埠網路資料流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
+4. 建立叢集：
+  * [使用 CLI 建立叢集](/docs/containers?topic=containers-clusters#clusters_cli)，並且使用 `--private-service-endpoint` 旗標。如果您也要啟用公用服務端點，請同時使用 `--public-service-endpoint` 旗標。
+  * [使用使用者介面建立叢集](/docs/containers?topic=containers-clusters#clusters_ui_standard)，並且選取**僅限專用端點**。如果您也要啟用公用服務端點，請選取**公用和專用端點**。
+5. 如果您只針對受防火牆保護的環境中的叢集啟用專用服務端點，請執行下列動作：
+  1. 驗證您位於 {{site.data.keyword.Bluemix_notm}} 專用網路，或透過 VPN 連線連接至專用網路。
+  2. [容許授權叢集使用者執行 `kubectl` 指令](/docs/containers?topic=containers-firewall#firewall_kubectl)，以透過專用服務端點來存取主節點。叢集使用者必須位於 {{site.data.keyword.Bluemix_notm}} 專用網路，或透過 VPN 連線連接至專用網路，才能執行 `kubectl` 指令。
+  3. 如果網路存取受到公司防火牆保護，則必須[在防火牆中容許存取 `ibmcloud` API 和 `ibmcloud ks` API 的公用端點](/docs/containers?topic=containers-firewall#firewall_bx)。雖然主節點的所有通訊都會經過專用網路，但 `ibmcloud` 和 `ibmcloud ks` 指令必須經過公用 API 端點。
 
-**我要管理叢集的公用和專用存取權時有哪些選項？**
-</br>下列各節說明跨越 {{site.data.keyword.containerlong_notm}} 的功能，您可以使用這些功能來設定連接至僅限專用 VLAN 之叢集的網路功能。
+  </br>
 
-### 配置閘道應用裝置
-{: #private_vlan_gateway}
+**要在叢集建立之後啟用的步驟**</br>
+1. 在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中啟用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)。
+2. [啟用 {{site.data.keyword.Bluemix_notm}} 帳戶，以使用服務端點](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+3. 啟用專用服務端點。
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+4. 重新整理 Kubernetes 主節點 API 伺服器，以使用專用服務端點。您可以遵循 CLI 中的提示，或手動執行下列指令。
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
 
-如果工作者節點是設定為僅限專用 VLAN，則您必須針對工作者節點與主節點之間的網路連線功能配置替代方案。您可以使用自訂網路原則來設定防火牆，以提供標準叢集的專用網路安全，以及偵測及重新修補網路侵入。例如，您可能選擇設定 [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) 或 [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) 作為防火牆，並且封鎖不想要的資料流量。當您設定防火牆時，也必須針對每一個地區[開啟必要埠及 IP 位址](cs_firewall.html#firewall_outbound)，讓主節點與工作者節點可以進行通訊。
+5. [建立 configmap](/docs/containers?topic=containers-update#worker-up-configmap)，以控制叢集中可能在某個時間無法使用的工作者節點數目上限。更新工作者節點時，ConfigMap 會協助避免應用程式的關閉，因為會依序將應用程式重新排定至可用的工作者節點。
+6. 更新叢集中的所有工作者節點，以反映專用服務端點配置。
 
-如果您具有現有的路由器應用裝置，然後新增叢集，則系統不會在路由器應用裝置上配置針對該叢集所訂購的新可攜式子網路。為了能夠使用網路服務，您必須[啟用 VLAN Spanning](cs_subnets.html#vra-routing)，在相同 VLAN 上的子網路之間啟用遞送。
-{: important}
+  <p class="important">透過發出 update 指令，會重新載入工作者節點，以反映服務端點配置。如果沒有工作者節點更新項目可供使用，則必須[手動重新載入工作者節點](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)。如果您重新載入，則務必隔離、排除及管理訂單，以控制在某個時間無法使用的工作者節點數目上限。</p>
+  ```
+  ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+  ```
+  {: pre}
 
-### 使用專用網路服務公開應用程式
-{: #private_vlan_services}
+8. 如果叢集位於受防火牆保護的環境，請執行下列動作：
+  * [容許授權叢集使用者執行 `kubectl` 指令，以透過專用服務端點來存取主節點。](/docs/containers?topic=containers-firewall#firewall_kubectl)
+  * 針對基礎架構資源以及您計劃使用的 {{site.data.keyword.Bluemix_notm}} 服務，[容許專用 IP 的出埠網路資料流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
-若要讓應用程式只可從專用網路進行存取，您可以使用專用 NodePort、LoadBalancer 或 Ingress 服務。因為您的工作者節點未連接至公用 VLAN，所以不會將任何公用資料流量遞送至這些服務。您也必須[開啟必要埠及 IP 位址](cs_firewall.html#firewall_inbound)，以允許針對這些服務的入埠資料流量。
+9. 選用項目：若只要使用專用服務端點，請停用公用服務端點。
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+  </br>
 
-如需每一個服務的相關資訊，請參閱[選擇 NodePort、LoadBalancer 或 Ingress 服務](cs_network_planning.html#external)。
+**停用的步驟**</br>
+無法停用專用服務端點。
 
-### 選用項目：使用閘道應用裝置連接至內部部署資料庫
-{: #private_vlan_vpn}
+## 設定公用服務端點
+{: #set-up-public-se}
 
-若要將工作者節點及應用程式安全地連接至內部部署網路，您必須設定 VPN 閘道。您可以使用先前設定的 VRA 或 FSA，同時配置 IPSec VPN 端點。若要配置 VRA，請參閱[使用 VRA 設定 VPN 連線功能](cs_vpn.html#vyatta)。
+啟用或停用叢集的公用服務端點。
+{: shortdesc}
+
+公用服務端點讓您的 Kubernetes 主節點可供公然存取。工作者節點和授權叢集使用者可以透過公用網路與 Kubernetes 主節點安全地通訊。若要判斷是否可以啟用公用服務端點，請參閱[規劃工作者節點與 Kubernetes 主節點之間的通訊](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)。
+
+**要在建立叢集期間啟用的步驟**</br>
+
+1. 如果您在受防火牆保護的環境中建立叢集，請針對您計劃使用的 {{site.data.keyword.Bluemix_notm}} 服務，[容許公用和專用 IP 的出埠網路資料流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
+
+2. 建立叢集：
+  * [使用 CLI 建立叢集](/docs/containers?topic=containers-clusters#clusters_cli)，並且使用 `--public-service-endpoint` 旗標。如果您也要啟用專用服務端點，請同時使用 `--private-service-endpoint` 旗標。
+  * [使用使用者介面建立叢集](/docs/containers?topic=containers-clusters#clusters_ui_standard)，並且選取**僅限公用端點**。如果您也要啟用專用服務端點，請選取**公用和專用端點**。
+
+3. 如果您在受防火牆保護的環境中建立叢集，請[容許授權叢集使用者執行 `kubectl` 指令，以僅透過公用服務端點或透過公用和專用服務端點來存取主節點。](/docs/containers?topic=containers-firewall#firewall_kubectl)
+
+  </br>
+
+**要在叢集建立之後啟用的步驟**</br>
+如果您先前已停用公用端點，則可以重新予以啟用。
+1. 啟用公用服務端點。
+  ```
+  ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+2. 重新整理 Kubernetes 主節點 API 伺服器，以使用公用服務端點。您可以遵循 CLI 中的提示，或手動執行下列指令。
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  </br>
+
+**停用的步驟**</br>
+若要停用公用服務端點，您必須先啟用專用服務端點，讓工作者節點可以與 Kubernetes 主節點進行通訊。
+1. 啟用專用服務端點。
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+2. 遵循 CLI 提示，或手動執行下列指令，以重新整理 Kubernetes 主節點 API 伺服器以使用專用服務端點。
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+3. [建立 configmap](/docs/containers?topic=containers-update#worker-up-configmap)，以控制叢集中可能在某個時間無法使用的工作者節點數目上限。更新工作者節點時，ConfigMap 會協助避免應用程式的關閉，因為會依序將應用程式重新排定至可用的工作者節點。
+
+4. 更新叢集中的所有工作者節點，以反映專用服務端點配置。
+
+  <p class="important">透過發出 update 指令，會重新載入工作者節點，以反映服務端點配置。如果沒有工作者節點更新項目可供使用，則必須[手動重新載入工作者節點](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)。如果您重新載入，則務必隔離、排除及管理訂單，以控制在某個時間無法使用的工作者節點數目上限。</p>
+  ```
+  ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+  ```
+  {: pre}
+5. 停用公用服務端點。
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+## 從公用服務端點切換至專用服務端點
+{: #migrate-to-private-se}
+
+在執行 Kubernetes 1.11 版或更新版本的叢集中，啟用工作者節點透過專用網路以與主節點通訊，而非啟用專用服務端點以透過公用網路與主節點通訊。
+{: shortdesc}
+
+依預設，所有連接至公用和專用 VLAN 的叢集都會使用公用服務端點。工作者節點和授權叢集使用者可以透過公用網路與 Kubernetes 主節點安全地通訊。若要啟用工作者節點透過專用網路來與 Kubernetes 主節點通訊，而非透過公用網路，則可以啟用專用服務端點。之後，您可以選擇性地停用公用服務端點。
+* 如果您啟用專用服務端點，並一併保持公用服務端點的啟用狀態，則工作者節點一律會透過專用網路與主節點進行通訊，但使用者可以透過公用或專用網路與主節點進行通訊。
+* 如果您啟用專用服務端點，但停用公用服務端點，則工作者節點和使用者必須透過專用網路與主節點進行通訊。
+
+請注意，專用服務端點在啟用之後，就無法予以停用。
+
+1. 在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中啟用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)。
+2. [啟用 {{site.data.keyword.Bluemix_notm}} 帳戶，以使用服務端點](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+3. 啟用專用服務端點。
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+4. 遵循 CLI 提示，或手動執行下列指令，以重新整理 Kubernetes 主節點 API 伺服器以使用專用服務端點。
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+5. [建立 configmap](/docs/containers?topic=containers-update#worker-up-configmap)，以控制叢集中可能在某個時間無法使用的工作者節點數目上限。更新工作者節點時，ConfigMap 會協助避免應用程式的關閉，因為會依序將應用程式重新排定至可用的工作者節點。
+
+6.  更新叢集中的所有工作者節點，以反映專用服務端點配置。
+
+    <p class="important">透過發出 update 指令，會重新載入工作者節點，以反映服務端點配置。如果沒有工作者節點更新項目可供使用，則必須[手動重新載入工作者節點](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)。如果您重新載入，則務必隔離、排除及管理訂單，以控制在某個時間無法使用的工作者節點數目上限。</p>
+    ```
+    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+    ```
+    {: pre}
+
+7. 選用項目：停用公用服務端點。
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}

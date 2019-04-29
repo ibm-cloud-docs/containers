@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -34,7 +38,7 @@ Descrizione delle tue opzioni di eliminazione:
 Dipende. Quando elimini un cluster, la PVC e il PV vengono eliminati. Tuttavia, scegli se rimuovere l'istanza di archiviazione associata nell'infrastruttura IBM Cloud (SoftLayer). Se scegli di non rimuoverla, l'istanza di archiviazione permane. Tuttavia, se hai eliminato il tuo cluster in uno stato non integro, l'archiviazione potrebbe permanere anche se hai scelto di rimuoverla. Attieniti alle istruzioni, in particolare il passo per [eliminare la tua istanza di archiviazione](#sl_delete_storage) nell'infrastruttura IBM Cloud (SoftLayer).
 
 **Posso eliminare la PVC per rimuovere tutta la mia archiviazione?**</br>
-In alcuni casi. Se [crei l'archiviazione persistente in modo dinamico](cs_storage_basics.html#dynamic_provisioning) e selezioni una classe di archiviazione senza `retain` nel suo nome, quando elimini la PVC, vengono eliminati anche il PV e l'istanza di archiviazione dell'infrastruttura IBM Cloud (SoftLayer).
+In alcuni casi. Se [crei l'archiviazione persistente in modo dinamico](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) e selezioni una classe di archiviazione senza `retain` nel suo nome, quando elimini la PVC, vengono eliminati anche il PV e l'istanza di archiviazione dell'infrastruttura IBM Cloud (SoftLayer).
 
 In tutti gli altri casi, attieniti alle istruzioni per controllare lo stato della PVC, del PV e del dispositivo di archiviazione fisico ed eliminali separatamente, se necessario.
 
@@ -42,14 +46,14 @@ In tutti gli altri casi, attieniti alle istruzioni per controllare lo stato dell
 Dipende da cosa elimini e dal tipo di fatturazione. Se elimini la PVC e il PV ma non l'istanza nel tuo account dell'infrastruttura IBM Cloud (SoftLayer), tale istanza permane e incorri in addebiti per essa. Devi eliminare tutto, per evitare addebiti. Inoltre, quando specifichi il tipo di fatturazione (`billingType`) nella PVC, puoi scegliere `hourly` o `monthly`. Se hai scelto `monthly`, la tua istanza viene fatturata mensilmente. Quando elimini l'istanza, ti viene addebitato il resto del mese.
 
 
-<p class="important">Quando ripulisci l'archiviazione persistente, elimini tutti i dati in essa archiviati. Se hai bisogno di una copia dei dati, crea un backup per l'[archiviazione file](cs_storage_file.html#backup_restore) o l'[archiviazione blocchi](cs_storage_block.html#backup_restore).</br>
-</br>Se utilizzi un account {{site.data.keyword.Bluemix_dedicated}}, devi richiedere l'eliminazione del volume [aprendo un caso di supporto](/docs/get-support/howtogetsupport.html#getting-customer-support).</p>
+<p class="important">Quando ripulisci l'archiviazione persistente, elimini tutti i dati in essa archiviati. Se hai bisogno di una copia dei dati, crea un backup per l'[archiviazione file](/docs/containers?topic=containers-file_storage#file_backup_restore) o l'[archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_backup_restore).</br>
+</br>Se utilizzi un account {{site.data.keyword.Bluemix_dedicated}}, devi richiedere l'eliminazione del volume [aprendo un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Per ripulire i dati persistenti:
 
-1.  Elenca le PVC nel tuo cluster e prendi nota del **NAME** della PVC, della **STORAGECLASS** e del nome del PV associato alla PVC e visualizzato come **VOLUME**.
+1.  Elenca le PVC nel tuo cluster e prendi nota del **`NAME`** della PVC, della **`STORAGECLASS`** e del nome del PV associato alla PVC e visualizzato come **`VOLUME`**.
     ```
     kubectl get pvc
     ```
@@ -64,7 +68,7 @@ Per ripulire i dati persistenti:
     ```
     {: screen}
 
-2. Esamina **ReclaimPolicy** e **billingType** per la classe di archiviazione.
+2. Esamina **`ReclaimPolicy`** e **`billingType`** per la classe di archiviazione.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
@@ -108,7 +112,7 @@ Per ripulire i dati persistenti:
    ```
    {: pre}
 
-5. Esamina lo stato del tuo PV. Utilizza il nome del PV che hai richiamato in precedenza come **VOLUME**.
+5. Esamina lo stato del tuo PV. Utilizza il nome del PV che hai richiamato in precedenza come **`VOLUME`**.
    ```
    kubectl get pv <pv_name>
    ```
@@ -128,7 +132,7 @@ Per ripulire i dati persistenti:
    ```
    {: pre}
 
-8. {: #sl_delete_storage}Elenca l'istanza di archiviazione fisica a cui puntava il tuo PV e prendi nota del suo **id**.
+8. {: #sl_delete_storage}Elenca l'istanza di archiviazione fisica a cui puntava il tuo PV e prendi nota del suo **`id`**.
 
    **Archiviazione file:**
    ```
@@ -147,18 +151,19 @@ Per ripulire i dati persistenti:
    Output di esempio:
    ```
    id         notes
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z
+   12345678   {"plugin":"ibm-file-plugin-5b55b7b77b-55bb7","region":"us-south","cluster":"aa1a11a1a11b2b2bb22b22222c3c3333","type":"Endurance","ns":"default","pvc":"mypvc","pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7","storageclass":"ibmc-file-gold"}
    ```
    {: screen}
 
    Descrizione delle informazioni del campo **Note**.
-   *  **`:`**: un carattere due punti (`:`) separa le informazioni.
-   *  **` ibmcloud-block-storage-plugin-7566ccb8d-44nff`**: il plug-in di archiviazione utilizzato dal cluster.
-   *  **`us-south`**: la regione in cui si trova il tuo cluster.
-   *  **`aa1a11a1a11b2b2bb22b22222c3c3333`**: l'ID cluster associato all'istanza di archiviazione.
-   *  **`Performance`**: il tipo di archiviazione file o blocchi, `Endurance` o `Performance`.
-   *  **`mypvc`**: il nome della PVC associata all'istanza di archiviazione.
-   *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`**: il PV associato all'istanza di archiviazione.
+   *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`**: il plugin di archiviazione utilizzato dal cluster.
+   *  **`"region":"us-south"`**: la regione in cui si trova il tuo cluster.
+   *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`**: l'ID cluster associato all'istanza di archiviazione.
+   *  **`"type":"Endurance"`**: il tipo di archiviazione file o blocchi, `Endurance` o `Performance`.
+   *  **`"ns":"default"`**: lo spazio dei nomi a cui viene distribuita l'istanza di archiviazione.
+   *  **`"pvc":"mypvc"`**: il nome della PVC associata all'istanza di archiviazione.
+   *  **`"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`**: il PV associato all'istanza di archiviazione
+   *  **`"storageclass":"ibmc-file-gold"`**: il tipo di classe di archiviazione: bronze, silver, gold o personalizzata.
 
 9. Rimuovi l'istanza di archiviazione fisica.
 

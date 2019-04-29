@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # チュートリアル: Kubernetes クラスターにアプリをデプロイする方法
 {: #cs_apps_tutorial}
 
@@ -29,7 +34,7 @@ lastupdated: "2018-12-05"
 
 PR 会社のアプリ開発者が、直前のチュートリアルで作成した Kubernetes クラスターを使用して、Hello World バージョンのアプリをデプロイします。 このチュートリアルの各レッスンを基に、アプリ開発者は同じアプリを段階的に複雑にした各バージョンをデプロイします。 次の図は、各デプロイメントのコンポーネントをレッスン別に示しています。
 
-![レッスンの構成要素](images/cs_app_tutorial_mz-roadmap.png)
+<img src="images/cs_app_tutorial_mz-roadmap.png" width="700" alt="レッスンのコンポーネント" style="width:700px; border-style: none"/>
 
 図に示すように、Kubernetes では、クラスター内でアプリを稼働状態にするためにいくつかの異なるタイプのリソースを使用します。 Kubernetes の場合は、デプロイメントとサービスが相互に連係します。 デプロイメントには、アプリの定義が含まれます。 例えば、コンテナーに使用するイメージや、アプリのために公開する必要があるポートです。 デプロイメントを作成すると、デプロイメントで定義したコンテナーごとに Kubernetes のポッドが作成されます。 アプリの回復力を高めるために、デプロイメントの中で同じアプリのインスタンスを複数定義することもできます。そうすれば、Kubernetes によってレプリカ・セットが自動的に作成されます。 そのレプリカ・セットによってポッドがモニターされ、常に指定された数のポッドが稼働状態になります。 1 つのポッドが応答しなくなったら、そのポッドが自動的に再作成されます。
 
@@ -40,6 +45,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 {{site.data.keyword.Bluemix_notm}} サービスをアプリに統合する作業は 1 つのレッスンでしか取り上げていませんが、そのサービスは、アプリがどれほど単純でもどれほど複雑でも利用できます。
 
 ## 達成目標
+{: #apps_objectives}
 
 * Kubernetes の基本的な用語を理解します
 * {{site.data.keyword.registryshort_notm}} のレジストリー名前空間にイメージをプッシュします
@@ -49,17 +55,20 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 * {{site.data.keyword.Bluemix_notm}} サービスの機能を使用するアプリをデプロイします
 
 ## 所要時間
+{: #apps_time}
 
 40 分
 
 ## 対象者
+{: #apps_audience}
 
 初めて Kubernetes クラスターにアプリをデプロイするソフトウェア開発者およびネットワーク管理者。
 
 ## 前提条件
+{: #apps_prereqs}
 
-* [チュートリアル: Kubernetes クラスターの作成](cs_tutorials.html#cs_cluster_tutorial)
-* [container-registry プラグイン](/docs/services/Registry/index.html#registry_cli_install)をインストールします。
+* [チュートリアル: Kubernetes クラスターの作成](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
+* [container-registry プラグイン](/docs/services/Registry?topic=registry-index#registry_cli_install)をインストールします。
 
 
 ## レッスン 1: アプリの 1 つのインスタンスを Kubernetes クラスターにデプロイする
@@ -91,7 +100,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
     ```
     {: pre}
 
-3. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+3. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 5.  {{site.data.keyword.registryshort_notm}} CLI にログインします。
 
@@ -106,9 +115,9 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
         ```
         {: pre}
 
-6.  `Lab 1` ディレクトリーのアプリ・ファイルを組み込んだ Docker イメージをビルドし、以前のチュートリアルで作成した {{site.data.keyword.registryshort_notm}} 名前空間にイメージをプッシュします。 後日アプリを変更しなければならなくなった場合は、この手順を繰り返して別バージョンのイメージを作成します。 **注**: コンテナー・イメージを使用する際の[個人情報の保護](cs_secure.html#pi)の詳細を確認してください。
+6.  `Lab 1` ディレクトリーのアプリ・ファイルを組み込んだ Docker イメージをビルドし、以前のチュートリアルで作成した {{site.data.keyword.registryshort_notm}} 名前空間にイメージをプッシュします。 後日アプリを変更しなければならなくなった場合は、この手順を繰り返して別バージョンのイメージを作成します。 **注**: コンテナー・イメージを使用する際の[個人情報の保護](/docs/containers?topic=containers-security#pi)の詳細を確認してください。
 
-    イメージ名には小文字の英数字または下線 (`_`) のみを使用してください。 コマンドの末尾にピリオド (`.`) をつけることを忘れないようにしてください。 このピリオドは、イメージをビルドするための Dockerfile とビルド成果物を、現行ディレクトリー内で探すよう Docker に指示するものです。
+    イメージ名には小文字の英数字または下線 (`_`) のみを使用してください。 コマンドの末尾にピリオド (`.`) をつけることを忘れないようにしてください。 このピリオドは、イメージをビルドするための Dockerfile とビルド成果物を、現行ディレクトリー内で探すよう Docker に指示するものです。 現在自分が属する地域の地域接頭部を取得するには、`ibmcloud api` を実行します。例えば、ダラス・ロケーションの米国南部地域の接頭部は、`ng` です。
 
     ```
     ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
@@ -145,7 +154,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
     ```
     {: screen}
 
-    Kubernetes リソースを処理する際の[個人情報の保護](cs_secure.html#pi)の詳細を確認してください。
+    Kubernetes リソースを処理する際の[個人情報の保護](/docs/containers?topic=containers-security#pi)の詳細を確認してください。
 
 8.  デプロイメントを NodePort サービスとして公開することによって、だれでもアプリにアクセスできるようにします。 Cloud Foundry アプリのポートを公開する場合と同じく、ここで公開する NodePort は、そのワーカー・ノードがトラフィックを listen するポートです。
 
@@ -223,18 +232,18 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
     2.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
         出力例:
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        ibmcloud ks workers --cluster pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
         ```
         {: screen}
 
@@ -248,14 +257,14 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
     アプリが公開されていることを確認するには、これを携帯電話のブラウザーに入力してみてください。
     {: tip}
 
-11. [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。
+11. [Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#cli_dashboard)します。
 
-    [{{site.data.keyword.Bluemix_notm}} コンソール](https://console.bluemix.net/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
+    [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
     {: tip}
 
 12. **「ワークロード」**タブで、作成したリソースを表示します。
 
-これで完了です。 最初のバージョンのアプリをデプロイできました。
+お疲れさまでした。最初のバージョンのアプリをデプロイできました。
 
 このレッスンで実行したコマンドの数が多すぎると思うなら、一部の処理を自動化するために構成スクリプトを使用できます。 第 2 バージョンのアプリでは構成スクリプトを使用します。また、アプリのインスタンスを複数デプロイして可用性を高めます。その方法を学ぶために次のレッスンに進みましょう。
 
@@ -355,7 +364,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 6.  デプロイメント作業が完了したので、ブラウザーを開いてアプリを確認できます。 前のレッスンで使用したのと同じワーカー・ノードのパブリック IP アドレスに、構成スクリプトで指定した NodePort を組み合わせて、URL を作成します。 ワーカー・ノードのパブリック IP アドレスを取得するには、以下のようにします。
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  ibmcloud ks workers --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -387,7 +396,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 
     *  **Kubernetes ダッシュボードを使用する場合**:
 
-       1.  [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。
+       1.  [Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#cli_dashboard)します。
        2.  **「ワークロード」**タブで、作成したリソースを表示します。 このタブから、ヘルス・チェックの作動状況を継続的にリフレッシュして確認できます。 **「ポッド (Pods)」**セクションには、ポッド内のコンテナーの再作成時にポッドが再始動した回数が表示されます。 ダッシュボードで以下のエラー・メッセージがキャッチされた場合は、ヘルス・チェックで問題が検出されています。 数分待ってから再度リフレッシュしてみてください。 各ポッドの再始動回数が変わっているはずです。
 
        ```
@@ -397,7 +406,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
        ```
        {: screen}
 
-これで完了です。 2 つ目のバージョンのアプリをデプロイできました。 使用するコマンドの数を減らし、ヘルス・チェックの動作を学び、デプロイメントを編集できました。 Hello World アプリは、PR 会社のテストに合格したといえます。 次の段階として、PR 会社がプレス・リリースの分析作業を開始するのに役立つアプリをデプロイしましょう。
+お疲れさまでした。2 つ目のバージョンのアプリをデプロイできました。 使用するコマンドの数を減らし、ヘルス・チェックの動作を学び、デプロイメントを編集できました。 Hello World アプリは、PR 会社のテストに合格したといえます。 次の段階として、PR 会社がプレス・リリースの分析作業を開始するのに役立つアプリをデプロイしましょう。
 
 作業を進める前に、これまで作成したリソースを削除してもかまいません。 同じ構成スクリプトを使用して、作成した両方のリソースを削除できます。
 
@@ -526,7 +535,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: codeblock}
 
-    2.  watson デプロイメントの volumes セクションで、前のチュートリアルで作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。 Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) の API キーを、ポッドで実行されるコンテナーから使用できるようになります。 このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用して API キーを検索するように構成されています。
+    2.  watson デプロイメントの volumes セクションで、前の [Kubernetes クラスターの作成チュートリアル](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)で作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) の API キーを、ポッドで実行されるコンテナーから使用できるようになります。 このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用して API キーを検索するように構成されています。
 
         ```
         volumes:
@@ -602,7 +611,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 
     入力したテキストに関する JSON 応答がブラウザーに表示されます。
 
-10. [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。
+10. [Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#cli_dashboard)します。
 
 11. **「ワークロード」**タブで、作成したリソースを表示します。
 
@@ -610,6 +619,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 {: #lesson3b}
 
 デプロイメントの稼働中に、デプロイメントを編集してポッド・テンプレートの値を変更することができます。 このレッスンには、使用されるイメージの更新が含まれています。 この PR 会社はデプロイメント内のアプリを変更します。
+{: shortdesc}
 
 イメージの名前を変更します。
 
@@ -649,9 +659,9 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 
     変更をロールアウトすると、Kubernetes によって別のポッドが作成されてテストされます。 テストが正常に完了すると、元のポッドは削除されます。
 
+[クイズに答えて知識を試してみましょう!![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-
-これで完了です。 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} アプリをデプロイできました。 この PR 会社は、このデプロイメントを使用してプレス・リリースの分析作業を開始できるようになりました。
+お疲れさまでした。{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} アプリをデプロイできました。 この PR 会社は、このデプロイメントを使用してプレス・リリースの分析作業を開始できるようになりました。
 
 これまで作成したリソースを削除してもかまいません。 構成スクリプトを使用して、作成したリソースを削除できます。
 
@@ -673,15 +683,15 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
   クラスターを保持する必要がない場合は、クラスターも削除できます。
 
   ```
-  ibmcloud ks cluster-rm <cluster_name_or_ID>
+  ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
 ## 次の作業
-{: #next}
+{: #apps_next}
 
 基本を習得したので、さらに高度な作業に進むことができます。 次のいずれかを試すことを検討してください。
 
 - リポジトリー内の[さらに複雑な Lab ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) を行う
-- {{site.data.keyword.containerlong_notm}} を使用して[アプリの自動スケーリングを行う](cs_app.html#app_scaling)
-- [IBM Developer ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/code/technologies/container-orchestration/) でコンテナー・オーケストレーションのコード・パターンを探索する
+- {{site.data.keyword.containerlong_notm}} を使用して[アプリの自動スケーリングを行う](/docs/containers?topic=containers-app#app_scaling)
+- [IBM Developer ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/technologies/containers/) でコンテナー・オーケストレーションのコード・パターンを探索する

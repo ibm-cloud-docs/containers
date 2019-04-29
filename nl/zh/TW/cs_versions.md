@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-06"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -17,10 +21,6 @@ lastupdated: "2018-12-06"
 {:important: .important}
 {:deprecated: .deprecated}
 {:note: .note}
-{:important: .important}
-{:deprecated: .deprecated}
-{:download: .download}
-
 
 
 # 版本資訊及更新動作
@@ -33,18 +33,22 @@ lastupdated: "2018-12-06"
 {:shortdesc}
 
 **支援的 Kubernetes 版本**:
-- 最新：1.12.3
-- 預設：1.10.11
-- 其他：1.11.5
+*   最新：1.13.4
+*   預設：1.12.6
+*   其他：1.11.8
+
+**已淘汰及不受支援的 Kubernetes 版本**：
+*   已淘汰：1.10
+*   不受支援：1.5、1.7、1.8、1.9
 
 </br>
 
-**已淘汰的版本**：當叢集在已淘汰的 Kubernetes 版本上執行時，在版本變成不受支援之前，您有 30 天的時間可以檢閱並更新至受支援的 Kubernetes 版本。在淘汰期間，您的叢集仍可運作，但可能需要更新為支援的版本，以修正安全漏洞。您無法建立使用已淘汰版本的新叢集。
+**已淘汰的版本**：當叢集在已淘汰的 Kubernetes 版本上執行時，在版本變成不受支援之前，您有最少 30 天的時間可以檢閱並更新至受支援的 Kubernetes 版本。在淘汰期間，您的叢集仍可運作，但可能需要更新為支援的版本，以修正安全漏洞。您無法建立使用已淘汰版本的新叢集。
 
-**不受支援的版本**：如果您在不受支援的 Kubernetes 版本上執行叢集，請檢閱下列更新的潛在影響，然後立即[更新叢集](cs_cluster_update.html#update)，以繼續接收重要的安全更新及支援。
-*  **注意**：如果您等到叢集在支援的版本後有三個以上的次要版本，則必須強制更新，這可能導致非預期的結果或失敗。
-*  不受支援的叢集無法新增或重新載入現有的工作者節點。
-*  將叢集更新為支援的版本之後，您的叢集可以繼續正常作業並繼續接收支援。
+**不受支援的版本**：如果您的叢集執行不受支援的 Kubernetes 版本，請檢閱下列可能的更新影響，然後立即[更新叢集](/docs/containers?topic=containers-update#update)，以繼續接收重要的安全更新項目和支援。不受支援的叢集無法新增或重新載入現有的工作者節點。您可以藉由檢閱**狀態**欄位，來找出您的叢集是否**不受支援**，該欄位位於 `ibmcloud ks clusters` 指令的輸出中，或位於 [{{site.data.keyword.containerlong_notm}} 主控台![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/clusters)。
+
+如果您等到叢集在支援版本後有三個以上的次要版本，您必須強制執行更新，這可能會造成非預期的結果或失敗。從 1.7 或 1.8 版更新至 1.11 版或更新版本時失敗。對於其他版本，例如，若您的叢集執行 Kubernetes 1.9 版，當您將主要伺服器直接更新至 1.12 或更新版本時，在您將工作者節點更新至相同的版本之前，大部分的 Pod 都會因為進入 `MatchNodeSelector`、`CrashLoopBackOff`或 `ContainerCreating` 等狀態而失敗。若要避免此問題，請將叢集更新至現行版本之前少於 3 版次的支援版本，例如，1.9 更新至 1.11，然後再更新至 1.12。<br><br>將叢集更新為支援的版本之後，您的叢集可以繼續正常作業並繼續接收支援。
+{: important}
 
 </br>
 
@@ -58,7 +62,7 @@ kubectl version  --short | grep -i server
 輸出範例：
 
 ```
-Server Version: v1.10.11+IKS
+Server Version: v1.12.6+IKS
 ```
 {: screen}
 
@@ -76,30 +80,220 @@ Server Version: v1.10.11+IKS
 |修補程式|x.x.4_1510|IBM 與您|Kubernetes 修補程式，以及其他 {{site.data.keyword.Bluemix_notm}} Provider 元件更新，例如安全及作業系統修補程式。IBM 會自動更新主節點，但由您將修補程式套用至工作者節點。如需修補程式的相關資訊，請參閱下節。|
 {: caption="Kubernetes 更新的影響" caption-side="top"}
 
-有可用的更新時，會在您檢視工作者節點的相關資訊時，使用如下指令通知您：`ibmcloud ks workers <cluster>` 或 `ibmcloud ks worker-get <cluster> <worker>`。
--  **主要及次要更新**：首先[更新您的主節點](cs_cluster_update.html#master)，然後[更新工作者節點](cs_cluster_update.html#worker_node)。
+有可用的更新時，會在您檢視工作者節點的相關資訊時，使用如下指令通知您：`ibmcloud ks workers --cluster <cluster>` 或 `ibmcloud ks worker-get --cluster <cluster> --worker <worker>`。
+-  **主要及次要更新 (1.x)**：首先，[更新您的主節點](/docs/containers?topic=containers-update#master)，然後[更新工作者節點](/docs/containers?topic=containers-update#worker_node)。工作者節點無法執行大於主節點版本的 Kubernetes 主要或次要版本。
    - 依預設，Kibernetes 主節點無法往前更新三個以上的次要版本。例如，如果現行主節點是 1.9 版，而您要更新至 1.12，則必須先更新至 1.10。您可以強制更新繼續進行，但更新超過兩個次要版本可能會造成非預期的結果或失敗。
-   - 如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集和 [CLI 版本](cs_cli_install.html#kubectl)保持最新。
+   - 如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集和 [CLI 版本](/docs/containers?topic=containers-cs_cli_install#kubectl)保持最新。
 
--  **修補程式更新**：各種修補程式的變更記載於[版本變更日誌](cs_versions_changelog.html)。有可用的更新時，會在您檢視 {{site.data.keyword.Bluemix_notm}} 主控台或 CLI 中主節點及工作者節點的相關資訊時，使用如下指令通知您：`ibmcloud ks clusters`、`cluster-get`、`workers` 或 `worker-get`。
-   - **工作者節點修補程式**：每月檢查以查看是否有可用的更新，並使用 `ibmcloud ks worker-update` [指令](cs_cli_reference.html#cs_worker_update)或 `ibmcloud ks worker-reload` [指令](cs_cli_reference.html#cs_worker_reload)來套用這些安全及作業系統修補程式。請注意，在更新或重新載入期間，您的工作者節點機器會重新安裝映像，而且如果資料不是[儲存在工作者節點之外](cs_storage_planning.html#persistent_storage_overview)即會被刪除。
-   - **主節點修補程式**：主節點修補程式會在數天的期間後自動套用，因此，主節點修補程式版本可能會先顯示為可用，再將它套用至您的主節點。更新自動化也會跳過處於性能不佳狀態或目前正在進行作業的叢集。有時，IBM 可能會停用特定主節點修正套件的自動更新（如變更日誌中所述），例如只有在主節點從某個次要版本更新為另一個次要版本時才需要的修補程式。在其中任何情況下，您可以選擇自行安全地使用 `ibmcloud ks cluster-update` [指令](cs_cli_reference.html#cs_cluster_update)，而不需要等待套用更新自動化。
+-  **修補程式更新 (x.x.4_1510)**：各種修補程式的變更記載於[版本變更日誌](/docs/containers?topic=containers-changelog)。會自動套用主節點修補程式，但您會起始工作者節點的修補程式更新項目。工作者節點也可以執行大於主節點版本的修補程式版本。有可用的更新時，會在您檢視 {{site.data.keyword.Bluemix_notm}} 主控台或 CLI 中主節點及工作者節點的相關資訊時，使用如下指令通知您：`ibmcloud ks clusters`、`cluster-get`、`workers` 或 `worker-get`。
+   - **工作者節點修補程式**：每月檢查以查看是否有可用的更新，並使用 `ibmcloud ks worker-update` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或 `ibmcloud ks worker-reload` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)來套用這些安全及作業系統修補程式。請注意，在更新或重新載入期間，您的工作者節點機器會重新安裝映像，而且如果資料不是[儲存在工作者節點之外](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)即會被刪除。
+   - **主節點修補程式**：主節點修補程式會在數天的期間後自動套用，因此，主節點修補程式版本可能會先顯示為可用，再將它套用至您的主節點。更新自動化也會跳過處於性能不佳狀態或目前正在進行作業的叢集。有時，IBM 可能會停用特定主節點修正套件的自動更新（如變更日誌中所述），例如只有在主節點從某個次要版本更新為另一個次要版本時才需要的修補程式。在其中任何情況下，您可以選擇自行安全地使用 `ibmcloud ks cluster-update` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)，而不需要等待套用更新自動化。
 
 </br>
 
+{: #prep-up}
 此資訊彙總當您將叢集從舊版更新為新版本時，可能會對已部署的應用程式造成影響的更新。
+-  1.13 版[準備動作](#cs_v113)。
 -  1.12 版[準備動作](#cs_v112)。
 -  1.11 版[準備動作](#cs_v111)。
--  1.10 版[準備動作](#cs_v110)。
--  已淘汰或不受支援版本的[保存檔](#k8s_version_archive)。
+-  **已淘汰**：1.10 版[準備動作](#cs_v110)。
+-  不受支援版本的[保存檔](#k8s_version_archive)。
 
 <br/>
 
 如需完整的變更清單，請檢閱下列資訊：
 * [Kubernetes 變更日誌 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)。
-* [IBM 版本變更日誌](cs_versions_changelog.html)。
+* [IBM 版本變更日誌](/docs/containers?topic=containers-changelog)。
 
 </br>
+
+## 發行歷程
+{: #release-history}
+
+下表記錄 {{site.data.keyword.containerlong_notm}} 版本發行歷程。您可以使用此資訊進行規劃，例如，當某些版次可能變成不受支援時，可用來預估一般時間範圍。在 Kubernetes 社群發行版本更新項目之後，IBM 團隊會針對 {{site.data.keyword.containerlong_notm}} 環境，開始進行加強及測試該發行的處理程序。可用性及不支援版本日期取決於這些測試的結果、社群更新項目、安全修補程式，以及版本之間的技術變更。根據 `n-2` 版本支援原則，計劃將叢集主節點及工作者節點版本保持最新。
+{: shortdesc}
+
+{{site.data.keyword.containerlong_notm}} 一般先與 Kubernetes 1.5 版搭配使用。預計的發行或不支援日期會隨時變更。若要跳至版本更新準備步驟，請按一下版本號碼。
+
+標示劍號 (`†`) 的日期是暫訂的，得隨時變更。
+{: important}
+
+<table summary="此表格顯示 {{site.data.keyword.containerlong_notm}} 的發行歷程。">
+<caption>{{site.data.keyword.containerlong_notm}} 的發行歷程。</caption>
+<col width="20%" align="center">
+<col width="20%">
+<col width="30%">
+<col width="30%">
+<thead>
+<tr>
+<th>是否支援？</th>
+<th>版本</th>
+<th>{{site.data.keyword.containerlong_notm}}<br>發行日期</th>
+<th>{{site.data.keyword.containerlong_notm}}<br>不支援日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="支援此版本。"/></td>
+  <td>[1.13](#cs_v113)</td>
+  <td>2019 年 2 月 05 日</td>
+  <td>2019 年 12 月 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="支援此版本。"/></td>
+  <td>[1.12](#cs_v112)</td>
+  <td>2018 年 11 月 07 日</td>
+  <td>2019 年 9 月 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="支援此版本。"/></td>
+  <td>[1.11](#cs_v111)</td>
+  <td>2018 年 8 月 14 日</td>
+  <td>2019 年 1 月 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="此版本已淘汰。"/></td>
+  <td>[1.10](#cs_v110)</td>
+  <td>2018 年 5 月 01 日</td>
+  <td>2019 年 4 月 30 日 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="不支援此版本。"/></td>
+  <td>[1.9](#cs_v19)</td>
+  <td>2018 年 2 月 08 日</td>
+  <td>2018 年 12 月 27 日</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="不支援此版本。"/></td>
+  <td>[1.8](#cs_v18)</td>
+  <td>2017 年 11 月 8 日</td>
+  <td>2018 年 9 月 22 日</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="不支援此版本。"/></td>
+  <td>[1.7](#cs_v17)</td>
+  <td>2017 年 9 月 19 日</td>
+  <td>2018 年 1 月 21 日</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="不支援此版本。"/></td>
+  <td>1.6</td>
+  <td>N/A</td>
+  <td>N/A</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="不支援此版本。"/></td>
+  <td>[1.5](#cs_v1-5)</td>
+  <td>2017 年 5 月 23 日</td>
+  <td>2018 年 4 月 04 日</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
+## 1.13 版
+{: #cs_v113}
+
+<p><img src="images/certified_kubernetes_1x13.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.13 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計劃下 1.13 版的已認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
+
+請檢閱從舊版 Kubernetes 更新至 1.13 版時，您可能需要進行的變更。
+{: shortdesc}
+
+### 在主節點之前更新
+{: #113_before}
+
+下表顯示您在更新 Kubernetes 主節點之前必須採取的動作。
+{: shortdesc}
+
+<table summary="1.13 版的 Kubernetes 更新">
+<caption>將主節點更新至 Kubernetes 1.13 之前要進行的變更</caption>
+<thead>
+<tr>
+<th>類型</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N/A</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### 在主節點之後更新
+{: #113_after}
+
+下表顯示您在更新 Kubernetes 主節點之後必須採取的動作。
+{: shortdesc}
+
+<table summary="1.13 版的 Kubernetes 更新">
+<caption>將主節點更新至 Kubernetes 1.13 之後要進行的變更</caption>
+<thead>
+<tr>
+<th>類型</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CoreDNS 可作為新的預設叢集 DNS 提供者</td>
+<td>現在，CoreDNS 是 Kubernetes 1.13 及更新版本中新叢集的預設叢集 DNS 提供者。如果您將現有的叢集更新至 1.13 版，其使用 KubeDNS 作為叢集 DNS 提供者，則 KubeDNS 會繼續成為叢集 DNS 提供者。不過，您可以選擇[改用 CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set)。<br><br>CoreDNS 支援[叢集 DNS 規格 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services)，將網域名稱輸入為 Kubernetes 服務 `ExternalName` 欄位。前一個叢集 DNS 提供者 KubeDNS 未遵循叢集 DNS 規格，因此，容許 `ExternalName` 的 IP 位址。如果任何 Kubernetes 服務使用 IP 位址而非 DNS，則必須將 `ExternalName` 更新為 DNS，以繼續支援功能。</td>
+</tr>
+<tr>
+<td>`Deployment` 及 `StatefulSet` 的 `kubectl` 輸出</td>
+<td>`Deployment` 及 `StatefulSet` 的 `kubectl` 輸出現在包含 `Ready` 直欄，且更具人類可讀性。如果您的 Script 依賴先前的行為，請予以更新。</td>
+</tr>
+<tr>
+<td>`PriorityClass` 的 `kubectl` 輸出</td>
+<td>`PriorityClass` 的 `kubectl` 輸出現在包含 `Value` 直欄。如果您的 Script 依賴先前的行為，請予以更新。</td>
+</tr>
+<tr>
+<td>`kubectl get componentstatuses`</td>
+<td>`kubectl get componentstatuses` 指令未適當報告一些 Kubernetes 主節點元件的性能，因為現在無法再從已停用 `localhost` 及安全 (HTTP) 埠的 Kubernetes API 伺服器存取這些元件。在 Kubernetes 1.10 版中引進高可用性 (HA) 主節點之後，每個 Kubernetes 主節點都會以多個 `apisserver`、`controller-manager`、`scheduler` 及 `etcd` 實例來設定。請改為透過檢查 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/landing)，或透過使用 `ibmcloud ks cluster-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)的方式，來檢閱叢集性能。</td>
+</tr>
+<tr>
+<tr>
+<td>不支援：`kubectl run-container`</td>
+<td>已移除 `kubectl run-container` 指令。請改用 `kubectl run` 指令。</td>
+</tr>
+<tr>
+<td>`kubectl rollout undo`</td>
+<td>當您針對不存在的修訂執行 `kubbectl rollout undo` 時，會傳回錯誤。如果您的 Script 依賴先前的行為，請予以更新。</td>
+</tr>
+<tr>
+<td>已淘汰：`scheduler.alpha.kubernetes.io/critical-pod` 註釋</td>
+<td>`scheduler.alpha.kubernetes.io/critical-pod` 註釋現在已淘汰。將依賴此註釋的所有 Pod 改為使用 [pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)。</td>
+</tr>
+</tbody>
+</table>
+
+### 在工作者節點之後更新
+{: #113_after_workers}
+
+下表顯示您在更新工作者節點之後必須採取的動作。
+{: shortdesc}
+
+<table summary="1.13 版的 Kubernetes 更新">
+<caption>將工作者節點更新至 Kubernetes 1.13 之後要進行的變更</caption>
+<thead>
+<tr>
+<th>類型</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd `cri` 串流伺服器</td>
+<td>在 containerd 1.2 版中，`cri` 外掛程式串流伺服器現在在隨機埠 `http://localhost:0` 上運作。此變更支援 `kubelet` 串流 Proxy，並為容器 `exec`及 `logs` 作業提供更安全的串流介面。先前，`cri` 串流伺服器在工作者節點的專用網路介面上使用埠 10010 進行接聽。如果您的應用程式使用容器 `cri` 外掛程式，並依賴先前的行為，請更新它們。</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## 1.12 版
 {: #cs_v112}
@@ -130,7 +324,7 @@ Server Version: v1.10.11+IKS
 </tr>
 <tr>
 <td>`kube-system` `default` 服務帳戶的角色連結</td>
-<td>`kube-system` `default` 服務帳戶不再具有 Kubernetes API 的 **cluster-admin** 存取權。如果您部署的特性或附加程式（例如 [Helm](cs_integrations.html#helm)）需要存取叢集裡的處理程序，請設定[服務帳戶 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)。如果您需要時間來建立及設定具有適當許可權的個別服務帳戶，則可以使用下列叢集角色連結來暫時授與 **cluster-admin** 角色：`kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
+<td>`kube-system` `default` 服務帳戶不再具有 Kubernetes API 的 **cluster-admin** 存取權。如果您部署的特性或附加程式（例如 [Helm](/docs/containers?topic=containers-integrations#helm)）需要存取叢集裡的處理程序，請設定[服務帳戶 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)。如果您需要時間來建立及設定具有適當許可權的個別服務帳戶，則可以使用下列叢集角色連結來暫時授與 **cluster-admin** 角色：`kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
 </tr>
 </tbody>
 </table>
@@ -151,18 +345,26 @@ Server Version: v1.10.11+IKS
 </thead>
 <tbody>
 <tr>
-<td>`apps/v1` Kubernetes API</td>
-<td>`apps/v1` Kubernetes API 會取代 `extensions`、`apps/v1beta1` 及 `apps/v1alpha` API。Kubernetes 專案即將淘汰，並逐步淘汰支援來自 Kubernetes `apiserver` 及 `kubectl` 用戶端的前一個 API。<br><br>您必須將所有 YAML `apiVersion` 欄位更新為使用 `apps/v1`。另請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)，以取得與 `apps/v1` 相關的變更，如下所示。
+<td>Kubernetes 的 API</td>
+<td>Kubernetes API 會取代已淘汰的 API，如下所示：
+<ul><li><strong>apps/v1</strong>：`apps/v1` Kubernetes API 取代`apps/v1beta1` 及 `apps/v1alpha` API。`apps/v1` API 也會取代 `daemonset`、`deployment`、`replicaset` 及 `statefulset` 資源的 `extensions/v1beta1` API。Kubernetes 專案即將淘汰，並逐步淘汰支援來自 Kubernetes `apiserver` 及 `kubectl` 用戶端的前一個 API。</li>
+<li><strong>networking.k8s.io/v1</strong>：`networking.k8s.io/v1` API 取代 `networkpolicy` 資源的 `extensions/v1beta1` API。</li>
+<li><strong>policy/v1beta1</strong>：`policy/v1beta1` API 取代 `podsecuritypolicy` 資源的 `extensions/v1beta1` API。</li></ul>
+<br><br>在淘汰的 API 變成不受支援之前，請先將所有 YAML `apiVersion` 欄位更新為使用適當的 Kubernetes API。另請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)，以取得與 `apps/v1` 相關的變更，如下所示。
 <ul><li>在建立部署之後，`.spec.selector` 欄位是不可變的。</li>
 <li>`.spec.rollbackTo` 欄位已淘汰。請改用 `kubectl rollout undo` 指令。</li></ul></td>
 </tr>
 <tr>
 <td>CoreDNS 可作為叢集 DNS 提供者</td>
-<td>Kubernetes 專案正在進行轉移，以支援 CoreDNS 而非現行 Kbernetes DNS (KubeDNS)。在 1.12 版中，預設叢集 DNS 會保留 KubeDNS，但您可以[選擇使用 CoreDNS](cs_cluster_update.html#dns)。</td>
+<td>Kubernetes 專案正在進行轉移，以支援 CoreDNS 而非現行 Kbernetes DNS (KubeDNS)。在 1.12 版中，預設叢集 DNS 會保留 KubeDNS，但您可以[選擇使用 CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set)。</td>
 </tr>
 <tr>
 <td>`kubectl apply --force`</td>
 <td>現在，當您在無法更新的資源（例如 YAML 檔案中不可變的欄位）上強制執行套用動作 (`kubbectl apply --force`) 時，即會改為重建資源。如果您的 Script 依賴先前的行為，請予以更新。</td>
+</tr>
+<tr>
+<td>`kubectl get componentstatuses`</td>
+<td>`kubectl get componentstatuses` 指令未適當報告一些 Kubernetes 主節點元件的性能，因為現在無法再從已停用 `localhost` 及安全 (HTTP) 埠的 Kubernetes API 伺服器存取這些元件。在 Kubernetes 1.10 版中引進高可用性 (HA) 主節點之後，每個 Kubernetes 主節點都會以多個 `apisserver`、`controller-manager`、`scheduler` 及 `etcd` 實例來設定。請改為透過檢查 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/landing)，或透過使用 `ibmcloud ks cluster-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)的方式，來檢閱叢集性能。</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
@@ -190,12 +392,12 @@ Server Version: v1.10.11+IKS
 </tr>
 <tr>
 <td>Kubernetes 儀表板</td>
-<td>如果您透過 `kubectl proxy` 存取儀表板，則會移除登入頁面上的**跳過**按鈕。請改用**記號**來登入。</td>
+<td>如果您透過 `kubectl proxy` 存取儀表板，則會移除登入頁面上的**跳過**按鈕。請改為[使用**記號**來登入](/docs/containers?topic=containers-app#cli_dashboard)。</td>
 </tr>
 <tr>
 <td id="metrics-server">Kubernetes Metrics Server</td>
-<td>Kubernetes Metrics Server 取代 Kubernetes Heapster（自 Kubernetes 1.8 版後已淘汰）作為叢集度量值提供者。如果您對叢集裡的每個工作者節點執行超過 30 個 Pod，請[調整效能的 `metrics-server` 配置](cs_performance.html#metrics)。<p>Kubernetes 儀表板不會使用 `metrics-server`。如果您想要在儀表板中顯示度量，請從下列選項中選擇。</p>
-<ul><li>使用「叢集監視儀表板」來[設定 Grafana 以分析度量值](/docs/services/cloud-monitoring/tutorials/container_service_metrics.html#container_service_metrics)。</li>
+<td>Kubernetes Metrics Server 取代 Kubernetes Heapster（自 Kubernetes 1.8 版後已淘汰）作為叢集度量值提供者。如果您對叢集裡的每個工作者節點執行超過 30 個 Pod，請[調整效能的 `metrics-server` 配置](/docs/containers?topic=containers-kernel#metrics)。<p>Kubernetes 儀表板不會使用 `metrics-server`。如果您想要在儀表板中顯示度量，請從下列選項中選擇。</p>
+<ul><li>使用「叢集監視儀表板」來[設定 Grafana 以分析度量值](/docs/services/cloud-monitoring/tutorials?topic=cloud-monitoring-container_service_metrics#container_service_metrics)。</li>
 <li>將 [Heapster ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/heapster) 部署至您的叢集。
 <ol><li>複製 `heapster-rbac` [YAML ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/heapster-rbac.yaml)、`heapster-service` [YAML ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-service.yaml) 及 `heapster-controller` [YAML ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-controller.yaml) 檔案。</li>
 <li>取代下列字串來編輯 `heapster-controller` YAML。
@@ -213,6 +415,9 @@ Server Version: v1.10.11+IKS
 </tr>
 </tbody>
 </table>
+
+<br />
+
 
 ## 1.11 版
 {: #cs_v111}
@@ -255,7 +460,7 @@ Server Version: v1.10.11+IKS
 </tr>
 <tr>
 <td>加密 etcd 中的資料</td>
-<td>先前，etcd 資料是儲存在主節點的 NFS 檔案儲存空間實例上，而此實例是在靜止時加密。現在，etcd 資料是儲存在主節點的本端磁碟上，並備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。不過，主節點的本端磁碟上的 etcd 資料不會加密。如果您想要將主節點的本端 etcd 資料加密，請[在您的叢集裡啟用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
+<td>之前，etcd 資料是儲存在主節點的 NFS 檔案儲存空間實例上，而此實例是在靜止時加密。現在，etcd 資料是儲存在主節點的本端磁碟上，並備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。不過，主節點的本端磁碟上的 etcd 資料不會加密。如果您想要將主節點的本端 etcd 資料加密，請[在您的叢集裡啟用 {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-encryption#keyprotect)。</td>
 </tr>
 <tr>
 <td>Kubernetes 容器磁區裝載傳播</td>
@@ -290,7 +495,11 @@ Server Version: v1.10.11+IKS
 </tr>
 <tr>
 <td>重新整理 Kubernetes 配置</td>
-<td>已更新叢集 Kubernetes API 伺服器的 OpenID Connect 配置，以支援 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 存取群組。因此，您必須在主節點 Kubernetes 1.11 版更新之後，執行 `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>` 來重新整理叢集的 Kubernetes 配置。<br><br>如果您未重新整理配置，則叢集動作會失敗，錯誤訊息如下：`You must be logged in to the server (Unauthorized).`</td>
+<td>已更新叢集 Kubernetes API 伺服器的 OpenID Connect 配置，以支援 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 存取群組。因此，您必須在主節點 Kubernetes 1.11 版更新之後，執行 `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>` 來重新整理叢集的 Kubernetes 配置。當使用這個指令時，配置會套用至 `default` 名稱空間中的角色連結。<br><br>如果您未重新整理配置，則叢集動作會失敗，錯誤訊息如下：`You must be logged in to the server (Unauthorized).`</td>
+</tr>
+<tr>
+<td>Kubernetes 儀表板</td>
+<td>如果您透過 `kubectl proxy` 存取儀表板，則會移除登入頁面上的**跳過**按鈕。請改為[使用**記號**來登入](/docs/containers?topic=containers-app#cli_dashboard)。</td>
 </tr>
 <tr>
 <td>`kubectl` CLI</td>
@@ -317,10 +526,8 @@ Server Version: v1.10.11+IKS
 對於執行 Kubernetes [1.10.8_1530](#110_ha-masters) 版、1.11.3_1531 版或更新版本的叢集，會更新叢集主節點配置以增加高可用性 (HA)。叢集現在具有三個 Kubernetes 主節點抄本，而設定這些抄本時，每一個主節點會部署在個別的實體主機上。此外，如果您的叢集是在具有多區域功能的區域中，則主節點會分散在各區域之中。
 {: shortdesc}
 
-將叢集從 1.9 版或更舊的 1.10 或 1.11 修補程式更新至這個 Kubernetes 版本時，您需要採取這些準備步驟。為了讓您有時間，會暫時停用主節點的自動更新。如需相關資訊和時間表，請參閱 [HA 主節點部落格文章](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/)。
-{: tip}
+您可以透過檢查主控台中的叢集主節點 URL，或執行下列指令，來檢查叢集是否具有 HA 主要配置：`ibmcloud ks cluster-get --cluster <cluster_name_or_ID`. 如果主節點 URL 具有 ` https://c2.us-south.containers.cloud.ibm.com:xxxxx` 等主機名稱，而非 ` https://169.xx.xx.xx:xxxxx` 等 IP 位址，則叢集會有 HA 主要配置。您可能會因為自動主要修補程式更新，或者透過手動套用更新的方式，取得 HA 主要配置。無論哪一種情況，您仍必須檢閱下列項目，以確保您的叢集網路設為充分利用配置。
 
-檢閱下列狀況，而您必須在其中進行變更，才能充分運用 HA 主節點配置：
 * 如果您具有防火牆或自訂 Calico 網路原則。
 * 如果您是在工作者節點上使用主機埠 `2040` 或 `2041`。
 * 如果您已使用叢集主節點 IP 位址，對主節點進行叢集內存取。
@@ -330,14 +537,14 @@ Server Version: v1.10.11+IKS
 <br>
 **針對 HA 主節點更新防火牆或自訂的 Calico 主機網路原則**：</br>
 {: #ha-firewall}
-如果您使用防火牆或自訂的 Calico 主機網路原則，控制來自工作者節點的 Egress，則容許將資料流量送出至叢集所在地區內所有區域的埠及 IP 位址。請參閱[容許叢集存取基礎架構資源及其他服務](cs_firewall.html#firewall_outbound)。
+如果您使用防火牆或自訂的 Calico 主機網路原則，控制來自工作者節點的 Egress，則容許將資料流量送出至叢集所在地區內所有區域的埠及 IP 位址。請參閱[容許叢集存取基礎架構資源及其他服務](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
 <br>
 **保留工作者節點上的主機埠 `2040` 及 `2041`**：</br>
 {: #ha-ports}
 若要容許存取 HA 配置中的叢集主節點，您必須在所有工作者節點上將主機埠 `2040` 和 `2041` 保留為可用狀態。
 * 更新任何 Pod，將 `hostPort` 設為 `2040` 或 `2041` 來使用不同的埠。
-* 更新任何在埠 `2040` 或 `2041` 上接聽的 Pod，將 `hostNetwork` 設為 `true` 來使用不同的埠。
+* 將 `hostNetwork` 設為 `true`，且將在埠 `2040` 或 `2041` 上進行接聽的任何 Pod，更新為使用不同的埠。
 
 若要檢查您的 Pod 目前是否使用埠 `2040` 或 `2041`，請將目標設為您的叢集並執行下列指令。
 
@@ -360,12 +567,12 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 {: #ha-outofcluster}
 `kin-system` 名稱空間中 `calic-config` ConfigMap 所儲存的資料已變更為支援 HA 主節點配置。尤其，`etcd_endpoints` 值現在僅支援叢集內存取。使用此值來配置 Calico CLI 以從叢集外部進行存取，不再運作。
 
-請改用 `kudo-system` 名稱空間中 `cluster-info` ConfigMap 所儲存的資料。尤其，使用 `etcd_host` 和 `etcd_port` 值來配置 [Calico CLI](cs_network_policy.html#cli_install) 的端點，從叢集外部存取具有 HA 配置的主節點。
+請改用 `kudo-system` 名稱空間中 `cluster-info` ConfigMap 所儲存的資料。尤其，使用 `etcd_host` 和 `etcd_port` 值來配置 [Calico CLI](/docs/containers?topic=containers-network_policies#cli_install) 的端點，從叢集外部存取具有 HA 配置的主節點。
 
 <br>
 **更新 Kubernetes 或 Calico 網路原則**：</br>
 {: #ha-networkpolicies}
-如果您使用 [Kubernetes 或 Calico 網路原則](cs_network_policy.html#network_policies)，來控制對叢集主節點的 Pod Egress 存取，而且您目前正在使用下列項目，則需要採取其他動作：
+如果您使用 [Kubernetes 或 Calico 網路原則](/docs/containers?topic=containers-network_policies#network_policies)，來控制對叢集主節點的 Pod Egress 存取，而且您目前正在使用下列項目，則需要採取其他動作：
 *  Kubernetes 服務叢集 IP，您可以藉由執行 `kubectl get service kubernetes -o yaml | grep clusterIP` 來取得此 IP。
 *  Kubernetes 服務網域名稱，預設為 `https://kubernetes.default.svc.cluster.local`。
 *  叢集主節點 IP，您可以藉由執行 `kubectl cluster-info | grep Kubernetes` 來取得此 IP。
@@ -373,7 +580,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 下列步驟說明如何更新您的 Kubernet 網路原則。若要更新 Calico 網路原則，請重複這些步驟，搭配一些次要原則語法變更及 `calicoctl` 來搜尋原則找出影響。
 {: note}
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  取得您的叢集主節點 IP 位址。
     ```
@@ -389,7 +596,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 
 3.  檢閱 YAML。例如，如果您的叢集使用下列 Kubernetes 網路原則，容許 `default` 名稱空間中的 Pod，透過 `kubernetes` 服務叢集 IP 或叢集主節點 IP 存取叢集主節點，則您必須更新原則。
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -424,7 +631,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     {: tip}
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -460,7 +667,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: pre}
 
-6.  在您完成所有[準備動作](#ha-masters)（包括這些步驟）之後，請[將叢集主節點更新為](cs_cluster_update.html#master) HA 主節點修正套件。
+6.  在您完成所有[準備動作](#ha-masters)（包括這些步驟）之後，請[將叢集主節點更新為](/docs/containers?topic=containers-update#master) HA 主節點修正套件。
 
 7.  在更新完成之後，請從網路原則移除叢集主節點 IP 位址。例如，從前一個網路原則移除下列這幾行，然後重新套用原則。
 
@@ -527,30 +734,33 @@ failed size validation
     ```
     {: pre}
 
-2.  如果有任何 Pod 未處於 **Running** 狀況，則請刪除 Pod，並先等到它處於 **Running** 狀況，再繼續進行。如果 Pod 未回到**執行中**狀態，請執行下列動作：
+2.  如果有任何 Pod 未處於**執行中**狀態，則請刪除 Pod，並先等到它處於**執行中**狀態，再繼續進行。如果 Pod 未回到**執行中**狀態，請執行下列動作：
     1.  檢查工作者節點的**狀況**及**狀態**。
         ```
-      ibmcloud ks workers --cluster <cluster_name_or_ID>
-      ```
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
+        ```
         {: pre}
-    2.  如果工作者節點狀況不是**正常**，請遵循[除錯工作者節點](cs_troubleshoot.html#debug_worker_nodes)步驟。例如，**嚴重**或**不明**狀況通常藉由[重新載入工作者節點](cs_cli_reference.html#cs_worker_reload)來解決。
+    2.  如果工作者節點狀況不是**正常**，請遵循[除錯工作者節點](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)步驟。例如，**嚴重**或**不明**狀況通常藉由[重新載入工作者節點](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)來解決。
 
 3.  如果您自動產生 Calico 原則或其他 Calico 資源，則請更新自動化工具，以使用 [Calico 第 3 版語法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/) 來產生這些資源。
 
-4.  如果您將 [strongSwan](cs_vpn.html#vpn-setup) 用於 VPN 連線功能，則 strongSwan 2.0.0 Helm 圖表不會使用 Calico 第 3 版或 Kubernetes 1.11。[更新 strongSwan](cs_vpn.html#vpn_upgrade) 至 2.1.0 Helm 圖表，其與 Calico 2.6 及 Kubernetes 1.7、1.8 及 1.9 舊版相容。
+4.  如果您將 [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) 用於 VPN 連線功能，則 strongSwan 2.0.0 Helm 圖表不會使用 Calico 第 3 版或 Kubernetes 1.11。[更新 strongSwan](/docs/containers?topic=containers-vpn#vpn_upgrade) 至 2.1.0 Helm 圖表，其與 Calico 2.6 及 Kubernetes 1.7、1.8 及 1.9 舊版相容。
 
-5.  [將叢集主節點更新至 Kubernetes 1.11 版](cs_cluster_update.html#master)。
+5.  [將叢集主節點更新至 Kubernetes 1.11 版](/docs/containers?topic=containers-update#master)。
 
 <br />
 
 
-## 1.10 版
+## 已淘汰：1.10 版
 {: #cs_v110}
 
 <p><img src="images/certified_kubernetes_1x10.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.10 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.10 版的已認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
 
 請檢閱從舊版 Kubernetes 更新至 1.10 版時，您可能需要進行的變更。
 {: shortdesc}
+
+Kubernetes 1.10 版已淘汰，自 2019 年 4 月 30 日（暫訂）起不再支援。針對每個 Kubernetes 版本更新，[檢閱潛在影響](/docs/containers?topic=containers-cs_versions#cs_versions)，然後立即[更新您的叢集](/docs/containers?topic=containers-update#update)為至少 1.11。
+{: deprecated}
 
 您必須遵循[準備更新至 Calico 第 3 版](#110_calicov3)中所列的步驟，才能順利更新至 Kubernetes 1.10。
 {: important}
@@ -600,7 +810,7 @@ failed size validation
 <tr>
 <td>strongSwan VPN
 </td>
-<td>如果您使用 [strongSwan](cs_vpn.html#vpn-setup) 進行 VPN 連線，則必須執行 `helm delete --purge <release_name>` 來移除圖表，然後再更新叢集。在叢集更新完成之後，請重新安裝 strongSwan Helm 圖表。</td>
+<td>如果您使用 [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) 進行 VPN 連線，則必須執行 `helm delete --purge <release_name>` 來移除圖表，然後再更新叢集。在叢集更新完成之後，請重新安裝 strongSwan Helm 圖表。</td>
 </tr>
 </tbody>
 </table>
@@ -629,12 +839,16 @@ failed size validation
 <td>節點的 <code>ExternalIP</code> 欄位現在設定為節點的公用 IP 位址值。請檢閱並更新依賴此值的任何資源。</td>
 </tr>
 <tr>
+<td>Kubernetes 儀表板</td>
+<td>如果您透過 `kubectl proxy` 存取儀表板，則會移除登入頁面上的**跳過**按鈕。請改為[使用**記號**來登入](/docs/containers?topic=containers-app#cli_dashboard)。</td>
+</tr>
+<tr>
 <td><code>kubectl port-forward</code></td>
 <td>現在，當您使用 <code>kubectl port-forward</code> 指令時，不再支援 <code>-p</code> 旗標。如果您的 Script 依賴先前的行為，請更新它們，以將 <code>-p</code> 旗標取代為 Pod 名稱。</td>
 </tr>
 <tr>
 <td>`kubectl --show-all, -a` 旗標</td>
-<td>只適用於人類可讀取之 Pod 指令（不是 API 呼叫）的 `--show-all, -a` 旗標已被淘汰，且未來版本不再支援它。此旗標是用來顯示終端機狀況中的 Pod。若要追蹤已終止之應用程式及容器的相關資訊，請[在叢集裡設定日誌轉遞](cs_health.html#health)。</td>
+<td>只適用於人類可讀取之 Pod 指令（不是 API 呼叫）的 `--show-all, -a` 旗標已被淘汰，且未來版本不再支援它。此旗標是用來顯示終端機狀況中的 Pod。若要追蹤已終止之應用程式及容器的相關資訊，請[在叢集裡設定日誌轉遞](/docs/containers?topic=containers-health#health)。</td>
 </tr>
 <tr>
 <td>唯讀 API 資料磁區</td>
@@ -644,7 +858,7 @@ failed size validation
 <tr>
 <td>strongSwan VPN
 </td>
-<td>如果您使用 [strongSwan](cs_vpn.html#vpn-setup) 進行 VPN 連線，並在更新叢集之前已刪除圖表，則現在可以重新安裝 strongSwan Helm 圖表。</td>
+<td>如果您使用 [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) 進行 VPN 連線，並在更新叢集之前已刪除圖表，則現在可以重新安裝 strongSwan Helm 圖表。</td>
 </tr>
 </tbody>
 </table>
@@ -655,10 +869,8 @@ failed size validation
 對於執行 Kubernetes 1.10.8_1530 版、[1.11.3_1531](#ha-masters) 版或更新版本的叢集，會更新叢集主節點配置以增加高可用性 (HA)。叢集現在具有三個 Kubernetes 主節點抄本，而設定這些抄本時，每一個主節點會部署在個別的實體主機上。此外，如果您的叢集是在具有多區域功能的區域中，則主節點會分散在各區域之中。
 {: shortdesc}
 
-將叢集從 1.9 版或更舊的 1.10 修補程式更新至這個 Kubernetes 版本時，您需要採取這些準備步驟。為了讓您有時間，會暫時停用主節點的自動更新。如需相關資訊和時間表，請參閱 [HA 主節點部落格文章](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/)。
-{: tip}
+您可以透過檢查主控台中的叢集主節點 URL，或執行下列指令，來檢查叢集是否具有 HA 主要配置：`ibmcloud ks cluster-get --cluster <cluster_name_or_ID`. 如果主節點 URL 具有 ` https://c2.us-south.containers.cloud.ibm.com:xxxxx` 等主機名稱，而非 ` https://169.xx.xx.xx:xxxxx` 等 IP 位址，則叢集會有 HA 主要配置。您可能會因為自動主要修補程式更新，或者透過手動套用更新的方式，取得 HA 主要配置。無論哪一種情況，您仍必須檢閱下列項目，以確保您的叢集網路設為充分利用配置。
 
-檢閱下列狀況，而您必須在其中進行變更，才能充分運用 HA 主節點配置：
 * 如果您具有防火牆或自訂 Calico 網路原則。
 * 如果您是在工作者節點上使用主機埠 `2040` 或 `2041`。
 * 如果您已使用叢集主節點 IP 位址，對主節點進行叢集內存取。
@@ -668,14 +880,14 @@ failed size validation
 <br>
 **針對 HA 主節點更新防火牆或自訂的 Calico 主機網路原則**：</br>
 {: #110_ha-firewall}
-如果您使用防火牆或自訂的 Calico 主機網路原則，控制來自工作者節點的 Egress，則容許將資料流量送出至叢集所在地區內所有區域的埠及 IP 位址。請參閱[容許叢集存取基礎架構資源及其他服務](cs_firewall.html#firewall_outbound)。
+如果您使用防火牆或自訂的 Calico 主機網路原則，控制來自工作者節點的 Egress，則容許將資料流量送出至叢集所在地區內所有區域的埠及 IP 位址。請參閱[容許叢集存取基礎架構資源及其他服務](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
 <br>
 **保留工作者節點上的主機埠 `2040` 及 `2041`**：</br>
 {: #110_ha-ports}
 若要容許存取 HA 配置中的叢集主節點，您必須在所有工作者節點上將主機埠 `2040` 和 `2041` 保留為可用狀態。
 * 更新任何 Pod，將 `hostPort` 設為 `2040` 或 `2041` 來使用不同的埠。
-* 更新任何在埠 `2040` 或 `2041` 上接聽的 Pod，將 `hostNetwork` 設為 `true` 來使用不同的埠。
+* 將 `hostNetwork` 設為 `true`，且將在埠 `2040` 或 `2041` 上進行接聽的任何 Pod，更新為使用不同的埠。
 
 若要檢查您的 Pod 目前是否使用埠 `2040` 或 `2041`，請將目標設為您的叢集並執行下列指令。
 
@@ -698,20 +910,20 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 {: #110_ha-outofcluster}
 `kin-system` 名稱空間中 `calic-config` ConfigMap 所儲存的資料已變更為支援 HA 主節點配置。尤其，`etcd_endpoints` 值現在僅支援叢集內存取。使用此值來配置 Calico CLI 以從叢集外部進行存取，不再運作。
 
-請改用 `kudo-system` 名稱空間中 `cluster-info` ConfigMap 所儲存的資料。尤其，使用 `etcd_host` 和 `etcd_port` 值來配置 [Calico CLI](cs_network_policy.html#cli_install) 的端點，從叢集外部存取具有 HA 配置的主節點。
+請改用 `kudo-system` 名稱空間中 `cluster-info` ConfigMap 所儲存的資料。尤其，使用 `etcd_host` 和 `etcd_port` 值來配置 [Calico CLI](/docs/containers?topic=containers-network_policies#cli_install) 的端點，從叢集外部存取具有 HA 配置的主節點。
 
 <br>
 **更新 Kubernetes 或 Calico 網路原則**：</br>
 {: #110_ha-networkpolicies}
-如果您使用 [Kubernetes 或 Calico 網路原則](cs_network_policy.html#network_policies)，來控制對叢集主節點的 Pod Egress 存取，而且您目前正在使用下列項目，則需要採取其他動作：
+如果您使用 [Kubernetes 或 Calico 網路原則](/docs/containers?topic=containers-network_policies#network_policies)，來控制對叢集主節點的 Pod Egress 存取，而且您目前正在使用下列項目，則需要採取其他動作：
 *  Kubernetes 服務叢集 IP，您可以藉由執行 `kubectl get service kubernetes -o yaml | grep clusterIP` 來取得此 IP。
 *  Kubernetes 服務網域名稱，預設為 `https://kubernetes.default.svc.cluster.local`。
 *  叢集主節點 IP，您可以藉由執行 `kubectl cluster-info | grep Kubernetes` 來取得此 IP。
 
-下列步驟說明如何更新您的 Kubernet 網路原則。若要更新 Calico 網路原則，請重複這些步驟，搭配一些次要原則語法變更及 `calicoctl` 來搜尋原則找出影響。
+下列步驟說明如何更新您的 Kubernet 網路原則。若要更新 Calico 網路原則，請重複這些步驟，搭配一些次要原則語法變更，並使用 `calicoctl` 來搜尋原則找出影響。
 {: note}
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  取得您的叢集主節點 IP 位址。
     ```
@@ -727,7 +939,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 
 3.  檢閱 YAML。例如，如果您的叢集使用下列 Kubernetes 網路原則，容許 `default` 名稱空間中的 Pod，透過 `kubernetes` 服務叢集 IP 或叢集主節點 IP 存取叢集主節點，則您必須更新原則。
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -762,7 +974,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     {: tip}
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -798,7 +1010,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: pre}
 
-6.  在您完成所有[準備動作](#ha-masters)（包括這些步驟）之後，請[將叢集主節點更新為](cs_cluster_update.html#master) HA 主節點修正套件。
+6.  在您完成所有[準備動作](#ha-masters)（包括這些步驟）之後，請[將叢集主節點更新為](/docs/containers?topic=containers-update#master) HA 主節點修正套件。
 
 7.  在更新完成之後，請從網路原則移除叢集主節點 IP 位址。例如，從前一個網路原則移除下列這幾行，然後重新套用原則。
 
@@ -828,19 +1040,19 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: pre}
 
-2.  如果有任何 Pod 未處於 **Running** 狀況，則請刪除 Pod，並先等到它處於 **Running** 狀況，再繼續進行。如果 Pod 未回到**執行中**狀態，請執行下列動作：
+2.  如果有任何 Pod 未處於**執行中**狀態，則請刪除 Pod，並先等到它處於**執行中**狀態，再繼續進行。如果 Pod 未回到**執行中**狀態，請執行下列動作：
     1.  檢查工作者節點的**狀況**及**狀態**。
         ```
         ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    2.  如果工作者節點狀況不是**正常**，請遵循[除錯工作者節點](cs_troubleshoot.html#debug_worker_nodes)步驟。例如，**嚴重**或**不明**狀況通常藉由[重新載入工作者節點](cs_cli_reference.html#cs_worker_reload)來解決。
+    2.  如果工作者節點狀況不是**正常**，請遵循[除錯工作者節點](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)步驟。例如，**嚴重**或**不明**狀況通常藉由[重新載入工作者節點](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)來解決。
 
 3.  如果您自動產生 Calico 原則或其他 Calico 資源，則請更新自動化工具，以使用 [Calico 第 3 版語法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/) 來產生這些資源。
 
-4.  如果您將 [strongSwan](cs_vpn.html#vpn-setup) 用於 VPN 連線功能，則 strongSwan 2.0.0 Helm 圖表不會使用 Calico 第 3 版或 Kubernetes 1.10。[更新 strongSwan](cs_vpn.html#vpn_upgrade) 至 2.1.0 Helm 圖表，其與 Calico 2.6 及 Kubernetes 1.7、1.8 及 1.9 舊版相容。
+4.  如果您將 [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) 用於 VPN 連線功能，則 strongSwan 2.0.0 Helm 圖表不會使用 Calico 第 3 版或 Kubernetes 1.10。[更新 strongSwan](/docs/containers?topic=containers-vpn#vpn_upgrade) 至 2.1.0 Helm 圖表，其與 Calico 2.6 及 Kubernetes 1.7、1.8 及 1.9 舊版相容。
 
-5.  [將叢集主節點更新至 Kubernetes 1.10 版](cs_cluster_update.html#master)。
+5.  [將叢集主節點更新至 Kubernetes 1.10 版](/docs/containers?topic=containers-update#master)。
 
 <br />
 
@@ -851,102 +1063,32 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 尋找 {{site.data.keyword.containerlong_notm}} 中不支援之 Kubernetes 版本的概觀。
 {: shortdesc}
 
-### 1.9 版（已淘汰，自 2018 年 12 月 27 日起不再支援）
+### 1.9 版（不受支援）
 {: #cs_v19}
 
-<p><img src="images/certified_kubernetes_1x9.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.9 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.9 版的已認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
-
-請檢閱從舊版 Kubernetes 更新至 1.9 版時，您可能需要進行的變更。
+自 2018 年 12 月 27 日起，不支援執行 [Kubernetes 1.9 版](/docs/containers?topic=containers-changelog#changelog_archive)的 {{site.data.keyword.containerlong_notm}} 叢集。1.9 版叢集無法接收安全更新或支援，除非它們更新為下一個最新版本 ([Kubernetes 1.10](#cs_v110))。
 {: shortdesc}
 
-<br/>
+針對每個 Kubernetes 版本更新，[檢閱潛在影響](/docs/containers?topic=containers-cs_versions#cs_versions)，然後立即[更新您的叢集](/docs/containers?topic=containers-update#update)為至少 1.10。
 
-### 在主節點之前更新
-{: #19_before}
-
-下表顯示您在更新 Kubernetes 主節點之前必須採取的動作。
-{: shortdesc}
-
-<table summary="1.9 版的 Kubernetes 更新">
-<caption>在將主節點更新至 Kubernetes 1.9 之前要進行的變更</caption>
-<thead>
-<tr>
-<th>類型</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Webhook 許可 API</td>
-<td>在 API 伺服器呼叫許可控制 Webhook 時使用的許可 API，從 <code>admission.v1alpha1</code> 移至 <code>admission.v1beta1</code>。<em>在升級叢集之前您必須刪除任何現有的 Webhook</em>，並更新 Webhook 配置檔來使用最新 API。此變更與舊版不相容。</td>
-</tr>
-</tbody>
-</table>
-
-### 在主節點之後更新
-{: #19_after}
-
-下表顯示您在更新 Kubernetes 主節點之後必須採取的動作。
-{: shortdesc}
-
-<table summary="1.9 版的 Kubernetes 更新">
-<caption>在將主節點更新至 Kubernetes 1.9 之後要進行的變更</caption>
-<thead>
-<tr>
-<th>類型</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`kubectl` 輸出</td>
-<td>現在，當您使用 `kubectl` 指令來指定 `-o custom-columns`，但在物件中找不到該直欄時，您會看到輸出 `<none>`。<br>
-之前，作業會失敗，且您看到 `xxx is not found` 錯誤訊息。如果您的 Script 依賴先前的行為，請予以更新。</td>
-</tr>
-<tr>
-<td>`kubectl patch`</td>
-<td>現在，當未對修補的資源進行任何變更時，`kubectl patch` 指令會失敗，並出現 `exit code 1`。如果您的 Script 依賴先前的行為，請予以更新。</td>
-</tr>
-<tr>
-<td>Kubernetes 儀表板許可權</td>
-<td>使用者必須使用其認證來登入 Kubernetes 儀表板，以檢視叢集資源。已移除預設 Kubernetes 儀表板 `ClusterRoleBinding` RBAC 授權。如需指示，請參閱[啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。</td>
-</tr>
-<tr>
-<td>唯讀 API 資料磁區</td>
-<td>現在，`secret`、`configMap`、`downwardAPI` 及預期的磁區是已裝載的唯讀磁區。
-先前，容許應用程式可將資料寫入至這些磁區，而系統可能會自動回復這些磁區。修正安全漏洞 [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102) 需要這個變更。
-如果您的應用程式依賴先前不安全的行為，請相應地修改它們。</td>
-</tr>
-<tr>
-<td>污點及容忍</td>
-<td>`node.alpha.kubernetes.io/notReady` 及 `node.alpha.kubernetes.io/unreachable` 污點已分別變更為 `node.kubernetes.io/not-ready` 及 `node.kubernetes.io/unreachable`。<br>
-雖然會自動更新污點，但您必須手動更新這些污點的容忍。針對 `ibm-system` 及 `kube-system` 以外的每一個名稱空間，判斷您是否需要變更容忍：<br>
-<ul><li><code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/notReady" && echo "Action required"</code></li><li>
-<code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/unreachable" && echo "Action required"</code></li></ul><br>
-如果傳回 `Action required`，請相應地修改 Pod 容忍。</td>
-</tr>
-<tr>
-<td>Webhook 許可 API</td>
-<td>如果您已在更新叢集之前刪除現有 Webhook，請建立新的 Webhook。</td>
-</tr>
-</tbody>
-</table>
 
 ### 1.8 版（不受支援）
 {: #cs_v18}
 
-自 2018 年 9 月 22 日起，不支援執行 [Kubernetes 1.8 版](cs_versions_changelog.html#changelog_archive)的 {{site.data.keyword.containerlong_notm}} 叢集。1.8 版叢集無法接收安全更新或支援，除非它們更新為下一個最新版本 ([Kubernetes 1.9](#cs_v19))。
+自 2018 年 9 月 22 日起，不支援執行 [Kubernetes 1.8 版](/docs/containers?topic=containers-changelog#changelog_archive)的 {{site.data.keyword.containerlong_notm}} 叢集。1.8 版叢集無法接收安全更新或支援，除非它們更新為下一個最新版本 ([Kubernetes 1.10](#cs_v110))。
 {: shortdesc}
 
-針對每個 Kubernetes 版本更新[檢閱潛在影響](cs_versions.html#cs_versions)，然後立即[更新您的叢集](cs_cluster_update.html#update)為至少 1.9。
+針對每個 Kubernetes 版本更新，[檢閱潛在影響](/docs/containers?topic=containers-cs_versions#cs_versions)，然後立即[更新您的叢集](/docs/containers?topic=containers-update#update)為 1.10。
+從 1.8 版更新至 1.11 版或更新版本時失敗。
 
 ### 1.7 版（不受支援）
 {: #cs_v17}
 
-自 2018 年 6 月 21 日起，不支援執行 [Kubernetes 1.7 版](cs_versions_changelog.html#changelog_archive)的 {{site.data.keyword.containerlong_notm}} 叢集。1.7 版叢集無法接收安全更新或支援，除非它們更新為下一個最新支援的版本 ([Kubernetes 1.9](#cs_v19))。
+自 2018 年 6 月 21 日起，不支援執行 [Kubernetes 1.7 版](/docs/containers?topic=containers-changelog#changelog_archive)的 {{site.data.keyword.containerlong_notm}} 叢集。1.7 版叢集無法接收安全更新或支援，除非它們更新為下一個最新支援的版本 ([Kubernetes 1.10](#cs_v110))。
 {: shortdesc}
 
-針對每個 Kubernetes 版本更新[檢閱潛在影響](cs_versions.html#cs_versions)，然後立即[更新您的叢集](cs_cluster_update.html#update)為至少 1.9。
+針對每個 Kubernetes 版本更新，[檢閱潛在影響](/docs/containers?topic=containers-cs_versions#cs_versions)，然後立即[更新您的叢集](/docs/containers?topic=containers-update#update)為 1.10 版。
+從 1.7 版更新至 1.11 版或更新版本時失敗。
 
 ### 1.5 版（不受支援）
 {: #cs_v1-5}
@@ -954,4 +1096,4 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 自 2018 年 4 月 4 日起，不支援執行 [Kubernetes 1.5 版](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md)的 {{site.data.keyword.containerlong_notm}} 叢集。1.5 版叢集無法接收安全更新或支援。
 {: shortdesc}
 
-若要在 {{site.data.keyword.containerlong_notm}} 中繼續執行應用程式，請[建立新的叢集](cs_clusters.html#clusters)，並[部署應用程式](cs_app.html#app)至新的叢集。
+若要在 {{site.data.keyword.containerlong_notm}} 中繼續執行應用程式，請[建立新的叢集](/docs/containers?topic=containers-clusters#clusters)，並[部署應用程式](/docs/containers?topic=containers-app#app)至新的叢集。

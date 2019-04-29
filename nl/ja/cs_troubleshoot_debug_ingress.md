@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, nginx, ingress controller
+
+subcollection: containers
 
 ---
 
@@ -34,10 +38,42 @@ lastupdated: "2018-12-05"
 1 つのホストは、必ず 1 つの Ingress リソースだけに定義するようにしてください。 1 つのホストが複数の Ingress リソースに定義された場合、ALB はトラフィックを正しく転送しないことがあり、その場合エラーが発生する場合があります。
 {: tip}
 
-始めに、以下の [{{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシー](cs_users.html#platform)があることを確認してください。
+始めに、以下の [{{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシー](/docs/containers?topic=containers-users#platform)があることを確認してください。
   - クラスターに対する**エディター**または**管理者**のプラットフォーム役割
+  - **ライター**または**管理者**のサービス役割
 
-## ステップ 1: Ingress デプロイメントと ALB ポッドのログでエラー・メッセージを確認する
+## ステップ 1: {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用した Ingress テストを実行する
+
+トラブルシューティングの際に、{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用して、Ingress テストを実行し、クラスターから Ingress の関連情報を収集することができます。このデバッグ・ツールを使用するには、[`ibmcloud-iks-debug` Helm チャート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug) をインストールします。
+{: shortdesc}
+
+
+1. [クラスターで Helm をセットアップし、Tiller のサービス・アカウントを作成し、Helm インスタンスに `ibm` リポジトリーを追加します](/docs/containers?topic=containers-integrations#helm)。
+
+2. Helm チャートをクラスターにインストールします。
+  ```
+  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  ```
+  {: pre}
+
+
+3. デバッグ・ツール・インターフェースを表示するためにプロキシー・サーバーを始動します。
+  ```
+  kubectl proxy --port 8080
+  ```
+  {: pre}
+
+4. Web ブラウザーで、デバッグ・ツール・インターフェースの URL (http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page) を開きます。
+
+5. テストの**「ingress」**グループを選択します。潜在的な警告、エラー、または問題を検査するテストもあれば、トラブルシューティング中に参照できる情報を収集するだけのテストもあります。各テストの機能について詳しくは、テストの名前の隣にある情報アイコンをクリックしてください。
+
+6. **「実行 (Run)」**をクリックします。
+
+7. 各テストの結果を確認します。
+  * テストが失敗する場合、問題の解決方法について詳しくは、左側の列内のテスト名の隣にある情報アイコンをクリックしてください。
+  * 以下のセクションで Ingress サービスをデバッグする際に、情報を収集するだけのテストの結果も使用できます。
+
+## ステップ 2: Ingress デプロイメントと ALB ポッドのログでエラー・メッセージを確認する
 {: #errors}
 
 まず、Ingress リソースのデプロイメント・イベントと ALB ポッドのログでエラー・メッセージを確認します。 これらのエラー・メッセージは、障害の根本原因を探して、次のセクションで Ingress のセットアップをさらにデバッグするのに役立ちます。
@@ -49,7 +85,7 @@ lastupdated: "2018-12-05"
     ```
     {: pre}
 
-    出力の **Events** セクションに、Ingress リソースや使用した特定のアノテーション内の無効な値に関する警告メッセージが表示される場合があります。 [Ingress リソース構成の資料](cs_ingress.html#public_inside_4)または[アノテーションの資料](cs_annotations.html)を参照してください。
+    出力の **Events** セクションに、Ingress リソースや使用した特定のアノテーション内の無効な値に関する警告メッセージが表示される場合があります。 [Ingress リソース構成の資料](/docs/containers?topic=containers-ingress#public_inside_4)または[アノテーションの資料](/docs/containers?topic=containers-ingress_annotation)を参照してください。
 
     ```
     Name:             myingress
@@ -113,7 +149,7 @@ lastupdated: "2018-12-05"
 
     4. ALB ログでエラー・メッセージを確認します。
 
-## ステップ 2: ALB サブドメインとパブリック IP アドレスに ping する
+## ステップ 3: ALB サブドメインとパブリック IP アドレスに ping する
 {: #ping}
 
 Ingress サブドメインと ALB のパブリック IP アドレスの可用性を確認します。
@@ -136,7 +172,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: screen}
 
-    * パブリック ALB に IP アドレスが指定されていない場合は、[Ingress ALB がゾーンにデプロイされない](cs_troubleshoot_network.html#cs_multizone_subnet_limit)を参照してください。
+    * パブリック ALB に IP アドレスが指定されていない場合は、[Ingress ALB がゾーンにデプロイされない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit)を参照してください。
 
 2. ALB IP の正常性を確認します。
 
@@ -146,10 +182,10 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
         ```
         {: pre}
 
-        * CLI がタイムアウトを返し、ワーカー・ノードを保護するカスタム・ファイアウォールがある場合は、[ファイアウォール](cs_troubleshoot_clusters.html#cs_firewall)で ICMP を許可していることを確認します。
+        * CLI がタイムアウトを返し、ワーカー・ノードを保護するカスタム・ファイアウォールがある場合は、[ファイアウォール](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)で ICMP を許可していることを確認します。
         * ping をブロックしているファイアウォールがなく、引き続き ping がタイムアウトになる場合は、[ALB ポッドの状況を確認](#check_pods)します。
 
-    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。 MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](cs_ingress.html#planning) を参照してください。 MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。 クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](cs_clusters.html#add_zone)します。 クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。 別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
+    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。 MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](/docs/containers?topic=containers-ingress#planning) を参照してください。 MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。 クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](/docs/containers?topic=containers-clusters#add_zone)します。 クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。 別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
 
     以下の HTTP cURL コマンドは、`albhealth` ホストを使用します。このホストは、{{site.data.keyword.containerlong_notm}} によって構成され、ALB IP の `healthy` または `unhealthy` の状況を返します。
         ```
@@ -166,7 +202,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 
 3. IBM 提供の Ingress サブドメインを取得します。
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
@@ -191,8 +227,8 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: screen}
 
-## ステップ 3: ドメイン・マッピングと Ingress リソース構成を確認する
-{: #config}
+## ステップ 4: ドメイン・マッピングと Ingress リソース構成を確認する
+{: #ts_ingress_config}
 
 1. カスタム・ドメインを使用する場合は、DNS プロバイダーを使用してカスタム・ドメインを IBM 提供のサブドメインまたは ALB のパブリック IP アドレスにマップしていることを確認します。 IBM では IBM サブドメインに対する自動ヘルス・チェックを提供しており、障害のある IP がすべて DNS 応答から削除されるため、CNAME の使用がお勧めされることに注意してください。
     * IBM 提供のサブドメイン: 正規名レコード (CNAME) 内のクラスターの IBM 提供のサブドメインにカスタム・ドメインがマップされていることを確認します。
@@ -230,9 +266,9 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 
     1. 1 つのホストは、必ず 1 つの Ingress リソースだけに定義するようにしてください。 1 つのホストが複数の Ingress リソースに定義された場合、ALB はトラフィックを正しく転送しないことがあり、その場合エラーが発生する場合があります。
 
-    2. サブドメインと TLS 証明書が正しいことを確認します。 IBM 提供の Ingress サブドメインと TLS 証明書を見つけるには、`ibmcloud ks cluster-get <cluster_name_or_ID>` を実行します。
+    2. サブドメインと TLS 証明書が正しいことを確認します。 IBM 提供の Ingress サブドメインと TLS 証明書を見つけるには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` を実行します。
 
-    3.  アプリが、Ingress の **path** セクションで構成されているパスを使用して listen していることを確認します。 アプリがルート・パスで listen するようにセットアップされている場合は、`/` をパスとして使用します。 このパスへの着信トラフィックを、アプリが listen している別のパスにルーティングする必要がある場合は、[再書き込みパス](cs_annotations.html#rewrite-path)・アノテーションを使用します。
+    3.  アプリが、Ingress の **path** セクションで構成されているパスを使用して listen していることを確認します。 アプリがルート・パスで listen するようにセットアップされている場合は、`/` をパスとして使用します。 このパスへの着信トラフィックを、アプリが listen している別のパスにルーティングする必要がある場合は、[再書き込みパス](/docs/containers?topic=containers-ingress_annotation#rewrite-path)・アノテーションを使用します。
 
     4. 必要に応じてリソース構成 YAML を編集します。 エディターを閉じると、変更内容が保存され、自動的に適用されます。
         ```
@@ -350,7 +386,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     {: pre}
 
     * すべてが正しく構成されていれば、アプリから予期される応答が返されます。
-    * 応答にエラーがある場合、アプリにエラーがあるか、この特定の ALB にのみ適用される構成にエラーがある可能性があります。 アプリのコード、[Ingress リソース構成ファイル](cs_ingress.html#public_inside_4)、またはこの ALB のみに適用したその他の構成を確認します。
+    * 応答にエラーがある場合、アプリにエラーがあるか、この特定の ALB にのみ適用される構成にエラーがある可能性があります。 アプリのコード、[Ingress リソース構成ファイル](/docs/containers?topic=containers-ingress#public_inside_4)、またはこの ALB のみに適用したその他の構成を確認します。
 
 7. デバッグが完了したら、ALB ポッドに対するヘルス・チェックをリストアします。 ALB ポッドごとに、これらのステップを繰り返します。
   1. ALB ポッドにログインし、`server_name` から `#` を削除します。
@@ -388,21 +424,21 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 
 
 ## ヘルプとサポートの取得
-{: #ts_getting_help}
+{: #ingress_getting_help}
 
 まだクラスターに問題がありますか?
 {: shortdesc}
 
 -  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
--   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
+-   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を確認します](https://cloud.ibm.com/status?selected=status)。
 -   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
     {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
     {: tip}
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
-    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support/howtogetsupport.html#using-avatar)を参照してください。
--   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
-問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。
+    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)を参照してください。
+-   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を参照してください。
+問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。 また、[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) を使用して、クラスターから関連情報を収集してエクスポートし、IBM サポートと情報を共有することができます。
 {: tip}
 

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # 指導教學：將應用程式從 Cloud Foundry 移轉至叢集
 {: #cf_tutorial}
 
@@ -28,25 +31,32 @@ lastupdated: "2018-12-05"
 
 
 ## 目標
+{: #cf_objectives}
 
 - 瞭解將容器中的應用程式部署至 Kubernetes 叢集的一般處理程序。
 - 從您的應用程式碼建立 Dockerfile，以建置容器映像檔。
 - 將容器從該映像檔部署至 Kubernet 叢集。
 
 ## 所需時間
+{: #cf_time}
+
 30 分鐘
 
 ## 適用對象
+{: #cf_audience}
+
 本指導教學的適用對象為 Cloud Foundry 應用程式開發人員。
 
 ## 必要條件
+{: #cf_prereqs}
 
-- [在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔登錄](../services/Registry/index.html)。
-- [建立叢集](cs_clusters.html#clusters_ui)。
-- [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
+- [在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔登錄](/docs/services/Registry?topic=registry-index)。
+- [建立叢集](/docs/containers?topic=containers-clusters#clusters_ui)。
+- [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 - 確定您具有 {{site.data.keyword.containerlong_notm}} 的下列 {{site.data.keyword.Bluemix_notm}} IAM 存取原則：
-    - [任何平台角色](cs_users.html#platform)
-- [瞭解 Docker 和 Kubernetes 術語](cs_tech.html)。
+    - [任何平台角色](/docs/containers?topic=containers-users#platform)
+    - [**撰寫者**或**管理員**服務角色](/docs/containers?topic=containers-users#platform)
+- [瞭解 Docker 和 Kubernetes 術語](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology)。
 
 
 <br />
@@ -54,6 +64,7 @@ lastupdated: "2018-12-05"
 
 
 ## 課程 1：下載應用程式碼
+{: #cf_1}
 
 請備妥程式碼。還沒有任何程式碼？您可以下載入門範本程式碼，以在本指導教學中使用。
 {: shortdesc}
@@ -79,7 +90,7 @@ lastupdated: "2018-12-05"
 
     c. 從主控台指示中的步驟 1，按一下**下載入門範本程式碼**。
 
-    d. 將 .zip 檔解壓縮，並將其內容儲存至 `cf.py` 目錄。
+    d. 解壓縮 `.zip` 檔，並將其內容儲存至 `cf-py` 目錄。
 
 您的應用程式碼已經準備好容器化！
 
@@ -89,6 +100,7 @@ lastupdated: "2018-12-05"
 
 
 ## 課程 2：使用您的應用程式碼建立 Docker 映像檔
+{: #cf_2}
 
 建立 Dockerfile，其中包含您的應用程式碼及容器的必要配置。然後，從該 Dockerfile 建置 Docker 映像檔，並將它推送至您的專用映像檔登錄。
 {: shortdesc}
@@ -175,6 +187,7 @@ lastupdated: "2018-12-05"
 
 
 ## 課程 3：從映像檔部署容器
+{: #cf_3}
 
 將您的應用程式部署為 Kubernetes 叢集裡的容器。
 {: shortdesc}
@@ -182,7 +195,7 @@ lastupdated: "2018-12-05"
 1. 建立名為 `cf-py.yaml` 的配置 YAML 檔案，然後將 `<registry_namespace>` 更新為您的專用映像檔登錄名稱。此配置檔會從您在前一課程建立的映像檔定義容器部署，以及一個服務，以便將應用程式公開給大眾使用。
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -255,7 +268,7 @@ lastupdated: "2018-12-05"
     a.  取得工作者節點在叢集裡的公用 IP 位址。
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -263,7 +276,7 @@ lastupdated: "2018-12-05"
 
     ```
 ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 
@@ -271,11 +284,11 @@ ID                                                 Public IP        Private IP  
 
     <img src="images/python_flask.png" alt="已部署的樣板 Python Flask 應用程式的畫面擷取。" />
 
-5.  [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
+5.  [啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#cli_dashboard)。
 
-    如果您在 [{{site.data.keyword.Bluemix_notm}} 主控台](https://console.bluemix.net/)中選取叢集，則可以使用 **Kubernetes 儀表板** 按鈕，透過按一下來啟動儀表板。
+    如果您在 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/)中選取叢集，則可以使用 **Kubernetes 儀表板** 按鈕，透過按一下來啟動儀表板。
     {: tip}
 
 6. 在**工作負載**標籤中，您可以看到所建立的資源。
 
-恭喜！您的應用程式已部署在容器中！
+做得好！您的應用程式已部署在容器中！

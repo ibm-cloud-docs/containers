@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, nginx, ingress controller
+
+subcollection: containers
 
 ---
 
@@ -34,10 +38,42 @@ Ha expuesto a nivel público la app creando un recurso de Ingress para la app en
 Asegúrese de definir un host solo en un recurso de Ingress. Si se define un host en varios recursos de Ingress, el ALB no puede reenviar el tráfico correctamente y puede que se produzcan errores.
 {: tip}
 
-Antes de empezar, asegúrese de tener las [políticas de acceso de {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) siguientes:
+Antes de empezar, asegúrese de tener las [políticas de acceso de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) siguientes:
   - Rol de plataforma **Editor** o **Administrador** para el clúster
+  - Rol de servicio de **Escritor** o de **Gestor**
 
-## Paso 1: Compruebe si hay mensajes de error en los registros de despliegue de Ingress y de pod de ALB
+## Paso 1. Ejecutar pruebas con la herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}}
+
+Cuando resuelva problemas, puede utilizar la herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}} para ejecutar pruebas de Ingress y recopilar información de Ingress pertinente del clúster. Para utilizar la herramienta de depuración, instale el diagrama de Helm [`ibmcloud-iks-debug` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+{: shortdesc}
+
+
+1. [Configure Helm en el clúster, cree una cuenta de servicio para Tiller y añada el repositorio `ibm` a la instancia de Helm](/docs/containers?topic=containers-integrations#helm).
+
+2. Instale el diagrama de Helm en el clúster.
+  ```
+  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  ```
+  {: pre}
+
+
+3. Inicie un servidor proxy para visualizar la interfaz de la herramienta de depuración.
+  ```
+  kubectl proxy --port 8080
+  ```
+  {: pre}
+
+4. En un navegador web, abra el URL de la interfaz de la herramienta de depuración: http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
+
+5. Seleccione el grupo de pruebas **ingress**. Algunas pruebas comprueban si hay posibles avisos, errores o problemas, y algunas pruebas solo recopilan información que puede consultar mientras resuelve problemas. Para obtener más información acerca de la función de cada prueba, pulse el icono de información situado junto al nombre de la prueba.
+
+6. Pulse **Ejecutar**.
+
+7. Compruebe los resultados de cada prueba.
+  * Si falla alguna prueba, pulse en el icono de información situado junto al nombre de la prueba en la columna de la izquierda para obtener información sobre cómo resolver el problema.
+  * También puede utilizar los resultados de las pruebas que solo recopilan información mientras depura el servicio Ingress en las secciones siguientes.
+
+## Paso 2: Comprobar si hay mensajes de error en los registros de despliegue de Ingress y de pod de ALB
 {: #errors}
 
 En primer lugar, compruebe si hay mensajes de error en los registros de pod de ALB y los sucesos de despliegue de recursos de Ingress. Estos mensajes de error pueden ayudarle a encontrar las causas raíz de las anomalías y a depurar aún más la configuración de Ingress en las secciones siguientes.
@@ -49,7 +85,7 @@ En primer lugar, compruebe si hay mensajes de error en los registros de pod de A
     ```
     {: pre}
 
-    En la sección de **sucesos** de la salida, es posible que vea mensajes de aviso sobre valores no válidos en el recurso de Ingress o en determinadas anotaciones que haya utilizado. Consulte la [documentación de configuración de recursos de Ingress](cs_ingress.html#public_inside_4) o la [documentación de anotaciones](cs_annotations.html).
+    En la sección de **sucesos** de la salida, es posible que vea mensajes de aviso sobre valores no válidos en el recurso de Ingress o en determinadas anotaciones que haya utilizado. Consulte la [documentación de configuración de recursos de Ingress](/docs/containers?topic=containers-ingress#public_inside_4) o la [documentación de anotaciones](/docs/containers?topic=containers-ingress_annotation).
 
     ```
     Name:             myingress
@@ -87,7 +123,7 @@ En primer lugar, compruebe si hay mensajes de error en los registros de pod de A
 
     2. Asegúrese de que todos los pods están en ejecución seleccionando la columna **ESTADO**.
 
-    3. Si un pod no está `En ejecución`, puede inhabilitar y volver a habilitar el ALB. En los mandatos siguientes, sustituya `<ALB_ID>` con el ID del ALB del pod. Por ejemplo, si el pod que no se está ejecutando tiene el nombre `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z`, el ID de ALB es `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1`.
+    3. Si un pod no está `En ejecución`, puede inhabilitar y volver a habilitar el ALB. En los mandatos siguientes, sustituya `<ALB_ID>` por el ID del ALB del pod. Por ejemplo, si el pod que no se está ejecutando tiene el nombre `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z`, el ID de ALB es `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1`.
         ```
         ibmcloud ks alb-configure --albID <ALB_ID> --disable
         ```
@@ -113,7 +149,7 @@ En primer lugar, compruebe si hay mensajes de error en los registros de pod de A
 
     4. Mire si hay mensajes de error en los registros del ALB.
 
-## Paso 2: Ejecute ping al subdominio del ALB y las direcciones IP públicas
+## Paso 3: Ejecutar ping sobre el subdominio del ALB y las direcciones IP públicas
 {: #ping}
 
 Compruebe la disponibilidad del subdominio de Ingress y las direcciones IP públicas de los ALB.
@@ -136,7 +172,7 @@ Compruebe la disponibilidad del subdominio de Ingress y las direcciones IP públ
     ```
     {: screen}
 
-    * Si un ALB público no tiene ninguna dirección IP, consulte [Ingress ALB no se despliega en una zona](cs_troubleshoot_network.html#cs_multizone_subnet_limit).
+    * Si un ALB público no tiene ninguna dirección IP, consulte [Ingress ALB no se despliega en una zona](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit).
 
 2. Compruebe el estado de las IP de ALB.
 
@@ -146,10 +182,10 @@ Compruebe la disponibilidad del subdominio de Ingress y las direcciones IP públ
         ```
         {: pre}
 
-        * Si la CLI devuelve un tiempo de espera y tiene un cortafuegos personalizado que protege los nodos trabajadores, asegúrese de permitir ICMP en el [cortafuegos](cs_troubleshoot_clusters.html#cs_firewall).
+        * Si la CLI devuelve un tiempo de espera y tiene un cortafuegos personalizado que protege los nodos trabajadores, asegúrese de permitir ICMP en el [cortafuegos](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).
         * Si no hay ningún cortafuegos que esté bloqueando los pings y los pings siguen ejecutándose con el tiempo de espera, [compruebe el estado de los pods de ALB](#check_pods).
 
-    * Solo clústeres multizona: puede utilizar la comprobación de estado de MZLB para determinar el estado de las IP de ALB. Para obtener más información sobre el MZLB, consulte [Equilibrador de carga multizona (MZLB)](cs_ingress.html#planning). La comprobación de estado de MZLB solo está disponible para los clústeres que tienen el nuevo subdominio de Ingress en el formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si el clúster sigue utilizando el formato antiguo de `<cluster_name>.<region>.containers.mybluemix.net`, [convierta el clúster de una sola zona en multizona](cs_clusters.html#add_zone). Se asigna al clúster un subdominio con el nuevo formato, pero también puede continuar utilizando el formato del subdominio antiguo. Como alternativa, puede solicitar un nuevo clúster al que se asigne automáticamente el nuevo formato de subdominio.
+    * Solo clústeres multizona: puede utilizar la comprobación de estado de MZLB para determinar el estado de las IP de ALB. Para obtener más información sobre el MZLB, consulte [Equilibrador de carga multizona (MZLB)](/docs/containers?topic=containers-ingress#planning). La comprobación de estado de MZLB solo está disponible para los clústeres que tienen el nuevo subdominio de Ingress en el formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si el clúster sigue utilizando el formato antiguo de `<cluster_name>.<region>.containers.mybluemix.net`, [convierta el clúster de una sola zona en multizona](/docs/containers?topic=containers-clusters#add_zone). Se asigna al clúster un subdominio con el nuevo formato, pero también puede continuar utilizando el formato del subdominio antiguo. Como alternativa, puede solicitar un nuevo clúster al que se asigne automáticamente el nuevo formato de subdominio.
 
     El siguiente mandato cURL de HTTP utiliza el host `albhealth`, que está configurado por {{site.data.keyword.containerlong_notm}} para devolver los valores de estado `healthy` o `unhealthy` para una IP de ALB.
         ```
@@ -166,7 +202,7 @@ Compruebe la disponibilidad del subdominio de Ingress y las direcciones IP públ
 
 3. Obtenga el subdominio de Ingress proporcionado por IBM.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
@@ -191,8 +227,8 @@ Compruebe la disponibilidad del subdominio de Ingress y las direcciones IP públ
     ```
     {: screen}
 
-## Paso 3: Compruebe las correlaciones de dominio y la configuración de recursos de Ingress
-{: #config}
+## Paso 4: Comprobar las correlaciones de dominio y la configuración de recursos de Ingress
+{: #ts_ingress_config}
 
 1. Si utiliza un dominio personalizado, verifique que ha utilizado el proveedor de DNS para correlacionar el dominio personalizado con el subdominio proporcionado por IBM o con la dirección IP pública de ALB. Tenga en cuenta que se prefiere el uso de un CNAME porque IBM proporciona comprobaciones de estado automáticas en el subdominio de IBM y elimina cualquier IP anómala de la respuesta de DNS.
     * Subdominio proporcionado por IBM: compruebe que el dominio personalizado esté correlacionado con el subdominio proporcionado por IBM del clúster en el registro de nombre canónico (CNAME).
@@ -230,9 +266,9 @@ Compruebe la disponibilidad del subdominio de Ingress y las direcciones IP públ
 
     1. Asegúrese de definir un host solo en un recurso de Ingress. Si se define un host en varios recursos de Ingress, el ALB no puede reenviar el tráfico correctamente y puede que se produzcan errores.
 
-    2. Compruebe que el subdominio y el certificado TLS sean correctos. Para encontrar el subdominio de Ingress proporcionado por IBM y el certificado TLS, ejecute `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+    2. Compruebe que el subdominio y el certificado TLS sean correctos. Para encontrar el subdominio de Ingress proporcionado por IBM y el certificado TLS, ejecute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
 
-    3.  Asegúrese de que su app está a la escucha en la misma vía de acceso que está configurada en la sección **path** de Ingress. Si la app se ha configurado para que escuche en la vía de acceso raíz, utilice `/` como vía de acceso. Si el tráfico de entrada a esta vía de acceso se debe direccionar a una vía de acceso distinta en la que la app está a la escucha, utilice la anotación de [vías de acceso de reescritura](cs_annotations.html#rewrite-path).
+    3.  Asegúrese de que su app está a la escucha en la misma vía de acceso que está configurada en la sección **path** de Ingress. Si la app se ha configurado para que escuche en la vía de acceso raíz, utilice `/` como vía de acceso. Si el tráfico de entrada a esta vía de acceso se debe direccionar a una vía de acceso distinta en la que la app está a la escucha, utilice la anotación de [vías de acceso de reescritura](/docs/containers?topic=containers-ingress_annotation#rewrite-path).
 
     4. Edite el YAML de configuración de recursos según sea necesario. Cuando se cierra el editor, los cambios se guardan y se aplican automáticamente.
         ```
@@ -350,7 +386,7 @@ Por ejemplo, supongamos que tiene un clúster multizona en 2 zonas y los 2 ALB p
     {: pre}
 
     * Si todo está configurado correctamente, obtendrá la respuesta esperada de la app.
-    * Si obtiene un error en la respuesta, puede que haya un error en la app o en una configuración que se aplique únicamente a este ALB específico. Compruebe el código de la app, los [archivos de configuración de recursos de Ingress](cs_ingress.html#public_inside_4) o cualquier otra configuración que haya aplicado sólo a este ALB.
+    * Si obtiene un error en la respuesta, puede que haya un error en la app o en una configuración que se aplique únicamente a este ALB específico. Compruebe el código de la app, los [archivos de configuración de recursos de Ingress](/docs/containers?topic=containers-ingress#public_inside_4) o cualquier otra configuración que haya aplicado sólo a este ALB.
 
 7. Después de finalizar la depuración, restaure la comprobación de estado en los pods de ALB. Repita estos pasos para cada pod de ALB.
   1. Inicie la sesión en el pod de ALB y elimine el carácter `#` de `server_name`.
@@ -388,21 +424,21 @@ Por ejemplo, supongamos que tiene un clúster multizona en 2 zonas y los 2 ALB p
 
 
 ## Obtención de ayuda y soporte
-{: #ts_getting_help}
+{: #ingress_getting_help}
 
 ¿Sigue teniendo problemas con su clúster?
 {: shortdesc}
 
--  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plug-ins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
--   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/bluemix/support/#status).
+-  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plugins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
+-   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/status?selected=status).
 -   Publique una pregunta en [Slack de {{site.data.keyword.containerlong_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
     Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
     {: tip}
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
-    -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
-    Consulte [Obtención de ayuda](/docs/get-support/howtogetsupport.html#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
--   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
-Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.
+    -   Para formular preguntas sobre el servicio y obtener instrucciones de iniciación, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
+    Consulte [Obtención de ayuda](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
+-   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`. También puede utilizar la [herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) para recopilar y exportar la información pertinente del clúster que se va a compartir con el servicio de soporte de IBM.
 {: tip}
 

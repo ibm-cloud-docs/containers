@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -33,14 +37,14 @@ Si vous choisissez de modifier les paramètres par défaut, vous le faites à vo
 Si vous avez des exigences spécifiques en termes d'optimisation des performances, vous pouvez modifier les valeurs par défaut des paramètres `sysctl` du noyau Linux sur les noeuds worker.
 {: shortdesc}
 
-Les noeuds worker sont automatiquement mis à disposition avec des performances de noyau optimisées, mais vous pouvez modifier les paramètres par défaut en appliquant un objet [Kubernetes `DaemonSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) personnalisé dans votre cluster. Cet objet modifie les paramètres de tous les noeuds worker existants et les applique aux nouveaux noeuds worker mis à disposition dans le cluster. Aucun pod n'est affecté.
+Les noeuds worker sont automatiquement mis à disposition avec des performances de noyau optimisées, mais vous pouvez modifier les paramètres par défaut en appliquant un objet [Kubernetes `DaemonSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) personnalisé dans votre cluster. Cet objet modifie les paramètres de tous les noeuds worker existants et appliquent les paramètres à tous les nouveaux noeuds worker mis à disposition dans le cluster. Aucun pod n'est affecté.
 
-Vous devez disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](cs_users.html#platform) pour le cluster pour exécuter le modèle initContainer privilégié. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+Vous devez disposer du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Responsable**](/docs/containers?topic=containers-users#platform) pour tous les espaces de nom pour exécuter l'exemple de commande `initContainer` avec privileged. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
 {: note}
 
-1. Sauvegardez l'objet DaemonSet suivant dans un fichier nommé `worker-node-kernel-settings.yaml`. Dans la section `spec.template.spec.initContainers`, ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'objet daemonset modifie le nombre maximal par défaut de connexions autorisées dans l'environnement via le paramètre `net.core.somaxconn` et la plage de ports éphémères via le paramètre `net.ipv4.ip_local_port_range`.
+1. Sauvegardez l'ensemble de démons (DaemonSet) suivant dans un fichier nommé `worker-node-kernel-settings.yaml`. Dans la section `spec.template.spec.initContainers`, ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'ensemble de démons modifie le nombre maximal par défaut de connexions autorisées dans l'environnement via le paramètre `net.core.somaxconn` et la plage de ports éphémères via le paramètre `net.ipv4.ip_local_port_range`.
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: kernel-optimization
@@ -93,7 +97,7 @@ Vous devez disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} I
     ```
     {: codeblock}
 
-2. Appliquez l'objet DaemonSet à vos noeuds worker. Les modifications sont appliquées immédiatement.
+2. Appliquez l'ensemble de démons à vos noeuds worker. Les modifications sont appliquées immédiatement.
     ```
     kubectl apply -f worker-node-kernel-settings.yaml
     ```
@@ -101,15 +105,15 @@ Vous devez disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} I
 
 <br />
 
-Pour rétablir les valeurs par défaut des paramètres `sysctl` de vos noeuds worker, définis par {{site.data.keyword.containerlong_notm}} :
+Pour rétablir les valeurs par défaut des paramètres `sysctl` de vos noeuds worker, définies par {{site.data.keyword.containerlong_notm}} :
 
-1. Supprimez l'objet DaemonSet. Les éléments initContainers qui avaient appliqué les paramètres personnalisés sont supprimés.
+1. Supprimez l'ensemble de démons. Les éléments `initContainers` qui appliquaient les paramètres personnalisés sont supprimés.
     ```
     kubectl delete ds kernel-optimization
     ```
     {: pre}
 
-2. [Réamorcez tous les noeuds worker dans le cluster](cs_cli_reference.html#cs_worker_reboot). Les noeuds worker sont à nouveau en ligne dès que les valeurs par défaut sont appliquées.
+2. [Réamorcez tous les noeuds worker dans le cluster](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). Les noeuds worker sont à nouveau en ligne dès que les valeurs par défaut sont appliquées.
 
 <br />
 
@@ -120,11 +124,11 @@ Pour rétablir les valeurs par défaut des paramètres `sysctl` de vos noeuds wo
 Si vous avez des exigences spécifiques en termes de charges de travail pour les performances, vous pouvez modifier les paramètres par défaut `sysctl` du noyau Linux dans les espaces de nom de réseau de pods.
 {: shortdesc}
 
-Pour optimiser les paramètres du noyau pour les pods d'application, vous pouvez insérer un correctif [initContainer ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) dans le fichier YAML `pod/ds/rs/deployment` pour chaque déploiement. L'élément initContainer est ajouté à chaque déploiement d'application figurant dans l'espace de nom du réseau de pods dont vous souhaitez optimiser les performances.
+Pour optimiser les paramètres du noyau pour les pods d'application, vous pouvez insérer un correctif [`initContainer ` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) dans le fichier YAML `pod/ds/rs/deployment` pour chaque déploiement. L'élément `initContainer` est ajouté à chaque déploiement d'application figurant dans l'espace de nom du réseau de pods dont vous souhaitez optimiser les performances.
 
-Avant de commencer, vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](cs_users.html#platform) pour le cluster pour exécuter l'exemple initContainer privilégié. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+Avant de commencer, vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Responsable**](/docs/containers?topic=containers-users#platform) pour tous les espaces de nom pour exécuter l'exemple de commande `initContainer` avec privileged. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
 
-1. Sauvegardez le correctif initContainer suivant dans un fichier nommé `pod-patch.yaml` et ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'élément initContainer modifie le nombre maximal par défaut de connexions autorisées dans l'environnement via le paramètre `net.core.somaxconn` et la plage de ports éphémères via le paramètre `net.ipv4.ip_local_port_range`.
+1. Sauvegardez le correctif `initContainer` suivant dans un fichier nommé `pod-patch.yaml` et ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'élément `initContainer` modifie le nombre maximal par défaut de connexions autorisées dans l'environnement via le paramètre `net.core.somaxconn` et la plage de ports éphémères via le paramètre `net.ipv4.ip_local_port_range`.
     ```
     spec:
       template:
@@ -157,11 +161,11 @@ Avant de commencer, vérifiez que vous disposez du [rôle de plateforme {{site.d
 ## Ajustement des ressources du fournisseur de métriques du cluster
 {: #metrics}
 
-Les configurations du fournisseur de métriques de votre cluster (`metrics-server` dans Kubernetes 1.12 et version ultérieure, ou `heapster` dans les versions antérieures) sont optimisées pour les clusters comportant un nombre inférieur ou égal à 30 pods par noeud worker. Si votre cluster comporte plus de pods par noeud worker, le conteneur principal du fournisseur de métriques `metrics-server` ou `heapster` pour le pod peut redémarrer fréquemment avec un message d'erreur de ce type : `OOMKilled`.
+Les configurations du fournisseur de métriques de votre cluster (`metrics-server` dans Kubernetes 1.12 et versions ultérieures, ou `heapster` dans les versions antérieures) sont optimisées pour les clusters comportant un nombre inférieur ou égal à 30 pods par noeud worker. Si votre cluster comporte plus de pods par noeud worker, le conteneur principal du fournisseur de métriques `metrics-server` ou `heapster` pour le pod peut redémarrer fréquemment avec un message d'erreur de ce type : `OOMKilled`.
 
 Le pod du fournisseur de métriques comporte également un conteneur `nanny` pour la mise à l'échelle des demandes et des limites de ressources du conteneur principal de `metrics-server` ou `heapster` en réponse au nombre de noeuds worker dans le cluster. Vous pouvez modifier les ressources par défaut en éditant l'élément configmap du fournisseur de métriques.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Ouvrez le fichier YAML correspondant à l'élément configmap du fournisseur de métriques du cluster.
     *  Pour `metrics-server` :

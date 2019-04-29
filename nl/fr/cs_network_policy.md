@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # Contrôle du trafic à l'aide de règles réseau
 {: #network_policies}
 
@@ -32,7 +37,7 @@ Si vous avez des exigences particulières en matière de sécurité ou si vous d
   [Règles réseau Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/network-policies/) : ces règles indiquent comment les pods communiquent avec d'autres pods et avec des noeuds finaux externes. A partir de Kubernetes version 1.8, le trafic réseau entrant et sortant peut être autorisé ou bloqué selon le protocole, le port et les adresses IP source et de destination. Le trafic peut également être filtré en fonction des libellés de pod et d'espace de nom. Les règles réseau Kubernetes sont appliquées à l'aide de commandes `kubectl` ou d'API Kubernetes. Lorsque ces règles sont appliquées, elles sont automatiquement converties en règles réseau Calico et Calico les met en oeuvre.
   </li>
   <li>
-  Règles réseau Calico pour les clusters Kubernetes version [1.10 et ultérieure ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) ou [1.9 et antérieure ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) : ces règles sont un sur-ensemble de règles réseau Kubernetes et sont appliquées à l'aide de commandes `calicoctl`. Les règles Calico ajoutent les fonctions suivantes.
+  [Règles réseau Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) : ces règles sont un sur-ensemble des règles réseau Kubernetes et sont appliquées à l'aide de commandes `calicoctl`. Les règles Calico ajoutent les fonctions suivantes.
     <ul>
     <li>Autorisation ou blocage du trafic réseau sur des interfaces réseau spécifiques, sans tenir compte de la source de pod Kubernetes, de l'adresse IP de destination ou du routage CIDR.</li>
     <li>Autorisation ou blocage du trafic réseau pour les pods entre les espaces de nom.</li>
@@ -43,7 +48,7 @@ Si vous avez des exigences particulières en matière de sécurité ou si vous d
 
 Calico applique ces règles, y compris les éventuelles règles réseau Kubernetes converties automatiquement en règles Calico, en configurant des règles Linux Iptables sur les noeuds worker Kubernetes. Les règles Iptables font office de pare-feu pour le noeud worker en définissant les caractéristiques que le trafic réseau doit respecter pour être acheminé vers la ressource ciblée.
 
-Pour avoir recours au service Ingress et au service d'équilibreur de charge, utilisez des règles Calico et Kubernetes pour gérer le trafic réseau en provenance et à destination de votre cluster. N'utilisez pas les [groupes de sécurité](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups) de l'infrastructure IBM Cloud (SoftLayer). Ces groupes de sécurité sont appliqués à l'interface réseau d'un serveur virtuel unique pour filtrer le trafic au niveau de l'hyperviseur. Toutefois, les groupes de sécurité ne prennent pas en charge le protocole VRRP qui est utilisé par {{site.data.keyword.containerlong_notm}} pour gérer l'adresse IP de l'équilibreur de charge. Si le protocole VRRP n'est pas présent pour gérer l'adresse IP de l'équilibreur de charge, les services d'équilibreur de charge et Ingress ne fonctionneront pas correctement.
+Pour avoir recours au service Ingress et au service d'équilibreur de charge, utilisez des règles Calico et Kubernetes pour gérer le trafic réseau en provenance et à destination de votre cluster. N'utilisez pas les [groupes de sécurité](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) de l'infrastructure IBM Cloud (SoftLayer). Ces groupes de sécurité sont appliqués à l'interface réseau d'un serveur virtuel unique pour filtrer le trafic au niveau de l'hyperviseur. Toutefois, les groupes de sécurité ne prennent pas en charge le protocole VRRP qui est utilisé par {{site.data.keyword.containerlong_notm}} pour gérer l'adresse IP de l'équilibreur de charge. Si le protocole VRRP n'est pas présent pour gérer l'adresse IP de l'équilibreur de charge, les services d'équilibreur de charge et Ingress ne fonctionneront pas correctement.
 {: tip}
 
 <br />
@@ -52,7 +57,7 @@ Pour avoir recours au service Ingress et au service d'équilibreur de charge, ut
 ## Règles réseau Calico et Kubernetes par défaut
 {: #default_policy}
 
-Lorsqu'un cluster avec un réseau local virtuel (VLAN) public est créé, une ressource HostEndpoint avec le libellé `ibm.role: worker_public` est générée automatiquement pour chaque noeud worker et l'interface réseau publique associée. Pour protéger l'interface réseau publique d'un noeud worker, des règles Calico par défaut sont appliquées à chaque noeud final d'hôte avec le libellé `ibm.role: worker_public`.
+Lorsqu'un cluster avec un réseau local virtuel (VLAN) public est créé, une ressource `HostEndpoint` avec le libellé `ibm.role: worker_public` est générée automatiquement pour chaque noeud worker et l'interface réseau publique associée. Pour protéger l'interface réseau publique d'un noeud worker, des règles Calico par défaut sont appliquées à chaque noeud final d'hôte avec le libellé `ibm.role: worker_public`.
 {:shortdesc}
 
 Ces règles Calico par défaut autorisent tout le trafic réseau sortant et autorisent le trafic réseau entrant sur des composants de cluster spécifiques, par exemple les services Kubernetes NodePort, LoadBalancer et Ingress. Tout autre trafic réseau entrant provenant d'Internet vers vos noeuds worker qui n'est pas spécifié dans les règles par défaut est bloqué. Les règles par défaut n'affectent pas le trafic entre les pods.
@@ -95,7 +100,7 @@ Ne supprimez pas de règle appliquée à un noeud final d'hôte à moins de comp
   </tbody>
 </table>
 
-Dans les clusters Kubernetes version 1.10 et les clusters plus récents, une règle Kubernetes par défaut limitant l'accès au tableau de bord Kubernetes est également créée. Les règles Kubernetes ne s'appliquent pas au noeud final d'hôte, mais au pod `kube-dashboard` à la place. Cette règle s'applique aux clusters connectés uniquement à un VLAN privé et aux clusters connectés à un VLAN public et privé.
+Dans les clusters Kubernetes version 1.10 ou ultérieure, une règle Kubernetes par défaut limitant l'accès au tableau de bord Kubernetes est également créée. Les règles Kubernetes ne s'appliquent pas au noeud final d'hôte, mais au pod `kube-dashboard` à la place. Cette règle s'applique aux clusters connectés uniquement à un VLAN privé et aux clusters connectés à un VLAN public et privé.
 
 <table>
 <caption>Règles Kubernetes par défaut pour chaque cluster</caption>
@@ -105,7 +110,7 @@ Dans les clusters Kubernetes version 1.10 et les clusters plus récents, une rè
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>Dans Kubernetes 1.10 ou version ultérieure uniquement</b>, règle fournie dans l'espace de nom <code>kube-system</code> : blocage de l'accès de tous les pods au tableau de bord Kubernetes. Cette règle n'affecte pas l'accès au tableau de bord à partir de la console {{site.data.keyword.Bluemix_notm}} ou via <code>kubectl proxy</code>. Si un pod nécessite l'accès au tableau de bord, déployez-le dans un espace de nom ayant le libellé <code>kubernetes-dashboard-policy: allow</code>.</td>
+  <td>Dans Kubernetes 1.10 ou version ultérieure uniquement, règle fournie dans l'espace de nom <code>kube-system</code> utilisée pour bloquer l'accès de tous les pods au tableau de bord Kubernetes. Cette règle n'affecte pas l'accès au tableau de bord à partir de la console {{site.data.keyword.Bluemix_notm}} ou via <code>kubectl proxy</code>. Si un pod nécessite l'accès au tableau de bord, déployez-le dans un espace de nom ayant le libellé <code>kubernetes-dashboard-policy: allow</code>.</td>
  </tr>
 </tbody>
 </table>
@@ -119,31 +124,14 @@ Dans les clusters Kubernetes version 1.10 et les clusters plus récents, une rè
 Pour afficher, gérer et ajouter des règles Calico, installez et configurez l'interface CLI de Calico.
 {:shortdesc}
 
-La compatibilité entre les versions de Calico pour la configuration de l'interface CLI et les règles varie en fonction de la version Kubernetes de votre cluster. Pour installer et configurer l'interface CLI de Calico, cliquez sur l'un des liens suivants en fonction de la version de votre cluster :
-
-* [Clusters Kubernetes version 1.10 ou ultérieure](#1.10_install)
-* [Clusters Kubernetes version 1.9 ou antérieure (déprécié)](#1.9_install)
-
-Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieure à la version 1.10 ou ultérieure, consultez la rubrique [Préparation à la mise à jour vers Calico v3](cs_versions.html#110_calicov3).
-{: tip}
-
-### Installation et configuration de l'interface CLI de Calico version 3.3.1 pour les clusters exécutant Kubernetes version 1.10 ou ultérieure
-{: #1.10_install}
-
-1. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `ibmcloud ks cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement comprend également les clés permettant d'accéder à votre portefeuille d'infrastructure et d'exécuter des commandes Calico sur vos noeuds worker.
+1. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Incluez les options `--admin` et `--network` avec la commande `ibmcloud ks cluster-config`. L'option `--admin` permet de télécharger les clés pour accéder à votre portefeuille d'infrastructure et exécuter des commandes Calico sur vos noeuds worker. L'option `--network` permet de télécharger le fichier de configuration pour exécuter toutes les commandes Calico.
 
   ```
-  ibmcloud ks cluster-config <cluster_name> --admin
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
   ```
   {: pre}
 
-2. Téléchargez le fichier de configuration de Calico pour exécuter toutes les commandes Calico.
-    ```
-    ibmcloud ks cluster-config <cluster_name_or_ID> --network
-    ```
-    {: pre}
-
-3. Pour les utilisateurs OSX et Linux, procédez comme suit.
+3. Pour les utilisateurs OS X et Linux, procédez comme suit.
     1. Créez le répertoire `/etc/calico`.
         ```
         sudo mkdir /etc/calico
@@ -158,10 +146,11 @@ Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieur
 
 4. [Téléchargez l'interface CLI de Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/projectcalico/calicoctl/releases/tag/v3.3.1).
 
-    Si vous utilisez OS X, téléchargez la version `-darwin-amd64`. Si vous utilisez Windows, installez l'interface CLI de Calico dans le même répertoire que celle d'{{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard. Veillez à sauvegarder le fichier sous `calicoctl.exe`.
+    Si vous utilisez OS X, téléchargez la version `-darwin-amd64`. Si vous utilisez Windows, installez l'interface CLI de Calico dans le même répertoire que celle d'{{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécutez des commandes par la suite.
+    Veillez à sauvegarder le fichier sous `calicoctl.exe`.
     {: tip}
 
-5. Pour les utilisateurs OSX et Linux, procédez comme suit.
+5. Pour les utilisateurs OS X et Linux, procédez comme suit.
     1. Déplacez le fichier exécutable vers le répertoire _/usr/local/bin_.
         - Linux :
 
@@ -184,7 +173,7 @@ Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieur
         ```
         {: pre}
 
-6. Si les règles réseau d'entreprise utilisent des proxys ou des pare-feux pour empêcher l'accès depuis votre système local à des noeuds finaux publics, [autorisez l'accès TCP pour les commandes Calico](cs_firewall.html#firewall).
+6. Si les règles réseau d'entreprise utilisent des proxys ou des pare-feux pour empêcher l'accès depuis votre système local à des noeuds finaux publics, [autorisez l'accès TCP pour les commandes Calico](/docs/containers?topic=containers-firewall#firewall).
 
 7. Vérifiez que la configuration Calico fonctionne correctement.
 
@@ -212,160 +201,6 @@ Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieur
       ```
       {: screen}
 
-
-### Installation et configuration de l'interface CLI de Calico version 1.6.3 pour les clusters exécutant Kubernetes version 1.9 ou antérieure (déprécié)
-{: #1.9_install}
-
-La version 1.9 de Kubernetes est dépréciée et n'est plus prise en charge à partir du 27 décembre 2018. Les versions antérieures de Kubernetes ne sont pas prises en charge. Dès que possible, [mettez à jour](cs_cluster_update.html#update) ou [créez](cs_clusters.html#clusters) des clusters qui exécutent une [version prise en charge](cs_versions.html#cs_versions).
-{: note}
-
-1. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `ibmcloud ks cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement comprend également les clés permettant d'accéder à votre portefeuille d'infrastructure et d'exécuter des commandes Calico sur vos noeuds worker.
-
-  ```
-  ibmcloud ks cluster-config <cluster_name> --admin
-  ```
-  {: pre}
-
-
-2. [Téléchargez l'interface CLI de Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.3).
-
-    Si vous utilisez OS X, téléchargez la version `-darwin-amd64`. Si vous utilisez Windows, installez l'interface CLI de Calico dans le même répertoire que celle d'{{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
-    {: tip}
-
-3. Pour les utilisateurs OSX et Linux, procédez comme suit.
-    1. Déplacez le fichier exécutable vers le répertoire _/usr/local/bin_.
-        - Linux :
-          ```
-          mv filepath/calicoctl /usr/local/bin/calicoctl
-          ```
-          {: pre}
-
-        - OS X :
-          ```
-          mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
-          ```
-          {: pre}
-
-    2. Rendez le fichier exécutable.
-        ```
-        chmod +x /usr/local/bin/calicoctl
-        ```
-        {: pre}
-
-4. Assurez-vous que les commandes `calicoctl` s'exécutent correctement en vérifiant la version client de l'interface de ligne de commande Calico.
-    ```
-    calicoctl version
-    ```
-    {: pre}
-
-5. Si les règles réseau d'entreprise utilisent des proxys ou des pare-feux pour empêcher l'accès de votre système local à des noeuds finaux publics : voir [Exécution des commandes `calicoctl` derrière un pare-feu](cs_firewall.html#firewall) afin d'obtenir les instructions permettant d'autoriser l'accès TCP pour les commandes Calico.
-
-6. Pour Linux et OS X, créez le répertoire `/etc/calico`. Pour Windows, vous pouvez utiliser n'importe quel répertoire.
-    ```
-    sudo mkdir -p /etc/calico/
-    ```
-    {: pre}
-
-7. Créez un fichier `calicoctl.cfg`.
-    - Linux et OS X :
-      ```
-      sudo vi /etc/calico/calicoctl.cfg
-      ```
-      {: pre}
-
-    - Windows : créez le fichier à l'aide d'un éditeur de texte.
-
-8. Entrez les informations suivantes dans le fichier <code>calicoctl.cfg</code>.
-
-    ```
-    apiVersion: v1
-    kind: calicoApiConfig
-    metadata:
-    spec:
-        etcdEndpoints: https://<ETCD_HOST>:<ETCD_PORT>
-        etcdKeyFile: <CERTS_DIR>/admin-key.pem
-        etcdCertFile: <CERTS_DIR>/admin.pem
-        etcdCACertFile: <CERTS_DIR>/<ca-*pem_file>
-    ```
-    {: codeblock}
-
-    1. Récupérez l'hôte `<ETCD_HOST>` et le port `<ETCD_PORT>`.
-        1. Obtenez les valeurs de configuration de Calico à partir de l'élément configmap `cluster-info`.
-            ```
-            kubectl get cm -n kube-system cluster-info -o yaml
-            ```
-            {: pre}
-
-        2. Dans la section `data`, localisez les valeurs de l'hôte `etcd_host` et du port `etcd_port`.
-
-    2. Récupérez `<CERTS_DIR>`, le répertoire dans lequel sont téléchargés les certificats de Kubernetes.
-
-        - Linux et OS X :
-          ```
-          dirname $KUBECONFIG
-          ```
-          {: pre}
-
-          Exemple de sortie :
-          ```
-          /home/sysadmin/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/
-          ```
-          {: screen}
-
-        - Windows :
-          ```
-          ECHO %KUBECONFIG%
-          ```
-          {: pre}
-
-          Exemple de sortie :
-          ```
-          C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
-          ```
-          {: screen}
-
-        Pour obtenir le chemin d'accès au répertoire, retirez le nom de fichier `kube-config-prod-<zone>-<cluster_name>.yml` à la fin de la sortie.
-
-    3. Extrayez la valeur `ca-*pem_file`.
-
-        - Linux et OS X :
-          ```
-          ls `dirname $KUBECONFIG` | grep "ca-"
-          ```
-          {: pre}
-
-        - Windows :
-          1. Ouvrez le répertoire que vous avez récupéré à l'étape précédente.
-              ```
-              C:\Users\<user>\.bluemix\plugins\container-service\<cluster_name>-admin\
-              ```
-              {: pre}
-
-          2. Localisez le fichier `ca-*pem_file`.
-
-    4. Vérifiez que la configuration Calico fonctionne correctement.
-
-        - Linux et OS X :
-          ```
-          calicoctl get nodes
-          ```
-          {: pre}
-
-        - Windows : utilisez l'indicateur `--config` pour pointer vers le fichier de configuration réseau que vous avec créé. Incluez cet indicateur chaque fois que vous exécutez une commande `calicoctl`.
-          ```
-          calicoctl get nodes --config=filepath/calicoctl.cfg
-          ```
-          {: pre}
-
-          Sortie :
-          ```
-          NAME
-              kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
-              kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
-              kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w3.cloud.ibm
-          ```
-          {: screen}
-
 <br />
 
 
@@ -377,22 +212,14 @@ Affichez les détails des règles réseau par défaut ou ayant été ajoutées q
 
 Avant de commencer :
 1. [Installez et configurez l'interface CLI de Calico.](#cli_install)
-2. [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `ibmcloud ks cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement comprend également les clés permettant d'accéder à votre portefeuille d'infrastructure et d'exécuter des commandes Calico sur vos noeuds worker.
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
+2. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Incluez les options `--admin` et `--network` avec la commande `ibmcloud ks cluster-config`. L'option `--admin` permet de télécharger les clés pour accéder à votre portefeuille d'infrastructure et exécuter des commandes Calico sur vos noeuds worker. L'option `--network` permet de télécharger le fichier de configuration pour exécuter toutes les commandes Calico.
 
-La compatibilité entre les versions de Calico pour la configuration de l'interface CLI et les règles varie en fonction de la version Kubernetes de votre cluster. Pour installer et configurer l'interface CLI de Calico, cliquez sur l'un des liens suivants en fonction de la version de votre cluster :
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
-* [Clusters Kubernetes version 1.10 ou ultérieure](#1.10_examine_policies)
-* [Clusters Kubernetes version 1.9 ou antérieure (déprécié)](#1.9_examine_policies)
-
-La version 1.9 de Kubernetes est dépréciée et n'est plus prise en charge à partir du 27 décembre 2018. Les versions antérieures de Kubernetes ne sont pas prises en charge. Dès que possible, [mettez à jour](cs_cluster_update.html#update) ou [créez](cs_clusters.html#clusters) des clusters qui exécutent une [version prise en charge](cs_versions.html#cs_versions). Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieure à la version 1.10 ou ultérieure, consultez la rubrique [Préparation à la mise à jour vers Calico v3](cs_versions.html#110_calicov3).
-{: note}
-
-### Afficher les règles réseau dans les clusters exécutant Kubernetes version 1.10 ou ultérieure
-{: #1.10_examine_policies}
+**Pour afficher des règles réseau dans les clusters** :
 
 Les utilisateurs de Linux et de Mac n'ont pas besoin d'inclure l'indicateur `--config=filepath/calicoctl.cfg` dans les commandes `calicoctl`.
 {: tip}
@@ -432,43 +259,6 @@ Les utilisateurs de Linux et de Mac n'ont pas besoin d'inclure l'indicateur `--c
     ```
     {: pre}
 
-### Afficher les règles réseau dans les clusters exécutant Kubernetes version 1.9 ou antérieure (déprécié)
-{: #1.9_examine_policies}
-
-La version 1.9 de Kubernetes est dépréciée et n'est plus prise en charge à partir du 27 décembre 2018. Les versions antérieures de Kubernetes ne sont pas prises en charge. Dès que possible, [mettez à jour](cs_cluster_update.html#update) ou [créez](cs_clusters.html#clusters) des clusters qui exécutent une [version prise en charge](cs_versions.html#cs_versions).
-{: note}
-
-Les utilisateurs de Linux n'ont pas besoin d'inclure l'indicateur `--config=filepath/calicoctl.cfg` dans les commandes `calicoctl`.
-{: tip}
-
-1. Examinez le noeud final d'hôte Calico.
-
-    ```
-    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-2. Examinez toutes les règles réseau Calico et Kubernetes créées pour le cluster. Cette liste inclut des règles qui n'ont peut-être pas encore été appliquées à des pods ou à des hôtes. Pour qu'une règle réseau soit appliquée, une ressource Kubernetes correspondant au sélecteur défini dans la règle réseau Calico doit être localisée.
-
-    ```
-    calicoctl get policy -o wide --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-3. Affichez les informations détaillées d'une règle réseau.
-
-    ```
-    calicoctl get policy -o yaml <policy_name> --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-4. Affichez les informations détaillées de toutes les règles réseau pour le cluster.
-
-    ```
-    calicoctl get policy -o yaml --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
 <br />
 
 
@@ -480,60 +270,19 @@ Dans la plupart des cas, les règles par défaut n'ont pas besoin d'être modifi
 
 Pour créer des règles réseau Kubernetes, voir la [documentation Kubernetes Network Policies ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
-Pour créer des règles Calico, procédez comme suit : La compatibilité entre les versions de Calico pour la configuration de l'interface CLI et les règles varie en fonction de la version Kubernetes de votre cluster. Cliquez sur l'un des liens suivants en fonction de la version de votre cluster :
+Pour créer des règles Calico, procédez comme suit :
 
-* [Clusters Kubernetes version 1.10 ou ultérieure](#1.10_create_new)
-* [Clusters Kubernetes version 1.9 ou antérieure (déprécié)](#1.9_create_new)
-
-La version 1.9 de Kubernetes est dépréciée et n'est plus prise en charge à partir du 27 décembre 2018. Les versions antérieures de Kubernetes ne sont pas prises en charge. Dès que possible, [mettez à jour](cs_cluster_update.html#update) ou [créez](cs_clusters.html#clusters) des clusters qui exécutent une [version prise en charge](cs_versions.html#cs_versions). Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieure à la version 1.10 ou ultérieure, consultez la rubrique [Préparation à la mise à jour vers Calico v3](cs_versions.html#110_calicov3).
-{: tip}
-
-### Ajout de règles Calico dans les clusters exécutant Kubernetes version 1.10 ou ultérieure
-{: #1.10_create_new}
-
-Avant de commencer :
 1. [Installez et configurez l'interface CLI de Calico.](#cli_install)
-2. [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `ibmcloud ks cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement comprend également les clés permettant d'accéder à votre portefeuille d'infrastructure et d'exécuter des commandes Calico sur vos noeuds worker.
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
+2. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Incluez les options `--admin` et `--network` avec la commande `ibmcloud ks cluster-config`. L'option `--admin` permet de télécharger les clés pour accéder à votre portefeuille d'infrastructure et exécuter des commandes Calico sur vos noeuds worker. L'option `--network` permet de télécharger le fichier de configuration pour exécuter toutes les commandes Calico.
 
-1. Définissez votre [règle réseau ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) ou [règle réseau globale ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) Calico en créant un script de configuration (`.yaml`). Ces fichiers de configuration incluent les sélecteurs qui décrivent les pods, les espaces de nom ou les hôtes, auxquels s'appliquent ces règles. Reportez-vous à ces [exemples de règles Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) pour vous aider à créer vos propres règles. Notez que les clusters Kubernetes version 1.10 ou ultérieure doivent utiliser la syntaxe des règles de Calico v3.
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
-2. Appliquez les règles au cluster.
-    - Linux et OS X :
+3. Définissez votre [règle réseau ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) ou [règle réseau globale ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) Calico en créant un script de configuration (`.yaml`). Ces fichiers de configuration incluent les sélecteurs qui décrivent les pods, les espaces de nom ou les hôtes, auxquels s'appliquent ces règles. Reportez-vous à ces [exemples de règles Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) pour vous aider à créer vos propres règles. Notez que les clusters Kubernetes version 1.10 ou ultérieure doivent utiliser la syntaxe des règles de Calico v3.
 
-      ```
-      calicoctl apply -f policy.yaml
-      ```
-      {: pre}
-
-    - Windows :
-
-      ```
-      calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
-
-### Ajout de règles Calico dans les clusters exécutant Kubernetes version 1.9 ou antérieure (déprécié)
-{: #1.9_create_new}
-
-La version 1.9 de Kubernetes est dépréciée et n'est plus prise en charge à partir du 27 décembre 2018. Les versions antérieures de Kubernetes ne sont pas prises en charge. Dès que possible, [mettez à jour](cs_cluster_update.html#update) ou [créez](cs_clusters.html#clusters) des clusters qui exécutent une [version prise en charge](cs_versions.html#cs_versions).
-{: note}
-
-Avant de commencer :
-1. [Installez et configurez l'interface CLI de Calico.](#cli_install)
-2. [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `ibmcloud ks cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement comprend également les clés permettant d'accéder à votre portefeuille d'infrastructure et d'exécuter des commandes Calico sur vos noeuds worker.
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
-
-1. Définissez votre [règle réseau Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) en créant un script de configuration (`.yaml`). Ces fichiers de configuration incluent les sélecteurs qui décrivent les pods, les espaces de nom ou les hôtes, auxquels s'appliquent ces règles. Reportez-vous à ces [exemples de règles Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) pour vous aider à créer vos propres règles. Notez que les clusters Kubernetes version 1.9 ou antérieure doivent utiliser la syntaxe des règles de Calico v2.
-
-
-2. Appliquez les règles au cluster.
+4. Appliquez les règles au cluster.
     - Linux et OS X :
 
       ```
@@ -562,15 +311,27 @@ Les règles par défaut de Kubernetes et Calico sont difficiles à appliquer pou
 Quelques utilisations classiques des règles réseau pre-DNAT Calico :
 
   - Blocage du trafic vers les ports de noeud publics d'un service d'équilibreur de charge privé : un service d'équilibreur de charge rend votre application accessible via l'adresse IP et le port de l'équilibreur de charge et la rend également accessible via les ports de noeud du service. Les ports de noeud sont accessibles sur toutes les adresses IP (publiques et privées) pour tous les noeuds figurant dans le cluster.
-  - Blocage du trafic vers les ports de noeud publics sur les clusters qui exécutent des [noeuds worker de périphérie](cs_edge.html#edge) : le blocage des ports de noeud garantit que les noeuds worker de périphérie sont les seuls noeuds worker qui traitent le trafic entrant.
+  - Blocage du trafic vers les ports de noeud publics sur les clusters qui exécutent des [noeuds worker de périphérie](/docs/containers?topic=containers-edge#edge) : le blocage des ports de noeud garantit que les noeuds worker de périphérie sont les seuls noeuds worker qui traitent le trafic entrant.
   - Blocage du trafic en provenance de certaines adresses IP source ou CIDR (placement sur liste noire)
   - Autorisation du trafic provenant uniquement de certaines adresses IP source ou CIDR (placement sur liste blanche) et blocage de tout autre trafic
 
-Pour voir comment mettre des adresses IP source sur liste blanche ou sur liste noire, essayez le [tutoriel sur l'utilisation des règles réseau de Calico pour bloquer le trafic](cs_tutorials_policies.html#policy_tutorial). Pour obtenir d'autres exemples de règles réseau Calico utilisées pour contrôler le trafic en provenance et à destination de votre cluster, vous pouvez consulter les pages [Stars Policy Demo ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) et [Advanced network policy ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
+Pour voir comment mettre des adresses IP source sur liste blanche ou sur liste noire, essayez le [tutoriel sur l'utilisation des règles réseau de Calico pour bloquer le trafic](/docs/containers?topic=containers-policy_tutorial#policy_tutorial). Pour obtenir d'autres exemples de règles réseau Calico utilisées pour contrôler le trafic en provenance et à destination de votre cluster, vous pouvez consulter les pages [Stars Policy Demo ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) et [Advanced network policy ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
 {: tip}
 
+Avant de commencer :
+1. [Installez et configurez l'interface CLI de Calico.](#cli_install)
+2. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Incluez les options `--admin` et `--network` avec la commande `ibmcloud ks cluster-config`. L'option `--admin` permet de télécharger les clés pour accéder à votre portefeuille d'infrastructure et exécuter des commandes Calico sur vos noeuds worker. L'option `--network` permet de télécharger le fichier de configuration pour exécuter toutes les commandes Calico.
+
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+Pour créer une règle pre-DNAT :
+
 1. Définissez une règle réseau pre-DNAT de Calico pour l'accès entrant (trafic entrant) vers les services Kubernetes.
-    * Les clusters Kubernetes version 1.10 ou ultérieure doivent utiliser la [syntaxe des règles Calico v3 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Les clusters Kubernetes version 1.9 ou antérieure doivent utiliser la [syntaxe des règles Calico v2 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
+    * Les clusters Kubernetes version 1.10 ou ultérieure doivent utiliser la [syntaxe des règles Calico v3 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy).
+    * Si vous gérez le trafic vers un [service d'équilibreur de charge version 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs), vous devez inclure les zones `applyOnForward: true` et `doNotTrack: true` dans la section `spec` de la règle.
 
         Exemple de ressource qui bloque tous les ports de noeud :
 
@@ -581,6 +342,7 @@ Pour voir comment mettre des adresses IP source sur liste blanche ou sur liste n
           name: deny-nodeports
         spec:
           applyOnForward: true
+          preDNAT: true
           ingress:
           - action: Deny
             destination:
@@ -592,17 +354,72 @@ Pour voir comment mettre des adresses IP source sur liste blanche ou sur liste n
             destination:
               ports:
               - 30000:32767
-            protocol: UDP
-            source: {}
-          preDNAT: true
-          selector: ibm.role=='worker_public'
-          order: 1100
-          types:
+        protocol: UDP
+        source: {}
+      selector: ibm.role=='worker_public'
+      order: 1100
+      types:
           - Ingress
         ```
         {: codeblock}
 
-2. Appliquez la règle réseau preDNAT de Calico. Comptez environ 1 minute pour que les modifications de règle
+        Exemple de ressource qui place en liste blanche le trafic qui provient uniquement d'un CIDR source indiqué vers un équilibreur de charge 2.0 :
+
+        ```
+        apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+      name: whitelist
+    spec:
+      applyOnForward: true
+      doNotTrack: true
+      ingress:
+          - action: Allow
+        destination:
+          nets:
+              - <loadbalancer_IP>/32
+          ports:
+              - 80
+        protocol: TCP
+        source:
+          nets:
+              - <client_address>/32
+      selector: ibm.role=='worker_public'
+      order: 500
+      types:
+          - Ingress
+        ```
+        {: codeblock}
+
+        Exemple de ressource qui place en liste blanche le trafic qui provient uniquement d'un CIDR source indiqué vers un équilibreur de charge 1.0 :
+
+        ```
+        apiVersion: projectcalico.org/v3
+        kind: GlobalNetworkPolicy
+        metadata:
+          name: whitelist
+        spec:
+          applyOnForward: true
+          preDNAT: true
+          ingress:
+          - action: Allow
+        destination:
+          nets:
+              - <loadbalancer_IP>/32
+          ports:
+              - 80
+        protocol: TCP
+        source:
+          nets:
+              - <client_address>/32
+      selector: ibm.role=='worker_public'
+      order: 500
+      types:
+          - Ingress
+        ```
+        {: codeblock}
+
+2. Appliquez la règle réseau Calico preDNAT. Comptez environ 1 minute pour que les modifications de règle
 soient appliquées dans tout le cluster.
 
   - Linux et OS X :
@@ -619,12 +436,13 @@ soient appliquées dans tout le cluster.
     ```
     {: pre}
 
-3. Facultatif : dans les clusters à zones multiples, l'équilibreur de charge pour zones multiples (MZLB) effectue un diagnostic d'intégrité des équilibreurs de charge d'application (ALB) Ingress dans chaque zone de votre cluster et conserve les résultats de recherche DNS mis à jour en fonction de ces diagnostics. Si vous utilisez des règles pre-DNAT pour bloquer tout le trafic entrant vers les services Ingress, vous devez également inclure dans la liste blanche les [adresses IP IPv4 de Cloudflare ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.cloudflare.com/ips/) utilisées pour effectuer des diagnostics d'intégrité de vos équilibreurs de charge d'application (ALB). Pour obtenir les étapes nécessaires permettant de créer une règle pre-DAT Calico pour mettre ces adresses IP sur liste blanche, voir la leçon 3 du [Tutoriel sur les règles réseau de Calico](cs_tutorials_policies.html#lesson3).
+3. Facultatif : dans les clusters à zones multiples, l'équilibreur de charge pour zones multiples (MZLB) effectue un diagnostic d'intégrité des équilibreurs de charge d'application (ALB) Ingress dans chaque zone de votre cluster et conserve les résultats de recherche DNS mis à jour en fonction de ces diagnostics. Si vous utilisez des règles pre-DNAT pour bloquer tout le trafic entrant vers les services Ingress, vous devez également inclure dans la liste blanche les [adresses IP IPv4 de Cloudflare ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.cloudflare.com/ips/) utilisées pour effectuer des diagnostics d'intégrité de vos équilibreurs de charge d'application (ALB). Pour obtenir les étapes nécessaires permettant de créer une règle pre-DAT Calico pour mettre ces adresses IP sur liste blanche, voir la leçon 3 du [Tutoriel sur les règles réseau de Calico](/docs/containers?topic=containers-policy_tutorial#lesson3).
 
 ## Isolement de vos clusters sur le réseau privé
 {: #isolate_workers}
 
-Si vous disposez d'un cluster à zones multiples, de plusieurs VLAN pour un cluster à zone unique ou de plusieurs sous-réseaux sur le même VLAN, vous devez [activer le spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Cependant, lorsque le spanning VLAN est activé, tout système connecté à l'un des VLAN privés dans le même compte IBM Cloud peut communiquer avec les noeuds worker.
+Si vous disposez d'un cluster à zones multiples, de plusieurs VLAN pour un cluster à zone unique ou de plusieurs sous-réseaux sur le même VLAN, vous devez [activer le spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Cependant, lorsque le spanning VLAN est activé, tout système connecté à l'un des VLAN privés dans le même compte IBM Cloud peut communiquer avec les noeuds worker.
+{: shortdesc}
 
 Vous pouvez isoler votre cluster des autres systèmes sur le réseau privé en appliquant des [règles de réseau privé Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). Cet ensemble de règles Calico et de noeuds finaux d'hôte isole le trafic du réseau privé d'un cluster des autres ressources dans le réseau privé du compte.
 
@@ -642,11 +460,12 @@ Les règles ciblent l'interface privée des noeuds worker (eth0) et le réseau d
 
 Avant de commencer :
 1. [Installez et configurez l'interface CLI de Calico.](#cli_install)
-2. [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `ibmcloud ks cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement comprend également les clés permettant d'accéder à votre portefeuille d'infrastructure et d'exécuter des commandes Calico sur vos noeuds worker.
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
+2. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Incluez les options `--admin` et `--network` avec la commande `ibmcloud ks cluster-config`. L'option `--admin` permet de télécharger les clés pour accéder à votre portefeuille d'infrastructure et exécuter des commandes Calico sur vos noeuds worker. L'option `--network` permet de télécharger le fichier de configuration pour exécuter toutes les commandes Calico.
+
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
 Pour isoler votre cluster sur le réseau privé en utilisant des règles Calico :
 
@@ -657,22 +476,20 @@ Pour isoler votre cluster sur le réseau privé en utilisant des règles Calico 
     {: pre}
 
 2. Accédez au répertoire des règles privées pour la version de Calico compatible avec la version de votre cluster.
-    * Clusters Kubernetes de version 1.10 ou ultérieure :
-      ```
-      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
-      ```
-      {: pre}
-
-    * Clusters Kubernetes de version 1.9 ou antérieure :
-      ```
-      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v2
-      ```
-      {: pre}
+   ```
+   cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
+   ```
+   {: pre}
 
 3. Configurez une règle pour le noeud final de l'hôte privé.
     1. Ouvrez la règle `generic-privatehostendpoint.yaml`.
-    2. Remplacez `<worker_name>` par le nom d'un noeud worker et `<worker-node-private-ip>` par l'adresse IP privée du noeud worker. Pour voir les adresses IP privées de vos noeuds worker, exécutez la commande `ibmcloud ks workers --cluster <my_cluster>`.
-    3. Répétez cette étape dans une nouvelle section pour chaque noeud worker de votre cluster. **Remarque** : chaque fois que vous ajoutez un noeud worker dans un cluster, vous devez mettre à jour le fichier des noeuds finaux de l'hôte avec les nouvelles entrées.
+    2. Remplacez `<worker_name>` par le nom d'un noeud worker. **Important** : certains noeuds worker doivent suivre une structure de désignation différente pour les règles Calico. Vous devez utiliser le nom d'un noeud worker au format renvoyé par la commande suivante.
+      ```
+      ibmcloud ks calicoctl get nodes --config==filepath/calicoctl.cfg
+      ```
+      {: pre}
+    3. Remplacez `<worker-node-private-ip>` par l'adresse IP privée du noeud worker. Pour voir les adresses IP privées de vos noeuds worker, exécutez la commande `ibmcloud ks workers --cluster <my_cluster>`.
+    4. Répétez cette série d'étapes dans une nouvelle section pour chaque noeud worker de votre cluster. **Remarque** : chaque fois que vous ajoutez un noeud worker dans un cluster, vous devez mettre à jour le fichier des noeuds finaux de l'hôte avec les nouvelles entrées.
 
 4. Appliquez l'ensemble des règles dans votre cluster.
     - Linux et OS X :
@@ -713,7 +530,7 @@ Pour en savoir plus sur comment les règles réseau Kubernetes contrôlent le tr
 
 Le scénario suivant illustre comment gérer le trafic entre les microservices d'application au sein d'un espace de nom.
 
-Une équipe nommée Accounts déploie plusieurs services d'application dans un espace de nom, mais ces services doivent être isolés pour n'autoriser que la communication nécessaire entre les microservices sur le réseau public. Pour l'application Srv1, l'équipe dispose des services de front end et de back end, et d'un service de base de données. Elle indique pour chaque service le libellé `app: Srv1` et le libellé `tier: frontend`, `tier: backend` ou `tier: db`.
+Une équipe nommée Accounts déploie plusieurs services d'application dans un espace de nom, mais ces services doivent être isolés pour n'autoriser que la communication nécessaire entre les microservices sur le réseau public. Pour l'application `Srv1`, l'équipe dispose de services de front end et de back end, et d'un service de base de données. Elle indique pour chaque service le libellé `app: Srv1` et le libellé `tier: frontend`, `tier: backend` ou `tier: db`.
 
 <img src="images/cs_network_policy_single_ns.png" width="200" alt="Utilisation d'une règle réseau pour gérer le trafic entre les espaces de nom." style="width:200px; border-style: none"/>
 
@@ -814,10 +631,10 @@ Pour consigner les demandes de trafic refusé sur certains pods de votre cluster
 Lorsque vous configurez des règles réseau pour limiter le trafic sur les pods d'application, les demandes de trafic qui ne sont pas autorisées par ces règles sont refusées et supprimées. Dans certains cas, vous souhaiterez obtenir plus d'informations sur les demandes de trafic refusé. Par exemple, vous pouvez éventuellement détecter un trafic inhabituel qui est systématiquement refusé par l'une de vos règles réseau. Pour surveiller cette menace de sécurité potentielle, vous pouvez configurer la consignation de sorte à enregistrer toutes les fois qu'une règle refuse une action intentée sur les pods d'application indiqués.
 
 Avant de commencer :
-1. [Installez et configurez l'interface CLI de Calico.](#cli_install) **Remarque** : les règles présentées dans ces étapes utilisent la syntaxe de Calico v3 qui est compatible avec les clusters exécutant Kubernetes version 1.10 ou ultérieure. Pour les clusters exécutant Kubernetes version 1.9 ou antérieure, vous devez utiliser des [règles avec la syntaxe de Calico v2 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
-2. [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `ibmcloud ks cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement comprend également les clés permettant d'accéder à votre portefeuille d'infrastructure et d'exécuter des commandes Calico sur vos noeuds worker.
+1. [Installez et configurez l'interface CLI de Calico.](#cli_install)
+2. [Ciblez l'interface CLI de Kubernetes sur le cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Incluez l'option `--admin` avec la commande `ibmcloud ks cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement comprend également les clés permettant d'accéder à votre portefeuille d'infrastructure et d'exécuter des commandes Calico sur vos noeuds worker.
     ```
-    ibmcloud ks cluster-config <cluster_name> --admin
+    ibmcloud ks cluster-config --cluster <cluster_name> --admin
     ```
     {: pre}
 
@@ -826,7 +643,7 @@ Pour créer une règle Calico pour consigner le trafic refusé :
 1. Créez ou utilisez une règle réseau Kubernetes ou Calico existante pour bloquer ou limiter le trafic entrant. Par exemple, pour contrôler le trafic entre les pods, vous pouvez utiliser l'exemple de règle Kubernetes nommée `access-nginx` qui limite l'accès à une application NGINX. Le trafic entrant dans les pods avec le libellé "run=nginx" est autorisé uniquement en provenance des pods avec le libellé "run=access". Tout autre trafic entrant vers les pods d'application labellisés "run=nginx" est bloqué.
     ```
     kind: NetworkPolicy
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     metadata:
       name: access-nginx
     spec:
@@ -847,7 +664,7 @@ Pour créer une règle Calico pour consigner le trafic refusé :
         kubectl apply -f <policy_name>.yaml
         ```
         {: pre}
-        La règle Kubernetes est automatiquement convertie en règle réseau Calico de sorte que Calico puisse l'appliquer sous forme de règles Iptables.
+        La règle Kubernetes est automatiquement convertie en règle réseau Calico (`NetworkPolicy`) de sorte que Calico puisse l'appliquer sous forme de règles Iptables.
 
     * Pour appliquer une règle Calico :
         ```
@@ -880,7 +697,7 @@ Pour créer une règle Calico pour consigner le trafic refusé :
     ```
     {: screen}
 
-4. Pour consigner tout le trafic refusé par la règle Calico que vous avez créée précédemment, créez une règle réseau Calico nommée `log-denied-packets`. Par exemple, utilisez la règle suivante pour consigner tous les paquets refusés par la règle réseau que vous avez définie à l'étape 1. La règle de consignation utilise le même sélecteur de pod que dans l'exemple de règle `access-nginx`, qui ajoute cette règle dans la chaîne de règles Iptables de Calico. En utilisant un numéro d'ordre plus élevé, tel que `3000`, vous pouvez assurer que cette règle est ajoutée à la fin de la chaîne de règles Iptables. Tout paquet de demandes provenant du pod "run=access" qui correspond à la règle `access-nginx` est accepté par les pods "run=nginx".  Cependant, lorsque des paquets d'une autre source tentent de correspondre à la règle `access-nginx` d'ordre inférieur, ils sont refusés. Ces paquets tentent alors de correspondre à la règle `log-denied-packets` d'ordre supérieur. La règle `log-denied-packets` consigne tout paquet qui passe par elle, par conséquent seuls les paquets qui ont été refusés par les pods "run=nginx" sont consignés. Une fois que les tentatives de ces paquets sont consignées, les paquets sont supprimés.
+4. Pour consigner tout le trafic refusé par la règle Calico que vous avez créée précédemment, créez une règle réseau Calico (`NetworkPolicy`) nommée `log-denied-packets`. Par exemple, utilisez la règle suivante pour consigner tous les paquets refusés par la règle réseau que vous avez définie à l'étape 1. La règle de consignation utilise le même sélecteur de pod que dans l'exemple de règle `access-nginx`, qui ajoute cette règle dans la chaîne de règles Iptables de Calico. En utilisant un numéro d'ordre plus élevé, tel que `3000`, vous pouvez assurer que cette règle est ajoutée à la fin de la chaîne de règles Iptables. Tout paquet de demandes provenant du pod "run=access" qui correspond à la règle `access-nginx` est accepté par les pods "run=nginx".  Cependant, lorsque des paquets d'une autre source tentent de correspondre à la règle `access-nginx` d'ordre inférieur, ils sont refusés. Ces paquets tentent alors de correspondre à la règle `log-denied-packets` d'ordre supérieur. La règle `log-denied-packets` consigne tout paquet qui passe par elle, par conséquent seuls les paquets qui ont été refusés par les pods "run=nginx" sont consignés. Une fois que les tentatives de ces paquets sont consignées, les paquets sont supprimés.
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy
@@ -929,4 +746,4 @@ Pour créer une règle Calico pour consigner le trafic refusé :
     ```
     {: pre}
 
-6. [Transférez les journaux](cs_health.html#configuring) de `/var/log/syslog` vers {{site.data.keyword.loganalysislong}} ou un serveur syslog externe.
+6. [Transférez les journaux](/docs/containers?topic=containers-health#configuring) de `/var/log/syslog` vers {{site.data.keyword.loganalysislong}} ou un serveur syslog externe.

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2017, 2018
-lastupdated: "2018-12-05"
+  years: 2017, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, audit
+
+subcollection: containers
 
 ---
 
@@ -33,9 +37,9 @@ Puoi visualizzare, gestire e controllare le attività avviate dall'utente nel tu
 
 * **Eventi di controllo del server API Kubernetes**:
     * Questi eventi vengono generati automaticamente, ma devi configurare il cluster per inoltrarli al servizio {{site.data.keyword.cloudaccesstrailshort}}.
-    * Puoi configurare il cluster per inviare gli eventi al **dominio account** o a un **dominio spazio** di {{site.data.keyword.cloudaccesstrailshort}}. Per ulteriori informazioni, vedi [Invio dei log di controllo](/docs/containers/cs_health.html#api_forward).
+    * Puoi configurare il cluster per inviare gli eventi al **dominio account** o a un **dominio spazio** di {{site.data.keyword.cloudaccesstrailshort}}. Per ulteriori informazioni, vedi [Invio dei log di controllo](/docs/containers?topic=containers-health#api_forward).
 
-Per ulteriori informazioni su come funziona il servizio, consulta la [documentazione di {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html). Per ulteriori informazioni sulle azioni Kubernetes che vengono tracciate, vedi la [documentazione Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/home/).
+Per ulteriori informazioni sul funzionamento del servizio, consulta la [documentazione di {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla). Per ulteriori informazioni sulle azioni Kubernetes che vengono tracciate, vedi la [documentazione Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/home/).
 
 ## Ricerca di informazioni per gli eventi
 {: #kube-find}
@@ -54,7 +58,7 @@ Per monitorare l'attività amministrativa:
 5. Imposta l'intervallo di tempo per il quale desideri visualizzare i log. Il valore predefinito è 24 ore.
 6. Per restringere la ricerca, puoi fare clic sull'icona di modifica per `ActivityTracker_Account_Search_in_24h` e aggiungere campi nella colonna **Campi disponibili**.
 
-Per consentire ad altri utenti di visualizzare eventi di account e di spazio, vedi [Concessione di autorizzazioni per visualizzare gli eventi di account](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+Per consentire ad altri utenti di visualizzare eventi di account e di spazio, vedi [Concessione di autorizzazioni per visualizzare gli eventi di account](/docs/services/cloud-activity-tracker/how-to?topic=cloud-activity-tracker-grant_permissions#grant_permissions).
 {: tip}
 
 ## Traccia degli eventi di gestione del cluster
@@ -145,7 +149,7 @@ Controlla il seguente elenco degli eventi di gestione del cluster che vengono in
 Controlla la seguente tabella per un elenco degli eventi di controllo del server API Kubernetes che vengono inviati a {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-Prima di iniziare: assicurati che il cluster sia configurato per inoltrare gli [eventi di controllo API Kubernetes](cs_health.html#api_forward).
+Prima di iniziare: assicurati che il cluster sia configurato per inoltrare gli [eventi di controllo API Kubernetes](/docs/containers?topic=containers-health#api_forward).
 
 <table>
   <tr>

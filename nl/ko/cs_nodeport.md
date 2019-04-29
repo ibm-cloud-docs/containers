@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -28,16 +32,16 @@ Kubernetes 클러스터에서 작업자 노드의 공인 IP 주소를 사용하�
 {:shortdesc}
 
 ## NodePort를 사용한 네트워크 트래픽 관리
-{: #planning}
+{: #nodeport_planning}
 
 작업자 노드에서 공용 포트를 노출하고, 작업자 노드의 공인 IP 주소를 사용하여 인터넷을 통해 클러스터의 서비스에 공용으로 액세스하십시오.
 {:shortdesc}
 
-NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 30000 - 32767 범위의 NodePort 및 내부 클러스터 IP 주소가 서비스에 지정됩니다. NodePort 서비스는 앱의 수신 요청에 대한 외부 시작점 역할을 합니다. 지정된 NodePort는 클러스터에 있는 각 작업자 노드의 kubeproxy 설정에서 공용으로 노출됩니다. 모든 작업자 노드는 지정된 NodePort에서 서비스의 수신 입력을 청취하기 시작합니다. 인터넷에서 서비스에 액세스하기 위해, 사용자는 `<IP_address>:<nodeport>` 형식의 NodePort 및 클러스터 작성 중에 지정된 작업자 노드의 공인 IP 주소를 사용할 수 있습니다. 공인 IP 주소 이외에 작업자 노드의 사설 IP 주소를 통해 NodePort 서비스를 사용할 수 있습니다.
+NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 30000 - 32767 범위의 NodePort 및 내부 클러스터 IP 주소가 서비스에 지정됩니다. NodePort 서비스는 앱의 수신 요청에 대한 외부 시작점 역할을 합니다. 지정된 NodePort는 클러스터에 있는 각 작업자 노드의 `kubeproxy` 설정에서 공용으로 노출됩니다. 모든 작업자 노드는 지정된 NodePort에서 서비스의 수신 입력을 청취하기 시작합니다. 인터넷에서 서비스에 액세스하기 위해, 사용자는 `<IP_address>:<nodeport>` 형식의 NodePort 및 클러스터 작성 중에 지정된 작업자 노드의 공인 IP 주소를 사용할 수 있습니다. 공인 IP 주소 이외에 작업자 노드의 사설 IP 주소를 통해 NodePort 서비스를 사용할 수 있습니다.
 
 다음 다이어그램은 NodePort 서비스가 구성될 때 인터넷에서 앱으로 통신이 이루어지는 방식을 표시합니다.
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="NodePort를 사용하여 {{site.data.keyword.containerlong_notm}}에서 앱 노출" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="600" alt="NodePort를 사용하여 {{site.data.keyword.containerlong_notm}}에 앱 노출" style="width:600px; border-style: none"/>
 
 1. 작업자 노드에서 NodePort와 작업자 노드의 공인 IP 주소를 사용하여 앱에 요청을 전송합니다.
 
@@ -47,14 +51,14 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 
 4. 앱이 배치된 팟(Pod)의 사설 IP 주소로 요청이 전달됩니다. 다중 앱 인스턴스가 클러스터에 배치되는 경우 NodePort 서비스는 앱 팟(Pod) 간의 요청을 라우팅합니다.
 
-작업자 노드의 공인 IP 주소는 영구적이지 않습니다. 작업자 노드가 제거되거나 다시 작성되면 새 공인 IP 주소가 작업자 노드에 지정됩니다. 앱에 대한 공용 액세스를 테스트하기 위해 또는 짧은 시간 동안에만 공용 액세스가 필요한 경우에 NodePort 서비스를 사용할 수 있습니다. 서비스에 대한 추가 가용성과 안정적인 공인 IP 주소가 필요한 경우에는 [LoadBalancer 서비스](cs_loadbalancer.html) 또는 [Ingress](cs_ingress.html)를 사용하여 앱을 노출하십시오.
+작업자 노드의 공인 IP 주소는 영구적이지 않습니다. 작업자 노드가 제거되거나 다시 작성되면 새 공인 IP 주소가 작업자 노드에 지정됩니다. 앱에 대한 공용 액세스를 테스트하기 위해 또는 짧은 시간 동안에만 공용 액세스가 필요한 경우에 NodePort 서비스를 사용할 수 있습니다. 서비스에 대한 추가 가용성과 안정적인 공인 IP 주소가 필요한 경우에는 [LoadBalancer 서비스](/docs/containers?topic=containers-loadbalancer) 또는 [Ingress](/docs/containers?topic=containers-ingress)를 사용하여 앱을 노출하십시오.
 {: note}
 
 <br />
 
 
 ## NodePort 서비스를 사용하여 앱에 대한 액세스 사용
-{: #config}
+{: #nodeport_config}
 
 무료 또는 표준 클러스터에 대해 Kubernetes NodePort 서비스로서 앱을 노출할 수 있습니다.
 {:shortdesc}
@@ -94,7 +98,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td><code><em>&lt;my-nodeport-service&gt;</em></code>를 NodePort 서비스 이름으로 대체합니다.<p>Kubernetes 리소스에 대해 작업할 때 [개인 정보 보호](cs_secure.html#pi)에 대해 자세히 알아보십시오.</p></td>
+    <td><code><em>&lt;my-nodeport-service&gt;</em></code>를 NodePort 서비스 이름으로 대체합니다.<p>Kubernetes 리소스에 대해 작업할 때 [개인 정보 보호](/docs/containers?topic=containers-security#pi)에 대해 자세히 알아보십시오.</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
@@ -102,7 +106,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td><code><em>&lt;my-selector-key&gt;</em></code> 및 <code><em>&lt;my-selector-value&gt;</em></code>를 배치 yaml의 <code>spec.template.metadata.labels</code> 섹션에 사용한 키/값 쌍으로 대체하십시오. 서비스를 배치와 연관시키려면 선택기가 배치 레이블과 일치해야 합니다.
+      <td><code><em>&lt;my-selector-key&gt;</em></code> 및 <code><em>&lt;my-selector-value&gt;</em></code>를 배치 YAML의 <code>spec.template.metadata.labels</code> 섹션에 사용한 키/값 쌍으로 대체하십시오. 서비스를 배치와 연관시키려면 선택기가 배치 레이블과 일치해야 합니다.
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -126,7 +130,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 1.  클러스터의 작업자 노드에 대한 공인 IP 주소를 가져오십시오. 사설 네트워크의 작업자 노드에 액세스하려면 사설 IP 주소를 대신 가져오십시오.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -165,7 +169,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 
     이 예에서 NodePort는 `30872`입니다.
 
-    **엔드포인트** 섹션에서 `<none>`을 표시하면 `<selectorkey>` 및 `<selectorvalue>`(NodePort 서비스의 `spec.selector` 섹션에서 사용 중인)를 확인하십시오. 배치 yaml의 `spec.template.metadata.labels` 섹션에서 사용한 _키/값_ 쌍과 동일해야 합니다.
+    **엔드포인트** 섹션에서 `<none>`을 표시하면 `<selectorkey>` 및 `<selectorvalue>`(NodePort 서비스의 `spec.selector` 섹션에서 사용 중인)를 확인하십시오. 배치 YAML의 `spec.template.metadata.labels` 섹션에서 사용한 _키/값_ 쌍과 동일해야 합니다.
     {: note}
 
 3.  NodePort 및 작업자 노드 IP 주소 중 하나로 URL을 구성하십시오. 예: `http://192.0.2.23:30872`

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, compliance, security standards
+
+subcollection: containers
 
 ---
 
@@ -33,42 +37,42 @@ Kubernetes 是一个开放式源代码平台，用于管理跨多个主机的容
 {: #kubernetes_service}
 {: faq}
 
-通过 {{site.data.keyword.containerlong_notm}}，您可以创建自己的 Kubernetes 集群，以在 {{site.data.keyword.Bluemix_notm}} 上部署和管理容器化应用程序。容器化应用程序在称为工作程序节点的 IBM Cloud Infrastructure (SoftLayer) 计算主机上托管。您可以选择将计算主机作为[虚拟机](cs_clusters_planning.html#vm)（使用共享或专用资源）或[裸机机器](cs_clusters_planning.html#bm)（可以针对 GPU 和软件定义的存储 (SDS) 使用情况进行优化）进行供应。工作程序节点由 IBM 配置、监视和管理的高可用性 Kubernetes 主节点进行控制。您可以通过 {{site.data.keyword.containerlong_notm}} API 或 CLI 来使用集群基础架构资源，通过 Kubernetes API 或 CLI 来管理部署和服务。 
+通过 {{site.data.keyword.containerlong_notm}}，您可以创建自己的 Kubernetes 集群，以在 {{site.data.keyword.Bluemix_notm}} 上部署和管理容器化应用程序。容器化应用程序在称为工作程序节点的 IBM Cloud Infrastructure (SoftLayer) 计算主机上托管。您可以选择将计算主机作为[虚拟机](/docs/containers?topic=containers-plan_clusters#vm)（使用共享或专用资源）或[裸机机器](/docs/containers?topic=containers-plan_clusters#bm)（可以针对 GPU 和软件定义的存储 (SDS) 使用情况进行优化）进行供应。工作程序节点由 IBM 配置、监视和管理的高可用性 Kubernetes 主节点进行控制。您可以通过 {{site.data.keyword.containerlong_notm}} API 或 CLI 来使用集群基础架构资源，通过 Kubernetes API 或 CLI 来管理部署和服务。 
 
-有关如何设置集群资源的更多信息，请参阅[服务体系结构](cs_tech.html#architecture)。要查找功能和优点的列表，请参阅[为什么选择 {{site.data.keyword.containerlong_notm}}](cs_why.html#cs_ov)。
+有关如何设置集群资源的更多信息，请参阅[服务体系结构](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)。要查找功能和优点的列表，请参阅[为什么选择 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)。
 
 ## 为什么应该使用 IBM Cloud Kubernetes Service？
-{: #benefits}
+{: #faq_benefits}
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} 是一个受管的 Kubernetes 产品，提供功能强大的工具、直观的用户体验和内置安全性，用于快速交付可绑定到与 IBM Watson®、AI、IoT、DevOps、安全性和数据分析相关的云服务的应用程序。作为经过认证的 Kubernetes 提供程序，{{site.data.keyword.containerlong_notm}} 具备智能安排、自我复原、水平缩放、服务发现和负载均衡、自动应用和回滚以及私钥和配置管理功能。该服务还具有与简化的集群管理、容器安全性和隔离策略相关的高级功能，设计您自己的集群的功能，以及用于实现部署一致性的集成操作工具。
 
-有关功能和优点的详细概述，请参阅[为什么选择 {{site.data.keyword.containerlong_notm}}](cs_why.html#cs_ov)。 
+有关功能和优点的详细概述，请参阅[为什么选择 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)。 
 
 ## 服务随附受管 Kubernetes 主节点和工作程序节点吗？
 {: #managed_master_worker}
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} 中的每个 Kubernetes 集群都由 IBM 拥有的 {{site.data.keyword.Bluemix_notm}} 基础架构帐户中 IBM 管理的专用 Kubernetes 主节点进行控制。Kubernetes 主节点（包括所有主节点组件）、计算、联网和存储资源由 IBM 现场可靠性工程师 (SRE) 持续监视。SRE 将应用最新的安全标准，检测恶意活动并进行修复，以及设法确保 {{site.data.keyword.containerlong_notm}} 的可性和可用性。IBM 会自动更新在您供应集群时自动安装的附加组件，例如用于日志记录的 Fluentd。但是，您可以选择禁用某些附加组件的自动更新，而单独从主节点和工作程序节点手动更新这些附加组件。
-有关更多信息，请参阅[更新集群附加组件](cs_cluster_update.html#addons)。 
+有关更多信息，请参阅[更新集群附加组件](/docs/containers?topic=containers-update#addons)。 
 
-Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versions.html#version_types)。这些更新可能会影响 Kubernetes 主节点中的 Kubernetes API 服务器版本或其他组件。IBM 会自动更新补丁版本，但主节点的主版本和次版本必须由您进行更新。有关更多信息，请参阅[更新 Kubernetes 主节点](cs_cluster_update.html#master)。 
+Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/containers?topic=containers-cs_versions#version_types)。这些更新可能会影响 Kubernetes 主节点中的 Kubernetes API 服务器版本或其他组件。IBM 会自动更新补丁版本，但主节点的主版本和次版本必须由您进行更新。有关更多信息，请参阅[更新 Kubernetes 主节点](/docs/containers?topic=containers-update#master)。 
 
-标准集群中的工作程序节点将供应给 {{site.data.keyword.Bluemix_notm}} 基础架构帐户。工作程序节点专用于您的帐户，您将负责请求及时更新工作程序节点，以确保工作程序节点操作系统和 {{site.data.keyword.containerlong_notm}} 组件应用最新的安全性更新和补丁。安全性更新和补丁由 IBM 现场可靠性工程师 (SRE) 提供，他们会持续监视工作程序节点上安装的 Linux 映像，以检测漏洞和安全合规性问题。有关更多信息，请参阅[更新工作程序节点](cs_cluster_update.html#worker_node)。 
+标准集群中的工作程序节点将供应给 {{site.data.keyword.Bluemix_notm}} 基础架构帐户。工作程序节点专用于您的帐户，您将负责请求及时更新工作程序节点，以确保工作程序节点操作系统和 {{site.data.keyword.containerlong_notm}} 组件应用最新的安全性更新和补丁。安全性更新和补丁由 IBM 现场可靠性工程师 (SRE) 提供，他们会持续监视工作程序节点上安装的 Linux 映像，以检测漏洞和安全合规性问题。有关更多信息，请参阅[更新工作程序节点](/docs/containers?topic=containers-update#worker_node)。 
 
 ## Kubernetes 主节点和工作程序节点是高可用性节点吗？
-{: #ha}
+{: #faq_ha}
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} 体系结构和基础架构旨在确保可靠性、处理等待时间短以及服务正常运行时间最长。缺省情况下，在 {{site.data.keyword.containerlong_notm}} 中运行 Kubernetes V1.10 或更高版本的每个集群都设置为具有多个 Kubernetes 主节点实例，以确保集群资源的可用性和可访问性，即使 Kubernetes 主节点的一个或多个实例不可用也不受影响。 
 
-通过将工作负载分布在一个区域的多个专区中的多个工作程序节点上，可以进一步提高集群的高可用性，防止应用程序产生停机时间。此设置称为[多专区集群](cs_clusters_planning.html#multizone)，用于确保应用程序可访问，即使某个工作程序节点或整个专区不可用也不受影响。 
+通过将工作负载分布在一个区域的多个专区中的多个工作程序节点上，可以进一步提高集群的高可用性，防止应用程序产生停机时间。此设置称为[多专区集群](/docs/containers?topic=containers-plan_clusters#multizone)，用于确保应用程序可访问，即使某个工作程序节点或整个专区不可用也不受影响。 
 
-要防止整个区域发生故障，请创建[多个集群并将其分布在多个 {{site.data.keyword.containerlong_notm}} 区域中](cs_clusters_planning.html#multiple_clusters)。通过为集群设置负载均衡器，可以实现对集群进行跨区域负载均衡和跨区域联网。 
+要防止整个区域发生故障，请创建[多个集群并将其分布在多个 {{site.data.keyword.containerlong_notm}} 区域中](/docs/containers?topic=containers-plan_clusters#multiple_clusters)。通过为集群设置负载均衡器，可以实现对集群进行跨区域负载均衡和跨区域联网。 
 
-如果您具有即使发生中断也必须可用的数据，请确保将数据存储在[持久性存储器](cs_storage_planning.html#storage_planning)上。 
+如果您具有即使发生中断也必须可用的数据，请确保将数据存储在[持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)上。 
 
-有关如何为集群实现高可用性的更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 的高可用性](cs_ha.html#ha)。 
+有关如何为集群实现高可用性的更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 的高可用性](/docs/containers?topic=containers-ha#ha)。 
 
 ## 我有哪些选项可保护集群？
 {: #secure_cluster}
@@ -76,7 +80,15 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versio
 
 您可以使用 {{site.data.keyword.containerlong_notm}} 中的内置安全功能来保护集群中的组件以及数据和应用程序部署，以确保安全合规性和数据完整性。使用这些功能可以保护 Kubernetes API 服务器、etcd 数据存储、工作程序节点、网络、存储器、映像和部署免受恶意攻击。您还可以利用内置日志记录和监视工具来检测恶意攻击和可疑使用模式。 
 
-有关集群组件以及如何保护每个组件的更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 的安全性](cs_secure.html#security)。 
+有关集群组件以及如何保护每个组件的更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 的安全性](/docs/containers?topic=containers-security#security)。 
+
+## 在哪里可以找到影响集群的安全公告的列表？ 
+{: #faq_security_bulletins}
+{: faq}
+
+如果在 Kubernetes 中发现漏洞，Kubernetes 会在安全公告中发布 CVE 以通知用户，并描述用户必须执行哪些操作来修复漏洞。影响 {{site.data.keyword.containerlong_notm}} 用户或 {{site.data.keyword.Bluemix_notm}} 平台的 Kubernetes 安全公告会在 [{{site.data.keyword.Bluemix_notm}} 安全公告](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security)中发布。 
+
+某些 CVE 需要 Kubernetes 版本的最新补丁更新，您可以在 {{site.data.keyword.containerlong_notm}} 中的常规[集群更新过程](/docs/containers?topic=containers-update#update)中安装该更新。确保及时应用安全补丁，以保护集群免受恶意攻击。有关安全补丁中包含哪些内容的信息，请参阅[版本更改日志](/docs/containers?topic=containers-changelog#changelog)。 
 
 ## 服务提供对裸机和 GPU 的支持吗？ 
 {: #bare_metal_gpu}
@@ -84,7 +96,7 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versio
 
 是的，您可以将工作程序节点作为单租户物理裸机服务器进行供应。裸机服务器能为工作负载（例如，数据、AI 和 GPU）带来高性能优点。此外，所有硬件资源都专供您的工作负载使用，因此您不必担心“吵闹的邻居”。
 
-有关可用裸机类型模板以及裸机与虚拟机的差异的更多信息，请参阅[物理机器（裸机）](cs_clusters_planning.html#bm)。
+有关可用裸机类型模板以及裸机与虚拟机的差异的更多信息，请参阅[物理机器（裸机）](/docs/containers?topic=containers-plan_clusters#bm)。
 
 ## 服务支持哪些 Kubernetes 版本？ 
 {: #supported_kube_versions}
@@ -93,40 +105,38 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versio
 {{site.data.keyword.containerlong_notm}} 同时支持多个版本的 Kubernetes。发布最新版本 (n) 时，支持最多低 2 (n-2) 的版本。比最新版本低 2 以上的版本 (n-3) 将首先不推荐使用，然后不再支持。
 当前支持以下版本： 
 
-- 最新版本：1.12.3
-- 缺省版本：1.10.11
-- 其他版本：1.11.5
+- 最新版本：1.13.4
+- 缺省版本：1.12.6
+- 其他版本：1.11.8
 
-有关支持的版本以及从一个版本移至另一个版本时必须执行的更新操作的更多信息，请参阅[版本信息和更新操作](cs_versions.html#cs_versions)。
+有关支持的版本以及从一个版本移至另一个版本时必须执行的更新操作的更多信息，请参阅[版本信息和更新操作](/docs/containers?topic=containers-cs_versions#cs_versions)。
 
 ## 服务在哪里可用？
 {: #supported_regions}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} 在全球范围内可用。您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
+{{site.data.keyword.containerlong_notm}} 在全球范围内可用。您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在精选区域中可用。
 
-有关支持的区域的更多信息，请参阅[区域和专区](cs_regions.html#regions-and-zones)。
+有关支持的区域的更多信息，请参阅[区域和专区](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)。
 
 ## 服务符合哪些标准？ 
 {: #standards}
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} 实施与以下标准相当的控制措施： 
-- HIPAA
-- SOC1
-- SOC2 类型 1
-- ISAE 3402
-- ISO 27001
-- ISO 27017
-- ISO 27018
+- 健康保险可移植性和责任法案 (HIPAA)
+- 服务组织控制标准（SOC 1 和 SOC 2 类型 1）
+- 鉴证业务国际准则第 3402 号 (ISAE 3402) - 服务类组织控制鉴证报告
+- 国际标准化组织（ISO 27001、ISO 27017 和 ISO 27018）
+- 支付卡行业数据安全标准 (PCI DSS)
 
 ## 可以将 IBM Cloud 和其他服务用于集群吗？
-{: #integrations}
+{: #faq_integrations}
 {: faq}
 
 您可以将 {{site.data.keyword.Bluemix_notm}} 平台和基础架构服务以及来自第三方供应商的服务添加到 {{site.data.keyword.containerlong_notm}} 集群，以启用自动化，提高安全性或增强集群中的监视和日志记录功能。
 
-有关支持的服务的列表，请参阅[集成服务](cs_integrations.html#integrations)。
+有关支持的服务的列表，请参阅[集成服务](/docs/containers?topic=containers-integrations#integrations)。
 
 ## 能将 IBM Cloud Public 中的集群与内部部署数据中心内运行的应用程序相连接吗？
 {: #hybrid}
@@ -136,9 +146,9 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versio
 - 您在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 中使用 {{site.data.keyword.containerlong_notm}} 创建了集群，但希望将该集群与内部部署数据库相连接。
 - 您在自己的数据中心内的 {{site.data.keyword.Bluemix_notm}} Private 中创建了 Kubernetes 集群，并将应用程序部署到该集群。但是，应用程序可能会使用 {{site.data.keyword.Bluemix_notm}} Public 中的 {{site.data.keyword.ibmwatson_notm}} 服务，例如 Tone Analyzer。
 
-要支持在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 中运行的服务与内部部署运行的服务之间的通信，必须[设置 VPN 连接](cs_vpn.html#vpn)。要将 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 环境与 {{site.data.keyword.Bluemix_notm}} Private 环境相连接，请参阅[将 {{site.data.keyword.containerlong_notm}} 用于 {{site.data.keyword.Bluemix_notm}} Private](cs_hybrid.html#hybrid_iks_icp)。
+要支持在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 中运行的服务与内部部署运行的服务之间的通信，必须[设置 VPN 连接](/docs/containers?topic=containers-vpn#vpn)。要将 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 环境与 {{site.data.keyword.Bluemix_notm}} Private 环境相连接，请参阅[将 {{site.data.keyword.containerlong_notm}} 用于 {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)。
 
-有关支持的 {{site.data.keyword.containerlong_notm}} 产品的概述，请参阅[产品及其组合的比较](cs_why.html#differentiation)。
+有关支持的 {{site.data.keyword.containerlong_notm}} 产品的概述，请参阅[产品及其组合的比较](/docs/containers?topic=containers-cs_ov#differentiation)。
 
 ## 我可以在自己的数据中心部署 IBM Cloud Kubernetes Service 吗？
 {: #private}
@@ -152,7 +162,7 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versio
 {: #charges}
 {: faq}
 
-通过 {{site.data.keyword.containerlong_notm}} 集群，您可以将 IBM Cloud Infrastructure (SoftLayer) 计算、联网和存储资源与 Watson AI 或 Compose 数据库即服务等平台服务配合使用。每个资源都可能产生相应的费用，该费用可能是[固定、计量、分层或保留的](/docs/billing-usage/how_charged.html#charges)。 
+通过 {{site.data.keyword.containerlong_notm}} 集群，您可以将 IBM Cloud Infrastructure (SoftLayer) 计算、联网和存储资源与 Watson AI 或 Compose 数据库即服务等平台服务配合使用。每个资源都可能产生相应的费用，该费用可能是[固定、计量、分层或保留的](/docs/billing-usage?topic=billing-usage-charges#charges)。 
 * [工作程序节点](#nodes)
 * [出站联网](#bandwidth)
 * [子网 IP 地址](#subnets)
@@ -168,28 +178,29 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versio
   <li><strong>每月分层小时数</strong>：按小时计费是分层的。由于 VM 始终订购的是计费月份内的小时层，因此按小时收取的费率更低。各小时层如下：0 - 150 小时、151 - 290 小时、291 - 540 小时和 541 小时以上。</li></ul>
   <p><strong>物理机器（裸机）</strong>能为工作负载（例如，数据、AI 和 GPU）带来高性能优点。此外，所有硬件资源都专供您的工作负载使用，因此您没有“吵闹的邻居”。请牢记以下影响裸机成本的因素：</p>
   <ul><li><strong>仅按月计费</strong>：所有裸机均按月计费。</li>
-  <li><strong>订购过程用时更长</strong>：由于订购和取消裸机服务器是通过 IBM Cloud Infrastructure (SoftLayer) 帐户手动执行的过程，因此可能需要一个工作日以上的时间才能完成。</li></ul>
-  <p>有关机器规范的详细信息，请参阅[工作程序节点的可用硬件](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)。</p></dd>
+  <li><strong>订购过程更长</strong>：订购或取消裸机服务器后，该过程在 IBM Cloud Infrastructure (SoftLayer) 帐户中手动完成。因此，完成此过程可能需要超过一个工作日的时间。</li></ul>
+  <p>有关机器规范的详细信息，请参阅[工作程序节点的可用硬件](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)。</p></dd>
 
 <dt id="bandwidth">公共带宽</dt>
-  <dd><p>带宽是指入站和出站网络流量的公共数据传输，包括进出全球数据中心的 {{site.data.keyword.Bluemix_notm}} 资源的数据传输。公共带宽按每 GB 计费。您可以通过登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://console.bluemix.net/)，从菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中选择**基础架构**，然后选择**网络 > 带宽 > 摘要**页面来查看当前带宽摘要。
+  <dd><p>带宽是指入站和出站网络流量的公共数据传输，包括进出全球数据中心的 {{site.data.keyword.Bluemix_notm}} 资源的数据传输。公共带宽按每 GB 计费。您可以通过登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://cloud.ibm.com/)，从菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中选择**经典基础架构**，然后选择**网络 > 带宽 > 摘要**页面来查看当前带宽摘要。
   <p>查看影响公共带宽费用的以下因素：</p>
   <ul><li><strong>位置</strong>：与工作程序节点一样，费用随资源所部署到的专区而有所不同。</li>
-  <li><strong>随附带宽或现买现付</strong>：工作程序节点机器可能分配有一定的每月出站联网带宽，例如 250 GB（对于 VM）或 500 GB（对于裸机）。或者，分配可能是根据 GB 使用量现买现付。</li>
+  <li><strong>随附带宽或现收现付</strong>：工作程序节点机器可能分配有一定的每月出站联网带宽，例如 250 GB（对于 VM）或 500 GB（对于裸机）。或者，分配可能是根据 GB 使用量现收现付。</li>
   <li><strong>分层包</strong>：超过任何随附的带宽后，会根据按位置变化的分层使用量方案收费。如果超过了某个层分配量，可能还会向您收取标准数据传输费用。</li></ul>
   <p>有关更多信息，请参阅[带宽包 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/bandwidth)。</p></dd>
 
 <dt id="subnets">子网 IP 地址</dt>
-  <dd><p>创建标准集群时，会订购具有 8 个公共 IP 地址的可移植公用子网，并按月向您的帐户收费。</p><p>如果基础架构帐户中有可用的子网，那么可以改为使用这些子网。使用 `--no-subnets` [标志](cs_cli_reference.html#cs_cluster_create)创建集群，然后[复用子网](cs_subnets.html#custom)。</p>
+  <dd><p>创建标准集群时，会订购具有 8 个公共 IP 地址的可移植公用子网，并按月向您的帐户收费。</p><p>如果基础架构帐户中有可用的子网，那么可以改为使用这些子网。使用 `--no-subnets` [标志](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)创建集群，然后[复用子网](/docs/containers?topic=containers-subnets#subnets_custom)。</p>
   </dd>
 
 <dt id="storage">存储器</dt>
-  <dd>供应存储器时，可以选择适合您用例的存储类型和存储类。费用随存储类型、位置和存储实例的规范而有所不同。某些存储解决方案（例如，File Storage 和 Block Storage）提供了按小时和按月收费的套餐供您选择。要选择正确的存储解决方案，请参阅[规划高可用性持久性存储器](cs_storage_planning.html#storage_planning)。有关更多信息，请参阅：<ul><li>[NFS 文件存储器定价 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/file-storage/pricing)</li>
+  <dd>供应存储器时，可以选择适合您用例的存储类型和存储类。费用随存储类型、位置和存储实例的规范而有所不同。某些存储解决方案（例如，File Storage 和 Block Storage）提供了按小时和按月收费的套餐供您选择。要选择正确的存储解决方案，请参阅[规划高可用性持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)。有关更多信息，请参阅：
+  <ul><li>[NFS 文件存储器定价 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/file-storage/pricing)</li>
   <li>[块存储器定价 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/block-storage/pricing)</li>
   <li>[Object Storage 套餐 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
 
 <dt id="services">{{site.data.keyword.Bluemix_notm}} 服务</dt>
-  <dd>与集群集成的每个服务都有自己的定价模型。有关更多信息，请查阅各产品文档和[成本估算器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/pricing/)。</dd>
+  <dd>与集群集成的每个服务都有自己的定价模型。请查阅每个产品文档，并使用 {{site.data.keyword.Bluemix_notm}}“控制台”来[估算成本](/docs/billing-usage?topic=billing-usage-cost#cost)。</dd>
 
 </dl>
 
@@ -200,17 +211,16 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versio
 {: #bill}
 {: faq}
 
-您使用的是计费 {{site.data.keyword.Bluemix_notm}} 帐户时，平台和基础架构资源会汇总到一个帐单中。如果您链接了 {{site.data.keyword.Bluemix_notm}} 和 IBM Cloud Infrastructure (SoftLayer) 帐户，那么将收到 {{site.data.keyword.Bluemix_notm}} 平台和基础架构资源的[合并帐单](/docs/customer-portal/linking_accounts.html#unifybillaccounts)。 
+您使用的是计费 {{site.data.keyword.Bluemix_notm}} 帐户时，平台和基础架构资源会汇总到一个帐单中。如果您链接了 {{site.data.keyword.Bluemix_notm}} 和 IBM Cloud Infrastructure (SoftLayer) 帐户，那么将收到 {{site.data.keyword.Bluemix_notm}} 平台和基础架构资源的[合并帐单](/docs/customer-portal?topic=customer-portal-unifybillaccounts#unifybillaccounts)。 
 
 ## 我能估算成本吗？
 {: #cost_estimate}
 {: faq}
 
-可以，请参阅[估算成本](/docs/billing-usage/estimating_costs.html#cost)和[成本估算工具 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/pricing/)，以获取更多信息。 
+可以，请参阅[估算成本](/docs/billing-usage?topic=billing-usage-cost#cost)。请记住，某些费用不会反映在估算中，例如针对增加的每小时使用量的分层定价。有关更多信息，请参阅[使用 {{site.data.keyword.containerlong_notm}} 时，将向我收取多少费用？](#charges)。
 
 ## 可以查看我的当前使用情况吗？ 
 {: #usage}
 {: faq}
 
-您可以检查 {{site.data.keyword.Bluemix_notm}} 平台和基础架构资源的当前使用情况以及每月估算总计。有关更多信息，请参阅[查看使用情况](/docs/billing-usage/viewing_usage.html#viewingusage)。要组织计费，可以使用[资源组](/docs/resources/bestpractice_rgs.html#bp_resourcegroups)对资源进行分组。 
-
+您可以检查 {{site.data.keyword.Bluemix_notm}} 平台和基础架构资源的当前使用情况以及每月估算总计。有关更多信息，请参阅[查看使用情况](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage)。要组织计费，可以使用[资源组](/docs/resources?topic=resources-bp_resourcegroups#bp_resourcegroups)对资源进行分组。 

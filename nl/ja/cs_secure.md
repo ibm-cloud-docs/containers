@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -17,7 +21,6 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 
@@ -47,6 +50,9 @@ lastupdated: "2018-12-05"
 - [コンテナーの分離とセキュリティー](#container)
 - [個人情報](#pi)
 
+<br />
+
+
 ## Kubernetes API サーバーと etcd
 {: #apiserver}
 
@@ -75,10 +81,10 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
     <tr>
       <td>完全に管理される専用 Kubernetes マスター</td>
       <td><p>{{site.data.keyword.containerlong_notm}} に含まれる Kubernetes クラスターはすべて、IBM が所有する IBM Cloud インフラストラクチャー (SoftLayer) アカウントで、IBM が管理する専用 Kubernetes マスターにより制御されます。 Kubernetes マスターは、他の IBM のお客様とは共用されない、以下の専用コンポーネントを使用してセットアップされます。</p>
-        <ul><li><strong>etcd データ・ストア:</strong> `サービス`、`デプロイメント`、`ポッド`などのクラスターのすべての Kubernetes リソースを保管します。 Kubernetes `ConfigMaps` および `Secrets` は、ポッドで実行されるアプリで使用できるように、キー値ペアとして保管されるアプリ・データです。 Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](cs_encrypt.html#encryption)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。 以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。 etcd データがポッドに送信されるときには、データの保護と保全性を確保するために、データが TLS で暗号化されます。</li>
+        <ul><li><strong>etcd データ・ストア:</strong> `サービス`、`デプロイメント`、`ポッド`などのクラスターのすべての Kubernetes リソースを保管します。 Kubernetes `ConfigMaps` および `Secrets` は、ポッドで実行されるアプリで使用できるように、キー値ペアとして保管されるアプリ・データです。 Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](/docs/containers?topic=containers-encryption#encryption)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。 以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。 etcd データがポッドに送信されるときには、データの保護と保全性を確保するために、データが TLS で暗号化されます。</li>
           <li><strong>kube-apiserver:</strong> ワーカー・ノードから Kubernetes マスターへのすべてのクラスター管理要求のメインエントリー・ポイントとなります。 kube-apiserver は要求を検証して処理し、etcd データ・ストアに対する読み取り/書き込みを行うことができます。</li>
           <li><strong>kube-scheduler:</strong> ポッドをどこにデプロイするかを決定します。このとき、キャパシティーとパフォーマンスのニーズ、ハードウェアとソフトウェアのポリシー制約、アンチアフィニティー仕様、およびワークロード要件が考慮されます。 要件に合致するワーカー・ノードが見つからなければ、ポッドはクラスターにデプロイされません。</li>
-          <li><strong>kube-controller-manager:</strong> レプリカ・セットをモニターし、対応するポッドを作成して目的の状態を実現するためのコンポーネントです。</li>
+          <li><strong>kube-controller-manager:</strong> レプリカ・セットをモニターし、対応するポッドを作成して、指定された状態を実現するためのコンポーネントです。</li>
           <li><strong>OpenVPN:</strong> {{site.data.keyword.containerlong_notm}} 固有のコンポーネントであり、Kubernetes マスターからワーカー・ノードへのすべての通信のためのセキュア・ネットワーク接続を提供します。 Kubernetes マスターとワーカー・ノードの間の通信はユーザーによって開始され、<code>kubectl</code> コマンド (<code>logs</code>、<code>attach</code>、<code>exec</code>、<code>top</code> など) を含んでいます。</li></ul></td>
     </tr>
     <tr>
@@ -95,29 +101,43 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
     </tr>
     <tr>
       <td>きめの細かいアクセス制御</td>
-      <td>アカウント管理者は、{{site.data.keyword.Bluemix_notm}} の IAM (ID およびアクセス管理) を使用して [{{site.data.keyword.containerlong_notm}} の他のユーザーにアクセス権限を付与](cs_users.html#users)できます。 {{site.data.keyword.Bluemix_notm}} IAM は、{{site.data.keyword.Bluemix_notm}} プラットフォーム、{{site.data.keyword.containerlong_notm}}、およびアカウント内のすべてのリソースでセキュアな認証を提供します。 リソースにアクセスできるユーザーを制限し、正当なアクセス権を悪用したユーザーから被る損害を制限するためには、適切なユーザー役割と権限をセットアップすることが重要です。 </br></br>ユーザーが実行できる一連の操作を決定する、以下の事前定義ユーザー役割の中から選択することができます。 <ul><li><strong>プラットフォーム役割:</strong> ユーザーが {{site.data.keyword.containerlong_notm}} で実行できるクラスターとワーカー・ノード関連の操作を決定します。</li><li><strong>インフラストラクチャー役割:</strong> ワーカー・ノード、VLAN、サブネットなどのインフラストラクチャー・リソースをオーダー、更新、または削除する権限を決定します。</li><li><strong>Kubernetes RBAC 役割:</strong> クラスターへのアクセスを許可されている場合に、ユーザーが実行できる `kubectl` コマンドを決定します。 RBAC 役割は、クラスターのデフォルトの名前空間に対して自動的にセットアップされます。 同じ RBAC 役割を他の名前空間で使用するためには、デフォルトの名前空間から RBAC 役割をコピーしてください。  </li></ul> </br> 事前定義のユーザー役割を使用する代わりに、[インフラストラクチャー権限をカスタマイズ](cs_users.html#infra_access)したり、[独自の RBAC 役割をセットアップ](cs_users.html#rbac)したりして、よりきめの細かいアクセス制御を追加することもできます。 </td>
+      <td>アカウント管理者は、{{site.data.keyword.Bluemix_notm}} の IAM (ID およびアクセス管理) を使用して [{{site.data.keyword.containerlong_notm}} の他のユーザーにアクセス権限を付与](/docs/containers?topic=containers-users#users)できます。 {{site.data.keyword.Bluemix_notm}} IAM は、{{site.data.keyword.Bluemix_notm}} プラットフォーム、{{site.data.keyword.containerlong_notm}}、およびアカウント内のすべてのリソースでセキュアな認証を提供します。 リソースにアクセスできるユーザーを制限し、正当なアクセス権を悪用したユーザーから被る損害を制限するためには、適切なユーザー役割と権限をセットアップすることが重要です。 </br></br>ユーザーが実行できる一連の操作を決定する、以下の事前定義ユーザー役割の中から選択することができます。 <ul><li><strong>プラットフォーム役割:</strong> ユーザーが {{site.data.keyword.containerlong_notm}} で実行できるクラスターとワーカー・ノード関連の操作を決定します。</li><li><strong>インフラストラクチャー役割:</strong> ワーカー・ノード、VLAN、サブネットなどのインフラストラクチャー・リソースをオーダー、更新、または削除する権限を決定します。</li><li><strong>Kubernetes RBAC 役割:</strong> クラスターへのアクセスを許可されている場合に、ユーザーが実行できる `kubectl` コマンドを決定します。 RBAC 役割は、クラスターのデフォルトの名前空間に対して自動的にセットアップされます。 同じ RBAC 役割を他の名前空間で使用するためには、デフォルトの名前空間から RBAC 役割をコピーしてください。  </li></ul> </br> 事前定義のユーザー役割を使用する代わりに、[インフラストラクチャー権限をカスタマイズ](/docs/containers?topic=containers-users#infra_access)したり、[独自の RBAC 役割をセットアップ](/docs/containers?topic=containers-users#rbac)したりして、よりきめの細かいアクセス制御を追加することもできます。 </td>
     </tr>
     <tr>
       <td>アドミッション・コントローラー</td>
       <td>アドミッション・コントローラーは、Kubernetes と {{site.data.keyword.containerlong_notm}} の特定の機能のために実装されています。 アドミッション・コントローラーにより、クラスター内で特定の操作を許可するかどうかを決定するポリシーを、クラスター内にセットアップできます。 ポリシーには、RBAC を使用してユーザーに割り当てた汎用権限に含まれている操作であっても、ユーザーがその操作を実行できなくなる条件を指定できます。 したがって、アドミッション・コントローラーは、Kubernetes API サーバーで API 要求が処理される前に適用されるセキュリティー層をクラスターに追加できます。 </br></br> クラスターを作成すると、{{site.data.keyword.containerlong_notm}} は自動的に以下の [Kubernetes アドミッション・コントローラー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/admin/admission-controllers/) を Kubernetes マスターにインストールします。これは、ユーザーが変更することはできません。 <ul>
-      <li>DefaultTolerationSeconds</li>
-      <li>DefaultStorageClass</li>
-      <li>GenericAdmissionWebhook (Kubernetes 1.8)</li>
-      <li>Initializers</li>
-      <li>LimitRanger</li>
-      <li>MutatingAdmissionWebhook (Kubernetes 1.9 以降)</li>
-      <li>NamespaceLifecycle</li>
-      <li>PersistentVolumeLabel</li>
-      <li>[PodSecurityPolicy](cs_psp.html#ibm_psp) (Kubernetes 1.8.13、1.9.8、または 1.10.3 以降)</li>
-      <li>[優先度](cs_pod_priority.html#pod_priority) (Kubernetes 1.11.2 以降)</li>
-      <li>ResourceQuota</li>
-      <li>ServiceAccount</li>
-      <li>StorageObjectInUseProtection (Kubernetes 1.10 以降)</li>
-      <li>ValidatingAdmissionWebhook (Kubernetes 1.9 以降)</li></ul></br>
-      [独自のアドミッション・コントローラーをクラスターにインストール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) したり、{{site.data.keyword.containerlong_notm}} に用意されているオプションのアドミッション・コントローラーから選択したりすることもできます。 <ul><li><strong>[Container Image Security Enforcer](/docs/services/Registry/registry_security_enforce.html#security_enforce):</strong> このアドミッション・コントローラーを使用すると、Vulnerability Advisor ポリシーをクラスター内で適用して、脆弱なイメージからのデプロイメントをブロックできます。</li></ul></br><p class="note">手動でインストールしたアドミッション・コントローラーが不要になった場合は、必ず、完全に削除してください。 アドミッション・コントローラーを完全に削除しておかないと、クラスターに対して実行する必要がある操作がすべてブロックされる可能性があります。</p></td>
+      <li>`DefaultTolerationSeconds`</li>
+      <li>`DefaultStorageClass`</li>
+      <li>`GenericAdmissionWebhook` (Kubernetes 1.8)</li>
+      <li>`Initializers`</li>
+      <li>`LimitRanger`</li>
+      <li>`MutatingAdmissionWebhook` (Kubernetes 1.9 以降)</li>
+      <li>`NamespaceLifecycle`</li>
+      <li>`PersistentVolumeLabel`</li>
+      <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp) (Kubernetes 1.8.13、1.9.8、または 1.10.3 以降)</li>
+      <li>[`優先度`](/docs/containers?topic=containers-pod_priority#pod_priority) (Kubernetes 1.11.2 以降)</li>
+      <li>`ResourceQuota`</li>
+      <li>`ServiceAccount`</li>
+      <li>`StorageObjectInUseProtection` (Kubernetes 1.10 以降)</li>
+      <li>`ValidatingAdmissionWebhook` (Kubernetes 1.9 以降)</li></ul></br>
+      [独自のアドミッション・コントローラーをクラスターにインストール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) したり、{{site.data.keyword.containerlong_notm}} に用意されているオプションのアドミッション・コントローラーから選択したりすることもできます。 <ul><li><strong>[Container Image Security Enforcer](/docs/services/Registry?topic=registry-security_enforce#security_enforce):</strong> このアドミッション・コントローラーを使用すると、Vulnerability Advisor ポリシーをクラスター内で適用して、脆弱なイメージからのデプロイメントをブロックできます。</li></ul></br><p class="note">手動でインストールしたアドミッション・コントローラーが不要になった場合は、必ず、完全に削除してください。 アドミッション・コントローラーを完全に削除しておかないと、クラスターに対して実行する必要がある操作がすべてブロックされる可能性があります。</p></td>
     </tr>
   </tbody>
 </table>
+
+**Kubernetes API サーバーを保護するために他に何ができますか?**</br>
+
+クラスターをプライベート VLAN とパブリック VLAN に接続すると、{{site.data.keyword.containerlong_notm}} はパブリック・サービス・エンドポイントを通してクラスター・マスターとワーカー・ノードの間のセキュア OpenVPN 接続を自動的にセットアップします。{{site.data.keyword.Bluemix_notm}} アカウント内で VRF が有効になっている場合は、代わりにプライベート・サービス・エンドポイントを通して、クラスター・マスターとワーカー・ノードのプライベート・ネットワーク経由の通信を許可できます。
+
+サービス・エンドポイントにより、ワーカー・ノードとクラスター・ユーザーがクラスター・マスターにアクセスできる方法が決まります。
+* パブリック・サービス・エンドポイントのみ: パブリック・ネットワーク経由のクラスター・マスターとワーカー・ノードの間のセキュア OpenVPN 接続が確立されます。マスターはクラスター・ユーザーにパブリックにアクセスできます。
+* パブリック・サービス・エンドポイントとプライベート・サービス・エンドポイント: プライベート・サービス・エンドポイントを通してプライベート・ネットワーク経由のクラスター・マスターとワーカー・ノードの間の通信が確立されます。クラスターのパブリック・サービス・エンドポイントを有効にしても、Kubernetes マスターからワーカー・ノードへの通信はプライベート・ネットワーク経由で行われます。パブリック・サービス・エンドポイントは、インターネット経由で Kubernetes マスターに安全にアクセスするために使用されます。例えば、許可されたクラスター・ユーザーが `kubectl` コマンドを実行できるようになります。
+* プライベート・サービス・エンドポイントのみ: プライベート・ネットワーク経由のマスターとワーカー・ノードの間の通信が確立されます。クラスター・ユーザーがマスターにアクセスするには、{{site.data.keyword.Bluemix_notm}} プライベート・ネットワークの中で作業しているか、VPN 接続経由でプライベート・ネットワークに接続している必要があります。
+
+サービス・エンドポイントの詳細については、[ワーカー・ノードと Kubernetes マスター間の通信の計画](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)を参照してください。
+
+<br />
+
 
 ## ワーカー・ノード
 {: #workernodes}
@@ -130,7 +150,7 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
 
 標準クラスター内のワーカー・ノードは、ユーザーの {{site.data.keyword.Bluemix_notm}} パブリック・アカウントまたは専用アカウントに関連付けられているIBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされます。 ワーカー・ノードはユーザー・アカウントに専用のものです。このためユーザーは、ワーカー・ノードの OS および {{site.data.keyword.containerlong_notm}} コンポーネントに最新のセキュリティー更新とパッチが適用されるように、ワーカー・ノードに対するタイムリーな更新を要求する責任があります。
 
-`ibmcloud ks worker-update` [コマンド](cs_cli_reference.html#cs_worker_update)を定期的 (毎月など) に使用して、更新とセキュリティー・パッチをオペレーティング・システムに導入し、Kubernetes バージョンを更新してください。 更新プログラムが利用可能になると、{{site.data.keyword.Bluemix_notm}} コンソールまたは CLI (`ibmcloud ks clusters` や `ibmcloud ks workers<cluster_name>` コマンドなど) でマスターやワーカー・ノードの情報を表示したときに通知されます。
+`ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)を定期的 (毎月など) に使用して、更新とセキュリティー・パッチをオペレーティング・システムに導入し、Kubernetes バージョンを更新してください。 更新プログラムが利用可能になると、{{site.data.keyword.Bluemix_notm}} コンソールまたは CLI (`ibmcloud ks clusters` コマンドや `ibmcloud ks workers --cluster <cluster_name>` コマンドなど) でマスターやワーカー・ノードの情報を表示したときに通知されます。最新のセキュリティー・パッチが含まれる完全なワーカー・ノードのイメージとして、ワーカー・ノードの更新が IBM により提供されています。更新を適用するには、ワーカー・ノードのイメージを再作成し、新しいイメージを使ってワーカー・ノードを再ロードする必要があります。ワーカー・ノードの再ロード時に、root ユーザーの鍵は自動的に交替されます。
 {: important}
 
 **ワーカー・ノードのセットアップはどのようなものですか?**</br>
@@ -155,7 +175,7 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
     </tr>
     <tr>
   <td>コンピュートの分離</td>
-  <td>ワーカー・ノードは特定のクラスターの専用であり、他のクラスターのワークロードをホストすることはありません。 標準クラスターを作成するときには、ワーカー・ノードを[物理マシン (ベア・メタル) としてプロビジョンするか、共有または専用の物理ハードウェア上で実行される仮想マシンとしてプロビジョンするか](cs_clusters_planning.html#planning_worker_nodes)を選択できます。 フリー・クラスターのワーカー・ノードは、IBM が所有する IBM Cloud インフラストラクチャー (SoftLayer) アカウント内の仮想共有ノードとして自動的にプロビジョンされます。</td>
+  <td>ワーカー・ノードは特定のクラスターの専用であり、他のクラスターのワークロードをホストすることはありません。 標準クラスターを作成するときには、ワーカー・ノードを[物理マシン (ベア・メタル) としてプロビジョンするか、共有または専用の物理ハードウェア上で実行される仮想マシンとしてプロビジョンするか](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)を選択できます。 フリー・クラスターのワーカー・ノードは、IBM が所有する IBM Cloud インフラストラクチャー (SoftLayer) アカウント内の仮想共有ノードとして自動的にプロビジョンされます。</td>
 </tr>
 <tr>
 <td>ベア・メタルをデプロイするオプション</td>
@@ -163,13 +183,13 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
 </tr>
 <tr>
   <td id="trusted_compute">トラステッド・コンピューティングのオプション</td>
-    <td>トラステッド・コンピューティングをサポートするベア・メタルにクラスターをデプロイした場合は、[トラストを有効にする](cs_cli_reference.html#cs_cluster_feature_enable)ことができます。 トラステッド・コンピューティングをサポートするクラスター内の各ベア・メタル・ワーカー・ノード (クラスターに将来追加するノードも含む) の Trusted Platform Module (TPM) チップが有効になります。 したがって、トラストを有効にした後に、クラスターのトラストを無効にすることはできません。 トラスト・サーバーがマスター・ノードにデプロイされ、トラスト・エージェントがワーカー・ノードにポッドとしてデプロイされます。 ワーカー・ノードが始動すると、トラスト・エージェント・ポッドがプロセスの各ステージをモニターします。<p>ハードウェアはトラストのルートに位置し、TPM を使用して測定値を送信します。 TPM は、このプロセス全体で測定データの伝送を保護するために使用する暗号鍵を生成します。 トラスト・エージェントは、始動プロセスの中で (TPM ハードウェアと対話する BIOS ファームウェアから、ブート・ローダーや OS カーネルまでを含む) 各コンポーネントの測定値をトラスト・サーバーに渡します。 その後、トラスト・エージェントはそれらの測定値をトラスト・サーバーで予想された値と比較して、始動が有効なものであったかどうかを確認します。 トラステッド・コンピューティングのプロセスでは、アプリケーションなどのワーカー・ノード内の他のポッドはモニターされません。</p><p>例えば、不正なユーザーがシステムにアクセスし、データを収集するためのロジックを追加して OS カーネルを変更した場合、トラスト・エージェントは、その変更を検出し、そのノードを信頼できないものとしてマークします。トラステッド・コンピューティングを使用すると、ワーカー・ノードが改ざんされていないことを検証できます。</p>
+    <td>トラステッド・コンピューティングをサポートするベア・メタルにクラスターをデプロイした場合は、[トラストを有効にする](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)ことができます。 トラステッド・コンピューティングをサポートするクラスター内の各ベア・メタル・ワーカー・ノード (クラスターに将来追加するノードも含む) の Trusted Platform Module (TPM) チップが有効になります。 したがって、トラストを有効にした後に、クラスターのトラストを無効にすることはできません。 トラスト・サーバーがマスター・ノードにデプロイされ、トラスト・エージェントがワーカー・ノードにポッドとしてデプロイされます。 ワーカー・ノードが始動すると、トラスト・エージェント・ポッドがプロセスの各ステージをモニターします。<p>ハードウェアはトラストのルートに位置し、TPM を使用して測定値を送信します。 TPM は、このプロセス全体で測定データの伝送を保護するために使用する暗号鍵を生成します。 トラスト・エージェントは、始動プロセスの中で (TPM ハードウェアと対話する BIOS ファームウェアから、ブート・ローダーや OS カーネルまでを含む) 各コンポーネントの測定値をトラスト・サーバーに渡します。 その後、トラスト・エージェントはそれらの測定値をトラスト・サーバーで予想された値と比較して、始動が有効なものであったかどうかを確認します。 トラステッド・コンピューティングのプロセスでは、アプリケーションなどのワーカー・ノード内の他のポッドはモニターされません。</p><p>例えば、不正なユーザーがシステムにアクセスし、データを収集するためのロジックを追加して OS カーネルを変更した場合、トラスト・エージェントは、その変更を検出し、そのノードを信頼できないものとしてマークします。トラステッド・コンピューティングを使用すると、ワーカー・ノードが改ざんされていないことを検証できます。</p>
     <p class="note">トラステッド・コンピューティングは、選ばれたベア・メタル・マシン・タイプでのみ使用できます。 例えば、`mgXc` GPU フレーバーではトラステッド・コンピューティングはサポートされません。</p>
     <p><img src="images/trusted_compute.png" alt="ベア・メタル・クラスターのトラステッド・コンピューティング" width="480" style="width:480px; border-style: none"/></p></td>
   </tr>
     <tr>
   <td id="encrypted_disk">暗号化されたディスク</td>
-    <td>デフォルトでは、すべてのワーカー・ノードは、2 つのローカル SSD 暗号化データ・パーティションでプロビジョンされます。 最初のパーティションには、ワーカー・ノードのブートに使用され、暗号化されていないカーネル・イメージが含まれています。 2 番目のパーティションは、コンテナー・ファイル・システムを保持し、LUKS 暗号キーを使用してアンロックされます。 各 Kubernetes クラスター内の各ワーカー・ノードには、独自の固有の LUKS 暗号キーがあり、{{site.data.keyword.containerlong_notm}} によって管理されます。 クラスターを作成する際やワーカー・ノードを既存のクラスターに追加する際に、この鍵は安全にプルされてから、暗号化ディスクのアンロック後に破棄されます。 <p class="note">暗号化はディスク入出力のパフォーマンスに影響します。 高性能のディスク入出力が必要なワークロードの場合、暗号化を有効/無効にした両方のクラスターをテストし、暗号化をオフにするかどうかの決定に役立ててください。</p></td>
+    <td>デフォルトでは、すべてのワーカー・ノードは、2 つのローカル SSD、AES 256 ビット暗号化データ・パーティションでプロビジョンされます。最初のパーティションには、ワーカー・ノードのブートに使用され、暗号化されていないカーネル・イメージが含まれています。 2 番目のパーティションは、コンテナー・ファイル・システムを保持し、LUKS 暗号キーを使用してアンロックされます。 各 Kubernetes クラスター内の各ワーカー・ノードには、独自の固有の LUKS 暗号キーがあり、{{site.data.keyword.containerlong_notm}} によって管理されます。 クラスターを作成する際やワーカー・ノードを既存のクラスターに追加する際に、この鍵は安全にプルされてから、暗号化ディスクのアンロック後に破棄されます。 <p class="note">暗号化はディスク入出力のパフォーマンスに影響します。 高性能のディスク入出力が必要なワークロードの場合、暗号化を有効/無効にした両方のクラスターをテストし、暗号化をオフにするかどうかの決定に役立ててください。</p></td>
       </tr>
     <tr>
       <td>エキスパート AppArmor ポリシー</td>
@@ -182,6 +202,9 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
   </tbody>
   </table>
 
+<br />
+
+
 ## ネットワーク
 {: #network}
 会社のネットワークを保護する従来の方法は、ファイアウォールをセットアップして、アプリに対する不要なネットワーク・トラフィックをブロックすることでした。 この方法は今でも有効ですが、悪意のある攻撃の多くは、割り当てられた権限を悪用した内部関係者や許可ユーザーによるものであることが調査で示されています。
@@ -190,23 +213,24 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
 ネットワークを保護し、ネットワークへのアクセスを許可されたユーザーから被る可能性がある損害の範囲を制限するために、ワークロードを可能な限り分離し、公開するアプリとワーカー・ノードの数を制限する必要があります。
 
 **デフォルトではどのようなネットワーク・トラフィックがクラスターに許可されますか?**</br>
-すべてのコンテナーが、[事前定義の Calico ネットワーク・ポリシー設定](cs_network_policy.html#default_policy)で保護されます。この設定は、クラスターの作成時にすべてのワーカー・ノードに構成されます。 デフォルトでは、すべてのワーカー・ノードに対して、すべてのアウトバウンド・ネットワーク・トラフィックが許可されます。 インバウンド・ネットワーク・トラフィックはブロックされます。ただし、例外として、IBM がネットワーク・トラフィックをモニターするためのポートや、IBM が Kubernetes マスターのセキュリティー更新を自動的にインストールするためのポートがいくつか開かれています。 Kubernetes マスターからワーカー・ノードの kubelet へのアクセスは、OpenVPN トンネルによって保護されます。 詳しくは、[{{site.data.keyword.containerlong_notm}} アーキテクチャー](cs_tech.html)を参照してください。
+すべてのコンテナーが、[事前定義の Calico ネットワーク・ポリシー設定](/docs/containers?topic=containers-network_policies#default_policy)で保護されます。この設定は、クラスターの作成時にすべてのワーカー・ノードに構成されます。 デフォルトでは、すべてのワーカー・ノードに対して、すべてのアウトバウンド・ネットワーク・トラフィックが許可されます。 インバウンド・ネットワーク・トラフィックはブロックされます。ただし、例外として、IBM がネットワーク・トラフィックをモニターするためのポートや、IBM が Kubernetes マスターのセキュリティー更新を自動的にインストールするためのポートがいくつか開かれています。 Kubernetes マスターからワーカー・ノードの kubelet へのアクセスは、OpenVPN トンネルによって保護されます。 詳しくは、[{{site.data.keyword.containerlong_notm}} アーキテクチャー](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology)を参照してください。
 
-インターネットからの着信ネットワーク・トラフィックを許可する場合は、[NodePort サービス、LoadBalancer サービス、または Ingress アプリケーション・ロード・バランサー](cs_network_planning.html#planning)を使用してアプリを公開する必要があります。  
+インターネットからの着信ネットワーク・トラフィックを許可する場合は、[NodePort サービス、LoadBalancer サービス、または Ingress アプリケーション・ロード・バランサー](/docs/containers?topic=containers-cs_network_planning#external)を使用してアプリを公開する必要があります。  
 
+{: #network_segmentation}
 **ネットワーク・セグメンテーションとは何ですか? どうすればクラスターにセットアップできますか?** </br>
 ネットワーク・セグメンテーションとは、1 つのネットワークを複数のサブネットワークに分割する方式を表すものです。 組織内の特定のグループからアクセスできるように、アプリと関連データをグループ化できます。 あるサブネットワーク内で実行されるアプリは、別のサブネットワーク内のアプリを認識することも、アクセスすることもできません。 ネットワーク・セグメンテーションは、内部関係者やサード・パーティー製ソフトウェアに提供されているアクセスも制限するので、さまざまな悪意のあるアクティビティーを制限できます。   
 
-{{site.data.keyword.containerlong_notm}} には、ワーカー・ノードのために高品質のネットワーク・パフォーマンスとネットワークの分離を実現する IBM Cloud インフラストラクチャー (SoftLayer) VLAN が用意されています。 VLAN では、ワーカー・ノードとポッドをまとめたグループが同じ物理ワイヤーに接続されているかのように構成されます。 VLAN は各 {{site.data.keyword.Bluemix_notm}} アカウントに専用のものであり、複数の IBM カスタマーの間で共有されることはありません。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して [VLAN スパンニング](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](cs_users.html#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)を使用します。 {{site.data.keyword.BluDirectLink}} を使用している場合は、代わりに[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) を使用する必要があります。 VRF を有効にするには、IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください。
+{{site.data.keyword.containerlong_notm}} には、ワーカー・ノードのために高品質のネットワーク・パフォーマンスとネットワークの分離を実現する IBM Cloud インフラストラクチャー (SoftLayer) VLAN が用意されています。 VLAN では、ワーカー・ノードとポッドをまとめたグループが同じ物理ワイヤーに接続されているかのように構成されます。 VLAN は各 {{site.data.keyword.Bluemix_notm}} アカウントに専用のものであり、複数の IBM カスタマーの間で共有されることはありません。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
 
-VLAN スパンニングは {{site.data.keyword.Bluemix_notm}} アカウントの設定であり、オン/オフを切り替えられます。 オンにすると、アカウント内のすべてのクラスターが互いを認識して対話できるようになります。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](cs_cli_reference.html#cs_vlan_spanning_get)を使用します。 これはシナリオによっては役に立ちますが、VLAN スパンニングはクラスターのネットワーク・セグメンテーションを無効にします。
+自分のアカウントに対して VRF または VLAN スパンニングを有効にすると、クラスターに関するネットワーク・セグメンテーションが削除されます。
 
-VLAN スパンニングをオンにした状況でネットワーク・セグメンテーションを実現するために取れる方法を、以下の表で確認してください。
+自分のアカウントに対して VRF または VLAN スパンニングを有効にした状況でネットワーク・セグメンテーションを実現するために取れる方法を、以下の表で確認してください。
 
 |セキュリティー機能|説明|
 |-------|----------------------------------|
-|Calico を使用してカスタム・ネットワーク・ポリシーをセットアップする|組み込みの Calico インターフェースを使用して、ワーカー・ノード用に[カスタムの Calico ネットワーク・ポリシーをセットアップ](cs_network_policy.html#network_policies)できます。 例えば、特定のネットワーク・インターフェース上で、特定のポッドまたはサービスのネットワーク・トラフィックを許可またはブロックすることができます。 カスタムのネットワーク・ポリシーをセットアップするには、[<code>calicoctl</code> CLI をインストールする](cs_network_policy.html#cli_install)必要があります。|
-|IBM Cloud インフラストラクチャー (SoftLayer) ネットワーク・ファイアウォールのサポート|{{site.data.keyword.containerlong_notm}} は、すべての [ IBM Cloud インフラストラクチャー (SoftLayer) ファイアウォール・オファリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/network-security) に対応しています。 {{site.data.keyword.Bluemix_notm}} Public では、カスタム・ネットワーク・ポリシーをファイアウォールにセットアップして、標準クラスターのための専用ネットワーク・セキュリティーを設定し、ネットワーク侵入を検出して対処することができます。 例えば、ファイアウォールとして機能し、不要なトラフィックをブロックするように [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) をセットアップできます。 ファイアウォールをセットアップする場合は、マスター・ノードとワーカー・ノードが通信できるように、地域ごとに[必要なポートと IP アドレスを開く](cs_firewall.html#firewall)必要もあります。|
+|Calico を使用してカスタム・ネットワーク・ポリシーをセットアップする|組み込みの Calico インターフェースを使用して、ワーカー・ノード用に[カスタムの Calico ネットワーク・ポリシーをセットアップ](/docs/containers?topic=containers-network_policies#network_policies)できます。 例えば、特定のネットワーク・インターフェース上で、特定のポッドまたはサービスのネットワーク・トラフィックを許可またはブロックすることができます。 カスタムのネットワーク・ポリシーをセットアップするには、[<code>calicoctl</code> CLI をインストールする](/docs/containers?topic=containers-network_policies#cli_install)必要があります。|
+|IBM Cloud インフラストラクチャー (SoftLayer) ネットワーク・ファイアウォールのサポート|{{site.data.keyword.containerlong_notm}} は、すべての [ IBM Cloud インフラストラクチャー (SoftLayer) ファイアウォール・オファリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/network-security) に対応しています。 {{site.data.keyword.Bluemix_notm}} Public では、カスタム・ネットワーク・ポリシーをファイアウォールにセットアップして、標準クラスターのための専用ネットワーク・セキュリティーを設定し、ネットワーク侵入を検出して対処することができます。 例えば、ファイアウォールとして機能し、不要なトラフィックをブロックするように [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) をセットアップできます。 ファイアウォールをセットアップする場合は、マスター・ノードとワーカー・ノードが通信できるように、地域ごとに[必要なポートと IP アドレスを開く](/docs/containers?topic=containers-firewall#firewall)必要もあります。|
 {: caption="ネットワーク・セグメンテーションのオプション" caption-side="top"}
 
 **外部攻撃の対象領域を減らすために他に何ができますか?**</br>
@@ -214,33 +238,37 @@ VLAN スパンニングをオンにした状況でネットワーク・セグメ
 
 |セキュリティー機能|説明|
 |-------|----------------------------------|
-|公開するアプリの数を制限する|デフォルトでは、クラスター内で実行されるアプリとサービスには、公共のインターネットからはアクセスできません。 アプリを公開するか、それとも、プライベート・ネットワークでしかアプリとサービスにアクセスできないようにするかを選択できます。 アプリとサービスをプライベートのままにする場合は、組み込みのセキュリティー機能を利用してワーカー・ノードとポッドの間のセキュアな通信を確保できます。 サービスとアプリを公共のインターネットに公開する場合は、[Ingress とロード・バランサーのサポート](cs_network_planning.html#planning)を活用してサービスを安全に公開することができます。 必要なサービスのみが公開されていることを確認し、公開されているアプリのリストを定期的に調べて、それらがまだ有効であることを確認してください。 |
-|ワーカー・ノードをプライベートのままにする|クラスターを作成すると、すべてのクラスターはプライベート VLAN に自動的に接続されます。 ワーカー・ノードに割り当てられるプライベート IP アドレスは、プライベート VLAN によって決定されます。 ワーカー・ノードをプライベートのままにするには、ワーカー・ノードをプライベート VLAN だけに接続します。 フリー・クラスターのプライベート VLAN は IBM が管理し、標準クラスターのプライベート VLAN は IBM Cloud インフラストラクチャー (SoftLayer) アカウントのユーザーが管理します。 </br></br><strong>注意:</strong>  Kubernetes マスターと通信するため、および {{site.data.keyword.containerlong_notm}} を正しく機能させるためには、[特定の URL および IP アドレス](cs_firewall.html#firewall_outbound)へのパブリック接続を構成する必要があることに注意してください。 このパブリック接続をセットアップするために、[仮想ルーター・アプライアンス](/docs/infrastructure/virtual-router-appliance/about.html)などのファイアウォールをワーカー・ノードの前面に構成して、それらの URL および IP アドレスへのネットワーク・トラフィックを有効にすることができます。|
-|公共のインターネットとエッジ・ノードの接続を制限する|デフォルトでは、すべてのワーカー・ノードが、アプリ・ポッドおよび関連するロード・バランサーまたは Ingress ポッドを受け入れるように構成されています。 ワーカー・ノードに[エッジ・ノード](cs_edge.html#edge)のラベルを付けて、ロード・バランサーと Ingress ポッドがそれらのワーカー・ノードにだけデプロイされるようにすることができます。 さらに、[ワーカー・ノードにテイントを適用](cs_edge.html#edge_workloads)して、アプリ・ポッドがエッジ・ノードにスケジュールされることを防止できます。 エッジ・ノードを使用することで、クラスター内の少数のワーカー・ノード上にネットワーク・ワークロードを分離し、クラスター内の他のワーカー・ノードはプライベートのままにすることができます。|
+|公開するアプリの数を制限する|デフォルトでは、クラスター内で実行されるアプリとサービスには、公共のインターネットからはアクセスできません。 アプリを公開するか、それとも、プライベート・ネットワークでしかアプリとサービスにアクセスできないようにするかを選択できます。 アプリとサービスをプライベートのままにする場合は、組み込みのセキュリティー機能を利用してワーカー・ノードとポッドの間のセキュアな通信を確保できます。 サービスとアプリを公共のインターネットに公開する場合は、[Ingress とロード・バランサーのサポート](/docs/containers?topic=containers-cs_network_planning#external)を活用してサービスを安全に公開することができます。 必要なサービスのみが公開されていることを確認し、公開されているアプリのリストを定期的に調べて、それらがまだ有効であることを確認してください。 |
+|ワーカー・ノードをプライベートのままにする|クラスターを作成すると、すべてのクラスターはプライベート VLAN に自動的に接続されます。 ワーカー・ノードに割り当てられるプライベート IP アドレスは、プライベート VLAN によって決定されます。 ワーカー・ノードをプライベートのままにするには、ワーカー・ノードをプライベート VLAN だけに接続します。 フリー・クラスターのプライベート VLAN は IBM が管理し、標準クラスターのプライベート VLAN は IBM Cloud インフラストラクチャー (SoftLayer) アカウントのユーザーが管理します。 </br></br><strong>注意:</strong>  Kubernetes マスターと通信するため、および {{site.data.keyword.containerlong_notm}} を正しく機能させるためには、[特定の URL および IP アドレス](/docs/containers?topic=containers-firewall#firewall_outbound)へのパブリック接続を構成する必要があることに注意してください。 このパブリック接続をセットアップするために、[仮想ルーター・アプライアンス](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra)などのファイアウォールをワーカー・ノードの前面に構成して、それらの URL および IP アドレスへのネットワーク・トラフィックを有効にすることができます。|
+|公共のインターネットとエッジ・ノードの接続を制限する|デフォルトでは、すべてのワーカー・ノードが、アプリ・ポッドおよび関連するロード・バランサーまたは Ingress ポッドを受け入れるように構成されています。 ワーカー・ノードに[エッジ・ノード](/docs/containers?topic=containers-edge#edge)のラベルを付けて、ロード・バランサーと Ingress ポッドがそれらのワーカー・ノードにだけデプロイされるようにすることができます。 さらに、[ワーカー・ノードにテイントを適用](/docs/containers?topic=containers-edge#edge_workloads)して、アプリ・ポッドがエッジ・ノードにスケジュールされることを防止できます。 エッジ・ノードを使用することで、クラスター内の少数のワーカー・ノード上にネットワーク・ワークロードを分離し、クラスター内の他のワーカー・ノードはプライベートのままにすることができます。|
 {: caption="プライベート・サービスとワーカー・ノードのオプション" caption-side="top"}
 
 **クラスターをオンプレミス・データ・センターに接続する場合はどうすればよいですか?**</br>
-ワーカー・ノードとアプリをオンプレミス・データ・センターに接続するには、[strongSwan サービス、仮想ルーター・アプライアンス、または Fortigate Security Appliance を使用して VPN IPsec エンドポイントを](cs_vpn.html#vpn)構成します。
+ワーカー・ノードとアプリをオンプレミス・データ・センターに接続するには、[strongSwan サービス、仮想ルーター・アプライアンス、または Fortigate Security Appliance を使用して VPN IPsec エンドポイントを](/docs/containers?topic=containers-vpn#vpn)構成します。
 
 ### LoadBalancer サービスと Ingress サービス
 {: #network_lb_ingress}
 
 LoadBalancer および Ingress ネットワーク・サービスを使用して、アプリを公共のインターネットまたは外部プライベート・ネットワークに接続できます。 バックエンド・アプリのセキュリティー要件を満たすため、またはクラスター内を移動するトラフィックを暗号化するために使用できる、ロード・バランサーと Ingress ALB の次のオプション設定を確認してください。
+{: shortdesc}
 
 **セキュリティー・グループを使用してクラスターのネットワーク・トラフィックを管理できますか?** </br>
-Ingress サービスおよび LoadBalancer サービスを使用する場合は、[Calico および Kubernetes ポリシー](cs_network_policy.html)を使用して、クラスターの発信/着信ネットワーク・トラフィックを管理してください。 IBM Cloud インフラストラクチャー (SoftLayer) の[セキュリティー・グループ](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups)は使用しないでください。 IBM Cloud インフラストラクチャー (SoftLayer) のセキュリティー・グループは、単一仮想サーバーのネットワーク・インターフェースに適用され、ハイパーバイザー・レベルでトラフィックをフィルタリングします。 しかし、セキュリティー・グループは、{{site.data.keyword.containerlong_notm}} が LoadBalancer の IP アドレスの管理に使用する VRRP プロトコルをサポートしていません。 LoadBalancer の IP を管理する VRRP プロトコルが存在しない場合、Ingress サービスおよび LoadBalancer サービスは正しく機能しません。 Ingress サービスや LoadBalancer サービスを使用せずに、ワーカー・ノードをパブリックから完全に切り離す場合は、セキュリティー・グループを使用できます。
+Ingress サービスおよび LoadBalancer サービスを使用する場合は、[Calico および Kubernetes ポリシー](/docs/containers?topic=containers-network_policies)を使用して、クラスターの発信/着信ネットワーク・トラフィックを管理してください。 IBM Cloud インフラストラクチャー (SoftLayer) の[セキュリティー・グループ](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups)は使用しないでください。 IBM Cloud インフラストラクチャー (SoftLayer) のセキュリティー・グループは、単一仮想サーバーのネットワーク・インターフェースに適用され、ハイパーバイザー・レベルでトラフィックをフィルタリングします。 しかし、セキュリティー・グループは、{{site.data.keyword.containerlong_notm}} が LoadBalancer の IP アドレスの管理に使用する VRRP プロトコルをサポートしていません。 LoadBalancer の IP を管理する VRRP プロトコルが存在しない場合、Ingress サービスおよび LoadBalancer サービスは正しく機能しません。 Ingress サービスや LoadBalancer サービスを使用せずに、ワーカー・ノードをパブリックから完全に切り離す場合は、セキュリティー・グループを使用できます。
 
 **クラスター内のソース IP はどのような方法で保護できますか?** </br>
 デフォルトでは、クライアント要求のソース IP アドレスは保持されません。 アプリへのクライアント要求がクラスターに送信されると、その要求は、ALB を公開しているロード・バランサー・サービス・ポッドに転送されます。 ロード・バランサー・サービス・ポッドと同じワーカー・ノードにアプリ・ポッドが存在しない場合、ロード・バランサーは異なるワーカー・ノード上のアプリ・ポッドに要求を転送します。 パッケージのソース IP アドレスは、アプリ・ポッドが実行されているワーカー・ノードのパブリック IP アドレスに変更されます。
 
-クライアントの IP を保持すると、例えば、アプリ・サーバーがセキュリティーやアクセス制御ポリシーを適用する必要がある場合などに役に立ちます。 クライアント要求の元のソース IP アドレスを保持するには、[ロード・バランサー](cs_loadbalancer.html#node_affinity_tolerations)または [Ingress ALB](cs_ingress.html#preserve_source_ip) のソース IP 保持を有効化します。
+クライアントの IP を保持すると、例えば、アプリ・サーバーがセキュリティーやアクセス制御ポリシーを適用する必要がある場合などに役に立ちます。 クライアント要求の元のソース IP アドレスを保持するには、[ロード・バランサー](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)または [Ingress ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) のソース IP 保持を有効化します。
 
 **TLS を使用してトラフィックを暗号化する方法を教えてください。** </br>
 Ingress サービスは、トラフィック・フロー内の次の 2 つのポイントで TLS 終端処理を実行します。
-* [到着時にパッケージを復号する](cs_ingress.html#public_inside_2): デフォルトでは、Ingress ALB は、クラスター内のアプリへの HTTP ネットワーク・トラフィックのロード・バランシングを行います。 着信 HTTPS 接続のロード・バランシングも行う場合は ALB でその機能を構成できます。つまり、ネットワーク・トラフィックを復号し、復号した要求をクラスター内で公開されているアプリに転送するように構成します。 IBM 提供の Ingress サブドメインを使用する場合は、IBM 提供の TLS 証明書を使用できます。 カスタム・ドメインを使用する場合は、独自の TLS 証明書を使用して TLS 終端を管理できます。
-* [アップストリーム・アプリに転送される前にパッケージを再暗号化する](cs_annotations.html#ssl-services): ALB は、トラフィックをアプリに転送する前に HTTPS 要求を復号します。 HTTPS を必要とするアプリがあり、それらのアップストリームのアプリに転送する前にトラフィックを暗号化する必要がある場合は、`ssl-services` アノテーションを使用できます。 アップストリーム・アプリが TLS を処理できる場合は、片方向認証または双方向認証の TLS シークレットに含まれる証明書をオプションで提供できます。
+* [到着時にパッケージを復号する](/docs/containers?topic=containers-ingress#public_inside_2): デフォルトでは、Ingress ALB は、クラスター内のアプリへの HTTP ネットワーク・トラフィックのロード・バランシングを行います。 着信 HTTPS 接続のロード・バランシングも行う場合は ALB でその機能を構成できます。つまり、ネットワーク・トラフィックを復号し、復号した要求をクラスター内で公開されているアプリに転送するように構成します。 IBM 提供の Ingress サブドメインを使用する場合は、IBM 提供の TLS 証明書を使用できます。 カスタム・ドメインを使用する場合は、独自の TLS 証明書を使用して TLS 終端を管理できます。
+* [アップストリーム・アプリに転送される前にパッケージを再暗号化する](/docs/containers?topic=containers-ingress_annotation#ssl-services): ALB は、トラフィックをアプリに転送する前に HTTPS 要求を復号します。 HTTPS を必要とするアプリがあり、それらのアップストリームのアプリに転送する前にトラフィックを暗号化する必要がある場合は、`ssl-services` アノテーションを使用できます。 アップストリーム・アプリが TLS を処理できる場合は、片方向認証または双方向認証の TLS シークレットに含まれる証明書をオプションで提供できます。
 
 サービス間通信を保護するには、[Istio の双方向 TLS 認証 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/concepts/security/mutual-tls/) を使用できます。 Istio は Kubernetes などのクラウド・オーケストレーション・プラットフォームでマイクロサービス・ネットワーク (サービス・メッシュともいう) の接続、保護、管理、モニターを行うための方法を開発者に提供するオープン・ソース・サービスです。
+
+<br />
+
 
 ## 永続ストレージ
 {: #storage}
@@ -249,22 +277,25 @@ Ingress サービスは、トラフィック・フロー内の次の 2 つのポ
 {: shortdesc}
 
 特定のストレージ・タイプのデータの暗号化方法について詳しくは、以下のリンクを参照してください。
-- [NFS ファイル・ストレージ](/docs/infrastructure/FileStorage/block-file-storage-encryption-rest.html#securing-your-data-provider-managed-encryption-at-rest)
-- [ブロック・ストレージ](/docs/infrastructure/BlockStorage/block-file-storage-encryption-rest.html#securing-your-data-provider-managed-encryption-at-rest) </br>
+- [NFS ファイル・ストレージ](/docs/infrastructure/FileStorage?topic=FileStorage-encryption#encryption)
+- [ブロック・ストレージ](/docs/infrastructure/BlockStorage?topic=BlockStorage-encryption#block-storage-encryption-at-rest) </br>
 
-[{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) などの {{site.data.keyword.Bluemix_notm}} データベース・サービスを使用して、データをクラスター外の管理対象データベースに保存することもできます。 クラウド・データベース・サービスを使用して保管されたデータには、すべてのクラスター、ゾーン、領域からアクセスできます。 IBM Cloudant NoSQL DB のセキュリティー関連情報については、[サービス資料](/docs/services/Cloudant/offerings/security.html#security)を参照してください。
+[{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) などの {{site.data.keyword.Bluemix_notm}} データベース・サービスを使用して、データをクラスター外の管理対象データベースに保存することもできます。 クラウド・データベース・サービスを使用して保管されたデータには、すべてのクラスター、ゾーン、領域からアクセスできます。 IBM Cloudant NoSQL DB のセキュリティー関連情報については、[サービス資料](/docs/services/Cloudant/offerings?topic=cloudant-security#security)を参照してください。
+
+<br />
+
 
 ## モニタリングとロギング
 {: #monitoring_logging}
 
-クラスター内で悪意のある攻撃を検出するために重要なことは、クラスター内で発生するすべてのイベントを適切にモニターしてロギングすることです。 モニタリングとロギングにより、クラスターの容量とアプリによるリソースの利用状況も理解できるため、それに応じてアプリのダウン時間の発生を防ぐ計画を立てることができます。
+クラスター内で悪意のある攻撃を検出するために重要なことは、クラスター内で発生するメトリックとすべてのイベントを適切にモニターしてロギングすることです。モニタリングとロギングにより、クラスターの容量とアプリによるリソースの利用状況も理解できるため、それに応じてアプリのダウン時間の発生を防ぐ計画を立てることができます。
 {: shortdesc}
 
 **IBM は個々の利用者のクラスターをモニターしますか?**</br>
 IBM は、プロセス・レベルのサービス妨害 (DOS) 攻撃を抑制して対処するために、すべての Kubernetes マスターを継続的にモニターしています。 {{site.data.keyword.containerlong_notm}} は、Kubernetes マスターがデプロイされたすべてのノードにおいて、Kubernetes および OS 固有のセキュリティー修正で検出された脆弱性を自動的にスキャンします。 脆弱性が見つかった場合、{{site.data.keyword.containerlong_notm}} はユーザーに代わって自動的に修正を適用し、脆弱性を解決して、マスター・ノードが確実に保護されるようにします。  
 
 **どのような情報がログに記録されますか?**</br>
-標準クラスターの場合は、さまざまなソースのあらゆるクラスター関連イベントについて、{{site.data.keyword.loganalysislong_notm}} や別の外部サーバーへの[ログ転送をセットアップ](/docs/containers/cs_health.html#logging)し、ログのフィルタリングおよび分析を行うことができます。 それらのソースには、次のログが含まれます。
+標準クラスターの場合は、さまざまなソースのあらゆるクラスター関連イベントについて、{{site.data.keyword.loganalysislong_notm}} や別の外部サーバーへの[ログ転送をセットアップ](/docs/containers?topic=containers-health#logging)し、ログのフィルタリングおよび分析を行うことができます。 それらのソースには、次のログが含まれます。
 
 - **コンテナー**: STDOUT または STDERR に書き込まれるログ。
 - **アプリ**: アプリ内の特定のパスに書き込まれるログ。
@@ -276,29 +307,33 @@ IBM は、プロセス・レベルのサービス妨害 (DOS) 攻撃を抑制し
 ログに記録するクラスターのイベントと、ログを転送する場所を選択できます。 悪意のあるアクティビティーを検出し、クラスターの正常性を確認するには、継続的にログを分析する必要があります。
 
 **クラスターの正常性とパフォーマンスはどのような方法でモニターできますか?**</br>
-クラスターのコンポーネントとコンピュート・リソース (CPU やメモリーの使用量など) をモニターすることで、クラスターの容量とパフォーマンスを確認できます。 {{site.data.keyword.containerlong_notm}} は、標準クラスターのメトリックを自動的に {{site.data.keyword.monitoringlong}} に送信するので、[それらを Grafana で表示して分析](cs_health.html#view_metrics)できます。
+クラスターのコンポーネントとコンピュート・リソース (CPU やメモリーの使用量など) をモニターすることで、クラスターの容量とパフォーマンスを確認できます。 {{site.data.keyword.containerlong_notm}} は、標準クラスターのメトリックを自動的に {{site.data.keyword.monitoringlong}} に送信するので、[それらを Grafana で表示して分析](/docs/containers?topic=containers-health#view_metrics)できます。
 
-{{site.data.keyword.containerlong_notm}} 詳細ページや Kubernetes ダッシュボードなどの組み込みツールを使用することも、Prometheus、Weave Scope、その他の[サード・パーティー統合をセットアップする](cs_integrations.html#health_services)こともできます。
+{{site.data.keyword.containerlong_notm}} 詳細ページや Kubernetes ダッシュボードなどの組み込みツールを使用することも、Prometheus、Sysdig、LogDNA、Weave Scope、その他の[サード・パーティー統合をセットアップする](/docs/containers?topic=containers-integrations#health_services)こともできます。
+
+ホスト・ベースの侵入検知システム (HIDS) とセキュリティー・イベント・ログ・モニタリング (SELM) をセットアップするには、[Twistlock ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.twistlock.com/) や [Sysdig Falco プロジェクト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://sysdig.com/opensource/falco/) などの、クラスターやコンテナー化アプリをモニターして侵入や誤用を検出するように設計されているサード・パーティー・ツールをインストールします。Sysdig Falco は別個のツールなので、クラスターで IBM 提供の [Sysdig アドオン](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)をインストールすることを選択しても組み込まれません。  
 
 **クラスターで発生したイベントはどのような方法で監査できますか?**</br>
-[{{site.data.keyword.containerlong_notm}} クラスター内に {{site.data.keyword.cloudaccesstraillong}} をセットアップすることができます](cs_at_events.html#at_events)。 詳しくは、[{{site.data.keyword.cloudaccesstrailshort}} の資料](/docs/services/cloud-activity-tracker/activity_tracker_ov.html#activity_tracker_ov)を参照してください。
+[{{site.data.keyword.containerlong_notm}} クラスター内に {{site.data.keyword.cloudaccesstraillong}} をセットアップすることができます](/docs/containers?topic=containers-at_events#at_events)。 詳しくは、[{{site.data.keyword.cloudaccesstrailshort}} の資料](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-activity_tracker_ov#activity_tracker_ov)を参照してください。
 
 **クラスター内のトラストを有効にする方法にはどのようなものがありますか?** </br>
 セキュリティー機能が豊富な環境でコンテナー化アプリをデプロイできるように、{{site.data.keyword.containerlong_notm}} はクラスター・コンポーネント向けの機能をデフォルトで数多く提供します。 クラスターの信頼レベルを高めて、より確実に、意図したことだけがクラスターで行われるようにします。 以下の図に示すように、さまざまな方法でクラスターに信頼を実装できます。
 
-![信頼できるコンテンツを使用してコンテナーをデプロイする](images/trusted_story.png)
+<img src="images/trusted_story.png" width="700" alt="信頼できるコンテンツを使用してコンテナーをデプロイする" style="width:700px; border-style: none"/>
 
 1.  **トラステッド・コンピューティングを使用した {{site.data.keyword.containerlong_notm}}**: ベア・メタル・ワーカー・ノードでは、トラストを有効にすることができます。 トラスト・エージェントがハードウェアの始動処理をモニターして変更を報告するので、ベア・メタル・ワーカー・ノードが改ざんされていないことを検証できます。 トラステッド・コンピューティングを使用すると、検証されたベア・メタル・ホストにコンテナーをデプロイして、信頼できるハードウェア上でワークロードを実行できます。 GPU などの一部のベアメタル・マシンでは、トラステッド・コンピューティングがサポートされないことに注意してください。 [トラステッド・コンピューティングの仕組みについて詳しくは、こちらをご覧ください](#trusted_compute)。
 
-2.  **イメージのコンテンツの信頼**: {{site.data.keyword.registryshort_notm}} でコンテンツの信頼を有効にして、イメージの完全性を確保します。 信頼できるコンテンツを使用する場合は、信頼できるイメージとしてイメージに署名できるユーザーを制御できます。 信頼できる署名者がイメージをレジストリーにプッシュすると、ユーザーはその署名付きのコンテンツをプルして、イメージのソースを確認できます。 詳しくは、[Signing images for trusted content](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent) を参照してください。
+2.  **イメージのコンテンツの信頼**: {{site.data.keyword.registryshort_notm}} でコンテンツの信頼を有効にして、イメージの完全性を確保します。 信頼できるコンテンツを使用する場合は、信頼できるイメージとしてイメージに署名できるユーザーを制御できます。 信頼できる署名者がイメージをレジストリーにプッシュすると、ユーザーはその署名付きのコンテンツをプルして、イメージのソースを確認できます。 詳しくは、[Signing images for trusted content](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent) を参照してください。
 
-3.  **Container Image Security Enforcement (ベータ)**: コンテナー・イメージを検証してからデプロイできるように、アドミッション・コントローラーとカスタム・ポリシーを作成します。 Container Image Security Enforcement を使用すると、イメージのデプロイ元を制御できるうえに、イメージが [Vulnerability Advisor](/docs/services/va/va_index.html) ポリシーまたは[コンテンツの信頼](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent)要件を満たしていることを確認できます。 設定したポリシーをデプロイメントが満たしていなければ、Security Enforcement によって、クラスターの変更が防止されます。 詳しくは、[Enforcing container image security (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce) を参照してください。
+3.  **Container Image Security Enforcement (ベータ)**: コンテナー・イメージを検証してからデプロイできるように、アドミッション・コントローラーとカスタム・ポリシーを作成します。 Container Image Security Enforcement を使用すると、イメージのデプロイ元を制御できるうえに、イメージが [Vulnerability Advisor](/docs/services/va?topic=va-va_index) ポリシーまたは[コンテンツの信頼](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)要件を満たしていることを確認できます。 設定したポリシーをデプロイメントが満たしていなければ、Security Enforcement によって、クラスターの変更が防止されます。 詳しくは、[Enforcing container image security (beta)](/docs/services/Registry?topic=registry-security_enforce#security_enforce) を参照してください。
 
-4.  **コンテナー脆弱性スキャナー**: デフォルトでは Vulnerability Advisor が、{{site.data.keyword.registryshort_notm}} に保管されているイメージをスキャンします。 クラスター内で実行されているライブ・コンテナーの状況を確認するには、コンテナー・スキャナーをインストールします。 詳しくは、[コンテナー・スキャナーのインストール](/docs/services/va/va_index.html#va_install_container_scanner)を参照してください。
+4.  **コンテナー脆弱性スキャナー**: デフォルトでは Vulnerability Advisor が、{{site.data.keyword.registryshort_notm}} に保管されているイメージをスキャンします。 クラスター内で実行されているライブ・コンテナーの状況を確認するには、コンテナー・スキャナーをインストールします。 詳しくは、[コンテナー・スキャナーのインストール](/docs/services/va?topic=va-va_index#va_install_container_scanner)を参照してください。
 
-5.  **Security Advisor (プレビュー) によるネットワーク分析**: {{site.data.keyword.Bluemix_notm}} Security Advisor を使用すると、Vulnerability Advisor や {{site.data.keyword.cloudcerts_short}} などの {{site.data.keyword.Bluemix_notm}} サービスから得られるセキュリティー分析データを集約できます。 クラスターで Security Advisor を有効にすると、不審な着信および発信ネットワーク・トラフィックに関するレポートを参照できます。 詳しくは、[Network Analytics](/docs/services/security-advisor/network-analytics.html#network-analytics) を参照してください。 インストールするには、[Setting up monitoring of suspicious clients and server IP addresses for a Kubernetes cluster](/docs/services/security-advisor/setup_cluster.html) を参照してください。
+5.  **Security Advisor (プレビュー) によるネットワーク分析**: {{site.data.keyword.Bluemix_notm}} Security Advisor を使用すると、Vulnerability Advisor や {{site.data.keyword.cloudcerts_short}} などの {{site.data.keyword.Bluemix_notm}} サービスから得られるセキュリティー分析データを集約できます。 クラスターで Security Advisor を有効にすると、不審な着信および発信ネットワーク・トラフィックに関するレポートを参照できます。 詳しくは、[Network Analytics](/docs/services/security-advisor?topic=security-advisor-setup-network#setup-network) を参照してください。 インストールするには、[Setting up monitoring of suspicious clients and server IP addresses for a Kubernetes cluster](/docs/services/security-advisor?topic=security-advisor-setup-network#setup-network) を参照してください。
 
-6.  **{{site.data.keyword.cloudcerts_long_notm}} (ベータ)**: クラスターが米国南部にあり、[TLS ありでカスタム・ドメインを使用してアプリを公開する](cs_ingress.html#ingress_expose_public)場合は、TLS 証明書を {{site.data.keyword.cloudcerts_short}} に保管できます。 既に期限切れか、まもなく期限切れになる証明書も Security Advisor ダッシュボードに報告されます。 詳しくは、[{{site.data.keyword.cloudcerts_short}} 概説](/docs/services/certificate-manager/index.html#gettingstarted)を参照してください。
+6.  **{{site.data.keyword.cloudcerts_long_notm}} **: [TLS ありでカスタム・ドメインを使用してアプリを公開する](/docs/containers?topic=containers-ingress#ingress_expose_public)場合は、TLS 証明書を {{site.data.keyword.cloudcerts_short}} に保管できます。既に期限切れか、まもなく期限切れになる証明書も {{site.data.keyword.security-advisor_short}} ダッシュボードに報告されます。詳しくは、[{{site.data.keyword.cloudcerts_short}} 概説](/docs/services/certificate-manager?topic=certificate-manager-gettingstarted#gettingstarted)を参照してください。
+
+<br />
 
 
 ## イメージとレジストリー
@@ -313,12 +348,15 @@ Docker Hub などのパブリック・レジストリーは、Docker イメー�
 **イメージの脆弱性検査はなぜ大切ですか?** </br>
 悪意のある攻撃のほとんどがソフトウェアの既知の脆弱性や脆弱なシステム構成を利用したものであることが調査で示されています。 イメージからコンテナーをデプロイすると、そのコンテナーは、イメージに記述されている OS と追加バイナリーを使用して起動します。 仮想マシンや物理マシンを保護する場合と同様に、不正なユーザーによるアクセスからアプリを保護するために、コンテナー内で使用する OS とバイナリーの既知の脆弱性を除去する必要があります。 </br>
 
-アプリを保護するために、以下の範囲に対応するプロセスをチーム内に確立することを検討してください。
+アプリを保護するために、以下の範囲に対応することを検討してください。
 
-1. **イメージを実稼働環境にデプロイする前にスキャンする:** </br>
-必ず、コンテナーをデプロイする前に、すべてのイメージをスキャンしてください。 脆弱性が検出された場合は、脆弱性を除去することを検討するか、そのイメージのデプロイメントをブロックします。 イメージの内容の承認を義務付け、脆弱性検査に合格したイメージだけをデプロイできるようにするプロセスを確立します。
+1. **ビルド・プロセスを自動化して許可を制限する**: </br>
+ソース・コードからコンテナー・イメージをビルドするプロセスを自動化して、ソース・コードの変化型や欠陥が除かれるようにします。このビルド・プロセスを CI/CD パイプラインに統合すると、指定したセキュリティー検査に合格した場合に限りイメージがスキャンされてビルドされるようにすることができます。開発者が機密性の高いイメージにホット・フィックスを適用しないようにするには、ビルド・プロセスへのアクセス権がある組織内の人の数を制限します。
 
-2. **実行中のコンテナーを定期的にスキャンする:** </br>
+2. **イメージを実稼働環境にデプロイする前にスキャンする:** </br>
+必ず、コンテナーをデプロイする前に、すべてのイメージをスキャンしてください。 例えば、{{site.data.keyword.registryshort_notm}} を使用する場合には、すべてのイメージは、名前空間にプッシュする際に脆弱性が自動的にスキャンされます。脆弱性が検出された場合は、脆弱性を除去することを検討するか、そのイメージのデプロイメントをブロックします。 脆弱性のモニターと除去を担当している組織内の人物またはチームを見つけます。組織の構造に応じて、この人はセキュリティー、操作、またはデプロイメントのチームの一員である可能性があります。[Container Image Security Enforcement](/docs/services/Registry?topic=registry-security_enforce#security_enforce) などのアドミッション・コントローラーを使用して、脆弱性チェックに合格していないイメージからのデプロイメントをブロックし、[コンテント・トラスト](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)を有効にして、イメージをコンテナー・レジストリーにプッシュできるようになる前に、信頼できる署名者がそのイメージを承認する必要があるようにします。
+
+3. **実行中のコンテナーを定期的にスキャンする:** </br>
 脆弱性検査に合格したイメージからコンテナーをデプロイした場合でも、時間が経つと、コンテナー内で実行されるオペレーティング・システムやバイナリーが脆弱になる場合があります。 アプリを保護するには、脆弱性を検出して対処できるように、実行中のコンテナーを定期的にスキャンする必要があります。 アプリによっては、セキュリティーをさらに強化するために、脆弱性が検出された場合に脆弱なコンテナーを停止するプロセスを確立することもできます。
 
 **イメージとデプロイメント・プロセスの保護に {{site.data.keyword.registryshort_notm}} はどのように役立ちますか?**  
@@ -334,26 +372,28 @@ Docker Hub などのパブリック・レジストリーは、Docker イメー�
   <tbody>
     <tr>
       <td>{{site.data.keyword.registryshort_notm}} の保護された Docker プライベート・イメージ・リポジトリー</td>
-      <td>IBM によってホストおよび管理されている、マルチテナントで可用性が高く、スケーラブルなプライベート・イメージ・レジストリー内に独自の Docker [イメージ・リポジトリー](/docs/services/Registry/index.html#index)をセットアップします。 このレジストリーを使用することで、Docker イメージを作成して安全に保管し、クラスター・ユーザー間で共有することができます。 </br></br>コンテナー・イメージを使用する際の[個人情報の保護](cs_secure.html#pi)の詳細を確認してください。</td>
+      <td>IBM によってホストおよび管理されている、マルチテナントで可用性が高く、スケーラブルなプライベート・イメージ・レジストリー内に独自の Docker [イメージ・リポジトリー](/docs/services/Registry?topic=registry-getting-started#getting-started)をセットアップします。 このレジストリーを使用することで、Docker イメージを作成して安全に保管し、クラスター・ユーザー間で共有することができます。 </br></br>コンテナー・イメージを使用する際の[個人情報の保護](/docs/containers?topic=containers-security#pi)の詳細を確認してください。</td>
     </tr>
     <tr>
       <td>信頼できるコンテンツのイメージのみをプッシュする</td>
-      <td>イメージ・リポジトリーで[コンテンツの信頼性](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent)を有効にして、イメージの完全性を確保します。 信頼できるコンテンツを使用する場合は、信頼できるイメージとしてイメージに署名して特定のレジストリー名前空間にプッシュできる人を制限できます。 信頼できる署名者がイメージをレジストリー名前空間にプッシュすると、ユーザーはその署名付きのコンテンツをプルして、イメージの提供者と完全性を確認できます。</td>
+      <td>イメージ・リポジトリーで[コンテンツの信頼性](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)を有効にして、イメージの完全性を確保します。 信頼できるコンテンツを使用する場合は、信頼できるイメージとしてイメージに署名して特定のレジストリー名前空間にプッシュできる人を制限できます。 信頼できる署名者がイメージをレジストリー名前空間にプッシュすると、ユーザーはその署名付きのコンテンツをプルして、イメージの提供者と完全性を確認できます。</td>
     </tr>
     <tr>
       <td>脆弱性の自動スキャン</td>
-      <td>{{site.data.keyword.registryshort_notm}}を使用する際、[Vulnerability Advisor](/docs/services/va/va_index.html#va_registry_cli) に標準装備のセキュリティー・スキャンを利用できます。 レジストリー名前空間にプッシュされるどのイメージも、CentOS、Debian、Red Hat、および Ubuntu の既知の問題のデータベースに基づいて、脆弱性が自動的にスキャンされます。 脆弱性が検出されると、それらを解決してイメージの保全性とセキュリティーを確保する方法を Vulnerability Advisor が提示します。</td>
+      <td>{{site.data.keyword.registryshort_notm}}を使用する際、[Vulnerability Advisor](/docs/services/va?topic=va-va_index#va_registry_cli) に標準装備のセキュリティー・スキャンを利用できます。 レジストリー名前空間にプッシュされるどのイメージも、CentOS、Debian、Red Hat、および Ubuntu の既知の問題のデータベースに基づいて、脆弱性が自動的にスキャンされます。 脆弱性が検出されると、それらを解決してイメージの保全性とセキュリティーを確保する方法を Vulnerability Advisor が提示します。</td>
     </tr>
     <tr>
       <td>脆弱なイメージや信頼されないユーザーからのデプロイメントのブロック</td>
-      <td>コンテナー・イメージを検証してからデプロイできるように、アドミッション・コントローラーとカスタム・ポリシーを作成します。 [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce) を使用すると、イメージのデプロイ元を制御できるうえに、イメージが Vulnerability Advisor ポリシーまたはコンテンツの信頼要件を満たしていることを確認できます。 設定したポリシーをデプロイメントが満たしていない場合、アドミッション・コントローラーはクラスターへのデプロイメントをブロックします。</td>
+      <td>コンテナー・イメージを検証してからデプロイできるように、アドミッション・コントローラーとカスタム・ポリシーを作成します。 [Container Image Security Enforcement](/docs/services/Registry?topic=registry-security_enforce#security_enforce) を使用すると、イメージのデプロイ元を制御できるうえに、イメージが Vulnerability Advisor ポリシーまたはコンテンツの信頼要件を満たしていることを確認できます。 設定したポリシーをデプロイメントが満たしていない場合、アドミッション・コントローラーはクラスターへのデプロイメントをブロックします。</td>
     </tr>
     <tr>
       <td>コンテナーのライブ・スキャン</td>
-      <td>実行中のコンテナーの脆弱性を検出するには、[ibmcloud-container-scanner](/docs/services/va/va_index.html#va_install_container_scanner) をインストールします。 イメージの場合と同様に、すべてのクラスター名前空間でコンテナーをモニターして脆弱性を検出するように、コンテナー・スキャナーをセットアップできます。 脆弱性が検出されたら、ソース・イメージを更新し、コンテナーを再デプロイしてください。</td>
+      <td>実行中のコンテナーの脆弱性を検出するには、[ibmcloud-container-scanner](/docs/services/va?topic=va-va_index#va_install_container_scanner) をインストールします。 イメージの場合と同様に、すべてのクラスター名前空間でコンテナーをモニターして脆弱性を検出するように、コンテナー・スキャナーをセットアップできます。 脆弱性が検出されたら、ソース・イメージを更新し、コンテナーを再デプロイしてください。</td>
     </tr>
   </tbody>
   </table>
+
+<br />
 
 
 ## コンテナーの分離とセキュリティー
@@ -370,7 +410,7 @@ Kubernetes 名前空間は、クラスターを仮想的に分割して、デプ
 
 クラスター管理者は、必要に応じて、クラスター内に追加の名前空間をセットアップし、カスタマイズすることができます。
 
-クラスター内に存在するすべての名前空間について、名前空間へのアクセスを制限し、デプロイできる対象を制御するための適切な [RBAC ポリシー](cs_users.html#rbac)をセットアップし、適切な [ リソース割り当て量 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) と[制限範囲 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/) を設定してください。
+クラスター内に存在するすべての名前空間について、名前空間へのアクセスを制限し、デプロイできる対象を制御するための適切な [RBAC ポリシー](/docs/containers?topic=containers-users#rbac)をセットアップし、適切な [ リソース割り当て量 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) と[制限範囲 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/) を設定してください。
 {: important}
 
 **単一テナントまたはマルチテナントのどちらのクラスターをセットアップすべきでしょうか?** </br>
@@ -395,10 +435,14 @@ Kubernetes 名前空間は、クラスターを仮想的に分割して、デプ
 
 |セキュリティー機能|説明|
 |-------|----------------------------------|
-|特権コンテナーの数を制限する|コンテナーは、他のプロセスから分離された独立した Linux プロセスとしてコンピュート・ホスト上で実行されます。 他の Linux プロセス、ホスト・ファイル・システム、ホスト・デバイスを保護するために、コンテナーの中で root 権限を持つユーザーでも、コンテナーの外では権限が制限されます。 一部のアプリは、ホスト・ファイル・システムへのアクセス権限や高い権限がないと、正しく機能しません。 コンテナーを特権モードで実行すると、コンピュート・ホストで実行されるプロセスと同じアクセス権限を、そのコンテナーに許可できます。<p class="important">特権コンテナーが乗っ取られると、クラスターおよび基礎コンピュート・ホストに甚大な損害がもたらされる可能性があることに注意してください。 特権モードで実行するコンテナーの数を制限し、高い権限がなくても実行できるようにアプリの構成を変更することを検討してください。 特権コンテナーをクラスター内で実行できないようにするには、カスタムの[ポッド・セキュリティー・ポリシー](cs_psp.html#customize_psp)をセットアップすることを検討してください。</p>|
+|特権コンテナーの数を制限する|コンテナーは、他のプロセスから分離された独立した Linux プロセスとしてコンピュート・ホスト上で実行されます。 他の Linux プロセス、ホスト・ファイル・システム、ホスト・デバイスを保護するために、コンテナーの中で root 権限を持つユーザーでも、コンテナーの外では権限が制限されます。 一部のアプリは、ホスト・ファイル・システムへのアクセス権限や高い権限がないと、正しく機能しません。 コンテナーを特権モードで実行すると、コンピュート・ホストで実行されるプロセスと同じアクセス権限を、そのコンテナーに許可できます。<p class="important">特権コンテナーが乗っ取られると、クラスターおよび基礎コンピュート・ホストに甚大な損害がもたらされる可能性があることに注意してください。 特権モードで実行するコンテナーの数を制限し、高い権限がなくても実行できるようにアプリの構成を変更することを検討してください。 特権コンテナーをクラスター内で実行できないようにするには、カスタムの[ポッド・セキュリティー・ポリシー](/docs/containers?topic=containers-psp#customize_psp)をセットアップすることを検討してください。</p>|
 |コンテナー用の CPU とメモリーの制限を設定する|どのコンテナーも、正常に起動して実行し続けるためには、特定の量の CPU とメモリーが必要です。 コンテナーで使用できる CPU とメモリーの量を制限するために、コンテナーに対して [Kubernetes リソース要求およびリソース制限 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) を定義できます。 CPU とメモリーの制限を設定しない場合、コンテナーがビジーになると、使用可能なすべてのリソースが使用されます。 このようなリソースの高消費により、ワーカー・ノード上の他のコンテナーに、リソースが不足して正常に起動または実行できないという影響が生じる可能性があります。また、これはワーカー・ノードをサービス妨害攻撃のリスクにさらします。|
-|OS セキュリティー設定をポッドに適用する|[<code>securityContext</code> セクション ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) をポッド・デプロイメントに追加して、ポッドまたはポッド内の特定のコンテナーに Linux 固有のセキュリティー設定を適用することができます。 セキュリティー設定には、エントリー・ポイント・スクリプトなどのスクリプトをコンテナー内で実行するユーザー ID とグループ ID、またはボリューム・マウント・パスを所有するユーザー ID とグループ IP に対する制御が含まれます。 </br></br><strong>ヒント:</strong> <code>securityContext</code> を使用して <code>runAsUser</code> ユーザー ID または <code>fsGroup</code> グループ ID を設定する場合は、[永続ストレージを作成](cs_storage_block.html#add_block)するときにブロック・ストレージを使用することを検討してください。 NFS ストレージは <code>fsGroup</code> をサポートしません。<code>runAsUser</code> は、ポッド・レベルではなくコンテナー・レベルで設定する必要があります。 |
+|OS セキュリティー設定をポッドに適用する|[<code>securityContext</code> セクション ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) をポッド・デプロイメントに追加して、ポッドまたはポッド内の特定のコンテナーに Linux 固有のセキュリティー設定を適用することができます。 セキュリティー設定には、エントリー・ポイント・スクリプトなどのスクリプトをコンテナー内で実行するユーザー ID とグループ ID、またはボリューム・マウント・パスを所有するユーザー ID とグループ IP に対する制御が含まれます。 </br></br><strong>ヒント:</strong> <code>securityContext</code> を使用して <code>runAsUser</code> ユーザー ID または <code>fsGroup</code> グループ ID を設定する場合は、[永続ストレージを作成](/docs/containers?topic=containers-block_storage#add_block)するときにブロック・ストレージを使用することを検討してください。 NFS ストレージは <code>fsGroup</code> をサポートしません。<code>runAsUser</code> は、ポッド・レベルではなくコンテナー・レベルで設定する必要があります。 |
+|ポリシー駆動の認証を実施する|サービスや API へのアクセスを制御できる Ingress アノテーションをデプロイメントに追加できます。{{site.data.keyword.appid_short_notm}} と宣言セキュリティーを使用して、ユーザー認証とトークンの検証を確認できます。|
 {: caption="その他のセキュリティー保護" caption-side="top"}
+
+<br />
+
 
 ## 個人情報の保管
 {: #pi}
@@ -408,10 +452,19 @@ Kubernetes リソースおよびコンテナー・イメージ内の個人情報
 
 <dl>
   <dt>Kubernetes シークレットを使用した個人情報の保管</dt>
-  <dd>個人情報を保持するように設計された Kubernetes リソースにのみ個人情報を保管します。 例えば、Kubernetes 名前空間、デプロイメント、サービス、または構成マップの名前に自分の名前を使用しないでください。 適切な保護と暗号化を行うには、代わりに <a href="cs_encrypt.html#secrets">Kubernetes シークレット</a>に個人情報を保管してください。</dd>
+  <dd>個人情報を保持するように設計された Kubernetes リソースにのみ個人情報を保管します。 例えば、Kubernetes 名前空間、デプロイメント、サービス、または構成マップの名前に自分の名前を使用しないでください。 適切な保護と暗号化を行うには、代わりに <a href="/docs/containers?topic=containers-encryption#secrets">Kubernetes シークレット</a>に個人情報を保管してください。</dd>
 
   <dt>Kubernetes `imagePullSecret` を使用したイメージ・レジストリー資格情報の保管</dt>
-  <dd>個人情報をコンテナー・イメージまたはレジストリー名前空間に保管しないでください。 適切な保護と暗号化を行うには、代わりに、レジストリー資格情報は <a href="cs_images.html#other">Kubernetes imagePullSecrets</a> に保管し、その他の個人情報は <a href="cs_encrypt.html#secrets">Kubernetes シークレット</a>に保管してください。 個人情報がイメージの前のレイヤーに保管されている場合、イメージを削除するだけではこの個人情報を削除できない場合があることに注意してください。</dd>
+  <dd>個人情報をコンテナー・イメージまたはレジストリー名前空間に保管しないでください。 適切な保護と暗号化を行うには、代わりに、レジストリー資格情報は <a href="/docs/containers?topic=containers-images#other">Kubernetes `imagePullSecrets`</a> に保管し、その他の個人情報は <a href="/docs/containers?topic=containers-encryption#secrets">Kubernetes シークレット</a>に保管してください。個人情報がイメージの前のレイヤーに保管されている場合、イメージを削除するだけではこの個人情報を削除できない場合があることに注意してください。</dd>
   </dl>
 
-シークレットのために暗号化をセットアップするには、[{{site.data.keyword.keymanagementserviceshort}} を使用した Kubernetes シークレットの暗号化](cs_encrypt.html#keyprotect)を参照してください。
+シークレットのために暗号化をセットアップするには、[{{site.data.keyword.keymanagementserviceshort}} を使用した Kubernetes シークレットの暗号化](/docs/containers?topic=containers-encryption#keyprotect)を参照してください。
+
+SGX 対応のベアメタル・ワーカー・ノードでは、[{{site.data.keyword.datashield_short}} (ベータ版) サービス](/docs/services/data-shield?topic=data-shield-getting-started#getting-started)を使用して、使用中のデータを暗号化できます。保存されたデータや流れているデータに対して暗号化が機能する方法と同様に、{{site.data.keyword.datashield_short}} と統合された Fortanix Runtime Encryption によって、鍵、データ、アプリが外的脅威や内的脅威から保護されます。この種の脅威には、悪質な内部関係者、クラウド・プロバイダー、OS レベルのハッキング、ネットワーク侵入者が含まれる場合があります。
+
+## Kubernetes のセキュリティー情報
+{: #security_bulletins}
+
+Kubernetes で脆弱性が検出されると、Kubernetes は CVE をセキュリティー情報にリリースして、ユーザーに通知し、脆弱性に対処するためにユーザーが取る必要のある処置について説明します。{{site.data.keyword.containerlong_notm}} ユーザーや {{site.data.keyword.Bluemix_notm}} プラットフォームに影響のある Kubernetes のセキュリティー情報は、[{{site.data.keyword.Bluemix_notm}} のセキュリティー情報](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security)で公開されています。
+
+一部の CVE では、{{site.data.keyword.containerlong_notm}} 内の定期的な[クラスター更新プロセス](/docs/containers?topic=containers-update#update)の一部としてインストールできる、Kubernetes バージョンの最新パッチ更新が必要になります。悪意のある攻撃からクラスターを保護するには、適時にセキュリティー・パッチを適用するようにしてください。セキュリティー・パッチの内容に関する情報については、[バージョンの変更ログ](/docs/containers?topic=containers-changelog#changelog)を参照してください。

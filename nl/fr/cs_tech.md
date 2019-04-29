@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, docker
+
+subcollection: containers
 
 ---
 
@@ -17,7 +21,6 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Technologie d'{{site.data.keyword.containerlong_notm}}
@@ -62,9 +65,9 @@ En savoir plus sur certains concepts de base Docker :
   </ul>
   </dd>
 
-<p>Découvrez comment [sécuriser vos informations personnelles](cs_secure.html#pi) lorsque vous utilisez des images de conteneur.</p>
+<p>Découvrez comment [sécuriser vos informations personnelles](/docs/containers?topic=containers-security#pi) lorsque vous utilisez des images de conteneur.</p>
 
-<p>Prêt à en savoir plus sur Docker ? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Découvrez comment Docker et {{site.data.keyword.containerlong_notm}} fonctionnent ensemble en suivant ce cours.</a></p>
+<p>Prêt à en savoir plus sur Docker ? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">Découvrez comment Docker et {{site.data.keyword.containerlong_notm}} fonctionnent ensemble en suivant ce cours.</a></p>
 
 </dl>
 
@@ -79,7 +82,7 @@ En savoir plus sur certains concepts de base Docker :
 
 Découvrez des concepts Kubernetes de base comme illustré dans le diagramme suivant.
 
-![Configuration de déploiement](images/cs_app_tutorial_components1.png)
+![Configuration de déploiement](images/cs_app_tutorial_mz-components1.png)
 
 <dl>
 <dt>Compte</dt>
@@ -103,11 +106,11 @@ Définissez des stratégies de mise à jour de votre application, notamment le n
 <dt>Application</dt>
 <dd>Une application peut se référer à une application complète ou à un composant d'une application. Vous pourriez déployer des composants d'une application dans des composants distincts ou des noeuds worker distincts.</dd>
 
-<p>Découvrez comment [sécuriser vos informations personnelles](cs_secure.html#pi) lorsque vous utilisez des ressources Kubernetes.</p>
+<p>Découvrez comment [sécuriser vos informations personnelles](/docs/containers?topic=containers-security#pi) lorsque vous utilisez des ressources Kubernetes.</p>
 
 <p>Prêt à en savoir plus sur Kubernetes ?</p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Développez vos connaissances en termes de terminologie avec le tutoriel Création de clusters</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Découvrez comment Kubernetes et {{site.data.keyword.containerlong_notm}} fonctionnent ensemble en suivant ce cours.</a></li></ul>
+<ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">Développez vos connaissances en termes de terminologie avec le tutoriel Création de clusters</a>.</li>
+<li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">Découvrez comment Kubernetes et {{site.data.keyword.containerlong_notm}} fonctionnent ensemble en suivant ce cours.</a></li></ul>
 
 
 </dl>
@@ -118,14 +121,23 @@ Définissez des stratégies de mise à jour de votre application, notamment le n
 ## Architecture de service
 {: #architecture}
 
-Dans un cluster Kubernetes qui s'exécute sur {{site.data.keyword.containerlong_notm}}, vos applications conteneurisées sont hébergées sur des hôtes de calcul nommés noeuds worker. Plus précisément, les applications s'exécutent dans des pods et ces pods sont hébergés sur des noeuds worker. Les noeuds worker sont gérés par le maître Kubernetes. Le maître Kubernetes et les noeuds worker communiquent entre eux au moyen de certificats TLS sécurisés et d'une connexion OpenVPN pour orchestrer vos configurations de cluster.
+Dans un cluster Kubernetes qui s'exécute sur {{site.data.keyword.containerlong_notm}}, vos applications conteneurisées sont hébergées sur des hôtes de calcul nommés noeuds worker. Plus précisément, les applications s'exécutent dans des pods et ces pods sont hébergés sur des noeuds worker. Les noeuds worker sont gérés par le maître Kubernetes. La configuration de la communication entre le maître Kubernetes et les noeuds worker dépend de la manière dont vous avez configuré votre réseau d'infrastructure IBM Cloud (SoftLayer) : compte avec noeud final de service public ou compte avec fonction VRF activée comportant des noeuds finaux de service public et privé.
 {: shortdesc}
 
-La figure suivante présente les composants de votre cluster et montre comment ils interagissent.
+L'image suivante présente les composants de votre cluster et montre leur interaction dans un compte avec uniquement le [noeud final de service public activé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
 <p>
 <figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes - Architecture">
- <figcaption>Architecture d'{{site.data.keyword.containerlong_notm}}</figcaption>
+ <img src="images/cs_org_ov_public_se.png" alt="Architecture d'{{site.data.keyword.containerlong_notm}} Kubernetes">
+ <figcaption>Architecture d'{{site.data.keyword.containerlong_notm}} avec uniquement le noeud final de service public activé</figcaption>
+</figure>
+</p>
+
+L'image suivante présente les composants de votre cluster et montre leur interaction dans un compte avec la fonction VRF activée lorsque les [noeuds finaux de service public et privé sont activés](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
+
+<p>
+<figure>
+ <img src="images/cs_org_ov_both_ses.png" alt="Architecture d'{{site.data.keyword.containerlong_notm}} Kubernetes">
+ <figcaption>Architecture d'{{site.data.keyword.containerlong_notm}} avec les noeuds finaux de service public et privé activés</figcaption>
 </figure>
 </p>
 
@@ -155,15 +167,15 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     </tr>
     <tr>
     <td>kube-scheduler</td>
-    <td>Le planificateur de Kubernetes examine les pods qui viennent d'être créés et décide de l'emplacement de leur déploiement en fonction de la capacité, des besoins en matière de performances, des contraintes en matière de réglementation, des spécification en matière d'anti-affinité et des exigences liées aux charges de travail. Si aucun noeud worker ne correspond à ces exigences, le pod n'est pas déployé dans le cluster.</td>
+    <td>Le planificateur de Kubernetes examine les pods qui viennent d'être créés et décide de l'emplacement de leur déploiement en fonction de la capacité, des besoins en matière de performances, des contraintes en matière de réglementation, des spécification en matière d'anti-affinité et des exigences liées aux charges de travail. Si aucun noeud worker ne répond à ces exigences, le pod n'est pas déployé dans le cluster.</td>
     </tr>
     <tr>
     <td>kube-controller-manager</td>
-    <td>Le gestionnaire de contrôleurs Kubernetes est un démon qui examine l'état des ressources de cluster, telles que les jeux de répliques. Lorsque l'état d'une ressource change, par exemple si un pod d'un jeu de répliques tombe en panne, le gestionnaire de contrôleurs initie les actions correctives pour atteindre l'état désiré.</td>
+    <td>Le gestionnaire de contrôleurs Kubernetes est un démon qui examine l'état des ressources de cluster, telles que les jeux de répliques. Lorsque l'état d'une ressource change, par exemple si un pod d'un jeu de répliques tombe en panne, le gestionnaire de contrôleurs initie les actions correctives pour atteindre l'état requis.</td>
     </tr>
     </tbody></table></dd>
   <dt>Noeud worker</dt>
-    <dd>Chaque noeud worker correspond à une machine physique (bare metal) ou à une machine virtuelle qui s'exécute sur du matériel physique dans l'environnement de cloud. Lorsque vous mettez à disposition un noeud worker, vous déterminez les ressources disponibles dans les conteneurs qui sont hébergés sur ce noeud worker. Prêts à l'emploi, vos noeuds worker sont configurés avec un moteur Docker Engine géré par {{site.data.keyword.IBM_notm}}, ainsi que des ressources de calcul, un réseau et un service de volumes distincts. Les fonctions de sécurité intégrées assurent l'isolement, offrent des capacités de gestion des ressources et garantissent la conformité des noeuds worker en matière de sécurité.</br></br>Le tableau suivant présente les composants d'un noeud worker.
+    <dd>Chaque noeud worker correspond à une machine physique (bare metal) ou à une machine virtuelle qui s'exécute sur du matériel physique dans l'environnement de cloud. Lorsque vous mettez à disposition un noeud worker, vous déterminez les ressources disponibles dans les conteneurs qui sont hébergés sur ce noeud worker. Prêts à l'emploi, vos noeuds worker sont configurés avec un moteur Docker Engine géré par {{site.data.keyword.IBM_notm}}, ainsi que des ressources de calcul, un réseau et un service de volumes distincts. Les fonctions de sécurité intégrées assurent l'isolement, offrent des capacités de gestion des ressources et garantissent la conformité des noeuds worker en matière de sécurité.</br></br><p class="note">La modification des composants de noeud worker par défaut, tels que le `kubelet` n'est pas prise en charge et peut entraîner des résultats imprévisibles.</p>Le tableau suivant présente les composants d'un noeud worker.
     <table>
     <caption>Composants des noeuds worker</caption>
     <thead>
@@ -173,49 +185,49 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     </thead>
     <tbody>
     <tr>
-    <td>ibm-master-proxy</td>
+    <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
-    <td>Pour les clusters qui exécutent Kubernetes version 1.10 ou ultérieure, `ibm-master-proxy` transfère les demandes du noeud worker aux adresses IP des répliques du maître à haute disponibilité. Dans les clusters à zone unique, le maître comporte trois répliques sur des hôtes distincts avec une adresse IP du maître et un nom de domaine. Pour les clusters qui se trouvent dans une zone compatible avec plusieurs zones, le maître comporte trois répliques réparties sur les différentes zones. Par conséquent, chaque maître dispose de sa propre adresse IP enregistré avec DNS, avec un nom de domaine pour le maître du cluster complet.</td>
+    <td>Pour les clusters qui exécutent Kubernetes version 1.10 ou ultérieure, `ibm-master-proxy` transfère les demandes du noeud worker aux adresses IP des répliques du maître à haute disponibilité. Dans les clusters à zone unique, le maître comporte trois répliques sur des hôtes distincts avec une adresse IP du maître et un nom de domaine. Pour les clusters qui se trouvent dans une zone compatible avec plusieurs zones, le maître comporte trois répliques réparties sur les différentes zones. Par conséquent, chaque maître dispose de sa propre adresse IP enregistrée avec DNS, avec un nom de domaine pour le maître cluster complet.</td>
     </tr>
     <tr>
-    <td>openvpn-client</td>
+    <td>`openvpn-client`</td>
     <td>kube-system</td>
     <td>Le client OpenVPN utilise le serveur OpenVPN pour connecter le maître au noeud worker de manière sécurisée. Cette connexion prend en charge les appels `apiserver proxy` vers vos pods et services, ainsi que les appels `kubectl exec`, `attach` et `logs` vers le kubelet.</td>
     </tr>
     <tr>
-    <td>kubelet</td>
+    <td>`kubelet`</td>
     <td>kube-system</td>
     <td>Le kubelet est un pod qui s'exécute sur tous les noeuds worker et qui est chargé de surveiller l'intégrité des pods qui s'exécutent sur le noeud worker et de contrôler les événements envoyés par le serveur d'API Kubernetes. En fonction des événements, le kubelet crée ou supprime des pods, assure la mise en place des sondes Liveness probe et Readiness probe et renvoie le statut des pods au serveur d'API Kubernetes.</td>
     </tr>
     <tr>
-    <td>kube-dns</td>
+    <td>`coredns`</td>
     <td>kube-system</td>
-    <td>Kubernetes DNS planifie un pod et un service DNS sur le cluster. Les conteneurs utilisent automatiquement l'adresse IP du service DNS pour résoudre les noms DNS dans leur recherche d'autres pods et services.</td>
+    <td>Par défaut, Kubernetes planifie un service et un pod CoreDNS (ou un pod KubeDNS dans la version 1.12 ou antérieure) sur le cluster. Les conteneurs utilisent automatiquement l'adresse IP du service DNS pour résoudre les noms DNS dans leur recherche d'autres pods et services.</td>
     </tr>
     <tr>
-    <td>calico</td>
+    <td>`calico`</td>
     <td>kube-system</td>
     <td>Calico gère les règles réseau de votre cluster et comprend les composants suivants :
     <ul>
-    <li>**calico-cni** : l'interface CNI (Container Network Interface) de Calico gère la connectivité réseau de vos conteneurs et supprime les ressources allouées lorsqu'un conteneur est supprimé.</li>
-    <li>**calico-ipam** : Calico IPAM gère l'affectation d'adresses IP pour les conteneurs.</li>
-    <li>**calico-node** : le noeud Calico est un conteneur qui regroupe les différents composants requis pour mettre en réseau les conteneurs avec Calico.</li>
-    <li>**calico-policy-controller** : le contrôleur Calico Policy Controller examine le trafic réseau entrant et sortant pour voir s'il est conforme aux règles réseau établies. Si le trafic n'est pas autorisé dans le cluster, l'accès au cluster est bloqué. Calico Policy Controller est également utilisé pour créer et définir des règles réseau pour un cluster.</li></ul></td>
+    <li>**`calico-cni`** : l'interface CNI (Container Network Interface) de Calico gère la connectivité réseau de vos conteneurs et supprime les ressources allouées lorsqu'un conteneur est supprimé.</li>
+    <li>**`calico-ipam`** : Calico IPAM gère l'affectation d'adresses IP pour les conteneurs.</li>
+    <li>**`calico-node`** : le noeud Calico est un conteneur qui regroupe les différents composants requis pour mettre en réseau les conteneurs avec Calico.</li>
+    <li>**`calico-policy-controller`** : le contrôleur Calico Policy Controller examine le trafic réseau entrant et sortant pour voir s'il est conforme aux règles réseau établies. Si le trafic n'est pas autorisé dans le cluster, l'accès au cluster est bloqué. Calico Policy Controller est également utilisé pour créer et définir des règles réseau pour un cluster.</li></ul></td>
     </tr>
     <tr>
-    <td>kube-proxy</td>
+    <td>`kube-proxy`</td>
     <td>kube-system</td>
     <td>Le proxy réseau de Kubernetes est un démon qui s'exécute sur tous les noeuds worker et transfère ou équilibre le trafic réseau TCP et UDP pour les services qui s'exécutent dans le cluster.</td>
     </tr>
     <tr>
-    <td>kube-dashboard</td>
+    <td>`kube-dashboard`</td>
     <td>kube-system</td>
     <td>Le tableau de bord Kubernetes est une interface graphique Web qui permet aux utilisateurs d'assurer la gestion et le traitement des incidents du cluster et des applications qui s'exécutent dans le cluster.</td>
     </tr>
     <tr>
-    <td>heapster</td>
+    <td>`heapster`</td>
     <td>kube-system</td>
-    <td>Heapster est un outil d'aggrégation de données d'événement et de surveillance à l'échelle du cluster. Le pod Heapster reconnaît tous les noeuds dans un cluster et interroge les informations d'utilisation à partir du kubelet de chaque noeud. Vous pouvez obtenir des graphiques d'utilisation dans le tableau de bord Kubernetes.</td>
+    <td>Heapster est un outil d'agrégation de données d'événement et de surveillance à l'échelle du cluster. Le pod Heapster reconnaît tous les noeuds dans un cluster et interroge les informations d'utilisation à partir du kubelet de chaque noeud. Vous pouvez obtenir des graphiques d'utilisation dans le tableau de bord Kubernetes.</td>
     </tr>
     <tr>
     <td>ALB Ingress</td>
@@ -225,12 +237,12 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     <tr>
     <td>Storage Provider</td>
     <td>kube-system</td>
-    <td>Tous les clusters sont configurés avec un plug-in pour mettre à disposition du stockage de fichiers. Vous pouvez opter pour l'installation d'autres modules complémentaires, comme par exemple le stockage par blocs.</td>
+    <td>Tous les clusters sont configurés avec un plug-in pour mettre à disposition du stockage de fichiers. Vous pouvez opter pour l'installation d'autres modules complémentaires, comme par exemple du stockage par blocs.</td>
     </tr>
     <tr>
     <td>Logging and Metrics</td>
     <td>ibm-system</td>
-    <td>Vous pouvez recourir aux services intégrés {{site.data.keyword.loganalysislong_notm}} et {{site.data.keyword.monitoringlong_notm}} pour étendre vos fonctions de collecte et de conservation lorsque vous utiliser des journaux et des indicateurs.</td>
+    <td>Vous pouvez recourir aux services intégrés {{site.data.keyword.loganalysislong_notm}} et {{site.data.keyword.monitoringlong_notm}} pour étendre vos fonctions de collecte et de conservation lorsque vous utilisez des journaux et des indicateurs.</td>
     </tr>
     <tr>
     <td>Equilibreur de charge</td>
@@ -245,5 +257,5 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     </tbody></table></dd>
 </dl>
 
-Vous souhaitez voir comment utiliser {{site.data.keyword.containerlong_notm}} avec d'autres produits et services ? Consultez quelques exemples d'[intégrations](cs_integrations.html#integrations).
+Vous souhaitez voir comment utiliser {{site.data.keyword.containerlong_notm}} avec d'autres produits et services ? Consultez quelques exemples d'[intégrations](/docs/containers?topic=containers-integrations#integrations).
 {: tip}

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -19,21 +23,14 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-# Nueva navegación por almacenamiento
-Para facilitar la búsqueda de información de almacenamiento, se han movido los temas de almacenamiento que está buscando. Utilice la navegación **Almacenamiento de datos en almacenamiento persistente** que se puede contraer o bien pulse en uno de los siguientes nombres de título anteriores para acceder al contenido.
+# Este contenido ha cambiado de sitio
+Utilice la navegación **Almacenamiento de datos en almacenamiento persistente** que se puede contraer o bien pulse en uno de los siguientes enlaces para acceder al contenido.
 
-*  [Planificación de almacenamiento altamente disponible](cs_storage_planning.html#storage_planning)
-*  [Utilización de recursos compartidos de archivos NFS existentes en el clúster](cs_storage_file.html#existing_file)
-*  [Utilización de almacenamiento en bloque existente en el clúster](cs_storage_block.html#existing_block)
-*  Adición de almacenamiento de archivos NFS o almacenamiento en bloque a apps
-    * [Almacenamiento de archivos](cs_storage_file.html#add_file)
-    * [Almacenamiento en bloque](cs_storage_block.html#add_block)
-*  [Personalización de una clase de almacenamiento para el almacenamiento en bloques XFS](cs_storage_block.html#custom_storageclass)
-*  [Cómo cambiar la versión del almacenamiento de archivos NFS predeterminada](cs_storage_file.html#nfs_version)
-*  [Configuración de almacenamiento persistente de NFS y en bloque en clústeres multizona](cs_storage_basics.html#multizone)
-*  Instalación de la CLI de infraestructura de IBM Cloud (SoftLayer): ahora puede utilizar mandatos `ibmcloud sl` en lugar de instalar `slcli`.
-*  [Instalación del plugin {{site.data.keyword.Bluemix_notm}} Block Storage en el clúster](cs_storage_block.html#install_block)
-*  Configuración de soluciones de copia de seguridad y restauración de comparticiones de archivos NFS y almacenamiento en bloque
-    * [Almacenamiento de archivos](cs_storage_file.html#backup_restore)
-    * [Almacenamiento en bloque](cs_storage_block.html#backup_restore)
-*  [Limpieza del almacenamiento de archivos NFS y en bloque persistente](cs_storage_remove.html#cleanup)
+- [Planificación de almacenamiento altamente disponible](/docs/containers?topic=containers-storage_planning#storage_planning)
+- [Conceptos básicos del almacenamiento de Kubernetes](/docs/containers?topic=containers-kube_concepts#kube_concepts)
+- [Almacenamiento de datos en IBM File Storage for IBM Cloud](/docs/containers?topic=containers-file_storage#file_storage)
+- [Almacenamiento de datos en IBM Block Storage for IBM Cloud](/docs/containers?topic=containers-block_storage#block_storage)
+- [Almacenamiento de datos en IBM Cloud Object Storage](/docs/containers?topic=containers-object_storage#object_storage)
+- [Almacenamiento de datos en almacenamiento definido por software (SDS) con Portworx](/docs/containers?topic=containers-portworx#portworx)
+- [Programas de utilidad de almacenamiento de IBM Cloud](/docs/containers?topic=containers-utilities#utilities)
+- [Limpieza del almacenamiento de archivos NFS y en bloque persistente](/docs/containers?topic=containers-cleanup#cleanup)

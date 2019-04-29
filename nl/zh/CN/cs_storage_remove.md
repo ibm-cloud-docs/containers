@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -22,7 +26,7 @@ lastupdated: "2018-12-05"
 # 从集群中除去持久性存储器
 {: #cleanup}
 
-在集群中设置持久性存储器时，有三个主要组件：Kubernetes 持久性卷申领 (PVC)（用于请求存储器）、Kubernetes 持久性卷 (PV)（安装到 pod，并在 PVC 中进行描述）和 IBM Cloud Infrastructure (SoftLayer) 实例（例如，NFS 文件存储器或块存储器）。根据创建方式，您可能需要分别删除所有三个组件。
+在集群中设置持久性存储器时，有三个主要组件：Kubernetes 持久卷声明 (PVC)（用于请求存储器）、Kubernetes 持久卷 (PV)（安装到 pod，并在 PVC 中进行描述）和 IBM Cloud Infrastructure (SoftLayer) 实例（例如，NFS 文件存储器或块存储器）。根据创建方式，您可能需要分别删除所有三个组件。
 {:shortdesc}
 
 ## 清除持久性存储器
@@ -34,7 +38,7 @@ lastupdated: "2018-12-05"
 视情况而定。删除集群时，会删除 PVC 和 PV。但是，您可选择是否除去 IBM Cloud Infrastructure (SoftLayer) 中的关联存储器实例。如果选择不除去，那么存储器实例仍然存在。此外，如果删除的是状态为运行状况不佳的集群，那么即使选择除去存储器，存储器也仍然可能存在。请遵循指示信息，尤其是在 IBM Cloud Infrastructure (SoftLayer) 中[删除存储器实例](#sl_delete_storage)的步骤。
 
 **可以通过删除 PVC 来除去所有存储器吗？**</br>
-有时可以。如果[动态创建持久性存储器](cs_storage_basics.html#dynamic_provisioning)，并且选择其名称中不含 `retain` 的存储类，那么删除 PVC 时，会同时删除 PV 和 IBM Cloud Infrastructure (SoftLayer) 存储器实例。
+有时可以。如果[动态创建持久性存储器](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)，并且选择其名称中不含 `retain` 的存储类，那么删除 PVC 时，会同时删除 PV 和 IBM Cloud Infrastructure (SoftLayer) 存储器实例。
 
 在其他所有情况下，请遵循指示信息来检查 PVC、PV 和物理存储设备的状态，并根据需要单独进行删除。
 
@@ -42,14 +46,14 @@ lastupdated: "2018-12-05"
 这取决于删除的内容和计费类型。如果删除 PVC 和 PV，但未删除 IBM Cloud Infrastructure (SoftLayer) 帐户中的实例，那么该实例仍然存在，因此您仍需要为此付费。必须删除所有内容才能避免继续付费。此外，在 PVC 中指定 `billingType` 时，可以选择 `hourly` 或 `monthly`。如果选择 `monthly`，那么将按月对实例收费。删除实例后，您仍需为该月的剩余时间付费。
 
 
-<p class="important">清除持久性存储器时，将删除其中存储的所有数据。如果需要数据的副本，请备份[文件存储器](cs_storage_file.html#backup_restore)或[块存储器](cs_storage_block.html#backup_restore)。</br>
-</br>如果使用的是 {{site.data.keyword.Bluemix_dedicated}} 帐户，那么必须通过[开具支持用例](/docs/get-support/howtogetsupport.html#getting-customer-support)来请求卷删除。</p>
+<p class="important">清除持久性存储器时，将删除其中存储的所有数据。如果需要数据的副本，请备份[文件存储器](/docs/containers?topic=containers-file_storage#file_backup_restore)或[块存储器](/docs/containers?topic=containers-block_storage#block_backup_restore)。</br>
+</br>如果使用的是 {{site.data.keyword.Bluemix_dedicated}} 帐户，那么必须通过[打开一个支持案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)来请求卷删除。</p>
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 要清除持久数据，请执行以下操作：
 
-1.  列出集群中的 PVC，并记下 PVC 的 **NAME**、**STORAGECLASS** 以及绑定到该 PVC 并显示为 **VOLUME** 的 PV 的名称。
+1.  列出集群中的 PVC，并记下 PVC 的 **`NAME`**、**`STORAGECLASS`** 以及绑定到该 PVC 并显示为 **`VOLUME`** 的 PV 的名称。
     ```
     kubectl get pvc
     ```
@@ -64,9 +68,9 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-2. 查看存储类的 **ReclaimPolicy** 和 **billingType**。
+2. 查看存储类的 **`ReclaimPolicy`** 和 **`billingType`**。
    ```
-   kubectl describe storageclass <storageclass_name>
+kubectl describe storageclass <storageclass_name>
    ```
    {: pre}
 
@@ -92,14 +96,14 @@ lastupdated: "2018-12-05"
 
    2. 除去使用该 PVC 的 pod。如果 pod 是部署的一部分，请除去该部署。
       ```
-      kubectl delete pod <pod_name>
+kubectl delete pod <pod_name>
       ```
       {: pre}
 
    3. 验证 pod 是否已除去。
       ```
-            kubectl get pods
-            ```
+      kubectl get pods
+      ```
       {: pre}
 
 4. 除去 PVC。
@@ -108,7 +112,7 @@ lastupdated: "2018-12-05"
    ```
    {: pre}
 
-5. 复查 PV 的阶段状态。使用先前检索到的显示为 **VOLUME** 的 PV 的名称。
+5. 复查 PV 的阶段状态。使用先前检索到的显示为 **`VOLUME`** 的 PV 的名称。
    ```
    kubectl get pv <pv_name>
    ```
@@ -118,17 +122,17 @@ lastupdated: "2018-12-05"
 
 6. 如果 PV 未删除，请手动除去该 PV。
    ```
-   kubectl delete pv <pv_name>
+kubectl delete pv <pv_name>
    ```
    {: pre}
 
 7. 验证 PV 是否已除去。
    ```
-    kubectl get pv
-    ```
+   kubectl get pv
+   ```
    {: pre}
 
-8. {: #sl_delete_storage}列出 PV 指向的物理存储器实例，并记下物理存储器实例的 **id**。
+8. {: #sl_delete_storage}列出 PV 指向的物理存储器实例，并记下物理存储器实例的 **`id`**。
 
    **文件存储器：**
    ```
@@ -147,18 +151,19 @@ lastupdated: "2018-12-05"
    输出示例：
    ```
    id         notes   
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z 
+   12345678   {"plugin":"ibm-file-plugin-5b55b7b77b-55bb7","region":"us-south","cluster":"aa1a11a1a11b2b2bb22b22222c3c3333","type":"Endurance","ns":"default","pvc":"mypvc","pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7","storageclass":"ibmc-file-gold"}
    ```
    {: screen}
 
    了解 **Notes** 字段信息：
-   *  **`:`**：冒号 (`:`) 用于分隔信息。
-   *  **`ibmcloud-block-storage-plugin-7566ccb8d-44nff`**：集群使用的存储器插件。
-   *  **`us-south`**：集群所在的区域。
-   *  **`aa1a11a1a11b2b2bb22b22222c3c3333`**：与存储器实例关联的集群标识。
-   *  **`Performance`**：文件存储器或块存储器的类型：`Endurance` 或 `Performance`。
-   *  **`mypvc`**：与存储器实例关联的 PVC 的名称。
-   *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`**：与存储器实例关联的 PV。
+   *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`**：集群使用的存储器插件。
+   *  **`"region":"us-south"`**：集群所在的区域。
+   *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`**：与存储器实例关联的集群标识。
+   *  **`"type":"Endurance"`**：文件存储器或块存储器的类型：`Endurance` 或 `Performance`。
+   *  **`"ns":"default"`**：存储实例部署到的名称空间。
+   *  **`"pvc":"mypvc"`**：与存储器实例关联的 PVC 的名称。
+   *  **`"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`**：与存储器实例关联的 PV。
+   *  **`"storageclass":"ibmc-file-gold"`**：存储类的类型：铜牌级、银牌级、金牌级或定制。
 
 9. 除去物理存储器实例。
 
@@ -183,6 +188,6 @@ lastupdated: "2018-12-05"
    {: pre}
    **块存储器：**
    ```
-   ibmcloud sl block volume-list 
+   ibmcloud sl block volume-list
    ```
    {: pre}

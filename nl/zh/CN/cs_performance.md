@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -35,12 +39,12 @@ lastupdated: "2018-12-05"
 
 系统会自动向工作程序节点供应优化的内核性能，但您可以通过将定制 [Kubernetes `守护程序集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 对象应用于集群来更改缺省设置。守护程序集将更改所有现有工作程序节点的设置，并将设置应用于集群中供应的任何新工作程序节点。这不会影响任何 pod。
 
-您必须具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)，才能运行样本特权 initContainer。在初始化这些部署的容器之后，将删除这些特权。
+您必须具有对所有名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **管理者**服务角色](/docs/containers?topic=containers-users#platform)，才能运行样本特权 `initContainer`。在初始化这些部署的容器之后，将删除这些特权。
 {: note}
 
 1. 将以下守护程序集保存在名为 `worker-node-kernel-settings.yaml` 的文件中。在 `spec.template.spec.initContainers` 部分中，添加要调整的 `sysctl` 参数的字段和值。此示例守护程序集通过 `net.core.somaxconn` 设置来更改环境中允许的缺省最大连接数，并通过 `net.ipv4.ip_local_port_range` 设置来更改临时端口范围。
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: kernel-optimization
@@ -103,13 +107,13 @@ lastupdated: "2018-12-05"
 
 要将工作程序节点的 `sysctl` 参数还原为 {{site.data.keyword.containerlong_notm}} 设置的缺省值，请执行以下操作：
 
-1. 删除守护程序集。这将除去应用了定制设置的 initContainer。
+1. 删除守护程序集。这将除去应用了定制设置的 `initContainer`。
     ```
     kubectl delete ds kernel-optimization
     ```
     {: pre}
 
-2. [重新引导集群中的所有工作程序节点](cs_cli_reference.html#cs_worker_reboot)。工作程序节点恢复为应用了缺省值的联机状态。
+2. [重新引导集群中的所有工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)。工作程序节点恢复为应用了缺省值的联机状态。
 
 <br />
 
@@ -120,11 +124,11 @@ lastupdated: "2018-12-05"
 如果您具有特定的性能工作负载需求，那么可以更改 pod 网络名称空间上 Linux 内核 `sysctl` 参数的缺省设置。
 {: shortdesc}
 
-要优化应用程序 pod 的内核设置，可以在每个部署的 `pod/ds/rs/deployment` YAML 中插入 [initContainer ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)。initContainer 将添加到 pod 网络名称空间中要优化其性能的每个应用程序部署。
+要优化应用程序 pod 的内核设置，可以在每个部署的 `pod/ds/rs/deployment` YAML 中插入 [`initContainer ` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)。`initContainer` 将添加到 pod 网络名称空间中要优化其性能的每个应用程序部署。
 
-开始之前，您必须具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)，才能运行样本特权 initContainer。在初始化这些部署的容器之后，将删除这些特权。
+开始之前，确保您具有对所有名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **管理者**服务角色](/docs/containers?topic=containers-users#platform)，才能运行样本特权 `initContainer`。在初始化这些部署的容器之后，将删除这些特权。
 
-1. 将以下 initContainer 补丁保存在名为 `pod-patch.yaml` 的文件中，并为要调整的 `sysctl` 参数添加字段和值。此示例 initContainer 通过 `net.core.somaxconn` 设置来更改环境中允许的缺省最大连接数，并通过 `net.ipv4.ip_local_port_range` 设置来更改临时端口范围。
+1. 将以下 `initContainer` 补丁保存在名为 `pod-patch.yaml` 的文件中，并为要调整的 `sysctl` 参数添加字段和值。此示例 `initContainer` 通过 `net.core.somaxconn` 设置来更改环境中允许的缺省最大连接数，并通过 `net.ipv4.ip_local_port_range` 设置来更改临时端口范围。
     ```
     spec:
       template:
@@ -161,7 +165,7 @@ lastupdated: "2018-12-05"
 
 度量值提供程序 pod 还有一个 `nanny` 容器，用于对 `metrics-server` 或 `heapster` 主容器的资源请求和限制进行调整，以响应集群中工作程序节点的数量。您可以通过编辑度量值提供程序的配置映射来更改缺省资源。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  打开集群度量值提供程序配置映射 YAML。
     *  对于 `metrics-server`：

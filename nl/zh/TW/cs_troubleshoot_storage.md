@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -22,14 +26,13 @@ lastupdated: "2018-12-05"
 {:tsResolve: .tsResolve}
 
 
-
 # 叢集儲存空間的疑難排解
 {: #cs_troubleshoot_storage}
 
 在您使用 {{site.data.keyword.containerlong}} 時，請考慮使用這些技術來進行叢集儲存空間的疑難排解。
 {: shortdesc}
 
-如果您有更一般性的問題，請嘗試[叢集除錯](cs_troubleshoot.html)。
+如果您有更一般性的問題，請嘗試[叢集除錯](/docs/containers?topic=containers-cs_troubleshoot)。
 {: tip}
 
 ## 在多區域叢集裡，持續性磁區無法裝載至 Pod
@@ -46,7 +49,7 @@ lastupdated: "2018-12-05"
 依預設，其工作者節點儲存區可以跨越多個區域的新叢集會標示 PV。如果您在建立工作者節點儲存區之前建立叢集，則必須手動新增標籤。
 
 {: tsResolve}
-[使用地區及區域標籤更新叢集裡的 PV](cs_storage_basics.html#multizone)。
+[使用地區及區域標籤更新叢集裡的 PV](/docs/containers?topic=containers-kube_concepts#storage_multizone)。
 
 <br />
 
@@ -65,9 +68,9 @@ lastupdated: "2018-12-05"
 
 {: tsResolve}
 1.  備份可能儲存在工作者節點或容器上的任何資料。
-2.  若要對現有工作者節點進行短期修正，請重新載入工作者節點。<pre class="pre"><code>ibmcloud ks worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
+2.  若要對現有工作者節點進行短期修正，請重新載入工作者節點。<pre class="pre"><code>ibmcloud ks worker-reload --cluster &lt;cluster_name&gt; --worker &lt;worker_ID&gt;</code></pre>
 
-如需長期修正，請[更新工作者節點儲存區的機型](cs_cluster_update.html#machine_type)。
+如需長期修正，請[更新工作者節點儲存區的機型](/docs/containers?topic=containers-update#machine_type)。
 
 <br />
 
@@ -77,7 +80,22 @@ lastupdated: "2018-12-05"
 {: #nonroot}
 
 {: tsSymptoms}
-[新增 NFS 儲存空間](cs_storage_file.html#app_volume_mount)至您的部署之後，您的容器部署失敗。擷取容器的日誌時，您可能會看到諸如「撰寫許可權」或「沒有必要許可權」等錯誤。Pod 失敗，並停留在重新載入的循環中。
+[新增 NFS 儲存空間](/docs/containers?topic=containers-file_storage#app_volume_mount)至您的部署之後，您的容器部署失敗。當您擷取容器的日誌時，可能會看到如下錯誤。Pod 失敗，並停留在重新載入的循環中。
+
+```
+write-permission
+```
+{: screen}
+
+```
+do not have required permission
+```
+{: screen}
+
+```
+cannot create directory '/bitnami/mariadb/data': Permission denied
+```
+{: screen}
 
 {: tsCauses}
 依預設，非 root 使用者對於支援 NFS 的儲存空間的磁區裝載路徑沒有寫入權。部分一般應用程式映像檔（例如 Jenkins 及 Nexus3）會在 Dockerfile 中指定擁有裝載路徑的非 root 使用者。當您從這個 Dockerfile 建立容器時，會由於非 root 使用者對裝載路徑的權限不足，而造成建立容器失敗。若要授與寫入權，您可以修改 Dockerfile，以在變更裝載路徑許可權之前，暫時將非 root 使用者新增至 root 使用者群組，或使用 init 容器。
@@ -91,7 +109,7 @@ lastupdated: "2018-12-05"
 當您在部署中包括 [init 容器 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 時，可以授與 Dockerfile 中所指定的非 root 使用者對於容器內的磁區裝載路徑的寫入權。init 容器會在您的應用程式容器啟動之前啟動。init 容器會在容器內建立磁區裝載路徑，將裝載路徑變更為由正確的（非 root）使用者所擁有，然後關閉。然後，會使用必須寫入至裝載路徑的非 root 使用者來啟動您的應用程式容器。因為路徑已由非 root 使用者擁有，所以會成功寫入至裝載路徑。如果您不想要使用 init 容器，則可以修改 Dockerfile，以新增非 root 使用者對 NFS 檔案儲存空間的存取權。
 
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  開啟應用程式的 Dockerfile，然後取得您要授與磁區裝載路徑寫入權的使用者的使用者 ID (UID) 及群組 ID (GID)。在 Jenkins Dockerfile 的範例中，其資訊如下：
     - UID：`1000`
@@ -152,7 +170,7 @@ lastupdated: "2018-12-05"
 
     ```
     initContainers:
-    - name: initContainer # Or you can replace with any name
+    - name: initcontainer # Or replace the name
       image: alpine:latest
       command: ["/bin/sh", "-c"]
       args:
@@ -285,17 +303,68 @@ apiVersion: apps/v1
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
-在您[新增非 root 使用者對持續性儲存空間的存取權](#nonroot)或在指定非 root 使用者 ID 的情況下部署 Helm 圖表之後，使用者無法寫入已裝載的儲存空間。
+在您[新增非 root 使用者對持續性儲存空間的存取權](#nonroot)之後，或在指定非 root 使用者 ID 的情況下部署 Helm 圖表之後，使用者無法寫入已裝載的儲存空間。
 
 {: tsCauses}
 部署或 Helm 圖表配置為 Pod 的 `fsGroup`（群組 ID）及 `runAsUser`（使用者 ID）指定[安全環境定義](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)。目前，{{site.data.keyword.containerlong_notm}} 不支援 `fsGroup` 規格，僅支援 `runAsUser` 設為 `0`（root 許可權）。
 
 {: tsResolve}
-請從映像檔、部署或 Helm 圖表配置檔中，移除 `fsGroup` 及 `runAsUser` 的配置的 `securityContext` 欄位，然後重新部署。如果您需要變更 `nobody` 的裝載路徑的所有權，請[新增非 root 使用者存取權](#nonroot)。在您新增[非 root initContainer](#nonroot) 之後，請在容器層次設定 `runAsUser`，而不是 Pod 層次。
+請從映像檔、部署或 Helm 圖表配置檔中，移除 `fsGroup` 及 `runAsUser` 的配置的 `securityContext` 欄位，然後重新部署。如果您需要變更 `nobody` 的裝載路徑的所有權，請[新增非 root 使用者存取權](#nonroot)。在您新增[非 root `initContainer`](#nonroot) 之後，請在容器層次設定 `runAsUser`，而非 Pod 層次。
 
 <br />
 
 
+
+
+## 區塊儲存空間：區塊儲存空間變更為唯讀
+{: #readonly_block}
+
+{: tsSymptoms}
+您可能會看到下列狀況：
+- 當您執行 `kubectl get pods -o wide` 時，您會看到同一個工作者節點上有多個 Pod 停留在 `ContainerCreating` 或 `CrashLoopBackOff` 狀態中。這些 Pod 全部都使用相同的區塊儲存空間實例。
+- 當您執行 `kubectl describe pod` 指令時，您會在**事件**區段中看到下列錯誤：`MountVolume.SetUp failed for volume ... read-only`。
+
+{: tsCauses}
+如果在 Pod 寫入磁區時發生網路錯誤，IBM Cloud 基礎架構 (SoftLayer) 會將磁區變更為唯讀模式，以保護磁區上的資料免於毀損。使用此磁區的 Pod 無法繼續寫入磁區，並發生失敗。
+
+{: tsResolve}
+1. 檢查叢集中已安裝的 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式版本。
+   ```
+   helm ls
+   ```
+   {: pre}
+
+2. 驗證您使用[最新版本的 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)。如果不是，請[更新外掛程式](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)。
+3. 如果您的 Pod 使用 Kubernetes 部署，請移除失敗的 Pod 並讓 Kubernetes 重建它，以重新啟動該 Pod。如果您未使用部署，請執行下列指令以擷取用來建立 Pod 的 YAML 檔：`kubectl getpod <pod_name> -o yaml >pod.yaml`。然後，刪除並手動重建 Pod。
+    ```
+    kubectl delete pod <pod_name>
+    ```
+    {: pre}
+
+4. 檢查重建 Pod 是否已解決問題。如果沒有，請重新載入工作者節點。
+   1. 尋找 Pod 執行所在的工作者節點，並記下指派給工作者節點的專用 IP 位址。
+      ```
+      kubectl describe pod <pod_name> | grep Node
+      ```
+      {: pre}
+
+      輸出範例：
+      ```
+      Node:               10.75.XX.XXX/10.75.XX.XXX
+      Node-Selectors:  <none>
+      ```
+      {: screen}
+
+   2. 透過使用前一個步驟的專用 IP 位址，來擷取工作者節點的 **ID**。
+      ```
+      ibmcloud ks workers --cluster <cluster_name_or_ID>
+      ```
+      {: pre}
+
+   3. 溫和地[重新載入工作者節點](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)。
+
+
+<br />
 
 
 ## 區塊儲存空間：將現有區塊儲存空間裝載至 Pod 失敗，因為檔案系統錯誤
@@ -309,8 +378,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-您的現有區塊儲存裝置已設定 `XFS` 檔案系統。若要將此裝置裝載至您的 Pod，您已[建立 PV](cs_storage_block.html#existing_block)，其將 `ext4` 指定為檔案系統或 `spec/flexVolume/fsType` 區段中未指定檔案系統。如果未定義任何檔案系統，則 PV 預設為 `ext4`。
-PV 已順利建立並鏈結至現有區塊儲存空間實例。不過，當您嘗試使用相符的 PVC 將 PV 裝載到叢集時，會無法裝載磁區。您無法將具有 `ext4` 檔案系統的 `XFS` 區塊儲存空間實例裝載到 Pod。
+您的現有區塊儲存裝置已設定 `XFS` 檔案系統。若要將此裝置裝載至您的 Pod，您已[建立 PV](/docs/containers?topic=containers-block_storage#existing_block)，其將 `ext4` 指定為檔案系統或 `spec/flexVolume/fsType` 區段中未指定檔案系統。如果未定義任何檔案系統，則 PV 預設為 `ext4`。PV 已順利建立並鏈結至現有區塊儲存空間實例。不過，當您嘗試使用相符的 PVC 將 PV 裝載到叢集時，會無法裝載磁區。您無法將具有 `ext4` 檔案系統的 `XFS` 區塊儲存空間實例裝載到 Pod。
 
 {: tsResolve}
 將現有 PV 中的檔案系統從 `ext4` 更新至 `XFS`。
@@ -321,13 +389,13 @@ PV 已順利建立並鏈結至現有區塊儲存空間實例。不過，當您�
    ```
    {: pre}
 
-2. 將 PV yaml 儲存在您的本端機器上。
+2. 將 PV YAML 儲存在您的本端機器上。
    ```
    kubectl get pv <pv_name> -o yaml > <filepath/xfs_pv.yaml>
    ```
    {: pre}
 
-3. 開啟 yaml 檔案，並將 `fsType` 從 `ext4` 變更為 `xfs`。
+3. 開啟 YAML 檔案，並將 `fsType` 從 `ext4` 變更為 `xfs`。
 4. 取代叢集裡的 PV。
    ```
    kubectl replace --force -f <filepath/xfs_pv.yaml>
@@ -376,7 +444,7 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
    ```
    {: pre}
 
-2. [安裝 {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos)。
+2. [安裝 {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#install_cos)。
 
 <br />
 
@@ -403,7 +471,7 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 儲存 {{site.data.keyword.cos_full_notm}} 服務認證的 Kubernetes 的密碼、PVC 及 Pod 不是都在相同的 Kubernetes 名稱空間中。將密碼部署至與 PVC 或 Pod 不同的名稱空間時，無法存取密碼。
 
 {: tsResolve}
-
+此作業需要所有名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 
 1. 列出叢集裡的密碼，並檢閱已建立 {{site.data.keyword.cos_full_notm}} 服務實例之 Kubernetes 密碼的 Kubernetes 名稱空間。密碼必須將 `ibm/ibmc-s3fs` 顯示為**類型**。
    ```
@@ -411,9 +479,9 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
    ```
    {: pre}
 
-2. 檢查 PVC 及 Pod 的 YAML 配置檔，驗證您已使用相同的名稱空間。如果您要將 Pod 部署至與密碼所在名稱空間不同的名稱空間，則請在所需名稱空間中[建立另一個密碼](cs_storage_cos.html#create_cos_secret)。
+2. 檢查 PVC 及 Pod 的 YAML 配置檔，驗證您已使用相同的名稱空間。如果您要將 Pod 部署至非密碼所在的名稱空間中，則請在該名稱空間中[建立另一個密碼](/docs/containers?topic=containers-object_storage#create_cos_secret)。
 
-3. 建立 PVC，或在所需名稱空間中部署 Pod。
+3. 在適當的名稱空間中建立 PVC 或部署 Pod。
 
 <br />
 
@@ -459,7 +527,7 @@ CredentialsEndpointError: failed to load credentials
       ```
       {: pre}
 
-4. 在 **iam_role_crn** 區段中，驗證您具有 `Writer` 或 `Manager` 角色。如果您沒有正確的角色，則必須[建立具有正確許可權的新 {{site.data.keyword.cos_full_notm}} 服務認證](cs_storage_cos.html#create_cos_service)。然後，更新現有密碼，或使用新的服務認證來[建立新的密碼](cs_storage_cos.html#create_cos_secret)。
+4. 在 **iam_role_crn** 區段中，驗證您具有 `Writer` 或 `Manager` 角色。如果您沒有正確的角色，則必須[建立具有正確許可權的新 {{site.data.keyword.cos_full_notm}} 服務認證](/docs/containers?topic=containers-object_storage#create_cos_service)。然後，更新現有密碼，或使用新的服務認證來[建立新的密碼](/docs/containers?topic=containers-object_storage#create_cos_secret)。
 
 <br />
 
@@ -478,10 +546,10 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 您可能使用錯誤的儲存空間類別來存取現有儲存區，或嘗試存取您未建立的儲存區。
 
 {: tsResolve}
-1. 從 [{{site.data.keyword.Bluemix_notm}} 儀表板 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/dashboard/apps) 中，選取 {{site.data.keyword.cos_full_notm}} 服務實例。
+1. 從 [{{site.data.keyword.Bluemix_notm}} 儀表板 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/) 中，選取 {{site.data.keyword.cos_full_notm}} 服務實例。
 2. 選取**儲存區**。
 3. 檢閱現有儲存區的**類別**及**位置**資訊。
-4. 選擇適當的[儲存空間類別](cs_storage_cos.html#storageclass_reference)。
+4. 選擇適當的[儲存空間類別](/docs/containers?topic=containers-object_storage#cos_storageclass_reference)。
 
 <br />
 
@@ -530,8 +598,8 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
 
    2. 建立 `test-permission` Pod。
       ```
-      kubectl apply -f test-permission.yaml
-      ```
+   kubectl apply -f test-permission.yaml
+   ```
       {: pre}
 
    3. 登入 Pod。
@@ -644,18 +712,18 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
 
 
 ## 取得協助及支援
-{: #ts_getting_help}
+{: #storage_getting_help}
 
 叢集仍有問題？
 {: shortdesc}
 
 -  在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
--   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
+-   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/status?selected=status)。
 -   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
     {: tip}
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
     -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
-    -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
--   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
+    -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)。
+-   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。您也可以使用 [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)，來收集及匯出叢集中的相關資訊，以與 IBM 支援中心共用。
 {: tip}
 

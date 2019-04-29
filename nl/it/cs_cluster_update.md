@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-06"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-06"
 {:download: .download}
 
 
-
 # Aggiornamento dei cluster, dei nodi di lavoro e degli elementi aggiuntivi
 {: #update}
 
@@ -29,24 +32,26 @@ Puoi installare gli aggiornamenti per mantenere aggiornati i tuoi cluster Kubern
 ## Aggiornamento del master Kubernetes
 {: #master}
 
-Periodicamente, Kubernetes rilascia [aggiornamenti principali, secondari o patch](cs_versions.html#version_types). Gli aggiornamenti possono influire sulla versione del server API Kubernetes o su altri componenti nel tuo master Kubernetes. IBM aggiorna la versione patch, ma devi aggiornare la versione principale e quella secondaria del master.
+Periodicamente, Kubernetes rilascia [aggiornamenti principali, secondari o patch](/docs/containers?topic=containers-cs_versions#version_types). Gli aggiornamenti possono influire sulla versione del server API Kubernetes o su altri componenti nel tuo master Kubernetes. IBM aggiorna la versione patch, ma devi aggiornare la versione principale e quella secondaria del master.
 {:shortdesc}
 
 **Come posso sapere quando aggiornare il master?**</br>
-Riceverai una notifica nella console e nella CLI {{site.data.keyword.Bluemix_notm}} nel momento in cui saranno disponibili aggiornamenti e inoltre potrai controllare la nostra pagina delle [versioni supportate](cs_versions.html).
+Riceverai una notifica nella console e nella CLI {{site.data.keyword.Bluemix_notm}} nel momento in cui saranno disponibili aggiornamenti e inoltre potrai controllare la nostra pagina delle [versioni supportate](/docs/containers?topic=containers-cs_versions).
 
 **Quante versioni precedenti alla più recente sono supportate dal master?**</br>
 IBM generalmente supporta 3 versioni di Kubernetes in un determinato momento. Puoi aggiornare il server API Kubernetes a non più di due versioni precedenti a quella corrente.
 
-Ad esempio, se la versione corrente del server API Kubernetes è 1.7 e vuoi aggiornare alla 1.10, devi prima aggiornare alla 1.9. Puoi forzare l'aggiornamento, ma l'aggiornamento di tre o più versioni secondarie potrebbe causare risultati imprevisti o un errore.
+Ad esempio, se la versione corrente del server API Kubernetes è 1.8 e vuoi aggiornare alla 1.11, devi prima aggiornare alla 1.10. Puoi forzare l'aggiornamento, ma l'aggiornamento di tre o più versioni secondarie potrebbe causare risultati imprevisti o un errore.
 
 Se il tuo cluster esegue una versione di Kubernetes non supportata, potresti dover forzare l'aggiornamento. Quindi, tieni aggiornato il tuo cluster per evitare un impatto operativo.
 
 **Sui miei nodi di lavoro posso utilizzare una versione successiva a quella del master?**</br>
-No. Innanzitutto, [aggiorna il tuo master](#update_master) alla versione Kubernetes più recente. Poi, [aggiorna i nodi di lavoro](#worker_node) nel tuo cluster.
+I tuoi nodi di lavoro non possono eseguire una versione Kubernetes `major.minor` successiva rispetto a quella master. Per prima cosa, [aggiorna il tuo master](#update_master) alla versione Kubernetes più recente. Poi, [aggiorna i nodi di lavoro](#worker_node) nel tuo cluster.
+
+I nodi di lavoro possono eseguire versioni patch successive rispetto al master, ad esempio versioni patch specifiche per i nodi di lavoro per gli aggiornamenti di sicurezza.
 
 **Come vengono applicati gli aggiornamenti patch?**</br>
-Per impostazione predefinita, gli aggiornamenti patch per il master vengono applicati automaticamente nel corso di diversi giorni, pertanto una versione della patch master potrebbe essere disponibile prima che venga applicata al tuo master. L'automazione degli aggiornamenti ignora anche i cluster che si trovano in uno stato non integro o che hanno operazioni attualmente in corso. Occasionalmente, IBM potrebbe disabilitare gli aggiornamenti automatici per uno specifico fix pack del master, ad esempio una patch che è necessaria solo se un master viene aggiornato da una versione secondaria a un'altra. In questi casi, puoi [controllare il changelog delle versioni](cs_versions_changelog.html) per eventuali impatti potenziali e scegliere di utilizzare tranquillamente il [comando](cs_cli_reference.html#cs_cluster_update) `ibmcloud ks cluster-update` senza attendere l'applicazione dell'automazione degli aggiornamenti.
+Per impostazione predefinita, gli aggiornamenti patch per il master vengono applicati automaticamente nel corso di diversi giorni, pertanto una versione della patch master potrebbe essere disponibile prima che venga applicata al tuo master. L'automazione degli aggiornamenti ignora anche i cluster che si trovano in uno stato non integro o che hanno operazioni attualmente in corso. Occasionalmente, IBM potrebbe disabilitare gli aggiornamenti automatici per uno specifico fix pack del master, ad esempio una patch che è necessaria solo se un master viene aggiornato da una versione secondaria a un'altra. In questi casi, puoi [controllare il changelog delle versioni](/docs/containers?topic=containers-changelog) per eventuali impatti potenziali e scegliere di utilizzare tranquillamente il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update) `ibmcloud ks cluster-update` senza attendere l'applicazione dell'automazione degli aggiornamenti.
 
 A differenza del master, devi aggiornare i tuoi nodi di lavoro per ogni versione patch.
 
@@ -66,17 +71,17 @@ Il seguente diagramma illustra il processo che puoi seguire per aggiornare il tu
 Figura 1. Diagramma del processo di aggiornamento del master Kubernetes
 
 {: #update_master}
-Prima di iniziare, assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](cs_users.html#platform).
+Prima di iniziare, assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform).
 
 Per aggiornare la versione _principale_ o _secondaria_ del master Kubernetes:
 
-1.  Controlla le [modifiche Kubernetes](cs_versions.html) ed effettua tutti gli aggiornamenti contrassegnati come _Aggiorna prima master_.
+1.  Controlla le [modifiche Kubernetes](/docs/containers?topic=containers-cs_versions) ed effettua tutti gli aggiornamenti contrassegnati come _Aggiorna prima master_.
 
-2.  Aggiorna il tuo server API Kubernetes e i componenti master Kubernetes associati utilizzando la console {{site.data.keyword.Bluemix_notm}} o eseguendo il [comando](cs_cli_reference.html#cs_cluster_update) della CLI `ibmcloud ks cluster-update`.
+2.  Aggiorna il tuo server API Kubernetes e i componenti master Kubernetes associati utilizzando la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/login) o eseguendo il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update) della CLI `ibmcloud ks cluster-update`.
 
-3.  Attendi alcuni minuti, quindi conferma che l'aggiornamento è stato completato. Controlla la versione del server API Kubernetes nel dashboard {{site.data.keyword.Bluemix_notm}} o eseguendo `ibmcloud ks clusters`.
+3.  Attendi alcuni minuti, quindi conferma che l'aggiornamento è stato completato. Controlla la versione del server API Kubernetes nel dashboard dei cluster {{site.data.keyword.Bluemix_notm}} o esegui `ibmcloud ks clusters`.
 
-4.  Installa la versione della [`cli kubectl`](cs_cli_install.html#kubectl) che corrisponde alla versione del server API Kubernetes eseguita nel master Kubernetes.
+4.  Installa la versione della [`cli kubectl`](/docs/containers?topic=containers-cs_cli_install#kubectl) che corrisponde alla versione del server API Kubernetes eseguita nel master Kubernetes.
 
 Una volta completato l'aggiornamento del server API Kubernetes, puoi aggiornare i tuoi nodi di lavoro.
 
@@ -92,30 +97,31 @@ Hai ricevuto una notifica per aggiornare i tuoi nodi di lavoro. Cosa significa? 
 **Cosa accade alle mie applicazioni durante un aggiornamento?**</br>
 Se esegui le applicazioni come parte di una distribuzione su nodi di lavoro che hai aggiornato, le applicazioni verranno ripianificate su altri nodi di lavoro nel cluster. Questi nodi di lavoro potrebbero trovarsi in un pool di nodi di lavoro diverso oppure, se hai nodi di lavoro autonomi, le applicazioni potrebbero essere pianificate su nodi di lavoro autonomi. Per evitare un periodo di inattività per la tua applicazione, devi assicurarti di disporre di capacità sufficiente nel cluster per sostenere il carico di lavoro.
 
-**In che modo posso controllare quanti nodi di lavoro vengono disabilitati in un determinato momento durante l'aggiornamento?**
-Se tutti i tuoi nodi di lavoro devono essere attivi e in esecuzione, prendi in considerazione il [ridimensionamento del tuo pool di nodi di lavoro](cs_cli_reference.html#cs_worker_pool_resize) oppure l'[aggiunta di nodi di lavoro autonomi](cs_cli_reference.html#cs_worker_add) per aggiungere altri nodi di lavoro. Puoi rimuovere i nodi di lavoro aggiuntivi una volta completato l'aggiornamento.
+**In che modo posso controllare quanti nodi di lavoro vengono disabilitati in un determinato momento durante l'aggiornamento?**</br>
+Se tutti i tuoi nodi di lavoro devono essere attivi e in esecuzione, prendi in considerazione il [ridimensionamento del tuo pool di nodi di lavoro](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) oppure l'[aggiunta di nodi di lavoro autonomi](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add) per aggiungere altri nodi di lavoro. Puoi rimuovere i nodi di lavoro aggiuntivi una volta completato l'aggiornamento.
 
-Inoltre, puoi creare una mappa di configurazione Kubernetes che specifichi il numero massimo di nodo di lavoro non disponibili alla volta durante l'aggiornamento. I nodi di lavoro vengono identificati dalle etichette del nodo di lavoro. Puoi utilizzare le etichette fornite da IBM oppure le etichette personalizzate che hai aggiunto al nodo di lavoro.
+Inoltre, puoi creare una mappa di configurazione Kubernetes che specifichi il numero massimo di nodi di lavoro non disponibili alla volta durante l'aggiornamento. I nodi di lavoro vengono identificati dalle etichette del nodo di lavoro. Puoi utilizzare le etichette fornite da IBM oppure le etichette personalizzate che hai aggiunto al nodo di lavoro.
 
 **Se scelgo di non definire una mappa di configurazione?**</br>
 Quando la mappa di configurazione non è definita, viene utilizzato il valore predefinito. Per impostazione predefinita, un massimo del 20% di tutti i nodi di lavoro in ciascun cluster può non essere disponibile durante il processo di aggiornamento.
 
 **Prima di iniziare**:
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Aggiorna il master Kubernetes](#master). La versione Kubernetes del nodo di lavoro non può essere superiore alla versione del server API Kubernetes che viene eseguita nel master Kubernetes.
-- Apporta tutte le modifiche contrassegnate con _Aggiorna dopo il master_ in [Modifiche Kubernetes](cs_versions.html).
-- Se vuoi applicare un aggiornamento della patch, esamina il [changelog della versione Kubernetes](cs_versions_changelog.html#changelog).
-- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](cs_users.html#platform). </br>
+- Apporta tutte le modifiche contrassegnate con _Aggiorna dopo il master_ in [Modifiche Kubernetes](/docs/containers?topic=containers-cs_versions).
+- Se vuoi applicare un aggiornamento della patch, esamina il [changelog della versione Kubernetes](/docs/containers?topic=containers-changelog#changelog).
+- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform). </br>
 
-Gli aggiornamenti ai nodi di lavoro possono causare tempi di inattività per applicazioni e servizi. L'immagine della macchina del nodo di lavoro viene ricreata e i dati vengono eliminati se non sono [archiviati al di fuori del pod](cs_storage_planning.html#persistent_storage_overview).
+Gli aggiornamenti ai nodi di lavoro possono causare tempi di inattività per applicazioni e servizi. L'immagine della macchina del nodo di lavoro viene ricreata e i dati vengono eliminati se non sono [archiviati al di fuori del pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
+{: #worker-up-configmap}
 **Per creare una mappa di configurazione e aggiornare i nodi di lavoro**:
 
 1.  Elenca i nodi di lavoro e prendi nota del loro indirizzo IP privato.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -226,16 +232,16 @@ Gli aggiornamenti ai nodi di lavoro possono causare tempi di inattività per app
    ```
    {: pre}
 
-5. Verifica che la mappa di configurazione sia stata creata.
-   ```
-   kubectl get configmap --namespace kube-system
-   ```
-   {: pre}
+5.  Verifica che la mappa di configurazione sia stata creata.
+    ```
+    kubectl get configmap --namespace kube-system
+    ```
+    {: pre}
 
 6.  Aggiorna i nodi di lavoro.
 
     ```
-    ibmcloud ks worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
+    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -251,12 +257,35 @@ Gli aggiornamenti ai nodi di lavoro possono causare tempi di inattività per app
    ```
    {: pre}
 
-9. Verifica di non avere nodi di lavoro duplicati. In alcuni casi, i cluster meno recenti possono elencare nodi di lavoro duplicati con uno stato di **Non pronto** dopo un aggiornamento. Per rimuovere i duplicati, consulta [risoluzione dei problemi](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
+9. Verifica di non avere nodi di lavoro duplicati. In alcuni casi, i cluster meno recenti possono elencare nodi di lavoro duplicati con uno stato di **`Non pronto`** dopo un aggiornamento. Per rimuovere i duplicati, consulta [risoluzione dei problemi](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes).
 
 Passi successivi:
-  - Ripeti il processo di aggiornamento con gli altri pool di nodi di lavoro.
-  - Avvisa gli sviluppatori che lavorano nel cluster di aggiornare la loro CLI `kubectl` alla versione del master Kubernetes.
-  - Se il dashboard Kubernetes non visualizza i grafici di utilizzo, [elimina il pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs).
+-   Ripeti il processo di aggiornamento con gli altri pool di nodi di lavoro.
+-   Avvisa gli sviluppatori che lavorano nel cluster di aggiornare la loro CLI `kubectl` alla versione del master Kubernetes.
+-   Se il dashboard Kubernetes non visualizza i grafici di utilizzo, [elimina il pod `kube-dashboard`](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs).
+
+
+### Aggiornamento dei nodi di lavoro nella console
+{: #worker_up_console}
+
+Dopo aver configurato la mappa di configurazione per la prima volta, puoi aggiornare successivamente i nodi di lavoro utilizzando la console {{site.data.keyword.Bluemix_notm}}.
+{: shortdesc}
+
+Prima di iniziare:
+*   [Imposta una mappa di configurazione](#worker_node) per controllare come vengono aggiornati i tuoi nodi di lavoro.
+*   [Aggiorna il master Kubernetes](#master). La versione Kubernetes del nodo di lavoro non può essere superiore alla versione del server API Kubernetes che viene eseguita nel master Kubernetes.
+*   Apporta tutte le modifiche contrassegnate con _Aggiorna dopo il master_ in [Modifiche Kubernetes](/docs/containers?topic=containers-cs_versions).
+*   Se vuoi applicare un aggiornamento della patch, esamina il [changelog della versione Kubernetes](/docs/containers?topic=containers-changelog#changelog).
+*   Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform). </br>
+
+Gli aggiornamenti ai nodi di lavoro possono causare tempi di inattività per applicazioni e servizi. L'immagine della macchina del nodo di lavoro viene ricreata e i dati vengono eliminati se non sono [archiviati al di fuori del pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{: important}
+
+Per aggiornare i nodi di lavoro dalla console:
+1.  Dal menu della [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/) ![Icona Menu](../icons/icon_hamburger.svg "Icona Menu"), fai clic su **Kubernetes**.
+2.  Dalla pagina **Cluster**, fai clic sul tuo cluster.
+3.  Dalla scheda **Nodi di lavoro**, seleziona la casella di spunta per ciascun nodo di lavoro che desideri aggiornare. Viene visualizzata una barra delle azioni sulla riga dell'intestazione della tabella.
+4.  Dalla barra delle azioni, fai clic su **Aggiorna Kubernetes**.
 
 <br />
 
@@ -269,9 +298,11 @@ Puoi aggiornare i tipi di macchina dei tuoi nodi di lavoro aggiungendo nuovi nod
 {: shortdesc}
 
 Prima di iniziare:
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
-- Se archivi i dati nel tuo nodo di lavoro, i dati vengono eliminati se non [archiviati all'esterno del nodo di lavoro](cs_storage_planning.html#persistent_storage_overview).
-- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](cs_users.html#platform).
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- Se archivi i dati nel tuo nodo di lavoro, i dati vengono eliminati se non [archiviati all'esterno del nodo di lavoro](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform). 
+
+Per aggiornare i tipi di macchina:
 
 1. Elenca i nodi di lavoro e prendi nota del loro indirizzo IP privato.
    - **Per i nodi di lavoro in un pool di nodi di lavoro**:
@@ -283,26 +314,26 @@ Prima di iniziare:
 
      2. Elenca i nodi di lavoro nel pool di nodi di lavoro.
         ```
-        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <pool_name>
+        ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
         ```
         {: pre}
 
      3. Ottieni i dettagli per un nodo di lavoro e prendi nota della zona, dell'ID VLAN privata e di quello della VLAN pubblica.
         ```
-        ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> <worker_ID>
         ```
         {: pre}
 
    - **Obsoleto: per i nodi di lavoro autonomi**:
      1. Elenca i nodi di lavoro disponibili.
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
      2. Ottieni i dettagli per un nodo di lavoro e prendi nota della zona, dell'ID VLAN privata e di quello della VLAN pubblica.
         ```
-        ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_ID>
         ```
         {: pre}
 
@@ -326,7 +357,7 @@ Prima di iniziare:
         ```
         {: pre}
 
-     3. Aggiungi la zona al pool di nodi di lavoro che hai recuperato in precedenza. Quando aggiungi una zona, viene eseguito il provisioning dei nodi di lavoro definiti nel tuo pool di nodi di lavoro nella zona e vengono considerati per una pianificazione futura del carico di lavoro. Se vuoi estendere i tuoi nodi di lavoro tra più zone, scegli una [zona che supporta il multizona](cs_regions.html#zones).
+     3. Aggiungi la zona al pool di nodi di lavoro che hai recuperato in precedenza. Quando aggiungi una zona, viene eseguito il provisioning dei nodi di lavoro definiti nel tuo pool di nodi di lavoro nella zona e vengono considerati per una pianificazione futura del carico di lavoro. Se vuoi estendere i tuoi nodi di lavoro tra più zone, scegli una [zona che supporta il multizona](/docs/containers?topic=containers-regions-and-zones#zones).
         ```
         ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
         ```
@@ -340,7 +371,7 @@ Prima di iniziare:
 
 4. Attendi che i nodi di lavoro vengano distribuiti.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -362,13 +393,13 @@ Prima di iniziare:
 
    - **Obsoleto: per i nodi di lavoro autonomi**:
       ```
-      ibmcloud ks worker-rm <cluster_name> <worker_node>
+      ibmcloud ks worker-rm --cluster <cluster_name> --worker <worker_node>
       ```
       {: pre}
 
 6. Verifica che i nodi di lavoro siano stati rimossi dal tuo cluster.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -409,7 +440,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **Posso installare altri componenti aggiuntivi oltre a quelli predefiniti?**</br>
-Sì. {{site.data.keyword.containerlong_notm}} fornisce altri componenti aggiuntivi tra cui puoi scegliere per aggiungere funzionalità al tuo cluster. Ad esempio, potresti voler [utilizzare i grafici Helm](cs_integrations.html#helm) per installare il [plugin dell'archiviazione blocchi](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) o [VPN strongSwan](cs_vpn.html#vpn-setup). Devi aggiornare separatamente ciascun componente aggiuntivo seguendo le istruzioni per aggiornare i grafici Helm.
+Sì. {{site.data.keyword.containerlong_notm}} fornisce altri componenti aggiuntivi tra cui puoi scegliere per aggiungere funzionalità al tuo cluster. Ad esempio, potresti voler [utilizzare i grafici Helm](/docs/containers?topic=containers-integrations#helm) per installare il [plugin dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) o [VPN strongSwan](/docs/containers?topic=containers-vpn#vpn-setup). Devi aggiornare separatamente ciascun componente aggiuntivo seguendo le istruzioni per aggiornare i grafici Helm.
 
 ### Gestione degli aggiornamenti automatici per il componente aggiuntivo Fluentd per la registrazione
 {: #logging}
@@ -417,10 +448,10 @@ Sì. {{site.data.keyword.containerlong_notm}} fornisce altri componenti aggiunti
 Per apportare modifiche alle configurazioni della registrazione o del filtraggio, la versione del componente aggiuntivo Fluentd deve essere la più recente. Per impostazione predefinita, gli aggiornamenti automatici per il componente aggiuntivo sono abilitati.
 {: shortdesc}
 
-Puoi gestire gli aggiornamenti automatici del componente aggiuntivo Fluentd nei seguenti modi. **Nota**: per eseguire questi comandi, devi disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Amministratore**](cs_users.html#platform) per il cluster.
+Puoi gestire gli aggiornamenti automatici del componente aggiuntivo Fluentd nei seguenti modi. **Nota**: per eseguire questi comandi, devi disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Amministratore**](/docs/containers?topic=containers-users#platform) per il cluster.
 
-* Controlla se gli aggiornamenti automatici sono abilitati eseguendo il [comando](cs_cli_reference.html#cs_log_autoupdate_get) `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>`.
-* Disabilita gli aggiornamenti automatici eseguendo il [comando](cs_cli_reference.html#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable`.
+* Controlla se gli aggiornamenti automatici sono abilitati eseguendo il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get) `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>`.
+* Disabilita gli aggiornamenti automatici eseguendo il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable`.
 * Se gli aggiornamenti automatici sono disabilitati ma hai bisogno di apportare una modifica alla tua configurazione, hai due opzioni:
     * Attiva gli aggiornamenti automatici per i tuoi pod Fluentd.
         ```
@@ -492,18 +523,18 @@ Prima di iniziare:
     private-crb110acca09414e88a44227b87576ceea-alb1   enabled   private   10.130.5.78    mex01   ingress:350/ingress-auth:192*
     public-crb110acca09414e88a44227b87576ceea-alb1    enabled   public    169.57.1.110   mex01   ingress:350/ingress-auth:192*
 
-    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://console.bluemix.net/docs/containers/cs_cluster_update.html#alb
+    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://cloud.ibm.com/docs/containers?topic=containers-update#alb
     ```
     {: screen}
 
-Puoi gestire gli aggiornamenti automatici del componente aggiuntivo ALB Ingress nei seguenti modi. **Nota**: per eseguire questi comandi, devi disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Editor** o **Amministratore**](cs_users.html#platform) per il cluster.
+Puoi gestire gli aggiornamenti automatici del componente aggiuntivo ALB Ingress nei seguenti modi. **Nota**: per eseguire questi comandi, devi disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Editor** o **Amministratore**](/docs/containers?topic=containers-users#platform) per il cluster.
 * Disabilita gli aggiornamenti automatici.
     ```
     ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
     ```
     {: pre}
 * Aggiorna manualmente il tuo componente aggiuntivo ALB Ingress.
-    1. Se è disponibile un aggiornamento e vuoi aggiornare il componente aggiuntivo, per prima cosa controlla il [changelog per l'ultima versione del componente aggiuntivo ALB Ingress](cs_versions_addons.html#alb_changelog) per verificare eventuali modifiche con potenziale interruzione del servizio.
+    1. Se è disponibile un aggiornamento e vuoi aggiornare il componente aggiuntivo, per prima cosa controlla il [changelog per l'ultima versione del componente aggiuntivo ALB Ingress](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) per verificare eventuali modifiche con potenziale interruzione del servizio.
     2. Forza un aggiornamento una tantum dei tuoi pod ALB. Tutti i pod ALB nel cluster vengono aggiornati all'ultima versione di build. Non puoi aggiornare un singolo ALB o scegliere a quale build aggiornare il componente aggiuntivo. Gli aggiornamenti automatici rimangono disabilitati.
         ```
         ibmcloud ks alb-update --cluster <cluster_name_or_ID>
@@ -515,10 +546,10 @@ Puoi gestire gli aggiornamenti automatici del componente aggiuntivo ALB Ingress 
     ```
     {: pre}
 * Riabilita gli aggiornamenti automatici. Ogni volta che diventa disponibile la build successiva, i pod ALB vengono aggiornati automaticamente all'ultima build.
-        ```
-        ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+    ```
+    ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 <br />
 
@@ -539,12 +570,14 @@ Esamina la seguente immagine per vedere in che modo cambia la configurazione del
 <img src="images/cs_cluster_migrate.png" alt="Aggiorna il tuo cluster da nodi di lavoro autonomi a pool di nodi di lavoro" width="600" style="width:600px; border-style: none"/>
 
 Prima di iniziare:
-- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](cs_users.html#platform) per il cluster.
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform) per il cluster.
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+
+Per aggiornare i nodi di lavoro autonomi ai pool di nodi di lavoro:
 
 1. Elenca i nodi di lavoro autonomi esistenti nel tuo cluster e prendi nota di **ID**, **Tipo di macchina** e **IP privato**.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -554,7 +587,7 @@ Prima di iniziare:
    ```
    {: pre}
 
-3. Elenca le zone disponibili e stabilisci dove vuoi eseguire il provisioning dei nodi di lavoro nel tuo pool di nodi di lavoro. Per visualizzare la zona in cui hai eseguito il provisioning dei tuoi nodi di lavoro autonomi, esegui `ibmcloud ks cluster-get <cluster_name_or_ID>`. Se vuoi estendere i tuoi nodi di lavoro tra più zone, scegli una [zona che supporta il multizona](cs_regions.html#zones).
+3. Elenca le zone disponibili e stabilisci dove vuoi eseguire il provisioning dei nodi di lavoro nel tuo pool di nodi di lavoro. Per visualizzare la zona in cui hai eseguito il provisioning dei tuoi nodi di lavoro autonomi, esegui `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`. Se vuoi estendere i tuoi nodi di lavoro tra più zone, scegli una [zona che supporta il multizona](/docs/containers?topic=containers-regions-and-zones#zones).
    ```
    ibmcloud ks zones
    ```
@@ -562,7 +595,7 @@ Prima di iniziare:
 
 4. Elenca le VLAN disponibili per la zona che hai scelto nel passo precedente. Se ancora non hai una VLAN in tale zona, questa viene creata automaticamente per te quando aggiungi la zona al pool di nodi di lavoro.
    ```
-   ibmcloud ks vlans <zone>
+   ibmcloud ks vlans --zone <zone>
    ```
    {: pre}
 
@@ -575,17 +608,17 @@ Prima di iniziare:
       ```
       {: pre}
 
-   2. **Per aggiungere la zona a più pool di nodi di lavoro**: aggiungi più pool di nodi di lavoro al comando `ibmcloud ks zone-add`. Per aggiungere più pool di nodi di lavoro a una zona, devi avere una VLAN privata e una pubblica esistenti in tale zona. Se non hai una VLAN privata e una pubblica in tale zona, prendi in considerazione di aggiungere innanzitutto la zona a un pool di nodi di lavoro in modo che la VLAN privata e quella pubblica vengano create per te. Quindi, puoi aggiungere la zona agli altri pool di nodi di lavoro. </br></br>È importante che venga eseguito il provisioning dei nodi di lavoro presenti in tutti i tuoi pool di nodi di lavoro in tutte le zone per assicurarti che il tuo cluster sia bilanciato tra le zone. Se vuoi utilizzare VLAN diverse per pool di nodi di lavoro differenti, ripeti questo comando con la VLAN che vuoi utilizzare per il tuo pool di nodi di lavoro. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
+   2. **Per aggiungere la zona a più pool di nodi di lavoro**: aggiungi più pool di nodi di lavoro al comando `ibmcloud ks zone-add`. Per aggiungere più pool di nodi di lavoro a una zona, devi avere una VLAN privata e una pubblica esistenti in tale zona. Se non hai una VLAN privata e una pubblica in tale zona, prendi in considerazione di aggiungere innanzitutto la zona a un pool di nodi di lavoro in modo che la VLAN privata e quella pubblica vengano create per te. Quindi, puoi aggiungere la zona agli altri pool di nodi di lavoro. </br></br>È importante che venga eseguito il provisioning dei nodi di lavoro presenti in tutti i tuoi pool di nodi di lavoro in tutte le zone per assicurarti che il tuo cluster sia bilanciato tra le zone. Se vuoi utilizzare VLAN diverse per pool di nodi di lavoro differenti, ripeti questo comando con la VLAN che vuoi utilizzare per il tuo pool di nodi di lavoro. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **Per aggiungere più zone ai tuoi pool di nodi di lavoro**: ripeti il comando `ibmcloud ks zone-add` con una zona diversa e specifica i pool di nodi di lavoro di cui vuoi eseguire il provisioning in tale zona. Aggiungendo altre zone al tuo cluster, lo modifichi da cluster a zona singola a [cluster multizona](cs_clusters_planning.html#multizone).
+   3. **Per aggiungere più zone ai tuoi pool di nodi di lavoro**: ripeti il comando `ibmcloud ks zone-add` con una zona diversa e specifica i pool di nodi di lavoro di cui vuoi eseguire il provisioning in tale zona. Aggiungendo altre zone al tuo cluster, lo modifichi da cluster a zona singola a [cluster multizona](/docs/containers?topic=containers-plan_clusters#multizone).
 
 6. Attendi che i nodi di lavoro vengano distribuiti in ciascuna zona.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
    Quando lo stato del nodo di lavoro diventa **Normal**, la distribuzione è terminata.
@@ -606,7 +639,7 @@ Prima di iniziare:
       kubectl get nodes
       ```
       {: pre}
-      Il tuo nodo di lavoro è disabilitato per la pianificazione di pod se lo stato visualizza **SchedulingDisabled**.
+      Il tuo nodo di lavoro è disabilitato per la pianificazione di pod se lo stato visualizza **`SchedulingDisabled`**.
    4. Forza la rimozione dei pod dal tuo nodo di lavoro autonomo e la ripianificazione sui nodi di lavoro autonomi non delimitati e sui nodi di lavoro rimanenti provenienti dal tuo pool di nodi di lavoro.
       ```
       kubectl drain <worker_name> --ignore-daemonsets
@@ -616,118 +649,14 @@ Prima di iniziare:
 
    5. Rimuovi il tuo nodo di lavoro autonomo. Usa l'ID del nodo di lavoro che hai recuperato con il comando `ibmcloud ks workers <cluster_name_or_ID>`.
       ```
-      ibmcloud ks worker-rm <cluster_name_or_ID> <worker_ID>
+      ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_ID>
       ```
       {: pre}
    6. Ripeti questa procedura fino a quando non saranno stati rimossi tutti i tuoi nodi di lavoro autonomi.
 
 
 **Operazioni successive** </br>
-Ora che hai aggiornato il tuo cluster per utilizzare i pool di nodi di lavoro, puoi migliorare la disponibilità aggiungendo altre zone al tuo cluster. Aggiungendo altre zone al tuo cluster, quest'ultimo passa da cluster a zona singola a [cluster multizona](cs_clusters_planning.html#ha_clusters). Quando modifichi il tuo cluster a zona singola in un cluster multizona, il tuo dominio Ingress passa da `<cluster_name>.<region>.containers.mybluemix.net` a `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Il dominio Ingress esistente è ancora valido e puoi utilizzarlo per inviare le richieste alle tue applicazioni.
+Ora che hai aggiornato il tuo cluster per utilizzare i pool di nodi di lavoro, puoi migliorare la disponibilità aggiungendo altre zone al tuo cluster. Aggiungendo altre zone al tuo cluster, quest'ultimo passa da cluster a zona singola a [cluster multizona](/docs/containers?topic=containers-plan_clusters#ha_clusters). Quando modifichi il tuo cluster a zona singola in un cluster multizona, il tuo dominio Ingress passa da `<cluster_name>.<region>.containers.mybluemix.net` a `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Il dominio Ingress esistente è ancora valido e puoi utilizzarlo per inviare le richieste alle tue applicazioni.
 
 <br />
 
-
-## Impostazione del provider DNS del cluster su CoreDNS
-{: #dns}
-
-A ogni servizio nel tuo cluster viene assegnato un nome DNS (Domain Name System) che il provider DNS del cluster registra per risolvere le richieste DNS. Il provider DNS predefinito del cluster è il DNS Kubernetes (KubeDNS). Tuttavia, per i cluster che eseguono Kubernetes versione 1.12 o successive, puoi scegliere di utilizzare invece [CoreDNS ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://coredns.io/). Potresti utilizzare CoreDNS come early adopter o per testare potenziali impatti mentre il progetto Kubernetes passa a sostituire KubeDNS con CoreDNS. Per ulteriori informazioni sul DNS per i servizi e i pod, consulta [la documentazione di Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
-{: shortdesc}
-
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
-
-1.  Determina il provider DNS del cluster corrente. Nel seguente esempio, KubeDNS è il provider DNS corrente del cluster.
-    ```
-    kubectl cluster-info
-    ```
-    {: pre}
-
-    Output di esempio:
-    ```
-    ...
-    KubeDNS is running at https://c2.us-south.containers.cloud.ibm.com:20190/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-    ...
-    ```
-    {: screen}
-2.  Imposta CoreDNS come provider DNS del cluster.
-
-    1.  **Facoltativo**: se hai personalizzato la mappa di configurazione `kube-dns` nello spazio dei nomi `kube-system`, trasferisci qualsiasi personalizzazione alla mappa di configurazione `coredns` nello spazio dei nomi `kube-system`. Nota che la sintassi differisce tra le mappe di configurazione `kube-dns` e `coredns`. Per un esempio, vedi [Installing CoreDNS via Kubeadm ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) nella documentazione di CoreDNS.
-
-    2.  Riduci la distribuzione dell'autoscaler KubeDNS.
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
-        ```
-        {: pre}
-
-    3.  Controlla e attendi che i pod vengano eliminati.
-        ```
-        kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
-        ```
-        {: pre}
-
-    4.  Riduci la distribuzione di KubeDNS.
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
-        ```
-        {: pre}
-
-    5.  Amplia la distribuzione dell'autoscaler CoreDNS.
-        ```
-        kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
-        ```
-        {: pre}
-
-    6.  Etichetta e annota il servizio DNS del cluster per CoreDNS.
-        ```
-        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port=9153
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
-        ```
-        {: pre}
-3.  **Facoltativo**: inverti i passi precedenti per tornare a KubeDNS come provider DNS del cluster.
-
-    1.  **Facoltativo**: se hai personalizzato la mappa di configurazione `coredns` nello spazio dei nomi `kube-system`, trasferisci qualsiasi personalizzazione alla mappa di configurazione `kube-dns` nello spazio dei nomi `kube-system`. Nota che la sintassi differisce tra le mappe di configurazione `kube-dns` e `coredns`. Per un esempio, vedi [Installing CoreDNS via Kubeadm ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) nella documentazione di CoreDNS.
-
-    2.  Riduci la distribuzione dell'autoscaler CoreDNS.
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
-        ```
-        {: pre}
-
-    3.  Controlla e attendi che i pod vengano eliminati.
-        ```
-        kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
-        ```
-        {: pre}
-
-    4.  Riduci la distribuzione di CoreDNS.
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 coredns
-        ```
-        {: pre}
-
-    5.  Amplia la distribuzione dell'autoscaler KubeDNS.
-        ```
-        kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
-        ```
-        {: pre}
-
-    6.  Etichetta e annota il servizio DNS del cluster per KubeDNS.
-        ```
-        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port-
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape-
-        ```
-        {: pre}

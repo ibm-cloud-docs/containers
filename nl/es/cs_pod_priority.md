@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -25,23 +29,24 @@ Con la evitación y la prioridad de pod de Kubernetes, puede configurar las clas
 {: shortdesc}
 
 **¿Por qué debo definir una prioridad de pod?**</br>
-Como administrador de clúster, desea controlar qué pods son más importantes para la carga de trabajo del clúster. Las clases de prioridad pueden ayudarle a controlar las decisiones del planificador de Kubernetes para favorecer los pods de prioridad más alta sobre los pods de prioridad más baja. El planificador puede incluso evitar (eliminar) pods de prioridad más baja que se estén ejecutando, para que se puedan planificar pods pendientes de prioridad más alta.
+Como administrador del clúster, desea controlar qué pods son más importantes para la carga de trabajo del clúster. Las clases de prioridad pueden ayudarle a controlar las decisiones del planificador de Kubernetes para favorecer los pods de prioridad más alta sobre los pods de prioridad más baja. El planificador puede incluso evitar (eliminar) pods de prioridad más baja que se estén ejecutando, para que se puedan planificar pods pendientes de prioridad más alta.
 
 Al establecer la prioridad de pod, puede evitar que las cargas de trabajo de prioridad más baja afecten a las cargas de trabajo críticas para el clúster, especialmente en los casos en los que el clúster empieza a alcanzar su capacidad de recursos.
 
-Asegúrese de que ha [configurado correctamente el acceso de usuario](cs_users.html#users) al clúster y, si procede, [las políticas de seguridad de pod](cs_psp.html#psp). El acceso y las políticas de seguridad de pod pueden ayudar a evitar que usuarios no fiables desplieguen pods de alta prioridad que evitan que otros pods se planifiquen.
+Asegúrese de que ha [configurado correctamente el acceso de usuario](/docs/containers?topic=containers-users#users) al clúster y, si procede, [las políticas de seguridad de pod](/docs/containers?topic=containers-psp#psp). El acceso y las políticas de seguridad de pod pueden ayudar a evitar que usuarios no fiables desplieguen pods de alta prioridad que evitan que otros pods se planifiquen.
 {: tip}
 
 {: #priority_scheduling}
 **¿Cómo funcionan los trabajos de planificación y evitación?**</br>
 En general, los pods pendientes que tienen una prioridad más alta se planifican antes que los pods con prioridad más baja. Si no dispone de suficientes recursos en los nodos trabajadores, el planificador puede evitar (eliminar) pods para liberar recursos suficientes para que se planifiquen los pods de prioridad más alta. La evitación también se ve afectada por los periodos de terminación ordenada, los presupuestos de interrupción de pod y la afinidad de los nodos trabajadores.
 
-Si no especifica una prioridad para el despliegue de pod, el valor predeterminado se establece en la clase de prioridad que se establece como `globalDefault`. Si no dispone de una clase de prioridad `globalDefault`, la prioridad predeterminada para todos los pods es cero (` 0 `). De forma predeterminada, {{site.data.keyword.containerlong_notm}} no establece un valor `globalDefault`, por lo que la prioridad predeterminada de pod es cero.
+Si no especifica una prioridad para el despliegue de pod, el valor predeterminado se establece en la clase de prioridad que se establece como `globalDefault`. Si no dispone de una clase de prioridad `globalDefault`, la prioridad predeterminada para todos los pods es cero (`0`). De forma predeterminada, {{site.data.keyword.containerlong_notm}} no establece un valor `globalDefault`, por lo que la prioridad predeterminada de pod es cero.
 
 Para entender cómo la prioridad de pod y el planificador trabajan juntos, tenga en cuenta los casos de ejemplo de la figura siguiente. Debe colocar los pods priorizados en nodos trabajadores con recursos disponibles. De lo contrario, los pods de prioridad alta del clúster pueden quedar pendientes, al mismo tiempo que se eliminan pods existentes, como en el caso de ejemplo 3.
 
 _Figura: casos de ejemplo de prioridad de pod_
-![Casos de ejemplo de prioridad de pod](images/pod-priority.png)
+<img src="images/pod-priority.png" width="500" alt="Casos de ejemplo de prioridad de pod" style="width:500px; border-style: none"/>
+
 1.  Tres pods con prioridad alta, media y baja están pendientes de planificación. El planificador encuentra un nodo trabajador disponible con espacio para los 3 pods, y los planifica en orden de prioridad, con el pod de prioridad más alto planificado primero.
 2.  Tres pods con prioridad alta, media y baja están pendientes de planificación. El planificador encuentra un nodo trabajador disponible, pero el nodo trabajador sólo tiene recursos suficientes para admitir los pods de prioridad alta y media. El pod de prioridad baja no está planificado y se queda pendiente.
 3.  Dos pods con prioridad alta y media están pendientes de planificación. Existe un tercer pod con una prioridad baja en un nodo trabajador disponible. Sin embargo, el nodo trabajador no tiene recursos suficientes para planificar ninguno de los pods pendientes. El planificador evita, o elimina, el pod de baja prioridad, que devuelve el pod a un estado pendiente. A continuación, el planificador intenta planificar el pod de prioridad alta. Sin embargo, el nodo trabajador no tiene suficientes recursos para planificar el pod de prioridad alta y, en su lugar, el planificador planifica el pod de prioridad media.
@@ -87,8 +92,9 @@ Para establecer la prioridad de pod, tiene que utilizar una clase de prioridad.
 {: shortdesc}
 
 Antes de empezar:
-* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
-* [Cree](cs_clusters.html#clusters_ui) o [actualice](cs_cluster_update.html#update) su clúster a Kubernetes versión 1.11 o posterior.
+* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* Asegúrese de que tiene el [rol de **Escritor** o de **Gestor** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
+* [Cree](/docs/containers?topic=containers-clusters#clusters_ui) o [actualice](/docs/containers?topic=containers-update#update) su clúster a Kubernetes versión 1.11 o posterior.
 
 Para utilizar una clase de prioridad:
 
@@ -168,8 +174,9 @@ Asigne una clase de prioridad a su especificación de pod para establecer la pri
 {: shortdesc}
 
 Antes de empezar:
-* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
-* [Cree](cs_clusters.html#clusters_ui) o [actualice](cs_cluster_update.html#update) su clúster a Kubernetes versión 1.11 o posterior.
+* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* Asegúrese de que tiene el [rol de **Escritor** o de **Gestor** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres en el que desea desplegar los pods.
+* [Cree](/docs/containers?topic=containers-clusters#clusters_ui) o [actualice](/docs/containers?topic=containers-update#update) su clúster a Kubernetes versión 1.11 o posterior.
 * [Comprenda cómo funciona la planificación de prioridad](#priority_scheduling), ya que la prioridad puede evitar los pods existentes y afectar a la forma en que se consumen los recursos del clúster.
 
 Para asignar prioridad a los pods:
@@ -200,7 +207,7 @@ Para asignar prioridad a los pods:
 3.  En la especificación de pod, añada el campo `priorityClassName` con el nombre de la clase de prioridad que ha recuperado en el paso anterior.
 
     ```yaml
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -34,7 +38,7 @@ lastupdated: "2018-12-05"
 状況によります。 クラスターを削除すると、PVC と PV は削除されます。 ただし、関連するストレージ・インスタンスを IBM Cloud インフラストラクチャー (SoftLayer) で削除するかどうかは選択できます。 削除しないことを選択した場合、ストレージ・インスタンスは残ります。 また、クラスターを正常でない状態で削除した場合は、ストレージを削除することを選択していても、ストレージがまだ存在している可能性があります。 IBM Cloud インフラストラクチャー (SoftLayer) の[ストレージ・インスタンスを削除](#sl_delete_storage)する手順に従ってください。
 
 **PVC を削除することで自分のストレージをすべて削除することはできますか?**</br>
-場合によります。 [永続ストレージを動的に作成](cs_storage_basics.html#dynamic_provisioning)し、名前に `retain` が付いていないストレージ・クラスを選択した場合は、PVC を削除すると、PV および IBM Cloud インフラストラクチャー (SoftLayer) ストレージ・インスタンスも削除されます。
+場合によります。 [永続ストレージを動的に作成](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)し、名前に `retain` が付いていないストレージ・クラスを選択した場合は、PVC を削除すると、PV および IBM Cloud インフラストラクチャー (SoftLayer) ストレージ・インスタンスも削除されます。
 
 それ以外の場合はすべて、説明に従って PVC、PV、物理ストレージ・デバイスの状況を確認し、必要に応じて個々に削除してください。
 
@@ -42,14 +46,14 @@ lastupdated: "2018-12-05"
 何を削除したかと、課金タイプによって異なります。 PVC と PV を削除しても、IBM Cloud インフラストラクチャー (SoftLayer) アカウントのインスタンスを削除しなかった場合は、そのインスタンスがまだ存在するので課金されます。 課金されないようにするには、すべて削除する必要があります。 また、PVC で `billingType` を指定するときには、`hourly` か `monthly` を選択できます。 `monthly` を選択した場合、インスタンスは月単位で課金されます。 インスタンスを削除しても、その月の最後まで請求されます。
 
 
-<p class="important">永続ストレージをクリーンアップすると、保管されているすべてのデータが削除されます。 データのコピーが必要な場合は、[ファイル・ストレージ](cs_storage_file.html#backup_restore)または[ブロック・ストレージ](cs_storage_block.html#backup_restore)のバックアップを作成してください。</br>
-</br>{{site.data.keyword.Bluemix_dedicated}} アカウントを使用している場合は、[サポート・ケースを開いて](/docs/get-support/howtogetsupport.html#getting-customer-support)、ボリュームの削除を要求する必要があります。</p>
+<p class="important">永続ストレージをクリーンアップすると、保管されているすべてのデータが削除されます。 データのコピーが必要な場合は、[ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_backup_restore)または[ブロック・ストレージ](/docs/containers?topic=containers-block_storage#block_backup_restore)のバックアップを作成してください。</br>
+</br>{{site.data.keyword.Bluemix_dedicated}} アカウントを使用している場合は、[サポート・ケースを開いて](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)、ボリュームの削除を要求する必要があります。</p>
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 永続データをクリーンアップするには、次の手順を実行します。
 
-1.  クラスターの PVC をリストし、PVC の **NAME**、**STORAGECLASS**、および PVC にバインドされていて **VOLUME** として表示されている PV の名前をメモします。
+1.  クラスターの PVC をリストし、PVC の **`NAME`**、**`STORAGECLASS`**、および PVC にバインドされていて **`VOLUME`** として表示されている PV の名前をメモします。
     ```
     kubectl get pvc
     ```
@@ -64,7 +68,7 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-2. ストレージ・クラスの **ReclaimPolicy** と **billingType** を確認します。
+2. ストレージ・クラスの **`ReclaimPolicy`** と **`billingType`** を確認します。
    ```
    kubectl describe storageclass <storageclass_name>
    ```
@@ -108,7 +112,7 @@ lastupdated: "2018-12-05"
    ```
    {: pre}
 
-5. PV の状況を確認します。 先ほど取得した PV の名前を、**VOLUME** として使用します。
+5. PV の状況を確認します。 先ほど取得した PV の名前を、**`VOLUME`** として使用します。
    ```
    kubectl get pv <pv_name>
    ```
@@ -128,7 +132,7 @@ lastupdated: "2018-12-05"
    ```
    {: pre}
 
-8. {: #sl_delete_storage}PV が指していた物理ストレージ・インスタンスをリストし、物理ストレージ・インスタンスの **id** をメモします。
+8. {: #sl_delete_storage}PV が指していた物理ストレージ・インスタンスをリストし、物理ストレージ・インスタンスの **`id`** をメモします。
 
    **ファイル・ストレージ:**
    ```
@@ -147,18 +151,19 @@ lastupdated: "2018-12-05"
    出力例:
    ```
    id         notes   
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z
+   12345678   {"plugin":"ibm-file-plugin-5b55b7b77b-55bb7","region":"us-south","cluster":"aa1a11a1a11b2b2bb22b22222c3c3333","type":"Endurance","ns":"default","pvc":"mypvc","pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7","storageclass":"ibmc-file-gold"}
    ```
    {: screen}
 
    **Notes** フィールドの情報について
-   *  **`:`**: コロン (`:`) は情報を区切ります。
-   *  **` ibmcloud-block-storage-plugin-7566ccb8d-44nff`**: クラスターが使用するストレージ・プラグイン。
-   *  **`us-south`**: クラスターが存在している領域。
-   *  **`aa1a11a1a11b2b2bb22b22222c3c3333`**: ストレージ・インスタンスに関連付けられているクラスター ID。
-   *  **`Performance`**: ファイル・ストレージまたはブロック・ストレージのタイプ (`Endurance` または `Performance`)。
-   *  **`mypvc`**: ストレージ・インスタンスに関連付けられている PVC の名前。
-   *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`**: ストレージ・インスタンスに関連付けられている PV。
+   *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`**: クラスターが使用するストレージ・プラグイン。
+   *  **`"region":"us-south"`**: クラスターが存在している領域。
+   *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`**: ストレージ・インスタンスに関連付けられているクラスター ID。
+   *  **`"type":"Endurance"`**: ファイル・ストレージまたはブロック・ストレージのタイプ (`Endurance` または `Performance`)。
+   *  **`"ns":"default"`**: ストレージ・インスタンスのデプロイ先の名前空間。
+   *  **`"pvc":"mypvc"`**: ストレージ・インスタンスに関連付けられている PVC の名前。
+   *  **`"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`**: ストレージ・インスタンスに関連付けられている PV。
+   *  **`"storageclass":"ibmc-file-gold"`**: ストレージ・クラスのタイプ (ブロンズ、シルバー、ゴールド、またはカスタム)。
 
 9. 物理ストレージ・インスタンスを削除します。
 

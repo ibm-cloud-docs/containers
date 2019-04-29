@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -17,6 +21,7 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # 规划高可用性持久性存储器
@@ -65,7 +70,7 @@ lastupdated: "2018-12-05"
 5. 调查数据是否必须在多个应用程序实例、专区或区域中共享。
    - **跨 pod 访问：**使用 Kubernetes 持久性卷访问存储器时，可以确定可同时安装该卷的 pod 的数量。某些存储解决方案（例如，Block Storage）一次只能由一个 pod 进行访问。其他存储解决方案允许在多个 pod 之间共享同一个卷。
    - **跨专区和区域访问：**您可能需要数据可跨专区或区域进行访问。某些存储解决方案（例如，File Storage 和 Block Storage）是特定于数据中心的，无法在多专区集群设置中跨专区共享。
-   
+
    如果要使数据可以在各个专区或区域中进行访问，请确保咨询法律部门，以验证您的数据是否可以存储在多个专区或者不同的国家或地区中。
    {: note}
 
@@ -88,7 +93,7 @@ lastupdated: "2018-12-05"
 
 下图显示 {{site.data.keyword.containerlong_notm}} 中可用的非持久性数据存储选项。这些选项可用于免费和标准集群。
 <p>
-<img src="images/cs_storage_nonpersistent.png" alt="非持久性数据存储选项" width="500" style="width: 500px; border-style: none"/></p>
+<img src="images/cs_storage_nonpersistent.png" alt="非持久性数据存储选项" width="550" style="width: 550px; border-style: none"/></p>
 
 <table>
 <thead>
@@ -110,7 +115,7 @@ lastupdated: "2018-12-05"
 <tr>
 <td style="text-align:left">容量</td>
 <td style="text-align:left">限于工作程序节点的可用辅助磁盘。要限制 pod 使用的辅助存储量，请使用[临时存储器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage) 的资源请求和限制。</td>
-<td style="text-align:left">限于工作程序节点在主磁盘 (hostPath) 或辅助磁盘 (emptyDir) 上的可用空间。要限制 pod 使用的辅助存储量，请使用[临时存储器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage) 的资源请求和限制。</td>
+<td style="text-align:left">限于工作程序节点在主磁盘 (`hostPath`) 或辅助磁盘 (`emptyDir`) 上的可用空间。要限制 pod 使用的辅助存储量，请使用[临时存储器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage) 的资源请求和限制。</td>
 </tr>
 <tr>
 <td style="text-align:left">数据访问模式</td>
@@ -166,132 +171,207 @@ lastupdated: "2018-12-05"
 </table>
 
 
+## 单专区集群持久性存储选项的比较
+{: #single_zone_persistent_storage}
 
-## 持久性存储选项的比较
-{: #persistent_storage_overview}
-
-对要永久保留（即使除去了容器、工作程序节点或集群时数据也保留）的任何数据使用持久性存储选项。
+如果您有单专区集群，那么可以在 {{site.data.keyword.containerlong_notm}} 中的以下选项之间进行选择，以快速访问您的数据。为了获得更高的可用性，请使用专为[地理分布式数据](#persistent_storage_overview)而设计的存储选项，并尽可能针对您的需求创建多专区集群。
 {: shortdesc}
 
 持久性数据存储选项仅可用于标准集群。
+{: note}
 
-要改为将集群连接到内部部署数据库吗？请参阅[设置到集群的 VPN 连接](cs_vpn.html#vpn)。
-{: tip}
+下图显示了 {{site.data.keyword.containerlong_notm}} 中用于在单个集群中永久存储数据的选项。
 
-下图显示了在 {{site.data.keyword.containerlong_notm}} 中永久存储数据并使数据在集群中高度可用的选项。
-
-<img src="images/cs_storage_mz-ha.png" alt="持久性存储器的高可用性选项"/>
+<img src="images/cs_storage_single_zone.png" alt="单专区集群的持久性存储选项"  width="300" style="width: 300px; border-style: none"/>
 
 <table>
 <thead>
 <th style="text-align:left">特征</th>
 <th style="text-align:left">File</th>
 <th style="text-align:left">Block</th>
-<th style="text-align:left">Object</th>
-<th style="text-align:left">DBaaS</th>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">支持多专区</td>
 <td style="text-align:left">否，因为特定于数据中心。除非实现自己的数据复制，否则不能跨专区共享数据。</td>
 <td style="text-align:left">否，因为特定于数据中心。除非实现自己的数据复制，否则不能跨专区共享数据。</td>
-<td style="text-align:left">是</td>
-<td style="text-align:left">是</td>
 </tr>
 <tr>
 <td style="text-align:left">理想的数据类型</td>
 <td style="text-align:left">所有</td>
 <td style="text-align:left">所有</td>
-<td style="text-align:left">半结构化数据和非结构化数据</td>
-<td style="text-align:left">取决于 DBaaS</td>
 </tr>
 <tr>
 <td style="text-align:left">数据使用模式</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">随机读写操作</li><li style="margin:0px; padding:0px">顺序读写操作</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">随机读写操作</li><li style="margin:0px; padding:0px">写密集型工作负载</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">读密集型工作负载</li><li style="margin:0px; padding:0px">很少或没有写操作</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">读写密集型工作负载</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">访问</td>
 <td style="text-align:left">通过已安装卷上的文件系统</td>
 <td style="text-align:left">通过已安装卷上的文件系统</td>
-<td style="text-align:left">通过已安装卷（插件）上的文件系统或通过应用程序中的 REST API</td>
-<td style="text-align:left">通过应用程序中的 REST API</td>
 </tr>
 <tr>
 <td style="text-align:left">支持的 Kubernetes 访问写操作</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">不适用，因为是从应用程序直接访问</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">性能</td>
 <td style="text-align:left">由于分配了 IOPS 和大小，因此可预测。IOPS 在访问卷的 pod 之间共享。</td>
 <td style="text-align:left">由于分配了 IOPS 和大小，因此可预测。IOPS 不在 pod 之间共享。</td>
-<td style="text-align:left">对于读操作，性能高。对于写操作，性能不可预测。</td>
-<td style="text-align:left">如果部署到应用程序所在的数据中心，那么性能高。</td>
 </tr>
 <tr>
 <td style="text-align:left">一致性</td>
 <td style="text-align:left">强</td>
 <td style="text-align:left">强</td>
-<td style="text-align:left">最终</td>
-<td style="text-align:left">取决于 DBaaS</td>
 </tr>
 <tr>
 <td style="text-align:left">耐久性</td>
 <td style="text-align:left">高</td>
-<td style="text-align:left">高</td>
-<td style="text-align:left">数据切片分散在存储节点集群上时，耐久性非常高。每个节点只存储一部分数据。</td>
 <td style="text-align:left">高</td>
 </tr>
 <tr>
 <td style="text-align:left">弹性</td>
 <td style="text-align:left">中等，因为特定于数据中心。File Storage 服务器由 IBM 通过冗余联网进行集群。</td>
 <td style="text-align:left">中等，因为特定于数据中心。Block Storage 服务器由 IBM 通过冗余联网进行集群。</td>
-<td style="text-align:left">数据切片分散在 3 个专区或区域时，弹性高。仅在单个专区中设置时，弹性中等。</td>
-<td style="text-align:left">取决于 DBaaS 和设置。</td>
 </tr>
 <tr>
 <td style="text-align:left">可用性</td>
 <td style="text-align:left">中等，因为特定于数据中心。</td>
 <td style="text-align:left">中等，因为特定于数据中心。</td>
-<td style="text-align:left">高，因为跨专区或区域进行分布。</td>
-<td style="text-align:left">如果设置了多个实例，可用性为高。</td>
 </tr>
 <tr>
 <td style="text-align:left">可扩展性</td>
 <td style="text-align:left">难以扩展到数据中心之外。无法更改现有存储层。</td>
 <td style="text-align:left">难以扩展到数据中心之外。无法更改现有存储层。</td>
-<td style="text-align:left">轻松缩放。</td>
-<td style="text-align:left">轻松缩放。</td>
 </tr>
 <tr>
 <td style="text-align:left">加密</td>
 <td style="text-align:left">静态</td>
-<td style="text-align:left">静态</td>
-<td style="text-align:left">动态和静态</td>
 <td style="text-align:left">静态</td>
 </tr>
 <tr>
 <td style="text-align:left">常见用例</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">海量或单个文件存储</li><li style="margin:0px; padding:0px">文件在单专区集群中共享</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">有状态集</li><li style="margin:0px; padding:0px">运行自己的数据库时备份存储器</li><li style="margin:0px; padding:0px">高性能访问单个 pod</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">地理分布式数据</li><li style="margin:0px; padding:0px">静态大数据</li><li style="margin:0px; padding:0px">静态多媒体内容</li><li style="margin:0px; padding:0px">Web 应用程序</li><li style="margin:0px; padding:0px">备份</li><li style="margin:0px; padding:0px">归档</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">关系数据库和非关系数据库</li><li style="margin:0px; padding:0px">地理分布式数据</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">非理想用例</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">地理分布式数据</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">地理分布式数据</li><li style="margin:0px; padding:0px">跨多个应用程序实例共享数据</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">写密集型工作负载</li><li style="margin:0px; padding:0px">随机写操作</li><li style="margin:0px; padding:0px">增量数据更新</li><li style="margin:0px; padding:0px">事务数据库</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">设计为写入文件系统的应用程序</li></ul></td>
 </tr>
 </tbody>
 </table>
 
 
 
+## 多专区集群持久性存储选项的比较
+{: #persistent_storage_overview}
 
+如果您有多专区集群，请在以下持久性存储选项之间进行选择，以从跨专区分布的工作程序节点访问数据。
+{: shortdesc}
+
+持久性数据存储选项仅可用于标准集群。
+
+要改为将集群连接到内部部署数据库吗？请参阅[设置到集群的 VPN 连接](/docs/containers?topic=containers-vpn#vpn)。
+{: tip}
+
+下图显示了 {{site.data.keyword.containerlong_notm}} 中用于在多专区集群中永久存储数据并使数据高度可用的选项。您可以在单专区集群中使用这些选项，但可能无法获得应用程序所需的高可用性优点。
+
+<img src="images/cs_storage_options_multizone.png" alt="多专区集群中持久性存储器的高可用性选项"/>
+
+<table>
+<thead>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">Object</th>
+<th style="text-align:left">SDS (Portworx)</th>
+<th style="text-align:left">{{site.data.keyword.Bluemix_notm}} 数据库</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">支持多专区</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:left">理想的数据类型</td>
+<td style="text-align:left">半结构化数据和非结构化数据</td>
+<td style="text-align:left">所有</td>
+<td style="text-align:left">取决于 DBaaS</td>
+</tr>
+<tr>
+<td style="text-align:left">数据使用模式</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">读密集型工作负载</li><li style="margin:0px; padding:0px">很少或没有写操作</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">写密集型工作负载</li><li style="margin:0px; padding:0px">随机读写操作</li><li style="margin:0px; padding:0px">顺序读写操作</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">读写密集型工作负载</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">访问</td>
+<td style="text-align:left">通过已安装卷（插件）上的文件系统或通过应用程序中的 REST API</td>
+<td style="text-align:left">通过已安装卷上的文件系统或 NFS 客户机来访问卷</td>
+<td style="text-align:left">通过应用程序中的 REST API</td>
+</tr>
+<tr>
+<td style="text-align:left">支持的 Kubernetes 访问写操作</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left">所有</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">不适用，因为是从应用程序直接访问</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">性能</td>
+<td style="text-align:left">对于读操作，性能高。由于在使用非 SDS 机器时分配了 IOPS 和大小，因此可预测。</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">使用 SDS 机器时，顺序读写操作的性能接近于裸机。</li><li style="margin:0px; padding:0px">提供[概要文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) 来运行高性能数据库</li><li style="margin:0px; padding:0px">可以创建具有不同性能概要文件的存储层，供应用程序从中选择概要文件。</li></ul> </td>
+<td style="text-align:left">如果部署到应用程序所在的数据中心，那么性能高。</td>
+</tr>
+<tr>
+<td style="text-align:left">一致性</td>
+<td style="text-align:left">最终</td>
+<td style="text-align:left">强</td>
+<td style="text-align:left">取决于 DBaaS</td>
+</tr>
+<tr>
+<td style="text-align:left">耐久性</td>
+<td style="text-align:left">数据切片分散在存储节点集群上时，耐久性非常高。每个节点只存储一部分数据。</td>
+<td style="text-align:left">非常高，因为在任何时候都维护数据的三个副本。</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left">弹性</td>
+<td style="text-align:left">数据切片分散在 3 个专区或区域时，弹性高。仅在单个专区中设置时，弹性中等。</td>
+<td style="text-align:left">设置为在 3 个专区中进行复制时，弹性高。仅在单个专区中存储数据时，弹性中等。</td>
+<td style="text-align:left">取决于 DBaaS 和设置。</td>
+</tr>
+<tr>
+<td style="text-align:left">可用性</td>
+<td style="text-align:left">高，因为跨专区或区域进行分布。</td>
+<td style="text-align:left">在跨不同专区的 3 个工作程序节点中复制数据时，可用性高。</td>
+<td style="text-align:left">如果设置了多个实例，可用性为高。</td>
+</tr>
+<tr>
+<td style="text-align:left">可扩展性</td>
+<td style="text-align:left">自动缩放</td>
+<td style="text-align:left">通过调整卷大小来提高卷容量。要增加总体存储层容量，必须添加工作程序节点或远程块存储器。这两种场景都需要用户来监视容量。</td>
+<td style="text-align:left">自动缩放</td>
+</tr>
+<tr>
+<td style="text-align:left">加密</td>
+<td style="text-align:left">动态和静态</td>
+<td style="text-align:left">自带密钥通过 {{site.data.keyword.keymanagementservicelong_notm}} 来保护动态和静态数据。</td>
+<td style="text-align:left">静态</td>
+</tr>
+<tr>
+<td style="text-align:left">常见用例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">地理分布式数据</li><li style="margin:0px; padding:0px">静态大数据</li><li style="margin:0px; padding:0px">静态多媒体内容</li><li style="margin:0px; padding:0px">Web 应用程序</li><li style="margin:0px; padding:0px">备份</li><li style="margin:0px; padding:0px">归档</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">有状态集</li><li style="margin:0px; padding:0px">地理分布式数据</li><li style="margin:0px; padding:0px">跨多个云提供者运行应用程序时的常用存储解决方案</li><li style="margin:0px; padding:0px">运行自己的数据库时备份存储器</li><li style="margin:0px; padding:0px">高性能访问单个 pod</li><li style="margin:0px; padding:0px">跨多个 pod 和工作程序节点的共享存储器访问</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">关系数据库和非关系数据库</li><li style="margin:0px; padding:0px">地理分布式数据</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">非理想用例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">写密集型工作负载</li><li style="margin:0px; padding:0px">随机写操作</li><li style="margin:0px; padding:0px">增量数据更新</li><li style="margin:0px; padding:0px">事务数据库</li></ul></td>
+<td style="text-align:left">不适用</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">设计为写入文件系统的应用程序</li></ul></td>
+</tr>
+</tbody>
+</table>

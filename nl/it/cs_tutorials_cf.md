@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # Esercitazione: Migrazione di un'applicazione da Cloud Foundry a un cluster
 {: #cf_tutorial}
 
@@ -28,26 +31,33 @@ Puoi prendere un'applicazione che hai precedentemente distribuito utilizzando Cl
 
 
 ## Obiettivi
+{: #cf_objectives}
 
 - Imparare il processo generale di distribuzione delle applicazioni presenti nei contenitori in un cluster Kubernetes.
 - Creare un Dockerfile dal tuo codice applicazione per creare un'immagine del contenitore.
 - Distribuire un contenitore proveniente da tale immagine in un cluster Kubernetes.
 
 ## Tempo richiesto
+{: #cf_time}
+
 30 minuti
 
 ## Destinatari
+{: #cf_audience}
+
 Questa esercitazione è progettata per gli sviluppatori dell'applicazione Cloud Foundry.
 
 ## Prerequisiti
+{: #cf_prereqs}
 
-- [Crea un registro delle immagini privato in {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
+- [Crea un registro delle immagini privato in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-index).
 - [Crea un
-cluster](cs_clusters.html#clusters_ui).
-- [Indirizza la tua CLI al cluster](cs_cli_install.html#cs_cli_configure).
+cluster](/docs/containers?topic=containers-clusters#clusters_ui).
+- [Indirizza la tua CLI al cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Assicurati di disporre delle seguenti politiche di accesso {{site.data.keyword.Bluemix_notm}} IAM per {{site.data.keyword.containerlong_notm}}:
-    - [Qualsiasi ruolo della piattaforma](cs_users.html#platform)
-- [Acquisisci informazioni sulla terminologia Docker e Kubernetes](cs_tech.html).
+    - [Qualsiasi ruolo della piattaforma](/docs/containers?topic=containers-users#platform)
+    - Il ruolo del servizio [**Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform)
+- [Acquisisci informazioni sulla terminologia Docker e Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
 
 
 <br />
@@ -55,6 +65,7 @@ cluster](cs_clusters.html#clusters_ui).
 
 
 ## Lezione 1: Scarica il codice dell'applicazione
+{: #cf_1}
 
 Tieni il tuo codice pronto per l'utilizzo. Non hai ancora il codice? Puoi scaricare il codice iniziale da utilizzare in questa esercitazione.
 {: shortdesc}
@@ -80,7 +91,7 @@ Tieni il tuo codice pronto per l'utilizzo. Non hai ancora il codice? Puoi scaric
 
     c. Dal passo 1 nelle istruzioni della console, fai clic su **DOWNLOAD STARTER CODE**.
 
-    d. Estrai il file .zip e salvane il contenuto nella tua directory `cf-py`.
+    d. Estrai il file `.zip` e salvane il contenuto nella tua directory `cf-py`.
 
 Il tuo codice applicazione è pronto per essere inserito nel contenitore!
 
@@ -90,6 +101,7 @@ Il tuo codice applicazione è pronto per essere inserito nel contenitore!
 
 
 ## Lezione 2: Creazione di un'immagine Docker con il tuo codice applicazione
+{: #cf_2}
 
 Crea un Dockerfile che includa il tuo codice applicazione e le configurazioni necessarie per il tuo contenitore. Quindi, crea un'immagine Docker da tale Dockerfile e inseriscila nel tuo registro delle immagini privato.
 {: shortdesc}
@@ -178,6 +190,7 @@ contiene il Dockerfile, immetti un punto (.). Altrimenti, utilizza il percorso r
 
 
 ## Lezione 3: Distribuzione di un contenitore dalla propria immagine
+{: #cf_3}
 
 Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 {: shortdesc}
@@ -185,7 +198,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 1. Crea un file YAML di configurazione denominato `cf-py.yaml` e aggiorna `<registry_namespace>` con il nome del tuo registro delle immagini privato. Questo file di configurazione definisce una distribuzione del contenitore dall'immagine che hai creato nella lezione precedente e un servizio per esporre l'applicazione al pubblico.
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -258,7 +271,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
     a.  Ottieni l'indirizzo IP pubblico per il nodo di lavoro nel cluster.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -266,7 +279,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 
@@ -274,11 +287,11 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
     <img src="images/python_flask.png" alt="Un'acquisizione schermo dell'applicazione Python Flask del contenitore tipo distribuita." />
 
-5.  [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard).
+5.  [Avvia il dashboard Kubernetes](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Se selezioni il tuo cluster nella [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
+    Se selezioni il tuo cluster nella [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
     {: tip}
 
 6. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato.
 
-Congratulazioni! La tua applicazione è stata distribuita al contenitore!
+Ottimo lavoro! La tua applicazione è stata distribuita al contenitore!

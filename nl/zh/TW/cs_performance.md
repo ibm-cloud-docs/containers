@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -33,14 +37,14 @@ lastupdated: "2018-12-05"
 如果您具有特定的效能最佳化需求，則可以變更工作者節點上 Linux Kernel `sysctl` 參數的預設值。
 {: shortdesc}
 
-系統會以最佳化核心效能來自動佈建工作者節點，但您可以藉由將自訂 [Kubernetes `DaemonSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 物件套用至叢集來變更預設值。DaemonSet 會變更所有現有工作者節點的設定，並將這些設定套用至叢集裡所佈建的任何新工作者節點。不影響任何 Pod。
+系統會以最佳化核心效能來自動佈建工作者節點，但您可以藉由將自訂 [Kubernetes `DaemonSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 物件套用至叢集來變更預設值。常駐程式集會變更所有現有工作者節點的設定，並將這些設定套用至叢集中所佈建的任何新工作者節點。不影響任何 Pod。
 
-您必須具有叢集的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)，才能執行範例特許 initContainer。在起始設定用於部署的容器之後，就會捨棄這些專用權。
+您必須具有所有名稱空間的 [**Manager** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)，才能執行範例特許 `initContainer`。在起始設定用於部署的容器之後，就會捨棄這些專用權。
 {: note}
 
-1. 將下列 DaemonSet 儲存在名為 `worker-node-kernel-settings.yaml` 的檔案中。在 `spec.template.spec.initContainers` 區段中，新增您要調整的 `sysctl` 參數的欄位和值。此範例 DaemonSet 會透過 `net.core.somaxconn` 設定來變更環境中允許的預設連線數上限，以及透過 `net.ipv4.ip_local_port_range` 設定來變更暫時埠範圍。
+1. 將下列常駐程式集儲存在名為 `worker-node-kernel-settings.yaml` 的檔案中。在 `spec.template.spec.initContainers` 區段中，新增您要調整的 `sysctl` 參數的欄位和值。此範例常駐程式集會透過 `net.core.somaxconn` 設定來變更環境中允許的預設連線數上限，以及透過 `net.ipv4.ip_local_port_range` 設定來變更暫時埠範圍。
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: kernel-optimization
@@ -93,7 +97,7 @@ lastupdated: "2018-12-05"
     ```
     {: codeblock}
 
-2. 將 DaemonSet 套用至您的工作者節點。會立即套用變更。
+2. 將常駐程式集套用至工作者節點。會立即套用變更。
     ```
     kubectl apply -f worker-node-kernel-settings.yaml
     ```
@@ -103,13 +107,13 @@ lastupdated: "2018-12-05"
 
 若要使工作者節點的 `sysctl` 參數回復至 {{site.data.keyword.containerlong_notm}} 所設定的預設值：
 
-1. 刪除 DaemonSet。即會移除套用自訂設定的 initContainers。
+1. 刪除常駐程式集。即會移除套用自訂設定的 `initContainers`。
     ```
     kubectl delete ds kernel-optimization
     ```
     {: pre}
 
-2. [將叢集裡的所有工作者節點重新開機](cs_cli_reference.html#cs_worker_reboot)。工作者節點已回到線上，並已套用預設值。
+2. [將叢集裡的所有工作者節點重新開機](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)。工作者節點已回到線上，並已套用預設值。
 
 <br />
 
@@ -120,11 +124,11 @@ lastupdated: "2018-12-05"
 如果您具有特定的效能工作負載需求，則可以變更 Pod 網路名稱空間上 Linux Kernel `sysctl` 參數的預設值。
 {: shortdesc}
 
-若要將應用程式 Pod 的核心設定最佳化，您可以將 [initContainer ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 修補程式插入至每個部署的 `pod/ds/rs/deployment` YAML 中。initContainer 會新增至您要將效能最佳化的 Pod 網路名稱空間中的每一個應用程式部署。
+若要將應用程式 Pod 的核心設定最佳化，您可以將 [`initContainer ` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 修補程式插入至每個部署的 `pod/ds/rs/deployment` YAML 中。`initContainer` 會新增至您要將效能最佳化的 Pod 網路名稱空間中的每個應用程式部署。
 
-開始之前，請確定您具有叢集的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)，才能執行範例特許 initContainer。在起始設定用於部署的容器之後，就會捨棄這些專用權。
+開始之前，請確定您具有所有名稱空間的 [**Manager** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)，才能執行範例特許 `initContainer`。在起始設定用於部署的容器之後，就會捨棄這些專用權。
 
-1. 將下列 initContainer 修補程式儲存在名稱為 `pod-patch.yaml` 的檔案中，並新增您要調整的 `sysctl` 參數的欄位和值。此範例 initContainer 會透過 `net.core.somaxconn` 設定來變更環境中允許的預設連線數上限，以及透過 `net.ipv4.ip_local_port_range` 設定來變更暫時埠範圍。
+1. 將下列 `initContainer` 修補程式儲存在名為 `pod-patch.yaml` 的檔案中，並新增您要調整的 `sysctl` 參數的欄位和值。此範例 `initContainer` 會透過 `net.core.somaxconn` 設定來變更環境中允許的預設連線數上限，以及透過 `net.ipv4.ip_local_port_range` 設定來變更暫時埠範圍。
     ```
     spec:
       template:
@@ -161,7 +165,7 @@ lastupdated: "2018-12-05"
 
 度量提供者 Pod 也有一個 `nanny` 容器，可以調整 `metrics-server` 或 `heapster` 主要容器的資源要求及限制，以回應叢集裡的工作者節點數目。您可以藉由編輯度量提供者的 ConfigMap 來變更預設資源。
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  開啟叢集度量提供者 Configmap YAML。
     *  若為 `metrics-server`，請執行下列指令：
@@ -174,8 +178,8 @@ lastupdated: "2018-12-05"
        kubectl get configmap heapster-config -n kube-system -o yaml
        ```
        {: pre}
-輸出範例：
-        ```
+    輸出範例：
+    ```
     apiVersion: v1
     data:
       NannyConfiguration: |-

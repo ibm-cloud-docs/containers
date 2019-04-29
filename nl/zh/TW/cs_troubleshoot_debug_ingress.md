@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, nginx, ingress controller
+
+subcollection: containers
 
 ---
 
@@ -34,10 +38,43 @@ lastupdated: "2018-12-05"
 確定您只在一個 Ingress 資源中定義主機。如果在多個 Ingress 資源中定義一個主機，則 ALB 可能不會適當地轉遞資料流量，而且您可能會遭遇錯誤。
 {: tip}
 
-開始之前，請確定您具有下列 [{{site.data.keyword.Bluemix_notm}} IAM 存取原則](cs_users.html#platform)：
+開始之前，請確定您具有下列 [{{site.data.keyword.Bluemix_notm}} IAM 存取原則](/docs/containers?topic=containers-users#platform)：
   - 叢集的**編輯者**或**管理者**平台角色
+  - **撰寫者**或**管理員**服務角色
 
-## 步驟 1：檢查 Ingress 部署及 ALB Pod 日誌中的錯誤訊息
+## 步驟 1：在 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 中執行 Ingress 測試
+
+疑難排解時，您可以使用 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 來執行 Ingress 測試，並從叢集中收集相關的 Ingress 資訊。若要使用除錯工具，請安裝 [`ibmcloud-iks-debug` Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
+{: shortdesc}
+
+
+1. [在叢集中設定 Helm，建立 Tiller 的服務帳戶，並將 `ibm` 儲存庫新增至 Helm 實例](/docs/containers?topic=containers-integrations#helm)。
+
+2. 將 Helm 圖表安裝至您的叢集。
+        
+  ```
+  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  ```
+  {: pre}
+
+
+3. 啟動 Proxy 伺服器以顯示除錯工具介面。
+  ```
+  kubectl proxy --port 8080
+  ```
+  {: pre}
+
+4. 在 Web 瀏覽器中，開啟除錯工具介面 URL： http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
+
+5. 選取測試的 **ingress** 群組。有些測試會檢查潛在警告、錯誤或問題，有些測試僅收集您在疑難排解時可以參照的資訊。如需每個測試的功能相關資訊，請按一下測試名稱旁邊的資訊圖示。
+
+6. 按一下**執行**。
+
+7. 檢查每個測試的結果。
+  * 如果有任何測試失敗，請按一下左手邊直欄中測試名稱旁的資訊圖示，以取得如何解決問題的相關資訊。
+  * 您也可以使用測試結果，其只在您於下列各節中對 Ingress 服務進行除錯時收集資訊。
+
+## 步驟 2：檢查 Ingress 部署及 ALB Pod 日誌中的錯誤訊息
 {: #errors}
 
 從檢查 Ingress 資源部署事件及 ALB Pod 日誌中的錯誤訊息開始。這些錯誤訊息可協助您找到失敗的主要原因，並在下列各節進一步除錯 Ingress 設定。
@@ -49,7 +86,7 @@ lastupdated: "2018-12-05"
     ```
     {: pre}
 
-    在輸出的 **Events** 區段中，您可能會看到關於您使用之 Ingress 資源或某些註釋中含有無效值的警告訊息。請檢查 [Ingress 資源配置文件](cs_ingress.html#public_inside_4)或[註釋文件](cs_annotations.html)。
+    在輸出的 **Events** 區段中，您可能會看到關於您使用之 Ingress 資源或某些註釋中含有無效值的警告訊息。請檢查 [Ingress 資源配置文件](/docs/containers?topic=containers-ingress#public_inside_4)或[註釋文件](/docs/containers?topic=containers-ingress_annotation)。
 
     ```
         Name:             myingress
@@ -112,7 +149,7 @@ lastupdated: "2018-12-05"
 
     4. 尋找 ALB 日誌中的錯誤訊息。
 
-## 步驟 2：連線測試 ALB 子網域及公用 IP 位址
+## 步驟 3：連線測試 ALB 子網域及公用 IP 位址
 {: #ping}
 
 請檢查 Ingress 子網域及 ALB 之公用 IP 位址的可用性。
@@ -135,7 +172,7 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-    * 如果公用 ALB 沒有 IP 位址，請參閱 [Ingress ALB 未在區域中部署](cs_troubleshoot_network.html#cs_multizone_subnet_limit)。
+    * 如果公用 ALB 沒有 IP 位址，請參閱 [Ingress ALB 未在區域中部署](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit)。
 
 2. 檢查 ALB IP 的性能。
 
@@ -145,10 +182,10 @@ lastupdated: "2018-12-05"
         ```
         {: pre}
 
-        * 如果 CLI 傳回逾時，而且您有保護工作者節點的自訂防火牆，請確定[防火牆](cs_troubleshoot_clusters.html#cs_firewall)中容許 ICMP。
+        * 如果 CLI 傳回逾時，而且您有保護工作者節點的自訂防火牆，請確定[防火牆](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)中容許 ICMP。
         * 如果沒有任何防火牆封鎖連線測試，但連線測試仍然執行逾時，則請[檢查 ALB Pod 的狀態](#check_pods)。
 
-    * 僅限多區域叢集：您可以使用 MZLB 性能檢查來判斷您 ALB IP 的狀態。如需 MZLB 的相關資訊，請參閱[多區域負載平衡器 (MZLB)](cs_ingress.html#planning)。MZLB 性能檢查僅適用於格式為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 之新 Ingress 子網域的叢集。如果您的叢集仍然使用舊格式 `<cluster_name>.<region>.containers.mybluemix.net`，則請[將單一區域叢集轉換成多區域](cs_clusters.html#add_zone)。您的叢集獲指派具有新格式的子網域，但也可以繼續使用較舊的子網域格式。或者，您可以訂購自動獲指派新子網域格式的新叢集。
+    * 僅限多區域叢集：您可以使用 MZLB 性能檢查來判斷您 ALB IP 的狀態。如需 MZLB 的相關資訊，請參閱[多區域負載平衡器 (MZLB)](/docs/containers?topic=containers-ingress#planning)。MZLB 性能檢查僅適用於格式為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 之新 Ingress 子網域的叢集。如果您的叢集仍然使用舊格式 `<cluster_name>.<region>.containers.mybluemix.net`，則請[將單一區域叢集轉換成多區域](/docs/containers?topic=containers-clusters#add_zone)。您的叢集獲指派具有新格式的子網域，但也可以繼續使用較舊的子網域格式。或者，您可以訂購自動獲指派新子網域格式的新叢集。
 
     下列 HTTP cURL 指令使用 `albhealth` 主機，其由 {{site.data.keyword.containerlong_notm}} 配置成傳回 ALB IP 的 `healthy` 或 `unhealthy` 狀態。
         ```
@@ -165,7 +202,7 @@ lastupdated: "2018-12-05"
 
 3. 取得 IBM 提供的 Ingress 子網域。
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
@@ -190,8 +227,8 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-## 步驟 3：檢查網域對映及 Ingress 資源配置
-{: #config}
+## 步驟 4：檢查網域對映及 Ingress 資源配置
+{: #ts_ingress_config}
 
 1. 如果您使用自訂網域，請驗證您已使用 DNS 提供者將自訂網域對映至 IBM 提供的子網域或 ALB 的公用 IP 位址。請注意，最好使用 CNAME，因為 IBM 會在 IBM 子網域上提供自動性能檢查，並從 DNS 回應移除任何失敗的 IP。
     * IBM 提供的子網域：確認已將自訂網域對映至「標準名稱記錄 (CNAME)」中叢集的 IBM 所提供子網域。
@@ -201,7 +238,7 @@ lastupdated: "2018-12-05"
         {: pre}
 
         輸出範例：
-        ```
+    ```
         www.my-domain.com is an alias for mycluster-12345.us-south.containers.appdomain.cloud
         mycluster-12345.us-south.containers.appdomain.cloud has address 169.46.52.222
         mycluster-12345.us-south.containers.appdomain.cloud has address 169.62.196.238
@@ -215,7 +252,7 @@ lastupdated: "2018-12-05"
         {: pre}
 
         輸出範例：
-        ```
+    ```
         www.my-domain.com has address 169.46.52.222
         www.my-domain.com has address 169.62.196.238
         ```
@@ -229,9 +266,9 @@ lastupdated: "2018-12-05"
 
     1. 確定您只在一個 Ingress 資源中定義主機。如果在多個 Ingress 資源中定義一個主機，則 ALB 可能不會適當地轉遞資料流量，而且您可能會遭遇錯誤。
 
-    2. 確認子網域及 TLS 憑證正確無誤。若要尋找 IBM 提供的 Ingress 子網域及 TLS 憑證，請執行 `ibmcloud ks cluster-get <cluster_name_or_ID>`。
+    2. 確認子網域及 TLS 憑證正確無誤。若要尋找 IBM 提供的 Ingress 子網域及 TLS 憑證，請執行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`。
 
-    3.  確定應用程式接聽與 Ingress 之 **path** 區段中配置相同的路徑。如果您的應用程式設定成接聽根路徑，請使用 `/` 作為路徑。如果必須將此路徑的送入資料流量遞送至應用程式所接聽的不同路徑，請使用 [rewrite paths](cs_annotations.html#rewrite-path) 註釋。
+    3.  確定應用程式接聽與 Ingress 之 **path** 區段中配置相同的路徑。如果您的應用程式設定成接聽根路徑，請使用 `/` 作為路徑。如果必須將此路徑的送入資料流量遞送至應用程式所接聽的不同路徑，請使用 [rewrite paths](/docs/containers?topic=containers-ingress_annotation#rewrite-path) 註釋。
 
     4. 視需要編輯資源配置 YAML。當您關閉編輯器時，即會儲存並自動套用您的變更。
         ```
@@ -279,7 +316,7 @@ lastupdated: "2018-12-05"
         ```
         {: pre}
 
-        確認 ALB Pod 的範例輸出已配置正確的性能檢查主機名稱 `albhealth.<domain>`：
+        確認 ALB Pod 的輸出範例已配置正確的性能檢查主機名稱 `albhealth.<domain>`:
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```
@@ -298,7 +335,7 @@ lastupdated: "2018-12-05"
         {: pre}
 
         輸出範例：
-        ```
+    ```
         #server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud
         ```
         {: screen}
@@ -349,7 +386,7 @@ lastupdated: "2018-12-05"
     {: pre}
 
     * 如果已正確配置所有項目，則會從應用程式取得預期回應。
-    * 如果您在回應中收到錯誤，則您的應用程式或只套用至此特定 ALB 的配置中可能發生錯誤。請檢查您的應用程式碼、[Ingress 資源配置檔](cs_ingress.html#public_inside_4)，或您只套用至此 ALB 的任何其他配置。
+    * 如果您在回應中收到錯誤，則您的應用程式或只套用至此特定 ALB 的配置中可能發生錯誤。請檢查您的應用程式碼、[Ingress 資源配置檔](/docs/containers?topic=containers-ingress#public_inside_4)，或您只套用至此 ALB 的任何其他配置。
 
 7. 完成除錯之後，請在 ALB Pod 上還原性能檢查。針對每個 ALB Pod，重複這些步驟。
   1. 登入 ALB Pod，並移除 `server_name` 中的 `#`。
@@ -387,18 +424,18 @@ lastupdated: "2018-12-05"
 
 
 ## 取得協助及支援
-{: #ts_getting_help}
+{: #ingress_getting_help}
 
 叢集仍有問題？
 {: shortdesc}
 
 -  在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
--   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
+-   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/status?selected=status)。
 -   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
     {: tip}
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
     -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
-    -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
--   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
+    -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)。
+-   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。您也可以使用 [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)，來收集及匯出叢集中的相關資訊，以與 IBM 支援中心共用。
 {: tip}
 

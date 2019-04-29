@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -17,6 +21,8 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
+
 
 # 地域とゾーン
 {: #regions-and-zones}
@@ -42,7 +48,7 @@ _{{site.data.keyword.containerlong_notm}} 地域とゾーン_
 | 英国南部 | ロンドン |
 | 米国東部 (標準クラスターのみ) | ワシントン DC |
 | 米国南部 | ダラス |
-{: caption="表: Kubernetes Service のサポート対象地域および対応する IBM Cloud のロケーション" caption-side="top"}
+{: caption="Kubernetes Service のサポート対象地域および対応する IBM Cloud のロケーション" caption-side="top"}
 
 <br />
 
@@ -53,41 +59,62 @@ _{{site.data.keyword.containerlong_notm}} 地域とゾーン_
 {{site.data.keyword.Bluemix_notm}} のロケーション(地域とも呼ばれる) を使用して、{{site.data.keyword.Bluemix_notm}} サービス間のリソースを編成できます。 例えば、同じロケーションの {{site.data.keyword.registryshort_notm}} に保管されるプライベート Docker イメージを使用して、Kubernetes クラスターを作成することができます。
 {:shortdesc}
 
-現在どの {{site.data.keyword.Bluemix_notm}} ロケーションにいるのかを確認するには、`ibmcloud info` を実行し、**Region** フィールドを確認します。
+グローバル API エンドポイントにログインするときに、{{site.data.keyword.Bluemix_notm}} 地域を指定できます。使用可能な地域をリストするには、`ibmcloud regions` を実行します。現在どの {{site.data.keyword.Bluemix_notm}} ロケーションにいるのかを確認するには、`ibmcloud target` を実行し、**Region** フィールドを確認します。 地域を指定しない場合は、地域を選択するプロンプトが表示されます。
 
-{{site.data.keyword.Bluemix_notm}} のロケーションには、ログイン時に地域の API エンドポイントを指定することによってアクセスできます。 地域のエンドポイントを指定しない場合、最も近い地域に自動的にログインします。
+例えば、ダラス (`us-south`) 地域のグローバル API エンドポイントにログインするには、以下を実行します。
+```
+ibmcloud login -a https://cloud.ibm.com -r us-south
+```
+{: pre}
 
-例えば、以下のコマンドを使用して {{site.data.keyword.Bluemix_notm}} 地域の API エンドポイントにログインできます。
+グローバル API エンドポイントにログインしてから地域を選択するには、以下を実行します。
+```
+ibmcloud login -a https://cloud.ibm.com
+```
+{: pre}
 
-  * ダラス
-      ```
-      ibmcloud login -a api.ng.bluemix.net
-      ```
-      {: pre}
+出力例:
+```
+API endpoint: cloud.ibm.com
 
-  * ワシントン DC
-      ```
-      ibmcloud login -a api.us-east.bluemix.net
-      ```
-      {: pre}
+Get One Time Code from https://identity-2.eu-central.iam.cloud.ibm.com/identity/passcode to proceed.
+Open the URL in the default browser? [Y/n]> y
+One Time Code > 
+Authenticating...
+OK
 
-  * シドニーと東京
-      ```
-      ibmcloud login -a api.au-syd.bluemix.net
-      ```
-      {: pre}
+Select an account:
+1. MyAccount (00a11aa1a11aa11a1111a1111aaa11aa) <-> 1234567
+2. TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
+Enter a number> 2
+Targeted account TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
 
-  * フランクフルト
-      ```
-      ibmcloud login -a api.eu-de.bluemix.net
-      ```
-      {: pre}
 
-  * ロンドン
-      ```
-      ibmcloud login -a api.eu-gb.bluemix.net
-      ```
-      {: pre}
+Targeted resource group default
+
+Select a region (or press enter to skip):
+1. au-syd
+2. jp-tok
+3. eu-de
+4. eu-gb
+5. us-south
+6. us-east
+Enter a number> 5
+Targeted region us-south
+
+                      
+API endpoint:      https://cloud.ibm.com   
+Region:            us-south   
+User:              first.last@email.com   
+Account:           TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321  
+Resource group:    default   
+CF API endpoint:      
+Org:                  
+Space:                
+
+...
+```
+{: screen}
 
 <br />
 
@@ -109,7 +136,7 @@ _{{site.data.keyword.containerlong_notm}} 地域とゾーン_
   * 米国東部 (標準クラスターのみ)
   * 米国南部
 
-1 つのグローバルなエンドポイント `https://containers.bluemix.net/v1` を使用して、{{site.data.keyword.containerlong_notm}} にアクセスできます。
+1 つのグローバルなエンドポイント `https://containers.cloud.ibm.com/v1` を使用して、{{site.data.keyword.containerlong_notm}} にアクセスできます。
 * 現在自分が属する {{site.data.keyword.containerlong_notm}} 地域を確認するには、`ibmcloud ks region` を実行します。
 * 使用可能な地域とそのエンドポイントのリストを取得するには、`ibmcloud ks regions` を実行します。
 
@@ -126,7 +153,7 @@ _{{site.data.keyword.containerlong_notm}} 地域とゾーン_
   * ある地域で作成した {{site.data.keyword.Bluemix_notm}} サービスまたはプライベート Docker イメージを、別の地域の {{site.data.keyword.containerlong_notm}} で使用したい。
   * ログインしているデフォルトの {{site.data.keyword.Bluemix_notm}} 地域とは別の地域のクラスターにアクセスしたい。
 
-地域をすぐに切り替えるには、[`ibmcloud ks region-set`](cs_cli_reference.html#cs_region-set) を実行します。
+地域をすぐに切り替えるには、[`ibmcloud ks region-set`](/docs/containers?topic=containers-cs_cli_reference#cs_region-set) を実行します。
 
 ### {{site.data.keyword.containerlong_notm}} の API コマンドの使用
 {: #containers_api}
@@ -136,7 +163,7 @@ _{{site.data.keyword.containerlong_notm}} 地域とゾーン_
 
 `GET /clusters` API の例を示します。
   ```
-  GET https://containers.bluemix.net/v1/clusters
+  GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
@@ -145,7 +172,7 @@ _{{site.data.keyword.containerlong_notm}} 地域とゾーン_
 グローバル・エンドポイントと共に API を使用するには、すべての要求で、`X-Region` ヘッダーによって地域名を渡します。 使用可能な地域をリストするには、`ibmcloud ks regions` を実行します。
 {: tip}
 
-API コマンドの資料を参照するには、[https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/) を表示してください。
+API コマンドの資料を参照するには、[https://containers.cloud.ibm.com/swagger-api/](https://containers.cloud.ibm.com/swagger-api/) を表示してください。
 
 ## {{site.data.keyword.containerlong_notm}} のゾーン
 {: #zones}
@@ -153,8 +180,8 @@ API コマンドの資料を参照するには、[https://containers.bluemix.net
 ゾーンとは、各 {{site.data.keyword.Bluemix_notm}} 地域で使用できる物理データ・センターのことです。 地域は、ゾーンを編成するための概念的なツールであり、さまざまな国のゾーン (データ・センター) を含めることができます。 以下の表に、地域別に使用可能なゾーンを示します。
 {:shortdesc}
 
-* **複数ゾーンの大都市**: 複数ゾーンの大都市に作成されたクラスター内のワーカー・ノードは、複数のゾーンに分散されます。 さらに、Kubernetes バージョン 1.10 以降のクラスターを複数ゾーンの大都市に作成する場合、可用性の高いマスターは複数のゾーンに分散されます。
-* **単一ゾーンの都市**: 単一ゾーンの都市に作成されたクラスター内のワーカー・ノードは、1 つのゾーンにとどまります。 ワーカー・ノードを複数のゾーンに分散させることはできません。 可用性の高いマスターには、別々のホストに 3 つのレプリカを持ちますが、複数のゾーンには分散されません。
+* **複数ゾーンの大都市**: **シドニー (南アジア太平洋地域) 以外の**複数ゾーンの大都市にクラスターを作成した場合は、可用性の高い Kubernetes マスターのレプリカがゾーン間に自動的に分散されます。1 つのゾーンの障害からアプリを保護するために、ワーカー・ノードを複数のゾーンに分散させるという選択肢があります。
+* **単一ゾーンの都市**: 単一ゾーンの都市にクラスターを作成する場合は、複数のワーカー・ノードを作成できますが、それらを複数のゾーンに分散させることはできません。可用性の高いマスターには、別々のホストに 3 つのレプリカを持ちますが、複数のゾーンには分散されません。
 
 <table summary="この表は、利用可能なゾーンを地域別に示しています。行は左から右に読みます。1 列目は地域、2 列目は複数ゾーンの大都市、3 列目は単一ゾーンの都市です。">
 <caption>利用可能な単一ゾーンと複数ゾーン (地域別)。</caption>
@@ -174,9 +201,8 @@ API コマンドの資料を参照するには、[https://containers.bluemix.net
     </tr>
     <tr>
       <td>南アジア太平洋地域</td>
-      <td>なし</td>
-      <td><p>シドニー: syd01、syd04</p>
-      <p>メルボルン: mel01</p></td>
+      <td>シドニー: syd01、syd04、syd05</td>
+      <td>メルボルン: mel01</td>
     </tr>
     <tr>
       <td>中欧</td>
@@ -189,7 +215,7 @@ API コマンドの資料を参照するには、[https://containers.bluemix.net
     </tr>
     <tr>
       <td>英国南部</td>
-      <td>ロンドン: lon04、lon05、lon06 **注**: lon02 は lon05 に置き換えられました。 新規クラスターでは lon05 を使用する必要があります。lon05 のみで、ゾーン間での可用性の高いマスター・スプレッドがサポートされます。</td>
+      <td>ロンドン: lon04、lon05`*`、lon06</td>
       <td></td>
     </tr>
     <tr>
@@ -201,17 +227,20 @@ API コマンドの資料を参照するには、[https://containers.bluemix.net
     <tr>
       <td>米国南部</td>
       <td>ダラス: dal10、dal12、dal13</td>
-      <td><p>サンノゼ: sjc03、sjc04</p><p>サンパウロ: sao01</p></td>
+      <td><p>メキシコ: mex01</p><p>サンノゼ: sjc03、sjc04</p><p>サンパウロ: sao01</p></td>
     </tr>
   </tbody>
 </table>
 
+`*` lon02 は lon05 に置き換えられました。新規クラスターでは lon05 を使用する必要があります。lon05 のみで、ゾーン間での可用性の高いマスター・スプレッドがサポートされます。
+{: note}
+
 ### 単一ゾーンのクラスター
-{: #single_zone}
+{: #regions_single_zone}
 
 単一ゾーンのクラスターでは、クラスターのリソースは、クラスターがデプロイされたゾーンにとどまります。 以下の図は、米国東部の地域の例における単一ゾーン・クラスターのコンポーネントの関係を表しています。
 
-![クラスターのリソースが存在する場所について](/images/region-cluster-resources.png)
+<img src="/images/region-cluster-resources.png" width="650" alt="クラスターのリソースが存在する場所について" style="width:650px; border-style: none"/>
 
 _単一ゾーンのクラスターのリソースが存在する場所について_
 
@@ -222,16 +251,20 @@ _単一ゾーンのクラスターのリソースが存在する場所につい�
 3.  クラスターの管理操作 (`ibmcloud ks` コマンドの使用など) を開始すると、クラスターに関する基本情報 (名前、ID、ユーザー、コマンドなど) が地域のエンドポイントを介して転送されます。
 
 ### 複数ゾーン・クラスター
-{: #multizone}
+{: #regions_multizone}
 
 複数ゾーン・クラスターでは、マスター・ノードは複数ゾーン対応のゾーンにデプロイされ、クラスターのリソースは複数のゾーンに分散されます。
 
 1.  ワーカー・ノードは、クラスターの可用性を向上させるために、1 つの地域内の複数のゾーンに分散されます。 マスターは、クラスターをデプロイしたのと同じ複数ゾーン対応のゾーンにとどまります。 ローカル・コンテナーのオーケストレーション操作 (`kubectl` コマンドなど) を開始すると、地域エンドポイントを介してマスター・ノードとワーカー・ノードの間で情報が交換されます。
 
 2.  ストレージ、ネットワーキング、コンピュート、ポッドで実行されるアプリなど、他のクラスター・リソースは、さまざまな方法で複数ゾーン・クラスターにデプロイできます。 詳しくは、以下のトピックを参照してください。
-    * 複数ゾーン・クラスターで [ファイル・ストレージ](cs_storage_file.html#add_file)と[ブロック・ストレージ](cs_storage_block.html#add_block)をセットアップする
-    * [複数ゾーン・クラスターで LoadBalancer サービスを使用してアプリへのパブリック・アクセスまたはプライベート・アクセスを有効にする](cs_loadbalancer.html#multi_zone_config)
-    * [Ingress を使用してネットワーク・トラフィックを管理する](cs_ingress.html#planning)
-    * [アプリの可用性の向上](cs_app.html#increase_availability)
+    * 複数ゾーン・クラスターで [ファイル・ストレージ](/docs/containers?topic=containers-file_storage#add_file)と[ブロック・ストレージ](/docs/containers?topic=containers-block_storage#add_block)をセットアップする
+    * [複数ゾーン・クラスターで LoadBalancer サービスを使用してアプリへのパブリック・アクセスまたはプライベート・アクセスを有効にする](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+    * [Ingress を使用してネットワーク・トラフィックを管理する](/docs/containers?topic=containers-ingress#planning)
+    * [アプリの可用性の向上](/docs/containers?topic=containers-app#increase_availability)
 
-3.  クラスターの管理操作 ([`ibmcloud ks` コマンド](cs_cli_reference.html#cs_cli_reference)の使用など) を開始すると、クラスターに関する基本情報 (名前、ID、ユーザー、コマンドなど) が地域のエンドポイントを介して転送されます。
+3.  クラスターの管理操作 ([`ibmcloud ks` コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)の使用など) を開始すると、クラスターに関する基本情報 (名前、ID、ユーザー、コマンドなど) が地域のエンドポイントを介して転送されます。
+
+
+
+

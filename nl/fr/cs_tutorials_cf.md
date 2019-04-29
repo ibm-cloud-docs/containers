@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,34 +23,40 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # Tutoriel : Migration d'une application de Cloud Foundry vers un cluster
 {: #cf_tutorial}
 
-Vous pouvez prendre une application que vous avez déjà déployée avec Cloud Foundry et déployer le même code dans un conteneur vers un cluster Kubernetes dans {{site.data.keyword.containerlong_notm}}.
+Vous pouvez prendre une application que vous avez déjà déployée avec Cloud Foundry et déployer le même code dans un conteneur sur un cluster Kubernetes dans {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 
 ## Objectifs
+{: #cf_objectives}
 
 - Découvrir le processus général de déploiement d'applications dans des conteneurs sur un cluster Kubernetes.
 - Créer un fichier Dockerfile à partir du code de votre application pour générer une image de conteneur.
 - Déployer un conteneur à partir de cette image dans un cluster Kubernetes.
 
 ## Durée
+{: #cf_time}
+
 30 minutes
 
 ## Public
+{: #cf_audience}
+
 Ce tutoriel s'adresse aux développeurs d'applications Cloud Foundry.
 
-## Conditions prérequises
+## Prérequis
+{: #cf_prereqs}
 
-- [Créez un registre d'images privé dans {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
-- [Créez un cluster](cs_clusters.html#clusters_ui).
-- [Ciblez votre interface CLI sur le cluster](cs_cli_install.html#cs_cli_configure).
+- [Créez un registre d'images privé dans {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-index).
+- [Créez un cluster](/docs/containers?topic=containers-clusters#clusters_ui).
+- [Ciblez votre interface CLI sur le cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Vérifiez que vous disposez des règles d'accès {{site.data.keyword.Bluemix_notm}} IAM pour {{site.data.keyword.containerlong_notm}} :
-    - [N'importe quel rôle de plateforme](cs_users.html#platform)
-- [Familiarisez-vous avec la terminologie de Docker et Kubernetes](cs_tech.html).
+    - [N'importe quel rôle de plateforme](/docs/containers?topic=containers-users#platform)
+    - [Rôle de service **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform)
+- [Familiarisez-vous avec la terminologie de Docker et Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
 
 
 <br />
@@ -54,6 +64,7 @@ Ce tutoriel s'adresse aux développeurs d'applications Cloud Foundry.
 
 
 ## Leçon 1 : Téléchargement du code de l'application
+{: #cf_1}
 
 Obtenez votre code prêt à l'emploi. Vous n'avez pas encore de code ? Vous pouvez télécharger le code de démarrage à utiliser dans ce tutoriel.
 {: shortdesc}
@@ -65,21 +76,21 @@ Obtenez votre code prêt à l'emploi. Vous n'avez pas encore de code ? Vous pouv
   ```
   {: pre}
 
-2. Copiez le code de l'application et tous les fichiers associés dans le répertoire. Vous pouvez utiliser le code de votre propre application ou télécharger un conteneur boilerplate à partir du catalogue. Ce tutoriel utilise le conteneur boilerplate Python Flask. Vous pouvez toutefois utiliser les mêmes étapes de base avec un fichier Node.js, du code Java ou une application [Kitura](https://github.com/IBM-Cloud/Kitura-Starter).
+2. Copiez le code de l'application et tous les fichiers associés dans le répertoire. Vous pouvez utiliser le code de votre propre application ou télécharger un conteneur boilerplate à partir du catalogue. Ce tutoriel utilise le conteneur boilerplate Flask Python. Vous pouvez toutefois utiliser les mêmes étapes de base avec un fichier Node.js, du code Java ou une application [Kitura](https://github.com/IBM-Cloud/Kitura-Starter).
 
-    Pour télécharger le code d'application Python Flask :
+    Pour télécharger le code d'application Flask Python :
 
-    a. Dans le catalogue, à la section **Boilerplates**, cliquez sur **Python Flask**. Ce conteneur boilerplate comprend un environnement d'exécution pour les applications Python 2 et Python 3.
+    a. Dans le catalogue, à la section **Conteneurs boilerplate**, cliquez sur **Flask Python**. Ce conteneur boilerplate comprend un environnement d'exécution pour les applications Python 2 et Python 3.
 
-    b. Entrez le nom de l'application `cf-py-<name>` et cliquez sur **CREATE**. Pour accéder au code d'application du conteneur boilerplate, vous devez d'abord déployer l'application CF dans le cloud. Vous pouvez utiliser n'importe quel nom pour l'application. Si vous utilisez le nom indiqué dans l'exemple, remplacez `<name>` par un identificateur unique, par exemple `cf-py-msx`.
+    b. Entrez le nom de l'application `cf-py-<name>` et cliquez sur **CREER**. Pour accéder au code d'application du conteneur boilerplate, vous devez d'abord déployer l'application CF dans le cloud. Vous pouvez utiliser n'importe quel nom pour l'application. Si vous utilisez le nom indiqué dans l'exemple, remplacez `<name>` par un identificateur unique, par exemple `cf-py-msx`.
 
     **Attention** : n'utilisez pas d'informations personnelles dans les noms d'application, d'image de conteneur ou de ressource Kubernetes.
 
     A mesure que l'application est déployée, sont affichées des instructions pour le téléchargement, la modification et le redéploiement de votre application avec l'interface de ligne de commande.
 
-    c. Dans l'étape 1 des instructions de la console, cliquez sur **DOWNLOAD STARTER CODE**.
+    c. Dans l'étape 1 des instructions de la console, cliquez sur **TELECHARGER LE CODE DE DEMARRAGE**.
 
-    d. Extrayez le fichier .zip et sauvegardez son contenu dans le répertoire `cf-py`.
+    d. Extrayez le fichier `.zip` et sauvegardez son contenu dans votre répertoire `cf-py`.
 
 Votre code d'application est désormais prêt à être conteneurisé.
 
@@ -89,6 +100,7 @@ Votre code d'application est désormais prêt à être conteneurisé.
 
 
 ## Leçon 2 : Création d'une image Docker avec votre code d'application
+{: #cf_2}
 
 Créez un fichier Dockerfile incluant votre code d'application et les configurations nécessaires pour votre conteneur. Générez ensuite une image Docker depuis ce fichier Dockerfile et transférez-la à votre registre d'images privé.
 {: shortdesc}
@@ -175,6 +187,7 @@ Créez un fichier Dockerfile incluant votre code d'application et les configurat
 
 
 ## Leçon 3 : Déploiement d'un conteneur depuis votre image
+{: #cf_3}
 
 Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 {: shortdesc}
@@ -182,7 +195,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 1. Créez un fichier de configuration YAML nommé `cf-py.yaml` et mettez à jour `<registry_namespace>` avec le nom de votre registre d'images privé. Le fichier de configuration définit un déploiement de conteneur à partir de l'image que vous avez créée dans la leçon précédente et un service permettant d'exposer l'application au public.
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -255,7 +268,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
     a.  Identifiez l'adresse IP publique du noeud worker dans le cluster.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -263,19 +276,19 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 
     b. Ouvrez un navigateur et accédez à l'application via l'URL `http://<public_IP_address>:<NodePort>`. En utilisant les valeurs de l'exemple, l'URL est `http://169.xx.xxx.xxx:30872`. Vous pouvez communiquer cette URL à un collègue pour la tester, ou bien l'entrer dans le navigateur de votre téléphone portable pour constater que l'application est réellement accessible au public.
 
-    <img src="images/python_flask.png" alt="Capture d'écran de l'application de conteneur boilerplate Python Flask déployée." />
+    <img src="images/python_flask.png" alt="Capture d'écran de l'application de conteneur boilerplate Flask Python déployée." />
 
-5.  [Lancez le tableau de bord Kubernetes](cs_app.html#cli_dashboard).
+5.  [Lancez le tableau de bord Kubernetes](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Si vous sélectionnez votre cluster dans la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), vous pouvez cliquer sur le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
+    Si vous sélectionnez votre cluster dans la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), vous pouvez utiliser le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
     {: tip}
 
-6. Vous pouvez examiner dans l'onglet **Charges de travail** les ressources que vous avez créées.
+6. Dans l'onglet **Charges de travail**, vous pouvez examiner les ressources que vous avez créées.
 
-Félicitations ! Votre application est déployée dans un conteneur.
+Bien joué ! Votre application est déployée dans un conteneur.

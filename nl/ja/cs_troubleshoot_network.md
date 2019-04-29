@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -29,7 +33,10 @@ lastupdated: "2018-12-05"
 {{site.data.keyword.containerlong}} を使用する際は、ここに示すクラスターのネットワーキングのトラブルシューティング手法を検討してください。
 {: shortdesc}
 
-Ingress を介したアプリへの接続に問題が発生していますか? [Ingress のデバッグ](cs_troubleshoot_debug_ingress.html)をお試しください。
+Ingress を介したアプリへの接続に問題が発生していますか? [Ingress のデバッグ](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)をお試しください。
+{: tip}
+
+トラブルシューティングの際に、[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) を使用して、テストを実行し、クラスターからネットワーキング、Ingress、および strongSwan の関連情報を収集することができます。
 {: tip}
 
 ## ロード・バランサー・サービス経由でアプリに接続できない
@@ -51,13 +58,13 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 1.  標準クラスターをセットアップしたこと、クラスターが完全にデプロイされていること、また、ロード・バランサー・サービスの高可用性を確保するためにクラスターに 2 つ以上のワーカー・ノードがあることを確認します。
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  ibmcloud ks workers --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
     CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のマシン・タイプが表示されていることを確認します。
 
-2. バージョン 2.0 ロード・バランサーの場合: [ロード・バランサー 2.0 の前提条件](cs_loadbalancer.html#ipvs_provision)を満たしていることを確認します。
+2. バージョン 2.0 ロード・バランサーの場合: [ロード・バランサー 2.0 の前提条件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)を満たしていることを確認します。
 
 3. ロード・バランサー・サービスの構成ファイルが正しいことを確認します。
     * バージョン 2.0 ロード・バランサー:
@@ -81,7 +88,7 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 
         1. サービスのタイプとして **LoadBalancer** を定義したことを確認します。
         2. `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"` アノテーションを指定したことを確認します。
-        3. LoadBalancer サービスの `spec.selector` セクションの `<selector_key>` と `<selector_value>` が、デプロイメント yaml の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
+        3. LoadBalancer サービスの `spec.selector` セクションの `<selector_key>` と `<selector_value>` が、デプロイメント YAML の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
         4. アプリで listen している **port** を使用していることを確認します。
         5. `externalTrafficPolicy` を `Local` に設定していることを確認します。
 
@@ -102,7 +109,7 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
         {: screen}
 
         1. サービスのタイプとして **LoadBalancer** を定義したことを確認します。
-        2. LoadBalancer サービスの `spec.selector` セクションの `<selector_key>` と `<selector_value>` が、デプロイメント yaml の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
+        2. LoadBalancer サービスの `spec.selector` セクションの `<selector_key>` と `<selector_value>` が、デプロイメント YAML の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
         3. アプリで listen している **port** を使用していることを確認します。
 
 3.  ロード・バランサー・サービスを確認し、**Events** セクションを参照して、エラーがないか探します。
@@ -115,12 +122,12 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
     次のようなエラー・メッセージを探します。
 
     <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>ロード・バランサー・サービスを使用するには、2 つ以上のワーカー・ノードがある標準クラスターでなければなりません。</li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>このエラー・メッセージは、ロード・バランサー・サービスに割り振れるポータブル・パブリック IP アドレスが残っていないことを示しています。 クラスター用にポータブル・パブリック IP アドレスを要求する方法については、<a href="cs_subnets.html#subnets">クラスターへのサブネットの追加</a>を参照してください。 クラスターにポータブル・パブリック IP アドレスを使用できるようになると、ロード・バランサー・サービスが自動的に作成されます。</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>**loadBalancerIP** セクションを使用してロード・バランサー・サービスのポータブル・パブリック IP アドレスを定義しましたが、そのポータブル・パブリック IP アドレスはポータブル・パブリック・サブネットに含まれていません。 構成スクリプトの **loadBalancerIP** セクションで、既存の IP アドレスを削除し、使用可能なポータブル・パブリック IP アドレスの 1 つを追加します。 スクリプトから **loadBalancerIP** セクションを削除して、使用可能なポータブル・パブリック IP アドレスが自動的に割り振られるようにすることもできます。</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>このエラー・メッセージは、ロード・バランサー・サービスに割り振れるポータブル・パブリック IP アドレスが残っていないことを示しています。 クラスター用にポータブル・パブリック IP アドレスを要求する方法については、<a href="/docs/containers?topic=containers-subnets#subnets">クラスターへのサブネットの追加</a>を参照してください。 クラスターにポータブル・パブリック IP アドレスを使用できるようになると、ロード・バランサー・サービスが自動的に作成されます。</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>**`loadBalancerIP`** セクションを使用してロード・バランサー・サービスのポータブル・パブリック IP アドレスを定義しましたが、そのポータブル・パブリック IP アドレスはポータブル・パブリック・サブネットに含まれていません。 構成スクリプトの **`loadBalancerIP`** セクションで、既存の IP アドレスを削除し、使用可能なポータブル・パブリック IP アドレスの 1 つを追加します。 スクリプトから **`loadBalancerIP`** セクションを削除して、使用可能なポータブル・パブリック IP アドレスが自動的に割り振られるようにすることもできます。</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>ワーカー・ノードが不足しているため、ロード・バランサー・サービスをデプロイできません。 複数のワーカー・ノードを持つ標準クラスターをデプロイしましたが、ワーカー・ノードのプロビジョンが失敗した可能性があります。</li>
     <ol><li>使用可能なワーカー・ノードのリストを表示します。</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
-    <li>使用可能なワーカー・ノードが 2 つ以上ある場合は、ワーカー・ノードの詳細情報をリストします。</br><pre class="pre"><code>ibmcloud ks worker-get &lt;cluster_name_or_ID&gt; &lt;worker_ID&gt;</code></pre></li>
-    <li><code>kubectl get nodes</code> コマンドと <code>ibmcloud ks &lt;cluster_name_or_ID&gt; worker-get</code> コマンドから返されたワーカー・ノードのパブリック VLAN ID とプライベート VLAN ID が一致していることを確認します。</li></ol></li></ul>
+    <li>使用可能なワーカー・ノードが 2 つ以上ある場合は、ワーカー・ノードの詳細情報をリストします。</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
+    <li><code>kubectl get nodes</code> コマンドと <code>ibmcloud ks worker-get</code> コマンドから返されたワーカー・ノードのパブリック VLAN ID とプライベート VLAN ID が一致していることを確認します。</li></ol></li></ul>
 
 4.  カスタム・ドメインを使用してロード・バランサー・サービスに接続している場合は、カスタム・ドメインがロード・バランサー・サービスのパブリック IP アドレスにマップされていることを確認します。
     1.  ロード・バランサー・サービスのパブリック IP アドレスを見つけます。
@@ -143,14 +150,14 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 {: tsResolve}
 まず、クラスターが完全にデプロイされており、ゾーンごとに 2 つ以上のワーカー・ノードが使用可能で、ALB の高可用性が確保されていることを確認します。
 ```
-ibmcloud ks workers <cluster_name_or_ID>
+ibmcloud ks workers --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
 CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のマシン・タイプが表示されていることを確認します。
 
-* 標準クラスターが完全にデプロイされており、ゾーンごとに 2 つ以上のワーカー・ノードがあるが、使用可能な **Ingress サブドメイン**がない場合は、[Ingress ALB のサブドメインを取得できない](cs_troubleshoot_network.html#cs_subnet_limit)を参照してください。
-* その他の問題については、[Ingress のデバッグ](cs_troubleshoot_debug_ingress.html)のステップに従って、Ingress のセットアップをトラブルシューティングします。
+* 標準クラスターが完全にデプロイされており、ゾーンごとに 2 つ以上のワーカー・ノードがあるが、使用可能な **Ingress サブドメイン**がない場合は、[Ingress ALB のサブドメインを取得できない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)を参照してください。
+* その他の問題については、[Ingress のデバッグ](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)のステップに従って、Ingress のセットアップをトラブルシューティングします。
 
 <br />
 
@@ -159,7 +166,7 @@ CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示�
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Ingress アプリケーション・ロード・バランサー (ALB) のシークレットをクラスターにデプロイした後で、{{site.data.keyword.cloudcerts_full_notm}} 内の証明書を参照したところ、`Description` フィールドがシークレット名で更新されていません。
+`ibmcloud ks alb-cert-deploy` コマンドを使用して Ingress アプリケーション・ロード・バランサー (ALB) のシークレットをクラスターにデプロイした後で、{{site.data.keyword.cloudcerts_full_notm}} 内の証明書を表示したところ、`Description` フィールドがシークレット名で更新されていません。
 
 ALB シークレットに関する情報をリストすると、状況は `*_failed` となっています。 例えば、`create_failed`、`update_failed`、`delete_failed` などです。
 
@@ -175,7 +182,7 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
  <tbody>
  <tr>
  <td>証明書データのダウンロードやアップデートに必要なアクセス役割を持っていない。</td>
- <td>アカウント管理者に問い合わせて、以下の {{site.data.keyword.Bluemix_notm}} IAM 役割を割り当てるように依頼してください。<ul><li>{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**管理者**と**ライター**のサービス役割。 詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">サービス・アクセスの管理</a>を参照してください。</li><li>クラスターに対する<a href="cs_users.html#platform">**管理者**のプラットフォーム役割</a>。</li></ul></td>
+ <td>アカウント管理者に問い合わせて、以下の {{site.data.keyword.Bluemix_notm}} IAM 役割を割り当てるように依頼してください。<ul><li>{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**管理者**と**ライター**のサービス役割。 詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">サービス・アクセスの管理</a>を参照してください。</li><li>クラスターに対する<a href="/docs/containers?topic=containers-users#platform">**管理者**のプラットフォーム役割</a>。</li></ul></td>
  </tr>
  <tr>
  <td>作成時、更新時、または削除時に提供された証明書 CRN が、クラスターと同じアカウントに属していない。</td>
@@ -193,6 +200,10 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
  <td>{{site.data.keyword.cloudcerts_long_notm}} サービスがダウンしている。</td>
  <td>{{site.data.keyword.cloudcerts_short}} サービスが稼働中であることを確認します。</td>
  </tr>
+ <tr>
+ <td>インポートされたシークレットの名前が、IBM 提供の Ingress シークレットと同じである。</td>
+ <td>シークレットの名前を変更します。IBM 提供の Ingress シークレットの名前は、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行すると確認できます。</td>
+ </tr>
  </tbody></table>
 
 <br />
@@ -202,7 +213,7 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-get <cluster>` を実行すると、クラスターが `normal` 状態であるのに、**Ingress サブドメイン**が表示されません。
+`ibmcloud ks cluster-get --cluster <cluster>` を実行すると、クラスターが `normal` 状態であるのに、使用可能な **Ingress サブドメイン**がありません。
 
 次のようなエラー・メッセージが表示される可能性があります。
 
@@ -215,13 +226,13 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
 標準クラスターでは、あるゾーンで初めてクラスターを作成したときに、そのゾーン内のパブリック VLAN とプライベート VLAN が IBM Cloud インフラストラクチャー (SoftLayer) アカウントで自動的にプロビジョンされます。 そのゾーンでは、指定したパブリック VLAN 上に 1 つのパブリック・ポータブル・サブネットが要求され、指定したプライベート VLAN 上に 1 つのプライベート・ポータブル・サブネットが要求されます。 {{site.data.keyword.containerlong_notm}} の場合、VLAN のサブネット数の上限は 40 個です。 ゾーン内のクラスターの VLAN が既にその上限に達している場合、**Ingress Subdomain** をプロビジョンできません。
 
 VLAN のサブネット数を表示するには、以下のようにします。
-1.  [IBM Cloud インフラストラクチャー (SoftLayer) コンソール](https://control.bluemix.net/)から、**「ネットワーク」**>**「IP 管理 (IP Management)」**>**「VLAN」**の順に選択します。
+1.  [IBM Cloud インフラストラクチャー (SoftLayer) コンソール](https://cloud.ibm.com/classic?)から、**「ネットワーク」**>**「IP 管理 (IP Management)」**>**「VLAN」**の順に選択します。
 2.  クラスターの作成に使用した VLAN の **「VLAN の数 (VLAN Number)」**をクリックします。 **「サブネット」**セクションで、サブネットが 40 個以上存在するかどうかを確認します。
 
 {: tsResolve}
-新規 VLAN が必要な場合、[{{site.data.keyword.Bluemix_notm}} サポートに連絡して](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](cs_cli_reference.html#cs_cluster_create)。
+新規 VLAN が必要な場合、[{{site.data.keyword.Bluemix_notm}} サポートに連絡して](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)。
 
-使用可能な別の VLAN がある場合は、既存のクラスターで [VLAN スパンニングをセットアップ](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)できます。 その後、使用可能なサブネットがある他の VLAN を使用する新規ワーカー・ノードをクラスターに追加できます。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](cs_cli_reference.html#cs_vlan_spanning_get)を使用します。
+使用可能な別の VLAN がある場合は、既存のクラスターで [VLAN スパンニングをセットアップ](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)できます。 その後、使用可能なサブネットがある他の VLAN を使用する新規ワーカー・ノードをクラスターに追加できます。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
 
 VLAN に使用していないサブネットがある場合、クラスターでサブネットを再利用できます。
 1.  使用したいサブネットが使用可能であることを確認します。
@@ -229,9 +240,9 @@ VLAN に使用していないサブネットがある場合、クラスターで
     使用しているインフラストラクチャー・アカウントが、複数の {{site.data.keyword.Bluemix_notm}} アカウントで共有されている場合があります。 その場合、**バインドされたクラスター**があるサブネットを表示するために `ibmcloud ks subnets` コマンドを実行しても、自分のクラスターの情報しか表示できません。 サブネットが使用可能であり、他のアカウントやチームで使用されていないことをインフラストラクチャー・アカウント所有者に確認してください。
     {: note}
 
-2.  サービスが新規サブネットの作成を試行しないように、`--no-subnet` オプションを指定して [クラスターを作成](cs_cli_reference.html#cs_cluster_create)します。 再利用できるサブネットがあるゾーンと VLAN を指定します。
+2.  サービスが新規サブネットの作成を試行しないように、`--no-subnet` オプションを指定して [クラスターを作成](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)します。 再利用できるサブネットがあるゾーンと VLAN を指定します。
 
-3.  `ibmcloud ks cluster-subnet-add` [コマンド](cs_cli_reference.html#cs_cluster_subnet_add)を使用して、既存のサブネットをクラスターに追加します。 詳しくは、[Kubernetes クラスターでカスタム・サブネットおよび既存のサブネットを追加または再利用する](cs_subnets.html#custom)を参照してください。
+3.  `ibmcloud ks cluster-subnet-add` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add)を使用して、既存のサブネットをクラスターに追加します。 詳しくは、[Kubernetes クラスターでカスタム・サブネットおよび既存のサブネットを追加または再利用する](/docs/containers?topic=containers-subnets#subnets_custom)を参照してください。
 
 <br />
 
@@ -279,7 +290,7 @@ Ingress サービスによって、WebSocket を使用するアプリが公開�
 
 2. 接続を活動状態で保つには、タイムアウトの値を増やすか、またはアプリでハートビートをセットアップします。
 <dl><dt>タイムアウトの変更</dt>
-<dd>ALB 構成の `proxy-read-timeout` の値を増やします。 例えば、`60s` から `300s` などのより大きい値にタイムアウトを変更するには、`ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"` の [アノテーション](cs_annotations.html#connection)を Ingress リソース・ファイルに追加します。 クラスター内のすべてのパブリック ALB のタイムアウトが変更されます。</dd>
+<dd>ALB 構成の `proxy-read-timeout` の値を増やします。 例えば、`60s` から `300s` などのより大きい値にタイムアウトを変更するには、`ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"` の [アノテーション](/docs/containers?topic=containers-ingress_annotation#connection)を Ingress リソース・ファイルに追加します。 クラスター内のすべてのパブリック ALB のタイムアウトが変更されます。</dd>
 <dt>ハートビートのセットアップ</dt>
 <dd>ALB のデフォルトの読み取りタイムアウト値を変更しない場合は、WebSocket アプリでハートビートをセットアップします。 [WAMP ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://wamp-proto.org/) のようなフレームワークを使用してハートビート・プロトコルをセットアップすると、アプリのアップストリーム・サーバーは定期的に「ping」メッセージを送信し、クライアントは「pong」メッセージで応答します。 60 秒間のタイムアウトが適用される前に、「ping/pong」トラフィックによって接続が開いた状態に保たれるように、ハートビート間隔を 58 秒以下に設定します。</dd></dl>
 
@@ -290,21 +301,21 @@ Ingress サービスによって、WebSocket を使用するアプリが公開�
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-サービス構成ファイルの `externalTrafficPolicy` を `Local` に変更して、[バージョン 1.0 ロード・バランサー](cs_loadbalancer.html#node_affinity_tolerations)・サービスまたは [Ingress ALB](cs_ingress.html#preserve_source_ip) サービスのソース IP 保持を有効にしました。 しかし、トラフィックがアプリのバックエンド・サービスに到達しません。
+サービス構成ファイルの `externalTrafficPolicy` を `Local` に変更して、[バージョン 1.0 ロード・バランサー](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)・サービスまたは [Ingress ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) サービスのソース IP 保持を有効にしました。 しかし、トラフィックがアプリのバックエンド・サービスに到達しません。
 
 {: tsCauses}
 ロード・バランサー・サービスまたは Ingress ALB サービスのソース IP 保持を有効にすると、クライアント要求のソース IP アドレスは保持されます。 これらのサービスは、要求パケットの IP アドレスが変更されないようにするために、同じワーカー・ノード上の各アプリ・ポッドにのみトラフィックを転送します。 通常、ロード・バランサーまたは Ingress ALB のサービス・ポッドは、各アプリ・ポッドがデプロイされたワーカー・ノードと同じワーカー・ノードにデプロイされます。 しかし、次のように、サービス・ポッドとアプリ・ポッドが同じワーカー・ノードにスケジュールされない状況もあります。 ワーカー・ノードで [Kubernetes テイント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を使用している場合、テイントの耐障害性がないポッドはすべて、テイント適用ワーカー・ノードでの実行が阻止されます。 ソース IP 保持が、次に示すように、使用しているテイントのタイプに基づいて動作していない可能性があります。
 
-* **エッジ・ノードのテイント**: クラスター内の各パブリック VLAN 上の複数のワーカー・ノードに [`dedicated=edge` ラベルを追加](cs_edge.html#edge_nodes)して、Ingress ポッドとロード・バランサー・ポッドがそれらのワーカー・ノードにのみデプロイされるようにしました。 その後、[それらのエッジ・ノードにテイントも適用](cs_edge.html#edge_workloads)して、他のすべてのワークロードがエッジ・ノードで実行されないようにしました。 しかし、アプリ・デプロイメントにエッジ・ノードのアフィニティー・ルールと耐障害性を追加しませんでした。 アプリ・ポッドは、サービス・ポッドと同じテイント適用ノードにスケジュールすることはできず、トラフィックはアプリのバックエンド・サービスに到達しません。
+* **エッジ・ノードのテイント**: クラスター内の各パブリック VLAN 上の複数のワーカー・ノードに [`dedicated=edge` ラベルを追加](/docs/containers?topic=containers-edge#edge_nodes)して、Ingress ポッドとロード・バランサー・ポッドがそれらのワーカー・ノードにのみデプロイされるようにしました。 その後、[それらのエッジ・ノードにテイントも適用](/docs/containers?topic=containers-edge#edge_workloads)して、他のすべてのワークロードがエッジ・ノードで実行されないようにしました。 しかし、アプリ・デプロイメントにエッジ・ノードのアフィニティー・ルールと耐障害性を追加しませんでした。 アプリ・ポッドは、サービス・ポッドと同じテイント適用ノードにスケジュールすることはできず、トラフィックはアプリのバックエンド・サービスに到達しません。
 
 * **カスタム・テイント**: カスタム・テイントをいくつかのノード上で使用して、そのテイントの耐障害性があるアプリ・ポッドだけをそれらのノードにデプロイできるようにしました。 アプリのデプロイメントと、ロード・バランサー・サービスまたは Ingress サービスにアフィニティー・ルールと耐障害性を追加したので、それらのポッドはそれらのノードにのみデプロイされます。 しかし、`ibm-system` 名前空間に自動的に作成される `ibm-cloud-provider-ip` `keepalived` ポッドがあるので、ロード・バランサー・ポッドとアプリ・ポッドは必ず同じワーカー・ノードにスケジュールされます。 これらの `keepalived` ポッドには、使用したカスタムのテイントに対する耐障害性がありません。 これらのポッドをアプリ・ポッドが実行されているノードと同じテイント適用ノードにスケジュールすることはできず、トラフィックはアプリのバックエンド・サービスに到達しません。
 
 {: tsResolve}
 以下のいずれかのオプションを選択して、この問題を解決します。
 
-* **エッジ・ノードのテイント**: ロード・バランサー・ポッドとアプリ・ポッドをテイント適用エッジ・ノードに確実にデプロイするには、[アプリ・デプロイメントにエッジ・ノードのアフィニティー・ルールと耐障害性を追加します](cs_loadbalancer.html#edge_nodes)。 ロード・バランサー・ポッドと Ingress ALB ポッドには、デフォルトでこれらのアフィニティー・ルールと耐障害性があります。
+* **エッジ・ノードのテイント**: ロード・バランサー・ポッドとアプリ・ポッドをテイント適用エッジ・ノードに確実にデプロイするには、[アプリ・デプロイメントにエッジ・ノードのアフィニティー・ルールと耐障害性を追加します](/docs/containers?topic=containers-loadbalancer#edge_nodes)。 ロード・バランサー・ポッドと Ingress ALB ポッドには、デフォルトでこれらのアフィニティー・ルールと耐障害性があります。
 
-* **カスタム・テイント**: `keepalived` ポッドが耐障害性を保持していないカスタム・テイントを削除します。 代わりに、[ワーカー・ノードにエッジ・ノードのラベルを付けてから、それらのエッジ・ノードにテイントを適用する](cs_edge.html)ことができます。
+* **カスタム・テイント**: `keepalived` ポッドが耐障害性を保持していないカスタム・テイントを削除します。 代わりに、[ワーカー・ノードにエッジ・ノードのラベルを付けてから、それらのエッジ・ノードにテイントを適用する](/docs/containers?topic=containers-edge)ことができます。
 
 上記オプションのいずれかを実行しても `keepalived` ポッドがまだスケジュールされない場合、`keepalived` ポッドに関する詳細情報を取得することができます。
 
@@ -342,7 +353,7 @@ Helm チャートの構成ファイルに誤った値があるか、値が欠落
 {: tsResolve}
 strongSwan Helm チャートとの VPN 接続を確立しようとすると、初回は VPN の状況が `ESTABLISHED` にならない可能性があります。 いくつかのタイプの問題を確認し、それに応じて構成ファイルを変更する必要がある場合があります。 strongSwan VPN 接続をトラブルシューティングするには、以下のようにします。
 
-1. strongSwan チャートの定義に含まれている 5 つの Helm テストを実行して、[strongSwan VPN 接続のテストと検証](cs_vpn.html#vpn_test)を行います。
+1. strongSwan チャートの定義に含まれている 5 つの Helm テストを実行して、[strongSwan VPN 接続のテストと検証](/docs/containers?topic=containers-vpn#vpn_test)を行います。
 
 2. Helm テストの実行後に VPN 接続を確立できない場合は、VPN ポッド・イメージ内にパッケージされている VPN デバッグ・ツールを実行できます。
 
@@ -559,30 +570,13 @@ Error: release vpn failed: deployments.extensions "vpn-strongswan" already exist
 Calico ポリシーを使用するには、クラスターの Kubernetes バージョン、Calico CLI バージョン、Calico 構成ファイル構文、およびポリシーの表示コマンドの 4 つの要因すべてが正しい組み合わせになっている必要があります。 これらの要因のうち 1 つ以上が、正しいバージョンになっていません。
 
 {: tsResolve}
-[Kubernetes バージョン 1.10 以降](cs_versions.html)のクラスターでは、Calico CLI v3.1、`calicoctl.cfg` v3 構成ファイル構文、および `calicoctl get GlobalNetworkPolicy` コマンドと `calicoctl get NetworkPolicy` コマンドを使用する必要があります。
-
-[Kubernetes バージョン 1.9 以前](cs_versions.html)のクラスターでは、Calico CLI v1.6.3、`calicoctl.cfg` v2 構成ファイル構文、および `calicoctl get policy` コマンドを使用する必要があります。
+[Kubernetes バージョン 1.10 以降](/docs/containers?topic=containers-cs_versions)のクラスターでは、Calico CLI v3.1、`calicoctl.cfg` v3 構成ファイル構文、および `calicoctl get GlobalNetworkPolicy` コマンドと `calicoctl get NetworkPolicy` コマンドを使用する必要があります。
 
 すべての Calico 要因が正しい組み合わせになっていることを確認するには、以下のようにします。
 
-1. クラスターの Kubernetes バージョンを表示します
-    ```
-    ibmcloud ks cluster-get <cluster_name>
-    ```
-    {: pre}
-
-    * クラスターが Kubernetes バージョン 1.10 以降である場合は、以下のようにします。
-        1. [バージョン 3.3.1 Calico CLI をインストールして構成します](cs_network_policy.html#1.10_install)。 この構成には、Calico v3 構文を使用するように `calicoctl.cfg` ファイルを手動で更新することも含まれます。
-        2. 作成してクラスターに適用するすべてのポリシーで、[Calico v3 構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) が使用されていることを確認します。 既存のポリシー `.yaml` または `.json` ファイルで Calico v2 構文が使用されている場合は、[`calicoctl convert` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert) を使用して、これらを Calico v3 構文に変換できます。
-        3. [ポリシーを表示](cs_network_policy.html#1.10_examine_policies)するには、必ず `calicoctl get GlobalNetworkPolicy` (グローバル・ポリシーの場合) および `calicoctl get NetworkPolicy --namespace <policy_namespace>` (特定の名前空間にスコープ設定されたポリシーの場合) を使用します。
-
-    * クラスターが Kubernetes バージョン 1.9 以前である場合は、以下のようにします。
-        1. [バージョン 1.6.3 Calico CLI をインストールして構成します](cs_network_policy.html#1.9_install)。 `calicoctl.cfg` ファイルで Calico v2 構文が使用されていることを確認します。
-        2. 作成してクラスターに適用するすべてのポリシーで、 [Calico v2 構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) が使用されていることを確認します。
-        3. [ポリシーを表示](cs_network_policy.html#1.9_examine_policies)するには、必ず `calicoctl get policy` を使用します。
-
-Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラスターを更新する前に、[Calico v3 への更新の準備](cs_versions.html#110_calicov3)を確認してください。
-{: tip}
+1. [バージョン 3.3.1 Calico CLI をインストールして構成します](/docs/containers?topic=containers-network_policies#cli_install)。 この構成には、Calico v3 構文を使用するように `calicoctl.cfg` ファイルを手動で更新することも含まれます。
+2. 作成してクラスターに適用するすべてのポリシーで、[Calico v3 構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) が使用されていることを確認します。 既存のポリシー `.yaml` または `.json` ファイルで Calico v2 構文が使用されている場合は、[`calicoctl convert` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert) を使用して、これらを Calico v3 構文に変換できます。
+3. [ポリシーを表示](/docs/containers?topic=containers-network_policies#view_policies)するには、必ず `calicoctl get GlobalNetworkPolicy` (グローバル・ポリシーの場合) および `calicoctl get NetworkPolicy --namespace <policy_namespace>` (特定の名前空間にスコープ設定されたポリシーの場合) を使用します。
 
 <br />
 
@@ -603,11 +597,11 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 
 {: tsResolve}
 
-[既存のワーカー・プールを削除](cs_cli_reference.html#cs_worker_pool_rm)してから、[新しいワーカー・プールを作成](cs_cli_reference.html#cs_worker_pool_create)できます。
+[既存のワーカー・プールを削除](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm)してから、[新しいワーカー・プールを作成](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)できます。
 
 また、新しい VLAN をオーダーし、これらを使用してプール内に新しいワーカー・ノードを作成することによって、既存のワーカー・プールを保持することもできます。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  新しい VLAN ID を必要とする対象のゾーンを取得するには、次のコマンドの出力の **Location** をメモします。 **注**: クラスターが複数ゾーンの場合、ゾーンごとに VLAN ID が必要です。
 
@@ -616,7 +610,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
     ```
     {: pre}
 
-2.  [{{site.data.keyword.Bluemix_notm}} サポートに連絡する](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans)ことによって、クラスターが含まれているゾーンごとに新しいプライベート VLAN とパブリック VLAN を取得します。
+2.  [{{site.data.keyword.Bluemix_notm}} サポートに連絡する](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)ことによって、クラスターが含まれているゾーンごとに新しいプライベート VLAN とパブリック VLAN を取得します。
 
 3.  ゾーンごとの新しいプライベート VLAN ID と新しいパブリック VLAN ID をメモします。
 
@@ -627,7 +621,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
     ```
     {: pre}
 
-5.  `zone-network-set` [コマンド](cs_cli_reference.html#cs_zone_network_set)を使用して、ワーカー・プールのネットワーク・メタデータを変更します。
+5.  `zone-network-set` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)を使用して、ワーカー・プールのネットワーク・メタデータを変更します。
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
@@ -646,7 +640,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 8.  ワーカー・ノードが作成されたことを確認します。
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool>
+    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool>
     ```
     {: pre}
 
@@ -655,21 +649,21 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 
 
 ## ヘルプとサポートの取得
-{: #ts_getting_help}
+{: #network_getting_help}
 
 まだクラスターに問題がありますか?
 {: shortdesc}
 
 -  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
--   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
+-   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を確認します](https://cloud.ibm.com/status?selected=status)。
 -   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
     {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
     {: tip}
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
-    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support/howtogetsupport.html#using-avatar)を参照してください。
--   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
-問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。
+    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)を参照してください。
+-   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を参照してください。
+問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。 また、[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) を使用して、クラスターから関連情報を収集してエクスポートし、IBM サポートと情報を共有することができます。
 {: tip}
 

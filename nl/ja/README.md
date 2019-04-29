@@ -1,14 +1,14 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
 
 ---
 
 
 # 顧客対応資料のソース・ファイル
 
-顧客対応資料: https://console.bluemix.net/docs/containers/container_index.html
+顧客対応資料: https://cloud.ibm.com/docs/containers?topic=containers-container_index
 
 

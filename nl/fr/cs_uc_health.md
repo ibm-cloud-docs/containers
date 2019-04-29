@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -20,7 +24,6 @@ lastupdated: "2018-12-05"
 
 
 
-
 # Cas d'utilisation d'{{site.data.keyword.cloud_notm}} dans le domaine de la santé
 {: #cs_uc_health}
 
@@ -31,15 +34,17 @@ Ces cas d'utilisation mettent en évidence comment les charges de travail sur {{
 {: #uc_migrate}
 
 Un responsable informatique travaillant pour un prestataire de soins de santé dispose de systèmes de diagnostic et de gestion des patients sur site. Ces systèmes passent par des cycles d'amélioration lents, ce qui peut conduire à des niveaux de services stagnants pour les patients.
+{: shortdesc}
 
 Pourquoi {{site.data.keyword.cloud_notm}} ? Pour améliorer le service aux patients, le prestataire envisage d'utiliser {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.contdelivery_full}} afin de réduire les dépenses informatiques et accélérer le développement, le tout sur une plateforme sécurisée. Les systèmes SaaS (Software as a Service) à utilisation intensive du prestataire qui regroupent à la fois les systèmes d'enregistrements des patients et les applications de diagnostics métier, nécessitent des mises à jour fréquentes. Mais l'environnement sur site ne facilite pas un développement agile. Le prestataire souhaite également réduire les coûts de main d'oeuvre qui ne cessent d'augmenter par rapport à un budget de plus en plus réduit.
 
-Technologies clés :    
-* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](cs_clusters_planning.html#shared_dedicated_node)
-* [Mise à l'échelle horizontale](cs_app.html#highly_available_apps)
-* [Sécurité et isolement de conteneur](cs_secure.html#security)
+Technologies clés :
+* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Mise à l'échelle horizontale](/docs/containers?topic=containers-app#highly_available_apps)
+* [Sécurité et isolement de conteneur](/docs/containers?topic=containers-security#security)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK pour Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [Possibilité de connexion sans modifier le code d'application en utilisant {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
 
 Pour commencer, les systèmes SaaS du prestataire sont conteneurisés et placés dans le cloud. A partir de cette première étape, le prestataire passe d'un matériel sursollicité dans un centre de données privé à un calcul personnalisé qui réduit les opérations informatiques et la maintenance, et économise l'énergie. Pour héberger les systèmes SaaS, des clusters Kubernetes sont facilement élaborés pour répondre aux besoins du prestataire en matière de stockage, UC et mémoire RAM. Un autre facteur permettant de réduire les coûts de personnel réside dans le fait qu'IBM gère Kubernetes, donc le prestataire peut se concentrer sur l'offre d'un meilleur service aux clients.
 
@@ -64,12 +69,13 @@ La sécurisation des données des patients conduit à une meilleure satisfaction
 
 **Modèle de solution**
 
-Les services de calcul, de stockage et d'entrée-sortie à la demande s'exécutent dans le cloud public avec un accès sécurisé aux actifs d'entreprise sur site. Implémenter un processus CI/CD et d'autres éléments d'IBM Garage Method permet de réduire considérablement les cycles de livraison.
+Les services de calcul, de stockage et d'E-S à la demande s'exécutent dans le cloud public avec un accès sécurisé aux actifs d'entreprise sur site. Implémenter un processus CI/CD et d'autres éléments d'IBM Garage Method permet de réduire considérablement les cycles de livraison.
 
 **Etape 1 : Sécurisation de la plateforme de calcul**
 * Les applications qui gèrent les données ultra-sensibles des patients peuvent être redirigées pour être hébergées sur {{site.data.keyword.containerlong_notm}} qui s'exécute sur Bare Metal for Trusted Compute.
 * La fonction de calcul sécurisé (Trusted Compute) peut vérifier que le matériel sous-jacent ne fait pas l'objet de falsification.
 * Sur cette base, Vulnerability Advisor fournit des fonctionnalités d'analyse d'images, de règles, de conteneurs et de packages pour détecter les logiciels malveillants connus.
+* Imposition uniforme d'une authentification gérée par des règles à vos services et API avec une simple annotation Ingress. Avec la sécurité déclarative, vous pouvez garantir l'authentification des utilisateurs et la validation de jeton en utilisant {{site.data.keyword.appid_short_notm}}.
 
 **Etape 2 : Migration de type "lift-and-shift"**
 * Migrer des images de machine virtuelle sur des images de conteneur qui s'exécutent sur {{site.data.keyword.containerlong_notm}} dans le cloud public.
@@ -88,6 +94,7 @@ Les services de calcul, de stockage et d'entrée-sortie à la demande s'exécute
 * {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
+* {{site.data.keyword.appid_short_notm}}
 
 Pour les charges de travail les plus sensibles, les clusters peuvent être hébergés sur {{site.data.keyword.containerlong_notm}} for Bare Metal.  Il s'agit d'une plateforme de calcul sécurisé qui analyse automatiquement le matériel et le code d'exécution pour y détecter les vulnérabilités. En utilisant la technologie des conteneurs aux normes de l'industrie, les applications peuvent être redirigées dès le départ pour être rapidement hébergées sur {{site.data.keyword.containerlong_notm}} sans modifications d'architecture majeures. Cette délocalisation contribue à l'évolutivité immédiate.
 
@@ -114,12 +121,12 @@ Un responsable du développement au sein d'un organisme de recherche à but non 
 
 Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} offre un calcul sécurisé permettant de traiter des données sensibles et performantes sur une plateforme ouverte. Cette plateforme globale est hébergée dans des régions situées à proximité. Donc elle est liée à des réglementations locales qui inspirent confiance aux patients et aux chercheurs quant à la protection de leurs données en local et fait la différence en obtenant des meilleurs résultats sur la santé.
 
-Technologies clés :    
-* [Planification intelligente pour placer les charges de travail là où c'est nécessaire](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
-* [{{site.data.keyword.cloudant}} pour conserver et synchroniser les données sur plusieurs applications](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [Analyse de vulnérabilité et isolement des charges de travail](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+Technologies clés :
+* [Planification intelligente pour placer les charges de travail là où c'est nécessaire](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [{{site.data.keyword.cloudant}} pour conserver et synchroniser les données sur plusieurs applications](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [Analyse de vulnérabilité et isolement des charges de travail](/docs/services/Registry?topic=va-va_index#va_index)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} pour assainir les données et envoyer des notifications aux chercheurs en cas de changement de structure des données](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} pour assainir les données et envoyer des notifications aux chercheurs en cas de changement de structure des données](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
 
 **Contexte : Hébergement et partage des données sur les maladies de manière sécurisée pour un organisme de recherche à but non lucratif**
 
@@ -181,7 +188,7 @@ Solution technique :
 
 **Etape 1 : Applications conteneurisées à l'aide de microservices**
 * Utiliser le kit de démarrage Node.js d'IBM pour démarrer le développement rapidement.
-* Organiser l'architecture des applications sous forme d'ensemble de microservices coopératifs au sein d'{{site.data.keyword.containerlong_notm}} selon les zones fonctionnelles de l'application et des dépendances associées.
+* Structurer les applications sous forme d'ensemble de microservices coopératifs dans {{site.data.keyword.containerlong_notm}} basé sur les zones fonctionnelles de l'application et de ses dépendances.
 * Déployer les applications de recherche dans des conteneurs dans {{site.data.keyword.containerlong_notm}}.
 * Fournir des tableaux de bord DevOps normalisés via Kubernetes.
 * Activer la mise à l'échelle du calcul à la demande pour le traitement par lots et d'autres charges de travail de recherche qui s'exécutent moins fréquemment.

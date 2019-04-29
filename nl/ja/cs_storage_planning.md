@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -17,6 +21,7 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # 可用性の高い永続ストレージの計画
@@ -65,8 +70,8 @@ lastupdated: "2018-12-05"
 5. 複数のアプリ・インスタンス、ゾーン、または地域にわたってデータを共有する必要があるかどうかを調査します。
    - **複数のポッドによるアクセス:** ストレージにアクセスするために Kubernetes 永続ボリュームを使用する場合、ボリュームを同時にマウントすることができるポッドの数を決定できます。 ブロック・ストレージなどの一部のストレージ・ソリューションには、一度に 1 つのポッドのみがアクセスできます。 それ以外のストレージ・ソリューションでは、複数のポッドで同じボリュームを共有できます。
    - **複数のゾーンおよび地域でのアクセス:** 複数のゾーンまたは地域でデータをアクセス可能にする必要がある場合があります。 ファイル・ストレージやブロック・ストレージなどの一部のストレージ・ソリューションは、データ・センター固有のものであり、複数ゾーン・クラスター・セットアップを使用して複数のゾーンで共有することはできません。
-   
-   データを複数のゾーンや地域で利用できるようにする場合は、社内の法務部門に相談して、データを複数のゾーンや国外に保管できることを確認してください。 
+
+   データを複数のゾーンや地域で利用できるようにする場合は、社内の法務部門に相談して、データを複数のゾーンや国外に保管できることを確認してください。
    {: note}
 
 6. 選択に影響を与えるその他のストレージ特性を理解します。
@@ -88,7 +93,7 @@ lastupdated: "2018-12-05"
 
 以下のイメージは、{{site.data.keyword.containerlong_notm}} で使用可能な非永続データ・ストレージ・オプションを示しています。 これらの方法は、フリー・クラスターと標準クラスターで使用可能です。
 <p>
-<img src="images/cs_storage_nonpersistent.png" alt="非永続データ・ストレージ・オプション" width="500" style="width: 500px; border-style: none"/></p>
+<img src="images/cs_storage_nonpersistent.png" alt="非永続データ・ストレージ・オプション" width="550" style="width: 550px; border-style: none"/></p>
 
 <table>
 <thead>
@@ -110,7 +115,7 @@ lastupdated: "2018-12-05"
 <tr>
 <td style="text-align:left">容量</td>
 <td style="text-align:left">ワーカー・ノードの使用可能な 2 次ディスクに制限されます。 ポッドによって消費される 2 次ストレージの量を制限するには、[一時ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage) のリソース要求と制限を使用します。</td>
-<td style="text-align:left">ワーカー・ノードの 1 次ディスク (hostPath) または 2 次ディスク (emptyDir) の使用可能なスペースに制限されます。 ポッドによって消費される 2 次ストレージの量を制限するには、[一時ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage) のリソース要求と制限を使用します。</td>
+<td style="text-align:left">ワーカー・ノードの 1 次ディスク (`hostPath`) または 2 次ディスク (`emptyDir`) の使用可能なスペースに制限されます。 ポッドによって消費される 2 次ストレージの量を制限するには、[一時ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage) のリソース要求と制限を使用します。</td>
 </tr>
 <tr>
 <td style="text-align:left">データ・アクセス・パターン</td>
@@ -166,132 +171,207 @@ lastupdated: "2018-12-05"
 </table>
 
 
+## 単一ゾーン・クラスター用の永続ストレージ・オプションの比較
+{: #single_zone_persistent_storage}
 
-## 永続ストレージ・オプションの比較
-{: #persistent_storage_overview}
-
-永続ストレージ・オプションは、コンテナー、ワーカー・ノード、またはクラスターが削除された場合でも永久に保持する必要があるデータに対して使用します。
+単一ゾーン・クラスターを使用している場合は、{{site.data.keyword.containerlong_notm}} で高速なデータ・アクセスを実現する以下のオプションの中から選択できます。より高い可用性を希望する場合は、[地理的に分散されたデータ](#persistent_storage_overview)向けに設計されたストレージ・オプションを使用し、要件と照らし合わせて可能な場合は、複数ゾーン・クラスターを作成してください。
 {: shortdesc}
 
 永続データ・ストレージ・オプションは、標準クラスターでのみ使用可能です。
+{: note}
 
-代わりに、クラスターをオンプレミス・データベースに接続する方法をお探しですか? [クラスターへの VPN 接続のセットアップ](cs_vpn.html#vpn)を参照してください。
-{: tip}
+次の図は、単一クラスター内にデータを永続的に保管するために {{site.data.keyword.containerlong_notm}} で使用できるオプションを示しています。
 
-以下のイメージは、データを永久に保管して、クラスター内のデータの可用性を高めるために {{site.data.keyword.containerlong_notm}} で選択できるオプションを示しています。
-
-<img src="images/cs_storage_mz-ha.png" alt="可用性の高い永続ストレージとしての選択肢"/>
+<img src="images/cs_storage_single_zone.png" alt="単一ゾーン・クラスター用の永続ストレージ・オプション"  width="300" style="width: 300px; border-style: none"/>
 
 <table>
 <thead>
 <th style="text-align:left">特性</th>
 <th style="text-align:left">ファイル</th>
 <th style="text-align:left">ブロック</th>
-<th style="text-align:left">オブジェクト</th>
-<th style="text-align:left">DBaaS</th>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">複数ゾーン対応</td>
 <td style="text-align:left">いいえ (データ・センターに固有であるため)。 独自のデータ複製を実装していない場合は、ゾーン間でデータを共有することはできません。</td>
 <td style="text-align:left">いいえ (データ・センターに固有であるため)。 独自のデータ複製を実装していない場合は、ゾーン間でデータを共有することはできません。</td>
-<td style="text-align:left">はい</td>
-<td style="text-align:left">はい</td>
 </tr>
 <tr>
 <td style="text-align:left">理想的なデータ型</td>
 <td style="text-align:left">すべて</td>
 <td style="text-align:left">すべて</td>
-<td style="text-align:left">準構造化データと非構造化データ</td>
-<td style="text-align:left">DBaaS によって異なる</td>
 </tr>
 <tr>
 <td style="text-align:left">データの使用パターン</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ランダム読み取り/書き込み操作</li><li style="margin:0px; padding:0px">順次読み取り/書き込み操作</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ランダム読み取り/書き込み操作</li><li style="margin:0px; padding:0px">書き込み主体のワークロード</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">読み取り主体のワークロード</li><li style="margin:0px; padding:0px">書き込み操作は少ないか、行われない</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">読み取り/書き込み主体のワークロード</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">アクセス</td>
 <td style="text-align:left">マウントされたボリューム上のファイル・システム経由</td>
 <td style="text-align:left">マウントされたボリューム上のファイル・システム経由</td>
-<td style="text-align:left">マウントされたボリューム上のファイル・システム経由 (プラグイン) またはアプリからの REST API 経由</td>
-<td style="text-align:left">アプリからの REST API 経由</td>
 </tr>
 <tr>
 <td style="text-align:left">サポートされる Kubernetes アクセス書き込み</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">アプリから直接アクセスされるため該当なし</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">パフォーマンス</td>
 <td style="text-align:left">IOPS とサイズが割り当てられるため、予測可能です。 IOPS はボリュームにアクセスするポッド間で共有されます。</td>
 <td style="text-align:left">IOPS とサイズが割り当てられるため、予測可能です。 IOPS はポッド間で共有されません。 </td>
-<td style="text-align:left">読み取り操作の場合はハイ。 書き込み操作の場合は予測できません。</td>
-<td style="text-align:left">アプリと同じデータ・センターにデプロイされた場合はハイ。</td>
 </tr>
 <tr>
 <td style="text-align:left">整合性</td>
 <td style="text-align:left">強</td>
 <td style="text-align:left">強</td>
-<td style="text-align:left">結果</td>
-<td style="text-align:left">DBaaS によって異なる</td>
 </tr>
 <tr>
 <td style="text-align:left">耐久性</td>
 <td style="text-align:left">ハイ</td>
-<td style="text-align:left">ハイ</td>
-<td style="text-align:left">非常にハイ (ストレージ・ノードのクラスター全体にデータ・スライスが分散するため)。 どのノードもデータの一部のみ保管します。 </td>
 <td style="text-align:left">ハイ</td>
 </tr>
 <tr>
 <td style="text-align:left">回復力</td>
 <td style="text-align:left">ミディアム (データ・センターに固有であるため)。 ファイル・ストレージ・サーバーは、冗長ネットワーキングで IBM によってクラスター化されます。</td>
 <td style="text-align:left">ミディアム (データ・センターに固有であるため)。 ブロック・ストレージ・サーバーは、冗長ネットワーキングで IBM によってクラスター化されます。</td>
-<td style="text-align:left">ハイ (3 つのゾーンまたは地域にわたってデータ・スライスが分散するため)。 単一ゾーンのみにセットアップされた場合はミディアム。</td>
-<td style="text-align:left">DBaaS およびセットアップによって異なります。 </td>
 </tr>
 <tr>
 <td style="text-align:left">可用性</td>
 <td style="text-align:left">ミディアム (データ・センターに固有であるため)。</td>
 <td style="text-align:left">ミディアム (データ・センターに固有であるため)。</td>
-<td style="text-align:left">ハイ (複数のゾーンまたは地域への分散のため)。 </td>
-<td style="text-align:left">ハイ (複数のインスタンスをセットアップした場合)。 </td>
 </tr>
 <tr>
 <td style="text-align:left">スケーラビリティー</td>
 <td style="text-align:left">データ・センターを超える拡張は難しい。 既存のストレージ層は変更できません。 </td>
 <td style="text-align:left">データ・センターを超える拡張は難しい。 既存のストレージ層は変更できません。</td>
-<td style="text-align:left">スケーリングしやすい。</td>
-<td style="text-align:left">スケーリングしやすい。</td>
 </tr>
 <tr>
 <td style="text-align:left">暗号化</td>
 <td style="text-align:left">静止</td>
-<td style="text-align:left">静止</td>
-<td style="text-align:left">転送中および静止</td>
 <td style="text-align:left">静止</td>
 </tr>
 <tr>
 <td style="text-align:left">一般的なユース・ケース</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">大規模または単一のファイル・ストレージ</li><li style="margin:0px; padding:0px">単一のゾーン・クラスター内でのファイル共有</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ステートフル・セット</li><li style="margin:0px; padding:0px">独自のデータベースを実行する場合のバッキング・ストレージ</li><li style="margin:0px; padding:0px">単一のポッドのハイパフォーマンス・アクセス</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">複数ゾーン・クラスター</li><li style="margin:0px; padding:0px">地理的分散データ</li><li style="margin:0px; padding:0px">静的ビッグデータ</li><li style="margin:0px; padding:0px">静的マルチメディア・コンテンツ</li><li style="margin:0px; padding:0px">Web アプリ</li><li style="margin:0px; padding:0px">バックアップ</li><li style="margin:0px; padding:0px">アーカイブ</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">複数ゾーン・クラスター</li><li style="margin:0px; padding:0px">リレーショナル・データベースおよび非リレーショナル・データベース</li><li style="margin:0px; padding:0px">地理的分散データ</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">推奨されないユース・ケース</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">複数ゾーン・クラスター</li><li style="margin:0px; padding:0px">地理的分散データ</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">複数ゾーン・クラスター</li><li style="margin:0px; padding:0px">地理的分散データ</li><li style="margin:0px; padding:0px">複数のアプリ・インスタンスでのデータの共有</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">書き込み主体のワークロード</li><li style="margin:0px; padding:0px">ランダム書き込み操作</li><li style="margin:0px; padding:0px">増分データ更新</li><li style="margin:0px; padding:0px">トランザクション・データベース</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ファイル・システムに書き込むように設計されたアプリ</li></ul></td>
 </tr>
 </tbody>
 </table>
 
 
 
+## 複数ゾーン・クラスター用の永続ストレージ・オプションの比較
+{: #persistent_storage_overview}
 
+複数ゾーン・クラスターを使用している場合は、複数のゾーンにまたがって分散されている複数のワーカー・ノードからデータにアクセスするための永続ストレージ・オプションを以下の中から選択してください。
+{: shortdesc}
+
+永続データ・ストレージ・オプションは、標準クラスターでのみ使用可能です。
+
+代わりに、クラスターをオンプレミス・データベースに接続する方法をお探しですか? [クラスターへの VPN 接続のセットアップ](/docs/containers?topic=containers-vpn#vpn)を参照してください。
+{: tip}
+
+次の図は、複数ゾーン・クラスターにデータを永続的に保管してデータの高可用性を確保するために {{site.data.keyword.containerlong_notm}} で使用できるオプションを示しています。これらのオプションを単一ゾーン・クラスター内で使用することもできますが、ご使用のアプリで要求される高可用性の利点は得られない可能性があります。
+
+<img src="images/cs_storage_options_multizone.png" alt="複数ゾーン・クラスター内の永続ストレージ用の高可用性オプション"/>
+
+<table>
+<thead>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">オブジェクト</th>
+<th style="text-align:left">SDS (Portworx)</th>
+<th style="text-align:left">{{site.data.keyword.Bluemix_notm}} データベース</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">複数ゾーン対応</td>
+<td style="text-align:left">はい</td>
+<td style="text-align:left">はい</td>
+<td style="text-align:left">はい</td>
+</tr>
+<tr>
+<td style="text-align:left">理想的なデータ型</td>
+<td style="text-align:left">準構造化データと非構造化データ</td>
+<td style="text-align:left">すべて</td>
+<td style="text-align:left">DBaaS によって異なる</td>
+</tr>
+<tr>
+<td style="text-align:left">データの使用パターン</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">読み取り主体のワークロード</li><li style="margin:0px; padding:0px">書き込み操作は少ないか、行われない</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">書き込み主体のワークロード</li><li style="margin:0px; padding:0px">ランダム読み取り/書き込み操作</li><li style="margin:0px; padding:0px">順次読み取り/書き込み操作</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">読み取り/書き込み主体のワークロード</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">アクセス</td>
+<td style="text-align:left">マウントされたボリューム上のファイル・システム経由 (プラグイン) またはアプリからの REST API 経由</td>
+<td style="text-align:left">マウントされたボリューム上のファイル・システム経由、またはボリュームへの NFS クライアント・アクセス経由</td>
+<td style="text-align:left">アプリからの REST API 経由</td>
+</tr>
+<tr>
+<td style="text-align:left">サポートされる Kubernetes アクセス書き込み</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left">すべて</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">アプリから直接アクセスされるため該当なし</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">パフォーマンス</td>
+<td style="text-align:left">読み取り操作の場合はハイ。 非 SDS マシンの使用時は、割り当てられる IOPS とサイズのために予測可能です。 </td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">SDS マシンの使用時は、順次読み取り/書き込み操作についてはベア・メタル・パフォーマンスに近い。</li><li style="margin:0px; padding:0px">高性能データベースを実行するための[プロファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) を提供</li><li style="margin:0px; padding:0px">ご使用のアプリで選択できる各種のパフォーマンス・プロファイルを使用してストレージ層を作成可能。</li></ul> </td>
+<td style="text-align:left">アプリと同じデータ・センターにデプロイされた場合はハイ。</td>
+</tr>
+<tr>
+<td style="text-align:left">整合性</td>
+<td style="text-align:left">結果</td>
+<td style="text-align:left">強</td>
+<td style="text-align:left">DBaaS によって異なる</td>
+</tr>
+<tr>
+<td style="text-align:left">耐久性</td>
+<td style="text-align:left">非常にハイ (ストレージ・ノードのクラスター全体にデータ・スライスが分散するため)。 どのノードもデータの一部のみ保管します。 </td>
+<td style="text-align:left">データの 3 つのコピーが常に保持されるため非常にハイ。</td>
+<td style="text-align:left">ハイ</td>
+</tr>
+<tr>
+<td style="text-align:left">回復力</td>
+<td style="text-align:left">ハイ (3 つのゾーンまたは地域にわたってデータ・スライスが分散するため)。 単一ゾーンのみにセットアップされた場合はミディアム。</td>
+<td style="text-align:left">3 つのゾーンにまたがるレプリケーションをサポートするようにセットアップされた場合はハイ。単一ゾーンのみにデータを保管する場合はミディアム。</td>
+<td style="text-align:left">DBaaS およびセットアップによって異なります。 </td>
+</tr>
+<tr>
+<td style="text-align:left">可用性</td>
+<td style="text-align:left">ハイ (複数のゾーンまたは地域への分散のため)。 </td>
+<td style="text-align:left">別々のゾーンにある 3 つのワーカー・ノードにまたがってデータを複製する場合はハイ。</td>
+<td style="text-align:left">ハイ (複数のインスタンスをセットアップした場合)。 </td>
+</tr>
+<tr>
+<td style="text-align:left">スケーラビリティー</td>
+<td style="text-align:left">自動的にスケーリングします</td>
+<td style="text-align:left">ボリュームのサイズ変更によってボリューム容量を増やします。全体的なストレージ層容量を増やすには、ワーカー・ノードまたはリモート・ブロック・ストレージを追加する必要があります。どちらの場合でも、ユーザーによる容量の監視が必要です。</td>
+<td style="text-align:left">自動的にスケーリングします</td>
+</tr>
+<tr>
+<td style="text-align:left">暗号化</td>
+<td style="text-align:left">転送中および静止</td>
+<td style="text-align:left">{{site.data.keyword.keymanagementservicelong_notm}} を使用して転送中および保存中のデータを保護するための独自のキーを用意してください。</td>
+<td style="text-align:left">静止</td>
+</tr>
+<tr>
+<td style="text-align:left">一般的なユース・ケース</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">複数ゾーン・クラスター</li><li style="margin:0px; padding:0px">地理的分散データ</li><li style="margin:0px; padding:0px">静的ビッグデータ</li><li style="margin:0px; padding:0px">静的マルチメディア・コンテンツ</li><li style="margin:0px; padding:0px">Web アプリ</li><li style="margin:0px; padding:0px">バックアップ</li><li style="margin:0px; padding:0px">アーカイブ</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ステートフル・セット</li><li style="margin:0px; padding:0px">地理的分散データ</li><li style="margin:0px; padding:0px">複数のクラウド・プロバイダーにまたがってアプリを実行している場合の一般的なストレージ・ソリューション</li><li style="margin:0px; padding:0px">独自のデータベースを実行する場合のバッキング・ストレージ</li><li style="margin:0px; padding:0px">単一のポッドのハイパフォーマンス・アクセス</li><li style="margin:0px; padding:0px">複数のポッドとワーカー・ノードにまたがる共有ストレージ・アクセス</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">複数ゾーン・クラスター</li><li style="margin:0px; padding:0px">リレーショナル・データベースおよび非リレーショナル・データベース</li><li style="margin:0px; padding:0px">地理的分散データ</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">推奨されないユース・ケース</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">書き込み主体のワークロード</li><li style="margin:0px; padding:0px">ランダム書き込み操作</li><li style="margin:0px; padding:0px">増分データ更新</li><li style="margin:0px; padding:0px">トランザクション・データベース</li></ul></td>
+<td style="text-align:left">該当なし</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ファイル・システムに書き込むように設計されたアプリ</li></ul></td>
+</tr>
+</tbody>
+</table>

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # 瞭解 Kubernetes 儲存空間基本觀念
 {: #kube_concepts}
 
@@ -30,13 +35,13 @@ lastupdated: "2018-12-05"
 
 下圖顯示 Kubernetes 叢集裡的儲存空間元件。
 
-<img src="images/cs_storage_pvc_pv.png" alt="叢集裡的儲存空間元件" width="300" style="width: 300px; border-style: none"/>
+<img src="images/cs_storage_pvc_pv.png" alt="叢集中的儲存空間元件" width="275" style="width: 275px; border-style: none"/>
 
-- **叢集**</br> 依預設，每個叢集都會設定一個外掛程式，以[佈建檔案儲存空間](cs_storage_file.html#add_file)。您可以選擇安裝其他附加程式，例如適用於[區塊儲存空間](cs_storage_block.html)的附加程式。若要在叢集裡使用儲存空間，您必須建立持續性磁區要求、持續性磁區及實體儲存空間實例。當您刪除叢集時，可以選擇刪除相關的儲存空間實例。
+- **叢集**</br> 依預設，每個叢集都會設定一個外掛程式，以[佈建檔案儲存空間](/docs/containers?topic=containers-file_storage#add_file)。您可以選擇安裝其他附加程式，例如適用於[區塊儲存空間](/docs/containers?topic=containers-block_storage)的附加程式。若要在叢集裡使用儲存空間，您必須建立持續性磁區要求、持續性磁區及實體儲存空間實例。當您刪除叢集時，可以選擇刪除相關的儲存空間實例。
 - **應用程式**</br> 若要從您的儲存空間實例讀取，以及寫入到其中，您必須將持續性磁區要求 (PVC) 裝載至您的應用程式。不同的儲存空間類型有不同的讀寫規則。例如，您可以將多個 Pod 裝載至檔案儲存空間的同一個 PVC。區塊儲存空間具有 RWO (ReadWriteOnce) 存取模式，因此您只能將儲存空間裝載至一個 Pod。
 - **持續性磁區要求 (PVC)** </br> PVC 是利用特定類型及配置來佈建持續性儲存空間的要求。若要指定您想要的持續性儲存空間特性，請使用 [Kubernetes 儲存空間類別](#storageclasses)。叢集管理者可以定義儲存空間類別，或者您可以從 {{site.data.keyword.containerlong_notm}} 的預先定義儲存空間類別中選擇一個。當您建立 PVC 時，要求會傳送至 {{site.data.keyword.Bluemix}} 儲存空間提供者。視儲存空間類別中定義的配置而定，會訂購實體儲存裝置，並將其佈建至您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。如果所要求的配置不存在，則不會建立儲存空間。
 - **持續性磁區 (PV)** </br> PV 是以磁區形式新增至叢集的虛擬儲存空間實例。PV 指向 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實體儲存裝置，並使用來與儲存裝置通訊的 API 抽象化。若要將 PV 裝載至應用程式，您必須具有相符的 PVC。裝載的 PV 會以資料夾形式出現在容器的檔案系統內。
-- **實體儲存空間** </br> 您可以用來持續保存資料的實體儲存空間實例。{{site.data.keyword.containerlong_notm}} 提供實體儲存空間實例的高可用性。不過，儲存在實體儲存空間實例上的資料不會自動備份。視您使用的儲存空間類型而定，有不同的方法存在，可設定備份及還原解決方案。
+- **實體儲存空間** </br> 您可以用來持續保存資料的實體儲存空間實例。{{site.data.keyword.Bluemix_notm}} 中的實體儲存空間範例包括 [File Storage](/docs/containers?topic=containers-file_storage#file_storage)、[Block Storage](/docs/containers?topic=containers-block_storage#block_storage)、[Object Storage](/docs/containers?topic=containers-object_storage#object_storage)，以及可用來作為具有 [Portworx](/docs/containers?topic=containers-portworx#portworx) 之 SDS 儲存空間的本端工作者節點儲存空間。{{site.data.keyword.Bluemix_notm}} 提供實體儲存空間實例的高可用性。不過，儲存在實體儲存空間實例上的資料不會自動備份。視您使用的儲存空間類型而定，有不同的方法存在，可設定備份及還原解決方案。
 
 如需如何建立及使用 PVC、PV 及實體儲存裝置的相關資訊，請參閱：
 - [動態佈建](#dynamic_provisioning)
@@ -73,8 +78,8 @@ lastupdated: "2018-12-05"
 3. **經常建立及刪除儲存空間：**您有一個應用程式或設定了持續交付管線，用於定期建立及移除持續性儲存空間。可以藉由刪除 PVC 來移除動態佈建且具有非保留儲存空間類別的持續性儲存空間。
 
 如需如何動態佈建持續性儲存空間的相關資訊，請參閱：
-- [檔案儲存空間](cs_storage_file.html#add_file)
-- [區塊儲存空間](cs_storage_block.html#add_block)
+- [檔案儲存空間](/docs/containers?topic=containers-file_storage#add_file)
+- [區塊儲存空間](/docs/containers?topic=containers-block_storage#add_block)
 
 ## 靜態佈建
 {: #static_provisioning}
@@ -104,12 +109,12 @@ lastupdated: "2018-12-05"
 請檢閱下列用於靜態佈建持續性儲存空間的一般使用案例：
 1. **讓保留的資料可供叢集使用：**您已使用動態佈建搭配保留儲存空間類別來佈建持續性儲存空間。您已移除 PVC，但 PV、IBM Cloud 基礎架構 (SoftLayer) 中的實體儲存空間，以及資料都仍然存在。您想要從叢集裡的應用程式存取保留的資料。
 2. **使用現有儲存裝置：**您已在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中直接佈建持續性儲存空間，而且想要在叢集裡使用此儲存裝置。
-3. **在相同區域中跨叢集共用持續性儲存空間：**您已針對叢集佈建持續性儲存空間。若要與相同區域中的其他叢集共用相同的持續性儲存空間實例，您必須在其他叢集裡手動建立 PV 及相符的 PVC。**附註：**只有在叢集與儲存空間實例位於相同區域時，才能跨叢集共用持續性儲存空間。 
+3. **在相同區域中跨叢集共用持續性儲存空間：**您已針對叢集佈建持續性儲存空間。若要與相同區域中的其他叢集共用相同的持續性儲存空間實例，您必須在其他叢集裡手動建立 PV 及相符的 PVC。**附註：**只有在叢集與儲存空間實例位於相同區域時，才能跨叢集共用持續性儲存空間。
 4. **在相同叢集裡跨名稱空間共用持續性儲存空間：**您已在叢集的名稱空間中佈建持續性儲存空間。您想要對部署至叢集裡不同名稱空間的應用程式 Pod 使用相同的儲存空間實例。
 
 如需如何靜態佈建儲存空間的相關資訊，請參閱：
-- [檔案儲存空間](cs_storage_file.html#predefined_storageclass)
-- [區塊儲存空間](cs_storage_block.html#predefined_storageclass)
+- [檔案儲存空間](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
+- [區塊儲存空間](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 
 ## 儲存空間類別
 {: #storageclasses}
@@ -117,11 +122,11 @@ lastupdated: "2018-12-05"
 若要動態佈建持續性儲存空間，您必須定義想要的儲存空間類型及配置。
 {: shortdesc}
 
-Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支援的基礎儲存空間平台抽象化，因此您不必知道所有關於支援大小、IOPS 或保留原則的詳細資料，即可在叢集裡順利地佈建持續性儲存空間。{{site.data.keyword.containerlong_notm}} 為支援的每種儲存空間類型提供預先定義的儲存空間類別。每一個儲存空間類別都設計成使支援的儲存空間層級抽象化，同時又可讓您選擇決定想要的大小、IOPS 及保留原則。
+[Kubernetes 儲存空間類別 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/storage/storage-classes/) 用來使 {{site.data.keyword.Bluemix_notm}} 中支援的基礎儲存空間平台抽象化，因此您不必知道所有關於支援大小、IOPS 或保留原則的詳細資料，即可在叢集中順利地佈建持續性儲存空間。{{site.data.keyword.containerlong_notm}} 為支援的每種儲存空間類型提供預先定義的儲存空間類別。每一個儲存空間類別都設計成使支援的儲存空間層級抽象化，同時又可讓您選擇決定想要的大小、IOPS 及保留原則。
 
 如需預先定義的儲存空間類別規格相關資訊，請參閱：
-- [檔案儲存空間](cs_storage_file.html#storageclass_reference)
-- [區塊儲存空間](cs_storage_block.html#storageclass_reference)
+- [檔案儲存空間](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+- [區塊儲存空間](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
 
 找不到您要尋找的項目嗎？您也可以自行建立自訂儲存空間類別，來佈建您想要的儲存空間類型。
 {: tip}
@@ -130,15 +135,16 @@ Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支
 {: #customized_storageclass}
 
 如果您無法使用其中一個提供的儲存空間類別，可以自行建立自訂儲存空間類別。
+建議您自訂儲存空間類別以指定配置，例如區域、檔案系統類型、伺服器類型或[磁區連結模式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) 選項（僅限區塊儲存空間）。
 {: shortdesc}
 
 1. 建立自訂的儲存空間類別。首先，您可以使用其中一個預先定義的儲存空間類別，或是參閱我們的自訂儲存空間類別範例。
    - 預先定義的儲存空間類別：
-     - [檔案儲存空間](cs_storage_file.html#storageclass_reference)
-     - [區塊儲存空間](cs_storage_block.html#storageclass_reference)
+     - [檔案儲存空間](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+     - [區塊儲存空間](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
    - 自訂儲存空間類別範例：
-     - [檔案儲存空間](cs_storage_file.html#custom_storageclass)
-     - [區塊儲存空間](cs_storage_block.html#custom_storageclass)
+     - [檔案儲存空間](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
+     - [區塊儲存空間](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
 
 2. 建立自訂儲存空間類別。
    ```
@@ -154,8 +160,8 @@ Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支
     {: pre}
 
 4. 建立持續性磁區要求 (PVC)，以搭配自訂儲存空間類別來動態佈建儲存空間。
-   - [檔案儲存空間](cs_storage_file.html#add_file)
-   - [區塊儲存空間](cs_storage_block.html#add_block)
+   - [檔案儲存空間](/docs/containers?topic=containers-file_storage#add_file)
+   - [區塊儲存空間](/docs/containers?topic=containers-block_storage#add_block)
 
 5. 驗證已建立您的 PVC，並且已連結至持續性磁區 (PV)。此處理程序可能需要幾分鐘的時間才能完成。
    ```
@@ -169,7 +175,7 @@ Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支
 使用儲存空間類別來動態佈建持續性儲存空間時，您可以使用特定配置來佈建持續性儲存空間。您無法變更儲存空間類別的名稱，或所佈建之儲存空間的類型。不過，您可以選擇調整儲存空間，如下表所示。
 {: shortdesc}
 
-<table> 
+<table>
 <caption>{{site.data.keyword.containerlong_notm}} 儲存空間解決方案之調整選項的概觀</caption>
 <thead>
 <th>儲存空間解決方案</th>
@@ -178,11 +184,11 @@ Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支
 <tbody>
 <tr>
 <td>檔案儲存空間</td>
-<td>您可以[修改現有的磁區](cs_storage_file.html#change_storage_configuration)，來增加儲存空間大小和指派的 IOPS。</td>
+<td>您可以[修改現有的磁區](/docs/containers?topic=containers-file_storage#file_change_storage_configuration)，來增加儲存空間大小和指派的 IOPS。</td>
 </tr>
 <tr>
 <td>區塊儲存空間</td>
-<td>您可以[修改現有的磁區](cs_storage_block.html#change_storage_configuration)，來增加儲存空間大小和指派的 IOPS。</td>
+<td>您可以[修改現有的磁區](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)，來增加儲存空間大小和指派的 IOPS。</td>
 </tr>
 <tr>
 <td>Object Storage</td>
@@ -193,7 +199,7 @@ Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支
 
 
 ## 準備現有的儲存空間，以 Kubernetes 標籤來進行多區域使用
-{: #multizone}
+{: #storage_multizone}
 
 如果已將您的叢集從單一區域叢集更新為多區域叢集，而且具有現有的持續性磁區 (PV)，請將 Kubernetes 區域及地區標籤新增至您的 PV。標籤可確保將裝載此儲存空間的 Pod 部署至持續性儲存空間所在區域。
 {:shortdesc}
@@ -204,8 +210,9 @@ Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支
 使用 Script 來尋找叢集裡的所有 PV，並套用 Kubernetes `failure-domain.beta.kubernetes.io/region` 及 `failure-domain.beta.kubernetes.io/zone` 標籤。如果 PV 已有標籤，則 Script 不會改寫現有值。
 
 開始之前：
-- [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
-- 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
+- [將 Kubernetes CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- 如果一個叢集具有多個 VLAN、相同的 VLAN 上具有多個子網路，或多區域叢集，則必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可在專用網路上彼此通訊。若要啟用 VRF，請[聯絡 IBM Cloud 基礎架構 (SoftLayer) 帳戶代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+
 
 若要更新現有 PV，請執行下列動作：
 
@@ -277,5 +284,5 @@ Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支
 **下一步為何？**
 
 既然您已為現有 PV 加上標籤，就可以將 PV 裝載至多區域叢集。如需相關資訊，請參閱下列鏈結。
-- 使用[現有的 NFS 檔案儲存空間](cs_storage_file.html#existing_file)
-- 使用[現有的區塊儲存空間](cs_storage_block.html#existing_block)
+- 使用[現有的 NFS 檔案儲存空間](/docs/containers?topic=containers-file_storage#existing_file)
+- 使用[現有的區塊儲存空間](/docs/containers?topic=containers-block_storage#existing_block)

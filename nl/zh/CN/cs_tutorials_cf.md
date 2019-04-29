@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # 教程：将应用程序从 Cloud Foundry 迁移到集群
 {: #cf_tutorial}
 
@@ -28,25 +31,32 @@ lastupdated: "2018-12-05"
 
 
 ## 目标
+{: #cf_objectives}
 
 - 了解将容器中的应用程序部署到 Kubernetes 集群的一般过程。
 - 根据应用程序代码创建 Dockerfile 以构建容器映像。
 - 将该映像中的容器部署到 Kubernetes 集群中。
 
 ## 所需时间
+{: #cf_time}
+
 30 分钟
 
 ## 受众
+{: #cf_audience}
+
 本教程适用于 Cloud Foundry 应用程序开发者。
 
 ## 先决条件
+{: #cf_prereqs}
 
-- [在 {{site.data.keyword.registrylong_notm}} 中创建专用映像注册表](../services/Registry/index.html)。
-- [创建集群](cs_clusters.html#clusters_ui)。
-- [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
+- [在 {{site.data.keyword.registrylong_notm}} 中创建专用映像注册表](/docs/services/Registry?topic=registry-index)。
+- [创建集群](/docs/containers?topic=containers-clusters#clusters_ui)。
+- [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 - 确保您具有用于 {{site.data.keyword.containerlong_notm}} 的以下 {{site.data.keyword.Bluemix_notm}} IAM 访问策略：
-    - [任何平台角色](cs_users.html#platform)
-- [了解有关 Docker 和 Kubernetes 术语的信息](cs_tech.html)。
+    - [任何平台角色](/docs/containers?topic=containers-users#platform)
+    - [**写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)
+- [了解有关 Docker 和 Kubernetes 术语的信息](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology)。
 
 
 <br />
@@ -54,6 +64,7 @@ lastupdated: "2018-12-05"
 
 
 ## 第 1 课：下载应用程序代码
+{: #cf_1}
 
 准备好您的代码。还没有任何代码？您可以下载要在本教程中使用的入门模板代码。
 {: shortdesc}
@@ -79,7 +90,7 @@ lastupdated: "2018-12-05"
 
     c. 在控制台指示信息的步骤 1 中，单击**下载入门模板代码**。
 
-    d. 解压缩 .zip 文件，并将其内容保存到 `cf-py` 目录。
+    d. 解压缩 `.zip` 文件，并将其内容保存到 `cf-py` 目录。
 
 应用程序代码可随时进行容器化！
 
@@ -89,6 +100,7 @@ lastupdated: "2018-12-05"
 
 
 ## 第 2 课：使用应用程序代码创建 Docker 映像
+{: #cf_2}
 
 创建 Dockerfile 以包含应用程序代码以及容器的必要配置。然后，通过该 Dockerfile 构建 Docker 映像，并将其推送到专用映像注册表。
 {: shortdesc}
@@ -175,6 +187,7 @@ lastupdated: "2018-12-05"
 
 
 ## 第 3 课：通过映像部署容器
+{: #cf_3}
 
 将应用程序部署为 Kubernetes 集群中的容器。
 {: shortdesc}
@@ -182,7 +195,7 @@ lastupdated: "2018-12-05"
 1. 创建名为 `cf-py.yaml` 的配置 YAML 文件，并使用专用映像注册表的名称更新 `<registry_namespace>`。此配置文件根据您在上一课中创建的映像以及用于向公众公开应用程序的服务来定义容器部署。
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -255,15 +268,15 @@ lastupdated: "2018-12-05"
     a.  获取集群中工作程序节点的公共 IP 地址。
 
     ```
-        ibmcloud ks workers <cluster_name>
-        ```
+    ibmcloud ks workers --cluster <cluster_name>
+    ```
     {: pre}
 
     输出：
 
     ```
-ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
+    ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 
@@ -271,11 +284,11 @@ ID                                                 Public IP        Private IP  
 
     <img src="images/python_flask.png" alt="已部署样板 Python Flask 应用程序的截屏。" />
 
-5.  [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
+5.  [启动 Kubernetes 仪表板](/docs/containers?topic=containers-app#cli_dashboard)。
 
-    如果在 [{{site.data.keyword.Bluemix_notm}} 控制台](https://console.bluemix.net/)中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
+    如果在 [{{site.data.keyword.Bluemix_notm}} 控制台](https://cloud.ibm.com/)中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
     {: tip}
 
 6. 在**工作负载**选项卡中，可以查看已创建的资源。
 
-祝贺您！您的应用程序已部署在容器中！
+非常好！您的应用程序已部署在容器中！

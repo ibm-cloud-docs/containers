@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,15 +23,16 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # CLI 更改日志
 {: #cs_cli_changelog}
 
 在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
 {:shortdesc}
 
-要安装 CLI 插件，请参阅[安装 CLI](cs_cli_install.html#cs_cli_install_steps)。
+要安装 {{site.data.keyword.containerlong}} CLI 插件，请参阅[安装 CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)。
 
-请参阅下表以获取每个 CLI 插件版本的更改摘要。
+请参阅下表以获取每个 {{site.data.keyword.containerlong_notm}} CLI 插件版本的更改摘要。
 
 <table summary="{{site.data.keyword.containerlong_notm}} CLI 插件的版本更改概述">
 <caption>{{site.data.keyword.containerlong_notm}} CLI 插件的更改日志</caption>
@@ -40,6 +45,81 @@ lastupdated: "2018-12-05"
 </thead>
 <tbody>
 <tr>
+<td>0.2.80</td>
+<td>2019 年 3 月 19 日</td>
+<td><ul>
+<li>在[启用 VRF 的帐户](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)中运行 Kubernetes V1.11 或更高版本的标准集群中，添加了对启用[通过服务端点进行的主节点与工作程序之间通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)的支持。有关如何使用以下命令的信息，请参阅[设置专用服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)和[设置公共服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)。<ul>
+<li>向 [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) 命令添加了 `--private-service-endpoint` 和 `--public-service-endpoint` 标志。</li>
+<li>向 <code>ibmcloud ks cluster-get</code> 的输出添加了 **Public Service Endpoint URL** 和 **Private Service Endpoint URL** 字段。</li>
+<li>添加了 [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint) 命令。</li>
+<li>添加了 [<code>ibmcloud ks cluster-feature-enable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_public_service_endpoint) 命令。</li>
+<li>添加了 [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable_public_service_endpoint) 命令。</li>
+<li>添加了 [<code>ibmcloud ks cluster-feature-ls</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls) 命令。</li>
+</ul></li>
+<li>更新了文档和翻译。</li>
+<li>将 Go 版本更新为 1.11.6。</li>
+<li>解决了 macOS 用户的间歇性联网问题。</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.75</td>
+<td>2019 年 3 月 14 日</td>
+<td><ul><li>隐藏了错误输出中的原始 HTML。</li>
+<li>修订了帮助文本中的输入错误。</li>
+<li>修订了帮助文本的翻译。</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.61</td>
+<td>2019 年 2 月 26 日</td>
+<td><ul>
+<li>添加了 `cluster-pull-secret-apply` 命令，此命令用于创建集群的 IAM 服务标识、策略、API 密钥和映像拉取私钥，以便在 `default` Kubernetes 名称空间中运行的容器可以从 IBM Cloud Container Registry 中拉取映像。对于新集群，缺省情况下会创建使用 IAM 凭证的映像拉取私钥。要更新现有集群，或者如果集群在创建期间发生映像拉取私钥错误，可使用此命令。有关更多信息，请参阅[文档](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth)。</li>
+<li>修订了 `ibmcloud ks init` 失败导致打印帮助输出的错误。</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.53</td>
+<td>2019 年 2 月 19 日</td>
+<td><ul><li>修正了针对 `ibmcloud ks api-key-reset`、`ibmcloud ks credential-get/set` 和 `ibmcloud ks vlan-spanning-get` 忽略区域的错误。</li>
+<li>提高了 `ibmcloud ks worker-update` 的性能。</li>
+<li>在 `ibmcloud ks cluster-addon-enable` 提示中添加了附加组件的版本。</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.44</td>
+<td>2019 年 2 月 8 日</td>
+<td><ul>
+<li>向 `ibmcloud ks cluster-config` 命令添加了 `--skip-rbac` 选项，用于跳过将基于 {{site.data.keyword.Bluemix_notm}} IAM 服务访问角色的用户 Kubernetes RBAC 角色添加到集群配置的操作。仅当您[管理自己的 Kubernetes RBAC 角色](/docs/containers?topic=containers-users#rbac)时，才包含此选项。如果是使用 [{{site.data.keyword.Bluemix_notm}} IAM 服务访问角色](/docs/containers?topic=containers-access_reference#service)来管理所有 RBAC 用户，请不要包含此选项。</li>
+<li>将 Go 版本更新为 1.11.5。</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.40</td>
+<td>2019 年 2 月 6 日</td>
+<td><ul>
+<li>添加了 [<code>ibmcloud ks cluster-addons</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addons)、[<code>ibmcloud ks cluster-addon-enable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable) 和 [<code>ibmcloud ks cluster-addon-disable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_disable) 命令，以使用受管集群附加组件，例如 {{site.data.keyword.containerlong_notm}} 的 [Istio](/docs/containers?topic=containers-istio) 和 [Knative](/docs/containers?topic=containers-knative_tutorial) 受管附加组件。</li>
+<li>改进了向 {{site.data.keyword.Bluemix_dedicated_notm}} 用户提供的 <code>ibmcloud ks vlans</code> 命令的帮助文本。</li></ul></td>
+</tr>
+<tr>
+<td>0.2.30</td>
+<td>2019 年 1 月 31 日</td>
+<td>将 `ibmcloud ks cluster-config` 的缺省超时值增加到了 `500s`。</td>
+</tr>
+<tr>
+<td>0.2.19</td>
+<td>2019 年 1 月 16 日</td>
+<td><ul><li>添加了 `IKS_BETA_VERSION` 环境变量以启用 {{site.data.keyword.containerlong_notm}} 插件 CLI 的重新设计的 Beta 版本。要试用重新设计的版本，请参阅[使用 Beta 命令结构](/docs/containers?topic=containers-cs_cli_reference#cs_beta)。</li>
+<li>将 `ibmcloud ks subnets` 的缺省超时值增加到了 `60s`。</li>
+<li>次要错误和翻译修订。</li></ul></td>
+</tr>
+<tr>
+<td>0.1.668</td>
+<td>2018 年 12 月 18 日</td>
+<td><ul><li>将缺省 API 端点从 <code>https://containers.bluemix.net</code> 更改为 <code>https://containers.cloud.ibm.com</code>。</li>
+<li>修订了错误，以便能正确显示命令帮助和错误消息的翻译。</li>
+<li>更快地显示命令帮助。</li></ul></td>
+</tr>
+<tr>
 <td>0.1.654</td>
 <td>2018 年 12 月 5 日</td>
 <td>更新了文档和翻译。</td>
@@ -48,23 +128,28 @@ lastupdated: "2018-12-05"
 <td>0.1.638</td>
 <td>2018 年 11 月 15 日</td>
 <td>
-<ul><li>添加了 [<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh) 命令。</li>
+<ul><li>添加了 [<code>ibmcloud ks cluster-refresh</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh) 命令。</li>
 <li>向 <code>ibmcloud ks cluster-get</code> 和 <code>ibmcloud ks clusters</code> 的输出添加了资源组名称。</li></ul>
 </td>
 </tr>
 <tr>
 <td>0.1.635</td>
 <td>2018 年 11 月 6 日</td>
-<td>添加了 [<code>ibmcloud ks alb-autoupdate-disable</code>](cs_cli_reference.html#cs_alb_autoupdate_disable)、[<code>ibmcloud ks alb-autoupdate-enable</code>](cs_cli_reference.html#cs_alb_autoupdate_enable)、[<code>ibmcloud ks alb-autoupdate-get</code>](cs_cli_reference.html#cs_alb_autoupdate_get)、[<code>ibmcloud ks alb-rollback</code>](cs_cli_reference.html#cs_alb_rollback) 和 [<code>ibmcloud ks alb-update</code>](cs_cli_reference.html#cs_alb_update) 命令，用于管理 Ingress ALB 集群附加组件的自动更新。
-</td>
+<td>添加了用于管理 Ingress ALB 集群附加组件自动更新的命令：<ul>
+<li>[<code>ibmcloud ks alb-autoupdate-disable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_disable)</li>
+<li>[<code>ibmcloud ks alb-autoupdate-enable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_enable)</li>
+<li>[<code>ibmcloud ks alb-autoupdate-get</code>](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_get)</li>
+<li>[<code>ibmcloud ks alb-rollback</code>](/docs/containers?topic=containers-cs_cli_reference#cs_alb_rollback)</li>
+<li>[<code>ibmcloud ks alb-update</code>](/docs/containers?topic=containers-cs_cli_reference#cs_alb_update)</li>
+</ul></td>
 </tr>
 <tr>
 <td>0.1.621</td>
 <td>2018 年 10 月 30 日</td>
 <td><ul>
-<li>添加了 [<code>ibmcloud ks credential-get</code> 命令](cs_cli_reference.html#cs_credential_get)。</li>
-<li>添加了对 <code>storage</code> 日志源用于所有集群日志记录命令的支持。有关更多信息，请参阅<a href="cs_health.html#logging">了解集群和应用程序日志转发</a>。</li>
-<li>向 [<code>ibmcloud ks cluster-config</code> 命令](cs_cli_reference.html#cs_cluster_config)添加了 `--network` 标志，用于下载 Calico 配置文件以运行所有 Calico 命令。</li>
+<li>添加了 [<code>ibmcloud ks credential-get</code> 命令](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get)。</li>
+<li>添加了对 <code>storage</code> 日志源用于所有集群日志记录命令的支持。有关更多信息，请参阅<a href="/docs/containers?topic=containers-health#logging">了解集群和应用程序日志转发</a>。</li>
+<li>向 [<code>ibmcloud ks cluster-config</code> 命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)添加了 `--network` 标志，用于下载 Calico 配置文件以运行所有 Calico 命令。</li>
 <li>小幅错误修订和重构</li></ul>
 </td>
 </tr>
@@ -72,20 +157,20 @@ lastupdated: "2018-12-05"
 <td>0.1.593</td>
 <td>2018 年 10 月 10 日</td>
 <td><ul><li>向 <code>ibmcloud ks cluster-get</code> 的输出添加了资源组标识。</li>
-<li>[启用 {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect) 作为集群中的密钥管理服务 (KMS) 提供程序时，在 <code>ibmcloud ks cluster-get</code> 的输出中添加了“KMS 已启用”字段。</li></ul></td>
+<li>[启用 {{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect) 作为集群中的密钥管理服务 (KMS) 提供程序时，在 <code>ibmcloud ks cluster-get</code> 的输出中添加了“KMS 已启用”字段。</li></ul></td>
 </tr>
 <tr>
 <td>0.1.591</td>
 <td>2018 年 10 月 2 日</td>
-<td>添加了对[资源组](cs_clusters.html#prepare_account_level)的支持。</td>
+<td>添加了对[资源组](/docs/containers?topic=containers-clusters#prepare_account_level)的支持。</td>
 </tr>
 <tr>
 <td>0.1.590</td>
 <td>2018 年 10 月 1 日</td>
 <td><ul>
-<li>添加了 [<code>ibmcloud ks logging-collect</code>](cs_cli_reference.html#cs_log_collect) 和 [<code>ibmcloud ks logging-collect-status</code>](cs_cli_reference.html#cs_log_collect_status) 命令，用于收集集群中的 API 服务器日志。</li>
-<li>添加了 [<code>ibmcloud ks key-protect-enable</code> 命令](cs_cli_reference.html#cs_key_protect)，用于启用 {{site.data.keyword.keymanagementserviceshort}} 作为集群中的密钥管理服务 (KMS) 提供程序。</li>
-<li>向 [ibmcloud ks worker-reboot](cs_cli_reference.html#cs_worker_reboot) 和 [ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reboot) 命令添加了 <code>--skip-master-health</code> 标志，用于跳过启动重新引导或重新装入之前的主节点运行状况检查。</li>
+<li>添加了 [<code>ibmcloud ks logging-collect</code>](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect) 和 [<code>ibmcloud ks logging-collect-status</code>](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect_status) 命令，用于收集集群中的 API 服务器日志。</li>
+<li>添加了 [<code>ibmcloud ks key-protect-enable</code> 命令](/docs/containers?topic=containers-cs_cli_reference#cs_key_protect)，用于启用 {{site.data.keyword.keymanagementserviceshort}} 作为集群中的密钥管理服务 (KMS) 提供程序。</li>
+<li>向 [ibmcloud ks worker-reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot) 和 [ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot) 命令添加了 <code>--skip-master-health</code> 标志，用于跳过启动重新引导或重新装入之前的主节点运行状况检查。</li>
 <li>将 <code>ibmcloud ks cluster-get</code> 输出中的 <code>Owner Email</code> 重命名为 <code>Owner</code>。</li></ul></td>
 </tr>
 </tbody>

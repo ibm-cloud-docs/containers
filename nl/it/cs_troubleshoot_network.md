@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -29,7 +33,10 @@ lastupdated: "2018-12-05"
 Mentre utilizzi {{site.data.keyword.containerlong}}, tieni presente queste tecniche per la risoluzione dei problemi di rete del cluster.
 {: shortdesc}
 
-Hai problemi a connetterti alla tua applicazione tramite Ingress? Prova ad eseguire il [debug di Ingress](cs_troubleshoot_debug_ingress.html).
+Hai problemi a connetterti alla tua applicazione tramite Ingress? Prova ad eseguire il [debug di Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress).
+{: tip}
+
+Mentre risolvi i problemi, puoi utilizzare il [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) per eseguire i test e raccogliere le informazioni di rete, Ingress e strongSwan pertinenti dal tuo cluster.
 {: tip}
 
 ## Impossibile collegarsi a un'applicazione tramite un servizio di programma di bilanciamento del carico
@@ -51,13 +58,13 @@ Per risolvere i problemi del tuo servizio di programma di bilanciamento del cari
 1.  Verifica di aver configurato un cluster standard che è stato completamente distribuito e che abbia almeno due nodi di lavoro per garantire l'elevata disponibilità per il tuo servizio di programma di bilanciamento del carico.
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  ibmcloud ks workers --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
     Nel tuo output della CLI, assicurati che lo **Stato** del tuo nodo di lavoro visualizzi **Pronto** e che il **Tipo di macchina** sia diverso da **gratuito**.
 
-2. Per i programmi di bilanciamento del carico versione 2.0: assicurati di completare i [prerequisiti del programma di bilanciamento del carico 2.0](cs_loadbalancer.html#ipvs_provision).
+2. Per i programmi di bilanciamento del carico versione 2.0: assicurati di completare i [prerequisiti del programma di bilanciamento del carico 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
 
 3. Verifica l'accuratezza del file di configurazione del tuo servizio di programma di bilanciamento del carico.
     * Programmi di bilanciamento del carico versione 2.0:
@@ -81,7 +88,7 @@ Per risolvere i problemi del tuo servizio di programma di bilanciamento del cari
 
         1. Verifica di aver definito **LoadBalancer** come il tipo del tuo servizio.
         2. Verifica di aver incluso l'annotazione `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"`.
-        3. Nella sezione `spec.selector` del servizio LoadBalancer, assicurati che `<selector_key>` e `<selector_value>` siano gli stessi della coppia chiave/valore che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo file yaml di distribuzione. Se le etichette non corrispondono, la sezione **Endpoints** nel tuo servizio LoadBalancer mostra **<none>** e la tua applicazione non sarà accessibile da Internet.
+        3. Nella sezione `spec.selector` del servizio LoadBalancer, assicurati che `<selector_key>` e `<selector_value>` siano gli stessi della coppia chiave/valore che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo YAML di distribuzione. Se le etichette non corrispondono, la sezione **Endpoints** nel tuo servizio LoadBalancer mostra **<none>** e la tua applicazione non sarà accessibile da Internet.
         4. Verifica di aver utilizzato la **porta** su cui è in ascolto la tua applicazione.
         5. Verifica di aver impostato `externalTrafficPolicy` su `Local`.
 
@@ -102,7 +109,7 @@ Per risolvere i problemi del tuo servizio di programma di bilanciamento del cari
         {: screen}
 
         1. Verifica di aver definito **LoadBalancer** come il tipo del tuo servizio.
-        2. Nella sezione `spec.selector` del servizio LoadBalancer, assicurati che `<selector_key>` e `<selector_value>` siano gli stessi della coppia chiave/valore che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo file yaml di distribuzione. Se le etichette non corrispondono, la sezione **Endpoints** nel tuo servizio LoadBalancer mostra **<none>** e la tua applicazione non sarà accessibile da Internet.
+        2. Nella sezione `spec.selector` del servizio LoadBalancer, assicurati che `<selector_key>` e `<selector_value>` siano gli stessi della coppia chiave/valore che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo YAML di distribuzione. Se le etichette non corrispondono, la sezione **Endpoints** nel tuo servizio LoadBalancer mostra **<none>** e la tua applicazione non sarà accessibile da Internet.
         3. Verifica di aver utilizzato la **porta** su cui è in ascolto la tua applicazione.
 
 3.  Verifica il tuo servizio di programma di bilanciamento del carico e controlla la sezione **Eventi** per trovare errori potenziali.
@@ -115,12 +122,12 @@ Per risolvere i problemi del tuo servizio di programma di bilanciamento del cari
     Ricerca i seguenti messaggi di errore:
 
     <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Per utilizzare il servizio di programma di bilanciamento del carico, devi disporre di un cluster standard con almeno due nodi di lavoro.</li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Questo messaggio di errore indica che non è stato lasciato alcun indirizzo IP pubblico portatile che può essere assegnato al tuo servizio di programma di bilanciamento del carico. Fai riferimento a <a href="cs_subnets.html#subnets">Aggiunta di sottoreti ai cluster</a> per trovare informazioni su come richiedere gli indirizzi IP pubblici portatili per il tuo cluster. Dopo che gli indirizzi IP pubblici portatili sono disponibili per il cluster, il servizio di programma di bilanciamento del carico viene creato automaticamente.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Hai definito un indirizzo IP pubblico portatile per il tuo servizio di programma di bilanciamento del carico utilizzando la sezione **loadBalancerIP**, ma questo indirizzo IP pubblico portatile non è disponibile nella tua sottorete pubblica portatile. Nella sezione **loadBalancerIP** il tuo script di configurazione rimuove l'indirizzo IP esistente e aggiunge uno degli indirizzi IP pubblici portatili. Puoi anche rimuovere la sezione **loadBalancerIP** dal tuo script in modo che possa venirne assegnato uno automaticamente.</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Questo messaggio di errore indica che non è stato lasciato alcun indirizzo IP pubblico portatile che può essere assegnato al tuo servizio di programma di bilanciamento del carico. Fai riferimento a <a href="/docs/containers?topic=containers-subnets#subnets">Aggiunta di sottoreti ai cluster</a> per trovare informazioni su come richiedere gli indirizzi IP pubblici portatili per il tuo cluster. Dopo che gli indirizzi IP pubblici portatili sono disponibili per il cluster, il servizio di programma di bilanciamento del carico viene creato automaticamente.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Hai definito un indirizzo IP pubblico portatile per il tuo servizio di programma di bilanciamento del carico utilizzando la sezione **`loadBalancerIP`**, ma questo indirizzo IP pubblico portatile non è disponibile nella tua sottorete pubblica portatile. Nella sezione **`loadBalancerIP`** il tuo script di configurazione rimuove l'indirizzo IP esistente e aggiunge uno degli indirizzi IP pubblici portatili. Puoi anche rimuovere la sezione **`loadBalancerIP`** dal tuo script in modo che possa venirne assegnato uno automaticamente.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Non disponi di abbastanza nodi di lavoro da distribuire a un servizio di programma di bilanciamento del carico. Un motivo potrebbe essere che hai distribuito un cluster standard con più di un nodo di lavoro ma il provisioning ha avuto esito negativo.</li>
     <ol><li>Elenca i nodi di lavoro disponibili.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
-    <li>Se vengono trovati almeno due nodi di lavoro, elenca i dettagli del nodo di lavoro.</br><pre class="pre"><code>ibmcloud ks worker-get &lt;cluster_name_or_ID&gt; &lt;worker_ID&gt;</code></pre></li>
-    <li>Assicurati che gli ID di VLAN pubblica e privata dei nodi di lavoro restituiti dai comandi <code>kubectl get nodes</code> e <code>ibmcloud ks &lt;cluster_name_or_ID&gt; worker-get</code> corrispondano.</li></ol></li></ul>
+    <li>Se vengono trovati almeno due nodi di lavoro, elenca i dettagli del nodo di lavoro.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
+    <li>Assicurati che gli ID di VLAN pubblica e privata dei nodi di lavoro restituiti dai comandi <code>kubectl get nodes</code> e <code>ibmcloud ks worker-get</code> corrispondano.</li></ol></li></ul>
 
 4.  Se stai utilizzando un dominio personalizzato per collegarti al tuo servizio di programma di bilanciamento del carico, assicurati che sia associato all'indirizzo IP pubblico del tuo servizio di programma di bilanciamento del carico.
     1.  Trova l'indirizzo IP pubblico del servizio di bilanciamento del carico.
@@ -143,14 +150,14 @@ Hai esposto pubblicamente la tua applicazione creando una risorsa Ingress per la
 {: tsResolve}
 Controlla innanzitutto che il tuo cluster sia completamente distribuito e che abbia almeno 2 nodi di lavoro disponibili per zona per garantire l'elevata disponibilità per il tuo ALB.
 ```
-ibmcloud ks workers <cluster_name_or_ID>
+ibmcloud ks workers --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
 Nel tuo output della CLI, assicurati che lo **Stato** del tuo nodo di lavoro visualizzi **Pronto** e che il **Tipo di macchina** sia diverso da **gratuito**.
 
-* Se il tuo cluster standard è completamente distribuito e ha almeno 2 nodi di lavoro per zona, ma non è disponibile alcun **Dominio secondario Ingress**, vedi [Impossibile ottenere un dominio secondario per l'ALB Ingress](cs_troubleshoot_network.html#cs_subnet_limit).
-* Per altre situazioni di cui occuparsi, risolvi i problemi della tua impostazione Ingress attenendoti alla procedura in [Debug di Ingress](cs_troubleshoot_debug_ingress.html).
+* Se il tuo cluster standard è completamente distribuito e ha almeno 2 nodi di lavoro per zona, ma non è disponibile alcun **Dominio secondario Ingress**, vedi [Impossibile ottenere un dominio secondario per l'ALB Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
+* Per altre situazioni di cui occuparsi, risolvi i problemi della tua impostazione Ingress attenendoti alla procedura in [Debug di Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress).
 
 <br />
 
@@ -159,7 +166,7 @@ Nel tuo output della CLI, assicurati che lo **Stato** del tuo nodo di lavoro vis
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Dopo aver distribuito un segreto del programma di bilanciamento del carico (ALB) dell'applicazione Ingress al tuo cluster, il campo `Descrizione` non viene aggiornato con il nome del segreto quando visualizzi il tuo certificato in {{site.data.keyword.cloudcerts_full_notm}}.
+Dopo che hai distribuito un segreto del programma di bilanciamento del carico dell'applicazione (ALB, application load balancer) Ingress al tuo cluster utilizzando il comando `ibmcloud ks alb-cert-deploy`, il campo `Description` non viene aggiornato con il nome del segreto quando visualizzi il tuo certificato in {{site.data.keyword.cloudcerts_full_notm}}.
 
 Quando elenchi le informazioni sul segreto dell'ALB, lo stato è `*_failed`. Ad esempio, `create_failed`, `update_failed`, `delete_failed`.
 
@@ -175,7 +182,7 @@ Controlla i seguenti motivi sul perché il segreto dell'ALB può avere un malfun
  <tbody>
  <tr>
  <td>Non disponi dei ruoli di accesso necessari per scaricare e aggiornare i dati del certificato.</td>
- <td>Rivolgiti all'amministratore del tuo account per farti assegnare i seguenti ruoli {{site.data.keyword.Bluemix_notm}} IAM:<ul><li>I ruoli del servizio **Gestore** e **Scrittore** per la tua istanza {{site.data.keyword.cloudcerts_full_notm}}. Per ulteriori informazioni, vedi <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Gestione dell'accesso al servizio</a> per {{site.data.keyword.cloudcerts_short}}.</li><li>Il <a href="cs_users.html#platform">ruolo della piattaforma **Amministratore**</a> per il cluster.</li></ul></td>
+ <td>Rivolgiti all'amministratore del tuo account per farti assegnare i seguenti ruoli {{site.data.keyword.Bluemix_notm}} IAM:<ul><li>I ruoli del servizio **Gestore** e **Scrittore** per la tua istanza {{site.data.keyword.cloudcerts_full_notm}}. Per ulteriori informazioni, vedi <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">Gestione dell'accesso al servizio</a> per {{site.data.keyword.cloudcerts_short}}.</li><li>Il <a href="/docs/containers?topic=containers-users#platform">ruolo della piattaforma **Amministratore**</a> per il cluster.</li></ul></td>
  </tr>
  <tr>
  <td>Il CRN del certificato fornito al momento della creazione, dell'aggiornamento o della rimozione non appartiene allo stesso account del cluster.</td>
@@ -193,6 +200,10 @@ Controlla i seguenti motivi sul perché il segreto dell'ALB può avere un malfun
  <td>Il servizio {{site.data.keyword.cloudcerts_long_notm}} sta riscontrando un tempo di inattività.</td>
  <td>Controlla che il tuo servizio {{site.data.keyword.cloudcerts_short}} sia attivo e in esecuzione.</td>
  </tr>
+ <tr>
+ <td>Il tuo segreto importato ha lo stesso nome del segreto Ingress fornito da IBM.</td>
+ <td>Rinomina il tuo segreto. Puoi controllare il nome del segreto Ingress fornito da IBM eseguendo `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
+ </tr>
  </tbody></table>
 
 <br />
@@ -202,7 +213,7 @@ Controlla i seguenti motivi sul perché il segreto dell'ALB può avere un malfun
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Quando esegui `ibmcloud ks cluster-get <cluster>`, il tuo cluster si trova in uno stato `normal` ma non ci sono **domini secondari Ingress** disponibili.
+Quando esegui `ibmcloud ks cluster-get --cluster <cluster>`, il tuo cluster si trova in uno stato `normal` ma non ci sono **domini secondari Ingress** disponibili.
 
 Potresti ricevere un messaggio di errore simile al seguente.
 
@@ -215,13 +226,13 @@ There are already the maximum number of subnets permitted in this VLAN.
 Nei cluster standard, la prima volta che crei un cluster in una zona, viene automaticamente eseguito il provisioning di una VLAN pubblica e di una VLAN privata in tale zona per tuo conto nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). In tale zona, 1 sottorete pubblica portatile è richiesta sulla VLAN pubblica da te specificata e 1 sottorete privata portatile è richiesta sulla VLAN privata da te specificata. Per {{site.data.keyword.containerlong_notm}}, le VLAN hanno un limite di 40 sottoreti. Se la VLAN del cluster in una zona ha già raggiunto tale limite, il provisioning del **dominio secondario Ingress** non riesce.
 
 Per visualizzare quante sottoreti sono presenti in una VLAN:
-1.  Dalla [console dell'infrastruttura IBM Cloud (SoftLayer)](https://control.bluemix.net/), seleziona **Rete** > **Gestione IP** > **VLAN**.
+1.  Dalla [console dell'infrastruttura IBM Cloud (SoftLayer)](https://cloud.ibm.com/classic?), seleziona **Rete** > **Gestione IP** > **VLAN**.
 2.  Fai clic sul **Numero VLAN** della VLAN che hai usato per creare il tuo cluster. Esamina la sezione **Sottoreti** per vedere se ci sono 40 o più sottoreti.
 
 {: tsResolve}
-Se hai bisogno di una nuova VLAN, ordinane una [contattando il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Quindi [crea un cluster](cs_cli_reference.html#cs_cluster_create) che utilizzi questa nuova VLAN.
+Se hai bisogno di una nuova VLAN, ordinane una [contattando il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Quindi [crea un cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) che utilizzi questa nuova VLAN.
 
-Se hai un'altra VLAN disponibile, puoi [configurare lo spanning delle VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) nel tuo cluster esistente. Dopo, puoi aggiungere nuovi nodi di lavoro al cluster che utilizza l'altra VLAN con sottoreti disponibili. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Se hai un'altra VLAN disponibile, puoi [configurare lo spanning delle VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) nel tuo cluster esistente. Dopo, puoi aggiungere nuovi nodi di lavoro al cluster che utilizza l'altra VLAN con sottoreti disponibili. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Se non stai utilizzando tutte le sottoreti nella VLAN, puoi riutilizzare le sottoreti nel cluster.
 1.  Controlla che le sottoreti che desideri utilizzare siano disponibili.
@@ -229,9 +240,9 @@ Se non stai utilizzando tutte le sottoreti nella VLAN, puoi riutilizzare le sott
     L'account dell'infrastruttura che stai utilizzando potrebbe essere condiviso tra più account {{site.data.keyword.Bluemix_notm}}. Se è questo il caso, anche se esegui il comando `ibmcloud ks subnets` per vedere le sottoreti con **Bound Clusters**, potrai vedere le informazioni solo per i tuoi cluster. Controlla con il proprietario dell'account dell'infrastruttura per assicurarti che le sottoreti siano disponibili e non in uso da parte di un altro account o team.
     {: note}
 
-2.  [Crea un cluster](cs_cli_reference.html#cs_cluster_create) con l'opzione `--no-subnet` in modo tale che il servizio non tenti di creare nuove sottoreti. Specifica la zona e la VLAN in cui le sottoreti sono disponibili per essere utilizzate.
+2.  [Crea un cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) con l'opzione `--no-subnet` in modo tale che il servizio non tenti di creare nuove sottoreti. Specifica la zona e la VLAN in cui le sottoreti sono disponibili per essere utilizzate.
 
-3.  Usa il [comando](cs_cli_reference.html#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add` per aggiungere sottoreti esistenti al tuo cluster. Per ulteriori informazioni, consulta [Aggiunta o riutilizzo di sottoreti personalizzate ed esistenti nei cluster Kubernetes](cs_subnets.html#custom).
+3.  Usa il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add` per aggiungere sottoreti esistenti al tuo cluster. Per ulteriori informazioni, consulta [Aggiunta o riutilizzo di sottoreti personalizzate ed esistenti nei cluster Kubernetes](/docs/containers?topic=containers-subnets#subnets_custom).
 
 <br />
 
@@ -279,7 +290,7 @@ Per evitare che la connessione venga chiusa dopo 60 secondi di inattività:
 
 2. Per mantenere attiva la connessione, puoi aumentare il valore del timeout oppure configurare un heartbeat nella tua applicazione.
 <dl><dt>Modifica il timeout</dt>
-<dd>Aumenta il valore del `proxy-read-timeout` nella tua configurazione dell'ALB. Ad esempio, per modificare il timeout da `60s` a un valore più grande come `300s`, aggiungi questa [annotazione](cs_annotations.html#connection) al tuo file di risorse Ingress `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. Il timeout viene modificato per tutti gli ALB pubblici nel tuo cluster.</dd>
+<dd>Aumenta il valore del `proxy-read-timeout` nella tua configurazione dell'ALB. Ad esempio, per modificare il timeout da `60s` a un valore più grande come `300s`, aggiungi questa [annotazione](/docs/containers?topic=containers-ingress_annotation#connection) al tuo file di risorse Ingress `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. Il timeout viene modificato per tutti gli ALB pubblici nel tuo cluster.</dd>
 <dt>Configura un heartbeat</dt>
 <dd>Se non vuoi modificare il valore di timeout della lettura predefinito di ALB, configura un heartbeat nella tua applicazione WebSocket. Quando configuri un protocollo heartbeat utilizzando un framework come [WAMP ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://wamp-proto.org/), il server di upstream dell'applicazione invia periodicamente un messaggio "ping" a un intervallo prestabilito e il client risponde con un messaggio "pong". Configura l'intervallo di heartbeat su 58 secondi o meno in modo che il traffico "ping/pong" mantenga la connessione aperta prima che venga implementato il timeout di 60 secondi.</dd></dl>
 
@@ -290,21 +301,21 @@ Per evitare che la connessione venga chiusa dopo 60 secondi di inattività:
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-Hai abilitato la conservazione dell'IP di origine per un servizio del [programma di bilanciamento del carico versione 1.0](cs_loadbalancer.html#node_affinity_tolerations) o dell'[ALB Ingress](cs_ingress.html#preserve_source_ip) modificando `externalTrafficPolicy` in `Local` nel file di configurazione del servizio. Tuttavia, nessun traffico raggiunge il servizio di backend per la tua applicazione.
+Hai abilitato la conservazione dell'IP di origine per un servizio del [programma di bilanciamento del carico versione 1.0](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) o dell'[ALB Ingress](/docs/containers?topic=containers-ingress#preserve_source_ip) modificando `externalTrafficPolicy` in `Local` nel file di configurazione del servizio. Tuttavia, il traffico non raggiunge il servizio di back-end per la tua applicazione.
 
 {: tsCauses}
 Quando abiliti la conservazione dell'IP di origine per i servizi del programma di bilanciamento del carico o dell'ALB Ingress, l'indirizzo IP di origine della richiesta del client viene conservato. Il servizio inoltra il traffico ai pod dell'applicazione solo sullo stesso nodo di lavoro per garantire che l'indirizzo IP del pacchetto di richiesta non venga modificato. In genere, i pod dei servizi del programma di bilanciamento del carico o dell'ALB Ingress vengono distribuiti negli stessi nodi di lavoro su cui vengono distribuiti i pod dell'applicazione. Tuttavia, ci sono alcune situazioni in cui i pod del servizio e i pod dell'applicazione potrebbero non essere pianificati sullo stesso nodo di lavoro. Se utilizzi le [corruzioni Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) sui nodi di lavoro, a tutti i pod che non hanno una tolleranza alle corruzioni viene impedita l'esecuzione sui nodi di lavoro corrotti. La conservazione dell'IP di origine potrebbe non funzionare in base al tipo di corruzione che hai utilizzato:
 
-* **Corruzioni del nodo edge**: hai [aggiunto l'etichetta `dedicated=edge`](cs_edge.html#edge_nodes) a due o più nodi di lavoro su ogni VLAN pubblica nel tuo cluster per garantire che i pod Ingress e del programma di bilanciamento del carico vengano distribuiti solo a quei nodi di lavoro. Quindi, hai anche [corrotto quei nodi edge](cs_edge.html#edge_workloads) per impedire che altri carichi di lavoro vengano eseguiti su nodi edge. Tuttavia, non hai aggiunto una regola di affinità del nodo edge e una tolleranza alla tua distribuzione dell'applicazione. I tuoi pod dell'applicazione non possono essere pianificati sugli stessi nodi corrotti dei pod del servizio e nessun traffico raggiunge il servizio di backend per la tua applicazione.
+* **Corruzioni del nodo edge**: hai [aggiunto l'etichetta `dedicated=edge`](/docs/containers?topic=containers-edge#edge_nodes) a due o più nodi di lavoro su ogni VLAN pubblica nel tuo cluster per garantire che i pod Ingress e del programma di bilanciamento del carico vengano distribuiti solo a quei nodi di lavoro. Quindi, hai anche [corrotto quei nodi edge](/docs/containers?topic=containers-edge#edge_workloads) per impedire che altri carichi di lavoro vengano eseguiti su nodi edge. Tuttavia, non hai aggiunto una regola di affinità del nodo edge e una tolleranza alla tua distribuzione dell'applicazione. I tuoi pod dell'applicazione non possono essere pianificati sugli stessi nodi corrotti dei pod del servizio e il traffico non raggiunge il servizio di back-end per la tua applicazione.
 
-* **Corruzioni personalizzate**: hai utilizzato corruzioni personalizzate su diversi nodi in modo che solo i pod dell'applicazione con tolleranza a queste corruzioni possano essere distribuiti su tali nodi. Hai aggiunto regole di affinità e tolleranze alle distribuzioni dell'applicazione e del servizio del programma di bilanciamento del carico o Ingress in modo che i loro pod vengano distribuiti solo su tali nodi. Tuttavia, i pod `keepalived` `ibm-cloud-provider-ip` che vengono creati automaticamente nello spazio dei nomi `ibm-system` garantiscono che i pod del programma di bilanciamento del carico e i pod dell'applicazione siano sempre pianificati sullo stesso nodo di lavoro. Questi pod `keepalived` non hanno le tolleranze per le corruzioni personalizzate che hai utilizzato. Non possono essere pianificati sugli stessi nodi corrotti su cui sono in esecuzione i tuoi pod dell'applicazione e nessun traffico raggiunge il servizio di backend per la tua applicazione.
+* **Corruzioni personalizzate**: hai utilizzato corruzioni personalizzate su diversi nodi in modo che solo i pod dell'applicazione con tolleranza a queste corruzioni possano essere distribuiti su tali nodi. Hai aggiunto regole di affinità e tolleranze alle distribuzioni dell'applicazione e del servizio del programma di bilanciamento del carico o Ingress in modo che i loro pod vengano distribuiti solo su tali nodi. Tuttavia, i pod `keepalived` `ibm-cloud-provider-ip` che vengono creati automaticamente nello spazio dei nomi `ibm-system` garantiscono che i pod del programma di bilanciamento del carico e i pod dell'applicazione siano sempre pianificati sullo stesso nodo di lavoro. Questi pod `keepalived` non hanno le tolleranze per le corruzioni personalizzate che hai utilizzato. Non possono essere pianificati sugli stessi nodi corrotti su cui sono in esecuzione i tuoi pod dell'applicazione e il traffico non raggiunge il servizio di back-end per la tua applicazione.
 
 {: tsResolve}
 Risolvi il problema scegliendo una delle seguenti opzioni:
 
-* **Corruzioni del nodo edge**: per garantire che i tuoi pod del programma di bilanciamento del carico e dell'applicazione vengano distribuiti sui nodi edge corrotti, [aggiungi regole di affinità e tolleranze del nodo edge alla tua distribuzione dell'applicazione](cs_loadbalancer.html#edge_nodes). I pod del programma di bilanciamento del carico e dell'ALB Ingress hanno queste regole di affinità e tolleranze per impostazione predefinita.
+* **Corruzioni del nodo edge**: per garantire che i tuoi pod del programma di bilanciamento del carico e dell'applicazione vengano distribuiti sui nodi edge corrotti, [aggiungi regole di affinità e tolleranze del nodo edge alla tua distribuzione dell'applicazione](/docs/containers?topic=containers-loadbalancer#edge_nodes). I pod del programma di bilanciamento del carico e dell'ALB Ingress hanno queste regole di affinità e tolleranze per impostazione predefinita.
 
-* **Corruzioni personalizzate**: rimuovi le corruzioni personalizzate per le quali i pod `keepalived` non hanno tolleranze. Puoi invece [etichettare i nodi di lavoro come edge e quindi danneggiare quei nodi edge](cs_edge.html).
+* **Corruzioni personalizzate**: rimuovi le corruzioni personalizzate per le quali i pod `keepalived` non hanno tolleranze. Puoi invece [etichettare i nodi di lavoro come edge e quindi danneggiare quei nodi edge](/docs/containers?topic=containers-edge).
 
 Se completi una delle opzioni precedenti ma i pod `keepalived` non vengono ancora pianificati, puoi ottenere ulteriori informazioni sui pod `keepalived`:
 
@@ -342,7 +353,7 @@ Il tuo file di configurazione del grafico Helm ha valori errati, valori mancanti
 {: tsResolve}
 Quando tenti di stabilire la connettività VPN con il grafico Helm strongSwan per la prima volta, è probabile che lo stato della VPN non sia `ESTABLISHED`. Potresti dover verificare diversi tipi di problemi e modificare di conseguenza il tuo file di configurazione. Per risolvere i problemi relativi alla connettività VPN strongSwan:
 
-1. [Testa e verifica la connettività VPN strongSwan](cs_vpn.html#vpn_test) eseguendo i cinque test Helm inclusi nella definizione del grafico strongSwan.
+1. [Testa e verifica la connettività VPN strongSwan](/docs/containers?topic=containers-vpn#vpn_test) eseguendo i cinque test Helm inclusi nella definizione del grafico strongSwan.
 
 2. Se non sei in grado di stabilire la connettività VPN dopo aver eseguito i test Helm, puoi eseguire lo strumento di debug VPN fornito all'interno dell'immagine del pod VPN.
 
@@ -421,7 +432,7 @@ In precedenza hai stabilito una connessione VPN funzionante utilizzando il servi
 Se hai aggiunto un nodo di lavoro a un pool di nodi di lavoro:
 
 * È stato eseguito il provisioning del nodo di lavoro su una nuova sottorete privata che non è esposta tramite la connessione VPN dalle tue impostazioni `localSubnetNAT` o `local.subnet` esistenti
-* Le rotte VPN non possono essere aggiunte al nodo di lavoro perché il nodo di lavoro ha delle corruzioni o etichette che non sono incluse nelle tue impostazioni `tolerations` o `nodeSelector` esistenti
+* Gli instradamenti VPN non possono essere aggiunti al nodo di lavoro perché il nodo di lavoro ha delle corruzioni o etichette che non sono incluse nelle tue impostazioni `tolerations` o `nodeSelector` esistenti
 * Il pod VPN è in esecuzione sul nuovo nodo di lavoro, ma l'indirizzo IP pubblico di tale nodo di lavoro non è consentito attraverso il firewall in loco
 
 Se hai eliminato il nodo di lavoro:
@@ -556,33 +567,16 @@ Quando tenti di visualizzare le politiche di rete Calico nel tuo cluster eseguen
 - `Failed to get resources: Resource type 'GlobalNetworkPolicy' is not supported`
 
 {: tsCauses}
-Per utilizzare le politiche Calico, quattro fattori devono essere allineati: la tua versione del cluster Kubernetes, la versione della CLI Calico, la sintassi del file di configurazione Calico e i comandi di visualizzazione della politica. Uno o più di questi fattori non è alla versione corretta.
+Per utilizzare le politiche Calico, quattro fattori devono allinearsi: la tua versione del cluster Kubernetes, la versione della CLI Calico, la sintassi del file di configurazione Calico e i comandi di visualizzazione della politica. Uno o più di questi fattori non è alla versione corretta.
 
 {: tsResolve}
-Quando il tuo cluster è alla [versione Kubernetes 1.10 o successive](cs_versions.html), devi utilizzare la CLI Calico v3.1, la sintassi del file di configurazione `calicoctl.cfg` v3 e i comandi `calicoctl get GlobalNetworkPolicy` e `calicoctl get NetworkPolicy`.
-
-Quando il tuo cluster è alla [versione Kubernetes 1.9 o precedenti](cs_versions.html), devi utilizzare la CLI Calico v1.6.3, la sintassi del file di configurazione `calicoctl.cfg` v2 e il comando `calicoctl get policy`.
+Quando il tuo cluster è alla [versione Kubernetes 1.10 o successive](/docs/containers?topic=containers-cs_versions), devi utilizzare la CLI Calico v3.1, la sintassi del file di configurazione `calicoctl.cfg` v3 e i comandi `calicoctl get GlobalNetworkPolicy` e `calicoctl get NetworkPolicy`.
 
 Per assicurarti che tutti i fattori Calico siano allineati:
 
-1. Visualizza la tua versione del cluster Kubernetes.
-    ```
-    ibmcloud ks cluster-get <cluster_name>
-    ```
-    {: pre}
-
-    * Se il tuo cluster è alla versione Kubernetes 1.10 o successive:
-        1. [Installa e configura la CLI Calico versione 3.3.1](cs_network_policy.html#1.10_install). La configurazione include l'aggiornamento manuale del file `calicoctl.cfg` per utilizzare la sintassi Calico v3.
-        2. Assicurati che tutte le politiche che crei e vuoi applicare al tuo cluster utilizzino la [sintassi Calico v3 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Se hai un file `.yaml` o `.json` della politica esistente alla sintassi Calico v2, puoi convertirlo a Calico v3 utilizzando il comando [`calicoctl convert` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
-        3. Per [visualizzare le politiche](cs_network_policy.html#1.10_examine_policies), assicurati di stare utilizzando `calicoctl get GlobalNetworkPolicy` per le politiche globali e `calicoctl get NetworkPolicy --namespace <policy_namespace>` per le politiche dedicate a spazi dei nomi specifici.
-
-    * Se il tuo cluster è alla versione Kubernetes 1.9 o precedenti:
-        1. [Installa e configura la CLI Calico versione 1.6.3](cs_network_policy.html#1.9_install). Assicurati che il file `calicoctl.cfg` utilizzi la sintassi Calico v2.
-        2. Assicurati che tutte le politiche che crei e vuoi applicare al tuo cluster utilizzino la [sintassi Calico v2 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
-        3. Per [visualizzare le politiche](cs_network_policy.html#1.9_examine_policies), assicurati di stare utilizzando `calicoctl get policy`.
-
-Prima di aggiornare il tuo cluster da Kubernetes versione 1.9 o precedenti alla versione 1.10 o successive, rivedi [Preparazione dell'aggiornamento a Calico v3](cs_versions.html#110_calicov3).
-{: tip}
+1. [Installa e configura la CLI Calico versione 3.3.1](/docs/containers?topic=containers-network_policies#cli_install). La configurazione include l'aggiornamento manuale del file `calicoctl.cfg` per utilizzare la sintassi Calico v3.
+2. Assicurati che tutte le politiche che crei e vuoi applicare al tuo cluster utilizzino la [sintassi Calico v3 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Se hai un file `.yaml` o `.json` della politica esistente alla sintassi Calico v2, puoi convertirlo a Calico v3 utilizzando il comando [`calicoctl convert` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
+3. Per [visualizzare le politiche](/docs/containers?topic=containers-network_policies#view_policies), assicurati che stai utilizzando `calicoctl get GlobalNetworkPolicy` per le politiche globali e `calicoctl get NetworkPolicy --namespace <policy_namespace>` per le politiche il cui ambito è delimitato a specifici spazi dei nomi.
 
 <br />
 
@@ -603,11 +597,11 @@ Quando un account viene sospeso, i nodi di lavoro all'interno dell'account vengo
 
 {: tsResolve}
 
-Puoi [eliminare il tuo pool di nodi di lavoro esistente](cs_cli_reference.html#cs_worker_pool_rm) e quindi [creare un nuovo pool di nodi di lavoro](cs_cli_reference.html#cs_worker_pool_create).
+Puoi [eliminare il tuo pool di nodi di lavoro esistente](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm) e quindi [creare un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
 
 In alternativa, puoi conservare il tuo pool di nodi di lavoro esistente ordinando delle nuove VLAN e utilizzandole per creare dei nuovi nodi di lavoro nel pool.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Per ottenere le zone per cui hai bisogno di nuovi ID VLAN, prendi nota dell'**Ubicazione** nel seguente output di comando. **Nota**: se il tuo cluster è un multizona, ti servono degli ID VLAN per ciascuna zona.
 
@@ -616,7 +610,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
     ```
     {: pre}
 
-2.  Ottieni una nuova VLAN privata e pubblica per ogni zona in cui si trova il tuo cluster [contattando il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans).
+2.  Ottieni una nuova VLAN pubblica e privata per ciascuna zona in cui si trova il tuo cluster [contattando il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
 3.  Prendi nota dei nuovi ID VLAN pubblica e privata per ciascuna zona.
 
@@ -627,7 +621,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
     ```
     {: pre}
 
-5.  Utilizza il [comando](cs_cli_reference.html#cs_zone_network_set) `zone-network-set` per modificare i metadati della rete del pool di nodi di lavoro.
+5.  Utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) `zone-network-set` per modificare i metadati della rete del pool di nodi di lavoro.
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
@@ -646,7 +640,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 8.  Verifica che i tuoi nodi di lavoro vengano creati.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool>
+    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool>
     ```
     {: pre}
 
@@ -655,13 +649,13 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 
 
 ## Come ottenere aiuto e supporto
-{: #ts_getting_help}
+{: #network_getting_help}
 
 Stai ancora avendo problemi con il tuo cluster?
 {: shortdesc}
 
--  Nel terminale, ricevi una notifica quando sono disponibili degli aggiornamenti ai plug-in e alla CLI `ibmcloud`. Assicurati di mantenere la tua CLI aggiornata in modo che tu possa utilizzare tutti i comandi e gli indicatori disponibili.
--   Per vedere se {{site.data.keyword.Bluemix_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/bluemix/support/#status).
+-  Nel terminale, ricevi una notifica quando sono disponibili degli aggiornamenti ai plugin e alla CLI `ibmcloud`. Assicurati di mantenere la tua CLI aggiornata in modo che tu possa utilizzare tutti i comandi e gli indicatori disponibili.
+-   Per vedere se {{site.data.keyword.Bluemix_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/status?selected=status).
 -   Pubblica una domanda in [{{site.data.keyword.containerlong_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
     Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo Slack.
     {: tip}
@@ -672,8 +666,8 @@ Stai ancora avendo problemi con il tuo cluster?
     -   Per domande sul servizio e istruzioni introduttive, utilizza il forum
 [IBM Developer Answers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Includi le tag `ibm-cloud`
 e `containers`.
-    Consulta [Come ottenere supporto](/docs/get-support/howtogetsupport.html#using-avatar) per ulteriori dettagli sull'utilizzo dei forum.
--   Contatta il supporto IBM aprendo un caso. Per informazioni su come aprire un caso di supporto IBM o sui livelli di supporto e sulla gravità dei casi, consulta [Come contattare il supporto](/docs/get-support/howtogetsupport.html#getting-customer-support).
-Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `ibmcloud ks clusters`.
+    Consulta [Come ottenere supporto](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) per ulteriori dettagli sull'utilizzo dei forum.
+-   Contatta il supporto IBM aprendo un caso. Per informazioni su come aprire un caso di supporto IBM o sui livelli di supporto e sulla gravità dei casi, consulta [Come contattare il supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `ibmcloud ks clusters`. Puoi anche utilizzare il [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) per raccogliere ed esportare informazioni pertinenti dal tuo cluster da condividere con il supporto IBM.
 {: tip}
 

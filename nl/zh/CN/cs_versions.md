@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-06"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -17,10 +21,6 @@ lastupdated: "2018-12-06"
 {:important: .important}
 {:deprecated: .deprecated}
 {:note: .note}
-{:important: .important}
-{:deprecated: .deprecated}
-{:download: .download}
-
 
 
 # 版本信息和更新操作
@@ -33,18 +33,22 @@ lastupdated: "2018-12-06"
 {:shortdesc}
 
 **支持的 Kubernetes 版本**：
-- 最新版本：1.12.3
-- 缺省版本：1.10.11
-- 其他版本：1.11.5
+*   最新版本：1.13.4
+*   缺省版本：1.12.6
+*   其他版本：1.11.8
+
+**不推荐和不支持的 Kubernetes 版本**：
+*   不推荐的版本：1.10
+*   不支持的版本：1.5、1.7、1.8 和 1.9
 
 </br>
 
-**不推荐的版本**：集群在不推荐的 Kubernetes 版本上运行时，您有 30 天的时间来复查并更新到支持的 Kubernetes 版本，30 天后此版本变为不受支持。在不推荐期间，集群仍可正常工作，但可能需要更新为支持的发行版以修复安全漏洞。不能创建使用不推荐版本的新集群。
+**不推荐的版本**：集群在不推荐的 Kubernetes 版本上运行时，您至少有 30 天的时间来复查并更新到支持的 Kubernetes 版本，30 天后此版本变为不受支持。在不推荐期间，集群仍可正常工作，但可能需要更新为支持的发行版以修复安全漏洞。不能创建使用不推荐版本的新集群。
 
-**不支持的版本**：如果是在不支持的 Kubernetes 版本上运行集群，请查看下面与更新相关的潜在影响，然后立即[更新集群](cs_cluster_update.html#update)以继续接收重要的安全性更新和支持。
-*  **注意**：如果您等到集群低于受支持版本三个或更多次版本时才更新，那么必须强制更新，但这可能会导致意外结果或失败。
-*  不支持的集群无法添加或重新装入现有工作程序节点。
-*  将集群更新为支持的版本后，集群可以恢复正常运行并继续接收支持。
+**不支持的版本**：如果集群在不支持的 Kubernetes 版本上运行，请查看以下潜在更新影响，然后立即[更新集群](/docs/containers?topic=containers-update#update)以继续接收重要的安全性更新和支持。不支持的集群无法添加或重新装入现有工作程序节点。通过在 `ibmcloud ks clusters` 命令的输出中查看 **State** 字段，或在 [{{site.data.keyword.containerlong_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/containers-kubernetes/clusters) 中查看该字段，可以了解集群是否为**不受支持**。
+
+如果您等到集群低于受支持版本三个或更多次版本时才更新，那么必须强制更新，但这可能会导致意外结果或失败。从 V1.7 或 V1.8 更新到 V1.11 或更高版本会失败。对于其他版本，例如如果集群运行的是 Kubernetes V1.9，那么将主节点直接更新为 1.12 或更高版本时，大多数 pod 会因进入 `MatchNodeSelector`、`CrashLoopBackOff` 或 `ContainerCreating` 等状态而失败，这种情况会持续到您将工作程序节点更新为同一版本。要避免此问题，在将集群从当前版本更新为受支持版本时，跨度应少于三个次版本，例如先从 1.9 更新到 1.11，然后再更新到 1.12。<br><br>将集群更新为支持的版本后，集群可以恢复正常运行并继续接收支持。
+{: important}
 
 </br>
 
@@ -58,7 +62,7 @@ kubectl version  --short | grep -i server
 输出示例：
 
 ```
-Server Version: v1.10.11+IKS
+Server Version: v1.12.6+IKS
 ```
 {: screen}
 
@@ -76,31 +80,221 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 |补丁|x.x.4_1510|IBM 和您|Kubernetes 补丁以及其他 {{site.data.keyword.Bluemix_notm}} Provider 组件更新，例如安全性和操作系统补丁。IBM 会自动更新主节点，但由您将补丁应用于工作程序节点。请参阅以下部分中有关补丁的更多信息。|
 {: caption="Kubernetes 更新的影响" caption-side="top"}
 
-更新可用时，您在查看有关工作程序节点的信息时（例如，使用 `ibmcloud ks workers <cluster>` 或 `ibmcloud ks worker-get <cluster> <worker>` 命令），会收到相应通知。
--  **主要更新和次要更新**：首先[更新主节点](cs_cluster_update.html#master)，然后[更新工作程序节点](cs_cluster_update.html#worker_node)。
+更新可用时，您在查看有关工作程序节点的信息时（例如，使用 `ibmcloud ks workers --cluster <cluster>` 或 `ibmcloud ks worker-get --cluster <cluster> --worker <worker>` 命令），会收到相应通知。
+-  **主要更新和次要更新 (1.x)**：首先[更新主节点](/docs/containers?topic=containers-update#master)，然后[更新工作程序节点](/docs/containers?topic=containers-update#worker_node)。工作程序节点运行的 Kubernetes 主版本或次版本不能高于主节点。
    - 缺省情况下，您最多只能跨 Kubernetes 主节点的两个次版本进行更新。例如，如果当前主节点的版本是 1.9，而您要更新到 1.12，那么必须先更新到 1.10。可以强制更新继续，但跨两个以上的次版本更新可能会导致意外结果或失败。
 
-   - 您使用的 `kubectl` CLI 版本至少应该与集群的 `major.minor` 版本相匹配，否则可能会遇到意外的结果。请确保 Kubernetes 集群版本和 [CLI 版本](cs_cli_install.html#kubectl)保持最新。
+   - 您使用的 `kubectl` CLI 版本至少应该与集群的 `major.minor` 版本相匹配，否则可能会遇到意外的结果。请确保 Kubernetes 集群版本和 [CLI 版本](/docs/containers?topic=containers-cs_cli_install#kubectl)保持最新。
 
--  **补丁更新**：各补丁之间的更改会记录在[版本更改日志](cs_versions_changelog.html)中。更新可用时，您在 {{site.data.keyword.Bluemix_notm}} 控制台或 CLI 中查看有关主节点和工作程序节点的信息时（例如，使用 `ibmcloud ks clusters`、`cluster-get`、`workers` 或 `worker-get` 命令），会收到相应通知。
-   - **工作程序节点补丁**：每月检查以了解更新是否可用，并使用 `ibmcloud ks worker-update` [命令](cs_cli_reference.html#cs_worker_update)或 `ibmcloud ks worker-reload` [命令](cs_cli_reference.html#cs_worker_reload)来应用这些安全性和操作系统补丁。请注意，在更新或重新装入期间，将重新创建工作程序节点机器的映像，并且如果数据未[存储在工作程序节点外部](cs_storage_planning.html#persistent_storage_overview)，那么将删除数据。
-   - **主节点补丁**：主节点补丁会自动应用，但需要若干天时间，因此主节点补丁版本在应用于主节点之前可能会显示为可用。自动更新还会跳过运行状况欠佳或当前有操作正在执行的集群。有时，IBM 可能会对特定主节点修订包禁用自动更新（如更改日志中所注释），例如仅当主节点从一个次版本更新到另一个次版本时才需要的补丁。在上述任何情况下，您都可以选择自行安全地使用 `ibmcloud ks cluster-update` [命令](cs_cli_reference.html#cs_cluster_update)，而无需等待应用自动更新。
+-  **补丁更新 (x.x.4_1510)**：各补丁之间的更改会记录在[版本更改日志](/docs/containers?topic=containers-changelog)中。主节点补丁会自动应用，但工作程序节点补丁更新须由您来启动。此外，工作程序节点运行的补丁版本可以高于主节点。更新可用时，您在 {{site.data.keyword.Bluemix_notm}} 控制台或 CLI 中查看有关主节点和工作程序节点的信息时（例如，使用 `ibmcloud ks clusters`、`cluster-get`、`workers` 或 `worker-get` 命令），会收到相应通知。
+   - **工作程序节点补丁**：每月检查以了解更新是否可用，并使用 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)来应用这些安全性和操作系统补丁。请注意，在更新或重新装入期间，将重新创建工作程序节点机器的映像，并且如果数据未[存储在工作程序节点外部](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)，那么将删除数据。
+   - **主节点补丁**：主节点补丁会自动应用，但需要若干天时间，因此主节点补丁版本在应用于主节点之前可能会显示为可用。自动更新还会跳过运行状况欠佳或当前有操作正在执行的集群。有时，IBM 可能会对特定主节点修订包禁用自动更新（如更改日志中所注释），例如仅当主节点从一个次版本更新到另一个次版本时才需要的补丁。在上述任何情况下，您都可以选择自行安全地使用 `ibmcloud ks cluster-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)，而无需等待应用自动更新。
 
 </br>
 
+{: #prep-up}
 以下信息总结了在将集群从先前版本更新到新版本时，可能会对已部署应用程序产生影响的更新。
+-  V1.13 [准备操作](#cs_v113)。
 -  V1.12 [准备操作](#cs_v112)。
 -  V1.11 [准备操作](#cs_v111)。
--  V1.10 [准备操作](#cs_v110)。
--  对不推荐使用或不受支持版本的[归档](#k8s_version_archive)。
+-  **不推荐**：V1.10 [准备操作](#cs_v110)。
+-  对不支持的版本[归档](#k8s_version_archive)。
 
 <br/>
 
 有关完整的更改列表，请查看以下信息：
 * [Kubernetes 更改日志 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)。
-* [IBM 版本更改日志](cs_versions_changelog.html)。
+* [IBM 版本更改日志](/docs/containers?topic=containers-changelog)。
 
 </br>
+
+## 发布历史记录
+{: #release-history}
+
+下表记录了 {{site.data.keyword.containerlong_notm}} 版本发布历史记录。您可以将这些信息用于规划目的，例如估算在某个发行版可能变为不受支持时的常规时间范围。Kubernetes 社区发布版本更新后，IBM 团队即会开始针对 {{site.data.keyword.containerlong_notm}} 环境对该发行版进行强化和测试。可用和不受支持的发布日期取决于这些测试的结果、社区更新、安全补丁和版本之间的技术更改。请根据 `n-2` 版本支持策略来计划更新，以使集群主节点和工作程序节点版本保持最新。
+{: shortdesc}
+
+{{site.data.keyword.containerlong_notm}} 最早是在 Kubernetes V1.5 中一般可用。预计的发布或不受支持的日期会随时更改。要转至版本更新准备步骤，请单击相应版本号。
+
+标记有短剑 (`†`) 的日期表示这是暂定时间，会随时更改。
+{: important}
+
+<table summary="此表显示了 {{site.data.keyword.containerlong_notm}} 的发布历史记录。">
+<caption>{{site.data.keyword.containerlong_notm}} 的发布历史记录。</caption>
+<col width="20%" align="center">
+<col width="20%">
+<col width="30%">
+<col width="30%">
+<thead>
+<tr>
+<th>是否受支持？</th>
+<th>版本</th>
+<th>{{site.data.keyword.containerlong_notm}}<br>发布日期</th>
+<th>{{site.data.keyword.containerlong_notm}}<br>不受支持的日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="此版本受支持。"/></td>
+  <td>[1.13](#cs_v113)</td>
+  <td>2019 年 2 月 5 日</td>
+  <td>2019 年 12 月 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="此版本受支持。"/></td>
+  <td>[1.12](#cs_v112)</td>
+  <td>2018 年 11 月 7 日</td>
+  <td>2019 年 9 月 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="此版本受支持。"/></td>
+  <td>[1.11](#cs_v111)</td>
+  <td>2018 年 8 月 14 日</td>
+  <td>2019 年 6 月 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="此版本不推荐使用。"/></td>
+  <td>[1.10](#cs_v110)</td>
+  <td>2018 年 5 月 1 日</td>
+  <td>2019 年 4 月 30 日 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="此版本不受支持。"/></td>
+  <td>[1.9](#cs_v19)</td>
+  <td>2018 年 2 月 8 日</td>
+  <td>2018 年 12 月 27 日</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="此版本不受支持。"/></td>
+  <td>[1.8](#cs_v18)</td>
+  <td>2017 年 11 月 8 日</td>
+  <td>2018 年 9 月 22 日</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="此版本不受支持。"/></td>
+  <td>[1.7](#cs_v17)</td>
+  <td>2017 年 9 月 19 日</td>
+  <td>2018 年 6 月 21 日</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="此版本不受支持。"/></td>
+  <td>1.6</td>
+  <td>不适用</td>
+  <td>不适用</td>
+</tr>
+<tr>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="此版本不受支持。"/></td>
+  <td>[1.5](#cs_v1-5)</td>
+  <td>2017 年 5 月 23 日</td>
+  <td>2018 年 4 月 4 日</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
+## V1.13
+{: #cs_v113}
+
+<p><img src="images/certified_kubernetes_1x13.png" style="padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.13 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V1.13 的 Kubernetes 产品。_Kubernetes® 是 Linux Foundation 在美国和其他国家或地区的注册商标，并根据 Linux Foundation 的许可证进行使用。_</p>
+
+查看 Kubernetes 从先前版本更新到 V1.13 时可能需要进行的更改。
+{: shortdesc}
+
+### 在更新主节点之前更新
+{: #113_before}
+
+下表说明了在更新 Kubernetes 主节点之前必须执行的操作。
+{: shortdesc}
+
+<table summary="适用于 V1.13 的 Kubernetes 更新">
+<caption>在将主节点更新到 Kubernetes 1.13 之前要进行的更改</caption>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不适用</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### 在更新主节点之后更新
+{: #113_after}
+
+下表说明了在更新 Kubernetes 主节点之后必须执行的操作。
+{: shortdesc}
+
+<table summary="适用于 V1.13 的 Kubernetes 更新">
+<caption>在将主节点更新到 Kubernetes 1.13 之后要进行的更改</caption>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CoreDNS 作为新的缺省集群 DNS 提供程序可用</td>
+<td>现在，在 Kubernetes 1.13 和更高版本中，CoreDNS 是新集群的缺省集群 DNS 提供程序。如果将使用 KubeDNS 作为集群 DNS 提供程序的现有集群更新为 1.13，那么 KubeDNS 会继续作为集群 DNS 提供程序。但是，您可以选择[改为使用 CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set)。<br><br>CoreDNS 支持[集群 DNS 规范 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) 以输入域名作为 Kubernetes 服务 `ExternalName` 字段。先前的集群 DNS 提供程序 KubeDNS 不遵循集群 DNS 规范，因此允许将 IP 地址用于 `ExternalName`。如果任何 Kubernetes 服务使用的是 IP 地址，而不是 DNS，那么必须将 `ExternalName` 更新为 DNS 才能继续使用此功能。</td>
+</tr>
+<tr>
+<td>`Deployment` 和 `StatefulSet` 的 `kubectl` 输出</td>
+<td>现在，`Deployment` 和 `StatefulSet` 的 `kubectl` 输出包含 `Ready` 列，并且更容易供人类阅读。如果脚本依赖于先前的行为，请更新这些脚本。</td>
+</tr>
+<tr>
+<td>`PriorityClass` 的 `kubectl` 输出</td>
+<td>现在，`PriorityClass` 的 `kubectl` 输出包含 `Value` 列。如果脚本依赖于先前的行为，请更新这些脚本。</td>
+</tr>
+<tr>
+<td>`kubectl get componentstatuses`</td>
+<td>`kubectl get componentstatuses` 命令未正确报告某些 Kubernetes 主节点组件的运行状况，因为既然 `localhost` 和不安全 (HTTP) 端口已禁用，因此这些组件不再可通过 Kubernetes API 服务器进行访问。在 Kubernetes V1.10 中引入高可用性 (HA) 主节点后，每个 Kubernetes 主节点都设置有多个 `apiserver`、`controller-manager`、`scheduler` 和 `etcd` 实例。请改为通过检查 [{{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/containers-kubernetes/landing) 或使用 `ibmcloud ks cluster-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)来查看集群运行状况。</td>
+</tr>
+<tr>
+<tr>
+<td>不受支持：`kubectl run-container`</td>
+<td>`kubectl run-container` 命令已除去。请改为使用 `kubectl run` 命令。</td>
+</tr>
+<tr>
+<td>`kubectl rollout undo`</td>
+<td>对不存在的修订版运行 `kubectl rollout undo` 时，将返回错误。如果脚本依赖于先前的行为，请更新这些脚本。</td>
+</tr>
+<tr>
+<td>不推荐：`scheduler.alpha.kubernetes.io/critical-pod` 注释</td>
+<td>现在，不推荐使用 `scheduler.alpha.kubernetes.io/critical-pod` 注释。请将依赖于此注释的任何 pod 更改为使用 [pod 优先级](/docs/containers?topic=containers-pod_priority#pod_priority)。</td>
+</tr>
+</tbody>
+</table>
+
+### 在更新工作程序节点之后的更新
+{: #113_after_workers}
+
+下表说明了在更新工作程序节点之后必须执行的操作。
+{: shortdesc}
+
+<table summary="适用于 V1.13 的 Kubernetes 更新">
+<caption>在将工作程序节点更新到 Kubernetes 1.13 之后要进行的更改</caption>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd `cri` 流服务器</td>
+<td>在 containerd V1.2 中，现在 `cri` 插件流服务器在随机端口 `http://localhost:0` 上提供服务。此更改支持 `kubelet` 流式代理，并为容器 `exec` 和 `logs` 操作提供了更安全的流接口。先前，`cri` 流服务器使用端口 10010 侦听工作程序节点的专用网络接口。如果应用程序使用的是 containerd `cri` 插件并依赖于先前的行为，请对其进行更新。</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## V1.12
 {: #cs_v112}
@@ -131,7 +325,7 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 </tr>
 <tr>
 <td>`kube-system` `default` 服务帐户的角色绑定</td>
-<td>`kube-system` `default` 服务帐户不再具有对 Kubernetes API 的 **cluster-admin** 访问权。如果部署需要访问集群中的进程的功能或附加组件（例如 [Helm](cs_integrations.html#helm)），请设置[服务帐户 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)。如果您需要时间来创建和设置具有相应许可权的单个服务帐户，那么可以使用以下集群角色绑定临时授予 **cluster-admin** 角色：`kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
+<td>`kube-system` `default` 服务帐户不再具有对 Kubernetes API 的 **cluster-admin** 访问权。如果部署需要访问集群中的进程的功能或附加组件（例如 [Helm](/docs/containers?topic=containers-integrations#helm)），请设置[服务帐户 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)。如果您需要时间来创建和设置具有相应许可权的单个服务帐户，那么可以使用以下集群角色绑定临时授予 **cluster-admin** 角色：`kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
 </tr>
 </tbody>
 </table>
@@ -152,17 +346,25 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 </thead>
 <tbody>
 <tr>
-<td>`apps/v1` Kubernetes API</td>
-<td>`apps/v1` Kubernetes API 将替换 `extensions`、`apps/v1beta1` 和 `apps/v1alpha` API。Kubernetes 项目不推荐使用对 Kubernetes `apiserver` 和 `kubectl` 客户机的先前 API 的支持，此支持将分阶段停止。<br><br>您必须将所有 YAML `apiVersion` 字段更新为使用 `apps/v1`。此外，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)，以了解与 `apps/v1` 相关的更改，例如：<ul><li>创建部署后，`.spec.selector` 字段是不可变的。</li>
+<td>Kubernetes API</td>
+<td>Kubernetes API 替换了如下不推荐使用的 API：
+<ul><li><strong>apps/v1</strong>：`apps/v1` Kubernetes API 替换了 `apps/v1beta1` 和 `apps/v1alpha` API。此外，`apps/v1` API 还替换了用于 `daemonset`、`deployment`、`replicaset` 和 `statefulset` 资源的 `extensions/v1beta1` API。Kubernetes 项目不推荐使用对 Kubernetes `apiserver` 和 `kubectl` 客户机的先前 API 的支持，此支持将分阶段停止。</li>
+<li><strong>networking.k8s.io/v1</strong>：`networking.k8s.io/v1` API 替换了用于 `networkpolicy` 资源的 `extensions/v1beta1` API。</li>
+<li><strong>policy/v1beta1</strong>：`policy/v1beta1` API 替换了用于 `podsecuritypolicy` 资源的 `extensions/v1beta1` API。</li></ul>
+<br><br>在不推荐使用的 API 变为不受支持之前，请更新所有 YAML `apiVersion` 字段以使用相应的 Kubernetes API。此外，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)，以了解与 `apps/v1` 相关的更改，例如：<ul><li>创建部署后，`.spec.selector` 字段是不可变的。</li>
 <li>不推荐使用 `.spec.rollbackTo` 字段。请改为使用 `kubectl rollout undo` 命令。</li></ul></td>
 </tr>
 <tr>
 <td>作为集群 DNS 提供程序提供的 CoreDNS</td>
-<td>Kubernetes 项目正在过渡为支持 CoreDNS，以取代当前的 Kubernetes DNS (KubeDNS)。在 V1.12 中，缺省集群 DNS 仍然为 KubeDNS，但您可以[选择使用 CoreDNS](cs_cluster_update.html#dns)。</td>
+<td>Kubernetes 项目正在过渡为支持 CoreDNS，以取代当前的 Kubernetes DNS (KubeDNS)。在 V1.12 中，缺省集群 DNS 仍然为 KubeDNS，但您可以[选择使用 CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set)。</td>
 </tr>
 <tr>
 <td>`kubectl apply --force`</td>
 <td>现在，对无法更新的资源（例如，YAML 文件中的不可变字段）强制执行应用操作 (`kubectl apply --force`) 时，会改为重新创建这些资源。如果脚本依赖于先前的行为，请更新这些脚本。</td>
+</tr>
+<tr>
+<td>`kubectl get componentstatuses`</td>
+<td>`kubectl get componentstatuses` 命令未正确报告某些 Kubernetes 主节点组件的运行状况，因为既然 `localhost` 和不安全 (HTTP) 端口已禁用，因此这些组件不再可通过 Kubernetes API 服务器进行访问。在 Kubernetes V1.10 中引入高可用性 (HA) 主节点后，每个 Kubernetes 主节点都设置有多个 `apiserver`、`controller-manager`、`scheduler` 和 `etcd` 实例。请改为通过检查 [{{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/containers-kubernetes/landing) 或使用 `ibmcloud ks cluster-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)来查看集群运行状况。</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
@@ -191,13 +393,13 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 </tr>
 <tr>
 <td>Kubernetes 仪表板</td>
-<td>如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为使用**令牌**进行登录。</td>
+<td>如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为[使用**令牌**进行登录](/docs/containers?topic=containers-app#cli_dashboard)。</td>
 </tr>
 <tr>
 <td id="metrics-server">Kubernetes Metrics Server</td>
-<td>Kubernetes Metrics Server 将替换作为集群度量值提供程序的 Kubernetes Heapster（自 Kubernetes V1.8 开始不推荐使用）。如果在集群中每个工作程序节点上运行的 pod 超过 30 个，请[调整 `metrics-server` 配置以提高性能](cs_performance.html#metrics)。
+<td>Kubernetes Metrics Server 将替换作为集群度量值提供程序的 Kubernetes Heapster（自 Kubernetes V1.8 开始不推荐使用）。如果在集群中每个工作程序节点上运行的 pod 超过 30 个，请[调整 `metrics-server` 配置以提高性能](/docs/containers?topic=containers-kernel#metrics)。
 <p>Kubernetes 仪表板无法用于 `metrics-server`。如果要在仪表板中显示度量值，请从以下选项中进行选择。</p>
-<ul><li>通过使用集群监视仪表板，[设置 Grafana 来分析度量值](/docs/services/cloud-monitoring/tutorials/container_service_metrics.html#container_service_metrics)。</li>
+<ul><li>通过使用集群监视仪表板，[设置 Grafana 来分析度量值](/docs/services/cloud-monitoring/tutorials?topic=cloud-monitoring-container_service_metrics#container_service_metrics)。</li>
 <li>将 [Heapster ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/heapster) 部署到集群。
 <ol><li>复制 `heapster-rbac` [YAML ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/heapster-rbac.yaml)、`heapster-service` [YAML ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-service.yaml) 和 `heapster-controller` [YAML ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-controller.yaml) 文件。</li>
 <li>编辑 `heapter-controller` YAML 并替换以下字符串。
@@ -211,10 +413,13 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 </tr>
 <tr>
 <td>`rbac.authorization.k8s.io/v1` Kubernetes API</td>
-<td>`rbac.authorization.k8s.io/v1` Kubernetes API（自 Kubernetes 1.8 开始受支持）将替换 `rbac.authorization.k8s.io/v1alpha1` 和 `rbac.authorization.k8s.io/v1beta1` API。您不能再使用不受支持的 `v1alpha` API 来创建 RBAC 对象，例如 role 或 rolebinding。现有 RBAC 对象将转换为 `v1` API。</td>
+<td>`rbac.authorization.k8s.io/v1` Kubernetes API（自 Kubernetes 1.8 开始受支持）将替换 `rbac.authorization.k8s.io/v1alpha1` 和 `rbac.authorization.k8s.io/v1beta1` API。您不能再使用不受支持的 `v1alpha` API 来创建 RBAC 对象，例如角色或角色绑定。现有 RBAC 对象将转换为 `v1` API。</td>
 </tr>
 </tbody>
 </table>
+
+<br />
+
 
 ## V1.11
 {: #cs_v111}
@@ -257,7 +462,7 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 </tr>
 <tr>
 <td>加密 etcd 中的数据</td>
-<td>先前，etcd 数据存储在静态加密的主节点 NFS 文件存储器实例上。现在，etcd 数据存储在主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。但是，不会对主节点本地磁盘上的 etcd 数据进行加密。如果要对主节点的本地 etcd 数据进行加密，请[在集群中启用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
+<td>先前，etcd 数据存储在静态加密的主节点 NFS 文件存储器实例上。现在，etcd 数据存储在主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。但是，不会对主节点本地磁盘上的 etcd 数据进行加密。如果要对主节点的本地 etcd 数据进行加密，请[在集群中启用 {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-encryption#keyprotect)。</td>
 </tr>
 <tr>
 <td>Kubernetes 容器卷安装传播</td>
@@ -292,7 +497,11 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 </tr>
 <tr>
 <td>刷新 Kubernetes 配置</td>
-<td>更新集群的 Kubernetes API 服务器的 OpenID Connect 配置以支持 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 访问组。因此，在通过运行 `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>` 更新主 Kubernetes v1.11 后，必须刷新集群的 Kubernetes 配置。<br><br>如果不刷新配置，那么集群操作将失败，并显示以下错误消息：`You must be logged in to the server (Unauthorized).`</td>
+<td>更新集群的 Kubernetes API 服务器的 OpenID Connect 配置以支持 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 访问组。因此，在通过运行 `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>` 更新主 Kubernetes v1.11 后，必须刷新集群的 Kubernetes 配置。使用此命令时，配置将应用于 `default` 名称空间中的角色绑定。<br><br>如果不刷新配置，那么集群操作将失败，并显示以下错误消息：`You must be logged in to the server (Unauthorized).`</td>
+</tr>
+<tr>
+<td>Kubernetes 仪表板</td>
+<td>如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为[使用**令牌**进行登录](/docs/containers?topic=containers-app#cli_dashboard)。</td>
 </tr>
 <tr>
 <td>`kubectl` CLI</td>
@@ -319,10 +528,8 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 对于运行 Kubernetes V[1.10.8_1530](#110_ha-masters)、1.11.3_1531 或更高版本的集群，将更新集群主节点配置以提高高可用性 (HA)。集群现在设置有三个 Kubernetes 主节点副本，其中每个主节点副本部署到单独的物理主机上。此外，如果集群位于支持多专区的专区中，那么这些主节点还将在各专区中进行分布。
 {: shortdesc}
 
-将集群从 V1.9 或者从 1.10 或 1.11 的更低版本补丁更新为此 Kubernetes 版本时，需要执行这些准备步骤。为了给您留出时间，主节点自动更新会暂时禁用。有关更多信息和时间线，请查看 [HA 主节点博客帖子](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/)。
-{: tip}
+可以通过在控制台中检查集群的主节点 URL，或者通过运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID` 来检查集群是否具有 HA 主配置。如果主节点 URL 具有主机名（例如，`https://c2.us-south.containers.cloud.ibm.com:xxxxx`），而不是 IP 地址（例如，`https://169.xx.xx.xx:xxxxx`），说明集群具有 HA 主节点配置。您可能会因为自动主节点补丁更新或手动应用更新而获得 HA 主节点配置。在任一情况下，您仍必须复查以下各项，以确保集群网络设置为充分利用配置。
 
-请复查以下情况，在这些情况下，您必须进行更改才能充分利用 HA 主配置：
 * 如果具有防火墙或定制 Calico 网络策略。
 * 如果在工作程序节点上使用的主机端口是 `2040` 或 `2041`。
 * 如果使用了集群主节点 IP 地址对主节点进行集群内访问。
@@ -332,14 +539,14 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 <br>
 **针对 HA 主节点更新防火墙或定制 Calico 主机网络策略**:</br>
 {: #ha-firewall}
-如果使用防火墙或定制 Calico 主机网络策略来控制来自工作程序节点的流出流量，请允许出局流量流至集群所在区域内所有专区的端口和 IP 地址。请参阅[允许集群访问基础架构资源和其他服务](cs_firewall.html#firewall_outbound)。
+如果使用防火墙或定制 Calico 主机网络策略来控制来自工作程序节点的流出流量，请允许出局流量流至集群所在区域内所有专区的端口和 IP 地址。请参阅[允许集群访问基础架构资源和其他服务](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
 <br>
 **在工作程序节点上保留主机端口 `2040` 和 `2041`**：</br>
 {: #ha-ports}
 要允许访问高可用性配置中的集群主节点，必须使所有工作程序节点上的主机端口 `2040` 和 `2041` 保持可用。
 * 将 `hostPort` 设置为 `2040` 或 `2041` 的任何 pod 更新为使用其他端口。
-* 将 `hostNetwork` 设置为 `true` 并侦听端口 `2040` 或 `2041` 的任何 pod 更新为使用其他端口。
+* 对于将 `hostNetwork` 设置为 `true` 且侦听端口 `2040` 或 `2041` 的任何 pod，将这些 pod 更新为使用其他端口。
 
 要检查 pod 当前是否在使用端口 `2040` 或 `2041`，请将集群设定为目标，然后运行以下命令。
 
@@ -362,12 +569,12 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 {: #ha-outofcluster}
 存储在 `kube-system` 名称空间的 `calico-config` 配置映射中的数据更改为支持 HA 主配置。特别是，`etcd_endpoints` 值现在仅支持集群内访问。使用此值来配置 Calico CLI 以支持从集群外部进行访问不再有效。
 
-请改为使用存储在 `kube-system` 名称空间的 `cluster-info` 配置映射中的数据。特别是，使用 `etcd_host` 和 `etcd_port` 值来配置 [Calico CLI](cs_network_policy.html#cli_install) 的端点，以便从集群外部访问使用 HA 配置的主节点。
+请改为使用存储在 `kube-system` 名称空间的 `cluster-info` 配置映射中的数据。特别是，使用 `etcd_host` 和 `etcd_port` 值来配置 [Calico CLI](/docs/containers?topic=containers-network_policies#cli_install) 的端点，以便从集群外部访问使用 HA 配置的主节点。
 
 <br>
 **更新 Kubernetes 或 Calico 网络策略**：</br>
 {: #ha-networkpolicies}
-如果使用 [Kubernetes 或 Calico 网络策略](cs_network_policy.html#network_policies)来控制对集群主节点的 pod 流出访问，并且当前正在使用以下各项，那么需要执行其他操作：
+如果使用 [Kubernetes 或 Calico 网络策略](/docs/containers?topic=containers-network_policies#network_policies)来控制对集群主节点的 pod 流出访问，并且当前正在使用以下各项，那么需要执行其他操作：
 *  Kubernetes 服务集群 IP，此 IP 可以通过运行 `kubectl get service kubernetes -o yaml | grep clusterIP` 来获取。
 *  Kubernetes 服务域名，缺省情况下为：`https://kubernetes.default.svc.cluster.local`。
 *  集群主节点 IP，此 IP 可以通过运行 `kubectl cluster-info | grep Kubernetes` 来获取。
@@ -375,7 +582,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 以下步骤描述了如何更新 Kubernetes 网络策略。如果要更新 Calico 网络策略，可重复这些步骤，但需要做一些微小的策略语法更改，并使用 `calicoctl` 来搜索策略以了解影响。
 {: note}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  获取集群主节点 IP 地址。
     ```
@@ -391,7 +598,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 
 3.  复查 YAML。例如，如果集群使用以下 Kubernetes 网络策略来允许 `default` 名称空间中的 pod 通过 `kubernetes` 服务集群 IP 或集群主节点 IP 来访问集群主节点，那么必须更新该策略。
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -426,7 +633,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     {: tip}
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -462,7 +669,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: pre}
 
-6.  完成所有[准备操作](#ha-masters)（包括这些步骤）后，[更新集群主节点](cs_cluster_update.html#master)至 HA 主修订包。
+6.  完成所有[准备操作](#ha-masters)（包括这些步骤）后，[更新集群主节点](/docs/containers?topic=containers-update#master)至 HA 主修订包。
 
 7.  更新完成后，从网络策略中除去集群主节点 IP 地址。例如，从先前的网络策略中除去以下行，然后重新应用策略。
 
@@ -535,24 +742,27 @@ failed size validation
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
         {: pre}
-    2.  如果工作程序节点的状态不是**正常**，请执行[调试工作程序节点](cs_troubleshoot.html#debug_worker_nodes)步骤。例如，**临界**或**未知**状态通常可通过[重新装入工作程序节点](cs_cli_reference.html#cs_worker_reload)来解决。
+    2.  如果工作程序节点的状态不是**正常**，请执行[调试工作程序节点](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)步骤。例如，**临界**或**未知**状态通常可通过[重新装入工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)来解决。
 
 3.  如果是自动生成的 Calico 策略或其他 Calico 资源，请更新自动化工具，以使用 [Calico V3 语法 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/) 生成这些资源。
 
-4.  如果是将 [strongSwan](cs_vpn.html#vpn-setup) 用于 VPN 连接，那么 strongSwan 2.0.0 Helm 图表不适用于 Calico V3 或 Kubernetes 1.11。请[更新 strongSwan](cs_vpn.html#vpn_upgrade) 至 2.1.0 Helm 图表，此版本向后兼容 Calico 2.6 以及 Kubernetes 1.7、1.8 和 1.9。
+4.  如果是将 [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) 用于 VPN 连接，那么 strongSwan 2.0.0 Helm chart 不适用于 Calico V3 或 Kubernetes 1.11。请[更新 strongSwan](/docs/containers?topic=containers-vpn#vpn_upgrade) 至 2.1.0 Helm chart，此版本向后兼容 Calico 2.6 以及 Kubernetes 1.7、1.8 和 1.9。
 
-5.  [将集群主节点更新到 Kubernetes V1.11](cs_cluster_update.html#master)。
+5.  [将集群主节点更新到 Kubernetes V1.11](/docs/containers?topic=containers-update#master)。
 
 <br />
 
 
-## V1.10
+## 不推荐的版本：V1.10
 {: #cs_v110}
 
 <p><img src="images/certified_kubernetes_1x10.png" style="padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.10 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V1.10 的 Kubernetes 产品。_Kubernetes® 是 Linux Foundation 在美国和其他国家或地区的注册商标，并根据 Linux Foundation 的许可证进行使用。_</p>
 
 查看 Kubernetes 从先前版本更新到 V1.10 时可能需要进行的更改。
 {: shortdesc}
+
+Kubernetes V1.10 已不推荐使用，到 2019 年 4 月 30 日（暂定）将不再予以支持。对于每个 Kubernetes 版本更新，请[查看潜在影响](/docs/containers?topic=containers-cs_versions#cs_versions)，然后立即[更新集群](/docs/containers?topic=containers-update#update)，并且至少更新到 1.11。
+{: deprecated}
 
 必须执行[准备更新到 Calico V3](#110_calicov3) 中列出的步骤后，才能成功更新到 Kubernetes 1.10。
 {: important}
@@ -602,7 +812,7 @@ failed size validation
 <tr>
 <td>strongSwan VPN
 </td>
-<td>如果是将 [strongSwan](cs_vpn.html#vpn-setup) 用于 VPN 连接，那么在更新集群之前，必须通过运行 `helm delete --purge <release_name>`. 集群更新完成后，请重新安装 strongSwan Helm 图表。</td>
+<td>如果是将 [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) 用于 VPN 连接，那么在更新集群之前，必须通过运行 `helm delete --purge <release_name>`. 集群更新完成后，请重新安装 strongSwan Helm 图表。</td>
 </tr>
 </tbody>
 </table>
@@ -631,12 +841,16 @@ failed size validation
 <td>现在，节点的 <code>ExternalIP</code> 字段设置为节点的公用 IP 地址值。复查并更新依赖于此值的所有资源。</td>
 </tr>
 <tr>
+<td>Kubernetes 仪表板</td>
+<td>如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为[使用**令牌**进行登录](/docs/containers?topic=containers-app#cli_dashboard)。</td>
+</tr>
+<tr>
 <td><code>kubectl port-forward</code></td>
 <td>现在，使用 <code>kubectl port-forward</code> 命令时，此命令不再支持 <code>-p</code> 标志。如果脚本依赖于先前的行为，请更新这些脚本，将 <code>-p</code> 标志替换为 pod 名称。</td>
 </tr>
 <tr>
 <td>`kubectl --show-all, -a` 标志</td>
-<td>`--show-all, -a` 标志仅应用于人类可读的 pod 命令（非 API 调用），因此不推荐使用，并且在未来的版本中不再支持。该标志用于显示处于终端状态的 pod。要跟踪有关终止的应用程序和容器的信息，请[在集群中设置日志转发](cs_health.html#health)。</td>
+<td>`--show-all, -a` 标志仅应用于人类可读的 pod 命令（非 API 调用），因此不推荐使用，并且在未来的版本中不再支持。该标志用于显示处于终端状态的 pod。要跟踪有关终止的应用程序和容器的信息，请[在集群中设置日志转发](/docs/containers?topic=containers-health#health)。</td>
 </tr>
 <tr>
 <td>只读 API 数据卷</td>
@@ -646,7 +860,7 @@ failed size validation
 <tr>
 <td>strongSwan VPN
 </td>
-<td>如果是将 [strongSwan](cs_vpn.html#vpn-setup) 用于 VPN 连接，并且在更新集群之前删除了图表，那么现在可以重新安装 strongSwan Helm 图表。</td>
+<td>如果是将 [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) 用于 VPN 连接，并且在更新集群之前删除了 chart，那么现在可以重新安装 strongSwan Helm chart。</td>
 </tr>
 </tbody>
 </table>
@@ -657,10 +871,8 @@ failed size validation
 对于运行 Kubernetes V1.10.8_1530、V[1.11.3_1531](#ha-masters) 或更高版本的集群，将更新集群主节点配置以提高高可用性 (HA)。集群现在设置有三个 Kubernetes 主节点副本，其中每个主节点副本部署到单独的物理主机上。此外，如果集群位于支持多专区的专区中，那么这些主节点还将在各专区中进行分布。
 {: shortdesc}
 
-将集群从 V1.9 或者从 1.10 的更低版本补丁更新为此 Kubernetes 版本时，需要执行这些准备步骤。为了给您留出时间，主节点自动更新会暂时禁用。有关更多信息和时间线，请查看 [HA 主节点博客帖子](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/)。
-{: tip}
+可以通过在控制台中检查集群的主节点 URL，或者通过运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID`. 如果主节点 URL 具有主机名（例如，`https://c2.us-south.containers.cloud.ibm.com:xxxxx`），而不是 IP 地址（例如，`https://169.xx.xx.xx:xxxxx`），说明集群具有 HA 主节点配置。您可能会因为自动主节点补丁更新或手动应用更新而获得 HA 主节点配置。在任一情况下，您仍必须复查以下各项，以确保集群网络设置为充分利用配置。
 
-请复查以下情况，在这些情况下，您必须进行更改才能充分利用 HA 主配置：
 * 如果具有防火墙或定制 Calico 网络策略。
 * 如果在工作程序节点上使用的主机端口是 `2040` 或 `2041`。
 * 如果使用了集群主节点 IP 地址对主节点进行集群内访问。
@@ -670,14 +882,14 @@ failed size validation
 <br>
 **针对 HA 主节点更新防火墙或定制 Calico 主机网络策略**:</br>
 {: #110_ha-firewall}
-如果使用防火墙或定制 Calico 主机网络策略来控制来自工作程序节点的流出流量，请允许出局流量流至集群所在区域内所有专区的端口和 IP 地址。请参阅[允许集群访问基础架构资源和其他服务](cs_firewall.html#firewall_outbound)。
+如果使用防火墙或定制 Calico 主机网络策略来控制来自工作程序节点的流出流量，请允许出局流量流至集群所在区域内所有专区的端口和 IP 地址。请参阅[允许集群访问基础架构资源和其他服务](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
 <br>
 **在工作程序节点上保留主机端口 `2040` 和 `2041`**：</br>
 {: #110_ha-ports}
 要允许访问高可用性配置中的集群主节点，必须使所有工作程序节点上的主机端口 `2040` 和 `2041` 保持可用。
 * 将 `hostPort` 设置为 `2040` 或 `2041` 的任何 pod 更新为使用其他端口。
-* 将 `hostNetwork` 设置为 `true` 并侦听端口 `2040` 或 `2041` 的任何 pod 更新为使用其他端口。
+* 对于将 `hostNetwork` 设置为 `true` 且侦听端口 `2040` 或 `2041` 的任何 pod，将这些 pod 更新为使用其他端口。
 
 要检查 pod 当前是否在使用端口 `2040` 或 `2041`，请将集群设定为目标，然后运行以下命令。
 
@@ -700,20 +912,20 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 {: #110_ha-outofcluster}
 存储在 `kube-system` 名称空间的 `calico-config` 配置映射中的数据更改为支持 HA 主配置。特别是，`etcd_endpoints` 值现在仅支持集群内访问。使用此值来配置 Calico CLI 以支持从集群外部进行访问不再有效。
 
-请改为使用存储在 `kube-system` 名称空间的 `cluster-info` 配置映射中的数据。特别是，使用 `etcd_host` 和 `etcd_port` 值来配置 [Calico CLI](cs_network_policy.html#cli_install) 的端点，以便从集群外部访问使用 HA 配置的主节点。
+请改为使用存储在 `kube-system` 名称空间的 `cluster-info` 配置映射中的数据。特别是，使用 `etcd_host` 和 `etcd_port` 值来配置 [Calico CLI](/docs/containers?topic=containers-network_policies#cli_install) 的端点，以便从集群外部访问使用 HA 配置的主节点。
 
 <br>
 **更新 Kubernetes 或 Calico 网络策略**：</br>
 {: #110_ha-networkpolicies}
-如果使用 [Kubernetes 或 Calico 网络策略](cs_network_policy.html#network_policies)来控制对集群主节点的 pod 流出访问，并且当前正在使用以下各项，那么需要执行其他操作：
+如果使用 [Kubernetes 或 Calico 网络策略](/docs/containers?topic=containers-network_policies#network_policies)来控制对集群主节点的 pod 流出访问，并且当前正在使用以下各项，那么需要执行其他操作：
 *  Kubernetes 服务集群 IP，此 IP 可以通过运行 `kubectl get service kubernetes -o yaml | grep clusterIP` 来获取。
 *  Kubernetes 服务域名，缺省情况下为：`https://kubernetes.default.svc.cluster.local`。
 *  集群主节点 IP，此 IP 可以通过运行 `kubectl cluster-info | grep Kubernetes` 来获取。
 
-以下步骤描述了如何更新 Kubernetes 网络策略。如果要更新 Calico 网络策略，可重复这些步骤，但需要做一些微小的策略语法更改，并使用 `calicoctl` 来搜索策略以了解影响。
+以下步骤描述了如何更新 Kubernetes 网络策略。要更新 Calico 网络策略，请重复这些步骤，但需要做一些微小的策略语法更改，并使用 `calicoctl` 来搜索策略以了解影响。
 {: note}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 1.  获取集群主节点 IP 地址。
     ```
@@ -729,7 +941,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 
 3.  复查 YAML。例如，如果集群使用以下 Kubernetes 网络策略来允许 `default` 名称空间中的 pod 通过 `kubernetes` 服务集群 IP 或集群主节点 IP 来访问集群主节点，那么必须更新该策略。
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -764,7 +976,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     {: tip}
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -800,7 +1012,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: pre}
 
-6.  完成所有[准备操作](#ha-masters)（包括这些步骤）后，[更新集群主节点](cs_cluster_update.html#master)至 HA 主修订包。
+6.  完成所有[准备操作](#ha-masters)（包括这些步骤）后，[更新集群主节点](/docs/containers?topic=containers-update#master)至 HA 主修订包。
 
 7.  更新完成后，从网络策略中除去集群主节点 IP 地址。例如，从先前的网络策略中除去以下行，然后重新应用策略。
 
@@ -836,13 +1048,13 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
         {: pre}
-    2.  如果工作程序节点的状态不是**正常**，请执行[调试工作程序节点](cs_troubleshoot.html#debug_worker_nodes)步骤。例如，**临界**或**未知**状态通常可通过[重新装入工作程序节点](cs_cli_reference.html#cs_worker_reload)来解决。
+    2.  如果工作程序节点的状态不是**正常**，请执行[调试工作程序节点](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)步骤。例如，**临界**或**未知**状态通常可通过[重新装入工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)来解决。
 
 3.  如果是自动生成的 Calico 策略或其他 Calico 资源，请更新自动化工具，以使用 [Calico V3 语法 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/) 生成这些资源。
 
-4.  如果是将 [strongSwan](cs_vpn.html#vpn-setup) 用于 VPN 连接，那么 strongSwan 2.0.0 Helm 图表不适用于 Calico V3 或 Kubernetes 1.10。请[更新 strongSwan](cs_vpn.html#vpn_upgrade) 至 2.1.0 Helm 图表，此版本向后兼容 Calico 2.6 以及 Kubernetes 1.7、1.8 和 1.9。
+4.  如果是将 [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) 用于 VPN 连接，那么 strongSwan 2.0.0 Helm chart 不适用于 Calico V3 或 Kubernetes 1.10。请[更新 strongSwan](/docs/containers?topic=containers-vpn#vpn_upgrade) 至 2.1.0 Helm chart，此版本向后兼容 Calico 2.6 以及 Kubernetes 1.7、1.8 和 1.9。
 
-5.  [将集群主节点更新到 Kubernetes V1.10](cs_cluster_update.html#master)。
+5.  [将集群主节点更新到 Kubernetes V1.10](/docs/containers?topic=containers-update#master)。
 
 <br />
 
@@ -853,101 +1065,30 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 查找 {{site.data.keyword.containerlong_notm}} 中不支持的 Kubernetes 版本的概述。
 {: shortdesc}
 
-### V1.9（不推荐使用，自 2018 年 12 月 27 日起不再支持）
+### V1.9（不受支持）
 {: #cs_v19}
 
-<p><img src="images/certified_kubernetes_1x9.png" style="padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.9 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V1.9 的 Kubernetes 产品。_Kubernetes® 是 Linux Foundation 在美国和其他国家或地区的注册商标，并根据 Linux Foundation 的许可证进行使用。_</p>
-
-查看 Kubernetes 从先前版本更新到 V1.9 时可能需要进行的更改。
+自 2018 年 12 月 27 日开始，不支持使用运行 [Kubernetes V1.9](/docs/containers?topic=containers-changelog#changelog_archive) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.9 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.10](#cs_v110))。
 {: shortdesc}
 
-<br/>
+对于每个 Kubernetes 版本更新，请[查看潜在影响](/docs/containers?topic=containers-cs_versions#cs_versions)，然后立即[更新集群](/docs/containers?topic=containers-update#update)，并且至少更新到 1.10。
 
-### 在更新主节点之前更新
-{: #19_before}
-
-下表说明了在更新 Kubernetes 主节点之前必须执行的操作。
-{: shortdesc}
-
-<table summary="适用于 V1.9 的 Kubernetes 更新">
-<caption>在将主节点更新到 Kubernetes 1.9 之前要进行的更改</caption>
-<thead>
-<tr>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Webhook 许可 API</td>
-<td>许可 API 已从 <code>admission.v1alpha1</code> 移至 <code>admission.v1beta1</code>，并在 API 服务器调用许可控制 Webhook 时使用。<em>升级集群之前必须删除所有现有 Webhook</em>，然后更新 Webhook 配置文件以使用最新的 API。此更改不向后兼容。</td>
-</tr>
-</tbody>
-</table>
-
-### 在更新主节点之后更新
-{: #19_after}
-
-下表说明了在更新 Kubernetes 主节点之后必须执行的操作。
-{: shortdesc}
-
-<table summary="适用于 V1.9 的 Kubernetes 更新">
-<caption>在将主节点更新到 Kubernetes 1.9 之后要进行的更改</caption>
-<thead>
-<tr>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`kubectl` 输出</td>
-<td>现在，使用 `kubectl` 命令来指定 `-o custom-columns`，但在对象中找不到列时，将会看到输出为 `<none>`.<br>
-先前，此操作失败，并且您看到错误消息 `xxx is not found`。如果脚本依赖于先前的行为，请更新这些脚本。</td>
-</tr>
-<tr>
-<td>`kubectl patch`</td>
-<td>现在，当未对已打补丁的资源进行任何更改时，`kubectl patch` 命令会失败，并返回 `exit code 1`。如果脚本依赖于先前的行为，请更新这些脚本。</td>
-</tr>
-<tr>
-<td>Kubernetes 仪表板许可权</td>
-<td>用户需要使用其凭证登录到 Kubernetes 仪表板，以查看集群资源。除去了缺省 Kubernetes 仪表板 `ClusterRoleBinding` RBAC 权限。有关指示信息，请参阅[启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。</td>
-</tr>
-<tr>
-<td>只读 API 数据卷</td>
-<td>现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，允许应用程序将数据写入这些卷，但系统可能会自动还原这些卷。需要此更改来修复安全漏洞 [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102)。
-如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</td>
-</tr>
-<tr>
-<td>污点和容忍度</td>
-<td>`node.alpha.kubernetes.io/notReady` 和 `node.alpha.kubernetes.io/unreachable` 污点已分别更改为 `node.kubernetes.io/not-ready` 和 `node.kubernetes.io/unreachable`。<br>
-虽然会自动更新污点，但您必须手动更新这些污点的容忍度。对于除 `ibm-system` 和 `kube-system` 之外的每个名称空间，确定是否需要更改容忍度：<br>
-<ul><li><code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/notReady" && echo "Action required"</code></li><li>
-<code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/unreachable" && echo "Action required"</code></li></ul><br>
-如果返回 `Action required`，请相应地修改 pod 容忍度。</td>
-</tr>
-<tr>
-<td>Webhook 许可 API</td>
-<td>如果在更新集群之前删除了现有的 Webhook，请创建新的 Webhook。</td>
-</tr>
-</tbody>
-</table>
 
 ### V1.8（不受支持）
 {: #cs_v18}
 
-自 2018 年 9 月 22 日开始，不支持使用运行 [Kubernetes V1.8](cs_versions_changelog.html#changelog_archive) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.8 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.9](#cs_v19))。
+自 2018 年 9 月 22 日开始，不支持使用运行 [Kubernetes V1.8](/docs/containers?topic=containers-changelog#changelog_archive) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.8 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.10](#cs_v110))。
 {: shortdesc}
 
-对于每个 Kubernetes 版本更新，请[查看潜在影响](cs_versions.html#cs_versions)，然后立即[更新集群](cs_cluster_update.html#update)，并且至少更新到 1.9。
+对于每个 Kubernetes 版本更新，请[查看潜在影响](/docs/containers?topic=containers-cs_versions#cs_versions)，然后立即[更新集群](/docs/containers?topic=containers-update#update)至 1.10。从 V1.8 更新到 V1.11 或更高版本会失败。
 
 ### V1.7（不支持）
 {: #cs_v17}
 
-自 2018 年 6 月 21 日开始，不支持使用运行 [Kubernetes V1.7](cs_versions_changelog.html#changelog_archive) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.7 集群无法接收安全性更新或支持，除非更新到下一个最新支持的版本 ([Kubernetes 1.9](#cs_v19))。
+自 2018 年 6 月 21 日开始，不支持使用运行 [Kubernetes V1.7](/docs/containers?topic=containers-changelog#changelog_archive) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.7 集群无法接收安全性更新或支持，除非更新到下一个最新支持的版本 ([Kubernetes 1.10](#cs_v110))。
 {: shortdesc}
 
-对于每个 Kubernetes 版本更新，请[查看潜在影响](cs_versions.html#cs_versions)，然后立即[更新集群](cs_cluster_update.html#update)，并且至少更新到 1.9。
+对于每个 Kubernetes 版本更新，请[查看潜在影响](/docs/containers?topic=containers-cs_versions#cs_versions)，然后立即[更新集群](/docs/containers?topic=containers-update#update)至 V1.10。从 V1.7 更新到 V1.11 或更高版本会失败。
 
 ### V1.5（不受支持）
 {: #cs_v1-5}
@@ -955,4 +1096,4 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 自 2018 年 4 月 4 日开始，不支持使用运行 [Kubernetes V1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.5 集群无法接收安全性更新或支持。
 {: shortdesc}
 
-要继续在 {{site.data.keyword.containerlong_notm}} 中运行应用程序，请[创建新集群](cs_clusters.html#clusters)并[部署应用程序](cs_app.html#app)至新集群。
+要继续在 {{site.data.keyword.containerlong_notm}} 中运行应用程序，请[创建新集群](/docs/containers?topic=containers-clusters#clusters)并[部署应用程序](/docs/containers?topic=containers-app#app)至新集群。

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, docker
+
+subcollection: containers
 
 ---
 
@@ -17,7 +21,6 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # {{site.data.keyword.containerlong_notm}} 技術
@@ -62,9 +65,9 @@ lastupdated: "2018-12-05"
   </ul>
   </dd>
 
-<p>進一步瞭解使用容器映像檔時如何[保護個人資訊安全](cs_secure.html#pi)。</p>
+<p>進一步瞭解使用容器映像檔時如何[保護個人資訊安全](/docs/containers?topic=containers-security#pi)。</p>
 
-<p>準備好深入瞭解 Docker 嗎？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">完成本課程來瞭解 Docker 與 {{site.data.keyword.containerlong_notm}} 如何一起運作。</a></p>
+<p>準備好深入瞭解 Docker 嗎？<a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">完成本課程來瞭解 Docker 與 {{site.data.keyword.containerlong_notm}} 如何一起運作。</a></p>
 
 </dl>
 
@@ -79,7 +82,7 @@ lastupdated: "2018-12-05"
 
 瞭解一些基本 Kubernetes 概念，如下圖所示。
 
-![部署設定](images/cs_app_tutorial_components1.png)
+![部署設定](images/cs_app_tutorial_mz-components1.png)
 
 <dl>
 <dt>帳戶</dt>
@@ -104,11 +107,11 @@ lastupdated: "2018-12-05"
 <dd>應用程式可能指的是完整應用程式或應用程式的元件。您可以在個別 Pod 或個別工作者節點中部署應用程式的元件。
 </dd>
 
-<p>進一步瞭解使用 Kubernetes 資源時如何[保護個人資訊安全](cs_secure.html#pi)。</p>
+<p>進一步瞭解使用 Kubernetes 資源時如何[保護個人資訊安全](/docs/containers?topic=containers-security#pi)。</p>
 
 <p>準備好深入瞭解 Kubernetes 嗎？</p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">使用「建立叢集」指導教學</a>，擴充您的術語知識。</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">完成本課程來瞭解 Kubernetes 與 {{site.data.keyword.containerlong_notm}} 如何一起運作。</a></li></ul>
+<ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">使用「建立叢集」指導教學</a>，擴充您的術語知識。</li>
+<li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">完成本課程來瞭解 Kubernetes 與 {{site.data.keyword.containerlong_notm}} 如何一起運作。</a></li></ul>
 
 
 </dl>
@@ -119,15 +122,22 @@ lastupdated: "2018-12-05"
 ## 服務架構
 {: #architecture}
 
-在 {{site.data.keyword.containerlong_notm}} 上執行的 Kubernetes 叢集裡，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，應用程式是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點及工作者節點是透過安全的 TLS 憑證及 openVPN 連線來彼此通訊，以編排叢集配置。
+在 {{site.data.keyword.containerlong_notm}} 上執行的 Kubernetes 叢集裡，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，應用程式是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點與工作者節點之間的通訊設定視您如何設定 IBM Cloud 基礎架構 (SoftLayer) 網路而定：具有公用服務端點的帳戶，或者具有公用及專用服務端點且已啟用 VRF 的帳戶。
 {: shortdesc}
 
-下圖顯示您的叢集元件及其互動方式。
+下圖顯示您的叢集元件，以及在只[啟用公用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)時，這些元件在帳戶中的互動方式。
 <p>
 <figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 架構">
- <figcaption>{{site.data.keyword.containerlong_notm}} 架構</figcaption>
-</figure>
+ <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 架構">
+ <figcaption>僅啟用公用服務端點時的 {{site.data.keyword.containerlong_notm}} 架構</figcaption> </figure>
+</p>
+
+下圖顯示您的叢集元件，以及在[啟用公用及專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)時，這些元件在已啟用 VRF 帳戶中的互動方式。
+
+<p>
+<figure>
+ <img src="images/cs_org_ov_both_ses.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 架構">
+ <figcaption>啟用公用及專用服務端點時的 {{site.data.keyword.containerlong_notm}} 架構</figcaption> </figure>
 </p>
 
 Kubernetes 主節點與工作者節點之間的差異為何？問得好。
@@ -160,11 +170,11 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     </tr>
     <tr>
     <td>kube-controller-manager</td>
-    <td>Kubernetes 控制器管理程式是一種常駐程式，它會監看叢集資源（例如抄本集）的狀況。當資源的狀況變更時，例如，如果抄本集中的 Pod 關閉，控制器管理程式會起始更正動作以達到想要的狀況。</td>
+    <td>Kubernetes 控制器管理程式是一種常駐程式，它會監看叢集資源（例如抄本集）的狀況。當資源的狀況變更時，例如，若抄本集中的 Pod 關閉，控制器管理程式會起始更正動作以達到所需的狀況。</td>
     </tr>
     </tbody></table></dd>
   <dt>工作者節點</dt>
-    <dd>每一個工作者節點都是雲端環境中，實體機器（裸機）或是在實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、個別的運算資源、網路及磁區服務。內建的安全特性提供了隔離、資源管理功能及工作者節點安全規範。</br></br>下表說明工作者節點的元件。
+    <dd>每一個工作者節點都是雲端環境中，實體機器（裸機）或是在實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、個別的運算資源、網路及磁區服務。內建的安全特性提供了隔離、資源管理功能及工作者節點安全規範。</br></br><p class="note">不支援修改預設工作者節點元件，例如，`kubelet`，可能導致非預期的結果。</p>下表說明工作者節點的元件。
     <table>
     <caption>工作者節點的元件</caption>
     <thead>
@@ -174,47 +184,47 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     </thead>
     <tbody>
     <tr>
-    <td>ibm-master-proxy</td>
+    <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
     <td>對於執行 Kubernetes 1.10 版或更新版本的叢集，`ibm-master-proxy` 會將工作者節點中的要求轉遞至高可用性主節點抄本的 IP 位址。在單一區域叢集裡，主節點在個別主機上具有三個抄本，搭配一個主節點 IP 位址及網域名稱。對於具有多區域功能之區域中的叢集，主節點具有三個分散在各區域之中的抄本。因此，每一個主節點都有向 DNS 登錄的專屬 IP 位址，搭配一個用於整個叢集主節點的網域名稱。</td>
     </tr>
     <tr>
-    <td>openvpn-client</td>
+    <td>`openvpn-client`</td>
     <td>kube-system</td>
     <td>OpenVPN 用戶端會使用 OpenVPN 伺服器，將主節點安全地連接至工作者節點。此連線支援對 Pod 及服務的 `apiserver proxy` 呼叫，以及對 kubelet 的 `kubectl exec`、`attach` 及 `logs` 呼叫。</td>
     </tr>
     <tr>
-    <td>kubelet</td>
+    <td>`kubelet`</td>
     <td>kube-system</td>
     <td>kubelet 是在每個工作者節點上執行的 Pod，負責監視在工作者節點上執行之 Pod 的性能，以及監看 Kubernetes API 伺服器傳送的事件。根據這些事件，kubelet 會建立或移除 Pod、確保存活性及就緒探測，以及向 Kubernetes API 伺服器回報 Pod 的狀態。</td>
     </tr>
     <tr>
-    <td>kube-dns</td>
+    <td>`coredns`</td>
     <td>kube-system</td>
-    <td>Kubernetes DNS 會在叢集上排定 DNS Pod 及服務。容器在搜尋其他 Pod 及服務時，會自動使用 DNS 服務的 IP 來解析 DNS 名稱。</td>
+    <td>依預設，Kubernetes 在叢集上排程 CoreDNS Pod（或 1.12 版及更早版本中的 KubeDNS Pod）及服務。容器在搜尋其他 Pod 及服務時，會自動使用 DNS 服務的 IP 來解析 DNS 名稱。</td>
     </tr>
     <tr>
-    <td>calico</td>
+    <td>`calico`</td>
     <td>kube-system</td>
     <td>Calico 會管理叢集的網路原則，並包含一些元件，如下所示。
     <ul>
-    <li>**calico-cni**：Calico 容器網路介面 (CNI) 可以管理容器的網路連線功能，並在刪除容器時移除已配置的資源。</li>
-    <li>**calico-ipam**：Calico IPAM 可管理容器的 IP 位址指派。</li>
-    <li>**calico-node**：Calico 節點是一種容器，它會將透過網路連接容器與 Calico 所需的各種元件組合在一起。</li>
-    <li>**calico-policy-controller**：Calico 原則控制器會監看入埠及出埠網路資料流量是否遵循已設定的網路原則。如果叢集裡不容許資料流量，則對叢集的存取會遭到封鎖。Calico 原則控制器也用來建立及設定叢集的網路原則。</li></ul></td>
+    <li>**`calico-cni`**：Calico 容器網路介面 (CNI) 可以管理容器的網路連線功能，並在刪除容器時移除已配置的資源。</li>
+    <li>**`calico-ipam`**：Calico IPAM 可管理容器的 IP 位址指派。</li>
+    <li>**`calico-node`**：Calico 節點是一種容器，它會將透過網路連接容器與 Calico 所需的各種元件組合在一起。</li>
+    <li>**`calico-policy-controller`**：Calico 原則控制器會監看入埠及出埠網路資料流量是否遵循已設定的網路原則。如果叢集裡不容許資料流量，則對叢集的存取會遭到封鎖。Calico 原則控制器也用來建立及設定叢集的網路原則。</li></ul></td>
     </tr>
     <tr>
-    <td>kube-proxy</td>
+    <td>`kube-proxy`</td>
     <td>kube-system</td>
     <td>Kubernetes 網路 Proxy 是一種常駐程式，其在每個工作者節點上執行，並為叢集裡執行的服務轉遞 TCP 及 UDP 網路資料流量，或對這些網路資料流量進行負載平衡。</td>
     </tr>
     <tr>
-    <td>kube-dashboard</td>
+    <td>`kube-dashboard`</td>
     <td>kube-system</td>
     <td>Kubernetes 儀表板是 Web 型 GUI，容許使用者管理及疑難排解叢集和叢集裡執行的應用程式。</td>
     </tr>
     <tr>
-    <td>heapster</td>
+    <td>`heapster`</td>
     <td>kube-system</td>
     <td>Heapster 是監視及事件資料的全叢集聚集器。Heapster Pod 會探索叢集裡的所有節點，並從每一個節點的 kubelet 查詢用量資訊。您可以在 Kubernetes 儀表板中找到使用率圖形。</td>
     </tr>
@@ -246,5 +256,5 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     </tbody></table></dd>
 </dl>
 
-想要查看 {{site.data.keyword.containerlong_notm}} 如何與其他產品及服務搭配使用嗎？請參閱部分[整合](cs_integrations.html#integrations)。
+想要查看 {{site.data.keyword.containerlong_notm}} 如何與其他產品及服務搭配使用嗎？請參閱部分[整合](/docs/containers?topic=containers-integrations#integrations)。
 {: tip}

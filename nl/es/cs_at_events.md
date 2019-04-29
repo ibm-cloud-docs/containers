@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2017, 2018
-lastupdated: "2018-12-05"
+  years: 2017, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, audit
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-# {{site.data.keyword.cloudaccesstrailshort}} events
+# Sucesos de {{site.data.keyword.cloudaccesstrailshort}}
 {: #at_events}
 
 Puede ver, gestionar y auditar las actividades que ha realizado el usuario en el clúster de {{site.data.keyword.containerlong_notm}} mediante el servicio {{site.data.keyword.cloudaccesstrailshort}}.
@@ -33,9 +37,9 @@ Puede ver, gestionar y auditar las actividades que ha realizado el usuario en el
 
 * **Sucesos de auditoría de servidor de API de Kubernetes**:
     * Estos sucesos se generan automáticamente, pero debe configurar el clúster para reenviar estos sucesos al servicio {{site.data.keyword.cloudaccesstrailshort}}.
-    * Puede configurar el clúster para que envíe sucesos al **dominio de cuenta** de {{site.data.keyword.cloudaccesstrailshort}} o a un **dominio de espacio**. Para obtener más información, consulte [Envío de registros de auditoría](/docs/containers/cs_health.html#api_forward).
+    * Puede configurar el clúster para que envíe sucesos al **dominio de cuenta** de {{site.data.keyword.cloudaccesstrailshort}} o a un **dominio de espacio**. Para obtener más información, consulte [Envío de registros de auditoría](/docs/containers?topic=containers-health#api_forward).
 
-Para obtener más información sobre el funcionamiento del servicio, consulte la [documentación de {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html). Para obtener más información sobre las acciones de Kubernetes de las que se realiza un seguimiento, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/home/).
+Para obtener más información sobre cómo funciona el servicio, consulte la [documentación de {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla). Para obtener más información sobre las acciones de Kubernetes de las que se realiza un seguimiento, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/home/).
 
 ## Búsqueda de información sobre sucesos
 {: #kube-find}
@@ -54,7 +58,7 @@ Para supervisar la actividad administrativa:
 5. Establezca el intervalo de tiempo para el que desea ver los registros. El valor predeterminado es 24 horas.
 6. Para reducir la búsqueda, puede pulsar el icono de edición correspondiente a `ActivityTracker_Account_Search_in_24h` y añadir campos en la columna **Campos disponibles**.
 
-Para permitir que otros usuarios vean sucesos de cuenta y espacio, consulte [Concesión de permisos para ver sucesos de cuentas](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+Para permitir que otros usuarios vean sucesos de cuenta y espacio, consulte [Concesión de permisos para ver sucesos de cuentas](/docs/services/cloud-activity-tracker/how-to?topic=cloud-activity-tracker-grant_permissions#grant_permissions).
 {: tip}
 
 ## Seguimiento de sucesos de gestión de clústeres
@@ -145,7 +149,7 @@ Consulte la lista siguiente de sucesos de gestión de clústeres que se envían 
 Consulte la tabla siguiente para ver una lista de los sucesos de auditoría del servidor de API de Kubernetes que se envían a {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-Antes de empezar: asegúrese de que el clúster está configurado para reenviar [Sucesos de auditoría de API de Kubernetes](cs_health.html#api_forward).
+Antes de empezar: asegúrese de que el clúster está configurado para reenviar [Sucesos de auditoría de API de Kubernetes](/docs/containers?topic=containers-health#api_forward).
 
 <table>
   <tr>

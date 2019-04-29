@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -22,7 +26,7 @@ lastupdated: "2018-12-05"
 # Eliminación del almacenamiento persistente de un clúster
 {: #cleanup}
 
-Cuando configura el almacenamiento persistente en el clúster, tiene tres componentes principales: la reclamación de volumen persistente (PVC) de Kubernetes que solicita almacenamiento, el volumen persistente (PV) de Kubernetes que se monta en un pod y se describe en el PVC y la instancia de infraestructura de IBM Cloud (SoftLayer), como por ejemplo un archivo NFS o almacenamiento en bloque. En función de cómo los haya creado, es posible que los tenga que suprimir por separado.
+Cuando configura el almacenamiento persistente en el clúster, tiene tres componentes principales: la reclamación de volumen persistente (PVC) de Kubernetes que solicita almacenamiento, el volumen persistente (PV) de Kubernetes que se monta en un pod y se describe en la PVC y la instancia de infraestructura de IBM Cloud (SoftLayer), como por ejemplo un archivo NFS o almacenamiento en bloque. En función de cómo los haya creado, es posible que los tenga que suprimir por separado.
 {:shortdesc}
 
 ## Limpieza del almacenamiento persistente
@@ -34,22 +38,22 @@ Varias opciones de supresión:
 Depende. Cuando se suprime un clúster, se suprimen la PVC y el PV. Sin embargo, puede elegir si desea eliminar la instancia de almacenamiento asociada en la infraestructura de IBM Cloud (SoftLayer). Si ha elegido no eliminarla, la instancia de almacenamiento seguirá existiendo. Además, si ha suprimido el clúster en un estado no saludable, es posible que el almacenamiento siga existiendo incluso si ha elegido eliminarlo. Siga las instrucciones, en particular el paso para [suprimir la instancia de almacenamiento](#sl_delete_storage) en la infraestructura de IBM Cloud (SoftLayer).
 
 **¿Puedo suprimir la PVC para eliminar todo mi almacenamiento?**</br>
-A veces. Si [cree el almacenamiento persistente de forma dinámica](cs_storage_basics.html#dynamic_provisioning) y seleccione una clase de almacenamiento sin la opción `retain` en su nombre, cuando suprima la PVC, también se suprimirán el PV y la instancia de almacenamiento de la infraestructura de IBM Cloud (SoftLayer).
+A veces. Si [cree el almacenamiento persistente de forma dinámica](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) y seleccione una clase de almacenamiento sin la opción `retain` en su nombre, cuando suprima la PVC, también se suprimirán el PV y la instancia de almacenamiento de la infraestructura de IBM Cloud (SoftLayer).
 
 En los demás casos, siga las instrucciones para comprobar el estado de su PVC, PV y del dispositivo de almacenamiento físico y suprímalos por separado si hace falta.
 
 **¿Se me seguirá cobrando el almacenamiento después de que lo suprima?**</br>
-Depende de lo que suprima y del tipo de facturación. Si suprime la PVC y el PV, pero no la instancia de la cuenta de infraestructura de IBM Cloud (SoftLayer), dicha instancia seguirá existiendo y se le facturará por ella. Debe suprimir todo para evitar cargos. Además, cuando especifique el tipo de facturación (`billingType`) en el PVC, puede elegir por hora (`hourly`) o mensual (`monthly`). Si elige `monthly`, la instancia se facturará mensualmente. Cuando se suprime la instancia, se le facturará durante el resto del mes.
+Depende de lo que suprima y del tipo de facturación. Si suprime la PVC y el PV, pero no la instancia de la cuenta de infraestructura de IBM Cloud (SoftLayer), dicha instancia seguirá existiendo y se le facturará por ella. Debe suprimir todo para evitar cargos. Además, cuando especifique el tipo de facturación (`billingType`) en la PVC, puede elegir por hora (`hourly`) o mensual (`monthly`). Si elige `monthly`, la instancia se facturará mensualmente. Cuando se suprime la instancia, se le facturará durante el resto del mes.
 
 
-<p class="important">Cuando se limpia el almacenamiento persistente, se suprimen todos los datos almacenados en el mismo. Si necesita una copia de los datos, realice una copia de seguridad del [almacenamiento de archivos](cs_storage_file.html#backup_restore) o del [almacenamiento en bloque](cs_storage_block.html#backup_restore).</br>
-</br>Si utiliza una cuenta de {{site.data.keyword.Bluemix_dedicated}}, debe solicitar la supresión de volúmenes [abriendo un caso de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).</p>
+<p class="important">Cuando se limpia el almacenamiento persistente, se suprimen todos los datos almacenados en el mismo. Si necesita una copia de los datos, realice una copia de seguridad del [almacenamiento de archivos](/docs/containers?topic=containers-file_storage#file_backup_restore) o del [almacenamiento en bloque](/docs/containers?topic=containers-block_storage#block_backup_restore).</br>
+</br>Si utiliza una cuenta de {{site.data.keyword.Bluemix_dedicated}}, debe solicitar la supresión de volúmenes [abriendo un caso de soporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Para limpiar los datos persistentes:
 
-1.  Obtenga una lista de las PVC del clúster y anote el nombre (**NAME**) de la PVC, su **STORAGECLASS** y el nombre del PV vinculado a la PVC que se muestra como **VOLUME**.
+1.  Obtenga una lista de las PVC del clúster y anote el nombre (**`NAME`**) de la PVC, su **`STORAGECLASS`** y el nombre del PV vinculado a la PVC que se muestra como **`VOLUME`**.
     ```
     kubectl get pvc
     ```
@@ -64,7 +68,7 @@ Para limpiar los datos persistentes:
     ```
     {: screen}
 
-2. Revise los valores **ReclaimPolicy** y **billingType** para la clase de almacenamiento.
+2. Revise los valores **`ReclaimPolicy`** y **`billingType`** para la clase de almacenamiento.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
@@ -108,7 +112,7 @@ Para limpiar los datos persistentes:
    ```
    {: pre}
 
-5. Revise el estado de su PV. Utilice el nombre del PV que ha recuperado antes como recuperó como **VOLUME**.
+5. Revise el estado de su PV. Utilice el nombre del PV que ha recuperado antes como **`VOLUME`**.
    ```
    kubectl get pv <pv_name>
    ```
@@ -128,7 +132,7 @@ Para limpiar los datos persistentes:
    ```
    {: pre}
 
-8. {: #sl_delete_storage}Obtenga una lista de la instancia de almacenamiento físico a la que apuntaba su PV y anote el **id** de la instancia de almacenamiento físico.
+8. {: #sl_delete_storage}Obtenga una lista de la instancia de almacenamiento físico a la que apuntaba su PV y anote el **`id`** de la instancia de almacenamiento físico.
 
    **Almacenamiento de archivos:**
    ```
@@ -147,18 +151,19 @@ Para limpiar los datos persistentes:
    Salida de ejemplo:
    ```
    id         notes
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z
+   12345678   {"plugin":"ibm-file-plugin-5b55b7b77b-55bb7","region":"us-south","cluster":"aa1a11a1a11b2b2bb22b22222c3c3333","type":"Endurance","ns":"default","pvc":"mypvc","pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7","storageclass":"ibmc-file-gold"}
    ```
    {: screen}
 
    Visión general de la información del campo **Notes**:
-   *  **`:`**: un signo de dos puntos (`:`) separata información.
-   *  **` ibmcloud-block-storage-plugin-7566ccb8d-44nff`**: el plugin de almacenamiento que utiliza el clúster.
-   *  **`us-south`**: la región en la que se encuentra el clúster.
-   *  **`aa1a11a1a11b2b2bb22b22222c3c3333`**: el ID del clúster asociado a la instancia de almacenamiento.
-   *  **`Performance`**: el tipo de almacenamiento de archivos o en bloque, que puede ser `Endurance` o `Performance`.
-   *  **`mypvc`**: el nombre de la PVC asociada a la instancia de almacenamiento.
-   *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`**: el PV asociado a la instancia de almacenamiento.
+   *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`**: El plugin de almacenamiento que utiliza el clúster.
+   *  **`"region":"us-south"`**: La región en la que está el clúster.
+   *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`**: El ID del clúster asociado a la instancia de almacenamiento.
+   *  **`"type":"Endurance"`**: El tipo de almacenamiento de archivos o en bloque, que puede ser `Endurance` o `Performance`.
+   *  **`"ns":"default"`**: El espacio de nombres en el que se ha desplegado la instancia de almacenamiento.
+   *  **`"pvc":"mypvc"`**: El nombre de la PVC asociada a la instancia de almacenamiento.
+   *  **`"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`**: El PV asociado a la instancia de almacenamiento.
+   *  **`"storageclass":"ibmc-file-gold"`**: El tipo de clase de almacenamiento: bronze, silver, gold o custom.
 
 9. Elimine la instancia de almacenamiento físico.
 

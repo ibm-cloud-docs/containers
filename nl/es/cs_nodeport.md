@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -28,17 +32,17 @@ Puede poner la app contenerizada a disponibilidad pública en Internet utilizand
 {:shortdesc}
 
 ## Gestión de tráfico de red utilizando NodePorts
-{: #planning}
+{: #nodeport_planning}
 
 Exponga un puerto público en el nodo trabajador y utilice la dirección IP pública del nodo trabajador para acceder de forma pública al servicio en el clúster desde Internet.
 {:shortdesc}
 
 Cuando expone una app creando un servicio de Kubernetes de tipo NodePort, se asigna al servicio
-un NodePort comprendido entre 30000 y 32767 y una dirección IP de clúster interno. El servicio NodePort sirve como punto de entrada externo para las solicitudes entrantes para la app. El NodePort asignado se expone de forma pública en los valores kubeproxy de cada nodo trabajador del clúster. Cada nodo trabajador empieza a escuchar en el NodePort asignado para detectar solicitudes entrantes para el servicio. Para acceder al servicio desde Internet, puede utilizar la dirección IP pública de cualquier nodo trabajador asignado durante la creación del clúster y el NodePort en el formato `<IP_address>:<nodeport>`. Además de la dirección IP pública, está disponible un servicio NodePort en la dirección IP privada de un nodo trabajador.
+un NodePort comprendido entre 30000 y 32767 y una dirección IP de clúster interno. El servicio NodePort sirve como punto de entrada externo para las solicitudes entrantes para la app. El NodePort asignado se expone de forma pública en los valores de `kubeproxy` de cada nodo trabajador del clúster. Cada nodo trabajador empieza a escuchar en el NodePort asignado para detectar solicitudes entrantes para el servicio. Para acceder al servicio desde Internet, puede utilizar la dirección IP pública de cualquier nodo trabajador asignado durante la creación del clúster y el NodePort en el formato `<IP_address>:<nodeport>`. Además de la dirección IP pública, está disponible un servicio NodePort en la dirección IP privada de un nodo trabajador.
 
 El siguiente diagrama muestra cómo se dirige la comunicación desde Internet a una app cuando se configura un servicio NodePort:
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Exponer una app en {{site.data.keyword.containerlong_notm}} mediante NodePort" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="600" alt="Exposición de una app en {{site.data.keyword.containerlong_notm}} mediante NodePort" style="width:600px; border-style: none"/>
 
 1. Se envía una solicitud a la app mediante la dirección IP pública del nodo trabajador y el NodePort del nodo trabajador.
 
@@ -48,14 +52,14 @@ El siguiente diagrama muestra cómo se dirige la comunicación desde Internet a 
 
 4. La solicitud se reenvía a la dirección IP privada del pod en el que se ha desplegado la app. Si se despliegan varias instancias de app en el clúster, el servicio NodePort direcciona las solicitudes entre los pods de app.
 
-La dirección IP pública del nodo trabajador no es permanente. Cuando un nodo trabajador se elimina o se vuelve a crear, se le asigna una nueva dirección IP pública. Puede utilizar el servicio NodePort para probar el acceso público para la app o cuando se necesita acceso público solo durante un breve periodo de tiempo. Si necesita una dirección IP pública estable y más disponibilidad para el servicio, exponga la app utilizando un [servicio LoadBalancer](cs_loadbalancer.html) o [Ingress](cs_ingress.html).
+La dirección IP pública del nodo trabajador no es permanente. Cuando un nodo trabajador se elimina o se vuelve a crear, se le asigna una nueva dirección IP pública. Puede utilizar el servicio NodePort para probar el acceso público para la app o cuando se necesita acceso público solo durante un breve periodo de tiempo. Si necesita una dirección IP pública estable y más disponibilidad para el servicio, exponga la app utilizando un [servicio LoadBalancer](/docs/containers?topic=containers-loadbalancer) o [Ingress](/docs/containers?topic=containers-ingress).
 {: note}
 
 <br />
 
 
 ## Habilitación del acceso a una app utilizando un servicio NodePort
-{: #config}
+{: #nodeport_config}
 
 Puede exponer la app como servicio de Kubernetes de tipo NodePort para clústeres gratuitos o estándares.
 {:shortdesc}
@@ -95,7 +99,7 @@ Si todavía no tiene una app lista, puede utilizar una app de ejemplo de Kuberne
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td>Sustituya <code><em>&lt;my-nodeport-service&gt;</em></code> por el nombre del servicio NodePort.<p>Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja recursos de Kubernetes.</p></td>
+    <td>Sustituya <code><em>&lt;my-nodeport-service&gt;</em></code> por el nombre del servicio NodePort.<p>Obtenga más información sobre cómo [proteger su información personal](/docs/containers?topic=containers-security#pi) cuando se trabaja recursos de Kubernetes.</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
@@ -103,7 +107,7 @@ Si todavía no tiene una app lista, puede utilizar una app de ejemplo de Kuberne
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td>Sustituya <code><em>&lt;my-selector-key&gt;</em></code> y <code><em>&lt;my-selector-value&gt;</em></code> con el par de clave/valor que utilizó en la sección <code>spec.template.metadata.labels</code> de su yaml de despliegue. Para asociar el servicio con el despliegue, el selector debe comparar las etiquetas de despliegue.
+      <td>Sustituya <code><em>&lt;my-selector-key&gt;</em></code> y <code><em>&lt;my-selector-value&gt;</em></code> por el par de clave/valor que ha utilizado en la sección <code>spec.template.metadata.labels</code> de su archivo YAML de despliegue. Para asociar el servicio con el despliegue, el selector debe comparar las etiquetas de despliegue.
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -126,7 +130,7 @@ Cuando se despliegue la app, puede utilizar la dirección IP pública de cualqui
 1.  Obtener la dirección IP pública para un nodo trabajador del clúster. Si desea acceder al nodo trabajador en una red privada, obtenga en su lugar la dirección IP privada.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 
@@ -165,7 +169,7 @@ Cuando se despliegue la app, puede utilizar la dirección IP pública de cualqui
 
     En este ejemplo, el NodePort es `30872`.
 
-    Si la sección **Endpoints** visualiza `<none>`, compruebe los `<selectorkey>` y `<selectorvalue>` que utiliza en la sección `spec.selector` del servicio NodePort. Asegúrese de que son los mismos que el par _clave/valor_ que utilizó en la sección `spec.template.metadata.labels` de su yaml de despliegue.
+    Si la sección **Endpoints** muestra `<none>`, compruebe los valores de `<selectorkey>` y `<selectorvalue>` que utiliza en la sección `spec.selector` del servicio NodePort. Asegúrese de que son los mismos que el par _clave/valor_ que utilizó en la sección `spec.template.metadata.labels` de su archivo YAML de despliegue.
     {: note}
 
 3.  Forme el URL con el NodePort y las direcciones IP del nodo trabajador. Ejemplo: `http://192.0.2.23:30872`

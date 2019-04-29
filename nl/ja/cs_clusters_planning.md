@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, multi az, multi-az, szr, mzr
+
+subcollection: containers
 
 ---
 
@@ -19,9 +23,11 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # クラスターおよびワーカー・ノードのセットアップの計画
 {: #plan_clusters}
 {{site.data.keyword.containerlong}} を使用して、アプリの可用性と容量を最大化できるように標準クラスターを設計します。
+{: shortdesc}
 
 ## 可用性の高いクラスター
 {: #ha_clusters}
@@ -45,20 +51,20 @@ lastupdated: "2018-12-05"
 
 <img src="images/cs_cluster_singlezone.png" alt="単一ゾーン・クラスターの高可用性" width="230" style="width:230px; border-style: none"/>
 
-デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされます。 このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。 [既存のワーカー・プールのサイズを変更](cs_clusters.html#resize_pool)するか、[新しいワーカー・プールを追加](cs_clusters.html#add_pool)して、クラスターにワーカー・ノードを追加できます。
+デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされます。 このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。 [既存のワーカー・プールのサイズを変更](/docs/containers?topic=containers-clusters#resize_pool)するか、[新しいワーカー・プールを追加](/docs/containers?topic=containers-clusters#add_pool)して、クラスターにワーカー・ノードを追加できます。
 
 ワーカー・ノードをさらに追加すると、複数のワーカー・ノード間でアプリ・インスタンスを分散できます。 1 つのワーカー・ノードがダウンしても、使用可能なワーカー・ノード上のアプリ・インスタンスは実行を継続します。 Kubernetes が、使用不可のワーカー・ノード内のポッドのスケジュールを自動的に変更して、アプリのパフォーマンスと容量を確保します。 ポッドがワーカー・ノード間に均等に分散されるようにするには、[ポッド・アフィニティー](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)を実装します。
 
 **単一ゾーン・クラスターを複数ゾーン・クラスターに変換できますか?**</br>
-はい。クラスターが[サポートされている複数ゾーンの大都市](cs_regions.html#zones)のいずれかにある場合は可能です。 [スタンドアロン・ワーカー・ノードからワーカー・プールへの更新](cs_cluster_update.html#standalone_to_workerpool)を参照してください。
+はい。クラスターが[サポートされている複数ゾーンの大都市](/docs/containers?topic=containers-regions-and-zones#zones)のいずれかにある場合は可能です。 [スタンドアロン・ワーカー・ノードからワーカー・プールへの更新](/docs/containers?topic=containers-update#standalone_to_workerpool)を参照してください。
 
 
 **複数ゾーン・クラスターを使用しなければなりませんか?**</br>
-いいえ。好きなだけ単一ゾーン・クラスターを作成できます。 実際に、管理をシンプルにしたい場合や、クラスターを特定の[単一ゾーンの都市](cs_regions.html#zones)に置く必要があるという場合は、単一ゾーン・クラスターを使用するほうが良いでしょう。
+いいえ。好きなだけ単一ゾーン・クラスターを作成できます。 実際に、管理をシンプルにしたい場合や、クラスターを特定の[単一ゾーンの都市](/docs/containers?topic=containers-regions-and-zones#zones)に置く必要があるという場合は、単一ゾーン・クラスターを使用するほうが良いでしょう。
 
 **単一ゾーンで高可用性マスターを作成できますか?**</br>
 はい。Kubernetes バージョン 1.10 以降を実行するクラスターであれば可能です。 単一ゾーンのマスターは高可用性です。マスター更新時などの停止を防ぐために、Kubernetes API サーバー、etcd、スケジューラー、およびコントローラー・マネージャー用に別々の物理ホスト上にレプリカが配置されます。 ゾーン障害から保護するには、以下のようにしてください。
-* [複数ゾーン対応ゾーンにクラスターを作成します](cs_clusters_planning.html#multizone)。マスターがゾーン間に分散されます。
+* [複数ゾーン対応ゾーンにクラスターを作成します](/docs/containers?topic=containers-plan_clusters#multizone)。マスターがゾーン間に分散されます。
 * [複数のクラスターを作成](#multiple_clusters)し、グローバル・ロード・バランサーに接続します。
 
 ## 複数ゾーン・クラスター
@@ -71,10 +77,10 @@ lastupdated: "2018-12-05"
 ワーカー・プールとは、マシン・タイプ、CPU、メモリーなど、フレーバーが同じワーカー・ノードの集合のことです。 クラスターを作成すると、デフォルトのワーカー・プールが自動的に作成されます。 複数のゾーンにまたがるプールにワーカー・ノードを分散させたり、ワーカー・ノードをプールに追加したり、ワーカー・ノードを更新したりするために、新しい `ibmcloud ks worker-pool` コマンドを使用できます。
 
 **スタンドアロン・ワーカー・ノードはまだ使用できますか?**</br>
-スタンドアロン・ワーカー・ノードで構成された従来のクラスター・セットアップは、サポートされますが、非推奨です。 スタンドアロン・ワーカー・ノードを使用するのではなく、[ワーカー・プールをクラスターに追加](cs_clusters.html#add_pool)し、[ワーカー・プールを使用](cs_cluster_update.html#standalone_to_workerpool)してワーカー・ノードを編成してください。
+スタンドアロン・ワーカー・ノードで構成された従来のクラスター・セットアップは、サポートされますが、非推奨です。 スタンドアロン・ワーカー・ノードを使用するのではなく、[ワーカー・プールをクラスターに追加](/docs/containers?topic=containers-clusters#add_pool)し、[ワーカー・プールを使用](/docs/containers?topic=containers-update#standalone_to_workerpool)してワーカー・ノードを編成してください。
 
 **単一ゾーン・クラスターを複数ゾーン・クラスターに変換できますか?**</br>
-はい。クラスターが[サポートされている複数ゾーンの大都市](cs_regions.html#zones)のいずれかにある場合は可能です。 [スタンドアロン・ワーカー・ノードからワーカー・プールへの更新](cs_cluster_update.html#standalone_to_workerpool)を参照してください。
+はい。クラスターが[サポートされている複数ゾーンの大都市](/docs/containers?topic=containers-regions-and-zones#zones)のいずれかにある場合は可能です。 [スタンドアロン・ワーカー・ノードからワーカー・プールへの更新](/docs/containers?topic=containers-update#standalone_to_workerpool)を参照してください。
 
 
 ### 複数ゾーン・クラスターのセットアップの詳細
@@ -93,10 +99,10 @@ lastupdated: "2018-12-05"
 - **3 つのゾーン間にリソースを分散させる:**  この方法では、各ゾーンに 3 コアがデプロイされるので、合計容量は 9 コアになります。 ワークロードを処理するには、同時に 2 つのゾーンが稼働している必要があります。 1 つのゾーンが使用不可になった場合は、別の 2 つのゾーンでワークロードを処理できます。 2 つのゾーンが使用不可になった場合は、残りの 3 コアが稼働してワークロードを処理します。 ゾーンあたり 3 コアをデプロイするということは、マシンが小規模になるので、コストが削減されることになります。</br>
 
 **Kubernetes マスターはどのようにセットアップされますか?** </br>
-複数ゾーン・クラスターには、単一または高可用性 (Kubernetes 1.10 以降) の Kubernetes マスターがセットアップされ、ワーカーと同じ大都市圏にプロビジョンされます。 さらに、複数ゾーン・クラスターを作成した場合は、複数の高可用性マスターが複数のゾーンに分散されます。 例えば、`dal10`、`dal12`、または `dal13` ゾーンにクラスターが存在する場合は、複数ゾーン大都市であるダラスの各ゾーンにマスターが分散されます。
+[限定された複数ゾーンの大都市](/docs/containers?topic=containers-regions-and-zones#zones)に複数ゾーン・クラスターを作成すると、可用性の高い Kubernetes マスターが自動的にデプロイされ、3 つのレプリカがその都市のゾーン間に分散されます。例えば、`dal10`、`dal12`、または `dal13` ゾーンにクラスターが存在する場合は、複数ゾーン大都市であるダラスの各ゾーンに Kubernetes マスターのレプリカが分散されます。
 
 **Kubernetes マスターが使用不可の場合にどのような状況になりますか?** </br>
-[Kubernetes マスター](cs_tech.html#architecture)は、クラスターを稼働状態に保つための主要なコンポーネントです。 マスターは、クラスターの真実の単一点 (Single Point of Truth) として機能する etcd データベースに、クラスター・リソースとその構成を保管します。 Kubernetes API サーバーは、ワーカー・ノードからマスターへのすべてのクラスター管理要求、またはクラスター・リソースと対話する場合のメインエントリー・ポイントです。<br><br>マスターに障害が発生した場合、ワークロードは引き続きワーカー・ノードで実行されますが、`kubectl` コマンドを使用してクラスター・リソースを操作したり、マスターの Kubernetes API サーバーがバックアップされるまでクラスターの正常性を表示したりすることはできません。 マスターの障害時にポッドがダウンすると、ワーカー・ノードが再び Kubernetes API サーバーに到達できるまで、ポッドをスケジュール変更することはできません。<br><br>マスターの障害時にも、`ibmcloud ks` コマンドを {{site.data.keyword.containerlong_notm}} API に対して実行して、ワーカー・ノードや VLAN などのインフラストラクチャー・リソースを操作することができます。 クラスターに対してワーカー・ノードを追加または削除して現在のクラスター構成を変更する場合、マスターがバックアップされるまで変更は行われません。
+[Kubernetes マスター](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)は、クラスターを稼働状態に保つための主要なコンポーネントです。 マスターは、クラスターの真実の単一点 (Single Point of Truth) として機能する etcd データベースに、クラスター・リソースとその構成を保管します。 Kubernetes API サーバーは、ワーカー・ノードからマスターへのすべてのクラスター管理要求、またはクラスター・リソースと対話する場合のメインエントリー・ポイントです。<br><br>マスターに障害が発生した場合、ワークロードは引き続きワーカー・ノードで実行されますが、`kubectl` コマンドを使用してクラスター・リソースを操作したり、マスターの Kubernetes API サーバーがバックアップされるまでクラスターの正常性を表示したりすることはできません。 マスターの障害時にポッドがダウンすると、ワーカー・ノードが再び Kubernetes API サーバーに到達できるまで、ポッドをスケジュール変更することはできません。<br><br>マスターの障害時にも、`ibmcloud ks` コマンドを {{site.data.keyword.containerlong_notm}} API に対して実行して、ワーカー・ノードや VLAN などのインフラストラクチャー・リソースを操作することができます。 クラスターに対してワーカー・ノードを追加または削除して現在のクラスター構成を変更する場合、マスターがバックアップされるまで変更は行われません。
 
 マスターの障害時はワーカー・ノードを再始動またはリブートしないでください。 このアクションにより、ワーカー・ノードからポッドが削除されます。 Kubernetes API サーバーが使用不可のため、ポッドをクラスター内の他のワーカー・ノードにスケジュール変更することはできません。
 {: important}
@@ -105,17 +111,17 @@ lastupdated: "2018-12-05"
 Kubernetes マスターの障害からクラスターを保護したい場合や、複数ゾーン・クラスターを使用できない地域の場合は、[複数のクラスターをセットアップし、グローバル・ロード・バランサーを使用して接続する](#multiple_clusters)ことができます。
 
 **複数のゾーンにまたがるワーカーとマスター間の通信を可能にするために何かする必要がありますか?**</br>
-はい。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して [VLAN スパンニング](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](cs_users.html#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)を使用します。 {{site.data.keyword.BluDirectLink}} を使用している場合は、代わりに[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) を使用する必要があります。 VRF を有効にするには、IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください。
+はい。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
 
 **公共のインターネットからユーザーがアプリにアクセスするにはどうしたらよいですか?**</br>
 Ingress アプリケーション・ロード・バランサー (ALB) またはロード・バランサー・サービスを使用して、アプリケーションを公開できます。
 
-- **Ingress アプリケーション・ロード・バランサー (ALB):** デフォルトでは、パブリック ALB がクラスター内の各ゾーンに自動的に作成されて有効になります。 地域ごとに 1 つの MZLB が存在するように、クラスター用の Cloudflare 複数ゾーン・ロード・バランサー (MZLB) も自動的に作成され、デプロイされます。 MZLB は、ALB の IP アドレスを同じホスト名の背後に配置し、これらの IP アドレスが使用可能かどうかを判別するためにこれらのアドレスに対してヘルス・チェックを有効にします。 例えば、米国東部地域の 3 つのゾーンにワーカー・ノードがある場合、ホスト名 `yourcluster.us-east.containers.appdomain.cloud` には 3 つの ALB IP アドレスがあります。 MZLB は、地域の各ゾーンのパブリック ALB IP をヘルス・チェックし、そのヘルス・チェックに基づいて DNS 参照の結果を最新の状態に保ちます。 詳しくは、[Ingress のコンポーネントとアーキテクチャー](cs_ingress.html#planning)を参照してください。
+- **Ingress アプリケーション・ロード・バランサー (ALB):** デフォルトでは、パブリック ALB がクラスター内の各ゾーンに自動的に作成されて有効になります。 地域ごとに 1 つの MZLB が存在するように、クラスター用の Cloudflare 複数ゾーン・ロード・バランサー (MZLB) も自動的に作成され、デプロイされます。 MZLB は、ALB の IP アドレスを同じホスト名の背後に配置し、これらの IP アドレスが使用可能かどうかを判別するためにこれらのアドレスに対してヘルス・チェックを有効にします。 例えば、米国東部地域の 3 つのゾーンにワーカー・ノードがある場合、ホスト名 `yourcluster.us-east.containers.appdomain.cloud` には 3 つの ALB IP アドレスがあります。 MZLB は、地域の各ゾーンのパブリック ALB IP をヘルス・チェックし、そのヘルス・チェックに基づいて DNS 参照の結果を最新の状態に保ちます。 詳しくは、[Ingress のコンポーネントとアーキテクチャー](/docs/containers?topic=containers-ingress#planning)を参照してください。
 
-- **ロード・バランサー・サービス:** ロード・バランサー・サービスは、1 つのゾーンにのみセットアップされます。 アプリに対する着信要求は、この 1 つのゾーンから他のゾーンのすべてのアプリ・インスタンスに転送されます。 このゾーンが使用不可になると、インターネットからアプリにアクセスできなくなる可能性があります。 他のゾーンに追加のロード・バランサー・サービスをセットアップすることで、単一ゾーンの障害に対応できます。 詳しくは、可用性の高い[ロード・バランサー・サービス](cs_loadbalancer.html#multi_zone_config)を参照してください。
+- **ロード・バランサー・サービス:** ロード・バランサー・サービスは、1 つのゾーンにのみセットアップされます。 アプリに対する着信要求は、この 1 つのゾーンから他のゾーンのすべてのアプリ・インスタンスに転送されます。 このゾーンが使用不可になると、インターネットからアプリにアクセスできなくなる可能性があります。 他のゾーンに追加のロード・バランサー・サービスをセットアップすることで、単一ゾーンの障害に対応できます。 詳しくは、可用性の高い[ロード・バランサー・サービス](/docs/containers?topic=containers-loadbalancer#multi_zone_config)を参照してください。
 
 **複数ゾーン・クラスターの永続ストレージはセットアップできますか?**</br>
-可用性の高い永続ストレージの場合は、[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage) などのクラウド・サービスを使用します。
+可用性の高い永続ストレージの場合は、[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage) などのクラウド・サービスを使用します。 [SDS マシン](#sds)を使用する [Portworx](/docs/containers?topic=containers-portworx#portworx) などのソフトウェア定義ストレージ (SDS) ソリューションを試すこともできます。詳しくは、[複数ゾーン・クラスターの永続ストレージ・オプションの比較](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を参照してください。
 
 NFS ファイルおよびブロック・ストレージは、ゾーン間で共有できません。 永続ボリュームは、実際のストレージ・デバイスが存在するゾーンでのみ使用できます。 使用を継続するクラスター内に既存の NFS ファイルまたはブロック・ストレージがある場合は、地域とゾーンのラベルを既存の永続ボリュームに適用する必要があります。 これらのラベルにより、kube-scheduler は永続ボリュームを使用するアプリのスケジュール先を決定できます。 `<mycluster>` をクラスター名に置き換えて、以下のコマンドを実行します。
 
@@ -125,12 +131,13 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 {: pre}
 
 **複数ゾーン・クラスターを作成しました。 まだゾーンが 1 つだけなのはなぜですか? どのようにしてクラスターにゾーンを追加するのですか?**</br>
-[CLI で複数ゾーン・クラスターを作成](cs_clusters.html#clusters_cli)すると、クラスターは作成されますが、ゾーンをワーカー・プールに追加しないと処理は完了しません。 複数のゾーンに広げるには、クラスターが[複数ゾーンの大都市](cs_regions.html#zones)に存在していなければなりません。 クラスターにゾーンを追加してワーカー・ノードをゾーン間に分散させるには、[ゾーンをクラスターに追加する](cs_clusters.html#add_zone)手順を参照してください。
+[CLI で複数ゾーン・クラスターを作成](/docs/containers?topic=containers-clusters#clusters_cli)すると、クラスターは作成されますが、ゾーンをワーカー・プールに追加しないと処理は完了しません。 複数のゾーンに広げるには、クラスターが[複数ゾーンの大都市](/docs/containers?topic=containers-regions-and-zones#zones)に存在していなければなりません。 クラスターにゾーンを追加してワーカー・ノードをゾーン間に分散させるには、[ゾーンをクラスターに追加する](/docs/containers?topic=containers-clusters#add_zone)手順を参照してください。
 
 ### 現在のクラスターの管理方法はどのように変わりますか?
 {: #mz_new_ways}
 
-ワーカー・プールを導入すると、新しい一連の API とコマンドを使用してクラスターを管理できます。 これらの新しいコマンドは、[CLI 資料のページ](cs_cli_reference.html#cs_cli_reference)を参照するか、`ibmcloud ks help` を実行して端末に表示できます。
+ワーカー・プールを導入すると、新しい一連の API とコマンドを使用してクラスターを管理できます。 これらの新しいコマンドは、[CLI 資料のページ](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)を参照するか、`ibmcloud ks help` を実行して端末に表示できます。
+{: shortdesc}
 
 以下の表は、いくつかの一般的なクラスター管理操作の古い方式と新しい方式を比較しています。
 <table summary="この表は、複数ゾーン・コマンドを実行する新しい方法の説明を示しています。行は左から右に読みます。1 列目は説明、2 列目は古い方法、3 列目は新しい複数ゾーンの方法です。">
@@ -144,19 +151,19 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
     <tr>
     <td>ワーカー・ノードをクラスターに追加します。</td>
     <td><p class="deprecated">スタンドアロン・ワーカー・ノードを追加するための <code>ibmcloud ks worker-add</code>。</p></td>
-    <td><ul><li>既存のプールと異なるマシン・タイプを追加するには、<code>ibmcloud ks worker-pool-create</code> [コマンド](cs_cli_reference.html#cs_worker_pool_create)で新しいワーカー・プールを作成します。</li>
-    <li>ワーカー・ノードを既存のプールに追加するには、<code>ibmcloud ks worker-pool-resize</code> [コマンド](cs_cli_reference.html#cs_worker_pool_resize)で、プール内のゾーンあたりのノード数をサイズ変更します。</li></ul></td>
+    <td><ul><li>既存のプールと異なるマシン・タイプを追加するには、<code>ibmcloud ks worker-pool-create</code> [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)で新しいワーカー・プールを作成します。</li>
+    <li>ワーカー・ノードを既存のプールに追加するには、<code>ibmcloud ks worker-pool-resize</code> [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)で、プール内のゾーンあたりのノード数をサイズ変更します。</li></ul></td>
     </tr>
     <tr>
     <td>ワーカー・ノードをクラスターから削除します。</td>
     <td>まだ <code>ibmcloud ks worker-rm</code> を使用して、クラスターから問題のあるワーカー・ノードを削除できます。</td>
-    <td><ul><li>ワーカー・プールがアンバランスになっている場合 (ワーカー・ノードの削除後など)、<code>ibmcloud ks worker-pool-rebalance</code> [コマンド](cs_cli_reference.html#cs_rebalance)でバランスを再調整します。</li>
-    <li>プール内のワーカー・ノードの数を減らすには、<code>ibmcloud ks worker-pool-resize</code> [コマンド](cs_cli_reference.html#cs_worker_pool_resize)で、ゾーンあたりの数をサイズ変更します (最小値は 1)。</li></ul></td>
+    <td><ul><li>ワーカー・プールがアンバランスになっている場合 (ワーカー・ノードの削除後など)、<code>ibmcloud ks worker-pool-rebalance</code> [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)でバランスを再調整します。</li>
+    <li>プール内のワーカー・ノードの数を減らすには、<code>ibmcloud ks worker-pool-resize</code> [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)で、ゾーンあたりの数をサイズ変更します (最小値は 1)。</li></ul></td>
     </tr>
     <tr>
     <td>ワーカー・ノードに新しい VLAN を使用します。</td>
     <td><p class="deprecated"><code>ibmcloud ks worker-add</code> で新しいプライベート VLAN またはパブリック VLAN を使用する新しいワーカー・ノードを追加します。</p></td>
-    <td><code>ibmcloud ks zone-network-set</code> [コマンド](cs_cli_reference.html#cs_zone_network_set)で、これまで使用していたものとは別のパブリック VLAN またはプライベート VLAN を使用するように、ワーカー・プールを設定します。</td>
+    <td><code>ibmcloud ks zone-network-set</code> [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)で、これまで使用していたものとは別のパブリック VLAN またはプライベート VLAN を使用するように、ワーカー・プールを設定します。</td>
     </tr>
   </tbody>
   </table>
@@ -179,9 +186,9 @@ Kubernetes マスターの障害からアプリを保護したい場合や、複
 
 **複数のクラスターに対してグローバル・ロード・バランサーをセットアップするには、以下のようにします。**
 
-1. 複数のゾーンまたは地域で[クラスターを作成](cs_clusters.html#clusters)します。
-2. 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して [VLAN スパンニング](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](cs_users.html#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)を使用します。 {{site.data.keyword.BluDirectLink}} を使用している場合は、代わりに[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) を使用する必要があります。 VRF を有効にするには、IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください。
-3. 各クラスターで、[アプリケーション・ロード・バランサー (ALB)](cs_ingress.html#ingress_expose_public) または[ロード・バランサー・サービス](cs_loadbalancer.html)を使用して、アプリを公開します。
+1. 複数のゾーンまたは地域で[クラスターを作成](/docs/containers?topic=containers-clusters#clusters)します。
+2. 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+3. 各クラスターで、[アプリケーション・ロード・バランサー (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) または[ロード・バランサー・サービス](/docs/containers?topic=containers-loadbalancer)を使用して、アプリを公開します。
 4. クラスターごとに、ALB またはロード・バランサー・サービスのパブリック IP アドレスをリストします。
    - クラスター内のすべてのパブリック対応 ALB の IP アドレスをリストするには、以下のようにします。
      ```
@@ -200,12 +207,10 @@ Kubernetes マスターの障害からアプリを保護したい場合や、複
 4.  {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) を使用してグローバル・ロード・バランサーをセットアップするか、独自のグローバル・ロード・バランサーをセットアップします。
 
     **CIS グローバル・ロード・バランサーを使用するには、以下のようにします**。
-    1.  [{{site.data.keyword.Bluemix_notm}} Internet Services (CIS) の概説](/docs/infrastructure/cis/getting-started.html#getting-started-with-ibm-cloud-internet-services-cis-)のステップ 1 から 4 に従って、サービスをセットアップします。
-        *  ステップ 1 から 3 で、サービス・インスタンスをプロビジョニングし、アプリ・ドメインを追加し、ネーム・サーバーを構成します。
-        * ステップ 4 で、DNS レコードを作成します。 集めた ALB またはロード・バランサーの IP アドレスごとに DNS レコードを作成します。 これらの DNS レコードにより、アプリ・ドメインをクラスターの ALB またはロード・バランサーのすべてにマップし、アプリ・ドメインへの要求がラウンドロビン・サイクルでクラスターに転送されるようになります。
-    2. ALB またはロード・バランサーの[ヘルス・チェックを追加](/docs/infrastructure/cis/glb-setup.html#add-a-health-check)します。 すべてのクラスター内の ALB またはロード・バランサーに同じヘルス・チェックを使用することも、特定のクラスターで使用する特定のヘルス・チェックを作成することもできます。
-    3. 各クラスターの ALB またはロード・バランサーの IP を追加して、クラスターごとに[起点プールを追加](/docs/infrastructure/cis/glb-setup.html#add-a-pool)します。 例えば、3 つのクラスターがあり、各クラスターに 2 つの ALB がある場合、それぞれ 2 つの ALB IP アドレスを含む起点プールを 3 つ作成します。 作成した起点プールごとにヘルス・チェックを追加します。
-    4. [グローバル・ロード・バランサーを追加](/docs/infrastructure/cis/glb-setup.html#set-up-and-configure-your-load-balancers)します。
+    1.  [{{site.data.keyword.Bluemix_notm}} Internet Services (CIS) の概説](/docs/infrastructure/cis?topic=cis-getting-started#getting-started)のステップ 1 から 5 に従って、サービスをセットアップします。 この手順で、サービス・インスタンスをプロビジョニングし、アプリ・ドメインを追加し、ネーム・サーバーを構成し、DNS レコードを作成します。集めた ALB またはロード・バランサーの IP アドレスごとに DNS レコードを作成します。 これらの DNS レコードにより、アプリ・ドメインをクラスターの ALB またはロード・バランサーのすべてにマップし、アプリ・ドメインへの要求がラウンドロビン・サイクルでクラスターに転送されるようになります。
+    2. ALB またはロード・バランサーの[ヘルス・チェックを追加](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check)します。 すべてのクラスター内の ALB またはロード・バランサーに同じヘルス・チェックを使用することも、特定のクラスターで使用する特定のヘルス・チェックを作成することもできます。
+    3. 各クラスターの ALB またはロード・バランサーの IP を追加して、クラスターごとに[起点プールを追加](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool)します。 例えば、3 つのクラスターがあり、各クラスターに 2 つの ALB がある場合、それぞれ 2 つの ALB IP アドレスを含む起点プールを 3 つ作成します。 作成した起点プールごとにヘルス・チェックを追加します。
+    4. [グローバル・ロード・バランサーを追加](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers)します。
 
     **独自のグローバル・ロード・バランサーを使用するには、以下のようにします**。
     1. すべてのパブリック対応の ALB やロード・バランサー・サービスの IP アドレスをドメインに追加して、着信トラフィックを ALB またはロード・バランサー・サービスに転送するようにドメインを構成します。
@@ -215,21 +220,24 @@ Kubernetes マスターの障害からアプリを保護したい場合や、複
 {: #private_clusters}
 
 デフォルトでは、{{site.data.keyword.containerlong_notm}} は、プライベート VLAN およびパブリック VLAN にアクセスできるクラスターをセットアップします。 プライベート VLAN により、各ワーカー・ノードに割り当てられるプライベート IP アドレスが決まり、各ワーカー・ノードにプライベート・ネットワーク・インターフェースが提供されます。 パブリック VLAN により、ワーカー・ノードは自動的かつ安全にマスターに接続できます。
+{: shortdesc}
 
-クラスターをロックダウンして、プライベート VLAN 経由のプライベート・トラフィックを許可する一方でパブリック VLAN 経由のパブリック・トラフィックをブロックする場合は、[Calico ネットワーク・ポリシーでクラスターをパブリック・アクセスから保護](cs_network_cluster.html#both_vlans_private_services)することができます。 これらの Calico ネットワーク・ポリシーでは、ワーカー・ノードとマスターとの通信はブロックされません。 [ネットワーキングのワークロードをエッジ・ワーカー・ノードだけに隔離](cs_edge.html)することによって、パブリック・トラフィックをロックダウンせずにクラスター内の脆弱性の面を制限することもできます。
+ただし、セキュリティーまたはコンプライアンスの要件を満たすために、プライベート VLAN またはプライベート・サービス・エンドポイントのクラスターを作成しなければならないことがあります。プライベート・クラスターを作成する方法は、所有している IBM Cloud インフラストラクチャー (SoftLayer) アカウントのタイプと、どのようなパブリック/プライベート VLAN のセットアップが必要かによって異なります。以下の各セットアップについて詳しくは、[クラスター・ネットワークの計画](/docs/containers?topic=containers-cs_network_ov)を参照してください。.
 
-プライベート VLAN へのアクセス権限のみを持つクラスターを作成する場合、単一ゾーンまたは複数ゾーンのプライベート・クラスターを作成できます。 ただし、ワーカー・ノードがプライベート VLAN にのみ接続されている場合、ワーカー・ノードは自動的にはマスターに接続できません。 ワーカー・ノードとマスターの間のネットワーク接続を提供するために、ゲートウェイ・アプライアンスを構成する必要があります。
-
-パブリック VLAN とプライベート VLAN に接続されているクラスターを変換してプライベート専用クラスターにすることはできません。 クラスターからすべてのパブリック VLAN を削除すると、複数のクラスター・コンポーネントが作業を停止します。 以下のステップを実行して、新規クラスターを作成する必要があります。
+既存のクラスターをプライベート専用にしたい場合は、ワーカー・プールを追加したり既存のワーカー・プールを変更したりして新しい VLAN を使用する方法を、[ワーカー・ノードの VLAN 接続を変更する](/docs/containers?topic=containers-cs_network_cluster#change-vlans)で確認してください。
 {: note}
 
-プライベート VLAN へのアクセス権限のみを持つクラスターを作成する場合は、以下のようにします。
+**VRF 対応アカウント。プライベート Kubernetes マスター。ワーカー・ノードはパブリック VLAN とプライベート VLAN の両方に接続**</br>
+Kubernetes バージョン 1.11 以降を実行するクラスターでは、パブリックとプライベートの両方のサービス・エンドポイントを使用するようにクラスター・ネットワークをセットアップできます。プライベート・サービス・エンドポイントを有効にすると、Kubernetes マスターとワーカー・ノードは常にプライベート・サービス・エンドポイントを介してプライベート VLAN 経由で通信します。クラスターのパブリック・サービス・エンドポイントを有効にしても、Kubernetes マスターからワーカー・ノードへの通信はプライベート VLAN 経由で行われます。プライベート・サービス・エンドポイントは、いったん有効にしたら無効にすることはできません。パブリック・サービス・エンドポイントは、例えば、`kubectl` コマンドを実行したりするために、インターネット経由で Kubernetes マスターに安全にアクセスできるように残しておくことも、プライベート・サービス・エンドポイント専用クラスターにするために無効にすることもできます。
 
-1.  [プライベート専用クラスター・ネットワーキングの計画](cs_network_cluster.html#private_vlan)を確認します。
-2.  ゲートウェイ・アプライアンスをネットワーク接続用に構成します。 ファイアウォールで[必要なポートと IP アドレスを開いて](cs_firewall.html#firewall_outbound)、サブネットの [VLAN スパンニングを有効にする](cs_subnets.html#vra-routing)必要があることに注意してください。
-3.  `--private-only` フラグを組み込み、[CLI を使用してクラスターを作成します](cs_clusters.html#clusters_cli)。
-4.  プライベートの NodePort サービス、ロード・バランサー・サービス、または Ingress サービスを使用してプライベート・ネットワークにアプリを公開する場合は、[プライベート VLAN セットアップ専用のプライベート外部ネットワーキングの計画](cs_network_planning.html#private_vlan)を確認します。 サービスはプライベート IP アドレスでのみアクセス可能であり、プライベート IP アドレスを使用するようにファイアウォールのポートを構成する必要があります。
+**VRF 非対応アカウントまたは VRF 対応アカウント。Kubernetes マスターおよびワーカー・ノードはプライベート VLAN にのみ接続**</br>
+ワーカー・ノードにプライベート VLAN 接続しかセットアップしない場合、そのままではワーカー・ノードはパブリック・ネットワーク上にアプリ・サービスを公開できません。また、VRF 非対応アカウントのワーカー・ノードはマスターに接続することもできません。ワーカー・ノードとマスターの間のネットワーク接続を提供するために、ゲートウェイ・アプライアンスを構成する必要があります。
 
+VRF 非対応アカウントの場合: パブリック VLAN とプライベート VLAN の両方に接続するクラスターを作成した場合に、後でそのクラスターからパブリック VLAN を削除することはできません。クラスターからすべてのパブリック VLAN を削除すると、複数のクラスター・コンポーネントが作業を停止します。 その場合は、パブリック VLAN なしで新しいクラスターを作成してください。
+{: note}
+
+**VRF 非対応アカウント。Kubernetes マスター・ノードとワーカー・ノードはパブリックとプライベートの両方の VLAN に接続**</br>
+ほとんどの場合、クラスター・セットアップにはパブリック VLAN とプライベート VLAN の両方に接続するワーカー・ノードを含めることができます。そして、Calico ポリシーでパブリック VLAN トラフィックをブロックし、特定のエッジ・ノードにのみトラフィックを制限することでクラスターをロックできます。
 
 ## ワーカー・プールとワーカー・ノード
 {: #planning_worker_nodes}
@@ -237,10 +245,15 @@ Kubernetes マスターの障害からアプリを保護したい場合や、複
 Kubernetes クラスターは、ワーカー・ノード・プールでグループ化されたワーカー・ノードで構成され、Kubernetes マスターによって一元的にモニターされて管理されます。 クラスター管理者は、ワーカー・ノードのクラスターをどのようにセットアップするかを決定して、クラスター内のアプリをデプロイして実行するためのすべてのリソースをクラスター・ユーザーのために用意します。
 {:shortdesc}
 
-標準クラスターを作成すると、自動的に同じメモリー、CPU、およびディスク・スペースの仕様 (フレーバー) のワーカー・ノードが IBM Cloud インフラストラクチャー (SoftLayer) で注文され、クラスター内のデフォルトのワーカー・ノード・プールに追加されます。 すべてのワーカー・ノードには、固有のワーカー・ノード ID とドメイン名が割り当てられます。それらをクラスターの作成後に変更してはいけません。 仮想サーバーと物理 (ベア・メタル) サーバーのどちらにするかを選択できます。 選択したハードウェア分離レベルに応じて、仮想ワーカー・ノードを共有ノードまたは専用ノードとしてセットアップできます。 別のフレーバーをクラスターに追加するには、[別のワーカー・プールを作成](cs_cli_reference.html#cs_worker_pool_create)します。
+標準クラスターを作成すると、自動的に同じメモリー、CPU、およびディスク・スペースの仕様 (フレーバー) のワーカー・ノードが IBM Cloud インフラストラクチャー (SoftLayer) で注文され、クラスター内のデフォルトのワーカー・ノード・プールに追加されます。 すべてのワーカー・ノードには、固有のワーカー・ノード ID とドメイン名が割り当てられます。それらをクラスターの作成後に変更してはいけません。 仮想サーバーと物理 (ベア・メタル) サーバーのどちらにするかを選択できます。 選択したハードウェア分離レベルに応じて、仮想ワーカー・ノードを共有ノードまたは専用ノードとしてセットアップできます。 別のフレーバーをクラスターに追加するには、[別のワーカー・プールを作成](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)します。
 
 Kubernetes では、1 つのクラスター内に作成できるワーカー・ノードの最大数に制限があります。 詳しくは、[ワーカー・ノードとポッドの割り当て量 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/setup/cluster-large/) を参照してください。
 
+
+常に十分な数のワーカー・ノードを配備してワークロードをカバーできるようにするには、[クラスター自動スケーリング機能](/docs/containers?topic=containers-ca#ca)を試してみてください。
+{: tip}
+
+<br />
 
 
 ## ワーカー・ノードに使用可能なハードウェア
@@ -249,11 +262,11 @@ Kubernetes では、1 つのクラスター内に作成できるワーカー・�
 {{site.data.keyword.Bluemix_notm}} で標準クラスターを作成する場合、ワーカー・プールを、物理マシン (ベア・メタル) のワーカー・ノードによる構成にするか、または物理ハードウェア上で実行される仮想マシンのワーカー・ノードによる構成にするかを選択します。 また、ワーカー・ノードのフレーバー、つまり、メモリー、CPU、ディスク・ストレージなどのその他のマシン仕様の組み合わせを選択します。
 {:shortdesc}
 
-![標準クラスター内のワーカー・ノードのハードウェア・オプション](images/cs_clusters_hardware.png)
+<img src="images/cs_clusters_hardware.png" width="700" alt="標準クラスター内のワーカー・ノードのハードウェア・オプション" style="width:700px; border-style: none"/>
 
-ワーカー・ノードに複数のフレーバーを使用する場合、フレーバーごとにワーカー・プールを作成する必要があります。 フリー・クラスターを作成した場合、ワーカー・ノードは IBM Cloud インフラストラクチャー (SoftLayer) アカウントに仮想の共有ノードとして自動的にプロビジョンされます。 標準クラスターでは、ワークロードに最適なマシンのタイプを選択できます。 計画する際は、CPU とメモリーの合計容量に対する[ワーカー・ノードのリソース予約](#resource_limit_node)を考慮してください。
+ワーカー・ノードに複数のフレーバーを使用する場合、フレーバーごとにワーカー・プールを作成する必要があります。 既存のワーカー・ノードのサイズを変更して、CPU やメモリーなどのリソースを変えることはできません。フリー・クラスターを作成した場合、ワーカー・ノードは IBM Cloud インフラストラクチャー (SoftLayer) アカウントに仮想の共有ノードとして自動的にプロビジョンされます。 標準クラスターでは、ワークロードに最適なマシンのタイプを選択できます。 計画する際は、CPU とメモリーの合計容量に対する[ワーカー・ノードのリソース予約](#resource_limit_node)を考慮してください。
 
-クラスターは、[コンソール UI](cs_clusters.html#clusters_ui) または [CLI](cs_clusters.html#clusters_cli) を使用してデプロイできます。
+クラスターは、[コンソール UI](/docs/containers?topic=containers-clusters#clusters_ui) または [CLI](/docs/containers?topic=containers-clusters#clusters_cli) を使用してデプロイできます。
 
 必要なワーカー・プールのタイプを決定するには、以下のオプションのいずれかを選択します。
 * [仮想マシン](#vm)
@@ -274,15 +287,19 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 
 共有ノードは通常、専用ノードよりも安価です。基盤となるハードウェアのコストを複数のお客様が共同で分担するからです。 ただし、共有ノードにするか専用ノードにするかを決定する際は、社内の法務部門に相談して、アプリ環境で必要になるインフラストラクチャーの分離とコンプライアンスのレベルを検討することをお勧めします。
 
+一部のフレーバーは、特定のタイプのテナント・セットアップとしてのみ提供されています。例えば、`m2c` VM は `shared` テナンシー・セットアップとしてのみ提供されています。
+{: note}
+
 **VM の一般的な特徴は何ですか?**</br>
-仮想マシンでは、信頼性を確保するために、ストレージ・エリア・ネットワーク (SAN) ではなくローカル・ディスクが使用されます。 信頼性が高いと、ローカル・ディスクへのバイトのシリアライズ時のスループットが向上し、ネットワーク障害が原因のファイル・システムのパフォーマンス低下が軽減されます。 すべての VM には、ネットワーキング速度 1000Mbps、OS ファイル・システム用の 1 次ローカル・ディスク・ストレージ 25 GB、コンテナー・ランタイムや `kubelet` などのデータ用の 2 次ローカル・ディスク・ストレージ 100 GB があります。 ワーカー・ノード上のローカル・ストレージは短期処理専用で、ワーカー・ノードを更新したり再ロードしたりすると、1 次ディスクと 2 次ディスクはワイプされます。 永続ストレージのソリューションについては、[可用性の高い永続ストレージの計画](cs_storage_planning.html#storage_planning)を参照してください。
+仮想マシンでは、信頼性を確保するために、ストレージ・エリア・ネットワーク (SAN) ではなくローカル・ディスクが使用されます。 信頼性が高いと、ローカル・ディスクへのバイトのシリアライズ時のスループットが向上し、ネットワーク障害が原因のファイル・システムのパフォーマンス低下が軽減されます。 すべての VM には、ネットワーキング速度 1000Mbps、OS ファイル・システム用の 1 次ローカル・ディスク・ストレージ 25 GB、コンテナー・ランタイムや `kubelet` などのデータ用の 2 次ローカル・ディスク・ストレージ 100 GB があります。 ワーカー・ノード上のローカル・ストレージは短期処理専用で、ワーカー・ノードを更新したり再ロードしたりすると、1 次ディスクと 2 次ディスクはワイプされます。 永続ストレージのソリューションについては、[可用性の高い永続ストレージの計画](/docs/containers?topic=containers-storage_planning#storage_planning)を参照してください。
 
 **非推奨のマシン・タイプ `u1c` または `b1c` があったらどうなりますか?**</br>
-マシン・タイプ `u2c` と `b2c` の使用を開始するには、[ワーカー・ノードを追加してマシン・タイプを更新してください](cs_cluster_update.html#machine_type)。
+マシン・タイプ `u2c` と `b2c` の使用を開始するには、[ワーカー・ノードを追加してマシン・タイプを更新してください](/docs/containers?topic=containers-update#machine_type)。
 
 **どのような仮想マシン・フレーバーが使用可能ですか?**</br>
-マシン・タイプはゾーンによって異なります。 ご使用のゾーンで使用可能なマシン・タイプを確認するには、`ibmcloud ks machine-types <zone>` を実行してください。 使用可能な[ベア・メタル](#bm)や [SDS](#sds) のマシン・タイプを確認することもできます。
+マシン・タイプはゾーンによって異なります。 ご使用のゾーンで使用可能なマシン・タイプを確認するには、`ibmcloud ks machine-types <zone>` を実行してください。 例えば、`m2c` VM はダラスのロケーション (`dal10、dal12、dal13`) でしか提供されていません。使用可能な[ベア・メタル](#bm)や [SDS](#sds) のマシン・タイプを確認することもできます。
 
+{: #vm-table}
 <table>
 <caption>{{site.data.keyword.containerlong_notm}} で使用可能な仮想マシン・タイプ。</caption>
 <thead>
@@ -311,35 +328,66 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>仮想、b2c.32x128</strong>: このバランス型 VM は、データベースや、同時ユーザー数の多い動的 Web サイトなど、中規模から大規模のワークロードに使用します。</td></td>
+<td><strong>仮想、b2c.32x128</strong>: このバランス型 VM は、データベースや、同時ユーザー数の多い動的 Web サイトなど、中規模から大規模のワークロードに使用します。</td>
 <td>32 / 128GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>仮想、b2c.56x242</strong>: このバランス型 VM は、データベースや、同時ユーザー数の多い複数のアプリなど、大規模のワークロードに使用します。</td></td>
+<td><strong>仮想、b2c.56x242</strong>: このバランス型 VM は、データベースや、同時ユーザー数の多い複数のアプリなど、大規模のワークロードに使用します。</td>
 <td>56 / 242GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>仮想、c2c.16x16</strong>: このフレーバーは、軽いワークロードの際にワーカー・ノードのコンピュート・リソースを均等なバランスにする場合に使用します。</td></td>
+<td><strong>仮想、c2c.16x16</strong>: このフレーバーは、軽いワークロードの際にワーカー・ノードのコンピュート・リソースを均等なバランスにする場合に使用します。</td>
 <td>16 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>仮想、c2c.16x32</strong>: このフレーバーは、小規模から中規模のワークロードの際にワーカー・ノードの CPU とメモリーのリソースを 1:2 の比率にする場合に使用します。</td></td>
+<td><strong>仮想、c2c.16x32</strong>: このフレーバーは、小規模から中規模のワークロードの際にワーカー・ノードの CPU とメモリーのリソースを 1:2 の比率にする場合に使用します。</td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>仮想、c2c.32x32</strong>: このフレーバーは、中規模のワークロードの際にワーカー・ノードのコンピュート・リソースを均等なバランスにする場合に使用します。</td></td>
+<td><strong>仮想、c2c.32x32</strong>: このフレーバーは、中規模のワークロードの際にワーカー・ノードのコンピュート・リソースを均等なバランスにする場合に使用します。</td>
 <td>32 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>仮想、c2c.32x64</strong>: このフレーバーは、中規模のワークロードの際にワーカー・ノードの CPU とメモリー・リソースを 1:2 の比率にする場合に使用します。</td></td>
+<td><strong>仮想、c2c.32x64</strong>: このフレーバーは、中規模のワークロードの際にワーカー・ノードの CPU とメモリー・リソースを 1:2 の比率にする場合に使用します。</td>
 <td>32 / 64GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>仮想、m2c.8x64</strong>: このフレーバーは、{{site.data.keyword.Db2_on_Cloud_short}} などのデータベースのように、メモリーを多く必要とする中規模から小規模のワークロードのために、1:8 の比率の CPU リソースとメモリー・リソースが必要な場合に使用します。ダラスでのみ、`--hardware shared` テナンシーとして提供されています。</td>
+<td>8 / 64GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>仮想、m2c.16x128</strong>: このフレーバーは、{{site.data.keyword.Db2_on_Cloud_short}} などのデータベースのように、メモリーを多く必要とする中規模のワークロードのために、1:8 の比率の CPU リソースとメモリー・リソースが必要な場合に使用します。ダラスでのみ、`--hardware shared` テナンシーとして提供されています。</td>
+<td>16 / 128GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>仮想、m2c.30x240</strong>: このフレーバーは、{{site.data.keyword.Db2_on_Cloud_short}} などのデータベースのように、メモリーを多く必要とする中規模から大規模のワークロードのために、1:8 の比率の CPU リソースとメモリー・リソースが必要な場合に使用します。ダラスでのみ、`--hardware shared` テナンシーとして提供されています。</td>
+<td>30 / 240GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>仮想、m2c.48x384</strong>: このフレーバーは、{{site.data.keyword.Db2_on_Cloud_short}} などのデータベースのように、メモリーを多く必要とする中規模から大規模のワークロードのために、1:8 の比率の CPU リソースとメモリー・リソースが必要な場合に使用します。ダラスでのみ、`--hardware shared` テナンシーとして提供されています。</td>
+<td>48 / 384GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>仮想、m2c.56x448</strong>: このフレーバーは、{{site.data.keyword.Db2_on_Cloud_short}} などのデータベースのように、メモリーを多く必要とする大規模のワークロードのため、1:8 の比率の CPU リソースとメモリー・リソースが必要な場合に使用します。ダラスでのみ、`--hardware shared` テナンシーとして提供されています。</td>
+<td>56 / 448GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>仮想、m2c.64x512</strong>: このフレーバーは、{{site.data.keyword.Db2_on_Cloud_short}} などのデータベースのように、メモリーを多く必要とする大規模のワークロードのために、1:8 の比率の CPU リソースとメモリー・リソースが必要な場合に使用します。ダラスでのみ、`--hardware shared` テナンシーとして提供されています。</td>
+<td>64 / 512GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
@@ -353,15 +401,18 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 {: shortdesc}
 
 **ベア・メタルと VM にはどのような違いがありますか?**</br>
-ベア・メタルを使用すると、メモリーや CPU など、マシン上の物理リソースに直接アクセスできます。 このセットアップには、ホスト上で稼働する仮想マシンに物理リソースを割り振る仮想マシン・ハイパーバイザーは含まれません。 むしろ、ベア・メタル・マシンのすべてのリソースがこのワーカーの専用であるため、リソースを共有したりパフォーマンスを低下させたりする「ノイジー・ネイバー」について心配する必要がありません。 物理マシン・タイプは、ローカル・ストレージが仮想マシン・タイプより大きく、一部のタイプはデータの可用性を向上させるための RAID を備えています。 ワーカー・ノード上のローカル・ストレージは短期処理専用で、ワーカー・ノードを更新したり再ロードしたりすると、1 次ディスクと 2 次ディスクはワイプされます。 永続ストレージのソリューションについては、[可用性の高い永続ストレージの計画](cs_storage_planning.html#storage_planning)を参照してください。
+ベア・メタルを使用すると、メモリーや CPU など、マシン上の物理リソースに直接アクセスできます。 このセットアップには、ホスト上で稼働する仮想マシンに物理リソースを割り振る仮想マシン・ハイパーバイザーは含まれません。 むしろ、ベア・メタル・マシンのすべてのリソースがこのワーカーの専用であるため、リソースを共有したりパフォーマンスを低下させたりする「ノイジー・ネイバー」について心配する必要がありません。 物理マシン・タイプは、ローカル・ストレージが仮想マシン・タイプより大きく、一部のタイプはデータの可用性を向上させるための RAID を備えています。 ワーカー・ノード上のローカル・ストレージは短期処理専用で、ワーカー・ノードを更新したり再ロードしたりすると、1 次ディスクと 2 次ディスクはワイプされます。 永続ストレージのソリューションについては、[可用性の高い永続ストレージの計画](/docs/containers?topic=containers-storage_planning#storage_planning)を参照してください。
 
 **より良い仕様でパフォーマンスが向上すること以外に、VM ではできないことをベア・メタルで実行できますか?**</br>
-はい。 ベア・メタルでは、ワーカー・ノードが改ざんされていないことを検証するためのトラステッド・コンピュートを有効にするオプションがあります。 クラスターの作成時にトラストを有効にしなかった場合に、後で有効にするには、`ibmcloud ks feature-enable` [コマンド](cs_cli_reference.html#cs_cluster_feature_enable)を使用します。 トラストを有効にした後に無効にすることはできません。 トラストなしで新規クラスターを作成できます。 ノードの始動プロセス中のトラストの動作について詳しくは、[トラステッド・コンピューティングを使用する {{site.data.keyword.containerlong_notm}}](cs_secure.html#trusted_compute) を参照してください。 トラステッド・コンピューティングは、特定のベア・メタル・マシン・タイプでのみ使用できます。 `ibmcloud ks machine-types <zone>` [コマンド](cs_cli_reference.html#cs_machine_types)を実行し、**Trustable** フィールドを参照して、トラストをサポートしているマシンを確認できます。 例えば、`mgXc` GPU フレーバーではトラステッド・コンピューティングはサポートされません。
+はい。 ベア・メタルでは、ワーカー・ノードが改ざんされていないことを検証するためのトラステッド・コンピュートを有効にするオプションがあります。 クラスターの作成時にトラストを有効にしなかった場合に、後で有効にするには、`ibmcloud ks feature-enable` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)を使用します。 トラストを有効にした後に無効にすることはできません。 トラストなしで新規クラスターを作成できます。 ノードの始動プロセス中のトラストの動作について詳しくは、[トラステッド・コンピューティングを使用する {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#trusted_compute) を参照してください。 トラステッド・コンピューティングは、特定のベア・メタル・マシン・タイプでのみ使用できます。 `ibmcloud ks machine-types <zone>` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)を実行し、**Trustable** フィールドを参照して、トラストをサポートしているマシンを確認できます。 例えば、`mgXc` GPU フレーバーではトラステッド・コンピューティングはサポートされません。
+
+トラステッド・コンピュートに加えて、{{site.data.keyword.datashield_full}} (ベータ版) も使用できます。{{site.data.keyword.datashield_short}} は、インテル® Software Guard Extensions (SGX) および Fortanix® テクノロジーと統合されているため、使用中の {{site.data.keyword.Bluemix_notm}} コンテナーのワークロードのコードとデータを保護できます。アプリのコードとデータは、CPU で保護されたエンクレーブで実行されます。エンクレーブは、ワーカー・ノード上の信頼できるメモリー領域であり、ここでアプリの重要な側面を保護することで、コードとデータの機密を保ち、改ざんを防止できます。
+社内の方針、政府規制、業界のコンプライアンス要件のためにデータの機密性を確保する必要がある場合は、このソリューションを使用すればクラウドへの移行の役に立つはずです。ユース・ケースの例には、金融機関や医療機関、オンプレミスのクラウド・ソリューションを必要とする政策を行っている国などがあります。
 
 **ベア・メタルは素晴らしいです。 今すぐ注文しない理由はありますか?**</br>
 ベア・メタル・サーバーは仮想サーバーよりも費用がかかりますが、多くのリソースとホスト制御を必要とする高性能アプリに最適です。
 
-ベア・メタル・サーバーは月単位で請求されます。 月末前にベア・メタル・サーバーを解約しても、その月の終わりまでの金額が請求されます。 ベア・メタル・サーバーの注文およびキャンセルは、IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用した手動プロセスです。 完了するまでに 1 営業日以上かかる場合があります。
+ベア・メタル・サーバーは月単位で請求されます。 月末前にベア・メタル・サーバーを解約しても、その月の終わりまでの金額が請求されます。 お客様がベアメタル・サーバーを注文またはキャンセルした後に、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの処理が手動で実行されます。そのため、完了するまでに 1 営業日以上かかる場合があります。
 {: important}
 
 **注文できるベア・メタル・フレーバーにはどのようなものがありますか?**</br>
@@ -377,6 +428,7 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 * **RAID**: ストレージ・デバイスでは、データは、RAID レベルに応じて異なる冗長性とパフォーマンスのために分散されています。 このため、使用可能なディスク容量はさまざまです。
 
 
+{: #bm-table}
 <table>
 <caption>{{site.data.keyword.containerlong_notm}} で使用可能なベア・メタル・マシン・タイプ。</caption>
 <thead>
@@ -417,7 +469,7 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>バランス型ベア・メタル、mb1c.4x32</strong>: 仮想マシンが提供するより多くのコンピュート・リソースを必要とするバランス型ワークロードに使用します。</td>
+<td><strong>バランス型ベア・メタル、mb2c.4x32</strong>: 仮想マシンが提供するより多くのコンピュート・リソースを必要とするバランス型ワークロードに使用します。 このフレーバーは、インテル® Software Guard Extensions (SGX) でも有効にできるため、<a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (ベータ版) <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用してデータ・メモリーを暗号化することができます。</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 2TB SATA</td>
 <td>10000Mbps</td>
@@ -440,11 +492,11 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 
 **SDS フレーバーはどのような場合に使用しますか?**</br>
 通常、以下の場合に SDS マシンを使用します。
-*  クラスターに SDS アドオンを使用する場合、SDS マシンを使用します。
+*  クラスターに SDS アドオン ([Portworx](/docs/containers?topic=containers-portworx#portworx) など) を使用する場合は、SDS マシンを使用します。
 *  アプリが、ローカル・ストレージを必要とする [StatefulSet ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) である場合、SDS マシンを使用して、[Kubernetes ローカル永続ボリューム (ベータ) ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/) をプロビジョンできます。
 *  カスタム・アプリのためにローカルに追加のロー・ストレージが必要な場合もあります。
 
-その他のストレージのソリューションについては、[可用性の高い永続ストレージの計画](cs_storage_planning.html#storage_planning)を参照してください。
+その他のストレージのソリューションについては、[可用性の高い永続ストレージの計画](/docs/containers?topic=containers-storage_planning#storage_planning)を参照してください。
 
 **どのような SDS フレーバーを注文できますか?**</br>
 マシン・タイプはゾーンによって異なります。 ご使用のゾーンで使用可能なマシン・タイプを確認するには、`ibmcloud ks machine-types <zone>` を実行してください。 使用可能な[ベア・メタル](#bm)や [VM](#vm) のマシン・タイプを確認することもできます。
@@ -457,6 +509,7 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 * **RAID**: ストレージ・デバイスでは、データは、RAID レベルに応じて異なる冗長性とパフォーマンスのために分散されています。 このため、使用可能なディスク容量はさまざまです。
 
 
+{: #sds-table}
 <table>
 <caption>{{site.data.keyword.containerlong_notm}} で使用可能な SDS マシン・タイプ。</caption>
 <thead>
@@ -471,28 +524,28 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 <td><strong>SDS 付きベア・メタル、ms2c.4x32.1.9tb.ssd</strong>: パフォーマンスのために追加のローカル・ストレージが必要な場合、ソフトウェア定義ストレージ (SDS) がサポートされて、大量のディスクを使用するこのフレーバーを使用します。</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 960GB SSD</td>
-<td>1.9TB ロー SSD</td>
+<td>1.9TB ロー SSD (デバイス・パス: `/dev/sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>SDS 付きベア・メタル、ms2c.16x64.1.9tb.ssd</strong>: パフォーマンスのために追加のローカル・ストレージが必要な場合、ソフトウェア定義ストレージ (SDS) がサポートされて、大量のディスクを使用するこのフレーバーを使用します。</td>
 <td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
-<td>1.9TB ロー SSD</td>
+<td>1.9TB ロー SSD (デバイス・パス: `/dev/sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>SDS 付きベア・メタル、ms2c.28x256.3.8tb.ssd</strong>: パフォーマンスのために追加のローカル・ストレージが必要な場合、ソフトウェア定義ストレージ (SDS) がサポートされて、大量のディスクを使用するこのフレーバーを使用します。</td>
 <td>28 / 256GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
-<td>3.8TB ロー SSD</td>
+<td>3.8TB ロー SSD (デバイス・パス: `/dev/sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>SDS 付きベア・メタル、ms2c.28x512.4x3.8tb.ssd</strong>: パフォーマンスのために追加のローカル・ストレージが必要な場合、ソフトウェア定義ストレージ (SDS) がサポートされて、大量のディスクを使用するこのフレーバーを使用します。</td>
 <td>28 / 512GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
-<td>4 ディスク、3.8TB ロー SSD</td>
+<td>4 ディスク、3.8TB ロー SSD (デバイス・パス: `/dev/sdc`、`/dev/sdd`、`/dev/sde`、`/dev/sdf`)</td>
 <td>10000Mbps</td>
 </tr>
 </tbody>
@@ -511,7 +564,7 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 ワーカー・ノードで現在使用されているコンピュート・リソースの量を確認するには、[`kubectl top node ` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/overview/#top) を実行します。
 {: tip}
 
-<table summary="ワーカー・ノードの層別メモリー予約。">
+<table summary="この表は、ワーカー・ノードのメモリー予約を層別に示しています。">
 <caption>ワーカー・ノードの層別メモリー予約。</caption>
 <thead>
 <tr>
@@ -555,7 +608,7 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 </tbody>
 </table>
 
-<table summary="ワーカー・ノードの層別 CPU 予約。">
+<table summary="この表は、ワーカー・ノードの CPU 予約を層別に示しています。">
 <caption>ワーカー・ノードの層別 CPU 予約。</caption>
 <thead>
 <tr>
@@ -600,12 +653,12 @@ VM を使用すると、ベア・メタルと比較して、柔軟性が高く�
 </table>
 
 ## ワーカー・ノードの自動リカバリー
-{: #autorecovery}
+{: #planning_autorecovery}
 
 `containerd`、`kubelet`、`kube-proxy`、および `calico` などの重要なコンポーネントは、Kubernetes ワーカー・ノードを正常に保つために適切に機能している必要があります。 時間の経過とともに、これらのコンポーネントが中断し、ワーカー・ノードが機能しない状態になることがあります。 機能しない状態のワーカー・ノードがあると、クラスターの合計処理能力が減少し、アプリにダウン時間が生じる可能性があります。
 {:shortdesc}
 
-[ワーカー・ノードのヘルス・チェックを構成し、Autorecovery を有効にする](cs_health.html#autorecovery)ことができます。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 Autorecovery の仕組みについて詳しくは、[Autorecovery のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
+[ワーカー・ノードのヘルス・チェックを構成し、Autorecovery を有効にする](/docs/containers?topic=containers-health#autorecovery)ことができます。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 Autorecovery の仕組みについて詳しくは、[Autorecovery のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
 
 <br />
 

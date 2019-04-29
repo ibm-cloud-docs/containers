@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -17,6 +21,8 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
+
 
 # 지역 및 구역
 {: #regions-and-zones}
@@ -40,8 +46,8 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 |중앙 유럽 | 프랑크푸르트 |
 |영국 남부 | 런던 |
 |미국 동부(표준 클러스터만 해당) | 워싱턴 DC |
-|미국 남부 | 달라스 |
-{: caption="표: 지원되는 Kubernetes 서비스 지역 및 해당되는 IBM Cloud 위치." caption-side="top"}
+|미국 남부 | 댈러스 |
+{: caption="지원되는 Kubernetes 서비스 지역 및 해당되는 IBM Cloud 위치" caption-side="top"}
 
 <br />
 
@@ -52,41 +58,63 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 지역이라고도 하는 {{site.data.keyword.Bluemix_notm}} 위치를 사용하여 {{site.data.keyword.Bluemix_notm}} 서비스 간에 리소스를 구성할 수 있습니다. 예를 들어, 동일한 위치의 {{site.data.keyword.registryshort_notm}}에 저장된 개인용 Docker 이미지를 사용하여 Kubernetes 클러스터를 작성할 수 있습니다.
 {:shortdesc}
 
-현재 자신이 있는 {{site.data.keyword.Bluemix_notm}} 위치를 확인하려면 `ibmcloud info`를 실행하고 **지역** 필드를 검토하십시오.
+글로벌 API 엔드포인트에 로그인할 때 {{site.data.keyword.Bluemix_notm}} 지역을 지정할 수 있습니다. 사용 가능한 지역을 나열하려면 `ibmcloud regions`를 실행하십시오.
+현재 자신이 있는 {{site.data.keyword.Bluemix_notm}} 위치를 확인하려면 `ibmcloud target`를 실행하고 **지역** 필드를 검토하십시오. 지역을 지정하지 않으면 지역을 선택하라는 프롬프트가 표시됩니다.
 
-로그인할 때 지역 API 엔드포인트를 지정하여 {{site.data.keyword.Bluemix_notm}} 위치에 액세스할 수 있습니다. 지역 엔드포인트를 지정하지 않으면 가장 근접한 지역에 자동으로 로그인됩니다.
+예를 들어, 댈러스(`us-south`) 지역의 글로벌 API 엔드포인트에 로그인하려면 다음을 수행하십시오.
+```
+ibmcloud login -a https://cloud.ibm.com -r us-south
+```
+{: pre}
 
-예를 들어, 다음 명령을 사용하여 {{site.data.keyword.Bluemix_notm}} 지역 API 엔드포인트에 로그인할 수 있습니다.
+글로벌 API 엔드포인트에 로그인하고 지역을 선택하려면 다음을 수행하십시오.
+```
+ibmcloud login -a https://cloud.ibm.com
+```
+{: pre}
 
-  * 달라스
-      ```
-      ibmcloud login -a api.ng.bluemix.net
-      ```
-      {: pre}
+출력 예:
+```
+API endpoint: cloud.ibm.com
 
-  * 워싱턴 DC
-      ```
-      ibmcloud login -a api.us-east.bluemix.net
-      ```
-      {: pre}
+Get One Time Code from https://identity-2.eu-central.iam.cloud.ibm.com/identity/passcode to proceed.
+Open the URL in the default browser? [Y/n]> y
+One Time Code > 
+Authenticating...
+OK
 
-  * 시드니 및 도쿄
-      ```
-      ibmcloud login -a api.au-syd.bluemix.net
-      ```
-      {: pre}
+Select an account:
+1. MyAccount (00a11aa1a11aa11a1111a1111aaa11aa) <-> 1234567
+2. TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
+Enter a number> 2
+Targeted account TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
 
-  * 프랑크푸르트
-      ```
-      ibmcloud login -a api.eu-de.bluemix.net
-      ```
-      {: pre}
 
-  * 런던
-      ```
-      ibmcloud login -a api.eu-gb.bluemix.net
-      ```
-      {: pre}
+Targeted resource group default
+
+Select a region (or press enter to skip):
+1. au-syd
+2. jp-tok
+3. eu-de
+4. eu-gb
+5. us-south
+6. us-east
+Enter a number> 5
+Targeted region us-south
+
+                      
+API endpoint:      https://cloud.ibm.com   
+Region:            us-south   
+User:              first.last@email.com   
+Account:           TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321  
+Resource group:    default   
+CF API endpoint:      
+Org:                  
+Space:                
+
+...
+```
+{: screen}
 
 <br />
 
@@ -108,7 +136,7 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
   * 미국 동부(표준 클러스터만 해당)
   * 미국 남부
 
-하나의 글로벌 엔드포인트: `https://containers.bluemix.net/v1`을 통해 {{site.data.keyword.containerlong_notm}}에 액세스할 수 있습니다.
+하나의 글로벌 엔드포인트: `https://containers.cloud.ibm.com/v1`을 통해 {{site.data.keyword.containerlong_notm}}에 액세스할 수 있습니다.
 * 현재 자신이 위치한 {{site.data.keyword.containerlong_notm}} 지역을 확인하려면 `ibmcloud ks region`을 실행하십시오.
 * 사용 가능한 지역과 해당 엔드포인트의 목록을 검색하려면 `ibmcloud ks regions`를 실행하십시오.
 
@@ -125,7 +153,7 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
   * 한 지역에 {{site.data.keyword.Bluemix_notm}} 서비스 또는 사설 Docker를 작성한 후 다른 지역의 {{site.data.keyword.containerlong_notm}}에서 사용하려고 합니다.
   * 로그인한 기본 {{site.data.keyword.Bluemix_notm}} 지역과 다른 지역에 있는 클러스터에 액세스하려고 합니다.
 
-지역을 신속하게 전환하려면 [`ibmcloud ks region-set`](cs_cli_reference.html#cs_region-set)를 실행하십시오.
+지역을 신속하게 전환하려면 [`ibmcloud ks region-set`](/docs/containers?topic=containers-cs_cli_reference#cs_region-set)를 실행하십시오.
 
 ### {{site.data.keyword.containerlong_notm}} API 명령 사용
 {: #containers_api}
@@ -135,7 +163,7 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 
 `GET /clusters` API 예제:
   ```
-  GET https://containers.bluemix.net/v1/clusters
+  GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
@@ -144,7 +172,7 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 글로벌 엔드포인트가 있는 API를 사용하려면 모든 요청에서 `X-Region` 헤더에 지역 이름을 전달하십시오. 사용 가능한 지역을 나열하려면 `ibmcloud ks regions`를 실행하십시오.
 {: tip}
 
-API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)를 보십시오.
+API 명령에 대한 문서는 [https://containers.cloud.ibm.com/swagger-api/](https://containers.cloud.ibm.com/swagger-api/)를 보십시오.
 
 ## {{site.data.keyword.containerlong_notm}}의 구역
 {: #zones}
@@ -152,8 +180,8 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
 구역(zone)은 {{site.data.keyword.Bluemix_notm}} 지역 내에서 사용 가능한 실제 데이터센터입니다. 지역은 구역을 구성하기 위한 개념적인 도구이며, 이에는 다른 나라의 구역(데이터센터)이 포함될 수 있습니다. 다음 표에는 지역별로 사용 가능한 구역이 표시되어 있습니다.
 {:shortdesc}
 
-* **다중 구역 메트로 시티**: 다중 구역 메트로 시티에서 작성된 클러스터의 작업자 노드는 구역 간에 전개될 수 있습니다. 또한 다중 구역 메트로 시티에서 Kubernetes 버전 1.10 이상 클러스터를 작성하는 경우에는 고가용성 마스터가 구역 간에 전개됩니다.
-* **단일 구역 시티**: 단일 구역 시티에서 작성된 클러스터의 작업자 노드는 하나의 구역 내에서만 유지될 수 있습니다. 다중 구역 간에 작업자 노드를 전개할 수는 없습니다. 고가용성 마스터에는 별도의 호스트에 3개의 복제본이 포함되지만, 이는 구역 간에 전개되어 있지 않습니다.
+* **다중 구역 메트로 시티**: **시드니(AP 남부)를 제외**한 다중 구역 메트로 시티에서 클러스터를 작성하는 경우, 고가용성 Kubernetes 마스터의 복제본이 자동으로 구역 간에 전개됩니다. 구역 간 작업자 노드를 분산하여 구역 장애로부터 앱을 보호할 수 있는 옵션이 있습니다.
+* **단일 구역 시티**: 단일 구역 시티에서 클러스터를 작성하는 경우 여러 개의 작업자 노드를 작성할 수 있지만 구역 간에 전개할 수는 없습니다. 고가용성 마스터에는 별도의 호스트에 3개의 복제본이 포함되지만, 이는 구역 간에 전개되어 있지 않습니다.
 
 <table summary="표에서는 지역별로 사용 가능한 구역을 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 지역은 1열에 있고 다중 구역 메트로 시티는 2열에 있으며 단일 구역 시티는 3열에 있습니다. ">
 <caption>지역별로 사용 가능한 단일 및 다중 구역.</caption>
@@ -173,9 +201,8 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
     </tr>
     <tr>
       <td>AP 남부</td>
-      <td>없음</td>
-      <td><p>시드니: syd01, syd04</p>
-      <p>맬버른: mel01</p></td>
+      <td>시드니: syd01, syd04, syd05</td>
+      <td>맬버른: mel01</td>
     </tr>
     <tr>
       <td>중앙 유럽</td>
@@ -188,7 +215,7 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
     </tr>
     <tr>
       <td>영국 남부</td>
-      <td>런던: lon04, lon05, lon06 **참고**: lon05는 lon02를 대체합니다. 새 클러스터는 lon05를 사용해야 하며, lon05만 구역 간에 전개된 고가용성 마스터를 지원합니다.</td>
+      <td>런던: lon04, lon05`*`, lon06</td>
       <td></td>
     </tr>
     <tr>
@@ -199,18 +226,21 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
     </tr>
     <tr>
       <td>미국 남부</td>
-      <td>달라스: dal10, dal12, dal13</td>
-      <td><p>산호세: sjc03, sjc04</p><p>상파울루: sao01</p></td>
+      <td>댈러스: dal10, dal12, dal13</td>
+      <td><p>멕시코: mex01</p><p>산호세: sjc03, sjc04</p><p>상파울루: sao01</p></td>
     </tr>
   </tbody>
 </table>
 
+`*` lon05는 lon02를 대체합니다. 새 클러스터는 lon05를 사용해야 하며, lon05만 구역 간에 전개된 고가용성 마스터를 지원합니다.
+{: note}
+
 ### 단일 구역 클러스터
-{: #single_zone}
+{: #regions_single_zone}
 
 단일 구역 클러스터에서 클러스터의 리소스는 클러스터가 배치된 영역에서 그대로 유지됩니다. 다음 이미지에서는 미국 동부의 예제 지역 내에서 단일 구역 클러스터 컴포넌트의 관계를 강조표시합니다.
 
-![클러스터 리소스가 상주하는 위치 파악](/images/region-cluster-resources.png)
+<img src="/images/region-cluster-resources.png" width="650" alt="클러스터 리소스가 상주하는 위치 파악" style="width:650px; border-style: none"/>
 
 _단일 구역 클러스터 리소스가 있는 위치를 파악합니다._
 
@@ -221,16 +251,20 @@ _단일 구역 클러스터 리소스가 있는 위치를 파악합니다._
 3.  `ibmcloud ks` 명령 사용과 같은 클러스터 관리 조치를 시작하는 경우, 클러스터에 대한 기본 정보(예: 이름, ID, 사용자, 명령)는 지역 엔드포인트를 통해 라우팅됩니다.
 
 ### 다중 구역 클러스터
-{: #multizone}
+{: #regions_multizone}
 
 다중 구역 클러스터에서 마스터 노드는 다중 구역 가능 구역에 배치되며 클러스터의 리소스는 다중 구역 간에 전개됩니다.
 
 1.  작업자 노드는 클러스터에 대한 추가 가용성을 제공하기 위해 한 지역의 다중 구역 간에 전개됩니다. 마스터는 클러스터가 배치된 동일한 다중 구역 가능 구역에서 그대로 유지됩니다. `kubectl` 명령과 같은 로컬 컨테이너 오케스트레이션 조치를 시작하면 지역 엔드포인트를 통해 마스터와 작업자 노드 간에 정보가 교환됩니다.
 
 2.  기타 클러스터 리소스(예: 스토리지, 네트워킹, 컴퓨팅 또는 팟(Pod)에서 실행되는 앱)는 해당 리소스가 다중 구역 클러스터에서 구역에 배치되는 방법에 따라 다릅니다. 자세한 정보를 보려면 다음 주제를 검토하십시오.
-    * 다중 구역 클러스터에서 [파일 스토리지](cs_storage_file.html#add_file) 및 [블록 스토리지](cs_storage_block.html#add_block) 설정
-    * [다중 구역 클러스터에서 LoadBalancer 서비스를 사용하여 앱에 대한 공용 또는 개인용 액세스 사용](cs_loadbalancer.html#multi_zone_config)
-    * [Ingress를 사용한 네트워크 트래픽 관리](cs_ingress.html#planning)
-    * [앱의 가용성 향상](cs_app.html#increase_availability)
+    * 다중 구역 클러스터에서 [파일 스토리지](/docs/containers?topic=containers-file_storage#add_file) 및 [블록 스토리지](/docs/containers?topic=containers-block_storage#add_block) 설정
+    * [다중 구역 클러스터에서 LoadBalancer 서비스를 사용하여 앱에 대한 공용 또는 개인용 액세스 사용](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+    * [Ingress를 사용한 네트워크 트래픽 관리](/docs/containers?topic=containers-ingress#planning)
+    * [앱의 가용성 향상](/docs/containers?topic=containers-app#increase_availability)
 
-3.  [`ibmcloud ks` 명령](cs_cli_reference.html#cs_cli_reference) 사용과 같은 클러스터 관리 조치를 시작하는 경우, 클러스터에 대한 기본 정보(예: 이름, ID, 사용자, 명령)는 지역 엔드포인트를 통해 라우팅됩니다.
+3.  [`ibmcloud ks` 명령](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) 사용과 같은 클러스터 관리 조치를 시작하는 경우, 클러스터에 대한 기본 정보(예: 이름, ID, 사용자, 명령)는 지역 엔드포인트를 통해 라우팅됩니다.
+
+
+
+

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -23,7 +27,7 @@ lastupdated: "2018-12-05"
 # Restriction du trafic réseau aux noeuds worker de périphérie
 {: #edge}
 
-Les noeuds worker de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès aux noeuds worker depuis l'extérieur et en isolant la charge de travail du réseau dans {{site.data.keyword.containerlong}}.
+Les noeuds worker de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès aux noeuds worker en externe et en isolant la charge de travail du réseau dans {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 Lorsque ces noeuds worker sont marqués pour mise en réseau uniquement, les autres charges de travail ne peuvent pas consommer d'unité centrale ou de mémoire ni interférer avec le réseau.
@@ -39,17 +43,19 @@ Ajoutez l'étiquette `dedicated=edge` à au moins deux noeuds worker sur chaque 
 
 Avant de commencer :
 
-1. Vérifiez que vous disposez d'un [rôle de plateforme](cs_users.html#platform) {{site.data.keyword.Bluemix_notm}} IAM.
-2. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+1. Vérifiez que vous disposez des [rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) suivants :
+  * N'importe quel rôle de plateforme
+  * Rôle de service **Auteur** ou **Responsable** pour tous les espaces de nom
+2. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 3. Vérifiez que votre cluster dispose d'au moins un VLAN public. Les noeuds worker de périphérie ne sont pas disponibles pour les clusters avec VLAN privés uniquement.
-4. [Créez un nouveau pool de noeuds worker](cs_clusters.html#add_pool) couvrant toutes le zones de votre cluster et comportant au moins 2 noeuds worker par zone.
+4. [Créez un nouveau pool de noeuds worker](/docs/containers?topic=containers-clusters#add_pool) couvrant toutes le zones de votre cluster et comportant au moins 2 noeuds worker par zone.
 
 Pour étiqueter des noeuds worker en tant que noeuds de périphérie :
 
 1. Affichez la liste des noeuds worker figurant dans le pool de noeuds worker de périphérie. Utilisez l'**adresse IP privée** pour identifier les noeuds.
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
+  ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
@@ -95,7 +101,7 @@ Pour étiqueter des noeuds worker en tant que noeuds de périphérie :
   ```
   {: screen}
 
-Vous avez étiqueté des noeuds worker avec `dedicated=edge` et redéployé tous les équilibreurs de charge et Ingress existants sur les noeuds worker de périphérie. Ensuite, empêchez d'autres [charges de travail de s'exécuter sur des noeuds worker de périphérie](#edge_workloads) et [bloquez le trafic entrant vers des ports de noeud (NodePort) sur des noeuds worker](cs_network_policy.html#block_ingress).
+Vous avez étiqueté des noeuds worker avec `dedicated=edge` et redéployé tous les équilibreurs de charge et Ingress existants sur les noeuds worker de périphérie. Ensuite, empêchez d'autres [charges de travail de s'exécuter sur des noeuds worker de périphérie](#edge_workloads) et [bloquez le trafic entrant vers des ports de noeud (NodePort) sur des noeuds worker](/docs/containers?topic=containers-network_policies#block_ingress).
 
 <br />
 
@@ -108,7 +114,11 @@ Un avantage des noeuds worker de périphérie est le fait qu'ils peuvent être d
 
 La tolérance `dedicated=edge` implique que tous les services d'équilibreur de charge et Ingress sont déployés uniquement sur les noeuds worker étiquetés. Toutefois, pour empêcher d'autres charges de travail de s'exécuter sur des noeuds worker de périphérie et de consommer des ressources de noeud worker, vous devez utiliser une [annotation Kubernetes taints![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Avant de commencer :
+- Vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Responsable** pour tous les espaces de nom](/docs/containers?topic=containers-users#platform).
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+
+Pour empêcher l'exécution de charges de travail sur des noeuds worker de périphérie :
 
 1. Répertoriez tous les noeuds worker avec l'étiquette `dedicated=edge`.
 
@@ -125,4 +135,10 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
   {: pre}
   Maintenant, seuls les pods ayant la tolérance `dedicated=edge` sont déployés sur vos noeuds worker de périphérie.
 
-3. Si vous choisissez d'[activer la conservation de l'adresse IP source pour un service d'équilibreur de charge 1.0 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assurez-vous que tous les pods d'application sont planifiés sur les noeuds worker de périphérie en [ajoutant l'affinité de noeud de périphérie aux pods d'application](cs_loadbalancer.html#edge_nodes). Les pods d'application doivent être planifiés sur des noeuds de périphérie pour recevoir des demandes entrantes.
+3. Si vous choisissez d'[activer la conservation de l'adresse IP source pour un service d'équilibreur de charge 1.0 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assurez-vous que tous les pods d'application sont planifiés sur les noeuds worker de périphérie en [ajoutant l'affinité de noeud de périphérie aux pods d'application](/docs/containers?topic=containers-loadbalancer#edge_nodes). Les pods d'application doivent être planifiés sur des noeuds de périphérie pour recevoir des demandes entrantes.
+
+4. Pour supprimer une annotation taint, exécutez la commande suivante.
+    ```
+    kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
+    ```
+    {: pre}

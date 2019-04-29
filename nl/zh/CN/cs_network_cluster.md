@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -18,196 +22,351 @@ lastupdated: "2018-12-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
-# 规划集群内联网和专用联网
-{: #planning}
+# 设置集群网络
+{: #cs_network_cluster}
 
-规划 {{site.data.keyword.containerlong}} 集群的联网设置。
-{: shortdesc}
+在 {{site.data.keyword.containerlong}} 集群中设置联网配置。
+{:shortdesc}
 
-## 了解集群内联网
-{: #in-cluster}
+此页面可帮助您设置集群的网络配置。不确定要选择哪个设置？请参阅[规划集群网络](/docs/containers?topic=containers-cs_network_ov)。
+{: tip}
 
-部署到工作程序节点的所有 pod 都会分配有 172.30.0.0/16 范围内的专用 IP 地址，并且仅在工作程序节点之间路由这些 pod。为了避免冲突，请勿在与工作程序节点通信的任何节点上使用此 IP 范围。工作程序节点和 pod 可以使用专用 IP 地址在专用网络上安全地通信。但是，当 pod 崩溃或需要重新创建工作程序节点时，会分配新的专用 IP 地址。
-
-缺省情况下，很难跟踪必须高度可用的应用程序不断变化的专用 IP 地址。可以改为使用内置 Kubernetes 服务发现功能，以将应用程序公开为专用网络上的集群 IP 服务。Kubernetes 服务会将一些 pod 分组在一起，并提供与这些 pod 的网络连接。此连接提供了与集群中其他服务的连接，而无需公开每个 pod 的实际专用 IP 地址。服务会分配有只能在集群内部访问的集群内 IP 地址。
-* 旧集群：对于 2018 年 2 月之前在 dal13 专区中创建的集群或 2017 年 10 月之前在其他任何专区中创建的集群，服务会分配有 10.10.10.0/24 范围内 254 个 IP 中的其中一个 IP。如果达到 254 个服务的限制，并且需要更多服务，那么必须创建新的集群。
-* 新集群：对于 2018 年 2 月之后在 dal13 专区中创建的集群或 2017 年 10 月之后在其他任何专区中创建的集群，服务会分配有 172.21.0.0/16 范围内的 65,000 个 IP 中的其中一个 IP。
-
-为了避免冲突，请勿在与工作程序节点通信的任何节点上使用此 IP 范围。此外，会为该服务创建 DNS 查找条目，并将该条目存储在集群的 `kube-dns` 组件中。DNS 条目包含服务名称、在其中创建服务的名称空间以及指向分配的集群内 IP 地址的链接。
-
-应用程序要访问位于集群服务后端的 pod，可以使用该服务的集群内 IP 地址，也可以使用该服务的名称发送请求。使用服务名称时，会在 `kube-dns` 组件中查找该名称，并将其路由到服务的集群内 IP 地址。请求到达服务时，服务会将所有请求都同等转发到 pod，而不考虑 pod 的集群内 IP 地址和部署到的工作程序节点。
-
-<br />
-
-
-## 了解 VLAN 连接和网络接口
-{: #interfaces}
-
-{{site.data.keyword.containerlong_notm}} 提供了 IBM Cloud Infrastructure (SoftLayer) VLAN，用于确保工作程序节点的高质量网络性能和网络隔离。VLAN 会将一组工作程序节点和 pod 视为连接到同一物理连线那样进行配置。
-VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IBM 客户之间共享。
-
-缺省情况下，所有集群都会连接到专用 VLAN。专用 VLAN 用于确定分配给每个工作程序节点的专用 IP 地址。工作程序具有专用网络接口，可通过专用网络访问。创建同时连接到公用 VLAN 的集群时，该集群还会有公用网络接口。公用 VLAN 允许工作程序节点自动、安全地连接到主节点。有关集群的缺省 VLAN 的更多信息，请参阅[集群的缺省 VLAN、子网和 IP](cs_subnets.html#default_vlans_subnets)。
-
-集群联网设置可以由集群的网络接口进行定义：
-
-* **缺省集群联网**：具有专用和公用网络接口的集群
-* **定制缺省集群联网**：同时具有专用和公用网络接口以及阻止入局公共流量的 Calico 网络策略的集群
-* **仅专用集群联网**：仅具有专用网络接口的集群
-
-单击下列其中一个设置以规划集群的联网：
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/network_imagemap.png" width="575" alt="单击卡以规划集群联网设置。" style="width:575px;" />
-<map name="home_map" id="home_map">
-<area href="#both_vlans" alt="规划缺省集群联网" title="规划缺省集群联网" shape="rect" coords="-7, -8, 149, 211" />
-<area href="#both_vlans_private" alt="规划定制缺省集群联网" title="规划定制缺省集群联网" shape="rect" coords="196, -1, 362, 210" />
-<area href="#private_vlan" alt="规划仅专用集群联网" title="规划仅专用集群联网" shape="rect" coords="409, -10, 572, 218" />
-</map>
-
-<br />
-
-
-## 规划缺省集群网络
+## 设置使用公用和专用 VLAN 的集群联网
 {: #both_vlans}
 
-缺省情况下，{{site.data.keyword.containerlong_notm}} 为集群设置了对公用 VLAN 和专用 VLAN 的访问权。
-{:shortdesc}
+为集群设置对[公用 VLAN 和专用 VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) 的访问权。下图显示了可以使用此设置为集群配置的网络选项。
+{: shortdesc}
 
+此联网设置包含以下在集群创建期间必需的联网配置以及在集群创建后可选的联网配置。
 
+1. 如果是在防火墙后的环境中创建集群，请针对计划使用的 {{site.data.keyword.Bluemix_notm}} 服务，[允许流至公共和专用 IP 的出站网络流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
-**使用此设置时，集群可以获得什么？**
-* 每个工作程序节点的公共 IP 地址，用于为工作程序节点提供公用网络接口
-* 每个工作程序节点的专用 IP 地址，用于为工作程序节点提供专用网络接口
-* 所有工作程序节点和主节点之间的自动、安全的 OpenVPN 连接
+2. 创建连接到公用和专用 VLAN 的集群。如果创建多专区集群，那么可以为每个专区选择 VLAN 对。
 
-**为什么可能会使用此设置？**
+3. 选择 Kubernetes 主节点和工作程序节点之间的通信方式。
+  * 如果在 {{site.data.keyword.Bluemix_notm}} 帐户中启用了 VRF，请启用[仅公共](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)、[公共和专用](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)或[仅专用服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)。
+  * 如果无法或不想启用 VRF，请启用[仅公共服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)。
 
-* 您在单专区集群中具有必须可供公用因特网访问的应用程序。
-* 您在多专区集群中具有必须可供公用因特网访问的应用程序。由于必须启用 [VLAN 生成](cs_subnets.html#subnet-routing)才能创建多专区集群，因此该集群可以与连接到同一 IBM Cloud 帐户中任何专用 VLAN 的其他系统进行通信。要隔离专用网络上的多专区集群，可以使用 [Calico 网络策略](cs_network_policy.html#isolate_workers)。
-
-**哪些选项可用于管理对集群的公共和专用访问权？**
-</br>以下各部分描述了 {{site.data.keyword.containerlong_notm}} 中的功能，您可以使用这些功能为连接到公用和专用 VLAN 的集群设置联网。
-
-### 利用联网服务公开应用程序
-{: #both_vlans_services}
-
-工作程序节点的公用网络接口通过集群创建期间在每个工作程序节点上配置的[预定义 Calico 网络策略设置](cs_network_policy.html#default_policy)进行保护。缺省情况下，所有工作程序节点都允许所有出站网络流量。入站网络流量会被阻止，但有几个端口例外。通过打开这些端口，IBM 可以监视网络流量，并自动为 Kubernetes 主节点安装安全性更新。
-
-如果要将应用程序公开给公用或专用网络，您可以创建公共或专用 NodePort、LoadBalancer 或 Ingress 服务。有关每个服务的更多信息，请参阅[选择 NodePort、LoadBalancer 或 Ingress 服务](cs_network_planning.html#external)。
-
-### 可选：将联网工作负载隔离到边缘工作程序节点
-{: #both_vlans_edge}
-
-边缘工作程序节点通过减少允许外部访问的工作程序节点，并隔离联网工作负载，可以提高集群的安全性。要确保 Ingress 和负载均衡器 pod 仅部署到指定的工作程序节点，请[将工作程序节点标记为边缘节点](cs_edge.html#edge_nodes)。此外，要防止其他工作负载在边缘节点上运行，请[感染边缘节点](cs_edge.html#edge_workloads)。
-
-
-### 可选：使用 strongSwan VPN 连接到内部部署网络或 IBM Cloud Private
-{: #both_vlans_vpn}
-
-要将工作程序节点和应用程序安全地连接到内部部署网络，可以设置 [strongSwan IPSec VPN 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.strongswan.org/about.html)。strongSwan IPSec VPN 服务基于业界标准因特网协议安全性 (IPSec) 协议组，通过因特网提供安全的端到端通信信道。
-* 要在集群与内部部署网络之间设置安全连接，请在集群的 pod 中直接[配置和部署 strongSwan IPSec VPN 服务](cs_vpn.html#vpn-setup)。
-* 要在集群与 IBM Cloud Private 实例之间设置安全连接，请参阅[使用 strongSwan VPN 连接公共和专用云](cs_hybrid.html#hybrid_vpn)。
-
+4. 创建集群后，可以配置以下联网选项：
+  * 设置 [strongSwan VPN 连接服务](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)，以允许集群与内部部署网络或 {{site.data.keyword.icpfull_notm}} 之间的通信。
+  * 创建 [Kubernetes 发现服务](/docs/containers?topic=containers-cs_network_planning#in-cluster)，以允许 pod 之间进行集群内通信。
+  * 创建[公共](/docs/containers?topic=containers-cs_network_planning#public_access) Ingress、LoadBalancer 或 NodePort 服务，以将应用程序公开到公用网络。
+  * 创建[专用](/docs/containers?topic=containers-cs_network_planning#private_both_vlans) Ingress、LoadBalancer 或 NodePort 服务，以将应用程序公开到专用网络，并创建 Calico 网络策略来保护集群不受公共访问。
+  * 将联网工作负载隔离到[边缘工作程序节点](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)。
+  * [隔离专用网络上的集群](/docs/containers?topic=containers-cs_network_planning#isolate)。
 
 <br />
 
 
-## 规划定制缺省集群联网
-{: #both_vlans_private}
+## 设置仅使用专用 VLAN 的集群联网
+{: #setup_private_vlan}
 
-缺省情况下，{{site.data.keyword.containerlong_notm}} 为集群设置了对公用 VLAN 和专用 VLAN 的访问权。但是，您可以使用网络策略来定制缺省联网设置，以阻止公共访问。
-{:shortdesc}
+如果您有特定安全性需求，或者需要创建定制网络策略和路由规则，以提供专用网络安全性，请为集群设置对[仅专用 VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) 的访问权。下图显示了可以使用此设置为集群配置的网络选项。
+{: shortdesc}
 
+此联网设置包含以下在集群创建期间必需的联网配置以及在集群创建后可选的联网配置。
 
+1. 如果是在防火墙后的环境中创建集群，请针对计划使用的 {{site.data.keyword.Bluemix_notm}} 服务，[允许流至公共和专用 IP 的出站网络流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
-**使用此设置时，集群可以获得什么？**
-* 每个工作程序节点的公共 IP 地址，用于为工作程序节点提供公用网络接口
-* 每个工作程序节点的专用 IP 地址，用于为工作程序节点提供专用网络接口
-* 所有工作程序节点和主节点之间的自动、安全的 OpenVPN 连接
+2. 创建连接到[仅专用 VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) 的集群。如果创建多专区集群，那么可以为每个专区选择专用 VLAN。
 
-**为什么可能会使用此设置？**
+3. 选择 Kubernetes 主节点和工作程序节点之间的通信方式。
+  * 如果在 {{site.data.keyword.Bluemix_notm}} 帐户中启用了 VRF，请[启用专用服务端点](#set-up-private-se)。
+  * 如果无法或不想启用 VRF，那么 Kubernetes 主节点和工作程序节点无法自动连接到主节点。必须为集群配置[网关设备](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)。
 
-* 您在单专区集群中有应用程序。您希望将应用程序仅公开给集群内或连接到同一专用 VLAN 的其他集群中的 pod。
-* 您在多专区集群中有应用程序。您希望将应用程序仅公开给集群内或连接到您集群所在专用 VLAN 的其他集群中的 pod。但是，由于必须对多专区集群启用 [VLAN 生成](cs_subnets.html#subnet-routing)，因此连接到同一 IBM Cloud 帐户中任何专用 VLAN 的其他系统可以访问该集群。您希望将多专区集群与其他系统相隔离。
-
-**哪些选项可用于管理对集群的公共和专用访问权？**</br>以下各部分描述了 {{site.data.keyword.containerlong_notm}} 中的功能，您可以使用这些功能为连接到公用和专用 VLAN 的集群设置仅专用联网和锁定公用联网。
-
-### 使用专用联网服务公开应用程序，并使用 Calico 网络策略保护集群不被公共访问
-{: #both_vlans_private_services}
-
-工作程序节点的公用网络接口通过集群创建期间在每个工作程序节点上配置的[预定义 Calico 网络策略设置](cs_network_policy.html#default_policy)进行保护。缺省情况下，所有工作程序节点都允许所有出站网络流量。入站网络流量会被阻止，但有几个端口例外。通过打开这些端口，IBM 可以监视网络流量，并自动为 Kubernetes 主节点安装安全性更新。
-
-如果要仅通过专用网络公开应用程序，您可以创建专用 NodePort、LoadBalancer 或 Ingress 服务。有关规划专用外部联网的更多信息，请参阅[规划公用和专用 VLAN 设置的专用外部联网](cs_network_planning.html#private_both_vlans)。
-
-但是，缺省的 Calico 网络策略还允许从因特网流至这些服务的入站公用网络流量。您可以创建 Calico 策略以改为阻止流至这些服务的所有公共流量。例如，NodePort 服务通过工作程序节点的专用和公共 IP 地址，在工作程序节点上打开一个端口。具有可移植专用 IP 地址的 LoadBalancer 服务会在每个工作程序节点上打开一个公共 NodePort。必须创建 [Calico DNAT 前网络策略](cs_network_policy.html#block_ingress)来阻止公共 NodePort。
-
-例如，假设创建了专用 LoadBalancer 服务。另外还创建了 Calico DNAT 前策略，以阻止公共流量到达负载均衡器打开的公共 NodePort。可通过以下对象访问此专用负载均衡器：
-* [同一集群中的任何 pod](#in-cluster)
-* 任何集群中连接到同一专用 VLAN 的任何 pod
-* 连接到同一 IBM Cloud 帐户中任何专用 VLAN 的任何系统（如果已[启用 VLAN 生成](cs_subnets.html#subnet-routing)）
-* 通过 VPN 连接到负载均衡器 IP 所在子网的任何系统（如果您不在 IBM Cloud 帐户中，但仍在公司防火墙后）
-* 通过 VPN 连接到负载均衡器 IP 所在子网的任何系统（如果您位于其他 IBM Cloud 帐户中）
-
-### 在专用网络上隔离集群
-{: #isolate}
-
-如果有多专区集群、有多个 VLAN 用于单专区集群，或者在同一 VLAN 上有多个子网，那么必须[启用 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，以便工作程序节点可以在专用网络上相互通信。但是，启用 VLAN 生成后，连接到同一 IBM Cloud 帐户中任何专用 VLAN 的任何系统都可以访问工作程序。您可以使用 [Calico 网络策略](cs_network_policy.html#isolate_workers)将多专区集群与专用网络上的其他系统相隔离。这些策略还允许在专用防火墙中打开的专用 IP 范围和端口的流量流入和流出。
-
-### 可选：将联网工作负载隔离到边缘工作程序节点
-{: #both_vlans_private_edge}
-
-边缘工作程序节点通过减少允许外部访问的工作程序节点，并隔离联网工作负载，可以提高集群的安全性。要确保 Ingress 和负载均衡器 pod 仅部署到指定的工作程序节点，请[将工作程序节点标记为边缘节点](cs_edge.html#edge_nodes)。此外，要防止其他工作负载在边缘节点上运行，请[感染边缘节点](cs_edge.html#edge_workloads)。
-
-
-然后，使用 [Calico DNAT 前网络策略](cs_network_policy.html#block_ingress)来阻止运行边缘工作程序节点的集群上流至公共 NodePort 的流量。阻止节点端口可确保边缘工作程序节点是处理入局流量的唯一工作程序节点。
-
-### 可选：使用 strongSwan VPN 连接到内部部署网络或 IBM Cloud Private
-{: #both_vlans_private_vpn}
-
-要将工作程序节点和应用程序安全地连接到内部部署网络，可以设置 [strongSwan IPSec VPN 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.strongswan.org/about.html)。strongSwan IPSec VPN 服务基于业界标准因特网协议安全性 (IPSec) 协议组，通过因特网提供安全的端到端通信信道。
-* 要在集群与内部部署网络之间设置安全连接，请在集群的 pod 中直接[配置和部署 strongSwan IPSec VPN 服务](cs_vpn.html#vpn-setup)。
-* 要在集群与 IBM Cloud Private 实例之间设置安全连接，请参阅[使用 strongSwan VPN 连接公共和专用云](cs_hybrid.html#hybrid_vpn)。
-
+4. 创建集群后，可以配置以下联网选项：
+  * [设置 VPN 网关](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)，以允许集群与内部部署网络或 {{site.data.keyword.icpfull_notm}} 之间的通信。如果先前设置了 VRA 或 FSA，以允许主节点和工作程序节点之间进行通信，那么可以在 VRA 或 FSA 上配置 IPSec VPN 端点。
+  * 创建 [Kubernetes 发现服务](/docs/containers?topic=containers-cs_network_planning#in-cluster)，以允许 pod 之间进行集群内通信。
+  * 创建[专用](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) Ingress、LoadBalancer 或 NodePort 服务，以将应用程序公开到专用网络。
+  * 将联网工作负载隔离到[边缘工作程序节点](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)。
+  * [隔离专用网络上的集群](/docs/containers?topic=containers-cs_network_planning#isolate)。
 
 <br />
 
 
-## 规划仅专用集群联网
-{: #private_vlan}
+## 更改工作程序节点 VLAN 连接
+{: #change-vlans}
 
-您可以通过在 CLI 中包含 `--private-only` 标志来选择[创建仅专用 VLAN 集群](cs_clusters.html#clusters_cli)。工作程序节点仅连接到专用 VLAN 时，这些工作程序节点无法自动连接到主节点。必须使用网关设备将工作程序节点连接到主节点。还可以使用网关设备作为防火墙来保护集群免受不需要的访问。
-{:shortdesc}
+创建集群时，选择是将工作程序节点连接到专用和公用 VLAN，还是连接到仅专用 VLAN。工作程序节点是工作程序池的一部分，用于存储联网元数据，其中包含要用于供应池中未来工作程序节点的 VLAN。日后遇到如下情况时，您可能希望更改集群的 VLAN 连接设置。
+{: shortdesc}
+
+* 专区中的工作程序池 VLAN 的容量不足，您需要供应一个新的 VLAN 以供集群工作程序节点使用。
+* 您有一个集群，包含的工作程序节点同时位于公用和专用 VLAN 上，但您希望更改为[仅专用集群](#setup_private_vlan)。
+* 您具有仅专用的集群，但需要某些工作程序节点（例如，公用 VLAN 上的[边缘节点](/docs/containers?topic=containers-edge#edge)的工作程序池）在因特网上公开应用程序。
+
+要尝试转而更改用于主节点与工作程序之间通信的服务端点？请查看设置[公共](#set-up-public-se)和[专用](#set-up-private-se)服务端点的主题。
+{: tip}
+
+开始之前：
+* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* 如果工作程序节点是独立节点（不是工作程序池的一部分），请[将其更新到工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)。
+
+要更改工作程序池用于供应工作程序节点的 VLAN，请执行以下操作：
+
+1. 列出集群中工作程序池的名称。
+  ```
+  ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+2. 确定其中一个工作程序池的专区。在输出中，查找 **Zones** 字段。
+  ```
+  ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+  ```
+  {: pre}
+
+3. 对于在上一步中找到的每个专区，获取相互兼容的可用公用和专用 VLAN。
+
+  1. 检查输出中 **Type** 下列出的可用公用和专用 VLAN。
+    ```
+    ibmcloud ks vlans --zone <zone>
+    ```
+    {: pre}
+
+  2. 检查专区中的公用和专用 VLAN 是否兼容。要使两者兼容，**Router** 必须具有相同的 pod 标识。在此示例输出中，**Router** pod 标识匹配：`01a` 和 `01a`。如果一个 pod 标识为 `01a`，另一个为 `02a`，那么无法为工作程序池设置公用和专用 VLAN 标识。
+    ```
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    229xxxx          1234     private   bcr01a.dal12   true
+    229xxxx          5678     public    fcr01a.dal12   true
+    ```
+    {: screen}
+
+  3. 如果需要为专区订购新的公用或专用 VLAN，那么可以在 [{{site.data.keyword.Bluemix_notm}} 控制台](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)中进行订购或使用以下命令。请记住，VLAN 必须兼容，并且 **Router** pod 标识匹配，如上一步中所示。如果要创建一对新的公用和专用 VLAN，那么这些 VLAN 必须相互兼容。
+    ```
+    ibmcloud sl vlan create -t [public|private] -d <zone> -r <compatible_router>
+    ```
+    {: pre}
+
+  4. 记下兼容 VLAN 的标识。
+
+4. 为每个专区设置具有新的 VLAN 网络元数据的工作程序池。可以创建新的工作程序池，也可以修改现有工作程序池。
+
+  * **创建新的工作程序池**：请参阅[通过创建新的工作程序池来添加工作程序节点](/docs/containers?topic=containers-clusters#add_pool)。
+
+  * **修改现有工作程序池**：设置工作程序池的网络元数据以将 VLAN 用于每个专区。池中已创建的工作程序节点会继续使用先前的 VLAN，但池中的新工作程序节点将使用设置的新 VLAN 元数据。
+
+    * 添加公用和专用 VLAN 的示例（例如，从仅专用 VLAN 更改为专用和公共 VLAN）：
+      ```
+      ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
+      ```
+      {: pre}
+
+    * 添加仅专用 VLAN 的示例（例如，在您有使用服务端点的[启用 VRF 的帐户](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)时，从公用和专用 VLAN 更改为仅专用 VLAN）：
+      ```
+      ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
+      ```
+      {: pre}
+
+5. 通过调整池大小，向工作程序池添加工作程序节点。
+  ```
+    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <pool_name>  --size-per-zone <number_of_workers_per_zone>
+    ```
+  {: pre}
+
+  如果要除去使用先前网络元数据的工作程序节点，请将每个专区的工作程序数更改为先前每个专区的工作程序数的两倍。以后在这些步骤中，可以封锁、放弃和除去先前的工作程序节点。
+  {: tip}
+
+6. 验证是否新工作程序节点是使用输出中的相应 **Public IP** 和 **Private IP** 创建的。例如，如果将工作程序池从公用和专用 VLAN 更改为仅专用 VLAN，那么新的工作程序节点仅具有专用 IP。如果将工作程序池从仅专用 VLAN 更改为公用和专用 VLAN，那么新的工作程序节点将同时具有公用和专用 IP。
+  ```
+  ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+  ```
+  {: pre}
+
+7. 可选：从工作程序池中除去具有先前网络元数据的工作程序节点。
+  1. 在上一步的输出中，记下要从工作程序池中除去的工作程序节点的 **ID** 和 **Private IP**。
+  2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。
+    ```
+    kubectl cordon <worker_private_ip>
+    ```
+    {: pre}
+  3. 验证是否已对工作程序节点禁用了 pod 安排。
+      ```
+kubectl get nodes
+```
+    {: pre}
+如果阶段状态显示为 **`SchedulingDisabled`**，说明已禁止工作程序节点用于 pod 安排。
+
+  4. 强制从工作程序节点中除去 pod，并将其重新安排到集群中的剩余工作程序节点上。
+    ```
+    kubectl drain <worker_private_ip>
+    ```
+    {: pre}
+此过程可能需要几分钟时间。
+  5. 除去工作程序节点。使用先前检索到的工作程序标识。
+    ```
+   ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
+   ```
+    {: pre}
+  6. 验证工作程序节点是否已除去。
+    ```
+    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ```
+    {: pre}
+
+8. 可选：对于集群中的每个工作程序池，可以重复步骤 2 到 7。完成这些步骤后，集群中的所有工作程序节点都将设置为使用新的 VLAN。
+
+9. 集群中的缺省 ALB 仍绑定到旧 VLAN，因为这些 ALB 的 IP 地址来自旧 VLAN 上的子网。由于 ALB 无法在 VLAN 之间移动，因此可以改为[在新 VLAN 上创建 ALB 并禁用旧 VLAN 上的 ALB](/docs/containers?topic=containers-ingress#migrate-alb-vlan)。
+
+<br />
 
 
+## 设置专用服务端点
+{: #set-up-private-se}
 
-**使用此设置时，集群可以获得什么？**
-* 每个工作程序节点的专用 IP 地址，用于为工作程序节点提供专用网络接口
+在运行 Kubernetes V1.11 或更高版本的集群中，启用或禁用集群的专用服务端点。
+{: shortdesc}
 
-**使用此设置时，集群不会获得什么？**
-* 每个工作程序节点的公共 IP 地址，用于为工作程序节点提供公用网络接口。集群永远不可供公众使用。
-* 所有工作程序节点和主节点之间的自动连接。必须通过[配置网关设备](#private_vlan_gateway)来提供此连接。
+通过专用服务端点，能使 Kubernetes 主节点可供专用访问。工作程序节点和授权集群用户可以通过专用网络与 Kubernetes 主节点进行通信。要确定是否可以启用专用服务端点，请参阅[规划主节点与工作程序之间的通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)。请注意，在启用专用服务端点后，即无法将其禁用。
 
-**为什么可能会使用此设置？**
-</br>您具有特定安全性需求，或者需要创建定制网络策略和路由规则，以提供专用网络安全性。请注意，使用网关设备会产生单独的开销。有关详细信息，请参阅[文档](/docs/infrastructure/fortigate-10g/explore-firewalls.html)。
+**在创建集群期间要启用的步骤**</br>
+1. 在您的 IBM Cloud Infrastructure (SoftLayer) 帐户中启用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)。
+2. [启用 {{site.data.keyword.Bluemix_notm}} 帐户以使用服务端点](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+3. 如果是在防火墙后的环境中创建集群，请针对基础架构资源和计划使用的 {{site.data.keyword.Bluemix_notm}} 服务，[允许流至公共和专用 IP 的出站网络流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
+4. 创建集群：
+  * [使用 CLI 创建集群](/docs/containers?topic=containers-clusters#clusters_cli)，并使用 `--private-service-endpoint` 标志。如果还要启用公共服务端点，请同时使用 `--public-service-endpoint` 标志。
+  * [使用 UI 创建集群](/docs/containers?topic=containers-clusters#clusters_ui_standard)，并选择**仅专用端点**。如果还要启用公共服务端点，请选择**公共和专用端点**。
+5. 如果在防火墙后的环境中为集群启用了仅专用服务端点：
+  1. 验证您是位于 {{site.data.keyword.Bluemix_notm}} 专用网络中，还是已通过 VPN 连接来连接到专用网络。
+  2. [允许授权集群用户运行 `kubectl` 命令](/docs/containers?topic=containers-firewall#firewall_kubectl)，以通过专用服务端点来访问主节点。集群用户必须位于 {{site.data.keyword.Bluemix_notm}} 专用网络中，或者通过 VPN 连接来连接到专用网络，才能运行 `kubectl` 命令。
+  3. 如果网络访问受公司防火墙保护，那么必须[在防火墙中允许访问 `ibmcloud` API 和 `ibmcloud ks` API 的公共端点](/docs/containers?topic=containers-firewall#firewall_bx)。虽然与主节点的所有通信都通过专用网络执行，但 `ibmcloud`和 `ibmcloud ks` 命令必须通过公共 API 端点执行。
 
-**哪些选项可用于管理对集群的公共和专用访问权？**
-</br>以下各部分描述了 {{site.data.keyword.containerlong_notm}} 中的功能，您可以使用这些功能为仅连接到专用 VLAN 的集群设置联网。
+  </br>
 
-### 配置网关设备
-{: #private_vlan_gateway}
+**创建集群后要启用的步骤**</br>
+1. 在您的 IBM Cloud Infrastructure (SoftLayer) 帐户中启用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)。
+2. [启用 {{site.data.keyword.Bluemix_notm}} 帐户以使用服务端点](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+3. 启用专用服务端点。
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+4. 刷新 Kubernetes 主节点 API 服务器以使用专用服务端点。您可以遵循 CLI 中的提示进行操作，也可以手动运行以下命令。
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
 
-如果工作程序节点设置为仅使用专用 VLAN，那么必须为工作程序节点与主节点之间的网络连接配置备用解决方案。可以使用定制网络策略来设置防火墙，以便为标准集群提供专用网络安全性，检测网络侵入并进行补救。例如，可以选择设置[虚拟路由器设备](/docs/infrastructure/virtual-router-appliance/about.html)或 [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html)，以充当防火墙并阻止不需要的流量。设置防火墙时，还必须为每个区域[打开必需的端口和 IP 地址](cs_firewall.html#firewall_outbound)，以便主节点和工作程序节点可以通信。
+5. [创建配置映射](/docs/containers?topic=containers-update#worker-up-configmap)，用于控制集群中可以同时不可用的最大工作程序节点数。更新工作程序节点时，配置映射可帮助防止应用程序产生停机时间，因为应用程序会有序地重新安排到可用的工作程序节点上。
+6. 更新集群中的所有工作程序节点以选取专用服务端点配置。
 
-如果您有现有路由器设备，然后添加集群，那么不会在该路由器设备上配置为集群订购的新可移植子网。要使用联网服务，必须通过[启用 VLAN 生成](cs_subnets.html#vra-routing)来启用同一 VLAN 上子网之间的路由。
-{: important}
+  <p class="important">通过发出更新命令，会重新装入工作程序节点以选取服务端点配置。如果没有工作程序更新可用，那么必须[手动重新装入工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)。如果重新装入，请确保封锁、放弃和管理工作程序节点，以控制可以同时不可用的最大工作程序节点数。</p>
+  ```
+  ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+  ```
+  {: pre}
 
-### 使用专用联网服务公开应用程序
-{: #private_vlan_services}
+8. 如果集群位于防火墙后的环境中：
+  * [允许授权集群用户运行 `kubectl` 命令，以通过专用服务端点来访问主节点](/docs/containers?topic=containers-firewall#firewall_kubectl)。
+  * 针对基础架构资源和计划使用的 {{site.data.keyword.Bluemix_notm}} 服务，[允许流至专用 IP 的出站网络流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
 
-要使应用程序只能从专用网络访问，可以使用专用 NodePort、LoadBalancer 或 Ingress 服务。由于工作程序节点未连接到公用 VLAN，因此不会将公共流量路由到这些服务。您还必须[打开必需的端口和 IP 地址](cs_firewall.html#firewall_inbound)，以允许流至这些服务的入站流量。
+9. 可选：要仅使用专用服务端点，请禁用公共服务端点。
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+  </br>
 
-有关每个服务的更多信息，请参阅[选择 NodePort、LoadBalancer 或 Ingress 服务](cs_network_planning.html#external)。
+**禁用步骤**</br>
+无法禁用专用服务端点。
 
-### 可选：使用网关设备连接到内部部署数据库
-{: #private_vlan_vpn}
+## 设置公共服务端点
+{: #set-up-public-se}
 
-要将工作程序节点和应用程序安全地连接到内部部署网络，必须设置 VPN 网关。您可以使用先前设置的 VRA 或 FSA 来配置 IPSec VPN 端点。要配置 VRA，请参阅[使用 VRA 设置 VPN 连接](cs_vpn.html#vyatta)。
+启用或禁用集群的公共服务端点。
+{: shortdesc}
+
+通过公共服务端点，能使 Kubernetes 主节点可供公共访问。工作程序节点和授权集群用户可以安全地通过公用网络与 Kubernetes 主节点进行通信。要确定是否可以启用公共服务端点，请参阅[规划工作程序节点与 Kubernetes 主节点之间的通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)。
+
+**在创建集群期间要启用的步骤**</br>
+
+1. 如果是在防火墙后的环境中创建集群，请针对计划使用的 {{site.data.keyword.Bluemix_notm}} 服务，[允许流至公共和专用 IP 的出站网络流量](/docs/containers?topic=containers-firewall#firewall_outbound)。
+
+2. 创建集群：
+  * [使用 CLI 创建集群](/docs/containers?topic=containers-clusters#clusters_cli)，并使用 `--public-service-endpoint` 标志。如果还要启用专用服务端点，请同时使用 `--private-service-endpoint` 标志。
+  * [使用 UI 创建集群](/docs/containers?topic=containers-clusters#clusters_ui_standard)，并选择**仅公共端点**。如果还要启用专用服务端点，请选择**公共和专用端点**。
+
+3. 如果是在防火墙后的环境中创建集群，请[允许授权集群用户运行 `kubectl` 命令，以仅通过公共服务端点或同时通过公共和专用服务端点访问主节点](/docs/containers?topic=containers-firewall#firewall_kubectl)。
+
+  </br>
+
+**创建集群后要启用的步骤**</br>
+如果先前禁用了公共端点，那么可以重新启用该端点。
+1. 启用公共服务端点。
+  ```
+  ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+2. 刷新 Kubernetes 主节点 API 服务器以使用公共服务端点。您可以遵循 CLI 中的提示进行操作，也可以手动运行以下命令。
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  </br>
+
+**禁用步骤**</br>
+要禁用公共服务端点，必须首先启用专用服务端点，以便工作程序节点可以与 Kubernetes 主节点进行通信。
+1. 启用专用服务端点。
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+2. 通过遵循 CLI 提示进行操作或手动运行以下命令，刷新 Kubernetes 主节点 API 服务器以使用专用服务端点。
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+3. [创建配置映射](/docs/containers?topic=containers-update#worker-up-configmap)，用于控制集群中可以同时不可用的最大工作程序节点数。更新工作程序节点时，配置映射可帮助防止应用程序产生停机时间，因为应用程序会有序地重新安排到可用的工作程序节点上。
+
+4. 更新集群中的所有工作程序节点以选取专用服务端点配置。
+
+  <p class="important">通过发出更新命令，会重新装入工作程序节点以选取服务端点配置。如果没有工作程序更新可用，那么必须[手动重新装入工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)。如果重新装入，请确保封锁、放弃和管理工作程序节点，以控制可以同时不可用的最大工作程序节点数。</p>
+  ```
+  ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+  ```
+  {: pre}
+5. 禁用公共服务端点。
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+## 从公共服务端点切换到专用服务端点
+{: #migrate-to-private-se}
+
+在运行 Kubernetes V1.11 或更高版本的集群中，通过启用专用服务端点，使工作程序节点能够通过专用网络而不是公用网络与主节点进行通信。
+{: shortdesc}
+
+缺省情况下，连接到公用和专用 VLAN 的所有集群都使用公共服务端点。工作程序节点和授权集群用户可以安全地通过公用网络与 Kubernetes 主节点进行通信。要使工作程序节点能够通过专用网络而不是公用网络与 Kubernetes 主节点进行通信，可以启用专用服务端点。之后，您可以选择禁用公共服务端点。
+* 如果启用了专用服务端点，并同时使公共服务端点保持启用状态，那么工作程序始终通过专用网络与主节点进行通信，但用户可以通过公用网络或专用网络与主节点进行通信。
+* 如果启用了专用服务端点，而禁用了公共服务端点，那么工作程序和用户必须通过专用网络与主节点进行通信。
+
+请注意，在启用专用服务端点后，即无法将其禁用。
+
+1. 在您的 IBM Cloud Infrastructure (SoftLayer) 帐户中启用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)。
+2. [启用 {{site.data.keyword.Bluemix_notm}} 帐户以使用服务端点](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+3. 启用专用服务端点。
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+4. 通过遵循 CLI 提示进行操作或手动运行以下命令，刷新 Kubernetes 主节点 API 服务器以使用专用服务端点。
+  ```
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+5. [创建配置映射](/docs/containers?topic=containers-update#worker-up-configmap)，用于控制集群中可以同时不可用的最大工作程序节点数。更新工作程序节点时，配置映射可帮助防止应用程序产生停机时间，因为应用程序会有序地重新安排到可用的工作程序节点上。
+
+6.  更新集群中的所有工作程序节点以选取专用服务端点配置。
+
+    <p class="important">通过发出更新命令，会重新装入工作程序节点以选取服务端点配置。如果没有工作程序更新可用，那么必须[手动重新装入工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)。如果重新装入，请确保封锁、放弃和管理工作程序节点，以控制可以同时不可用的最大工作程序节点数。</p>
+    ```
+    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+    ```
+    {: pre}
+
+7. 可选：禁用公共服务端点。
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+  ```
+  {: pre}

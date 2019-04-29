@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -39,17 +43,19 @@ Inclua o rótulo `dedicated=edge` em dois ou mais nós do trabalhador em cada VL
 
 Antes de iniciar:
 
-1. Certifique-se de ter qualquer [função da plataforma](cs_users.html#platform) do {{site.data.keyword.Bluemix_notm}} IAM.
-2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+1. Assegure-se de que você tenha as [funções do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) a seguir:
+  * Qualquer função da plataforma para o cluster
+  * Função de serviço **Gravador** ou **Gerenciador** para todos os namespaces
+2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 3. Assegure-se de que seu cluster tem pelo menos uma VLAN pública. Os nós do trabalhador de borda não estão disponíveis para clusters somente com VLANs privadas.
-4. [Crie um novo conjunto de trabalhadores](cs_clusters.html#add_pool) que abranja toda a zona em seu cluster e tenha pelo menos 2 trabalhadores por zona.
+4. [Crie um novo conjunto de trabalhadores](/docs/containers?topic=containers-clusters#add_pool) que abranda toda a zona em seu cluster e tenha pelo menos 2 trabalhadores por zona.
 
 Para rotular nós do trabalhador como nós de borda:
 
 1. Liste os nós do trabalhador em seu conjunto de trabalhadores do nó de borda. Use o endereço **IP privado** para identificar os nós.
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
+  ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
@@ -95,7 +101,7 @@ Para rotular nós do trabalhador como nós de borda:
   ```
   {: screen}
 
-Você rotulou os nós do trabalhador com `dedicated=edge` e reimplementou todos os balanceadores de carga existentes e o Ingresso nos nós do trabalhador de borda. Em seguida, evite que outras [cargas de trabalho sejam executadas em nós do trabalhador de borda](#edge_workloads) e [bloqueiem o tráfego de entrada para NodePorts em nós do trabalhador](cs_network_policy.html#block_ingress).
+Você rotulou os nós do trabalhador com `dedicated=edge` e reimplementou todos os balanceadores de carga existentes e o Ingresso nos nós do trabalhador de borda. Em seguida, evite que outras [cargas de trabalho sejam executadas em nós do trabalhador de borda](#edge_workloads) e [bloqueiem o tráfego de entrada para NodePorts em nós do trabalhador](/docs/containers?topic=containers-network_policies#block_ingress).
 
 <br />
 
@@ -108,7 +114,11 @@ Um benefício de nós do trabalhador de borda é que eles podem ser especificado
 
 Usar a tolerância `dedicated=edge` significa que todos os serviços de balanceador de carga e de Ingresso são implementados somente nos nós do trabalhador rotulados. No entanto, para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda e consumam recursos do nó do trabalhador, deve-se usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+Antes de iniciar:
+- Assegure-se de que você tenha a [função de **Gerenciador** do serviço {{site.data.keyword.Bluemix_notm}} IAM para todos os namespaces](/docs/containers?topic=containers-users#platform).
+- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+
+Para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda:
 
 1. Liste todos os nós do trabalhador com o rótulo `dedicated=edge`.
 
@@ -125,4 +135,10 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
   {: pre}
   Agora, somente pods com a tolerância `dedicated=edge` são implementados em nós do trabalhador de borda.
 
-3. Se você optar por [ativar a preservação do IP de origem para um serviço de balanceador de carga 1.0![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](cs_loadbalancer.html#edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.
+3. Se você escolher [ativar a preservação de IP de origem para um serviço de balanceador de carga 1.0 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda para os pods de app](/docs/containers?topic=containers-loadbalancer#edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.
+
+4. Para remover uma contaminação, execute o comando a seguir.
+    ```
+    kubectl taint node < node_name> dedicado: NoSchedule- dedicado: NoExecute-
+    ```
+    {: pre}

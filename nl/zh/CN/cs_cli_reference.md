@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, ibmcloud, ic, ks
+
+subcollection: containers
 
 ---
 
@@ -20,18 +24,61 @@ lastupdated: "2018-12-05"
 
 
 
-# 命令参考
+# IBM Cloud Kubernetes Service CLI
 {: #cs_cli_reference}
 
 请参阅以下命令以在 {{site.data.keyword.containerlong}} 中创建和管理 Kubernetes 集群。
 {:shortdesc}
 
-要安装 CLI 插件，请参阅[安装 CLI](cs_cli_install.html#cs_cli_install_steps)。
+要安装 CLI 插件，请参阅[安装 CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)。
 
 在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
 
-在查找 `ibmcloud cr` 命令吗？请参阅 [{{site.data.keyword.registryshort_notm}} CLI 参考](/docs/container-registry-cli-plugin/container-registry-cli.html#containerregcli)。在查找 `kubectl` 命令吗？请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/)。
+在查找 `ibmcloud cr` 命令吗？请参阅 [{{site.data.keyword.registryshort_notm}} CLI 参考](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)。在查找 `kubectl` 命令吗？请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/)。
 {:tip}
+
+## 使用 Beta 命令结构
+{: #cs_beta}
+
+重新设计的 {{site.data.keyword.containerlong_notm}} 插件版本作为 Beta 提供。重新设计的 {{site.data.keyword.containerlong_notm}} 插件将命令分组成不同类别，并将命令从连字符结构更改为空格结构。
+{: shortdesc}
+
+要使用重新设计的 {{site.data.keyword.containerlong_notm}} 插件，请将 `IKS_BETA_VERSION` 环境变量设置为要使用的 Beta 版本：
+
+```
+export IKS_BETA_VERSION=<beta_version>
+```
+{: pre}
+
+提供了重新设计的 {{site.data.keyword.containerlong_notm}} 插件的以下 Beta 版本。请注意，缺省行为是 `0.2`。
+
+<table>
+<caption>重新设计的 {{site.data.keyword.containerlong_notm}} 插件的 Beta 版本</caption>
+  <thead>
+    <th>Beta 版本</th>
+    <th>`ibmcloud ks help` 输出结构</th>
+    <th>命令结构</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>0.2</code>（缺省值）</td>
+      <td>旧版：命令以连字符结构显示，并按字母顺序列出。</td>
+      <td>旧版和 Beta：可以运行旧版连字符结构的命令 (`ibmcloud ks alb-cert-get`)，也可以运行 Beta 空格结构的命令 (`ibmcloud ks alb cert get`)。</td>
+  </tr>
+    <tr>
+      <td><code>0.3</code></td>
+      <td>Beta：命令以空格结构显示，并按类别列出。</td>
+      <td>旧版和 Beta：可以运行旧版连字符结构的命令 (`ibmcloud ks alb-cert-get`)，也可以运行 Beta 空格结构的命令 (`ibmcloud ks alb cert get`)。</td>
+    </tr>
+    <tr>
+      <td><code>1.0</code></td>
+      <td>Beta：命令以空格结构显示，并按类别列出。</td>
+      <td>Beta：只能运行 Beta 空格结构的命令 (`ibmcloud ks alb cert get`)。</td>
+    </tr>
+  </tbody>
+</table>
+
+
 
 ## ibmcloud ks 命令
 {: #cs_commands}
@@ -42,8 +89,6 @@ lastupdated: "2018-12-05"
     ibmcloud plugin list
     ```
 {: pre}
-
-
 
 <table summary="API 命令表">
 <caption>API 命令</caption>
@@ -101,21 +146,27 @@ lastupdated: "2018-12-05"
  </thead>
  <tbody>
   <tr>
+    <td>[ibmcloud ks cluster-addon-disable](#cs_cluster_addon_disable)</td>
+    <td>[ibmcloud ks cluster-addon-enable](#cs_cluster_addon_enable)</td>
+    <td>[ibmcloud ks cluster-addons](#cs_cluster_addons)</td>
     <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
-    <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
-    <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
-    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
   </tr>
   <tr>
+    <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
+    <td>[ibmcloud ks cluster-feature-disable](#cs_cluster_feature_disable)</td>
+    <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
+    <td>[ibmcloud ks cluster-feature-ls](#cs_cluster_feature_ls)</td>
+  </tr>
+  <tr>
+    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
+    <td>[ibmcloud ks cluster-pull-secret-apply](#cs_cluster_pull_secret_apply)</td>
     <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
-    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
-    <td>[ibmcloud ks clusters](#cs_clusters)</td>
   </tr>
   <tr>
+    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
+    <td>[ibmcloud ks clusters](#cs_clusters)</td>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
-    <td> </td>
-    <td> </td>
     <td> </td>
   </tr>
 </tbody>
@@ -354,10 +405,17 @@ lastupdated: "2018-12-05"
 ## API 命令
 {: #api_commands}
 
-### ibmcloud ks api --endpoint ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
+### ibmcloud ks api
+
 {: #cs_api}
 
 将 {{site.data.keyword.containerlong_notm}} 的 API 端点设定为目标。如果未指定端点，那么可以查看有关设定为目标的当前端点的信息。
+{: shortdesc}
+
+```
+ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
+```
+{: pre}
 
 要切换区域？请改为使用 `ibmcloud ks region-set` [命令](#cs_region-set)。
 {: tip}
@@ -369,13 +427,13 @@ lastupdated: "2018-12-05"
    <dl>
    <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
    <dd>{{site.data.keyword.containerlong_notm}} API 端点。请注意，此端点不同于 {{site.data.keyword.Bluemix_notm}} 端点。需要此值来设置 API 端点。接受的值如下：<ul>
-   <li>全球端点：https://containers.bluemix.net</li>
-   <li>亚太地区北部端点：https://ap-north.containers.bluemix.net</li>
-   <li>亚太地区南部端点：https://ap-south.containers.bluemix.net</li>
-   <li>欧洲中部端点：https://eu-central.containers.bluemix.net</li>
-   <li>英国南部端点：https://uk-south.containers.bluemix.net</li>
-   <li>美国东部端点：https://us-east.containers.bluemix.net</li>
-   <li>美国南部端点：https://us-south.containers.bluemix.net</li></ul>
+   <li>全球端点：https://containers.cloud.ibm.com</li>
+   <li>亚太地区北部端点：https://ap-north.containers.cloud.ibm.com</li>
+   <li>亚太地区南部端点：https://ap-south.containers.cloud.ibm.com</li>
+   <li>欧洲中部端点：https://eu-central.containers.cloud.ibm.com</li>
+   <li>英国南部端点：https://uk-south.containers.cloud.ibm.com</li>
+   <li>美国东部端点：https://us-east.containers.cloud.ibm.com</li>
+   <li>美国南部端点：https://us-south.containers.cloud.ibm.com</li></ul>
    </dd>
 
    <dt><code>--insecure</code></dt>
@@ -399,22 +457,28 @@ ibmcloud ks api
 {: pre}
 
 ```
-API Endpoint:          https://containers.bluemix.net   
-API Version:           v1   
-Skip SSL Validation:   false   
+API Endpoint:          https://containers.cloud.ibm.com
+API Version:           v1
+Skip SSL Validation:   false
 Region:                us-south
 ```
 {: screen}
 
 
-### ibmcloud ks api-key-info --cluster CLUSTER [--json][-s]
+### ibmcloud ks api-key-info
 {: #cs_api_key_info}
 
 查看 {{site.data.keyword.containerlong_notm}} 资源组和区域中 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 密钥所有者的姓名和电子邮件地址。
+{: shortdesc}
+
+```
+ibmcloud ks api-key-info --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 执行需要 {{site.data.keyword.containerlong_notm}} 管理员访问策略的第一个操作时，会自动针对资源组和区域设置 {{site.data.keyword.Bluemix_notm}} API 密钥。例如，某个管理用户在 `us-south` 区域的 `default` 资源组中创建了第一个集群。通过执行此操作，此用户的 {{site.data.keyword.Bluemix_notm}} IAM API 密钥将存储在此资源组和区域的帐户中。API 密钥用于订购 IBM Cloud Infrastructure (SoftLayer) 中的资源，例如新的工作程序节点或 VLAN。可以在一个资源组中为每个区域设置不同的 API 键。
 
-其他用户在此资源组和区域中执行需要与 IBM Cloud Infrastructure (SoftLayer) 产品服务组合进行交互的操作（例如，创建新集群或重新装入工作程序节点）时，将使用存储的 API 密钥来确定是否存在执行该操作的足够许可权。要确保可以成功执行集群中与基础架构相关的操作，请为 {{site.data.keyword.containerlong_notm}} 管理用户分配**超级用户**基础架构访问策略。有关更多信息，请参阅[管理用户访问权](cs_users.html#infra_access)。
+其他用户在此资源组和区域中执行需要与 IBM Cloud Infrastructure (SoftLayer) 产品服务组合进行交互的操作（例如，创建新集群或重新装入工作程序节点）时，将使用存储的 API 密钥来确定是否存在执行该操作的足够许可权。要确保可以成功执行集群中与基础架构相关的操作，请为 {{site.data.keyword.containerlong_notm}} 管理用户分配**超级用户**基础架构访问策略。有关更多信息，请参阅[管理用户访问权](/docs/containers?topic=containers-users#infra_access)。
 
 如果发现需要更新为资源组和区域存储的 API 密钥，那么可以通过运行 [ibmcloud ks api-key-reset](#cs_api_key_reset) 命令来执行此操作。此命令需要 {{site.data.keyword.containerlong_notm}} 管理员访问策略，并在帐户中存储执行此命令的用户的 API 密钥。
 
@@ -444,15 +508,20 @@ Region:                us-south
   {: pre}
 
 
-### ibmcloud ks api-key-reset [-s]
+### ibmcloud ks api-key-reset
 {: #cs_api_key_reset}
 
 替换 {{site.data.keyword.containerlong_notm}} 区域中的当前 {{site.data.keyword.Bluemix_notm}} IAM API 密钥。
 {: shortdesc}
 
+```
+ibmcloud ks api-key-reset [-s]
+```
+{: pre}
+
 此命令需要 {{site.data.keyword.containerlong_notm}} 管理员访问策略，并在帐户中存储执行此命令的用户的 API 密钥。要从 IBM Cloud Infrastructure (SoftLayer) 产品服务组合订购基础架构，需要 {{site.data.keyword.Bluemix_notm}} IAM API 密钥。存储后，该 API 密钥会用于区域中需要基础架构许可权（与执行此命令的用户无关）的每个操作。有关 {{site.data.keyword.Bluemix_notm}} IAM API 密钥的工作方式的更多信息，请参阅 [`ibmcloud ks api-key-info` 命令](#cs_api_key_info)。
 
-使用此命令之前，请确保执行此命令的用户具有必需的 [{{site.data.keyword.containerlong_notm}} 和 IBM Cloud Infrastructure (SoftLayer) 许可权](cs_users.html#users)。
+使用此命令之前，请确保执行此命令的用户具有必需的 [{{site.data.keyword.containerlong_notm}} 和 IBM Cloud Infrastructure (SoftLayer) 许可权](/docs/containers?topic=containers-users#users)。
 {: important}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
@@ -473,15 +542,23 @@ Region:                us-south
   {: pre}
 
 
+
 ### ibmcloud ks apiserver-config-get
 {: #cs_apiserver_config_get}
 
 获取有关集群的 Kubernetes API 服务器配置选项的信息。对于要获取其信息的配置选项，此命令必须与下列其中一个子命令组合在一起。
+{: shortdesc}
 
-#### ibmcloud ks apiserver-config-get audit-webhook --cluster CLUSTER
+#### ibmcloud ks apiserver-config-get audit-webhook
 {: #cs_apiserver_config_get_audit_webhook}
 
 查看要向其发送 API 服务器审计日志的远程日志记录服务的 URL。URL 是在您为 API 服务器配置创建 Webhook 后端时指定的。
+{: shortdesc}
+
+```
+ibmcloud ks apiserver-config-get audit-webhook --cluster CLUSTER
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -499,15 +576,26 @@ Region:                us-south
   ```
   {: pre}
 
+
 ### ibmcloud ks apiserver-config-set
 {: #cs_apiserver_config_set}
 
 为集群的 Kubernetes API 服务器配置设置选项。对于要设置的配置选项，此命令必须与下列其中一个子命令组合在一起。
+{: shortdesc}
 
-#### ibmcloud ks apiserver-config-set audit-webhook --cluster CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
+#### ibmcloud ks apiserver-config-set audit-webhook
 {: #cs_apiserver_set}
 
 设置 API 服务器配置的 Webhook 后端。Webhook 后端将 API 服务器审计日志转发到远程服务器。根据您在此命令标志中提供的信息来创建 Webhook 配置。如果未在标志中提供任何信息，那么将使用缺省的 Webhook 配置。
+{: shortdesc}
+
+```
+ibmcloud ks apiserver-config-set audit-webhook --cluster CLUSTER [--remoteServer SERVER_URL_OR_IP] [--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH] [--clientKey CLIENT_KEY_PATH]
+```
+{: pre}
+
+设置 Webhook 后，必须运行 `ibmcloud ks apiserver-refresh` 命令以将更改应用于 Kubernetes 主节点。
+{: note}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -524,7 +612,7 @@ Region:                us-south
    <dd>用于验证远程日志记录服务的 CA 证书的文件路径。此值是可选的。</dd>
 
    <dt><code>--clientCert <em>CLIENT_CERT_PATH</em></code></dt>
-   <dd>用于针对远程日志记录服务进行认证的客户机证书的文件路径。此值是可选的。</dd>
+   <dd>用于向远程日志记录服务进行认证的客户机证书的文件路径。此值是可选的。</dd>
 
    <dt><code>--clientKey <em> CLIENT_KEY_PATH</em></code></dt>
    <dd>用于连接到远程日志记录服务的相应客户机密钥的文件路径。此值是可选的。</dd>
@@ -542,11 +630,21 @@ Region:                us-south
 {: #cs_apiserver_config_unset}
 
 禁用集群的 Kubernetes API 服务器配置的选项。对于要取消设置的配置选项，此命令必须与下列其中一个子命令组合在一起。
+{: shortdesc}
 
-#### ibmcloud ks apiserver-config-unset audit-webhook --cluster CLUSTER
+#### ibmcloud ks apiserver-config-unset audit-webhook
 {: #cs_apiserver_unset}
 
 禁用集群 API 服务器的 Webhook 后端配置。禁用 Webhook 后端会停止将 API 服务器审计日志转发到远程服务器。
+{: shortdesc}
+
+```
+ibmcloud ks apiserver-config-unset audit-webhook --cluster CLUSTER
+```
+{: pre}
+
+禁用 Webhook 后，必须运行 `ibmcloud ks apiserver-refresh` 命令以将更改应用于 Kubernetes 主节点。
+{: note}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -564,11 +662,16 @@ Region:                us-south
   ```
   {: pre}
 
-### ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
+### ibmcloud ks apiserver-refresh
 {: #cs_apiserver_refresh}
 
-重新启动集群主节点以应用新的 Kubernetes API 配置更改。但是，工作程序节点、应用程序和资源不会修改，并且会继续运行。
+对使用 `ibmcloud ks apiserver-config-set`、`apiserver-config-unset`、`cluster-feature-enable` 或 `cluster-feature-disable` 命令请求的 Kubernetes 主节点应用配置更改。如果配置更改需要重新启动，那么会重新启动受影响的 Kubernetes 主节点组件。如果可以在不重新启动的情况下应用配置更改，那么不会重新启动 Kubernetes 主节点组件。但是，工作程序节点、应用程序和资源不会修改，并且会继续运行。
 {: shortdesc}
+
+```
+ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -601,26 +704,28 @@ Region:                us-south
 {: #cs_help}
 
 查看支持的命令和参数的列表。
+{: shortdesc}
+
+```
+ibmcloud ks help
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：无
 
-<strong>命令选项</strong>：
-
-   无
-
-**示例**：
-
-  ```
-  ibmcloud ks help
-  ```
-  {: pre}
+<strong>命令选项</strong>：无
 
 
-### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
+### ibmcloud ks init [--host HOST]
 {: #cs_init}
 
 初始化 {{site.data.keyword.containerlong_notm}} 插件或指定要在其中创建或访问 Kubernetes 集群的区域。
 {: shortdesc}
+
+```
+ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：无
 
@@ -628,7 +733,7 @@ Region:                us-south
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>要使用的 {{site.data.keyword.containerlong_notm}} API 端点。此值是可选的。[查看可用的 API 端点值。](cs_regions.html#container_regions)</dd>
+   <dd>要使用的 {{site.data.keyword.containerlong_notm}} API 端点。此值是可选的。[查看可用的 API 端点值。](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>允许不安全的 HTTP 连接。</dd>
@@ -645,13 +750,10 @@ Region:                us-south
    </dl>
 
 **示例**：
-
-
 ```
-ibmcloud ks init --host https://uk-south.containers.bluemix.net
+ibmcloud ks init --host https://uk-south.containers.cloud.ibm.com
 ```
 {: pre}
-
 
 ### ibmcloud ks messages
 {: #cs_messages}
@@ -659,15 +761,12 @@ ibmcloud ks init --host https://uk-south.containers.bluemix.net
 查看 IBM 标识用户的当前消息。
 {: shortdesc}
 
-<strong>最低必需许可权</strong>：无
-
-**示例**：
-
 ```
 ibmcloud ks messages
 ```
 {: pre}
 
+<strong>最低必需许可权</strong>：无
 
 <br />
 
@@ -675,15 +774,287 @@ ibmcloud ks messages
 ## 集群命令：管理
 {: #cluster_mgmt_commands}
 
+### ibmcloud ks cluster-addon-disable
+{: #cs_cluster_addon_disable}
 
+在现有集群中禁用受管附加组件。对于要禁用的受管附加组件，此命令必须与下列其中一个子命令组合在一起。
+{: shortdesc}
 
-### ibmcloud ks cluster-config --cluster CLUSTER [--admin][--export] [--network][-s] [--yaml]
+#### ibmcloud ks cluster-addon-disable <ph class="ignoreSpelling">istio</ph>
+{: #cs_cluster_addon_disable_istio}
+
+禁用受管 Istio 附加组件。从集群中除去所有 Istio 核心组件，包括 Prometheus。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable istio --cluster CLUSTER [-f]
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+   <dt><code>-f</code></dt>
+   <dd>可选：此附加组件是 <code>istio-extras</code>、<code>istio-sample-bookinfo</code> 和 <code>knative</code> 受管附加组件的依赖项。包含此标志还可禁用这些附加组件。</dd>
+</dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks cluster-addon-disable istio --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable istio-extras
+{: #cs_cluster_addon_disable_istio_extras}
+
+禁用受管 Istio extras 附加组件。从集群中除去 Grafana、Jager 和 Kiali。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable istio-extras --cluster CLUSTER [-f]
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>可选：此附加组件是 <code>istio-sample-bookinfo</code> 受管附加组件的依赖项。包含此标志还可禁用该附加组件。</dd>
+</dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks cluster-addon-disable istio-extras --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable istio-sample-bookinfo
+{: #cs_cluster_addon_disable_istio_sample_bookinfo}
+
+禁用受管 Istio BookInfo 附加组件。从集群中除去所有部署、pod 和其他 BookInfo 应用程序资源。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster CLUSTER
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>集群的名称或标识。此值是必需的。</dd>
+</dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable <ph class="ignoreSpelling">knative</ph>
+{: #cs_cluster_addon_disable_knative}
+
+禁用受管 Knative 附加组件，以从集群中除去 Knative 无服务器框架。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>集群的名称或标识。此值是必需的。</dd>
+</dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-addon-enable
+{: #cs_cluster_addon_enable}
+
+在现有集群中启用受管附加组件。对于要启用的受管附加组件，此命令必须与下列其中一个子命令组合在一起。
+{: shortdesc}
+
+#### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">istio</ph>
+{: #cs_cluster_addon_enable_istio}
+
+启用受管 [Istio 附加组件](/docs/containers?topic=containers-istio)。安装 Istio V1.0.5 的核心组件，包括 Prometheus。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+</dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks cluster-addon-enable istio --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable istio-extras
+{: #cs_cluster_addon_enable_istio_extras}
+
+启用受管 Istio extras 附加组件。安装 Grafana、Jager 和 Kiali，用于为 Istio 提供额外的监视、跟踪和可视化功能。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>可选：启用 <code>istio</code> 附加组件依赖项。</dd>
+</dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable istio-sample-bookinfo
+{: #cs_cluster_addon_enable_istio_sample_bookinfo}
+
+启用受管 Istio BookInfo 附加组件。将 [Istio 的 BookInfo 样本应用程序 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/examples/bookinfo/) 部署到 <code>default</code> 名称空间。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>可选：启用 <code>istio</code> 和 <code>istio-extras</code> 附加组件依赖项。</dd>
+</dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
+{: #cs_cluster_addon_enable_knative}
+
+启用受管 [Knative 附加组件](/docs/containers?topic=containers-knative_tutorial)以安装 Knative 无服务器框架。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>可选：启用 <code>istio</code> 附加组件依赖项。</dd>
+</dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks cluster-addon-enable knative --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-addons
+{: #cs_cluster_addons}
+
+列出在集群中启用的受管附加组件。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addons --cluster CLUSTER
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+</dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks cluster-addons --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-config
 {: #cs_cluster_config}
 
 登录后，下载 Kubernetes 配置数据和证书，以连接到集群并运行 `kubectl` 命令。这些文件会下载到 `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
 {: shortdesc}
 
-**最低必需许可权**：无
+```
+ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [--skip-rbac] [-s] [--yaml]
+```
+{: pre}
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的 {{site.data.keyword.Bluemix_notm}} IAM **查看者**或**读取者**服务角色。此外，如果您仅具有平台角色或仅具有服务角色，那么将应用其他约束。
+* **平台**：如果您仅具有平台角色，那么可以执行此命令，但需要[服务角色](/docs/containers?topic=containers-users#platform)或[定制 RBAC 策略](/docs/containers?topic=containers-users#role-binding)在集群中执行 Kubernetes 操作。
+* **服务**：如果您仅具有服务角色，那么可以执行此命令。 但是，集群管理员必须为您提供集群名称和标识，因为您无法运行 `ibmcloud ks clusters` 命令或启动 {{site.data.keyword.containerlong_notm}} 控制台来查看集群。之后，可以[通过 CLI 启动 Kubernetes 仪表板](/docs/containers?topic=containers-app#db_cli)，并使用 Kubernetes。
 
 **命令选项**：
 
@@ -699,6 +1070,9 @@ ibmcloud ks messages
 
    <dt><code>--export</code></dt>
    <dd>下载 Kubernetes 配置数据和证书，而不包含导出命令以外的任何消息。由于未显示任何消息，因此您可以在创建自动化脚本时使用此标志。此值是可选的。</dd>
+
+   <dt><code>--skip-rbac</code></dt>
+   <dd>跳过基于 {{site.data.keyword.Bluemix_notm}} IAM 服务访问角色向集群配置添加用户 Kubernetes RBAC 角色的操作。仅当您[管理自己的 Kubernetes RBAC 角色](/docs/containers?topic=containers-users#rbac)时，才包含此选项。如果是使用 [{{site.data.keyword.Bluemix_notm}} IAM 服务访问角色](/docs/containers?topic=containers-access_reference#service)来管理所有 RBAC 用户，请不要包含此选项。</dd>
 
   <dt><code>-s</code></dt>
   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
@@ -716,10 +1090,16 @@ ibmcloud ks cluster-config --cluster my_cluster
 {: pre}
 
 
-### ibmcloud ks cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--private-only][--workers WORKER] [--disable-disk-encrypt][--trusted] [-s]
+### ibmcloud ks cluster-create
 {: #cs_cluster_create}
 
 在组织中创建集群。对于免费集群，请指定集群名称；其他所有项都设置为缺省值。免费集群在 30 天后会被自动删除。一次只能有一个免费集群。要利用 Kubernetes 的全部功能，请创建标准集群。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：
 * 帐户级别对 {{site.data.keyword.containerlong_notm}} 的**管理员**平台角色
@@ -772,7 +1152,7 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要将工作程序节点部署到的机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。</td>
+     <td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要将工作程序节点部署到的机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-type` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)的文档。</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
@@ -793,30 +1173,30 @@ trusted: <em>true</em>
      <tr>
       <td><code><em>kube-version</em></code></td>
       <td>集群主节点的 Kubernetes 版本。此值是可选的。未指定版本时，会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>ibmcloud ks kube-versions</code>。
-</td></tr> 
+</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#encrypted_disk)。要禁用加密，请包括此选项并将值设置为 <code>false</code>。</td></tr>
+      <td>工作程序节点缺省情况下具有 AES 256 位磁盘加密功能；[了解更多](/docs/containers?topic=containers-security#encrypted_disk)。要禁用加密，请包括此选项并将值设置为 <code>false</code>。</td></tr>
       <tr>
       <td><code>trusted: <em>true</em></code></td>
-      <td>**仅限裸机**：启用[可信计算](cs_secure.html#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。</td></tr>
+      <td>**仅限裸机**：启用[可信计算](/docs/containers?topic=containers-security#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。</td></tr>
      </tbody></table>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值对于标准集群是可选的，且不可用于免费集群。</dd>
+<dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值对于 VM 标准集群是可选的，且不可用于免费集群。对于裸机机器类型，请指定 `dedicated`。</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>要在其中创建集群的专区。可用的位置取决于您登录到的 {{site.data.keyword.Bluemix_notm}} 区域。请选择实际离您最近的区域，以获得最佳性能。
 此值对于标准集群是必需的，对于免费集群是可选的。
 
-<p>请查看[可用专区](cs_regions.html#zones)。</p>
+<p>请查看[可用专区](/docs/containers?topic=containers-regions-and-zones#zones)。</p>
 
 <p class="note">选择您所在国家或地区以外的专区时，请记住，您可能需要法律授权才能将数据实际存储在国外。</p>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-types` [命令](cs_cli_reference.html#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
+<dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-types` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>集群的名称。此值是必需的。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。
@@ -851,7 +1231,13 @@ trusted: <em>true</em>
 <p>要了解您是否已具有用于特定专区的公用 VLAN，或要查找现有公用 VLAN 的名称，请运行 <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>。</p></dd>
 
 <dt><code>--private-only </code></dt>
-  <dd>使用此选项可阻止创建公用 VLAN。仅当指定 `--private-vlan` 标志并且不包含 `--public-vlan` 标志时，此项才是必需的。<p class="note">如果需要仅专用集群，那么必须配置网关设备进行网络连接。有关更多信息，请参阅[专用集群](cs_clusters_planning.html#private_clusters)。</p></dd>
+  <dd>使用此选项可阻止创建公用 VLAN。仅当指定 `--private-vlan` 标志并且不包含 `--public-vlan` 标志时，此项才是必需的。<p class="note">如果工作程序节点设置为仅使用专用 VLAN，那么必须启用专用服务端点或配置网关设备。有关更多信息，请参阅[专用集群](/docs/containers?topic=containers-plan_clusters#private_clusters)。</p></dd>
+
+<dt><code>--private-service-endpoint</code></dt>
+  <dd>**在[启用 VRF 的帐户](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)中运行 Kubernetes V1.11 或更高版本的标准集群**：启用[专用服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，以便 Kubernetes 主节点和工作程序节点可通过专用 VLAN 进行通信。此外，可以选择使用 `--public-service-endpoint` 标志来启用公共服务端点，以通过因特网访问集群。如果仅启用专用服务端点，那么必须连接到专用 VLAN 才能与 Kubernetes 主节点进行通信。启用专用服务端点后，日后无法将其禁用。<br><br>创建集群后，可以通过运行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 来获取端点。</dd>
+
+<dt><code>--public-service-endpoint</code></dt>
+  <dd>**运行 Kubernetes V1.11 或更高版本的标准集群**：启用[公共服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)，以便可以通过公用网络访问 Kubernetes 主节点，例如通过终端运行 `kubectl` 命令。如果您有[启用 VRF 的帐户](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)，并且还包含了 `--private-service-endpoint` 标志，那么[主节点与工作程序节点的通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)在专用网络上执行。如果日后希望使用仅专用集群，那么可以禁用公共服务端点。<br><br>创建集群后，可以通过运行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 来获取端点。</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>要在集群中部署的工作程序节点数。如果未指定此选项，将创建具有 1 个工作程序节点的集群。此值对于标准集群是可选的，且不可用于免费集群。
@@ -859,10 +1245,10 @@ trusted: <em>true</em>
 <p class="important">系统会为每个工作程序节点分配唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#encrypted_disk)。要禁用加密，请包括此选项。</dd>
+<dd>工作程序节点缺省情况下具有 AES 256 位磁盘加密功能；[了解更多](/docs/containers?topic=containers-security#encrypted_disk)。要禁用加密，请包括此选项。</dd>
 
 <dt><code>--trusted</code></dt>
-<dd><p>**仅限裸机**：启用[可信计算](cs_secure.html#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。</p>
+<dd><p>**仅限裸机**：启用[可信计算](/docs/containers?topic=containers-security#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。</p>
 <p>要检查裸机机器类型是否支持信任，请检查 `ibmcloud ks machine-types <zone>` [命令](#cs_machine_types)输出中的 `Trustable` 字段。要验证集群是否已启用信任，请查看 `ibmcloud ks cluster-get` [命令](#cs_cluster_get)输出中的 **Trust ready** 字段。要验证裸机工作程序节点是否已启用信任，请查看 `ibmcloud ks worker-get` [ 命令](#cs_worker_get)输出中的 **Trust** 字段。</p></dd>
 
 <dt><code>-s</code></dt>
@@ -870,8 +1256,6 @@ trusted: <em>true</em>
 </dl>
 
 **示例**：
-
-  
 
   **创建免费集群**：仅指定集群名称；其他所有项都设置为缺省值。免费集群在 30 天后会被自动删除。一次只能有一个免费集群。要利用 Kubernetes 的全部功能，请创建标准集群。
 
@@ -902,11 +1286,21 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-### ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted][-s]
-{: #cs_cluster_feature_enable}
+### ibmcloud ks cluster-feature-disable public-service-endpoint
+{: #cs_cluster_feature_disable}
 
-在现有集群上启用功能。
+**在运行 Kubernetes V1.11 或更高版本的集群中**：禁用集群的公共服务端点。
 {: shortdesc}
+
+```
+ibmcloud ks cluster-feature-disable public-service-endpoint --cluster CLUSTER [-s] [-f]
+```
+{: pre}
+
+**重要信息**：禁用公共端点之前，必须先完成以下步骤以启用专用服务端点：
+1. 通过运行 `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>` 来启用专用服务端点。
+2. 遵循 CLI 中的提示来刷新 Kubernetes 主节点 API 服务器。
+3. [重新装入集群中的所有工作程序节点以选取专用端点配置](#cs_worker_reload)。
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
@@ -916,29 +1310,166 @@ trusted: <em>true</em>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>集群的名称或标识。此值是必需的。</dd>
 
-   <dt><code>-f</code></dt>
-   <dd>使用此选项可强制执行 <code>--trusted</code> 选项，而不显示用户提示。此值是可选的。</dd>
+  <dt><code>-s</code></dt>
+   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
 
-   <dt><code><em>--trusted</em></code></dt>
-   <dd><p>包含此标志可对集群中所有支持的裸机工作程序节点启用[可信计算](cs_secure.html#trusted_compute)。启用信任后，日后无法对集群禁用信任。</p>
-   <p>要检查裸机机器类型是否支持信任，请检查 `ibmcloud ks machine-types <zone>` [命令](#cs_machine_types)输出中的 **Trustable** 字段。要验证集群是否已启用信任，请查看 `ibmcloud ks cluster-get` [命令](#cs_cluster_get)输出中的 **Trust ready** 字段。要验证裸机工作程序节点是否已启用信任，请查看 `ibmcloud ks worker-get` [ 命令](#cs_worker_get)输出中的 **Trust** 字段。</p></dd>
+**示例**：
+
+```
+ibmcloud ks cluster-feature-disable public-service-endpoint --cluster my_cluster
+```
+{: pre}
+
+
+### ibmcloud ks cluster-feature-enable
+{: #cs_cluster_feature_enable}
+
+在现有集群上启用功能。
+对于要启用的功能，此命令必须与下列其中一个子命令组合在一起。
+{: shortdesc}
+
+#### ibmcloud ks cluster-feature-enable private-service-endpoint
+{: #cs_cluster_feature_enable_private_service_endpoint}
+
+**在运行 Kubernetes V1.11 或更高版本的集群中**：启用[专用服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，以使集群主节点可供专用访问。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-feature-enable private-service-endpoint --cluster CLUSTER [-s]
+```
+{: pre}
+
+要运行此命令，请执行以下操作：
+1. 在您的 IBM Cloud Infrastructure (SoftLayer) 帐户中启用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)。
+2. [启用 {{site.data.keyword.Bluemix_notm}} 帐户以使用服务端点](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+3. 运行 `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>`。
+4. 遵循 CLI 中的提示来刷新 Kubernetes 主节点 API 服务器。
+5. 在集群中[重新装入所有工作程序节点](#cs_worker_reload)以选取专用端点配置。
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
 
   <dt><code>-s</code></dt>
    <dd>不显示每日消息或更新提示。此值是可选的。</dd>
 </dl>
 
-**示例命令**：
+**示例**：
 
-  ```
-  ibmcloud ks cluster-feature-enable --cluster my_cluster --trusted=true
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-feature-enable private-service-endpoint --cluster my_cluster
+```
+{: pre}
 
-### ibmcloud ks cluster-get --cluster CLUSTER [--json][--showResources] [-s]
+#### ibmcloud ks cluster-feature-enable public-service-endpoint
+{: #cs_cluster_feature_enable_public_service_endpoint}
+
+**在运行 Kubernetes V1.11 或更高版本的集群中**：启用[公共服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)，以使集群主节点可供公共访问。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-feature-enable public-service-endpoint --cluster CLUSTER [-s]
+```
+{: pre}
+
+运行此命令后，必须通过遵循 CLI 中的提示来刷新 API 服务器，才能使用服务端点。
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+  <dt><code>-s</code></dt>
+   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+
+```
+ibmcloud ks cluster-feature-enable public-service-endpoint --cluster my_cluster
+```
+{: pre}
+
+#### ibmcloud ks cluster-feature-enable trusted
+{: #cs_cluster_feature_enable_trusted}
+
+对集群中所有支持的裸机工作程序节点启用[可信计算](/docs/containers?topic=containers-security#trusted_compute)。启用信任后，日后无法对集群禁用信任。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-feature-enable trusted --cluster CLUSTER [-s] [-f]
+```
+{: pre}
+
+要检查裸机机器类型是否支持信任，请检查 `ibmcloud ks machine-types <zone>` [命令](#cs_machine_types)输出中的 **Trustable** 字段。要验证集群是否已启用信任，请查看 `ibmcloud ks cluster get` [命令](#cs_cluster_get)输出中的 **Trust ready** 字段。要验证裸机工作程序节点是否已启用信任，请查看 `ibmcloud ks worker get` [ 命令](#cs_worker_get)输出中的 **Trust** 字段。
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>使用此选项可强制执行 <code>--trusted</code> 选项，而不显示用户提示。此值是可选的。</dd>
+
+  <dt><code>-s</code></dt>
+   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+
+```
+ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
+```
+{: pre}
+
+### ibmcloud ks cluster-feature-ls
+{: #cs_cluster_feature_ls}
+
+列出集群中已启用或禁用的功能。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-feature-ls --cluster CLUSTER [-s]
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
+
+<strong>命令选项</strong>：
+
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+  <dt><code>-s</code></dt>
+   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+
+```
+ibmcloud ks cluster-feature-ls --cluster my_cluster
+```
+{: pre}
+
+### ibmcloud ks cluster-get
 {: #cs_cluster_get}
 
 查看有关组织中集群的信息。
 {: shortdesc}
+
+```
+ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -959,7 +1490,7 @@ trusted: <em>true</em>
   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
   </dl>
 
-**示例命令**：
+**示例**：
 
   ```
   ibmcloud ks cluster-get --cluster my_cluster --showResources
@@ -968,44 +1499,85 @@ trusted: <em>true</em>
 
 **示例输出**：
 
-  ```
-  Name:                   mycluster
-  ID:                     df253b6025d64944ab99ed63bb4567b6
-  State:                  normal
-  Created:                2018-09-28T15:43:15+0000
-  Location:               dal10
-  Master URL:             https://169.xx.xxx.xxx:30426
-  Master Location:        Dallas
-  Master Status:          Ready (21 hours ago)
-  Ingress Subdomain:      ...
-  Ingress Secret:         mycluster
-  Workers:                6
-  Worker Zones:           dal10, dal12
-  Version:                1.11.3_1524
-  Owner:                  owner@email.com
-  Monitoring Dashboard:   ...
-  Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
-  Resource Group Name:    Default
+```
+Name:                           mycluster
+ID:                             df253b6025d64944ab99ed63bb4567b6
+State:                          normal
+Created:                        2018-09-28T15:43:15+0000
+Location:                       dal10
+Master URL:                     https://c3.<region>.containers.cloud.ibm.com:30426
+Public Service Endpoint URL:    https://c3.<region>.containers.cloud.ibm.com:30426
+Private Service Endpoint URL:   https://c3-private.<region>.containers.cloud.ibm.com:31140
+Master Location:                Dallas
+Master Status:                  Ready (21 hours ago)
+Ingress Subdomain:              mycluster.us-south.containers.appdomain.cloud
+Ingress Secret:                 mycluster
+Workers:                        6
+Worker Zones:                   dal10, dal12
+Version:                        1.11.3_1524
+Owner:                          owner@email.com
+Monitoring Dashboard:           ...
+Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
+Resource Group Name:            Default
 
-  Addons
-  Name                   Enabled
-  customer-storage-pod   true
-  basic-ingress-v2       true
-  storage-watcher-pod    true
-
-  Subnet VLANs
+Subnet VLANs
   VLAN ID   Subnet CIDR         Public   User-managed
   2234947   10.xxx.xx.xxx/29    false    false
   2234945   169.xx.xxx.xxx/29  true    false
 
   ```
-  {: screen}
+{: screen}
 
-### ibmcloud ks cluster-refresh --cluster CLUSTER [-f][-s]
+### ibmcloud ks cluster-pull-secret-apply
+{: #cs_cluster_pull_secret_apply}
+
+为集群创建 {{site.data.keyword.Bluemix_notm}} IAM 服务标识，为该服务标识创建策略，以用于在 {{site.data.keyword.registrylong_notm}} 中分配**读者**服务访问角色，然后为该服务标识创建 API 密钥。接下来，将 API 密钥存储在 Kubernetes `imagePullSecret` 中，以便可以从 `default` Kubernetes 名称空间中容器的 {{site.data.keyword.registryshort_notm}} 名称空间中拉取映像。创建集群时会自动执行此过程。如果在集群创建过程中遇到错误或具有现有集群，那么可以使用此命令再次应用该过程。
+{: shortdesc}
+
+运行此命令时，IAM 凭证和映像拉取私钥的创建操作将启动，并且可能需要一些时间才能完成。在创建映像拉取私钥之前，无法部署用于从 {{site.data.keyword.registrylong_notm}} `icr.io` 域中拉取映像的容器。要检查映像拉取私钥，请运行 `kubectl get secrets | grep icr`。
+{: important}
+
+```
+ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
+```
+{: pre}
+
+此 API 密钥方法自动创建[令牌](/docs/services/Registry?topic=registry-registry_access#registry_tokens)，并将令牌存储在映像拉取私钥中；此方法替换了先前用于授权集群访问 {{site.data.keyword.registrylong_notm}} 的方法。现在，通过使用 IAM API 密钥来访问 {{site.data.keyword.registrylong_notm}}，可以为服务标识定制 IAM 策略，以限制对名称空间或特定映像的访问。例如，可以更改集群的映像拉取私钥中的服务标识策略，以仅从特定注册表区域或名称空间中拉取映像。必须[为 {{site.data.keyword.registrylong_notm}} 启用 {{site.data.keyword.Bluemix_notm}} IAM 策略](/docs/services/Registry?topic=registry-user#existing_users)后，才能定制 IAM 策略。
+
+有关更多信息，请参阅[了解如何授权集群从 {{site.data.keyword.registrylong_notm}} 拉取映像](/docs/containers?topic=containers-images#cluster_registry_auth)。
+
+如果向现有服务标识添加了 IAM 策略，例如用于限制对区域注册表的访问，那么此命令将重置映像拉取私钥的服务标识、IAM 策略和 API 密钥。
+{: important}
+
+<strong>最低必需许可权</strong>：
+*  对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员或管理员**平台角色
+*  {{site.data.keyword.registrylong_notm}} 中的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+   </dl>
+
+**示例**：
+
+```
+ibmcloud ks cluster-pull-secret-apply --cluster my_cluster
+```
+{: pre}
+
+### ibmcloud ks cluster-refresh
 {: #cs_cluster_refresh}
 
 重新启动集群主节点以应用新的 Kubernetes API 配置更改。但是，工作程序节点、应用程序和资源不会修改，并且会继续运行。
 {: shortdesc}
+
+```
+ibmcloud ks cluster-refresh --cluster CLUSTER [-f] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -1030,11 +1602,16 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-### ibmcloud ks cluster-rm --cluster CLUSTER [--force-delete-storage][-f] [-s]
+### ibmcloud ks cluster-rm
 {: #cs_cluster_rm}
 
 从组织中除去集群。
 {: shortdesc}
+
+```
+ibmcloud ks cluster-rm --cluster CLUSTER [--force-delete-storage] [-f] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
@@ -1063,13 +1640,18 @@ trusted: <em>true</em>
   {: pre}
 
 
-### ibmcloud ks cluster-update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update] [-f][-s]
+### ibmcloud ks cluster-update
 {: #cs_cluster_update}
 
 将 Kubernetes 主节点更新到缺省 API 版本。在更新期间，您无法访问或更改集群。用户已部署的工作程序节点、应用程序和资源不会被修改，并且将继续运行。
 {: shortdesc}
 
-您可能需要更改 YAML 文件以供未来部署。请查看此[发行说明](cs_versions.html)以了解详细信息。
+```
+ibmcloud ks cluster-update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-f] [-s]
+```
+{: pre}
+
+您可能需要更改 YAML 文件以供未来部署。请查看此[发行说明](/docs/containers?topic=containers-cs_versions)以了解详细信息。
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -1101,11 +1683,16 @@ trusted: <em>true</em>
   {: pre}
 
 
-### ibmcloud ks clusters [--json][-s]
+### ibmcloud ks clusters
 {: #cs_clusters}
 
 查看组织中集群的列表。
 {: shortdesc}
+
+```
+ibmcloud ks clusters [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -1127,11 +1714,17 @@ trusted: <em>true</em>
   {: pre}
 
 
-### ibmcloud ks kube-versions [--json][-s]
+###   ibmcloud ks kube-versions
+  
 {: #cs_kube_versions}
 
-查看 {{site.data.keyword.containerlong_notm}} 中支持的 Kubernetes 版本列表。将[集群主节点](#cs_cluster_update)和[工作程序节点](cs_cli_reference.html#cs_worker_update)更新到缺省版本以获取最新的稳定功能。
+查看 {{site.data.keyword.containerlong_notm}} 中支持的 Kubernetes 版本列表。将[集群主节点](#cs_cluster_update)和[工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)更新到缺省版本以获取最新的稳定功能。
 {: shortdesc}
+
+```
+ibmcloud ks kube-versions [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：无
 
@@ -1160,11 +1753,16 @@ trusted: <em>true</em>
 {: #cluster_services_commands}
 
 
-### ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_NAME [-s]
+### ibmcloud ks cluster-service-bind
 {: #cs_cluster_service_bind}
 
 向集群添加 {{site.data.keyword.Bluemix_notm}} 服务。要查看 {{site.data.keyword.Bluemix_notm}}“目录”中的可用 {{site.data.keyword.Bluemix_notm}} 服务，请运行 `ibmcloud service offerings`。**注**：只能添加支持服务密钥的 {{site.data.keyword.Bluemix_notm}} 服务。
 {: shortdesc}
+
+```
+ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [--key SERVICE_INSTANCE_KEY] [--role IAM_ROLE] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色以及 Cloud Foundry **开发者**角色
 
@@ -1174,11 +1772,18 @@ trusted: <em>true</em>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>集群的名称或标识。此值是必需的。</dd>
 
+   <dt><code>--key <em>SERVICE_INSTANCE_KEY</em></code></dt>
+   <dd>服务密钥的名称或 GUID。此值是可选的。如果要使用现有服务密钥而不创建新的服务密钥，请包含此值。</dd>
+
    <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>Kubernetes 名称空间的名称。此值是必需的。</dd>
 
-   <dt><code>--service <em>SERVICE_INSTANCE_NAME</em></code></dt>
-   <dd>要绑定的 {{site.data.keyword.Bluemix_notm}} 服务实例的名称。要查找服务实例的名称，请运行 <code>ibmcloud service list</code>。如果多个实例在帐户中具有相同名称，请使用服务实例标识来代替名称。要查找标识，请运行 <code>ibmcloud service show <service instance name> --guid</code>。其中一个值是必需的。</dd>
+   <dt><code>--service <em>SERVICE_INSTANCE_GUID</em></code></dt>
+   <dd>要绑定的 {{site.data.keyword.Bluemix_notm}} 服务实例的标识。要查找标识，请运行 <code>ibmcloud service show <service_instance_name> --guid</code>。此值是必需的。</dd>
+
+   <dt><code>--role <em>IAM_ROLE</em></code></dt>
+   <dd>您希望服务密钥具有的 {{site.data.keyword.Bluemix_notm}} IAM 角色。缺省值为 IAM `写入者`服务角色。如果使用的是现有服务密钥或用于未启用 IAM 的服务（例如，Cloud Foundry 服务），请不要包含此值。<br><br>
+   要列出服务的可用角色，请运行 `ibmcloud iam roles --service <service_name>`。服务名称是服务在目录中的名称，可以通过运行 `ibmcloud catalog search` 来获取。</dd>
 
    <dt><code>-s</code></dt>
    <dd>不显示每日消息或更新提示。此值是可选的。</dd>
@@ -1193,11 +1798,16 @@ trusted: <em>true</em>
   {: pre}
 
 
-### ibmcloud ks cluster-service-unbind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [-s]
+### ibmcloud ks cluster-service-unbind
 {: #cs_cluster_service_unbind}
 
 从集群中除去 {{site.data.keyword.Bluemix_notm}} 服务。
 {: shortdesc}
+
+```
+ibmcloud ks cluster-service-unbind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [-s]
+```
+{: pre}
 
 除去 {{site.data.keyword.Bluemix_notm}} 服务时，会从集群中除去服务凭证。如果 pod 仍在使用该服务，那么除去操作会因为找不到服务凭证而失败。
 {: note}
@@ -1214,7 +1824,7 @@ trusted: <em>true</em>
    <dd>Kubernetes 名称空间的名称。此值是必需的。</dd>
 
    <dt><code>--service <em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>要除去的 {{site.data.keyword.Bluemix_notm}} 服务实例的标识。要查找服务实例的标识，请运行 `ibmcloud ks cluster-services <cluster_name_or_ID>`。此值是必需的。</dd>
+   <dd>要除去的 {{site.data.keyword.Bluemix_notm}} 服务实例的标识。要查找服务实例的标识，请运行 `ibmcloud ks cluster-services <cluster_name_or_ID>`. 此值是必需的。</dd>
 
    <dt><code>-s</code></dt>
    <dd>不显示每日消息或更新提示。此值是可选的。</dd>
@@ -1229,10 +1839,16 @@ trusted: <em>true</em>
   {: pre}
 
 
-### ibmcloud ks cluster-services --cluster CLUSTER [--namespace KUBERNETES_NAMESPACE][--all-namespaces] [--json][-s]
+### ibmcloud ks cluster-services
 {: #cs_cluster_services}
 
 列出绑定到集群中一个或全部 Kubernetes 名称空间的服务。如果未指定任何选项，那么将显示缺省名称空间的服务。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-services --cluster CLUSTER [--namespace KUBERNETES_NAMESPACE] [--all-namespaces] [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -1263,10 +1879,17 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-### ibmcloud ks va --container CONTAINER_ID [--extended][--vulnerabilities] [--configuration-issues][--json]
+
+### ibmcloud ks va
 {: #cs_va}
 
-[安装容器扫描程序](/docs/services/va/va_index.html#va_install_container_scanner)后，请查看集群中容器的详细漏洞评估报告。
+[安装容器扫描程序](/docs/services/va?topic=va-va_index#va_install_container_scanner)后，请查看集群中容器的详细漏洞评估报告。
+{: shortdesc}
+
+```
+ibmcloud ks va --container CONTAINER_ID [--extended] [--vulnerabilities] [--configuration-issues] [--json]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.registrylong_notm}} 的**读取者**服务访问角色。**注**：不要在资源组级别为 {{site.data.keyword.registryshort_notm}} 分配策略。
 
@@ -1275,7 +1898,7 @@ trusted: <em>true</em>
 <dl>
 <dt><code>--container CONTAINER_ID</code></dt>
 <dd><p>容器的标识。此值是必需的。</p>
-<p>要查找容器的标识，请执行以下操作：<ol><li>[设定 Kubernetes CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。</li><li>通过运行 `kubectl get pods` 列出 pod。</li><li>在 `kubectl describe pod <pod_name>` 命令的输出中找到 **Container ID** 字段。例如，`Container ID: containerd://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li><li>在将容器标识用于 `ibmcloud ks va` 命令之前，请从标识中除去 `containerd://` 前缀。例如，`1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li></ol></p></dd>
+<p>要查找容器的标识，请执行以下操作：<ol><li>[设定 Kubernetes CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。</li><li>通过运行 `kubectl get pods` 列出 pod。</li><li>在 `kubectl describe pod <pod_name>` 命令的输出中找到 **Container ID** 字段。例如，`Container ID: containerd://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li><li>在将容器标识用于 `ibmcloud ks va` 命令之前，请从标识中除去 `containerd://` 前缀。例如，`1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>扩展命令输出，以显示有漏洞的包的更多修订信息。此值是可选的。</p>
@@ -1298,11 +1921,16 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ```
 {: pre}
 
-### ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url ENDPOINT --key-protect-instance INSTANCE_GUID --crk ROOT_KEY_ID
+### ibmcloud ks key-protect-enable
 {: #cs_key_protect}
 
-通过在集群中将 [{{site.data.keyword.keymanagementservicefull}} ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/services/key-protect/index.html#getting-started-with-key-protect) 用作[密钥管理服务 (KMS) 提供程序 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/)，对 Kubernetes 私钥进行加密。
+通过在集群中将 [{{site.data.keyword.keymanagementservicefull}} ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) 用作[密钥管理服务 (KMS) 提供程序 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/)，对 Kubernetes 私钥进行加密。
 {: shortdesc}
+
+```
+ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url ENDPOINT --key-protect-instance INSTANCE_GUID --crk ROOT_KEY_ID
+```
+{: pre}
 
 如果删除 {{site.data.keyword.keymanagementserviceshort}} 实例中的根密钥，那么您将无法访问或除去集群中私钥的数据。
 {: important}
@@ -1316,13 +1944,13 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 <dd>集群的名称或标识。</dd>
 
 <dt><code>--key-protect-url ENDPOINT</code></dt>
-<dd>集群实例的 {{site.data.keyword.keymanagementserviceshort}} 端点。要获取该端点，请参阅[按区域列出的服务端点](/docs/services/key-protect/regions.html#endpoints)。</dd>
+<dd>集群实例的 {{site.data.keyword.keymanagementserviceshort}} 端点。要获取该端点，请参阅[按区域列出的服务端点](/docs/services/key-protect?topic=key-protect-regions#service-endpoints)。</dd>
 
 <dt><code>--key-protect-instance INSTANCE_GUID</code></dt>
 <dd>您的 {{site.data.keyword.keymanagementserviceshort}} 实例 GUID。要获取实例 GUID，请运行 <code>ibmcloud resource service-instance SERVICE_INSTANCE_NAME --id</code>，然后复制第二个值（而不是完整的 CRN）。</dd>
 
 <dt><code>--crk ROOT_KEY_ID</code></dt>
-<dd>您的 {{site.data.keyword.keymanagementserviceshort}} 根密钥标识。要获取 CRK，请参阅[查看密钥](/docs/services/key-protect/view-keys.html#view-keys)。</dd>
+<dd>您的 {{site.data.keyword.keymanagementserviceshort}} 根密钥标识。要获取 CRK，请参阅[查看密钥](/docs/services/key-protect?topic=key-protect-view-keys#view-keys)。</dd>
 </dl>
 
 **示例**：
@@ -1333,10 +1961,16 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 {: pre}
 
 
-### ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
+### ibmcloud ks webhook-create
 {: #cs_webhook_create}
 
 注册 Webhook。
+{: shortdesc}
+
+```
+ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -1350,7 +1984,7 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
    <dd>通知级别，例如 <code>Normal</code> 或 <code>Warning</code>。<code>Warning</code> 是缺省值。此值是可选的。</dd>
 
    <dt><code>--type <em>slack</em></code></dt>
-   <dd>Webhook 类型。当前支持 slack。此值是必需的。</dd>
+   <dd>Webhook 类型。目前支持 slack。此值是必需的。</dd>
 
    <dt><code>--url <em>URL</em></code></dt>
    <dd>Webhook 的 URL。此值是必需的。</dd>
@@ -1373,15 +2007,20 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 ## 集群命令：子网
 {: #cluster_subnets_commands}
 
-### ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
+### ibmcloud ks cluster-subnet-add
 {: #cs_cluster_subnet_add}
 
-可以向 Kubernetes 集群添加 IBM Cloud infrastructure (SoftLayer) 帐户中的现有可移植公用或专用子网，或者复用已删除集群中的子网，而不使用自动供应的子网。
+可以向 Kubernetes 集群添加 IBM Cloud Infrastructure (SoftLayer) 帐户中的现有可移植公用或专用子网，或者复用已删除集群中的子网，而不使用自动供应的子网。
 {: shortdesc}
+
+```
+ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
+```
+{: pre}
 
 <p class="important">可移植公共 IP 地址按月收费。如果在供应集群后除去可移植公共 IP 地址，那么即使只使用了很短的时间，您也仍然必须支付一个月的费用。</br>
 </br>使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containerlong_notm}} 外部的其他用途。</br>
-</br>要启用同一 VLAN 的不同子网上的工作程序之间的通信，必须[启用同一 VLAN 上子网之间的路由](cs_subnets.html#subnet-routing)。</p>
+</br>要启用同一 VLAN 的不同子网上的工作程序之间的通信，必须[启用同一 VLAN 上子网之间的路由](/docs/containers?topic=containers-subnets#subnet-routing)。</p>
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -1407,13 +2046,19 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
   {: pre}
 
 
-### ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [-s]
+### ibmcloud ks cluster-subnet-create
 {: #cs_cluster_subnet_create}
 
 在 IBM Cloud Infrastructure (SoftLayer) 帐户中创建子网，并使其可供 {{site.data.keyword.containerlong_notm}} 中的指定集群使用。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [-s]
+```
+{: pre}
 
 <p class="important">使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containerlong_notm}} 外部的其他用途。</br>
-</br>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud Infrastructure (SoftLayer) 帐户代表。</p>
+</br>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p>
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -1441,15 +2086,21 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
   {: pre}
 
 
-### ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
+### ibmcloud ks cluster-user-subnet-add
 {: #cs_cluster_user_subnet_add}
 
 将您自己的专用子网置于 {{site.data.keyword.containerlong_notm}} 集群中。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
+```
+{: pre}
 
 此专用子网不是 IBM Cloud Infrastructure (SoftLayer) 提供的子网。因此，您必须为子网配置任何入站和出站网络流量路由。要添加 IBM Cloud Infrastructure (SoftLayer) 子网，请使用 `ibmcloud ks cluster-subnet-add` [命令](#cs_cluster_subnet_add)。
 
 <p class="important">使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containerlong_notm}} 外部的其他用途。</br>
-</br>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud Infrastructure (SoftLayer) 帐户代表。</p>
+</br>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p>
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -1476,10 +2127,16 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
   {: pre}
 
 
-### ibmcloud ks cluster-user-subnet-rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
+### ibmcloud ks cluster-user-subnet-rm
 {: #cs_cluster_user_subnet_rm}
 
 从指定集群除去您自己的专用子网。除去子网后，部署到您自己专用子网的 IP 地址的任何服务都将保持活动状态。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-user-subnet-rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -1503,10 +2160,18 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
   ```
   {: pre}
 
-### ibmcloud ks subnets [--json][-s]
+
+###     ibmcloud ks subnets
+    
 {: #cs_subnets}
 
 查看 IBM Cloud Infrastructure (SoftLayer) 帐户中可用的子网列表。
+{: shortdesc}
+
+```
+ibmcloud ks subnets [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -1534,10 +2199,16 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 ## Ingress 应用程序负载均衡器 (ALB) 命令
 {: #alb_commands}
 
-### ibmcloud ks alb-autoupdate-disable --cluster CLUSTER
+### ibmcloud ks alb-autoupdate-disable
 {: #cs_alb_autoupdate_disable}
 
 缺省情况下，会启用对 Ingress 应用程序负载均衡器 (ALB) 附加组件的自动更新。有新的构建版本可用时，会自动更新 ALB pod。要改为手动更新该附加组件，请使用此命令来禁用自动更新。然后，可以通过运行 [`ibmcloud ks alb-update` 命令](#cs_alb_update)来更新 ALB pod。
+{: shortdesc}
+
+```
+ibmcloud ks alb-autoupdate-disable --cluster CLUSTER
+```
+{: pre}
 
 更新集群的 Kubernetes 主版本或次版本时，IBM 会自动对 Ingress 部署进行必要的更改，但不会更改 Ingress ALB 附加组件的构建版本。您应负责检查最新的 Kubernetes 版本和 Ingress ALB 附加组件映像的兼容性。
 
@@ -1550,10 +2221,16 @@ ibmcloud ks alb-autoupdate-disable --cluster mycluster
 ```
 {: pre}
 
-### ibmcloud ks alb-autoupdate-enable --cluster CLUSTER
+### ibmcloud ks alb-autoupdate-enable
 {: #cs_alb_autoupdate_enable}
 
 如果禁用了 Ingress ALB 附加组件的自动更新，那么您可以重新启用自动更新。这样，每当下一个构建版本可用时，ALB 都会自动更新为最新构建。
+{: shortdesc}
+
+```
+ibmcloud ks alb-autoupdate-enable --cluster CLUSTER
+```
+{: pre}
 
 **最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -1564,10 +2241,16 @@ ibmcloud ks alb-autoupdate-enable --cluster mycluster
 ```
 {: pre}
 
-### ibmcloud ks alb-autoupdate-get --cluster CLUSTER
+### ibmcloud ks alb-autoupdate-get
 {: #cs_alb_autoupdate_get}
 
 检查是否启用了 Ingress ALB 附加组件的自动更新，以及是否 ALB 已更新为最新构建版本。
+{: shortdesc}
+
+```
+ibmcloud ks alb-autoupdate-get --cluster CLUSTER
+```
+{: pre}
 
 **最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -1578,10 +2261,21 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
 ```
 {: pre}
 
-### ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update][-s]
+### ibmcloud ks alb-cert-deploy
 {: #cs_alb_cert_deploy}
 
 将 {{site.data.keyword.cloudcerts_long_notm}} 实例中的证书部署或更新到集群中的 ALB。只能更新从同一 {{site.data.keyword.cloudcerts_long_notm}} 实例导入的证书。
+{: shortdesc}
+
+```
+ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update] [-s]
+```
+{: pre}
+
+使用此命令导入证书时，将在名为 `ibm-cert-store` 的名称空间中创建证书私钥。然后，将在 `default` 名称空间中创建对此私钥的引用，任何名称空间中的任何 Ingress 资源都可以对其进行访问。ALB 处理请求时，会访问此引用来选取并使用 `ibm-cert-store` 名称空间中的证书私钥。
+
+要保持在 {{site.data.keyword.cloudcerts_short}} 设置的[速率限制](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting)范围内，请在依次执行的 `alb-cert-deploy` 和 `alb-cert-deploy --update` 命令之间等待至少 45 秒。
+{: note}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
@@ -1621,10 +2315,16 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
  {: pre}
 
 
-### ibmcloud ks alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN] [--json][-s]
+### ibmcloud ks alb-cert-get
 {: #cs_alb_cert_get}
 
-查看有关集群中 ALB 私钥的信息。
+如果已将证书从 {{site.data.keyword.cloudcerts_short}} 导入集群中的 ALB，请查看有关 TLS 证书的信息，例如与该证书关联的私钥。
+{: shortdesc}
+
+```
+ibmcloud ks alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
@@ -1664,10 +2364,19 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
  {: pre}
 
 
-### ibmcloud ks alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN] [-s]
+### ibmcloud ks alb-cert-rm
 {: #cs_alb_cert_rm}
 
-除去集群中的 ALB 私钥。
+如果已将证书从 {{site.data.keyword.cloudcerts_short}} 导入集群中的 ALB，请从集群中除去私钥。
+{: shortdesc}
+
+```
+ibmcloud ks alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [-s]
+```
+{: pre}
+
+要保持在 {{site.data.keyword.cloudcerts_short}} 设置的[速率限制](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting)范围内，请在依次执行的 `alb-cert-rm` 命令之间等待至少 45 秒。
+{: note}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
@@ -1705,10 +2414,16 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
  {: pre}
 
 
-### ibmcloud ks alb-certs --cluster CLUSTER [--json][-s]
+### ibmcloud ks alb-certs
 {: #cs_alb_certs}
 
-查看集群中 ALB 私钥的列表。
+列出已从 {{site.data.keyword.cloudcerts_long_notm}} 实例导入到集群中 ALB 的证书。
+{: shortdesc}
+
+```
+ibmcloud ks alb-certs --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
@@ -1730,10 +2445,16 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
  ```
  {: pre}
 
-### ibmcloud ks alb-configure --albID ALB_ID [--enable][--user-ip USERIP] [--disable][--disable-deployment] [-s]
+### ibmcloud ks alb-configure
 {: #cs_alb_configure}
 
 在标准集群中启用或禁用 ALB。缺省情况下，已启用公共 ALB。
+{: shortdesc}
+
+```
+ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disable] [--disable-deployment] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -1790,10 +2511,17 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
   ```
   {: pre}
 
-### ibmcloud ks alb-get --albID ALB_ID [--json][-s]
+
+### ibmcloud ks alb-get
 {: #cs_alb_get}
 
 查看 ALB 的详细信息。
+{: shortdesc}
+
+```
+ibmcloud ks alb-get --albID ALB_ID [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -1818,10 +2546,16 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
   ```
   {: pre}
 
-### ibmcloud ks alb-rollback --cluster CLUSTER
+### ibmcloud ks alb-rollback
 {: #cs_alb_rollback}
 
 如果最近更新了 ALB pod，但 ALB 的定制配置受到最新构建的影响，那么您可以将更新回滚到 ALB pod 先前运行的构建。回滚更新后，会禁用 ALB pod 的自动更新。要重新启用自动更新，请使用 [`alb-autoupdate-enable` 命令](#cs_alb_autoupdate_enable)。
+{: shortdesc}
+
+```
+ibmcloud ks alb-rollback --cluster CLUSTER
+```
+{: pre}
 
 **最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -1832,10 +2566,17 @@ ibmcloud ks alb-rollback --cluster mycluster
 ```
 {: pre}
 
-### ibmcloud ks alb-types [--json][-s]
+###   ibmcloud ks alb-types
+  
 {: #cs_alb_types}
 
 查看区域中支持的 ALB 类型。
+{: shortdesc}
+
+```
+ibmcloud ks alb-types [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -1856,10 +2597,16 @@ ibmcloud ks alb-rollback --cluster mycluster
   ```
   {: pre}
 
-### ibmcloud ks alb-update --cluster CLUSTER
+### ibmcloud ks alb-update
 {: #cs_alb_update}
 
 如果禁用了 Ingress ALB 附加组件的自动更新，而您希望更新该附加组件，那么可以强制一次性更新 ALB pod。选择手动更新该附加组件时，集群中的所有 ALB pod 都会更新为最新构建。您无法更新单个 ALB，也无法选择要将附加组件更新到哪个构建。自动更新会保持禁用状态。
+{: shortdesc}
+
+```
+ibmcloud ks alb-update --cluster CLUSTER
+```
+{: pre}
 
 更新集群的 Kubernetes 主版本或次版本时，IBM 会自动对 Ingress 部署进行必要的更改，但不会更改 Ingress ALB 附加组件的构建版本。您应负责检查最新的 Kubernetes 版本和 Ingress ALB 附加组件映像的兼容性。
 
@@ -1872,10 +2619,17 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-### ibmcloud ks albs --cluster CLUSTER [--json][-s]
+###     ibmcloud ks albs
+    
 {: #cs_albs}
 
 查看集群中所有 ALB 的阶段状态。如果未返回任何 ALB 标识，说明集群没有可移植子网。您可以为集群[创建](#cs_cluster_subnet_create)或[添加](#cs_cluster_subnet_add)子网。
+{: shortdesc}
+
+```
+ibmcloud ks albs --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -1904,13 +2658,20 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
 <br />
 
 
+
 ## 基础架构命令
 {: #infrastructure_commands}
 
-### ibmcloud ks credential-get [-s][--json]
+### ibmcloud ks
 {: #cs_credential_get}
 
 如果将 IBM Cloud 帐户设置为使用其他凭证来访问 IBM Cloud 基础架构产品服务组合，请为您当前的目标区域和资源组获取基础架构用户名。
+{: shortdesc}
+
+```
+ibmcloud ks credential-get [-s] [--json]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -1925,27 +2686,33 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
 
 **示例：**
 ```
-        ibmcloud ks credential-get
-        ```
+ibmcloud ks credential-get
+```
 {: pre}
 
 **输出示例：**
 ```
-        Infrastructure credentials for user name user@email.com set for resource group default.
-        ```
+Infrastructure credentials for user name user@email.com set for resource group default.
+```
 
-### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credential-set
 {: #cs_credentials_set}
 
 为 {{site.data.keyword.containerlong_notm}} 资源组和区域设置 IBM Cloud Infrastructure (SoftLayer) 帐户凭证。
+{: shortdesc}
 
-如果您有 {{site.data.keyword.Bluemix_notm}} 现买现付帐户，那么缺省情况下您可以访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合。但是，您可能希望使用已经拥有的其他 IBM Cloud Infrastructure (SoftLayer) 帐户来订购基础架构。您可以使用此命令将此基础架构帐户链接到 {{site.data.keyword.Bluemix_notm}} 帐户。
+```
+ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+```
+{: pre}
+
+如果您有 {{site.data.keyword.Bluemix_notm}} 现收现付帐户，那么缺省情况下您可以访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合。但是，您可能希望使用已经拥有的其他 IBM Cloud Infrastructure (SoftLayer) 帐户来订购基础架构。您可以使用此命令将此基础架构帐户链接到 {{site.data.keyword.Bluemix_notm}} 帐户。
 
 如果为某个区域和资源组手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，那么这些凭证会用于为该资源组中该区域内的所有集群订购基础架构。这些凭证用于确定基础架构许可权，即使已存在该资源组和区域的 [{{site.data.keyword.Bluemix_notm}}IAM API 密钥](#cs_api_key_info)也不例外。如果存储了其凭证的用户没有必需的许可权来订购基础架构，那么与基础架构相关的操作（例如，创建集群或重新装入工作程序节点）可能会失败。
 
 不能为同一 {{site.data.keyword.containerlong_notm}} 资源组和区域设置多个凭证。
 
-使用此命令之前，请确保使用其凭证的用户具有必需的 [{{site.data.keyword.containerlong_notm}} 和 IBM Cloud Infrastructure (SoftLayer) 许可权](cs_users.html#users)。
+使用此命令之前，请确保使用其凭证的用户具有必需的 [{{site.data.keyword.containerlong_notm}} 和 IBM Cloud Infrastructure (SoftLayer) 许可权](/docs/containers?topic=containers-users#users)。
 {: important}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
@@ -1955,35 +2722,22 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud Infrastructure (SoftLayer) 帐户 API 用户名。此值是必需的。请注意，基础架构 API 用户名与 IBM 标识不同。要查看基础架构 API 用户名，请执行以下操作：
-   <ol><li>登录到 [{{site.data.keyword.Bluemix_notm}} 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/)。</li>
-   <li>在菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中，选择**基础架构**。</li>
-   <li>在菜单栏中，选择**帐户** > **用户** > **用户列表**。</li>
-   <li>对于要查看的用户，单击 **IBM 标识或用户名**。</li>
-   <li>在 **API 访问信息**部分中，查看 **API 用户名**。</li>
+   <ol>
+   <li>登录到 [{{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com)。<li>在菜单栏中，选择**管理 > 访问权 (IAM)**。
+   <li>选择**用户**选项卡，然后单击您的用户名。
+   <li>在 **API 密钥**窗格中，找到**经典基础架构 API 密钥**条目，然后单击**操作菜单** ![“操作菜单”图标](../icons/action-menu-icon.svg "“操作菜单”图标") > **>详细信息**。
+   <li>复制 API 用户名。
    </ol></dd>
 
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
-   <dd>IBM Cloud Infrastructure (SoftLayer) 帐户 API 密钥。此值是必需的。
-
- <p>
-要生成 API 密钥：
-
-  <ol>
-  <li>登录到 [IBM Cloud Infrastructure (SoftLayer) 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://control.bluemix.net/)。</li>
-  <li>选择<strong>帐户</strong>，然后选择<strong>用户</strong>。</li>
-  <li>单击<strong>生成</strong>，为帐户生成 IBM Cloud Infrastructure (SoftLayer) API 密钥。</li>
-  <li>复制 API 密钥以在此命令中使用。</li>
+   <dd>IBM Cloud Infrastructure (SoftLayer) 帐户 API 密钥。此值是必需的。要查看或生成基础架构 API 密钥，请执行以下操作：
+  <li>登录到 [{{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com)。<li>在菜单栏中，选择**管理 > 访问权 (IAM)**。
+  <li>选择**用户**选项卡，然后单击您的用户名。
+  <li>在 **API 密钥**窗格中，找到**经典基础架构 API 密钥**条目，然后单击**操作菜单** ![“操作菜单”图标](../icons/action-menu-icon.svg "“操作菜单”图标") > **>详细信息**。如果看不到经典基础架构 API 密钥，请通过单击**创建 {{site.data.keyword.Bluemix_notm}} API 密钥**来生成 API 密钥。
+  <li>复制 API 用户名。
   </ol>
-
-  要查看现有 API 密钥：
-  <ol>
-  <li>登录到 [IBM Cloud Infrastructure (SoftLayer) 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://control.bluemix.net/)。</li>
-  <li>选择<strong>帐户</strong>，然后选择<strong>用户</strong>。</li>
-  <li>单击<strong>查看</strong>以查看现有 API 密钥。</li>
-  <li>复制 API 密钥以在此命令中使用。</li>
-  </ol>
-  </p></dd>
+  </dd>
 
   <dt><code>-s</code></dt>
   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
@@ -1997,10 +2751,17 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
+
 ### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 除去 {{site.data.keyword.containerlong_notm}} 区域的 IBM Cloud Infrastructure (SoftLayer) 帐户凭证。
+{: shortdesc}
+
+```
+  ibmcloud ks credential-unset
+  ```
+{: pre}
 
 除去凭证后，将使用 [{{site.data.keyword.Bluemix_notm}}IAM API 密钥](#cs_api_key_info)来订购 IBM Cloud Infrastructure (SoftLayer) 中的资源。
 
@@ -2013,21 +2774,19 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
   </dl>
 
-**示例**：
 
-  ```
-  ibmcloud ks credential-unset
-  ```
-  {: pre}
-
-
-### ibmcloud ks machine-types --zone ZONE [--json][-s]
+### ibmcloud ks machine-types
 {: #cs_machine_types}
 
-查看可用于工作程序节点的机器类型的列表。机器类型因专区而变化。每种机器类型都包含集群中每个工作程序节点的虚拟 CPU 量、内存量和磁盘空间量。缺省情况下，存储所有容器数据的辅助存储器磁盘目录将使用 LUKS 加密进行加密。如果在创建集群期间包含了 `disable-disk-encrypt` 选项，那么不会加密主机的容器运行时数据。[了解有关加密的更多信息](cs_secure.html#encrypted_disk)。
+查看可用于工作程序节点的机器类型的列表。机器类型因专区而变化。每种机器类型都包含集群中每个工作程序节点的虚拟 CPU 量、内存量和磁盘空间量。缺省情况下，存储所有容器数据的辅助存储器磁盘目录将使用 AES 256 位 LUKS 加密进行加密。如果在创建集群期间包含了 `disable-disk-encrypt` 选项，那么不会加密主机的容器运行时数据。[了解有关加密的更多信息](/docs/containers?topic=containers-security#encrypted_disk)。
 {:shortdesc}
 
-可以将工作程序节点作为虚拟机在共享或专用硬件上进行供应，也可以作为物理机器在裸机上进行供应。[了解有关机器类型选项的更多信息](cs_clusters_planning.html#shared_dedicated_node)。
+```
+ibmcloud ks machine-types --zone ZONE [--json] [-s]
+```
+{: pre}
+
+可以将工作程序节点作为虚拟机在共享或专用硬件上进行供应，也可以作为物理机器在裸机上进行供应。[了解有关机器类型选项的更多信息](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)。
 
 <strong>最低必需许可权</strong>：无
 
@@ -2035,7 +2794,7 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
 
    <dl>
    <dt><code>--zone <em>ZONE</em></code></dt>
-   <dd>输入要列出其中可用机器类型的专区。此值是必需的。请查看[可用专区](cs_regions.html#zones)。</dd>
+   <dd>输入要列出其中可用机器类型的专区。此值是必需的。请查看[可用专区](/docs/containers?topic=containers-regions-and-zones#zones)。</dd>
 
    <dt><code>--json</code></dt>
   <dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
@@ -2044,17 +2803,25 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
   </dl>
 
-**示例命令**：
+**示例**：
 
   ```
   ibmcloud ks machine-types --zone dal10
   ```
   {: pre}
 
-### ibmcloud ks vlans --zone ZONE [--all][--json] [-s]
+
+
+### ibmcloud ks <ph class="ignoreSpelling">vlans</ph>
 {: #cs_vlans}
 
 列出可用于 IBM Cloud Infrastructure (SoftLayer) 帐户中专区的公用和专用 VLAN。要列出可用 VLAN，您必须具有付费帐户。
+{: shortdesc}
+
+```
+ibmcloud ks vlans --zone ZONE [--all] [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：
 * 查看专区中集群连接到的 VLAN：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
@@ -2064,7 +2831,7 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
 
    <dl>
    <dt><code>--zone <em>ZONE</em></code></dt>
-   <dd>输入要列出其中专用和公用 VLAN 的专区。此值是必需的。请查看[可用专区](cs_regions.html#zones)。</dd>
+   <dd>输入要列出其中专用和公用 VLAN 的专区。此值是必需的。请查看[可用专区](/docs/containers?topic=containers-regions-and-zones#zones)。</dd>
 
    <dt><code>--all</code></dt>
    <dd>列出所有可用的 VLAN。缺省情况下，会对 VLAN 进行过滤，以仅显示有效的 VLAN。要使 VLAN 有效，必须将 VLAN 与可使用本地磁盘存储来托管工作程序的基础架构相关联。</dd>
@@ -2084,10 +2851,17 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   {: pre}
 
 
-### ibmcloud ks vlan-spanning-get [--json][-s]
+###   ibmcloud ks vlan-spanning-get
+  
 {: #cs_vlan_spanning_get}
 
 查看 IBM Cloud Infrastructure (SoftLayer) 帐户的 VLAN 生成状态。VLAN 生成支持帐户中的所有设备通过专用网络相互通信，而不管设备分配给哪个 VLAN。
+{: shortdesc}
+
+```
+ibmcloud ks vlan-spanning-get [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -2114,10 +2888,16 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
 ## 日志记录命令
 {: #logging_commands}
 
-### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
+### ibmcloud ks logging-autoupdate-disable
 {: #cs_log_autoupdate_disable}
 
 在特定集群中禁用 Fluentd pod 的自动更新。更新集群的 Kubernetes 主版本或次版本时，IBM 会自动对 Fluentd 配置映射进行必要的更改，但不会更改日志记录附加组件的 Fluentd 的构建版本。您应负责检查最新的 Kubernetes 版本和附加组件映像的兼容性。
+{: shortdesc}
+
+```
+ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
+```
+{: pre}
 
 <strong>命令选项</strong>：
 
@@ -2126,10 +2906,16 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
     <dd>要在其中禁用 Fluentd 附加组件自动更新的集群的名称或标识。此值是必需的。</dd>
 </dl>
 
-### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
+### ibmcloud ks logging-autoupdate-enable
 {: #cs_log_autoupdate_enable}
 
 在特定集群中启用 Fluentd pod 的自动更新。有新的构建版本可用时，会自动更新 Fluentd pod。
+{: shortdesc}
+
+```
+ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
+```
+{: pre}
 
 <strong>命令选项</strong>：
 
@@ -2138,10 +2924,16 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
     <dd>要在其中启用 Fluentd 附加组件自动更新的集群的名称或标识。此值是必需的。</dd>
 </dl>
 
-### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
+### ibmcloud ks logging-autoupdate-get
 {: #cs_log_autoupdate_get}
 
 检查 Fluentd pod 是否在特定集群中设置为自动更新。
+{: shortdesc}
+
+```
+ibmcloud ks logging-autoupdate-get --cluster CLUSTER
+```
+{: pre}
 
 <strong>命令选项</strong>：
 
@@ -2150,10 +2942,16 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
     <dd>要在其中检查 Fluentd 附加组件自动更新是否已启用的集群的名称或标识。此值是必需的。</dd>
 </dl>
 
-### ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS][--syslog-protocol PROTOCOL]  [--json][--skip-validation] [--force-update][-s]
+### ibmcloud ks logging-config-create
 {: #cs_logging_create}
 
 创建日志记录配置。您可以使用此命令将容器、应用程序、工作程序节点、Kubernetes 集群以及 Ingress 应用程序负载均衡器的日志转发到 {{site.data.keyword.loganalysisshort_notm}} 或外部 syslog 服务器。
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL]  [--json] [--skip-validation] [--force-update][-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对集群的**编辑者**平台角色（对于除 `kube-audit` 以外的其他所有日志源）和对集群的**管理员**平台角色（对于 `kube-audit` 日志源）
 
@@ -2163,7 +2961,7 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>集群的名称或标识。</dd>
 
-  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>    
+  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
     <dd>要对其启用日志转发的日志源。此自变量支持要应用其配置的日志源的逗号分隔列表。接受的值为 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>storage</code>、<code>ingress</code> 和 <code>kube-audit</code>。如果未提供日志源，那么会为 <code>container</code> 和 <code>ingress</code> 创建配置。</dd>
 
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
@@ -2173,7 +2971,7 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
     <dd>要从中转发日志的 Kubernetes 名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。此值仅对容器日志源有效，并且是可选的。如果未指定名称空间，那么集群中的所有名称空间都将使用此配置。</dd>
 
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-    <dd>日志记录类型为 <code>syslog</code> 时，日志收集器服务器的主机名或 IP 地址。此值对于 <code>syslog</code> 是必需的。日志记录类型为 <code>ibm</code> 时，{{site.data.keyword.loganalysislong_notm}} 数据获取 URL。您可以在[此处](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)找到可用数据获取 URL 的列表。如果未指定数据获取 URL，那么将使用创建集群所在区域的端点。</dd>
+    <dd>日志记录类型为 <code>syslog</code> 时，日志收集器服务器的主机名或 IP 地址。此值对于 <code>syslog</code> 是必需的。日志记录类型为 <code>ibm</code> 时，{{site.data.keyword.loganalysislong_notm}} 数据获取 URL。您可以在[此处](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls)找到可用数据获取 URL 的列表。如果未指定数据获取 URL，那么将使用创建集群所在区域的端点。</dd>
 
   <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
     <dd>日志收集器服务器的端口。此值是可选的。如果未指定端口，那么标准端口 <code>514</code> 将用于 <code>syslog</code>，并且标准端口 <code>9091</code> 将用于 <code>ibm</code>。</dd>
@@ -2229,10 +3027,17 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
-### ibmcloud ks logging-config-get --cluster CLUSTER [--logsource LOG_SOURCE][--json] [-s]
+
+### ibmcloud ks logging-config-get
 {: #cs_logging_get}
 
 查看集群的所有日志转发配置，或基于日志源过滤日志记录配置。
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-get --cluster CLUSTER [--logsource LOG_SOURCE] [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -2263,10 +3068,16 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   {: pre}
 
 
-### ibmcloud ks logging-config-refresh --cluster CLUSTER  [--force-update]  [-s]
+### ibmcloud ks logging-config-refresh
 {: #cs_logging_refresh}
 
 刷新集群的日志记录配置。这将刷新转发到集群中空间级别的任何日志记录配置的日志记录令牌。
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-refresh --cluster CLUSTER [--force-update] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -2291,10 +3102,17 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   {: pre}
 
 
-### ibmcloud ks logging-config-rm --cluster CLUSTER [--id LOG_CONFIG_ID][--all] [--force-update][-s]
+
+### ibmcloud ks logging-config-rm
 {: #cs_logging_rm}
 
 删除集群的一个日志转发配置或所有日志记录配置。这会停止将日志转发到远程 syslog 服务器或 {{site.data.keyword.loganalysisshort_notm}}。
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-rm --cluster CLUSTER [--id LOG_CONFIG_ID] [--all] [--force-update] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对集群的**编辑者**平台角色（对于除 `kube-audit` 以外的其他所有日志源）和对集群的**管理员**平台角色（对于 `kube-audit` 日志源）
 
@@ -2325,10 +3143,16 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   {: pre}
 
 
-### ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-paths PATH] [--app-containers PATH][--json] [--skipValidation][--force-update] [-s]
+### ibmcloud ks logging-config-update
 {: #cs_logging_update}
 
 更新日志转发配置的详细信息。
+{: shortdesc}
+
+```
+ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] [--json] [--skipValidation] [--force-update] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -2348,7 +3172,7 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
     <dd>要从中转发日志的 Kubernetes 名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。此值仅对 <code>container</code> 日志源有效。如果未指定名称空间，那么集群中的所有名称空间都将使用此配置。</dd>
 
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-   <dd>日志记录类型为 <code>syslog</code> 时，日志收集器服务器的主机名或 IP 地址。此值对于 <code>syslog</code> 是必需的。日志记录类型为 <code>ibm</code> 时，{{site.data.keyword.loganalysislong_notm}} 数据获取 URL。您可以在[此处](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)找到可用数据获取 URL 的列表。如果未指定数据获取 URL，那么将使用创建集群所在区域的端点。</dd>
+   <dd>日志记录类型为 <code>syslog</code> 时，日志收集器服务器的主机名或 IP 地址。此值对于 <code>syslog</code> 是必需的。日志记录类型为 <code>ibm</code> 时，{{site.data.keyword.loganalysislong_notm}} 数据获取 URL。您可以在[此处](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls)找到可用数据获取 URL 的列表。如果未指定数据获取 URL，那么将使用创建集群所在区域的端点。</dd>
 
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>日志收集器服务器的端口。当记录类型为 <code>syslog</code> 时，此值是可选的。如果未指定端口，那么标准端口 <code>514</code> 将用于 <code>syslog</code>，并且 <code>9091</code> 将用于 <code>ibm</code>。</dd>
@@ -2393,10 +3217,17 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   {: pre}
 
 
-### ibmcloud ks logging-filter-create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--message MESSAGE][--regex-message MESSAGE] [--force-update][--json] [-s]
+
+### ibmcloud ks logging-filter-create
 {: #cs_log_filter_create}
 
 创建日志记录过滤器。可以使用此命令来过滤掉根据日志记录配置转发的日志。
+{: shortdesc}
+
+```
+ibmcloud ks logging-filter-create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -2446,7 +3277,7 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
-此示例过滤掉处于 info 级别或更低级别且从特定集群转发的所有日志。输出会作为 JSON 返回。
+此示例将过滤掉通过 `info` 级别或更低级别从特定集群转发的所有日志。输出会作为 JSON 返回。
 
   ```
   ibmcloud ks logging-filter-create --cluster example-cluster --type all --level info --json
@@ -2455,10 +3286,16 @@ ibmcloud ks alb-update --cluster <cluster_name_or_ID>
 
 
 
-### ibmcloud ks logging-filter-get --cluster CLUSTER [--id FILTER_ID][--show-matching-configs] [--show-covering-filters][--json] [-s]
+### ibmcloud ks logging-filter-get
 {: #cs_log_filter_view}
 
 查看日志记录过滤器配置。可以使用此命令来查看已创建的日志记录过滤器。
+{: shortdesc}
+
+```
+ibmcloud ks logging-filter-get --cluster CLUSTER [--id FILTER_ID] [--show-matching-configs] [--show-covering-filters] [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -2491,10 +3328,16 @@ ibmcloud ks logging-filter-get mycluster --id 885732 --show-matching-configs
 ```
 {: pre}
 
-### ibmcloud ks logging-filter-rm --cluster CLUSTER [--id FILTER_ID][--all] [--force-update][-s]
+### ibmcloud ks logging-filter-rm
 {: #cs_log_filter_delete}
 
 删除日志记录过滤器。可以使用此命令来除去已创建的日志记录过滤器。
+{: shortdesc}
+
+```
+ibmcloud ks logging-filter-rm --cluster CLUSTER [--id FILTER_ID] [--all] [--force-update] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -2524,10 +3367,16 @@ ibmcloud ks logging-filter-rm mycluster --id 885732
 ```
 {: pre}
 
-### ibmcloud ks logging-filter-update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--message MESSAGE][--regex-message MESSAGE] [--force-update][--json] [-s]
+### ibmcloud ks logging-filter-update
 {: #cs_log_filter_update}
 
 更新日志记录过滤器。可以使用此命令来更新已创建的日志记录过滤器。
+{: shortdesc}
+
+```
+ibmcloud ks logging-filter-update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
 
@@ -2580,17 +3429,23 @@ ibmcloud ks logging-filter-rm mycluster --id 885732
   ```
   {: pre}
 
-此示例过滤掉处于 info 级别或更低级别且从特定集群转发的所有日志。输出会作为 JSON 返回。
+此示例将过滤掉通过 `info` 级别或更低级别从特定集群转发的所有日志。输出会作为 JSON 返回。
 
   ```
   ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type all --level info --json
   ```
   {: pre}
 
-### ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-s]
+### ibmcloud ks logging-collect
 {: #cs_log_collect}
 
 在特定时间点发出为日志生成快照的请求，然后将日志存储在 {{site.data.keyword.cos_full_notm}} 存储区中。
+{: shortdesc}
+
+```
+ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
@@ -2636,10 +3491,17 @@ ibmcloud ks logging-filter-rm mycluster --id 885732
   ```
   {: screen}
 
-### ibmcloud ks logging-collect-status --cluster CLUSTER [--json][-s]
+
+### ibmcloud ks logging-collect-status
 {: #cs_log_collect_status}
 
 检查集群的日志收集快照请求的状态。
+{: shortdesc}
+
+```
+ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
@@ -2685,26 +3547,25 @@ ibmcloud ks logging-filter-rm mycluster --id 885732
 {: #cs_region}
 
 查找当前所在的 {{site.data.keyword.containerlong_notm}} 区域。您可以创建和管理特定于该区域的集群。使用 `ibmcloud ks region-set` 命令可更改区域。
-
-<strong>最低必需许可权</strong>：无
-
-**示例**：
+{: shortdesc}
 
 ```
 ibmcloud ks region
 ```
 {: pre}
 
-**输出**：
-```
-Region: us-south
-```
-{: screen}
+<strong>最低必需许可权</strong>：无
 
-### ibmcloud ks region-set [--region REGION]
+### ibmcloud ks region-set
 {: #cs_region-set}
 
 设置 {{site.data.keyword.containerlong_notm}} 的区域。您可以创建和管理特定于该区域的集群，并且您可能希望在多个区域中创建集群以实现高可用性。
+{: shortdesc}
+
+```
+ibmcloud ks region-set [--region REGION]
+```
+{: pre}
 
 例如，您可以登录到美国南部区域的 {{site.data.keyword.Bluemix_notm}} 并创建集群。接下来，您可以使用 `ibmcloud ks region-set eu-central` 将欧洲中部区域作为目标，并创建另一个集群。最后，您可以使用 `ibmcloud ks region-set us-south` 返回到美国南部，以管理该区域中的集群。
 
@@ -2718,7 +3579,7 @@ Region: us-south
 
 
 
-要获取可用区域的列表，请查看[区域和专区](cs_regions.html)或使用 `ibmcloud ks regions` [命令](#cs_regions)。</dd></dl>
+要获取可用区域的列表，请查看[区域和专区](/docs/containers?topic=containers-regions-and-zones)或使用 `ibmcloud ks regions` [命令](#cs_regions)。</dd></dl>
 
 **示例**：
 
@@ -2746,12 +3607,11 @@ OK
 ```
 {: screen}
 
-
-
 ### ibmcloud ks regions
 {: #cs_regions}
 
 列出可用的区域。`Region Name` 是 {{site.data.keyword.containerlong_notm}} 名称，`Region Alias` 是区域的常规 {{site.data.keyword.Bluemix_notm}} 名称。
+{: shortdesc}
 
 <strong>最低必需许可权</strong>：无
 
@@ -2774,10 +3634,17 @@ us-south      us-south
 ```
 {: screen}
 
-### ibmcloud ks zones [--region-only][--json] [-s]
+###         ibmcloud ks zones
+        
 {: #cs_datacenters}
 
 查看可用于在其中创建集群的专区的列表。可用的专区根据您登录到的区域而变化。要切换区域，请运行 `ibmcloud ks region-set`。
+{: shortdesc}
+
+```
+ibmcloud ks zones [--region-only] [--json] [-s]
+```
+{: pre}
 
 <strong>命令选项</strong>：
 
@@ -2795,22 +3662,28 @@ us-south      us-south
 **示例**：
 
   ```
-        ibmcloud ks zones
-        ```
+  ibmcloud ks zones
+  ```
   {: pre}
 
 <br />
+
 
 
 ## 工作程序节点命令
 {: worker_node_commands}
 
 
-### 不推荐：ibmcloud ks worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt][-s]
+### 不推荐：ibmcloud ks worker-add
 {: #cs_worker_add}
 
 向标准集群添加不在工作程序池中的独立工作程序节点。
 {: deprecated}
+
+```
+ibmcloud ks worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -2853,7 +3726,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要将工作程序节点部署到的机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-types` [命令](cs_cli_reference.html#cs_machine_types)。</td>
+<td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要将工作程序节点部署到的机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-types` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)。</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
@@ -2861,7 +3734,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>将 <code>&lt;public_VLAN&gt;</code> 替换为要用于工作程序节点的公用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>ibmcloud ks vlans &lt;zone&gt;</code> 并查找以 <code>fcr</code>（前端路由器）开头的 VLAN 路由器。<br><strong>注</strong>：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。</td>
+<td>将 <code>&lt;public_VLAN&gt;</code> 替换为要用于工作程序节点的公用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>ibmcloud ks vlans &lt;zone&gt;</code> 并查找以 <code>fcr</code>（前端路由器）开头的 VLAN 路由器。<br><strong>注</strong>：如果工作程序节点设置为仅使用专用 VLAN，那么必须通过[启用专用服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)或[配置网关设备](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)，允许工作程序节点和集群主节点进行通信。</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -2873,14 +3746,14 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#encrypted_disk)。要禁用加密，请包括此选项并将值设置为 <code>false</code>。</td></tr>
+<td>工作程序节点缺省情况下具有 AES 256 位磁盘加密功能；[了解更多](/docs/containers?topic=containers-security#encrypted_disk)。要禁用加密，请包括此选项并将值设置为 <code>false</code>。</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值是可选的。</dd>
+<dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值是可选的。对于裸机机器类型，请指定 `dedicated`。</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-types` [命令](cs_cli_reference.html#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
+<dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-types` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
 
 <dt><code>--workers <em>NUMBER</em></code></dt>
 <dd>整数，表示要在集群中创建的工作程序节点数。缺省值为 1。此值是可选的。</dd>
@@ -2889,10 +3762,10 @@ diskEncryption: <em>false</em></code></pre>
 <dd>创建集群时指定的专用 VLAN。此值是必需的。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。</dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>创建集群时指定的公用 VLAN。此值是可选的。如果希望工作程序节点仅存在于专用 VLAN 上，请不要提供公用 VLAN 标识。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。<p class="note">如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。</p></dd>
+<dd>创建集群时指定的公用 VLAN。此值是可选的。如果希望工作程序节点仅存在于专用 VLAN 上，请不要提供公用 VLAN 标识。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。<p class="note">如果工作程序节点设置为仅使用专用 VLAN，那么必须通过[启用专用服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)或[配置网关设备](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)，允许工作程序节点和集群主节点进行通信。</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#encrypted_disk)。要禁用加密，请包括此选项。</dd>
+<dd>工作程序节点缺省情况下具有 AES 256 位磁盘加密功能；[了解更多](/docs/containers?topic=containers-security#encrypted_disk)。要禁用加密，请包括此选项。</dd>
 
 <dt><code>-s</code></dt>
 <dd>不显示每日消息或更新提示。此值是可选的。</dd>
@@ -2913,10 +3786,16 @@ diskEncryption: <em>false</em></code></pre>
   ```
   {: pre}
 
-### ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [--json][-s]
+### ibmcloud ks worker-get
 {: #cs_worker_get}
 
 查看工作程序节点的详细信息。
+{: shortdesc}
+
+```
+ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -2936,7 +3815,7 @@ diskEncryption: <em>false</em></code></pre>
    <dd>不显示每日消息或更新提示。此值是可选的。</dd>
    </dl>
 
-**示例命令**：
+**示例**：
 
   ```
   ibmcloud ks worker-get --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
@@ -2960,10 +3839,16 @@ diskEncryption: <em>false</em></code></pre>
   ```
   {: screen}
 
-### ibmcloud ks worker-reboot [-f][--hard] --cluster CLUSTER --worker WORKER [WORKER][--skip-master-healthcheck] [-s]
+### ibmcloud ks worker-reboot
 {: #cs_worker_reboot}
 
-重新引导集群中的工作程序节点。在重新引导期间，工作程序节点的状态不会更改。例如，如果 IBM Cloud Infrastructure (SoftLayer) 中的工作程序节点状态为 `Powered Off`，但您需要开启该工作程序节点，那么可以使用重新引导。
+重新引导集群中的工作程序节点。在重新引导期间，工作程序节点的状态不会更改。例如，如果 IBM Cloud Infrastructure (SoftLayer) 中的工作程序节点状态为 `Powered Off`，但您需要开启该工作程序节点，那么可以使用重新引导。重新引导将清除临时目录，但不会清除整个文件系统或重新格式化磁盘。
+{: shortdesc}
+
+```
+ibmcloud ks worker-reboot [-f] [--hard] --cluster CLUSTER --worker WORKER [WORKER] [--skip-master-healthcheck] [-s]
+```
+{: pre}
 
 **注意：**重新引导工作程序节点可能导致工作程序节点上发生数据损坏。请谨慎使用此命令，仅在确信重新引导可以帮助恢复工作程序节点时使用。在其他所有情况下，请改为[重新装入工作程序节点](#cs_worker_reload)。
 
@@ -2973,28 +3858,28 @@ diskEncryption: <em>false</em></code></pre>
 
 1. 列出集群中的所有工作程序节点，并记下要重新引导的工作程序节点的 **name**。
    ```
-kubectl get nodes
-```
+   kubectl get nodes
+   ```
    {: pre}
    此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。在运行 `ibmcloud ks workers <cluster_name_or_ID>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
 2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。使用在上一步中检索到的工作程序节点的 **name**。
    ```
-   kubectl cordon <worker_name>
+kubectl cordon <worker_name>
    ```
    {: pre}
 
 3. 验证是否已对工作程序节点禁用了 pod 安排。
    ```
-kubectl get nodes
-```
+   kubectl get nodes
+   ```
    {: pre}
-   如果阶段状态显示为 **SchedulingDisabled**，说明已禁止工作程序节点用于 pod 安排。
+如果阶段状态显示为 **`SchedulingDisabled`**，说明已禁止工作程序节点用于 pod 安排。
  4. 强制从工作程序节点中除去 pod，并将其重新安排到集群中的剩余工作程序节点上。
     ```
     kubectl drain <worker_name>
     ```
     {: pre}
-此过程可能需要几分钟时间。
+    此过程可能需要几分钟时间。
  5. 重新引导工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令返回的工作程序标识。
     ```
     ibmcloud ks worker-reboot --cluster <cluster_name_or_ID> --workers <worker_name_or_ID>
@@ -3039,13 +3924,19 @@ kubectl get nodes
   {: pre}
 
 
-### ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER][--skip-master-healthcheck] [-s]
+
+### ibmcloud ks worker-reload
 {: #cs_worker_reload}
 
-重新装入工作程序节点的配置。如果工作程序节点遇到问题（例如，性能降低），或者如果工作程序节点卡在非正常运行状态，那么重新装入会非常有用。请注意，在重新装入期间，工作程序节点机器将使用最新映像进行更新，并且如果数据未[存储在工作程序节点外部](cs_storage_planning.html#persistent_storage_overview)，那么将删除数据。
+重新装入工作程序节点的配置。如果工作程序节点遇到问题（例如，性能降低），或者如果工作程序节点卡在非正常运行状态，那么重新装入会非常有用。请注意，在重新装入期间，工作程序节点机器将使用最新映像进行更新，并且如果数据未[存储在工作程序节点外部](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)，那么将删除数据。
 {: shortdesc}
 
-重新装入工作程序节点会将补丁版本更新应用于工作程序节点，但不会应用主要或次要更新。要查看从一个补丁版本到下一个补丁版本的更改，请查看[版本更改日志](cs_versions_changelog.html#changelog)文档。
+```
+ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER] [--skip-master-healthcheck] [-s]
+```
+{: pre}
+
+重新装入工作程序节点会将补丁版本更新应用于工作程序节点，但不会应用主要或次要更新。要查看从一个补丁版本到下一个补丁版本的更改，请查看[版本更改日志](/docs/containers?topic=containers-changelog#changelog)文档。
 {: tip}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
@@ -3054,27 +3945,27 @@ kubectl get nodes
 
 1. 列出集群中的所有工作程序节点，并记下要重新装入的工作程序节点的 **name**。
    ```
-kubectl get nodes
-```
+   kubectl get nodes
+   ```
    此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。在运行 `ibmcloud ks workers <cluster_name_or_ID>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
 2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。使用在上一步中检索到的工作程序节点的 **name**。
    ```
-   kubectl cordon <worker_name>
+kubectl cordon <worker_name>
    ```
    {: pre}
 
 3. 验证是否已对工作程序节点禁用了 pod 安排。
    ```
-kubectl get nodes
-```
+   kubectl get nodes
+   ```
    {: pre}
-   如果阶段状态显示为 **SchedulingDisabled**，说明已禁止工作程序节点用于 pod 安排。
+如果阶段状态显示为 **`SchedulingDisabled`**，说明已禁止工作程序节点用于 pod 安排。
  4. 强制从工作程序节点中除去 pod，并将其重新安排到集群中的剩余工作程序节点上。
     ```
     kubectl drain <worker_name>
     ```
     {: pre}
-此过程可能需要几分钟时间。
+    此过程可能需要几分钟时间。
  5. 重新装入工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令返回的工作程序标识。
     ```
     ibmcloud ks worker-reload --cluster <cluster_name_or_ID> --workers <worker_name_or_ID>
@@ -3113,10 +4004,16 @@ kubectl get nodes
   {: pre}
 
 
-### ibmcloud ks worker-rm [-f] --cluster CLUSTER --workers WORKER[,WORKER][-s]
+### ibmcloud ks worker-rm
 {: #cs_worker_rm}
 
 从集群中除去一个或多个工作程序节点。如果除去工作程序节点，那么集群将变得不均衡。您可以通过运行 `ibmcloud ks worker-pool-rebalance` [命令](#cs_rebalance)来自动重新均衡工作程序池。
+{: shortdesc}
+
+```
+ibmcloud ks worker-rm [-f] --cluster CLUSTER --workers WORKER[,WORKER] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -3125,29 +4022,29 @@ kubectl get nodes
 
 1. 列出集群中的所有工作程序节点，并记下要除去的工作程序节点的 **name**。
    ```
-kubectl get nodes
-```
+   kubectl get nodes
+   ```
+   {: pre}
    此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。在运行 `ibmcloud ks workers <cluster_name_or_ID>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
 2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。使用在上一步中检索到的工作程序节点的 **name**。
    ```
-   kubectl cordon <worker_name>
+kubectl cordon <worker_name>
    ```
    {: pre}
 
 3. 验证是否已对工作程序节点禁用了 pod 安排。
    ```
-kubectl get nodes
-```
+   kubectl get nodes
+   ```
    {: pre}
-   如果阶段状态显示为 **SchedulingDisabled**，说明已禁止工作程序节点用于 pod 安排。
+如果阶段状态显示为 **`SchedulingDisabled`**，说明已禁止工作程序节点用于 pod 安排。
 4. 强制从工作程序节点中除去 pod，并将其重新安排到集群中的剩余工作程序节点上。
    ```
-    kubectl drain <worker_name>
-    ```
-   {: pre}
-此过程可能需要几分钟时间。
-     5. 除去工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令检索到的工作程序节点的标识。
-      
+kubectl drain <worker_name>
+   ```
+    {: pre}
+   此过程可能需要几分钟时间。
+5. 除去工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令返回的工作程序标识。
    ```
    ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
    ```
@@ -3157,6 +4054,7 @@ kubectl get nodes
    ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
+   {: pre}
 </br>
 <strong>命令选项</strong>：
 
@@ -3182,17 +4080,24 @@ kubectl get nodes
   {: pre}
 
 
-### ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER][--force-update] [-s]
+
+### ibmcloud ks worker-update
 {: #cs_worker_update}
 
-更新工作程序节点以将最新的安全性更新和补丁应用于操作系统，并更新 Kubernetes 版本以与 Kubernetes 主节点的版本相匹配。可以使用 `ibmcloud ks cluster-update` [命令](cs_cli_reference.html#cs_cluster_update)来更新 Kubernetes 主节点的版本。
+更新工作程序节点以将最新的安全性更新和补丁应用于操作系统，并更新 Kubernetes 版本以与 Kubernetes 主节点的版本相匹配。可以使用 `ibmcloud ks cluster-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)来更新 Kubernetes 主节点的版本。
+{: shortdesc}
+
+```
+ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [--force-update] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
-运行 `ibmcloud ks worker-update` 可能会导致应用程序和服务产生停机时间。更新期间，所有 pod 都将重新安排到其他工作程序节点，对该工作程序节点重新应用映像，如果数据未存储在 pod 外部，那么将删除数据。为避免停机时间，请[确保在所选工作程序节点更新时有足够的工作程序节点来处理工作负载](cs_cluster_update.html#worker_node)。
+运行 `ibmcloud ks worker-update` 可能会导致应用程序和服务产生停机时间。更新期间，所有 pod 都将重新安排到其他工作程序节点，对该工作程序节点重新应用映像，如果数据未存储在 pod 外部，那么将删除数据。为避免停机时间，请[确保在所选工作程序节点更新时有足够的工作程序节点来处理工作负载](/docs/containers?topic=containers-update#worker_node)。
 {: important}
 
-在更新前，您可能需要更改 YAML 文件以进行部署。请查看此[发行说明](cs_versions.html)以了解详细信息。
+在更新前，您可能需要更改 YAML 文件以进行部署。请查看此[发行说明](/docs/containers?topic=containers-cs_versions)以了解详细信息。
 
 <strong>命令选项</strong>：
 
@@ -3222,10 +4127,17 @@ kubectl get nodes
   ```
   {: pre}
 
-### ibmcloud ks workers --cluster CLUSTER [--worker-pool POOL][--show-pools] [--show-deleted][--json] [-s]
+
+### ibmcloud ks workers
 {: #cs_workers}
 
 查看集群中工作程序节点的列表以及每个工作程序节点的状态。
+{: shortdesc}
+
+```
+ibmcloud ks workers --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--show-deleted] [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -3236,7 +4148,7 @@ kubectl get nodes
    <dd>可用工作程序节点的集群的名称或标识。此值是必需的。</dd>
 
    <dt><code>--worker-pool <em>POOL</em></code></dt>
-   <dd>仅查看属于工作程序池的工作程序节点。要列出可用的工作程序池，请运行 `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`. 此值是可选的。</dd>
+   <dd>仅查看属于工作程序池的工作程序节点。要列出可用的工作程序池，请运行 `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`。此值是可选的。</dd>
 
    <dt><code>--show-pools</code></dt>
    <dd>列出每个工作程序节点所属的工作程序池。此值是可选的。</dd>
@@ -3261,13 +4173,20 @@ kubectl get nodes
 <br />
 
 
+
 ## 工作程序池命令
 {: #worker-pool}
 
-### ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--labels LABELS][--disable-disk-encrypt] [-s][--json]
+### ibmcloud ks worker-pool-create
 {: #cs_worker_pool_create}
 
 可以在集群中创建工作程序池。添加工作程序池时，缺省情况下不会为其分配专区。您可以指定每个专区中需要的工作程序数以及工作程序的机器类型。将为工作程序池提供缺省 Kubernetes 版本。要完成创建工作程序，请向池[添加专区](#cs_zone_add)。
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--labels LABELS] [--disable-disk-encrypt] [-s] [--json]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -3281,7 +4200,7 @@ kubectl get nodes
     <dd>集群的名称或标识。此值是必需的。</dd>
 
   <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-    <dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-types` [命令](cs_cli_reference.html#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
+    <dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-types` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
 
   <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
     <dd>要在每个专区中创建的工作程序数。此值是必需的，并且必须大于或等于 1。</dd>
@@ -3302,17 +4221,24 @@ kubectl get nodes
     <dd>不显示每日消息或更新提示。此值是可选的。</dd>
 </dl>
 
-**示例命令**：
+**示例**：
 
   ```
   ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
   ```
   {: pre}
 
-### ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s][--json]
+
+### ibmcloud ks worker-pool-get
 {: #cs_worker_pool_get}
 
 查看工作程序池的详细信息。
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--json]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -3320,7 +4246,7 @@ kubectl get nodes
 
 <dl>
   <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>要查看其详细信息的工作程序节点池的名称。要列出可用的工作程序池，请运行 `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`. 此值是必需的。</dd>
+    <dd>要查看其详细信息的工作程序节点池的名称。要列出可用的工作程序池，请运行 `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`。此值是必需的。</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>工作程序池所在的集群的名称或标识。此值是必需的。</dd>
 
@@ -3331,7 +4257,7 @@ kubectl get nodes
     <dd>不显示每日消息或更新提示。此值是可选的。</dd>
 </dl>
 
-**示例命令**：
+**示例**：
 
   ```
   ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
@@ -3341,22 +4267,28 @@ kubectl get nodes
 **示例输出**：
 
   ```
-  Name:               pool   
-  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g   
-  State:              active   
-  Hardware:           shared   
-  Zones:              dal10,dal12   
-  Workers per zone:   3   
-  Machine type:       b2c.4x16.encrypted   
-  Labels:             -   
-  Version:            1.10.11_1512
+  Name:               pool
+  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g
+  State:              active
+  Hardware:           shared
+  Zones:              dal10,dal12
+  Workers per zone:   3
+  Machine type:       b2c.4x16.encrypted
+  Labels:             -
+  Version:            1.12.6_1512
   ```
   {: screen}
 
-### ibmcloud ks worker-pool-rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
+### ibmcloud ks worker-pool-rebalance
 {: #cs_rebalance}
 
 删除工作程序节点后，可以重新均衡工作程序池。运行此命令后，会向工作程序池添加新的工作程序。
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -3378,10 +4310,16 @@ kubectl get nodes
   ```
   {: pre}
 
-### ibmcloud ks worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE [-s]
+### ibmcloud ks worker-pool-resize
 {: #cs_worker_pool_resize}
 
 调整工作程序池的大小，以增大或减小集群的每个专区中的工作程序节点数。工作程序池必须至少有一个工作程序节点。
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -3402,17 +4340,23 @@ kubectl get nodes
 
 </dl>
 
-**示例命令**：
+**示例**：
 
   ```
   ibmcloud ks worker-pool-resize --cluster my_cluster --worker-pool my_pool --size-per-zone 3
   ```
   {: pre}
 
-### ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-s]
+### ibmcloud ks worker-pool-rm
 {: #cs_worker_pool_rm}
 
 从集群中除去工作程序池。这将删除池中的所有工作程序节点。执行删除时，会重新安排 pod。为了避免产生停机时间，请确保您有足够的工作程序来运行工作负载。
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-f] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -3423,21 +4367,30 @@ kubectl get nodes
     <dd>要除去的工作程序节点池的名称。此值是必需的。</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>要从中除去工作程序池的集群的名称或标识。此值是必需的。</dd>
+  <dt><code>-f</code></dt>
+    <dd>强制此命令运行，而不显示用户提示。此值是可选的。</dd>
   <dt><code>-s</code></dt>
     <dd>不显示每日消息或更新提示。此值是可选的。</dd>
 </dl>
 
-**示例命令**：
+**示例**：
 
   ```
   ibmcloud ks worker-pool-rm --cluster my_cluster --worker-pool pool1
   ```
   {: pre}
 
-### ibmcloud ks worker-pools --cluster CLUSTER [--json][-s]
+###         ibmcloud ks worker-pools
+        
 {: #cs_worker_pools}
 
 查看您在集群中具有的工作程序池。
+{: shortdesc}
+
+```
+ibmcloud ks worker-pools --cluster CLUSTER [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
@@ -3452,17 +4405,23 @@ kubectl get nodes
     <dd>不显示每日消息或更新提示。此值是可选的。</dd>
 </dl>
 
-**示例命令**：
+**示例**：
 
   ```
   ibmcloud ks worker-pools --cluster my_cluster
   ```
   {: pre}
 
-### ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN][--private-only] [--json][-s]
+### ibmcloud ks zone-add
 {: #cs_zone_add}
 
 **仅限多专区集群**：创建集群或工作程序池后，可以添加专区。添加专区后，会向新专区添加工作程序节点，以匹配为工作程序池指定的每个专区的工作程序数。
+{: shortdesc}
+
+```
+ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [--json] [-s]
+```
+{: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -3470,7 +4429,7 @@ kubectl get nodes
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>要添加的专区。必须是集群区域内的[支持多专区的专区](cs_regions.html#zones)。此值是必需的。</dd>
+    <dd>要添加的专区。必须是集群区域内的[支持多专区的专区](/docs/containers?topic=containers-regions-and-zones#zones)。此值是必需的。</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>集群的名称或标识。此值是必需的。</dd>
@@ -3480,18 +4439,17 @@ kubectl get nodes
 
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
     <dd><p>专用 VLAN 的标识。此值是有条件的。</p>
-    <p>如果专区中有专用 VLAN，那么此值必须与集群中一个或多个工作程序节点的专用 VLAN 标识相匹配。要查看可用的 VLAN，请运行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。新的工作程序节点会添加到指定的 VLAN，但不会更改任何现有工作程序节点的 VLAN。
-      </p>
+    <p>如果专区中有专用 VLAN，那么此值必须与集群中一个或多个工作程序节点的专用 VLAN 标识相匹配。要查看可用的 VLAN，请运行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。新的工作程序节点会添加到指定的 VLAN，但不会更改任何现有工作程序节点的 VLAN。</p>
     <p>如果在该专区中没有专用或公用 VLAN，请勿指定此选项。初始向工作程序池添加新专区后，会自动创建专用和公用 VLAN。</p>
-    <p>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud Infrastructure (SoftLayer) 帐户代表。</p></dd>
+    <p>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd><p>公用 VLAN 的标识。如果要在创建集群之后向公众公开节点上的工作负载，那么此值是必需的。此值必须与集群中该专区的一个或多个工作程序节点的公用 VLAN 标识相匹配。要查看可用的 VLAN，请运行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。新的工作程序节点会添加到指定的 VLAN，但不会更改任何现有工作程序节点的 VLAN。</p>
     <p>如果在该专区中没有专用或公用 VLAN，请勿指定此选项。初始向工作程序池添加新专区后，会自动创建专用和公用 VLAN。</p>
-    <p>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud Infrastructure (SoftLayer) 帐户代表。</p></dd>
+    <p>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p></dd>
 
   <dt><code>--private-only </code></dt>
-    <dd>使用此选项可阻止创建公用 VLAN。仅当指定 `--private-vlan` 标志并且不包含 `--public-vlan` 标志时，此项才是必需的。<p class="note">如果需要仅专用集群，那么必须配置网关设备进行网络连接。有关更多信息，请参阅[专用集群](cs_clusters_planning.html#private_clusters)。</p></dd>
+    <dd>使用此选项可阻止创建公用 VLAN。仅当指定 `--private-vlan` 标志并且不包含 `--public-vlan` 标志时，此项才是必需的。<p class="note">如果工作程序节点设置为仅使用专用 VLAN，那么必须启用专用服务端点或配置网关设备。有关更多信息，请参阅[专用集群](/docs/containers?topic=containers-plan_clusters#private_clusters)。</p></dd>
 
   <dt><code>--json</code></dt>
     <dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
@@ -3507,10 +4465,16 @@ kubectl get nodes
   ```
   {: pre}
 
-  ### ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN][-f] [-s]
-  {: #cs_zone_network_set}
+### ibmcloud ks zone-network-set
+{: #cs_zone_network_set}
 
-  **仅限多专区集群**：为工作程序池设置网络元数据，以将与先前所用不同的公用或专用 VLAN 用于专区。池中已创建的工作程序节点会继续使用先前的公用或专用 VLAN，但池中的新工作程序节点将使用新的网络数据。
+**仅限多专区集群**：为工作程序池设置网络元数据，以将与先前所用不同的公用或专用 VLAN 用于专区。池中已创建的工作程序节点会继续使用先前的公用或专用 VLAN，但池中的新工作程序节点将使用新的网络数据。
+{: shortdesc}
+
+```
+ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [-f] [-s]
+```
+{: pre}
 
   <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -3524,13 +4488,13 @@ VLAN ID   Subnet CIDR         Public   User-managed
   <pre class="screen"><code>ID        Name   Number   Type      Router         Supports Virtual Workers
 229xxxx          1234     private   bcr01a.dal12   true
 229xxxx          5678     public    fcr01a.dal12   true</code></pre><p>请注意，<strong>Router</strong> pod 标识匹配：`01a` 和 `01a`。如果一个 pod 标识为 `01a`，另一个为 `02a`，那么无法为工作程序池设置公用和专用 VLAN 标识。</p></li>
-  <li>如果没有任何 VLAN 可用，那么可以<a href="/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans">订购新的 VLAN</a>。</li></ol>
+  <li>如果没有任何 VLAN 可用，那么可以<a href="/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans">订购新的 VLAN</a>。</li></ol>
 
   <strong>命令选项</strong>：
 
   <dl>
     <dt><code>--zone <em>ZONE</em></code></dt>
-      <dd>要添加的专区。必须是集群区域内的[支持多专区的专区](cs_regions.html#zones)。此值是必需的。</dd>
+      <dd>要添加的专区。必须是集群区域内的[支持多专区的专区](/docs/containers?topic=containers-regions-and-zones#zones)。此值是必需的。</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>集群的名称或标识。此值是必需的。</dd>
@@ -3558,10 +4522,16 @@ VLAN ID   Subnet CIDR         Public   User-managed
   ```
   {: pre}
 
-### ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f][-s]
+### ibmcloud ks zone-rm
 {: #cs_zone_rm}
 
 **仅限多专区集群**：从集群中的所有工作程序池中除去专区。这将删除工作程序池中此专区的所有工作程序节点。
+{: shortdesc}
+
+```
+ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f] [-s]
+```
+{: pre}
 
 在除去专区之前，请确保集群的其他专区中有足够的工作程序节点，以便可以重新安排 pod，以帮助避免因工作程序节点上的应用程序或数据损坏而产生的停机时间。
 {: tip}
@@ -3572,7 +4542,7 @@ VLAN ID   Subnet CIDR         Public   User-managed
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>要添加的专区。必须是集群区域内的[支持多专区的专区](cs_regions.html#zones)。此值是必需的。</dd>
+    <dd>要添加的专区。必须是集群区域内的[支持多专区的专区](/docs/containers?topic=containers-regions-and-zones#zones)。此值是必需的。</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>集群的名称或标识。此值是必需的。</dd>
@@ -3590,3 +4560,5 @@ VLAN ID   Subnet CIDR         Public   User-managed
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
+
+

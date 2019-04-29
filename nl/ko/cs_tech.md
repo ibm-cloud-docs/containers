@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, docker
+
+subcollection: containers
 
 ---
 
@@ -17,7 +21,6 @@ lastupdated: "2018-12-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # {{site.data.keyword.containerlong_notm}} 기술
@@ -63,9 +66,9 @@ lastupdated: "2018-12-05"
   </ul>
   </dd>
 
-<p>컨테이너 이미지에 대해 작업하는 경우 [개인 정보 보호](cs_secure.html#pi)에 대해 자세히 알아보십시오.</p>
+<p>컨테이너 이미지에 대해 작업하는 경우 [개인 정보 보호](/docs/containers?topic=containers-security#pi)에 대해 자세히 알아보십시오.</p>
 
-<p>Docker에 대해 더 자세히 알아볼 준비가 되셨습니까? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">이 과정을 완료하여 Docker와 {{site.data.keyword.containerlong_notm}}가 어떻게 함께 작동하는지 알아보십시오</a>.</p>
+<p>Docker에 대해 더 자세히 알아볼 준비가 되셨습니까? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">이 과정을 완료하여 Docker와 {{site.data.keyword.containerlong_notm}}가 어떻게 함께 작동하는지 알아보십시오</a>.</p>
 
 </dl>
 
@@ -80,14 +83,14 @@ lastupdated: "2018-12-05"
 
 다음 다이어그램에 나타낸 것처럼 일부 기본 Kubernetes 개념에 대해 학습하십시오.
 
-![배치 설정](images/cs_app_tutorial_components1.png)
+![배치 설정](images/cs_app_tutorial_mz-components1.png)
 
 <dl>
 <dt>계정</dt>
 <dd>계정은 {{site.data.keyword.Bluemix_notm}} 계정을 나타냅니다.</dd>
 
 <dt>클러스터</dt>
-<dd>Kubernetes 클러스터는 작업자 노드라는 하나 이상의 컴퓨팅 호스트로 구성됩니다. 작업자 노드는 클러스터의 모든 Kubernetes 리소스를 중앙에서 제어하고 모니터하는
+<dd>Kubernetes 클러스터는 작업자 노드라는 하나 이상의 컴퓨팅 호스트로 구성됩니다. 작업자 노드는 클러스터의 모든 Kubernetes 리소스를 중앙에서 제어하고 모니터링하는
 Kubernetes 마스터에서 관리합니다. 그러므로 컨테이너화된 앱을 위한 리소스를 배치하는 경우 Kubernetes 마스터는 클러스터에서 사용 가능한 용량과 배치 요구사항을 고려하여 해당 리소스를 배치할 작업자 노드를 결정합니다. Kubernetes 리소스에는 서비스, 배치 및 팟(Pod)이 포함됩니다.</dd>
 
 <dt>서비스</dt>
@@ -105,11 +108,11 @@ Kubernetes 마스터에서 관리합니다. 그러므로 컨테이너화된 앱�
 <dt>앱</dt>
 <dd>앱은 전체 앱 또는 앱의 컴포넌트를 참조할 수 있습니다. 별도의 팟(Pod) 또는 별도의 작업자 노드에 앱의 컴포넌트를 배치할 수 있습니다.</dd>
 
-<p>Kubernetes 리소스에 대해 작업할 때 [개인 정보 보호](cs_secure.html#pi)에 대해 자세히 알아보십시오.</p>
+<p>Kubernetes 리소스에 대해 작업할 때 [개인 정보 보호](/docs/containers?topic=containers-security#pi)에 대해 자세히 알아보십시오.</p>
 
 <p>Kubernetes에 대해 더 자세히 알아볼 준비가 되셨습니까?</p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">클러스터 작성 튜토리얼을 통해 용어에 대한 지식을 넓히십시오</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">이 과정을 완료하여 Kubernetes와 {{site.data.keyword.containerlong_notm}}가 어떻게 함께 작동하는지 알아보십시오</a>.</li></ul>
+<ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">클러스터 작성 튜토리얼을 통해 용어에 대한 지식을 넓히십시오</a>.</li>
+<li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">이 과정을 완료하여 Kubernetes와 {{site.data.keyword.containerlong_notm}}가 어떻게 함께 작동하는지 알아보십시오</a>.</li></ul>
 
 
 </dl>
@@ -120,14 +123,23 @@ Kubernetes 마스터에서 관리합니다. 그러므로 컨테이너화된 앱�
 ## 서비스 아키텍처
 {: #architecture}
 
-{{site.data.keyword.containerlong_notm}}에서 실행되는 Kubernetes 클러스터에서 컨테이너화된 앱은 작업자 노드라고 하는 컴퓨팅 호스트에서 호스팅됩니다. 좀 더 구체적으로 설명하면, 앱은 작업자 노드에서 호스팅되는 팟(Pod)에서 실행됩니다. 작업자 노드는 Kubernetes 마스터가 관리합니다. Kubernetes 마스터 및 작업자 노드는 보안 TLS 인증서 및 openVPN 연결을 통해 서로 통신하여 클러스터 구성을 조정합니다.
+{{site.data.keyword.containerlong_notm}}에서 실행되는 Kubernetes 클러스터에서 컨테이너화된 앱은 작업자 노드라고 하는 컴퓨팅 호스트에서 호스팅됩니다. 좀 더 구체적으로 설명하면, 앱은 작업자 노드에서 호스팅되는 팟(Pod)에서 실행됩니다. 작업자 노드는 Kubernetes 마스터가 관리합니다. Kubernetes 마스터와 작업자 노드 간의 통신 설정은 공용 클라우드 엔드 포인트를 사용하는 계정 또는 공용 및 개인 서비스 엔드 포인트를 사용하는 VRF 사용 계정의 IBM Cloud 인프라 (SoftLayer) 네트워크를 설정하는 방법에 따라 다릅니다.
 {: shortdesc}
 
-다음 이미지는 클러스터의 컴포넌트 및 이들이 상호작용하는 방법을 보여줍니다.
+다음 이미지는 [공용 서비스 엔드포인트만 사용으로 설정](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)된 경우 클러스터의 컴포넌트와 계정에서 클러스터의 컴포넌트가 상호작용하는 방법을 표시합니다.
 <p>
 <figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 아키텍처">
- <figcaption>{{site.data.keyword.containerlong_notm}} 아키텍처</figcaption>
+ <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 아키텍처">
+ <figcaption>공용 서비스 엔드포인트만 사용으로 설정된 경우 {{site.data.keyword.containerlong_notm}} 아키텍처</figcaption>
+</figure>
+</p>
+
+다음 이미지는 [공용 및 개인 서비스 엔드포인트가 사용으로 설정](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)된 경우 클러스터 컴포넌트와 VRF 사용 계정에서 클러스터의 컴포넌트가 상호작용하는 방법을 표시합니다.
+
+<p>
+<figure>
+ <img src="images/cs_org_ov_both_ses.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 아키텍처">
+ <figcaption>공용 및 개인 서비스 엔드포인트가 사용으로 설정된 경우 {{site.data.keyword.containerlong_notm}} 아키텍처</figcaption>
 </figure>
 </p>
 
@@ -162,11 +174,11 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     </tr>
     <tr>
     <td>kube-controller-manager</td>
-    <td>Kubernetes 제어기 관리자는 복제본 세트 등의 클러스터 리소스의 상태를 감시하는 디먼입니다. 리소스의 상태가 변경되는 경우(예: 복제본 세트의 팟(Pod)이 작동 중지됨), 제어기 관리자는 정정 조치를 시작하여 원하는 상태를 얻습니다.</td>
+    <td>Kubernetes 제어기 관리자는 복제본 세트 등의 클러스터 리소스의 상태를 감시하는 디먼입니다. 리소스의 상태가 변경되는 경우(예: 복제본 세트의 팟(Pod)이 작동 중지됨), 제어기 관리자는 정정 조치를 시작하여 필수 상태를 얻습니다.</td>
     </tr>
     </tbody></table></dd>
   <dt>작업자 노드</dt>
-    <dd>각 작업자 노드는 클라우드 환경의 실제 머신(베어메탈), 또는 실제 하드웨어에서 실행되는 가상 머신입니다. 작업자 노드를 프로비저닝할 때 해당 작업자 노드에서 호스팅되는 컨테이너에 사용 가능한 리소스를 판별합니다. 기본적으로, 작업자 노드는 {{site.data.keyword.IBM_notm}} 관리 Docker Engine, 개별 컴퓨팅 리소스, 네트워킹 및 볼륨 서비스로 설정됩니다. 기본 제공 보안 기능은 격리, 리소스 관리 기능 및 작업자 노드 보안 준수를 제공합니다.</br></br>다음 표에서는 작업자 노드의 컴포넌트에 대해 설명합니다.
+    <dd>각 작업자 노드는 클라우드 환경의 실제 머신(베어메탈), 또는 실제 하드웨어에서 실행되는 가상 머신입니다. 작업자 노드를 프로비저닝할 때 해당 작업자 노드에서 호스팅되는 컨테이너에 사용 가능한 리소스를 판별합니다. 기본적으로, 작업자 노드는 {{site.data.keyword.IBM_notm}} 관리 Docker Engine, 개별 컴퓨팅 리소스, 네트워킹 및 볼륨 서비스로 설정됩니다. 기본 제공 보안 기능은 격리, 리소스 관리 기능 및 작업자 노드 보안 준수를 제공합니다. </br></br><p class="note">`kubelet`와 같은 기본 작업자 노드 컴포넌트를 수정하는 것은 지원되지 않으며 예기치 않은 결과가 발생할 수 있습니다. </p>다음 표에서는 작업자 노드의 컴포넌트에 대해 설명합니다.
     <table>
     <caption>작업자 노드의 컴포넌트</caption>
     <thead>
@@ -176,47 +188,47 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     </thead>
     <tbody>
     <tr>
-    <td>ibm-master-proxy</td>
+    <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
     <td>Kubernetes 버전 1.10 이상을 실행하는 클러스터의 경우, `ibm-master-proxy`는 작업자 노드의 요청을 고가용성 마스터 복제본의 IP 주소로 전달합니다. 단일 구역 클러스터에서 마스터에는 하나의 마스터 IP 주소와 도메인 이름을 지닌 별도 호스트의 3개 복제본이 있습니다. 다중 구역 가능 구역에 있는 클러스터의 경우, 마스터에는 구역 간에 전개된 3개의 복제본이 있습니다. 따라서 각각의 마스터에는 전체 클러스터 마스터에 대해 하나의 도메인 이름을 지닌 DNS에 등록된 자체 IP 주소가 있습니다.</td>
     </tr>
     <tr>
-    <td>openvpn-client</td>
+    <td>`openvpn-client`</td>
     <td>kube-system</td>
     <td>OpenVPN 클라이언트는 OpenVPN 서버와 함께 작업하여 마스터를 작업자 노드에 안전하게 연결합니다. 이 연결은 팟(Pod) 및 서비스에 대한 `apiserver proxy` 호출과 kubelet에 대한 `kubectl exec`, `attach` 및 `logs` 호출을 지원합니다.</td>
     </tr>
     <tr>
-    <td>kubelet</td>
+    <td>`kubelet`</td>
     <td>kube-system</td>
-    <td>kubelet는 모든 작업자 노드에서 실행되는 팟(Pod)이며, 작업자 노드에서 실행되는 팟(Pod)의 상태를 모니터하고 Kubernetes API 서버가 전송하는 이벤트를 감시하는 역할을 담당합니다. 이벤트를 기반으로, kubelet는 팟(Pod)을 작성 또는 제거하고 라이브 및 준비 프로브를 보장하며 팟(Pod)의 상태를 다시 Kubernetes API 서버에 보고합니다.</td>
+    <td>kubelet는 모든 작업자 노드에서 실행되는 팟(Pod)이며, 작업자 노드에서 실행되는 팟(Pod)의 상태를 모니터링하고 Kubernetes API 서버가 전송하는 이벤트를 감시하는 역할을 담당합니다. 이벤트를 기반으로, kubelet는 팟(Pod)을 작성 또는 제거하고 라이브 및 준비 프로브를 보장하며 팟(Pod)의 상태를 다시 Kubernetes API 서버에 보고합니다.</td>
     </tr>
     <tr>
-    <td>kube-dns</td>
+    <td>`coredns`</td>
     <td>kube-system</td>
-    <td>Kubernetes DNS는 클러스터에서 DNS 팟(Pod) 및 서비스를 스케줄합니다. 컨테이너는 자동으로 DNS 서비스의 IP를 사용하여 기타 팟(Pod) 및 서비스에 대한 자체 검색에서 DNS 이름을 분석합니다.</td>
+    <td>기본적으로, Kubernetes는 클러스터에서 CoreDNS 팟(Pod)(또는 버전 1.12 이하에서 KubeDNS)과 서비스를 스케줄합니다. 컨테이너는 자동으로 DNS 서비스의 IP를 사용하여 기타 팟(Pod) 및 서비스에 대한 자체 검색에서 DNS 이름을 분석합니다.</td>
     </tr>
     <tr>
-    <td>calico</td>
+    <td>`calico`</td>
     <td>kube-system</td>
     <td>Calico는 클러스터에 대한 네트워크 정책을 관리하고 다음과 같은 일부 컴포넌트를 구성합니다.
     <ul>
-    <li>**calico-cni**: Calico 컨테이너 네트워크 인터페이스(CNI)는 컨테이너의 네트워크 연결을 관리하며 컨테이너가 삭제될 때 할당된 리소스를 제거합니다.</li>
-    <li>**calico-ipam**: Calico IPAM은 컨테이너에 대한 IP 주소 할당을 관리합니다.</li>
-    <li>**calico-node**: Calico 노드는 컨테이너를 Calico와 네트워크로 연결하는 데 필요한 다양한 컴포넌트를 함께 번들링하는 컨테이너입니다.</li>
-    <li>**calico-policy-controller**: Calico 정책 제어기는 설정된 네트워크 정책을 준수하기 위해 인바운드 및 아웃바운드 네트워크 트래픽을 감시합니다. 트래픽이 클러스터에서 허용되지 않으면 클러스터에 대한 액세스가 차단됩니다. Calico 정책 제어기는 클러스터에 대한 네트워크 정책을 작성하고 설정하는 데도 사용됩니다.</li></ul></td>
+    <li>**`calico-cni`**: Calico 컨테이너 네트워크 인터페이스(CNI)는 컨테이너의 네트워크 연결을 관리하며 컨테이너가 삭제될 때 할당된 리소스를 제거합니다.</li>
+    <li>**`calico-ipam`**: Calico IPAM은 컨테이너에 대한 IP 주소 할당을 관리합니다.</li>
+    <li>**`calico-node`**: Calico 노드는 컨테이너를 Calico와 네트워크로 연결하는 데 필요한 다양한 컴포넌트를 함께 번들링하는 컨테이너입니다.</li>
+    <li>**`calico-policy-controller`**: Calico 정책 제어기는 설정된 네트워크 정책을 준수하기 위해 인바운드 및 아웃바운드 네트워크 트래픽을 감시합니다. 트래픽이 클러스터에서 허용되지 않으면 클러스터에 대한 액세스가 차단됩니다. Calico 정책 제어기는 클러스터에 대한 네트워크 정책을 작성하고 설정하는 데도 사용됩니다.</li></ul></td>
     </tr>
     <tr>
-    <td>kube-proxy</td>
+    <td>`kube-proxy`</td>
     <td>kube-system</td>
     <td>Kubernetes 네트워크 프록시는 모든 작업자 노드에서 실행되며 클러스터에서 실행되는 서비스의 TCP 및 UDP 네트워크 트래픽을 전달하거나 로드 밸런싱하는 디먼입니다.</td>
     </tr>
     <tr>
-    <td>kube-dashboard</td>
+    <td>`kube-dashboard`</td>
     <td>kube-system</td>
     <td>Kubernetes 대시보드는 사용자가 클러스터에서 실행 중인 애플리케이션과 클러스터를 관리하고 해당 문제점을 해결할 수 있도록 허용하는 웹 기반 GUI입니다.</td>
     </tr>
     <tr>
-    <td>heapster</td>
+    <td>`heapster`</td>
     <td>kube-system</td>
     <td>Heapster는 모니터링 및 이벤트 데이터의 클러스터 전체 집계기입니다. Heapster 팟(Pod)은 클러스터의 모든 노드를 검색하고 각 노드의 kubelet에서 사용 정보를 조회합니다. Kubernetes 대시보드에서 이용 그래프를 찾을 수 있습니다.</td>
     </tr>
@@ -248,5 +260,5 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     </tbody></table></dd>
 </dl>
 
-{{site.data.keyword.containerlong_notm}}를 다른 제품 및 서비스와 함께 사용하는 방법을 알아보시겠습니까? 몇 가지 [통합](cs_integrations.html#integrations)을 참고해 보십시오.
+{{site.data.keyword.containerlong_notm}}를 다른 제품 및 서비스와 함께 사용하는 방법을 알아보시겠습니까? 몇 가지 [통합](/docs/containers?topic=containers-integrations#integrations)을 참고해 보십시오.
 {: tip}

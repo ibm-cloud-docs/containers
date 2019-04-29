@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # 指導教學：將應用程式部署至 Kubernetes 叢集
 {: #cs_apps_tutorial}
 
@@ -29,9 +34,9 @@ lastupdated: "2018-12-05"
 
 使用在最後指導教學中建立的 Kubernetes 叢集，公關公司的應用程式開發人員會部署應用程式的 Hello World 版本。根據本指導教學中每個課程的建置，應用程式開發人員會漸進部署同一個應用程式的較複雜版本。下圖依課程顯示每個部署的元件。
 
-![課程元件](images/cs_app_tutorial_mz-roadmap.png)
+<img src="images/cs_app_tutorial_mz-roadmap.png" width="700" alt="課程元件" style="width:700px; border-style: none"/>
 
-如圖所示，Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集裡開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包含應用程式的定義。例如，用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保隨時都有指定數目的 Pod 已啟動並在執行中。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
+如圖所示，Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包含應用程式的定義。例如，用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保隨時都有指定數目的 Pod 已啟動並在執行中。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
 
 服務會將一組 Pod 分組在一起，並且為叢集裡的其他服務提供這些 Pod 的網路連線，而不需公開每一個 Pod 的實際專用 IP 位址。您可以使用 Kubernetes 服務，讓叢集內的其他 Pod 能夠使用應用程式，或是將應用程式公開給網際網路使用。在本指導教學中，您使用 Kubernetes 服務，透過使用自動指派給工作者節點的公用 IP 位址以及公用埠，從網際網路存取執行中的應用程式。
 
@@ -40,6 +45,7 @@ lastupdated: "2018-12-05"
 只有其中一個課程討論到將 {{site.data.keyword.Bluemix_notm}} 服務整合至應用程式中，但無論您想像得到的應用程式有多麼簡單或複雜，都能派上用場。
 
 ## 目標
+{: #apps_objectives}
 
 * 瞭解基本的 Kubernetes 術語
 * 將映像檔推送至 {{site.data.keyword.registryshort_notm}} 中的登錄名稱空間
@@ -49,17 +55,20 @@ lastupdated: "2018-12-05"
 * 部署使用 {{site.data.keyword.Bluemix_notm}} 服務功能的應用程式
 
 ## 所需時間
+{: #apps_time}
 
 40 分鐘
 
 ## 適用對象
+{: #apps_audience}
 
 第一次將應用程式部署至 Kubernetes 叢集的軟體開發人員及網路管理者。
 
 ## 必要條件
+{: #apps_prereqs}
 
-* [指導教學：建立 Kubernetes 叢集](cs_tutorials.html#cs_cluster_tutorial)。
-* 安裝 [container-registry plug-in](/docs/services/Registry/index.html#registry_cli_install)。
+* [指導教學：建立 Kubernetes 叢集](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)。
+* 安裝 [container-registry plug-in](/docs/services/Registry?topic=registry-index#registry_cli_install)。
 
 
 ## 課程 1：將單一實例應用程式部署至 Kubernetes 叢集
@@ -92,7 +101,7 @@ lastupdated: "2018-12-05"
     ```
     {: pre}
 
-3. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+3. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 5.  登入 {{site.data.keyword.registryshort_notm}} CLI。
 
@@ -107,9 +116,9 @@ lastupdated: "2018-12-05"
         ```
         {: pre}
 
-6.  建置 Docker 映像檔，其包括 `Lab 1` 目錄的應用程式檔案，並將映像檔推送至您在前一個指導教學中建立的 {{site.data.keyword.registryshort_notm}} 名稱空間。如果您未來需要對應用程式進行變更，請重複這些步驟，以建立另一個版本的映像檔。**附註**：進一步瞭解使用容器映像檔時如何[保護個人資訊安全](cs_secure.html#pi)。
+6.  建置 Docker 映像檔，其包括 `Lab 1` 目錄的應用程式檔案，並將映像檔推送至您在前一個指導教學中建立的 {{site.data.keyword.registryshort_notm}} 名稱空間。如果您未來需要對應用程式進行變更，請重複這些步驟，以建立另一個版本的映像檔。**附註**：進一步瞭解使用容器映像檔時如何[保護個人資訊安全](/docs/containers?topic=containers-security#pi)。
 
-    在映像檔名稱中，只可使用小寫英數字元或底線 (`_`)。請不要忘記指令尾端的句點 (`.`)。這個句點告訴 Docker 要在現行目錄中尋找 Dockerfile 及建置構件，以建置映像檔。
+    在映像檔名稱中，只可使用小寫英數字元或底線 (`_`)。請不要忘記指令尾端的句點 (`.`)。這個句點告訴 Docker 要在現行目錄中尋找 Dockerfile 及建置構件，以建置映像檔。若要取得您目前所在地區的地區字首，請執行 `ibmcloud api`。例如，達拉斯位置，美國南部地區字首為 `ng`。
 
     ```
     ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
@@ -146,7 +155,7 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-    進一步瞭解使用 Kubernetes 資源時如何[保護個人資訊安全](cs_secure.html#pi)。
+    進一步瞭解使用 Kubernetes 資源時如何[保護個人資訊安全](/docs/containers?topic=containers-security#pi)。
 
 8.  將部署公開成為 NodePort 服務，讓所有人都可以存取此應用程式。就像您可能會公開 Cloud Foundry 應用程式的埠，您公開的 NodePort 就是工作者節點用來接聽資料流量的埠。
 
@@ -224,18 +233,18 @@ lastupdated: "2018-12-05"
     2.  取得工作者節點在叢集裡的公用 IP 位址。
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
         輸出範例：
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        ibmcloud ks workers --cluster pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
         ```
         {: screen}
 
@@ -249,14 +258,14 @@ lastupdated: "2018-12-05"
     若要確定應用程式可公開使用，請嘗試在您的行動電話上將它輸入到瀏覽器中。
     {: tip}
 
-11. [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
+11. [啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#cli_dashboard)。
 
-    如果您在 [{{site.data.keyword.Bluemix_notm}} 主控台](https://console.bluemix.net/)中選取叢集，則可以使用 **Kubernetes 儀表板** 按鈕，透過按一下來啟動儀表板。
+    如果您在 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/)中選取叢集，則可以使用 **Kubernetes 儀表板** 按鈕，透過按一下來啟動儀表板。
     {: tip}
 
 12. 在**工作負載**標籤中，您可以看到所建立的資源。
 
-恭喜！您已部署第一個應用程式版本。
+做得好！您已部署第一個應用程式版本。
 
 本課程中有太多指令？同意。那麼使用配置 Script 來為您執行某些工作怎麼樣呢？若要為第二個應用程式版本使用配置 Script，以及部署該應用程式的多個實例來建立較高的可用性，請繼續進行下一個課程。
 
@@ -356,8 +365,8 @@ lastupdated: "2018-12-05"
 6.  現在，部署工作已完成，您可以開啟瀏覽器並查看應用程式。若要構成 URL，請採用您在前一個課程中用於工作者節點的相同公用 IP 位址，並將其與配置 Script 中指定的 NodePort 結合。若要取得工作者節點的公用 IP 位址，請執行：
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
-  ```
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
+        ```
   {: pre}
 
   使用範例值的 URL 為 `http://169.xx.xxx.xxx:30072`。您可能會在瀏覽器中看到下列文字。如果沒看到這些文字，請不必擔心。此應用程式的設計即為啟動後關閉。
@@ -388,17 +397,17 @@ lastupdated: "2018-12-05"
 
     *  **從 Kubernetes 儀表板中**：
 
-       1.  [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
-       2.  在**工作負載**標籤中，您可以看到所建立的資源。在此標籤中，您可以反覆重新整理，並看到性能檢查正常運作中。在 **Pod** 區段中，您可以看到，當 Pod 中的容器重建時，Pod 重新啟動多少次。如果您正好在儀表板中捕捉到下列錯誤，此訊息表示性能檢查捕捉到問題。請給它幾分鐘時間，然後再重新整理。您會看到每一個 Pod 的重新啟動次數有所變更。
+       1.  [啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#cli_dashboard)。
+       2.  在**工作負載**標籤中，您可以看到所建立的資源。在此標籤中，您可以反覆重新整理，並看到性能檢查正常運作中。在 **Pod** 區段中，您可以看到，當 Pod 中的容器重建時，Pod 會重新啟動多少次。如果您正好在儀表板中捕捉到下列錯誤，此訊息會指出性能檢查捕捉到問題。請給它幾分鐘時間，然後再重新整理。您會看到每一個 Pod 的重新啟動次數有所變更。
 
        ```
-       Liveness probe failed: HTTP probe failed with statuscode: 500
-       Back-off restarting failed docker container
-       Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
-       ```
+    Liveness probe failed: HTTP probe failed with statuscode: 500
+    Back-off restarting failed docker container
+    Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
+    ```
        {: screen}
 
-恭喜！您已部署第二個應用程式版本。您必須使用的指令較少、已瞭解性能檢查如何運作，並編輯了部署，這真是太棒了！Hello World 應用程式已通過公關公司的測試。現在，您可以為公關公司部署更好用的應用程式，以開始分析新聞稿。
+做得好！您已部署第二個應用程式版本。您必須使用的指令較少、已瞭解性能檢查如何運作，並編輯了部署，這真是太棒了！Hello World 應用程式已通過公關公司的測試。現在，您可以為公關公司部署更好用的應用程式，以開始分析新聞稿。
 
 準備好先刪除您建立的內容後再繼續嗎？這次，您可以使用相同的配置 Script 來刪除您所建立的這兩項資源。
 
@@ -527,7 +536,7 @@ lastupdated: "2018-12-05"
         ```
         {: codeblock}
 
-    2.  在 watson 部署的 volumes 區段中，更新您在前一個指導教學中建立的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 密碼名稱。將 Kubernetes 密碼當作磁區裝載至您的部署，即可讓 Pod 中執行的容器可使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 金鑰。此指導教學中的 {{site.data.keyword.watson}} 應用程式元件已配置為使用磁區裝載路徑來查閱 API 金鑰。
+    2.  在 watson 部署的 volumes 區段中，更新您在前一個[建立 Kubernetes 叢集指導教學](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)中建立的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 密碼名稱。將 Kubernetes 密碼當作磁區裝載至您的部署，即可讓 Pod 中執行的容器可使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 金鑰。此指導教學中的 {{site.data.keyword.watson}} 應用程式元件已配置為使用磁區裝載路徑來查閱 API 金鑰。
 
         ```
         volumes:
@@ -592,7 +601,7 @@ lastupdated: "2018-12-05"
         ```
         {: codeblock}
 
-9.  開啟瀏覽器，並分析一些文字。URL 的格式為 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
+9.  開啟瀏覽器，並分析一些文字。URL 的格式為 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`。
 
     範例：
 
@@ -603,7 +612,7 @@ lastupdated: "2018-12-05"
 
     在瀏覽器中，您可以看到對您輸入文字的 JSON 回應。
 
-10. [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
+10. [啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#cli_dashboard)。
 
 11. 在**工作負載**標籤中，您可以看到所建立的資源。
 
@@ -611,14 +620,15 @@ lastupdated: "2018-12-05"
 {: #lesson3b}
 
 部署執行時，您可以編輯部署來變更 Pod 範本中的值。此課程包括更新已使用的映像檔。公關公司想要變更部署裡的應用程式。
+{: shortdesc}
 
 變更映像檔的名稱：
 
 1.  開啟執行中部署的配置詳細資料。
 
     ```
-        kubectl edit deployment/watson-talk-pod
-        ```
+    kubectl edit deployment/watson-talk-pod
+    ```
     {: pre}
 
     視您的作業系統而定，可能會開啟 vi 編輯器或文字編輯器。
@@ -637,8 +647,8 @@ lastupdated: "2018-12-05"
 4.  將變更套用至執行中的部署。
 
     ```
-        kubectl rollout status deployment/watson-talk-pod
-        ```
+    kubectl rollout status deployment/watson-talk-pod
+    ```
     {: pre}
 
     等待確認推出完成。
@@ -650,9 +660,9 @@ lastupdated: "2018-12-05"
 
     當您推出變更時，Kubernetes 會建立並測試另一個 Pod。測試成功時，會移除舊的 Pod。
 
+[測試您的知識，並進行隨堂測驗！![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-
-恭喜！您已部署 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 應用程式。公關公司可以開始使用這個部署，以開始分析其新聞稿。
+做得好！您已部署 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 應用程式。公關公司可以開始使用這個部署，以開始分析其新聞稿。
 
 準備好刪除您建立的內容嗎？您可以使用配置 Script 來刪除您所建立的資源。
 
@@ -674,15 +684,15 @@ lastupdated: "2018-12-05"
   如果您不想要保留叢集，可以同時將它刪除。
 
   ```
-  ibmcloud ks cluster-rm <cluster_name_or_ID>
+  ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
 ## 下一步為何？
-{: #next}
+{: #apps_next}
 
 既然您已掌握基本觀念，就可以移至更進階的活動。請考量嘗試執行下列其中一項：
 
 - 在儲存庫中完成[更複雜的實驗室 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM/container-service-getting-started-wt#lab-overview)
-- 使用 {{site.data.keyword.containerlong_notm}} [自動調整應用程式](cs_app.html#app_scaling)
-- 探索 [IBM Developer ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/code/technologies/container-orchestration/) 上的容器編排程式碼型樣。
+- 使用 {{site.data.keyword.containerlong_notm}} [自動調整應用程式](/docs/containers?topic=containers-app#app_scaling)
+- 探索 [IBM Developer ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/technologies/containers/) 上的容器編排程式碼型樣。

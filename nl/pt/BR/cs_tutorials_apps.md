@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # Tutorial: Implementando apps em clusters do Kubernetes
 {: #cs_apps_tutorial}
 
@@ -29,7 +34,7 @@ Neste cenário, uma firma PR fictícia usa o serviço {{site.data.keyword.Bluemi
 
 Usando o cluster do Kubernetes que foi criado no último tutorial, o desenvolvedor de app da firma PR implementa uma versão Hello World do app. Construindo em cada lição neste tutorial, o desenvolvedor de aplicativo implementa versões progressivamente mais complicadas do mesmo app. O diagrama a seguir mostra os componentes de cada implementação por lição.
 
-![Componentes da lição](images/cs_app_tutorial_mz-roadmap.png)
+<img src="images/cs_app_tutorial_mz-roadmap.png" width="700" alt="Lesson components" style="width:700px; border-style: none"/>
 
 Conforme descrito no diagrama, o Kubernetes usa vários tipos diferentes de recursos para deixar seus apps funcionando em clusters. No Kubernetes, as implementações e os serviços funcionam juntos. As implementações incluem as definições para o app. Por exemplo, a imagem a ser usada para o contêiner e qual porta deve ser exposta para o app. Ao criar uma implementação, um pod do Kubernetes é criado para cada contêiner definido na implementação. Para tornar seu app mais resiliente, é possível definir múltiplas instâncias do mesmo app em sua implementação e permitir que o Kubernetes crie automaticamente um conjunto de réplicas para você. O conjunto de réplicas monitora os pods e assegura que o número especificado de pods estejam sempre funcionando. Se um dos pods tornar-se não responsivo, o pod será recriado automaticamente.
 
@@ -40,6 +45,7 @@ Para tornar seu app ainda mais altamente disponível, em clusters padrão, é po
 Somente uma das lições inclui a integração de um serviço do {{site.data.keyword.Bluemix_notm}} em um app, mas é possível usá-las com um app tão simples ou complexo quanto se possa imaginar.
 
 ## Objetivos
+{: #apps_objectives}
 
 * Entender a terminologia básica do Kubernetes
 * Enviar por push uma imagem para o namespace de seu registro no {{site.data.keyword.registryshort_notm}}
@@ -49,18 +55,21 @@ Somente uma das lições inclui a integração de um serviço do {{site.data.key
 * Implementar um app que use a funcionalidade de um serviço do {{site.data.keyword.Bluemix_notm}}
 
 ## Tempo Necessário
+{: #apps_time}
 
 40
 minutos
 
 ## Públicos
+{: #apps_audience}
 
 Os desenvolvedores de software e administradores da rede que estão implementando um app em um cluster do Kubernetes pela primeira vez.
 
 ## Pré-requisitos
+{: #apps_prereqs}
 
-* [ Tutorial: criando clusters do Kubernetes ](cs_tutorials.html#cs_cluster_tutorial).
-* Instale o [plug-in container-registry](/docs/services/Registry/index.html#registry_cli_install).
+* [ Tutorial: criando clusters do Kubernetes ](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
+* Instale o  [ plug-in container-registry ](/docs/services/Registry?topic=registry-index#registry_cli_install).
 
 
 ## Lição 1: implementando apps de instância única em clusters do Kubernetes
@@ -92,7 +101,7 @@ Para implementar o app:
     ```
     {: pre}
 
-3. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+3. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 5.  Efetue login na CLI do {{site.data.keyword.registryshort_notm}}.
 
@@ -107,9 +116,11 @@ Para implementar o app:
         ```
         {: pre}
 
-6.  Construa uma imagem do Docker que inclua os arquivos de app do diretório `Lab 1` e envie por push a imagem para o namespace do {{site.data.keyword.registryshort_notm}} que você criou no tutorial anterior. Caso seja necessário fazer uma mudança no app no futuro, repita estas etapas para criar outra versão da imagem. **Nota**: saiba mais sobre [proteção de suas informações pessoais](cs_secure.html#pi) quando você trabalhar com imagens de contêiner.
+6.  Construa uma imagem do Docker que inclua os arquivos de app do diretório `Lab 1` e envie por push a imagem para o namespace do {{site.data.keyword.registryshort_notm}} que você criou no tutorial anterior. Caso seja necessário fazer uma mudança no app no futuro, repita estas etapas para criar outra versão da imagem. **Nota**: saiba mais sobre [proteção de suas informações pessoais](/docs/containers?topic=containers-security#pi) quando você trabalhar com imagens de contêiner.
 
-    Use caracteres alfanuméricos minúsculos ou sublinhados (`_`) somente no nome da imagem. Não esqueça o ponto (`.`) no final do comando. O ponto indica ao Docker para verificar dentro do diretório atual para o Dockerfile e construir artefatos para construir a imagem.
+    Use caracteres alfanuméricos minúsculos ou sublinhados (`_`) somente no nome da imagem. Não esqueça o ponto (`.`) no final do comando. O ponto indica
+ao Docker para verificar dentro do diretório atual para o Dockerfile e construir artefatos para construir a
+imagem. Para obter o prefixo de região para a região em que você está atualmente, execute `ibmcloud api`. Por exemplo, o local de Dallas, o prefixo da região sul dos EUA é `ng`.
 
     ```
     ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
@@ -137,7 +148,7 @@ Para implementar o app:
     ```
     {: screen}
 
-    Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com recursos do Kubernetes.
+    Saiba mais sobre [como proteger suas informações pessoais](/docs/containers?topic=containers-security#pi) quando trabalhar com recursos do Kubernetes.
 
 8.  Torne o app acessível ao mundo expondo a implementação como um serviço NodePort. Assim como você pode expor uma porta para um app Cloud Foundry, o NodePort que você expõe é a porta na qual o nó do trabalhador atende o tráfego.
 
@@ -215,18 +226,18 @@ Para implementar o app:
     2.  Obtenha o endereço IP público para o nó do trabalhador no cluster.
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
         Saída de exemplo:
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        ibmcloud ks workers --cluster pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
         ```
         {: screen}
 
@@ -240,14 +251,14 @@ Para implementar o app:
     Para ver se o app está publicamente disponível, tente inseri-lo em um navegador em seu telefone celular.
     {: tip}
 
-11. [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
+11. [ Ativar o painel do Kubernetes ](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Se você selecionar seu cluster no [console do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
+    Se você selecionar seu cluster no [console do {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
     {: tip}
 
 12. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
 
-Parabéns! Você implementou sua primeira versão do app.
+Bom trabalho! Você implementou sua primeira versão do app.
 
 Muitos comandos nesta lição? Acordado. Que tal usar um script de configuração para fazer alguns dos trabalhos para você? Para usar um script de configuração para a segunda versão do app e para criar maior disponibilidade implementando múltiplas instâncias desse app, continue com a próxima lição.
 
@@ -340,7 +351,7 @@ do que apenas uma instância.
 6.  Agora que o trabalho de implementação está pronto, é possível abrir um navegador e efetuar check-out do app. Para formar a URL, tome o mesmo endereço IP público que você usou na lição anterior para seu nó do trabalhador e combine-o com o NodePort que foi especificado no script de configuração. Para obter o endereço IP público para o nó do trabalhador:
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  ibmcloud ks workers --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -372,7 +383,7 @@ do que apenas uma instância.
 
     *  **No painel do Kubernetes**:
 
-       1.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
+       1.  [ Ativar o painel do Kubernetes ](/docs/containers?topic=containers-app#cli_dashboard).
        2.  Na guia **Cargas de trabalho**, é possível ver os recursos que você criou. Nessa guia, é possível atualizar continuamente e ver que a verificação de funcionamento está funcionando. Na seção **Pods**, é possível ver quantas vezes os pods são reiniciados quando os contêineres neles são recriados. Se acontecer de você capturar o erro a seguir no painel, esta mensagem indicará que a verificação de funcionamento capturou um problema. Aguarde alguns minutos e atualize novamente. Você verá o número de mudança de reinicializações para cada pod.
 
        ```
@@ -382,7 +393,7 @@ do que apenas uma instância.
        ```
        {: screen}
 
-Parabéns! A segunda versão do app foi implementada. Você teve que usar menos comandos,
+Bom trabalho! A segunda versão do app foi implementada. Você teve que usar menos comandos,
 aprendeu como as verificações de funcionamento trabalham e editou uma implementação, o que é ótimo! O app Hello World passou no teste para a firma PR. Agora, é possível implementar um app mais útil para que a firma PR comece a analisar os press releases.
 
 Pronto para excluir o que você criou antes de continuar? Desta vez, é possível usar o mesmo script de configuração para excluir ambos os recursos que você criou.
@@ -512,7 +523,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
         ```
         {: codeblock}
 
-    2.  Na seção de volumes da implementação do watson, atualize o nome do segredo do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} criado no tutorial anterior. Montando o segredo do Kubernetes como um volume para a sua implementação, você torna a chave de API do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) disponível para o contêiner que está em execução em seu pod. Os componentes do app do {{site.data.keyword.watson}} neste tutorial são configurados para consultar a chave de API usando o caminho de montagem do volume.
+    2.  Na seção de volumes da implementação do Watson, atualize o nome do segredo do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que você criou no [tutorial de criação do cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) anterior. Montando o segredo do Kubernetes como um volume para a sua implementação, você torna a chave de API do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) disponível para o contêiner que está em execução em seu pod. Os componentes do app do {{site.data.keyword.watson}} neste tutorial são configurados para consultar a chave de API usando o caminho de montagem do volume.
 
         ```
         volumes:
@@ -588,7 +599,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
 
     Em um navegador, é possível ver a resposta JSON para o texto inserido.
 
-10. [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
+10. [ Ativar o painel do Kubernetes ](/docs/containers?topic=containers-app#cli_dashboard).
 
 11. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
 
@@ -596,6 +607,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
 {: #lesson3b}
 
 Enquanto uma implementação está em execução, é possível editá-la para mudar valores no modelo de pod. Esta lição inclui atualizar a imagem que é usada. A firma PR deseja mudar o app na implementação.
+{: shortdesc}
 
 Mude o nome da imagem:
 
@@ -635,9 +647,9 @@ Mude o nome da imagem:
 
     Quando você apresenta uma mudança, outro pod é criado e testado pelo Kubernetes. Quando o teste é bem-sucedido, o pod antigo é removido.
 
+[Teste seus conhecimentos e faça um teste! ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-
-Parabéns! Você implementou o app {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}. A firma PR pode começar a usar essa implementação para iniciar a análise de seus press releases.
+Bom trabalho! Você implementou o app {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}. A firma PR pode começar a usar essa implementação para iniciar a análise de seus press releases.
 
 Pronto para excluir o que você criou? É possível usar o script de configuração para excluir os recursos criados.
 
@@ -659,15 +671,15 @@ service "watson-talk-service" deleted
   Se você não deseja manter o cluster, é possível excluí-lo também.
 
   ```
-  ibmcloud ks cluster-rm <cluster_name_or_ID>
+  ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
 ## O que Vem a Seguir?
-{: #next}
+{: #apps_next}
 
 Agora que você conquistou o básico, é possível mover para atividades mais avançadas. Considere experimentar um dos seguintes:
 
 - Conclua um [laboratório mais complicado ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) no repositório
-- [Escalar automaticamente seus apps](cs_app.html#app_scaling) com o {{site.data.keyword.containerlong_notm}}
-- Explore os padrões de código de orquestração de contêiner no [IBM Developer ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/technologies/container-orchestration/)
+- [Escalar automaticamente seus apps](/docs/containers?topic=containers-app#app_scaling) com o {{site.data.keyword.containerlong_notm}}
+- Explore os padrões de código de orquestração do contêiner no [IBM Developer ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/technologies/containers/)

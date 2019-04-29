@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -33,14 +37,14 @@ Se você optar por mudar as configurações padrão, você estará fazendo isso 
 Se você tiver requisitos de otimização de desempenho específicos, será possível mudar as configurações padrão para os parâmetros `sysctl` do kernel do Linux em nós do trabalhador.
 {: shortdesc}
 
-Os nós do trabalhador são provisionados automaticamente com o desempenho do kernel otimizado, mas é possível mudar as configurações padrão aplicando um objeto `DaemonSet` do [Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) customizado ao seu cluster. O daemonset altera as configurações para todos os nós do trabalhador existentes e aplica as configurações a quaisquer novos nós do trabalhador que são provisionados no cluster. Nenhum pods é afetado.
+Os nós do trabalhador são provisionados automaticamente com o desempenho do kernel otimizado, mas é possível mudar as configurações padrão aplicando um objeto `DaemonSet` do [Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) customizado ao seu cluster. O conjunto de daemons altera as configurações para todos os nós do trabalhador existentes e aplica as configurações a todos os novos nós do trabalhador que são fornecidos no cluster. Nenhum pods é afetado.
 
-Deve-se ter a [função de **Administrador** da plataforma do {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para que o cluster execute o initContainer privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
+Você deve ter a [função de serviço IAM do **Manager** {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para todos os namespaces para executar o `initContainer`privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
 {: note}
 
-1. Salve o daemonset a seguir em um arquivo denominado `worker-node-kernel-settings.yaml`. Na seção `spec.template.spec.initContainers`, inclua os campos e valores para os parâmetros `sysctl` que você deseja ajustar. Esse daemonset de exemplo muda o número máximo padrão de conexões permitidas no ambiente por meio da configuração `net.core.somaxconn` e do intervalo de portas efêmeras por meio da configuração `net.ipv4.ip_local_local_port_range`.
+1. Salve o daemon a seguir configurado em um arquivo denominado `worker-node-kernel-settings.yaml`. Na seção `spec.template.spec.initContainers`, inclua os campos e valores para os parâmetros `sysctl` que você deseja ajustar. Esse conjunto de daemons de exemplo muda o número máximo padrão de conexões que são permitidas no ambiente por meio da configuração `net.core.somaxconn` e do intervalo de portas efêmeras por meio da configuração `net.ipv4.ip_local_port_range`.
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: kernel-optimization
@@ -93,7 +97,7 @@ Deve-se ter a [função de **Administrador** da plataforma do {{site.data.keywor
     ```
     {: codeblock}
 
-2. Aplique o daemonset aos nós do trabalhador. As mudanças são aplicadas imediatamente.
+2. Aplique o conjunto de daemons aos seus nós do trabalhador. As mudanças são aplicadas imediatamente.
     ```
     kubectl apply -f worker-node-node-kernel-settings.yaml
     ```
@@ -103,13 +107,13 @@ Deve-se ter a [função de **Administrador** da plataforma do {{site.data.keywor
 
 Para reverter os parâmetros `sysctl` de seus nós do trabalhador para os valores padrão configurados pelo {{site.data.keyword.containerlong_notm}}:
 
-1. Exclua o daemonset. Os initContainers que aplicaram as configurações customizadas são removidos.
+1. Exclua o conjunto de daemon. Os `initContainers` que aplicaram as configurações customizadas são removidos.
     ```
     kubectl delete ds kernel-optimization
     ```
     {: pre}
 
-2. [Reinicialize todos os nós do trabalhador no cluster](cs_cli_reference.html#cs_worker_reboot). Os nós do trabalhador voltam on-line, com os valores padrão aplicados.
+2. [Reinicializar todos os nós do trabalhador no cluster](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). Os nós do trabalhador voltam on-line, com os valores padrão aplicados.
 
 <br />
 
@@ -120,11 +124,11 @@ Para reverter os parâmetros `sysctl` de seus nós do trabalhador para os valore
 Se você tiver demandas de carga de trabalho de desempenho específicas, será possível mudar as configurações padrão para os parâmetros `sysctl` do kernel do Linux em namespaces de rede de pod.
 {: shortdesc}
 
-Para otimizar as configurações do kernel para os pods de app, é possível inserir uma correção [initContainer ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) no YAML `pod/ds/rs/deployment` para cada implementação. O initContainer é incluído em cada implementação de app que está no namespace de rede do pod para o qual você deseja otimizar o desempenho.
+Para otimizar as configurações do kernel para os pods de app, é possível inserir uma correção [`initContainer ` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) no YAML `pod/ds/rs/deployment` para cada implementação. O `initContainer` é incluído em cada implementação de app que está no namespace de rede do pod para o qual você deseja otimizar o desempenho.
 
-Antes de iniciar, assegure-se de que você tenha a [função **Administrador** da plataforma do {{site.data.keyword.Bluemix_notm}}](cs_users.html#platform) IAM para o cluster para executar o initContainer privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
+Antes de iniciar, assegure-se de que você tenha a [ função de serviço **Gerenciador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para todos os namespaces para executar a amostra privilegiada `initContainer`. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
 
-1. Salve a correção de initContainer a seguir em um arquivo denominado `pod-patch.yaml` e inclua os campos e valores para os parâmetros `sysctl` que você deseja ajustar. Esse initContainer de exemplo muda o número máximo padrão de conexões permitidas no ambiente por meio da configuração `net.core.somaxconn` e do intervalo de portas efêmeras por meio da configuração `net.ipv4.ip_local_port_local_port_range`.
+1. Salve a correção `initContainer` a seguir em um arquivo denominado `pod-patch.yaml` e inclua os campos e valores para os parâmetros `sysctl` que você deseja ajustar. Este exemplo `initContainer` muda o número máximo padrão de conexões permitidas no ambiente por meio da configuração `net.core.somaxconn` e do intervalo de portas efêmeras por meio da configuração `net.ipv4.ip_local_port_range`.
     ```
     spec:
       template:
@@ -161,7 +165,7 @@ As configurações do provedor de métricas do seu cluster (`metrics-server` no 
 
 O pod do provedor de métricas também tem um contêiner `nanny` que escala as solicitações de recurso do contêiner principal `metrics-server` ou `heapster` e limites em resposta ao número de nós do trabalhador no cluster. É possível mudar os recursos padrão editando o configmap do provedor de métricas.
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Abra o YAML do configmap do provedor de métricas do cluster.
     *  Para `metrics-server`:

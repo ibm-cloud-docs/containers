@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -29,7 +33,7 @@ Como um administrador de cluster, você deseja controlar quais pods são mais cr
 
 Configurando a prioridade do pod, é possível ajudar a evitar que cargas de trabalho de prioridade mais baixa impactem cargas de trabalho críticas em seu cluster, especialmente nos casos em que o cluster começa a atingir a sua capacidade de recurso.
 
-Certifique-se de que você tenha [configurado o acesso de usuário adequado](cs_users.html#users) para seu cluster e, se aplicável, [políticas de segurança do pod](cs_psp.html#psp). Políticas de segurança de acesso e pod podem ajudar a evitar que usuários não confiáveis implementem pods de alta prioridade que evitam que outros pods sejam planejados.
+Certifique-se de que você tenha [configurado o acesso de usuário adequado](/docs/containers?topic=containers-users#users) para seu cluster e, se aplicável, [políticas de segurança do pod](/docs/containers?topic=containers-psp#psp). Políticas de segurança de acesso e pod podem ajudar a evitar que usuários não confiáveis implementem pods de alta prioridade que evitam que outros pods sejam planejados.
 {: tip}
 
 {: #priority_scheduling}
@@ -40,8 +44,9 @@ Se você não especificar uma prioridade para a implementação do pod, o padrã
 
 Para entender como a prioridade do pod e o planejador trabalham juntos, considere os cenários na figura a seguir. Deve-se colocar os pods priorizados nos nós do trabalhador com recursos disponíveis. Caso contrário, os pods de alta prioridade em seu cluster podem permanecer pendentes, ao mesmo tempo que os pods existentes são removidos, como no Cenário 3.
 
-_Figura: cenários de prioridade do pod_
-![Cenários de prioridade do pod](images/pod-priority.png)
+_ Figura: Cenários de Prioridade do Pod _
+<img src="images/pod-priority.png" width="500" alt="Pod priority scenarios" style="width:500px; border-style: none"/>
+
 1.  Três pods com prioridade alta, média e baixa estão pendentes de planejamento. O planejador localiza um nó do trabalhador disponível com espaço para todos os 3 pods e planeja-os em ordem de prioridade, com o pod de prioridade mais alta planejado primeiro.
 2.  Três pods com prioridade alta, média e baixa estão pendentes de planejamento. O planejador localiza um nó do trabalhador disponível, mas o nó do trabalhador tem recursos suficientes somente para suportar os pods de prioridade alta e média. O pod de baixa prioridade não está planejado e permanece pendente.
 3.  Dois pods com prioridade alta e média estão pendentes de planejamento. Existe um terceiro pod com baixa prioridade em um nó do trabalhador disponível. No entanto, o nó do trabalhador não tem recursos suficientes para planejar qualquer um dos pods pendentes. O planejador prioriza ou remove o pod de baixa prioridade, que retorna o pod para um estado pendente. Em seguida, o planejador tenta planejar o pod de alta prioridade. No entanto, o nó do trabalhador não tem recursos suficientes para planejar o pod de alta prioridade e, em vez disso, o planejador planeja o pod de prioridade média.
@@ -86,8 +91,9 @@ Para configurar a prioridade do pod, é necessário usar uma classe de prioridad
 {: shortdesc}
 
 Antes de iniciar:
-* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
-* [Crie](cs_clusters.html#clusters_ui) ou [atualize](cs_cluster_update.html#update) seu cluster para o Kubernetes versão 1.11 ou mais recente.
+* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* Assegure-se de que você tenha a [função de **Gravador** ou **Gerenciador** do serviço {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `default`.
+* [Crie](/docs/containers?topic=containers-clusters#clusters_ui) ou [atualize](/docs/containers?topic=containers-update#update) seu cluster para o Kubernetes versão 1.11 ou mais recente.
 
 Para usar uma classe de prioridade:
 
@@ -167,8 +173,9 @@ Designe uma classe de prioridade à sua especificação de pod para configurar a
 {: shortdesc}
 
 Antes de iniciar:
-* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
-* [Crie](cs_clusters.html#clusters_ui) ou [atualize](cs_cluster_update.html#update) seu cluster para o Kubernetes versão 1.11 ou mais recente.
+* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* Assegure-se de que você tenha [a função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) no namespace no qual deseja implementar os pods.
+* [Crie](/docs/containers?topic=containers-clusters#clusters_ui) ou [atualize](/docs/containers?topic=containers-update#update) seu cluster para o Kubernetes versão 1.11 ou mais recente.
 * [Entenda como o planejamento de prioridade funciona](#priority_scheduling), pois a prioridade pode priorizar os pods existentes e afetar como os recursos de seu cluster são consumidos.
 
 Para designar prioridade a seus pods:
@@ -199,18 +206,18 @@ Para designar prioridade a seus pods:
 3.  Em sua especificação de pod, inclua o campo `priorityClassName` com o nome da classe de prioridade que você recuperou na etapa anterior.
 
     ```yaml
-    apiVersion: apps/v1beta1
-    kind: Deployment
-    metadata:
-      name: ibmliberty
+    apiVersion: apps / v1
+    tipo: Implementação
+    metadados:
+      nome: ibmliberty
     spec:
-      replicas: 1
-      template:
-        metadata:
-          labels:
+      réplicas: 1
+      gabarito:
+        metadados:
+          etiquetas:
             app: ibmliberty
         spec:
-          containers:
+          Contentores:
           - name: ibmliberty
             image: registry.bluemix.net/ibmliberty:latest
             ports:

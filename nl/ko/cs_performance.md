@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -33,14 +37,14 @@ lastupdated: "2018-12-05"
 특정 성능 최적화 요구사항이 있는 경우, 작업자 노드의 Linux 커널 `sysctl` 매개변수에 대한 기본 설정을 변경할 수 있습니다.
 {: shortdesc}
 
-작업자 노드는 최적화된 커널 성능으로 자동 프로비저닝되지만, 사용자 정의 [Kubernetes `DaemonSet` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 오브젝트를 클러스터에 적용하여 기본 설정을 변경할 수 있습니다. DaemonSet은 모든 기존 작업자 노드의 설정을 변경하며 클러스터에서 프로비저닝되는 새 작업자 노드에 해당 설정을 적용합니다. 어떤 팟(Pod)도 영향을 받지 않습니다.
+작업자 노드는 최적화된 커널 성능으로 자동 프로비저닝되지만, 사용자 정의 [Kubernetes `DaemonSet` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 오브젝트를 클러스터에 적용하여 기본 설정을 변경할 수 있습니다. 디먼 세트는 모든 기존 작업자 노드의 설정을 변경하며 클러스터에서 프로비저닝되는 새 작업자 노드에 해당 설정을 적용합니다. 어떤 팟(Pod)도 영향을 받지 않습니다.
 
-권한 부여된 샘플 initContainer를 실행하려면 클러스터에 대해 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)을 보유하고 있어야 합니다. 배치를 위한 컨테이너가 초기화되면 권한이 삭제됩니다.
+권한 부여된 샘플 `initContainer`를 실행하려면 모든 네임스페이스에 대해 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)을 보유하고 있어야 합니다. 배치를 위한 컨테이너가 초기화되면 권한이 삭제됩니다.
 {: note}
 
-1. 이름이 `worker-node-kernel-settings.yaml`인 파일에 다음 DaemonSet을 저장하십시오. `spec.template.spec.initContainers` 섹션에서 튜닝하고자 하는 `sysctl` 매개변수의 필드와 값을 추가하십시오. 이 DaemonSet 예는 `net.core.somaxconn` 설정을 통해 환경에서 허용되는 기본 최대 연결 수를 변경하고, `net.ipv4.ip_local_port_range` 설정을 통해 임시 포트 범위를 변경합니다.
+1. 이름이 `worker-node-kernel-settings.yaml`인 파일에 다음 디먼 세트를 저장하십시오. `spec.template.spec.initContainers` 섹션에서 튜닝하고자 하는 `sysctl` 매개변수의 필드와 값을 추가하십시오. 이 디먼 세트 예는 `net.core.somaxconn` 설정을 통해 환경에서 허용되는 기본 최대 연결 수를 변경하고, `net.ipv4.ip_local_port_range` 설정을 통해 임시 포트 범위를 변경합니다.
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: kernel-optimization
@@ -93,7 +97,7 @@ lastupdated: "2018-12-05"
     ```
     {: codeblock}
 
-2. 작업자 노드에 DaemonSet을 적용하십시오. 변경사항은 즉시 적용됩니다.
+2. 작업자 노드에 디먼 세트를 적용하십시오. 변경사항은 즉시 적용됩니다.
     ```
     kubectl apply -f worker-node-kernel-settings.yaml
     ```
@@ -103,13 +107,13 @@ lastupdated: "2018-12-05"
 
 {{site.data.keyword.containerlong_notm}}에서 설정한 기본값으로 작업자 노드의 `sysctl` 매개변수를 되돌리려면 다음을 수행하십시오.
 
-1. DaemonSet을 삭제하십시오. 사용자 정의 설정을 적용한 initContainers가 제거됩니다.
+1. 디먼 세트를 삭제하십시오. 사용자 정의 설정을 적용한 `initContainers`가 제거됩니다.
     ```
     kubectl delete ds kernel-optimization
     ```
     {: pre}
 
-2. [클러스터의 모든 작업자 노드를 재부팅](cs_cli_reference.html#cs_worker_reboot)하십시오. 작업자 노드가 기본값이 적용되어 다시 온라인 상태가 됩니다.
+2. [클러스터의 모든 작업자 노드를 재부팅](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)하십시오. 작업자 노드가 기본값이 적용되어 다시 온라인 상태가 됩니다.
 
 <br />
 
@@ -120,11 +124,11 @@ lastupdated: "2018-12-05"
 특정 성능 워크로드 요구가 있는 경우 팟(Pod) 네트워크 네임스페이스의 Linux 커널 `sysctl` 매개변수에 대한 기본 설정을 변경할 수 있습니다.
 {: shortdesc}
 
-앱 팟(Pod)의 커널 설정을 최적화하기 위해 배치마다 [initContainer ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 패치를 `pod/ds/rs/deployment` YAML에 삽입할 수 있습니다. initContainer는 해당 성능의 최적화를 원하는 팟(Pod) 네트워크 네임스페이스에 있는 각 앱 배치에 추가됩니다.
+앱 팟(Pod)의 커널 설정을 최적화하기 위해 배치마다 [`initContainer ` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 패치를 `pod/ds/rs/deployment` YAML에 삽입할 수 있습니다. `initContainer`는 해당 성능의 최적화를 원하는 팟(Pod) 네트워크 네임스페이스에 있는 각 앱 배치에 추가됩니다.
 
-시작하기 전에, 권한 부여된 샘플 initContainer를 실행하려면 클러스터에 대해 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)을 보유하고 있는지 확인하십시오. 배치를 위한 컨테이너가 초기화되면 권한이 삭제됩니다.
+시작하기 전에, 권한 부여된 샘플 `initContainer`를 실행하려면 모든 네임스페이스에 대해 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)을 보유하고 있는지 확인하십시오. 배치를 위한 컨테이너가 초기화되면 권한이 삭제됩니다.
 
-1. 이름이 `pod-patch.yaml`인 파일에 다음의 initContainer 패치를 저장하고 튜닝할 `sysctl` 매개변수의 필드와 값을 추가하십시오. 이 initContainer 예는 `net.core.somaxconn` 설정을 통해 환경에서 허용되는 기본 최대 연결 수를 변경하고, `net.ipv4.ip_local_port_range` 설정을 통해 임시 포트 범위를 변경합니다.
+1. 이름이 `pod-patch.yaml`인 파일에 다음의 `initContainer` 패치를 저장하고 튜닝할 `sysctl` 매개변수의 필드와 값을 추가하십시오. 이 `initContainer` 예는 `net.core.somaxconn` 설정을 통해 환경에서 허용되는 기본 최대 연결 수를 변경하고, `net.ipv4.ip_local_port_range` 설정을 통해 임시 포트 범위를 변경합니다.
     ```
     spec:
       template:
@@ -161,7 +165,7 @@ lastupdated: "2018-12-05"
 
 메트릭 제공자 팟(Pod)에는 또한 `nanny` 컨테이너도 있는데, 이 컨테이너는 클러스터의 작업자 노드 수에 대한 응답으로 `metrics-server` 또는 `heapster` 기본 컨테이너의 리소스 요청 및 한계를 스케일링합니다. 메트릭 제공자의 configmap을 편집하여 기본 리소스를 변경할 수 있습니다.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  클러스터 메트릭 제공자 configmap YAML을 여십시오.
     *  `metrics-server`의 경우:

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -29,7 +33,7 @@ En tant qu'administrateur de cluster, vous souhaitez contrôler les pods essenti
 
 En définissant la priorité des pods, vous pouvez empêcher des charges de travail avec une priorité plus faible d'impacter des charges de travail essentielles dans votre cluster, notamment dans les cas où le cluster commence à atteindre la limite de capacité de ses ressources.
 
-Assurez-vous d'avoir [configuré l'accès utilisateur approprié](cs_users.html#users) pour votre cluster, et, le cas échéant, les [politiques de sécurité de pod](cs_psp.html#psp). L'accès et les politiques de sécurité de pod (PSP) peuvent empêcher des utilisateurs qui ne sont pas fiables de déployer des pods de priorité élevée empêchant la planification des autres pods.
+Assurez-vous d'avoir [configuré l'accès utilisateur approprié](/docs/containers?topic=containers-users#users) pour votre cluster, et, le cas échéant, les [politiques de sécurité de pod](/docs/containers?topic=containers-psp#psp). L'accès et les politiques de sécurité de pod (PSP) peuvent empêcher des utilisateurs qui ne sont pas fiables de déployer des pods de priorité élevée empêchant la planification des autres pods.
 {: tip}
 
 {: #priority_scheduling}
@@ -38,10 +42,11 @@ En général, les pods en attente ayant une priorité plus élevée sont planifi
 
 Si vous n'indiquez pas de priorité pour le déploiement de vos pods, la valeur par défaut correspond à la classe de priorité définie par `globalDefault`. Si vous n'avez pas de classe de priorité `globalDefault`, la priorité par défaut pour tous les pods est zéro (`0`). Par défaut, {{site.data.keyword.containerlong_notm}} ne définit pas de classe `globalDefault`, par conséquent, la priorité par défaut des pods est zéro.
 
-Pour comprendre comment s'articulent la priorité des pods avec le planificateur, considérez les scénarios illustrés dans la figure suivante. Vous devez placer les pods dont la priorité est définie sur des noeuds worker avec des ressources disponibles. Autrement, les pods de priorité élevée dans votre cluster peuvent rester en attente, alors que des pods existants sont retirés au même moment, comme dans le scénario 3.
+Pour comprendre comment s'articule la priorité des pods avec le planificateur, considérez les scénarios illustrés dans la figure suivante. Vous devez placer les pods dont la priorité est définie sur des noeuds worker avec des ressources disponibles. Autrement, les pods de priorité élevée dans votre cluster peuvent rester en attente, alors que des pods existants sont retirés au même moment, comme dans le scénario 3.
 
 _Figure : Scénarios illustrant la priorité des pods_
-![Scénarios illustrant la priorité des pods](images/pod-priority.png)
+<img src="images/pod-priority.png" width="500" alt="Scénarios illustrant la priorité des pods" style="width:500px; border-style: none"/>
+
 1.  Trois pods avec une priorité élevée, moyenne et faible sont en attente de planification. Le planificateur trouve un noeud worker disposant d'assez d'espace pour les trois pods et planifie ces pods par ordre de priorité, en planifiant en premier le pod dont la priorité est la plus élevée.
 2.  Trois pods avec une priorité élevée, moyenne et faible sont en attente de planification. Le planificateur trouve un noeud worker disponible mais ce noeud n'a pas assez de ressources pour prendre en charge les pods avec une priorité élevée ou moyenne. Le pod de priorité faible n'est pas planifié et reste en attente.
 3.  Deux pods avec une priorité élevée et moyenne sont en attente de planification. Il existe déjà un troisième pod avec une priorité faible sur un noeud worker disponible. Cependant, le noeud worker ne dispose pas de ressources suffisantes pour planifier les pods en attente. Le planificateur préempte, ou retire, le pod de faible priorité, qui repasse alors à l'état en attente. Ensuite, le planificateur tente de planifier le pod avec une priorité élevée. Cependant, le noeud worker ne dispose pas de ressources suffisantes pour planifier le pod de priorité élevée et le planificateur planifie à la place le pod avec une priorité moyenne.
@@ -52,7 +57,7 @@ _Figure : Scénarios illustrant la priorité des pods_
 Non. Si vous ne souhaitez pas utiliser la priorité de pod, ne définissez pas de classe `globalDefault` ou ajoutez une classe de priorité dans les déploiements de vos pods. Tous les pods prennent la valeur zéro, sauf les pods essentiels pour le cluster qu'IBM déploie avec les [classes de priorité par défaut](#default_priority_class). Comme la priorité des pods est relative, cette configuration de base garantit que les pods essentiels pour le cluster sont prioritaires pour les ressources et planifie tous les autres pods suivant les règles de planification existantes en vigueur.
 
 **Comment les quotas de ressources affectent la priorité d'un pod ?**</br>
-Vous pouvez utiliser la priorité de pod en combinaison avec les quotas de ressources, notamment des [étendues de quotas (quota scopes) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) pour les clusters qui exécutent Kubernetes 1.12 ou version ultérieure. Avec les étendues de quotas, vous pouvez configurer vos quotas de ressources en fonction de la priorité des pods. Ainsi, les pods de priorité plus élevée consomment des ressources système limitées par le quota de ressources avant les pods de priorité plus faible.
+Vous pouvez utiliser la priorité de pod en combinaison avec les quotas de ressources, notamment des [portées de quotas (quota scopes) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) pour les clusters qui exécutent Kubernetes 1.12 ou version ultérieure. Avec les portées de quotas, vous pouvez configurer vos quotas de ressources en fonction de la priorité des pods. Ainsi, les pods de priorité plus élevée consomment des ressources système limitées par le quota de ressources avant les pods de priorité plus faible.
 
 ## Description des classes de priorité par défaut
 {: #default_priority_class}
@@ -86,8 +91,9 @@ Pour définir la priorité d'un pod, vous devez utiliser une classe de priorité
 {: shortdesc}
 
 Avant de commencer :
-* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
-* [Créez](cs_clusters.html#clusters_ui) ou [mettez à jour](cs_cluster_update.html#update) votre cluster avec Kubernetes version 1.11 ou ultérieure.
+* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* Vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `default`.
+* [Créez](/docs/containers?topic=containers-clusters#clusters_ui) ou [mettez à jour](/docs/containers?topic=containers-update#update) votre cluster avec Kubernetes version 1.11 ou ultérieure.
 
 Pour utiliser une classe de priorité :
 
@@ -167,8 +173,9 @@ Affectez une classe de priorité à la spécification de votre pod pour définir
 {: shortdesc}
 
 Avant de commencer :
-* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
-* [Créez](cs_clusters.html#clusters_ui) ou [mettez à jour](cs_cluster_update.html#update) votre cluster avec Kubernetes version 1.11 ou ultérieure.
+* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* Vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom dans lequel vous souhaitez déployer les pods.
+* [Créez](/docs/containers?topic=containers-clusters#clusters_ui) ou [mettez à jour](/docs/containers?topic=containers-update#update) votre cluster avec Kubernetes version 1.11 ou ultérieure.
 * [Familiarisez-vous avec le fonctionnement de la planification des priorités](#priority_scheduling), car la priorité peut préempter des pods existants et affecter le mode de consommation des ressources de votre cluster.
 
 Pour affecter une priorité à vos pods :
@@ -199,7 +206,7 @@ Pour affecter une priorité à vos pods :
 3.  Dans votre spécification de pod, ajoutez la zone `priorityClassName` avec le nom de la classe de priorité que vous avez obtenue à l'étape précédente.
 
     ```yaml
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty

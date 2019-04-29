@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -20,7 +24,6 @@ lastupdated: "2018-12-05"
 
 
 
-
 # {{site.data.keyword.cloud_notm}} 的医疗保健用例
 {: #cs_uc_health}
 
@@ -31,15 +34,17 @@ lastupdated: "2018-12-05"
 {: #uc_migrate}
 
 医疗保健提供者的 IT 主管拥有内部部署的业务报告和患者系统。这些系统的功能增强周期长，因而导致患者服务水平停滞不前。
+{: shortdesc}
 
 为什么选择 {{site.data.keyword.cloud_notm}}：为了改善患者服务，提供者希望通过 {{site.data.keyword.containerlong_notm}} 和 {{site.data.keyword.contdelivery_full}} 来减少 IT 支出并加速开发，所有这些工作全部在一个安全平台上完成。提供者的 SaaS 系统用于支持患者记录系统和业务报告应用程序，使用频率高，需要频繁更新。然而，内部部署环境阻碍了敏捷开发工作。提供者还希望能应对不断上升的员工成本，并降低预算。
 
-关键技术：    
-* [适应各种 CPU、内存和存储器需求的集群](cs_clusters_planning.html#shared_dedicated_node)
-* [水平缩放](cs_app.html#highly_available_apps)
-* [容器安全性和隔离](cs_secure.html#security)
+关键技术：
+* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [水平缩放](/docs/containers?topic=containers-app#highly_available_apps)
+* [容器安全性和隔离](/docs/containers?topic=containers-security#security)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [使用 {{site.data.keyword.appid_short_notm}} 而不更改应用程序代码进行登录的功能](/docs/services/appid?topic=appid-getting-started)
 
 首先，他们对自己的 SaaS 系统容器化，然后将其放入云中。从第一步开始，他们从专用数据中心内构建过度的硬件转向可定制计算，从而减少了 IT 运营、维护和能源成本。为了托管 SaaS 站点，他们轻松设计了 Kubernetes 集群，以适应自己的 CPU、RAM 和存储器需求。降低员工成本的另一个因素是由 IBM 来管理 Kubernetes，这样提供者就可以集中精力交付更好的客户服务。
 
@@ -64,12 +69,13 @@ lastupdated: "2018-12-05"
 
 **解决方案模型**
 
-随需应变计算、存储和 IO 服务在公共云中运行，可安全地对内部部署企业资产进行访问。实施 CI/CD 过程以及 IBM Garage Method 的其他部件可大幅缩短交付周期。
+随需应变计算、存储和 I/O 服务在公共云中运行，可安全地对内部部署企业资产进行访问。实施 CI/CD 过程以及 IBM Garage Method 的其他部件可大幅缩短交付周期。
 
 **步骤 1：保护计算平台**
 * 用于管理高敏感性患者数据的应用程序可以在支持可信计算的裸机上运行的 {{site.data.keyword.containerlong_notm}} 上重新托管。
 * 可信计算可以验证底层硬件是否受到篡改。
 * 通过该核心，漏洞顾问程序可提供针对已知恶意软件的映像、策略、容器、打包扫描和漏洞扫描。
+* 通过简单的 Ingress 注释，以一致的方式对服务和 API 强制实施策略驱动的认证。通过使用 {{site.data.keyword.appid_short_notm}} 和声明式安全性，可以确保用户认证和令牌验证。
 
 **步骤 2：提升并转换**
 * 将虚拟机映像迁移到在公共云的 {{site.data.keyword.containerlong_notm}} 中运行的容器映像。
@@ -88,6 +94,7 @@ lastupdated: "2018-12-05"
 * {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
+* {{site.data.keyword.appid_short_notm}}
 
 对于最敏感的工作负载，可在 {{site.data.keyword.containerlong_notm}} for Bare Metal 中托管集群。它提供了一个可信计算平台，可自动扫描硬件和运行时代码以查找漏洞。通过使用业界标准容器技术，应用程序最初可在 {{site.data.keyword.containerlong_notm}} 上迅速重新托管，而无需重大的体系结构更改。此更改即时提供了可扩展性的优点。
 
@@ -114,12 +121,12 @@ CI/CD 过程本身的大部分内容通过云中的 IBM Continuous Delivery 服�
 
 为什么选择 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 可交付安全计算，用于在开放式平台上托管敏感数据和高性能数据处理。该全球平台在就近区域中进行托管。因此，它与当地法规密切相关，可帮助树立患者和研究人员的信心，让他们相信自己的数据在本地受到保护，并且对改进医疗成效能起到重要作用。
 
-关键技术：    
-* [智能安排按需放置工作负载](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
-* [用于跨应用程序持久存储和同步数据的 {{site.data.keyword.cloudant}}](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [工作负载漏洞扫描和隔离](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+关键技术：
+* [智能安排按需放置工作负载](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [用于跨应用程序持久存储和同步数据的 {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [工作负载漏洞扫描和隔离](/docs/services/Registry?topic=va-va_index#va_index)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}}，用于清理数据并通知研究人员关于数据结构更改](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}}，用于清理数据并通知研究人员关于数据结构更改](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
 
 **背景：为非盈利性研究机构安全托管和共享疾病数据**
 
@@ -181,7 +188,7 @@ CI/CD 过程本身的大部分内容通过云中的 IBM Continuous Delivery 服�
 
 **步骤 1：使用微服务对应用程序容器化**
 * 使用 IBM 的 Node.js 入门模板工具包开始进行开发。
-* 基于应用程序的功能性区域及其依赖关系，将应用程序构建成 {{site.data.keyword.containerlong_notm}} 中的一组协作微服务。
+* 基于应用程序的功能性区域及其依赖关系，将应用程序构造成 {{site.data.keyword.containerlong_notm}} 中的一组协作微服务。
 * 将研究应用程序部署到 {{site.data.keyword.containerlong_notm}} 中的容器。
 * 通过 Kubernetes 提供标准化的 DevOps 仪表板。
 * 对不频繁运行的批处理和其他研究工作负载的计算启用按需缩放。

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # ネットワーク・ポリシーによるトラフィックの制御
 {: #network_policies}
 
@@ -32,7 +37,7 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
   [Kubernetes ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): これらのポリシーは、ポッドが他のポッドおよび外部エンドポイントと通信する方法を指定します。 Kubernetes バージョン 1.8 以降では、着信ネットワーク・トラフィックと発信ネットワーク・トラフィックの両方を、プロトコル、ポート、およびソースまたは宛先 IP アドレスに基づいて許可またはブロックできます。 トラフィックは、ポッドおよび名前空間ラベルに基づいてフィルタリングすることもできます。 Kubernetes ネットワーク・ポリシーは、`kubectl` コマンドまたは Kubernetes API を使用して適用されます。 これらのポリシーは、適用されると自動的に Calico ネットワーク・ポリシーに変換され、Calico によってこれらのポリシーが実施されます。
   </li>
   <li>
-  Kubernetes バージョン [1.10 以降のクラスター ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) または [1.9 以前のクラスター ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) 用の Calico ネットワーク・ポリシー: これらのポリシーは Kubernetes ネットワーク・ポリシーのスーパーセットであり、`calicoctl` コマンドを使用して適用されます。 Calico ポリシーは、以下の機能を追加します。
+  [Calico ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy): これらのポリシーは Kubernetes ネットワーク・ポリシーのスーパーセットであり、`calicoctl` コマンドを使用して適用されます。Calico ポリシーは、以下の機能を追加します。
     <ul>
     <li>Kubernetes ポッドのソースまたは宛先 IP アドレスや CIDR に関係なく、特定のネットワーク・インターフェース上のネットワーク・トラフィックを許可またはブロックします。</li>
     <li>複数の名前空間にまたがるポッドのネットワーク・トラフィックを許可またはブロックします。</li>
@@ -43,7 +48,7 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
 
 Calico は、Kubernetes ワーカー・ノードで Linux Iptables 規則をセットアップすることにより、Calico ポリシーに自動的に変換される Kubernetes ネットワーク・ポリシーを含め、これらのポリシーを実施します。 iptables 規則はワーカー・ノードのファイアウォールとして機能し、ネットワーク・トラフィックがターゲット・リソースに転送されるために満たさなければならない特性を定義します。
 
-Ingress およびロード・バランサー・サービスを使用するには、Calico および Kubernetes ポリシーを使用してクラスターの発信/着信ネットワーク・トラフィックを管理します。 IBM Cloud インフラストラクチャー (SoftLayer) の[セキュリティー・グループ](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups)は使用しないでください。 IBM Cloud インフラストラクチャー (SoftLayer) のセキュリティー・グループは、単一仮想サーバーのネットワーク・インターフェースに適用され、ハイパーバイザー・レベルでトラフィックをフィルタリングします。 しかし、セキュリティー・グループは、{{site.data.keyword.containerlong_notm}} がロード・バランサー の IP アドレスの管理に使用する VRRP プロトコルをサポートしていません。 ロード・バランサーの IP を管理する VRRP プロトコルが存在しない場合、Ingress サービスおよびロード・バランサー・サービスは正しく機能しません。
+Ingress およびロード・バランサー・サービスを使用するには、Calico および Kubernetes ポリシーを使用してクラスターの発信/着信ネットワーク・トラフィックを管理します。 IBM Cloud インフラストラクチャー (SoftLayer) の[セキュリティー・グループ](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups)は使用しないでください。 IBM Cloud インフラストラクチャー (SoftLayer) のセキュリティー・グループは、単一仮想サーバーのネットワーク・インターフェースに適用され、ハイパーバイザー・レベルでトラフィックをフィルタリングします。 しかし、セキュリティー・グループは、{{site.data.keyword.containerlong_notm}} がロード・バランサー の IP アドレスの管理に使用する VRRP プロトコルをサポートしていません。 ロード・バランサーの IP を管理する VRRP プロトコルが存在しない場合、Ingress サービスおよびロード・バランサー・サービスは正しく機能しません。
 {: tip}
 
 <br />
@@ -52,7 +57,7 @@ Ingress およびロード・バランサー・サービスを使用するには
 ## デフォルトの Calico および Kubernetes ネットワーク・ポリシー
 {: #default_policy}
 
-パブリック VLAN を持つクラスターが作成されると、各ワーカー・ノードとそのパブリック・ネットワーク・インターフェースに対して、`ibm.role: worker_public` ラベルを持つ HostEndpoint リソースが自動的に作成されます。 ワーカー・ノードのパブリック・ネットワーク・インターフェースを保護するために、デフォルトの Calico ポリシーが `ibm.role: worker_public` ラベルを持つすべてのホスト・エンドポイントに適用されます。
+パブリック VLAN を持つクラスターが作成されると、各ワーカー・ノードとそのパブリック・ネットワーク・インターフェースに対して、`ibm.role: worker_public` ラベルを持つ `HostEndpoint` リソースが自動的に作成されます。 ワーカー・ノードのパブリック・ネットワーク・インターフェースを保護するために、デフォルトの Calico ポリシーが `ibm.role: worker_public` ラベルを持つすべてのホスト・エンドポイントに適用されます。
 {:shortdesc}
 
 これらのデフォルトの Calico ポリシーは、すべてのアウトバウンド・ネットワーク・トラフィックを許可し、Kubernetes NodePort、LoadBalancer、Ingress サービスなどの特定のクラスター・コンポーネントへのインバウンド・トラフィックを許可します。 デフォルト・ポリシーで指定されていない、インターネットからワーカー・ノードへのその他のインバウンド・ネットワーク・トラフィックはすべてブロックされます。 デフォルト・ポリシーはポッド間トラフィックに影響しません。
@@ -95,7 +100,7 @@ Ingress およびロード・バランサー・サービスを使用するには
   </tbody>
 </table>
 
-Kubernetes バージョン 1.10 以降のクラスターでは、Kubernetes ダッシュボードへのアクセスを制限するデフォルトの Kubernetes ポリシーも作成されます。 Kubernetes ポリシーはホスト・エンドポイントには適用されませんが、代わりに `kube-dashboard` ポッドに適用されます。 このポリシーは、プライベート VLAN にのみ接続されたクラスターと、パブリック VLAN およびプライベート VLAN に接続されたクラスターに適用されます。
+Kubernetes バージョン 1.10 以降のクラスターでは、Kubernetes ダッシュボードへのアクセスを制限するデフォルトの Kubernetes ポリシーも作成されます。Kubernetes ポリシーはホスト・エンドポイントには適用されませんが、代わりに `kube-dashboard` ポッドに適用されます。 このポリシーは、プライベート VLAN にのみ接続されたクラスターと、パブリック VLAN およびプライベート VLAN に接続されたクラスターに適用されます。
 
 <table>
 <caption>各クラスターのデフォルトの Kubernetes ポリシー</caption>
@@ -105,7 +110,7 @@ Kubernetes バージョン 1.10 以降のクラスターでは、Kubernetes ダ�
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>Kubernetes v1.10 以降でのみ</b>、<code>kube-system</code> 名前空間で提供されます。すべてのポッドに対し、Kubernetes ダッシュボードへのアクセスをブロックします。 このポリシーは、ダッシュボードへの {{site.data.keyword.Bluemix_notm}} コンソールからのアクセス、または <code>kubectl proxy</code> を使用したアクセスには影響しません。 ダッシュボードへのアクセスを必要とするポッドの場合は、<code>kubernetes-dashboard-policy: allow</code> ラベルを持つ名前空間にそのポッドをデプロイします。</td>
+  <td>Kubernetes v1.10 以降でのみ、<code>kube-system</code> 名前空間で提供されます。すべてのポッドに対し、Kubernetes ダッシュボードへのアクセスをブロックします。 このポリシーは、ダッシュボードへの {{site.data.keyword.Bluemix_notm}} コンソールからのアクセス、または <code>kubectl proxy</code> を使用したアクセスには影響しません。 ダッシュボードへのアクセスを必要とするポッドの場合は、<code>kubernetes-dashboard-policy: allow</code> ラベルを持つ名前空間にそのポッドをデプロイします。</td>
  </tr>
 </tbody>
 </table>
@@ -119,31 +124,14 @@ Kubernetes バージョン 1.10 以降のクラスターでは、Kubernetes ダ�
 Calico ポリシーを表示、管理、および追加するには、Calico CLI をインストールして構成します。
 {:shortdesc}
 
-CLI 構成およびポリシーに関する Calico バージョンの互換性は、クラスターの Kubernetes バージョンに応じて異なります。 Calico CLI をインストールして構成するには、クラスター・バージョンに応じて以下のいずれかのリンクをクリックします。
-
-* [Kubernetes バージョン 1.10 以降のクラスター](#1.10_install)
-* [Kubernetes バージョン 1.9 以前のクラスター (非推奨)](#1.9_install)
-
-Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラスターを更新する前に、[Calico v3 への更新の準備](cs_versions.html#110_calicov3)を確認してください。
-{: tip}
-
-### Kubernetes バージョン 1.10 以降を実行しているクラスター用のバージョン 3.3.1 の Calico CLI のインストールおよび構成
-{: #1.10_install}
-
-1. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。 `ibmcloud ks cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。 このダウンロードには、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーも含まれています。
+1. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 `ibmcloud ks cluster-config` コマンドに `--admin` オプションと `--network` オプションを指定します。`--admin` は、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーをダウンロードします。 `--network` は、すべての Calico コマンドを実行するための Calico 構成ファイルをダウンロードします。
 
   ```
-  ibmcloud ks cluster-config <cluster_name> --admin
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
   ```
   {: pre}
 
-2. Calico 構成ファイルをダウンロードして、すべての Calico コマンドを実行します。
-    ```
-    ibmcloud ks cluster-config <cluster_name_or_ID> --network
-    ```
-    {: pre}
-
-3. OSX と Linux のユーザーは、以下の手順を実行してください。
+3. OS X と Linux のユーザーは、以下の手順を実行してください。
     1. `/etc/calico` ディレクトリーを作成します。
         ```
         sudo mkdir /etc/calico
@@ -158,10 +146,10 @@ Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラ�
 
 4. [Calico CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/projectcalico/calicoctl/releases/tag/v3.3.1) をダウンロードします。
 
-    OSX を使用している場合は、`-darwin-amd64` バージョンをダウンロードします。 Windows を使用している場合、Calico CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。 ファイルを必ず `calicoctl.exe` として保存してください。
+    OS X を使用している場合は、`-darwin-amd64` バージョンをダウンロードします。 Windows を使用している場合、Calico CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。 ファイルを必ず `calicoctl.exe` として保存してください。
     {: tip}
 
-5. OSX と Linux のユーザーは、以下の手順を実行してください。
+5. OS X と Linux のユーザーは、以下の手順を実行してください。
     1. 実行可能ファイルを _/usr/local/bin_ ディレクトリーに移動します。
         - Linux:
 
@@ -184,7 +172,7 @@ Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラ�
         ```
         {: pre}
 
-6. 企業ネットワーク・ポリシーがプロキシーまたはファイアウォールを使用して、ローカル・システムからパブリック・エンドポイントへのアクセスを禁止している場合は、[Calico コマンドに対して TCP アクセスを許可](cs_firewall.html#firewall)します。
+6. 企業ネットワーク・ポリシーがプロキシーまたはファイアウォールを使用して、ローカル・システムからパブリック・エンドポイントへのアクセスを禁止している場合は、[Calico コマンドに対して TCP アクセスを許可](/docs/containers?topic=containers-firewall#firewall)します。
 
 7. Calico 構成が正常に動作していることを確認します。
 
@@ -212,160 +200,6 @@ Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラ�
       ```
       {: screen}
 
-
-### Kubernetes バージョン 1.9 以前を実行しているクラスター用のバージョン 1.6.3 の Calico CLI のインストールおよび構成 (非推奨)
-{: #1.9_install}
-
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
-{: note}
-
-1. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。 `ibmcloud ks cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。 このダウンロードには、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーも含まれています。
-
-  ```
-  ibmcloud ks cluster-config <cluster_name> --admin
-  ```
-  {: pre}
-
-
-2. [Calico CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.3) をダウンロードします。
-
-    OSX を使用している場合は、`-darwin-amd64` バージョンをダウンロードします。 Windows を使用している場合、Calico CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
-    {: tip}
-
-3. OSX と Linux のユーザーは、以下の手順を実行してください。
-    1. 実行可能ファイルを _/usr/local/bin_ ディレクトリーに移動します。
-        - Linux:
-          ```
-          mv filepath/calicoctl /usr/local/bin/calicoctl
-          ```
-          {: pre}
-
-        - OS X:
-          ```
-          mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
-          ```
-          {: pre}
-
-    2. ファイルを実行可能ファイルにします。
-        ```
-        chmod +x /usr/local/bin/calicoctl
-        ```
-        {: pre}
-
-4. Calico CLI クライアントのバージョンを調べて、`calicoctl` コマンドが正常に実行されたことを確認します。
-    ```
-    calicoctl version
-    ```
-    {: pre}
-
-5. 企業ネットワーク・ポリシーがプロキシーまたはファイアウォールを使用して、ローカル・システムからパブリック・エンドポイントへのアクセスを禁止している場合は、Calico コマンドに対して TCP アクセスを許可する手順について、[ファイアウォール保護下での `calicoctl` コマンドの実行](cs_firewall.html#firewall)を参照してください。
-
-6. Linux および OS X の場合、`/etc/calico` ディレクトリーを作成します。 Windows の場合は、どのディレクトリーを使用しても構いません。
-    ```
-    sudo mkdir -p /etc/calico/
-    ```
-    {: pre}
-
-7. `calicoctl.cfg` ファイルを作成します。
-    - Linux および OS X:
-      ```
-      sudo vi /etc/calico/calicoctl.cfg
-      ```
-      {: pre}
-
-    - Windows の場合: テキスト・エディターでファイルを作成します。
-
-8. <code>calicoctl.cfg</code> ファイルに次の情報を入力します。
-
-    ```
-    apiVersion: v1
-    kind: calicoApiConfig
-    metadata:
-    spec:
-        etcdEndpoints: https://<ETCD_HOST>:<ETCD_PORT>
-        etcdKeyFile: <CERTS_DIR>/admin-key.pem
-        etcdCertFile: <CERTS_DIR>/admin.pem
-        etcdCACertFile: <CERTS_DIR>/<ca-*pem_file>
-    ```
-    {: codeblock}
-
-    1. `<ETCD_HOST>` と `<ETCD_PORT>` を取得します。
-        1. `cluster-info` 構成マップから Calico 構成値を取得します。
-            ```
-            kubectl get cm -n kube-system cluster-info -o yaml
-            ```
-            {: pre}
-
-        2. `data` セクションで、`etcd_host` と `etcd_port` の値を見つけます。
-
-    2. `<CERTS_DIR>` (Kubernetes 証明書をダウンロードしたディレクトリー) を取得します。
-
-        - Linux および OS X:
-          ```
-          dirname $KUBECONFIG
-          ```
-          {: pre}
-
-          出力例:
-          ```
-          /home/sysadmin/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/
-          ```
-          {: screen}
-
-        - Windows:
-          ```
-          ECHO %KUBECONFIG%
-          ```
-          {: pre}
-
-          出力例:
-          ```
-          C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
-          ```
-          {: screen}
-
-        ディレクトリー・パスを取得するには、出力の最後からファイル名 `kube-config-prod-<zone>-<cluster_name>.yml` を除きます。
-
-    3. `ca-*pem_file` を取得します。
-
-        - Linux および OS X:
-          ```
-          ls `dirname $KUBECONFIG` | grep "ca-"
-          ```
-          {: pre}
-
-        - Windows:
-          1. 最後のステップで取得したディレクトリーを開きます。
-              ```
-              C:\Users\<user>\.bluemix\plugins\container-service\<cluster_name>-admin\
-              ```
-              {: pre}
-
-          2. `ca-*pem_file` ファイルを見つけます。
-
-    4. Calico 構成が正常に動作していることを確認します。
-
-        - Linux および OS X:
-          ```
-          calicoctl get nodes
-          ```
-          {: pre}
-
-        - Windows: `--config` フラグを使用して、作成したネットワーク構成ファイルを指します。 `calicoctl` コマンドを実行するたびに、このフラグを含めます。
-          ```
-          calicoctl get nodes --config=filepath/calicoctl.cfg
-          ```
-          {: pre}
-
-          出力:
-          ```
-          NAME
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w3.cloud.ibm
-          ```
-          {: screen}
-
 <br />
 
 
@@ -377,22 +211,14 @@ Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日に
 
 開始前に、以下のことを行います。
 1. [Calico CLI をインストールして構成します。](#cli_install)
-2. [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。 `ibmcloud ks cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。 このダウンロードには、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーも含まれています。
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
+2. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 `ibmcloud ks cluster-config` コマンドに `--admin` オプションと `--network` オプションを指定します。`--admin` は、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーをダウンロードします。 `--network` は、すべての Calico コマンドを実行するための Calico 構成ファイルをダウンロードします。
 
-CLI 構成およびポリシーに関する Calico バージョンの互換性は、クラスターの Kubernetes バージョンに応じて異なります。 Calico CLI をインストールして構成するには、クラスター・バージョンに応じて以下のいずれかのリンクをクリックします。
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
-* [Kubernetes バージョン 1.10 以降のクラスター](#1.10_examine_policies)
-* [Kubernetes バージョン 1.9 以前のクラスター (非推奨)](#1.9_examine_policies)
-
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。 Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラスターを更新する前に、[Calico v3 への更新の準備](cs_versions.html#110_calicov3)を確認してください。
-{: note}
-
-### Kubernetes バージョン 1.10 以降を実行しているクラスター内のネットワーク・ポリシーの表示
-{: #1.10_examine_policies}
+**クラスターのネットワーク・ポリシーの表示**:
 
 Linux および Mac ユーザーは、`calicoctl` コマンドに `--config=filepath/calicoctl.cfg` フラグを含める必要はありません。
 {: tip}
@@ -432,43 +258,6 @@ Linux および Mac ユーザーは、`calicoctl` コマンドに `--config=file
     ```
     {: pre}
 
-### Kubernetes バージョン 1.9 以前を実行しているクラスター内のネットワーク・ポリシーの表示 (非推奨)
-{: #1.9_examine_policies}
-
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
-{: note}
-
-Linux ユーザーは、`calicoctl` コマンドに `--config=filepath/calicoctl.cfg` フラグを含める必要はありません。
-{: tip}
-
-1. Calico ホスト・エンドポイントを表示します。
-
-    ```
-    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-2. そのクラスター用に作成されたすべての Calico および Kubernetes ネットワーク・ポリシーを表示します。 このリストにはどのポッドやホストにもまだ適用されていない可能性のあるポリシーも含まれています。 ネットワーク・ポリシーを適用するには、Calico ネットワーク・ポリシーで定義されたセレクターと一致する Kubernetes リソースを見つける必要があります。
-
-    ```
-    calicoctl get policy -o wide --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-3. ネットワーク・ポリシーの詳細を表示します。
-
-    ```
-    calicoctl get policy -o yaml <policy_name> --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-4. そのクラスター用のすべてのネットワーク・ポリシーの詳細を表示します。
-
-    ```
-    calicoctl get policy -o yaml --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
 <br />
 
 
@@ -480,60 +269,19 @@ Linux ユーザーは、`calicoctl` コマンドに `--config=filepath/calicoctl
 
 Kubernetes ネットワーク・ポリシーを作成するには、[Kubernetes ネットワーク・ポリシーの資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/network-policies/) を参照してください。
 
-Calico ポリシーを作成するには、以下の手順を実行します。 CLI 構成およびポリシーに関する Calico バージョンの互換性は、クラスターの Kubernetes バージョンに応じて異なります。 クラスターのバージョンに応じて、以下のいずれかのリンクをクリックします。
+Calico ポリシーを作成するには、以下の手順を実行します。
 
-* [Kubernetes バージョン 1.10 以降のクラスター](#1.10_create_new)
-* [Kubernetes バージョン 1.9 以前のクラスター (非推奨)](#1.9_create_new)
-
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。 Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラスターを更新する前に、[Calico v3 への更新の準備](cs_versions.html#110_calicov3)を確認してください。
-{: tip}
-
-### Kubernetes バージョン 1.10 以降を実行しているクラスターでの Calico ポリシーの追加
-{: #1.10_create_new}
-
-開始前に、以下のことを行います。
 1. [Calico CLI をインストールして構成します。](#cli_install)
-2. [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。 `ibmcloud ks cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。 このダウンロードには、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーも含まれています。
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
+2. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 `ibmcloud ks cluster-config` コマンドに `--admin` オプションと `--network` オプションを指定します。`--admin` は、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーをダウンロードします。 `--network` は、すべての Calico コマンドを実行するための Calico 構成ファイルをダウンロードします。
 
-1. 構成スクリプト (`.yaml`) を作成して、Calico [ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) または[グローバル・ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) を定義します。 これらの構成ファイルにはどのポッド、名前空間、またはホストにこれらのポリシーを適用するかを説明するセレクターが含まれます。 独自のポリシーを作成するときには、こちらの[サンプル Calico ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) を参考にしてください。 Kubernetes バージョン 1.10 以降のクラスターでは Calico v3 ポリシー構文を使用する必要があることに注意してください。
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
-2. ポリシーをクラスターに適用します。
-    - Linux および OS X:
+3. 構成スクリプト (`.yaml`) を作成して、Calico [ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) または[グローバル・ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) を定義します。 これらの構成ファイルにはどのポッド、名前空間、またはホストにこれらのポリシーを適用するかを説明するセレクターが含まれます。 独自のポリシーを作成するときには、こちらの[サンプル Calico ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) を参考にしてください。 Kubernetes バージョン 1.10 以降のクラスターでは Calico v3 ポリシー構文を使用する必要があることに注意してください。
 
-      ```
-      calicoctl apply -f policy.yaml
-      ```
-      {: pre}
-
-    - Windows:
-
-      ```
-      calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
-
-### Kubernetes バージョン 1.9 以前を実行しているクラスターでの Calico ポリシーの追加 (非推奨)
-{: #1.9_create_new}
-
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
-{: note}
-
-開始前に、以下のことを行います。
-1. [Calico CLI をインストールして構成します。](#cli_install)
-2. [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。 `ibmcloud ks cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。 このダウンロードには、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーも含まれています。
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
-
-1. 構成スクリプト (`.yaml`) を作成して、独自の [Calico ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) を定義します。 これらの構成ファイルにはどのポッド、名前空間、またはホストにこれらのポリシーを適用するかを説明するセレクターが含まれます。 独自のポリシーを作成するときには、こちらの[サンプル Calico ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) を参考にしてください。 Kubernetes バージョン 1.9 以前のクラスターでは Calico v2 ポリシー構文を使用する必要があることに注意してください。
-
-
-2. ポリシーをクラスターに適用します。
+4. ポリシーをクラスターに適用します。
     - Linux および OS X:
 
       ```
@@ -562,15 +310,27 @@ Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日に
 Calico pre-DNAT ネットワーク・ポリシーのいくつかの一般的な使用方法:
 
   - プライベート・ロード・バランサー・サービスのパブリック・ノード・ポートへのトラフィックをブロックします。ロード・バランサー・サービスにより、ロード・バランサーの IP アドレスとポート上でアプリが利用可能になり、サービスのノード・ポート上でアプリが利用可能になります。 ノード・ポートは、クラスター内のすべてのノードのすべての IP アドレス (パブリックとプライベート) でアクセス可能です。
-  - [エッジ・ワーカー・ノード](cs_edge.html#edge)を実行しているクラスター上のパブリック・ノード・ポートへのトラフィックをブロックします。ノード・ポートをブロックすることにより、エッジ・ワーカー・ノードだけが着信トラフィックを扱うワーカー・ノードとなります。
+  - [エッジ・ワーカー・ノード](/docs/containers?topic=containers-edge#edge)を実行しているクラスター上のパブリック・ノード・ポートへのトラフィックをブロックします。ノード・ポートをブロックすることにより、エッジ・ワーカー・ノードだけが着信トラフィックを扱うワーカー・ノードとなります。
   - 特定のソース IP アドレスまたは CIDR からのトラフィックをブロックします (ブラックリスティング)
   - 特定のソース IP アドレスまたは CIDR からのトラフィックのみ許可し (ホワイトリスティング)、他のトラフィックをすべてブロックします
 
-ソース IP アドレスをホワイトリストまたはブラックリストに登録する方法については、[Calico ネットワーク・ポリシーを使用してトラフィックをブロックするチュートリアル](cs_tutorials_policies.html#policy_tutorial)をお試しください。 クラスターのトラフィックを制御する Calico ネットワーク・ポリシーの例については、、[Stars Policy Demo ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) と [Advanced Network Policy ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) を参照してください。
+ソース IP アドレスをホワイトリストまたはブラックリストに登録する方法については、[Calico ネットワーク・ポリシーを使用してトラフィックをブロックするチュートリアル](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)をお試しください。 クラスターのトラフィックを制御する Calico ネットワーク・ポリシーの例については、、[Stars Policy Demo ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) と [Advanced Network Policy ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) を参照してください。
 {: tip}
 
+開始前に、以下のことを行います。
+1. [Calico CLI をインストールして構成します。](#cli_install)
+2. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 `ibmcloud ks cluster-config` コマンドに `--admin` オプションと `--network` オプションを指定します。`--admin` は、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーをダウンロードします。 `--network` は、すべての Calico コマンドを実行するための Calico 構成ファイルをダウンロードします。
+
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+pre-DNAT ポリシーを作成するには、以下のようにします。
+
 1. Kubernetes サービスへの ingress (インバウンド・トラフィック) アクセス用の Calico pre-DNAT ネットワーク・ポリシーを定義します。
-    * Kubernetes バージョン 1.10 以降のクラスターでは、[Calico v3 ポリシー構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) を使用する必要があります。 Kubernetes バージョン 1.9 以前のクラスターでは、[Calico v2 ポリシー構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) を使用する必要があります。
+    * Kubernetes バージョン 1.10 以降のクラスターでは、[Calico v3 ポリシー構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) を使用する必要があります。
+    * [バージョン 2.0 のロード・バランサー・サービス](/docs/containers?topic=containers-loadbalancer#planning_ipvs)へのトラフィックを管理する場合は、ポリシーの `spec` セクションに `applyOnForward: true` フィールドと `doNotTrack: true` フィールドを含める必要があります。
 
         すべてのノード・ポートをブロックするリソースの例:
 
@@ -581,6 +341,7 @@ Calico pre-DNAT ネットワーク・ポリシーのいくつかの一般的な�
       name: deny-nodeports
     spec:
       applyOnForward: true
+      preDNAT: true
       ingress:
           - action: Deny
             destination:
@@ -594,9 +355,64 @@ Calico pre-DNAT ネットワーク・ポリシーのいくつかの一般的な�
               - 30000:32767
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 1100
+      types:
+          - Ingress
+        ```
+        {: codeblock}
+
+        指定したソース CIDR からロード・バランサー 2.0 へのトラフィックのみをホワイトリストに登録するリソースの例:
+
+        ```
+        apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+      name: whitelist
+    spec:
+      applyOnForward: true
+      doNotTrack: true
+      ingress:
+          - action: Allow
+        destination:
+          nets:
+              - <loadbalancer_IP>/32
+          ports:
+              - 80
+        protocol: TCP
+        source:
+          nets:
+              - <client_address>/32
+      selector: ibm.role=='worker_public'
+      order: 500
+      types:
+          - Ingress
+        ```
+        {: codeblock}
+
+        指定したソース CIDR からロード・バランサー 1.0へのトラフィックのみをホワイトリストに登録するリソースの例:
+
+        ```
+        apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+      name: whitelist
+    spec:
+      applyOnForward: true
+      preDNAT: true
+      ingress:
+          - action: Allow
+        destination:
+          nets:
+              - <loadbalancer_IP>/32
+          ports:
+              - 80
+        protocol: TCP
+        source:
+          nets:
+              - <client_address>/32
+      selector: ibm.role=='worker_public'
+      order: 500
       types:
           - Ingress
         ```
@@ -619,12 +435,13 @@ Calico pre-DNAT ネットワーク・ポリシーのいくつかの一般的な�
     ```
     {: pre}
 
-3. オプション: 複数ゾーン・クラスターでは、複数ゾーン・ロード・バランサー (MZLB) ヘルス・チェックにより、クラスターの各ゾーンの Ingress アプリケーション・ロード・バランサー (ALB) が検査され、そのヘルス・チェックに基づいて DNS 参照の結果が最新の状態に保たれます。 preDNAT ポリシーを使用して Ingress サービスへのすべての着信トラフィックをブロックする場合は、ALB のヘルス・チェックに使用される [Cloudflare の IPv4 IP ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.cloudflare.com/ips/) をホワイトリストに登録する必要があります。 Calico preDNAT ポリシーを作成してこれらの IP をホワイトリストに登録する手順については、[Calico ネットワーク・ポリシー・チュートリアル](cs_tutorials_policies.html#lesson3)のレッスン 3 を参照してください。
+3. オプション: 複数ゾーン・クラスターでは、複数ゾーン・ロード・バランサー (MZLB) ヘルス・チェックにより、クラスターの各ゾーンの Ingress アプリケーション・ロード・バランサー (ALB) が検査され、そのヘルス・チェックに基づいて DNS 参照の結果が最新の状態に保たれます。 preDNAT ポリシーを使用して Ingress サービスへのすべての着信トラフィックをブロックする場合は、ALB のヘルス・チェックに使用される [Cloudflare の IPv4 IP ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.cloudflare.com/ips/) をホワイトリストに登録する必要があります。 Calico preDNAT ポリシーを作成してこれらの IP をホワイトリストに登録する手順については、[Calico ネットワーク・ポリシー・チュートリアル](/docs/containers?topic=containers-policy_tutorial#lesson3)のレッスン 3 を参照してください。
 
 ## プライベート・ネットワーク上のクラスターの分離
 {: #isolate_workers}
 
-複数ゾーン・クラスター、単一ゾーン・クラスター用の複数の VLAN、または同じ VLAN 上に複数のサブネットがある場合は、[VLAN スパンニングを有効](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 ただし、VLAN スパンニングが有効になっている場合、同じ IBM Cloud アカウント内のいずれかのプライベート VLAN に接続されているすべてのシステムはワーカーと通信できます。
+複数ゾーン・クラスター、単一ゾーン・クラスター用の複数の VLAN、または同じ VLAN 上に複数のサブネットがある場合は、[VLAN スパンニングを有効](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 ただし、VLAN スパンニングが有効になっている場合、同じ IBM Cloud アカウント内のいずれかのプライベート VLAN に接続されているすべてのシステムはワーカーと通信できます。
+{: shortdesc}
 
 [Calico プライベート・ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation) を適用することにより、プライベート・ネットワーク上の他のシステムからクラスターを分離できます。 この一連の Calico ポリシーおよびホスト・エンドポイントにより、アカウントのプライベート・ネットワーク内の他のリソースからクラスターのプライベート・ネットワーク・トラフィックが分離されます。
 
@@ -642,11 +459,12 @@ Calico pre-DNAT ネットワーク・ポリシーのいくつかの一般的な�
 
 開始前に、以下のことを行います。
 1. [Calico CLI をインストールして構成します。](#cli_install)
-2. [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。 `ibmcloud ks cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。 このダウンロードには、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーも含まれています。
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
+2. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 `ibmcloud ks cluster-config` コマンドに `--admin` オプションと `--network` オプションを指定します。`--admin` は、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーをダウンロードします。 `--network` は、すべての Calico コマンドを実行するための Calico 構成ファイルをダウンロードします。
+
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
 Calico ポリシーを使用して、プライベート・ネットワーク上のクラスターを分離するには、以下のようにします。
 
@@ -657,22 +475,20 @@ Calico ポリシーを使用して、プライベート・ネットワーク上�
     {: pre}
 
 2. クラスター・バージョンと互換性がある Calico バージョンのプライベート・ポリシー・ディレクトリーにナビゲートします。
-    * Kubernetes バージョン 1.10 以降のクラスター:
-      ```
-      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
-      ```
-      {: pre}
-
-    * Kubernetes バージョン 1.9 以前のクラスター:
-      ```
-      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v2
-      ```
-      {: pre}
+   ```
+   cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
+   ```
+   {: pre}
 
 3. プライベート・ホスト・エンドポイントのポリシーをセットアップします。
     1. `generic-privatehostendpoint.yaml` ポリシーを開きます。
-    2. `<worker_name>` をワーカー・ノードの名前に置き換え、`<worker-node-private-ip>` をワーカー・ノードのプライベート IP アドレスに置き換えます。 ワーカー・ノードのプライベート IP を確認するには、`ibmcloud ks workers --cluster <my_cluster>` を実行します。
-    3. クラスター内の各ワーカー・ノードの新しいセクションでこのステップを繰り返します。 **注**: ワーカー・ノードをクラスターに追加するたびに、新しいエントリーを使用してホスト・エンドポイント・ファイルを更新する必要があります。
+    2. `<worker_name>` を、ワーカー・ノードの名前に置き換えます。**重要**: Calico ポリシーでは別の名前構造に従わなければならないワーカー・ノードがあります。以下のコマンドで戻される形式のワーカー・ノード名を使用する必要があります。
+```
+      ibmcloud ks calicoctl get nodes --config==filepath/calicoctl.cfg
+      ```
+      {: pre}
+    3. `<worker-node-private-ip>` をワーカー・ノードのプライベート IP アドレスに置き換えます。ワーカー・ノードのプライベート IP を確認するには、`ibmcloud ks workers --cluster <my_cluster>` を実行します。
+    4. この一連の手順を、クラスター内のワーカー・ノードごとに新しいセクションを追加して繰り返します。**注**: ワーカー・ノードをクラスターに追加するたびに、新しいエントリーを使用してホスト・エンドポイント・ファイルを更新する必要があります。
 
 4. すべてのポリシーをクラスターに適用します。
     - Linux および OS X:
@@ -713,11 +529,11 @@ Kubernetes ネットワーク・ポリシーがポッド間のトラフィック
 
 以下のシナリオでは、1 つの名前空間でアプリのマイクロサービス間のトラフィックを管理する方法を説明します。
 
-Accounts チームは、1 つの名前空間に複数のアプリ・サービスをデプロイしますが、パブリック・ネットワークによるマイクロサービス間の通信を、必要なものだけに制限するために分離を必要としています。 アプリ Srv1 のために、チームはフロントエンド・サービス、バックエンド・サービス、データベース・サービスを作成しました。 それぞれのサービスに `app: Srv1` というラベルと `tier: frontend`、`tier: backend`、`tier: db` というラベルを付けています。
+Accounts チームは、1 つの名前空間に複数のアプリ・サービスをデプロイしますが、パブリック・ネットワークによるマイクロサービス間の通信を、必要なものだけに制限するために分離を必要としています。 アプリ `Srv1` については、チームにはフロントエンド・サービス、バックエンド・サービス、データベース・サービスがあります。それぞれのサービスに `app: Srv1` というラベルと `tier: frontend`、`tier: backend`、`tier: db` というラベルを付けています。
 
 <img src="images/cs_network_policy_single_ns.png" width="200" alt="ネットワーク・ポリシーを使用して名前空間の間のトラフィックを管理する" style="width:200px; border-style: none"/>
 
-Accounts チームは、フロントエンドからバックエンド、およびバックエンドからデータベースへのトラフィックを許可する必要があります。 そこで、ネットワーク・ポリシーでラベルを使用し、マイクロサービス間でどのトラフィック・フローを許可するかを指定することにしました。
+Accounts チームは、フロントエンドからバックエンド、およびバックエンドからデータベースへのトラフィックを許可する必要があります。そこで、ネットワーク・ポリシーでラベルを使用し、マイクロサービス間でどのトラフィック・フローを許可するかを指定することにしました。
 
 まずは、フロントエンドからバックエンドへのトラフィックを許可する Kubernetes ネットワーク・ポリシーを作成します。
 
@@ -814,10 +630,10 @@ spec:
 トラフィックをアプリ・ポッドに制限するネットワーク・ポリシーをセットアップしている場合、このポリシーで許可されないトラフィック要求は拒否され、除去されます。 一部のシナリオでは、拒否されたトラフィック要求の詳細情報が必要になる場合があります。 例えば、ネットワーク・ポリシーの 1 つによって一部の異常なトラフィックが継続的に拒否されることに気付く場合があります。 潜在的なセキュリティー脅威をモニターするには、指定されたアプリ・ポッドで試行されたアクションがポリシーで拒否されるたびに記録するようにロギングをセットアップします。
 
 開始前に、以下のことを行います。
-1. [Calico CLI をインストールして構成します。](#cli_install) **注**: これらのステップのポリシーは、Kubernetes バージョン 1.10 以降を実行するクラスターと互換性のある Calico v3 構文を使用します。 Kubernetes バージョン 1.9 以前を実行するクラスターの場合は、[Calico v2 ポリシー構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) を使用する必要があります。
-2. [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。 `ibmcloud ks cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。 このダウンロードには、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーも含まれています。
+1. [Calico CLI をインストールして構成します。](#cli_install)
+2. [クラスターを Kubernetes CLI のターゲットとして設定](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)します。 `ibmcloud ks cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。 このダウンロードには、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーも含まれています。
     ```
-    ibmcloud ks cluster-config <cluster_name> --admin
+    ibmcloud ks cluster-config --cluster <cluster_name> --admin
     ```
     {: pre}
 
@@ -826,7 +642,7 @@ spec:
 1. 着信トラフィックをブロックまたは制限する Kubernetes または Calico ネットワーク・ポリシーを作成するか、または既存のものを使用します。 例えば、ポッド間のトラフィックを制御するには、NGINX アプリへのアクセスを制限する `access-nginx` という名前の以下のサンプル Kubernetes ポリシーを使用します。 「run=nginx」というラベルが付いたポッドへの着信トラフィックは、「run=access」ラベルを持つポッドからのみ許可されます。 「run=nginx」アプリ・ポッドへの他の着信トラフィックはすべてブロックされます。
     ```
     kind: NetworkPolicy
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     metadata:
       name: access-nginx
     spec:
@@ -847,7 +663,7 @@ spec:
         kubectl apply -f <policy_name>.yaml
         ```
         {: pre}
-        Kubernetes ポリシーは自動的に Calico NetworkPolicy に変換されるため、Calico はそれを Iptables 規則として適用できます。
+        Kubernetes ポリシーは自動的に Calico `NetworkPolicy` に変換されるため、Calico はそれを Iptables 規則として適用できます。
 
     * Calico ポリシーを適用するには、以下のようにします。
         ```
@@ -880,7 +696,7 @@ spec:
     ```
     {: screen}
 
-4. 以前に作成した Calico ポリシーによって拒否されたトラフィックをすべてログに記録するために、`log-denied-packets` という名前の Calico NetworkPolicy を作成します。 例えば、次のポリシーを使用して、ステップ 1 で定義したネットワーク・ポリシーによって拒否されたすべてのパケットをログに記録します。ログ・ポリシーはサンプル・ポリシー `access-nginx` と同じポッド・セレクターを使用し、これにより、このポリシーが Calico Iptables 規則チェーンに追加されます。 `3000` などの大きい順序番号を使用すると、この規則を確実に Iptables 規則チェーンの最後に追加することができます。 `access-nginx` ポリシー規則に一致する「run=access」ポッドからの要求パケットは、「run=nginx」ポッドに受け入れられます。  ただし、他のソースからのパケットが下位の `access-nginx` ポリシー規則と照合しようとすると、これらのパケットは拒否されます。 これらのパケットは、次に、上位の `log-denied-packets` ポリシー規則と照合しようとします。 `log-denied-packets` は、これに到達したすべてのパケットをログに記録します。したがって、「run=nginx」ポッドによって拒否されたパケットだけがログに記録されます。 パケットの試行がログに記録された後、パケットは除去されます。
+4. 以前に作成した Calico ポリシーによって拒否されたトラフィックをすべてログに記録するために、`log-denied-packets` という名前の Calico `NetworkPolicy` を作成します。 例えば、次のポリシーを使用して、ステップ 1 で定義したネットワーク・ポリシーによって拒否されたすべてのパケットをログに記録します。ログ・ポリシーはサンプル・ポリシー `access-nginx` と同じポッド・セレクターを使用し、これにより、このポリシーが Calico Iptables 規則チェーンに追加されます。 `3000` などの大きい順序番号を使用すると、この規則を確実に Iptables 規則チェーンの最後に追加することができます。 `access-nginx` ポリシー規則に一致する「run=access」ポッドからの要求パケットは、「run=nginx」ポッドに受け入れられます。  ただし、他のソースからのパケットが下位の `access-nginx` ポリシー規則と照合しようとすると、これらのパケットは拒否されます。 これらのパケットは、次に、上位の `log-denied-packets` ポリシー規則と照合しようとします。 `log-denied-packets` は、これに到達したすべてのパケットをログに記録します。したがって、「run=nginx」ポッドによって拒否されたパケットだけがログに記録されます。 パケットの試行がログに記録された後、パケットは除去されます。
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy
@@ -929,4 +745,4 @@ spec:
     ```
     {: pre}
 
-6. `/var/log/syslog` から {{site.data.keyword.loganalysislong}} または外部の syslog サーバーに[ログを転送](cs_health.html#configuring)します。
+6. `/var/log/syslog` から {{site.data.keyword.loganalysislong}} または外部の syslog サーバーに[ログを転送](/docs/containers?topic=containers-health#configuring)します。

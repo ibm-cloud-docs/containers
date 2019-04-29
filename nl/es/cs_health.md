@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-06"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, logmet, logs, metrics
+
+subcollection: containers
 
 ---
 
@@ -19,37 +23,70 @@ lastupdated: "2018-12-06"
 {:download: .download}
 
 
+
 # Registro y supervisión
 {: #health}
 
 Configure el registro y la supervisión en {{site.data.keyword.containerlong}} para ayudarle a resolver los problemas y mejorar el estado y el rendimiento de las apps y los clústeres de Kubernetes.
 {: shortdesc}
 
-¿Está buscando otros servicios de registro de {{site.data.keyword.Bluemix_notm}} o de terceros que pueda añadir al clúster? Consulte
-[Integraciones de registro y supervisión](cs_integrations.html#health_services), incluyendo
-[{{site.data.keyword.la_full_notm}} con LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).
-{: note}
+La supervisión y el registro continuos son la clave para detectar ataques en el clúster y para resolver problemas a medida que surjan. Mediante la supervisión continua del clúster, puede comprender mejor la capacidad del clúster y la disponibilidad de los recursos que están disponibles para la app. Con esta perspectiva, puede prepararse para proteger sus apps frente a un tiempo de inactividad. **Nota**: Para
+configurar el registro y la supervisión, debe utilizar un clúster estándar en {{site.data.keyword.containerlong_notm}}.
+
+## Elección de una solución de registro
+{: #logging_overview}
+
+De forma predeterminada, los registros se generan y se escriben localmente para todos los componentes siguientes de clúster de {{site.data.keyword.containerlong_notm}}: nodos trabajadores, contenedores, aplicaciones, almacenamiento persistente, equilibrador de carga de aplicación de Ingress, API de Kubernetes y espacio de nombres `kube-system`. Hay varias soluciones de registro disponibles para recopilar, reenviar y ver estos registros.
+{: shortdesc}
+
+Puede elegir la solución de registro en función de los componentes de clúster para los que se deben recopilar registros. Una implementación común consiste en elegir el servicio de registro que prefiera en función de sus posibilidades de análisis y de interfaz, como por ejemplo {{site.data.keyword.loganalysisfull}}, {{site.data.keyword.la_full}} o un servicio de terceros. A continuación, puede utilizar {{site.data.keyword.cloudaccesstrailfull}} para auditar la actividad de usuario en el clúster y hacer copia de seguridad de los registros maestros del clúster en {{site.data.keyword.cos_full}}. **Nota**: Para configurar el registro, debe tener un clúster estándar de Kubernetes.
+
+<dl>
+
+<dt>Fluentd con {{site.data.keyword.loganalysisfull_notm}} o syslog</dt>
+<dd>Para recopilar, reenviar y ver registros correspondientes a un componente del clúster, puede crear una configuración de registro mediante Fluentd. Cuando se crea una configuración de registro, el complemento del clúster [Fluentd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.fluentd.org/) recopila registros de las vías de acceso para un origen especificado. A continuación, Fluentd reenvía estos registros a {{site.data.keyword.loganalysisfull_notm}} o a un servidor de syslog externo.
+
+<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) amplía la capacidad de recopilación, retención y búsqueda de registros. Cuando se crea una configuración de registro que reenvía registros para un origen a {{site.data.keyword.loganalysisfull_notm}}, puede ver los registros en un panel de control de Kibana.</li>
+
+<li><strong>Servidor syslog externo</strong>: Configure un servidor externo que acepte un protocolo syslog. Luego puede crear una configuración de registro para un origen en el clúster para reenviar registros a un servidor externo.</li></ul>
+
+Para empezar, consulte
+[Visión general del reenvío de registros de clúster y de app](#logging).
+</dd>
+
+<dt>{{site.data.keyword.la_full_notm}}</dt>
+<dd>Para gestionar los registros del contenedor del pod, despliegue LogDNA como servicio de terceros en el clúster. Para utilizar {{site.data.keyword.la_full_notm}}, debe desplegar un agente de registro en cada nodo trabajador del clúster. Este agente recopila los registros con la extensión `*.log` y los archivos sin extensión almacenados en el directorio `/var/log` de su pod desde todos los espacios de nombres, incluido `kube-system`. A continuación, el agente reenvía los registros al servicio {{site.data.keyword.la_full_notm}}. Para obtener más información sobre el servicio, consulte la documentación de [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about). Para empezar, consulte
+[Gestión de registros de clúster de Kubernetes con {{site.data.keyword.loganalysisfull_notm}} con LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</dd>
+
+<dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
+<dd>Para supervisar la actividad administrativa iniciada por el usuario que se realiza en el clúster, puede recopilar y reenviar registros de auditoría a {{site.data.keyword.cloudaccesstrailfull_notm}}. Los clústeres generan dos tipos de sucesos de {{site.data.keyword.cloudaccesstrailshort}}.
+
+<ul><li>Los sucesos de gestión del clúster se generan automáticamente y se reenvían a {{site.data.keyword.cloudaccesstrailshort}}.</li>
+
+<li>Los sucesos de auditoría de servidor de API de Kubernetes se generan automáticamente, pero debe [crear una configuración de registro](#api_forward) para que Fluentd pueda reenviar estos registros a {{site.data.keyword.loganalysisshort}}. A continuación, {{site.data.keyword.cloudaccesstrailshort}} extrae estos registros de {{site.data.keyword.loganalysisshort}}.</li></ul>
+
+Para obtener más información sobre los tipos de sucesos de {{site.data.keyword.containerlong_notm}} de los que puede realizar un seguimiento, consulte [sucesos de Activity Tracker](/docs/containers?topic=containers-at_events). Para obtener más información sobre el servicio, consulte la documentación de [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla).
+</dd>
+
+<dt>{{site.data.keyword.cos_full_notm}}</dt>
+<dd>Para recopilar, reenviar y ver registros para el nodo maestro de Kubernetes del clúster, puede tomar una instantánea de los registros maestros en cualquier punto en el tiempo para recopilarlos en un grupo de {{site.data.keyword.cos_full_notm}}. La instantánea incluye todo lo que se envía a través del servidor de API, como la planificación del pod, los despliegues o las políticas RBAC. Para empezar, consulte [Recopilación de registros maestros](#collect_master).</dd>
+
+<dt>Servicios de terceros</dt>
+<dd>Si tiene requisitos especiales, puede configurar su propia solución de registro. Consulte los servicios de registro de terceros que puede añadir a su clúster en el apartado sobre [Integraciones de registro y de supervisión](/docs/containers?topic=containers-integrations#health_services). En los clústeres que ejecutan Kubernetes versión 1.11 o posteriores, puede recopilar registros de contenedor desde la vía de acceso `/var/log/pods/`. En los clústeres que ejecutan Kubernetes versión 1.10 o anteriores, puede recopilar registros de contenedor desde la vía de acceso `/var/lib/docker/containers/`.</dd>
+
+</dl>
 
 ## Visión general del reenvío de registros de clúster y de app
 {: #logging}
 
-La supervisión y el registro continuos son la clave para detectar ataques en el clúster y para resolver problemas a medida que surjan. Mediante la supervisión continua del clúster, puede comprender mejor la capacidad del clúster y la disponibilidad de los recursos que están disponibles para la app. Esto le permite prepararse en consecuencia para proteger sus apps frente a un tiempo de inactividad. Para configurar el registro, debe trabajar con un clúster de Kubernetes estándar en {{site.data.keyword.containerlong_notm}}.
+De forma predeterminada, los registros se recopilan mediante el complemento [Fluentd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.fluentd.org/) en el clúster. Cuando se crea una configuración de registro para un origen en el clúster, como por ejemplo un contenedor, los registros que Fluentd recopila de las vías de acceso de dicho origen se reenvían a {{site.data.keyword.loganalysisshort_notm}} o a un servidor syslog externo. El tráfico entre el origen y el servicio de registro del puerto de ingestión está cifrado.
 {: shortdesc}
 
-
-**¿Supervisa IBM mi clúster?**
-
-IBM supervisa continuamente cada nodo maestro de Kubernetes. {{site.data.keyword.containerlong_notm}} explora automáticamente cada nodo en el que se ha desplegado el nodo maestro de Kubernetes en busca de vulnerabilidades y arreglos de seguridad específicos de Kubernetes y del sistema operativo. Si se encuentran vulnerabilidades, {{site.data.keyword.containerlong_notm}} aplica automáticamente los arreglos y soluciona las vulnerabilidades en nombre del usuario para asegurarse de la protección del nodo maestro. El usuario es el responsable de supervisar y analizar los registros para el resto del clúster.
-
-**¿Cómo se recopilan los registros?**
-
-Los registros se recopilan mediante el complemento [ Fluentd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.fluentd.org/) en el clúster. Cuando crea una configuración de registro para un origen del clúster, el componente Fluentd recopila registro de las vías de acceso de dicho origen. Luego los registros se reenvían a {{site.data.keyword.loganalysisshort_notm}} o a un servidor de syslog externo.
-
-**¿Para qué códigos fuente puedo configurar el registro?**
+**¿Para qué códigos fuente puedo configurar el reenvío de registros?**
 
 En la imagen siguiente puede ver la ubicación de los códigos fuente para los que puede configurar el registro.
 
-<img src="images/log_sources.png" width="550" alt="Orígenes de registros en el clúster" style="width:550px; border-style: none"/>
+<img src="images/log_sources.png" width="600" alt="Orígenes de registro del clúster" style="width:600px; border-style: none"/>
 
 1. `worker`: información específica de la configuración de la infraestructura que tiene para el nodo trabajador. Los registros de nodo trabajador se capturan en syslog y contienen sucesos del sistema operativo. En `auth.log` encontrará información sobre las solicitudes de autenticación que se realizan en el sistema operativo.</br>**Vías de acceso**:
     * `/var/log/syslog`
@@ -78,7 +115,7 @@ En la imagen siguiente puede ver la ubicación de los códigos fuente para los q
 
 6. `kube-audit`: información sobre las acciones relacionadas con el clúster que se envía al servidor de API de Kubernetes, que incluye la hora, el usuario y el recurso afectado.
 
-7. `ingress`: información sobre el tráfico de red que entra en un clúster a través del equilibrador de carga de aplicación de Ingress. Para ver información específica de configuración, consulte la [documentación de Ingress](cs_ingress_health.html#ingress_logs).</br>**Vías de acceso**:
+7. `ingress`: información sobre el tráfico de red que entra en un clúster a través del equilibrador de carga de aplicación de Ingress. Para ver información específica de configuración, consulte la [documentación de Ingress](/docs/containers?topic=containers-ingress_health#ingress_logs).</br>**Vías de acceso**:
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
@@ -115,7 +152,7 @@ En la tabla siguiente se muestran las distintas opciones que tiene para configur
     </tr>
     <tr>
       <td><code><em>--hostname</em></code></td>
-      <td><p>Para {{site.data.keyword.loganalysisshort_notm}}, utilice el [URL de ingesta](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Si no especifica un URL de ingesta, se utiliza el punto final de la región en la que ha creado el clúster.</p>
+      <td><p>Para {{site.data.keyword.loganalysisshort_notm}}, utilice el [URL de ingesta](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). Si no especifica un URL de ingesta, se utiliza el punto final de la región en la que ha creado el clúster.</p>
       <p>Para syslog, especifique el nombre de host o la dirección IP del servicio del recopilador de registros.</p></td>
     </tr>
     <tr>
@@ -158,35 +195,43 @@ En la tabla siguiente se muestran las distintas opciones que tiene para configur
   </tbody>
 </table>
 
-**¿Soy el responsable de mantener actualizado Fluentd para el registro?**
+**¿Soy el responsable de mantener actualizado Fluentd?**
 
-Para poder realizar cambios en las configuraciones de registro o de filtro, debe tener la versión más reciente del complemento de registro Fluentd. De forma predeterminada, las actualizaciones automáticas del complemento están habilitadas. Para inhabilitar las actualizaciones automáticas, consulte [Actualización de complementos de clúster: Fluentd para registro](cs_cluster_update.html#logging).
+Para poder realizar cambios en las configuraciones de registro o de filtro, debe tener la versión más reciente del complemento de registro Fluentd. De forma predeterminada, las actualizaciones automáticas del complemento están habilitadas. Para inhabilitar las actualizaciones automáticas, consulte [Actualización de complementos de clúster: Fluentd para registro](/docs/containers?topic=containers-update#logging).
 
-**¿Puedo utilizar mi propia solución de registro?**
+**¿Puedo reenviar algunos registros, pero no otros, desde un origen de mi clúster?**
 
-Si tiene requisitos especiales, puede configurar su propia solución de registro en el clúster. En los clústeres que ejecutan Kubernetes versión 1.11 o posteriores, puede recopilar registros de contenedor desde la vía de acceso `/var/log/pods/`. En los clústeres que ejecutan Kubernetes versión 1.10 o anteriores, puede recopilar registros de contenedor desde la vía de acceso `/var/lib/docker/containers/`.
+Sí. Por ejemplo, si tiene un pod con muchas conversaciones, quizás desee evitar que los registros procedentes de dicho pod ocupen espacio de almacenamiento de registros, pero permitir que se reenvíen los registros de otros pods. Para evitar que se reenvíen los registros procedentes de un determinado pod, consulte [Filtrado de registros](#filter-logs).
+
+**Varios equipos trabajan en un clúster. ¿Cómo puedo separar los registros por equipo?**
+
+Puede reenviar los registros de contenedor de un espacio de nombres a un espacio de Cloud Foundry y los registros de contenedor de otro espacio de nombres a otro espacio de Cloud Foundry. Para cada espacio de nombres, cree una configuración de reenvío de registros para el origen de registro de `container`. Especifique el espacio de nombres del equipo al que desea aplicar la configuración en el distintivo `--namespace` y el espacio del equipo al que se reenvían los registros en el distintivo `--space`. Si lo desea también puede especificar una organización de Cloud Foundry dentro del espacio en el distintivo `--org`.
 
 <br />
 
 
-## Configuración del reenvío
+## Configuración del reenvío de registros de clúster y de app
 {: #configuring}
 
-Puede configurar el registro para {{site.data.keyword.containerlong_notm}} mediante la consola o la CLI.
+Puede configurar el registro para clústeres estándares de {{site.data.keyword.containerlong_notm}} mediante la consola o la CLI.
 {: shortdesc}
 
 ### Habilitación del reenvío de registros con la consola de {{site.data.keyword.Bluemix_notm}}
 {: #enable-forwarding-ui}
 
 Puede configurar el reenvío de registros en el panel de control de {{site.data.keyword.containerlong_notm}}. Puede llevar varios minutos el completar el proceso, por lo que si no ve los registros de forma inmediata, espere un poco más y compruébelo de nuevo.
+{: shortdesc}
 
 Para crear una configuración a nivel de cuenta para un espacio de nombres de contenedor específico o para el registro de app, utilice la CLI.
 {: tip}
 
-1. Vaya al separador **Visión general** del panel de control.
-2. Seleccione la organización Cloud Foundry y el espacio del que desea reenviar registros. Cuando configura el reenvío de registros en el panel de control, los registros se envían al punto final predeterminado de {{site.data.keyword.loganalysisshort_notm}} para su clúster. Para reenviar registros a un servidor externo, o a otro punto final de {{site.data.keyword.loganalysisshort_notm}}, puede utilizar la CLI para configurar la creación de registros.
-3. Seleccione los orígenes de registro para los que desea reenviar registros.
-4. Pulse **Crear**.
+Antes de empezar, [cree](/docs/containers?topic=containers-clusters#clusters) o identifique el clúster estándar que desea utilizar.
+
+1. Inicie una sesión en la [consola de {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/containers-kubernetes/clusters) y vaya a **Kubernetes > Clústeres**.
+2. Seleccione el clúster estándar y, en el campo **Visión general** del separador **Registros**, pulse **Habilitar**.
+3. Seleccione la **Organización de Cloud Foundry** y el **Espacio** desde los que desea reenviar registros. Cuando configura el reenvío de registros en el panel de control, los registros se envían al punto final predeterminado de {{site.data.keyword.loganalysisshort_notm}} para su clúster. Para reenviar registros a un servidor externo, o a otro punto final de {{site.data.keyword.loganalysisshort_notm}}, puede utilizar la CLI para configurar la creación de registros.
+4. Seleccione los **Orígenes de registro** desde los que desea reenviar registros.
+5. Pulse **Crear**.
 
 </br>
 </br>
@@ -195,25 +240,28 @@ Para crear una configuración a nivel de cuenta para un espacio de nombres de co
 {: #enable-forwarding}
 
 Puede crear una configuración para los registros del clúster. Puede diferenciar entre las diferentes opciones de registro mediante distintivos.
+{: shortdesc}
+
+Antes de empezar, [cree](/docs/containers?topic=containers-clusters#clusters) o identifique el clúster estándar que desea utilizar.
 
 **Reenvío de registros a IBM**
 
 1. Verifique los permisos.
-    1. Asegúrese de tener el rol de [**Editor** o **Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform).
+    1. Asegúrese de tener el rol de [**Editor** o **Administrador** de la plataforma de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
     2. Si ha especificado un espacio al crear el clúster, tanto usted como el propietario de la clave de API de
-{{site.data.keyword.containerlong_notm}} necesitan el [rol **Desarrollador** de Cloud Foundry](/docs/iam/mngcf.html) en dicho espacio.
+{{site.data.keyword.containerlong_notm}} necesitan el [rol **Desarrollador** de Cloud Foundry](/docs/iam?topic=iam-mngcf) en dicho espacio.
       * Si desconoce quién es el propietario de la clave de API de {{site.data.keyword.containerlong_notm}}, ejecute el mandato siguiente.
           ```
-          ibmcloud ks api-key-info <cluster_name>
+          ibmcloud ks api-key-info --cluster <cluster_name>
           ```
           {: pre}
-      * Para aplicar inmediatamente los cambios que ha realizado, ejecute el mandato siguiente.
+      * Si cambia los permisos, puede aplicar de forma inmediata los cambios con el mandato siguiente.
           ```
-          ibmcloud ks logging-config-refresh <cluster_name>
+          ibmcloud ks logging-config-refresh --cluster <cluster_name>
           ```
           {: pre}
 
-2.  Para el clúster en el que se encuentra el origen de registro: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+2.  Para el clúster estándar en el que se encuentra el origen de registro: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
     Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
     {: tip}
@@ -255,9 +303,9 @@ Si tiene apps que se ejecuten en contenedores que no es posible configurar para 
 
 **Reenvío de registros a su propio servidor a través de los protocolos `udp` o `tcp`**
 
-1. Asegúrese de tener el rol de [**Editor** o **Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform).
+1. Asegúrese de tener el rol de [**Editor** o **Administrador** de la plataforma de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
 
-2. Para el clúster en el que se encuentra el origen de registro: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure). **Nota**: Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
+2. Para el clúster en el que se encuentra el origen de registro: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Nota**: Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
 
 3. Para reenviar registros a syslog, configure un servidor que acepte un protocolo syslog de una de estas dos maneras:
   * Puede configurar y gestionar su propio servidor o dejar que lo gestione un proveedor. Si un proveedor gestiona el servidor, obtenga el punto final de registro del proveedor de registro.
@@ -282,9 +330,11 @@ Si tiene apps que se ejecuten en contenedores que no es posible configurar para 
 Los pasos siguientes son instrucciones generales. Antes de utilizar el contenedor en un entorno de producción, asegúrese de que se cumplen todos los requisitos de seguridad que necesite.
 {: tip}
 
-1. Asegúrese de tener el rol de [**Editor** o **Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform).
+1. Asegúrese de que tiene los siguientes [roles de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform):
+    * Rol de plataforma **Editor** o **Administrador** para el clúster
+    * Rol de servicio de **Escritor** o de **Gestor** para el espacio de nombres `kube-system`
 
-2. Para el clúster en el que se encuentra el origen de registro: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure). **Nota**: Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
+2. Para el clúster en el que se encuentra el origen de registro: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Nota**: Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
 
 3. Configure un servidor que acepte un protocolo syslog de una de estas dos maneras:
   * Puede configurar y gestionar su propio servidor o dejar que lo gestione un proveedor. Si un proveedor gestiona el servidor, obtenga el punto final de registro del proveedor de registro.
@@ -316,27 +366,27 @@ Puede verificar que la configuración es correcta de una de estas dos formas:
 
 * Para obtener una lista de todas las configuraciones de registro en un clúster:
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 * Para obtener una lista de las configuraciones de registro para un tipo de origen de registro:
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID> --logsource <source>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
 
-</br>
-</br>
+</br></br>
 
 ### Actualización del reenvío de registros
 {: #updating-forwarding}
 
 Puede actualizar una configuración de registro que ya ha creado.
+{: shortdesc}
 
-1. Actualice una configuración de reenvío de registro.
+1. Actualizar una configuración de reenvío de registros.
     ```
-    ibmcloud ks logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+    ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
     ```
     {: pre}
 
@@ -349,14 +399,14 @@ Puede actualizar una configuración de registro que ya ha creado.
 Puede detener el reenvío de registros de una o de todas las configuraciones de registro de un clúster.
 {: shortdesc}
 
-1. Para el clúster en el que se encuentra el origen de registro: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+1. Para el clúster en el que se encuentra el origen de registro: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 2. Suprima la configuración de registro.
   <ul>
   <li>Para suprimir una configuración de registro:</br>
-    <pre><code>ibmcloud ks logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
+    <pre><code>ibmcloud ks logging-config-rm --cluster &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
   <li>Para suprimir todas las configuraciones de registro:</br>
-    <pre><code>ibmcloud ks logging-config-rm <my_cluster> --all</pre></code></li>
+    <pre><code>ibmcloud ks logging-config-rm --cluster <my_cluster> --all</pre></code></li>
   </ul>
 
 </br>
@@ -374,21 +424,21 @@ Para ver los registros de clústeres y contenedores, puede utilizar las caracter
 Puede ver los registros que se reenvían a {{site.data.keyword.loganalysislong_notm}} mediante el panel de control de Kibana.
 {: shortdesc}
 
-Si ha utilizado los valores predeterminados para crear el archivo de configuración, entonces los registros pueden encontrarse en la cuenta, o la organización y el espacio, en los que se ha creado el clúster. Si ha especificado una organización y un espacio en el archivo de configuración, puede encontrar los registros en ese espacio. Para obtener más información sobre el registro, consulte [Registro para {{site.data.keyword.containerlong_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Si ha utilizado los valores predeterminados para crear el archivo de configuración, entonces los registros pueden encontrarse en la cuenta, o la organización y el espacio, en los que se ha creado el clúster. Si ha especificado una organización y un espacio en el archivo de configuración, puede encontrar los registros en ese espacio. Para obtener más información sobre el registro, consulte [Registro para {{site.data.keyword.containerlong_notm}}](/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kubernetes#containers_kubernetes).
 
 Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta o el espacio de {{site.data.keyword.Bluemix_notm}} en el que haya configurado el reenvío de registro para el clúster.
-- EE.UU. sur y EE.UU. este: https://logging.ng.bluemix.net
-- RU sur: https://logging.eu-gb.bluemix.net
-- UE central: https://logging.eu-fra.bluemix.net
-- AP sur y AP norte: https://logging.au-syd.bluemix.net
+- EE. UU. sur y EE. UU. este: `https://logging.ng.bluemix.net`
+- RU sur: `https://logging.eu-gb.bluemix.net`
+- UE central: `https://logging.eu-fra.bluemix.net`
+- AP sur y AP norte: `https://logging.au-syd.bluemix.net`
 
-Para obtener más información sobre la visualización de registros, consulte [Navegación a Kibana desde un navegador web](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
+Para obtener más información sobre la visualización de registros, consulte [Navegación a Kibana desde un navegador web](/docs/services/CloudLogAnalysis/kibana?topic=cloudloganalysis-launch#launch_Kibana_from_browser).
 
 </br>
 
 **Registros de contenedor**
 
-Puede aprovechar las funciones incorporadas de registro de tiempo de ejecución de contenedor para revisar las actividades de las secuencias de salida estándar STDOUT y STDERR. Para obtener más información, consulte [Visualización de registros de contenedor para un contenedor que se ejecute en un clúster de Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Puede aprovechar las funciones incorporadas de registro de tiempo de ejecución de contenedor para revisar las actividades de las secuencias de salida estándar STDOUT y STDERR. Para obtener más información, consulte [Visualización de registros de contenedor para un contenedor que se ejecute en un clúster de Kubernetes](/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kubernetes#containers_kubernetes).
 
 <br />
 
@@ -397,6 +447,7 @@ Puede aprovechar las funciones incorporadas de registro de tiempo de ejecución 
 {: #filter-logs}
 
 Puede elegir qué registros reenviará filtrando registros específicos durante un periodo de tiempo. Puede diferenciar entre las diferentes opciones de filtrado mediante distintivos.
+{: shortdesc}
 
 <table>
 <caption>Visión general de las opciones para el filtrado de registros</caption>
@@ -426,7 +477,7 @@ Puede elegir qué registros reenviará filtrando registros específicos durante 
     </tr>
     <tr>
       <td><code>&lt;logging_level&gt;</code></td>
-      <td>Opcional: filtra los registros en el nivel especificado y en los inferiores. Valores aceptables en su orden canónico son <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> y <code>trace</code>. Por ejemplo, si filtra registros al nivel <code>info</code>, también se filtran los niveles <code>debug</code> y <code>trace</code>. **Nota**: Puede utilizar este distintivo sólo cuando los mensajes de registro están en formato JSON y contienen un campo de nivel. Para visualizar los mensajes en JSON, añada el distintivo <code>-- json</code> al mandato.</td>
+      <td>Opcional: filtra los registros en el nivel especificado y en los inferiores. Valores aceptables en su orden canónico son <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> y <code>trace</code>. Por ejemplo, si filtra registros al nivel <code>info</code>, también se filtran los niveles <code>debug</code> y <code>trace</code>. **Nota**: Puede utilizar este distintivo sólo cuando los mensajes de registro están en formato JSON y contienen un campo de nivel. Para visualizar los mensajes en JSON, añada el distintivo <code>--json</code> al mandato.</td>
     </tr>
     <tr>
       <td><code>&lt;message&gt;</code></td>
@@ -447,7 +498,6 @@ Puede elegir qué registros reenviará filtrando registros específicos durante 
   </tbody>
 </table>
 
-
 1. Crear un filtro de registro.
   ```
   ibmcloud ks logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
@@ -457,20 +507,20 @@ Puede elegir qué registros reenviará filtrando registros específicos durante 
 2. Visualice el filtro de registro que ha creado.
 
   ```
-  ibmcloud ks logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ibmcloud ks logging-filter-get --cluster <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
   ```
   {: pre}
 
 3. Actualice el filtro de registro que ha creado.
   ```
-  ibmcloud ks logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  ibmcloud ks logging-filter-update --cluster <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
 
 4. Suprima un filtro de registro que ha creado.
 
   ```
-  ibmcloud ks logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
+  ibmcloud ks logging-filter-rm --cluster <cluster_name_or_ID> --id <filter_ID> [--all]
   ```
   {: pre}
 
@@ -481,29 +531,29 @@ Puede elegir qué registros reenviará filtrando registros específicos durante 
 ## Configuración de reenvío de registros para registros de auditoría de API de Kubernetes
 {: #api_forward}
 
-Kubernetes audita de forma automática los sucesos que pasan a través de su apiserver. Los sucesos se pueden reenviar a {{site.data.keyword.loganalysisshort_notm}} o a un servidor externo.
+Kubernetes audita de forma automática los sucesos que pasan a través del servidor de API de Kubernetes. Los sucesos se pueden reenviar a {{site.data.keyword.loganalysisshort_notm}} o a un servidor externo.
 {: shortdesc}
 
 
 Para obtener más información sobre los registros de auditoría de Kubernetes, consulte el <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">tema sobre auditoría <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> en la documentación de Kubernetes.
 
-* El reenvío de registros de auditoría de API de Kubernetes sólo está admitido en la versión 1.9 de Kubernetes y posterior.
 * Actualmente, se utiliza una política de auditoría predeterminada para todos los clústeres con esta configuración de registro.
 * Actualmente no se da soporte a filtros.
 * Sólo puede haber una configuración `kube-audit` por clúster, sin embargo, es posible reenviar los registros a {{site.data.keyword.loganalysisshort_notm}} y a un servidor externo creando un webhook y una configuración de registro.
-* Debe tener el rol de [**Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para el clúster.
+* Debe tener el rol de [**Administrador** de la plataforma de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
 
 
 ### Envío de registros de auditoría a {{site.data.keyword.loganalysisshort_notm}}
 {: #audit_enable_loganalysis}
 
-Existe la posibilidad de reenviar los registros de auditoría del servidor de API de Kubernetes a {{site.data.keyword.loganalysisshort_notm}}
+Existe la posibilidad de reenviar los registros de auditoría del servidor de API de Kubernetes a {{site.data.keyword.loganalysisshort_notm}}.
+{: shortdesc}
 
 **Antes de empezar**
 
 1. Verifique los permisos. Si ha especificado un espacio al crear el clúster o la configuración de registro, tanto el propietario de la cuenta como el propietario de claves de {{site.data.keyword.containerlong_notm}} necesitan permisos de gestor, desarrollador o auditor en ese espacio.
 
-2. Para el clúster del que desea recopilar registros de auditoría de servidor de API: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure). **Nota**: Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
+2. Para el clúster del que desea recopilar registros de auditoría de servidor de API: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Nota**: Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
 
 **Reenvío de registros**
 
@@ -540,7 +590,7 @@ Existe la posibilidad de reenviar los registros de auditoría del servidor de AP
         </tr>
         <tr>
           <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
-          <td>El punto final al que desea reenviar los registros. Si no especifica un [URL de ingesta](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls), se utilizará el punto final de la región en la que creó su clúster.</td>
+          <td>El punto final al que desea reenviar los registros. Si no especifica un [URL de ingesta](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls), se utiliza el punto final de la región en la que ha creado el clúster.</td>
         </tr>
         <tr>
           <td><code><em>&lt;cluster_space&gt;</em></code></td>
@@ -556,13 +606,13 @@ Existe la posibilidad de reenviar los registros de auditoría del servidor de AP
 2. Visualizar la configuración de registro para verificar que se ha implementado según lo previsto.
 
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
     Ejemplo de mandato y su salida:
     ```
-    ibmcloud ks logging-config-get myCluster
+    ibmcloud ks logging-config-get --cluster myCluster
     Retrieving cluster myCluster logging configurations...
     OK
     Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
@@ -584,7 +634,7 @@ Existe la posibilidad de reenviar los registros de auditoría del servidor de AP
 
 1. Configure un servidor de registro remoto donde puede reenviar los registros. Por ejemplo, puede [utilizar Logstash con Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend) para recopilar sucesos de auditoría.
 
-2. Para el clúster del que desea recopilar registros de auditoría de servidor de API: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure). **Nota**: Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
+2. Para el clúster del que desea recopilar registros de auditoría de servidor de API: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Nota**: Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
 
 Para reenviar registros de auditoría de API de Kubernetes:
 
@@ -641,12 +691,12 @@ Para reenviar registros de auditoría de API de Kubernetes:
 3. Aplique la actualización de configuración reiniciando el maestro de Kubernetes.
 
     ```
-    ibmcloud ks apiserver-refresh <cluster_name_or_ID>
+    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 4. Opcional: si desea detener el reenvío de registros de auditoría, puede inhabilitar su configuración.
-    1. Para el clúster del que desea dejar de recopilar registros de auditoría de servidor de API: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+    1. Para el clúster del que desea dejar de recopilar registros de auditoría de servidor de API: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
     2. Inhabilite la configuración del programa de fondo del webhook para el servidor de API del clúster.
 
         ```
@@ -657,7 +707,7 @@ Para reenviar registros de auditoría de API de Kubernetes:
     3. Aplique la actualización de configuración reiniciando el maestro de Kubernetes.
 
         ```
-        ibmcloud ks apiserver-refresh <cluster_name_or_ID>
+        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -674,14 +724,14 @@ Debido a que los registros del servidor de API de Kubernetes se transmiten autom
 
 **Antes de empezar**
 
-* [Suministre una instancia](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) de {{site.data.keyword.cos_short}} desde el catálogo de {{site.data.keyword.Bluemix_notm}}.
-* Asegúrese de tener el rol de [**Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para el clúster.
+* [Suministre una instancia](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-for-developers#provision-an-instance-of-ibm-cloud-object-storage) de {{site.data.keyword.cos_short}} desde el catálogo de {{site.data.keyword.Bluemix_notm}}.
+* Asegúrese de que tiene el [rol de **Administrador** de la plataforma de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
 
 **Creación de una instantánea**
 
-1. Cree un grupo de Object Storage mediante la consola de {{site.data.keyword.Bluemix_notm}} siguiendo [esta guía de aprendizaje de iniciación](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
+1. Cree un grupo de Object Storage mediante la consola de {{site.data.keyword.Bluemix_notm}} siguiendo [esta guía de aprendizaje de iniciación](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started-console-#create-buckets).
 
-2. Genere [credenciales de servicio de HMAC](/docs/services/cloud-object-storage/iam/service-credentials.html) en el grupo que ha creado.
+2. Genere [credenciales de servicio de HMAC](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials) en el grupo que ha creado.
   1. En el separador **Credenciales de servicio** del panel de control de {{site.data.keyword.cos_short}}, pulse **Nueva credencial**.
   2. Otorgue a las credenciales HMAC el rol de servicio `Escritor`.
   3. En el campo **Añadir parámetros de configuración en línea**, especifique `{"HMAC":true}`.
@@ -727,40 +777,47 @@ Debido a que los registros del servidor de API de Kubernetes se transmiten autom
 <br />
 
 
-## Visualización de métricas
+## Elección de una solución de supervisión
 {: #view_metrics}
 
 Las métricas le ayudan a supervisar el estado y el rendimiento de sus clústeres. Puede utilizar las funciones estándares de tiempo de ejecución de contenedor y Kubernetes para supervisar el estado de sus clústeres y apps. **Nota**: La supervisión se soporta solo para los clústeres estándares.
 {:shortdesc}
 
+**¿Supervisa IBM mi clúster?**
+
+IBM supervisa continuamente cada nodo maestro de Kubernetes. {{site.data.keyword.containerlong_notm}} explora automáticamente cada nodo en el que se ha desplegado el nodo maestro de Kubernetes en busca de vulnerabilidades y arreglos de seguridad específicos de Kubernetes y del sistema operativo. Si se encuentran vulnerabilidades, {{site.data.keyword.containerlong_notm}} aplica automáticamente los arreglos y soluciona las vulnerabilidades en nombre del usuario para asegurarse de la protección del nodo maestro. El usuario es el responsable de supervisar y analizar los registros correspondientes al resto de componentes del clúster.
+
+Para evitar conflictos cuando servicios de métricas, asegúrese de que los clústeres de los grupos de recursos y regiones tienen nombres exclusivos.
+{: tip}
+
 <dl>
   <dt>Página de detalles del clúster en {{site.data.keyword.Bluemix_notm}}</dt>
     <dd>{{site.data.keyword.containerlong_notm}} proporciona información sobre el estado y la capacidad del clúster y sobre el uso de los recursos del clúster. Puede utilizar esta consola para escalar los clústeres, trabajar con el almacenamiento persistente y añadir funciones adicionales al clúster mediante la vinculación de servicios de {{site.data.keyword.Bluemix_notm}}. Para ver la página de detalles de un clúster, vaya al **Panel de control de {{site.data.keyword.Bluemix_notm}}** y seleccione un clúster.</dd>
   <dt>Panel de control de Kubernetes</dt>
-    <dd>El panel de control de Kubernetes es una interfaz web administrativa que puede utilizar para revisar el estado de los nodos trabajadores, buscar recursos de Kubernetes, desplegar apps contenerizadas y resolver problemas de apps con la información de registro y supervisión. Para obtener más información sobre cómo acceder al panel de control de Kubernetes, consulte [Inicio del panel de control de Kubernetes para {{site.data.keyword.containerlong_notm}}](cs_app.html#cli_dashboard).</dd>
+    <dd>El panel de control de Kubernetes es una interfaz web administrativa que puede utilizar para revisar el estado de los nodos trabajadores, buscar recursos de Kubernetes, desplegar apps contenerizadas y resolver problemas de apps con la información de registro y supervisión. Para obtener más información sobre cómo acceder al panel de control de Kubernetes, consulte [Inicio del panel de control de Kubernetes para {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>En el caso de los clústeres estándares, las métricas se encuentran en el espacio de {{site.data.keyword.Bluemix_notm}} al que se inició sesión cuando se creó el clúster de Kubernetes. Si ha especificado un espacio de {{site.data.keyword.Bluemix_notm}} al crear el clúster, entonces las métricas están ubicados en el espacio en cuestión. Las métricas de contenedor se recopilan automáticamente para todos los contenedores desplegados en un clúster. Estas métricas se envían y se ponen a disponibilidad mediante Grafana. Para obtener más información sobre las métricas, consulte el tema sobre [Supervisión de {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
+    <dd><p>En el caso de los clústeres estándares, las métricas se encuentran en el espacio de {{site.data.keyword.Bluemix_notm}} al que se inició sesión cuando se creó el clúster de Kubernetes. Si ha especificado un espacio de {{site.data.keyword.Bluemix_notm}} al crear el clúster, entonces las métricas están ubicados en el espacio en cuestión. Las métricas de contenedor se recopilan automáticamente para todos los contenedores desplegados en un clúster. Estas métricas se envían y se ponen a disponibilidad mediante Grafana. Para obtener más información sobre las métricas, consulte el tema sobre [Supervisión de {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
     <p>Para acceder al panel de control de Grafana, vaya a uno de los siguientes URL y seleccione la cuenta o espacio de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster.</p> <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas deben leerse de izquierda a derecha, con la zona de servidor en la columna una y las direcciones IP coincidentes en la columna dos.">
   <caption>Direcciones IP para abrir para el tráfico de supervisión</caption>
         <thead>
         <th>Región de {{site.data.keyword.containerlong_notm}}</th>
         <th>Dirección de supervisión</th>
-        <th>Direcciones IP de supervisión</th>
+        <th>Subredes de supervisión</th>
         </thead>
       <tbody>
         <tr>
          <td>UE central</td>
-         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>metrics.eu-de.bluemix.net</code></td>
          <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
          <td>RU sur</td>
-         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>metrics.eu-gb.bluemix.net</code></td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
-          <td>EE.UU. este, EE.UU. sur, AP norte, AP sur</td>
-          <td>metrics.ng.bluemix.net</td>
+          <td>EE. UU. este, EE. UU. sur, AP norte, AP sur</td>
+          <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
          
@@ -768,12 +825,9 @@ Las métricas le ayudan a supervisar el estado y el rendimiento de sus clústere
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Obtenga visibilidad operativa en el rendimiento y estado de las apps mediante el despliegue de Sysdig como servicio de terceros en sus nodos trabajadores para reenviar métricas a {{site.data.keyword.monitoringlong}}. Para obtener más información, consulte
-[Análisis de métricas para una app desplegada en un clúster de Kubernetes](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Nota**: {{site.data.keyword.mon_full_notm}} no da soporte al tiempo de ejecución de contenedor de `containerd`. Cuando utilice {{site.data.keyword.mon_full_notm}} con clústeres de la versión 1.11 o posterior, no se recopilarán todas las métricas de contenedor.</dd>
+  <dd>Obtenga visibilidad operativa sobre el rendimiento y el estado de las apps mediante el despliegue de Sysdig como servicio de terceros en sus nodos trabajadores para reenviar métricas a {{site.data.keyword.monitoringlong}}. Para obtener más información, consulte
+[Análisis de métricas para una app desplegada en un clúster de Kubernetes](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). **Nota**: {{site.data.keyword.mon_full_notm}} no da soporte al tiempo de ejecución de contenedor de `containerd`. Cuando utilice {{site.data.keyword.mon_full_notm}} con clústeres de la versión 1.11 o posterior, no se recopilarán todas las métricas de contenedor.</dd>
 </dl>
-
-Para evitar conflictos cuando utilice el servicio de métricas incorporado, asegúrese de que los clústeres de los grupos de recursos y regiones tienen nombres exclusivos.
-{: tip}
 
 ### Otras herramientas de supervisión de estado
 {: #health_tools}
@@ -781,7 +835,7 @@ Para evitar conflictos cuando utilice el servicio de métricas incorporado, aseg
 Puede configurar otras herramientas para disponer de funciones adicionales.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus es una herramienta de supervisión, registro y generación de alertas diseñada para Kubernetes. La herramienta recupera información detallada acerca del clúster, los nodos trabajadores y el estado de despliegue basado en la información de registro de Kubernetes. Para obtener información sobre la configuración, consulte [Integración de servicios con {{site.data.keyword.containerlong_notm}}](cs_integrations.html#integrations).</dd>
+    <dd>Prometheus es una herramienta de supervisión, registro y generación de alertas diseñada para Kubernetes. La herramienta recupera información detallada acerca del clúster, los nodos trabajadores y el estado de despliegue basado en la información de registro de Kubernetes. Para obtener información sobre la configuración, consulte [Integración de servicios con {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#integrations).</dd>
 </dl>
 
 <br />
@@ -790,21 +844,38 @@ Puede configurar otras herramientas para disponer de funciones adicionales.
 ## Configuración de la supervisión de estado de los nodos trabajadores con recuperación automática
 {: #autorecovery}
 
-El sistema de recuperación automática de {{site.data.keyword.containerlong_notm}} se puede desplegar en clústeres existentes de Kubernetes versión 1.9 o posterior.
-{: shortdesc}
-
-El sistema de recuperación automática utiliza varias comprobaciones para consultar el estado de salud del nodo trabajador de la consulta. Si la recuperación automática detecta un nodo trabajador erróneo basado en las comprobaciones configuradas, desencadena una acción correctiva, como una recarga del sistema operativo, en el nodo trabajador. Solo se aplica una acción correctiva por nodo trabajador cada vez. El nodo trabajador debe completar correctamente la acción correctiva antes de otro nodo trabajador empiece otra acción correctiva. Para obtener más información, consulte esta [publicación del blog sobre recuperación automática ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
+El sistema de recuperación automática utiliza varias comprobaciones para consultar el estado de salud del nodo trabajador de la consulta. Si la recuperación automática detecta un nodo trabajador erróneo basado en las comprobaciones configuradas, desencadena una acción correctiva, como una recarga del sistema operativo, en el nodo trabajador. Solo se aplica una acción correctiva por nodo trabajador cada vez. El nodo trabajador debe completar correctamente la acción correctiva antes de otro nodo trabajador empiece otra acción correctiva. Para obtener más información, consulte esta [publicación del blog sobre recuperación automática ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
+{: shortdesc}</br> </br>
 
 La recuperación automática requiere que al menos haya un nodo en buen estado que funcione correctamente. Configure la recuperación automática solo con las comprobaciones activas en los clústeres con dos o varios nodos trabajadores.
 {: note}
 
 Antes de empezar:
-- Asegúrese de tener el rol de [**Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform).
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+- Asegúrese de que tiene los siguientes [roles de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform):
+    - Rol de plataforma de **Administrador** sobre el clúster
+    - Rol de servicio de **Escritor** o de **Gestor** para el espacio de nombres `kube-system`
+- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-1. [Instale Helm para el clúster y añada el repositorio de {{site.data.keyword.Bluemix_notm}} a la instancia de Helm](cs_integrations.html#helm).
+Para configurar la característica Autorecovery:
 
-2. Cree un archivo de mapa de configuración que defina las comprobaciones en formato JSON. Por ejemplo, el siguiente archivo YAML define tres comprobaciones: una comprobación HTTP y dos comprobaciones de servidor API de Kubernetes. Consulte las tablas después del archivo YAML de ejemplo para obtener información sobre los tres tipos de comprobaciones e información sobre los componentes individuales de las comprobaciones.
+1.  [Siga las instrucciones](/docs/containers?topic=containers-integrations#helm) para instalar el cliente de Helm en la máquina local, instale el servidor Helm (tiller) con una cuenta de servicio y añada el repositorio de Helm de {{site.data.keyword.Bluemix_notm}}.
+
+2.  Verifique que el tiller se ha instalado con una cuenta de servicio.
+
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    Salida de ejemplo:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. Cree un archivo de mapa de configuración que defina las comprobaciones en formato JSON. Por ejemplo, el siguiente archivo YAML define tres comprobaciones: una comprobación HTTP y dos comprobaciones de servidor API de Kubernetes. Consulte las tablas después del archivo YAML de ejemplo para obtener información sobre los tres tipos de comprobaciones e información sobre los componentes individuales de las comprobaciones.
 </br>
    **Sugerencia:** Defina cada comprobación como una clave exclusiva en la sección `data` del mapa de configuración.
 
@@ -880,7 +951,7 @@ Antes de empezar:
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
-   <td>Define una comprobación HTTP que comprueba si un servidor HTTP que se ejecuta en el nodo trabajador tiene un estado saludable. Para utilizar esta comprobación debe desplegar un servidor HTTP en cada nodo trabajador en su clúster utilizando un [daemonset ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Debe implementar una comprobación de salud que esté disponible en la vía de acceso <code>/myhealth</code> que pueda verificar si su servidor HTTP posee un estado saludable. Puede definir otras vías cambiando el parámetro <strong>Route</strong>. Si el servidor HTTP posee un estado saludable, debe devolver el código de respuesta HTTP que esté definido en <strong>ExpectedStatus</strong>. El servidor HTTP debe configurarse para aparecer en la lista de direcciones IP privadas del nodo trabajador. Ejecute <code>kubectl get nodes</code> para obtener las direcciones IP privadas.<br></br>
+   <td>Define una comprobación HTTP que comprueba si un servidor HTTP que se ejecuta en el nodo trabajador tiene un estado saludable. Para utilizar esta comprobación debe desplegar un servidor HTTP en cada nodo trabajador en su clúster utilizando un [conjunto de daemons ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Debe implementar una comprobación de salud que esté disponible en la vía de acceso <code>/myhealth</code> que pueda verificar si su servidor HTTP posee un estado saludable. Puede definir otras vías cambiando el parámetro <strong>Route</strong>. Si el servidor HTTP posee un estado saludable, debe devolver el código de respuesta HTTP que esté definido en <strong><code>ExpectedStatus</code></strong>. El servidor HTTP debe configurarse para aparecer en la lista de direcciones IP privadas del nodo trabajador. Ejecute <code>kubectl get nodes</code> para obtener las direcciones IP privadas.<br></br>
    Por ejemplo, considere dos nodos en un clúster que tienen las direcciones IP privadas 10.10.10.1 y 10.10.10.2. En este ejemplo, se comprueban dos rutas para la respuesta 200 HTTP: <code>http://10.10.10.1:80/myhealth</code> y <code>http://10.10.10.2:80/myhealth</code>.
    La comprobación del YAML de ejemplo se ejecuta cada 3 minutos. Si falla tres veces consecutivas, se rearranca el nodo trabajador. Esta acción equivale a ejecutar <code>ibmcloud ks worker-reboot</code>.<br></br>La comprobación HTTP está inhabilitada hasta que se establece el campo <b>Habilitado</b> en <code>true</code>.</td>
    </tr>
@@ -907,7 +978,7 @@ Antes de empezar:
    </tr>
    <tr>
    <td><code>PodFailureThresholdPercent</code></td>
-   <td>Cuando el tipo de recurso sea <code>POD</code>, especifique el umbral del porcentaje de pods en un nodo trabajador que puede encontrarse en estado [NotReady ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Este porcentaje se basa en el número total de pods que están programados para un nodo trabajador. Cuando una comprobación determina que el porcentaje de pods erróneos es superior al umbral, cuenta un error.</td>
+   <td>Cuando el tipo de recurso sea <code>POD</code>, especifique el umbral del porcentaje de pods en un nodo trabajador que puede encontrarse en estado [<strong><code>NotReady </code></strong> ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Este porcentaje se basa en el número total de pods que están programados para un nodo trabajador. Cuando una comprobación determina que el porcentaje de pods erróneos es superior al umbral, cuenta un error.</td>
    </tr>
    <tr>
    <td><code>CorrectiveAction</code></td>
@@ -927,7 +998,7 @@ Antes de empezar:
    </tr>
    <tr>
    <td><code>Port</code></td>
-   <td>Cuando el tipo de comprobación sea <code>HTTP</code>, especifique el puerto con el que se debe vincular el servidor HTTP en los nodos trabajadores. Este puerto debe estar expuesto a la IP de cada nodo trabajador en el clúster. La recuperación automática requiere un número de puerto en todos los nodos para la comprobación de servidores. Utilice [daemonsets ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)cuando despliegue un servidor personalizado en un clúster.</td>
+   <td>Cuando el tipo de comprobación sea <code>HTTP</code>, especifique el puerto con el que se debe vincular el servidor HTTP en los nodos trabajadores. Este puerto debe estar expuesto a la IP de cada nodo trabajador en el clúster. La recuperación automática requiere un número de puerto en todos los nodos para la comprobación de servidores. Utilice [conjuntos de daemons ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)cuando despliegue un servidor personalizado en un clúster.</td>
    </tr>
    <tr>
    <td><code>ExpectedStatus</code></td>
@@ -948,35 +1019,35 @@ Antes de empezar:
    </tbody>
    </table>
 
-3. Cree el mapa de configuración en el clúster.
+4. Cree el mapa de configuración en el clúster.
 
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
-3. Verifique haber creado el mapa de configuración con el nombre `ibm-worker-recovery-checks` en el espacio de nombre `kube-system` con las comprobaciones adecuadas.
+5. Verifique haber creado el mapa de configuración con el nombre `ibm-worker-recovery-checks` en el espacio de nombre `kube-system` con las comprobaciones adecuadas.
 
     ```
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
-4. Desplegar Autorecovery en su clúster instalando el diagrama Helm `ibm-worker-recovery`.
+6. Desplegar Autorecovery en su clúster instalando el diagrama Helm `ibm-worker-recovery`.
 
     ```
     helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
-5. Pasados unos minutos, podrá comprobar la sección `Sucesos` en la salida del siguiente mandato para ver la actividad en el despliegue de la recuperación automática.
+7. Pasados unos minutos, podrá comprobar la sección `Sucesos` en la salida del siguiente mandato para ver la actividad en el despliegue de la recuperación automática.
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
-6. Si está visualizando actividad en el despliegue Autorecovery, puede comprobar el despliegue de Helm ejecutando las pruebas que se incluyen en la definición del diagrama Autorecovery.
+8. Si está visualizando actividad en el despliegue Autorecovery, puede comprobar el despliegue de Helm ejecutando las pruebas que se incluyen en la definición del diagrama Autorecovery.
 
     ```
     helm test ibm-worker-recovery

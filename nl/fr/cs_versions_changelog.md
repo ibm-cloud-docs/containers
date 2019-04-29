@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -26,25 +30,793 @@ lastupdated: "2018-12-05"
 Affichez des informations sur les modifications de version correspondant à des mises à jour de version principale, de version secondaire ou de correctif disponibles pour vos clusters Kubernetes {{site.data.keyword.containerlong}}. Les modifications comprennent des mises à jour pour les composants de Kubernetes et d'{{site.data.keyword.Bluemix_notm}} Provider.
 {:shortdesc}
 
-Pour plus d'informations sur les versions principales et secondaires, les versions de correctifs et les actions de préparation entre les versions secondaires, voir [Versions Kubernetes](cs_versions.html). 
+Pour plus d'informations sur les versions principales et secondaires, les versions de correctifs et les actions de préparation entre les versions secondaires, voir [Versions Kubernetes](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
 Pour plus d'informations sur les modifications apportées depuis la version précédente, voir les journaux de modifications suivants.
+-  [Journal des modifications](#113_changelog) - Version 1.13.
 -  [Journal des modifications](#112_changelog) - Version 1.12.
 -  [Journal des modifications](#111_changelog) - Version 1.11.
--  [Journal des modifications](#110_changelog) - Version 1.10.
--  [Archive](#changelog_archive) des journaux des modifications pour les versions dépréciées ou non prises en charge.
+-  **Déprécié** : [Journal des modifications](#110_changelog) - Version 1.10.
+-  [Archive](#changelog_archive) des journaux de modifications des versions non prises en charge.
 
-Certains journaux de modifications concernent les _groupes de correctifs de noeud worker_ et s'appliquent uniquement aux noeuds worker. Vous devez [appliquer ces correctifs](cs_cli_reference.html#cs_worker_update) pour garantir la conformité de vos noeuds worker aux normes de sécurité. D'autres journaux de modifications pour les _groupes de correctifs du maître_ et s'appliquent uniquement au noeud maître du cluster. Les groupes de correctifs du maître ne s'appliquent pas forcément automatiquement. Vous pouvez choisir de les [appliquer manuellement](cs_cli_reference.html#cs_cluster_update). Pour plus d'informations sur les types de correctif, voir [Types de mise à jour](cs_versions.html#update_types).
+Certains journaux de modifications concernent les _groupes de correctifs de noeud worker_ et s'appliquent uniquement aux noeuds worker. Vous devez [appliquer ces correctifs](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) pour garantir la conformité de vos noeuds worker aux normes de sécurité. Ces groupes de correctifs peuvent avoir une version supérieure à celle du maître car certains groupes de correctifs de génération sont spécifiques à des noeuds worker. D'autres journaux de modifications pour les _groupes de correctifs du maître_ et s'appliquent uniquement au noeud du maître cluster. Les groupes de correctifs du maître ne s'appliquent pas forcément automatiquement. Vous pouvez choisir de les [appliquer manuellement](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update). Pour plus d'informations sur les types de correctif, voir [Types de mise à jour](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
 </br>
 
+## Journal des modifications - Version 1.13
+{: #113_changelog}
+
+### Journal des modifications pour la version 1.13.4_1513, publié le 20 mars 2019
+{: #1134_1513}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.13.4_1513.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.13.4_1510">
+<caption>Modifications depuis la version 1.13.4_1510</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuration du DNS de cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Correction d'un bogue qui pouvait entraîner l'échec d'opérations du maître cluster, par exemple une actualisation (`refresh`) ou une mise à jour (`update`), lorsque le DNS de cluster non utilisé devait être réduit.</td>
+</tr>
+<tr>
+<td>Configuration de proxy à haute disponibilité de maître cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration pour mieux traiter les échecs de connexion intermittente avec le maître cluster.</td>
+</tr>
+<tr>
+<td>Configuration du serveur CoreDNS</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration du serveur CoreDNS pour prendre en charge [plusieurs fichiers Corefiles ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://coredns.io/2017/07/23/corefile-explained/) après une mise à jour de la version du cluster Kubernetes à partir de la version 1.12.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.4</td>
+<td>1.2.5</td>
+<td>Voir les [notes sur l'édition de containerd![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/containerd/containerd/releases/tag/v1.2.5). La mise à jour comprend une amélioration du correctif pour la vulnérabilité [CVE-2019-5736 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Mise à jour des pilotes GPU à la version [418.43 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.nvidia.com/object/unix.html). La mise à jour comprend un correctif pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>344</td>
+<td>345</td>
+<td>Prise en charge des [noeuds finaux de service privé](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter la vulnérabilité [CVE-2019-6133 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>136</td>
+<td>166</td>
+<td>Image mise à jour pour traiter les vulnérabilités [CVE-2018-16890 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) et [CVE-2019-3823 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Image mise à jour pour traiter les vulnérabilités [CVE-2018-10779 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) et [CVE-2019-7663 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.13.4_1510, publié le 4 mars 2019
+{: #1134_1510}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.13.4_1510.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.13.2_1509">
+<caption>Modifications depuis la version 1.13.2_1509</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fournisseur DNS de cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Augmentation de la limite de mémoire de pod pour les serveurs CoreDNS et DNS Kubernetes de `170Mi` à `400Mi` afin de traiter plus de services de cluster.</td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Mise à jour des images pour traiter la vulnérabilité [CVE-2019-6454 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.2-62</td>
+<td>v1.13.4-86</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.13.4. Correction de problèmes de connectivité périodique des équilibreurs de charge de version 1.0 qui définissaient le paramètre `externalTrafficPolicy` avec la valeur `local`. Mise à jour des événements d'équilibreur de charge de version 1.0 et 2.0 pour utiliser les liens à jour de la documentation {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>342</td>
+<td>344</td>
+<td>Modification de l'image de base du système d'exploitation pour passer de Fedora à Alpine. Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>122</td>
+<td>136</td>
+<td>Augmentation du délai d'attente du client dans {{site.data.keyword.keymanagementservicefull_notm}}. Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.2</td>
+<td>v1.13.4</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.4). La mise à jour résout les vulnérabilités [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) et [CVE-2019-1002100 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+</tr>
+<tr>
+<td>Configuration de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Ajout du paramètre `ExperimentalCriticalPodAnnotation=true` à l'option `--feature-gates`. Ce paramètre permet de migrer les pods de l'annotation `scheduler.alpha.kubernetes.io/critical-pod` dépréciée pour [prendre en charge la priorité de pod de Kubernetes](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>Equilibreur de charge et moniteur d'équilibrage de charge pour {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Serveur et client OpenVPN</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-1559 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-6454 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.13.2_1509, publié le 27 février 2019
+{: #1132_1509}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.13.2_1509.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.13.2_1508">
+<caption>Modifications depuis la version 1.13.2_1508</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter la vulnérabilité [CVE-2018-19407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.13.2_1508, publié le 15 février 2019
+{: #1132_1508}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.13.2_1508.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.13.2_1507">
+<caption>Modifications depuis la version 1.13.2_1507</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuration de proxy à haute disponibilité de maître cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Remplacement de la valeur `spec.priorityClassName` de la configuration de pod par `system-node-critical` et définition de la valeur de `spec.priority` sur `2000001000`.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.2</td>
+<td>1.2.4</td>
+<td>Voir les [notes sur l'édition de containerd![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/containerd/containerd/releases/tag/v1.2.4). La mise à jour résout la vulnérabilité [CVE-2019-5736 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Configuration du `kubelet` de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique. Définissez l'option `event-qps` avec la valeur `0` pour empêcher la création d'événement de limitation de débit.</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.13.2_1507, publié le 5 février 2019
+{: #1132_1507}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.13.2_1507.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.4_1535">
+<caption>Modifications depuis la version 1.12.4_1535</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.3.1</td>
+<td>v3.4.0</td>
+<td>Voir les [notes sur l'édition de Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.4/releases/#v340).</td>
+</tr>
+<tr>
+<td>Fournisseur DNS de cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Le serveur CoreDNS est désormais le fournisseur de DNS de cluster par défaut pour les nouveaux clusters. Si vous effectuez une mise à jour du cluster existant à la version 1.13 qui utilise KubeDNS comme fournisseur de DNS de cluster, KubeDNS reste le fournisseur de DNS de cluster. Cependant, vous pouvez choisir d'[utiliser CoreDNS à la place](/docs/containers?topic=containers-cluster_dns#dns_set).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.2.2</td>
+<td>Voir les [notes sur l'édition de containerd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/containerd/containerd/releases/tag/v1.2.2).</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.2</td>
+<td>1.2.6</td>
+<td>Voir les [notes sur l'édition de CoreDNS![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coredns/coredns/releases/tag/v1.2.6). En outre, la configuration de CoreDNS est mise à jour pour [prendre en charge plusieurs fichiers Corefiles ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://coredns.io/2017/07/23/corefile-explained/).</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus). </td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Images mises à jour pour traiter les vulnérabilités [CVE-2019-3462 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) et [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.4-118</td>
+<td>v1.13.2-62</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.13.2. Par ailleurs, `calicoctl` est mis à jour à la version 3.4.0. Correction de mises à jour de configuration inutiles vers les équilibreurs de charge de version 2.0 sur les modifications de statut de noeud worker.</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>338</td>
+<td>342</td>
+<td>Le plug-in de stockage de fichiers est mis à jour comme suit :
+<ul><li>Prise en charge du provisionnement dynamique avec [planification tenant compte de la topologie de volume](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<li>Les erreurs de suppression de réservation de volume persistant (PVC) sont ignorées si le stockage est déjà supprimé.</li>
+<li>Ajout d'une annotation de message d'échec pour les PVC ayant échoué.</li>
+<li>Optimisation des paramètres d'élection du leader du contrôleur du service de mise à disposition de stockage et de période de resynchronisation et augmentation du délai de mise à disposition de 30 minutes à 1 heure.</li>
+<li>Vérification des droits d'utilisateur avant de commencer la mise à disposition.</li>
+<li>Ajout d'un paramètre de tolérance `CriticalAddonsOnly` dans les déploiements de `ibm-file-plugin` et `ibm-storage-watcher` dans l'espace de nom `kube-system`.</li></ul></td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>111</td>
+<td>122</td>
+<td>Ajout d'une logique de nouvelle tentative pour éviter les échecs temporaires lorsque les valeurs confidentielles (secrets) de Kubernetes sont gérées par {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.4</td>
+<td>v1.13.2</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.2).</td>
+</tr>
+<tr>
+<td>Configuration de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration de règle d'audit du serveur d'API Kubernetes pour inclure les métadonnées de journalisation pour les demandes `cluster-admin` et consigner le corps des demandes `create`, `update` et `patch` de charge de travail.</td>
+</tr>
+<tr>
+<td>Mise à l'échelle automatique de DNS avec Kubernetes</td>
+<td>1.2.0</td>
+<td>1.3.0</td>
+<td>Voir les [notes sur l'édition de la fonction Kubernetes de mise à l'échelle automatique (autoscaler) de DNS ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.3.0).</td>
+</tr>
+<tr>
+<td>Client OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Ajout d'un paramètre de tolérance `CriticalAddonsOnly` au déploiement de `vpn` dans l'espace de nom `kube-system`. Par ailleurs, la configuration de pod est désormais obtenue à partir d'une valeur confidentielle (secret) au lieu d'une mappe de configuration (configmap).</td>
+</tr>
+<tr>
+<td>Serveur OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). </td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Correctif de sécurité pour traiter la vulnérabilité [CVE-2018-16864 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
 ## Journal des modifications - Version 1.12
 {: #112_changelog}
 
-Passez en revue le journal des modifications de la version 1.12. 
+Passez en revue le journal des modifications de la version 1.12.
 {: shortdesc}
+
+### Journal des modifications pour la version 1.12.6_1544, publié le 20 mars 2019
+{: #1126_1544}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.12.6_1544.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.6_1541">
+<caption>Modifications depuis la version 1.12.6_1541</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuration du DNS de cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Correction d'un bogue qui pouvait entraîner l'échec d'opérations du maître cluster, par exemple une actualisation (`refresh`) ou une mise à jour (`update`), lorsque le DNS de cluster non utilisé devait être réduit.</td>
+</tr>
+<tr>
+<td>Configuration de proxy à haute disponibilité de maître cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration pour mieux traiter les échecs de connexion intermittente avec le maître cluster.</td>
+</tr>
+<tr>
+<td>Configuration du serveur CoreDNS</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration du serveur CoreDNS pour prendre en charge [plusieurs fichiers Corefiles ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://coredns.io/2017/07/23/corefile-explained/).</td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Mise à jour des pilotes GPU à la version [418.43 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.nvidia.com/object/unix.html). La mise à jour comprend un correctif pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>344</td>
+<td>345</td>
+<td>Prise en charge des [noeuds finaux de service privé](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter la vulnérabilité [CVE-2019-6133 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>136</td>
+<td>166</td>
+<td>Image mise à jour pour traiter les vulnérabilités [CVE-2018-16890 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) et [CVE-2019-3823 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Image mise à jour pour traiter les vulnérabilités [CVE-2018-10779 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) et [CVE-2019-7663 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.12.6_1541, publié le 4 mars 2019
+{: #1126_1541}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.12.6_1541.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.5_1540">
+<caption>Modifications depuis la version 1.12.5_1540</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fournisseur DNS de cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Augmentation de la limite de mémoire de pod pour les serveurs CoreDNS et DNS Kubernetes de `170Mi` à `400Mi` afin de traiter plus de services de cluster.</td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Mise à jour des images pour traiter la vulnérabilité [CVE-2019-6454 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.5-137</td>
+<td>v1.12.6-157</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.12.6. Correction de problèmes de connectivité périodique des équilibreurs de charge de version 1.0 qui définissaient le paramètre `externalTrafficPolicy` avec la valeur `local`. Mise à jour des événements d'équilibreur de charge de version 1.0 et 2.0 pour utiliser les liens à jour de la documentation {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>342</td>
+<td>344</td>
+<td>Modification de l'image de base du système d'exploitation pour passer de Fedora à Alpine. Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>122</td>
+<td>136</td>
+<td>Augmentation du délai d'attente du client dans {{site.data.keyword.keymanagementservicefull_notm}}. Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.5</td>
+<td>v1.12.6</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.6). La mise à jour résout les vulnérabilités [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) et [CVE-2019-1002100 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+</tr>
+<tr>
+<td>Configuration de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Ajout du paramètre `ExperimentalCriticalPodAnnotation=true` à l'option `--feature-gates`. Ce paramètre permet de migrer les pods de l'annotation `scheduler.alpha.kubernetes.io/critical-pod` dépréciée pour [prendre en charge la priorité de pod de Kubernetes](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>Equilibreur de charge et moniteur d'équilibrage de charge pour {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Serveur et client OpenVPN</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-1559 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-6454 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.12.5_1540, publié le 27 février 2019
+{: #1125_1540}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.5_1540.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.5_1538">
+<caption>Modifications depuis la version 1.12.5_1538</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter la vulnérabilité [CVE-2018-19407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.12.5_1538, publié le 15 février 2019
+{: #1125_1538}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.5_1538.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.5_1537">
+<caption>Modifications depuis la version 1.12.5_1537</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuration de proxy à haute disponibilité de maître cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Remplacement de la valeur `spec.priorityClassName` de la configuration de pod par `system-node-critical` et définition de la valeur de `spec.priority` sur `2000001000`.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.1.6</td>
+<td>Voir les [notes sur l'édition de containerd![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/containerd/containerd/releases/tag/v1.1.6). La mise à jour résout la vulnérabilité [CVE-2019-5736 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Configuration du `kubelet` de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique. </td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.12.5_1537, publié le 5 février 2019
+{: #1125_1537}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.12.5_1537.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.4_1535">
+<caption>Modifications depuis la version 1.12.4_1535</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus). </td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Images mises à jour pour traiter les vulnérabilités [CVE-2019-3462 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) et [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.4-118</td>
+<td>v1.12.5-137</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.12.5. Par ailleurs, `calicoctl` est mis à jour à la version 3.3.1. Correction de mises à jour de configuration inutiles vers les équilibreurs de charge de version 2.0 sur les modifications de statut de noeud worker.</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>338</td>
+<td>342</td>
+<td>Le plug-in de stockage de fichiers est mis à jour comme suit :
+<ul><li>Prise en charge du provisionnement dynamique avec [planification tenant compte de la topologie de volume](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<li>Les erreurs de suppression de réservation de volume persistant (PVC) sont ignorées si le stockage est déjà supprimé.</li>
+<li>Ajout d'une annotation de message d'échec pour les PVC ayant échoué.</li>
+<li>Optimisation des paramètres d'élection du leader du contrôleur du service de mise à disposition de stockage et de période de resynchronisation et augmentation du délai de mise à disposition de 30 minutes à 1 heure.</li>
+<li>Vérification des droits d'utilisateur avant de commencer la mise à disposition.</li></ul></td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>111</td>
+<td>122</td>
+<td>Ajout d'une logique de nouvelle tentative pour éviter les échecs temporaires lorsque les valeurs confidentielles (secrets) de Kubernetes sont gérées par {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.4</td>
+<td>v1.12.5</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.5).</td>
+</tr>
+<tr>
+<td>Configuration de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration de règle d'audit du serveur d'API Kubernetes pour inclure les métadonnées de journalisation pour les demandes `cluster-admin` et consigner le corps des demandes `create`, `update` et `patch` de charge de travail.</td>
+</tr>
+<tr>
+<td>Client OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Par ailleurs, la configuration de pod est désormais obtenue à partir d'une valeur confidentielle (secret) au lieu d'une mappe de configuration (configmap).</td>
+</tr>
+<tr>
+<td>Serveur OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). </td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Correctif de sécurité pour traiter la vulnérabilité [CVE-2018-16864 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.12.4_1535, publié le 28 janvier 2019
+{: #1124_1535}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.4_1535.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.4_1534">
+<caption>Modifications depuis la version 1.12.4_1534</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour pour les packages Ubuntu installés, notamment `apt` pour traiter les vulnérabilités [CVE-2019-3462 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) et [USN-3863-1 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://usn.ubuntu.com/3863-1).</td>
+</tr>
+</tbody>
+</table>
+
+
+### Journal des modifications pour la version 1.12.4_1534, publié le 21 janvier 2019
+{: #1124_1534}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.12.3_1534.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.4_1533">
+<caption>Modifications depuis la version 1.12.3_1533</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.3-91</td>
+<td>v1.12.4-118</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.12.4. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.3</td>
+<td>v1.12.4</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.4).</td>
+</tr>
+<tr>
+<td>Image Kubernetes add-on resizer</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>Voir les [notes sur l'édition de Kubernetes pour l'image add-on resizer ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+</tr>
+<tr>
+<td>Tableau de bord Kubernetes</td>
+<td>v1.8.3</td>
+<td>v1.10.1</td>
+<td>Voir les [notes sur l'édition sur le tableau de bord Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). La mise à jour résout la vulnérabilité [CVE-2018-18264 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).</td>
+</tr>
+<tr>
+<td>Programme d'installation de GPU</td>
+<td>390.12</td>
+<td>410.79</td>
+<td>Mise à jour des pilotes GPU installés à la version 410.79.</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.12.3_1533, publié le 7 janvier 2019
+{: #1123_1533}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.3_1533.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.3_1532">
+<caption>Modifications depuis la version 1.12.3_1532</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-139</td>
+<td>4.4.0-141</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter les vulnérabilités [CVE-2017-5753, CVE-2018-18690 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.12.3_1532, publié le 17 décembre 2018
+{: #1123_1532}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.2_1532.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.3_1531">
+<caption>Modifications depuis la version 1.12.3_1531</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour des packages Ubuntu installés.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Journal des modifications pour la version 1.12.3_1531, publié le 5 décembre 2018
 {: #1123_1531}
@@ -99,7 +871,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Utilisation des ressources de noeud worker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Ajout de groupes cgroups pour le kubelet et containerd pour empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](cs_clusters_planning.html#resource_limit_node).</td>
+<td>Ajout de groupes cgroups pour le kubelet et containerd pour empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -153,7 +925,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.12.2
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.12.2_1528, publié le 19 novembre 2018
 {: #1122_1528}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.2_1528. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.2_1528.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.12.2_1527">
@@ -171,7 +943,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Noyau</td>
 <td>4.4.0-137</td>
 <td>4.4.0-139</td>
-<td>Mise à jour des images de noeud worker avec la mise à jour du noyau pour [CVE-2018-7755 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour [CVE-2018-7755 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
 </tr>
 </tbody>
 </table>
@@ -180,7 +952,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.12.2_1527, publié le 7 novembre 2018
 {: #1122_1527}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.12.2_1527. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.12.2_1527.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1533">
@@ -204,13 +976,13 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.12.2
 <td>Fournisseur DNS de cluster</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Kubernetes DNS (KubeDNS) reste le fournisseur DNS de cluster par défaut. Vous avez toutefois la possibilité de [remplacer le fournisseur DNS de cluster par CoreDNS](cs_cluster_update.html#dns).</td>
+<td>Kubernetes DNS (KubeDNS) reste le fournisseur DNS de cluster par défaut. Vous avez toutefois la possibilité de [remplacer le fournisseur DNS de cluster par CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set).</td>
 </tr>
 <tr>
 <td>Fournisseur de métriques de cluster</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Le serveur Kubernetes Metrics Server remplace Kubernetes Heapster (déprécié depuis la version 1.8 de Kubernetes) comme fournisseur de métriques de cluster. Pour les éléments action, voir [l'action de préparation `metrics-server`](cs_versions.html#metrics-server).</td>
+<td>Le serveur Kubernetes Metrics Server remplace Kubernetes Heapster (déprécié depuis la version 1.8 de Kubernetes) comme fournisseur de métriques de cluster. Pour les éléments action, voir [l'action de préparation `metrics-server`](/docs/containers?topic=containers-cs_versions#metrics-server).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -234,14 +1006,14 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.12.2
 <td>Configuration de Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Ajout de trois nouvelles politiques de sécurité de pod IBM et des rôles de cluster associés. Pour plus d'informations, voir [Description des ressources par défaut pour la gestion de cluster IBM](cs_psp.html#ibm_psp).</td>
+<td>Ajout de trois nouvelles politiques de sécurité de pod IBM et des rôles de cluster associés. Pour plus d'informations, voir [Description des ressources par défaut pour la gestion de cluster IBM](/docs/containers?topic=containers-psp#ibm_psp).</td>
 </tr>
 <tr>
 <td>Tableau de bord Kubernetes</td>
 <td>v1.8.3</td>
 <td>v1.10.0</td>
 <td>Voir les [notes sur l'édition du tableau de bord Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0).<br><br>
-Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. Utilisez à la place un **Jeton** pour vous connecter. De plus, vous pouvez désormais augmenter le nombre de pods du tableau de bord Kubernetes en exécutant la commande `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.</td>
+Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place. De plus, vous pouvez désormais augmenter le nombre de pods du tableau de bord Kubernetes en exécutant la commande `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
@@ -262,7 +1034,7 @@ Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur 
 <td>Mise à jour pour prendre en charge l'édition Kubernetes 1.12. Autres modifications incluses :
 <ul><li>Les pods d'équilibreur de charge (`ibm-cloud-provider-ip-*` dans l'espace de nom `ibm-system`) définissent désormais les demandes de ressources d'UC et de mémoire.</li>
 <li>L'annotation `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` a été ajoutée pour spécifier le réseau local virtuel (VLAN) sur lequel est déployé le service d'équilibreur de charge. Pour voir les VLAN disponibles dans votre cluster, exécutez la commande `ibmcloud ks vlans --zone <zone>`.</li>
-<li>Un nouvel [équilibreur de charge 2.0](cs_loadbalancer.html#planning_ipvs) est disponible en version bêta.</li></ul></td>
+<li>Un nouvel [équilibreur de charge 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) est disponible en version bêta.</li></ul></td>
 </tr>
 <tr>
 <td>Configuration du client OpenVPN</td>
@@ -277,6 +1049,419 @@ Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur 
 {: #111_changelog}
 
 Passez en revue le journal des modifications de la version 1.11.
+
+### Journal des modifications pour la version 1.11.8_1550, publié le 20 mars 2019
+{: #1118_1550}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.8_1550.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.8_1547">
+<caption>Modifications depuis la version 1.11.8_1547</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuration de proxy à haute disponibilité de maître cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration pour mieux traiter les échecs de connexion intermittente avec le maître cluster.</td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Mise à jour des pilotes GPU à la version [418.43 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.nvidia.com/object/unix.html). La mise à jour comprend un correctif pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>344</td>
+<td>345</td>
+<td>Prise en charge des [noeuds finaux de service privé](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter la vulnérabilité [CVE-2019-6133 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>136</td>
+<td>166</td>
+<td>Image mise à jour pour traiter les vulnérabilités [CVE-2018-16890 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) et [CVE-2019-3823 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Image mise à jour pour traiter les vulnérabilités [CVE-2018-10779 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) et [CVE-2019-7663 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.11.8_1547, publié le 4 mars 2019
+{: #1118_1547}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.8_1547.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.7_1546">
+<caption>Modifications depuis la version 1.11.7_1546</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Mise à jour des images pour traiter la vulnérabilité [CVE-2019-6454 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.7-198</td>
+<td>v1.11.8-219</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11.8. Correction de problèmes de connectivité périodique des équilibreurs de charge qui définissaient le paramètre `externalTrafficPolicy` avec la valeur `local`. Mise à jour des événements d'équilibreur de charge pour utiliser les liens à jour de la documentation {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>342</td>
+<td>344</td>
+<td>Modification de l'image de base du système d'exploitation pour passer de Fedora à Alpine. Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>122</td>
+<td>136</td>
+<td>Augmentation du délai d'attente du client dans {{site.data.keyword.keymanagementservicefull_notm}}. Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.7</td>
+<td>v1.11.8</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.8). La mise à jour résout les vulnérabilités [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) et [CVE-2019-1002100 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+</tr>
+<tr>
+<td>Configuration de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Ajout du paramètre `ExperimentalCriticalPodAnnotation=true` à l'option `--feature-gates`. Ce paramètre permet de migrer les pods de l'annotation `scheduler.alpha.kubernetes.io/critical-pod` dépréciée pour [prendre en charge la priorité de pod de Kubernetes](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Augmentation de la limite de mémoire de pod pour le serveur Kubernetes DNS de `170Mi` à `400Mi` afin de traiter plus de services de cluster.</td>
+</tr>
+<tr>
+<td>Equilibreur de charge et moniteur d'équilibrage de charge pour {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Serveur et client OpenVPN</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-1559 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-6454 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.11.7_1546, publié le 27 février 2019
+{: #1117_1546}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.7_1546.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.7_1546">
+<caption>Modifications depuis la version 1.11.7_1546</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter la vulnérabilité [CVE-2018-19407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.11.7_1544, publié le 15 février 2019
+{: #1117_1544}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.7_1544.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.7_1543">
+<caption>Modifications depuis la version 1.11.7_1543</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuration de proxy à haute disponibilité de maître cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Remplacement de la valeur `spec.priorityClassName` de la configuration de pod par `system-node-critical` et définition de la valeur de `spec.priority` sur `2000001000`.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.1.6</td>
+<td>Voir les [notes sur l'édition de containerd![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/containerd/containerd/releases/tag/v1.1.6). La mise à jour résout la vulnérabilité [CVE-2019-5736 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Configuration du `kubelet` de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique. </td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.11.7_1543, publié le 5 février 2019
+{: #1117_1543}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.7_1543.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.6_1541">
+<caption>Modifications depuis la version 1.11.6_1541</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus). </td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Images mises à jour pour traiter les vulnérabilités [CVE-2019-3462 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) et [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.6-180</td>
+<td>v1.11.7-198</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11.7. Par ailleurs, `calicoctl` est mis à jour à la version 3.3.1. Correction de mises à jour de configuration inutiles vers les équilibreurs de charge de version 2.0 sur les modifications de statut de noeud worker.</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>338</td>
+<td>342</td>
+<td>Le plug-in de stockage de fichiers est mis à jour comme suit :
+<ul><li>Prise en charge du provisionnement dynamique avec [planification tenant compte de la topologie de volume](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<li>Les erreurs de suppression de réservation de volume persistant (PVC) sont ignorées si le stockage est déjà supprimé.</li>
+<li>Ajout d'une annotation de message d'échec pour les PVC ayant échoué.</li>
+<li>Optimisation des paramètres d'élection du leader du contrôleur du service de mise à disposition de stockage et de période de resynchronisation et augmentation du délai de mise à disposition de 30 minutes à 1 heure.</li>
+<li>Vérification des droits d'utilisateur avant de commencer la mise à disposition.</li></ul></td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>111</td>
+<td>122</td>
+<td>Ajout d'une logique de nouvelle tentative pour éviter les échecs temporaires lorsque les valeurs confidentielles (secrets) de Kubernetes sont gérées par {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.6</td>
+<td>v1.11.7</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7). </td>
+</tr>
+<tr>
+<td>Configuration de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration de règle d'audit du serveur d'API Kubernetes pour inclure les métadonnées de journalisation pour les demandes `cluster-admin` et consigner le corps des demandes `create`, `update` et `patch` de charge de travail.</td>
+</tr>
+<tr>
+<td>Client OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Par ailleurs, la configuration de pod est désormais obtenue à partir d'une valeur confidentielle (secret) au lieu d'une mappe de configuration (configmap).</td>
+</tr>
+<tr>
+<td>Serveur OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). </td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Correctif de sécurité pour traiter la vulnérabilité [CVE-2018-16864 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.11.6_1541, publié le 28 janvier 2019
+{: #1116_1541}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.6_1541.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.6_1540">
+<caption>Modifications depuis la version 1.11.6_1540</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour pour les packages Ubuntu installés, notamment `apt` pour traiter les vulnérabilités [CVE-2019-3462 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) / [USN-3863-1 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://usn.ubuntu.com/3863-1).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.11.6_1540, publié le 21 janvier 2019
+{: #1116_1540}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.6_1540.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.5_1539">
+<caption>Modifications depuis la version 1.11.5_1539</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.5-152</td>
+<td>v1.11.6-180</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11.6. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.5</td>
+<td>v1.11.6</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6). </td>
+</tr>
+<tr>
+<td>Image Kubernetes add-on resizer</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>Voir les [notes sur l'édition de Kubernetes pour l'image add-on resizer ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+</tr>
+<tr>
+<td>Tableau de bord Kubernetes</td>
+<td>v1.8.3</td>
+<td>v1.10.1</td>
+<td>Voir les [notes sur l'édition sur le tableau de bord Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). La mise à jour résout la vulnérabilité [CVE-2018-18264 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place. </td>
+</tr>
+<tr>
+<td>Programme d'installation de GPU</td>
+<td>390.12</td>
+<td>410.79</td>
+<td>Mise à jour des pilotes GPU installés à la version 410.79.</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.11.5_1539, publié le 7 janvier 2019
+{: #1115_1539}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.5_1539.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.5_1538">
+<caption>Modifications depuis la version 1.11.5_1538</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-139</td>
+<td>4.4.0-141</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter les vulnérabilités [CVE-2017-5753, CVE-2018-18690 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.11.5_1538, publié le 17 décembre 2018
+{: #1115_1538}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.5_1538.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.5_1537">
+<caption>Modifications depuis la version 1.11.5_1537</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour des packages Ubuntu installés.</td>
+</tr>
+</tbody>
+</table>
 
 ### Journal des modifications pour la version 1.11.5_1537, publié le 5 décembre 2018
 {: #1115_1537}
@@ -331,7 +1516,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Utilisation des ressources de noeud worker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Ajout de groupes cgroups pour le kubelet et containerd pour empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](cs_clusters_planning.html#resource_limit_node).</td>
+<td>Ajout de groupes cgroups pour le kubelet et containerd pour empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -389,7 +1574,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.4
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.11.3_1534, publié le 19 novembre 2018
 {: #1113_1534}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1534. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1534.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1533">
@@ -416,7 +1601,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.11.3_1533, publié le 7 novembre 2018
 {: #1113_1533}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1533. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1533.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1531">
@@ -431,10 +1616,10 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.3
 </thead>
 <tbody>
 <tr>
-<td>Mise à jour des maîtres à haute disponibilité (HA)</td>
+<td>Mise à jour des maîtres cluster à haute disponibilité (HA)</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Correction de la mise à jour des maîtres à haute disponibilité (HA) pour les clusters qui utilisent des webhooks d'admission, tels qu'`initializerconfigurations`, `mutatingwebhookconfigurations` ou `validatingwebhookconfigurations`. Vous pouvez utiliser ces webhooks avec des chartes Helm comme pour [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce).</td>
+<td>Correction de la mise à jour des maîtres à haute disponibilité (HA) pour les clusters qui utilisent des webhooks d'admission, tels qu'`initializerconfigurations`, `mutatingwebhookconfigurations` ou `validatingwebhookconfigurations`. Vous pouvez utiliser ces webhooks avec des chartes Helm comme pour [Container Image Security Enforcement](/docs/services/Registry?topic=registry-security_enforce#security_enforce).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -446,7 +1631,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.3
 <td>Noyau avec puce TPM activée</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Les noeuds worker bare metal avec des puces TPM pour la fonction de calcul sécurisé utilisent le noyau Ubuntu par défaut jusqu'à ce que la fonction de confiance (trust) soit activée. Si vous [activez la fonction de confiance](cs_cli_reference.html#cs_cluster_feature_enable) sur un cluster existant, vous devez [recharger](cs_cli_reference.html#cs_worker_reload) tous les noeuds worker bare metal existants avec des puces TPM. Pour vérifier si un noeud worker bare metal comporte une puce TPM, vérifiez la zone **Trustable** après avoir exécuté la [commande](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+<td>Les noeuds worker bare metal avec des puces TPM pour la fonction de calcul sécurisé utilisent le noyau Ubuntu par défaut jusqu'à ce que la fonction de confiance (trust) soit activée. Si vous [activez la fonction de confiance](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) sur un cluster existant, vous devez [recharger](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) tous les noeuds worker bare metal existants avec des puces TPM. Pour vérifier si un noeud worker bare metal comporte une puce TPM, vérifiez la zone **Trustable** après avoir exécuté la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
 </tr>
 </tbody>
 </table>
@@ -454,7 +1639,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.3
 ### Journal des modifications du maître - Groupe de correctifs 1.11.3_1531, publié le 1er novembre 2018
 {: #1113_1531_ha-master}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.11.3_1531. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.11.3_1531.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1527">
@@ -469,18 +1654,18 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 </thead>
 <tbody>
 <tr>
-<td>Maître de cluster</td>
+<td>Maître cluster</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Mise à jour de la configuration du noeud maître du cluster pour accroître la haute disponibilité (HA). Désormais, les clusters ont trois répliques du maître Kubernetes conçues avec une configuration haute disponibilité (HA), chaque maître étant déployé sur des hôtes physiques distincts. Par ailleurs, si votre cluster se trouve dans une zone compatible avec plusieurs zones, les maîtres sont répartis sur les différentes zones.<br>Pour connaître les actions que vous devez effectuer, voir [Mise à jour des maîtres de cluster pour la haute disponibilité](cs_versions.html#ha-masters). Ces actions de préparation sont applicables dans les cas suivants :<ul>
+<td>Mise à jour de la configuration du noeud du maître cluster pour accroître la haute disponibilité (HA). Désormais, les clusters ont trois répliques du maître Kubernetes conçues avec une configuration haute disponibilité (HA), chaque maître étant déployé sur des hôtes physiques distincts. Par ailleurs, si votre cluster se trouve dans une zone compatible avec plusieurs zones, les maîtres sont répartis sur les différentes zones.<br>Pour connaître les actions que vous devez effectuer, voir [Mise à jour des maîtres cluster pour la haute disponibilité](/docs/containers?topic=containers-cs_versions#ha-masters). Ces actions de préparation sont applicables dans les cas suivants :<ul>
 <li>Si vous disposez d'un pare-feu ou de règles réseau Calico personnalisées.</li>
 <li>Si vous utilisez les ports d'hôte `2040` ou `2041` sur vos noeuds worker.</li>
-<li>Si vous avez utilisé l'adresse IP du noeud maître du cluster pour accéder au maître depuis le cluster.</li>
+<li>Si vous avez utilisé l'adresse IP du noeud du maître cluster pour accéder au maître depuis le cluster.</li>
 <li>Si vous disposez d'un processus automatique pour appeler l'API ou l'interface de ligne de commande Calico (`calicoctl`), par exemple pour créer des règles Calico.</li>
 <li>Si vous utilisez des règles réseau Kubernetes ou Calico pour contrôler l'accès du trafic sortant du pod vers le maître.</li></ul></td>
 </tr>
 <tr>
-<td>Proxy du maître de cluster HA</td>
+<td>Proxy du maître cluster HA</td>
 <td>N/A</td>
 <td>1.8.12-alpine</td>
 <td>Ajout d'un pod `ibm-master-proxy-*` pour l'équilibrage de charge côté client sur tous les noeuds worker, de sort que chaque client de noeud worker puisse acheminer les demandes à une réplique de maître HA disponible.</td>
@@ -495,7 +1680,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Chiffrement des données dans etcd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Auparavant, les données etcd étaient stockées sur une instance de stockage de fichiers NFS d'un maître chiffrée au repos. Désormais, les données etcd sont stockées sur le disque local du maître et sauvegardées dans {{site.data.keyword.cos_full_notm}}. Les données sont chiffrées lors du transit vers {{site.data.keyword.cos_full_notm}} et au repos. Cependant, les données etcd sur le disque local du maître ne sont pas chiffrées. Si vous souhaitez que les données etcd locales de votre maître soient chiffrées, [activez {{site.data.keyword.keymanagementservicelong_notm}} dans votre cluster](cs_encrypt.html#keyprotect).</td>
+<td>Auparavant, les données etcd étaient stockées sur une instance de stockage de fichiers NFS d'un maître chiffrée au repos. Désormais, les données etcd sont stockées sur le disque local du maître et sauvegardées dans {{site.data.keyword.cos_full_notm}}. Les données sont chiffrées lors du transit vers {{site.data.keyword.cos_full_notm}} et au repos. Cependant, les données etcd sur le disque local du maître ne sont pas chiffrées. Si vous souhaitez que les données etcd locales de votre maître soient chiffrées, [activez {{site.data.keyword.keymanagementservicelong_notm}} dans votre cluster](/docs/containers?topic=containers-encryption#keyprotect).</td>
 </tr>
 </tbody>
 </table>
@@ -503,7 +1688,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.11.3_1531, publié le 26 octobre 2018
 {: #1113_1531}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1531. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1531.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1525">
@@ -529,7 +1714,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications du maître - Groupe de correctifs 1.11.3_1527, publié le 15 octobre 2018
 {: #1113_1527}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.11.3_1527. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.11.3_1527.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1524">
@@ -561,7 +1746,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.11.3_1525, publié le 10 octobre 2018
 {: #1113_1525}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1525. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1525.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1524">
@@ -594,7 +1779,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.11.3_1524, publié le 2 octobre 2018
 {: #1113_1524}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1524. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1524.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1521">
@@ -625,7 +1810,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.3
 <td>N/A</td>
 <td>N/A</td>
 <td>Suppression du paramètre `reclaimPolicy` en double dans les classes de stockage de fichiers d'IBM.<br><br>
-Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
+Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
 </tr>
 </tbody>
 </table>
@@ -633,7 +1818,7 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 ### Journal des modifications pour la version 1.11.3_1521, publié le 20 septembre 2018
 {: #1113_1521}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1521. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1521.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.2_1516">
@@ -658,13 +1843,13 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.3
 <td>N/A</td>
 <td>N/A</td>
 <td>Suppression de `mountOptions` dans les classes de stockage de fichiers d'IBM afin d'utiliser la valeur par défaut fournie par le noeud worker.<br><br>
-Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe de stockage de fichiers d'IBM reste `ibmc-file-bronze`. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
+Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste `ibmc-file-bronze`. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
 </tr>
 <tr>
 <td>Fournisseur de service de gestion des clés (KMS)</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Possibilité d'utiliser le service de gestion des clés (KMS) de Kubernetes dans le cluster pour prendre en charge {{site.data.keyword.keymanagementservicefull}}. Lorsque vous [activez {{site.data.keyword.keymanagementserviceshort}} dans votre cluster](cs_encrypt.html#keyprotect), toutes vos valeurs confidentielles (secrets) Kubernetes sont chiffrées.</td>
+<td>Possibilité d'utiliser le fournisseur de service de gestion des clés (KMS) de Kubernetes dans le cluster pour prendre en charge {{site.data.keyword.keymanagementservicefull}}. Lorsque vous [activez {{site.data.keyword.keymanagementserviceshort}} dans votre cluster](/docs/containers?topic=containers-encryption#keyprotect), toutes vos valeurs confidentielles (secrets) Kubernetes sont chiffrées.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -682,13 +1867,13 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 <td>Rotation des journaux</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Passage à l'utilisation de fichiers timer `systemd` au lieu de travaux `cronjobs` pour empêcher l'échec de la rotation des journaux (`logrotate`) sur les noeuds worker qui ne sont pas rechargés ou mis à niveau dans les 90 jours. **Remarque** : dans toutes les versions antérieures à cette version secondaire, le disque principal se remplit après l'échec d'un travail cron car il est impossible de faire tourner les journaux. Le travail cron échoue lorsque le noeud worker est actif pendant une durée de 90 jours sans être mis à jour ou rechargé. Si les journaux remplissent la totalité du disque principal, le noeud worker passe à l'état d'échec. Le noeud worker peut être corrigé en exécutant la [commande](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou la [commande](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` .</td>
+<td>Passage à l'utilisation de fichiers timer `systemd` au lieu de travaux `cronjobs` pour empêcher l'échec de la rotation des journaux (`logrotate`) sur les noeuds worker qui ne sont pas rechargés ou mis à niveau dans les 90 jours. **Remarque** : dans toutes les versions antérieures à cette version secondaire, le disque principal se remplit après l'échec d'un travail cron car il est impossible de faire tourner les journaux. Le travail cron échoue lorsque le noeud worker est actif pendant une durée de 90 jours sans être mis à jour ou rechargé. Si les journaux remplissent la totalité du disque principal, le noeud worker passe à l'état d'échec. Le noeud worker peut être corrigé en exécutant la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Expiration du mot de passe root</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Les mots de passe root des noeuds worker expirent au bout de 90 jours pour des raisons de conformité. Si vos outils d'automatisation doivent se connecter au noeud worker en tant que root ou dépendent de travaux cron qui s'exécutent en tant que root, vous pouvez désactiver l'expiration du mot de passe en vous connectant au noeud worker et en exécutant la commande `chage -M -1 root`. **Remarque** : si vos exigences de conformité en matière de sécurité vous empêchent toute exécution en tant que root ou l'annulation de l'expiration du mot de passe, ne désactivez pas l'expiration. Vous pouvez à la place [mettre à jour](cs_cli_reference.html#cs_worker_update) ou [recharger](cs_cli_reference.html#cs_worker_reload) vos noeuds worker au moins tous les 90 jours.</td>
+<td>Les mots de passe root des noeuds worker expirent au bout de 90 jours pour des raisons de conformité. Si vos outils d'automatisation doivent se connecter au noeud worker en tant que root ou dépendent de travaux cron qui s'exécutent en tant que root, vous pouvez désactiver l'expiration du mot de passe en vous connectant au noeud worker et en exécutant la commande `chage -M -1 root`. **Remarque** : si vos exigences de conformité en matière de sécurité vous empêchent toute exécution en tant que root ou l'annulation de l'expiration du mot de passe, ne désactivez pas l'expiration. Vous pouvez à la place [mettre à jour](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) ou [recharger](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) vos noeuds worker au moins tous les 90 jours.</td>
 </tr>
 <tr>
 <td>Composants d'exécution de noeud worker (`kubelet`, `kube-proxy`, `containerd`)</td>
@@ -697,7 +1882,7 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 <td>Suppression des dépendances des composants d'exécution sur le disque principal. Cette amélioration empêche l'échec des noeuds worker lorsque le disque principal est plein.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Nettoyage régulier des unités de montage transitoires pour leur éviter de devenir illimitées. Cette action corrige l'erreur [Kubernetes 57345 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -708,7 +1893,7 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 ### Journal des modifications pour la version 1.11.2_1516, publié le 4 septembre 2018
 {: #1112_1516}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.2_1516. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.2_1516.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.2_1514">
@@ -741,10 +1926,10 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.2
 <td>La configuration du fournisseur de cloud a changé pour mieux gérer les mises à jour des services d'équilibreur de charge avec l'élément `externalTrafficPolicy` défini sur `local`.</td>
 </tr>
 <tr>
-<td>Configuration du plug-in de stockage de fichiers d'IBM</td>
+<td>Configuration du plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>La version NFS par défaut a été supprimée des options de montage dans les classes de stockage de fichiers fournies par IBM. Désormais, le système d'exploitation de l'hôte négocie la version NFS avec le serveur NFS de l'infrastructure IBM Cloud (SoftLayer). Pour définir manuellement une version NFS spécifique ou modifier la version NFS de votre volume persistant qui a été négociée par le système d'exploitation de l'hôte, voir [Modification de la version NFS par défaut](cs_storage_file.html#nfs_version_class).</td>
+<td>La version NFS par défaut a été supprimée des options de montage dans les classes de stockage de fichiers fournies par IBM. Désormais, le système d'exploitation de l'hôte négocie la version NFS avec le serveur NFS de l'infrastructure IBM Cloud (SoftLayer). Pour définir manuellement une version NFS spécifique ou modifier la version NFS de votre volume persistant qui a été négociée par le système d'exploitation de l'hôte, voir [Modification de la version NFS par défaut](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 </tbody>
 </table>
@@ -752,7 +1937,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.2
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.11.2_1514, publié le 23 août 2018
 {: #1112_1514}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.2_1514. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.2_1514.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.2_1513">
@@ -784,7 +1969,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.11.2_1513, publié le 14 août 2018
 {: #1112_1513}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.2_1513. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.2_1513.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.5_1518">
@@ -802,13 +1987,13 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.2
 <td>containerd</td>
 <td>N/A</td>
 <td>1.1.2</td>
-<td>`containerd` est le nouvel environnement de conteneur de Kubernetes qui remplace Docker. Voir les [notes sur l'édition de `containerd` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/containerd/containerd/releases/tag/v1.1.2). Pour connaître les actions que vous devez effectuer, voir [Mise à jour vers l'environnement d'exécution `containerd`](cs_versions.html#containerd).</td>
+<td>`containerd` est le nouvel environnement d'exécution de conteneur de Kubernetes qui remplace Docker. Voir les [notes sur l'édition de `containerd` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/containerd/containerd/releases/tag/v1.1.2). Pour connaître les actions que vous devez effectuer, voir [Mise à jour vers l'environnement d'exécution de conteneur `containerd`](/docs/containers?topic=containers-cs_versions#containerd).</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>`containerd` est le nouvel environnement d'exécution de conteneur de Kubernetes qui remplace Docker afin d'améliorer les performances. Pour connaître les actions que vous devez effectuer, voir [Mise à jour vers l'environnement d'exécution `containerd`](cs_versions.html#containerd).</td>
+<td>`containerd` est le nouvel environnement d'exécution de conteneur de Kubernetes qui remplace Docker afin d'améliorer les performances. Pour connaître les actions que vous devez effectuer, voir [Mise à jour vers l'environnement d'exécution de conteneur `containerd`](/docs/containers?topic=containers-cs_versions#containerd).</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -823,10 +2008,10 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.2
 <td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11. En outre, les pods d'équilibreur de charge utilisent désormais la nouvelle classe de priorité de pod `ibm-app-cluster-critical`.</td>
 </tr>
 <tr>
-<td>Plug-in IBM File Storage</td>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
 <td>334</td>
 <td>338</td>
-<td>Mise à jour d'`incubator` à la version 1.8. Le stockage de fichiers est mis à disposition dans la zone spécifique que vous sélectionnez. Vous ne pouvez pas mettre à jour des libellés d'une instance de volume persistant (statique) existante, à moins d'utiliser un cluster à zones multiples et de nécessiter [l'ajout de libellés de région et de zone](cs_storage_basics.html#multizone).</td>
+<td>Mise à jour d'`incubator` à la version 1.8. Le stockage de fichiers est mis à disposition dans la zone spécifique que vous sélectionnez. Vous ne pouvez pas mettre à jour des libellés d'une instance de volume persistant (statique) existante, à moins d'utiliser un cluster à zones multiples et de nécessiter [l'ajout de libellés de région et de zone](/docs/containers?topic=containers-kube_concepts#storage_multizone).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -839,8 +2024,8 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.2
 <td>N/A</td>
 <td>N/A</td>
 <td>Mise à jour de la configuration OpenID Connect pour le serveur d'API Kubernetes du cluster pour prendre en charge les groupes d'accès Identity Access and Management (IAM) d'{{site.data.keyword.Bluemix_notm}}. Ajout de `Priority` dans l'option `--enable-admission-plugins` pour le serveur d'API Kubernetes du cluster et configuration du cluster pour prendre en charge la priorité des pods. Pour plus d'informations, voir :
-<ul><li>[Groupes d'accès {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#rbac)</li>
-<li>[Configuration de la priorité de pod](cs_pod_priority.html#pod_priority)</li></ul></td>
+<ul><li>[Groupes d'accès {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#rbac)</li>
+<li>[Configuration de la priorité de pod](/docs/containers?topic=containers-pod_priority#pod_priority)</li></ul></td>
 </tr>
 <tr>
 <td>Kubernetes Heapster</td>
@@ -860,10 +2045,404 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.2
 <br />
 
 
-## Journal des modifications - Version 1.10
+## Déprécié : Journal des modifications - Version 1.10
 {: #110_changelog}
 
 Passez en revue le journal des modifications de la version 1.10.
+{: shortdesc}
+
+La version 1.10 de Kubernetes est dépréciée et n'est plus prise en charge à compter du 30 avril 2019 (date hypothétique). [Consultez l'impact potentiel](/docs/containers?topic=containers-cs_versions#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](/docs/containers?topic=containers-update#update) pour passer immédiatement à la version 1.11 ou ultérieure.
+{: deprecated}
+
+### Journal des modifications pour la version 1.10.13_1551, publié le 20 mars 2019
+{: #11013_1551}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.13_1551.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.13_1548">
+<caption>Modifications depuis la version 1.10.13_1548</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuration de proxy à haute disponibilité de maître cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration pour mieux traiter les échecs de connexion intermittente avec le maître cluster.</td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Mise à jour des pilotes GPU à la version [418.43 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.nvidia.com/object/unix.html). La mise à jour comprend un correctif pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>344</td>
+<td>345</td>
+<td>Prise en charge des [noeuds finaux de service privé](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter la vulnérabilité [CVE-2019-6133 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>136</td>
+<td>166</td>
+<td>Image mise à jour pour traiter les vulnérabilités [CVE-2018-16890 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) et [CVE-2019-3823 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Image mise à jour pour traiter les vulnérabilités [CVE-2018-10779 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) et [CVE-2019-7663 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.10.13_1548, publié le 4 mars 2019
+{: #11013_1548}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.13_1548.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.12_1546">
+<caption>Modifications depuis la version 1.10.12_1546</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Mise à jour des images pour traiter la vulnérabilité [CVE-2019-6454 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.12-252</td>
+<td>v1.10.13-288</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.10.13. Correction de problèmes de connectivité périodique des équilibreurs de charge qui définissaient le paramètre `externalTrafficPolicy` avec la valeur `local`. Mise à jour des événements d'équilibreur de charge pour utiliser les liens à jour de la documentation {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>342</td>
+<td>344</td>
+<td>Modification de l'image de base du système d'exploitation pour passer de Fedora à Alpine. Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>122</td>
+<td>136</td>
+<td>Augmentation du délai d'attente du client dans {{site.data.keyword.keymanagementservicefull_notm}}. Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.12</td>
+<td>v1.10.13</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13). </td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Augmentation de la limite de mémoire de pod pour le serveur Kubernetes DNS de `170Mi` à `400Mi` afin de traiter plus de services de cluster.</td>
+</tr>
+<tr>
+<td>Equilibreur de charge et moniteur d'équilibrage de charge pour {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Serveur et client OpenVPN</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-1559 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2019-6454 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.10.12_1546, publié le 27 février 2019
+{: #11012_1546}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.12_1546.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.12_1544">
+<caption>Modifications depuis la version 1.10.12_1544</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter la vulnérabilité [CVE-2018-19407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.10.12_1544, publié le 15 février 2019
+{: #11012_1544}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.12_1544.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.12_1543">
+<caption>Modifications depuis la version 1.10.12_1543</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>18.06.1-ce</td>
+<td>18.06.2-ce</td>
+<td>Voir les [notes sur l'édition de Docker Community Edition ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/docker/docker-ce/releases/tag/v18.06.2-ce). La mise à jour résout la vulnérabilité [CVE-2019-5736 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Configuration du `kubelet` de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique. </td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.10.12_1543, publié le 5 février 2019
+{: #11012_1543}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.12_1543.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.12_1541">
+<caption>Modifications depuis la version 1.10.12_1541</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus). </td>
+</tr>
+<tr>
+<td>Plug-in et programme d'installation d'unité GPU</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Images mises à jour pour traiter les vulnérabilités [CVE-2019-3462 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) et [CVE-2019-6486 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>338</td>
+<td>342</td>
+<td>Le plug-in de stockage de fichiers est mis à jour comme suit :
+<ul><li>Prise en charge du provisionnement dynamique avec [planification tenant compte de la topologie de volume](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<li>Les erreurs de suppression de réservation de volume persistant (PVC) sont ignorées si le stockage est déjà supprimé.</li>
+<li>Ajout d'une annotation de message d'échec pour les PVC ayant échoué.</li>
+<li>Optimisation des paramètres d'élection du leader du contrôleur du service de mise à disposition de stockage et de période de resynchronisation et augmentation du délai de mise à disposition de 30 minutes à 1 heure.</li>
+<li>Vérification des droits d'utilisateur avant de commencer la mise à disposition.</li></ul></td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>111</td>
+<td>122</td>
+<td>Ajout d'une logique de nouvelle tentative pour éviter les échecs temporaires lorsque les valeurs confidentielles (secrets) de Kubernetes sont gérées par {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Configuration de Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mise à jour de la configuration de règle d'audit du serveur d'API Kubernetes pour inclure les métadonnées de journalisation pour les demandes `cluster-admin` et consigner le corps des demandes `create`, `update` et `patch` de charge de travail.</td>
+</tr>
+<tr>
+<td>Client OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Par ailleurs, la configuration de pod est désormais obtenue à partir d'une valeur confidentielle (secret) au lieu d'une mappe de configuration (configmap).</td>
+</tr>
+<tr>
+<td>Serveur OpenVPN</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). </td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Correctif de sécurité pour traiter la vulnérabilité [CVE-2018-16864 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.10.12_1541, publié le 28 janvier 2019
+{: #11012_1541}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.12_1541.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.12_1540">
+<caption>Modifications depuis la version 1.10.12_1540</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour pour les packages Ubuntu installés, notamment `apt` pour traiter les vulnérabilités [CVE-2019-3462 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) et [USN-3863-1 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://usn.ubuntu.com/3863-1).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.10.12_1540, publié le 21 janvier 2019
+{: #11012_1540}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.12_1540.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.11_1538">
+<caption>Modifications depuis la version 1.10.11_1538</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.11-219</td>
+<td>v1.10.12-252</td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.10.12. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.11</td>
+<td>v1.10.12</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.12). </td>
+</tr>
+<tr>
+<td>Image Kubernetes add-on resizer</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>Voir les [notes sur l'édition de Kubernetes pour l'image add-on resizer ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+</tr>
+<tr>
+<td>Tableau de bord Kubernetes</td>
+<td>v1.8.3</td>
+<td>v1.10.1</td>
+<td>Voir les [notes sur l'édition sur le tableau de bord Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). La mise à jour résout la vulnérabilité [CVE-2018-18264 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place. </td>
+</tr>
+<tr>
+<td>Programme d'installation de GPU</td>
+<td>390.12</td>
+<td>410.79</td>
+<td>Mise à jour des pilotes GPU installés à la version 410.79.</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.10.11_1538, publié le 7 janvier 2019
+{: #11011_1538}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.11_1538.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.11_1537">
+<caption>Modifications depuis la version 1.10.11_1537</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Noyau</td>
+<td>4.4.0-139</td>
+<td>4.4.0-141</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour traiter les vulnérabilités [CVE-2017-5753, CVE-2018-18690 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.10.11_1537, publié le 17 décembre 2018
+{: #11011_1537}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.11_1537.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.11_1536">
+<caption>Modifications depuis la version 1.10.11_1536</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour des packages Ubuntu installés.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Journal des modifications pour la version 1.10.11_1536, publié le 4 décembre 2018
 {: #11011_1536}
@@ -910,7 +2489,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.1
 <td>Utilisation des ressources de noeud worker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Ajout de groupes cgroups pour le kubelet et docker pour empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](cs_clusters_planning.html#resource_limit_node).</td>
+<td>Ajout de groupes cgroups pour le kubelet et docker pour empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -944,7 +2523,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.8_1531, publié le 19 novembre 2018
 {: #1108_1531}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1531. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1531.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1530">
@@ -970,7 +2549,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.8_1530, publié le 7 novembre 2018
 {: #1108_1530_ha-master}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.8_1530. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.8_1530.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1528">
@@ -985,18 +2564,18 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.8
 </thead>
 <tbody>
 <tr>
-<td>Maître de cluster</td>
+<td>Maître cluster</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Mise à jour de la configuration du noeud maître du cluster pour accroître la haute disponibilité (HA). Désormais, les clusters ont trois répliques du maître Kubernetes conçues avec une configuration haute disponibilité (HA), chaque maître étant déployé sur des hôtes physiques distincts. Par ailleurs, si votre cluster se trouve dans une zone compatible avec plusieurs zones, les maîtres sont répartis sur les différentes zones.<br>Pour connaître les actions que vous devez effectuer, voir [Mise à jour des maîtres de cluster pour la haute disponibilité](cs_versions.html#ha-masters). Ces actions de préparation sont applicables dans les cas suivants :<ul>
+<td>Mise à jour de la configuration du noeud du maître cluster pour accroître la haute disponibilité (HA). Désormais, les clusters ont trois répliques du maître Kubernetes conçues avec une configuration haute disponibilité (HA), chaque maître étant déployé sur des hôtes physiques distincts. Par ailleurs, si votre cluster se trouve dans une zone compatible avec plusieurs zones, les maîtres sont répartis sur les différentes zones.<br>Pour connaître les actions que vous devez effectuer, voir [Mise à jour des maîtres cluster pour la haute disponibilité](/docs/containers?topic=containers-cs_versions#ha-masters). Ces actions de préparation sont applicables dans les cas suivants :<ul>
 <li>Si vous disposez d'un pare-feu ou de règles réseau Calico personnalisées.</li>
 <li>Si vous utilisez les ports d'hôte `2040` ou `2041` sur vos noeuds worker.</li>
-<li>Si vous avez utilisé l'adresse IP du noeud maître du cluster pour accéder au maître depuis le cluster.</li>
+<li>Si vous avez utilisé l'adresse IP du noeud du maître cluster pour accéder au maître depuis le cluster.</li>
 <li>Si vous disposez d'un processus automatique pour appeler l'API ou l'interface de ligne de commande Calico (`calicoctl`), par exemple pour créer des règles Calico.</li>
 <li>Si vous utilisez des règles réseau Kubernetes ou Calico pour contrôler l'accès du trafic sortant du pod vers le maître.</li></ul></td>
 </tr>
 <tr>
-<td>Proxy du maître de cluster HA</td>
+<td>Proxy du maître cluster HA</td>
 <td>N/A</td>
 <td>1.8.12-alpine</td>
 <td>Ajout d'un pod `ibm-master-proxy-*` pour l'équilibrage de charge côté client sur tous les noeuds worker, de sort que chaque client de noeud worker puisse acheminer les demandes à une réplique de maître HA disponible.</td>
@@ -1011,7 +2590,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.8
 <td>Chiffrement des données dans etcd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Auparavant, les données etcd étaient stockées sur une instance de stockage de fichiers NFS d'un maître chiffrée au repos. Désormais, les données etcd sont stockées sur le disque local du maître et sauvegardées dans {{site.data.keyword.cos_full_notm}}. Les données sont chiffrées lors du transit vers {{site.data.keyword.cos_full_notm}} et au repos. Cependant, les données etcd sur le disque local du maître ne sont pas chiffrées. Si vous souhaitez que les données etcd locales de votre maître soient chiffrées, [activez {{site.data.keyword.keymanagementservicelong_notm}} dans votre cluster](cs_encrypt.html#keyprotect).</td>
+<td>Auparavant, les données etcd étaient stockées sur une instance de stockage de fichiers NFS d'un maître chiffrée au repos. Désormais, les données etcd sont stockées sur le disque local du maître et sauvegardées dans {{site.data.keyword.cos_full_notm}}. Les données sont chiffrées lors du transit vers {{site.data.keyword.cos_full_notm}} et au repos. Cependant, les données etcd sur le disque local du maître ne sont pas chiffrées. Si vous souhaitez que les données etcd locales de votre maître soient chiffrées, [activez {{site.data.keyword.keymanagementservicelong_notm}} dans votre cluster](/docs/containers?topic=containers-encryption#keyprotect).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -1023,7 +2602,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.8
 <td>Noyau avec puce TPM activée</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Les noeuds worker bare metal avec des puces TPM pour la fonction de calcul sécurisé utilisent le noyau Ubuntu par défaut jusqu'à ce que la fonction de confiance (trust) soit activée. Si vous [activez la fonction de confiance](cs_cli_reference.html#cs_cluster_feature_enable) sur un cluster existant, vous devez [recharger](cs_cli_reference.html#cs_worker_reload) tous les noeuds worker bare metal existants avec des puces TPM. Pour vérifier si un noeud worker bare metal comporte une puce TPM, vérifiez la zone **Trustable** après avoir exécuté la [commande](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+<td>Les noeuds worker bare metal avec des puces TPM pour la fonction de calcul sécurisé utilisent le noyau Ubuntu par défaut jusqu'à ce que la fonction de confiance (trust) soit activée. Si vous [activez la fonction de confiance](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) sur un cluster existant, vous devez [recharger](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) tous les noeuds worker bare metal existants avec des puces TPM. Pour vérifier si un noeud worker bare metal comporte une puce TPM, vérifiez la zone **Trustable** après avoir exécuté la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
 </tr>
 </tbody>
 </table>
@@ -1031,7 +2610,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.8
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.8_1528, publié le 26 octobre 2018
 {: #1108_1528}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1528. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1528.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1527">
@@ -1057,7 +2636,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications du maître - Groupe de correctifs 1.10.8_1527, publié le 15 octobre 2018
 {: #1108_1527}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.10.8_1527. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.10.8_1527.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1524">
@@ -1089,7 +2668,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.8_1525, publié le 10 octobre 2018
 {: #1108_1525}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1525. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1525.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1524">
@@ -1122,7 +2701,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.8_1524, publié le 2 octobre 2018
 {: #1108_1524}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.8_1524. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.8_1524.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.7_1520">
@@ -1140,7 +2719,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.8
 <td>Fournisseur de service de gestion des clés (KMS)</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Possibilité d'utiliser le service de gestion des clés (KMS) de Kubernetes dans le cluster pour prendre en charge {{site.data.keyword.keymanagementservicefull}}. Lorsque vous [activez {{site.data.keyword.keymanagementserviceshort}} dans votre cluster](cs_encrypt.html#keyprotect), toutes vos valeurs confidentielles (secrets) Kubernetes sont chiffrées.</td>
+<td>Possibilité d'utiliser le fournisseur de service de gestion des clés (KMS) de Kubernetes dans le cluster pour prendre en charge {{site.data.keyword.keymanagementservicefull}}. Lorsque vous [activez {{site.data.keyword.keymanagementserviceshort}} dans votre cluster](/docs/containers?topic=containers-encryption#keyprotect), toutes vos valeurs confidentielles (secrets) Kubernetes sont chiffrées.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1165,7 +2744,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.8
 <td>N/A</td>
 <td>N/A</td>
 <td>Suppression de `mountOptions` dans les classes de stockage de fichiers d'IBM afin d'utiliser la valeur par défaut fournie par le noeud worker. Suppression du paramètre `reclaimPolicy` en double dans les classes de stockage de fichiers d'IBM.<br><br>
-Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
+Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
 </tr>
 </tbody>
 </table>
@@ -1173,7 +2752,7 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.7_1521, publié le 20 septembre 2018
 {: #1107_1521}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.7_1521. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.7_1521.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.7_1520">
@@ -1191,7 +2770,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Rotation des journaux</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Passage à l'utilisation de fichiers timer `systemd` au lieu de travaux `cronjobs` pour empêcher l'échec de la rotation des journaux (`logrotate`) sur les noeuds worker qui ne sont pas rechargés ou mis à niveau dans les 90 jours. **Remarque** : dans toutes les versions antérieures à cette version secondaire, le disque principal se remplit après l'échec d'un travail cron car il est impossible de faire tourner les journaux. Le travail cron échoue lorsque le noeud worker est actif pendant une durée de 90 jours sans être mis à jour ou rechargé. Si les journaux remplissent la totalité du disque principal, le noeud worker passe à l'état d'échec. Le noeud worker peut être corrigé en exécutant la [commande](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou la [commande](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` .</td>
+<td>Passage à l'utilisation de fichiers timer `systemd` au lieu de travaux `cronjobs` pour empêcher l'échec de la rotation des journaux (`logrotate`) sur les noeuds worker qui ne sont pas rechargés ou mis à niveau dans les 90 jours. **Remarque** : dans toutes les versions antérieures à cette version secondaire, le disque principal se remplit après l'échec d'un travail cron car il est impossible de faire tourner les journaux. Le travail cron échoue lorsque le noeud worker est actif pendant une durée de 90 jours sans être mis à jour ou rechargé. Si les journaux remplissent la totalité du disque principal, le noeud worker passe à l'état d'échec. Le noeud worker peut être corrigé en exécutant la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Composants d'exécution de noeud worker (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -1203,10 +2782,10 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Expiration du mot de passe root</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Les mots de passe root des noeuds worker expirent au bout de 90 jours pour des raisons de conformité. Si vos outils d'automatisation doivent se connecter au noeud worker en tant que root ou dépendent de travaux cron qui s'exécutent en tant que root, vous pouvez désactiver l'expiration du mot de passe en vous connectant au noeud worker et en exécutant la commande `chage -M -1 root`. **Remarque** : si vos exigences de conformité en matière de sécurité vous empêchent toute exécution en tant que root ou l'annulation de l'expiration du mot de passe, ne désactivez pas l'expiration. Vous pouvez à la place [mettre à jour](cs_cli_reference.html#cs_worker_update) ou [recharger](cs_cli_reference.html#cs_worker_reload) vos noeuds worker au moins tous les 90 jours.</td>
+<td>Les mots de passe root des noeuds worker expirent au bout de 90 jours pour des raisons de conformité. Si vos outils d'automatisation doivent se connecter au noeud worker en tant que root ou dépendent de travaux cron qui s'exécutent en tant que root, vous pouvez désactiver l'expiration du mot de passe en vous connectant au noeud worker et en exécutant la commande `chage -M -1 root`. **Remarque** : si vos exigences de conformité en matière de sécurité vous empêchent toute exécution en tant que root ou l'annulation de l'expiration du mot de passe, ne désactivez pas l'expiration. Vous pouvez à la place [mettre à jour](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) ou [recharger](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) vos noeuds worker au moins tous les 90 jours.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Nettoyage régulier des unités de montage transitoires pour leur éviter de devenir illimitées. Cette action corrige l'erreur [Kubernetes 57345 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -1217,7 +2796,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>N/A</td>
 <td>Désactivation du pont Docker par défaut pour que la plage d'adresses IP `172.17.0.0/16` soit désormais utilisée pour les routes privées. Si vos conteneurs Docker doivent être construits en exécutant des commandes `docker` directement sur l'hôte ou en utilisant un pod qui monte le socket Docker, choisissez l'une des options suivantes.<ul><li>Pour assurer la connectivité avec le réseau externe lorsque vous construisez le conteneur, exécutez la commande `docker build . --network host`.</li>
 <li>Pour créer de manière explicite un réseau à utiliser lorsque vous construisez le conteneur, exécutez la commande `docker network create`, puis utilisez ce réseau.</li></ul>
-**Remarque** : vous avez des dépendances sur le socket Docker ou directement sur Docker ? [Effectuez une mise à jour pour passer à l'environnement d'exécution de conteneur `containerd` au lieu de `docker`](cs_versions.html#containerd) pour que vos clusters soient prêts à exécuter Kubernetes version 1.11 ou ultérieure.</td>
+**Remarque** : vous avez des dépendances sur le socket Docker ou directement sur Docker ? [Effectuez une mise à jour pour passer à l'environnement d'exécution de conteneur `containerd` au lieu de `docker`](/docs/containers?topic=containers-cs_versions#containerd) pour que vos clusters soient prêts à exécuter Kubernetes version 1.11 ou ultérieure.</td>
 </tr>
 </tbody>
 </table>
@@ -1225,7 +2804,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.7_1520, publié le 4 septembre 2018
 {: #1107_1520}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.7_1520. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.7_1520.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.5_1519">
@@ -1252,10 +2831,10 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.7
 <td>Mise à jour pour prendre en charge l'édition Kubernetes 1.10.7. En outre, la configuration du fournisseur de cloud a changé pour mieux gérer les mises à jour des services d'équilibreur de charge avec l'élément `externalTrafficPolicy` défini sur `local`.</td>
 </tr>
 <tr>
-<td>Plug-in IBM File Storage</td>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
 <td>334</td>
 <td>338</td>
-<td>Mise à jour d'incubateur à la version 1.8. Le stockage de fichiers est mis à disposition dans la zone spécifique que vous sélectionnez. Vous ne pouvez pas mettre à jour des libellés d'une instance de volume persistant (statique) existante, à moins d'utiliser un cluster à zones multiples et de nécessiter l'ajout de libellés de région et de zone.<br><br> La version NFS par défaut a été supprimée des options de montage dans les classes de stockage de fichiers fournies par IBM. Désormais, le système d'exploitation de l'hôte négocie la version NFS avec le serveur NFS de l'infrastructure IBM Cloud (SoftLayer). Pour définir manuellement une version NFS spécifique ou modifier la version NFS de votre volume persistant qui a été négociée par le système d'exploitation de l'hôte, voir [Modification de la version NFS par défaut](cs_storage_file.html#nfs_version_class).</td>
+<td>Mise à jour d'incubateur à la version 1.8. Le stockage de fichiers est mis à disposition dans la zone spécifique que vous sélectionnez. Vous ne pouvez pas mettre à jour des libellés d'une instance de volume persistant (statique) existante, à moins d'utiliser un cluster à zones multiples et de nécessiter l'ajout de libellés de région et de zone.<br><br> La version NFS par défaut a été supprimée des options de montage dans les classes de stockage de fichiers fournies par IBM. Désormais, le système d'exploitation de l'hôte négocie la version NFS avec le serveur NFS de l'infrastructure IBM Cloud (SoftLayer). Pour définir manuellement une version NFS spécifique ou modifier la version NFS de votre volume persistant qui a été négociée par le système d'exploitation de l'hôte, voir [Modification de la version NFS par défaut](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1275,7 +2854,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.7
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.5_1519, publié le 23 août 2018
 {: #1105_1519}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.5_1519. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.5_1519.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.5_1518">
@@ -1308,7 +2887,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.5_1518, publié le 13 août 2018
 {: #1105_1518}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.5_1518. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.5_1518.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.5_1517">
@@ -1334,7 +2913,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.5_1517, publié le 27 juillet 2018
 {: #1105_1517}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.5_1517. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.5_1517.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.3_1514">
@@ -1361,7 +2940,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.5
 <td>Mise à jour pour prendre en charge l'édition Kubernetes 1.10.5. En outre, les événements `create failure` du service LoadBalancer incluent désormais toutes les erreurs des sous-réseaux portables.</td>
 </tr>
 <tr>
-<td>Plug-in IBM File Storage</td>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
 <td>320</td>
 <td>334</td>
 <td>Le délai de création d'un volume persistant a augmenté pour passer de 15 à 30 minutes. Le type de facturation par défaut a été changé pour passer à une facturation à l'heure (`hourly`). Des options de montage ont été ajoutées aux classes de stockage prédéfinies. Dans l'instance de stockage de fichiers NFS dans votre compte d'infrastructure IBM Cloud (SoftLayer), la zone **Notes** est désormais au format JSON et l'espace de nom Kubernetes dans lequel le volume persistant est déployé a été ajouté. Pour prendre en charge les clusters à zones multiples, des libellés de zone et de région ont été ajoutés pour les volumes persistants.</td>
@@ -1390,7 +2969,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.5
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.3_1514, publié le 3 juillet 2018
 {: #1103_1514}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.3_1514. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.3_1514.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.3_1513">
@@ -1417,7 +2996,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.3_1513, publié le 21 juin 2018
 {: #1103_1513}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.3_1513. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.3_1513.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.3_1512">
@@ -1443,7 +3022,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.3_1512, publié le 12 juin 2018
 {: #1103_1512}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.3_1512. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.3_1512.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.1_1510">
@@ -1467,7 +3046,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.3
 <td>Configuration de Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Ajout de `PodSecurityPolicy` dans l'option `--enable-admission-plugins` pour le serveur d'API Kubernetes du cluster et configuration du cluster pour prendre en charge les politiques de sécurité de pod. Pour plus d'informations, voir [Configuration de politiques de sécurité de pod](cs_psp.html).</td>
+<td>Ajout de `PodSecurityPolicy` dans l'option `--enable-admission-plugins` pour le serveur d'API Kubernetes du cluster et configuration du cluster pour prendre en charge les politiques de sécurité de pod. Pour plus d'informations, voir [Configuration de politiques de sécurité de pod](/docs/containers?topic=containers-psp).</td>
 </tr>
 <tr>
 <td>Configuration de Kubelet</td>
@@ -1501,7 +3080,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.3
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.1_1510, publié le 18 mai 2018
 {: #1101_1510}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.1_1510. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.1_1510.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.1_1509">
@@ -1527,7 +3106,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.1_1509, publié le 16 mai 2018
 {: #1101_1509}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.1_1509. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.1_1509.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.1_1508">
@@ -1553,7 +3132,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 10. 1_1508, publié le 1er mai 2018
 {: #1101_1508}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.1_1508. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.1_1508.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1510">
@@ -1607,7 +3186,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.1
 <td>Prise en charge de GPU</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>La prise en charge des [charges de travail de conteneur d'unité de traitement graphique (GPU)](cs_app.html#gpu_app) est désormais disponible pour la planification et l'exécution. Pour obtenir la liste des types de machine GPU disponibles, voir [Matériel pour les noeuds worker](cs_clusters_planning.html#shared_dedicated_node). Pour plus d'informations, voir la documentation Kubernetes relative à la [planification d'unités GPU ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>La prise en charge des [charges de travail de conteneur d'unité de traitement graphique (GPU)](/docs/containers?topic=containers-app#gpu_app) est désormais disponible pour la planification et l'exécution. Pour obtenir la liste des types de machine GPU disponibles, voir [Matériel pour les noeuds worker](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). Pour plus d'informations, voir la documentation Kubernetes relative à la [planification d'unités GPU ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
@@ -1623,10 +3202,36 @@ Versions de Kubernetes non prises en charge :
 *  [Version 1.8](#18_changelog)
 *  [Version 1.7](#17_changelog)
 
-### Journal des modifications pour la version 1.9 (dépréciée, non prise en charge depuis le 27 décembre 2018)
+### Journal des modifications pour la version 1.9 (non prise en charge depuis le 27 décembre 2018)
 {: #19_changelog}
 
 Passez en revue le journal des modifications de la version 1.9.
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.9.11_1539, publié le 17 décembre 2018
+{: #1911_1539}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.11_1539.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.9.11_1538">
+<caption>Modifications depuis la version 1.9.11_1538</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour des packages Ubuntu installés.</td>
+</tr>
+</tbody>
+</table>
 
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.11_1538, publié le 4 décembre 2018
 {: #1911_1538}
@@ -1649,7 +3254,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Utilisation des ressources de noeud worker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Ajout de groupes cgroups pour le kubelet et docker pour empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](cs_clusters_planning.html#resource_limit_node).</td>
+<td>Ajout de groupes cgroups pour le kubelet et docker pour empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1683,7 +3288,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.11_1536, publié le 19 novembre 2018
 {: #1911_1536}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.11_1536. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.11_1536.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1532">
@@ -1733,7 +3338,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.11
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.10_1532, publié le 7 novembre 2018
 {: #1910_1532}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.11_1532. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.11_1532.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1531">
@@ -1751,7 +3356,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Noyau avec puce TPM activée</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Les noeuds worker bare metal avec des puces TPM pour la fonction de calcul sécurisé utilisent le noyau Ubuntu par défaut jusqu'à ce que la fonction de confiance (trust) soit activée. Si vous [activez la fonction de confiance](cs_cli_reference.html#cs_cluster_feature_enable) sur un cluster existant, vous devez [recharger](cs_cli_reference.html#cs_worker_reload) tous les noeuds worker bare metal existants avec des puces TPM. Pour vérifier si un noeud worker bare metal comporte une puce TPM, vérifiez la zone **Trustable** après avoir exécuté la [commande](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+<td>Les noeuds worker bare metal avec des puces TPM pour la fonction de calcul sécurisé utilisent le noyau Ubuntu par défaut jusqu'à ce que la fonction de confiance (trust) soit activée. Si vous [activez la fonction de confiance](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) sur un cluster existant, vous devez [recharger](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) tous les noeuds worker bare metal existants avec des puces TPM. Pour vérifier si un noeud worker bare metal comporte une puce TPM, vérifiez la zone **Trustable** après avoir exécuté la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
 </tr>
 </tbody>
 </table>
@@ -1759,7 +3364,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.10_1531, publié le 26 octobre 2018
 {: #1910_1531}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1531. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1531.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1530">
@@ -1785,7 +3390,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications du maître - Groupe de correctifs 1.9.10_1530, publié le 15 octobre 2018
 {: #1910_1530}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1530. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1530.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1527">
@@ -1811,7 +3416,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.10_1528, publié le 10 octobre 2018
 {: #1910_1528}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1528. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1528.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1527">
@@ -1844,7 +3449,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.10_1527, publié le 2 octobre 2018
 {: #1910_1527}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.10_1527. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.10_1527.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1523">
@@ -1869,7 +3474,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.10
 <td>N/A</td>
 <td>N/A</td>
 <td>Suppression de `mountOptions` dans les classes de stockage de fichiers d'IBM afin d'utiliser la valeur par défaut fournie par le noeud worker. Suppression du paramètre `reclaimPolicy` en double dans les classes de stockage de fichiers d'IBM.<br><br>
-Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
+Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
 </tr>
 </tbody>
 </table>
@@ -1877,7 +3482,7 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.10_1524, publié le 20 septembre 2018
 {: #1910_1524}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1524. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1524.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1523">
@@ -1895,7 +3500,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Rotation des journaux</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Passage à l'utilisation de fichiers timer `systemd` au lieu de travaux `cronjobs` pour empêcher l'échec de la rotation des journaux (`logrotate`) sur les noeuds worker qui ne sont pas rechargés ou mis à niveau dans les 90 jours. **Remarque** : dans toutes les versions antérieures à cette version secondaire, le disque principal se remplit après l'échec d'un travail cron car il est impossible de faire tourner les journaux. Le travail cron échoue lorsque le noeud worker est actif pendant une durée de 90 jours sans être mis à jour ou rechargé. Si les journaux remplissent la totalité du disque principal, le noeud worker passe à l'état d'échec. Le noeud worker peut être corrigé en exécutant la [commande](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou la [commande](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` .</td>
+<td>Passage à l'utilisation de fichiers timer `systemd` au lieu de travaux `cronjobs` pour empêcher l'échec de la rotation des journaux (`logrotate`) sur les noeuds worker qui ne sont pas rechargés ou mis à niveau dans les 90 jours. **Remarque** : dans toutes les versions antérieures à cette version secondaire, le disque principal se remplit après l'échec d'un travail cron car il est impossible de faire tourner les journaux. Le travail cron échoue lorsque le noeud worker est actif pendant une durée de 90 jours sans être mis à jour ou rechargé. Si les journaux remplissent la totalité du disque principal, le noeud worker passe à l'état d'échec. Le noeud worker peut être corrigé en exécutant la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Composants d'exécution de noeud worker (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -1907,10 +3512,10 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Expiration du mot de passe root</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Les mots de passe root des noeuds worker expirent au bout de 90 jours pour des raisons de conformité. Si vos outils d'automatisation doivent se connecter au noeud worker en tant que root ou dépendent de travaux cron qui s'exécutent en tant que root, vous pouvez désactiver l'expiration du mot de passe en vous connectant au noeud worker et en exécutant la commande `chage -M -1 root`. **Remarque** : si vos exigences de conformité en matière de sécurité vous empêchent toute exécution en tant que root ou l'annulation de l'expiration du mot de passe, ne désactivez pas l'expiration. Vous pouvez à la place [mettre à jour](cs_cli_reference.html#cs_worker_update) ou [recharger](cs_cli_reference.html#cs_worker_reload) vos noeuds worker au moins tous les 90 jours.</td>
+<td>Les mots de passe root des noeuds worker expirent au bout de 90 jours pour des raisons de conformité. Si vos outils d'automatisation doivent se connecter au noeud worker en tant que root ou dépendent de travaux cron qui s'exécutent en tant que root, vous pouvez désactiver l'expiration du mot de passe en vous connectant au noeud worker et en exécutant la commande `chage -M -1 root`. **Remarque** : si vos exigences de conformité en matière de sécurité vous empêchent toute exécution en tant que root ou l'annulation de l'expiration du mot de passe, ne désactivez pas l'expiration. Vous pouvez à la place [mettre à jour](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) ou [recharger](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) vos noeuds worker au moins tous les 90 jours.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Nettoyage régulier des unités de montage transitoires pour leur éviter de devenir illimitées. Cette action corrige l'erreur [Kubernetes 57345 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -1921,7 +3526,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>N/A</td>
 <td>Désactivation du pont Docker par défaut pour que la plage d'adresses IP `172.17.0.0/16` soit désormais utilisée pour les routes privées. Si vos conteneurs Docker doivent être construits en exécutant des commandes `docker` directement sur l'hôte ou en utilisant un pod qui monte le socket Docker, choisissez l'une des options suivantes.<ul><li>Pour assurer la connectivité avec le réseau externe lorsque vous construisez le conteneur, exécutez la commande `docker build . --network host`.</li>
 <li>Pour créer de manière explicite un réseau à utiliser lorsque vous construisez le conteneur, exécutez la commande `docker network create`, puis utilisez ce réseau.</li></ul>
-**Remarque** : vous avez des dépendances sur le socket Docker ou directement sur Docker ? [Effectuez une mise à jour pour passer à l'environnement d'exécution de conteneur `containerd` au lieu de `docker`](cs_versions.html#containerd) pour que vos clusters soient prêts à exécuter Kubernetes version 1.11 ou ultérieure.</td>
+**Remarque** : vous avez des dépendances sur le socket Docker ou directement sur Docker ? [Effectuez une mise à jour pour passer à l'environnement d'exécution de conteneur `containerd` au lieu de `docker`](/docs/containers?topic=containers-cs_versions#containerd) pour que vos clusters soient prêts à exécuter Kubernetes version 1.11 ou ultérieure.</td>
 </tr>
 </tbody>
 </table>
@@ -1929,7 +3534,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.10_1523, publié le 4 septembre 2018
 {: #1910_1523}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.10_1523. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.10_1523.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.9_1522">
@@ -1950,10 +3555,10 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.10
 <td>Mise à jour pour prendre en charge l'édition Kubernetes 1.9.10. En outre, la configuration du fournisseur de cloud a changé pour mieux gérer les mises à jour des services d'équilibreur de charge avec l'élément `externalTrafficPolicy` défini sur `local`.</td>
 </tr>
 <tr>
-<td>Plug-in IBM File Storage</td>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
 <td>334</td>
 <td>338</td>
-<td>Mise à jour d'incubateur à la version 1.8. Le stockage de fichiers est mis à disposition dans la zone spécifique que vous sélectionnez. Vous ne pouvez pas mettre à jour des libellés d'une instance de volume persistant (statique) existante, à moins d'utiliser un cluster à zones multiples et de nécessiter l'ajout de libellés de région et de zone.<br><br>La version NFS par défaut a été supprimée des options de montage dans les classes de stockage de fichiers fournies par IBM. Désormais, le système d'exploitation de l'hôte négocie la version NFS avec le serveur NFS de l'infrastructure IBM Cloud (SoftLayer). Pour définir manuellement une version NFS spécifique ou modifier la version NFS de votre volume persistant qui a été négociée par le système d'exploitation de l'hôte, voir [Modification de la version NFS par défaut](cs_storage_file.html#nfs_version_class).</td>
+<td>Mise à jour d'incubateur à la version 1.8. Le stockage de fichiers est mis à disposition dans la zone spécifique que vous sélectionnez. Vous ne pouvez pas mettre à jour des libellés d'une instance de volume persistant (statique) existante, à moins d'utiliser un cluster à zones multiples et de nécessiter l'ajout de libellés de région et de zone.<br><br>La version NFS par défaut a été supprimée des options de montage dans les classes de stockage de fichiers fournies par IBM. Désormais, le système d'exploitation de l'hôte négocie la version NFS avec le serveur NFS de l'infrastructure IBM Cloud (SoftLayer). Pour définir manuellement une version NFS spécifique ou modifier la version NFS de votre volume persistant qui a été négociée par le système d'exploitation de l'hôte, voir [Modification de la version NFS par défaut](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1973,7 +3578,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.10
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.9_1522, publié le 23 août 2018
 {: #199_1522}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.9_1522. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.9_1522.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.9_1521">
@@ -2006,7 +3611,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.9_1521, publié le 13 août 2018
 {: #199_1521}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.9_1521. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.9_1521.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.9_1520">
@@ -2032,7 +3637,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.9_1520, publié le 27 juillet 2018
 {: #199_1520}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.9_1520. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.9_1520.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.8_1517">
@@ -2053,7 +3658,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.9_
 <td>Mise à jour pour prendre en charge l'édition Kubernetes 1.9.9. En outre, les événements `create failure` du service LoadBalancer incluent désormais toutes les erreurs des sous-réseaux portables.</td>
 </tr>
 <tr>
-<td>Plug-in IBM File Storage</td>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
 <td>320</td>
 <td>334</td>
 <td>Le délai de création d'un volume persistant a augmenté pour passer de 15 à 30 minutes. Le type de facturation par défaut a été changé pour passer à une facturation à l'heure (`hourly`). Des options de montage ont été ajoutées aux classes de stockage prédéfinies. Dans l'instance de stockage de fichiers NFS dans votre compte d'infrastructure IBM Cloud (SoftLayer), la zone **Notes** est désormais au format JSON et l'espace de nom Kubernetes dans lequel le volume persistant est déployé a été ajouté. Pour prendre en charge les clusters à zones multiples, des libellés de zone et de région ont été ajoutés pour les volumes persistants.</td>
@@ -2082,7 +3687,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.9_
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.8_1517, publié le 3 juillet 2018
 {: #198_1517}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.8_1517. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.8_1517.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.8_1516">
@@ -2109,7 +3714,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.8_1516, publié le 21 juin 2018
 {: #198_1516}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.8_1516. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.8_1516.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.8_1515">
@@ -2135,7 +3740,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.8_1515, publié le 19 juin 2018
 {: #198_1515}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.8_1515. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.8_1515.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1513">
@@ -2159,7 +3764,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.8_
 <td>Configuration de Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Ajout de PodSecurityPolicy dans l'option --admission-control pour le serveur d'API Kubernetes du cluster et configuration du cluster pour prendre en charge les politiques de sécurité de pod. Pour plus d'informations, voir [Configuration de politiques de sécurité de pod](cs_psp.html).</td>
+<td>Ajout de `PodSecurityPolicy` dans l'option `--admission-control` pour le serveur d'API Kubernetes du cluster et configuration du cluster pour prendre en charge les politiques de sécurité de pod. Pour plus d'informations, voir [Configuration de politiques de sécurité de pod](/docs/containers?topic=containers-psp).</td>
 </tr>
 <tr>
 <td>IBM Cloud Provider</td>
@@ -2180,7 +3785,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.8_
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.7_1513, publié le 11 juin 2018
 {: #197_1513}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1513. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1513.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1512">
@@ -2206,7 +3811,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.7_1512, publié le 18 mai 2018
 {: #197_1512}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1512. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1512.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1511">
@@ -2232,7 +3837,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.7_1511, publié le 16 mai 2018
 {: #197_1511}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1511. 
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1511.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1510">
@@ -2258,7 +3863,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.7_1510, publié le 30 avril 2018
 {: #197_1510}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.7_1510. 
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.7_1510.
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.3_1506">
@@ -2288,13 +3893,13 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.7_
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.9.3-71</td>
 <td>v1.9.7-102</td>
-<td>Les services `NodePort` et `LoadBalancer` prennent désormais en charge la [conservation de l'adresse IP source du client](cs_loadbalancer.html#node_affinity_tolerations) en définissant l'élément `service.spec.externalTrafficPolicy` sur `Local`.</td>
+<td>Les services `NodePort` et `LoadBalancer` prennent désormais en charge la [conservation de l'adresse IP source du client](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) en définissant l'élément `service.spec.externalTrafficPolicy` sur `Local`.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Correction de la configuration de tolérance des [noeuds de périphérie](cs_edge.html#edge) pour les clusters plus anciens.</td>
+<td>Correction de la configuration de tolérance des [noeuds de périphérie](/docs/containers?topic=containers-edge#edge) pour les clusters plus anciens.</td>
 </tr>
 </tbody>
 </table>
@@ -2325,7 +3930,7 @@ Passez en revue les modifications suivantes.
 <td>Rotation des journaux</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Passage à l'utilisation de fichiers timer `systemd` au lieu de travaux `cronjobs` pour empêcher l'échec de la rotation des journaux (`logrotate`) sur les noeuds worker qui ne sont pas rechargés ou mis à niveau dans les 90 jours. **Remarque** : dans toutes les versions antérieures à cette version secondaire, le disque principal se remplit après l'échec d'un travail cron car il est impossible de faire tourner les journaux. Le travail cron échoue lorsque le noeud worker est actif pendant une durée de 90 jours sans être mis à jour ou rechargé. Si les journaux remplissent la totalité du disque principal, le noeud worker passe à l'état d'échec. Le noeud worker peut être corrigé en exécutant la [commande](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou la [commande](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` .</td>
+<td>Passage à l'utilisation de fichiers timer `systemd` au lieu de travaux `cronjobs` pour empêcher l'échec de la rotation des journaux (`logrotate`) sur les noeuds worker qui ne sont pas rechargés ou mis à niveau dans les 90 jours. **Remarque** : dans toutes les versions antérieures à cette version secondaire, le disque principal se remplit après l'échec d'un travail cron car il est impossible de faire tourner les journaux. Le travail cron échoue lorsque le noeud worker est actif pendant une durée de 90 jours sans être mis à jour ou rechargé. Si les journaux remplissent la totalité du disque principal, le noeud worker passe à l'état d'échec. Le noeud worker peut être corrigé en exécutant la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Composants d'exécution de noeud worker (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -2337,10 +3942,10 @@ Passez en revue les modifications suivantes.
 <td>Expiration du mot de passe root</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Les mots de passe root des noeuds worker expirent au bout de 90 jours pour des raisons de conformité. Si vos outils d'automatisation doivent se connecter au noeud worker en tant que root ou dépendent de travaux cron qui s'exécutent en tant que root, vous pouvez désactiver l'expiration du mot de passe en vous connectant au noeud worker et en exécutant la commande `chage -M -1 root`. **Remarque** : si vos exigences de conformité en matière de sécurité vous empêchent toute exécution en tant que root ou l'annulation de l'expiration du mot de passe, ne désactivez pas l'expiration. Vous pouvez à la place [mettre à jour](cs_cli_reference.html#cs_worker_update) ou [recharger](cs_cli_reference.html#cs_worker_reload) vos noeuds worker au moins tous les 90 jours.</td>
+<td>Les mots de passe root des noeuds worker expirent au bout de 90 jours pour des raisons de conformité. Si vos outils d'automatisation doivent se connecter au noeud worker en tant que root ou dépendent de travaux cron qui s'exécutent en tant que root, vous pouvez désactiver l'expiration du mot de passe en vous connectant au noeud worker et en exécutant la commande `chage -M -1 root`. **Remarque** : si vos exigences de conformité en matière de sécurité vous empêchent toute exécution en tant que root ou l'annulation de l'expiration du mot de passe, ne désactivez pas l'expiration. Vous pouvez à la place [mettre à jour](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) ou [recharger](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) vos noeuds worker au moins tous les 90 jours.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Nettoyage régulier des unités de montage transitoires pour leur éviter de devenir illimitées. Cette action corrige l'erreur [Kubernetes 57345 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -2421,7 +4026,7 @@ Passez en revue les modifications suivantes.
 <td>Mise à jour pour prendre en charge l'édition Kubernetes 1.8.15. En outre, les événements `create failure` du service LoadBalancer incluent désormais toutes les erreurs des sous-réseaux portables.</td>
 </tr>
 <tr>
-<td>Plug-in IBM File Storage</td>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
 <td>320</td>
 <td>334</td>
 <td>Le délai de création d'un volume persistant a augmenté pour passer de 15 à 30 minutes. Le type de facturation par défaut a été changé pour passer à une facturation à l'heure (`hourly`). Des options de montage ont été ajoutées aux classes de stockage prédéfinies. Dans l'instance de stockage de fichiers NFS dans votre compte d'infrastructure IBM Cloud (SoftLayer), la zone **Notes** est désormais au format JSON et l'espace de nom Kubernetes dans lequel le volume persistant est déployé a été ajouté. Pour prendre en charge les clusters à zones multiples, des libellés de zone et de région ont été ajoutés pour les volumes persistants.</td>
@@ -2518,7 +4123,7 @@ Passez en revue les modifications suivantes.
 <td>Configuration de Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Ajout de PodSecurityPolicy dans l'option --admission-control pour le serveur d'API Kubernetes du cluster et configuration du cluster pour prendre en charge les politiques de sécurité de pod. Pour plus d'informations, voir [Configuration de politiques de sécurité de pod](cs_psp.html).</td>
+<td>Ajout de `PodSecurityPolicy` dans l'option `--admission-control` pour le serveur d'API Kubernetes du cluster et configuration du cluster pour prendre en charge les politiques de sécurité de pod. Pour plus d'informations, voir [Configuration de politiques de sécurité de pod](/docs/containers?topic=containers-psp).</td>
 </tr>
 <tr>
 <td>IBM Cloud Provider</td>
@@ -2637,13 +4242,13 @@ Passez en revue les modifications suivantes.
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.8.8-86</td>
 <td>v1.8.11-126</td>
-<td>Les services `NodePort` et `LoadBalancer` prennent désormais en charge la [conservation de l'adresse IP source du client](cs_loadbalancer.html#node_affinity_tolerations) en définissant l'élément `service.spec.externalTrafficPolicy` sur `Local`.</td>
+<td>Les services `NodePort` et `LoadBalancer` prennent désormais en charge la [conservation de l'adresse IP source du client](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) en définissant l'élément `service.spec.externalTrafficPolicy` sur `Local`.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Correction de la configuration de tolérance des [noeuds de périphérie](cs_edge.html#edge) pour les clusters plus anciens.</td>
+<td>Correction de la configuration de tolérance des [noeuds de périphérie](/docs/containers?topic=containers-edge#edge) pour les clusters plus anciens.</td>
 </tr>
 </tbody>
 </table>
@@ -2748,13 +4353,13 @@ Passez en revue les modifications suivantes.
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.7.4-133</td>
 <td>v1.7.16-17</td>
-<td>Les services `NodePort` et `LoadBalancer` prennent désormais en charge la [conservation de l'adresse IP source du client](cs_loadbalancer.html#node_affinity_tolerations) en définissant l'élément `service.spec.externalTrafficPolicy` sur `Local`.</td>
+<td>Les services `NodePort` et `LoadBalancer` prennent désormais en charge la [conservation de l'adresse IP source du client](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) en définissant l'élément `service.spec.externalTrafficPolicy` sur `Local`.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Correction de la configuration de tolérance des [noeuds de périphérie](cs_edge.html#edge) pour les clusters plus anciens.</td>
+<td>Correction de la configuration de tolérance des [noeuds de périphérie](/docs/containers?topic=containers-edge#edge) pour les clusters plus anciens.</td>
 </tr>
 </tbody>
 </table>

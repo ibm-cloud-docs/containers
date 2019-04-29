@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-06"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -30,8 +34,40 @@ lastupdated: "2018-12-06"
 {: shortdesc}
 
 以下の一般的な手順を実行して、クラスターが最新の状態であることを確認できます。
-- [ワーカー・ノードを更新](cs_cli_reference.html#cs_worker_update)するためのセキュリティー・パッチやオペレーティング・システム・パッチが使用可能になっていないか、毎月確認してください。
-- クラスターを {{site.data.keyword.containerlong_notm}} 用の [Kubernetes の最新のデフォルト・バージョン](cs_versions.html)に[更新](cs_cli_reference.html#cs_cluster_update)します
+- [ワーカー・ノードを更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)するためのセキュリティー・パッチやオペレーティング・システム・パッチが使用可能になっていないか、毎月確認してください。
+- クラスターを {{site.data.keyword.containerlong_notm}} 用の [Kubernetes の最新のデフォルト・バージョン](/docs/containers?topic=containers-cs_versions)に[更新](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)します
+
+## {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用したテストの実行
+{: #debug_utility}
+
+トラブルシューティングの際に、{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用して、テストを実行し、クラスターから関連情報を収集することができます。このデバッグ・ツールを使用するには、[`ibmcloud-iks-debug` Helm チャート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug) をインストールします。
+{: shortdesc}
+
+
+1. [クラスターで Helm をセットアップし、Tiller のサービス・アカウントを作成し、Helm インスタンスに `ibm` リポジトリーを追加します](/docs/containers?topic=containers-integrations#helm)。
+
+2. Helm チャートをクラスターにインストールします。
+  ```
+  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  ```
+  {: pre}
+
+
+3. デバッグ・ツール・インターフェースを表示するためにプロキシー・サーバーを始動します。
+  ```
+  kubectl proxy --port 8080
+  ```
+  {: pre}
+
+4. Web ブラウザーで、デバッグ・ツール・インターフェースの URL (http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page) を開きます。
+
+5. 実行する個別のテストまたはテストのグループを選択します。潜在的な警告、エラー、または問題を検査するテストもあれば、トラブルシューティング中に参照できる情報を収集するだけのテストもあります。各テストの機能について詳しくは、テストの名前の隣にある情報アイコンをクリックしてください。
+
+6. **「実行 (Run)」**をクリックします。
+
+7. 各テストの結果を確認します。
+  * テストが失敗する場合、問題の解決方法について詳しくは、左側の列内のテスト名の隣にある情報アイコンをクリックしてください。
+  * 情報 (完全な YAML など) を収集するテストの結果も使用でき、以下のセクションでクラスターをデバッグする際に役立てることができます。
 
 ## クラスターのデバッグ
 {: #debug_clusters}
@@ -56,7 +92,7 @@ lastupdated: "2018-12-06"
    <tbody>
 <tr>
    <td>Aborted</td>
-   <td>Kubernetes マスターがデプロイされる前にユーザーからクラスターの削除が要求されました。 クラスターの削除が完了すると、クラスターはダッシュボードから除去されます。 クラスターが長時間この状態になっている場合は、[{{site.data.keyword.Bluemix_notm}} サポート・ケース](cs_troubleshoot.html#ts_getting_help)を開いてください。</td>
+   <td>Kubernetes マスターがデプロイされる前にユーザーからクラスターの削除が要求されました。 クラスターの削除が完了すると、クラスターはダッシュボードから除去されます。 クラスターが長時間この状態になっている場合は、[{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いてください。</td>
    </tr>
  <tr>
      <td>Critical</td>
@@ -68,7 +104,7 @@ lastupdated: "2018-12-06"
    </tr>
    <tr>
      <td>Deleted</td>
-     <td>クラスターは削除されましたが、まだダッシュボードからは除去されていません。 クラスターが長時間この状態になっている場合は、[{{site.data.keyword.Bluemix_notm}} サポート・ケース](cs_troubleshoot.html#ts_getting_help)を開いてください。 </td>
+     <td>クラスターは削除されましたが、まだダッシュボードからは除去されていません。 クラスターが長時間この状態になっている場合は、[{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いてください。 </td>
    </tr>
    <tr>
    <td>Deleting</td>
@@ -76,7 +112,7 @@ lastupdated: "2018-12-06"
    </tr>
    <tr>
      <td>Deploy failed</td>
-     <td>Kubernetes マスターのデプロイメントを完了できませんでした。 この状態はお客様には解決できません。 [{{site.data.keyword.Bluemix_notm}} サポート・ケース](cs_troubleshoot.html#ts_getting_help)を開いて、IBM Cloud サポートに連絡してください。</td>
+     <td>Kubernetes マスターのデプロイメントを完了できませんでした。 この状態はお客様には解決できません。 [{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いて、IBM Cloud サポートに連絡してください。</td>
    </tr>
      <tr>
        <td>Deploying</td>
@@ -84,7 +120,7 @@ lastupdated: "2018-12-06"
       </tr>
       <tr>
        <td>Normal</td>
-       <td>クラスター内のすべてのワーカー・ノードが稼働中です。 クラスターにアクセスし、アプリをクラスターにデプロイできます。 この状態は正常と見なされるので、アクションは必要ありません。<p class="note">ワーカー・ノードは正常であっても、[ネットワーキング](cs_troubleshoot_network.html)や[ストレージ](cs_troubleshoot_storage.html)などの他のインフラストラクチャー・リソースには注意が必要な可能性もあります。</p></td>
+       <td>クラスター内のすべてのワーカー・ノードが稼働中です。 クラスターにアクセスし、アプリをクラスターにデプロイできます。 この状態は正常と見なされるので、アクションは必要ありません。<p class="note">ワーカー・ノードは正常であっても、[ネットワーキング](/docs/containers?topic=containers-cs_troubleshoot_network)や[ストレージ](/docs/containers?topic=containers-cs_troubleshoot_storage)などの他のインフラストラクチャー・リソースには注意が必要な可能性もあります。</p></td>
     </tr>
       <tr>
        <td>Pending</td>
@@ -92,7 +128,7 @@ lastupdated: "2018-12-06"
      </tr>
    <tr>
      <td>Requested</td>
-     <td>クラスターを作成し、Kubernetes マスターとワーカー・ノードのインフラストラクチャーを注文するための要求が送信されました。 クラスターのデプロイメントが開始されると、クラスターの状態は「<code>Deploying</code>」に変わります。 クラスターが長時間「<code>Requested</code>」状態になっている場合は、[{{site.data.keyword.Bluemix_notm}} サポート・ケース](cs_troubleshoot.html#ts_getting_help)を開いてください。 </td>
+     <td>クラスターを作成し、Kubernetes マスターとワーカー・ノードのインフラストラクチャーを注文するための要求が送信されました。 クラスターのデプロイメントが開始されると、クラスターの状態は「<code>Deploying</code>」に変わります。 クラスターが長時間「<code>Requested</code>」状態になっている場合は、[{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いてください。 </td>
    </tr>
    <tr>
      <td>Updating</td>
@@ -106,7 +142,7 @@ lastupdated: "2018-12-06"
  </table>
 
 
-[Kubernetes マスター](cs_tech.html#architecture)は、クラスターを稼働状態に保つための主要なコンポーネントです。 マスターは、クラスターの真実の単一点 (Single Point of Truth) として機能する etcd データベースに、クラスター・リソースとその構成を保管します。 Kubernetes API サーバーは、ワーカー・ノードからマスターへのすべてのクラスター管理要求、またはクラスター・リソースと対話する場合のメインエントリー・ポイントです。<br><br>マスターに障害が発生した場合、ワークロードは引き続きワーカー・ノードで実行されますが、`kubectl` コマンドを使用してクラスター・リソースを操作したり、マスターの Kubernetes API サーバーがバックアップされるまでクラスターの正常性を表示したりすることはできません。 マスターの障害時にポッドがダウンすると、ワーカー・ノードが再び Kubernetes API サーバーに到達できるまで、ポッドをスケジュール変更することはできません。<br><br>マスターの障害時にも、`ibmcloud ks` コマンドを {{site.data.keyword.containerlong_notm}} API に対して実行して、ワーカー・ノードや VLAN などのインフラストラクチャー・リソースを操作することができます。 クラスターに対してワーカー・ノードを追加または削除して現在のクラスター構成を変更する場合、マスターがバックアップされるまで変更は行われません。
+[Kubernetes マスター](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)は、クラスターを稼働状態に保つための主要なコンポーネントです。 マスターは、クラスターの真実の単一点 (Single Point of Truth) として機能する etcd データベースに、クラスター・リソースとその構成を保管します。 Kubernetes API サーバーは、ワーカー・ノードからマスターへのすべてのクラスター管理要求、またはクラスター・リソースと対話する場合のメインエントリー・ポイントです。<br><br>マスターに障害が発生した場合、ワークロードは引き続きワーカー・ノードで実行されますが、`kubectl` コマンドを使用してクラスター・リソースを操作したり、マスターの Kubernetes API サーバーがバックアップされるまでクラスターの正常性を表示したりすることはできません。 マスターの障害時にポッドがダウンすると、ワーカー・ノードが再び Kubernetes API サーバーに到達できるまで、ポッドをスケジュール変更することはできません。<br><br>マスターの障害時にも、`ibmcloud ks` コマンドを {{site.data.keyword.containerlong_notm}} API に対して実行して、ワーカー・ノードや VLAN などのインフラストラクチャー・リソースを操作することができます。 クラスターに対してワーカー・ノードを追加または削除して現在のクラスター構成を変更する場合、マスターがバックアップされるまで変更は行われません。
 
 マスターの障害時はワーカー・ノードを再始動またはリブートしないでください。 このアクションにより、ワーカー・ノードからポッドが削除されます。 Kubernetes API サーバーが使用不可のため、ポッドをクラスター内の他のワーカー・ノードにスケジュール変更することはできません。
 {: important}
@@ -124,7 +160,7 @@ lastupdated: "2018-12-06"
 1.  クラスターが **Critical**、**Delete failed**、または **Warning** 状態の場合、あるいは **Pending** 状態が長時間続いている場合は、ワーカー・ノードの状態を確認してください。
 
   ```
-  ibmcloud ks workers <cluster_name_or_id>
+  ibmcloud ks workers --cluster <cluster_name_or_id>
   ```
   {: pre}
 
@@ -139,7 +175,13 @@ lastupdated: "2018-12-06"
     <tbody>
   <tr>
       <td>Critical</td>
-      <td>ワーカー・ノードは、次のようなさまざまな理由で Critical 状態になることがあります。 <ul><li>閉鎖と排出を行わずに、ワーカー・ノードのリブートを開始した。。 ワーカー・ノードをリブートすると、<code>containerd</code>、<code>kubelet</code>、<code>kube-proxy</code>、および <code>calico</code> でデータ破損が発生する可能性があります。 </li><li>ワーカー・ノードにデプロイしたポッドが、[メモリー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) と [CPU ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/) のリソース制限を使用していない。 リソース制限を使用しないと、ポッドが、使用可能なリソースをすべて使い果たして、このワーカー・ノード上の他のポッドを実行するためのリソースがなくなる可能性があります。 この過剰なワークロードにより、ワーカー・ノードに障害が発生します。 </li><li>数百、数千ものコンテナーを長時間実行した後、<code>containerd</code>、<code>kubelet</code>、または <code>calico</code> がリカバリー不能な状態になった。 </li><li>ワーカー・ノード用にセットアップした Virtual Router Appliance が停止したために、ワーカー・ノードと Kubernetes マスターの間の通信が切断された。 </li><li> {{site.data.keyword.containerlong_notm}} または IBM Cloud インフラストラクチャー (SoftLayer) の現在のネットワーキングの問題によって、ワーカー・ノードと Kubernetes マスターが通信できなくなっている。</li><li>ワーカー・ノードが容量を使い尽くした。 ワーカー・ノードの <strong>Status</strong> に <strong>Out of disk</strong> または <strong>Out of memory</strong> と表示されていないか確認します。 ワーカー・ノードが容量を使い尽くしている場合は、ワーカー・ノードのワークロードを減らすか、ワークロードの負荷を分散できるようにクラスターにワーカー・ノードを追加してください。</li></ul> 多くの場合、ワーカー・ノードを[再ロードする](cs_cli_reference.html#cs_worker_reload)と問題を解決できます。 ワーカー・ノードを再ロードすると、最新の[パッチ・バージョン](cs_versions.html#version_types)がワーカー・ノードに適用されます。 メジャー・バージョンとマイナー・バージョンは変更されません。 必ず、ワーカー・ノードを再ロードする前に、ワーカー・ノードを閉鎖して排出してください。これにより、既存のポッドが正常終了し、残りのワーカー・ノードに再スケジュールされます。 </br></br> ワーカー・ノードを再ロードしても問題が解決しない場合は、次の手順に進み、ワーカー・ノードのトラブルシューティングを続けてください。 </br></br><strong>ヒント:</strong> [ワーカー・ノードのヘルス・チェックを構成し、Autorecovery を有効にする](cs_health.html#autorecovery)ことができます。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 Autorecovery の仕組みについて詳しくは、[Autorecovery のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
+      <td>ワーカー・ノードは、次のようなさまざまな理由で Critical 状態になることがあります。 <ul><li>閉鎖と排出を行わずに、ワーカー・ノードのリブートを開始した。。 ワーカー・ノードをリブートすると、<code>containerd</code>、<code>kubelet</code>、<code>kube-proxy</code>、および <code>calico</code> でデータ破損が発生する可能性があります。 </li>
+      <li>ワーカー・ノードにデプロイしたポッドが、[メモリー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) と [CPU ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/) のリソース制限を使用していない。 リソース制限を使用しないと、ポッドが、使用可能なリソースをすべて使い果たして、このワーカー・ノード上の他のポッドを実行するためのリソースがなくなる可能性があります。 この過剰なワークロードにより、ワーカー・ノードに障害が発生します。 </li>
+      <li>数百、数千ものコンテナーを長時間実行した後、<code>containerd</code>、<code>kubelet</code>、または <code>calico</code> がリカバリー不能な状態になった。 </li>
+      <li>ワーカー・ノード用にセットアップした Virtual Router Appliance が停止したために、ワーカー・ノードと Kubernetes マスターの間の通信が切断された。 </li><li> {{site.data.keyword.containerlong_notm}} または IBM Cloud インフラストラクチャー (SoftLayer) の現在のネットワーキングの問題によって、ワーカー・ノードと Kubernetes マスターが通信できなくなっている。</li>
+      <li>ワーカー・ノードが容量を使い尽くした。 ワーカー・ノードの <strong>Status</strong> に <strong>Out of disk</strong> または <strong>Out of memory</strong> と表示されていないか確認します。 ワーカー・ノードが容量を使い尽くしている場合は、ワーカー・ノードのワークロードを減らすか、ワークロードの負荷を分散できるようにクラスターにワーカー・ノードを追加してください。</li>
+      <li>デバイスが [{{site.data.keyword.Bluemix_notm}} コンソールのリソース・リスト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/resources) で電源オフにされた。リソース・リストを開き、**「デバイス」**リストでワーカー・ノード ID を見つけます。アクション・メニューで、**「パワーオン」**をクリックします。</li></ul>
+      多くの場合、ワーカー・ノードを[再ロードする](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)と問題を解決できます。 ワーカー・ノードを再ロードすると、最新の[パッチ・バージョン](/docs/containers?topic=containers-cs_versions#version_types)がワーカー・ノードに適用されます。 メジャー・バージョンとマイナー・バージョンは変更されません。 必ず、ワーカー・ノードを再ロードする前に、ワーカー・ノードを閉鎖して排出してください。これにより、既存のポッドが正常終了し、残りのワーカー・ノードに再スケジュールされます。 </br></br> ワーカー・ノードを再ロードしても問題が解決しない場合は、次の手順に進み、ワーカー・ノードのトラブルシューティングを続けてください。 </br></br><strong>ヒント:</strong> [ワーカー・ノードのヘルス・チェックを構成し、Autorecovery を有効にする](/docs/containers?topic=containers-health#autorecovery)ことができます。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 Autorecovery の仕組みについて詳しくは、[Autorecovery のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
       </td>
      </tr>
      <tr>
@@ -152,7 +194,7 @@ lastupdated: "2018-12-06"
      </tr>
         <tr>
         <td>Normal</td>
-        <td>ワーカー・ノードは完全にプロビジョンされ、クラスターで使用できる状態です。 この状態は正常と見なされるので、ユーザーのアクションは必要ありません。 **注**: ワーカー・ノードは正常であっても、[ネットワーキング](cs_troubleshoot_network.html)や[ストレージ](cs_troubleshoot_storage.html)などの他のインフラストラクチャー・リソースには注意が必要な可能性もあります。</td>
+        <td>ワーカー・ノードは完全にプロビジョンされ、クラスターで使用できる状態です。 この状態は正常と見なされるので、ユーザーのアクションは必要ありません。 **注**: ワーカー・ノードは正常であっても、[ネットワーキング](/docs/containers?topic=containers-cs_troubleshoot_network)や[ストレージ](/docs/containers?topic=containers-cs_troubleshoot_storage)などの他のインフラストラクチャー・リソースには注意が必要な可能性もあります。</td>
      </tr>
    <tr>
         <td>Provisioning</td>
@@ -176,7 +218,7 @@ lastupdated: "2018-12-06"
       </tr>
       <tr>
        <td>Unknown</td>
-       <td>次のいずれかの理由で、Kubernetes マスターにアクセスできません。<ul><li>Kubernetes マスターの更新を要求しました。 更新中は、ワーカー・ノードの状態を取得できません。 Kubernetes マスターが正常に更新された後でもワーカー・ノードが長期間この状態のままである場合は、ワーカー・ノードの[再ロード](cs_cli_reference.html#cs_worker_reload)を試行してください。</li><li>ワーカー・ノードを保護している別のファイアウォールが存在するか、最近ファイアウォールの設定を変更した可能性があります。 {{site.data.keyword.containerlong_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 詳しくは、[ファイアウォールがあるためにワーカー・ノードが接続しない](cs_troubleshoot_clusters.html#cs_firewall)を参照してください。</li><li>Kubernetes マスターがダウンしています。 [{{site.data.keyword.Bluemix_notm}} サポート・ケース](#ts_getting_help)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</li></ul></td>
+       <td>次のいずれかの理由で、Kubernetes マスターにアクセスできません。<ul><li>Kubernetes マスターの更新を要求しました。 更新中は、ワーカー・ノードの状態を取得できません。 Kubernetes マスターが正常に更新された後でもワーカー・ノードが長期間この状態のままである場合は、ワーカー・ノードの[再ロード](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)を試行してください。</li><li>ワーカー・ノードを保護している別のファイアウォールが存在するか、最近ファイアウォールの設定を変更した可能性があります。 {{site.data.keyword.containerlong_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 詳しくは、[ファイアウォールがあるためにワーカー・ノードが接続しない](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)を参照してください。</li><li>Kubernetes マスターがダウンしています。 [{{site.data.keyword.Bluemix_notm}} サポート・ケース](#ts_getting_help)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</li></ul></td>
   </tr>
      <tr>
         <td>Warning</td>
@@ -186,14 +228,8 @@ lastupdated: "2018-12-06"
   </table>
 
 5.  ワーカー・ノードの詳細情報をリストします。 詳細情報にエラー・メッセージが含まれている場合は、[ワーカー・ノードに関する一般的なエラー・メッセージ](#common_worker_nodes_issues)のリストを参照して、問題の解決方法を確認してください。
-
-   ```
-   ibmcloud ks worker-get <worker_id>
-   ```
-   {: pre}
-
   ```
-  ibmcloud ks worker-get [<cluster_name_or_id>] <worker_node_id>
+  ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id>
   ```
   {: pre}
 
@@ -222,13 +258,13 @@ lastupdated: "2018-12-06"
       <td>選択したゾーンに、ワーカー・ノードをプロビジョンするための十分なインフラストラクチャー容量がない可能性があります。 または、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの制限を超えた可能性があります。 解決するには、以下のいずれかのオプションを試してください。
       <ul><li>ゾーン内のインフラストラクチャー・リソースの可用性は、頻繁に変動します。 数分待ってから、再試行してください。</li>
       <li>単一ゾーン・クラスターの場合は、別のゾーンにクラスターを作成します。 複数ゾーン・クラスターの場合は、クラスターにゾーンを追加します。</li>
-      <li>IBM Cloud インフラストラクチャー (SoftLayer) アカウントで、ワーカー・ノードに対してパブリック VLAN とプライベート VLAN の異なるペアを指定します。 ワーカー・プール内にあるワーカー・ノードの場合は、<code>ibmcloud ks zone-network-set</code> [コマンド](cs_cli_reference.html#cs_zone_network_set)を使用できます。</li>
+      <li>IBM Cloud インフラストラクチャー (SoftLayer) アカウントで、ワーカー・ノードに対してパブリック VLAN とプライベート VLAN の異なるペアを指定します。 ワーカー・プール内にあるワーカー・ノードの場合は、<code>ibmcloud ks zone-network-set</code> [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)を使用できます。</li>
       <li>IBM Cloud インフラストラクチャー (SoftLayer) アカウント・マネージャーに連絡して、グローバルな割り当て量などのアカウント制限を超えないことを確認してください。</li>
       <li>[IBM Cloud インフラストラクチャー (SoftLayer) サポート・ケース](#ts_getting_help)を開きます。</li></ul></td>
       </tr>
       <tr>
-        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan id&gt;.</td>
-        <td>次のいずれかの理由で、選択した VLAN ID が見つからなかったため、ワーカー・ノードをプロビジョンできませんでした。<ul><li>VLAN ID ではなく VLAN 番号を指定した可能性があります。 VLAN 番号の長さは 3 桁または 4 桁ですが、VLAN ID の長さは 7 桁です。 VLAN ID を取得するには、<code>ibmcloud ks vlans &lt;zone&gt;</code> を実行してください。<li>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントに VLAN ID が関連付けられていない可能性があります。 アカウントの使用可能な VLAN ID をリストするには、<code>ibmcloud ks vlans &lt;zone&gt;</code> を実行します。 IBM Cloud インフラストラクチャー (SoftLayer) アカウントを変更するには、[`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set) を参照してください。 </ul></td>
+        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: <code>&lt;vlan id&gt;</code>.</td>
+        <td>次のいずれかの理由で、選択した VLAN ID が見つからなかったため、ワーカー・ノードをプロビジョンできませんでした。<ul><li>VLAN ID ではなく VLAN 番号を指定した可能性があります。 VLAN 番号の長さは 3 桁または 4 桁ですが、VLAN ID の長さは 7 桁です。 VLAN ID を取得するには、<code>ibmcloud ks vlans --zone &lt;zone&gt;</code> を実行してください。<li>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントに VLAN ID が関連付けられていない可能性があります。 アカウントの使用可能な VLAN ID をリストするには、<code>ibmcloud ks vlans --zone &lt;zone&gt;</code> を実行します。 IBM Cloud インフラストラクチャー (SoftLayer) アカウントを変更するには、[`ibmcloud ks credential-set`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set) を参照してください。 </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
@@ -240,15 +276,26 @@ lastupdated: "2018-12-06"
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
         </br></br>
         The {{site.data.keyword.Bluemix_notm}} infrastructure credentials could not be validated.</td>
-        <td>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオでアクションを実行するために必要なアクセス権限がない可能性があるか、または正しくないインフラストラクチャー資格情報を使用しています。 [API キーのセットアップによるインフラストラクチャー・ポートフォリオへのアクセスの有効化](cs_users.html#api_key)を参照してください。</td>
+        <td>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオでアクションを実行するために必要なアクセス権限がない可能性があるか、または正しくないインフラストラクチャー資格情報を使用しています。 [API キーのセットアップによるインフラストラクチャー・ポートフォリオへのアクセスの有効化](/docs/containers?topic=containers-users#api_key)を参照してください。</td>
       </tr>
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containerlong_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
-       <td><ul><li>ファイアウォールがある場合は、[該当するポートと IP アドレスへの発信トラフィックを許可するようにファイアウォール設定を構成します](cs_firewall.html#firewall_outbound)。</li><li>`ibmcloud ks workers &lt;mycluster&gt;` を実行して、クラスターにパブリック IP が含まれていないかどうかを確認します。 パブリック IP がリストされない場合、クラスターにはプライベート VLAN だけがあります。<ul><li>クラスターにプライベート VLAN のみが含まれるようにするには、[VLAN 接続](cs_clusters_planning.html#private_clusters)と[ファイアウォール](cs_firewall.html#firewall_outbound)をセットアップします。</li><li>パブリック IP があるクラスターにするには、パブリック VLAN とプライベート VLAN の両方を指定して[新しいワーカー・ノードを追加](cs_cli_reference.html#cs_worker_add)します。</li></ul></li></ul></td>
+       <td><ul><li>ファイアウォールがある場合は、[該当するポートと IP アドレスへの発信トラフィックを許可するようにファイアウォール設定を構成します](/docs/containers?topic=containers-firewall#firewall_outbound)。</li>
+       <li>`ibmcloud ks workers &lt;mycluster&gt;` を実行して、クラスターにパブリック IP が含まれていないかどうかを確認します。 パブリック IP がリストされない場合、クラスターにはプライベート VLAN だけがあります。
+       <ul><li>クラスターにプライベート VLAN のみが含まれるようにするには、[VLAN 接続](/docs/containers?topic=containers-plan_clusters#private_clusters)と[ファイアウォール](/docs/containers?topic=containers-firewall#firewall_outbound)をセットアップします。</li>
+       <li>パブリック IP があるクラスターにするには、パブリック VLAN とプライベート VLAN の両方を指定して[新しいワーカー・ノードを追加](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add)します。</li></ul></li></ul></td>
      </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
-  <td>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスに使用される API キーの所有者には、このアクションを実行するために必要な権限がありません。あるいは、その所有者が削除の保留中である可能性があります。</br></br><strong>ユーザーは</strong>、以下の手順に従ってください。 <ol><li>複数のアカウントを利用できる場合は、{{site.data.keyword.containerlong_notm}} を操作したいアカウントにログインしていることを確認します。 </li><li><code>ibmcloud ks api-key-info</code> を実行して、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスに使用される現在の API キーの所有者を表示します。 </li><li><code>ibmcloud account list</code> を実行して、現在使用している {{site.data.keyword.Bluemix_notm}} アカウントの所有者を表示します。 </li><li>{{site.data.keyword.Bluemix_notm}} アカウントの所有者に連絡して、API キーの所有者に IBM Cloud インフラストラクチャー (SoftLayer) での十分な権限がないか、その所有者が削除の保留中である可能性があることを報告します。 </li></ol></br><strong>アカウント所有者は</strong>、以下の手順に従ってください。 <ol><li>先ほど失敗したアクションを実行するために [IBM Cloud インフラストラクチャー (SoftLayer) に必要な権限](cs_users.html#infra_access)を確認します。 </li><li>API キーの所有者の権限を修正するか、[<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) コマンドを使用して新しい API キーを作成します。 </li><li>自分または別のアカウント管理者が、IBM Cloud インフラストラクチャー (SoftLayer) の資格情報を手動でアカウントに設定した場合は、[<code>ibmcloud ks credential-unset</code>](cs_cli_reference.html#cs_credentials_unset) を実行してアカウントから資格情報を削除します。</li></ol></td>
+  <td>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスに使用される API キーの所有者には、このアクションを実行するために必要な権限がありません。あるいは、その所有者が削除の保留中である可能性があります。</br></br><strong>ユーザーは</strong>、以下の手順に従ってください。
+  <ol><li>複数のアカウントを利用できる場合は、{{site.data.keyword.containerlong_notm}} を操作したいアカウントにログインしていることを確認します。 </li>
+  <li><code>ibmcloud ks api-key-info</code> を実行して、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスに使用される現在の API キーの所有者を表示します。 </li>
+  <li><code>ibmcloud account list</code> を実行して、現在使用している {{site.data.keyword.Bluemix_notm}} アカウントの所有者を表示します。 </li>
+  <li>{{site.data.keyword.Bluemix_notm}} アカウントの所有者に連絡して、API キーの所有者に IBM Cloud インフラストラクチャー (SoftLayer) での十分な権限がないか、その所有者が削除の保留中である可能性があることを報告します。 </li></ol>
+  </br><strong>アカウント所有者は</strong>、以下の手順に従ってください。
+  <ol><li>先ほど失敗したアクションを実行するために [IBM Cloud インフラストラクチャー (SoftLayer) に必要な権限](/docs/containers?topic=containers-users#infra_access)を確認します。 </li>
+  <li>API キーの所有者の権限を修正するか、[<code>ibmcloud ks api-key-reset</code>](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset) コマンドを使用して新しい API キーを作成します。 </li>
+  <li>自分または別のアカウント管理者が、IBM Cloud インフラストラクチャー (SoftLayer) の資格情報を手動でアカウントに設定した場合は、[<code>ibmcloud ks credential-unset</code>](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset) を実行してアカウントから資格情報を削除します。</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -265,14 +312,14 @@ lastupdated: "2018-12-06"
 
 アプリ・デプロイメントをデバッグするためのオプションを確認し、障害の根本原因を探します。
 
-
+始める前に、アプリがデプロイされている名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
 1. `describe` コマンドを実行して、サービス・リソースまたはデプロイメント・リソース内の異常を見つけます。
 
  例:
  <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
 
-2. [コンテナーが ContainerCreating 状態で停滞しているかどうかを確認します](cs_troubleshoot_storage.html#stuck_creating_state)。
+2. [コンテナーが `ContainerCreating` 状態で停滞しているかどうかを確認します](/docs/containers?topic=containers-cs_troubleshoot_storage#stuck_creating_state)。
 
 3. クラスターが `Critical` 状態かどうかを確認します。 クラスターが `Critical` 状態の場合、ファイアウォール・ルールを調べて、マスターがワーカー・ノードと通信できることを検査します。
 
@@ -311,15 +358,15 @@ lastupdated: "2018-12-06"
 {: shortdesc}
 
 -  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
--   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
+-   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を確認します](https://cloud.ibm.com/status?selected=status)。
 -   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
     {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
     {: tip}
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
-    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support/howtogetsupport.html#using-avatar)を参照してください。
--   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
-問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。
+    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)を参照してください。
+-   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を参照してください。
+問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。 また、[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) を使用して、クラスターから関連情報を収集してエクスポートし、IBM サポートと情報を共有することができます。
 {: tip}
 

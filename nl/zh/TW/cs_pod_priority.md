@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -29,7 +33,7 @@ lastupdated: "2018-12-05"
 
 透過設定 Pod 優先順序，您可以協助防止較低優先順序的工作負載影響叢集裡的重要工作負載，尤其是在叢集開始達到其資源容量的情況下。
 
-請確定您已對叢集[設定適當的使用者存取權](cs_users.html#users)及（如果適用）[Pod 安全原則](cs_psp.html#psp)。存取權及 Pod 安全原則有助於防止不受信任的使用者部署高優先順序 Pod，而防止其他 Pod 進行排程。
+請確定您已對叢集[設定適當的使用者存取權](/docs/containers?topic=containers-users#users)及（如果適用）[Pod 安全原則](/docs/containers?topic=containers-psp#psp)。存取權及 Pod 安全原則有助於防止不受信任的使用者部署高優先順序 Pod，而防止其他 Pod 進行排程。
 {: tip}
 
 {: #priority_scheduling}
@@ -40,7 +44,9 @@ lastupdated: "2018-12-05"
 
 若要瞭解 Pod 優先順序與排程器如何一起運作，請考量下圖中的情境。您必須在具有可用資源的工作者節點上放置已設定優先順序的 Pod。否則，在移除現有 Pod 的同時，叢集裡的高優先順序 Pod 可能保持擱置狀態，如「情境 3」所示。
 
-_圖：Pod 優先順序情境_![Pod 優先順序情境](images/pod-priority.png)
+_圖：Pod 優先順序情境_
+<img src="images/pod-priority.png" width="500" alt="Pod 優先順序情境" style="width:500px; border-style: none"/>
+
 1.  具有高、中、低優先順序的三個 Pod 擱置排程。排程器會尋找有空間給所有 3 個 Pod 的可用工作者節點，並依優先順序排程它們，優先順序最高的 Pod 先排。
 2.  具有高、中、低優先順序的三個 Pod 擱置排程。排程器會尋找可用的工作者節點，但工作者節點的資源僅足以支援高及中優先順序的 Pod。低優先順序 Pod 未進行排程而保持擱置。
 3.  具有高及中優先順序的兩個 Pod 擱置排程。可用的工作者節點上具有低優先順序的第三個 Pod。不過，工作者節點沒有足夠的資源來進行任何擱置 Pod 的排程。排程器會先占或移除低優先順序 Pod，這使得 Pod 回到擱置狀態。然後，排程器會嘗試排程高優先順序 Pod。不過，工作者節點沒有足夠的資源來排程高優先順序 Pod，排程器改為排程中優先順序 Pod。
@@ -85,8 +91,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始之前：
-* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
-* [建立](cs_clusters.html#clusters_ui)或[更新](cs_cluster_update.html#update)您的叢集至 Kubernetes 1.11 版或更新版本。
+* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* 確定您具有 `default` 名稱空間的 [**Writer** 或 **Manager** {{site.data.keyword.Bluemix_notm}}IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* [建立](/docs/containers?topic=containers-clusters#clusters_ui)或[更新](/docs/containers?topic=containers-update#update)您的叢集至 Kubernetes 1.11 版或更新版本。
 
 若要使用優先順序等級，請執行下列動作：
 
@@ -166,8 +173,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始之前：
-* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
-* [建立](cs_clusters.html#clusters_ui)或[更新](cs_cluster_update.html#update)您的叢集至 Kubernetes 1.11 版或更新版本。
+* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* 確定您具有要在其中部署 Pod 的名稱空間的 [**Writer** 或 **Manager** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* [建立](/docs/containers?topic=containers-clusters#clusters_ui)或[更新](/docs/containers?topic=containers-update#update)您的叢集至 Kubernetes 1.11 版或更新版本。
 * [瞭解優先順序排程的運作方式](#priority_scheduling)，因為優先順序可能先佔現有的 Pod，並影響叢集資源的使用。
 
 若要指派 Pod 的優先順序，請執行下列動作：
@@ -198,7 +206,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 3.  在您的 Pod 規格中，把您在前一個步驟擷取的優先順序等級的名稱新增至 `priorityClassName` 欄位中。
 
     ```yaml
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty

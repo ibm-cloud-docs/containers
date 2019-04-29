@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2017, 2018
-lastupdated: "2018-12-05"
+  years: 2017, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, audit
+
+subcollection: containers
 
 ---
 
@@ -33,9 +37,9 @@ lastupdated: "2018-12-05"
 
 * **Kubernetes API 服务器审计事件**：
     * 这些事件会自动生成，但必须配置集群以将这些事件转发到 {{site.data.keyword.cloudaccesstrailshort}} 服务。
-    * 可以配置集群以将事件发送到 {{site.data.keyword.cloudaccesstrailshort}} **帐户域**或**空间域**。有关更多信息，请参阅[发送审计日志](/docs/containers/cs_health.html#api_forward)。
+    * 可以配置集群以将事件发送到 {{site.data.keyword.cloudaccesstrailshort}} **帐户域**或**空间域**。有关更多信息，请参阅[发送审计日志](/docs/containers?topic=containers-health#api_forward)。
 
-有关服务如何工作的更多信息，请参阅 [{{site.data.keyword.cloudaccesstrailshort}} 文档](/docs/services/cloud-activity-tracker/index.html)。有关跟踪的 Kubernetes 操作的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/home/)。
+有关服务如何工作的更多信息，请参阅 [{{site.data.keyword.cloudaccesstrailshort}} 文档](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla)。有关跟踪的 Kubernetes 操作的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/home/)。
 
 ## 查找事件的信息
 {: #kube-find}
@@ -54,7 +58,7 @@ lastupdated: "2018-12-05"
 5. 设置要查看其日志的时间范围。缺省值为 24 小时。
 6. 要缩小搜索范围，可以单击 `ActivityTracker_Account_Search_in_24h` 的编辑图标，然后在**可用字段**列中添加字段。
 
-要允许其他用户查看帐户和空间事件，请参阅[授予查看帐户事件的许可权](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions)。
+要允许其他用户查看帐户和空间事件，请参阅[授予查看帐户事件的许可权](/docs/services/cloud-activity-tracker/how-to?topic=cloud-activity-tracker-grant_permissions#grant_permissions)。
 {: tip}
 
 ## 跟踪集群管理事件
@@ -145,7 +149,7 @@ lastupdated: "2018-12-05"
 查看下表以获取发送到 {{site.data.keyword.cloudaccesstrailshort}} 的 Kubernetes API 服务器审计事件的列表。
 {: shortdesc}
 
-开始之前：确保将集群配置为转发 [Kubernetes API 审计事件](cs_health.html#api_forward)。
+开始之前：确保将集群配置为转发 [Kubernetes API 审计事件](/docs/containers?topic=containers-health#api_forward)。
 
 <table>
   <tr>
@@ -434,35 +438,35 @@ lastupdated: "2018-12-05"
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.create</code></td>
-    <td>创建了持久性卷申领。</td>
+    <td>创建了持久卷声明。</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.delete</code></td>
-    <td>删除了持久性卷申领。</td>
+    <td>删除了持久卷声明。</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.patch</code></td>
-    <td>修补了持久性卷申领。</td>
+    <td>修补了持久卷声明。</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.update</code></td>
-    <td>更新了持久性卷申领。</td>
+    <td>更新了持久卷声明。</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.create</code></td>
-    <td>创建了持久性卷。</td>
+    <td>创建了持久卷。</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.delete</code></td>
-    <td>删除了持久性卷。</td>
+    <td>删除了持久卷。</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.patch</code></td>
-    <td>修补了持久性卷。</td>
+    <td>修补了持久卷。</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.update</code></td>
-    <td>更新了持久性卷。</td>
+    <td>更新了持久卷。</td>
   </tr>
   <tr>
     <td><code>poddisruptionbudgets.create</code></td>

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -20,7 +24,6 @@ lastupdated: "2018-12-05"
 
 
 
-
 # {{site.data.keyword.cloud_notm}} 的醫療保健使用案例
 {: #cs_uc_health}
 
@@ -31,15 +34,17 @@ lastupdated: "2018-12-05"
 {: #uc_migrate}
 
 醫療保健提供者的 IT Exec 具有內部部署商業報告及病患系統。這些系統經歷慢速增強週期，進而造成停滯的病患服務層次。
+{: shortdesc}
 
 為何要使用 {{site.data.keyword.cloud_notm}}：若要改善病患服務，提供者會尋找 {{site.data.keyword.containerlong_notm}} 及 {{site.data.keyword.contdelivery_full}} 以減少 IT 費用並加速開發，而這些全都是在安全平台上執行。提供者的高使用量 SaaS 系統（同時保留病患記錄系統及商業報告應用程式）需要經常更新。此外，內部部署環境會阻礙敏捷開發。提供者也想要抵消不斷增加的人力成本以及減少預算。
 
-重要技術：    
-* [適合各種 CPU、RAM、儲存空間需求的叢集](cs_clusters_planning.html#shared_dedicated_node)
-* [水平調整](cs_app.html#highly_available_apps)
-* [容器安全及隔離](cs_secure.html#security)
+重要技術：
+* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [水平調整](/docs/containers?topic=containers-app#highly_available_apps)
+* [容器安全及隔離](/docs/containers?topic=containers-security#security)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [使用 {{site.data.keyword.appid_short_notm}} 可在不需變更應用程式碼的情況下登入](/docs/services/appid?topic=appid-getting-started)
 
 它們是從容器化其 SaaS 系統並將它們放入雲端開始。從這個第一個步驟，它們已從專用資料中心的過度建置硬體移到可降低 IT 作業、維護及能源的可自訂運算。為了管理 SaaS 系統，它們輕鬆地設計 Kubernetes 叢集，以符合其 CPU、RAM 及儲存空間需求。減少人員成本的另一個因素是 IBM 管理 Kubernetes，因此提供者可以專注於提供更佳的客戶服務。
 
@@ -64,12 +69,13 @@ lastupdated: "2018-12-05"
 
 **解決方案模型**
 
-隨需應變運算、儲存空間及 IO 服務是在可安全存取內部部署企業資產的公用雲端中執行。實作 CI/CD 處理程序及其他 IBM Garage Method 組件，以大幅縮短交付週期。
+隨需應變運算、儲存空間及 I/O 服務是在可安全存取內部部署企業資產的公用雲端中執行。實作 CI/CD 處理程序及其他 IBM Garage Method 組件，以大幅縮短交付週期。
 
 **步驟 1：保護運算平台的安全**
 * 管理高度敏感病患資料的應用程式可以在於「裸機」上執行以進行「授信運算」的 {{site.data.keyword.containerlong_notm}} 上重新管理。
 * 「授信運算」可以驗證基礎硬體未遭到竄改。
 * 從該核心，「漏洞警告器」提供已知惡意軟體的映像檔、原則、容器及套件掃描漏洞掃描。
+* 利用簡單的 Ingress 註釋，對您的服務及 API 一貫地強制執行原則驅動鑑別。藉由宣告式安全，您可以使用 {{site.data.keyword.appid_short_notm}} 來確保使用者鑑別及記號驗證。
 
 **步驟 2：提升及轉移**
 * 將虛擬機器映像檔移轉至在公用雲端的 {{site.data.keyword.containerlong_notm}} 中執行的容器映像檔。
@@ -88,6 +94,7 @@ lastupdated: "2018-12-05"
 * {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
+* {{site.data.keyword.appid_short_notm}}
 
 對於最敏感的工作負載，可以在「裸機」的 {{site.data.keyword.containerlong_notm}} 中管理叢集。它提供授信運算平台，以自動掃描硬體及運行環境程式碼來找出漏洞。使用業界標準容器技術，即可一開始就快速在 {{site.data.keyword.containerlong_notm}} 上重新管理應用程式，而不需要變更主要架構。這項變更提供可調整性的直接好處。
 
@@ -114,12 +121,12 @@ lastupdated: "2018-12-05"
 
 為何要使用 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 提供安全運算，可以在開放式平台上管理敏感及高效能資料處理。該廣域平台會在附近的地區進行管理。因此，它與當地法規相關聯，以提高病患及研究人員在本端保護其資料的信心，並在改善健康成果方面有所不同。
 
-重要技術：    
-* [智慧型排程會視需要放置工作負載](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
-* [{{site.data.keyword.cloudant}} 可以跨應用程式持續保存及同步處理資料](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [工作負載的漏洞掃描及隔離](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+重要技術：
+* [智慧型排程會視需要放置工作負載](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [{{site.data.keyword.cloudant}} 可以跨應用程式持續保存及同步處理資料](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [工作負載的漏洞掃描及隔離](/docs/services/Registry?topic=va-va_index#va_index)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} 會將資料消毒，並通知研究人員資料結構發生變更](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} 會將資料消毒，並通知研究人員資料結構發生變更](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
 
 **環境定義：安全地管理及共用非營利研究的疾病資料**
 
@@ -181,7 +188,7 @@ lastupdated: "2018-12-05"
 
 **步驟 1：使用微服務來容器化應用程式**
 * 使用 IBM 的 Node.js 入門範本套件來快速開始開發。
-* 根據應用程式的功能範圍及其相依關係，將應用程式架構成 {{site.data.keyword.containerlong_notm}} 內的一組共同微服務。
+* 根據應用程式的功能範圍及其相依關係，將應用程式建構成 {{site.data.keyword.containerlong_notm}} 內的一組共同微服務。
 * 將研究應用程式部署至 {{site.data.keyword.containerlong_notm}} 中的容器。
 * 透過 Kubernetes 提供標準化 DevOps 儀表板。
 * 針對批次及其他不常執行的研究工作負載，啟用隨需應變運算調整。

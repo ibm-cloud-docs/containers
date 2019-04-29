@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -20,7 +24,6 @@ lastupdated: "2018-12-05"
 
 
 
-
 # Casi di utilizzo di assistenza sanitaria per {{site.data.keyword.cloud_notm}}
 {: #cs_uc_health}
 
@@ -31,15 +34,17 @@ Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyw
 {: #uc_migrate}
 
 Un responsabile IT per un fornitore di assistenza sanitaria dispone di sistemi aziendali di reporting e gestione dei pazienti installati in loco. Questi sistemi hanno lenti cicli di miglioramento, che portano a livelli di servizio stagnanti per i pazienti.
+{: shortdesc}
 
 Perché {{site.data.keyword.cloud_notm}}: per migliorare il servizio dei pazienti, il fornitore ha cercato {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.contdelivery_full}} per ridurre la spesa IT e accelerare lo sviluppo, il tutto su una piattaforma sicura. I sistemi SaaS ad alto utilizzo del fornitore, che contenevano sia i sistemi di registrazione dei pazienti che le applicazioni di report aziendali, necessitavano di aggiornamenti frequenti. Tuttavia, l'ambiente in loco ha ostacolato lo sviluppo agile. Il fornitore voleva anche contrastare l'aumento del costo del lavoro e un budget in diminuzione.
 
-Tecnologie chiave:    
-* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](cs_clusters_planning.html#shared_dedicated_node)
-* [Adattamento orizzontale](cs_app.html#highly_available_apps)
-* [Sicurezza e isolamento dei contenitori](cs_secure.html#security)
+Tecnologie chiave:
+* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Adattamento orizzontale](/docs/containers?topic=containers-app#highly_available_apps)
+* [Sicurezza e isolamento dei contenitori](/docs/containers?topic=containers-security#security)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK per Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK per Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [Funzionalità di accesso senza modificare il codice applicativo utilizzando {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
 
 Hanno iniziato caricando i propri sistemi SaaS in un contenitore e inserendoli nel cloud. Da quel primo passo, sono passati dall'hardware sovradimensionato in un data center privato al calcolo personalizzabile che riduce le operazioni IT, la manutenzione e l'energia. Per ospitare i sistemi SaaS, hanno progettato facilmente cluster Kubernetes per soddisfare le loro esigenze di CPU, RAM e archiviazione. Un altro fattore per la riduzione dei costi del personale è che IBM gestisce Kubernetes, quindi il fornitore può concentrarsi sulla fornitura di un servizio clienti migliore.
 
@@ -64,12 +69,13 @@ Proteggere i dati dei pazienti fa sì che i pazienti siano più felici.
 
 **Modello di soluzione**
 
-Servizi IO, archiviazione e calcolo su richiesta eseguiti nel cloud pubblico con accesso sicuro alle risorse aziendali in loco. Implementare un processo CI/CD e altre parti di IBM Garage Method per ridurre drasticamente i cicli di consegna.
+Servizi I/O, archiviazione e calcolo su richiesta eseguiti nel cloud pubblico con accesso sicuro alle risorse aziendali in loco. Implementare un processo CI/CD e altre parti di IBM Garage Method per ridurre drasticamente i cicli di consegna.
 
 **Passo 1: protezione della piattaforma di calcolo**
 * Le applicazioni che gestiscono dati altamente sensibili dei pazienti possono essere riospitate su {{site.data.keyword.containerlong_notm}} in esecuzione su bare metal per Trusted Compute.
 * Trusted Compute può verificare eventuali manomissioni dell'hardware sottostante.
 * Da tale nucleo, Vulnerability Advisor fornisce la scansione dei punti vulnerabili di immagini, politiche, contenitori e pacchetti per rilevare malware noti.
+* Implementa in modo congruente l'autenticazione controllata dalle politiche ai tuoi servizi e alle tue API con una semplice annotazione Ingress. Con la sicurezza dichiarativa, puoi garantire l'autenticazione degli utenti e la convalida dei token utilizzando {{site.data.keyword.appid_short_notm}}.
 
 **Passo 2: migrazione (Lift and shift)**
 * Migra le immagini della macchina virtuale nelle immagini del contenitore eseguite in {{site.data.keyword.containerlong_notm}} nel cloud pubblico.
@@ -88,6 +94,7 @@ Servizi IO, archiviazione e calcolo su richiesta eseguiti nel cloud pubblico con
 * {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
+* {{site.data.keyword.appid_short_notm}}
 
 Per i carichi di lavoro più sensibili, i cluster possono essere ospitati in {{site.data.keyword.containerlong_notm}} per Bare Metal.  Fornisce una piattaforma di calcolo attendibile che esegue automaticamente la scansione dell'hardware e del codice di runtime per rilevare eventuali vulnerabilità. Utilizzando la tecnologia dei contenitori standard del settore, le applicazioni possono essere inizialmente riospitate su {{site.data.keyword.containerlong_notm}} in modo rapido senza importanti modifiche architetturali. Questa modifica offre il vantaggio immediato della scalabilità.
 
@@ -114,12 +121,12 @@ Un responsabile dello sviluppo per una ricerca no-profit sulle malattie ha ricer
 
 Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} offre un calcolo sicuro in grado di ospitare l'elaborazione di dati sensibili e performanti su una piattaforma aperta. Questa piattaforma globale è ospitata nelle regioni vicine. Quindi è legato alle normative locali che ispirano la fiducia dei pazienti e dei ricercatori il fatto che i loro dati siano protetti localmente e facciano la differenza ottenendo migliori risultati sanitari.
 
-Tecnologie chiave:    
-* [La pianificazione intelligente posiziona i carichi di lavoro dove necessario](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
-* [{{site.data.keyword.cloudant}} per mantenere e sincronizzare i dati tra le applicazioni](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [Scansione e isolamento delle vulnerabilità per i carichi di lavoro](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+Tecnologie chiave:
+* [La pianificazione intelligente posiziona i carichi di lavoro dove necessario](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [{{site.data.keyword.cloudant}} per mantenere e sincronizzare i dati tra le applicazioni](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [Scansione e isolamento delle vulnerabilità per i carichi di lavoro](/docs/services/Registry?topic=va-va_index#va_index)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} per ripulire i dati e informare i ricercatori sulle modifiche alla struttura dei dati](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} per ripulire i dati e informare i ricercatori sulle modifiche alla struttura dei dati](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
 
 **Contesto: hosting e condivisione sicura dei dati sulle malattie per la ricerca no-profit**
 
@@ -181,7 +188,7 @@ Soluzione tecnica:
 
 **Passo 1: carica le applicazioni in un contenitore utilizzando i microservizi**
 * Utilizza il kit starter Node.js di IBM per iniziare subito le attività di sviluppo.
-* Progetta le applicazioni in una serie di microservizi cooperativi all'interno di {{site.data.keyword.containerlong_notm}} in base alle aree funzionali dell'applicazione e delle sue dipendenze.
+* Struttura le applicazioni in una serie di microservizi cooperativi all'interno di {{site.data.keyword.containerlong_notm}} in base alle aree funzionali dell'applicazione e delle sue dipendenze.
 * Distribuisci le applicazioni di ricerca nei contenitori in {{site.data.keyword.containerlong_notm}}.
 * Fornisci dashboard DevOps standardizzati attraverso Kubernetes.
 * Abilita il ridimensionamento su richiesta del calcolo per i carichi di lavoro batch e di altre ricerche che vengono eseguiti raramente.

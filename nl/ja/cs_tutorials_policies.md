@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # チュートリアル: Calico ネットワーク・ポリシーを使用したトラフィックのブロック
 {: #policy_tutorial}
 
@@ -31,24 +34,31 @@ lastupdated: "2018-12-05"
 このシナリオでは、PR 会社のネットワーク管理者の役割を担って、アプリへの何らかの異常なトラフィックを見つけます。 このチュートリアルのレッスンでは、サンプル Web サーバー・アプリを作成し、ロード・バランサー・サービスを使用してアプリを公開し、Calico ポリシーのホワイトリストとブラックリストの両方を使用して、不要で異常なトラフィックからアプリを保護します。
 
 ## 達成目標
+{: #policies_objectives}
 
 - 上位の Pre-DNAT ポリシーを作成することによって、すべてのノード・ポートへの着信トラフィックをブロックします。
 - 下位の Pre-DNAT ポリシーを作成することによって、ホワイトリストにあるソース IP アドレスが、ロード・バランサーのパブリック IP およびポートにアクセスできるようにします。 下位ポリシーが上位ポリシーをオーバーライドします。
 - 下位の Pre-DNAT ポリシーを作成することによって、ブラックリストにあるソース IP アドレスが、ロード・バランサーのパブリック IP およびポートにアクセスすることをブロックします。
 
 ## 所要時間
+{: #policies_time}
+
 1 時間
 
 ## 対象読者
+{: #policies_audience}
+
 このチュートリアルは、アプリへのネットワーク・トラフィックを管理するソフトウェア開発者やネットワーク管理者を対象にしています。
 
 ## 前提条件
+{: #policies_prereqs}
 
-- [バージョン 1.10 以降のクラスターを作成する](cs_clusters.html#clusters_ui)か、または[既存のクラスターをバージョン 1.10 に更新します](cs_versions.html#cs_v110)。 このチュートリアルでは、Kubernetes バージョン 1.10 以降のクラスターで、3.3.1 Calico CLI および Calico v3 ポリシー構文を使用する必要があります。
-- [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
-- [Calico CLI をインストールして構成します](cs_network_policy.html#1.10_install)。
+- [バージョン 1.10 以降のクラスターを作成する](/docs/containers?topic=containers-clusters#clusters_ui)か、または[既存のクラスターをバージョン 1.10 に更新します](/docs/containers?topic=containers-cs_versions#cs_v110)。 このチュートリアルでは、Kubernetes バージョン 1.10 以降のクラスターで、3.3.1 Calico CLI および Calico v3 ポリシー構文を使用する必要があります。
+- [CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [Calico CLI をインストールして構成します](/docs/containers?topic=containers-network_policies#cli_install)。
 - {{site.data.keyword.containerlong_notm}}に対する以下の {{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシーがあることを確認します。
-    - [任意のプラットフォーム役割](cs_users.html#platform)
+    - [任意のプラットフォーム役割](/docs/containers?topic=containers-users#platform)
+    - [**ライター**または**管理者**のサービス役割](/docs/containers?topic=containers-users#platform)
 
 <br />
 
@@ -59,14 +69,14 @@ lastupdated: "2018-12-05"
 最初のレッスンでは、複数の IP アドレスとポートからアプリがどのように公開されるか、パブリック・トラフィックがクラスターにどのように着信するかを示します。
 {: shortdesc}
 
-チュートリアルを通じて使用するサンプル Web サーバー・アプリのデプロイから開始します。 `echoserver` Web サーバーでは、クライアントからクラスターへの接続に関するデータが表示され、PR 会社のクラスターへのアクセスをテストできます。 次に、ロード・バランサー 2.0 サービスを作成して、アプリを公開します。 ロード・バランサー 2.0 サービスにより、ロード・バランサー・サービス IP アドレスとワーカー・ノードのノード・ポートの両方でアプリが使用可能になります。
+チュートリアルを通じて使用するサンプル Web サーバー・アプリのデプロイから開始します。 `echoserver` Web サーバーでは、クライアントからクラスターへの接続に関するデータが表示され、PR 会社のクラスターへのアクセスをテストできます。 次に、ロード・バランサー 1.0 サービスを作成して、アプリを公開します。 ロード・バランサー 1.0 サービスにより、ロード・バランサー・サービス IP アドレスとワーカー・ノードのノード・ポートの両方でアプリが使用可能になります。
 
-代わりに [Ingress アプリケーション・ロード・バランサー (ALB)](cs_ingress.html) を使用しますか? ステップ 3 と 4 のロード・バランサーの作成をスキップしてください。代わりに、`ibmcloud ks albs --cluster <cluster_name>` を実行して ALB のパブリック IP を取得し、それらの IP をチュートリアルの `<loadbalancer_IP>` の代わりに常に使用してください。
+Ingress アプリケーション・ロード・バランサー (ALB) を使用しますか? ステップ 3 と 4 でロード・バランサーを作成する代わりに、[Web サーバー・アプリのサービスを作成して](/docs/containers?topic=containers-ingress#public_inside_1)、[Web サーバー・アプリの Ingress リソースを作成します](/docs/containers?topic=containers-ingress#public_inside_4)。その後、`ibmcloud ks albs --cluster <cluster_name>` を実行して ALB のパブリック IP を取得し、それらの IP をチュートリアルの `<loadbalancer_IP>` の代わりに常に使用してください。
 {: tip}
 
 以下のイメージは、レッスン 1 の終了時に、Web サーバー・アプリがパブリック・ノード・ポートとパブリック・ロード・バランサーによってインターネットにどのように公開されるかを示しています。
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="レッスン 1 の最後に、パブリック・ノード・ポートとパブリック・ロード・バランサーによって Web サーバー・アプリがインターネットに公開されます。" style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="レッスン 1 の終了時に、Web サーバー・アプリがパブリック・ノード・ポートとパブリック・ロード・バランサーによってインターネットに公開されます。" style="width:450px; border-style: none"/>
 
 1. サンプル Web サーバー・アプリをデプロイします。 接続が Web サーバー・アプリに対して行われると、アプリは接続で受信した HTTP ヘッダーを使用して応答します。
     ```
@@ -89,7 +99,7 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-3. アプリをパブリック・インターネットに公開するには、テキスト・エディターで `webserver-lb.yaml` というロード・バランサー 2.0 サービス構成ファイルを作成します。
+3. アプリをパブリック・インターネットに公開するには、テキスト・エディターで `webserver-lb.yaml` というロード・バランサー 1.0 サービス構成ファイルを作成します。
     ```
     apiVersion: v1
     kind: Service
@@ -97,8 +107,6 @@ lastupdated: "2018-12-05"
       labels:
         run: webserver
       name: webserver-lb
-      annotations:
-        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
       type: LoadBalancer
       selector:
@@ -108,7 +116,6 @@ lastupdated: "2018-12-05"
         port: 80
         protocol: TCP
         targetPort: 8080
-      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -182,16 +189,16 @@ lastupdated: "2018-12-05"
 
     2. ワーカー・ノードの **Public IP** アドレスを取得します。
         ```
-        ibmcloud ks workers <cluster_name>
+        ibmcloud ks workers --cluster <cluster_name>
         ```
         {: pre}
 
         出力例:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
         ```
         {: screen}
 
@@ -234,7 +241,10 @@ lastupdated: "2018-12-05"
 ## レッスン 2: すべてのノード・ポートへの着信トラフィックをブロックする
 {: #lesson2}
 
-PR 会社のクラスターを保護するには、アプリを公開しているロード・バランサー・サービスとノード・ポートの両方へのパブリック・アクセスをブロックする必要があります。 まず、ノード・ポートへのアクセスをブロックします。 以下のイメージは、レッスン 2 の終了時に、トラフィックがどのようにロード・バランサーに許可され、ノード・ポートには許可されないかを示しています。
+PR 会社のクラスターを保護するには、アプリを公開しているロード・バランサー・サービスとノード・ポートの両方へのパブリック・アクセスをブロックする必要があります。 まず、ノード・ポートへのアクセスをブロックします。
+{: shortdesc}
+
+以下のイメージは、レッスン 2 の終了時に、トラフィックがどのようにロード・バランサーに許可され、ノード・ポートには許可されないかを示しています。
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="レッスン 2 の最後に、パブリック・ロード・バランサーのみによって Web サーバー・アプリがインターネットに公開されます。" style="width:425px; border-style: none"/>
 
@@ -246,7 +256,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
       name: deny-nodeports
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
             destination:
@@ -343,6 +353,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
 {: shortdesc}
 
 最初に、ノード・ポートに加えて、アプリを公開しているロード・バランサーへのすべての着信トラフィックをブロックする必要があります。 その後、システムの IP アドレスをホワイトリストに入れるポリシーを作成できます。 レッスン 3 の終了時に、パブリック・ノード・ポートおよびロード・バランサーへのすべてのトラフィックはブロックされ、ホワイトリストにあるシステム IP からのトラフィックのみ許可されます。
+
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="Web サーバー・アプリはパブリック・ロード・バランサーによって、システム IP のみに公開されます。" style="width:500px; border-style: none"/>
 
 1. テキスト・エディターで、`deny-lb-port-80.yaml` という上位の Pre-DNAT ポリシーを作成し、すべてのソース IP からのロード・バランサー IP アドレスとポートへの着信 TCP および UDP トラフィックを拒否します。 メモしたロード・バランサー・パブリック IP アドレスに `<loadbalancer_IP>` を置き換えます。
@@ -354,7 +365,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
       name: deny-lb-port-80
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -408,7 +419,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
       name: whitelist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Allow
         destination:
@@ -462,8 +473,10 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
 {: #lesson4}
 
 前のレッスンでは、すべてのトラフィックをブロックし、いくつかの IP のみをホワイトリストに入れました。 このシナリオは、制御されたいくつかのソース IP アドレスのみにアクセスを制限するようなテスト目的の場合によく機能します。 ただし、PR 会社のアプリは広く公開される必要のあるものです。 少数の IP アドレスで見られる異常なトラフィックを除き、すべてのトラフィックが許可される必要があります。 ブラックリスティングは、少数の IP アドレスからの攻撃を防ぐ場合に役立つため、このようなシナリオで有用です。
+{: shortdesc}
 
 このレッスンでは、所有するシステムのソース IP アドレスからのトラフィックをブロックすることにより、ブラックリストをテストします。 レッスン 4 の終了時に、パブリック・ノード・ポートへのすべてのトラフィックがブロックされ、パブリック・ロード・バランサーへのすべてのトラフィックが許可されます。 ブラックリストに入れたシステム IP からのロード・バランサーへのトラフィックのみブロックされます。
+
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web サーバー・アプリは、パブリック・ロード・バランサーによってインターネットに公開されます。システム IP からのトラフィックのみブロックされます。" style="width:550px; border-style: none"/>
 
 1. 前のレッスンで作成したホワイトリスト・ポリシーをクリーンアップします。
@@ -497,7 +510,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
       name: blacklist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -568,5 +581,5 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
 ## 次の作業
 {: #whats_next}
 
-* [ネットワーク・ポリシーによるトラフィックの制御](cs_network_policy.html)をお読みください。
+* [ネットワーク・ポリシーによるトラフィックの制御](/docs/containers?topic=containers-network_policies)をお読みください。
 * クラスターのトラフィックを制御する Calico ネットワーク・ポリシーの例については、[Stars Policy Demo ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) と [advanced network policy ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) を参照してください。
