@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-26"
+lastupdated: "2019-04-29"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -475,6 +475,15 @@ spec:
 
 The following is a copy of the deployment YAML that is [discussed section-by-section previously](#app_yaml). You can also [download the YAML from GitHub](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
 {: shortdesc}
+
+To apply the YAML:
+
+```
+kubectl apply -f file.yaml [-n <namespace>]
+```
+{: pre}
+
+Example YAML:
 
 ```yaml
 apiVersion: apps/v1
