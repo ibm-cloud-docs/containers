@@ -543,7 +543,7 @@ spec:
 </tr>
 <tr>
 <td><code>autoscaling.knative.dev/maxScale</code></td>
-<td>Enter the maximum number of pods that you want to run in your cluster. Knative cannot scale up your app above the number that you set, even if you have more requests that your current app instances can handle. You can enter any number that you want up to the [maximum number of pods that you can run per worker node](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#tech_limits).  </td>
+<td>Enter the maximum number of pods that you want to run in your cluster. Knative cannot scale up your app above the number that you set, even if you have more requests that your current app instances can handle.</td>
 </tr>
 </tbody>
 </table>

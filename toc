@@ -33,7 +33,6 @@ IBM Cloud Kubernetes Service
     Tutorials
         cs_tutorials.md
         cs_tutorials_apps.md
-        cs_tutorials_knative.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
         [Tutorial: Move a VM-based application to Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
@@ -70,7 +69,8 @@ IBM Cloud Kubernetes Service
         cs_vpn.md
 
     cs_images.md
-    cs_app.md
+    cs_app_kubernetes.md
+    cs_app_knative.md
 
     {: .topicgroup}
     Networking to expose apps
