@@ -100,7 +100,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Multizone clusters</td>
  <td>Create [multizone clusters](/docs/containers?topic=containers-plan_clusters#multizone) by adding more zones to your worker pools.</td>
- <td>Create [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool)<staging pc>(/docs/containers?topic=containers-add_workers#add_pool)</staging pc>. When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
+ <td>Create [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
  </tr>
 </tbody></table>
 {: caption="Feature differences between {{site.data.keyword.Bluemix_notm}} public and {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -485,7 +485,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 ### Adding worker nodes
 {: #add_workers_dedicated}
 
-With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool)<staging pc>(/docs/containers?topic=containers-add_workers#add_pool)</staging pc>. When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
+With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
 {: shortdesc}
 
 ### Using private and public image registries
@@ -555,7 +555,7 @@ Review the following options for other cluster configurations:
   * [Updating worker nodes](/docs/containers?topic=containers-update#worker_node)
   * [Configuring cluster logging](/docs/containers?topic=containers-health#logging). Log enablement is not supported from the Dedicated endpoint. You must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space to enable log forwarding.
   * [Configuring cluster monitoring](/docs/containers?topic=containers-health#view_metrics). An `ibm-monitoring` cluster exists within each {{site.data.keyword.Bluemix_dedicated_notm}} account. This cluster continuously monitors the health of the {{site.data.keyword.containerlong_notm}} in the Dedicated environment, checking the stability and connectivity of the environment. Do not remove this cluster from the environment.
-  * [Removing clusters](/docs/containers?topic=containers-clusters#remove)
+  * [Removing clusters](/docs/containers?topic=containers-clusters#remove)<staging pc>(/docs/containers?topic=containers-remove)</staging pc>
 
 <br />
 
