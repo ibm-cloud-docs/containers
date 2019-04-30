@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # Deprecated: Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #dedicated}
 
