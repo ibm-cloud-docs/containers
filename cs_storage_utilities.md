@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -502,7 +502,7 @@ To attach the block storage device to a non-SDS worker node you must create a pe
 
 **Before you begin**:
 - Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted and unmounted block storage to your non-SDS worker nodes.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **To attach raw block storage to non-SDS worker nodes**:
 1. Prepare the PV creation.  
