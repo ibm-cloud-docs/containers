@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-22"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Customizing Ingress with annotations
@@ -1520,7 +1521,8 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 80```
+          servicePort: 80
+```
 {: codeblock}
 
 <table>
@@ -2233,7 +2235,8 @@ spec:
       - path: /service2_path
         backend:
           serviceName: <myservice2>
-          servicePort: 80```
+          servicePort: 80
+```
 {: codeblock}
 
 <table>

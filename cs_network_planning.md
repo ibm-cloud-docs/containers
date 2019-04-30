@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 # Planning in-cluster and external networking for apps
 {: #cs_network_planning}
@@ -177,7 +178,7 @@ When it comes to exposing an app with a network service, you have several choice
 <td>Istio + NLB host name</td>
 <td>Basic load balancing that exposes the app with a host name and uses Istio routing rules</td>
 <td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public host name.</li></ol></td>
-<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a host name](/docs/containers?topic=containers-istio#istio_expose_link).</td>
+<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a host name](/docs/containers?topic=containers-istio#istio_expose_link).</li></ol></td>
 </tr><tr>
 <td>Ingress ALB</td>
 <td>HTTPS load balancing that exposes the app with a host name and uses custom routing rules</td>

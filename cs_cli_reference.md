@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -23,7 +23,7 @@ subcollection: containers
 {:download: .download}
 
 
-# IBM Cloud Kubernetes Service CLI
+# {{site.data.keyword.containerlong_notm}} CLI
 {: #cs_cli_reference}
 
 Refer to these commands to create and manage Kubernetes clusters in {{site.data.keyword.containerlong}}.
@@ -542,7 +542,7 @@ If you find that you need to update the API key that is stored for a resource gr
 ### ibmcloud ks api-key-reset
 {: #cs_api_key_reset}
 
-Replace the current {{site.data.keyword.Bluemix_notm}} IAM API key in an {{site.data.keyword.containerlong_notm}} region.
+Replace the current {{site.data.keyword.Bluemix_notm}} IAM API key in an {{site.data.keyword.Bluemix_notm}} resource group and {{site.data.keyword.containershort_notm}} region.
 {: shortdesc}
 
 ```
@@ -552,7 +552,7 @@ ibmcloud ks api-key-reset [-s]
 
 This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.Bluemix_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.Bluemix_notm}} IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
 
-Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users).
+Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users). Target the resource group and region that you want to set the API key for.
 {: important}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}

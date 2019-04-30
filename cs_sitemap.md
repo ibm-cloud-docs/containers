@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-30"
 
 ---
 
@@ -299,19 +299,15 @@ lastupdated: "2019-04-25"
 
 [Logging and monitoring](/docs/containers?topic=containers-health#health)
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
-* [Understanding cluster and app log forwarding](/docs/containers?topic=containers-health#logging)
-* [Configuring cluster and app log forwarding](/docs/containers?topic=containers-health#configuring)
-  * [Enabling log forwarding with the {{site.data.keyword.Bluemix_notm}} console](/docs/containers?topic=containers-health#enable-forwarding-ui)
-  * [Enabling log forwarding with the CLI](/docs/containers?topic=containers-health#enable-forwarding)
-  * [Verifying log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
-  * [Updating log forwarding](/docs/containers?topic=containers-health#updating-forwarding)
-  * [Stopping log forwarding](/docs/containers?topic=containers-health#log_sources_delete)
-  * [Viewing logs](/docs/containers?topic=containers-health#view_logs)
-* [Filtering logs](/docs/containers?topic=containers-health#filter-logs)
-* [Configuring log forwarding for Kubernetes API audit logs](/docs/containers?topic=containers-health#api_forward)
-  * [Sending audit logs to Log Analysis](/docs/containers?topic=containers-health#audit_enable_loganalysis)
-  * [Sending audit logs to an external server](/docs/containers?topic=containers-health#audit_enable)
-* [Collecting master logs](/docs/containers?topic=containers-health#collect_master)
+* [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
+* [Forwarding cluster, app, and Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health#configuring)
+  * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging)
+  * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
+  * [Forwarding Kubernetes API audit logs](/docs/containers?topic=containers-health#audit_enable)
+  * [Filtering logs that are forwarded](/docs/containers?topic=containers-health#filter-logs)
+  * [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
+* [Forwarding Kubernetes API audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}](/docs/containers?topic=containers-health#api_forward)
+* [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
   * [Other health monitoring tools](/docs/containers?topic=containers-health#health_tools)
 * [Configuring health monitoring for worker nodes with Autorecovery](/docs/containers?topic=containers-health#autorecovery)

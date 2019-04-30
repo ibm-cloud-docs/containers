@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-26"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Opening required ports and IP addresses in your firewall
@@ -576,7 +575,7 @@ If you want to access services that run inside or outside {{site.data.keyword.Bl
       ```
       {: pre}
 
-    2. From the output of the previous step, note all the unique network IDs (first 3 octets) of the **Public IP** for the worker nodes in your cluster.<staging> If you want to whitelist a private-only cluster, note the **Private IP** instead.<staging> In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
+    2. From the output of the previous step, note all the unique network IDs (first 3 octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
         kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   

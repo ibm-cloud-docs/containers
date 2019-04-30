@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Security for {{site.data.keyword.containerlong_notm}}
@@ -134,7 +133,7 @@ Service endpoints determine how worker nodes and cluster users can access the cl
 * Public and private service endpoints: Communication between the master and worker nodes is established over the private network through the private service endpoint. Even if you enable the public service endpoint for your cluster, the Kubernetes master to worker node communication stays on the private network. The public service endpoint is used for secure access to your Kubernetes master over the internet, for example so that authorized cluster users can run `kubectl` commands.
 * Private service endpoint only: Communication between the master and worker nodes is established over the private network. Your cluster users must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to access the master.
 
-For more information about service endpoints, see [Service endpoints for worker-to-master and user-to-master communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master).
+For more information about service endpoints, see [Planning communication between worker nodes and the Kubernetes master](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master).
 
 <br />
 

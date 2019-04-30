@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -20,6 +20,7 @@ subcollection: containers
 {:note: .note}
 {:download: .download}
 {:faq: data-hd-content-type='faq'}
+
 
 # FAQs
 {: #faqs}

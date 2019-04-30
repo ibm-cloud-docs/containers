@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, node scaling
 
@@ -22,7 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:gif: data-image-type='gif'}
-
 
 
 # Scaling clusters
@@ -595,7 +594,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
 ## Limiting apps to run on only certain autoscaled worker pools
 {: #ca_limit_pool}
 
-To limit a pod deployment to a specific worker pool that is managed by the cluster autoscaler, use labels and `nodeSelector`.
+To limit a pod deployment to a specific worker pool that is managed by the cluster autoscaler, use labels and `nodeSelector` or `nodeAffinity`. With `nodeAffinity`, you have more control over how the scheduling behavior works to match pods to worker nodes. For more information about assigning pods to worker nodes, [see the Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/).
 {: shortdesc}
 
 **Before you begin**:
@@ -604,13 +603,15 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 
 **To limit pods to run on certain autoscaled worker pools**:
 
-1.  Create the worker pool with the label that you want to use.
+1.  Create the worker pool with the label that you want to use. For example, your label might be `app: nginx`.
     ```
     ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
     ```
     {: pre}
 2.  [Add the worker pool to the cluster autoscaler configuration](#ca_cm).
-3.  In your pod spec template, match the `nodeSelector` to the label that you used in your worker pool.
+3.  In your pod spec template, match the `nodeSelector` or `nodeAffinity` to the label that you used in your worker pool.
+
+    Example of `nodeSelector`:
     ```
     ...
     spec:
@@ -621,6 +622,25 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
       nodeSelector:
         app: nginx
     ...
+    ```
+    {: codeblock}
+
+    Example of `nodeAffinity`:
+    ```
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: IfNotPresent
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - nginx
     ```
     {: codeblock}
 4.  Deploy the pod. Because of the matching label, the pod is scheduled onto a worker node that is in the labeled worker pool.

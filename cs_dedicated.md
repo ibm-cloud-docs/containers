@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-26"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Deprecated: Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}
@@ -280,7 +281,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
         - **Virtual - Dedicated**: Your worker nodes are hosted on infrastructure that is devoted to your account. Your physical resources are completely isolated.
 
-        - **Bare Metal**: Billed monthly, bare metal servers are provisioned manually by IBM Cloud infrastructure (SoftLayer) after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. 
+        - **Bare Metal**: Billed monthly, bare metal servers are provisioned manually by IBM Cloud infrastructure (SoftLayer) after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. For select machine types, you can also choose to enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
 
         Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
         {:tip}
@@ -542,7 +543,7 @@ Review the following options for other cluster configurations:
   * [Updating worker nodes](/docs/containers?topic=containers-update#worker_node)
   * [Configuring cluster logging](/docs/containers?topic=containers-health#logging). Log enablement is not supported from the Dedicated endpoint. You must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space to enable log forwarding.
   * [Configuring cluster monitoring](/docs/containers?topic=containers-health#view_metrics). An `ibm-monitoring` cluster exists within each {{site.data.keyword.Bluemix_dedicated_notm}} account. This cluster continuously monitors the health of the {{site.data.keyword.containerlong_notm}} in the Dedicated environment, checking the stability and connectivity of the environment. Do not remove this cluster from the environment.
-  * [Removing clusters](/docs/containers?topic=containers-clusters#remove)
+  * [Removing clusters](/docs/containers?topic=containers-clusters#remove)<staging pc>(/docs/containers?topic=containers-remove)</staging pc>
 
 <br />
 

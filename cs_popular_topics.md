@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Popular topics for {{site.data.keyword.containerlong_notm}}
@@ -486,7 +485,7 @@ configure pod security policies to authorize who can create and update pods in {
 </tr>
 <tr>
 <td>23 February</td>
-<td>View the web console for [logging](/docs/containers?topic=containers-health#view_logs) and [metrics](/docs/containers?topic=containers-health#view_metrics)</td>
+<td>View the web console for [logging](/docs/containers?topic=containers-health#logging_overview) and [metrics](/docs/containers?topic=containers-health#view_metrics)</td>
 <td>Easily view log and metric data on your cluster and its components with an improved web UI. See your cluster detail page for access.</td>
 </tr>
 <tr>

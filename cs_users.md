@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-26"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Assigning cluster access
@@ -151,7 +150,7 @@ For more information about setting up your account and resources, try out this t
 ## Setting up the API key to enable access to the infrastructure portfolio
 {: #api_key}
 
-To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.Bluemix_notm}} account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio.
+To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.Bluemix_notm}} account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio in each resource group and region that your clusters are in.
 {: shortdesc}
 
 **Most cases**: Your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account already has access to the IBM Cloud infrastructure (SoftLayer) portfolio. To set up {{site.data.keyword.containerlong_notm}} to access the portfolio, the **account owner** must set the API key for the region and resource group.
@@ -162,11 +161,16 @@ To successfully provision and work with clusters, you must ensure that your {{si
     ```
     {: pre}
 
-2. Target the resource group where you want to set the API key. If you do not target a resource group, the API key is set for the default resource group.
+2. Target the resource group where you want to set the API key. If you do not target a resource group, the API key is set for the default resource group. To list available resource groups, run `ibmcloud resource groups`.
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {:pre}
+3.  Target the region where you want to set the API key. To check your current region, run `ibmcloud ks region`.
+    ```
+    ibmcloud ks region-set
+    ```
+    {: pre}
 
 4. Set the API key for the region and resource group.
     ```

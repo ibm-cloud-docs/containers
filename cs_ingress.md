@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-25"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # HTTPS load balancing with Ingress application load balancers (ALB)
@@ -1294,6 +1293,8 @@ To edit the configmap to enable SSL protocols and ciphers:
 
 To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
 {: shortdesc}
+
+
 
 ### Enabling log buffering and flush timeout
 {: #access-log}
