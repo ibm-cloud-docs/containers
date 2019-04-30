@@ -2792,24 +2792,11 @@ Before you use this command, make sure that the user whose credentials are used 
 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-   <dd>IBM Cloud infrastructure (SoftLayer) account API username. This value is required. Note that the infrastructure API user name is not the same as the IBMid. To view the infrastructure API user name:
-   <ol>
-   <li>Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com).
-   <li>From the menu bar, select **Manage > Access (IAM)**.
-   <li>Select the **Users** tab and then click on your user name.
-   <li>In the **API keys** pane, find the entry **Classic infrastructure API key** and click the **Action menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Details**.
-   <li>Copy the API user name.
-   </ol></dd>
+   <dd>IBM Cloud infrastructure (SoftLayer) account API username. This value is required. Note that the infrastructure API user name is not the same as the IBMid. To view the infrastructure API user name, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys).</dd>
 
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
-   <dd>IBM Cloud infrastructure (SoftLayer) account API key. This value is required. To view or generate an infrastructure API key:
-  <li>Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com).
-  <li>From the menu bar, select **Manage > Access (IAM)**.
-  <li>Select the **Users** tab and then click on your user name.
-  <li>In the **API keys** pane, find the entry **Classic infrastructure API key** and click the **Action menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Details**. If you do not see a classic infrastructure API key, generate one by clicking **Create an {{site.data.keyword.Bluemix_notm}} API key**.
-  <li>Copy the API user name.
-  </ol>
+   <dd>IBM Cloud infrastructure (SoftLayer) account API key. This value is required. To view or generate an infrastructure API key, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys).
   </dd>
 
   <dt><code>--region <em>REGION</em></code></dt>
