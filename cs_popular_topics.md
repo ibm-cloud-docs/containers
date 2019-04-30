@@ -43,6 +43,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
+<td>30 Apr 2019</td>
+<td>[Global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint)</td>
+<td>By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources that you have access to in all locations. You are not required to target a region to work with resources. To get started with the global endpoint, update your {{site.data.keyword.containerlong_notm}} plug-in to 0.3.8 by running `ibmcloud plugin update container-service`.</td>
+</tr>
+<tr>
 <td>15 Apr 2019</td>
 <td>[Registering a network load balancer (NLB) host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
 <td>After you set up public network load balancers (NLBs) to expose your apps to the internet, you can now create DNS entries for the NLB IPs by creating host names. {{site.data.keyword.Bluemix_notm}} takes care of generating and maintaining the wildcard SSL certificate for the host name for you. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each host name.</td>

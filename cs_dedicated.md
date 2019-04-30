@@ -314,7 +314,19 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
 
-3.  To target a region, run `ibmcloud ks region-set`.
+3.  Target a regional endpoint. The following regional endpoints are supported:
+  * Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
+  * Frankfurt (EU Central, eu-de): `https://eu-central.containers.cloud.ibm.com`
+  * London (UK South, eu-gb): `https://uk-south.containers.cloud.ibm.com`
+  * Sydney (AP South, au-syd): `https://ap-south.containers.cloud.ibm.com`
+  * Tokyo (AP North, jp-tok): `https://ap-north.containers.cloud.ibm.com`
+  * Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
+  ```
+  ibmcloud ks init --host <endpoint>
+  ```
+  {: pre}
+  You cannot use the global endpoint, `https://containers.cloud.ibm.com`. You must target a regional endpoint to create or work with clusters in that region.
+  {: important}
 
 4.  Create a cluster with the `cluster-create` command. When you create a standard cluster, the hardware of the worker node is billed by hours of usage.
 

@@ -116,7 +116,7 @@ For more information about supported versions and update actions that you must t
 
 {{site.data.keyword.containerlong_notm}} is available worldwide. You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
 
-For more information about supported regions, see [Regions and zones](/docs/containers?topic=containers-regions-and-zones#regions-and-zones).
+For more information about supported regions, see [Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones).
 
 ## What standards does the service comply to?
 {: #standards}

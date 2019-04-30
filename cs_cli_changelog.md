@@ -44,6 +44,14 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </thead>
 <tbody>
 <tr>
+<td>0.3.8</td>
+<td>30 Apr 2019</td>
+<td>Adds support for [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) in version `0.3`. By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources in all locations. You are not required to target a region to work with resources.</li>
+<ul><li>Adds the [<code>ibmcloud ks supported-locations</code>](/docs/containers?topic=containers-cs_cli_reference#cs_supported-locations) command to list all locations that {{site.data.keyword.containerlong_notm}} supports.</li>
+<li>Adds the <code>--locations</code> flag to the `clusters` and `zones` commands to filter resources by one or more locations.</li>
+<li>Adds the <code>--region</code> flag to the `credential-set/unset/get`, `api-key-reset`, and `vlan-spanning-get` commands. To run these commands, you must specify a region in the `--region` flag.</li></ul></td>
+</tr>
+<tr>
 <td>0.2.102</td>
 <td>15 Apr 2019</td>
 <td>Adds the [`ibmcloud ks nlb-dns` group of commands](/docs/containers?topic=containers-cs_cli_reference#nlb-dns) for registering and managing a host name for network load balancer (NLB) IP addresses, and the [`ibmcloud ks nlb-dns-monitor` group of commands](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor) for creating and modifying health check monitors for NLB host names. For more information, see [Registering NLB IPs with a DNS host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns).

@@ -114,6 +114,11 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
 </tr>
 <tr>
+<td>View a list of supported locations in {{site.data.keyword.containerlong_notm}}.</td>
+<td><code>[ibmcloud ks supported-locations](/docs/containers?topic=containers-cs_cli_reference#cs_supported-locations)</code></td>
+<td><code>-</code></td>
+</tr>
+<tr>
 <td>View a list of available zones that you can create a cluster in.</td>
 <td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cs_cli_reference#cs_datacenters)</code></td>
 <td><code>[GET /v1/zones](https://containers.cloud.ibm.com/swagger-api/#!/util/GetZones)</code></td>

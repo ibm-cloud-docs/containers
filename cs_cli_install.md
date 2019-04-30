@@ -164,7 +164,7 @@ Before you can run `kubectl` commands:
 
 To use `kubectl` commands:
 
-1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).
+1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
 
     ```
     ibmcloud login
@@ -182,20 +182,14 @@ To use `kubectl` commands:
     ```
     {: pre}
 
-4.  To create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, target the region.
-    ```
-    ibmcloud ks region-set
-    ```
-    {: pre}
-
-5.  List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.Bluemix_notm}} IAM service role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
+4.  List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.Bluemix_notm}} IAM service role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-6.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
+5.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
@@ -235,7 +229,7 @@ To use `kubectl` commands:
         ```
         {: screen}
 
-7.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
+6.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
 
     ```
     kubectl version  --short
@@ -276,7 +270,7 @@ To update the CLIs:
 
 1.  Update the {{site.data.keyword.Bluemix_notm}} CLI. Download the [latest version ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-ibmcloud-cli) and run the installer.
 
-2. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).
+2. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
 
     ```
     ibmcloud login

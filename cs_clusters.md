@@ -252,9 +252,9 @@ To create a cluster:
 
 4.  Create a cluster. Standard clusters can be created in any region and available zone. Free clusters can be created in the region that you target with the `ibmcloud ks region-set` command, but you cannot select the zone.
 
-    1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
+    1.  **Standard clusters**: Review the zones that are available. To see zones in a specific location, such as a geography, country, or a metro, you can specify the location in the `--locations` flag. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
         ```
-        ibmcloud ks zones
+        ibmcloud ks zones [--locations <location>]
         ```
         {: pre}
         When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.
