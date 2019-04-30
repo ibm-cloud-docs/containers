@@ -166,11 +166,6 @@ To successfully provision and work with clusters, you must ensure that your {{si
     ibmcloud target -g <resource_group_name>
     ```
     {:pre}
-3.  Target the region where you want to set the API key. To check your current region, run `ibmcloud ks region`.
-    ```
-    ibmcloud ks region-set
-    ```
-    {: pre}
 
 3. Set the API key for the region and resource group.
     ```
