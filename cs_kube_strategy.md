@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 # Defining your Kubernetes strategy
 {: #strategy}
@@ -104,7 +105,7 @@ Check out the [Twelve-Factor App ![External link icon](../icons/launch-glyph.svg
 7.  **Port binding**: Port bindings are self-contained and provide a service endpoint on well-defined host and port.
 8.  **Concurrency**: Manage and scale your app through process instances such as replicas and horizontal scaling. Set resource requests and limits for your deployments. Note that Calico network policies cannot limit bandwidth. Instead, consider [Istio](/docs/containers?topic=containers-istio).
 9.  **Disposability**: Design your app to be disposable, with minimal startup, graceful shutdown, and toleration for abrupt process terminations. Remember, containers, pods, and even worker nodes are meant to be disposable, so plan your app accordingly.
-10.  **Dev-to-prod parity**: Set up a [continuous integration](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/) and [continuous development](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/) pipeline for your app, with minimal difference between the app in development and the app in prod.
+10.  **Dev-to-prod parity**: Set up a [continuous integration](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/) and [continuous delivery](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/) pipeline for your app, with minimal difference between the app in development and the app in prod.
 11.  **Logs**: Treat logs as event streams: the outer or hosting environment processes and routes log files. **Important**: In {{site.data.keyword.containerlong_notm}}, logs are not turned on by default. To enable, see [Configuring log forwarding](/docs/containers?topic=containers-health#configuring).
 12.  **Admin processes**: Keep any one-time admin scripts with the app as a [Kubernetes Job object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) to ensure that the admin scripts run with the same environment as the app itself. For orchestration of larger packages that you want to run in your Kubernetes clusters, consider using a package manager such as [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/).
 
@@ -249,7 +250,7 @@ Review more information about making resources highly available.
 * [Create multizone clusters](/docs/containers?topic=containers-plan_clusters#ha_clusters).
 * [Plan highly available deployments](/docs/containers?topic=containers-app#highly_available_apps) that use features such as replica sets and pod anti-affinity across multizones.
 * [Run containers that are based on images in a cloud-based public registry](/docs/containers?topic=containers-images).
-* [Plan data storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about).
+* [Plan data storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).
 * For multizone clusters, enable a [load balancer service](/docs/containers?topic=containers-loadbalancer#multi_zone_config) or the Ingress [multizone load balancer](/docs/containers?topic=containers-ingress#ingress) to expose your apps publicly.
 
 <br />
@@ -448,7 +449,7 @@ To update your app, you can choose from a variety of strategies such as the foll
 <dt>Instantaneous switch</dt>
   <dd>Also referred to as a blue-green deployment, an instantaneous switch requires double the compute resources to have two versions of an app running at once. With this approach, you can switch your users to the newer version in near real time. Make sure that you use service label selectors (such as `version: green` and `version: blue`) to make sure that requests are sent to the right app version. You can create the new `version: green` deployment, wait until it is ready, and then delete the `version: blue` deployment. Or, you can perform a [rolling update](/docs/containers?topic=containers-app#app_rolling), but set the `maxUnavailable` parameter to `0%` and the `maxSurge` parameter to `100%`.</dd>
 <dt>Canary or A/B deployment</dt>
-  <dd>A more complex update strategy, a canary deployment is when you pick a percentage of users such as 5% and send them to the new app version. You collect metrics in your logging and monitoring tools on how the new app version performs, do A/B testing, and then roll out the update to more users. As with all deployments, labelling the app (such as `version: stable` and `version: canary`) is critical. To manage canary deployments, you might [install the managed Istio add-on service mesh](/docs/containers?topic=containers-istio#istio), [set up Sysdig monitoring for your cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster), and then use the Istio service mesh for A/B testing as described [in this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/blog/monitor-istio/).</dd>
+  <dd>A more complex update strategy, a canary deployment is when you pick a percentage of users such as 5% and send them to the new app version. You collect metrics in your logging and monitoring tools on how the new app version performs, do A/B testing, and then roll out the update to more users. As with all deployments, labelling the app (such as `version: stable` and `version: canary`) is critical. To manage canary deployments, you might [install the managed Istio add-on service mesh](/docs/containers?topic=containers-istio#istio), [set up Sysdig monitoring for your cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster), and then use the Istio service mesh for A/B testing as described [in this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/blog/monitor-istio/). Or, use Knative for canary deployments.</dd>
 </dl>
 
 <br />

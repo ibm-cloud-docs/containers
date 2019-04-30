@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Customizing Ingress with annotations
@@ -1520,7 +1521,8 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 80```
+          servicePort: 80
+```
 {: codeblock}
 
 <table>
@@ -1766,7 +1768,7 @@ Route incoming network traffic on an ALB domain path to a different path that yo
 {:shortdesc}
 
 **Description**</br>
-Your Ingress ALB domain routes incoming network traffic on `mykubecluster.us-south.containers.appdomain.cloud/beans` to your app. Your app listens on `/coffee`, instead of `/beans`. To forward incoming network traffic to your app, add the rewrite annotation to your Ingress resource configuration file. The rewrite annotation ensures that incoming network traffic on `/beans` is forwarded to your app by using the `/coffee` path. When including multiple services, use only a semi-colon (;) to separate them.
+Your Ingress ALB domain routes incoming network traffic on `mykubecluster.us-south.containers.appdomain.cloud/beans` to your app. Your app listens on `/coffee`, instead of `/beans`. To forward incoming network traffic to your app, add the rewrite annotation to your Ingress resource configuration file. The rewrite annotation ensures that incoming network traffic on `/beans` is forwarded to your app by using the `/coffee` path. When including multiple services, use only a semi-colon (;) with no space before or after the semi-colon to separate them.
 
 **Sample Ingress resource YAML**</br>
 
@@ -2233,7 +2235,8 @@ spec:
       - path: /service2_path
         backend:
           serviceName: <myservice2>
-          servicePort: 80```
+          servicePort: 80
+```
 {: codeblock}
 
 <table>
@@ -2344,7 +2347,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=<size>
+   ingress.bluemix.net/client-max-body-size: "serviceName=<myservice> size=<size>; size=<size>"
 spec:
  tls:
  - hosts:
@@ -2368,8 +2371,11 @@ spec:
 </thead>
 <tbody>
 <tr>
+<td><code>serviceName</code></td>
+<td>Optional: To apply a client max body size to a specific service, replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the service. If you do not specify a service name, the size is applied to all services. In the example YAML, the format <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> applies the first size to the <code>myservice</code> service and applies the second size to all other services.</li>
+</tr>
 <td><code>&lt;size&gt;</code></td>
-<td>The maximum size of the client response body. For example, to set the maximum size to 200 megabyte, define <code>200m</code>. You can set the size to 0 to disable the check of the client request body size.</td>
+<td>The maximum size of the client response body. For example, to set the maximum size to 200 megabytes, define <code>200m</code>. You can set the size to 0 to disable the check of the client request body size.</td>
 </tr>
 </tbody></table>
 

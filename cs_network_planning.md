@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -22,7 +22,8 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 
-# Planning to expose your apps with in-cluster and external networking
+
+# Planning in-cluster and external networking for apps
 {: #cs_network_planning}
 
 With {{site.data.keyword.containerlong}}, you can manage in-cluster and external networking by making apps publicly or privately accessible.
@@ -177,7 +178,7 @@ When it comes to exposing an app with a network service, you have several choice
 <td>Istio + NLB host name</td>
 <td>Basic load balancing that exposes the app with a host name and uses Istio routing rules</td>
 <td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public host name.</li></ol></td>
-<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a host name](/docs/containers?topic=containers-istio#istio_expose_link).</td>
+<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a host name](/docs/containers?topic=containers-istio#istio_expose_link).</li></ol></td>
 </tr><tr>
 <td>Ingress ALB</td>
 <td>HTTPS load balancing that exposes the app with a host name and uses custom routing rules</td>
@@ -231,7 +232,7 @@ Check out the following load balancing deployment patterns for private networkin
 |NodePort|Port on a worker node that exposes the app on the worker's private IP address|Test private access to one app or provide access for only a short amount of time.|<ol><li>[Create a NodePort service](/docs/containers?topic=containers-nodeport).</li><li>A NodePort service opens a port on a worker node over both the private and public IP address of the worker node. You must use a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to the public NodePorts.</li></ol>|
 |NLB v1.0|Basic load balancing that exposes the app with a private IP address|Quickly expose one app to a private network with a private IP address.|<ol><li>[Create a private NLB service](/docs/containers?topic=containers-loadbalancer).</li><li>An NLB with a portable private IP address still has a public node port open on every worker node. Create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to the public NodePorts.</li></ol>|
 |NLB v2.0|DSR load balancing that exposes the app with a private IP address|Expose an app that might receive high levels of traffic to a private network with an IP address.|<ol><li>[Create a private NLB service](/docs/containers?topic=containers-loadbalancer).</li><li>An NLB with a portable private IP address still has a public node port open on every worker node. Create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to the public NodePorts.</li></ol>|
-|Ingress ALB|HTTPS load balancing that exposes the app with a host name and uses custom routing rules|Implement custom routing rules and SSL termination for multiple apps.|<ol><li>[Disable the public ALB](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</li><li>[Enable the private ALB and create an Ingress resource](/docs/containers?topic=containers-ingress#private_ingress).</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
+|Ingress ALB|HTTPS load balancing that exposes the app with a host name and uses custom routing rules|Implement custom routing rules and SSL termination for multiple apps.|<ol><li>[Disable the public ALB.](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</li><li>[Enable the private ALB and create an Ingress resource](/docs/containers?topic=containers-ingress#ingress_expose_private).</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
 {: caption="Characteristics of network deployment patterns for a public and a private VLAN setup" caption-side="top"}
 
 Because the default Calico network policies allow inbound public traffic to these services, you can create Calico policies to instead block all public traffic to the services. For example, a NodePort service opens a port on a worker node over both the private and public IP address of the worker node. An NLB service with a portable private IP address opens a public NodePort on every worker node. You must create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block public NodePorts.

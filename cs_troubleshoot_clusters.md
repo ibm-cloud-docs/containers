@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -384,7 +384,7 @@ Consider the following scenario to understand how clusters might become orphaned
 4.  [Delete the cluster](/docs/containers?topic=containers-clusters#remove).
 5.  If you want, reset the infrastructure credentials to the previous account. Note that if you created clusters with a different infrastructure account than the account that you switch to, you might orphan those clusters.
     * To set credentials to a different infrastructure account, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set).
-    * To use the default credentials that come with your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, use the `ibmcloud ks credential-unset` [command](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset).
+    * To use the default credentials that come with your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, use the `ibmcloud ks credential-unset --region <region>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset).
 
 <br />
 
@@ -433,7 +433,7 @@ Multiple service instances might have the same name in different regions.
 {: tsResolve}
 Use the service GUID instead of the service instance name in the `ibmcloud ks cluster-service-bind` command.
 
-1. [Log in to the region that includes the service instance to bind.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
+1. [Log in to the {{site.data.keyword.Bluemix_notm}} region that includes the service instance to bind.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 2. Get the GUID for the service instance.
   ```
@@ -507,7 +507,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 
 4. Wait a few minutes, then let the user try to bind the service again.
 
-5. If this does not resolve the problem, then the {{site.data.keyword.Bluemix_notm}} IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) by opening a support case. Make sure to provide the cluster ID, the user ID, and the service instance ID.
+5. If this does not resolve the problem, then the {{site.data.keyword.Bluemix_notm}} IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support?topic=get-support-getting-customer-support) by opening a support case. Make sure to provide the cluster ID, the user ID, and the service instance ID.
    1. Retrieve the cluster ID.
       ```
       ibmcloud ks clusters
@@ -648,7 +648,7 @@ Make sure that the user or service account is authorized by a pod security polic
 
 If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it.
 
-1.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2.  Refresh the Kubernetes master to restore it.
 
     ```
@@ -1125,7 +1125,9 @@ To troubleshoot your Helm chart:
 
 When you try to install Helm tiller or want to deploy images from public registries, such as DockerHub, the installation fails with an error similar to the following:
 
-```Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:```
+```
+Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:
+```
 {: screen}
 
 {: tsCauses}
@@ -1153,7 +1155,7 @@ Still having issues with your cluster?
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
--   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
 When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

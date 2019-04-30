@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Popular topics for {{site.data.keyword.containerlong_notm}}
@@ -43,6 +42,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>30 Apr 2019</td>
+<td>[Global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint)</td>
+<td>By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources that you have access to in all locations. You are not required to target a region to work with resources. To get started with the global endpoint, update your {{site.data.keyword.containerlong_notm}} plug-in to 0.3.8 by running `ibmcloud plugin update container-service`.</td>
+</tr>
 <tr>
 <td>15 Apr 2019</td>
 <td>[Registering a network load balancer (NLB) host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
@@ -74,9 +78,9 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <tr>
 <td>21 Mar 2019</td>
 <td>Introducing private service endpoints for your Kubernetes cluster master</td>
-<td>By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access on a public and private VLAN. Previously, if you wanted a [private VLAN-only cluster](/docs/containers?topic=containers-plan_clusters#private_clusters), you needed to set up a gateway appliance to connect the cluster's worker nodes with the master. Now, you can use the private service endpoint. With the private service endpoint enabled, all traffic between the worker nodes and the master is on the private network, without the need for a gateway appliance device. In addition to this increased security, inbound and outbound traffic on the private network is [unlimited and not charged ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth). You can still keep a public service endpoint for secure access to your Kubernetes master over the internet, for example to run `kubectl` commands without being on the private network.<br><br>
+<td>By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access on a public and private VLAN. Previously, if you wanted a [private VLAN-only cluster](/docs/containers?topic=containers-plan_clusters#private_clusters), you needed to set up a gateway device to connect the cluster's worker nodes with the master. Now, you can use the private service endpoint. With the private service endpoint enabled, all traffic between the worker nodes and the master is on the private network, without the need for a gateway device device. In addition to this increased security, inbound and outbound traffic on the private network is [unlimited and not charged ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth). You can still keep a public service endpoint for secure access to your Kubernetes master over the internet, for example to run `kubectl` commands without being on the private network.<br><br>
 To use private service endpoints, you must enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) for your IBM Cloud infrastructure (SoftLayer) account. Your cluster must run Kubernetes version 1.11 or later. If your cluster runs an earlier Kubernetes version, [update to at least 1.11](/docs/containers?topic=containers-update#update). For more information, check out the following links:<ul>
-<li>[Understanding master-to-worker communication with service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
+<li>[Service endpoints for worker-to-master and user-to-master communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[Switching from public to private service endpoints](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>If you have a firewall on the private network, [adding the private IP addresses for {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, and other {{site.data.keyword.Bluemix_notm}} services](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
@@ -486,7 +490,7 @@ configure pod security policies to authorize who can create and update pods in {
 </tr>
 <tr>
 <td>23 February</td>
-<td>View the web console for [logging](/docs/containers?topic=containers-health#view_logs) and [metrics](/docs/containers?topic=containers-health#view_metrics)</td>
+<td>View the web console for [logging](/docs/containers?topic=containers-health#logging_overview) and [metrics](/docs/containers?topic=containers-health#view_metrics)</td>
 <td>Easily view log and metric data on your cluster and its components with an improved web UI. See your cluster detail page for access.</td>
 </tr>
 <tr>

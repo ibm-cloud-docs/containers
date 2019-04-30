@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -84,7 +84,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Persistent storage</td>
  <td>Use [dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) or [static provisioning](/docs/containers?topic=containers-kube_concepts#static_provisioning) of volumes.</td>
- <td>Use [dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) of volumes. [Open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
+ <td>Use [dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) of volumes. [Open a support case](/docs/get-support?topic=get-support-getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
  </tr>
  <tr>
  <td>Image registry URL in {{site.data.keyword.registryshort_notm}}</td>
@@ -180,7 +180,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
             ```
             {: pre}
 
-            Replace <em>&lt;user_IBMid&gt;</em> with the email of the user you want to invite, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the GUID of the public account organization. 
+            Replace <em>&lt;user_IBMid&gt;</em> with the email of the user you want to invite, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the GUID of the public account organization.
 
         * To invite all users currently in a Dedicated account organization:
 
@@ -188,7 +188,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
             ibmcloud cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
 
-            Replace <em>&lt;dedicated_org_ID&gt;</em> with the Dedicated account organization ID, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the public account organization GUID. 
+            Replace <em>&lt;dedicated_org_ID&gt;</em> with the Dedicated account organization ID, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the public account organization GUID.
 
     3.  If an IBMid exists for a user, the user is automatically added to the specified organization in the public account. If an IBMid does not exist for a user, then an invitation is sent to the user's email address. After the user accepts the invitation, an IBMid is created for the user, and the user is added to the specified organization in the public account.
 
@@ -280,7 +280,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
         - **Virtual - Dedicated**: Your worker nodes are hosted on infrastructure that is devoted to your account. Your physical resources are completely isolated.
 
-        - **Bare Metal**: Billed monthly, bare metal servers are provisioned manually by IBM Cloud infrastructure (SoftLayer) after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. 
+        - **Bare Metal**: Billed monthly, bare metal servers are provisioned manually by IBM Cloud infrastructure (SoftLayer) after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. For select machine types, you can also choose to enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
 
         Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
         {:tip}
@@ -313,7 +313,19 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
 
-3.  To target a region, run `ibmcloud ks region-set`.
+3.  Target a regional endpoint. The following regional endpoints are supported:
+  * Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
+  * Frankfurt (EU Central, eu-de): `https://eu-central.containers.cloud.ibm.com`
+  * London (UK South, eu-gb): `https://uk-south.containers.cloud.ibm.com`
+  * Sydney (AP South, au-syd): `https://ap-south.containers.cloud.ibm.com`
+  * Tokyo (AP North, jp-tok): `https://ap-north.containers.cloud.ibm.com`
+  * Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
+  ```
+  ibmcloud ks init --host <endpoint>
+  ```
+  {: pre}
+  You cannot use the global endpoint, `https://containers.cloud.ibm.com`. You must target a regional endpoint to create or work with clusters in that region.
+  {: important}
 
 4.  Create a cluster with the `cluster-create` command. When you create a standard cluster, the hardware of the worker node is billed by hours of usage.
 
@@ -382,7 +394,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     {: pre}
 
     * For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
-    * If you see the following error message, [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+    * If you see the following error message, [open a support case](/docs/get-support?topic=get-support-getting-customer-support).
         ```
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.
         ```
@@ -501,7 +513,7 @@ Requirements:
 
 Before you begin: Configure the routing of network traffic into and out of your enterprise network to the {{site.data.keyword.Bluemix_dedicated_notm}} network that will use the user-managed subnet.
 
-1. To use your own subnet, [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) and provide the list of subnet CIDRs that you want to use. **Note**: The way that the ALB and load balancers are managed for on-premises and internal account connectivity differs depending on the format of the subnet CIDR. See the final step for configuration differences.
+1. To use your own subnet, [open a support case](/docs/get-support?topic=get-support-getting-customer-support) and provide the list of subnet CIDRs that you want to use. **Note**: The way that the ALB and load balancers are managed for on-premises and internal account connectivity differs depending on the format of the subnet CIDR. See the final step for configuration differences.
 
 2. After {{site.data.keyword.IBM_notm}} provisions the user-managed subnets, make the subnet available to your Kubernetes cluster.
 
@@ -566,19 +578,19 @@ For {{site.data.keyword.Bluemix_dedicated_notm}} environments, public primary IP
 #### Configuring access to an app by using the load balancer service type
 {: #dedicated_apps_public_load_balancer}
 
-If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Basic and DSR load balancing with network load balancers (NLB)](/docs/containers?topic=containers-loadbalancer).
+If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Basic and DSR load balancing with network load balancers (NLB)](/docs/containers?topic=containers-loadbalancer).
 {: shortdesc}
 
 #### Configuring public access to an app by using Ingress
 {: #dedicated_apps_public_ingress}
 
-If you want to use public IP addresses for the Ingress ALB, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps to the public](/docs/containers?topic=containers-ingress#ingress_expose_public).
+If you want to use public IP addresses for the Ingress ALB, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps to the public](/docs/containers?topic=containers-ingress#ingress_expose_public).
 {: shortdesc}
 
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see Persistent data storage options for high availability](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+To review options for creating persistent storage, see Persistent data storage options for high availability](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support?topic=get-support-getting-customer-support).
 {: shortdesc}
 
 If you choose to provision [file storage](/docs/containers?topic=containers-file_storage#file_predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support case.

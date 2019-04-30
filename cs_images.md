@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Building containers from images
@@ -79,9 +80,9 @@ You can deploy containers to your cluster from an IBM-provided public image or a
 
 Before you begin:
 1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3. If you have an existing cluster that was created before **25 February 2019**, [update your cluster to use the API key `imagePullSecret`](#imagePullSecret_migrate_api_key).
-4. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+4. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To deploy a container into the **default** namespace of your cluster:
 
@@ -110,7 +111,7 @@ To deploy a container into the **default** namespace of your cluster:
     {: codeblock}
 
     Replace the image URL variables with the information for your image:
-    *  **`<app_name>`**: The name of your app. 
+    *  **`<app_name>`**: The name of your app.
     *  **`<region>`**: The regional {{site.data.keyword.registryshort_notm}} API endpoint for the registry domain. To list the domain for the region that you are logged in to, run `ibmcloud cr api`.
     *  **`<namespace>`**: The registry namespace. To get your namespace information, run `ibmcloud cr namespace-list`.
     *  **`<my_image>:<tag>`**: The image and tag that you want to use to build the container. To get the images available in your registry, run `ibmcloud cr images`.
@@ -170,14 +171,14 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
 {: shortdesc}
 
 **Before you begin**:
-*   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Make sure that you have the following permissions:
-    *   {{site.data.keyword.Bluemix_notm}} IAM **Operator or Administrator** platform role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running: 
+    *   {{site.data.keyword.Bluemix_notm}} IAM **Operator or Administrator** platform role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles Administrator,Operator
         ```
         {: pre}
-    *   {{site.data.keyword.Bluemix_notm}} IAM **Administrator** platform role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The account owner can give you the role by running: 
+    *   {{site.data.keyword.Bluemix_notm}} IAM **Administrator** platform role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The account owner can give you the role by running:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
         ```
@@ -237,9 +238,9 @@ Image pull secrets are valid only for the Kubernetes namespaces that they were c
 Before you begin:
 
 1.  [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2.  [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2.  [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3.  If you have an existing cluster that was created before **25 February 2019**, [update your cluster to use the API key image pull secret](#imagePullSecret_migrate_api_key).
-4.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+4.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 <br/>
 To use your own image pull secret, choose among the following options:
@@ -471,7 +472,7 @@ If you already have a private registry, you must store the registry credentials 
 
 Before you begin:
 
-1.  [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+1.  [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 2.  [Target your CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 To create an image pull secret:
@@ -709,7 +710,7 @@ With the registry token that is stored in the image pull secret, you can deploy 
 
 Before you begin:
 1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3. [Target your CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 To deploy a container into the **default** namespace of your cluster, create a configuration file.

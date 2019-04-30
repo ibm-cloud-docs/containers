@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -297,49 +297,43 @@ Depending on your cluster setup, you access the services by using the public, pr
     <tbody>
       <tr>
         <td>Global registry across <br>{{site.data.keyword.containerlong_notm}} regions</td>
-        <td><strong>Public</strong>: <code>icr.io</code><br>
-        Deprecated: <code>registry.bluemix.net</code><br><br>
-        <strong>Private</strong>: <code>z1-1.private.icr.io<br>z2-1.private.icr.io<br>z3-1.private.icr.io</code></td>
+        <td><code>icr.io</code><br><br>
+        Deprecated: <code>registry.bluemix.net</code></td>
         <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
         <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
       </tr>
       <tr>
         <td>AP North</td>
-        <td><strong>Public</strong>: <code>jp.icr.io</code><br>
-        Deprecated: <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>Private</strong>: <code>z1-1.private.jp.icr.io<br>z2-1.private.jp.icr.io<br>z3-1.private.jp.icr.io</code></td>
+        <td><code>jp.icr.io</code><br><br>
+        Deprecated: <code>registry.au-syd.bluemix.net</code></td>
         <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
         <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
       </tr>
       <tr>
         <td>AP South</td>
-        <td><strong>Public</strong>: <code>au.icr.io</code><br>
-        Deprecated: <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>Private</strong>: <code>z1-1.private.au.icr.io<br>z2-1.private.au.icr.io<br>z3-1.private.au.icr.io</code></td>
+        <td><code>au.icr.io</code><br><br>
+        Deprecated: <code>registry.au-syd.bluemix.net</code></td>
         <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
         <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
       </tr>
       <tr>
         <td>EU Central</td>
-        <td><strong>Public</strong>: <code>de.icr.io</code><br>
-        Deprecated: <code>registry.eu-de.bluemix.net</code><br><br>
-        <strong>Private</strong>: <code>z1-1.private.de.icr.io<br>z2-1.private.de.icr.io<br>z3-1.private.de.icr.io</code></td>
+        <td><code>de.icr.io</code><br><br>
+        Deprecated: <code>registry.eu-de.bluemix.net</code></td>
         <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
         <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
        </tr>
        <tr>
         <td>UK South</td>
-        <td><strong>Public</strong>: <code>uk.icr.io</code><br>
-        Deprecated: <code>registry.eu-gb.bluemix.net</code><br><br>
-        <strong>Private</strong>: <code>z1-1.private.uk.icr.io<br>z2-1.private.uk.icr.io<br>z3-1.private.uk.icr.io</code></td>
+        <td><code>uk.icr.io</code><br><br>
+        Deprecated: <code>registry.eu-gb.bluemix.net</code></td>
         <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
         <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
        </tr>
        <tr>
         <td>US East, US South</td>
-        <td><strong>Public</strong>: <code>us.icr.io</code><br>
-        Deprecated: <code>registry.ng.bluemix.net</code><br><br>
-        <strong>Private</strong>: <code>z1-1.private.us.icr.io<br>z2-1.private.us.icr.io<br>z3-1.private.us.icr.io</code></td>
+        <td><code>us.icr.io</code><br><br>
+        Deprecated: <code>registry.ng.bluemix.net</code></td>
         <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
         <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
        </tr>
@@ -472,7 +466,7 @@ If you have a firewall on the private network, allow communication between worke
     - Allow inbound TCP and UDP connections to port 10250 for the Kubernetes dashboard and commands such as `kubectl logs` and `kubectl exec`.
     - Allow inbound and outbound connections to TCP and UDP port 53 for DNS access.
 
-4. If you also have a firewall on the public network, or if you have a private-VLAN only cluster and are using a gateway appliance as a firewall, you must also allow the IPs and ports specified in [Allowing the cluster to access infrastructure resources and other services](#firewall_outbound).
+4. If you also have a firewall on the public network, or if you have a private-VLAN only cluster and are using a gateway device as a firewall, you must also allow the IPs and ports specified in [Allowing the cluster to access infrastructure resources and other services](#firewall_outbound).
 
 <br />
 
@@ -582,7 +576,7 @@ If you want to access services that run inside or outside {{site.data.keyword.Bl
       ```
       {: pre}
 
-    2. From the output of the previous step, note all the unique network IDs (first 3 octets) of the **Public IP** for the worker nodes in your cluster.<staging> If you want to whitelist a private-only cluster, note the **Private IP** instead.<staging> In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
+    2. From the output of the previous step, note all the unique network IDs (first 3 octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
         kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -24,8 +24,11 @@ subcollection: containers
 
 
 
+
+
 # Planning your cluster and worker node setup
 {: #plan_clusters}
+
 Design your standard cluster for maximum availability and capacity for your app with {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
@@ -64,7 +67,7 @@ No. You can create as many single zone clusters as you like. Indeed, you might p
 
 **Can I have a highly available master in a single zone?**</br>
 Yes. In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a master update. To protect against a zonal failure, you can:
-* [Create a cluster in a multizone-capable zone](/docs/containers?topic=containers-plan_clusters#multizone), where the master is spread across zones.
+* [Create a cluster in a multizone-capable zone](#multizone), where the master is spread across zones.
 * [Create multiple clusters](#multiple_clusters) and connect them with a global load balancer.
 
 ## Multizone cluster
@@ -121,7 +124,7 @@ You can expose your apps by using an Ingress application load balancer (ALB) or 
 - **Load balancer services:** Load balancer services are set up in one zone only. Incoming requests to your app are routed from that one zone to all app instances in other zones. If this zone becomes unavailable, then your app might not be reachable from the internet. You can set up additional load balancer services in other zones to account for a single zone failure. For more information, see highly available [load balancer services](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
 
 **Can I set up persistent storage for my multizone cluster?**</br>
-For highly available persistent storage, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). You can also try a software-defined storage (SDS) solution such as [Portworx](/docs/containers?topic=containers-portworx#portworx) that uses [SDS machines](#sds). For more information, see [Comparison of persistent storage options for multizone clusters](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+For highly available persistent storage, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about). You can also try a software-defined storage (SDS) solution such as [Portworx](/docs/containers?topic=containers-portworx#portworx) that uses [SDS machines](#sds). For more information, see [Comparison of persistent storage options for multizone clusters](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 NFS file and block storage is not sharable across zones. Persistent volumes can be used only in the zone where the actual storage device is located. If you have existing NFS file or block storage in your cluster that you want to continue to use, you must apply region and zone labels to existing persistent volumes. These labels help the kube-scheduler to determine where to schedule an app that uses the persistent volume. Run the following command and replace `<mycluster>` with your cluster name.
 
@@ -231,7 +234,7 @@ Do you have an existing cluster that you want to make private only? To see how y
 In clusters that run Kubernetes version 1.11 or later, you can set up your cluster network to use public and private service endpoints. After you enable the private service endpoint, the Kubernetes master and your worker nodes always communicate over the private VLAN via the private service endpoint. Even if you enable the public service endpoint for your cluster, the Kubernetes master to worker node communication stays on the private VLAN. After you enable the private service endpoint, you cannot disable it. You can keep the public service endpoint for secure access to your Kubernetes master over the internet, for example to run `kubectl` commands, or you can disable the public service endpoint for a private service endpoint-only cluster.
 
 **Non-VRF or VRF-enabled account, Kubernetes master and worker nodes on private VLAN only**</br>
-If you set up your worker nodes on a private VLAN only, the worker nodes can't automatically expose their app services on the public network, and in a non-VRF account also cannot connect to the master. You must configure a gateway appliance to provide network connectivity between the worker nodes and the master.
+If you set up your worker nodes on a private VLAN only, the worker nodes can't automatically expose their app services on the public network, and in a non-VRF account also cannot connect to the master. You must configure a gateway device to provide network connectivity between the worker nodes and the master.
 
 For non-VRF accounts: If you create the cluster with both public and private VLANs, you cannot later remove the public VLANs from that cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. Instead, create a new cluster without the public VLAN.
 {: note}
@@ -266,7 +269,7 @@ When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you ch
 
 If you want more than one flavor of worker node, you must create a worker pool for each flavor. You cannot resize existing worker nodes to have different resources such as CPU or memory. When you create a free cluster, your worker node is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account. In standard clusters, you can choose the type of machine that works best for your workload. As you plan, consider the [worker node resource reserves](#resource_limit_node) on the total CPU and memory capacity.
 
-You can deploy clusters by using the [console UI](/docs/containers?topic=containers-clusters#clusters_ui) or the [CLI](/docs/containers?topic=containers-clusters#clusters_cli).
+You can deploy clusters by using the [console UI](/docs/containers?topic=containers-clusters#clusters_ui_standard) or the [CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 
 Select one of the following options to decide what type of worker pool you want.
 * [Virtual machines](#vm)
@@ -672,4 +675,6 @@ Critical components, such as `containerd`, `kubelet`, `kube-proxy`, and `calico`
 You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
 
 <br />
+
+
 

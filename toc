@@ -33,8 +33,6 @@ IBM Cloud Kubernetes Service
     Tutorials
         cs_tutorials.md
         cs_tutorials_apps.md
-        cs_tutorials_knative.md
-        cs_tutorials_istio.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
         [Tutorial: Move a VM-based application to Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
@@ -59,19 +57,20 @@ IBM Cloud Kubernetes Service
         cs_performance.md
 
     {: .topicgroup}
-    Setting up cluster networking
+    Managing cluster network traffic
         cs_network_ov.md
-        cs_network_cluster.md
         cs_firewall.md
-        cs_dns.md
         cs_network_policy.md
         cs_edge.md
         cs_istio.md
-        cs_vpn.md
         cs_subnets.md
+        cs_network_cluster.md
+        cs_dns.md
+        cs_vpn.md
 
     cs_images.md
-    cs_app.md
+    cs_app_kubernetes.md
+    cs_app_knative.md
 
     {: .topicgroup}
     Networking to expose apps
@@ -122,8 +121,8 @@ IBM Cloud Kubernetes Service
         cs_versions_addons.md
 
     cs_regions.md
-    cs_access_reference.md
     cs_integrations_overview.md
+    cs_access_reference.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}
@@ -160,8 +159,8 @@ IBM Cloud Kubernetes Service
     container_volumes_ov.md
     cs_classic.md
     cs_cli_devtools.md
-    cs_integrations.md
     cs_cli_reference.md
     cs_storage.md
+    cs_tutorials_istio.md
     transcript_autorecovery.md
     transcript_loadbalancing.md

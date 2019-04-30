@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks
 
@@ -289,13 +289,13 @@ Review common error messages and learn how to resolve them.
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
   <td>The owner of the API key that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps:
   <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li>
-  <li>Run <code>ibmcloud ks api-key-info</code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio. </li>
+  <li>Run <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio. </li>
   <li>Run <code>ibmcloud account list</code> to view the owner of the {{site.data.keyword.Bluemix_notm}} account that you currently use. </li>
   <li>Contact the owner of the {{site.data.keyword.Bluemix_notm}} account and report that the API key owner has insufficient permissions in IBM Cloud infrastructure (SoftLayer) or might be pending to be deleted. </li></ol>
   </br><strong>As the account owner</strong>, follow these steps:
   <ol><li>Review the [required permissions in IBM Cloud infrastructure (SoftLayer)](/docs/containers?topic=containers-users#infra_access) to perform the action that previously failed. </li>
-  <li>Fix the permissions of the API key owner or create a new API key by using the [<code>ibmcloud ks api-key-reset</code>](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset) command. </li>
-  <li>If you or another account admin manually set IBM Cloud infrastructure (SoftLayer) credentials in your account, run [<code>ibmcloud ks credential-unset</code>](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
+  <li>Fix the permissions of the API key owner or create a new API key by using the [<code>ibmcloud ks api-key-reset --region <region></code>](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset) command. </li>
+  <li>If you or another account admin manually set IBM Cloud infrastructure (SoftLayer) credentials in your account, run [<code>ibmcloud ks credential-unset --region <region></code>](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -366,7 +366,7 @@ Still having issues with your cluster?
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
--   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
 When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

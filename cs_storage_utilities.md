@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # IBM Cloud storage utilities
@@ -502,7 +503,7 @@ To attach the block storage device to a non-SDS worker node you must create a pe
 
 **Before you begin**:
 - Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted and unmounted block storage to your non-SDS worker nodes.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **To attach raw block storage to non-SDS worker nodes**:
 1. Prepare the PV creation.  
@@ -645,3 +646,5 @@ To attach the block storage device to a non-SDS worker node you must create a pe
 
 If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure (SoftLayer) account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure (SoftLayer) account](/docs/containers?topic=containers-cleanup).
 {: note}
+
+

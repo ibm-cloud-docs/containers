@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-04-30"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 # Tuning performance
 {: #kernel}
@@ -168,7 +169,7 @@ Your cluster's metrics provider (`metrics-server` in Kubernetes 1.12 and later, 
 
 The metrics provider pod also has a `nanny` container that scales the `metrics-server` or `heapster` main container's resource requests and limits in response to the number of worker nodes in the cluster. You can change the default resources by editing the metrics provider's configmap.
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Open the cluster metrics provider configmap YAML.
     *  For `metrics-server`:

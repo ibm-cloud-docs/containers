@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -140,7 +140,6 @@ Ingress is a Kubernetes service that balances network traffic workloads in your 
 ### What comes with Ingress?
 {: #components}
 
-
 Ingress consists of three components:
 <dl>
 <dt>Ingress resource</dt>
@@ -152,7 +151,6 @@ Ingress consists of three components:
 <p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you use only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.</p>
 <p class="note">If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist <a href="https://www.cloudflare.com/ips/">Cloudflare's IPv4 IPs <img src="../icons/launch-glyph.svg" alt="External link icon"></a> that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the <a href="/docs/containers?topic=containers-policy_tutorial#lesson3">Calico network policy tutorial</a>.</p></dd>
 </dl>
-
 
 ### How are IPs assigned to Ingress ALBs?
 {: #ips}
@@ -298,7 +296,7 @@ Expose apps that are inside your cluster to the public by using the public Ingre
 Before you begin:
 
 * Review the Ingress [prerequisites](#config_prereqs).
-* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Step 1: Deploy apps and create app services
 {: #public_inside_1}
@@ -628,7 +626,7 @@ Before you begin:
 
 * Review the Ingress [prerequisites](#config_prereqs).
 * Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
-* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To expose apps that are outside your cluster to the public:
 
@@ -910,49 +908,7 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 ```
 {: pre}
 
-Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
-{: note}
-
 When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
-
-</br>
-
-If you do not have a TLS certificate ready, follow these steps:
-1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-2. Convert the cert and key into base-64.
-   1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file.
-      ```
-      openssl base64 -in tls.key -out tls.key.base64
-      ```
-      {: pre}
-
-   2. View the base-64 encoded value for your cert and key.
-      ```
-      cat tls.key.base64
-      ```
-      {: pre}
-
-3. Create a secret YAML file using the cert and key.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       tls.crt: <client_certificate>
-       tls.key: <client_key>
-     ```
-     {: codeblock}
-
-4. Create the certificate as a Kubernetes secret.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
-     Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
-     {: note}
-
 
 ### Step 5: Create the Ingress resource
 {: #private_5}
@@ -1339,6 +1295,8 @@ To edit the configmap to enable SSL protocols and ciphers:
 To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
 {: shortdesc}
 
+
+
 ### Enabling log buffering and flush timeout
 {: #access-log}
 
@@ -1491,7 +1449,16 @@ Configuring your own custom Ingress controller can be useful when you have speci
     ```
     {: pre}
 
-3. Get the configuration file for your Ingress controller ready. For example, you can use the YAML configuration file for the [NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml).
+3. Get the configuration file for your Ingress controller ready. For example, you can use the YAML configuration file for the [NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml). If you use the community controller, edit the configuration file by following these steps.
+  1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
+  2. Replace all `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with the `app: ingress-nginx` label. After you replace the labels, all `labels` and `matchLabels` sections look similar to the following:
+     ```
+     labels:
+       app: ingress-nginx
+     ```
+     {: screen}
+  3. Replace `- --publish-service=$(POD_NAMESPACE)/ingress-nginx` with `- --publish-service=$(POD_NAMESPACE)/<ALB_ID>`.
+     For example, the ALB ID from step 1 might look like `- --publish-service=$(POD_NAMESPACE)/public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
 
 4. Deploy your own Ingress controller. **Important**: To continue to use the load balancer service exposing the controller and the IBM-provided Ingress subdomain, your controller must be deployed in the `kube-system` namespace.
     ```

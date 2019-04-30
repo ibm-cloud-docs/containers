@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -24,8 +24,12 @@ subcollection: containers
 {:gif: data-image-type='gif'}
 
 
+
+
+
 # Setting up clusters and worker nodes
 {: #clusters}
+
 Create clusters and add worker nodes to increase cluster capacity in {{site.data.keyword.containerlong}}. Still getting started? Try out the [creating a Kubernetes cluster tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
 {: shortdesc}
 
@@ -248,9 +252,9 @@ To create a cluster:
 
 4.  Create a cluster. Standard clusters can be created in any region and available zone. Free clusters can be created in the region that you target with the `ibmcloud ks region-set` command, but you cannot select the zone.
 
-    1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
+    1.  **Standard clusters**: Review the zones that are available. To see zones in a specific location, such as a geography, country, or a metro, you can specify the location in the `--locations` flag. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
         ```
-        ibmcloud ks zones
+        ibmcloud ks zones [--locations <location>]
         ```
         {: pre}
         When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.
@@ -340,7 +344,7 @@ To create a cluster:
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
         <td><ul><li>**Free clusters**: You do not have to define a private VLAN. Your free cluster is automatically connected to a private VLAN that is owned by IBM.</li><li>**Standard clusters**: If you already have a private VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the private VLAN. If you do not have a private VLAN in your account, do not specify this option. {{site.data.keyword.containerlong_notm}} automatically creates a private VLAN for you.<p>Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></li>
-        <li>To create a [private VLAN-only cluster](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan), include this `--private-vlan` flag and the `--private-only` flag to confirm your choice. Do **not** include the `--public-vlan` and `--public-service-endpoint` flags. Note that to enable connection between your master and worker nodes, you must include the `--private-service-endpoint` flag or set up your own gateway appliance device.</li></ul></td>
+        <li>To create a [private VLAN-only cluster](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan), include this `--private-vlan` flag and the `--private-only` flag to confirm your choice. Do **not** include the `--public-vlan` and `--public-service-endpoint` flags. Note that to enable connection between your master and worker nodes, you must include the `--private-service-endpoint` flag or set up your own gateway device.</li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -709,7 +713,7 @@ If you have a cluster that was created after worker pools were introduced, you c
 
 4. Add stand-alone worker nodes to the cluster. For bare metal machine types, specify `dedicated`.
    ```
-   ibmcloud ks worker-add --cluster <cluster_name_or_ID> --number <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --machine-type <machine_type> --hardware <shared_or_dedicated>
+   ibmcloud ks worker-add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --machine-type <machine_type> --hardware <shared_or_dedicated>
    ```
    {: pre}
 
@@ -839,3 +843,5 @@ Next steps:
 - After it is no longer listed in the available clusters list when you run the `ibmcloud ks clusters` command, you can reuse the name of a removed cluster.
 - If you kept the subnets, you can [reuse them in a new cluster](/docs/containers?topic=containers-subnets#subnets_custom) or manually delete them later from your IBM Cloud infrastructure (SoftLayer) portfolio.
 - If you kept the persistent storage, you can [delete your storage](/docs/containers?topic=containers-cleanup#cleanup) later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} console.
+
+

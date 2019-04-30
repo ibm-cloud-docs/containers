@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, node scaling
 
@@ -145,7 +145,7 @@ Make the most out of the cluster autoscaler by using the following strategies fo
 
 ### Can I autoscale multiple worker pools at once?
 {: #scalable-practices-multiple}
-Yes, after you install the Helm chart, you can choose which worker pools within the cluster to autoscale [in the configmap](#ca_cm). You can run only one `ibm-iks-cluster-autoscaler` Helm chart per cluster. 
+Yes, after you install the Helm chart, you can choose which worker pools within the cluster to autoscale [in the configmap](#ca_cm). You can run only one `ibm-iks-cluster-autoscaler` Helm chart per cluster.
 {: shortdesc}
 
 ### How can I make sure the cluster autoscaler responds to what resources my app needs?
@@ -207,7 +207,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  [Create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui) that runs **Kubernetes version 1.12 or later**.
-3.   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+3.   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 4.  Confirm that your {{site.data.keyword.Bluemix_notm}} Identity and Access Management credentials are stored in the cluster. The cluster autoscaler uses this secret to authenticate.
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
@@ -353,7 +353,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
 
 **Before you begin**:
 *  [Install the `ibm-iks-cluster-autoscaler` plug-in](#ca_helm).
-*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **To update the cluster autoscaler configmap and values**:
 
@@ -446,7 +446,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
 {: shortdesc}
 
 **Before you begin**:
-*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  [Install the `ibm-iks-cluster-autoscaler` plug-in](#ca_helm).
 
 **To update the cluster autoscaler values**:
@@ -590,27 +590,29 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     helm get values ibm-iks-cluster-autoscaler -a
     ```
     {: pre}
-    
+
 
 ## Limiting apps to run on only certain autoscaled worker pools
 {: #ca_limit_pool}
 
-To limit a pod deployment to a specific worker pool that is managed by the cluster autoscaler, use labels and `nodeSelector`.
+To limit a pod deployment to a specific worker pool that is managed by the cluster autoscaler, use labels and `nodeSelector` or `nodeAffinity`. With `nodeAffinity`, you have more control over how the scheduling behavior works to match pods to worker nodes. For more information about assigning pods to worker nodes, [see the Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/).
 {: shortdesc}
 
 **Before you begin**:
 *  [Install the `ibm-iks-cluster-autoscaler` plug-in](#ca_helm).
-*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **To limit pods to run on certain autoscaled worker pools**:
 
-1.  Create the worker pool with the label that you want to use.
+1.  Create the worker pool with the label that you want to use. For example, your label might be `app: nginx`.
     ```
     ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
     ```
     {: pre}
 2.  [Add the worker pool to the cluster autoscaler configuration](#ca_cm).
-3.  In your pod spec template, match the `nodeSelector` to the label that you used in your worker pool.
+3.  In your pod spec template, match the `nodeSelector` or `nodeAffinity` to the label that you used in your worker pool.
+
+    Example of `nodeSelector`:
     ```
     ...
     spec:
@@ -621,6 +623,25 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
       nodeSelector:
         app: nginx
     ...
+    ```
+    {: codeblock}
+
+    Example of `nodeAffinity`:
+    ```
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: IfNotPresent
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - nginx
     ```
     {: codeblock}
 4.  Deploy the pod. Because of the matching label, the pod is scheduled onto a worker node that is in the labeled worker pool.
@@ -660,7 +681,7 @@ You can update the existing cluster autoscaler Helm chart to the latest version.
 Updating to the latest Helm chart from version 1.0.2 or earlier? [Follow these instructions](#ca_helm_up_102).
 {: note}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
     ```
@@ -723,7 +744,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 The latest Helm chart version of the cluster autoscaler requires a full removal of previously installed cluster autoscaler Helm chart versions. If you installed the Helm chart version 1.0.2 or earlier, uninstall that version first before you install the latest Helm chart of the cluster autoscaler.
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Get your cluster autoscaler configmap.
     ```
@@ -793,7 +814,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 If you do not want to automatically scale your worker pools, you can uninstall the cluster autoscaler Helm chart. After the removal, you must [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) your worker pools manually.
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  In the [cluster autoscaler configmap](#ca_cm), remove the worker pool by setting the `"enabled"` value to `false`.
     ```

@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-30"
 
 ---
 
@@ -299,19 +299,15 @@ lastupdated: "2019-04-15"
 
 [Logging and monitoring](/docs/containers?topic=containers-health#health)
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
-* [Understanding cluster and app log forwarding](/docs/containers?topic=containers-health#logging)
-* [Configuring cluster and app log forwarding](/docs/containers?topic=containers-health#configuring)
-  * [Enabling log forwarding with the {{site.data.keyword.Bluemix_notm}} console](/docs/containers?topic=containers-health#enable-forwarding-ui)
-  * [Enabling log forwarding with the CLI](/docs/containers?topic=containers-health#enable-forwarding)
-  * [Verifying log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
-  * [Updating log forwarding](/docs/containers?topic=containers-health#updating-forwarding)
-  * [Stopping log forwarding](/docs/containers?topic=containers-health#log_sources_delete)
-  * [Viewing logs](/docs/containers?topic=containers-health#view_logs)
-* [Filtering logs](/docs/containers?topic=containers-health#filter-logs)
-* [Configuring log forwarding for Kubernetes API audit logs](/docs/containers?topic=containers-health#api_forward)
-  * [Sending audit logs to Log Analysis](/docs/containers?topic=containers-health#audit_enable_loganalysis)
-  * [Sending audit logs to an external server](/docs/containers?topic=containers-health#audit_enable)
-* [Collecting master logs](/docs/containers?topic=containers-health#collect_master)
+* [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
+* [Forwarding cluster, app, and Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health#configuring)
+  * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging)
+  * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
+  * [Forwarding Kubernetes API audit logs](/docs/containers?topic=containers-health#audit_enable)
+  * [Filtering logs that are forwarded](/docs/containers?topic=containers-health#filter-logs)
+  * [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
+* [Forwarding Kubernetes API audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}](/docs/containers?topic=containers-health#api_forward)
+* [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
   * [Other health monitoring tools](/docs/containers?topic=containers-health#health_tools)
 * [Configuring health monitoring for worker nodes with Autorecovery](/docs/containers?topic=containers-health#autorecovery)
@@ -338,7 +334,7 @@ lastupdated: "2019-04-15"
   * [Public service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)
   * [Private service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)
   * [Public and private service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)
-  * [Private networking with a gateway appliance](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)
+  * [Private networking with a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)
 * [Planning cluster to on-premises network or {{site.data.keyword.icpfull_notm}} communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn)
   * [Setting up a VPN connection for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)
   * [Setting up a VPN connection for a private VLAN only setup](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)
@@ -444,7 +440,7 @@ lastupdated: "2019-04-15"
   * [Adding portable private IPs by using user-managed subnets](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
   * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
-  * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
+  * [Managing subnet routing for gateway devices](/docs/containers?topic=containers-subnets#vra-routing)
 
 ## Building containers from images
 {: #sitemap-images}
@@ -960,6 +956,20 @@ lastupdated: "2019-04-15"
 
 [Cluster add-ons changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 * [Ingress ALB add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
+
+## Locations
+{: #sitemap-locations}
+
+[Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
+  * [Available locations](/docs/containers?topic=containers-regions-and-zones#available-locations)
+  * [Single zone and multizone locations in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
+  * [Single-zone clusters](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
+  * [Multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
+* [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
+  * [Logging in to {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
+  * [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
+* [Deprecated: Previous {{site.data.keyword.Bluemix_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 ## User access permissions
 {: #sitemap-user-access}
