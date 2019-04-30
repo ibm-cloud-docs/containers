@@ -45,7 +45,6 @@ Before you begin:
 1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
   * Any platform role for the cluster
   * **Writer** or **Manager** service role for all namespaces
-2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 3. Ensure that your cluster has a least one public VLAN. Edge worker nodes are not available for clusters with private VLANs only.
 4. [Create a new worker pool](/docs/containers?topic=containers-clusters#add_pool) that spans all the zone in your cluster and has at least 2 workers per zone.
 
@@ -115,7 +114,6 @@ Using the `dedicated=edge` toleration means that all load balancer and Ingress s
 
 Before you begin:
 - Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role for all namespaces](/docs/containers?topic=containers-users#platform).
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To prevent other workloads from running on edge worker nodes:
 
