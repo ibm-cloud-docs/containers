@@ -99,7 +99,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Multizone clusters</td>
  <td>Create [multizone clusters](/docs/containers?topic=containers-plan_clusters#multizone) by adding more zones to your worker pools.</td>
- <td>Create [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool)<staging pc>(/docs/containers?topic=containers-add_workers#add_pool)</staging pc>. When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
+ <td>Create [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
  </tr>
 </tbody></table>
 {: caption="Feature differences between {{site.data.keyword.Bluemix_notm}} public and {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -180,7 +180,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
             ```
             {: pre}
 
-            Replace <em>&lt;user_IBMid&gt;</em> with the email of the user you want to invite, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the GUID of the public account organization. 
+            Replace <em>&lt;user_IBMid&gt;</em> with the email of the user you want to invite, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the GUID of the public account organization.
 
         * To invite all users currently in a Dedicated account organization:
 
@@ -188,7 +188,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
             ibmcloud cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
 
-            Replace <em>&lt;dedicated_org_ID&gt;</em> with the Dedicated account organization ID, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the public account organization GUID. 
+            Replace <em>&lt;dedicated_org_ID&gt;</em> with the Dedicated account organization ID, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the public account organization GUID.
 
     3.  If an IBMid exists for a user, the user is automatically added to the specified organization in the public account. If an IBMid does not exist for a user, then an invitation is sent to the user's email address. After the user accepts the invitation, an IBMid is created for the user, and the user is added to the specified organization in the public account.
 
@@ -484,7 +484,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 ### Adding worker nodes
 {: #add_workers_dedicated}
 
-With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool)<staging pc>(/docs/containers?topic=containers-add_workers#add_pool)</staging pc>. When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
+With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
 {: shortdesc}
 
 ### Using private and public image registries
