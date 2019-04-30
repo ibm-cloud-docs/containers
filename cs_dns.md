@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-30"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2019-03-21"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 # Configure the cluster DNS provider
 {: #cluster_dns}
@@ -39,14 +40,14 @@ Each service in your {{site.data.keyword.containerlong}} cluster is assigned a D
 By default, your {{site.data.keyword.containerlong_notm}} cluster DNS provider includes a deployment to autoscale the DNS pods in response to the number of worker nodes and cores within the cluster. You can finetune the DNS autoscaler parameters by editing the DNS autoscaling configmap. For example, if your apps have heavy usage of the cluster DNS provider, you might need to increase the minimum number of DNS pods to support the app. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/).
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Verify that the cluster DNS provider deployment is available. You might have the autoscaler for the KubeDNS, the CoreDNS, or both DNS providers installed in your cluster. If you have both DNS autoscalers installed, find the one that is in use by looking at the **AVAILABLE** column in your CLI output. The deployment that is in use is listed with 1 available deployment.
     ```
     kubectl get deployment -n kube-system | grep dns-autoscaler
     ```
     {: pre}
-    
+
     Example output:
     ```
     NAME                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
@@ -64,7 +65,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     kubectl edit configmap -n kube-system <dns-autoscaler>
     ```
     {: pre}
-    
+
     Example output:
     ```
     apiVersion: v1
@@ -82,14 +83,14 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 You can customize your {{site.data.keyword.containerlong_notm}} cluster DNS provider by editing the DNS configmap. For example, you might want to configure stubdomains and upstream nameservers to resolve services that point to external hosts. Additionally, if you use CoreDNS, you can configure multiple [Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/) within the CoreDNS configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Verify that the cluster DNS provider deployment is available. You might have the DNS cluster provider for KubeDNS, CoreDNS, or both DNS providers installed in your cluster. If you have both DNS providers installed, find the one that is in use by looking at the **AVAILABLE** column in your CLI output. The deployment that is in use is listed with 1 available deployment.
     ```
     kubectl get deployment -n kube-system -l k8s-app=kube-dns
     ```
     {: pre}
-    
+
     Example output:
     ```
     NAME                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
@@ -98,14 +99,14 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: screen}
 2.  Edit the default settings for the CoreDNS or KubeDNS configmap.
-    
+
     *   **For CoreDNS**: Use a Corefile in the `data` section of the configmap to customize stubdomains and upstream nameservers. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns).
         ```
         kubectl edit configmap -n kube-system coredns
         ```
         {: pre}
-    
-        **CoreDNS example output**: 
+
+        **CoreDNS example output**:
           ```
           apiVersion: v1
           kind: ConfigMap
@@ -136,10 +137,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
               }
           ```
           {: screen}
-          
+
           Do you have many customizations that you want to organize? In Kubernetes version 1.12.6_1543 and later, you can add multiple Corefiles to the CoreDNS configmap. For more information, see [the Corefile import documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/import/).
           {: tip}
-          
+
     *   **For KubeDNS**: Configure stubdomains and upstream nameservers in the `data` section of the configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns).
         ```
         kubectl edit configmap -n kube-system kube-dns
@@ -166,7 +167,7 @@ If you have a {{site.data.keyword.containerlong_notm}} cluster that runs Kuberne
 {: shortdesc}
 
 **Before you begin**:
-1.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2.  Determine the current cluster DNS provider. In the following example, KubeDNS is the current cluster DNS provider.
     ```
     kubectl cluster-info

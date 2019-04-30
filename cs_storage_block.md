@@ -23,6 +23,7 @@ subcollection: containers
 {:download: .download}
 
 
+
 # Storing data on IBM Block Storage for IBM Cloud
 {: #block_storage}
 
@@ -95,7 +96,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 6. Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
    ```
-   helm install iks-charts/ibmcloud-block-storage-plugin 
+   helm install iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -1220,7 +1221,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 If you want to increase storage capacity or performance, you can modify your existing volume.
 {: shortdesc}
 
-For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding Block Storage capacity](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity) and [Adjusting IOPS](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS). Updates that you make from the console are not reflected in the persistent volume (PV). To add this information to the PV, run `kubectl patch pv <pv_name>` and manually update the size and IOPS in the **Labels** and **Annotation** section of your PV. 
+For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding Block Storage capacity](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity) and [Adjusting IOPS](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS). Updates that you make from the console are not reflected in the persistent volume (PV). To add this information to the PV, run `kubectl patch pv <pv_name>` and manually update the size and IOPS in the **Labels** and **Annotation** section of your PV.
 {: tip}
 
 1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column.
@@ -1235,29 +1236,29 @@ For questions about billing and to find the steps for how to use the {{site.data
    myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
    ```
    {: screen}
-   
-2. If you want to change the IOPS and the size for your block storage, edit the IOPS in the `metadata.labels.IOPS` section of your PV first. You can change to a lower or greater IOPS value. Make sure that you enter an IOPS that is supported for the storage type that you have. For example, if you have endurance block storage with 4 IOPS, you can change the IOPS to either 2 or 10. For more supported IOPS values, see [Deciding on your block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). 
+
+2. If you want to change the IOPS and the size for your block storage, edit the IOPS in the `metadata.labels.IOPS` section of your PV first. You can change to a lower or greater IOPS value. Make sure that you enter an IOPS that is supported for the storage type that you have. For example, if you have endurance block storage with 4 IOPS, you can change the IOPS to either 2 or 10. For more supported IOPS values, see [Deciding on your block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).
    ```
    kubectl edit pv <pv_name>
    ```
    {: pre}
-   
-   To change the IOPS from the CLI, you must also change the size of your block storage. If you want to change only the IOPS, but not the size, you must [request the IOPS change from the console](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS). 
+
+   To change the IOPS from the CLI, you must also change the size of your block storage. If you want to change only the IOPS, but not the size, you must [request the IOPS change from the console](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS).
    {: note}
-   
-3. Edit the PVC and add the new size in the `spec.resources.requests.storage` section of your PVC. Make sure that the new size does not exceed the maximum capacity that is set by your storage class. To see available sizes for your storage class, see [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). 
+
+3. Edit the PVC and add the new size in the `spec.resources.requests.storage` section of your PVC. Make sure that the new size does not exceed the maximum capacity that is set by your storage class. To see available sizes for your storage class, see [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).
    ```
    kubectl edit pvc <pvc_name>
    ```
    {: pre}
-   
-4. Verify that the volume expansion is requested. The volume expansion is successfully requested when you see a `FileSystemResizePending` message in the **Conditions** section of your CLI output. 
+
+4. Verify that the volume expansion is requested. The volume expansion is successfully requested when you see a `FileSystemResizePending` message in the **Conditions** section of your CLI output.
    ```
    kubectl describe pvc <pvc_name>
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    ...
    Conditions:
@@ -1266,40 +1267,40 @@ For questions about billing and to find the steps for how to use the {{site.data
    FileSystemResizePending   True    Mon, 01 Jan 0001 00:00:00 +0000   Thu, 25 Apr 2019 15:52:49 -0400           Waiting for user to (re-)start a pod to finish file system resize of volume on node.
    ```
    {: screen}
-   
-5. List all the pods that mount the PVC. 
+
+5. List all the pods that mount the PVC.
    ```
    kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
    ```
    {: pre}
-   
+
    Mounted pods are returned in the format: `<pod_name>: <pvc_name>`.
-   
-6. Remove all pods that mount the PVC and let Kubernetes re-create the pods. If you created a pod without using a Kubernetes deployment or replica set, then you must re-create your pod after you remove it. To retrieve the YAML file that was used to create your pod, run `kubectl get pod <pod_name> -o yaml >pod.yaml`. If your PVC had no mounted pods from the previous step, [create a pod or deployment and mount the PVC](/docs/containers?topic=containers-block_storage#add_block). 
+
+6. Remove all pods that mount the PVC and let Kubernetes re-create the pods. If you created a pod without using a Kubernetes deployment or replica set, then you must re-create your pod after you remove it. To retrieve the YAML file that was used to create your pod, run `kubectl get pod <pod_name> -o yaml >pod.yaml`. If your PVC had no mounted pods from the previous step, [create a pod or deployment and mount the PVC](/docs/containers?topic=containers-block_storage#add_block).
    ```
    kubectl delete pod <pod_name>
    ```
    {: pre}
 
-7. Monitor the volume expansion status. The volume expansion is complete when you see the `"message":"Success"` message in your CLI output. 
+7. Monitor the volume expansion status. The volume expansion is complete when you see the `"message":"Success"` message in your CLI output.
    ```
    kubectl get pv <pv_name> -o go-template=$'{{index .metadata.annotations "ibm.io/volume-expansion-status"}}\n'
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    {"size":50,"iops":500,"orderid":38832711,"start":"2019-04-30T17:00:37Z","end":"2019-04-30T17:05:27Z","status":"complete","message":"Success"}
    ```
    {: screen}
-   
-8. Verify that the size and IOPS are changed in the **Labels** section of your CLI output. 
+
+8. Verify that the size and IOPS are changed in the **Labels** section of your CLI output.
    ```
    kubectl describe pv <pv_name>
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    ...
    Labels:       CapacityGb=50

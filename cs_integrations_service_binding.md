@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-30"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Adding services by using IBM Cloud service binding
@@ -56,7 +57,7 @@ Before you begin:
     - [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform) for the cluster where you want to bind a service
     - [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the Kubernetes namespace where you want to bind the service
     - For Cloud Foundry services: [**Developer** Cloud Foundry role](/docs/iam?topic=iam-mngcf#mngcf) for the space where you want to provision the service
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 
@@ -174,7 +175,7 @@ The credentials of a service instance are base64 encoded and stored inside your 
 
 Before you begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [Add an {{site.data.keyword.Bluemix_notm}} service to your cluster](#bind-services).
 
 ### Mounting the secret as a volume to your pod
@@ -449,16 +450,16 @@ You can add the service credentials and other key value pairs from your Kubernet
    ```
    {: codeblock}
 
-8. Optional: As a precaution, add error handling to your app in case that the `BINDING` environment variable is not set properly. 
-   
-   Example code in Java: 
+8. Optional: As a precaution, add error handling to your app in case that the `BINDING` environment variable is not set properly.
+
+   Example code in Java:
    ```java
    if (System.getenv("BINDING") == null) {
     throw new RuntimeException("Environment variable 'SECRET' is not set!");
    }
    ```
    {: codeblock}
-   
+
    Example code in Node.js:
    ```js
    if (!process.env.BINDING) {
@@ -467,4 +468,3 @@ You can add the service credentials and other key value pairs from your Kubernet
    }
    ```
    {: codeblock}
-

@@ -26,7 +26,6 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 
-
 # Troubleshooting logging and monitoring
 {: #cs_troubleshoot_health}
 

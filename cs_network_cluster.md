@@ -25,7 +25,6 @@ subcollection: containers
 
 
 
-
 # Setting up your cluster network
 {: #cs_network_cluster}
 
@@ -102,7 +101,7 @@ Trying to change the service endpoint for master-worker communication instead? C
 {: tip}
 
 Before you begin:
-* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * If your worker nodes are stand-alone (not part of a worker pool), [update them to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 To change the VLANs that a worker pool uses to provision worker nodes:
