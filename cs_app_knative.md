@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 ---
 
@@ -194,7 +194,7 @@ To deploy your serverless app as a Knative service:
    ```
    {: screen}
 
-3. Verify that your Knative service is created. In your CLI output, you can view the public **DOMAIN** that is assigned to your serverless app. The **LATESTCREATED** and **LATESTREADY** colums show the version of your app that was last created and that is currently deployed in the format `<knative_service_name>-<version>`. The version that is assigned to your app is a random string value. In this example, the version of your serverless app is `rjmwt`. When you update the service, a new version of your app is created and assigned a new random string for the version.  
+3. Verify that your Knative service is created. In your CLI output, you can view the public **DOMAIN** that is assigned to your serverless app. The **LATESTCREATED** and **LATESTREADY** columns show the version of your app that was last created and that is currently deployed in the format `<knative_service_name>-<version>`. The version that is assigned to your app is a random string value. In this example, the version of your serverless app is `rjmwt`. When you update the service, a new version of your app is created and assigned a new random string for the version.  
    ```
    kubectl get ksvc/kn-helloworld
    ```
