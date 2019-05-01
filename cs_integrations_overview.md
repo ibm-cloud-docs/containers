@@ -132,7 +132,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Weave Scope</td>
-<td>Weave Scope provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.<p>For more information, see [Visualizing Kubernetes cluster resources with Weave Scope and {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#weavescope).</p></li></ol>
+<td>[Weave Scope ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.weave.works/oss/scope/) provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.</li></ol>
 </td>
 </tr>
 </tbody>

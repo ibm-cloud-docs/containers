@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 keywords: kubernetes, iks
 
@@ -61,7 +61,7 @@ subcollection: containers
 - [Set up Continuous Integration/ Continuous Delivery for {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [Migrate a VM app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [Migrate a CF app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-- [Run serverless apps in a cluster with Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Run serverless apps in a cluster with Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers?topic=containers-serverless-apps-knative)
 - [Orchestrate long running workloads for apps with an Apache Kafka based messaging service ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [Automate deployments in a cluster with Terraform ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [Organizing users and teams ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 keywords: kubernetes, iks
 
@@ -126,7 +126,7 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 </tr>
 <tr>
 <td>06 Feb 2019</td>
-<td>[Knative on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-knative_tutorial)</td>
+<td>[Knative on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-serverless-apps-knative)</td>
 <td>Knative is an open source platform that extends the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. Managed Knative on {{site.data.keyword.containerlong_notm}} is a managed add-on that integrates Knative and Istio directly with your Kubernetes cluster. The Knative and Istio version in the add-on are tested by IBM and supported for the use in {{site.data.keyword.containerlong_notm}}.</td>
 </tr>
 </tbody></table>
