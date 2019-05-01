@@ -394,12 +394,6 @@ Worker node flavors vary by zone. The following table includes the most recent v
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
-<tr>
-<td><strong>Virtual, z1.2x4</strong>: Use this flavor when you want a worker node to be created on Hyper Protect Containers on IBM Z Systems.</td>
-<td>2 / 4GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
 </tbody>
 </table>
 
