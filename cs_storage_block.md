@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 keywords: kubernetes, iks
 
@@ -1246,7 +1246,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    To change the IOPS from the CLI, you must also change the size of your block storage. If you want to change only the IOPS, but not the size, you must [request the IOPS change from the console](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS).
    {: note}
 
-3. Edit the PVC and add the new size in the `spec.resources.requests.storage` section of your PVC. Make sure that the new size does not exceed the maximum capacity that is set by your storage class. To see available sizes for your storage class, see [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).
+3. Edit the PVC and add the new size in the `spec.resources.requests.storage` section of your PVC. You can change to a greater size only up to the maximum capacity that is set by your storage class. You cannot downsize your existing storage. To see available sizes for your storage class, see [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).
    ```
    kubectl edit pvc <pvc_name>
    ```
