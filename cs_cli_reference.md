@@ -465,10 +465,10 @@ Region-specific endpoints are deprecated. Use the [global endpoint](/docs/contai
 
 If you need to list and work with resources from one region only, you can use the `ibmcloud ks api` command to target a regional endpoint instead of the global endpoint.
 * Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
-* Frankfurt (EU Central, eu-de): `https://eu-central.containers.cloud.ibm.com`
-* London (UK South, eu-gb): `https://uk-south.containers.cloud.ibm.com`
-* Sydney (AP South, au-syd): `https://ap-south.containers.cloud.ibm.com`
-* Tokyo (AP North, jp-tok): `https://ap-north.containers.cloud.ibm.com`
+* Frankfurt (EU Central, eu-de): `https://eu-de.containers.cloud.ibm.com`
+* London (UK South, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
+* Sydney (AP South, au-syd): `https://au-syd.containers.cloud.ibm.com`
+* Tokyo (AP North, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
 * Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
 
 To use the global functionality, you can use the `ibmcloud ks api` command again to target the global endpoint: `https://containers.cloud.ibm.com`
@@ -779,10 +779,10 @@ Region-specific endpoints are deprecated. Use the [global endpoint](/docs/contai
 If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` command to target a regional endpoint instead of the global endpoint.
 
 * Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
-* Frankfurt (EU Central, eu-de): `https://eu-central.containers.cloud.ibm.com`
-* London (UK South, eu-gb): `https://uk-south.containers.cloud.ibm.com`
-* Sydney (AP South, au-syd): `https://ap-south.containers.cloud.ibm.com`
-* Tokyo (AP North, jp-tok): `https://ap-north.containers.cloud.ibm.com`
+* Frankfurt (EU Central, eu-de): `https://eu-de.containers.cloud.ibm.com`
+* London (UK South, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
+* Sydney (AP South, au-syd): `https://au-syd.containers.cloud.ibm.com`
+* Tokyo (AP North, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
 * Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
 
 To use the global functionality, you can use the `ibmcloud ks init` command again to target the global endpoint: `https://containers.cloud.ibm.com`

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 keywords: kubernetes, iks
 
@@ -107,6 +107,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
 <br />
 
 
+
 ### Service architecture
 {: #dedicated_ov_architecture}
 
@@ -180,7 +181,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
             ```
             {: pre}
 
-            Replace <em>&lt;user_IBMid&gt;</em> with the email of the user you want to invite, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the GUID of the public account organization.
+            Replace <em>&lt;user_IBMid&gt;</em> with the email of the user you want to invite, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the GUID of the public account organization. 
 
         * To invite all users currently in a Dedicated account organization:
 
@@ -188,7 +189,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
             ibmcloud cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
 
-            Replace <em>&lt;dedicated_org_ID&gt;</em> with the Dedicated account organization ID, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the public account organization GUID.
+            Replace <em>&lt;dedicated_org_ID&gt;</em> with the Dedicated account organization ID, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the public account organization GUID. 
 
     3.  If an IBMid exists for a user, the user is automatically added to the specified organization in the public account. If an IBMid does not exist for a user, then an invitation is sent to the user's email address. After the user accepts the invitation, an IBMid is created for the user, and the user is added to the specified organization in the public account.
 
@@ -205,7 +206,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 
     1.  From the menu bar in the public console, click **Manage > Security > Identity and Access**, and then click **Users**.
 
-    2.  From the row for the user that you want to assign access, select the **Actions** menu, and then click **Assign access**.
+    2.  From the row for the user to assign access, select the **Actions** menu, and then click **Assign access**.
 
     3.  Select **Assign access to resources**.
 
@@ -315,10 +316,10 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
 3.  Target a regional endpoint. The following regional endpoints are supported:
   * Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
-  * Frankfurt (EU Central, eu-de): `https://eu-central.containers.cloud.ibm.com`
-  * London (UK South, eu-gb): `https://uk-south.containers.cloud.ibm.com`
-  * Sydney (AP South, au-syd): `https://ap-south.containers.cloud.ibm.com`
-  * Tokyo (AP North, jp-tok): `https://ap-north.containers.cloud.ibm.com`
+  * Frankfurt (EU Central, eu-de): `https://eu-de.containers.cloud.ibm.com`
+  * London (UK South, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
+  * Sydney (AP South, au-syd): `https://au-syd.containers.cloud.ibm.com`
+  * Tokyo (AP North, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
   * Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
   ```
   ibmcloud ks init --host <endpoint>
@@ -399,7 +400,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.
         ```
 
-    When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
+    When the provisioning of your cluster is complete, the status of your cluster changes to **deployed**.
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name

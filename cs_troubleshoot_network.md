@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 keywords: kubernetes, iks
 
@@ -212,14 +212,15 @@ Review the following reasons why the ALB secret might fail and the corresponding
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
+
 When you run `ibmcloud ks cluster-get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** is available.
 
 You might see an error message similar to the following.
-
 ```
 There are already the maximum number of subnets permitted in this VLAN.
 ```
 {: screen}
+
 
 {: tsCauses}
 In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. In that zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN in a zone already reached that limit, the **Ingress Subdomain** fails to provision.
