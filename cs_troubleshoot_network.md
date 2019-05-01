@@ -208,20 +208,22 @@ Review the following reasons why the ALB secret might fail and the corresponding
 <br />
 
 
-## Cannot get a subdomain for Ingress ALB or cannot deploy a load balancer
+## Cannot get a subdomain for Ingress ALB
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
 
-* No Ingress subdomain: When you run `ibmcloud ks cluster-get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** is available.
-* Cannot deploy a load balancer: You might see an error message similar to the following.
-  ```
-  Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN.
-  ```
-  {: screen}
+When you run `ibmcloud ks cluster-get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** is available.
+
+You might see an error message similar to the following.
+```
+There are already the maximum number of subnets permitted in this VLAN.
+```
+{: screen}
+
 
 {: tsCauses}
-In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. In that zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN in a zone already reached that limit, the **Ingress Subdomain** fails to provision, or you might not have a portable public IP address available to create a network load balancer (NLB).
+In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. In that zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN in a zone already reached that limit, the **Ingress Subdomain** fails to provision.
 
 To view how many subnets a VLAN has:
 1.  From the [IBM Cloud infrastructure (SoftLayer) console](https://cloud.ibm.com/classic?), select **Network** > **IP Management** > **VLANs**.
