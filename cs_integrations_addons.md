@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-05-01"
 
 keywords: kubernetes, iks, helm
 
@@ -47,7 +47,7 @@ To enable a managed add-on in your cluster, you use the [`ibmcloud ks cluster-ad
 For more information about the prerequisites for each add-on, see:
 
 - [Istio](/docs/containers?topic=containers-istio#istio)
-- [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Knative](/docs/containers?topic=containers-serverless-apps-knative)
 
 ## Updating managed add-ons
 {: #updating-managed-add-ons}

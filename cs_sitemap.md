@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 ---
 
@@ -148,15 +148,6 @@ lastupdated: "2019-04-30"
   * [Lesson 3a: Deploying the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_apps_tutorial#lesson3a)
   * [Lesson 3b. Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_apps_tutorial#lesson3b)
 * [What's next?](/docs/containers?topic=containers-cs_apps_tutorial#apps_next)
-
-[Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
-* [Objectives](/docs/containers?topic=containers-knative_tutorial#knative_objectives)
-* [Time required](/docs/containers?topic=containers-knative_tutorial#knative_time)
-* [Audience](/docs/containers?topic=containers-knative_tutorial#knative_audience)
-* [Prerequisites](/docs/containers?topic=containers-knative_tutorial#knative_prerequisites)
-* [Lesson 1: Setting up the managed Knative add-on](/docs/containers?topic=containers-knative_tutorial#knative_setup)
-* [Lesson 2: Deploy a serverless app to your cluster](/docs/containers?topic=containers-knative_tutorial#deploy_app)
-* [What's next?](/docs/containers?topic=containers-knative_tutorial#whats-next)
 
 [Tutorial: Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
 * [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
@@ -731,20 +722,21 @@ lastupdated: "2019-04-30"
 ## Enhancing cluster capabilities with integrations
 {: #sitemap-integrations}
 
-[Integrating services](/docs/containers?topic=containers-integrations#integrations)
-* [Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
-  * [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
-  * [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
-* [Adding services by using Helm](/docs/containers?topic=containers-helm#helm)
-  * [Setting up Helm in a cluster with public access](/docs/containers?topic=containers-helm#public_helm_install)
-  * [Private clusters: Pushing the Tiller image to your private registry in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
-  * [Private clusters: Installing Helm charts without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)
-  * [Related Helm links](/docs/containers?topic=containers-integrations#helm_links)
-* [Adding services by using {{site.data.keyword.Bluemix_notm}} service binding](/docs/containers?topic=containers-service-binding#service-binding)
-  * [Adding {{site.data.keyword.Bluemix_notm}} services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
-  * [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
-      * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
-      * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
+[Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
+* [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
+* [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
+
+[Adding services by using Helm](/docs/containers?topic=containers-helm#helm)
+* [Setting up Helm in a cluster with public access](/docs/containers?topic=containers-helm#public_helm_install)
+* [Private clusters: Pushing the Tiller image to your private registry in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
+* [Private clusters: Installing Helm charts without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)
+* [Related Helm links](/docs/containers?topic=containers-helm#helm_links)
+
+[Adding services by using {{site.data.keyword.Bluemix_notm}} service binding](/docs/containers?topic=containers-service-binding#service-binding)
+* [Adding {{site.data.keyword.Bluemix_notm}} services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
+* [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
+    * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
+    * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
 
 ## Activity Tracker events
 {: #sitemap-at}

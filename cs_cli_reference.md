@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1122,7 +1122,7 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_enable_knative}
 
-Enable the managed [Knative add-on](/docs/containers?topic=containers-knative_tutorial) to install the Knative serverless framework.
+Enable the managed [Knative add-on](/docs/containers?topic=containers-serverless-apps-knative) to install the Knative serverless framework.
 {: shortdesc}
 
 ```

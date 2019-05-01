@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 keywords: kubernetes, iks
 
@@ -109,7 +109,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         **IBM responsibilities**:
         <ul>
         <li>Provision clusters with Kubernetes components installed so that you can access the Kubernetes API.</li>
-        <li>Provide a number of managed add-ons to extend your app's capabilities, such as [Istio](/docs/containers?topic=containers-istio#istio) and [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). Maintenance is simplified for you because IBM provides the installation and updates for the managed add-ons.</li>
+        <li>Provide a number of managed add-ons to extend your app's capabilities, such as [Istio](/docs/containers?topic=containers-istio#istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative). Maintenance is simplified for you because IBM provides the installation and updates for the managed add-ons.</li>
         <li>Provide cluster integration with select 3rd party partnership technologies, such as {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}}, and Portworx.</li>
         <li>Provide automation to enable service binding to other {{site.data.keyword.Bluemix_notm}} services.</li>
         <li>Create clusters with image pull secrets so that your deployments in the `default` Kubernetes namespace can pull images from {{site.data.keyword.registrylong_notm}}.</li>

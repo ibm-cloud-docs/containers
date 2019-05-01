@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-01"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -47,7 +47,7 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 {: shortdesc}
 
 
-1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](/docs/containers?topic=containers-integrations#helm).
+1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](/docs/containers?topic=containers-helm).
 
 2. Install the Helm chart to your cluster.
   ```
