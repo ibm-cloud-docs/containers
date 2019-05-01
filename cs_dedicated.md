@@ -99,7 +99,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Multizone clusters</td>
  <td>Create [multizone clusters](/docs/containers?topic=containers-plan_clusters#multizone) by adding more zones to your worker pools.</td>
- <td>Create [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone)<staging pc>(/docs/containers?topic=containers-ha_clusters#single_zone)</staging pc>. The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool)<staging pc>(/docs/containers?topic=containers-add_workers#resize_pool)</staging pc> or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool)<staging pc>(/docs/containers?topic=containers-add_workers#add_pool)</staging pc>. When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
+ <td>Create [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
  </tr>
 </tbody></table>
 {: caption="Feature differences between {{site.data.keyword.Bluemix_notm}} public and {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -400,7 +400,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.
         ```
 
-    When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
+    When the provisioning of your cluster is complete, the status of your cluster changes to **deployed**.
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
@@ -485,7 +485,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 ### Adding worker nodes
 {: #add_workers_dedicated}
 
-With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone)<staging pc>(/docs/containers?topic=containers-ha_clusters#single_zone)</staging pc>. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool)<staging pc>(/docs/containers?topic=containers-add_workers#resize_pool)</staging pc> or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool)<staging pc>(/docs/containers?topic=containers-add_workers#add_pool)</staging pc>. When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
+With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
 {: shortdesc}
 
 ### Using private and public image registries
