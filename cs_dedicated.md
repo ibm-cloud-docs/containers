@@ -107,6 +107,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
 <br />
 
 
+
 ### Service architecture
 {: #dedicated_ov_architecture}
 
