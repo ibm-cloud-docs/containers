@@ -43,14 +43,18 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_n
 A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure. Additionally, beginning with beta version `0.3` (default), new [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) is available.
 {: shortdesc}
 
-To use the redesigned {{site.data.keyword.containerlong_notm}} plug-in, set the `IKS_BETA_VERSION` environment variable to the beta version that you want to use:
-
-```
-export IKS_BETA_VERSION=<beta_version>
-```
-{: pre}
-
-The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available. Note that the default behavior is `0.3`. To use the deprecated regional endpoint functionality, you must use `0.2`.
+The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available.
+* The default behavior is `0.3`. Ensure that your {{site.data.keyword.containerlong_notm}} plug-in uses the latest `0.3` version by running `ibmcloud plugin update kubernetes-service`.
+* To use `0.4` or `1.0`, set the `IKS_BETA_VERSION` environment variable to the beta version that you want to use:
+    ```
+    export IKS_BETA_VERSION=<beta_version>
+    ```
+    {: pre}
+* To use the deprecated regional endpoint functionality, you must set the `IKS_BETA_VERSION` environment variable to `0.2`:
+    ```
+    export IKS_BETA_VERSION=0.2
+    ```
+    {: pre}
 
 <table>
 <caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
