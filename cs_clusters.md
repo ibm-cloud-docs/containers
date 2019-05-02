@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-02"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -40,8 +40,8 @@ With {{site.data.keyword.containerlong_notm}}, you can create a highly available
 {: shortdesc}
 
 The list is divided into two parts:
-*  **Account-level**: These are preparations that, after the account administrator makes them, you might not need to change them each time that you create a cluster. However, each time that you create a cluster, you still want to verify that the current account-level state is what you need it to be.
-*  **Cluster-level**: These are preparations that impact your cluster each time that you create a cluster.
+* **Account-level**: These are preparations that, after the account administrator makes them, you might not need to change them each time that you create a cluster. However, each time that you create a cluster, you still want to verify that the current account-level state is what you need it to be.
+* **Cluster-level**: These are preparations that impact your cluster each time that you create a cluster.
 
 ### Account-level
 {: #prepare_account_level}
@@ -49,8 +49,8 @@ The list is divided into two parts:
 Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-1.  [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
-2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](/docs/containers?topic=containers-users#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
+1. [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
+2. [Set up an {{site.data.keyword.containerlong_notm}} API key](/docs/containers?topic=containers-users#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
     *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. If your account predates 4 October 2018, you need to [enable {{site.data.keyword.Bluemix_notm}} IAM policies for {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-user#existing_users). With IAM policies, you can control access to resources such as registry namespaces.
@@ -58,13 +58,13 @@ Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for 
     Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
     {: tip}
 
-3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](/docs/containers?topic=containers-users#resource_groups). 
+3. If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](/docs/containers?topic=containers-users#resource_groups). 
     *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the default resource group is automatically targeted.
     *  If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
     *  You cannot change a cluster's resource group. Furthermore, if you need to use the `ibmcloud ks cluster-service-bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.Bluemix_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.
     *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers?topic=containers-health#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
 
-4.  Set up your IBM Cloud infrastructure (SoftLayer) networking. You can choose from the following options:
+4. Set up your IBM Cloud infrastructure (SoftLayer) networking. You can choose from the following options:
     *  **VRF-enabled**: With virtual routing and forwarding (VRF) and its multiple isolation separation technology, you can use public and private service endpoints to communicate with your Kubernetes master in clusters that run Kubernetes version 1.11 or later. By using the [private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private), communication between the Kubernetes master and your worker nodes stays on the private VLAN. If you want to run `kubectl` commands from your local machine against your cluster, you must be connected to the same private VLAN that your Kubernetes master is on. To expose your apps to the internet, your worker nodes must be connected to a public VLAN so that incoming network traffic can be forwarded to your apps. To run `kubectl` commands against your cluster over the internet, you can use the public service endpoint. With the public service endpoint, network traffic is routed over the public VLAN and is secured by using an OpenVPN tunnel. To use private service endpoints, you must enable your account for VRF and service endpoints, which requires opening an  IBM Cloud infrastructure (SoftLayer) support case. For more information, see [Overview of VRF on {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [Enabling your account for service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
     *  **Non-VRF**: If you don’t want to or cannot enable VRF for your account, your worker nodes can automatically connect to the Kubernetes master over the public network through the [public service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public). To secure this communication, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN connection between the Kubernetes master and the worker node when the cluster is created. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 
@@ -242,13 +242,13 @@ To create a cluster:
       **Note**:
         * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
         * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
-        * Free clusters are automatically created in the the default resource group.
+        * Free clusters are automatically created in the default resource group.
       ```
       ibmcloud target -g <resource_group_name>
       ```
       {: pre}
 
-    4. **Free clusters**: If you want to create a free cluster in a specific region, you must target that region by running `ibmcloud ks region-set`.
+    4. **Free clusters**: If you want to create a free cluster in a specific region, you must target that region by running `ibmcloud ks region-set`. You can create a free cluster in `ap-south`, `eu-central`, `uk-south`, or `us-south`. The cluster is created in a zone within that region.
 
 4.  Create a cluster. Standard clusters can be created in any region and available zone. Free clusters can be created in the region that you target with the `ibmcloud ks region-set` command, but you cannot select the zone.
 
