@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-02"
 
 keywords: kubernetes, iks, node scaling
 
@@ -462,7 +462,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     expander: least-waste
     image:
       pullPolicy: Always
-      repository: registry.ng.bluemix.net/armada-master/ibmcloud-cluster-autoscaler
+      repository: icr.io/iks-charts/ibm-iks-cluster-autoscaler 
       tag: dev1
     maxNodeProvisionTime: 120m
     resources:
@@ -507,7 +507,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <tr>
     <td>`image.repository` parameter</td>
     <td>Specify the cluster autoscaler Docker image to use.</td>
-    <td>`registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler`</td>
+    <td>`icr.io/iks-charts/ibm-iks-cluster-autoscaler`</td>
     </tr>
     <tr>
     <td>`image.pullPolicy` parameter</td>
