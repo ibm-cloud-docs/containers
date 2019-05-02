@@ -23,7 +23,7 @@ subcollection: containers
 {:download: .download}
 
 
-# Deploying apps in clusters
+# Deploying Kubernetes-native apps in clusters
 {: #app}
 
 You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users. Because Kubernetes is an extensible container orchestration platform that does not mandate a specific language or app, you can run a variety of workloads such as stateless, stateful, and data-processing apps that are written in the language of your choice.
