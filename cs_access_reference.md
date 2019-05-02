@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-02"
 
 keywords: kubernetes, iks
 
@@ -1149,7 +1149,7 @@ The following table shows the infrastructure permissions required to complete gr
   <li>Cancel Server</li></ul>
 <strong>Devices</strong>:<ul>
   <li>View Hardware Details</li>
-  <li>IPMI Remote Management/li>
+  <li>IPMI Remote Management</li>
   <li>OS Reloads and Rescue Kernel</li>
   <li>View Virtual Server Details</li></ul>
 <strong>Network</strong>:<ul>
