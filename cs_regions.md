@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-02"
 
 keywords: kubernetes, iks
 
@@ -49,7 +49,7 @@ To list available {{site.data.keyword.containerlong_notm}} locations, use the `i
 
 The following image is used as an example to explain how {{site.data.keyword.containerlong_notm}} locations are organized.
 
-![{{site.data.keyword.containerlong_notm}} locations organization](images/cs_regions_hierarchy.png)
+![Organization of {{site.data.keyword.containerlong_notm}} locations](images/cs_regions_hierarchy.png)
 
 <table summary="The table shows organization of {{site.data.keyword.containerlong_notm}} locations. Rows are to be read from the left to right, with the location type in column one, an example of the type in column two, and the description in column three.">
 <caption>Organization of {{site.data.keyword.containerlong_notm}} locations.</caption>
@@ -340,6 +340,16 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
     *   [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability).
 
 3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
+
+### Free clusters
+{: #regions_free}
+
+Free clusters are limited to specific locations.
+{: shortdesc}
+
+**Creating a free cluster in the CLI**: Before you create a free cluster, you must target a region by running `ibmcloud ks region-set`. Your cluster is created in a metro within the region that you target: the Sydney metro in `ap-south`, the Frankfurt metro in `eu-central`, the London metro in `uk-south`, or the Dallas matro in `us-south`. Note that you cannot specify a zone within the metro.
+
+**Creating a free cluster in the {{site.data.keyword.Bluemix_notm}} console**: When you use the console, you can select a geography and a metro location in the geography. You can select the Dallas metro in North America, the Frankfurt or London metros in Europe, or the Sydney metro in Asia Pacific. Your cluster is created in a zone within the metro you choose.
 
 <br />
 
