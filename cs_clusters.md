@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-02"
+lastupdated: "2019-05-03"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -678,7 +678,6 @@ To add a zone with worker nodes to your worker pool:
   Worker Zones:                   dal10, dal12
   Version:                        1.11.3_1524
   Owner:                          owner@email.com
-  Monitoring Dashboard:           ...
   Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
   Resource Group Name:            Default
   ```
@@ -732,7 +731,7 @@ If you have a cluster that was created after worker pools were introduced, you c
 Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might have occurred.
 {:shortdesc}
 
-To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, owner, and monitoring dashboard, use the `ibmcloud ks cluster-get <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
+To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, and owner, use the `ibmcloud ks cluster-get <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 
 You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).
 

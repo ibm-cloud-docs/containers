@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-02"
+lastupdated: "2019-05-03"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1587,7 +1587,6 @@ Workers:                        6
 Worker Zones:                   dal10, dal12
 Version:                        1.11.3_1524
 Owner:                          owner@email.com
-Monitoring Dashboard:           ...
 Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
 Resource Group Name:            Default
 
