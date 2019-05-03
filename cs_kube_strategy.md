@@ -230,7 +230,8 @@ The number of clusters that you create depends on your workload, company policie
 <dt>Organize your Kubernetes objects with labels</dt>
   <dd><p>To organize and select your Kubernetes resources such as `pods` or `nodes`, [use Kubernetes labels ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). By default, {{site.data.keyword.containerlong_notm}} applies some labels, including `arch`, `os`, `region`, `zone`, and `machine-type`.</p>
   <p>Example use cases for labels include [limiting network traffic to edge worker nodes](/docs/containers?topic=containers-edge), [deploying an app to a GPU machine](/docs/containers?topic=containers-app#gpu_app), and [restricting your app workloads![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) to run on worker nodes that meet certain machine type or SDS capabilities, such as bare metal worker nodes. To see what labels are already applied to a resource, use the <code>kubectl get</code> command with the <code>--show-labels</code> flag. For example:</p>
-  <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p></dd>
+  <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p>
+  To apply labels to worker nodes, [create your worker pool](/docs/containers?topic=containers-clusters#add_pool) with labels or [update an existing worker pool](/docs/containers?topic=containers-clusters#worker_pool_labels)</dd>
 </dl>
 
 

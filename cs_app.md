@@ -243,6 +243,7 @@ metadata:
   <dd><p>With [labels](/docs/containers?topic=containers-strategy#deploy_organize), you can mark different types of resources in your cluster with the same `key: value` pair. Then, you can specify the selector to match the label so that you can build upon these other resources. If you plan to expose your app publicly, you must use a label that matches the selector that you specify in the service. In the example, the deployment spec uses the template that matches the label `app: wasliberty.`</p>
   <p>You can retrieve objects that are labeled in your cluster, such as to see `staging` or `production` components. For example, list all resources with an `env: production` label across all namespaces in the cluster. Note that you need access to all namespaces to run this command.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>For more information about labels, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
+  <li>To apply labels to worker nodes, [create your worker pool](/docs/containers?topic=containers-clusters#add_pool) with labels or [update an existing worker pool](/docs/containers?topic=containers-clusters#worker_pool_labels).</li>
   <li>For a more detailed example, see [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-app#node_affinity).</li></ul>
   <p><pre class="codeblock"><code>selector:
   matchLabels:

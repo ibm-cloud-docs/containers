@@ -797,6 +797,50 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
 <br />
 
 
+## Adding labels to existing worker pools
+{: #worker_pool_labels}
+
+You can assign a worker pool a label when you [create the worker pool](#add_pool), or later by following these steps. After a worker pool is labeled, all existing and subsequent worker nodes get this label. You might use labels to deploy specific workloads only to worker nodes in the worker pool, such as [edge nodes for load balancer network traffic](/docs/containers?topic=containers-edge).
+{: shortdesc}
+
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  List the worker pools in your cluster.
+    ```
+    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+2.  To label the worker pool with a `key=value` label, use the [PATCH worker pool API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool). Format the body of the request as in the following JSON example. 
+    ```
+    {
+      "labels": {"key":"value"},
+      "state": "labels"
+    }
+    ```
+    {: codeblock}
+3.  Verify that the worker pool and worker node have the `key=value` label that you assigned.
+    *   To check worker pools:
+        ```
+        ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+        ```
+        {: pre}
+    *   To check worker nodes:
+        1.  List the worker nodes in the worker pool and note the **Private IP**.
+            ```
+            ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+            ```
+            {: pre}
+        2.  Review the **Labels** field of the output.
+            ```
+            kubectl describe node <worker_node_private_IP>
+            ```
+            {: pre}
+
+After you label your worker pool, you can use the [label in your app deployments](/docs/containers?topic=containers-app#label) so that your workloads run on only these worker nodes, or [taints ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/concepts/configuration/taint-and-toleration/) to prevent deployments from running on these worker nodes.
+
+<br />
+
+
 ## Removing clusters
 {: #remove}
 
