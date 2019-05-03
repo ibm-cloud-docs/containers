@@ -57,8 +57,7 @@ To label worker nodes as edge nodes:
         "labels": {"dedicated":"edge"},
         "state": "labels"
       }
-      </pre>
-  </p>
+      </pre></p>
 
 2. Verify that the worker pool and worker nodes have the `dedicated=edge` label.
   * To check the worker pool:
