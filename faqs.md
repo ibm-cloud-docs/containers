@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-03"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -81,6 +81,8 @@ For more information about how to achieve high availability for your cluster, se
 You can use built-in security features in {{site.data.keyword.containerlong_notm}} to protect the components in your cluster, your data, and app deployments to ensure security compliance and data integrity. Use these features to secure your Kubernetes API server, etcd data store, worker node, network, storage, images, and deployments against malicious attacks. You can also leverage built-in logging and monitoring tools to detect malicious attacks and suspicious usage patterns.
 
 For more information about the components of your cluster and how you can secure each component, see [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security).
+
+
 
 ## Where can I find a list of security bulletins that affect my cluster?
 {: #faq_security_bulletins}
