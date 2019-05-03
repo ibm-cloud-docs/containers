@@ -1831,11 +1831,13 @@ ibmcloud ks kube-versions [--json] [-s]
 ### ibmcloud ks cluster-service-bind
 {: #cs_cluster_service_bind}
 
-Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
+Create service credentials of an {{site.data.keyword.Bluemix_notm}} service and store these credentials in a Kubernetes secret in your cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
 {: shortdesc}
 
+For more information about service binding and what services you can add to your cluster, see [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding). 
+
 ```
-ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [--key SERVICE_INSTANCE_KEY] [--role IAM_ROLE] [-s]
+ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE [--key SERVICE_INSTANCE_KEY] [--role IAM_SERVICE_ROLE] [-s]
 ```
 {: pre}
 
@@ -1848,17 +1850,17 @@ ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>--key <em>SERVICE_INSTANCE_KEY</em></code></dt>
-   <dd>The name or GUID of the service key. This value is optional. Include this value if you want to use an existing service key instead of creating a new service key.</dd>
+   <dd>The name or GUID of an existing service key. This value is optional. When you use the `service-binding` command, new service credentials are automatically created for your service instance and assigned the IAM **Writer** service access role for IAM-enabled services. If you want to use an existing service key that you created earlier, use this option. If you define a service key, you cannot set the `--role` option at the same time, because your service keys are already created with a specific IAM service access role. </dd>
 
    <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-   <dd>The name of the Kubernetes namespace. This value is required.</dd>
+   <dd>The name of the Kubernetes namespace where you want to create the Kubernetes secret for your service credentials. This value is required.</dd>
 
-   <dt><code>--service <em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>The ID of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the ID, run <code>ibmcloud service show <service_instance_name> --guid</code>. This value is required. </dd>
+   <dt><code>--service <em>SERVICE_INSTANCE</em></code></dt>
+   <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name, run <code>ibmcloud service list</code> for Cloud Foundry services, and <code>ibmcloud resource service-instances</code> for IAM-enabled services. This value is required. </dd>
 
-   <dt><code>--role <em>IAM_ROLE</em></code></dt>
-   <dd>The {{site.data.keyword.Bluemix_notm}} IAM role that you want the service key to have. The default value is the IAM service role `Writer`. Do not include this value if you are using an existing service key or for services that are not IAM-enabled, such as Cloud Foundry services.<br><br>
-   To list available roles for the service, run `ibmcloud iam roles --service <service_name>`. The service name is the name of the service in the catalog which you can get by running `ibmcloud catalog search`.</dd>
+   <dt><code>--role <em>IAM_SERVICE_ROLE</em></code></dt>
+   <dd>The {{site.data.keyword.Bluemix_notm}} IAM role that you want the service key to have. This value is optional and can be used for IAM-enabled services only. If you do not set this option, your service credentials are automatically created and assigned the IAM **Writer** service access role. If you want to use existing service keys by specifying the `--service` option, do not include this option.<br><br>
+   To list available roles for the service, run `ibmcloud iam roles --service <service_name>`. The service name is the name of the service in the catalog which you can get by running `ibmcloud catalog search`.  </dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1880,7 +1882,7 @@ Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-service-unbind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [-s]
+ibmcloud ks cluster-service-unbind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE [-s]
 ```
 {: pre}
 
@@ -1898,8 +1900,8 @@ When you remove an {{site.data.keyword.Bluemix_notm}} service, the service crede
    <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>The name of the Kubernetes namespace. This value is required.</dd>
 
-   <dt><code>--service <em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>The ID of the {{site.data.keyword.Bluemix_notm}} service instance that you want to remove. To find the ID of the service instance, run `ibmcloud ks cluster-services <cluster_name_or_ID>`. This value is required.</dd>
+   <dt><code>--service <em>SERVICE_INSTANCE</em></code></dt>
+   <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to remove. To find the name of the service instance, run `ibmcloud ks cluster-services --cluster <cluster_name_or_ID>`. This value is required.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
