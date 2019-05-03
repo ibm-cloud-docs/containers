@@ -52,7 +52,7 @@ To label worker nodes as edge nodes:
 
 1. [Create a new worker pool](/docs/containers?topic=containers-clusters#add_pool) that spans all zones in your cluster and has at least 2 workers per zone. In the `ibmcloud ks worker-pool-create` command, include the `--labels dedicated=edge` flag to label all worker nodes in the pool. All subsequent Ingress and load balancers are deployed to an edge worker node in this pool.
   <p class="tip">If you want to use an existing worker pool, the pool must span all zones in your cluster and have at least 2 workers per zone. You can label the worker pool with `dedicated=edge` by using the [PATCH worker pool API](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool). In the body of the request, pass in the following JSON. After the worker pool is marked with `dedicated=edge`, all existing and subsequent worker nodes get this label, and Ingress and load balancers are deployed to an edge worker node.
-      <pre class="codeblock"
+      <pre class="codeblock">
       {
         "labels": {"dedicated":"edge"},
         "state": "labels"
