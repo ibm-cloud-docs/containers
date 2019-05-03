@@ -52,13 +52,12 @@ To label worker nodes as edge nodes:
 
 1. [Create a new worker pool](/docs/containers?topic=containers-clusters#add_pool) that spans all zones in your cluster and has at least 2 workers per zone. In the `ibmcloud ks worker-pool-create` command, include the `--labels dedicated=edge` flag to label all worker nodes in the pool. All subsequent Ingress and load balancers are deployed to an edge worker node in this pool.
   <p class="tip">If you want to use an existing worker pool, the pool must span all zones in your cluster and have at least 2 workers per zone. You can label the worker pool with `dedicated=edge` by using the [PATCH worker pool API](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool). In the body of the request, pass in the following JSON. After the worker pool is marked with `dedicated=edge`, all existing and subsequent worker nodes get this label, and Ingress and load balancers are deployed to an edge worker node.
-      ```
+      <pre class="codeblock"
       {
         "labels": {"dedicated":"edge"},
         "state": "labels"
       }
-      ```
-      {: codeblock}
+      </pre>
   </p>
 
 2. Verify that the worker pool and worker nodes have the `dedicated=edge` label.
@@ -115,9 +114,9 @@ To label worker nodes as edge nodes:
     kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-27pv4    0 (0%)        0 (0%)        0 (0%)           0 (0%)
     kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-s77z6    0 (0%)        0 (0%)        0 (0%)           0 (0%)
     ```
-    {: pre}
+    {: screen}
 
-You labeled worker nodes with `dedicated=edge` and redeployed all of the existing load balancers and Ingress to the edge worker nodes. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to NodePorts on worker nodes](/docs/containers?topic=containers-network_policies#block_ingress).
+</br>You labeled worker nodes with `dedicated=edge` and redeployed all of the existing load balancers and Ingress to the edge worker nodes. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to NodePorts on worker nodes](/docs/containers?topic=containers-network_policies#block_ingress).
 
 <br />
 
@@ -145,7 +144,7 @@ To prevent other workloads from running on edge worker nodes:
 
 2. Verify that your edge nodes are tainted.
   ```
-  kubectl describe nodes -l dedicated=edge | egrep "Taint|Hostname"
+  kubectl describe nodes -l dedicated=edge | grep "Taint|Hostname"
   ```
   {: pre}
 

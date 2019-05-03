@@ -84,7 +84,7 @@ To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to ev
 <br />
 
 
-## Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.loganalysisfull_notm}} (deprecated)
+## Deprecated: Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.loganalysisfull_notm}}
 {: #loga}
 
 Previously, you could create a logging configuration to forward logs that are collected by the Fluentd cluster component to {{site.data.keyword.loganalysisfull_notm}}. As of 30 April 2019, {{site.data.keyword.loganalysisfull_notm}} is deprecated. You cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019.
@@ -690,7 +690,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
   <dt>Kubernetes dashboard</dt>
     <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>
 
-  <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.Bluemix_notm}} console and output of <code>ibmcloud ks cluster-get</code>/dt>
+  <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.Bluemix_notm}} console and output of <code>ibmcloud ks cluster-get</code></dt>
     <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view metrics, go to the **Kubernetes** > **Clusters** dashboard, select a cluster, and click the **Metrics** link.
   <p class="deprecated">The link to the metrics dashboard in the cluster overview page of the {{site.data.keyword.Bluemix_notm}} console and in the output of `ibmcloud ks cluster-get` is deprecated. Clusters created after 03 May 2019 are not created with the metrics dashboard link. Clusters created on or before 03 May 2019 continue to have the link to the metrics dashboard.</p></dd>
 
