@@ -90,7 +90,11 @@ To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to ev
 Previously, you could create a logging configuration to forward logs that are collected by the Fluentd cluster component to {{site.data.keyword.loganalysisfull_notm}}. As of 30 April 2019, {{site.data.keyword.loganalysisfull_notm}} is deprecated. You cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019.
 {: deprecated}
 
-To continue collecting logs for your cluster, you must [set up {{site.data.keyword.la_full_notm}}](#logdna) or [change your configuration to forward logs to an external server](#configuring).
+To continue collecting logs for your cluster, you have the following options:
+* Set up {{site.data.keyword.la_full_notm}}. For more information, see [Transitioning to {{site.data.keyword.la_full_notm}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-transition).
+* [Change your configuration to forward logs to an external server](#configuring).
+
+For information about existing {{site.data.keyword.loganalysisshort_notm}} instances, see the [{{site.data.keyword.loganalysisshort_notm}} documentation](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-containers_kube_other_logs).
 
 <br />
 
