@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-02"
+lastupdated: "2019-05-03"
 
 keywords: kubernetes, iks
 
@@ -1164,9 +1164,9 @@ The following table shows the infrastructure permissions required to complete gr
   <li>Create and manage storage infrastructure resources.</li></ul></td>
 <td>
 <strong>Account</strong>:<ul>
-  <li>Add/Upgrade Storage (StorageLayer)</li></ul></td>
+  <li>Add/Upgrade Storage (StorageLayer)</li></ul>
 <strong>Services</strong>:<ul>
-  <li>Storage Manage</li></ul>
+  <li>Storage Manage</li></ul></td>
 </tr>
 <tr>
 <td>
