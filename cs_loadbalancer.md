@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-02"
+lastupdated: "2019-05-03"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -70,10 +70,10 @@ When you expose an app with an NLB service, your app is automatically made avail
 <br />
 
 
-## Comparison of version 1.0 and 2.0 NLBs
+## Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs
 {: #comparison}
 
-When you create an NLB, you can choose a version 1.0 or 2.0 NLB. Note that version 2.0 NLBs are in beta.
+When you create an NLB, you can choose a version 1.0 NLB, which performs basic oad balancing, or version 2.0 NLB, which performs direct server return (DSR) load balancing. Note that version 2.0 NLBs are in beta.
 {: shortdesc}
 
 **How are version 1.0 and 2.0 NLBs similar?**
@@ -82,14 +82,14 @@ Version 1.0 and 2.0 NLBs are both Layer 4 load balancers that live only in the L
 
 **How are version 1.0 and 2.0 NLBs different?**
 
-When a client sends a request to your app, the NLB routes request packets to the worker node IP address where an app pod exists. Version 1.0 NLBs use network address translation (NAT) to rewrite the request packet's source IP address to the IP of worker node where a load balancer pod exists. When the worker node returns the app response packet, it uses that worker node IP where the NLB exists. The NLB must then send the response packet to the client. To prevent the IP address from being rewritten, you can [enable source IP preservation](#node_affinity_tolerations). However, source IP preservation requires load balancer pods and app pods to run on the same worker so that the request doesn't have to be forwarded to another worker. You must add node affinity and tolerations to app pods.
+When a client sends a request to your app, the NLB routes request packets to the worker node IP address where an app pod exists. Version 1.0 NLBs use network address translation (NAT) to rewrite the request packet's source IP address to the IP of worker node where a load balancer pod exists. When the worker node returns the app response packet, it uses that worker node IP where the NLB exists. The NLB must then send the response packet to the client. To prevent the IP address from being rewritten, you can [enable source IP preservation](#node_affinity_tolerations). However, source IP preservation requires load balancer pods and app pods to run on the same worker so that the request doesn't have to be forwarded to another worker. You must add node affinity and tolerations to app pods. For more information about basic load balancing with version 1.0 NLBs, see [v1.0: Components and architecture of basic load balancing](#v1_planning).
 
-As opposed to version 1.0 NLBs, version 2.0 NLBs don't use NAT when forwarding requests to app pods on other workers. When an NLB 2.0 routes a client request, it uses IP over IP (IPIP) to encapsulate the original request packet into another, new packet. This encapsulating IPIP packet has a source IP of the worker node where the load balancer pod is, which allows the original request packet to preserve the client IP as its source IP address. The worker node then uses direct server return (DSR) to send the app response packet to the client IP. The response packet skips the NLB and is sent directly to the client, decreasing the amount of traffic that the NLB must handle.
+As opposed to version 1.0 NLBs, version 2.0 NLBs don't use NAT when forwarding requests to app pods on other workers. When an NLB 2.0 routes a client request, it uses IP over IP (IPIP) to encapsulate the original request packet into another, new packet. This encapsulating IPIP packet has a source IP of the worker node where the load balancer pod is, which allows the original request packet to preserve the client IP as its source IP address. The worker node then uses direct server return (DSR) to send the app response packet to the client IP. The response packet skips the NLB and is sent directly to the client, decreasing the amount of traffic that the NLB must handle. For more information about DSR load balancing with version 2.0 NLBs, see [v2.0: Components and architecture of DSR load balancing](#planning_ipvs).
 
 <br />
 
 
-## v1.0: Components and architecture
+## v1.0: Components and architecture of basic load balancing
 {: #v1_planning}
 
 The TCP/UDP network load balancer (NLB) 1.0 uses Iptables, a Linux kernel feature, to load balance requests across an app's pods.
@@ -658,7 +658,7 @@ Before you create an NLB 2.0, you must complete the following prerequisite steps
        * For type of support, select **Technical**.
        * For category, select **VLAN Spanning**.
        * For subject, enter **Public VLAN Network Question.**
-    4. Add the following information to the description: "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145". Note that if you want to allow capacity aggregation on only specific VLANs, such as the public VLANs for one cluster only, you can specify those VLAN IDs in the description.
+    4. Add the following information to the description: "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145". Note that if you want to allow capacity aggregation on specific VLANs, such as the public VLANs for one cluster only, you can specify those VLAN IDs in the description.
     5. Click **Submit**.
 
 3. Enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure (SoftLayer) account. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the NLB 2.0 can route packets to various subnets in the account.
