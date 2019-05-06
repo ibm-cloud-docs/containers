@@ -1859,7 +1859,7 @@ ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
    <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name, run <code>ibmcloud service list</code> for Cloud Foundry services, and <code>ibmcloud resource service-instances</code> for IAM-enabled services. This value is required. </dd>
 
    <dt><code>--role <em>IAM_SERVICE_ROLE</em></code></dt>
-   <dd>The {{site.data.keyword.Bluemix_notm}} IAM role that you want the service key to have. This value is optional and can be used for IAM-enabled services only. If you do not set this option, your service credentials are automatically created and assigned the IAM **Writer** service access role. If you want to use existing service keys by specifying the `--service` option, do not include this option.<br><br>
+   <dd>The {{site.data.keyword.Bluemix_notm}} IAM role that you want the service key to have. This value is optional and can be used for IAM-enabled services only. If you do not set this option, your service credentials are automatically created and assigned the IAM **Writer** service access role. If you want to use existing service keys by specifying the `--key` option, do not include this option.<br><br>
    To list available roles for the service, run `ibmcloud iam roles --service <service_name>`. The service name is the name of the service in the catalog which you can get by running `ibmcloud catalog search`.  </dd>
 
    <dt><code>-s</code></dt>
