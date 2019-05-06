@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-06"
 
 keywords: kubernetes, iks
 
@@ -192,7 +192,7 @@ To list available portable public IP addresses:
     ```
     {: pre}
 
-    The creation of this service fails because the Kubernetes master cannot find the specified NLB IP address in the Kubernetes configmap. When you run this command, you can see the error message and the list of available public IP addresses for the cluster.
+    The creation of this service fails because the Kubernetes master cannot find the specified NLB IP address in the Kubernetes configmap. When you run this command, you can see the error message and a list of available public IP addresses for the cluster.
 
     ```
     Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IP addresses are available: <list_of_IP_addresses>

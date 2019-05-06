@@ -34,7 +34,7 @@ Review our partners and the benefits of each solution that they provide. To find
 ## LogDNA
 {: #logdna-partner}
 
-{site.data.keyword.la_full_notm}} provides [LogDNA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://logdna.com/) as a third-party service that you can use to add intelligent logging capabilities to your cluster and apps. 
+{{site.data.keyword.la_full_notm}} provides [LogDNA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://logdna.com/) as a third-party service that you can use to add intelligent logging capabilities to your cluster and apps. 
 
 ### Benefits
 {: #logdna-benefits}
@@ -44,16 +44,16 @@ Review the following table to find a list of key benefits that you can get by us
 
 |Benefit|Description|
 |-------------|------------------------------|
-|Centralized log management and log analysis|When you configure your cluster as a log source, logDNA automatically starts collecting logging information for your worker nodes, pods, apps, and network. Your logs are automatically parsed, indexed, tagged, and aggregated by logDNA and visualized in the LogDNA dashboard so that you can easily dive into your cluster resources. You can use the built-in graphing tool to visualize most common error codes or log entries. |
-|Easy findability with Google-like search syntax|LogDNA uses Google-like search syntax that supports standard terms, `AND` and `OR` operations, and lets you exclude or combine search terms to help you find your logs more easily. With smart indexing of logs, you can jump to a specific log entries in any moment in time. |
-|Military-grade encryption|LogDNA automatically encrypts your logs to secure your logs during transit and at rest. |
+|Centralized log management and log analysis|When you configure your cluster as a log source, LogDNA automatically starts collecting logging information for your worker nodes, pods, apps, and network. Your logs are automatically parsed, indexed, tagged, and aggregated by LogDNA and visualized in the LogDNA dashboard so that you can easily dive into your cluster resources. You can use the built-in graphing tool to visualize most common error codes or log entries. |
+|Easy findability with Google-like search syntax|LogDNA uses Google-like search syntax that supports standard terms, `AND` and `OR` operations, and lets you exclude or combine search terms to help you find your logs more easily. With smart indexing of logs, you can jump to a specific log entry in any moment in time. |
+|Encryption in transit and at rest|LogDNA automatically encrypts your logs to secure your logs during transit and at rest. |
 |Custom alerts and log views|You can use the dashboard to find the logs that match your search criteria, save these logs in a view, and share this view with other users to simplify debugging across team members. You can also use this view to create an alert that you can send to downstream systems, like PagerDuty, Slack, or email.   |
 |Out-of-the-box and custom dashboards|You can choose between a variety of existing dashboards or create your own dashboard to visualize logs in the way you need it. |
 
 ### Integration with {{site.data.keyword.containerlong_notm}}
 {: #logdna-integration}
 
-LogDNA is provided by {{site.data.keyword.la_full_notm}}, an {{site.data.keyword.Bluemix_notm}} platform service that you can use with your cluster and is operated by LogDNA in partnership with IBM. 
+LogDNA is provided by {{site.data.keyword.la_full_notm}}, an {{site.data.keyword.Bluemix_notm}} platform service that you can use with your cluster. {{site.data.keyword.la_full_notm}} is operated by LogDNA in partnership with IBM. 
 {: shortdesc}
 
 To use LogDNA in your cluster, you must provision an instance of {{site.data.keyword.la_full_notm}} in your {{site.data.keyword.Bluemix_notm}} account and configure your Kubernetes clusters as a log source. After the cluster is configured, logs are automatically collected and forwarded to your {{site.data.keyword.la_full_notm}} service instance. You can use the {{site.data.keyword.la_full_notm}} dashboard to access your logs.   
@@ -63,7 +63,7 @@ For more information, see [Managing Kubernetes cluster logs with {{site.data.key
 ### Billing and support 
 {: #logdna-billing-support}
 
-{{site.data.keyword.la_full_notm}} is fully integrated into the {{site.data.keyword.Bluemix_notm}} support system. If you run into an issue with using {{site.data.keyword.la_full_notm}}, post a question in the `logdna-on-iks` channel in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/). Log in to Slack by using your IBMid. If you do not use an IBMid for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation to this Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/). You can also open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support). 
+{{site.data.keyword.la_full_notm}} is fully integrated into the {{site.data.keyword.Bluemix_notm}} support system. If you run into an issue with using {{site.data.keyword.la_full_notm}}, post a question in the `logdna-on-iks` channel in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/), or open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support). Log in to Slack by using your IBMid. If you do not use an IBMid for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation to this Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/). 
 
 ## Sysdig
 {: #sydig-partner}
@@ -88,7 +88,7 @@ Review the following table to find a list of key benefits that you can get by us
 ### Integration with {{site.data.keyword.containerlong_notm}}
 {: #sysdig-integration}
 
-Sysdig Monitor is provided by {{site.data.keyword.mon_full_notm}}, an {{site.data.keyword.Bluemix_notm}} platform service that you can use with your cluster and is operated by Sysdig in partnership with IBM. . 
+Sysdig Monitor is provided by {{site.data.keyword.mon_full_notm}}, an {{site.data.keyword.Bluemix_notm}} platform service that you can use with your cluster. {{site.data.keyword.mon_full_notm}} is operated by Sysdig in partnership with IBM. 
 {: shortdesc}
 
 To use Sysdig Monitor in your cluster, you must provision an instance of {{site.data.keyword.mon_full_notm}} in your {{site.data.keyword.Bluemix_notm}} account and configure your Kubernetes clusters as a metrics source. After the cluster is configured, metrics are automatically collected and forwarded to your {{site.data.keyword.mon_full_notm}} service instance. You can use the {{site.data.keyword.mon_full_notm}} dashboard to access your metrics.   
@@ -100,7 +100,7 @@ For more information, see [Analyze metrics for an app that is deployed in a Kube
 
 Because Sysdig Monitor is provided by {{site.data.keyword.mon_full_notm}}, your usage is included in the {{site.data.keyword.Bluemix_notm}} bill for platform services. For pricing information, review available plans in the [{{site.data.keyword.Bluemix_notm}} catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/observe/monitoring/create). 
 
-{{site.data.keyword.mon_full_notm}} is fully integrated into the {{site.data.keyword.Bluemix_notm}} support system. If you run into an issue with using {{site.data.keyword.mon_full_notm}}, post a question in the `sysdig-monitoring` channel in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/). Log in to Slack by using your IBMid. If you do not use an IBMid for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation to this Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/). You can also open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support). 
+{{site.data.keyword.mon_full_notm}} is fully integrated into the {{site.data.keyword.Bluemix_notm}} support system. If you run into an issue with using {{site.data.keyword.mon_full_notm}}, post a question in the `sysdig-monitoring` channel in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/), or open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support). Log in to Slack by using your IBMid. If you do not use an IBMid for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation to this Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/). 
 
 ## Portworx
 {: #portworx-parter}
@@ -121,16 +121,16 @@ Review the following table to find a list of key benefits that you can get by us
 |-------------|------------------------------|
 |Cloud native storage and data management for stateful apps|Portworx aggregates available local storage that is attached to your worker nodes and that can vary in size or type, and creates a unified persistent storage layer for containerized databases or other stateful apps that you want to run in the cluster. By using Kubernetes persistent volume claims (PVC), you can add local persistent storage to your apps to store your data.|
 |Highly available data with volume replication|Portworx automatically replicates data in your volumes across worker nodes and zones in your cluster so that your data can be accessed at all times and that your stateful app can be rescheduled to another worker node in case of a worker node failure or reboot. |
-|Support to run `hyper-converged`|Portworx can be configured to [run `hyper-converged` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/) to ensure that your compute resources and the storage are always placed onto the same worker node. When your app must be rescheduled, Portworx moves your app to a worker node where one of your volume replicas resides to ensure local-disk access speed and best performance for your stateful app. |
+|Support to run `hyper-converged`|Portworx can be configured to run [`hyper-converged` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/) to ensure that your compute resources and the storage are always placed onto the same worker node. When your app must be rescheduled, Portworx moves your app to a worker node where one of your volume replicas resides to ensure local-disk access speed and high performance for your stateful app. |
 |Encrypt data with {{site.data.keyword.keymanagementservicelong_notm}}|You can [set up {{site.data.keyword.keymanagementservicelong_notm}} encryption keys](/docs/containers?topic=containers-portworx#encrypt_volumes) that are secured by FIPS 140-2 Level 2 certified cloud-based hardware security modules (HSMs) to protect the data in your volumes. You can choose between using one encryption key to encrypt all your volumes in a cluster or using one encryption key for each volume. Portworx uses this key to encrypt data at rest and during transit when data is sent to a different worker node.|
-|Built-in snapshots and cloud backups|You can save the current state of a volume and its data by creating a [Portworx snapshot ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/). Snapshots can be stored on your local Portworx cluster or in the Cloud.|
-|Integrated monitoring with Lighthouse|Lighthouse ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/lighthouse/) is an intuitive, graphical tool to help you manage and monitor your Portworx clusters and volume snapshots. With Lighthouse, you can view the health of your Portworx cluster, including the number of available storage nodes, volumes and available capacity, and analyze your data in Prometheus, Grafana, or Kibana.|
+|Built-in snapshots and cloud backups|You can save the current state of a volume and its data by creating a [Portworx snapshot ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/). Snapshots can be stored on your local Portworx cluster or in the cloud.|
+|Integrated monitoring with Lighthouse|[Lighthouse ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/lighthouse/) is an intuitive, graphical tool to help you manage and monitor your Portworx clusters and volume snapshots. With Lighthouse, you can view the health of your Portworx cluster, including the number of available storage nodes, volumes and available capacity, and analyze your data in Prometheus, Grafana, or Kibana.|
 {: caption="Benefits of using Portworx" caption-side="top"}
 
 ### Integration with {{site.data.keyword.containerlong_notm}}
 {: #portworx-integration}
 
-{{site.data.keyword.containerlong}} provides worker node flavors that are optimized for SDS usage and that come with one or more raw, unformatted, and unmounted local disks that you can use to store your data. Portworx offers best performance when you use [SDS worker node machines](/docs/containers?topic=containers-plan_clusters#sds) that come with 10Gbps network speed. However, you can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. 
+{{site.data.keyword.containerlong_notm}} provides worker node flavors that are optimized for SDS usage and that come with one or more raw, unformatted, and unmounted local disks that you can use to store your data. Portworx offers best performance when you use [SDS worker node machines](/docs/containers?topic=containers-plan_clusters#sds) that come with 10Gbps network speed. However, you can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. 
 {: shortdesc}
 
 Portworx is installed by using a [Helm chart](/docs/containers?topic=containers-portworx#install_portworx). When you install the Helm chart, Portworx automatically analyzes the local persistent storage that is available in your cluster and adds the storage to the Portworx storage layer. To add storage from your Portworx storage layer to your apps, you must use [Kubernetes persistent volume claims](/docs/containers?topic=containers-portworx#add_portworx_storage). 
