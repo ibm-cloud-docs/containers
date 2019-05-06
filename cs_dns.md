@@ -25,7 +25,7 @@ lastupdated: "2019-05-06"
 Each service in your {{site.data.keyword.containerlong}} cluster is assigned a Domain Name System (DNS) name that the cluster DNS provider registers to resolve DNS requests. Depending on the Kubernetes version of your cluster, you might choose between Kubernetes DNS (KubeDNS) or [CoreDNS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/). For more information about DNS for services and pods, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
 {: shortdesc}
 
-**What Kubernetes versions support what cluster DNS provider?**<br>
+**Which Kubernetes versions support which cluster DNS provider?**<br>
 
 | Kubernetes Version | Default for new clusters | Description |
 |---|---|---|
