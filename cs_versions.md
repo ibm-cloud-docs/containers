@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-06"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,9 @@ subcollection: containers
 {{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
 
+
+
+
 **Supported Kubernetes versions**:
 *   Latest: 1.13.5
 *   Default: 1.12.7
@@ -41,9 +44,10 @@ subcollection: containers
 *   Deprecated: 1.10
 *   Unsupported: 1.5, 1.7, 1.8, 1.9
 
+
 </br>
 
-**Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have a minimum of 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes, but you cannot create new clusters that use the deprecated version.
+**Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have a minimum of 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes, but you cannot create new clusters that use the deprecated version when the unsupported date is 30 or less days away.
 
 **Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out if your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
 
@@ -53,14 +57,12 @@ If you wait until your cluster is three or more minor versions behind a supporte
 </br>
 
 To check the server version of a cluster, run the following command.
-
 ```
 kubectl version  --short | grep -i server
 ```
 {: pre}
 
 Example output:
-
 ```
 Server Version: v1.12.7+IKS
 ```
@@ -150,6 +152,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>14 Aug 2018</td>
   <td>Jun 2019 `†`</td>
 </tr>
+
 <tr>
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.10](#cs_v110)</td>
@@ -190,6 +193,8 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 </table>
 
 <br />
+
+
 
 
 ## Version 1.13
@@ -428,6 +433,7 @@ The following table shows the actions that you must take after you update the Ku
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.11.
 {: shortdesc}
+
 
 Before you can successfully update a cluster from Kubernetes version 1.9 or earlier to version 1.11, you must follow the steps listed in [Preparing to update to Calico v3](#111_calicov3).
 {: important}

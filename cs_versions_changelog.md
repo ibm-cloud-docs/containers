@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-06"
 
 keywords: kubernetes, iks
 
@@ -29,6 +29,8 @@ subcollection: containers
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components.
 {:shortdesc}
 
+Unless otherwise noted in the changelogs, the {{site.data.keyword.containerlong_notm}} provider version enables Kubernetes APIs and features that are at beta. Kubernetes alpha features, which are subject to change, are disabled.
+
 For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
@@ -43,6 +45,8 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 {: note}
 
 </br>
+
+
 
 ## Version 1.13 changelog
 {: #113_changelog}
@@ -1424,6 +1428,9 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+{: shortdesc}
+
+
 
 ### Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019
 {: #1119_1556}

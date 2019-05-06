@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-06"
 
 ---
 
@@ -29,15 +29,17 @@ Each service in your {{site.data.keyword.containerlong}} cluster is assigned a D
 
 | Kubernetes Version | Default for new clusters | Description |
 |---|---|---|
-| 1.13 and later | CoreDNS | Clusters that are updated to 1.13 from an earlier cluster keep whatever DNS provider they used at the time of the update. If you want to use a different one, [switch the DNS provider](#dns_set). |
+| 1.13 | CoreDNS | Clusters that are updated to 1.13 from an earlier version keep whichever DNS provider they used at the time of the update. If you want to use a different one, [switch the DNS provider](#dns_set). |
 | 1.12 | KubeDNS | To use CoreDNS instead, [switch the DNS provider](#set_coredns). |
 | 1.11 and earlier | KubeDNS | You cannot switch the DNS provider to CoreDNS. |
 {: caption="Default cluster DNS provider by Kubernetes version" caption-side="top"}
 
+
+
 ## Autoscaling the cluster DNS provider
 {: #dns_autoscale}
 
-By default, your {{site.data.keyword.containerlong_notm}} cluster DNS provider includes a deployment to autoscale the DNS pods in response to the number of worker nodes and cores within the cluster. You can finetune the DNS autoscaler parameters by editing the DNS autoscaling configmap. For example, if your apps have heavy usage of the cluster DNS provider, you might need to increase the minimum number of DNS pods to support the app. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/).
+By default, your {{site.data.keyword.containerlong_notm}} cluster DNS provider includes a deployment to autoscale the DNS pods in response to the number of worker nodes and cores within the cluster. You can finetune the DNS autoscaler parameters by editing the DNS autoscaling configmap. For example, if your apps heavily use the cluster DNS provider, you might need to increase the minimum number of DNS pods to support the app. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/).
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -163,8 +165,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Setting the cluster DNS provider to CoreDNS or KubeDNS
 {: #dns_set}
 
-If you have a {{site.data.keyword.containerlong_notm}} cluster that runs Kubernetes version 1.12 or later, you can choose to use Kubernetes DNS (KubeDNS) or CoreDNS as the cluster DNS provider.
+If you have a {{site.data.keyword.containerlong_notm}} cluster that runs Kubernetes version 1.12 or 1.13, you can choose to use Kubernetes DNS (KubeDNS) or CoreDNS as the cluster DNS provider.
 {: shortdesc}
+
+
 
 **Before you begin**:
 1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
