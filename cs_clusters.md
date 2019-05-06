@@ -836,7 +836,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             ```
             {: pre}
 
-After you label your worker pool, you can use the [label in your app deployments](/docs/containers?topic=containers-app#label) so that your workloads run on only these worker nodes, or [taints ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/concepts/configuration/taint-and-toleration/) to prevent deployments from running on these worker nodes.
+After you label your worker pool, you can use the [label in your app deployments](/docs/containers?topic=containers-app#label) so that your workloads run on only these worker nodes, or [taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) to prevent deployments from running on these worker nodes.
 
 <br />
 
