@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-07"
 
 keywords: kubernetes, iks
 
@@ -426,26 +426,168 @@ Update the file system in the existing PV from `ext4` to `XFS`.
 {: #cos_helm_fails}
 
 {: tsSymptoms}
-When you install the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in, the installation fails with the following error:
+When you install the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in, the installation fails with one of the following errors:
 ```
 Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
+```
+{: screen}
+
+```
+Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission denied
 ```
 {: screen}
 
 {: tsCauses}
 When the `ibmc` Helm plug-in is installed, a symlink is created from the `./helm/plugins/helm-ibmc` directory to the directory where the `ibmc` Helm plug-in is located on your local system, which is usually in `./ibmcloud-object-storage-plugin/helm-ibmc`. When you remove the `ibmc` Helm plug-in from your local system, or you move the `ibmc` Helm plug-in directory to a different location, the symlink is not removed.
 
+If you see a `permission denied` error, you do not have the required `read`, `write`, and `execute` permission on the `ibmc.sh` bash file so that you can execute `ibmc` Helm plug-in commands. 
+
 {: tsResolve}
+
+**For symlink errors**: 
+
 1. Remove the {{site.data.keyword.cos_full_notm}} Helm plug-in.
    ```
    rm -rf ~/.helm/plugins/helm-ibmc
    ```
    {: pre}
 
-2. [Install the {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#install_cos).
+2. Follow the [documentation](/docs/containers?topic=containers-object_storage#install_cos) to re-install the `ibmc` Helm plug-in and the {{site.data.keyword.cos_full_notm}} plug-in.
+
+**For permission errors**: 
+
+1. Change the permissions for the `ibmc` plug-in. 
+   ```
+   chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh
+   ```
+   {: pre}
+   
+2. Try out the `ibm` Helm plug-in. 
+   ```
+   helm ibmc --help
+   ```
+   {: pre}
+   
+3. [Continue installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#install_cos). 
+
 
 <br />
 
+
+## Object storage: PVC remains in a pending state
+{: #cos_pvc_pending}
+
+{: tsSymptoms}
+When you create a PVC and you run `kubectl get pvc <pvc_name>`, your PVC remains in a **Pending** state, even after waiting for some time. 
+
+{: tsCauses}
+During the PVC creation and binding, many different tasks are executed by the {{site.data.keyword.cos_full_notm}} plug-in. Each task can fail and cause a different error message.
+
+{: tsResolve}
+
+1. Find the root cause for why the PVC remains in a **Pending** state. 
+   ```
+   kubectl describe pvc <pvc_name> -n <namespace>
+   ```
+   {: pre}
+   
+2. Review common error message descriptions and resolutions.
+   
+   <table>
+   <thead>
+     <th>Error message</th>
+     <th>Description</th>
+     <th>Steps to resolve</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`cannot get credentials: cannot get secret test-secret: secrets "test-secret" not found`</td>
+      <td>The Kubernetes secret that holds your {{site.data.keyword.cos_full_notm}} service credentials does not exist in the same namespace as the PVC or pod. </td>
+      <td>See [PVC or pod creation fails due to not finding the Kubernetes secret](#cos_secret_access_fails).</td>
+    </tr>
+    <tr>
+      <td>`cannot get credentials: Wrong Secret Type.Provided secret of type XXXX.Expected type ibm/ibmc-s3fs`</td>
+      <td>The Kubernetes secret that you created for your {{site.data.keyword.cos_full_notm}} does not include the type `ibm/ibmc-s3fs`</td>
+      <td>Edit the Kubernetes secret that holds your {{site.data.keyword.cos_full_notm}} credentials to add or change the `type` to `ibm/ibmc-s3fs`. </td>
+    </tr>
+    <tr>
+      <td>`Bad value for ibm.io/object-store-endpoint XXXX: scheme is missing. Must be of the form http://<hostname> or https://<hostname>` </br> </br> `Bad value for ibm.io/iam-endpoint XXXX: scheme is missing. Must be of the form http://<hostname> or https://<hostname>`</td>
+      <td>The s3fs API or IAM API endpoint has the wrong format, or the s3fs API endpoint could not be retrieved based on your cluster location.  </td>
+      <td>See [PVC creation fails due to wrong s3fs API endpoint](#cos_api_endpoint_failure).</td>
+    </tr>
+    <tr>
+      <td>`object-path cannot be set when auto-create is enabled`</td>
+      <td>You specified an existing subdirectory in your bucket that you want to mount to your PVC by using the `ibm.io/object-path` annotation. If you set a subdirectory, you must disable the bucket auto-create feature.  </td>
+      <td>In your PVC, set `ibm.io/auto-create-bucket: "false"` and provide the name of the existing bucket in `ibm.io/bucket`.</td>
+    </tr>
+    <tr>
+    <td>`bucket auto-create must be enabled when bucket auto-delete is enabled`</td>
+    <td>In your PVC, you set `ibm.io/auto-delete-bucket: true` to automatically delete your data, the bucket, and the PV when you remove the PVC. This option requires `ibm.io/auto-create-bucket` to be set to <strong>true</strong>, and `ibm.io/bucket` to be set to `""` at the same time.</td>
+    <td>In your PVC, set `ibm.io/auto-create-bucket: true` and `ibm.io/bucket: ""` so that your bucket is automatically created with a name with the format `tmp-s3fs-xxxx`. </td>
+    </tr>
+    <tr>
+    <td>`bucket cannot be set when auto-delete is enabled`</td>
+    <td>In your PVC, you set `ibm.io/auto-delete-bucket: true` to automatically delete your data, the bucket, and the PV when you remove the PVC. This option requires `ibm.io/auto-create-bucket` to be set to <strong>true</strong>, and `ibm.io/bucket` to be set to `""` at the same time.</td>
+    <td>In your PVC, set `ibm.io/auto-create-bucket: true` and `ibm.io/bucket: ""` so that your bucket is automatically created with a name with the format `tmp-s3fs-xxxx`. </td>
+    </tr>
+    <tr>
+    <td>`cannot create bucket using API key without service-instance-id`</td>
+    <td>If you want to use IAM API keys to access your {{site.data.keyword.cos_full_notm}} service instance, you must store the API key and the ID of the {{site.data.keyword.cos_full_notm}} service instance in a Kubernetes secret.  </td>
+    <td>See [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-object_storage#create_cos_secret). </td>
+    </tr>
+    <tr>
+      <td>`object-path “<subdirectory_name>” not found inside bucket <bucket_name>`</td>
+      <td>You specified an existing subdirectory in your bucket that you want to mount to your PVC by using the `ibm.io/object-path` annotation. This subdirectory could not be found in the bucket that you specified. </td>
+      <td>Verify that the subdirectory that you specified in `ibm.io/object-path` exists in the bucket that you specified in `ibm.io/bucket`. </td>
+    </tr>
+        <tr>
+          <td>`BucketAlreadyExists: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.`</td>
+          <td>You set `ibm.io/auto-create-bucket: true` and specified a bucket name at the same time, or you specified a bucket name that already exists in {{site.data.keyword.cos_full_notm}}. Bucket names must be unique across all service instances and regions in {{site.data.keyword.cos_full_notm}}.  </td>
+          <td>Make sure that you set `ibm.io/auto-create-bucket: false` and that you provide a bucket name that is unique in {{site.data.keyword.cos_full_notm}}. If you want to use the {{site.data.keyword.cos_full_notm}} plug-in to automatically create a bucket name for you, set `ibm.io/auto-create-bucket: true` and `ibm.io/bucket: ""`. Your bucket is created with a unique name in the format `tmp-s3fs-xxxx`. </td>
+        </tr>
+        <tr>
+          <td>`cannot access bucket <bucket_name>: NotFound: Not Found`</td>
+          <td></td>
+          <td>See [Cannot access an existing bucket](#cos_access_bucket_fails). </td>
+        </tr>
+        <tr>
+          <td>`Put https://s3-api.dal-us-geo.objectstorage.service.networklayer.com/&ly;bucket_name&gt;: net/http: invalid header field value "AWS4-HMAC-SHA256 Credential=1234a12a123a123a1a123aa1a123a123\n\n/20190412/us-standard/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=12aa1abc123456aabb12aas12aa123456sb123456abc" for key Authorization`</td>
+          <td>The values in your Kubernetes secret are not correctly encoded to base64.  </td>
+          <td>Review the values in your Kubernetes secret and encode every value to base64. You can also use the [`kubectl create secret`](/docs/containers?topic=containers-object_storage#create_cos_secret) command to create a new secret and let Kubernetes automatically encode your values to base64. </td>
+        </tr>
+        <tr>
+          <td>`cannot access bucket <bucket_name>: Forbidden: Forbidden`</td>
+          <td>You specified `ibm.io/auto-create-bucket: false` and tried to access a bucket that you did not create or the service access key or access key ID of your {{site.data.keyword.cos_full_notm}} HMAC credentials are incorrect.  </td>
+          <td>You cannot access a bucket that you did not create. Create a new bucket instead by setting `ibm.io/auto-create-bucket: true` and `ibm.io/bucket: ""`. If you are the owner of the bucket, see [PVC creation fails due to wrong credentials or access denied](#cred_failure) to check your credentials. </td>
+        </tr>
+        <tr>
+          <td>`cannot create bucket <bucket_name>: AccessDenied: Access Denied`</td>
+          <td>You specified `ibm.io/auto-create-bucket: true` to automatically create a bucket in {{site.data.keyword.cos_full_notm}}, but the credentials that you provided in the Kubernetes secret are assigned the **Reader** IAM service access role. This role does not allow bucket creation in {{site.data.keyword.cos_full_notm}}. </td>
+          <td>See [PVC creation fails due to wrong credentials or access denied](#cred_failure). </td>
+        </tr>
+        <tr>
+          <td>`cannot create bucket <bucket_name>: AccessForbidden: Access Forbidden`</td>
+          <td>You specified `ibm.io/auto-create-bucket: true` and provided a name of an existing bucket in `ibm.io/bucket`. In addition the credentials that you provided in the Kubernetes secret are assigned the **Reader** IAM service access role. This role does not allow bucket creation in {{site.data.keyword.cos_full_notm}}. </td>
+          <td>To use an existing bucket, set `ibm.io/auto-create-bucket: false` and provide the name of your existing bucket in `ibm.io/bucket`. To automatically create a bucket by using your existing Kubernetes secret, set `ibm.io/bucket: ""` and follow [PVC creation fails due to wrong credentials or access denied](#cred_failure) to verify the credentials in your Kubernetes secret.</td>
+        </tr>
+        <tr>
+          <td>`cannot create bucket <bucket_name>: SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. For more information, see REST Authentication and SOAP Authentication for details`</td>
+          <td>The {{site.data.keyword.cos_full_notm}} secret access key of your HMAC credentials that you provided in your Kubernetes secret is not correct. </td>
+          <td>See [PVC creation fails due to wrong credentials or access denied](#cred_failure).</td>
+        </tr>
+        <tr>
+          <td>`cannot create bucket <bucket_name>: InvalidAccessKeyId: The AWS Access Key ID you provided does not exist in our records`</td>
+          <td>The {{site.data.keyword.cos_full_notm}} access key ID or the secret access key of your HMAC credentials that you provided in your Kubernetes secret is not correct.</td>
+          <td>See [PVC creation fails due to wrong credentials or access denied](#cred_failure). </td>
+        </tr>
+        <tr>
+          <td>`cannot create bucket <bucket_name>: CredentialsEndpointError: failed to load credentials`</td>
+          <td>The {{site.data.keyword.cos_full_notm}} API key of your IAM credentials and the GUID of your {{site.data.keyword.cos_full_notm}} service instance are not correct.</td>
+          <td>See [PVC creation fails due to wrong credentials or access denied](#cred_failure). </td>
+        </tr>
+  </tbody>
+    </table>
+    
 
 ## Object storage: PVC or pod creation fails due to not finding the Kubernetes secret
 {: #cos_secret_access_fails}
@@ -455,7 +597,7 @@ When you create your PVC or deploy a pod that mounts the PVC, the creation or de
 
 - Example error message for a PVC creation failure:
   ```
-  pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
+  cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
   ```
   {: screen}
 
@@ -505,32 +647,70 @@ CredentialsEndpointError: failed to load credentials
 ```
 {: screen}
 
+```
+InvalidAccessKeyId: The AWS Access Key ID you provided does not exist in our records`
+```
+{: screen}
+
+```
+cannot access bucket <bucket_name>: Forbidden: Forbidden
+```
+{: screen}
+
+
 {: tsCauses}
 The {{site.data.keyword.cos_full_notm}} service credentials that you use to access the service instance might be wrong, or allow only read access to your bucket.
 
 {: tsResolve}
 1. In the navigation on the service details page, click **Service Credentials**.
 2. Find your credentials, then click **View credentials**.
-3. Verify that you use the correct **access_key_id** and **secret_access_key** in your Kubernetes secret. If not, update your Kubernetes secret.
-   1. Get the YAML that you used to create the secret.
-      ```
-      kubectl get secret <secret_name> -o yaml
-      ```
-      {: pre}
+3. In the **iam_role_crn** section, verify that you have the `Writer` or `Manager` role. If you do not have the correct role, you must create new {{site.data.keyword.cos_full_notm}} service credentials with the correct permission. 
+4. If the role is correct, verify that you use the correct **access_key_id** and **secret_access_key** in your Kubernetes secret. 
+5. [Create a new secret with the updated **access_key_id** and **secret_access_key**](/docs/containers?topic=containers-object_storage#create_cos_secret). 
 
-   2. Update the **access_key_id** and **secret_access_key**.
-   3. Update the secret.
-      ```
-      kubectl apply -f secret.yaml
-      ```
-      {: pre}
-
-4. In the **iam_role_crn** section, verify that you have the `Writer` or `Manager` role. If you do not have the correct role, you must [create new {{site.data.keyword.cos_full_notm}} service credentials with the correct permission](/docs/containers?topic=containers-object_storage#create_cos_service). Then, update your existing secret or [create a new secret](/docs/containers?topic=containers-object_storage#create_cos_secret) with your new service credentials.
 
 <br />
 
 
+## Object storage: PVC creation fails due to wrong s3fs or IAM API endpoint
+{: #cos_api_endpoint_failure}
+
+{: tsSymptoms}
+When you create the PVC, the PVC remains in a pending state. After you run the `kubectl describe pvc <pvc_name>` command, you see one of the following error messages: 
+
+```
+Bad value for ibm.io/object-store-endpoint XXXX: scheme is missing. Must be of the form http://<hostname> or https://<hostname>
+```
+{: screen}
+
+```
+Bad value for ibm.io/iam-endpoint XXXX: scheme is missing. Must be of the form http://<hostname> or https://<hostname>
+```
+{: screen}
+
+{: tsCauses}
+The s3fs API endpoint for the bucket that you want to use might have the wrong format, or your cluster is deployed in a location that is supported in {{site.data.keyword.containerlong_notm}} but is not yet supported by the {{site.data.keyword.cos_full_notm}} plug-in. 
+
+{: tsResolve}
+1. Check the s3fs API endpoint that was automatically assigned by the `ibmc` Helm plug-in to your storage classes during the {{site.data.keyword.cos_full_notm}} plug-in installation. The endpoint is based on the location that your cluster is deployed to.  
+   ```
+   kubectl get sc ibmc-s3fs-standard-regional -o yaml | grep object-store-endpoint
+   ```
+   {: pre}
+
+   If the command returns `ibm.io/object-store-endpoint: NA`, your cluster is deployed in a location that is supported in {{site.data.keyword.containerlong_notm}} but is not yet supported by the {{site.data.keyword.cos_full_notm}} plug-in. To add the location to the {{site.data.keyword.containerlong_notm}}, post a question in our public Slack or open an {{site.data.keyword.Bluemix_notm}} support case. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). 
+   
+2. If you manually added the s3fs API endpoint with the `ibm.io/endpoint` annotation or the IAM API endpoint with the `ibm.io/iam-endpoint` annotaion in your PVC, make sure that you added the endpoints in the format `https://<s3fs_api_endpoint>` and `https://<iam_api_endpoint>`. The annotation overwrites the API endpoints that are automatically set by the `ibmc` plug-in in the {{site.data.keyword.cos_full_notm}} storage classes. 
+   ```
+   kubectl describe pvc <pvc_name>
+   ```
+   {: pre}
+   
+<br />
+
+
 ## Object storage: Cannot access an existing bucket
+{: #cos_access_bucket_fails}
 
 {: tsSymptoms}
 When you create the PVC, the bucket in {{site.data.keyword.cos_full_notm}} cannot be accessed. You see an error message similar to the following:
@@ -541,13 +721,14 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: screen}
 
 {: tsCauses}
-You might have used the wrong storage class to access your existing bucket, or you tried to access a bucket that you did not create.
+You might have used the wrong storage class to access your existing bucket, or you tried to access a bucket that you did not create. You cannot access a bucket that you did not create. 
 
 {: tsResolve}
 1. From the [{{site.data.keyword.Bluemix_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/), select your {{site.data.keyword.cos_full_notm}} service instance.
 2. Select **Buckets**.
 3. Review the **Class** and **Location** information for your existing bucket.
 4. Choose the appropriate [storage class](/docs/containers?topic=containers-object_storage#cos_storageclass_reference).
+5. Make sure that you set `ibm.io/auto-create-bucket: false` and that you provide the correct name of your existing bucket. 
 
 <br />
 
@@ -715,7 +896,7 @@ After you set the correct file permissions in your {{site.data.keyword.cos_full_
 Still having issues with your cluster?
 {: shortdesc}
 
--  In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all the available commands and flags.
+-  In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
 -   To see whether {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/status?selected=status).
 -   Post a question in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
     If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
