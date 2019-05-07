@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-02"
 
 keywords: kubernetes, iks
 
@@ -484,7 +484,7 @@ To isolate your cluster on the private network using Calico policies:
     1. Open the `generic-privatehostendpoint.yaml` policy.
     2. Replace `<worker_name>` with the name of a worker node. **Important**: Some worker nodes must follow a different naming structure for Calico policies. You must use the name of a worker node in the format that is returned by the following command.
       ```
-      ibmcloud ks calicoctl get nodes --config==filepath/calicoctl.cfg
+      calicoctl get nodes --config==filepath/calicoctl.cfg
       ```
       {: pre}
     3. Replace `<worker-node-private-ip>` with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`.

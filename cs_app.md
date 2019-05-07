@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-06"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -23,7 +23,7 @@ subcollection: containers
 {:download: .download}
 
 
-# Deploying apps in clusters
+# Deploying Kubernetes-native apps in clusters
 {: #app}
 
 You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users. Because Kubernetes is an extensible container orchestration platform that does not mandate a specific language or app, you can run a variety of workloads such as stateless, stateful, and data-processing apps that are written in the language of your choice.
@@ -243,6 +243,7 @@ metadata:
   <dd><p>With [labels](/docs/containers?topic=containers-strategy#deploy_organize), you can mark different types of resources in your cluster with the same `key: value` pair. Then, you can specify the selector to match the label so that you can build upon these other resources. If you plan to expose your app publicly, you must use a label that matches the selector that you specify in the service. In the example, the deployment spec uses the template that matches the label `app: wasliberty.`</p>
   <p>You can retrieve objects that are labeled in your cluster, such as to see `staging` or `production` components. For example, list all resources with an `env: production` label across all namespaces in the cluster. Note that you need access to all namespaces to run this command.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>For more information about labels, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
+  <li>To apply labels to worker nodes, [create your worker pool](/docs/containers?topic=containers-clusters#add_pool) with labels or [update an existing worker pool](/docs/containers?topic=containers-clusters#worker_pool_labels).</li>
   <li>For a more detailed example, see [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-app#node_affinity).</li></ul>
   <p><pre class="codeblock"><code>selector:
   matchLabels:
@@ -283,7 +284,7 @@ template:
   <p>The default `imagePullPolicy` is set to `IfNotPresent`, which pulls the image only if it does not already exist locally. If you want the image to be pulled every time that the container starts, specify the `imagePullPolicy: Always`.</p>
   <p><pre class="codeblock"><code>containers:
 - name: wasliberty
-  image: registry.bluemix.net/ibmliberty:webProfile8
+  image: icr.io/ibmliberty:webProfile8
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">Port for the app's service</dt>
@@ -513,7 +514,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: wasliberty
-        image: registry.bluemix.net/ibmliberty
+        image: icr.io/ibmliberty
         env:
           - name: VERSION
             valueFrom:
@@ -631,7 +632,7 @@ Do you have so many resources and users in your cluster that the Kubernetes dash
 Before you begin:
 * Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 * To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform role](/docs/containers?topic=containers-users#platform). If you are assigned only a service role but no platform role, [launch the Kubernetes dashboard from the CLI](#db_cli).
-* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
 
@@ -705,7 +706,7 @@ Do you have so many resources and users in your cluster that the Kubernetes dash
 Before you begin:
 
 -   [Install the required CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+-   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 -   To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform role](/docs/containers?topic=containers-users#platform). If you are assigned only a service role but no platform role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 
@@ -735,7 +736,7 @@ After a cluster is created, you can deploy an app into that cluster by using the
 Before you begin:
 
 -   Install the required [CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+-   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To deploy your app:
@@ -769,7 +770,7 @@ When you deploy an app, the app pods indiscriminately deploy to various worker n
 {:shortdesc}
 
 Before you begin:
-*   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To deploy apps to specific worker nodes:
@@ -1076,7 +1077,7 @@ Looking for information about scaling Cloud Foundry applications? Check out [IBM
 {: tip}
 
 Before you begin:
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Heapster monitoring must be deployed in the cluster that you want to autoscale.
 - Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
@@ -1156,7 +1157,7 @@ Want to prevent downtime during your rolling update? Be sure to specify a [readi
 {: tip}
 
 Before you begin:
-*   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Create a [deployment](#app_cli).
 *   Make sure that you have a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-06"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -84,13 +84,17 @@ To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to ev
 <br />
 
 
-## Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.loganalysisfull_notm}} (deprecated)
+## Deprecated: Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.loganalysisfull_notm}}
 {: #loga}
 
 Previously, you could create a logging configuration to forward logs that are collected by the Fluentd cluster component to {{site.data.keyword.loganalysisfull_notm}}. As of 30 April 2019, {{site.data.keyword.loganalysisfull_notm}} is deprecated. You cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019.
 {: deprecated}
 
-To continue collecting logs for your cluster, you must [set up {{site.data.keyword.la_full_notm}}](#logdna) or [change your configuration to forward logs to an external server](#configuring).
+To continue collecting logs for your cluster, you have the following options:
+* Set up {{site.data.keyword.la_full_notm}}. For more information, see [Transitioning to {{site.data.keyword.la_full_notm}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-transition).
+* [Change your configuration to forward logs to an external server](#configuring).
+
+For information about existing {{site.data.keyword.loganalysisshort_notm}} instances, see the [{{site.data.keyword.loganalysisshort_notm}} documentation](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-containers_kube_other_logs).
 
 <br />
 
@@ -680,12 +684,16 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 {: tip}
 
 <dl>
-  <dt>Cluster details page in {{site.data.keyword.Bluemix_notm}}</dt>
-    <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view the cluster details page, go to your **{{site.data.keyword.Bluemix_notm}} Dashboard** and select a cluster.</dd>
-  <dt>Kubernetes dashboard</dt>
-    <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
     <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
+
+  <dt>Kubernetes dashboard</dt>
+    <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>
+
+  <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.Bluemix_notm}} console and output of <code>ibmcloud ks cluster-get</code></dt>
+    <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view metrics, go to the **Kubernetes** > **Clusters** dashboard, select a cluster, and click the **Metrics** link.
+  <p class="deprecated">The link to the metrics dashboard in the cluster overview page of the {{site.data.keyword.Bluemix_notm}} console and in the output of `ibmcloud ks cluster-get` is deprecated. Clusters created after 03 May 2019 are not created with the metrics dashboard link. Clusters created on or before 03 May 2019 continue to have the link to the metrics dashboard.</p></dd>
+
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
     <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.</p>
@@ -734,7 +742,7 @@ You can configure other tools for more monitoring capabilities.
 {: #autorecovery}
 
 The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
-{: shortdesc}</br> </br>
+{: shortdesc}
 
 Autorecovery requires at least one healthy node to function properly. Configure Autorecovery with active checks only in clusters with two or more worker nodes.
 {: note}

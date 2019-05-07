@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-07"
 
 keywords: kubernetes, iks
 
@@ -108,16 +108,18 @@ The following image shows the default cluster security settings that address aut
       <li>`DefaultTolerationSeconds`</li>
       <li>`DefaultStorageClass`</li>
       <li>`GenericAdmissionWebhook`</li>
-      <li>`Initializers`</li>
+      <li>`Initializers` (Kubernetes 1.13 or earlier)</li>
       <li>`LimitRanger`</li>
       <li>`MutatingAdmissionWebhook`</li>
       <li>`NamespaceLifecycle`</li>
+      <li>`NodeRestriction` (Kubernetes 1.14 or later)</li>
       <li>`PersistentVolumeLabel`</li>
       <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp)</li>
-      <li>[`Priority`](/docs/containers?topic=containers-pod_priority#pod_priority) (Kubernetes 1.11.2 or later</li>
+      <li>[`Priority`](/docs/containers?topic=containers-pod_priority#pod_priority) (Kubernetes 1.11 or later)</li>
       <li>`ResourceQuota`</li>
       <li>`ServiceAccount`</li>
       <li>`StorageObjectInUseProtection`</li>
+      <li>`TaintNodesByCondition` (Kubernetes 1.12 or later)</li>
       <li>`ValidatingAdmissionWebhook`</li></ul></br>
       You can [install your own admission controllers in the cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) or choose from the optional admission controllers that {{site.data.keyword.containerlong_notm}} provides: <ul><li><strong>[Container image security enforcer](/docs/services/Registry?topic=registry-security_enforce#security_enforce):</strong> Use this admission controller to enforce Vulnerability Advisor policies in your cluster to block deployments from vulnerable images.</li></ul></br><p class="note">If you manually installed admission controllers and you do not want to use them anymore, make sure to remove them entirely. If admission controllers are not entirely removed, they might block all actions that you want to perform on the cluster.</p></td>
     </tr>
@@ -130,7 +132,7 @@ If your cluster is connected to a private and a public VLAN, {{site.data.keyword
 
 Service endpoints determine how worker nodes and cluster users can access the cluster master.
 * Public service endpoint only: A secure OpenVPN connection between the cluster master and worker nodes is established over the public network. The master is publicly accessible to your cluster users.
-* Public and private service endpoints: Communication between the master and worker nodes is established over the private network through the private service endpoint. Even if you enable the public service endpoint for your cluster, the Kubernetes master to worker node communication stays on the private network. The public service endpoint is used for secure access to your Kubernetes master over the internet, for example so that authorized cluster users can run `kubectl` commands.
+* Public and private service endpoints: Communication is established over both the private network through the private service endpoint and the public network through the public service endpoint. By routing half of the worker-to-master traffic over the public endpoint and half over the private endpoint, your master-to-worker communication is protected from potential outages of the public or private network. The master is privately accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a VPN connection. Otherwise, the master is publicly accessible to authorized cluster users through the public service endpoint.
 * Private service endpoint only: Communication between the master and worker nodes is established over the private network. Your cluster users must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to access the master.
 
 For more information about service endpoints, see [Planning communication between worker nodes and the Kubernetes master](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-07"
 
 keywords: kubernetes, iks
 
@@ -29,13 +29,16 @@ subcollection: containers
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components.
 {:shortdesc}
 
+Unless otherwise noted in the changelogs, the {{site.data.keyword.containerlong_notm}} provider version enables Kubernetes APIs and features that are at beta. Kubernetes alpha features, which are subject to change, are disabled.
+
 For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
+-  Version 1.14 [changelog](#114_changelog).
 -  Version 1.13 [changelog](#113_changelog).
 -  Version 1.12 [changelog](#112_changelog).
--  Version 1.11 [changelog](#111_changelog).
+-  **Deprecated**: Version 1.11 [changelog](#111_changelog).
 -  **Deprecated**: Version 1.10 [changelog](#110_changelog).
 -  [Archive](#changelog_archive) of changelogs for unsupported versions.
 
@@ -43,6 +46,102 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 {: note}
 
 </br>
+
+## Version 1.14 changelog
+{: #114_changelog}
+
+### Changelog for 1.14.1_1516, released 7 May 2019
+{: #1141_1516}
+
+The following table shows the changes that are included in the patch 1.14.1_1516.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.5_1519">
+<caption>Changes since version 1.13.5_1519</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.4.4</td>
+<td>v3.6.1</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.6/release-notes/).</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.6</td>
+<td>1.3.1</td>
+<td>See the [CoreDNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2019/01/13/coredns-1.3.1-release/). The update includes the addition of a [metrics port ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/metrics/) on the cluster DNS service. <br><br>CoreDNS is now the only supported cluster DNS provider. If you update a cluster to Kubernetes version 1.14 from an earlier version and used KubeDNS, KubeDNS is automatically migrated to CoreDNS during the cluster update. For more information or to test out CoreDNS before you update, see [Configure the cluster DNS provider](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>9ff3fda</td>
+<td>ed0dafc</td>
+<td>Updated image for [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.14.1-71</td>
+<td>Updated to support the Kubernetes 1.14.1 release. Additionally, `calicoctl` version is updated to 3.6.1. Fixed updates to version 2.0 load balancers with only one available worker node for the load balancer pods. Private load balancers now support running on [private edge workers nodes](/docs/containers?topic=containers-edge#edge).</td>
+</tr>
+<tr>
+<td>IBM pod security policies</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>[IBM pod security policies](/docs/containers?topic=containers-psp#ibm_psp) are updated to support the Kubernetes [RunAsGroup ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups) feature.</td>
+</tr>
+<tr>
+<td>`kubelet` configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Set the `--pod-max-pids` option to `14336` to prevent a single pod from consuming all process IDs on a worker node.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.14.1</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) and [Kubernetes 1.14 blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/).<br><br>The Kubernetes default role-based access control (RBAC) policies no longer grant access to [discovery and permission-checking APIs to unauthenticated users ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles). This change applies only to new version 1.14 clusters. If you update a cluster from a prior version, unauthenticated users still have access to the discovery and permission-checking APIs.</td>
+</tr>
+<tr>
+<td>Kubernetes admission controllers configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td><ul>
+<li>Added `NodeRestriction` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server and configured the related cluster resources to support this security enhancement.</li>
+<li>Removed `Initializers` from the `--enable-admission-plugins` option and `admissionregistration.k8s.io/v1alpha1=true` from the `--runtime-config` option for the cluster's Kubernetes API server because these APIs are no longer supported. Instead, you can use [Kubernetes admission webhooks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).</li></ul></td>
+</tr>
+<tr>
+<td>Kubernetes DNS autoscaler</td>
+<td>1.3.0</td>
+<td>1.4.0</td>
+<td>See the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.4.0).</td>
+</tr>
+<tr>
+<td>Kubernetes feature gates configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td><ul>
+  <li>Added `RuntimeClass=false` to disable selection of the container runtime configuration.</li>
+  <li>Removed `ExperimentalCriticalPodAnnotation=true` because the `scheduler.alpha.kubernetes.io/critical-pod` pod annotation is no longer supported. Instead, you can use [Kubernetes pod priority ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority).</li></ul></td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>e132aa4</td>
+<td>e7182c7</td>
+<td>Updated image for [CVE-2019-11068 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## Version 1.13 changelog
 {: #113_changelog}
@@ -1420,10 +1519,14 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 </tbody>
 </table>
 
-## Version 1.11 changelog
+## Deprecated: Version 1.11 changelog
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+{: shortdesc}
+
+Kubernetes version 1.11 is deprecated and becomes unsupported on 27 June 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
+{: deprecated}
 
 ### Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019
 {: #1119_1556}

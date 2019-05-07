@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-02"
 
 keywords: kubernetes, iks
 
@@ -63,6 +63,7 @@ This tutorial is intended for software developers and network administrators who
 -  Check out the steps you need to take to [prepare to create a cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
 -  Ensure you have the following access policies:
     - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
+    - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}}
     - The [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
 
 

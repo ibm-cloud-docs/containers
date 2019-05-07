@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-01"
+lastupdated: "2019-05-06"
 
 keywords: kubernetes, iks, helm
 
@@ -29,9 +29,101 @@ subcollection: containers
 You can use various external services and catalog services with a standard Kubernetes cluster in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+## Popular integrations
+{: #popular_services}
+
+<table summary="The table shows available services that you can add to your cluster and that are popular among {{site.data.keyword.containerlong_notm}} users. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
+<caption>Popular services</caption>
+<thead>
+<tr>
+<th>Service</th>
+<th>Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>Cluster activity logs</td>
+<td>Monitor the administrative activity made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</td>
+</tr>
+<tr id="appid">
+<td>{{site.data.keyword.appid_full}}</td>
+<td>Authentication</td>
+<td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix}} Block Storage</td>
+<td>Block storage</td>
+<td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloudcerts_full}}</td>
+<td>TLS certificates</td>
+<td>You can use <a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to store and manage SSL certificates for your apps. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.registrylong}}</td>
+<td>Container images</td>
+<td>Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.contdelivery_full}}</td>
+<td>Build automation</td>
+<td>Automate your app builds and container deployments to Kubernetes clusters by using a toolchain. For setup information, see the blog <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.datashield_full}} (Beta)</td>
+<td>Memory encryption</td>
+<td>You can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix}} File Storage</td>
+<td>File storage</td>
+<td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.keymanagementservicefull}}</td>
+<td>Data encryption</td>
+<td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="/docs/containers?topic=containers-encryption#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/services/key-protect?topic=key-protect-getting-started-tutorial" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.la_full}}</td>
+<td>Cluster and app logs</td>
+<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full}}</td>
+<td>Cluster and app metrics</td>
+<td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cos_full}}</td>
+<td>Object storage</td>
+<td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For general information about the service, see the <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+</tr>
+<tr>
+<td>Istio on {{site.data.keyword.containerlong_notm}}</td>
+<td>Microservice management</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms. Istio on {{site.data.keyword.containerlong}} provides a one-step installation of Istio into your cluster through a managed add-on. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. To get started, see [Using the managed Istio add-on (beta)](/docs/containers?topic=containers-istio).</td>
+</tr>
+<tr>
+<td>Knative</td>
+<td>Serverless apps</td>
+<td>[Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others with the goal of extending the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. The platform uses a consistent approach across programming languages and frameworks to abstract the operational burden of building, deploying and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. For more information, see [Deploying serverless apps with Knative](/docs/containers?topic=containers-serverless-apps-knative). </td>
+</tr>
+<tr>
+<td>Portworx</td>
+<td>Storage for stateful apps</td>
+<td>[Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://portworx.com/products/introduction/) is a highly available software-defined storage solution that you can use to manage persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones. You can install Portworx with a Helm chart and provision storage for your apps by using Kubernetes persistent volumes. For more information about how to set up Portworx in your cluster, see [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx).</td>
+</tr>
+</tbody>
+</table>
+
 
 ## DevOps services
 {: #devops_services}
+
 <table summary="The table shows available services that you can add to your cluster to add extra DevOps capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
 <caption>DevOps services</caption>
 <thead>

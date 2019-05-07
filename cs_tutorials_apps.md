@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-02"
 
 keywords: kubernetes, iks
 
@@ -115,10 +115,10 @@ To deploy the app:
 
 6.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous tutorial. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
-    Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. To get the region prefix for the region that you are currently in, run `ibmcloud api`. For example, the Dallas location, US South region prefix is `ng`.
+    Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. To get the registry region that you are currently in, run `ibmcloud cr region`.
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
 
@@ -126,8 +126,8 @@ To deploy the app:
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -141,7 +141,7 @@ To deploy the app:
 7.  Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
 
     ```
-    kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
+    kubectl run hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
     {: pre}
 
@@ -295,7 +295,7 @@ As defined in the configuration script, Kubernetes can use an availability check
 3.  Build, tag, and push the app as an image to your namespace in {{site.data.keyword.registryshort_notm}}.  Again, don't forget the period (`.`) at the end of the command.
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
       ```
     {: pre}
 
@@ -303,8 +303,8 @@ As defined in the configuration script, Kubernetes can use an availability check
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -319,7 +319,7 @@ As defined in the configuration script, Kubernetes can use an availability check
     1. Update the details for the image in your private registry namespace.
 
         ```
-        image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
+        image: "<region>.icr.io/<namespace>/hello-world:2"
         ```
         {: codeblock}
 
@@ -461,7 +461,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
     2.  Build, tag, and push the `watson` app as an image to your namespace in {{site.data.keyword.registryshort_notm}}. Again, don't forget the period (`.`) at the end of the command.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson .
         ```
         {: pre}
 
@@ -484,7 +484,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
     2.  Build, tag, and push the `watson-talk`app as an image to your namespace in {{site.data.keyword.registryshort_notm}}. Again, don't forget the period (`.`) at the end of the command.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -507,11 +507,11 @@ From the previous tutorial, you have your account and a cluster with one worker 
     ```
     Listing images...
 
-    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
-    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                        NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    us.icr.io/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    us.icr.io/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    us.icr.io/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    us.icr.io/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
@@ -522,14 +522,14 @@ From the previous tutorial, you have your account and a cluster with one worker 
         watson:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson"
+        image: "<region>.icr.io/namespace/watson"
         ```
         {: codeblock}
 
         watson-talk:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson-talk"
+        image: "<region>.icr.io/namespace/watson-talk"
         ```
         {: codeblock}
 
@@ -635,7 +635,7 @@ Change the name of the image:
     ```
     spec:
           containers:
-          - image: registry.<region>.bluemix.net/ibmliberty:latest
+          - image: <region>.icr.io/ibmliberty:latest
     ```
     {: codeblock}
 

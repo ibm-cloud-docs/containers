@@ -94,6 +94,8 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Enhancing cluster capabilities with integrations
+        cs_integrations_partnerships.md
+        cs_integrations_ibm_third_party.md
         cs_integrations_addons.md
         cs_integrations_helm.md
         cs_integrations_service_binding.md

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-06"
 
 keywords: kubernetes, iks
 
@@ -309,7 +309,13 @@ The following image shows how traffic will be permitted to the NLB but not to no
     ```
     {: screen}
 
-4. Using the value from your cheat sheet, verify that you can still publicly access the NLB external IP address.
+4. Change the externalTrafficPolicy of the LoadBalancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the LoadBalancer in the next step.
+    ```
+    kubectl patch svc webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    ```
+    {: pre}
+
+5. Using the value from your cheat sheet, verify that you can still publicly access the NLB external IP address.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -340,7 +346,7 @@ The following image shows how traffic will be permitted to the NLB but not to no
     {: screen}
     In the `Request Information` section of the output, note that the source IP address is, for example, `client_address=1.1.1.1`. The source IP address is the public IP of the system that you're using to run curl. Otherwise, if you are connecting to the internet through a proxy or VPN, the proxy or VPN might be obscuring your system's actual IP address. In either case, the NLB sees your system's source IP address as the client IP address.
 
-5. Copy your system's source IP address (`client_address=1.1.1.1` in the previous step output) into your cheat sheet to use in later lessons.
+6. Copy your system's source IP address (`client_address=1.1.1.1` in the previous step output) into your cheat sheet to use in later lessons.
 
 Great! At this point, your app is exposed to the public internet from the public NLB port only. Traffic to the public node ports is blocked. You've partially locked down your cluster from unwanted traffic.
 
@@ -411,7 +417,7 @@ First, in addition to the node ports, you must block all incoming traffic to the
     ```
     {: pre}
 
-4. In a text editor, create a low-order Pre-DNAT policy called `whitelist.yaml` to allow traffic from your system's IP to the NLB IP address and port. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the NLB and `<client_address>` with the public IP address of your system's source IP.
+4. In a text editor, create a low-order Pre-DNAT policy called `whitelist.yaml` to allow traffic from your system's IP to the NLB IP address and port. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the NLB and `<client_address>` with the public IP address of your system's source IP. If you can't remember your system IP, you can run `curl ifconfig.co`.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy

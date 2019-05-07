@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-02"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -217,7 +217,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
             app: secret-test
         spec:
           containers:
-          - image: registry.bluemix.net/ibmliberty:latest
+          - image: icr.io/ibmliberty:latest
             name: secret-test
             volumeMounts:
             - mountPath: <mount_path>
@@ -372,7 +372,7 @@ You can add the service credentials and other key value pairs from your Kubernet
            app: secret-test
        spec:
          containers:
-         - image: registry.bluemix.net/ibmliberty:latest
+         - image: icr.io/ibmliberty:latest
            name: secret-test
            env:
            - name: BINDING

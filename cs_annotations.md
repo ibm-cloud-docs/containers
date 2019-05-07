@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-06"
 
 keywords: kubernetes, iks, ingress
 
@@ -2590,9 +2590,9 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
       3. Click **Create**.
 
 2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the request URL against the whitelist of redirect URLs.
-  1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
-  2. Make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
-  3. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<app_path>/appid_callback` or `https://<hostname>/<app_path>/appid_callback`.
+  1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Manage Authentication**.
+  2. In the **Identity providers** tab, make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
+  3. In the **Authentication settings** tab, add redirect URLs for your app in the format `http://<hostname>/<app_path>/appid_callback` or `https://<hostname>/<app_path>/appid_callback`.
 
     {{site.data.keyword.appid_full_notm}} offers a logout function: If `/logout` exists in your {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page. To use this function, you must append `/appid_logout` to your domain in the format `https://<hostname>/<app_path>/appid_logout` and include this URL in the redirect URLs list.
     {: note}
