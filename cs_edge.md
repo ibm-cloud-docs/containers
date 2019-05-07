@@ -45,14 +45,14 @@ In Kubernetes 1.14 and later, both public and private NLBs and ALBs can deploy o
 
 Before you begin:
 
-1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+* Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
   * Any platform role for the cluster
   * **Writer** or **Manager** service role for all namespaces
-2. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To label worker nodes as edge nodes:
+</br>To label worker nodes as edge nodes:
 
-1. [Create a new worker pool](/docs/containers?topic=containers-clusters#add_pool) that spans all zones in your cluster and has at least 2 workers per zone. In the `ibmcloud ks worker-pool-create` command, include the `--labels dedicated=edge` flag to label all worker nodes in the pool. All subsequent Ingress and load balancers are deployed to an edge worker node in this pool.
+1. [Create a new worker pool](/docs/containers?topic=containers-clusters#add_pool) that spans all zones in your cluster and has at least 2 workers per zone. In the `ibmcloud ks worker-pool-create` command, include the `--labels dedicated=edge` flag to label all worker nodes in the pool. All worker nodes in this pool, including any worker nodes that you add later, are labeled as edge nodes.
   <p class="tip">If you want to use an existing worker pool, the pool must span all zones in your cluster and have at least 2 workers per zone. You can label the worker pool with `dedicated=edge` by using the [PATCH worker pool API](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool). In the body of the request, pass in the following JSON. After the worker pool is marked with `dedicated=edge`, all existing and subsequent worker nodes get this label, and Ingress and load balancers are deployed to an edge worker node.
       <pre class="screen">
       {
@@ -67,19 +67,19 @@ To label worker nodes as edge nodes:
     ```
     {: pre}
 
-  * To check worker nodes, review the **Labels** field of the output of the following command.
+  * To check individual worker nodes, review the **Labels** field of the output of the following command.
     ```
     kubectl describe node <worker_node_private_IP>
     ```
     {: pre}
 
-2. Retrieve all existing NLBs and ALBs in the cluster.
+3. Retrieve all existing NLBs and ALBs in the cluster.
   ```
   kubectl get services --all-namespaces | grep LoadBalancer
   ```
   {: pre}
 
-  In the output, note the **Namespace** and **Name** of each load balancer service. For example, in the following output, there are 4 load balancer services: the public NLB `webserver-lb` in the `default` namespace, the private ALB `private-crdf253b6025d64944ab99ed63bb4567b6-alb1` in the `kube-system` namespace, and the 2 public Ingress ALBs `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb2` in the `kube-system` namespace.
+  In the output, note the **Namespace** and **Name** of each load balancer service. For example, in the following output, there are 4 load balancer services: a public NLB in the `default` namespace, and one private and 2 public ALBs in the `kube-system` namespace.
   ```
   NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
   default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                10m
@@ -89,7 +89,7 @@ To label worker nodes as edge nodes:
   ```
   {: screen}
 
-3. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node.
+4. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node.
 
   If your cluster runs Kubernetes 1.14 or later, you can deploy both public and private NLBs and ALBs onto the edge worker nodes. In Kubernetes 1.13 and earlier, only public and private ALBs and public NLBs can deploy to edge nodes, so do not redeploy private NLB services.
   {: note}
@@ -105,8 +105,8 @@ To label worker nodes as edge nodes:
   ```
   {: screen}
 
-4. Optional: To verify that networking workloads are restricted to edge nodes, confirm that NLB and ALB pods are scheduled onto the edge nodes.
-  * NLB pods: Search for the external IP address of the load balancer service that you found in step 2. Replace the periods (`.`) with hyphens (`-`). Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
+5. Optional: To verify that networking workloads are restricted to edge nodes, confirm that NLB and ALB pods are scheduled onto the edge nodes.
+  * NLB pods: Search for the external IP address of the load balancer service that is listed in the output of step 3. Replace the periods (`.`) with hyphens (`-`). Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
     ```
     kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
     ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
@@ -121,7 +121,7 @@ To label worker nodes as edge nodes:
     ```
     {: screen}
 
-</br>You labeled worker nodes with `dedicated=edge` and redeployed all of the existing load balancers and Ingress to the edge worker nodes. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to NodePorts on worker nodes](/docs/containers?topic=containers-network_policies#block_ingress).
+</br>You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all of the existing ALBs and NLBs to the edge nodes. All subsequent ALBs and NLBs that are added to the cluster are also deployed to an edge node in your edge worker pool. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to NodePorts on worker nodes](/docs/containers?topic=containers-network_policies#block_ingress).
 
 <br />
 
@@ -138,7 +138,7 @@ Before you begin:
 - Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role for all namespaces](/docs/containers?topic=containers-users#platform).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To prevent other workloads from running on edge worker nodes:
+</br>To prevent other workloads from running on edge worker nodes:
 
 1. Apply a taint to all worker nodes with the `dedicated=edge` label that prevents pods from running on the worker node and that removes pods that do not have the `dedicated=edge` label from the worker node. The pods that are removed are redeployed on other worker nodes with capacity.
   ```
@@ -162,7 +162,7 @@ To prevent other workloads from running on edge worker nodes:
   ```
   {: screen}
 
-3. If you choose to [enable source IP preservation for an NLB 1.0 service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
+3. If you choose to [enable source IP preservation for an NLB 1.0 service](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
 4. To remove a taint, run the following command.
     ```
