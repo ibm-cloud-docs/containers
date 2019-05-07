@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-06"
+lastupdated: "2019-05-07"
 
 keywords: kubernetes, iks
 
@@ -37,8 +37,11 @@ If you have a multizone cluster and want to restrict network traffic to edge wor
 ## Labeling worker nodes as edge nodes
 {: #edge_nodes}
 
-Add the `dedicated=edge` label to two or more worker nodes on each public VLAN in your cluster to ensure that network load balancers (NLBs) and Ingress application load balancers (ALBs) are deployed to those worker nodes only.
+Add the `dedicated=edge` label to two or more worker nodes on each public or private VLAN in your cluster to ensure that network load balancers (NLBs) and Ingress application load balancers (ALBs) are deployed to those worker nodes only.
 {:shortdesc}
+
+In Kubernetes 1.14 and later, both public and private NLBs and ALBs can deploy onto edge worker nodes. In Kubernetes 1.13 and earlier, public and private ALBs and public NLBs can deploy to edge nodes, but private NLBs must deploy to only non-edge worker nodes in your cluster.
+{: note}
 
 Before you begin:
 
@@ -46,7 +49,6 @@ Before you begin:
   * Any platform role for the cluster
   * **Writer** or **Manager** service role for all namespaces
 2. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-3. Ensure that your cluster has a least one public VLAN. Edge worker nodes are not available for clusters with private VLANs only.
 
 To label worker nodes as edge nodes:
 
@@ -77,16 +79,21 @@ To label worker nodes as edge nodes:
   ```
   {: pre}
 
-  In the output, note the **Namespace** and **Name** of each load balancer service. For example, in the following output, there are 3 load balancer services: the public NLB `webserver-lb` in the `default` namespace and the 2 public Ingress ALBs `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb2` in the `kube-system` namespace.
+  In the output, note the **Namespace** and **Name** of each load balancer service. For example, in the following output, there are 4 load balancer services: the public NLB `webserver-lb` in the `default` namespace, the private ALB `private-crdf253b6025d64944ab99ed63bb4567b6-alb1` in the `kube-system` namespace, and the 2 public Ingress ALBs `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb2` in the `kube-system` namespace.
   ```
-  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
-  default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                 10m
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP   1h
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP   57m
+  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
+  default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                10m
+  kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.185.94.150   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  57m
   ```
   {: screen}
 
-3. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node. Only public NLBs must be redeployed, but both public and private ALBs can be redeployed.
+3. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node.
+
+  If your cluster runs Kubernetes 1.14 or later, you can deploy both public and private NLBs and ALBs onto the edge worker nodes. In Kubernetes 1.13 and earlier, only public and private ALBs and public NLBs can deploy to edge nodes, so do not redeploy private NLB services.
+  {: note}
+
   ```
   kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
   ```
