@@ -79,7 +79,7 @@ Before you begin:
   ```
   {: pre}
 
-  In the output, note the **Namespace** and **Name** of each load balancer service. For example, in the following output, there are 4 load balancer services: a public NLB in the `default` namespace, and one private and 2 public ALBs in the `kube-system` namespace.
+  In the output, note the **Namespace** and **Name** of each load balancer service. For example, in the following output, there are 4 load balancer services: 1 public NLB in the `default` namespace, and 1 private and 2 public ALBs in the `kube-system` namespace.
   ```
   NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
   default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                10m
@@ -101,7 +101,7 @@ Before you begin:
 
   Example output:
   ```
-  service "my_loadbalancer" configured
+  service "webserver-lb" configured
   ```
   {: screen}
 
