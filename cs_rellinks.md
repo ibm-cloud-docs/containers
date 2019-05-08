@@ -42,7 +42,7 @@ subcollection: containers
 **REST APIs**
 
 - [REST API for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/)
-- [REST API JSON for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
+- [REST API JSON for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
