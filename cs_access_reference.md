@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-03"
+lastupdated: "2019-05-08"
 
 keywords: kubernetes, iks
 
@@ -520,7 +520,7 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 <td><code>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterSubnet)</code></td>
 </tr>
 <tr>
-<td>Create a subnet.</td>
+<td>Create a subnet and add it to a cluster.</td>
 <td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_create)</code></td>
 <td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateClusterSubnet)</code></td>
 </tr>
