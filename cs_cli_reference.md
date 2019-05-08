@@ -55,7 +55,7 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
     export IKS_BETA_VERSION=0.2
     ```
     {: pre}
-
+</br></br>
 <table>
 <caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
   <thead>
@@ -91,8 +91,6 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
     </tr>
   </tbody>
 </table>
-
-
 
 ## ibmcloud ks commands
 {: #cs_commands}
@@ -1326,7 +1324,9 @@ ibmcloud ks cluster-feature-enable private-service-endpoint --cluster CLUSTER [-
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:<dt><code>--cluster <em>CLUSTER</em></code></dt>
+**Command options**:
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>-s</code></dt>
@@ -1354,7 +1354,9 @@ ibmcloud ks cluster-feature-enable public-service-endpoint --cluster CLUSTER [-s
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:<dt><code>--cluster <em>CLUSTER</em></code></dt>
+**Command options**:
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>-s</code></dt>
@@ -1383,7 +1385,9 @@ ibmcloud ks cluster-feature-enable trusted --cluster CLUSTER [-s] [-f]
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:<dt><code>--cluster <em>CLUSTER</em></code></dt>
+**Command options**:
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>-f</code></dt>
