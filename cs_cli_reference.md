@@ -56,7 +56,7 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
     ```
     {: pre}
 
-</br></br>
+</br>
 <table>
 <caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
   <thead>
@@ -403,6 +403,8 @@ ibmcloud plugin list
 </tbody>
 </table>
 
+</br>
+
 
 
 </br>
@@ -430,6 +432,8 @@ ibmcloud plugin list
     </tr>
   </tbody>
 </table>
+
+</br>
 
 <table summary="Worker pool commands table">
 <caption>Worker pool commands</caption>
