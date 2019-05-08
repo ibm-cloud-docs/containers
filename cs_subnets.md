@@ -145,7 +145,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ```
 {: pre}
 
-To list only portable public IP addresses that are available to create NLBs, you can use the following steps:
+To list only portable public IP addresses that are available to create public NLBs, you can use the following steps:
 
 Before you begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
@@ -205,26 +205,30 @@ To list available portable public IP addresses:
 ### Freeing up used IP addresses
 {: #free}
 
-You can free up a used portable IP address by deleting the network load balancer (NLB) service that is using the portable IP address.
+You can free up a used portable IP address by deleting the network load balancer (NLB) service or disabling the Ingress application load balancer (ALB) that is using the portable IP address.
 {:shortdesc}
 
 Before you begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To delete an NLB:
+To delete an NLB or disable an ALB:
 
-1.  List available services in your cluster.
-
+1. List available services in your cluster.
     ```
-    kubectl get services
+    kubectl get services | grep LoadBalancer
     ```
     {: pre}
 
-2.  Remove the load balancer service that uses a public or private IP address.
-
+2. Remove the load balancer service or disable the ALB that uses a public or private IP address.
+  * Delete an NLB:
     ```
     kubectl delete service <service_name>
+    ```
+    {: pre}
+  * Disable an ALB:
+    ```
+    ibmcloud ks alb-configure --albID <ALB_ID> --disable
     ```
     {: pre}
 
