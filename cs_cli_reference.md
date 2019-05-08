@@ -55,6 +55,7 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
     export IKS_BETA_VERSION=0.2
     ```
     {: pre}
+
 </br></br>
 <table>
 <caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
@@ -202,6 +203,9 @@ ibmcloud plugin list
     <td>[ibmcloud ks va](#cs_va)</td>
   </tr>
     <td>[ibmcloud ks webhook-create](#cs_webhook_create)</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
   <tr>
   </tr>
 </tbody>
@@ -226,9 +230,9 @@ ibmcloud plugin list
   </tr>
   <tr>
     <td>[ibmcloud ks subnets](#cs_subnets)</td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
   </tr>
 </tbody>
 </table>
@@ -251,8 +255,8 @@ ibmcloud plugin list
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks vlans](#cs_vlans)</td>
     <td>[ibmcloud ks vlan-spanning-get](#cs_vlan_spanning_get)</td>
+    <td>[ibmcloud ks vlans](#cs_vlans)</td>
     <td> </td>
     <td> </td>
   </tr>
@@ -316,23 +320,23 @@ ibmcloud plugin list
       <td>[ibmcloud ks logging-autoupdate-enable](#cs_log_autoupdate_enable)</td>
       <td>[ibmcloud ks logging-autoupdate-disable](#cs_log_autoupdate_disable)</td>
       <td>[ibmcloud ks logging-autoupdate-get](#cs_log_autoupdate_get)</td>
-      <td>[ibmcloud ks logging-config-create](#cs_logging_create)</td>
+      <td>[ibmcloud ks logging-collect](#cs_log_collect)</td>
     </tr>
     <tr>
+      <td>[ibmcloud ks logging-collect-status](#cs_log_collect_status)</td>
+      <td>[ibmcloud ks logging-config-create](#cs_logging_create)</td>
       <td>[ibmcloud ks logging-config-get](#cs_logging_get)</td>
       <td>[ibmcloud ks logging-config-refresh](#cs_logging_refresh)</td>
+    </tr>
+    <tr>
       <td>[ibmcloud ks logging-config-rm](#cs_logging_rm)</td>
       <td>[ibmcloud ks logging-config-update](#cs_logging_update)</td>
-    </tr>
-    <tr>
       <td>[ibmcloud ks logging-filter-create](#cs_log_filter_create)</td>
       <td>[ibmcloud ks logging-filter-update](#cs_log_filter_update)</td>
-      <td>[ibmcloud ks logging-filter-get](#cs_log_filter_view)</td>
-      <td>[ibmcloud ks logging-filter-rm](#cs_log_filter_delete)</td>
     </tr>
     <tr>
-      <td>[ibmcloud ks logging-collect](#cs_log_collect)</td>
-      <td>[ibmcloud ks logging-collect-status](#cs_log_collect_status)</td>
+      <td>[ibmcloud ks logging-filter-get](#cs_log_filter_view)</td>
+      <td>[ibmcloud ks logging-filter-rm](#cs_log_filter_delete)</td>
       <td> </td>
       <td> </td>
     </tr>
@@ -385,10 +389,10 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks supported-locations](#cs_supported-locations)</td>
     <td>[ibmcloud ks region-get](#cs_region)</td>
     <td>[ibmcloud ks region-set](#cs_region-set)</td>
     <td>[ibmcloud ks regions](#cs_regions)</td>
+    <td>[ibmcloud ks supported-locations](#cs_supported-locations)</td>
   </tr>
   <tr>
     <td>[ibmcloud ks zones](#cs_datacenters)</td>
@@ -2633,6 +2637,37 @@ ibmcloud ks machine-types --zone dal10
 ```
 {: pre}
 
+### ibmcloud ks vlan-spanning-get
+{: #cs_vlan_spanning_get}
+
+View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) account. VLAN spanning enables all devices on an account to communicate with each other by means of the private network, regardless of its assigned VLAN.
+{: shortdesc}
+
+```
+ibmcloud ks vlan-spanning-get --region REGION [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--region <em>REGION</em></code></dt>
+<dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks vlan-spanning-get --region us-south
+```
+{: pre}
+
 ### ibmcloud ks <ph class="ignoreSpelling">vlans</ph>
 {: #cs_vlans}
 
@@ -2666,37 +2701,6 @@ ibmcloud ks vlans --zone ZONE [--all] [--json] [-s]
 **Example**:
 ```
 ibmcloud ks vlans --zone dal10
-```
-{: pre}
-
-### ibmcloud ks vlan-spanning-get
-{: #cs_vlan_spanning_get}
-
-View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) account. VLAN spanning enables all devices on an account to communicate with each other by means of the private network, regardless of its assigned VLAN.
-{: shortdesc}
-
-```
-ibmcloud ks vlan-spanning-get --region REGION [--json] [-s]
-```
-{: pre}
-
-**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--region <em>REGION</em></code></dt>
-<dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
-
-<dt><code>--json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks vlan-spanning-get --region us-south
 ```
 {: pre}
 
@@ -2813,14 +2817,14 @@ The log collection request was successfully submitted. To view the status of the
 ```
 {: screen}
 
-### ibmcloud ks logging-collect status
+### ibmcloud ks logging-collect-status
 {: #cs_log_collect_status}
 
 Check the status of the log collection snapshot request for your cluster.
 {: shortdesc}
 
 ```
-ibmcloud ks logging-collect status --cluster CLUSTER [--json] [-s]
+ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
 
@@ -2841,7 +2845,7 @@ ibmcloud ks logging-collect status --cluster CLUSTER [--json] [-s]
 **Example command**:
 
 ```
-ibmcloud ks logging-collect status --cluster mycluster
+ibmcloud ks logging-collect-status --cluster mycluster
 ```
 {: pre}
 
@@ -3172,7 +3176,7 @@ ibmcloud ks logging-filter-create --cluster example-cluster --type all --level i
 ```
 {: pre}
 
-### ibmcloud ks logging-filter -get
+### ibmcloud ks logging-filter-get
 {: #cs_log_filter_view}
 
 View a logging filter configuration.
@@ -3318,7 +3322,7 @@ ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type a
 <br />
 
 
-## Network load balancer commands (`nlb-dns`)
+## Network load balancer (NLB) commands
 {: #nlb-dns}
 
 Use this group of commands to create and manage host names for network load balancer (NLB) IP addresses and health check monitors for host names. For more information, see [Registering a load balancer host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
@@ -3397,37 +3401,6 @@ ibmcloud ks nlb-dns-create --cluster mycluster --ip 1.1.1.1
 ```
 {: pre}
 
-### ibmcloud ks nlb-dnss
-{: #cs_nlb-dns-ls}
-
-List the network load balancer host names and IP addresses that are registered in a cluster.
-{: shortdesc}
-
-```
-ibmcloud ks nlb-dnss --cluster CLUSTER [--json] [-s]
-```
-{: pre}
-
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>--json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks nlb-dnss --cluster mycluster
-```
-{: pre}
-
 ### ibmcloud ks nlb-dns-rm
 {: #cs_nlb-dns-rm}
 
@@ -3462,6 +3435,37 @@ ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [
 **Example**:
 ```
 ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dnss
+{: #cs_nlb-dns-ls}
+
+List the network load balancer host names and IP addresses that are registered in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dnss --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dnss --cluster mycluster
 ```
 {: pre}
 
@@ -3727,19 +3731,6 @@ ibmcloud ks nlb-dns-monitors --cluster mycluster
 Use this group of commands to view available locations, view the currently targeted region, and set the targeted region.
 {: shortdesc}
 
-### ibmcloud ks supported-locations
-{: #cs_supported-locations}
-
-List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
-{: shortdesc}
-
-```
-ibmcloud ks supported-locations
-```
-{: pre}
-
-**Minimum required permissions**: None
-
 ### ibmcloud ks region-get
 {: #cs_region}
 
@@ -3817,6 +3808,19 @@ us-east       us-east
 us-south      us-south
 ```
 {: screen}
+
+### ibmcloud ks supported-locations
+{: #cs_supported-locations}
+
+List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
+{: shortdesc}
+
+```
+ibmcloud ks supported-locations
+```
+{: pre}
+
+**Minimum required permissions**: None
 
 ### ibmcloud ks zones
 {: #cs_datacenters}
@@ -4338,7 +4342,7 @@ ibmcloud ks workers --cluster my_cluster
 <br />
 
 
-## Worker pool commands (`worker-pool`)
+## Worker pool commands
 {: #worker-pool}
 
 Use this group of commands to view and modify worker pools for a cluster.
