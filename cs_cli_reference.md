@@ -406,9 +406,6 @@ ibmcloud plugin list
 </br>
 
 
-
-</br>
-
 <table summary="Worker node commands table">
 <caption>Worker node commands</caption>
 <col width="25%">
