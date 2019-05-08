@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-08"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -406,7 +406,7 @@ The {{site.data.keyword.containerlong_notm}} API requires header information tha
 
 To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token.
 
-You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
+You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json) to generate a client that can interact with the API as part of your automation work.
 {: tip}
 
 <table summary="ID types and options with the input parameter in column 1 and the value in column 2.">
@@ -696,7 +696,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
      </tbody>
      </table>
 
-5.  Review the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api) to find a list of supported APIs.
+5.  Review the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api) to find a list of supported APIs.
 
 <br />
 
@@ -955,7 +955,7 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
 
     You can find your new {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token**, and the refresh token in the **refresh_token** field of your API output.
 
-2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api) by using the token from the previous step.
+2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api) by using the token from the previous step.
 
 <br />
 

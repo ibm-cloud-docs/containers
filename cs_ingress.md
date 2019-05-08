@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-06"
+lastupdated: "2019-05-08"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -799,11 +799,11 @@ If you used the `--no-subnet` flag when you created the cluster, then you must a
 
     The field **Status** for private ALBs is _disabled_.
     ```
-    ALB ID                                            Status     Type      ALB IP          Zone    Build
-    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
-    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   disabled   private   -               dal12   ingress:350/ingress-auth:192
-    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
-    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:411/ingress-auth:315   
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal12   ingress:411/ingress-auth:315   
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:411/ingress-auth:315   
     ```
     {: screen}
     In multizone clusters, the numbered suffix on the ALB ID indicates the order that the ALB was added.
@@ -857,9 +857,9 @@ If you used the `--no-subnet` flag when you created the cluster, then you must a
 
     The field **Status** for the private ALB is _disabled_.
     ```
-    ALB ID                                            Status     Type      ALB IP          Zone    Build
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:411/ingress-auth:315   
     ```
     {: screen}
 

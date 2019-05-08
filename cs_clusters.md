@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-06"
+lastupdated: "2019-05-08"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -810,7 +810,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
     ```
     {: pre}
-2.  To label the worker pool with a `key=value` label, use the [PATCH worker pool API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool). Format the body of the request as in the following JSON example. 
+2.  To label the worker pool with a `key=value` label, use the [PATCH worker pool API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/#!/clusters/PatchWorkerPool). Format the body of the request as in the following JSON example. 
     ```
     {
       "labels": {"key":"value"},

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-06"
+lastupdated: "2019-05-08"
 
 keywords: kubernetes, iks
 
@@ -32,7 +32,7 @@ Change the pool of available portable public or private IP addresses for network
 
 
 
-## Using custom or existing IBM Cloud infrastructure (SoftLayer) subnets to create a cluster
+## Using existing subnets to create a cluster
 {: #subnets_custom}
 
 When you create a standard cluster, subnets are automatically created for you. However, instead of using the automatically provisioned subnets, you can use existing portable subnets from your IBM Cloud infrastructure (SoftLayer) account or reuse subnets from a deleted cluster.
@@ -52,7 +52,7 @@ Before you begin:
    ```
    {: pre}
 
-To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio with custom firewall rules or available IP addresses:
+</br>To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio:
 
 1. Get the ID of the subnet to use and the ID of the VLAN that the subnet is on.
 
@@ -145,7 +145,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ```
 {: pre}
 
-To list only portable public IP addresses that are available to create NLBs, you can use the following steps:
+To list only portable public IP addresses that are available to create public NLBs, you can use the following steps:
 
 Before you begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
@@ -205,26 +205,30 @@ To list available portable public IP addresses:
 ### Freeing up used IP addresses
 {: #free}
 
-You can free up a used portable IP address by deleting the network load balancer (NLB) service that is using the portable IP address.
+You can free up a used portable IP address by deleting the network load balancer (NLB) service or disabling the Ingress application load balancer (ALB) that is using the portable IP address.
 {:shortdesc}
 
 Before you begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To delete an NLB:
+To delete an NLB or disable an ALB:
 
-1.  List available services in your cluster.
-
+1. List available services in your cluster.
     ```
-    kubectl get services
+    kubectl get services | grep LoadBalancer
     ```
     {: pre}
 
-2.  Remove the load balancer service that uses a public or private IP address.
-
+2. Remove the load balancer service or disable the ALB that uses a public or private IP address.
+  * Delete an NLB:
     ```
     kubectl delete service <service_name>
+    ```
+    {: pre}
+  * Disable an ALB:
+    ```
+    ibmcloud ks alb-configure --albID <ALB_ID> --disable
     ```
     {: pre}
 
@@ -240,14 +244,14 @@ By default, 4 portable public and 4 portable private IP addresses can be used to
 When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure to use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
 {: important}
 
-Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your subnet is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
-{: note}
-
 ### Adding portable IPs by ordering more subnets
 {: #request}
 
 You can get more portable IPs for NLB services by creating a new subnet in an IBM Cloud infrastructure (SoftLayer) account and making it available to your specified cluster.
 {:shortdesc}
+
+Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your subnet is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
+{: note}
 
 Before you begin:
 -  Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
@@ -269,10 +273,6 @@ To order a subnet:
     </thead>
     <tbody>
     <tr>
-    <td><code>cluster-subnet-create</code></td>
-    <td>The command to provision a subnet for your cluster.</td>
-    </tr>
-    <tr>
     <td><code><em>&lt;cluster_name_or_id&gt;</em></code></td>
     <td>Replace <code>&lt;cluster_name_or_id&gt;</code> with the name or ID of the cluster.</td>
     </tr>
@@ -282,7 +282,7 @@ To order a subnet:
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td>Replace <code>&lt;VLAN_ID&gt;</code> with the ID of the public or private VLAN on which you want to allocate the portable public or private IP addresses. You must select the public or private VLAN that an existing worker node is connected to. To review the public or private VLAN for a worker node, run the <code>ibmcloud ks worker-get --worker &lt;worker_id&gt;</code> command. <The subnet is provisioned in the same zone that the VLAN is in.</td>
+    <td>Replace <code>&lt;VLAN_ID&gt;</code> with the ID of the public or private VLAN on which you want to allocate the portable public or private IP addresses. You must select a public or private VLAN that an existing worker node is connected to. To review the public or private VLANs that your worker nodes are connected to, run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> and look for the <strong>Subnet VLANs</strong> section in the output. The subnet is provisioned in the same zone that the VLAN is in.</td>
     </tr>
     </tbody></table>
 
