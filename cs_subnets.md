@@ -32,7 +32,7 @@ Change the pool of available portable public or private IP addresses for network
 
 
 
-## Using existing IBM Cloud infrastructure (SoftLayer) subnets or reusing subnets to create a cluster
+## Using existing subnets to create a cluster
 {: #subnets_custom}
 
 When you create a standard cluster, subnets are automatically created for you. However, instead of using the automatically provisioned subnets, you can use existing portable subnets from your IBM Cloud infrastructure (SoftLayer) account or reuse subnets from a deleted cluster.
@@ -52,7 +52,7 @@ Before you begin:
    ```
    {: pre}
 
-To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio with custom firewall rules or available IP addresses:
+</br>To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio:
 
 1. Get the ID of the subnet to use and the ID of the VLAN that the subnet is on.
 
