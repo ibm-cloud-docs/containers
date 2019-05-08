@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-05-01"
+lastupdated: "2019-05-08"
 
 ---
 
@@ -1054,7 +1054,7 @@ lastupdated: "2019-05-01"
 * [Object storage: Installing the {{site.data.keyword.cos_full_notm}} ibmcloud Helm plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails)
 * [Object storage: PVC or pod creation fails due to not finding the Kubernetes secret](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_secret_access_fails)
 * [Object storage: PVC creation fails due to wrong credentials or access denied](/docs/containers?topic=containers-cs_troubleshoot_storage#cred_failure)
-* [Object storage: Cannot access an existing bucket](/docs/containers?topic=containers-cs_troubleshoot_storage#object-storage-cannot-access-an-existing-bucket)
+* [Object storage: Cannot access an existing bucket](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_access_bucket_fails)
 * [Object storage: Accessing files with a non-root user fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access)
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_storage#storage_getting_help)
 
