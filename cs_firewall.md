@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-01"
+lastupdated: "2019-05-09"
 
 keywords: kubernetes, iks
 
@@ -159,7 +159,7 @@ To allow access for a specific cluster:
     }
     ```
     {: screen}
-  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master:
+  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: To access your cluster master on the private network over a VPN connection or through DirectLink, you must use the private service endpoint. However, communication with the Kubernetes master must go through the `166.XXX.XXX` IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal `10.XXX.XXX` IP address range to the Kubernetes master.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -230,7 +230,7 @@ Depending on your cluster setup, you access the services by using the public, pr
     ```
     {: pre}
 
-2.  Allow outgoing network traffic from the source <em>&lt;each_worker_node_publicIP&gt;</em> to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
+2.  Allow outgoing network traffic from the source <em>&lt;each_worker_node_publicIP&gt;</em> to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. These IP addresses permit worker nodes to communicate with the cluster master. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for your local machine too so that you can access the cluster master.
 
     You must allow outgoing traffic to port 443 for all of the zones within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones.
     {: important}
@@ -284,7 +284,7 @@ Depending on your cluster setup, you access the services by using the public, pr
           </tbody>
         </table>
 
-3.  {: #firewall_registry}Allow outgoing network traffic from the worker nodes to [{{site.data.keyword.registrylong_notm}} regions](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
+3.  {: #firewall_registry}To permit worker nodes to communicate with {{site.data.keyword.registrylong_notm}}, allow outgoing network traffic from the worker nodes to [{{site.data.keyword.registrylong_notm}} regions](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
   - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
   -  Replace <em>&lt;registry_subnet&gt;</em> with the registry subnet to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images. Port 4443 is required for notary functions, such as [Verifying image signatures](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent). <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for Registry traffic</caption>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-09"
 
 keywords: kubernetes, iks
 
@@ -28,9 +28,6 @@ subcollection: containers
 
 With {{site.data.keyword.containerlong}}, you can manage in-cluster and external networking by making apps publicly or privately accessible.
 {: shortdesc}
-
-This page helps you plan in-cluster and external networking for your apps. For information about setting up your cluster for networking, see [Setting up your cluster network](/docs/containers?topic=containers-cs_network_cluster).
-{: tip}
 
 To quickly get started with app networking, follow this decision tree and click an option to see its setup docs:
 
@@ -205,13 +202,14 @@ Still want more details about the load balancing deployment patterns that are av
 Privately expose an app in your cluster to the private network only.
 {: shortdesc}
 
-When you deploy an app in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, you might want to make the app accessible to only users and services that are on the same private network as your cluster. As an example, say that you create a private NLB for your app. This private NLB can be accessed by:
+When you deploy an app in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, you might want to make the app accessible to only users and services that are on the same private network as your cluster. Private load balancing is ideal for making your app available to requests from outside the cluster without exposing the app to the general public. You can also use private load balancing to test access, request routing, and other configurations for your app before you later expose your app to the public with public network services.
+
+As an example, say that you create a private NLB for your app. This private NLB can be accessed by:
 * Any pod in that same cluster.
 * Any pod in any cluster in the same {{site.data.keyword.Bluemix_notm}} account.
-* If you have a [VRF](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation) or [VLAN spanning](/docs/containers?topic=containers-subnets#subnet-routing) enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.Bluemix_notm}} account.
+* If you have a [VRF or VLAN spanning](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation) enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.Bluemix_notm}} account.
 * If you're not in the {{site.data.keyword.Bluemix_notm}} account but still behind the company firewall, any system through a VPN connection to the subnet that the NLB IP is on
 * If you're in a different {{site.data.keyword.Bluemix_notm}} account, any system through a VPN connection to the subnet that the NLB IP is on.
-Private load balancing is ideal for making your app available to requests from outside the cluster without exposing the app to the general public. You can also use private load balancing to test access, request routing, and other configurations for your app before you later expose your app to the public with public network services.
 
 To make an app available over a private network only, choose a load balancing deployment pattern based on your cluster's VLAN setup:
 * [Public and private VLAN setup](#private_both_vlans)
@@ -225,6 +223,8 @@ When your worker nodes are connected to both a public and a private VLAN, you ca
 
 The public network interface for worker nodes is protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports. These ports are opened so that IBM can monitor network traffic and automatically install security updates for the Kubernetes master, and so that connections can be established to NodePort, LoadBalancer, and Ingress services.
 
+Because the default Calico network policies allow inbound public traffic to these services, you can create Calico policies to instead block all public traffic to the services. For example, a NodePort service opens a port on a worker node over both the private and public IP address of the worker node. An NLB service with a portable private IP address opens a public NodePort on every worker node. You must create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block public NodePorts.
+
 Check out the following load balancing deployment patterns for private networking:
 
 |Name|Load balancing method|Use case|Implementation|
@@ -234,9 +234,6 @@ Check out the following load balancing deployment patterns for private networkin
 |NLB v2.0|DSR load balancing that exposes the app with a private IP address|Expose an app that might receive high levels of traffic to a private network with an IP address.|<ol><li>[Create a private NLB service](/docs/containers?topic=containers-loadbalancer).</li><li>An NLB with a portable private IP address still has a public node port open on every worker node. Create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to the public NodePorts.</li></ol>|
 |Ingress ALB|HTTPS load balancing that exposes the app with a host name and uses custom routing rules|Implement custom routing rules and SSL termination for multiple apps.|<ol><li>[Disable the public ALB.](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</li><li>[Enable the private ALB and create an Ingress resource](/docs/containers?topic=containers-ingress#ingress_expose_private).</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
 {: caption="Characteristics of network deployment patterns for a public and a private VLAN setup" caption-side="top"}
-
-Because the default Calico network policies allow inbound public traffic to these services, you can create Calico policies to instead block all public traffic to the services. For example, a NodePort service opens a port on a worker node over both the private and public IP address of the worker node. An NLB service with a portable private IP address opens a public NodePort on every worker node. You must create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block public NodePorts.
-{: tip}
 
 <br />
 
