@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-09"
 
 keywords: kubernetes, iks
 
@@ -134,7 +134,7 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
 
 8.  During the enablement, you might not be able to access the Kubernetes master such as to update YAML configurations for deployments. In the output of the following command, check that the **Master Status** is **Ready**.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 

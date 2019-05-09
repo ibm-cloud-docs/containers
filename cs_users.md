@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-09"
 
 keywords: kubernetes, iks
 
@@ -176,7 +176,7 @@ To successfully provision and work with clusters, you must ensure that your {{si
 
 4. Verify that the API key is set.
     ```
-    ibmcloud ks api-key-info <cluster_name_or_ID>
+    ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
