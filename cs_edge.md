@@ -105,7 +105,7 @@ Before you begin:
   ```
   {: screen}
 
-5. To verify that networking workloads are restricted to edge nodes, confirm that NLB and ALB pods are scheduled onto the edge nodes and are not scheduled to non-edge nodes.
+5. To verify that networking workloads are restricted to edge nodes, confirm that NLB and ALB pods are scheduled onto the edge nodes and are not scheduled onto non-edge nodes.
 
   * NLB pods:
     1. Confirm that the NLB pods are deployed to edge nodes. Search for the external IP address of the load balancer service that is listed in the output of step 3. Replace the periods (`.`) with hyphens (`-`). Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
@@ -125,7 +125,7 @@ Before you begin:
       kubectl describe nodes -l dedicated!=edge | grep "169-46-17-2"
       ```
       {: pre}
-      * If the NLB pods are correctly deployed to edge nodes, no NLB pods are returned.
+      * If the NLB pods are correctly deployed to edge nodes, no NLB pods are returned. Your NLBs are successfully rescheduled onto only edge worker nodes.
       * If NLB pods are returned, continue to the next step.
 
   * ALB pods:
@@ -151,17 +151,17 @@ Before you begin:
       kubectl describe nodes -l dedicated!=edge | grep alb
       ```
       {: pre}
-      * If the ALB pods are correctly deployed to edge nodes, no ALB pods are returned. Your ALBs are successfully rescheduled to only edge worker nodes.
+      * If the ALB pods are correctly deployed to edge nodes, no ALB pods are returned. Your ALBs are successfully rescheduled onto only edge worker nodes.
       * If ALB pods are returned, continue to the next step.
 
-6. If NLB or ALB pods are still deployed to non-edge nodes, you can delete the pods so that they re-deploy to edge nodes. **Important**: Delete only one pod at a time, and verify that the pod is rescheduled to an edge node before you delete other pods.
+6. If NLB or ALB pods are still deployed to non-edge nodes, you can delete the pods so that they re-deploy to edge nodes. **Important**: Delete only one pod at a time, and verify that the pod is rescheduled onto an edge node before you delete other pods.
   1. Delete a pod. Example for if one of the `webserver-lb` NLB pods did not schedule to an edge node:
     ```
     kubectl delete pod ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg
     ```
     {: pre}
 
-  2. Verify that the pod is rescheduled to an edge worker node. Rescheduling is automatic, but might take a few minutes. Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
+  2. Verify that the pod is rescheduled onto an edge worker node. Rescheduling is automatic, but might take a few minutes. Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
     ```
     kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
     ```
