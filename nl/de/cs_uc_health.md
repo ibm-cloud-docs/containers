@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -20,7 +24,6 @@ lastupdated: "2018-12-05"
 
 
 
-
 # Anwendungsfälle aus dem Gesundheitswesen für {{site.data.keyword.cloud_notm}}
 {: #cs_uc_health}
 
@@ -31,15 +34,17 @@ Diese Anwendungsfälle verdeutlichen, wie Workloads für {{site.data.keyword.con
 {: #uc_migrate}
 
 Eine IT-Führungskraft eines Anbieters aus dem Gesundheitswesen ist für lokale Systeme zum Erstellen von Geschäftsberichten und lokale Patientensysteme zuständig. Die Zyklen für die Verbesserung dieser Systeme sind langsam, was dazu führt, dass auch die Servicequalität für die Patienten stagniert.
+{: shortdesc}
 
 Warum {{site.data.keyword.cloud_notm}}: Da er den Patientenservice verbessern wollte, informierte sich der Anbieter über {{site.data.keyword.containerlong_notm}} und {{site.data.keyword.contdelivery_full}}, um damit auf einer sicheren Plattform die IT-Ausgaben zu reduzieren und die Entwicklung zu beschleunigen. Für die stark genutzten SaaS-Systeme des Anbieters, die sowohl für die Systeme zum Speichern der Patientendatensätze als auch für die Apps zum Erstellen der Geschäftsberichte verwendet wurden, waren häufig Aktualisierungen erforderlich. Doch die lokale Umgebung verhinderte eine agile Entwicklung. Außerdem wollte der Provider den steigenden Personalkosten und dem sinkenden Budget entgegenwirken.
 
-Schlüsseltechnologien:    
-* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](cs_clusters_planning.html#shared_dedicated_node)
-* [Horizontale Skalierung](cs_app.html#highly_available_apps)
-* [Containersicherheit und -isolierung](cs_secure.html#security)
+Schlüsseltechnologien:
+* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Horizontale Skalierung](/docs/containers?topic=containers-app#highly_available_apps)
+* [Containersicherheit und -isolierung](/docs/containers?topic=containers-security#security)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK für Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK für Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [Anmeldefunktionalität ohne App-Code-Änderungen durch {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
 
 Zunächst wurden die SaaS-Systeme containerisiert und in die Cloud gestellt. In diesem ersten Schritt wurde die überdimensionierte Hardware in einem privaten Rechenzentrum durch eine anpassbare Rechenleistung ersetzt, wodurch der IT-Betrieb, die Wartung und die Energiekosten reduziert wurden. Zum Hosten der SaaS-Systeme wurden einfach Kubernetes-Cluster entworfen, die an die jeweiligen Anforderungen an CPU, RAM und Speicher angepasst wurden. Ein weiterer Faktor für niedrigere Personalkosten ist die Tatsache, dass Kubernetes von IBM verwaltet wird, sodass sich der Anbieter auf die Bereitstellung eines besseren Kundendienstes konzentrieren kann.
 
@@ -70,6 +75,7 @@ Bedarfsgerechte Rechenkapazität, Speicherkapazität und E/A-Services in der öf
 * Apps, die hochsensible Patientendaten verwalten, können in {{site.data.keyword.containerlong_notm}} mithilfe von Bare Metal für Trusted Compute ausgeführt werden.
 * Mit Trusted Compute kann die zugrunde liegende Hardware auf Manipulationen überprüft werden.
 * Auf dieser Grundlage werden von Vulnerability Advisor Schwachstellensuchen für Images, Richtlinien, Container und Paketierung auf bekannte Malware durchgeführt.
+* Sie können eine richtlinienbasierte Authentifizierung für Ihre Services und APIs durch eine einfache Ingress-Annotation konsistent durchsetzen. Durch deklarative Sicherheit können Sie die Benutzerauthentifizierung und die Tokenvalidierung mithilfe von {{site.data.keyword.appid_short_notm}} sicherstellen.
 
 **Schritt 2: Lift-and-shift**
 * Migrieren Sie die Images der virtuellen Maschine auf Container-Images, die in {{site.data.keyword.containerlong_notm}} in der öffentlichen Cloud ausgeführt werden.
@@ -88,6 +94,7 @@ Bedarfsgerechte Rechenkapazität, Speicherkapazität und E/A-Services in der öf
 * {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
+* {{site.data.keyword.appid_short_notm}}
 
 Die sensibelsten Workloads können in Clustern in {{site.data.keyword.containerlong_notm}} auf Bare-Metal-Maschinen gehostet werden.  So wird eine sichere Rechenplattform bereitgestellt, in der automatisch Hardware und Laufzeitcode auf Schwachstellen durchsucht werden. Mithilfe standardisierter Container-Technologie können Apps anfangs von {{site.data.keyword.containerlong_notm}} ohne größere architektonische Änderungen erneut gehostet werden. Diese Änderung bietet den unmittelbaren Vorteil der Skalierbarkeit.
 
@@ -114,12 +121,12 @@ In der Entwicklungsabteilung einer gemeinnützigen medizinischen Forschungseinri
 
 Warum {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} bietet eine sichere Rechenleistung zum Hosten sensibler Daten und einer leistungsfähigen Datenverarbeitung auf einer offenen Plattform. Diese globale Plattform wird in nahe gelegenen Regionen gehostet. Somit ist sie an lokale Regelungen gebunden, die bei den Patienten und Forschern das Vertrauen schaffen, dass ihre Daten lokal geschützt sind und zu einer Verbesserung der Gesundheitslage beitragen.
 
-Schlüsseltechnologien:    
-* [Durch intelligentes Planen werden die Workloads nach Bedarf ausgeführt](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
-* [{{site.data.keyword.cloudant}} zum Beibehalten und Synchronisieren von Daten für Apps](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [Schwachstellensuche und Isolation für Workloads](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+Schlüsseltechnologien:
+* [Durch intelligentes Planen werden die Workloads nach Bedarf ausgeführt](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [{{site.data.keyword.cloudant}} zum Beibehalten und Synchronisieren von Daten für Apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [Schwachstellensuche und Isolation für Workloads](/docs/services/Registry?topic=va-va_index#va_index)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} zum Bereinigen der Daten und Benachrichtigen der Forscher über Änderungen an der Datenstruktur](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} zum Bereinigen der Daten und Benachrichtigen der Forscher über Änderungen an der Datenstruktur](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
 
 **Kontext: Sicheres Hosten und gemeinsames Nutzen von Krankheitsdaten für gemeinnützige Forschungseinrichtung**
 
@@ -181,7 +188,7 @@ Technische Lösung:
 
 **Schritt 1: Containerisierte Apps mithilfe von Microservices**
 * Verwenden Sie das Node.js-Starter-Kit von IBM für einen Schnelleinstieg in die Entwicklung.
-* Organisieren Sie die Apps in einer Gruppe aus kooperativen Microservices in {{site.data.keyword.containerlong_notm}}; Basis hierfür sind die Funktionsbereiche der App und ihre Abhängigkeiten.
+* Strukturieren Sie die Apps in einer Gruppe aus kooperativen Microservices in {{site.data.keyword.containerlong_notm}}; Basis hierfür sind die Funktionsbereiche der App und ihre Abhängigkeiten.
 * Stellen Sie die Forschungs-Apps in den Containern in {{site.data.keyword.containerlong_notm}} bereit.
 * Stellen Sie standardisierte DevOps-Dashboards über Kubernetes bereit.
 * Aktivieren Sie die bedarfsgerechte Skalierung der Rechenleistung für Batch-Workloads und weitere Forschungs-Workloads, die nicht häufig ausgeführt werden.

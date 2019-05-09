@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -19,21 +23,14 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-# Neue Speichernavigation
-Damit Speicherinformationen besser gefunden werden, wurden die Speicherthemen, die Sie anzeigen möchten, verschoben. Verwenden Sie die ausblendbare Option **Daten im persistenten Speicher speichern** oder klicken Sie auf einen der nachfolgenden Namen von vorherigen Titeln, um auf den Inhalt zuzugreifen.
+# Dieser Inhalt wurde verschoben.
+Verwenden Sie die ausblendbare Option **Daten im persistenten Speicher speichern** oder klicken Sie auf einen der nachfolgenden Links, um auf den Inhalt zuzugreifen.
 
-*  [Hochverfügbarkeitsspeicher planen](cs_storage_planning.html#storage_planning)
-*  [Vorhandene NFS-Dateifreigaben in Clustern verwenden](cs_storage_file.html#existing_file)
-*  [Vorhandenen Blockspeicher in Ihrem Cluster verwenden](cs_storage_block.html#existing_block)
-*  NFS-Dateispeicher oder -Blockspeicher zu Apps hinzufügen
-    * [File Storage](cs_storage_file.html#add_file)
-    * [Blockspeicher](cs_storage_block.html#add_block)
-*  [Speicherklasse für XFS-Blockspeicher anpassen](cs_storage_block.html#custom_storageclass)
-*  [Standardversion der des NFS-Dateispeichers ändern](cs_storage_file.html#nfs_version)
-*  [NFS-Speicher und persistenten Blockspeicher in Mehrzonenclustern konfigurieren](cs_storage_basics.html#multizone)
-*  CLI der IBM Cloud-Infrastruktur (SoftLayer) installieren: Nun können Sie `ibmcloud sl`-Befehle verwenden, anstatt die Schnittstelle `slcli` zu verwenden.
-*  [{{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in in Ihrem Cluster installieren](cs_storage_block.html#install_block)
-*  Lösungen zum Sichern und Wiederherstellen für NFS-Dateifreigaben und Blockspeicher konfigurieren
-    * [File Storage](cs_storage_file.html#backup_restore)
-    * [Blockspeicher](cs_storage_block.html#backup_restore)
-*  [Persistenten NFS-Dateispeicher und Blockspeicher bereinigen](cs_storage_remove.html#cleanup)
+- [Hochverfügbarkeitsspeicher planen](/docs/containers?topic=containers-storage_planning#storage_planning)
+- [Erklärung der grundlegenden Voraussetzungen für Kubernetes-Speicher](/docs/containers?topic=containers-kube_concepts#kube_concepts)
+- [Daten in IBM File Storage für IBM Cloud speichern](/docs/containers?topic=containers-file_storage#file_storage)
+- [Daten in IBM Blockspeicher für IBM Cloud speichern](/docs/containers?topic=containers-block_storage#block_storage)
+- [Daten in IBM Cloud Object Storage speichern](/docs/containers?topic=containers-object_storage#object_storage)
+- [Daten in softwaredefiniertem Speicher (SDS) mit Portworx speichern](/docs/containers?topic=containers-portworx#portworx)
+- [IBM Cloud-Speicherdienstprogramme](/docs/containers?topic=containers-utilities#utilities)
+- [Persistenten NFS-Dateispeicher und Blockspeicher bereinigen](/docs/containers?topic=containers-cleanup#cleanup)

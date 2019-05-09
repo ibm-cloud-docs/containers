@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -20,7 +24,7 @@ lastupdated: "2018-12-05"
 
 
 
-# Netzverkehr zu Edge-Workerknoten beschränken
+# Netzverkehr auf Edge-Workerknoten beschränken
 {: #edge}
 
 Mit Edge-Workerknoten kann die Sicherheit des Kubernetes-Clusters verbessert werden, indem der externe Zugriff auf Workerknoten beschränkt und die Netzarbeitslast in {{site.data.keyword.containerlong}} isoliert wird.
@@ -37,19 +41,21 @@ Wenn Sie über einen Mehrzonencluster verfügen und den Datenaustausch im Netz a
 Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten auf jedem öffentlichen VLAN in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und LoadBalancer-Services nur für diese Workerknoten bereitgestellt werden.
 {:shortdesc}
 
-Vorbemerkungen:
+Vorbereitende Schritte:
 
-1. Stellen Sie sicher, dass Sie über eine beliebige {{site.data.keyword.Bluemix_notm}} IAM-[Plattformrolle](cs_users.html#platform) verfügen.
-2. [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
+1. Stellen Sie sicher, dass Sie die folgenden [{{site.data.keyword.Bluemix_notm}} IAM-Rollen](/docs/containers?topic=containers-users#platform) innehaben:
+  * Beliebige Plattformrolle für den Cluster
+  * Servicerolle **Schreibberechtigter** oder **Manager** für alle Namensbereiche
+2. [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 3. Stellen Sie sicher, dass der Cluster mindestens über ein öffentliches VLAN verfügt. Edge-Workerknoten stehen nicht für Cluster mit ausschließlich privaten VLANs zur Verfügung.
-4. [Erstellen Sie einen neuen Worker-Pool](cs_clusters.html#add_pool), der sich über alle Zonen im Cluster erstreckt und mindestens zwei Worker pro Zone aufweist.
+4. [Erstellen Sie einen neuen Worker-Pool](/docs/containers?topic=containers-clusters#add_pool), der sich über alle Zonen im Cluster erstreckt und mindestens zwei Worker pro Zone aufweist.
 
 Gehen Sie wie folgt vor, um eine Bezeichnung für Edge-Knoten zu Workerknoten hinzuzufügen:
 
 1. Listen Sie die Workerknoten im Worker-Pool für Edge-Knoten auf. Verwenden Sie die Adresse unter **Private IP** zum Identifizieren des Knotens.
 
   ```
-  ibmcloud ks workers <clustername_oder_-id> --worker-pool <poolname_für_edge-knoten>
+  ibmcloud ks workers --cluster <clustername_oder_-id> --worker-pool <edge-poolname>
   ```
   {: pre}
 
@@ -95,7 +101,7 @@ Gehen Sie wie folgt vor, um eine Bezeichnung für Edge-Knoten zu Workerknoten hi
   ```
   {: screen}
 
-Sie haben Workerknoten mit der Bezeichnung `dedicated=edge` markiert und alle vorhandenen LoadBalancer- sowie Ingress-Services erneut auf den Workerknoten bereitgestellt. Verhindern Sie nun als nächsten Schritt, dass andere [Arbeitslasten auf Edge-Workerknoten ausgeführt werden](#edge_workloads) und [blockieren Sie eingehenden Datenverkehr an Knotenports auf Workerknoten](cs_network_policy.html#block_ingress).
+Sie haben Workerknoten mit der Bezeichnung `dedicated=edge` markiert und alle vorhandenen LoadBalancer- sowie Ingress-Services erneut auf den Workerknoten bereitgestellt. Verhindern Sie nun als nächsten Schritt, dass andere [Arbeitslasten auf Edge-Workerknoten ausgeführt werden](#edge_workloads) und [blockieren Sie eingehenden Datenverkehr an Knotenports auf Workerknoten](/docs/containers?topic=containers-network_policies#block_ingress).
 
 <br />
 
@@ -108,7 +114,11 @@ Ein Vorteil von Edge-Workerknoten besteht darin, dass sie so konfiguriert werden
 
 Die Verwendung der Tolerierung `dedicated=edge` bedeutet, dass alle LoadBalancer- und Ingress-Services nur auf den markierten Workerknoten ausgeführt werden. Um jedoch zu verhindern, dass andere Workloads auf Edge-Workerknoten ausgeführt werden und deren Ressourcen verbrauchen, müssen Sie [Kubernetes-Taints ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) verwenden.
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
+Vorbereitende Schritte:
+- Stellen Sie sicher, dass Sie über die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Manager** für alle Namensbereiche](/docs/containers?topic=containers-users#platform) verfügen.
+- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+Gehen Sie wie folgt vor, um zu verhindern, dass andere Workloads auf Edge-Workerknoten ausgeführt werden:
 
 1. Listen Sie alle Workerknoten mit der Bezeichnung `dedicated=edge` auf.
 
@@ -125,4 +135,10 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
   {: pre}
   Nun werden nur Pods mit der Tolerierung `dedicated=edge` auf Ihren Edge-Workerknoten bereitgestellt.
 
-3. Wenn Sie die [Beibehaltung der Quellen-IP für einen Lastausgleichsservice der Version 1.0 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") aktivieren](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), stellen Sie sicher, dass App-Pods auf den Edge-Workerknoten geplant sind, indem Sie [Edge-Knoten-Affinität zu App-Pods hinzufügen](cs_loadbalancer.html#edge_nodes). App-Pods müssen auf Edge-Knoten geplant werden, um eingehende Anforderungen empfangen zu können.
+3. Wenn Sie die [Beibehaltung der Quellen-IP für einen Lastausgleichsservice der Version 1.0 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") aktivieren](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), stellen Sie sicher, dass App-Pods auf den Edge-Workerknoten geplant werden, indem Sie [Edge-Knoten-Affinität zu App-Pods hinzufügen](/docs/containers?topic=containers-loadbalancer#edge_nodes). App-Pods müssen auf Edge-Knoten geplant werden, um eingehende Anforderungen empfangen zu können.
+
+4. Zum Entfernen eines Taints führen Sie den folgenden Befehl aus.
+    ```
+    kubectl taint node <knotenname> dedicated:NoSchedule- dedicated:NoExecute-
+    ```
+    {: pre}

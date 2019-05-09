@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # Lernprogramm: App aus Cloud Foundry in einen Cluster migrieren
 {: #cf_tutorial}
 
@@ -28,25 +31,32 @@ Sie können eine App nehmen, die Sie zuvor mithilfe von Cloud Foundry bereitgest
 
 
 ## Ziele
+{: #cf_objectives}
 
 - Den allgemeinen Prozess der Bereitstellung von Apps in Containern auf einem Kubernetes-Cluster kennenlernen.
 - Eine Dockerfile aus Ihrem App-Code generieren, um ein Container-Image zu erstellen.
 - Einen Container aus diesem Image in einem Kubernetes-Cluster bereitstellen.
 
 ## Erforderlicher Zeitaufwand
+{: #cf_time}
+
 30 Minuten
 
 ## Zielgruppe
+{: #cf_audience}
+
 Dieses Lernprogramm richtet sich an Entwickler von Cloud Foundry-Apps.
 
 ## Voraussetzungen
+{: #cf_prereqs}
 
-- [Erstellen Sie eine private Image-Registry in {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
-- [Erstellen Sie einen Cluster](cs_clusters.html#clusters_ui).
-- [Geben Sie als Ziel Ihrer CLI den Cluster an](cs_cli_install.html#cs_cli_configure).
+- [Erstellen Sie eine private Image-Registry in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-index).
+- [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_ui).
+- [Geben Sie als Ziel Ihrer CLI den Cluster an](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen:
-    - [Beliebige Plattformrolle](cs_users.html#platform)
-- [Lernen Sie die Docker- und Kubernetes-Terminologie kennen](cs_tech.html).
+    - [Beliebige Plattformrolle](/docs/containers?topic=containers-users#platform)
+    - Die [Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform)
+- [Lernen Sie die Docker- und Kubernetes-Terminologie kennen](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
 
 
 <br />
@@ -54,6 +64,7 @@ Dieses Lernprogramm richtet sich an Entwickler von Cloud Foundry-Apps.
 
 
 ## Lerneinheit 1: App-Code herunterladen
+{: #cf_1}
 
 Bereiten Sie Ihren Code vor. Sie haben noch keinen Code? Sie können den in diesem Lernprogramm verwendeten Starter-Code herunterladen.
 {: shortdesc}
@@ -79,7 +90,7 @@ Bereiten Sie Ihren Code vor. Sie haben noch keinen Code? Sie können den in dies
 
     c. Klicken Sie in Schritt 1 in den Konsolenanweisungen auf **STARTER-CODE HERUNTERLADEN**.
 
-    d. Extrahieren Sie die ZIP-Datei und speichern Sie ihren Inhalt in Ihrem Verzeichnis `cf-py`.
+    d. Extrahieren Sie die ZIP-Datei (`.zip`) und speichern Sie ihren Inhalt in Ihrem Verzeichnis `cf-py`.
 
 Ihr App-Code kann jetzt containerisiert werden.
 
@@ -89,6 +100,7 @@ Ihr App-Code kann jetzt containerisiert werden.
 
 
 ## Lerneinheit 2: Docker-Image mit Ihrem App-Code erstellen
+{: #cf_2}
 
 Erstellen Sie eine Dockerfile, die Ihren App-Code und die notwendigen Konfigurationen für Ihren Container enthält. Erstellen Sie anschließend ein Docker-Image aus dieser Dockerfile, und übertragen Sie es per Push-Operation in Ihre private Image-Registry.
 {: shortdesc}
@@ -175,6 +187,7 @@ Erstellen Sie eine Dockerfile, die Ihren App-Code und die notwendigen Konfigurat
 
 
 ## Lerneinheit 3: Container aus Ihrem Image bereitstellen
+{: #cf_3}
 
 Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 {: shortdesc}
@@ -182,7 +195,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 1. Erstellen Sie eine YAML-Konfigurationsdatei namens `cf-py.yaml` und aktualisieren Sie `<registry_namespace>` mit dem Namen Ihrer privaten Image-Registry. Diese Konfigurationsdatei definiert eine Containerbereitstellung aus dem Image, das Sie in der vorherigen Lerneinheit erstellt haben, und einen Service, um die App der Öffentlichkeit zugänglich zu machen.
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -255,7 +268,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
     a.  Rufen Sie die öffentliche IP-Adresse für den Workerknoten im Cluster ab.
 
     ```
-    ibmcloud ks workers <clustername>
+    ibmcloud ks workers --cluster <clustername>
     ```
     {: pre}
 
@@ -263,7 +276,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 
@@ -271,11 +284,11 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
     <img src="images/python_flask.png" alt="Screenshot der bereitgestellten Python Flask-Boilerplate-App." />
 
-5.  [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
+5.  [Starten Sie das Kubernetes-Dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
+    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://cloud.ibm.com/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
     {: tip}
 
 6. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt.
 
-Glückwunsch! Ihre App ist jetzt in einem Container bereitgestellt.
+Gute Arbeit! Ihre App ist jetzt in einem Container bereitgestellt.

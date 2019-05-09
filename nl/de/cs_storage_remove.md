@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -34,7 +38,7 @@ Erklärung der Löschoptionen:
 Es kommt darauf an. Wenn Sie einen Cluster löschen, werden der PVC und der persistente Datenträger gelöscht. Sie können jedoch wählen, ob die zugeordnete Speicherinstanz in der IBM Cloud-Infrastruktur (SoftLayer) entfernt werden soll. Wenn Sie wählen, Sie nicht zu entfernen, ist die Speicherinstanz noch vorhanden. Wenn Sie den Cluster in einem nicht einwandfreien Zustand gelöscht haben, kann der Speicher auch dann noch vorhanden sein, wenn Sie ausgewählt haben, ihn zu entfernen. Führen Sie die Anweisungen aus, insbesondere den Schritt zum [Löschen Ihrer Speicherinstanz](#sl_delete_storage) in der IBM Cloud-Infrastruktur (SoftLayer).
 
 **Kann ich den PVC löschen, um meinen gesamten Speicher zu entfernen?**</br>
-Manchmal. Wenn Sie [den persistenten Speicher dynamisch erstellen](cs_storage_basics.html#dynamic_provisioning) und eine Speicherklasse wählen, die im Namen kein `retain` führt, werden beim Löschen des PVC auch der persistente Datenträger und die Instanz der IBM Cloud-Infrastruktur (SoftLayer) gelöscht.
+Manchmal. Wenn Sie [den persistenten Speicher dynamisch erstellen](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) und eine Speicherklasse wählen, die im Namen kein `retain` führt, werden beim Löschen des PVC auch der persistente Datenträger und die Instanz der IBM Cloud-Infrastruktur (SoftLayer) gelöscht.
 
 Führen Sie in allen anderen Fällen die Anweisungen zum Überprüfen des Status Ihres Persistent Volume Claim, des persistenten Datenträgers und der physischen Speichereinheit aus und löschen Sie sie, falls erforderlich, separat.
 
@@ -42,14 +46,14 @@ Führen Sie in allen anderen Fällen die Anweisungen zum Überprüfen des Status
 Dies hängt vom Abrechnungstyp sowie davon ab, welche Elemente Sie löschen. Wenn Sie den PVC und den persistenten Datenträger, aber nicht die Instanz in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) löschen, ist diese Instanz weiterhin vorhanden und Ihnen werden dafür Gebühren berechnet. Damit Ihnen keine Gebühren mehr berechnet werden, müssen Sie alles löschen. Wenn Sie außerdem im Persistent Volume Claim den Abrechnungstyp (`billingType`) angeben, können Sie zwischen einer Abrechnung auf Stundenbasis (`hourly`) und der monatlichen Abrechnung (`monthly`) wählen. Wenn Sie `monthly` auswählen, wird monatlich eine Abrechnung für Ihre Instanz erstellt. Wenn Sie die Instanz löschen, wird Ihnen der Rest des Monats in Rechnung gestellt.
 
 
-<p class="important">Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](cs_storage_file.html#backup_restore) oder den [Blockspeicher](cs_storage_block.html#backup_restore) eine Sicherung ausführen.</br>
-</br>Wenn Sie ein {{site.data.keyword.Bluemix_dedicated}}-Konto verwenden, müssen Sie die Datenträgerlöschung anfordern, indem Sie [einen Supportfall öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).</p>
+<p class="important">Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](/docs/containers?topic=containers-file_storage#file_backup_restore) oder den [Blockspeicher](/docs/containers?topic=containers-block_storage#block_backup_restore) eine Sicherung ausführen.</br>
+</br>Wenn Sie ein {{site.data.keyword.Bluemix_dedicated}}-Konto verwenden, müssen Sie die Datenträgerlöschung anfordern, indem Sie [einen Supportfall öffnen](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
 
-1.  Listen Sie die PVCs in Ihrem Cluster auf und notieren Sie sich folgende Einstellungen: **NAME** des Persistent Volume Claim, die Speicherklasse (**STORAGECLASS**) und den Namen des persistenten Datenträgers, der an den Persistent Volume Claim gebunden ist und als **VOLUME** angezeigt wird.
+1.  Listen Sie die PVCs in Ihrem Cluster auf und notieren Sie sich folgende Einstellungen: **`NAME`** des Persistent Volume Claim, die Speicherklasse (**`STORAGECLASS`**) und den Namen des persistenten Datenträgers, der an den Persistent Volume Claim gebunden ist und als **`VOLUME`** angezeigt wird.
     ```
     kubectl get pvc
     ```
@@ -64,7 +68,7 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
     ```
     {: screen}
 
-2. Überprüfen Sie für die Speicherklasse die Einstellungen für **ReclaimPolicy** und **billingType**.
+2. Überprüfen Sie für die Speicherklasse die Einstellungen für **`ReclaimPolicy`** und **`billingType`**.
    ```
    kubectl describe storageclass <name_der_speicherklasse>
    ```
@@ -108,7 +112,7 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    ```
    {: pre}
 
-5. Überprüfen Sie den Status Ihres persistenten Datenträgers. Verwenden Sie den Namen des persistenten Datenträgers (PV), den Sie zuvor als **VOLUME** abgerufen haben.
+5. Überprüfen Sie den Status Ihres persistenten Datenträgers. Verwenden Sie den Namen des persistenten Datenträgers (PV), den Sie zuvor als **`VOLUME`** abgerufen haben.
    ```
    kubectl get pv <pv-name>
    ```
@@ -128,9 +132,9 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    ```
    {: pre}
 
-8. {: #sl_delete_storage}Listen Sie die physische Speicherinstanz auf, auf die Ihr persistenter Datenträger verwiesen hat, und notieren Sie die **id** der physischen Speicherinstanz.
+8. {: #sl_delete_storage}Listen Sie die physische Speicherinstanz auf, auf die Ihr persistenter Datenträger verwiesen hat, und notieren Sie die **`id`** der physischen Speicherinstanz.
 
-   **File Storage:**
+   **Dateispeicher:**
    ```
    ibmcloud sl file volume-list --columns id  --columns notes | grep <pv-name>
    ```
@@ -147,22 +151,23 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    Beispielausgabe:
    ```
    id         notes   
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z
+   12345678   {"plugin":"ibm-file-plugin-5b55b7b77b-55bb7","region":"us-south","cluster":"aa1a11a1a11b2b2bb22b22222c3c3333","type":"Endurance","ns":"default","pvc":"mypvc","pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7","storageclass":"ibmc-file-gold"}
    ```
    {: screen}
 
-   Erklärung der Informationen im Feld **Anmerkungen**:
-   *  **`:`**: Die Informationen werden durch ein Semikolon (`:`) voneinander getrennt.
-   *  **` ibmcloud-block-storage-plugin-7566ccb8d-44nff`**: Das Speicher-Plug-in, das der Cluster verwendet.
-   *  **`us-south`**: Die Region, in der sich Ihr Cluster befindet.
-   *  **`aa1a11a1a11b2b2bb22b22222c3c3333`**: Die Cluster-ID, die der Speicherinstanz zugeordnet ist.
-   *  **`Performance`**: Der Typ des Datei- oder Blockspeichers, entweder `Endurance` oder `Performance`.
-   *  **`mypvc`**: Der Name des Persistent Volume Claim, der der Speicherinstanz zugeordnet ist.
-   *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`**: Der persistente Datenträger, der der Speicherinstanz zugeordnet ist.
+   Erklärung der Informationen im Feld **notes**:
+   *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`**: Das Speicher-Plug-in, das der Cluster verwendet.
+   *  **`"region":"us-south"`**: Die Region, in der sich Ihr Cluster befindet.
+   *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`**: Die Cluster-ID, die der Speicherinstanz zugeordnet ist.
+   *  **`"type":"Endurance"`**: Der Typ des Datei- oder Blockspeichers, entweder `Endurance` oder `Performance`.
+   *  **`"ns":"default"`**: Der Namensbereich, in dem die Speicherinstanz bereitgestellt wurde.
+   *  **`"pvc":"mypvc"`**: Der Name des Persistent Volume Claim, der der Speicherinstanz zugeordnet ist.
+   *  **`"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`**: Der persistente Datenträger, der der Speicherinstanz zugeordnet ist.
+   *  **`"storageclass":"ibmc-file-gold"`**: Der Typ von Speicherklasse: 'bronze', 'silver', 'gold' oder 'custom'.
 
 9. Entfernen Sie die physische Speicherinstanz.
 
-   **File Storage:**
+   **Dateispeicher:**
    ```
    ibmcloud sl file volume-cancel <dateispeicher-id>
    ```
@@ -176,7 +181,7 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
 
 9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. Beachten Sie, dass der Löschvorgang mehrere Tage dauern kann.
 
-   **File Storage:**
+   **Dateispeicher:**
    ```
    ibmcloud sl file volume-list
    ```

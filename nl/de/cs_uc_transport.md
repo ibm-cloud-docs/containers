@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -20,40 +24,39 @@ lastupdated: "2018-12-05"
 
 
 
-
 # Anwendungsfälle aus dem Transportwesen für {{site.data.keyword.cloud_notm}}
 {: #cs_uc_transport}
 
-Anhand der folgenden Anwendungsfälle wird hervorgehoben, wie Workloads in {{site.data.keyword.containerlong_notm}} von Toolchains für schnelle App-Aktualisierungen und Bereitstellungen in mehreren Regionen auf der Welt profitieren können. Gleichzeitig können diese Workloads eine Verbindung zu vorhandenen Back-End-Systemen herstellen, Watson AI für die Personalisierung verwenden und mit {{site.data.keyword.messagehub_full}} auf IoT-Daten zugreifen. 
+Anhand der folgenden Anwendungsfälle wird hervorgehoben, wie Workloads in {{site.data.keyword.containerlong_notm}} von Toolchains für schnelle App-Aktualisierungen und Bereitstellungen in mehreren Regionen auf der Welt profitieren können. Gleichzeitig können diese Workloads eine Verbindung zu vorhandenen Back-End-Systemen herstellen, Watson AI für die Personalisierung verwenden und mit {{site.data.keyword.messagehub_full}} auf IoT-Daten zugreifen.
 
 {: shortdesc}
 
-## Reederei erhöht die Verfügbarkeit weltweiter Systeme für Partnernetzwerk
+## Reederei erhöht die Verfügbarkeit weltweiter Systeme für Geschäftspartnernetzwerk
 {: #uc_shipping}
 
 Eine IT-Führungskraft ist für die weltweiten Streckenführungs- und Planungssysteme verantwortlich, mit denen die Partner interagieren. Die Partner benötigen von diesen Systemen, die auf IoT-Einheitendaten zugreifen, zeitnahe Informationen. Die Hochverfügbarkeit für diese Systeme konnte jedoch nicht weltweit skaliert werden.
 {: shortdesc}
- 
-Warum {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} skaliert containerisierte Apps mit extrem hoher Verfügbarkeit, um dem wachsenden Bedarf gerecht zu werden. Die App-Bereitstellungen werden 40 Mal pro Tag durchgeführt zu, wenn die Entwickler ohne großen Aufwand experimentieren; auf diese Art werden Änderungen schnell zu Bereitstellungs- und Testsystemen hinzugefügt. Die IoT-Plattform erleichtert den Zugriff auf IoT-Daten. 
- 
+
+Warum {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} skaliert containerisierte Apps mit extrem hoher Verfügbarkeit, um dem wachsenden Bedarf gerecht zu werden. Die App-Bereitstellungen werden 40 Mal pro Tag durchgeführt zu, wenn die Entwickler ohne großen Aufwand experimentieren; auf diese Art werden Änderungen schnell zu Bereitstellungs- und Testsystemen hinzugefügt. Die IoT-Plattform erleichtert den Zugriff auf IoT-Daten.
+
 Schlüsseltechnologien:    
-* [Mehrere Regionen für Partnernetzwerk](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
-* [Horizontale Skalierung](cs_app.html#highly_available_apps) 
+* [Mehrere Regionen für Geschäftspartnernetzwerk ](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [Horizontale Skalierung](/docs/containers?topic=containers-app#highly_available_apps)
 * [Offene Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Cloud-Services für Innovation](https://www.ibm.com/cloud/products/#analytics)
-* [{{site.data.keyword.messagehub_full}} für die Zuführung von Ereignisdaten zu Apps](https://console.bluemix.net/docs/services/MessageHub/messagehub010.html#about)
+* [{{site.data.keyword.messagehub_full}} für die Zuführung von Ereignisdaten zu Apps](/docs/services/EventStreams?topic=eventstreams-about#about)
 
-**Kontext: Reederei erhöht Verfügbarkeit weltweiter Systeme für Partnernetzwerk**
+**Kontext: Reederei erhöht Verfügbarkeit weltweiter Systeme für Geschäftspartnernetzwerk**
 
-* Regionale Unterschiede in der Logistik machten es schwierig, der wachsenden Anzahl an Partnern in mehreren Ländern Rechnung zu tragen. So müssen zum Beispiel eindeutige Regelungen und die Transitlogistik beachtet werden, für die vom Unternehmen konsistente Datensätze über Grenzen hinweg verwaltet werden müssen. 
-* Just-in-time-Daten bedeuteten, dass die weltweiten Systeme hoch verfügbar sein müssen, um Verzögerungen bei der Übertragung zu reduzieren. Die Zeitpläne für die Schiffsumschlaganlagen werden exakt gesteuert und sind in manchen Fallen inflexibel. Da die Nutzung des World Wide Web zunimmt, kann die Instabilität eine schlechte Benutzererfahrung zur Folge haben. 
+* Regionale Unterschiede in der Logistik machten es schwierig, der wachsenden Anzahl an Partnern in mehreren Ländern Rechnung zu tragen. So müssen zum Beispiel eindeutige Regelungen und die Transitlogistik beachtet werden, für die vom Unternehmen konsistente Datensätze über Grenzen hinweg verwaltet werden müssen.
+* Just-in-time-Daten bedeuteten, dass die weltweiten Systeme hoch verfügbar sein müssen, um Verzögerungen bei der Übertragung zu reduzieren. Die Zeitpläne für die Schiffsumschlaganlagen werden exakt gesteuert und sind in manchen Fallen inflexibel. Da die Nutzung des World Wide Web zunimmt, kann die Instabilität eine schlechte Benutzererfahrung zur Folge haben.
 * Entwickler müssen die Apps ständig weiterentwickeln, aufgrund der traditionellen Tools dauerte es jedoch lange, Aktualisierungen und Funktionen häufig bereitzustellen.  
 
 **Die Lösung**
 
-Die Reederei muss die Zeitpläne für die Verschiffung, die Lagerbestände und die Zollpapiere kohäsiv verwalten. Danach können die Position der Sendungen, der Lieferumfang und die Lieferpläne mit den Kunden gemeinsam genutzt werden. Somit ist es nicht mehr nötig, zu schätzen, wann eine Ware (zum Beispiel ein Gerät, Bekleidung oder ein Produkt) eintrifft, sodass die Kunden der Reederei diese Informationen an ihre Kunden übermitteln können. 
+Die Reederei muss die Zeitpläne für die Verschiffung, die Lagerbestände und die Zollpapiere kohäsiv verwalten. Danach können die Position der Sendungen, der Lieferumfang und die Lieferpläne mit den Kunden gemeinsam genutzt werden. Somit ist es nicht mehr nötig, zu schätzen, wann eine Ware (zum Beispiel ein Gerät, Bekleidung oder ein Produkt) eintrifft, sodass die Kunden der Reederei diese Informationen an ihre Kunden übermitteln können.
 
-Die Lösung besteht aus den folgenden wichtigen Bestandteilen: 
+Die Lösung besteht aus den folgenden wichtigen Bestandteilen:
 1. Das Streaming der Daten von IoT-Geräten für jeden Versandcontainer: Frachtlisten und Standort
 2. Zollpapiere, die digital mit den jeweiligen Häfen und Transitpartnern gemeinsam genutzt werden (einschließlich Zugriffskontrolle)
 3. Eine App für Reedereikunden, die Ankunftsdaten für Transportgut zusammenfasst und überträgt, einschließlich APIs für Reedereikunden zum erneuten Verwenden der Sendungsdaten in ihren eigenen Einzelhandels- und Business-to-Business-Apps
@@ -69,13 +72,13 @@ Da die Sendungsdaten mit den Kunden des Unternehmens gemeinsam genutzt werden, s
 * Überwachen von Status und Wiederherstellung für Workerknoten
 * Bereitstellung globaler Rechenleistung, damit Entwickler nicht für die Infrastruktur in den mehreren Regionen verantwortlich sind, in denen sich Workloads und Daten befinden müssen
 
-Um eine globale Verfügbarkeit zu erreichen, wurden die Entwicklungs-, Test- und Produktionssysteme auf der ganzen Welt in mehreren Rechenzentren bereitgestellt. Zur Gewährleistung der hohen Verfügbarkeit wird eine Kombination aus mehreren Clustern in unterschiedlichen geografischen Regionen sowie Mehrzonenclustern verwendet. Somit können die Hafen-Apps ohne großen Aufwand so bereitgestellt werden, dass die Geschäftsanforderungen erfüllt werden: 
+Um eine globale Verfügbarkeit zu erreichen, wurden die Entwicklungs-, Test- und Produktionssysteme auf der ganzen Welt in mehreren Rechenzentren bereitgestellt. Zur Gewährleistung der hohen Verfügbarkeit wird eine Kombination aus mehreren Clustern in unterschiedlichen geografischen Regionen sowie Mehrzonenclustern verwendet. Somit können die Hafen-Apps ohne großen Aufwand so bereitgestellt werden, dass die Geschäftsanforderungen erfüllt werden:
 * In Clustern in Frankfurt zur Einhaltung der lokalen EU-Regelungen
-* In Clustern in den USA, um die lokale Verfügbarkeit und die Wiederherstellung bei Fehlern sicherzustellen 
+* In Clustern in den USA, um die lokale Verfügbarkeit und die Wiederherstellung bei Fehlern sicherzustellen
 
 Auch die Workloads wurden auf Mehrzonencluster in Frankfurt verteilt, um die Verfügbarkeit der Europäischen Version der App und einen effizienten Lastausgleich für die Workload sicherzustellen. Da von jeder Region mit der Hafen-App eindeutige Daten hochgeladen werden, werden die Cluster der App in Regionen gehostet, in denen die Latenzzeit niedrig ist.
 
-Für Entwickler kann ein großer Teil des fortlaufenden Integrations- und Bereitstellungsprozesses (CI/CD-Prozess) mit {{site.data.keyword.contdelivery_full}} automatisiert werden. Das Unternehmen kann die Workflow-Toolchains zum Vorbereiten der Container-Images definieren, eine Überprüfung auf Schwachstellen durchführen und eine Bereitstellung im Kubernetes-Cluster ausführen. 
+Für Entwickler kann ein großer Teil des fortlaufenden Integrations- und Bereitstellungsprozesses (CI/CD-Prozess) mit {{site.data.keyword.contdelivery_full}} automatisiert werden. Das Unternehmen kann die Workflow-Toolchains zum Vorbereiten der Container-Images definieren, eine Überprüfung auf Schwachstellen durchführen und eine Bereitstellung im Kubernetes-Cluster ausführen.
 
 **Lösungsmodell**
 
@@ -90,32 +93,32 @@ Technische Lösung:
 **Schritt 1: Containerisierte Apps mithilfe von Microservices**
 
 * Organisieren Sie die Apps in einer Gruppe aus kooperativen Microservices in {{site.data.keyword.containerlong_notm}}; Basis hierfür sind die Funktionsbereiche der App und ihre Abhängigkeiten.
-* Stellen Sie die Apps in den Containern in {{site.data.keyword.containerlong_notm}} bereit. 
+* Stellen Sie die Apps in den Containern in {{site.data.keyword.containerlong_notm}} bereit.
 * Stellen Sie standardisierte DevOps-Dashboards über Kubernetes bereit.
 * Aktivieren Sie die bedarfsgerechte Skalierung der Rechenleistung für Batch-Workloads und Lagerbestands-Workloads, die nicht häufig ausgeführt werden.
 * Verwenden Sie {{site.data.keyword.messagehub_full}} zum Verwalten der Streaming-Daten von den IoT-Geräten.
 
 **Schritt 2: Globale Verfügbarkeit sicherstellen**
 * Die in {{site.data.keyword.containerlong_notm}} integrierten Hochverfügbarkeitstools gleichen die Workload in jeder geografischen Region aus; hierbei sind auch automatische Fehlerbehebung und Lastverteilung eingeschlossen.
-* Für Lastausgleich, Firewalls und DNS wird IBM Cloud Internet Services verwendet. 
-* Mithilfe der Toolchains und Helm-Bereitstellungstools werden die Apps auch in Clustern auf der ganzen Welt bereitgestellt; somit erfüllen die Workloads und Daten die regionalen Vorschriften. 
+* Für Lastausgleich, Firewalls und DNS wird IBM Cloud Internet Services verwendet.
+* Mithilfe der Toolchains und Helm-Bereitstellungstools werden die Apps auch in Clustern auf der ganzen Welt bereitgestellt; somit erfüllen die Workloads und Daten die regionalen Vorschriften.
 
 **Schritt 3: Daten gemeinsam nutzen**
-* Von {{site.data.keyword.cos_full}} und {{site.data.keyword.messagehub_full}} wird ein echtzeitorientierter Protokolldatenspeicher bereitgestellt. 
+* Von {{site.data.keyword.cos_full}} und {{site.data.keyword.messagehub_full}} wird ein echtzeitorientierter Protokolldatenspeicher bereitgestellt.
 * Die Kunden der Reederei können die Daten in ihren Apps gemeinsam nutzen.
 
 **Schritt 4: Kontinuierlich bereitstellen**
 * {{site.data.keyword.contdelivery_full}} dient Entwicklern als Unterstützung bei der schnellen Bereitstellung einer integrierten Toolchain mithilfe anpassbarer und gemeinsam nutzbarer Vorlagen unter Verwendung von IBM Tools, Tools von Drittanbietern und Open-Source-Tools. Automatisieren Sie Erstellungen und Tests und kontrollieren Sie die Qualität durch Analysen.
-* Nachdem die Entwickler die Apps in den Entwicklungs- und Testclustern erstellt und getestet haben, verwenden Sie die IBM CI/CD-Toolchains zum Bereitstellen von Apps in Clustern auf der ganzen Welt. 
-* {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps; angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio bereitgestellt, damit regionale Anforderungen erfüllt werden können. 
+* Nachdem die Entwickler die Apps in den Entwicklungs- und Testclustern erstellt und getestet haben, verwenden Sie die IBM CI/CD-Toolchains zum Bereitstellen von Apps in Clustern auf der ganzen Welt.
+* {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps; angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio bereitgestellt, damit regionale Anforderungen erfüllt werden können.
 
 **Ergebnisse**
 
-* Mit {{site.data.keyword.containerlong_notm}} und CI/CD-Tools von IBM werden regionale Versionen der Apps in der Nähe der physischen Einheiten gehostet, von denen sie Daten erfassen. 
+* Mit {{site.data.keyword.containerlong_notm}} und CI/CD-Tools von IBM werden regionale Versionen der Apps in der Nähe der physischen Einheiten gehostet, von denen sie Daten erfassen.
 * Mit Microservices wird die Bereitstellungszeit für Patches, Fehlerkorrekturen und neue Funktionen erheblich reduziert. Erstmalige Entwicklungen verlaufen schnell und Aktualisierungen sind häufig.
 * Die Kunden der Reederei verfügen über Echtzeitzugriff auf die Positionen der Sendungen, Lieferpläne und sogar die genehmigten Hafendaten.
-* Da die Transitpartner an den verschiedenen Versandterminals über die Frachtlisten und und Sendungsdetails verfügen, verläuft die Logistik vor Ort schneller und es kommt zu weniger Verzögerungen. 
-* Abgesehen von diesem Szenario [sind Maersk und IBM ein Joint Venture eingegangen](https://www.ibm.com/press/us/en/pressrelease/53602.wss), um internationale Lieferketten mit Blockchain zu verbessern. 
+* Da die Transitpartner an den verschiedenen Versandterminals über die Frachtlisten und und Sendungsdetails verfügen, verläuft die Logistik vor Ort schneller und es kommt zu weniger Verzögerungen.
+* Abgesehen von diesem Szenario [sind Maersk und IBM ein Joint Venture eingegangen](https://www.ibm.com/press/us/en/pressrelease/53602.wss), um internationale Lieferketten mit Blockchain zu verbessern.
 
 ## Fluglinie stellt innovative Human Resources-Site für Mitarbeiterleistungen in weniger als drei Wochen bereit
 {: #uc_airline}
@@ -126,26 +129,26 @@ Ein Chief Human Resources Officer (CHRO) benötigt eine neue Human Resources-Sit
 Warum {{site.data.keyword.cloud_notm}}: Mit {{site.data.keyword.containerlong_notm}} kann die Rechenleistung in kurzer Zeit bereitgestellt werden. Somit können die Entwickler ohne großen Aufwand experimentieren und mit offenen Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen. Die Arbeit mit ihren herkömmlichen Softwareentwicklungstools verläuft deutlich schneller, wenn sie IBM Watson Assistant hinzufügen. Die neue Leistungsseite wurde in weniger als 3 Wochen erstellt.
 
 Schlüsseltechnologien:    
-* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](cs_clusters_planning.html#shared_dedicated_node)
+* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Chatbot-Service, der auf Watson basiert](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK für Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK für Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **Kontext: Schnelle Erstellung und Bereitstellung einer innovativen Human Resources-Site für Mitarbeiterleistungen in weniger als drei Wochen**
-* Die Zunahme der Mitarbeiter und sich ändernde Personalpolitik haben zur Folge, dass eine ganz neue Site für die jährlichen Bewerbungen erforderlich wird. 
+* Die Zunahme der Mitarbeiter und sich ändernde Personalpolitik haben zur Folge, dass eine ganz neue Site für die jährlichen Bewerbungen erforderlich wird.
 * Die neue Personalpolitik soll den vorhandenen Mitarbeitern mithilfe interaktiver Funktionen wie einem Chatbot mitgeteilt werden.
-* Aufgrund der Zunahme an Mitarbeitern stieg der Datenverkehr auf der Site, das Budget für ihre Infrastruktur bleibt jedoch niedrig. 
-* Das Human Resources-Team stand unter Druck, die neuen Funktionen schnell bereitzustellen und die Änderungen an den Leistungen in letzter Minute häufig zu veröffentlichen. 
+* Aufgrund der Zunahme an Mitarbeitern stieg der Datenverkehr auf der Site, das Budget für ihre Infrastruktur bleibt jedoch niedrig.
+* Das Human Resources-Team stand unter Druck, die neuen Funktionen schnell bereitzustellen und die Änderungen an den Leistungen in letzter Minute häufig zu veröffentlichen.
 * Da die Bewerbungsfrist zwei Wochen dauert, darf es nicht zu einer Ausfallzeit für die App kommen.
 
 **Die Lösung**
 
-Mit einer offenen Kultur möchte die Fluglinie den Menschen in den Mittelpunkt stellen. Der Personalvorstand ist sich bewusst, dass es für die Rentabilität der Fluglinie von Vorteil ist, wenn es ihr gelingt Talente zu gewinnen und zu halten. Aus diesem Grund ist die jährliche Anwerbung neuer Mitarbeiter ein wichtiger Aspekt bei der Förderung einer auf den Mitarbeiter ausgerichteten Unternehmenskultur. 
+Mit einer offenen Kultur möchte die Fluglinie den Menschen in den Mittelpunkt stellen. Der Personalvorstand ist sich bewusst, dass es für die Rentabilität der Fluglinie von Vorteil ist, wenn es ihr gelingt Talente zu belohnen und zu halten. Aus diesem Grund ist die jährliche Anwerbung neuer Mitarbeiter ein wichtiger Aspekt bei der Förderung einer auf den Mitarbeiter ausgerichteten Unternehmenskultur.
 
 Es ist eine Lösung erforderlich, die Vorteile für Entwicklern und Benutzer bietet:
 * Front-End für vorhandene Leistungen: Versicherung, Bildungsangebote, Wellness und vieles mehr
 * Regional spezifische Features: Da für jedes Land eine eigene Personalpolitik gilt, können sich die Seiten ähnlich sehen, für jede Region werden jedoch spezifische Leistungen angeboten
-* Entwicklerfreundliche Tools: Das Implementieren von Funktionen und Beheben von Fehlern wird beschleunigt 
+* Entwicklerfreundliche Tools: Das Implementieren von Funktionen und Beheben von Fehlern wird beschleunigt
 * Chatbot: Bereitstellung authentischer Gespräche über Leistungen und einer effizienten Beantwortung von Benutzeranforderungen und -fragen
 
 Technische Lösung:
@@ -154,8 +157,9 @@ Technische Lösung:
 * {{site.data.keyword.contdelivery_full}}
 * IBM Cloud Logging and Monitoring
 * {{site.data.keyword.SecureGatewayfull}}
+* {{site.data.keyword.appid_full_notm}}
 
-Für CHRO ist die beschleunigte Entwicklung eine bedeutende Verbesserung. Das Team beginnt zunächst damit, die Apps zu containerisieren und in die Cloud zu stellen. Durch die Verwendung moderner Container können die Entwickler ohne großen Aufwand mit dem Node.js-SDK experimentieren und Änderungen zu Bereitstellungs- und Testsystemen mit Push-Operationen hinzufügen, die mit separaten Clustern horizontal skaliert werden. Diese Push-Operationen wurden mit offenen Toolchains und {{site.data.keyword.contdelivery_full}} automatisiert. Die Aktualisierung der Human Resources-Site zieht sich nicht mehr in langsamen, fehlerträchtigen Erstellungsprozessen hin. Schrittweise Aktualisierungen können für die Site täglich oder sogar noch häufiger bereitgestellt werden.  Darüber hinaus ist die Protokollierung und Überwachung der Human Resources-Site schnell integriert, insbesondere in Bezug auf die Art und Weise, wie von der Site personalisierte Daten aus Back-End-Leistungssystemen extrahiert werden. Die Entwickler verschwenden ihre Zeit nicht mit dem Erstellen komplexer Protokollierungssysteme, nur um in der Lage zu sein, Fehler in den aktiven Systemen zu beheben.
+Für CHRO ist die beschleunigte Entwicklung eine bedeutende Verbesserung. Das Team beginnt zunächst damit, die Apps zu containerisieren und in die Cloud zu stellen. Durch die Verwendung moderner Container können die Entwickler ohne großen Aufwand mit dem Node.js-SDK experimentieren und Änderungen zu Bereitstellungs- und Testsystemen mit Push-Operationen hinzufügen, die mit separaten Clustern horizontal skaliert werden. Diese Push-Operationen wurden mit offenen Toolchains und {{site.data.keyword.contdelivery_full}} automatisiert. Die Aktualisierung der Human Resources-Site zieht sich nicht mehr in langsamen, fehlerträchtigen Erstellungsprozessen hin. Schrittweise Aktualisierungen können für die Site täglich oder sogar noch häufiger bereitgestellt werden.  Darüber hinaus ist die Protokollierung und Überwachung der Human Resources-Site schnell integriert, insbesondere in Bezug auf die Art und Weise, wie von der Site personalisierte Daten aus Back-End-Leistungssystemen extrahiert werden. Die Entwickler verschwenden ihre Zeit nicht mit dem Erstellen komplexer Protokollierungssysteme, nur um in der Lage zu sein, Fehler in den aktiven Systemen zu beheben. Entwickler müssen keine Zeit darauf verwenden, sich zu Experten für Cloudsicherheit weiterzubilden. Mithilfe von {{site.data.keyword.appid_full_notm}} können sie ohne großen Aufwand eine richtliniengesteuerte Authentifizierung umsetzen.
 
 Mit {{site.data.keyword.containerlong_notm}} wurde die überdimensionierte Hardware in einem privaten Rechenzentrum durch anpassbare Rechenleistung ersetzt, wodurch der IT-Betrieb, die Wartung und die Energiekosten reduziert wurden. Zum Hosten der Human Resources-Site konnten ohne großen Aufwand Kubernetes-Cluster entworfen werden, die an die Anforderungen an CPU, RAM und Speicher angepasst wurden. Ein weiterer Faktor für niedrigere Personalkosten ist die Tatsache, dass Kubernetes von IBM verwaltet wird, sodass sich die Entwickler auf die Bereitstellung einer besseren Mitarbeitererfahrung für die Antragsverarbeitung konzentrieren kann.
 
@@ -163,9 +167,9 @@ Mit {{site.data.keyword.containerlong_notm}} wurde die überdimensionierte Hardw
 
 **Schritt 1: Container, Microservices und Garage Methode**
 * Die Apps werden in einer Gruppe aus kooperativen Microservices erstellt, die in {{site.data.keyword.containerlong_notm}} ausgeführt werden. Die Architektur stellt die Funktionsbereiche der App mit den meisten Qualitätsproblemen dar.
-* Stellen Sie die Apps in einem Container in {{site.data.keyword.containerlong_notm}} bereit, der kontinuierlich mit IBM Vulnerability Advisor gescannt wird. 
+* Stellen Sie die Apps in einem Container in {{site.data.keyword.containerlong_notm}} bereit, der kontinuierlich mit IBM Vulnerability Advisor gescannt wird.
 * Stellen Sie standardisierte DevOps-Dashboards über Kubernetes bereit.
-* Übernehmen Sie die wichtigen agilen und iterativen Entwicklungsverfahren in IBM Garage Method, um häufige Releases neuer Funktionen, Patches und Korrekturen ohne Ausfallzeit zu ermöglichen. 
+* Übernehmen Sie die wichtigen agilen und iterativen Entwicklungsverfahren in IBM Garage Method, um häufige Releases neuer Funktionen, Patches und Korrekturen ohne Ausfallzeit zu ermöglichen.
 
 **Schritt 2: Verbindungen zum vorhandenen Leistungs-Back-End**
 * {{site.data.keyword.SecureGatewayfull}} wird verwendet, um einen sicheren Tunnel zu lokalen Systemen aufzubauen, von denen die Leistungssysteme gehostet werden.  
@@ -174,18 +178,16 @@ Mit {{site.data.keyword.containerlong_notm}} wurde die überdimensionierte Hardw
 
 **Schritt 3: Chatbot und Personalisierung**
 * IBM Watson Assistant bietet Tools, mit denen schnell das Gerüst für einen Chatbot erstellt werden kann, von dem den Benutzern die richtigen Leistungen bereitgestellt werden können.
-* Watson Tone Analyzer sorgt dafür, dass die Kunden mit den Chatbot-Gesprächen zufrieden sind und bei Bedarf auf eine persönliche Interaktion mit einem Berater zurückgreifen können. 
+* Watson Tone Analyzer sorgt dafür, dass die Kunden mit den Chatbot-Gesprächen zufrieden sind und bei Bedarf auf eine persönliche Interaktion mit einem Berater zurückgreifen können.
 
 **Schritt 4: Kontinuierlich weltweit bereitstellen**
 * {{site.data.keyword.contdelivery_full}} dient Entwicklern als Unterstützung bei der schnellen Bereitstellung einer integrierten Toolchain mithilfe anpassbarer und gemeinsam nutzbarer Vorlagen unter Verwendung von IBM Tools, Tools von Drittanbietern und Open-Source-Tools. Automatisieren Sie Erstellungen und Tests und kontrollieren Sie die Qualität durch Analysen.
-* Nachdem die Entwickler die Apps in den Entwicklungs- und Testclustern erstellt und getestet haben, verwenden Sie die IBM CI/CD-Toolchains zum Bereitstellen von Apps in Produktionsclustern auf der ganzen Welt. 
-* {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps. Angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio bereitgestellt, damit regionale Anforderungen erfüllt werden können. 
+* Nachdem die Entwickler die Apps in den Entwicklungs- und Testclustern erstellt und getestet haben, verwenden Sie die IBM CI/CD-Toolchains zum Bereitstellen von Apps in Produktionsclustern auf der ganzen Welt.
+* {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps. Angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio bereitgestellt, damit regionale Anforderungen erfüllt werden können.
 * Die in {{site.data.keyword.containerlong_notm}} integrierten Hochverfügbarkeitstools gleichen die Workload in jeder geografischen Region aus; hierbei sind auch automatische Fehlerbehebung und Lastverteilung eingeschlossen.
 
 **Ergebnisse**
-* Mit Tools wie dem Chatbot hat das Human Resources-Team seinen Mitarbeitern bewiesen, dass Innovation für das Unternehmen nicht nur ein Modeschlagwort, sondern tatsächlich Bestandteil der Unternehmenskultur ist. 
-* Die Authentizität und die benutzerspezifischen Anpassungen auf der Site haben den geänderten Erwartungen heutigen Fluglinienmitarbeiter Rechnung getragen. 
-* Die in der letzten Minute noch vorgenommenen Aktualisierungen an der Human Resources-Site, einschließlich der Aktualisierungen durch die Chatbot-Gespräche der Mitarbeiter, verliefen schnell, weil die Entwickler mindestens 10 Mal täglich Änderungen vorgenommen hatten. 
-* Da die Verwaltung der Infrastruktur von IBM übernommen wurde, hatte das Entwicklerteam mehr Zeit und konnte die Site in nur drei Wochen bereitstellen. 
-
-
+* Mit Tools wie dem Chatbot hat das Human Resources-Team seinen Mitarbeitern bewiesen, dass Innovation für das Unternehmen nicht nur ein Modeschlagwort, sondern tatsächlich Bestandteil der Unternehmenskultur ist.
+* Die Authentizität und die benutzerspezifischen Anpassungen auf der Site haben den geänderten Erwartungen heutigen Fluglinienmitarbeiter Rechnung getragen.
+* Die in der letzten Minute noch vorgenommenen Aktualisierungen an der Human Resources-Site, einschließlich der Aktualisierungen durch die Chatbot-Gespräche der Mitarbeiter, verliefen schnell, weil die Entwickler mindestens 10 Mal täglich Änderungen vorgenommen hatten.
+* Da die Verwaltung der Infrastruktur von IBM übernommen wurde, hatte das Entwicklerteam mehr Zeit und konnte die Site in nur drei Wochen bereitstellen.

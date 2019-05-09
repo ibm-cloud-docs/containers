@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -22,24 +26,20 @@ lastupdated: "2018-12-05"
 {: #psp}
 
 Mit [Pod-Sicherheitsrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) können Sie
-Richtlinien konfigurieren, um anzugeben, wer Pods in {{site.data.keyword.containerlong}} erstellen und aktualisieren darf. Cluster, die die Kubernetes-Versionen 1.10.3, 1.9.8 und 1.8.13 oder spätere Fixpacks ausführen, unterstützen den Zugangscontroller `PodSecurityPolicy`, der diese Richtlinien durchsetzt.
-{: shortdesc}
-
-Sie verwenden eine ältere Version von Kubernetes? [Aktualisieren Sie Ihren Cluster](cs_cluster_update.html) noch heute.
-{: tip}
+Richtlinien konfigurieren, um anzugeben, wer Pods in {{site.data.keyword.containerlong}} erstellen und aktualisieren darf.
 
 **Warum lege ich Pod-Sicherheitsrichtlinien fest?**</br>
 Als Clusteradministrator möchten Sie steuern, was in Ihrem Cluster passiert, insbesondere Aktionen, die sich auf die Sicherheit oder Bereitschaft des Clusters auswirken. Pod-Sicherheitsrichtlinien können Ihnen dabei helfen, die Verwendung von berechtigten Containern, Stammnamensbereichen, Host-Netzbetrieb und -Ports, Datenträgertypen, Hostdateisystemen, Linux-Berechtigungen wie z. B. Nur-Lese-Berechtigung oder Gruppen-IDs und vieles mehr zu steuern.
 
-Mit dem Zugangscontroller `PodSecurityPolicy` können Pods erst nach der [Autorisierung von Richtlinien](#customize_psp) erstellt werden. Die Konfiguration von Pod-Sicherheitsrichtlinien kann unbeabsichtigte Nebeneffekte haben. Deshalb sollten Sie eine Implementierung nach dem Ändern der Richtlinie testen. Um Apps bereitstellen zu können, müssen die entsprechenden Benutzer- und Servicekonten alle durch die Pod-Sicherheitsrichtlinien autorisiert sein, die für die Bereitstellung von Pods erforderlich sind. Wenn Sie beispielsweise Apps mithilfe von [Helm](cs_integrations.html#helm_links) installieren, werden durch die Tiller-Komponente von Helm Pods erstellt. Sie müssen daher über die Autorisierung der richtigen Pod-Sicherheitsrichtlinie verfügen.
+Mit dem Zugangscontroller `PodSecurityPolicy` können Pods erst nach der [Autorisierung von Richtlinien](#customize_psp) erstellt werden. Die Konfiguration von Pod-Sicherheitsrichtlinien kann unbeabsichtigte Nebeneffekte haben. Deshalb sollten Sie eine Implementierung nach dem Ändern der Richtlinie testen. Um Apps bereitstellen zu können, müssen die entsprechenden Benutzer- und Servicekonten alle durch die Pod-Sicherheitsrichtlinien autorisiert sein, die für die Bereitstellung von Pods erforderlich sind. Wenn Sie beispielsweise Apps mithilfe von [Helm](/docs/containers?topic=containers-integrations#helm_links) installieren, werden durch die Tiller-Komponente von Helm Pods erstellt. Sie müssen daher über die Autorisierung der richtigen Pod-Sicherheitsrichtlinie verfügen.
 
-Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerlong_notm}} haben? Informationen zum Festlegen von {{site.data.keyword.Bluemix_notm}} IAM- und Infrastrukturberechtigungen finden Sie im Abschnitt [Clusterzugriff zuweisen](cs_users.html#users).
+Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerlong_notm}} haben? Informationen zum Festlegen von {{site.data.keyword.Bluemix_notm}} IAM- und Infrastrukturberechtigungen finden Sie im Abschnitt [Clusterzugriff zuweisen](/docs/containers?topic=containers-users#users).
 {: tip}
 
 **Gibt es Richtlinien, die standardmäßig festgelegt werden? Was kann ich hinzufügen?**</br>
 Standardmäßig konfiguriert {{site.data.keyword.containerlong_notm}} den Zugangscontroller `PodSecurityPolicy` mit [Ressourcen für die {{site.data.keyword.IBM_notm}} Clusterverwaltung](#ibm_psp), den Sie nicht löschen oder ändern können. Sie können den Zugangscontroller auch nicht inaktivieren.
 
-Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Zusätzliche RBAC-Ressourcen sind für die Portierbarkeit mit privaten {{site.data.keyword.Bluemix_notm}}-Paketen eingeschlossen, die für [Hybridbereitstellungen](cs_hybrid.html#hybrid_iks_icp) verwendet werden.
+Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Zusätzliche RBAC-Ressourcen sind für die Portierbarkeit mit privaten {{site.data.keyword.Bluemix_notm}}-Paketen eingeschlossen, die für [Hybridbereitstellungen](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp) verwendet werden.
 
 Wenn Sie bestimmte Benutzer daran hindern möchten, Pods zu erstellen oder zu aktualisieren, können Sie [diese RBAC-Ressourcen ändern oder eigene Ressourcen erstellen](#customize_psp).
 
@@ -48,7 +48,7 @@ Wenn Sie als Benutzer einen Pod direkt erstellen und nicht über einen Controlle
 
 Wenn Sie einen Pod mithilfe eines Ressourcencontrollers erstellen (z. B. eine Bereitstellung), prüft Kubernetes die Berechtigungsnachweise für das Servicekonto des Pods anhand der Pod-Sicherheitsrichtlinien, die das Servicekonto verwenden darf. Wenn keine Richtlinie die Pod-Sicherheitsanforderungen unterstützt, ist der Controller zwar erfolgreich, der Pod wird jedoch nicht erstellt.
 
-Informationen zu allgemeinen Fehlernachrichten finden Sie im Abschnitt [Pods können wegen einer Pod-Sicherheitsrichtlinie nicht bereitgestellt werden](cs_troubleshoot_clusters.html#cs_psp).
+Informationen zu allgemeinen Fehlernachrichten finden Sie im Abschnitt [Pods können wegen einer Pod-Sicherheitsrichtlinie nicht bereitgestellt werden](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp).
 
 ## Pod-Sicherheitsrichtlinien anpassen
 {: #customize_psp}
@@ -70,9 +70,10 @@ Richtlinien können Benutzer privilegierte und nicht privilegierte (eingeschrän
 
 Sie können diese RBAC-Rollen ändern, um Administratoren, Benutzer, Services oder Knoten zu der Richtlinie hinzuzufügen oder aus ihr zu entfernen.
 
-Vorbemerkungen:
-*  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
-*  Verstehen Sie die Funktionsweise von RBAC-Rollen. Weitere Informationen hierzu finden Sie im Abschnitt [Benutzer mit angepassten Kubernetes-RBAC-Rollen berechtigen](cs_users.html#rbac) oder in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
+Vorbereitende Schritte:
+*  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  Verstehen Sie die Funktionsweise von RBAC-Rollen. Weitere Informationen hierzu finden Sie im Abschnitt [Benutzer mit angepassten Kubernetes-RBAC-Rollen berechtigen](/docs/containers?topic=containers-users#rbac) oder in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
+* Stellen Sie sicher, dass Sie über die [{{site.data.keyword.Bluemix_notm}} IAM-Servicezugriffsrolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche verfügen.
 
 Wenn Sie die Standardkonfiguration ändern, können Sie wichtige Clusteraktionen, wie Podbereitstellungen oder Clusteraktualisierungen, verhindern. Testen Sie Ihre Änderungen in einem Cluster, der sich nicht in einer Produktionsumgebung befindet und für andere Teams nicht wichtig ist.
 {: important}

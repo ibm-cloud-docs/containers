@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks 
+
+subcollection: containers
 
 ---
 
@@ -29,7 +33,7 @@ Als Clusteradministrator steuern Sie, welche Pods kritischer für Ihre Clusterau
 
 Indem Sie die Podpriorität festlegen, können Sie verhindern, dass kritische Workloads in Ihrem Cluster von Workloads mit niedrigerer Priorität beeinträchtigt werden, insbesondere in den Fällen, in denen der Cluster seine Ressourcenkapazität erreicht.
 
-Stellen Sie sicher, dass Sie den [richtigen Benutzerzugriff](cs_users.html#users) auf Ihren Cluster und gegebenenfalls [Podsicherheitsrichtlinien](cs_psp.html#psp) eingerichtet haben. Zugriffs- und Podsicherheitsrichtlinien können dazu beitragen, nicht vertrauenswürdige Benutzer daran zu hindern, Pods mit hoher Priorität bereitzustellen, die die Planung anderer Pods verhindern.
+Stellen Sie sicher, dass Sie den [richtigen Benutzerzugriff](/docs/containers?topic=containers-users#users) auf Ihren Cluster und gegebenenfalls [Podsicherheitsrichtlinien](/docs/containers?topic=containers-psp#psp) eingerichtet haben. Zugriffs- und Podsicherheitsrichtlinien können dazu beitragen, nicht vertrauenswürdige Benutzer daran zu hindern, Pods mit hoher Priorität bereitzustellen, die die Planung anderer Pods verhindern.
 {: tip}
 
 {: #priority_scheduling}
@@ -41,7 +45,8 @@ Wenn Sie für Ihre Podbereitstellung keine Priorität angeben, wird die Standard
 Wenn Sie wissen möchten, wie die Podpriorität und der Scheduler zusammenarbeiten, sehen Sie sich die Szenarios in der folgenden Abbildung an. Sie müssen priorisierte Pods auf Workerknoten mit verfügbaren Ressourcen platzieren. Andernfalls kann es geschehen, dass Pods mit hoher Priorität in Ihrem Cluster weiter zur Verarbeitung anstehen, während gleichzeitig vorhandene Pods entfernt werden (siehe Szenario 3).
 
 _Abbildung: Szenarios für die Podpriorität_
-![Szenarios für die Podpriorität](images/pod-priority.png)
+<img src="images/pod-priority.png" width="500" alt="Szenarios für die Podpriorität" style="width:500px; border-style: none"/>
+
 1.  Drei Pods mit hoher, mittlerer und niedriger Priorität stehen für die Planung an. Der Scheduler sucht nach einem verfügbaren Workerknoten mit der Kapazität für alle drei Pods und plant sie in der Reihenfolge ihrer Priorität, wobei der höchste Pod zuerst geplant wird.
 2.  Drei Pods mit hoher, mittlerer und niedriger Priorität stehen für die Planung an. Der Scheduler sucht einen verfügbaren Workerknoten, aber der Workerknoten verfügt nur über die Ressourcen, die zur Unterstützung der Pods mit hoher und mittlerer Priorität erforderlich sind. Der Pod mit niedriger Priorität wird nicht geplant und verbleibt im Status 'Anstehend'.
 3.  Zwei Pods mit hoher und mittlerer Priorität stehen für die Planung an. Ein dritter Pod mit niedriger Priorität ist auf einem verfügbaren Workerknoten vorhanden. Der Workerknoten verfügt jedoch nicht über genügend Ressourcen, um einen der anstehenden Pods zu planen. Der Scheduler stellt den Pod mit niedriger Priorität zurück (oder entfernt ihn), wodurch der Pod in den Status 'Anstehend' zurückgesetzt wird. Anschließend versucht der Scheduler, den Pod mit hoher Priorität zu planen. Der Workerknoten verfügt jedoch nicht über genügend Ressourcen, um den Pod mit hoher Priorität zu planen. Stattdessen plant der Scheduler den Pod mit mittlerer Priorität.
@@ -86,8 +91,9 @@ Um die Podpriorität festzulegen, müssen Sie eine Prioritätsklasse verwenden.
 {: shortdesc}
 
 Vorbereitende Schritte:
-* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
-* [Erstellen](cs_clusters.html#clusters_ui) oder [aktualisieren](cs_cluster_update.html#update) Sie den Cluster so, dass Kubernetes Version 1.11 oder eine höhere Version verwendet wird.
+* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `default` innehaben.
+* [Erstellen](/docs/containers?topic=containers-clusters#clusters_ui) oder [aktualisieren](/docs/containers?topic=containers-update#update) Sie den Cluster so, dass Kubernetes Version 1.11 oder eine höhere Version verwendet wird.
 
 Gehen Sie wie folgt vor, um eine Prioritätsklasse zu verwenden:
 
@@ -167,8 +173,9 @@ Ordnen Sie Ihrer Podspezifikation eine Prioritätsklasse zu, um die Priorität d
 {: shortdesc}
 
 Vorbereitende Schritte:
-* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
-* [Erstellen](cs_clusters.html#clusters_ui) oder [aktualisieren](cs_cluster_update.html#update) Sie den Cluster so, dass Kubernetes Version 1.11 oder eine höhere Version verwendet wird.
+* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* Stellen Sie sicher, dass Sie die [ {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich innehaben, in dem Sie die Pods bereitstellen wollen.
+* [Erstellen](/docs/containers?topic=containers-clusters#clusters_ui) oder [aktualisieren](/docs/containers?topic=containers-update#update) Sie den Cluster so, dass Kubernetes Version 1.11 oder eine höhere Version verwendet wird.
 * [Machen Sie sich damit vertraut, wie die Planung anhand der Priorität funktioniert](#priority_scheduling), da die Priorität die Zurückstellung vorhandener Pods bewirken und außerdem beeinflussen kann, wie die Ressourcen Ihres Clusters genutzt werden.
 
 Gehen Sie wie folgt vor, um Ihren Pods eine Priorität zuzuweisen:
@@ -199,7 +206,7 @@ Gehen Sie wie folgt vor, um Ihren Pods eine Priorität zuzuweisen:
 3.  Fügen Sie in Ihrer Podspezifikation das Feld `priorityClassName` mit dem Namen der Prioritätsklasse hinzu, die Sie im vorherigen Schritt abgerufen haben.
 
     ```yaml
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty

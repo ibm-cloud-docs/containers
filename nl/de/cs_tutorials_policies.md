@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,7 +23,6 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-
 # Lernprogramm: Calico-Netzrichtlinien zum Blockieren von Datenverkehr verwenden
 {: #policy_tutorial}
 
@@ -31,24 +34,31 @@ Aus Sicherheitsgründen ist es jedoch unter Umständen erforderlich, dass der Da
 In diesem Szenario übernehmen Sie die Rolle des Netzadministrators für eine PR-Firma und Sie bemerken ungewöhnlichen Datenverkehr, der Ihre Apps erreicht. Die Lerneinheiten in diesem Lernprogramm führen Sie durch die Schritte für die Erstellung einer Web-Server-Beispielapp, für das Verfügbarmachen der App mithilfe eines Lastausgleichsservice und für das Schützen der App vor unerwünschtem ungewöhnlichen Datenverkehr mithilfe von Calico-Richtlinien für eine Whitelist und eine Blacklist.
 
 ## Ziele
+{: #policies_objectives}
 
 - Erlernen Sie, wie der gesamte und zu allen Knotenports eingehende Datenverkehr durch Erstellen einer höchstwertigen Pre-DNAT-Richtlinie blockiert wird.
 - Erlernen Sie, wie Sie den auf eine Whitelist gesetzten Quellen-IP-Adressen den Zugriff auf die öffentliche Lastausgleichsfunktions-IP und den Port ermöglichen, indem Sie eine niederwertige Pre-DNAT-Richtlinie erstellen. Niederwertigere Richtlinien setzen höherwertigere Richtlinien außer Kraft.
 - Erlernen Sie, wie Sie den auf eine Blacklist gesetzten Quellen-IP-Adressen den Zugriff auf die öffentliche Lastausgleichsfunktions-IP und den Port verweigern, indem Sie eine niederwertige Pre-DNAT-Richtlinie erstellen.
 
 ## Erforderlicher Zeitaufwand
+{: #policies_time}
+
 1 Stunde
 
 ## Zielgruppe
+{: #policies_audience}
+
 Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipiert, die den an eine App gehenden Netzverkehr verwalten möchten.
 
 ## Voraussetzungen
+{: #policies_prereqs}
 
-- [Erstellen Sie einen Cluster der Version 1.10 oder höher](cs_clusters.html#clusters_ui) oder [aktualisieren Sie einen vorhandenen Cluster auf Version 1.10](cs_versions.html#cs_v110). Ein Cluster mit Kubernetes Version 1.10 oder höher muss in diesem Lernprogramm die Calico-CLI der Version 3.3.1 und die Syntax für Calico Version 3-Richtlinien verwenden.
-- [Geben Sie als Ziel Ihrer CLI den Cluster an](cs_cli_install.html#cs_cli_configure).
-- [Installieren und konfigurieren Sie die Calico-CLI](cs_network_policy.html#1.10_install).
+- [Erstellen Sie einen Cluster der Version 1.10 oder höher](/docs/containers?topic=containers-clusters#clusters_ui) oder [aktualisieren Sie einen vorhandenen Cluster auf Version 1.10](/docs/containers?topic=containers-cs_versions#cs_v110). Ein Cluster mit Kubernetes Version 1.10 oder höher muss in diesem Lernprogramm die Calico-CLI der Version 3.3.1 und die Syntax für Calico Version 3-Richtlinien verwenden.
+- [Geben Sie als Ziel Ihrer CLI den Cluster an](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Installieren und konfigurieren Sie die Calico-CLI](/docs/containers?topic=containers-network_policies#cli_install).
 - Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen:
-    - [Beliebige Plattformrolle](cs_users.html#platform)
+    - [Beliebige Plattformrolle](/docs/containers?topic=containers-users#platform)
+    - [Die Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform)
 
 <br />
 
@@ -59,14 +69,14 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 In der ersten Lerneinheit erfahren Sie, wie Ihre App von mehreren IP-Adressen und Ports aus zugänglich gemacht wird und an welcher Stelle öffentlicher Datenverkehr in Ihren Cluster eingeht.
 {: shortdesc}
 
-Starten Sie mit der Bereitstellung einer Web-Server-Beispielapp, die während des gesamten Lernprogramms verwendet wird. Der Web-Server `echoserver` zeigt Daten zu der Verbindung an, die vom Client zum Cluster hergestellt wird, und lässt Sie den Zugriff auf den Cluster der PR-Firma testen. Machen Sie die App anschließend durch Erstellen eines Lastausgleichsservice der Version 2.0 zugänglich. Eine Lastausgleichsfunktion der Version 2.0 macht Ihre App sowohl über die IP-Adresse des Lastausgleichsservice als auch über die Knotenports der Workerknoten zugänglich.
+Starten Sie mit der Bereitstellung einer Web-Server-Beispielapp, die während des gesamten Lernprogramms verwendet wird. Der Web-Server `echoserver` zeigt Daten zu der Verbindung an, die vom Client zum Cluster hergestellt wird, und lässt Sie den Zugriff auf den Cluster der PR-Firma testen. Machen Sie die App anschließend durch Erstellen eines Lastausgleichsservice der Version 1.0 zugänglich. Eine Lastausgleichsfunktion der Version 1.0 macht Ihre App sowohl über die IP-Adresse des Lastausgleichsservice als auch über die Knotenports der Workerknoten zugänglich.
 
-Möchten Sie stattdessen eine [Ingress-Lastausgleichsfunktion für Anwendungen (Application Load Balancer, ALB)](cs_ingress.html) verwenden? Überspringen Sie die Erstellung der Lastausgleichsfunktion in den Schritten 3 und 4. Verwenden Sie stattdessen die öffentlichen IPs Ihrer ALBs, indem Sie `ibmcloud ks albs --cluster <cluster_name>` ausführen, und verwenden Sie diese IPs während des gesamten Lernprogramms anstelle von `<loadbalancer_IP>.`
+Möchten Sie stattdessen eine Ingress-Lastausgleichsfunktion für Anwendungen (Application Load Balancer, ALB) verwenden? Anstatt in den Schritten 3 und 4 eine Lastausgleichsfunktion zu erstellen, [erstellen Sie einen Service für die Web-Server-App](/docs/containers?topic=containers-ingress#public_inside_1) und [erstellen eine Ingress-Ressource für die Web-Server-App](/docs/containers?topic=containers-ingress#public_inside_4). Rufen Sie anschließend die öffentlichen IP-Adressen Ihrer ALBs ab, indem Sie den Befehl `ibmcloud ks albs --cluster <clustername>` ausführen und verwenden Sie diese IP-Adressen im gesamten Lernprogramm anstelle von `<ip_der_lastausgleichsfunktion>.`
 {: tip}
 
 Aus der folgenden Abbildung geht hervor, wie die Web-Server-App am Ende von Lerneinheit 1 über den öffentlichen Knotenport und die öffentliche Lastausgleichsfunktion im Internet zugänglich gemacht wird:
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="Am Ende von Lerneinheit 1 wird die Web-Server-App dem Internet über den öffentlichen Knotenport und die öffentliche Lastausgleichsfunktion zugänglich gemacht." style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="Am Ende von Lerneinheit 1 wird die Web-Server-App über den öffentlichen Knotenport und die öffentliche Lastausgleichsfunktion für das Internet zugänglich gemacht." style="width:450px; border-style: none"/>
 
 1. Stellen Sie die Web-Server-Beispielapp bereit. Wenn eine Verbindung zur Web-Server-App hergestellt ist, antwortet die App mit den HTTP-Headern, die sie in der Verbindung empfangen hat.
     ```
@@ -89,7 +99,7 @@ Aus der folgenden Abbildung geht hervor, wie die Web-Server-App am Ende von Lern
     ```
     {: screen}
 
-3. Um die App im öffentlichen Internet zugänglich zu machen, erstellen Sie für den Lastausgleichsservice der Version 2.0 in einem Texteditor eine Konfigurationsdatei mit dem Namen `webserver-lb.yaml`.
+3. Um die App im öffentlichen Internet zugänglich zu machen, erstellen Sie für den Lastausgleichsservice der Version 1.0 in einem Texteditor eine Konfigurationsdatei mit dem Namen `webserver-lb.yaml`.
     ```
     apiVersion: v1
     kind: Service
@@ -97,8 +107,6 @@ Aus der folgenden Abbildung geht hervor, wie die Web-Server-App am Ende von Lern
       labels:
         run: webserver
       name: webserver-lb
-      annotations:
-        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
       type: LoadBalancer
       selector:
@@ -108,7 +116,6 @@ Aus der folgenden Abbildung geht hervor, wie die Web-Server-App am Ende von Lern
         port: 80
         protocol: TCP
         targetPort: 8080
-      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -182,16 +189,16 @@ Aus der folgenden Abbildung geht hervor, wie die Web-Server-App am Ende von Lern
 
     2. Rufen Sie die **Öffentliche IP** eines Workerknotens ab.
         ```
-        ibmcloud ks workers <clustername>
+        ibmcloud ks workers --cluster <clustername>
         ```
         {: pre}
 
         Beispielausgabe:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
         ```
         {: screen}
 
@@ -234,7 +241,10 @@ Als Nächstes können Sie mit der Erstellung und Anwendung von Calico-Richtlinie
 ## Lerneinheit 2: Gesamten eingehenden Datenverkehrs an alle Knotenports blockieren
 {: #lesson2}
 
-Zum Sichern des Clusters der PR-Firma müssen Sie den öffentlichen Zugriff sowohl auf den Lastausgleichsservice als auch auf die Knotenports blockieren, die Ihre App zugänglich machen. Beginnen Sie, indem Sie den Zugriff auf die Knotenports blockieren. In der folgenden Abbildung wird veranschaulicht, wie am Ende von Lerneinheit 2 der Datenverkehr zur Lastausgleichsfunktion zulässig ist, jedoch nicht zu den Knotenports.
+Zum Sichern des Clusters der PR-Firma müssen Sie den öffentlichen Zugriff sowohl auf den Lastausgleichsservice als auch auf die Knotenports blockieren, die Ihre App zugänglich machen. Beginnen Sie, indem Sie den Zugriff auf die Knotenports blockieren.
+{: shortdesc}
+
+In der folgenden Abbildung wird veranschaulicht, wie am Ende von Lerneinheit 2 der Datenverkehr zur Lastausgleichsfunktion zulässig ist, jedoch nicht zu den Knotenports.
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="Am Ende der Lerneinheit 2 wird die Web-Server-App im Internet nur über die öffentliche Lastausgleichsfunktion zugänglich gemacht." style="width:425px; border-style: none"/>
 
@@ -246,7 +256,7 @@ Zum Sichern des Clusters der PR-Firma müssen Sie den öffentlichen Zugriff sowo
       name: deny-nodeports
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
             destination:
@@ -343,6 +353,7 @@ Sie entscheiden sich nun, den Datenverkehr an den Cluster der PR-Firma vollstän
 {: shortdesc}
 
 Zuerst müssen Sie wie schon bei den Knotenports den gesamten eingehenden Datenverkehr an die Lastausgleichsfunktion, die die App zugänglich macht, blockieren. Anschließend können Sie eine Richtlinie erstellen, mit der die IP-Adresse Ihres Systems auf die Whitelist gesetzt wird. Am Ende von Lerneinheit 3 wird der gesamte Datenverkehr an die öffentlichen Knotenports und an die Lastausgleichsfunktion blockiert und nur der Datenverkehr von Ihrer in der Whitelist aufgeführten IP-Adresse ist zulässig:
+
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="Die Web-Server-App wird über die öffentliche Lastausgleichsfunktion nur der IP-Adresse des System zugänglich gemacht." style="width:500px; border-style: none"/>
 
 1. Erstellen Sie in einem Texteditor eine höherwertige Richtlinie des Typs Pre-DNAT mit dem Namen `deny-lb-port-80.yaml`, um den gesamten TCP- und UDP-Datenverkehr zurückzuweisen, der von beliebigen Quellen-IPs an die IP-Adresse und den Port der Lastausgleichsfunktion fließt. Ersetzen Sie `<loadbalancer_IP>` durch die öffentliche IP-Adresse der Lastausgleichsfunktion, die Sie auf dem Spickzettel notiert haben.
@@ -354,7 +365,7 @@ Zuerst müssen Sie wie schon bei den Knotenports den gesamten eingehenden Datenv
       name: deny-lb-port-80
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -408,7 +419,7 @@ Zuerst müssen Sie wie schon bei den Knotenports den gesamten eingehenden Datenv
       name: whitelist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Allow
         destination:
@@ -462,8 +473,10 @@ Zu diesem Zeitpunkt ist der gesamte Datenverkehr an die öffentlichen Knotenport
 {: #lesson4}
 
 In der vorherigen Lerneinheit haben Sie den gesamten Datenverkehr blockiert und nur einige IPs in der Whitelist aufgeführt. Dieses Szenario ist günstig für Testzwecke, wenn Sie den Zugriff auf nur einige wenige kontrollierte Quellen-IP-Adressen beschränken wollen. Die PR-Firma hat jedoch Apps, die in hohem Maße öffentlich verfügbar sein sollen. Sie müssen sicherstellen, dass der gesamte Datenverkehr zulässig ist, mit Ausnahme des ungewöhnlichen Datenverkehrs, der von einigen wenigen IP-Adressen stammt. Das Aufführen in einer Blacklist ist in einem solchen Szenario wie diesem nützlich, da es Ihnen helfen kann, einen Angriff zu verhindern, der von einer kleinen Gruppe von IP-Adressen ausgeht.
+{: shortdesc}
 
 In dieser Lerneinheit testen Sie die Arbeit mit einer Blacklist, indem Sie den Datenverkehr blockieren, der aus der Quellen-IP-Adresse Ihres eigenen Systems stammt. Am Ende von Lerneinheit 4 ist der gesamte Datenverkehr an die öffentlichen Knotenports blockiert und der gesamte Datenverkehr an die öffentliche Lastausgleichsfunktion ist zulässig. Nur der Datenverkehr von Ihrer in der Blacklist aufgeführten System-IP zur Lastausgleichsfunktion wird blockiert:
+
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="Die Web-Server-App wird dem Internet über die öffentliche Lastausgleichsfunktion zugänglich gemacht. Nur der Datenverkehr von Ihrer System-IP ist blockiert." style="width:550px; border-style: none"/>
 
 1. Bereinigen Sie die Whitelist-Richtlinien, die Sie in der vorherigen Lerneinheit erstellt haben.
@@ -497,7 +510,7 @@ In dieser Lerneinheit testen Sie die Arbeit mit einer Blacklist, indem Sie den D
       name: blacklist
     spec:
       applyOnForward: true
-      doNotTrack: true
+      preDNAT: true
       ingress:
       - action: Deny
         destination:
@@ -568,5 +581,5 @@ Ganz hervorragend! Sie haben erfolgreich den in Ihre App eingehenden Datenverkeh
 ## Womit möchten Sie fortfahren?
 {: #whats_next}
 
-* Weitere Informationen zur [Steuerung des Datenverkehrs mithilfe von Netzrichtlinien](cs_network_policy.html).
+* Weitere Informationen zur [Steuerung des Datenverkehrs mithilfe von Netzrichtlinien](/docs/containers?topic=containers-network_policies).
 * Weitere Beispiele für Calico-Netzrichtlinien, die den Datenverkehr zu und von Ihrem Cluster steuern, finden Sie unter [Richtliniendemo 'Stars' ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) und [erweiterte Netzrichtlinie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).

@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # Erklärung der grundlegenden Voraussetzungen für Kubernetes-Speicher
 {: #kube_concepts}
 
@@ -30,13 +35,13 @@ Vor der Bereitstellung von Speicher ist es wichtig, die Kubernetes-Konzepte 'Per
 
 Die folgende Abbildung zeigt die Speicherkomponenten in einem Kubernetes-Cluster.
 
-<img src="images/cs_storage_pvc_pv.png" alt="Speicherkomponenten in einem Cluster" width="300" style="width: 300px; border-style: none"/>
+<img src="images/cs_storage_pvc_pv.png" alt="Speicherkomponenten in einem Cluster" width="275" style="width: 275px; border-style: none"/>
 
-- **Cluster**</br> Standardmäßig ist jedes Cluster mit einem Plug-in zur [Bereitstellung von Dateispeicher](cs_storage_file.html#add_file) eingerichtet. Sie können auch auswählen, weitere Add-ons zu installieren, wie z. B. das Add-on für [Blockspeicher](cs_storage_block.html). Zum Verwenden von Speicher in einem Cluster müssen Sie eine Anforderung nach einem persistenten Datenträger (Persistent Volume Claim), einen persistenten Datenträger und eine physische Speicherinstanz erstellen. Beim Löschen des Clusters haben Sie die Option, zugehörige Speicherinstanzen zu löschen.
+- **Cluster**</br> Standardmäßig ist jedes Cluster mit einem Plug-in zur [Bereitstellung von Dateispeicher](/docs/containers?topic=containers-file_storage#add_file) eingerichtet. Sie können auch auswählen, weitere Add-ons zu installieren, wie z. B. das Add-on für [Blockspeicher](/docs/containers?topic=containers-block_storage). Zum Verwenden von Speicher in einem Cluster müssen Sie eine Anforderung nach einem persistenten Datenträger (Persistent Volume Claim), einen persistenten Datenträger und eine physische Speicherinstanz erstellen. Beim Löschen des Clusters haben Sie die Option, zugehörige Speicherinstanzen zu löschen.
 - **App**</br> Um Lese- und Schreibvorgänge für Ihre Speicherinstanz auszuführen, müssen Sie den Persistent Volume Claim (PVC) an Ihre App anhängen. Die Lese-/Schreibregeln unterscheiden sich je nach Speichertyp. Sie können z. B. mehrere Pods an dieselben PVC anhängen, mit dem Dateispeicher angefordert wird. Der Blockspeicher wird mit dem RWO-Zugriffsmodus (ReadWriteOnce) geliefert, sodass Sie den Speicher nur an einen Pod anhängen können.
 - **Persistent Volume Claim (PVC)** </br> Ein PVC ist die Anforderung, persistenten Speicher mit einem bestimmten Typ und einer bestimmten Konfiguration bereitzustellen. Verwenden Sie die [Kubernetes-Speicherklassen](#storageclasses), um den von Ihnen gewünschten Typ von persistentem Datenträger anzugeben. Der Clusteradministrator kann Speicherklassen definieren oder Sie können eine der in {{site.data.keyword.containerlong_notm}} vordefinierten Speicherklassen auswählen. Nachdem Sie einen PVC erstellt haben, wird dieser an den {{site.data.keyword.Bluemix}} Storage Provider gesendet. Abhängig von der in der Speicherklasse definierten Konfiguration wird die physische Speichereinheit bestellt und in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. Wenn die angeforderte Konfiguration nicht vorhanden ist, wird der Speicher nicht erstellt.
 - **Persistent Volume (PV)** </br> Ein Persistent Volume (persistenter Datenträger) ist eine virtuelle Speicherinstanz, die dem Cluster als Datenträger hinzugefügt wird. Der persistente Datenträger verweist auf eine physische Speichereinheit, die sich in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) befindet, und abstrahiert die API, die für die Kommunikation mit der Speichereinheit verwendet wird. Zum Anhängen eines persistenten Datenträgers (PV) an eine App müssen Sie über einen entsprechenden PVC (Persistent Volume Claim) verfügen. Angehängte PVs werden im Dateisystem des Containers als Ordner angezeigt.
-- **Physischer Speicher** </br> Eine physische Speicherinstanz, die Sie verwenden können, um Ihre Daten als persistent zu definieren. {{site.data.keyword.containerlong_notm}} bietet Hochverfügbarkeit für physische Speicherinstanzen. In einer physischen Speicherinstanz gespeicherte Daten, werden jedoch nicht automatisch gesichert. Abhängig vom verwendeten Speichertyp gibt es verschiedene Methoden, um Sicherungs- und Wiederherstellungslösungen festzulegen.
+- **Physischer Speicher** </br> Eine physische Speicherinstanz, die Sie verwenden können, um Ihre Daten als persistent zu definieren. Beispiele für physischen Speicher in {{site.data.keyword.Bluemix_notm}} sind [Dateispeicher (File Storage)](/docs/containers?topic=containers-file_storage#file_storage), [Blockspeicher (Block Storage)](/docs/containers?topic=containers-block_storage#block_storage), [Objektspeicher (Object Storage)](/docs/containers?topic=containers-object_storage#object_storage) und lokaler Workerknotenspeicher, den Sie als SDS-Speicher mit [Portworx](/docs/containers?topic=containers-portworx#portworx) verwenden können. {{site.data.keyword.Bluemix_notm}} bietet Hochverfügbarkeit für physische Speicherinstanzen. In einer physischen Speicherinstanz gespeicherte Daten, werden jedoch nicht automatisch gesichert. Abhängig vom verwendeten Speichertyp gibt es verschiedene Methoden, um Sicherungs- und Wiederherstellungslösungen festzulegen.
 
 Weitere Informationen zur Vorgehensweise beim Erstellen und Verwenden von PVCs, PVs und der physischen Speichereinheit finden Sie unter:
 - [Dynamische Bereitstellung](#dynamic_provisioning)
@@ -73,8 +78,8 @@ Sehen Sie sich folgende allgemeine Anwendungsfälle für die dynamische Bereitst
 3. **Häufiges Erstellen und Löschen von Speicher:** Sie haben einen App oder Sie richten eine Continuous-Delivery-Pipeline ein, die persistenten Speicher regelmäßig erstellt und löscht. Persistenter Speicher, der mit einer Speicherklasse ohne 'retain' bereitgestellt wird, kann durch Löschen des PVC entfernt werden.
 
 Weitere Informationen zur Vorgehensweise beim dynamischen Bereitstellen von persistentem Speicher finden Sie im Folgenden:
-- [File Storage](cs_storage_file.html#add_file)
-- [Blockspeicher](cs_storage_block.html#add_block)
+- [Dateispeicher](/docs/containers?topic=containers-file_storage#add_file)
+- [Blockspeicher](/docs/containers?topic=containers-block_storage#add_block)
 
 ## Statische Bereitstellung
 {: #static_provisioning}
@@ -104,12 +109,12 @@ Die folgende Abbildung zeigt, wie Dateispeicher in einem Cluster statisch bereit
 Sehen Sie sich folgende allgemeine Anwendungsfälle für die statische Bereitstellung von persistentem Speicher an:
 1. **Beibehaltene Daten für den Cluster verfügbar machen:** Sie haben mithilfe der dynamischen Bereitstellung persistenten Speicher mit einer Speicherklasse für die Beibehaltung bereitgestellt. Sie haben den PVC entfernt, aber der persistente Datenträger, die physische Speichereinheit in der IBM Cloud-Infrastruktur (SoftLayer) und die Daten sind weiterhin vorhanden. Sie wollen von einer App in Ihrem Cluster aus auf die beibehaltenen Daten zugreifen.
 2. **Vorhandene Speichereinheit verwenden:** Sie haben persistenten Speicher direkt in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt und Sie möchten diese Speichereinheit in Ihrem Cluster verwenden.
-3. **Persistenten Speicher clusterübergreifend in derselben Zone verwenden:** Sie haben persistenten Speicher für Ihren Cluster bereitgestellt. Um dieselbe persistente Speicherinstanz mit anderen Clustern gemeinsam zu verwenden, müssen Sie den persistenten Datenträger und den entsprechenden PVC in dem anderen Cluster manuell erstellen. **Hinweis:** Die gemeinsame Nutzung von persistentem Speicher ist clusterübergreifend nur verfügbar, wenn sich der Cluster und die Speicherinstanz in derselben Zone befinden. 
+3. **Persistenten Speicher clusterübergreifend in derselben Zone verwenden:** Sie haben persistenten Speicher für Ihren Cluster bereitgestellt. Um dieselbe persistente Speicherinstanz mit anderen Clustern gemeinsam zu verwenden, müssen Sie den persistenten Datenträger und den entsprechenden PVC in dem anderen Cluster manuell erstellen. **Hinweis:** Die gemeinsame Nutzung von persistentem Speicher ist clusterübergreifend nur verfügbar, wenn sich der Cluster und die Speicherinstanz in derselben Zone befinden.
 4. **Persistenten Speicher namensbereichsübergreifend im selben Cluster gemeinsam verwenden:** Sie haben persistenten Speicher in einem Namensbereich Ihres Cluster bereitgestellt. Sie möchten dieselbe Speicherinstanz für einen App-Pod verwenden, der in einem anderen Namensbereich Ihres Clusters bereitgestellt wurde.
 
 Weitere Informationen zur Vorgehensweise beim statischen Bereitstellen von Speicher finden Sie im Folgenden:
-- [File Storage](cs_storage_file.html#predefined_storageclass)
-- [Blockspeicher](cs_storage_block.html#predefined_storageclass)
+- [Dateispeicher](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
+- [Blockspeicher](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 
 ## Speicherklassen
 {: #storageclasses}
@@ -117,11 +122,11 @@ Weitere Informationen zur Vorgehensweise beim statischen Bereitstellen von Speic
 Um persistenten Speicher dynamisch bereitzustellen, müssen Sie den Typ und die Konfiguration des gewünschten Speichers definieren.
 {: shortdesc}
 
-Eine Kubernetes-Speicherklasse wird verwendet, um die in {{site.data.keyword.Bluemix_notm}} unterstützte, zugrundeliegende Speicherplattform zusammenzufassen, damit Sie nicht sämtliche Details zu unterstützten Größen, E/A-Operationen pro Sekunde oder Aufbewahrungsrichtlinien kennen müssen, um erfolgreich persistenten Speicher in einem Cluster bereitzustellen. {{site.data.keyword.containerlong_notm}} stellt für jeden unterstützten Speichertyp vordefinierte Speicherklassen bereit. Jede Speicherklasse ist so konzipiert, dass das unterstützte Speichertier zusammengefasst wird, während Sie die Möglichkeit haben, nach Ihren Wünschen Größe, E/A-Operationen pro Sekunde und die Aufbewahrungsrichtlinie festzulegen.
+Eine [Kubernetes-Speicherklasse ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/storage/storage-classes/) wird verwendet, um die in {{site.data.keyword.Bluemix_notm}} unterstützte, zugrundeliegende Speicherplattform zusammenzufassen, damit Sie nicht sämtliche Details zu unterstützten Größen, E/A-Operationen pro Sekunde oder Aufbewahrungsrichtlinien kennen müssen, um erfolgreich persistenten Speicher in einem Cluster bereitzustellen. {{site.data.keyword.containerlong_notm}} stellt für jeden unterstützten Speichertyp vordefinierte Speicherklassen bereit. Jede Speicherklasse ist so konzipiert, dass das unterstützte Speichertier zusammengefasst wird, während Sie die Möglichkeit haben, nach Ihren Wünschen Größe, E/A-Operationen pro Sekunde und die Aufbewahrungsrichtlinie festzulegen.
 
 Informationen zu den vordefinierten Spezifikationen für Speicherklassen finden Sie im Folgenden:
-- [File Storage](cs_storage_file.html#storageclass_reference)
-- [Blockspeicher](cs_storage_block.html#storageclass_reference)
+- [Dateispeicher](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+- [Blockspeicher](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
 
 Sie finden nicht das, wonach Sie suchen? Sie können auch eine eigene angepasste Speicherklasse erstellen, um den von Ihnen gewünschten Speichertyp bereitzustellen.
 {: tip}
@@ -129,16 +134,16 @@ Sie finden nicht das, wonach Sie suchen? Sie können auch eine eigene angepasste
 ### Speicherklasse anpassen
 {: #customized_storageclass}
 
-Wenn Sie keine der bereitgestellten Speicherklassen verwenden können, können Sie Ihre eigene angepasste Speicherklasse erstellen.
+Wenn Sie keine der bereitgestellten Speicherklassen verwenden können, können Sie Ihre eigene angepasste Speicherklasse erstellen. Sie können eine Speicherklasse anpassen, um Konfigurationen wie die Optionen für Zone, Dateisystemtyp, Servertyp oder [Datenträgerbindungsmodus ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) anzugeben (nur Blockspeicher).
 {: shortdesc}
 
 1. Erstellen Sie eine angepasste Speicherklasse. Sie können beginnen, indem Sie eine der vordefinierten Speicherklassen verwenden oder unter den Beispielen für angepasste Speicherklassen wählen.
    - Vordefinierte Speicherklassen:
-     - [File Storage](cs_storage_file.html#storageclass_reference)
-     - [Blockspeicher](cs_storage_block.html#storageclass_reference)
+     - [Dateispeicher](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+     - [Blockspeicher](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
    - Beispiele für angepasste Speicherklassen:
-     - [File Storage](cs_storage_file.html#custom_storageclass)
-     - [Blockspeicher](cs_storage_block.html#custom_storageclass)
+     - [Dateispeicher](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
+     - [Blockspeicher](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
 
 2. Erstellen Sie die angepasste Speicherklasse.
    ```
@@ -153,8 +158,8 @@ Wenn Sie keine der bereitgestellten Speicherklassen verwenden können, können S
     {: pre}
 
 4. Erstellen Sie einen Persistent Volume Claim (PVC), um mithilfe Ihrer angepassten Speicherklasse Speicher dynamisch bereitzustellen.
-   - [File Storage](cs_storage_file.html#add_file)
-   - [Blockspeicher](cs_storage_block.html#add_block)
+   - [Dateispeicher](/docs/containers?topic=containers-file_storage#add_file)
+   - [Blockspeicher](/docs/containers?topic=containers-block_storage#add_block)
 
 5. Überprüfen Sie, ob Ihr PVC erstellt und an einen persistenten Datenträger gebunden wurde. Dieser Prozess kann einige Minuten dauern.
    ```
@@ -165,10 +170,10 @@ Wenn Sie keine der bereitgestellten Speicherklassen verwenden können, können S
 ### Ändern oder Aktualisieren in eine andere Speicherklasse
 {: #update_storageclass}
 
-Wenn Sie persistenten Speicher mithilfe einer Speicherklasse dynamisch bereitstellen, stellen Sie persistenten Speicher mit einer bestimmten Konfiguration bereit. Sie können den Namen der Speicherklasse oder den Typ des Speichers, den Sie bereitgestellt haben, nicht ändern. Sie haben jedoch die Möglichkeit, Ihren Speicher zu skalieren, wie in der folgenden Tabelle gezeigt. 
+Wenn Sie persistenten Speicher mithilfe einer Speicherklasse dynamisch bereitstellen, stellen Sie persistenten Speicher mit einer bestimmten Konfiguration bereit. Sie können den Namen der Speicherklasse oder den Typ des Speichers, den Sie bereitgestellt haben, nicht ändern. Sie haben jedoch die Möglichkeit, Ihren Speicher zu skalieren, wie in der folgenden Tabelle gezeigt.
 {: shortdesc}
 
-<table> 
+<table>
 <caption>Übersicht über die Skalierungsoptionen für {{site.data.keyword.containerlong_notm}}-Speicherlösungen</caption>
 <thead>
 <th>Speicherlösung</th>
@@ -177,11 +182,11 @@ Wenn Sie persistenten Speicher mithilfe einer Speicherklasse dynamisch bereitste
 <tbody>
 <tr>
 <td>Dateispeicher</td>
-<td>Sie können die Speichergröße und die zugeordneten E/A-Operationen pro Sekunde nach oben korrigieren, indem Sie [Ihren vorhandenen Datenträger ändern](cs_storage_file.html#change_storage_configuration). </td>
+<td>Sie können die Speichergröße und die zugeordneten E/A-Operationen pro Sekunde nach oben korrigieren, indem Sie [Ihren vorhandenen Datenträger ändern](/docs/containers?topic=containers-file_storage#file_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Blockspeicher</td>
-<td>Sie können die Speichergröße und die zugeordneten E/A-Operationen pro Sekunde nach oben korrigieren, indem Sie [Ihren vorhandenen Datenträger ändern](cs_storage_block.html#change_storage_configuration). </td>
+<td>Sie können die Speichergröße und die zugeordneten E/A-Operationen pro Sekunde nach oben korrigieren, indem Sie [Ihren vorhandenen Datenträger ändern](/docs/containers?topic=containers-block_storage#block_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Objektspeicher</td>
@@ -192,7 +197,7 @@ Wenn Sie persistenten Speicher mithilfe einer Speicherklasse dynamisch bereitste
 
 
 ## Vorhandenen Speicher mit Kubernetes-Bezeichnungen für die Mehrzonenverwendung vorbereiten
-{: #multizone}
+{: #storage_multizone}
 
 Wenn Sie Ihren Cluster von einem Cluster mit einer einzelnen Zone auf einen Mehrzonencluster aktualisiert haben und persistente Datenträger (PVs) bereits vorhanden waren, fügen Sie die Kubernetes-Zone und die Regionsbezeichnungen zu Ihren persistenten Datenträgern hinzu. Durch die Bezeichnungen wird sichergestellt, dass Pods, die diesen Speicher anhängen, in der Zone bereitgestellt werden, in der sich der persistente Speicher befindet.
 {:shortdesc}
@@ -202,9 +207,9 @@ Diese Schritte sind nur erforderlich, wenn bereits persistente Datenträger vorh
 
 Verwenden Sie ein Script, um alle persistenten Datenträger in Ihrem Cluster zu suchen und die Kubernetes-Bezeichnungen `failure-domain.beta.kubernetes.io/region` und `failure-domain.beta.kubernetes.io/zone` anzuwenden. Wenn der persistente Datenträger die Bezeichnungen bereits aufweist, überschreibt das Script die vorhandenen Werte nicht.
 
-Vorbemerkungen:
-- [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure).
-- Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer).
+Vorbereitende Schritte:
+- [Richten Sie die Kubernetes-CLI auf den Cluster aus](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie eine [VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten über das private Netz miteinander kommunizieren können. Zur Aktivierung von VRF [wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Gehen Sie wie folgt vor, um vorhandene persistente Datenträger zu aktualisieren:
 
@@ -276,5 +281,5 @@ Gehen Sie wie folgt vor, um vorhandene persistente Datenträger zu aktualisieren
 **Womit möchten Sie fortfahren? **
 
 Nachdem Sie Ihre vorhandenen persistenten Datenträger mit einer Bezeichnung versehen haben, können Sie den persistenten Datenträger an Ihren Mehrzonencluster anhängen. Weitere Informationen finden Sie über die folgenden Links.
-- [Vorhandenen NFS-Dateispeicher](cs_storage_file.html#existing_file) verwenden
-- [Vorhandenen Blockspeicher](cs_storage_block.html#existing_block) verwenden
+- [Vorhandenen NFS-Dateispeicher](/docs/containers?topic=containers-file_storage#existing_file) verwenden
+- [Vorhandenen Blockspeicher](/docs/containers?topic=containers-block_storage#existing_block) verwenden

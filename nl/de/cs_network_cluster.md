@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -18,195 +22,350 @@ lastupdated: "2018-12-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
-# Netzbetrieb in Clustern und private Vernetzung planen
-{: #planning}
+# Clusternetz einrichten
+{: #cs_network_cluster}
 
-Sie können den Netzbetrieb für Ihren {{site.data.keyword.containerlong}}-Cluster planen.
-{: shortdesc}
+Richten Sie eine Netzkonfiguration in Ihrem {{site.data.keyword.containerlong}}-Cluster ein.
+{:shortdesc}
 
-## Erklärung des Netzbetriebs in Clustern
-{: #in-cluster}
+Die Informationen auf dieser Seite helfen Ihnen bei der Einrichtung der Netzkonfiguration für Ihren Cluster. Sie sind nicht sicher, welche Konfiguration Sie wählen sollen? Informationen dazu finden Sie unter [Clusternetz planen](/docs/containers?topic=containers-cs_network_ov).
+{: tip}
 
-Alle Pods, die auf einem Workerknoten bereitgestellt werden, erhalten im Bereich 172.30.0.0/16 eine private IP-Adresse und werden nur zwischen den Workerknoten weitergeleitet. Vermeiden Sie Konflikte, indem Sie diesen IP-Bereich nicht auf Knoten verwenden, die mit Ihren Workerknoten kommunizieren. Workerknoten und Pods können im privaten Netz durch die Verwendung von privaten IP-Adressen sicher kommunizieren. Wenn ein Pod ausfällt oder ein Workerknoten neu erstellt werden muss, wird jedoch eine neue private IP-Adresse zugewiesen.
-
-Standardmäßig ist es schwierig, sich ändernde private IP-Adressen für Apps nachzuverfolgen, die hoch verfügbar sein müssen. Stattdessen können Sie die integrierten Erkennungsfunktionen des Kubernetes-Service nutzen, um Anwendungen als Cluster-IP-Services im privaten Netz zugänglich zu machen. Ein Kubernetes-Service fasst eine Gruppe von Pods zusammen und stellt diesen Pods eine Netzverbindung zur Verfügung. Diese Verbindung stellen Konnektivität zu anderen Services im Cluster bereit, ohne hierbei die tatsächlichen privaten IP-Adressen der einzelnen Pods preiszugeben. Services wird eine IP-Cluster-IP-Adresse zugeordnet, auf die nur innerhalb des Clusters zugegriffen werden kann.
-* Ältere Cluster: In Clustern, die vor Februar 2018 in der Zone 'dal13' oder vor Oktober 2017 in einer anderen Zone erstellt wurden, wird den Services eine der 254 IPs im Bereich 10.10.10.0/24 zugeordnet. Wenn Sie den Grenzwert von 254 Services erreicht haben und mehr Services benötigen, müssen Sie einen neuen Cluster erstellen.
-* Neuere Cluster: In Clustern, die nach Februar 2018 in der Zone 'dal13' oder nach Oktober 2017 in einer anderen Zone erstellt wurden, wird den Services eine der 65.000 IPs im Bereich 172.21.0.0/16 zugeordnet.
-
-Vermeiden Sie Konflikte, indem Sie diesen IP-Bereich nicht auf Knoten verwenden, die mit Ihren Workerknoten kommunizieren. Es wird auch ein Eintrag für die DNS-Suche für den Service erstellt und in der Komponente `kube-dns` des Clusters gespeichert. Der DNS-Eintrag enthält den Namen des Service, den Namensbereich, in dem der Service erstellt wurde, und den Link zu der zugeordneten IP-Adresse, die im Cluster enthalten ist.
-
-Um auf einen Pod hinter einem Cluster-Service zuzugreifen, können Apps entweder die IP-Adresse des Service im Cluster verwenden oder eine Anforderung mit dem Namen des Service senden. Wenn Sie den Namen des Service verwenden, wird dieser in der Komponente `kube-dns` gesucht und an die IP-Adresse des Service im Cluster weitergeleitet. Wenn eine Anforderung den Service erreicht, leitet der Service die Anforderungen an die Pods weiter, unabhängig von den IP-Adressen der Pods im Cluster und dem Workerknoten, auf dem sie bereitgestellt wurden.
-
-<br />
-
-
-## Erklärung der VLAN-Verbindungen und Netzschnittstellen
-{: #interfaces}
-
-{{site.data.keyword.containerlong_notm}} stellt VLANs der IBM Cloud-Infrastruktur (SoftLayer) bereit, die eine hohe Qualität der Netzleistung sowie Netzisolation für Workerknoten sicherstellen. Ein VLAN konfiguriert eine Gruppe von Workerknoten und Pods so, als wären diese an dasselbe physische Kabel angeschlossen. VLANs sind Ihrem {{site.data.keyword.Bluemix_notm}}-Konto zugeordnet und werden von IBM Kunden nicht gemeinsam genutzt.
-
-Standardmäßig sind alle Cluster mit einem privaten VLAN verbunden. Das private VLAN legt fest, welche private IP-Adresse jedem Workerknoten zugewiesen wird. Ihre Worker verfügen über eine private Netzschnittstelle und sind über das private Netz zugänglich. Wenn Sie einen Cluster erstellen, der auch mit einem öffentlichen VLAN verbunden ist, verfügt Ihr Cluster außerdem über eine öffentliche Netzschnittstelle. Das öffentliche VLAN ermöglicht es den Workerknoten, automatisch und sicher eine Verbindung zum Master herzustellen. Weitere Informationen zu den Standard-VLANs für Ihren Cluster finden Sie im Abschnitt [Standard-VLANs, Teilnetze und IPs für Cluster](cs_subnets.html#default_vlans_subnets).
-
-Konfigurationen für die Clustervernetzung können durch die Netzschnittstellen des Clusters definiert werden:
-
-* **Standardclustervernetzung**: Ein Cluster mit einer privaten und einer öffentlichen Netzschnittstelle
-* **Angepasste Standardclustervernetzung**: Ein Cluster mit einer privaten und einer öffentlichen Netzschnittstelle sowie Calico-Netzrichtlinien zum Blockieren des eingehenden öffentlichen Datenverkehrs
-* **Ausschließlich private Clustervernetzung**: Ein Cluster, der lediglich über eine private Netzschnittstelle verfügt
-
-Klicken Sie auf eine der folgenden Konfigurationen, um den Vernetzung Ihres Clusters zu planen:
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/network_imagemap.png" width="575" alt="Klicken Sie auf eine Karte, um die Konfiguration für die Clustervernetzung zu planen." style="width:575px;" />
-<map name="home_map" id="home_map">
-<area href="#both_vlans" alt="Standardclustervernetzung planen" title="Standardclustervernetzung planen" shape="rect" coords="-7, -8, 149, 211" />
-<area href="#both_vlans_private" alt="Angepasste Standardclustervernetzung planen" title="Angepasste Standardclustervernetzung planen" shape="rect" coords="196, -1, 362, 210" />
-<area href="#private_vlan" alt="Ausschließlich private Clustervernetzung planen" title="Ausschließlich private Clustervernetzung planen" shape="rect" coords="409, -10, 572, 218" />
-</map>
-
-<br />
-
-
-## Standardclustervernetzung planen
+## Clusternetz mit einem öffentlichen und einem privaten VLAN einrichten
 {: #both_vlans}
 
-{{site.data.keyword.containerlong_notm}} richtet Ihren Cluster standardmäßig mit Zugriff auf ein öffentliches VLAN und ein privates VLAN ein.
-{:shortdesc}
+Richten Sie Ihren Cluster mit Zugriff auf [ein öffentliches VLAN und ein privates VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) ein. Die folgende Abbildung zeigt Netzoptionen, die Sie für Ihren Cluster mit dieser Netzeinrichtung konfigurieren können.
+{: shortdesc}
 
+Diese Netzeinrichtung besteht aus den folgenden erforderlichen Netzkonfigurationen bei der Clustererstellung und optionalen Netzkonfigurationen nach der Clustererstellung.
 
+1. Wenn Sie den Cluster in einer Umgebung hinter einer Firewall erstellen, [lassen Sie ausgehenden Netzdatenverkehr an die öffentlichen und privaten IP-Adressen](/docs/containers?topic=containers-firewall#firewall_outbound) für die {{site.data.keyword.Bluemix_notm}}-Services zu, deren Einsatz Sie planen.
 
-**Was erhält mein Cluster bei dieser Konfiguration?**
-* Eine öffentliche IP-Adresse für jeden Workerknoten, wodurch die Workerknoten eine öffentliche Netzschnittstelle erhalten
-* Eine private IP-Adresse für jeden Workerknoten, wodurch die Workerknoten eine private Netzschnittstelle erhalten
-* Eine automatische sichere OpenVPN-Verbindung zwischen allen Workerknoten und dem Master
+2. Erstellen Sie einen Cluster, der mit einem öffentlichen und einem privaten VLAN verbunden ist. Wenn Sie einen Mehrzonencluster erstellen, können Sie VLAN-Paare für jede Zone auswählen.
 
-**Warum sollte ich diese Konfiguration verwenden?**
+3. Wählen Sie aus, wie Ihr Kubernetes-Masterknoten und Ihre Kubernetes-Workerknoten miteinander kommunizieren.
+  * Wenn VRF (Virtual Routing and Forwarding) in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto aktiviert ist, aktivieren Sie [nur öffentliche](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public), [öffentliche und private](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both) oder [nur private Serviceendpunkte](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private).
+  * Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie [nur den öffentlichen Serviceendpunkt](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
 
-* Sie verfügen über eine App, die für das öffentliche Internet in einem Einzelzonencluster zugänglich sein muss.
-* Sie verfügen über eine App, die für das öffentliche Internet in einem Mehrzonencluster zugänglich sein muss. Da Sie [VLAN-Spanning](cs_subnets.html#subnet-routing) aktivieren müssen, um einen Mehrzonencluster zu erstellen, kann der Cluster mit anderen Systemen kommunizieren, die mit einem beliebigen privaten VLAN in demselben IBM Cloud-Konto verbunden sind. Sie können [Calico-Netzrichtlinien](cs_network_policy.html#isolate_workers) verwenden, um Ihren Mehrzonencluster im privaten Netz zu isolieren.
-
-**Welche Optionen habe ich für die Verwaltung des öffentlichen und privaten Zugriffs auf meinen Cluster?**
-</br>In den folgenden Abschnitten werden die Funktionen von {{site.data.keyword.containerlong_notm}} beschrieben, mit denen Sie den Netzbetrieb für Cluster einrichten können, die mit einem öffentlichen und einem privaten VLAN verbunden sind.
-
-### Apps mit Netzservices zugänglich machen
-{: #both_vlans_services}
-
-Die öffentliche Netzschnittstelle für Workerknoten wird durch [vordefinierte Calico-Netzrichtlinieneinstellungen](cs_network_policy.html#default_policy) geschützt, die bei der Clustererstellung auf jedem Workerknoten konfiguriert werden. Standardmäßig ist für alle Workerknoten der gesamte ausgehende Netzverkehr zulässig. Eingehender Netzverkehr wird abgesehen von bestimmten Ports blockiert. Diese Ports werden geöffnet, damit IBM den Netzverkehr überwachen und Sicherheitsupdates für den Kubernetes-Master automatisch installieren kann.
-
-Wenn Sie Ihre Apps öffentlich oder in einem privaten Netz zugänglich machen möchten, können Sie öffentliche oder private NodePort-, LoadBalancer- oder Ingress-Services erstellen. Weitere Informationen zu den einzelnen Services finden Sie unter [NodePort-Service, Lastausgleichsservice oder Ingress-Service auswählen](cs_network_planning.html#external).
-
-### Optional: Netzarbeitslasten für Edge-Workerknoten isolieren
-{: #both_vlans_edge}
-
-Mit Edge-Workerknoten kann die Sicherheit des Clusters verbessert werden, indem der externe Zugriff auf Workerknoten beschränkt und die Netzarbeitslast isoliert wird. Um sicherzustellen, dass Ingress- und Lastausgleichsfunktions-Pods nur auf den angegebenen Workerknoten bereitgestellt werden, [kennzeichnen Sie die Workerknoten als Edge-Knoten](cs_edge.html#edge_nodes). Um außerdem zu verhindern, dass andere Arbeitslasten auf Edge-Knoten ausgeführt werden, [wenden Sie Taints auf die Edge-Knoten an](cs_edge.html#edge_workloads).
-
-
-### Optional: Verbindung zu einem lokalen Netz oder IBM Cloud Private mithilfe des strongSwan-VPN-Service herstellen
-{: #both_vlans_vpn}
-
-Um eine sichere Verbindung Ihrer Workerknoten und Apps zu einem lokalen Netz herzustellen, können Sie einen [strongSwan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/about.html) einrichten. Der strongSwan-IPSec-VPN-Service stellt einen sicheren End-to-End-Kommunikationskanal über das Internet bereit, der auf der standardisierten IPSec-Protokollsuite (IPSec - Internet Protocol Security) basiert.
-* Um eine sichere Verbindung zwischen Ihrem Cluster und einem lokalen Netz einzurichten, [konfigurieren und implementieren Sie den StrongSwan-IPSec-VPN-Service](cs_vpn.html#vpn-setup) direkt in einem Pod in Ihrem Cluster.
-* Informationen zum Einrichten einer sicheren Verbindung zwischen Ihrem Cluster und einer IBM Cloud Private-Instanz finden Sie im Abschnitt [Öffentliche und private Cloud mit dem strongSwan-VPN verbinden](cs_hybrid.html#hybrid_vpn).
-
+4. Nach dem Erstellen des Clusters können Sie die folgenden Netzoptionen konfigurieren:
+  * Richten Sie einen [Verbindungsservice 'strongSwan-VPN'](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public) ein, um die Kommunikation zwischen Ihrem Cluster und einem lokalen Netz oder {{site.data.keyword.icpfull_notm}} zu ermöglichen.
+  * Erstellen Sie [Kubernetes-Erkennungsservices](/docs/containers?topic=containers-cs_network_planning#in-cluster), um eine clusterinterne Kommunikation zwischen Pods zu ermöglichen.
+  * Erstellen Sie [öffentliche](/docs/containers?topic=containers-cs_network_planning#public_access) Ingress-Services, Lastausgleichsservices oder Knotenportservices, um Apps für öffentliche Netze zugänglich zu machen.
+  * Erstellen Sie [private](/docs/containers?topic=containers-cs_network_planning#private_both_vlans) Ingress-Services, Lastausgleichsservices oder Knotenportservices, um Apps für private Netze zugänglich zu machen, und erstellen Sie Calico-Netzrichtlinien, um Ihren Cluster gegen öffentlichen Zugriff zu schützen.
+  * Isolieren Sie Netzworkloads an [Edge-Workerknoten](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge).
+  * [Isolieren Sie Ihren Cluster im privaten Netz](/docs/containers?topic=containers-cs_network_planning#isolate).
 
 <br />
 
 
-## Angepasste Standardclustervernetzung planen
-{: #both_vlans_private}
+## Clusternetz nur mit einem privaten VLAN einrichten
+{: #setup_private_vlan}
 
-{{site.data.keyword.containerlong_notm}} richtet Ihren Cluster standardmäßig mit Zugriff auf ein öffentliches VLAN und ein privates VLAN ein. Sie können die Standardnetzkonfiguration jedoch mithilfe von Netzrichtlinien anpassen, um den öffentlichen Zugriff zu blockieren.
-{:shortdesc}
+Wenn Sie bestimmte Sicherheitsanforderungen haben oder angepasste Netzrichtlinien und Routing-Regeln erstellen müssen, um eine dedizierte Netzsicherheit bereitzustellen, richten Sie Ihren Cluster mit Zugriff [nur auf ein privates VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) ein. Die folgende Abbildung zeigt Netzoptionen, die Sie für Ihren Cluster mit dieser Netzeinrichtung konfigurieren können.
+{: shortdesc}
 
+Diese Netzeinrichtung besteht aus den folgenden erforderlichen Netzkonfigurationen bei der Clustererstellung und optionalen Netzkonfigurationen nach der Clustererstellung.
 
+1. Wenn Sie den Cluster in einer Umgebung hinter einer Firewall erstellen, [lassen Sie ausgehenden Netzdatenverkehr an die öffentlichen und privaten IP-Adressen](/docs/containers?topic=containers-firewall#firewall_outbound) für die {{site.data.keyword.Bluemix_notm}}-Services zu, deren Einsatz Sie planen.
 
-**Was erhält mein Cluster bei dieser Konfiguration?**
-* Eine öffentliche IP-Adresse für jeden Workerknoten, wodurch die Workerknoten eine öffentliche Netzschnittstelle erhalten
-* Eine private IP-Adresse für jeden Workerknoten, wodurch die Workerknoten eine private Netzschnittstelle erhalten
-* Eine automatische sichere OpenVPN-Verbindung zwischen allen Workerknoten und dem Master
+2. Erstellen Sie einen Cluster, der [nur mit einem privaten VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) verbunden ist. Wenn Sie einen Mehrzonencluster erstellen, können Sie ein privates VLAN in jeder Zone auswählen.
 
-**Warum sollte ich diese Konfiguration verwenden?**
+3. Wählen Sie aus, wie Ihr Kubernetes-Masterknoten und Ihre Kubernetes-Workerknoten miteinander kommunizieren.
+  * Wenn VRF (Virtual Routing and Forwarding) in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto aktiviert ist, [aktivieren Sie einen privaten Serviceendpunkt](#set-up-private-se).
+  * Wenn Sie VRF nicht aktivieren können oder wollen, können Ihr Kubernetes-Masterknoten und Ihre Workerknoten keine automatische Verbindung zum Master herstellen. Sie müssen Ihren Cluster mit einer [Gateway-Appliance](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private) konfigurieren.
 
-* Sie verfügen über eine App in einem Einzelzonencluster. Sie möchten die App nur für Pods innerhalb des Clusters oder in anderen Clustern, die mit demselben privaten VLAN verbunden sind, zugänglich machen.
-* Sie verfügen über eine App in einem Mehrzonencluster. Sie möchten die App nur für Pods innerhalb des Clusters oder in anderen Clustern, die mit denselben privaten VLANs wie Ihr Cluster verbunden sind, zugänglich machen. Da [VLAN-Spanning](cs_subnets.html#subnet-routing) für Mehrzonencluster jedoch aktiviert sein muss, kann von anderen Systemen, die mit einem privaten VLAN in demselben IBM Cloud-Konto verbunden sind, auf den Cluster zugegriffen werden. Es ist sinnvoll, den Mehrzonencluster von anderen Systemen zu isolieren.
-
-**Welche Optionen habe ich für die Verwaltung des öffentlichen und privaten Zugriffs auf meinen Cluster?**</br>In den folgenden Abschnitten werden die Funktionen von {{site.data.keyword.containerlong_notm}} beschrieben, mit denen Sie ausschließlich private Netze einrichten und öffentliche Netze für Cluster sperren können, die mit einem öffentlichen und einem privaten VLAN verbunden sind.
-
-### Apps mit privaten Netzservices zugänglich machen und den Cluster mit Calico-Netzrichtlinien gegen öffentlichen Zugriff schützen
-{: #both_vlans_private_services}
-
-Die öffentliche Netzschnittstelle für Workerknoten wird durch [vordefinierte Calico-Netzrichtlinieneinstellungen](cs_network_policy.html#default_policy) geschützt, die bei der Clustererstellung auf jedem Workerknoten konfiguriert werden. Standardmäßig ist für alle Workerknoten der gesamte ausgehende Netzverkehr zulässig. Eingehender Netzverkehr wird abgesehen von bestimmten Ports blockiert. Diese Ports werden geöffnet, damit IBM den Netzverkehr überwachen und Sicherheitsupdates für den Kubernetes-Master automatisch installieren kann.
-
-Wenn Sie Ihre Apps ausschließlich über ein privates Netz zugänglich machen möchten, können Sie private NodePort-, LoadBalancer- oder Ingress-Services erstellen. Weitere Informationen zum Planen einer privaten externen Vernetzung finden Sie im Abschnitt [Private externe Vernetzung für ein öffentliches und privates VLAN-Setup planen](cs_network_planning.html#private_both_vlans).
-
-Die standardmäßigen Calico-Netzrichtlinien ermöglichen jedoch auch den eingehenden Netzverkehr aus dem Internet an diese Services. Sie können Calico-Richtlinien erstellen, um stattdessen den gesamten öffentlichen Datenverkehr an die Services zu blockieren. Beispielsweise öffnet ein NodePort-Service einen Port auf einem Workerknoten sowohl über die private als auch über die öffentliche IP-Adresse des Workerknotens. Ein Lastausgleichsservice mit einer portierbaren privaten IP-Adresse öffnet einen öffentlichen Knotenport auf jedem Workerknoten. Sie müssen eine [Calico-PreDNAT-Netzrichtlinie](cs_network_policy.html#block_ingress) erstellen, um öffentliche Knotenports (NodePorts) zu blockieren.
-
-Beispiel: Angenommen, Sie haben einen privaten Lastausgleichsservice erstellt. Außerdem haben Sie eine Calico-PreDNAT-Richtlinie erstellt, um den öffentlichen Datenverkehr zu blockieren, sodass er nicht zu den öffentlichen NodePorts gelangt, die von der Lastausgleichsfunktion geöffnet werden. Auf diese private Lastausgleichsfunktion ist der Zugriff wie folgt möglich:
-* [Von einem beliebigen Pod in demselben Cluster](#in-cluster)
-* Von einem beliebigen Pod in einem beliebigen Cluster, der mit demselben privaten VLAN verbunden ist
-* Von allen Systemen, die mit einem der privaten VLANs in demselben IBM Cloud-Konto verbunden sind (Wenn das [VLAN-Spanning aktiviert](cs_subnets.html#subnet-routing) ist)
-* Von allen Systemen über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die Lastausgleichsfunktion befindet (wenn Sie sich nicht im IBM Cloud-Konto, aber dennoch hinter der Unternehmensfirewall befinden)
-* Von allen Systemen über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die Lastausgleichsfunktion befindet (wenn Sie sich in einem anderen IBM Cloud-Konto befinden)
-
-### Cluster im privaten Netz isolieren
-{: #isolate}
-
-Wenn Sie einen Mehrzonencluster, mehrere VLANs für einen Einzelzonencluster oder mehrere Teilnetze in demselben VLAN haben, müssen Sie das [VLAN-Spanning aktivieren](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning), damit Ihre Workerknoten miteinander im privaten Netz kommunizieren können. Wenn das VLAN-Spanning aktiviert ist, kann jedes System, das mit einem der privaten VLANs in demselben IBM Cloud-Konto verbunden ist, auf Ihre Worker zugreifen. Sie können Ihren Mehrzonencluster von anderen Systemen im privaten Netz mithilfe von [Calico-Netzrichtlinien](cs_network_policy.html#isolate_workers) isolieren. Diese Richtlinien ermöglichen auch eingehenden und abgehenden Datenverkehr für die privaten IP-Bereiche und Ports, die Sie in Ihrer privaten Firewall geöffnet haben.
-
-### Optional: Netzarbeitslasten für Edge-Workerknoten isolieren
-{: #both_vlans_private_edge}
-
-Mit Edge-Workerknoten kann die Sicherheit des Clusters verbessert werden, indem der externe Zugriff auf Workerknoten beschränkt und die Netzarbeitslast isoliert wird. Um sicherzustellen, dass Ingress- und Lastausgleichsfunktions-Pods nur auf den angegebenen Workerknoten bereitgestellt werden, [kennzeichnen Sie die Workerknoten als Edge-Knoten](cs_edge.html#edge_nodes). Um außerdem zu verhindern, dass andere Arbeitslasten auf Edge-Knoten ausgeführt werden, [wenden Sie Taints auf die Edge-Knoten an](cs_edge.html#edge_workloads).
-
-
-Verwenden Sie dann eine [Calico-PreDNAT-Netzrichtlinie](cs_network_policy.html#block_ingress), um den Datenverkehr an öffentlichen Knotenports in Clustern zu blockieren, in denen Edge-Workerknoten ausgeführt werden. Durch das Blockieren von Knotenports wird sichergestellt, dass die Edge-Workerknoten die einzigen Workerknoten sind, die eingehenden Datenverkehr verarbeiten.
-
-### Optional: Verbindung zu einem lokalen Netz oder IBM Cloud Private mithilfe des strongSwan-VPN-Service herstellen
-{: #both_vlans_private_vpn}
-
-Um eine sichere Verbindung Ihrer Workerknoten und Apps zu einem lokalen Netz herzustellen, können Sie einen [strongSwan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/about.html) einrichten. Der strongSwan-IPSec-VPN-Service stellt einen sicheren End-to-End-Kommunikationskanal über das Internet bereit, der auf der standardisierten IPSec-Protokollsuite (IPSec - Internet Protocol Security) basiert.
-* Um eine sichere Verbindung zwischen Ihrem Cluster und einem lokalen Netz einzurichten, [konfigurieren und implementieren Sie den StrongSwan-IPSec-VPN-Service](cs_vpn.html#vpn-setup) direkt in einem Pod in Ihrem Cluster.
-* Informationen zum Einrichten einer sicheren Verbindung zwischen Ihrem Cluster und einer IBM Cloud Private-Instanz finden Sie im Abschnitt [Öffentliche und private Cloud mit dem strongSwan-VPN verbinden](cs_hybrid.html#hybrid_vpn).
-
+4. Nach dem Erstellen des Clusters können Sie die folgenden Netzoptionen konfigurieren:
+  * [Richten Sie ein VPN-Gateway ein](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private), um die Kommunikation zwischen Ihrem Cluster und einem lokalen Netz oder {{site.data.keyword.icpfull_notm}} zu ermöglichen. Wenn Sie zuvor eine VRA (Virtual Router Appliance) oder eine FSA (Fortigate Security Appliance) für die Kommunikation zwischen dem Masterknoten und den Workerknoten eingerichtet haben, können Sie den IPSec-VPN-Endpunkt auf der VRA bzw. FSA konfigurieren.
+  * Erstellen Sie [Kubernetes-Erkennungsservices](/docs/containers?topic=containers-cs_network_planning#in-cluster), um eine clusterinterne Kommunikation zwischen Pods zu ermöglichen.
+  * Erstellen Sie [private](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) Ingress-Services, Lastausgleichsservices oder Knotenportservices, um Apps in privaten Netzen zugänglich zu machen.
+  * Isolieren Sie Netzworkloads an [Edge-Workerknoten](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge).
+  * [Isolieren Sie Ihren Cluster im privaten Netz](/docs/containers?topic=containers-cs_network_planning#isolate).
 
 <br />
 
 
-## Ausschließlich private Clusternetze planen
-{: #private_vlan}
+## VLAN-Verbindungen für Workerknoten ändern
+{: #change-vlans}
 
-Sie können [einen Cluster ausschließlich mit privatem VLAN erstellen](cs_clusters.html#clusters_cli), indem Sie das Flag `--private-only` in die CLI einfügen. Wenn Ihre Workerknoten nur mit einem privaten VLAN verbunden sind, können die Workerknoten nicht automatisch eine Verbindung zum Master herstellen. Sie müssen eine Gateway-Appliance verwenden, um die Workerknoten mit dem Master zu verbinden. Sie können die Gateway-Appliance auch als Firewall verwenden, um Ihren Cluster vor unerwünschtem Zugriff zu schützen.
-{:shortdesc}
+Wenn Sie einen Cluster erstellen, wählen Sie aus, ob Ihre Workerknoten mit einem privaten und einem öffentlichen VLAN oder nur mit einem privaten VLAN verbunden werden sollen. Ihre Workerknoten gehören zu Worker-Pools, die Netzmetadaten speichern, die die VLANs enthalten, die zur Bereitstellung zukünftiger Workerknoten im Pool verwendet werden sollen. Sie haben die Möglichkeit, die Einrichtung der VLAN-Konnektivität Ihres Clusters später zu ändern, wie zum Beispiel in folgenden Fällen.
+{: shortdesc}
+
+* Die Kapazität der VLANs für den Worker-Pool in einer Zone wird knapp und Sie müssen ein neues VLAN bereitstellen, das Ihre Cluster-Workerknoten verwenden können.
+* Sie haben einen Cluster mit Workerknoten, die sich sowohl in öffentlichen als auch in privaten VLANs befinden, Sie wollen jedoch zu einem [rein privaten Cluster](#setup_private_vlan) wechseln.
+* Sie haben einen reinen privaten Cluster, Sie wollen jedoch einige Workerknoten als Worker-Pool von [Edge-Knoten](/docs/containers?topic=containers-edge#edge) im öffentlichen VLAN haben, um Ihre Apps im Internet zugänglich zu machen.
+
+Versuchen Sie stattdessen den Serviceendpunkt für die Kommunikation zwischen Master- und Workerknoten zu ändern? Prüfen Sie die Abschnitte zur Einrichtung [öffentlicher](#set-up-public-se) und [privater](#set-up-private-se) Serviceendpunkte.
+{: tip}
+
+Vorbereitende Schritte:
+* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* Wenn Ihre Workerknoten eigenständig sind (nicht zu einem Worker-Pool gehören), [aktualisieren Sie sie zu Worker-Pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
+
+Gehen Sie wie folgt vor, um die VLANs zu ändern, die ein Worker-Pool zur Bereitstellung von Workerknoten verwendet:
+
+1. Listen Sie die Namen der Worker-Pools in Ihrem Cluster auf.
+  ```
+  ibmcloud ks worker-pools --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+
+2. Bestimmen Sie die Zonen für einen der Worker-Pools. Suchen Sie in der Ausgabe nach dem Feld **Zones**.
+  ```
+  ibmcloud ks worker-pool-get --cluster <clustername_oder_-id> --worker-pool <poolname>
+  ```
+  {: pre}
+
+3. Ermitteln Sie für jede Zone, die Sie im vorherigen Schritt gefunden haben, ein verfügbares öffentliches VLAN und ein verfügbares privates VLAN, die miteinander kompatibel sind.
+
+  1. Prüfen Sie die verfügbaren öffentlichen und privaten VLANs, die unter **Type** in der Ausgabe aufgelistet werden.
+    ```
+    ibmcloud ks vlans --zone <zone>
+    ```
+    {: pre}
+
+  2. Prüfen Sie, ob die öffentlichen und privaten VLANs in der Zone kompatibel sind. Um kompatibel zu sein, muss der **Router** dieselbe Pod-ID aufweisen. In der folgenden Beispielausgabe stimmen die Pod-IDs für **Router** überein: `01a` und `01a`. Wenn eine Pod-ID `01a` und die andere Pod-ID `02a` wäre, könnten Sie diese öffentlichen und privaten VLAN-IDs nicht für Ihren Worker-Pool festlegen.
+    ```
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    229xxxx          1234     private   bcr01a.dal12   true
+    229xxxx          5678     public    fcr01a.dal12   true
+    ```
+    {: screen}
+
+  3. Wenn Sie ein neues öffentliches oder privates VLAN für die Zone bestellen müssen, können Sie über die [{{site.data.keyword.Bluemix_notm}}-Konsole](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) bestellen oder den folgenden Befehl verwenden. Beachten Sie, dass die VLANs mit übereinstimmenden Pod-IDs für **Router** wie im vorherigen Schritt kompatibel sein müssen. Wenn Sie ein Paar aus einem neuen öffentlichen VLAN und einem neuen privaten VLAN erstellen, müssen diese miteinander kompatibel sein.
+    ```
+    ibmcloud sl vlan create -t [public|private] -d <zone> -r <kompatibler_router>
+    ```
+    {: pre}
+
+  4. Notieren Sie die IDs der kompatiblen VLANs.
+
+4. Richten Sie einen Worker-Pool mit den neuen VLAN-Netzmetadaten für jede Zone ein. Sie können einen neuen Worker-Pool erstellen oder einen vorhandenen Worker-Pool ändern.
+
+  * **Neuen Worker-Pool erstellen:** Siehe [Workerknoten durch Erstellen eines neuen Worker-Pools hinzufügen](/docs/containers?topic=containers-clusters#add_pool).
+
+  * **Vorhandenen Worker-Pool ändern:** Legen Sie die Netzmetadaten des Worker-Pools zur Verwendung des VLAN für jede Zone fest. Workerknoten, die bereits im Pool erstellt wurden, verwenden weiterhin die vorherigen VLANs, während neue Workerknoten im Pool die neuen VLAN-Metadaten verwenden, die Sie festlegen.
+
+    * Beispiel für das Hinzufügen eines öffentlichen und eines privaten VLAN wie beim Wechseln von einer rein privaten Netzkonfiguration zu einer privaten und öffentlichen Netzkonfiguration:
+      ```
+      ibmcloud ks zone-network-set --zone <zone> --cluster <clustername_oder_-id> --worker-pools <poolname> --private-vlan <id_des_privaten_vlan> --public-vlan <id_des_öffentlichen_vlan>
+      ```
+      {: pre}
+
+    * Beispiel für das Hinzufügen eines privaten VLAN wie beim Wechsel von öffentlichen und privaten VLANs zu nur privaten, wenn Sie ein [VRF-aktiviertes Konto, das Serviceendpunkte verwendet,](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) haben:
+      ```
+      ibmcloud ks zone-network-set --zone <zone> --cluster <clustername_oder_-id> --worker-pools <poolname> --private-vlan <id_des_privaten_vlan> --public-vlan <id_des_öffentlichen_vlan>
+      ```
+      {: pre}
+
+5. Fügen Sie dem Worker-Pool Workerknoten hinzu, indem Sie die Größe des Pools ändern.
+  ```
+  ibmcloud ks worker-pool-resize --cluster <clustername_oder_-id> --worker-pool <poolname> --size-per-zone <anzahl_der_worker_pro_zone>
+  ```
+  {: pre}
+
+  Wenn Sie Workerknoten, die die vorherigen Netzmedadaten verwenden, entfernen wollen, ändern Sie die Anzahl der Worker pro Zone, um die vorherige Anzahl der Worker pro Zone zu verdoppeln. In späteren dieser Schritte können Sie die vorherigen Workerknoten abriegeln ('cordon'), entleeren ('drain') und entfernen.
+  {: tip}
+
+6. Überprüfen Sie in der Ausgabe, ob die neuen Workerknoten mit den entsprechenden Werten für **Public IP** und **Private IP** erstellt wurden. Beispiel: Wenn Sie den Worker-Pool von einem öffentlichen und privaten VLAN in ein nur privates VLAN ändern, haben die neuen Workerknoten nur eine private IP-Adresse. Wenn Sie den Worker-Pool von nur privaten VLANs in öffentliche und private VLANs ändern, haben die Workerknoten sowohl öffentliche als auch private IP-Adressen.
+  ```
+  ibmcloud ks workers --cluster <clustername_oder_-id> --worker-pool <poolname>
+  ```
+  {: pre}
+
+7. Optional: Entfernen Sie die Workerknoten mit den vorherigen Netzmetadaten aus dem Worker-Pool.
+  1. Notieren Sie in der Ausgabe des vorherigen Schritts die Werte für **ID** und **Private IP** der Workerknoten, die Sie aus dem Worker-Pool entfernen wollen.
+  2. Markieren Sie den Workerknoten in einem Prozess, der als Abriegelung oder "Cordoning" bezeichnet wird, als nicht planbar ("unschedulable"). Wenn Sie einen Workerknoten abriegeln, ist er für die künftige Pod-Planung nicht mehr verfügbar.
+    ```
+    kubectl cordon <private_ip_des_workerknotens>
+    ```
+    {: pre}
+  3. Überprüfen Sie, ob die Pod-Planung für Ihren Workerknoten inaktiviert ist
+    ```
+    kubectl get nodes
+    ```
+    {: pre}
+     Ihr Workerknoten ist für die Pod-Planung inaktiviert, wenn der Status **`SchedulingDisabled`** angezeigt wird.
+  4. Erzwingen Sie, dass Pods aus Ihrem Workerknoten entfernt und auf den verbleibenden Workerknoten im Cluster erneut geplant werden.
+    ```
+    kubectl drain <private_ip_des_workerknotens>
+    ```
+    {: pre}
+     Dieser Prozess kann einige Minuten dauern.
+  5. Entfernen Sie den Workerknoten. Verwenden Sie die Worker-ID, die Sie zuvor abgerufen haben.
+    ```
+    ibmcloud ks worker-rm --cluster <clustername_oder_-id> --worker <workername_oder_-id>
+    ```
+    {: pre}
+  6. Überprüfen Sie, ob der Workerknoten entfernt wurde.
+    ```
+    ibmcloud ks workers --cluster <clustername_oder_-id> --worker-pool <poolname>
+    ```
+    {: pre}
+
+8. Optional: Sie können die Schritte 2 bis 7 für jeden Worker-Pool in Ihrem Cluster wiederholen. Nachdem Sie diese Schritte ausgeführt haben, sind alle Workerknoten in Ihrem Cluster mit den neuen VLANs eingerichtet.
+
+9. Die Standard-ALBs in Ihrem Cluster sind weiterhin an das alte VLAN gebunden, da ihre IP-Adressen aus einem Teilnetz in diesem VLAN stammen. Da ALBs nicht über VLANs hinweg versetzt werden können, können Sie stattdessen [ALBs in den neuen VLANs erstellen und ALBs in den alten VLANs inaktivieren](/docs/containers?topic=containers-ingress#migrate-alb-vlan).
+
+<br />
 
 
+## Privaten Serviceendpunkt einrichten
+{: #set-up-private-se}
 
-**Was erhält mein Cluster bei dieser Konfiguration?**
-* Eine private IP-Adresse für jeden Workerknoten, wodurch die Workerknoten eine private Netzschnittstelle erhalten
+In Clustern mit Kubernetes Version 1.11 oder höher können Sie den privaten Serviceendpunkt für Ihren Cluster aktivieren oder inaktivieren.
+{: shortdesc}
 
-**Was erhält mein Cluster bei dieser Konfiguration nicht?**
-* Eine öffentliche IP-Adresse für jeden Workerknoten, wodurch die Workerknoten eine öffentliche Netzschnittstelle erhalten. Der Cluster ist nie öffentlich verfügbar.
-* Eine automatische Verbindung zwischen allen Workerknoten und dem Master. Sie müssen diese Verbindung durch [Konfigurieren einer Gateway-Appliance](#private_vlan_gateway) zur Verfügung stellen.
+Der private Serviceendpunkt macht Ihren Kubernetes-Master privat zugänglich. Ihre Workerknoten und Ihre berechtigten Clusterbenutzer können mit dem Kubernetes-Master über das private Netz kommunizieren. Informationen dazu, ob Sie den privaten Serviceendpunkt aktivieren können, finden Sie unter [Kommunikation zwischen Master und Worker planen](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master). Beachten Sie, dass Sie den privaten Serviceendpunkt nicht inaktivieren können, nachdem Sie ihn aktiviert haben.
 
-**Warum sollte ich diese Konfiguration verwenden?**
-</br>Sie haben bestimmte Sicherheitsanforderungen oder müssen angepasste Netzrichtlinien und Routing-Regeln erstellen, um eine dedizierte Netzsicherheit zu ermöglichen. Beachten Sie, dass für die Nutzung einer Gateway-Appliance separate Kosten anfallen. Weitere Informationen finden Sie in der [Dokumentation](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
+**Schritte zum Aktivieren während der Clustererstellung**</br>
+1. Aktivieren Sie [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) in Ihrem Konto für die IBM Cloud-Infrastruktur (SoftLayer).
+2. [Aktivieren Sie Ihr {{site.data.keyword.Bluemix_notm}}-Konto zur Verwendung von Serviceendpunkten](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
+3. Wenn Sie den Cluster in einer Umgebung hinter einer Firewall erstellen, [lassen Sie ausgehenden Netzdatenverkehr an die öffentlichen und privaten IP-Adressen](/docs/containers?topic=containers-firewall#firewall_outbound) für die Infrastrukturressourcen und für die {{site.data.keyword.Bluemix_notm}}-Services zu, deren Einsatz Sie planen.
+4. Erstellen Sie einen Cluster:
+  * [Erstellen Sie einen Cluster über die CLI](/docs/containers?topic=containers-clusters#clusters_cli) und verwenden Sie das Flag `--private-service-endpoint`. Wenn Sie zudem den öffentlichen Serviceendpunkt aktivieren wollen, verwenden Sie außerdem das Flag `--public-service-endpoint`.
+  * [Erstellen Sie einen Cluster über die Benutzerschnittstelle](/docs/containers?topic=containers-clusters#clusters_ui_standard) und wählen Sie **Nur privaten Endpunkt** aus. Wenn Sie zudem den öffentlichen Serviceendpunkt aktivieren wollen, wählen Sie **Öffentlichen und privaten Endpunkt** aus.
+5. Wenn Sie nur den privaten Serviceendpunkt für einen Cluster in einer Umgebung hinter einer Firewall aktivieren:
+  1. Überprüfen Sie, ob Sie sich in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden oder mit dem privaten Netz durch eine VPN-Verbindung verbunden sind.
+  2. [Lassen Sie zu, dass berechtigte Clusterbenutzer `kubectl`-Befehle ausführen](/docs/containers?topic=containers-firewall#firewall_kubectl), um auf den Master über den privaten Serviceendpunkt zuzugreifen. Ihre Clusterbenutzer müssen sich in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden oder eine Verbindung zu dem privaten Netz durch eine VPN-Verbindung herstellen, um `kubectl`-Befehle auszuführen.
+  3. Wenn Ihr Netzzugriff durch eine Firewall des Unternehmens geschützt wird, müssen Sie [den Zugriff auf die öffentlichen Endpunkte für die API `ibmcloud` und die API `ibmcloud ks` in Ihrer Firewall zulassen](/docs/containers?topic=containers-firewall#firewall_bx). Obwohl sämtliche Kommunikation an den Master über das private Netz erfolgt, müssen `ibmcloud`- und `ibmcloud ks`-Befehle über die öffentlichen API-Endpunkte übertragen werden.
 
-**Welche Optionen habe ich für die Verwaltung des öffentlichen und privaten Zugriffs auf meinen Cluster?**
-</br>In den folgenden Abschnitten werden die Funktionen von {{site.data.keyword.containerlong_notm}} beschrieben, mit denen Sie den Netzbetrieb für Cluster einrichten können, die nur mit einem privaten VLAN verbunden sind.
+  </br>
 
-### Gateway-Appliance konfigurieren
-{: #private_vlan_gateway}
+**Schritte zum Aktivieren nach der Clustererstellung**</br>
+1. Aktivieren Sie [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) in Ihrem Konto für die IBM Cloud-Infrastruktur (SoftLayer).
+2. [Aktivieren Sie Ihr {{site.data.keyword.Bluemix_notm}}-Konto zur Verwendung von Serviceendpunkten](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
+3. Aktivieren Sie den privaten Serviceendpunkt.
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+4. Aktualisieren Sie den API-Server des Kubernetes-Masters, sodass er den privaten Serviceendpunkt verwendet. Sie können der Eingabeaufforderung in der CLI folgen oder den folgenden Befehl manuell ausführen.
+  ```
+  ibmcloud ks apiserver-refresh --cluster <clustername_oder_-id>
+  ```
+  {: pre}
 
-Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität zwischen Ihren Workerknoten und dem Master konfigurieren. Sie können eine Firewall mit angepassten Netzrichtlinien einrichten, um für Ihren Standardcluster dedizierte Netzsicherheit bereitzustellen und unbefugten Zugriff zu erkennen und zu unterbinden. Sie können beispielsweise [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) oder [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) als Ihre Firewall und zum Blockieren unerwünschten Datenverkehrs einrichten. Wenn Sie eine Firewall einrichten, müssen Sie auch [die erforderlichen Ports und IP-Adressen für die einzelnen Regionen öffnen](cs_firewall.html#firewall_outbound), damit der Master und die Workerknoten kommunizieren können.
+5. [Erstellen Sie eine Konfigurationszuordnung (Configmap)](/docs/containers?topic=containers-update#worker-up-configmap), um die maximale Anzahl von Workerknoten zu steuern, die gleichzeitig in Ihrem Cluster nicht verfügbar sein können. Wenn Sie Ihre Workerknoten aktualisieren, hilft die Konfigurationszuordnung bei der Vermeidung von Ausfallzeiten für Ihre Apps, wenn die Apps ordentlich auf verfügbaren Workerknoten erneut geplant werden.
+6. Aktualisieren Sie alle Workerknoten in Ihrem Cluster, um die Konfiguration des privaten Serviceendpunkts aufzunehmen.
 
-Wenn Sie über eine vorhandene Router Appliance verfügen und dann einen Cluster hinzufügen, werden die neuen portierbaren Teilnetze, die für den Cluster bestellt sind, nicht in der Router Appliance konfiguriert. Um Netzservices verwenden zu können, müssen Sie die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren, indem Sie [VLAN-Spanning aktivieren](cs_subnets.html#vra-routing).
-{: important}
+  <p class="important">Durch Absetzen des Update-Befehls werden die Workerknoten erneut geladen, um die Konfiguration des Serviceendpunkts aufzunehmen. Wenn keine Workeraktualisierung verfügbar ist, müssen Sie [Workerknoten manuell erneut laden](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference). Wenn Sie erneut laden, stellen Sie sicher, dass Sie die Bestellung abriegeln ('cordon'), entleeren ('drain') und verwalten, um die maximale Anzahl der Workerknoten zu steuern, die gleichzeitig nicht verfügbar sind.</p>
+  ```
+  ibmcloud ks worker-update --cluster <clustername_oder_-id> --workers <worker1,worker2>
+  ```
+  {: pre}
 
-### Apps mit privaten Netzservices zugänglich machen
-{: #private_vlan_services}
+8. Wenn sich der Cluster in einer Umgebung hinter einer Firewall befindet:
+  * [Lassen Sie zu, dass berechtigte Clusterbenutzer `kubectl`-Befehle ausführen, um auf den Master über den privaten Serviceendpunkt zuzugreifen.](/docs/containers?topic=containers-firewall#firewall_kubectl)
+  * [Lassen Sie ausgehenden Netzdatenverkehr an die privaten IP-Adressen](/docs/containers?topic=containers-firewall#firewall_outbound) für Infrastrukturressourcen und für die {{site.data.keyword.Bluemix_notm}}-Services zu, deren Einsatz Sie planen.
 
-Um Ihre App nur über ein privates Netz zugänglich zu machen, können Sie private NodePort-, LoadBalancer- oder Ingress-Services verwenden. Da Ihre Workerknoten nicht mit einem öffentlichen VLAN verbunden sind, wird kein öffentlicher Datenverkehr an diese Services weitergeleitet. Sie müssen außerdem [die erforderlichen Ports und IP-Adressen für die einzelnen Regionen öffnen](cs_firewall.html#firewall_inbound), um den eingehenden Datenverkehr für diese Services zuzulassen.
+9. Optional: Wenn Sie nur den privaten Serviceendpunkt verwenden wollen, inaktivieren Sie den öffentlichen Serviceendpunkt.
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+  </br>
 
-Weitere Informationen zu den einzelnen Services finden Sie unter [NodePort-Service, Lastausgleichsservice oder Ingress-Service auswählen](cs_network_planning.html#external).
+**Schritte zum Inaktivieren**</br>
+Der private Serviceendpunkt kann nicht inaktiviert werden.
 
-### Optional: Verbindung zu einer lokalen Datenbank mithilfe der Gateway-Appliance herstellen
-{: #private_vlan_vpn}
+## Öffentlichen Serviceendpunkt einrichten
+{: #set-up-public-se}
 
-Um eine sichere Verbindung Ihrer Workerknoten und Apps zu einem lokalen Netz herzustellen, müssen Sie ein VPN-Gateway einrichten. Sie können die VRA oder FSA verwenden, die Sie zuvor für die Konfiguration eines IPSec-VPN-Endpunkts eingerichtet haben. Informationen zum Konfigurieren einer VRA finden Sie unter [VPN-Konnektivität mit VRA konfigurieren](cs_vpn.html#vyatta).
+Sie können den öffentlichen Serviceendpunkt für Ihren Cluster aktivieren oder inaktivieren.
+{: shortdesc}
+
+Der öffentliche Serviceendpunkt macht Ihren Kubernetes-Master öffentlich zugänglich. Ihre Workerknoten und Ihre berechtigten Clusterbenutzer können mit dem Kubernetes-Master sicher über das öffentliche Netz kommunizieren. Informationen dazu, ob Sie den öffentlichen Serviceendpunkt aktivieren können, finden Sie unter [Kommunikation zwischen Workerknoten und dem Kubernetes-Master planen](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master).
+
+**Schritte zum Aktivieren während der Clustererstellung**</br>
+
+1. Wenn Sie den Cluster in einer Umgebung hinter einer Firewall erstellen, [lassen Sie ausgehenden Netzdatenverkehr an die öffentlichen und privaten IP-Adressen](/docs/containers?topic=containers-firewall#firewall_outbound) für die {{site.data.keyword.Bluemix_notm}}-Services zu, deren Einsatz Sie planen.
+
+2. Erstellen Sie einen Cluster:
+  * [Erstellen Sie einen Cluster über die CLI](/docs/containers?topic=containers-clusters#clusters_cli) und verwenden Sie das Flag `--public-service-endpoint`. Wenn Sie zudem den privaten Serviceendpunkt aktivieren wollen, verwenden Sie außerdem das Flag `--private-service-endpoint`.
+  * [Erstellen Sie einen Cluster über die Benutzerschnittstelle](/docs/containers?topic=containers-clusters#clusters_ui_standard) und wählen Sie **Nur öffentlichen Endpunkt** aus. Wenn Sie zudem den privaten Serviceendpunkt aktivieren wollen, wählen Sie **Öffentlichen und privaten Endpunkt** aus.
+
+3. Wenn Sie den Cluster in einer Umgebung hinter einer Firewall erstellen, [lassen Sie zu, dass berechtigte Clusterbenutzer `kubectl`-Befehle ausführen, um auf den Master nur über den öffentlichen Serviceendpunkt oder über den öffentlichen und den privaten Serviceendpunkt zuzugreifen.](/docs/containers?topic=containers-firewall#firewall_kubectl)
+
+  </br>
+
+**Schritte zum Aktivieren nach der Clustererstellung**</br>
+Wenn Sie den öffentlichen Endpunkt zuvor inaktiviert haben, können Sie ihn wieder aktivieren.
+1. Aktivieren Sie den öffentlichen Serviceendpunkt.
+  ```
+  ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+2. Aktualisieren Sie den API-Server des Kubernetes-Masters, sodass er den öffentlichen Serviceendpunkt verwendet. Sie können der Eingabeaufforderung in der CLI folgen oder den folgenden Befehl manuell ausführen.
+  ```
+  ibmcloud ks apiserver-refresh --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+
+  </br>
+
+**Schritte zum Inaktivieren**</br>
+Zum Inaktivieren des öffentlichen Serviceendpunkts müssen Sie zuerst den privaten Serviceendpunkt aktivieren, sodass Ihre Workerknoten mit dem Kubernetes-Master kommunizieren können.
+1. Aktivieren Sie den privaten Serviceendpunkt.
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+2. Aktualisieren Sie den API-Server des Kubernetes-Masters, sodass er den privaten Serviceendpunkt verwendet, indem Sie der CLI-Eingabeaufforderung folgen oder den folgenden Befehl manuell ausführen.
+  ```
+  ibmcloud ks apiserver-refresh --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+3. [Erstellen Sie eine Konfigurationszuordnung (Configmap)](/docs/containers?topic=containers-update#worker-up-configmap), um die maximale Anzahl von Workerknoten zu steuern, die gleichzeitig in Ihrem Cluster nicht verfügbar sein können. Wenn Sie Ihre Workerknoten aktualisieren, hilft die Konfigurationszuordnung bei der Vermeidung von Ausfallzeiten für Ihre Apps, wenn die Apps ordentlich auf verfügbaren Workerknoten erneut geplant werden.
+
+4. Aktualisieren Sie alle Workerknoten in Ihrem Cluster, um die Konfiguration des privaten Serviceendpunkts aufzunehmen.
+
+  <p class="important">Durch Absetzen des Update-Befehls werden die Workerknoten erneut geladen, um die Konfiguration des Serviceendpunkts aufzunehmen. Wenn keine Workeraktualisierung verfügbar ist, müssen Sie [Workerknoten manuell erneut laden](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference). Wenn Sie erneut laden, stellen Sie sicher, dass Sie die Bestellung abriegeln ('cordon'), entleeren ('drain') und verwalten, um die maximale Anzahl der Workerknoten zu steuern, die gleichzeitig nicht verfügbar sind.</p>
+  ```
+  ibmcloud ks worker-update --cluster <clustername_oder_-id> --workers <worker1,worker2>
+  ```
+  {: pre}
+5. Inaktivieren Sie den öffentlichen Serviceendpunkt.
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+
+## Vom öffentlichen Serviceendpunkt zum privaten Serviceendpunkt wechseln
+{: #migrate-to-private-se}
+
+In Clustern mit Kubernetes Version 1.11 oder höher können Sie Workerknoten zur Kommunikation mit dem Master über das private Netz anstelle des öffentlichen Netzes einrichten, indem Sie den privaten Serviceendpunkt aktivieren.
+{: shortdesc}
+
+Alle Cluster, die mit einem öffentlichen und einem privaten VLAN verbunden sind, verwenden standardmäßig den öffentlichen Serviceendpunkt. Ihre Workerknoten und Ihre berechtigten Clusterbenutzer können mit dem Kubernetes-Master sicher über das öffentliche Netz kommunizieren. Um Workerknoten für die Kommunikation mit dem Kubernetes-Master über das private Netz anstelle des öffentlichen Netzes einzurichten, können Sie den privaten Serviceendpunkt aktivieren. Anschließend können Sie optional den öffentlichen Serviceendpunkt inaktivieren.
+* Wenn Sie den privaten Serviceendpunkt aktivieren und den öffentlichen Serviceendpunkt behalten, kommunizieren Worker mit dem Master immer über das private Netz, während Ihre Benutzer mit dem Master entweder über das öffentliche oder über das private Netz kommunizieren können.
+* Wenn Sie den privaten Serviceendpunkt aktivieren, jedoch den öffentlichen Serviceendpunkt inaktivieren, müssen Worker und Benutzer mit dem Master über das private Netz kommunizieren.
+
+Beachten Sie, dass Sie den privaten Serviceendpunkt nicht inaktivieren können, nachdem Sie ihn aktiviert haben.
+
+1. Aktivieren Sie [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) in Ihrem Konto für die IBM Cloud-Infrastruktur (SoftLayer).
+2. [Aktivieren Sie Ihr {{site.data.keyword.Bluemix_notm}}-Konto zur Verwendung von Serviceendpunkten](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
+3. Aktivieren Sie den privaten Serviceendpunkt.
+  ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+4. Aktualisieren Sie den API-Server des Kubernetes-Masters, sodass er den privaten Serviceendpunkt verwendet, indem Sie der CLI-Eingabeaufforderung folgen oder den folgenden Befehl manuell ausführen.
+  ```
+  ibmcloud ks apiserver-refresh --cluster <clustername_oder_-id>
+  ```
+  {: pre}
+5. [Erstellen Sie eine Konfigurationszuordnung (Configmap)](/docs/containers?topic=containers-update#worker-up-configmap), um die maximale Anzahl von Workerknoten zu steuern, die gleichzeitig in Ihrem Cluster nicht verfügbar sein können. Wenn Sie Ihre Workerknoten aktualisieren, hilft die Konfigurationszuordnung bei der Vermeidung von Ausfallzeiten für Ihre Apps, wenn die Apps ordentlich auf verfügbaren Workerknoten erneut geplant werden.
+
+6.  Aktualisieren Sie alle Workerknoten in Ihrem Cluster, um die Konfiguration des privaten Serviceendpunkts aufzunehmen.
+
+    <p class="important">Durch Absetzen des Update-Befehls werden die Workerknoten erneut geladen, um die Konfiguration des Serviceendpunkts aufzunehmen. Wenn keine Workeraktualisierung verfügbar ist, müssen Sie [Workerknoten manuell erneut laden](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference). Wenn Sie erneut laden, stellen Sie sicher, dass Sie die Bestellung abriegeln ('cordon'), entleeren ('drain') und verwalten, um die maximale Anzahl der Workerknoten zu steuern, die gleichzeitig nicht verfügbar sind.</p>
+    ```
+    ibmcloud ks worker-update --cluster <clustername_oder_-id> --workers <worker1,worker2>
+    ```
+    {: pre}
+
+7. Optional: Inaktivieren Sie den öffentlichen Serviceendpunkt.
+  ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <clustername_oder_-id>
+  ```
+  {: pre}

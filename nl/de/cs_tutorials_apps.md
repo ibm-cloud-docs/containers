@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-05"
+  years: 2014, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks
+
+subcollection: containers
 
 ---
 
@@ -19,6 +23,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
+
 # Lernprogramm: Apps in Kubernetes-Clustern bereitstellen
 {: #cs_apps_tutorial}
 
@@ -29,7 +34,7 @@ In diesem Szenario nutzt ein fiktives PR-Unternehmen den {{site.data.keyword.Blu
 
 Der App-Entwickler des PR-Unternehmens verwendet den im vorherigen Lernprogramm erstellten Kubernetes-Cluster, um eine 'Hello World'-Version der App bereitzustellen. In den aufeinander aufbauenden Lerneinheiten dieses Lernprogramms stellt der App-Entwickler zunehmend komplexere Versionen derselben App bereit. Das folgende Diagramm zeigt die Komponenten der Bereitstellungen in den einzelnen Lerneinheiten.
 
-![Komponenten der Lerneinheit](images/cs_app_tutorial_mz-roadmap.png)
+<img src="images/cs_app_tutorial_mz-roadmap.png" width="700" alt="Komponenten der Lerneinheit" style="width:700px; border-style: none"/>
 
 Wie im Diagramm dargestellt, verwendet Kubernetes verschiedene Typen von Ressourcen, um Ihre Apps betriebsbereit für die Ausführung in Clustern zu gestalten. In Kubernetes arbeiten Bereitstellungen und Services zusammen. Bereitstellungen enthalten die Definitionen für die App. Dazu zählen beispielsweise das Image, das für den Container verwendet werden soll, oder die Angabe, welcher Port für die App zugänglich gemacht werden muss. Wenn Sie eine Bereitstellung erstellen, wird für jeden Container, den Sie in der Bereitstellung definiert haben, ein Kubernetes-Pod erstellt. Um Ihre App widerstandsfähiger zu machen, können Sie in Ihrer Bereitstellung mehrere Instanzen derselben App definieren und von Kubernetes automatisch eine Replikatgruppe erstellen lassen. Die Replikatgruppe überwacht die Pods und stellt sicher, dass die angegebene Anzahl von Pods immer betriebsbereit ist. Reagiert einer der Pods nicht mehr, so wird dieser automatisch neu erstellt.
 
@@ -40,6 +45,7 @@ Um die Verfügbarkeit Ihrer App noch weiter zu steigern, können Sie in Standard
 Die Integration eines {{site.data.keyword.Bluemix_notm}}-Service in eine App wird nur in einer Lerneinheit behandelt. Sie können Services jedoch mit so einfach oder so komplex konzipierten Apps verwenden, wie überhaupt vorstellbar.
 
 ## Ziele
+{: #apps_objectives}
 
 * Grundlegende Kubernetes-Terminologie verstehen
 * Image mit Push-Operation in Registry-Namensbereich in {{site.data.keyword.registryshort_notm}} übertragen
@@ -49,17 +55,20 @@ Die Integration eines {{site.data.keyword.Bluemix_notm}}-Service in eine App wir
 * Eine App implementieren, die Funktionalität eines {{site.data.keyword.Bluemix_notm}}-Service verwendet
 
 ## Erforderlicher Zeitaufwand
+{: #apps_time}
 
 40 Minuten
 
 ## Zielgruppen
+{: #apps_audience}
 
 Softwareentwickler und Netzadministratoren, die erstmalig eine App in einem Kubernetes-Cluster bereitstellen.
 
 ## Voraussetzungen
+{: #apps_prereqs}
 
-* [Lernprogramm: Kubernetes-Cluster erstellen](cs_tutorials.html#cs_cluster_tutorial).
-* Installieren Sie das [Plug-in 'container-registry'](/docs/services/Registry/index.html#registry_cli_install).
+* [Lernprogramm: Kubernetes-Cluster erstellen](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
+* Installieren Sie das [Plug-in 'container-registry'](/docs/services/Registry?topic=registry-index#registry_cli_install).
 
 
 ## Lerneinheit 1: Einzelinstanz-Apps auf Kubernetes-Clustern bereitstellen
@@ -91,7 +100,7 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     ```
     {: pre}
 
-3. [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
+3. [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 5.  Melden Sie sich an der {{site.data.keyword.registryshort_notm}}-CLI an.
 
@@ -106,9 +115,9 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
         ```
         {: pre}
 
-6.  Erstellen Sie ein Docker-Image, das die App-Dateien aus dem Verzeichnis `Lab 1` enthält, und übertragen Sie das Image per Push zu dem {{site.data.keyword.registryshort_notm}}-Namensbereich, den Sie im vorherigen Lernprogramm erstellt haben. Falls zu einem späteren Zeitpunkt Änderungen an der App vorgenommen werden sollen, wiederholen Sie diese Schritte, um eine weitere Version des Image zu erstellen. **Hinweis**: Erfahren Sie mehr über das [Sichern der persönlichen Daten](cs_secure.html#pi) bei der Arbeit mit Container-Images.
+6.  Erstellen Sie ein Docker-Image, das die App-Dateien aus dem Verzeichnis `Lab 1` enthält, und übertragen Sie das Image per Push zu dem {{site.data.keyword.registryshort_notm}}-Namensbereich, den Sie im vorherigen Lernprogramm erstellt haben. Falls zu einem späteren Zeitpunkt Änderungen an der App vorgenommen werden sollen, wiederholen Sie diese Schritte, um eine weitere Version des Image zu erstellen. **Hinweis**: Erfahren Sie mehr über das [Sichern der persönlichen Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Container-Images.
 
-    Verwenden Sie im Imagenamen nur alphanumerische Zeichen in Kleinschreibung oder Unterstreichungszeichen (`_`). Vergessen Sie nicht den Punkt (`.`) am Ende des Befehls. Der Punkt signalisiert Docker, im aktuellen Verzeichnis nach der Dockerfile zu suchen und Artefakte zum Erstellen des Image zu erstellen.
+    Verwenden Sie im Imagenamen nur alphanumerische Zeichen in Kleinschreibung oder Unterstreichungszeichen (`_`). Vergessen Sie nicht den Punkt (`.`) am Ende des Befehls. Der Punkt signalisiert Docker, im aktuellen Verzeichnis nach der Dockerfile zu suchen und Artefakte zum Erstellen des Image zu erstellen. Zum Abrufen des Regionspräfixes für die Region, in der Sie sich momentan befinden, führen Sie den Befehl `ibmcloud api` aus. Beispiel: Der Standort Dallas in der Region 'Vereinigte Staaten (Süden)' hat das Präfix `ng`.
 
     ```
     ibmcloud cr build -t registry.<region>.bluemix.net/<namensbereich>/hello-world:1 .
@@ -145,7 +154,7 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     ```
     {: screen}
 
-    Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Kubernetes-Ressourcen.
+    Erfahren Sie mehr über das [Sichern der persönliche Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Kubernetes-Ressourcen.
 
 8.  Machen Sie die App zugänglich, indem Sie die Bereitstellung als Service vom Typ 'NodePort' zur Verfügung stellen. Genau wie beim Zugänglichmachen eines Ports für eine Cloud Foundry-App machen Sie als Knotenport (NodePort) den Port zugänglich, an dem der Workerknoten für Datenverkehr empfangsbereit ist.
 
@@ -223,18 +232,18 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     2.  Rufen Sie die öffentliche IP-Adresse für den Workerknoten im Cluster ab.
 
         ```
-        ibmcloud ks workers <clustername_oder_-id>
+        ibmcloud ks workers --cluster <clustername_oder_-id>
         ```
         {: pre}
 
         Beispielausgabe:
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        ibmcloud ks workers --cluster pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
         ```
         {: screen}
 
@@ -249,14 +258,14 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     Um zu überprüfen, ob die App öffentlich verfügbar ist, versuchen Sie, sie im Browser Ihres Mobiltelefons einzugeben.
     {: tip}
 
-11. [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
+11. [Starten Sie das Kubernetes-Dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
+    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://cloud.ibm.com/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
     {: tip}
 
 12. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt.
 
-Glückwunsch! Sie haben die erste Version der App bereitgestellt.
+Gute Arbeit! Sie haben die erste Version der App bereitgestellt.
 
 Sie sind der Ansicht, dass diese Lerneinheit zu viele Befehle enthält? Ganz Ihrer Meinung. Warum also verwenden Sie nicht ein Konfigurationsscript, das Ihnen einen Teil der Arbeit abnimmt? Um für die zweite Version der App ein Konfigurationsscript zu verwenden und durch die Bereitstellung mehrerer Instanzen dieser App ein höheres Maß an Verfügbarkeit erreichen, fahren Sie mit der nächsten Lerneinheit fort.
 
@@ -356,7 +365,7 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
 6.  Nachdem die Bereitstellung nun abgeschlossen ist, können Sie einen Browser öffnen und die App überprüfen. Um die URL zu bilden, kombinieren Sie die öffentliche IP-Adresse, die Sie in der vorherigen Lerneinheit für Ihren Workerknoten verwendet haben, mit der Knotenportnummer (NodePort), die im Konfigurationsscript angegeben war. So rufen Sie die öffentliche IP-Adresse für den Workerknoten ab:
 
   ```
-  ibmcloud ks workers <clustername_oder_-id>
+  ibmcloud ks workers --cluster <clustername_oder_-id>
   ```
   {: pre}
 
@@ -388,7 +397,7 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
 
     *  **Im Kubernetes-Dashboard**:
 
-       1.  [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
+       1.  [Starten Sie das Kubernetes-Dashboard](/docs/containers?topic=containers-app#cli_dashboard).
        2.  Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt. Von dieser Registerkarte aus können Sie die Anzeige fortlaufend aktualisieren lassen und sicherstellen, dass die Statusprüfung ordnungsgemäß funktioniert. Im Abschnitt **Pods** wird angegeben, wie häufig die Pods erneut gestartet werden, wenn die in ihnen enthaltenen Container erneut erstellt werden. Falls Sie per Zufall den folgenden Fehler im Dashboard abfangen, so beachten Sie, das diese Nachricht darauf hinweist, dass bei der Statusprüfung ein Problem festgestellt wurde. Warten Sie einige Minuten ab und aktualisieren Sie dann die Anzeige erneut. Sie können erkennen, dass die Anzahl von Neustarts für jeden Pod variiert.
 
        ```
@@ -401,7 +410,7 @@ Fehler bei Synchronisierung von Pod, wird übersprungen: "StartContainer" für "
        ```
        {: screen}
 
-Glückwunsch! Sie haben die zweite Version der App bereitgestellt. Hierzu haben Sie eine geringere Anzahl von Befehlen verwenden müssen, konnten erfahren, wie Statusprüfungen funktionieren, und haben eine Bereitstellung bearbeitet, was hervorragend ist. Die App 'Hello World' hat den Test für das PR-Unternehmen bestanden. Nun können Sie eine App mit höherem Nutzwert für das PR-Unternehmen bereitstellen, um mit der Analyse von Pressemitteilungen zu beginnen.
+Gute Arbeit! Sie haben die zweite Version der App bereitgestellt. Hierzu haben Sie eine geringere Anzahl von Befehlen verwenden müssen, konnten erfahren, wie Statusprüfungen funktionieren, und haben eine Bereitstellung bearbeitet, was hervorragend ist. Die App 'Hello World' hat den Test für das PR-Unternehmen bestanden. Nun können Sie eine App mit höherem Nutzwert für das PR-Unternehmen bereitstellen, um mit der Analyse von Pressemitteilungen zu beginnen.
 
 Sind Sie bereit, die von Ihnen erstellten Elemente zu löschen, bevor Sie fortfahren? Dieses Mal können Sie dasselbe Konfigurationsscript verwenden, um die beiden von Ihnen erstellten Ressourcen zu löschen.
 
@@ -530,8 +539,7 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         ```
         {: codeblock}
 
-    2.  Aktualisieren Sie im Datenträgerabschnitt der Watson-Bereitstellung den Namen des geheimen Schlüssels
-für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen Lernprogramm erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie den {{site.data.keyword.Bluemix_notm}} IAM-API-Schüssel (Identity and Access Management) dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie den API-Schlüssel unter Verwendung des Datenträgermountpfads suchen.
+    2.  Aktualisieren Sie im Datenträgerabschnitt ('volumes') der Watson-Bereitstellung den Namen des geheimen Schlüssels für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen [Lernprogramm: Kubernetes-Cluster erstellen](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie den {{site.data.keyword.Bluemix_notm}} IAM-API-Schüssel (Identity and Access Management) dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie den API-Schlüssel unter Verwendung des Datenträgermountpfads suchen.
 
         ```
         volumes:
@@ -607,7 +615,7 @@ für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den S
 
     In einem Browser wird die JSON-Antwort auf den von Ihnen eingegebenen Text angezeigt.
 
-10. [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
+10. [Starten Sie das Kubernetes-Dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
 11. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt.
 
@@ -615,6 +623,7 @@ für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den S
 {: #lesson3b}
 
 Während der Ausführung einer Bereitstellung können Sie die Bereitstellung durch Änderung von Werten in der Pod-Vorlage bearbeiten. In dieser Lerneinheit aktualisieren Sie das verwendete Image. Die PR-Firma möchte die App in der Bereitstellung ändern.
+{: shortdesc}
 
 Ändern Sie den Namen des Image:
 
@@ -654,9 +663,9 @@ Während der Ausführung einer Bereitstellung können Sie die Bereitstellung dur
 
     Wenn Sie eine Änderung implementieren, wird ein weiterer Pod von Kubernetes erstellt getestet. Wenn der Test erfolgreich ist, wird der alte Pod entfernt.
 
+[Testen Sie Ihr Wissen und nehmen Sie an einem Quiz teil! ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-
-Glückwunsch! Sie haben die App '{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}' bereitgestellt. Das PR-Unternehmen kann diese Bereitstellung künftig einsetzen, um mit der Analyse seiner Pressemitteilungen zu beginnen.
+Gute Arbeit! Sie haben die App '{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}' bereitgestellt. Das PR-Unternehmen kann diese Bereitstellung künftig einsetzen, um mit der Analyse seiner Pressemitteilungen zu beginnen.
 
 Sind Sie bereit, die von Ihnen erstellten Elemente zu löschen? Zum Löschen der von Ihnen erstellten Ressourcen können Sie das Konfigurationsscript verwenden.
 
@@ -669,24 +678,24 @@ Sind Sie bereit, die von Ihnen erstellten Elemente zu löschen? Zum Löschen der
 
   ```
   deployment "watson-pod" deleted
-deployment "watson-talk-pod" deleted
-service "watson-service" deleted
-service "watson-talk-service" deleted
+  deployment "watson-talk-pod" deleted
+  service "watson-service" deleted
+  service "watson-talk-service" deleted
   ```
   {: screen}
 
   Falls Sie den Cluster nicht beibehalten wollen, können Sie diesen ebenfalls löschen.
 
   ```
-  ibmcloud ks cluster-rm <clustername_oder_-id>
+  ibmcloud ks cluster-rm --cluster <clustername_oder_-id>
   ```
   {: pre}
 
 ## Womit möchten Sie fortfahren?
-{: #next}
+{: #apps_next}
 
 Nachdem Sie sich mit den grundlegenden Informationen vertraut gemacht haben, können Sie nun komplexere Aufgaben in Angriff nehmen. Ziehen Sie eine der folgenden Aufgaben in Betracht:
 
 - Ein [kompliziertes Lab ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) im Repository vervollständigen
-- [Apps automatisch skalieren](cs_app.html#app_scaling) mit {{site.data.keyword.containerlong_notm}}
-- Lernprogramme für Codemuster für die Containerorchestrierung unter [IBM Developer ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/technologies/container-orchestration/) erkunden
+- [Apps automatisch skalieren](/docs/containers?topic=containers-app#app_scaling) mit {{site.data.keyword.containerlong_notm}}
+- Lernprogramme für Codemuster für die Containerorchestrierung unter [IBM Developer ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/technologies/containers/) erkunden

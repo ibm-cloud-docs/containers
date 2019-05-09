@@ -1,8 +1,12 @@
 ---
 
 copyright:
-  years: 2017, 2018
-lastupdated: "2018-12-05"
+  years: 2017, 2019
+lastupdated: "2019-03-21"
+
+keywords: kubernetes, iks, audit
+
+subcollection: containers
 
 ---
 
@@ -33,9 +37,9 @@ Von {{site.data.keyword.containershort_notm}} werden zwei Typen von {{site.data.
 
 * **Ereignisse des Kubernetes-API-Serveraudits**:
     * Diese Ereignisse werden automatisch generiert, Sie müssen den Cluster jedoch so konfigurieren, dass diese Ereignisse an den {{site.data.keyword.cloudaccesstrailshort}}-Service weitergeleitet werden.
-    * Sie können den Cluster so konfigurieren, dass Ereignisse an die {{site.data.keyword.cloudaccesstrailshort}}-**Kontodomäne** oder an eine **Bereichsdomäne** gesendet werden. Weitere Informationen finden Sie unter [Auditprotokoll senden](/docs/containers/cs_health.html#api_forward).
+    * Sie können den Cluster so konfigurieren, dass Ereignisse an die {{site.data.keyword.cloudaccesstrailshort}}-**Kontodomäne** oder an eine **Bereichsdomäne** gesendet werden. Weitere Informationen finden Sie unter [Auditprotokoll senden](/docs/containers?topic=containers-health#api_forward).
 
-Weitere Informationen zur Arbeitsweise des Service finden Sie in der [{{site.data.keyword.cloudaccesstrailshort}}-Dokumentation](/docs/services/cloud-activity-tracker/index.html). Weitere Informationen zu Kubernetes-Aktionen, die aufgezeichnet werden, finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/home/).
+Weitere Informationen zur Arbeitsweise des Service finden Sie in der [{{site.data.keyword.cloudaccesstrailshort}}-Dokumentation](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla). Weitere Informationen zu Kubernetes-Aktionen, die aufgezeichnet werden, finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/home/).
 
 ## Informationen zu Ereignissen suchen
 {: #kube-find}
@@ -54,7 +58,7 @@ So überwachen Sie die Verwaltungsaktivität:
 5. Legen Sie den Zeitrahmen fest, für den Sie Protokolle anzeigen möchten. Der Standardwert ist 24 Stunden.
 6. Zum Eingrenzen der Suche können Sie auf das Bearbeitungssymbol für `ActivityTracker_Account_Search_in_24h` klicken und Felder in der Spalte **Verfügbare Felder** hinzufügen.
 
-Die Informationen im Abschnitt [Berechtigungen zur Anzeige von Kontoereignissen erteilen](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions) helfen Ihnen dabei, wenn Sie andere Benutzer berechtigen wollen, Konto- und Bereichsereignisse anzuzeigen.
+Die Informationen im Abschnitt [Berechtigungen zur Anzeige von Kontoereignissen erteilen](/docs/services/cloud-activity-tracker/how-to?topic=cloud-activity-tracker-grant_permissions#grant_permissions) helfen Ihnen dabei, wenn Sie andere Benutzer berechtigen wollen, Konto- und Bereichsereignisse anzuzeigen.
 {: tip}
 
 ## Ereignisse der Clusterverwaltung aufzeichnen
@@ -145,7 +149,7 @@ In der folgenden Tabelle finden Sie eine Liste der Ereignisse der Clusterverwalt
 In der folgenden Tabelle finden Sie eine Liste der Ereignisse von Kubernetes-API-Serveraudits, die an {{site.data.keyword.cloudaccesstrailshort}} gesendet werden.
 {: shortdesc}
 
-Vorbereitende Schritte: Stellen Sie sicher, dass der Cluster für die Weiterleitung von [Kubernetes-API-Auditereignissen](cs_health.html#api_forward) konfiguriert ist.
+Vorbereitende Schritte: Stellen Sie sicher, dass der Cluster für die Weiterleitung von [Kubernetes-API-Auditereignissen](/docs/containers?topic=containers-health#api_forward) konfiguriert ist.
 
 <table>
   <tr>
