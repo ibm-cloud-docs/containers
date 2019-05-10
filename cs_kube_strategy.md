@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-08"
+lastupdated: "2019-05-10"
 
 keywords: kubernetes, iks
 
@@ -45,36 +45,32 @@ Not on slack yet? [Request an invite!](https://bxcs-slack-invite.mybluemix.net/)
 ### What can I move to the {{site.data.keyword.Bluemix_notm}}?
 {: #move_to_cloud}
 
-With {{site.data.keyword.Bluemix_notm}}, you have flexibility to choose a [public, private, or hybrid cloud approach](/docs/containers?topic=containers-cs_ov#differentiation) for your workloads. The following table provides some examples of what types of workloads that users typically move to the various types of clouds.
+With {{site.data.keyword.Bluemix_notm}}, you have flexibility to create Kubernetes clusters in [off-premises, on-premises, or hybrid cloud environments](/docs/containers?topic=containers-cs_ov#differentiation). The following table provides some examples of what types of workloads that users typically move to the various types of clouds. You might also choose a hybrid approach where you have clusters running in both environments.
 {: shortdesc}
 
-| Workload | Public | Private | Hybrid |
-| --- | --- | --- | --- |
-| DevOps enablement tools | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | | |
-| Developing and testing apps | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | | |
-| Apps have major shifts in demand and need to scale rapidly | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | | |
-| Business apps such as CRM, HCM, ERP, and E-commerce | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | | |
-| Collaboration and social tools such as email | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | | |
-| Linux and x86 workloads | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | | |
-| Intensive CPU or I/O capacity needs that exceed public machine types | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | |
-| Legacy apps with platform and infrastructure constraints and dependencies | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
-| Proprietary apps with strict designs, licensing, or heavy regulations | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
-| Scaling apps in the public cloud and syncing the data to an on-site private database | | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
+| Workload | {{site.data.keyword.containershort_notm}} off-prem | on-prem |
+| --- | --- | --- |
+| DevOps enablement tools | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | |
+| Developing and testing apps | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | |
+| Apps have major shifts in demand and need to scale rapidly | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | |
+| Business apps such as CRM, HCM, ERP, and E-commerce | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | |
+| Collaboration and social tools such as email | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | |
+| Linux and x86 workloads | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | |
+| Bare metal and GPU compute resources | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
+| PCI and HIPAA compliant workloads | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
+| Legacy apps with platform and infrastructure constraints and dependencies | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
+| Proprietary apps with strict designs, licensing, or heavy regulations | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
+| Scaling apps in the public cloud and syncing the data to an on-site private database | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />  | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 {: caption="{{site.data.keyword.Bluemix_notm}} implementations support your workloads" caption-side="top"}
 
-**Ready to run workloads in the public cloud?**</br>
+**Ready to run workloads off-premises in {{site.data.keyword.containerlong_notm}}?**</br>
 Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
 
-**Interested in the private cloud?**</br>
+**Interested in an on-premises cloud?**</br>
 Explore the [{{site.data.keyword.Bluemix_notm}} Private documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html). If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.Bluemix_notm}} Private modernization strategy with various tools.
-* To gather a better understanding about your existing apps and supporting environment, use [IBM Transformation Advisor ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/featured_applications/transformation_advisor.html).
-* To help determine your adoption readiness and provide a cloud roadmap, seek out [{{site.data.keyword.Bluemix_notm}} Advisory Services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/us-en/marketplace/cloud-consulting-services).
-* For helping developers to build services for {{site.data.keyword.Bluemix_notm}} Private, see [IBM Microclimate ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/us-en/marketplace/microclimate).
-* For multi-cloud provisioning, consider [{{site.data.keyword.Bluemix_notm}} Automation Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/us-en/marketplace/cognitive-automation).
-* To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.Bluemix_notm}} Public and {{site.data.keyword.Bluemix_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
 
-**Want to use both public and private cloud?**</br>
-Start with setting up an {{site.data.keyword.Bluemix_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.Bluemix_notm}} Private environment with a cluster in {{site.data.keyword.Bluemix_notm}} Public.
+**Want to run workloads in both on-premises and off-premises clouds?**</br>
+Start with setting up an {{site.data.keyword.Bluemix_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.Bluemix_notm}} Private environment with a cluster in {{site.data.keyword.Bluemix_notm}} Public. To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.Bluemix_notm}} Public and {{site.data.keyword.Bluemix_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
 
 ### What kind of apps can I run in {{site.data.keyword.containerlong_notm}}?
 {: #app_types}

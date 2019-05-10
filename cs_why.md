@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-10"
 
 keywords: kubernetes, iks
 
@@ -60,30 +60,27 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Blue
 
 
 <table>
-<caption>Differences between {{site.data.keyword.containerlong_notm}} setups</caption>
+<caption>Differences between {{site.data.keyword.containershort_notm}} setups</caption>
 <col width="22%">
 <col width="78%">
  <thead>
- <th>{{site.data.keyword.containerlong_notm}} setup</th>
+ <th>{{site.data.keyword.containershort_notm}} setup</th>
  <th>Description</th>
  </thead>
  <tbody>
  <tr>
- <td>{{site.data.keyword.Bluemix_notm}} Public
- </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Public, off-premises</td>
  <td>With {{site.data.keyword.Bluemix_notm}} Public on [shared or dedicated hardware or on bare metal machines](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node), you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.Bluemix_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
  </td>
  </tr>
  <tr>
- <td>{{site.data.keyword.Bluemix_notm}} Private
- </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Private, on-premises</td>
  <td>{{site.data.keyword.Bluemix_notm}} Private is an application platform that can be installed locally on your own machines. You might choose to use Kubernetes in {{site.data.keyword.Bluemix_notm}} Private when you need to develop and manage on-prem, containerized apps in your own controlled environment behind a firewall. <br><br>For more information, see the [{{site.data.keyword.Bluemix_notm}} Private product documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
  </td>
  </tr>
  <tr>
- <td>Hybrid setup
- </td>
- <td>Hybrid is the combined use of services that run in {{site.data.keyword.Bluemix_notm}} Public and other services that run on-prem, such as an app in {{site.data.keyword.Bluemix_notm}} Private. Examples for a hybrid setup: <ul><li>Provisioning a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Public but connecting that cluster to an on-prem database.</li><li>Provisioning a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Private and deploying an app into that cluster. However, this app might use an {{site.data.keyword.ibmwatson}} service, such as {{site.data.keyword.toneanalyzershort}}, in {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>To enable communication between services that are running in {{site.data.keyword.Bluemix_notm}} Public and services that are running on-prem, you must [set up a VPN connection](/docs/containers?topic=containers-vpn). For more information, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp).
+ <td>Hybrid setup</td>
+ <td>Hybrid is the combined use of services that run in {{site.data.keyword.Bluemix_notm}} Public off-premises and other services that run on-premises, such as an app in {{site.data.keyword.Bluemix_notm}} Private. Examples for a hybrid setup: <ul><li>Provisioning a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Public but connecting that cluster to an on-prem database.</li><li>Provisioning a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Private and deploying an app into that cluster. However, this app might use an {{site.data.keyword.ibmwatson}} service, such as {{site.data.keyword.toneanalyzershort}}, in {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>To enable communication between services that are running in {{site.data.keyword.Bluemix_notm}} Public or Dedicated and services that are running on-prem, you must [set up a VPN connection](/docs/containers?topic=containers-vpn). For more information, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp).
  </td>
  </tr>
  </tbody>
