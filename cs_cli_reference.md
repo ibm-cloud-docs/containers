@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-10"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -2518,8 +2518,10 @@ ibmcloud ks credential-get --region REGION [-s] [--json]
 <dl>
 <dt><code>--region <em>REGION</em></code></dt>
 <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
+
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
+
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -2602,6 +2604,8 @@ ibmcloud ks credential-unset --region REGION [-s]
 ibmcloud ks credential-unset --region us-south
 ```
 {: pre}
+
+
 
 ### ibmcloud ks machine-types
 {: #cs_machine_types}

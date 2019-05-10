@@ -62,6 +62,11 @@ CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 {: screen}
 
 ```
+Worker not found. Review {{site.data.keyword.Bluemix_notm}} infrastructure permissions.
+```
+{: screen}
+
+```
 {{site.data.keyword.Bluemix_notm}} Infrastructure Exception:
 The user does not have the necessary {{site.data.keyword.Bluemix_notm}}
 Infrastructure permissions to add servers
@@ -79,33 +84,71 @@ The cluster could not be configured with the registry. Make sure that you have t
 {: screen}
 
 {: tsCauses}
-You do not have the correct permissions to create a cluster. You need the following permissions to create a cluster:
-*  **Super User** role for IBM Cloud infrastructure (SoftLayer), or at least [these minimum infrastructure permissions](/docs/containers?topic=containers-access_reference#infra).
-*  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
-*  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level. If you started to use {{site.data.keyword.registrylong_notm}} before 4 October 2018, ensure that you [enable {{site.data.keyword.Bluemix_notm}} IAM policy enforcement](/docs/services/Registry?topic=registry-user#existing_users).
-
-For infrastructure-related errors, {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go accounts that were created after automatic account linking was enabled are already set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. You can purchase infrastructure resources for your cluster without additional configuration. If you have a valid Pay-As-You-Go account and receive this error message, you might not be using the correct IBM Cloud infrastructure (SoftLayer) account credentials to access infrastructure resources.
-
-Users with other {{site.data.keyword.Bluemix_notm}} account types must configure their accounts to create standard clusters. Examples of when you might have a different account type are:
-* You have an existing IBM Cloud infrastructure (SoftLayer) account that predates your {{site.data.keyword.Bluemix_notm}} platform account and want to continue to use it.
-* You want to use a different IBM Cloud infrastructure (SoftLayer) account to provision infrastructure resources in. For example, you might set up a team {{site.data.keyword.Bluemix_notm}} account to use a different infrastructure account for billing purposes.
-
-If you use a different IBM Cloud infrastructure (SoftLayer) account to provision infrastructure resources, you might also have [orphaned clusters](#orphaned) in your account.
+The infrastructure credentials that are set for the region and resource group are missing the appropriate [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra). The user's infrastructure permissions are most commonly stored as an [API key](/docs/containers?topic=containers-users#api_key) for the region and resource group. More rarely, if you use a [different {{site.data.keyword.Bluemix_notm}} account type](/docs/containers?topic=containers-users#understand_infra), you might have [set infrastructure credentials manually](/docs/containers?topic=containers-users#credentials). If you use a different IBM Cloud infrastructure (SoftLayer) account to provision infrastructure resources, you might also have [orphaned clusters](#orphaned) in your account.
 
 {: tsResolve}
 The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
 
-1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) and from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Classic Infrastructure**. If you see a menu, you have access to an infrastructure account. If you do not have access, you see an option to upgrade your account.
-2.  Check if your cluster uses a different infrastructure account than the one that comes with your Pay-As-You-Go account.
-    1.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes > Clusters**.
-    2.  From the table, select your cluster.
-    3.  In the **Overview** tab, check for an **Infrastructure User** field.
-        * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts.
-        * If you see an **Infrastructure User** field, your cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account. These different credentials apply to all clusters within the region.
-3.  Decide what type of account you want to have to determine how to troubleshoot your infrastructure permission issue. For most users, the default linked Pay-As-You-Go account is sufficient.
-    *  Linked Pay-As-You-Go {{site.data.keyword.Bluemix_notm}} account: [Verify that the API key is set up with the correct permissions](/docs/containers?topic=containers-users#default_account). If your cluster is using a different infrastructure account, you must unset those credentials as part of the process.
-    *  Different {{site.data.keyword.Bluemix_notm}} platform and infrastructure accounts: Verify that you can access the infrastructure portfolio and that [the infrastructure account credentials are set up with the correct permissions](/docs/containers?topic=containers-users#credentials).
-4.  If you cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](#orphaned).
+Before you begin, [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+
+1.  Identify what user credentials are used for the region and resource group's infrastructure permissions.
+    1.  Check the API key for a region and resource group of the cluster.
+        ```
+        ibmcloud ks api-key-info
+        ```
+        {: pre}
+        
+        Example output:
+        ```
+        Getting information about the API key owner for cluster <cluster_name>...
+        OK
+        Name                Email   
+        <user_name>         <name@email.com> 
+        ```
+        {: screen}
+    2.  Check if the infrastructure account for the region and resource group is manually set to use a different IBM Cloud infrastructure (SoftLayer) account.
+        ```
+        ibmcloud ks credential-get --region <us-south>
+        ```
+        {: pre}
+        
+        Example output if credentials are set to use a different account. In this case, this user's infrastructure credentials are used for the region and resource group that you targeted, even if a different user's credentials are stored in the API key that you retrieved in the previous step.
+        ```
+        OK
+        Infrastructure credentials for user name <1234567_name@email.com> set for resource group <resource_group_name>.
+        ```
+        {: screen}
+        
+        Example output if credentials are not set to use a different account. In this case, the API key owner that you retrieved in the previous step has the infrastructure credentials that are used for the region and resource group.
+        ```
+        FAILED
+        No credentials set for resource group <resource_group_name>.: The user credentials could not be found. (E0051)
+        ```
+        {: screen}
+2.  Validate the infrastructure permissions that the user has.
+    2.  Make sure that the [infrastructure credentials owner for the API key or the manually set account has the correct permissions](/docs/containers?topic=containers-users#owner_permissions). 
+    3.  If necessary, you can change the [API key](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_api_key_reset) or [manually-set](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_credentials_set) infrastructure credentials owner for the region and resource group.
+3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster. 
+    1.  For example, you might try to a delete a worker node.
+        ```
+        ibmcloud ks worker-rm <worker_node_ID>
+        ```
+        {: pre}
+    2.  Check to see if the worker node is removed.
+        ```
+        ibmcloud ks worker-get <worker_node_ID>
+        ```
+        {: pre}
+        
+        Example output if the worker node removal is successful. The `worker-get` operation fails because the worker node is deleted. The infrastructure permissions are correctly set up.
+        ```
+        FAILED
+        The specified worker node could not be found. (E0011)
+        ```
+        {: screen}
+        
+    3.  If the worker node is not removed, review that [**State** and **Status** fields](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes) and the [common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot#common_worker_nodes_issues) to continue debugging.
+    4.  If you manually set credentials and still cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](#orphaned).
 
 <br />
 
