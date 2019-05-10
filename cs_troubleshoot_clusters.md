@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-10"
 
 keywords: kubernetes, iks
 
@@ -272,10 +272,9 @@ To check your user access permissions:
     * If you have access to the cluster but not to the resource group that the cluster is in:
       1. Do not target a resource group. If you already targeted a resource group, untarget it:
         ```
-        ibmcloud target -g none
+        ibmcloud target --unset-resource-group
         ```
         {: pre}
-        This command fails because no resource group that is named `none` exists. However, the current resource group is automatically untargeted when the command fails.
 
       2. Target the cluster.
         ```
@@ -287,10 +286,9 @@ To check your user access permissions:
         1. Ask your account owner to assign an [{{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) to you for that cluster.
         2. Do not target a resource group. If you already targeted a resource group, untarget it:
           ```
-          ibmcloud target -g none
+          ibmcloud target --unset-resource-group
           ```
           {: pre}
-          This command fails because no resource group that is named `none` exists. However, the current resource group is automatically untargeted when the command fails.
         3. Target the cluster.
           ```
           ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
