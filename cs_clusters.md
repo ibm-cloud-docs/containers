@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-10"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -735,6 +735,9 @@ To view information about a specific cluster, such as its zones, service endpoin
 
 You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).
 
+You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. 
+{: shortdesc}
+
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
 <caption>Cluster states</caption>
    <thead>
@@ -743,51 +746,51 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    </thead>
    <tbody>
 <tr>
-   <td>Aborted</td>
+   <td>`Aborted`</td>
    <td>The deletion of the cluster is requested by the user before the Kubernetes master is deployed. After the deletion of the cluster is completed, the cluster is removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
  <tr>
-     <td>Critical</td>
+     <td>`Critical`</td>
      <td>The Kubernetes master cannot be reached or all worker nodes in the cluster are down. </td>
     </tr>
    <tr>
-     <td>Delete failed</td>
+     <td>`Delete failed`</td>
      <td>The Kubernetes master or at least one worker node cannot be deleted.  </td>
    </tr>
    <tr>
-     <td>Deleted</td>
+     <td>`Deleted`</td>
      <td>The cluster is deleted but not yet removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
-   <td>Deleting</td>
+   <td>`Deleting`</td>
    <td>The cluster is being deleted and cluster infrastructure is being dismantled. You cannot access the cluster.  </td>
    </tr>
    <tr>
-     <td>Deploy failed</td>
+     <td>`Deploy failed`</td>
      <td>The deployment of the Kubernetes master could not be completed. You cannot resolve this state. Contact IBM Cloud support by opening an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
      <tr>
-       <td>Deploying</td>
+       <td>`Deploying`</td>
        <td>The Kubernetes master is not fully deployed yet. You cannot access your cluster. Wait until your cluster is fully deployed to review the health of your cluster.</td>
       </tr>
       <tr>
-       <td>Normal</td>
+       <td>`Normal`</td>
        <td>All worker nodes in a cluster are up and running. You can access the cluster and deploy apps to the cluster. This state is considered healthy and does not require an action from you.<p class="note">Although the worker nodes might be normal, other infrastructure resources, such as [networking](/docs/containers?topic=containers-cs_troubleshoot_network) and [storage](/docs/containers?topic=containers-cs_troubleshoot_storage), might still need attention. If you just created the cluster, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process.</p></td>
     </tr>
       <tr>
-       <td>Pending</td>
+       <td>`Pending`</td>
        <td>The Kubernetes master is deployed. The worker nodes are being provisioned and are not available in the cluster yet. You can access the cluster, but you cannot deploy apps to the cluster.  </td>
      </tr>
    <tr>
-     <td>Requested</td>
+     <td>`Requested`</td>
      <td>A request to create the cluster and order the infrastructure for the Kubernetes master and worker nodes is sent. When the deployment of the cluster starts, the cluster state changes to <code>Deploying</code>. If your cluster is stuck in the <code>Requested</code> state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
-     <td>Updating</td>
+     <td>`Updating`</td>
      <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that the user deployed are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
    </tr>
     <tr>
-       <td>Warning</td>
+       <td>`Warning`</td>
        <td>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. </td>
     </tr>
    </tbody>
