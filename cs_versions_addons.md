@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -24,6 +24,7 @@ subcollection: containers
 
 
 # Cluster add-ons changelog
+{: #cluster-add-ons-changelog}
 
 Your {{site.data.keyword.containerlong}} cluster comes with add-ons that are updated automatically by IBM. You can also disable automatic updates for some add-ons and manually update them separately from the master and worker nodes. Refer to the tables in the following sections for a summary of changes for each version.
 {: shortdesc}
@@ -56,7 +57,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td>411 / 315</td>
 <td>15 Apr 2019</td>
-<td>Updates the value of the {{site.data.keyword.appid_full}} cookie expiration so that it matches the value of the access token expiration.</td>
+<td>Updates the value of the {{site.data.keyword.appid_full_notm}} cookie expiration so that it matches the value of the access token expiration.</td>
 <td>-</td>
 </tr>
 <tr>
@@ -70,7 +71,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <td>18 Mar 2019</td>
 <td><ul>
 <li>Fixes vulnerabilities for image scans.</li>
-<li>Improves logging for {{site.data.keyword.appid_full_notm}}.</li>
+<li>Improves logging for the integration with {{site.data.keyword.appid_full_notm}}.</li>
 </ul></td>
 <td>-</td>
 </tr>
@@ -111,19 +112,19 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td>393 / 291</td>
 <td>09 Jan 2019</td>
-<td>Adds support for multiple {{site.data.keyword.appid_full_notm}} instances.</td>
+<td>Adds support for integration with multiple {{site.data.keyword.appid_full_notm}} instances.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>393 / 282</td>
 <td>29 Nov 2018</td>
-<td>Improves performance for {{site.data.keyword.appid_full_notm}}.</td>
+<td>Improves performance for the integration with {{site.data.keyword.appid_full_notm}}.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>384 / 246</td>
 <td>14 Nov 2018</td>
-<td>Improves logging and logout features for {{site.data.keyword.appid_full_notm}}.</td>
+<td>Improves logging and logout features for the integration with {{site.data.keyword.appid_full_notm}}.</td>
 <td>Replaces the self-signed certificate for `*.containers.mybluemix.net` with the LetsEncrypt signed certificate that is automatically generated for and used by the cluster. The `*.containers.mybluemix.net` self-signed certificate is removed.</td>
 </tr>
 <tr>
