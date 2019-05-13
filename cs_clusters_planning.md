@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -337,12 +337,6 @@ Worker node flavors vary by zone. The following table includes the most recent v
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b3c.56x242</strong>: Select this balanced VM for large workloads, such as a database and multiple apps with many concurrent users.</td>
-<td>56 / 242GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
 <td><strong>Virtual, c3c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node for light workloads.</td>
 <td>16 / 16GB</td>
 <td>25GB / 100GB</td>
@@ -376,21 +370,6 @@ Worker node flavors vary by zone. The following table includes the most recent v
 </tr><tr>
 <td><strong>Virtual, m3c.30x240</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>30 / 240GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.48x384</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only as `--hardware shared` tenancy.</td>
-<td>48 / 384GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.56x448</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only as `--hardware shared` tenancy.</td>
-<td>56 / 448GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.64x512</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only as `--hardware shared` tenancy.</td>
-<td>64 / 512GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
