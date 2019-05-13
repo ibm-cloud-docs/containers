@@ -121,7 +121,7 @@ ibmcloud plugin list
   <tr>
     <td>[ibmcloud ks apiserver-config-set](#cs_apiserver_config_set)</td>
     <td>[ibmcloud ks apiserver-config-unset](#cs_apiserver_config_unset)</td>
-    <td>[ibmcloud ks apiserver-refresh](#cs_apiserver_refresh)</td>
+    <td>[ibmcloud ks apiserver-refresh](#cs_apiserver_refresh) (cluster-refresh)</td>
     <td></td>
  </tr>
 </tbody>
@@ -173,11 +173,10 @@ ibmcloud plugin list
   <tr>
     <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
     <td>[ibmcloud ks cluster-pull-secret-apply](#cs_cluster_pull_secret_apply)</td>
-    <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
+    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
     <td> </td>
@@ -680,7 +679,7 @@ ibmcloud ks apiserver-config-unset audit-webhook --cluster CLUSTER
 </dl>
 
 
-### ibmcloud ks apiserver-refresh
+### ibmcloud ks apiserver-refresh (cluster-refresh)
 {: #cs_apiserver_refresh}
 
 Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks apiserver-config-set`, `apiserver-config-unset`, `cluster-feature-enable`, or `cluster-feature-disable` commands. If a configuration change requires a restart, the affected Kubernetes master component is restarted. If the configuration changes can be applied without a restart, no Kubernetes master component is restarted. Your worker nodes, apps, and resources are not modified and continue to run.
@@ -1500,31 +1499,6 @@ ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
 <dl>
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
-</dl>
-
-### ibmcloud ks cluster-refresh
-{: #cs_cluster_refresh}
-
-Restart the cluster master nodes to apply new Kubernetes API configuration changes. Your worker nodes, apps, and resources are not modified and continue to run.
-{: shortdesc}
-
-```
-ibmcloud ks cluster-refresh --cluster CLUSTER [-f] [-s]
-```
-{: pre}
-
-**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>-f</code></dt>
-<dd>Use this option to force the removal of a cluster without user prompts. This value is optional.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 ### ibmcloud ks cluster-rm
@@ -4447,7 +4421,7 @@ ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
   Workers per zone:   3
   Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.12.7_1512
+  Version:            1.12.8_1512
   ```
   {: screen}
 

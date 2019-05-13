@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks
 
@@ -161,7 +161,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.1.638</td>
 <td>15 Nov 2018</td>
 <td>
-<ul><li>Adds the [<code>ibmcloud ks cluster-refresh</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh) command.</li>
+<ul><li>Adds the [<code>ibmcloud ks cluster-refresh</code>](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh) alias to the `apiserver-refresh` command.</li>
 <li>Adds the resource group name to the output of <code>ibmcloud ks cluster-get</code> and <code>ibmcloud ks clusters</code>.</li></ul>
 </td>
 </tr>

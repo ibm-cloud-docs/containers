@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks
 
@@ -445,18 +445,13 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 <tbody>
 <tr>
 <td>Refresh the Kubernetes master.</td>
-<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh)</code></td>
+<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh) (cluster-refresh)</code></td>
 <td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#!/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
 <td>Make an {{site.data.keyword.Bluemix_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID.</td>
 <td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
-</tr>
-<tr>
-<td>Restart the cluster master nodes to apply new Kubernetes API configuration changes.</td>
-<td><code>[ibmcloud ks cluster-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#!/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
 <td>Add a subnet to a cluster.</td>
