@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-13"
 
 ---
 
@@ -340,7 +340,7 @@ You can configure Knative to assign host names from your own custom domain that 
 
 By default, every app is assigned a public subdomain from your Ingress subdomain in the format `<knative_service_name>.<namespace>.<ingress_subdomain>` that you can use to access the app from the internet. In addition, a private host name is assigned to your app in the format `<knative_service_name>.<namespace>.cluster.local` that you can use to access your app from within the cluster. If you want to assign host names from a custom domain that you own, you can change the Knative configmap to use the custom domain instead.
 
-1. Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [IBM Cloud DNS](/docs/infrastructure/dns?topic=dns-getting-started-with-dns#getting-started-with-dns).
+1. Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [IBM Cloud DNS](/docs/infrastructure/dns?topic=dns-getting-started).
 2. Configure your domain to route incoming network traffic to the IBM-provided Ingress gateway. Choose between these options:
    - Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get --cluster <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
    - Map your custom domain to the portable public IP address of the Ingress gateway by adding the IP address as a record. To find the public IP address of the Ingress gateway, run `nslookup <ingress_subdomain>`.
