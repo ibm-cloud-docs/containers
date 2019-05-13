@@ -131,12 +131,12 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster. 
     1.  For example, you might try to a delete a worker node.
         ```
-        ibmcloud ks worker-rm <worker_node_ID>
+        ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_node_ID>
         ```
         {: pre}
     2.  Check to see if the worker node is removed.
         ```
-        ibmcloud ks worker-get <worker_node_ID>
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_node_ID>
         ```
         {: pre}
         
