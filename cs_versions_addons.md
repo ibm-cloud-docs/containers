@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -54,6 +54,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>423 / 329</td>
+<td>13 May 2019</td>
+<td>Improves performance for the integration with {{site.data.keyword.appid_full}}.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>411 / 315</td>
 <td>15 Apr 2019</td>
