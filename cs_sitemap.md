@@ -1078,7 +1078,7 @@ lastupdated: "2019-05-13"
 * [Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_ingress_fails)
 * [Ingress application load balancer secret issues](/docs/containers?topic=containers-cs_troubleshoot_network#cs_albsecret_fails)
 * [Cannot get a subdomain for Ingress ALB](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)
-* [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit)
+* [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_network#cs_ingress_websocket)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_network#cs_source_ip_fails)
 * [Cannot establish VPN connectivity with the strongSwan Helm chart](/docs/containers?topic=containers-cs_troubleshoot_network#cs_vpn_fails)

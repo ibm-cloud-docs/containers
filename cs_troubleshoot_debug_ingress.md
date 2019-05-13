@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -171,7 +171,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: screen}
 
-    * If a public ALB has no IP address, see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit).
+    * If a public ALB has no IP address, see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
 
 2. Check the health of your ALB IPs.
 
