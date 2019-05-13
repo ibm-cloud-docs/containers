@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks
 
@@ -94,7 +94,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 1.  Identify what user credentials are used for the region and resource group's infrastructure permissions.
     1.  Check the API key for a region and resource group of the cluster.
         ```
-        ibmcloud ks api-key-info
+        ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
         ```
         {: pre}
         
@@ -112,21 +112,21 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ```
         {: pre}
         
-        Example output if credentials are set to use a different account. In this case, this user's infrastructure credentials are used for the region and resource group that you targeted, even if a different user's credentials are stored in the API key that you retrieved in the previous step.
+        **Example output if credentials are set to use a different account**. In this case, the user's infrastructure credentials are used for the region and resource group that you targeted, even if a different user's credentials are stored in the API key that you retrieved in the previous step.
         ```
         OK
         Infrastructure credentials for user name <1234567_name@email.com> set for resource group <resource_group_name>.
         ```
         {: screen}
         
-        Example output if credentials are not set to use a different account. In this case, the API key owner that you retrieved in the previous step has the infrastructure credentials that are used for the region and resource group.
+        **Example output if credentials are not set to use a different account**. In this case, the API key owner that you retrieved in the previous step has the infrastructure credentials that are used for the region and resource group.
         ```
         FAILED
         No credentials set for resource group <resource_group_name>.: The user credentials could not be found. (E0051)
         ```
         {: screen}
 2.  Validate the infrastructure permissions that the user has.
-    2.  Make sure that the [infrastructure credentials owner for the API key or the manually set account has the correct permissions](/docs/containers?topic=containers-users#owner_permissions). 
+    2.  Make sure that the [infrastructure credentials owner for the API key or the manually-set account has the correct permissions](/docs/containers?topic=containers-users#owner_permissions). 
     3.  If necessary, you can change the [API key](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_api_key_reset) or [manually-set](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_credentials_set) infrastructure credentials owner for the region and resource group.
 3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster. 
     1.  For example, you might try to a delete a worker node.
