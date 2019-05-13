@@ -50,7 +50,49 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 ## Version 1.14 changelog
 {: #114_changelog}
 
+### Changelog for 1.14.1_1518, released 13 May 2019
+{: #1141_1518}
 
+The following table shows the changes that are included in the patch 1.14.1_1518.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.1_1516">
+<caption>Changes since version 1.14.1_1516</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The Kubernetes API server audit policy configuration is updated to not log the `/openapi/v2*` read-only URL. In addition, the Kubernetes controller manager configuration increased the validity duration of signed `kubelet` certificates from 1 to 3 years.</td>
+</tr>
+<tr>
+<td>OpenVPN client configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The OpenVPN client `vpn-*` pod in the `kube-system` namespace now sets `dnsPolicy` to `Default` to prevent the pod from failing when cluster DNS is down.</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>e7182c7</td>
+<td>13c7ef0</td>
+<td>Updated image for [CVE-2016-7076 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076) and [CVE-2017-1000368 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.14.1_1516, released 7 May 2019
 {: #1141_1516}
@@ -148,7 +190,67 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 ## Version 1.13 changelog
 {: #113_changelog}
 
+### Changelog for 1.13.6_1521, released 13 May 2019
+{: #1136_1521}
 
+The following table shows the changes that are included in the patch 1.13.6_1521.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.5_1519">
+<caption>Changes since version 1.13.5_1519</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Updated image for [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.13.6-139</td>
+<td>Updated to support the Kubernetes 1.13.6 release. Also, fixed the update process for version 2.0 load balancer that have only one available worker node for the load balancer pods.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.13.6</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.6).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The Kubernetes API server audit policy configuration is updated to not log the `/openapi/v2*` read-only URL. In addition, the Kubernetes controller manager configuration increased the validity duration of signed `kubelet` certificates from 1 to 3 years.</td>
+</tr>
+<tr>
+<td>OpenVPN client configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The OpenVPN client `vpn-*` pod in the `kube-system` namespace now sets `dnsPolicy` to `Default` to prevent the pod from failing when cluster DNS is down.</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Updated image for [CVE-2016-7076 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368), and [CVE-2019-11068 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.13.5_1519, released 29 April 2019
 {: #1135_1519}
@@ -683,7 +785,67 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 Review the version 1.12 changelog.
 {: shortdesc}
 
+### Changelog for 1.12.8_1552, released 13 May 2019
+{: #1128_1552}
 
+The following table shows the changes that are included in the patch 1.12.8_1552.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.7_1550">
+<caption>Changes since version 1.12.7_1550</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Updated image for [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.7-180</td>
+<td>v1.12.8-210</td>
+<td>Updated to support the Kubernetes 1.12.8 release. Also, fixed the update process for version 2.0 load balancer that have only one available worker node for the load balancer pods.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.7</td>
+<td>v1.12.8</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.8).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The Kubernetes API server audit policy configuration is updated to not log the `/openapi/v2*` read-only URL. In addition, the Kubernetes controller manager configuration increased the validity duration of signed `kubelet` certificates from 1 to 3 years.</td>
+</tr>
+<tr>
+<td>OpenVPN client configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The OpenVPN client `vpn-*` pod in the `kube-system` namespace now sets `dnsPolicy` to `Default` to prevent the pod from failing when cluster DNS is down.</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Updated image for [CVE-2016-7076 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368), and [CVE-2019-11068 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.7_1550, released 29 April 2019
 {: #1127_1550}
@@ -1534,7 +1696,67 @@ Review the version 1.11 changelog.
 Kubernetes version 1.11 is deprecated and becomes unsupported on 27 June 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
 {: deprecated}
 
+### Changelog for 1.11.10_1558, released 13 May 2019
+{: #11110_1558}
 
+The following table shows the changes that are included in the patch 1.11.10_1558.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.9_1556">
+<caption>Changes since version 1.11.9_1556</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Updated image for [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.9-241</td>
+<td>v1.11.10-270</td>
+<td>Updated to support the Kubernetes 1.11.10 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.9</td>
+<td>v1.11.10</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The Kubernetes API server audit policy configuration is updated to not log the `/openapi/v2*` read-only URL. In addition, the Kubernetes controller manager configuration increased the validity duration of signed `kubelet` certificates from 1 to 3 years.</td>
+</tr>
+<tr>
+<td>OpenVPN client configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The OpenVPN client `vpn-*` pod in the `kube-system` namespace now sets `dnsPolicy` to `Default` to prevent the pod from failing when cluster DNS is down.</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Updated image for [CVE-2016-7076 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368), and [CVE-2019-11068 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019
 {: #1119_1556}
@@ -2731,7 +2953,31 @@ Review the version 1.10 changelog.
 Kubernetes version 1.10 is deprecated and becomes unsupported on 15 May 2019. [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
 
+### Changelog for worker node fix pack 1.10.13_1558, released 13 May 2019
+{: #11013_1558}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.13_1558.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.13_1557">
+<caption>Changes since version 1.10.13_1557</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.13_1557, released 29 April 2019
 {: #11013_1557}
