@@ -127,8 +127,8 @@ For more information about available bare metal flavors and how bare metal is di
 
 
 *   Latest: 1.14.1
-*   Default: 1.12.8
-*   Other: 1.13.6
+*   Default: 1.12.7
+*   Other: 1.13.5
 
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).

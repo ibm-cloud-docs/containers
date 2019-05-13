@@ -36,8 +36,8 @@ subcollection: containers
 
 **Supported Kubernetes versions**:
 *   Latest: 1.14.1
-*   Default: 1.12.8
-*   Other: 1.13.6
+*   Default: 1.12.7
+*   Other: 1.13.5
 
 
 **Deprecated and unsupported Kubernetes versions**:
