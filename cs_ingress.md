@@ -1473,7 +1473,7 @@ The IBM-provided Ingress application load balancers (ALBs) are based on NGINX co
     ```
     {: pre}
 
-5. Get the **EXTERNAL-IP** IP address for the load balancer.
+5. Get the **EXTERNAL-IP** address for the load balancer.
     ```
     kubectl get svc -n kube-system
     ```
