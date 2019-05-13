@@ -372,11 +372,6 @@ Worker node flavors vary by zone. The following table includes the most recent v
 <td>30 / 240GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.48x384</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only as `--hardware shared` tenancy.</td>
-<td>48 / 384GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
 </tr>
 </tbody>
 </table>
