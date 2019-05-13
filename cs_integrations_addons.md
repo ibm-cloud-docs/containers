@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-01"
+lastupdated: "2019-05-09"
 
 keywords: kubernetes, iks, helm
 
@@ -57,7 +57,7 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
 
 1. Check whether your add-ons are at the latest version. Any addons that are denoted with `* (<version> latest)` can be updated.
    ```
-   ibmcloud ks cluster-addon-ls --cluster <mycluster>
+   ibmcloud ks cluster-addons --cluster <mycluster>
    ```
    {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-07"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks
 
@@ -49,6 +49,8 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+
 
 ### Changelog for 1.14.1_1516, released 7 May 2019
 {: #1141_1516}
@@ -145,6 +147,8 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+
 
 ### Changelog for worker node fix pack 1.13.5_1519, released 29 April 2019
 {: #1135_1519}
@@ -678,6 +682,8 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+
 
 ### Changelog for worker node fix pack 1.12.7_1550, released 29 April 2019
 {: #1127_1550}
@@ -1527,6 +1533,8 @@ Review the version 1.11 changelog.
 
 Kubernetes version 1.11 is deprecated and becomes unsupported on 27 June 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
 {: deprecated}
+
+
 
 ### Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019
 {: #1119_1556}
@@ -2722,6 +2730,8 @@ Review the version 1.10 changelog.
 
 Kubernetes version 1.10 is deprecated and becomes unsupported on 15 May 2019. [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
+
+
 
 ### Changelog for worker node fix pack 1.10.13_1557, released 29 April 2019
 {: #11013_1557}

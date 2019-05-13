@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-08"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks
 
@@ -445,18 +445,13 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 <tbody>
 <tr>
 <td>Refresh the Kubernetes master.</td>
-<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh)</code></td>
+<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh) (cluster-refresh)</code></td>
 <td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#!/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
 <td>Make an {{site.data.keyword.Bluemix_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID.</td>
 <td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
-</tr>
-<tr>
-<td>Restart the cluster master nodes to apply new Kubernetes API configuration changes.</td>
-<td><code>[ibmcloud ks cluster-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#!/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
 <td>Add a subnet to a cluster.</td>
@@ -1033,8 +1028,10 @@ The following table shows the Cloud Foundry roles required for cluster action pe
 ## Infrastructure roles
 {: #infra}
 
-When a user with the **Super User** infrastructure access role [sets the API key for a region and resource group](/docs/containers?topic=containers-users#api_key), infrastructure permissions for the other users in the account are set by {{site.data.keyword.Bluemix_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
+A user with the **Super User** infrastructure access role [sets the API key for a region and resource group](/docs/containers?topic=containers-users#api_key) so that infrastructure actions can be performed (or, more rarely, [manually sets different account credentials](/docs/containers?topic=containers-users#credentials)). Then, the infrastructure actions that other users in the account can perform is authorized through {{site.data.keyword.Bluemix_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For instructions to assign permissions, see [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
 {: shortdesc}
+
+
 
 The following table shows the infrastructure permissions required to complete groups of common tasks.
 
@@ -1053,9 +1050,10 @@ The following table shows the infrastructure permissions required to complete gr
 </ul><strong>Account</strong>: <ul>
 <li>Add Server</li></ul>
   <strong>Devices</strong>:<ul>
+  <li>For bare metal worker nodes: View Hardware Details</li>
   <li>IPMI Remote Management</li>
   <li>OS Reloads and Rescue Kernel</li>
-  <li>View Virtual Server Details</li></td>
+  <li>For VM worker nodes: View Virtual Server Details</li></td>
 </tr>
 <tr>
 <td>
@@ -1070,13 +1068,13 @@ The following table shows the infrastructure permissions required to complete gr
   <li>Add Server</li>
   <li>Cancel Server</li></ul>
 <strong>Devices</strong>:<ul>
-  <li>View Hardware Details</li>
+  <li>For bare metal worker nodes: View Hardware Details</li>
   <li>IPMI Remote Management</li>
   <li>OS Reloads and Rescue Kernel</li>
-  <li>View Virtual Server Details</li></ul>
+  <li>For VM worker nodes: View Virtual Server Details</li></ul>
 <strong>Network</strong>:<ul>
   <li>Add Compute with Public Network Port</li></ul>
-**Important**: You must also assign the user the ability to manage support cases. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
+<p class="important">You must also assign the user the ability to manage support cases. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).</p>
 </td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks
 
@@ -176,7 +176,7 @@ To successfully provision and work with clusters, you must ensure that your {{si
 
 4. Verify that the API key is set.
     ```
-    ibmcloud ks api-key-info <cluster_name_or_ID>
+    ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -981,8 +981,9 @@ When you assign the **Super User** infrastructure role to the admin who sets the
 
 For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.Bluemix_notm}} IAM platform roles to control users' infrastructure access, you must set specific IBM Cloud infrastructure (SoftLayer) permissions for users.
 
-If your account is not VRF-enabled, your IBM Cloud infrastructure (SoftLayer) account owner must turn on VLAN spanning. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. For more information, see [VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation).
-{: tip}
+For example, if your account is not VRF-enabled, your IBM Cloud infrastructure (SoftLayer) account owner must turn on VLAN spanning. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. For more information, see [VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation).
+
+
 
 Before you begin, make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
 

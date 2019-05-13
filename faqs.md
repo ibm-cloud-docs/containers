@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-07"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -124,9 +124,12 @@ For more information about available bare metal flavors and how bare metal is di
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
+
+
 *   Latest: 1.14.1
 *   Default: 1.12.7
 *   Other: 1.13.5
+
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 

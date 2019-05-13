@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-06"
+lastupdated: "2019-05-09"
 
 ---
 
@@ -104,9 +104,6 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-The `istio` managed add-on can be installed into a free cluster. To also install the `istio-extras` and `istio-sample-bookinfo` add-ons, create a standard cluster with at least two worker nodes.
-{: note}
-
 <br />
 
 
@@ -118,7 +115,7 @@ Install Istio managed add-ons in an existing cluster.
 
 **Before you begin**</br>
 * Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-* [Create or use an existing cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). Additionally, the cluster and worker nodes must run at least the minimum supported version of Kubernetes, which you can review by running `ibmcloud ks addon-versions --addon istio`.
+* [Create or use an existing standard cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). Additionally, the cluster and worker nodes must run at least the minimum supported version of Kubernetes, which you can review by running `ibmcloud ks addon-versions --addon istio`.
 * [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 * If are using an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 
@@ -282,43 +279,23 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookinfo` managed add-ons](#istio_install) in a cluster.
 
 1. Get the public address for your cluster.
-  * Standard clusters:
-      2. Set the ingress host.
-        ```
-        export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-        ```
-        {: pre}
+  1. Set the ingress host.
+    ```
+    export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    ```
+    {: pre}
 
-      3. Set the ingress port.
-        ```
-        export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
-        ```
-        {: pre}
+  2. Set the ingress port.
+    ```
+    export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+    ```
+    {: pre}
 
-      4. Create a `GATEWAY_URL` environment variable that uses the ingress host and port.
-         ```
-         export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-         ```
-         {: pre}
-
-  * Free clusters:
-      1. Set the ingress host. This host is the public IP address of any worker node in your cluster.
-        ```
-        export INGRESS_HOST=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
-        ```
-        {: pre}
-
-      2. Set the ingress port.
-        ```
-        export INGRESS_PORT=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
-        ```
-        {: pre}
-
-      3. Create a GATEWAY_URL environment variable that uses the public IP address of the worker node and a NodePort.
-         ```
-         export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-         ```
-         {: pre}
+  3. Create a `GATEWAY_URL` environment variable that uses the ingress host and port.
+     ```
+     export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+     ```
+     {: pre}
 
 2. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
    ```
@@ -617,7 +594,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 After you [set up Envoy proxy sidecar injection](#istio_sidecar) and deploy your apps into the Istio service mesh, you can expose your Istio-managed apps to public requests by using an IBM-provided host name.
 {: shortdesc}
 
-Istio uses [Gateways ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) and [VirtualServices ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) to control how traffic is routed to your apps. A gateway configures a load balancer, `istio-ingressgateway`, that acts as the entry point for your Istio-managed apps. In standard clusters, you can expose your Istio-managed apps by registering the external IP address of the `istio-ingressgateway` load balancer with a DNS entry and host name.
+Istio uses [Gateways ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) and [VirtualServices ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) to control how traffic is routed to your apps. A gateway configures a load balancer, `istio-ingressgateway`, that acts as the entry point for your Istio-managed apps. You can expose your Istio-managed apps by registering the external IP address of the `istio-ingressgateway` load balancer with a DNS entry and host name.
 
 You can try out the [example to expose BookInfo](#istio_expose_bookinfo) first, or [publicly expose your own Istio-managed apps](#istio_expose_link).
 

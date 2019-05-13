@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-01"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks
 
@@ -40,7 +40,7 @@ You can take these general steps to ensure that your clusters are up-to-date:
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}
 
-While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/iks-charts/ibmcloud-iks-debug):
 {: shortdesc}
 
 
@@ -83,7 +83,10 @@ Review the options to debug your clusters and find the root causes for failures.
 
 2.  Review the `State` of your cluster. If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, start [debugging the worker nodes](#debug_worker_nodes).
 
-    <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
+    You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. 
+{: shortdesc}
+
+<table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
 <caption>Cluster states</caption>
    <thead>
    <th>Cluster state</th>
@@ -91,51 +94,51 @@ Review the options to debug your clusters and find the root causes for failures.
    </thead>
    <tbody>
 <tr>
-   <td>Aborted</td>
+   <td>`Aborted`</td>
    <td>The deletion of the cluster is requested by the user before the Kubernetes master is deployed. After the deletion of the cluster is completed, the cluster is removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
  <tr>
-     <td>Critical</td>
+     <td>`Critical`</td>
      <td>The Kubernetes master cannot be reached or all worker nodes in the cluster are down. </td>
     </tr>
    <tr>
-     <td>Delete failed</td>
+     <td>`Delete failed`</td>
      <td>The Kubernetes master or at least one worker node cannot be deleted.  </td>
    </tr>
    <tr>
-     <td>Deleted</td>
+     <td>`Deleted`</td>
      <td>The cluster is deleted but not yet removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
-   <td>Deleting</td>
+   <td>`Deleting`</td>
    <td>The cluster is being deleted and cluster infrastructure is being dismantled. You cannot access the cluster.  </td>
    </tr>
    <tr>
-     <td>Deploy failed</td>
+     <td>`Deploy failed`</td>
      <td>The deployment of the Kubernetes master could not be completed. You cannot resolve this state. Contact IBM Cloud support by opening an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
      <tr>
-       <td>Deploying</td>
+       <td>`Deploying`</td>
        <td>The Kubernetes master is not fully deployed yet. You cannot access your cluster. Wait until your cluster is fully deployed to review the health of your cluster.</td>
       </tr>
       <tr>
-       <td>Normal</td>
+       <td>`Normal`</td>
        <td>All worker nodes in a cluster are up and running. You can access the cluster and deploy apps to the cluster. This state is considered healthy and does not require an action from you.<p class="note">Although the worker nodes might be normal, other infrastructure resources, such as [networking](/docs/containers?topic=containers-cs_troubleshoot_network) and [storage](/docs/containers?topic=containers-cs_troubleshoot_storage), might still need attention. If you just created the cluster, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process.</p></td>
     </tr>
       <tr>
-       <td>Pending</td>
+       <td>`Pending`</td>
        <td>The Kubernetes master is deployed. The worker nodes are being provisioned and are not available in the cluster yet. You can access the cluster, but you cannot deploy apps to the cluster.  </td>
      </tr>
    <tr>
-     <td>Requested</td>
+     <td>`Requested`</td>
      <td>A request to create the cluster and order the infrastructure for the Kubernetes master and worker nodes is sent. When the deployment of the cluster starts, the cluster state changes to <code>Deploying</code>. If your cluster is stuck in the <code>Requested</code> state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
-     <td>Updating</td>
+     <td>`Updating`</td>
      <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that the user deployed are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
    </tr>
     <tr>
-       <td>Warning</td>
+       <td>`Warning`</td>
        <td>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. </td>
     </tr>
    </tbody>
@@ -165,69 +168,73 @@ Review the options to debug your worker nodes and find the root causes for failu
   {: pre}
 
 2.  Review the `State` and `Status` field for every worker node in your CLI output.
+    
+    <p>You can view the current worker node state by running the `ibmcloud ks workers --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields. 
+{: shortdesc} 
 
-  <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
-  <caption>Worker node states</caption>
-    <thead>
-    <th>Worker node state</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-  <tr>
-      <td>Critical</td>
-      <td>A worker node can go into a Critical state for many reasons: <ul><li>You initiated a reboot for your worker node without cordoning and draining your worker node. Rebooting a worker node can cause data corruption in <code>containerd</code>, <code>kubelet</code>, <code>kube-proxy</code>, and <code>calico</code>. </li>
-      <li>The pods that are deployed to your worker node do not use resource limits for [memory ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) and [CPU ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Without resource limits, pods can consume all available resources, leaving no resources for other pods to run on this worker node. This overcommitment of workload causes the worker node to fail. </li>
-      <li><code>containerd</code>, <code>kubelet</code>, or <code>calico</code> went into an unrecoverable state after it ran hundreds or thousands of containers over time. </li>
-      <li>You set up a Virtual Router Appliance for your worker node that went down and cut off the communication between your worker node and the Kubernetes master. </li><li> Current networking issues in {{site.data.keyword.containerlong_notm}} or IBM Cloud infrastructure (SoftLayer) that causes the communication between your worker node and the Kubernetes master to fail.</li>
-      <li>Your worker node ran out of capacity. Check the <strong>Status</strong> of the worker node to see whether it shows <strong>Out of disk</strong> or <strong>Out of memory</strong>. If your worker node is out of capacity, consider to either reduce the workload on your worker node or add a worker node to your cluster to help load balance the workload.</li>
-      <li>The device was powered off from the [{{site.data.keyword.Bluemix_notm}} console resource list ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/resources). Open the resource list and find your worker node ID in the **Devices** list. In the action menu, click **Power On**.</li></ul>
-      In many cases, [reloading](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker node can solve the problem. When you reload your worker node, the latest [patch version](/docs/containers?topic=containers-cs_versions#version_types) is applied to your worker node. The major and minor version is not changed. Before you reload your worker node, make sure to cordon and drain your worker node to ensure that the existing pods are terminated gracefully and rescheduled onto remaining worker nodes. </br></br> If reloading the worker node does not resolve the issue, go to the next step to continue troubleshooting your worker node. </br></br><strong>Tip:</strong> You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
-      </td>
+<table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
+<caption>Worker node states</caption>
+  <thead>
+  <th>Worker node state</th>
+  <th>Description</th>
+  </thead>
+  <tbody>
+<tr>
+    <td>`Critical`</td>
+    <td>A worker node can go into a Critical state for many reasons: <ul><li>You initiated a reboot for your worker node without cordoning and draining your worker node. Rebooting a worker node can cause data corruption in <code>containerd</code>, <code>kubelet</code>, <code>kube-proxy</code>, and <code>calico</code>. </li>
+    <li>The pods that are deployed to your worker node do not use resource limits for [memory ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) and [CPU ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Without resource limits, pods can consume all available resources, leaving no resources for other pods to run on this worker node. This overcommitment of workload causes the worker node to fail. </li>
+    <li><code>containerd</code>, <code>kubelet</code>, or <code>calico</code> went into an unrecoverable state after it ran hundreds or thousands of containers over time. </li>
+    <li>You set up a Virtual Router Appliance for your worker node that went down and cut off the communication between your worker node and the Kubernetes master. </li><li> Current networking issues in {{site.data.keyword.containerlong_notm}} or IBM Cloud infrastructure (SoftLayer) that causes the communication between your worker node and the Kubernetes master to fail.</li>
+    <li>Your worker node ran out of capacity. Check the <strong>Status</strong> of the worker node to see whether it shows <strong>Out of disk</strong> or <strong>Out of memory</strong>. If your worker node is out of capacity, consider to either reduce the workload on your worker node or add a worker node to your cluster to help load balance the workload.</li>
+    <li>The device was powered off from the [{{site.data.keyword.Bluemix_notm}} console resource list ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/resources). Open the resource list and find your worker node ID in the **Devices** list. In the action menu, click **Power On**.</li></ul>
+    In many cases, [reloading](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker node can solve the problem. When you reload your worker node, the latest [patch version](/docs/containers?topic=containers-cs_versions#version_types) is applied to your worker node. The major and minor version is not changed. Before you reload your worker node, make sure to cordon and drain your worker node to ensure that the existing pods are terminated gracefully and rescheduled onto remaining worker nodes. </br></br> If reloading the worker node does not resolve the issue, go to the next step to continue troubleshooting your worker node. </br></br><strong>Tip:</strong> You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
+    </td>
+   </tr>
+   <tr>
+   <td>`Deployed`</td>
+   <td>Updates are successfully deployed to your worker node. After updates are deployed, {{site.data.keyword.containerlong_notm}} starts a health check on the worker node. After the health check is successful, the worker node goes into a <code>Normal</code> state. Worker nodes in a <code>Deployed</code> state usually are ready to receive workloads, which you can check by running <code>kubectl get nodes</code> and confirming that the state shows <code>Normal</code>. </td>
+   </tr>
+    <tr>
+      <td>`Deploying`</td>
+      <td>When you update the Kubernetes version of your worker node, your worker node is redeployed to install the updates. If you reload or reboot your worker node, the worker node is redeployed to automatically install the latest patch version. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the deployment. </td>
+   </tr>
+      <tr>
+      <td>`Normal`</td>
+      <td>Your worker node is fully provisioned and ready to be used in the cluster. This state is considered healthy and does not require an action from the user. **Note**: Although the worker nodes might be normal, other infrastructure resources, such as [networking](/docs/containers?topic=containers-cs_troubleshoot_network) and [storage](/docs/containers?topic=containers-cs_troubleshoot_storage), might still need attention.</td>
+   </tr>
+ <tr>
+      <td>`Provisioning`</td>
+      <td>Your worker node is being provisioned and is not available in the cluster yet. You can monitor the provisioning process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the provisioning.</td>
+    </tr>
+    <tr>
+      <td>`Provision_failed`</td>
+      <td>Your worker node could not be provisioned. Continue with the next step to find the details for the failure.</td>
+    </tr>
+ <tr>
+      <td>`Reloading`</td>
+      <td>Your worker node is being reloaded and is not available in the cluster. You can monitor the reloading process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the reloading.</td>
      </tr>
      <tr>
-     <td>Deployed</td>
-     <td>Updates are successfully deployed to your worker node. After updates are deployed, {{site.data.keyword.containerlong_notm}} starts a health check on the worker node. After the health check is successful, the worker node goes into a <code>Normal</code> state. Worker nodes in a <code>Deployed</code> state usually are ready to receive workloads, which you can check by running <code>kubectl get nodes</code> and confirming that the state shows <code>Normal</code>. </td>
-     </tr>
-      <tr>
-        <td>Deploying</td>
-        <td>When you update the Kubernetes version of your worker node, your worker node is redeployed to install the updates. If you reload or reboot your worker node, the worker node is redeployed to automatically install the latest patch version. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the deployment. </td>
-     </tr>
-        <tr>
-        <td>Normal</td>
-        <td>Your worker node is fully provisioned and ready to be used in the cluster. This state is considered healthy and does not require an action from the user. **Note**: Although the worker nodes might be normal, other infrastructure resources, such as [networking](/docs/containers?topic=containers-cs_troubleshoot_network) and [storage](/docs/containers?topic=containers-cs_troubleshoot_storage), might still need attention.</td>
-     </tr>
+      <td>`Reloading_failed`</td>
+      <td>Your worker node could not be reloaded. Continue with the next step to find the details for the failure.</td>
+    </tr>
+    <tr>
+      <td>`Reload_pending`</td>
+      <td>A request to reload or to update the Kubernetes version of your worker node is sent. When the worker node is being reloaded, the state changes to <code>Reloading</code>. </td>
+    </tr>
+    <tr>
+     <td>`Unknown`</td>
+     <td>The Kubernetes master is not reachable for one of the following reasons:<ul><li>You requested an update of your Kubernetes master. The state of the worker node cannot be retrieved during the update. If the worker node remains in this state for an extended period of time even after the Kubernetes master is successfully updated, try to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) the worker node.</li><li>You might have another firewall that is protecting your worker nodes, or changed firewall settings recently. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. For more information, see [Firewall prevents worker nodes from connecting](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>The Kubernetes master is down. Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support case](#ts_getting_help).</li></ul></td>
+</tr>
    <tr>
-        <td>Provisioning</td>
-        <td>Your worker node is being provisioned and is not available in the cluster yet. You can monitor the provisioning process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the provisioning.</td>
-      </tr>
-      <tr>
-        <td>Provision_failed</td>
-        <td>Your worker node could not be provisioned. Continue with the next step to find the details for the failure.</td>
-      </tr>
-   <tr>
-        <td>Reloading</td>
-        <td>Your worker node is being reloaded and is not available in the cluster. You can monitor the reloading process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the reloading.</td>
-       </tr>
-       <tr>
-        <td>Reloading_failed </td>
-        <td>Your worker node could not be reloaded. Continue with the next step to find the details for the failure.</td>
-      </tr>
-      <tr>
-        <td>Reload_pending </td>
-        <td>A request to reload or to update the Kubernetes version of your worker node is sent. When the worker node is being reloaded, the state changes to <code>Reloading</code>. </td>
-      </tr>
-      <tr>
-       <td>Unknown</td>
-       <td>The Kubernetes master is not reachable for one of the following reasons:<ul><li>You requested an update of your Kubernetes master. The state of the worker node cannot be retrieved during the update. If the worker node remains in this state for an extended period of time even after the Kubernetes master is successfully updated, try to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) the worker node.</li><li>You might have another firewall that is protecting your worker nodes, or changed firewall settings recently. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. For more information, see [Firewall prevents worker nodes from connecting](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>The Kubernetes master is down. Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support case](#ts_getting_help).</li></ul></td>
-  </tr>
-     <tr>
-        <td>Warning</td>
-        <td>Your worker node is reaching the limit for memory or disk space. You can either reduce work load on your worker node or add a worker node to your cluster to help load balance the work load.</td>
-  </tr>
-    </tbody>
-  </table>
+      <td>`Warning`</td>
+      <td>Your worker node is reaching the limit for memory or disk space. You can either reduce work load on your worker node or add a worker node to your cluster to help load balance the work load.</td>
+</tr>
+  </tbody>
+</table>
+</p>
 
-5.  List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.
+3.  List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.
   ```
   ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id>
   ```
@@ -300,10 +307,7 @@ Review common error messages and learn how to resolve them.
     </tbody>
   </table>
 
-
-
 <br />
-
 
 
 
@@ -357,7 +361,7 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
 Still having issues with your cluster?
 {: shortdesc}
 
--  In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all the available commands and flags.
+-  In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
 -   To see whether {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/status?selected=status).
 -   Post a question in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
     If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
