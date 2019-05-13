@@ -1469,27 +1469,26 @@ The IBM-provided Ingress application load balancers (ALBs) are based on NGINX co
 
 4. Create the service in your cluster.
     ```
-    kubectl apply -f myloadbalancer.yaml
+    kubectl apply -f my-lb-svc.yaml
     ```
     {: pre}
 
 5. Get the **EXTERNAL-IP** address for the load balancer.
     ```
-    kubectl get svc -n kube-system
+    kubectl get svc my-lb-svc -n kube-system
     ```
     {: pre}
 
     In the following example output, the **EXTERNAL-IP** is `168.1.1.1`.
     ```
-    NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP                               AGE
-    ...
-    my-lb-svc               LoadBalancer   172.21.xxx.xxx   168.1.1.1          1883:31303/TCP         6d
+    NAME         TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)            AGE
+    my-lb-svc    LoadBalancer   172.21.xxx.xxx   168.1.1.1        80:30104/TCP       2m
     ```
     {: screen}
 
 6. Register the load balancer IP address by creating a DNS host name.
     ```
-    ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <NLB_IP>
+    ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
     ```
     {: pre}
 
