@@ -141,14 +141,19 @@ Kubernetes
    
    <table>
    <thead>
+   </thead>
+   <tbody>
+   </tbody>
+   </thead>
+   </table>
    
    
-2. Create your remove resource in the cluster. 
+2. Create your remote resource in the cluster. 
    ```
    kubectl apply -f remoteresource.yaml
    ```
    
-3. Verify that the remote resource is created successfully and that the file that you specified could be downloaded and applied successfully 
+3. Verify that the remote resource is created successfully. After the remote resource is created, the remote resource establishes a connection to the remote location, downloads the specified file, and applies the file to the cluster. Then, the remote resource waits to be reinforced by Kubernetes to start this process all over again.
 
    **Remote Resource**: 
    ```
@@ -192,13 +197,20 @@ Kubernetes
    Events:                                  <none>
    ```
    
+4. Verify that the Kubernetes resource is created or updated. For example to verify a deployment, run the following command. 
+   ```
+   kubectl describe deployment <deployment_name> -n <namespace>
+   ```
    
+5. Change the configuration of your YAML file. For example, if you have a deployment, you can change or add a label to the `metadata` section of your YAML file. 
+
+6. Wait about 2 minutes for the change to be applied to your Kubernetes resource. Then, verify that your Kubernetes resource is updated. 
+   ```
+   kubectl describe deployment <deployment_name> -n <namespace>
+   ```
    
+7. Optional: To remove a Kubernetes resource, remove the source repository's URL where your YAML file is stored from the remote resource. 
+  
+### Step 3: 
 
 
-
-
-
-### Step 1: Automatically update 
-
-You can use the Razee `RemoteResource` component to automatically create Kubernetes YAML files that are stored in a remote location, such as GitHub or Cloud Object Storage. 
