@@ -211,6 +211,38 @@ Kubernetes
    
 7. Optional: To remove a Kubernetes resource, remove the source repository's URL where your YAML file is stored from the remote resource. 
   
-### Step 3: 
+### Step 3: Managing multiple versions of your YAML file with a mustach template
+
+1. 
+   ```
+   apiVersion: "kapitan.razee.io/v1alpha1"
+   kind: MustacheTemplate
+   metadata:
+     name: demo-mustachetemplate
+     namespace: razee
+   spec:
+     env:
+     - name: sample-app-version
+       value: "3.0"
+     templates:
+     - apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+         name: mypvc
+         labels:
+           billingType: "monthly"
+           region: us-south
+           zone: dal13
+           razeetest: "{{sample-app-version}}"
+       spec:
+         accessModes:
+           - ReadWriteMany
+         resources:
+           requests:
+             storage: 24Gi
+         storageClassName: ibmc-file-silver
+   ```
+
+
 
 
