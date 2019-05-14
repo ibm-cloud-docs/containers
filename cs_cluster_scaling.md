@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-02"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks, node scaling
 
@@ -67,6 +67,10 @@ For more information, see the Kubernetes Cluster Autoscaler FAQs for [How does s
 You can customize settings or use other Kubernetes resources to affect how scaling up and down work.
 *   **Scale-up**: [Customize the cluster autoscaler Helm chart values](#ca_chart_values) such as `scanInterval`, `expander`, `skipNodes`, or `maxNodeProvisionTime`. Review ways to [overprovision worker nodes](#ca_scaleup) so that you can scale up worker nodes before a worker pool runs out of resources. You can also [set up Kubernetes pod budget disruptions and pod priority cutoffs](#scalable-practices-apps) to affect how scaling up works.
 *   **Scale-down**: [Customize the cluster autoscaler Helm chart values](#ca_chart_values) such as `scaleDownUnneededTime`, `scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete`, or `scaleDownUtilizationThreshold`.
+
+<br>
+**Can I set the minimum size per zone to immediately scale up my cluster to that size?**<br>
+No, setting a `minSize` does not automatically trigger a scale-up. The `minSize` is a threshold so that the cluster autoscaler does not scale below a certain number of worker nodes per zone. If your cluster does not yet have that number per zone, the cluster autoscaler does not scale up until you have workload resource requests that require more resources. For example, if you have a worker pool with 1 worker node per 3 zones (3 total worker nodes) and set the `minSize` to `4` per zone, the cluster autoscaler does not immediately provision an additional 3 worker nodes per zone (12 worker nodes total). Instead, the scale-up is triggered by resource requests. If you create a workload that requests the resources of 15 worker nodes, the cluster autoscaler scales up the worker pool to meet this request. Now, the `minSize` means that the cluster autoscaler does not scale down below 4 worker nodes per zone even if you remove the workload that requests the amount.
 
 <br>
 **How is this behavior different from worker pools that are not manage by the cluster autoscaler?**<br>
@@ -157,7 +161,7 @@ The cluster autoscaler scales your cluster in response to your workload [resourc
 ### Can I scale down a worker pool to zero (0) nodes?
 {: #scalable-practices-zero}
 
-No, you cannot set the cluster autoscaler `minSize` to `0`. Additionally, unless you [disable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) application load balancers (ALBs) in your cluster, you must change the `minSize` to `2` worker nodes per zone so that the ALB pods can be spread for high availability.
+No, you cannot set the cluster autoscaler `minSize` to `0`. Additionally, unless you [disable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) all public application load balancers (ALBs) in each zone of your cluster, you must change the `minSize` to `2` worker nodes per zone so that the ALB pods can be spread for high availability.
 {: shortdesc}
 
 ### Can I optimize my deployments for autoscaling?
@@ -380,7 +384,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
       uid: b45d047b-f406-11e8-b7f0-82ddffc6e65e
     ```
     {: screen}
-2.  Edit the configmap with the parameters to define how the cluster autoscaler scales your cluster worker pool. Note that unless you [disabled](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) application load balancers (ALBs) in your standard cluster, you must change the `minSize` to `2` per zone so that the ALB pods can be spread for high availability.
+2.  Edit the configmap with the parameters to define how the cluster autoscaler scales your cluster worker pool. Note that unless you [disabled](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) all public application load balancers (ALBs) in each zone of your standard cluster, you must change the `minSize` to `2` per zone so that the ALB pods can be spread for high availability.
 
     <table>
     <caption>Cluster autoscaler configmap parameters</caption>
@@ -400,11 +404,12 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
-    <td headers="parameter-minsize parameter-with-description">Specify the minimum number of worker nodes per zone to be in the worker pool at all times. The value must be 2 or greater so that your ALB pods can be spread for high availability. If you [disabled](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) the ALB in your standard cluster, you can set the value to `1`.</td>
+    <td headers="parameter-minsize parameter-with-description">Specify the minimum number of worker nodes per zone that the cluster autoscaler can scale down the worker pool to. The value must be 2 or greater so that your ALB pods can be spread for high availability. If you [disabled](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) all public ALBs in each zone of your standard cluster, you can set the value to `1`.
+    <p class="note">Setting a `minSize` does not automatically trigger a scale-up. The `minSize` is a threshold so that the cluster autoscaler does not scale below a certain number of worker nodes per zone. If your cluster does not yet have that number per zone, the cluster autoscaler does not scale up until you have workload resource requests that require more resources. For example, if you have a worker pool with 1 worker node per 3 zones (3 total worker nodes) and set the `minSize` to `4` per zone, the cluster autoscaler does not immediately provision an additional 3 worker nodes per zone (12 worker nodes total). Instead, the scale-up is triggered by resource requests. If you create a workload that requests the resources of 15 worker nodes, the cluster autoscaler scales up the worker pool to meet this request. Now, the `minSize` means that the cluster autoscaler does not scale down below 4 worker nodes per zone even if you remove the workload that requests the amount. For more information, see the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#when-does-cluster-autoscaler-change-the-size-of-a-cluster).</p></td>
     </tr>
     <tr>
     <td id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</td>
-    <td headers="parameter-maxsize parameter-with-description">Specify the maximum number of worker nodes per zone to be in the worker pool. The value must be equal to or greater than the value that you set for the `minSize`.</td>
+    <td headers="parameter-maxsize parameter-with-description">Specify the maximum number of worker nodes per zone that the cluster autoscaler can scale up the worker pool to. The value must be equal to or greater than the value that you set for the `minSize`.</td>
     </tr>
     <tr>
     <td id="parameter-enabled" headers="parameter-with-default">`"enabled": false`</td>

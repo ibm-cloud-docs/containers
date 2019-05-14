@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-13"
 
 keywords: kubernetes, iks
 
@@ -128,7 +128,7 @@ To troubleshoot your NLB service:
     <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the <code>kubectl get nodes</code> and the <code>ibmcloud ks worker-get</code> commands match.</li></ol></li></ul>
 
-4.  If you are using a custom domain to connect to your NLB service, make sure that your custom domain is mapped to the public IP address of your NLB service.
+4.  If you use a custom domain to connect to your NLB service, make sure that your custom domain is mapped to the public IP address of your NLB service.
     1.  Find the public IP address of your NLB service.
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
@@ -208,19 +208,33 @@ Review the following reasons why the ALB secret might fail and the corresponding
 <br />
 
 
-## Cannot get a subdomain for Ingress ALB or cannot deploy a load balancer
+## Cannot get a subdomain for Ingress ALB, ALB does not deploy in a zone, or cannot deploy a load balancer
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
 * No Ingress subdomain: When you run `ibmcloud ks cluster-get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** is available.
-* Cannot deploy a load balancer: You might see an error message similar to the following.
+* An ALB does not deploy in a zone: When you have a multizone cluster and run `ibmcloud ks albs --cluster <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
+  ```
+  ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:411/ingress-auth:315   
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false      disabled   private   -                dal13   ingress:411/ingress-auth:315   
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true       enabled    public    169.xx.xxx.xxx   dal10   ingress:411/ingress-auth:315   
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   
+  ```
+  {: screen}
+* Cannot deploy a load balancer: When you describe the `ibm-cloud-provider-vlan-ip-config` configmap, you might see an error message similar to the following example output.
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config
+  ```
+  {: pre}
   ```
   Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN.
   ```
   {: screen}
 
 {: tsCauses}
-In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. In that zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN in a zone already reached that limit, the **Ingress Subdomain** fails to provision, or you might not have a portable public IP address available to create a network load balancer (NLB).
+In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. In that zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN in a zone already reached that limit, the **Ingress Subdomain** fails to provision, the public Ingress ALB for that zone fails to provision, or you might not have a portable public IP address available to create a network load balancer (NLB).
 
 To view how many subnets a VLAN has:
 1.  From the [IBM Cloud infrastructure (SoftLayer) console](https://cloud.ibm.com/classic?), select **Network** > **IP Management** > **VLANs**.
@@ -232,38 +246,32 @@ If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_not
 If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 
 If you are not using all the subnets in the VLAN, you can reuse subnets in the cluster.
-1.  Check that the subnets that you want to use are available.
+1. Check that the subnet that you want to use is available.
+  The infrastructure account that you use might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. In this case, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
+  {: note}
 
-    The infrastructure account that you are using might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. If so, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
-    {: note}
+2. Use the [`ibmcloud ks cluster-subnet-add` command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) to make an existing subnet available to your cluster.
 
-2.  [Create a cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the zone and VLAN that has the subnets that are available for reuse.
+3. Verify that the subnet was successfully created and added to your cluster. The subnet CIDR is listed in the **Subnet VLANs** section.
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ```
+    {: pre}
 
-3.  Use the `ibmcloud ks cluster-subnet-add` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) to add existing subnets to your cluster. For more information, see [Adding or reusing custom and existing subnets in Kubernetes clusters](/docs/containers?topic=containers-subnets#subnets_custom).
+    In this example output, a second subnet was added to the `2234945` public VLAN:
+    ```
+    Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+    ```
+    {: screen}
 
-<br />
-
-
-## Ingress ALB does not deploy in a zone
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-When you have a multizone cluster and run `ibmcloud ks albs --cluster <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
-```
-ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:411/ingress-auth:315   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false      disabled   private   -                dal13   ingress:411/ingress-auth:315   
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true       enabled    public    169.xx.xxx.xxx   dal10   ingress:411/ingress-auth:315   
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   
-```
-{: screen}
-
-{: tsCauses}
-In each zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If the cluster's public VLAN in a zone already reached that limit, the public Ingress ALB for that zone fails to provision.
-
-{: tsResolve}
-To check the number of subnets on a VLAN and for steps on how to get another VLAN, see [Cannot get a subdomain for Ingress ALB](#cs_subnet_limit).
+4. Verify that the portable IP addresses from the subnet that you added are used for the ALBs or load balancers in your cluster. It might take several minutes for the services to use the portable IP addresses from the newly-added subnet.
+  * No Ingress subdomain: Run `ibmcloud ks cluster-get --cluster <cluster>` to verify that the **Ingress Subdomain** is populated.
+  * An ALB does not deploy in a zone: Run `ibmcloud ks albs --cluster <cluster>` to verify that the missing ALB is deployed.
+  * Cannot deploy a load balancer: Run `kubectl get svc -n kube-system` to verify that the load balancer has an **EXTERNAL-IP**.
 
 <br />
 
@@ -466,7 +474,7 @@ Update the Helm chart values to reflect the worker node changes:
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>The added worker might be deployed on a new, different private subnet than the other existing subnets that other worker nodes are on. If you are using subnet NAT to remap your cluster's private local IP addresses and the worker was added on a new subnet, add the new subnet CIDR to this setting.</td>
+     <td>The added worker might be deployed on a new, different private subnet than the other existing subnets that other worker nodes are on. If you use subnet NAT to remap your cluster's private local IP addresses and the worker was added on a new subnet, add the new subnet CIDR to this setting.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -493,7 +501,7 @@ Update the Helm chart values to reflect the worker node changes:
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>If you are using subnet NAT to remap specific private local IP addresses, remove any IP addresses from this setting that are from the old worker. If you are using subnet NAT to remap entire subnets and no workers remain on a subnet, remove that subnet CIDR from this setting.</td>
+     <td>If you use subnet NAT to remap specific private local IP addresses, remove any IP addresses from this setting that are from the old worker. If you use subnet NAT to remap entire subnets and no workers remain on a subnet, remove that subnet CIDR from this setting.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -573,7 +581,7 @@ To ensure that all Calico factors align:
 
 1. [Install and configure a version 3.3 or later Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 2. Ensure that any policies you create and want to apply to your cluster use [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). If you have an existing policy `.yaml` or `.json` file in Calico v2 syntax, you can convert it to Calico v3 syntax by using the [`calicoctl convert` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
-3. To [view policies](/docs/containers?topic=containers-network_policies#view_policies), ensure that you are using `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies that are scoped to specific namespaces.
+3. To [view policies](/docs/containers?topic=containers-network_policies#view_policies), ensure that you use `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies that are scoped to specific namespaces.
 
 <br />
 

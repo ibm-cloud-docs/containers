@@ -1942,10 +1942,10 @@ ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 <dd>The name or ID of the cluster. This value is required. To list your clusters, use the `ibmcloud ks clusters` [command](#cs_clusters).</dd>
 
 <dt><code>--size <em>SIZE</em></code></dt>
-<dd>The number of subnet IP addresses. This value is required. Possible values are 8, 16, 32, or 64.</dd>
+<dd>The number of IP addresses that you want to create in the portable subnet. Accepted values are 8, 16, 32, or 64. <p class="note"> When you add portable IP addresses for your subnet, three IP addresses are used to establish cluster-internal networking. You cannot use these three IP addresses for your Ingress application load balancers (ALBs) or to create network load balancer (NLB) services. For example, if you request eight portable public IP addresses, you can use five of them to expose your apps to the public.</p> </dd>
 
 <dt><code>--vlan <em>VLAN_ID</em></code></dt>
-<dd>The VLAN in which to create the subnet. This value is required. To list available VLANs, use the `ibmcloud ks vlans --zone <zone>` [command](#cs_vlans). The subnet is provisioned in the same zone that the VLAN is in.</dd>
+<dd>The ID of the public or private VLAN on which you want to create the subnet. You must select a public or private VLAN that an existing worker node is connected to. To review the public or private VLANs that your worker nodes are connected to, run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> and look for the <strong>Subnet VLANs</strong> section in the output. The subnet is provisioned in the same zone that the VLAN is in.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>

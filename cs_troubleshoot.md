@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-14"
 
 keywords: kubernetes, iks
 
@@ -167,9 +167,7 @@ Review the options to debug your worker nodes and find the root causes for failu
   ```
   {: pre}
 
-2.  Review the `State` and `Status` field for every worker node in your CLI output.
-    
-    <p>You can view the current worker node state by running the `ibmcloud ks workers --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields. 
+2.  Review the **State** and **Status** field for every worker node in your CLI output.<p>You can view the current worker node state by running the `ibmcloud ks workers --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields. 
 {: shortdesc} 
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
