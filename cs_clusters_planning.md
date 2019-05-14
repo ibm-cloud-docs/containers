@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-14"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -236,7 +236,7 @@ In clusters that run Kubernetes version 1.11 or later, you can set up your clust
 **Non-VRF or VRF-enabled account, Kubernetes master and worker nodes on private VLAN only**</br>
 If you set up your worker nodes on a private VLAN only, the worker nodes can't automatically expose their app services on the public network, and in a non-VRF account also cannot connect to the master. You must configure a gateway device to provide network connectivity between the worker nodes and the master.
 
-For non-VRF accounts: If you create the cluster with both public and private VLANs, you cannot later remove the public VLANs from that cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. Instead, create a new cluster without the public VLAN.
+For non-VRF accounts: If you create the cluster with both public and private VLANs, you cannot later remove the public VLANs from that cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. Instead, create a new worker pool that is connected to a private VLAN only.
 {: note}
 
 **Non-VRF account, Kubernetes master and worker nodes on both public and private VLANs**</br>
