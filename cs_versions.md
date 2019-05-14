@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-14"
 
 keywords: kubernetes, iks
 
@@ -33,9 +33,9 @@ subcollection: containers
 {:shortdesc}
 
 **Supported Kubernetes versions**:
-*   Latest: 1.14.1
-*   Default: 1.12.8
-*   Other: 1.13.6
+*   Latest: 1.14.1 
+*   Default: 1.13.6
+*   Other: 1.12.8
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.10, 1.11
@@ -60,7 +60,7 @@ kubectl version  --short | grep -i server
 
 Example output:
 ```
-Server Version: v1.12.8+IKS
+Server Version: v1.13.6+IKS
 ```
 {: screen}
 
