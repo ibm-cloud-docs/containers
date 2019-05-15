@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -682,7 +682,7 @@ ibmcloud ks apiserver-config-unset audit-webhook --cluster CLUSTER
 ### ibmcloud ks apiserver-refresh (cluster-refresh)
 {: #cs_apiserver_refresh}
 
-Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks apiserver-config-set`, `apiserver-config-unset`, `cluster-feature-enable`, or `cluster-feature-disable` commands. If a configuration change requires a restart, the affected Kubernetes master component is restarted. If the configuration changes can be applied without a restart, no Kubernetes master component is restarted. Your worker nodes, apps, and resources are not modified and continue to run.
+Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks apiserver-config-set`, `apiserver-config-unset`, `cluster-feature-enable`, or `cluster-feature-disable` commands. The highly available Kubernetes master components are restarted in a rolling restart. Your worker nodes, apps, and resources are not modified and continue to run.
 {: shortdesc}
 
 ```
@@ -1189,7 +1189,7 @@ trusted: <em>true</em>
 <dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-types` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>The name for the cluster.  This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+<dd>The name for the cluster.  This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
@@ -4421,7 +4421,7 @@ ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
   Workers per zone:   3
   Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.12.8_1512
+  Version:            1.13.6_1512
   ```
   {: screen}
 
