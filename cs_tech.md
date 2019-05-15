@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-15"
 
 keywords: kubernetes, iks, docker
 
@@ -261,4 +261,52 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
 Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}
 
+## Service limitations
+{: #tech_limits}
 
+{{site.data.keyword.containerlong_notm}} and the Kubernetes open source project come with default service settings and limitations to ensure security, convenience, and basic functionality. Some of the limitations you might be able to change where noted. If you anticipate reaching the following {{site.data.keyword.containerlong_notm}} limitations, contact the IBM team in the [internal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
+{: shortdesc}
+
+<table summary="This table contains information on the {{site.data.keyword.containerlong_notm}} limitations. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation.">
+<caption>{{site.data.keyword.containerlong_notm}} limitations</caption>
+<thead>
+  <tr>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>API rate limits</td>
+    <td>100 requests per 10 seconds to the {{site.data.keyword.containerlong_notm}} API for each unique source IP address.</td>
+  </tr>
+  <tr>
+    <td>Worker node capacity</td>
+    <td>Worker nodes are available in [select flavors](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) of compute resources.</td>
+  </tr>
+  <tr>
+    <td>Worker node host access</td>
+    <td>For security, you cannot SSH into the worker node compute host.</td>
+  </tr>
+  <tr>
+    <td>Maximum number of worker nodes</td>
+    <td>If you plan to exceed 900 per cluster, contact the IBM team in the [internal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com) first.<br><br>If you see an IBM Cloud infrastructure (SoftLayer) capacity limit on the number of instances per data center or that are ordered each month, contact your IBM Cloud infrastructure (SoftLayer) representative.</td>
+  </tr>
+  <tr>
+    <td>Maximum number of pods</td>
+    <td>110 per worker node.<br><br>The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you do not overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity.</td>
+  </tr>
+  <tr>
+    <td>Maximum number of Kubernetes services</td>
+    <td>65,000 IPs per cluster in the 172.21.0.0/16 range that you can assign to Kubernetes services within the cluster.</td>
+  </tr>
+  <tr>
+    <td>Ingress application load balancer (ALB) traffic</td>
+    <td>32,768 connections per second.<br><br>If your ingress traffic exceeds this number, [scale up the number of ALB replicas](/docs/containers?topic=containers-ingress#scale_albs) in your cluster to handle the increased workload.</td>
+  </tr>
+  <tr>
+    <td>Storage volumes</td>
+    <td>250 combined total of volumes of IBM Cloud infrastructure (SoftLayer) file and block storage instances per account.<br><br>If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes and need to contact your IBM Cloud infrastructure (SoftLayer) representative. For more FAQs, see the [file](/docs/infrastructure/FileStorage?topic=FileStorage-faqs#how-many-volumes-can-i-provision-) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-) storage docs.</td>
+  </tr>
+</tbody>
+</table>
