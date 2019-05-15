@@ -709,7 +709,6 @@ ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
 ## CLI plug-in usage commands
 {: #cli_plug-in_commands}
 
-</br>
 ### ibmcloud ks help
 {: #cs_help}
 
@@ -803,7 +802,6 @@ ibmcloud ks messages
 ## Cluster commands: Management
 {: #cluster_mgmt_commands}
 
-</br>
 ### ibmcloud ks addon-versions
 {: #cs_addon_versions}
 
@@ -1656,7 +1654,6 @@ ibmcloud ks kube-versions
 ## Cluster commands: Services and integrations
 {: #cluster_services_commands}
 
-</br>
 ### ibmcloud ks cluster-service-bind
 {: #cs_cluster_service_bind}
 
@@ -1898,7 +1895,6 @@ ibmcloud ks webhook-create --cluster my_cluster --level Normal --type slack --ur
 ## Cluster commands: Subnets
 {: #cluster_subnets_commands}
 
-</br>
 ### ibmcloud ks cluster-subnet-add
 {: #cs_cluster_subnet_add}
 
@@ -2080,7 +2076,6 @@ ibmcloud ks subnets --locations ams03,wdc,ap
 ## Ingress application load balancer (ALB) commands
 {: #alb_commands}
 
-</br>
 ### ibmcloud ks alb-autoupdate-disable
 {: #cs_alb_autoupdate_disable}
 
@@ -2504,7 +2499,6 @@ ibmcloud ks albs --cluster my_cluster
 ## Infrastructure commands
 {: #infrastructure_commands}
 
-</br>
 ### ibmcloud ks credential-get
 {: #cs_credential_get}
 
@@ -2723,7 +2717,6 @@ ibmcloud ks vlans --zone dal10
 ## Logging commands
 {: #logging_commands}
 
-</br>
 ### ibmcloud ks logging-autoupdate-disable
 {: #cs_log_autoupdate_disable}
 
@@ -3352,7 +3345,6 @@ ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type a
 Use this group of commands to create and manage host names for network load balancer (NLB) IP addresses and health check monitors for host names. For more information, see [Registering a load balancer host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
 {: shortdesc}
 
-</br>
 ### ibmcloud ks nlb-dns-add
 {: #cs_nlb-dns-add}
 
@@ -3766,7 +3758,6 @@ ibmcloud ks nlb-dns-monitors --cluster mycluster
 Use this group of commands to view available locations, view the currently targeted region, and set the targeted region.
 {: shortdesc}
 
-</br>
 ### ibmcloud ks region-get
 {: #cs_region}
 
@@ -3783,6 +3774,7 @@ ibmcloud ks region-get
 {: pre}
 
 **Minimum required permissions**: None
+
 </br>
 ### ibmcloud ks region-set
 {: #cs_region-set}
@@ -3855,6 +3847,7 @@ ibmcloud ks supported-locations
 {: pre}
 
 **Minimum required permissions**: None
+
 </br>
 ### ibmcloud ks zones
 {: #cs_datacenters}
@@ -4388,7 +4381,6 @@ ibmcloud ks workers --cluster my_cluster
 Use this group of commands to view and modify worker pools for a cluster.
 {: shortdesc}
 
-</br>
 ### ibmcloud ks worker-pool-create
 {: #cs_worker_pool_create}
 
