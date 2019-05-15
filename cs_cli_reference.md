@@ -2758,22 +2758,22 @@ ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-end
 **Command options**:
 <dl>
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster that you want to create a snapshot for. This value is required.</dd>
+<dd>The name or ID of the cluster that you want to create a snapshot for.</dd>
 
 <dt><code>--cos-bucket <em>BUCKET_NAME</em></code></dt>
-<dd>The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in. This value is required.</dd>
+<dd>The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in.</dd>
 
 <dt><code>--cos-endpoint <em>ENDPOINT</em></code></dt>
-<dd>The {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. This value is required.</dd>
+<dd>The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) in the {{site.data.keyword.cos_short}} documentation.</dd>
 
 <dt><code>--hmac-key-id <em>HMAC_KEY_ID</em></code></dt>
-<dd>The unique ID for your HMAC credentials for your Object Storage instance. This value is required.</dd>
+<dd>The unique ID for your HMAC credentials for your {{site.data.keyword.cos_short}} instance.</dd>
 
 <dt><code>--hmac-key <em>HMAC_KEY</em></code></dt>
-<dd>The HMAC key for your {{site.data.keyword.cos_short}} instance. This value is required.</dd>
+<dd>The HMAC key for your {{site.data.keyword.cos_short}} instance.</dd>
 
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
-<dd>The type of logs that you want to create a snapshot of. Currently, `master` is the only option, as well as the default.</dd>
+<dd>Optional: The type of logs that you want to create a snapshot of. Currently, `master` is the only option, as well as the default.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
