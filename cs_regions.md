@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-08"
+lastupdated: "2019-05-15"
 
 keywords: kubernetes, iks
 
@@ -96,8 +96,8 @@ The following tables list the available single and multizone locations in {{site
 
 **Multizone metro locations**
 
-<table summary="The table shows the available multizone metro locations {{site.data.keyword.containerlong_notm}}. Rows are to be read from the left to right.  Column one is the geography that the location is in, column two is the country of the location, column three is the metro of the location, column four is the data center, and column five is the deprecated region that the location used to be organized into.">
-<caption>Available multizone metro locations {{site.data.keyword.containerlong_notm}}.</caption>
+<table summary="The table shows the available multizone metro locations in {{site.data.keyword.containerlong_notm}}. Rows are to be read from the left to right.  Column one is the geography that the location is in, column two is the country of the location, column three is the metro of the location, column four is the data center, and column five is the deprecated region that the location used to be organized into.">
+<caption>Available multizone metro locations in {{site.data.keyword.containerlong_notm}}.</caption>
   <thead>
   <th>Geography</th>
   <th>Country</th>
@@ -153,8 +153,8 @@ The following tables list the available single and multizone locations in {{site
 
 **Single zone data center locations**
 
-<table summary="The table shows the available single zone data center locations {{site.data.keyword.containerlong_notm}}. Rows are to be read from the left to right. Column one is the geography that the location is in, column two is the country of the location, column three is the metro of the location, column four is the data center, and column five is the deprecated region that the location used to be organized into.">
-<caption>Available single zone locations {{site.data.keyword.containerlong_notm}}.</caption>
+<table summary="The table shows the available single zone data center locations in {{site.data.keyword.containerlong_notm}}. Rows are to be read from the left to right. Column one is the geography that the location is in, column two is the country of the location, column three is the metro of the location, column four is the data center, and column five is the deprecated region that the location used to be organized into.">
+<caption>Available single zone locations in {{site.data.keyword.containerlong_notm}}.</caption>
   <thead>
   <th>Geography</th>
   <th>Country</th>
