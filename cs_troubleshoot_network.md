@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-14"
 
 keywords: kubernetes, iks
 
@@ -245,10 +245,9 @@ If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_not
 
 If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 
-If you are not using all the subnets in the VLAN, you can reuse subnets in the cluster.
+If you are not using all the subnets in the VLAN, you can reuse subnets on the VLAN by adding them to your cluster.
 1. Check that the subnet that you want to use is available.
-  The infrastructure account that you use might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. In this case, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
-  {: note}
+  <p class="note">The infrastructure account that you use might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. In this case, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.</p>
 
 2. Use the [`ibmcloud ks cluster-subnet-add` command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) to make an existing subnet available to your cluster.
 

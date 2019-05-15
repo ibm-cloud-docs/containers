@@ -159,15 +159,8 @@ Do not restart or reboot a worker node during a master outage. This action remov
 
 Review the options to debug your worker nodes and find the root causes for failures.
 
-
-1.  If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes.
-
-  ```
-  ibmcloud ks workers --cluster <cluster_name_or_id>
-  ```
-  {: pre}
-
-2.  Review the **State** and **Status** field for every worker node in your CLI output.<p>You can view the current worker node state by running the `ibmcloud ks workers --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields. 
+<ol><li>If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes.<p class="pre">ibmcloud ks workers --cluster <cluster_name_or_id></p></li>
+<li>Review the **State** and **Status** field for every worker node in your CLI output.<p>You can view the current worker node state by running the `ibmcloud ks workers --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields. 
 {: shortdesc} 
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
@@ -230,13 +223,9 @@ Review the options to debug your worker nodes and find the root causes for failu
 </tr>
   </tbody>
 </table>
-</p>
-
-3.  List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.
-  ```
-  ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id>
-  ```
-  {: pre}
+</p></li>
+<li>List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></li>
+</ol>
 
 <br />
 
