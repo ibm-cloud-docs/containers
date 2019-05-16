@@ -457,7 +457,7 @@ If you have a firewall on the private network, allow communication between worke
 
 2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges so that you can create worker nodes in your cluster.
     1. Allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. See [Backend (private) Network](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network).
-    2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](/docs/containers?topic=containers-regions-and-zones#zones) that you are using. Note that you must add IPs for the `dal01`, `dal10`, `wdc04` zones, and if your cluster is in the Europe geography, `ams01`. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
+    2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](/docs/containers?topic=containers-regions-and-zones#zones) that you are using. Note that you must add IPs for the `dal01`, `dal10`, `wdc04` zones, and if your cluster is in the Europe geography, the `ams01` zone. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
 
 3. Open the following ports:
     - Allow outbound TCP and UDP connections from the workers to ports 80 and 443 to allow worker node updates and reloads.
