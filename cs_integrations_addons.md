@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks, helm
 
@@ -65,8 +65,8 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
    ```
    OK
    Name      Version
-   istio     1.0.6 *(1.1.2 latest)
-   knative   0.4.1
+   istio     1.1.5
+   knative   0.5.2
    ```
    {: screen}
 
