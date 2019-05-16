@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-16"
 
 ---
 
@@ -819,12 +819,8 @@ lastupdated: "2019-05-13"
     * [Updating to highly available cluster masters in Kubernetes 1.11](/docs/containers?topic=containers-cs_versions#ha-masters)
   * [Updating to containerd as the container runtime](/docs/containers?topic=containers-cs_versions#containerd)
   * [Preparing to update to Calico v3](/docs/containers?topic=containers-cs_versions#111_calicov3)
-* [Version 1.10](/docs/containers?topic=containers-cs_versions#cs_v110)
-  * [Update before master](/docs/containers?topic=containers-cs_versions#110_before)
-  * [Update after master](/docs/containers?topic=containers-cs_versions#110_after)
-    * [Updating to highly available cluster masters in Kubernetes 1.10](/docs/containers?topic=containers-cs_versions#110_ha-masters)
-  * [Preparing to update to Calico v3](/docs/containers?topic=containers-cs_versions#110_calicov3)
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+  * [Version 1.10 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v110)
   * [Version 1.9 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v19)
   * [Version 1.8 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v18)
   * [Version 1.7 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v17)
@@ -876,7 +872,8 @@ lastupdated: "2019-05-13"
   * [Changelog for 1.11.2_1516, released 4 September 2018](/docs/containers?topic=containers-changelog#1112_1516)
     * [Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018](/docs/containers?topic=containers-changelog#1112_1514)
   * [Changelog for 1.11.2_1513, released 14 August 2018](/docs/containers?topic=containers-changelog#1112_1513)
-* [Version 1.10 changelog](/docs/containers?topic=containers-changelog#110_changelog)
+* [Archive](/docs/containers?topic=containers-changelog#changelog_archive)
+* [Version 1.10 changelog (unsupported as of 16 May 2019)](/docs/containers?topic=containers-changelog#110_changelog)
   * [Changelog for 1.10.13_1551, released 20 March 2019](/docs/containers?topic=containers-changelog#11013_1551)
   * [Changelog for 1.10.13_1548, released 4 March 2019](/docs/containers?topic=containers-changelog#11013_1548)
     * [Changelog for worker node fix pack 1.10.12_1546, released 27 February 2019](/docs/containers?topic=containers-changelog#11012_1546)
@@ -905,7 +902,6 @@ lastupdated: "2019-05-13"
     * [Changelog for worker node fix pack 1.10.1_1510, released 18 May 2018](/docs/containers?topic=containers-changelog#1101_1510)
     * [Changelog for worker node fix pack 1.10.1_1509, released 16 May 2018](/docs/containers?topic=containers-changelog#1101_1509)
   * [Changelog for 1.10.1_1508, released 01 May 2018](/docs/containers?topic=containers-changelog#1101_1508)
-* [Archive](/docs/containers?topic=containers-changelog#changelog_archive)
   * [Version 1.9 changelog (unsupported as of 27 December 2018)](/docs/containers?topic=containers-changelog#19_changelog)
     * [Changelog for worker node fix pack 1.9.11_1539, released 17 December 2018](/docs/containers?topic=containers-changelog#1911_1539)
     * [Changelog for worker node fix pack 1.9.11_1538, released 4 December 2018](/docs/containers?topic=containers-changelog#1911_1538)

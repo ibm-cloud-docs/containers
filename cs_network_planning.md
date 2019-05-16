@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks
 
@@ -207,7 +207,7 @@ When you deploy an app in a Kubernetes cluster in {{site.data.keyword.containerl
 As an example, say that you create a private NLB for your app. This private NLB can be accessed by:
 * Any pod in that same cluster.
 * Any pod in any cluster in the same {{site.data.keyword.Bluemix_notm}} account.
-* If you have a [VRF or VLAN spanning](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation) enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.Bluemix_notm}} account.
+* If you have [VRF or VLAN spanning](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation) enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.Bluemix_notm}} account.
 * If you're not in the {{site.data.keyword.Bluemix_notm}} account but still behind the company firewall, any system through a VPN connection to the subnet that the NLB IP is on
 * If you're in a different {{site.data.keyword.Bluemix_notm}} account, any system through a VPN connection to the subnet that the NLB IP is on.
 

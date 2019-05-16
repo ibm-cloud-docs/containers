@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -66,7 +66,7 @@ For more information about the types of {{site.data.keyword.containerlong_notm}}
 <dd>To collect, forward, and view logs for your cluster's Kubernetes master, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies. To get started, see [Collecting master logs](#collect_master).</dd>
 
 <dt>Third-party services</dt>
-<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). In clusters that run Kubernetes version 1.11 or later, you can collect container logs from the `/var/log/pods/` path. In clusters that run Kubernetes version 1.10 or earlier, you can collect container logs from the `/var/lib/docker/containers/` path.</dd>
+<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). You can collect container logs from the `/var/log/pods/` path.</dd>
 
 </dl>
 
@@ -632,9 +632,38 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 3. Through the CLI, make a request for a snapshot of your master logs.
 
   ```
-  ibmcloud ks logging-collect --cluster <cluster name or ID>  --type <type_of_log_to_collect> --cos-bucket <COS_bucket_name> --cos-endpoint <location_of_COS_bucket> --hmac-key-id <HMAC_access_key_ID> --hmac-key <HMAC_access_key> --type <log_type>
+  ibmcloud ks logging-collect --cluster <cluster name or ID> --cos-bucket <COS_bucket_name> --cos-endpoint <location_of_COS_bucket> --hmac-key-id <HMAC_access_key_ID> --hmac-key <HMAC_access_key>
   ```
   {: pre}
+
+  <table>
+  <caption>Understanding this command's components</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--cluster <em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td>The name or ID of the cluster.</td>
+      </tr>
+      <tr>
+        <td><code>--cos-bucket <em>&lt;COS_bucket_name&gt;</em></code></td>
+        <td>The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in.</td>
+      </tr>
+      <tr>
+        <td><code>--cos-endpoint <em>&lt;location_of_COS_bucket&gt;</em></code></td>
+        <td>The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) in the {{site.data.keyword.cos_short}} documentation.</td>
+      </tr>
+      <tr>
+        <td><code>--hmac-key-id <em>&lt;HMAC_access_key_ID&gt;</em></code></td>
+        <td>The unique ID for your HMAC credentials for your {{site.data.keyword.cos_short}} instance.</td>
+      </tr>
+      <tr>
+        <td><code>--hmac-key <em>&lt;HMAC_access_key&gt;</em></code></td>
+        <td>The HMAC key for your {{site.data.keyword.cos_short}} instance.</td>
+      </tr>
+    </tbody>
+  </table>
 
   Example command and response:
 

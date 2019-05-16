@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks
 
@@ -222,7 +222,7 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 <tr>
 <td>7 November</td>
 <td>Highly available masters</td>
-<td>Highly available masters are available for clusters that run Kubernetes version 1.10! All the benefits described in the earlier entry for 1.11 clusters apply to 1.10 clusters, as well as the [preparation steps](/docs/containers?topic=containers-cs_versions#110_ha-masters) that you must take.</td>
+<td>Highly available masters are available for clusters that run Kubernetes version 1.10! All the benefits described in the earlier entry for 1.11 clusters apply to 1.10 clusters, as well as the preparation steps that you must take.</td>
 </tr>
 <tr>
 <td>1 November</td>

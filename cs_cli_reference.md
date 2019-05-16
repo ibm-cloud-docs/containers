@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -464,6 +464,7 @@ ibmcloud plugin list
 ## API commands
 {: #api_commands}
 
+</br>
 ### ibmcloud ks api
 {: #cs_cli_api}
 
@@ -524,7 +525,7 @@ Region:                us-south
 ```
 {: screen}
 
-
+</br>
 ### ibmcloud ks api-key-info
 {: #cs_api_key_info}
 
@@ -565,7 +566,7 @@ ibmcloud ks api-key-info --cluster my_cluster
 ```
 {: pre}
 
-
+</br>
 ### ibmcloud ks api-key-reset
 {: #cs_api_key_reset}
 
@@ -599,7 +600,7 @@ ibmcloud ks api-key-reset --region us-south
 ```
 {: pre}
 
-
+</br>
 ### ibmcloud ks apiserver-config-get audit-webhook
 {: #cs_apiserver_config_get}
 
@@ -618,7 +619,7 @@ ibmcloud ks apiserver-config-get audit-webhook --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
-
+</br>
 ### ibmcloud ks apiserver-config-set audit-webhook
 {: #cs_apiserver_config_set}
 
@@ -659,6 +660,7 @@ ibmcloud ks apiserver-config-set audit-webhook --cluster my_cluster --remoteServ
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks apiserver-config-unset audit-webhook
 {: #cs_apiserver_config_unset}
 
@@ -678,11 +680,11 @@ ibmcloud ks apiserver-config-unset audit-webhook --cluster CLUSTER
 <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
 
-
+</br>
 ### ibmcloud ks apiserver-refresh (cluster-refresh)
 {: #cs_apiserver_refresh}
 
-Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks apiserver-config-set`, `apiserver-config-unset`, `cluster-feature-enable`, or `cluster-feature-disable` commands. If a configuration change requires a restart, the affected Kubernetes master component is restarted. If the configuration changes can be applied without a restart, no Kubernetes master component is restarted. Your worker nodes, apps, and resources are not modified and continue to run.
+Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks apiserver-config-set`, `apiserver-config-unset`, `cluster-feature-enable`, or `cluster-feature-disable` commands. The highly available Kubernetes master components are restarted in a rolling restart. Your worker nodes, apps, and resources are not modified and continue to run.
 {: shortdesc}
 
 ```
@@ -722,7 +724,7 @@ ibmcloud ks help
 
 **Command options**: None
 
-
+</br>
 ### ibmcloud ks init
 {: #cs_init}
 
@@ -780,7 +782,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
   ibmcloud ks init --host https://containers.cloud.ibm.com
   ```
   {: pre}
-
+</br>
 ### ibmcloud ks messages
 {: #cs_messages}
 
@@ -832,6 +834,7 @@ ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--json] [-s]
   ```
   {: pre}
 
+</br>
 ### ibmcloud ks cluster-addon-disable
 {: #cs_cluster_addon_disable}
 
@@ -940,7 +943,7 @@ ibmcloud ks cluster-addon-disable kube-terminal --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
-
+</br>
 ### ibmcloud ks cluster-addon-enable
 {: #cs_cluster_addon_enable}
 
@@ -1067,7 +1070,7 @@ ibmcloud ks cluster-addon-enable kube-terminal --cluster CLUSTER [--version VERS
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 </dl>
-
+</br>
 ### ibmcloud ks cluster-addons
 {: #cs_cluster_addons}
 
@@ -1088,7 +1091,7 @@ ibmcloud ks cluster-addons --cluster CLUSTER
 </dl>
 
 
-
+</br>
 ### ibmcloud ks cluster-config
 {: #cs_cluster_config}
 
@@ -1134,7 +1137,7 @@ ibmcloud ks cluster-config --cluster my_cluster
 ```
 {: pre}
 
-
+</br>
 ### ibmcloud ks cluster-create
 {: #cs_cluster_create}
 
@@ -1180,7 +1183,7 @@ trusted: <em>true</em>
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>The zone where you want to create the cluster. This value is required for standard clusters. Free clusters can be created in the region that you target with the <code>ibmcloud ks region-set</code> command, but you cannot specify the zone.
 
-<p>Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</p>
+<p>Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones). To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).</p>
 
 <p class="note">When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
 </dd>
@@ -1189,7 +1192,7 @@ trusted: <em>true</em>
 <dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-types` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>The name for the cluster.  This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+<dd>The name for the cluster.  This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
@@ -1268,6 +1271,7 @@ ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --privat
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks cluster-feature-disable public-service-endpoint
 {: #cs_cluster_feature_disable}
 
@@ -1301,7 +1305,7 @@ ibmcloud ks cluster-feature-disable public-service-endpoint --cluster my_cluster
 ```
 {: pre}
 
-
+</br>
 ### ibmcloud ks cluster-feature-enable
 {: #cs_cluster_feature_enable}
 
@@ -1407,6 +1411,7 @@ ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks cluster-get
 {: #cs_cluster_get}
 
@@ -1470,6 +1475,7 @@ VLAN ID   Subnet CIDR         Public   User-managed
 ```
 {: screen}
 
+</br>
 ### ibmcloud ks cluster-pull-secret-apply
 {: #cs_cluster_pull_secret_apply}
 
@@ -1500,7 +1506,7 @@ ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
-
+</br>
 ### ibmcloud ks cluster-rm
 {: #cs_cluster_rm}
 
@@ -1535,6 +1541,7 @@ ibmcloud ks cluster-rm --cluster my_cluster
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks cluster-update
 {: #cs_cluster_update}
 
@@ -1574,6 +1581,7 @@ ibmcloud ks cluster-update --cluster my_cluster
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks clusters
 {: #cs_clusters}
 
@@ -1610,7 +1618,7 @@ ibmcloud ks clusters --locations ams03,wdc,ap
 ```
 {: pre}
 
-
+</br>
 ### ibmcloud ks kube-versions
 {: #cs_kube_versions}
 
@@ -1645,7 +1653,6 @@ ibmcloud ks kube-versions
 
 ## Cluster commands: Services and integrations
 {: #cluster_services_commands}
-
 
 ### ibmcloud ks cluster-service-bind
 {: #cs_cluster_service_bind}
@@ -1690,6 +1697,7 @@ ibmcloud ks cluster-service-bind --cluster my_cluster --namespace my_namespace -
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks cluster-service-unbind
 {: #cs_cluster_service_unbind}
 
@@ -1727,7 +1735,7 @@ ibmcloud ks cluster-service-unbind --cluster my_cluster --namespace my_namespace
 ```
 {: pre}
 
-
+</br>
 ### ibmcloud ks cluster-services
 {: #cs_cluster_services}
 
@@ -1765,6 +1773,7 @@ ibmcloud ks cluster-services --cluster my_cluster --namespace my_namespace
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks va
 {: #cs_va}
 
@@ -1804,6 +1813,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks key-protect-enable
 {: #cs_key_protect}
 
@@ -1841,7 +1851,7 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 ```
 {: pre}
 
-
+</br>
 ### ibmcloud ks webhook-create
 {: #cs_webhook_create}
 
@@ -1920,6 +1930,7 @@ ibmcloud ks cluster-subnet-add --cluster my_cluster --subnet-id 1643389
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks cluster-subnet-create
 {: #cs_cluster_subnet_create}
 
@@ -1957,6 +1968,7 @@ ibmcloud ks cluster-subnet-create --cluster my_cluster --size 8 --vlan 1764905
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks cluster-user-subnet-add
 {: #cs_cluster_user_subnet_add}
 
@@ -1993,6 +2005,7 @@ ibmcloud ks cluster-user-subnet-add --cluster my_cluster --subnet-cidr 169.xx.xx
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks cluster-user-subnet-rm
 {: #cs_cluster_user_subnet_rm}
 
@@ -2023,6 +2036,7 @@ ibmcloud ks cluster-user-subnet-rm --cluster my_cluster --subnet-cidr 169.xx.xxx
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks subnets
 {: #cs_subnets}
 
@@ -2085,6 +2099,7 @@ ibmcloud ks alb-autoupdate-disable --cluster mycluster
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks alb-autoupdate-enable
 {: #cs_alb_autoupdate_enable}
 
@@ -2100,6 +2115,7 @@ ibmcloud ks alb-autoupdate-enable --cluster CLUSTER
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
+</br>
 ### ibmcloud ks alb-autoupdate-get
 {: #cs_alb_autoupdate_get}
 
@@ -2113,6 +2129,7 @@ ibmcloud ks alb-autoupdate-get --cluster CLUSTER
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
+</br>
 ### ibmcloud ks alb-cert-deploy
 {: #cs_alb_cert_deploy}
 
@@ -2164,6 +2181,7 @@ ibmcloud ks alb-cert-deploy --update --secret-name my_alb_secret --cluster my_cl
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks alb-cert-get
 {: #cs_alb_cert_get}
 
@@ -2210,6 +2228,7 @@ ibmcloud ks alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks alb-cert-rm
 {: #cs_alb_cert_rm}
 
@@ -2257,6 +2276,7 @@ ibmcloud ks alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cl
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks alb-certs
 {: #cs_alb_certs}
 
@@ -2289,6 +2309,7 @@ ibmcloud ks alb-certs --cluster my_cluster
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks alb-configure
 {: #cs_alb_configure}
 
@@ -2349,7 +2370,7 @@ ibmcloud ks alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
 {: pre}
 
 
-
+</br>
 ### ibmcloud ks alb-get
 {: #cs_alb_get}
 
@@ -2381,6 +2402,7 @@ ibmcloud ks alb-get --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks alb-rollback
 {: #cs_alb_rollback}
 
@@ -2396,6 +2418,7 @@ ibmcloud ks alb-rollback --cluster CLUSTER
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
+</br>
 ### ibmcloud ks alb-types
 {: #cs_alb_types}
 
@@ -2417,7 +2440,7 @@ ibmcloud ks alb-types [--json] [-s]
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
-
+</br>
 ### ibmcloud ks alb-update
 {: #cs_alb_update}
 
@@ -2435,6 +2458,7 @@ ibmcloud ks alb-update --cluster CLUSTER
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
+</br>
 ### ibmcloud ks albs
 {: #cs_albs}
 
@@ -2506,6 +2530,7 @@ ibmcloud ks credential-get --region us-south
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks credential-set
 {: #cs_credentials_set}
 
@@ -2549,6 +2574,7 @@ ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-u
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
@@ -2580,7 +2606,7 @@ ibmcloud ks credential-unset --region us-south
 {: pre}
 
 
-
+</br>
 ### ibmcloud ks machine-types
 {: #cs_machine_types}
 
@@ -2616,6 +2642,7 @@ ibmcloud ks machine-types --zone dal10
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks vlan-spanning-get
 {: #cs_vlan_spanning_get}
 
@@ -2647,6 +2674,7 @@ ibmcloud ks vlan-spanning-get --region us-south
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks <ph class="ignoreSpelling">vlans</ph>
 {: #cs_vlans}
 
@@ -2707,7 +2735,7 @@ ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster where you want to disable automatic updates for the Fluentd add-on. This value is required.</dd>
 </dl>
-
+</br>
 ### ibmcloud ks logging-autoupdate-enable
 {: #cs_log_autoupdate_enable}
 
@@ -2724,7 +2752,7 @@ ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster where you want to enable automatic updates for the Fluentd add-on. This value is required.</dd>
 </dl>
-
+</br>
 ### ibmcloud ks logging-autoupdate-get
 {: #cs_log_autoupdate_get}
 
@@ -2741,7 +2769,7 @@ ibmcloud ks logging-autoupdate-get --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster where you want to check if automatic updates for the Fluentd add-on are enabled. This value is required.</dd>
 </dl>
-
+</br>
 ### ibmcloud ks logging-collect
 {: #cs_log_collect}
 
@@ -2758,22 +2786,22 @@ ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-end
 **Command options**:
 <dl>
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster that you want to create a snapshot for. This value is required.</dd>
+<dd>The name or ID of the cluster that you want to create a snapshot for.</dd>
 
 <dt><code>--cos-bucket <em>BUCKET_NAME</em></code></dt>
-<dd>The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in. This value is required.</dd>
+<dd>The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in.</dd>
 
 <dt><code>--cos-endpoint <em>ENDPOINT</em></code></dt>
-<dd>The {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. This value is required.</dd>
+<dd>The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) in the {{site.data.keyword.cos_short}} documentation.</dd>
 
 <dt><code>--hmac-key-id <em>HMAC_KEY_ID</em></code></dt>
-<dd>The unique ID for your HMAC credentials for your Object Storage instance. This value is required.</dd>
+<dd>The unique ID for your HMAC credentials for your {{site.data.keyword.cos_short}} instance.</dd>
 
 <dt><code>--hmac-key <em>HMAC_KEY</em></code></dt>
-<dd>The HMAC key for your {{site.data.keyword.cos_short}} instance. This value is required.</dd>
+<dd>The HMAC key for your {{site.data.keyword.cos_short}} instance.</dd>
 
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
-<dd>The type of logs that you want to create a snapshot of. Currently, `master` is the only option, as well as the default.</dd>
+<dd>Optional: The type of logs that you want to create a snapshot of. Currently, `master` is the only option, as well as the default.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2796,6 +2824,7 @@ The log collection request was successfully submitted. To view the status of the
 ```
 {: screen}
 
+</br>
 ### ibmcloud ks logging-collect-status
 {: #cs_log_collect_status}
 
@@ -2840,6 +2869,7 @@ s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-2-0862ae70a9ae6c19845b
 ```
 {: screen}
 
+</br>
 ### ibmcloud ks logging-config-create
 {: #cs_logging_create}
 
@@ -2915,6 +2945,7 @@ ibmcloud ks logging-config-create --cluster my_cluster --logsource container --h
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks logging-config-get
 {: #cs_logging_get}
 
@@ -2952,6 +2983,7 @@ ibmcloud ks logging-config-get --cluster my_cluster --logsource worker
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks logging-config-refresh
 {: #cs_logging_refresh}
 
@@ -2983,6 +3015,7 @@ ibmcloud ks logging-config-refresh --cluster CLUSTER [--force-update] [-s]
   ```
   {: pre}
 
+</br>
 ### ibmcloud ks logging-config-rm
 {: #cs_logging_rm}
 
@@ -3020,6 +3053,7 @@ ibmcloud ks logging-config-rm --cluster my_cluster --id f4bc77c0-ee7d-422d-aabf-
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks logging-config-update
 {: #cs_logging_update}
 
@@ -3092,6 +3126,7 @@ ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
   ```
   {: pre}
 
+</br>
 ### ibmcloud ks logging-filter-create
 {: #cs_log_filter_create}
 
@@ -3155,6 +3190,7 @@ ibmcloud ks logging-filter-create --cluster example-cluster --type all --level i
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks logging-filter-get
 {: #cs_log_filter_view}
 
@@ -3195,6 +3231,7 @@ ibmcloud ks logging-filter-get --cluster mycluster --id 885732 --show-matching-c
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks logging-filter-rm
 {: #cs_log_filter_delete}
 
@@ -3232,6 +3269,7 @@ ibmcloud ks logging-filter-rm --cluster mycluster --id 885732
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks logging-filter-update
 {: #cs_log_filter_update}
 
@@ -3346,6 +3384,7 @@ ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks nlb-dns-create
 {: #cs_nlb-dns-create}
 
@@ -3380,6 +3419,7 @@ ibmcloud ks nlb-dns-create --cluster mycluster --ip 1.1.1.1
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks nlb-dns-rm
 {: #cs_nlb-dns-rm}
 
@@ -3417,6 +3457,7 @@ ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks nlb-dnss
 {: #cs_nlb-dns-ls}
 
@@ -3448,12 +3489,14 @@ ibmcloud ks nlb-dnss --cluster mycluster
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks nlb-dns-monitor
 {: #cs_nlb-dns-monitor}
 
 Create, modify, and view health check monitors for network load balancer host names in a cluster. This command must be combined with one of the following subcommands.
 {: shortdesc}
 
+</br>
 ### ibmcloud ks nlb-dns-monitor-configure
 {: #cs_nlb-dns-monitor-configure}
 
@@ -3532,6 +3575,7 @@ ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks nlb-dns-monitor-get
 {: #cs_nlb-dns-monitor-get}
 
@@ -3566,6 +3610,7 @@ ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cde
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks nlb-dns-monitor-disable
 {: #cs_nlb-dns-monitor-disable}
 
@@ -3600,6 +3645,7 @@ ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host mycluster-a1b
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks nlb-dns-monitor-enable
 {: #cs_nlb-dns-monitor-enable}
 
@@ -3636,6 +3682,7 @@ ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host mycluster-a1b2
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks nlb-dns-monitor-status
 {: #cs_nlb-dns-monitor-status}
 
@@ -3670,6 +3717,7 @@ ibmcloud ks nlb-dns-monitor-status --cluster mycluster
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks nlb-dns-monitors
 {: #cs_nlb-dns-monitor-ls}
 
@@ -3718,11 +3766,7 @@ Find the {{site.data.keyword.containerlong_notm}} region that you are currently 
 
 You can work with resources that you have access to in any location, even if you set a region by running `ibmcloud ks region-set` and the resource that you want to work with is in another region. If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region-set` command and use the cluster name when you run commands.
 
-<p class="deprecated">
-Legacy behavior:<ul>
-<li>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](/docs/containers?topic=containers-cs_cli_reference#cs_init) to target a regional endpoint instead of the global endpoint.</li>
-<li>If you [set the <code>IKS_BETA_VERSION</code> environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to <code>0.2</code>](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_beta), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region set</code> command to change regions.</li></ul>
-</p>
+<p class="deprecated">Legacy behavior:<ul><li>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](/docs/containers?topic=containers-cs_cli_reference#cs_init) to target a regional endpoint instead of the global endpoint.</li><li>If you [set the <code>IKS_BETA_VERSION</code> environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to <code>0.2</code>](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_beta), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region set</code> command to change regions.</li></ul></p>
 
 ```
 ibmcloud ks region-get
@@ -3731,6 +3775,7 @@ ibmcloud ks region-get
 
 **Minimum required permissions**: None
 
+</br>
 ### ibmcloud ks region-set
 {: #cs_region-set}
 
@@ -3762,6 +3807,7 @@ ibmcloud ks region set --region eu-central
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks regions
 {: #cs_regions}
 
@@ -3788,6 +3834,7 @@ us-south      us-south
 ```
 {: screen}
 
+</br>
 ### ibmcloud ks supported-locations
 {: #cs_supported-locations}
 
@@ -3801,6 +3848,7 @@ ibmcloud ks supported-locations
 
 **Minimum required permissions**: None
 
+</br>
 ### ibmcloud ks zones
 {: #cs_datacenters}
 
@@ -3949,6 +3997,7 @@ ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks worker-get
 {: #cs_worker_get}
 
@@ -4000,6 +4049,7 @@ ibmcloud ks worker-get --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b
   ```
   {: screen}
 
+</br>
 ### ibmcloud ks worker-reboot
 {: #cs_worker_reboot}
 
@@ -4085,6 +4135,7 @@ ibmcloud ks worker-reboot --cluster my_cluster --worker kube-dal10-cr18a61a63a6a
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks worker-reload
 {: #cs_worker_reload}
 
@@ -4163,6 +4214,7 @@ ibmcloud ks worker-reload --cluster my_cluster --workers kube-dal10-cr18a61a63a6
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks worker-rm
 {: #cs_worker_rm}
 
@@ -4236,6 +4288,7 @@ ibmcloud ks worker-rm --cluster my_cluster --workers kube-dal10-cr18a61a63a6a94b
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks worker-update
 {: #cs_worker_update}
 
@@ -4278,6 +4331,7 @@ ibmcloud ks worker-update --cluster my_cluster --worker kube-dal10-cr18a61a63a6a
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks workers
 {: #cs_workers}
 
@@ -4376,6 +4430,7 @@ ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-typ
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks worker-pool-get
 {: #cs_worker_pool_get}
 
@@ -4421,10 +4476,11 @@ ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
   Workers per zone:   3
   Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.12.8_1512
+  Version:            1.13.6_1512
   ```
   {: screen}
 
+</br>
 ### ibmcloud ks worker-pool-rebalance
 {: #cs_rebalance}
 
@@ -4456,6 +4512,7 @@ ibmcloud ks worker-pool-rebalance --cluster my_cluster --worker-pool my_pool
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks worker-pool-resize
 {: #cs_worker_pool_resize}
 
@@ -4491,6 +4548,7 @@ ibmcloud ks worker-pool-resize --cluster my_cluster --worker-pool my_pool --size
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks worker-pool-rm
 {: #cs_worker_pool_rm}
 
@@ -4522,6 +4580,7 @@ ibmcloud ks worker-pool-rm --cluster my_cluster --worker-pool pool1
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks worker-pools
 {: #cs_worker_pools}
 
@@ -4553,6 +4612,7 @@ ibmcloud ks worker-pools --cluster my_cluster
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks zone-add
 {: #cs_zone_add}
 
@@ -4604,23 +4664,12 @@ ibmcloud ks zone-add --zone dal10 --cluster my_cluster --worker-pools pool1,pool
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks zone-network-set
 {: #cs_zone_network_set}
 
 **Multizone clusters only**: Set the network metadata for a worker pool to use a different public or private VLAN for the zone than it previously used. Worker nodes that were already created in the pool continue to use the previous public or private VLAN, but new worker nodes in the pool use the new network data.
 {: shortdesc}
-
-Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.
-<ol><li>Check the VLANs that are available in your cluster. <pre class="pre"><code>ibmcloud ks cluster get --cluster &lt;cluster_name_or_ID&gt; --showResources</code></pre><p>Example output:</p>
-<pre class="screen"><code>Subnet VLANs
-VLAN ID   Subnet CIDR         Public   User-managed
-229xxxx   169.xx.xxx.xxx/29   true     false
-229xxxx   10.xxx.xx.x/29      false    false</code></pre></li>
-<li>Check that the public and private VLAN IDs that you want to use are compatible. To be compatible, the <strong>Router</strong> must have the same pod ID.<pre class="pre"><code>ibmcloud ks vlans --zone &lt;zone&gt;</code></pre><p>Example output:</p>
-<pre class="screen"><code>ID        Name   Number   Type      Router         Supports Virtual Workers
-229xxxx          1234     private   bcr01a.dal12   true
-229xxxx          5678     public    fcr01a.dal12   true</code></pre><p>Note that <strong>Router</strong> pod IDs match: `01a` and `01a`. If one pod ID were `01a` and the other were `02a`, you cannot set these public and private VLAN IDs for your worker pool.</p></li>
-<li>If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans">order new VLANs</a>.</li></ol>
 
 ```
 ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [-f] [-s]
@@ -4653,12 +4702,25 @@ ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
+**Usage**:
+<ol><li>Check the VLANs that are available in your cluster. <pre class="pre"><code>ibmcloud ks cluster get --cluster &lt;cluster_name_or_ID&gt; --showResources</code></pre><p>Example output:</p>
+<pre class="screen"><code>Subnet VLANs
+VLAN ID   Subnet CIDR         Public   User-managed
+229xxxx   169.xx.xxx.xxx/29   true     false
+229xxxx   10.xxx.xx.x/29      false    false</code></pre></li>
+<li>Check that the public and private VLAN IDs that you want to use are compatible. To be compatible, the <strong>Router</strong> must have the same pod ID. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.<pre class="pre"><code>ibmcloud ks vlans --zone &lt;zone&gt;</code></pre><p>Example output:</p>
+<pre class="screen"><code>ID        Name   Number   Type      Router         Supports Virtual Workers
+229xxxx          1234     private   bcr01a.dal12   true
+229xxxx          5678     public    fcr01a.dal12   true</code></pre><p>Note that <strong>Router</strong> pod IDs match: `01a` and `01a`. If one pod ID were `01a` and the other were `02a`, you cannot set these public and private VLAN IDs for your worker pool.</p></li>
+<li>If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans">order new VLANs</a>.</li></ol>
+
 **Example**:
 ```
 ibmcloud ks zone-network-set --zone dal10 --cluster my_cluster --worker-pools pool1,pool2,pool3 --private-vlan 2294021
 ```
 {: pre}
 
+</br>
 ### ibmcloud ks zone-rm
 {: #cs_zone_rm}
 
