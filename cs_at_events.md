@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks, audit
 
@@ -267,13 +267,13 @@ Before you begin: Be sure that your cluster is configured to forward [Kubernetes
     <td><code>limitranges.update</code></td>
     <td>A range limit is updated.</td></tr><tr>
     <td><code>mutatingwebhookconfigurations.create</code></td>
-    <td>In Kubernetes v1.9 and later, a mutating webhook configuration is created.</td></tr><tr>
+    <td>A mutating webhook configuration is created.</td></tr><tr>
     <td><code>mutatingwebhookconfigurations.delete</code></td>
-    <td>In Kubernetes v1.9 and later, a mutating webhook configuration is deleted.</td></tr><tr>
+    <td>A mutating webhook configuration is deleted.</td></tr><tr>
     <td><code>mutatingwebhookconfigurations.patch</code></td>
-    <td>In Kubernetes v1.9 and later, a mutating webhook configuration is patched.</td></tr><tr>
+    <td>A mutating webhook configuration is patched.</td></tr><tr>
     <td><code>mutatingwebhookconfigurations.update</code></td>
-    <td>In Kubernetes v1.9 and later, a mutating webhook configuration is updated.</td></tr><tr>
+    <td>A mutating webhook configuration is updated.</td></tr><tr>
     <td><code>namespaces.create</code></td>
     <td>A namespace is created.</td></tr><tr>
     <td><code>namespaces.delete</code></td>
@@ -437,11 +437,11 @@ Before you begin: Be sure that your cluster is configured to forward [Kubernetes
     <td><code>tokenreviews.create</code></td>
     <td>A token review is created.</td></tr><tr>
     <td><code>validatingwebhookconfigurations.create</code></td>
-    <td>In Kubernetes v1.9 and later, a webhook configuration validation is created.</td></tr><tr>
+    <td>A webhook configuration validation is created.</td></tr><tr>
     <td><code>validatingwebhookconfigurations.delete</code></td>
-    <td>In Kubernetes v1.9 and later, a webhook configuration validation is deleted.</td></tr><tr>
+    <td>A webhook configuration validation is deleted.</td></tr><tr>
     <td><code>validatingwebhookconfigurations.patch</code></td>
-    <td>In Kubernetes v1.9 and later, a webhook configuration validation is patched.</td></tr><tr>
+    <td>A webhook configuration validation is patched.</td></tr><tr>
     <td><code>validatingwebhookconfigurations.update</code></td>
-    <td>In Kubernetes v1.9 and later, a webhook configuration validation is updated.</td></tr>
+    <td>A webhook configuration validation is updated.</td></tr>
 </table>

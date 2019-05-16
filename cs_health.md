@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-15"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -66,7 +66,7 @@ For more information about the types of {{site.data.keyword.containerlong_notm}}
 <dd>To collect, forward, and view logs for your cluster's Kubernetes master, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies. To get started, see [Collecting master logs](#collect_master).</dd>
 
 <dt>Third-party services</dt>
-<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). In clusters that run Kubernetes version 1.11 or later, you can collect container logs from the `/var/log/pods/` path. In clusters that run Kubernetes version 1.10 or earlier, you can collect container logs from the `/var/lib/docker/containers/` path.</dd>
+<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). You can collect container logs from the `/var/log/pods/` path.</dd>
 
 </dl>
 

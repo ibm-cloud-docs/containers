@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks
 
@@ -651,9 +651,6 @@ To upgrade your strongSwan Helm chart to the latest version:
   helm upgrade -f config.yaml <release_name> ibm/strongswan
   ```
   {: pre}
-
-The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](/docs/containers?topic=containers-cs_versions#cs_v110), first update strongSwan to the 2.2.0 or later Helm chart, which are backward compatible with Calico 2.6 and Kubernetes 1.9. Next, delete your strongSwan Helm chart. Then, after the update, you can reinstall the chart.
-{:tip}
 
 ## Disabling the strongSwan IPSec VPN service
 {: vpn_disable}
