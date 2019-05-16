@@ -626,7 +626,7 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 ### Updating to highly available cluster masters in Kubernetes 1.11
 {: #ha-masters}
 
-For clusters that run Kubernetes version [1.10.8_1530](#110_ha-masters), 1.11.3_1531, or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
+For clusters that run Kubernetes version 1.10.8_1530, 1.11.3_1531, or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
 {: shortdesc}
 
 You can check if your cluster has an HA master configuration by checking the cluster's master URL in the console or by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID`. If the master URL has a host name such as ` https://c2.us-south.containers.cloud.ibm.com:xxxxx` and not an IP address such as ` https://169.xx.xx.xx:xxxxx`, the cluster has an HA master configuration. You might get an HA master configuration because of an automatic master patch update or by applying an update manually. In either case, you still must review the following items to ensure that your cluster network is set up to take full advantage of the configuration.

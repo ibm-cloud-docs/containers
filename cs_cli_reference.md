@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-15"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -2792,7 +2792,7 @@ ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-end
 <dd>The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in.</dd>
 
 <dt><code>--cos-endpoint <em>ENDPOINT</em></code></dt>
-<dd>The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) in the {{site.data.keyword.cos_short}} documentation.</dd>
+<dd>The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) in the {{site.data.keyword.cos_short}} documentation.</dd>
 
 <dt><code>--hmac-key-id <em>HMAC_KEY_ID</em></code></dt>
 <dd>The unique ID for your HMAC credentials for your {{site.data.keyword.cos_short}} instance.</dd>
