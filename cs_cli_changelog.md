@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-16"
 
 keywords: kubernetes, iks
 
@@ -195,7 +195,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.1.591</td>
 <td>02 Oct 2018</td>
-<td>Adds support for [resource groups](/docs/containers?topic=containers-clusters#prepare_account_level).</td>
+<td>Adds support for [resource groups](/docs/containers?topic=containers-clusters#prepare_account_level)</td>
 </tr>
 <tr>
 <td>0.1.590</td>
