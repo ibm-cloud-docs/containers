@@ -2955,7 +2955,7 @@ Unsupported Kubernetes versions:
 ### Version 1.10 changelog (unsupported as of 16 May 2019)
 {: #110_changelog}
 
-Review the version 1.10 changelog.
+Review the version 1.10 changelogs.
 {: shortdesc}
 
 *   [Changelog for worker node fix pack 1.10.13_1558, released 13 May 2019](#11013_1558)
@@ -3071,7 +3071,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.10.13_1555, released 8 April 2019
+#### Changelog for 1.10.13_1555, released 8 April 2019
 {: #11013_1555}
 
 The following table shows the changes that are included in the patch 1.10.13_1555.
@@ -3765,7 +3765,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.10.8_1527, released 15 October 2018
+#### Changelog for master fix pack 1.10.8_1527, released 15 October 2018
 {: #1108_1527}
 
 The following table shows the changes that are included in the master fix pack 1.10.8_1527.
@@ -4329,7 +4329,9 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 ### Version 1.9 changelog (unsupported as of 27 December 2018)
 {: #19_changelog}
 
-Review the version 1.9 changelog.
+Review the version 1.9 changelogs.
+{: shortdesc}
+
 *   [Changelog for worker node fix pack 1.9.11_1539, released 17 December 2018](#1911_1539)
 *   [Changelog for worker node fix pack 1.9.11_1538, released 4 December 2018](#1911_1538)
 *   [Changelog for worker node fix pack 1.9.11_1537, released 27 November 2018](#1911_1537)
@@ -5055,7 +5057,9 @@ The following table shows the changes that are included in patch 1.9.7_1510.
 ### Version 1.8 changelog (Unsupported)
 {: #18_changelog}
 
-Review the following changes.
+Review the version 1.8 changelogs.
+{: shortdesc}
+
 *   [Changelog for worker node fix pack 1.8.15_1521, released 20 September 2018](#1815_1521)
 *   [Changelog for worker node fix pack 1.8.15_1520, released 23 August 2018](#1815_1520)
 *   [Changelog for worker node fix pack 1.8.15_1519, released 13 August 2018](#1815_1519)
@@ -5415,7 +5419,9 @@ Review the following changes.
 ### Version 1.7 changelog (Unsupported)
 {: #17_changelog}
 
-Review the following changes.
+Review the version 1.7 changelogs.
+{: shortdesc}
+
 *   [Changelog for worker node fix pack 1.7.16_1514, released 11 June 2018](#1716_1514)
 *   [Changelog for worker node fix pack 1.7.16_1513, released 18 May 2018](#1716_1513)
 *   [Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018](#1716_1512)
