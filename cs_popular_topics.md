@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-20"
 
 keywords: kubernetes, iks
 
@@ -80,7 +80,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <td>Introducing private service endpoints for your Kubernetes cluster master</td>
 <td>By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access on a public and private VLAN. Previously, if you wanted a [private VLAN-only cluster](/docs/containers?topic=containers-plan_clusters#private_clusters), you needed to set up a gateway device to connect the cluster's worker nodes with the master. Now, you can use the private service endpoint. With the private service endpoint enabled, all traffic between the worker nodes and the master is on the private network, without the need for a gateway device device. In addition to this increased security, inbound and outbound traffic on the private network is [unlimited and not charged ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth). You can still keep a public service endpoint for secure access to your Kubernetes master over the internet, for example to run `kubectl` commands without being on the private network.<br><br>
 To use private service endpoints, you must enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) for your IBM Cloud infrastructure (SoftLayer) account. Your cluster must run Kubernetes version 1.11 or later. If your cluster runs an earlier Kubernetes version, [update to at least 1.11](/docs/containers?topic=containers-update#update). For more information, check out the following links:<ul>
-<li>[Service endpoints for worker-to-master and user-to-master communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
+<li>[Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master)</li>
 <li>[Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[Switching from public to private service endpoints](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>If you have a firewall on the private network, [adding the private IP addresses for {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, and other {{site.data.keyword.Bluemix_notm}} services](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
@@ -183,7 +183,7 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 </tr>
 <tr>
 <td>4 December</td>
-<td>[Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node)</td>
+<td>[Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)</td>
 <td>Are you deploying so many apps that you’re worried about exceeding your cluster capacity? Worker node resource reserves and Kubernetes evictions protect your cluster’s compute capacity so that your cluster has enough resources to keep running. Just add a few more worker nodes, and your pods start rescheduling to them automatically. Worker node resource reserves are updated in the latest [version patch changes](/docs/containers?topic=containers-changelog#changelog).</td>
 </tr>
 </tbody></table>
@@ -290,7 +290,7 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 <td>[New zones available](/docs/containers?topic=containers-regions-and-zones)</td>
 <td>Now you have even more options of where to deploy your apps!
 <ul><li>Welcome to San Jose as two new zones in the US South region, `sjc03` and `sjc04`. If you have a firewall, be sure to [open the firewall ports](/docs/containers?topic=containers-firewall#firewall) for this zone and the others within the region that your cluster is in.</li>
-<li>With two new `tok04` and `tok05` zones, you can now [create multizone clusters](/docs/containers?topic=containers-plan_clusters#multizone) in Tokyo in the AP North region.</li></ul></td>
+<li>With two new `tok04` and `tok05` zones, you can now [create multizone clusters](/docs/containers?topic=containers-ha_clusters#multizone) in Tokyo in the AP North region.</li></ul></td>
 </tr>
 <tr>
 <td>05 September</td>
@@ -341,7 +341,7 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 <tr>
 <td>10 July</td>
 <td>Introducing multizone clusters</td>
-<td>Want to improve cluster availability? Now you can span your cluster across multiple zones in select metro areas. For more information, see [Creating multizone clusters in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_clusters#multizone).</td>
+<td>Want to improve cluster availability? Now you can span your cluster across multiple zones in select metro areas. For more information, see [Creating multizone clusters in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha_clusters#multizone).</td>
 </tr>
 </tbody></table>
 
@@ -394,7 +394,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tr>
 <td>14 May</td>
 <td>[Update: Deploy workloads on GPU bare metal worldwide](/docs/containers?topic=containers-app#gpu_app)</td>
-<td>If you have a [bare metal graphics processing unit (GPU) machine type](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
+<td>If you have a [bare metal graphics processing unit (GPU) machine type](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
 </tr>
 <tr>
 <td>03 May</td>
@@ -452,7 +452,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tbody>
 <tr>
 <td>16 March</td>
-<td>[Provision a bare metal cluster with Trusted Compute](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)</td>
+<td>[Provision a bare metal cluster with Trusted Compute](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)</td>
 <td>Create a bare metal cluster that runs [Kubernetes version 1.9](/docs/containers?topic=containers-cs_versions#cs_v19) or later, and enable Trusted Compute to verify your worker nodes against tampering.</td>
 </tr>
 <tr>

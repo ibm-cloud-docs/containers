@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-20"
 
 ---
 
@@ -159,12 +159,6 @@ The following image shows network connectivity for worker nodes that are connect
 </p>
 
 If you want to create a multizone cluster, if you have multiple VLANs for a cluster, or if you have multiple subnets on the same VLAN, the worker nodes on different subnets in the same VLAN or in different VLANs cannot automatically communicate with each other. You must enable either [VRF or VLAN spanning](#cs_network_ov_basics_segmentation) for your IBM Cloud infrastructure (SoftLayer) account. Choose VRF to enable the [private service endpoint for master-to-worker communication](#cs_network_ov_master_private). If you cannot or do not want to enable VRF, you must enable VLAN spanning and also configure a gateway device for master-to-worker communication.
-
-### I made my choice for VLAN connections. How do I set them up?
-{: #cs_network_ov_worker_setup}
-
-You can follow the steps in [Setting up cluster networking with a public and a private VLAN](/docs/containers?topic=containers-cs_network_cluster#both_vlans) or [Setting up cluster networking with a private VLAN only](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan).
-{: shortdesc}
 
 ### Can I change my VLAN decision later? Do my worker node IP addresses change?
 {: #cs_network_ov_worker_change}

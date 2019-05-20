@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-20"
 
 ---
 
@@ -190,40 +190,63 @@ lastupdated: "2019-05-16"
 * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
 * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
-## Administering clusters
+## Setting up clusters
+{: #sitemap-setup-clusters}
+
+[Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
+* [Understanding cluster network basics](/docs/containers?topic=containers-plan_clusters#plan_basics)
+  * [Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker)
+  * [Master-to-worker communication](/docs/containers?topic=containers-plan_clusters#workeruser-master)
+  * [Worker communication to other {{site.data.keyword.Bluemix_notm}} services or on-premises networks](/docs/containers?topic=containers-plan_clusters#worker-services-onprem)
+  * [External communication to apps running on worker nodes](docs/containers?topic=containers-plan_clusters#external-workers)
+* [Scenario: Run internet-facing app workloads in a cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
+* [Scenario: Extend your on-premises datacenter to a cluster on the private network and add limited public access](/docs/containers?topic=containers-plan_clusters#internet-facing)
+  * [Using edge nodes and Calico network policies](/docs/containers?topic=containers-plan_clusters#internet-facing)
+  * [Using a gateway device](/docs/containers?topic=containers-plan_clusters#internet-facing)
+* [Scenario: Extend your on-premises datacenter to a cluster on the private network](/docs/containers?topic=containers-plan_clusters#internet-facing)
+
+[Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters)
+* [Single zone cluster](/docs/containers?topic=containers-ha_clusters#single_zone)
+* [Multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone)
+  * [Tell me more about the multizone cluster setup](/docs/containers?topic=containers-ha_clusters#mz_setup)
+  * [What are some changes from how I currently manage my clusters?](/docs/containers?topic=containers-ha_clusters#mz_new_ways)
+* [Multiple clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple_clusters)
+
+[Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes)
+* [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
+* [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm)
+* [Physical machines (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm)
+* [Software-defined storage (SDS) machines](/docs/containers?topic=containers-planning_worker_nodes#sds)
+* [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
+
+[Creating clusters](/docs/containers?topic=containers-clusters)
+* [Account-level](/docs/containers?topic=containers-clusters#cluster_prepare)
+* [Cluster-level](/docs/containers?topic=containers-clusters#prepare_cluster_level)
+* [Creating a free cluster](/docs/containers?topic=containers-clusters#clusters_free)
+  * [Creating a free cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui_free)
+  * [Creating a free cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_free)
+* [Creating a free cluster](/docs/containers?topic=containers-clusters#clusters_standard)
+  * [Creating a standard cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
+  * [Creating a standard cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
+* [Accessing your cluster](/docs/containers?topic=containers-clusters#access_cluster)
+  * [Accessing clusters that run internet-facing workloads](/docs/containers?topic=containers-clusters#access_internet)
+  * [Accessing clusters that extend your on-premises datacenter](/docs/containers?topic=containers-clusters#access_on_prem)
+* [Next steps](/docs/containers?topic=containers-clusters#next_steps)
+  * [Run internet-facing app workloads in a cluster](/docs/containers?topic=containers-clusters#next_steps_internet)
+  * [Extend your on-premises datacenter to a cluster and allow limited public access using edge nodes and Calico network policies](/docs/containers?topic=containers-clusters#next_steps_calico)
+  * [Extend your on-premises datacenter to a cluster and allow limited public access using a gateway device](/docs/containers?topic=containers-clusters#next_steps_gateway)
+  * [Extend your on-premises datacenter to a cluster on the private network only](/docs/containers?topic=containers-clusters#next_steps_extend)
+
+[Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
+* [Adding worker nodes by resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool)
+* [Adding worker nodes by creating a new worker pool](/docs/containers?topic=containers-add_workers#add_pool)
+* [Adding worker nodes by adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#add_zone)
+* [Deprecated: Adding stand-alone worker nodes](/docs/containers?topic=containers-add_workers#standalone)
+* [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
+* [Autorecovery for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
+
+Administering clusters
 {: #sitemap-clusters-admin}
-
-[Planning your cluster and worker node setup](/docs/containers?topic=containers-plan_clusters#plan_clusters)
-* [Highly available clusters](/docs/containers?topic=containers-plan_clusters#ha_clusters)
-* [Single zone cluster](/docs/containers?topic=containers-plan_clusters#single_zone)
-* [Multizone cluster](/docs/containers?topic=containers-plan_clusters#multizone)
-  * [Tell me more about the multizone cluster setup](/docs/containers?topic=containers-plan_clusters#mz_setup)
-  * [What are some changes from how I currently manage my clusters?](/docs/containers?topic=containers-plan_clusters#mz_new_ways)
-* [Multiple clusters connected with a global load balancer](/docs/containers?topic=containers-plan_clusters#multiple_clusters)
-* [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters)
-* [Worker pools and worker nodes](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)
-* [Available hardware for worker nodes](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
-  * [Virtual machines](/docs/containers?topic=containers-plan_clusters#vm)
-  * [Physical machines (bare metal)](/docs/containers?topic=containers-plan_clusters#bm)
-  * [Software-defined storage (SDS) machines](/docs/containers?topic=containers-plan_clusters#sds)
-* [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node)
-* [Autorecovery for your worker nodes](/docs/containers?topic=containers-plan_clusters#planning_autorecovery)
-
-[Setting up clusters and worker nodes](/docs/containers?topic=containers-clusters#clusters)
-* [Preparing to create clusters](/docs/containers?topic=containers-clusters#cluster_prepare)
-  * [Account-level](/docs/containers?topic=containers-clusters#prepare_account_level)
-  * [Cluster-level](/docs/containers?topic=containers-clusters#prepare_cluster_level)
-* [Creating clusters with the {{site.data.keyword.Bluemix_notm}} console](/docs/containers?topic=containers-clusters#clusters_ui)
-  * [Creating a free cluster](/docs/containers?topic=containers-clusters#clusters_ui_free)
-  * [Creating a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui_standard)
-* [Creating clusters with the {{site.data.keyword.Bluemix_notm}} CLI](/docs/containers?topic=containers-clusters#clusters_cli)
-* [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-clusters#add_workers)
-  * [Adding worker nodes by resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool)
-  * [Adding worker nodes by creating a new worker pool](/docs/containers?topic=containers-clusters#add_pool)
-  * [Adding worker nodes by adding a zone to a worker pool](/docs/containers?topic=containers-clusters#add_zone)
-  * [Deprecated: Adding stand-alone worker nodes](/docs/containers?topic=containers-clusters#standalone)
-* [Viewing cluster states](/docs/containers?topic=containers-clusters#states)
-* [Removing clusters](/docs/containers?topic=containers-clusters#remove)
 
 [Scaling clusters](/docs/containers?topic=containers-ca#ca)
 * [Understanding how the cluster autoscaler works](/docs/containers?topic=containers-ca#ca_about)
@@ -291,6 +314,7 @@ lastupdated: "2019-05-16"
 [Logging and monitoring](/docs/containers?topic=containers-health#health)
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 * [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
+* [Deprecated: Forwarding cluster, app, and Kubernetes API audit logs to IBM Cloud Log Analysis](/docs/containers?topic=containers-health#loga)
 * [Forwarding cluster, app, and Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health#configuring)
   * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging)
   * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
@@ -301,6 +325,7 @@ lastupdated: "2019-05-16"
 * [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
   * [Other health monitoring tools](/docs/containers?topic=containers-health#health_tools)
+* [Viewing cluster states](/docs/containers?topic=containers-clusters#states)
 * [Configuring health monitoring for worker nodes with Autorecovery](/docs/containers?topic=containers-health#autorecovery)
 
 [Tuning performance](/docs/containers?topic=containers-kernel#kernel)
@@ -308,37 +333,10 @@ lastupdated: "2019-05-16"
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 * [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
 
-## Setting up cluster networking
+[Removing clusters](/docs/containers?topic=containers-remove)
+
+## Managing cluster network traffic
 {: #sitemap-clusters-networking}
-
-[Planning your cluster network](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)
-* [Understanding {{site.data.keyword.containerlong_notm}} network basics](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics)
-  * [Which cluster components must communicate with each other?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_components)
-  * [How does networking work in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_vlans)
-  * [What are subnets? What types of subnets does {{site.data.keyword.containerlong_notm}} offer?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_subnets)
-  * [How are VLANs and subnets configured to ensure network segmentation?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation)
-* [Planning worker-to-worker communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker)
-  * [What are my options for worker node VLAN connectivity?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options)
-  * [I made my choice for VLAN connections. How do I set them up?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_setup)
-  * [Can I change my VLAN decision later?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_change)
-* [Planning master-to-worker communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)
-  * [Public service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)
-  * [Private service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)
-  * [Public and private service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)
-  * [Private networking with a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)
-* [Planning cluster to on-premises network or {{site.data.keyword.icpfull_notm}} communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn)
-  * [Setting up a VPN connection for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)
-  * [Setting up a VPN connection for a private VLAN only setup](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)
-
-[Setting up your cluster network](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
-* [Setting up cluster networking with a public and a private VLAN](/docs/containers?topic=containers-cs_network_cluster#both_vlans)
-* [Setting up cluster networking with a private VLAN only](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan)
-* [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
-* [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
-* [Setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
-* [Switching from the public service endpoint to the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
-* [Isolating networking workloads to edge worker nodes](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_edge)
-* [Isolating your cluster on the private network](/docs/containers?topic=containers-cs_network_cluster#isolate)
 
 [Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall#firewall)
 * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_kubectl)
@@ -348,13 +346,6 @@ lastupdated: "2019-05-16"
 * [Allowing the cluster to access resources through Calico egress policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 * [Accessing NodePort, load balancer, and Ingress services from outside the cluster](/docs/containers?topic=containers-firewall#firewall_inbound)
 * [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#whitelist_workers)
-
-[Configure the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
-* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
-* [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
-* [Setting the cluster DNS provider to CoreDNS or KubeDNS](/docs/containers?topic=containers-cluster_dns#dns_set)
-  * [Setting up CoreDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_coredns)
-  * [Setting up KubeDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_kubedns)
 
 [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies#network_policies)
 * [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
@@ -389,14 +380,43 @@ lastupdated: "2019-05-16"
 * [Setting up sidecar injection for your apps](/docs/containers?topic=containers-istio#istio_sidecar)
   * [Enabling automatic sidecar injection](/docs/containers?topic=containers-istio#istio_sidecar_automatic)
   * [Manually injecting sidecars](/docs/containers?topic=containers-istio#istio_sidecar_manual)
-* [Exposing Istio-managed apps by using the {{site.data.keyword.IBM_notm}}-provided Ingress subdomain](/docs/containers?topic=containers-istio#istio_expose)
-  * [Example: Exposing BookInfo by using the {{site.data.keyword.IBM_notm}}-provided Ingress subdomain](/docs/containers?topic=containers-istio#istio_expose_bookinfo)
-  * [Publicly exposing your own Istio-managed apps by connecting the Istio gateway and Ingress ALB](/docs/containers?topic=containers-istio#istio_expose_link)
+* [Exposing Istio-managed apps by using an IBM-provided host name](/docs/containers?topic=containers-istio#istio_expose)
+  * [Example: Exposing BookInfo by using an IBM-provided host name](/docs/containers?topic=containers-istio#istio_expose_bookinfo)
+  * [Publicly exposing your own Istio-managed apps by using an IBM-provided host name](/docs/containers?topic=containers-istio#istio_expose_link)
 * [Uninstalling Istio on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-istio#istio_uninstall)
   * [Uninstalling managed Istio add-ons in the CLI](/docs/containers?topic=containers-istio#istio_uninstall_cli)
   * [Uninstalling managed Istio add-ons in the UI](/docs/containers?topic=containers-istio#istio_uninstall_ui)
   * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
 * [What's next?](/docs/containers?topic=containers-istio#istio_next)
+
+[Configuring subnets for clusters](/docs/containers?topic=containers-subnets#subnets)
+* [Overview of networking in IBM Cloud Kubernetes Service](/docs/containers?topic=containers-subnets#basics)
+  * [VLANs](/docs/containers?topic=containers-subnets#basics_vlans)
+  * [Subnets and IP addresses](/docs/containers?topic=containers-subnets#basics_subnets)
+  * [Network segmentation](/docs/containers?topic=containers-subnets#basics_segmentation)
+* [Using existing subnets to create a cluster](/docs/containers?topic=containers-subnets#subnets_custom)
+* [Managing existing portable IP addresses](/docs/containers?topic=containers-subnets#managing_ips)
+  * [Viewing available portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)
+  * [Freeing up used IP addresses](/docs/containers?topic=containers-subnets#free)
+* [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips)
+  * [Adding portable IPs by ordering more subnets](/docs/containers?topic=containers-subnets#request)
+  * [Adding portable private IPs by using user-managed subnets](/docs/containers?topic=containers-subnets#subnet_user_managed)
+* [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
+  * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
+  * [Managing subnet routing for gateway devices](/docs/containers?topic=containers-subnets#vra-routing)
+
+[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
+* [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
+* [Setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+* [Switching from the public service endpoint to the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+* [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
+
+[Configure the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
+* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
+* [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
+* [Setting the cluster DNS provider to CoreDNS or KubeDNS](/docs/containers?topic=containers-cluster_dns#dns_set)
+  * [Setting up CoreDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_coredns)
+  * [Setting up KubeDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_kubedns)
 
 [Setting up VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
 * [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)
@@ -420,18 +440,6 @@ lastupdated: "2019-05-16"
 * [Upgrading the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
 * [Disabling the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#disabling-the-strongswan-ipsec-vpn-service)
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
-
-[Configuring subnets for clusters](/docs/containers?topic=containers-subnets#subnets)
-* [Using custom or existing subnets to create a cluster](/docs/containers?topic=containers-subnets#subnets_custom)
-* [Managing existing portable IP addresses](/docs/containers?topic=containers-subnets#managing_ips)
-  * [Viewing available portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)
-  * [Freeing up used IP addresses](/docs/containers?topic=containers-subnets#free)
-* [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips)
-  * [Adding portable IPs by ordering more subnets](/docs/containers?topic=containers-subnets#request)
-  * [Adding portable private IPs by using user-managed subnets](/docs/containers?topic=containers-subnets#subnet_user_managed)
-* [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
-  * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
-  * [Managing subnet routing for gateway devices](/docs/containers?topic=containers-subnets#vra-routing)
 
 ## Building containers from images
 {: #sitemap-images}
