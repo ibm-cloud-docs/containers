@@ -684,7 +684,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
         ```
         {: pre}
 
-    **Example output**: For if you assign user `user@email.com` and access group `team1` the **Reader** service role and then run `kubectl get rolebinding ibm-view -o yaml -n default`.
+    **Example output**: You get the following example output if you assign user `user@email.com` and access group `team1` the **Reader** service role, and then run `kubectl get rolebinding ibm-view -o yaml -n default`.
 
     ```
     apiVersion: rbac.authorization.k8s.io/v1
