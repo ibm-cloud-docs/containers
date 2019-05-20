@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-20"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -943,7 +943,9 @@ ibmcloud ks cluster-addon-disable kube-terminal --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
+
 </br>
+
 ### ibmcloud ks cluster-addon-enable
 {: #cs_cluster_addon_enable}
 
@@ -2440,7 +2442,9 @@ ibmcloud ks alb-types [--json] [-s]
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
+
 </br>
+
 ### ibmcloud ks alb-update
 {: #cs_alb_update}
 
@@ -2735,7 +2739,9 @@ ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster where you want to disable automatic updates for the Fluentd add-on. This value is required.</dd>
 </dl>
+
 </br>
+
 ### ibmcloud ks logging-autoupdate-enable
 {: #cs_log_autoupdate_enable}
 
@@ -2752,7 +2758,9 @@ ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster where you want to enable automatic updates for the Fluentd add-on. This value is required.</dd>
 </dl>
+
 </br>
+
 ### ibmcloud ks logging-autoupdate-get
 {: #cs_log_autoupdate_get}
 
