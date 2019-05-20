@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-20"
 
 keywords: kubernetes, iks
 
@@ -63,7 +63,7 @@ The solution is made up of these primary components:
 
 For the retailer to work with global business partners, the inventory APIs required changes to fit each region’s language and market preferences. {{site.data.keyword.containerlong_notm}} offers coverage in multiple regions, including North America, Europe, Asia, and Australia, so that the APIs reflected the needs of each country and ensured low latency for API calls.
 
-Another requirement is that inventory data must be shareable with the business partners’ and customers of the company. With the inventory APIs, Developers can surface information in apps, such as mobile inventory apps or web e-commerce solutions. The Developers are also busy with building and maintaining the primary e-commerce site. In short, they need to focus on coding instead of managing the infrastructure.
+Another requirement is that inventory data must be shareable with the business partners and customers of the company. With the inventory APIs, Developers can surface information in apps, such as mobile inventory apps or web e-commerce solutions. The Developers are also busy with building and maintaining the primary e-commerce site. In short, they need to focus on coding instead of managing the infrastructure.
 
 Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
 * Managing Kubernetes master, IaaS, and operational components, such as Ingress and storage
