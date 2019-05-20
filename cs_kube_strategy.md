@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-20"
 
 keywords: kubernetes, iks
 
@@ -103,7 +103,7 @@ Check out the [Twelve-Factor App ![External link icon](../icons/launch-glyph.svg
 9.  **Disposability**: Design your app to be disposable, with minimal startup, graceful shutdown, and toleration for abrupt process terminations. Remember, containers, pods, and even worker nodes are meant to be disposable, so plan your app accordingly.
 10.  **Dev-to-prod parity**: Set up a [continuous integration](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/) and [continuous delivery](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/) pipeline for your app, with minimal difference between the app in development and the app in prod.
 11.  **Logs**: Treat logs as event streams: the outer or hosting environment processes and routes log files. **Important**: In {{site.data.keyword.containerlong_notm}}, logs are not turned on by default. To enable, see [Configuring log forwarding](/docs/containers?topic=containers-health#configuring).
-12.  **Admin processes**: Keep any one-time admin scripts with the app as a [Kubernetes Job object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) to ensure that the admin scripts run with the same environment as the app itself. For orchestration of larger packages that you want to run in your Kubernetes clusters, consider using a package manager such as [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/).
+12.  **Admin processes**: Keep any one-time admin scripts with your app and run them as a [Kubernetes Job object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) to ensure that the admin scripts run with the same environment as the app itself. For orchestration of larger packages that you want to run in your Kubernetes clusters, consider using a package manager such as [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/).
 
 ### I already have an app. How can I migrate it to {{site.data.keyword.containerlong_notm}}?
 {: #migrate_containerize}
