@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-20"
 
 keywords: kubernetes, iks
 
@@ -103,7 +103,7 @@ Check out the [Twelve-Factor App ![External link icon](../icons/launch-glyph.svg
 9.  **Disposability**: Design your app to be disposable, with minimal startup, graceful shutdown, and toleration for abrupt process terminations. Remember, containers, pods, and even worker nodes are meant to be disposable, so plan your app accordingly.
 10.  **Dev-to-prod parity**: Set up a [continuous integration](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/) and [continuous delivery](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/) pipeline for your app, with minimal difference between the app in development and the app in prod.
 11.  **Logs**: Treat logs as event streams: the outer or hosting environment processes and routes log files. **Important**: In {{site.data.keyword.containerlong_notm}}, logs are not turned on by default. To enable, see [Configuring log forwarding](/docs/containers?topic=containers-health#configuring).
-12.  **Admin processes**: Keep any one-time admin scripts with the app as a [Kubernetes Job object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) to ensure that the admin scripts run with the same environment as the app itself. For orchestration of larger packages that you want to run in your Kubernetes clusters, consider using a package manager such as [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/).
+12.  **Admin processes**: Keep any one-time admin scripts with your app and run them as a [Kubernetes Job object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) to ensure that the admin scripts run with the same environment as the app itself. For orchestration of larger packages that you want to run in your Kubernetes clusters, consider using a package manager such as [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/).
 
 ### I already have an app. How can I migrate it to {{site.data.keyword.containerlong_notm}}?
 {: #migrate_containerize}
@@ -329,12 +329,12 @@ With Kubernetes, you declare many types of objects in YAML configuration files s
 ### I thought that I needed to put my app in a container. Now what's all this stuff about pods?
 {: #deploy_pods}
 
-A [pod ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) is the smallest deployable unit that Kubernetes can manage. You put your container (or a group of containers) into a pod and use the pod configuration file to tell the pod how to run the container and share resources with other pods. Whatever you put in a pod runs in a shared context, which means that they work in sync on the same virtual or physical machine.
+A [pod ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) is the smallest deployable unit that Kubernetes can manage. You put your container (or a group of containers) into a pod and use the pod configuration file to tell the pod how to run the container and share resources with other pods. All containers that you put into a pod run in a shared context, which means that they share the same virtual or physical machine.
 {: shortdesc}
 
 **What to put in a container**: As you think about your application's components, consider whether they have significantly different resource requirements for things like CPU and memory. Could some components run at a best effort, where going down for a little while to divert resources to other areas is acceptable? Is another component customer-facing, so it's critical for it to stay up? Split them up into separate containers. You can always deploy them to the same pod so that they run together in sync.
 
-**What to put in a pod**: The containers for your app don't always have to be in the same pod. In fact, if you have a component that is stateful and difficult to scale, such as a database service, put it in a different pod that you can schedule on a worker node with more resources to handle the workload. If your containers work can work correctly if they run on different worker nodes, then use multiple pods. If they need to be on the same machine and scale together, group the containers into the same pod.
+**What to put in a pod**: The containers for your app don't always have to be in the same pod. In fact, if you have a component that is stateful and difficult to scale, such as a database service, put it in a different pod that you can schedule on a worker node with more resources to handle the workload. If your containers work correctly if they run on different worker nodes, then use multiple pods. If they need to be on the same machine and scale together, group the containers into the same pod.
 
 ### So if I can just use a pod, why do I need all these different types of objects?
 {: #deploy_objects}

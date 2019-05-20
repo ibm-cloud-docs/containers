@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-20"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -12,7 +12,7 @@ subcollection: containers
 
 {:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
-{:screen: .screen}
+{:screen: .screen} 
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
@@ -87,7 +87,7 @@ For reference information about these CLIs, see the documentation for those tool
 
 -   [`ibmcloud` commands](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
 -   [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`ibmcloud cr` commands](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
+-   [`ibmcloud cr` commands](/docs/services/Registry?topic=container-registry-cli-plugin-containerregcli)
 
 ## Installing the Kubernetes CLI (`kubectl`)
 {: #kubectl}
