@@ -325,7 +325,7 @@ Administering clusters
 * [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
   * [Other health monitoring tools](/docs/containers?topic=containers-health#health_tools)
-* [Viewing cluster states](/docs/containers?topic=containers-clusters#states)
+* [Viewing cluster states](/docs/containers?topic=containers-health#states)
 * [Configuring health monitoring for worker nodes with Autorecovery](/docs/containers?topic=containers-health#autorecovery)
 
 [Tuning performance](/docs/containers?topic=containers-kernel#kernel)
