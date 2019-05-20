@@ -329,7 +329,7 @@ With Kubernetes, you declare many types of objects in YAML configuration files s
 ### I thought that I needed to put my app in a container. Now what's all this stuff about pods?
 {: #deploy_pods}
 
-A [pod ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) is the smallest deployable unit that Kubernetes can manage. You put your container (or a group of containers) into a pod and use the pod configuration file to tell the pod how to run the container and share resources with other pods. Whatever you put in a pod runs in a shared context, which means that they work in sync on the same virtual or physical machine.
+A [pod ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) is the smallest deployable unit that Kubernetes can manage. You put your container (or a group of containers) into a pod and use the pod configuration file to tell the pod how to run the container and share resources with other pods. All containers that you put into a pod run in a shared context, which means that they share the same virtual or physical machine.
 {: shortdesc}
 
 **What to put in a container**: As you think about your application's components, consider whether they have significantly different resource requirements for things like CPU and memory. Could some components run at a best effort, where going down for a little while to divert resources to other areas is acceptable? Is another component customer-facing, so it's critical for it to stay up? Split them up into separate containers. You can always deploy them to the same pod so that they run together in sync.
