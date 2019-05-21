@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-05-20"
+lastupdated: "2019-05-21"
 
 ---
 
@@ -1091,26 +1091,6 @@ Administering clusters
 * [Cannot retrieve Calico network policies](/docs/containers?topic=containers-cs_troubleshoot_network#cs_calico_fails)
 * [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_network#suspended)
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
-
-## Popular topics for {{site.data.keyword.containerlong_notm}}
-{: #sitemap-poptopics}
-
-[Popular topics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_popular_topics)
-* [Popular topics in February 2019](/docs/containers?topic=containers-cs_popular_topics#feb19)
-* [Popular topics in January 2019](/docs/containers?topic=containers-cs_popular_topics#jan19)
-* [Popular topics in December 2018](/docs/containers?topic=containers-cs_popular_topics#dec18)
-* [Popular topics in November 2018](/docs/containers?topic=containers-cs_popular_topics#nov18)
-* [Popular topics in October 2018](/docs/containers?topic=containers-cs_popular_topics#oct18)
-* [Popular topics in September 2018](/docs/containers?topic=containers-cs_popular_topics#sept18)
-* [Popular topics in August 2018](/docs/containers?topic=containers-cs_popular_topics#aug18)
-* [Popular topics in July 2018](/docs/containers?topic=containers-cs_popular_topics#july18)
-* [Popular topics in June 2018](/docs/containers?topic=containers-cs_popular_topics#june18)
-* [Popular topics in May 2018](/docs/containers?topic=containers-cs_popular_topics#may18)
-* [Popular topics in April 2018](/docs/containers?topic=containers-cs_popular_topics#apr18)
-* [Popular topics in March 2018](/docs/containers?topic=containers-cs_popular_topics#mar18)
-* [Popular topics in February 2018](/docs/containers?topic=containers-cs_popular_topics#feb18)
-* [Popular topics in January 2018](/docs/containers?topic=containers-cs_popular_topics#jan18)
-* [Chat with like-minded developers on Slack](/docs/containers?topic=containers-cs_popular_topics#slack)
 
 ## Related links
 {: #sitemap-rellinks}
