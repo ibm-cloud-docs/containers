@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-20"
+lastupdated: "2019-05-21"
 
 keywords: kubernetes, iks
 
@@ -183,7 +183,7 @@ Now let's add some other features that you might use.
 
 Don't forget that you want your workload to be up as much as possible!
 
-1.  Plan out your strategy for [highly available clusters](/docs/containers?topic=containers-plan_clusters#ha_clusters), such as deciding between single or multizone clusters.
+1.  Plan out your strategy for [highly available clusters](/docs/containers?topic=containers-ha_clusters#ha_clusters), such as deciding between single or multizone clusters.
 2.  Review [highly available deployments](/docs/containers?topic=containers-app#highly_available_apps) to help decide how you can make your app available.
 
 ### How many worker nodes do I need to handle my workload?
@@ -194,7 +194,7 @@ Now that you have a good idea of what your workload looks like, let's map the es
 1.  Estimate the max worker node capacity, which depends on what type of cluster you have. You don't want to max out worker node capacity in case a surge or other temporary event happens.
     *  **Single zone clusters**: Plan to have at least 3 worker nodes in your cluster. Further, you want 1 extra node's worth of CPU and memory capacity available within the cluster.
     *  **Multizone clusters**: Plan to have at least 2 worker nodes per zone, so 6 nodes across 3 zones in total. Additionally, plan for the total capacity of your cluster to be at least 150% of your total workload's required capacity, so that if 1 zone goes down, you have resources available to maintain the workload.
-2.  Align the app size and worker node capacity with one of the [available worker node flavors](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). To see available flavors in a zone, run `ibmcloud ks machine-types <zone>`.
+2.  Align the app size and worker node capacity with one of the [available worker node flavors](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). To see available flavors in a zone, run `ibmcloud ks machine-types <zone>`.
     *   **Don't overload worker nodes**: To avoid your pods competing for CPU or running inefficiently, you must know what resources your apps require so that you can plan the number of worker nodes that you need. For example, if your apps require less resources than the resources that are available on the worker node, you can limit the number of pods that you deploy to one worker node. Keep your worker node at around 75% capacity to leave space for other pods that might need to be scheduled. If your apps require more resources than you have available on your worker node, use a different worker node flavor that can fulfill these requirements. You know that your worker nodes are overloaded when they frequently report back a status of `NotReady` or evict pods due to the lack of memory or other resources.
     *   **Larger vs. smaller worker node flavors**: Larger nodes can be more cost efficient than smaller nodes, particularly for workloads that are designed to gain efficiency when they process on a high-performance machine. However, if a large worker node goes down, you need to be sure that your cluster has enough capacity to gracefully reschedule all the workload pods onto other worker nodes in the cluster. Smaller worker can help you scale more gracefully.
     *   **Replicas of your app**: To determine the number of worker nodes that you want, you can also consider how many replicas of your app that you want to run. For example, if you know that your workload requires 32 CPU cores, and you plan to run 16 replicas of your app, each replica pod needs 2 CPU cores. If you want to run only one app pod per worker node, you can order an appropriate number of worker nodes for your cluster type to support this configuration.
@@ -213,16 +213,16 @@ Your {{site.data.keyword.containerlong_notm}} is linked to one IBM Cloud infrast
 ### What type of cluster and machine types should I get?
 {: #env_flavors}
 
-**Types of clusters**: Decide whether you want a [single zone, multizone, or multiple cluster setup](/docs/containers?topic=containers-plan_clusters#ha_clusters). Multizone clusters are available in [all six worldwide {{site.data.keyword.Bluemix_notm}} metro regions](/docs/containers?topic=containers-regions-and-zones#zones). Also keep in mind that worker nodes vary by zone.
+**Types of clusters**: Decide whether you want a [single zone, multizone, or multiple cluster setup](/docs/containers?topic=containers-ha_clusters#ha_clusters). Multizone clusters are available in [all six worldwide {{site.data.keyword.Bluemix_notm}} metro regions](/docs/containers?topic=containers-regions-and-zones#zones). Also keep in mind that worker nodes vary by zone.
 
-**Types of worker nodes**: In general, your intensive workloads are more suited to run on bare metal physical machines, whereas for cost-effective testing and development work, you might choose virtual machines on shared or dedicated shared hardware. With bare metal worker nodes, your cluster has a network speed of 10Gbps and hyper-threaded cores that offer higher throughput. Virtual machines come with a network speed of 1 Gbps and regular cores that do not offer hyper-threading. [Check out the machine isolation and flavors that are available](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes).
+**Types of worker nodes**: In general, your intensive workloads are more suited to run on bare metal physical machines, whereas for cost-effective testing and development work, you might choose virtual machines on shared or dedicated shared hardware. With bare metal worker nodes, your cluster has a network speed of 10Gbps and hyper-threaded cores that offer higher throughput. Virtual machines come with a network speed of 1 Gbps and regular cores that do not offer hyper-threading. [Check out the machine isolation and flavors that are available](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
 ### Do I use multiple clusters, or just add more workers to an existing cluster?
 {: #env_multicluster}
 
 The number of clusters that you create depends on your workload, company policies and regulations, and what you want to do with the computing resources. You can also review security information about this decision in [Container isolation and security](/docs/containers?topic=containers-security#container).
 
-**Multiple clusters**: You need to set up [a global load balancer](/docs/containers?topic=containers-plan_clusters#multiple_clusters) and copy and apply the same configuration YAML files in each to balance workloads across the clusters. Therefore, multiple clusters are generally more complex to manage, but can help you achieve important goals such as the following.
+**Multiple clusters**: You need to set up [a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple_clusters) and copy and apply the same configuration YAML files in each to balance workloads across the clusters. Therefore, multiple clusters are generally more complex to manage, but can help you achieve important goals such as the following.
 *  Comply with security policies that require you to isolate workloads.
 *  Test how your app runs in a different version of Kubernetes or other cluster software such as Calico.
 *  Create a cluster with your app in another region for higher performance for users in that geographical area.
@@ -241,7 +241,7 @@ The number of clusters that you create depends on your workload, company policie
   <li><strong>Don't tap out your cluster bandwidth</strong>: Keep in mind that network bandwidth on scaling virtual machines is around 1000 Mbps. If you need hundreds of worker nodes in a cluster, split it up into multiple clusters with fewer nodes, or order bare metal nodes.</li>
   <li><strong>Sorting out your services</strong>: Plan out how many services that you need for your workload before you deploy. Networking and port forwarding rules are put into Iptables. If you anticipate a larger number of services, such as more than 5,000 services, split up the cluster into multiple clusters.</li></ul></dd>
 <dt>Provision different types of machines for a mix of computing resources.</dt>
-  <dd>Everyone likes choices, right? With {{site.data.keyword.containerlong_notm}}, you have [a mix of machine types](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes) that you can deploy: from bare metal for intensive workloads to virtual machines for rapid scaling. Use labels or namespaces to organize deployments to your machines. When you create a deployment, limit it so that your app's pod only deploys on machines with the right mix of resources. For example, you might want to limit a database application to a bare metal machine with a significant amount of local disk storage like the `md1c.28x512.4x4tb`.</dd>
+  <dd>Everyone likes choices, right? With {{site.data.keyword.containerlong_notm}}, you have [a mix of machine types](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that you can deploy: from bare metal for intensive workloads to virtual machines for rapid scaling. Use labels or namespaces to organize deployments to your machines. When you create a deployment, limit it so that your app's pod only deploys on machines with the right mix of resources. For example, you might want to limit a database application to a bare metal machine with a significant amount of local disk storage like the `md1c.28x512.4x4tb`.</dd>
 <dt>Set up multiple namespaces when you have multiple teams and projects that share the cluster.</dt>
   <dd><p>Namespaces are kind of like a cluster within the cluster. They are a way to divide up cluster resources by using [resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) and [default limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/). When you make new namespaces, be sure to set up proper [RBAC policies](/docs/containers?topic=containers-users#rbac) to control access. For more information, see [Share a cluster with namespaces ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/namespaces/) in the Kubernetes documentation.</p>
   <p>If you have a small cluster, a couple dozen users, and resources that are similar (such as different versions of the same software), you probably don't need multiple namespaces. You can use labels instead.</p></dd>
@@ -251,7 +251,7 @@ The number of clusters that you create depends on your workload, company policie
   <dd><p>To organize and select your Kubernetes resources such as `pods` or `nodes`, [use Kubernetes labels ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). By default, {{site.data.keyword.containerlong_notm}} applies some labels, including `arch`, `os`, `region`, `zone`, and `machine-type`.</p>
   <p>Example use cases for labels include [limiting network traffic to edge worker nodes](/docs/containers?topic=containers-edge), [deploying an app to a GPU machine](/docs/containers?topic=containers-app#gpu_app), and [restricting your app workloads![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) to run on worker nodes that meet certain machine type or SDS capabilities, such as bare metal worker nodes. To see what labels are already applied to a resource, use the <code>kubectl get</code> command with the <code>--show-labels</code> flag. For example:</p>
   <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p>
-  To apply labels to worker nodes, [create your worker pool](/docs/containers?topic=containers-clusters#add_pool) with labels or [update an existing worker pool](/docs/containers?topic=containers-clusters#worker_pool_labels)</dd>
+  To apply labels to worker nodes, [create your worker pool](/docs/containers?topic=containers-add_workers#add_pool) with labels or [update an existing worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels)</dd>
 </dl>
 
 
@@ -268,7 +268,7 @@ While no system is entirely failsafe, you can take steps to increase your the hi
 
 Review more information about making resources highly available.
 * [Reduce potential points of failure](/docs/containers?topic=containers-ha#ha).
-* [Create multizone clusters](/docs/containers?topic=containers-plan_clusters#ha_clusters).
+* [Create multizone clusters](/docs/containers?topic=containers-ha_clusters#ha_clusters).
 * [Plan highly available deployments](/docs/containers?topic=containers-app#highly_available_apps) that use features such as replica sets and pod anti-affinity across multizones.
 * [Run containers that are based on images in a cloud-based public registry](/docs/containers?topic=containers-images).
 * [Plan data storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).
