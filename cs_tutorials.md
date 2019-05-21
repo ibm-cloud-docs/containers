@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-02"
+lastupdated: "2019-05-21"
 
 keywords: kubernetes, iks
 
@@ -79,7 +79,7 @@ Because it can take a few minutes to provision, create your cluster before you i
 
 1.  [In the {{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), create a free or standard cluster with 1 worker pool that has 1 worker node in it.
 
-    You can also create a [cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli).
+    You can also create a [cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps).
     {: tip}
 
 As your cluster provisions, install the following CLIs that are used to manage clusters:
@@ -120,10 +120,10 @@ If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after
 
 6. To deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
-  1. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.12.7.
-    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
+  1. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.13.6.
+    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
+    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
+    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
 
   2. If you're using OS X or Linux, complete the following steps.
 
@@ -187,7 +187,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.7
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.13.6
     ```
     {: screen}
 
@@ -246,8 +246,8 @@ Every time you log in to the {{site.data.keyword.containerlong}} CLI to work wit
     Example output:
 
     ```
-    Client Version: v1.12.7
-    Server Version: v1.12.7
+    Client Version: v1.13.6
+    Server Version: v1.13.6
     ```
     {: screen}
 
@@ -270,7 +270,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
 2.  Bind the {{site.data.keyword.toneanalyzershort}} instance to the `default` Kubernetes namespace for the cluster. Later, you can create your own namespaces to manage user access to Kubernetes resources, but for now, use the `default` namespace. Kubernetes namespaces are different from the registry namespace you created earlier.
 
     ```
-    ibmcloud ks cluster-service-bind <cluster_name> default <service_name>
+    ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace default --service <service_name>
     ```
     {: pre}
 
