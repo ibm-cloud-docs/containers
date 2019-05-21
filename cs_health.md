@@ -775,7 +775,7 @@ Review the state of a Kubernetes cluster to get information about the availabili
 
 To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, and owner, use the `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 
-You can review information about the overall cluster and your worker nodes. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).
+You can review information about the overall cluster<staging master>, the IBM-managed master,</staging master> and your worker nodes. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).
 
 ### Cluster states
 {: #states_cluster}
