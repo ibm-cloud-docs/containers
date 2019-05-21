@@ -2356,7 +2356,7 @@ ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disab
 <dd>Include this flag to enable an ALB in a cluster.</dd>
 
 <dt><code>--disable</code></dt>
-<dd>Include this flag to disable an ALB in a cluster. <p class="note">If you disable an ALB, the IP that the ALB used goes back into the pool of available portable IPs so that another service can use the IP. If you later try to re-enable the ALB, the ALB might report an error if the IP address it previously used is now in use by another service. You can either stop running the other service or specify another IP address to use when you re-enable the ALB.</p></dd>
+<dd>Include this flag to disable an ALB in a cluster. <p class="note">If you disable an ALB, the IP address that the ALB used goes back into the pool of available portable IPs so that another service can use the IP. If you later try to re-enable the ALB, the ALB might report an error if the IP address it previously used is now in use by another service. You can either stop running the other service or specify another IP address to use when you re-enable the ALB.</p></dd>
 
 <dt><code>--disable-deployment</code></dt>
 <dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
