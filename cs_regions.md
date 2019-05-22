@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-15"
+lastupdated: "2019-05-22"
 
 keywords: kubernetes, iks
 
