@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-21"
+lastupdated: "2019-05-22"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -382,7 +382,7 @@ To forward Kubernetes API audit logs:
 ### Filtering logs that are forwarded
 {: #filter-logs}
 
-You can choose which logs that you forward to your external server by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using flags.
+You can choose which logs to forward to your external server by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using flags.
 {: shortdesc}
 
 <table>
