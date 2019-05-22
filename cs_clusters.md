@@ -300,7 +300,7 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
 
 2. Review the zones that are available. To see zones in a specific location, such as a geography, country, or a metro, you can specify the location in the `--locations` flag. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
     ```
-    ibmcloud ks zones
+    ibmcloud ks zones [--locations <location>]
     ```
     {: pre}
     When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.

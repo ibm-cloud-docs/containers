@@ -4703,9 +4703,6 @@ ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>The ID of the public VLAN. This value is required only if you want to change the public VLAN for the zone. To change the public VLAN, you must always provide a compatible private VLAN. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.<p class="note">The private and public VLANs must be compatible, which you can determine from the **Router** ID prefix.</p></dd>
 
-<dt><code>--private-only</code></dt>
-<dd>Optional: Unset the public VLAN so that the workers in this zone are connected to a private VLAN only.</dd>
-
 <dt><code>-f</code></dt>
 <dd>Force the command to run without user prompts. This value is optional.</dd>
 
