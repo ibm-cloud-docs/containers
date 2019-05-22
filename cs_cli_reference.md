@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-21"
+lastupdated: "2019-05-22"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1243,24 +1243,7 @@ trusted: <em>true</em>
 
 **<code>--trusted</code>**</br>
 <p>**Bare metal only**: Enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
-<p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker-get` [command](#cs_worker_get).</p><staging byos>
-{: #pod-subnet}
-
-**<code>--pod-subnet <em>SUBNET</em></code>**</br>
-**Standard clusters running Kubernetes 1.14 or later**: All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through DirectLink or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for pods.
-<p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of 4 worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for 8 workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
-<p>Note that the subnet cannot be in the following reserved ranges:
-<ul><li><code>10.0.&#42;.&#42;</code></li>
-<li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code></li></ul></p>
-{: #service-subnet}
-
-**<code>--service-subnet <em>SUBNET</em></code>**</br>
-**Standard clusters running Kubernetes 1.14 or later**: All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through DirectLink or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
-<p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. Note that the subnet cannot be in the following reserved ranges:
-<ul><li><code>10.0.&#42;.&#42;</code></li>
-<li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code></li></ul></p></staging byos>
+<p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker-get` [command](#cs_worker_get).</p>
 
 **<code>-s</code>**</br>
 Do not show the message of the day or update reminders. This value is optional.
@@ -2388,49 +2371,7 @@ ibmcloud ks alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
 ```
 {: pre}
 
-<staging alb-migrate>
-</br>
-### ibmcloud ks alb-create
-{: #cs_alb_create}
 
-Create a public or private ALB in a zone. The ALB that you create is enabled by default.
-{: shortdesc}
-
-```
-ibmcloud ks alb-create --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE --vlan VLAN_ID [--user-ip IP] [-s]
-```
-{: pre}
-
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster.</dd>
-
-<dt><code>--type<em> PUBLIC|PRIVATE</em></code></dt>
-<dd>The type of ALB: <code>public</code> or <code>private</code>.</dd>
-
-<dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone to create the ALB in.</dd>
-
-<dt><code>--vlan <em>VLAN_ID</em></code></dt>
-<dd>The ID of the VLAN to create the ALB on. This VLAN must match the ALB <code>type</code> and must be in the the same <code>zone</code> as the ALB that you want to create.</dd>
-
-<dt><code>--user-ip <em>IP</em></code></dt>
-<dd>Optional: An IP address to assign to the ALB. This IP must be on the <code>vlan</code> that you specified and must be in the same <code>zone</code> as the ALB that you want to create. Note that this IP address must not be in use by another load balancer or ALB in the cluster.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks alb-create --cluster mycluster --type public --zone dal10 --vlan 2234945 --user-ip 1.1.1.1
-```
-{: pre}
-
-</staging alb-migrate>
 </br>
 ### ibmcloud ks alb-get
 {: #cs_alb_get}
