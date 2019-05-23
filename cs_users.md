@@ -983,7 +983,7 @@ For compliance, security, or billing reasons, you might not want to give the **S
 
 For example, if your account is not VRF-enabled, your IBM Cloud infrastructure (SoftLayer) account owner must turn on VLAN spanning. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. For more information, see [VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-subnets#basics_segmentation).
 
-<p class="tip">Already set infrastructure credentials by using the `ibmcloud ks credential-set` command? You can check whether the credentials are missing suggested or required infrastructure permissions by running the [`ibmcloud ks infra-permissions-get --region <region>` command](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#infra_permissions_get). In the output, if any suggested or required permissions are missing, you can use the steps in this section to assign the required access.</p>
+<p class="tip">Already set infrastructure credentials by using the `ibmcloud ks credential-set` command? You can check whether the credentials are missing suggested or required infrastructure permissions by running the [`ibmcloud ks infra-permissions-get --region <region>` command](/docs/containers?topic=containers-cs_cli_reference#infra_permissions_get). In the output, if any suggested or required permissions are missing, you can use the steps in this section to assign the required access.</p>
 
 Before you begin, make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
 

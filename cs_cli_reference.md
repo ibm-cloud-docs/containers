@@ -2376,8 +2376,8 @@ ibmcloud ks alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
 ```
 {: pre}
 
-
 </br>
+
 ### ibmcloud ks alb-create
 {: #cs_alb_create}
 
@@ -2418,8 +2418,8 @@ ibmcloud ks alb-create --cluster mycluster --type public --zone dal10 --vlan 223
 ```
 {: pre}
 
-
 </br>
+
 ### ibmcloud ks alb-get
 {: #cs_alb_get}
 
