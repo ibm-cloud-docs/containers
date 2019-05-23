@@ -198,7 +198,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--syslog-protocol</em></code></td>
-      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`, `tls`, or `tcp`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
+      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`, `tls`, or `tcp`. When forwarding to a rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
     </tr>
     <tr>
       <td><code><em>--ca-cert</em></code></td>
