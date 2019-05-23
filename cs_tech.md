@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-21"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks, docker
 
@@ -302,7 +302,7 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
   <tr>
     <td>Ingress application load balancer (ALB) traffic</td>
-    <td>32,768 connections per second.</td>
+    <td>32,768 connections per second.<br><br>If your ingress traffic exceeds this number, [scale up the number of ALB replicas](/docs/containers?topic=containers-ingress#scale_albs) in your cluster to handle the increased workload.</td>
   </tr>
   <tr>
     <td>Storage volumes</td>

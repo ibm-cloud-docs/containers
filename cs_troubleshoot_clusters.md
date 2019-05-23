@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks
 
@@ -126,6 +126,11 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ```
         {: screen}
 2.  Validate the infrastructure permissions that the user has.
+    1.  List the suggested and required infrastructure permissions for the region and resource group.
+        ```
+        ibmcloud ks infra-permissions-get --region <region>
+        ```
+        {: pre}
     2.  Make sure that the [infrastructure credentials owner for the API key or the manually-set account has the correct permissions](/docs/containers?topic=containers-users#owner_permissions). 
     3.  If necessary, you can change the [API key](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_api_key_reset) or [manually-set](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_credentials_set) infrastructure credentials owner for the region and resource group.
 3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster. 
@@ -422,7 +427,7 @@ Consider the following scenario to understand how clusters might become orphaned
 3.  Use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
     If you no longer have access to and cannot get the infrastructure credentials, you must open an {{site.data.keyword.Bluemix_notm}} support case to remove the orphaned cluster.
     {: note}
-4.  [Delete the cluster](/docs/containers?topic=containers-clusters#remove).
+4.  [Delete the cluster](/docs/containers?topic=containers-remove).
 5.  If you want, reset the infrastructure credentials to the previous account. Note that if you created clusters with a different infrastructure account than the account that you switch to, you might orphan those clusters.
     * To set credentials to a different infrastructure account, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set).
     * To use the default credentials that come with your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, use the `ibmcloud ks credential-unset --region <region>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset).
@@ -626,8 +631,8 @@ Manually update the reference of the private IP address to point to the correct 
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.12.7
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.12.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.13.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.13.6
   ```
   {: screen}
 
@@ -1005,7 +1010,7 @@ If this cluster is an existing one, check your cluster capacity.
         ```
         {: pre}
 
-    2.  If the request exceeds the available capacity, [add a new worker pool](/docs/containers?topic=containers-clusters#add_pool) with worker nodes that can fulfill the request.
+    2.  If the request exceeds the available capacity, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) with worker nodes that can fulfill the request.
 
 6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
 

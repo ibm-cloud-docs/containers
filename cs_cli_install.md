@@ -214,6 +214,9 @@ To use `kubectl` commands:
         {: pre}
 
         
+        Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.
+        {: tip}
+        
 
         After downloading the configuration files, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
 

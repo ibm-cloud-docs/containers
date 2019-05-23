@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks
 
@@ -185,6 +185,11 @@ The **Viewer** platform role includes the [actions that require no permissions](
 <td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#!/accounts/GetUserCredentials)</code></td>
 </tr>
 <tr>
+<td>Check whether the credentials that allow access to the IBM Cloud infrastructure (SoftLayer) portfolio for the targeted region and resource group are missing suggested or required infrastructure permissions.</td>
+<td><code>[ibmcloud ks infra-permissions-get](/docs/containers?topic=containers-cs_cli_reference#infra_permissions_get)</code></td>
+<td><code>[GET /v1/infra-permissions](https://containers.cloud.ibm.com/global/swagger-global-api/#!/accounts/GetInfraPermissions)</code></td>
+</tr>
+<tr>
 <td>View the status for automatic updates of the Fluentd add-on.</td>
 <td><code>[ibmcloud ks logging-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)</code></td>
 <td><code>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#!/logging/GetUpdatePolicy)</code></td>
@@ -295,6 +300,11 @@ The **Editor** platform role includes the permissions that are granted by **View
 <td>Enable or disable an Ingress ALB.</td>
 <td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</code></td>
 <td><code>[POST /albs](https://containers.cloud.ibm.com/global/swagger-global-api/#!/alb/EnableALB) and [DELETE /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</code></td>
+</tr>
+<tr>
+<td>Create an Ingress ALB.</td>
+<td><code>[ibmcloud ks alb-create](/docs/containers?topic=containers-cs_cli_reference#cs_alb_create)</code></td>
+<td><code>[POST /clusters/{idOrName}/zone/{zoneId}](https://containers.cloud.ibm.com/global/swagger-global-api/#!/alb/CreateALB)</code></td>
 </tr>
 <tr>
 <td>Roll back the an Ingress ALB add-on update to the build that your ALB pods were previously running.</td>
