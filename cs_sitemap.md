@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-05-21"
+lastupdated: "2019-05-23"
 
 ---
 
@@ -245,7 +245,7 @@ lastupdated: "2019-05-21"
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
 * [Autorecovery for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
 
-Administering clusters
+## Administering clusters
 {: #sitemap-clusters-admin}
 
 [Scaling clusters](/docs/containers?topic=containers-ca#ca)
