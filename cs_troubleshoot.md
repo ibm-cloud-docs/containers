@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-14"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks
 
@@ -40,7 +40,7 @@ You can take these general steps to ensure that your clusters are up-to-date:
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}
 
-While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/iks-charts/ibmcloud-iks-debug):
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug):
 {: shortdesc}
 
 
@@ -137,6 +137,10 @@ Review the options to debug your clusters and find the root causes for failures.
      <td>`Updating`</td>
      <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that the user deployed are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
    </tr>
+   <tr>
+    <td>`Unsupported`</td>
+    <td>The [Kubernetes version](/docs/containers?topic=containers-cs_versions#cs_versions) that the cluster runs is no longer supported. Your cluster's health is no longer actively monitored or reported. Additionally, you cannot add or reload worker nodes. To continue receiving important security updates and support, you must update your cluster. Review the [version update preparation actions](/docs/containers?topic=containers-cs_versions#prep-up), then [update your cluster](/docs/containers?topic=containers-update#update) to a supported Kubernetes version.<br><br><p class="note">Clusters that are three or more versions behind the oldest supported version cannot be updated. To avoid this situation, you can update the cluster to a Kubernetes version less than three ahead of the current version, such as 1.12 to 1.14. Further, if your cluster runs version 1.5, 1.7, or 1.8, then the version is too far behind to update. Instead, you must [create a cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the cluster.</p></td>
+   </tr>
     <tr>
        <td>`Warning`</td>
        <td>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. </td>
@@ -160,8 +164,8 @@ Do not restart or reboot a worker node during a master outage. This action remov
 Review the options to debug your worker nodes and find the root causes for failures.
 
 <ol><li>If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes.<p class="pre">ibmcloud ks workers --cluster <cluster_name_or_id></p></li>
-<li>Review the **State** and **Status** field for every worker node in your CLI output.<p>You can view the current worker node state by running the `ibmcloud ks workers --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields. 
-{: shortdesc} 
+<li>Review the **State** and **Status** field for every worker node in your CLI output.<p>You can view the current worker node state by running the `ibmcloud ks workers --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields.
+{: shortdesc}
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
 <caption>Worker node states</caption>
@@ -215,7 +219,7 @@ Review the options to debug your worker nodes and find the root causes for failu
     </tr>
     <tr>
      <td>`Unknown`</td>
-     <td>The Kubernetes master is not reachable for one of the following reasons:<ul><li>You requested an update of your Kubernetes master. The state of the worker node cannot be retrieved during the update. If the worker node remains in this state for an extended period of time even after the Kubernetes master is successfully updated, try to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) the worker node.</li><li>You might have another firewall that is protecting your worker nodes, or changed firewall settings recently. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. For more information, see [Firewall prevents worker nodes from connecting](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>The Kubernetes master is down. Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support case](#ts_getting_help).</li></ul></td>
+     <td>The Kubernetes master is not reachable for one of the following reasons:<ul><li>You requested an update of your Kubernetes master. The state of the worker node cannot be retrieved during the update. If the worker node remains in this state for an extended period of time even after the Kubernetes master is successfully updated, try to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) the worker node.</li><li>You might have another firewall that is protecting your worker nodes, or changed firewall settings recently. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. For more information, see [Firewall prevents worker nodes from connecting](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>The Kubernetes master is down. Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</li></ul></td>
 </tr>
    <tr>
       <td>`Warning`</td>
@@ -293,6 +297,61 @@ Review common error messages and learn how to resolve them.
   </tr>
     </tbody>
   </table>
+
+<br />
+
+
+## Reviewing master health
+{: #debug_master}
+
+Your {{site.data.keyword.containerlong_notm}} includes an IBM-managed master with highly available replicas, automatic security patch updates applied for you, and automation in place to recover in case of an incident. You can check the health, status, and state of the cluster master by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
+{: shortdesc} 
+
+**Master Health**<br>
+The **Master Health** reflects the state of master components and notifies you if something needs your attention. The health might be one of the following:
+*   `error`: The master is not operational. IBM is automatically notified and takes action to resolve this issue. You can continue monitoring the health until the master is `normal`.
+*   `normal`: The master is operational and healthy. No action is required.
+*   `unavailable`: The master might not be accessible, which means some actions such as resizing a worker pool are temporarily unavailable. IBM is automatically notified and takes action to resolve this issue. You can continue monitoring the health until the master is `normal`. 
+*   `unsupported`: The master runs an unsupported version of Kubernetes. You must [update your cluster](/docs/containers?topic=containers-update) to return the master to `normal` health.
+
+**Master Status and State**<br>
+The **Master Status** provides details of what operation from the master state is in progress. The status includes a timestamp of how long the master has been in the same state, such as `Ready (1 month ago)`. The **Master State** reflects the lifecycle of possible operations that can be performed on the master, such as deploying, updating, and deleting. Each state is described in the following table.
+
+<table summary="Every table row should be read left to right, with the master state in column one and a description in column two.">
+<caption>Master states</caption>
+   <thead>
+   <th>Master state</th>
+   <th>Description</th>
+   </thead>
+   <tbody>
+<tr>
+   <td>`deployed`</td>
+   <td>The master is successfully deployed. Check the status to verify that the master is `Ready` or to see if an update is available.</td>
+   </tr>
+ <tr>
+     <td>`deploying`</td>
+     <td>The master is currently deploying. Wait for the state to become `deployed` before working with your cluster, such as adding worker nodes.</td>
+    </tr>
+   <tr>
+     <td>`deploy_failed`</td>
+     <td>The master failed to deploy. IBM Support is notified and works to resolve the issue. Check the **Master Status** field for more information, or wait for the state to become `deployed`.</td>
+   </tr>
+   <tr>
+   <td>`deleting`</td>
+   <td>The master is currently deleting because you deleted the cluster. You cannot undo a deletion. After the cluster is deleted, you can no longer check the master state because the cluster is completely removed.</td>
+   </tr>
+     <tr>
+       <td>`delete_failed`</td>
+       <td>The master failed to delete. IBM Support is notified and works to resolve the issue. You cannot resolve the issue by trying to delete the cluster again. Instead, check the **Master Status** field for more information, or wait for the cluster to delete.</td>
+      </tr>
+      <tr>
+       <td>`updating`</td>
+       <td>The master is updating its Kubernetes version. The update might be a patch update that is automatically applied, or a minor or major version that you applied by updating the cluster. During the update, your highly available master can continue processing requests, and your app workloads and worker nodes continue to run. After the master update is complete, you can [update your worker nodes](/docs/containers?topic=containers-update#worker_node).<br><br>
+       If the update is unsuccessful, the master returns to a `deployed` state and continues running the previous version. IBM Support is notified and works to resolve the issue. You can check if the update failed in the **Master Status** field.</td>
+    </tr>
+   </tbody>
+ </table>
+
 
 <br />
 

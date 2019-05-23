@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-20"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks
 
@@ -981,9 +981,9 @@ When you assign the **Super User** infrastructure role to the admin who sets the
 
 For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.Bluemix_notm}} IAM platform roles to control users' infrastructure access, you must set specific IBM Cloud infrastructure (SoftLayer) permissions for users.
 
-For example, if your account is not VRF-enabled, your IBM Cloud infrastructure (SoftLayer) account owner must turn on VLAN spanning. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. For more information, see [VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation).
+For example, if your account is not VRF-enabled, your IBM Cloud infrastructure (SoftLayer) account owner must turn on VLAN spanning. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. For more information, see [VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-subnets#basics_segmentation).
 
-
+<p class="tip">Already set infrastructure credentials by using the `ibmcloud ks credential-set` command? You can check whether the credentials are missing suggested or required infrastructure permissions by running the [`ibmcloud ks infra-permissions-get --region <region>` command](/docs/containers?topic=containers-cs_cli_reference#infra_permissions_get). In the output, if any suggested or required permissions are missing, you can use the steps in this section to assign the required access.</p>
 
 Before you begin, make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
 
@@ -1004,7 +1004,7 @@ Before you begin, make sure that you are the account owner or have **Super User*
 
 6.  In the **Device** tab, select the devices to grant access to.
 
-    * In the **Select type** group, you can grant access to all bare metal, dedicated, and virtual servers so that users can work with all [machine types for worker nodes](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
+    * In the **Select type** group, you can grant access to all bare metal, dedicated, and virtual servers so that users can work with all [machine types for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
     * In the **Enable future access** group, you can grant the user access to all future bare metal, dedicated, and virtual servers.
     * In the table of devices, make sure that the appropriate devices are selected.
 

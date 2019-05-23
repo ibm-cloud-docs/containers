@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-22"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks
 
@@ -90,6 +90,10 @@ The following tables list the available single and multizone locations in {{site
 
 * **Multizone**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
 * **Single zone**: If you create a cluster in a single data center location, you can create multiple worker nodes, but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
+
+To quickly determine whether a zone is multizone-capable, your can run `ibmcloud ks supported-locations` and look for the value in the `Multizone Metro` column.
+{: tip}
+
 
 {{site.data.keyword.Bluemix_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.
 {: deprecated}

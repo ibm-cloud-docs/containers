@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,19 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </thead>
 <tbody>
 <tr>
+<td>0.3.28</td>
+<td>23 May 2019</td>
+<td><ul><li>Adds the [<code>ibmcloud ks alb-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_alb_create) command to create Ingress ALBs. For more information, see [Scaling ALBs](/docs/containers?topic=containers-ingress#scale_albs).</li>
+<li>Adds the [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cs_cli_reference#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure (SoftLayer) portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.</li>
+<li>Adds the <code>--private-only</code> flag to the `zone-network-set` command to unset the public VLAN for the worker pool metadata so that subsequent worker nodes in that worker pool zone are connected to a private VLAN only.</li>
+<li>Removes the <code>--force-update</code> flag from the `worker-update` command.</li>
+<li>Adds the **VLAN ID** column to the output of the `albs` and `alb-get` commands.</li>
+<li>Adds the **Multizone Metro** column to the output of the `supported-locations` command to designate zones that are multizone-capable.</li>
+<li>Adds the **Master State** and **Master Health** fields to the output of the `cluster-get` command. For more information, see [Master states](/docs/containers?topic=containers-health#states_master).</li>
+<li>Updates translations of help text.</li>
+</ul></td>
+</tr>
+<tr>
 <td>0.3.8</td>
 <td>30 Apr 2019</td>
 <td>Adds support for [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) in version `0.3`. By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources in all locations. You are not required to target a region to work with resources.</li>
@@ -82,7 +95,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.2.80</td>
 <td>19 Mar 2019</td>
 <td><ul>
-<li>Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) in standard clusters that run Kubernetes version 1.11 or later in [VRF-enabled accounts](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).<ul>
+<li>Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-plan_clusters#workeruser-master) in standard clusters that run Kubernetes version 1.11 or later in [VRF-enabled accounts](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).<ul>
 <li>Adds the `--private-service-endpoint` and `--public-service-endpoint` flags to the [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) command.</li>
 <li>Adds the **Public Service Endpoint URL** and **Private Service Endpoint URL** fields to the output of <code>ibmcloud ks cluster-get</code>.</li>
 <li>Adds the [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint) command.</li>
@@ -195,7 +208,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.1.591</td>
 <td>02 Oct 2018</td>
-<td>Adds support for [resource groups](/docs/containers?topic=containers-clusters#prepare_account_level)</td>
+<td>Adds support for [resource groups](/docs/containers?topic=containers-clusters#cluster_prepare).</td>
 </tr>
 <tr>
 <td>0.1.590</td>

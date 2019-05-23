@@ -247,18 +247,18 @@ ibmcloud plugin list
     <th colspan=4>Infrastructure commands</th>
  </thead>
  <tbody>
-  <tr>
-    <td>[ibmcloud ks credential-get](#cs_credential_get)</td>
-    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
-    <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
-  </tr>
-  <tr>
-    <td>[ibmcloud ks vlan-spanning-get](#cs_vlan_spanning_get)</td>
-    <td>[ibmcloud ks vlans](#cs_vlans)</td>
-    <td> </td>
-    <td> </td>
-  </tr>
+   <tr>
+     <td>[ibmcloud ks credential-get](#cs_credential_get)</td>
+     <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+     <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
+     <td>[ibmcloud ks infra-permissions-get](#infra_permissions_get)</td>
+   </tr>
+   <tr>
+     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
+     <td>[ibmcloud ks vlan-spanning-get](#cs_vlan_spanning_get)</td>
+     <td>[ibmcloud ks vlans](#cs_vlans)</td>
+     <td> </td>
+   </tr>
 </tbody>
 </table>
 
@@ -288,14 +288,14 @@ ibmcloud plugin list
       <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
     </tr>
     <tr>
+      <td>[ibmcloud ks alb-create](#cs_alb_create)</td>
       <td>[ibmcloud ks alb-get](#cs_alb_get)</td>
       <td>[ibmcloud ks alb-rollback](#cs_alb_rollback)</td>
       <td>[ibmcloud ks alb-types](#cs_alb_types)</td>
-      <td>[ibmcloud ks alb-update](#cs_alb_update)</td>
     </tr>
     <tr>
+      <td>[ibmcloud ks alb-update](#cs_alb_update)</td>
       <td>[ibmcloud ks albs](#cs_albs)</td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -1094,6 +1094,7 @@ ibmcloud ks cluster-addons --cluster CLUSTER
 
 
 </br>
+
 ### ibmcloud ks cluster-config
 {: #cs_cluster_config}
 
@@ -1101,7 +1102,7 @@ After logging in, download Kubernetes configuration data and certificates to con
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [--skip-rbac] [-s] [--yaml]
+ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [--powershell] [--skip-rbac] [-s] [--yaml]
 ```
 {: pre}
 
@@ -1122,6 +1123,9 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 
 <dt><code>--export</code></dt>
 <dd>Download Kubernetes configuration data and certificates without any messages other than the export command. Because no messages are displayed, you can use this flag when you create automated scripts. This value is optional.</dd>
+
+<dt><code>--powershell</code></dt>
+<dd>Retrieve environment variables in Windows PowerShell format.</dd>
 
 <dt><code>--skip-rbac</code></dt>
 <dd>Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.Bluemix_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.Bluemix_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option.</dd>
@@ -2319,8 +2323,9 @@ Enable or disable an ALB in your standard cluster.
 {: shortdesc}
 
 You can use this command to:
-* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, note that all default public ALBs are automatically enabled.
+* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, note that all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks alb-create` command are enabled by default too.
 * Enable an ALB that you previously disabled.
+* Disable an ALB on an old VLAN after you create an ALB on a new VLAN. For more information, see [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress#migrate-alb-vlan).
 * Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.
 
 ```
@@ -2345,7 +2350,7 @@ ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disab
 <dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
 
 <dt><code>--user-ip <em>USER_IP</em></code></dt>
-<dd>This parameter is available for enabling a private ALB only. The private ALB is deployed with an IP address from a user-provided private subnet. If no IP address is provided, the ALB is deployed with a private IP address from the portable private subnet that was provisioned automatically when you created the cluster.</dd>
+<dd>Optional: If you enable the ALB with the <code>--enable</code> flag, you can specify an IP address that is on a VLAN in the zone that the ALB was created in. The ALB is enabled with and uses this public or private IP address. Note that this IP address must not be in use by another load balancer or ALB in the cluster. If no IP address is provided, the ALB is deployed with a public or private IP address from the portable public or private subnet that was provisioned automatically when you created the cluster, or the public or private IP address that you previously assigned to the ALB.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2371,8 +2376,50 @@ ibmcloud ks alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
 ```
 {: pre}
 
+</br>
+
+### ibmcloud ks alb-create
+{: #cs_alb_create}
+
+Create a public or private ALB in a zone. The ALB that you create is enabled by default.
+{: shortdesc}
+
+```
+ibmcloud ks alb-create --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE --vlan VLAN_ID [--user-ip IP] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster.</dd>
+
+<dt><code>--type<em> PUBLIC|PRIVATE</em></code></dt>
+<dd>The type of ALB: <code>public</code> or <code>private</code>.</dd>
+
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>The zone to create the ALB in.</dd>
+
+<dt><code>--vlan <em>VLAN_ID</em></code></dt>
+<dd>The ID of the VLAN to create the ALB on. This VLAN must match the ALB <code>type</code> and must be in the the same <code>zone</code> as the ALB that you want to create.</dd>
+
+<dt><code>--user-ip <em>IP</em></code></dt>
+<dd>Optional: An IP address to assign to the ALB. This IP must be on the <code>vlan</code> that you specified and must be in the same <code>zone</code> as the ALB that you want to create. Note that this IP address must not be in use by another load balancer or ALB in the cluster.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks alb-create --cluster mycluster --type public --zone dal10 --vlan 2234945 --user-ip 1.1.1.1
+```
+{: pre}
 
 </br>
+
 ### ibmcloud ks alb-get
 {: #cs_alb_get}
 
@@ -2608,6 +2655,80 @@ ibmcloud ks credential-unset --region REGION [-s]
 ibmcloud ks credential-unset --region us-south
 ```
 {: pre}
+
+
+</br>
+### ibmcloud ks infra-permissions-get
+{: #infra_permissions_get}
+
+Check whether the credentials that allow [access to the IBM Cloud infrastructure (SoftLayer) portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.
+{: shortdesc}
+
+**What do `required` and `suggested` infrastructure permissions mean?**<br>
+If the infrastructure credentials for the region and resource group are missing any permissions, the output of this command returns a list of `required` and `suggested` permissions.
+*   **Required**: These permissions are needed to successfully order and manage infrastructure resources such as worker nodes. If the infrastructure credentials are missing one of these permissions, common actions such as `worker-reload` can fail for all clusters in the region and resource group.
+*   **Suggested**: These permissions are helpful to include in your infrastructure permissions, and might be necessary in certain use cases. For example, the `Add Compute with Public Network Port` infrastructure permission is suggested because if you want public networking, you need this permission. However, if your use case is a cluster on the private VLAN only, the permission is not needed so it is not considered `required`.
+
+For a list of common use cases by permission, see [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra).
+
+**What if I see an infrastructure permission that I can't find in the console or [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra) table?**<br>
+`Support Case` permissions are managed in a different part of the console than infrastructure permissions. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
+
+**Which infrastructure permissions do I assign?**<br>
+If your company's policies for permissions are very strict, you might need to limit the `suggested` permissions for your cluster's use case. Otherwise, make sure that your infrastructure credentials for the region and resource group include all the `required` and `suggested` permissions.
+
+For most use cases, [set up the API key](/docs/containers?topic=containers-users#api_key) for the region and resource group with the appropriate infrastructure permissions. If you need to use another infrastructure account that differs from your current account, [set up manual credentials](/docs/containers?topic=containers-users#credentials).
+
+**How do I control what actions the users can perform?**<br>
+After infrastructure credentials are set up, you can control what actions your users can perform by assigning them [{{site.data.keyword.Bluemix_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform).
+
+```
+ibmcloud ks infra-permissions-get --region REGION [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--region <em>REGION</em></code></dt>
+<dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>. This value is required.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks infra-permissions-get --region us-south
+```
+{: pre}
+
+Example output:
+```
+Missing Virtual Worker Permissions
+
+Add Server                    suggested
+Cancel Server                 suggested
+View Virtual Server Details   required
+
+Missing Physical Worker Permissions
+
+No changes are suggested or required.
+
+Missing Network Permissions
+
+No changes are suggested or required.
+
+Missing Storage Permissions
+
+Add Storage       required
+Manage Storage    required
+```
+{: screen}
 
 
 </br>
@@ -4677,7 +4798,7 @@ ibmcloud ks zone-add --zone dal10 --cluster my_cluster --worker-pools pool1,pool
 {: shortdesc}
 
 ```
-ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [-f] [-s]
+ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [-f] [-s]
 ```
 {: pre}
 
@@ -4699,6 +4820,9 @@ ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>The ID of the public VLAN. This value is required only if you want to change the public VLAN for the zone. To change the public VLAN, you must always provide a compatible private VLAN. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.<p class="note">The private and public VLANs must be compatible, which you can determine from the **Router** ID prefix.</p></dd>
+
+<dt><code>--private-only</code></dt>
+<dd>Optional: Unset the public VLAN so that the workers in this zone are connected to a private VLAN only.</dd>
 
 <dt><code>-f</code></dt>
 <dd>Force the command to run without user prompts. This value is optional.</dd>
