@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-21"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks
 
@@ -114,7 +114,7 @@ The following table is an overview of available {{site.data.keyword.Bluemix_notm
 | --- | --- | --- |
 | IBM Db2 Direct Advanced Edition Server | 11.1 | CNU3TML |
 | IBM Db2 Advanced Enterprise Server Edition Server | 11.1 | CNU3SML |
-| IBM MQ Advanced | 9.0.5 | CNU1VML |
+| IBM MQ Advanced | 9.1.0.0, 9.1.1,0, 9.1.2.0 | - |
 | IBM WebSphere Application Server Liberty | 16.0.0.3 | Docker Hub image |
 {: caption="Table. Supported {{site.data.keyword.Bluemix_notm}} Private products to be used in {{site.data.keyword.Bluemix_notm}} Public." caption-side="top"}
 
