@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-20"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -12,7 +12,7 @@ subcollection: containers
 
 {:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
-{:screen: .screen} 
+{:screen: .screen}
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
@@ -72,7 +72,7 @@ To install the CLIs:
     ibmcloud plugin list
     ```
     {: pre}
-    
+
     Example output:
     ```
     Listing installed plug-ins...
@@ -82,7 +82,7 @@ To install the CLIs:
     container-service/kubernetes-service   0.3.23   
     ```
     {: screen}
-    
+
 For reference information about these CLIs, see the documentation for those tools.
 
 -   [`ibmcloud` commands](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
@@ -127,7 +127,7 @@ To view a local version of the Kubernetes dashboard and to deploy apps into your
         {: pre}
 3.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use.
 
-Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli).
+Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 
 For more information about the Kubernetes CLI, see the [`kubectl` reference docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
 {: note}
@@ -175,7 +175,7 @@ All `kubectl` commands that are available in Kubernetes 1.13.6 are supported for
 
 Before you can run `kubectl` commands:
 * [Install the required CLIs](#cs_cli_install).
-* [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+* [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 * Make sure that you have a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. If you have only a service role but no platform role, you need the cluster admin to give you the cluster name and ID, or the **Viewer** platform role to list clusters.
 
 To use `kubectl` commands:
@@ -213,6 +213,8 @@ To use `kubectl` commands:
         ```
         {: pre}
 
+        
+
         After downloading the configuration files, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
 
         Example:
@@ -226,9 +228,6 @@ To use `kubectl` commands:
 
         **Mac or Linux users**: Instead of running the `ibmcloud ks cluster-config` command and copying the `KUBECONFIG` environment variable, you can run `ibmcloud ks cluster-config --export <cluster-name>`. Depending on your shell, you can set up your shell by running `eval $(ibmcloud ks cluster-config --export <cluster-name>)`.
         {: tip}
-
-        **Windows PowerShell users**: Instead of copying and pasting the `SET` command from the output of `ibmcloud ks cluster-config`, you must set the `KUBECONFIG` environment variable by running, for example, `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`.
-        {:tip}
 
     3.  Verify that the `KUBECONFIG` environment variable is set properly.
 
