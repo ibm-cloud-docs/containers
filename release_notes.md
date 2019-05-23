@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-21"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks
 
@@ -38,6 +38,12 @@ Use these release notes to learn about the latest changes to the {{site.data.key
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>23 May 2019</td>
+  <td><ul>
+  <li><strong>Cluster version updates</strong>: Updated the [unsupported versions policy](/docs/containers?topic=containers-cs_versions) to note that you cannot update clusters if the master version is three or more versions behind the oldest supported version. You can view if the cluster is **unsupported** by reviewing the **State** field when you list clusters.</li>
+  </ul></td>
+</tr>
 <tr>
   <td>20 May 2019</td>
   <td><ul>
