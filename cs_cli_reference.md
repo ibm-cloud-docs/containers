@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-22"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1568,7 +1568,7 @@ ibmcloud ks cluster-update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH] 
 <dd>The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud ks kube-versions](#cs_kube_versions). This value is optional.</dd>
 
 <dt><code>--force-update</code></dt>
-<dd>Attempt the update even if the change is greater than two minor versions. This value is optional.</dd>
+<dd>Attempt the update even if the change is greater than two minor versions from the worker node version. This value is optional.</dd>
 
 <dt><code>-f</code></dt>
 <dd>Force the command to run without user prompts. This value is optional.</dd>
@@ -4309,7 +4309,7 @@ Running `ibmcloud ks worker-update` can cause downtime for your apps and service
 You might need to change your YAML files for deployments before updating. Review this [release note](/docs/containers?topic=containers-cs_versions) for details.
 
 ```
-ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [--force-update] [-s]
+ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [-s]
 ```
 {: pre}
 
@@ -4322,9 +4322,6 @@ ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [--fo
 
 <dt><code>-f</code></dt>
 <dd>Use this option to force the update of the master without user prompts. This value is optional.</dd>
-
-<dt><code>--force-update</code></dt>
-<dd>Attempt the update even if the change is greater than two minor versions. This value is optional.</dd>
 
 <dt><code>--workers <em>WORKER</em></code></dt>
 <dd>The ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
