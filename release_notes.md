@@ -42,6 +42,20 @@ Use these release notes to learn about the latest changes to the {{site.data.key
   <td>23 May 2019</td>
   <td><ul>
   <li><strong>Cluster version updates</strong>: Updated the [unsupported versions policy](/docs/containers?topic=containers-cs_versions) to note that you cannot update clusters if the master version is three or more versions behind the oldest supported version. You can view if the cluster is **unsupported** by reviewing the **State** field when you list clusters.</li>
+  <li><strong>Cluster add-ons changelog</strong>: Updated the [ALB `nginx-ingress` image to build 457](/docs/containers?topic=containers-cluster-add-ons-changelog).</li>
+  <li><strong>Cluster planning and creation</strong>: You can now find information about cluster planning, creation, and removal and network planning in the following pages:
+    <ul><li>[Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)</li>
+    <li>[Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters)</li>
+    <li>[Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes)</li>
+    <li>[Creating clusters](/docs/containers?topic=containers-clusters)</li>
+    <li>[Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)</li>
+    <li>[Removing clusters](/docs/containers?topic=containers-remove)</li>
+    <li>[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)</li></ul>
+  </li>
+  <li><strong>CLI reference</strong>: Updated the [CLI reference page](/docs/containers?topic=containers-cli-plugin-cs_cli_reference) to remove the `--force-update` flag from the `worker-update` command.</li>
+  <li><strong>Cluster and worker states</strong>: Updated the [Logging and monitoring page](/docs/containers?topic=containers-health#states) to add reference tables about about cluster and worker node states.</li>
+  <li><strong>Istio</strong>: Updated the [Istio page](/docs/containers?topic=containers-istio) to remove the limitation that Istio does not work in clusters that are connected to a private VLAN only. Added a step to the [Updating managed add-ons topic](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons) to re-create Istio gateways that use TLS sections after the update of an Istio managed add-on is complete.</li>
+  <li><strong>Popular topics</strong>: Removed the popular topics page. This release notes page replaces the popular topics page.</li>
   </ul></td>
 </tr>
 <tr>

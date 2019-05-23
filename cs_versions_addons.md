@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-22"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -56,7 +56,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tbody>
 <tr>
 <td>457 / 329</td>
-<td>22 May 2019</td>
+<td>23 May 2019</td>
 <td>Fixes Go vulnerabilities for image scans.</td>
 <td>-</td>
 </tr>
