@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -29,7 +29,7 @@ subcollection: containers
 {: #kubernetes}
 {: faq}
 
-Kubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers managements tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. All containers that make up your microservice are grouped into pods, a logical unit to ensure easy management and discovery. These pods run on compute hosts that are managed in a Kubernetes cluster that is portable, extensible, and self-healing in case of failures. 
+Kubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers managements tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. All containers that make up your microservice are grouped into pods, a logical unit to ensure easy management and discovery. These pods run on compute hosts that are managed in a Kubernetes cluster that is portable, extensible, and self-healing in case of failures.
 {: shortdesc}
 
 For more information about Kubernetes, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational).
@@ -38,7 +38,7 @@ For more information about Kubernetes, see the [Kubernetes documentation ![Exter
 {: #kubernetes_service}
 {: faq}
 
-With {{site.data.keyword.containerlong_notm}}, you can create your own Kubernetes cluster to deploy and manage containerized apps on {{site.data.keyword.Bluemix_notm}}. Your containerized apps are hosted on IBM Cloud infrastructure (SoftLayer) compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](/docs/containers?topic=containers-plan_clusters#vm) with shared or dedicated resources, or as [bare metal machines](/docs/containers?topic=containers-plan_clusters#bm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the {{site.data.keyword.containerlong_notm}} API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.
+With {{site.data.keyword.containerlong_notm}}, you can create your own Kubernetes cluster to deploy and manage containerized apps on {{site.data.keyword.Bluemix_notm}}. Your containerized apps are hosted on IBM Cloud infrastructure (SoftLayer) compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm) with shared or dedicated resources, or as [bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#bm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the {{site.data.keyword.containerlong_notm}} API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.
 
 For more information on how your cluster resources are set up, see the [Service architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture). To find a list of capabilities and benefits, see [Why {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov).
 
@@ -66,9 +66,9 @@ Worker nodes in standard clusters are provisioned in to your {{site.data.keyword
 
 The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is designed to ensure reliability, low processing latency, and a maximum uptime of the service. By default, every cluster in {{site.data.keyword.containerlong_notm}} is set up with multiple Kubernetes master instances to ensure availability and accessibility of your cluster resources, even if one or more instances of your Kubernetes master are unavailable.
 
-You can make your cluster even more highly available and protect your app from a downtime by spreading your workloads across multiple worker nodes in multiple zones of a region. This setup is called a [multizone cluster](/docs/containers?topic=containers-plan_clusters#multizone) and ensures that your app is accessible, even if a worker node or an entire zone is not available.
+You can make your cluster even more highly available and protect your app from a downtime by spreading your workloads across multiple worker nodes in multiple zones of a region. This setup is called a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone) and ensures that your app is accessible, even if a worker node or an entire zone is not available.
 
-To protect against an entire region failure, create [multiple clusters and spread them across {{site.data.keyword.containerlong_notm}} regions](/docs/containers?topic=containers-plan_clusters#multiple_clusters). By setting up a network load balancer (NLB) for your clusters, you can achieve cross-region load balancing and cross-region networking for your clusters.
+To protect against an entire region failure, create [multiple clusters and spread them across {{site.data.keyword.containerlong_notm}} regions](/docs/containers?topic=containers-ha_clusters#multiple_clusters). By setting up a network load balancer (NLB) for your clusters, you can achieve cross-region load balancing and cross-region networking for your clusters.
 
 If you have data that must be available, even if an outage occurs, make sure to store your data on [persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
@@ -116,7 +116,7 @@ Some CVEs require the latest patch update for a Kubernetes version that you can 
 
 Yes, you can provision your worker node as a single-tenant physical bare metal server. Bare metal servers come with high performance benefits for workloads such as data, AI, and GPU. Additionally, all the hardware resources are dedicated to your workloads, so you don't have to worry about "noisy neighbors".
 
-For more information about available bare metal flavors and how bare metal is different from virtual machines, see [Physical machines (bare metal)](/docs/containers?topic=containers-plan_clusters#bm).
+For more information about available bare metal flavors and how bare metal is different from virtual machines, see [Physical machines (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm).
 
 ## Which Kubernetes versions does the service support?
 {: #supported_kube_versions}
@@ -124,7 +124,7 @@ For more information about available bare metal flavors and how bare metal is di
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
-*   Latest: 1.14.1 
+*   Latest: 1.14.1
 *   Default: 1.13.6
 *   Other: 1.12.8
 
@@ -199,7 +199,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <p><strong>Physical machines (bare metal)</strong> yield high performance benefits for workloads such as data, AI, and GPU. Additionally, all the hardware resources are dedicated to your workloads, so you don't have "noisy neighbors". Keep in mind these factors that impact your bare metal costs:</p>
   <ul><li><strong>Monthly billing only</strong>: All bare metals are charged monthly.</li>
   <li><strong>Longer ordering process</strong>:  After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure (SoftLayer) account. Therefore, it can take more than one business day to complete.</li></ul>
-  <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).</p></dd>
+  <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).</p></dd>
 
 <dt id="bandwidth">Public bandwidth</dt>
   <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.Bluemix_notm}} resources in data centers around the globe. Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.
