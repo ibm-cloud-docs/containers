@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-22"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Logging and monitoring
@@ -833,6 +832,10 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    <tr>
      <td>`Updating`</td>
      <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that the user deployed are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
+   </tr>
+   <tr>
+    <td>`Unsupported`</td>
+    <td>The [Kubernetes version](/docs/containers?topic=containers-cs_versions#cs_versions) that the cluster runs is no longer supported. Your cluster's health is no longer actively monitored or reported. Additionally, you cannot add or reload worker nodes. To continue receiving important security updates and support, you must update your cluster. Review the [version update preparation actions](/docs/containers?topic=containers-cs_versions#prep-up), then [update your cluster](/docs/containers?topic=containers-update#update) to a supported Kubernetes version.<br><br><p class="note">Clusters that are three or more versions behind the oldest supported version cannot be updated. To avoid this situation, you can update the cluster to a Kubernetes version less than three ahead of the current version, such as 1.12 to 1.14. Further, if your cluster runs version 1.5, 1.7, or 1.8, then the version is too far behind to update. Instead, you must [create a cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the cluster.</p></td>
    </tr>
     <tr>
        <td>`Warning`</td>
