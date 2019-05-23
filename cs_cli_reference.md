@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-20"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1224,13 +1224,13 @@ trusted: <em>true</em>
 <p>To find out if you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run <code>ibmcloud ks vlans --zone <em>&lt;zone&gt;</em></code>.</p></dd>
 
 <dt><code>--private-only</code></dt>
-<dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If worker nodes are set up with a private VLAN only, you must enable the private service endpoint or configure a gateway device. For more information, see [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
+<dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If worker nodes are set up with a private VLAN only, you must enable the private service endpoint or configure a gateway device. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master).</p></dd>
 
 <dt><code>--private-service-endpoint</code></dt>
-<dd>**Standard clusters that run Kubernetes version 1.11 or later in [VRF-enabled accounts](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)**: Enable the [private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private service endpoint, you cannot later disable it.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.</dd>
+<dd>**Standard clusters that run Kubernetes version 1.11 or later in [VRF-enabled accounts](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)**: Enable the [private service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private service endpoint, you cannot later disable it.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.</dd>
 
 <dt><code>--public-service-endpoint</code></dt>
-<dd>**Standard clusters that run Kubernetes version 1.11 or later**: Enable the [public service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public) so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your terminal. If you have a [VRF-enabled account](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) and also include the `--private-service-endpoint` flag, master-worker node communication goes over the private and the public network. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.</dd>
+<dd>**Standard clusters that run Kubernetes version 1.11 or later**: Enable the [public service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your terminal. If you have a [VRF-enabled account](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) and also include the `--private-service-endpoint` flag, master-worker node communication goes over the private and the public network. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with 1 worker node is created. This value is optional for standard clusters and is not available for free clusters.
@@ -1317,7 +1317,7 @@ Enable a feature on an existing cluster. This command must be combined with one 
 #### ibmcloud ks cluster-feature-enable private-service-endpoint
 {: #cs_cluster_feature_enable_private_service_endpoint}
 
-Enable the [private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) to make your cluster master privately accessible.
+Enable the [private service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to make your cluster master privately accessible.
 {: shortdesc}
 
 To run this command:
@@ -1352,7 +1352,7 @@ ibmcloud ks cluster-feature-enable private-service-endpoint --cluster my_cluster
 #### ibmcloud ks cluster-feature-enable public-service-endpoint
 {: #cs_cluster_feature_enable_public_service_endpoint}
 
-Enable the [public service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public) to make your cluster master publicly accessible.
+Enable the [public service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to make your cluster master publicly accessible.
 {: shortdesc}
 
 After you run this command, you must refresh the API server to use the service endpoint by following the prompt in the CLI.
@@ -1568,7 +1568,7 @@ ibmcloud ks cluster-update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH] 
 <dd>The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud ks kube-versions](#cs_kube_versions). This value is optional.</dd>
 
 <dt><code>--force-update</code></dt>
-<dd>Attempt the update even if the change is greater than two minor versions. This value is optional.</dd>
+<dd>Attempt the update even if the change is greater than two minor versions from the worker node version. This value is optional.</dd>
 
 <dt><code>-f</code></dt>
 <dd>Force the command to run without user prompts. This value is optional.</dd>
@@ -2339,7 +2339,7 @@ ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disab
 <dd>Include this flag to enable an ALB in a cluster.</dd>
 
 <dt><code>--disable</code></dt>
-<dd>Include this flag to disable an ALB in a cluster. <p class="note">If you disable an ALB, the IP that the ALB used goes back into the pool of available portable IPs so that another service can use the IP. If you later try to re-enable the ALB, the ALB might report an error if the IP address it previously used is now in use by another service. You can either stop running the other service or specify another IP address to use when you re-enable the ALB.</p></dd>
+<dd>Include this flag to disable an ALB in a cluster. <p class="note">If you disable an ALB, the IP address that the ALB used goes back into the pool of available portable IPs so that another service can use the IP. If you later try to re-enable the ALB, the ALB might report an error if the IP address it previously used is now in use by another service. You can either stop running the other service or specify another IP address to use when you re-enable the ALB.</p></dd>
 
 <dt><code>--disable-deployment</code></dt>
 <dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
@@ -2619,7 +2619,7 @@ View a list of available worker machine types, or flavors, for your worker nodes
 
 Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers?topic=containers-security#encrypted_disk).
 
-You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
+You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
 ```
 ibmcloud ks machine-types --zone ZONE [--json] [-s]
@@ -3961,7 +3961,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Replace <code>&lt;public_VLAN&gt;</code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> and look for VLAN routers that start with <code>fcr</code> (front-end router). <br><strong>Note</strong>: If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) or [configuring a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway).</td>
+<td>Replace <code>&lt;public_VLAN&gt;</code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> and look for VLAN routers that start with <code>fcr</code> (front-end router). <br><strong>Note</strong>: If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway device](/docs/containers?topic=containers-plan_clusters#workeruser-master).</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -3989,7 +3989,7 @@ diskEncryption: <em>false</em></code></pre>
 <dd>The private VLAN that was specified when the cluster was created. This value is required. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>The public VLAN that was specified when the cluster was created. This value is optional. If you want your worker nodes to exist on a private VLAN only, do not provide a public VLAN ID. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.<p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) or [configuring a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway).</p></dd>
+<dd>The public VLAN that was specified when the cluster was created. This value is optional. If you want your worker nodes to exist on a private VLAN only, do not provide a public VLAN ID. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.<p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway device](/docs/containers?topic=containers-plan_clusters#workeruser-master).</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option.</dd>
@@ -4309,7 +4309,7 @@ Running `ibmcloud ks worker-update` can cause downtime for your apps and service
 You might need to change your YAML files for deployments before updating. Review this [release note](/docs/containers?topic=containers-cs_versions) for details.
 
 ```
-ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [--force-update] [-s]
+ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [-s]
 ```
 {: pre}
 
@@ -4322,9 +4322,6 @@ ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [--fo
 
 <dt><code>-f</code></dt>
 <dd>Use this option to force the update of the master without user prompts. This value is optional.</dd>
-
-<dt><code>--force-update</code></dt>
-<dd>Attempt the update even if the change is greater than two minor versions. This value is optional.</dd>
 
 <dt><code>--workers <em>WORKER</em></code></dt>
 <dd>The ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>

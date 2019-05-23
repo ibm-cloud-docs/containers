@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-02"
+lastupdated: "2019-05-22"
 
 keywords: kubernetes, iks
 
@@ -141,7 +141,7 @@ To deploy the app:
 7.  Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
 
     ```
-    kubectl run hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
+    kubectl create deployment hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
     {: pre}
 
@@ -241,7 +241,7 @@ To deploy the app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
         ```
         {: screen}
 

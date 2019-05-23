@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-06"
+lastupdated: "2019-05-20"
 
 keywords: kubernetes, iks, ingress
 
@@ -1881,7 +1881,7 @@ Use the buffer annotation to disable the storage of response data on the ALB whi
 **Description**</br>
 The Ingress ALB acts as a proxy between your back-end app and the client web browser. When a response is sent from the back-end app to the client, the response data is buffered on the ALB by default. The ALB proxies the client response and starts sending the response to the client at the client's pace. After all data from the back-end app is received by the ALB, the connection to the back-end app is closed. The connection from the ALB to the client remains open until the client receives all data.
 
-If buffering of response data on the ALB is disabled, data is immediately sent from the ALB to the client. The client must be able to handle incoming data at the pace of the ALB. If the client is too slow, data might get lost.
+If buffering of response data on the ALB is disabled, data is immediately sent from the ALB to the client. The client must be able to handle incoming data at the pace of the ALB. If the client is too slow, the upstream connection remains open until the client can catch up.
 
 Response data buffering on the ALB is enabled by default.
 

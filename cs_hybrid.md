@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-21"
 
 keywords: kubernetes, iks
 
@@ -42,8 +42,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 {: shortdesc}
 
 1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_notm}} Public or use an existing one. To create a cluster, choose between the following options:
-    - [Create a standard cluster from the console](/docs/containers?topic=containers-clusters#clusters_ui).
-    - [Create a standard cluster from the CLI](/docs/containers?topic=containers-clusters#clusters_cli).
+    - [Create a standard cluster from the console or CLI](/docs/containers?topic=containers-clusters#clusters_ui).
     - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
 
 2.  In your {{site.data.keyword.containerlong_notm}} cluster, [follow the instructions to set up the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn_configure).
@@ -135,7 +134,7 @@ To deploy an {{site.data.keyword.Bluemix_notm}} Private image in a cluster in {{
 
     2.  Follow the [Liberty Helm chart instructions![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html).
 
-2.  Verify that the **STATUS** of the Helm chart shows `DEPLOYED`. If not, wait a few minutes, then try again.
+2.  Verify that the **STATUS** of the Helm chart shows `DEPLOYED`. If not, wait a few minutes, and then try again.
     ```
     helm status <helm_chart_name>
     ```

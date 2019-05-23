@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-22"
 
 keywords: kubernetes, iks
 
@@ -159,7 +159,7 @@ To allow access for a specific cluster:
     }
     ```
     {: screen}
-  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: To access your cluster master on the private network over a VPN connection or through DirectLink, you must use the private service endpoint. However, communication with the Kubernetes master must go through the `166.XXX.XXX` IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal `10.XXX.XXX` IP address range to the Kubernetes master.
+  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: To access your cluster master on the private network over a VPN connection or through DirectLink, you must use the private service endpoint. However, communication with the Kubernetes master must go through the `166.X.X.X` IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal `10.X.X.X` IP address range to the Kubernetes master.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```

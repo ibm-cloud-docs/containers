@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-22"
 
 ---
 
@@ -66,9 +66,7 @@ If you need to use the latest version of Istio or customize your Istio installat
 {: tip}
 
 **Are there any limitations?** </br>
-You cannot enable the managed Istio add-on in your cluster if:
-* Your cluster is connected to a private VLAN only.
-* You installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster.
+You cannot enable the managed Istio add-on in your cluster if you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster.
 
 <br />
 

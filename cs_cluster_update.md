@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-23"
 
 keywords: kubernetes, iks
 
@@ -42,9 +42,9 @@ You are notified in the {{site.data.keyword.Bluemix_notm}} console and CLI when 
 **How many versions behind the latest can the master be?**</br>
 IBM generally supports 3 versions of Kubernetes at a given time. You can update the Kubernetes API server no more than 2 versions ahead of its current version.
 
-For example, if your current Kubernetes API server version is 1.11 and you want to update to 1.14, you must first update to 1.12. You can force the update to occur, but updating three or more minor versions might cause unexpected results or failure.
+For example, if your current Kubernetes API server version is 1.11 and you want to update to 1.14, you must first update to 1.12.
 
-If your cluster is running an unsupported Kubernetes version, you might have to force the update. Therefore, keep your cluster up to date to avoid operational impact.
+If your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](/docs/containers?topic=containers-cs_versions#k8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up to date.
 
 **Can my worker nodes run a later version than the master?**</br>
 Your worker nodes cannot run a later `major.minor` Kubernetes version than the master. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
@@ -615,7 +615,7 @@ To update stand-alone worker nodes to worker pools:
       ```
       {: pre}
 
-   3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone-add` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-plan_clusters#multizone).
+   3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone-add` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone).
 
 6. Wait for the worker nodes to be deployed in each zone.
    ```
@@ -657,7 +657,7 @@ To update stand-alone worker nodes to worker pools:
 
 
 **What's next?** </br>
-Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-plan_clusters#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
+Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
 
 <br />
 

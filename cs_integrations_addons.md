@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-22"
 
 keywords: kubernetes, iks, helm
 
@@ -177,3 +177,10 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
        ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
        ```
        {: pre}
+
+13. Optional for Istio: If you use TLS sections in your gateway configuration files, you must delete and recreate the gateways so that Envoy can access the secrets.
+  ```
+  kubectl delete gateway mygateway
+  kubectl create -f mygateway.yaml
+  ```
+  {: pre}
