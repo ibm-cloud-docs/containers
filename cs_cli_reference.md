@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-23"
+lastupdated: "2019-05-24"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -4742,7 +4742,7 @@ ibmcloud ks worker-pools --cluster my_cluster
 ### ibmcloud ks zone-add
 {: #cs_zone_add}
 
-**Multizone clusters only**: After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool.
+After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool. You can only add more than one zone if your cluster is in a multizone metro.
 {: shortdesc}
 
 ```
