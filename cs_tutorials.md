@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-21"
+lastupdated: "2019-05-24"
 
 keywords: kubernetes, iks
 
@@ -263,7 +263,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
     {: note}
 
     ```
-    ibmcloud service create tone_analyzer standard <service_name>
+    ibmcloud resource service-instance-create <service_name> tone-analyzer standard us-south 
     ```
     {: pre}
 
