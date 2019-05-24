@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-07"
+lastupdated: "2019-05-24"
 
 keywords: kubernetes, iks
 
@@ -581,7 +581,7 @@ During the PVC creation and binding, many different tasks are executed by the {{
           <td>See [PVC creation fails due to wrong credentials or access denied](#cred_failure). </td>
         </tr>
         <tr>
-          <td>`cannot create bucket <bucket_name>: CredentialsEndpointError: failed to load credentials`</td>
+          <td>`cannot create bucket <bucket_name>: CredentialsEndpointError: failed to load credentials` </br> </br> `cannot access bucket <bucket_name>: CredentialsEndpointError: failed to load credentials`</td>
           <td>The {{site.data.keyword.cos_full_notm}} API key of your IAM credentials and the GUID of your {{site.data.keyword.cos_full_notm}} service instance are not correct.</td>
           <td>See [PVC creation fails due to wrong credentials or access denied](#cred_failure). </td>
         </tr>
