@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-28"
 
 keywords: kubernetes, iks
 
@@ -45,7 +45,7 @@ You can use multiple registries with {{site.data.keyword.containerlong_notm}} to
 
 |Registry|Description|Benefit|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)|With this option, you can set up your own secured Docker image repository in {{site.data.keyword.registryshort_notm}} where you can safely store and share images between cluster users.|<ul><li>Manage access to images in your account.</li><li>Use {{site.data.keyword.IBM_notm}} provided images and sample apps, such as {{site.data.keyword.IBM_notm}} Liberty, as a parent image and add your own app code to it.</li><li>Automatic scanning of images for potential vulnerabilities by Vulnerability Advisor, including OS specific recommendations to fix them.</li></ul>|
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#getting-started)|With this option, you can set up your own secured Docker image repository in {{site.data.keyword.registryshort_notm}} where you can safely store and share images between cluster users.|<ul><li>Manage access to images in your account.</li><li>Use {{site.data.keyword.IBM_notm}} provided images and sample apps, such as {{site.data.keyword.IBM_notm}} Liberty, as a parent image and add your own app code to it.</li><li>Automatic scanning of images for potential vulnerabilities by Vulnerability Advisor, including OS specific recommendations to fix them.</li></ul>|
 |Any other private registry|Connect any existing private registry to your cluster by creating an [image pull secret ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/containers/images/). The secret is used to securely save your registry URL and credentials in a Kubernetes secret.|<ul><li>Use existing private registries independent of their source (Docker Hub, organization owned registries, or other private Cloud registries).</li></ul>|
 |[Public Docker Hub![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/){: #dockerhub}|Use this option to use existing public images from Docker Hub directly in your [Kubernetes deployment![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) when no Dockerfile changes are needed. <p>**Note:** Keep in mind that this option might not meet your organization's security requirements, like access management, vulnerability scanning, or app privacy.</p>|<ul><li>No additional setup is needed for your cluster.</li><li>Includes a variety of open-source applications.</li></ul>|
 {: caption="Public and private image registry options" caption-side="top"}
@@ -329,7 +329,7 @@ You can copy an image pull secret, such as the one that is automatically created
 ### Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.Bluemix_notm}} accounts
 {: #other_registry_accounts}
 
-You can assign {{site.data.keyword.Bluemix_notm}} IAM access policies to users or a service ID to restrict permissions to specific registry image repositories, namespaces, or actions (such as `push` or `pull`). Then, create an API key and store these registry credentials in an image pull secret for your cluster.
+You can assign {{site.data.keyword.Bluemix_notm}} IAM access policies to users or a service ID to restrict permissions to specific registry image namespaces or actions (such as `push` or `pull`). Then, create an API key and store these registry credentials in an image pull secret for your cluster.
 {: shortdesc}
 
 For example, to access images in other {{site.data.keyword.Bluemix_notm}} accounts, create an API key that stores the {{site.data.keyword.registryshort_notm}} credentials of a user or service ID in that account. Then, in your cluster's account, save the API key credentials in an image pull secret for each cluster and cluster namespace.

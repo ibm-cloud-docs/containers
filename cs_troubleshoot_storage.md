@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-07"
+lastupdated: "2019-05-24"
 
 keywords: kubernetes, iks
 
@@ -36,23 +36,172 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
 {: tip}
 
-## In a multizone cluster, a persistent volume fails to mount to a pod
-{: #mz_pv_mount}
+
+## Debugging persistent storage failures
+{: #debug_storage}
+
+Review the options to debug persistent storage and find the root causes for failures.
+{: shortdesc}
+
+1. Verify that the `kubectl` CLI version that you run on your local machine matches the Kubernetes version that is installed in your cluster. 
+   1. Show the `kubectl` CLI version that is installed in your cluster and your local machine. 
+      ```
+      kubectl version
+      ```
+      {: pre} 
+   
+      Example output: 
+      ```
+      Client Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.5", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"darwin/amd64"}
+      Server Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.5+IKS", GitCommit:"e15454c2216a73b59e9a059fd2def4e6712a7cf0", GitTreeState:"clean", BuildDate:"2019-04-01T10:08:07Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+      ```
+      {: screen}
+    
+      The CLI versions match if you can see the same version in `GitVersion` for the client and the server. You can ignore the `+IKS` part of the version for the server. 
+   2. If the `kubectl` CLI version on your local machine and your cluster do not match, either [update your cluster](/docs/containers?topic=containers-update) or [install a different CLI version on your local machine](/docs/containers?topic=containers-cs_cli_install#kubectl). 
+
+2. For block storage, object storage, and Portworx only: Make sure that you [installed the Helm server Tiller with a Kubernetes services account](/docs/containers?topic=containers-helm#public_helm_install). 
+
+3. For block storage, object storage, and Portworx only: Make sure that you have installed the latest Helm chart version for the plug-in. 
+   
+   **For block and object storage**: 
+   
+   1. Update your Helm chart repositories. 
+      ```
+      helm repo update
+      ```
+      {: pre}
+      
+   2. List the Helm charts in the `iks-charts` repository. 
+      ```
+      helm search `iks-charts`
+      ```
+      {: pre}
+      
+      Example output: 
+      ```
+      iks-charts/ibm-block-storage-attacher          	1.0.2        A Helm chart for installing ibmcloud block storage attach...
+      iks-charts/ibm-iks-cluster-autoscaler          	1.0.5        A Helm chart for installing the IBM Cloud cluster autoscaler
+      iks-charts/ibm-object-storage-plugin           	1.0.6        A Helm chart for installing ibmcloud object storage plugin  
+      iks-charts/ibm-worker-recovery                 	1.10.46      IBM Autorecovery system allows automatic recovery of unhe...
+      ...
+      ```
+      {: screen}
+      
+   3. List the installed Helm charts in your cluster and compare the version that you installed with the version that is available. 
+      ```
+      helm ls
+      ```
+      {: pre}
+      
+   4. If a more recent version is available, install this version. For instructions, see [Updating the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in) and [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin). 
+   
+   **For Portworx**: 
+   
+   1. Find the [latest Helm chart version ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/tree/master/charts/portworx) that is available. 
+   
+   2. List the installed Helm charts in your cluster and compare the version that you installed with the version that is available. 
+      ```
+      helm ls
+      ```
+      {: pre}
+   
+   3. If a more recent version is available, install this version. For instructions, see [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx). 
+   
+4. Verify that the storage driver and plug-in pods show a status of **Running**. 
+   1. List the pods in the `kube-system` namespace. 
+      ```
+      kubectl get pods -n kube-system 
+      ```
+      {: pre}
+      
+   2. If the pods do not show a **Running** status, get more details of the pod to find the root cause. Depending on the status of your pod, you might not be able to execute all of the following commands. 
+      ```
+      kubectl describe pod <pod_name> -n kube-system
+      ```
+      {: pre}
+      
+      ```
+      kubectl logs <pod_name> -n kube-system
+      ```
+      {: pre}
+      
+   3. Analyze the **Events** section of the CLI output of the `kubectl describe pod` command and the latest logs to find the root cause for the error. 
+   
+5. Review the storage type-specific troubleshooting information in this topic to find common errors that can occur during the storage plug-in installation, PVC creation and mounting of your pod. 
+   
+
+## PVC creation fails because of missing permissions
+{: #missing_permissions}
 
 {: tsSymptoms}
-Your cluster was previously a single-zone cluster with stand-alone worker nodes that were not in worker pools. You successfully mounted a persistent volume claim (PVC) that described the persistent volume (PV) to use for your app's pod deployment. Now that you have worker pools and added zones to your cluster, however, the PV fails to mount to a pod.
+When you create a PVC, the PVC remains pending. When you run `kubectl describe pvc <pvc_name>`, you see an error message similar to the following: 
+
+```
+User doesn't have permissions to create or manage Storage
+```
+{: screen}
 
 {: tsCauses}
-For multizone clusters, PVs must have the following labels so that pods do not try to mount volumes in a different zone.
-* `failure-domain.beta.kubernetes.io/region`
-* `failure-domain.beta.kubernetes.io/zone`
-
-New clusters with worker pools that can span multiple zones label the PVs by default. If you created your clusters before worker pools were introduced, you must add the labels manually.
+The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster  does not have all the required permissions to provision persistent storage. 
 
 {: tsResolve}
-[Update the PVs in your cluster with the region and zone labels](/docs/containers?topic=containers-kube_concepts#storage_multizone).
+1. Retrieve the IAM key or IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster and verify that the correct API key is used. 
+   ```
+   kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   [Bluemix]
+   iam_url = "https://iam.bluemix.net"
+   iam_client_id = "bx"
+   iam_client_secret = "bx"
+   iam_api_key = "<iam_api_key>"
+   refresh_token = ""
+   pay_tier = "paid"
+   containers_api_route = "https://us-south.containers.bluemix.net"
 
-<br />
+   [Softlayer]
+   encryption = true
+   softlayer_username = ""
+   softlayer_api_key = ""
+   softlayer_endpoint_url = "https://api.softlayer.com/rest/v3"
+   softlayer_iam_endpoint_url = "https://api.softlayer.com/mobile/v3"
+   softlayer_datacenter = "dal10"
+   ```
+   {: screen}
+   
+   The IAM API key is listed in the `Bluemix.iam_api_key` section of your CLI output. If the `Softlayer.softlayer_api_key` is empty at the same time, then the IAM API key is used to determine your infrastructure permissions. The IAM API key is automatically set by the user who runs the first action that requires the IAM **Administrator** platform role in a resource group and region. If a different API key is set in `Softlayer.softlayer_api_key`, then this key takes precedence over the IAM API key. The `Softlayer.softlayer_api_key` is set when a cluster admin runs the `ibmcloud ks credentials-set` command. 
+   
+2. If you want to change the credentials, update the API key that is used. 
+    1.  To update the IAM API key, use the `ibmcloud ks api-key-reset` [command](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_api_key_reset). To update the IBM Cloud infrastructure (SoftLayer) key, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_credentials_set).
+    2. Wait about 10-15 minutes for the `storage-secret-store` Kubernetes secret to update, then verify that the key is updated.
+       ```
+       kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
+       ```
+       {: pre}
+   
+3. If the API key is correct, verify that the key has the correct permission to provision persistent storage.
+   1. Contact the account owner to verify the permission of the API key. 
+   2. As the account owner, select **Manage** > **Access (IAM)** from the navigation in the {{site.data.keyword.Bluemix_notm}} console.
+   3. Select **Users** and find the user whose API key you want to use. 
+   4. From the actions menu, select **Manage user details**. 
+   5. Go to the **Classic infrastructure** tab. 
+   6. Expand the **Account** category and verify that the **Add/ Upgrade Storage (StorageLayer)** permission is assigned. 
+   7. Expand the **Services** category and verify that the **Storage Manage** permission is assigned. 
+4. Remove the PVC that failed. 
+   ```
+   kubectl delete pvc <pvc_name>
+   ```
+   {: pre}
+   
+5. Recreate the PVC. 
+   ```
+   kubectl apply -f pvc.yaml
+   ```
+   {: pre}
 
 
 ## File storage: File systems for worker nodes change to read-only
@@ -501,6 +650,11 @@ During the PVC creation and binding, many different tasks are executed by the {{
   </thead>
   <tbody>
     <tr>
+      <td>`User doesn't have permissions to create or manage Storage`</td>
+      <td>The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
+      <td>See [PVC creation fails because of missing permissions](#missing_permissions). </td>
+    </tr>
+    <tr>
       <td>`cannot get credentials: cannot get secret <secret_name>: secrets "<secret_name>" not found`</td>
       <td>The Kubernetes secret that holds your {{site.data.keyword.cos_full_notm}} service credentials does not exist in the same namespace as the PVC or pod. </td>
       <td>See [PVC or pod creation fails due to not finding the Kubernetes secret](#cos_secret_access_fails).</td>
@@ -581,7 +735,7 @@ During the PVC creation and binding, many different tasks are executed by the {{
           <td>See [PVC creation fails due to wrong credentials or access denied](#cred_failure). </td>
         </tr>
         <tr>
-          <td>`cannot create bucket <bucket_name>: CredentialsEndpointError: failed to load credentials`</td>
+          <td>`cannot create bucket <bucket_name>: CredentialsEndpointError: failed to load credentials` </br> </br> `cannot access bucket <bucket_name>: CredentialsEndpointError: failed to load credentials`</td>
           <td>The {{site.data.keyword.cos_full_notm}} API key of your IAM credentials and the GUID of your {{site.data.keyword.cos_full_notm}} service instance are not correct.</td>
           <td>See [PVC creation fails due to wrong credentials or access denied](#cred_failure). </td>
         </tr>
@@ -589,7 +743,7 @@ During the PVC creation and binding, many different tasks are executed by the {{
     </table>
     
 
-## Object storage: PVC or pod creation fails due to not finding the Kubernetes secret
+### Object storage: PVC or pod creation fails due to not finding the Kubernetes secret
 {: #cos_secret_access_fails}
 
 {: tsSymptoms}
@@ -626,7 +780,7 @@ This task requires [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}}
 <br />
 
 
-## Object storage: PVC creation fails due to wrong credentials or access denied
+### Object storage: PVC creation fails due to wrong credentials or access denied
 {: #cred_failure}
 
 {: tsSymptoms}
@@ -672,7 +826,7 @@ The {{site.data.keyword.cos_full_notm}} service credentials that you use to acce
 <br />
 
 
-## Object storage: PVC creation fails due to wrong s3fs or IAM API endpoint
+### Object storage: PVC creation fails due to wrong s3fs or IAM API endpoint
 {: #cos_api_endpoint_failure}
 
 {: tsSymptoms}
@@ -709,7 +863,7 @@ The s3fs API endpoint for the bucket that you want to use might have the wrong f
 <br />
 
 
-## Object storage: Cannot access an existing bucket
+### Object storage: Cannot access an existing bucket
 {: #cos_access_bucket_fails}
 
 {: tsSymptoms}
@@ -886,7 +1040,6 @@ After you set the correct file permissions in your {{site.data.keyword.cos_full_
 {: tip}
 
 <br />
-
 
 
 

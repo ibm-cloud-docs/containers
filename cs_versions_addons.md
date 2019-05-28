@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-23"
+lastupdated: "2019-05-28"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -54,6 +54,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>462 / 329</td>
+<td>28 May 2019</td>
+<td>Fixes cURL vulnerabilities for image scans.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>457 / 329</td>
 <td>23 May 2019</td>

@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-05-21"
+lastupdated: "2019-05-28"
 
 ---
 
@@ -245,7 +245,7 @@ lastupdated: "2019-05-21"
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
 * [Autorecovery for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
 
-Administering clusters
+## Administering clusters
 {: #sitemap-clusters-admin}
 
 [Scaling clusters](/docs/containers?topic=containers-ca#ca)
@@ -1049,7 +1049,8 @@ Administering clusters
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help)
 
 [Troubleshooting cluster storage](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_troubleshoot_storage)
-* [In a multizone cluster, a persistent volume fails to mount to a pod](/docs/containers?topic=containers-cs_troubleshoot_storage#mz_pv_mount)
+* [Debugging persistent storage failures](/docs/containers?topic=containers-cs_troubleshoot_storage#debug_storage)
+* [PVC creation fails because of missing permissions](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions)
 * [File storage: File systems for worker nodes change to read-only](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_nodes)]
 * [File storage: App fails when a non-root user owns the NFS file storage mount path](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)]
 * [File storage: Adding non-root user access to persistent storage fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot)

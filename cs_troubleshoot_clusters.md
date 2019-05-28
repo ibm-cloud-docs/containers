@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-23"
+lastupdated: "2019-05-28"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
 subcollection: containers
 
@@ -726,9 +726,37 @@ You can try one of the following solutions:
 <br />
 
 
+## Cluster create error cannot pull images from registry
+{: #ts_image_pull_create}
+
+{: tsSymptoms}
+When you created a cluster, you received an error message similar to the following.
 
 
-## Image cannot be pulled from registry
+```
+Your cluster cannot pull images from the IBM Cloud Container Registry 'icr.io' domains because an IAM access policy could not be created. Make sure that you have the IAM Administrator platform role to IBM Cloud Container Registry. Then, create an image pull secret with IAM credentials to the registry by running 'ibmcloud ks cluster-pull-secret-apply'.
+```
+{: screen}
+
+{: tsCauses}
+During cluster creation, a service ID is created for your cluster and assigned the **Reader** service access policy to {{site.data.keyword.registrylong_notm}}. Then, an API key for this service ID is generated and stored in [an image pull secret](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize the cluster to pull images from {{site.data.keyword.registrylong_notm}}.
+
+To successfully assign the **Reader** service access policy to the service ID during cluster creation, you must have the **Administrator** platform access policy to {{site.data.keyword.registrylong_notm}}.
+
+{: tsResolve}
+
+Steps:
+1.  Make sure that the account owner gives you the **Administrator** role to {{site.data.keyword.registrylong_notm}}.
+    ```
+    ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
+    ```
+    {: pre}
+2.  [Use the `ibmcloud ks cluster-pull-secret-apply` command](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cli_reference) to re-create an image pull secret with the appropriate registry credentials.
+
+<br />
+
+
+## Failed to pull image from registry with `ImagePullBackOff` or authorization errors
 {: #ts_image_pull}
 
 {: tsSymptoms}

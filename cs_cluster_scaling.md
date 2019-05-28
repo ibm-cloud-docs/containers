@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-13"
+lastupdated: "2019-05-28"
 
 keywords: kubernetes, iks, node scaling
 
@@ -48,7 +48,7 @@ The cluster autoscaler periodically scans the cluster to adjust the number of wo
 
 Scanning and scaling up and down happens at regular intervals over time, and depending on the number of worker nodes might take a longer period of time to complete, such as 30 minutes.
 
-The cluster autoscaler adjusts the number of worker nodes by considering the [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) that you define for your deployments, not actual worker node usage. If your pods and deployments don't request appropriate amounts of resources, you must adjust their configuration files. The cluster autoscaler can't adjust them for you. Also keep in mind that worker nodes use some of their compute resources for basic cluster functionality, default and custom [add-ons](/docs/containers?topic=containers-update#addons), and [resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).
+The cluster autoscaler adjusts the number of worker nodes by considering the [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) that you define for your deployments, not actual worker node usage. If your pods and deployments don't request appropriate amounts of resources, you must adjust their configuration files. The cluster autoscaler can't adjust them for you. Also keep in mind that worker nodes use some of their compute resources for basic cluster functionality, default and custom [add-ons](/docs/containers?topic=containers-update#addons), and [resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).
 {: note}
 
 <br>
@@ -56,7 +56,7 @@ The cluster autoscaler adjusts the number of worker nodes by considering the [re
 In general, the cluster autoscaler calculates the number of worker nodes that your cluster needs to run its workload. Scaling the cluster up or down depends on many factors including the following.
 *   The minimum and maximum worker node size per zone that you set.
 *   Your pending pod resource requests and certain metadata that you associate with the workload, such as anti-affinity, labels to place pods only on certain machine types, or [pod disruption budgets![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
-*   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](/docs/containers?topic=containers-plan_clusters#multizone).
+*   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone).
 *   The [custom Helm chart values](#ca_chart_values) that are set, such as skipping worker nodes for deletion if they use local storage.
 
 For more information, see the Kubernetes Cluster Autoscaler FAQs for [How does scale-up work? ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-up-work) and [How does scale-down work? ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work).
@@ -74,7 +74,7 @@ No, setting a `minSize` does not automatically trigger a scale-up. The `minSize`
 
 <br>
 **How is this behavior different from worker pools that are not manage by the cluster autoscaler?**<br>
-When you [create a worker pool](/docs/containers?topic=containers-clusters#add_pool), you specify how many worker nodes per zone it has. The worker pool maintains that number of worker nodes until you [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) it. The worker pool does not add or remove worker nodes for you. If you have more pods than can be scheduled, the pods remain in pending state until you resize the worker pool.
+When you [create a worker pool](/docs/containers?topic=containers-add_workers#add_pool), you specify how many worker nodes per zone it has. The worker pool maintains that number of worker nodes until you [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) it. The worker pool does not add or remove worker nodes for you. If you have more pods than can be scheduled, the pods remain in pending state until you resize the worker pool.
 
 When you enable the cluster autoscaler for a worker pool, worker nodes are scaled up or down in response to your pod spec settings and resource requests. You don't need to resize or rebalance the worker pool manually.
 
@@ -85,7 +85,7 @@ Consider the following image for an example of scaling the cluster up and down.
 _Figure: Autoscaling a cluster up and down._
 ![Autoscaling a cluster up and down GIF](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  The cluster has four worker nodes in two worker pools that are spread across two zones. Each pool has one worker node per zone, but **Worker Pool A** has a machine type of `u2c.2x4` and **Worker Pool B** has a machine type of `b2c.4x16`. Your total compute resources are roughly 10 cores (2 cores x 2 worker nodes for **Worker Pool A**, and 4 cores x 2 worker nodes for **Worker Pool B**). Your cluster currently runs a workload that requests 6 of these 10 cores. Note that additional computing resources are taken up on each worker node by the [reserved resources](/docs/containers?topic=containers-plan_clusters#resource_limit_node) required to run the cluster, worker nodes, and any add-ons such as the cluster autoscaler.
+1.  The cluster has four worker nodes in two worker pools that are spread across two zones. Each pool has one worker node per zone, but **Worker Pool A** has a machine type of `u2c.2x4` and **Worker Pool B** has a machine type of `b2c.4x16`. Your total compute resources are roughly 10 cores (2 cores x 2 worker nodes for **Worker Pool A**, and 4 cores x 2 worker nodes for **Worker Pool B**). Your cluster currently runs a workload that requests 6 of these 10 cores. Note that additional computing resources are taken up on each worker node by the [reserved resources](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) required to run the cluster, worker nodes, and any add-ons such as the cluster autoscaler.
 2.  The cluster autoscaler is configured to manage both worker pools with the following minimum and maximum size-per-zone:
     *  **Worker Pool A**: `minSize=1`, `maxSize=5`.
     *  **Worker Pool B**: `minSize=1`, `maxSize=2`.
@@ -212,7 +212,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
     *  Helm (`helm`)
 2.  [Create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui) that runs **Kubernetes version 1.12 or later**.
 3.   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-4.  Confirm that your {{site.data.keyword.Bluemix_notm}} Identity and Access Management credentials are stored in the cluster. The cluster autoscaler uses this secret to authenticate.
+4.  Confirm that your {{site.data.keyword.Bluemix_notm}} Identity and Access Management credentials are stored in the cluster. The cluster autoscaler uses this secret to authenticate credentials. If the secret is missing, [create it by resetting credentials](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
@@ -229,7 +229,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
         Labels:             ibm-cloud.kubernetes.io/worker-pool-id=a1aa111111b22b22cc3c3cc444444d44-4d555e5
         ```
         {: screen}
-    2.  If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-clusters#add_pool) and use this worker pool with the cluster autoscaler.
+    2.  If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) and use this worker pool with the cluster autoscaler.
 
 
 <br>
@@ -400,7 +400,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]</pre><br><br>
-    **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check if your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-clusters#add_pool) and use this worker pool with the cluster autoscaler.</td>
+    **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check if your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) and use this worker pool with the cluster autoscaler.</td>
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
@@ -467,7 +467,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     expander: least-waste
     image:
       pullPolicy: Always
-      repository: icr.io/iks-charts/ibm-iks-cluster-autoscaler 
+      repository: icr.io/iks-charts/ibm-iks-cluster-autoscaler
       tag: dev1
     maxNodeProvisionTime: 120m
     resources:
