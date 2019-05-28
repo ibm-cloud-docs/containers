@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-23"
+lastupdated: "2019-05-28"
 
 keywords: kubernetes, iks
 
@@ -38,6 +38,18 @@ Use these release notes to learn about the latest changes to the {{site.data.key
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>28 May 2019</td>
+  <td><ul>
+  <li><strong>Cluster add-ons changelog</strong>: Updated the [ALB `nginx-ingress` image to build 462](/docs/containers?topic=containers-cluster-add-ons-changelog).</li>
+  <li><strong>Troubleshooting registry</strong>: Added a [troubleshooting topic](/docs/containers?topic=containers-cs_troubleshoot_clusters#ts_image_pull_create) for when your cluster cannot pull images from {{site.data.keyword.registryfull}} due to an error during cluster creation.
+  </li>
+  <li><strong>Troubleshooting storage</strong>: <ul>
+  <li>Added a topic for [debugging persistent storage failures](/docs/containers?topic=containers-cs_troubleshoot_storage#debug_storage).</li>
+  <li>Added a troubleshooting topic for [PVC creation failures due to missing permissions](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).</li>
+  </ul></li>
+  </ul></td>
+</tr>
 <tr>
   <td>23 May 2019</td>
   <td><ul>
