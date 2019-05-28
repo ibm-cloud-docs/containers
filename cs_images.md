@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-28"
 
 keywords: kubernetes, iks
 
@@ -329,7 +329,7 @@ You can copy an image pull secret, such as the one that is automatically created
 ### Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.Bluemix_notm}} accounts
 {: #other_registry_accounts}
 
-You can assign {{site.data.keyword.Bluemix_notm}} IAM access policies to users or a service ID to restrict permissions to specific registry image repositories, namespaces, or actions (such as `push` or `pull`). Then, create an API key and store these registry credentials in an image pull secret for your cluster.
+You can assign {{site.data.keyword.Bluemix_notm}} IAM access policies to users or a service ID to restrict permissions to specific registry image namespaces or actions (such as `push` or `pull`). Then, create an API key and store these registry credentials in an image pull secret for your cluster.
 {: shortdesc}
 
 For example, to access images in other {{site.data.keyword.Bluemix_notm}} accounts, create an API key that stores the {{site.data.keyword.registryshort_notm}} credentials of a user or service ID in that account. Then, in your cluster's account, save the API key credentials in an image pull secret for each cluster and cluster namespace.
