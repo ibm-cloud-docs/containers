@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-28"
+lastupdated: "2019-05-29"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -224,6 +224,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 
 </dl>
 <br><br>
+
 Monthly resources are billed based upon the first of the month for usage in the preceding month. If you order a monthly resource in the middle of the month, you are charged a prorated amount for that month. However, if you cancel a resource in the middle of the month, you are still charged the full amount for the monthly resource.
 {: note}
 
