@@ -40,7 +40,13 @@ Use these release notes to learn about the latest changes to the {{site.data.key
 <tbody>
 <tr>
   <td>30 May 2019</td>
-  <td><strong>CLI reference</strong>: Updated the [CLI reference page](/docs/containers?topic=containers-cs_cli_reference) to reflect multiple changes for the [release of version 0.3.33](/docs/containers?topic=containers-cs_cli_changelog) of the {{site.data.keyword.containerlong_notm}} CLI plug-in.
+  <td><ul>
+  <li><strong>CLI reference</strong>: Updated the [CLI reference page](/docs/containers?topic=containers-cs_cli_reference) to reflect multiple changes for the [release of version 0.3.33](/docs/containers?topic=containers-cs_cli_changelog) of the {{site.data.keyword.containerlong_notm}} CLI plug-in.</li>
+  <li><strong>Troubleshooting storage</strong>: <ul>
+  <li>Added a file and block storage troubleshooting topic for [PVC pending states](/docs/containers?topic=containers-cs_troubleshoot_storage#file_pvc_pending).</li>
+  <li>Added a block storage troubleshooting topic for when [an app cannot access or write to PVC](/docs/containers?topic=containers-cs_troubleshoot_storage#block_app_failures).</li>
+  </ul></li>
+  </ul></td>
 </tr>
 <tr>
   <td>28 May 2019</td>
