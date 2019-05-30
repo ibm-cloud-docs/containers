@@ -155,9 +155,8 @@ Review the options to debug persistent storage and find the root causes for fail
    3. Review common errors that can occur during the PVC creation. 
       - [File storage and block storage: PVC remains in a pending state](#file_pvc_pending)
       - [Object storage: PVC remains in a pending state](#cos_pvc_pending)
-
    
-7. Check if your pod is successfully deployed. 
+7. Check if the pod that mounts your storage instance is successfully deployed. 
    1. List the pods in your cluster. A pod is successfully deployed if the pod shows a status of **Running**. 
       ```
       kubectl get pods
@@ -220,7 +219,7 @@ During the PVC creation and binding, many different tasks are executed by the fi
     </tr>
     <tr>
       <td><code>Unable to find the exact ItemPriceIds(type|size|iops) for the specified storage</code> </br></br><code>Failed to place storage order with the storage provider</code></td>
-      <td>The storage size and IOPS that you specified in your PVC are not supported by the storage type that you chose and the configuration that is pre-defined by your storage class. </td>
+      <td>The storage size and IOPS that you specified in your PVC are not supported by the storage type that you chose and cannot be used with the specified storage class. </td>
       <td>Review [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass) and [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to find supported storage sizes and IOPS for the storage class that you want to use. Correct the size and IOPS, and recreate the PVC. </td>
     </tr>
     <tr>
@@ -249,7 +248,8 @@ During the PVC creation and binding, many different tasks are executed by the fi
 ## File storage: App cannot access or write to PVC
 {: #file_app_failures}
 
-When you deploy a pod that mounts
+When you mount a PVC to your pod, you might experience errors when accessing or writing to the PVC. 
+{: shortdesc}
 
 1. List the pods in your cluster and review the status of the pod. 
    ```
