@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-23"
+lastupdated: "2019-05-30"
 
 keywords: kubernetes, iks
 
@@ -43,6 +43,14 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.3.33</td>
+<td>30 May 2019</td>
+<td><ul>
+<li>Adds the <code>--powershell</code> flag to the `cluster-config` command to retrieve Kubernetes environment variables in Windows PowerShell format.</li>
+<li>Deprecates the `region-get`, `region-set`, and `regions` commands. For more information, see [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint).</li>
+</ul></td>
+</tr>
 <tr>
 <td>0.3.28</td>
 <td>23 May 2019</td>

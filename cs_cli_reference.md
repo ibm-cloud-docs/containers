@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-24"
+lastupdated: "2019-05-30"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -384,13 +384,13 @@ ibmcloud plugin list
 <col width="25%">
 <col width="25%">
  <thead>
-    <th colspan=4>Region commands</th>
+    <th colspan=4>Region and location commands</th>
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks region-get](#cs_region)</td>
-    <td>[ibmcloud ks region-set](#cs_region-set)</td>
-    <td>[ibmcloud ks regions](#cs_regions)</td>
+    <td>[Deprecated: ibmcloud ks region-get](#cs_region)</td>
+    <td>[Deprecated: ibmcloud ks region-set](#cs_region-set)</td>
+    <td>[Deprecated: ibmcloud ks regions](#cs_regions)</td>
     <td>[ibmcloud ks supported-locations](#cs_supported-locations)</td>
   </tr>
   <tr>
@@ -3887,7 +3887,7 @@ ibmcloud ks nlb-dns-monitors --cluster mycluster
 Use this group of commands to view available locations, view the currently targeted region, and set the targeted region.
 {: shortdesc}
 
-### ibmcloud ks region-get
+### Deprecated: ibmcloud ks region-get
 {: #cs_region}
 
 Find the {{site.data.keyword.containerlong_notm}} region that you are currently targeted to.
@@ -3905,7 +3905,7 @@ ibmcloud ks region-get
 **Minimum required permissions**: None
 
 </br>
-### ibmcloud ks region-set
+### Deprecated: ibmcloud ks region-set
 {: #cs_region-set}
 
 Set the region for {{site.data.keyword.containerlong_notm}}.
@@ -3937,7 +3937,7 @@ ibmcloud ks region set --region eu-central
 {: pre}
 
 </br>
-### ibmcloud ks regions
+### Deprecated: ibmcloud ks regions
 {: #cs_regions}
 
 List the available regions. The `Region Name` is the {{site.data.keyword.containerlong_notm}} name, and the `Region Alias` is the general {{site.data.keyword.Bluemix_notm}} name for the region.

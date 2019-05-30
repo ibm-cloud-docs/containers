@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-24"
+lastupdated: "2019-05-30"
 
 keywords: kubernetes, iks
 
@@ -200,7 +200,6 @@ Set the context for your Kubernetes cluster in your CLI.
 Every time you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.Bluemix_notm}}.
 
 1.  Get the command to set the environment variable and download the Kubernetes configuration files.
-
     ```
     ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
     ```
@@ -209,16 +208,14 @@ Every time you log in to the {{site.data.keyword.containerlong}} CLI to work wit
     When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
 
     Example for OS X:
-
     ```
     export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
     ```
     {: screen}
+    Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.
+    {: tip}
 
 2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
-
-    **Windows PowerShell users**: Instead of copying and pasting the `SET` command from the output of `ibmcloud ks cluster-config`, you must set the `KUBECONFIG` environment variable by running, for example, `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`.
-    {: note}
 
 3.  Verify that the `KUBECONFIG` environment variable is set properly.
 
@@ -263,7 +260,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
     {: note}
 
     ```
-    ibmcloud resource service-instance-create <service_name> tone-analyzer standard us-south 
+    ibmcloud resource service-instance-create <service_name> tone-analyzer standard us-south
     ```
     {: pre}
 
