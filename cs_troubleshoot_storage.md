@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-24"
+lastupdated: "2019-05-30"
 
 keywords: kubernetes, iks
 
@@ -43,7 +43,18 @@ If you have a more general issue, try out [cluster debugging](/docs/containers?t
 Review the options to debug persistent storage and find the root causes for failures.
 {: shortdesc}
 
-1. Verify that the `kubectl` CLI version that you run on your local machine matches the Kubernetes version that is installed in your cluster. 
+1. Verify that you use the latest {{site.data.keyword.Bluemix_notm}} and {{site.data.keyword.containerlong_notm}} plug-in version. 
+   ```
+   ibmcloud update
+   ```
+   {: pre}
+   
+   ```
+   ibmcloud plugin repo-plugins
+   ```
+   {: pre}
+
+2. Verify that the `kubectl` CLI version that you run on your local machine matches the Kubernetes version that is installed in your cluster. 
    1. Show the `kubectl` CLI version that is installed in your cluster and your local machine. 
       ```
       kubectl version
@@ -60,11 +71,11 @@ Review the options to debug persistent storage and find the root causes for fail
       The CLI versions match if you can see the same version in `GitVersion` for the client and the server. You can ignore the `+IKS` part of the version for the server. 
    2. If the `kubectl` CLI version on your local machine and your cluster do not match, either [update your cluster](/docs/containers?topic=containers-update) or [install a different CLI version on your local machine](/docs/containers?topic=containers-cs_cli_install#kubectl). 
 
-2. For block storage, object storage, and Portworx only: Make sure that you [installed the Helm server Tiller with a Kubernetes services account](/docs/containers?topic=containers-helm#public_helm_install). 
+3. For block storage, object storage, and Portworx only: Make sure that you [installed the Helm server Tiller with a Kubernetes services account](/docs/containers?topic=containers-helm#public_helm_install). 
 
-3. For block storage, object storage, and Portworx only: Make sure that you have installed the latest Helm chart version for the plug-in. 
+4. For block storage, object storage, and Portworx only: Make sure that you installed the latest Helm chart version for the plug-in. 
    
-   **For block and object storage**: 
+   **Block and object storage**: 
    
    1. Update your Helm chart repositories. 
       ```
@@ -96,7 +107,7 @@ Review the options to debug persistent storage and find the root causes for fail
       
    4. If a more recent version is available, install this version. For instructions, see [Updating the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in) and [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin). 
    
-   **For Portworx**: 
+   **Portworx**: 
    
    1. Find the [latest Helm chart version ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/tree/master/charts/portworx) that is available. 
    
@@ -108,7 +119,7 @@ Review the options to debug persistent storage and find the root causes for fail
    
    3. If a more recent version is available, install this version. For instructions, see [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx). 
    
-4. Verify that the storage driver and plug-in pods show a status of **Running**. 
+5. Verify that the storage driver and plug-in pods show a status of **Running**. 
    1. List the pods in the `kube-system` namespace. 
       ```
       kubectl get pods -n kube-system 
@@ -128,83 +139,162 @@ Review the options to debug persistent storage and find the root causes for fail
       
    3. Analyze the **Events** section of the CLI output of the `kubectl describe pod` command and the latest logs to find the root cause for the error. 
    
-5. Review the storage type-specific troubleshooting information in this topic to find common errors that can occur during the storage plug-in installation, PVC creation and mounting of your pod. 
-   
+6. Check if your PVC is successfully provisioned. 
+   1. Check the state of your PVC. A PVC is successfully provisioned if the PVC shows a status of **Bound**. 
+      ```
+      kubectl get pvc
+      ```
+      {: pre}
+      
+   2. If the state of the PVC shows **Pending**, retrieve the error for why the PVC remains pending. 
+      ```
+      kubectl describe pvc <pvc_name>
+      ```
+      {: pre}
+      
+   3. Review common errors that can occur during the PVC creation. 
+      - [File storage and block storage: PVC remains in a pending state](#file_pvc_pending)
+      - [Object storage: PVC remains in a pending state](#cos_pvc_pending)
 
-## PVC creation fails because of missing permissions
-{: #missing_permissions}
+   
+7. Check if your pod is successfully deployed. 
+   1. List the pods in your cluster. A pod is successfully deployed if the pod shows a status of **Running**. 
+      ```
+      kubectl get pods
+      ```
+      {: pre}
+      
+   2. Get the details of your pod and check if errors are displayed in the **Events** section of your CLI output. 
+      ```
+      kubectl describe pod <pod_name>
+      ```
+      {: pre}
+   
+   3. Retrieve the logs for your app and check if you can see any error messages. 
+      ```
+      kubectl logs <pod_name>
+      ```
+      {: pre}
+   
+   4. Review common errors that can occur when you mount a PVC to your app. 
+      - [File storage: App cannot access or write to PVC](#file_app_failures)
+      - [Block storage: App cannot access or write to PVC](#block_app_failures)
+      - [Object storage: Accessing files with a non-root user fails](#cos_nonroot_access)
+      
+
+## File storage and block storage: PVC remains in a pending state
+{: #file_pvc_pending}
 
 {: tsSymptoms}
-When you create a PVC, the PVC remains pending. When you run `kubectl describe pvc <pvc_name>`, you see an error message similar to the following: 
-
-```
-User doesn't have permissions to create or manage Storage
-```
-{: screen}
+When you create a PVC and you run `kubectl get pvc <pvc_name>`, your PVC remains in a **Pending** state, even after waiting for some time. 
 
 {: tsCauses}
-The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster  does not have all the required permissions to provision persistent storage. 
+During the PVC creation and binding, many different tasks are executed by the file and block storage plug-in. Each task can fail and cause a different error message.
 
 {: tsResolve}
-1. Retrieve the IAM key or IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster and verify that the correct API key is used. 
+
+1. Find the root cause for why the PVC remains in a **Pending** state. 
    ```
-   kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
+   kubectl describe pvc <pvc_name> -n <namespace>
    ```
    {: pre}
    
-   Example output: 
-   ```
-   [Bluemix]
-   iam_url = "https://iam.bluemix.net"
-   iam_client_id = "bx"
-   iam_client_secret = "bx"
-   iam_api_key = "<iam_api_key>"
-   refresh_token = ""
-   pay_tier = "paid"
-   containers_api_route = "https://us-south.containers.bluemix.net"
+2. Review common error message descriptions and resolutions.
+   
+   <table>
+   <thead>
+     <th>Error message</th>
+     <th>Description</th>
+     <th>Steps to resolve</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>User doesn't have permissions to create or manage Storage</code></br></br><code>Failed to find any valid softlayer credentials in configuration file</code></br></br><code>Storage with the order ID %d could not be created after retrying for %d seconds.</code></br></br><code>Unable to locate datacenter with name <datacenter_name>.</code></td>
+      <td>The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
+      <td>See [PVC creation fails because of missing permissions](#missing_permissions). </td>
+    </tr>
+    <tr>
+      <td><code>Your order will exceed the maximum number of storage volumes allowed. Please contact Sales</code></td>
+      <td>Every {{site.data.keyword.Bluemix_notm}} account is set up with a maximum number of storage instances that can be created. By creating the PVC, you exceed the maximum number of storage instances. </td>
+      <td>To create a PVC, choose from the following options. <ul><li>Remove any unused PVCs.</li><li>Ask the {{site.data.keyword.Bluemix_notm}} account owner to increase your storage quota by [opening a support case](/docs/get-support?topic=get-support-getting-customer-support).</li></ul> </td>
+    </tr>
+    <tr>
+      <td><code>Unable to find the exact ItemPriceIds(type|size|iops) for the specified storage</code> </br></br><code>Failed to place storage order with the storage provider</code></td>
+      <td>The storage size and IOPS that you specified in your PVC are not supported by the storage type that you chose and the configuration that is pre-defined by your storage class. </td>
+      <td>Review [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass) and [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to find supported storage sizes and IOPS for the storage class that you want to use. Correct the size and IOPS, and recreate the PVC. </td>
+    </tr>
+    <tr>
+  <td><code>Failed to find the datacenter name in configuration file</code></td>
+      <td>The data center that you specified in your PVC does not exist. </td>
+  <td>Run <code>ibmcloud ks locations</code> to list available data centers. Correct the data center in your PVC and recreate the PVC.</td>
+    </tr>
+    <tr>
+  <td><code>Failed to place storage order with the storage provider</code></br></br><code>Storage with the order ID 12345 could not be created after retrying for xx seconds. </code></br></br><code>Failed to do subnet authorizations for the storage 12345.</code><code>Storage 12345 has ongoing active transactions and could not be completed after retrying for xx seconds.</code></td>
+  <td>The storage size, IOPS, and storage type might be incompatible with the storage class that you chose, or the {{site.data.keyword.Bluemix_notm}} infrastructure API endpoint is currently unavailable. </td>
+  <td>Review [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass) and [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to find supported storage sizes and IOPS for the storage class and storage type that you want to use. Then, delete the PVC and recreate the PVC. </td>
+  </tr>
+  <tr>
+  <td><code>Failed to find the storage with storage id 12345. </code></td>
+  <td>You want to create a PVC for an existing storage instance by using Kubernetes static provisioning, but the storage instance that you specified could not be found. </td>
+  <td>Follow the instructions to provision existing [file storage](/docs/containers?topic=containers-file_storage#existing_file) or [block storage](/docs/containers?topic=containers-block_storage#existing_block) in your cluster and make sure to retrieve the correct information for your existing storage instance. Then, delete the PVC and recreate the PVC.  </td>
+  </tr>
+  <tr>
+  <td><code>Storage type not provided, expected storage type is `Endurance` or `Performance`. </code></td>
+  <td>You created a custom storage class and specified a storage type that is not supported.</td>
+  <td>Update your custom storage class to specify `Endurance` or `Performance` as your storage type. To find examples for custom storage classes, see the sample custom storage classes for [file storage](/docs/containers?topic=containers-file_storage#file_custom_storageclass) and [block storage](/docs/containers?topic=containers-block_storage#block_custom_storageclass). </td>
+  </tr>
+  </tbody>
+  </table>
+  
+## File storage: App cannot access or write to PVC
+{: #file_app_failures}
 
-   [Softlayer]
-   encryption = true
-   softlayer_username = ""
-   softlayer_api_key = ""
-   softlayer_endpoint_url = "https://api.softlayer.com/rest/v3"
-   softlayer_iam_endpoint_url = "https://api.softlayer.com/mobile/v3"
-   softlayer_datacenter = "dal10"
+When you deploy a pod that mounts
+
+1. List the pods in your cluster and review the status of the pod. 
    ```
-   {: screen}
-   
-   The IAM API key is listed in the `Bluemix.iam_api_key` section of your CLI output. If the `Softlayer.softlayer_api_key` is empty at the same time, then the IAM API key is used to determine your infrastructure permissions. The IAM API key is automatically set by the user who runs the first action that requires the IAM **Administrator** platform role in a resource group and region. If a different API key is set in `Softlayer.softlayer_api_key`, then this key takes precedence over the IAM API key. The `Softlayer.softlayer_api_key` is set when a cluster admin runs the `ibmcloud ks credentials-set` command. 
-   
-2. If you want to change the credentials, update the API key that is used. 
-    1.  To update the IAM API key, use the `ibmcloud ks api-key-reset` [command](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_api_key_reset). To update the IBM Cloud infrastructure (SoftLayer) key, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_credentials_set).
-    2. Wait about 10-15 minutes for the `storage-secret-store` Kubernetes secret to update, then verify that the key is updated.
-       ```
-       kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
-       ```
-       {: pre}
-   
-3. If the API key is correct, verify that the key has the correct permission to provision persistent storage.
-   1. Contact the account owner to verify the permission of the API key. 
-   2. As the account owner, select **Manage** > **Access (IAM)** from the navigation in the {{site.data.keyword.Bluemix_notm}} console.
-   3. Select **Users** and find the user whose API key you want to use. 
-   4. From the actions menu, select **Manage user details**. 
-   5. Go to the **Classic infrastructure** tab. 
-   6. Expand the **Account** category and verify that the **Add/ Upgrade Storage (StorageLayer)** permission is assigned. 
-   7. Expand the **Services** category and verify that the **Storage Manage** permission is assigned. 
-4. Remove the PVC that failed. 
-   ```
-   kubectl delete pvc <pvc_name>
+   kubectl get pods
    ```
    {: pre}
    
-5. Recreate the PVC. 
+2. Find the root cause for why your app cannot access or write to the PVC.
    ```
-   kubectl apply -f pvc.yaml
+   kubectl describe pod <pod_name>
+   ```
+   {: pre}
+   
+   ```
+   kubectl logs <pod_name>
    ```
    {: pre}
 
+3. Review common errors that can occur when you mount a PVC to a pod. 
+   <table>
+   <thead>
+     <th>Symptom or error message</th>
+     <th>Description</th>
+     <th>Steps to resolve</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Your pod is stuck in a <strong>ContainerCreating</strong> state. </br></br><code>MountVolume.SetUp failed for volume ... read-only file system</code></td>
+      <td>The {{site.data.keyword.Bluemix_notm}} infrastructure back end experienced network problems. To protect your data and to avoid data corruption, {{site.data.keyword.Bluemix_notm}} automatically disconnected the file storage server to prevent write operations on NFS file shares.  </td>
+      <td>See [File storage: File systems for worker nodes change to read-only](#readonly_nodes)</td>
+      </tr>
+      <tr>
+  <td><code>write-permission</code> </br></br><code>do not have required permission</code></br></br><code>cannot create directory '/bitnami/mariadb/data': Permission denied </code></td>
+  <td>In your deployment, you specified a non-root user to own the NFS file storage mount path. By default, non-root users do not have write permission on the volume mount path for NFS-backed storage. </td>
+  <td>See [File storage: App fails when a non-root user owns the NFS file storage mount path](#nonroot)</td>
+  </tr>
+  <tr>
+  <td>After you specified a non-root user to own the NFS file storage mount path or deployed a Helm chart with a non-root user ID specified, the user cannot write to the mounted storage.</td>
+  <td>The deployment or Helm chart configuration specifies the security context for the pod's <code>fsGroup</code> (group ID) and <code>runAsUser</code> (user ID)</td>
+  <td>See [File storage: Adding non-root user access to persistent storage fails](#cs_storage_nonroot)</td>
+  </tr>
+</tbody>
+</table>
 
-## File storage: File systems for worker nodes change to read-only
+### File storage: File systems for worker nodes change to read-only
 {: #readonly_nodes}
 
 {: tsSymptoms}
@@ -227,7 +317,7 @@ For a long-term fix, [update the machine type of your worker pool](/docs/contain
 
 
 
-## File storage: App fails when a non-root user owns the NFS file storage mount path
+### File storage: App fails when a non-root user owns the NFS file storage mount path
 {: #nonroot}
 
 {: tsSymptoms}
@@ -445,7 +535,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 <br />
 
 
-## File storage: Adding non-root user access to persistent storage fails
+### File storage: Adding non-root user access to persistent storage fails
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
@@ -462,7 +552,51 @@ Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser
 
 
 
-## Block storage: Block storage changes to read-only
+## Block storage: App cannot access or write to PVC
+{: #block_app_failures}
+
+When you mount a PVC to your pod, you might experience errors when accessing or writing to the PVC. 
+{: shortdesc}
+
+1. List the pods in your cluster and review the status of the pod. 
+   ```
+   kubectl get pods
+   ```
+   {: pre}
+   
+2. Find the root cause for why your app cannot access or write to the PVC.
+   ```
+   kubectl describe pod <pod_name>
+   ```
+   {: pre}
+   
+   ```
+   kubectl logs <pod_name>
+   ```
+   {: pre}
+
+3. Review common errors that can occur when you mount a PVC to a pod. 
+   <table>
+   <thead>
+     <th>Symptom or error message</th>
+     <th>Description</th>
+     <th>Steps to resolve</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Your pod is stuck in a <strong>ContainerCreating</strong> or <strong>CrashLoopBackOff</strong> state. </br></br><code>MountVolume.SetUp failed for volume ... read-only.</code></td>
+      <td>The {{site.data.keyword.Bluemix_notm}} infrastructure back end experienced network problems. To protect your data and to avoid data corruption, {{site.data.keyword.Bluemix_notm}} automatically disconnected the block storage server to prevent write operations on block storage instances.  </td>
+      <td>See [Block storage: Block storage changes to read-only](#readonly_block)</td>
+      </tr>
+      <tr>
+  <td><code>failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32</code> </td>
+        <td>You want to mount an existing block storage instance that was set up with an <code>XFS</code> file system. When you created the PV and the matching PVC, you specified an <code>ext4</code> or no file system. The file system that you specify in your PV must be the same file system that is set up in your block storage instance. </td>
+  <td>See [Block storage: Mounting existing block storage to a pod fails due to the wrong file system](#block_filesystem)</td>
+  </tr>
+</tbody>
+</table>
+
+### Block storage: Block storage changes to read-only
 {: #readonly_block}
 
 {: tsSymptoms}
@@ -513,7 +647,7 @@ If a network error occurs while a pod writes to a volume, IBM Cloud infrastructu
 <br />
 
 
-## Block storage: Mounting existing block storage to a pod fails due to the wrong file system
+### Block storage: Mounting existing block storage to a pod fails due to the wrong file system
 {: #block_filesystem}
 
 {: tsSymptoms}
@@ -1041,6 +1175,79 @@ After you set the correct file permissions in your {{site.data.keyword.cos_full_
 
 <br />
 
+
+   
+## PVC creation fails because of missing permissions
+{: #missing_permissions}
+
+{: tsSymptoms}
+When you create a PVC, the PVC remains pending. When you run `kubectl describe pvc <pvc_name>`, you see an error message similar to the following: 
+
+```
+User doesn't have permissions to create or manage Storage
+```
+{: screen}
+
+{: tsCauses}
+The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster  does not have all the required permissions to provision persistent storage. 
+
+{: tsResolve}
+1. Retrieve the IAM key or IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster and verify that the correct API key is used. 
+   ```
+   kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   [Bluemix]
+   iam_url = "https://iam.bluemix.net"
+   iam_client_id = "bx"
+   iam_client_secret = "bx"
+   iam_api_key = "<iam_api_key>"
+   refresh_token = ""
+   pay_tier = "paid"
+   containers_api_route = "https://us-south.containers.bluemix.net"
+
+   [Softlayer]
+   encryption = true
+   softlayer_username = ""
+   softlayer_api_key = ""
+   softlayer_endpoint_url = "https://api.softlayer.com/rest/v3"
+   softlayer_iam_endpoint_url = "https://api.softlayer.com/mobile/v3"
+   softlayer_datacenter = "dal10"
+   ```
+   {: screen}
+   
+   The IAM API key is listed in the `Bluemix.iam_api_key` section of your CLI output. If the `Softlayer.softlayer_api_key` is empty at the same time, then the IAM API key is used to determine your infrastructure permissions. The IAM API key is automatically set by the user who runs the first action that requires the IAM **Administrator** platform role in a resource group and region. If a different API key is set in `Softlayer.softlayer_api_key`, then this key takes precedence over the IAM API key. The `Softlayer.softlayer_api_key` is set when a cluster admin runs the `ibmcloud ks credentials-set` command. 
+   
+2. If you want to change the credentials, update the API key that is used. 
+    1.  To update the IAM API key, use the `ibmcloud ks api-key-reset` [command](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_api_key_reset). To update the IBM Cloud infrastructure (SoftLayer) key, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_credentials_set).
+    2. Wait about 10-15 minutes for the `storage-secret-store` Kubernetes secret to update, then verify that the key is updated.
+       ```
+       kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
+       ```
+       {: pre}
+   
+3. If the API key is correct, verify that the key has the correct permission to provision persistent storage.
+   1. Contact the account owner to verify the permission of the API key. 
+   2. As the account owner, select **Manage** > **Access (IAM)** from the navigation in the {{site.data.keyword.Bluemix_notm}} console.
+   3. Select **Users** and find the user whose API key you want to use. 
+   4. From the actions menu, select **Manage user details**. 
+   5. Go to the **Classic infrastructure** tab. 
+   6. Expand the **Account** category and verify that the **Add/ Upgrade Storage (StorageLayer)** permission is assigned. 
+   7. Expand the **Services** category and verify that the **Storage Manage** permission is assigned. 
+4. Remove the PVC that failed. 
+   ```
+   kubectl delete pvc <pvc_name>
+   ```
+   {: pre}
+   
+5. Recreate the PVC. 
+   ```
+   kubectl apply -f pvc.yaml
+   ```
+   {: pre}
 
 
 ## Getting help and support
