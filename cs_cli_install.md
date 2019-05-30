@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-23"
+lastupdated: "2019-05-30"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -206,17 +206,11 @@ To use `kubectl` commands:
     {: pre}
 
 5.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
-    1.  Get the command to set the environment variable and download the Kubernetes configuration files.
-
+    1.  Get the command to set the environment variable and download the Kubernetes configuration files. <p class="tip">Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.</p>
         ```
         ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
         ```
         {: pre}
-
-        
-        Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.
-        {: tip}
-        
 
         After downloading the configuration files, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
 
