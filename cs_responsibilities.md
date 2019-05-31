@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Your responsibilities by using {{site.data.keyword.containerlong_notm}}
@@ -99,7 +100,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
       **Your responsibilities**:
       <ul>
       <li>Use the API, CLI, or console tools to apply the provided [security patch updates](/docs/containers?topic=containers-changelog#changelog) to your worker nodes.</li>
-      <li>Choose how to set up your [cluster network](/docs/containers?topic=containers-cs_network_ov#cs_network_ov) and configure further [security settings](/docs/containers?topic=containers-security#security) to meet your workload's security and compliance needs. If applicable, configure your [firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
+      <li>Choose how to set up your [cluster network](/docs/containers?topic=containers-plan_clusters) and configure further [security settings](/docs/containers?topic=containers-security#security) to meet your workload's security and compliance needs. If applicable, configure your [firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
       <br><br></td>
       </tr>
 

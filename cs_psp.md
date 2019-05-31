@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Configuring pod security policies

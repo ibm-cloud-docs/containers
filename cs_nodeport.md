@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 

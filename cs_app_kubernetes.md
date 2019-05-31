@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -348,7 +349,7 @@ To deploy apps to specific worker nodes:
 ## Deploying an app on a GPU machine
 {: #gpu_app}
 
-If you have a [bare metal graphics processing unit (GPU) machine type](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node), you can schedule mathematically intensive workloads onto the worker node. For example, you might run a 3D app that uses the Compute Unified Device Architecture (CUDA) platform to share the processing load across the GPU and CPU to increase performance.
+If you have a [bare metal graphics processing unit (GPU) machine type](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node), you can schedule mathematically intensive workloads onto the worker node. For example, you might run a 3D app that uses the Compute Unified Device Architecture (CUDA) platform to share the processing load across the GPU and CPU to increase performance.
 {:shortdesc}
 
 In the following steps, you learn how to deploy workloads that require the GPU. You can also [deploy apps](#app_ui) that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tensorflow.org/) machine learning framework with [this Kubernetes demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow).

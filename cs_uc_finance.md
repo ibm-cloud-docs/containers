@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Financial services use cases for {{site.data.keyword.cloud_notm}}
@@ -41,7 +42,7 @@ Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company lo
 {{site.data.keyword.containerlong_notm}} and key technologies:
 * [Horizontal scaling](/docs/containers?topic=containers-app#highly_available_apps)
 * [Multiple regions for high availability](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Container security and isolation](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -109,7 +110,7 @@ Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}}
 Then, Developers can experiment easily, pushing changes to Development and Test systems quickly with open toolchains. Their traditional software development tools get a new face when they add on AI cloud services to apps with a click.
 
 Key technologies:
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Fraud prevention with {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

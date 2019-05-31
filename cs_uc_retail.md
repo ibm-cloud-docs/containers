@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-20"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Retail use cases for {{site.data.keyword.cloud_notm}}
@@ -39,7 +40,7 @@ A Line-of-Business (LOB) Exec needs to increase sales channels, but the retail s
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides a public-cloud ecosystem, where containers enable new business partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jump-start new app development. App deployments increase when Developers experiment easily, pushing changes to Development and Test systems quickly with toolchains.
 
 {{site.data.keyword.containerlong_notm}} and key technologies:
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.cos_full}} to persist and sync data across apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
@@ -127,7 +128,7 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 
 Key technologies:    
 * [Horizontal scaling to accelerate development](/docs/containers?topic=containers-app#highly_available_apps)
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Insights to market trends with Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Inventory management with {{site.data.keyword.messagehub_full}}](/docs/services/EventStreams?topic=eventstreams-about#about)

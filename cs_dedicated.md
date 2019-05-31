@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Deprecated: Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}
@@ -98,8 +99,8 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  </tr>
  <tr>
  <td>Multizone clusters</td>
- <td>Create [multizone clusters](/docs/containers?topic=containers-plan_clusters#multizone) by adding more zones to your worker pools.</td>
- <td>Create [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
+ <td>Create [multizone clusters](/docs/containers?topic=containers-ha_clusters#multizone) by adding more zones to your worker pools.</td>
+ <td>Create [single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-add_workers#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
  </tr>
 </tbody></table>
 {: caption="Feature differences between {{site.data.keyword.Bluemix_notm}} public and {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -271,7 +272,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
 5. Configure your cluster details.
 
-    1. Enter a **Cluster Name**. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+    1. Enter a **Cluster Name**. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 
     2. Select the **Zone** in which to deploy your cluster. The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up.
 
@@ -291,7 +292,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     6. Choose the **Number of worker nodes** that you need. Select `3` to ensure high availability of your cluster.
 
     7. Select a **Public VLAN** (optional) and **Private VLAN** (required). The available public and private VLANs are pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment is set up. Both VLANs communicate between worker nodes but the public VLAN also communicates with the IBM-managed Kubernetes master. You can use the same VLAN for multiple clusters.
-        If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) or [configuring a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway).
+        If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway device](/docs/containers?topic=containers-plan_clusters#workeruser-master).
         {: note}
 
     8. By default, **Encrypt local disk** is selected. If you choose to clear the check box, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers?topic=containers-security#encrypted_disk).
@@ -357,7 +358,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Enter the ID of the public VLAN that your Dedicated environment is configured to use. If you want to connect your worker nodes to a private VLAN only, do not specify this option.<p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) or [configuring a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway).</p></td>
+    <td>Enter the ID of the public VLAN that your Dedicated environment is configured to use. If you want to connect your worker nodes to a private VLAN only, do not specify this option.<p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway device](/docs/containers?topic=containers-plan_clusters#workeruser-master).</p></td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -365,7 +366,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     </tr>  
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>Enter a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+    <td>Enter a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </td>
     </tr>
     <tr>
@@ -404,7 +405,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.7      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.13.6      Default
     ```
     {: screen}
 
@@ -422,7 +423,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
     ```
     {: screen}
 
@@ -485,7 +486,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 ### Adding worker nodes
 {: #add_workers_dedicated}
 
-With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-plan_clusters#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
+With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-add_workers#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
 {: shortdesc}
 
 ### Using private and public image registries
@@ -555,7 +556,7 @@ Review the following options for other cluster configurations:
   * [Updating worker nodes](/docs/containers?topic=containers-update#worker_node)
   * [Configuring cluster logging](/docs/containers?topic=containers-health#logging). Log enablement is not supported from the Dedicated endpoint. You must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space to enable log forwarding.
   * [Configuring cluster monitoring](/docs/containers?topic=containers-health#view_metrics). An `ibm-monitoring` cluster exists within each {{site.data.keyword.Bluemix_dedicated_notm}} account. This cluster continuously monitors the health of the {{site.data.keyword.containerlong_notm}} in the Dedicated environment, checking the stability and connectivity of the environment. Do not remove this cluster from the environment.
-  * [Removing clusters](/docs/containers?topic=containers-clusters#remove)
+  * [Removing clusters](/docs/containers?topic=containers-remove)
 
 <br />
 

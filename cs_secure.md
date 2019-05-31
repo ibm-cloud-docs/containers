@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Security for {{site.data.keyword.containerlong_notm}}
@@ -135,7 +136,7 @@ Service endpoints determine how worker nodes and cluster users can access the cl
 * Public and private service endpoints: Communication is established over both the private network through the private service endpoint and the public network through the public service endpoint. By routing half of the worker-to-master traffic over the public endpoint and half over the private endpoint, your master-to-worker communication is protected from potential outages of the public or private network. The master is privately accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a VPN connection. Otherwise, the master is publicly accessible to authorized cluster users through the public service endpoint.
 * Private service endpoint only: Communication between the master and worker nodes is established over the private network. Your cluster users must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to access the master.
 
-For more information about service endpoints, see [Planning communication between worker nodes and the Kubernetes master](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master).
+For more information about service endpoints, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master).
 
 <br />
 
@@ -176,7 +177,7 @@ The image does not include components that ensure secure end-to-end communicatio
     </tr>
     <tr>
   <td>Compute isolation</td>
-  <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes) that run on shared or dedicated physical hardware. The worker node in a free cluster is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM.</td>
+  <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that run on shared or dedicated physical hardware. The worker node in a free cluster is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM.</td>
 </tr>
 <tr>
 <td>Option to deploy bare metal</td>
