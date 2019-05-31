@@ -35,7 +35,7 @@ In an {{site.data.keyword.containerlong_notm}} cluster, your containerized apps 
 First time creating a cluster? Try out our [tutorial](/docs/containers?topic=containers-cs_cluster_tutorial) first and come back here when you’re ready to plan out your production-ready clusters.
 {: tip}
 
-To plan your cluster network setup, first [understand cluster network basics](#plan_basics). Then, you can review 3 potential cluster network setups that are suited to environment-based scenarios, including [running internet-facing app workloads](#internet-facing), [extending an on-premises datacenter with limited public access](#limited-public), and [extending an on-premises datacenter on the private network only](#private_clusters).
+To plan your cluster network setup, first [understand cluster network basics](#plan_basics). Then, you can review 3 potential cluster network setups that are suited to environment-based scenarios, including [running internet-facing app workloads](#internet-facing), [extending an on-premises data center with limited public access](#limited-public), and [extending an on-premises data center on the private network only](#private_clusters).
 
 ## Understanding cluster network basics
 {: #plan_basics}
@@ -88,6 +88,7 @@ To make your master publicly or privately accessible to cluster users, you can e
 * Communication between worker nodes and master is established over both the private network through the private service endpoint and the public network through the public service endpoint. By routing half of the worker-to-master traffic over the public endpoint and half over the private endpoint, your master-to-worker communication is protected from potential outages of the public or private network.
 * The master is publicly accessible to authorized cluster users through the public service endpoint. The master is privately accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a VPN connection. <p class="note">To access your cluster master on the private network over an IPSec VPN connection or through DirectLink, you must use the private service endpoint. However, communication with the Kubernetes master must go through the <code>166.X.X.X</code> IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal <code>10.X.X.X</code> IP address range to the Kubernetes master.</p>
 
+
 **Private service endpoint only**</br>
 To make your master only privately accessible, you can enable the private service endpoint. VRF is required in your {{site.data.keyword.Bluemix_notm}} account, and you must enable your account to use service endpoints. To enable VRF and service endpoints, run `ibmcloud account update --service-endpoint-enable true`. Note that using private service endpoint only incurs no billed or metered bandwidth charges.
 * Communication between worker nodes and master is established over the private network through the private service endpoint.
@@ -107,10 +108,10 @@ Your worker nodes can automatically and securely communicate with other {{site.d
 If you use Calico network policies to lock down the public network in your cluster, you might need to allow access to the public and private IP addresses of the services that you want to use in your Calico policies. If you use a gateway device, such as a Virtual Router Appliance (Vyatta), you must [allow access to the private IP addresses of the services that you want to use](/docs/containers?topic=containers-firewall#firewall_outbound) in your gateway device firewall.
 {: note}
 
-**DirectLink for communication over the private network with resources in on-premises datacenters**</br>
-To connect your cluster with your on-premises datacenter, such as with {{site.data.keyword.icpfull_notm}}, you can set up [DirectLink](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). DirectLink allows you to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
+**DirectLink for communication over the private network with resources in on-premises data centers**</br>
+To connect your cluster with your on-premises data center, such as with {{site.data.keyword.icpfull_notm}}, you can set up [DirectLink](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). DirectLink allows you to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
 
-**strongSwan IPSec VPN connection for communication over the public network with resources in on-premises datacenters**
+**strongSwan IPSec VPN connection for communication over the public network with resources in on-premises data centers**
 * Worker nodes connected to public and private VLANs: Set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html) directly in your cluster. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.
 * Worker nodes connected to a private VLAN only: Set up an IPSec VPN endpoint on a gateway device, such as a Virtual Router Appliance (Vyatta). Then, [configure the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) in your cluster to use the VPN endpoint on your gateway. If you do not want to use strongSwan, you can [set up VPN connectivity directly with VRA](/docs/containers?topic=containers-vpn#vyatta).
 
@@ -156,7 +157,7 @@ If you create the cluster with both public and private VLANs, you cannot later r
 {: note}
 
 You can choose to allow worker-to-master and user-to-master communication over the public and private networks, or over the public network only.
-* Public and private service endpoints: Your account must be enabled with VRF and enabled to use service endpoints. Communication between worker nodes and master is established over both the private network through the private service endpoint and the public network through the public service endpoint. The master is privately accessible through the private service endpoint if authorized cluster users are connected directly or through a VPN to your {{site.data.keyword.Bluemix_notm}} private network. Otherwise, the master is publicly accessible to authorized cluster users through the public service endpoint.
+* Public and private service endpoints: Your account must be enabled with VRF and enabled to use service endpoints. Communication between worker nodes and master is established over both the private network through the private service endpoint and the public network through the public service endpoint. The master is publicly accessible to authorized cluster users through the public service endpoint.
 * Public service endpoint: If you don’t want to or cannot enable VRF for your account, your worker nodes and authorized cluster users can automatically connect to the Kubernetes master over the public network through the public service endpoint.
 
 Your worker nodes can automatically, securely communicate with other {{site.data.keyword.Bluemix_notm}} services that support private service endpoints over your IBM Cloud infrastructure (SoftLayer) private network. If a {{site.data.keyword.Bluemix_notm}} service does not support private service endpoints, workers can securely communicate with the services over the public network. Note that you can lock down the public or private interfaces of worker nodes by using Calico network policies for public network or private network isolation. You might need to allow access to the public and private IP addresses of the services that you want to use in these Calico isolation policies.
@@ -170,10 +171,10 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 <br />
 
 
-## Scenario: Extend your on-premises datacenter to a cluster on the private network and add limited public access
+## Scenario: Extend your on-premises data center to a cluster on the private network and add limited public access
 {: #limited-public}
 
-In this scenario, you want to run workloads in a cluster that are accessible to services, databases, or other resources in your on-premises datacenter. However, you might need to provide limited public access to your cluster, and want to ensure that any public access is controlled and isolated in your cluster. For example, you might need your workers to access an {{site.data.keyword.Bluemix_notm}} service that does not support private service endpoints, and must be accessed over the public network. Or, you might need to provide limited public access to an app that runs in your cluster.
+In this scenario, you want to run workloads in a cluster that are accessible to services, databases, or other resources in your on-premises data center. However, you might need to provide limited public access to your cluster, and want to ensure that any public access is controlled and isolated in your cluster. For example, you might need your workers to access an {{site.data.keyword.Bluemix_notm}} service that does not support private service endpoints, and must be accessed over the public network. Or, you might need to provide limited public access to an app that runs in your cluster.
 {: shortdesc}
 
 To achieve this cluster setup, you can create a firewall by [using edge nodes and Calico network policies](#calico-pc) or [using a gateway device](#vyatta).
@@ -191,7 +192,11 @@ Allow limited public connectivity to your cluster by using edge nodes as a publi
 </figure>
 </p>
 
-With this setup, you create a cluster by connecting worker nodes to a private VLAN only. To provide connectivity between the cluster master and worker nodes through the private service endpoint only, your account must be enabled with VRF and enabled to use service endpoints. To access the master through the private service endpoint, your cluster users must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through the VPN connection or DirectLink. However, communication with the Kubernetes master must go through the <code>166.X.X.X</code> IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal <code>10.X.X.X</code> IP address range to the Kubernetes master.
+With this setup, you create a cluster by connecting worker nodes to a private VLAN only. Your account must be enabled with VRF and enabled to use private service endpoints.
+
+
+To provide connectivity between the cluster master and worker nodes through the private service endpoint only, your account must be enabled with VRF and enabled to use service endpoints. To access the master through the private service endpoint, your cluster users must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through the VPN connection or DirectLink. However, communication with the Kubernetes master must go through the <code>166.X.X.X</code> IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal <code>10.X.X.X</code> IP address range to the Kubernetes master.
+
 
 Next, you can create a pool of worker nodes that are connected to public and private VLANs and labeled as edge nodes. Edge nodes can improve the security of your cluster by allowing only a few worker nodes to be accessed externally and by isolating the networking workload to these workers.
 
@@ -199,7 +204,7 @@ Your worker nodes can automatically, securely communicate with other {{site.data
 
 To provide private access to an app in your cluster, you can create a private network load balancer (NLB) or Ingress application load balancer (ALB) to expose your app to the private network only. You can block all public traffic to these network services that expose your apps by creating Calico pre-DNAT policies, such as policies to block public NodePorts on worker nodes. If you need to provide limited public access to an app in your cluster, you can create a public NLB or ALB to expose your app. You must then deploy your apps to these edge nodes so that the NLBs or ALBs can direct public traffic to your app pods. You can further control public traffic to the network services that expose your apps by creating Calico pre-DNAT policies, such as whitelist and blacklist policies. The pods for both private and public network services are deployed to the edge nodes so that external traffic workloads are restricted to only a few workers in your cluster.  
 
-To securely access services outside of {{site.data.keyword.Bluemix_notm}} and other on-premises networks, you can configure and deploy the strongSwan IPSec VPN service in your cluster. The strongSwan load balancer pod deploys to a worker in the edge pool, where the pod establishes a secure connection to the on-premises network through an encrypted VPN tunnel over the public network. Alternatively, you can use DirectLink services to connect your cluster to your on-premises datacenter over the private network only.
+To securely access services outside of {{site.data.keyword.Bluemix_notm}} and other on-premises networks, you can configure and deploy the strongSwan IPSec VPN service in your cluster. The strongSwan load balancer pod deploys to a worker in the edge pool, where the pod establishes a secure connection to the on-premises network through an encrypted VPN tunnel over the public network. Alternatively, you can use DirectLink services to connect your cluster to your on-premises data center over the private network only.
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters#cluster_prepare).
 
@@ -233,22 +238,24 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 <br />
 
 
-## Scenario: Extend your on-premises datacenter to a cluster on the private network
+## Scenario: Extend your on-premises data center to a cluster on the private network
 {: #private_clusters}
 
-In this scenario, you want to run workloads in an {{site.data.keyword.containerlong_notm}} cluster. However, you want these workloads to be accessible only to services, databases, or other resources in your on-premises datacenter, such as {{site.data.keyword.icpfull_notm}}. Your cluster workloads might need to access a few other {{site.data.keyword.Bluemix_notm}} services that support communication over the private network, such as {{site.data.keyword.cos_full_notm}}.
+In this scenario, you want to run workloads in an {{site.data.keyword.containerlong_notm}} cluster. However, you want these workloads to be accessible only to services, databases, or other resources in your on-premises data center, such as {{site.data.keyword.icpfull_notm}}. Your cluster workloads might need to access a few other {{site.data.keyword.Bluemix_notm}} services that support communication over the private network, such as {{site.data.keyword.cos_full_notm}}.
 {: shortdesc}
 
 <p>
 <figure>
- <img src="images/cs_clusters_planning_extend.png" alt="Architecture image for a cluster that connects to an on-premises datacenter on the private network"/>
- <figcaption>Architecture for a cluster that connects to an on-premises datacenter on the private network</figcaption>
+ <img src="images/cs_clusters_planning_extend.png" alt="Architecture image for a cluster that connects to an on-premises data center on the private network"/>
+ <figcaption>Architecture for a cluster that connects to an on-premises data center on the private network</figcaption>
 </figure>
 </p>
 
 To achieve this setup, you create a cluster by connecting worker nodes to a private VLAN only. To provide connectivity between the cluster master and worker nodes over the private network through the private service endpoint only, your account must be enabled with VRF and enabled to use service endpoints. Because your cluster is visible to any resource on the private network when VRF is enabled, you can isolate your cluster from other systems on the private network by applying Calico private network policies.
 
+
 You must use a VPN connection or DirectLink to connect your cluster to your on-premises datacenter. To access the master through the private service endpoint, your cluster users must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through the VPN connection or DirectLink. However, communication with the Kubernetes master must go through the <code>166.X.X.X</code> IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal <code>10.X.X.X</code> IP address range to the Kubernetes master.
+
 
 Your worker nodes can automatically, securely communicate with other {{site.data.keyword.Bluemix_notm}} services that support private service endpoints, such as {{site.data.keyword.registrylong}}, over your IBM Cloud infrastructure (SoftLayer) private network. For example, dedicated hardware environments for all standard plan instances of {{site.data.keyword.cloudant_short_notm}} support private service endpoints. If a {{site.data.keyword.Bluemix_notm}} service does not support private service endpoints, your cluster cannot access that service.
 

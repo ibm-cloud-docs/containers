@@ -91,15 +91,17 @@ Prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.
   * If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
   * You cannot change a cluster's resource group. Furthermore, if you need to use the `ibmcloud ks cluster-service-bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.Bluemix_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.
   * If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers?topic=containers-health#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
+  * Free clusters are created in the `default` resource group.
 
-5. Plan your cluster [network setup](/docs/containers?topic=containers-plan_clusters) so that your cluster meets the needs of your workloads and environment. Then set up your IBM Cloud infrastructure (SoftLayer) networking to allow worker-to-master and user-to-master communication:
-  * To use the private service endpoint only or the public and private service endpoints (run internet-facing workloads or extend your on-premises datacenter):
+5. **Standard clusters**: Plan your cluster [network setup](/docs/containers?topic=containers-plan_clusters) so that your cluster meets the needs of your workloads and environment. Then set up your IBM Cloud infrastructure (SoftLayer) networking to allow worker-to-master and user-to-master communication:
+  * To use the private service endpoint only or the public and private service endpoints (run internet-facing workloads or extend your on-premises data center):
     1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure (SoftLayer) account.
     2. [Enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
     3. To run `kubectl` commands against your cluster over an IPSec VPN connection or through DirectLink, you must access the master through the private service endpoint. However, communication with the Kubernetes master must go through the `166.X.X.X` IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal `10.X.X.X` IP address range to the Kubernetes master.
+
   * To use the public service endpoint only (run internet-facing workloads):
     1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
-  * To use a gateway device (extend your on-premises datacenter):
+  * To use a gateway device (extend your on-premises data center):
     1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
     2. Configure a gateway device. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall to allow necessary traffic and block unwanted traffic.
     3. [Open up the required private IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate and for the {{site.data.keyword.Bluemix_notm}} services that you plan to use.
@@ -121,7 +123,7 @@ After you set up your account to create clusters, prepare the setup of your clus
 
 3. For standard clusters, you can [estimate the cost](/docs/billing-usage?topic=billing-usage-cost#cost) in the {{site.data.keyword.Bluemix_notm}} console. For more information on charges that might not be included in the estimator, see [Pricing and billing](/docs/containers?topic=containers-faqs#charges).
 
-4. If you create the cluster in an environment behind a firewall, such as for clusters that extend your on-premises datacenter, [allow outbound network traffic to the public and private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for the {{site.data.keyword.Bluemix_notm}} services that you plan to use.
+4. If you create the cluster in an environment behind a firewall, such as for clusters that extend your on-premises data center, [allow outbound network traffic to the public and private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for the {{site.data.keyword.Bluemix_notm}} services that you plan to use.
 
 <br />
 
@@ -147,7 +149,7 @@ Free clusters include one worker node set up with 2vCPU and 4GB memory and have 
 
   Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
   {: important}
-7. After you cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_internet).
+7. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
 
 ### Creating a free cluster in the CLI
 {: #clusters_cli_free}
@@ -207,7 +209,7 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
     Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
     {: important}
 
-5. After you cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_internet).
+5. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
 
 <br />
 
@@ -244,16 +246,16 @@ Use the {{site.data.keyword.Bluemix_notm}} CLI or the {{site.data.keyword.Bluemi
 7. For each zone, choose VLANs.
   * To create a cluster in which you can run internet-facing workloads:
     1. Select a public VLAN and a private VLAN from your IBM Cloud infrastructure (SoftLayer) account for each zone. Worker nodes communicate with each other by using the private VLAN, and can communicate with the Kubernetes master by using the public or the private VLAN. If you do not have a public or private VLAN in this zone, a public and a private VLAN is automatically created for you. You can use the same VLAN for multiple clusters.
-  * To create a cluster that extends your on-premises datacenter on the private network only, that extends your on-premises datacenter with the option of adding limited public access later, or that extends your on-premises datacenter and provides limited public access through a gateway device:
+  * To create a cluster that extends your on-premises data center on the private network only, that extends your on-premises data center with the option of adding limited public access later, or that extends your on-premises data center and provides limited public access through a gateway device:
     1. Select a private VLAN from your IBM Cloud infrastructure (SoftLayer) account for each zone. Worker nodes communicate with each other by using the private VLAN. If you do not have a private VLAN in a zone, a private VLAN is automatically created for you. You can use the same VLAN for multiple clusters.
     2. For the public VLAN, select **None**.
 
 8. For **Master service endpoint**, choose how your Kubernetes master and worker nodes communicate.
   * To create a cluster in which you can run internet-facing workloads:
-    * If VRF and service endpoints are enabled in your {{site.data.keyword.Bluemix_notm}} account, select **Both private & public endpoints**, **Public endpoint only**, or **Private endpoint only**.
+    * If VRF and service endpoints are enabled in your {{site.data.keyword.Bluemix_notm}} account, select **Both private & public endpoints**.
     * If you cannot or do not want to enable VRF, select **Public endpoint only**.
-  * To create a cluster that extends your on-premises datacenter only, or a cluster that extends your on-premises datacenter and provides limited public access with edge worker nodes, select **Private endpoint only**. Ensure that you have enabled VRF and service endpoints in your {{site.data.keyword.Bluemix_notm}} account.
-  * To create a cluster that extends your on-premises datacenter and provides limited public access with a gateway device, select **Public endpoint only**.
+  * To create a cluster that extends your on-premises data center only, or a cluster that extends your on-premises data center and provides limited public access with edge worker nodes, select **Both private & public endpoints** or **Private endpoint only**. Ensure that you have enabled VRF and service endpoints in your {{site.data.keyword.Bluemix_notm}} account.
+  * To create a cluster that extends your on-premises data center and provides limited public access with a gateway device, select **Public endpoint only**.
 
 9. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
   1. Choose the Kubernetes API server version for the cluster master node and worker nodes.
@@ -271,7 +273,7 @@ Use the {{site.data.keyword.Bluemix_notm}} CLI or the {{site.data.keyword.Bluemi
   Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
   {: important}
 
-11. After you cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
+11. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
 
 ### Creating a standard cluster in the CLI
 {: #clusters_cli_steps}
@@ -337,7 +339,7 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
   ```
   {: screen}
   * To create a cluster in which you can run internet-facing workloads, check to see if a public and private VLAN exist. If a public and private VLAN already exist, note the matching routers. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match. In the example output, any of the private VLANs can be used with any of public VLANs because the routers all include `02a.dal10`.
-  * To create a cluster that extends your on-premises datacenter on the private network only, that extends your on-premises datacenter with the option of adding limited public access later through edge worker nodes, or that extends your on-premises datacenter and provides limited public access through a gateway device, check to see if a private VLAN exists. If you have a private VLAN, note the ID.
+  * To create a cluster that extends your on-premises data center on the private network only, that extends your on-premises data center with the option of adding limited public access later through edge worker nodes, or that extends your on-premises data center and provides limited public access through a gateway device, check to see if a private VLAN exists. If you have a private VLAN, note the ID.
 
 5. Run the `cluster-create` command. By default, the worker node disks are AES 256-bit encrypted and the cluster is billed by hours of usage.
   * To create a cluster in which you can run internet-facing workloads:
@@ -345,12 +347,12 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
     ibmcloud ks cluster-create --zone <zone> --machine-type <machine_type> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version <major.minor.patch> [--private-service-endpoint] [--public-service-endpoint] [--disable-disk-encrypt] [--trusted]
     ```
     {: pre}
-  * To create a cluster that extends your on-premises datacenter on the private network, with the option of adding limited public access later through edge worker nodes:
+  * To create a cluster that extends your on-premises data center on the private network, with the option of adding limited public access later through edge worker nodes:
     ```
-    ibmcloud ks cluster-create --zone <zone> --machine-type <machine_type> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --private-service-endpoint [--disable-disk-encrypt] [--trusted]
+    ibmcloud ks cluster-create --zone <zone> --machine-type <machine_type> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --private-service-endpoint [--public-service-endpoint] [--disable-disk-encrypt] [--trusted]
     ```
     {: pre}
-  * To create a cluster that extends your on-premises datacenter and provides limited public access through a gateway device:
+  * To create a cluster that extends your on-premises data center and provides limited public access through a gateway device:
     ```
     ibmcloud ks cluster-create --zone <zone> --machine-type <machine_type> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --public-service-endpoint [--disable-disk-encrypt] [--trusted]
     ```
@@ -452,7 +454,7 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
     Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
     {: important}
 
-8. After you cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
+8. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
 
 <br />
 
@@ -460,8 +462,10 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
 ## Accessing your cluster
 {: #access_cluster}
 
-After you cluster is created, you can begin working with your cluster by configuring your CLI session.
+After your cluster is created, you can begin working with your cluster by configuring your CLI session.
 {: shortdesc}
+
+
 
 ### Accessing clusters that run internet-facing workloads
 {: #access_internet}
@@ -574,6 +578,8 @@ After you cluster is created, you can begin working with your cluster by configu
       ```
       {: codeblock}
 
+
+
 <br />
 
 
@@ -598,7 +604,7 @@ Then, you can check out the following network configuration steps for your clust
 * Control public traffic to the network services that expose your apps by creating [Calico pre-DNAT policies](/docs/containers?topic=containers-network_policies#block_ingress), such as whitelist and blacklist policies.
 * Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up a [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn).
 
-### Extend your on-premises datacenter to a cluster and allow limited public access using edge nodes and Calico network policies
+### Extend your on-premises data center to a cluster and allow limited public access using edge nodes and Calico network policies
 {: #next_steps_calico}
 
 * Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up [DirectLink](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) or the [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn). DirectLink allows communication between apps and services in your cluster and an on-premises network over the private network, while strongSwan allows communication through an encrypted VPN tunnel over the public network.
@@ -606,7 +612,7 @@ Then, you can check out the following network configuration steps for your clust
 * Expose your apps with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
 * [Create Calico host network policies](/docs/containers?topic=containers-network_policies#isolate_workers) to block public access to pods, isolate your cluster on the private network, and allow access to other {{site.data.keyword.Bluemix_notm}} services.
 
-### Extend your on-premises datacenter to a cluster and allow limited public access using a gateway device
+### Extend your on-premises data center to a cluster and allow limited public access using a gateway device
 {: #next_steps_gateway}
 
 * If you also configure your gateway firewall for the private network, you must [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
@@ -614,8 +620,9 @@ Then, you can check out the following network configuration steps for your clust
 * Expose your apps with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
 * [Open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_inbound) in your gateway device firewall to permit inbound traffic to networking services.
 
-### Extend your on-premises datacenter to a cluster on the private network only
+### Extend your on-premises data center to a cluster on the private network only
 {: #next_steps_extend}
 
+* If you have a firewall on the private network, [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
 * Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up [DirectLink](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link).
 * Expose your apps on the private network with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
