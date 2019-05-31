@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Configuring pod security policies
 {: #psp}
 
-With [pod security policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), you can
+With [pod security policies (PSPs) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), you can
 configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}.
 
 **Why do I set pod security policies?**</br>
@@ -50,6 +50,9 @@ When you as a user create a pod directly and not by using a controller such as a
 When you create a pod by using a resource controller such as a deployment, Kubernetes validates the pod's service account credentials against the pod security policies that the service account is authorized to use. If no policy supports the pod security requirements, the controller succeeds, but the pod is not created.
 
 For common error messages, see [Pods fail to deploy because of a pod security policy](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp).
+
+**Why can I still create privileged pods when I am not part of the `privileged-psp-user` cluster role binding?**<br>
+Other cluster role bindings or namespace-scoped role bindings might give you other pod security policies that authorize you to create privileged pods. Additionally by default, cluster administrators have access to all resources, including pod security policies, and so can add themselves to PSPs or create privileged resources.
 
 ## Customizing pod security policies
 {: #customize_psp}
