@@ -86,7 +86,7 @@ Review the options to debug persistent storage and find the root causes for fail
       
    2. List the Helm charts in the `iks-charts` repository. 
       ```
-      helm search `iks-charts`
+      helm search iks-charts
       ```
       {: pre}
       
