@@ -42,8 +42,8 @@ Use these release notes to learn about the latest changes to the {{site.data.key
 <tr>
   <td>3 June 2019</td>
   <td><ul>
-  <li><strong>Cluster add-ons changelog</strong>: Updated the [ALB `nginx-ingress` image to build 467](/docs/containers?topic=containers-cluster-add-ons-changelog).</li>
   <li><strong>Bringing your own Ingress controller</strong>: Updated the [steps](/docs/containers?topic=containers-ingress#user_managed) to reflect changes to the default community controller and to require a health check for controller IP addresses in multizone clusters.</li>
+  <li><strong>Cluster add-ons changelog</strong>: Updated the [ALB `nginx-ingress` image to build 467](/docs/containers?topic=containers-cluster-add-ons-changelog).</li>
   <li><strong>Kustomize</strong>: Added an example of [reusing Kubernetes configuration files across multiple environments with Kustomize](/docs/containers?topic=containers-app#kustomize).</li>
   </td>
 </tr>
