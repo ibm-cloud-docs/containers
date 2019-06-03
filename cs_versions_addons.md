@@ -57,7 +57,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tbody>
 <tr>
 <td>467 / 329</td>
-<td>03 May 2019</td>
+<td>03 June 2019</td>
 <td>Fixes GnuTLS vulnerabilities for image scans.</td>
 <td>-</td>
 </tr>
