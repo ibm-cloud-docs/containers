@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -272,7 +272,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 9. Install the {{site.data.keyword.cos_full_notm}} plug-in. When you install the plug-in, pre-defined storage classes are added to your cluster.
 
    - **For OS X and Linux:**
-     - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.
+     - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.</br>
        **Without Tiller**: 
        ```
        helm ibmc template iks-charts/ibm-object-storage-plugin --apply
@@ -285,7 +285,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
        ```
        {: pre}
 
-     - If you completed the previous step, install with a limitation to specific Kubernetes secrets.
+     - If you completed the previous step, install with a limitation to specific Kubernetes secrets.</br>
        **Without Tiller**: 
        ```
        cd ../..
@@ -314,7 +314,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         {: pre}
 
      3. Install the Helm chart.
-        - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.
+        - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.</br>
           **Without Tiller**: 
           ```
           helm ibmc template iks-charts/ibm-object-storage-plugin --apply
@@ -327,7 +327,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
           ```
           {: pre}
 
-        - If you completed the previous step, install with a limitation to specific Kubernetes secrets.
+        - If you completed the previous step, install with a limitation to specific Kubernetes secrets.</br>
           **Without Tiller**: 
           ```
           cd ../..
@@ -475,12 +475,12 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
    ```
    {: pre}
 
-5. Upgrade the plug-in. 
+5. Upgrade the plug-in. </br>
    **Without Tiller**: 
-     ```
-     helm ibmc template iks-charts/ibm-object-storage-plugin --update
-     ```
-     {: pre}
+   ```
+   helm ibmc template iks-charts/ibm-object-storage-plugin --update
+   ```
+   {: pre}
      
    **With Tiller**: 
    1. Find the installation name of your Helm chart.
@@ -540,7 +540,7 @@ Before you begin:
 
 To remove the plug-in:
 
-1. Remove the plug-in from your cluster. 
+1. Remove the plug-in from your cluster. </br>
    **With Tiller**: 
    1. Find the installation name of your Helm chart.
       ```
@@ -561,10 +561,10 @@ To remove the plug-in:
       {: pre}
 
    **Without Tiller**: 
-      ```
-      helm ibmc template iks-charts/ibm-object-storage-plugin --delete
-      ```
-      {: pre}
+   ```
+   helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+   ```
+   {: pre}
 
 2. Verify that the {{site.data.keyword.cos_full_notm}} pods are removed.
    ```
