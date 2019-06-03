@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Why {{site.data.keyword.containerlong_notm}}
@@ -40,7 +41,7 @@ Clusters are deployed on compute hosts that provide native Kubernetes and {{site
 |-------|-----------|
 |Single-tenant Kubernetes clusters with compute, network, and storage infrastructure isolation|<ul><li>Create your own customized infrastructure that meets the requirements of your organization.</li><li>Provision a dedicated and secured Kubernetes master, worker nodes, virtual networks, and storage by using the resources provided by IBM Cloud infrastructure (SoftLayer).</li><li>Fully managed Kubernetes master that is continuously monitored and updated by {{site.data.keyword.IBM_notm}} to keep your cluster available.</li><li>Option to provision worker nodes as bare metal servers with Trusted Compute.</li><li>Store persistent data, share data between Kubernetes pods, and restore data when needed with the integrated and secure volume service.</li><li>Benefit from full support for all native Kubernetes APIs.</li></ul>|
 | Multizone clusters to increase high availability | <ul><li>Easily manage worker nodes of the same machine type (CPU, memory, virtual or physical) with worker pools.</li><li>Guard against zone failure by spreading nodes evenly across select multizones and using anti-affinity pod deployments for your apps.</li><li>Decrease your costs by using multizone clusters instead of duplicating the resources in a separate cluster.</li><li>Benefit from automatic load balancing across apps with the multizone load balancer (MZLB) that is set up automatically for you in each zone of the cluster.</li></ul>|
-| Highly available masters | <ul><li>Reduce cluster downtime such as during master updates with highly available masters that are provisioned automatically when you create a cluster.</li><li>Spread your masters across zones in a [multizone cluster](/docs/containers?topic=containers-plan_clusters#multizone) to protect your cluster from zonal failures.</li></ul> |
+| Highly available masters | <ul><li>Reduce cluster downtime such as during master updates with highly available masters that are provisioned automatically when you create a cluster.</li><li>Spread your masters across zones in a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone) to protect your cluster from zonal failures.</li></ul> |
 |Image security compliance with Vulnerability Advisor|<ul><li>Set up your own repo in our secured Docker private image registry where images are stored and shared by all users in the organization.</li><li>Benefit from automatic scanning of images in your private {{site.data.keyword.Bluemix_notm}} registry.</li><li>Review recommendations specific to the operating system used in the image to fix potential vulnerabilities.</li></ul>|
 |Continuous monitoring of the cluster health|<ul><li>Use the cluster dashboard to quickly see and manage the health of your cluster, worker nodes, and container deployments.</li><li>Find detailed consumption metrics by using {{site.data.keyword.monitoringlong}} and quickly expand your cluster to meet work loads.</li><li>Review logging information by using {{site.data.keyword.loganalysislong}} to see detailed cluster activities.</li></ul>|
 |Secure exposure of apps to the public|<ul><li>Choose between a public IP address, an {{site.data.keyword.IBM_notm}} provided route, or your own custom domain to access services in your cluster from the internet.</li></ul>|
@@ -70,7 +71,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Blue
  <tbody>
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Public, off-premises</td>
- <td>With {{site.data.keyword.Bluemix_notm}} Public on [shared or dedicated hardware or on bare metal machines](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node), you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.Bluemix_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
+ <td>With {{site.data.keyword.Bluemix_notm}} Public on [shared or dedicated hardware or on bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes), you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.Bluemix_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
  </td>
  </tr>
  <tr>
@@ -105,7 +106,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[{{site.data.keyword.Bluemix_notm}} service access from the cluster and apps](/docs/containers?topic=containers-service-binding#bind-services)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Disk space on worker node for non-persistent storage](/docs/containers?topic=containers-storage_planning#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 | [Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones) | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
-|[Multizone clusters to increase app high availability](/docs/containers?topic=containers-plan_clusters#multizone) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Multizone clusters to increase app high availability](/docs/containers?topic=containers-ha_clusters#multizone) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 | Replicated masters for higher availability | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 |[Scalable number of worker nodes to increase capacity](/docs/containers?topic=containers-app#app_scaling)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Persistent NFS file-based storage with volumes](/docs/containers?topic=containers-file_storage#file_storage)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
@@ -113,6 +114,6 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Public network app access by an Ingress service to a stable IP address and customizable URL](/docs/containers?topic=containers-ingress#planning)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Logging and monitoring](/docs/containers?topic=containers-health#logging)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|[Option to provision bare metal workers with Trusted Compute](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Option to provision bare metal workers with Trusted Compute](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of free and standard clusters" caption-side="top"}

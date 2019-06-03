@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-30"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
@@ -85,7 +86,7 @@ Review the options to debug persistent storage and find the root causes for fail
       
    2. List the Helm charts in the `iks-charts` repository. 
       ```
-      helm search `iks-charts`
+      helm search iks-charts
       ```
       {: pre}
       

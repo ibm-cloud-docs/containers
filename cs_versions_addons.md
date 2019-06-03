@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-28"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Cluster add-ons changelog
@@ -54,6 +55,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>467 / 329</td>
+<td>03 June 2019</td>
+<td>Fixes GnuTLS vulnerabilities for image scans.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>462 / 329</td>
 <td>28 May 2019</td>

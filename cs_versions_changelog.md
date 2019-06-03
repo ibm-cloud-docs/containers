@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-20"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Version changelog
@@ -456,7 +457,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1084,7 +1085,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1608,7 +1609,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -2033,7 +2034,7 @@ The following table shows the changes that are included in the worker node fix 1
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -2542,7 +2543,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -3270,7 +3271,7 @@ The following table shows the changes that are included in the worker node fix 1
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -3749,7 +3750,7 @@ The following table shows the changes that are included in patch 1.10.11_1536.
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -4446,7 +4447,7 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 <td>GPU support</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Support for [graphics processing unit (GPU) container workloads](/docs/containers?topic=containers-app#gpu_app) is now available for scheduling and execution. For a list of available GPU machine types, see [Hardware for worker nodes](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>Support for [graphics processing unit (GPU) container workloads](/docs/containers?topic=containers-app#gpu_app) is now available for scheduling and execution. For a list of available GPU machine types, see [Hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
@@ -4529,7 +4530,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>

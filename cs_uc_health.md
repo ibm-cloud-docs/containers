@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Healthcare use cases for {{site.data.keyword.cloud_notm}}
@@ -38,7 +39,7 @@ An IT Exec for a healthcare provider has business reporting and patient systems 
 Why {{site.data.keyword.cloud_notm}}: To improve patient service, the provider looked to {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.contdelivery_full}} to reduce IT spend and accelerate development, all on a secure platform. The provider’s high-use SaaS systems, which held both patient record systems and business report apps, needed updates frequently. Yet the on-premises environment hindered agile development. The provider also wanted to counteract increasing labor costs and a decreasing budget.
 
 Key technologies:
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Horizontal scaling](/docs/containers?topic=containers-app#highly_available_apps)
 * [Container security and isolation](/docs/containers?topic=containers-security#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)

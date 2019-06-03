@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-08"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -16,11 +16,12 @@ subcollection: containers
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
+{:tip: .tip}rwo
 {:note: .note}
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -52,7 +53,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
       ```
       {: screen}
 
@@ -539,7 +540,7 @@ To add block storage:
     Volume:		pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
     Labels:		<none>
     Capacity:	20Gi
-    Access Modes:	RWX
+    Access Modes:	RWO
     Events:
       FirstSeen	LastSeen	Count	From								SubObjectPath	Type		Reason			Message
       ---------	--------	-----	----								-------------	--------	------			-------
@@ -1233,7 +1234,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    Example output:
    ```
    NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWO            ibmc-block-bronze    147d
    ```
    {: screen}
 

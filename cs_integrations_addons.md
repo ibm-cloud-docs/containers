@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-22"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, helm
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 # Adding services by using managed add-ons
 {: #managed-addons}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-21"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Defining your Kubernetes strategy
@@ -406,6 +407,7 @@ A few tips for organizing deployment YAML files:
     ```
     {: codeblock}
 *  You can use the `kubectl apply -f` command to apply to an entire directory, not just a single file.
+*  Try out the [`kustomize` project](/docs/containers?topic=containers-app#kustomize) that you can use to help write, customize, and reuse your Kubernetes resource YAML configurations.
 
 Within the YAML file, you can use labels or annotations as metadata to manage your deployments.
 
