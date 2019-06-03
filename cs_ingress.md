@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1651,18 +1651,13 @@ You have 2 options for bringing your own Ingress controller:
 Create a network load balancer (NLB) to expose your custom Ingress controller deployment, and then create a host name for the NLB IP address.
 {: shortdesc}
 
-1. Get the configuration file for your Ingress controller ready. For example, you can use the YAML file for the [NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml). If you use the community controller, edit the configuration file by following these steps.
-  1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
-  2. Replace all `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with the `app: ingress-nginx` label. After you replace the labels, all `labels` and `matchLabels` sections look similar to the following:
-     ```
-     labels:
-       app: ingress-nginx
-     ```
-     {: screen}
+1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/tree/master/deploy/cloud-generic). If you use the community controller, edit the `kustomization.yaml` file by following these steps.
+  1. Replace the `namespace: ingress-nginx` with `namespace: kube-system`.
+  2. In the `commonLabels` section, replace the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with one `app: ingress-nginx` label.
 
-2. Deploy your own Ingress controller.
+2. Deploy your own Ingress controller. For example, to use the cloud-generic NGINX community Ingress controller, run the following command.
     ```
-    kubectl apply -f deployment/customingress.yaml -n kube-system
+    kubectl apply --kustomize . -n kube-system
     ```
     {: pre}
 
@@ -1752,20 +1747,14 @@ Disable the IBM-provided ALB deployment and use the load balancer service that e
     ```
     {: pre}
 
-3. Get the configuration file for your Ingress controller ready. For example, you can use the YAML configuration file for the [NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml). If you use the community controller, edit the configuration file by following these steps.
-  1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
-  2. Replace all `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with the `app: ingress-nginx` label. After you replace the labels, all `labels` and `matchLabels` sections look similar to the following:
-     ```
-     labels:
-       app: ingress-nginx
-     ```
-     {: screen}
-  3. Replace `- --publish-service=$(POD_NAMESPACE)/ingress-nginx` with `- --publish-service=$(POD_NAMESPACE)/<ALB_ID>`.
-     For example, the ALB ID from step 1 might look like `- --publish-service=$(POD_NAMESPACE)/public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
+3. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/tree/master/deploy/cloud-generic). If you use the community controller, edit the `kustomization.yaml` file by following these steps.
+  1. Replace the `namespace: ingress-nginx` with `namespace: kube-system`.
+  2. In the `commonLabels` section, replace the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with one `app: ingress-nginx` label.
+  3. In the `SERVICE_NAME` variable, replace `name: ingress-nginx` with `name: <ALB_ID>`. For example, the ALB ID from step 1 might look like `name: public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
 
-4. Deploy your own Ingress controller. **Important**: To continue to use the load balancer service exposing the controller and the IBM-provided Ingress subdomain, your controller must be deployed in the `kube-system` namespace.
+4. Deploy your own Ingress controller. For example, to use the cloud-generic NGINX community Ingress controller, run the following command. **Important**: To continue to use the load balancer service exposing the controller and the IBM-provided Ingress subdomain, your controller must be deployed in the `kube-system` namespace.
     ```
-    kubectl apply -f deployment/customingress.yaml -n kube-system
+    kubectl apply --kustomize . -n kube-system
     ```
     {: pre}
 
@@ -1858,7 +1847,22 @@ Disable the IBM-provided ALB deployment and use the load balancer service that e
 
 9. If you have a multizone cluster, repeat these steps for each ALB.
 
-10. Create Ingress resources for your apps by following the steps in [Exposing apps that are inside your cluster to the public](#ingress_expose_public).
+10. If you have a multizone cluster, you must configure a health check. The Cloudflare DNS healthcheck endpoint, `albhealth.<clustername>.<region>.containers.appdomain.com`, expects a `200` response with a body of `healthy` in the response. If no health check is set up to return `200` and `healthy`, the health check removes any ALB IP addresses from the DNS pool. You can either edit the existing healthcheck resource, or create your own.
+  * To edit the existing healthcheck resource:
+    1. Open the `alb-health` resource.
+      ```
+      kubectl edit ingress alb-health --namespace kube-system
+      ```
+      {: pre}
+    2. In the `metadata.annotations` section, change the `ingress.bluemix.net/server-snippets` annotation name to the annotation that your controller supports. For example, you might use the `nginx.ingress.kubernetes.io/server-snippet` annotation. Do not change the content of the server snippet.
+    3. Save and close the file. Your changes are automatically applied.
+  * To create your own healthcheck resource, ensure that the following snippet is returned to Cloudflare:
+    ```
+    { return 200 'healthy'; add_header Content-Type text/plain; }
+    ```
+    {: codeblock}
+
+11. Create Ingress resources for your apps by following the steps in [Exposing apps that are inside your cluster to the public](#ingress_expose_public).
 
 Your apps are now exposed by your custom Ingress controller. To restore the IBM-provided ALB deployment, re-enable the ALB. The ALB is redeployed, and the load balancer service is automatically reconfigured to point to the ALB.
 
