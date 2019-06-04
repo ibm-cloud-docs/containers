@@ -50,7 +50,73 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 ## Version 1.14 changelog
 {: #114_changelog}
 
+### Changelog for 1.14.2_1521, released 4 June 2019
+{: #1142_1521}
 
+The following table shows the changes that are included in the patch 1.14.2_1521.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.1_1519">
+<caption>Changes since version 1.14.1_1519</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster DNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed a bug that might leave both Kubernetes DNS and CoreDNS pods running after cluster `create` or `update` operations.</td>
+</tr>
+<tr>
+<td>Cluster master HA configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to minimize intermittent master network connectivity failures during a master update.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.14.1-71</td>
+<td>v1.14.2-100</td>
+<td>Updated to support the Kubernetes 1.14.2 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.1</td>
+<td>v1.14.2</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.2).</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>See the [Kubernetes Metrics Server release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.14.1_1519, released 20 May 2019
 {: #1141_1519}
@@ -224,7 +290,61 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 ## Version 1.13 changelog
 {: #113_changelog}
 
+### Changelog for 1.13.6_1524, released 4 June 2019
+{: #1136_1524}
 
+The following table shows the changes that are included in the patch 1.13.6_1524.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.6_1522">
+<caption>Changes since version 1.13.6_1522</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster DNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed a bug that might leave both Kubernetes DNS and CoreDNS pods running after cluster `create` or `update` operations.</td>
+</tr>
+<tr>
+<td>Cluster master HA configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to minimize intermittent master network connectivity failures during a master update.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>See the [Kubernetes Metrics Server release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.13.6_1522, released 20 May 2019
 {: #1136_1522}
@@ -853,7 +973,73 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 Review the version 1.12 changelog.
 {: shortdesc}
 
+### Changelog for 1.12.9_1555, released 4 June 2019
+{: #1129_1555}
 
+The following table shows the changes that are included in the patch 1.12.9_1555.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.8_1553">
+<caption>Changes since version 1.12.8_1553</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster DNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed a bug that might leave both Kubernetes DNS and CoreDNS pods running after cluster `create` or `update` operations.</td>
+</tr>
+<tr>
+<td>Cluster master HA configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to minimize intermittent master network connectivity failures during a master update.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.8-210</td>
+<td>v1.12.9-227</td>
+<td>Updated to support the Kubernetes 1.12.9 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.8</td>
+<td>v1.12.9</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.9).</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>See the [Kubernetes Metrics Server release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.8_1553, released 20 May 2019
 {: #1128_1533}
@@ -1798,7 +1984,49 @@ Review the version 1.11 changelog.
 Kubernetes version 1.11 is deprecated and becomes unsupported on 27 June 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
 {: deprecated}
 
+### Changelog for 1.11.10_1561, released 4 June 2019
+{: #11110_1561}
 
+The following table shows the changes that are included in the patch 1.11.10_1561.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.10_1559">
+<caption>Changes since version 1.11.10_1559</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to minimize intermittent master network connectivity failures during a master update.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.10_1559, released 20 May 2019
 {: #11110_1559}
