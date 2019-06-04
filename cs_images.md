@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks
 
@@ -162,6 +162,9 @@ Tokens authorize access to the deprecated `registry.bluemix.net` registry domain
 
 Before the deprecated tokens and `registry.bluemix.net` domains become unsupported, update your cluster image pull secrets to use the API key method for the [`default` Kubernetes namespace](#imagePullSecret_migrate_api_key) and [any other namespaces or accounts](#other) you might use. Then, update your deployments to pull from the `icr.io` registry domains.
 
+**After I copy or create an image pull secret in another Kubernetes namespace, am I done?**<br>
+Not quite. Your containers must be authorized to pull images by using the secret that you created. You can add the image pull secret to the service account for the namespace, or refer to the secret in each deployment. For instructions, see [Using the image pull secret to deploy containers](/docs/containers?topic=containers-images#use_imagePullSecret).
+
 <br />
 
 
@@ -232,6 +235,8 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
 
 Set up your own image pull secret in your cluster to deploy containers to Kubernetes namespaces other than `default`, use images that are stored in other {{site.data.keyword.Bluemix_notm}} accounts, or use images that are stored in external private registries. Further, you might create your own image pull secret to apply IAM access policies that restrict permissions to specific registry image namespaces, or actions (such as `push` or `pull`).
 {:shortdesc}
+
+After you create the image pull secret, your containers your containers must use the secret to be authorized to pull an image from the registry. You can add the image pull secret to the service account for the namespace, or refer to the secret in each deployment. For instructions, see [Using the image pull secret to deploy containers](/docs/containers?topic=containers-images#use_imagePullSecret).
 
 Image pull secrets are valid only for the Kubernetes namespaces that they were created for. Repeat these steps for every namespace where you want to deploy containers. Images from [DockerHub](#dockerhub) do not require image pull secrets.
 {: tip}
@@ -325,7 +330,7 @@ You can copy an image pull secret, such as the one that is automatically created
     kubectl get secrets -n <namespace_name>
     ```
     {: pre}
-5.  [You can choose to add the image pull secret to a Kubernetes service account so that any pod in the namespace can use the image pull secret when you deploy a container](#use_imagePullSecret).
+5.  [Add the image pull secret to a Kubernetes service account so that any pod in the namespace can use the image pull secret when you deploy a container](#use_imagePullSecret).
 
 ### Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.Bluemix_notm}} accounts
 {: #other_registry_accounts}
@@ -463,7 +468,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
-8.  [You can choose to add the image pull secret to a Kubernetes service account so that any pod in the namespace can use the image pull secret when you deploy a container](#use_imagePullSecret).
+8.  [Add the image pull secret to a Kubernetes service account so that any pod in the namespace can use the image pull secret when you deploy a container](#use_imagePullSecret).
 
 ### Accessing images that are stored in other private registries
 {: #private_images}
