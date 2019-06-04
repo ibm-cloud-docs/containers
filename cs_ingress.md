@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1771,13 +1771,13 @@ Disable the IBM-provided ALB deployment and use the load balancer service that e
     ```
     {: screen}
 
-5. Using the ALB ID you got in step 1, open the load balancer service that exposes the IBM ALB.
+6. Using the ALB ID you got in step 1, open the load balancer service that exposes the IBM ALB.
     ```
     kubectl edit svc <ALB_ID> -n kube-system
     ```
     {: pre}
 
-6. Update the load balancer service to point to your custom Ingress deployment. Under `spec/selector`, remove the ALB ID from the `app` label and add the label for your own Ingress controller that you got in step 5.
+7. Update the load balancer service to point to your custom Ingress deployment. Under `spec/selector`, remove the ALB ID from the `app` label and add the label for your own Ingress controller that you got in step 5.
     ```
     apiVersion: v1
     kind: Service
@@ -1805,13 +1805,13 @@ Disable the IBM-provided ALB deployment and use the load balancer service that e
     {: codeblock}
     1. Optional: By default, the load balancer service allows traffic on port 80 and 443. If your custom Ingress controller requires a different set of ports, add those ports to the `ports` section.
 
-7. Save and close the configuration file. The output is similar to the following:
+8. Save and close the configuration file. The output is similar to the following:
     ```
     service "public-cr18e61e63c6e94b658596ca93d087eed9-alb1" edited
     ```
     {: screen}
 
-8. Verify that the ALB `Selector` now points to your controller.
+9. Verify that the ALB `Selector` now points to your controller.
     ```
     kubectl describe svc <ALB_ID> -n kube-system
     ```
@@ -1843,26 +1843,26 @@ Disable the IBM-provided ALB deployment and use the load balancer service that e
     ```
     {: screen}
 
-8. Deploy any other resources that are required by your custom Ingress controller, such as the configmap.
+10. Deploy any other resources that are required by your custom Ingress controller, such as the configmap.
 
-9. If you have a multizone cluster, repeat these steps for each ALB.
+11. If you have a multizone cluster, repeat these steps for each ALB.
 
-10. If you have a multizone cluster, you must configure a health check. The Cloudflare DNS healthcheck endpoint, `albhealth.<clustername>.<region>.containers.appdomain.com`, expects a `200` response with a body of `healthy` in the response. If no health check is set up to return `200` and `healthy`, the health check removes any ALB IP addresses from the DNS pool. You can either edit the existing healthcheck resource, or create your own.
+12. If you have a multizone cluster, you must configure a health check. The Cloudflare DNS healthcheck endpoint, `albhealth.<clustername>.<region>.containers.appdomain.com`, expects a `200` response with a body of `healthy` in the response. If no health check is set up to return `200` and `healthy`, the health check removes any ALB IP addresses from the DNS pool. You can either edit the existing healthcheck resource, or create your own.
   * To edit the existing healthcheck resource:
-    1. Open the `alb-health` resource.
-      ```
-      kubectl edit ingress alb-health --namespace kube-system
-      ```
-      {: pre}
-    2. In the `metadata.annotations` section, change the `ingress.bluemix.net/server-snippets` annotation name to the annotation that your controller supports. For example, you might use the `nginx.ingress.kubernetes.io/server-snippet` annotation. Do not change the content of the server snippet.
-    3. Save and close the file. Your changes are automatically applied.
+      1. Open the `alb-health` resource.
+        ```
+        kubectl edit ingress alb-health --namespace kube-system
+        ```
+        {: pre}
+      2. In the `metadata.annotations` section, change the `ingress.bluemix.net/server-snippets` annotation name to the annotation that your controller supports. For example, you might use the `nginx.ingress.kubernetes.io/server-snippet` annotation. Do not change the content of the server snippet.
+      3. Save and close the file. Your changes are automatically applied.
   * To create your own healthcheck resource, ensure that the following snippet is returned to Cloudflare:
     ```
     { return 200 'healthy'; add_header Content-Type text/plain; }
     ```
     {: codeblock}
 
-11. Create Ingress resources for your apps by following the steps in [Exposing apps that are inside your cluster to the public](#ingress_expose_public).
+13. Create Ingress resources for your apps by following the steps in [Exposing apps that are inside your cluster to the public](#ingress_expose_public).
 
 Your apps are now exposed by your custom Ingress controller. To restore the IBM-provided ALB deployment, re-enable the ALB. The ALB is redeployed, and the load balancer service is automatically reconfigured to point to the ALB.
 
