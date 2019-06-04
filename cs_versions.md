@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-23"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks
 
@@ -33,13 +33,13 @@ subcollection: containers
 {:shortdesc}
 
 **Supported Kubernetes versions**:
-*   Latest: 1.14.1 
+*   Latest: 1.14.2 
 *   Default: 1.13.6
-*   Other: 1.12.8
+*   Other: 1.12.9
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.11
-*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10
+*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10 
 
 </br>
 
