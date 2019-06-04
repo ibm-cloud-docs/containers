@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks
 
@@ -39,6 +39,12 @@ Use these release notes to learn about the latest changes to the {{site.data.key
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>4 June 2019</td>
+  <td><ul>
+  <li><strong>Version changelogs</strong>: Updated the changelogs for the [1.14.2_1521](/docs/containers?topic=containers-changelog#1142_1521), [1.13.6_1524](/docs/containers?topic=containers-changelog#1136_1524), [1.12.9_1555](/docs/containers?topic=containers-changelog#1129_1555), and [1.11.10_1561](/docs/containers?topic=containers-changelog#11110_1561) patch releases.</li>
+  </td>
+</tr>
 <tr>
   <td>3 June 2019</td>
   <td><ul>
