@@ -369,7 +369,7 @@ With Red Hat OpenShift on IBM Cloud, you can create a new app and expose your ap
         Example output:
         ```
         NAME          HOST/PORT                         PATH                                        SERVICES      PORT       TERMINATION   WILDCARD
-        hello-world   hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud             hello-world   8080-tcp   edge/Allow    None
+        hello-world   hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud    hello-world   8080-tcp   edge/Allow    None
         ```
         {: screen}
 5.  Access your app.
