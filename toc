@@ -32,6 +32,7 @@ IBM Cloud Kubernetes Service
     {: .topicgroup}
     Tutorials
         cs_tutorials.md
+        cs_tutorial_rhos.md
         cs_tutorials_apps.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
