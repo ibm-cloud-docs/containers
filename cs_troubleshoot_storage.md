@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -642,7 +642,7 @@ If a network error occurs while a pod writes to a volume, IBM Cloud infrastructu
       ```
       {: pre}
 
-   3. Gracefully [reload the worker node](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload).
+   3. Gracefully [reload the worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).
 
 
 <br />
@@ -1223,7 +1223,7 @@ The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stor
    The IAM API key is listed in the `Bluemix.iam_api_key` section of your CLI output. If the `Softlayer.softlayer_api_key` is empty at the same time, then the IAM API key is used to determine your infrastructure permissions. The IAM API key is automatically set by the user who runs the first action that requires the IAM **Administrator** platform role in a resource group and region. If a different API key is set in `Softlayer.softlayer_api_key`, then this key takes precedence over the IAM API key. The `Softlayer.softlayer_api_key` is set when a cluster admin runs the `ibmcloud ks credentials-set` command. 
    
 2. If you want to change the credentials, update the API key that is used. 
-    1.  To update the IAM API key, use the `ibmcloud ks api-key-reset` [command](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_api_key_reset). To update the IBM Cloud infrastructure (SoftLayer) key, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_credentials_set).
+    1.  To update the IAM API key, use the `ibmcloud ks api-key-reset` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). To update the IBM Cloud infrastructure (SoftLayer) key, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
     2. Wait about 10-15 minutes for the `storage-secret-store` Kubernetes secret to update, then verify that the key is updated.
        ```
        kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode

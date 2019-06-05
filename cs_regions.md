@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -344,7 +344,7 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
     *   [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress#planning).
     *   [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability).
 
-3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
+3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#kubernetes-service-cli), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
 
 ### Free clusters
 {: #regions_free}
@@ -405,7 +405,7 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
   * If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region-set` command and use the cluster name when you run commands.
 
 * Legacy functionality:
-  * If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/containers?topic=containers-cs_cli_reference#cs_init) to target a regional endpoint instead of the global endpoint.
+  * If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.
     Example to target the US South regional endpoint:
     ```
     ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
@@ -445,7 +445,7 @@ If you need to specify a region in an API call, remove the `/global` parameter f
 Previously, your {{site.data.keyword.Bluemix_notm}} resources were organized into regions. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries and geographies. The following table maps the previous {{site.data.keyword.Bluemix_notm}} regions, {{site.data.keyword.containerlong_notm}} regions, and {{site.data.keyword.containerlong_notm}} zones. Multizone-capable zones are in bold.
 {: shortdesc}
 
-Region-specific endpoints are deprecated. Use the [global endpoint](#endpoint) instead. If you must use regional endpoints, [set the `IKS_BETA_VERSION` environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to `0.2`](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_beta).
+Region-specific endpoints are deprecated. Use the [global endpoint](#endpoint) instead. If you must use regional endpoints, [set the `IKS_BETA_VERSION` environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to `0.2`](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).
 {: deprecated}
 
 | {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.Bluemix_notm}} regions | Available zones in the region |
@@ -464,4 +464,4 @@ You might want to log in to another {{site.data.keyword.containerlong_notm}} reg
   * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
   * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region that you are logged in to.
 
-To quickly switch regions, use the `ibmcloud ks region-set` [command](/docs/containers?topic=containers-cs_cli_reference#cs_region-set).
+To quickly switch regions, use the `ibmcloud ks region-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set).

@@ -167,8 +167,8 @@ IBM Cloud Kubernetes Service
     container_volumes_ov.md
     cs_classic.md
     cs_cli_devtools.md
-    cs_cli_reference.md
-    /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
+    kubernetes-service-cli.md
+    /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
     cs_storage.md
     transcript_autorecovery.md
     transcript_loadbalancing.md

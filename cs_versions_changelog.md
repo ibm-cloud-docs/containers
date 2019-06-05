@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -42,7 +42,7 @@ For information about changes since the previous version, see the following chan
 -  **Deprecated**: Version 1.11 [changelog](#111_changelog).
 -  [Archive](#changelog_archive) of changelogs for unsupported versions.
 
-Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
 </br>
@@ -2894,7 +2894,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -3130,13 +3130,13 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update).</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update).</td>
 </tr>
 <tr>
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) or [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) or [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>Worker node runtime components (`kubelet`, `kube-proxy`, `containerd`)</td>
@@ -4099,7 +4099,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -4267,7 +4267,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update).</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update).</td>
 </tr>
 <tr>
 <td>Worker node runtime components (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -4279,7 +4279,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) or [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) or [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4868,7 +4868,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -5012,7 +5012,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update).</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update).</td>
 </tr>
 <tr>
 <td>Worker node runtime components (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -5024,7 +5024,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) or [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) or [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -5455,7 +5455,7 @@ Review the version 1.8 changelogs.
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update).</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update).</td>
 </tr>
 <tr>
 <td>Worker node runtime components (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -5467,7 +5467,7 @@ Review the version 1.8 changelogs.
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) or [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) or [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>systemd</td>
