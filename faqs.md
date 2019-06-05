@@ -189,6 +189,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 * [Subnet IP addresses](#subnet_ips)
 * [Storage](#persistent_storage)
 * [{{site.data.keyword.Bluemix_notm}} services](#services)
+* [Red Hat OpenShift on IBM Cloud](#rhos_charges)
 
 <dl>
 <dt id="nodes">Worker nodes</dt>
@@ -222,6 +223,10 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 
 <dt id="services">{{site.data.keyword.Bluemix_notm}} services</dt>
   <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.Bluemix_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
+
+<dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
+  <dd>
+  <p class="preview">[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-rhos_iks_tutorial) is available as a beta to test out OpenShift clusters.</p>If you create a [Red Hat OpenShift on IBM Cloud cluster](/docs/containers?topic=containers-rhos_iks_tutorial), your worker nodes are installed with the Red Hat Enterprise Linux operating system, which increases the price of the [worker node machines](#nodes). You must also have an OpenShift license, which incurs monthly costs in addition to the hourly VM costs or monthly bare metal costs. The OpenShift license is for every 2 cores of the worker node flavor. If you delete your worker node before the end of the month, your monthly license is available for other worker nodes in the worker pool to use. For more information on OpenShift clusters, see [Creating a Red Hat OpenShift on IBM Cloud cluster](/docs/containers?topic=containers-rhos_iks_tutorial).</dd>
 
 </dl>
 <br><br>
