@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -25,46 +25,108 @@ subcollection: containers
 
 
 # 您使用 {{site.data.keyword.containerlong_notm}} 的責任
+{: #responsibilities_iks}
+
 瞭解使用 {{site.data.keyword.containerlong}} 時，您所擁有的叢集管理責任及條款。
 {:shortdesc}
 
 ## 叢集管理責任
 {: #responsibilities}
 
-檢閱您與 IBM 共同分擔的叢集管理責任。
+IBM 提供企業雲端平台，供您部署應用程式與 {{site.data.keyword.Bluemix_notm}} DevOps、AI、資料及安全服務。您可以選擇如何在雲端中設定、整合及操作應用程式和服務。
 {:shortdesc}
 
-**IBM 負責：**
-
-- 在建立叢集時，在叢集內部署主節點、工作者節點及管理元件，例如 Ingress 應用程式負載平衡器
-- 提供叢集的 Kubernetes 主節點安全更新、監視、隔離及回復
-- 讓版本更新項目及安全修補程式可供您套用至叢集工作者節點
-- 監視工作者節點的性能，並為那些工作者節點提供自動化更新及回復
-- 對基礎架構帳戶執行自動化作業，包括新增工作者節點、移除工作者節點及建立預設子網路
-- 管理、更新及回復叢集內的作業元件，例如 Ingress 應用程式負載平衡器及儲存空間外掛程式
-- 在持續性磁區要求要求時，佈建儲存磁區
-- 在所有工作者節點上提供安全設定
-
-</br>
-
-**您負責：**
-
-- [配置具有適當許可權的 {{site.data.keyword.containerlong_notm}} API 金鑰，以存取 IBM Cloud 基礎架構 (SoftLayer) 組合及其他 {{site.data.keyword.Bluemix_notm}} 服務](/docs/containers?topic=containers-users#api_key)
-- [在叢集內部署及管理 Kubernetes 資源，例如 Pod、服務及部署](/docs/containers?topic=containers-app#app_cli)
-- [利用服務及 Kubernetes 的功能以確保應用程式的高可用性](/docs/containers?topic=containers-app#highly_available_apps)
-- [調整工作者節點儲存區的大小，以新增或移除叢集容量](/docs/containers?topic=containers-clusters#add_workers)
-- [啟用 VLAN Spanning，讓多區域工作者節點儲存區在各區域之間保持平衡](/docs/containers?topic=containers-plan_clusters#ha_clusters)
-- [在 IBM Cloud 基礎架構 (SoftLayer) 建立公用及專用 VLAN，以進行叢集的網路隔離](/docs/infrastructure/vlans?topic=vlans-getting-started-with-vlans#getting-started-with-vlans)
-- [確保所有工作者節點都具有 Kubernetes 服務端點 URL 的網路連線功能](/docs/containers?topic=containers-firewall#firewall) <p class="note">如果工作者節點同時具有公用和專用 VLAN，則已配置網路連線功能。如果工作者節點設定為具有僅限專用 VLAN，則您必須[啟用專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)或[配置閘道裝置](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)，以容許工作者節點與叢集主節點通訊。如果您已設定防火牆，則必須管理及配置其設定，以容許存取與叢集搭配使用的 {{site.data.keyword.containerlong_notm}} 及其他 {{site.data.keyword.Bluemix_notm}} 服務。</p>
-- [當 Kubernetes 版本更新可用時，更新主節點 kube-apiserver](/docs/containers?topic=containers-update#master)
-- [讓工作者節點保持最新的主要、次要及修補程式版本](/docs/containers?topic=containers-update#worker_node) <p class="note">您無法變更工作者節點的作業系統，或登入工作者節點。IBM 會以包括最新安全修補程式的完整工作者節點映像檔形式提供工作者節點更新項目。若要套用更新項目，必須使用新的映像檔來重新映像化及重新載入工作者節點。重新載入工作者節點時，會自動替換 root 使用者的金鑰。</p>
-- [設定叢集元件的日誌轉遞來監視叢集性能](/docs/containers?topic=containers-health#health)。   
-- [回復出問題的工作者節點，方法為執行 `kubectl` 指令（例如 `cordon` 或 `drain`），以及執行 `ibmcloud ks` 指令（例如 `reboot`、`reload` 或 `delete`）](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)
-- [視需要新增或移除 IBM Cloud 基礎架構 (SoftLayer) 中的子網路](/docs/containers?topic=containers-subnets#subnets)
-- [在 IBM Cloud 基礎架構 (SoftLayer) 備份及還原持續性儲存空間裡的資料 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter)
-- 設定[記載](/docs/containers?topic=containers-health#logging)及[監視](/docs/containers?topic=containers-health#view_metrics)服務，以支援叢集的性能及效能
-- [針對具有自動回復的工作者節點配置性能監視](/docs/containers?topic=containers-health#autorecovery)
-- 審核可變更叢集裡資源的事件，例如使用 [{{site.data.keyword.cloudaccesstrailfull}}](/docs/containers?topic=containers-at_events#at_events) 檢視可變更 {{site.data.keyword.containerlong_notm}} 實例狀況的使用者起始活動
+<table summary="此表格顯示 IBM 及您的責任。列應該從左到右閱讀，第一欄為代表每個責任的圖示，第二欄為說明。">
+<caption>IBM 及您的責任</caption>
+  <thead>
+  <th colspan=2>依類型的責任</th>
+  </thead>
+  <tbody>
+    <tr>
+    <td align="center"><img src="images/icon_clouddownload.svg" alt="箭頭指向下方的雲端圖示"/><br>雲端基礎架構</td>
+    <td>
+    **IBM 責任**：
+    <ul><li>在安全的 IBM 擁有的基礎架構帳戶中，部署每個叢集的完整受管理、高可用性專用主節點。</li>
+    <li>在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中佈建工作者節點。</li>
+    <li>設定叢集管理元件，例如 VLAN 及負載平衡器。</li>
+    <li>滿足更多基礎架構的要求，例如，新增及移除工作者節點、建立預設子網路，以及佈建儲存空間磁區以回應持續性磁區要求。</li>
+    <li>整合已訂購的基礎架構資源以自動與叢集架構一起運作，並可用於已部署的應用程式及工作負載。</li></ul>
+    <br><br>
+    **您的責任**：
+    <ul><li>使用提供的 API、CLI 或主控台工具來調整[運算](/docs/containers?topic=containers-clusters#clusters)及[儲存空間](/docs/containers?topic=containers-storage_planning#storage_planning)容量，並且調整[網路配置](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)來符合您工作負載的需求。</li></ul><br><br>
+    </td>
+     </tr>
+     <tr>
+     <td align="center"><img src="images/icon_tools.svg" alt="板手的圖示"/><br>受管理叢集</td>
+     <td>
+     **IBM 責任**：
+     <ul><li>提供一組工具來自動化叢集管理，例如 {{site.data.keyword.containerlong_notm}} [API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api/)、[CLI 外掛程式](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)及[主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/clusters)。</li>
+     <li>自動套用 Kubernetes 主節點修補程式作業系統、版本及安全更新項目。讓主要和次要更新項目可供您套用。</li>
+     <li>更新及回復叢集內的作業 {{site.data.keyword.containerlong_notm}} 及 Kubernetes 元件，例如 Ingress 應用程式負載平衡器及檔案儲存空間外掛程式。</li>
+     <li>備份並回復 etcd 中的資料，例如 Kubernetes 工作負載配置檔。</li>
+     <li>建立叢集時，設定主節點與工作者節點之間的 OpenVPN 連線。</li>
+     <li>在各種介面中監視及報告主節點及工作者節點的性能。</li>
+     <li>提供工作者節點主要、次要及修補程式作業系統、版本及安全更新項目。</li>
+     <li>滿足自動化要求，以更新及回復工作者節點。提供選用的[工作者節點自動回復](/docs/containers?topic=containers-health#autorecovery)。</li>
+     <li>提供[叢集 Autoscaler](/docs/containers?topic=containers-ca#ca) 這類工具來延伸叢集基礎架構。</li>
+     </ul>
+     <br><br>
+     **您的責任**：
+     <ul>
+     <li>使用 API、CLI 或主控台工具來[套用](/docs/containers?topic=containers-update#update)提供的主要及次要 Kubernetes 主節點更新項目，以及主要、次要和修補程式工作者節點更新項目。</li>
+     <li>使用 API、CLI 或主控台工具來[回復](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot)您的基礎架構資源，或設定並配置選用的[工作者節點自動回復](/docs/containers?topic=containers-health#autorecovery)。</li></ul>
+     <br><br></td>
+      </tr>
+    <tr>
+      <td align="center"><img src="images/icon_locked.svg" alt="鎖的圖示"/><br>高度安全的環境</td>
+      <td>
+      **IBM 責任**：
+      <ul>
+      <li>維護與[各種業界規範標準](/docs/containers?topic=containers-faqs#standards)相對應的控制項，例如 PCI DSS。</li>
+      <li>監視、隔離及回復叢集主節點。</li>
+      <li>提供 Kubernetes 主節點 API 伺服器、etcd、排程器及控制器管理程式元件的高可用性抄本，來防範主節點運作中斷。</li>
+      <li>自動套用主要安全修補程式更新項目，並提供工作者節點安全修補程式更新項目。</li>
+      <li>啟用特定安全設定，例如工作者節點上的加密磁碟。</li>
+      <li>停用工作者節點的某些不安全動作，例如不允許使用者透過 SSH 連接至主機。</li>
+      <li>使用 TLS 加密主節點與工作者節點之間的通訊。</li>
+      <li>為工作者節點作業系統提供符合 CIS 標準的 Linux 映像檔。</li>
+      <li>持續監視主節點及工作者節點映像檔，以偵測漏洞及安全規範問題。</li>
+      <li>為工作者節點佈建兩個本端 SSD、AES 256 位元加密資料分割區。</li>
+      <li>提供叢集網路連線功能的選項，例如公用及專用服務端點。</li>
+      <li>提供運算隔離的選項，例如專用虛擬機器、裸機及具有 Trusted Compute 的裸機。</li>
+      <li>整合 Kubernetes 角色型存取控制 (RBAC) 與 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)。</li>
+      </ul>
+      <br><br>
+      **您的責任**：
+      <ul>
+      <li>使用 API、CLI 或主控台工具，將提供的[安全修補程式更新項目](/docs/containers?topic=containers-changelog#changelog)套用至工作者節點。</li>
+      <li>選擇如何設定[叢集網路](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)，並配置進一步的[安全設定](/docs/containers?topic=containers-security#security)，以符合您工作負載的安全及規範需求。適用的話，請配置[防火牆](/docs/containers?topic=containers-firewall#firewall)。</li></ul>
+      <br><br></td>
+      </tr>
+      
+      <tr>
+        <td align="center"><img src="images/icon_code.svg" alt="程式碼方括弧的圖示"/><br>應用程式編排</td>
+        <td>
+        **IBM 責任**：
+        <ul>
+        <li>佈建已安裝 Kubernetes 元件的叢集，讓您可以存取 Kubernetes API。</li>
+        <li>提供許多受管理附加程式，以延伸應用程式的功能，例如 [Istio](/docs/containers?topic=containers-istio#istio) 及 [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)。為您簡化維護，因為 IBM 為受管理附加程式提供安裝及更新項目。</li>
+        <li>提供叢集與精選協力廠商夥伴關係技術的整合，例如 {{site.data.keyword.la_short}}、{{site.data.keyword.mon_short}} 及 Portworx。</li>
+        <li>提供自動化，以啟用與其他 {{site.data.keyword.Bluemix_notm}} 服務的服務連結。</li>
+        <li>使用映像檔取回密碼來建立叢集，讓 `default` Kubernetes 名稱空間中的部署可以從 {{site.data.keyword.registrylong_notm}} 取回映像檔。</li>
+        <li>提供儲存空間類別及外掛程式，以支援與應用程式搭配使用的持續性磁區。</li>
+        <li>建立已保留子網路 IP 位址的叢集，以用來在外部公開應用程式。</li>
+        <li>支援原生 Kubernetes 公用和專用負載平衡器及 Ingress 路徑，以在外部公開服務。</li>
+        </ul>
+        <br><br>
+        **您的責任**：
+        <ul>
+        <li>使用提供的工具和特性來[配置及部署](/docs/containers?topic=containers-app#app)；[設定許可權](/docs/containers?topic=containers-users#users)；[與其他服務整合](/docs/containers?topic=containers-supported_integrations#supported_integrations)；[在外部提供](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)；[監視性能](/docs/containers?topic=containers-health#health)；[儲存、備份及還原資料](/docs/containers?topic=containers-storage_planning#storage_planning)；以及管理[高可用性](/docs/containers?topic=containers-ha#ha)和具復原力的工作負載。</li>
+        </ul>
+        </td>
+        </tr>
+  </tbody>
+  </table>
 
 <br />
 

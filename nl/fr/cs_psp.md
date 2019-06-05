@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -31,7 +31,7 @@ configurer des politiques pour déterminer quelles sont les personnes autorisée
 **Pourquoi définir des politiques de sécurité de pod ?**</br>
 En tant qu'administrateur de cluster, vous désirez contrôler ce qui se passe dans votre cluster, notamment les actions qui affectent la sécurité ou la réactivité du cluster. Ces politiques peuvent vous aider à contrôler l'utilisation des conteneurs privilégiés, des espaces de nom racine, des réseaux et ports d'hôte, des types de volume, des systèmes de fichiers hôte, des droits Linux, tels que lecture seule ou ID de groupes, etc.
 
-Avec le contrôleur d'admission `PodSecurityPolicy`, aucun pod ne peut être créé tant que vous n'avez pas [autorisé de politiques](#customize_psp). La configuration des politiques de sécurité de pod peut avoir des effets secondaires indésirables, par conséquent veillez à tester un déploiement après avoir modifié une politique. Pour déployer des applications, les comptes utilisateur et les comptes de service doivent tous être autorisés par les politiques de sécurité de pod requises à déployer des pods. Par exemple, si vous installez des applications en utilisant [Helm](/docs/containers?topic=containers-integrations#helm_links), le composant Helm tiller crée des pods, et vous devez donc disposer de l'autorisation de politique de sécurité adéquate.
+Avec le contrôleur d'admission `PodSecurityPolicy`, aucun pod ne peut être créé tant que vous n'avez pas [autorisé de politiques](#customize_psp). La configuration des politiques de sécurité de pod peut avoir des effets secondaires indésirables, par conséquent veillez à tester un déploiement après avoir modifié une politique. Pour déployer des applications, les comptes utilisateur et les comptes de service doivent tous être autorisés par les politiques de sécurité de pod requises à déployer des pods. Par exemple, si vous installez des applications en utilisant [Helm](/docs/containers?topic=containers-helm#public_helm_install), le composant Helm tiller crée des pods, et vous devez donc disposer de l'autorisation de politique de sécurité adéquate.
 
 Vous essayez de contrôler quels sont les utilisateurs pouvant accéder à {{site.data.keyword.containerlong_notm}} ? Voir [Affectation d'accès au cluster](/docs/containers?topic=containers-users#users) pour définir les droits IAM et les droits de l'infrastructure {{site.data.keyword.Bluemix_notm}}.
 {: tip}
@@ -181,8 +181,8 @@ Lorsque vous modifiez la configuration par défaut, vous pouvez empêcher l'exé
     {: pre}
 
 </br>
-**Pour créer votre propre politique de sécurité de pod** :</br>
-Pour créer votre propre ressource de politique de sécurité de pod et autoriser les utilisateurs avec le contrôle d'accès RBAC, consultez la [documentation de Kubernetes  ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
+**Pour créer votre propre ressource de politique de sécurité de pod** :</br>
+Pour créer votre propre ressource de politique de sécurité de pod et autoriser les utilisateurs avec le contrôle d'accès RBAC, consultez la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
 
 Veillez lorsque vous avez modifié des politiques existantes à ce que la nouvelle politique que vous créez n'entre pas en conflit avec une politique existante. Prenons l'exemple d'une politique existante autorisant les utilisateurs à créer et à mettre à jour des pods privilégiés : si vous créez une politique qui n'autorise pas les utilisateurs à créer ou mettre à jour des pods privilégiés, le conflit entre la politique existante et la nouvelle politique peut provoquer des résultats inattendus.
 

@@ -26,7 +26,7 @@ lastupdated: "2019-03-21"
 
 **어떤 Kubernetes 버전이 어떤 클러스터 DNS 제공자를 지원합니까?**<br>
 
-| Kubernetes 버전  | 새 클러스터에 대한 기본값 |설명 |
+| Kubernetes 버전 | 새 클러스터에 대한 기본값 |설명 |
 |---|---|---|
 | 1.13 이상 |CoreDNS | 이전 클러스터에서 1.13으로 업데이트된 클러스터는 업데이트 시 사용한 모든 DNS 제공자를 유지합니다. 다른 DNS 제공자를 사용하려면 [DNS 제공자를 전환](#dns_set)하십시오. |
 | 1.12 | KubeDNS | 대신 CoreDNS를 사용하려면 [DNS 제공자를 전환](#set_coredns)하십시오. |
@@ -36,7 +36,7 @@ lastupdated: "2019-03-21"
 ## 클러스터 DNS 제공자 Auto-Scaling
 {: #dns_autoscale}
 
-기본적으로 {{site.data.keyword.containerlong_notm}} 클러스터 DNS 제공자에는 클러스터의 작업자 노드와 코어의 수에 따라 DNS 팟(Pod)을 자동 조정하는 배치가 포함되어 있습니다. DNS Auto-Scaling configmap을 편집하여 DNS 오토스케일러 매개변수를 세부 조정할 수 있습니다. 예를 들어, 앱에 클러스터 DNS 제공자의 사용량이 많은 경우에는 앱을 지원할 수 있도록 최소 DNS 팟(Pod) 수를 늘려야 할 수 있습니다. 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/)를 참조하십시오.
+기본적으로 {{site.data.keyword.containerlong_notm}} 클러스터 DNS 제공자에는 클러스터의 작업자 노드와 코어의 수에 따라 DNS 팟(Pod)을 오토스케일링하는 배치가 포함되어 있습니다. DNS Auto-Scaling configmap을 편집하여 DNS 오토스케일러 매개변수를 세부 조정할 수 있습니다. 예를 들어, 앱에 클러스터 DNS 제공자의 사용량이 많은 경우에는 앱을 지원할 수 있도록 최소 DNS 팟(Pod) 수를 늘려야 할 수 있습니다. 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/)를 참조하십시오.
 {: shortdesc}
 
 시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
@@ -60,7 +60,7 @@ lastupdated: "2019-03-21"
     ```
     {: pre}    
 3.  DNS 오토스케일러에 대한 기본 설정을 편집하십시오. `data.linear` 필드를 찾으십시오. 이 필드는 클러스터 크기(`preventSinglePointFailure: true`)에 관계없이 최소 2개의 DNS 팟(Pod)이 있는 16개의 작업자 노드 또는 256개의 코어당 1개의 DNS 팟(Pod)으로 기본 설정됩니다. 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/#tuning-autoscaling-parameters)를 참조하십시오.
-```
+    ```
     kubectl edit configmap -n kube-system <dns-autoscaler>
     ```
     {: pre}
@@ -100,12 +100,12 @@ DNS configmap을 편집하여 {{site.data.keyword.containerlong_notm}} 클러스
 2.  CoreDNS 또는 KubeDNS configmap에 대한 기본 설정을 편집하십시오.
     
     *   **CoreDNS의 경우**: configmap의 `data` 섹션에 있는 Corefile을 사용하여 스텁 도메인 및 업스트림 네임 서버를 사용자 정의합니다. 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns)를 참조하십시오.
-```
+        ```
         kubectl edit configmap -n kube-system coredns
         ```
         {: pre}
     
-        **CoreDNS 출력 예**:
+        **CoreDNS 출력 예**: 
           ```
           apiVersion: v1
           kind: ConfigMap
@@ -141,7 +141,7 @@ DNS configmap을 편집하여 {{site.data.keyword.containerlong_notm}} 클러스
           {: tip}
           
     *   **KubeDNS의 경우**: configmap의 `data` 섹션에서 스텁 도메인과 업스트림 네임 서버를 구성합니다. 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns)를 참조하십시오.
-```
+        ```
         kubectl edit configmap -n kube-system kube-dns
         ```
         {: pre}

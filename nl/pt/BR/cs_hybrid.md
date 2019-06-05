@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -32,7 +32,7 @@ subcollection: containers
 Se você tiver uma conta {{site.data.keyword.Bluemix}} Private, será possível usá-la com os serviços do {{site.data.keyword.Bluemix_notm}} selecionados, incluindo o {{site.data.keyword.containerlong}}. Para obter mais informações, consulte o blog em [Experiência híbrida no {{site.data.keyword.Bluemix_notm}} Private e IBM Public Cloud![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://ibm.biz/hybridJune2018).
 {: shortdesc}
 
-Você entende as  [ {{site.data.keyword.Bluemix_notm}}  ofertas ](/docs/containers?topic=containers-cs_ov#differentiation). Agora, é possível [conectar sua nuvem pública e privada](#hybrid_vpn) e [reutilizar seus pacotes privados para contêineres públicos](#hybrid_ppa_importer).
+Você entende as [ofertas do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_ov#differentiation) e desenvolveu sua estratégia do Kubernetes para quais [cargas de trabalho devem ser executadas na nuvem](/docs/containers?topic=containers-strategy#cloud_workloads). Agora, é possível [conectar sua nuvem pública e privada](#hybrid_vpn) e [reutilizar seus pacotes privados para contêineres públicos](#hybrid_ppa_importer).
 
 ## Conectando sua nuvem pública e privada com a VPN strongSwan
 {: #hybrid_vpn}
@@ -94,6 +94,11 @@ Estabeleça a conectividade de VPN entre o cluster público do Kubernetes e sua 
 
 8.  Repita essas etapas para cada cluster que você deseja conectar.
 
+**O que vem a seguir?**
+
+*   [Execute as imagens de seu software licenciado em clusters públicos](#hybrid_ppa_importer).
+*   Para gerenciar múltiplos clusters do Kubernetes em nuvem, como ao longo do {{site.data.keyword.Bluemix_notm}} Public e do {{site.data.keyword.Bluemix_notm}} Private, efetue check-out do [IBM Multicloud Manager ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
+
 
 ## Executando imagens do {{site.data.keyword.Bluemix_notm}} Private em contêineres públicos do Kubernetes
 {: #hybrid_ppa_importer}
@@ -117,11 +122,11 @@ Antes de iniciar:
 - [Instale o plug-in da CLI do {{site.data.keyword.registryshort}} (`ibmcloud cr`)](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install).
 - [Configure um namespace no {{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup) ou recupere seu namespace existente executando `ibmcloud cr namespaces`.
 - [Destine a sua CLI `kubectl` para o seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- [Instale a CLI do Helm e configure o tiller em seu cluster](/docs/containers?topic=containers-integrations#helm).
+- [Instale a CLI do Helm e configure o tiller em seu cluster](/docs/containers?topic=containers-helm#public_helm_install).
 
 Para implementar uma imagem do {{site.data.keyword.Bluemix_notm}} Private em um cluster no {{site.data.keyword.Bluemix_notm}} Public:
 
-1.  Siga as etapas na documentação do [{{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-ts_index#ts_ppa) para fazer download do software licenciado do IBM Passport Advantage, enviar por push a imagem para o seu namespace e instalar o gráfico do Helm em seu cluster.
+1.  Siga as etapas na [documentação do {{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-ts_index#ts_ppa) para fazer download do software licenciado no IBM Passport Advantage, enviar a imagem por push para seu namespace e instalar o gráfico do Helm em seu cluster.
 
     ** Para o IBM WebSphere Application Server Liberty **:
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks
 
@@ -27,5 +27,5 @@ subcollection: containers
 # 찾고 있는 컨텐츠가 이동되었습니다.
 {: #cs_cli_devtools}
 
-찾고 있는 컨텐츠가 이동되었습니다. <a href="https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip">새 위치에서 최신 정보를 다운로드하십시오</a>.
+찾고 있는 컨텐츠가 이동되었습니다. <a href="/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference">새 위치에서 최신 정보를 확인하십시오</a>.
 {:shortdesc}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,7 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"}
+{:table: .aria-labeledby="caption"} 
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
@@ -41,7 +41,7 @@ Kubernetes クラスターのストレージ構成要素を以下の図に示し
 - **アプリ**</br> ストレージ・インスタンスとの間で読み書きを行うには、永続ボリューム請求 (PVC) をアプリにマウントする必要があります。 ストレージ・タイプごとに読み取り/書き込みのルールがあります。 例えば、ファイル・ストレージの場合は、同じ PVC に複数のポッドをマウントできます。 ブロック・ストレージは、RWO (ReadWriteOnce) アクセス・モードであるため、1 つのポッドにしかマウントできません。
 - **永続ボリューム請求 (PVC)** </br> PVC は、特定のタイプや構成で永続ストレージをプロビジョンするための要求です。 永続ストレージのフレーバーを指定するには、[Kubernetes ストレージ・クラス](#storageclasses)を使用します。 クラスター管理者がストレージ・クラスを定義することも、{{site.data.keyword.containerlong_notm}} の事前定義ストレージ・クラスの中から選択することも可能です。 PVC を作成すると、要求が {{site.data.keyword.Bluemix}} ストレージ・プロバイダーに送信されます。 ストレージ・クラスで定義されている構成に応じて、物理ストレージ・デバイスが注文され、IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされます。 要求対象の構成が存在しなければ、ストレージは作成されません。
 - **永続ボリューム (PV)** </br> PV は、クラスターにボリュームとして追加される仮想ストレージ・インスタンスです。 PV は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの物理ストレージ・デバイスを参照し、そのストレージ・デバイスとの通信のために使用する API を抽象化します。 PV をアプリにマウントするには、対応する PVC が必要です。 マウントした PV は、コンテナーのファイル・システム内でフォルダーとして表示されます。
-- **物理ストレージ** </br> データを永続化するために使用できる物理ストレージ・インスタンス。 {{site.data.keyword.Bluemix_notm}} 内の物理ストレージの例としては、[ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_storage)、[ブロック・ストレージ](/docs/containers?topic=containers-block_storage#block_storage)、[オブジェクト・ストレージ](/docs/containers?topic=containers-object_storage#object_storage)、[Portworx](/docs/containers?topic=containers-portworx#portworx) で SDS ストレージとして使用できるローカル・ワーカー・ノード・ストレージなどがあります。{{site.data.keyword.Bluemix_notm}} には、物理ストレージ・インスタンスの高可用性機能が用意されています。 ただし、物理ストレージ・インスタンスに保管したデータの自動バックアップ機能はありません。 バックアップ/リストア・ソリューションをセットアップする方法は、使用するストレージのタイプによって異なります。
+- **物理ストレージ** </br> データを永続化するために使用できる物理ストレージ・インスタンス。 {{site.data.keyword.Bluemix_notm}} 内の物理ストレージの例としては、[ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_storage)、[ブロック・ストレージ](/docs/containers?topic=containers-block_storage#block_storage)、[オブジェクト・ストレージ](/docs/containers?topic=containers-object_storage#object_storage)、[Portworx](/docs/containers?topic=containers-portworx#portworx) で SDS ストレージとして使用できるローカル・ワーカー・ノード・ストレージなどがあります。 {{site.data.keyword.Bluemix_notm}} には、物理ストレージ・インスタンスの高可用性機能が用意されています。 ただし、物理ストレージ・インスタンスに保管したデータの自動バックアップ機能はありません。 バックアップ/リストア・ソリューションをセットアップする方法は、使用するストレージのタイプによって異なります。
 
 PVC、PV、物理ストレージ・デバイスを作成して使用する方法の詳細については、以下を参照してください。
 - [動的プロビジョニング](#dynamic_provisioning)
@@ -209,7 +209,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントに既存
 
 開始前に、以下のことを行います。
 - [クラスターを Kubernetes CLI のターゲットとして設定](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)します。
-- 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+- 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
 
 既存の PV を更新するには、以下のようにします。
 

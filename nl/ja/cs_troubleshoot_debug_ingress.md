@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,7 +44,7 @@ subcollection: containers
 
 ## ステップ 1: {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用した Ingress テストを実行する
 
-トラブルシューティングの際に、{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用して、Ingress テストを実行し、クラスターから Ingress の関連情報を収集することができます。このデバッグ・ツールを使用するには、[`ibmcloud-iks-debug` Helm チャート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug) をインストールします。
+トラブルシューティングの際に、{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用して、Ingress テストを実行し、クラスターから Ingress の関連情報を収集することができます。 このデバッグ・ツールを使用するには、[`ibmcloud-iks-debug` Helm チャート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug) をインストールします。
 {: shortdesc}
 
 
@@ -52,7 +52,7 @@ subcollection: containers
 
 2. Helm チャートをクラスターにインストールします。
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
@@ -65,7 +65,7 @@ subcollection: containers
 
 4. Web ブラウザーで、デバッグ・ツール・インターフェースの URL (http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page) を開きます。
 
-5. テストの**「ingress」**グループを選択します。潜在的な警告、エラー、または問題を検査するテストもあれば、トラブルシューティング中に参照できる情報を収集するだけのテストもあります。各テストの機能について詳しくは、テストの名前の隣にある情報アイコンをクリックしてください。
+5. テストの**「ingress」**グループを選択します。 潜在的な警告、エラー、または問題を検査するテストもあれば、トラブルシューティング中に参照できる情報を収集するだけのテストもあります。 各テストの機能について詳しくは、テストの名前の隣にある情報アイコンをクリックしてください。
 
 6. **「実行 (Run)」**をクリックします。
 

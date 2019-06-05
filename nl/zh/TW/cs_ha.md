@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, disaster recovery, dr, ha, hadr
 
@@ -57,7 +57,7 @@ subcollection: containers
 
 在主節點中斷期間，請不要將工作者節點重新啟動或重新開機。此動作會從您的工作者節點移除 Pod。因為 Kubernetes API 伺服器無法使用，所以無法將 Pod 重新排程至叢集裡的其他工作者節點。
 {: important}
-主要叢集具有高可用性，且會在個別主機上包含 Kubernetes API 伺服器、etcd、排程器及控制器管理程式的抄本，來防範在主節點更新這類期間發生運作中斷。</p><p>若要防範叢集主節點發生區域失敗，您可以：<ul><li>在[多區域都會城市](/docs/containers?topic=containers-regions-and-zones#zones)中建立叢集，這會將主節點分散在各區域之中。</li><li>在另一個區域設定第二個叢集。</li></ul></p>
+主要叢集具有高可用性，且會在個別主機上包含 Kubernetes API 伺服器、etcd、排程器及控制器管理程式的抄本，來防範在主節點更新這類期間發生運作中斷。</p><p>若要防範叢集主節點發生區域失敗，您可以：<ul><li>在[多區域都會位置](/docs/containers?topic=containers-regions-and-zones#zones)中建立叢集，這會將主節點分散在各區域之中。</li><li>在另一個區域設定第二個叢集。</li></ul></p>
   <p>請參閱[設定高可用性叢集。](/docs/containers?topic=containers-plan_clusters#ha_clusters)</p></dd>
 <dt> 4. 區域故障。</dt>
   <dd><p>區域故障會影響所有實體運算主機及 NFS 儲存空間。故障包括電源、散熱、網路連線或儲存空間運作中斷，以及自然災害，例如洪水、地震和颶風等。若要避免發生區域故障，您必須讓叢集位於兩個不同區域，然後由外部負載平衡器進行負載平衡。</p>
@@ -66,6 +66,6 @@ subcollection: containers
   <dd><p>每一個地區都有設定高可用性的負載平衡器，可從地區專用的 API 端點進行存取。負載平衡器會將送入及送出要求遞送至地區區域中的叢集。整個地區故障的可能性很低。不過，若要說明此故障，您可以在不同地區設定多個叢集，然後使用外部負載平衡器連接它們。假設整個地區故障，其他地區的叢集就可以接管工作負載。</p><p class="note">多地區叢集需要數個「雲端」資源，視您的應用程式而定，它們可能既複雜又昂貴。檢查您是否需要多地區設定，或您是否可以容忍潛在的服務中斷。如果要設定多地區叢集，請確定您的應用程式和資料可在另一個地區管理，而且您的應用程式可以處理廣域資料抄寫。</p>
   <p>請參閱[設定高可用性叢集](/docs/containers?topic=containers-plan_clusters#ha_clusters)。</p></dd>   
 <dt> 6a、6b. 儲存空間故障。</dt>
-  <dd><p>在有狀態的應用程式中，資料扮演能讓您應用程式保持運行的重要角色。您要確定資料具有高可用性，以在發生潛在故障時能夠回復。在 {{site.data.keyword.containerlong_notm}} 中，您可以從數個選項中選擇，以持續保存您的資料。例如，您可以使用 Kubernetes 原生持續性磁區來佈建 NFS 儲存空間，或使用 {{site.data.keyword.Bluemix_notm}} 資料庫服務來儲存資料。</p>
+  <dd><p>在有狀態的應用程式中，資料扮演能讓您應用程式保持運行的重要角色。請確定資料具有高可用性，以在發生潛在故障時能夠回復。在 {{site.data.keyword.containerlong_notm}} 中，您可以從數個選項中選擇，以持續保存您的資料。例如，您可以使用 Kubernetes 原生持續性磁區來佈建 NFS 儲存空間，或使用 {{site.data.keyword.Bluemix_notm}} 資料庫服務來儲存資料。</p>
   <p>請參閱[規劃高可用性資料](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。</p></dd>
 </dl>

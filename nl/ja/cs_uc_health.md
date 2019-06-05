@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -69,13 +69,13 @@ subcollection: containers
 
 **ソリューション・モデル**
 
-オンプレミスのエンタープライズ資産に安全にアクセスできるパブリック・クラウドで、オンデマンドにコンピュート・サービス、ストレージ・サービス、I/O サービスを実行します。CI/CD プロセスと IBM Garage Method の他のパーツを実装して、配信サイクルを劇的に短縮します。
+オンプレミスのエンタープライズ資産に安全にアクセスできるパブリック・クラウドで、オンデマンドにコンピュート・サービス、ストレージ・サービス、I/O サービスを実行します。 CI/CD プロセスと IBM Garage Method の他のパーツを実装して、配信サイクルを劇的に短縮します。
 
 **ステップ 1: コンピュート・プラットフォームを保護する**
 * 非常に機密性の高い患者データを管理するアプリは、トラステッド・コンピューティングのためにベアメタル上で実行される {{site.data.keyword.containerlong_notm}} 上で再ホストすることができます。
 * トラステッド・コンピューティングでは、基盤となるハードウェアが悪用されていないことを検証できます。
 * そのコアから、脆弱性アドバイザーが既知のマルウェアに対して、イメージ、ポリシー、コンテナー、パッケージのスキャンと、脆弱性スキャンを行います。
-* シンプルな Ingress アノテーションを使用して、サービスと API に対するポリシー駆動型の認証を一貫して実施します。宣言型セキュリティーでは、{{site.data.keyword.appid_short_notm}} を使用してユーザー認証とトークン検証を保証できます。
+* シンプルな Ingress アノテーションを使用して、サービスと API に対するポリシー駆動型の認証を一貫して実施します。 宣言型セキュリティーでは、{{site.data.keyword.appid_short_notm}} を使用してユーザー認証とトークン検証を保証できます。
 
 **ステップ 2: リフト・アンド・シフトを行う**
 * パブリック・クラウド内の {{site.data.keyword.containerlong_notm}} で実行されるコンテナー・イメージに仮想マシン・イメージをマイグレーションします。
@@ -123,7 +123,7 @@ CI/CD プロセス自体の多くは、IBM のクラウド内の継続的デリ�
 
 主要なテクノロジー:
 * [インテリジェント・スケジューリングによってワークロードが必要な場所に配置される](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [アプリ間でデータを永続化および同期化する {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [アプリ間でデータを永続化および同期化する {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [脆弱性スキャンとワークロードの分離](/docs/services/Registry?topic=va-va_index#va_index)
 * [{{site.data.keyword.contdelivery_full}} のオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
 * [データをサニタイズして、研究者にデータ構造の変更について通知する {{site.data.keyword.openwhisk}}](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)

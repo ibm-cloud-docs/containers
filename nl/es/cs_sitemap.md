@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -19,17 +19,18 @@ lastupdated: "2019-03-21"
 {:download: .download}
 
 
-
 # Mapa del sitio
 {: #cs_sitemap}
 
 ## Iniciación a {{site.data.keyword.containerlong_notm}}
+{: #sitemap-gs}
 
-[Iniciación a {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index#container_index)
+[Iniciación a {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
 
 
 
 ## Acerca de
+{: #sitemap-about}
 
 [Por qué {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)
 * [Ventajas de utilizar el servicio](/docs/containers?topic=containers-cs_ov#benefits)
@@ -43,6 +44,8 @@ lastupdated: "2019-03-21"
 * [Arquitectura del servicio](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)
 
 ## Casos de uso
+{: #sitemap-usecases}
+
 [Visión general de casos de uso](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
 [Casos de uso de {{site.data.keyword.Bluemix_notm}} en el sector de servicios financieros](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
@@ -66,10 +69,11 @@ lastupdated: "2019-03-21"
 * [Un gran puerto público protege el intercambio de datos y los manifiestos de transporte marítimo entre organizaciones públicas y privadas](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
 ## Su estrategia de clúster
+{: #sitemap-strategy}
 
-[Responsabilidades al utilizar {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
-* [Responsabilidades de la gestión de clústeres](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#responsibilities)
-* [Abuso en {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#terms)
+[Responsabilidades al utilizar {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
+* [Responsabilidades de la gestión de clústeres](/docs/containers?topic=containers-responsibilities_iks#responsibilities)
+* [Abuso en {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#terms)
 
 [Seguridad para {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
 * [Visión general de las amenazas de seguridad para el clúster](/docs/containers?topic=containers-security#threats)
@@ -87,7 +91,40 @@ lastupdated: "2019-03-21"
 [Alta disponibilidad para {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#ha)
 * [Visión general de posibles puntos de anomalía en {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
 
+[Definición de la estrategia de Kubernetes](/docs/containers?topic=containers-strategy#strategy)
+* [Traspasar las cargas de trabajo a {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
+  * [¿Qué puedo traspasar a {{site.data.keyword.Bluemix_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
+  * [¿Qué tipo de apps puedo ejecutar en {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#app_types)
+    * [Algunas directrices para desarrollar apps sin estado, nativas de la nube](/docs/containers?topic=containers-strategy#12factor)
+    * [Ya tengo una app. ¿Cómo puedo migrarla a {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#migrate_containerize)
+* [Dimensionar el clúster de Kubernetes para dar soporte a la carga de trabajo](/docs/containers?topic=containers-strategy#sizing)
+  * [¿Cuántos recursos necesita mi app?](/docs/containers?topic=containers-strategy#sizing_resources)
+  * [¿Qué más, aparte de mi app, puede utilizar recursos del clúster?](/docs/containers?topic=containers-strategy#sizing_other)
+  * [¿Qué tipo de disponibilidad desea que tenga mi carga de trabajo?](/docs/containers?topic=containers-strategy#sizing_availability)
+  * [¿Cuántos nodos trabajadores necesito para manejar mi carga de trabajo?](/docs/containers?topic=containers-strategy#sizing_workers)
+* [Estructuración del entorno de Kubernetes](/docs/containers?topic=containers-strategy#kube_env)
+  * [¿Qué tipo de clúster y de máquinas debo obtener?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [¿Utilizo varios clústeres, o simplemente añado más trabajadores a un clúster existente?](/docs/containers?topic=containers-strategy#env_multicluster)
+  * [¿Cómo puedo configurar mis recursos dentro del clúster?](/docs/containers?topic=containers-strategy#env_resources)
+* [Cómo hacer que sus recursos estén altamente disponibles](/docs/containers?topic=containers-strategy#kube_ha)
+* [Configuración del descubrimiento de servicios](/docs/containers?topic=containers-strategy#service_discovery)
+  * [¿Puedo personalizar el proveedor de DNS del clúster de Kubernetes?](/docs/containers?topic=containers-strategy#services_dns)
+  * [¿Cómo puedo asegurarme de que mis servicios están conectados a los despliegues correctos y listos para funcionar?](/docs/containers?topic=containers-strategy#services_connected)
+  * [¿Cómo controlo el tráfico de red entre los servicios que se ejecutan en mi clúster?](/docs/containers?topic=containers-strategy#services_network_traffic)
+  * [¿Cómo puedo exponer mis servicios en Internet?](/docs/containers?topic=containers-strategy#services_expose_apps)
+* [Despliegue de cargas de trabajo de apps en clústeres](/docs/containers?topic=containers-strategy#deployments)
+  * [Creía que tenía que poner mi app en un contenedor. ¿Qué es todo esto de los pods?](/docs/containers?topic=containers-strategy#deploy_pods)
+  * [Así pues, si puedo utilizar un solo pod, ¿para qué necesito todos estos diferentes tipos de objetos?](/docs/containers?topic=containers-strategy#deploy_objects)
+  * [¿Cómo puedo organizar mis despliegues para hacerlos más fáciles de actualizar y gestionar?](/docs/containers?topic=containers-strategy#deploy_organize)
+  * [¿Qué más puedo hacer para preparar mi app para su despliegue?](/docs/containers?topic=containers-strategy#deploy_prep)
+* [Empaquetar la app](/docs/containers?topic=containers-strategy#packaging)
+* [Mantener la app actualizada](/docs/containers?topic=containers-strategy#updating)
+  * [¿Cómo puedo mantener mi clúster en estado soportado?](/docs/containers?topic=containers-strategy#updating_kube)
+  * [¿Qué estrategias de actualización de apps puedo utilizar?](/docs/containers?topic=containers-strategy#updating_apps)
+* [Supervisión del rendimiento del clúster](/docs/containers?topic=containers-strategy#monitoring_health)
+
 ## Guías de aprendizaje
+{: #sitemap-tutorials}
 
 [Guía de aprendizaje: Creación de clústeres de Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 * [Objetivos](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
@@ -145,9 +182,10 @@ lastupdated: "2019-03-21"
 
 [Guía de aprendizaje: Crear un clúster de varias regiones mediante Cloud Internet Services](/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
 
-[Guía de aprendizaje: Configurar una integración continua y un conducto de entrega para apps contenerizadas que se ejecutan en Kubernetes](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+[Guía de aprendizaje: Configurar un conducto de integración y entrega continuas para apps contenerizadas que se ejecutan en Kubernetes](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 
 ## Configuración de la CLI y la API
+{: #sitemap-cli-api}
 
 [Configuración de la CLI y la API](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
 * [Instalación de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)
@@ -155,11 +193,14 @@ lastupdated: "2019-03-21"
 * [Configuración de la CLI para que ejecute mandatos `kubectl`](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * [Actualización de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [Desinstalación de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
+* [Uso de Kubernetes Terminal en el navegador web (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)
 * [Automatización de despliegues de clústeres con la API](/docs/containers?topic=containers-cs_cli_install#cs_api)
-  * [Renovación de señales de acceso de {{site.data.keyword.Bluemix_notm}} IAM y obtención de nuevas señales de renovación con la API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
-  * [Renovación de señales de acceso de {{site.data.keyword.Bluemix_notm}} IAM y obtención de nuevas señales de renovación con la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
+* [Cómo trabajar con el clúster utilizando la API de Kubernetes](/docs/containers?topic=containers-cs_cli_install#kube_api)
+* [Renovación de señales de acceso de {{site.data.keyword.Bluemix_notm}} IAM y obtención de nuevas señales de renovación con la API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
+* [Renovación de señales de acceso de {{site.data.keyword.Bluemix_notm}} IAM y obtención de nuevas señales de renovación con la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
 ## Administración de clústeres
+{: #sitemap-clusters-admin}
 
 [Planificación de la configuración del clúster y del nodo trabajador](/docs/containers?topic=containers-plan_clusters#plan_clusters)
 * [Clústeres de alta disponibilidad](/docs/containers?topic=containers-plan_clusters#ha_clusters)
@@ -209,7 +250,7 @@ lastupdated: "2019-03-21"
   * [Actualización de nodos trabajadores en la consola](/docs/containers?topic=containers-update#worker_up_console)
 * [Actualización de los tipos de máquina](/docs/containers?topic=containers-update#machine_type)
 * [Actualización de complementos de clúster](/docs/containers?topic=containers-update#addons)
-  * [Gestión de actualizaciones automáticas para el complemento Fluentd para registro](/docs/containers?topic=containers-update#logging)
+  * [Gestión de actualizaciones automáticas para el complemento Fluentd para registro](/docs/containers?topic=containers-update#logging-up)
   * [Gestión de las actualizaciones automáticas para el complemento ALB de Ingress](/docs/containers?topic=containers-update#alb)
 * [Actualización de nodos trabajadores autónomos a agrupaciones de nodos trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
@@ -281,6 +322,7 @@ lastupdated: "2019-03-21"
 * [Ajuste de recursos del proveedor de métricas de clúster](/docs/containers?topic=containers-kernel#metrics)
 
 ## Configuración de la red de clúster
+{: #sitemap-clusters-networking}
 
 [Planificación de la red de clúster](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)
 * [Visión general de los conceptos básicos de la red de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics)
@@ -299,21 +341,26 @@ lastupdated: "2019-03-21"
   * [Red privada con un dispositivo de pasarela](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)
 * [Planificación del clúster en la red local o con comunicación de {{site.data.keyword.icpfull_notm}}](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn)
   * [Configuración de una conexión VPN para una configuración de VLAN pública y privada](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)
-  * [Configuración de una conexión VPN para una configuración solo de VLAN privada](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)
+  * [Configuración de una conexión VPN para una configuración de VLAN solo privada](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)
 
 [Configuración de la red de clúster](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
 * [Configuración de la red de clúster con una VLAN pública y una privada](/docs/containers?topic=containers-cs_network_cluster#both_vlans)
-* [Configuración de la red de clúster solo con una VLAN privada](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan)
+* [Configuración de la red de clúster con una VLAN solo privada](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan)
 * [Cambio de las conexiones de VLAN de nodo trabajador](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
 * [Configuración del punto final de servicio privado](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
 * [Configuración de punto final de servicio público](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+* [Cómo pasar de un punto final de servicio público a un punto final de servicio privado](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+* [Aislamiento de las cargas de trabajo de red en nodos trabajadores de extremo](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_edge)
+* [Aislamiento del clúster en la red privada](/docs/containers?topic=containers-cs_network_cluster#isolate)
 
 [Apertura de los puertos y direcciones IP necesarios en el cortafuegos](/docs/containers?topic=containers-firewall#firewall)
 * [Ejecución de mandatos `kubectl` desde detrás de un cortafuegos](/docs/containers?topic=containers-firewall#firewall_kubectl)
 * [Ejecución de mandatos `calicoctl` desde detrás de un cortafuegos](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 * [Cómo permitir al clúster acceder a recursos de infraestructura y otros servicios](/docs/containers?topic=containers-firewall#firewall_outbound)
 * [Cómo permitir que el clúster acceda a recursos a través de un cortafuegos privado](/docs/containers?topic=containers-firewall#firewall_private)
+* [Cómo permitir que el clúster acceda a recursos a través de políticas de salida de Calico](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 * [Acceso a servicios NodePort, de equilibrador de carga e Ingress desde fuera del clúster](/docs/containers?topic=containers-firewall#firewall_inbound)
+* [Colocación del clúster en la lista blanca de los cortafuegos de otros servicios o de los cortafuegos locales](/docs/containers?topic=containers-firewall#whitelist_workers)
 
 [Configuración del proveedor de DNS de clúster](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 * [Escalado automático del proveedor de DNS de clúster](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -394,26 +441,28 @@ lastupdated: "2019-03-21"
   * [Liberación de direcciones IP utilizadas](/docs/containers?topic=containers-subnets#free)
 * [Adición de direcciones IP portátiles](/docs/containers?topic=containers-subnets#adding_ips)
   * [Adición de direcciones IP portátiles mediante la solicitud de más subredes](/docs/containers?topic=containers-subnets#request)
-  * [Adición de IP privadas portátiles mediante subredes gestionadas por el usuario](/docs/containers?topic=containers-subnets#user_managed)
+  * [Adición de IP privadas portátiles mediante subredes gestionadas por el usuario](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [Gestión del direccionamiento de subred](/docs/containers?topic=containers-subnets#subnet-routing)
   * [Habilitación del direccionamiento entre subredes primarias en la misma VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
   * [Gestión del direccionamiento de subred para dispositivos de pasarela](/docs/containers?topic=containers-subnets#vra-routing)
 
 ## Compilación de contenedores a partir de imágenes
+{: #sitemap-images}
 
 [Compilación de contenedores a partir de imágenes](/docs/containers?topic=containers-images#images)
 * [Planificación de registros de imagen](/docs/containers?topic=containers-images#planning_images)
 * [Configuración de contenido de confianza para imágenes de contenedor](/docs/containers?topic=containers-images#trusted_images)
 * [Despliegue de contenedores desde una imagen de {{site.data.keyword.registryshort_notm}} en el espacio de nombres de Kubernetes predeterminado](/docs/containers?topic=containers-images#namespace)
-* [Utilización de un secreto de extracción de imagen para acceder a otros espacios de nombres de Kubernetes, otras cuentas de {{site.data.keyword.Bluemix_notm}} o registros privados externos](/docs/containers?topic=containers-images#other)
-  * [Copia del secreto de extracción de imagen del espacio de nombres predeterminado en otros espacios de nombres en el clúster](/docs/containers?topic=containers-images#copy_imagePullSecret)
-  * [Creación de un secreto de extracción de imagen para acceder a imágenes de otras cuentas de {{site.data.keyword.Bluemix_notm}} o para utilizar políticas de IAM para restringir el acceso al registro](/docs/containers?topic=containers-images#other_registry_accounts)
+* [Utilización de un secreto de extracción de imágenes para acceder a otros espacios de nombres de Kubernetes, otras cuentas de {{site.data.keyword.Bluemix_notm}} o registros privados externos](/docs/containers?topic=containers-images#other)
+  * [Copia del secreto de extracción de imágenes del espacio de nombres predeterminado en otros espacios de nombres en el clúster](/docs/containers?topic=containers-images#copy_imagePullSecret)
+  * [Creación de un secreto de extracción de imágenes para acceder a imágenes de otras cuentas de {{site.data.keyword.Bluemix_notm}} o para utilizar políticas de IAM para restringir el acceso al registro](/docs/containers?topic=containers-images#other_registry_accounts)
   * [Acceso a imágenes almacenadas en otros registros privados](/docs/containers?topic=containers-images#private_images)
-* [Despliegue de contenedores utilizando el secreto de extracción de imagen creado](/docs/containers?topic=containers-images#use_imagePullSecret)
-  * [Cómo hacer referencia al secreto de extracción de imagen en el despliegue del pod](/docs/containers?topic=containers-images#pod_imagePullSecret)
-  * [Almacenamiento del secreto de extracción de imagen en la cuenta de servicio de Kubernetes para el espacio de nombres seleccionado](/docs/containers?topic=containers-images#store_imagePullSecret)
+* [Despliegue de contenedores utilizando el secreto de extracción de imágenes creado](/docs/containers?topic=containers-images#use_imagePullSecret)
+  * [Cómo hacer referencia al secreto de extracción de imágenes en el despliegue del pod](/docs/containers?topic=containers-images#pod_imagePullSecret)
+  * [Almacenamiento del secreto de extracción de imágenes en la cuenta de servicio de Kubernetes para el espacio de nombres seleccionado](/docs/containers?topic=containers-images#store_imagePullSecret)
 
 ## Despliegue de apps en clústeres
+{: #sitemap-apps}
 
 [Despliegue de apps en clústeres](/docs/containers?topic=containers-app#app)
 * [Planificación de la ejecución de apps en clústeres](/docs/containers?topic=containers-app#plan_apps)
@@ -439,6 +488,7 @@ lastupdated: "2019-03-21"
 * [Gestión de despliegues continuos para actualizar las apps](/docs/containers?topic=containers-app#app_rolling)
 
 ## Sistemas de red para exponer apps
+{: #sitemap-apps-networking}
 
 [Planificación de la exposición de apps con red interna y externa del clúster](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
 * [Exposición de apps al tráfico interno del clúster mediante servicios de Kubernetes](/docs/containers?topic=containers-cs_network_planning#in-cluster)
@@ -446,15 +496,12 @@ lastupdated: "2019-03-21"
 * [Planificación del sistema de red externo público para una configuración de VLAN pública y privada](/docs/containers?topic=containers-cs_network_planning#public_access)
 * [Planificación del sistema de red externo privado para una configuración de VLAN pública y privada](/docs/containers?topic=containers-cs_network_planning#private_both_vlans)
 * [Planificación del sistema de red externo privado para una configuración solo de VLAN privada](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)
-* [Opcional: Aislamiento de las cargas de trabajo de red en nodos trabajadores de extremo](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)
-* [Opcional: Aislamiento del clúster en la red privada](/docs/containers?topic=containers-cs_network_planning#isolate)
 
-[Exposición de apps con NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
+[Prueba de acceso a las apps con NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 * [Gestión de tráfico de red utilizando NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [Habilitación del acceso a una app utilizando un servicio NodePort](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-[Exposición de apps con equilibradores de carga](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-* [Archivos YAML de ejemplo](/docs/containers?topic=containers-loadbalancer#sample)
+[Equilibrio de carga básico y de DSR con equilibradores de carga de red (NLB)](/docs/containers?topic=containers-loadbalancer#loadbalancer)
 * [Visión general](/docs/containers?topic=containers-loadbalancer#lb_overview)
 * [Comparación entre los equilibradores de carga de la versión 1.0 y de la versión 2.0](/docs/containers?topic=containers-loadbalancer#comparison)
 * [v2.0: Componentes y arquitectura (beta)](/docs/containers?topic=containers-loadbalancer#planning_ipvs)
@@ -472,10 +519,15 @@ lastupdated: "2019-03-21"
 * [v1.0: Configuración de un equilibrador de carga 1.0 en un clúster multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
 * [v1.0: Configuración de un equilibrador de carga 1.0 en un clúster de una sola zona](/docs/containers?topic=containers-loadbalancer#lb_config)
 * [v1.0: Habilitación de la conservación de IP de origen](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
-  * [Adición de tolerancias y reglas de afinidad de nodo extremo](/docs/containers?topic=containers-loadbalancer#edge_nodes)
+  * [Adición de tolerancias y reglas de afinidad de nodo extremo](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [Adición de reglas de afinidad para múltiples VLAN privadas o públicas](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
+* [Registro de un nombre de host de equilibrador de carga](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)
+  * [Registro de las IP de equilibrador de carga con un nombre de host DNS](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)
+  * [Formato del nombre de host](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_format)
+  * [Habilitar comprobaciones de estado en un nombre de host creando un supervisor de estado.](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_monitor)
+  * [Actualización y eliminación de IPs y supervisores de los nombres de host](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_delete)
 
-[Exposición de apps con Ingress](/docs/containers?topic=containers-ingress#ingress)
+[Equilibrio de carga HTTPS con equilibradores de carga de aplicación (ALB) de Ingress](/docs/containers?topic=containers-ingress#ingress)
 * [Archivos YAML de ejemplo](/docs/containers?topic=containers-ingress#sample_ingress)
 * [¿Qué es Ingress?](/docs/containers?topic=containers-ingress#planning)
   * [¿Qué se suministra con Ingress?](/docs/containers?topic=containers-ingress#components)
@@ -509,7 +561,7 @@ lastupdated: "2019-03-21"
   * [Habilitación del almacenamiento intermedio de registro y el tiempo de espera excedido de vaciado](/docs/containers?topic=containers-ingress#access-log)
   * [Cambio del número o la duración de las conexiones de estado activo](/docs/containers?topic=containers-ingress#keepalive_time)
   * [Cambio del proceso de conexiones pendientes](/docs/containers?topic=containers-ingress#backlog)
-  * [Ajuste del rendimiento de kernel](/docs/containers?topic=containers-ingress#kernel)
+  * [Ajuste del rendimiento de kernel](/docs/containers?topic=containers-ingress#ingress_kernel)
 * [Cómo traer su propio controlador Ingress](/docs/containers?topic=containers-ingress#user_managed)
 
 [Personalización de Ingress con anotaciones](/docs/containers?topic=containers-ingress_annotation#ingress_annotation)
@@ -567,6 +619,7 @@ lastupdated: "2019-03-21"
 * [Aumento del tamaño de la zona de memoria compartida para la recopilación de métricas de Ingress](/docs/containers?topic=containers-ingress_health#vts_zone_size)
 
 ## Almacenamiento de datos en almacenamiento persistente
+{: #sitemap-storage}
 
 [Planificación de almacenamiento persistente altamente disponible](/docs/containers?topic=containers-storage_planning#storage_planning)
 * [Elección de una solución de almacenamiento](/docs/containers?topic=containers-storage_planning#choose_storage_solution)
@@ -587,8 +640,8 @@ lastupdated: "2019-03-21"
 * [Cómo decidir la configuración del almacenamiento de archivos](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 * [Adición de almacenamiento de archivos a apps](/docs/containers?topic=containers-file_storage#add_file)
 * [Utilización de almacenamiento de archivos existente en el clúster](/docs/containers?topic=containers-file_storage#existing_file)
-  * [Paso 1: Preparación del almacenamiento existente.](/docs/containers?topic=containers-file_storage#step-1-preparing-your-existing-storage-)
-  * [Paso 2: Creación de un volumen persistente (PV) y de una reclamación de volumen persistente (PVC) coincidente](/docs/containers?topic=containers-file_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [Paso 1: Preparación del almacenamiento existente.](/docs/containers?topic=containers-file_storage#existing-file-1)
+  * [Paso 2: Creación de un volumen persistente (PV) y de una reclamación de volumen persistente (PVC) coincidente](/docs/containers?topic=containers-file_storage#existing-file-2)
 * [Utilización del almacenamiento de archivos en un conjunto con estado](/docs/containers?topic=containers-file_storage#file_statefulset)
   * [Suministro dinámico de la PVC al crear un conjunto con estado](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
   * [Realice un suministro previo de la PVC antes de crear el conjunto con estado](/docs/containers?topic=containers-file_storage#file_static_statefulset)
@@ -598,7 +651,7 @@ lastupdated: "2019-03-21"
 * [Referencia de clases de almacenamiento](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
   * [Bronce](/docs/containers?topic=containers-file_storage#file_bronze)
   * [Plata](/docs/containers?topic=containers-file_storage#file_silver)
-  * [Oro](/docs/containers?topic=containers-file_storage#block_gold)
+  * [Oro](/docs/containers?topic=containers-file_storage#file_gold)
   * [Personalizada](/docs/containers?topic=containers-file_storage#file_custom)
 * [Clases de almacenamiento personalizadas de ejemplo](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
   * [Creación de almacenamiento que tenga en cuenta la topología](/docs/containers?topic=containers-file_storage#file-topology)
@@ -612,8 +665,8 @@ lastupdated: "2019-03-21"
 * [Cómo decidir la configuración del almacenamiento en bloque](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 * [Adición de almacenamiento en bloques a apps](/docs/containers?topic=containers-block_storage#add_block)
 * [Utilización de almacenamiento en bloque existente en el clúster](/docs/containers?topic=containers-block_storage#existing_block)
-  * [Paso 1: Recuperación de la información del almacenamiento en bloque existente](/docs/containers?topic=containers-block_storage#step-1-retrieving-the-information-of-your-existing-block-storage)
-  * [Paso 2: Creación de un volumen persistente (PV) y de una reclamación de volumen persistente (PVC) coincidente](/docs/containers?topic=containers-block_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [Paso 1: Recuperación de la información del almacenamiento en bloque existente](/docs/containers?topic=containers-block_storage#existing-block-1)
+  * [Paso 2: Creación de un volumen persistente (PV) y de una reclamación de volumen persistente (PVC) coincidente](/docs/containers?topic=containers-block_storage#existing-block-2)
 * [Utilización del almacenamiento en bloque en un conjunto con estado](/docs/containers?topic=containers-block_storage#block_statefulset)
   * [Suministro dinámico de la PVC al crear un conjunto con estado](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
   * [Realice un suministro previo de la PVC antes de crear el conjunto con estado](/docs/containers?topic=containers-block_storage#block_static_statefulset)
@@ -655,7 +708,7 @@ lastupdated: "2019-03-21"
   * [Actualización de Portworx en el clúster](/docs/containers?topic=containers-portworx#update_portworx)
   * [Eliminación de Portworx del clúster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Cifrado de volúmenes de Portworx con {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-portworx#encrypt_volumes)
-  * [Flujo de trabajo del cifrado por volumen de Portworx](/docs/containers?topic=containers-portworx#encryption)
+  * [Flujo de trabajo del cifrado por volumen de Portworx](/docs/containers?topic=containers-portworx#px_encryption)
   * [Flujo de trabajo del descifrado por volumen de Portworx](/docs/containers?topic=containers-portworx#decryption)
   * [Configuración del cifrado de volúmenes de Portworx](/docs/containers?topic=containers-portworx#setup_encryption)
 * [Adición de almacenamiento del clúster de Portworx a las apps](/docs/containers?topic=containers-portworx#add_portworx_storage)
@@ -679,31 +732,36 @@ lastupdated: "2019-03-21"
 [Eliminación del almacenamiento persistente de un clúster](/docs/containers?topic=containers-cleanup#cleanup)
 * [Limpieza del almacenamiento persistente](/docs/containers?topic=containers-cleanup#storage_remove)
 
-## Integración de servicios
+## Mejora de las posibilidades del clúster con integraciones
+{: #sitemap-integrations}
 
 [Integración de servicios](/docs/containers?topic=containers-integrations#integrations)
-* [Servicios de DevOps](/docs/containers?topic=containers-integrations#devops_services)
-* [Servicios de registro y supervisión](/docs/containers?topic=containers-integrations#health_services)
-* [Servicios de seguridad](/docs/containers?topic=containers-integrations#security_services)
-* [Servicios de almacenamiento](/docs/containers?topic=containers-integrations#storage_services)
-* [Adición de servicios de {{site.data.keyword.Bluemix_notm}} a clústeres](/docs/containers?topic=containers-integrations#adding_cluster)
-* [Acceso a las credenciales de servicio desde las apps](/docs/containers?topic=containers-integrations#adding_app)
-  * [Montaje del secreto como un volumen en el pod](/docs/containers?topic=containers-integrations#mount_secret)
-  * [Cómo hacer referencia al secreto en las variables de entorno](/docs/containers?topic=containers-integrations#reference_secret)
-* [Configuración de Helm en {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#helm)
+* [Adición de servicios utilizando complementos gestionados](/docs/containers?topic=containers-managed-addons#managed-addons)
+  * [Adición de complementos gestionados](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
+  * [Actualización de complementos gestionados](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
+* [Adición de servicios utilizando Helm](/docs/containers?topic=containers-helm#helm)
+  * [Configuración de Helm en un clúster con acceso público](/docs/containers?topic=containers-helm#public_helm_install)
+  * [Clústeres privados: Envío de la imagen de Tiller al registro privado en {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
+  * [Clústeres privados: Instalación de diagramas de Helm sin utilizar Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)
   * [Enlaces de Helm relacionados](/docs/containers?topic=containers-integrations#helm_links)
-* [Visualización de recursos de un clúster de Kubernetes](/docs/containers?topic=containers-integrations#weavescope)
+* [Adición de servicios utilizando el enlace de servicios de {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#service-binding)
+  * [Adición de servicios de {{site.data.keyword.Bluemix_notm}} a clústeres](/docs/containers?topic=containers-service-binding#bind-services)
+  * [Acceso a las credenciales de servicio desde las apps](/docs/containers?topic=containers-service-binding#adding_app)
+      * [Montaje del secreto como un volumen en el pod](/docs/containers?topic=containers-service-binding#mount_secret)
+      * [Cómo hacer referencia al secreto en las variables de entorno](/docs/containers?topic=containers-service-binding#reference_secret)
 
 ## Sucesos de Activity Tracker
+{: #sitemap-at}
 
 [Sucesos de Activity Tracker](/docs/containers?topic=containers-at_events#at_events)
 * [Búsqueda de información sobre sucesos](/docs/containers?topic=containers-at_events#kube-find)
 * [Seguimiento de sucesos de gestión de clústeres](/docs/containers?topic=containers-at_events#cluster-events)
 * [Seguimiento de sucesos de auditoría de Kubernetes](/docs/containers?topic=containers-at_events#kube-events)
 
-## Nube dedicada
+## En desuso: Nube dedicada
+{: #sitemap-dedicated}
 
-[Iniciación a los clústeres en {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated)
+[En desuso: Iniciación a los clústeres en {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated)
 * [Acerca del entorno de nube dedicada](/docs/containers?topic=containers-dedicated#dedicated_environment)
 * [Diferencias en la gestión de clústeres entre entornos de nube](/docs/containers?topic=containers-dedicated#dedicated_env_differences)
   * [Arquitectura del servicio](/docs/containers?topic=containers-dedicated#dedicated_ov_architecture)
@@ -711,7 +769,7 @@ lastupdated: "2019-03-21"
 * [Creación de clústeres](/docs/containers?topic=containers-dedicated#dedicated_administering)
   * [Creación de clústeres con la consola de {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-dedicated#dedicated_creating_ui)
   * [Creación de clústeres con la CLI](/docs/containers?topic=containers-dedicated#dedicated_creating_cli)
-  * [Adición de nodos trabajadores](/docs/containers?topic=containers-dedicated#add_workers)
+  * [Adición de nodos trabajadores](/docs/containers?topic=containers-dedicated#add_workers_dedicated)
   * [Utilización de registros de imagen privada y pública](/docs/containers?topic=containers-dedicated#dedicated_images)
   * [Adición de subredes a clústeres](/docs/containers?topic=containers-dedicated#dedicated_cluster_subnet)
       * [Adición de más subredes y direcciones IP gestionadas por el usuario a los clústeres de Kubernetes](/docs/containers?topic=containers-dedicated#dedicated_byoip_subnets)
@@ -723,16 +781,19 @@ lastupdated: "2019-03-21"
   * [Creación de almacenamiento persistente](/docs/containers?topic=containers-dedicated#dedicated_apps_volume_claim)
 
 ## En desuso: Ejecución de contenedores únicos y escalables
+{: #sitemap-singlescalable}
 
 [En desuso: Ejecución de contenedores únicos y escalables](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
 ## Nube híbrida
+{: #sitemap-hybrid}
 
 [Nube híbrida](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)
 * [Conexión de la nube pública y privada con la VPN de strongSwan](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
 * [Ejecución de imágenes de {{site.data.keyword.icpfull_notm}} en contenedores públicos de Kubernetes](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
 ## Consulta del plugin de CLI de {{site.data.keyword.containerlong_notm}}
+{: #sitemap-cli-plugin}
 
 [Consulta de mandatos](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
 * [Utilización de la estructura de mandatos beta](/docs/containers?topic=containers-cs_cli_reference#cs_beta)
@@ -751,6 +812,7 @@ lastupdated: "2019-03-21"
 [Registro de cambios de CLI](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 ## Versiones de {{site.data.keyword.containerlong_notm}}
+{: #sitemap-versions}
 
 [Información de versión y acciones de actualización](/docs/containers?topic=containers-cs_versions#cs_versions)
 * [Tipos de versión de Kubernetes](/docs/containers?topic=containers-cs_versions#version_types)
@@ -782,119 +844,125 @@ lastupdated: "2019-03-21"
 
 [Registro de cambios de versiones](/docs/containers?topic=containers-changelog#changelog)
 * [Registro de cambios de la versión 1.13](/docs/containers?topic=containers-changelog#113_changelog)
+  * [Registro de cambios para 1.13.4_1513, publicado el 20 de marzo de 2019](/docs/containers?topic=containers-changelog#1134_1513)
+  * [Registro de cambios para 1.13.4_1510, publicado el 4 de marzo de 2019](/docs/containers?topic=containers-changelog#1134_1510)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.13.2_1509, publicado el 27 de febrero de 2019](/docs/containers?topic=containers-changelog#1132_1509)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.13.2_1508, publicado el 15 de febrero de 2019](/docs/containers?topic=containers-changelog#1132_1508)
   * [Registro de cambios para 1.13.2_1507, publicado el 5 de febrero de 2019](/docs/containers?topic=containers-changelog#1124_1534)
 * [Registro de cambios de la versión 1.12](/docs/containers?topic=containers-changelog#112_changelog)
+  * [Registro de cambios para 1.12.6_1544, publicado el 20 de marzo de 2019](/docs/containers?topic=containers-changelog#1126_1544)
+  * [Registro de cambios para 1.12.6_1541, publicado el 4 de marzo de 2019](/docs/containers?topic=containers-changelog#1126_1541)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.12.5_1540, publicado el 27 de febrero de 2019](/docs/containers?topic=containers-changelog#1125_1540)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.12.5_1538, publicado el 15 de febrero de 2019](/docs/containers?topic=containers-changelog#1125_1538)
   * [Registro de cambios para 1.12.5_1537, publicado el 5 de febrero de 2019](/docs/containers?topic=containers-changelog#1125_1537)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.12.4_1535, publicado el 28 de enero de 2019](/docs/containers?topic=containers-changelog#1124_1535)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.12.4_1535, publicado el 28 de enero de 2019](/docs/containers?topic=containers-changelog#1124_1535)
   * [Registro de cambios para 1.12.4_1534, publicado el 21 de enero de 2019](/docs/containers?topic=containers-changelog#1124_1534)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.12.3_1533, publicado el 7 de enero de 2019](/docs/containers?topic=containers-changelog#1123_1533)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.12.3_1532, publicado el 17 de diciembre de 2018](/docs/containers?topic=containers-changelog#1123_1532)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.12.3_1533, publicado el 7 de enero de 2019](/docs/containers?topic=containers-changelog#1123_1533)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.12.3_1532, publicado el 17 de diciembre de 2018](/docs/containers?topic=containers-changelog#1123_1532)
   * [Registro de cambios para 1.12.3_1531, publicado el 5 de diciembre de 2018](/docs/containers?topic=containers-changelog#1123_1531)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.12.2_1530, publicado el 4 de diciembre de 2018](/docs/containers?topic=containers-changelog#1122_1530)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.12.2_1530, publicado el 4 de diciembre de 2018](/docs/containers?topic=containers-changelog#1122_1530)
   * [Registro de cambios para 1.12.2_1529, publicado el 27 de noviembre de 2018](/docs/containers?topic=containers-changelog#1122_1529)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.12.2_1528, publicado el 19 de noviembre de 2018](/docs/containers?topic=containers-changelog#1122_1528)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.12.2_1528, publicado el 19 de noviembre de 2018](/docs/containers?topic=containers-changelog#1122_1528)
   * [Registro de cambios para 1.12.2_1527, publicado el 7 de noviembre de 2018](/docs/containers?topic=containers-changelog#1122_1527)
 * [Registro de cambios de la versión 1.11](/docs/containers?topic=containers-changelog#111_changelog)
+  * [Registro de cambios para 1.11.8_1550, publicado el 20 de marzo de 2019](/docs/containers?topic=containers-changelog#1118_1550)
+  * [Registro de cambios para 1.11.8_1547, publicado el 4 de marzo de 2019](/docs/containers?topic=containers-changelog#1118_1547)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.7_1546, publicado el 27 de febrero de 2019](/docs/containers?topic=containers-changelog#1117_1546)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.7_1544, publicado el 15 de febrero de 2019](/docs/containers?topic=containers-changelog#1117_1544)
   * [Registro de cambios para 1.11.7_1543, publicado el 5 de febrero de 2019](/docs/containers?topic=containers-changelog#1117_1543)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.11.6_1541, publicado el 28 de enero de 2019](/docs/containers?topic=containers-changelog#1116_1541)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.6_1541, publicado el 28 de enero de 2019](/docs/containers?topic=containers-changelog#1116_1541)
   * [Registro de cambios para 1.11.6_1540, publicado el 21 de enero de 2019](/docs/containers?topic=containers-changelog#1116_1540)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.11.5_1539, publicado el 7 de enero de 2019](/docs/containers?topic=containers-changelog#1115_1539)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.11.5_1538, publicado el 17 de diciembre de 2018](/docs/containers?topic=containers-changelog#1115_1538)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.5_1539, publicado el 7 de enero de 2019](/docs/containers?topic=containers-changelog#1115_1539)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.5_1538, publicado el 17 de diciembre de 2018](/docs/containers?topic=containers-changelog#1115_1538)
   * [Registro de cambios para 1.11.5_1537, publicado el 5 de diciembre de 2018](/docs/containers?topic=containers-changelog#1115_1537)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.11.4_1536, publicado el 4 de diciembre de 2018](/docs/containers?topic=containers-changelog#1114_1536)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.4_1536, publicado el 4 de diciembre de 2018](/docs/containers?topic=containers-changelog#1114_1536)
   * [Registro de cambios para 1.11.4_1535, publicado el 27 de noviembre de 2018](/docs/containers?topic=containers-changelog#1114_1535)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.11.3_1534, publicado el 19 de noviembre de 2018](/docs/containers?topic=containers-changelog#1113_1534)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.3_1534, publicado el 19 de noviembre de 2018](/docs/containers?topic=containers-changelog#1113_1534)
   * [Registro de cambios para 1.11.3_1533, publicado el 7 de noviembre de 2018](/docs/containers?topic=containers-changelog#1113_1533)
     * [Registro de cambios para fixpack de nodo maestro 1.11.3_1531, publicado el 1 de noviembre de 2018](/docs/containers?topic=containers-changelog#1113_1531_ha-master)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.11.3_1531, publicado el 26 de octubre de 2018](/docs/containers?topic=containers-changelog#1113_1531)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.3_1531, publicado el 26 de octubre de 2018](/docs/containers?topic=containers-changelog#1113_1531)
     * [Registro de cambios para fixpack de nodo maestro 1.11.3_1527, publicado el 15 de octubre de 2018](/docs/containers?topic=containers-changelog#1113_1527)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.11.3_1525, publicado el 10 de octubre de 2018](/docs/containers?topic=containers-changelog#1113_1525)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.3_1525, publicado el 10 de octubre de 2018](/docs/containers?topic=containers-changelog#1113_1525)
   * [Registro de cambios para 1.11.3_1524, publicado el 2 de octubre de 2018](/docs/containers?topic=containers-changelog#1113_1524)
   * [Registro de cambios para 1.11.3_1521, publicado el 20 de septiembre de 2018](/docs/containers?topic=containers-changelog#1113_1521)
   * [Registro de cambios para 1.11.2_1516, publicado el 4 de septiembre de 2018](/docs/containers?topic=containers-changelog#1112_1516)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.11.2_1514, publicado el 23 de agosto de 2018](/docs/containers?topic=containers-changelog#1112_1514)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.11.2_1514, publicado el 23 de agosto de 2018](/docs/containers?topic=containers-changelog#1112_1514)
   * [Registro de cambios para 1.11.2_1513, publicado el 14 de agosto de 2018](/docs/containers?topic=containers-changelog#1112_1513)
 * [Registro de cambios de la versión 1.10](/docs/containers?topic=containers-changelog#110_changelog)
+  * [Registro de cambios para 1.10.13_1551, publicado el 20 de marzo de 2019](/docs/containers?topic=containers-changelog#11013_1551)
+  * [Registro de cambios para 1.10.13_1548, publicado el 4 de marzo de 2019](/docs/containers?topic=containers-changelog#11013_1548)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.12_1546, publicado el 27 de febrero de 2019](/docs/containers?topic=containers-changelog#11012_1546)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.12_1544, publicado el 15 de febrero de 2019](/docs/containers?topic=containers-changelog#11012_1544)
   * [Registro de cambios para 1.10.12_1543, publicado el 5 de febrero de 2019](/docs/containers?topic=containers-changelog#1117_1543)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.12_1541, publicado en enero de 2019](/docs/containers?topic=containers-changelog#11012_1541)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.12_1541, publicado en enero de 2019](/docs/containers?topic=containers-changelog#11012_1541)
   * [Registro de cambios para 1.10.12_1540, publicado el 21 de enero de 2019](/docs/containers?topic=containers-changelog#11012_1540)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.11_1538, publicado el 7 de enero de 2019](/docs/containers?topic=containers-changelog#11011_1538)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.11_1537, publicado el 17 de diciembre de 2018](/docs/containers?topic=containers-changelog#11011_1537)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.11_1538, publicado el 7 de enero de 2019](/docs/containers?topic=containers-changelog#11011_1538)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.11_1537, publicado el 17 de diciembre de 2018](/docs/containers?topic=containers-changelog#11011_1537)
   * [Registro de cambios para 1.10.11_1536, publicado el 4 de diciembre de 2018](/docs/containers?topic=containers-changelog#11011_1536)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.8_1532, publicado el 27 de noviembre de 2018](/docs/containers?topic=containers-changelog#1108_1532)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.8_1531, publicado el 19 de noviembre de 2018](/docs/containers?topic=containers-changelog#1108_1531)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.8_1532, publicado el 27 de noviembre de 2018](/docs/containers?topic=containers-changelog#1108_1532)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.8_1531, publicado el 19 de noviembre de 2018](/docs/containers?topic=containers-changelog#1108_1531)
   * [Registro de cambios para 1.10.8_1530, publicado el 7 de noviembre de 2018](/docs/containers?topic=containers-changelog#1108_1530_ha-master)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.8_1528, publicado el 26 de octubre de 2018](/docs/containers?topic=containers-changelog#1108_1528)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.8_1528, publicado el 26 de octubre de 2018](/docs/containers?topic=containers-changelog#1108_1528)
     * [Registro de cambios para fixpack de nodo maestro 1.10.8_1527, publicado el 15 de octubre de 2018](/docs/containers?topic=containers-changelog#1108_1527)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.8_1525, publicado el 10 de octubre de 2018](/docs/containers?topic=containers-changelog#1108_1525)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.8_1525, publicado el 10 de octubre de 2018](/docs/containers?topic=containers-changelog#1108_1525)
   * [Registro de cambios para 1.10.8_1524, publicado el 2 de octubre de 2018](/docs/containers?topic=containers-changelog#1108_1524)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.7_1521, publicado el 20 de septiembre de 2018](/docs/containers?topic=containers-changelog#1107_1521)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.7_1521, publicado el 20 de septiembre de 2018](/docs/containers?topic=containers-changelog#1107_1521)
   * [Registro de cambios para 1.10.7_1520, publicado el 4 de septiembre de 2018](/docs/containers?topic=containers-changelog#1107_1520)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.5_1519, publicado el 23 de agosto de 2018](/docs/containers?topic=containers-changelog#1105_1519)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.5_1518, publicado el 13 de agosto de 2018](/docs/containers?topic=containers-changelog#1105_1518)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.5_1519, publicado el 23 de agosto de 2018](/docs/containers?topic=containers-changelog#1105_1519)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.5_1518, publicado el 13 de agosto de 2018](/docs/containers?topic=containers-changelog#1105_1518)
   * [Registro de cambios para 1.10.5_1517, publicado el 27 de julio de 2018](/docs/containers?topic=containers-changelog#1105_1517)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.3_1514, publicado el 3 de julio de 2018](/docs/containers?topic=containers-changelog#1103_1514)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.3_1513, publicado el 21 de junio de 2018](/docs/containers?topic=containers-changelog#1103_1513)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.3_1514, publicado el 3 de julio de 2018](/docs/containers?topic=containers-changelog#1103_1514)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.3_1513, publicado el 21 de junio de 2018](/docs/containers?topic=containers-changelog#1103_1513)
   * [Registro de cambios para 1.10.3_1512, publicado el 12 de junio de 2018](/docs/containers?topic=containers-changelog#1103_1512)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.1_1510, publicado el 18 de mayo de 2018](/docs/containers?topic=containers-changelog#1101_1510)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.10.1_1509, publicado el 16 de mayo de 2018](/docs/containers?topic=containers-changelog#1101_1509)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.1_1510, publicado el 18 de mayo de 2018](/docs/containers?topic=containers-changelog#1101_1510)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.10.1_1509, publicado el 16 de mayo de 2018](/docs/containers?topic=containers-changelog#1101_1509)
   * [Registro de cambios para 1.10.1_1508, publicado el 01 de mayo de 2018](/docs/containers?topic=containers-changelog#1101_1508)
 * [Archivo](/docs/containers?topic=containers-changelog#changelog_archive)
   * [Registro de cambios de la versión 1.9 (sin soporte desde el 27 de diciembre de 2018)](/docs/containers?topic=containers-changelog#19_changelog)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.11_1539, publicado el 17 de diciembre de 2018](/docs/containers?topic=containers-changelog#1911_1539)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.11_1538, publicado el 4 de diciembre de 2018](/docs/containers?topic=containers-changelog#1911_1538)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.11_1537, publicado el 27 de noviembre de 2018](/docs/containers?topic=containers-changelog#1911_1537)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.11_1539, publicado el 17 de diciembre de 2018](/docs/containers?topic=containers-changelog#1911_1539)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.11_1538, publicado el 4 de diciembre de 2018](/docs/containers?topic=containers-changelog#1911_1538)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.11_1537, publicado el 27 de noviembre de 2018](/docs/containers?topic=containers-changelog#1911_1537)
   * [Registro de cambios para 1.9.11_1536, publicado el 19 de noviembre de 2018](/docs/containers?topic=containers-changelog#1911_1536)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.10_1532, publicado el 7 de noviembre de 2018](/docs/containers?topic=containers-changelog#1910_1532)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.10_1531, publicado el 26 de octubre de 2018](/docs/containers?topic=containers-changelog#1910_1531)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.10_1532, publicado el 7 de noviembre de 2018](/docs/containers?topic=containers-changelog#1910_1532)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.10_1531, publicado el 26 de octubre de 2018](/docs/containers?topic=containers-changelog#1910_1531)
     * [Registro de cambios para fixpack de nodo maestro 1.9.10_1530, publicado el 15 de octubre de 2018](/docs/containers?topic=containers-changelog#1910_1530)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.10_1528, publicado el 10 de octubre de 2018](/docs/containers?topic=containers-changelog#1910_1528)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.10_1528, publicado el 10 de octubre de 2018](/docs/containers?topic=containers-changelog#1910_1528)
   * [Registro de cambios para 1.9.10_1527, publicado el 2 de octubre de 2018](/docs/containers?topic=containers-changelog#1910_1527)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.10_1524, publicado el 20 de septiembre de 2018](/docs/containers?topic=containers-changelog#1910_1524)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.10_1524, publicado el 20 de septiembre de 2018](/docs/containers?topic=containers-changelog#1910_1524)
   * [Registro de cambios para 1.9.10_1523, publicado el 4 de septiembre de 2018](/docs/containers?topic=containers-changelog#1910_1523)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.9_1522, publicado el 23 de agosto de 2018](/docs/containers?topic=containers-changelog#199_1522)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.9_1521, publicado el 13 de agosto de 2018](/docs/containers?topic=containers-changelog#199_1521)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.9_1522, publicado el 23 de agosto de 2018](/docs/containers?topic=containers-changelog#199_1522)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.9_1521, publicado el 13 de agosto de 2018](/docs/containers?topic=containers-changelog#199_1521)
   * [Registro de cambios para 1.9.9_1520, publicado el 27 de julio de 2018](/docs/containers?topic=containers-changelog#199_1520)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.8_1517, publicado el 3 de julio de 2018](/docs/containers?topic=containers-changelog#198_1517)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.8_1516, publicado el 21 de junio de 2018](/docs/containers?topic=containers-changelog#198_1516)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.8_1517, publicado el 3 de julio de 2018](/docs/containers?topic=containers-changelog#198_1517)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.8_1516, publicado el 21 de junio de 2018](/docs/containers?topic=containers-changelog#198_1516)
   * [Registro de cambios para 1.9.8_1515, publicado el 19 de junio de 2018](/docs/containers?topic=containers-changelog#198_1515)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.7_1513, publicado el 11 de junio de 2018](/docs/containers?topic=containers-changelog#197_1513)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.7_1512, publicado el 18 de mayo de 2018](/docs/containers?topic=containers-changelog#197_1512)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.9.7_1511, publicado el 16 de mayo de 2018](/docs/containers?topic=containers-changelog#197_1511)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.7_1513, publicado el 11 de junio de 2018](/docs/containers?topic=containers-changelog#197_1513)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.7_1512, publicado el 18 de mayo de 2018](/docs/containers?topic=containers-changelog#197_1512)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.9.7_1511, publicado el 16 de mayo de 2018](/docs/containers?topic=containers-changelog#197_1511)
   * [Registro de cambios para 1.9.7_1510, publicado el 30 de abril de 2018](/docs/containers?topic=containers-changelog#197_1510)
   * [Registro de cambios de la versión 1.8 (no soportada)](/docs/containers?topic=containers-changelog#18_changelog)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.8.15_1521, publicado el 20 de septiembre de 2018](/docs/containers?topic=containers-changelog#1815_1521)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.8.15_1520, publicado el 23 de agosto de 2018](/docs/containers?topic=containers-changelog#1815_1520)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.8.15_1519, publicado el 13 de agosto de 2018](/docs/containers?topic=containers-changelog#1815_1519)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.8.15_1521, publicado el 20 de septiembre de 2018](/docs/containers?topic=containers-changelog#1815_1521)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.8.15_1520, publicado el 23 de agosto de 2018](/docs/containers?topic=containers-changelog#1815_1520)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.8.15_1519, publicado el 13 de agosto de 2018](/docs/containers?topic=containers-changelog#1815_1519)
   * [Registro de cambios para 1.8.15_1518, publicado el 27 de julio de 2018](/docs/containers?topic=containers-changelog#1815_1518)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.8.13_1516, publicado el 3 de julio de 2018](/docs/containers?topic=containers-changelog#1813_1516)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.8.13_1515, publicado el 21 de junio de 2018](/docs/containers?topic=containers-changelog#1813_1515)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.8.13_1516, publicado el 3 de julio de 2018](/docs/containers?topic=containers-changelog#1813_1516)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.8.13_1515, publicado el 21 de junio de 2018](/docs/containers?topic=containers-changelog#1813_1515)
   * [Registro de cambios para 1.8.13_1514, publicado el 19 de junio de 2018](/docs/containers?topic=containers-changelog#1813_1514)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.8.11_1512, publicado el 11 de junio de 2018](/docs/containers?topic=containers-changelog#1811_1512)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.8.11_1511, publicado el 18 de mayo de 2018](/docs/containers?topic=containers-changelog#1811_1511)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.8.11_1510, publicado el 16 de mayo de 2018](/docs/containers?topic=containers-changelog#1811_1510)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.8.11_1512, publicado el 11 de junio de 2018](/docs/containers?topic=containers-changelog#1811_1512)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.8.11_1511, publicado el 18 de mayo de 2018](/docs/containers?topic=containers-changelog#1811_1511)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.8.11_1510, publicado el 16 de mayo de 2018](/docs/containers?topic=containers-changelog#1811_1510)
   * [Registro de cambios para 1.8.11_1509, publicado el 19 de abril de 2018](/docs/containers?topic=containers-changelog#1811_1509)
   * [Registro de cambios de la versión 1.7 (no soportada)](/docs/containers?topic=containers-changelog#17_changelog)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.7.16_1514, publicado el 11 de junio de 2018](/docs/containers?topic=containers-changelog#1716_1514)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.7.16_1513, publicado el 18 de mayo de 2018](/docs/containers?topic=containers-changelog#1716_1513)
-    * [Registro de cambios para el fix pack de nodo trabajador 1.7.16_1512, publicado el 16 de mayo de 2018](/docs/containers?topic=containers-changelog#1716_1512)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.7.16_1514, publicado el 11 de junio de 2018](/docs/containers?topic=containers-changelog#1716_1514)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.7.16_1513, publicado el 18 de mayo de 2018](/docs/containers?topic=containers-changelog#1716_1513)
+    * [Registro de cambios para el fixpack de nodo trabajador 1.7.16_1512, publicado el 16 de mayo de 2018](/docs/containers?topic=containers-changelog#1716_1512)
     * [Registro de cambios para 1.7.16_1511, publicado el 19 de abril de 2018](/docs/containers?topic=containers-changelog#1716_1511)
 
 [Registro de cambios de complementos del clúster](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 * [Registro de cambios del complemento de ALB de Ingress](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 
-## Regiones y zonas
-
-[Regiones y zonas](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [Ubicaciones en {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
-* [Regiones en {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#container_regions)
-  * [Inicio de sesión en otra región de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#container_login_endpoints)
-  * [Utilización de mandatos de API de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#containers_api)
-* [Zonas en {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
-  * [Clústeres de una sola zona](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
-  * [Clústeres multizona](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
-
 ## Permisos de acceso de usuario
+{: #sitemap-user-access}
 
 [Permisos de acceso de usuario](/docs/containers?topic=containers-access_reference)
 * [Roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-access_reference#iam_platform)
@@ -904,11 +972,22 @@ lastupdated: "2019-03-21"
   * [Acciones de Operador](/docs/containers?topic=containers-access_reference#operator-actions)
   * [Acciones de Administrador](/docs/containers?topic=containers-access_reference#admin-actions)
 * [Roles de servicio de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-access_reference#service)
-* [Permisos de recursos de Kubernetes por rol de RBAC](/docs/containers?topic=containers-access_reference#rbac)
+* [Permisos de recursos de Kubernetes por rol de RBAC](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Roles de Cloud Foundry](/docs/containers?topic=containers-access_reference#cloud-foundry)
 * [Roles de la infraestructura](/docs/containers?topic=containers-access_reference#infra)
 
+## Integraciones soportadas
+{: #sitemap-supported-integrations}
+
+[Integraciones soportadas](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+* [Servicios de DevOps](/docs/containers?topic=containers-supported_integrations#devops_services)
+* [Servicios de registro y supervisión](/docs/containers?topic=containers-supported_integrations#health_services)
+* [Servicios de seguridad](/docs/containers?topic=containers-supported_integrations#security_services)
+* [Servicios de almacenamiento](/docs/containers?topic=containers-supported_integrations#storage_services)
+* [Servicios de base de datos](/docs/containers?topic=containers-supported_integrations#database_services)
+
 ## Preguntas más frecuentes
+{: #sitemap-faqs}
 
 [Preguntas más frecuentes](/docs/containers?topic=containers-faqs#faqs)
 * [¿Qué es Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
@@ -931,6 +1010,7 @@ lastupdated: "2019-03-21"
 * [¿Puedo ver mi uso actual?](/docs/containers?topic=containers-faqs#usage)
 
 ## Resolución de problemas de clústeres
+{: #sitemap-ts}
 
 [Depuración de clústeres](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot)
 * [Ejecución de pruebas con la herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
@@ -1007,6 +1087,8 @@ lastupdated: "2019-03-21"
 * [Obtención de ayuda y soporte](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
 
 ## Temas populares sobre {{site.data.keyword.containerlong_notm}}
+{: #sitemap-poptopics}
+
 [Temas populares sobre {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_popular_topics)
 * [Temas populares en febrero de 2019](/docs/containers?topic=containers-cs_popular_topics#feb19)
 * [Temas populares en enero de 2019](/docs/containers?topic=containers-cs_popular_topics#jan19)
@@ -1025,6 +1107,7 @@ lastupdated: "2019-03-21"
 * [Chat con desarrolladores de Slack](/docs/containers?topic=containers-cs_popular_topics#slack)
 
 ## Enlaces relacionados
+{: #sitemap-rellinks}
 
 [Enlaces relacionados](/docs/containers?topic=containers-cs_rellinks#cs_rellinks)
 * [{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_rellinks#containers)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -33,9 +33,9 @@ subcollection: containers
 {:shortdesc}
 
 **Versions de Kubernetes prises en charge** :
-*   La plus récente : 1.13.4
-*   Par défaut : 1.12.6
-*   Autre : 1.11.8
+*   La plus récente : 1.13.5
+*   Par défaut : 1.12.7
+*   Autre : 1.11.9
 
 **Versions de Kubernetes dépréciées et non prises en charge** :
 *   Dépréciée : 1.10
@@ -43,9 +43,9 @@ subcollection: containers
 
 </br>
 
-**Versions dépréciées** : lorsque des clusters s'exécutent sur une version de Kubernetes dépréciée, vous disposez d'un minimum de 30 jours pour vérifier et passer à une version Kubernetes prise en charge. Passé ce délai, votre version ne sera plus prise en charge. Au cours de la période de dépréciation, votre cluster est toujours opérationnel mais peut nécessiter des mises à jour vers une version prise en charge pour corriger des vulnérabilités de sécurité. Vous ne pouvez pas créer de nouveaux clusters utilisant la version dépréciée.
+**Versions dépréciées** : lorsque des clusters s'exécutent sur une version de Kubernetes dépréciée, vous disposez d'un minimum de 30 jours pour vérifier et passer à une version Kubernetes prise en charge. Passé ce délai, votre version ne sera plus prise en charge. Au cours de la période de dépréciation, votre cluster est toujours opérationnel mais peut nécessiter des mises à jour vers une version prise en charge pour corriger des vulnérabilités de sécurité. Par exemple, vous pouvez ajouter et recharger des noeuds worker, mais vous ne pouvez pas créer de nouveaux clusters qui utilisent la version dépréciée.
 
-**Versions non prises en charge** : si vos clusters exécutent une version de Kubernetes qui n'est pas prise en charge, consultez les impacts potentiels suivants, puis [mettez à jour le cluster](/docs/containers?topic=containers-update#update) immédiatement pour continuer à recevoir les mises à jour de sécurité importantes et l'aide du support. Dans les clusters non pris en charge, il est impossible d'ajouter ou de recharger des noeuds worker. Vous pouvez déterminer si votre cluster n'**est pas pris en charge** en consultant la zone **State** dans la sortie de la commande `ibmcloud ks clusters` ou dans la [console {{site.data.keyword.containerlong_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/containers-kubernetes/clusters).
+**Versions non prises en charge** : si vos clusters exécutent une version de Kubernetes qui n'est pas prise en charge, consultez les impacts potentiels suivants, puis [mettez à jour le cluster](/docs/containers?topic=containers-update#update) immédiatement pour continuer à recevoir les mises à jour de sécurité importantes et l'aide du support. Dans les clusters non pris en charge, il est impossible d'ajouter ou de recharger des noeuds worker. Vous pouvez déterminer si votre cluster n'**est pas pris en charge** en consultant la zone **State** dans la sortie de la commande `ibmcloud ks clusters` ou dans la [console {{site.data.keyword.containerlong_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/clusters).
 
 Si vous attendez que votre cluster soit à une version secondaire inférieure à trois niveaux par rapport à une version prise en charge, vous devez forcer la mise à jour, ce qui peut occasionner des résultats inattendus ou provoquer des incidents. Une mise à jour vers la version 1.11 à partir de la version 1.7 ou 1.8 échouera. Pour les autres versions, par exemple si votre cluster exécute Kubernetes version 1.9, lorsque vous mettez à jour le maître directement à la version 1.12 ou ultérieure, la plupart des pods échouent en entrant à l'état `MatchNodeSelector`, `CrashLoopBackOff` ou `ContainerCreating` jusqu'à ce que vous mettiez à jour les noeuds worker à la même version. Pour éviter cela, mettez à jour le cluster à une version prise en charge inférieure à trois niveaux par rapport à la version actuelle, par exemple en passant de la version 1.9 à 1.11, et en effectuant ensuite la mise à jour vers la version 1.12.<br><br>Une fois que vous avez mis à jour le cluster pour passer à une version prise en charge, il peut effectuer à nouveau des opérations normales et continuer à recevoir l'aide du support.
 {: important}
@@ -62,7 +62,7 @@ kubectl version  --short | grep -i server
 Exemple de sortie :
 
 ```
-Server Version: v1.12.6+IKS
+Server Version: v1.12.7+IKS
 ```
 {: screen}
 
@@ -154,7 +154,7 @@ Les dates avec l'indicateur représentant un poignard (`†`) sont provisoires e
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="Cette version est dépréciée."/></td>
   <td>[1.10](#cs_v110)</td>
   <td>1er mai 2018</td>
-  <td>30 avril 2019 `†`</td>
+  <td>15 mai 2019</td>
 </tr>
 <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Cette version n'est pas prise en charge."/></td>
@@ -239,7 +239,8 @@ Le tableau suivant présente les actions que vous devez effectuer après avoir m
 <tbody>
 <tr>
 <td>CoreDNS est disponible comme nouveau fournisseur DNS de cluster par défaut</td>
-<td>CoreDNS est désormais le fournisseur DNS de cluster par défaut pour les nouveaux clusters dans Kubernetes versions 1.13 et ultérieures. Si vous mettez à jour un cluster existant à la version 1.13 et que ce cluster utilise KubeDNS comme fournisseur DNS de cluster, KubeDNS reste le fournisseur DNS de cluster. Cependant, vous pouvez choisir d'[utiliser CoreDNS à la place](/docs/containers?topic=containers-cluster_dns#dns_set).<br><br>CoreDNS prend en charge la [spécification de DNS de cluster ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) pour saisir un nom de domaine comme zone `ExternalName` du service Kubernetes. Le précédent fournisseur DNS de cluster, KubeDNS, ne suivait pas la spécification de DNS de cluster, et donc, autorisait les adresses IP dans la zone `ExternalName`. Si un service Kubernetes utilisedes adresses IP à la place de DNS, vous devez mettre à jour la zone `ExternalName` avec DNS afin d'assurer la continuité des fonctionnalités.</td>
+<td>CoreDNS est désormais le fournisseur DNS de cluster par défaut pour les nouveaux clusters dans Kubernetes versions 1.13 et ultérieures. Si vous mettez à jour un cluster existant à la version 1.13 et que ce cluster utilise KubeDNS comme fournisseur DNS de cluster, KubeDNS reste le fournisseur DNS de cluster. Cependant, vous pouvez choisir d'[utiliser CoreDNS à la place](/docs/containers?topic=containers-cluster_dns#dns_set).
+<br><br>CoreDNS prend en charge la [spécification de DNS de cluster ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) pour saisir un nom de domaine comme zone `ExternalName` du service Kubernetes. Le précédent fournisseur DNS de cluster, KubeDNS, ne suivait pas la spécification de DNS de cluster, et donc, autorisait les adresses IP dans la zone `ExternalName`. Si un service Kubernetes utilise des adresses IP à la place de DNS, vous devez mettre à jour la zone `ExternalName` avec DNS afin d'assurer la continuité des fonctionnalités.</td>
 </tr>
 <tr>
 <td>Sortie de la commande`kubectl` pour les sections `Deployment` et `StatefulSet`</td>
@@ -251,7 +252,7 @@ Le tableau suivant présente les actions que vous devez effectuer après avoir m
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>La commande `kubectl get componentstatuses` n'indique pas correctement l'état de santé de certains composants du maître Kubernetes car ces composants ne sont plus accessibles depuis le serveur d'API Kubernetes depuis que `localhost` et les ports (HTTP) non sécurisés sont désactivés. Après l'introduction de maîtres à haute disponibilité (HA) dans Kubernetes version 1.10, chaque maître Kubernetes est configuré avec plusieurs instances `apiserver`, `controller-manager`, `scheduler` et `etcd`. Examinez désormais l'état de santé du cluster en consultant la [console {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/containers-kubernetes/landing) ou en utilisant la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get) `ibmcloud ks cluster-get`.</td>
+<td>La commande `kubectl get componentstatuses` n'indique pas correctement l'état de santé de certains composants du maître Kubernetes car ces composants ne sont plus accessibles depuis le serveur d'API Kubernetes depuis que `localhost` et les ports (HTTP) non sécurisés sont désactivés. Après l'introduction de maîtres à haute disponibilité (HA) dans Kubernetes version 1.10, chaque maître Kubernetes est configuré avec plusieurs instances `apiserver`, `controller-manager`, `scheduler` et `etcd`. A la place, examinez l'état de santé du cluster en consultant la [console {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/landing) ou en utilisant la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get) `ibmcloud ks cluster-get`. </td>
 </tr>
 <tr>
 <tr>
@@ -323,7 +324,7 @@ Le tableau suivant présente les actions que vous devez effectuer avant de mettr
 </tr>
 <tr>
 <td>Liaisons de rôle pour le compte de service `kube-system` `default`</td>
-<td>Le compte de service `kube-system` `default` n'a plus l'accès **cluster-admin** à l'API Kubernetes. Si vous déployez des fonctions ou des modules complémentaires de type [Helm](/docs/containers?topic=containers-integrations#helm) qui nécessitent l'accès aux processus dans votre cluster, configurez un [compte de service ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/). Si vous avez besoin de temps pour créer et configurer des comptes de service individuels avec les droit appropriés, vous pouvez accorder provisoirement le rôle **cluster-admin** avec la liaison de rôle de cluster suivante : `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
+<td>Le compte de service `kube-system` `default` n'a plus l'accès **cluster-admin** à l'API Kubernetes. Si vous déployez des fonctions ou des modules complémentaires de type [Helm](/docs/containers?topic=containers-helm#public_helm_install) qui nécessitent l'accès aux processus dans votre cluster, configurez un [compte de service ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/). Si vous avez besoin de temps pour créer et configurer des comptes de service individuels avec les droit appropriés, vous pouvez accorder provisoirement le rôle **cluster-admin** avec la liaison de rôle de cluster suivante : `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
 </tr>
 </tbody>
 </table>
@@ -347,7 +348,7 @@ Le tableau suivant présente les actions que vous devez effectuer après avoir m
 <td>API pour Kubernetes</td>
 <td>L'API Kubernetes remplace les API dépréciées, comme suit :
 <ul><li><strong>apps/v1</strong> : l'API Kubernetes `apps/v1` remplace les API `apps/v1beta1` et `apps/v1alpha`. L'API `apps/v1` remplace également l'API `extensions/v1beta1` pour les ressources `daemonset`, `deployment`, `replicaset` et `statefulset`. Le projet Kubernetes déprécie et arrête progressivement la prise en charge des API précédentes du serveur d'API Kubernetes `apiserver` et du client `kubectl`.</li>
-<li><strong>networking.k8s.io/v1</strong> : l'API `networking.k8s.io/v1` remplace l'API `extensions/v1beta1` pour les ressources `networkpolicy`.</li>
+<li><strong>networking.k8s.io/v1</strong> : l'API `networking.k8s.io/v1` remplace l'API `extensions/v1beta1` pour les ressources NetworkPolicy. </li>
 <li><strong>policy/v1beta1</strong> : l'API `policy/v1beta1` remplace l'API `extensions/v1beta1` pour les ressources `podsecuritypolicy`.</li></ul>
 <br><br>Mettez à jour toutes les zones `apiVersion` de vos fichiers YAML pour utiliser l'API Kubernetes appropriée avant que les API dépréciées ne soient plus prises en charge. Consultez aussi la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) pour les modifications liées à l'API `apps/v1`, par exemple :
 <ul><li>Après avoir créé un déploiement, la zone `.spec.selector` est non modifiable.</li>
@@ -363,7 +364,7 @@ Le tableau suivant présente les actions que vous devez effectuer après avoir m
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>La commande `kubectl get componentstatuses` n'indique pas correctement l'état de santé de certains composants du maître Kubernetes car ces composants ne sont plus accessibles depuis le serveur d'API Kubernetes depuis que `localhost` et les ports (HTTP) non sécurisés sont désactivés. Après l'introduction de maîtres à haute disponibilité (HA) dans Kubernetes version 1.10, chaque maître Kubernetes est configuré avec plusieurs instances `apiserver`, `controller-manager`, `scheduler` et `etcd`. Examinez désormais l'état de santé du cluster en consultant la [console {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/containers-kubernetes/landing) ou en utilisant la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get) `ibmcloud ks cluster-get`.</td>
+<td>La commande `kubectl get componentstatuses` n'indique pas correctement l'état de santé de certains composants du maître Kubernetes car ces composants ne sont plus accessibles depuis le serveur d'API Kubernetes depuis que `localhost` et les ports (HTTP) non sécurisés sont désactivés. Après l'introduction de maîtres à haute disponibilité (HA) dans Kubernetes version 1.10, chaque maître Kubernetes est configuré avec plusieurs instances `apiserver`, `controller-manager`, `scheduler` et `etcd`. A la place, examinez l'état de santé du cluster en consultant la [console {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/landing) ou en utilisant la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get) `ibmcloud ks cluster-get`. </td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
@@ -392,7 +393,7 @@ Le tableau suivant présente les actions que vous devez effectuer après avoir m
 </tr>
 <tr>
 <td>Tableau de bord Kubernetes</td>
-<td>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place. </td>
+<td>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place.</td>
 </tr>
 <tr>
 <td id="metrics-server">Kubernetes Metrics Server</td>
@@ -495,12 +496,16 @@ Le tableau suivant présente les actions que vous devez effectuer après avoir m
 Le répertoire de consignation du conteneur `/var/lib/docker/` a été remplacé par `/var/log/pods/`. Si vous utilisez votre propre solution de consignation qui surveille l'ancien répertoire, effectuez la mise à jour en conséquence.</td>
 </tr>
 <tr>
+<td>Prise en charge d'{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)</td>
+<td>Dans les clusters exécutant Kubernetes version 1.11 ou plus, les [groupes d'accès](/docs/iam?topic=iam-groups#groups) et les [ID de service](/docs/iam?topic=iam-serviceids#serviceids) IAM sont pris en charge. Vous pouvez désormais utiliser ces fonctions pour [autoriser l'accès à votre cluster](/docs/containers?topic=containers-users#users).</td>
+</tr>
+<tr>
 <td>Actualisation de la configuration de Kubernetes</td>
 <td>La configuration OpenID Connect pour le serveur d'API Kubernetes du cluster a été mise à jour pour prendre en charge les groupes d'accès {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). Par conséquent, vous devez actualiser la configuration Kubernetes de votre cluster après la mise à jour du maître Kubernetes v1.11 en exécutant la commande `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. Avec cette commande, la configuration est appliquée aux liaisons de rôle dans l'espace de nom `default`.<br><br>Si vous ne le faites pas, les actions du cluster échouent avec un message d'erreur de ce type : `You must be logged in to the server (Unauthorized).`</td>
 </tr>
 <tr>
 <td>Tableau de bord Kubernetes</td>
-<td>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place. </td>
+<td>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place.</td>
 </tr>
 <tr>
 <td>Interface de ligne de commande (CLI) `kubectl`</td>
@@ -536,12 +541,12 @@ Vous pouvez vérifier si votre cluster bénéficie d'une configuration du maîtr
 * Si vous utilisez des règles réseau Kubernetes ou Calico pour contrôler l'accès du trafic sortant du pod vers le maître.
 
 <br>
-**Mise à jour de votre pare-feu ou de vos règles réseau d'hôte Calico personnalisées pour les maîtres à haute disponibilité** :</br>
+**Mise à jour de votre pare-feu ou de vos politiques réseau d'hôte Calico personnalisées pour les maîtres à haute disponibilité** :</br>
 {: #ha-firewall}
-Si vous utilisez un pare-feu ou des règles réseau d'hôte Calico personnalisées pour contrôler la sortie de vos noeuds worker, autorisez le trafic sortant vers les ports et les adresses IP pour toutes les zones au sein de la région où se trouve votre cluster. Voir [Autorisation au cluster d'accéder aux ressources de l'infrastructure et à d'autres services](/docs/containers?topic=containers-firewall#firewall_outbound).
+Si vous utilisez un pare-feu ou des politiques réseau d'hôte Calico personnalisées pour contrôler la sortie de vos noeuds worker, autorisez le trafic sortant vers les ports et les adresses IP pour toutes les zones au sein de la région où se trouve votre cluster. Voir [Autorisation accordée au cluster d'accéder aux ressources de l'infrastructure et à d'autres services](/docs/containers?topic=containers-firewall#firewall_outbound).
 
 <br>
-**Réservation des ports d'hôte `2040` et `2041` sur vos noeuds worker**:</br>
+**Réservation des ports d'hôte `2040` et `2041` sur vos noeuds worker** :</br>
 {: #ha-ports}
 Pour autoriser l'accès au maître cluster dans une configuration à haute disponibilité, vous devez laisser les ports d'hôte `2040` et `2041` disponibles sur tous les noeuds worker.
 * Mettez à jour les pods avec `hostPort` défini avec `2040` ou `2041` pour utiliser d'autres ports.
@@ -550,12 +555,28 @@ Pour autoriser l'accès au maître cluster dans une configuration à haute dispo
 Pour vérifier si vos pods utilisent actuellement les ports `2040` ou `2041`, ciblez votre cluster et exécutez la commande suivante.
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
 
+Si vous disposez déjà d'une configuration maître à haute disponibilité, les résultats pour `ibm-master-proxy-*` sont visibles dans l'espace de nom `kube-system`, comme illustré dans l'exemple ci-après. Si d'autres pods sont renvoyés, mettez à jour leurs ports.
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
+
+
 <br>
-**Utilisation de l'adresse IP du cluster ou le domaine du service `kubernetes` pour accéder au maître depuis le cluster** :</br>
+**Utilisation de l'adresse IP du cluster ou du domaine du service `kubernetes` pour accéder au maître depuis le cluster** : </br>
 {: #ha-incluster}
 Pour accéder au maître cluster dans une configuration à haute disponibilité depuis le cluster, utilisez l'une des options suivantes :
 * L'adresse IP du cluster du service `kubernetes`, dont la valeur par défaut est : `https://172.21.0.1`
@@ -564,16 +585,16 @@ Pour accéder au maître cluster dans une configuration à haute disponibilité 
 Si vous avez utilisé auparavant l'adresse IP du maître cluster, cette méthode fonctionne toujours. Cependant, pour une disponibilité accrue, effectuez une mise à jour pour utiliser l'adresse IP du cluster ou le nom de domaine du service `kubernetes`.
 
 <br>
-**Configuration de Calico pour accéder au maître en dehors du cluster avec une configuration à haute disponibilité (HA)** :</br>
+**Configuration de Calico pour accéder au maître en dehors du cluster avec une configuration à haute disponibilité (HA)** : </br>
 {: #ha-outofcluster}
 Les données stockées dans l'élément configmap `calico-config` dans l'espace de nom `kube-system` sont modifiées pour prendre en charge la configuration du maître à haute disponibilité. En particulier, la valeur `etcd_endpoints` prend désormais en charge l'accès au sein du cluster uniquement. L'utilisation de cette valeur pour configurer l'interface CLI de Calico pour l'accès en dehors du cluster ne fonctionne plus.
 
 Utilisez à la place les données stockées dans l'élément configmap `cluster-info` dans l'espace de nom `kube-system`. Utilisez notamment les valeurs `etcd_host` et `etcd_port` pour configurer le noeud final de l'[interface de ligne de commande (CLI) Calico](/docs/containers?topic=containers-network_policies#cli_install) pour accéder au maître avec une configuration à haute disponibilité en dehors du cluster.
 
 <br>
-**Mise à jour des règles réseau Kubernetes ou Calico** :</br>
+**Mise à jour des politiques réseau Kubernetes ou Calico** : </br>
 {: #ha-networkpolicies}
-Vous avez besoin d'effectuer d'autres actions si vous utilisez des [règles réseau Kubernetes ou Calico](/docs/containers?topic=containers-network_policies#network_policies) pour contrôler l'accès de la sortie du pod au maître cluster et vous utilisez actuellement :
+Vous avez besoin d'effectuer d'autres actions si vous utilisez des [politiques réseau Kubernetes ou Calico](/docs/containers?topic=containers-network_policies#network_policies) pour contrôler l'accès de la sortie du pod au maître cluster et vous utilisez actuellement :
 *  L'adresse IP du cluster du service Kubernetes, que vous pouvez obtenir en exécutant la commande `kubectl get service kubernetes -o yaml | grep clusterIP`.
 *  Le nom de domaine du service Kubernetes dont la valeur par défaut est `https://kubernetes.default.svc.cluster.local`.
 *  L'adresse IP du maître cluster, que vous pouvez obtenir en exécutant la commande `kubectl cluster-info | grep Kubernetes`.
@@ -581,7 +602,7 @@ Vous avez besoin d'effectuer d'autres actions si vous utilisez des [règles rés
 La procédure suivante indique comment mettre à jour vos règles réseau Kubernetes. Pour mettre à jour des règles réseau Calico, répétez cette procédure avec quelques légères modifications de syntaxe des règles et utilisez `calicoctl` pour rechercher des règles et en mesurer l'impact.
 {: note}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Obtenez l'adresse IP du maître cluster.
     ```
@@ -689,7 +710,7 @@ Pour les clusters qui exécutent Kubernetes version 1.11 ou ultérieure, `contai
 Exemples de fois où vous pouvez vous appuyer sur l'environnement d'exécution de conteneur Docker :
 *  Si vous accédez au moteur Docker ou directement à l'API en utilisant des conteneurs privilégiés, mettez à jour vos pods pour prendre en charge `containerd` comme environnement d'exécution. Par exemple, vous pouvez appeler le socket Docker directement pour lancer les conteneurs ou effectuer d'autres opérations Docker. Le socket Docker est passé de `/var/run/docker.sock` à `/run/containerd/containerd.sock`. Le protocole utilisé dans le socket `containerd` est légèrement différent de celui de Docker. Essayez de mettre à jour votre application pour utiliser le socket `containerd`. Pour continuer à utiliser le socket Docker, envisagez d'utiliser [Docker-inside-Docker (DinD) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://hub.docker.com/_/docker/).
 *  Certains modules complémentaires de tiers, par exemple les outils de consignation et de surveillance, que vous installez dans votre cluster peuvent reposer sur le moteur Docker. Vérifiez auprès de votre fournisseur que les outils sont bien compatibles avec containerd. Les cas d'utilisations possibles sont :
-   - Votre outil de consignation peut utiliser le répertoire `stderr/stdout` du conteneur `/var/log/pods/<pod_uuid>/<container_name>/*.log` pour accéder aux journaux. Dans Docker, ce répertoire est un lien symbolique vers `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log` alors que dans `containerd` vous accédez directement au répertoire sans recourir à un lien symbolique.
+   - Votre outil de consignation peut utiliser le répertoire `/var/log/pods/<pod_uuid>/<container_name>/*.log` du conteneur `stderr/stdout` pour accéder aux journaux. Dans Docker, ce répertoire est un lien symbolique vers `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log` alors que dans `containerd` vous accédez au répertoire directement sans lien symbolique. 
    - Votre outil de surveillance accède directement au socket Docker. Le socket Docker est passé de `/var/run/docker.sock` à `/run/containerd/containerd.sock`.
 
 <br>
@@ -756,7 +777,7 @@ Avant de commencer, votre maître cluster ainsi que tous les noeuds worker doive
 Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour de la version Kubernetes précédente vers la version 1.10.
 {: shortdesc}
 
-La version 1.10 de Kubernetes est dépréciée et n'est plus prise en charge à compter du 30 avril 2019 (date provisoire). [Consultez l'impact potentiel](/docs/containers?topic=containers-cs_versions#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](/docs/containers?topic=containers-update#update) pour passer immédiatement à la version 1.11 ou ultérieure.
+La version 1.10 de Kubernetes est dépréciée et n'est plus prise en charge à compter du 15 mai 2019. [Consultez l'impact potentiel](/docs/containers?topic=containers-cs_versions#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](/docs/containers?topic=containers-update#update) pour passer immédiatement à la version 1.11 ou ultérieure.
 {: deprecated}
 
 Pour pouvoir effectuer la mise à jour vers Kubernetes 1.10, vous devez suivre les étapes indiquées dans [Préparation à la mise à jour vers Calico v3](#110_calicov3).
@@ -836,7 +857,7 @@ Le tableau suivant présente les actions que vous devez effectuer après avoir m
 </tr>
 <tr>
 <td>Tableau de bord Kubernetes</td>
-<td>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place. </td>
+<td>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place.</td>
 </tr>
 <tr>
 <td><code>kubectl port-forward</code></td>
@@ -876,12 +897,12 @@ Vous pouvez vérifier si votre cluster bénéficie d'une configuration du maîtr
 * Si vous utilisez des règles réseau Kubernetes ou Calico pour contrôler l'accès du trafic sortant du pod vers le maître.
 
 <br>
-**Mise à jour de votre pare-feu ou de vos règles réseau d'hôte Calico personnalisées pour les maîtres à haute disponibilité** :</br>
+**Mise à jour de votre pare-feu ou de vos politiques réseau d'hôte Calico personnalisées pour les maîtres à haute disponibilité** :</br>
 {: #110_ha-firewall}
-Si vous utilisez un pare-feu ou des règles réseau d'hôte Calico personnalisées pour contrôler la sortie de vos noeuds worker, autorisez le trafic sortant vers les ports et les adresses IP pour toutes les zones au sein de la région où se trouve votre cluster. Voir [Autorisation au cluster d'accéder aux ressources de l'infrastructure et à d'autres services](/docs/containers?topic=containers-firewall#firewall_outbound).
+Si vous utilisez un pare-feu ou des politiques réseau d'hôte Calico personnalisées pour contrôler la sortie de vos noeuds worker, autorisez le trafic sortant vers les ports et les adresses IP pour toutes les zones au sein de la région où se trouve votre cluster. Voir [Autorisation accordée au cluster d'accéder aux ressources de l'infrastructure et à d'autres services](/docs/containers?topic=containers-firewall#firewall_outbound).
 
 <br>
-**Réservation des ports d'hôte `2040` et `2041` sur vos noeuds worker**:</br>
+**Réservation des ports d'hôte `2040` et `2041` sur vos noeuds worker** :</br>
 {: #110_ha-ports}
 Pour autoriser l'accès au maître cluster dans une configuration à haute disponibilité, vous devez laisser les ports d'hôte `2040` et `2041` disponibles sur tous les noeuds worker.
 * Mettez à jour les pods avec `hostPort` défini avec `2040` ou `2041` pour utiliser d'autres ports.
@@ -890,12 +911,27 @@ Pour autoriser l'accès au maître cluster dans une configuration à haute dispo
 Pour vérifier si vos pods utilisent actuellement les ports `2040` ou `2041`, ciblez votre cluster et exécutez la commande suivante.
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
 
+Si vous disposez déjà d'une configuration maître à haute disponibilité, les résultats pour `ibm-master-proxy-*` sont visibles dans l'espace de nom `kube-system`, comme illustré dans l'exemple ci-après. Si d'autres pods sont renvoyés, mettez à jour leurs ports.
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
+
 <br>
-**Utilisation de l'adresse IP du cluster ou le domaine du service `kubernetes` pour accéder au maître depuis le cluster** :</br>
+**Utilisation de l'adresse IP du cluster ou du domaine du service `kubernetes` pour accéder au maître depuis le cluster** : </br>
 {: #110_ha-incluster}
 Pour accéder au maître cluster dans une configuration à haute disponibilité depuis le cluster, utilisez l'une des options suivantes :
 * L'adresse IP du cluster du service `kubernetes`, dont la valeur par défaut est : `https://172.21.0.1`
@@ -904,14 +940,14 @@ Pour accéder au maître cluster dans une configuration à haute disponibilité 
 Si vous avez utilisé auparavant l'adresse IP du maître cluster, cette méthode fonctionne toujours. Cependant, pour une disponibilité accrue, effectuez une mise à jour pour utiliser l'adresse IP du cluster ou le nom de domaine du service `kubernetes`.
 
 <br>
-**Configuration de Calico pour accéder au maître en dehors du cluster avec une configuration à haute disponibilité (HA)** :</br>
+**Configuration de Calico pour accéder au maître en dehors du cluster avec une configuration à haute disponibilité (HA)** : </br>
 {: #110_ha-outofcluster}
 Les données stockées dans l'élément configmap `calico-config` dans l'espace de nom `kube-system` sont modifiées pour prendre en charge la configuration du maître à haute disponibilité. En particulier, la valeur `etcd_endpoints` prend désormais en charge l'accès au sein du cluster uniquement. L'utilisation de cette valeur pour configurer l'interface CLI de Calico pour l'accès en dehors du cluster ne fonctionne plus.
 
 Utilisez à la place les données stockées dans l'élément configmap `cluster-info` dans l'espace de nom `kube-system`. Utilisez notamment les valeurs `etcd_host` et `etcd_port` pour configurer le noeud final de l'[interface de ligne de commande (CLI) Calico](/docs/containers?topic=containers-network_policies#cli_install) pour accéder au maître avec une configuration à haute disponibilité en dehors du cluster.
 
 <br>
-**Mise à jour des règles réseau Kubernetes ou Calico** :</br>
+**Mise à jour des politiques réseau Kubernetes ou Calico** : </br>
 {: #110_ha-networkpolicies}
 Vous avez besoin d'effectuer d'autres actions si vous utilisez des [règles réseau Kubernetes ou Calico](/docs/containers?topic=containers-network_policies#network_policies) pour contrôler l'accès de la sortie du pod au maître cluster et vous utilisez actuellement :
 *  L'adresse IP du cluster du service Kubernetes, que vous pouvez obtenir en exécutant la commande `kubectl get service kubernetes -o yaml | grep clusterIP`.
@@ -921,7 +957,7 @@ Vous avez besoin d'effectuer d'autres actions si vous utilisez des [règles rés
 La procédure suivante indique comment mettre à jour vos règles réseau Kubernetes. Pour mettre à jour des règles réseau Calico, répétez cette procédure avec quelques légères modifications de syntaxe des règles et utilisez `calicoctl` pour rechercher des règles et en mesurer l'impact.
 {: note}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Obtenez l'adresse IP du maître cluster.
     ```
@@ -1071,7 +1107,7 @@ A partir du 27 décembre 2018, les clusters {{site.data.keyword.containerlong_no
 A partir du 22 septembre 2018, les clusters {{site.data.keyword.containerlong_notm}} qui exécutent [Kubernetes version 1.8](/docs/containers?topic=containers-changelog#changelog_archive) ne sont plus pris en charge. Les clusters de la version 1.8 ne peuvent pas recevoir des mises à jour de sécurité ou du support sauf s'ils ont été mis à jour à la version suivante la plus récente ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Consultez l'impact potentiel](/docs/containers?topic=containers-cs_versions#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](/docs/containers?topic=containers-update#update) pour passer immédiatement à la version 1.10. Les mises à jour vers la version 1.11 ou ultérieure à partir de la version 1.8 échoueront. 
+[Consultez l'impact potentiel](/docs/containers?topic=containers-cs_versions#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](/docs/containers?topic=containers-update#update) pour passer immédiatement à la version 1.10. Les mises à jour vers la version 1.11 ou ultérieure à partir de la version 1.8 échoueront.
 
 ### Version 1.7 (non prise en charge)
 {: #cs_v17}
@@ -1079,7 +1115,7 @@ A partir du 22 septembre 2018, les clusters {{site.data.keyword.containerlong_no
 A partir du 21 juin 2018, les clusters {{site.data.keyword.containerlong_notm}} qui exécutent [Kubernetes version 1.7](/docs/containers?topic=containers-changelog#changelog_archive) ne sont plus pris en charge. Les clusters de la version 1.7 ne peuvent pas recevoir des mises à jour de sécurité ou du support sauf s'ils ont été mis à jour à la version suivante prise en charge la plus récente ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Consultez l'impact potentiel](/docs/containers?topic=containers-cs_versions#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](/docs/containers?topic=containers-update#update) pour passer immédiatement à la version 1.10. Les mises à jour vers la version 1.11 ou ultérieure à partir de la version 1.7 échoueront. 
+[Consultez l'impact potentiel](/docs/containers?topic=containers-cs_versions#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](/docs/containers?topic=containers-update#update) pour passer immédiatement à la version 1.10. Les mises à jour vers la version 1.11 ou ultérieure à partir de la version 1.7 échoueront.
 
 ### Version 1.5 (non prise en charge)
 {: #cs_v1-5}

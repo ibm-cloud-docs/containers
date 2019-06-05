@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,7 +44,7 @@ subcollection: containers
 
 ## 步驟 1：在 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 中執行 Ingress 測試
 
-疑難排解時，您可以使用 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 來執行 Ingress 測試，並從叢集中收集相關的 Ingress 資訊。若要使用除錯工具，請安裝 [`ibmcloud-iks-debug` Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
+疑難排解時，您可以使用 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 來執行 Ingress 測試，並從叢集中收集相關的 Ingress 資訊。若要使用除錯工具，請安裝 [`ibmcloud-iks-debug` Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
 {: shortdesc}
 
 
@@ -53,7 +53,7 @@ subcollection: containers
 2. 將 Helm 圖表安裝至您的叢集。
         
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
@@ -303,7 +303,7 @@ subcollection: containers
     {: pre}
 
     輸出範例：
-    ```
+        ```
     public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq   2/2       Running   0          24m
     public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-trqxc   2/2       Running   0          24m
     ```
@@ -316,7 +316,7 @@ subcollection: containers
         ```
         {: pre}
 
-        確認 ALB Pod 的輸出範例已配置正確的性能檢查主機名稱 `albhealth.<domain>`:
+        確認 ALB Pod 的輸出範例已配置正確的性能檢查主機名稱 `albhealth.<domain>`：
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```

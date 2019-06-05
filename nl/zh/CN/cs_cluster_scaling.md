@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-17"
 
 keywords: kubernetes, iks, node scaling
 
@@ -37,7 +37,7 @@ subcollection: containers
 集群自动缩放器可用于设置为使用公用网络连接的标准集群。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么无法在集群中使用集群自动缩放器。
 {: important}
 
-## 了解集群自动缩放器的运作方式
+## 了解扩展和缩减
 {: #ca_about}
 
 集群自动缩放器会定期扫描集群，以根据工作负载资源请求以及配置的任何定制设置（如扫描时间间隔），调整它所管理的工作程序池中的工作程序节点数。集群自动缩放器每分钟会检查一次以下情况。
@@ -57,13 +57,24 @@ subcollection: containers
 *   设置的每个专区的工作程序节点最小大小和最大大小。
 *   暂挂 pod 资源请求数以及与工作负载关联的特定元数据，例如，反亲缘关系、用于将 pod 仅放在特定机器类型上的标签，或者 [pod 中断预算 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)。
 *   集群自动缩放器管理的工作程序池可能会跨[多专区集群](/docs/containers?topic=containers-plan_clusters#multizone)中的多个专区。
-*   有关更多信息，请参阅 [Kubernetes 集群自动缩放器常见问题 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md)。
+*   设置的[定制 Helm chart 值](#ca_chart_values)，例如删除操作跳过使用本地存储器的工作程序节点。
 
+有关更多信息，请参阅 Kubernetes 集群自动缩放器常见问题中的 [How does scale-up work? ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-up-work) 和 [How does scale-down work? ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work)。
+
+<br>
+
+**可以更改扩展和缩减的运作方式吗？**<br>
+可以定制设置或使用其他 Kubernetes 资源来影响扩展和缩减运作方式。
+*   **扩展**：[定制集群自动缩放器 Helm chart 值](#ca_chart_values)，例如 `scanInterval`、`expander`、`skipNodes` 或 `maxNodeProvisionTime`。查看[过量供应工作程序节点](#ca_scaleup)的方式，以便可以扩展工作程序节点而避免工作程序池耗尽资源。此外，还可以[设置 Kubernetes pod 预算中断和 pod 优先级分界值](#scalable-practices-apps)，以影响扩展运作方式。
+*   **缩减**：[定制集群自动缩放器 Helm chart 值](#ca_chart_values)，例如 `scaleDownUnneededTime`、`scaleDownDelayAfterAdd`、`scaleDownDelayAfterDelete` 或 `scaleDownUtilizationThreshold`。
+
+<br>
 **此行为与非集群自动缩放器管理的工作程序池有何不同？**<br>
 [创建工作程序池](/docs/containers?topic=containers-clusters#add_pool)时，您会指定每个专区的工作程序节点数。工作程序池将保持该数量的工作程序节点，直到您对其[调整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新均衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)。工作程序池不会添加或除去工作程序节点。如果拥有的 pod 数多于可以安排的数量，那么多出的这些 pod 会保持暂挂状态，直到您调整工作程序池的大小。
 
 对工作程序池启用集群自动缩放器后，可根据 pod 规范设置和资源请求，对工作程序节点进行扩展或缩减。您无需手动对工作程序池调整大小或重新均衡。
 
+<br>
 **我可以查看集群自动缩放器如何扩展和缩减的示例吗？**<br>
 请参阅下图，以了解集群扩展和缩减的示例。
 
@@ -124,30 +135,57 @@ _图：自动扩展和缩减集群。_
 6.  您不再需要额外的工作负载，因此可删除部署。经过很短的一段时间后，集群自动缩放器会检测到集群不再需要其所有计算资源，随即开始缩减工作程序节点，一次缩减一个。
 7.  工作程序池已缩减。集群自动缩放器会定期扫描，以检查暂挂 pod 资源请求和未充分利用的工作程序节点，并相应地扩展或缩减工作程序池。
 
-<br>
-**如何确保工作程序节点和部署实践可缩放？**<br>
-通过组织工作程序节点和应用程序工作负载策略，能最充分地利用集群自动缩放器。有关更多信息，请参阅 [Kubernetes 集群自动缩放器常见问题 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md)。
+## 遵循可缩放部署实践
+{: #scalable-practices}
 
-<br>
-**工作程序池和工作程序节点的一般准则是什么？**<br>
-*   每个集群只能运行一个 `ibm-iks-cluster-autoscaler`。
-*   集群自动缩放器会根据工作负载[资源请求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) 来缩放集群。因此，您无需对工作程序池[调整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新均衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)。
-*   不要使用 `ibmcloud ks worker-rm` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)从工作程序池中除去单个工作程序节点，这可能会导致工作程序池不均衡。
-*   由于无法在工作程序池级别应用污点，因此不要[污染工作程序节点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)，以避免产生意外结果。例如，部署有污点的工作程序节点不容忍的工作负载时，不会考虑对工作程序节点进行扩展，并且即使集群有足够的容量，也可能会订购更多工作程序节点。但是，如果有污点工作程序节点的资源利用率低于阈值（缺省情况下为 50%），并因此要考虑对其进行缩减，那么这些工作程序节点仍会被视为未充分利用。
+使用以下工作程序节点策略以及工作负载部署策略，以最充分地利用集群自动缩放器。有关更多信息，请参阅 [Kubernetes 集群自动缩放器常见问题 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md)。
+{: shortdesc}
 
-<br>
-**应用程序工作负载的一般准则是什么？**<br>
-*   请记住，自动缩放基于的是工作负载配置请求的计算使用量，不考虑其他因素，例如机器成本。
-*   为所有部署指定[资源请求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)，因为集群自动缩放器是使用资源请求来计算运行工作负载所需的工作程序节点数。
+通过若干测试工作负载[试用集群自动缩放器](#ca_helm)，以了解[扩展和缩减运作方式](#ca_about)、可能需要配置的[定制值](#ca_chart_values)以及可能需要的其他任何方面，如[过量供应](#ca_scaleup)工作程序节点或[限制应用程序](#ca_limit_pool)。然后，清除测试环境，并规划在集群自动缩放器全新安装中包含这些定制值和其他设置。
+
+### 可以一次自动缩放多个工作程序池吗？
+{: #scalable-practices-multiple}
+可以，安装 Helm chart 后，可以在[配置映射](#ca_cm)中选择集群中哪些工作程序池进行自动缩放。每个集群只能运行一个 `ibm-iks-cluster-autoscaler` Helm chart。
+{: shortdesc}
+
+### 如何确保集群自动缩放器可响应应用程序需要的资源？
+{: #scalable-practices-resrequests}
+
+集群自动缩放器会根据工作负载[资源请求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) 来缩放集群。因此，请为所有部署指定[资源请求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)，因为集群自动缩放器是使用资源请求来计算运行工作负载所需的工作程序节点数。请记住，自动缩放基于的是工作负载配置请求的计算使用量，不考虑其他因素，例如机器成本。
+{: shortdesc}
+
+### 可以将工作程序池缩减到零 (0) 个节点吗？
+{: #scalable-practices-zero}
+
+不能，您不能将集群自动缩放器的 `minSize` 设置 `0`。此外，除非在集群中[禁用](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)了应用程序负载均衡器 (ALB)，否则必须将每个专区的 `minSize` 更改为 `2` 个工作程序节点，才能分布 ALB pod 以实现高可用性。
+{: shortdesc}
+
+### 可以优化部署以进行自动缩放吗？
+{: #scalable-practices-apps}
+
+可以，您可以将多个 Kubernetes 功能添加到部署中，以调整集群自动缩放器如何考虑资源请求以进行缩放。
+{: shortdesc}
 *   使用 [pod 中断预算 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) 以防止突然重新安排或删除 pod。
 *   如果使用了 pod 优先级，那么可以[编辑优先级分界值 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-cluster-autoscaler-work-with-pod-priority-and-preemption)，以更改何种类型的优先级会触发扩展。缺省情况下，优先级分界值为零 (`0`)。
 
-<br>
-**为什么自动缩放工作程序池不均衡？**<br>
-在扩展期间，集群自动缩放器会在各专区中均衡节点，允许正/负一个 (+/- 1) 工作程序节点的差异。暂挂工作负载可能无法请求足够的容量使每个专区均衡。在这种情况下，如果要手动均衡工作程序池，请[更新集群自动缩放器配置映射](#ca_cm)，以除去不均衡的工作程序池。然后，运行 `ibmcloud ks worker-pool-rebalance` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)，并将该工作程序池添加回集群自动缩放器配置映射。
+### 可以将污点和容忍度用于自动缩放的工作程序池吗？
+{: #scalable-practices-taints}
 
-**为什么无法对工作程序池调整大小或重新均衡？**<br>
-对工作程序池启用了集群自动缩放器时，无法对工作程序池[调整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新均衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)。您必须[编辑配置映射](#ca_cm)来更改工作程序池的最小大小或最大大小，或者禁用对该工作程序池的集群自动缩放。
+由于无法在工作程序池级别应用污点，因此不要[污染工作程序节点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)，以避免产生意外结果。例如，部署有污点的工作程序节点不容忍的工作负载时，不会考虑对工作程序节点进行扩展，并且即使集群有足够的容量，也可能会订购更多工作程序节点。但是，如果有污点工作程序节点的资源利用率低于阈值（缺省情况下为 50%），并因此要考虑对其进行缩减，那么这些工作程序节点仍会被视为未充分利用。
+{: shortdesc}
+
+### 为什么自动缩放工作程序池不均衡?
+{: #scalable-practices-unbalanced}
+
+在扩展期间，集群自动缩放器会在各专区中均衡节点，允许正/负一个 (+/- 1) 工作程序节点的差异。暂挂工作负载可能无法请求足够的容量使每个专区均衡。在这种情况下，如果要手动均衡工作程序池，请[更新集群自动缩放器配置映射](#ca_cm)，以除去不均衡的工作程序池。然后，运行 `ibmcloud ks worker-pool-rebalance` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)，并将该工作程序池添加回集群自动缩放器配置映射。
+{: shortdesc}
+
+
+### 为什么无法对工作程序池调整大小或重新均衡？
+{: #scalable-practices-resize}
+
+对工作程序池启用了集群自动缩放器时，无法对工作程序池[调整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新均衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)。您必须[编辑配置映射](#ca_cm)来更改工作程序池的最小大小或最大大小，或者禁用对该工作程序池的集群自动缩放。不要使用 `ibmcloud ks worker-rm` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)从工作程序池中除去单个工作程序节点，这可能会导致工作程序池不均衡。
+{: shortdesc}
 
 此外，如果未禁用工作程序池就卸载了 `ibm-iks-cluster-autoscaler` Helm chart，那么也无法手动调整工作程序池的大小。请重新安装 `ibm-iks-cluster-autoscaler` Helm chart，[编辑配置映射](#ca_cm)以禁用工作程序池，然后重试。
 
@@ -169,7 +207,7 @@ _图：自动扩展和缩减集群。_
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  [创建标准集群](/docs/containers?topic=containers-clusters#clusters_ui)（运行的是 **Kubernetes V1.12 或更高版本**）。
-3.   [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+3.   [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 4.  确认您的 {{site.data.keyword.Bluemix_notm}} Identity and Access Management 凭证是否存储在集群中。集群自动缩放器会使用此私钥进行认证。
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
@@ -193,11 +231,11 @@ _图：自动扩展和缩减集群。_
 <br>
 **要在集群中安装 `ibm-iks-cluster-autoscaler` 插件**，请执行以下操作：
 
-1.  [遵循指示信息](/docs/containers?topic=containers-integrations#helm)在本地计算机上安装 **Helm V2.11 或更高版本**客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
+1.  [遵循指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 **Helm V2.11 或更高版本**客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
 2.  验证 Tiller 是否已使用服务帐户进行安装。
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -210,7 +248,7 @@ _图：自动扩展和缩减集群。_
     {: screen}
 3.  添加和更新集群自动缩放器 Helm chart 所在的 Helm 存储库。
     ```
-    helm repo add ibm https://registry.bluemix.net/helm/ibm/
+    helm repo add iks-charts https://icr.io/helm/iks-charts
     ```
     {: pre}
     ```
@@ -219,11 +257,11 @@ _图：自动扩展和缩减集群。_
     {: pre}
 4.  在集群的 `kube-system` 名称空间中安装集群自动缩放器 Helm chart。
 
-    您还可以[定制集群自动缩放器设置](#ca_chart_values)，例如在扩展或缩减工作程序节点之前等待的时间量。
+    在安装期间，您可以选择进一步[定制集群自动缩放器设置](#ca_chart_values)，例如在扩展或缩减工作程序节点之前等待的时间量。
     {: tip}
 
     ```
-    helm install ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
+    helm install iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
@@ -281,7 +319,7 @@ _图：自动扩展和缩减集群。_
         kubectl get pods --namespace=kube-system | grep ibm-iks-cluster-autoscaler
         ```
         {: pre}
-输出示例：
+        输出示例：
         ```
         ibm-iks-cluster-autoscaler-8497bfc968-dbn7w   1/1       Running   0          9m
         ```
@@ -291,7 +329,7 @@ _图：自动扩展和缩减集群。_
         kubectl get service --namespace=kube-system | grep ibm-iks-cluster-autoscaler
         ```
         {: pre}
-输出示例：
+        输出示例：
         ```
         ibm-iks-cluster-autoscaler   ClusterIP   172.21.xxx.xx    <none>        8085/TCP        9m
         ```
@@ -315,7 +353,7 @@ _图：自动扩展和缩减集群。_
 
 **开始之前**：
 *  [安装 `ibm-iks-cluster-autoscaler` 插件](#ca_helm)。
-*  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **要更新集群自动缩放器配置映射和值**，请执行以下操作：
 
@@ -324,8 +362,8 @@ _图：自动扩展和缩减集群。_
     kubectl edit cm iks-ca-configmap -n kube-system -o yaml
     ```
     {: pre}
-输出示例：
-        ```
+    输出示例：
+    ```
     apiVersion: v1
     data:
       workerPoolsConfig.json: |
@@ -350,8 +388,9 @@ _图：自动扩展和缩减集群。_
     <th id="parameter-with-default">具有缺省值的参数</th>
     <th id="parameter-with-description">描述</th>
     </thead>
+    <tbody>
     <tr>
-    <th id="parameter-name" headers="parameter-with-default">`"name": "default"`</th>
+    <td id="parameter-name" headers="parameter-with-default">`"name": "default"`</td>
     <td headers="parameter-name parameter-with-description">将 `"default"` 替换为要缩放的工作程序池的名称或标识。要列出工作程序池，请运行 `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`。<br><br>
     要管理多个工作程序池，请将该 JSON 行复制到逗号分隔行，如下所示。<pre class="codeblock">[
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
@@ -360,15 +399,15 @@ _图：自动扩展和缩减集群。_
     **注**：集群自动缩放器只能缩放具有 `ibm-cloud.kubernetes.io/worker-pool-id` 标签的工作程序池。要检查工作程序池是否具有必需的标签，请运行 `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`。如果工作程序池没有必需的标签，请[添加新的工作程序池](/docs/containers?topic=containers-clusters#add_pool)，并将此工作程序池与集群自动缩放器配合使用。</td>
     </tr>
     <tr>
-    <th id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</th>
+    <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
     <td headers="parameter-minsize parameter-with-description">指定工作程序池中每个专区应随时具备的最小工作程序节点数。值必须等于或大于 2，以便可以分布 ALB pod 以实现高可用性。如果在标准集群中[禁用](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)了 ALB，那么可以将值设置为 `1`。</td>
     </tr>
     <tr>
-    <th id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</th>
+    <td id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</td>
     <td headers="parameter-maxsize parameter-with-description">指定工作程序池中每个专区可具备的最大工作程序节点数。值必须等于或大于为 `minSize` 设置的值。</td>
     </tr>
     <tr>
-    <th id="parameter-enabled" headers="parameter-with-default">`"enabled": false`</th>
+    <td id="parameter-enabled" headers="parameter-with-default">`"enabled": false`</td>
     <td headers="parameter-enabled parameter-with-description">将值设置为 `true`，表示由集群自动缩放器来管理工作程序池的缩放。将值设置为 `false` 可阻止集群自动缩放器对工作程序池进行缩放。<br><br>
     如果日后要[除去集群自动缩放器](#ca_rm)，必须先在配置映射中禁用每个工作程序池。</td>
     </tr>
@@ -407,8 +446,8 @@ _图：自动扩展和缩减集群。_
 {: shortdesc}
 
 **开始之前**：
+*  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  [安装 `ibm-iks-cluster-autoscaler` 插件](#ca_helm)。
-*  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 **要更新集群自动缩放器值，请执行以下操作：**
 
@@ -454,7 +493,7 @@ _图：自动扩展和缩减集群。_
     <tbody>
     <tr>
     <td>`api_route` 参数</td>
-    <td>为集群所在的区域设置 [{{site.data.keyword.containerlong_notm}} API 端点](/docs/containers?topic=containers-cs_cli_reference#cs_api)。</td>
+    <td>为集群所在的区域设置 [{{site.data.keyword.containerlong_notm}} API 端点](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)。</td>
     <td>无缺省值；使用集群所在的目标区域。</td>
     </tr>
     <tr>
@@ -536,14 +575,15 @@ _图：自动扩展和缩减集群。_
     </tbody>
     </table>
 2.  要更改任何集群自动缩放器配置值，请使用新值更新 Helm chart。
+    包含 `--recreate-pods` 标志，以便重新创建任何现有集群自动缩放器 pod，从而获取定制设置更改。
     ```
-    helm upgrade --set scanInterval=2m ibm-iks-cluster-autoscaler ibm/ibm-iks-cluster-autoscaler -i
+    helm upgrade --set scanInterval=2m ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler -i --recreate-pods
     ```
     {: pre}
 
     要将图表重置为缺省值，请运行以下命令：
     ```
-    helm upgrade --reset-values ibm-iks-cluster-autoscaler ibm/ibm-iks-cluster-autoscaler
+    helm upgrade --reset-values ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler --recreate-pods
     ```
     {: pre}
 3.  要验证更改，请再次查看 Helm chart 值。
@@ -551,6 +591,7 @@ _图：自动扩展和缩减集群。_
     helm get values ibm-iks-cluster-autoscaler -a
     ```
     {: pre}
+    
 
 ## 将应用程序限制为仅在特定自动缩放的工作程序池上运行
 {: #ca_limit_pool}
@@ -560,7 +601,7 @@ _图：自动扩展和缩减集群。_
 
 **开始之前**：
 *  [安装 `ibm-iks-cluster-autoscaler` 插件](#ca_helm)。
-*  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **要将 pod 限制为在特定自动缩放的工作程序池上运行，请执行以下操作：**
 
@@ -602,7 +643,7 @@ _图：自动扩展和缩减集群。_
 
 <dl>
   <dt><strong>暂停 pod</strong></dt>
-  <dd>可以创建部署，用于通过特定资源请求在 pod 中部署[暂停容器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers)，并为该部署分配低 pod 优先级。当优先级较高的工作负载需要这些资源时，会抢占暂停 pod，使其变成暂挂 pod。此事件会触发集群自动缩放器进行扩展。<br><br>有关设置暂停 pod 部署的更多信息，请参阅 [Kubernetes 常见问题 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler)。<p class="note">如果使用此方法，请确保了解 [pod 优先级](/docs/containers?topic=containers-pod_priority#pod_priority)的运作方式，并为部署设置 pod 优先级。例如，如果暂停 pod 没有足够的资源可用于更高优先级的 pod，那么不会抢占该 pod。优先级较高的工作负载会保持暂挂状态，因此会触发集群自动缩放器进行扩展。但是在这种情况下，缩放操作并不属于提早缩放，因为安排的并不是您关注的实际工作负载，而是暂停 pod。</p></dd>
+  <dd>可以创建部署，用于通过特定资源请求在 pod 中部署[暂停容器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers)，并为该部署分配低 pod 优先级。当优先级较高的工作负载需要这些资源时，会抢占暂停 pod，使其变成暂挂 pod。此事件会触发集群自动缩放器进行扩展。<br><br>有关设置暂停 pod 部署的更多信息，请参阅 [Kubernetes 常见问题 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler)。您可以使用[此示例过量供应配置文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml) 来创建优先级类、服务帐户和部署。<p class="note">如果使用此方法，请确保了解 [pod 优先级](/docs/containers?topic=containers-pod_priority#pod_priority)的运作方式，以及如何为部署设置 pod 优先级。例如，如果暂停 pod 没有足够的资源可用于更高优先级的 pod，那么不会抢占该 pod。优先级较高的工作负载会保持暂挂状态，因此会触发集群自动缩放器进行扩展。但是在这种情况下，扩展操作并不属于提早扩展，因为您要运行的工作负载由于资源不足而无法安排。</p></dd>
 
   <dt><strong>水平 pod 自动缩放 (HPA)</strong></dt>
   <dd>因为水平 pod 自动缩放基于的是 pod 的平均 CPU 使用率，所以在工作程序池实际耗尽资源之前，就会达到您设置的 CPU 使用率限制。这时会请求更多 pod，从而触发集群自动缩放器扩展工作程序池。<br><br>有关设置 HPA 的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/)。</dd>
@@ -620,7 +661,7 @@ _图：自动扩展和缩减集群。_
 要从 Helm chart V1.0.2 或更低版本更新到最新版本？请[遵循以下指示信息](#ca_helm_up_102)进行操作。
 {: note}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  更新 Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
     ```
@@ -630,7 +671,7 @@ _图：自动扩展和缩减集群。_
 
 2.  可选：将最新 Helm chart 下载到本地计算机。然后，解压缩该包并查看 `release.md` 文件，以了解最新的发行版信息。
     ```
-    helm fetch ibm/ibm-iks-cluster-autoscaler
+    helm fetch iks-charts/ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
@@ -648,7 +689,7 @@ _图：自动扩展和缩减集群。_
 
 4.  将集群自动缩放器 Helm chart 更新到最新版本。
     ```
-    helm upgrade --force --recreate-pods <helm_chart_name>  ibm/ibm-iks-cluster-autoscaler
+    helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
@@ -683,7 +724,7 @@ _图：自动扩展和缩减集群。_
 集群自动缩放器的最新 Helm chart 版本需要完全除去先前安装的集群自动缩放器 Helm chart 版本。如果已安装 Helm chart V1.0.2 或更低版本，请先卸载该版本，然后再安装集群自动缩放器的最新 Helm chart。
 {: shortdesc}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  获取集群自动缩放器配置映射。
     ```
@@ -712,7 +753,7 @@ _图：自动扩展和缩减集群。_
     {: pre}
 6.  安装最新的集群自动缩放器 Helm chart。应用先前与 `--set` 标志一起使用的任何定制设置，例如 `scanInterval=2m`。
     ```
-    helm install  ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
+    helm install  iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
     ```
     {: pre}
 7.  应用先前检索到的集群自动缩放器配置映射，以启用对工作程序池的自动缩放。
@@ -753,7 +794,7 @@ _图：自动扩展和缩减集群。_
 如果不想自动缩放工作程序池，那么可以卸载集群自动缩放器 Helm chart。除去后，您必须手动对工作程序池[调整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新均衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)。
 {: shortdesc}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  在[集群自动缩放器配置映射](#ca_cm)中，通过将 `"enabled"` 值设置为 `false` 来除去工作程序池。
     ```

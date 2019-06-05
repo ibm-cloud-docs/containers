@@ -105,7 +105,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
         ```
         {: pre}
     
-        **Output di esempio per CoreDNS**:
+        **Output di esempio per CoreDNS**: 
           ```
           apiVersion: v1
           kind: ConfigMap

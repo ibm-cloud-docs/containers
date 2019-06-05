@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -50,7 +50,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 ## 전제조건
 {: #cf_prereqs}
 
-- [{{site.data.keyword.registrylong_notm}}에서 개인용 이미지 레지스트리를 작성](/docs/services/Registry?topic=registry-index)하십시오.
+- [{{site.data.keyword.registrylong_notm}}에서 개인용 이미지 레지스트리를 작성](/docs/services/Registry?topic=registry-getting-started)하십시오.
 - [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui)하십시오.
 - [CLI에 클러스터를 대상으로 지정](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)하십시오.
 - {{site.data.keyword.containerlong_notm}}에 대해 다음의 {{site.data.keyword.Bluemix_notm}} IAM 액세스 정책이 있는지 확인하십시오.
@@ -276,7 +276,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
     ```
     {: screen}
 

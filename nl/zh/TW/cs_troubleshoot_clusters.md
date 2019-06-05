@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -32,11 +32,8 @@ subcollection: containers
 在您使用 {{site.data.keyword.containerlong}} 時，請考慮使用這些技術來進行叢集和工作者節點的疑難排解。
 {: shortdesc}
 
-如果您有更一般性的問題，請嘗試[叢集除錯](/docs/containers?topic=containers-cs_troubleshoot)。
-{: tip}
-
-疑難排解時，您可以使用 [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) 來執行測試，並從叢集中收集相關資訊。
-{: tip}
+<p class="tip">如果您有更一般性的問題，請嘗試[叢集除錯](/docs/containers?topic=containers-cs_troubleshoot)。
+<br>此外，疑難排解時，您可以使用 [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) 來執行測試，並從叢集中收集相關資訊。</p>
 
 ## 許可權錯誤導致無法建立叢集或管理工作者節點
 {: #cs_credentials}
@@ -84,7 +81,7 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
 
 {: tsCauses}
 您沒有建立叢集的正確許可權。您需要有下列許可權才能建立叢集：
-*  IBM Cloud 基礎架構 (SoftLayer) 的**超級使用者**角色。
+*  IBM Cloud 基礎架構 (SoftLayer) 的**超級使用者**角色，或至少[這些最低基礎架構許可權](/docs/containers?topic=containers-access_reference#infra)。
 *  帳戶層次中 {{site.data.keyword.containerlong_notm}} 的**管理者**平台管理角色。
 *  帳戶層次中 {{site.data.keyword.registrylong_notm}} 的**管理者**平台管理角色。請不要將 {{site.data.keyword.registryshort_notm}} 的原則限制為資源群組層次。如果您在 2018 年 10 月 4 日之前開始使用 {{site.data.keyword.registrylong_notm}}，請確定您[啟用 {{site.data.keyword.Bluemix_notm}} IAM 原則強制執行](/docs/services/Registry?topic=registry-user#existing_users)。
 
@@ -246,7 +243,7 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
                      Resource
         ```
         {: screen}
-    2. 尋找具有下列項目的原則：**Service Name** 值為 `containers-kubernetes`，且 **Service Instance** 值為叢集 ID。您可以執行下列指令來尋找叢集 ID：`ibmcloud ks cluster-get --cluster <cluster_name>`。例如，此原則指出使用者可以存取特定叢集：
+    2. 尋找具有下列項目的原則：**Service Name** 值為 `containers-kubernetes`，且 **Service Instance** 值為叢集 ID。您可以執行 `ibmcloud ks cluster-get --cluster <cluster_name>` 來尋找叢集 ID。例如，此原則指出使用者可以存取特定叢集：
         ```
         Policy ID:   140555ce-93ac-4fb2-b15d-6ad726795d90
         Roles:       Administrator
@@ -372,7 +369,7 @@ Instance ID inconsistent with worker records
 
 {: tsResolve}
 1.  檢查您叢集所在的地區目前使用哪個基礎架構帳戶來佈建叢集。
-    1.  登入 [{{site.data.keyword.containerlong_notm}} 叢集主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/clusters)。
+    1.  登入 [{{site.data.keyword.containerlong_notm}} 叢集主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/clusters)。
     2.  從表格中，選取您的叢集。
     3.  在**概觀**標籤中，檢查**基礎架構使用者**欄位。此欄位可協助您判斷 {{site.data.keyword.containerlong_notm}} 帳戶是否使用與預設值不同的基礎架構帳戶。
         * 如果您看不到**基礎架構使用者**欄位，表示您的已鏈結「隨收隨付制」帳戶會將相同的認證用於基礎架構及平台帳戶。無法修改的叢集可能佈建至不同的基礎架構帳戶。
@@ -409,7 +406,7 @@ Instance ID inconsistent with worker records
 主節點與工作者節點之間的 OpenVPN 連線未正常運作。
 
 {: tsResolve}
-1. 如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+1. 如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 2. 重新啟動 OpenVPN 用戶端 Pod。
   ```
@@ -591,8 +588,8 @@ This service doesn't support creation of keys
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.12.6
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.12.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.12.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.12.7
   ```
   {: screen}
 
@@ -654,7 +651,7 @@ unable to validate against any pod security policy
 
 如果您已刪除 {{site.data.keyword.IBM_notm}} 叢集管理資源，請重新整理 Kubernetes 主節點來還原它。
 
-1.  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+1.  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2.  重新整理 Kubernetes 主節點來還原它。
 
     ```
@@ -680,17 +677,19 @@ unable to validate against any pod security policy
 {: tsResolve}
 
 您可以嘗試下列其中一種解決方案：
-  - 執行 `ibmcloud ks clusters`，來檢查叢集的狀態。然後，執行下列指令以檢查並確定已部署工作者節點：`ibmcloud ks workers --cluster <cluster_name>`。
-  - 查看您的 VLAN 是否有效。VLAN 若要有效，則必須與基礎架構相關聯，且該基礎架構可以管理具有本端磁碟儲存空間的工作者節點。您可以藉由執行下列指令來[列出您的 VLAN](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)：`ibmcloud ks vlans --zone <zone>`，如果 VLAN 未顯示在清單中，表示它是無效的。請選擇其他 VLAN。
-
+  - 執行 `ibmcloud ks clusters`，來檢查叢集的狀態。然後，執行 `ibmcloud ks workers --cluster <cluster_name>`，來檢查並確定已部署工作者節點。
+  - 查看您的 VLAN 是否有效。VLAN 若要有效，則必須與基礎架構相關聯，且該基礎架構可以管理具有本端磁碟儲存空間的工作者節點。您可以執行 `ibmcloud ks vlans --zone <zone>` 來[列出 VLAN](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)，如果 VLAN 未顯示在清單中，則它是無效的。請選擇其他 VLAN。
 
 <br />
+
+
 
 
 ## 無法從登錄取回映像檔
 {: #ts_image_pull}
 
 {: tsSymptoms}
+
 當您部署工作負載從 {{site.data.keyword.registrylong_notm}} 取回映像檔時，您的 Pod 會失敗並處於 **`ImagePullBackOff`** 狀態。
 
 ```
@@ -724,7 +723,7 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
 {: screen}
 
 {: tsCauses}
-您的叢集使用儲存在[映像檔取回密碼](/docs/containers?topic=containers-images#cluster_registry_auth)中的 API 金鑰或記號，來授權叢集，以從 {{site.data.keyword.registrylong_notm}} 取回映像檔。依預設，新叢集具有使用 API 金鑰的映像檔取回密碼，以便叢集從已部署至 `default` Kubernetes 名稱空間之容器的任何區域登錄中，取回映像檔。如果叢集具有使用記號的映像檔取回密碼，則預設的 {{site.data.keyword.registrylong_notm}} 存取權會進一步受限於特定區域登錄。
+您的叢集使用儲存在[映像檔取回密碼](/docs/containers?topic=containers-images#cluster_registry_auth)中的 API 金鑰或記號，來授權叢集，以從 {{site.data.keyword.registrylong_notm}} 取回映像檔。依預設，新叢集具有使用 API 金鑰的映像檔取回密碼，以讓叢集可從已部署至 `default` Kubernetes 名稱空間之容器的任何地區 `icr.io` 登錄中取回映像檔。如果叢集具有使用記號的映像檔取回密碼，則預設的 {{site.data.keyword.registrylong_notm}} 存取權會進一步受限於使用已淘汰 `<region>.registry.bluemix.net` 網域的特定地區登錄。
 
 {: tsResolve}
 
@@ -827,8 +826,8 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
         ```
         {: pre}
 
-        輸出範例：
-        ```
+            輸出範例：
+    ```
         {"auths":{"<region>.icr.io":{"username":"iamapikey","password":"<password_string>","email":"<name@abc.com>","auth":"<auth_string>"}}}
         ```
         {: screen}
@@ -844,8 +843,8 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
             ```
             {: pre}
         2.  在 `default` Kubernetes 名稱空間中，重建部署。如果您仍看到授權錯誤訊息，請使用新的映像檔取回密碼，重複步驟 1-5。如果您仍無法登入，[請在 Slack 上聯絡 IBM 團隊，或開立 {{site.data.keyword.Bluemix_notm}} 支援案例](#clusters_getting_help)。
-    6.  如果登入成功，請在本端取回映像檔。如果指令失敗且發生 `access denied` 錯誤，則登錄帳戶所在的 {{site.data.keyword.Bluemix_notm}} 帳戶不同於叢集所在的帳戶。[建立映像檔取回密碼以在其他帳戶中存取映像檔](/docs/containers?topic=containers-images#other_registry_accounts)。如果指令成功，[請在 Slack 上聯絡 IBM 團隊，或開立 {{site.data.keyword.Bluemix_notm}} 支援案例](#clusters_getting_help)。
-        ```
+    6.  如果登入成功，請在本端取回映像檔。如果指令失敗且發生 `access denied` 錯誤，則登錄帳戶所在的 {{site.data.keyword.Bluemix_notm}} 帳戶不同於叢集所在的帳戶。[建立映像檔取回密碼以在其他帳戶中存取映像檔](/docs/containers?topic=containers-images#other_registry_accounts)。如果您可以將映像檔取回至本端機器，則 API 金鑰具有正確的許可權，但叢集中的 API 設定不正確。您無法解決此問題。[請在 Slack 上聯絡 IBM 團隊，或開立 {{site.data.keyword.Bluemix_notm}} 支援案例](#clusters_getting_help)。
+    ```
         docker pull <region>icr.io/<namespace>/<image>:<tag>
         ```
         {: pre}
@@ -1012,32 +1011,44 @@ Pod 順利部署至叢集，但容器未啟動。
 若要查看是否將 Pod 取代為較高優先順序的 Pod，請執行下列動作：
 1.  取得 Pod 的名稱。
 
-  ```
-  kubectl get pods
-  ```
-  {: pre}
+    ```
+    kubectl get pods
+    ```
+    {: pre}
 
-2.  說明您的 Pod YAML：`kubectl get pod <pod_name> -o yaml`
+2.  說明 Pod YAML。
+
+    ```
+    kubectl get pod <pod_name> -o yaml
+    ```
+    {: pre}
 
 3.  檢查 `priorityClassName` 欄位。
 
     1.  如果沒有 `priorityClassName` 欄位值，則 Pod 會有 `globalDefault` 優先順序類別。如果您的叢集管理者未設定 `globalDefault` 優先順序類別，則預設值為零 (0) 或最低優先順序。任何具有較高優先順序類別的 Pod 都可以先占或移除您的 Pod。
-    2.  如果有 `priorityClassName` 欄位值，請取得優先順序類別：`kubectl get priorityclass <priority_class_name> -o yaml`
+
+    2.  如果有 `priorityClassName` 欄位值，則請取得優先順序類別。
+
+        ```
+        kubectl get priorityclass <priority_class_name> -o yaml
+        ```
+        {: pre}
+
     3.  記下 `value` 欄位，以檢查您的 Pod 優先順序。
 
 4.  列出叢集裡的現有優先順序類別。
 
-  ```
-  kubectl get priorityclasses
-  ```
-  {: pre}
+    ```
+    kubectl get priorityclasses
+    ```
+    {: pre}
 
 5.  對於每個優先順序類別，取得 YAML 檔案，並記下 `value` 欄位。
 
-  ```
-  kubectl get priorityclass <priority_class_name> -o yaml
-  ```
-  {: pre}
+    ```
+    kubectl get priorityclass <priority_class_name> -o yaml
+    ```
+    {: pre}
 
 6.  將 Pod 的優先順序類別值與其他優先順序類別值比較，以查看其優先順序較高或較低。
 
@@ -1115,7 +1126,7 @@ Pod 順利部署至叢集，但容器未啟動。
 
 {: tsSymptoms}
 
-當您嘗試安裝 Helm Tiller，或想要從公用登錄（例如 Dockerhub）部署映像檔時，安裝失敗並傳回類似下列的錯誤：
+當您嘗試安裝 Helm Tiller 或要從公用登錄（例如 DockerHub）部署映像檔時，安裝失敗並傳回類似下列內容的錯誤：
 
 ```
 Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:
@@ -1127,7 +1138,7 @@ Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = 
 
 {: tsResolve}
 - 如果您有自訂防火牆或設定自訂 Calico 原則，請容許工作者節點與儲存映像檔之容器儲存庫之間的出埠及入埠網路資料流量。如果映像檔儲存在 {{site.data.keyword.registryshort_notm}} 中，請檢閱[容許叢集存取基礎架構資源及其他服務](/docs/containers?topic=containers-firewall#firewall_outbound)中的必要埠。
-- 如果您利用只啟用專用服務端點的方式來建立專用叢集，則可以針對您的叢集，[啟用公用服務端點](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)。如果想要在專用叢集中安裝 Helm 圖表，而不需開啟公用連線，則可安裝 Helm（[含 Tiller](/docs/containers?topic=containers-integrations#private_local_tiller) 或[不含 Tiller](/docs/containers?topic=containers-integrations#private_install_without_tiller)）。
+- 如果您利用只啟用專用服務端點的方式來建立專用叢集，則可以針對您的叢集，[啟用公用服務端點](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)。如果想要在專用叢集中安裝 Helm 圖表，而不需開啟公用連線，則可安裝 Helm（[含 Tiller](/docs/containers?topic=containers-helm#private_local_tiller) 或[不含 Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)）。
 
 <br />
 

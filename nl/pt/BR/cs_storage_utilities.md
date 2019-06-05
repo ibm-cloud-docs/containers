@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -29,7 +29,7 @@ subcollection: containers
 ## Instalando o plug-in do IBM Cloud Block Storage Attacher (beta)
 {: #block_storage_attacher}
 
-Use o {{site.data.keyword.Bluemix_notm}} Plug-in do Attacher de armazenamento de bloco para anexar armazenamento de bloco bruto, não formatado e desmontado em um nó do trabalhador em seu cluster.
+Use o {{site.data.keyword.Bluemix_notm}} Plug-in do Attacher de armazenamento de bloco para anexar armazenamento de bloco bruto, não formatado e desmontado em um nó do trabalhador em seu cluster.  
 {: shortdesc}
 
 Por exemplo, você deseja armazenar seus dados com uma solução de armazenamento definida pelo software (SDS), como [Portworx](/docs/containers?topic=containers-portworx), mas você não deseja usar nós do trabalhador bare metal que são otimizados para uso do SDS e que vêm com discos locais extras. Para incluir discos locais em seu nó do trabalhador não SDS, deve-se criar manualmente seus dispositivos de armazenamento de bloco em sua conta de infraestrutura do {{site.data.keyword.Bluemix_notm}} e usar o {{site.data.keyword.Bluemix_notm}} Block Volume Attacher para anexar o armazenamento ao nó do trabalhador não SDS.
@@ -39,7 +39,7 @@ O plug-in do {{site.data.keyword.Bluemix_notm}} Block Volume Attacher cria os po
 Procurando instruções sobre como atualizar ou remover o plug-in do {{site.data.keyword.Bluemix_notm}} Block Volume Attacher? Consulte [Atualizando o plug-in](#update_block_attacher) e [Removendo o plug-in](#remove_block_attacher).
 {: tip}
 
-1.  [Siga as instruções](/docs/containers?topic=containers-integrations#helm) para instalar o cliente Helm em sua máquina local e instale o servidor Helm (tiller) com uma conta do serviço em seu cluster.
+1.  [Siga as instruções](/docs/containers?topic=containers-helm#public_helm_install) para instalar o cliente Helm em sua máquina local e instale o servidor Helm (tiller) com uma conta do serviço em seu cluster.
 
 2.  Verifique se o tiller está instalado com uma conta do serviço.
 
@@ -63,7 +63,7 @@ Procurando instruções sobre como atualizar ou remover o plug-in do {{site.data
 
 4. Instale o  {{site.data.keyword.Bluemix_notm}}  Plug-in do Attacher de volume de bloco do  {{site.data.keyword.Bluemix_notm}} . Quando você instala o plug-in, classes de armazenamento de bloco predefinidas são incluídas no cluster.
    ```
-   helm install ibm/ibm-block-storage-attacher -- name block-attacher
+   helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
    {: pre}
 
@@ -143,7 +143,7 @@ Procurando instruções sobre como atualizar ou remover o plug-in do {{site.data
 
 2. Opcional: faça download do gráfico Helm mais recente em sua máquina local. Em seguida, extraia o pacote e revise o arquivo `release.md` para localizar as informações de liberação mais recentes.
    ```
-   helm fetch ibm/ibmcloud-block-storage-plugin
+   helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -229,13 +229,13 @@ Para incluir configurações de armazenamento de bloco diferentes, inclua o arma
     ```
     {: pre}
 
-2. Navegue para o diretório  ` block-storage-utilities ` .
+3. Navegue para o diretório  ` block-storage-utilities ` .
    ```
    cd ibmcloud-storage-utilities/block-storage-provisioner
    ```
    {: pre}
 
-3. Abra o arquivo `yamlgen.yaml` e especifique a configuração de armazenamento de bloco que você deseja incluir em cada nó do trabalhador no cluster.
+4. Abra o arquivo `yamlgen.yaml` e especifique a configuração de armazenamento de bloco que você deseja incluir em cada nó do trabalhador no cluster.
    ```
    #
    # É possível especificar somente 'performance' OU 'endurance' e a cláusula associada
@@ -282,16 +282,16 @@ Para incluir configurações de armazenamento de bloco diferentes, inclua o arma
    <td>Insira o tamanho de seu armazenamento em gigabytes. Consulte [Decidindo sobre a configuração de armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) para localizar tamanhos suportados para a sua camada de armazenamento. </td>
    </tr>
    </tbody>
-   </table>
+   </table>  
 
-4. Recupere o nome do usuário da infraestrutura do IBM Cloud (SoftLayer) e a chave de API. O nome do usuário e a chave API são usados pelo script `mkpvvyaml` para acessar o cluster.
+5. Recupere o nome do usuário da infraestrutura do IBM Cloud (SoftLayer) e a chave de API. O nome do usuário e a chave API são usados pelo script `mkpvvyaml` para acessar o cluster.
    1. Efetue login no [console do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/).
    2. No menu ![Ícone de menu](../icons/icon_hamburger.svg "Ícone de menu"), selecione **Infraestrutura**.
    3. Na barra de menus, selecione **Conta** > **Usuários** > **Lista de usuários**.
    4. Localize o usuário cujo nome de usuário e chave de API você deseja recuperar.
    5. Clique em **Gerar** para gerar uma chave de API ou **Visualizar** para visualizar sua chave de API existente. Uma janela pop-up é aberta que mostra o nome do usuário e a chave de API da infraestrutura.
 
-5. Armazene as credenciais em uma variável de ambiente.
+6. Armazene as credenciais em uma variável de ambiente.
    1. Inclua as variáveis de ambiente.
       ```
       export SL_USERNAME=<infrastructure_username>
@@ -309,7 +309,7 @@ Para incluir configurações de armazenamento de bloco diferentes, inclua o arma
       ```
       {: pre}
 
-6.  Construa e execute o contêiner  ` mkpvyaml ` . Quando você executa o contêiner por meio da imagem, o script `mkpvyaml.py` é executado. O script inclui um dispositivo de armazenamento de bloco em cada nó do trabalhador no cluster e autoriza cada nó do trabalhador a acessar o dispositivo de armazenamento de bloco. No final do script, um arquivo IAML `pv-<cluster_name>.yaml` é gerado e pode ser usado posteriormente para criar os volumes persistentes no cluster.
+7.  Construa e execute o contêiner  ` mkpvyaml ` . Quando você executa o contêiner por meio da imagem, o script `mkpvyaml.py` é executado. O script inclui um dispositivo de armazenamento de bloco em cada nó do trabalhador no cluster e autoriza cada nó do trabalhador a acessar o dispositivo de armazenamento de bloco. No final do script, um arquivo IAML `pv-<cluster_name>.yaml` é gerado e pode ser usado posteriormente para criar os volumes persistentes no cluster.
     1.  Construa o contêiner  ` mkpvyaml ` .
         ```
         docker build -t mkpvyaml.
@@ -342,7 +342,7 @@ Para incluir configurações de armazenamento de bloco diferentes, inclua o arma
         {: screen}
     2.  Execute o contêiner para executar o script `mkpvyaml.py`.
         ```
-        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
+        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME mkpvyaml
         ```
         {: pre}
 
@@ -410,7 +410,7 @@ Use essa opção se você desejar incluir configurações de armazenamento de bl
    ```
    {: pre}
 
-2. Revise a etapa 3 e 4 em [Decidindo sobre a configuração de armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) para escolher o tipo, o tamanho e o número de IOPS para o dispositivo de armazenamento de bloco que você deseja incluir em seu nó do trabalhador não SDS.
+2. Revise a etapa 3 e 4 em [Decidindo sobre a configuração de armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) para escolher o tipo, o tamanho e o número de IOPS para o dispositivo de armazenamento de bloco que você deseja incluir em seu nó do trabalhador não SDS.    
 
 3. Crie o dispositivo de armazenamento de bloco na mesma zona em que seu nó do trabalhador não SDS está.
 
@@ -435,7 +435,7 @@ Use essa opção se você desejar incluir configurações de armazenamento de bl
    Saída de exemplo:
    ```
    id         username          datacenter   storage_type                capacity_gb   bytes_used   ip_addr         lunId   active_transactions
-   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0
+   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0   
    ```
    {: screen}
 
@@ -461,7 +461,7 @@ Use essa opção se você desejar incluir configurações de armazenamento de bl
    ```
    {: screen}
 
-6. Autorize o nó do trabalhador não SDS a acessar o dispositivo de armazenamento de bloco. Substitua `<volume_ID>` com o ID do volume de seu dispositivo de armazenamento de bloco que você recuperou anteriormente e `<private_worker_IP>` com o endereço IP privado do nó do trabalhador não SDS no qual você deseja anexar o dispositivo.
+6. Autorize o nó do trabalhador não SDS a acessar o dispositivo de armazenamento de bloco. Substitua `<volume_ID>` pelo ID de volume do seu dispositivo de armazenamento de bloco recuperado anteriormente e `<private_worker_IP>` pelo endereço IP privado do nó do trabalhador que não é SDS no qual deseja conectar o dispositivo.
 
    ```
    ibmcloud sl block access-authorize <volume_ID> -p <private_worker_IP>
@@ -483,7 +483,7 @@ Use essa opção se você desejar incluir configurações de armazenamento de bl
    Saída de exemplo:
    ```
    ID          name                 type   private_ip_address   source_subnet   host_iqn                                      username   password           allowed_host_id
-   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581
+   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581   
    ```
    {: screen}
 
@@ -500,12 +500,12 @@ Para anexar o dispositivo de armazenamento de bloco a um nó do trabalhador não
 
 ** Antes de iniciar **:
 - Certifique-se de ter criado [automaticamente](#automatic_block) ou [manualmente](#manual_block) um armazenamento de bloco bruto, não formatado e desmontado em seus nós do trabalhador não SDS.
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Para conectar o armazenamento de bloco bruto a nós do trabalhador não SDS**:
-1. Prepare a criação do PV.
+1. Prepare a criação do PV.  
    - **Se você usou o contêiner `mkpvyaml` container:**
-     1. Abra o  ` pv-<cluster_name>arquivo .yaml ` .
+     1. Abra o arquivo `pv-<cluster_name>.yaml`.
         ```
         nano pv-< cluster_name> .yaml
         ```
@@ -552,7 +552,7 @@ Para anexar o dispositivo de armazenamento de bloco a um nó do trabalhador não
         </thead>
         <tbody>
       	<tr>
-      	<td><code>metadata.name</code></td>
+          <td><code>metadata.name</code></td>
       	<td>Insira um nome para seu PV.</td>
       	</tr>
         <tr>
@@ -580,7 +580,7 @@ Para anexar o dispositivo de armazenamento de bloco a um nó do trabalhador não
         <td>Insira o endereço IP privado do nó do trabalhador no qual você deseja anexar o dispositivo de armazenamento de bloco e que você autorizou anteriormente para acessar seu dispositivo de armazenamento de bloco. </td>
         </tr>
         <tr>
-        <td><code> ibm.io/volID </code></td>
+          <td><code> ibm.io/volID </code></td>
         <td>Insira o ID do volume de armazenamento de bloco que você recuperou anteriormente. </td>
         </tr>
         <tr>

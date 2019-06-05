@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -64,7 +64,7 @@ subcollection: containers
 | [`Pod` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | Pod 是工作負載的最小可部署單元，而且可以保留單一或多個容器。與容器類似，Pod 是設計為可移除的，而且通常用於應用程式功能的單元測試。若要避免應用程式關閉，請考量使用 Kubernetes 控制器（例如部署）來部署 Pod。部署可協助您管理多個 Pod、抄本、Pod 調整、推出和其他。|
 | [`ReplicaSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | 抄本集可確保 Pod 的多個抄本執行中，並在 Pod 關閉時重新排定 Pod。您可以建立抄本集以測試 Pod 排程如何運作，但若要管理應用程式更新、推出和調整，請改為建立一個部署。|
 | [`Deployment` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | 部署是管理 Pod 或 Pod 範本的[抄本集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) 的控制器。您可以在沒有部署的情況下建立 Pod 或抄本集來測試應用程式功能。若為正式作業層次設定，請使用部署來管理應用程式更新、推出及調整。|
-| [`StatefulSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | 與部署類似，有狀態集是管理一組 Pod 抄本的控制器。與部署不同的是，有狀態集確保您的 Pod 具有唯一的網路身分，可在重新排程時維護其狀態。當您要在雲端中執行工作負載時，請嘗試將應用程式設計為無狀態，以讓您的服務實例彼此獨立，且在失敗時不會中斷服務。不過，有些應用程式（例如資料庫）必須是無狀態。對於這些情況，請考量建立有狀態集，並使用[檔案](/docs/containers?topic=containers-file_storage#file_statefulset)、[區塊](/docs/containers?topic=containers-block_storage#block_statefulset)或[物件](/docs/containers?topic=containers-object_storage#cos_statefulset)儲存空間，作為有狀態集的持續性儲存空間。您也可以在裸機工作者節點上安裝 [Portworx](/docs/containers?topic=containers-portworx)，並使用 Portworx 作為高度可用的軟體定義儲存空間解決方案，來管理有狀態集的持續性儲存空間。|
+| [`StatefulSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | 與部署類似，有狀態集是管理一組 Pod 抄本的控制器。與部署不同的是，有狀態集確保您的 Pod 具有唯一的網路身分，可在重新排程時維護其狀態。當您要在雲端中執行工作負載時，請嘗試[將應用程式設計為無狀態](/docs/containers?topic=containers-strategy#cloud_workloads)，以讓您的服務實例彼此獨立，且在失敗時不會中斷服務。不過，部分應用程式（例如資料庫）必須是有狀態。對於這些情況，請考量建立有狀態集，並使用[檔案](/docs/containers?topic=containers-file_storage#file_statefulset)、[區塊](/docs/containers?topic=containers-block_storage#block_statefulset)或[物件](/docs/containers?topic=containers-object_storage#cos_statefulset)儲存空間，作為有狀態集的持續性儲存空間。您也可以在裸機工作者節點上安裝 [Portworx](/docs/containers?topic=containers-portworx)，並使用 Portworx 作為高度可用的軟體定義儲存空間解決方案，來管理有狀態集的持續性儲存空間。|
 | [`DaemonSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | 當您必須在叢集中的每個工作者節點上執行相同的 Pod 時，請使用常駐程式集。當工作者節點新增至叢集時，會自動排定常駐程式集所管理的 Pod。一般使用案例包括日誌收集器（例如 `logstash` 或 `promtheus`），可從每個工作者節點收集日誌，以洞察叢集或應用程式的性能。|
 | [`Job` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | 工作可確保一個以上的 Pod 順利完成。您可將工作用於佇列或批次工作，來支援個別但相關工作項目的平行處理（例如，要呈現的特定頁框數、要傳送的電子郵件，以及要轉換的檔案）。若要排定工作在特定時間執行，請使用 [`CronJob` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)。|
 {: caption="您可以建立的 Kubernetes 工作負載物件的類型。" caption-side="top"}
@@ -78,7 +78,7 @@ subcollection: containers
 * [埠](#port)
 * [資源要求及限制](#resourcereq)
 * [存活性及備妥探測](#probe)
-* [服務](#service)，用來在埠上公開應用程式服務
+* [服務](#app-service)，用來在埠上公開應用程式服務
 * [ConfigMap](#configmap)，用來設定容器環境變數
 * [密碼](#secret)，用來設定容器環境變數
 * [持續性磁區](#pv)，裝載至容器以供儲存使用
@@ -102,14 +102,14 @@ subcollection: containers
 
 <dt>密碼</dt>
 <dd>將機密性資訊提供給工作負載，如下所示。請注意，叢集的其他使用者可能有權存取密碼，因此，請確定您知道可以與那些使用者共用密碼資訊。<ul><li><strong>個人識別資訊 (PII)</strong>：在密碼中儲存機密性資訊，例如電子郵件位址或公司規範或政府法規所需的其他類型資訊。</li>
-<li><strong>認證</strong>：放置密碼、金鑰和記號這類認證，以減少意外曝光的風險。例如，當您[連結服務](/docs/containers?topic=containers-integrations#adding_cluster)至叢集時，認證會儲存在密碼中。</li></ul></dd>
+<li><strong>認證</strong>：放置密碼、金鑰和記號這類認證，以減少意外曝光的風險。例如，當您[連結服務](/docs/containers?topic=containers-service-binding#bind-services)至叢集時，認證會儲存在密碼中。</li></ul></dd>
 </dl>
 
 想要讓您的密碼更加安全嗎？要求叢集管理者在您的叢集裡[啟用 {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect)，以加密新密碼及現有密碼。
 {: tip}
 
 ### 如何將 IBM 服務新增至我的應用程式，例如 Watson？
-請參閱[將服務新增至應用程式](/docs/containers?topic=containers-integrations#adding_app)。
+請參閱[將服務新增至應用程式](/docs/containers?topic=containers-service-binding#adding_app)。
 
 ### 如何確定我的應用程式具有正確的資源？
 當您[指定應用程式 YAML 檔案](#app_yaml)時，可以將 Kubernetes 功能新增至應用程式配置，以協助您的應用程式取得正確的資源。具體而言，針對 YAML 檔案中所定義的每一個容器，[設定資源限制及要求 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)。
@@ -130,7 +130,7 @@ subcollection: containers
 *  **僅限專用 VLAN 標準叢集**：您可以使用 [NodePort、負載平衡器或 Ingress 服務](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)來公開應用程式。您也必須在防火牆中開啟服務專用 IP 位址的埠。
 
 ### 在我部署應用程式之後，如何監視其性能？
-您可以針對叢集設定 {{site.data.keyword.Bluemix_notm}} [記載和監視](/docs/containers?topic=containers-health#health)。您也可以選擇與協力廠商[記載或監視服務](/docs/containers?topic=containers-integrations#health_services)整合。
+您可以針對叢集設定 {{site.data.keyword.Bluemix_notm}} [記載和監視](/docs/containers?topic=containers-health#health)。您也可以選擇與協力廠商[記載或監視服務](/docs/containers?topic=containers-supported_integrations#health_services)整合。
 {: shortdesc}
 
 ### 如何將我的應用程式保持最新狀態？
@@ -199,9 +199,9 @@ subcollection: containers
   <p>Pod 會平均分佈到各區域，但不一定會分佈到各節點。例如，如果您叢集的 3 個區域各有 1 個節點，並且部署 6 個 Pod 的抄本集，則每個節點都會取得 2 個 Pod。不過，如果您叢集的 3 個區域各有 2 個節點，並且部署 6 個 Pod 的抄本集，則每個區域會排定 2 個 Pod，而且每個節點或許會排定 1 個 Pod 也或許未排定。如需進一步控制排程，您可以[設定 Pod 親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node)。</p>
   <p><strong>如果區域關閉，如何將 Pod 重新排定至其他區域中的其餘節點？</strong></br>它取決於您在部署中使用的排程原則。如果您已包括[節點特定 Pod 親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)，則不會重新排定 Pod。如果您未這麼做，則會在其他區域的可用工作者節點上建立 Pod，但它們可能不平衡。例如，2 個 Pod 可能會分散到 2 個可用節點，或者它們可能會同時排定到具有可用容量的 1 個節點。同樣地，傳回無法使用區域時，不會自動刪除 Pod，也不會重新讓它在各節點之間保持平衡。如果您要在備份區域之後重新讓 Pod 在各區域之間保持平衡，請考慮使用 [Kubernetes 取消排程器 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes-incubator/descheduler)。</p>
   <p><strong>提示</strong>：在多區域叢集裡，請嘗試將每個區域的工作者節點容量保持為 50%，讓您有足夠的剩餘容量來保護叢集不發生區域失敗。</p>
-  <p><strong>如果我要將應用程式分散到各地區，該怎麼辨？</strong></br>為了保護應用程式不發生地區失敗，請在另一個地區建立第二個叢集、[設定廣域負載平衡器](/docs/containers?topic=containers-plan_clusters#multiple_clusters)以連接叢集，以及使用部署 YAML，以利用應用程式的 [Pod 反親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 來部署重複抄本集。</p>
+  <p><strong>如果我要將應用程式分散到各地區，該怎麼辨？</strong></br>為了保護應用程式不發生地區失敗，請在另一個地區建立第二個叢集、[設定廣域負載平衡器](/docs/containers?topic=containers-plan_clusters#multiple_clusters)以連接叢集，以及使用部署 YAML 利用應用程式的 [Pod 反親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 來部署重複抄本集。</p>
   <p><strong>如果應用程式需要持續性儲存空間，該怎麼辨？</strong></p>
-  <p>請使用雲端服務（例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)）。</p></dd>
+  <p>請使用雲端服務（例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)）。</p></dd>
 </dl>
 
 ## 在 YAML 檔案中指定應用程式需求
@@ -219,7 +219,7 @@ subcollection: containers
 * [埠](#port)
 * [資源要求及限制](#resourcereq)
 * [存活性及備妥探測](#probe)
-* [服務](#service)，用來在埠上公開應用程式服務
+* [服務](#app-service)，用來在埠上公開應用程式服務
 * [ConfigMap](#configmap)，用來設定容器環境變數
 * [密碼](#secret)，用來設定容器環境變數
 * [持續性磁區](#pv)，裝載至容器以供儲存使用
@@ -241,7 +241,7 @@ kind: Deployment
 </pre></code></p></dd>
 
 <dt id="label">標籤</dt>
-  <dd><p>搭配標籤，您可以使用相同的 `key: value` 配對，標示叢集裡不同的資源類型。然後，您可以指定要符合標籤的選取器，讓您可以針對這些其他資源進行建置。如果您計劃公開應用程式，則必須使用一個符合您在服務中指定之選取器的標籤。在範例中，部署規格會使用符合標籤 `app: wasliberty` 的範本。</p>
+  <dd><p>搭配[標籤](/docs/containers?topic=containers-strategy#deploy_organize)，您可以使用相同的 `key: value` 配對，標示叢集中不同類型的資源。然後，您可以指定要符合標籤的選取器，讓您可以針對這些其他資源進行建置。如果您計劃公開應用程式，則必須使用一個符合您在服務中指定之選取器的標籤。在範例中，部署規格會使用符合標籤 `app: wasliberty` 的範本。</p>
   <p>您可以擷取叢集裡標示的物件，例如，查看 `staging` 或 `production` 元件。例如，列出叢集裡所有名稱空間內具有 `env: production` 標籤的所有資源。請注意，您需要存取所有名稱空間，才能執行這個指令。<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>如需標籤的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)。</li>
   <li>如需更詳細的範例，請參閱[使用標籤將應用程式部署至特定工作者節點](/docs/containers?topic=containers-app#node_affinity)。</li></ul>
@@ -289,7 +289,7 @@ kind: Deployment
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">應用程式服務的埠</dt>
-  <dd><p>選取要在其上開啟應用程式服務的容器埠。若要查看需要開啟的埠，請參閱您的應用程式規格或 Dockerfile。此埠可從專用網路存取，但不能從公用網路連線存取。若要公開應用程式，您必須建立 NodePort、負載平衡器或 Ingress 服務。[建立 `Service` 物件](#service)時，您可以使用這個相同的埠號。</p>
+  <dd><p>選取要在其上開啟應用程式服務的容器埠。若要查看需要開啟的埠，請參閱您的應用程式規格或 Dockerfile。此埠可從專用網路存取，但不能從公用網路連線存取。若要公開應用程式，您必須建立 NodePort、負載平衡器或 Ingress 服務。[建立 `Service` 物件](#app-service)時，您可以使用這個相同的埠號。</p>
   <p><pre class="codeblock"><code>ports:
 - containerPort: 9080</pre></code></p></dd>
 
@@ -327,7 +327,7 @@ readinessProbe:
   initialDelaySeconds: 45
   periodSeconds: 5</pre></code></p></dd>
 
-<dt id="service">公開應用程式服務</dt>
+<dt id="app-service">公開應用程式服務</dt>
   <dd><p>您可以建立一個公開應用程式的服務。在 `spec` 區段中，確定 `port` 及標籤值與您在部署中使用的值相符。服務會在下列範例中公開符合標籤（例如 `app: wasliberty`）的物件。</p>
   <ul><li>依預設，服務會使用 [`ClusterIP ` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/)，這讓服務只能在叢集內存取，不能在叢集外存取。</li>
   <li>您可以建立 NodePort、負載平衡器或 Ingress 服務，以公開應用程式。這些服務有兩個 IP，一個外部及一個內部。在外部 IP 收到資料流量時，會將其轉遞至內部叢集 IP。然後，從內部叢集 IP 中，資料流量會遞送至應用程式的容器 IP。</li>
@@ -391,7 +391,7 @@ data:
 kind: Deployment
   metadata:
 name: wasliberty
-  spec:
+    spec:
   replicas: 3
   template:
       ...
@@ -485,6 +485,9 @@ metadata:
   name: wasliberty
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: wasliberty
   template:
     metadata:
       labels:
@@ -623,7 +626,7 @@ spec:
 開始之前：
 * 請確定已獲指派一個[服務角色](/docs/containers?topic=containers-users#platform)來授與適當的 Kubernetes RBAC 角色，以便您可以使用 Kubernetes 資源。
 * 如果要[從主控台啟動 Kubernetes 儀表板](#db_gui)，您必須獲指派一個[平台角色](/docs/containers?topic=containers-users#platform)。如果您只獲指派服務角色而無平台角色，請[從 CLI 啟動 Kubernetes 儀表板](#db_cli)。
-* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 您可以使用預設埠或設定自己的埠，來啟動叢集的 Kubernetes 儀表板。
 
@@ -698,7 +701,7 @@ spec:
 開始之前：
 
 -   [安裝必要的 CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)。
--   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+-   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   請確定已獲指派一個[服務角色](/docs/containers?topic=containers-users#platform)來授與適當的 Kubernetes RBAC 角色，以便您可以使用 Kubernetes 資源。
 -   如果要[從主控台啟動 Kubernetes 儀表板](#db_gui)，您必須獲指派一個[平台角色](/docs/containers?topic=containers-users#platform)。如果您只獲指派服務角色而無平台角色，請[從 CLI 啟動 Kubernetes 儀表板](#db_cli)。
 
@@ -728,7 +731,7 @@ spec:
 開始之前：
 
 -   安裝必要的 [CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)。
--   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+-   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   請確定已獲指派一個[服務角色](/docs/containers?topic=containers-users#platform)來授與適當的 Kubernetes RBAC 角色，以便您可以使用名稱空間中的 Kubernetes 資源。
 
 若要部署應用程式，請執行下列動作：
@@ -762,7 +765,7 @@ spec:
 {:shortdesc}
 
 開始之前：
-*   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   請確定已獲指派一個[服務角色](/docs/containers?topic=containers-users#platform)來授與適當的 Kubernetes RBAC 角色，以便您可以使用名稱空間中的 Kubernetes 資源。
 
 若要將應用程式部署至特定的工作者節點，請執行下列動作：
@@ -794,17 +797,17 @@ spec:
     Roles:              <none>
     Labels:             arch=amd64
                         beta.kubernetes.io/arch=amd64
-                        beta.kubernetes.io/instance-type=b2c.4x16.encrypted
+                        beta.kubernetes.io/instance-type=b3c.4x16.encrypted
                         beta.kubernetes.io/os=linux
                         failure-domain.beta.kubernetes.io/region=us-south
                         failure-domain.beta.kubernetes.io/zone=dal10
                         ibm-cloud.kubernetes.io/encrypted-docker-data=true
                         ibm-cloud.kubernetes.io/ha-worker=true
                         ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                        ibm-cloud.kubernetes.io/machine-type=b2c.4x16.encrypted
+                        ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.12.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.12.7_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -838,7 +841,7 @@ spec:
     ```
     {: codeblock}
 
-    在範例 YAML 的 **affinity** 區段中，`ibm-cloud.kubernetes.io/worker-pool-id` 是 `key`，`<worker_pool_ID>` 是 `value`。
+    在範例 YAML 的 **affinity** 區段中，`ibm-cloud.kubernetes.io/worker-pool-id` 是 `key`，而 `<worker_pool_ID>` 是 `value`。
 
 5. 套用已更新的部署配置檔。
     ```
@@ -876,9 +879,9 @@ spec:
 
         ```
         ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b3c.4x16          normal   Ready   dal12   1.8.6_1504
         ```
         {: screen}
 
@@ -900,7 +903,6 @@ spec:
 
 開始之前：
 * [建立一個裸機 GPU 機型](/docs/containers?topic=containers-clusters#clusters_cli)。請注意，此處理程序可能需要多個營業日才能完成。
-* 您的叢集主節點和 GPU 工作者節點必須執行 Kubernetes 1.10 版或更新版本。
 * 請確定已獲指派一個[服務角色](/docs/containers?topic=containers-users#platform)來授與適當的 Kubernetes RBAC 角色，以便您可以使用名稱空間中的 Kubernetes 資源。
 
 若要在 GPU 機器上執行工作負載，請執行下列動作：
@@ -941,7 +943,7 @@ spec:
     ```
     {: codeblock}
 
-    <table>
+    <table summary="此表格說明第 1 欄是 YAML 檔案欄位，第 2 欄是如何填寫這些欄位。">
     <caption>YAML 元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
@@ -1066,12 +1068,12 @@ spec:
 使用 Kubernetes，您可以啟用[水平 Pod 自動調整![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，根據 CPU 自動增加或減少應用程式的實例數目。
 {:shortdesc}
 
-要尋找調整 Cloud Foundry 應用程式的相關資訊嗎？請查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=services/Auto-Scaling-get-started)。
+要尋找調整 Cloud Foundry 應用程式的相關資訊嗎？請查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started#get-started)。
 想要調整工作者節點而非 Pod？請查看[叢集 autoscaler](/docs/containers?topic=containers-ca#ca)。
 {: tip}
 
 開始之前：
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Heapster 監視必須部署在您要自動調整的叢集裡。
 - 請確定已獲指派一個[服務角色](/docs/containers?topic=containers-users#platform)來授與適當的 Kubernetes RBAC 角色，以便您可以使用名稱空間中的 Kubernetes 資源。
 
@@ -1084,7 +1086,7 @@ spec:
     ```
     {: pre}
 
-    <table>
+    <table summary="說明第 1 欄是 Kubectl 指令選項，而第 2 欄是如何填寫這些選項的表格。">
     <caption>`kubectl run` 的指令元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解這個指令的元件</th>
@@ -1117,7 +1119,7 @@ spec:
     ```
     {: pre}
 
-    <table>
+    <table summary="說明第 1 欄是 Kubectl 指令選項，而第 2 欄是如何填寫這些選項的表格。">
     <caption>`kubectl autoscale` 的指令元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解這個指令的元件</th>
@@ -1151,12 +1153,65 @@ spec:
 {: tip}
 
 開始之前：
-*   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   建立[部署](#app_cli)。
 *   請確定您已經具有[服務角色](/docs/containers?topic=containers-users#platform)來授與適當的 Kubernetes RBAC 角色，以便您可以使用名稱空間中的 Kubernetes 資源。
 
 若要管理應用程式的漸進式更新，請執行下列動作：
-1.  [推出 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) 變更。例如，建議您變更起始部署中所用的映像檔。
+1.  若要確定只有在容器正在執行且已備妥要處理要求時，才將部署標示為備妥，請新增[存活性及就緒探測至部署](#probe)。
+
+2.  更新部署以包括漸進式更新策略，該策略在更新期間指定突波上限及無法使用的 Pod 或 Pod 百分比。
+
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:  
+      name: nginx-test
+    spec:
+      replicas: 10
+      selector:
+        matchLabels:
+          service: http-server
+      minReadySeconds: 5
+      progressDeadlineSeconds: 600
+      strategy: 
+        type: RollingUpdate  
+        rollingUpdate:    
+          maxUnavailable: 50%
+          maxSurge: 2
+    ...
+    ```
+    {: codeblock}
+
+    <table summary="此表格說明第 1 欄是 YAML 檔案欄位，第 2 欄是如何填寫這些欄位。">
+    <caption>YAML 元件</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>spec.minReadySeconds</code></td>
+    <td>依預設，部署會等到將 Pod 標示為 `ready`，再繼續推出。如果您注意到即使最新 Pod 中的應用程式尚未備妥，部署還是繼續建立 Pod，則請使用此欄位來減緩部署推出的速度。例如，如果您指定 `5`，則部署會在 Pod `ready` 之後先等待 5 秒，再建立下一個 Pod。</td>
+    </tr>
+    <tr>
+    <td><code>spec.progressDeadlineSeconds</code></td>
+    <td>設定將部署視為失敗之前的逾時（以秒為單位）。例如，若沒有逾時，如果您的新應用程式版本具有錯誤並立即停止，則無法繼續推出，因為 Pod 從未到達 `ready` 狀態。如果您將此逾時設為 `600` 秒，則推出的任何階段無法進行 10 分鐘時，會將部署標示為失敗，並停止推出。</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.type</code></td>
+    <td>指定 `RollingUpdate` 策略類型。</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxUnavailable</code></td>
+    <td>設定更新期間可能無法使用的 Pod 數目上限，以數字 (`2`) 或百分比 (`50%`) 表示。一般而言，請使用百分比，這樣，稍後變更抄本數目時，就不需要記得在這裡更新此數字，除非您要將推出限制為僅容許一次關閉一個 Pod。如果您絕不想低於 100% 容量，請將此值設為 `0%` 並指定 `spec.strategy.type.rollingUpdate.maxSurge` 參數。</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
+    <td>設定部署可在推出期間使用多少額外資源，以數字 (`2`) 或百分比 (`50%`) 表示。例如，如果部署指定 `10` 個抄本，而且您將 `maxSurge` 設為 `2`，則會在推出期間建立 2 個新抄本。您現在會有 12 個抄本（10 個現有抄本，2 個新抄本）。2 個新抄本備妥之後，部署會將舊抄本縮減到 8，以符合指定的 10 個抄本。此處理程序會繼續進行，直到推出完成為止，而且 10 個抄本全部都會執行新版本。<p class="tip">如果您要執行藍綠即時切換樣式更新，請將 `maxSurge` 設為 `100%`。部署會建立所有新的必要抄本，然後將舊版本抄本縮減為 0。</p></td>
+    </tr>
+    </tbody></table>
+
+3.  [推出 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) 變更。例如，建議您變更起始部署中所用的映像檔。
 
     1.  取得部署名稱。
 
@@ -1188,14 +1243,26 @@ spec:
 
     當您執行這些指令時，會立即套用變更，並記載推出歷程。
 
-2.  檢查部署的狀態。
+4.  檢查部署的狀態。
 
     ```
     kubectl rollout status deployments/<deployment_name>
     ```
     {: pre}
 
-3.  回復變更。
+    如果您注意到某事項的狀態需要您花時間跟進，則可以使用下列指令來暫停及繼續推出。
+
+    ```
+    kubectl rollout pause deployment <deployment_name>
+    ```
+    {: pre}
+
+    ```
+    kubectl rollout resume deployment <deployment_name>
+    ```
+    {: pre}
+
+5.  回復變更。
     1.  檢視部署的推出歷程，並識別前次部署的修訂號碼。
 
         ```

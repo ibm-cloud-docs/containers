@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks 
 
@@ -143,7 +143,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     <tr>
     <td><code>globalDefault</code></td>
     <td>선택사항: 이 우선순위를 `priorityClassName` 값 없이 스케줄되는 모든 팟(Pod)에 적용되는 글로벌 기본값으로 지정하려면 이 필드를 `true`로 설정하십시오. 클러스터에서 1개의 우선순위 클래스만 글로벌 기본값으로 설정될 수 있습니다. 글로벌 기본값이 없는 경우, `priorityClassName`이 지정되지 않은 팟(Pod)의 우선순위는 영(`0`)입니다.</br></br>
-    [기본 우선순위 클래스](#default_priority_class)는 `globalDefault`를 설정하지 않습니다. 클러스터에서 다른 우선순위 클래스를 작성한 경우에는 다음을 실행하여 `globalDefault`가 설정되지 않았는지 확인할 수 있습니다. `kubectl describe priorityclass <name>`.</td>
+    [기본 우선순위 클래스](#default_priority_class)는 `globalDefault`를 설정하지 않습니다. 클러스터에서 다른 우선순위 클래스를 작성한 경우에는 `kubectl describe priorityclass <name>`을 실행하여 `globalDefault`가 설정되지 않았는지 확인할 수 있습니다.</td>
     </tr>
     <tr>
     <td><code>description</code></td>
@@ -212,6 +212,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
       name: ibmliberty
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: ibmliberty
       template:
         metadata:
           labels:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -55,8 +55,14 @@ Fai riferimento alla seguente tabella per un riepilogo delle modifiche per ogni 
 </thead>
 <tbody>
 <tr>
+<td>411 / 315</td>
+<td>15 aprile 2019</td>
+<td>Aggiorna il valore della scadenza del cookie {{site.data.keyword.appid_full}} in modo che corrisponda al valore della scadenza del token di accesso.</td>
+<td>-</td>
+</tr>
+<tr>
 <td>411 / 306</td>
-<td>21 marzo 2019</td>
+<td>22 marzo 2019</td>
 <td>Aggiorna la versione di Go alla 1.12.1.</td>
 <td>-</td>
 </tr>
@@ -65,7 +71,7 @@ Fai riferimento alla seguente tabella per un riepilogo delle modifiche per ogni 
 <td>18 marzo 2019</td>
 <td><ul>
 <li>Corregge le vulnerabilità per le scansioni di immagini.</li>
-<li>Migliora la registrazione per {{site.data.keyword.appid_full}}.</li>
+<li>Migliora la registrazione per {{site.data.keyword.appid_full_notm}}.</li>
 </ul></td>
 <td>-</td>
 </tr>
@@ -101,8 +107,7 @@ Fai riferimento alla seguente tabella per un riepilogo delle modifiche per ogni 
 <li>Aggiorna la direttiva dell'ubicazione {{site.data.keyword.appid_short_notm}} in modo che l'annotazione `app-id` possa essere utilizzata insieme alle annotazioni `proxy-buffers`, `proxy-buffer-size` e `proxy-busy-buffer-size`.</li>
 <li>Corregge un bug in modo che i log informativi non vengano etichettati come errori.</li>
 </ul></td>
-<td>Disabilita TLS 1.0 e 1.1 per impostazione predefinita. Se i client che si connettono alle tue applicazioni supportano TLS 1.2, non è richiesta alcuna azione. Se hai ancora dei client legacy che richiedono il supporto TLS 1.0 o 1.1, abilita manualmente le versioni TLS richieste attenendoti a [questa procedura](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers). Per ulteriori informazioni su come visualizzare le versioni TLS utilizzate dai tuoi client per accedere alle applicazioni, vedi questo [post del blog {{site.data.keyword.Bluemix_notm}}](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).
-</td>
+<td>Disabilita TLS 1.0 e 1.1 per impostazione predefinita. Se i client che si connettono alle tue applicazioni supportano TLS 1.2, non è richiesta alcuna azione. Se hai ancora dei client legacy che richiedono il supporto TLS 1.0 o 1.1, abilita manualmente le versioni TLS richieste attenendoti a [questa procedura](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers). Per ulteriori informazioni su come visualizzare le versioni TLS utilizzate dai tuoi client per accedere alle applicazioni, vedi questo [post del blog {{site.data.keyword.Bluemix_notm}}](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
 </tr>
 <tr>
 <td>393 / 291</td>

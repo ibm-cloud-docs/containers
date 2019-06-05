@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, disaster recovery, dr, ha, hadr
 
@@ -57,7 +57,7 @@ L'architettura e l'infrastruttura di {{site.data.keyword.containerlong_notm}} so
 
 Non riavviare un nodo di lavoro durante un'interruzione del master. Questa azione rimuove i pod dal tuo nodo di lavoro. Poiché il server API Kubernetes non è disponibile, i pod non possono essere ripianificati su altri nodi di lavoro nel cluster.
 {: important}
- I master cluster sono altamente disponibili e includono repliche per il server API, etcd, il programma di pianificazione e il gestore controller Kubernetes su host separati per proteggerti in caso di interruzione, come durante un aggiornamento del master.</p><p>Per proteggere il tuo master del cluster da un malfunzionamento della zona, puoi: <ul><li>Creare un cluster in una [città metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones), che estende il master tra le zone.</li><li>Configurare un secondo cluster in un'altra zona.</li></ul></p>
+ I master cluster sono altamente disponibili e includono repliche per il server API, etcd, il programma di pianificazione e il gestore controller Kubernetes su host separati per proteggerti in caso di interruzione, come durante un aggiornamento del master.</p><p>Per proteggere il tuo master del cluster da un malfunzionamento della zona, puoi: <ul><li>Creare un cluster in una [località metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones), che estende il master tra le zone.</li><li>Configurare un secondo cluster in un'altra zona.</li></ul></p>
   <p>Vedi [Configurazione di cluster altamente disponibili.](/docs/containers?topic=containers-plan_clusters#ha_clusters)</p></dd>
 <dt> 4. Malfunzionamento della zona.</dt>
   <dd><p>Un malfunzionamento della zona riguarda tutti gli host di calcolo fisici e l'archiviazione NFS. I malfunzionamenti includono interruzioni di alimentazione, raffreddamento, collegamento in rete o di archiviazione e disastri naturali, come inondazioni, terremoti e uragani. Per proteggerti da un malfunzionamento della zona, devi disporre di cluster in due ubicazioni diverse il cui carico viene bilanciato dal programma di bilanciamento del carico esterno.</p>
@@ -66,6 +66,6 @@ Non riavviare un nodo di lavoro durante un'interruzione del master. Questa azion
   <dd><p>Ogni regione è configurata con un programma di bilanciamento del carico altamente disponibile accessibile dall'endpoint API specifico della regione. Il programma di bilanciamento del carico instrada le richieste in entrata e in uscita ai cluster nelle zone regionali. La probabilità di un malfunzionamento a livello dell'intera regione è bassa. Tuttavia, per tenere conto di questo malfunzionamento, puoi configurare più cluster in regioni diverse e collegarli utilizzando un programma di bilanciamento del carico esterno. Nel caso in cui si verifichi un malfunzionamento in un'intera regione, il cluster nell'altra regione può sostenere il carico di lavoro.</p><p class="note">Un cluster per più regioni richiede diverse risorse cloud e, a seconda della tua applicazione, può essere complesso e costoso. Controlla se hai bisogno di una configurazione per più regioni o se puoi gestire una potenziale interruzione del servizio. Se vuoi configurare un cluster per più regioni, assicurati che la tua applicazione e i dati possano essere ospitati in un'altra regione e che l'applicazione possa gestire la replica dei dati globali.</p>
   <p>Vedi [Configurazione di cluster altamente disponibili](/docs/containers?topic=containers-plan_clusters#ha_clusters).</p></dd>   
 <dt> 6a, 6b. Malfunzionamento dell'archiviazione.</dt>
-  <dd><p>In un'applicazione con stato, i dati svolgono un ruolo importante per mantenere operativa la tua applicazione. Vuoi assicurarti che i tuoi dati siano altamente disponibili in modo da poterli recuperare in caso di malfunzionamento. In {{site.data.keyword.containerlong_notm}}, puoi scegliere tra diverse opzioni per conservare i tuoi dati. Ad esempio, puoi eseguire il provisioning dell'archiviazione NFS utilizzando i volumi persistenti nativi di Kubernetes o memorizzare i tuoi dati utilizzando un servizio di database {{site.data.keyword.Bluemix_notm}}.</p>
+  <dd><p>In un'applicazione con stato, i dati svolgono un ruolo importante per mantenere operativa la tua applicazione. Assicurati che i tuoi dati siano altamente disponibili in modo da poterli recuperare in caso di malfunzionamento. In {{site.data.keyword.containerlong_notm}}, puoi scegliere tra diverse opzioni per conservare i tuoi dati. Ad esempio, puoi eseguire il provisioning dell'archiviazione NFS utilizzando i volumi persistenti nativi di Kubernetes o memorizzare i tuoi dati utilizzando un servizio di database {{site.data.keyword.Bluemix_notm}}.</p>
   <p>Vedi [Pianificazione di dati altamente disponibili](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).</p></dd>
 </dl>

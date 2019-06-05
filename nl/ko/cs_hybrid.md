@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -32,7 +32,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix}} Private 계정이 있으면 {{site.data.keyword.containerlong}}를 포함하여 선택된 {{site.data.keyword.Bluemix_notm}} 서비스에서 이를 사용할 수 있습니다. 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} Private 및 IBM 퍼블릭 클라우드의 하이브리드 환경 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://ibm.biz/hybridJune2018)의 블로그를 참조하십시오.
 {: shortdesc}
 
-사용자는 [{{site.data.keyword.Bluemix_notm}} 오퍼링](/docs/containers?topic=containers-cs_ov#differentiation)을 이해하고 있습니다. 이제 [퍼블릭 및 프라이빗 클라우드에 연결](#hybrid_vpn)하고 [공용 컨테이너용 프라이빗 패키지를 재사용](#hybrid_ppa_importer)할 수 있습니다.
+사용자는 [{{site.data.keyword.Bluemix_notm}} 오퍼링](/docs/containers?topic=containers-cs_ov#differentiation) 및 [클라우드에서 실행될 워크로드](/docs/containers?topic=containers-strategy#cloud_workloads)에 대해 개발된 Kubernetes 전략을 이해하고 있습니다. 이제 [퍼블릭 및 프라이빗 클라우드에 연결](#hybrid_vpn)하고 [공용 컨테이너용 프라이빗 패키지를 재사용](#hybrid_ppa_importer)할 수 있습니다.
 
 ## 퍼블릭 및 프라이빗 클라우드를 strongSwan VPN과 연결
 {: #hybrid_vpn}
@@ -94,6 +94,11 @@ subcollection: containers
 
 8.  연결할 각각의 클러스터에 대해 이러한 단계를 반복하십시오.
 
+**다음에 수행할 작업**
+
+*   [공용 클러스터에서 라이센싱된 소프트웨어 이미지를 실행](#hybrid_ppa_importer)하십시오.
+*   {{site.data.keyword.Bluemix_notm}} Public 및 {{site.data.keyword.Bluemix_notm}} Private 등에서 다중 클라우드 Kubernetes 클러스터를 관리하려면 [IBM Multicloud Manager ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html)를 확인하십시오.
+
 
 ## 공용 Kubernetes 컨테이너에서 {{site.data.keyword.Bluemix_notm}} Private 이미지 실행
 {: #hybrid_ppa_importer}
@@ -117,7 +122,7 @@ subcollection: containers
 - [{{site.data.keyword.registryshort}} CLI 플러그인(`ibmcloud cr`)을 설치](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install)하십시오.
 - [ {{site.data.keyword.registryshort}}의 네임스페이스를 설정](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup)하거나 `ibmcloud cr namespaces`를 실행하여 기존 네임스페이스를 검색하십시오.
 - [클러스터에 `kubectl` CLI를 대상으로 지정](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)하십시오.
-- [Helm CLI를 설치하고 클러스터에서 Tiller를 설정](/docs/containers?topic=containers-integrations#helm)하십시오.
+- [Helm CLI를 설치하고 클러스터에서 Tiller를 설정](/docs/containers?topic=containers-helm#public_helm_install)하십시오.
 
 {{site.data.keyword.Bluemix_notm}} 퍼블릭의 클러스터에서 {{site.data.keyword.Bluemix_notm}} Private 이미지를 배치하려면 다음을 수행하십시오.
 

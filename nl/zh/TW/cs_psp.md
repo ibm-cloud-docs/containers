@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -30,7 +30,7 @@ subcollection: containers
 **為什麼要設定 Pod 安全原則？**</br>
 當您作為叢集管理者時，您要控制叢集裡發生的情況，特別是影響叢集的安全或準備情形的動作。Pod 安全原則可協助您控制特許容器、root 名稱空間、主機網路及埠、磁區類型、主機檔案系統、Linux 許可權（例如唯讀或群組 ID）等等的使用。
 
-使用 `PodSecurityPolicy` 許可控制器，要到您[授權原則](#customize_psp)之後，才能建立 Pod。設定 Pod 安全原則可能會有非預期的副作用，因此請務必在變更原則之後測試部署。若要部署應用程式，部署 Pod 所需的 Pod 安全原則必須全部授權使用者及服務帳戶。例如，如果您使用 [Helm](/docs/containers?topic=containers-integrations#helm_links) 來安裝應用程式，則 Helm tiller 元件會建立 Pod，因此，您必須有正確的 Pod 安全原則授權。
+使用 `PodSecurityPolicy` 許可控制器，要到您[授權原則](#customize_psp)之後，才能建立 Pod。設定 Pod 安全原則可能會有非預期的副作用，因此請務必在變更原則之後測試部署。若要部署應用程式，部署 Pod 所需的 Pod 安全原則必須全部授權使用者及服務帳戶。例如，如果您使用 [Helm](/docs/containers?topic=containers-helm#public_helm_install) 來安裝應用程式，則 Helm tiller 元件會建立 Pod，因此，您必須有正確的 Pod 安全原則授權。
 
 要嘗試控制哪些使用者可以存取 {{site.data.keyword.containerlong_notm}} 嗎？請參閱[指派叢集存取](/docs/containers?topic=containers-users#users)，以設定 {{site.data.keyword.Bluemix_notm}} IAM 及基礎架構許可權。
 {: tip}

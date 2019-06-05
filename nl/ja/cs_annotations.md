@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, ingress
 
@@ -23,14 +23,13 @@ subcollection: containers
 {:download: .download}
 
 
-
 # アノテーションを使用した Ingress のカスタマイズ
 {: #ingress_annotation}
 
 Ingress アプリケーション・ロード・バランサー (ALB) に機能を追加するため、Ingress リソースにメタデータとしてアノテーションを指定できます。
 {: shortdesc}
 
-アノテーションを使用する前に、『[Ingress を使用してアプリを公開する](/docs/containers?topic=containers-ingress)』の手順に従い、Ingress サービス構成を適切にセットアップしてください。 基本構成で Ingress ALB をセットアップしたら、Ingress リソース・ファイルにアノテーションを追加して機能を拡張できます。
+アノテーションを使用する前に、[Ingress アプリケーション・ロード・バランサー (ALB) を使用した HTTPS ロード・バランシング](/docs/containers?topic=containers-ingress)の手順に従い、Ingress サービス構成を適切にセットアップしてください。基本構成で Ingress ALB をセットアップしたら、Ingress リソース・ファイルにアノテーションを追加して機能を拡張できます。
 {: note}
 
 <table>
@@ -327,78 +326,79 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
 特定の HTTP エラーに対して ALB が実行できるカスタム・アクションを示します。
 {: shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>発生する可能性がある特定の HTTP エラーを処理するために、ALB に実行させるカスタム・エラー・アクションを設定することができます。<ul>
-<li>`custom-errors` アノテーションは、サービス名と、処理する HTTP エラーと、指定した HTTP エラーがそのサービスで発生したときに ALB が実行するエラー・アクションの名前を定義します。</li>
-<li>`custom-error-actions` アノテーションは、NGINX コード・スニペットでカスタム・エラー・アクションを定義します。</li></ul>
-</br>例えば、`custom-errors` アノテーションで、`app1` における `401` HTTP エラーを処理するために、`/errorAction401` というカスタム・エラー・アクションを戻すように ALB を設定することができます。それから、`custom-error-actions` アノテーションで、ALB がカスタム・エラー・ページをクライアントに戻すように、`/errorAction401` というコード・スニペットを定義することができます。</br>また、管理しているエラー・サービスにクライアントをリダイレクトするために、`custom-errors` アノテーションを使用することもできます。このエラー・サービスのパスを、Ingress リソース・ファイルの `paths` セクションに定義する必要があります。</dd>
+**説明**</br>
+発生する可能性がある特定の HTTP エラーを処理するために、ALB に実行させるカスタム・エラー・アクションを設定することができます。
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>
+* `custom-errors` アノテーションは、サービス名と、処理する HTTP エラーと、指定した HTTP エラーがそのサービスで発生したときに ALB が実行するエラー・アクションの名前を定義します。
+* `custom-error-actions` アノテーションは、NGINX コード・スニペットでカスタム・エラー・アクションを定義します。
+
+例えば、`custom-errors` アノテーションで、`app1` における `401` HTTP エラーを処理するために、`/errorAction401` というカスタム・エラー・アクションを戻すように ALB を設定することができます。 それから、`custom-error-actions` アノテーションで、ALB がカスタム・エラー・ページをクライアントに戻すように、`/errorAction401` というコード・スニペットを定義することができます。</br>
+
+また、管理しているエラー・サービスにクライアントをリダイレクトするために、`custom-errors` アノテーションを使用することもできます。 このエラー・サービスのパスを、Ingress リソース・ファイルの `paths` セクションに定義する必要があります。
+
+**サンプル Ingress リソース YAML**</br>
+
+```
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/custom-errors: "serviceName=&lt;app1&gt; httpError=&lt;401&gt; errorActionName=&lt;/errorAction401&gt;;serviceName=&lt;app2&gt; httpError=&lt;403&gt; errorActionName=&lt;/errorPath&gt;"
+    ingress.bluemix.net/custom-errors: "serviceName=<app1> httpError=<401> errorActionName=</errorAction401>;serviceName=<app2> httpError=<403> errorActionName=</errorPath>"
     ingress.bluemix.net/custom-error-actions: |
-         errorActionName=&lt;/errorAction401&gt;
+         errorActionName=</errorAction401>
          #Example custom error snippet
          proxy_pass http://example.com/forbidden.html;
-         &lt;EOS&gt;
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mysecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /path1
-        backend:
-          serviceName: app1
-          servicePort: 80
-      - path: /path2
-        backend:
-          serviceName: app2
-          servicePort: 80
-      - path: &lt;/errorPath&gt;
-        backend:
-          serviceName: &lt;error-svc&gt;
-          servicePort: 80
-</code></pre>
+         <EOS>
+  spec:
+    tls:
+    - hosts:
+      - mydomain
+      secretName: mysecret
+    rules:
+    - host: mydomain
+      http:
+        paths:
+        - path: /path1
+          backend:
+            serviceName: app1
+            servicePort: 80
+        - path: /path2
+          backend:
+            serviceName: app2
+            servicePort: 80
+        - path: </errorPath>
+          backend:
+            serviceName: <error-svc>
+            servicePort: 80
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
- </thead>
- <tbody>
- <tr>
- <td><code>serviceName</code></td>
- <td><code>&lt;<em>app1</em>&gt;</code> を、カスタム・エラーの適用対象である Kubernetes サービスの名前に置き換えます。カスタム・エラーは、この同じアップストリーム・サービスを使用する特定のパスでのみ適用されます。サービス名を設定しない場合、すべてのサービス・パスでカスタム・エラーが適用されます。</td>
- </tr>
- <tr>
- <td><code>httpError</code></td>
- <td><code>&lt;<em>401</em>&gt;</code> を、カスタム・エラー・アクションを使用して処理する対象の HTTP エラー・コードに置き換えます。</td>
- </tr>
- <tr>
- <td><code>errorActionName</code></td>
- <td><code>&lt;<em>/errorAction401</em>&gt;</code> を、実行するカスタム・エラー・アクションの名前か、またはエラー・サービスのパスに置き換えます。<ul>
- <li>カスタム・エラー・アクションの名前を指定する場合は、そのエラー・アクションを <code>custom-error-actions</code> アノテーション内のコード・スニペットで定義する必要があります。サンプル YAML では、<code>app1</code> で使用される <code>/errorAction401</code> が、<code>custom-error-actions</code> アノテーション内のスニペットで定義されています。</li>
- <li>エラー・サービスのパスを指定する場合は、<code>paths</code> セクションで、エラー・パスと、エラー・サービスの名前を指定する必要があります。サンプル YAML では、<code>app2</code> によって使用される <code>/errorPath</code> が、<code>paths</code> セクションの末尾に定義されています。</li></ul></td>
- </tr>
- <tr>
- <td><code>ingress.bluemix.net/custom-error-actions</code></td>
- <td>指定されたサービスおよび HTTP エラーに対して ALB が実行する、カスタム・エラー・アクションを定義します。NGINX コード・スニペットを使用し、各スニペットの末尾に <code>&lt;EOS&gt;</code> を付けます。サンプル YAML では、<code>app1</code> で <code>401</code> エラーが発生したときに、ALB がカスタム・エラー・ページ <code>http://example.com/forbidden.html</code> をクライアントに渡します。</td>
- </tr>
- </tbody></table>
-
- </dd></dl>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>app1</em>&gt;</code> を、カスタム・エラーの適用対象である Kubernetes サービスの名前に置き換えます。 カスタム・エラーは、この同じアップストリーム・サービスを使用する特定のパスでのみ適用されます。 サービス名を設定しない場合、すべてのサービス・パスでカスタム・エラーが適用されます。</td>
+</tr>
+<tr>
+<td><code>httpError</code></td>
+<td><code>&lt;<em>401</em>&gt;</code> を、カスタム・エラー・アクションを使用して処理する対象の HTTP エラー・コードに置き換えます。</td>
+</tr>
+<tr>
+<td><code>errorActionName</code></td>
+<td><code>&lt;<em>/errorAction401</em>&gt;</code> を、実行するカスタム・エラー・アクションの名前か、またはエラー・サービスのパスに置き換えます。<ul>
+<li>カスタム・エラー・アクションの名前を指定する場合は、そのエラー・アクションを <code>custom-error-actions</code> アノテーション内のコード・スニペットで定義する必要があります。 サンプル YAML では、<code>app1</code> で使用される <code>/errorAction401</code> が、<code>custom-error-actions</code> アノテーション内のスニペットで定義されています。</li>
+<li>エラー・サービスのパスを指定する場合は、<code>paths</code> セクションで、エラー・パスと、エラー・サービスの名前を指定する必要があります。 サンプル YAML では、<code>app2</code> によって使用される <code>/errorPath</code> が、<code>paths</code> セクションの末尾に定義されています。</li></ul></td>
+</tr>
+<tr>
+<td><code>ingress.bluemix.net/custom-error-actions</code></td>
+<td>指定されたサービスおよび HTTP エラーに対して ALB が実行する、カスタム・エラー・アクションを定義します。 NGINX コード・スニペットを使用し、各スニペットの末尾に <code>&lt;EOS&gt;</code> を付けます。 サンプル YAML では、<code>app1</code> で <code>401</code> エラーが発生したときに、ALB がカスタム・エラー・ページ <code>http://example.com/forbidden.html</code> をクライアントに渡します。</td>
+</tr>
+</tbody></table>
 
 <br />
 
@@ -409,34 +409,34 @@ spec:
 サービスのロケーション・ブロックのカスタム構成を追加します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>サーバー・ブロックは、ALB 仮想サーバーの構成を定義する NGINX ディレクティブです。 ロケーション・ブロックは、サーバー・ブロック内で定義される NGINX ディレクティブです。 ロケーション・ブロックは、要求 URI、またはドメイン名または IP アドレスおよびポートの後の要求の一部を Ingress がどのように処理するかを定義します。<br><br>サーバー・ブロックが要求を受け取ると、ロケーション・ブロックが URI をパスと突き合わせ、要求がアプリのデプロイ先のポッドの IP アドレスに転送されます。 <code>location-snippets</code> アノテーションを使用することで、ロケーション・ブロックが要求を特定のサービスに転送する方法を変更できます。<br><br>代わりにサーバー・ブロック全体を変更する方法については、<a href="#server-snippets">server-snippets</a> アノテーションを参照してください。
+**説明**</br>
+サーバー・ブロックは、ALB 仮想サーバーの構成を定義する NGINX ディレクティブです。 ロケーション・ブロックは、サーバー・ブロック内で定義される NGINX ディレクティブです。 ロケーション・ブロックは、要求 URI、またはドメイン名または IP アドレスおよびポートの後の要求の一部を Ingress がどのように処理するかを定義します。
 
-<p class="tip">NGINX 構成ファイル内のサーバー・ブロックとロケーション・ブロックを参照するには、いずれかの ALB ポッドに対して次のコマンドを実行します。<code>kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-&lt;ingress_resource_name&gt;.conf</code></p>
+サーバー・ブロックが要求を受け取ると、ロケーション・ブロックが URI をパスと突き合わせ、要求がアプリのデプロイ先のポッドの IP アドレスに転送されます。 `location-snippets` アノテーションを使用することで、ロケーション・ブロックが要求を特定のサービスに転送する方法を変更できます。
 
-</dd>
+代わりにサーバー・ブロック全体を変更する方法については、[`server-snippets`](#server-snippets) アノテーションを参照してください。
 
+NGINX 構成ファイル内のサーバー・ブロックとロケーション・ブロックを参照するには、いずれかの ALB ポッドに対して次のコマンドを実行します。`kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-<ingress_resource_name>.conf`
+{: tip}
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
+**サンプル Ingress リソース YAML**</br>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/location-snippets: |
-      serviceName=&lt;myservice1&gt;
+      serviceName=<myservice1>
       # Example location snippet
       proxy_request_buffering off;
       rewrite_log on;
       proxy_set_header "x-additional-test-header" "location-snippet-header";
-      &lt;EOS&gt;
-      serviceName=&lt;myservice2&gt;
+      <EOS>
+      serviceName=<myservice2>
       proxy_set_header Authorization "";
-      &lt;EOS&gt;
+      <EOS>
 spec:
   tls:
   - hosts:
@@ -447,9 +447,11 @@ spec:
     http:
       paths:
       - path: /
-      backend:
-        serviceName: &lt;myservice&gt;
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -466,8 +468,6 @@ spec:
 <td>指定したサービスに使用する構成スニペットを指定します。 <code>myservice1</code> サービスのサンプル・スニペットでは、プロキシー要求バッファリングをオフにし、ログの再書き込みをオンにし、要求をサービスに転送するときに追加ヘッダーを設定するようにロケーション・ブロックを構成しています。 <code>myservice2</code> サービスのサンプル・スニペットでは、空の <code>Authorization</code> ヘッダーを設定しています。 すべてのロケーション・スニペットは、値 <code>&lt;EOS&gt;</code> で終わる必要があります。</td>
 </tr>
 </tbody></table>
-</dd>
-</dl>
 
 <br />
 
@@ -478,22 +478,17 @@ spec:
 プライベート ALB によって着信要求をアプリにルーティングします。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
-パブリック ALB の代わりに着信要求を転送するプライベート ALB を選択します。</dd>
+**説明**</br>
+パブリック ALB の代わりに着信要求を転送するプライベート ALB を選択します。
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;"
+    ingress.bluemix.net/ALB-ID: "<private_ALB_ID_1>;<private_ALB_ID_2>"
 spec:
   tls:
   - hosts:
@@ -506,7 +501,9 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 8080</code></pre>
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -517,12 +514,10 @@ spec:
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
 <td>プライベート ALB の ID。 プライベート ALB の ID を検索するには、<code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code> を実行します。<p>
-有効な状態のプライベート ALB が複数含まれる複数ゾーン・クラスターがある場合、<code>;</code> で区切って ALB ID のリストを指定できます。 例: <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt</code></p>
+有効な状態のプライベート ALB が複数含まれる複数ゾーン・クラスターがある場合、<code>;</code> で区切って ALB ID のリストを指定できます。 例: <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt;</code></p>
 </td>
 </tr>
 </tbody></table>
-</dd>
-</dl>
 
 <br />
 
@@ -533,18 +528,16 @@ spec:
 サーバー・ブロックのカスタム構成を追加します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>サーバー・ブロックは、ALB 仮想サーバーの構成を定義する NGINX ディレクティブです。 <code>server-snippets</code> アノテーションでカスタム構成スニペットを指定することにより、サーバー・レベルで ALB が要求を処理する方法を変更できます。
+**説明**</br>
+サーバー・ブロックは、ALB 仮想サーバーの構成を定義する NGINX ディレクティブです。 `server-snippets` アノテーションでカスタム構成スニペットを指定することにより、サーバー・レベルで ALB が要求を処理する方法を変更できます。
 
-<p class="tip">NGINX 構成ファイル内のサーバー・ブロックとロケーション・ブロックを参照するには、いずれかの ALB ポッドに対して次のコマンドを実行します。<code>kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-&lt;ingress_resource_name&gt;.conf</code></p>
-</dd>
+NGINX 構成ファイル内のサーバー・ブロックとロケーション・ブロックを参照するには、いずれかの ALB ポッドに対して次のコマンドを実行します。`kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-<ingress_resource_name>.conf`
+{: tip}
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
+**サンプル Ingress リソース YAML**</br>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -565,9 +558,11 @@ spec:
     http:
       paths:
       - path: /
-      backend:
-        serviceName: &lt;myservice&gt;
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -579,202 +574,18 @@ spec:
 <td>サーバー・スニペット</td>
 <td>使用する構成スニペットを指定します。 このサンプル・スニペットは、<code>/health</code> 要求を処理するロケーション・ブロックを指定しています。 ロケーション・ブロックは、正常という応答を返し、要求を転送するときにヘッダーを追加するよう構成されています。</td>
 </tr>
-</tbody></table>
-<p class="tip"><code>server-snippets</code> アノテーションを使用して、サーバー・レベルですべてのサービスの応答にヘッダーを追加できます。</br> <pre class="codeblock">annotations:
+</tbody>
+</table>
+
+`server-snippets` アノテーションを使用して、サーバー・レベルですべてのサービスの応答にヘッダーを追加できます。
+{: tip}
+
+```
+annotations:
   ingress.bluemix.net/server-snippets: |
-    add_header &lt;header1&gt; &lt;value1&gt;;</pre></p>
-</dd>
-</dl>
-
-<br />
-
-
-### Istio サービス (`istio-services`)
-{: #istio-services}
-
-Istio 管理対象サービスにトラフィックを転送します。
-{:shortdesc}
-
-このアノテーションが機能するのは、Istio 0.7 以前の場合のみです。 IBM 提供のサブドメインを使用して Istio 管理のアプリを公開するには、[Istio 管理のアドオンの使用に関する資料](/docs/containers?topic=containers-istio#istio_expose)を参照してください。
-{: important}
-
-<dl>
-<dt>説明</dt>
-<dd>
-Istio 管理対象サービスがある場合は、クラスター ALB を使用して HTTP/HTTPS 要求を Istio Ingress コントローラーに転送できます。 Istio Ingress コントローラーは、要求をアプリ・サービスに転送します。 トラフィックを転送するには、クラスター ALB と Istio Ingress コントローラーの両方の Ingress リソースを変更する必要があります。
-<br><br>クラスター ALB の Ingress リソースで、以下を行う必要があります。
-  <ul>
-    <li>`istio-services` アノテーションを指定する</li>
-    <li>サービス・パスを、アプリが listen する実際のパスとして定義する</li>
-    <li>サービス・ポートを Istio Ingress コントローラーのポートとして定義する</li>
-  </ul>
-<br>Istio Ingress コントローラーの Ingress リソースで、以下を行う必要があります。
-  <ul>
-    <li>サービス・パスを、アプリが listen する実際のパスとして定義する</li>
-    <li>サービス・ポートを、Istio Ingress コントローラーで公開するアプリ・サービスの HTTP/HTTPS ポートとして定義する</li>
-</ul>
-</dd>
-
-<dt>クラスター ALB のサンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/istio-services: "enable=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: &lt;/myapp1&gt;
-          backend:
-            serviceName: &lt;myservice1&gt;
-            servicePort: &lt;istio_ingress_port&gt;
-      - path: &lt;/myapp2&gt;
-          backend:
-            serviceName: &lt;myservice2&gt;
-            servicePort: &lt;istio_ingress_port&gt;</code></pre>
-
-<table>
-<caption>YAML ファイルの構成要素について</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-</thead>
-<tbody>
-<tr>
-<td><code>enable</code></td>
-  <td>Istio 管理サービスへのトラフィック転送を有効にするには、<code>True</code> に設定します。</td>
-</tr>
-<tr>
-<td><code>serviceName</code></td>
-<td><code><em>&lt;myservice1&gt;</em></code> を、Istio 管理対象アプリ用に作成した Kubernetes サービスの名前に置き換えます。 複数のサービスは、セミコロン (,) で区切ります。 このフィールドはオプションです。 サービス名を指定しなかった場合は、すべての Istio 管理対象サービスのトラフィック転送が有効化されます。</td>
-</tr>
-<tr>
-<td><code>istioServiceNamespace</code></td>
-<td><code><em>&lt;istio-namespace&gt;</em></code> を、Istio がインストールされている Kubernetes 名前空間に置き換えます。 このフィールドはオプションです。 名前空間を指定しなかった場合は、<code>istio-system</code> 名前空間が使用されます。</td>
-</tr>
-<tr>
-<td><code>istioServiceName</code></td>
-<td><code><em>&lt;istio-ingress-service&gt;</em></code> を Istio Ingress サービスの名前に置き換えます。 このフィールドはオプションです。 Istio Ingress サービス名を指定しなかった場合は、サービス名 <code>istio-ingress</code> が使用されます。</td>
-</tr>
-<tr>
-<td><code>path</code></td>
-  <td>トラフィックを転送する Istio 管理対象サービスごとに、<code><em>&lt;/myapp1&gt;</em></code> を、Istio 管理対象サービスが listen するバックエンド・パスに置き換えます。 このパスは、Istio Ingress リソースで定義したパスに対応している必要があります。</td>
-</tr>
-<tr>
-<td><code>servicePort</code></td>
-<td>トラフィックを転送する Istio 管理対象サービスごとに、<code><em>&lt;istio_ingress_port&gt;</em></code> を、Istio Ingress コントローラーのポートに置き換えます。</td>
-</tr>
-</tbody></table>
-</dd>
-
-<dt>使用法</dt></dl>
-
-1. アプリをデプロイします。 以下の手順に示しているサンプル・リソースでは、[BookInfo ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://archive.istio.io/v0.7/docs/guides/bookinfo.html) というサンプル・アプリを使用しています。このサンプル・アプリは、`istio-0.7.1/samples/bookinfo/kube` リポジトリーにあります。
-   ```
-   kubectl apply -f bookinfo.yaml -n istio-system
-   ```
-   {: pre}
-
-2. アプリの Istio ルーティング・ルールをセットアップします。 例えば、BookInfo という Istio サンプル・アプリでは、[各マイクロサービスのルーティング・ルール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://archive.istio.io/v0.7/docs/tasks/traffic-management/request-routing.html)が、`route-rule-all-v1.yaml` ファイルに定義されています。
-
-3. Istio Ingress リソースを作成して、Istio Ingress コントローラーにアプリを公開します。 このリソースによって、モニタリングやルーティング・ルールなどの Istio 機能を、クラスターに着信するトラフィックに適用できます。
-    例えば、BookInfo アプリの以下のリソースが `bookinfo.yaml` ファイルに事前定義されています。
-    ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: istio-ingress-resource
-      annotations:
-        kubernetes.io/ingress.class: "istio"
-    spec:
-      rules:
-      - http:
-          paths:
-          - path: /productpage
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /login
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /logout
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /api/v1/products.*
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-    ```
-    {: codeblock}
-
-4. Istio Ingress リソースを作成します。
-    ```
-    kubectl create -f istio-ingress-resource.yaml -n istio-system
-    ```
-    {: pre}
-    アプリが Istio Ingress コントローラーに接続されます。
-
-5. クラスターの IBM **Ingress サブドメイン**と **Ingress シークレット**を取得します。 サブドメインとシークレットは、クラスター用に事前登録され、アプリの固有のパブリック URL として使用されます。
-    ```
-    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-6. IBM Ingress リソースを作成し、クラスターの IBM Ingress ALB に Istio Ingress コントローラーを接続します。
-    BookInfo アプリの例を以下に示します。
-    ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: ibm-ingress-resource
-      annotations:
-        ingress.bluemix.net/istio-services: "enabled=true serviceName=productpage istioServiceName=istio-ingress-resource"
-    spec:
-      tls:
-      - hosts:
-        - mycluster-459249.us-south.containers.mybluemix.net
-        secretName: mycluster-459249
-      rules:
-      - host: mycluster-459249.us-south.containers.mybluemix.net
-        http:
-          paths:
-          - path: /productpage
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /login
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /logout
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /api/v1/products.*
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-    ```
-    {: codeblock}
-
-7. IBM ALB Ingress リソースを作成します。
-    ```
-    kubectl apply -f ibm-ingress-resource.yaml -n istio-system
-    ```
-    {: pre}
-
-8. ブラウザーで、`https://<hostname>/frontend` に移動し、アプリの Web ページを表示します。
+    add_header <header1> <value1>;
+```
+{: codeblock}
 
 <br />
 
@@ -791,85 +602,75 @@ spec:
 ALB がバックエンド・アプリへの接続とそこからの読み取りを待機する時間を設定します。この時間を超えると、そのバックエンド・アプリは使用不可と見なされます。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>クライアント要求が Ingress ALB に送信されると、ALB はバックエンド・アプリへの接続を開きます。 デフォルトでは、ALB はバックエンド・アプリからの応答を受信するまで 60 秒待機します。 バックエンド・アプリが 60 秒以内に応答しない場合は、接続要求が中止され、バックエンド・アプリは使用不可と見なされます。
+**説明**</br>
+クライアント要求が Ingress ALB に送信されると、ALB はバックエンド・アプリへの接続を開きます。 デフォルトでは、ALB はバックエンド・アプリからの応答を受信するまで 60 秒待機します。 バックエンド・アプリが 60 秒以内に応答しない場合は、接続要求が中止され、バックエンド・アプリは使用不可と見なされます。
 
-</br></br>
 ALB がバックエンド・アプリに接続されると、応答データは ALB によってバックエンド・アプリから読み取られます。 この読み取り操作では、ALB はバックエンド・アプリからのデータを受け取るために、2 回の読み取り操作の間に最大 60 秒間待機します。 バックエンド・アプリが 60 秒以内にデータを送信しない場合、バックエンド・アプリへの接続が閉じられ、アプリは使用不可と見なされます。
-</br></br>
-60 秒の接続タイムアウトと読み取りタイムアウトは、プロキシー上のデフォルトのタイムアウトであり、通常は変更すべきではありません。
-</br></br>
-アプリの可用性が安定していない場合や、ワークロードが多いためにアプリの応答が遅い場合は、接続タイムアウトまたは読み取りタイムアウトを引き上げることもできます。 タイムアウトを引き上げると、タイムアウトになるまでバックエンド・アプリへの接続を開いている必要があるため、ALB のパフォーマンスに影響が及ぶことに注意してください。
-</br></br>
-一方、タイムアウトを下げると、ALB のパフォーマンスは向上します。 ワークロードが多いときでも、指定したタイムアウト内でバックエンド・アプリが要求を処理できるようにしてください。</dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+60 秒の接続タイムアウトと読み取りタイムアウトは、プロキシー上のデフォルトのタイムアウトであり、通常は変更すべきではありません。
+
+アプリの可用性が安定していない場合や、ワークロードが多いためにアプリの応答が遅い場合は、接続タイムアウトまたは読み取りタイムアウトを引き上げることもできます。 タイムアウトを引き上げると、タイムアウトになるまでバックエンド・アプリへの接続を開いている必要があるため、ALB のパフォーマンスに影響が及ぶことに注意してください。
+
+一方、タイムアウトを下げると、ALB のパフォーマンスは向上します。 ワークロードが多いときでも、指定したタイムアウト内でバックエンド・アプリが要求を処理できるようにしてください。
+
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;connect_timeout&gt;"
-   ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
+   ingress.bluemix.net/proxy-connect-timeout: "serviceName=<myservice> timeout=<connect_timeout>"
+   ingress.bluemix.net/proxy-read-timeout: "serviceName=<myservice> timeout=<read_timeout>"
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
- </thead>
- <tbody>
- <tr>
- <td><code>&lt;connect_timeout&gt;</code></td>
- <td>バックエンド・アプリに接続されるのを待機する秒数または分数 (例: <code>65s</code> または <code>1m</code>)。 接続タイムアウトは、75 秒より長くできません。</td>
- </tr>
- <tr>
- <td><code>&lt;read_timeout&gt;</code></td>
- <td>バックエンド・アプリが読み取られるまで待機する秒数または分数 (例: <code>65s</code> または <code>2m</code>)。
- </tr>
- </tbody></table>
-
- </dd></dl>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;connect_timeout&gt;</code></td>
+<td>バックエンド・アプリに接続されるのを待機する秒数または分数 (例: <code>65s</code> または <code>1m</code>)。 接続タイムアウトは、75 秒より長くできません。</td>
+</tr>
+<tr>
+<td><code>&lt;read_timeout&gt;</code></td>
+<td>バックエンド・アプリが読み取られるまで待機する秒数または分数 (例: <code>65s</code> または <code>2m</code>)。
+</tr>
+</tbody></table>
 
 <br />
-
 
 
 ### キープアライブ要求数 (`keepalive-requests`)
 {: #keepalive-requests}
 
-<dl>
-<dt>説明</dt>
-<dd>
+**説明**</br>
 1 つのキープアライブ接続で処理できる要求の最大数を設定します。
-</dd>
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/keepalive-requests: "serviceName=&lt;myservice&gt; requests=&lt;max_requests&gt;"
+    ingress.bluemix.net/keepalive-requests: "serviceName=<myservice> requests=<max_requests>"
 spec:
   tls:
   - hosts:
@@ -880,9 +681,11 @@ spec:
     http:
       paths:
       - path: /
-      backend:
-        serviceName: &lt;myservice&gt;
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: <myservice>
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -900,65 +703,54 @@ spec:
 </tr>
 </tbody></table>
 
-</dd>
-</dl>
-
 <br />
-
 
 
 ### キープアライブ・タイムアウト (`keepalive-timeout`)
 {: #keepalive-timeout}
 
-<dl>
-<dt>説明</dt>
-<dd>
+**説明**</br>
 サーバー上でキープアライブ接続を開いた状態に保つ最大時間を設定します。
-</dd>
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/keepalive-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;time&gt;s"
+   ingress.bluemix.net/keepalive-timeout: "serviceName=<myservice> timeout=<time>s"
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
- </thead>
- <tbody>
- <tr>
- <td><code>serviceName</code></td>
- <td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 このパラメーターはオプションです。 このパラメーターを指定した場合は、所定のサービスに対してキープアライブ・タイムアウトが設定されます。 パラメーターを指定しない場合は、キープアライブ・タイムアウトが構成されていないすべてのサービスに対して、サーバー・レベルの <code>nginx.conf</code> でキープアライブ・タイムアウトが設定されます。</td>
- </tr>
- <tr>
- <td><code>timeout</code></td>
- <td><code>&lt;<em>time</em>&gt;</code> を時間の長さ (秒単位) に置き換えます。 例: <code>timeout=20s</code>。 値を <code>0</code> に設定すると、キープアライブ・クライアント接続が無効になります。</td>
- </tr>
- </tbody></table>
-
- </dd>
- </dl>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 このパラメーターはオプションです。 このパラメーターを指定した場合は、所定のサービスに対してキープアライブ・タイムアウトが設定されます。 パラメーターを指定しない場合は、キープアライブ・タイムアウトが構成されていないすべてのサービスに対して、サーバー・レベルの <code>nginx.conf</code> でキープアライブ・タイムアウトが設定されます。</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td><code>&lt;<em>time</em>&gt;</code> を時間の長さ (秒単位) に置き換えます。 例: <code>timeout=20s</code>。 値を <code>0</code> に設定すると、キープアライブ・クライアント接続が無効になります。</td>
+</tr>
+</tbody></table>
 
 <br />
 
@@ -969,20 +761,21 @@ rules:
 ALB が要求を次のアップストリーム・サーバーに渡すことができる場合に設定します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
-Ingress ALB は、クライアント・アプリとユーザー・アプリの間のプロキシーとして機能します。 一部のアプリの構成では、ALB からの着信クライアント要求を処理する複数のアップストリーム・サーバーが必要です。 ALB で使用するプロキシー・サーバーが、アプリで使用するアップストリーム・サーバーとの接続を確立できない場合があります。 その場合、ALB は次のアップストリーム・サーバーとの接続を確立して、要求を代わりに渡すことができます。 `proxy-next-upstream-config` アノテーションを使用すると、ALB が要求を次のアップストリーム・サーバーに渡そうと試行するケース、期間、回数を設定できます。<p class="note">`proxy-next-upstream-config` を使用する場合は必ずタイムアウトが構成されるため、このアノテーションに `timeout=true` は追加しないでください。</p>
-</dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**説明**</br>
+Ingress ALB は、クライアント・アプリとユーザー・アプリの間のプロキシーとして機能します。 一部のアプリの構成では、ALB からの着信クライアント要求を処理する複数のアップストリーム・サーバーが必要です。 ALB で使用するプロキシー・サーバーが、アプリで使用するアップストリーム・サーバーとの接続を確立できない場合があります。 その場合、ALB は次のアップストリーム・サーバーとの接続を確立して、要求を代わりに渡すことができます。 `proxy-next-upstream-config` アノテーションを使用すると、ALB が要求を次のアップストリーム・サーバーに渡そうと試行するケース、期間、回数を設定できます。
+
+`proxy-next-upstream-config` を使用する場合は必ずタイムアウトが構成されるため、このアノテーションに `timeout=true` は追加しないでください。
+{: note}
+
+**サンプル Ingress リソース YAML**</br>
+
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;myservice1&gt; retries=&lt;tries&gt; timeout=&lt;time&gt; error=true http_502=true; serviceName=&lt;myservice2&gt; http_403=true non_idempotent=true"
+    ingress.bluemix.net/proxy-next-upstream-config: "serviceName=<myservice1> retries=<tries> timeout=<time> error=true http_502=true; serviceName=<myservice2> http_403=true non_idempotent=true"
 spec:
   tls:
   - hosts:
@@ -996,7 +789,8 @@ spec:
         backend:
           serviceName: myservice1
           servicePort: 80
-</code></pre>
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -1044,8 +838,6 @@ spec:
 </td>
 </tr>
 </tbody></table>
-</dd>
-</dl>
 
 <br />
 
@@ -1056,26 +848,24 @@ spec:
 スティッキー Cookie のアノテーションを使用すると、セッション・アフィニティーを ALB に追加し、常に着信ネットワーク・トラフィックを同じアップストリーム・サーバーにルーティングできます。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>高可用性にするためには、アプリのセットアップによっては、着信クライアント要求を処理する複数のアップストリーム・サーバーをデプロイする必要があります。 クライアントがバックエンド・アプリに接続したら、セッション期間中またはタスクが完了するまでの間、1 つのクライアントに同じアップストリーム・サーバーがサービスを提供するように、セッション・アフィニティーを使用することができます。 着信ネットワーク・トラフィックを常に同じアップストリーム・サーバーにルーティングしてセッション・アフィニティーを保つように、ALB を構成することができます。
+**説明**</br>
+高可用性にするためには、アプリのセットアップによっては、着信クライアント要求を処理する複数のアップストリーム・サーバーをデプロイする必要があります。 クライアントがバックエンド・アプリに接続したら、セッション期間中またはタスクが完了するまでの間、1 つのクライアントに同じアップストリーム・サーバーがサービスを提供するように、セッション・アフィニティーを使用することができます。 着信ネットワーク・トラフィックを常に同じアップストリーム・サーバーにルーティングしてセッション・アフィニティーを保つように、ALB を構成することができます。
 
-</br></br>
 バックエンド・アプリに接続した各クライアントは、ALB によって、使用可能なアップストリーム・サーバーのいずれかに割り当てられます。 ALB は、クライアントのアプリに保管されるセッション Cookie を作成します。そのセッション Cookie は、ALB とクライアントの間でやり取りされるすべての要求のヘッダー情報に含められます。 この Cookie の情報により、同一セッションのすべての要求を同じアップストリーム・サーバーで処理することができます。
 
-<p class="note">スティッキー・セッションに依存すると、複雑度が増し、可用性が低くなります。例えば、HTTP サーバーが初期接続におけるセッション状態を維持し、HTTP サービスが、後続の要求のうち同じセッション状態値を持つものだけを受け入れるようにするとします。この場合、HTTP サービスの水平スケーリングが困難になります。外部データベース (Redis や Memcached など) を使用して HTTP 要求セッション値を格納することで、複数のサーバーにわたってセッション状態を維持できないか検討してください。</p>
+スティッキー・セッションに依存すると、複雑度が増し、可用性が低くなります。 例えば、HTTP サーバーが初期接続におけるセッション状態を維持し、HTTP サービスが、後続の要求のうち同じセッション状態値を持つものだけを受け入れるようにするとします。 この場合、HTTP サービスの水平スケーリングが困難になります。 外部データベース (Redis や Memcached など) を使用して HTTP 要求セッション値を格納することで、複数のサーバーにわたってセッション状態を維持できないか検討してください。
+{: note}
 
-複数のサービスを含める場合は、セミコロン (;) を使用して区切ってください。</dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
+複数のサービスを含める場合は、セミコロン (;) を使用して区切ってください。
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
+    ingress.bluemix.net/sticky-cookie-services: "serviceName=<myservice1> name=<cookie_name1> expires=<expiration_time1> path=<cookie_path1> hash=<hash_algorithm1>;serviceName=<myservice2> name=<cookie_name2> expires=<expiration_time2> path=<cookie_path2> hash=<hash_algorithm2>"
 spec:
   tls:
   - hosts:
@@ -1087,42 +877,42 @@ spec:
       paths:
       - path: /service1_path
         backend:
-          serviceName: &lt;myservice1&gt;
+          serviceName: <myservice1>
           servicePort: 8080
       - path: /service2_path
         backend:
-          serviceName: &lt;myservice2&gt;
-          servicePort: 80</code></pre>
+          serviceName: <myservice2>
+          servicePort: 80
+```
+{: codeblock}
 
-  <table>
-  <caption>アノテーションの構成要素について</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。</td>
-  </tr>
-  <tr>
-  <td><code>name</code></td>
-  <td><code>&lt;<em>cookie_name</em>&gt;</code> を、セッション中に作成されたスティッキー Cookie の名前に置き換えます。</td>
-  </tr>
-  <tr>
-  <td><code>expires</code></td>
-  <td><code>&lt;<em>expiration_time</em>&gt;</code> を、スティッキー Cookie が期限切れになるまでの時間 (単位は秒 (s)、分 (m)、または時間 (h)) に置き換えます。 この時間は、ユーザー・アクティビティーとは無関係です。 期限が切れた Cookie は、クライアント Web ブラウザーによって削除され、ALB に送信されなくなります。 例えば、有効期間を 1 秒、1 分、または 1 時間に設定するには、<code>1s</code>、<code>1m</code>、または <code>1h</code> と入力します。</td>
-  </tr>
-  <tr>
-  <td><code>path</code></td>
-  <td><code>&lt;<em>cookie_path</em>&gt;</code> を、Ingress サブドメインに付加されるパスに置き換えます。このパスは、Cookie を ALB に送信する対象となるドメインとサブドメインを示すものです。 例えば、Ingress ドメインが <code>www.myingress.com</code> である場合に、すべてのクライアント要求で Cookie を送信するには、<code>path=/</code> を設定する必要があります。 <code>www.myingress.com/myapp</code> とそのすべてのサブドメインについてにのみ Cookie を送信するには、<code>path=/myapp</code> を設定する必要があります。</td>
-  </tr>
-  <tr>
-  <td><code>hash</code></td>
-  <td><code>&lt;<em>hash_algorithm</em>&gt;</code> を、Cookie の情報を保護するハッシュ・アルゴリズムに置き換えます。 <code>sha1</code> のみサポートされます。 SHA1 は、Cookie の情報に基づいてハッシュ合計を生成し、そのハッシュ合計を Cookie に付加します。 サーバーは Cookie の情報を暗号化解除し、データ保全性を検証します。</td>
-  </tr>
-  </tbody></table>
-
- </dd></dl>
+<table>
+<caption>アノテーションの構成要素について</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>&lt;<em>cookie_name</em>&gt;</code> を、セッション中に作成されたスティッキー Cookie の名前に置き換えます。</td>
+</tr>
+<tr>
+<td><code>expires</code></td>
+<td><code>&lt;<em>expiration_time</em>&gt;</code> を、スティッキー Cookie が期限切れになるまでの時間 (単位は秒 (s)、分 (m)、または時間 (h)) に置き換えます。 この時間は、ユーザー・アクティビティーとは無関係です。 期限が切れた Cookie は、クライアント Web ブラウザーによって削除され、ALB に送信されなくなります。 例えば、有効期間を 1 秒、1 分、または 1 時間に設定するには、<code>1s</code>、<code>1m</code>、または <code>1h</code> と入力します。</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>&lt;<em>cookie_path</em>&gt;</code> を、Ingress サブドメインに付加されるパスに置き換えます。このパスは、Cookie を ALB に送信する対象となるドメインとサブドメインを示すものです。 例えば、Ingress ドメインが <code>www.myingress.com</code> である場合に、すべてのクライアント要求で Cookie を送信するには、<code>path=/</code> を設定する必要があります。 <code>www.myingress.com/myapp</code> とそのすべてのサブドメインについてにのみ Cookie を送信するには、<code>path=/myapp</code> を設定する必要があります。</td>
+</tr>
+<tr>
+<td><code>hash</code></td>
+<td><code>&lt;<em>hash_algorithm</em>&gt;</code> を、Cookie の情報を保護するハッシュ・アルゴリズムに置き換えます。 <code>sha1</code> のみサポートされます。 SHA1 は、Cookie の情報に基づいてハッシュ合計を生成し、そのハッシュ合計を Cookie に付加します。 サーバーは Cookie の情報を暗号化解除し、データ保全性を検証します。</td>
+</tr>
+</tbody></table>
 
 <br />
 
@@ -1133,23 +923,17 @@ spec:
 ALB がサーバーへの接続を試行する時間の長さを設定します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
-サーバーを使用不可と見なす前に、ALB がサーバーへの接続を試行する時間の長さを設定できます。 設定した時間内に、<a href="#upstream-max-fails"><code>upstream-max-fails</code> アノテーション</a>で設定した接続試行の最大失敗回数に ALB が達すると、サーバーは使用不可と見なされます。 また、この時間の長さによって、サーバーが使用不可と見なされる時間の長さも決まります。
-</dd>
+**説明**</br>
+サーバーを使用不可と見なす前に、ALB がサーバーへの接続を試行する時間の長さを設定できます。 設定した時間内に、[`upstream-max-fails`](#upstream-max-fails) アノテーションで設定した接続試行の最大失敗回数に ALB が達すると、サーバーは使用不可と見なされます。 また、この時間の長さによって、サーバーが使用不可と見なされる時間の長さも決まります。
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/upstream-fail-timeout: "serviceName=&lt;myservice&gt; fail-timeout=&lt;fail_timeout&gt;"
+    ingress.bluemix.net/upstream-fail-timeout: "serviceName=<myservice> fail-timeout=<fail_timeout>"
 spec:
   tls:
   - hosts:
@@ -1162,7 +946,9 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 8080</code></pre>
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <thead>
@@ -1178,8 +964,6 @@ spec:
 <td><code>&lt;<em>fail_timeout</em>&gt;</code> を、サーバーを使用不可と見なす前に ALB がサーバーへの接続を試行する時間の長さに置き換えます。 デフォルトは <code>10s</code> です。 時間は秒単位にする必要があります。</td>
 </tr>
 </tbody></table>
-</dd>
-</dl>
 
 <br />
 
@@ -1190,23 +974,17 @@ spec:
 アップストリーム・サーバーのアイドル・キープアライブ接続の最大数を設定します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
+**説明**</br>
 所定のサービスのアップストリーム・サーバーへのアイドル・キープアライブ接続の最大数を設定します。 デフォルトでは、64 個のアイドル・キープアライブ接続がアップストリーム・サーバーに設定されています。
-</dd>
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/upstream-keepalive: "serviceName=&lt;myservice&gt; keepalive=&lt;max_connections&gt;"
+    ingress.bluemix.net/upstream-keepalive: "serviceName=<myservice> keepalive=<max_connections>"
 spec:
   tls:
   - hosts:
@@ -1219,7 +997,9 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 8080</code></pre>
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -1236,8 +1016,6 @@ spec:
 <td><code>&lt;<em>max_connections</em>&gt;</code> を、アップストリーム・サーバーへのアイドル・キープアライブ接続の最大数に置き換えます。 デフォルトは <code>64</code> です。 値を <code>0</code> に設定すると、所定のサービスのアップストリーム・キープアライブ接続が無効になります。</td>
 </tr>
 </tbody></table>
-</dd>
-</dl>
 
 <br />
 
@@ -1248,22 +1026,17 @@ spec:
 サーバーとの通信の試行に失敗できる最大回数を設定します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
-サーバーを使用不可と見なす前に、ALB がサーバーへの接続に失敗できる最大回数を設定します。 <a href="#upstream-fail-timeout"><code>upstream-fail-timeout</code> アノテーション</a>で設定した時間内に、ALB が最大回数に達すると、サーバーは使用不可と見なされます。 サーバーが使用不可と見なされる時間の長さも、<code>upstream-fail-timeout</code> アノテーションによって設定されます。</dd>
+**説明**</br>
+サーバーを使用不可と見なす前に、ALB がサーバーへの接続に失敗できる最大回数を設定します。 [`upstream-fail-timeout`](#upstream-fail-timeout) アノテーションで設定した時間内に、ALB が最大回数に達すると、サーバーは使用不可と見なされます。 サーバーが使用不可と見なされる時間の長さも、`upstream-fail-timeout` アノテーションによって設定されます。
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/upstream-max-fails: "serviceName=&lt;myservice&gt; max-fails=&lt;max_fails&gt;"
+    ingress.bluemix.net/upstream-max-fails: "serviceName=<myservice> max-fails=<max_fails>"
 spec:
   tls:
   - hosts:
@@ -1276,7 +1049,9 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 8080</code></pre>
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <thead>
@@ -1292,8 +1067,6 @@ spec:
 <td><code>&lt;<em>max_fails</em>&gt;</code> を、ALB がサーバーとの通信の試行に失敗できる最大回数に置き換えます。 デフォルトは <code>1</code> です。値を <code>0</code> にするとアノテーションが無効になります。</td>
 </tr>
 </tbody></table>
-</dd>
-</dl>
 
 <br />
 
@@ -1310,34 +1083,35 @@ HTTPS および TLS/SSL 認証アノテーションでは、ALB に HTTPS トラ
 HTTP (ポート 80) および HTTPS (ポート 443) ネットワーク・トラフィックのデフォルト・ポートを変更します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>デフォルトで、Ingress ALB は、ポート 80 上の着信 HTTP ネットワーク・トラフィックとポート 443 上の着信 HTTPS ネットワーク・トラフィックを listen するように構成されています。 ALB ドメインのセキュリティーを強化するため、または HTTPS ポートだけを有効にするために、デフォルト・ポートを変更できます。<p class="note">ポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](/docs/containers?topic=containers-ingress#opening_ingress_ports)、そのポートを [`mutual-auth` アノテーション](#mutual-auth)で指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。</p></dd>
+**説明**</br>
+デフォルトで、Ingress ALB は、ポート 80 上の着信 HTTP ネットワーク・トラフィックとポート 443 上の着信 HTTPS ネットワーク・トラフィックを listen するように構成されています。 ALB ドメインのセキュリティーを強化するため、または HTTPS ポートだけを有効にするために、デフォルト・ポートを変更できます。
 
+ポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](/docs/containers?topic=containers-ingress#opening_ingress_ports)、そのポートを [`mutual-auth` アノテーション](#mutual-auth)で指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。
+{: note}
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt; port=&lt;port2&gt;"
+   ingress.bluemix.net/custom-port: "protocol=<protocol1> port=<port1>;protocol=<protocol2> port=<port2>"
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -1353,49 +1127,70 @@ rules:
  <td><code>&lt;port&gt;</code></td>
  <td>着信 HTTP または HTTPS ネットワーク・トラフィックに使用するポート番号を入力します。  <p class="note">HTTP または HTTPS 用にカスタム・ポートを指定した場合、デフォルト・ポートは、HTTP と HTTPS のどちらに対しても有効ではなくなります。 例えば、HTTPS のデフォルト・ポートを 8443 に変更し、HTTP ではデフォルト・ポートを使用する場合、それらの両方に対して次のようにカスタム・ポートを設定する必要があります。<code>custom-port: "protocol=http port=80; protocol=https port=8443"</code></p></td>
  </tr>
- </tbody></table>
+</tbody></table>
 
- </dd>
- <dt>使用法</dt>
- <dd><ol><li>ALB 用の開かれたポートを確認します。
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-CLI 出力は、以下のようになります。
-<pre class="screen">
-<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
-<li>ALB の構成マップを開きます。
-<pre class="pre">
-<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>非デフォルトの HTTP および HTTPS ポートを構成マップに追加します。 &lt;port&gt; を、開く HTTP または HTTPS のポートに置き換えます。<p class="note">デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、<a href="/docs/containers?topic=containers-ingress#opening_ingress_ports">Ingress ALB でポートを開く</a>を参照してください。</p>
-<pre class="codeblock">
-<code>apiVersion: v1
-kind: ConfigMap
-data:
- public-ports: &lt;port1&gt;;&lt;port2&gt;
-metadata:
- creationTimestamp: 2017-08-22T19:06:51Z
- name: ibm-cloud-provider-ingress-cm
- namespace: kube-system
- resourceVersion: "1320"
- selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
- uid: &lt;uid&gt;</code></pre></li>
- <li>ALB が非デフォルトのポートによって再構成されたことを確認します。
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-CLI 出力は、以下のようになります。
-<pre class="screen">
-<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
-<li>着信ネットワーク・トラフィックをサービスにルーティングする際に、非デフォルトのポートを使用するように Ingress を構成します。 この解説ではサンプル YAML ファイルを使用します。 </li>
-<li>ALB 構成を更新します。
-<pre class="pre">
-<code>kubectl apply -f myingress.yaml</code></pre>
-</li>
-<li>任意の Web ブラウザーを開いてアプリにアクセスします。 例: <code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
+
+**使用法**</br>
+1. ALB 用の開かれたポートを確認します。
+  ```
+  kubectl get service -n kube-system
+  ```
+  {: pre}
+
+  CLI 出力は、以下のようになります。
+  ```
+  NAME                                             TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                      AGE
+  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d
+  ```
+  {: screen}
+
+2. ALB の構成マップを開きます。
+  ```
+  kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system
+  ```
+  {: pre}
+
+3. 非デフォルトの HTTP および HTTPS ポートを構成マップに追加します。 `<port>` を、開く HTTP または HTTPS のポートに置き換えます。
+  <p class="note">デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、[Ingress ALB でポートを開く](/docs/containers?topic=containers-ingress#opening_ingress_ports)を参照してください。</p>
+  ```
+  apiVersion: v1
+  kind: ConfigMap
+  data:
+    public-ports: <port1>;<port2>
+  metadata:
+    creationTimestamp: 2017-08-22T19:06:51Z
+    name: ibm-cloud-provider-ingress-cm
+    namespace: kube-system
+    resourceVersion: "1320"
+    selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+    uid: <uid>
+  ```
+  {: codeblock}
+
+4. ALB が非デフォルトのポートによって再構成されたことを確認します。
+  ```
+  kubectl get service -n kube-system
+  ```
+  {: pre}
+
+  CLI 出力は、以下のようになります。
+  ```
+  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                           AGE
+  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx <port1>:30776/TCP,<port2>:30412/TCP   109d
+  ```
+  {: screen}
+
+5. 着信ネットワーク・トラフィックをサービスにルーティングする際に、非デフォルトのポートを使用するように Ingress を構成します。 このリファレンスではサンプル YAML ファイルのアノテーションを使用します。
+
+6. ALB 構成を更新します。
+  ```
+  kubectl apply -f myingress.yaml
+  ```
+  {: pre}
+
+7. 任意の Web ブラウザーを開いてアプリにアクセスします。 例: `https://<ibmdomain>:<port>/<service_path>/`
 
 <br />
-
 
 
 ### HTTPS への HTTP リダイレクト (`redirect-to-https`)
@@ -1404,18 +1199,15 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 非セキュア HTTP クライアント要求を HTTPS に変換します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>Ingress ALB は、IBM 提供の TLS 証明書またはカスタム TLS 証明書を使用してドメインを保護するようにセットアップされます。 一部のユーザーが、ALB ドメインへの非セキュアな <code>HTTP</code> 要求、例えば、<code>https</code> ではなく <code>http://www.myingress.com</code> を使用してアプリにアクセスしようとする可能性があります。 リダイレクト・アノテーションを使用すると、非セキュアな HTTP 要求を常に HTTPS に変換できます。 このアノテーションを使用しない場合、デフォルトでは非セキュアな HTTP 要求は HTTPS 要求に変換されないので、暗号化されていない機密情報が公開されてしまうおそれがあります。
+**説明**</br>
+Ingress ALB は、IBM 提供の TLS 証明書またはカスタム TLS 証明書を使用してドメインを保護するようにセットアップされます。 一部のユーザーが、ALB ドメインへの非セキュアな `HTTP` 要求、例えば、`https` ではなく `http://www.myingress.com` を使用してアプリにアクセスしようとする可能性があります。 リダイレクト・アノテーションを使用すると、非セキュアな HTTP 要求を常に HTTPS に変換できます。 このアノテーションを使用しない場合、デフォルトでは非セキュアな HTTP 要求は HTTPS 要求に変換されないので、暗号化されていない機密情報が公開されてしまうおそれがあります。
 
-</br></br>
-HTTP 要求の HTTPS へのリダイレクトはデフォルトで無効です。</dd>
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
+HTTP 要求の HTTPS へのリダイレクトはデフォルトで無効です。
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -1425,19 +1217,17 @@ spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-</dd>
-
-</dl>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <br />
 
@@ -1445,23 +1235,17 @@ rules:
 ### HTTP Strict Transport Security (`hsts`)
 {: #hsts}
 
-<dl>
-<dt>説明</dt>
-<dd>
+**説明**</br>
 HSTS は、ドメインへのアクセスに HTTPS のみ使用するようブラウザーに指示します。 ユーザーがプレーンな HTTP リンクを入力したりアクセスしたりしても、ブラウザーが接続を HTTPS に強制的にアップグレードします。
-</dd>
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/hsts: enabled=true maxAge=&lt;31536000&gt; includeSubdomains=true
+    ingress.bluemix.net/hsts: enabled=true maxAge=<31536000> includeSubdomains=true
 spec:
   tls:
   - hosts:
@@ -1479,31 +1263,28 @@ spec:
         backend:
           serviceName: myservice2
           servicePort: 8444
-          </code></pre>
+          ```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>enabled</code></td>
-  <td>HSTS を有効にするには、<code>true</code> を使用します。</td>
-  </tr>
-    <tr>
-  <td><code>maxAge</code></td>
-  <td><code>&lt;<em>31536000</em>&gt;</code> を、HTTPS に直接送信される要求をブラウザーがキャッシュに入れる秒数を表す整数に置き換えてください。 デフォルトは <code>31536000</code>で、これは 1 年に相当します。</td>
-  </tr>
-  <tr>
-  <td><code>includeSubdomains</code></td>
-  <td>HSTS ポリシーが現行ドメインのすべてのサブドメインにも適用されることをブラウザーに通知するには、<code>true</code> を使用します。 デフォルトは <code>true</code> です。 </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-  </dl>
-
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>HSTS を有効にするには、<code>true</code> を使用します。</td>
+</tr>
+<tr>
+<td><code>maxAge</code></td>
+<td><code>&lt;<em>31536000</em>&gt;</code> を、HTTPS に直接送信される要求をブラウザーがキャッシュに入れる秒数を表す整数に置き換えてください。 デフォルトは <code>31536000</code>で、これは 1 年に相当します。</td>
+</tr>
+<tr>
+<td><code>includeSubdomains</code></td>
+<td>HSTS ポリシーが現行ドメインのすべてのサブドメインにも適用されることをブラウザーに通知するには、<code>true</code> を使用します。 デフォルトは <code>true</code> です。 </td>
+</tr>
+</tbody></table>
 
 <br />
 
@@ -1514,34 +1295,28 @@ spec:
 ALB の相互認証を構成します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
-Ingress ALB のダウンストリーム・トラフィックの相互認証を構成します。 外部クライアントはサーバーを認証し、サーバーもクライアントを認証します。どちらも証明書が使用されます。 相互認証は、証明書ベース認証とも双方向認証とも呼ばれます。</br></br>
+**説明**</br>
+Ingress ALB のダウンストリーム・トラフィックの相互認証を構成します。 外部クライアントはサーバーを認証し、サーバーもクライアントを認証します。どちらも証明書が使用されます。 相互認証は、証明書ベース認証とも双方向認証とも呼ばれます。
+
 クライアントと Ingress ALB との間の SSL 終端には、`mutual-auth` アノテーションを使用します。 Ingress ALB とバックエンド・アプリとの間の SSL 終端には、[`ssl-services` アノテーション](#ssl-services)を使用します。
-<p class="tip">相互認証アノテーションによって、クライアント証明書が検証されます。アプリケーションに許可を処理させるために、クライアント証明書をヘッダーに入れて転送するには、次の [`proxy-add-headers` アノテーション](#proxy-add-headers)を使用することができます。
-<code>"ingress.bluemix.net/proxy-add-headers": "serviceName=router-set {\n X-Forwarded-Client-Cert $ssl_client_escaped_cert;\n}\n"</code>
-</p>
-</dd>
 
-<dt>前提条件</dt>
-<dd>
-<ul>
-<li>必要な <code>ca.crt</code> が含まれた有効な相互認証シークレットが必要です。 相互認証シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li>
-<li>443 以外のポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](/docs/containers?topic=containers-ingress#opening_ingress_ports)、そのポートをこのアノテーションで指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。</li>
-</ul>
-</dd>
+相互認証アノテーションによって、クライアント証明書が検証されます。 アプリケーションに許可を処理させるために、クライアント証明書をヘッダーに入れて転送するには、次の [`proxy-add-headers` アノテーション](#proxy-add-headers)を使用することができます。
+`"ingress.bluemix.net/proxy-add-headers": "serviceName=router-set {\n X-Forwarded-Client-Cert $ssl_client_escaped_cert;\n}\n"`
+{: tip}
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
+**前提条件**</br>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+* 必要な `ca.crt` が含まれた有効な相互認証シークレットが必要です。 相互認証シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。
+* 443 以外のポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](/docs/containers?topic=containers-ingress#opening_ingress_ports)、そのポートをこのアノテーションで指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。
+
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
+    ingress.bluemix.net/mutual-auth: "secretName=<mysecret> port=<port> serviceName=<servicename1>,<servicename2>"
 spec:
   tls:
   - hosts:
@@ -1554,7 +1329,9 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 8080</code></pre>
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -1576,9 +1353,6 @@ spec:
 </tr>
 </tbody></table>
 
-</dd>
-</dl>
-
 **相互認証シークレットを作成するには、次のようにします。**
 
 1. 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
@@ -1586,24 +1360,23 @@ spec:
     {: tip}
 2. [証明書を base-64 に変換します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.base64encode.org/)。
 3. 証明書を使用して、シークレット YAML ファイルを作成します。
-     ```
-     apiVersion: v1
+   ```
+   apiVersion: v1
      kind: Secret
      metadata:
        name: ssl-my-test
      type: Opaque
      data:
        ca.crt: <ca_certificate>
-     ```
-     {: codeblock}
+   ```
+   {: codeblock}
 4. 証明書を Kubernetes シークレットとして作成します。
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
+   ```
+   kubectl create -f ssl-my-test
+   ```
+   {: pre}
 
 <br />
-
 
 
 ### SSL サービス・サポート (`ssl-services`)
@@ -1612,23 +1385,22 @@ spec:
 HTTPS 要求を許可し、アップストリーム・アプリへのトラフィックを暗号化します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
-Ingress リソース構成に TLS セクションが含まれている場合、Ingress ALB はアプリに対する HTTPS で保護された URL 要求を処理できます。 デフォルトでは、ALB は、TLS 終端処理を実行して要求を復号してから、HTTP プロトコルを使用してトラフィックをアプリに転送します。 HTTPS プロトコルを必要とするアプリケーションがあり、トラフィックを暗号化する必要がある場合は、`ssl-services` アノテーションを使用してください。 `ssl-services` アノテーションを使用すると、ALB は、外部 TLS 接続を終端した後に、ALB とアプリ・ポッドの間に新たに SSL 接続を作成します。 トラフィックは再び暗号化された後にアップストリームのポッドに送信されます。</br></br>
-バックエンド・アプリが TLS を処理できる場合に、さらにセキュリティーを強化するために、シークレットに格納した証明書を提供して片方向認証または相互認証を追加することができます。</br></br>
-Ingress ALB とバックエンド・アプリの間の SSL 終端には、`ssl-services` アノテーションを使用します。 クライアントと Ingress ALB の間の SSL 終端には、[`mutual-auth` アノテーション](#mutual-auth)を使用します。 </dd>
+**説明**</br>
+Ingress リソース構成に TLS セクションが含まれている場合、Ingress ALB はアプリに対する HTTPS で保護された URL 要求を処理できます。 デフォルトでは、ALB は、TLS 終端処理を実行して要求を復号してから、HTTP プロトコルを使用してトラフィックをアプリに転送します。 HTTPS プロトコルを必要とするアプリケーションがあり、トラフィックを暗号化する必要がある場合は、`ssl-services` アノテーションを使用してください。 `ssl-services` アノテーションを使用すると、ALB は、外部 TLS 接続を終端した後に、ALB とアプリ・ポッドの間に新たに SSL 接続を作成します。 トラフィックは再び暗号化された後にアップストリームのポッドに送信されます。
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
+バックエンド・アプリが TLS を処理できる場合に、さらにセキュリティーを強化するために、シークレットに格納した証明書を提供して片方向認証または相互認証を追加することができます。
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+Ingress ALB とバックエンド・アプリの間の SSL 終端には、`ssl-services` アノテーションを使用します。 クライアントと Ingress ALB の間の SSL 終端には、[`mutual-auth` アノテーション](#mutual-auth)を使用します。
+{: tip}
+
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: &lt;myingressname&gt;
+  name: <myingressname>
   annotations:
-    ingress.bluemix.net/ssl-services: ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
+    ingress.bluemix.net/ssl-services: ssl-service=<myservice1> ssl-secret=<service1-ssl-secret>;ssl-service=<myservice2> ssl-secret=<service2-ssl-secret>
 spec:
   tls:
   - hosts:
@@ -1646,51 +1418,50 @@ spec:
         backend:
           serviceName: myservice2
           servicePort: 8444
-          </code></pre>
+          ```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code> を、HTTPS を必要とするサービスの名前に置き換えます。 トラフィックは暗号化されて ALB からこのアプリのサービスに送信されます。</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>バックエンド・アプリで TLS を処理することができ、さらにセキュリティーを追加する場合は、<code>&lt;<em>service-ssl-secret</em>&gt;</code> をサービスの片方向認証または相互認証のシークレットに置き換えます。<ul><li>片方向認証シークレットを提供する場合、値にはアップストリーム・サーバーの <code>trusted.crt</code> が含まれている必要があります。 片方向シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li><li>相互認証シークレットを提供する場合、値にはアプリが必要とするクライアントの必須 <code>client.crt</code> および <code>client.key</code> が含まれている必要があります。 相互認証シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li></ul><p class="important">シークレットを提供しない場合、非セキュアな接続が許可されます。 接続のテスト中で、証明書の準備ができていない場合や、証明書が期限切れになっていて、非セキュアな接続を許可する場合には、シークレットの省略を選択する可能性があります。</p></td>
-  </tr>
-  </tbody></table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>ssl-service</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、HTTPS を必要とするサービスの名前に置き換えます。 トラフィックは暗号化されて ALB からこのアプリのサービスに送信されます。</td>
+</tr>
+<tr>
+<td><code>ssl-secret</code></td>
+<td>バックエンド・アプリで TLS を処理することができ、さらにセキュリティーを追加する場合は、<code>&lt;<em>service-ssl-secret</em>&gt;</code> をサービスの片方向認証または相互認証のシークレットに置き換えます。<ul><li>片方向認証シークレットを提供する場合、値にはアップストリーム・サーバーの <code>trusted.crt</code> が含まれている必要があります。 片方向シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li><li>相互認証シークレットを提供する場合、値にはアプリが必要とするクライアントの必須 <code>client.crt</code> および <code>client.key</code> が含まれている必要があります。 相互認証シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li></ul><p class="important">シークレットを提供しない場合、非セキュアな接続が許可されます。 接続のテスト中で、証明書の準備ができていない場合や、証明書が期限切れになっていて、非セキュアな接続を許可する場合には、シークレットの省略を選択する可能性があります。</p></td>
+</tr>
+</tbody></table>
 
-  </dd>
-  </dl>
 
 **片方向認証シークレットを作成するには、以下のようにします。**
 
-1. アップストリーム・サーバーからの認証局 (CA) 鍵および証明書と、SSL クライアント証明書を取得します。IBM ALB は、ルート証明書、中間証明書、およびバックエンド証明書を必要とする NGINX に基づいています。詳しくは、[NGINX の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/) を参照してください。
+1. アップストリーム・サーバーからの認証局 (CA) 鍵および証明書と、SSL クライアント証明書を取得します。 IBM ALB は、ルート証明書、中間証明書、およびバックエンド証明書を必要とする NGINX に基づいています。 詳しくは、[NGINX の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/) を参照してください。
 2. [証明書を base-64 に変換します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.base64encode.org/)。
 3. 証明書を使用して、シークレット YAML ファイルを作成します。
-     ```
-     apiVersion: v1
+   ```
+   apiVersion: v1
      kind: Secret
      metadata:
        name: ssl-my-test
      type: Opaque
      data:
        trusted.crt: <ca_certificate>
-     ```
-     {: codeblock}
+   ```
+   {: codeblock}
 
-     アップストリーム・トラフィックの相互認証も実施するには、データ・セクションに `trusted.crt` に加えて `client.crt` と `client.key` を指定できます。
-     {: tip}
+   アップストリーム・トラフィックの相互認証も実施するには、データ・セクションに `trusted.crt` に加えて `client.crt` と `client.key` を指定できます。
+   {: tip}
 
 4. 証明書を Kubernetes シークレットとして作成します。
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
+   ```
+   kubectl create -f ssl-my-test
+   ```
+   {: pre}
 
 </br>
 **相互認証シークレットを作成するには、次のようにします。**
@@ -1700,21 +1471,21 @@ spec:
     {: tip}
 2. [証明書を base-64 に変換します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.base64encode.org/)。
 3. 証明書を使用して、シークレット YAML ファイルを作成します。
-     ```
-     apiVersion: v1
+   ```
+   apiVersion: v1
      kind: Secret
      metadata:
        name: ssl-my-test
      type: Opaque
      data:
        ca.crt: <ca_certificate>
-     ```
-     {: codeblock}
+   ```
+   {: codeblock}
 4. 証明書を Kubernetes シークレットとして作成します。
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
+   ```
+   kubectl create -f ssl-my-test
+   ```
+   {: pre}
 
 <br />
 
@@ -1725,128 +1496,19 @@ spec:
 標準以外の TCP ポートを介してアプリにアクセスします。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
+**説明**</br>
 このアノテーションは、TCP ストリーム・ワークロードを実行するアプリに使用します。
 
 <p class="note">ALB はパススルー・モードで動作し、トラフィックをバックエンド・アプリに転送します。 この場合、SSL 終端はサポートされません。 TLS 接続は終了せず、何もしないで通過します。</p>
-</dd>
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mysecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;myservice&gt;
-          servicePort: 80</code></pre>
-
- <table>
- <caption>アノテーションの構成要素について</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code> を、標準以外の TCP ポートでアクセスする Kubernetes サービスの名前に置き換えます。</td>
-  </tr>
-  <tr>
-  <td><code>ingressPort</code></td>
-  <td><code>&lt;<em>ingress_port</em>&gt;</code> を、アプリにアクセスするための TCP ポートに置き換えます。</td>
-  </tr>
-  <tr>
-  <td><code>servicePort</code></td>
-  <td>このパラメーターはオプションです。 指定した場合、トラフィックがバックエンド・アプリに送信される前に、ポートはこの値に置き換えられます。 指定しない場合、ポートは Ingress ポートと同じままです。 このパラメーターを設定したくない場合は、構成から削除してかまいません。 </td>
-  </tr>
-  </tbody></table>
-
- </dd>
- <dt>使用法</dt>
- <dd><ol><li>ALB 用の開かれたポートを確認します。
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-CLI 出力は、以下のようになります。
-<pre class="screen">
-<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
-<li>ALB の構成マップを開きます。
-<pre class="pre">
-<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>TCP ポートを構成マップに追加します。 <code>&lt;port&gt;</code> を、開く TCP ポートに置き換えます。<p class="note">デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、<a href="/docs/containers?topic=containers-ingress#opening_ingress_ports">Ingress ALB でポートを開く</a>を参照してください。</p>
-<pre class="codeblock">
-<code>apiVersion: v1
-kind: ConfigMap
-data:
- public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
-metadata:
- creationTimestamp: 2017-08-22T19:06:51Z
- name: ibm-cloud-provider-ingress-cm
- namespace: kube-system
- resourceVersion: "1320"
- selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
- uid: &lt;uid&gt;</code></pre></li>
- <li>ALB が TCP ポートによって再構成されたことを確認します。
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-CLI 出力は、以下のようになります。
-<pre class="screen">
-<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
-<li>標準以外の TCP ポートを介してアプリにアクセスするように Ingress を構成します。 この解説ではサンプル YAML ファイルを使用します。 </li>
-<li>ALB リソースを作成するか、既存の ALB 構成を更新します。
-<pre class="pre">
-<code>kubectl apply -f myingress.yaml</code></pre>
-</li>
-<li>Ingress サブドメインに対して curl を実行して、アプリにアクセスします。 例: <code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
-
-<br />
-
-
-## パス・ルーティング・アノテーション
-{: #path-routing}
-
-Ingress ALB は、バックエンド・アプリが listen するパスにトラフィックをルーティングします。パス・ルーティング・アノテーションを使用すると、ALB がトラフィックをアプリにルーティングする方法を構成できます。
-{: shortdesc}
-
-### 外部サービス (`proxy-external-service`)
-{: #proxy-external-service}
-
-{{site.data.keyword.Bluemix_notm}} でホストされるサービスなどの外部サービスへのパス定義を追加します。
-{:shortdesc}
-
-<dl>
-<dt>説明</dt>
-<dd>外部サービスへのパス定義を追加します。 このアノテーションは、バックエンド・サービスの代わりに外部サービスでアプリを実行する場合にのみ使用します。 このアノテーションを使用して外部サービス経路を作成する場合、併用できるのは、`client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout`、`proxy-buffering` の各アノテーションのみです。 その他のアノテーションは、`proxy-external-service` と併用できません。<p class="note">単一のサービスとパスに、複数のホストを指定することはできません。</p>
-</dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>
+**サンプル Ingress リソース YAML**</br>
+```
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/proxy-external-service: "path=&lt;mypath&gt; external-svc=https:&lt;external_service&gt; host=&lt;mydomain&gt;"
+    ingress.bluemix.net/tcp-ports: "serviceName=<myservice> ingressPort=<ingress_port> servicePort=<service_port>"
 spec:
   tls:
   - hosts:
@@ -1860,86 +1522,119 @@ spec:
         backend:
           serviceName: myservice
           servicePort: 80
-</code></pre>
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
- </thead>
- <tbody>
- <tr>
- <td><code>path</code></td>
- <td><code>&lt;<em>mypath</em>&gt;</code> を、外部サービスが listen するパスに置き換えます。</td>
- </tr>
- <tr>
- <td><code>external-svc</code></td>
- <td><code>&lt;<em>external_service</em>&gt;</code> を、呼び出される外部サービスに置き換えます。 例えば、<code>https://&lt;myservice&gt;.&lt;region&gt;.mybluemix.net</code> を入力します。</td>
- </tr>
- <tr>
- <td><code>host</code></td>
- <td><code>&lt;<em>mydomain</em>&gt;</code> を、外部サービスのホスト・ドメインに置き換えます。</td>
- </tr>
- </tbody></table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、標準以外の TCP ポートでアクセスする Kubernetes サービスの名前に置き換えます。</td>
+</tr>
+<tr>
+<td><code>ingressPort</code></td>
+<td><code>&lt;<em>ingress_port</em>&gt;</code> を、アプリにアクセスするための TCP ポートに置き換えます。</td>
+</tr>
+<tr>
+<td><code>servicePort</code></td>
+<td>このパラメーターはオプションです。 指定した場合、トラフィックがバックエンド・アプリに送信される前に、ポートはこの値に置き換えられます。 指定しない場合、ポートは Ingress ポートと同じままです。 このパラメーターを設定したくない場合は、構成から削除してかまいません。 </td>
+</tr>
+</tbody></table>
 
- </dd></dl>
+
+**使用法**</br>
+1. ALB 用の開かれたポートを確認します。
+  ```
+  kubectl get service -n kube-system
+  ```
+  {: pre}
+
+  CLI 出力は、以下のようになります。
+  ```
+  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
+  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx   80:30416/TCP,443:32668/TCP   109d
+  ```
+  {: screen}
+
+2. ALB の構成マップを開きます。
+  ```
+  kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system
+  ```
+  {: pre}
+
+3. TCP ポートを構成マップに追加します。 `<port>` を、開く TCP ポートに置き換えます。
+  デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、[Ingress ALB でポートを開く](/docs/containers?topic=containers-ingress#opening_ingress_ports)を参照してください。
+  {: note}
+  ```
+  apiVersion: v1
+  kind: ConfigMap
+  data:
+    public-ports: 80;443;<port1>;<port2>
+  metadata:
+    creationTimestamp: 2017-08-22T19:06:51Z
+    name: ibm-cloud-provider-ingress-cm
+    namespace: kube-system
+    resourceVersion: "1320"
+    selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+    uid: <uid>
+   ```
+  {: codeblock}
+
+4. ALB が TCP ポートによって再構成されたことを確認します。
+  ```
+  kubectl get service -n kube-system
+  ```
+  {: pre}
+  CLI 出力は、以下のようになります。
+  ```
+  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                               AGE
+  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx   <port1>:30776/TCP,<port2>:30412/TCP   109d
+  ```
+  {: screen}
+
+5. 標準以外の TCP ポートを介してアプリにアクセスするように ALB を構成します。このリファレンスではサンプル YAML ファイルの `tcp-ports` アノテーションを使用します。
+
+6. ALB リソースを作成するか、既存の ALB 構成を更新します。
+  ```
+  kubectl apply -f myingress.yaml
+  ```
+  {: pre}
+
+7. Ingress サブドメインに対して curl を実行して、アプリにアクセスします。 例: `curl <domain>:<ingressPort>`
 
 <br />
 
 
-### ロケーション修飾子 (`location-modifier`)
-{: #location-modifier}
+## パス・ルーティング・アノテーション
+{: #path-routing}
 
-ALB が要求 URI とアプリ・パスを突き合わせる方法を変更します。
+Ingress ALB は、バックエンド・アプリが listen するパスにトラフィックをルーティングします。 パス・ルーティング・アノテーションを使用すると、ALB がトラフィックをアプリにルーティングする方法を構成できます。
+{: shortdesc}
+
+### 外部サービス (`proxy-external-service`)
+{: #proxy-external-service}
+
+{{site.data.keyword.Bluemix_notm}} でホストされるサービスなどの外部サービスへのパス定義を追加します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>デフォルトでは、ALB はアプリが listen するパスを接頭部として処理します。 ALB がアプリへの要求を受け取ると、ALB は、要求 URI の先頭に一致するパス (接頭部として指定) があるか Ingress リソースを検査します。 一致するものが見つかった場合、要求は、アプリがデプロイされているポッドの IP アドレスに転送されます。<br><br>`location-modifier` アノテーションは、ロケーション・ブロックの構成を変更することによって、ALB が一致を検索する方法を変更します。 ロケーション・ブロックは、アプリ・パスに対する要求の処理方法を決定します。<p class="note">正規表現 (regex) パスを処理するには、このアノテーションが必要です。</p></dd>
+**説明**</br>
+外部サービスへのパス定義を追加します。 このアノテーションは、バックエンド・サービスの代わりに外部サービスでアプリを実行する場合にのみ使用します。 このアノテーションを使用して外部サービス経路を作成する場合、併用できるのは、`client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout`、`proxy-buffering` の各アノテーションのみです。 その他のアノテーションは、`proxy-external-service` と併用できません。
 
-<dt>サポートされる修飾子</dt>
-<dd>
+単一のサービスとパスに、複数のホストを指定することはできません。
+{: note}
 
-<table>
-<caption>サポートされる修飾子</caption>
- <col width="10%">
- <col width="90%">
- <thead>
- <th>修飾子</th>
- <th>説明</th>
- </thead>
- <tbody>
- <tr>
- <td><code>=</code></td>
- <td>等号修飾子を使用すると、ALB は完全一致のみを選択します。 完全一致が検出されると、検索は停止し、一致したパスが選択されます。<br>例えば、アプリが <code>/tea</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、厳密に一致する <code>/tea</code> パスのみを選択します。</td>
- </tr>
- <tr>
- <td><code>~</code></td>
- <td>波形記号修飾子を使用すると、マッチング時に ALB はパスを大/小文字を区別する正規表現パスとして処理します。<br>例えば、アプリが <code>/coffee</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、<code>/ab/coffee</code> パスまたは <code>/123/coffee</code> パスを選択できます (これらのパスがアプリ用に明示的に設定されていなくてもかまいません)。</td>
- </tr>
- <tr>
- <td><code>~\*</code></td>
- <td>波形記号の後にアスタリスクが続く修飾子では、マッチング時に ALB はパスを大/小文字を区別しない正規表現パスとして処理します。<br>例えば、アプリが <code>/coffee</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、<code>/ab/Coffee</code> パスまたは <code>/123/COFFEE</code> パスを選択できます (これらのパスがアプリ用に明示的に設定されていなくてもかまいません)。</td>
- </tr>
- <tr>
- <td><code>^~</code></td>
- <td>脱字記号の後に波形記号が続く修飾子では、ALB は正規表現パスではなく、非正規表現による最適な一致を選択します。</td>
- </tr>
- </tbody>
-</table>
-
-</dd>
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
+    ingress.bluemix.net/proxy-external-service: "path=<mypath> external-svc=https:<external_service> host=<mydomain>"
 spec:
   tls:
   - hosts:
@@ -1951,26 +1646,117 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: &lt;myservice&gt;
-          servicePort: 80</code></pre>
+          serviceName: myservice
+          servicePort: 80
+```
+{: codeblock}
 
- <table>
- <caption>アノテーションの構成要素について</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>modifier</code></td>
-  <td><code>&lt;<em>location_modifier</em>&gt;</code> を、パスに使用するロケーション修飾子に置き換えてください。 サポートされる修飾子は、<code>「=」</code>、<code>「~」</code>、<code>「~\*」</code>、および<code>「^~」</code>です。 修飾子は単一引用符で囲む必要があります。</td>
-  </tr>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
+<table>
+<caption>アノテーションの構成要素について</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td><code>&lt;<em>mypath</em>&gt;</code> を、外部サービスが listen するパスに置き換えます。</td>
+</tr>
+<tr>
+<td><code>external-svc</code></td>
+<td><code>&lt;<em>external_service</em>&gt;</code> を、呼び出される外部サービスに置き換えます。 例えば、<code>https://&lt;myservice&gt;.&lt;region&gt;.mybluemix.net</code> を入力します。</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td><code>&lt;<em>mydomain</em>&gt;</code> を、外部サービスのホスト・ドメインに置き換えます。</td>
+</tr>
+</tbody></table>
+
+<br />
+
+
+### ロケーション修飾子 (`location-modifier`)
+{: #location-modifier}
+
+ALB が要求 URI とアプリ・パスを突き合わせる方法を変更します。
+{:shortdesc}
+
+**説明**</br>
+デフォルトでは、ALB はアプリが listen するパスを接頭部として処理します。 ALB がアプリへの要求を受け取ると、ALB は、要求 URI の先頭に一致するパス (接頭部として指定) があるか Ingress リソースを検査します。 一致するものが見つかった場合、要求は、アプリがデプロイされているポッドの IP アドレスに転送されます。
+
+`location-modifier` アノテーションは、ロケーション・ブロックの構成を変更することによって、ALB が一致を検索する方法を変更します。 ロケーション・ブロックは、アプリ・パスに対する要求の処理方法を決定します。
+
+正規表現 (regex) パスを処理するには、このアノテーションが必要です。
+{: note}
+
+**サポートされる修飾子**</br>
+<table>
+<caption>サポートされる修飾子</caption>
+<col width="10%">
+<col width="90%">
+<thead>
+<th>修飾子</th>
+<th>説明</th>
+</thead>
+<tbody>
+<tr>
+<td><code>=</code></td>
+<td>等号修飾子を使用すると、ALB は完全一致のみを選択します。 完全一致が検出されると、検索は停止し、一致したパスが選択されます。<br>例えば、アプリが <code>/tea</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、厳密に一致する <code>/tea</code> パスのみを選択します。</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>波形記号修飾子を使用すると、マッチング時に ALB はパスを大/小文字を区別する正規表現パスとして処理します。<br>例えば、アプリが <code>/coffee</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、<code>/ab/coffee</code> パスまたは <code>/123/coffee</code> パスを選択できます (これらのパスがアプリ用に明示的に設定されていなくてもかまいません)。</td>
+</tr>
+<tr>
+<td><code>~\*</code></td>
+<td>波形記号の後にアスタリスクが続く修飾子では、マッチング時に ALB はパスを大/小文字を区別しない正規表現パスとして処理します。<br>例えば、アプリが <code>/coffee</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、<code>/ab/Coffee</code> パスまたは <code>/123/COFFEE</code> パスを選択できます (これらのパスがアプリ用に明示的に設定されていなくてもかまいません)。</td>
+</tr>
+<tr>
+<td><code>^~</code></td>
+<td>脱字記号の後に波形記号が続く修飾子では、ALB は正規表現パスではなく、非正規表現による最適な一致を選択します。</td>
+</tr>
+</tbody>
+</table>
+
+
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/location-modifier: "modifier='<location_modifier>' serviceName=<myservice1>;modifier='<location_modifier>' serviceName=<myservice2>"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 80
+```
+{: codeblock}
+
+<table>
+<caption>アノテーションの構成要素について</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>modifier</code></td>
+<td><code>&lt;<em>location_modifier</em>&gt;</code> を、パスに使用するロケーション修飾子に置き換えてください。 サポートされる修飾子は、<code>「=」</code>、<code>「~」</code>、<code>「~\*」</code>、および<code>「^~」</code>です。 修飾子は単一引用符で囲む必要があります。</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。</td>
+</tr>
+</tbody></table>
 
 <br />
 
@@ -1981,18 +1767,18 @@ spec:
 ALB ドメイン・パスへの着信ネットワーク・トラフィックを、バックエンド・アプリが listen する別のパスにルーティングできます。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>Ingress ALB ドメインは、<code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> への着信ネットワーク・トラフィックをアプリにルーティングします。 アプリは、<code>/beans</code> ではなく <code>/coffee</code> で listen します。 着信ネットワーク・トラフィックをアプリに転送するには、Ingress リソース構成ファイルに再書き込みアノテーションを追加します。 再書き込みアノテーションにより、<code>/beans</code> 上の着信ネットワーク・トラフィックは <code>/coffee</code> パスを使用してアプリに転送されるようになります。 複数のサービスを含める場合は、セミコロン (;) のみを使用して区切ってください。</dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**説明**</br>
+Ingress ALB ドメインは、`mykubecluster.us-south.containers.appdomain.cloud/beans` への着信ネットワーク・トラフィックをアプリにルーティングします。 アプリは、`/beans` ではなく `/coffee` で listen します。 着信ネットワーク・トラフィックをアプリに転送するには、Ingress リソース構成ファイルに再書き込みアノテーションを追加します。 再書き込みアノテーションにより、`/beans` 上の着信ネットワーク・トラフィックは `/coffee` パスを使用してアプリに転送されるようになります。 複数のサービスを含める場合は、セミコロン (;) のみを使用して区切ってください。
+
+**サンプル Ingress リソース YAML**</br>
+
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/rewrite-path: "serviceName=&lt;myservice1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;myservice2&gt; rewrite=&lt;target_path2&gt;"
+    ingress.bluemix.net/rewrite-path: "serviceName=<myservice1> rewrite=<target_path1>;serviceName=<myservice2> rewrite=<target_path2>"
 spec:
   tls:
   - hosts:
@@ -2006,7 +1792,8 @@ spec:
         backend:
           serviceName: myservice1
           servicePort: 80
-</code></pre>
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -2020,11 +1807,9 @@ spec:
 </tr>
 <tr>
 <td><code>rewrite</code></td>
-<td><code>&lt;<em>target_path</em>&gt;</code> を、アプリが listen するパスに置き換えます。 ALB ドメイン上の着信ネットワーク・トラフィックは、このパスを使用して Kubernetes サービスに転送されます。 大多数のアプリは特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> の例では、rewrite パスは <code>/coffee</code> です。<strong>注</strong>: このファイルを適用し、URL で <code>404</code> 応答が示される場合、末尾が `/` のパスでバックエンド・アプリが listen している可能性があります。この rewrite フィールドの末尾に `/` を追加してから、ファイルを再適用し、再度その URL を試してください。</td>
+<td><code>&lt;<em>target_path</em>&gt;</code> を、アプリが listen するパスに置き換えます。 ALB ドメイン上の着信ネットワーク・トラフィックは、このパスを使用して Kubernetes サービスに転送されます。 大多数のアプリは特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> の例では、rewrite パスは <code>/coffee</code> です。 <p class= "note">このファイルを適用し、URL で <code>404</code> 応答が示される場合、末尾が `/` のパスでバックエンド・アプリが listen している可能性があります。 この rewrite フィールドの末尾に `/` を追加してから、ファイルを再適用し、再度その URL を試してください。</p></td>
 </tr>
 </tbody></table>
-
-</dd></dl>
 
 <br />
 
@@ -2041,33 +1826,32 @@ Ingress ALB は、バックエンド・アプリとクライアント Web ブラ
 ラージ・クライアント要求ヘッダーを読み取るバッファーの最大数と最大サイズを設定します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>ラージ・クライアント要求ヘッダーを読み取るバッファーは、必要な場合にのみ割り振られます。要求終了処理の後に接続がキープアライブ状態に遷移すると、これらのバッファーは解放されます。 デフォルトでは、<code>4</code> つのバッファーがあり、バッファー・サイズは <code>8K</code> バイトです。要求行が 1 つのバッファーの設定された最大サイズを超えると、「<code>414 Request-URI Too Large</code>」という HTTP エラーがクライアントに返されます。 また、要求ヘッダー・フィールドが 1 つのバッファーの設定された最大サイズを超えると、「<code>400 Bad Request</code>」というエラーがクライアントに返されます。 ラージ・クライアント要求ヘッダーの読み取りに使用されるバッファーの最大数と最大サイズを調整することができます。
+**説明**</br>
+ラージ・クライアント要求ヘッダーを読み取るバッファーは、必要な場合にのみ割り振られます。要求終了処理の後に接続がキープアライブ状態に遷移すると、これらのバッファーは解放されます。 デフォルトでは、`4` つのバッファーがあり、バッファー・サイズは `8K` バイトです。 要求行が 1 つのバッファーの設定された最大サイズを超えると、「`414 Request-URI Too Large`」という HTTP エラーがクライアントに返されます。 また、要求ヘッダー・フィールドが 1 つのバッファーの設定された最大サイズを超えると、「`400 Bad Request`」というエラーがクライアントに返されます。 ラージ・クライアント要求ヘッダーの読み取りに使用されるバッファーの最大数と最大サイズを調整することができます。
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/large-client-header-buffers: "number=&lt;number&gt; size=&lt;size&gt;"
+   ingress.bluemix.net/large-client-header-buffers: "number=<number> size=<size>"
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -2084,8 +1868,6 @@ rules:
  <td>ラージ・クライアント要求ヘッダーを読み取るバッファーの最大サイズ。 例えば、16 キロバイトに設定するには、<code>16k</code> と定義します。 サイズの末尾は、キロバイトの場合は <code>k</code>、メガバイトの場合は <code>m</code> でなければなりません。</td>
  </tr>
 </tbody></table>
-</dd>
-</dl>
 
 <br />
 
@@ -2096,58 +1878,54 @@ rules:
 バッファー・アノテーションを使用すると、クライアントにデータを送信する間、ALB での応答データの保存を無効にできます。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>Ingress ALB は、バックエンド・アプリとクライアント Web ブラウザーの間のプロキシーとして機能します。 応答がバックエンド・アプリからクライアントに送信されると、デフォルトでは、応答データが ALB のバッファーに入れられます。 ALB は、クライアント応答をプロキシー処理し、クライアントのペースでクライアントに応答を送信し始めます。 バックエンド・アプリからのすべてのデータを ALB が受信すると、バックエンド・アプリへの接続は閉じられます。 ALB からクライアントへの接続は、クライアントがすべてのデータを受信するまで開いたままです。
+**説明**</br>
+Ingress ALB は、バックエンド・アプリとクライアント Web ブラウザーの間のプロキシーとして機能します。 応答がバックエンド・アプリからクライアントに送信されると、デフォルトでは、応答データが ALB のバッファーに入れられます。 ALB は、クライアント応答をプロキシー処理し、クライアントのペースでクライアントに応答を送信し始めます。 バックエンド・アプリからのすべてのデータを ALB が受信すると、バックエンド・アプリへの接続は閉じられます。 ALB からクライアントへの接続は、クライアントがすべてのデータを受信するまで開いたままです。
 
-</br></br>
 ALB での応答データのバッファリングを無効にすると、データは即時に ALB からクライアントに送信されます。 クライアントが、ALB のペースで着信データを処理できなければなりません。 クライアントの処理速度が遅すぎる場合は、データが失われる可能性があります。
-</br></br>
-ALB での応答データのバッファリングは、デフォルトでは有効です。</dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+ALB での応答データのバッファリングは、デフォルトでは有効です。
+
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
+   ingress.bluemix.net/proxy-buffering: "enabled=<false> serviceName=<myservice1>"
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
- </thead>
- <tbody>
- <tr>
- <td><code>enabled</code></td>
-   <td>ALB での応答データ・バッファリングを無効にするには、<code>false</code> に設定します。</td>
- </tr>
- <tr>
- <td><code>serviceName</code></td>
- <td><code><em>&lt;myservice1&gt;</em></code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 複数のサービスは、セミコロン (,) で区切ります。 このフィールドはオプションです。 サービス名を指定しない場合は、すべてのサービスがこのアノテーションを使用します。</td>
- </tr>
- </tbody></table>
- </dd>
- </dl>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>ALB での応答データ・バッファリングを無効にするには、<code>false</code> に設定します。</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td><code><em>&lt;myservice1&gt;</em></code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 複数のサービスは、セミコロン (,) で区切ります。 このフィールドはオプションです。 サービス名を指定しない場合は、すべてのサービスがこのアノテーションを使用します。</td>
+</tr>
+</tbody></table>
 
 <br />
-
 
 
 ### プロキシー・バッファー (`proxy-buffers`)
@@ -2156,56 +1934,55 @@ rules:
 ALB 用のプロキシー・バッファーの数とサイズを構成します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
-プロキシー・サーバーからの単一の接続に対して、応答を読み取るバッファーの数とサイズを設定します。 特定のサービスが指定されていなければ、Ingress サブドメイン内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE number=2 size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>number=2 size=1k</code> という構成を指定した場合は、Ingress サブドメイン内のすべてのサービスに 1k が適用されます。</br>
-<p class="tip">`upstream sent too big header while reading response header from upstream` というエラー・メッセージを受け取った場合は、バックエンドのアップストリーム・サーバーが、デフォルトの制限より大きいヘッダー・サイズを送信しました。 <code>proxy-buffers</code> と [<code>proxy-buffer-size</code>](#proxy-buffer-size) の両方のサイズを大きくしてください。</p>
-</dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**説明**</br>
+プロキシー・サーバーからの単一の接続に対して、応答を読み取るバッファーの数とサイズを設定します。 特定のサービスが指定されていなければ、Ingress サブドメイン内のすべてのサービスにこの構成が適用されます。 例えば、`serviceName=SERVICE number=2 size=1k` という構成を指定した場合は、サービスに 1k が適用されます。 `number=2 size=1k` という構成を指定した場合は、Ingress サブドメイン内のすべてのサービスに 1k が適用されます。</br>
+<p class="tip">`upstream sent too big header while reading response header from upstream` というエラー・メッセージを受け取った場合は、バックエンドのアップストリーム・サーバーが、デフォルトの制限より大きいヘッダー・サイズを送信しました。 `proxy-buffers` と [`proxy-buffer-size`](#proxy-buffer-size) の両方のサイズを大きくしてください。</p>
+
+**サンプル Ingress リソース YAML**</br>
+
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-buffers: "serviceName=&lt;myservice&gt; number=&lt;number_of_buffers&gt; size=&lt;size&gt;"
+   ingress.bluemix.net/proxy-buffers: "serviceName=<myservice> number=<number_of_buffers> size=<size>"
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
- </thead>
- <tbody>
- <tr>
- <td><code>serviceName</code></td>
- <td><code>&lt;<em>myservice</em>&gt;</code> を、プロキシー・バッファーを適用するサービスの名前に置き換えます。</td>
- </tr>
- <tr>
- <td><code>number</code></td>
- <td><code>&lt;<em>number_of_buffers</em>&gt;</code> を、<em>2</em> などの数値に置き換えます。</td>
- </tr>
- <tr>
- <td><code>size</code></td>
- <td><code>&lt;<em>size</em>&gt;</code> を、各バッファーのサイズをキロバイト (k または K) 単位に置き換えます (例えば <em>1K</em>)。</td>
- </tr>
- </tbody>
- </table>
- </dd></dl>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、プロキシー・バッファーを適用するサービスの名前に置き換えます。</td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td><code>&lt;<em>number_of_buffers</em>&gt;</code> を、<code>2</code> などの数値に置き換えます。</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td><code>&lt;<em>size</em>&gt;</code> を、各バッファーのサイズをキロバイト (k または K) 単位に置き換えます (例えば <code>1K</code>)。</td>
+</tr>
+</tbody>
+</table>
 
 <br />
 
@@ -2216,60 +1993,53 @@ rules:
 応答の最初の部分を読み取るプロキシー・バッファーのサイズを構成します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
-プロキシー・サーバーから受け取る応答の、最初の部分を読み取るバッファーのサイズを設定します。 応答のこの部分には通常、短い応答ヘッダーが含まれています。 特定のサービスが指定されていなければ、Ingress サブドメイン内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>size=1k</code> という構成を指定した場合は、Ingress サブドメイン内のすべてのサービスに 1k が適用されます。
-<p class="tip">`upstream sent too big header while reading response header from upstream` というエラー・メッセージを受け取った場合は、バックエンドのアップストリーム・サーバーが、デフォルトの制限より大きいヘッダー・サイズを送信しました。 <code>proxy-buffer-size</code> と [<code>proxy-buffers</code>](#proxy-buffers) の両方のサイズを大きくしてください。</p>
-</dd>
+**説明**</br>
+プロキシー・サーバーから受け取る応答の、最初の部分を読み取るバッファーのサイズを設定します。 応答のこの部分には通常、短い応答ヘッダーが含まれています。 特定のサービスが指定されていなければ、Ingress サブドメイン内のすべてのサービスにこの構成が適用されます。 例えば、`serviceName=SERVICE size=1k` という構成を指定した場合は、サービスに 1k が適用されます。 `size=1k` という構成を指定した場合は、Ingress サブドメイン内のすべてのサービスに 1k が適用されます。
 
+`upstream sent too big header while reading response header from upstream` というエラー・メッセージを受け取った場合は、バックエンドのアップストリーム・サーバーが、デフォルトの制限より大きいヘッダー・サイズを送信しました。 `proxy-buffer-size` と [`proxy-buffers`](#proxy-buffers) の両方のサイズを大きくしてください。
+{: tip}
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-buffer-size: "serviceName=&lt;myservice&gt; size=&lt;size&gt;"
+   ingress.bluemix.net/proxy-buffer-size: "serviceName=<myservice> size=<size>"
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080
-</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
- </thead>
- <tbody>
- <tr>
- <td><code>serviceName</code></td>
- <td><code>&lt;<em>myservice</em>&gt;</code> を、proxy-buffers-size を適用するサービスの名前に置き換えます。</td>
- </tr>
- <tr>
- <td><code>size</code></td>
- <td><code>&lt;<em>size</em>&gt;</code> を、各バッファーのサイズをキロバイト (k または K) 単位に置き換えます (例えば <em>1K</em>)。 適切なサイズを計算するには、[このブログ投稿 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.getpagespeed.com/server-setup/nginx/tuning-proxy_buffer_size-in-nginx) を確認してください。</td>
- </tr>
- </tbody></table>
-
- </dd>
- </dl>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、proxy-buffers-size を適用するサービスの名前に置き換えます。</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td><code>&lt;<em>size</em>&gt;</code> を、各バッファーのサイズをキロバイト (k または K) 単位に置き換えます (例えば <code>1K</code>)。 適切なサイズを計算するには、[このブログ投稿 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.getpagespeed.com/server-setup/nginx/tuning-proxy_buffer_size-in-nginx) を確認してください。 </td>
+</tr>
+</tbody></table>
 
 <br />
-
 
 
 ### プロキシー・ビジー・バッファー・サイズ (`proxy-busy-buffers-size`)
@@ -2278,36 +2048,32 @@ rules:
 ビジー状態にすることができるプロキシー・バッファーのサイズを構成します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
-クライアントへの応答がまだ全部読み取られていない間、その応答を送信中のバッファー群のサイズを制限します。 その間、残りのバッファーでは応答を読み取ることができます。さらに必要に応じて、応答の一部を一時ファイルにバッファリングできます。 特定のサービスが指定されていなければ、Ingress サブドメイン内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>size=1k</code> という構成を指定した場合は、Ingress サブドメイン内のすべてのサービスに 1k が適用されます。
-</dd>
+**説明**</br>
+クライアントへの応答がまだ全部読み取られていない間、その応答を送信中のバッファー群のサイズを制限します。 その間、残りのバッファーでは応答を読み取ることができます。さらに必要に応じて、応答の一部を一時ファイルにバッファリングできます。 特定のサービスが指定されていなければ、Ingress サブドメイン内のすべてのサービスにこの構成が適用されます。 例えば、`serviceName=SERVICE size=1k` という構成を指定した場合は、サービスに 1k が適用されます。 `size=1k` という構成を指定した場合は、Ingress サブドメイン内のすべてのサービスに 1k が適用されます。
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;myservice&gt; size=&lt;size&gt;"
+   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=<myservice> size=<size>"
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+         ```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -2321,15 +2087,11 @@ rules:
 </tr>
 <tr>
 <td><code>size</code></td>
-<td><code>&lt;<em>size</em>&gt;</code> を、各バッファーのサイズをキロバイト (k または K) 単位に置き換えます (例えば <em>1K</em>)。</td>
+<td><code>&lt;<em>size</em>&gt;</code> を、各バッファーのサイズをキロバイト (k または K) 単位に置き換えます (例えば <code>1K</code>)。</td>
 </tr>
 </tbody></table>
 
- </dd>
- </dl>
-
 <br />
-
 
 
 ## 要求/応答アノテーション
@@ -2344,51 +2106,48 @@ rules:
 クライアント要求にサーバー・ポートを追加してからバックエンド・アプリに転送します。
 {: shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>要求をバックエンド・アプリに転送する前に、クライアント要求のホスト・ヘッダーに `:server_port` を追加します。
+**説明**</br>
+要求をバックエンド・アプリに転送する前に、クライアント要求のホスト・ヘッダーに `:server_port` を追加します。
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/add-host-port: "enabled=&lt;true&gt; serviceName=&lt;myservice&gt;"
+   ingress.bluemix.net/add-host-port: "enabled=<true> serviceName=<myservice>"
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
- </thead>
- <tbody>
- <tr>
- <td><code>enabled</code></td>
-   <td>サブドメインの server_port 設定を有効にするには、<code>true</code> に設定します。</td>
- </tr>
- <tr>
- <td><code>serviceName</code></td>
- <td><code><em>&lt;myservice&gt;</em></code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 複数のサービスは、セミコロン (,) で区切ります。 このフィールドはオプションです。 サービス名を指定しない場合は、すべてのサービスがこのアノテーションを使用します。</td>
- </tr>
- </tbody></table>
- </dd>
- </dl>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>サブドメインの server_port 設定を有効にするには、<code>true</code> に設定します。</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td><code><em>&lt;myservice&gt;</em></code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 複数のサービスは、セミコロン (,) で区切ります。 このフィールドはオプションです。 サービス名を指定しない場合は、すべてのサービスがこのアノテーションを使用します。</td>
+</tr>
+</tbody></table>
 
 <br />
 
@@ -2399,58 +2158,66 @@ rules:
 クライアント要求をバックエンド・アプリに送信する前に要求にさらにヘッダー情報を追加します。または、クライアント応答をクライアントに送信する前に応答にさらにヘッダー情報を追加します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>Ingress ALB は、クライアント・アプリとバックエンド・アプリの間のプロキシーとして機能します。 ALB に送信されたクライアント要求は、処理 (プロキシー処理) され、新しい要求に入れられた後に、バックエンド・アプリに送信されます。 同様に、ALB に送信されたバックエンド・アプリ応答も処理 (プロキシー処理) され、新しい応答に入れられた後に、クライアントに送信されます。 要求または応答のプロキシー処理によって、クライアントまたはバックエンド・アプリから最初に送信された HTTP ヘッダー情報 (ユーザー名など) は削除されます。
-<br><br>
-バックエンド・アプリに HTTP ヘッダー情報が必要な場合は、<code>proxy-add-headers</code> アノテーションを使用して、ALB がクライアント要求をバックエンド・アプリに転送する前に、ヘッダー情報をクライアント要求に追加できます。 クライアント Web アプリに HTTP ヘッダー情報が必要な場合は、<code>response-add-headers</code> アノテーションを使用して、ALB が応答をクライアント Web アプリに転送する前に、ヘッダー情報を応答に追加できます。<br>
+**説明**</br>
+Ingress ALB は、クライアント・アプリとバックエンド・アプリの間のプロキシーとして機能します。 ALB に送信されたクライアント要求は、処理 (プロキシー処理) され、新しい要求に入れられた後に、バックエンド・アプリに送信されます。 同様に、ALB に送信されたバックエンド・アプリ応答も処理 (プロキシー処理) され、新しい応答に入れられた後に、クライアントに送信されます。 要求または応答のプロキシー処理によって、クライアントまたはバックエンド・アプリから最初に送信された HTTP ヘッダー情報 (ユーザー名など) は削除されます。
 
-<ul><li>例えば、要求がアプリに転送される前に、次の X-Forward ヘッダー情報を要求に追加する必要があるとします。
-<pre class="screen">
-<code>proxy_set_header Host $host;
+バックエンド・アプリに HTTP ヘッダー情報が必要な場合は、`proxy-add-headers` アノテーションを使用して、ALB がクライアント要求をバックエンド・アプリに転送する前に、ヘッダー情報をクライアント要求に追加できます。 クライアント Web アプリに HTTP ヘッダー情報が必要な場合は、`response-add-headers` アノテーションを使用して、ALB が応答をクライアント Web アプリに転送する前に、ヘッダー情報を応答に追加できます。<br>
+
+例えば、要求がアプリに転送される前に、次の X-Forward ヘッダー情報を要求に追加する必要があるとします。
+```
+proxy_set_header Host $host;
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+```
+{: screen}
+
 X-Forward ヘッダー情報をアプリに送信される要求に追加するには、`proxy-add-headers` アノテーションを以下のように使用します。
-<pre class="screen">
-<code>ingress.bluemix.net/proxy-add-headers: |
-  serviceName=&lt;myservice1&gt; {
+```
+ingress.bluemix.net/proxy-add-headers: |
+  serviceName=<myservice1> {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
-  }</code></pre>
-</li></ul>
+  }
+```
+{: codeblock}
+
 </br>
-<p class="tip"><code>response-add-headers</code> アノテーションでは、すべてのサービスに対するグローバル・ヘッダーはサポートされません。 サーバー・レベルですべてのサービスの応答にヘッダーを追加するには、[<code>server-snippets</code> アノテーション](#server-snippets)を使用してください。</br> <pre class="codeblock">annotations:
+
+`response-add-headers` アノテーションでは、すべてのサービスに対するグローバル・ヘッダーはサポートされません。 サーバー・レベルですべてのサービスの応答にヘッダーを追加するには、[`server-snippets` アノテーション](#server-snippets)を使用してください。
+{: tip}
+```
+annotations:
   ingress.bluemix.net/server-snippets: |
-    add_header &lt;header1&gt; &lt;value1&gt;;</pre></p>
-</dd>
+    add_header <header1> <value1>;
+```
+{: pre}
+</br>
 
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/proxy-add-headers: |
-      serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt; &lt;value1&gt;;
-      &lt;header2&gt; &lt;value2&gt;;
+      serviceName=<myservice1> {
+      <header1> <value1>;
+      <header2> <value2>;
       }
-      serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt; &lt;value3&gt;;
+      serviceName=<myservice2> {
+      <header3> <value3>;
       }
     ingress.bluemix.net/response-add-headers: |
-      serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt;: &lt;value1&gt;;
-      &lt;header2&gt;: &lt;value2&gt;;
+      serviceName=<myservice1> {
+      <header1>:<value1>;
+      <header2>:<value2>;
       }
-      serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt;: &lt;value3&gt;;
+      serviceName=<myservice2> {
+      <header3>:<value3>;
       }
 spec:
   tls:
@@ -2463,36 +2230,36 @@ spec:
       paths:
       - path: /service1_path
         backend:
-          serviceName: &lt;myservice1&gt;
+          serviceName: <myservice1>
           servicePort: 8080
       - path: /service2_path
         backend:
-          serviceName: &lt;myservice2&gt;
-          servicePort: 80</code></pre>
+          serviceName: <myservice2>
+          servicePort: 80
+```
+{: codeblock}
 
- <table>
- <caption>アノテーションの構成要素について</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>service_name</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。</td>
-  </tr>
-  <tr>
-  <td><code>&lt;header&gt;</code></td>
-  <td>クライアント要求またはクライアント応答に追加するヘッダー情報のキー。</td>
-  </tr>
-  <tr>
-  <td><code>&lt;value&gt;</code></td>
-  <td>クライアント要求またはクライアント応答に追加するヘッダー情報の値。</td>
-  </tr>
-  </tbody></table>
- </dd></dl>
+<table>
+<caption>アノテーションの構成要素について</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>service_name</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。</td>
+</tr>
+<tr>
+<td><code>&lt;header&gt;</code></td>
+<td>クライアント要求またはクライアント応答に追加するヘッダー情報のキー。</td>
+</tr>
+<tr>
+<td><code>&lt;value&gt;</code></td>
+<td>クライアント要求またはクライアント応答に追加するヘッダー情報の値。</td>
+</tr>
+</tbody></table>
 
 <br />
-
 
 
 ### クライアント応答ヘッダーの削除 (`response-remove-headers`)
@@ -2501,24 +2268,24 @@ spec:
 バックエンド・アプリからのクライアント応答に含まれているヘッダー情報を削除してから、クライアントに応答を送信します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>Ingress ALB は、バックエンド・アプリとクライアント Web ブラウザーの間のプロキシーとして機能します。 ALB に送信されたバックエンド・アプリからのクライアント応答は、処理 (プロキシー処理) され、新しい応答に入れられた後に、ALB からクライアント Web ブラウザーに送信されます。 応答のプロキシー処理によって、バックエンド・アプリから最初に送信された HTTP ヘッダー情報は削除されますが、バックエンド・アプリに固有のヘッダーが削除されずに残る場合があります。 ALB からクライアント Web ブラウザーにクライアント応答を転送する前に、応答からヘッダー情報を削除します。</dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**説明**</br>
+Ingress ALB は、バックエンド・アプリとクライアント Web ブラウザーの間のプロキシーとして機能します。 ALB に送信されたバックエンド・アプリからのクライアント応答は、処理 (プロキシー処理) され、新しい応答に入れられた後に、ALB からクライアント Web ブラウザーに送信されます。 応答のプロキシー処理によって、バックエンド・アプリから最初に送信された HTTP ヘッダー情報は削除されますが、バックエンド・アプリに固有のヘッダーが削除されずに残る場合があります。 ALB からクライアント Web ブラウザーにクライアント応答を転送する前に、応答からヘッダー情報を削除します。
+
+**サンプル Ingress リソース YAML**</br>
+
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/response-remove-headers: |
-      serviceName=&lt;myservice1&gt; {
-      "&lt;header1&gt;";
-      "&lt;header2&gt;";
+      serviceName=<myservice1> {
+      "<header1>";
+      "<header2>";
       }
-      serviceName=&lt;myservice2&gt; {
-      "&lt;header3&gt;";
+      serviceName=<myservice2> {
+      "<header3>";
       }
 spec:
   tls:
@@ -2531,12 +2298,14 @@ spec:
       paths:
       - path: /service1_path
         backend:
-          serviceName: &lt;myservice1&gt;
+          serviceName: <myservice1>
           servicePort: 8080
       - path: /service2_path
         backend:
-          serviceName: &lt;myservice2&gt;
-          servicePort: 80</code></pre>
+          serviceName: <myservice2>
+          servicePort: 80
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -2553,7 +2322,6 @@ spec:
 <td>クライアント応答から削除するヘッダーのキー。</td>
 </tr>
 </tbody></table>
-</dd></dl>
 
 <br />
 
@@ -2564,51 +2332,49 @@ spec:
 クライアントが要求の一部として送信できる本体の最大サイズを設定します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>必要なパフォーマンスを維持するため、クライアント要求本体の最大サイズは 1 M バイトに設定されています。 本体サイズがこの制限を超えるクライアント要求が Ingress ALB に送信された場合、データを分割することをクライアントが許可していなければ、ALB は HTTP 応答 413 (要求エンティティーが大き過ぎる) をクライアントに返します。 要求本体のサイズが小さくなるまで、クライアントと ALB の間の接続は確立されません。 データを複数のチャンクに分割することをクライアントが許可した場合は、データが 1 M バイトの複数のパッケージに分割されて、ALB に送信されます。
+**説明**</br>
+必要なパフォーマンスを維持するため、クライアント要求本体の最大サイズは 1 M バイトに設定されています。 本体サイズがこの制限を超えるクライアント要求が Ingress ALB に送信された場合、データを分割することをクライアントが許可していなければ、ALB は HTTP 応答 413 (要求エンティティーが大き過ぎる) をクライアントに返します。 要求本体のサイズが小さくなるまで、クライアントと ALB の間の接続は確立されません。 データを複数のチャンクに分割することをクライアントが許可した場合は、データが 1 M バイトの複数のパッケージに分割されて、ALB に送信されます。
 
-</br></br>
 本体サイズが 1 M バイトを超えるクライアント要求が想定されるために、最大本体サイズを引き上げたい場合があります。 例えば、クライアントが大きなファイルをアップロードできるようにしたい場合があります。 要求本体の最大サイズを引き上げると、要求を受信するまでクライアントへの接続を開いておかなければならないため、ALB のパフォーマンスに影響を及ぼす可能性があります。
-</br></br>
-<p class="note">一部のクライアント Web ブラウザーは、HTTP 応答 413 のメッセージを正しく表示できません。</p></dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+一部のクライアント Web ブラウザーは、HTTP 応答 413 のメッセージを正しく表示できません。
+{: note}
+
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=&lt;size&gt;
+   ingress.bluemix.net/client-max-body-size: size=<size>
 spec:
  tls:
  - hosts:
    - mydomain
-  secretName: mytlssecret
-rules:
+   secretName: mytlssecret
+ rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
- </thead>
- <tbody>
- <tr>
- <td><code>&lt;size&gt;</code></td>
- <td>クライアント応答本体の最大サイズ。 例えば、最大サイズを 200 M バイトに設定するには、<code>200m</code> と定義します。 サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
- </tr>
- </tbody></table>
-
- </dd></dl>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;size&gt;</code></td>
+<td>クライアント応答本体の最大サイズ。 例えば、最大サイズを 200 M バイトに設定するには、<code>200m</code> と定義します。 サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
+</tr>
+</tbody></table>
 
 <br />
 
@@ -2625,23 +2391,17 @@ rules:
 すべてのサービスに対して、定義済みキーあたりの要求処理速度と接続数を制限します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
+**説明**</br>
 すべてのサービスに対して、選択したバックエンドのすべてのパスに使用される単一の IP アドレスから渡される、定義済みキーあたりの要求処理速度と接続数を制限します。
-</dd>
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/global-rate-limit: "key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number-of-connections&gt;"
+    ingress.bluemix.net/global-rate-limit: "key=<key> rate=<rate> conn=<number-of-connections>"
 spec:
   tls:
   - hosts:
@@ -2654,7 +2414,9 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 8080</code></pre>
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -2664,23 +2426,19 @@ spec:
 <tbody>
 <tr>
 <td><code>key</code></td>
-<td>サポートされる値は `location`、`$http_` ヘッダー、および `$uri` です。ゾーンまたはサービスに基づいて着信要求のグローバル制限を設定するには、`key=location` を使用します。 ヘッダーに基づいて着信要求のグローバル制限を設定するには、`X-USER-ID key=$http_x_user_id` を使用します。</td>
+<td>サポートされる値は `location`、`$http_` ヘッダー、および `$uri` です。 ゾーンまたはサービスに基づいて着信要求のグローバル制限を設定するには、`key=location` を使用します。 ヘッダーに基づいて着信要求のグローバル制限を設定するには、`X-USER-ID key=$http_x_user_id` を使用します。</td>
 </tr>
 <tr>
 <td><code>rate</code></td>
 <td><code>&lt;<em>rate</em>&gt;</code> を処理速度に置き換えます。 毎秒 (r/s) または毎分 (r/m) の速度として値を入力します。 例: <code>50r/m</code>。</td>
 </tr>
 <tr>
-<td><code>number-of-connections</code></td>
-<td><code>&lt;<em>conn</em>&gt;</code> を接続数に置き換えます。</td>
+<td><code>conn</code></td>
+<td><code>&lt;<em>number-of-connections</em>&gt;</code> を接続数に置き換えます。</td>
 </tr>
 </tbody></table>
 
-</dd>
-</dl>
-
 <br />
-
 
 
 ### サービスの速度制限 (`service-rate-limit`)
@@ -2689,22 +2447,17 @@ spec:
 特定のサービスに対して、要求処理速度と接続数を制限します。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>特定のサービスに対して、選択したバックエンドのすべてのパスに使用される単一の IP アドレスから渡される定義済みキーあたりの要求処理速度と接続数を制限します。
-</dd>
+**説明**</br>
+特定のサービスに対して、選択したバックエンドのすべてのパスに使用される単一の IP アドレスから渡される定義済みキーあたりの要求処理速度と接続数を制限します。
 
-
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/service-rate-limit: "serviceName=&lt;myservice&gt; key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
+    ingress.bluemix.net/service-rate-limit: "serviceName=<myservice> key=<key> rate=<rate> conn=<number_of_connections>"
 spec:
   tls:
   - hosts:
@@ -2717,7 +2470,9 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 8080</code></pre>
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -2731,19 +2486,17 @@ spec:
 </tr>
 <tr>
 <td><code>key</code></td>
-<td>サポートされる値は `location`、`$http_` ヘッダー、および `$uri` です。ゾーンまたはサービスに基づいて着信要求のグローバル制限を設定するには、`key=location` を使用します。 ヘッダーに基づいて着信要求のグローバル制限を設定するには、`X-USER-ID key=$http_x_user_id` を使用します。</td>
+<td>サポートされる値は `location`、`$http_` ヘッダー、および `$uri` です。 ゾーンまたはサービスに基づいて着信要求のグローバル制限を設定するには、`key=location` を使用します。 ヘッダーに基づいて着信要求のグローバル制限を設定するには、`X-USER-ID key=$http_x_user_id` を使用します。</td>
 </tr>
 <tr>
 <td><code>rate</code></td>
 <td><code>&lt;<em>rate</em>&gt;</code> を処理速度に置き換えます。 毎秒の速度を定義するには、r/s を使用して <code>10r/s</code> のようにします。 毎分の速度を定義するには、r/m を使用して <code>50r/m</code> のようにします。</td>
 </tr>
 <tr>
-<td><code>number-of_connections</code></td>
-<td><code>&lt;<em>conn</em>&gt;</code> を接続数に置き換えます。</td>
+<td><code>conn</code></td>
+<td><code>&lt;<em>number-of-connections</em>&gt;</code> を接続数に置き換えます。</td>
 </tr>
 </tbody></table>
-</dd>
-</dl>
 
 <br />
 
@@ -2760,27 +2513,24 @@ spec:
 {{site.data.keyword.appid_full_notm}} を使用して、アプリの認証を行います。
 {:shortdesc}
 
-<dl>
-<dt>説明</dt>
-<dd>
+**説明**</br>
 {{site.data.keyword.appid_short_notm}} を使用して、Web または API の HTTP /HTTPS 要求を認証します。
 
-<p>要求タイプを <code>web</code> に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む Web 要求が検証されます。 トークンの検証が失敗すると、Web 要求は拒否されます。 要求にアクセス・トークンが含まれていない場合、要求は {{site.data.keyword.appid_short_notm}} ログイン・ページにリダイレクトされます。 {{site.data.keyword.appid_short_notm}} Web 認証が機能するためには、ユーザーのブラウザーで Cookie を有効にする必要があります。</p>
+要求タイプを web に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む Web 要求が検証されます。 トークンの検証が失敗すると、Web 要求は拒否されます。 要求にアクセス・トークンが含まれていない場合、要求は {{site.data.keyword.appid_short_notm}} ログイン・ページにリダイレクトされます。 {{site.data.keyword.appid_short_notm}} Web 認証が機能するためには、ユーザーのブラウザーで Cookie を有効にする必要があります。
 
-<p>要求タイプを <code>api</code> に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む API 要求が検証されます。 要求にアクセス・トークンが含まれていない場合、「<code>401 : Unauthorized</code>」というエラー・メッセージがユーザーに返されます。</p>
+要求タイプを api に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む API 要求が検証されます。 要求にアクセス・トークンが含まれていない場合、「401 : Unauthorized」というエラー・メッセージがユーザーに返されます。
 
-<p class="note">セキュリティー上の理由から、{{site.data.keyword.appid_short_notm}} 認証は、TLS/SSL が有効化されているバックエンドのみをサポートします。</p>
-</dd>
-<dt>サンプル Ingress リソース YAML</dt>
-<dd>
+セキュリティー上の理由から、{{site.data.keyword.appid_short_notm}} 認証は、TLS/SSL が有効化されているバックエンドのみをサポートします。
+{: note}
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
+    ingress.bluemix.net/appid-auth: "bindSecret=<bind_secret> namespace=<namespace> requestType=<request_type> serviceName=<myservice> [idToken=false]"
 spec:
   tls:
   - hosts:
@@ -2793,7 +2543,9 @@ spec:
       - path: /
         backend:
           serviceName: myservice
-          servicePort: 8080</code></pre>
+          servicePort: 8080
+```
+{: codeblock}
 
 <table>
 <caption>アノテーションの構成要素について</caption>
@@ -2817,45 +2569,50 @@ spec:
 <td><code>serviceName</code></td>
 <td><code><em>&lt;myservice&gt;</em></code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 このフィールドは必須です。 サービス名を指定しない場合、アノテーションはすべてのサービスに対して有効になります。  サービス名を指定した場合、アノテーションはそのサービスに対してのみ有効になります。 複数のサービスは、コンマ (,) で区切ります。</td>
 </tr>
+<tr>
+<td><code>idToken=false</code></td>
+<td>オプション: Liberty OIDC クライアントはアクセス・トークンと識別トークンの両方を同時に解析することはできません。Liberty を処理する場合は、この値を false に設定して、識別トークンが Liberty サーバーに送信されないようにしてください。</td>
+</tr>
 </tbody></table>
-</dd>
-<dt>使用法</dt></dl>
+
+**使用法**</br>
 
 アプリは認証に {{site.data.keyword.appid_short_notm}} を使用するため、{{site.data.keyword.appid_short_notm}} インスタンスをプロビジョンし、有効なリダイレクト URI をインスタンスに構成し、インスタンスをクラスターにバインドしてバインド・シークレットを生成する必要があります。
 
 1. 既存の {{site.data.keyword.appid_short_notm}} インスタンスを選択するか、新しいインスタンスを作成します。
-    * 既存のインスタンスを使用する場合、サービス・インスタンス名にスペースが含まれていないことを確認します。 スペースを削除する場合、サービス・インスタンス名の隣にある「オプション (詳細)」メニューを選択し、「**サービスの名前変更**」を選びます。
-    * [新しい {{site.data.keyword.appid_short_notm}} インスタンスをプロビジョンするには、以下のようにします。](https://cloud.ibm.com/catalog/services/app-id)
-        1. 自動入力による**サービス名**を、サービス・インスタンスを表す固有の名前に置き換えます。 サービス・インスタンス名にスペースを含めることはできません。
-        2. クラスターのデプロイ先と同じ地域を選択します。
-        3. **「作成」**をクリックします。
-2. アプリのリダイレクト URL を追加します。 リダイレクト URL は、アプリのコールバック・エンドポイントです。 フィッシング攻撃を防止するため、アプリ ID では、リダイレクト URL のホワイトリストを使用して要求 URL が検証されます。
-    1. {{site.data.keyword.appid_short_notm}} 管理コンソールで、**「ID プロバイダー」 > 「管理」**とナビゲートします。
-    2. ID プロバイダーが選択されていることを確認します。 ID プロバイダーが選択されていない場合、ユーザーは認証されませんが、アプリへの匿名アクセス用のアクセス・トークンが発行されます。
-    3. 「**Web リダイレクト URL の追加**」フィールドで、`http://<hostname>/<app_path>/appid_callback` または `https://<hostname>/<app_path>/appid_callback` という形式でアプリのリダイレクト URL を追加します。
+  * 既存のインスタンスを使用する場合、サービス・インスタンス名にスペースが含まれていないことを確認します。 スペースを削除する場合、サービス・インスタンス名の隣にある「オプション (詳細)」メニューを選択し、「**サービスの名前変更**」を選びます。
+  * [新しい {{site.data.keyword.appid_short_notm}} インスタンスをプロビジョンするには、以下のようにします。](https://cloud.ibm.com/catalog/services/app-id)
+      1. 自動入力による**サービス名**を、サービス・インスタンスを表す固有の名前に置き換えます。 サービス・インスタンス名にスペースを含めることはできません。
+      2. クラスターのデプロイ先と同じ地域を選択します。
+      3. **「作成」**をクリックします。
 
-      {{site.data.keyword.appid_full_notm}} はログアウト機能を提供します。`/logout` が {{site.data.keyword.appid_full_notm}} パスに存在する場合は、Cookie が削除され、ユーザーはログイン・ページに戻されます。この機能を使用するには、`/appid_logout` を `https://<hostname>/<app_path>/appid_logout` の形式でドメインに付加し、この URL をリダイレクト URL リストに含める必要があります。
-      {: note}
+2. アプリのリダイレクト URL を追加します。 リダイレクト URL は、アプリのコールバック・エンドポイントです。 フィッシング攻撃を防止するため、アプリ ID では、リダイレクト URL のホワイトリストを使用して要求 URL が検証されます。
+  1. {{site.data.keyword.appid_short_notm}} 管理コンソールで、**「ID プロバイダー」 > 「管理」**とナビゲートします。
+  2. ID プロバイダーが選択されていることを確認します。 ID プロバイダーが選択されていない場合、ユーザーは認証されませんが、アプリへの匿名アクセス用のアクセス・トークンが発行されます。
+  3. 「**Web リダイレクト URL の追加**」フィールドで、`http://<hostname>/<app_path>/appid_callback` または `https://<hostname>/<app_path>/appid_callback` という形式でアプリのリダイレクト URL を追加します。
+
+    {{site.data.keyword.appid_full_notm}} はログアウト機能を提供します。`/logout` が {{site.data.keyword.appid_full_notm}} パスに存在する場合は、Cookie が削除され、ユーザーはログイン・ページに戻されます。 この機能を使用するには、`/appid_logout` を `https://<hostname>/<app_path>/appid_logout` の形式でドメインに付加し、この URL をリダイレクト URL リストに含める必要があります。
+    {: note}
 
 3. {{site.data.keyword.appid_short_notm}} サービス・インスタンスをクラスターにバインドします。 このコマンドによって、サービス・インスタンスのサービス・キーが作成されます。または、`--key` フラグを含めて、既存のサービス・キー資格情報を使用することができます。
-    ```
-    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
-    ```
-    {: pre}
-    サービスがクラスターに正常に追加されると、サービス・インスタンスの資格情報を保持するクラスター・シークレットが作成されます。 CLI 出力例:
-    ```
-    ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service appid1
+  ```
+  ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
+  ```
+  {: pre}
+  サービスがクラスターに正常に追加されると、サービス・インスタンスの資格情報を保持するクラスター・シークレットが作成されます。 CLI 出力例:
+  ```
+  ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service appid1
     Binding service instance to namespace...
     OK
     Namespace:    mynamespace
     Secret name:  binding-<service_instance_name>
-    ```
-    {: screen}
+  ```
+  {: screen}
 
 4. クラスター名前空間に作成されたシークレットを取得します。
-    ```
-    kubectl get secrets --namespace=<namespace>
-    ```
-    {: pre}
+  ```
+  kubectl get secrets --namespace=<namespace>
+  ```
+  {: pre}
 
 5. バインド・シークレットとクラスター名前空間を使用して、`appid-auth` アノテーションを Ingress リソースに追加します。

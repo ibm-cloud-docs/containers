@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks 
 
@@ -53,6 +53,9 @@ Vous devez disposer du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM 
         tier: management
         app: kernel-optimization
     spec:
+      selector:
+        matchLabels:
+          name: kernel-optimization
       template:
         metadata:
           labels:

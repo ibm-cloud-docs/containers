@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -57,8 +57,14 @@ Consulte la tabla siguiente para ver un resumen de los cambios de cada compilaci
 </thead>
 <tbody>
 <tr>
+<td>411 / 315</td>
+<td>15 de abril de 2019</td>
+<td>Actualiza el valor de caducidad de las cookies de {{site.data.keyword.appid_full}} de forma que coincida con el valor de la caducidad de la señal de acceso.</td>
+<td>-</td>
+</tr>
+<tr>
 <td>411 / 306</td>
-<td>21 de marzo de 2019</td>
+<td>22 de marzo de 2019</td>
 <td>Actualiza la versión de Go a 1.12.1.</td>
 <td>-</td>
 </tr>
@@ -67,7 +73,7 @@ Consulte la tabla siguiente para ver un resumen de los cambios de cada compilaci
 <td>18 de marzo de 2019</td>
 <td><ul>
 <li>Corrige las vulnerabilidades de las exploraciones de imágenes.</li>
-<li>Mejora el registro de {{site.data.keyword.appid_full}}.</li>
+<li>Mejora el registro de {{site.data.keyword.appid_full_notm}}.</li>
 </ul></td>
 <td>-</td>
 </tr>

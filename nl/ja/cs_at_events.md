@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, audit
 
@@ -44,7 +44,7 @@ subcollection: containers
 ## イベントの情報の検出
 {: #kube-find}
 
-Kibana ダッシュボードでログを参照して、クラスター内のアクティビティーをモニターできます。 
+Kibana ダッシュボードでログを参照して、クラスター内のアクティビティーをモニターできます。
 {: shortdesc}
 
 管理アクティビティーをモニターするには、次の手順を実行します。
@@ -518,19 +518,19 @@ Kibana ダッシュボードでログを参照して、クラスター内のア�
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>Kubernetes v1.10 以上で、ポッドのセキュリティー・ポリシーが作成されます。</td>
+    <td>ポッド・セキュリティー・ポリシーが作成されます。</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>Kubernetes v1.10 以上で、ポッドのセキュリティー・ポリシーが削除されます。</td>
+    <td>ポッド・セキュリティー・ポリシーが削除されます。</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>Kubernetes v1.10 以上で、ポッドのセキュリティー・ポリシーにパッチが適用されます。</td>
+    <td>ポッド・セキュリティー・ポリシーにパッチが適用されます。</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Kubernetes v1.10 以上で、ポッドのセキュリティー・ポリシーが更新されます。</td>
+    <td>ポッド・セキュリティー・ポリシーが更新されます。</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>

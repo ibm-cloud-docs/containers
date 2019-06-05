@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, disaster recovery, dr, ha, hadr
 
@@ -57,7 +57,7 @@ O {{site.data.keyword.containerlong_notm}} fornece várias abordagens para inclu
 
 Não reinicie ou reinicialize um nó do trabalhador durante uma indisponibilidade do mestre. Essa ação remove os pods de seu nó do trabalhador. Como o servidor da API do Kubernetes está indisponível, os pods não podem ser reprogramados em outros nós do trabalhador no cluster.
 {: important}
- Os clusters mestres são altamente disponíveis e incluem réplicas para o servidor de API do Kubernetes, o etcd, o planejador e o gerenciador do controlador em hosts separados para proteger contra uma indisponibilidade, como durante uma atualização do mestre.</p><p>Para proteger seu cluster mestre de uma falha de zona, é possível: <ul><li>Crie um cluster em uma [cidade metropolitana de múltiplas zonas](/docs/containers?topic=containers-regions-and-zones#zones), que espalha o mestre pelas zonas.</li><li>configurar um segundo cluster em outra zona.</li></ul></p>
+ Os clusters mestres são altamente disponíveis e incluem réplicas para o servidor de API do Kubernetes, o etcd, o planejador e o gerenciador do controlador em hosts separados para proteger contra uma indisponibilidade, como durante uma atualização do mestre.</p><p>Para proteger seu cluster mestre de uma falha de zona, é possível: <ul><li>Crie um cluster em um [local metro multizona](/docs/containers?topic=containers-regions-and-zones#zones) que espalhe o principal entre as zonas.</li><li>configurar um segundo cluster em outra zona.</li></ul></p>
   <p>Consulte  [ Configurando clusters altamente disponíveis. ](/docs/containers?topic=containers-plan_clusters#ha_clusters)</p></dd>
 <dt> 4. Falha na zona.</dt>
   <dd><p>Uma falha de zona afeta todos os hosts de cálculo físico e armazenamento NFS. As falhas incluem energia, resfriamento, rede ou indisponibilidades de armazenamento e desastres naturais, como inundações, terremotos e furacões. Para proteger contra uma falha de zona, deve-se ter clusters em duas zonas diferentes que são balanceadas por carga por um balanceador de carga externo.</p>
@@ -66,6 +66,6 @@ Não reinicie ou reinicialize um nó do trabalhador durante uma indisponibilidad
   <dd><p>Cada região é configurada com um balanceador de carga altamente disponível que seja acessível por meio do terminal de API específico da região. O balanceador de carga roteia as solicitações recebidas e de saída para os clusters nas zonas regionais. A probabilidade de uma falha regional integral é baixa. No entanto, para considerar essa falha, é possível configurar múltiplos clusters em diferentes regiões e conectá-los usando um balanceador de carga externo. No caso de uma região inteira falhar, o cluster na outra região pode assumir o controle da carga de trabalho.</p><p class="note">Um cluster de várias regiões requer vários recursos do Cloud e, dependendo de seu app, pode ser complexo e caro. Verifique se você precisa de uma configuração multiregion ou se é possível acomodar uma interrupção de serviço em potencial. Se você desejar configurar um cluster multiregion, certifique-se de que o seu app e os dados possam ser hospedados em outra região e de que o seu app possa manipular a replicação de dados globais.</p>
   <p>Consulte  [ Configurando clusters altamente disponíveis ](/docs/containers?topic=containers-plan_clusters#ha_clusters).</p></dd>   
 <dt> 6a, 6b. Falha de armazenamento.</dt>
-  <dd><p>Em um app stateful, os dados têm um papel importante para manter seu app funcionando. Você deseja certificar-se de que seus dados são altamente disponíveis para que seja possível recuperar de uma falha em potencial. No {{site.data.keyword.containerlong_notm}}, é possível escolher entre várias opções para persistir seus dados. Por exemplo, é possível provisionar o armazenamento NFS usando volumes persistentes nativos do Kubernetes ou armazenar seus dados usando um serviço de banco de dados do {{site.data.keyword.Bluemix_notm}}.</p>
+  <dd><p>Em um app stateful, os dados têm um papel importante para manter seu app funcionando. Certifique-se de que seus dados estejam altamente disponíveis para que seja possível recuperar-se de uma possível falha. No {{site.data.keyword.containerlong_notm}}, é possível escolher entre várias opções para persistir seus dados. Por exemplo, é possível provisionar o armazenamento NFS usando volumes persistentes nativos do Kubernetes ou armazenar seus dados usando um serviço de banco de dados do {{site.data.keyword.Bluemix_notm}}.</p>
   <p>Consulte  [ Planejando dados altamente disponíveis ](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).</p></dd>
 </dl>

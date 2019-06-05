@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -30,7 +30,7 @@ Con [políticas de seguridad de pod ![Icono de enlace externo](../icons/launch-g
 **¿Por qué debo definir políticas de seguridad de pod?**</br>
 Como administrador del clúster, desea controlar lo que sucede en el clúster, especialmente las acciones que afectan a la seguridad y a la preparación del clúster. Las políticas de seguridad de pod pueden ayudarle a controlar el uso de contenedores privilegiados, espacios de nombres raíz, host de red y puertos, tipos de volúmenes, sistemas de archivos de host, permisos de Linux como los ID de solo lectura o de grupo, etc.
 
-Con el controlador de admisiones `PodSecurityPolicy`, no se pueden crear pods hasta después de [autorizar políticas](#customize_psp). La configuración de políticas de seguridad de pod puede tener efectos secundarios no deseados, por lo tanto asegúrese de probar un despliegue después de cambiar la política. Para desplegar apps, las cuentas de usuario y de servicio deben estar autorizadas por las políticas de seguridad de pod necesarias para desplegar pods. Por ejemplo, si instala apps utilizando [Helm](/docs/containers?topic=containers-integrations#helm_links), el componente tiller de Helm crea pods y, por lo tanto, debe tener la autorización de política de seguridad de pod correcta.
+Con el controlador de admisiones `PodSecurityPolicy`, no se pueden crear pods hasta después de [autorizar políticas](#customize_psp). La configuración de políticas de seguridad de pod puede tener efectos secundarios no deseados, por lo tanto asegúrese de probar un despliegue después de cambiar la política. Para desplegar apps, las cuentas de usuario y de servicio deben estar autorizadas por las políticas de seguridad de pod necesarias para desplegar pods. Por ejemplo, si instala apps utilizando [Helm](/docs/containers?topic=containers-helm#public_helm_install), el componente tiller de Helm crea pods y, por lo tanto, debe tener la autorización de política de seguridad de pod correcta.
 
 ¿Está intentando controlar qué usuarios tienen acceso a {{site.data.keyword.containerlong_notm}}? Consulte [Asignación de acceso de clúster](/docs/containers?topic=containers-users#users) para establecer los permisos de {{site.data.keyword.Bluemix_notm}} IAM y de infraestructura.
 {: tip}

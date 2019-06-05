@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks 
 
@@ -28,7 +28,7 @@ subcollection: containers
 Con la priorità e la prevenzione di pod Kubernetes, puoi configurare delle classi di priorità per indicare la priorità relativa di un pod. Il programma di pianificazione Kubernetes tiene conto della priorità di un pod e può anche prevenire (rimuovere) i pod con priorità più bassa per fare spazio su un nodo di lavoro ai pod con priorità più elevata. I tuoi cluster {{site.data.keyword.containerlong}} che eseguono Kubernetes versione 1.11.2 o successive supportano il controller di ammissione `Priority` che implementa tali classi.
 {: shortdesc}
 
-**Come imposto la priorità dei pod?**</br>
+**Perché imposto la priorità dei pod?**</br>
 Come amministratore del cluster, vuoi controllare quali pod sono più critici per il carico di lavoro del tuo cluster. Le classi di priorità possono aiutarti a controllare le decisioni del programma di pianificazione Kubernetes per favorire i pod con priorità più elevata rispetto a quelli con priorità più bassa. Il programma di pianificazione può anche prevenire (rimuovere) i pod con priorità più bassa che sono in esecuzione in modo da rendere possibile la pianificazione dei pod con priorità più elevata in sospeso.
 
 Impostando la priorità dei pod, puoi aiutare a evitare che carichi di lavoro con priorità più bassa abbiano delle ripercussioni sui carichi di lavoro critici nel tuo cluster, in particolare nei casi in cui il cluster inizi a raggiungere la sua capacità di risorse.
@@ -37,7 +37,7 @@ Assicurati di avere [configurato un accesso utente appropriato](/docs/containers
 {: tip}
 
 {: #priority_scheduling}
-**Come funzionano la pianificazione e la prevenzione delle priorità?**</br>
+**Come funzionano la pianificazione e la precedenza delle priorità?**</br>
 In generale, i pod in sospeso che hanno una priorità più elevata sono pianificati prima dei pod a cui è stata data una priorità più bassa. Se le risorse residue nei tuoi nodi di lavoro non sono sufficienti, il programma di pianificazione può prevenire (rimuovere) i pod per liberare risorse a sufficienza per consentire la pianificazione dei pod a cui è stata data una priorità più elevata. La prevenzione è anche influenzata dai periodi di terminazione non forzata, dai PDB (Pod Disruption Budget) e dall'affinità dei nodi di lavoro.
 
 Se non specifichi una priorità per la tua distribuzione dei pod, il valore predefinito viene impostato alla classe di priorità impostata come `globalDefault` . Se non hai una classe di priorità `globalDefault`, la priorità predefinita per tutti i pod è zero (`0`). Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} non imposta un `globalDefault`, quindi la priorità predefinita dei pod è zero.
@@ -142,8 +142,7 @@ Per utilizzare una classe di priorità:
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
-    <td>Facoltativo: imposta il campo su `true` per rendere questa classe di priorità il valore predefinito globale che viene applicato a ogni pod che viene pianificato senza un valore `priorityClassName`. Solo la classe di priorità 1 nel tuo cluster può essere impostata come valore predefinito globale. Se non c'è alcun valore predefinito globale, i pod senza alcun `priorityClassName` specificato hanno una priorità pari a zero (`0`).</br></br>
-    Le [classi di priorità predefinite](#default_priority_class) non impostano un `globalDefault`. Se hai creato delle altri classi di priorità nel tuo cluster, puoi eseguire una verifica per assicurarti che non impostino un `globalDefault` eseguendo `kubectl describe priorityclass <name>`.</td>
+    <td>Facoltativo: imposta il campo su `true` per rendere questa classe di priorità il valore predefinito globale che viene applicato a ogni pod che viene pianificato senza un valore `priorityClassName`. Solo la classe di priorità 1 nel tuo cluster può essere impostata come valore predefinito globale. Se non c'è alcun valore predefinito globale, i pod senza alcun `priorityClassName` specificato hanno una priorità pari a zero (`0`)</br></br>. Le [classi di priorità predefinite](#default_priority_class) non impostano un `globalDefault`. Se hai creato delle altri classi di priorità nel tuo cluster, puoi eseguire una verifica per assicurarti che non impostino un `globalDefault` eseguendo `kubectl describe priorityclass <name>`.</td>
     </tr>
     <tr>
     <td><code>description</code></td>
@@ -212,6 +211,9 @@ Per assegnare la priorità ai tuoi pod:
       name: ibmliberty
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: ibmliberty
       template:
         metadata:
           labels:

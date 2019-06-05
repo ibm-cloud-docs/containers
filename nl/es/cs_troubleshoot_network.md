@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -39,23 +39,23 @@ Si utiliza {{site.data.keyword.containerlong}}, tenga en cuenta estas técnicas 
 Mientras resuelve problemas, puede utilizar la [herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) para ejecutar pruebas y recopilar información de red, de Ingress y de strongSwan del clúster.
 {: tip}
 
-## No se puede conectar a una app mediante un servicio de equilibrador de carga
+## No se puede conectar a una app mediante un servicio de equilibrador de carga de red (NLB)
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-Ha expuesto a nivel público la app creando un servicio equilibrador de carga en el clúster. Cuando intenta conectar con la app utilizando la dirección IP pública o equilibrador de carga, la conexión falla o supera el tiempo de espera.
+Ha expuesto a nivel público la app creando un servicio NLB en el clúster. Cuando intenta conectar con la app utilizando la dirección IP pública del NLB, la conexión falla o supera el tiempo de espera.
 
 {: tsCauses}
-Posibles motivos por los que el servicio del equilibrador de carga no funciona correctamente:
+Posibles motivos por los que el servicio de NLB no funciona correctamente:
 
 -   El clúster es un clúster gratuito o un clúster estándar con un solo nodo trabajador.
 -   El clúster todavía no se ha desplegado por completo.
--   El script de configuración correspondiente al servicio equilibrador de carga incluye errores.
+-   El script de configuración del servicio de NLB incluye errores.
 
 {: tsResolve}
-Para resolver el problema del servicio equilibrador de carga:
+Para resolver problemas del servicio de NLB:
 
-1.  Compruebe que ha configurado un clúster estándar que se ha desplegado por completo y que tiene al menos dos nodos trabajadores para garantizar la alta disponibilidad del servicio equilibrador de carga.
+1.  Compruebe que ha configurado un clúster estándar que se ha desplegado por completo y que tiene al menos dos nodos trabajadores para garantizar la alta disponibilidad del servicio de NLB.
 
   ```
   ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -64,10 +64,10 @@ Para resolver el problema del servicio equilibrador de carga:
 
     En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadores sea **Listo** y que el **Tipo de máquina** muestre un tipo de máquina que no sea **gratuito (free)**.
 
-2. Para equilibradores de carga de la versión 2.0: asegúrese de completar los [requisitos previos del equilibrador de carga 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
+2. Para los NLB versión 2.0: asegúrese de completar los [requisitos previos del NLB 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
 
-3. Compruebe si el archivo de configuración correspondiente al servicio equilibrador de carga es preciso.
-    * Equilibradores de carga de la versión 2.0:
+3. Compruebe la precisión del archivo de configuración del servicio de NLB.
+    * NLB versión 2.0:
         ```
         apiVersion: v1
         kind: Service
@@ -92,7 +92,7 @@ Para resolver el problema del servicio equilibrador de carga:
         4. Compruebe que ha utilizado el **puerto** en el que escucha la app.
         5. Compruebe que ha establecido `externalTrafficPolicy` en `Local`.
 
-    * Equilibradores de carga de la versión 1.0:
+    * NLB versión 1.0:
         ```
         apiVersion: v1
     kind: Service
@@ -112,7 +112,7 @@ Para resolver el problema del servicio equilibrador de carga:
         2. En la sección `spec.selector` del servicio LoadBalancer, asegúrese de que `<selector_key>` y `<selector_value>` corresponden al par de clave/valor utilizado en la sección `spec.template.metadata.labels` de su archivo YAML de despliegue. Si las etiquetas no coinciden, la sección **Endpoints** en el servicio LoadBalancer visualiza **<none>** y la app no es accesible desde Internet.
         3. Compruebe que ha utilizado el **puerto** en el que escucha la app.
 
-3.  Compruebe el servicio equilibrador de carga y revisar la sección de **Sucesos** para ver si hay errores.
+3.  Compruebe el servicio de NLB y revise la sección de **Sucesos** para ver si hay errores.
 
     ```
     kubectl describe service <myservice>
@@ -121,22 +121,22 @@ Para resolver el problema del servicio equilibrador de carga:
 
     Busque los siguientes mensajes de error:
 
-    <ul><li><pre class="screen"><code>Los clústeres con un nodo deben utilizar servicios de tipo NodePort</code></pre></br>Para utilizar el servicio equilibrador de carga, debe tener un clúster estándar con al menos dos nodos trabajadores.</li>
-    <li><pre class="screen"><code>No hay ninguna IP de proveedor de nube disponible para dar respuesta a la solicitud de servicio del equilibrador de carga. Añada una subred portátil al clúster y vuélvalo a intentar</code></pre></br>Este mensaje de error indica que no queda ninguna dirección IP pública portátil que se pueda asignar al servicio equilibrador de carga. Consulte la sección sobre <a href="/docs/containers?topic=containers-subnets#subnets">Adición de subredes a clústeres</a> para ver información sobre cómo solicitar direcciones IP públicas portátiles para el clúster. Cuando haya direcciones IP públicas portátiles disponibles para el clúster, el servicio equilibrador de carga se creará automáticamente.</li>
-    <li><pre class="screen"><code>La IP de proveedor de nube solicitada <cloud-provider-ip> no está disponible. Están disponibles las siguientes IP de proveedor de nube: <available-cloud-provider-ips></code></pre></br>Ha definido una dirección IP pública portátil para el servicio equilibrador de carga mediante la sección **`loadBalancerIP`**, pero esta dirección IP pública portátil no está disponible en la subred pública portátil. En la sección **`loadBalancerIP`** del script de configuración, elimine la dirección IP existente y añada una de las direcciones IP públicas portátiles disponibles. También puede eliminar la sección **`loadBalancerIP`** del script para que la dirección IP pública portátil disponible se pueda asignar automáticamente.</li>
-    <li><pre class="screen"><code>No hay nodos disponibles para el servicio equilibrador de carga</code></pre>No tiene suficientes nodos trabajadores para desplegar un servicio equilibrador de carga. Una razón posible es que ha desplegado un clúster estándar con más de un nodo trabajador, pero el suministro de los nodos trabajadores ha fallado.</li>
+    <ul><li><pre class="screen"><code>Los clústeres con un nodo deben utilizar servicios de tipo NodePort</code></pre></br>Para utilizar el servicio de NLB, debe tener un clúster estándar con al menos dos nodos trabajadores.</li>
+    <li><pre class="screen"><code>No hay ninguna IP de proveedor de nube disponible para dar respuesta a la solicitud de servicio del NLB. Añada una subred portátil al clúster y vuélvalo a intentar</code></pre></br>Este mensaje de error indica que no queda ninguna dirección IP pública portátil que se pueda asignar al servicio de NLB. Consulte la sección sobre <a href="/docs/containers?topic=containers-subnets#subnets">Adición de subredes a clústeres</a> para ver información sobre cómo solicitar direcciones IP públicas portátiles para el clúster. Cuando haya direcciones IP públicas portátiles disponibles para el clúster, el servicio de NLB se creará automáticamente.</li>
+    <li><pre class="screen"><code>La IP de proveedor de nube solicitada <cloud-provider-ip> no está disponible. Están disponibles las siguientes IP de proveedor de nube: <available-cloud-provider-ips></code></pre></br>Ha definido una dirección IP pública portátil para el YAML del equilibrador de carga utilizando la sección **`loadBalancerIP`**, pero esta dirección IP pública portátil no está disponible en la subred pública portátil. En la sección **`loadBalancerIP`** del script de configuración, elimine la dirección IP existente y añada una de las direcciones IP públicas portátiles disponibles. También puede eliminar la sección **`loadBalancerIP`** del script para que la dirección IP pública portátil disponible se pueda asignar automáticamente.</li>
+    <li><pre class="screen"><code>No hay nodos disponibles para el servicio de NLB</code></pre>No tiene suficientes nodos trabajadores para desplegar un servicio de NLB. Una razón posible es que ha desplegado un clúster estándar con más de un nodo trabajador, pero el suministro de los nodos trabajadores ha fallado.</li>
     <ol><li>Obtenga una lista de los nodos trabajadores disponibles.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>Si se encuentran al menos dos nodos trabajadores disponibles, obtenga una lista de los detalles de los nodos trabajadores.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>Asegúrese de que los ID de las VLAN públicas y privadas correspondientes a los nodos trabajadores devueltos por los mandatos <code>kubectl get nodes</code> e <code>ibmcloud ks worker-get</code> coinciden.</li></ol></li></ul>
 
-4.  Si utiliza un dominio personalizado para conectar con el servicio equilibrador de carga, asegúrese de que el dominio personalizado está correlacionado con la dirección IP pública del servicio equilibrador de carga.
-    1.  Busque la dirección IP pública del servicio equilibrador de carga.
+4.  Si utiliza un dominio personalizado para conectar con el servicio de NLB, asegúrese de que el dominio personalizado está correlacionado con la dirección IP pública del servicio de NLB.
+    1.  Busque la dirección IP pública del servicio de NLB.
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
-    2.  Compruebe que el dominio personalizado esté correlacionado con la dirección IP pública portátil del servicio equilibrador de carga en el registro de puntero
+    2.  Compruebe que el dominio personalizado esté correlacionado con la dirección IP pública portátil del servicio de NLB en el registro de puntero
 (PTR).
 
 <br />
@@ -163,7 +163,7 @@ En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadore
 <br />
 
 
-## Problemas con secretos del equilibrador de carga de aplicación de Ingress
+## Problemas secretos del equilibrador de carga de aplicación (ALB) de Ingress
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
@@ -315,7 +315,7 @@ Cuando habilita la conservación de IP para los servicios equilibrador de carga 
 {: tsResolve}
 Para solucionar el problema, elija una de las opciones siguientes:
 
-* **Nodos de extremo antagónicos**: para asegurarse de que el equilibrador de carga y los pods de la app se despliegan en nodos de extremo antagónicos, [añada reglas de afinidad de nodo de extremo y tolerancias al despliegue de la app](/docs/containers?topic=containers-loadbalancer#edge_nodes). Las pods de equilibrador de carga y de Ingress ALB tienen estas reglas de afinidad y tolerancias de forma predeterminada.
+* **Nodos de extremo antagónicos**: para asegurarse de que el equilibrador de carga y los pods de la app se despliegan en nodos de extremo antagónicos, [añada reglas de afinidad de nodo de extremo y tolerancias al despliegue de la app](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). Las pods de equilibrador de carga y de Ingress ALB tienen estas reglas de afinidad y tolerancias de forma predeterminada.
 
 * **Antagonismos personalizados**: elimine los antagonismos personalizados para los que los pods `keepalived` no tienen tolerancia. En su lugar, puede añadir [nodos trabajadores de etiqueta como nodos de extremo, y luego definir antagonismo para dichos nodos de extremo](/docs/containers?topic=containers-edge).
 
@@ -572,12 +572,12 @@ Cuando intenta ver las políticas de red de Calico en su clúster ejecutando `ca
 Para utilizar políticas de Calico, se deben alinear cuatro factores: la versión de Kubernetes del clúster, la versión de la CLI de Calico, la sintaxis del archivo de configuración de Calico y los mandatos de visualización de política. Uno o más de estos factores no están en la versión correcta.
 
 {: tsResolve}
-Cuando el clúster está en [Kubernetes versión 1.10 o posterior](/docs/containers?topic=containers-cs_versions), debe utilizar Calico CLI v3.1, la sintaxis del archivo de configuración `calicoctl.cfg` v3 y los mandatos `calicoctl get GlobalNetworkPolicy` y `calicoctl get NetworkPolicy`.
+Debe utilizar la v3.3 o posterior de la CLI de Calico, la sintaxis del archivo de configuración de la v3 `calicoctl.cfg` y los mandatos `calicoctl get GlobalNetworkPolicy` y `calicoctl get NetworkPolicy`.
 
 Para asegurarse de que se han alineado todos los factores de Calico:
 
-1. [Instale y configure la CLI de Calico versión 3.3.1](/docs/containers?topic=containers-network_policies#cli_install). La configuración incluye la actualización manual del archivo `calicoctl.cfg` para utilizar la sintaxis de Calico v3.
-2. Asegúrese de que las políticas que desea crear y aplicar al clúster utilizan la [sintaxis Calico v3 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Si tiene un archivo de política `.yaml` o `.json` existente en sintaxis de Calico v2, puede convertirlo a la sintaxis de Calico v3 utilizando el mandato [`calicoctl convert` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
+1. [Instale y configure una CLI de Calico versión 3.3 o posterior](/docs/containers?topic=containers-network_policies#cli_install).
+2. Asegúrese de que las políticas que desea crear y aplicar al clúster utilizan la [sintaxis Calico v3 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). Si tiene un archivo de política `.yaml` o `.json` existente en sintaxis de Calico v2, puede convertirlo a la sintaxis de Calico v3 utilizando el mandato [`calicoctl convert` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
 3. Para [visualizar políticas](/docs/containers?topic=containers-network_policies#view_policies), asegúrese de utilizar `calicoctl get GlobalNetworkPolicy` para políticas globales y `calicoctl get NetworkPolicy --namespace <policy_namespace>` para políticas cuyo ámbito sean espacios de nombres específicos.
 
 <br />
@@ -603,7 +603,7 @@ Puede [suprimir la agrupación de nodos trabajadores existente](/docs/containers
 
 Como alternativa, puede conservar la agrupación de nodos trabajadores existente solicitando nuevas VLAN y utilizándolas para crear nuevos nodos trabajadores en la agrupación.
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Para obtener las zonas para las que necesita nuevos ID de VLAN, anote la **Ubicación** de la información de salida del siguiente mandato. **Nota**: si el clúster es multizona, necesita los ID de VLAN de cada zona.
 

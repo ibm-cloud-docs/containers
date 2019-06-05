@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,7 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"}
+{:table: .aria-labeledby="caption"} 
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
@@ -68,7 +68,7 @@ L'image suivante montre comment fonctionne le provisionnement dynamique de stock
 1. L'utilisateur crée une réservation de volume persistant (PVC) qui indique le type de stockage, la classe de stockage, la taille en gigaoctets, le nombre d'opérations d'entrée-sortie par seconde (IOPS) et le type de facturation. La classe de stockage détermine le type de stockage mis à disposition et les plages de taille et d'IOPS autorisées. La création d'une PVC dans un cluster déclenche automatiquement le plug-in de stockage pour le type de stockage demandé pour mettre à disposition le stockage avec la spécification donnée.
 2. L'unité de stockage est automatiquement commandée et mise à disposition dans votre compte d'infrastructure IBM Cloud (SoftLayer). Le cycle de facturation de votre unité de stockage commence à ce stade.
 3. Le plug-in de stockage crée automatiquement un volume persistant (PV) dans le cluster, une unité de stockage virtuel pointant vers l'unité de stockage réelle dans votre compte d'infrastructure IBM Cloud (SoftLayer).
-4. La réservation de volume persistant (PVC) et le volume persistant (PV) sont automatiquement interconnectés. Le statut de la PVC et du PV passe à `Bound`. Vous pouvez désormais utiliser la PVC pour monter le stockage persistant sur votre application. Si vous supprimez la PVC, le PV et l'instance de stockage associée sont également supprimés. </br>
+4. La réservation de volume persistant (PVC) et le volume persistant (PV) sont automatiquement interconnectés. Le statut de la PVC et du PV passe à `Bound`. Vous pouvez désormais utiliser la PVC pour monter le stockage persistant sur votre application. Si vous supprimez la PVC, le PV et l'instance de stockage associée sont également supprimés.</br> 
 
 **Dans quels cas utiliser le provisionnement dynamique ?**</br>
 
@@ -102,7 +102,7 @@ L'image suivante montre comment fonctionne le provisionnement statique de stocka
 1. L'administrateur du cluster rassemble tous les détails sur l'unité de stockage existante et crée un volume persistant (PV) dans le cluster.
 2. En fonction des détails du stockage dans le volume persistant (PV), le plug-in de stockage connecte le PV à l'unité de stockage dans votre compte d'infrastructure IBM Cloud (SoftLayer).
 3. L'administrateur du cluster ou un développeur crée une réservation de volume persistant (PVC). Comme le PV et l'unité de stockage existent déjà, aucune classe de stockage n'est spécifiée dans la réservation PVC.
-4. Une fois la réservation PVC créée, le plug-in de stockage essaie de corréler cette PVC à un volume persistant existant. La PVC et le PV correspondent lorsqu'ils utilisent les mêmes valeurs de taille, d'IOPS et de mode d'accès. Lorsque la PVC et le PV correspondent, le statut de la PVC et du PV passe à `Bound`. Vous pouvez désormais utiliser la PVC pour monter le stockage persistant sur votre application. Lorsque vous supprimez la PVC, le PV et l'instance de stockage physique ne sont pas retirés. Vous devez retirer la PVC, le PV et l'instance de stockage physique séparément.  </br>
+4. Une fois la réservation PVC créée, le plug-in de stockage essaie de corréler cette PVC à un volume persistant existant. La PVC et le PV correspondent lorsqu'ils utilisent les mêmes valeurs de taille, d'IOPS et de mode d'accès. Lorsque la PVC et le PV correspondent, le statut de la PVC et du PV passe à `Bound`. Vous pouvez désormais utiliser la PVC pour monter le stockage persistant sur votre application. Lorsque vous supprimez la PVC, le PV et l'instance de stockage physique ne sont pas retirés. Vous devez retirer la PVC, le PV et l'instance de stockage physique séparément. </br> 
 
 **Dans quels cas utiliser le provisionnement statique ?**</br>
 
@@ -209,7 +209,7 @@ Utilisez un script pour rechercher tous les volumes persistants présents dans v
 
 Avant de commencer :
 - [Ciblez l'interface CLI de Kubernetes sur le cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+- Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Pour mettre à jour des volumes persistants (PV) existants :
 

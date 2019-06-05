@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, helm
 
@@ -159,7 +159,7 @@ Deseja uma visualização abrangente de como integrar os serviços de segurança
 <tbody>
   <tr id="appid">
     <td>{{site.data.keyword.appid_full}}</td>
-    <td>Inclua um nível de segurança para seus apps com [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started), requerendo que os usuários se conectem. Para autenticar as solicitações HTTP/HTTPS da web ou da API para seu app, é possível integrar o {{site.data.keyword.appid_short_notm}} com seu serviço Ingress usando a [{{site.data.keyword.appid_short_notm}} anotação do Ingress de autenticação](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
+    <td>Inclua um nível de segurança para seus apps com [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started), requerendo que os usuários se conectem. Para autenticar solicitações de web ou de HTTP/HTTPS da API para o seu app, é possível integrar o {{site.data.keyword.appid_short_notm}} com o seu serviço do Ingress usando a [anotação do Ingress de autenticação do {{site.data.keyword.appid_short_notm}}](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
   </tr>
 <tr>
 <td>Aqua Security</td>
@@ -167,7 +167,7 @@ Deseja uma visualização abrangente de como integrar os serviços de segurança
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td>É possível usar o <a href="/docs/services/certificate-manager?topic=certificate-manager-gettingstarted" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para armazenar e gerenciar certificados SSL para seus apps. Para obter mais informações, consulte <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Usar o {{site.data.keyword.cloudcerts_long_notm}} com o {{site.data.keyword.containerlong_notm}} para implementar certificados TLS de domínio customizado <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. </td>
+<td>É possível usar o <a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para armazenar e gerenciar certificados SSL para seus apps. Para obter mais informações, consulte <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Usar o {{site.data.keyword.cloudcerts_long_notm}} com o {{site.data.keyword.containerlong_notm}} para implementar certificados TLS de domínio customizado <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. </td>
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}}  (Beta)</td>
@@ -175,7 +175,7 @@ Deseja uma visualização abrangente de como integrar os serviços de segurança
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>Configure o seu próprio repositório de imagem assegurado do Docker no qual é possível armazenar e compartilhar imagens com segurança entre usuários do cluster. Para obter mais informações, consulte a documentação do <a href="/docs/services/Registry?topic=registry-index" target="_blank">{{site.data.keyword.registrylong}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>.</td>
+  <td>Configure o seu próprio repositório de imagem assegurado do Docker no qual é possível armazenar e compartilhar imagens com segurança entre usuários do cluster. Para obter mais informações, consulte a documentação do <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -213,7 +213,7 @@ Deseja uma visualização abrangente de como integrar os serviços de segurança
 </tr>
 <tr>
   <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[O {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#GettingStarted) é um armazenamento iSCSI persistente de alto desempenho que é possível incluir em seus apps usando volumes persistentes do Kubernetes (PVs). Use o armazenamento de bloco para implementar apps stateful em uma zona única ou como armazenamento de alto desempenho para os pods únicos. Para obter mais informações sobre como fornecer armazenamento de bloco em seu cluster, consulte [Armazenando dados no {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} O Armazenamento de bloco](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) é um armazenamento de iSCSI persistente, de alto desempenho que pode ser incluído em seus apps usando volumes persistentes (PVs) do Kubernetes. Use o armazenamento de bloco para implementar apps stateful em uma zona única ou como armazenamento de alto desempenho para os pods únicos. Para obter mais informações sobre como fornecer armazenamento de bloco em seu cluster, consulte [Armazenando dados no {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -221,7 +221,7 @@ Deseja uma visualização abrangente de como integrar os serviços de segurança
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}}  Armazenamento de arquivo</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-gettingstarted#gettingstarted) é um armazenamento de arquivo baseado em NFS persistente, rápido e flexível, que você pode incluir em seus apps usando volumes persistentes do Kubernetes. É possível escolher entre camadas de armazenamento predefinidas com tamanhos de GB e IOPS que atendam aos requisitos de suas cargas de trabalho. Para obter mais informações sobre como fornecer o armazenamento de arquivo em seu cluster, consulte [Armazenando dados no {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) é um armazenamento de arquivo baseado em NFS persistente, rápido e flexível, que você pode incluir em seus apps usando volumes persistentes do Kubernetes. É possível escolher entre camadas de armazenamento predefinidas com tamanhos de GB e IOPS que atendam aos requisitos de suas cargas de trabalho. Para obter mais informações sobre como fornecer o armazenamento de arquivo em seu cluster, consulte [Armazenando dados no {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -263,19 +263,19 @@ Deseja uma visualização abrangente de como integrar os serviços de segurança
 Inclua serviços do {{site.data.keyword.Bluemix_notm}} para aprimorar o cluster do Kubernetes com recursos extras em áreas como Watson AI, dados, segurança e Internet of Things (IoT).
 {:shortdesc}
 
-É possível ligar somente serviços que suportem chaves de serviço. Para localizar uma lista com serviços que suportem chaves de serviço, consulte [Ativando aplicativos externos para usar os serviços do {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
+É possível ligar somente serviços que suportem chaves de serviço. Para localizar uma lista com serviços que suportem chaves de serviço, consulte [Permitindo que aplicativos externos usem serviços do {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
 {: note}
 
 Antes de iniciar:
 - Assegure-se de que você tenha as funções a seguir:
-    - [Função de serviço **Editor** ou **Administrador** do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) IAM para o cluster.
+    - [Função de serviço **Editor** ou **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
     - [Função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace no qual deseja ligar o serviço
-    - [Função **Desenvolvedor** do Cloud Foundry](/docs/iam?topic=iam-mngcf#mngcf) para o espaço que deseja usar
+    - [Função **Desenvolvedor** do Cloud Foundry](/docs/iam?topic=iam-mngcf#mngcf) para o espaço que você deseja usar
 - [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Para incluir um serviço do {{site.data.keyword.Bluemix_notm}} em seu cluster:
 
-1. [ Crie uma instância do serviço  {{site.data.keyword.Bluemix_notm}}  ](/docs/resources?topic=resources-externalapp#externalapp).
+1. [Crie uma instância do serviço do {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
     * Alguns serviços do {{site.data.keyword.Bluemix_notm}} estão disponíveis somente em regiões selecionadas. Será possível ligar um serviço a seu cluster somente se o serviço estiver disponível na mesma região que seu cluster. Além disso, se você deseja criar uma instância de serviço na zona Washington DC, deve-se usar a CLI.
     * Deve-se criar a instância de serviço no mesmo grupo de recursos que seu cluster. Um recurso pode ser criado em apenas um grupo de recursos que não pode ser mudado posteriormente.
 
@@ -461,7 +461,7 @@ Quando você monta o segredo como um volume em seu pod, um arquivo denominado `b
     <td>O caminho absoluto do diretório no qual o volume está montado dentro do contêiner.</td>
     </tr>
     <tr>
-    <td><code> volumeMounts.name </code></br><code> volumes.name </code></td>
+    <td><code>volumeMounts.name</code></br><code>volumes.name</code></td>
     <td>O nome do volume a ser montado no pod.</td>
     </tr>
     <tr>
@@ -708,7 +708,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 4.  Verifique se a instalação foi bem-sucedida.
     1.  Verifique se a conta de serviço do Tiller foi criada.
         ```
-        kubectl get serviceaccount -n kube-system | grep tiller
+        kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
 
@@ -948,11 +948,11 @@ As etapas neste exemplo mostram como instalar os gráficos do Helm por meio dos 
 {: #helm_links}
 
 * Para usar o gráfico Helm do strongSwan, veja [Configurando a conectividade VPN com o gráfico Helm do serviço de VPN IPSec do strongSwan](/docs/containers?topic=containers-vpn#vpn-setup).
-* Visualize os gráficos do Helm disponíveis que podem ser usados com o {{site.data.keyword.Bluemix_notm}} no [Catálogo de gráficos do Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts) no console.
+* Visualize os gráficos Helm disponíveis que podem ser usados com o {{site.data.keyword.Bluemix_notm}} no [Catálogo de gráficos do Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) no console.
 * Saiba mais sobre os comandos do Helm que são usados para configurar e gerenciar os gráficos Helm na <a href="https://docs.helm.sh/helm/" target="_blank">documentação do Helm <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>.
 * Saiba mais sobre como é possível [aumentar a velocidade de implementação com os gráficos Helm do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 
-## Visualizando recursos de cluster do Kubernetes
+## Visualizando recursos do cluster Kubernetes
 {: #weavescope}
 
 O Weave Scope fornece um diagrama visual de seus recursos dentro de um cluster do Kubernetes, incluindo serviços, pods, contêineres e muito mais. O Weave Scope fornece métricas interativas para CPU e memória e ferramentas para rodapé e executável em um contêiner.

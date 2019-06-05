@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -81,7 +81,7 @@ subcollection: containers
 {: #nonroot}
 
 {: tsSymptoms}
-デプロイメントに [NFS ストレージを追加](/docs/containers?topic=containers-file_storage#app_volume_mount)した後に、コンテナーのデプロイメントが失敗します。 コンテナーのログを取得すると、以下のようなエラーが表示されることがあります。ポッドが失敗し、再ロードが繰り返されます。
+デプロイメントに [NFS ストレージを追加](/docs/containers?topic=containers-file_storage#file_app_volume_mount)した後に、コンテナーのデプロイメントが失敗します。 コンテナーのログを取得すると、以下のようなエラーが表示されることがあります。 ポッドが失敗し、再ロードが繰り返されます。
 
 ```
 write-permission
@@ -185,6 +185,9 @@ Helm チャートを使用してイメージをデプロイする場合は、ini
       name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:
@@ -314,11 +317,11 @@ Helm チャートを使用してイメージをデプロイする場合は、ini
 
 {: tsSymptoms}
 以下の症状が見られることがあります。
-- `kubectl get pods -o wide` を実行すると、同じワーカー・ノードの複数のポッドが `ContainerCreating` または `CrashLoopBackOff` 状態で停滞していることが判明します。これらのポッドはすべて、同じブロック・ストレージ・インスタンスを使用しています。
+- `kubectl get pods -o wide` を実行すると、同じワーカー・ノードの複数のポッドが `ContainerCreating` または `CrashLoopBackOff` 状態で停滞していることが判明します。 これらのポッドはすべて、同じブロック・ストレージ・インスタンスを使用しています。
 - `kubectl describe pod` コマンドを実行すると、**Events** セクションに `MountVolume.SetUp failed for volume ... read-only` というエラーが表示されます。
 
 {: tsCauses}
-ポッドのボリュームへの書き込み中にネットワーク・エラーが発生した場合、IBM Cloud インフラストラクチャー (SoftLayer) によってボリュームが読み取り専用モードに変更され、ボリュームのデータが破損から保護されます。このボリュームを使用しているポッドは、ボリュームへの書き込みを継続できず、失敗します。
+ポッドのボリュームへの書き込み中にネットワーク・エラーが発生した場合、IBM Cloud インフラストラクチャー (SoftLayer) によってボリュームが読み取り専用モードに変更され、ボリュームのデータが破損から保護されます。 このボリュームを使用しているポッドは、ボリュームへの書き込みを継続できず、失敗します。
 
 {: tsResolve}
 1. クラスターにインストールされている {{site.data.keyword.Bluemix_notm}} Block Storage プラグインのバージョンを確認します。
@@ -327,14 +330,14 @@ Helm チャートを使用してイメージをデプロイする場合は、ini
    ```
    {: pre}
 
-2. [{{site.data.keyword.Bluemix_notm}} Block Storage プラグインの最新バージョン](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)を使用していることを確認します。そうでない場合は、[プラグインを更新します](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)。
-3. ポッドに Kubernetes デプロイメントを使用している場合は、失敗するポッドを削除して Kubernetes でポッドを再作成し、ポッドを再始動します。デプロイメントを使用していない場合は、`kubectl get pod <pod_name> -o yaml >pod.yaml` を実行して、ポッドの作成に使用された YAML ファイルを取得します。その後、ポッドを削除して、手動でポッドを再作成します。
+2. [{{site.data.keyword.Bluemix_notm}} Block Storage プラグインの最新バージョン](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)を使用していることを確認します。 そうでない場合は、[プラグインを更新します](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)。
+3. ポッドに Kubernetes デプロイメントを使用している場合は、失敗するポッドを削除して Kubernetes でポッドを再作成し、ポッドを再始動します。 デプロイメントを使用していない場合は、`kubectl get pod <pod_name> -o yaml >pod.yaml` を実行して、ポッドの作成に使用された YAML ファイルを取得します。 その後、ポッドを削除して、手動でポッドを再作成します。
     ```
     kubectl delete pod <pod_name>
     ```
     {: pre}
 
-4. ポッドの再作成によって問題が解決されたかどうかを確認します。解決されていない場合は、ワーカー・ノードを再ロードします。
+4. ポッドの再作成によって問題が解決されたかどうかを確認します。 解決されていない場合は、ワーカー・ノードを再ロードします。
    1. ポッドが実行されているワーカー・ノードを見つけて、ワーカー・ノードに割り当てられているプライベート IP アドレスをメモします。
       ```
       kubectl describe pod <pod_name> | grep Node

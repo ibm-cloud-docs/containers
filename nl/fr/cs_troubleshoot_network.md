@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -39,23 +39,23 @@ Vous rencontrez des difficultés pour connecter votre application via Ingress ? 
 Lorsque vous traitez les incidents, vous pouvez utiliser l'[outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) pour exécuter des tests et regrouper des informations pertinentes sur les réseaux, Ingress et strongSwan concernant votre cluster.
 {: tip}
 
-## Impossible de se connecter à une application via un service d'équilibreur de charge
+## Impossible de se connecter à une application via un service d'équilibreur de charge de réseau (NLB)
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-Vous avez exposé votre application au public en créant un service d'équilibreur de charge dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application en utilisant l'adresse IP publique de l'équilibreur de charge, la connexion a échoué ou expiré.
+Vous avez exposé votre application au public en créant un service NLB dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application en utilisant l'adresse IP publique du NLB, la connexion a échoué ou expiré.
 
 {: tsCauses}
-Il se peut que le service d'équilibreur de charge ne fonctionne pas correctement pour l'une des raisons suivantes :
+Il se peut que votre service NLB ne fonctionne pas correctement pour l'une des raisons suivantes :
 
 -   Le cluster est un cluster gratuit ou un cluster standard avec un seul noeud worker.
 -   Le cluster n'est pas encore complètement déployé.
--   Le script de configuration pour votre service d'équilibreur de charge comporte des erreurs.
+-   Le script de configuration pour votre service NLB comporte des erreurs.
 
 {: tsResolve}
-Pour identifier et résoudre les problèmes liés à votre service d'équilibreur de charge :
+Pour identifier et résoudre les problèmes liés à votre service NLB :
 
-1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre service d'équilibreur de charge.
+1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre service NLB. 
 
   ```
   ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -64,10 +64,10 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
 
     Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds worker et qu'une autre valeur que **free** est spécifiée dans la zone **Machine Type**
 
-2. Pour les équilibreurs de charge version 2.0 : vérifiez que vous avez rempli les [prérequis pour les équilibreurs de charge 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
+2. Pour les NLB version 2.0 : vérifiez que vous avez rempli les [prérequis pour les NLB 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
 
-3. Vérifiez que le fichier de configuration du service d'équilibreur de charge est correct.
-    * Equilibreurs de charge version 2.0 :
+3. Vérifiez que le fichier de configuration du service NLB est correct.
+    * NLB version 2.0 :
         ```
         apiVersion: v1
         kind: Service
@@ -88,11 +88,11 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
 
         1. Vérifiez que vous avez défini **LoadBalancer** comme type de service.
         2. Vérifiez que vous avez inclus l'annotation `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"`.
-        3. Dans la section `spec.selector` du service LoadBalancer, vérifiez que la clé `<selector_key>` et le port `<selector_value>` correspondent à la paire clé/valeur que vous avez utilisée dans la section `spec.template.metadata.labels` du fichier YAML de votre déploiement. Si les libellés ne correspondent pas, la section **Endpoints** de votre service LoadBalancer affiche **<none>** et votre application n'est pas accessible sur Internet.
+        3. Dans la section `spec.selector` du service LoadBalancer, assurez-vous que `<selector_key>` et `<selector_value>` correspondent à la paire clé/valeur que vous avez utilisée dans la section `spec.template.metadata.labels` de votre fichier YAML de déploiement. Si les libellés ne correspondent pas, la section **Endpoints** de votre service LoadBalancer affiche **<none>** et votre application n'est pas accessible sur Internet.
         4. Vérifiez que vous avez utilisé le **port** sur lequel votre application est en mode écoute.
         5. Vérifiez que vous avez défini `externalTrafficPolicy` sur `Local`.
 
-    * Equilibreurs de charge version 1.0 :
+    * NLB version 1.0 :
         ```
         apiVersion: v1
     kind: Service
@@ -109,10 +109,10 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
         {: screen}
 
         1. Vérifiez que vous avez défini **LoadBalancer** comme type de service.
-        2. Dans la section `spec.selector` du service LoadBalancer, vérifiez que la clé `<selector_key>` et le port `<selector_value>` correspondent à la paire clé/valeur que vous avez utilisée dans la section `spec.template.metadata.labels` du fichier YAML de votre déploiement. Si les libellés ne correspondent pas, la section **Endpoints** de votre service LoadBalancer affiche **<none>** et votre application n'est pas accessible sur Internet.
+        2. Dans la section `spec.selector` du service LoadBalancer, assurez-vous que `<selector_key>` et `<selector_value>` correspondent à la paire clé/valeur que vous avez utilisée dans la section `spec.template.metadata.labels` de votre fichier YAML de déploiement. Si les libellés ne correspondent pas, la section **Endpoints** de votre service LoadBalancer affiche **<none>** et votre application n'est pas accessible sur Internet.
         3. Vérifiez que vous avez utilisé le **port** sur lequel votre application est en mode écoute.
 
-3.  Vérifiez votre service d'équilibreur de charge et passez en revue la section **Events** à la recherche d'éventuelles erreurs.
+3.  Vérifiez votre service NLB et passez en revue la section **Events** à la recherche d'éventuelles erreurs.
 
     ```
     kubectl describe service <myservice>
@@ -121,22 +121,22 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
 
     Recherchez les messages d'erreur suivants :
 
-    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Pour utiliser le service d'équilibreur de charge, vous devez disposer d'un cluster standard et d'au moins deux noeuds worker.</li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Ce message d'erreur indique qu'il ne reste aucune adresse IP publique portable à attribuer à votre service d'équilibreur de charge. Pour savoir comment demander des adresses IP publiques portables pour votre cluster, voir la rubrique <a href="/docs/containers?topic=containers-subnets#subnets">Ajout de sous-réseaux à des clusters</a>. Dès lors que des adresses IP publiques portables sont disponibles pour le cluster, le service d'équilibreur de charge est automatiquement créé.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Vous avez défini une adresse IP publique portable pour votre service d'équilibreur de charge à l'aide de la section **`loadBalancerIP`**, or, cette adresse IP publique portable n'est pas disponible dans votre sous-réseau public portable. Dans la section **`loadBalancerIP`** de votre script de configuration, supprimez l'adresse IP existante et ajoutez l'une des adresses IP publiques portables disponibles. Vous pouvez également retirer la section **`loadBalancerIP`** de votre script de sorte qu'une adresse IP publique portable disponible puisse être allouée automatiquement.</li>
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Vous ne disposez pas de suffisamment de noeuds worker pour déployer un service d'équilibreur de charge. Il se pourrait que vous ayez déployé un cluster standard avec plusieurs noeuds worker, mais que la mise à disposition des noeuds worker ait échoué.</li>
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Pour utiliser le service NLB, vous devez disposer d'un cluster standard et d'au moins deux noeuds worker.</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the NLB service request. Add a portable subnet to the cluster and try again</code></pre></br>Ce message d'erreur indique qu'il ne reste aucune adresse IP publique portable à attribuer à votre service NLB. Pour savoir comment demander des adresses IP publiques portables pour votre cluster, voir la rubrique <a href="/docs/containers?topic=containers-subnets#subnets">Ajout de sous-réseaux à des clusters</a>. Dès lors que des adresses IP publiques portables sont disponibles pour le cluster, le service NLB est automatiquement créé.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Vous avez défini une adresse IP publique portable pour votre fichier YAML d'équilibreur de charge à l'aide de la section **`loadBalancerIP`**, or, cette adresse IP publique portable n'est pas disponible dans votre sous-réseau public portable. Dans la section **`loadBalancerIP`** de votre script de configuration, supprimez l'adresse IP existante et ajoutez l'une des adresses IP publiques portables disponibles. Vous pouvez également retirer la section **`loadBalancerIP`** de votre script de sorte qu'une adresse IP publique portable disponible puisse être allouée automatiquement.</li>
+    <li><pre class="screen"><code>No available nodes for NLB services</code></pre>Vous ne disposez pas de suffisamment de noeuds worker pour déployer un service NLB. Il se pourrait que vous ayez déployé un cluster standard avec plusieurs noeuds worker, mais que la mise à disposition des noeuds worker ait échoué.</li>
     <ol><li>Affichez la liste des noeuds worker disponibles.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>Si au moins deux noeuds worker disponibles sont trouvés, affichez les détails de ces noeuds worker.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>Vérifiez que les ID des VLAN privé et public pour les noeuds worker renvoyés par les commandes <code>kubectl get nodes</code> et <code>ibmcloud ks worker-get</code> correspondent.</li></ol></li></ul>
 
-4.  Si vous utilisez un domaine personnalisé pour vous connecter à votre service d'équilibreur de charge, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique de votre service d'équilibreur de charge.
-    1.  Identifiez l'adresse IP publique de votre service d'équilibreur de charge.
+4.  Si vous utilisez un domaine personnalisé pour vous connecter à votre service NLB, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique de votre service NLB. 
+    1.  Identifiez l'adresse IP publique de votre service NLB.
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
-    2.  Assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable de votre service d'équilibreur de charge dans le pointeur (enregistrement PTR).
+    2.  Assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable de votre service NLB dans le pointeur (enregistrement PTR).
 
 <br />
 
@@ -162,7 +162,7 @@ Dans la sortie générée par votre interface de ligne de commande, vérifiez qu
 <br />
 
 
-## Problèmes de valeur confidentielle de l'équilibreur de charge d'application Ingress
+## Problèmes liés au secret d'équilibreur de charge d'application (ALB) Ingress
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
@@ -201,8 +201,9 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
  <td>Vérifiez que votre service {{site.data.keyword.cloudcerts_short}} est opérationnel.</td>
  </tr>
  <tr>
- <td>La valeur confidentielle que vous avez importée porte le même nom que la valeur confidentielle d'Ingress fournie par IBM. </td>
- <td>Renommez votre valeur confidentielle. Vous pouvez vérifier le nom de la valeur confidentielle Ingress fournie par IBM en exécutant la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
+ <td>La valeur confidentielle que vous avez importée porte le même nom que la valeur confidentielle d'Ingress fournie par IBM.</td>
+ <td>Renommez votre valeur confidentielle. Vous pouvez vérifier le nom de la valeur confidentielle Ingress fournie par IBM en exécutant la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+</td>
  </tr>
  </tbody></table>
 
@@ -251,7 +252,7 @@ Si vous n'utilisez pas tous les sous-réseaux du VLAN, vous pouvez réutiliser d
 {: #cs_multizone_subnet_limit}
 
 {: tsSymptoms}
-Lorsque vous disposez d'un cluster à zones multiples et que vous exécutez la commande `ibmcloud ks albs <cluster>`, aucun équilibreur de charge d'application (ALB) n'est déployé dans une zone. Par exemple, si vous disposez de noeuds worker dans 3 zones différentes, vous pouvez voir une sortie similaire à ce qui suit, où un ALB public ne s'est pas déployé dans la troisième zone.
+Lorsque vous disposez d'un cluster à zones multiples et que vous exécutez la commande `ibmcloud ks albs <cluster>`, aucun ALB n'est déployé dans une zone. Par exemple, si vous disposez de noeuds worker dans 3 zones différentes, vous pouvez voir une sortie similaire à ce qui suit, où un ALB public ne s'est pas déployé dans la troisième zone.
 ```
 ALB ID                                            Status     Type      ALB IP           Zone    Build
 private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
@@ -313,7 +314,7 @@ Lorsque vous activez la conservation de l'adresse IP source pour les services d'
 {: tsResolve}
 Corrigez le problème en choisissant l'une des options suivantes :
 
-* **Eléments taint de noeud de périphérie** : pour garantir que vos pods d'équilibreur de charge et d'application se déploient sur des noeuds avec taint, [ajouter des règles d'affinité de noeud de périphérie et des tolérances dans le déploiement de votre application](/docs/containers?topic=containers-loadbalancer#edge_nodes). Par défaut, les pods d'équilibreur de charge et d'ALB Ingress disposent de ces règles d'affinité et de ces tolérances.
+* **Eléments taint de noeud de périphérie** : pour garantir que vos pods d'équilibreur de charge et d'application se déploient sur des noeuds avec taint, [ajouter des règles d'affinité de noeud de périphérie et des tolérances dans le déploiement de votre application](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). Par défaut, les pods d'équilibreur de charge et d'ALB Ingress disposent de ces règles d'affinité et de ces tolérances.
 
 * **Eléments taint personnalisés** : retirez les éléments taint personnalisés pour lesquels les pods `keepalived` ne disposent pas de tolérances (tolerations). Vous pouvez à la place [labelliser les noeuds worker en tant que noeuds de périphérie, puis ajouter un élément taint à ces noeuds de périphérie](/docs/containers?topic=containers-edge).
 
@@ -570,12 +571,12 @@ Lorsque vous essayez d'afficher les règles réseau Calico dans votre cluster en
 Pour utiliser des règles Calico, quatre facteurs doivent être en phase : la version de votre cluster Kubernetes, la version de l'interface de ligne de commande (CLI) Calico, la syntaxe du fichier de configuration Calico et les commandes d'affichage des règles. Au moins un de ces facteurs n'est pas à la version correcte.
 
 {: tsResolve}
-Lorsque la version de votre cluster correspond à [Kubernetes version 1.10 ou ultérieure](/docs/containers?topic=containers-cs_versions), vous devez utiliser l'interface CLI de Calico v3.1, la syntaxe du fichier de configuration `calicoctl.cfg` v3 et les commandes `calicoctl get GlobalNetworkPolicy` et `calicoctl get NetworkPolicy`.
+Vous devez utiliser l'interface CLI de Calico v3.3 ou ultérieure, la syntaxe du fichier de configuration `calicoctl.cfg` v3 et les commandes `calicoctl get GlobalNetworkPolicy` et `calicoctl get NetworkPolicy`.
 
 Pour vous assurer que tous les facteurs Calico sont en phase :
 
-1. [Installez et configurez l'interface CLI de Calico version 3.3.1](/docs/containers?topic=containers-network_policies#cli_install). La configuration comprend la mise à jour manuelle du fichier `calicoctl.cfg` pour utiliser la syntaxe de Calico v3.
-2. Vérifiez que les règles que vous créez et que vous voulez appliquer à votre cluster utilisent la [syntaxe de Calico v3 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Si vous disposez d'un fichier `.yaml` de règles existant ou d'un fichier `.json` avec la syntaxe de Calico v2, vous pouvez le convertir en syntaxe de Calico v3 en utilisant la commande [`calicoctl convert` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
+1. [Installez et configurez l'interface CLI de Calico version 3.3 ou ultérieure](/docs/containers?topic=containers-network_policies#cli_install). 
+2. Vérifiez que les règles que vous créez et que vous voulez appliquer à votre cluster utilisent la [syntaxe de Calico v3 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). Si vous disposez d'un fichier `.yaml` de règles existant ou d'un fichier `.json` avec la syntaxe de Calico v2, vous pouvez le convertir en syntaxe de Calico v3 en utilisant la commande [`calicoctl convert` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
 3. Pour [afficher les règles](/docs/containers?topic=containers-network_policies#view_policies), vérifiez que vous utilisez la commande `calicoctl get GlobalNetworkPolicy` pour les règles globales et `calicoctl get NetworkPolicy --namespace <policy_namespace>` pour les règles limitées à des espaces de nom spécifiques.
 
 <br />
@@ -601,7 +602,7 @@ Vous pouvez [supprimer votre pool de noeuds worker](/docs/containers?topic=conta
 
 Sinon, vous pouvez conserver votre pool de noeuds worker en commandant des nouveaux VLAN que vous utiliserez pour créer de nouveaux noeuds worker dans le pool.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Pour obtenir les zones pour lesquelles vous devez obtenir les nouveaux ID de VLAN, notez l'**emplacement** dans la sortie de la commande suivante. **Remarque** : Si vous disposez d'un cluster à zones multiples, vous avez besoin des ID de VLAN pour chaque zone.
 

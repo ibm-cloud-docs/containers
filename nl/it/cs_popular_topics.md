@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,34 @@ Resta al passo con cosa succede in {{site.data.keyword.containerlong}}. Ulterior
 
 
 
+## Argomenti popolari nel mese di aprile 2019
+{: #apr19}
+
+<table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel mese di aprile 2019</caption>
+<thead>
+<th>Data</th>
+<th>Titolo</th>
+<th>Descrizione</th>
+</thead>
+<tbody>
+<tr>
+<td>15 aprile 2019</td>
+<td>[Registrazione di un nome host NLB (network load balancer)](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>Dopo che hai configurato gli NLB (network load balancer) pubblici per esporre le tue applicazioni a Internet, puoi procedere alla creazione delle voci DNS per gli IP dell'NLB creando i nomi host. {{site.data.keyword.Bluemix_notm}} si occupa di generare e gestire il certificato SSL jolly per il nome host per tuo conto. Puoi anche configurare i monitoraggi TCP/HTTP(S) per controllare lo stato di integrità degli indirizzi IP dell'NLB dietro ciascun nome host.</td>
+</tr>
+<tr>
+<td>8 aprile 2019</td>
+<td>[Terminale Kubernetes nel tuo browser web (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>Se utilizzi il dashboard cluster nella console {{site.data.keyword.Bluemix_notm}} per gestire i tuoi cluster ma desideri apportare velocemente modifiche della configurazione più avanzate, puoi ora eseguire i comandi CLI direttamente dal tuo browser web nel terminale Kubernetes. Nella pagina dei dettagli per un cluster, avvia il terminale Kubernetes facendo clic sul pulsante **Terminale**. Nota che il terminale Kubernetes è rilasciato come un componente aggiuntivo beta e non è destinato a essere utilizzato nei cluster di produzione.</td>
+</tr>
+<tr>
+<td>4 aprile 2019</td>
+<td>[Master altamente disponibili ora a Sydney](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>Quando [crei un cluster](/docs/containers?topic=containers-clusters#clusters_ui) in una località metropolitana multizona, di cui ora fa parte anche Sydney, le repliche master Kubernetes vengono distribuite tra le zone per un'alta disponibilità.</td>
+</tr>
+</tbody></table>
+
 ## Argomenti popolari nel mese di marzo 2019
 {: #mar19}
 
@@ -47,13 +75,13 @@ Resta al passo con cosa succede in {{site.data.keyword.containerlong}}. Ulterior
 <td>21 marzo 2019</td>
 <td>Presentazione degli endpoint del servizio privati per il tuo master cluster Kubernetes</td>
 <td>Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} configura il tuo cluster con l'accesso a una VLAN pubblica e a una VLAN privata. In precedenza, se volevi un [cluster di sola VLAN privata](/docs/containers?topic=containers-plan_clusters#private_clusters), dovevi configurare un'applicazione gateway per connettere i nodi di lavoro del cluster al master. Ora puoi utilizzare l'endpoint del servizio privato. Con l'endpoint del servizio privato abilitato, tutto il traffico tra i nodi di lavoro e il master si verifica sulla rete privata, senza che occorra un dispositivo di applicazione gateway. Oltre a questa sicurezza aumentata, il traffico in entrata e in uscita sulla rete privata è [illimitato e non addebitato ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/bandwidth). Puoi continuare a mantenere l'endpoint del servizio pubblico per proteggere l'accesso al tuo master Kubernetes su internet, ad esempio per eseguire i comandi `kubectl` senza essere sulla rete privata.<br><br>
-Per utilizzare gli endpoint del servizio privato, devi abilitare la [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) e gli [endpoint del servizio](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) . Il tuo cluster deve eseguire Kubernetes versione 1.11 o superiore. Se il tuo cluster esegue una versione Kubernetes meno recente, [esegui l'aggiornamento almeno alla 1.11](/docs/containers?topic=containers-update#update). Per ulteriori informazioni, consulta i seguenti link:<ul>
+Per utilizzare gli endpoint del servizio privato, devi abilitare la [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) e gli [endpoint del servizio](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) . Il tuo cluster deve eseguire Kubernetes versione 1.11 o superiore. Se il tuo cluster esegue una versione Kubernetes meno recente, [esegui l'aggiornamento almeno alla 1.11](/docs/containers?topic=containers-update#update). Per ulteriori informazioni, consulta i seguenti link:<ul>
 <li>[Descrizione delle comunicazioni tra master e nodi di lavoro con gli endpoint del servizio](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[Configurazione dell'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[Passaggio dagli endpoint del servizio pubblici a quelli privati](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>Se hai un firewall sulla rete privata, [aggiunta di indirizzi IP privati per {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}} e altri servizi {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
 </ul>
-<p class="important">Se passi a un cluster di endpoint del servizio solo privato, assicurati che il tuo cluster possa ancora comunicare con gli altri servizi {{site.data.keyword.Bluemix_notm}} che utilizzi. [Archiviazione file basata su NFS](/docs/containers?topic=containers-file_storage#file_storage), [SDS (software-defined storage) Portworx](/docs/containers?topic=containers-portworx#portworx) e [cluster autoscaler](/docs/containers?topic=containers-ca#ca) non supportano l'endpoint del servizio solo privato. Utilizza invece un cluster con endpoint del servizio sia pubblici che privati.</p>
+<p class="important">Se passi a un cluster di endpoint del servizio solo privato, assicurati che il tuo cluster possa ancora comunicare con gli altri servizi {{site.data.keyword.Bluemix_notm}} che utilizzi. [Archiviazione SDS (software-defined storage) Portworx](/docs/containers?topic=containers-portworx#portworx) e [cluster autoscaler](/docs/containers?topic=containers-ca#ca) non supportano l'endpoint del servizio solo privato. Utilizza invece un cluster con endpoint del servizio sia pubblici che privati. L'[archiviazione file basata su NFS](/docs/containers?topic=containers-file_storage#file_storage) è supportata se il tuo cluster esegue Kubernetes versione 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 o successive.</p>
 </td>
 </tr>
 <tr>
@@ -114,7 +142,7 @@ Hai bisogno di aiuto o hai un feedback sul cluster autoscaler? Se sei un utente 
 <tr>
 <td>30 gennaio</td>
 <td>Spazi dei nomi Kubernetes e ruoli di accesso del servizio {{site.data.keyword.Bluemix_notm}} IAM</td>
-<td>{{site.data.keyword.containerlong_notm}} ora supporta i [ruoli di accesso del servizio](/docs/containers?topic=containers-access_reference#service) {{site.data.keyword.Bluemix_notm}} IAM. Questi ruoli di accesso del servizio si allineano a [RBAC Kubernetes](/docs/containers?topic=containers-users#role-binding) per autorizzare gli utenti a eseguire azioni `kubectl` nel cluster per gestire risorse Kubernetes quali i pod o le distribuzioni. Puoi inoltre [limitare l'accesso utente a uno specifico spazio dei nomi Kubernetes](/docs/containers?topic=containers-users#platform) all'interno del cluster utilizzando i ruoli di accesso al servizio {{site.data.keyword.Bluemix_notm}} IAM. I [ruoli di accesso alla piattaforma](/docs/containers?topic=containers-access_reference#iam_platform) sono ora utilizzati per autorizzare gli utenti ad eseguire azioni `ibmcloud ks` per gestire la tua infrastruttura del cluster, come ad esempio i nodi di lavoro.<br><br>I ruoli di accesso al servizio {{site.data.keyword.Bluemix_notm}} IAM vengono aggiunti automaticamente ai cluster e agli account {{site.data.keyword.containerlong_notm}} esistenti basati sulle autorizzazioni che avevano in precedenza i tuoi utenti con i ruoli di accesso alla piattaforma IAM. Andando avanti, puoi utilizzare IAM per creare gruppi di accesso, aggiungere utenti ai gruppi di accesso e assegnare ai gruppi i ruoli di accesso al servizio o alla piattaforma. Per ulteriori informazioni, consulta il blog [Introducing service roles and namespaces in IAM for more granular control of cluster access ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).</td>
+<td>{{site.data.keyword.containerlong_notm}} ora supporta i [ruoli di accesso del servizio](/docs/containers?topic=containers-access_reference#service) {{site.data.keyword.Bluemix_notm}} IAM. Questi ruoli di accesso del servizio si allineano a [RBAC Kubernetes](/docs/containers?topic=containers-users#role-binding) per autorizzare gli utenti a eseguire azioni `kubectl` nel cluster per gestire risorse Kubernetes quali i pod o le distribuzioni. Puoi inoltre [limitare l'accesso utente a uno specifico spazio dei nomi Kubernetes](/docs/containers?topic=containers-users#platform) all'interno del cluster utilizzando i ruoli di accesso del servizio {{site.data.keyword.Bluemix_notm}} IAM. I [ruoli di accesso della piattaforma](/docs/containers?topic=containers-access_reference#iam_platform) sono ora utilizzati per autorizzare gli utenti ad eseguire azioni `ibmcloud ks` per gestire la tua infrastruttura del cluster, come ad esempio i nodi di lavoro.<br><br>I ruoli di accesso del servizio {{site.data.keyword.Bluemix_notm}} IAM vengono aggiunti automaticamente ai cluster e agli account {{site.data.keyword.containerlong_notm}} esistenti basati sulle autorizzazioni che avevano in precedenza i tuoi utenti con i ruoli di accesso della piattaforma IAM. Andando avanti, puoi utilizzare IAM per creare gruppi di accesso, aggiungere utenti ai gruppi di accesso e assegnare ai gruppi i ruoli di accesso del servizio o della piattaforma. Per ulteriori informazioni, consulta il blog [Introducing service roles and namespaces in IAM for more granular control of cluster access ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).</td>
 </tr>
 <tr>
 <td>8 gennaio</td>
@@ -142,7 +170,7 @@ Hai bisogno di aiuto o hai un feedback sul cluster autoscaler? Se sei un utente 
 <tr>
 <td>11 dicembre</td>
 <td>Supporto SDS con Portworx</td>
-<td>Gestisci l'archiviazione persistente per i tuoi database inseriti in contenitori e altre applicazioni con stato oppure condividi i dati tra i pod su più zone con Portworx.[Portworx ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://portworx.com/products/introduction/) è una soluzione SDS (software-defined storage) altamente disponibile che gestisce l'archiviazione blocchi locale dei tuoi nodi di lavoro per creare un livello di archiviazione persistente unificato per le tue applicazioni. Utilizzando la replica di volume di ciascun volume a livello di contenitore su più nodi di lavoro, Portworx garantisce la persistenza dei dati e l'accessibilità dei dati nelle zone.Per ulteriori informazioni, vedi [Archiviazione di dati su SDS (software-defined storage) con Portworx](/docs/containers?topic=containers-portworx#portworx).    </td>
+<td>Gestisci l'archiviazione persistente per i tuoi database inseriti in contenitori e altre applicazioni con stato oppure condividi i dati tra i pod su più zone con Portworx. [Portworx ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://portworx.com/products/introduction/) è una soluzione SDS (software-defined storage) altamente disponibile che gestisce l'archiviazione blocchi locale dei tuoi nodi di lavoro per creare un livello di archiviazione persistente unificato per le tue applicazioni. Utilizzando la replica di volume di ciascun volume a livello di contenitore su più nodi di lavoro, Portworx garantisce la persistenza dei dati e l'accessibilità dei dati nelle zone. Per ulteriori informazioni, vedi [Archiviazione di dati su SDS (software-defined storage) con Portworx](/docs/containers?topic=containers-portworx#portworx).    </td>
 </tr>
 <tr>
 <td>6 dicembre</td>
@@ -179,8 +207,8 @@ Hai bisogno di aiuto o hai un feedback sul cluster autoscaler? Se sei un utente 
 </tr>
 <tr>
 <td>7 novembre</td>
-<td>Programma di bilanciamento del carico 2.0 (beta)</td>
-<td>Puoi ora scegliere tra il [programma di bilanciamento del carico 1.0 o 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) per esporre in sicurezza le tue applicazioni cluster al pubblico.</td>
+<td>NLB (network load balancer) 2.0 (beta)</td>
+<td>Puoi ora scegliere tra [NLB 1.0 o 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) per esporre in modo protetto le tue applicazioni cluster al pubblico.</td>
 </tr>
 <tr>
 <td>7 novembre</td>
@@ -189,7 +217,7 @@ Hai bisogno di aiuto o hai un feedback sul cluster autoscaler? Se sei un utente 
 </tr>
 <tr>
 <td>7 novembre</td>
-<td>Master altamente disponibili nei cluster che eseguono Kubernetes versione 1.10</td>
+<td>Master altamente disponibili</td>
 <td>Sono disponibili master altamente disponibili per i cluster che eseguono Kubernetes versione 1.10. Tutti i vantaggi descritti nella voce precedente per i cluster della versione 1.11 si applicano ai cluster della versione 1.10, così come i [passi di preparazione](/docs/containers?topic=containers-cs_versions#110_ha-masters) che devi eseguire.</td>
 </tr>
 <tr>
@@ -223,7 +251,7 @@ Hai bisogno di aiuto o hai un feedback sul cluster autoscaler? Se sei un utente 
 <tr>
 <td>22 ottobre</td>
 <td>[Nuova ubicazione multizona di Londra, `lon05`](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>La città metropolitana multizona di Londra sostituisce la zona `lon02` con la nuova zona `lon05`, in cui sono disponibili più risorse di infrastruttura rispetto a `lon02`. Crea nuovi cluster multizona con `lon05`. I cluster esistenti con `lon02` sono supportati, ma i nuovi cluster multizona devono utilizzare invece `lon05`.</td>
+<td>L'ubicazione metropolitana multizona di Londra sostituisce la zona `lon02` con la nuova zona `lon05`, in cui sono disponibili più risorse di infrastruttura rispetto a `lon02`. Crea nuovi cluster multizona con `lon05`. I cluster esistenti con `lon02` sono supportati, ma i nuovi cluster multizona devono utilizzare invece `lon05`.</td>
 </tr>
 <tr>
 <td>05 ottobre</td>
@@ -281,7 +309,7 @@ Hai bisogno di aiuto o hai un feedback sul cluster autoscaler? Se sei un utente 
 <tr>
 <td>31 agosto</td>
 <td>{{site.data.keyword.cos_full_notm}} è ora integrato con {{site.data.keyword.containerlong}}</td>
-<td>Utilizza le attestazioni del volume persistente (o PVC, persistent volume claim) native di Kubernetes per eseguire il provisioning di {{site.data.keyword.cos_full_notm}} al tuo cluster. L'impiego ottimale di {{site.data.keyword.cos_full_notm}} è per i carichi di lavoro ad alta intensità di lettura e se si desidera archiviare i dati in più zone in un cluster multizona. Inizia [creando una istanza del servizio {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#create_cos_service) e [installando il plug-in {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#install_cos) sul tuo cluster. </br></br>Non sei sicuro di quale soluzione di archiviazione potrebbe essere quella giusta per te? Inizia [qui](/docs/containers?topic=containers-storage_planning#choose_storage_solution) per analizzare i tuoi dati e scegliere la soluzione di archiviazione appropriata per i tuoi dati. </td>
+<td>Utilizza le attestazioni del volume persistente (o PVC, persistent volume claim) native di Kubernetes per eseguire il provisioning di {{site.data.keyword.cos_full_notm}} al tuo cluster. L'impiego ottimale di {{site.data.keyword.cos_full_notm}} è per i carichi di lavoro ad alta intensità di lettura e se si desidera archiviare i dati in più zone in un cluster multizona. Inizia [creando una istanza del servizio {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#create_cos_service) e [installando il plugin {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#install_cos) sul tuo cluster. </br></br>Non sei sicuro di quale soluzione di archiviazione potrebbe essere quella giusta per te? Inizia [qui](/docs/containers?topic=containers-storage_planning#choose_storage_solution) per analizzare i tuoi dati e scegliere la soluzione di archiviazione appropriata per i tuoi dati. </td>
 </tr>
 <tr>
 <td>14 agosto</td>
@@ -425,7 +453,7 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 </tr>
 <tr>
 <td>14 marzo</td>
-<td>[Accesso sicuro con {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-integrations#appid)</td>
+<td>[Accesso sicuro con {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-supported_integrations#appid)</td>
 <td>Migliora le tue applicazioni in esecuzione in {{site.data.keyword.containerlong_notm}} richiedendo agli utenti di effettuare l'accesso.</td>
 </tr>
 <tr>

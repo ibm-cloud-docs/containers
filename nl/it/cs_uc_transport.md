@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 {: #cs_uc_transport}
 
 Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong_notm}} possano
-sfruttare le toolchain per aggiornamenti rapidi delle applicazioni e le distribuzioni multiregione in tutto il mondo. Allo stesso tempo, questi carichi di lavoro possono connettersi a sistemi di back-end esistenti, utilizzare Watson AI per la personalizzazione e accedere ai dati IOT con {{site.data.keyword.messagehub_full}}.
+avvalersi delle toolchain per aggiornamenti rapidi delle applicazioni e le distribuzioni multiregione in tutto il mondo. Allo stesso tempo, questi carichi di lavoro possono connettersi a sistemi di back-end esistenti, utilizzare Watson AI per la personalizzazione e accedere ai dati IOT con {{site.data.keyword.messagehub_full}}.
 
 {: shortdesc}
 
@@ -62,13 +62,13 @@ La soluzione è composta da questi componenti principali:
 2. Documenti doganali condivisi digitalmente con i porti e i partner di transito applicabili, incluso il controllo degli accessi
 3. Applicazioni per i clienti di spedizione che aggregano e comunicano le informazioni di arrivo per le merci spedite, comprese le API per i clienti di spedizione per riutilizzare i dati di spedizione nelle proprie applicazioni di vendita al dettaglio e business-to-business
 
-Affinché la società di spedizione lavori con partner globali, i sistemi di traffico e pianificazione hanno richiesto modifiche locali per adattarsi alla lingua, alle normative e alla logistica portuale di ciascuna regione. {{site.data.keyword.containerlong_notm}} offre una copertura globale in più regioni, tra cui Nord America, Europa, Asia e Australia, in modo che le applicazioni dell'azienda riflettano le esigenze dei suoi partner, in ogni paese.
+Affinché la società di spedizione lavori con partner globali, i sistemi di traffico e pianificazione hanno richiesto modifiche locali per adattarsi alla lingua, alle normative e alla logistica portuale di ciascuna regione. {{site.data.keyword.containerlong_notm}} offre una copertura globale in più regioni, tra cui Nord America, Europa, Asia e Australia, in modo che le applicazioni riflettano le esigenze dei suoi partner, in ogni paese.
 
 I dispositivi IoT trasmettono i dati che {{site.data.keyword.messagehub_full}} distribuisce alle applicazioni portuali regionali e agli archivi dati dei manifesti di carico dei controlli doganali e container associati. {{site.data.keyword.messagehub_full}} è il punto di approdo per gli eventi IoT. Distribuisce gli eventi in base alla connettività gestita che la piattaforma Watson IoT offre a {{site.data.keyword.messagehub_full}}.
 
 Una volta che gli eventi si trovano in {{site.data.keyword.messagehub_full}}, vengono mantenuti per l'uso immediato nelle applicazioni di transito portuale e per qualsiasi momento futuro. Le applicazioni che richiedono la latenza più bassa consumano direttamente in tempo reale dal flusso degli eventi ({{site.data.keyword.messagehub_full}}). Altre applicazioni future, come gli strumenti di analisi, possono scegliere di consumare in modalità batch dall'archivio eventi con {{site.data.keyword.cos_full}}.
 
-Poiché i dati di spedizione sono condivisi con i clienti della società, gli sviluppatori assicurano che i clienti della società possano utilizzare le API per visualizzare i dati di spedizione nelle loro applicazioni. Esempi di tali applicazioni sono le applicazioni di tracciamento mobile o soluzioni di e-commerce web. Gli sviluppatori sono anche impegnati nella creazione e manutenzione delle applicazioni portuali regionali che raccolgono e diffondono i registri doganali e i manifesti di carico. In sintesi, devono concentrarsi sulla codifica anziché sulla gestione dell'infrastruttura. Pertanto, hanno scelto {{site.data.keyword.containerlong_notm}} perché IBM semplifica la gestione dell'infrastruttura:
+Poiché i dati di spedizione sono condivisi con i clienti della società, gli sviluppatori assicurano che i clienti possano utilizzare le API per visualizzare i dati di spedizione nelle loro applicazioni. Esempi di tali applicazioni sono le applicazioni di tracciamento mobile o soluzioni di e-commerce web. Gli sviluppatori sono anche impegnati nella creazione e manutenzione delle applicazioni portuali regionali che raccolgono e diffondono i registri doganali e i manifesti di carico. In sintesi, devono concentrarsi sulla codifica anziché sulla gestione dell'infrastruttura. Pertanto, hanno scelto {{site.data.keyword.containerlong_notm}} perché IBM semplifica la gestione dell'infrastruttura:
 * Gestione di master Kubernetes, IaaS e componenti operativi, come Ingress e archiviazione
 * Monitoraggio dell'integrità e del recupero dei nodi di lavoro
 * Fornitura del calcolo globale, in modo che gli sviluppatori non siano responsabili dell'infrastruttura nelle diverse regioni in cui necessitano di carichi di lavoro e dati
@@ -93,7 +93,7 @@ Soluzione tecnica:
 
 **Passo 1: carica le applicazioni in un contenitore utilizzando i microservizi**
 
-* Progetta le applicazioni in una serie di microservizi cooperativi in {{site.data.keyword.containerlong_notm}} in base alle aree funzionali dell'applicazione e delle sue dipendenze.
+* Integra le applicazioni in una serie di microservizi cooperativi in {{site.data.keyword.containerlong_notm}} in base alle aree funzionali dell'applicazione e delle sue dipendenze.
 * Distribuisci le applicazioni nei contenitori in {{site.data.keyword.containerlong_notm}}.
 * Fornisci dashboard DevOps standardizzati attraverso Kubernetes.
 * Abilita il ridimensionamento su richiesta del calcolo per i carichi di lavoro batch e di altri inventari che vengono eseguiti raramente.
@@ -111,7 +111,7 @@ Soluzione tecnica:
 **Passo 4: consegna in modo continuo**
 * {{site.data.keyword.contdelivery_full}} aiuta gli sviluppatori a fornire rapidamente una toolchain integrata, utilizzando template personalizzabili e condivisibili con gli strumenti di IBM, terze parti e open source. Automatizza i processi di build e di test, controllando la qualità con l'analisi.
 * Dopo che gli sviluppatori hanno creato e testato le applicazioni nei propri cluster di sviluppo e test, utilizzano le toolchain CI/CD di IBM per distribuire le applicazioni nei cluster in tutto il mondo.
-* {{site.data.keyword.containerlong_notm}} fornisce un facile rollout e roll-back delle applicazioni; vengono distribuite applicazioni personalizzate per soddisfare i requisiti regionali attraverso l'instradamento e il bilanciamento del carico intelligente di Istio.
+* {{site.data.keyword.containerlong_notm}} fornisce un facile rollout e roll-back delle applicazioni; vengono distribuite applicazioni personalizzate per soddisfare i requisiti regionali attraverso l'instradamento e il bilanciamento del carico intelligenti di Istio.
 
 **Risultati**
 
@@ -160,7 +160,7 @@ Soluzione tecnica:
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_full_notm}}
 
-Lo sviluppo accelerato è una vittoria fondamentale per il responsabile delle risorse umane. Il team ha iniziato caricando le applicazioni in un contenitore e inserendole nel cloud. Con l'uso di moderni contenitori, gli sviluppatori possono sperimentare facilmente con l'SDK Node.js SDK e distribuire le modifiche nei sistemi di sviluppo e test, che vengono ridimensionati su cluster separati. Queste distribuzioni sono state automatizzate con le toolchain aperte e {{site.data.keyword.contdelivery_full}}. Gli aggiornamenti al sito HR non languivano più in processi di build lenti e soggetti a errori. Gli sviluppatori possono fornire aggiornamenti incrementali al loro sito, tutti i giorni o anche più frequentemente.  Inoltre, la registrazione e il monitoraggio per il sito HR si integrano rapidamente, in particolare per il modo in cui il sito estrae dati personalizzati dai sistemi di indennità di back-end. Gli sviluppatori non sprecano tempo a creare sistemi di registrazione complessi, solo per essere in grado di risolvere i problemi dei sistemi attivi. Gli sviluppatori non devono dedicare del tempo a diventare esperti di sicurezza cloud; possono facilmente implementare un'autenticazione controllata dalle politiche utilizzando {{site.data.keyword.appid_full_notm}}.
+Lo sviluppo accelerato è una vittoria fondamentale per il responsabile delle risorse umane. Il team ha iniziato caricando le applicazioni in un contenitore e inserendole nel cloud. Con l'uso di moderni contenitori, gli sviluppatori possono sperimentare facilmente con l'SDK Node.js SDK e distribuire le modifiche nei sistemi di sviluppo e test, che vengono ridimensionati su cluster separati. Queste distribuzioni sono state automatizzate con le toolchain aperte e {{site.data.keyword.contdelivery_full}}. Gli aggiornamenti al sito HR non languivano più in processi di build lenti e soggetti a errori. Gli sviluppatori possono fornire aggiornamenti incrementali al loro sito, tutti i giorni o anche più frequentemente.  Inoltre, la registrazione e il monitoraggio per il sito HR si integrano rapidamente, in particolare per il modo in cui il sito estrae dati personalizzati dai sistemi di indennità di back-end. Gli sviluppatori non sprecano tempo a creare sistemi di registrazione complessi, solo per essere in grado di risolvere i problemi dei sistemi attivi. Gli sviluppatori non hanno bisogno di diventare esperti di sicurezza cloud; possono facilmente implementare un'autenticazione controllata dalle politiche utilizzando {{site.data.keyword.appid_full_notm}}.
 
 Con {{site.data.keyword.containerlong_notm}}, sono passati dall'hardware sovradimensionato in un data center privato al calcolo personalizzabile che riduce le operazioni IT, la manutenzione e l'energia. Per ospitare il sito HR, sono riusciti a progettare facilmente cluster Kubernetes per soddisfare le loro esigenze di CPU, RAM e archiviazione. Un altro fattore per la riduzione dei costi del personale è che IBM gestisce Kubernetes, quindi gli sviluppatori possono concentrarsi sulla realizzazione di una migliore esperienza dei dipendenti per l'iscrizione alle indennità.
 
@@ -184,7 +184,7 @@ Con {{site.data.keyword.containerlong_notm}}, sono passati dall'hardware sovradi
 **Passo 4: consegna in modo continuo in tutto il mondo**
 * {{site.data.keyword.contdelivery_full}} aiuta gli sviluppatori a fornire rapidamente una toolchain integrata, utilizzando template personalizzabili e condivisibili con gli strumenti di IBM, terze parti e open source. Automatizza i processi di build e di test, controllando la qualità con l'analisi.
 * Dopo che gli sviluppatori hanno creato e testato le applicazioni nei propri cluster di sviluppo e test, utilizzano le toolchain CI/CD di IBM per distribuire le applicazioni nei cluster di produzione in tutto il mondo.
-* {{site.data.keyword.containerlong_notm}} fornisce un facile rollout e roll-back delle applicazioni. Vengono distribuite applicazioni personalizzate per soddisfare i requisiti regionali attraverso l'instradamento e il bilanciamento del carico intelligente di Istio.
+* {{site.data.keyword.containerlong_notm}} fornisce un facile rollout e roll-back delle applicazioni. Vengono distribuite applicazioni personalizzate per soddisfare i requisiti regionali attraverso l'instradamento e il bilanciamento del carico intelligenti di Istio.
 * Gli strumenti HA integrati in {{site.data.keyword.containerlong_notm}} bilanciano il carico di lavoro all'interno di ogni regione geografica, tra cui la riparazione automatica e il bilanciamento del carico.
 
 **Risultati**

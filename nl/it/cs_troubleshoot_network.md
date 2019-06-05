@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -39,23 +39,23 @@ Hai problemi a connetterti alla tua applicazione tramite Ingress? Prova ad esegu
 Mentre risolvi i problemi, puoi utilizzare il [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) per eseguire i test e raccogliere le informazioni di rete, Ingress e strongSwan pertinenti dal tuo cluster.
 {: tip}
 
-## Impossibile collegarsi a un'applicazione tramite un servizio di programma di bilanciamento del carico
+## Impossibile connettersi a un'applicazione tramite un servizio NLB (network load balancer)
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-Hai esposto pubblicamente la tua applicazione creando un servizio di programma di bilanciamento del carico nel tuo cluster. Quando tenti di collegarti alla tua applicazione utilizzando l'indirizzo IP pubblico del programma di bilanciamento del carico, la connessione non riesce o va in timeout.
+Hai esposto pubblicamente la tua applicazione creando un servizio NLB nel tuo cluster. Quando hai provato a connetterti alla tua applicazione utilizzando l'indirizzo IP pubblico dell'NLB, la connessione non è riuscita o è andata in timeout.
 
 {: tsCauses}
-Il tuo servizio di programma di bilanciamento del carico potrebbe non funzionare correttamente per uno dei seguenti motivi:
+Il tuo servizio NLB potrebbe non funzionare correttamente per uno dei seguenti motivi:
 
 -   Il cluster è un cluster gratuito o standard con solo un nodo di lavoro.
 -   Il cluster non è ancora stato completamente distribuito.
--   Lo script di configurazione per il tuo servizio di programma di bilanciamento del carico include degli errori.
+-   Lo script di configurazione per il tuo servizio NLB include degli errori.
 
 {: tsResolve}
-Per risolvere i problemi del tuo servizio di programma di bilanciamento del carico:
+Per risolvere i problemi del tuo servizio NLB:
 
-1.  Verifica di aver configurato un cluster standard che è stato completamente distribuito e che abbia almeno due nodi di lavoro per garantire l'elevata disponibilità per il tuo servizio di programma di bilanciamento del carico.
+1.  Verifica di aver configurato un cluster standard che è stato completamente distribuito e che abbia almeno due nodi di lavoro per garantire l'elevata disponibilità per il tuo servizio NLB.
 
   ```
   ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -64,10 +64,10 @@ Per risolvere i problemi del tuo servizio di programma di bilanciamento del cari
 
     Nel tuo output della CLI, assicurati che lo **Stato** del tuo nodo di lavoro visualizzi **Pronto** e che il **Tipo di macchina** sia diverso da **gratuito**.
 
-2. Per i programmi di bilanciamento del carico versione 2.0: assicurati di completare i [prerequisiti del programma di bilanciamento del carico 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
+2. Per gli NLB versione 2.0: assicurati di completare i [prerequisiti di NLB 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
 
-3. Verifica l'accuratezza del file di configurazione del tuo servizio di programma di bilanciamento del carico.
-    * Programmi di bilanciamento del carico versione 2.0:
+3. Verifica l'accuratezza del file di configurazione del tuo servizio NLB.
+    * NLB versione 2.0:
         ```
         apiVersion: v1
         kind: Service
@@ -88,11 +88,11 @@ Per risolvere i problemi del tuo servizio di programma di bilanciamento del cari
 
         1. Verifica di aver definito **LoadBalancer** come il tipo del tuo servizio.
         2. Verifica di aver incluso l'annotazione `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"`.
-        3. Nella sezione `spec.selector` del servizio LoadBalancer, assicurati che `<selector_key>` e `<selector_value>` siano gli stessi della coppia chiave/valore che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo YAML di distribuzione. Se le etichette non corrispondono, la sezione **Endpoints** nel tuo servizio LoadBalancer mostra **<none>** e la tua applicazione non sarà accessibile da Internet.
+        3. Nella sezione `spec.selector` del servizio LoadBalancer, assicurati che `<selector_key>` e `<selector_value>` siano uguali alla coppia chiave/valore che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo YAML di distribuzione. Se le etichette non corrispondono, la sezione **Endpoints** nel tuo servizio LoadBalancer mostra **<none>** e la tua applicazione non sarà accessibile da Internet.
         4. Verifica di aver utilizzato la **porta** su cui è in ascolto la tua applicazione.
         5. Verifica di aver impostato `externalTrafficPolicy` su `Local`.
 
-    * Programmi di bilanciamento del carico versione 1.0:
+    * NLB versione 1.0:
         ```
         apiVersion: v1
     kind: Service
@@ -109,10 +109,10 @@ Per risolvere i problemi del tuo servizio di programma di bilanciamento del cari
         {: screen}
 
         1. Verifica di aver definito **LoadBalancer** come il tipo del tuo servizio.
-        2. Nella sezione `spec.selector` del servizio LoadBalancer, assicurati che `<selector_key>` e `<selector_value>` siano gli stessi della coppia chiave/valore che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo YAML di distribuzione. Se le etichette non corrispondono, la sezione **Endpoints** nel tuo servizio LoadBalancer mostra **<none>** e la tua applicazione non sarà accessibile da Internet.
+        2. Nella sezione `spec.selector` del servizio LoadBalancer, assicurati che `<selector_key>` e `<selector_value>` siano uguali alla coppia chiave/valore che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo YAML di distribuzione. Se le etichette non corrispondono, la sezione **Endpoints** nel tuo servizio LoadBalancer mostra **<none>** e la tua applicazione non sarà accessibile da Internet.
         3. Verifica di aver utilizzato la **porta** su cui è in ascolto la tua applicazione.
 
-3.  Verifica il tuo servizio di programma di bilanciamento del carico e controlla la sezione **Eventi** per trovare errori potenziali.
+3.  Controlla il tuo servizio NLB ed esamina la sezione **Eventi** per trovare potenziali errori.
 
     ```
     kubectl describe service <myservice>
@@ -121,27 +121,27 @@ Per risolvere i problemi del tuo servizio di programma di bilanciamento del cari
 
     Ricerca i seguenti messaggi di errore:
 
-    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Per utilizzare il servizio di programma di bilanciamento del carico, devi disporre di un cluster standard con almeno due nodi di lavoro.</li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Questo messaggio di errore indica che non è stato lasciato alcun indirizzo IP pubblico portatile che può essere assegnato al tuo servizio di programma di bilanciamento del carico. Fai riferimento a <a href="/docs/containers?topic=containers-subnets#subnets">Aggiunta di sottoreti ai cluster</a> per trovare informazioni su come richiedere gli indirizzi IP pubblici portatili per il tuo cluster. Dopo che gli indirizzi IP pubblici portatili sono disponibili per il cluster, il servizio di programma di bilanciamento del carico viene creato automaticamente.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Hai definito un indirizzo IP pubblico portatile per il tuo servizio di programma di bilanciamento del carico utilizzando la sezione **`loadBalancerIP`**, ma questo indirizzo IP pubblico portatile non è disponibile nella tua sottorete pubblica portatile. Nella sezione **`loadBalancerIP`** il tuo script di configurazione rimuove l'indirizzo IP esistente e aggiunge uno degli indirizzi IP pubblici portatili. Puoi anche rimuovere la sezione **`loadBalancerIP`** dal tuo script in modo che possa venirne assegnato uno automaticamente.</li>
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Non disponi di abbastanza nodi di lavoro da distribuire a un servizio di programma di bilanciamento del carico. Un motivo potrebbe essere che hai distribuito un cluster standard con più di un nodo di lavoro ma il provisioning ha avuto esito negativo.</li>
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Per utilizzare il servizio NLB, devi disporre di un cluster standard con almeno due nodi di lavoro.</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the NLB service request. Add a portable subnet to the cluster and try again</code></pre></br>Questo messaggio di errore indica che non è rimasto alcun indirizzo IP pubblico portatile che può essere assegnato al tuo servizio NLB. Fai riferimento a <a href="/docs/containers?topic=containers-subnets#subnets">Aggiunta di sottoreti ai cluster</a> per trovare informazioni su come richiedere gli indirizzi IP pubblici portatili per il tuo cluster. Dopo che gli indirizzi IP pubblici portatili sono disponibili per il cluster, il servizio NLB viene creato automaticamente.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre>Hai definito un indirizzo IP pubblico portatile per il tuo YAML del programma di bilanciamento del carico utilizzando la sezione **`loadBalancerIP`**, ma questo indirizzo IP pubblico portatile non è disponibile nella tua sottorete pubblica portatile. Nella sezione **`loadBalancerIP`** il tuo script di configurazione rimuove l'indirizzo IP esistente e aggiunge uno degli indirizzi IP pubblici portatili. Puoi anche rimuovere la sezione **`loadBalancerIP`** dal tuo script in modo che possa venirne assegnato uno automaticamente.</li>
+    <li><pre class="screen"><code>Nessun nodo disponibile per i servizi NLB</code></pre>Non disponi di abbastanza nodi di lavoro per distribuire un servizio NLB. Un motivo potrebbe essere che hai distribuito un cluster standard con più di un nodo di lavoro ma il provisioning ha avuto esito negativo.</li>
     <ol><li>Elenca i nodi di lavoro disponibili.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
-    <li>Se vengono trovati almeno due nodi di lavoro, elenca i dettagli del nodo di lavoro.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
+    <li>Se vengono trovati almeno due nodi di lavoro, elenca i dettagli del nodo di lavoro. </br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>Assicurati che gli ID di VLAN pubblica e privata dei nodi di lavoro restituiti dai comandi <code>kubectl get nodes</code> e <code>ibmcloud ks worker-get</code> corrispondano.</li></ol></li></ul>
 
-4.  Se stai utilizzando un dominio personalizzato per collegarti al tuo servizio di programma di bilanciamento del carico, assicurati che sia associato all'indirizzo IP pubblico del tuo servizio di programma di bilanciamento del carico.
-    1.  Trova l'indirizzo IP pubblico del servizio di bilanciamento del carico.
+4.  Se stai utilizzando un dominio personalizzato per collegarti al tuo servizio NLB, assicurati che sia associato all'indirizzo IP pubblico del tuo servizio NLB.
+    1.  Trova l'indirizzo IP pubblico del tuo servizio NLB.
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
-    2.  Verifica che il tuo dominio personalizzato sia associato all'indirizzo IP pubblico portatile del tuo servizio di bilanciamento del carico nel record di puntatore (PTR).
+    2.  Verifica che il tuo dominio personalizzato sia associato all'indirizzo IP pubblico portatile del tuo servizio NLB nel record di puntatore (PTR).
 
 <br />
 
 
-## Impossibile collegarsi a un'applicazione tramite Ingress
+## Impossibile connettersi a un'applicazione tramite Ingress
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
@@ -162,11 +162,11 @@ Nel tuo output della CLI, assicurati che lo **Stato** del tuo nodo di lavoro vis
 <br />
 
 
-## Problemi con il segreto del programma di bilanciamento del carico dell'applicazione Ingress
+## Problemi con il segreto dell'ALB (application load balancer) Ingress
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Dopo che hai distribuito un segreto del programma di bilanciamento del carico dell'applicazione (ALB, application load balancer) Ingress al tuo cluster utilizzando il comando `ibmcloud ks alb-cert-deploy`, il campo `Description` non viene aggiornato con il nome del segreto quando visualizzi il tuo certificato in {{site.data.keyword.cloudcerts_full_notm}}.
+Dopo che hai distribuito un segreto dell'ALB (application load balancer) (ALB, application load balancer) Ingress al tuo cluster utilizzando il comando `ibmcloud ks alb-cert-deploy`, il campo `Description` non viene aggiornato con il nome del segreto quando visualizzi il tuo certificato in {{site.data.keyword.cloudcerts_full_notm}}.
 
 Quando elenchi le informazioni sul segreto dell'ALB, lo stato è `*_failed`. Ad esempio, `create_failed`, `update_failed`, `delete_failed`.
 
@@ -174,7 +174,7 @@ Quando elenchi le informazioni sul segreto dell'ALB, lo stato è `*_failed`. Ad 
 Controlla i seguenti motivi sul perché il segreto dell'ALB può avere un malfunzionamento e i passi di risoluzione del problema corrispondenti:
 
 <table>
-<caption>Risoluzione dei problemi con i segreti del programma di bilanciamento del carico dell'applicazione Ingress</caption>
+<caption>Risoluzione dei problemi con i segreti dell'ALB (application load balancer) Ingress</caption>
  <thead>
  <th>Perché sta succedendo</th>
  <th>Come porvi rimedio</th>
@@ -213,7 +213,7 @@ Controlla i seguenti motivi sul perché il segreto dell'ALB può avere un malfun
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Quando esegui `ibmcloud ks cluster-get --cluster <cluster>`, il tuo cluster si trova in uno stato `normal` ma non ci sono **domini secondari Ingress** disponibili.
+Quando esegui `ibmcloud ks cluster-get --cluster <cluster>`, il tuo cluster è in uno stato `normal` ma non è disponibile alcun **dominio secondario Ingress**.
 
 Potresti ricevere un messaggio di errore simile al seguente.
 
@@ -290,7 +290,7 @@ Per evitare che la connessione venga chiusa dopo 60 secondi di inattività:
 
 2. Per mantenere attiva la connessione, puoi aumentare il valore del timeout oppure configurare un heartbeat nella tua applicazione.
 <dl><dt>Modifica il timeout</dt>
-<dd>Aumenta il valore del `proxy-read-timeout` nella tua configurazione dell'ALB. Ad esempio, per modificare il timeout da `60s` a un valore più grande come `300s`, aggiungi questa [annotazione](/docs/containers?topic=containers-ingress_annotation#connection) al tuo file di risorse Ingress `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. Il timeout viene modificato per tutti gli ALB pubblici nel tuo cluster.</dd>
+<dd>Aumenta il valore del `proxy-read-timeout` nella tua configurazione dell'ALB. Ad esempio, per modificare il timeout da `60s` in un valore più grande come `300s`, aggiungi questa [annotazione](/docs/containers?topic=containers-ingress_annotation#connection) al tuo file di risorse Ingress:`ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. Il timeout viene modificato per tutti gli ALB pubblici nel tuo cluster.</dd>
 <dt>Configura un heartbeat</dt>
 <dd>Se non vuoi modificare il valore di timeout della lettura predefinito di ALB, configura un heartbeat nella tua applicazione WebSocket. Quando configuri un protocollo heartbeat utilizzando un framework come [WAMP ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://wamp-proto.org/), il server di upstream dell'applicazione invia periodicamente un messaggio "ping" a un intervallo prestabilito e il client risponde con un messaggio "pong". Configura l'intervallo di heartbeat su 58 secondi o meno in modo che il traffico "ping/pong" mantenga la connessione aperta prima che venga implementato il timeout di 60 secondi.</dd></dl>
 
@@ -313,7 +313,7 @@ Quando abiliti la conservazione dell'IP di origine per i servizi del programma d
 {: tsResolve}
 Risolvi il problema scegliendo una delle seguenti opzioni:
 
-* **Corruzioni del nodo edge**: per garantire che i tuoi pod del programma di bilanciamento del carico e dell'applicazione vengano distribuiti sui nodi edge corrotti, [aggiungi regole di affinità e tolleranze del nodo edge alla tua distribuzione dell'applicazione](/docs/containers?topic=containers-loadbalancer#edge_nodes). I pod del programma di bilanciamento del carico e dell'ALB Ingress hanno queste regole di affinità e tolleranze per impostazione predefinita.
+* **Corruzioni del nodo edge**: per garantire che i tuoi pod del programma di bilanciamento del carico e dell'applicazione vengano distribuiti sui nodi edge corrotti, [aggiungi regole di affinità e tolleranze del nodo edge alla tua distribuzione dell'applicazione](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). I pod del programma di bilanciamento del carico e dell'ALB Ingress hanno queste regole di affinità e tolleranze per impostazione predefinita.
 
 * **Corruzioni personalizzate**: rimuovi le corruzioni personalizzate per le quali i pod `keepalived` non hanno tolleranze. Puoi invece [etichettare i nodi di lavoro come edge e quindi danneggiare quei nodi edge](/docs/containers?topic=containers-edge).
 
@@ -570,13 +570,13 @@ Quando tenti di visualizzare le politiche di rete Calico nel tuo cluster eseguen
 Per utilizzare le politiche Calico, quattro fattori devono allinearsi: la tua versione del cluster Kubernetes, la versione della CLI Calico, la sintassi del file di configurazione Calico e i comandi di visualizzazione della politica. Uno o più di questi fattori non è alla versione corretta.
 
 {: tsResolve}
-Quando il tuo cluster è alla [versione Kubernetes 1.10 o successive](/docs/containers?topic=containers-cs_versions), devi utilizzare la CLI Calico v3.1, la sintassi del file di configurazione `calicoctl.cfg` v3 e i comandi `calicoctl get GlobalNetworkPolicy` e `calicoctl get NetworkPolicy`.
+Devi utilizzare la CLI Calico v3.3 o successive, la sintassi del file di configurazione `calicoctl.cfg` v3 e i comandi `calicoctl get GlobalNetworkPolicy` e `calicoctl get NetworkPolicy`.
 
 Per assicurarti che tutti i fattori Calico siano allineati:
 
-1. [Installa e configura la CLI Calico versione 3.3.1](/docs/containers?topic=containers-network_policies#cli_install). La configurazione include l'aggiornamento manuale del file `calicoctl.cfg` per utilizzare la sintassi Calico v3.
-2. Assicurati che tutte le politiche che crei e vuoi applicare al tuo cluster utilizzino la [sintassi Calico v3 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Se hai un file `.yaml` o `.json` della politica esistente alla sintassi Calico v2, puoi convertirlo a Calico v3 utilizzando il comando [`calicoctl convert` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
-3. Per [visualizzare le politiche](/docs/containers?topic=containers-network_policies#view_policies), assicurati che stai utilizzando `calicoctl get GlobalNetworkPolicy` per le politiche globali e `calicoctl get NetworkPolicy --namespace <policy_namespace>` per le politiche il cui ambito è delimitato a specifici spazi dei nomi.
+1. [Installa e configura una CLI Calico versione 3.3 o successive](/docs/containers?topic=containers-network_policies#cli_install).
+2. Assicurati che tutte le politiche che crei e vuoi applicare al tuo cluster utilizzino la [sintassi Calico v3 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). Se hai un file `.yaml` o `.json` della politica esistente nella sintassi Calico v2, puoi convertirlo in Calico v3 utilizzando il comando [`calicoctl convert` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
+3. Per [visualizzare le politiche](/docs/containers?topic=containers-network_policies#view_policies), assicurati che stai utilizzando `calicoctl get GlobalNetworkPolicy` per le politiche globali e `calicoctl get NetworkPolicy --namespace <policy_namespace>` per le politiche di cui è delimitato l'ambito a specifici spazi dei nomi.
 
 <br />
 
@@ -601,7 +601,7 @@ Puoi [eliminare il tuo pool di nodi di lavoro esistente](/docs/containers?topic=
 
 In alternativa, puoi conservare il tuo pool di nodi di lavoro esistente ordinando delle nuove VLAN e utilizzandole per creare dei nuovi nodi di lavoro nel pool.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Per ottenere le zone per cui hai bisogno di nuovi ID VLAN, prendi nota dell'**Ubicazione** nel seguente output di comando. **Nota**: se il tuo cluster è un multizona, ti servono degli ID VLAN per ciascuna zona.
 

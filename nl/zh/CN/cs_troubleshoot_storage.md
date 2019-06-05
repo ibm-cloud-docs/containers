@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -80,7 +80,7 @@ subcollection: containers
 {: #nonroot}
 
 {: tsSymptoms}
-向部署[添加 NFS 存储器](/docs/containers?topic=containers-file_storage#app_volume_mount)后，容器的部署失败。检索容器的日志时，您可能会看到如下所示的错误。pod 发生故障，并且卡在重新装入循环中。
+向部署[添加 NFS 存储器](/docs/containers?topic=containers-file_storage#file_app_volume_mount)后，容器的部署失败。检索容器的日志时，您可能会看到如下所示的错误。pod 发生故障，并且卡在重新装入循环中。
 
 ```
 write-permission
@@ -184,12 +184,15 @@ initContainers:
     Jenkins 部署的**示例**：
 
     ```
-apiVersion: apps/v1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:
@@ -334,8 +337,8 @@ apiVersion: apps/v1
    ```
    {: pre}
 
-2. 验证是否使用的是[最新版本的 {{site.data.keyword.Bluemix_notm}} Block Storage 插件](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)。如果不是，请[更新插件](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)。
-3. 如果对 pod 使用的是 Kubernetes 部署，请通过除去失败的 pod 并允许 Kubernetes 重新创建该 pod，从而重新启动该 pod。如果未使用部署，请通过运行 `kubectl get pod <pod_name> -o yaml >pod.yaml` 来检索用于创建该 pod 的 YAML 文件。然后，删除并手动重新创建该 pod。
+2. 验证是否使用的是[最新版本的 {{site.data.keyword.Bluemix_notm}} Block Storage 插件](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)。如果不是，请[更新插件](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)。
+3. 如果对 pod 使用的是 Kubernetes 部署，请通过除去失败的 pod 并允许 Kubernetes 重新创建该 pod，从而重新启动该 pod。如果未使用部署，请通过运行 `kubectl get pod <pod_name> -o yaml >pod.yaml` 来检索用于创建 pod 的 YAML 文件。然后，删除并手动重新创建该 pod。
     ```
       kubectl delete pod <pod_name>
       ```
@@ -371,7 +374,7 @@ apiVersion: apps/v1
 {: #block_filesystem}
 
 {: tsSymptoms}
-运行 `kubectl describe pod <pod_name>` 时，会看到以下错误：
+运行 `kubectl describe pod <pod_name>` 时，您会看到以下错误：
 ```
 failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32
 ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -55,8 +55,14 @@ Ingress ALB 추가 기능의 빌드별 변경사항에 대한 요약은 다음 �
 </thead>
 <tbody>
 <tr>
+<td>411 / 315</td>
+<td>2019년 4월 15일</td>
+<td>액세스 토큰 만기 값과 일치하도록 {{site.data.keyword.appid_full}} 쿠키 만기 값을 업데이트합니다.</td>
+<td>-</td>
+</tr>
+<tr>
 <td>411 / 306</td>
-<td>2019년 3월 21일</td>
+<td>2019년 3월 22일</td>
 <td>Go 버전을 1.12.1로 업데이트합니다.</td>
 <td>-</td>
 </tr>
@@ -65,7 +71,7 @@ Ingress ALB 추가 기능의 빌드별 변경사항에 대한 요약은 다음 �
 <td>2019년 3월 18일</td>
 <td><ul>
 <li>이미지 스캔의 취약점이 해결되었습니다.</li>
-<li>{{site.data.keyword.appid_full}}에 대한 로깅이 향상되었습니다.</li>
+<li>{{site.data.keyword.appid_full_notm}}에 대한 로깅이 향상되었습니다.</li>
 </ul></td>
 <td>-</td>
 </tr>
@@ -96,7 +102,7 @@ Ingress ALB 추가 기능의 빌드별 변경사항에 대한 요약은 다음 �
 <td><ul>
 <li>ALB의 NGINX 버전을 1.15.2로 업데이트합니다.</li>
 <li>IBM에서 제공하는 TLS 인증서는 이제 7일이 아닌 만료되기 37일 전에 자동으로 갱신됩니다.</li>
-<li>{{site.data.keyword.appid_full_notm}} 로그아웃 기능이 추가됨: `/logout` 접두부가 {{site.data.keyword.appid_full_notm}} 경로에 있으면 쿠키가 제거되고 사용자를 로그인 페이지로 다시 보냅니다. </li>
+<li>{{site.data.keyword.appid_full_notm}} 로그아웃 기능이 추가됨: `/logout` 접두부가 {{site.data.keyword.appid_full_notm}} 경로에 있으면 쿠키가 제거되고 사용자를 로그인 페이지로 다시 보냅니다.</li>
 <li>내부 추적 용도로 {{site.data.keyword.appid_full_notm}} 요청에 헤더가 추가되었습니다.</li>
 <li>`app-id` 어노테이션이 `proxy-buffers`, `proxy-buffer-size` 및 `proxy-busy-buffer-size` 어노테이션과 함께 사용될 수 있도록 {{site.data.keyword.appid_short_notm}} 위치 지시문을 업데이트합니다.</li>
 <li>정보 로그가 오류로 레이블되지 않도록 버그를 해결합니다.</li>

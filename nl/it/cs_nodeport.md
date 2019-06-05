@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Esposizione delle applicazioni con le NodePort
+# Verifica dell'accesso alle applicazioni con le NodePort
 {: #nodeport}
 
 Rendi disponibile la tua applicazione inserita in un contenitore per l'accesso a Internet utilizzando l'indirizzo IP pubblico di qualsiasi nodo di lavoro in un cluster Kubernetes ed esponendo una NodePort. Utilizza questa opzione per la verifica in {{site.data.keyword.containerlong}} e per l'accesso pubblico a breve termine.
@@ -41,10 +41,9 @@ Quando esponi la tua applicazione creando un servizio Kubernetes del tipo NodePo
 una NodePort nell'intervallo 30000 - 32767 e un indirizzo
 IP del cluster interno. Il servizio
 NodePort funge da punto di ingresso per le richieste in entrata per la tua applicazione. La NodePort assegnata è pubblicamente esposta nelle impostazioni `kubeproxy` di ogni nodo di lavoro nel cluster. Ogni nodo di lavoro inizia ad ascoltare dalla NodePort assegnata per le richieste in entrata per il
-servizio. Per accedere al servizio da Internet, puoi utilizzare l'indirizzo IP pubblico di ogni nodo di lavoro
-che è stato assegnato durante la creazione del cluster e la NodePort nel formato `<IP_address>:<nodeport>`. In aggiunta all'indirizzo IP pubblico, è disponibile un servizio NodePort nell'indirizzo IP privato di un nodo di lavoro.
+servizio. Per accedere al servizio da internet, è possibile utilizzare l'indirizzo IP pubblico di qualsiasi nodo di lavoro che è stato assegnato durante la creazione del cluster e il NodePort nel formato `<IP_address>:<nodeport>`. In aggiunta all'indirizzo IP pubblico, è disponibile un servizio NodePort nell'indirizzo IP privato di un nodo di lavoro.
 
-Il seguente diagramma mostra come vengono dirette le comunicazioni da Internet a un'applicazione quando è configurato un servizio NodePort:
+Il seguente diagramma mostra come viene diretta la comunicazione da Internet a un'applicazione quando è configurato un servizio NodePort:
 
 <img src="images/cs_nodeport_planning.png" width="600" alt="Esponi un'applicazione in {{site.data.keyword.containerlong_notm}} utilizzando NodePort" style="width:600px; border-style: none"/>
 
@@ -60,7 +59,7 @@ L'indirizzo IP pubblico del nodo di lavoro non è
 permanente. Quando un nodo di lavoro viene rimosso
 o ricreato, a tale nodo viene assegnato un nuovo indirizzo IP pubblico. Puoi utilizzare NodePort per testare l'accesso pubblico per la tua applicazione
 o se l'accesso pubblico è richiesto solo per un breve periodo. Quando hai bisogno di un indirizzo IP pubblico stabile
-e di una maggiore disponibilità per il tuo servizio, esponi la tua applicazione utilizzando un [Servizio LoadBalancer](/docs/containers?topic=containers-loadbalancer) o [Ingress](/docs/containers?topic=containers-ingress).
+e di una maggiore disponibilità per il tuo servizio, esponi la tua applicazione utilizzando un [Servizio NLB (network load balancer)](/docs/containers?topic=containers-loadbalancer) o [Ingress](/docs/containers?topic=containers-ingress).
 {: note}
 
 <br />
@@ -147,8 +146,8 @@ Quando l'applicazione viene distribuita, puoi utilizzare l'indirizzo IP pubblico
 
     ```
     ID                                                Public IP   Private IP    Size     State    Status
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u3c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u3c.2x4  normal   Ready
     ```
     {: screen}
 
@@ -178,7 +177,7 @@ Quando l'applicazione viene distribuita, puoi utilizzare l'indirizzo IP pubblico
 
     In questo esempio, la NodePort è `30872`.
 
-    Se la sezione **Endpoints** visualizza `<none>`, controlla `<selectorkey>` e `<selectorvalue>` che hai utilizzato nella sezione `spec.selector` del servizio NodePort. Assicurati che siano gli stessi della coppia _chiave/valore_ che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo YAML di distribuzione.
+    Se la sezione **Endpoint** visualizza `<none>`, controlla `<selectorkey>` e `<selectorvalue>` da te utilizzati nella sezione `spec.selector` del servizio NodePort. Assicurati che siano gli stessi della coppia _chiave/valore_ che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo YAML di distribuzione.
     {: note}
 
 3.  Forma l'URL con uno degli indirizzi IP del nodo di lavoro e la NodePort. Esempio: `http://192.0.2.23:30872`

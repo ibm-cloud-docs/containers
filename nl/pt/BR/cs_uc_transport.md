@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -45,7 +45,7 @@ Tecnologias chave:
 * [ Escalação Horizontal ](/docs/containers?topic=containers-app#highly_available_apps)
 * [ Abrir cadeias de ferramentas no  {{site.data.keyword.contdelivery_full}} ](https://www.ibm.com/cloud/garage/toolchains/)
 * [ Serviços de nuvem para inovação ](https://www.ibm.com/cloud/products/#analytics)
-* [ {{site.data.keyword.messagehub_full}}  para alimentar dados do evento para apps ](/docs/services/EventStreams?topic=eventstreams-about#about)
+* [{{site.data.keyword.messagehub_full}} para enviar dados de evento aos aplicativos](/docs/services/EventStreams?topic=eventstreams-about#about)
 
 **Contexto: A empresa de remessa aumenta a disponibilidade de sistemas mundiais para o ecossistema de parceiros de negócios**
 
@@ -62,13 +62,13 @@ A solução é composta por estes componentes primários:
 2. A documentação de alfândega que é compartilhada digitalmente com portos e parceiros de trânsito aplicáveis, incluindo controle de acesso
 3. O app para clientes de remessa que agrega e comunica informações de chegada para mercadorias enviadas, incluindo APIs para clientes de remessa para reutilização de dados de remessa em seus próprios apps de varejo e entre empresas
 
-Para que a companhia de navegação trabalhe com parceiros globais, os sistemas de roteamento e planejamento exigiram modificações locais para ajustar ao idioma, às regulamentações e à logística exclusiva do porto de cada região. O {{site.data.keyword.containerlong_notm}} oferece cobertura global em múltiplas regiões, incluindo América do Norte, Europa, Ásia e Austrália para que os apps da empresa reflitam as necessidades de seus parceiros, em cada país.
+Para que a companhia de navegação trabalhe com parceiros globais, os sistemas de roteamento e planejamento exigiram modificações locais para ajustar ao idioma, às regulamentações e à logística exclusiva do porto de cada região. O {{site.data.keyword.containerlong_notm}} oferece cobertura global em diversas regiões, incluindo a América do Norte, a Europa, a Ásia e a Austrália, para que os aplicativos reflitam as necessidades de seus parceiros em cada país.
 
 Os dispositivos IoT transmitem dados que o {{site.data.keyword.messagehub_full}} distribui para os apps de portos regionais e os armazenamentos de dados de manifest de Alfândega e Contêiner associados. {{site.data.keyword.messagehub_full}}  é o ponto de entrada para eventos IoT. Ele distribui os eventos com base na conectividade gerenciada que o Watson IoT Platform oferece ao {{site.data.keyword.messagehub_full}}.
 
 Após os eventos estarem no {{site.data.keyword.messagehub_full}}, eles são persistidos para uso imediato nos apps de trânsito do porto e para qualquer ponto no futuro. Os apps que requerem a latência mais baixa consomem diretamente em tempo real do fluxo do evento ({{site.data.keyword.messagehub_full}}). Outros apps futuros, como ferramentas de análise, podem escolher consumir em um modo de lote por meio do armazenamento de eventos com o {{site.data.keyword.cos_full}}.
 
-Como os dados de remessa são compartilhados com os clientes da empresa, os Desenvolvedores asseguram que os clientes da empresa possam usar APIs para manifestar dados de remessa em seus próprios apps. Exemplos desses apps são aplicativos de rastreamento móvel ou soluções de e-commerce da web. Os Desenvolvedores também estão ocupados com a construção e a manutenção dos apps de portos regionais que reúnem e disseminam os registros de alfândega e os manifests de remessa. Em resumo, eles precisam focar na codificação em vez de gerenciar a infraestrutura. Desse modo, eles escolheram o {{site.data.keyword.containerlong_notm}} porque a IBM simplifica o gerenciamento de infraestrutura:
+Como os dados de navegação são compartilhados com os clientes da empresa, os Desenvolvedores garantem que os clientes possam usar APIs para recebê-los em seus próprios aplicativos. Exemplos desses apps são aplicativos de rastreamento móvel ou soluções de e-commerce da web. Os Desenvolvedores também estão ocupados com a construção e a manutenção dos apps de portos regionais que reúnem e disseminam os registros de alfândega e os manifests de remessa. Em resumo, eles precisam focar na codificação em vez de gerenciar a infraestrutura. Desse modo, eles escolheram o {{site.data.keyword.containerlong_notm}} porque a IBM simplifica o gerenciamento de infraestrutura:
 * Gerenciando os componentes principais, IaaS e operacionais do Kubernetes, como Ingress e armazenamento
 * Monitorando o funcionamento e a recuperação de nós do trabalhador
 * Fornecendo cálculo global, assim os desenvolvedores não são responsáveis pela infraestrutura em várias regiões em que eles precisam que cargas de trabalho e dados residam
@@ -93,7 +93,7 @@ Solução Técnica:
 
 **Etapa 1: conteinerizar apps usando microsserviços**
 
-* Projete apps em um conjunto de microsserviços cooperativos no {{site.data.keyword.containerlong_notm}} com base em áreas funcionais do app e suas dependências.
+* Integre aplicativos em um conjunto de microsserviços cooperativos no {{site.data.keyword.containerlong_notm}} com base em áreas funcionais do aplicativo e suas dependências.
 * Implementar apps em contêineres no  {{site.data.keyword.containerlong_notm}}.
 * Forneça painéis padronizados do DevOps por meio do Kubernetes.
 * Ative o ajuste de escala sob demanda de cálculo para lote e outras cargas de trabalho de inventário que são executadas com pouca frequência.
@@ -106,12 +106,12 @@ Solução Técnica:
 
 ** Etapa 3: Compartilhar dados **
 * O {{site.data.keyword.cos_full}} e o {{site.data.keyword.messagehub_full}} fornecem armazenamento de dados em tempo real e em histórico.
-* As APIs permitem que os clientes da companhia de navegação compartilhem dados em seus apps.
+* As APIs permitem que os clientes da companhia de navegação compartilhem dados em seus aplicativos.
 
 ** Etapa 4: Entregar continuamente **
 * O {{site.data.keyword.contdelivery_full}} ajuda os desenvolvedores a provisionarem rapidamente uma cadeia de ferramentas integrada, usando modelos customizáveis, compartilháveis com ferramentas da IBM, de terceiros e de software livre. Automatize construções e testes, controlando a qualidade com a análise de dados.
 * Depois que os Desenvolvedores constroem e testam os apps em seus clusters de Desenvolvimento e teste, eles usam as cadeias de ferramentas CI/CD da IBM para implementar apps nos clusters em todo o globo.
-* O {{site.data.keyword.containerlong_notm}} fornece fácil lançamento e retrocesso de apps; os apps customizados são implementados para atender aos requisitos regionais por meio do roteamento e do balanceamento de carga inteligentes do Istio.
+* O {{site.data.keyword.containerlong_notm}} fornece fácil lançamento e recuperação de aplicativos, nos quais aplicativos customizados são implementados para atender aos requisitos regionais por meio do roteamento inteligente e do balanceamento de carga do Istio.
 
 ** Resultados **
 
@@ -160,7 +160,7 @@ Solução Técnica:
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_full_notm}}
 
-O desenvolvimento acelerado é uma vitória chave para o Exec de RH. A equipe começa conteinerizando seus apps e colocando-os na nuvem. Com o uso de contêineres modernos, os Desenvolvedores podem experimentar facilmente com o SDK do Node.js e enviar por push as mudanças para os sistemas de Desenvolvimento e Teste, que são escalados em clusters separados. Esses pushes foram automatizados com cadeias de ferramentas abertas e o {{site.data.keyword.contdelivery_full}}. As atualizações para o site de RH não mais se arrastam em processos de construção lentos e propensos a erros. Eles podem entregar atualizações incrementais para seu site, diariamente ou ainda mais frequentemente.  Além disso, a criação de log e o monitoramento para o site de RH são rapidamente integrados, especialmente em como o site puxa dados personalizados de sistemas de benefícios de backend. Os desenvolvedores não perdem tempo construindo sistemas de criação de log complexos, apenas para solucionar problemas de sistemas em tempo real. Os desenvolvedores não precisam gastar tempo se tornando especialistas em segurança de nuvem. Eles podem facilmente cumprir a autenticação orientada por política usando o {{site.data.keyword.appid_full_notm}}.
+O desenvolvimento acelerado é uma vitória chave para o Exec de RH. A equipe começa conteinerizando seus apps e colocando-os na nuvem. Com o uso de contêineres modernos, os Desenvolvedores podem experimentar facilmente com o SDK do Node.js e enviar por push as mudanças para os sistemas de Desenvolvimento e Teste, que são escalados em clusters separados. Esses pushes foram automatizados com cadeias de ferramentas abertas e o {{site.data.keyword.contdelivery_full}}. As atualizações para o site de RH não mais se arrastam em processos de construção lentos e propensos a erros. Eles podem entregar atualizações incrementais para seu site, diariamente ou ainda mais frequentemente.  Além disso, a criação de log e o monitoramento para o site de RH são rapidamente integrados, especialmente em como o site puxa dados personalizados de sistemas de benefícios de backend. Os desenvolvedores não perdem tempo construindo sistemas de criação de log complexos, apenas para solucionar problemas de sistemas em tempo real. Os desenvolvedores não precisam se tornar especialistas em segurança de nuvem, pois podem aplicar a autenticação orientada por política facilmente por meio do {{site.data.keyword.appid_full_notm}}.
 
 Com o {{site.data.keyword.containerlong_notm}}, eles foram de hardware superconstruído em um data center privado para cálculo customizável que reduz as operações de TI, a manutenção e a energia. Para hospedar o site de RH, eles podem projetar facilmente os clusters do Kubernetes para ajustar suas necessidades de CPU, RAM e armazenamento. Outro fator para menos custos de equipe é que a IBM gerencia o Kubernetes, para que os Desenvolvedores possam se concentrar em entregar a melhor experiência do funcionário para a inscrição de benefícios.
 
@@ -184,7 +184,7 @@ O {{site.data.keyword.containerlong_notm}} fornece recursos de cálculo escaláv
 **Etapa 4: entregar continuamente no mundo inteiro**
 * O {{site.data.keyword.contdelivery_full}} ajuda os desenvolvedores a provisionarem rapidamente uma cadeia de ferramentas integrada, usando modelos customizáveis, compartilháveis com ferramentas da IBM, de terceiros e de software livre. Automatize construções e testes, controlando a qualidade com a análise de dados.
 * Depois que os Desenvolvedores constroem e testam os apps em seus clusters de Desenvolvimento e Teste, eles usam as cadeias de ferramentas do IBM CI/CD para implementar apps em clusters de Produção no mundo inteiro.
-* O {{site.data.keyword.containerlong_notm}} fornece fácil lançamento e retrocesso de apps. Os apps customizados são implementados para atender aos requisitos regionais por meio do roteamento e balanceamento de carga inteligentes do Istio.
+* O {{site.data.keyword.containerlong_notm}} fornece fácil lançamento e retrocesso de apps. Os aplicativos customizados são implementados para atender aos requisitos regionais por meio do roteamento inteligente e do balanceamento de carga do Istio.
 * Ferramentas HA integradas no {{site.data.keyword.containerlong_notm}} fazem o balanceamento da carga de trabalho dentro de cada região geográfica, incluindo balanceamento com capacidade de recuperação automática e balanceamento de carga.
 
 ** Resultados **

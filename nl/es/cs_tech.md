@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, docker
 
@@ -187,7 +187,7 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     <tr>
     <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
-    <td>Para clústeres que ejecutan Kubernetes versión 1.10 o posterior, el `ibm-master-proxy` reenvía solicitudes desde el nodo trabajador a las direcciones IP de las réplicas del maestro de alta disponibilidad. En clústeres de una sola zona, el maestro tiene tres réplicas en hosts independientes con un nombre de dominio y una dirección IP de maestro. Para clústeres que se encuentran en una zona con capacidad multizona, el maestro tiene tres réplicas que se dispersan entre zonas. Como tal, cada maestro tiene su propia dirección IP que se registra con DNS, con un nombre de dominio para el maestro de clúster completo.</td>
+    <td>El `ibm-master-proxy` reenvía solicitudes desde el nodo trabajador a las direcciones IP de las réplicas de maestro de alta disponibilidad. En clústeres de una sola zona, el maestro tiene tres réplicas en hosts independientes con un nombre de dominio y una dirección IP de maestro. Para clústeres que se encuentran en una zona con capacidad multizona, el maestro tiene tres réplicas que se dispersan entre zonas. Como tal, cada maestro tiene su propia dirección IP que se registra con DNS, con un nombre de dominio para el maestro de clúster completo.</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
@@ -257,5 +257,5 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     </tbody></table></dd>
 </dl>
 
-¿Desea ver cómo se puede utilizar {{site.data.keyword.containerlong_notm}} con otros productos y servicios? Compruebe algunas de las [integraciones](/docs/containers?topic=containers-integrations#integrations).
+¿Desea ver cómo se puede utilizar {{site.data.keyword.containerlong_notm}} con otros productos y servicios? Compruebe algunas de las [integraciones](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}

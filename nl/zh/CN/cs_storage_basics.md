@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,7 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"}
+{:table: .aria-labeledby="caption"} 
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
@@ -37,11 +37,11 @@ subcollection: containers
 
 <img src="images/cs_storage_pvc_pv.png" alt="集群中的存储组件" width="275" style="width: 275px; border-style: none"/>
 
-- **集群**</br> 缺省情况下，每个集群都设置有一个插件，用于[供应文件存储器](/docs/containers?topic=containers-file_storage#add_file)。您可以选择安装其他附加组件，例如用于[块存储器](/docs/containers?topic=containers-block_storage)的附加组件。要在集群中使用存储器，必须创建持久卷声明、持久卷和物理存储器实例。删除集群时，可以选择删除相关的存储器实例。
-- **应用程序**</br> 要读取和写入存储器实例，必须将持久卷声明 (PVC) 安装到应用程序。不同的存储类型具有不同的读写规则。例如，可以将多个 pod 安装到同一 PVC 以用于文件存储器。块存储器随附 RWO (ReadWriteOnce) 访问方式，因此只能将存储器安装到一个 pod。
-- **持久卷声明 (PVC)**</br> PVC 是用于供应具有特定类型和配置的持久性存储器的请求。要指定所需的持久性存储器类型模板，请使用 [Kubernetes 存储类](#storageclasses)。集群管理员可以定义存储类，也可以从 {{site.data.keyword.containerlong_notm}} 中的其中一个预定义存储类中进行选择。创建 PVC 后，该请求会发送给 {{site.data.keyword.Bluemix}} 存储器提供者。根据存储类中定义的配置，将订购物理存储设备，并将其供应到 IBM Cloud Infrastructure (SoftLayer) 帐户。如果请求的配置不存在，那么不会创建存储器。
-- **持久卷 (PV)**</br> PV 是作为卷添加到集群的虚拟存储器实例。PV 指向 IBM Cloud Infrastructure (SoftLayer) 帐户中的物理存储设备，并抽象用于与存储设备进行通信的 API。要将 PV 安装到应用程序，必须具有匹配的 PVC。安装的 PV 在容器的文件系统中显示为文件夹。
-- **物理存储器**</br> 一种物理存储器实例，可以用于持久存储数据。{{site.data.keyword.Bluemix_notm}} 中的物理存储器示例包括[文件存储器](/docs/containers?topic=containers-file_storage#file_storage)、[块存储器](/docs/containers?topic=containers-block_storage#block_storage)、[对象存储器](/docs/containers?topic=containers-object_storage#object_storage)以及可通过 [Portworx](/docs/containers?topic=containers-portworx#portworx) 用作 SDS 存储器的本地工作程序节点存储器。{{site.data.keyword.Bluemix_notm}} 为物理存储器实例提供了高可用性。但是，存储在物理存储器实例上的数据不会自动进行备份。根据使用的存储类型，存在不同的方法来设置备份和复原解决方案。
+- **集群**</br>缺省情况下，每个集群都设置有一个插件，以[供应文件存储](/docs/containers?topic=containers-file_storage#add_file)。您可以选择安装其他附加组件，例如用于[块存储器](/docs/containers?topic=containers-block_storage)的附加组件。要在集群中使用存储器，必须创建持久卷声明、持久卷和物理存储器实例。删除集群时，可以选择删除相关的存储器实例。
+- **应用程序**</br>要读取和写入存储器实例，必须将持久卷声明 (PVC) 安装到应用程序。不同的存储类型具有不同的读写规则。例如，可以将多个 pod 安装到同一 PVC 以用于文件存储器。块存储器随附 RWO (ReadWriteOnce) 访问方式，因此只能将存储器安装到一个 pod。
+- **持久卷声明 (PVC)**</br>PVC 是用于供应具有特定类型和配置的持久性存储器的请求。要指定所需的持久性存储器类型模板，请使用 [Kubernetes 存储类](#storageclasses)。集群管理员可以定义存储类，也可以从 {{site.data.keyword.containerlong_notm}} 中的其中一个预定义存储类中进行选择。创建 PVC 后，该请求会发送给 {{site.data.keyword.Bluemix}} 存储器提供者。根据存储类中定义的配置，将订购物理存储设备，并将其供应到 IBM Cloud Infrastructure (SoftLayer) 帐户。如果请求的配置不存在，那么不会创建存储器。
+- **持久卷 (PV)**</br>PV 是作为卷添加到集群的虚拟存储器实例。PV 指向 IBM Cloud Infrastructure (SoftLayer) 帐户中的物理存储设备，并抽象用于与存储设备进行通信的 API。要将 PV 安装到应用程序，必须具有匹配的 PVC。安装的 PV 在容器的文件系统中显示为文件夹。
+- **物理存储器**</br>可用于持久存储数据的物理存储器实例。{{site.data.keyword.Bluemix_notm}} 中的物理存储器示例包括[文件存储器](/docs/containers?topic=containers-file_storage#file_storage)、[块存储器](/docs/containers?topic=containers-block_storage#block_storage)、[对象存储器](/docs/containers?topic=containers-object_storage#object_storage)以及可通过 [Portworx](/docs/containers?topic=containers-portworx#portworx) 用作 SDS 存储器的本地工作程序节点存储器。{{site.data.keyword.Bluemix_notm}} 为物理存储器实例提供了高可用性。但是，存储在物理存储器实例上的数据不会自动进行备份。根据使用的存储类型，存在不同的方法来设置备份和复原解决方案。
 
 有关如何创建和使用 PVC、PV 和物理存储设备的更多信息，请参阅：
 - [动态供应](#dynamic_provisioning)
@@ -53,7 +53,7 @@ subcollection: containers
 如果您希望开发者能够自由地根据需要供应存储器，请使用动态供应。
 {: shortdesc}
 
-**动态供应是如何运作的？**</br>
+**其运作方式如何？**</br>
 
 动态供应是 Kubernetes 的一项本机功能，允许集群开发者订购具有预定义类型和配置的存储器，而无需了解有关如何供应物理存储设备的所有详细信息。要抽象特定存储类型的详细信息，集群管理员必须创建开发者可以使用的[存储类](#storageclasses)，或者使用随 {{site.data.keyword.Bluemix}} 存储器插件一起提供的存储类。
 
@@ -68,7 +68,7 @@ subcollection: containers
 1. 用户创建持久卷声明 (PVC)，其中指定存储类型、存储类、大小（以千兆字节计）、IOPS 数和计费类型。存储类用于确定供应的存储器类型以及允许的大小和 IOPS 的范围。在集群中创建 PVC 会自动触发所请求类型存储器的存储器插件，以供应具有给定规范的存储器。
 2. 系统会自动订购存储设备，并将其供应到 IBM Cloud Infrastructure (SoftLayer) 帐户。存储设备的计费周期将开始。
 3. 存储器插件会自动在集群中创建持久卷 (PV)，这是指向 IBM Cloud Infrastructure (SoftLayer) 帐户中实际存储设备的虚拟存储设备。
-4. PVC 和 PV 彼此自动连接。PVC 和 PV 的状态会更改为 `Bound`。现在，可以使用 PVC 将持久性存储器安装到应用程序。如果删除 PVC，那么还会删除 PV 和相关存储器实例。</br>
+4. PVC 和 PV 彼此自动连接。PVC 和 PV 的状态会更改为 `Bound`。现在，可以使用 PVC 将持久性存储器安装到应用程序。如果删除了 PVC，那么 PV 和相关存储器实例也会一起删除。</br>
 
 **何时使用动态供应？**</br>
 
@@ -87,7 +87,7 @@ subcollection: containers
 如果您在 IBM Cloud Infrastructure (SoftLayer) 帐户中具有现有持久性存储设备，那么可以使用静态供应来使存储器实例可供集群使用。
 {: shortdesc}
 
-**静态供应是如何运作的？**</br>
+**其运作方式如何？**</br>
 
 静态供应是 Kubernetes 的一项本机功能，允许集群管理员使现有存储设备可供集群使用。作为集群管理员，您必须了解存储设备、其支持的配置和安装选项的详细信息。  
 
@@ -210,7 +210,7 @@ subcollection: containers
 
 开始之前：
 - [设定 Kubernetes CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-- 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+- 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 更新现有 PV：
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -80,7 +80,7 @@ subcollection: containers
 {: #nonroot}
 
 {: tsSymptoms}
-[新增 NFS 儲存空間](/docs/containers?topic=containers-file_storage#app_volume_mount)至您的部署之後，您的容器部署失敗。當您擷取容器的日誌時，可能會看到如下錯誤。Pod 失敗，並停留在重新載入的循環中。
+[新增 NFS 儲存空間](/docs/containers?topic=containers-file_storage#file_app_volume_mount)至您的部署之後，您的容器部署失敗。當您擷取容器的日誌時，可能會看到如下錯誤。Pod 失敗，並停留在重新載入的循環中。
 
 ```
 write-permission
@@ -184,12 +184,15 @@ cannot create directory '/bitnami/mariadb/data': Permission denied
     Jenkins 部署的**範例**：
 
     ```
-apiVersion: apps/v1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:
@@ -334,8 +337,8 @@ apiVersion: apps/v1
    ```
    {: pre}
 
-2. 驗證您使用[最新版本的 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)。如果不是，請[更新外掛程式](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)。
-3. 如果您的 Pod 使用 Kubernetes 部署，請移除失敗的 Pod 並讓 Kubernetes 重建它，以重新啟動該 Pod。如果您未使用部署，請執行下列指令以擷取用來建立 Pod 的 YAML 檔：`kubectl getpod <pod_name> -o yaml >pod.yaml`。然後，刪除並手動重建 Pod。
+2. 驗證您使用[最新版本的 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)。如果不是，請[更新外掛程式](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)。
+3. 如果您的 Pod 使用 Kubernetes 部署，請移除失敗的 Pod 並讓 Kubernetes 重建它，以重新啟動該 Pod。如果您未使用部署，請執行下列指令以擷取用來建立 Pod 的 YAML 檔案：`kubectl get pod <pod_name> -o yaml >pod.yaml`。然後，刪除並手動重建 Pod。
     ```
     kubectl delete pod <pod_name>
     ```

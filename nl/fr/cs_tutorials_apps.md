@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -67,8 +67,7 @@ Editeurs de logiciels et administrateurs réseau qui déploient une application 
 ## Prérequis
 {: #apps_prereqs}
 
-* [Tutoriel : Création de clusters Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* Installez le [plug-in container-registry](/docs/services/Registry?topic=registry-index#registry_cli_install).
+[Tutoriel : Création de clusters Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## Leçon 1 : Déploiement d'applications avec instance unique dans des clusters Kubernetes
@@ -243,7 +242,7 @@ Pour déployer l'application :
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 
@@ -535,7 +534,7 @@ Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster co
         ```
         {: codeblock}
 
-    2.  Dans la section volumes du déploiement Watson, mettez à jour le nom de la clé confidentielle {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que vous avez créée dans le [tutoriel de création d'un cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). En montant la valeur confidentielle Kubernetes en tant que volume dans votre déploiement, vous rendez la clé d'API {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) disponible dans le conteneur qui s'exécute dans votre pod. Les composants de l'application {{site.data.keyword.watson}} de ce tutoriel sont configurés pour rechercher la clé d'API en utilisant le chemin de montage du volume.
+    2.  Dans la section volumes du déploiement`watson-pod`, mettez à jour le nom de la clé confidentielle {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que vous avez créée dans le [tutoriel de création d'un cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). En montant la valeur confidentielle Kubernetes en tant que volume dans votre déploiement, vous rendez la clé d'API {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) disponible dans le conteneur qui s'exécute dans votre pod. Les composants de l'application {{site.data.keyword.watson}} de ce tutoriel sont configurés pour rechercher la clé d'API en utilisant le chemin de montage du volume.
 
         ```
         volumes:
@@ -600,7 +599,7 @@ Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster co
         ```
         {: codeblock}
 
-9.  Ouvrez un navigateur et analysez un texte. Format de l'URL : `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
+9.  Ouvrez un navigateur et analysez un texte. Le format de l'URL est `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
 
     Exemple :
 

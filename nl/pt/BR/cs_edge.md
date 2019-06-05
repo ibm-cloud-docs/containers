@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks 
 
@@ -48,7 +48,7 @@ Antes de iniciar:
   * Função de serviço **Gravador** ou **Gerenciador** para todos os namespaces
 2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 3. Assegure-se de que seu cluster tem pelo menos uma VLAN pública. Os nós do trabalhador de borda não estão disponíveis para clusters somente com VLANs privadas.
-4. [Crie um novo conjunto de trabalhadores](/docs/containers?topic=containers-clusters#add_pool) que abranda toda a zona em seu cluster e tenha pelo menos 2 trabalhadores por zona.
+4. [Crie um novo conjunto de trabalhadores](/docs/containers?topic=containers-clusters#add_pool) que abranja toda a zona em seu cluster e tenha pelo menos 2 trabalhadores por zona.
 
 Para rotular nós do trabalhador como nós de borda:
 
@@ -135,7 +135,7 @@ Para evitar que outras cargas de trabalho sejam executadas em nós do trabalhado
   {: pre}
   Agora, somente pods com a tolerância `dedicated=edge` são implementados em nós do trabalhador de borda.
 
-3. Se você escolher [ativar a preservação de IP de origem para um serviço de balanceador de carga 1.0 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda para os pods de app](/docs/containers?topic=containers-loadbalancer#edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.
+3. Se você optar por [ativar a preservação do IP de origem para um serviço de balanceador de carga 1.0![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.
 
 4. Para remover uma contaminação, execute o comando a seguir.
     ```

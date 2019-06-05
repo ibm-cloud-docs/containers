@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, audit
 
@@ -44,7 +44,7 @@ subcollection: containers
 ## 이벤트에 대한 정보 찾기
 {: #kube-find}
 
-Kibana 대시보드에서 로그를 확인하여 클러스터의 활동을 모니터링할 수 있습니다. 
+Kibana 대시보드에서 로그를 확인하여 클러스터의 활동을 모니터링할 수 있습니다.
 {: shortdesc}
 
 관리 활동을 모니터링하려면 다음을 수행하십시오.
@@ -518,19 +518,19 @@ Kibana 대시보드에서 로그를 확인하여 클러스터의 활동을 모�
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>Kubernetes v1.10 이상에 대해 팟(Pod) 보안 정책이 작성되었습니다.</td>
+    <td>팟(Pod) 보안 정책이 작성되었습니다.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>Kubernetes v1.10 이상에 대해 팟(Pod) 보안 정책이 삭제되었습니다.</td>
+    <td>팟(Pod) 보안 정책이 삭제되었습니다.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>Kubernetes v1.10 이상에 대해 팟(Pod) 보안 정책이 패치되었습니다.</td>
+    <td>팟(Pod) 보안 정책이 패치되었습니다.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Kubernetes v1.10 이상에 대해 팟(Pod) 보안 정책이 업데이트되었습니다.</td>
+    <td>팟(Pod) 보안 정책이 업데이트되었습니다.</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>

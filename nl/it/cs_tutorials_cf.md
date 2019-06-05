@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -50,7 +50,7 @@ Questa esercitazione è progettata per gli sviluppatori dell'applicazione Cloud 
 ## Prerequisiti
 {: #cf_prereqs}
 
-- [Crea un registro delle immagini privato in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-index).
+- [Crea un registro delle immagini privato in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started).
 - [Crea un
 cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Indirizza la tua CLI al cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
@@ -83,7 +83,7 @@ Tieni il tuo codice pronto per l'utilizzo. Non hai ancora il codice? Puoi scaric
 
     a. Nel catalogo, in **Boilerplates**, fai clic su **Python Flask**. Questo contenitore tipo include un ambiente di runtime per le applicazioni Python 2 e Python 3.
 
-    b. Immetti il nome dell'applicazione `cf-py-<name>` e fai clic su **CREATE**. Per accedere al codice dell'applicazione per il contenitore tipo, devi innanzitutto distribuire l'applicazione CF nel cloud. Puoi utilizzare qualsiasi nome per l'applicazione. Se utilizzi il nome proveniente dall'esempio, sostituisci `<name>` con un identificativo univoco, come `cf-py-msx`.
+    b. Immetti il nome applicazione `cf-py-<name>` e fai clic su **CREA**. Per accedere al codice dell'applicazione per il contenitore tipo, devi innanzitutto distribuire l'applicazione CF nel cloud. Puoi utilizzare qualsiasi nome per l'applicazione. Se utilizzi il nome dall'esempio, sostituisci `<name>` con un identificativo univoco, come ad esempio `cf-py-msx`.
 
     **Attenzione**: non utilizzare informazioni personali nei nomi dell'applicazione, del contenitore delle immagini o della risorsa Kubernetes.
 
@@ -279,7 +279,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
     ```
     {: screen}
 

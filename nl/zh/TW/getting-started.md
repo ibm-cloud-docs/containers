@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -30,17 +30,6 @@ subcollection: containers
 {:shortdesc}
 
 容器是包裝應用程式及其所有相依關係的標準方式，而此方式可讓您在環境之間無縫移動應用程式。容器與虛擬機器不同，容器不會搭載作業系統。只有應用程式碼、運行環境、系統工具、程式庫及設定才會包裝在容器中。容器比虛擬機器更輕量、可攜性更高且更有效率。
-
-
-
-按一下選項以開始使用：
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="按一下圖示，以快速開始使用 {{site.data.keyword.containerlong_notm}}。透過 {{site.data.keyword.Bluemix_dedicated_notm}}，按一下此圖示以查看選項。" style="width:440px;" />
-<map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="在 {{site.data.keyword.Bluemix_notm}} 中開始使用 Kubernetes 叢集" title="在 {{site.data.keyword.Bluemix_notm}} 中開始使用 Kubernetes 叢集" shape="rect" coords="-7, -8, 108, 211" />
-<area href="/docs/containers?topic=containers-cs_cli_install" alt="安裝 CLI。" title="安裝 CLI。" shape="rect" coords="155, -1, 289, 210" />
-<area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} 雲端環境" title="{{site.data.keyword.Bluemix_notm}} 雲端環境" shape="rect" coords="326, -10, 448, 218" />
-</map>
 
 
 ## 開始使用叢集
@@ -77,7 +66,7 @@ subcollection: containers
 **下一步為何？**</br>
 在到期之前，請試著使用您的免費叢集來做一些事情。
 
-* 瀏覽[第一個 {{site.data.keyword.containerlong_notm}} 指導教學](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)來建立 Kubernetes 叢集、安裝 CLI、建立專用登錄、設定叢集環境，以及將服務新增至叢集。
+* 瀏覽[第一個 {{site.data.keyword.containerlong_notm}} 指導教學](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)來建立 Kubernetes 叢集、安裝 CLI 或使用 Kubernetes Terminal、建立專用登錄、設定叢集環境，以及將服務新增至叢集。
 * 使用將應用程式部署至叢集的[第二個 {{site.data.keyword.containerlong_notm}} 指導教學](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)持續執行作業。
 * [建立標準叢集](/docs/containers?topic=containers-clusters#clusters_ui)（含多個節點），以提高可用性。
 

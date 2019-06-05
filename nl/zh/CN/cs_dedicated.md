@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -23,13 +23,16 @@ subcollection: containers
 {:download: .download}
 
 
-# 开始使用 {{site.data.keyword.Bluemix_dedicated_notm}} 中的集群
+# 不推荐：{{site.data.keyword.Bluemix_dedicated_notm}} 中的集群入门
 {: #dedicated}
 
-如果您具有 {{site.data.keyword.Bluemix_dedicated}} 帐户，那么可以在专用云环境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) 中部署 Kubernetes 集群，并使用也在其中运行的预先选择的 {{site.data.keyword.Bluemix_notm}} 服务进行连接。
+不推荐在 {{site.data.keyword.Bluemix_dedicated_notm}} 中使用 {{site.data.keyword.containerlong}}。因为您无法在 {{site.data.keyword.Bluemix_dedicated_notm}} 环境中创建集群。要在 {{site.data.keyword.Bluemix_notm}} Public 中创建集群，请参阅 [{{site.data.keyword.containerlong_notm}} 入门](/docs/containers?topic=containers-getting-started)。
+{: deprecated}
+
+如果您具有 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，那么可以在专用云环境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) 中部署 Kubernetes 集群，并与也在其中运行的预先选择的 {{site.data.keyword.Bluemix_notm}} 服务进行连接。
 {:shortdesc}
 
-如果您没有 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，那么可以在公共 {{site.data.keyword.Bluemix_notm}} 帐户中[开始使用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index)。
+如果您没有 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，那么可以在公共 {{site.data.keyword.Bluemix_notm}} 帐户中[开始使用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started)。
 
 ## 关于 Dedicated 云环境
 {: #dedicated_environment}
@@ -37,7 +40,7 @@ subcollection: containers
 使用 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，可用物理资源仅供您的集群专用，而不会与其他 {{site.data.keyword.IBM_notm}} 客户的集群共享。如果您希望对集群进行隔离，并且需要对您使用的其他 {{site.data.keyword.Bluemix_notm}} 服务进行隔离，可选择设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境。如果您没有 Dedicated 帐户，那么可以[在 {{site.data.keyword.Bluemix_notm}} Public 中创建具有专用硬件的集群](/docs/containers?topic=containers-clusters#clusters_ui)。
 {: shortdesc}
 
-使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您可以在 Dedicated 控制台中或通过使用 {{site.data.keyword.containerlong_notm}} CLI 在目录中创建集群。要使用 Dedicated 控制台，您可利用自己的 IBM 标识同时登录到 Dedicated 和 Public 帐户。可以使用此双登录通过 Dedicated 控制台来访问公共集群。要使用 CLI，请利用 Dedicated 端点 (`api.<my-dedicated-cloud-instance>.bluemix.net.`) . 然后将与 Dedicated 环境相关联的公共区域的 {{site.data.keyword.containerlong_notm}} API 端点设定为目标。
+使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您可以在 Dedicated 控制台中或通过使用 {{site.data.keyword.containerlong_notm}} CLI 在目录中创建集群。要使用 Dedicated 控制台，您可利用自己的 IBM 标识同时登录到 Dedicated 和 Public 帐户。可以使用此双登录通过 Dedicated 控制台来访问公共集群。要使用 CLI，请使用 Dedicated 端点 (`api.<my-dedicated-cloud-instance>.bluemix.net.`) 进行登录。然后将与 Dedicated 环境相关联的公共区域的 {{site.data.keyword.containerlong_notm}} API 端点设定为目标。
 
 {{site.data.keyword.Bluemix_notm}} Public 和 Dedicated 之间的最显著区别如下所示。
 
@@ -129,7 +132,7 @@ subcollection: containers
 
 开始之前：
   * [设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境](/docs/dedicated?topic=dedicated-dedicated#setupdedicated)。
-  * 如果本地系统或企业网络使用代理或防火墙来控制公共因特网端点，那么必须[在防火墙中打开必需的端口和 IP 地址](/docs/containers?topic=containers-firewall#firewall)。
+  * 如果本地系统或企业网络使用代理或防火墙来控制公用因特网端点，那么必须[在防火墙中打开必需的端口和 IP 地址](/docs/containers?topic=containers-firewall#firewall)。
   * [下载 Cloud Foundry CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/cloudfoundry/cli/releases)。
 
 要允许 {{site.data.keyword.Bluemix_dedicated_notm}} 用户访问集群，请执行以下操作：
@@ -142,7 +145,7 @@ subcollection: containers
         ```
         {: pre}
 
-        如果您有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+        如果您具有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
         {: tip}
 
     2.  生成用于邀请用户加入公共帐户的 API 密钥。记下该 API 密钥值，Dedicated 帐户管理员在下一步中必须使用该值。
@@ -167,7 +170,7 @@ subcollection: containers
         ```
         {: pre}
 
-        如果您有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+        如果您具有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
         {: tip}
 
     2.  邀请用户加入公共帐户。
@@ -224,7 +227,7 @@ subcollection: containers
         ```
         {: pre}
 
-        如果您有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+        如果您具有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
         {: tip}
 
     2.  如果您是首次登录，请在提示时提供您的 Dedicated 用户标识和密码。这将对您的 Dedicated 帐户进行认证，并且会将 Dedicated 和公共帐户链接在一起。首次登录后每次再登录时，只要使用自己的 IBM 标识即可登录。有关更多信息，请参阅[将 Dedicated 标识连接到 Public IBM 标识](/docs/iam?topic=iam-connect_dedicated_id#connect_dedicated_id)。
@@ -308,7 +311,7 @@ subcollection: containers
     ```
     {: pre}
 
-    如果您有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+    如果您具有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
     {: tip}
 
 3.  要以区域为目标，请运行 `ibmcloud ks region-set`。
@@ -390,7 +393,7 @@ subcollection: containers
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.6      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.7      Default
     ```
     {: screen}
 
@@ -408,7 +411,7 @@ subcollection: containers
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
     ```
     {: screen}
 
@@ -445,8 +448,6 @@ subcollection: containers
         ```
         /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
 
-        
-
         ```
         {: screen}
 
@@ -471,7 +472,7 @@ subcollection: containers
         {: codeblock}
 
 ### 添加工作程序节点
-{: #add_workers}
+{: #add_workers_dedicated}
 
 使用 {{site.data.keyword.Bluemix_dedicated_notm}} 时，您只能创建[单专区集群](/docs/containers?topic=containers-plan_clusters#single_zone)。缺省情况下，单专区集群会设置为使用名为 `default` 的工作程序池。工作程序池将使用集群创建期间所定义的相同配置（如机器类型）的工作程序节点分组在一起。可以通过[调整现有工作程序池大小](/docs/containers?topic=containers-clusters#resize_pool)或[添加新的工作程序池](/docs/containers?topic=containers-clusters#add_pool)，向集群添加更多工作程序节点。添加工作程序池时，必须向工作程序池添加可用专区，以便工作程序可以部署到该专区中。但是，不能将其他专区添加到工作程序池。
 {: shortdesc}
@@ -528,7 +529,7 @@ subcollection: containers
     ```
     {: screen}
 
-4. **重要信息**：如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+4. **重要信息**：如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 5. 要配置内部部署和内部帐户连接，请在以下选项之间进行选择：
   - 如果将 10.x.x.x 专用 IP 地址范围用于子网，请使用该范围内的有效 IP，以配置与 Ingress 和负载均衡器的内部部署和内部帐户连接。有关更多信息，请参阅[使用 NodePort、LoadBalancer 或 Ingress 服务规划联网](/docs/containers?topic=containers-cs_network_planning#external)。
@@ -543,7 +544,6 @@ subcollection: containers
   * [更新工作程序节点](/docs/containers?topic=containers-update#worker_node)
   * [配置集群日志记录](/docs/containers?topic=containers-health#logging)Dedicated 端点不支持日志启用。您必须登录到公共 {{site.data.keyword.cloud_notm}} 端点并将公共组织和空间设定为目标，才能启用日志转发。
   * [配置集群监视](/docs/containers?topic=containers-health#view_metrics)。`ibm-monitoring` 集群存在于每个 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户中。此集群持续监视 Dedicated 环境中 {{site.data.keyword.containerlong_notm}} 的运行状况，检查环境的稳定性和连通性。请勿从环境中除去此集群。
-  * [可视化 Kubernetes 集群资源](/docs/containers?topic=containers-integrations#weavescope)
   * [除去集群](/docs/containers?topic=containers-clusters#remove)
 
 <br />
@@ -568,7 +568,7 @@ subcollection: containers
 #### 使用 LoadBalancer 服务类型来配置对应用程序的访问权
 {: #dedicated_apps_public_load_balancer}
 
-如果要对负载均衡器使用公共 IP 地址，请确保向 IBM 提供企业防火墙白名单，或[打开一个支持案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)以配置防火墙白名单。然后遵循[使用负载均衡器公开应用程序](/docs/containers?topic=containers-loadbalancer)中的步骤进行操作。
+如果要对负载均衡器使用公共 IP 地址，请确保向 IBM 提供企业防火墙白名单，或[打开一个支持案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)以配置防火墙白名单。然后遵循[使用网络负载均衡器 (NLB) 来实现基本负载均衡和 DSR 负载均衡](/docs/containers?topic=containers-loadbalancer)中的步骤进行操作。
 {: shortdesc}
 
 #### 使用 Ingress 配置对应用程序的公共访问权
@@ -652,7 +652,7 @@ subcollection: containers
 
 
         ```
-apiVersion: v1
+        apiVersion: v1
         kind: Pod
         metadata:
           name: <pod_name>

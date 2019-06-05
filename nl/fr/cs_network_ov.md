@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -58,10 +58,9 @@ Lorsque vous créez un cluster, les noeuds worker du cluster sont connectés aut
 <dt>VLAN pour clusters gratuits</dt>
 <dd>Dans les clusters gratuits, les noeuds worker du cluster sont connectés par défaut à un VLAN public et un VLAN privé dont IBM est le propriétaire. IBM contrôlant les VLAN, les sous-réseaux et les adresses IP, vous ne pouvez pas créer des clusters à zones multiples ni ajouter des sous-réseaux à votre cluster, et vous ne pouvez utiliser que des services NodePort pour exposer votre application.</dd>
 <dt>VLAN pour clusters standard</dt>
-<dd>Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Pour tous les autres clusters que vous créez dans cette zone, vous devez spécifier la paire de VLAN que vous souhaitez utiliser dans cette zone. Vous pouvez réutiliser le même VLAN public et le même VLAN privé que vous avez créés pour vous car les VLAN peuvent être partagés par plusieurs clusters.</br>
-</br>Vous pouvez connecter vos noeuds worker à la fois à un VLAN public et au VLAN privé, ou seulement au VLAN privé. Si vous désirez connecter vos noeuds worker uniquement à un VLAN privé, vous pouvez utiliser l'ID d'un VLAN existant ou [créer un VLAN privé](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) et utiliser l'ID lors de la création du cluster.</dd></dl>
+<dd>Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Pour tous les autres clusters que vous créez dans cette zone, vous devez spécifier la paire de VLAN que vous souhaitez utiliser dans cette zone. Vous pouvez réutiliser le même VLAN public et le même VLAN privé que ceux que vous avez créés pour vous car les VLAN peuvent être partagés par plusieurs clusters. </br></br>Vous pouvez connecter vos noeuds worker à la fois à un VLAN public et au VLAN privé, ou seulement au VLAN privé. Si vous désirez connecter vos noeuds worker uniquement à un VLAN privé, vous pouvez utiliser l'ID d'un VLAN existant ou [créer un VLAN privé](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) et utiliser l'ID lors de la création du cluster.</dd></dl>
 
-Pour voir quels sont les VLAN mis à disposition dans chaque zone de votre compte, exécutez la commande `ibmcloud ks vlans --zone <zone>.` Pour voir quels sont les VLAN sur lesquels est mis à disposition un cluster, exécutez la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` et recherchez la section **Subnet VLANs**.
+Pour voir quels sont les VLAN mis à disposition dans chaque zone de votre compte, exécutez la commande `ibmcloud ks vlans --zone <zone>.` Pour voir quels sont les VLAN sur lesquels est mis à disposition un cluster, exécutez la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` et recherchez la section **Subnet VLANs**. 
 
 L'infrastructure IBM Cloud (SoftLayer) gère les VLAN qui sont mis à disposition automatiquement lorsque vous créez votre premier cluster dans une zone. Si vous laissez un VLAN inactif, par exemple en supprimant tous les noeuds worker qui s'y trouvent, l'infrastructure IBM Cloud (SoftLayer) récupère ce VLAN. Par la suite, si vous avez besoin d'un nouveau VLAN, [contactez le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
@@ -81,11 +80,11 @@ Les sous-réseaux suivants sont automatiquement mis à disposition sur les VLAN 
 
 **Sous-réseaux de VLAN public**
 * Le sous-réseau public principal détermine les adresses IP publiques qui sont affectées aux noeuds worker lors de la création du cluster. Plusieurs clusters figurant sur le même VLAN peuvent partager un sous-réseau public principal.
-* Le sous-réseau public portable est lié à un seul cluster et fournit 8 adresses IP publiques au cluster. 3 adresses IP sont réservées aux fonctions de l'infrastructure IBM Cloud (SoftLayer). 1 adresse IP est utilisée par l'équilibreur de charge d'application (ALB) Ingress public par défaut et 4 adresses peuvent être utilisées pour créer des services réseau d'équilibreur de charge public. Les adresses IP publiques portables sont permanentes, ces adresses IP fixes peuvent être utilisées pour accéder aux services d'équilibreur de charge via Internet. Si vous avez besoin de plus de 4 adresses IP pour les équilibreurs de charge public, voir [Ajout d'adresses IP portables](/docs/containers?topic=containers-subnets#adding_ips).
+* Le sous-réseau public portable est lié à un seul cluster et fournit 8 adresses IP publiques au cluster. 3 adresses IP sont réservées aux fonctions de l'infrastructure IBM Cloud (SoftLayer). 1 adresse IP est utilisée par l'équilibreur de charge d'application (ALB) Ingress public par défaut et 4 adresses peuvent être utilisées pour créer des services d'équilibreur de charge de réseau public. Les adresses IP publiques portables sont des adresses IP permanentes fixes pouvant être utilisées pour accéder aux équilibreurs de charge de réseau via Internet. Si vous avez besoin de plus de 4 adresses IP pour les équilibreurs de charge de réseau, voir [Ajout d'adresses IP portables](/docs/containers?topic=containers-subnets#adding_ips).
 
 **Sous-réseaux de VLAN privé**
 * Le sous-réseau privé principal détermine les adresses IP privées qui sont affectées aux noeuds worker lors de la création du cluster. Plusieurs clusters figurant sur le même VLAN peuvent partager un sous-réseau privé principal.
-* Le sous-réseau privé portable est lié à un seul cluster et fournit 8 adresses IP privées au cluster. 3 adresses IP sont réservées aux fonctions de l'infrastructure IBM Cloud (SoftLayer). 1 adresse IP est utilisée par l'équilibreur de charge d'application (ALB) Ingress privé par défaut et 4 adresses peuvent être utilisées pour créer des services réseau d'équilibreur de charge privé. Les adresses IP privées portables sont permanentes, ces adresses IP fixes peuvent être utilisées pour accéder aux services d'équilibreur de charge via Internet. Si vous avez besoin de plus de 4 adresses IP pour les équilibreurs de charge privés, voir [Ajout d'adresses IP portables](/docs/containers?topic=containers-subnets#adding_ips).
+* Le sous-réseau privé portable est lié à un seul cluster et fournit 8 adresses IP privées au cluster. 3 adresses IP sont réservées aux fonctions de l'infrastructure IBM Cloud (SoftLayer). 1 adresse IP est utilisée par l'équilibreur de charge d'application (ALB) Ingress public par défaut et 4 adresses IP peuvent être utilisées pour créer des services d'équilibreur de charge de réseau privé. Les adresses IP publiques portables sont des adresses IP permanentes fixes pouvant être utilisées pour accéder aux équilibreurs de charge de réseau via un réseau privé. Si vous avez besoin de plus de 4 adresses IP pour les équilibreurs de charge de réseau privés, voir [Ajout d'adresses IP portables](/docs/containers?topic=containers-subnets#adding_ips).
 
 Pour voir tous les sous-réseaux mis à disposition dans votre compte, exécutez la commande `ibmcloud ks subnets`. Pour voir les sous-réseaux portables publics et privés liés à un cluster, vous pouvez exécuter la commande `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` et recherchez la section **Subnet VLANs**.
 
@@ -103,7 +102,7 @@ Cependant, dans plusieurs situations, les composants de votre cluster doivent ê
 **Que sont les fonctions de routeur virtuel (VRF) et de spanning VLAN ?**</br>
 
 <dl>
-<dt>[Fonction de routeur virtuel (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)</dt>
+<dt>[Fonction de routeur virtuel (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
 <dd>Une fonction VRF active tous les VLAN et les sous-réseaux dans votre compte d'infrastructure pour qu'ils communiquent entre eux. De plus, une fonction VRF est requise pour autoriser vos noeuds worker et le maître à communiquer via le noeud final de service privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Notez que la fonction VRF élimine l'option Spanning VLAN de votre compte car tous les VLAN sont en mesure de communiquer sauf si vous configurez un dispositif de passerelle pour gérer le trafic.</dd>
 <dt>[Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction Spanning VLAN. Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Notez que vous ne pouvez pas activer le noeud final de service privé si vous choisissez d'activer la fonction Spanning VLAN à la place d'une fonction VRF.</dd>
@@ -111,7 +110,7 @@ Cependant, dans plusieurs situations, les composants de votre cluster doivent ê
 
 **Comment les fonctions VRF ou Spanning VLAN affectent-elles la segmentation du réseau ?**</br>
 
-Lorsque la fonction VRF ou Spanning VLAN est activée, tout système connecté à l'un de vos VLAN privés dans le même compte {{site.data.keyword.Bluemix_notm}} peut communiquer avec des noeuds worker. Vous pouvez isoler votre cluster des autres systèmes sur le réseau privé en appliquant des [règles de réseau privé Calico](/docs/containers?topic=containers-network_policies#isolate_workers). {{site.data.keyword.containerlong_notm}} est également compatible avec toutes les [offres de pare-feu d'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud-computing/bluemix/network-security). Vous pouvez mettre en place un pare-feu, tel qu'un [dispositif de routeur virtuel (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra), avec des règles réseau personnalisées afin d'assurer une sécurité réseau dédiée pour votre cluster standard et détecter et parer à des intrusions réseau. 
+Lorsque la fonction VRF ou Spanning VLAN est activée, tout système connecté à l'un de vos VLAN privés dans le même compte {{site.data.keyword.Bluemix_notm}} peut communiquer avec des noeuds worker. Vous pouvez isoler votre cluster des autres systèmes sur le réseau privé en appliquant des [règles de réseau privé Calico](/docs/containers?topic=containers-network_policies#isolate_workers). {{site.data.keyword.containerlong_notm}} est également compatible avec toutes les [offres de pare-feu d'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud-computing/bluemix/network-security). Vous pouvez mettre en place un pare-feu, tel qu'un [dispositif de routeur virtuel (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra), avec des règles réseau personnalisées afin d'assurer une sécurité réseau dédiée pour votre cluster standard et détecter et parer à des intrusions réseau.
 
 <br />
 
@@ -142,7 +141,7 @@ L'image suivante illustre la connectivité réseau pour les noeuds worker connec
 </figure>
 </p>
 
-Si vous souhaitez créer un cluster à zones multiples, si vous disposez de plusieurs VLAN pour un cluster ou de plusieurs sous-réseaux sur le même VLAN, les noeuds worker sur les différents sous-réseaux du même VLAN ou dans différents VLAN ne peuvent pas automatiquement communiquer entre eux. Vous devez activer la fonction [VRF ou Spanning VLAN](#cs_network_ov_basics_segmentation) pour votre compte d'infrastructure IBM Cloud (SoftLayer). Choisissez VRF pour activer le [noeud final de service privé pour la communication entre le maître et les noeuds worker](#cs_network_ov_master_private). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction Spanning VLAN. 
+Si vous souhaitez créer un cluster à zones multiples, si vous disposez de plusieurs VLAN pour un cluster ou de plusieurs sous-réseaux sur le même VLAN, les noeuds worker sur les différents sous-réseaux du même VLAN ou dans différents VLAN ne peuvent pas automatiquement communiquer entre eux. Vous devez activer la fonction [VRF ou Spanning VLAN](#cs_network_ov_basics_segmentation) pour votre compte d'infrastructure IBM Cloud (SoftLayer). Choisissez VRF pour activer le [noeud final de service privé pour la communication entre le maître et les noeuds worker](#cs_network_ov_master_private). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction Spanning VLAN.
 
 **Pourquoi connecter mon cluster uniquement à un VLAN privé ?**</br>
 
@@ -157,7 +156,7 @@ L'image suivante illustre la connectivité réseau pour les noeuds worker connec
 </figure>
 </p>
 
-Si vous souhaitez créer un cluster à zones multiples, si vous disposez de plusieurs VLAN pour un cluster ou de plusieurs sous-réseaux sur le même VLAN, les noeuds worker sur les différents sous-réseaux du même VLAN ou dans différents VLAN ne peuvent pas automatiquement communiquer entre eux. Vous devez activer la fonction [VRF ou Spanning VLAN](#cs_network_ov_basics_segmentation) pour votre compte d'infrastructure IBM Cloud (SoftLayer). Choisissez VRF pour activer le [noeud final de service privé pour la communication entre le maître et les noeuds worker](#cs_network_ov_master_private). Si vous ne pouvez pas ou ne voulez pas activer la fonction VRF, vous devez activer la fonction Spanning VLAN et configurer également un périphérique de passerelle pour la communication entre le maître et les noeuds worker.
+Si vous souhaitez créer un cluster à zones multiples, si vous disposez de plusieurs VLAN pour un cluster ou de plusieurs sous-réseaux sur le même VLAN, les noeuds worker sur les différents sous-réseaux du même VLAN ou dans différents VLAN ne peuvent pas automatiquement communiquer entre eux. Vous devez activer la fonction [VRF ou Spanning VLAN](#cs_network_ov_basics_segmentation) pour votre compte d'infrastructure IBM Cloud (SoftLayer). Choisissez VRF pour activer le [noeud final de service privé pour la communication entre le maître et les noeuds worker](#cs_network_ov_master_private). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, vous devez activer la fonction Spanning VLAN et configurer également un périphérique de passerelle pour la communication entre le maître et les noeuds worker.
 
 ### J'ai choisi mes connexions de VLAN. Comment les configurer ?
 {: #cs_network_ov_worker_setup}
@@ -165,11 +164,13 @@ Si vous souhaitez créer un cluster à zones multiples, si vous disposez de plus
 Vous pouvez suivre la procédure indiquée dans la rubrique [Configuration réseau avec un VLAN public et un VLAN privé](/docs/containers?topic=containers-cs_network_cluster#both_vlans) ou [Configuration réseau avec un VLAN privé uniquement](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan).
 {: shortdesc}
 
-### Puis-je changer d'avis sur mes VLAN par la suite ?
+### Puis-je changer d'avis sur mes VLAN par la suite ? Mes adresses IP de noeud worker changent-elles ?
 {: #cs_network_ov_worker_change}
 
 Vous pouvez changer la configuration de vos VLAN en modifiant les pools de noeuds worker dans votre cluster. Pour plus d'informations, voir [Modification des connexions de VLAN de vos noeuds worker](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
 {: shortdesc}
+
+Une adresse IP est affectée à votre noeud worker sur les VLAN publics ou privés que votre cluster utilise. Une fois que le noeud worker est mis à disposition, les adresses IP ne changent pas. Par exemple, les adresses IP de noeud worker sont conservées au cours des opérations `reload`, `reboot` et `update`. De plus, l'adresse IP du noeud worker est utilisée pour l'identité de noeud worker dans la plupart des commandes `kubectl`. Si vous changez les VLAN que le pool worker utilise, les nouveaux noeuds worker qui sont mis à disposition dans ce pool utilisent les nouveaux VLAN pour leurs adresses IP. Les adresses IP de noeud worker existantes ne changent pas, mais vous pouvez choisir de retirer les noeuds worker qui utilisent les anciens VLAN. 
 
 <br />
 
@@ -212,15 +213,14 @@ L'image suivante illustre la communication entre les noeuds worker et le maître
 La communication est établie de manière sécurisée sur le réseau public via le noeud final de service public. Les noeuds worker dialoguent avec le maître via des certificats TLS et le maître dialogue avec eux via une connexion OpenVPN.
 
 **Accès au maître**</br>
-Le maître est accessible au public pour les utilisateurs du cluster autorisés via le noeud final de service public. Les utilisateurs de votre cluster peuvent accéder de manière sécurisée à votre maître Kubernetes sur Internet pour exécuter des commandes `kubectl`, par exemple.
+Le maître est accessible au public pour les utilisateurs de cluster autorisés via le noeud final de service public. Les utilisateurs de votre cluster peuvent accéder de manière sécurisée à votre maître Kubernetes sur Internet pour exécuter des commandes `kubectl`, par exemple.
 
 Pour configurer le noeud final de service public uniquement pendant ou après la création du cluster, suivez la procédure indiquée dans la rubrique [Configuration du noeud final de service public](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).
 
 ### Noeud final de service privé uniquement
 {: #cs_network_ov_master_private}
 
-Pour rendre votre maître accessible uniquement en privé, vous pouvez activer le noeud final de service privé dans les clusters exécutant Kubernetes version 1.11 ou ultérieure. Une fonction de routeur virtuel (VRF) est requise dans votre compte {{site.data.keyword.Bluemix_notm}}.
-Lorsque votre cluster est connecté uniquement à un VLAN privé, un noeud final de service privé évite d'avoir à utiliser un périphérique de passerelle pour établir une connexion sécurisée avec le maître.
+Pour rendre votre maître accessible uniquement en privé, vous pouvez activer le noeud final de service privé dans les clusters exécutant Kubernetes version 1.11 ou ultérieure. Une fonction de routeur virtuel (VRF) est requise dans votre compte {{site.data.keyword.Bluemix_notm}}. Lorsque votre cluster est connecté uniquement à un VLAN privé, un noeud final de service privé évite d'avoir à utiliser un périphérique de passerelle pour établir une connexion sécurisée avec le maître.
 {: shortdesc}
 
 L'image suivante illustre la communication entre les noeuds worker et le maître Kubernetes via un noeud final de service privé.
@@ -233,10 +233,10 @@ L'image suivante illustre la communication entre les noeuds worker et le maître
 </p>
 
 **Communication entre les noeuds worker et le maître**</br>
-La communication est établie sur le réseau privé via le noeud final de service privé.
+La communication est établie sur le réseau privé via le noeud final de service privé. 
 
 **Accès au maître**</br>
-Les utilisateurs de votre cluster doivent figurer dans votre réseau privé {{site.data.keyword.Bluemix_notm}} ou se connecter au réseau privé via une connexion VPN pour accéder au maître.
+Les utilisateurs de votre cluster doivent figurer dans votre réseau privé {{site.data.keyword.Bluemix_notm}} ou se connecter au réseau privé via une connexion VPN pour accéder au maître. 
 
 Pour configurer le noeud final de service privé uniquement pendant ou après la création du cluster, suivez la procédure indiquée dans la rubrique [Configuration du noeud final de service privé](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).
 
@@ -247,7 +247,7 @@ Pour rendre votre maître accessible au public ou en privé aux utilisateurs du 
 {: shortdesc}
 
 **Communication entre les noeuds worker et le maître**</br>
-La communication est établie sur le réseau privé via le noeud final de service privé. Même si vous activez le noeud final de service public pour votre cluster, la communication entre le maître Kubernetes et les noeuds worker reste sur le réseau privé.
+La communication est établie sur le réseau privé via le noeud final de service privé et sur le réseau public via le noeud final de service public. En acheminant la moitié du trafic worker vers maître via le noeud final public et l'autre moitié via le noeud final privé, votre communication maître vers worker est protégée contre d'éventuelles pannes du réseau public ou privé. 
 
 **Accès au maître**</br>
 Le maître est accessible en privé via le noeud final de service privé si les utilisateurs du cluster autorisés figurent dans votre réseau privé {{site.data.keyword.Bluemix_notm}} ou s'ils sont connectés au réseau privé via une connexion VPN. Sinon, le maître est accessible au public pour les utilisateurs du cluster autorisés via le noeud final de service public.
@@ -286,7 +286,7 @@ Pour connecter vos noeuds worker et vos applications de manière sécurisée à 
 ### Etablissement d'une connexion VPN pour une configuration de VLAN privé uniquement
 {: #cs_network_ov_vpn_private}
 
-Si votre cluster est connecté uniquement à un VLAN privé, vous devez configurer un noeud final VPN IPSec sur un périphérique de passerelle VRA ou FSA. Vous pouvez ensuite [configurer et déployer le service VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) dans votre cluster pour utiliser le noeud final VPN sur votre passerelle. Si vous ne souhaitez pas utiliser strongSwan, vous pouvez [configurer une connectivité VPN directement avec VRA](/docs/containers?topic=containers-vpn#vyatta).
+Si votre cluster est connecté uniquement à un VLAN privé, vous devez configurer un noeud final VPN IPSec sur un périphérique de passerelle VRA (Vyatta) ou FSA. Vous pouvez ensuite [configurer et déployer le service VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) dans votre cluster pour utiliser le noeud final VPN sur votre passerelle. Si vous ne souhaitez pas utiliser strongSwan, vous pouvez [configurer une connectivité VPN directement avec VRA](/docs/containers?topic=containers-vpn#vyatta).
 {: shortdesc}
 
 <p>

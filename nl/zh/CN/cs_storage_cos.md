@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # 在 IBM Cloud Object Storage 上存储数据
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage) 是一种持久的高可用性存储器，可以使用 {{site.data.keyword.cos_full_notm}} 插件安装到在 Kubernetes 集群中运行的应用程序。这是一种 Kubernetes Flex-Volume 插件，用于将 Cloud {{site.data.keyword.cos_short}} 存储区连接到集群中的 pod。使用 {{site.data.keyword.cos_full_notm}} 存储的信息会进行动态和静态加密，分布在多个地理位置，并使用 REST API 通过 HTTP 进行访问。
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about) 是一种持久的高可用性存储器，可以使用 {{site.data.keyword.cos_full_notm}} 插件安装到在 Kubernetes 集群中运行的应用程序。这是一种 Kubernetes Flex-Volume 插件，用于将 Cloud {{site.data.keyword.cos_short}} 存储区连接到集群中的 pod。使用 {{site.data.keyword.cos_full_notm}} 存储的信息会进行动态和静态加密，分布在多个地理位置，并使用 REST API 通过 HTTP 进行访问。
 
 要连接到 {{site.data.keyword.cos_full_notm}}，集群需要公用网络访问权通过 {{site.data.keyword.Bluemix_notm}} Identity and Access Management 进行认证。如果您有仅专用集群，那么安装插件 V`1.0.3` 或更高版本后，可与 {{site.data.keyword.cos_full_notm}} 专用服务端点进行通信，并可设置 {{site.data.keyword.cos_full_notm}} 服务实例进行 HMAC 认证。如果不想使用 HMAC 认证，那么必须在端口 443 上打开所有出站网络流量，该插件才能在专用集群中正常工作。
 {: important}
@@ -38,7 +38,7 @@ subcollection: containers
 您必须在自己的帐户中供应 {{site.data.keyword.cos_full_notm}} 服务实例后，才能开始在集群中使用对象存储器。
 {: shortdesc}
 
-{{site.data.keyword.cos_full_notm}} 插件配置为使用任何 s3 API 端点。例如，您可能希望使用本地 Cloud Object Storage 服务器（如 [Minio](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore)），或者连接到在不同云提供者处设置的 s3 API 端点，而不使用 {{site.data.keyword.cos_full_notm}} 服务实例。
+{{site.data.keyword.cos_full_notm}} 插件配置为使用任何 s3 API 端点。例如，您可能希望使用本地 Cloud Object Storage 服务器（如 [Minio](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore)），或者连接到在不同云提供者处设置的 s3 API 端点，而不使用 {{site.data.keyword.cos_full_notm}} 服务实例。
 
 要创建 {{site.data.keyword.cos_full_notm}} 服务实例，请执行以下步骤。如果计划使用本地 Cloud Object Storage 服务器或其他 s3 API 端点，请参阅提供者文档来设置 Cloud Object Storage 实例。
 
@@ -66,7 +66,7 @@ subcollection: containers
 
 要为 {{site.data.keyword.cos_full_notm}} 服务实例的凭证创建 Kubernetes 私钥，请执行以下步骤。如果计划使用本地 Cloud Object Storage 服务器或其他 s3 API 端点，请使用相应的凭证创建 Kubernetes 私钥。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 检索 [{{site.data.keyword.cos_full_notm}} 服务凭证](#service_credentials)的 **apikey** 或者 **access_key_id** 和 **secret_access_key**。
 
@@ -75,89 +75,53 @@ subcollection: containers
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-
-3. 将 {{site.data.keyword.cos_full_notm}} **GUID** 和 **apikey** 或者先前检索到的 **access_key_id** 和 **secret_access_key** 编码为 Base64，并记下所有 Base64 编码的值。对每个参数重复此命令，以检索 Base64 编码值。
+   
+3. 创建 Kubernetes 私钥以用于存储服务凭证。创建私钥时，所有值都会自动编码为 Base64。 
+   
+   **使用 API 密钥的示例：**
    ```
-   echo -n "<key_value>" | base64
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=api-key=<api_key> --from-literal=service-instance-id=<service_instance_guid>
+   ```
+   {: pre}
+   
+   **HMAC 认证的示例：**
+   ```
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=access-key=<access_key_ID> --from-literal=secret-key=<secret_access_key>    
    ```
    {: pre}
 
-4. 创建配置文件以定义 Kubernetes 私钥。
-
-   **使用 API 密钥的示例：**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     api-key: <base64_apikey>
-     service-instance-id: <base64_guid>
-   ```
-   {: codeblock}
-
-   **使用 HMAC 认证的示例：**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     access-key: <base64_access_key_id>
-     secret-key: <base64_secret_access_key>
-   ```
-   {: codeblock}
-
    <table>
-   <caption>了解 YAML 文件的组成部分</caption>
+   <caption>了解命令的组成部分</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+   <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解命令的组成部分</th>
    </thead>
    <tbody>
    <tr>
-   <td><code>metadata.name</code></td>
-   <td>输入 {{site.data.keyword.cos_full_notm}} 私钥的名称。</td>
+   <td><code>api-key</code></td>
+   <td>输入先前从 {{site.data.keyword.cos_full_notm}} 服务凭证中检索到的 API 密钥。如果要使用 HMAC 认证，请改为指定 <code>access-key</code> 和 <code>secret-key</code>。</td>
    </tr>
    <tr>
-   <td><code>metadata.namespace</code></td>
-   <td>指定要在其中创建私钥的名称空间。必须在要创建 PVC 和用于访问 {{site.data.keyword.cos_full_notm}} 服务实例的 pod 的同一名称空间中创建私钥。</td>
+   <td><code>access-key</code></td>
+   <td>输入先前从 {{site.data.keyword.cos_full_notm}} 服务凭证中检索到的访问密钥标识。如果要使用 OAuth2 认证，请改为指定 <code>api-key</code>。</td>
    </tr>
    <tr>
-   <td><code>data.api-key</code></td>
-   <td>输入先前从 {{site.data.keyword.cos_full_notm}} 服务凭证中检索到的 API 密钥。API 密钥必须已进行 Base64 编码。如果要使用 HMAC 认证，请改为指定 <code>data/access-key</code> 和 <code>data/secret-key</code>。</td>
+   <td><code>secret-key</code></td>
+   <td>输入先前从 {{site.data.keyword.cos_full_notm}} 服务凭证中检索到的访问密钥。如果要使用 OAuth2 认证，请改为指定 <code>api-key</code>。</td>
    </tr>
    <tr>
-   <td><code>data.access-key</code></td>
-   <td>输入先前从 {{site.data.keyword.cos_full_notm}} 服务凭证中检索到的访问密钥标识。访问密钥标识必须已进行 base64 编码。如果要使用 OAuth2 认证，请改为指定 <code>data/api-key</code>。</td>
-   </tr>
-   <tr>
-   <td><code>data.secret-key</code></td>
-   <td>输入先前从 {{site.data.keyword.cos_full_notm}} 服务凭证中检索到的访问密钥。访问密钥必须已进行 base64 编码。如果要使用 OAuth2 认证，请改为指定 <code>data/api-key</code>。</td>
-   </tr>
-   <tr>
-   <td><code>data.service-instance-id</code></td>
-   <td>输入先前检索到的 {{site.data.keyword.cos_full_notm}} 服务实例的 GUID。GUID 必须已进行 Base64 编码。</td>
+   <td><code>service-instance-id</code></td>
+   <td>输入先前检索到的 {{site.data.keyword.cos_full_notm}} 服务实例的 GUID。</td>
    </tr>
    </tbody>
    </table>
 
-5. 在集群中创建私钥。
-   ```
-   kubectl apply -f filepath/secret.yaml
-   ```
-   {: pre}
-
-6. 验证是否已在名称空间中创建私钥。
+4. 验证是否已在名称空间中创建私钥。
    ```
    kubectl get secret
    ```
    {: pre}
 
-7. [安装 {{site.data.keyword.cos_full_notm}} 插件](#install_cos)，或者如果已安装该插件，请针对 {{site.data.keyword.cos_full_notm}} 存储区[决定配置]( #configure_cos)。
+5. [安装 {{site.data.keyword.cos_full_notm}} 插件](#install_cos)，或者如果已安装该插件，请针对 {{site.data.keyword.cos_full_notm}} 存储区[决定配置]( #configure_cos)。
 
 ## 安装 IBM Cloud Object Storage 插件
 {: #install_cos}
@@ -168,20 +132,20 @@ subcollection: containers
 在查找有关如何更新或除去 {{site.data.keyword.cos_full_notm}} 插件的指示信息？请参阅[更新插件](#update_cos_plugin)和[除去插件](#remove_cos_plugin)。
 {: tip}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 确保工作程序节点应用次版本的最新补丁。
    1. 列出工作程序节点的当前补丁版本。
       ```
-ibmcloud ks workers --cluster <cluster_name_or_ID>
-      ```
-   {: pre}
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
+   ```
+      {: pre}
 
       输出示例：
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
       ```
       {: screen}
 
@@ -191,15 +155,15 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 
    3. 通过重新装入工作程序节点来应用最新的补丁版本。请遵循 [ibmcloud ks worker-reload 命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)中的指示信息执行操作，以便在重新装入工作程序节点之前，正常重新安排工作程序节点上任何正在运行的 pod。请注意，在重新装入期间，工作程序节点机器将使用最新映像进行更新，并且如果数据未[存储在工作程序节点外部](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)，那么将删除数据。
 
-2.  [遵循指示信息](/docs/containers?topic=containers-integrations#helm)在本地计算机上安装 Helm 客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
+2.  [遵循指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
 
-    安装 Helm 服务器 Tiller 需要与公共 Google Container Registry 的公用网络连接。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么可以选择[将 Tiller 映像拉出到本地计算机，并将映像推送到 {{site.data.keyword.registryshort_notm}} 中的名称空间](/docs/containers?topic=containers-integrations#private_local_tiller)，或者[安装 Helm chart（不使用 Tiller）](/docs/containers?topic=containers-integrations#private_install_without_tiller)。
+    安装 Helm 服务器 Tiller 需要与公共 Google Container Registry 的公用网络连接。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么可以选择[将 Tiller 映像拉出到本地计算机，并将映像推送到 {{site.data.keyword.registryshort_notm}} 中的名称空间](/docs/containers?topic=containers-helm#private_local_tiller)，或者[安装 Helm chart（不使用 Tiller）](/docs/containers?topic=containers-helm#private_install_without_tiller)。
     {: note}
 
 3.  验证 Tiller 是否已使用服务帐户进行安装。
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -213,7 +177,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 
 4. 将 {{site.data.keyword.Bluemix_notm}} Helm 存储库添加到集群。
    ```
-   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
@@ -225,7 +189,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 
 6. 下载 Helm 图表，并将这些图表解包到当前目录。
    ```
-   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
    ```
    {: pre}
 
@@ -267,8 +231,8 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
    
 
       示例用法：
-    helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
-   ```
+       helm ibmc install iks-charts/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+      ```
       {: screen}
 
       如果输出显示错误 `Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission denied`，请运行 `chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh`。然后，重新运行 `helm ibmc --help`。
@@ -304,7 +268,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
    - **对于 macOS 和 Linux：**
      - 如果跳过了前一个步骤，那么安装时不会限制为使用特定 Kubernetes 私钥。
           ```
-       helm ibmc install ibm/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install iks-charts/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
@@ -331,7 +295,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
      3. 安装 Helm chart。
         - 如果跳过了前一个步骤，那么安装时不会限制为使用特定 Kubernetes 私钥。
           ```
-          helm install ibm/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          helm install iks-charts/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
           ```
           {: pre}
 
@@ -358,7 +322,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
    ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
    ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                  PROVISIONER       AGE
    ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
    ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
@@ -417,7 +381,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: screen}
 
-   看到一个 `ibmcloud-object-storage-plugin` pod 以及一个或多个 `ibmcloud-object-storage-driver` pod 时，说明安装成功。`ibmcloud-object-storage-driver` pod 的数量等于集群中的工作程序节点数。所有 pod 都必须处于 `Running` 状态，插件才能正常运行。如果 pod 发生故障，请运行 `kubectl describe pod -n kube-system <pod_name>` 以查找故障的根本原因。
+   看到一个 `ibmcloud-object-storage-plugin` pod 以及一个或多个 `ibmcloud-object-storage-driver` pod 时，说明安装成功。`ibmcloud-object-storage-driver` pod 的数量等于集群中的工作程序节点数。所有 pod 都必须处于 `Running` 状态，插件才能正常运行。如果 pod 发生故障，请运行 `kubectl describe pod -n kube-system <pod_name>` 来查找故障的根本原因。
 
 11. 验证存储类是否已成功创建。
     ```
@@ -450,21 +414,21 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 可以将现有 {{site.data.keyword.cos_full_notm}} 插件升级到最新版本。
 {: shortdesc}
 
-1. 如果使用的是 macOS 或 Linux 分发版，请将 Helm 插件 {{site.data.keyword.cos_full_notm}} `ibmc` 更新为最新版本。
-   ```
-   helm ibmc --update
-   ```
-   {: pre}
-
-2. 更新 {{site.data.keyword.Bluemix_notm}} Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
+1. 更新 {{site.data.keyword.Bluemix_notm}} Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
    ```
    helm repo update
    ```
    {: pre}
 
+2. 如果使用的是 macOS 或 Linux 分发版，请将 Helm 插件 {{site.data.keyword.cos_full_notm}} `ibmc` 更新为最新版本。
+   ```
+   helm ibmc --update
+   ```
+   {: pre}
+
 3. 将最新 {{site.data.keyword.cos_full_notm}} Helm chart 下载到本地计算机，然后解压缩该包来查看 `release.md` 文件，以了解最新发行版信息。
    ```
-   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
    ```
 
 4. 查找 Helm chart 的安装名称。
@@ -481,7 +445,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 
 5. 将 {{site.data.keyword.cos_full_notm}} Helm chart 升级到最新版本。
    ```   
-   helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   helm ibmc upgrade <helm_chart_name> iks-charts/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
    ```
    {: pre}
 
@@ -520,7 +484,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 开始之前：
 
 - [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-- 确保集群中没有任何使用 {{site.data.keyword.cos_full_notm}} 的 PVC 或 PV。要列出安装特定 PVC 的所有 pod，请运行 `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`.
+- 确保集群中没有任何使用 {{site.data.keyword.cos_full_notm}} 的 PVC 或 PV。要列出安装特定 PVC 的所有 pod，请运行 `kubectl get pods --all-namespaces-o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`。
 
 要除去该插件，请执行以下操作：
 
@@ -572,7 +536,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
       {: pre}
 
       输出示例：
-        ```
+      ```
         NAME	VERSION	DESCRIPTION
    ```
      {: screen}
@@ -622,7 +586,7 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 
 4. 查看存储类的详细 {{site.data.keyword.cos_full_notm}} 存储区配置。
    ```
-kubectl describe storageclass <storageclass_name>
+   kubectl describe storageclass <storageclass_name>
    ```
    {: pre}
 
@@ -815,7 +779,7 @@ kubectl describe storageclass <storageclass_name>
 
 4. 可选：如果计划使用非 root 用户访问数据，或者通过直接使用控制台或 API 将文件添加到现有 {{site.data.keyword.cos_full_notm}} 存储区，请确保[文件分配有正确的许可权](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access)，以便应用程序可以根据需要成功地读取和更新文件。
 
-4.  {: #app_volume_mount}要将 PV 安装到部署，请创建配置 `.yaml` 文件，并指定绑定该 PV 的 PVC。
+4.  {: #cos_app_volume_mount}要将 PV 安装到部署，请创建配置 `.yaml` 文件，并指定绑定该 PV 的 PVC。
 
     ```
     apiVersion: apps/v1
@@ -838,6 +802,7 @@ kubectl describe storageclass <storageclass_name>
             name: <container_name>
             securityContext:
               runAsUser: <non_root_user>
+              fsGroup: <non_root_user> #仅适用于运行 Kubernetes V1.13 或更高版本的集群
             volumeMounts:
             - name: <volume_name>
               mountPath: /<file_path>
@@ -876,7 +841,7 @@ kubectl describe storageclass <storageclass_name>
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.runAsUser</code></td>
-    <td>可选：要以非 root 用户身份运行应用程序，请通过定义非 root 用户为 pod 指定[安全上下文 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)，而不在部署 YAML 中同时设置 `fsGroup`。设置 `fsGroup` 将触发 {{site.data.keyword.cos_full_notm}} 插件以在部署 pod 时更新存储区中所有文件的组许可权。更新许可权是一种写操作，会影响性能。根据您拥有的文件数量，更新许可权可能会阻止 pod 启动并进入 <code>Running</code> 状态。</td>
+    <td>可选：要以非 root 用户身份在运行 Kubernetes V1.12 或更低版本的集群中运行应用程序，请通过定义非 root 用户为 pod 指定[安全上下文 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)，而不在部署 YAML 中同时设置 `fsGroup`。设置 `fsGroup` 将触发 {{site.data.keyword.cos_full_notm}} 插件以在部署 pod 时更新存储区中所有文件的组许可权。更新许可权是一种写操作，会影响性能。根据您拥有的文件数量，更新许可权可能会阻止 pod 启动并进入 <code>Running</code> 状态。</br></br>如果有运行 Kubernetes V1.13 或更高版本的集群以及 {{site.data.keyword.Bluemix_notm}} Object Storage V1.0.4 或更高版本插件，那么可以更改 s3fs 安装点的所有者。要更改所有者，请通过将 `runAsUser` 和 `fsGroup` 设置为要拥有 s3fs 安装点的相同非 root 用户标识，从而指定安全上下文。如果这两个值不匹配，那么安装点会自动由 `root` 用户拥有。</td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -898,9 +863,9 @@ kubectl describe storageclass <storageclass_name>
 
 5.  创建部署。
      ```
-kubectl apply -f <local_yaml_path>
-     ```
-    {: pre}
+    kubectl apply -f <local_yaml_path>
+    ```
+     {: pre}
 
 6.  验证 PV 是否已成功安装。
 

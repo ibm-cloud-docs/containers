@@ -47,8 +47,8 @@ lastupdated: "2019-03-21"
     ```
     {: pre}
     
-输出示例：
-        ```
+    输出示例：
+    ```
     NAME                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
     coredns-autoscaler     0         0         0            0           32d
     kube-dns-autoscaler    1         1         1            1           260d
@@ -90,8 +90,8 @@ lastupdated: "2019-03-21"
     ```
     {: pre}
     
-输出示例：
-        ```
+    输出示例：
+    ```
     NAME                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
     coredns                0         0         0            0           89d
     kube-dns-amd64         2         2         2            2           89d
@@ -173,8 +173,8 @@ lastupdated: "2019-03-21"
     ```
     {: pre}
 
-输出示例：
-        ```
+    输出示例：
+    ```
     ...
     KubeDNS is running at https://c2.us-south.containers.cloud.ibm.com:20190/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
     ...
@@ -194,12 +194,12 @@ lastupdated: "2019-03-21"
     *   对于 `kube-system` 名称空间中的 `kube-dns` 配置映射，请将所有 [DNS 定制内容 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) 传输到 `kube-system` 名称空间中的 `coredns` 配置映射。请注意，`kube-dns` 和 `coredns` 配置映射的语法不同。有关示例，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configuration-equivalent-to-kube-dns)。
     *   对于 `kube-system` 名称空间中的 `kube-dns-autoscaler` 配置映射，请将所有 [DNS 自动缩放器定制内容 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/) 传输到 `kube-system` 名称空间中的 `coredns-autoscaler` 配置映射。请注意，定制内容的语法相同。
 2.  缩减 KubeDNS 自动缩放器部署。
-        ```
+    ```
         kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
         ```
     {: pre}
 3.  检查并等待要删除的 pod 显示。
-        ```
+    ```
         kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
         ```
     {: pre}
@@ -209,12 +209,12 @@ lastupdated: "2019-03-21"
         ```
     {: pre}
 5.  扩展 CoreDNS 自动缩放器部署。
-        ```
+    ```
         kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
         ```
     {: pre}
 6.  对集群 DNS 服务进行标记和注释以用于 CoreDNS。
-        ```
+    ```
         kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
         ```
     {: pre}
@@ -244,12 +244,12 @@ lastupdated: "2019-03-21"
     *   对于 `kube-system` 名称空间中的 `coredns` 配置映射，请将所有 [DNS 定制内容 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) 传输到 `kube-system` 名称空间中的 `kube-dns` 配置映射。请注意，`kube-dns` 和 `coredns` 配置映射的语法不同。有关示例，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configuration-equivalent-to-kube-dns)。
     *   对于 `kube-system` 名称空间中的 `coredns-autoscaler` 配置映射，请将所有 [DNS 自动缩放器定制内容 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/) 传输到 `kube-system` 名称空间中的 `kube-dns-autoscaler` 配置映射。请注意，定制内容的语法相同。
 2.  缩减 CoreDNS 自动缩放器部署。
-        ```
+    ```
         kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
         ```
     {: pre}
 3.  检查并等待要删除的 pod 显示。
-        ```
+    ```
         kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
         ```
     {: pre}
@@ -259,12 +259,12 @@ lastupdated: "2019-03-21"
         ```
     {: pre}
 5.  扩展 KubeDNS 自动缩放器部署。
-        ```
+    ```
         kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
         ```
     {: pre}
 6.  对集群 DNS 服务进行标记和注释以用于 KubeDNS。
-        ```
+    ```
         kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
         ```
     {: pre}

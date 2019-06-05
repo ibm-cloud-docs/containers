@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -40,7 +40,7 @@ subcollection: containers
 ## {{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구를 사용하여 테스트 실행
 {: #debug_utility}
 
-문제점을 해결하는 중에 {{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구를 사용하여 테스트를 실행하고 관련 정보를 클러스터에서 수집할 수 있습니다. 디버그 도구를 사용하려면 다음과 같이 [`ibmcloud-iks-debug` Helm 차트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)를 설치하십시오.
+문제점을 해결하는 중에 {{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구를 사용하여 테스트를 실행하고 관련 정보를 클러스터에서 수집할 수 있습니다. 디버그 도구를 사용하려면 다음과 같이 [`ibmcloud-iks-debug` Helm 차트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)를 설치하십시오.
 {: shortdesc}
 
 
@@ -120,7 +120,7 @@ subcollection: containers
       </tr>
       <tr>
        <td>정상(Normal)</td>
-       <td>클러스터의 모든 작업자 노드가 시작되어 실행 중입니다. 클러스터에 액세스하고 클러스터에 앱을 배치할 수 있습니다. 이 상태는 정상으로 간주되고 사용자의 조치가 필요하지 않습니다.<p class="note">작업자 노드가 정상인 경우에도 [네트워킹](/docs/containers?topic=containers-cs_troubleshoot_network) 및 [스토리지](/docs/containers?topic=containers-cs_troubleshoot_storage)와 같은 기타 인프라 리소스에는 여전히 주의를 기울여야 합니다.</p></td>
+       <td>클러스터의 모든 작업자 노드가 시작되어 실행 중입니다. 클러스터에 액세스하고 클러스터에 앱을 배치할 수 있습니다. 이 상태는 정상으로 간주되고 사용자의 조치가 필요하지 않습니다.<p class="note">작업자 노드가 정상인 경우에도 [네트워킹](/docs/containers?topic=containers-cs_troubleshoot_network) 및 [스토리지](/docs/containers?topic=containers-cs_troubleshoot_storage)와 같은 기타 인프라 리소스에는 여전히 주의를 기울여야 합니다. 클러스터를 방금 작성한 경우 Ingress 시크릿 또는 레지스트리 이미지 풀 시크릿과 같은 기타 서비스에서 사용하는 클러스터의 일부분이 계속 처리 중일 수 있다는 점에 유의하십시오. </p></td>
     </tr>
       <tr>
        <td>보류 중(Pending)</td>
@@ -181,7 +181,7 @@ subcollection: containers
       <li>작업자 노드 및 Kubernetes 마스터 간 통신의 성능을 저하시키거나 차단하는 작업자 노드에 대한 가상 라우터 어플라이언스를 설정합니다. </li><li> 현재 네트워킹 작업자 노드와 Kubernetes 마스터 간의 통신 실패의 원인이 되는 {{site.data.keyword.containerlong_notm}} 또는 IBM Cloud 인프라(SoftLayer)의 현재 네트워킹 문제점입니다.</li>
       <li>작업자 노드의 용량이 부족합니다. 작업자 노드의 <strong>상태</strong>를 확인하여 <strong>디스크 부족</strong> 또는 <strong>메모리 부족</strong>이 표시되는지 확인하십십시오. 작업자 노드의 용량이 부족하면 워크로드의 로드 밸런싱을 지원하기 위해 작업자 노드의 워크로드를 줄이거나 작업자 노드를 클러스터에 추가해보십시오.</li>
       <li>디바이스가 [{{site.data.keyword.Bluemix_notm}} 콘솔 리소스 목록 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/resources)에서 전원이 꺼져 있습니다. 리소스 목록을 열고 **디바이스** 목록에서 작업자 노드 ID를 찾으십시오. 조치 메뉴에서 **전원 켜기**를 클릭하십시오.</li></ul>
-많은 경우 작업자 노드를 [다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)하면 문제점을 해결할 수 있습니다. 작업자 노드를 다시 로드하면 최신 [패치 버전](/docs/containers?topic=containers-cs_versions#version_types)이 작업자 노드에 적용됩니다. 주 버전 및 부 버전은 변경되지 않습니다. 작업자 노드를 다시 로드하기 전에 기존 팟(Pod)이 정상적으로 종료되고 남아 있는 작업자 노드로 다시 스케줄되었는지 확인하려면 작업자 노드를 유출하고 드레인하십시오. </br></br> 작업자 노드를 다시 로드해도 문제가 해결되지 않으면 다음 단계로 이동하여 작업자 노드의 문제점 해결을 계속 진행하십시오. </br></br><strong>팁:</strong> [작업자 노드에 대한 상태 검사를 구성하고 자동 복구를 사용으로 설정](/docs/containers?topic=containers-health#autorecovery)할 수 있습니다. 자동 복구는 구성된 검사에 따라 비정상적인 작업자 노드를 발견하면 작업자 노드에서 OS 다시 로드와 같은 정정 조치를 트리거합니다. 자동 복구 작동 방식에 대한 자세한 정보는 [자동 복구 블로그 게시물![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)을 참조하십시오.
+많은 경우 작업자 노드를 [다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)하면 문제점을 해결할 수 있습니다. 작업자 노드를 다시 로드하면 최신 [패치 버전](/docs/containers?topic=containers-cs_versions#version_types)이 작업자 노드에 적용됩니다. 주 버전 및 부 버전은 변경되지 않습니다. 작업자 노드를 다시 로드하기 전에 기존 팟(Pod)이 정상적으로 종료되고 남아 있는 작업자 노드로 다시 스케줄되었는지 확인하려면 작업자 노드를 유출하고 드레인하십시오.</br></br> 작업자 노드를 다시 로드해도 문제가 해결되지 않으면 다음 단계로 이동하여 작업자 노드의 문제점 해결을 계속 진행하십시오. </br></br><strong>팁:</strong> [작업자 노드에 대한 상태 검사를 구성하고 자동 복구를 사용으로 설정](/docs/containers?topic=containers-health#autorecovery)할 수 있습니다. 자동 복구는 구성된 검사에 따라 비정상적인 작업자 노드를 발견하면 작업자 노드에서 OS 다시 로드와 같은 정정 조치를 트리거합니다. 자동 복구 작동 방식에 대한 자세한 정보는 [자동 복구 블로그 게시물![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)을 참조하십시오.
       </td>
      </tr>
      <tr>
@@ -275,7 +275,7 @@ subcollection: containers
         </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
         </br></br>
-        The {{site.data.keyword.Bluemix_notm}} infrastructure credentials could not be validated.</td>
+                The {{site.data.keyword.Bluemix_notm}} infrastructure credentials could not be validated.</td>
         <td>IBM Cloud 인프라(SoftLayer) 포트폴리오에서 조치를 수행하는 데 필요한 권한이 없거나 잘못된 인프라 인증 정보를 사용 중입니다. [인프라 포트폴리오에 대한 액세스를 가능하게 하기 위한 API 키 설정](/docs/containers?topic=containers-users#api_key)을 참조하십시오.</td>
       </tr>
       <tr>
@@ -286,7 +286,7 @@ subcollection: containers
        <li>클러스터가 공인 IP를 사용하려는 경우 공용 및 사설 VLAN을 모두 사용하여 [새 작업자 노드를 추가](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add)하십시오.</li></ul></li></ul></td>
      </tr>
       <tr>
-  <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
+  <td>IMS 계정이 선택한 BSS 계정에 연결되어 있지 않으므로 IMS 포털 토큰을 작성할 수 없음</br></br>제공된 사용자를 찾을 수 없거나 활성임</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: 사용자 계정이 현재 cancel_pending 상태입니다.</br></br>머신이 사용자에게 표시될 때까지 기다림</td>
   <td>IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하는 데 사용되는 API 키의 소유자에 조치를 수행하는 데 필요한 권한이 없거나 삭제를 보류 중일 수 있습니다.</br></br><strong>사용자</strong>는 다음 단계를 수행하십시오.
   <ol><li>여러 계정에 대한 액세스 권한이 있는 경우 {{site.data.keyword.containerlong_notm}} 관련 작업을 수행하려는 계정에 로그인되어 있는지 확인하십시오. </li>
   <li><code>ibmcloud ks api-key-info</code>를 실행하여 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하는 데 사용되는 현재 API 키 소유자를 보십시오. </li>

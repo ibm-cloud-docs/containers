@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -30,6 +30,7 @@ subcollection: containers
 {: #block_storage_attacher}
 
 使用 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 外掛程式，將原始、未格式化且未裝載的區塊儲存空間連接至叢集中的工作者節點。
+  
 {: shortdesc}
 
 例如，您想要使用 [Portworx](/docs/containers?topic=containers-portworx) 等軟體定義儲存空間解決方案(SDS) 來儲存資料，但不想要使用來自額外本端磁碟，且針對 SDS 用法而進行最佳化的裸機工作者節點。若要新增本端磁碟至您的非 SDS工作者節點，您必須在 {{site.data.keyword.Bluemix_notm}} 基礎架構帳戶中，手動建立區塊儲存裝置，然後使用 {{site.data.keyword.Bluemix_notm}}Block Volume Attacher 將該儲存空間連接至您的非 SDS 工作者節點。
@@ -39,7 +40,7 @@ subcollection: containers
 您在尋找如何更新或移除 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式的指示嗎？請參閱[更新外掛程式](#update_block_attacher)及[移除外掛程式](#remove_block_attacher)。
 {: tip}
 
-1.  [遵循指示](/docs/containers?topic=containers-integrations#helm)，在您的本端機器上安裝 Helm 用戶端，並在叢集中安裝具有服務帳戶的 Helm 伺服器 (Tiller)。
+1.  [遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上，並在叢集中使用服務帳戶安裝 Helm 伺服器 (tiller)。
 
 2.  驗證是否已安裝 Tiller 且具有服務帳戶。
 
@@ -64,7 +65,7 @@ subcollection: containers
 
 4. 安裝 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式。安裝外掛程式時，會將預先定義的區塊儲存空間類別新增至叢集。
    ```
-   helm install ibm/ibm-block-storage-attacher --name block-attacher
+   helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
    {: pre}
 
@@ -144,7 +145,7 @@ subcollection: containers
 
 2. 選用項目：將最新的 Helm 圖表下載至您的本端機器。然後，解壓縮套件並檢閱 `release.md` 檔，以尋找最新版本資訊。
    ```
-   helm fetch ibm/ibmcloud-block-storage-plugin
+   helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -230,13 +231,13 @@ subcollection: containers
     ```
     {: pre}
 
-2. 導覽至 `block-storage-utilities` 目錄。
+3. 導覽至 `block-storage-utilities` 目錄。
    ```
    cd ibmcloud-storage-utilities/block-storage-provisioner
    ```
    {: pre}
 
-3. 開啟 `yamlgen.yaml` 檔，並指定要新增至叢集中每個工作者節點的區塊儲存空間配置。
+4. 開啟 `yamlgen.yaml` 檔，並指定要新增至叢集中每個工作者節點的區塊儲存空間配置。
    ```
    #
    # Can only specify 'performance' OR 'endurance' and associated clause
@@ -283,16 +284,16 @@ subcollection: containers
    <td>輸入儲存空間的大小（以 GB 為單位）。請參閱[決定區塊儲存空間配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)，尋找您的儲存空間層級所支援的大小。</td>
    </tr>
    </tbody>
-   </table>
+   </table>  
 
-4. 擷取您的 IBM Cloud 基礎架構 (SoftLayer) 使用者名稱及 API 金鑰。`mkpvyaml` Script 會使用該使用者名稱及 API 金鑰來存取叢集。
+5. 擷取您的 IBM Cloud 基礎架構 (SoftLayer) 使用者名稱及 API 金鑰。`mkpvyaml` Script 會使用該使用者名稱及 API 金鑰來存取叢集。
    1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。
    2. 從功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中，選取**基礎架構**。
    3. 從功能表列中，選取**帳戶** > **使用者** > **使用者清單**。
    4. 尋找您要擷取其使用者名稱及 API 金鑰的使用者。
    5. 按一下**產生**以產生 API 金鑰，或**檢視**以檢視您現有的 API 金鑰。即會開啟一個蹦現視窗，顯示基礎架構使用者名稱及 API 金鑰。
 
-5. 將認證儲存在環境變數中。
+6. 將認證儲存在環境變數中。
    1. 新增環境變數。
       ```
       export SL_USERNAME=<infrastructure_username>
@@ -310,7 +311,7 @@ subcollection: containers
         ```
       {: pre}
 
-6.  建置並執行 `mkpvyaml` 容器。當您從映像檔執行容器時，會執行 `mkpvyaml.py` Script。該 Script 會將區塊儲存裝置新增至叢集中的每個工作者節點，並授權每個工作者節點存取該區塊儲存裝置。在 Script 結束時，`pv-<cluster_name>.yaml` YAML 檔會產生，您稍後可以使用該檔案在叢集中建立持續性磁區。
+7.  建置並執行 `mkpvyaml` 容器。當您從映像檔執行容器時，會執行 `mkpvyaml.py` Script。該 Script 會將區塊儲存裝置新增至叢集中的每個工作者節點，並授權每個工作者節點存取該區塊儲存裝置。在 Script 結束時，會產生 `pv-<cluster_name>.yaml` YAML 檔案，您稍後可以使用該檔案在叢集中建立持續性磁區。
     1.  建置 `mkpvyaml` 容器。
         ```
         docker build -t mkpvyaml .
@@ -343,7 +344,7 @@ subcollection: containers
         {: screen}
     2.  執行容器，以執行 `mkpvyaml.py` Script。
         ```
-        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
+        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME mkpvyaml
         ```
         {: pre}
 
@@ -411,7 +412,7 @@ subcollection: containers
    ```
    {: pre}
 
-2. 檢閱[決定區塊儲存空間配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)中的步驟 3 和 4，針對您要新增至非 SDS 工作者節點的區塊儲存裝置，選擇類型、大小及 IOPS 數目。
+2. 檢閱[決定區塊儲存空間配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)中的步驟 3 和 4，針對您要新增至非 SDS 工作者節點的區塊儲存裝置，選擇類型、大小及 IOPS 數目。    
 
 3. 在非 SDS 工作者節點所在的相同區域中建立區塊儲存裝置。
 
@@ -501,10 +502,10 @@ subcollection: containers
 
 **開始之前**：
 - 請確定您已[自動](#automatic_block)或[手動](#manual_block)建立原始、未格式化且未裝載的區塊儲存空間至您的非 SDS 工作者節點。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **若要將原始區塊儲存空間連接至非 SDS 工作者節點**，請執行下列動作：
-1. 準備建立 PV。
+1. 準備建立 PV。  
    - **如果您使用 `mkpvyaml` 容器，請執行下列動作：**
      1. 開啟 `pv-<cluster_name>.yaml` 檔案。
         ```
@@ -553,7 +554,7 @@ subcollection: containers
         </thead>
         <tbody>
       	<tr>
-      	<td><code>metadata.name</code></td>
+          <td><code>metadata.name</code></td>
       	<td>輸入 PV 的名稱。</td>
       	</tr>
         <tr>
@@ -581,7 +582,7 @@ subcollection: containers
         <td>針對要在其中連接區塊儲存裝置，且您先前已授權存取您區塊儲存裝置的工作者節點，輸入其專用 IP 位址。</td>
         </tr>
         <tr>
-        <td><code>ibm.io/volID</code></td>
+          <td><code>ibm.io/volID</code></td>
         <td>輸入您先前擷取的區塊儲存空間磁區 ID。</td>
         </tr>
         <tr>

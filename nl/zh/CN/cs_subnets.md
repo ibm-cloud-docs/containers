@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # 配置集群的子网
 {: #subnets}
 
-通过向 Kubernetes 集群添加子网，更改用于 LoadBalancer 服务的可用可移植公共或专用 IP 地址的池。
+通过向 Kubernetes 集群添加子网，更改用于网络负载均衡器 (NLB) 服务的可用可移植公共或专用 IP 地址的池。
 {:shortdesc}
 
 ## 使用定制或现有 IBM Cloud Infrastructure (SoftLayer) 子网创建集群
@@ -36,13 +36,13 @@ subcollection: containers
 创建标准集群时，将自动创建子网。但是，您可以不使用自动供应的子网，而改为使用 IBM Cloud Infrastructure (SoftLayer) 帐户中的现有可移植子网，或者复用已删除集群中的子网。
 {:shortdesc}
 
-使用此选项可在集群除去和创建操作之后保留稳定的静态 IP 地址，也可用于订购更大的 IP 地址块。如果希望改为使用您自己的内部部署网络子网来获取用于集群 Load Balancer 服务的更多可移植专用 IP 地址，请参阅[通过向专用 VLAN 添加用户管理的子网来添加可移植专用 IP](#user_managed)。
+使用此选项可在集群除去和创建操作之后保留稳定的静态 IP 地址，也可用于订购更大的 IP 地址块。如果希望改为使用您自己的内部部署网络子网来获取用于集群网络负载均衡器 (NLB) 服务的更多可移植专用 IP 地址，请参阅[通过向专用 VLAN 添加用户管理的子网来添加可移植专用 IP](#subnet_user_managed)。
 
 可移植公共 IP 地址按月收费。如果在供应集群后除去可移植公共 IP 地址，那么即使只使用了很短的时间，您也仍然必须支付一个月的费用。
 {: note}
 
 开始之前：
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - 要复用不再需要的集群中的子网，请删除不再需要的集群。请立即创建新集群，因为不复用的子网会在 24 小时内删除。
 
    ```
@@ -73,7 +73,7 @@ subcollection: containers
 2. 使用识别到的 VLAN 标识来[创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。包含 `--no-subnet` 标志，以阻止自动创建新的可移植公共 IP 子网和新的可移植专用 IP 子网。
 
     ```
-    ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
+    ibmcloud ks cluster-create --zone dal10 --machine-type b3c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
     如果记不住 VLAN 所在的专区以用于 `--zone` 标志，您可以通过运行 `ibmcloud ks vlans --zone <zone>` 来检查 VLAN 是否位于特定专区中。
@@ -90,7 +90,7 @@ subcollection: containers
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.12.6      Default
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.12.7      Default
     ```
     {: screen}
 
@@ -105,11 +105,11 @@ subcollection: containers
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone     Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.12.6
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.12.7
     ```
     {: screen}
 
-5.  通过指定子网标识，向集群添加子网。使子网可供集群使用后，将创建 Kubernetes 配置映射，其中包含所有可用的可移植公共 IP 地址以供您使用。如果子网的 VLAN 所在的专区中不存在 Ingress ALB，那么会自动使用一个可移植公共 IP 地址和一个可移植专用 IP 地址来为该专区创建公共和专用 ALB。可以使用子网中的其他所有可移植公共和专用 IP 地址来为应用程序创建 LoadBalancer 服务。
+5.  通过指定子网标识，向集群添加子网。使子网可供集群使用后，将创建 Kubernetes 配置映射，其中包含所有可用的可移植公共 IP 地址以供您使用。如果子网的 VLAN 所在的专区中不存在 Ingress ALB，那么会自动使用一个可移植公共 IP 地址和一个可移植专用 IP 地址来为该专区创建公共和专用 ALB。可以使用子网中的其他所有可移植公共和专用 IP 地址来为应用程序创建 NLB 服务。
 
   ```
   ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
@@ -130,7 +130,7 @@ subcollection: containers
 ## 管理现有可移植 IP 地址
 {: #managing_ips}
 
-缺省情况下，4 个可移植公共 IP 地址和 4 个可移植专用 IP 地址可用于通过[创建 LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer)向公用或专用网络公开单个应用程序。要创建 LoadBalancer 服务，您必须至少有 1 个可用且类型正确的可移植 IP 地址。可以查看可用的可移植 IP 地址，或者释放已用的可移植 IP 地址。
+缺省情况下，4 个可移植公共 IP 地址和 4 个可移植专用 IP 地址可用于通过[创建网络负载均衡器 (NLB) 服务](/docs/containers?topic=containers-loadbalancer)向公用或专用网络公开单个应用程序。要创建 NLB 服务，您必须至少有 1 个正确类型的可移植 IP 地址可用。可以查看可用的可移植 IP 地址，或者释放已用的可移植 IP 地址。
 {: shortdesc}
 
 ### 查看可用的可移植公用 IP 地址
@@ -144,17 +144,15 @@ subcollection: containers
   ```
 {: pre}
 
-要仅列出可用于创建负载均衡器的可移植公共 IP 地址，可以使用以下步骤：
+要仅列出可用于创建 NLB 的可移植公共 IP 地址，可以使用以下步骤：
 
 开始之前：
 -  确保您具有对 `default` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 要列出可用的可移植公共 IP 地址，请执行以下操作：
 
-1.  创建名为 `myservice.yaml` 的 Kubernetes 服务配置文件，并使用哑元负载均衡器 IP 地址定义类型为 `LoadBalancer` 的服务。以下示例使用 IP 地址 1.1.1.1 作为负载均衡器 IP 地址。
-
-将 `<zone>` 替换为要在其中检查可用 IP 的专区。
+1.  创建名为 `myservice.yaml` 的 Kubernetes 服务配置文件，并使用哑元 NLB IP 地址定义类型为 `LoadBalancer` 的服务。以下示例使用 IP 地址 1.1.1.1 作为 NLB IP 地址。将 `<zone>` 替换为要在其中检查可用 IP 的专区。
 
     ```
     apiVersion: v1
@@ -193,7 +191,7 @@ subcollection: containers
     ```
     {: pre}
 
-    由于 Kubernetes 主节点在 Kubernetes 配置映射中找不到指定的负载均衡器 IP 地址，因此创建此服务失败。运行此命令时，可能会看到错误消息以及该集群的可用公共 IP 地址列表。
+    由于 Kubernetes 主节点在 Kubernetes 配置映射中找不到指定的 NLB IP 地址，因此创建此服务失败。运行此命令时，可能会看到错误消息以及该集群的可用公共 IP 地址列表。
 
     ```
     Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IP addresses are available: <list_of_IP_addresses>
@@ -206,14 +204,14 @@ subcollection: containers
 ### 释放使用的 IP 地址
 {: #free}
 
-可以通过删除正在使用可移植 IP 地址的 LoadBalancer 服务，释放该已用可移植 IP 地址。
+可以通过删除正在使用可移植 IP 地址的网络负载均衡器 (NLB) 服务，释放已用可移植 IP 地址。
 {:shortdesc}
 
 开始之前：
 -  确保您具有对 `default` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-要删除负载均衡器，请执行以下操作：
+要删除 NLB，请执行以下操作：
 
 1.  列出集群中的可用服务。
 
@@ -235,7 +233,7 @@ subcollection: containers
 ## 添加可移植 IP 地址
 {: #adding_ips}
 
-缺省情况下，4 个可移植公共 IP 地址和 4 个可移植专用 IP 地址可用于通过[创建 LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer)向公用或专用网络公开单个应用程序。要创建 4 个以上的公共负载均衡器或 4 个以上的专用负载均衡器，可以通过向集群添加网络子网来获取更多可移植 IP 地址。
+缺省情况下，4 个可移植公共 IP 地址和 4 个可移植专用 IP 地址可用于通过[创建网络负载均衡器 (NLB) 服务](/docs/containers?topic=containers-loadbalancer)向公用或专用网络公开单个应用程序。要创建 4 个以上的公共 NLB 或 4 个以上的专用 NLB，可以通过向集群添加网络子网来获取更多可移植 IP 地址。
 {: shortdesc}
 
 使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containerlong_notm}} 外部的其他用途。
@@ -247,12 +245,12 @@ subcollection: containers
 ### 通过订购更多子网来添加可移植 IP
 {: #request}
 
-通过在 IBM Cloud Infrastructure (SoftLayer) 帐户中创建新子网，并使其可用于指定的集群，可以获取用于 LoadBalancer 服务的更多可移植 IP。
+通过在 IBM Cloud Infrastructure (SoftLayer) 帐户中创建新子网，并使其可用于指定的集群，可以获取用于 NLB 服务的更多可移植 IP。
 {:shortdesc}
 
 开始之前：
 -  确保您具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **操作员**或**管理员**平台角色](/docs/containers?topic=containers-users#platform)。
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 要订购子网，请执行以下操作：
 
@@ -279,7 +277,7 @@ subcollection: containers
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>将 <code>&lt;subnet_size&gt;</code> 替换为要从可移植子网中添加的 IP 地址数。接受的值为 8、16、32 或 64。<p class="note"> 添加子网的可移植 IP 地址时，会使用 3 个 IP 地址来建立集群内部联网。所以不能将这 3 个 IP 地址用于应用程序负载均衡器或用于创建 LoadBalancer 服务。例如，如果请求 8 个可移植公共 IP 地址，那么可以使用其中 5 个地址向公众公开应用程序。</p> </td>
+    <td>将 <code>&lt;subnet_size&gt;</code> 替换为要从可移植子网中添加的 IP 地址数。接受的值为 8、16、32 或 64。<p class="note"> 添加子网的可移植 IP 地址时，会使用 3 个 IP 地址来建立集群内部联网。所以不能将这 3 个 IP 地址用于 Ingress 应用程序负载均衡器 (ALB) 或用于创建网络负载均衡器 (NLB) 服务。例如，如果请求 8 个可移植公共 IP 地址，那么可以使用其中 5 个地址向公众公开应用程序。</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
@@ -310,9 +308,9 @@ subcollection: containers
 
 
 ### 通过向专用 VLAN 添加用户管理的子网来添加可移植专用 IP
-{: #user_managed}
+{: #subnet_user_managed}
 
-通过使内部部署网络中的子网可用于集群，可以获取用于 LoadBalancer 服务的更多可移植专用 IP。
+通过使内部部署网络中的子网可用于集群，可以获取用于网络负载均衡器 (NLB) 服务的更多可移植专用 IP。
 {:shortdesc}
 
 要改为复用 IBM Cloud Infrastructure (SoftLayer) 帐户中的现有可移植子网吗？请参阅[使用定制或现有 IBM Cloud Infrastructure (SoftLayer) 子网创建集群](#subnets_custom)。
@@ -327,7 +325,7 @@ subcollection: containers
 - 配置进出外部子网的网络流量的路径。
 - 确认内部部署数据中心网关与专用网络虚拟路由器设备或与集群中运行的 strongSwan VPN 服务之间是否具有 VPN 连接。有关更多信息，请参阅[设置 VPN 连接](/docs/containers?topic=containers-vpn)。
 -  确保您具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **操作员**或**管理员**平台角色](/docs/containers?topic=containers-users#platform)。
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 
 要从内部部署网络添加子网，请执行以下操作：
@@ -381,7 +379,7 @@ Subnet VLANs
 
 4. [启用同一 VLAN 上子网之间的路由](#subnet-routing)。
 
-5. 添加[专用 LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer)或启用[专用 Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress)，以通过专用网络访问应用程序。要使用已添加子网中的专用 IP 地址，必须指定子网 CIDR 中的 IP 地址。否则，将在专用 VLAN 上的 IBM Cloud Infrastructure (SoftLayer) 子网或用户提供的子网中随机选择 IP 地址。
+5. 添加[专用网络负载均衡器 (NLB) 服务](/docs/containers?topic=containers-loadbalancer)或启用[专用 Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress)，以通过专用网络访问应用程序。要使用已添加子网中的专用 IP 地址，必须指定子网 CIDR 中的 IP 地址。否则，将在专用 VLAN 上的 IBM Cloud Infrastructure (SoftLayer) 子网或用户提供的子网中随机选择 IP 地址。
 
 <br />
 
@@ -389,7 +387,7 @@ Subnet VLANs
 ## 管理子网路由
 {: #subnet-routing}
 
-如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 请查看以下场景，其中还需要 VLAN 生成。
 
@@ -409,10 +407,10 @@ Subnet VLANs
 ### 管理网关设备的子网路由
 {: #vra-routing}
 
-创建集群时，会在集群连接到的 VLAN 上订购可移植公用子网和可移植专用子网。这些子网提供用于 Ingress 和负载均衡器联网服务的 IP 地址。
+创建集群时，会在集群连接到的 VLAN 上订购可移植公用子网和可移植专用子网。这些子网提供用于 Ingress 应用程序负载均衡器 (ALB) 和网络负载均衡器 (NLB) 服务的 IP 地址。
 {: shortdesc}
 
-但是，如果您有现有路由器设备（例如，[虚拟路由器设备 (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra#about-the-vra)），那么不会在路由器上配置集群连接到的这些 VLAN 中新添加的可移植子网。要使用 Ingress 或负载均衡器联网服务，必须通过[启用 VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)确保网络设备可以在同一 VLAN 上的不同子网之间进行路由。
+但是，如果您有现有路由器设备（例如，[虚拟路由器设备 (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra#about-the-vra)），那么不会在路由器上配置集群连接到的这些 VLAN 中新添加的可移植子网。要使用 NLB 或 Ingress ALB，必须通过[启用 VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)确保网络设备可以在同一 VLAN 上的不同子网之间进行路由。
 
 要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 {: tip}

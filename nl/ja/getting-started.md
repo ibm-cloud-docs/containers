@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -30,16 +30,6 @@ Kubernetes クラスターで稼動する Docker コンテナーに可用性の�
 {:shortdesc}
 
 コンテナーは、環境間でアプリをシームレスに移動できるようにアプリとそのすべての従属物をパッケージ化するための標準的な手段です。 仮想マシンとは異なり、コンテナーはオペレーティング・システムをバンドルしません。 アプリのコード、ランタイム、システム・ツール、ライブラリー、設定値のみがコンテナー内にパッケージされます。 コンテナーは、仮想マシンより軽量で移植しやすく、効率的です。
-
-
-開始するための以下のオプションをクリックしてください。
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="{{site.data.keyword.containerlong_notm}} をすぐに開始するにはこのアイコンをクリックします。{{site.data.keyword.Bluemix_dedicated_notm}} の場合は、このアイコンをクリックするとオプションが表示されます。" style="width:440px;" />
-<map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="{{site.data.keyword.Bluemix_notm}} の Kubernetes クラスターの概説" title="{{site.data.keyword.Bluemix_notm}} の Kubernetes クラスターの概説" shape="rect" coords="-7, -8, 108, 211" /><area href="/docs/containers?topic=containers-cs_cli_install" alt="CLI をインストールします。" title="CLI をインストールします。" shape="rect" coords="155, -1, 289, 210" />
-<area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} クラウド環境" title="{{site.data.keyword.Bluemix_notm}} クラウド環境" shape="rect" coords="326, -10, 448, 218" />
-</map>
-
 
 ## クラスターの概説
 {: #clusters_gs}
@@ -75,7 +65,7 @@ Kubernetes クラスターで稼動する Docker コンテナーに可用性の�
 **次の作業**</br>
 期限が切れる前に、フリー・クラスターでさまざまな機能を試してください。
 
-* [最初の {{site.data.keyword.containerlong_notm}} チュートリアル](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)で、Kubernetes クラスターの作成、CLI のインストール、専用レジストリーの作成、クラスター環境のセットアップ、クラスターへのサービスの追加について理解します。
+* [最初の {{site.data.keyword.containerlong_notm}} チュートリアル](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)で、Kubernetes クラスターの作成、CLI のインストールまたは Kubernetes Terminal の使用、専用レジストリーの作成、クラスター環境のセットアップ、クラスターへのサービスの追加について理解します。
 * そのまま、[2 つ目の{{site.data.keyword.containerlong_notm}} チュートリアル](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)も行い、クラスターにアプリをデプロイする方法について学習します。
 * 可用性を高めるために、複数のノードを使用する[標準クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
 

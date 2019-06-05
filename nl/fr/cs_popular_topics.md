@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,34 @@ Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}
 
 
 
+## Rubriques les plus consultées en avril 2019
+{: #apr19}
+
+<table summary="Ce tableau présente les rubriques les plus consultées. La lecture des lignes s'effectue de gauche à droite, avec la date indiquée dans la première colonne, le titre de la fonction dans la deuxième colonne et la description dans la troisième colonne.">
+<caption>Rubriques les plus consultées pour les conteneurs et les clusters Kubernetes en avril 2019</caption>
+<thead>
+<th>Date</th>
+<th>Titre</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>15 avril 2019</td>
+<td>[Enregistrement d'un nom d'hôte d'équilibreur de charge de réseau (NLB)](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>Après avoir configuré des équilibreurs de charge de réseau publics (NLB) afin d'exposer vos applications sur Internet, vous pouvez à présent créer des entrées DNS pour les adresses IP NLB en créant des noms d'hôte. {{site.data.keyword.Bluemix_notm}} se charge de générer et gérer le certificat SSL d'assistant pour le nom d'hôte. Vous pouvez également configurer des moniteurs TCP/HTTP(S) afin d'effectuer un diagnostic d'intégrité des adresses IP NLB derrière chaque nom d'hôte.</td>
+</tr>
+<tr>
+<td>8 avril 2019</td>
+<td>[Terminal Kubernetes dans votre navigateur Web (bêta)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>Si vous utilisez le tableau de bord de cluster dans la console {{site.data.keyword.Bluemix_notm}} pour gérer vos clusters mais que vous souhaitez effectuer rapidement des modifications de configuration plus évoluées, vous pouvez désormais exécuter des commandes CLI directement à partir de votre navigateur Web dans le terminal Kubernetes. Sur la page de détails d'un cluster, lancez le terminal Kubernetes en cliquant sur le bouton **Terminal**. Notez que le terminal Kubernetes est publié en tant que module complémentaire bêta et qu'il n'est pas prévu de l'utiliser dans des clusters de production. </td>
+</tr>
+<tr>
+<td>4 avril 2019</td>
+<td>[Maîtres à haute disponibilité désormais présents à Sydney](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>Lorsque vous [créez un cluster](/docs/containers?topic=containers-clusters#clusters_ui) dans une agglomération à zones multiples, y compris Sydney, les répliques de votre maître Kubernetes sont réparties entre les différentes zones à des fins de haute disponibilité. </td>
+</tr>
+</tbody></table>
+
 ## Rubriques les plus consultées en mars 2019
 {: #mar19}
 
@@ -47,13 +75,13 @@ Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}
 <td>21 mars 2019</td>
 <td>Introduction des noeuds finaux de service privés pour votre maître cluster Kubernetes</td>
 <td>Par défaut, {{site.data.keyword.containerlong_notm}} configure votre cluster avec accès sur un VLAN public et un VLAN privé. Auparavant, si vous souhaitiez disposer d'un [cluster avec VLAN privé uniquement](/docs/containers?topic=containers-plan_clusters#private_clusters), il vous fallait configurer un dispositif de passerelle pour connecter les noeuds worker du cluster au maître. Vous pouvez désormais utiliser le noeud final de service privé. Lorsque le noeud final de service privé est activé, tout le trafic entre les noeuds worker et le maître s'effectue sur le réseau privé, sans nécessiter de dispositif de passerelle. En plus de cette sécurité renforcée, le trafic entrant et sortant sur le réseau privé est [illimité et gratuit ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/bandwidth). Vous pouvez toujours garder un noeud final de service public pour accéder à votre maître Kubernetes sur Internet, par exemple pour exécuter des commandes `kubectl` sans être sur le réseau privé.<br><br>
-Pour utiliser des noeuds finaux de service privés, vous devez activer la fonction [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) et les [noeuds finaux de service](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) pour votre compte d'infrastructure IBM Cloud (SoftLayer). Votre cluster doit exécuter Kubernetes version 1.11 ou ultérieure. S'il exécute une version plus ancienne de Kubernetes, [mettez-le à jour pour passer au moins à la version 1.11](/docs/containers?topic=containers-update#update). Pour plus d'informations, cliquez sur les liens suivants :<ul>
+Pour utiliser des noeuds finaux de service privés, vous devez activer la fonction [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) et les [noeuds finaux de service](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) pour votre compte d'infrastructure IBM Cloud (SoftLayer). Votre cluster doit exécuter Kubernetes version 1.11 ou ultérieure. S'il exécute une version plus ancienne de Kubernetes, [mettez-le à jour pour passer au moins à la version 1.11](/docs/containers?topic=containers-update#update). Pour plus d'informations, cliquez sur les liens suivants :<ul>
 <li>[Description de la communication entre le maître et les noeuds worker avec des noeuds finaux de service](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[Configuration du noeud final de service privé](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[Passage d'un noeud final de service public à un noeud final de service privé](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>Si vous disposez d'un pare-feu sur le réseau privé : [Ajout d'adresses IP privées pour {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}} et d'autres services {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
 </ul>
-<p class="important">Si vous passez à un cluster avec noeud final de service privé uniquement, assurez-vous que votre cluster peut toujours communiquer avec d'autres services {{site.data.keyword.Bluemix_notm}} que vous utilisez. Le [stockage de fichiers NFS](/docs/containers?topic=containers-file_storage#file_storage), le [stockage SDS Portworx](/docs/containers?topic=containers-portworx#portworx) et le [programme de mise à l'échelle automatique de cluster (cluster autoscaler)](/docs/containers?topic=containers-ca#ca) ne prennent pas en charge le noeud final de service privé uniquement. Utilisez un cluster disposant à la fois de noeuds finaux de service public et privé.</p>
+<p class="important">Si vous passez à un cluster avec noeud final de service privé uniquement, assurez-vous que votre cluster peut toujours communiquer avec d'autres services {{site.data.keyword.Bluemix_notm}} que vous utilisez. Le [stockage SDS Portworx](/docs/containers?topic=containers-portworx#portworx) et le  [programme de mise à l'échelle automatique de cluster](/docs/containers?topic=containers-ca#ca) ne prennent pas en charge le noeud final de service privé uniquement. Utilisez un cluster disposant à la fois de noeuds finaux de service public et privé. Le [stockage de fichiers basé sur NFS](/docs/containers?topic=containers-file_storage#file_storage) est pris en charge si votre cluster exécute Kubernetes version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 ou plus. </p>
 </td>
 </tr>
 <tr>
@@ -95,7 +123,7 @@ Besoin d'aide ou commentaires sur le programme de mise à l'échelle automatique
 <tr>
 <td>6 février 2019</td>
 <td>[Knative sur {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-knative_tutorial)</td>
-<td>Knative est une plateforme open source qui étend les capacités de Kubernetes pour vous aider à créer des applications modernes, conteneurisées, axées sur la source et sans serveur, en plus de votre cluster Kubernetes. Managed Knative on {{site.data.keyword.containerlong_notm}} est un module complémentaire géré qui intègre Knative et Istio directement avec votre cluster Kubernetes. Les versions de Knative et d'Istio dans le module complémentaire sont testées par IBM et prises en charge pour être utilisées dans {{site.data.keyword.containerlong_notm}}. </td>
+<td>Knative est une plateforme open source qui étend les capacités de Kubernetes pour vous aider à créer des applications modernes, conteneurisées, axées sur la source et sans serveur, en plus de votre cluster Kubernetes. Managed Knative on {{site.data.keyword.containerlong_notm}} est un module complémentaire géré qui intègre Knative et Istio directement avec votre cluster Kubernetes. Les versions de Knative et d'Istio dans le module complémentaire sont testées par IBM et prises en charge pour être utilisées dans {{site.data.keyword.containerlong_notm}}.</td>
 </tr>
 </tbody></table>
 
@@ -179,8 +207,8 @@ Besoin d'aide ou commentaires sur le programme de mise à l'échelle automatique
 </tr>
 <tr>
 <td>7 novembre</td>
-<td>Equilibreur de charge 2.0 (bêta)</td>
-<td>Vous pouvez désormais choisir entre un [équilibreur de charge 1.0 ou 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) pour exposer vos applications de cluster au public de manière sécurisée.</td>
+<td>Equilibreur de charge de réseau 2.0 (bêta)</td>
+<td>Vous pouvez désormais choisir entre un [NLB 1.0 ou 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) pour exposer vos applications de cluster au public de manière sécurisée.</td>
 </tr>
 <tr>
 <td>7 novembre</td>
@@ -189,7 +217,7 @@ Besoin d'aide ou commentaires sur le programme de mise à l'échelle automatique
 </tr>
 <tr>
 <td>7 novembre</td>
-<td>Maîtres à haute disponibilité dans les clusters exécutant Kubernetes version 1.10</td>
+<td>Maîtres à haute disponibilité</td>
 <td>Des maîtres à haute disponibilité sont disponibles pour les clusters qui exécutent Kubernetes version 1.10. Tous les avantages décrits dans l'entrée précédente pour les clusters 1.11 s'appliquent aux clusters 1.10, ainsi que les [étapes de préparation](/docs/containers?topic=containers-cs_versions#110_ha-masters) que vous devez suivre.</td>
 </tr>
 <tr>
@@ -223,7 +251,7 @@ Besoin d'aide ou commentaires sur le programme de mise à l'échelle automatique
 <tr>
 <td>22 octobre</td>
 <td>[Nouvel emplacement à zones multiples pour Londres, `lon05`](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>La métropole de Londres à zones multiples remplace la zone `lon02` par la nouvelle zone `lon05` qui comporte plus de ressources d'infrastructure que `lon02`. Créez des clusters à zones multiples dans `lon05`. Les clusters existants de la zone `lon02` sont pris en charge mais les nouveaux clusters à zones multiples doivent dorénavant utiliser `lon05`.</td>
+<td>L'agglomération de Londres à zones multiples remplace la zone `lon02` par la nouvelle zone `lon05` qui comporte plus de ressources d'infrastructure que `lon02`. Créez des clusters à zones multiples dans `lon05`. Les clusters existants de la zone `lon02` sont pris en charge mais les nouveaux clusters à zones multiples doivent dorénavant utiliser `lon05`.</td>
 </tr>
 <tr>
 <td>5 octobre</td>
@@ -309,7 +337,7 @@ Besoin d'aide ou commentaires sur le programme de mise à l'échelle automatique
 <tr>
 <td>10 juillet</td>
 <td>Introduction des clusters à zones multiples</td>
-<td>Vous voulez améliorer la disponibilité de votre cluster ? Vous pouvez désormais étendre votre cluster dans plusieurs zones de certaines régions métropolitaines. Pour plus d'informations, voir [Création de clusters à zones multiples dans {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_clusters#multizone).</td>
+<td>Vous voulez améliorer la disponibilité de votre cluster ? Vous pouvez désormais étendre votre cluster dans plusieurs zones de certaines agglomérations. Pour plus d'informations, voir [Création de clusters à zones multiples dans {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_clusters#multizone).</td>
 </tr>
 </tbody></table>
 
@@ -425,7 +453,7 @@ configurer des politiques de sécurité de pod pour autoriser certaines personne
 </tr>
 <tr>
 <td>14 mars</td>
-<td>[Connexion sécurisée avec {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-integrations#appid)</td>
+<td>[Connexion sécurisée avec {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-supported_integrations#appid)</td>
 <td>Améliorez vos applications qui s'exécutent dans {{site.data.keyword.containerlong_notm}} en obligeant les utilisateurs à se connecter.</td>
 </tr>
 <tr>

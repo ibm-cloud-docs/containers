@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, helm
 
@@ -167,7 +167,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td>可以使用 <a href="/docs/services/certificate-manager?topic=certificate-manager-gettingstarted" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 来存储和管理应用程序的 SSL 证书。有关更多信息，请参阅 <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+<td>可以使用 <a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 来存储和管理应用程序的 SSL 证书。有关更多信息，请参阅 <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (Beta)</td>
@@ -175,7 +175,7 @@ subcollection: containers
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>设置您自己的安全 Docker 映像存储库，在其中可以安全地存储映像并在集群用户之间共享这些映像。有关更多信息，请参阅 <a href="/docs/services/Registry?topic=registry-index" target="_blank">{{site.data.keyword.registrylong}} 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+  <td>设置您自己的安全 Docker 映像存储库，在其中可以安全地存储映像并在集群用户之间共享这些映像。有关更多信息，请参阅 <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -213,7 +213,7 @@ subcollection: containers
 </tr>
 <tr>
   <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#GettingStarted) 是一种持久的高性能 iSCSI 存储器，可以使用 Kubernetes 持久卷 (PV) 添加到应用程序。使用块存储器可在单个专区中部署有状态的应用程序，或者用于部署为单个 pod 的高性能存储器。有关如何在集群中供应块存储器的更多信息，请参阅[在 {{site.data.keyword.Bluemix_notm}} Block Storage 上存储数据](/docs/containers?topic=containers-block_storage#block_storage)。</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) 是一种持久的高性能 iSCSI 存储器，可以使用 Kubernetes 持久卷 (PV) 添加到应用程序。使用块存储器可在单个专区中部署有状态的应用程序，或者用于部署为单个 pod 的高性能存储器。有关如何在集群中供应块存储器的更多信息，请参阅[在 {{site.data.keyword.Bluemix_notm}} Block Storage 上存储数据](/docs/containers?topic=containers-block_storage#block_storage)。</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -221,7 +221,7 @@ subcollection: containers
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-gettingstarted#gettingstarted) 是一种基于 NFS 的持久、快速、灵活的网络连接文件存储器，可以使用 Kubernetes 持久卷添加到应用程序。您可以在具有不同 GB 大小和 IOPS 的预定义存储层之间进行选择，以满足工作负载的需求。有关如何在集群中供应文件存储器的更多信息，请参阅[在 {{site.data.keyword.Bluemix_notm}} File Storage 上存储数据](/docs/containers?topic=containers-file_storage#file_storage)。</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) 是一种基于 NFS 的持久、快速、灵活的网络连接文件存储器，可以使用 Kubernetes 持久卷添加到应用程序。您可以在具有不同 GB 大小和 IOPS 的预定义存储层之间进行选择，以满足工作负载的需求。有关如何在集群中供应文件存储器的更多信息，请参阅[在 {{site.data.keyword.Bluemix_notm}} File Storage 上存储数据](/docs/containers?topic=containers-file_storage#file_storage)。</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -293,7 +293,7 @@ subcollection: containers
      ```
      {: screen}
 
-  - **{{site.data.keyword.Bluemix_notm}}支持 IAM 的服务：**
+  - **{{site.data.keyword.Bluemix_notm}} 启用 IAM 的服务：**
      ```
     ibmcloud resource service-instances
     ```
@@ -314,7 +314,7 @@ subcollection: containers
         ```
      {: pre}
 
-4.  使用 `ibmcloud ks cluster-service-bind` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)将服务添加到集群。对于支持 {{site.data.keyword.Bluemix_notm}} IAM 的服务，确保使用先前创建的 Cloud Foundry 别名。
+4.  使用 `ibmcloud ks cluster-service-bind` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)将服务添加到集群。对于 {{site.data.keyword.Bluemix_notm}} 启用 IAM 的服务，确保使用先前创建的 Cloud Foundry 别名。
     对于启用 IAM 的服务，您还可以使用缺省**写入者**服务访问角色，或者使用 `--role` 标志来指定服务访问角色。以下命令将为服务实例创建服务密钥，或者可以包含 `--key` 标志以使用现有服务密钥凭证。如果使用 `--key` 标志，请不要包含 `--role` 标志。
     ```
     ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
@@ -683,7 +683,7 @@ subcollection: containers
 [Helm ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://helm.sh) 是 Kubernetes 软件包管理器。可以创建 Helm 图表或使用预先存在的 Helm 图表来定义、安装和升级在 {{site.data.keyword.containerlong_notm}} 集群中运行的复杂 Kubernetes 应用程序。
 {:shortdesc}
 
-要部署 Helm chart，必须在本地计算机上安装 Helm CLI，并在集群中安装 Helm 服务器 Tiller。Tiller 的映像存储在公共 Google Container Registry 中。要在 Tiller 安装期间访问该映像，集群必须允许与公共 Google Container Registry 的公用网络连接。启用了公共服务端点的集群可以自动访问该映像。使用定制防火墙进行保护的专用集群或仅启用了专用服务端点的集群不允许访问 Tiller 映像。您可以改为[将映像拉取到本地计算机，并将映像推送到 {{site.data.keyword.registryshort_notm}} 中的名称空间](#private_local_tiller)，或者[安装不使用 Tiller 的 Helm chart](#private_install_without_tiller)。
+要部署 Helm chart，必须在本地计算机上安装 Helm CLI，并在集群中安装 Helm 服务器 Tiller。Tiller 的映像存储在公共 Google Container Registry 中。要在 Tiller 安装期间访问该映像，集群必须允许与公共 Google Container Registry 的公用网络连接。启用了公共服务端点的集群可以自动访问该映像。使用定制防火墙进行保护的专用集群或仅启用了专用服务端点的集群不允许访问 Tiller 映像。您可以改为[将映像拉取到本地计算机，并将映像推送到 {{site.data.keyword.registryshort_notm}} 中的名称空间](#private_local_tiller)，或者[安装 Helm chart（不使用 Tiller）](#private_install_without_tiller)。
 {: note}
 
 ### 在具有公共访问权的集群中设置 Helm
@@ -712,7 +712,7 @@ subcollection: containers
 4.  验证安装是否成功。
     1.  验证 Tiller 服务帐户是否已创建。
         ```
-        kubectl get serviceaccount -n kube-system | grep tiller
+        kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
 
@@ -836,14 +836,14 @@ subcollection: containers
    {: pre}
 
    ```
-   helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
-   ```
+    helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
+    ```
    {: pre}
 
 10. 更新存储库以检索所有 Helm chart 的最新版本。
     ```
-    helm repo update
-    ```
+        helm repo update
+        ```
     {: pre}
 
 11. 列出 {{site.data.keyword.Bluemix_notm}} 存储库中当前可用的 Helm 图表。
@@ -859,7 +859,7 @@ subcollection: containers
 
 12. 确定要安装的 Helm chart，并遵循该 Helm chart `README` 中的指示信息在集群中安装 Helm chart。
 
-### 专用集群：安装不使用 Tiller 的 Helm chart
+### 专用集群：安装 Helm chart（不使用 Tiller）
 {: #private_install_without_tiller}
 
 如果您不想在专用集群中安装 Tiller，那么可以使用 `kubectl` 命令手动创建 Helm chart YAML 文件并应用这些文件。
@@ -954,7 +954,7 @@ subcollection: containers
 {: #helm_links}
 
 * 要使用 strongSwan Helm chart，请参阅[使用 strongSwan IPSec VPN 服务 Helm chart 设置 VPN 连接](/docs/containers?topic=containers-vpn#vpn-setup)。
-* 在控制台中查看可在 [Helm chart 目录 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts) 中与 {{site.data.keyword.Bluemix_notm}} 配合使用的可用 Helm chart。
+* 在控制台中查看可在 [Helm chart 目录 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) 中与 {{site.data.keyword.Bluemix_notm}} 配合使用的可用 Helm chart。
 * 在 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 中了解有关用于设置和管理 Helm 图表的 Helm 命令的更多信息。
 * 了解有关如何[利用 Kubernetes Helm 图表提高部署速度 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/) 的更多信息。
 
@@ -966,7 +966,7 @@ Weave Scope 提供了 Kubernetes 集群内资源（包括服务、pod、容器�
 
 开始之前：
 
--   切勿在公共因特网上公开您的集群信息。完成以下步骤以安全地部署 Weave Scope 并在本地从 Web 浏览器对其进行访问。
+-   切勿在公用因特网上公开您的集群信息。完成以下步骤以安全地部署 Weave Scope 并在本地从 Web 浏览器对其进行访问。
 -   如果还没有标准集群，请[创建标准集群](/docs/containers?topic=containers-clusters#clusters_ui)。Weave Scope 可以是 CPU 密集型，尤其是应用程序。请对更大型的标准集群（而不是免费集群）运行 Weave Scope。
 -  确保您对所有名称空间具有[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 服务角色](/docs/containers?topic=containers-users#platform)。
 -   [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。

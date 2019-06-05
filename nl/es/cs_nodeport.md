@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Exposición de apps con NodePorts
+# Prueba de acceso a las apps con NodePorts
 {: #nodeport}
 
 Puede poner la app contenerizada a disponibilidad pública en Internet utilizando la dirección IP pública de cualquier nodo trabajador de un clúster de Kubernetes y exponiendo un NodePort. Utilice esta opción para pruebas en {{site.data.keyword.containerlong}} y para un acceso público de poco tiempo.
@@ -38,7 +38,7 @@ Exponga un puerto público en el nodo trabajador y utilice la dirección IP púb
 {:shortdesc}
 
 Cuando expone una app creando un servicio de Kubernetes de tipo NodePort, se asigna al servicio
-un NodePort comprendido entre 30000 y 32767 y una dirección IP de clúster interno. El servicio NodePort sirve como punto de entrada externo para las solicitudes entrantes para la app. El NodePort asignado se expone de forma pública en los valores de `kubeproxy` de cada nodo trabajador del clúster. Cada nodo trabajador empieza a escuchar en el NodePort asignado para detectar solicitudes entrantes para el servicio. Para acceder al servicio desde Internet, puede utilizar la dirección IP pública de cualquier nodo trabajador asignado durante la creación del clúster y el NodePort en el formato `<IP_address>:<nodeport>`. Además de la dirección IP pública, está disponible un servicio NodePort en la dirección IP privada de un nodo trabajador.
+un NodePort comprendido entre 30000 y 32767 y una dirección IP de clúster interna. El servicio NodePort sirve como punto de entrada externo para las solicitudes entrantes para la app. El NodePort asignado se expone de forma pública en los valores de `kubeproxy` de cada nodo trabajador del clúster. Cada nodo trabajador empieza a escuchar en el NodePort asignado para detectar solicitudes entrantes para el servicio. Para acceder al servicio desde Internet, puede utilizar la dirección IP pública de cualquier nodo trabajador asignado durante la creación del clúster y el NodePort en el formato `<IP_address>:<nodeport>`. Además de la dirección IP pública, está disponible un servicio NodePort en la dirección IP privada de un nodo trabajador.
 
 El siguiente diagrama muestra cómo se dirige la comunicación desde Internet a una app cuando se configura un servicio NodePort:
 
@@ -46,13 +46,13 @@ El siguiente diagrama muestra cómo se dirige la comunicación desde Internet a 
 
 1. Se envía una solicitud a la app mediante la dirección IP pública del nodo trabajador y el NodePort del nodo trabajador.
 
-2. La solicitud se reenvía automáticamente al puerto y a la dirección IP del clúster interno del servicio NodePort. Solo se puede acceder a la dirección IP del clúster interno dentro del clúster.
+2. La solicitud se reenvía automáticamente al puerto y a la dirección IP de clúster interna del servicio NodePort. Solo se puede acceder a la dirección IP de clúster interna dentro del clúster.
 
 3. `kube-proxy` direcciona la solicitud al servicio NodePort de Kubernetes para la app.
 
 4. La solicitud se reenvía a la dirección IP privada del pod en el que se ha desplegado la app. Si se despliegan varias instancias de app en el clúster, el servicio NodePort direcciona las solicitudes entre los pods de app.
 
-La dirección IP pública del nodo trabajador no es permanente. Cuando un nodo trabajador se elimina o se vuelve a crear, se le asigna una nueva dirección IP pública. Puede utilizar el servicio NodePort para probar el acceso público para la app o cuando se necesita acceso público solo durante un breve periodo de tiempo. Si necesita una dirección IP pública estable y más disponibilidad para el servicio, exponga la app utilizando un [servicio LoadBalancer](/docs/containers?topic=containers-loadbalancer) o [Ingress](/docs/containers?topic=containers-ingress).
+La dirección IP pública del nodo trabajador no es permanente. Cuando un nodo trabajador se elimina o se vuelve a crear, se le asigna una nueva dirección IP pública. Puede utilizar el servicio NodePort para probar el acceso público para la app o cuando se necesita acceso público solo durante un breve periodo de tiempo. Si necesita una dirección IP pública estable y más disponibilidad para el servicio, exponga la app utilizando un [servicio de equilibrador de carga de red (NLB)](/docs/containers?topic=containers-loadbalancer) o [Ingress](/docs/containers?topic=containers-ingress).
 {: note}
 
 <br />
@@ -138,8 +138,8 @@ Cuando se despliegue la app, puede utilizar la dirección IP pública de cualqui
 
     ```
     ID                                                Public IP   Private IP    Size     State    Status
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u3c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u3c.2x4  normal   Ready
     ```
     {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks 
 
@@ -135,7 +135,7 @@ Per impedire l'esecuzione di altri carichi di lavoro sui nodi di lavoro edge:
   {: pre}
   Adesso, solo i pod con la tolleranza `dedicated=edge` vengono distribuiti ai tuoi nodi di lavoro edge.
 
-3. Se scegli di [abilitare la conservazione dell'IP di origine per un servizio del programma di bilanciamento del carico 1.0 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assicurati che i pod dell'applicazione siano pianificati sui nodi di lavoro edge [aggiungendo l'affinità del nodo edge ai pod dell'applicazione](/docs/containers?topic=containers-loadbalancer#edge_nodes). I pod dell'applicazione devono essere pianificati nei nodi edge per ricevere le richieste in entrata.
+3. Se scegli di [abilitare la conservazione dell'IP di origine per un servizio del programma di bilanciamento del carico 1.0 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assicurati che i pod dell'applicazione siano pianificati sui nodi di lavoro edge [aggiungendo l'affinità del nodo edge ai pod dell'applicazione](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). I pod dell'applicazione devono essere pianificati nei nodi edge per ricevere le richieste in entrata.
 
 4. Per rimuovere una corruzione, immetti questo comando.
     ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -68,8 +68,7 @@ Os desenvolvedores de software e administradores da rede que estão implementand
 ## Pré-requisitos
 {: #apps_prereqs}
 
-* [ Tutorial: criando clusters do Kubernetes ](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* Instale o  [ plug-in container-registry ](/docs/services/Registry?topic=registry-index#registry_cli_install).
+[Tutorial: criando clusters do Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## Lição 1: implementando apps de instância única em clusters do Kubernetes
@@ -237,11 +236,11 @@ imagem. Para obter o prefixo de região para a região em que você está atualm
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 
-10. Abra um navegador e verifique o app com a URL a seguir: `http://<IP_address>:<NodePort>`. Com os valores de exemplo, a URL é `http://169.xx.xxx.xxx:30872`. Ao inserir essa URL em um navegador, é possível ver o texto a seguir.
+10. Abra um navegador e consulte o aplicativo com a URL a seguir: `http://<IP_address>:<NodePort>`. Com os valores de exemplo, a URL é `http://169.xx.xxx.xxx:30872`. Ao inserir essa URL em um navegador, é possível ver o texto a seguir.
 
     ```
     Hello world! Seu app está funcionando em um contêiner!
@@ -523,7 +522,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
         ```
         {: codeblock}
 
-    2.  Na seção de volumes da implementação do Watson, atualize o nome do segredo do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que você criou no [tutorial de criação do cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) anterior. Montando o segredo do Kubernetes como um volume para a sua implementação, você torna a chave de API do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) disponível para o contêiner que está em execução em seu pod. Os componentes do app do {{site.data.keyword.watson}} neste tutorial são configurados para consultar a chave de API usando o caminho de montagem do volume.
+    2.  Na seção de volumes da implementação `watson-pod` atualize o nome do segredo do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} criado no tutorial anterior [Criando o cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). Montando o segredo do Kubernetes como um volume para a sua implementação, você torna a chave de API do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) disponível para o contêiner que está em execução em seu pod. Os componentes do app do {{site.data.keyword.watson}} neste tutorial são configurados para consultar a chave de API usando o caminho de montagem do volume.
 
         ```
         volumes:
@@ -682,4 +681,4 @@ Agora que você conquistou o básico, é possível mover para atividades mais av
 
 - Conclua um [laboratório mais complicado ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) no repositório
 - [Escalar automaticamente seus apps](/docs/containers?topic=containers-app#app_scaling) com o {{site.data.keyword.containerlong_notm}}
-- Explore os padrões de código de orquestração do contêiner no [IBM Developer ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/technologies/containers/)
+- Explore os padrões de código de orquestração de contêiner no [IBM Developer ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/technologies/containers/)

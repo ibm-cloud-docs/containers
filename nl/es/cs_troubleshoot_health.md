@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -71,7 +71,7 @@ Revise los siguientes motivos por los que no aparecen sus registros del clúster
   <tr>
     <td>Si ha especificado un espacio durante la creación del clúster, el propietario de la cuenta no tiene permisos de gestor, desarrollador o auditor para el espacio en cuestión.</td>
       <td>Para cambiar los permisos de acceso para el propietario de la cuenta:
-      <ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
+      <ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>ibmcloud ks api-key-info</code>.</li>
       <li>Para otorgar a dicho propietario de cuenta permisos de acceso de {{site.data.keyword.containerlong_notm}} de Gestor, Desarrollador o Auditor al espacio, consulte <a href="/docs/containers?topic=containers-users">Gestión de acceso a clústeres</a>.</li>
       <li>Para renovar la señal de registro tras cambiar los permisos, ejecute <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
@@ -84,7 +84,7 @@ Revise los siguientes motivos por los que no aparecen sus registros del clúster
 
 Para probar los cambios que ha realizado durante la resolución de problemas, puede desplegar *Noisy*, un pod de ejemplo que produce varios sucesos de registro, en un nodo trabajador en el clúster.
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Cree el archivo de configuración `deploy-noisy.yaml`.
     ```
@@ -108,11 +108,11 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
     ```
     {:pre}
 
-3. Después de unos minutos, verá los registros en el panel control. Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster. Si ha especificado un espacio durante la creación del clúster, vaya al espacio.
-    - EE. UU. sur y EE. UU. este: https://logging.ng.bluemix.net
-    - RU sur: https://logging.eu-gb.bluemix.net
-    - UE central: https://logging.eu-fra.bluemix.net
-    - AP sur: https://logging.au-syd.bluemix.net
+3. Después de unos minutos, verá los registros en el panel de control. Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster. Si ha especificado un espacio durante la creación del clúster, vaya al espacio.
+    - EE. UU. sur y EE. UU. este: `https://logging.ng.bluemix.net`
+    - RU sur: `https://logging.eu-gb.bluemix.net`
+    - UE central: `https://logging.eu-fra.bluemix.net`
+    - AP sur: `https://logging.au-syd.bluemix.net`
 
 <br />
 

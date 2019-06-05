@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks 
 
@@ -143,7 +143,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     <tr>
     <td><code>globalDefault</code></td>
     <td>可选：将此字段设置为 `true` 可将此优先级类设置为全局缺省值，此缺省值将应用于安排的未指定 `priorityClassName` 值的每个 pod。集群中只能有 1 个优先级类可设置为全局缺省值。如果没有全局缺省值，那么没有指定 `priorityClassName` 的 pod 的优先级为零 (`0`)。</br></br>
-    [缺省优先级类](#default_priority_class)不会设置 `globalDefault`。如果在集群中创建了其他优先级类，那么可以通过运行 `kubectl describe priorityclass <name>`.</td>
+        [缺省优先级类](#default_priority_class)不会设置 `globalDefault`。如果在集群中创建了其他优先级类，那么可以通过运行 `kubectl describe priorityclass <name>` 来检查以确保这些类未设置 `globalDefault`。</td>
     </tr>
     <tr>
     <td><code>description</code></td>
@@ -212,6 +212,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
       name: ibmliberty
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: ibmliberty
       template:
         metadata:
           labels:

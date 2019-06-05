@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # IBM Cloud Object Storage에 데이터 저장
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)는 {{site.data.keyword.cos_full_notm}} 플러그인을 사용하여 Kubernetes 클러스터에서 실행되는 앱에 마운트할 수 있는 지속적 고가용성 스토리지 입니다. 플러그인은 Cloud {{site.data.keyword.cos_short}} 버킷을 클러스터의 팟(pod)에 연결하는 Kubernetes Flex-Volume 플러그인입니다. {{site.data.keyword.cos_full_notm}}에 저장된 정보는 전환하고 저장하는 상태에서 암호화되어 여러 지리적 위치에 분산되며 REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다.
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)는 {{site.data.keyword.cos_full_notm}} 플러그인을 사용하여 Kubernetes 클러스터에서 실행되는 앱에 마운트할 수 있는 지속적 고가용성 스토리지 입니다. 플러그인은 Cloud {{site.data.keyword.cos_short}} 버킷을 클러스터의 팟(pod)에 연결하는 Kubernetes Flex-Volume 플러그인입니다. {{site.data.keyword.cos_full_notm}}에 저장된 정보는 전환하고 저장하는 상태에서 암호화되어 여러 지리적 위치에 분산되며 REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다.
 
 {{site.data.keyword.cos_full_notm}}에 연결하려면 클러스터에는 {{site.data.keyword.Bluemix_notm}} Identity and Access Management로 인증하기 위한 공용 네트워크 액세스 권한이 필요합니다. 개인 전용 클러스터가 있는 경우 플러그인 버전 `1.0.3` 이상을 설치하고 HMAC 인증용 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 설정하면 {{site.data.keyword.cos_full_notm}} 개인 서비스 엔드포인트와 통신할 수 있습니다. HMAC 인증을 사용하지 않으려는 경우, 사설 클러스터에서 플러그인이 제대로 작동하려면 포트 443의 모든 아웃바운드 네트워크 트래픽을 열어야 합니다.
 {: important}
@@ -38,7 +38,7 @@ subcollection: containers
 클러스터에서 오브젝트 스토리지 사용을 시작하려면 우선 계정에서 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 프로비저닝해야 합니다.
 {: shortdesc}
 
-{{site.data.keyword.cos_full_notm}} 플러그인은 s3 API 엔드포인트와 함께 작동하도록 구성되어 있습니다. 예를 들어, [Minio](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore)와 같은 로컬 Cloud Object Storage 서버를 사용하거나 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 사용하는 대신 다른 클라우드 제공자에서 설정한 s3 API 엔드포인트에 연결할 수 있습니다.
+{{site.data.keyword.cos_full_notm}} 플러그인은 s3 API 엔드포인트와 함께 작동하도록 구성되어 있습니다. 예를 들어, [Minio](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore)와 같은 로컬 Cloud Object Storage 서버를 사용하거나 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 사용하는 대신 다른 클라우드 제공자에서 설정한 s3 API 엔드포인트에 연결할 수 있습니다.
 
 다음 단계를 수행하여 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 작성하십시오. 로컬 Cloud Object Storage 서버 또는 다른 서비스 API 엔드포인트를 사용하려는 경우, 제공자 문서를 참조하여 Cloud Object Storage를 설정하십시오.
 
@@ -66,7 +66,7 @@ subcollection: containers
 
 다음 단계를 수행하여 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 인증 정보에 대한 Kubernetes 시크릿을 작성하십시오. 로컬 Cloud Object Storage 서버 또는 다른 s3 API 엔드포인트를 사용하려는 경우 적절한 인증 정보를 사용하여 Kubernetes 시크릿을 작성하십시오.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. [{{site.data.keyword.cos_full_notm}} 서비스 인증 정보](#service_credentials)의 **apikey** 또는 **access_key_id** 및 **secret_access_key**를 검색하십시오.
 
@@ -75,89 +75,54 @@ subcollection: containers
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-
-3. 이전에 검색한 {{site.data.keyword.cos_full_notm}} **GUID**와 **apikey** 또는 **access_key_id**와 **secret_access_key**를 base64로 인코딩하고, base64 인코딩된 값을 모두 기록해 두십시오. 각 매개변수에 대해 이 명령을 반복하여 base64 인코딩된 값을 검색하십시오.
+   
+3. 서비스 인증 정보를 저장하기 위한 Kubernetes 시크릿을 작성하십시오. 시크릿을 작성하는 경우 모든 값이 base64로 자동 인코딩됩니다. 
+   
+   **API 키 사용의 예:**
    ```
-   echo -n "<key_value>" | base64
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=api-key=<api_key> --from-literal=service-instance-id=<service_instance_guid>
+   ```
+   {: pre}
+   
+   **HMAC 인증의 예:**
+   ```
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=access-key=<access_key_ID> --from-literal=secret-key=<secret_access_key>    
    ```
    {: pre}
 
-4. Kubernetes 시크릿을 정의하기 위한 구성 파일을 작성하십시오.
-
-   **API 키 사용의 예:**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     api-key: <base64_apikey>
-     service-instance-id: <base64_guid>
-   ```
-   {: codeblock}
-
-   **HMAC 인증 사용의 예:**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     access-key: <base64_access_key_id>
-     secret-key: <base64_secret_access_key>
-   ```
-   {: codeblock}
-
    <table>
-   <caption>YAML 파일 컴포넌트 이해</caption>
+   <caption>명령 컴포넌트 이해</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+   <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 명령 컴포넌트 이해</th>
    </thead>
    <tbody>
    <tr>
-   <td><code>metadata.name</code></td>
-   <td>{{site.data.keyword.cos_full_notm}} 시크릿의 이름을 입력하십시오. </td>
+   <td><code>api-key</code></td>
+   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 API 키를 입력하십시오. HMAC 인증을 사용하려면 <code>access-key</code> 및 <code>secret-key</code>를 대신 지정하십시오.
+</td>
    </tr>
    <tr>
-   <td><code>metadata.namespace</code></td>
-   <td>시크릿을 작성할 네임스페이스를 지정하십시오. 시크릿은 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에 액세스하는 팟(Pod) 및 PVC가 작성될 동일한 네임스페이스에서 작성되어야 합니다.  </td>
+   <td><code>access-key</code></td>
+   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 액세스 키 ID를 입력하십시오. OAuth2 인증을 사용하려면 <code>api-key</code>를 대신 지정하십시오.</td>
    </tr>
    <tr>
-   <td><code>data.api-key</code></td>
-   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 API 키를 입력하십시오. API 키는 base64 인코딩되어야 합니다. HMAC 인증을 사용하려면 <code>data/access-key</code> 및 <code>data/secret-key</code>를 대신 지정하십시오.  </td>
+   <td><code>secret-key</code></td>
+   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 시크릿 액세스 키를 입력하십시오. OAuth2 인증을 사용하려면 <code>api-key</code>를 대신 지정하십시오.</td>
    </tr>
    <tr>
-   <td><code>data.access-key</code></td>
-   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 액세스 키 ID를 입력하십시오. 액세스 키 ID는 base64 인코딩되어야 합니다. OAuth2 인증을 사용하려면 <code>data/api-key</code>를 대신 지정하십시오.  </td>
-   </tr>
-   <tr>
-   <td><code>data.secret-key</code></td>
-   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 시크릿 액세스 키를 입력하십시오. 시크릿 액세스 키는 base64 인코딩되어야 합니다. OAuth2 인증을 사용하려면 <code>data/api-key</code>를 대신 지정하십시오.</td>
-   </tr>
-   <tr>
-   <td><code>data.service-instance-id</code></td>
-   <td>이전에 검색한 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 GUID를 입력하십시오. GUID는 base64 인코딩되어야 합니다. </td>
+   <td><code>service-instance-id</code></td>
+   <td>이전에 검색한 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 GUID를 입력하십시오. </td>
    </tr>
    </tbody>
    </table>
 
-5. 클러스터의 시크릿을 작성하십시오.
-   ```
-   kubectl apply -f filepath/secret.yaml
-   ```
-   {: pre}
-
-6. 시크릿이 네임스페이스에서 작성되었는지 확인하십시오.
+4. 시크릿이 네임스페이스에서 작성되었는지 확인하십시오.
    ```
    kubectl get secret
    ```
    {: pre}
 
-7. [{{site.data.keyword.cos_full_notm}} 플러그인을 설치](#install_cos)하십시오. 또는 플러그인을 이미 설치한 경우에는 {{site.data.keyword.cos_full_notm}} 버킷에 대한 [구성을 결정]( #configure_cos)하십시오.
+5. [{{site.data.keyword.cos_full_notm}} 플러그인을 설치](#install_cos)하십시오. 또는 플러그인을 이미 설치한 경우에는 {{site.data.keyword.cos_full_notm}} 버킷에 대한 [구성을 결정]( #configure_cos)하십시오.
 
 ## IBM Cloud Object Storage 플러그인 설치
 {: #install_cos}
@@ -168,7 +133,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 {{site.data.keyword.cos_full_notm}} 플러그인의 업데이트 또는 제거 방법에 대한 지시사항을 찾으십니까? [플러그인 업데이트](#update_cos_plugin) 및 [플러그인 제거](#remove_cos_plugin)를 참조하십시오.
 {: tip}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 작업자 노드가 부 버전에 대한 최신 패치를 적용하는지 확인하십시오.
    1. 작업자 노드의 현재 패치 버전을 나열하십시오.
@@ -181,7 +146,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
       ```
       {: screen}
 
@@ -191,15 +156,15 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
    3. 작업자 노드를 다시 로드하여 최신 패치 버전을 적용하십시오. 작업자 노드를 다시 로드하기 전에 작업자 노드에서 실행 중인 팟(Pod)을 단계적으로 다시 스케줄하려면 [ibmcloud ks worker-reload 명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)의 지시사항을 따르십시오. 다시 로드하는 중에 작업자 노드 머신은 최신 이미지로 업데이트되며 [작업자 노드의 외부에 저장](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)되지 않은 경우 데이터가 삭제됨을 유념하십시오.
 
-2.  [지시사항에 따라](/docs/containers?topic=containers-integrations#helm) 로컬 시스템에 Helm 클라이언트를 설치하고 클러스터에 서비스 계정이 있는 Helm 서버(tiller)를 설치하십시오.
+2.  [지시사항에 따라](/docs/containers?topic=containers-helm#public_helm_install) 로컬 시스템에 Helm 클라이언트를 설치하고 클러스터에 서비스 계정이 있는 Helm 서버(tiller)를 설치하십시오.
 
-    Helm 서버 Tiller를 설치하려면 공용 Google Container Registry에 대한 공용 네트워크 연결이 필요합니다. 클러스터가 방화벽으로 보호되는 사설 클러스터 또는 개인 서비스 엔드포인트가 사용으로 설정된 클러스터와 같이 공용 네트워크에 액세스할 수 없는 경우 [Tiller 이미지를 로컬 시스템으로 가져와 해당 이미지를 {{site.data.keyword.registryshort_notm}}의 네임스페이스에 푸시](/docs/containers?topic=containers-integrations#private_local_tiller)하거나 [Tiller를 사용하지 않고 Helm 차트를 설치](/docs/containers?topic=containers-integrations#private_install_without_tiller)할 수 있습니다.
+    Helm 서버 Tiller를 설치하려면 공용 Google Container Registry에 대한 공용 네트워크 연결이 필요합니다. 클러스터가 방화벽으로 보호되는 사설 클러스터 또는 개인 서비스 엔드포인트가 사용으로 설정된 클러스터와 같이 공용 네트워크에 액세스할 수 없는 경우, [Tiller 이미지를 로컬 시스템으로 가져와 이미지를 {{site.data.keyword.registryshort_notm}}의 네임스페이스에 푸시](/docs/containers?topic=containers-helm#private_local_tiller)하거나 [Tiller를 사용하지 않고 Helm 차트를 설치](/docs/containers?topic=containers-helm#private_install_without_tiller)할 수 있습니다.
     {: note}
 
-3.  Tiller에 서비스 계정이 설치되어 있는지 확인하십시오.
+3.  Tiller가 서비스 계정으로 설치되어 있는지 확인하십시오.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -213,7 +178,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
 4. 클러스터에 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오.
    ```
-   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
@@ -225,7 +190,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
 6. Helm 차트를 다운로드하고 현재 디렉토리에서 차트의 압축을 푸십시오.
    ```
-   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
    ```
    {: pre}
 
@@ -263,7 +228,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
        -u, --update                  (Optional) Update this plugin to the latest version
 
       Example Usage:
-    helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install iks-charts/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
       ```
       {: screen}
 
@@ -300,7 +265,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    - **macOS 및 Linux의 경우:**
      - 이전 단계를 건너뛴 경우에는 특정 Kubernetes secret에 대한 제한사항 없이 설치하십시오.
        ```
-       helm ibmc install ibm/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install iks-charts/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
@@ -326,7 +291,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
      3. Helm 차트를 설치하십시오.
         - 이전 단계를 건너뛴 경우에는 특정 Kubernetes secret에 대한 제한사항 없이 설치하십시오.
           ```
-          helm install ibm/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          helm install iks-charts/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
           ```
           {: pre}
 
@@ -353,7 +318,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
    ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                  PROVISIONER       AGE
    ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
    ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
@@ -445,21 +410,21 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 기존 {{site.data.keyword.cos_full_notm}} 플러그인을 후속 버전으로 업그레이드할 수 있습니다.
 {: shortdesc}
 
-1. macOS 또는 Linux 배포판을 사용하는 경우에는 {{site.data.keyword.cos_full_notm}} `ibmc` Helm 플러그인을 최신 버전으로 업데이트하십시오.
-   ```
-   helm ibmc --update
-   ```
-   {: pre}
-
-2. {{site.data.keyword.Bluemix_notm}} Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
+1. {{site.data.keyword.Bluemix_notm}} Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
    ```
    helm repo update
    ```
    {: pre}
 
+2. macOS 또는 Linux 배포판을 사용하는 경우에는 {{site.data.keyword.cos_full_notm}} `ibmc` Helm 플러그인을 최신 버전으로 업데이트하십시오.
+   ```
+   helm ibmc --update
+   ```
+   {: pre}
+
 3. 최신 {{site.data.keyword.cos_full_notm}} Helm 차트를 로컬 머신에 다운로드하고 패키지의 압축을 푼 후에 `release.md` 파일을 검토하여 최신 릴리스 정보를 찾으십시오.
    ```
-   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
    ```
 
 4. Helm 차트의 설치 이름을 찾으십시오.
@@ -476,7 +441,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
 5. {{site.data.keyword.cos_full_notm}} Helm 차트를 최신 버전으로 업그레이드하십시오.
    ```   
-   helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   helm ibmc upgrade <helm_chart_name> iks-charts/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
    ```
    {: pre}
 
@@ -811,7 +776,7 @@ kubectl get pvc
 
 4. 선택사항: 비-루트 사용자로 데이터에 액세스할 계획이거나 콘솔 또는 API를 사용하여 기존 {{site.data.keyword.cos_full_notm}} 버킷에 직접 파일을 추가한 경우에는 필요 시에 앱이 파일을 성공적으로 읽고 업데이트할 수 있도록 [파일에 올바른 권한이 지정되어 있는지](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access) 확인하십시오.
 
-4.  {: #app_volume_mount}PV를 배치에 마운트하려면 구성 `.yaml` 파일을 작성하고 PV를 바인드하는 PVC를 지정하십시오.
+4.  {: #cos_app_volume_mount}PV를 배치에 마운트하려면 구성 `.yaml` 파일을 작성하고 PV를 바인드하는 PVC를 지정하십시오.
 
     ```
     apiVersion: apps/v1
@@ -834,6 +799,7 @@ kubectl get pvc
             name: <container_name>
             securityContext:
               runAsUser: <non_root_user>
+              fsGroup: <non_root_user> #only applicable for clusters that run Kubernetes version 1.13 or later
             volumeMounts:
             - name: <volume_name>
               mountPath: /<file_path>
@@ -872,7 +838,7 @@ kubectl get pvc
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.runAsUser</code></td>
-    <td>선택사항: 비-루트 사용자로 앱을 실행하려면 동시에 배치 YAML에 `fsGroup`을 설정하지 않고 비-루트 사용자를 정의하여 팟(Pod)에 대한 [보안 컨텍스트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)를 지정하십시오. `fsGroup`을 설정하면 팟(Pod) 배치 시에 버킷의 모든 파일에 대한 그룹 권한을 업데이트하도록 {{site.data.keyword.cos_full_notm}} 플러그인이 트리거됩니다. 권한 업데이트는 쓰기 오퍼레이션이며 성능에 영향을 줍니다. 보유한 파일의 수에 따라서는 권한 업데이트 때문에 팟(Pod)이 구동되어 <code>Running</code> 상태가 되지 못할 수 있습니다. </td>
+    <td>선택사항: Kubernetes 버전 1.12 이하를 실행하는 클러스터에서 비-루트 사용자로 앱을 실행하려면 동시에 배치 YAML에 `fsGroup`을 설정하지 않고 비-루트 사용자를 정의하여 팟(Pod)에 대한 [보안 컨텍스트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)를 지정하십시오. `fsGroup`을 설정하면 팟(Pod) 배치 시에 버킷의 모든 파일에 대한 그룹 권한을 업데이트하도록 {{site.data.keyword.cos_full_notm}} 플러그인이 트리거됩니다. 권한 업데이트는 쓰기 오퍼레이션이며 성능에 영향을 줍니다. 보유한 파일의 수에 따라서는 권한 업데이트 때문에 팟(Pod)이 구동되어 <code>Running</code> 상태가 되지 못할 수 있습니다. </br></br>Kubernetes 버전 1.13 이상을 실행하고 {{site.data.keyword.Bluemix_notm}} Object Storage 플러그인 버전 1.0.4 이상을 실행하는 클러스터가 있는 경우 s3fs 마운트 지점의 소유자를 변경할 수 있습니다. 소유자를 변경하려면 `runAsUser` 및 `fsGroup`을 s3fs 마운트 지점을 소유할 동일한 비루트 사용자 ID로 설정하여 보안 컨텍스트를 지정하십시오. 두 값이 일치하지 않으면 마운트 지점은 자동으로 `root` 사용자가 소유합니다. </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -1131,7 +1097,7 @@ kubectl get pvc
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">사용할 스토리지 클래스를 입력하십시오. 다음 선택사항 중 하나를 선택하십시오. <ul><li><strong><code>ibm.io/auto-create-bucket</code>이 true로 설정된 경우: </strong>새 버킷에 사용할 스토리지 클래스를 입력하십시오.</li><li><strong><code>ibm.io/auto-create-bucket</code>이 false로 설정된 경우: </strong>기존 버킷을 작성하는 데 사용한 스토리지 클래스를 입력하십시오. </li></ul></br>  기존 스토리지 클래스를 나열하려면 <code>kubectl get storageclasses | grep s3</code>을 실행하십시오. 스토리지 클래스를 지정하지 않으면 PVC가 클러스터에 설정된 기본 스토리지 클래스를 사용하여 작성됩니다. Stateful 세트가 오브젝트 스토리지를 사용하여 프로비저닝되도록 기본 스토리지 클래스가 <code>ibm.io/ibmc-s3fs</code> 프로비저너를 사용하는지 확인하십시오.</td>
+    <td style="text-align:left">사용할 스토리지 클래스를 입력하십시오. 다음 선택사항 중 하나를 선택하십시오. <ul><li><strong><code>ibm.io/auto-create-bucket</code>이 true로 설정된 경우: </strong>새 버킷에 사용할 스토리지 클래스를 입력하십시오.</li><li><strong><code>ibm.io/auto-create-bucket</code>이 false로 설정된 경우: </strong>기존 버킷을 작성하는 데 사용한 스토리지 클래스를 입력하십시오. </li></ul></br> 기존 스토리지 클래스를 나열하려면 <code>kubectl get storageclasses | grep s3</code>을 실행하십시오. 스토리지 클래스를 지정하지 않으면 PVC가 클러스터에 설정된 기본 스토리지 클래스를 사용하여 작성됩니다. Stateful 세트가 오브젝트 스토리지를 사용하여 프로비저닝되도록 기본 스토리지 클래스가 <code>ibm.io/ibmc-s3fs</code> 프로비저너를 사용하는지 확인하십시오.</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>spec.storageClassName</code></td>

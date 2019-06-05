@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 ---
 
@@ -19,7 +19,6 @@ lastupdated: "2019-03-21"
 {:download: .download}
 
 
-
 # チュートリアル: マネージド Knative を使用した Kubernetes クラスターでのサーバーレス・アプリの実行
 {: #knative_tutorial}
 
@@ -27,19 +26,19 @@ lastupdated: "2019-03-21"
 {: shortdesc}
 
 **Knative とは何ですか? なぜ使用する必要があるのですか?**</br>
-[Knative](https://github.com/knative/docs) は、Kubernetes の機能を拡張することを目標として、IBM、Google、Pivotal、Red Hat、Cisco などによって開発されたオープン・ソースのプラットフォームであり、最新のソース中心のコンテナー化されたサーバーレス・アプリを Kubernetes クラスター上に作成することを支援します。このプラットフォームは、12-Factor App、コンテナー、または関数といった、クラウドで実行するアプリのタイプを決定しなければならない今日の開発者のニーズに対処するように設計されています。各タイプのアプリには、それらのアプリのために調整されたオープン・ソース・ソリューションまたは独自のソリューション、つまり、12-Factor App には Cloud Foundry、コンテナーには Kubernetes、関数には OpenWhisk などが必要になります。以前は、開発者は従うべきアプローチを決定する必要があり、これによって、異なるタイプのアプリを結合しなければならない場合に、柔軟性がなく、複雑度が増すことになりました。  
+[Knative](https://github.com/knative/docs) は、Kubernetes の機能を拡張することを目標として、IBM、Google、Pivotal、Red Hat、Cisco などによって開発されたオープン・ソースのプラットフォームであり、最新のソース中心のコンテナー化されたサーバーレス・アプリを Kubernetes クラスター上に作成することを支援します。 このプラットフォームは、12-Factor App、コンテナー、または関数といった、クラウドで実行するアプリのタイプを決定しなければならない今日の開発者のニーズに対処するように設計されています。 各タイプのアプリには、それらのアプリのために調整されたオープン・ソース・ソリューションまたは独自のソリューション、つまり、12-Factor App には Cloud Foundry、コンテナーには Kubernetes、関数には OpenWhisk などが必要になります。 以前は、開発者は従うべきアプローチを決定する必要があり、これによって、異なるタイプのアプリを結合しなければならない場合に、柔軟性がなく、複雑度が増すことになりました。  
 
-Knative では、プログラミング言語やフレームワークにわたって一貫性のあるアプローチが使用され、Kubernetes でのワークロードの作成、デプロイ、および管理の作業負担が減るので、開発者は、最も重要なこと、つまりソース・コードに集中できます。既に慣れ親しんだ実績のあるビルド・パック (Cloud Foundry、Kaniko、Dockerfile、Bazel など) を使用できます。Istio と統合されることによって、Knative では、サーバーレスでコンテナー化されたワークロードを容易にインターネットに公開し、モニターして制御することが可能になり、データは転送中に確実に暗号化されます。
+Knative では、プログラミング言語やフレームワークにわたって一貫性のあるアプローチが使用され、Kubernetes でのワークロードの作成、デプロイ、および管理の作業負担が減るので、開発者は、最も重要なこと、つまりソース・コードに集中できます。 既に慣れ親しんだ実績のあるビルド・パック (Cloud Foundry、Kaniko、Dockerfile、Bazel など) を使用できます。 Istio と統合されることによって、Knative では、サーバーレスでコンテナー化されたワークロードを容易にインターネットに公開し、モニターして制御することが可能になり、データは転送中に確実に暗号化されます。
 
 **Knative はどのように機能しますか?**</br>
 Knative は、3 つのキー・コンポーネント (_プリミティブ_ と呼ばれます) から構成され、Kubernetes クラスターでのサーバーレス・アプリの作成、デプロイ、および管理を支援します。
 
-- **Build:** `Build` プリミティブは、ソース・コードからコンテナー・イメージまでのアプリを作成する一連の手順をサポートします。アプリ・コードを検索するソース・リポジトリーと、イメージをホストするコンテナー・レジストリーを指定する単純なビルド・テンプレートを使用するとします。単一コマンドを使用するだけで、このビルド・テンプレートを取得し、ソース・コードをプルし、イメージを作成し、コンテナー・レジストリーにイメージをプッシュするように Knative に指示することができ、コンテナー内のイメージを使用できるようになります。
-- **Serving:** `Serving` プリミティブは、Knative サービスとしてサーバーレス・アプリをデプロイして、それらを自動的にスケーリングすることを支援し、インスタンスをゼロにすることもできます。Istio のトラフィック管理機能とインテリジェント・ルーティング機能を使用することによって、サービスの特定バージョンにルーティングされるようにトラフィックを制御でき、それにより、開発者がアプリの新規バージョンをテストしてロールアウトすることや A-B テストを実行することが容易になります。
-- **Eventing:** `Eventing` プリミティブを使用すると、他のサービスがサブスクライブできるトリガーまたはイベント・ストリームを作成できます。例えば、GitHub マスター・リポジトリーにコードがプッシュされるごとに、アプリの新規ビルドを開始するなどです。または、温度が氷点を下回った場合にのみサーバーレス・アプリを実行するなどです。`Eventing` プリミティブは、特定のイベントが発生した場合にアプリの作成とデプロイメントを自動化する CI/CD パイプラインに統合できます。
+- **Build:** `Build` プリミティブは、ソース・コードからコンテナー・イメージまでのアプリを作成する一連の手順をサポートします。 アプリ・コードを検索するソース・リポジトリーと、イメージをホストするコンテナー・レジストリーを指定する単純なビルド・テンプレートを使用するとします。 単一コマンドを使用するだけで、このビルド・テンプレートを取得し、ソース・コードをプルし、イメージを作成し、コンテナー・レジストリーにイメージをプッシュするように Knative に指示することができ、コンテナー内のイメージを使用できるようになります。
+- **Serving:** `Serving` プリミティブは、Knative サービスとしてサーバーレス・アプリをデプロイして、それらを自動的にスケーリングすることを支援し、インスタンスをゼロにすることもできます。 Istio のトラフィック管理機能とインテリジェント・ルーティング機能を使用することによって、サービスの特定バージョンにルーティングされるようにトラフィックを制御でき、それにより、開発者がアプリの新規バージョンをテストしてロールアウトすることや A-B テストを実行することが容易になります。
+- **Eventing:** `Eventing` プリミティブを使用すると、他のサービスがサブスクライブできるトリガーまたはイベント・ストリームを作成できます。 例えば、GitHub マスター・リポジトリーにコードがプッシュされるごとに、アプリの新規ビルドを開始するなどです。 または、温度が氷点を下回った場合にのみサーバーレス・アプリを実行するなどです。 `Eventing` プリミティブは、特定のイベントが発生した場合にアプリの作成とデプロイメントを自動化する CI/CD パイプラインに統合できます。
 
 **Managed Knative on {{site.data.keyword.containerlong_notm}} (試験的) アドオンとは何ですか?** </br>
-{{site.data.keyword.containerlong_notm}} のマネージド Knative は、Kubernetes クラスターに Knative と Istio を直接統合するマネージド・アドオンです。アドオン内の Knative と Istio のバージョンは、IBM によってテストされ、{{site.data.keyword.containerlong_notm}} での使用をサポートされています。{{site.data.keyword.containerlong_notm}} では、アドオンの更新は自動的に提供開始されて、Knative および Istio のコンポーネントが最新の状態に保持されます。
+{{site.data.keyword.containerlong_notm}} のマネージド Knative は、Kubernetes クラスターに Knative と Istio を直接統合するマネージド・アドオンです。 アドオン内の Knative と Istio のバージョンは、IBM によってテストされ、{{site.data.keyword.containerlong_notm}} での使用をサポートされています。 アドオンの管理について詳しくは、[管理対象アドオンを使用したサービスの追加](/docs/containers?topic=containers-managed-addons#managed-addons)を参照してください。
 
 **何か制限はありますか?** </br>
 クラスターに [container image security enforcer アドミッション・コントローラー](/docs/services/Registry?topic=registry-security_enforce#security_enforce)をインストールしている場合、マネージド Knative アドオンをクラスターで有効にすることはできません。
@@ -68,17 +67,17 @@ Knative は、3 つのキー・コンポーネント (_プリミティブ_ と�
 {: #knative_prerequisites}
 
 -  [IBM Cloud CLI、{{site.data.keyword.containerlong_notm}} プラグイン、および Kubernetes CLI をインストールします](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)。 必ず、ご使用のクラスターの Kubernetes バージョンに一致する `kubectl` CLI バージョンをインストールしてください。
--  [それぞれが 4 コアと 16 GB のメモリー (`b2c.4x16`) 以上を備えた、少なくとも 3 つのワーカー・ノードのあるクラスターを作成します](/docs/containers?topic=containers-clusters#clusters_cli)。すべてのワーカー・ノードは、Kubernetes バージョン 1.11 以上を実行している必要があります。
+-  [それぞれが 4 コアと 16 GB のメモリー (`b3c.4x16`) 以上を備えた、少なくとも 3 つのワーカー・ノードのあるクラスターを作成します](/docs/containers?topic=containers-clusters#clusters_cli)。 すべてのワーカー・ノードは、Kubernetes バージョン 1.12 以上を実行している必要があります。
 -  {{site.data.keyword.containerlong_notm}} に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 -  [CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 ## レッスン 1: マネージド Knative アドオンをセットアップする
 {: #knative_setup}
 
-Knative は、Istio の上に構築され、サーバーレスでコンテナー化されたワークロードをクラスター内およびインターネット上で公開できるようにします。また、Istio を使用すると、サービス間のネットワーク・トラフィックをモニターして制御することができ、データは転送中に確実に暗号化されます。マネージド Knative アドオンをインストールすると、マネージド Istio アドオンも自動的にインストールされます。
+Knative は、Istio の上に構築され、サーバーレスでコンテナー化されたワークロードをクラスター内およびインターネット上で公開できるようにします。 また、Istio を使用すると、サービス間のネットワーク・トラフィックをモニターして制御することができ、データは転送中に確実に暗号化されます。 マネージド Knative アドオンをインストールすると、マネージド Istio アドオンも自動的にインストールされます。
 {: shortdesc}
 
-1. クラスターでマネージド Knative アドオンを有効にします。クラスターで Knative を有効にすると、Istio コンポーネントおよびすべての Knative コンポーネントがクラスターにインストールされます。
+1. クラスターでマネージド Knative アドオンを有効にします。 クラスターで Knative を有効にすると、Istio コンポーネントおよびすべての Knative コンポーネントがクラスターにインストールされます。
    ```
    ibmcloud ks cluster-addon-enable knative --cluster <cluster_name_or_ID> -y
    ```
@@ -93,7 +92,7 @@ Knative は、Istio の上に構築され、サーバーレスでコンテナー
 
    すべての Knative コンポーネントのインストールが完了するまで、数分かかることがあります。
 
-2. Istio が正常にインストールされていることを確認します。9 つの Istio サービス用のすべてのポッドと Prometheus 用のポッドが `Running` 状況になっている必要があります。
+2. Istio が正常にインストールされていることを確認します。 9 つの Istio サービス用のすべてのポッドと Prometheus 用のポッドが `Running` 状況になっている必要があります。
    ```
    kubectl get pods --namespace istio-system
    ```
@@ -115,7 +114,13 @@ Knative は、Istio の上に構築され、サーバーレスでコンテナー
    ```
    {: screen}
 
-3. すべての Knative コンポーネントが正常にインストールされていることを確認します。
+3. オプション: `default` 名前空間のすべてのアプリに Istio を使用する場合は、この名前空間 `istio-injection=enabled` ラベルを追加します。 アプリを Istio サービス・メッシュに含めるためには、各サーバーレス・アプリ・ポッドで Envoy プロキシー・サイドカーが実行される必要があります。 このラベルによって、ポッドが Envoy プロキシー・サイドカー・コンテナーとともに作成されるように Istio が新しいアプリ・デプロイメントのポッド・テンプレート仕様を自動的に変更できます。
+  ```
+  kubectl label namespace default istio-injection=enabled
+  ```
+  {: pre}
+
+4. すべての Knative コンポーネントが正常にインストールされていることを確認します。
    1. Knative `Serving` コンポーネントのすべてのポッドが `Running` 状態であることを確認します。  
       ```
       kubectl get pods --namespace knative-serving
@@ -203,10 +208,10 @@ Knative および Istio がすべてセットアップされたので、最初�
 ## レッスン 2: サーバーレス・アプリをクラスターにデプロイする
 {: #deploy_app}
 
-このレッスンでは、最初のサーバーレス [`Hello World`](https://hub.docker.com/r/ibmcom/kn-helloworld) アプリをデプロイしてみます。サンプル・アプリに要求を送信すると、アプリでは、環境変数 `TARGET` が読み取られ、`"Hello ${TARGET}!"` が出力されます。この環境変数が空の場合は、`"Hello World!"` が返されます。
+このレッスンでは、最初のサーバーレス [`Hello World`](https://hub.docker.com/r/ibmcom/kn-helloworld) アプリをデプロイしてみます。 サンプル・アプリに要求を送信すると、アプリでは、環境変数 `TARGET` が読み取られ、`"Hello ${TARGET}!"` が出力されます。 この環境変数が空の場合は、`"Hello World!"` が返されます。
 {: shortdesc}
 
-1. Knative で、最初のサーバーレス `Hello World` アプリの YAML ファイルを作成します。Knative を使用してアプリをデプロイするには、Knative サービス・リソースを指定する必要があります。サービスは、Knative `Serving` プリミティブによって管理され、ワークロードのライフサイクル全体の管理を行います。サービスによって、各デプロイメントに Knative リビジョン、経路、および構成が確実に提供されます。サービスを更新すると、アプリの新規バージョンが作成され、サービスのリビジョン・ヒストリーに追加されます。Knative 経路によって、アプリの各リビジョンがネットワーク・エンドポイントにマップされ、特定のリビジョンにルーティングされるネットワーク・トラフィック量を制御できるようになります。Knative 構成によって、特定のリビジョンの設定が保持されるので、いつでも、古いリビジョンにロールバックしたり、リビジョン間で切り替えたりすることができます。Knative `Serving` リソースについて詳しくは、[Knative の資料](https://github.com/knative/docs/tree/master/serving)を参照してください。
+1. Knative で、最初のサーバーレス `Hello World` アプリの YAML ファイルを作成します。 Knative を使用してアプリをデプロイするには、Knative サービス・リソースを指定する必要があります。 サービスは、Knative `Serving` プリミティブによって管理され、ワークロードのライフサイクル全体の管理を行います。 サービスによって、各デプロイメントに Knative リビジョン、経路、および構成が確実に提供されます。 サービスを更新すると、アプリの新規バージョンが作成され、サービスのリビジョン・ヒストリーに追加されます。 Knative 経路によって、アプリの各リビジョンがネットワーク・エンドポイントにマップされ、特定のリビジョンにルーティングされるネットワーク・トラフィック量を制御できるようになります。 Knative 構成によって、特定のリビジョンの設定が保持されるので、いつでも、古いリビジョンにロールバックしたり、リビジョン間で切り替えたりすることができます。 Knative `Serving` リソースについて詳しくは、[Knative の資料](https://github.com/knative/docs/tree/master/serving)を参照してください。
    ```
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
@@ -238,20 +243,20 @@ Knative および Istio がすべてセットアップされたので、最初�
     </tr>
     <tr>
     <td><code>metadata.namespace</td>
-    <td>Knative サービスとしてアプリをデプロイする Kubernetes 名前空間。</td>
+    <td>Knative サービスとしてアプリをデプロイする Kubernetes 名前空間。 </td>
     </tr>
     <tr>
     <td><code>spec.container.image</code></td>
-    <td>イメージが保管されているコンテナー・レジストリーの URL。この例では、Docker Hub の <code>ibmcom</code> 名前空間に保管されている Knative Hello World アプリをデプロイします。</td>
+    <td>イメージが保管されているコンテナー・レジストリーの URL。 この例では、Docker Hub の <code>ibmcom</code> 名前空間に保管されている Knative Hello World アプリをデプロイします。 </td>
     </tr>
     <tr>
     <td><code>spec.container.env</code></td>
-    <td>Knative サービスで使用する環境変数のリスト。この例では、環境変数 <code>TARGET</code> の値が、サンプル・アプリによって読み取られ、アプリに要求を送信したときに <code>"Hello ${TARGET}!"</code> 形式で返されます。値がない場合は、サンプル・アプリは <code>"Hello World!"</code> を返します。</td>
+    <td>Knative サービスで使用する環境変数のリスト。 この例では、環境変数 <code>TARGET</code> の値が、サンプル・アプリによって読み取られ、アプリに要求を送信したときに <code>"Hello ${TARGET}!"</code> 形式で返されます。 値がない場合は、サンプル・アプリは <code>"Hello World!"</code> を返します。  </td>
     </tr>
     </tbody>
     </table>
 
-2. クラスターに Knative サービスを作成します。サービスを作成すると、Knative `Serving` プリミティブによって、アプリ用に、変更不可能のリビジョン、Knative 経路、Ingress ルーティング・ルール、Kubernetes サービス、Kubernetes ポッドおよびロード・バランサーが作成されます。アプリは、`<knative_service_name>.<namespace>.<ingress_subdomain>` 形式で Ingress サブドメインからのサブドメインを割り当てられ、これはインターネットからのアプリへのアクセスに使用できます。
+2. クラスターに Knative サービスを作成します。 サービスを作成すると、Knative `Serving` プリミティブによって、アプリ用に、変更不可能のリビジョン、Knative 経路、Ingress ルーティング・ルール、Kubernetes サービス、Kubernetes ポッドおよびロード・バランサーが作成されます。 アプリは、`<knative_service_name>.<namespace>.<ingress_subdomain>` 形式で Ingress サブドメインからのサブドメインを割り当てられ、これはインターネットからのアプリへのアクセスに使用できます。
    ```
    kubectl apply -f service.yaml
    ```
@@ -263,10 +268,11 @@ Knative および Istio がすべてセットアップされたので、最初�
    ```
    {: screen}
 
-3. ポッドが作成されていることを確認します。 ポッドは 2 つのコンテナーで構成されます。一方のコンテナーは、`Hello World` アプリを実行し、もう一方のコンテナーは、Istio および Knative のモニタリング・ツールとロギング・ツールを実行するサイドカーです。ポッドには、`00001` リビジョン番号が割り当てられます。
+3. ポッドが作成されていることを確認します。 ポッドは 2 つのコンテナーで構成されます。 一方のコンテナーは、`Hello World` アプリを実行し、もう一方のコンテナーは、Istio および Knative のモニタリング・ツールとロギング・ツールを実行するサイドカーです。 ポッドには、`00001` リビジョン番号が割り当てられます。
    ```
    kubectl get pods
    ```
+   {: pre}
 
    出力例:
    ```
@@ -276,16 +282,16 @@ Knative および Istio がすべてセットアップされたので、最初�
    {: screen}
 
 4. `Hello World` アプリを試行します。
-   1. Knative サービスに割り当てられたデフォルト・ドメインを取得します。Knative サービスの名前を変更した場合、または別の名前空間にアプリをデプロイした場合は、照会内のこれらの値を更新してください。
+   1. Knative サービスに割り当てられたデフォルト・ドメインを取得します。 Knative サービスの名前を変更した場合、または別の名前空間にアプリをデプロイした場合は、照会内のこれらの値を更新してください。
       ```
-      kubectl get svc/kn-helloworld
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       出力例:
       ```
-      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
-      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
+      NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
+      kn-helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True
       ```
       {: screen}
 
@@ -318,7 +324,7 @@ Knative および Istio がすべてセットアップされたので、最初�
       ```
       {: screen}
 
-5. Knative でポッドがスケール・ダウンされるように、数分待ちます。Knative は、着信ワークロードを処理するために同時に稼働している必要のあるポッドの数を評価します。ネットワーク・トラフィックが受信されない場合、Knative は自動的にポッドをスケール・ダウンして、この例に示されているように、ポッドをゼロにすることもできます。
+5. Knative でポッドがスケール・ダウンされるように、数分待ちます。 Knative は、着信ワークロードを処理するために同時に稼働している必要のあるポッドの数を評価します。 ネットワーク・トラフィックが受信されない場合、Knative は自動的にポッドをスケール・ダウンして、この例に示されているように、ポッドをゼロにすることもできます。
 
    Knative でポッドがどのようにスケール・アップされるかご覧になりますか? アプリのワークロードを増やすことを試行してください。それには、例えば、[Simple cloud-based load tester](https://loader.io/) などのツールを使用します。
    {: tip}
@@ -351,7 +357,7 @@ Knative および Istio がすべてセットアップされたので、最初�
     ```
     {: codeblock}
 
-7. 変更をサービスに適用します。構成を変更した場合、Knative は自動的に、新規リビジョンを作成し、新規経路を割り当て、デフォルトで Istio に着信ネットワーク・トラフィックを最新のリビジョンにルーティングするように指示します。
+7. 変更をサービスに適用します。 構成を変更した場合、Knative は自動的に、新規リビジョンを作成し、新規経路を割り当て、デフォルトで Istio に着信ネットワーク・トラフィックを最新のリビジョンにルーティングするように指示します。
    ```
    kubectl apply -f service.yaml
    ```
@@ -369,7 +375,7 @@ Knative および Istio がすべてセットアップされたので、最初�
    ```
    {: screen}
 
-9. 増えたネットワーク・トラフィックのために Knative によって再度ポッドがスケール・アップされたことを確認します。ポッドには、`00002` リビジョン番号が割り当てられます。リビジョン番号を使用すると、例えば、2 つのリビジョン間で着信トラフィックを分割するように Istio に指示する場合などに、特定のバージョンのアプリを参照できます。
+9. 増えたネットワーク・トラフィックのために Knative によって再度ポッドがスケール・アップされたことを確認します。 ポッドには、`00002` リビジョン番号が割り当てられます。 リビジョン番号を使用すると、例えば、2 つのリビジョン間で着信トラフィックを分割するように Istio に指示する場合などに、特定のバージョンのアプリを参照できます。
    ```
    kubectl get pods
    ```
@@ -387,7 +393,7 @@ Knative および Istio がすべてセットアップされたので、最初�
     ```
     {: pre}
 
-お疲れさまでした。最初の Knative アプリをクラスターに正常にデプロイして、Knative `Serving` プリミティブのリビジョン機能とスケーリング機能を探索できました。
+お疲れさまでした。 最初の Knative アプリをクラスターに正常にデプロイして、Knative `Serving` プリミティブのリビジョン機能とスケーリング機能を探索できました。
 
 
 ## 次の作業   

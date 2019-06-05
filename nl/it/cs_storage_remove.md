@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -46,8 +46,7 @@ In tutti gli altri casi, attieniti alle istruzioni per controllare lo stato dell
 Dipende da cosa elimini e dal tipo di fatturazione. Se elimini la PVC e il PV ma non l'istanza nel tuo account dell'infrastruttura IBM Cloud (SoftLayer), tale istanza permane e incorri in addebiti per essa. Devi eliminare tutto, per evitare addebiti. Inoltre, quando specifichi il tipo di fatturazione (`billingType`) nella PVC, puoi scegliere `hourly` o `monthly`. Se hai scelto `monthly`, la tua istanza viene fatturata mensilmente. Quando elimini l'istanza, ti viene addebitato il resto del mese.
 
 
-<p class="important">Quando ripulisci l'archiviazione persistente, elimini tutti i dati in essa archiviati. Se hai bisogno di una copia dei dati, crea un backup per l'[archiviazione file](/docs/containers?topic=containers-file_storage#file_backup_restore) o l'[archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_backup_restore).</br>
-</br>Se utilizzi un account {{site.data.keyword.Bluemix_dedicated}}, devi richiedere l'eliminazione del volume [aprendo un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
+<p class="important">Quando ripulisci l'archiviazione persistente, elimini tutti i dati in essa archiviati. Se hai bisogno di una copia dei dati, crea un backup per l'[archiviazione file](/docs/containers?topic=containers-file_storage#file_backup_restore) o l'[archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
 
 Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -145,7 +144,7 @@ Per ripulire i dati persistenti:
    ```
    {: pre}
 
-   Se hai rimosso il tuo cluster e non riesci a richiamare il nome del PV, sostituisci `grep <pv_name>` con `grep <cluster_id>` per elencare tutti i dispositivi di archiviazione associati al tuo cluster.
+   Se hai rimosso il tuo cluster e non puoi richiamare il nome del PV, sostituisci `grep <pv_name>` con `grep <cluster_id>` per elencare tutti i dispositivi di archiviazione associati al tuo cluster.
    {: tip}
 
    Output di esempio:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,7 +44,7 @@ Antes de empezar, asegúrese de tener las [políticas de acceso de {{site.data.k
 
 ## Paso 1. Ejecutar pruebas con la herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}}
 
-Cuando resuelva problemas, puede utilizar la herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}} para ejecutar pruebas de Ingress y recopilar información de Ingress pertinente del clúster. Para utilizar la herramienta de depuración, instale el diagrama de Helm [`ibmcloud-iks-debug` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+Cuando resuelva problemas, puede utilizar la herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}} para ejecutar pruebas de Ingress y recopilar información de Ingress pertinente del clúster. Para utilizar la herramienta de depuración, instale el [diagrama de Helm de `ibmcloud-iks-debug` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
 {: shortdesc}
 
 
@@ -52,7 +52,7 @@ Cuando resuelva problemas, puede utilizar la herramienta de diagnósticos y de d
 
 2. Instale el diagrama de Helm en el clúster.
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 

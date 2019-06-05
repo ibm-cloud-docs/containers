@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -39,23 +39,23 @@ Tendo problemas de conexão com seu app por meio do Ingress? Tente  [ Depurging 
 Enquanto você soluciona problemas, é possível usar o [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) para executar testes e reunir informações pertinentes de rede, do Ingresso e do strongSwan por meio de seu cluster.
 {: tip}
 
-## Não é possível se conectar a um app por meio de um serviço de balanceador de carga
+## Não é possível se conectar a um aplicativo por meio de um serviço de balanceador de carga de rede (NLB)
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-Você expôs publicamente seu app criando um serviço de balanceador de carga no cluster. Quando tentou se conectar ao seu app usando o endereço IP público do balanceador de carga, a conexão falhou ou atingiu o tempo limite.
+Você expôs publicamente seu aplicativo criando um serviço de NLB em seu cluster. Quando tentou se conectar ao seu aplicativo usando o endereço IP público do NLB, a conexão falhou ou atingiu o tempo limite.
 
 {: tsCauses}
-O serviço de balanceador de carga pode não estar funcionando corretamente por um dos motivos a seguir:
+Seu serviço NLB pode não estar funcionando corretamente devido a um dos motivos a seguir:
 
 -   O cluster é um cluster grátis ou um cluster padrão com somente um nó do trabalhador.
 -   O cluster não está totalmente implementado ainda.
--   O script de configuração para o serviço de balanceador de carga inclui erros.
+-   O script de configuração para seu serviço NLB inclui erros.
 
 {: tsResolve}
-Para solucionar problemas do serviço de balanceador de carga:
+Para solucionar problemas de seu serviço NLB:
 
-1.  Verifique se você configurou um cluster padrão que está totalmente implementado e tem pelo menos dois nós do trabalhador para assegurar alta disponibilidade para o serviço de balanceador de carga.
+1.  Verifique se você configurou um cluster padrão totalmente implementado que tenha pelo menos dois nós do trabalhador para garantir a alta disponibilidade para seu serviço NLB.
 
   ```
   ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -64,10 +64,10 @@ Para solucionar problemas do serviço de balanceador de carga:
 
     Na saída da CLI, certifique-se de que o **Status** dos nós do trabalhador exiba **Pronto** e que o **Tipo de máquina** mostre um tipo de máquina diferente de **livre**.
 
-2. Para balanceadores de carga da versão 2.0: assegure-se de concluir os pré-requisitos do [pré-requisitos do balanceador de carga 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
+2. Para NLBs da versão 2.0: certifique-se de concluir os [pré-requisitos do NLB 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
 
-3. Verifique a precisão do arquivo de configuração para o serviço de balanceador de carga.
-    * Balanceadores de carga da versão 2.0:
+3. Verifique a exatidão do arquivo de configuração para seu serviço NLB.
+    * NLBs da versão 2.0:
         ```
         apiVersion: v1
         kind: Service
@@ -86,11 +86,11 @@ Para solucionar problemas do serviço de balanceador de carga:
 
         1. Verifique se você definiu **LoadBalancer** como o tipo para seu serviço.
         2. Verifique se você incluiu a anotação `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"`.
-        3. Na seção `spec.selector` do serviço LoadBalancer, assegure-se de que o `<selector_key>` e o `<selector_value>` é o mesmo que o par chave/valor que você usou na seção `spec.template.metadata.labels` de seu YAML de implementação. Se os rótulos não corresponderem, a seção **Terminais** em seu serviço LoadBalancer exibirá **<nenhum>** e seu app não ficará acessível na Internet.
+        3. Na seção `spec.selector` do serviço LoadBalancer, certifique-se de que `<selector_key>` e `<selector_value>` sejam iguais ao par chave/valor usado na seção `spec.template.metadata.labels` de seu YAML de implementação. Se os rótulos não corresponderem, a seção **Terminais** em seu serviço LoadBalancer exibirá **<nenhum>** e seu app não ficará acessível na Internet.
         4. Verifique se usou a **porta** em que seu app atende.
         5. Verifique se você configurou `externalTrafficPolicy` para `Local`.
 
-    * Balanceadores de carga da Versão 1.0:
+    * NLBs da versão 1.0:
         ```
         apiVersion: v1
     kind: Service
@@ -106,10 +106,10 @@ Para solucionar problemas do serviço de balanceador de carga:
         {: screen}
 
         1. Verifique se você definiu **LoadBalancer** como o tipo para seu serviço.
-        2. Na seção `spec.selector` do serviço LoadBalancer, assegure-se de que o `<selector_key>` e o `<selector_value>` é o mesmo que o par chave/valor que você usou na seção `spec.template.metadata.labels` de seu YAML de implementação. Se os rótulos não corresponderem, a seção **Terminais** em seu serviço LoadBalancer exibirá **<nenhum>** e seu app não ficará acessível na Internet.
+        2. Na seção `spec.selector` do serviço LoadBalancer, certifique-se de que `<selector_key>` e `<selector_value>` sejam iguais ao par chave/valor usado na seção `spec.template.metadata.labels` de seu YAML de implementação. Se os rótulos não corresponderem, a seção **Terminais** em seu serviço LoadBalancer exibirá **<nenhum>** e seu app não ficará acessível na Internet.
         3. Verifique se usou a **porta** em que seu app atende.
 
-3.  Verifique o serviço de balanceador de carga e revise a seção **Eventos** para localizar erros em potencial.
+3.  Verifique seu serviço NLB e revise a seção **Eventos** para localizar possíveis erros.
 
     ```
     kubectl describe service <myservice>
@@ -118,22 +118,22 @@ Para solucionar problemas do serviço de balanceador de carga:
 
     Procure as mensagens de erro a seguir:
 
-    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Para usar o serviço de balanceador de carga, deve-se ter um cluster padrão com pelo menos dois nós do trabalhador.</li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Essa mensagem de erro indica que não sobrou nenhum endereço IP público móvel para ser alocado para o serviço de balanceador de carga. Consulte <a href="/docs/containers?topic=containers-subnets#subnets">Incluindo sub-redes nos clusters</a> para localizar informações sobre como solicitar endereços IP públicos móveis para seu cluster. Depois que os endereços IP públicos móveis estiverem disponíveis para o cluster, o serviço de balanceador de carga será criado automaticamente.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Você definiu um endereço IP público móvel para o serviço de balanceador de carga usando a seção **`loadBalancerIP`**, mas esse endereço IP público móvel não está disponível em sua sub-rede pública móvel. Na seção **`loadBalancerIP`** de seu script de configuração, remova o endereço IP existente e inclua um dos endereços IP públicos móveis disponíveis. Também é possível remover a seção **`loadBalancerIP`** de seu script para que um endereço IP público móvel disponível possa ser alocado automaticamente.</li>
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Você não tem nós do trabalhador suficientes para implementar um serviço de balanceador de carga. Um motivo talvez seja que você tenha implementado um cluster padrão com mais de um nó do trabalhador, mas o fornecimento dos nós do trabalhador tenha falhado.</li>
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Para usar o serviço NLB, deve-se ter um cluster padrão com pelo menos dois nós do trabalhador.</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the NLB service request. Add a portable subnet to the cluster and try again</code></pre></br>Essa mensagem de erro indica que nenhum endereço IP público móvel ficou disponível para a alocação ao seu serviço NLB. Consulte <a href="/docs/containers?topic=containers-subnets#subnets">Incluindo sub-redes nos clusters</a> para localizar informações sobre como solicitar endereços IP públicos móveis para seu cluster. Depois que os endereços IP públicos móveis estiverem disponíveis para o cluster, o serviço NLB será criado automaticamente.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Você definiu um endereço IP público móvel para seu YAML do balanceador de carga usando a seção **`loadBalancerIP`**, mas ele não está disponível em sua sub-rede pública móvel. Na seção **`loadBalancerIP`** de seu script de configuração, remova o endereço IP existente e inclua um dos endereços IP públicos móveis disponíveis. Também é possível remover a seção **`loadBalancerIP`** de seu script para que um endereço IP público móvel disponível possa ser alocado automaticamente.</li>
+    <li><pre class="screen"><code>No available nodes for NLB services</code></pre>Você não possui nós do trabalhador suficientes para implementar um serviço NLB. Um motivo talvez seja que você tenha implementado um cluster padrão com mais de um nó do trabalhador, mas o fornecimento dos nós do trabalhador tenha falhado.</li>
     <ol><li>Liste os nós do trabalhador disponíveis.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>Se pelo menos dois nós do trabalhador disponíveis forem localizados, liste os detalhes do nó do trabalhador.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>Certifique-se de que os IDs de VLAN pública e privada para os nós do trabalhador que foram retornados pela correspondência de comandos <code>kubectl get nodes</code> e <code>ibmcloud ks worker-get</code>.</li></ol></li></ul>
 
-4.  Se você estiver usando um domínio customizado para se conectar ao serviço de balanceador de carga, certifique-se de que seu domínio customizado seja mapeado para o endereço IP público do serviço de balanceador de carga.
-    1.  Localize o endereço IP público do serviço de balanceador de carga.
+4.  Se estiver usando um domínio customizado para se conectar ao seu serviço NLB, certifique-se de que ele esteja mapeado para o endereço IP público de seu serviço NLB.
+    1.  Localize o endereço IP público de seu serviço NLB.
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
-    2.  Verifique se o seu domínio customizado está mapeado para o endereço IP público móvel do serviço de balanceador de carga no registro de Ponteiro (PTR).
+    2.  Verifique se seu domínio customizado está mapeado para o endereço IP público móvel de seu serviço NLB no Registro de ponteiro (PTR).
 
 <br />
 
@@ -153,13 +153,13 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 
 Na saída da CLI, certifique-se de que o **Status** dos nós do trabalhador exiba **Pronto** e que o **Tipo de máquina** mostre um tipo de máquina diferente de **livre**.
 
-* Se o cluster padrão estiver totalmente implementado e tiver pelo menos 2 nós do trabalhador por zona, mas nenhum **Subdomínio do Ingress** estiver disponível, consulte [Não é possível obter um subdomínio para o ALB do Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
+* Se o seu cluster padrão estiver completamente implementado e tiver pelo menos 2 nós do trabalhador por zona, mas nenhum **Subdomínio do Ingress** estiver disponível, consulte [Não é possível obter um subdomínio para o ALB do Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
 * Para outros problemas, solucione problemas de sua configuração do Ingress seguindo as etapas em [Depurando o Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress).
 
 <br />
 
 
-## Problemas de segredo do balanceador de carga de aplicativo de Ingresso
+## Problemas secretos do balanceador de carga do aplicativo (ALB) Ingress
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
@@ -199,7 +199,7 @@ Revise as razões a seguir por que o segredo do ALB pode falhar e as etapas de r
  </tr>
  <tr>
  <td>Seu segredo importado tem o mesmo nome que o segredo do Ingress fornecido pela IBM.</td>
- <td>Renomeie seu segredo. É possível verificar o nome do segredo do Ingress fornecido pela IBM executando `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress `.</td>
+ <td>Renomeie seu segredo. É possível verificar o nome do segredo do Ingress fornecido pela IBM executando `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
  </tr>
  </tbody></table>
 
@@ -210,7 +210,7 @@ Revise as razões a seguir por que o segredo do ALB pode falhar e as etapas de r
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Ao executar o `ibmcloud ks cluster-get --cluster <cluster>`< seu cluster está em um estado `normal`, mas nenhum **Subdomínio do Ingress** está disponível.
+Ao executar `ibmcloud ks cluster-get --cluster <cluster>`, seu cluster está em um estado `normal`, mas nenhum **Subdomínio do Ingress** está disponível.
 
 É possível ver uma mensagem de erro semelhante à seguinte:
 
@@ -227,7 +227,7 @@ Para visualizar quantas sub-redes uma VLAN tem:
 2.  Clique no **Número da VLAN** da VLAN usada para criar seu cluster. Revise a seção **Subnets** para ver se 40 ou mais sub-redes existem.
 
 {: tsResolve}
-Se você precisar de uma nova VLAN, peça uma [entrando em contato com o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Em seguida, [crie um cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) que usa essa nova VLAN.
+Se você precisar de uma nova VLAN, peça uma [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Em seguida, [crie um cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) que usa essa nova VLAN.
 
 Se você tiver outra VLAN disponível, será possível [configurar a ampliação da VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) no cluster existente. Depois, será possível incluir novos nós do trabalhador no cluster que usam a outra VLAN com sub-redes disponíveis. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
@@ -239,7 +239,7 @@ Se você não estiver usando todas as sub-redes na VLAN, será possível reutili
 
 2.  [Crie um cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) com a opção `--no-subnet` para que o serviço não tente criar novas sub-redes. Especifique a zona e a VLAN que tem as sub-redes que estão disponíveis para reutilização.
 
-3.  Use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add` para incluir sub-redes existentes no seu cluster. Para obter mais informações, veja [Incluindo ou reutilizando sub-redes customizadas e existentes nos clusters do Kubernetes](/docs/containers?topic=containers-subnets#subnets_custom).
+3.  Use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add` para incluir sub-redes existentes em seu cluster. Para obter mais informações, veja [Incluindo ou reutilizando sub-redes customizadas e existentes nos clusters do Kubernetes](/docs/containers?topic=containers-subnets#subnets_custom).
 
 <br />
 
@@ -248,7 +248,7 @@ Se você não estiver usando todas as sub-redes na VLAN, será possível reutili
 {: #cs_multizone_subnet_limit}
 
 {: tsSymptoms}
-Quando você tem um cluster de múltiplas zonas e executa `ibmcloud ks albs <cluster>`, nenhum ALB é implementado em uma zona. Por exemplo, se você tiver nós do trabalhador em 3 zonas, poderá ver uma saída semelhante à seguinte na qual um ALB público não foi implementado na terceira zona.
+Quando você tem um cluster multizona e executa `ibmcloud ks albs <cluster>`, nenhum ALB é implementado em uma zona. Por exemplo, se você tiver nós do trabalhador em 3 zonas, poderá ver uma saída semelhante à seguinte na qual um ALB público não foi implementado na terceira zona.
 ```
 ALB ID                                            Status     Type      ALB IP           Zone    Build
 private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
@@ -287,7 +287,7 @@ Para evitar que a conexão seja fechada após 60 segundos de inatividade:
 
 2. Para manter a conexão ativa, é possível aumentar o valor do tempo limite ou configurar uma pulsação em seu app.
 <dl><dt>Alterar o tempo limite</dt>
-<dd>Aumente o valor do `proxy-read-timeout` em sua configuração do ALB. Por exemplo, para mudar o tempo limite de `60s` para um valor maior, como `300s`, inclua esta [anotação](/docs/containers?topic=containers-ingress_annotation#connection) em seu arquivo de recursos do Ingress: `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s " `. O tempo limite é mudado para todos os ALBs públicos em seu cluster.</dd>
+<dd>Aumente o valor do `proxy-read-timeout` em sua configuração do ALB. Por exemplo, para mudar o tempo limite de `60s` para um valor maior, como `300s`, inclua essa [anotação](/docs/containers?topic=containers-ingress_annotation#connection) em seu arquivo de recursos do Ingress: `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. O tempo limite é mudado para todos os ALBs públicos em seu cluster.</dd>
 <dt>Configurar uma pulsação</dt>
 <dd>Se você não desejar mudar o valor de tempo limite de leitura padrão do ALB, configure uma pulsação em seu app WebSocket. Ao configurar um protocolo de pulsação usando uma estrutura como [WAMP ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://wamp-proto.org/), o servidor de envio de dados do app envia periodicamente uma mensagem "ping" em um intervalo cronometrado e o cliente responde com uma mensagem "pong". Configure o intervalo de pulsação para 58 segundos ou menos para que o tráfego "ping/pong" mantenha a conexão aberta antes que o tempo limite de 60 segundos seja cumprido.</dd></dl>
 
@@ -303,14 +303,14 @@ Você ativou a preservação de IP de origem para um [balanceador de carga da ve
 {: tsCauses}
 Ao ativar a preservação de IP de origem para os serviços de balanceador de carga ou ALB do Ingress, o endereço IP de origem da solicitação do cliente é preservado. O serviço encaminha o tráfego para os pods de app no mesmo nó do trabalhador somente para assegurar que o endereço IP do pacote de solicitações não seja mudado. Geralmente, os pods dos serviços de balanceador de carga ou ALB de Ingress são implementados nos mesmos nós do trabalhador nos quais os pods de app são implementados. No entanto, existem algumas situações em que os pods de serviço e os pods de app podem não ser planejados para o mesmo nó do trabalhador. Se você usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) em nós do trabalhador, quaisquer pods que não tiverem uma tolerância de contaminação serão impedidos de serem executados nos nós do trabalhador contaminados. A preservação de IP de origem pode não estar funcionando com base no tipo de contaminação que você usou:
 
-* **Contaminações de nó de borda**: você [incluiu o rótulo `dedicated=edge`](/docs/containers?topic=containers-edge#edge_nodes) para dois ou mais nós do trabalhador em cada VLAN pública em seu cluster para assegurar que os pods do Ingress e do balanceador de carga sejam implementados somente nos nós do trabalhador. Em seguida, você também [contaminou esses nós de borda](/docs/containers?topic=containers-edge#edge_workloads) para evitar que quaisquer outras cargas de trabalho sejam executadas em nós de borda. No entanto, você não incluiu uma regra de afinidade de nó de borda e tolerância em sua implementação do app. Seus pods de app não podem ser planejados nos mesmos nós contaminados que os pods de serviço, e nenhum tráfego atinge o serviço de back-end para o seu app.
+* **Contaminações do nó de borda**: você [incluiu o rótulo `dedicated=edge`](/docs/containers?topic=containers-edge#edge_nodes) em dois ou mais nós do trabalhador em cada VLAN pública em seu cluster para garantir que os pods do Ingress e do balanceador de carga sejam implementados somente nesses nós do trabalhador. Em seguida, você também [contaminou esses nós de borda](/docs/containers?topic=containers-edge#edge_workloads) para evitar que quaisquer outras cargas de trabalho sejam executadas em nós de borda. No entanto, você não incluiu uma regra de afinidade de nó de borda e tolerância em sua implementação do app. Seus pods de app não podem ser planejados nos mesmos nós contaminados que os pods de serviço, e nenhum tráfego atinge o serviço de back-end para o seu app.
 
 * **Contaminações customizadas**: você usou contaminações customizadas em vários nós para que somente os pods de app com essa tolerância de contaminação possam ser implementados nesses nós. Você incluiu regras de afinidade e tolerâncias para as implementações de seu app e o serviço de balanceador de carga ou Ingress para que seus pods sejam implementados somente nesses nós. No entanto, os pods `ibm-cloud-provider-ip` `keepalived` que são criados automaticamente no namespace `ibm-system` asseguram que os pods do balanceador de carga e os pods de app estejam sempre planejados para o mesmo nó do trabalhador. Esses pods `keepalived` não têm as tolerâncias para as contaminações customizadas que você usou. Eles não podem ser planejados nos mesmos nós contaminados nos quais seus pods de app estão em execução e nenhum tráfego atinge o serviço de back-end para o seu app.
 
 {: tsResolve}
 Resolva o problema escolhendo uma das opções a seguir:
 
-* **Contaminações de nó de borda**: para assegurar que seus pods do balanceador de carga e do app sejam implementados em nós de borda contaminados, [inclua regras de afinidade e tolerâncias de nó de borda em sua implementação do app](/docs/containers?topic=containers-loadbalancer#edge_nodes). Os pods do balanceador de carga e do ALB do Ingress têm essas regras de afinidade e tolerâncias por padrão.
+* **Contaminações de nó de borda**: para assegurar que seus pods do balanceador de carga e do app sejam implementados em nós de borda contaminados, [inclua regras de afinidade e tolerâncias de nó de borda em sua implementação do app](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). Os pods do balanceador de carga e do ALB do Ingress têm essas regras de afinidade e tolerâncias por padrão.
 
 * **Contaminações customizadas**: remova as contaminações customizadas para as quais os pods `keepalived` não têm tolerâncias. Em vez disso, é possível [rotular nós do trabalhador como nós de borda e, em seguida, contaminar esses nós de borda](/docs/containers?topic=containers-edge).
 
@@ -350,7 +350,7 @@ Seu arquivo de configuração do gráfico Helm tem valores incorretos, valores a
 {: tsResolve}
 Quando você tentar estabelecer a conectividade VPN com o gráfico Helm do strongSwan, é provável que o status da VPN não seja `ESTABLISHED` na primeira vez. Você pode precisar verificar vários tipos de problemas e mudar seu arquivo de configuração de acordo. Para solucionar problemas de sua conectividade VPN do strongSwan:
 
-1. [Teste e verifique a conectividade VPN do strongSwan](/docs/containers?topic=containers-vpn#vpn_test) executando os cinco testes do Helm que estão incluídos na definição de gráfico do strongSwan.
+1. [Teste e verifique a conectividade de VPN do strongSwan](/docs/containers?topic=containers-vpn#vpn_test) executando os cinco testes do Helm que estão incluídos na definição de gráfico do strongSwan.
 
 2. Se não for possível estabelecer a conectividade de VPN depois de executar os testes do Helm, será possível executar a ferramenta de depuração de VPN que está empacotada dentro da imagem do pod VPN.
 
@@ -567,13 +567,13 @@ Ao tentar visualizar políticas de rede do Calico em seu cluster executando `cal
 Para usar políticas do Calico, quatro fatores devem todos alinhar: a versão do cluster Kubernetes, a versão da CLI Calico, a sintaxe do arquivo de configuração do Calico e os comandos de política de visualização. Um ou mais desses fatores não está na versão correta.
 
 {: tsResolve}
-Quando o cluster estiver no [Kubernetes versão 1.10 ou mais recente](/docs/containers?topic=containers-cs_versions), deve-se usar a CLI do Calisto v3.1, a sintaxe do arquivo de configuração v3 `calicoctl.cfg` e os comandos `calicoctl get GlobalNetworkPolicy` e `calicoctl get NetworkPolicy`.
+Deve-se usar a CLI v3.3 ou mais recente do Calico, a sintaxe do arquivo de configuração da v3 `calicoctl.cfg` e os comandos `calicoctl get GlobalNetworkPolicy` e `calicoctl get NetworkPolicy`.
 
 Para assegurar que todos os fatores do Calico estejam alinhados:
 
-1. [Instale e configure a CLI do Calico versão 3.3.1](/docs/containers?topic=containers-network_policies#cli_install). A configuração inclui atualizar manualmente o arquivo `calicoctl.cfg` para usar a sintaxe do Calico v3.
-2. Assegure-se de que quaisquer políticas que você criar e desejar aplicar a seu cluster usem a [Sintaxe do Calico v3 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Se você tiver um arquivo `.yaml` ou `.json` de política existente na sintaxe do Calico v2, será possível converter isso para a sintaxe do Calico v3 usando o comando [`calicoctl convert` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
-3. Para [visualizar políticas](/docs/containers?topic=containers-network_policies#view_policies), assegure-se de que você esteja usando `calicoctl get GlobalNetworkPolicy` para as políticas globais e `calicoctl get NetworkPolicy --namespace <policy_namespace>` para políticas que estão com escopo definido para namespaces específicos.
+1. [Instale e configure uma CLI do Calico da versão 3.3 ou mais recente](/docs/containers?topic=containers-network_policies#cli_install).
+2. Assegure-se de que quaisquer políticas que você criar e desejar aplicar a seu cluster usem a [Sintaxe do Calico v3 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). Se tiver um arquivo de política `.yaml` ou `.json` existente na sintaxe do Calico v2, será possível convertê-lo para a sintaxe do Calico v3 usando o comando [`calicoctl convert` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
+3. Para [visualizar políticas](/docs/containers?topic=containers-network_policies#view_policies), certifique-se de estar usando `calicoctl get GlobalNetworkPolicy` para políticas globais e `calicoctl get NetworkPolicy --namespace <policy_namespace>` para políticas com escopo definido para namespaces específicos.
 
 <br />
 
@@ -598,7 +598,7 @@ Quando uma conta é suspensa, os nós do trabalhador dentro da conta são exclu�
 
 Como alternativa, é possível manter o seu conjunto de trabalhadores existente pedindo novas VLANs e usando-as para criar novos nós do trabalhador no conjunto.
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Para obter as zonas para as quais você precisa de novos IDs de VLAN, anote o **Local** na saída de comando a seguir. **Nota**: se o seu cluster for de múltiplas zonas, serão necessários IDs de VLAN para cada zona.
 
@@ -607,7 +607,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
     ```
     {: pre}
 
-2.  Obtenha uma nova VLAN privada e pública para cada zona em que seu cluster está [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
+2.  Obtenha uma nova VLAN privada e pública para cada zona na qual seu cluster está [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
 3.  Anote os novos IDs de VLAN privada e pública para cada zona.
 
@@ -618,7 +618,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
     ```
     {: pre}
 
-5.  Use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) `zone-network-set` para mudar os metadados da rede do conjunto de trabalhadores.
+5.  Use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) `zone-network-set` para mudar os metadados da rede do conjunto do trabalhador.
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>

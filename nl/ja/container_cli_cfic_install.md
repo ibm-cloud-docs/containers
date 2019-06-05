@@ -27,5 +27,5 @@ subcollection: containers
 # お探しのコンテンツは移動しました
 {: #container_cli_cfic_install}
 
-お探しのコンテンツは移動しました。 <a href="https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip">新しい場所から、最新情報をダウンロードしてください</a>。
+お探しのコンテンツは移動しました。<a href="https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip">新しい場所から、最新情報をダウンロードしてください</a>。
 {:shortdesc}

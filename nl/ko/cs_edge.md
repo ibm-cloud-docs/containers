@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks 
 
@@ -135,7 +135,7 @@ subcollection: containers
   {: pre}
 이제 `dedicated=edge` 결함 허용을 사용하는 팟(Pod)만 에지 작업자 노드에 배치됩니다.
 
-3. [로드 밸런서 서비스에 대해 소스 IP 보존을 사용으로 설정![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)하도록 선택한 경우에는 [에지 노드 친화성을 앱 팟(Pod)에 추가](/docs/containers?topic=containers-loadbalancer#edge_nodes)하여 앱 팟(Pod)이 에지 작업자 노드에 스케줄링되도록 하십시오. 수신 요청을 받도록 앱 팟(Pod)이 에지 노드에 스케줄되어야 합니다.
+3. [로드 밸런서 서비스에 대해 소스 IP 보존을 사용으로 설정![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)하도록 선택한 경우에는 [에지 노드 친화성을 앱 팟(Pod)에 추가](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)하여 앱 팟(Pod)이 에지 작업자 노드에 스케줄링되도록 하십시오. 수신 요청을 받도록 앱 팟(Pod)이 에지 노드에 스케줄되어야 합니다.
 
 4. 오염을 제거하려면 다음 명령을 실행하십시오.
     ```

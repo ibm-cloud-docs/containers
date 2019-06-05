@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -25,46 +25,108 @@ subcollection: containers
 
 
 # Le tue responsabilità nell'utilizzo di {{site.data.keyword.containerlong_notm}}
+{: #responsibilities_iks}
+
 Ulteriori informazioni sulle responsabilità di gestione del cluster e sui termini e le condizioni derivanti dall'utilizzo di {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 ## Responsabilità di gestione del cluster
 {: #responsibilities}
 
-Controlla le responsabilità che condividi con IBM per gestire i tuoi cluster.
+IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire le applicazioni insieme a servizi di sicurezza, {{site.data.keyword.Bluemix_notm}} DevOps, AI e dati.  Puoi scegliere come configurare, integrare e utilizzare le tue applicazioni e i tuoi servizi nel cloud.
 {:shortdesc}
 
-**IBM è responsabile di quanto segue:**
-
-- Distribuzione del master, dei nodi di lavoro e dei componenti di gestione all'interno del cluster, come il programma di bilanciamento del carico dell'applicazione Ingress, al momento della creazione del cluster
-- Fornitura di aggiornamenti della sicurezza, monitoraggio, isolamento e ripristino del master Kubernetes per il cluster
-- Messa a disposizione degli aggiornamenti di versione e delle patch di sicurezza per consentirti di applicarli ai nodi di lavoro del tuo cluster
-- Monitoraggio dell'integrità dei nodi di lavoro e la fornitura dell'automazione dell'aggiornamento e del ripristino di tali nodi di lavoro
-- Esecuzione delle attività di automazione nel tuo account dell'infrastruttura, inclusi l'aggiunta e la rimozione dei nodi di lavoro e la creazione di una sottorete predefinita
-- Gestione, aggiornamento e ripristino dei componenti operativi all'interno del cluster, come il programma di bilanciamento del carico dell'applicazione Ingress e il plug-in di archiviazione
-- Provisioning di volumi di archiviazione quando richiesto dalle attestazioni del volume persistente
-- Fornitura delle impostazioni di sicurezza per tutti i nodi di lavoro
-
-</br>
-
-**Tu sei responsabile per:**
-
-- [Configurazione della chiave API {{site.data.keyword.containerlong_notm}} con le autorizzazioni appropriate per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) e ad altri servizi {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#api_key)
-- [Distribuzione e gestione delle risorse Kubernetes, come i pod, i servizi e le distribuzioni, all'interno del cluster](/docs/containers?topic=containers-app#app_cli)
-- [Utilizzo delle funzionalità del servizio e di Kubernetes per garantire l'elevata disponibilità alle applicazioni](/docs/containers?topic=containers-app#highly_available_apps)
-- [Aggiunta o rimozione della capacità del cluster ridimensionando i tuoi pool di nodi di lavoro](/docs/containers?topic=containers-clusters#add_workers)
-- [Abilitazione dello spanning delle VLAN e mantenimento del bilanciamento dei pool di nodi di lavoro multizona tra le zone](/docs/containers?topic=containers-plan_clusters#ha_clusters)
-- [Creazione delle VLAN pubblica e privata nell'infrastruttura IBM Cloud (SoftLayer) per l'isolamento di rete del tuo cluster](/docs/infrastructure/vlans?topic=vlans-getting-started-with-vlans#getting-started-with-vlans)
-- [Verifica che tutti i nodi di lavoro dispongano di connettività di rete agli URL di endpoint del servizio Kubernetes](/docs/containers?topic=containers-firewall#firewall) <p class="note">Se un nodo di lavoro ha sia una VLAN pubblica che privata, viene configurata la connettività di rete. Se i nodi di lavoro sono configurati solo con una VLAN privata, devi consentire le comunicazioni tra i nodi di lavoro e il master cluster [abilitando l'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) o [configurando un dispositivo gateway](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway). Se imposti un firewall, devi gestirne e configurarne le impostazioni per consentire l'accesso per {{site.data.keyword.containerlong_notm}} e altri servizi {{site.data.keyword.Bluemix_notm}} che utilizzi con il cluster.</p>
-- [Aggiornamento del kube-apiserver master quando sono disponibili aggiornamenti alla versione di Kubernetes](/docs/containers?topic=containers-update#master)
-- [Mantenere i nodi di lavoro aggiornati alle versioni patch, principale e secondaria](/docs/containers?topic=containers-update#worker_node) <p class="note">Non puoi modificare il sistema operativo del tuo nodo di lavoro o eseguire l'accesso al nodo di lavoro. Gli aggiornamenti dei nodi di lavoro sono forniti da IBM come un'immagine del nodo di lavoro completa che include le patch di sicurezza più recenti. Per applicare gli aggiornamenti, è necessario ricercare l'immagine e ricaricare il nodo di lavoro con la nuova immagine. Le chiavi per l'utente root vengono ruotate automaticamente quando il nodo di lavoro viene ricaricato. </p>
-- [Monitoraggio dell'integrità del tuo cluster configurando l'inoltro dei log per i componenti del tuo cluster](/docs/containers?topic=containers-health#health).   
-- [Ripristino dei nodi di lavoro con problemi eseguendo i comandi `kubectl`, come `cordon` o `drain`, ed eseguendo i comandi `ibmcloud ks`, come `reboot`, `reload` o `delete`](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)
-- [Aggiunta o rimozione delle sottoreti nell'infrastruttura IBM Cloud (SoftLayer) secondo necessità](/docs/containers?topic=containers-subnets#subnets)
-- [Backup e ripristino dei dati nell'archiviazione persistente nell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter)
-- Configurazione dei servizi [logging](/docs/containers?topic=containers-health#logging) e [monitoring](/docs/containers?topic=containers-health#view_metrics) per supportare l'integrità e le prestazioni del tuo cluster
-- [Configurazione del monitoraggio dell'integrità per i nodi di lavoro con Autorecovery](/docs/containers?topic=containers-health#autorecovery)
-- Controllo degli eventi che modificano le risorse nel tuo cluster, come ad esempio utilizzando [{{site.data.keyword.cloudaccesstrailfull}}](/docs/containers?topic=containers-at_events#at_events) per visualizzare le attività avviate dall'utente che modificano lo stato della tua istanza {{site.data.keyword.containerlong_notm}}
+<table summary="La tabella mostra le responsabilità di IBM e le tue. le righe devono essere lette da sinistra a destra; le icone rappresentano ciascuna responsabilità nella colonna uno e la descrizione è contenuta nella colonna due.">
+<caption>Responsabilità di IBM e tue</caption>
+  <thead>
+  <th colspan=2>Responsabilità in base al tipo</th>
+  </thead>
+  <tbody>
+    <tr>
+    <td align="center"><img src="images/icon_clouddownload.svg" alt="Icona di una nuvola con una freccia che punta verso il basso"/><br>Infrastruttura cloud</td>
+    <td>
+    **Responsabilità di IBM**:
+    <ul><li>Distribuire un master dedicato altamente disponibile e pienamente gestito in un account protetto dell'infrastruttura di proprietà di IBM per ciascun cluster.</li>
+    <li>Eseguire il provisioning dei nodi di lavoro nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).</li>
+    <li>Configurare i componenti di gestione del cluster, come le VLAN e i programmi di bilanciamento del carico.</li>
+    <li>Soddisfare le richieste di ulteriore infrastruttura, come ad esempio l'aggiunta e la rimozione di nodi di lavoro, la creazione di sottoreti predefinite e il provisioning di volumi di archiviazione in risposta alle attestazioni del volume persistente (o PVC, persistent volume claim).</li>
+    <li>Integrare le risorse dell'infrastruttura ordinate in modo che funzionino automaticamente con l'architettura del tuo cluster e diventino disponibili per le tue applicazioni distribuite e i tuoi carichi di lavoro.</li></ul>
+    <br><br>
+    **Le tue responsabilità**:
+    <ul><li>Utilizzare gli strumenti API, CLI e console forniti per regolare la capacità di [calcolo](/docs/containers?topic=containers-clusters#clusters) e [archiviazione](/docs/containers?topic=containers-storage_planning#storage_planning) e per regolare la [configurazione di rete](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster) per soddisfare le esigenze del tuo carico di lavoro.</li></ul><br><br>
+    </td>
+     </tr>
+     <tr>
+     <td align="center"><img src="images/icon_tools.svg" alt="Icona di una chiave inglese"/><br>Cluster gestito</td>
+     <td>
+     **Responsabilità di IBM**:
+     <ul><li>Fornire una suite di strumenti per automatizzare la gestione del cluster, come ad esempio [API ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-api/), [plug-in CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) e [console ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/kubernetes/clusters) {{site.data.keyword.containerlong_notm}}.</li>
+     <li>Applicare automaticamente aggiornamenti di sicurezza, versione e sistema operativo di patch master Kubernetes. Eseguire gli aggiornamenti principali e secondari a tua disposizione per poterli applicare.</li>
+     <li>Aggiornare e ripristinare componenti {{site.data.keyword.containerlong_notm}} e Kubernetes operativi all'interno del cluster, come ad esempio l'ALB (application load balancer) Ingress e il plugin di archiviazione file.</li>
+     <li>Eseguire il backup e il ripristino dei dati in etcd, come ad esempio i tuoi file di configurazione del carico di lavoro Kubernetes</li>
+     <li>Configurare una connessione OpenVPN tra il master e i nodi di lavoro quando viene creato il cluster.</li>
+     <li>Monitorare e notificare l'integrità del master e dei tuoi nodi di lavoro nelle diverse interfacce.</li>
+     <li>Fornire gli aggiornamenti di sicurezza, versione, sistema operativo di patch, principali e secondari del nodo di lavoro.</li>
+     <li>Soddisfare le richieste di automazione per aggiornare e ripristinare i nodi di lavoro. Fornire l'[Autorecovery del nodo di lavoro](/docs/containers?topic=containers-health#autorecovery) facoltativo.</li>
+     <li>Fornire gli strumenti, come ad esempio il [cluster autoscaler](/docs/containers?topic=containers-ca#ca), per estendere la tua infrastruttura cluster.</li>
+     </ul>
+     <br><br>
+     **Le tue responsabilità**:
+     <ul>
+     <li>Utilizzare gli strumenti API, CLI o console per [applicare](/docs/containers?topic=containers-update#update) gli aggiornamenti master Kubernetes principali e secondari forniti e gli aggiornamenti di nodi di lavoro patch.</li>
+     <li>Utilizzare gli strumenti API, CLI o console per [ripristinare](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot) le tue risorse dell'infrastruttura o impostare e configurare l'[Autorecovery di nodo di lavoro](/docs/containers?topic=containers-health#autorecovery) facoltativo.</li></ul>
+     <br><br></td>
+      </tr>
+    <tr>
+      <td align="center"><img src="images/icon_locked.svg" alt="Icona di blocco"/><br>Ambiente altamente sicuro</td>
+      <td>
+      **Responsabilità di IBM**:
+      <ul>
+      <li>Mantenere controlli commisurati ai [vari standard di conformità del settore](/docs/containers?topic=containers-faqs#standards), come ad esempio PCI DSS.</li>
+      <li>Monitorare, isolare e ripristinare il master cluster.</li>
+      <li>Fornire repliche ad alta disponibilità dei componenti server API master Kubernetes, etcd, programma di pianificazione e gestore controller per una protezione in caso di interruzioni del master.</li>
+      <li>Applicare automaticamente gli aggiornamenti delle patch di sicurezza master e fornire gli aggiornamenti delle patch di sicurezza del nodo di lavoro.</li>
+      <li>Abilitare specifiche impostazioni di sicurezza, come i dischi crittografati sui nodi di lavoro</li>
+      <li>Disabilitare specifiche azioni non sicure per i nodi di lavoro, come ad esempio il non consentire agli utenti di eseguire SSH nell'host.</li>
+      <li>Crittografare le comunicazioni tra il master e i nodi di lavoro con TLS.</li>
+      <li>Fornire delle immagini Linux conformi a CIS per i sistemi operativi di nodo di lavoro.</li>
+      <li>Monitorare in modo continuo le immagini di nodo di lavoro e master per rilevare problemi di vulnerabilità e conformità alla sicurezza.</li>
+      <li>Eseguire il provisioning ai nodi di lavoro di due partizioni di dati crittografate a 256 bit SSD e AES.</li>
+      <li>Fornire le opzioni per la connettività di rete del cluster, come ad esempio gli endpoint del servizio pubblico e privato.</li>
+      <li>Fornire le opzioni per l'isolamento del calcolo, come ad esempio delle macchine virtuali dedicate, bare metal e bare metal con Trusted Compute.</li>
+      <li>Integrare RBAC (role-based access control) Kubernetes con {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management).</li>
+      </ul>
+      <br><br>
+      **Le tue responsabilità**:
+      <ul>
+      <li>Utilizzare gli strumenti API, CLI o console per applicare gli [aggiornamenti di patch di sicurezza](/docs/containers?topic=containers-changelog#changelog) forniti ai tuoi nodi di lavoro.</li>
+      <li>Scegliere come configurare la tua [rete cluster](/docs/containers?topic=containers-cs_network_ov#cs_network_ov) e configurare ulteriori [impostazioni di sicurezza](/docs/containers?topic=containers-security#security) per soddisfare le esigenze di sicurezza e di compatibilità del tuo carico di lavoro. Se applicabile, configura il tuo [firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
+      <br><br></td>
+      </tr>
+      
+      <tr>
+        <td align="center"><img src="images/icon_code.svg" alt="Icona di parentesi di codice"/><br>Orchestrazione delle applicazioni</td>
+        <td>
+        **Responsabilità di IBM**:
+       <ul>
+        <li>Eseguire il provisioning ai cluster dei componenti Kubernetes installati in modo da consentirti di accedere all'API Kubernetes.</li>
+        <li>Fornire diversi componenti aggiuntivi gestiti per estendere le funzionalità della tua applicazione, come ad esempio [Istio](/docs/containers?topic=containers-istio#istio) e [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). La manutenzione, per te, è semplificata poiché IBM fornisce l'installazione e gli aggiornamenti per i componenti aggiuntivi gestiti.</li>
+        <li>Fornire l'integrazione cluster con tecnologie di partenariato di terze parti selezionate, come ad esempio {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} e Portworx.</li>
+        <li>Fornire l'automazione per abilitare l'associazione mediante bind dei servizi ad altri servizi {{site.data.keyword.Bluemix_notm}}.</li>
+        <li>Creare dei cluster con i segreti di pull dell'immagine in modo che le tue distribuzioni nello spazio dei nomi Kubernetes `default` possano eseguire il pull di immagini da {{site.data.keyword.registrylong_notm}}.</li>
+        <li>Fornire classi di archiviazione e plug-in per supportare i volumi persistenti per l'utilizzo con le tue applicazioni.</li>
+        <li>Creare dei cluster con gli indirizzi IP di sottorete riservati da utilizzare per esporre le applicazioni esternamente.</li>
+        <li>Supportare i programmi di bilanciamento del carico pubblici e privati Kubernetes nativi e gli instradamenti Ingress per esporre i servizi esternamente.</li>
+        </ul>
+        <br><br>
+        **Le tue responsabilità**:
+      <ul>
+        <li>Utilizzare gli strumenti e le funzioni forniti per [configurare e distribuire](/docs/containers?topic=containers-app#app); [configurare le autorizzazioni](/docs/containers?topic=containers-users#users); [eseguire l'integrazione con altri servizi](/docs/containers?topic=containers-supported_integrations#supported_integrations); [servire esternamente](/docs/containers?topic=containers-cs_network_planning#cs_network_planning); [monitorare l'integrità](/docs/containers?topic=containers-health#health); [salvare, eseguire il backup e ripristinare i dati](/docs/containers?topic=containers-storage_planning#storage_planning) e gestire in altro modo i tuoi carichi di lavoro [altamente disponibili](/docs/containers?topic=containers-ha#ha) e resilienti.</li>
+        </ul>
+        </td>
+        </tr>
+  </tbody>
+  </table>
 
 <br />
 

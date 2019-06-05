@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -58,7 +58,7 @@ Revise as razões a seguir para saber o motivo de os logs do cluster não aparec
  <tbody>
   <tr>
     <td>Nenhuma configuração de criação de log está definida.</td>
-    <td>Para que os logs sejam enviados, deve-se criar uma configuração de criação de log. Para fazer isso, consulte <a href="/docs/containers?topic=containers-health#logging">Configurando a criação de log do cluster</a>.</td>
+    <td>Para que os logs sejam enviados, deve-se criar uma configuração de criação de log. Para fazer isso, veja <a href="/docs/containers?topic=containers-health#logging">Configurando a criação de log do cluster</a>.</td>
   </tr>
   <tr>
     <td>O cluster não está em um estado <code>Normal</code>.</td>
@@ -66,12 +66,12 @@ Revise as razões a seguir para saber o motivo de os logs do cluster não aparec
   </tr>
   <tr>
     <td>A cota de armazenamento do log foi atendida.</td>
-    <td>Para aumentar seus limites de armazenamento de log, consulte a <a href="/docs/services/CloudLogAnalysis/troubleshooting?topic=cloudloganalysis-error_msgs"> documentação do {{site.data.keyword.loganalysislong_notm}}</a>.</td>
+    <td>Para aumentar seus limites de armazenamento de log, consulte a <a href="/docs/services/CloudLogAnalysis/troubleshooting?topic=cloudloganalysis-error_msgs">documentação do {{site.data.keyword.loganalysislong_notm}}</a>.</td>
   </tr>
   <tr>
     <td>Se você especificou um espaço na criação do cluster, o proprietário da conta não tem permissões de Gerenciador, Desenvolvedor ou Auditor para esse espaço.</td>
       <td>Para mudar permissões de acesso para o proprietário da conta:
-      <ol><li>Para descobrir quem é o proprietário da conta para o cluster, execute <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
+      <ol><li>Para descobrir quem é o proprietário da conta para o cluster, execute <code>ibmcloud ks api-key-info</code>.</li>
       <li>Para conceder a esse proprietário da conta as permissões de acesso de Gerenciador, Desenvolvedor ou Auditor do {{site.data.keyword.containerlong_notm}} para o espaço, veja <a href="/docs/containers?topic=containers-users">Gerenciando o acesso ao cluster</a>.</li>
       <li>Para atualizar o token de criação de log após a mudança das permissões, execute <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
@@ -84,7 +84,7 @@ Revise as razões a seguir para saber o motivo de os logs do cluster não aparec
 
 Para testar as mudanças feitas durante a resolução de problemas, é possível implementar *Noisy*, um pod de amostra que produz vários eventos de log, para um nó do trabalhador em seu cluster.
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Crie o arquivo de configuração `deploy-noisy.yaml`.
     ```
@@ -109,10 +109,10 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
     {:pre}
 
 3. Após alguns minutos, é possível visualizar seus logs no painel do Kibana. Para acessar o painel do Kibana, acesse uma das URLs a seguir e selecione a conta do {{site.data.keyword.Bluemix_notm}} na qual você criou o cluster. Se você especificou um espaço na criação do cluster, acesse esse espaço.
-    - Sul e Leste dos EUA: https://logging.ng.bluemix.net
-    - Sul do Reino Unido: https://logging.eu-gb.bluemix.net
-    - UE Central: https://logging.eu-fra.bluemix.net
-    - AP-South: https://logging.au-syd.bluemix.net
+    - US-Sul e EUA/Leste:  ` https://logging.ng.bluemix.net `
+    - UK-Sul:  ` https://logging.eu-gb.bluemix.net `
+    - UE-Central:  ` https://logging.eu-fra.bluemix.net `
+    - AP-Sul: `https://logging.au-syd.bluemix.net`
 
 <br />
 

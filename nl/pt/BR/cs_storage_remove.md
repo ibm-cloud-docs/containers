@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -34,20 +34,19 @@ Ao configurar o armazenamento persistente em seu cluster, você tem três compon
 
 Entendendo suas opções de exclusão:
 
-** Eu excluo meu cluster. Tenho que excluir mais alguma coisa para remover o armazenamento persistente?**</br>
+** Eu excluo meu cluster. Preciso excluir alguma outra coisa para remover o armazenamento persistente?**</br>
 Depende. Quando você exclui um cluster, o PVC e o PV são excluídos. No entanto, você escolhe se deseja remover a instância de armazenamento associada na infraestrutura do IBM Cloud (SoftLayer). Se você escolheu não a remover, a instância de armazenamento ainda existe. Além disso, se você excluiu seu cluster em um estado não funcional, o armazenamento ainda poderá existir mesmo se você escolheu removê-lo. Siga as instruções, especialmente a etapa para [excluir sua instância de armazenamento](#sl_delete_storage) na infraestrutura do IBM Cloud (SoftLayer).
 
-**Posso excluir o PVC para remover todo o meu armazenamento?**</br>
-Às vezes. Se você [criar o armazenamento persistente dinamicamente](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) e selecionar uma classe de armazenamento sem `retain` em seu nome, quando excluir o PVC, o PV e a instância de armazenamento de infraestrutura do IBM Cloud (SoftLayer) também serão excluídos.
+**Posso excluir a PVC para remover todo o meu armazenamento?**</br>
+Às vezes. Se você [criar o armazenamento persistente dinamicamente](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) e selecionar uma classe de armazenamento sem `retain` em seu nome, então, quando excluir o PVC, o PV e a instância de armazenamento de infraestrutura do IBM Cloud (SoftLayer) também serão excluídos.
 
 Em todos os outros casos, siga as instruções para verificar o status de seu PVC, PV e o dispositivo de armazenamento físico e exclua-os separadamente, se necessário.
 
-**Eu ainda sou cobrado pelo armazenamento depois de excluí-lo?**</br>
+**Ainda estou cobrado pelo armazenamento depois de excluí-lo?**</br>
 Depende do que você excluir e do tipo de faturamento. Se você excluir o PVC e o PV, mas não a instância em sua conta de infraestrutura do IBM Cloud (SoftLayer), essa instância ainda existirá e você será cobrado por ela. Deve-se excluir tudo para evitar encargos. Além disso, quando você especifica o `billingType` no PVC, é possível escolher `hourly` ou `monthly`. Se você escolheu `monthly`, sua instância será faturada mensalmente. Quando você excluir a instância, será cobrado pelo restante do mês.
 
 
-<p class="important">Ao limpar o armazenamento persistente, você exclui todos os dados que estão armazenados nele. Se você precisar de uma cópia dos dados, faça um backup para o [armazenamento de arquivo](/docs/containers?topic=containers-file_storage#file_backup_restore) ou [armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_backup_restore).</br>
-</br>Se você usar uma conta do {{site.data.keyword.Bluemix_dedicated}}, deverá solicitar a exclusão do volume [abrindo um caso de suporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
+<p class="important">Ao limpar o armazenamento persistente, você exclui todos os dados que estão armazenados nele. Se você precisar de uma cópia dos dados, faça um backup para o [armazenamento de arquivo](/docs/containers?topic=containers-file_storage#file_backup_restore) ou [armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
 
 Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -68,7 +67,7 @@ Para limpar os dados persistentes:
     ```
     {: screen}
 
-2. Revise o **`ReclaimPolicy`** e **`billingType`** para a classe de armazenamento.
+2. Revise o **`ReclaimPolicy`** e o **`billingType`** para a classe de armazenamento.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
@@ -145,7 +144,7 @@ Para limpar os dados persistentes:
    ```
    {: pre}
 
-   Se você removeu seu cluster e não pode recuperar o nome do PV, substitua `grep <pv_name>` por ` grep <cluster_id>` para listar todos os dispositivos de armazenamento que estão associados a seu cluster.
+   Se você removeu seu cluster e não consegue recuperar o nome do PV, substitua `grep <pv_name>` por `grep <cluster_id>` para listar todos os dispositivos de armazenamento associados ao seu cluster.
    {: tip}
 
    Saída de exemplo:

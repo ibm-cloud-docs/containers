@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -26,19 +26,19 @@ subcollection: containers
 # Tutoriel : Utilisation des règles réseau Calico pour bloquer le trafic
 {: #policy_tutorial}
 
-Par défaut, les services Kubernetes NodePort, LoadBalancer et Ingress rendent votre application accessible au public et à toutes les interfaces réseau du cluster publiques et privées. La règle réseau Calico par défaut `allow-node-port-dnat` autorise le trafic entrant en provenance des services de port de noeud, d'équilibreur de charge et Ingress vers les pods d'application exposés par ces services. Kubernetes utilise la conversion d'adresse réseau de destination (DNAT) pour transférer les demandes de service aux pods appropriés.
+Par défaut, les services Kubernetes NodePort, LoadBalancer et Ingress rendent votre application accessible au public et à toutes les interfaces réseau du cluster publiques et privées. La règle réseau Calico par défaut `allow-node-port-dnat` autorise le trafic entrant en provenance des services NodePort, d'équilibreur de charge de réseau (NLS) et d'équilibreur de charge d'application (ALB) Ingress vers les pods d'application exposés par ces services. Kubernetes utilise la conversion d'adresse réseau de destination (DNAT) pour transférer les demandes de service aux pods appropriés.
 {: shortdesc}
 
 Cependant, pour des raisons de sécurité, vous pouvez être amené à autoriser le trafic vers les services de réseau uniquement à partir de certaines adresses IP source. Vous pouvez utiliser des [règles Calico Pre-DNAT ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) pour inscrire sur liste blanche ou liste noire le trafic en provenance ou à destination de certaines adresses IP. Les règles Pre-DNAT empêchent le trafic d'atteindre vos applications car elles sont appliquées avant que Kubernetes utilise la fonction DNAT standard pour acheminer le trafic vers les pods. Lorsque vous créez des règles Calico Pre-DNAT, vous déterminez les adresses IP source à inscrire sur liste blanche ou sur liste noire. Dans la plupart des cas, l'inscription sur liste blanche fournit la configuration la plus sécurisée car tout le trafic est bloqué à l'exception du trafic en provenance d'adresses IP source autorisées. En principe, l'utilisation d'une liste noire n'est utile que dans les scénarios utilisés pour empêcher une attaque en provenance d'un petit groupe d'adresses IP.
 
-Dans ce scénario, vous jouez le rôle d'un administrateur réseau pour une entreprise de relations publiques et vous constatez l'arrivée de trafic inhabituel dans vos applications. Les leçons de ce tutoriel vous guident dans le processus de création d'un modèle d'application de serveur Web, exposant l'application à l'aide d'un service d'équilibreur de charge et protégeant l'application contre le trafic inhabituel indésirable avec des règles Calico de liste blanche et de liste noire.
+Dans ce scénario, vous jouez le rôle d'un administrateur réseau pour une entreprise de relations publiques et vous constatez l'arrivée de trafic inhabituel dans vos applications. Les leçons de ce tutoriel vous guident dans le processus de création d'un modèle d'application de serveur Web, exposant l'application à l'aide d'un service d'équilibreur de charge de réseau (NLB) et protégeant l'application contre le trafic inhabituel indésirable avec des règles Calico de liste blanche et de liste noire.
 
 ## Objectifs
 {: #policies_objectives}
 
 - Apprendre à bloquer tout le trafic entrant sur tous les ports de noeud en créant une règle Pre-DNAT de poids fort.
-- Apprendre à autoriser des adresses IP source sur liste blanche à accéder à l'adresse IP publique et au port du service d'équilibreur de charge en créant une règle Pre-DNAT de poids faible. Les règles de poids faible remplacent les règles de poids fort.
-- Apprendre à bloquer les adresses IP source sur liste noire pour les empêcher d'accéder à l'adresse IP publique de l'équilibreur de charge et au port en créant une règle Pre-DNAT de poids faible.
+- Apprendre à autoriser des adresses IP source sur liste blanche à accéder à l'adresse IP publique et au port du service d'équilibreur de charge de réseau (NLB) en créant une règle Pre-DNAT de poids faible. Les règles de poids faible remplacent les règles de poids fort.
+- Apprendre à bloquer les adresses IP source sur liste noire pour les empêcher d'accéder à l'adresse IP publique et au port de l'équilibreur de charge de réseau (NLB) en créant une règle Pre-DNAT de poids faible.
 
 ## Durée
 {: #policies_time}
@@ -53,7 +53,7 @@ Ce tutoriel est destiné aux développeurs de logiciel et aux administrateurs r�
 ## Prérequis
 {: #policies_prereqs}
 
-- [Créez un cluster en version 1.10 ou ultérieure](/docs/containers?topic=containers-clusters#clusters_ui) ou [mettez à jour un cluster à la version 1.10](/docs/containers?topic=containers-cs_versions#cs_v110). Vous devez disposer d'un cluster Kubernetes de version 1.10 ou ultérieure pour utiliser l'interface de ligne de commande de Calico 3.3.1 et la syntaxe des règles Calico v3 dans ce tutoriel.
+- [Créez un cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Ciblez votre interface CLI sur le cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Installez et configurez l'interface de ligne de commande de Calico](/docs/containers?topic=containers-network_policies#cli_install).
 - Vérifiez que vous disposez des règles d'accès {{site.data.keyword.Bluemix_notm}} IAM pour {{site.data.keyword.containerlong_notm}} :
@@ -63,20 +63,20 @@ Ce tutoriel est destiné aux développeurs de logiciel et aux administrateurs r�
 <br />
 
 
-## Leçon 1 : Déploiement d'une application et exposition de cette application à l'aide d'un service d'équilibreur de charge
+## Leçon 1 : Déploiement d'une application et exposition de cette application à l'aide d'un NLB
 {: #lesson1}
 
 La première leçon vous montre comment est exposée votre application depuis plusieurs adresses IP et ports et par où passe le trafic public pour atteindre votre cluster.
 {: shortdesc}
 
-Commencez par déployer un modèle d'application de serveur Web à utiliser tout au long de ce tutoriel. Le serveur Web `echoserver` présente les données de la connexion établie avec le cluster à partir du client et vous laisse tester l'accès au cluster de l'entreprise de relations publiques (RP). Exposez ensuite l'application en créant un service d'équilibreur de charge 1.0. Un service d'équilibreur de charge 1.0 rend votre application accessible via l'adresse IP du service d'équilibreur de charge et les ports de noeud des noeuds worker.
+Commencez par déployer un modèle d'application de serveur Web à utiliser tout au long de ce tutoriel. Le serveur Web `echoserver` présente les données de la connexion établie avec le cluster à partir du client et vous laisse tester l'accès au cluster de l'entreprise de relations publiques (RP). Exposez ensuite l'application en créant un service d'équilibreur de charge de réseau (NLB) 1.0. Un service NLB 1.0 rend votre application accessible via l'adresse IP du service NLB et les ports de noeud des noeuds worker.
 
-Vous souhaitez utiliser un équilibreur de charge d'application (ALB) Ingress ? Au lieu de créer un équilibreur de charge dans les étapes 3 et 4, [créez un service pour l'application de serveur Web](/docs/containers?topic=containers-ingress#public_inside_1) et [créez une ressource Ingress pour l'application de serveur Web](/docs/containers?topic=containers-ingress#public_inside_4). Procurez-vous ensuite les adresses IP publiques de vos équilibreurs de charge d'application en exécutant la commande `ibmcloud ks albs --cluster <cluster_name>` et utilisez ces adresses IP tout au long du tutoriel à la place de `<loadbalancer_IP>.`
+Vous souhaitez utiliser un équilibreur de charge d'application (ALB) Ingress ? Au lieu de créer un équilibreur de charge de réseau aux étapes 3 et 4, [créez un service pour l'application de serveur Web](/docs/containers?topic=containers-ingress#public_inside_1) et [créez une ressource Ingress pour l'application de serveur Web](/docs/containers?topic=containers-ingress#public_inside_4). Procurez-vous ensuite les adresses IP publiques de vos équilibreurs de charge d'application en exécutant la commande `ibmcloud ks albs --cluster <cluster_name>` et utilisez ces adresses IP dans le tutoriel à la place de `<loadbalancer_IP>.`
 {: tip}
 
-L'image suivante montre comment l'application de serveur Web est exposée sur Internet par le port de noeud public et l'équilibreur de charge public à la fin de la leçon 1 :
+L'image suivante montre comment l'application de serveur Web est exposée sur Internet par le port de noeud public et l'équilibreur de charge de réseau public à la fin de la leçon 1 :
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="A la fin de la leçon 1, l'application de serveur Web est exposée sur Internet par le port de noeud public et l'équilibreur de charge public." style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="A la fin de la leçon 1, l'application de serveur Web est exposée sur Internet par le port de noeud public et l'équilibreur de charge de réseau public." style="width:450px; border-style: none"/>
 
 1. Déployez le modèle d'application de serveur Web. Lorsqu'une connexion à l'application de serveur Web est établie, l'application répond avec les en-têtes HTTP qu'elle a reçus dans la connexion.
     ```
@@ -99,7 +99,7 @@ L'image suivante montre comment l'application de serveur Web est exposée sur In
     ```
     {: screen}
 
-3. Pour exposer l'application sur l'Internet public, créez un fichier de configuration de service d'équilibreur de charge 1.0 nommé `webserver-lb.yaml` dans un éditeur de texte.
+3. Pour exposer l'application sur l'Internet public, créez un fichier de configuration de service d'équilibreur de charge de réseau 1.0 nommé `webserver-lb.yaml` dans un éditeur de texte.
     ```
     apiVersion: v1
     kind: Service
@@ -119,15 +119,15 @@ L'image suivante montre comment l'application de serveur Web est exposée sur In
     ```
     {: codeblock}
 
-4. Déployez l'équilibreur de charge.
+4. Déployez l'équilibreur de charge de réseau.
     ```
     kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-5. Vérifiez que vous disposez d'un accès public à l'application exposée par l'équilibreur de charge sur votre ordinateur.
+5. Vérifiez que vous disposez d'un accès public à l'application exposée par l'équilibreur de charge de réseau sur votre ordinateur. 
 
-    1. Obtenez l'adresse IP publique **EXTERNAL-IP** de l'équilibreur de charge.
+    1. Procurez-vous l'adresse **EXTERNAL-IP** de l'équilibreur de charge de réseau.
         ```
         kubectl get svc -o wide
         ```
@@ -140,15 +140,15 @@ L'image suivante montre comment l'application de serveur Web est exposée sur In
         ```
         {: screen}
 
-    2. Créez un fichier aide-mémoire et copiez l'adresse IP de l'équilibreur de charge dans ce fichier texte. Cet aide-mémoire vous aidera à retrouver plus rapidement les valeurs requises dans les leçons suivantes.
+    2. Créez un fichier aide-mémoire et copiez l'adresse IP de l'équilibreur de charge de réseau dans ce fichier texte. Cet aide-mémoire vous aidera à retrouver plus rapidement les valeurs requises dans les leçons suivantes.
 
-    3. Vérifiez que vous disposez d'un accès public à l'adresse IP externe de l'équilibreur de charge.
+    3. Vérifiez que vous disposez d'un accès public à l'adresse IP externe de l'équilibreur de charge de réseau.
         ```
         curl --connect-timeout 10 <loadbalancer_IP>:80
         ```
         {: pre}
 
-        L'exemple de sortie suivante confirme que l'équilibreur de charge expose votre application sur son adresse IP publique `169.1.1.1`. Le pod d'application `webserver-855556f688-76rkp` reçoit la demande curl :
+        L'exemple de sortie suivante confirme que l'équilibreur de charge de réseau expose votre application sur son adresse IP publique `169.1.1.1`. Le pod d'application `webserver-855556f688-76rkp` reçoit la demande curl :
         ```
         Hostname: webserver-855556f688-76rkp
         Pod Information:
@@ -172,9 +172,9 @@ L'image suivante montre comment l'application de serveur Web est exposée sur In
         ```
         {: screen}
 
-6. Vérifiez que vous disposez d'un accès public à l'application exposée par le port de noeud sur votre ordinateur. Un service d'équilibreur de charge rend votre application accessible via l'adresse IP du service d'équilibreur de charge et les ports de noeud des noeuds worker.
+6. Vérifiez que vous disposez d'un accès public à l'application exposée par le port de noeud sur votre ordinateur. Un service NLB rend votre application accessible via son adresse IP et les ports de noeud des noeuds worker.
 
-    1. Obtenez le port de noeud affecté par l'équilibreur de charge aux noeuds worker. La valeur du port de noeud est comprise entre 30000 et 32767.
+    1. Procurez-vous le port de noeud que l'équilibreur de charge de réseau a affecté aux noeuds worker. La valeur du port de noeud est comprise entre 30000 et 32767.
         ```
         kubectl get svc -o wide
         ```
@@ -196,9 +196,9 @@ L'image suivante montre comment l'application de serveur Web est exposée sur In
         Exemple de sortie :
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
         ```
         {: screen}
 
@@ -234,19 +234,19 @@ L'image suivante montre comment l'application de serveur Web est exposée sur In
         ```
         {: screen}
 
-A ce stade, votre application est exposée à partir de plusieurs ports et adresses IP. La plupart de ces adresses IP sont internes au cluster et sont accessibles uniquement via le réseau privé. Seuls le port de noeud public et le port de l'équilibreur de charge public sont exposés sur l'Internet public.
+A ce stade, votre application est exposée à partir de plusieurs ports et adresses IP. La plupart de ces adresses IP sont internes au cluster et sont accessibles uniquement via le réseau privé. Seuls le port de noeud public et le port de l'équilibreur de charge de réseau public sont exposés sur l'Internet public.
 
 Ensuite, vous pouvez commencer à créer et appliquer des règles Calico pour bloquer le trafic public.
 
 ## Leçon 2 : Blocage de tout le trafic entrant sur tous les ports de noeud
 {: #lesson2}
 
-Pour sécuriser le cluster de l'entreprise de relations publiques, vous devez bloquer l'accès public au service d'équilibreur de charge et aux ports de noeud exposant votre application. Commencez par bloquer l'accès aux ports de noeud.
+Pour sécuriser le cluster de l'entreprise de relations publiques, vous devez bloquer l'accès public au service NLB et aux ports de noeud qui exposent votre application. Commencez par bloquer l'accès aux ports de noeud.
 {: shortdesc}
 
-L'image suivante montre comment le trafic sera autorisé vers l'équilibreur de charge mais pas vers les ports de noeud à la fin de la leçon 2 :
+L'image suivante montre comment le trafic sera autorisé vers l'équilibreur de charge de réseau mais pas vers les ports de noeud à la fin de la leçon 2 :
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="A la fin de la leçon 2, l'application de serveur Web est exposée sur Internet uniquement par l'équilibreur de charge public." style="width:425px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="A la fin de la leçon 2, l'application de serveur Web est exposée sur Internet uniquement par l'équilibreur de charge de réseau public." style="width:425px; border-style: none"/>
 
 1. Dans un éditeur de texte, créez une règle Pre-DAT de poids fort nommée `deny-nodeports.yaml` pour refuser le trafic entrant TCP et UDP provenant d'une adresse IP source vers tous les ports de noeud.
     ```
@@ -309,7 +309,7 @@ L'image suivante montre comment le trafic sera autorisé vers l'équilibreur de 
     ```
     {: screen}
 
-4. En utilisant la valeur de votre aide-mémoire, vérifiez que vous bénéficiez toujours de l'accès public à l'adresse IP externe de l'équilibreur de charge.
+4. En utilisant la valeur de votre aide-mémoire, vérifiez que vous bénéficiez toujours de l'accès public à l'adresse IP externe de l'équilibreur de charge de réseau.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -338,25 +338,25 @@ L'image suivante montre comment le trafic sera autorisé vers l'équilibreur de 
         -no body in request-
     ```
     {: screen}
-    Dans la section `Request Information` de la sortie, notez que l'adresse IP source est, par exemple, `client_address=1.1.1.1`. L'adresse IP source est l'adresse IP publique du système que vous utilisez pour exécuter la commande curl. Autrement, si vous vous connectez à Internet via un proxy ou un réseau privé virtuel (VPN), le proxy ou le VPN peut rendre illisible l'adresse IP réelle de votre système. Dans les deux cas, l'équilibreur de charge voit l'adresse IP source de votre système en tant qu'adresse IP client.
+    Dans la section `Request Information` de la sortie, notez que l'adresse IP source est, par exemple, `client_address=1.1.1.1`. L'adresse IP source est l'adresse IP publique du système que vous utilisez pour exécuter la commande curl. Autrement, si vous vous connectez à Internet via un proxy ou un réseau privé virtuel (VPN), le proxy ou le VPN peut rendre illisible l'adresse IP réelle de votre système. Dans les deux cas, l'équilibreur de charge de réseau voit l'adresse IP source de votre système en tant qu'adresse IP client.
 
 5. Copiez l'adresse IP source de votre système (`client_address=1.1.1.1` figurant dans la sortie de l'étape précédente) dans votre aide-mémoire pour l'utiliser dans les leçons suivantes.
 
-Parfait ! A ce stade, votre application est exposée sur l'Internet public uniquement à partir du port de l'équilibreur de charge public. Le trafic vers les ports de noeud publics est bloqué. Vous avez verrouillé en partie votre cluster par rapport au trafic indésirable.
+Parfait ! A ce stade, votre application est exposée sur l'Internet public uniquement à partir du port de l'équilibreur de charge de réseau public. Le trafic vers les ports de noeud publics est bloqué. Vous avez verrouillé en partie votre cluster par rapport au trafic indésirable.
 
 Ensuite, vous pouvez créer et appliquer des règles Calico pour inscrire sur liste blanche le trafic en provenance de certaines adresses IP source.
 
-## Leçon 3 : Autorisation de trafic entrant à partir d'une adresse IP sur liste blanche vers l'équilibreur de charge
+## Leçon 3 : Autorisation de trafic entrant à partir d'une adresse IP sur liste blanche vers l'équilibreur de charge de réseau
 {: #lesson3}
 
 A présent, vous décidez de bloquer l'intégralité du trafic vers le cluster de l'entreprise de relations publiques et de tester l'accès en inscrivant uniquement l'adresse IP de votre ordinateur sur liste blanche.
 {: shortdesc}
 
-Tout d'abord, en plus des ports de noeud, vous devez bloquer tout le trafic entrant vers l'équilibreur de charge exposant l'application. Ensuite, vous pouvez créer une règle pour inscrire l'adresse IP de votre système sur liste blanche. A la fin de la leçon 3, tout le trafic vers l'équilibreur de charge et les ports de noeud publics est verrouillé et seul le trafic en provenance de l'adresse IP de votre système sur liste blanche est autorisé :
+Tout d'abord, en plus des ports de noeud, vous devez bloquer tout le trafic entrant vers l'équilibreur de charge de réseau qui expose l'application. Ensuite, vous pouvez créer une règle pour inscrire l'adresse IP de votre système sur liste blanche. A la fin de la leçon 3, tout le trafic vers les ports de noeud et l'équilibreur de charge de réseau publics sera bloqué et seul le trafic en provenance de l'adresse IP de votre système sur liste blanche sera autorisé : 
 
-<img src="images/cs_tutorial_policies_L3.png" width="550" alt="L'application de serveur Web est exposée par l'équilibreur de charge public vers l'adresse IP de votre système uniquement." style="width:500px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="550" alt="L'application de serveur Web est exposée par l'équilibreur de charge de réseau public uniquement sur votre adresse IP de système." style="width:500px; border-style: none"/>
 
-1. Dans un éditeur de texte, créez une règle Pre-DNAT de poids fort nommée `deny-lb-port-80.yaml` pour refuser tout le trafic TCP et UDP entrant en provenance de n'importe quelle adresse IP source vers l'adresse IP et le port de l'équilibreur de charge. Remplacez `<loadbalancer_IP>` par l'adresse IP publique de l'équilibreur de charge consignée dans votre aide-mémoire.
+1. Dans un éditeur de texte, créez une règle Pre-DNAT de poids fort nommée `deny-lb-port-80.yaml` pour refuser tout le trafic TCP et UDP entrant en provenance de n'importe quelle adresse IP source vers l'adresse IP et le port de l'équilibreur de charge de réseau. Remplacez `<loadbalancer_IP>` par l'adresse IP publique d'équilibreur de charge de réseau à partir de votre aide-mémoire. 
 
     ```
     apiVersion: projectcalico.org/v3
@@ -405,13 +405,13 @@ Tout d'abord, en plus des ports de noeud, vous devez bloquer tout le trafic entr
       ```
       {: pre}
 
-3. En utilisant la valeur de votre aide-mémoire, vérifiez que vous ne pouvez plus accéder à l'adresse IP publique de l'équilibreur de charge. La connexion arrive à expiration car la règle Calico que vous avez créée bloque le trafic vers l'équilibreur de charge.
+3. En utilisant la valeur de votre aide-mémoire, vérifiez que vous ne pouvez plus accéder à l'adresse IP publique de l'équilibreur de charge de réseau. La connexion arrive à expiration car la règle Calico que vous avez créée bloque le trafic vers l'équilibreur de charge de réseau.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
-4. Dans un éditeur de texte, créez une règle Pre-DNAT de poids faible nommée `whitelist.yaml` pour autoriser le trafic en provenance de l'adresse IP de votre système vers l'adresse IP et le port de l'équilibreur de charge. En utilisant les valeurs de votre aide mémoire, remplacez `<loadbalancer_IP>` par l'adresse IP publique de l'équilibreur de charge et `<client_address>` par l'adresse IP publique de l'adresse IP source de votre système.
+4. Dans un éditeur de texte, créez une règle Pre-DNAT de poids faible nommée `whitelist.yaml` pour autoriser le trafic en provenance de l'adresse IP de votre système vers l'adresse IP et le port de l'équilibreur de charge de réseau. En utilisant les valeurs de votre aide-mémoire, remplacez `<loadbalancer_IP>` par l'adresse IP publique de l'équilibreur de charge de réseau et `<client_address>` par l'adresse IP publique de l'adresse IP source de votre système.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -454,30 +454,30 @@ Tout d'abord, en plus des ports de noeud, vous devez bloquer tout le trafic entr
       {: pre}
   L'adresse IP de votre système est désormais sur liste blanche.
 
-6. En utilisant la valeur de votre aide-mémoire, vérifiez que vous pouvez désormais accéder à l'adresse IP publique de l'équilibreur de charge.
+6. En utilisant la valeur de votre aide-mémoire, vérifiez que vous pouvez désormais accéder à l'adresse IP publique de l'équilibreur de charge de réseau.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
-7. Si vous avez accès à un autre système ayant une adresse IP différente, essayez d'accéder à l'équilibreur de charge à partir de ce système.
+7. Si vous avez accès à un autre système ayant une adresse IP différente, essayez d'accéder à l'équilibreur de charge de réseau à partir de ce système.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
     La connexion arrive à expiration car l'adresse IP de ce système ne figure pas sur la liste blanche.
 
-A ce stade, tout le trafic vers les ports de noeud publics et l'équilibreur de charge est bloqué. Seul le trafic en provenance de l'adresse IP de votre système sur liste blanche est autorisé.
+A ce stade, tout le trafic vers les ports de noeud publics et l'équilibreur de charge de réseau est bloqué. Seul le trafic en provenance de l'adresse IP de votre système sur liste blanche est autorisé.
 
-## Leçon 4 : Refus d'accès entrant en provenance d'adresses IP sur liste noire vers l'équilibreur de charge
+## Leçon 4 : Refus d'accès entrant en provenance d'adresses IP sur liste noire vers l'équilibreur de charge de réseau
 {: #lesson4}
 
 Dans la leçon précédente, vous avez bloqué tout le trafic et inscrit uniquement quelques adresses IP sur liste blanche. Ce scénario fonctionne bien à des fins de test lorsque vous voulez limiter l'accès à quelques adresses IP source contrôlées. Cependant, l'entreprise de relations publiques dispose d'applications qui nécessitent une plus grande ouverture au public. Vous devez veiller à ce que tout le trafic soit autorisé sauf le trafic inhabituel que vous voyez en provenance de quelques adresses IP. L'utilisation d'une liste noire est utile dans un scénario de ce type car elle vous permet d'éviter toute attaque en provenance d'un petit groupe d'adresses IP.
 {: shortdesc}
 
-Dans cette leçon, vous allez tester l'utilisation d'une liste noire pour bloquer le trafic en provenance de l'adresse IP source de votre propre système. A la fin de la leçon 4, tout le trafic vers les ports de noeud publics sera bloqué et tout le trafic vers l'équilibreur de charge public sera autorisé. Seul le trafic en provenance de l'adresse IP de votre système sur liste noire vers l'équilibreur de charge sera bloqué :
+Dans cette leçon, vous allez tester l'utilisation d'une liste noire pour bloquer le trafic en provenance de l'adresse IP source de votre propre système. A la fin de la leçon 4, tout le trafic vers les ports de noeud publics sera bloqué et tout le trafic vers l'équilibreur de charge de réseau public sera autorisé. Seul le trafic en provenance de l'adresse IP de votre système sur liste noire vers l'équilibreur de charge de réseau sera bloqué :
 
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="L'application de serveur Web est exposée sur Internet par l'équilibreur de charge public. Seul le trafic provenant de l'adresse IP de votre système est bloqué." style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="L'application de serveur Web est exposée par l'équilibreur de charge de réseau public sur l'Internet. Seul le trafic en provenance de l'adresse IP de votre système est bloqué" style="width:550px; border-style: none"/>
 
 1. Supprimez les règles d'inscription sur liste blanche que vous avez créées dans la leçon précédente.
     - Linux :
@@ -500,44 +500,45 @@ Dans cette leçon, vous allez tester l'utilisation d'une liste noire pour bloque
       ```
       {: pre}
 
-    Désormais, tout le trafic TCP et UDP entrant en provenance de n'importe quelle source IP vers l'adresse IP et le port de l'équilibreur de charge est à nouveau autorisé.
+    Désormais, tout le trafic TCP et UDP entrant en provenance de n'importe quelle adresse IP source vers l'adresse IP et le port de l'équilibreur de charge de réseau est à nouveau autorisé.
 
-2. Pour refuser tout le trafic TCP et UDP entrant en provenance de l'adresse IP source de votre système vers l'adresse IP et le port de l'équilibreur de charge, créez une règle pre-DNAT de poids faible nommée `blacklist.yaml` dans un éditeur de texte. En utilisant les valeurs de votre aide mémoire, remplacez `<loadbalancer_IP>` par l'adresse IP publique de l'équilibreur de charge et `<client_address>` par l'adresse IP publique de l'adresse IP source de votre système.
-    ```
-    apiVersion: projectcalico.org/v3
-    kind: GlobalNetworkPolicy
-    metadata:
-      name: blacklist
-    spec:
-      applyOnForward: true
-      preDNAT: true
-      ingress:
-      - action: Deny
-        destination:
-          nets:
-          - <loadbalancer_IP>/32
-          ports:
-          - 80
-        protocol: TCP
-        source:
-          nets:
-          - <client_address>/32
-      - action: Deny
-        destination:
-          nets:
-          - <loadbalancer_IP>/32
-          ports:
-          - 80
-        protocol: UDP
-        source:
-          nets:
-          - <client_address>/32
-      selector: ibm.role=='worker_public'
-      order: 500
-      types:
-      - Ingress
-    ```
-    {: codeblock}
+2. Pour refuser tout le trafic TCP et UDP entrant en provenance de l'adresse IP source de votre système vers l'adresse IP et le port de l'équilibreur de charge de réseau, créez une règle pre-DNAT de poids faible nommée `blacklist.yaml` dans un éditeur de texte. En utilisant les valeurs de votre aide-mémoire, remplacez `<loadbalancer_IP>` par l'adresse IP publique de l'équilibreur de charge de réseau et `<client_address>` par l'adresse IP publique de l'adresse IP source de votre système.
+    
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: blacklist
+  spec:
+    applyOnForward: true
+    preDNAT: true
+    ingress:
+    - action: Deny
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: TCP
+      source:
+        nets:
+        - <client_address>/32
+    - action: Deny
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: UDP
+      source:
+        nets:
+        - <client_address>/32
+    selector: ibm.role=='worker_public'
+    order: 500
+    types:
+    - Ingress
+  ```
+  {: codeblock}
 
 3. Appliquez la règle.
     - Linux :
@@ -555,15 +556,82 @@ Dans cette leçon, vous allez tester l'utilisation d'une liste noire pour bloque
       {: pre}
   L'adresse IP de votre système figure à présent sur liste noire.
 
-4. En utilisant la valeur de votre aide-mémoire, vérifiez sur votre système que vous ne pouvez pas accéder à l'adresse IP de l'équilibreur de charge car l'adresse IP de votre système est sur liste noire.
+4. En utilisant la valeur de votre aide-mémoire, vérifiez sur votre système que vous ne pouvez pas accéder à l'adresse IP de l'équilibreur de charge de réseau car l'adresse IP de votre système est sur liste noire.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
-    A ce stade, tout le trafic vers les ports de noeud publics est bloqué et tout le trafic vers l'équilibreur de charge public est autorisé. Seul le trafic en provenance de l'adresse IP de votre système sur liste noire vers l'équilibreur de charge est bloqué.
+    A ce stade, tout le trafic vers les ports de noeud publics est bloqué et tout le trafic vers l'équilibreur de charge de réseau public est autorisé. Seul le trafic en provenance de l'adresse IP de votre système sur liste noire vers l'équilibreur de charge de réseau est bloqué.
 
-5. Pour supprimer cette règle de liste noire :
+Parfait ! Vous avez réussi à contrôler le trafic dans votre application en utilisant des règles Calico Pre-DNAT pour placer des adresses IP source sur liste noire. 
 
+## Leçon 5 : Consignation dy trafic bloqué en provenance d'adresses IP sur liste noire vers l'équilibreur de charge de réseau
+{: #lesson5}
+
+Dans la leçon précédente, vous avez inscrit sur liste noire le trafic provenant de l'adresse IP de votre système et à destination de l'équilibreur de charge de réseau. Dans cette leçon, vous allez apprendre à consigner les demandes de trafic refusé.
+{: shortdesc}
+
+Dans notre exemple de scénario, l'entreprise de relations publiques pour laquelle vous travaillez souhaite que vous configuriez une trace de consignation relative à tout le trafic inhabituel qui est systématiquement refusé par l'une de vos règles réseau. Pour surveiller cette menace de sécurité potentielle, vous configurez la consignation de manière à enregistrer toutes les fois que votre règle inscrite sur liste noire refuse une action intentée sur l'adresse IP d'équilibreur de charge de réseau indiquée. 
+
+1. Créez une règle de réseau Calico nommée `log-denied-packets`. Cette règle de journal utilise le même sélecteur que la règle `blacklist`, qui ajoute cette règle à la chaîne de règles Iptables Calico. En utilisant un numéro d'ordre plus faible, tel que `300`, vous pouvez assurer que cette règle est ajoutée à la fin de la chaîne de règles Iptables avant la règle inscrite sur liste noire. Les paquets provenant de votre adresse IP sont consignés par cette règle avant qu'ils ne tentent d'établir une correspondance avec la règle `blacklist` et ils sont refusés. 
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: log-denied-packets
+  spec:
+    applyOnForward: true
+    preDNAT: true
+    ingress:
+    - action: Log
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: TCP
+      source:
+        nets:
+        - <client_address>/32
+    - action: Deny
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: UDP
+      source:
+        nets:
+        - <client_address>/32
+    selector: ibm.role=='worker_public'
+    order: 500
+    types:
+    - Ingress
+  ```
+  {: codeblock}
+
+2. Appliquez la règle.
+  ```
+  calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+3. Générez des entrées de journal en envoyant des paquets depuis l'adresse IP de votre système vers l'adresse IP de l'équilibreur de charge de réseau. Ces paquets de demandes sont consignés avant d'être refusés. 
+  ```
+  curl --connect-timeout 10 <loadbalancer_IP>:80
+  ```
+  {: pre}
+
+4. Recherchez les entrées de journal qui sont écrites dans le chemin `/var/log/syslog`. L'entrée de journal se présente comme suit :
+  ```
+  Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
+  ```
+  {: screen}
+
+Bien ! Vous avez configuré la consignation de sorte que le trafic inscrit sur liste noire puisse être surveillé plus facilement. 
+
+Si vous souhaitez nettoyer les règles de liste noire et de journal :
+1. Nettoyez la règle de liste noire. 
     - Linux :
       ```
       calicoctl delete GlobalNetworkPolicy blacklist
@@ -576,7 +644,18 @@ Dans cette leçon, vous allez tester l'utilisation d'une liste noire pour bloque
       ```
       {: pre}
 
-Parfait ! Vous avez réussi à contrôler le trafic dans votre application en utilisant des règles Calico Pre-DNAT pour placer des adresses IP source sur liste blanche ou sur liste noire.
+2. Nettoyez la règle de journal. 
+    - Linux :
+      ```
+      calicoctl delete GlobalNetworkPolicy log-denied-packets
+      ```
+      {: pre}
+
+    - Windows et OS X :
+      ```
+      calicoctl delete GlobalNetworkPolicy log-denied-packets --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 ## Etape suivante ?
 {: #whats_next}

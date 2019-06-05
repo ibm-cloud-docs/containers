@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ subcollection: containers
 
 - **strongSwan IPSec VPN 服務**：您可以設定 [strongSwan IPSec VPN 服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.strongswan.org/about.html)，以安全地連接 Kubernetes 叢集與內部部署網路。在根據業界標準網際網路通訊協定安全 (IPSec) 通訊協定套組的網際網路上，strongsWan IPSec VPN 服務提供安全的端對端通訊通道。若要設定叢集與內部部署網路之間的安全連線，請直接在叢集的 Pod 中[配置及部署 strongSwan IPSec VPN 服務](#vpn-setup)。
 
-- **Virtual Router Appliance (VRA) 或 Fortigate Security Appliance (FSA)**：您可以選擇設定 [VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) 或 [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations)，以配置 IPSec VPN 端點。當您有較大的叢集、想要透過單一 VPN 存取多個叢集，或需要以路徑為基礎的 VPN 時，此選項十分有用。若要配置 VRA，請參閱[使用 VRA 設定 VPN 連線功能](#vyatta)。
+- **Virtual Router Appliance (VRA) 或 Fortigate Security Appliance (FSA)**：您可以選擇設定 [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) 或 [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations)，以配置 IPSec VPN 端點。當您有較大的叢集、想要透過單一 VPN 存取多個叢集，或需要以路徑為基礎的 VPN 時，此選項十分有用。若要配置 VRA，請參閱[使用 VRA 設定 VPN 連線功能](#vyatta)。
 
 ## 使用 strongSwan IPSec VPN 服務 Helm 圖表
 {: #vpn-setup}
@@ -44,7 +44,7 @@ subcollection: containers
 
 因為 strongSwan 已整合在您的叢集內，所以您不需要外部閘道裝置。建立 VPN 連線功能時，會在叢集裡的所有工作者節點上自動配置路徑。這些路線容許透過 VPN 通道在任何工作者節點與遠端系統上的 Pod 之間進行雙向連線。例如，下圖顯示 {{site.data.keyword.containerlong_notm}} 中的應用程式如何透過 strongSwan VPN 連線與內部部署伺服器通訊：
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="使用負載平衡器，在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="使用網路負載平衡器 (NLB)，在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:700px; border-style: none"/>
 
 1. 叢集裡的應用程式 (`myapp`) 會接收來自 Ingress 或 LoadBalancer 服務的要求，且需要安全地連接至內部部署網路中的資料。
 
@@ -68,7 +68,7 @@ subcollection: containers
 * strongSwan Helm 圖表不容許多個叢集和其他 IaaS 資源共用單一 VPN 連線。
 * strongSwan Helm 圖表會在叢集內以 Kubernetes Pod 形式執行。Kubernetes 的記憶體及網路用量，以及在叢集裡執行的其他 Pod，都會影響 VPN 效能。如果您具有效能關鍵環境，請考慮使用在叢集以外的專用硬體上執行的 VPN 解決方案。
 * strongSwan Helm 圖表會執行單一 VPN Pod，作為 IPSec 通道端點。如果 Pod 失敗，叢集會重新啟動 Pod。不過，當新 Pod 啟動並重新建立 VPN 連線時，您可能遭遇短暫的關閉時間。如果您需要更快速的錯誤回復，或更精心製作的高可用性解決方案，請考慮使用在叢集以外的專用硬體上執行的 VPN 解決方案。
-* strongSwan Helm 圖表不會針對流過 VPN 連線的網路資料流量提供度量值或監視。如需所支援監視工具的清單，請參閱[記載及監視服務](/docs/containers?topic=containers-integrations#health_services)。
+* strongSwan Helm 圖表不會針對流過 VPN 連線的網路資料流量提供度量值或監視。如需所支援監視工具的清單，請參閱[記載及監視服務](/docs/containers?topic=containers-supported_integrations#health_services)。
 
 <br />
 
@@ -164,7 +164,7 @@ subcollection: containers
 開始之前：
 * [在內部部署資料中心安裝 IPSec VPN 閘道](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection)。
 * 請確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
-* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **附註**：標準叢集允許所有 strongSwan 配置。如果您使用免費叢集，則在[步驟 3](#strongswan_3) 只能選擇出埠 VPN 連線。入埠 VPN 連線需要叢集中的負載平衡器，而免費叢集無法使用負載平衡器。
 
 ### 步驟 1：取得 strongSwan Helm 圖表
@@ -173,7 +173,7 @@ subcollection: containers
 安裝 Helm 並取得 strongSwan Helm 圖表，以檢視可能的配置。
 {: shortdesc}
 
-1.  [遵循指示](/docs/containers?topic=containers-integrations#helm)，在您的本端機器上安裝 Helm 用戶端、安裝具有服務帳戶的 Helm 伺服器 (Tiller)，以及新增 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫。
+1.  [遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上、使用服務帳戶安裝 Helm 伺服器 (tiller)，以及新增 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫。請注意，需要 Helm 2.8 版或更新版本。
 
 2.  驗證是否已安裝 Tiller 且具有服務帳戶。
 
@@ -193,7 +193,7 @@ subcollection: containers
 3. 將 strongSwan Helm 圖表的預設配置設定儲存在本端 YAML 檔案中。
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+    helm inspect values iks-charts/strongswan > config.yaml
     ```
     {: pre}
 
@@ -239,7 +239,7 @@ subcollection: containers
 
 若要建立入埠 VPN 連線，請修改下列設定：
 1. 驗證 `ipsec.auto` 已設為 `add`。
-2. 選用項目：將 `loadBalancerIP` 設為 strongSwan VPN 服務的可攜式公用 IP 位址。當您需要穩定的 IP 位址時（例如，當您必須指定允許哪些 IP 位址通過內部部署防火牆時），指定 IP 位址很有用。叢集必須至少有一個可用的公用「負載平衡器」IP 位址。[您可以查看可用的公用 IP 位址](/docs/containers?topic=containers-subnets#review_ip)或[釋放已使用的 IP 位址](/docs/containers?topic=containers-subnets#free)。
+2. 選用項目：將 `loadBalancerIP` 設為 strongSwan VPN 服務的可攜式公用 IP 位址。當您需要穩定的 IP 位址時（例如，當您必須指定允許哪些 IP 位址通過內部部署防火牆時），指定 IP 位址很有用。叢集必須至少有一個可用的公用負載平衡器 IP 位址。[您可以查看可用的公用 IP 位址](/docs/containers?topic=containers-subnets#review_ip)或[釋放已使用的 IP 位址](/docs/containers?topic=containers-subnets#free)。
     * 如果將此設定保留空白，則會使用其中一個可用的可攜式公用 IP 位址。
     * 您也必須配置針對內部部署 VPN 端點上的叢集 VPN 端點選取的公用 IP 位址，或指派給它的公用 IP 位址。
 
@@ -252,7 +252,7 @@ subcollection: containers
         * 如果 strongSwan Pod 已遭刪除，並重新排定至叢集裡的不同工作者節點，則 VPN 的公用 IP 位址會變更。遠端網路的內部部署 VPN 端點必須容許從任何叢集工作者節點的公用 IP 位址建立 VPN 連線。
         * 如果遠端 VPN 端點無法處理來自多個公用 IP 位址的 VPN 連線，請限制 strongSwan VPN Pod 部署至的節點。將 `nodeSelector` 設為特定工作者節點的 IP 位址或工作者節點標籤。例如，值 `kubernetes.io/hostname: 10.232.xx.xx` 容許 VPN Pod 僅部署至該工作者節點。`strongswan: vpn` 值將 VPN Pod 限制為只能在具有該標籤的任何工作者節點上執行。您可以使用任何工作者節點標籤。若要容許不同的工作者節點與不同的 Helm 圖表部署搭配使用，請使用 `strongswan: <release_name>`。如需高可用性，請至少選取兩個工作者節點。
     * **strongSwan 服務的公用 IP 位址**：若要使用 strongSwan VPN 服務的 IP 位址來建立連線，請將 `connectUsingLoadBalancerIP` 設為 `true`。strongSwan 服務 IP 位址是您可在 `loadBalancerIP` 設定中指定的可攜式公用 IP 位址，或是自動指派給服務的可用可攜式公用 IP 位址。<br>
-        * 如果您選擇使用 `loadBalancerIP` 設定來選取 IP 位址，則叢集必須至少具有一個可用的公用「負載平衡器」IP 位址。[您可以查看可用的公用 IP 位址](/docs/containers?topic=containers-subnets#review_ip)或[釋放已使用的 IP 位址](/docs/containers?topic=containers-subnets#free)。
+        * 如果您選擇使用 `loadBalancerIP` 設定來選取 IP 位址，則叢集必須至少有一個可用的公用負載平衡器 IP 位址。[您可以查看可用的公用 IP 位址](/docs/containers?topic=containers-subnets#review_ip)或[釋放已使用的 IP 位址](/docs/containers?topic=containers-subnets#free)。
         * 所有叢集工作者節點都必須位於相同的公用 VLAN 上。否則，您必須使用 `nodeSelector` 設定，以確保 VPN Pod 部署至與 `loadBalancerIP` 相同公用 VLAN 上的工作者節點。
         * 如果 `connectUsingLoadBalancerIP` 設為 `true`，且 `ipsec.keyexchange` 設為 `ikev1`，則您必須將 `enableServiceSourceIP` 設為 `true`。
 
@@ -343,7 +343,7 @@ subcollection: containers
     {: tip}
 
     ```
-    helm install -f config.yaml --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn iks-charts/strongswan
     ```
     {: pre}
 
@@ -528,13 +528,12 @@ subcollection: containers
 * 下列步驟中的 Calico 廣域網路原則不會防止使用主機網路的 Kubernetes Pod，透過 VPN 傳送及接收資料。使用主機網路配置 Pod 時，在 Pod 中執行的應用程式可以接聽其所在工作者節點的網路介面。這些主機網路 Pod 都可以存在於任何名稱空間中。若要判斷哪些 Pod 具有主機網路，請執行 `kubectl get pods --all-namespaces -o wide`，並尋找所有沒有 `172.30.0.0/16` Pod IP 位址的 Pod。如果您想要防止主機網路 Pod 透過 VPN 傳送及接收資料，您可以在 `values.yaml` 部署檔案中設定下列選項：`local.subnet: 172.30.0.0/16` 及 `enablePodSNAT: false`。這些配置設定會透過 VPN 連線將所有 Kubernetes Pod 公開至遠端網路。不過，只有位於所指定之安全名稱空間的 Pod 才能透過 VPN 進行聯繫。
 
 開始之前：
-* 建立或使用執行 Kuberneges 1.10 版或更新版本的叢集。
 * [部署 strongSwan Helm 圖表](#vpn_configure)，並[確保 VPN 連線功能運作正常](#vpn_test)。
 * [安裝並配置 Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)。
 
 若要將 VPN 資料流量限制為特定名稱空間，請執行下列動作：
 
-1. 建立名為 `allow-nonvpn-outbound.yaml` 的 Calico 廣域網路原則。此原則容許所有名稱空間繼續將出埠資料流量傳送至所有目的地，但 strongSwan VPN 存取的遠端子網路除外。將 `<remote.subnet>` 取代為您在 Helm `values.yaml` 配置檔中所指定的 `remote.subnet`。若要指定多個遠端子網路，請參閱 [Calico 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy)。
+1. 建立名為 `allow-nonvpn-outbound.yaml` 的 Calico 廣域網路原則。此原則容許所有名稱空間繼續將出埠資料流量傳送至所有目的地，但 strongSwan VPN 存取的遠端子網路除外。將 `<remote.subnet>` 取代為您在 Helm `values.yaml` 配置檔中指定的 `remote.subnet`。若要指定多個遠端子網路，請參閱 [Calico 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy)。
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -560,7 +559,7 @@ subcollection: containers
     ```
     {: pre}
 
-3. 建立另一個名為 `allow-vpn-from-namespace.yaml` 的 Calico 廣域網路原則。此原則僅容許指定的名稱空間將出埠資料流量傳送至 strongSwan VPN 存取的遠端子網路。將 `<namespace>` 取代為可以存取 VPN 的名稱空間，並將 `<remote.subnet>` 取代為您在 Helm `values.yaml` 配置檔中所指定的 `remote.subnet`。若要指定多個名稱空間或遠端子網路，請參閱 [Calico 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy)。
+3. 建立另一個名為 `allow-vpn-from-namespace.yaml` 的 Calico 廣域網路原則。此原則僅容許指定的名稱空間將出埠資料流量傳送至 strongSwan VPN 存取的遠端子網路。將 `<namespace>` 取代為可以存取 VPN 的名稱空間，並將 `<remote.subnet>` 取代為您在 Helm `values.yaml` 配置檔中指定的 `remote.subnet`。若要指定多個名稱空間或遠端子網路，請參閱 [Calico 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy)。
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy

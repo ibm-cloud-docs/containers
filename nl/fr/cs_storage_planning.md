@@ -321,7 +321,7 @@ L'image suivante présente les options disponibles dans {{site.data.keyword.cont
 </tr>
 <tr>
 <td style="text-align:left">Performances</td>
-<td style="text-align:left">Hautes pour les opérations de lecture. Prévisibles en raison des opérations d'entrée-sortie par seconde (IOPS) affectées et de la taille lors de l'utilisation de machines non SDS. </td>
+<td style="text-align:left">Hautes pour les opérations de lecture. Prévisibles en raison des opérations d'entrée-sortie par seconde (IOPS) affectées et de la taille lors de l'utilisation de machines non SDS.</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Proches des performances bare metal pour les opérations de lecture-écriture séquentielle lors de l'utilisation de machines SDS. </li><li style="margin:0px; padding:0px">Fourniture de [profils ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) pour l'exécution de bases de données hautes performances</li><li style="margin:0px; padding:0px">Possibilité de créer une couche de stockage avec différents profils de performance que votre application peut sélectionner.</li></ul> </td>
 <td style="text-align:left">Hautes si la base de données est déployée dans le même centre de données que votre application.</td>
 </tr>

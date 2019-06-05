@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -46,8 +46,7 @@ subcollection: containers
 這取決於您刪除的項目和計費類型。如果您刪除 PVC 及 PV，但未刪除 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實例，則該實例仍會存在，並且您仍要為其付費。您必須刪除所有項目，才能避免費用。此外，在 PVC 中指定 `billingType` 時，您可以選擇 `hourly` 或 `monthly`。如果您選擇 `monthly`，則您的實例是按月計費。刪除實例時，您需要為當月的剩餘時間付費。
 
 
-<p class="important">清除持續性儲存空間時，也會刪除其中儲存的所有資料。如果您需要資料的副本，請備份[檔案儲存空間](/docs/containers?topic=containers-file_storage#file_backup_restore)或[區塊儲存空間](/docs/containers?topic=containers-block_storage#block_backup_restore)。</br>
-</br>如果使用 {{site.data.keyword.Bluemix_dedicated}} 帳戶，您必須[開立支援案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)來要求刪除磁區。</p>
+<p class="important">清除持續性儲存空間時，也會刪除其中儲存的所有資料。如果您需要資料的副本，請備份[檔案儲存空間](/docs/containers?topic=containers-file_storage#file_backup_restore)或[區塊儲存空間](/docs/containers?topic=containers-block_storage#block_backup_restore)。</p>
 
 開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
@@ -145,7 +144,7 @@ subcollection: containers
    ```
    {: pre}
 
-   如果您已移除叢集而無法擷取 PV 的名稱，請將 `grep<pv_name>` 取代為 `grep <cluster_id>`，以列出與叢集相關聯的所有儲存裝置。
+   如果您已移除叢集而無法擷取 PV 的名稱，請將 `grep <pv_name>` 取代為 `grep <cluster_id>`，以列出與叢集相關聯的所有儲存裝置。
    {: tip}
 
    輸出範例：

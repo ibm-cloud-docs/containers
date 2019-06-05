@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,7 @@ Pourquoi {{site.data.keyword.Bluemix_notm}} ? Pour améliorer l'analyse des risq
 * [Plusieurs régions pour assurer une haute disponibilité](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Sécurité et isolement de conteneur](/docs/containers?topic=containers-security#security)
-* [{{site.data.keyword.cloudant}} pour conserver et synchroniser les données sur plusieurs applications](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} pour conserver et synchroniser les données sur plusieurs applications](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **Solution**
@@ -88,9 +88,9 @@ Cette solution offre des avantages immédiats en termes d'évolutivité. En util
 
 {{site.data.keyword.SecureGateway}} est utilisé pour créer un pipeline sécurisé vers les bases de données et les documents locaux pour les applications qui sont relocalisées pour s'exécuter dans {{site.data.keyword.containerlong_notm}}.
 
-{{site.data.keyword.cos_full_notm}} est conçu pour tout le stockage brut de documents et de données à mesure des avancées. Pour les simulations Monte Carlo, un pipeline de flux de travaux est mis en place dans lequel les données de simulation figurent dans des fichiers d'entrée structurés qui sont stockés dans {{site.data.keyword.cos_full_notm}}. Un déclencheur permettant de démarrer la simulation met à l'échelle les services de calcul dans {{site.data.keyword.containerlong_notm}} pour diviser les données d'entrée en compartiments de N événements pour la simulation. {{site.data.keyword.containerlong_notm}} s'adapte automatiquement aux exécutions des N services associés et consigne les résultats intermédiaires dans {{site.data.keyword.cos_full_notm}}. Ces résultats sont traités par un autre ensemble de services de calcul {{site.data.keyword.containerlong_notm}} pour produire les résultats finaux.
+{{site.data.keyword.cos_full_notm}} est conçu pour tout le stockage brut de documents et de données à mesure des avancées. Pour les simulations Monte Carlo, un pipeline de flux de travaux est mis en place dans lequel les données de simulation figurent dans des fichiers structurés qui sont stockés dans {{site.data.keyword.cos_full_notm}}. Un déclencheur permettant de démarrer la simulation met à l'échelle les services de calcul dans {{site.data.keyword.containerlong_notm}} pour diviser les données des fichiers en compartiments de N événements pour la simulation. {{site.data.keyword.containerlong_notm}} s'adapte automatiquement aux exécutions des N services associés et consigne les résultats intermédiaires dans {{site.data.keyword.cos_full_notm}}. Ces résultats sont traités par un autre ensemble de services de calcul {{site.data.keyword.containerlong_notm}} pour produire les résultats finaux.
 
-{{site.data.keyword.cloudant}} est une base de données NoSQL moderne qui convient à de nombreux cas d'utilisation axés sur les données, du stockage et des requêtes de données de type clé-valeur aux documents complexes. Pour gérer le volume grandissant des règles de rapports de gestion et de réglementations, la société hypothécaire utilise {{site.data.keyword.cloudant}} pour stocker les documents associés à l'entrée de données de réglementation brutes qu'elle reçoit. Des processus de calcul sur {{site.data.keyword.containerlong_notm}} sont déclenchés pour compiler, traiter et publier les données dans divers formats de rapports. Les résultats intermédiaires communs aux rapports sont stockés sous forme de documents {{site.data.keyword.cloudant}} de sorte que des processus utilisant des modèles puissent être utilisés pour produire les rapports nécessaires.
+{{site.data.keyword.cloudant}} est une base de données NoSQL moderne qui convient à de nombreux cas d'utilisation axés sur les données, du stockage et des requêtes de données de type clé-valeur aux documents complexes. Pour gérer le volume grandissant des règles de rapports de gestion et de réglementations, la société hypothécaire utilise {{site.data.keyword.cloudant}} pour stocker les documents associés aux données de réglementation brutes qu'elle reçoit. Des processus de calcul sur {{site.data.keyword.containerlong_notm}} sont déclenchés pour compiler, traiter et publier les données dans divers formats de rapports. Les résultats intermédiaires communs aux rapports sont stockés sous forme de documents {{site.data.keyword.cloudant}} de sorte que des processus utilisant des modèles puissent être utilisés pour produire les rapports nécessaires.
 
 **Résultats**
 

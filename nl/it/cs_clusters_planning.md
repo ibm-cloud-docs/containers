@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -57,32 +57,32 @@ Per impostazione predefinita, il tuo cluster a zona singola è impostato con un 
 Quando aggiungi più nodi di lavoro, le istanze dell'applicazione possono essere distribuite tra più nodi di lavoro. Se un nodo di lavoro si disattiva, le istanze dell'applicazione sui nodi di lavoro disponibili continueranno a funzionare. Kubernetes ripianifica automaticamente i pod dai nodi di lavoro non disponibili per garantire le prestazioni e la capacità della tua applicazione. Per assicurarti che i tuoi pod vengano distribuiti uniformemente tra i nodi di lavoro, implementa l'[affinità pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
 
 **Posso convertire il mio cluster a zona singola in un cluster multizona?**</br>
-Se il cluster si trova in una delle [città metropolitane multizona supportate](/docs/containers?topic=containers-regions-and-zones#zones), sì. Vedi [Aggiornamento dai nodi di lavoro autonomi ai pool di nodi di lavoro](/docs/containers?topic=containers-update#standalone_to_workerpool).
+Se il cluster si trova in una delle [località metropolitane multizona supportate](/docs/containers?topic=containers-regions-and-zones#zones), sì. Vedi [Aggiornamento dai nodi di lavoro autonomi ai pool di nodi di lavoro](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 **Devo utilizzare i cluster multizona?**</br>
 No. Puoi creare tutti i cluster a zona singola che desideri. In effetti, potresti preferire i cluster a zona singola per la gestione semplificata oppure se il tuo cluster deve risiedere in una specifica [città a zona singola](/docs/containers?topic=containers-regions-and-zones#zones).
 
 **Posso avere un master altamente disponibile in una singola zona?**</br>
-Sì, con i cluster che eseguono Kubernetes versione 1.10 o successive. In una singola zona, il tuo master è altamente disponibile e include repliche su host fisici separati per il server API, etcd, il programma di pianificazione e il gestore controller Kubernetes per proteggerti in caso di interruzione, come durante un aggiornamento del master. Per proteggerti da un malfunzionamento della zona, puoi:
-* [Creare un cluster in una zona che supporta il multizona](/docs/containers?topic=containers-plan_clusters#multizone), dove il master viene esteso tra più zone.
+Sì. In una singola zona, il tuo master è altamente disponibile e include repliche su host fisici separati per il server API, etcd, il programma di pianificazione e il gestore controller Kubernetes per proteggerti in caso di interruzione, come durante un aggiornamento del master. Per proteggerti da un malfunzionamento della zona, puoi:
+* [Creare un cluster in una zona che supporta il multizona](/docs/containers?topic=containers-plan_clusters#multizone), dove il master viene distribuito tra le zone.
 * [Creare più cluster](#multiple_clusters) e connetterli con un programma di bilanciamento del carico globale.
 
 ## Cluster multizona
 {: #multizone}
 
-Con {{site.data.keyword.containerlong}}, puoi creare cluster multizona. I tuoi utenti hanno meno probabilità di riscontrare tempi di inattività quando distribuisci le tue applicazioni tra più nodi di lavoro e zone utilizzando un pool di nodi di lavoro. Le funzionalità integrate, come il bilanciamento del carico, aumentano la resilienza nei confronti di
-potenziali malfunzionamenti della zona con host, reti o applicazioni. Se le risorse in una zona si disabilitano, i tuoi carichi di lavoro del cluster saranno ancora operativi nelle altre zone. **Nota**: per le istanze {{site.data.keyword.Bluemix_dedicated_notm}} sono disponibili solo cluster a zona singola.
+Con {{site.data.keyword.containerlong_notm}}, puoi creare cluster multizona. I tuoi utenti hanno meno probabilità di riscontrare tempi di inattività quando distribuisci le tue applicazioni tra più nodi di lavoro e zone utilizzando un pool di nodi di lavoro. Le funzionalità integrate, come il bilanciamento del carico, aumentano la resilienza nei confronti di
+potenziali malfunzionamenti della zona con host, reti o applicazioni. Se le risorse in una zona si disabilitano, i tuoi carichi di lavoro del cluster saranno ancora operativi nelle altre zone.
 {: shortdesc}
 
 **Cos'è un pool di nodi di lavoro?**</br>
 Un pool di nodi di lavoro è una raccolta di nodi di lavoro con la stessa varietà, ad esempio tipo di macchina, CPU e memoria. Quando crei un cluster, viene automaticamente creato per tuo conto un pool di nodi di lavoro predefinito. Per distribuire i nodi di lavoro nel tuo pool tra le zone, aggiungere nodi di lavoro al pool o aggiornare i nodi di lavoro, puoi utilizzare i nuovi comandi `ibmcloud ks worker-pool`.
 
-**Posso ancora utilizzare i nodi di lavoro autonomi?**</br>
+**Posso ancora utilizzare nodi di lavoro autonomi?**</br>
 La configurazione cluster precedente dei nodi di lavoro autonomi è supportata ma obsoleta. Assicurati di [aggiungere un pool di nodi di lavoro al tuo cluster](/docs/containers?topic=containers-clusters#add_pool) e quindi di [utilizzare i pool di nodi di lavoro](/docs/containers?topic=containers-update#standalone_to_workerpool) per organizzare i tuoi nodi di lavoro anziché i nodi di lavoro autonomi.
 
 **Posso convertire il mio cluster a zona singola in un cluster multizona?**</br>
-Se il cluster si trova in una delle [città metropolitane multizona supportate](/docs/containers?topic=containers-regions-and-zones#zones), sì. Vedi [Aggiornamento dai nodi di lavoro autonomi ai pool di nodi di lavoro](/docs/containers?topic=containers-update#standalone_to_workerpool).
+Se il cluster si trova in una delle [località metropolitane multizona supportate](/docs/containers?topic=containers-regions-and-zones#zones), sì. Vedi [Aggiornamento dai nodi di lavoro autonomi ai pool di nodi di lavoro](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 ### Ulteriori informazioni sulla configurazione del cluster multizona
@@ -90,18 +90,18 @@ Se il cluster si trova in una delle [città metropolitane multizona supportate](
 
 <img src="images/cs_cluster_multizone-ha.png" alt="Alta disponibilità per i cluster multizona" width="500" style="width:500px; border-style: none"/>
 
-Puoi aggiungere ulteriori zone al tuo cluster per replicare i nodi di lavoro nei tuoi pool di nodi di lavoro tra più zone all'interno di una regione. I cluster multizona sono progettati per pianificare uniformemente i pod tra i nodi di lavoro e le zone per garantire la disponibilità e il ripristino in caso di malfunzionamento. Se i nodi di lavoro non vengono estesi uniformemente tra le zone o se la capacità di una delle zone non è sufficiente, il programma di pianificazione (scheduler) Kubernetes potrebbe non riuscire a pianificare tutti i pod richiesti. Di conseguenza, i pod potrebbero essere in uno stato di **In sospeso** fino a quando non sarà disponibile capacità sufficiente. Se vuoi modificare il comportamento predefinito in modo che il programma di pianificazione (scheduler) Kubernetes distribuisca i pod tra le zone con una distribuzione migliore, usa la [politica di affinità pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
+Puoi aggiungere ulteriori zone al tuo cluster per replicare i nodi di lavoro nei tuoi pool di nodi di lavoro tra più zone all'interno di una regione. I cluster multizona sono progettati per pianificare uniformemente i pod tra i nodi di lavoro e le zone per garantire la disponibilità e il ripristino in caso di malfunzionamento. Se i nodi di lavoro non vengono distribuiti uniformemente tra le zone o se la capacità di una delle zone non è sufficiente, il programma di pianificazione (scheduler) Kubernetes potrebbe non riuscire a pianificare tutti i pod richiesti. Di conseguenza, i pod potrebbero essere in uno stato di **In sospeso** fino a quando non sarà disponibile capacità sufficiente. Se vuoi modificare il comportamento predefinito in modo che il programma di pianificazione (scheduler) Kubernetes distribuisca i pod tra le zone con una distribuzione migliore, usa la [politica di affinità pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
 
 **Perché ho bisogno dei nodi di lavoro in 3 zone?** </br>
 La distribuzione del tuo carico di lavoro tra 3 zone garantisce l'alta disponibilità per la tua applicazione nel caso in cui una o due zone non siano disponibili, ma rende anche la configurazione del tuo cluster più efficiente. Ti chiedi per quale motivo? Di seguito troverai un esempio.
 
 Supponiamo che hai bisogno di un nodo di lavoro con 6 core per gestire il carico di lavoro per la tua applicazione. Per rendere il tuo cluster ancora più disponibile, hai le seguenti opzioni:
 
-- **Duplica le tue risorse in un'altra zona:** questa opzione ti lascia con 2 nodi di lavoro, ciascuno con 6 core in ogni zona per un totale di 12 core. </br>
-- **Distribuisci le risorse tra 3 zone:** con questa opzione, distribuisci 3 core per zona, lasciandoti con una capacità totale di 9 core. Per gestire il tuo carico di lavoro, è necessario che siano attive due zone alla volta. Se una zona non è disponibile, le altre due zone possono gestire il tuo carico di lavoro. Se due zone non sono disponibili, i 3 core rimanenti sono attivi per gestire il tuo carico di lavoro. La distribuzione di 3 core per zona significa macchine più piccole e quindi una riduzione dei costi per te.</br>
+- **Duplica le tue risorse in un'altra zona:** questa opzione ti lascia con 2 nodi di lavoro, ciascuno con 6 core in ogni zona per un totale di 12 core.</br>
+- **Distribuisci le risorse tra 3 zone:** con questa opzione, distribuisci 3 core per zona, lasciandoti con una capacità totale di 9 core. Per gestire il tuo carico di lavoro, è necessario che siano attive due zone alla volta. Se una zona non è disponibile, le altre due zone possono gestire il tuo carico di lavoro. Se due zone non sono disponibili, i 3 core rimanenti sono attivi per gestire il tuo carico di lavoro. La distribuzione di 3 core per zona comporta l'impiego di macchine più piccole e quindi una riduzione dei costi per te.</br>
 
 **Come è configurato il mio master Kubernetes?** </br>
-Se crei un cluster multizona in una [città metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones), viene distribuito automaticamente un master Kubernetes altamente disponibile e vengono estese tre repliche tra le zone della città metropolitana. Ad esempio, se il cluster si trova nelle zone `dal10`, `dal12` o `dal13`, le repliche del master Kubernetes vengono estese su ogni zona nella città metropolitana multizona di Dallas.
+Quando crei un cluster multizona in una [località metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones), viene distribuito automaticamente un master Kubernetes altamente disponibile e vengono distribuite tre repliche tra le zone della località metropolitana. Ad esempio, se il cluster si trova nelle zone `dal10`, `dal12` o `dal13`, le repliche del master Kubernetes vengono estese su ogni zona nella città metropolitana multizona di Dallas.
 
 **Cosa accade se il master Kubernetes diventa non disponibile?** </br>
 Il [master Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) è il componente principale che mantiene operativo il tuo cluster. Il master archivia le risorse del cluster e le loro configurazioni nel database etcd che funge da SPoT (single point of truth) per il tuo cluster. Il server API Kubernetes funge da punto di ingresso principale per tutte le richieste di gestione del cluster dai nodo di lavoro al master oppure quando vuoi interagire con le tue risorse cluster.<br><br>Se si verifica un malfunzionamento del master, i tuoi carichi di lavoro continuano a essere eseguiti sui nodi di lavoro ma non puoi utilizzare i comandi `kubectl` per gestire le tue risorse cluster o visualizzare l'integrità del cluster finché il server API Kubernetes nel master non torna a essere attivo. Se un pod viene disattivato durante l'interruzione del master, non è possibile ripianificarlo finché il nodo di lavoro non potrà raggiungere nuovamente il server API Kubernetes.<br><br>Durante un'interruzione del master, puoi continuare a eseguire i comandi `ibmcloud ks` sull'API {{site.data.keyword.containerlong_notm}} per gestire le tue risorse dell'infrastruttura, quali i nodi di lavoro o le VLAN. Se modifichi la configurazione del cluster corrente aggiungendo o rimuovendo nodi di lavoro nel cluster, le tue modifiche diventeranno effettive solo dopo che il master sarà tornato attivo.
@@ -112,28 +112,28 @@ Non riavviare un nodo di lavoro durante un'interruzione del master. Questa azion
 
 Per proteggere il tuo cluster da un malfunzionamento del master Kubernetes o quando si trova in regioni in cui non sono disponibili cluster multizona, puoi [impostare più cluster e collegarli ad un programma di bilanciamento del carico globale](#multiple_clusters).
 
-**Devo fare qualcosa perché il master possa comunicare con i nodi di lavoro tra le zone?**</br>
-Sì. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+**Devo fare qualcosa affinché il master possa comunicare con i nodi di lavoro tra zone?**</br>
+Sì. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 **Come posso consentire ai miei utenti l'accesso alla mia applicazione da un Internet pubblico?**</br>
-Puoi esporre le tue applicazioni utilizzando un ALB Ingress o il servizio del programma di bilanciamento del carico.
+Puoi esporre le tue applicazioni utilizzando un ALB (application load balancer) Ingress o il servizio del programma di bilanciamento del carico.
 
 - **ALB (application load balancer) Ingress:** per impostazione predefinita, gli ALB pubblici vengono creati e abilitati automaticamente in ciascuna zona del tuo cluster. Viene anche creato e distribuito automaticamente un programma di bilanciamento del carico multizona (MZLB) Cloudflare per il tuo cluster in modo che esista 1 MZLB per ogni regione. L'MZLB mette gli indirizzi IP dei tuoi ALB dietro lo stesso nome host e abilita i controlli dell'integrità su tali indirizzi IP per determinare se sono disponibili o meno. Ad esempio, se hai dei nodi di lavoro in 3 zone nella regione Stati Uniti Est, il nome host `yourcluster.us-east.containers.appdomain.cloud` ha 3 indirizzi IP ALB. L'MZLB controlla l'integrità dell'IP ALB pubblico in ciascuna zona di una regione e tiene i risultati della ricerca DNS aggiornati in base a tali controlli dell'integrità. Per ulteriori informazioni, vedi [Componenti e architettura di Ingress](/docs/containers?topic=containers-ingress#planning).
 
 - **Servizi del programma di bilanciamento del carico:** i servizi del programma di bilanciamento del carico vengono configurati solo in una zona. Le richieste in entrata alla tua applicazione vengono instradate da tale zona a tutte le istanze dell'applicazione in altre zone. Se questa zona diventa non disponibile, la tua applicazione potrebbe non essere raggiungibile da Internet. Puoi impostare ulteriori servizi del programma di bilanciamento del carico nelle altre zone per tenere conto del malfunzionamento di una singola zona. Per ulteriori informazioni, vedi i [servizi del programma di bilanciamento del carico](/docs/containers?topic=containers-loadbalancer#multi_zone_config) ad alta disponibilità.
 
 **Posso configurare l'archiviazione persistente per il mio cluster multizona?**</br>
-Per l'archiviazione persistente altamente disponibile, usa un servizio cloud come [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage). Puoi anche provare una soluzione SDS (software-defined storage) come [Portworx](/docs/containers?topic=containers-portworx#portworx) che utilizza [macchine SDS](#sds). Per ulteriori informazioni, vedi [Confronto tra le opzioni di archiviazione persistente per i cluster multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Per l'archiviazione persistente altamente disponibile, usa un servizio cloud come [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). Puoi anche provare una soluzione SDS (software-defined storage) come [Portworx](/docs/containers?topic=containers-portworx#portworx) che utilizza [macchine SDS](#sds). Per ulteriori informazioni, vedi [Confronto tra le opzioni di archiviazione persistente per i cluster multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
-L'archiviazione file e blocchi NFS non è condivisibile tra le zone. I volumi persistenti possono essere utilizzati solo nella zona in cui si trova il dispositivo di archiviazione effettivo. Se nel tuo cluster hai dell'archiviazione blocchi o file NFS che vuoi continuare a utilizzare, devi applicare le etichette di regione e zona ai volumi persistenti esistenti. Queste etichette consentono al programma di pianificazione (scheduler) kube di determinare dove pianificare un'applicazione che utilizza il volume persistente. Esegui il seguente comando e sostituisci `<mycluster>` con il tuo nome cluster.
+L'archiviazione file e blocchi NFS non è condivisibile tra le zone. I volumi persistenti possono essere utilizzati solo nella zona in cui si trova il dispositivo di archiviazione effettivo. Se nel tuo cluster hai dell'archiviazione blocchi o file NFS che vuoi continuare a utilizzare, devi applicare le etichette di regione e zona ai volumi persistenti esistenti. Queste etichette consentono al programma di pianificazione (scheduler) kube di determinare dove pianificare un'applicazione che utilizza il volume persistente. Esegui il seguente comando e sostituisci `<mycluster>` con il nome del tuo cluster.
 
 ```
 bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
 ```
 {: pre}
 
-**Ho creato il mio cluster multizona. Perché è presente ancora una sola zona? Come posso aggiungere zone al mio cluster?**</br>
-Se [crei il tuo cluster multizona con la CLI](/docs/containers?topic=containers-clusters#clusters_cli), il cluster viene creato, ma devi aggiungere le zone al pool di nodi di lavoro per completare il processo. Per estendersi su più zone, il tuo cluster deve trovarsi in una [città metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones). Per aggiungere una zona al tuo cluster ed estendere i nodi di lavoro tra le zone, vedi [Aggiunta di una zona al tuo cluster](/docs/containers?topic=containers-clusters#add_zone).
+**Ho creato il mio cluster multizona. Perché è presente ancora una sola zona? Come aggiungo zone al mio cluster?**</br>
+Se [crei il tuo cluster multizona con la CLI](/docs/containers?topic=containers-clusters#clusters_cli), il cluster viene creato, ma devi aggiungere le zone al pool di nodi di lavoro per completare il processo. Per estendersi su più zone, il tuo cluster deve trovarsi in una [località metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones). Per aggiungere una zona al tuo cluster ed estendere i nodi di lavoro tra le zone, vedi [Aggiunta di una zona al tuo cluster](/docs/containers?topic=containers-clusters#add_zone).
 
 ### Quali sono alcuni cambiamenti rispetto a come gestisco attualmente i miei cluster?
 {: #mz_new_ways}
@@ -189,7 +189,7 @@ Puoi impostare più cluster in regioni diverse di una geolocalizzazione (ad esem
 **Per impostare un programma di bilanciamento del carico globale per più cluster:**
 
 1. [Crea i cluster](/docs/containers?topic=containers-clusters#clusters) in più zone o regioni.
-2. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+2. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 3. In ciascun cluster, esponi la tua applicazione utilizzando un [ALB](/docs/containers?topic=containers-ingress#ingress_expose_public) o un [servizio del programma di bilanciamento del carico](/docs/containers?topic=containers-loadbalancer).
 4. Per ciascun cluster, elenca gli indirizzi IP pubblici dei tuoi ALB o dei tuoi servizi del programma di bilanciamento del carico.
    - Per elencare l'indirizzo IP di tutti gli AL pubblici abilitati nel tuo cluster:
@@ -230,7 +230,7 @@ Hai un cluster esistente che vuoi rendere solo privato? Per vedere come aggiunge
 {: note}
 
 **Account abilitati per VRF, master Kubernetes privato e nodi di lavoro su VLAN sia pubbliche che private**</br>
-Nei cluster che eseguono Kubernetes versione 1.11 o successiva, puoi configurare la rete del tuo cluster in modo da utilizzare endpoint del servizio pubblici e privati. Dopo aver abilitato l'endpoint del servizio privato, il master Kubernetes e i tuoi nodi di lavoro comunicano sempre sulla VLAN privata tramite l'endpoint del servizio privato. Anche se abiliti l'endpoint del servizio pubblico per il tuo cluster, le comunicazioni tra il master Kubernetes e i nodi di lavoro rimangono sulla VLAN privata. Dopo aver abilitato l'endpoint del servizio privato, non puoi disabilitarlo. Puoi mantenere l'endpoint del servizio pubblico per l'accesso sicuro al tuo master Kubernetes su Internet, ad esempio per eseguire i comandi `kubectl` o puoi disabilitare l'endpoint del servizio pubblico se vuoi un cluster con solo l'endpoint del servizio privato.
+Nei cluster che eseguono Kubernetes versione 1.11 o successiva, puoi configurare la rete del tuo cluster in modo che utilizzi endpoint del servizio pubblici e privati. Dopo aver abilitato l'endpoint del servizio privato, il master Kubernetes e i tuoi nodi di lavoro comunicano sempre sulla VLAN privata tramite l'endpoint del servizio privato. Anche se abiliti l'endpoint del servizio pubblico per il tuo cluster, le comunicazioni tra il master Kubernetes e i nodi di lavoro rimangono sulla VLAN privata. Dopo aver abilitato l'endpoint del servizio privato, non puoi disabilitarlo. Puoi mantenere l'endpoint del servizio pubblico per l'accesso sicuro al tuo master Kubernetes su Internet, ad esempio per eseguire i comandi `kubectl` o puoi disabilitare l'endpoint del servizio pubblico se vuoi un cluster con solo l'endpoint del servizio privato.
 
 **Account non VRF o abilitati per VRF, master Kubernetes e nodi di lavoro solo su VLAN privata**</br>
 Se configuri i tuoi nodi di lavoro solo su una VLAN privata, i nodi di lavoro non possono esporre automaticamente i loro servizi dell'applicazione sulla rete pubblica e, in un account non VRF, non possono connettersi al master. Devi configurare un'applicazione gateway per fornire la connettività di rete tra i nodi di lavoro e il master.
@@ -299,17 +299,18 @@ sono condivisi tra più clienti. Tuttavia, quando decidi tra nodi condivisi e de
 potresti voler verificare con il tuo dipartimento legale e discutere sul livello di conformità e isolamento dell'infrastruttura
 che il tuo ambiente dell'applicazione necessita.
 
-Alcune varietà sono disponibili per un solo tipo di configurazione di tenancy. Ad esempio, le VM `m2c` sono disponibili solo come configurazione di tenancy `shared`.
+Alcune varietà sono disponibili per un solo tipo di configurazione di tenancy. Ad esempio, le VM `m3c` sono disponibili solo come configurazione di tenancy `shared`.
 {: note}
 
-**Quali sono le caratteristiche generali delle macchine virtuali (VM, Virtual Machine)?**</br>
+**Quali sono le funzioni generali delle VM?**</br>
 Le macchine virtuali utilizzano il disco locale anziché SAN (Storage Area Networking) per garantire l'affidabilità. I vantaggi dell'affidabilità includono una velocità di elaborazione più elevata durante la serializzazione dei byte sul disco locale e una riduzione del danneggiamento del file system dovuto a errori di rete. Ogni VM offre una velocità di rete di 1000Mbps, 25GB di archiviazione disco locale primaria per il file system del sistema operativo e 100GB di archiviazione disco locale secondaria per dati quali il runtime del contenitore e il `kubelet`. L'archiviazione locale sul nodo di lavoro è solo per l'elaborazione a breve termine e i dischi primari e secondari vengono cancellati quando aggiorni o ricarichi il nodo di lavoro. Per le soluzioni di archiviazione persistente, vedi [Pianificazione di archiviazione persistente altamente disponibile](/docs/containers?topic=containers-storage_planning#storage_planning).
 
-**Cosa succede se ho tipi di macchine `u1c` o `b1c` obsoleti?**</br>
-Per iniziare a utilizzare i tipi di macchina `u2c` e `b2c`, [aggiorna i tipi di macchina aggiungendo i nodi di lavoro](/docs/containers?topic=containers-update#machine_type).
+**Cosa succede se utilizzo tipi di macchina precedenti?**</br>
+se il tuo cluster ha tipi di nodo di lavoro `x1c` o Ubuntu 16 `x2c` precedenti obsoleti, puoi[aggiornare il tuo cluster ai nodi di lavoro `x3c`
+di Ubuntu 18 ](/docs/containers?topic=containers-update#machine_type).
 
-**Quali varietà di macchina virtuale sono disponibili?**</br>
-I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Ad esempio, le VM `m2c` sono disponibili solo nell'ubicazione di Dallas (`dal10, dal12, dal13`). Puoi anche riesaminare i tipi di macchina [bare metal](#bm) o [SDS](#sds) disponibili.
+**Quali tipi di macchina virtuale sono disponibili?**</br>
+I tipi di nodo di lavoro variano in base alla zona. La seguente tabella include la versione più recente di un tipo, ad esempio i tipi di nodi di lavoro Ubuntu 18 `x3c`, invece dei tipi di nodi di lavoro Ubuntu 16 precedenti, `x2c`. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Puoi anche riesaminare i tipi di macchina [bare metal](#bm) o [SDS](#sds) disponibili.
 
 {: #vm-table}
 <table>
@@ -322,83 +323,85 @@ I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili n
 </thead>
 <tbody>
 <tr>
-<td><strong>Virtuale, u2c.2x4</strong>: utilizza questa VM di dimensione minima per il test rapido, le prove di concetto e altri carichi di lavoro leggeri.</td>
+<td><strong>Virtuale, u3c.2x4</strong>: utilizza questa VM di dimensione minima per il test rapido, le prove di concetto e altri carichi di lavoro leggeri.</td>
 <td>2 / 4GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtuale, b2c.4x16</strong>: seleziona questa VM bilanciata per il test e lo sviluppo e altri carichi di lavoro leggeri.</td>
+<td><strong>Virtuale, b3c.4x16</strong>: seleziona questa VM bilanciata per il test e lo sviluppo e altri carichi di lavoro leggeri.</td>
 <td>4 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtuale, b2c.16x64</strong>: seleziona questa VM bilanciata per carichi di lavoro di dimensione media.</td></td>
+<td><strong>Virtuale, b3c.16x64</strong>: seleziona questa VM bilanciata per carichi di lavoro di dimensione media.</td></td>
 <td>16 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtuale, b2c.32x128</strong>: seleziona questa VM bilanciata per carichi di lavoro medi o grandi, come un database e un sito web dinamico con molti utenti simultanei.</td>
+<td><strong>Virtuale, b3c.32x128</strong>: seleziona questa VM bilanciata per carichi di lavoro medio-grandi, come un database e un sito Web dinamico con molti utenti simultanei.</td>
 <td>32 / 128GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtuale, b2c.56x242</strong>: seleziona questa VM bilanciata per carichi di lavoro grandi, come un database e più applicazioni con molti utenti simultanei.</td>
+<td><strong>Virtuale, b3c.56x242</strong>: seleziona questa VM bilanciata per carichi di lavoro grandi, come un database e più applicazioni con molti utenti simultanei.</td>
 <td>56 / 242GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtuale, c2c.16x16</strong>: utilizza questa varietà quando vuoi un bilanciamento equilibrato delle risorse di elaborazione dal nodo di lavoro per i carichi di lavoro leggeri.</td>
+<td><strong>Virtuale, c3c.16x16</strong>: utilizza questo tipo quando vuoi un bilanciamento equilibrato delle risorse di elaborazione provenienti dal nodo di lavoro per carichi di lavoro leggeri.</td>
 <td>16 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, c2c.16x32</strong>: utilizza questa varietà quando vuoi un rapporto 1:2 tra le risorse di CPU e memoria dal nodo di lavoro per i carichi di lavoro leggeri o di medie dimensioni.</td>
+<td><strong>Virtuale, c3c.16x32</strong>: utilizza questo tipo quando vuoi un rapporto 1:2 tra le risorse di CPU e memoria del nodo di lavoro per carichi di lavoro leggeri o di medie dimensioni.</td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, c2c.32x32</strong>: utilizza questa varietà quando vuoi un bilanciamento equilibrato delle risorse di elaborazione dal nodo di lavoro per i carichi di lavoro di medie dimensioni.</td>
+<td><strong>Virtuale, c3c.32x32</strong>: utilizza questo tipo quando vuoi un bilanciamento equilibrato delle risorse di elaborazione provenienti dal nodo di lavoro per carichi di lavoro di medie dimensioni.</td>
 <td>32 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, c2c.32x64</strong>: utilizza questa varietà quando vuoi un rapporto 1:2 tra le risorse di CPU e memoria dal nodo di lavoro per i carichi di lavoro di medie dimensioni.</td>
+<td><strong>Virtuale, c3c.32x64</strong>: utilizza questo tipo quando vuoi un rapporto 1:2 tra le risorse di CPU e memoria del nodo di lavoro per carichi di lavoro di medie dimensioni.</td>
 <td>32 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtuale, m2c.8x64</strong>: utilizza questa varietà quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro leggeri o di medie dimensioni che richiedono più memoria come i database di {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
+<td><strong>Virtuale, m3c.8x64</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per carichi di lavoro leggeri o di medie dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
 <td>8 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, m2c.16x128</strong>: utilizza questa varietà quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro di medie dimensioni che richiedono più memoria come i database di {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
+<td><strong>Virtuale, m3c.16x128</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per carichi di lavoro di medie dimensioni che richiedono più memoria, quali i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
 <td>16 / 128GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, m2c.30x240</strong>: utilizza questa varietà quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro di medie o grandi dimensioni che richiedono più memoria come i database di {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
+<td><strong>Virtuale, m3c.30x240</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per carichi di lavoro di medie o grandi dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
 <td>30 / 240GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, m2c.48x384</strong>: utilizza questa varietà quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro di medie o grandi dimensioni che richiedono più memoria come i database di {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
+<td><strong>Virtuale, m3c.48x384</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per carichi di lavoro di medie o grandi dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo come tenancy di
+`--hardware shared`.</td>
 <td>48 / 384GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, m2c.56x448</strong>: utilizza questa varietà quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro di grandi dimensioni che richiedono più memoria come i database di {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
+<td><strong>Virtuale, m3c.56x448</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro di grandi dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo come tenancy di
+`--hardware shared`.</td>
 <td>56 / 448GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, m2c.64x512</strong>: utilizza questa varietà quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro di grandi dimensioni che richiedono più memoria come i database di {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
+<td><strong>Virtuale, m3c.64x512</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro di grandi dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo come tenancy di `--hardware shared`.</td>
 <td>64 / 512GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
@@ -412,10 +415,10 @@ I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili n
 Puoi eseguire il provisioning del tuo nodo di lavoro come server fisico a singolo tenant, indicato anche come bare metal.
 {: shortdesc}
 
-**In che modo bare metal è diverso dalle macchine virtuali?**</br>
+**In che modo il bare metal di differenzia dalle VM?**</br>
 Bare metal ti dà accesso diretto alle risorse fisiche sulla macchina, come la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti degli "elementi di disturbo" che condividono risorse o rallentano le prestazioni. I tipi di macchine fisiche hanno più archiviazione locale rispetto a quelle virtuali e alcune dispongono di RAID per aumentare la disponibilità dei dati. L'archiviazione locale sul nodo di lavoro è solo per l'elaborazione a breve termine e i dischi primari e secondari vengono cancellati quando aggiorni o ricarichi il nodo di lavoro. Per le soluzioni di archiviazione persistente, vedi [Pianificazione di archiviazione persistente altamente disponibile](/docs/containers?topic=containers-storage_planning#storage_planning).
 
-**Oltre a specifiche migliori per le prestazioni, posso fare qualcosa con bare metal che non posso fare con le macchine virtuali?**</br>
+**Oltre ad avere specifiche migliori per le prestazioni, posso fare qualcosa con bare metal che non posso fare con le macchine virtuali?**</br>
 Sì. Con bare metal, puoi abilitare Trusted Compute per verificare possibili tentativi di manomissione dei tuoi nodi di lavoro. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente. Puoi creare un nuovo cluster senza attendibilità. Per ulteriori informazioni su come funziona l'attendibilità durante il processo di avvio del nodo, vedi [{{site.data.keyword.containerlong_notm}} con Trusted Compute](/docs/containers?topic=containers-security#trusted_compute). Trusted Compute è disponibile per alcuni tipi di macchina bare metal. Quando esegui il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types <zone>`, puoi vedere quali macchine supportano l'attendibilità controllando il campo **Trustable**. Ad esempio, le varietà GPU `mgXc` non supportano Trusted Compute.
 
 Oltre a Trusted Compute, puoi anche sfruttare {{site.data.keyword.datashield_full}} (Beta). {{site.data.keyword.datashield_short}} è integrato con la tecnologia di Intel® Software Guard Extensions (SGX) e Fortanix® in modo che il codice e i dati dei carichi di lavoro del tuo contenitore {{site.data.keyword.Bluemix_notm}} siano protetti durante l'utilizzo. Il codice e i dati dell'applicazione vengono eseguiti in enclavi con protezione avanzata della CPU, che sono aree di memoria attendibili sul nodo di lavoro che proteggono aspetti critici dell'applicazione, aiutando a mantenere il codice e i dati riservati e invariati. Se tu o la tua azienda richiedete la sensibilità dei dati a causa di politiche interne, regolamentazioni governative o requisiti di conformità del settore, questa soluzione potrebbe aiutarvi a passare al cloud. Casi di utilizzo di esempio includono istituzioni finanziarie e sanitarie o paesi con politiche governative che richiedono soluzioni cloud in loco.
@@ -426,8 +429,8 @@ I server bare metal sono più costosi di quelli virtuali e sono più adatti per 
 I server bare metal vengono fatturati mensilmente. Se annulli un server bare metal prima della fine del mese, ti viene addebitato il costo fino alla fine di quel mese. Dopo aver ordinato o annullato un server bare metal, il processo viene completato manualmente nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Pertanto, ci vuole più di un giorno lavorativo per completare questo processo.
 {: important}
 
-**Quali varietà di bare metal posso ordinare?**</br>
-I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Puoi anche riesaminare i tipi di macchina [VM](#vm) o [SDS](#sds) disponibili.
+**Quali tipi di bare metal posso ordinare?**</br>
+I tipi di nodo di lavoro variano in base alla zona. La seguente tabella include la versione più recente di un tipo, ad esempio i tipi di nodi di lavoro Ubuntu 18 `x3c`, invece dei tipi di nodi di lavoro Ubuntu 16 precedenti, `x2c`. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Puoi anche riesaminare i tipi di macchina [VM](#vm) o [SDS](#sds) disponibili.
 
 Le macchine bare metal sono ottimizzate per diversi casi d'uso quali i carichi di lavoro con un utilizzo intensivo di RAM, dati o GPU.
 
@@ -450,43 +453,43 @@ Scegli un tipo di macchina con la configurazione di archiviazione corretta per s
 </thead>
 <tbody>
 <tr>
-<td><strong>Bare metal con RAM intensiva, mr1c.28x512</strong>: massimizza la disponibilità della RAM dei tuoi nodi di lavoro.</td>
+<td><strong>Bare metal con RAM intensiva, mr3c.28x512</strong>: massimizza la disponibilità della RAM dei tuoi nodi di lavoro.</td>
 <td>28 / 512GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal GPU, mg1c.16x128</strong>: scegli questo tipo per i carichi di lavoro intensivi matematicamente come il calcolo di elevate prestazioni, il machine learning o le applicazioni 3D. Questa varietà ha 1 scheda fisica Tesla K80 con 2 GPU (graphics processing unit) per scheda per un totale di 2 GPU.</td>
+<td><strong>Bare metal GPU, mg3c.16x128</strong>: scegli questo tipo per i carichi di lavoro matematicamente complessi, quale il calcolo ad alte prestazioni, il machine learning o le applicazioni 3D. Questa varietà ha 1 scheda fisica Tesla K80 con 2 GPU (graphics processing unit) per scheda per un totale di 2 GPU.</td>
 <td>16 / 128GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal GPU, mg1c.28x256</strong>: scegli questo tipo per i carichi di lavoro intensivi matematicamente come il calcolo di elevate prestazioni, il machine learning o le applicazioni 3D. Questa varietà ha 2 schede fisiche Tesla K80 con 2 GPU per scheda per un totale di 4 GPU.</td>
+<td><strong>Bare metal GPU, mg3c.28x256</strong>: scegli questo tipo per i carichi di lavoro matematicamente complessi, quale il calcolo ad alte prestazioni, il machine learning o le applicazioni 3D. Questa varietà ha 2 schede fisiche Tesla K80 con 2 GPU per scheda per un totale di 4 GPU.</td>
 <td>28 / 256GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal con uso intensivo di dati, md1c.16x64.4x4tb</strong>: utilizza questo tipo per una quantità significativa di archiviazione su disco locale, incluso RAID per aumentare la disponibilità dei dati, per carichi di lavoro come file system distribuiti, database di grandi dimensioni e analisi dei big data.</td>
+<td><strong>Bare metal con uso intensivo di dati, md3c.16x64.4x4tb</strong>: utilizza questo tipo per una quantità significativa di archiviazione su disco locale, incluso RAID, per aumentare la disponibilità dei dati, per carichi di lavoro quali file system distribuiti, database di grandi dimensioni e analisi dei big data.</td>
 <td>16 / 64GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal con uso intensivo di dati, md1c.28x512.4x4tb</strong>: utilizza questo tipo per una quantità significativa di archiviazione su disco locale, incluso RAID per aumentare la disponibilità dei dati, per carichi di lavoro come file system distribuiti, database di grandi dimensioni e analisi dei big data.</td>
+<td><strong>Bare metal con uso intensivo di dati, md3c.28x512.4x4tb</strong>: utilizza questo tipo per una quantità significativa di archiviazione su disco locale, incluso RAID, per aumentare la disponibilità dei dati, per carichi di lavoro quali file system distribuiti, database di grandi dimensioni e analisi dei big data.</td>
 <td>28 / 512 GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal bilanciato, mb2c.4x32</strong>: utilizza per i carichi di lavoro bilanciati che richiedono ulteriori risorse di calcolo rispetto all'offerta delle macchine virtuali. Questa varietà può anche essere abilitata per Intel® Software Guard Extensions (SGX) in modo che tu possa utilizzare <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per crittografare la tua memoria di dati.</td>
+<td><strong>Bare metal bilanciato, mb3c.4x32</strong>: utilizzalo per i carichi di lavoro bilanciati che richiedono risorse di calcolo superiori a quelle offerte dalle macchine virtuali. Questa varietà può anche essere abilitata per Intel® Software Guard Extensions (SGX) in modo che tu possa utilizzare <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per crittografare la tua memoria di dati.</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 2TB SATA</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal bilanciato, mb1c.16x64</strong>: utilizza per i carichi di lavoro bilanciati che richiedono ulteriori risorse di calcolo rispetto all'offerta delle macchine virtuali.</td>
+<td><strong>Bare metal bilanciato, mb3c.16x64</strong>: utilizzalo per i carichi di lavoro bilanciati che richiedono risorse di calcolo superiori a quelle offerte dalle macchine virtuali.</td>
 <td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
@@ -501,7 +504,7 @@ Scegli un tipo di macchina con la configurazione di archiviazione corretta per s
 Le varietà SDS (software-defined storage) sono macchine fisiche fornite con dischi non formattati aggiuntivi per l'archiviazione locale fisica. A differenza del disco locale primario e secondario, questi dischi non formattati non vengono cancellati durante l'aggiornamento o il ricaricamento del nodo di lavoro. Poiché i dati sono co-ubicati con il nodo di elaborazione, le macchine SDS sono adatte per i carichi di lavoro ad elevate prestazioni.
 {: shortdesc}
 
-**Quando utilizzo le varietà SDS?**</br>
+**Quando utilizzo i tipi SDS?**</br>
 Di norma utilizzi le macchine SDS nei seguenti casi:
 *  Se utilizzi un componente aggiuntivo SDS come [Portworx](/docs/containers?topic=containers-portworx#portworx) nel cluster, usa una macchina SDS.
 *  Se la tua applicazione è uno [StatefulSet ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) che richiede l'archiviazione locale, puoi utilizzare le macchine SDS ed eseguire il provisioning di [volumi persistenti locali Kubernetes (beta)![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
@@ -509,8 +512,8 @@ Di norma utilizzi le macchine SDS nei seguenti casi:
 
 Per ulteriori soluzioni di archiviazione, vedi [Pianificazione di archiviazione persistente altamente disponibile](/docs/containers?topic=containers-storage_planning#storage_planning).
 
-**Quali varietà di SDS posso ordinare?**</br>
-I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Puoi anche riesaminare i tipi di macchina [bare metal](#bm) o [VM](#vm) disponibili.
+**Quali tipi di SDS posso ordinare?**</br>
+I tipi di nodo di lavoro variano in base alla zona. La seguente tabella include la versione più recente di un tipo, ad esempio i tipi di nodi di lavoro Ubuntu 18 `x3c`, invece dei tipi di nodi di lavoro Ubuntu 16 precedenti, `x2c`. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Puoi anche riesaminare i tipi di macchina [bare metal](#bm) o [VM](#vm) disponibili.
 
 Scegli un tipo di macchina con la configurazione di archiviazione corretta per supportare il tuo carico di lavoro. Alcune varietà hanno una combinazione delle seguenti configurazioni di dischi e archiviazione. Ad esempio, alcune varietà possono avere un disco primario SATA con un disco secondario SSD raw.
 
@@ -532,28 +535,28 @@ Scegli un tipo di macchina con la configurazione di archiviazione corretta per s
 </thead>
 <tbody>
 <tr>
-<td><strong>Bare metal con SDS, ms2c.4x32.1.9tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per le prestazioni, utilizza la varietà con una notevole capacità di disco che supporta SDS (software-defined storage).</td>
+<td><strong>Bare metal con SDS, ms3c.4x32.1.9tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per motivi di prestazioni, utilizza questo tipo dotato di notevole capacità di disco che supporta l'SDS (software-defined storage).</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>SSD raw di 1,9TB (percorso dispositivo: `/dev/sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal con SDS, ms2c.16x64.1.9tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per le prestazioni, utilizza la varietà con una notevole capacità di disco che supporta SDS (software-defined storage).</td>
+<td><strong>Bare metal con SDS, ms3c.16x64.1.9tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per motivi di prestazioni, utilizza questo tipo dotato di notevole capacità di disco che supporta l'SDS (software-defined storage).</td>
 <td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>SSD raw di 1,9TB (percorso dispositivo: `/dev/sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal con SDS, ms2c.28x256.3.8tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per le prestazioni, utilizza la varietà con una notevole capacità di disco che supporta SDS (software-defined storage).</td>
+<td><strong>Bare metal con SDS, ms3c.28x256.3.8tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per motivi di prestazioni, utilizza questo tipo dotato di notevole capacità di disco che supporta l'SDS (software-defined storage).</td>
 <td>28 / 256GB</td>
 <td>SATA di 2TB / SSD di 1,9TB</td>
 <td>SSD raw di 3,8TB (percorso dispositivo: `/dev/sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal con SDS, ms2c.28x512.4x3.8tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per le prestazioni, utilizza la varietà con una notevole capacità di disco che supporta SDS (software-defined storage).</td>
+<td><strong>Bare metal con SDS, ms3c.28x512.4x3.8tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per motivi di prestazioni, utilizza questo tipo dotato di notevole capacità di disco che supporta l'SDS (software-defined storage).</td>
 <td>28 / 512GB</td>
 <td>SATA di 2TB / SSD di 1,9TB</td>
 <td>4 dischi, SSD raw di 3,8TB (percorsi dispositivo: `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
@@ -581,16 +584,28 @@ Per verificare quante risorse di calcolo sono attualmente utilizzate sul tuo nod
 <tr>
   <th>Livello di memoria</th>
   <th>% o quantità riservata</th>
-  <th>Esempio di nodo di lavoro `b2c.4x16` (16 GB)</th>
+  <th>Esempio di nodo di lavoro `b3c.4x16` (16 GB)</th>
   <th>Esempio di nodo di lavoro `mg1c.28x256` (256 GB)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>Primi 16 GB (0-16 GB)</td>
+  <td>Primi 4 GB (0-4 GB)</td>
+  <td>25% di memoria</td>
+  <td>1 GB</td>
+  <td>1 GB</td>
+</tr>
+<tr>
+  <td>Successivi 4 GB (5-8 GB)</td>
+  <td>20% di memoria</td>
+  <td>0,8 GB</td>
+  <td>0,8 GB</td>
+</tr>
+<tr>
+  <td>Successivi 8 GB (9-16 GB)</td>
   <td>10% di memoria</td>
-  <td>1,6 GB</td>
-  <td>1,6 GB</td>
+  <td>0,8 GB</td>
+  <td>0,8 GB</td>
 </tr>
 <tr>
   <td>Successivi 112 GB (17-128 GB)</td>
@@ -613,8 +628,8 @@ Per verificare quante risorse di calcolo sono attualmente utilizzate sul tuo nod
 <tr>
   <td>**Totale riservato**</td>
   <td>**(variabile)**</td>
-  <td>**1,7 GB di 16 GB totali**</td>
-  <td>**10,96 GB di 256 GB totali**</td>
+  <td>**2,7 GB di 16 GB totali**</td>
+  <td>**11,96 GB di 256 GB totali**</td>
 </tr>
 </tbody>
 </table>
@@ -625,7 +640,7 @@ Per verificare quante risorse di calcolo sono attualmente utilizzate sul tuo nod
 <tr>
   <th>Livello di CPU</th>
   <th>% riservata</th>
-  <th>Esempio di nodo di lavoro `b2c.4x16` (4 core)</th>
+  <th>Esempio di nodo di lavoro `b3c.4x16` (4 core)</th>
   <th>Esempio di nodo di lavoro `mg1c.28x256` (28 core)</th>
 </tr>
 </thead>

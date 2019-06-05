@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -47,6 +47,164 @@ subcollection: containers
 
 ## V1.13 更改日志
 {: #113_changelog}
+
+### 2019 年 4 月 15 日发布的工作程序节点 FP1.13.5_1518 的更改日志
+{: #1135_1518}
+
+下表显示了工作程序节点 FP1.13.5_1518 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.5_1517 以来进行的更改">
+<caption>自 V1.13.5_1517 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了安装的 Ubuntu 软件包，包括针对 [CVE-2019-3842 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html)，更新了 `systemd`。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 8 日发布的 1.13.5_1517 的更改日志
+{: #1135_1517}
+
+下表显示了补丁 1.13.5_1517 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.4_1516 以来进行的更改">
+<caption>自 V1.13.4_1516 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V3.4.0</td>
+<td>V3.4.4</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.4/releases/#v344)。更新解决了 [CVE-2019-9946 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946)。</td>
+</tr>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>请参阅 [HAProxy 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.haproxy.org/download/1.9/src/CHANGELOG)。更新解决了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732)、[CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734)、[CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)、[CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)、[CVE-2019-1543 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) 和 [CVE-2019-1559 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.13.4-86</td>
+<td>V1.13.5-107</td>
+<td>更新为支持 Kubernetes 1.13.5 和 Calico 3.4.4 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.13.4</td>
+<td>V1.13.5</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.5)。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>针对 [CVE-2017-12447 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447)，更新了映像。</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 内核</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>通过针对 [CVE-2019-9213 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 内核</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>通过针对 [CVE-2019-9213 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 1 日发布的工作程序节点 FP1.13.4_1516 的更改日志
+{: #1134_1516}
+
+下表显示了工作程序节点 FP1.13.4_1516 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.4_1515 以来进行的更改">
+<caption>自 V1.13.4_1515 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作程序节点资源利用率</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 3 月 26 日发布的主节点 FP1.13.4_1515 的更改日志
+{: #1134_1515}
+
+下表显示了主节点 FP1.13.4_1515 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.4_1513 以来进行的更改">
+<caption>自 V1.13.4_1513 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群 DNS 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>修复了 Kubernetes V1.11 中的更新过程，以阻止更新将集群 DNS 提供程序切换到 CoreDNS。在更新后，您仍可以[将 CoreDNS 设置为集群 DNS 提供程序](/docs/containers?topic=containers-cluster_dns#set_coredns)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>345</td>
+<td>346</td>
+<td>针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)，更新了映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>166</td>
+<td>167</td>
+<td>修复了针对管理 Kubernetes 私钥，间歇性发生的`超过了上下文截止期限`和`超时`错误。此外，还修复了对密钥管理服务的更新，原先更新可能会使现有 Kubernetes 私钥处于未加密状态。更新包含针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) 的修订。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider 的负载均衡器和负载均衡器监视器</td>
+<td>143</td>
+<td>146</td>
+<td>针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2019 年 3 月 20 日发布的 1.13.4_1513 的更改日志
 {: #1134_1513}
@@ -390,6 +548,159 @@ subcollection: containers
 查看 V1.12 更改日志。
 {: shortdesc}
 
+### 2019 年 4 月 15 日发布的工作程序节点 FP1.12.7_1549 的更改日志
+{: #1127_1549}
+
+下表显示了工作程序节点 FP1.12.7_1549 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.7_1548 以来进行的更改">
+<caption>自 V1.12.7_1548 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了安装的 Ubuntu 软件包，包括针对 [CVE-2019-3842 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html)，更新了 `systemd`。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 8 日发布的 1.12.7_1548 的更改日志
+{: #1127_1548}
+
+下表显示了补丁 1.12.7_1548 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.6_1547 以来进行的更改">
+<caption>自 V1.12.6_1547 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V3.3.1</td>
+<td>V3.3.6</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/releases/#v336)。更新解决了 [CVE-2019-9946 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946)。</td>
+</tr>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>请参阅 [HAProxy 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.haproxy.org/download/1.9/src/CHANGELOG)。更新解决了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732)、[CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734)、[CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)、[CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)、[CVE-2019-1543 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) 和 [CVE-2019-1559 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.12.6-157</td>
+<td>V1.12.7-180</td>
+<td>更新为支持 Kubernetes 1.12.7 和 Calico 3.3.6 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.12.6</td>
+<td>V1.12.7</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.7)。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>针对 [CVE-2017-12447 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447)，更新了映像。</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 内核</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>通过针对 [CVE-2019-9213 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 内核</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>通过针对 [CVE-2019-9213 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 1 日发布的工作程序节点 FP1.12.6_1547 的更改日志
+{: #1126_1547}
+
+下表显示了工作程序节点 FP1.12.6_1547 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.6_1546 以来进行的更改">
+<caption>自 V1.12.6_1546 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作程序节点资源利用率</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+</tr>
+</tbody>
+</table>
+
+
+### 2019 年 3 月 26 日发布的主节点 FP1.12.6_1546 的更改日志
+{: #1126_1546}
+
+下表显示了主节点 FP1.12.6_1546 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.6_1544 以来进行的更改">
+<caption>自 V1.12.6_1544 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>345</td>
+<td>346</td>
+<td>针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)，更新了映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>166</td>
+<td>167</td>
+<td>修复了针对管理 Kubernetes 私钥，间歇性发生的`超过了上下文截止期限`和`超时`错误。此外，还修复了对密钥管理服务的更新，原先更新可能会使现有 Kubernetes 私钥处于未加密状态。更新包含针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) 的修订。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider 的负载均衡器和负载均衡器监视器</td>
+<td>143</td>
+<td>146</td>
+<td>针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
 ### 2019 年 3 月 20 日发布的 1.12.6_1544 的更改日志
 {: #1126_1544}
 
@@ -446,7 +757,7 @@ subcollection: containers
 <tr>
 <td>密钥管理服务提供程序</td>
 <td>136</td>
-<td> 166</td>
+<td>166</td>
 <td>针对 [CVE-2018-16890 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890)、[CVE-2019-3822 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) 和 [CVE-2019-3823 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823)，更新了映像。</td>
 </tr>
 <tr>
@@ -1031,7 +1342,7 @@ subcollection: containers
 <td>V1.12.2-68</td>
 <td>更新为支持 Kubernetes 1.12 发行版。其他更改包括以下内容：
 <ul><li>现在，负载均衡器 pod（在 `ibm-system` 名称空间中为 `ibm-cloud-provider-ip-*`）可设置 CPU 和内存资源请求。</li>
-<li>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`.</li>
+<li>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`。</li>
 <li>新的[负载均衡器 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) 作为 Beta 提供。</li></ul></td>
 </tr>
 <tr>
@@ -1047,6 +1358,164 @@ subcollection: containers
 {: #111_changelog}
 
 查看 V1.11 更改日志。
+
+### 2019 年 4 月 15 日发布的工作程序节点 FP1.11.9_1555 的更改日志
+{: #1119_1555}
+
+下表显示了工作程序节点 FP1.11.9_1555 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.9_1554 以来进行的更改">
+<caption>自 V1.11.9_1554 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了安装的 Ubuntu 软件包，包括针对 [CVE-2019-3842 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html)，更新了 `systemd`。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 8 日发布的 1.11.9_1554 的更改日志
+{: #1119_1554}
+
+下表显示了补丁 1.11.9_1554 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.8_1553 以来进行的更改">
+<caption>自 V1.11.8_1553 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V3.3.1</td>
+<td>V3.3.6</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/releases/#v336)。更新解决了 [CVE-2019-9946 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946)。</td>
+</tr>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>请参阅 [HAProxy 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.haproxy.org/download/1.9/src/CHANGELOG)。更新解决了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732)、[CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734)、[CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)、[CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)、[CVE-2019-1543 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) 和 [CVE-2019-1559 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.8-219</td>
+<td>V1.11.9-241</td>
+<td>更新为支持 Kubernetes 1.11.9 和 Calico 3.3.6 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.11.8</td>
+<td>V1.11.9</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.9)。</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.10</td>
+<td>1.14.13</td>
+<td>请参阅 [Kubernetes DNS 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dns/releases/tag/1.14.13)。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>针对 [CVE-2017-12447 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447)，更新了映像。</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 内核</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>通过针对 [CVE-2019-9213 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 内核</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>通过针对 [CVE-2019-9213 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 1 日发布的工作程序节点 FP1.11.8_1553 的更改日志
+{: #1118_1553}
+
+下表显示了工作程序节点 FP1.11.8_1553 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.8_1552 以来进行的更改">
+<caption>自 V1.11.8_1552 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作程序节点资源利用率</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 3 月 26 日发布的主节点 FP1.11.8_1552 的更改日志
+{: #1118_1552}
+
+下表显示了主节点 FP1.11.8_1552 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.8_1550 以来进行的更改">
+<caption>自 V1.11.8_1550 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>345</td>
+<td>346</td>
+<td>针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)，更新了映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>166</td>
+<td>167</td>
+<td>修复了针对管理 Kubernetes 私钥，间歇性发生的`超过了上下文截止期限`和`超时`错误。此外，还修复了对密钥管理服务的更新，原先更新可能会使现有 Kubernetes 私钥处于未加密状态。更新包含针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) 的修订。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider 的负载均衡器和负载均衡器监视器</td>
+<td>143</td>
+<td>146</td>
+<td>针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2019 年 3 月 20 日发布的 1.11.8_1550 的更改日志
 {: #1118_1550}
@@ -1092,7 +1561,7 @@ subcollection: containers
 <tr>
 <td>密钥管理服务提供程序</td>
 <td>136</td>
-<td> 166</td>
+<td>166</td>
 <td>针对 [CVE-2018-16890 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890)、[CVE-2019-3822 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) 和 [CVE-2019-3823 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823)，更新了映像。</td>
 </tr>
 <tr>
@@ -1622,7 +2091,7 @@ subcollection: containers
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>V1.11.3-100</td>
 <td>V1.11.3-127</td>
-<td>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`.</td>
+<td>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`。</td>
 </tr>
 <tr>
 <td>启用 TPM 的内核</td>
@@ -2047,8 +2516,149 @@ subcollection: containers
 查看 V1.10 更改日志。
 {: shortdesc}
 
-Kubernetes V1.10 已不推荐使用，到 2019 年 4 月 30 日（暂定）将不再予以支持。对于每个 Kubernetes 版本更新，请[查看潜在影响](/docs/containers?topic=containers-cs_versions#cs_versions)，然后立即[更新集群](/docs/containers?topic=containers-update#update)，并且至少更新到 1.11。
+Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以支持。对于每个 Kubernetes 版本更新，请[查看潜在影响](/docs/containers?topic=containers-cs_versions#cs_versions)，然后立即[更新集群](/docs/containers?topic=containers-update#update)，并且至少更新到 1.11。
 {: deprecated}
+
+### 2019 年 4 月 15 日发布的工作程序节点 FP1.10.13_1556 的更改日志
+{: #11013_1556}
+
+下表显示了工作程序节点 FP1.10.13_1556 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.13_1555 以来进行的更改">
+<caption>自 V1.10.13_1555 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了安装的 Ubuntu 软件包，包括针对 [CVE-2019-3842 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html)，更新了 `systemd`。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 8 日发布的 1.10.13_1555 的更改日志
+{: #11013_1555}
+
+下表显示了补丁 1.10.13_1555 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.13_1554 以来进行的更改">
+<caption>自 V1.10.13_1554 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>请参阅 [HAProxy 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.haproxy.org/download/1.9/src/CHANGELOG)。更新解决了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732)、[CVE-2018-0734 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734)、[CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)、[CVE-2018-5407 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)、[CVE-2019-1543 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) 和 [CVE-2019-1559 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)。</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.10</td>
+<td>1.14.13</td>
+<td>请参阅 [Kubernetes DNS 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dns/releases/tag/1.14.13)。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>针对 [CVE-2017-12447 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447)，更新了映像。</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 内核</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>通过针对 [CVE-2019-9213 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 内核</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>通过针对 [CVE-2019-9213 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 1 日发布的工作程序节点 FP1.10.13_1554 的更改日志
+{: #11013_1554}
+
+下表显示了工作程序节点 FP1.10.13_1554 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.13_1553 以来进行的更改">
+<caption>自 V1.10.13_1553 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作程序节点资源利用率</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+</tr>
+</tbody>
+</table>
+
+
+### 2019 年 3 月 26 日发布的主节点 FP1.10.13_1553 的更改日志
+{: #11118_1553}
+
+下表显示了主节点 FP1.10.13_1553 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.13_1551 以来进行的更改">
+<caption>自 V1.10.13_1551 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 插件</td>
+<td>345</td>
+<td>346</td>
+<td>针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)，更新了映像。</td>
+</tr>
+<tr>
+<td>密钥管理服务提供程序</td>
+<td>166</td>
+<td>167</td>
+<td>修复了针对管理 Kubernetes 私钥，间歇性发生的`超过了上下文截止期限`和`超时`错误。此外，还修复了对密钥管理服务的更新，原先更新可能会使现有 Kubernetes 私钥处于未加密状态。更新包含针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) 的修订。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider 的负载均衡器和负载均衡器监视器</td>
+<td>143</td>
+<td>146</td>
+<td>针对 [CVE-2019-9741 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2019 年 3 月 20 日发布的 1.10.13_1551 的更改日志
 {: #11013_1551}
@@ -2094,7 +2704,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 4 月 30 日（暂定）将�
 <tr>
 <td>密钥管理服务提供程序</td>
 <td>136</td>
-<td> 166</td>
+<td>166</td>
 <td>针对 [CVE-2018-16890 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890)、[CVE-2019-3822 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822) 和 [CVE-2019-3823 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823)，更新了映像。</td>
 </tr>
 <tr>
@@ -2591,7 +3201,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 4 月 30 日（暂定）将�
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>V1.10.8-172</td>
 <td>V1.10.8-197</td>
-<td>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`.</td>
+<td>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`。</td>
 </tr>
 <tr>
 <td>启用 TPM 的内核</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -45,7 +45,7 @@ Perché {{site.data.keyword.Bluemix_notm}}: per migliorare l'analisi dei rischi,
 * [Più regioni per l'alta disponibilità](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Sicurezza e isolamento dei contenitori](/docs/containers?topic=containers-security#security)
-* [{{site.data.keyword.cloudant}} per mantenere e sincronizzare i dati tra le applicazioni](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} per mantenere e sincronizzare i dati tra le applicazioni](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK per Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **Soluzione**
@@ -89,16 +89,16 @@ Questa soluzione offre il vantaggio immediato della scalabilità. Utilizzando la
 
 {{site.data.keyword.SecureGateway}} viene utilizzato per creare una pipeline sicura per database e documenti in loco per le applicazioni che vengono riospitate per l'esecuzione in {{site.data.keyword.containerlong_notm}}.
 
-{{site.data.keyword.cos_full_notm}} è utilizzato per l'archiviazione di tutti i documenti e dati non elaborati man mano che aumentano. Per le simulazioni Monte Carlo, viene implementata una pipeline del flusso di lavoro in cui i dati di simulazione si trovano in file di input strutturati memorizzati in {{site.data.keyword.cos_full_notm}}. Un trigger per avviare la simulazione ridimensiona i servizi di calcolo in {{site.data.keyword.containerlong_notm}} per suddividere i dati di input in N bucket di eventi per l'elaborazione della simulazione. {{site.data.keyword.containerlong_notm}} ridimensiona automaticamente a N esecuzioni del servizio associato e scrive risultati intermedi in {{site.data.keyword.cos_full_notm}}. Questi risultati vengono elaborati da un'altra serie di servizi di calcolo di {{site.data.keyword.containerlong_notm}} per produrre i risultati finali.
+{{site.data.keyword.cos_full_notm}} è utilizzato per l'archiviazione di tutti i documenti e dati non elaborati man mano che aumentano. Per le simulazioni Monte Carlo, viene implementata una pipeline del flusso di lavoro in cui i dati di simulazione si trovano in file strutturati memorizzati in {{site.data.keyword.cos_full_notm}}. Un trigger per avviare la simulazione ridimensiona i servizi di calcolo in {{site.data.keyword.containerlong_notm}} per suddividere i dati dei file in N bucket di eventi per l'elaborazione della simulazione. {{site.data.keyword.containerlong_notm}} ridimensiona automaticamente a N esecuzioni del servizio associato e scrive risultati intermedi in {{site.data.keyword.cos_full_notm}}. Questi risultati vengono elaborati da un'altra serie di servizi di calcolo di {{site.data.keyword.containerlong_notm}} per produrre i risultati finali.
 
-{{site.data.keyword.cloudant}} è un moderno database NoSQL utile per molti casi di utilizzo basati sui dati: dall'archiviazione e query di dati chiave-valore all'archiviazione e query di dati complessi orientati ai documenti. Per gestire la crescente serie di regole per i report normativi e di gestione, la società di prestiti utilizza {{site.data.keyword.cloudant}} per memorizzare i documenti associati all'input di dati normativi non elaborati che arrivano nell'azienda. I processi di calcolo su {{site.data.keyword.containerlong_notm}} vengono attivati per compilare, elaborare e pubblicare i dati in vari formati di report. I risultati intermedi comuni tra i report sono memorizzati come documenti di {{site.data.keyword.cloudant}} in modo che sia possibile utilizzare i processi basati su template per produrre i report necessari.
+{{site.data.keyword.cloudant}} è un moderno database NoSQL utile per molti casi di utilizzo basati sui dati: dall'archiviazione e query di dati chiave-valore all'archiviazione e query di dati complessi orientati ai documenti. Per gestire la crescente serie di regole per i report normativi e di gestione, la società di prestiti utilizza {{site.data.keyword.cloudant}} per memorizzare i documenti associati ai dati normativi non elaborati che arrivano nell'azienda. I processi di calcolo su {{site.data.keyword.containerlong_notm}} vengono attivati per compilare, elaborare e pubblicare i dati in vari formati di report. I risultati intermedi comuni tra i report sono memorizzati come documenti di {{site.data.keyword.cloudant}} in modo che sia possibile utilizzare i processi basati su template per produrre i report necessari.
 
 **Risultati**
 
 * Le simulazioni finanziarie complesse sono completate nel 25% del tempo rispetto a quanto era possibile in precedenza con i sistemi in loco esistenti.
 * Il tempo di distribuzione è migliorato dai precedenti 6 - 9 mesi a una media di 1 - 3 settimane. Questo miglioramento si verifica perché {{site.data.keyword.containerlong_notm}} consente un processo disciplinato e controllato per aumentare i contenitori di applicazioni e sostituirli con le versioni più recenti. I bug di report possono essere corretti rapidamente, risolvendo problemi, come la precisione.
 * I costi di report normativi sono stati ridotti con una serie di servizi di archiviazione e di calcolo coerente e scalabile offerta da {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.cloudant}}.
-* Nel tempo, le applicazioni originali inizialmente migrate nel cloud sono state ri-progettate in microservizi cooperativi che vengono eseguiti su {{site.data.keyword.containerlong_notm}}. Questa azione ha ulteriormente accelerato lo sviluppo e il tempo di distribuzione e ha consentito ulteriori innovazioni grazie alla relativa facilità di sperimentazione. Hanno inoltre rilasciato applicazioni innovative con versioni più recenti dei microservizi per sfruttare le condizioni di mercato e di business (ovvero, le applicazioni e i microservizi situazionali).
+* Nel tempo, le applicazioni originali inizialmente migrate nel cloud sono state ri-progettate in microservizi cooperativi che vengono eseguiti su {{site.data.keyword.containerlong_notm}}. Questa azione ha ulteriormente accelerato lo sviluppo e il tempo di distribuzione e ha consentito ulteriori innovazioni grazie alla relativa facilità di sperimentazione. Hanno inoltre rilasciato applicazioni innovative con versioni più recenti dei microservizi per avvalersi delle condizioni di mercato e di business (ovvero, le applicazioni e i microservizi situazionali).
 
 ## La società di gestione dei pagamenti ottimizza la produttività degli sviluppatori, distribuendo ai loro partner strumenti abilitati all'intelligenza artificiale 4 volte più velocemente
 {: #uc_payment_tech}

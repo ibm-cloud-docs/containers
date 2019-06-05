@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -30,13 +30,13 @@ subcollection: containers
 每个 Kubernetes 集群均设置有名为 Calico 的网络插件。缺省网络策略设置为保护 {{site.data.keyword.containerlong}} 中每个工作程序节点的公用网络接口的安全。
 {: shortdesc}
 
-如果您有独特的安全需求或者具有启用了 VLAN 生成的多专区集群，那么可以使用 Calico 和 Kubernetes 来为集群创建网络策略。通过 Kubernetes 网络策略，可以指定要允许或阻止与集群中的 pod 之间进出的网络流量。要设置更高级的网络策略（例如，阻止流至 LoadBalancer 服务的入站（流入）流量），请使用 Calico 网络策略。
+如果您有独特的安全需求或者具有启用了 VLAN 生成的多专区集群，那么可以使用 Calico 和 Kubernetes 来为集群创建网络策略。通过 Kubernetes 网络策略，可以指定要允许或阻止与集群中的 pod 之间进出的网络流量。要设置更高级的网络策略（例如阻止流至网络负载均衡器 (NLB) 服务的入站（流入）流量），请使用 Calico 网络策略。
 
 <ul>
   <li>
   [Kubernetes 网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)：这些策略指定 pod 可以如何与其他 pod 以及与外部端点进行通信。自 Kubernetes V1.8 开始，可以根据协议、端口以及源或目标 IP 地址来允许或阻止入局和出局网络流量。还可以根据 pod 和名称空间标签对流量进行过滤。Kubernetes 网络策略通过使用 `kubectl` 命令或 Kubernetes API 来应用。这些策略应用后，即会自动转换成 Calico 网络策略，Calico 会强制实施这些策略。</li>
   <li>
-  [Calico 网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)：这些策略是 Kubernetes 网络策略的超集，通过 `calicoctl` 命令进行应用。Calico 策略添加了以下功能。
+  [Calico 网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/getting-started/bare-metal/policy/)：这些策略是 Kubernetes 网络策略的超集，通过 `calicoctl` 命令进行应用。Calico 策略添加了以下功能。
     <ul>
     <li>允许或阻止特定网络接口上的网络流量，而不考虑 Kubernetes pod 源或目标 IP 地址或 CIDR。</li>
     <li>允许或阻止各名称空间中的 pod 的网络流量。</li>
@@ -47,7 +47,7 @@ subcollection: containers
 
 Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则来强制实施这些策略，包括自动转换为 Calico 策略的任何 Kubernetes 网络策略。iptable 规则充当工作程序节点的防火墙，可定义网络流量为能够转发到目标资源而必须满足的特征。
 
-要使用 Ingress 和 LoadBalancer 服务，请使用 Calico 和 Kubernetes 策略来管理流入和流出集群的网络流量。不要使用 IBM Cloud Infrastructure (SoftLayer) [安全组](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups)。IBM Cloud Infrastructure (SoftLayer) 安全组会应用于单个虚拟服务器的网络接口，以过滤系统管理程序级别的流量。但是，安全组不支持 VRRP 协议，{{site.data.keyword.containerlong_notm}} 使用该协议来管理负载均衡器 IP 地址。如果没有 VRRP 协议来管理负载均衡器 IP，那么 Ingress 和 LoadBalancer 服务无法正常工作。
+要使用网络负载均衡器 (NLB) 和 Ingress 应用程序负载均衡器 (ALB) 服务，请使用 Calico 和 Kubernetes 策略来管理流入和流出集群的网络流量。不要使用 IBM Cloud Infrastructure (SoftLayer) [安全组](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups)。IBM Cloud Infrastructure (SoftLayer) 安全组会应用于单个虚拟服务器的网络接口，以过滤系统管理程序级别的流量。但是，安全组不支持 VRRP 协议，{{site.data.keyword.containerlong_notm}} 使用该协议来管理 ALB 和 NLB IP 地址。如果没有 VRRP 协议来管理 IP，那么 ALB 和 NLB 服务无法正常工作。
 {: tip}
 
 <br />
@@ -59,17 +59,17 @@ Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则
 创建具有公用 VLAN 的集群时，会自动为每个工作程序节点及其公用网络接口创建具有 `ibm.role: worker_public` 标签的 `HostEndpoint` 资源。为了保护工作程序节点的公用网络接口，缺省 Calico 策略会应用于任何具有 `ibm.role: worker_public` 标签的主机端点。
 {:shortdesc}
 
-这些缺省 Calico 策略允许所有出站网络流量，并允许流至特定集群组件（例如，Kubernees NodePort、LoadBalancer 和 Ingress 服务）的入站流量。将阻止从因特网流至缺省策略中未指定的工作程序节点的其他任何入站网络流量。缺省策略不会影响 pod 到 pod 的流量。
+这些缺省 Calico 主机策略允许所有出站网络流量，并允许流至特定集群组件（例如，Kubernetes NodePort、LoadBalancer 和 Ingress 服务）的入站流量。将阻止从因特网流至缺省策略中未指定的工作程序节点的其他任何入站网络流量。缺省策略不会影响 pod 到 pod 的流量。
 
-查看自动应用于集群的以下缺省 Calico 网络策略。
+查看自动应用于集群的以下缺省 Calico 主机策略。
 
 不要除去应用于主机端点的策略，除非您充分了解该策略，并确信无需该策略允许的流量。
 {: important}
 
  <table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
-  <caption>每个集群的缺省 Calico 策略</caption>
+  <caption>每个集群的缺省 Calico 主机策略</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 每个集群的缺省 Calico 策略</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 每个集群的缺省 Calico 主机策略</th>
   </thead>
   <tbody>
     <tr>
@@ -86,7 +86,7 @@ Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>允许入局 NodePort、LoadBalancer 和 Ingress 服务流量流至这些服务公开的 pod。<strong>注</strong>：您无需指定公开的端口，因为 Kubernetes 会使用目标网络地址转换 (DNAT) 将服务请求转发到正确的 pod。这一转发过程在 Iptables 中应用主机端点策略之前执行。</td>
+      <td>允许入局网络负载均衡器 (NLB)、Ingress 应用程序负载均衡器 (ALB) 和 NodePort 服务流量流至这些服务公开的 pod。<strong>注</strong>：您无需指定公开的端口，因为 Kubernetes 会使用目标网络地址转换 (DNAT) 将服务请求转发到正确的 pod。这一转发过程在 Iptables 中应用主机端点策略之前执行。</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -99,7 +99,7 @@ Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则
   </tbody>
 </table>
 
-在 Kubernetes V1.10 和更高版本的集群中，还会创建缺省 Kubernetes 策略，用于限制对 Kubernetes 仪表板的访问。Kubernetes 策略不会应用于主机端点，而是应用于 `kube-dashboard` pod。此策略应用于仅连接到专用 VLAN 的集群以及同时连接到公用和专用 VLAN 的集群。
+还会创建缺省 Kubernetes 策略，用于限制对 Kubernetes 仪表板的访问。Kubernetes 策略不会应用于主机端点，而是应用于 `kube-dashboard` pod。此策略应用于仅连接到专用 VLAN 的集群以及同时连接到公用和专用 VLAN 的集群。
 
 <table>
 <caption>每个集群的缺省 Kubernetes 策略</caption>
@@ -109,7 +109,7 @@ Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td>仅在 Kubernetes V1.10 或更高版本中，在 <code>kube-system</code> 名称空间中提供：阻止所有 pod 访问 Kubernetes 仪表板。此策略不会影响通过 {{site.data.keyword.Bluemix_notm}} 控制台或使用 <code>kubectl proxy</code> 访问仪表板。如果 pod 需要访问该仪表板，请将 pod 部署到具有 <code>kubernetes-dashboard-policy: allow</code> 标签的名称空间中。</td>
+  <td>在 <code>kube-system</code> 名称空间中提供：阻止所有 pod 访问 Kubernetes 仪表板。此策略不会影响通过 {{site.data.keyword.Bluemix_notm}} 控制台或使用 <code>kubectl proxy</code> 访问仪表板。如果 pod 需要访问该仪表板，请将 pod 部署到具有 <code>kubernetes-dashboard-policy: allow</code> 标签的名称空间中。</td>
  </tr>
 </tbody>
 </table>
@@ -123,7 +123,7 @@ Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则
 要查看、管理和添加 Calico 策略，请安装并配置 Calico CLI。
 {:shortdesc}
 
-1. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+1. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -143,7 +143,7 @@ Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则
         ```
         {: pre}
 
-4. [下载 Calico CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/projectcalico/calicoctl/releases/tag/v3.3.1)。
+4. [下载 Calico CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/projectcalico/calicoctl/releases)。
 
     如果使用的是 OS X，请下载 `-darwin-amd64` 版本。如果使用的是 Windows，请将 Calico CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。通过此设置，您在以后运行命令时，可减少一些文件路径更改操作。确保将文件保存为 `calicoctl.exe`。
     {: tip}
@@ -211,7 +211,7 @@ Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则
 
 开始之前：
 1. [安装和配置 Calico CLI](#cli_install)。
-2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -232,13 +232,13 @@ Linux 和 Mac 用户不需要在 `calicoctl` 命令中包含 `--config=filepath/
 
 2. 查看为集群创建的所有 Calico 和 Kubernetes 网络策略。此列表包含可能还未应用于任何 pod 或主机的策略。要强制实施网络策略，必须找到与 Calico 网络策略中定义的选择器相匹配的 Kubernetes 资源。
 
-    [网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 的作用域限定为特定名称空间：
+    [网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) 的作用域限定为特定名称空间：
     ```
     calicoctl get NetworkPolicy --all-namespaces -o wide --config=filepath/calicoctl.cfg
     ```
     {:pre}
 
-    [全局网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) 的作用域不限定于特定名称空间：
+    [全局网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) 的作用域不限定于特定名称空间：
     ```
     calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
     ```
@@ -272,14 +272,14 @@ Linux 和 Mac 用户不需要在 `calicoctl` 命令中包含 `--config=filepath/
 要创建 Calico 策略，请使用以下步骤。
 
 1. [安装和配置 Calico CLI](#cli_install)。
-2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
   ```
   {: pre}
 
-3. 通过创建配置脚本 (`.yaml`) 来定义 Calico [网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 或[全局网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy)。这些配置文件包含选择器，用于描述这些策略应用于哪些 pod、名称空间或主机。请参阅这些[样本 Calico 策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) 以帮助您创建自己的策略。请注意，Kubernetes V1.10 或更高版本的集群必须使用 Calico V3 策略语法。
+3. 通过创建使用 Calico V3 策略语法的配置脚本 (`.yaml`) 来定义 Calico [网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) 或[全局网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy)。这些配置文件包含选择器，用于描述这些策略应用于哪些 pod、名称空间或主机。请参阅这些[样本 Calico 策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://docs.projectcalico.org/v3.3/getting-started/kubernetes/tutorials/advanced-policy) 以帮助您创建自己的策略。
 
 4. 将策略应用于集群。
     - Linux 和 OS X：
@@ -299,7 +299,7 @@ Linux 和 Mac 用户不需要在 `calicoctl` 命令中包含 `--config=filepath/
 <br />
 
 
-## 控制流至 LoadBalancer 或 NodePort 服务的入站流量
+## 控制流至 NLB 或 NodePort 服务的入站流量
 {: #block_ingress}
 
 [缺省情况下](#default_policy)，Kubernetes NodePort 和 LoadBalancer 服务旨在使应用程序在所有公共和专用集群接口上都可用。但是，您可以使用 Calico 策略基于流量源或目标，阻止流至服务的入局流量。
@@ -309,18 +309,17 @@ Linux 和 Mac 用户不需要在 `calicoctl` 命令中包含 `--config=filepath/
 
 Calico DNAT 前网络策略的一些常见用途：
 
-  - 阻止流量流至专用 LoadBalancer 服务的公共节点端口：LoadBalancer 服务通过负载均衡器 IP 地址和端口使应用程序可用，并通过服务的节点端口使应用程序可用。
-对于集群内的每个节点，在每个 IP 地址（公共和专用）上都可以访问节点端口。
+  - 阻止流量流至专用网络负载均衡器 (NLB) 服务的公共节点端口：NLB 服务通过 NLB IP 地址和端口使应用程序可用，并通过服务的节点端口使应用程序可用。对于集群内的每个节点，在每个 IP 地址（公共和专用）上都可以访问节点端口。
   - 阻止流量流至运行[边缘工作程序节点](/docs/containers?topic=containers-edge#edge)的集群上的公共节点端口：阻止节点端口可确保边缘工作程序节点是处理入局流量的唯一工作程序节点。
   - 阻止来自特定源 IP 地址或 CIDR（列入黑名单）的流量。
   - 仅允许来自特定源 IP 地址或 CIDR（列入白名单）的流量，而阻止其他所有流量。
 
-要查看如何将源 IP 地址列入白名单或黑名单，请试用[使用 Calico 网络策略阻止流量教程](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)。有关用于控制流入和流出集群的流量的更多示例 Calico 网络策略，可以查看 [Stars Policy Demo ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) 和 [Advanced Network Policy ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)。
+要查看如何将源 IP 地址列入白名单或黑名单，请试用[使用 Calico 网络策略阻止流量教程](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)。有关用于控制流入和流出集群的流量的更多示例 Calico 网络策略，可以查看 [Stars Policy Demo ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/getting-started/kubernetes/tutorials/stars-policy/) 和 [Advanced Network Policy ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/getting-started/kubernetes/tutorials/advanced-policy)。
 {: tip}
 
 开始之前：
 1. [安装和配置 Calico CLI](#cli_install)。
-2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -330,8 +329,8 @@ Calico DNAT 前网络策略的一些常见用途：
 要创建 DNAT 前策略，请执行以下操作：
 
 1. 定义 Calico DNAT 前网络策略，以允许对 Kubernetes 服务进行流入（入站流量）访问。
-    * Kubernetes V1.10 或更高版本的集群必须使用 [Calico V3 策略语法 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy)。
-    * 如果要管理流至 [V2.0 LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer#planning_ipvs)的流量，那么必须将 `applyOnForward: true` 和 `doNotTrack: true` 字段包含到策略的 `spec` 部分中。
+    * 使用 [Calico V3 策略语法 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy)。
+    * 如果要管理流至 [NLB 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) 的流量，那么必须将 `applyOnForward: true` 和 `doNotTrack: true` 字段包含到策略的 `spec` 部分中。
 
         用于阻止所有节点端口的示例资源：
 
@@ -363,7 +362,7 @@ Calico DNAT 前网络策略的一些常见用途：
         ```
         {: codeblock}
 
-        将从仅指定源 CIDR 流至 Load Balancer 2.0 的流量列入白名单的示例资源：
+        将从仅指定源 CIDR 流至 NLB 2.0 的流量列入白名单的示例资源：
 
         ```
 apiVersion: projectcalico.org/v3
@@ -391,7 +390,7 @@ apiVersion: projectcalico.org/v3
         ```
         {: codeblock}
 
-        将从仅指定源 CIDR 流至 Load Balancer 1.0 的流量列入白名单的示例资源：
+        将从仅指定源 CIDR 流至 NLB 1.0 的流量列入白名单的示例资源：
 
         ```
         apiVersion: projectcalico.org/v3
@@ -459,7 +458,7 @@ calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
 
 开始之前：
 1. [安装和配置 Calico CLI](#cli_install)。
-2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -621,6 +620,9 @@ spec:
 
 在此示例中，允许来自 finance 名称空间中所有微服务的所有流量。由于无法组合使用 `podSelector` 和 `namespaceSelector`，因此无法允许来自其他名称空间中的特定应用程序 pod 的流量。
 
+<br />
+
+
 ## 记录拒绝流量
 {: #log_denied}
 
@@ -628,6 +630,9 @@ spec:
 {: shortdesc}
 
 在设置网络策略以将流量限制为应用程序 pod 时，将拒绝并删除这些策略不允许的流量请求。在某些情况下，您可能想要有关已拒绝的流量请求的更多信息。例如，您可能注意到某个网络策略持续拒绝某些不常见流量。要监视潜在安全威胁，可以设置日志记录，以在每次策略拒绝指定的应用程序 pod 上尝试的操作时进行记录。
+
+此部分说明如何记录 Kubernetes 网络策略所拒绝的流量。要记录 Calico 网络策略所拒绝的流量，请参阅 [Calico 网络策略教程第 5 课](/docs/containers?topic=containers-policy_tutorial#lesson5)。
+{: tip}
 
 开始之前：
 1. [安装和配置 Calico CLI](#cli_install)。
@@ -637,9 +642,10 @@ spec:
     ```
     {: pre}
 
-要创建 Calico 策略来记录已拒绝的流量，请执行以下操作：
+要记录被拒绝的流量，请执行以下操作：
 
-1. 创建或使用阻止或限制入局流量的现有 Kubernetes 或 Calico 网络策略。例如，要控制 pod 之间的流量，可以使用名为 `access-nginx` 的以下示例 Kubernetes 策略，限制访问 NGINX 应用程序。到标记有“run=nginx”标签的 pod 的入局流量只能来自带有“run=access”标签的 pod。将阻止到“run=nginx”应用程序 pod 的所有其他入局流量。
+1. 创建或使用阻止或限制入局流量的现有 Kubernetes 网络策略。
+  1. 创建 Kubernetes 网络策略。例如，要控制 pod 之间的流量，可以使用名为 `access-nginx` 的以下示例 Kubernetes 策略，限制访问 NGINX 应用程序。到标记有“run=nginx”标签的 pod 的入局流量只能来自带有“run=access”标签的 pod。将阻止到“run=nginx”应用程序 pod 的所有其他入局流量。
     ```
     kind: NetworkPolicy
     apiVersion: networking.k8s.io/v1
@@ -657,27 +663,19 @@ spec:
     ```
     {: codeblock}
 
-2. 应用该策略。
-    * 要应用 Kubernetes 策略：
-        ```
+  2. 应用该策略。
+    ```
         kubectl apply -f <policy_name>.yaml
         ```
-        {: pre}
-        Kubernetes 策略将自动转换为 Calico `NetworkPolicy`，以便 Calico 可将其作为 Iptables 规则应用。
+    {: pre}
 
-    * 要应用 Calico 策略：
-        ```
-        calicoctl apply -f <policy_name>.yaml --config=<filepath>/calicoctl.cfg
-        ```
-        {: pre}
-
-3. 如果已应用 Kubernetes 策略，请查看自动创建的 Calico 策略的语法，并复制 `spec.selector` 字段的值。
+  3. Kubernetes 策略将自动转换为 Calico NetworkPolicy，以便 Calico 可将其作为 Iptables 规则应用。查看自动创建的 Calico 策略的语法，并复制 `spec.selector` 字段的值。
     ```
     calicoctl get policy -o yaml <policy_name> --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
-    例如，在应用并转换后，`access-nginx` 策略具有以下 Calico v3 语法。`spec.selector` 字段具有值 `projectcalico.org/orchestrator == 'k8s' && run == 'nginx'`。
+    例如，在应用 Kubernetes 策略，并将其转换为 Calico NetworkPolicy 后，`access-nginx` 策略具有以下 Calico V3 语法。`spec.selector` 字段具有值 `projectcalico.org/orchestrator == 'k8s' && run == 'nginx'`。
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy
@@ -696,53 +694,62 @@ spec:
         ```
     {: screen}
 
-4. 要记录先前创建的 Calico 策略拒绝的所有流量，请创建名为 `log-denied-packets` 的 Calico `NetworkPolicy`。例如，使用以下策略以记录在步骤 1 中定义的网络策略所拒绝的所有包。日志策略使用与示例 `access-nginx` 策略相同的 pod 选择器，这会将此策略添加到 Calico Iptables 规则链。通过使用更高的排序号（例如，`3000`），可确保将此规则添加到 Iptables 规则链的末尾。“run=nginx”pod 接受来自匹配 `access-nginx` 策略规则的“run=access”pod 的任何请求包。但是，当来自任何其他源的包尝试匹配低位 `access-nginx` 策略规则时，将拒绝这些包。然后，这些包尝试匹配高位 `log-denied-packets` 策略规则。`log-denied-packets` 记录到达的任何包，因此仅记录“run=nginx”pod 所拒绝的包。在记录包的尝试后，将删除包。
-    ```
-    apiVersion: projectcalico.org/v3
-    kind: NetworkPolicy
-    metadata:
-      name: log-denied-packets
-    spec:
-      types:
-      - Ingress
-      ingress:
-      - action: Log
-        destination: {}
-        source: {}
-      selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
-      order: 3000
-    ```
-    {: codeblock}
+2. 要记录上一步中创建的策略拒绝的所有流量，请创建名为 `log-denied-packets` 的 Calico NetworkPolicy。例如，以下日志策略使用的 pod 选择器与步骤 1 中所述的示例 `access-nginx` Kubernetes 策略的相同，用于将此策略添加到 Calico Iptables 规则链。通过使用更高的排序号（例如，`3000`），可确保将此规则添加到 Iptables 规则链的末尾。标注为 `run=nginx` 的 pod 接受来自匹配 `access-nginx` 策略规则的标注为 `run=access` 的 pod 的任何请求包。但是，当来自任何其他源的包尝试匹配低位 `access-nginx` 策略规则时，将拒绝这些包。然后，这些包尝试匹配高位 `log-denied-packets` 策略规则。`log-denied-packets` 记录到达的任何包，因此仅记录标注为 `run=nginx` 的 pod 所拒绝的包。在记录包的尝试后，将删除包。
+    
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: NetworkPolicy
+  metadata:
+    name: log-denied-packets
+  spec:
+    types:
+    - Ingress
+    ingress:
+    - action: Log
+      destination: {}
+      source: {}
+    selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
+    order: 3000
+  ```
+  {: codeblock}
 
-    <table>
-    <caption>了解日志策略 YAML 组件</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解日志策略 YAML 组件</th>
-    </thead>
-    <tbody>
-    <tr>
-     <td><code>types</code></td>
-     <td>此 <code>Ingress</code> 策略应用于所有入局流量请求。值 <code>Ingress</code> 是所有入局流量的通用术语，并不仅仅指来自 IBM Ingress ALB 的流量。</td>
-    </tr>
-     <tr>
-      <td><code>ingress</code></td>
-      <td><ul><li><code>action</code>：<code>Log</code> 操作将匹配此策略的任何请求的日志条目写入到工作程序节点上的 `/var/log/syslog` 路径。</li><li><code>destination</code>：不指定任何目标，因为 <code>selector</code> 将此策略应用于具有特定标签的所有 pod。</li><li><code>source</code>：此策略应用于来自任何源的请求。</td>
-     </tr>
-     <tr>
-      <td><code>selector</code></td>
-      <td>将 &lt;selector&gt; 替换为步骤 1 中在 Calico 中使用的或者步骤 3 中在 Kubernetes 策略的 Calico 语法中找到的 `spec.selector` 字段中的相同选择器。例如，通过使用选择器 <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>，此策略的规则将添加到与步骤 1 中的 <code>access-nginx</code> 样本网络策略规则相同的 Iptable 链。此策略仅应用于流至使用相同 pod 选择器标签的 pod 的入局网络流量。</td>
-     </tr>
-     <tr>
-      <td><code>order</code></td>
-      <td>Calico 策略具有确定何时应用于入局请求包的顺序。首先应用低位策略，例如，<code>1000</code>。高位策略在低位策略之后应用。例如，顺序非常高（例如，<code>3000</code>）的策略在应用所有低位策略后才最后应用。</br></br>入局请求包进入 Iptable 规则链，并且首先尝试匹配低位策略的规则。如果包匹配任何规则，那么将接受该包。但是，如果包不匹配任何规则，那么将到达 Iptable 规则链中顺序最高的最后一个规则。要确保这是链中的最后一个策略，请使用比在步骤 1 中创建的策略高很多的顺序，例如，<code>3000</code>。</td>
-     </tr>
-    </tbody>
-    </table>
+  <table>
+  <caption>了解日志策略 YAML 组件</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解日志策略 YAML 组件</th>
+  </thead>
+  <tbody>
+  <tr>
+   <td><code>types</code></td>
+   <td>此 <code>Ingress</code> 策略应用于所有入局流量请求。值 <code>Ingress</code> 是所有入局流量的通用术语，并不仅仅指来自 IBM Ingress ALB 的流量。</td>
+  </tr>
+   <tr>
+    <td><code>ingress</code></td>
+    <td><ul><li><code>action</code>：<code>Log</code> 操作将匹配此策略的任何请求的日志条目写入到工作程序节点上的 `/var/log/syslog` 路径。</li><li><code>destination</code>：不指定任何目标，因为 <code>selector</code> 将此策略应用于具有特定标签的所有 pod。</li><li><code>source</code>：此策略应用于来自任何源的请求。</li></ul></td>
+   </tr>
+   <tr>
+    <td><code>selector</code></td>
+    <td>将 &lt;selector&gt; 替换为步骤 1 的策略中所使用 `spec.selector` 字段中的相同选择器。例如，通过使用选择器 <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>，此策略的规则将添加到与步骤 1 中的 <code>access-nginx</code> 样本网络策略规则相同的 Iptable 链。此策略仅应用于流至使用相同选择器标签的 pod 的入局网络流量。</td>
+   </tr>
+   <tr>
+    <td><code>order</code></td>
+    <td>Calico 策略具有确定何时应用于入局请求包的顺序。首先应用低位策略，例如，<code>1000</code>。高位策略在低位策略之后应用。例如，超高位（例如，<code>3000</code>）的策略在应用所有低位策略后才最后应用。</br></br>入局请求包进入 Iptable 规则链，并且首先尝试匹配低位策略的规则。如果包匹配任何规则，那么将接受该包。但是，如果包不匹配任何规则，那么将到达 Iptable 规则链中顺序最高的最后一个规则。要确保这是链中的最后一个策略，请使用比在步骤 1 中创建的策略高很多的顺序，例如，<code>3000</code>。</td>
+   </tr>
+  </tbody>
+  </table>
 
-5. 应用该策略。
-    ```
+3. 应用该策略。
+  ```
     calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
     ```
-    {: pre}
+  {: pre}
 
-6. [将日志](/docs/containers?topic=containers-health#configuring)从 `/var/log/syslog` 转发到 {{site.data.keyword.loganalysislong}} 或外部 syslog 服务器。
+4. 通过发送步骤 1 中创建的策略不允许的请求来生成日志条目。例如，尝试从不允许的 pod 或 IP 地址对受网络策略保护的 pod 执行 ping 操作。
+
+5. 检查写入 `/var/log/syslog` 路径的日志条目。请注意，由于代理、网络地址转换 (NAT) 和其他联网进程，日志条目中的 DST（目标）或 SRC（源）IP 地址可能不同于期望值。日志条目类似于以下内容。
+  ```
+  Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
+  ```
+  {: screen}
+
+6. 可选：[转发日志](/docs/containers?topic=containers-health#configuring)，使日志从 `/var/log/syslog` 转发到外部 syslog 服务器。

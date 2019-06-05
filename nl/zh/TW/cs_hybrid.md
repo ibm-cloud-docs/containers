@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -32,7 +32,7 @@ subcollection: containers
 如果您有「{{site.data.keyword.Bluemix}} 專用」帳戶，則可以將它與精選 {{site.data.keyword.Bluemix_notm}} 服務（包括 {{site.data.keyword.containerlong}}）搭配使用。如需相關資訊，請參閱 [{{site.data.keyword.Bluemix_notm}} 專用及 IBM 公用雲端的混合式經驗 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://ibm.biz/hybridJune2018) 上的部落格。
 {: shortdesc}
 
-您瞭解 [{{site.data.keyword.Bluemix_notm}} 供應項目](/docs/containers?topic=containers-cs_ov#differentiation)。現在，您可以[連接公用及專用雲端](#hybrid_vpn)，以及[重複使用公用容器的專用套件](#hybrid_ppa_importer)。
+您瞭解 [{{site.data.keyword.Bluemix_notm}} 供應項目](/docs/containers?topic=containers-cs_ov#differentiation)，並針對[要在雲端上執行的工作負載](/docs/containers?topic=containers-strategy#cloud_workloads)開發了 Kubernetes 策略。現在，您可以[連接公用及專用雲端](#hybrid_vpn)，以及[重複使用公用容器的專用套件](#hybrid_ppa_importer)。
 
 ## 使用 strongSwan VPN 連接公用及專用雲端
 {: #hybrid_vpn}
@@ -94,6 +94,11 @@ subcollection: containers
 
 8.  針對每一個您要連接的叢集，重複這些步驟。
 
+**下一步為何？**
+
+*   [在公用叢集中執行授權軟體映像檔](#hybrid_ppa_importer)。
+*   若要管理多個雲端 Kubernetes 叢集（例如，跨 {{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_notm}} Private），請查看 [IBM Multicloud Manager ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html)。
+
 
 ## 在公用 Kubernetes 容器中執行 {{site.data.keyword.Bluemix_notm}} 專用映像檔
 {: #hybrid_ppa_importer}
@@ -117,7 +122,7 @@ subcollection: containers
 - [安裝 {{site.data.keyword.registryshort}} CLI 外掛程式 (`ibmcloud cr`)](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install)。
 - [在 {{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup) 中設定名稱空間，或藉由執行 `ibmcloud cr namespaces` 來擷取現有名稱空間。
 - [將 `kubectl` CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-- [在叢集裡安裝 Helm CLI 並設定 tiller](/docs/containers?topic=containers-integrations#helm)。
+- [在叢集裡安裝 Helm CLI 並設定 tiller](/docs/containers?topic=containers-helm#public_helm_install)。
 
 若要在「{{site.data.keyword.Bluemix_notm}} 公用」的叢集裡部署「{{site.data.keyword.Bluemix_notm}} 專用」映像檔，請執行下列動作：
 

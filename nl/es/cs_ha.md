@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, disaster recovery, dr, ha, hadr
 
@@ -57,7 +57,7 @@ La arquitectura y la infraestructura de {{site.data.keyword.containerlong_notm}}
 
 No reinicie o rearranque un nodo trabajador durante una interrupción del nodo maestro. Esta acción elimina los pods del nodo trabajador. Puesto que el servidor de API de Kubernetes no está disponible, los pods no se pueden volver a programar en otros nodos trabajadores del clúster.
 {: important}
- Los clústeres maestros tienen alta disponibilidad e incluyen réplicas para que el servidor de API de Kubernetes, etcd, el planificador y el gestor de controladores en hosts independientes puedan protegerse frente a interrupciones como, por ejemplo, una actualización del maestro.</p><p>Para proteger el maestro de clúster de un fallo zonal, puede: <ul><li>Cree un clúster en una [ciudad metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones), que distribuye el maestro entre las zonas.</li><li>Configurar un segundo clúster en otra zona.</li></ul></p>
+ Los clústeres maestros tienen alta disponibilidad e incluyen réplicas para que el servidor de API de Kubernetes, etcd, el planificador y el gestor de controladores en hosts independientes puedan protegerse frente a interrupciones como, por ejemplo, una actualización del maestro.</p><p>Para proteger el maestro de clúster de un fallo zonal, puede: <ul><li>Cree un clúster en una [ubicación metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones), que distribuye el maestro entre las zonas.</li><li>Configurar un segundo clúster en otra zona.</li></ul></p>
   <p>Consulte [Configuración de clústeres de alta disponibilidad.](/docs/containers?topic=containers-plan_clusters#ha_clusters)</p></dd>
 <dt> 4. Anomalía de una zona.</dt>
   <dd><p>Los errores de zona afectan a todos los hosts de cálculo físico y al almacenamiento NFS. Los errores pueden ser interrupciones de alimentación, refrigeración, red o almacenamiento, y desastres naturales, como inundaciones, terremotos y huracanes. Para estar protegido ante un error de zona, debe tener clústeres en dos zonas diferentes en las que equilibre la carga un equilibrador de carga externo.</p>
@@ -66,6 +66,6 @@ No reinicie o rearranque un nodo trabajador durante una interrupción del nodo m
   <dd><p>Cada región está configurada con un equilibrador de carga de alta disponibilidad al que se puede acceder desde el punto final de la API específico de la región. El equilibrador de carga direcciona solicitudes de entrada y salida a los clústeres en las zonas regionales. La probabilidad de que se produzca un error global de región es baja. Sin embargo, para estar preparado ante este error, puede configurar varios clústeres en diferentes regiones y conectarlos mediante un equilibrador de carga externo. En caso de que falle toda una región, el clúster de la otra región puede asumir la carga de trabajo.</p><p class="note">Un clúster de varias regiones requiere varios recursos de nube y, en función de la app, puede ser complejo y costoso. Compruebe si necesita una configuración de varias regiones o si podría tolerar una interrupción potencial del servicio. Si desea configurar un clúster de varias regiones, asegúrese de que la app y los datos se pueden alojar en otra región, y que la app admite la réplica de datos globales.</p>
   <p>Consulte [Configuración de clústeres de alta disponibilidad](/docs/containers?topic=containers-plan_clusters#ha_clusters).</p></dd>   
 <dt> 6a, 6b. Anomalía del almacenamiento.</dt>
-  <dd><p>En una app con estado, los datos desempeñan un papel importante para mantener la app en funcionamiento. Desea asegurarse de que los datos son de alta disponibilidad para poder recuperarse de un error potencial. En {{site.data.keyword.containerlong_notm}} puede elegir entre varias opciones para conservar los datos. Por ejemplo, puede suministrar almacenamiento NFS utilizando volúmenes persistentes nativos de Kubernetes, o almacenar los datos utilizando un servicio de base de datos de {{site.data.keyword.Bluemix_notm}}.</p>
+  <dd><p>En una app con estado, los datos desempeñan un papel importante para mantener la app en funcionamiento. Asegúrese de que los datos son de alta disponibilidad, de forma que pueda recuperarse de un error potencial. En {{site.data.keyword.containerlong_notm}} puede elegir entre varias opciones para conservar los datos. Por ejemplo, puede suministrar almacenamiento NFS utilizando volúmenes persistentes nativos de Kubernetes, o almacenar los datos utilizando un servicio de base de datos de {{site.data.keyword.Bluemix_notm}}.</p>
   <p>Consulte [Planificación de datos de alta disponibilidad](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).</p></dd>
 </dl>

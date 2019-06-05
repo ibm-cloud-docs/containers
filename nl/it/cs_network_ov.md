@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -58,8 +58,7 @@ Quando crei un cluster, i nodi di lavoro del cluster vengono connessi automatica
 <dt>VLAN per i cluster gratuiti</dt>
 <dd>Per i cluster gratuiti, i nodi di lavoro del cluster sono connessi a una VLAN privata e a una VLAN pubblica di proprietà di IBM per impostazione predefinita. Poiché IBM controlla le VLAN, le sottoreti e gli indirizzi IP, non puoi creare dei cluster multizona o aggiungere sottoreti al tuo cluster e puoi solo utilizzare i servizi NodePort per esporre la tua applicazione.</dd>
 <dt>VLAN per i cluster standard</dt>
-<dd>Nei cluster standard, la prima volta che crei un cluster in una zona, viene automaticamente eseguito il provisioning di una VLAN pubblica e di una VLAN privata in tale zona per tuo conto nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per ogni cluster successivo che crei in tale zona, devi specificare la coppia di VLAN che vuoi usare nella zona. Puoi riutilizzare le stesse VLAN pubbliche e private che sono state create per te perché più cluster possono condividere VLAN.</br>
-</br>Puoi collegare i tuoi nodi di lavoro a una VLAN pubblica e alla VLAN privata o solo alla VLAN privata. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, puoi utilizzare l'ID di una VLAN privata esistente o [creare una VLAN privata](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) e utilizzare l'ID durante la creazione del cluster.</dd></dl>
+<dd>Nei cluster standard, la prima volta che crei un cluster in una zona, viene automaticamente eseguito il provisioning di una VLAN pubblica e di una VLAN privata in tale zona per tuo conto nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per ogni cluster successivo che crei in tale zona, devi specificare la coppia di VLAN che vuoi usare nella zona. Puoi riutilizzare le stesse VLAN pubbliche e private create per te, poiché le VLAN possono essere condivise da più cluster.</br></br>Puoi collegare i tuoi nodi di lavoro a una VLAN pubblica e alla VLAN privata o solo alla VLAN privata. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, puoi utilizzare l'ID di una VLAN privata esistente o [creare una VLAN privata](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) e utilizzare l'ID durante la creazione del cluster.</dd></dl>
 
 Per visualizzare le VLAN di cui viene eseguito il provisioning in ciascuna zona per il tuo account, esegui `ibmcloud ks vlans --zone <zone>.` Per visualizzare le VLAN di cui viene eseguito il provisioning su un singolo cluster, esegui `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` e cerca la sezione **Subnet VLANs**.
 
@@ -81,13 +80,13 @@ Delle seguenti reti viene eseguito automaticamente il provisioning sulle VLAN pu
 
 **Sottoreti VLAN pubbliche**
 * La sottorete pubblica primaria determina gli indirizzi IP pubblici che vengono assegnati ai nodi di lavoro durante la creazione del cluster. Più cluster sulla stessa VLAN possono condividere una sottorete pubblica primaria.
-* La sottorete pubblica portatile è associata solo a un singolo cluster e fornisce al cluster 8 indirizzi IP pubblici. 3 IP sono riservati per le funzioni dell'infrastruttura Cloud IBM (SoftLayer). 1 IP viene utilizzato dall'ALB Ingress pubblico predefinito e 4 IP possono essere utilizzati per creare servizi di rete del programma di bilanciamento del carico pubblico. Gli IP pubblici portatili sono indirizzi IP fissi e permanenti che possono essere utilizzati per accedere ai servizi del programma di bilanciamento del carico su Internet. Se hai bisogno di più di 4 IP per i programmi di bilanciamento del carico pubblico, vedi [Aggiunta di indirizzi IP portatili](/docs/containers?topic=containers-subnets#adding_ips).
+* La sottorete pubblica portatile è associata solo a un singolo cluster e fornisce al cluster 8 indirizzi IP pubblici. 3 IP sono riservati per le funzioni dell'infrastruttura Cloud IBM (SoftLayer). 1 IP viene utilizzato dall'ALB Ingress pubblico predefinito e 4 IP possono essere utilizzati per creare servizi NLB (network load balancer) pubblici. Gli IP pubblici portatili sono indirizzi IP fissi e permanenti che possono essere utilizzati per accedere agli NLB su Internet. Se hai bisogno di più di 4 IP per gli NLB, vedi [Aggiunta di indirizzi IP portatili](/docs/containers?topic=containers-subnets#adding_ips).
 
 **Sottoreti VLAN private**
 * La sottorete privata primaria determina gli indirizzi IP privati che vengono assegnati ai nodi di lavoro durante la creazione del cluster. Più cluster sulla stessa VLAN possono condividere una sottorete privata primaria.
-* La sottorete privata portatile è associata solo a un singolo cluster e fornisce al cluster 8 indirizzi IP privati. 3 IP sono riservati per le funzioni dell'infrastruttura Cloud IBM (SoftLayer). 1 IP viene utilizzato dall'ALB Ingress privato predefinito e 4 IP possono essere utilizzati per creare servizi di rete del programma di bilanciamento del carico privato. Gli IP privati portatili sono indirizzi IP fissi e permanenti che possono essere utilizzati per accedere ai servizi del programma di bilanciamento del carico su Internet. Se hai bisogno di più di 4 IP per i programmi di bilanciamento del carico privato, vedi [Aggiunta di indirizzi IP portatili](/docs/containers?topic=containers-subnets#adding_ips).
+* La sottorete privata portatile è associata solo a un singolo cluster e fornisce al cluster 8 indirizzi IP privati. 3 IP sono riservati per le funzioni dell'infrastruttura Cloud IBM (SoftLayer). 1 IP viene utilizzato dall'ALB Ingress privato predefinito e 4 IP possono essere utilizzati per creare servizi NLB (network load balancer) privati. Gli IP privati portatili sono indirizzi IP fissi e permanenti che possono essere utilizzati per accedere agli NLB su una rete privata. Se hai bisogno di più di 4 IP per gli NLB privati, vedi [Aggiunta di indirizzi IP portatili](/docs/containers?topic=containers-subnets#adding_ips).
 
-Per visualizzare tutte le sottoreti di cui viene eseguito il provisioning nel tuo account, esegui `ibmcloud ks subnets`. Per visualizzare le sottoreti pubbliche e private portatili associate a un singolo cluster, puoi eseguire `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` e cerca la sezione **Subnet VLANs**.
+Per visualizzare tutte le sottoreti di cui viene eseguito il provisioning nel tuo account, esegui `ibmcloud ks subnets`. Per visualizzare le sottoreti pubbliche e private portatili di cui viene eseguito il binding su un singolo cluster, puoi eseguire `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` e cercare la sezione **Subnet VLANs**.
 
 In {{site.data.keyword.containerlong_notm}}, le VLAN hanno un limite di 40 sottoreti. Se raggiungi questo limite, controlla prima se puoi [riutilizzare le sottoreti nella VLAN per creare nuovi cluster](/docs/containers?topic=containers-subnets#subnets_custom). Se hai bisogno di una nuova VLAN, ordinane una [contattando il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Quindi [crea un cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) che utilizzi questa nuova VLAN.
 {: note}
@@ -103,7 +102,7 @@ Tuttavia, in diverse situazioni, i componenti del tuo cluster devono essere auto
 **Cosa sono le VRF (Virtual Router Function) e lo spanning della VLAN?**</br>
 
 <dl>
-<dt>[VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)</dt>
+<dt>[VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
 <dd>Una VRF consente a tutte le VLAN e sottoreti nel tuo account dell'infrastruttura di comunicare tra loro. Inoltre, una VRF è necessaria per consentire ai tuoi nodi di lavoro e al master di comunicare sull'endpoint del servizio privato. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Nota che VRF elimina l'opzione di spanning VLAN per il tuo account, poiché tutte le VLAN sono in grado di comunicare a meno che non configuri un'applicazione gateway per gestire il traffico.</dd>
 <dt>[Spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>Se non puoi o non vuoi abilitare VRF, abilita lo spanning della VLAN. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Nota che, se scegli di abilitare lo spanning della VLAN invece di una VRF, non puoi abilitare l'endpoint del servizio privato.</dd>
@@ -165,11 +164,14 @@ Se vuoi creare un cluster multizona, hai più VLAN per un cluster o hai più sot
 Puoi seguire i passi in [Configurazione della rete del cluster con una VLAN pubblica e una privata](/docs/containers?topic=containers-cs_network_cluster#both_vlans) o [Configurazione della rete del cluster con una VLAN solo privata](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan).
 {: shortdesc}
 
-### Posso cambiare la mia decisione riguardo alla VLAN in seguito?
+### Posso cambiare la mia decisione riguardo alla VLAN in seguito? Gli indirizzi IP del mio nodo di lavoro cambiano?
 {: #cs_network_ov_worker_change}
 
 Puoi cambiare la tua configurazione della VLAN modificando i pool di nodi di lavoro nel tuo cluster. Per ulteriori informazioni, vedi [Modifica delle connessioni VLAN dei tuoi nodi di lavoro](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
 {: shortdesc}
+
+Al tuo nodo di lavoro viene assegnato un indirizzo IP sulle VLAN pubbliche o private utilizzate dal tuo cluster. Una volta eseguito il provisioning del tuo nodo di lavoro, gli indirizzi IP restano immutati. Ad esempio, gli indirizzi IP del nodo di lavoro persistono attraverso le operazioni `reload`, `reboot` e `update`. Inoltre, l'indirizzo IP privato del nodo di lavoro viene utilizzato per l'identità di tale nodo nella maggior parte dei comandi `kubectl`. Se modifichi le VLAN utilizzate dal pool di nodi di lavoro, i nuovi nodi di lavoro di cui viene eseguito il provisioning in tale pool utilizzano le nuove VLAN per i propri indirizzi IP. Gli indirizzi IP
+del nodo di lavoro esistente non cambiano, ma puoi scegliere di rimuovere i nodi di lavoro che utilizzano le vecchie VLAN.
 
 <br />
 
@@ -181,7 +183,7 @@ Puoi cambiare la tua configurazione della VLAN modificando i pool di nodi di lav
 Quando crei il tuo cluster, devi scegliere in che modo i nodi di lavoro e il master Kubernetes comunicano per orchestrare le configurazioni del tuo cluster.
 {: shortdesc}
 
-È necessario configurare un canale di comunicazione in modo che il master Kubernetes possa gestire i tuoi nodi di lavoro. Questa configurazione delle comunicazioni dipende da come imposti la connettività VLAN. Potresti essere in grado di consentire le comunicazioni tra i tuoi nodi di lavoro e il master Kubernetes abilitando endpoint del servizio solo pubblici, pubblici e privati o solo privati. Per determinare se puoi utilizzare gli endpoint del servizio, segui questa struttura ad albero delle decisioni.
+È necessario configurare un canale di comunicazione in modo che il master Kubernetes possa gestire i tuoi nodi di lavoro. Questa configurazione delle comunicazioni dipende da come imposti la connettività VLAN. Potresti essere in grado di consentire le comunicazioni tra i tuoi nodi di lavoro e il master Kubernetes abilitando endpoint del servizio solo pubblici, pubblici e privati o solo privati. Per determinare se puoi utilizzare gli endpoint del servizio, segui questa albero delle decisioni.
 
 <img usemap="#dt-image-map" border="0" class="image" id="image_ztx_crb_f1c" src="images/cs_network_cluster_tree.png" alt="Determina se puoi utilizzare gli endpoint del servizio." />
 <map name="dt-image-map" id="dt-image-map">
@@ -208,8 +210,8 @@ La seguente immagine mostra le comunicazioni tra i nodi di lavoro e il master Ku
 </figure>
 </p>
 
-**Comunicazioni tra i nodi di lavoro e il master**</br>
-Le comunicazioni vengono stabilite in modo sicuro sulla rete pubblica attraverso l'endpoint del servizio pubblico. I nodi di lavoro comunicano in modo sicuro con il master attraverso i certificati TLS e il master comunica con i nodi di lavoro attraverso una connessione OpenVPN.
+**Comunicazioni tra nodi di lavoro e master**</br>
+Le comunicazioni vengono stabilite in modo sicuro sulla rete pubblica, attraverso l'endpoint del servizio pubblico. I nodi di lavoro comunicano in modo sicuro con il master attraverso i certificati TLS e il master comunica con i nodi di lavoro attraverso una connessione OpenVPN.
 
 **Accesso al master**</br>
 Il master è pubblicamente accessibile agli utenti del cluster autorizzati attraverso l'endpoint del servizio pubblico. Gli utenti del tuo cluster possono accedere in modo sicuro al tuo master Kubernetes su Internet per eseguire, ad esempio, i comandi `kubectl`.
@@ -231,11 +233,12 @@ La seguente immagine mostra le comunicazioni tra i nodi di lavoro e il master Ku
 </figure>
 </p>
 
-**Comunicazioni tra i nodi di lavoro e il master**</br>
-Le comunicazioni vengono stabilite sulla rete privata attraverso l'endpoint del servizio privato.
+**Comunicazioni tra nodi di lavoro e master**</br>
+Le comunicazioni vengono stabilite sulla rete privata, attraverso l'endpoint del servizio privato.
 
 **Accesso al master**</br>
-Per accedere al master, gli utenti del tuo cluster devono trovarsi nella tua rete privata {{site.data.keyword.Bluemix_notm}} o connettersi alla rete privata tramite una connessione VPN.
+Per accedere al master, gli utenti del tuo cluster devono trovarsi nella tua rete privata {{site.data.keyword.Bluemix_notm}} o connettersi alla rete privata
+tramite una connessione VPN.
 
 Per configurare solo l'endpoint del servizio privato durante o dopo la creazione del cluster, segui la procedura in [Configurazione dell'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).
 
@@ -245,11 +248,12 @@ Per configurare solo l'endpoint del servizio privato durante o dopo la creazione
 Per rendere il tuo master accessibile pubblicamente o privatamente agli utenti del cluster, puoi abilitare gli endpoint del servizio pubblici e privati nei cluster che eseguono Kubernetes versione 1.11 o successive. È richiesta una VRF nel tuo account {{site.data.keyword.Bluemix_notm}}.
 {: shortdesc}
 
-**Comunicazioni tra i nodi di lavoro e il master**</br>
-Le comunicazioni vengono stabilite sulla rete privata attraverso l'endpoint del servizio privato. Anche se abiliti l'endpoint del servizio pubblico per il tuo cluster, le comunicazioni tra il master Kubernetes e i nodi di lavoro rimangono sulla rete privata.
+**Comunicazioni tra nodi di lavoro e master**</br>
+Le comunicazioni vengono stabilite sulla rete privata attraverso l'endpoint del servizio privato e sulla rete pubblica attraverso l'endpoint del servizio pubblico. Instradando
+metà del traffico nodo di lavoro-master sull'endpoint pubblico e metà sull'endpoint privato, le tue comunicazioni master-nodo di lavoro sono protette da eventuali interruzioni della rete pubblica o privata.
 
 **Accesso al master**</br>
-Il master è accessibile privatamente tramite l'endpoint del servizio privato se gli utenti del cluster autorizzati si trovano nella tua rete privata {{site.data.keyword.Bluemix_notm}} o sono connessi alla rete privata tramite una connessione VPN. In caso contrario, il master è pubblicamente accessibile agli utenti del cluster autorizzati attraverso l'endpoint del servizio pubblico.
+Il master è accessibile privatamente tramite l'endpoint del servizio privato se gli utenti del cluster autorizzati si trovano nella tua rete privata {{site.data.keyword.Bluemix_notm}} o sono connessi alla rete privata attraverso una connessione VPN. In caso contrario, il master è pubblicamente accessibile agli utenti del cluster autorizzati attraverso l'endpoint del servizio pubblico.
 
 Per configurare gli endpoint del servizio pubblici e privati durante la creazione del cluster, segui la procedura in [Configurazione dell'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se). Dopo la creazione del cluster, puoi abilitare l'endpoint del servizio [pubblico](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) o [privato](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) singolarmente.
 
@@ -285,7 +289,7 @@ Per connettere in modo sicuro i tuoi nodi di lavoro e le tue applicazioni a una 
 ### Impostazione di una connessione VPN per la configurazione di una VLAN solo privata
 {: #cs_network_ov_vpn_private}
 
-Se il tuo cluster è connesso solo a una VLAN privata, devi configurare un endpoint VPN IPSec su un dispositivo gateway VRA o FSA. Quindi, puoi [configurare e distribuire il servizio VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) nel tuo cluster per utilizzare l'endpoint VPN sul tuo gateway. Se non vuoi utilizzare strongSwan, puoi [impostare la connettività VPN direttamente con VRA](/docs/containers?topic=containers-vpn#vyatta).
+Se il tuo cluster è connesso solo a una VLAN privata, devi configurare un endpoint VPN IPSec su un dispositivo gateway VRA (Vyatta) o FSA. Quindi, puoi [configurare e distribuire il servizio VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) nel tuo cluster per utilizzare l'endpoint VPN sul tuo gateway. Se non vuoi utilizzare strongSwan, puoi [impostare la connettività VPN direttamente con VRA](/docs/containers?topic=containers-vpn#vyatta).
 {: shortdesc}
 
 <p>

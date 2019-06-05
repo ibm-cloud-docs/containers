@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 ---
 
@@ -17,7 +17,6 @@ lastupdated: "2019-03-21"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # 指導教學：使用受管理的 Knative 在 Kubernetes 叢集中執行無伺服器應用程式
@@ -38,11 +37,9 @@ Knative 隨附 3 個關鍵元件（或_基本元素_），可協助您建置、�
 - **Serving：**`Serving` 基本元素可協助您將無伺服器應用程式部署為 Knative 服務，並自動調整它們，甚至縮減到 0 個實例。透過使用 Istio 的資料流量管理及智慧型遞送功能，您可以控制哪些資料流量遞送至服務的特定版本，方便開發人員測試及推出新的應用程式版本或執行 A-B 測試。
 - **Eventing：**使用 `Eventing` 基本元素，您可以建立觸發程式或要讓其他服務訂閱的事件串流。例如，您可能想要在每次程式碼推送至您的 GitHub 主節點儲存庫時，開始應用程式的新建置。或者，您只想要在溫度低於冰點時，才執行無伺服器應用程式。`Eventing` 基本元素可整合至您的 CI/CD 管線，以在發生特定事件時自動建置及部署應用程式。
 
-**何謂 Managed Knative on {{site.data.keyword.containerlong_notm}}（實驗）附加程式？**</br>
-Managed Knative on {{site.data.keyword.containerlong_notm}} 是受管理的附加程式，可將 Knative 及 Istio 直接與您的 Kubernetes 叢集整合。附加程式中的 Knative 及 Istio 版本由 IBM 進行測試，並支援在 {{site.data.keyword.containerlong_notm}} 中使用。{{site.data.keyword.containerlong_notm}} 藉由自動推出附加程式的更新，讓 Knative 及 Istio 元件保持最新。
+**何謂 Managed Knative on {{site.data.keyword.containerlong_notm}}（實驗）附加程式？** </br>Managed Knative on {{site.data.keyword.containerlong_notm}} 是受管理的附加程式，可將 Knative 及 Istio 直接與您的 Kubernetes 叢集整合。附加程式中的 Knative 及 Istio 版本由 IBM 進行測試，並支援在 {{site.data.keyword.containerlong_notm}} 中使用。如需受管理附加程式的相關資訊，請參閱[使用受管理附加程式新增服務](/docs/containers?topic=containers-managed-addons#managed-addons)。
 
-**有任何限制嗎？** </br>
-如果您在叢集中已安裝 [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce)，便無法在叢集中啟用受管理的 Knative 附加程式。
+**有任何限制嗎？** </br> 如果您在叢集中已安裝 [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce)，便無法在叢集中啟用受管理的 Knative 附加程式。
 
 聽起來不錯？請遵循本指導教學，開始在 {{site.data.keyword.containerlong_notm}} 中使用 Knative。
 
@@ -68,7 +65,7 @@ Managed Knative on {{site.data.keyword.containerlong_notm}} 是受管理的附�
 {: #knative_prerequisites}
 
 -  [安裝 IBM Cloud CLI、{{site.data.keyword.containerlong_notm}} 外掛程式及 Kubernetes CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)。請務必安裝符合叢集之 Kubernetes 版本的 `kubectl` CLI 版本。
--  [建立具有至少 3 個工作者節點的叢集，每個工作者節點具有 4 個核心及 16 GB 記憶體(`b2c.4x16`) 或更多](/docs/containers?topic=containers-clusters#clusters_cli)。每個工作者節點都必須執行 Kubernetes 1.11 版或更新版本。
+-  [建立具有至少 3 個工作者節點的叢集，每個工作者節點具有 4 個核心及 16 GB 記憶體 (`b3c.4x16`) 或更多](/docs/containers?topic=containers-clusters#clusters_cli)。每個工作者節點都必須執行 Kubernetes 1.12 版或更新版本。
 -  請確定您具有 {{site.data.keyword.containerlong_notm}} 的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 -  [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
@@ -115,7 +112,13 @@ Knative 建置在 Istio 頂端，確保您的無伺服器及容器化工作負�
     ```
    {: screen}
 
-3. 驗證是否已順利安裝所有 Knative 元件。
+3. 選用項目：如果您要在 `default` 名稱空間中對所有應用程式使用 Istio，請將 `istio-injection=enabled` 標籤新增至名稱空間。每個無伺服器應用程式 Pod 都必須執行 Envoy Proxy Sidecar，才能將應用程式包含在 Istio 服務網中。此標籤容許 Istio 自動修改新應用程式部署中的 Pod 範本規格，以使用 Envoy Proxy Sidecar 容器來建立 Pod。
+  ```
+    kubectl label namespace default istio-injection=enabled
+    ```
+  {: pre}
+
+4. 驗證是否已順利安裝所有 Knative 元件。
    1. 驗證 Knative `Serving` 元件的所有 Pod 都處於 `Running` 狀態。  
       ```
       kubectl get pods --namespace knative-serving
@@ -203,7 +206,7 @@ Knative 建置在 Istio 頂端，確保您的無伺服器及容器化工作負�
 ## 課程 2：將無伺服器應用程式部署至您的叢集
 {: #deploy_app}
 
-在本課程中，您將在 Go 中部署您的第一個無伺服器 [`Hello World`](https://hub.docker.com/r/ibmcom/kn-helloworld) 應用程式。當您將要求傳送至您的範例應用程式時，應用程式會讀取環境變數 `TARGET`，並顯示出 `"Hello ${TARGET}!"`。如果此環境變數是空的，則 `"Hello World!"` 會傳回。
+在本課程中，您將在 Go 中部署您的第一個無伺服器 [`Hello World`](https://hub.docker.com/r/ibmcom/kn-helloworld) 應用程式。當您將要求傳送至您的範例應用程式時，應用程式會讀取環境變數 `TARGET`，並顯示出 `"Hello ${TARGET}!"`. 如果此環境變數是空的，則 `"Hello World!"` 會傳回。
 {: shortdesc}
 
 1. 在 Knative 中，為您的第一個無伺服器 `Hello World` 應用程式建立 YAML 檔案。若要使用 Knative 部署應用程式，您必須指定 Knative Service 資源。服務由 Knative `Serving` 基本元素所管理，且負責管理工作負載的整個生命週期。服務可確保每個部署都有一個 Knative 修訂版、一個路徑和一個配置。當您更新服務時，會建立應用程式的新版本，並新增至服務的修訂歷程。Knative 路徑可確保每個應用程式修訂都對映至一個網路端點，以便您可以控制遞送至特定修訂的網路資料流量。Knative 配置保留特定修訂的設定，以便您一律可以回復到舊版修訂，或在修訂之間切換。如需 Knative `Serving` 資源的相關資訊，請參閱 [Knative 文件](https://github.com/knative/docs/tree/master/serving)。
@@ -246,7 +249,7 @@ Knative 建置在 Istio 頂端，確保您的無伺服器及容器化工作負�
     </tr>
     <tr>
     <td><code>spec.container.env</code></td>
-    <td>您想要 Knative 服務擁有的環境變數清單。在本範例中，範例應用程式會讀取環境變數 <code>TARGET</code> 的值，然後在您傳送要求至應用程式時傳回，格式為 <code>"Hello ${TARGET}!"</code>。如果未提供任何值，則範例應用程式會傳回 <code>"Hello World!"</code>。</td>
+    <td>您想要 Knative 服務擁有的環境變數清單。在本範例中，範例應用程式會讀取環境變數 <code>TARGET</code> 的值，然後在您傳送要求至應用程式時傳回，格式為 <code>"Hello ${TARGET}!"</code>. 如果未提供任何值，則範例應用程式會傳回 <code>"Hello World!"</code>.  </td>
     </tr>
     </tbody>
     </table>
@@ -267,6 +270,7 @@ Knative 建置在 Istio 頂端，確保您的無伺服器及容器化工作負�
    ```
    kubectl get pods
    ```
+   {: pre}
 
    輸出範例：
    ```
@@ -278,14 +282,14 @@ Knative 建置在 Istio 頂端，確保您的無伺服器及容器化工作負�
 4. 試用 `Hello World` 應用程式。
    1. 取得指派給您 Knative 服務的預設網域。如果您已變更您 Knative 服務的名稱，或已將應用程式部署至不同的名稱空間，請更新您查詢中的這些值。
       ```
-      kubectl get svc/kn-helloworld
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       輸出範例：
       ```
-      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
-      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
+      NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
+      kn-helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True
       ```
       {: screen}
 

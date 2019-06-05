@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # 区域和专区
 {: #regions-and-zones}
 
@@ -34,14 +33,14 @@ subcollection: containers
 
 _{{site.data.keyword.containerlong_notm}} 区域和专区_
 
-{{site.data.keyword.Bluemix_notm}} 在全球托管。{{site.data.keyword.Bluemix_notm}} 内的服务可以在全球可用或在特定区域内可用。
+ {{site.data.keyword.Bluemix_notm}} 在全球托管。{{site.data.keyword.Bluemix_notm}} 内的服务可以在全球可用或在特定区域内可用。
 在 {{site.data.keyword.containerlong_notm}} 中创建 Kubernetes 集群时，其资源仍保留在将集群部署到的区域中。
 
 
-您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在精选区域中可用。
+ 您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在精选区域中可用。
 {: note}
 
-|{{site.data.keyword.containerlong_notm}} 区域|相应的 {{site.data.keyword.Bluemix_notm}} 位置|
+ |{{site.data.keyword.containerlong_notm}} 区域|相应的 {{site.data.keyword.Bluemix_notm}} 位置|
 | --- | --- |
 |亚太地区北部（仅限标准集群）|东京|
 |亚太地区南部|悉尼|
@@ -52,7 +51,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
       |达拉斯|
 {: caption="支持的 Kubernetes Service 区域和相应的 IBM Cloud 位置。" caption-side="top"}
 
-<br />
+ <br />
 
 
 ## {{site.data.keyword.Bluemix_notm}} 中的位置
@@ -131,7 +130,7 @@ Space:
 您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在精选区域中可用。
 {: note}
 
-支持的 {{site.data.keyword.containerlong_notm}} 区域：
+ 支持的 {{site.data.keyword.containerlong_notm}} 区域：
   * 亚太地区北部（仅限标准集群）
   * 亚太地区南部
   * 欧洲中部
@@ -164,13 +163,13 @@ Space:
 要与 {{site.data.keyword.containerlong_notm}} API 交互，请输入命令类型并将 `/v1/command` 附加到全局端点。
 {:shortdesc}
 
-`GET /clusters` API 的示例：
+ `GET /clusters` API 的示例：
   ```
   GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
-</br>
+ </br>
 
 要将 API 用于全球端点，请在所有请求的 `X-Region` 头中传递区域名称。要列出可用区域，请运行 `ibmcloud ks regions`。
 {: tip}
@@ -183,15 +182,15 @@ Space:
 专区是 {{site.data.keyword.Bluemix_notm}} 区域内可用的物理数据中心。区域是用于组织专区的概念工具，可以包含不同国家或地区中的专区（数据中心）。下表按区域显示可用的专区。
 {:shortdesc}
 
-* **多专区大城市**：如果在多专区大城市（**悉尼（亚太地区南部）除外）**中创建集群，那么高可用性 Kubernetes 主节点的副本会在各专区中分布。您可以选择在各专区中分布工作程序节点，以保护应用程序不受专区故障的影响。
-* **单专区城市**：如果在单专区城市中创建了集群，那么可以创建多个工作程序节点，但不能在各专区之间分布这些节点。高可用性主节点包含三个副本，分别位于不同的主机上，但主节点不会在各专区中分布。
+* **多专区大城市位置**：如果在多专区大城市位置中创建集群，那么高可用性 Kubernetes 主节点的副本会自动分布到各个专区。您可以选择在各专区中分布工作程序节点，以保护应用程序不受专区故障的影响。
+* **单专区位置**：如果在单专区位置中创建集群，那么您可以创建多个工作程序节点，但却不能在各专区之间分布这些节点。高可用性主节点包含三个副本，分别位于不同的主机上，但主节点不会在各专区中分布。
 
-<table summary="该表显示了按区域列出的可用专区。每行从左到右阅读，其中第一列是区域，第二列是多专区大城市，第三列是单专区城市。">
+<table summary="该表按区域显示可用专区。各行都应从左到右阅读，其中第一列为区域，第二列为多专区大城市位置，第三列为单专区位置。">
 <caption>按区域列出的可用单专区和多专区。</caption>
   <thead>
   <th>区域</th>
-  <th>多专区大城市</th>
-  <th>单专区城市</th>
+  <th>多专区大城市位置</th>
+  <th>单专区位置</th>
   </thead>
   <tbody>
     <tr>
@@ -261,10 +260,10 @@ _了解单专区集群资源的位置。_
 1.  工作程序节点跨一个区域中的多个专区进行分布，从而为集群提供更高可用性。主节点保留在将集群部署到的支持多专区的专区中。启动本地容器编排操作（例如，`kubectl` 命令）时，将通过区域端点在主节点与工作程序节点之间交换信息。
 
 2.  其他集群资源（例如，存储器、联网、计算或在 pod 中运行的应用程序）在多专区集群内的专区中的部署方式各不相同。有关更多信息，请查看以下主题：
-    * 在多专区集群中设置[文件存储器](/docs/containers?topic=containers-file_storage#add_file)和[块存储器](/docs/containers?topic=containers-block_storage#add_block)
-    * [在多专区集群中使用 LoadBalancer 服务启用对应用程序的公共或专用访问权](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-    * [使用 Ingress 管理网络流量](/docs/containers?topic=containers-ingress#planning)
-    * [提高应用程序的可用性](/docs/containers?topic=containers-app#increase_availability)
+  * 在多专区集群中设置[文件存储器](/docs/containers?topic=containers-file_storage#add_file)和[块存储器](/docs/containers?topic=containers-block_storage#add_block)
+  * [在多专区集群中使用 LoadBalancer 服务启用对应用程序的公共或专用访问权](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+  * [使用 Ingress 管理网络流量](/docs/containers?topic=containers-ingress#planning)
+  * [提高应用程序的可用性](/docs/containers?topic=containers-app#increase_availability)
 
 3.  启动集群管理操作（例如，使用 [`ibmcloud ks` 命令](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)）时，将通过区域端点传递有关集群（例如，名称、标识、用户和命令）的基本信息。
 

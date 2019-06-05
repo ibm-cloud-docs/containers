@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ Per collegare i tuoi nodi di lavoro e applicazioni a un data center in loco, puo
 
 - **Servizio VPN IPSec strongSwan**: puoi configurare un [Servizio VPN IPSec strongSwan![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.strongswan.org/about.html) che collega in modo sicuro il tuo cluster Kubernetes a una rete in loco. Il servizio VPN IPSec strongSwan fornisce un canale di comunicazione end-to-end protetto su Internet basato sulla suite di protocolli IPSec (Internet Protocol Security) standard del settore. Per configurare una connessione protetta tra il tuo cluster e una rete in loco, [configura e distribuisci il servizio VPN IPSec strongSwan](#vpn-setup) direttamente in un pod nel tuo cluster.
 
-- **VRA (Virtual Router Appliance) o FSA (Fortigate Security Appliance)**: puoi scegliere di configurare una [VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o una [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) per configurare un endpoint VPN IPSec. Questa opzione è utile quando hai un cluster più grande, vuoi accedere a più cluster su una singola VPN o hai bisogno di una VPN basata sugli instradamenti. Per configurare una VRA, vedi [Configurazione della connettività VPN con VRA](#vyatta).
+- **VRA (Virtual Router Appliance) o FSA (Fortigate Security Appliance)**: Potresti scegliere di configurare una [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o una [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) per configurare un endpoint VPN IPSec. Questa opzione è utile quando hai un cluster più grande, vuoi accedere a più cluster su una singola VPN o hai bisogno di una VPN basata sugli instradamenti. Per configurare una VRA, vedi [Configurazione della connettività VPN con VRA](#vyatta).
 
 ## Utilizzo del grafico Helm del servizio VPN IPSec strongSwan
 {: #vpn-setup}
@@ -44,7 +44,7 @@ Utilizza un grafico Helm per configurare e distribuire il servizio VPN IPSec str
 
 Poiché strongSwan è integrato con il tuo cluster, non hai bisogno di un dispositivo gateway esterno. Quando viene stabilita la connettività VPN, gli instradamenti vengono configurati automaticamente su tutti i nodi di lavoro nel cluster. Questi instradamenti consentono una connettività a due vie tramite il tunnel VPN tra i pod su un qualsiasi nodo di lavoro e il sistema remoto. Ad esempio, il seguente diagramma mostra in che modo un'applicazione in {{site.data.keyword.containerlong_notm}} può comunicare con un server in loco tramite una connessione VPN strongSwan:
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="Esponi un'applicazione in {{site.data.keyword.containerlong_notm}} utilizzando un programma di bilanciamento del carico" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="Esponi un'applicazione in {{site.data.keyword.containerlong_notm}} utilizzando un NLB (network load balancer)" style="width:700px; border-style: none"/>
 
 1. Un'applicazione nel tuo cluster, `myapp`, riceve una richiesta da un servizio Ingress o LoadBalancer e deve connettersi in modo sicuro alla tua rete in loco.
 
@@ -68,7 +68,7 @@ Prima di utilizzare il grafico Helm strongSwan, esamina le considerazioni e le l
 * Il grafico Helm strongSwan non consente a più cluster e ad altre risorse IaaS di condividere una singola connessione VPN.
 * Il grafico Helm strongSwan viene eseguito come un pod Kubernetes all'interno del cluster. Le prestazioni della VPN sono influenzate dall'utilizzo della memoria e della rete di Kubernetes e di altri pod che sono in esecuzione nel cluster. Se hai un ambiente critico per le prestazioni, considera l'utilizzo di una soluzione VPN eseguita esternamente al cluster su hardware dedicato.
 * Il grafico Helm strongSwan esegue un singolo pod VPN come endpoint del tunnel IPSec. Se si verifica un malfunzionamento del pod, il cluster lo riavvia. Tuttavia, potresti riscontrare un breve tempo di inattività mentre il nuovo pod viene avviato e la connessione VPN viene ristabilita. Se hai bisogno di un ripristino a seguito di un errore più rapido oppure una soluzione ad alta disponibilità più elaborata, considera l'utilizzo di una soluzione VPN eseguita esternamente al cluster su hardware dedicato.
-* Il grafico Helm strongSwan non fornisce le metriche o il monitoraggio del traffico di rete che transita sulla connessione VPN. Per un elenco degli strumenti di monitoraggio supportati, consulta [Servizi di registrazione e monitoraggio](/docs/containers?topic=containers-integrations#health_services).
+* Il grafico Helm strongSwan non fornisce le metriche o il monitoraggio del traffico di rete che transita sulla connessione VPN. Per un elenco degli strumenti di monitoraggio supportati, consulta [Servizi di registrazione e monitoraggio](/docs/containers?topic=containers-supported_integrations#health_services).
 
 <br />
 
@@ -103,7 +103,7 @@ Quando la connessione VPN è in uscita dal cluster multizona, è necessaria solo
 1. [Configura un grafico Helm VPN strongSwan](/docs/containers?topic=containers-vpn#vpn_configure). Quando ti attieni alla procedura indicata in tale sezione, assicurati di specificare le seguenti impostazioni:
     - `ipsec.auto`: modifica in `start`. Le connessioni sono in uscita dal cluster.
     - `loadBalancerIP`: non specificare un indirizzo IP. Lascia questa impostazione vuota.
-    - `zoneLoadBalancer`: specifica un indirizzo IP di programma di bilanciamento del carico pubblico per ciascuna zona dove hai dei nodi di lavoro.[Puoi verificare se visualizzare i tuoi indirizzi IP pubblici disponibili](/docs/containers?topic=containers-subnets#review_ip) o [liberare un indirizzo IP utilizzato](/docs/containers?topic=containers-subnets#free). Poiché il pod VPN strongSwan può essere pianificato su un nodo di lavoro in qualsiasi zona, questo elenco di IP garantisce che possa essere utilizzato un IP di programma di bilanciamento del carico in qualsiasi zona dove è pianificato il pod VPN.
+    - `zoneLoadBalancer`: specifica un indirizzo IP di programma di bilanciamento del carico pubblico per ciascuna zona dove hai dei nodi di lavoro. [Puoi verificare se visualizzare i tuoi indirizzi IP pubblici disponibili](/docs/containers?topic=containers-subnets#review_ip) o [liberare un indirizzo IP utilizzato](/docs/containers?topic=containers-subnets#free). Poiché il pod VPN strongSwan può essere pianificato su un nodo di lavoro in qualsiasi zona, questo elenco di IP garantisce che possa essere utilizzato un IP di programma di bilanciamento del carico in qualsiasi zona dove è pianificato il pod VPN.
     - `connectUsingLoadBalancerIP`: imposta su `true`. Quando il pod VPN strongSwan è pianificato su un nodo di lavoro, il servizio strongSwan seleziona l'indirizzo IP del programma di bilanciamento del carico che si trova nella stessa zona e utilizza questo IP per stabilire la connessione in uscita.
     - `local.id`: specifica un valore fisso che è supportato dal tuo endpoint VPN remoto. Se l'endpoint VPN remoto richiede che tu imposti l'opzione `local.id` (valore `leftid` in `ipsec.conf`) sull'indirizzo IP pubblico del tunnel IPSec VPN, imposta `local.id` su `%loadBalancerIP`. Questo valore configura automaticamente il valore `leftid` in `ipsec.conf` sull'indirizzo IP del programma di bilanciamento del carico utilizzato per la connessione.
 
@@ -122,7 +122,7 @@ L'endpoint VPN remoto può stabilire la connessione VPN a uno qualsiasi dei prog
 1. [Configura un grafico Helm VPN strongSwan](/docs/containers?topic=containers-vpn#vpn_configure). Quando ti attieni alla procedura indicata in tale sezione, assicurati di specificare le seguenti impostazioni:
     - `ipsec.auto`: modifica in `add`. Le connessioni sono in entrata al cluster.
     - `loadBalancerIP`: non specificare un indirizzo IP. Lascia questa impostazione vuota.
-    - `zoneLoadBalancer`: specifica un indirizzo IP di programma di bilanciamento del carico pubblico per ciascuna zona dove hai dei nodi di lavoro.[Puoi verificare se visualizzare i tuoi indirizzi IP pubblici disponibili](/docs/containers?topic=containers-subnets#review_ip) o [liberare un indirizzo IP utilizzato](/docs/containers?topic=containers-subnets#free).
+    - `zoneLoadBalancer`: specifica un indirizzo IP di programma di bilanciamento del carico pubblico per ciascuna zona dove hai dei nodi di lavoro. [Puoi verificare se visualizzare i tuoi indirizzi IP pubblici disponibili](/docs/containers?topic=containers-subnets#review_ip) o [liberare un indirizzo IP utilizzato](/docs/containers?topic=containers-subnets#free).
     - `local.id`: se l'endpoint VPN remoto richiede che tu imposti l'opzione `local.id` (valore `leftid` in `ipsec.conf`) sull'indirizzo IP pubblico del tunnel IPSec VPN, imposta `local.id` su `%loadBalancerIP`. Questo valore configura automaticamente il valore `leftid` in `ipsec.conf` sull'indirizzo IP del programma di bilanciamento del carico utilizzato per la connessione.
 
 2. Nel tuo firewall di rete remota, consenti le connessioni VPN IPSec in uscita agli indirizzi IP pubblici che hai elencato nell'impostazione `zoneLoadBalancer`.
@@ -164,7 +164,7 @@ Prima di installare il grafico Helm strongSwan, devi decidere la configurazione 
 Prima di iniziare:
 * [Installa un gateway VPN IPSec nel tuo data center in loco](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection).
 * Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `default`.
-* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **Nota**: nei cluster standard sono consentite tutte le configurazioni strongSwan. Se utilizzi un cluster gratuito, puoi scegliere solo una connessione VPN in uscita nel [Passo 3](#strongswan_3). Le connessioni VPN in entrata richiedono un programma di bilanciamento del carico nel cluster e i programmi di bilanciamento del carico non sono disponibili per i cluster gratuiti.
 
 ### Passo 1: Ottieni il grafico Helm strongSwan
@@ -173,7 +173,7 @@ Prima di iniziare:
 Installa Helm e ottieni il grafico Helm strongSwan per visualizzare le possibili configurazioni.
 {: shortdesc}
 
-1.  [Segui le istruzioni](/docs/containers?topic=containers-integrations#helm) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) con un account di servizio e aggiungere il repository Helm {{site.data.keyword.Bluemix_notm}}.
+1.  [Segui le istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) con un account di servizio e aggiungere il repository Helm {{site.data.keyword.Bluemix_notm}}. Nota: è necessario Helm versione 2.8 o successive.
 
 2.  Verifica che tiller sia installato con un account di servizio.
 
@@ -193,7 +193,7 @@ Installa Helm e ottieni il grafico Helm strongSwan per visualizzare le possibili
 3. Salva le impostazioni di configurazione predefinite per il grafico Helm strongSwan in un file YAML locale.
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+    helm inspect values iks-charts/strongswan > config.yaml
     ```
     {: pre}
 
@@ -267,7 +267,7 @@ Determina le risorse cluster che devono essere accessibili dalla rete remota sul
 1. Aggiungi i CIDR di una o più sottoreti del cluster all'impostazione `local.subnet`. Devi configurare i CIDR della sottorete locale sull'endpoint VPN in loco. Questo elenco può includere le seguenti sottoreti:  
     * CIDR della sottorete del pod Kubernetes: `172.30.0.0/16`. Le comunicazioni bidirezionali sono abilitate tra tutti i pod del cluster e uno qualsiasi degli host nelle sottoreti di rete remota che elenchi nell'impostazione `remote.subnet`. Se devi evitare che qualsiasi host `remote.subnet` acceda ai pod del cluster per motivi di sicurezza, non aggiungere la sottorete pod Kubernetes all'impostazione `local.subnet`.
     * CIDR della sottorete del servizio Kubernetes: `172.21.0.0/16`. Gli indirizzi IP del servizio forniscono un modo per esporre più pod dell'applicazione distribuiti su diversi nodi di lavoro dietro un singolo IP.
-    * Se le tue applicazioni vengono esposte da un servizio NodePort sulla rete privata o un ALB Ingress privato, aggiungi il CIDR di sottorete privata del nodo di lavoro. Richiama i primi tre ottetti del tuo indirizzo IP privato del tuo lavoro eseguendo `ibmcloud ks worker <cluster_name>`. Ad esempio, se è `10.176.48.xx`, prendi nota di `10.176.48`. Successivamente, ottieni il CIDR della sottorete privata del nodo di lavoro eseguendo il seguente comando, sostituendo `<xxx.yyy.zz>` con l'ottetto che avevi richiamato in precedenza: `ibmcloud sl subnet list | grep <xxx.yyy.zzz>`. **Nota**: se un nodo di lavoro viene aggiunto a una nuova sottorete privata, devi aggiungere il nuovo CIDR della sottorete privata sia all'impostazione `local.subnet` che all'endpoint VPN in loco. Bisogna quindi riavviare la connessione VPN.
+    * Se le tue applicazioni vengono esposte da un servizio NodePort sulla rete privata o un ALB Ingress privato, aggiungi il CIDR di sottorete privata del nodo di lavoro. Richiama i primi tre ottetti del tuo indirizzo IP privato del tuo nodo di lavoro eseguendo `ibmcloud ks worker <cluster_name>`. Ad esempio, se è `10.176.48.xx`, prendi nota di `10.176.48`. Ottieni quindi il CIDR della sottorete privata del nodo di lavoro eseguendo questo comando, sostituendo `<xxx.yyy.zz>` con l'ottetto che hai richiamato precedentemente: `ibmcloud sl subnet list | grep <xxx.yyy.zzz>`. **Nota**: se un nodo di lavoro viene aggiunto a una nuova sottorete privata, devi aggiungere il nuovo CIDR della sottorete privata sia all'impostazione `local.subnet` che all'endpoint VPN in loco. Bisogna quindi riavviare la connessione VPN.
     * Se hai delle applicazioni esposte dai servizi LoadBalancer sulla rete privata, aggiungi i CIDR della sottorete gestita dall'utente privata del cluster. Per trovare questi valori, esegui `ibmcloud ks cluster-get --cluster <cluster_name> --showResources`. Nella sezione **VLAN**, ricerca i CIDR che hanno un valore **Pubblico** di `false`. **Nota**: se `ipsec.keyexchange` è impostata su `ikev1`, puoi specificare solo una sottorete. Puoi tuttavia utilizzare l'impostazione `localSubnetNAT` per combinare più sottoreti del cluster in una singola sottorete.
 
 2. Facoltativo: riassocia le sottoreti del cluster utilizzando l'impostazione `localSubnetNAT`. NAT (Network Address Translation) per le sottoreti fornisce una soluzione temporanea per i conflitti di sottorete tra la rete del cluster e la rete remota in loco. Puoi utilizzare NAT per riassociare le sottoreti IP locali private del cluster, la sottorete del pod (172.30.0.0/16) o la sottorete del servizio pod (172.21.0.0/16) a una sottorete privata diversa. Il tunnel VPN vede le sottoreti IP riassociate invece delle sottoreti originali. La riassociazione avviene prima che i pacchetti vengano inviati attraverso il tunnel VPN e dopo che i pacchetti arrivano dal tunnel VPN. Puoi esporre contemporaneamente entrambe le sottoreti riassociate e non riassociate sulla VPN. Per abilitare NAT, puoi aggiungere un'intera sottorete o singoli indirizzi IP.
@@ -346,7 +346,7 @@ Distribuisci il grafico Helm strongSwan nel tuo cluster con le configurazioni ch
     {: tip}
 
     ```
-    helm install -f config.yaml --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn iks-charts/strongswan
     ```
     {: pre}
 
@@ -400,11 +400,11 @@ Dopo aver distribuito il tuo grafico Helm, verifica la connettività VPN.
         1. Esegui `helm delete --purge <release_name>`
         2. Correggi i valori errati nel file di configurazione.
         3. Esegui `helm install -f config.yaml --name=<release_name> ibm/strongswan`
-      Puoi anche eseguire più controlli nel passo successivo.
+      Puoi anche eseguire ulteriori controlli nel passo successivo.
 
     * Se il pod VPN è in uno stato `ERROR` o continua ad arrestarsi e a riavviarsi, potrebbe essere dovuto alla convalida dei parametri delle impostazioni `ipsec.conf` nella mappa di configurazione del grafico.
         1. Controlla eventuali errori di convalida nei log del pod strongSwan eseguendo `kubectl logs $STRONGSWAN_POD`.
-        2. Se sono presenti errori di convalida, esegui `helm delete --purge <release_name>`
+        2. Se sono presenti degli errori di convalida, esegui `helm delete --purge <release_name>`
         3. Correggi i valori errati nel file di configurazione.
         4. Esegui `helm install -f config.yaml --name=<release_name> ibm/strongswan`
 
@@ -531,13 +531,12 @@ Prima di utilizzare questa soluzione, esamina le considerazioni e le limitazioni
 * Le politiche di rete globali di Calico nei seguenti passi non impediscono ai pod Kubernetes che utilizzano la rete host di inviare e ricevere dati tramite la VPN. Quando un pod è configurato con la rete host, l'applicazione in esecuzione nel pod può restare in ascolto sulle interfacce di rete del nodo di lavoro su cui si trova. Questi pod di rete host possono esistere in qualsiasi spazio dei nomi. Per determinare quali pod dispongono della rete host, esegui `kubectl get pods --all-namespaces -o wide` e cerca tutti i pod che non hanno un indirizzo IP di pod `172.30.0.0/16`. Se vuoi impedire ai pod di rete host di inviare e ricevere dati tramite la VPN, puoi impostare le seguenti opzioni nel tuo file di distribuzione `values.yaml`: `local.subnet: 172.30.0.0/16` e `enablePodSNAT: false`. Queste impostazioni di configurazione espongono tutti i pod Kubernetes sulla connessione VPN alla rete remota. Tuttavia, solo i pod che si trovano nello spazio dei nomi sicuro specificato sono raggiungibili tramite la VPN.
 
 Prima di iniziare:
-* Crea o utilizza un cluster che esegua Kubernetes versione 1.10 o successive.
 * [Distribuisci il grafico Helm strongSwan](#vpn_configure) e [assicurati che la connettività VPN funzioni correttamente](#vpn_test).
 * [Installa e configura la CLI Calico](/docs/containers?topic=containers-network_policies#cli_install).
 
 Per limitare il traffico VPN a un determinato spazio dei nomi:
 
-1. Crea una politica di rete globale Calico denominata `allow-non-vpn-outbound.yaml`. Questa politica consente a tutti gli spazi dei nomi di continuare a inviare il traffico in uscita a tutte le destinazioni, ad eccezione della sottorete remota a cui accede la VPN strongSwan. Sostituisci `<remote.subnet>` con la `remote.subnet` che hai specificato nel file di configurazione Helm `values.yaml`. Per specificare più sottoreti remote, vedi la [documentazione di Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
+1. Crea una politica di rete globale Calico denominata `allow-non-vpn-outbound.yaml`. Questa politica consente a tutti gli spazi dei nomi di continuare a inviare il traffico in uscita a tutte le destinazioni, ad eccezione della sottorete remota a cui accede la VPN strongSwan. Sostituisci `<remote.subnet>` con la `remote.subnet` che hai specificato nel file di configurazione `values.yaml` di Helm. Per specificare più sottoreti remote, vedi la [documentazione di Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -563,7 +562,7 @@ Per limitare il traffico VPN a un determinato spazio dei nomi:
     ```
     {: pre}
 
-3. Crea un'altra politica di rete globale Calico denominata `allow-vpn-from-namespace.yaml`. Questa politica consente solo a uno spazio dei nomi specificato di inviare il traffico in uscita alla sottorete remota a cui accede la VPN strongSwan. Sostituisci `<namespace>` con lo spazio dei nomi che può accedere alla VPN e `<remote.subnet>` con la `remote.subnet` che hai specificato nel file di configurazione Helm `values.yaml`. Per specificare più spazi dei nomi o sottoreti remote, vedi la [documentazione di Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
+3. Crea un'altra politica di rete globale Calico denominata `allow-vpn-from-namespace.yaml`. Questa politica consente solo a uno spazio dei nomi specificato di inviare il traffico in uscita alla sottorete remota a cui accede la VPN strongSwan. Sostituisci `<namespace>` con lo spazio dei nomi che può accedere alla VPN e `<remote.subnet>` con la `remote.subnet` che hai specificato nel file di configurazione `values.yaml` di Helm. Per specificare più spazi dei nomi o sottoreti remote, vedi la [documentazione di Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy

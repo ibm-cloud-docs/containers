@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -81,7 +81,7 @@ Para uma correção de longo prazo, [atualize o tipo de máquina do seu conjunto
 {: #nonroot}
 
 {: tsSymptoms}
-Depois de [incluir armazenamento NFS](/docs/containers?topic=containers-file_storage#app_volume_mount) em sua implementação, a implementação de seu contêiner falha. Ao recuperar os logs para seu contêiner, é possível ver erros como os seguintes. O pod falha e fica preso em um ciclo de recarregamento.
+Depois de [incluir armazenamento NFS](/docs/containers?topic=containers-file_storage#file_app_volume_mount) em sua implementação, a implementação de seu contêiner falha. Ao recuperar os logs para seu contêiner, é possível ver erros como os seguintes. O pod falha e fica preso em um ciclo de recarregamento.
 
 ```
 write-permission
@@ -185,6 +185,9 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
       name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:
@@ -327,8 +330,8 @@ Se ocorrer um erro de rede enquanto um pod gravar em um volume, a infraestrutura
    ```
    {: pre}
 
-2. Verifique se você usa a [versão mais recente do plug-in do {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). Se não,  [ atualize seu plug-in ](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
-3. Se você usou uma implementação do Kubernetes para seu pod, reinicie o pod que está falhando removendo-o e permitindo que o Kubernetes o recrie. Se você não usou uma implementação, recupere o arquivo YAML que foi usado para criar seu pod executando `kubectl get pod <pod_name> -o yaml >pod.yaml`. Em seguida, exclua e recrie manualmente o pod.
+2. Verifique se você usa a [versão mais recente do plug-in do {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). Se não,  [ atualize seu plug-in ](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
+3. Se você usou uma implementação do Kubernetes para seu pod, reinicie o pod que está falhando removendo-o e permitindo que o Kubernetes o recrie. Se você não usou uma implementação, recupere o arquivo YAML usado para criar seu pod executando `kubectl get pod <pod_name> -o yaml >pod.yaml`. Em seguida, exclua e recrie manualmente o pod.
     ```
     kubectl delete pod <pod_name>
     ```
@@ -364,7 +367,7 @@ Se ocorrer um erro de rede enquanto um pod gravar em um volume, a infraestrutura
 {: #block_filesystem}
 
 {: tsSymptoms}
-Quando você executa `kubectl describe pod <pod_name>`, você vê o erro a seguir:
+Ao executar `kubectl describe pod <pod_name>`, você verá o erro a seguir:
 ```
 failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32
 ```

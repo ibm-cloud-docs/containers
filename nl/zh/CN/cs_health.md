@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -32,6 +32,8 @@ subcollection: containers
 
 持续监视和日志记录是检测对集群的攻击，并在发生问题时对问题进行故障诊断的关键。通过持续监视集群，可以更好地了解集群容量以及可供应用程序使用的资源的可用性。通过此洞察，您可以做好准备以保护应用程序免受停机时间的影响。**注**：要配置日志记录和监视，必须在 {{site.data.keyword.containerlong_notm}} 中使用标准集群。
 
+
+
 ## 选择日志记录解决方案
 {: #logging_overview}
 
@@ -42,25 +44,25 @@ subcollection: containers
 
 <dl>
 
+<dt>{{site.data.keyword.la_full_notm}}</dt>
+<dd>通过将 LogDNA 作为第三方服务部署到集群来管理 pod 容器日志。要使用 {{site.data.keyword.la_full_notm}}，必须将日志记录代理程序部署到集群中的每个工作程序节点。此代理程序从所有名称空间（包括 `kube-system`）收集 pod 的 `/var/log` 目录中存储的扩展名为 `*.log` 的日志以及无扩展名文件。然后，代理程序会将这些日志转发到 {{site.data.keyword.la_full_notm}} 服务。有关该服务的更多信息，请参阅 [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) 文档。首先，请参阅[使用 {{site.data.keyword.loganalysisfull_notm}} with LogDNA 管理 Kubernetes 集群日志](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube)。</dd>
+
 <dt>将 Fluentd 用于 {{site.data.keyword.loganalysisfull_notm}} 或 syslog</dt>
 <dd>要收集、转发和查看集群组件的日志，可以使用 Fluentd 来创建日志记录配置。创建日志记录配置时，[Fluentd ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.fluentd.org/) 集群附加组件会从指定源的路径收集日志。然后，Fluentd 会将这些日志转发到 {{site.data.keyword.loganalysisfull_notm}} 或外部 syslog 服务器。
 
-<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>：[{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) 扩展了日志收集、保留和搜索能力。创建用于将源的日志转发到 {{site.data.keyword.loganalysisfull_notm}} 的日志记录配置后，可以在 Kibana 仪表板中查看日志。</li>
+<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>：[{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) 扩展了日志收集、保留和搜索能力。创建用于将源的日志转发到 {{site.data.keyword.loganalysisshort_notm}} 的日志记录配置后，可以在 Kibana 仪表板中查看日志。<p class="deprecated">不推荐使用 {{site.data.keyword.loganalysisfull_notm}}。从 2019 年 4 月 30 日开始，您无法供应新的 {{site.data.keyword.loganalysisshort_notm}} 实例，并且所有轻量套餐实例都会被删除。对现有高端套餐实例的支持持续到 2019 年 9 月 30 日。要继续收集集群的日志，可以将 Fluentd 收集的日志转发到外部 syslog 服务器，或者设置 {{site.data.keyword.la_full_notm}}。</p></li>
 
 <li><strong>外部 syslog 服务器</strong>：设置接受 syslog 协议的外部服务器。然后，可以为集群中的源创建日志记录配置，以将日志转发到该外部服务器。</li></ul>
 
 首先，请参阅[了解集群和应用程序日志转发](#logging)。
 </dd>
 
-<dt>{{site.data.keyword.la_full_notm}}</dt>
-<dd>通过将 LogDNA 作为第三方服务部署到集群来管理 pod 容器日志。要使用 {{site.data.keyword.la_full_notm}}，必须将日志记录代理程序部署到集群中的每个工作程序节点。此代理程序从所有名称空间（包括 `kube-system`）收集 pod 的 `/var/log` 目录中存储的扩展名为 `*.log` 的日志以及无扩展名文件。然后，代理程序会将这些日志转发到 {{site.data.keyword.la_full_notm}} 服务。有关该服务的更多信息，请参阅 [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) 文档。首先，请参阅[使用 {{site.data.keyword.loganalysisfull_notm}} with LogDNA 管理 Kubernetes 集群日志](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube)。</dd>
-
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
 <dd>要监视在集群中执行的用户启动的管理活动，您可以收集审计日志并将其转发到 {{site.data.keyword.cloudaccesstrailfull_notm}}。集群会生成两种类型的 {{site.data.keyword.cloudaccesstrailshort}} 事件。
 
 <ul><li>集群管理事件会自动生成并转发到 {{site.data.keyword.cloudaccesstrailshort}}。</li>
 
-<li>Kubernetes API 服务器审计事件会自动生成，但您必须[创建日志记录配置](#api_forward)，Fluentd 才能将这些日志转发到 {{site.data.keyword.loganalysisshort}}。然后，{{site.data.keyword.cloudaccesstrailshort}} 会从 {{site.data.keyword.loganalysisshort}} 中拉取这些日志。</li></ul>
+<li>Kubernetes API 服务器审计事件会自动生成，但您必须[创建日志记录配置](#api_forward)，Fluentd 才能将这些日志转发到 {{site.data.keyword.cloudaccesstrailshort}}。</li></ul>
 
 有关可以跟踪的 {{site.data.keyword.containerlong_notm}} 事件类型的更多信息，请参阅 [Activity Tracker 事件](/docs/containers?topic=containers-at_events)。有关服务的更多信息，请参阅 [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla) 文档。
 </dd>
@@ -70,15 +72,18 @@ subcollection: containers
 首先，请参阅[收集主节点日志](#collect_master)。</dd>
 
 <dt>第三方服务</dt>
-<dd>如果您有特殊需求，那么可以设置您自己的日志记录解决方案。在[日志记录和监视集成](/docs/containers?topic=containers-integrations#health_services)中，查看可以添加到集群的第三方日志记录服务。在运行 Kubernetes V1.11 或更高版本的集群中，可以从 `/var/log/pods/` 路径中收集容器日志。在运行 Kubernetes V1.10 或更低版本的集群中，可以从 `/var/lib/docker/containers/` 路径中收集容器日志。</dd>
+<dd>如果您有特殊需求，那么可以设置您自己的日志记录解决方案。在[日志记录和监视集成](/docs/containers?topic=containers-supported_integrations#health_services)中，查看可以添加到集群的第三方日志记录服务。在运行 Kubernetes V1.11 或更高版本的集群中，可以从 `/var/log/pods/` 路径中收集容器日志。在运行 Kubernetes V1.10 或更低版本的集群中，可以从 `/var/lib/docker/containers/` 路径中收集容器日志。</dd>
 
 </dl>
 
-## 了解集群和应用程序日志转发
+## 了解如何将集群和应用程序日志转发到 syslog
 {: #logging}
 
 缺省情况下，日志由集群中的 [Fluentd ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.fluentd.org/) 附加组件进行收集。为集群中的源（如容器）创建日志记录配置后，Fluentd 从该源的路径中收集的日志会转发到 {{site.data.keyword.loganalysisshort_notm}} 或外部 syslog 服务器。系统会对摄入端口上从源到日志记录服务的流量进行加密。
 {: shortdesc}
+
+不推荐使用 {{site.data.keyword.loganalysisfull_notm}}。从 2019 年 4 月 30 日开始，您无法供应新的 {{site.data.keyword.loganalysisshort_notm}} 实例，并且所有轻量套餐实例都会被删除。对现有高端套餐实例的支持持续到 2019 年 9 月 30 日。要继续收集集群的日志，可以将 Fluentd 收集的日志转发到外部 syslog 服务器，或者设置 {{site.data.keyword.la_full_notm}}。
+{: deprecated}
 
 **可以为哪些源配置日志转发？**
 
@@ -90,9 +95,9 @@ subcollection: containers
     * `/var/log/syslog`
     * `/var/log/auth.log`
 
-2. `container`：运行中容器记录的信息。</br>**路径**：写入 `STDOUT` 或 `STDERR` 的任何内容。
+2. `container`：正在运行的容器记录的信息。</br>**路径**：写入 `STDOUT` 或 `STDERR` 的任何内容。
 
-3. `application`：有关在应用程序级别发生的事件的信息。这可能是有关发生了事件（例如成功登录）的通知、有关存储器的警告或可在应用程序级别执行的其他操作。</br>**路径**：可以设置将日志转发到的路径。但是，为了发送日志，必须在日志记录配置中使用绝对路径，否则无法读取日志。如果路径安装到工作程序节点上，那么可能已创建符号链接。示例：如果指定的路径为 `/usr/local/spark/work/app-0546/0/stderr`，但日志实际上会转至 `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`，那么无法读取日志。
+3. `application`：有关在应用程序级别发生的事件的信息。这可能是有关发生了事件（例如成功登录）的通知、有关存储器的警告或可在应用程序级别执行的其他操作。</br>**路径**：可以设置日志转发到的路径。但是，为了发送日志，必须在日志记录配置中使用绝对路径，否则无法读取日志。如果路径安装到工作程序节点上，那么可能已创建符号链接。示例：如果指定的路径为 `/usr/local/spark/work/app-0546/0/stderr`，但日志实际上会转至 `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`，那么无法读取日志。
 
 4. `storage`：有关集群中设置的持久性存储器的信息。存储器日志可以帮助您将问题确定仪表板和警报设置为 DevOps 管道和生产发布的一部分。**注**：路径 `/var/log/kubelet.log` 和 `/var/log/syslog` 也包含存储器日志，但这些路径中的日志由 `kubernetes` 和 `worker` 日志源进行收集。</br>**路径**：
     * `/var/log/ibmc-s3fs.log`
@@ -112,7 +117,7 @@ subcollection: containers
 
 6. `kube-audit`：有关发送到 Kubernetes API 服务器的集群相关操作的信息，包括时间、用户和受影响的资源。
 
-7. `ingress`：有关通过 Ingress 应用程序负载均衡器进入集群的网络流量的信息。有关特定配置信息，请查看 [Ingress 文档](/docs/containers?topic=containers-ingress_health#ingress_logs)。</br>**路径**：
+7. `ingress`：有关通过 Ingress ALB 进入集群的网络流量的信息。</br>**路径**：
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
@@ -141,7 +146,7 @@ subcollection: containers
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
-      <td>要转发日志的位置。选项为 <code>ibm</code>（将日志转发到 {{site.data.keyword.loganalysisshort_notm}}）和 <code>syslog</code>（将日志转发到外部服务器）。</td>
+      <td>要转发日志的位置。选项为 <code>ibm</code>（将日志转发到 {{site.data.keyword.loganalysisshort_notm}}）和 <code>syslog</code>（将日志转发到外部服务器）。<p class="deprecated">不推荐使用 {{site.data.keyword.loganalysisfull_notm}}。对现有高端套餐实例的支持持续到 2019 年 9 月 30 日。请使用 <code>--type syslog</code> 将日志转发到外部 syslog 服务器。</td>
     </tr>
     <tr>
       <td><code><em>--namespace</em></code></td>
@@ -195,7 +200,7 @@ subcollection: containers
 **由我负责使 Fluentd 保持更新吗？**
 
 为了对日志记录或过滤器配置进行更改，Fluentd 日志记录附加组件必须为最新版本。缺省情况下，会启用附加组件的自动更新。
-要禁用自动更新，请参阅[更新集群附加组件：用于日志记录的 Fluentd](/docs/containers?topic=containers-update#logging)。
+要禁用自动更新，请参阅[更新集群附加组件：用于日志记录的 Fluentd](/docs/containers?topic=containers-update#logging-up)。
 
 **我能从集群中的一个源转发某些日志，但不转发其他日志吗？**
 
@@ -208,11 +213,14 @@ subcollection: containers
 <br />
 
 
-## 配置集群和应用程序日志转发
+## 将集群和应用程序日志转发到 syslog
 {: #configuring}
 
 可以通过控制台或 CLI 为 {{site.data.keyword.containerlong_notm}} 标准集群配置日志记录。
 {: shortdesc}
+
+不推荐使用 {{site.data.keyword.loganalysisfull_notm}}。从 2019 年 4 月 30 日开始，您无法供应新的 {{site.data.keyword.loganalysisshort_notm}} 实例，并且所有轻量套餐实例都会被删除。对现有高端套餐实例的支持持续到 2019 年 9 月 30 日。要继续收集集群的日志，可以将 Fluentd 收集的日志转发到外部 syslog 服务器，或者设置 {{site.data.keyword.la_full_notm}}。
+{: deprecated}
 
 ### 使用 {{site.data.keyword.Bluemix_notm}} 控制台启用日志转发
 {: #enable-forwarding-ui}
@@ -225,7 +233,7 @@ subcollection: containers
 
 开始之前，请[创建](/docs/containers?topic=containers-clusters#clusters)或识别要使用的标准集群。
 
-1. 登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://cloud.ibm.com/containers-kubernetes/clusters)，并浏览至 **Kubernetes > 集群**。
+1. 登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://cloud.ibm.com/kubernetes/clusters)，并浏览至 **Kubernetes > 集群**。
 2. 选择标准集群，然后在**概述**选项卡的**日志**字段中，单击**启用**。
 3. 选择要从中转发日志的 **Cloud Foundry 组织**和**空间**。在仪表板中配置日志转发时，日志将发送到集群的缺省 {{site.data.keyword.loganalysisshort_notm}} 端点。要将日志转发到外部服务器或其他 {{site.data.keyword.loganalysisshort_notm}} 端点，可以使用 CLI 来配置日志记录。
 4. 选择要从中转发日志的**日志源**。
@@ -242,7 +250,64 @@ subcollection: containers
 
 开始之前，请[创建](/docs/containers?topic=containers-clusters#clusters)或识别要使用的标准集群。
 
-**将日志转发到 IBM**
+**通过 `udp` 或 `tcp` 协议将日志转发到您自己的服务器**
+
+1. 确保您具有 [{{site.data.keyword.Bluemix_notm}} IAM **编辑者**或**管理员**平台角色](/docs/containers?topic=containers-users#platform)。
+
+2. 对于日志源所在的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+3. 要将日志转发到 syslog，请通过以下两种方式之一来设置接受 syslog 协议的服务器：
+  * 设置和管理您自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。
+
+  * 从容器运行 syslog。例如，可以使用此[部署 .yaml 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) 来访存在集群中运行容器的 Docker 公共映像。该映像在公共集群 IP 地址上发布端口 `514`，并使用此公共集群 IP 地址来配置 syslog 主机。
+
+  可以通过除去 syslog 前缀，将日志作为有效 JSON 进行查看。为此，请将以下代码添加到运行 rsyslog 服务器的 <code>etc/rsyslog.conf</code> 文件的顶部：<code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+  {: tip}
+
+4. 创建日志转发配置。
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ```
+    {: pre}
+
+</br></br>
+
+**通过 `tls` 协议将日志转发到您自己的服务器**
+
+以下步骤是常规指示信息。在生产环境中使用容器之前，请确保满足所需的任何安全需求。
+{: tip}
+
+1. 确保您具有以下 [{{site.data.keyword.Bluemix_notm}} IAM 角色](/docs/containers?topic=containers-users#platform)：
+    * 对集群的**编辑者**或**管理员**平台角色
+    * 对 `kube-system` 名称空间的**写入者**或**管理者**服务角色
+
+2. 对于日志源所在的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+3. 通过以下两种方式之一来设置接受 syslog 协议的服务器：
+  * 设置和管理您自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。
+
+  * 从容器运行 syslog。例如，可以使用此[部署 .yaml 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) 来访存在集群中运行容器的 Docker 公共映像。该映像在公共集群 IP 地址上发布端口 `514`，并使用此公共集群 IP 地址来配置 syslog 主机。您必须注入相关认证中心和服务器端证书，并更新 `syslog.conf` 以在服务器上启用 `tls`。
+
+4. 将认证中心证书保存为名为 `ca-cert` 的文件。名称必须与此完全相同。
+
+5. 在 `kube-system` 名称空间中为 `ca-cert` 文件创建私钥。创建日志记录配置时，将私钥名称用于 `--ca-cert` 标志。
+    ```
+    kubectl -n kube-system create secret generic --from-file=ca-cert
+    ```
+    {: pre}
+
+6. 创建日志转发配置。
+    ```
+    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
+    ```
+    {: pre}
+
+</br></br>
+
+**将日志转发到 {{site.data.keyword.loganalysisfull_notm}}**
+
+不推荐使用 {{site.data.keyword.loganalysisfull_notm}}。从 2019 年 4 月 30 日开始，您无法供应新的 {{site.data.keyword.loganalysisshort_notm}} 实例，并且所有轻量套餐实例都会被删除。对现有高端套餐实例的支持持续到 2019 年 9 月 30 日。要继续收集集群的日志，可以将 Fluentd 收集的日志转发到外部 syslog 服务器，或者设置 {{site.data.keyword.la_full_notm}}。
+{: deprecated}
 
 1. 验证许可权。
     1. 确保您具有 [{{site.data.keyword.Bluemix_notm}} IAM **编辑者**或**管理员**平台角色](/docs/containers?topic=containers-users#platform)。
@@ -258,10 +323,7 @@ subcollection: containers
           ```
           {: pre}
 
-2.  对于日志源所在的标准集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-
-    如果使用的是 Dedicated 帐户，那么必须登录到公共 {{site.data.keyword.cloud_notm}} 端点并将公共组织和空间设定为目标，才能启用日志转发。
-    {: tip}
+2.  对于日志源所在的标准集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 3. 创建日志转发配置。
     ```
@@ -296,69 +358,7 @@ subcollection: containers
 如果在容器中运行的应用程序无法配置为将日志写入到 STDOUT 或 STDERR，那么可以创建日志记录配置以从应用程序日志文件转发日志。
 {: tip}
 
-</br>
-</br>
-
-
-**通过 `udp` 或 `tcp` 协议将日志转发到您自己的服务器**
-
-1. 确保您具有 [{{site.data.keyword.Bluemix_notm}} IAM **编辑者**或**管理员**平台角色](/docs/containers?topic=containers-users#platform)。
-
-2. 对于日志源所在的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。**注**：如果使用的是 Dedicated 帐户，那么必须登录到公共 {{site.data.keyword.cloud_notm}} 端点并将公共组织和空间设定为目标，才能启用日志转发。
-
-
-3. 要将日志转发到 syslog，请通过以下两种方式之一来设置接受 syslog 协议的服务器：
-  * 设置和管理您自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。
-
-  * 从容器运行 syslog。例如，可以使用此[部署 .yaml 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) 来访存在集群中运行容器的 Docker 公共映像。该映像在公共集群 IP 地址上发布端口 `514`，并使用此公共集群 IP 地址来配置 syslog 主机。
-
-  可以通过除去 syslog 前缀，将日志作为有效 JSON 进行查看。为此，请将以下代码添加到运行 rsyslog 服务器的 <code>etc/rsyslog.conf</code> 文件的顶部：<code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
-  {: tip}
-
-4. 创建日志转发配置。
-    ```
-    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
-    ```
-    {: pre}
-
-</br>
-</br>
-
-
-**通过 `tls` 协议将日志转发到您自己的服务器**
-
-以下步骤是常规指示信息。在生产环境中使用容器之前，请确保满足所需的任何安全需求。
-{: tip}
-
-1. 确保您具有以下 [{{site.data.keyword.Bluemix_notm}} IAM 角色](/docs/containers?topic=containers-users#platform)：
-    * 对集群的**编辑者**或**管理员**平台角色
-    * 对 `kube-system` 名称空间的**写入者**或**管理者**服务角色
-
-2. 对于日志源所在的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。**注**：如果使用的是 Dedicated 帐户，那么必须登录到公共 {{site.data.keyword.cloud_notm}} 端点并将公共组织和空间设定为目标，才能启用日志转发。
-
-
-3. 通过以下两种方式之一来设置接受 syslog 协议的服务器：
-  * 设置和管理您自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。
-
-  * 从容器运行 syslog。例如，可以使用此[部署 .yaml 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) 来访存在集群中运行容器的 Docker 公共映像。该映像在公共集群 IP 地址上发布端口 `514`，并使用此公共集群 IP 地址来配置 syslog 主机。您将需要注入相关认证中心和服务器端证书，并更新 `syslog.conf` 以在服务器上启用 `tls`。
-
-4. 将认证中心证书保存为名为 `ca-cert` 的文件。名称必须与此完全相同。
-
-5. 在 `kube-system` 名称空间中为 `ca-cert` 文件创建私钥。创建日志记录配置时，将私钥名称用于 `--ca-cert` 标志。
-    ```
-    kubectl -n kube-system create secret generic --from-file=ca-cert
-    ```
-    {: pre}
-
-6. 创建日志转发配置。
-    ```
-    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
-    ```
-    {: pre}
-
-</br>
-</br>
-
+</br></br>
 
 ### 验证日志转发
 {: verify-logging}
@@ -366,13 +366,13 @@ subcollection: containers
 可以通过以下两种方式之一来验证配置是否正确设置：
 
 * 列出集群中的所有日志记录配置：
-      ```
+    ```
     ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 * 列出一种类型日志源的日志记录配置：
-      ```
+    ```
     ibmcloud ks logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
@@ -400,7 +400,7 @@ subcollection: containers
 可以停止集群的一个或全部日志记录配置的日志转发。
 {: shortdesc}
 
-1. 对于日志源所在的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+1. 对于日志源所在的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. 删除日志记录配置。
   <ul>
@@ -444,7 +444,7 @@ subcollection: containers
 <br />
 
 
-## 过滤日志
+## 过滤转发到 syslog 的日志
 {: #filter-logs}
 
 可以通过过滤掉某段时间内的特定日志来选择转发的日志。您可以使用标志来区分不同的过滤选项。
@@ -529,34 +529,31 @@ subcollection: containers
 
 
 
-## 为 Kubernetes API 审计日志配置日志转发
+## 将 Kubernetes API 审计日志转发到 {{site.data.keyword.cloudaccesstrailfull_notm}} 或 syslog
 {: #api_forward}
 
-Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件。可以将日志转发到 {{site.data.keyword.loganalysisshort_notm}} 或外部服务器。
+Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件。可以将日志转发到 {{site.data.keyword.cloudaccesstrailfull_notm}} 或外部服务器。
 {: shortdesc}
-
 
 有关 Kubernetes 审计日志的更多信息，请参阅 Kubernetes 文档中的<a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">审计主题 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。
 
 * 目前，缺省审计策略用于具有此日志记录配置的所有集群。
 * 目前不支持过滤器。
-* 每个集群只能有一个 `kube-audit` 配置，但可以通过创建日志记录配置和 Webhook，将日志转发到 {{site.data.keyword.loganalysisshort_notm}} 和外部服务器。
+* 每个集群只能有一个 `kube-audit` 配置，但可以通过创建日志记录配置和 Webhook，将日志转发到 {{site.data.keyword.cloudaccesstrailshort}} 和外部服务器。
 
 * 您必须具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](/docs/containers?topic=containers-users#platform)。
 
-
-### 将审计日志发送到 {{site.data.keyword.loganalysisshort_notm}}
+### 将审计日志转发到 {{site.data.keyword.cloudaccesstrailfull_notm}}
 {: #audit_enable_loganalysis}
 
-可以将 Kubernetes API 服务器审计日志转发到 {{site.data.keyword.loganalysisshort_notm}}。
+可以将 Kubernetes API 服务器审计日志转发到 {{site.data.keyword.cloudaccesstrailfull_notm}}。
 {: shortdesc}
 
 **开始之前**
 
-1. 验证许可权。如果在创建集群或日志记录配置时指定了空间，那么帐户所有者和 {{site.data.keyword.containerlong_notm}} 密钥所有者需要该空间的“管理者”、“开发者”或“审计员”许可权。
+1. 验证许可权。如果在创建集群时指定了空间，那么帐户所有者和 {{site.data.keyword.containerlong_notm}} 密钥所有者都需要该空间的“管理者”、“开发者”或“审计员”许可权。
 
-2. 对于要从中收集 API 服务器审计日志的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。**注**：如果使用的是 Dedicated 帐户，那么必须登录到公共 {{site.data.keyword.cloud_notm}} 端点并将公共组织和空间设定为目标，才能启用日志转发。
-
+2. 对于要从中收集 API 服务器审计日志的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **转发日志**
 
@@ -628,19 +625,14 @@ Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件�
 
 3. 可选：如果要停止转发审计日志，可以[删除配置](#log_sources_delete)。
 
-<br />
-
-
-
-### 将审计日志发送到外部服务器
+### 将审计日志转发到外部 syslog 服务器
 {: #audit_enable}
 
 **开始之前**
 
 1. 设置可以转发日志的远程日志记录服务器。例如，您可以[将 Logstash 用于 Kubernetes ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend) 以收集审计事件。
 
-2. 对于要从中收集 API 服务器审计日志的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。**注**：如果使用的是 Dedicated 帐户，那么必须登录到公共 {{site.data.keyword.cloud_notm}} 端点并将公共组织和空间设定为目标，才能启用日志转发。
-
+2. 对于要从中收集 API 服务器审计日志的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 转发 Kubernetes API 审计日志：
 
@@ -702,7 +694,7 @@ Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件�
     {: pre}
 
 4. 可选：如果要停止转发审计日志，可以禁用配置。
-    1. 对于要停止从中收集 API 服务器审计日志的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+    1. 对于要停止从中收集 API 服务器审计日志的集群：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
     2. 禁用集群 API 服务器的 Webhook 后端配置。
 
         ```
@@ -720,7 +712,7 @@ Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件�
 <br />
 
 
-## 收集主节点日志
+## 在 {{site.data.keyword.cos_full_notm}} 存储区中收集主节点日志
 {: #collect_master}
 
 通过 {{site.data.keyword.containerlong_notm}}，您可以获取任意时间点的主节点日志的快照，以在 {{site.data.keyword.cos_full_notm}} 存储区中进行收集。快照包含通过 API 服务器发送的任何内容，例如 pod 安排、部署或 RBAC 策略。
@@ -730,12 +722,12 @@ Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件�
 
 **开始之前**
 
-* 在 {{site.data.keyword.Bluemix_notm}}“目录”中[供应 {{site.data.keyword.cos_short}} 实例](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-for-developers#provision-an-instance-of-ibm-cloud-object-storage)。
+* 在 {{site.data.keyword.Bluemix_notm}}“目录”中[供应 {{site.data.keyword.cos_short}} 实例](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev)。
 * 确保您具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](/docs/containers?topic=containers-users#platform)。
 
 **创建快照**
 
-1. 通过遵循[此入门教程](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started-console-#create-buckets)以使用 {{site.data.keyword.Bluemix_notm}} 控制台来创建 Object Storage 存储区。
+1. 通过遵循[此入门教程](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets)以使用 {{site.data.keyword.Bluemix_notm}} 控制台来创建 Object Storage 存储区。
 
 2. 在已创建的存储区中生成 [HMAC 服务凭证](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials)。
   1. 在 {{site.data.keyword.cos_short}} 仪表板的**服务凭证**选项卡中，单击**新建凭证**。
@@ -804,35 +796,34 @@ Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件�
     <dd>Kubernetes 仪表板是一个管理 Web 界面，可以在其中查看工作程序节点的运行状况，查找 Kubernetes 资源，部署容器化应用程序，以及使用日志记录和监视信息对应用程序进行故障诊断。有关如何访问 Kubernetes 仪表板的更多信息，请参阅[启动 {{site.data.keyword.containerlong_notm}} 的 Kubernetes 仪表板](/docs/containers?topic=containers-app#cli_dashboard)。</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>标准集群的度量值位于创建 Kubernetes 集群时登录到的 {{site.data.keyword.Bluemix_notm}} 帐户中。如果在创建集群时指定了 {{site.data.keyword.Bluemix_notm}} 空间，那么度量值将位于该空间中。将为集群中部署的所有容器自动收集容器度量值。这些度量值会通过 Grafana 发送并使其可用。有关度量值的更多信息，请参阅[监视 {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov)。</p>
-    <p>要访问 Grafana 仪表板，请转至以下某个 URL，然后选择在其中已创建集群的 {{site.data.keyword.Bluemix_notm}} 帐户或空间。</p> <table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
+    <p>要访问 Grafana 仪表板，请转至以下某个 URL，然后选择在其中已创建集群的 {{site.data.keyword.Bluemix_notm}} 帐户或空间。</p>
+    <table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
   <caption>要为监视流量打开的 IP 地址</caption>
-        <thead>
-        <th>{{site.data.keyword.containerlong_notm}} 区域</th>
-        <th>监视地址</th>
-        <th>监视子网</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>欧洲中部</td>
-         <td><code>metrics.eu-de.bluemix.net</code></td>
-         <td><code>158.177.65.80/30</code></td>
-        </tr>
-        <tr>
-         <td>英国南部</td>
-         <td><code>metrics.eu-gb.bluemix.net</code></td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>美国东部、美国南部、亚太地区北部和亚太地区南部</td>
-          <td><code>metrics.ng.bluemix.net</code></td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
- </dd>
+            <thead>
+            <th>{{site.data.keyword.containerlong_notm}} 区域</th>
+            <th>监视地址</th>
+            <th>监视子网</th>
+            </thead>
+          <tbody>
+            <tr>
+             <td>欧洲中部</td>
+             <td><code>metrics.eu-de.bluemix.net</code></td>
+             <td><code>158.177.65.80/30</code></td>
+            </tr>
+            <tr>
+             <td>英国南部</td>
+             <td><code>metrics.eu-gb.bluemix.net</code></td>
+             <td><code>169.50.196.136/29</code></td>
+            </tr>
+            <tr>
+              <td>美国东部、美国南部、亚太地区北部和亚太地区南部</td>
+              <td><code>metrics.ng.bluemix.net</code></td>
+              <td><code>169.47.204.128/29</code></td>
+             </tr>
+            </tbody>
+          </table> </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>通过将 Sysdig 作为第三方服务部署到工作程序节点，以将度量值转发到 {{site.data.keyword.monitoringlong}}，从而从运营角度了解应用程序的性能和运行状况。有关更多信息，请参阅[分析在 Kubernetes 集群中部署的应用程序的度量值](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)。**注**：{{site.data.keyword.mon_full_notm}} 不支持 `containerd` 容器运行时。因此，将 {{site.data.keyword.mon_full_notm}} 用于 V1.11 或更高版本的集群时，不会收集所有容器度量值。</dd>
+  <dd>通过将 Sysdig 作为第三方服务部署到工作程序节点，以将度量值转发到 {{site.data.keyword.monitoringlong}}，从而从运营角度了解应用程序的性能和运行状况。有关更多信息，请参阅[分析在 Kubernetes 集群中部署的应用程序的度量值](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)。</dd>
 </dl>
 
 ### 其他运行状况监视工具
@@ -841,7 +832,7 @@ Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件�
 可以配置其他工具来执行更多监视功能。
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus 是一个开放式源代码监视、日志记录和警报工具，专为 Kubernetes 而设计。该工具基于 Kubernetes 日志记录信息来检索有关集群、工作程序节点和部署运行状况的详细信息。有关设置信息，请参阅[将服务与 {{site.data.keyword.containerlong_notm}} 集成](/docs/containers?topic=containers-integrations#integrations)。</dd>
+    <dd>Prometheus 是一个开放式源代码监视、日志记录和警报工具，专为 Kubernetes 而设计。该工具基于 Kubernetes 日志记录信息来检索有关集群、工作程序节点和部署运行状况的详细信息。有关更多信息，请参阅 [CoreOS 指示信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus)。</dd>
 </dl>
 
 <br />
@@ -861,21 +852,19 @@ Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件�
 - 确保您具有以下 [{{site.data.keyword.Bluemix_notm}} IAM 角色](/docs/containers?topic=containers-users#platform)：
     - 对集群的**管理员**平台角色
     - 对 `kube-system` 名称空间的**写入者**或**管理者**服务角色
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 要配置自动恢复，请执行以下操作：
 
-1.  [遵循指示信息](/docs/containers?topic=containers-integrations#helm)在本地计算机上安装 Helm 客户机，使用服务帐户安装 Helm 服务器 (Tiller)，然后添加 {{site.data.keyword.Bluemix_notm}} Helm 存储库。
+1.  [遵循指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，使用服务帐户安装 Helm 服务器 (Tiller)，然后添加 {{site.data.keyword.Bluemix_notm}} Helm 存储库。
 
 2.  验证 Tiller 是否已使用服务帐户进行安装。
-
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
     {: pre}
 
     输出示例：
-
     ```
     NAME                                 SECRETS   AGE
     tiller                               1         2m
@@ -953,12 +942,13 @@ Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件�
    <tr>
    <td><code>checkpod.json</code></td>
    <td>
-定义 Kubernetes API pod 检查，用于根据分配给工作程序节点的 pod 总数来检查该工作程序节点上 <code>NotReady</code> pod 的总百分比。如果特定工作程序节点的 <code>NotReady</code> pod 的总百分比大于定义的 <code>PodFailureThresholdPercent</code>，那么对该工作程序节点的检查计为一次失败。示例 YAML 中的检查每 3 分钟运行一次。如果连续失败三次，将重新装入该工作程序节点。此操作相当于运行 <code>ibmcloud ks worker-reload</code>。例如，缺省 <code>PodFailureThresholdPercent</code>为 50%。如果 <code>NotReady</code> pod 的百分比连续三次超过 50%，那么将重新装入工作程序节点。<br></br>缺省情况下，将检查所有名称空间中的 pod。要将检查限制为仅检查指定名称空间中的 pod，请将 <code>Namespace</code> 字段添加到检查。pod 检查会一直处于启用状态，直到您将 <b>Enabled</b> 字段设置为 <code>false</code> 或除去检查。</td>
+定义 Kubernetes API pod 检查，用于根据分配给工作程序节点的 pod 总数来检查该工作程序节点上 <code>NotReady</code> pod 的总百分比。如果特定工作程序节点的 <code>NotReady</code> pod 的总百分比大于定义的 <code>PodFailureThresholdPercent</code>，那么对该工作程序节点的检查计为一次失败。示例 YAML 中的检查每 3 分钟运行一次。如果连续失败三次，将重新装入该工作程序节点。此操作相当于运行 <code>ibmcloud ks worker-reload</code>。例如，缺省 <code>PodFailureThresholdPercent</code>为 50%。如果 <code>NotReady</code> pod 的百分比连续三次超过 50%，那么将重新装入工作程序节点。<br></br>缺省情况下，将检查所有名称空间中的 pod。要将检查限制为仅检查指定名称空间中的 pod，请将 <code>Namespace</code> 字段添加到检查。pod 检查会一直处于启用状态，直到您将 <b>Enabled</b> 字段设置为 <code>false</code> 或除去检查。
+   </td>
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
    <td>定义 HTTP 检查，用于检查在工作程序节点上运行的 HTTP 服务器是否运行正常。要使用此检查，必须使用 [DaemonSet ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 在集群中的每个工作程序节点上部署 HTTP 服务器。必须实现在 <code>/myhealth</code> 路径中可用并且可以验证 HTTP 服务器是否运行正常的运行状况检查。您可以通过更改 <strong>Route</strong> 参数来定义其他路径。如果 HTTP 服务器运行正常，那么必须返回 <strong><code>ExpectedStatus</code></strong> 中定义的 HTTP 响应代码。必须将 HTTP 服务器配置为侦听工作程序节点的专用 IP 地址。可以通过运行 <code>kubectl get nodes</code> 来查找专用 IP 地址。<br></br>
-   例如，假设集群中有两个节点，其专用 IP 地址分别为 10.10.10.1 和 10.10.10.2。在此示例中，会对下面两个路径检查是否返回 200 HTTP 响应：<code>http://10.10.10.1:80/myhealth</code> 和 <code>http://10.10.10.2:80/myhealth</code>。
+      例如，假设集群中有两个节点，其专用 IP 地址分别为 10.10.10.1 和 10.10.10.2。在此示例中，会对下面两个路径检查是否返回 200 HTTP 响应：<code>http://10.10.10.1:80/myhealth</code> 和 <code>http://10.10.10.2:80/myhealth</code>。
    示例 YAML 中的检查每 3 分钟运行一次。如果连续失败三次，将重新引导该工作程序节点。此操作相当于运行 <code>ibmcloud ks worker-reboot</code>。<br></br>HTTP 检查会一直处于禁用状态，直到您将 <b>Enabled</b> 字段设置为 <code>true</code>。</td>
    </tr>
    </tbody>
@@ -1026,36 +1016,35 @@ Kubernetes 会自动审计通过 Kubernetes API 服务器传递的任何事件�
    </table>
 
 4. 在集群中创建配置映射。
-
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
 5. 使用相应检查来验证是否已在 `kube-system` 名称空间中创建名称为 `ibm-worker-recovery-checks` 的配置映射。
-
     ```
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
 6. 通过安装 `ibm-worker-recovery` Helm 图表，将自动恢复部署到集群中。
-
     ```
-helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
+    helm install --name ibm-worker-recovery iks-charts/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
 7. 过几分钟后，可以检查以下命令的输出中的 `Events` 部分，以查看自动恢复部署上的活动。
-
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
 8. 如果未看到自动恢复部署上有活动，可以通过运行自动恢复图表定义中包含的测试来检查 Helm 部署。
-
     ```
 helm test ibm-worker-recovery
     ```
     {: pre}
+
+
+
+

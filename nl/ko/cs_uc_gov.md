@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ subcollection: containers
 주요 기술:    
 * [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.cos_full_notm}}를 사용하여 공공 데이터에 대한 액세스 제공](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)
+* [{{site.data.keyword.cos_full_notm}}를 사용하여 공공 데이터에 대한 액세스 제공](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
 * [IBM Cloud 분석 서비스 즉시 사용](https://www.ibm.com/cloud/analytics)
 
 **컨텍스트: 지역 정부가 공공-민간 데이터를 결합하는 지역 공동체 개발자와의 협업 과정 및 속도를 개선함**

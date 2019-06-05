@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -46,7 +46,7 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 サポートされない Kubernetes バージョンがクラスターで実行されている場合は、更新を強制する必要がある場合があります。 したがって、動作への影響を避けるために、クラスターを最新の状態に保ってください。
 
 **ワーカー・ノードをマスターよりも新しいバージョンにすることはできますか?**</br>
-ワーカー・ノードは、マスターより新しい `major.minor` Kubernetes バージョンを実行することはできません。まずは、[マスターを更新](#update_master)して最新の Kubernetes バージョンにしてください。 その後に、クラスター内の[ワーカー・ノードを更新](#worker_node)してください。
+ワーカー・ノードは、マスターより新しい `major.minor` Kubernetes バージョンを実行することはできません。 まずは、[マスターを更新](#update_master)して最新の Kubernetes バージョンにしてください。 その後に、クラスター内の[ワーカー・ノードを更新](#worker_node)してください。
 
 ワーカー・ノードは、セキュリティー更新プログラム用のワーカー・ノードに固有のパッチ・バージョンなど、マスターより新しいパッチ・バージョンを実行できます。
 
@@ -142,7 +142,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012
@@ -284,7 +284,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 コンソールからワーカー・ノードを更新するには、以下のようにします。
 1.  [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/)のメニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン")で、**「Kubernetes」**をクリックします。
 2.  **「クラスター」**ページから、クラスターを選択します。
-3.  **「ワーカー・ノード」**タブから、更新する各ワーカー・ノードのチェック・ボックスを選択します。アクション・バーがテーブル・ヘッダー行の上に表示されます。
+3.  **「ワーカー・ノード」**タブから、更新する各ワーカー・ノードのチェック・ボックスを選択します。 アクション・バーがテーブル・ヘッダー行の上に表示されます。
 4.  アクション・バーで**「Kubernetes の更新」**をクリックします。
 
 <br />
@@ -294,7 +294,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 ## マシン・タイプの更新
 {: #machine_type}
 
-ワーカー・ノードのマシン・タイプを更新するには、新しいワーカー・ノードを追加し、古いワーカー・ノードを削除します。 例えば、名前に `u1c` または `b1c` を含む非推奨のマシン・タイプに仮想ワーカー・ノードがある場合は、名前に `u2c` または `b2c` を含むマシン・タイプを使用するワーカー・ノードを作成してください。
+ワーカー・ノードのマシン・タイプを更新するには、新しいワーカー・ノードを追加し、古いワーカー・ノードを削除します。 例えば、クラスターに非推奨の `x1c` や古い Ubuntu 16 `x2c` といったワーカー・ノード・フレーバーがある場合、名前に `x3c` を含むマシン・タイプを使用する Ubuntu 18 ワーカー・ノードを作成します。
 {: shortdesc}
 
 開始前に、以下のことを行います。
@@ -413,7 +413,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 
 **クラスターと別に更新できるデフォルトのアドオンは何ですか?**</br>
 必要に応じて、以下のアドオンの自動更新を無効にできます。
-* [ロギング用の Fluentd](#logging)
+* [ロギング用の Fluentd](#logging-up)
 * [Ingress アプリケーション・ロード・バランサー](#alb)
 
 **クラスターと別には更新できないアドオンはありますか?**</br>
@@ -440,10 +440,10 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **デフォルト以外のアドオンをインストールできますか?**</br>
-はい。 {{site.data.keyword.containerlong_notm}} には、クラスターに機能を追加するために選択できるアドオンが他にもあります。 例えば、[Helm チャートを使用](/docs/containers?topic=containers-integrations#helm)して [Block Storage プラグイン](/docs/containers?topic=containers-block_storage#install_block)、[Istio](/docs/containers?topic=containers-istio)、[strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup) をインストールできます。 以下の手順に従って Helm チャートを更新し、各アドオンを個々に更新する必要があります。
+はい。 {{site.data.keyword.containerlong_notm}} には、クラスターに機能を追加するために選択できるアドオンが他にもあります。 例えば、[Helm チャートを使用](/docs/containers?topic=containers-helm#public_helm_install)して [Block Storage プラグイン](/docs/containers?topic=containers-block_storage#install_block)、[Istio](/docs/containers?topic=containers-istio)、[strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup) をインストールできます。 以下の手順に従って Helm チャートを更新し、各アドオンを個々に更新する必要があります。
 
 ### ロギング用 Fluentd アドオンの自動更新の管理
-{: #logging}
+{: #logging-up}
 
 ロギングやフィルター構成に変更を加えるには、Fluentd アドオンが最新バージョンでなければなりません。 デフォルトでは、このアドオンに対する自動更新が有効になっています。
 {: shortdesc}
@@ -608,7 +608,7 @@ Ingress ALB アドオンの自動更新は、以下の方法で管理できま�
       ```
       {: pre}
 
-   2. **1 つのゾーンを複数のワーカー・プールに追加する場合**: 複数のワーカー・プールを `ibmcloud ks zone-add` コマンドに追加します。 複数のワーカー・プールを 1 つのゾーンに追加するには、そのゾーン内に既存のプライベート VLAN とパブリック VLAN がなければなりません。 そのゾーン内にパブリック VLAN もプライベート VLAN もない場合は、まず 1 つのワーカー・プールにそのゾーンを追加して、パブリック VLAN とプライベート VLAN が作成されるようにしてください。 そうすると、そのゾーンを他のワーカー・プールに追加できます。 </br></br>ゾーン間でクラスターのバランスが取れるように、すべてのワーカー・プールのワーカー・ノードをすべてのゾーンにプロビジョンすることが重要です。 ワーカー・プールごとに別の VLAN を使用する場合は、ワーカー・プールで使用する VLAN を指定してこのコマンドを繰り返します。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+   2. **1 つのゾーンを複数のワーカー・プールに追加する場合**: 複数のワーカー・プールを `ibmcloud ks zone-add` コマンドに追加します。 複数のワーカー・プールを 1 つのゾーンに追加するには、そのゾーン内に既存のプライベート VLAN とパブリック VLAN がなければなりません。 そのゾーン内にパブリック VLAN もプライベート VLAN もない場合は、まず 1 つのワーカー・プールにそのゾーンを追加して、パブリック VLAN とプライベート VLAN が作成されるようにしてください。 そうすると、そのゾーンを他のワーカー・プールに追加できます。 </br></br>ゾーン間でクラスターのバランスが取れるように、すべてのワーカー・プールのワーカー・ノードをすべてのゾーンにプロビジョンすることが重要です。 ワーカー・プールごとに別の VLAN を使用する場合は、ワーカー・プールで使用する VLAN を指定してこのコマンドを繰り返します。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```

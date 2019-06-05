@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2019-03-21"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # 使用受管理 Istio 附加程式（測試版）
@@ -52,17 +53,21 @@ Istio 服務網由資料平面及控制平面組成。資料平面由每個應�
 Istio on {{site.data.keyword.containerlong_notm}} 是以受管理附加程式形式提供，可直接整合 Istio 與 Kubernetes 叢集。
 {: shortdesc}
 
+受管理的 Istio 附加程式分類為測試版，而且可能不穩定或經常變更。測試版特性也可能未提供正式發行特性所提供的相同層次效能或相容性，且其目的不是要用於正式作業環境。
+{: note}
+
 **這在我的叢集中看起來像什麼？**</br>
 當您安裝 Istio 附加程式時，Istio 控制項及資料平面會使用您叢集已連接的 VLAN。配置資料流量會流經叢集內的專用網路，且不需要您在防火牆中開啟任何其他埠或 IP 位址。如果您使用 Istio Gateway 公開 Istio 受管理應用程式，則對應用程式提出的外部資料流量要求會流經公用 VLAN。
 
 **更新處理程序如何運作？**</br>
-受管理附加程式中的 Istio 版本是透過 {{site.data.keyword.Bluemix_notm}} 進行測試，並核准用於 {{site.data.keyword.containerlong_notm}}。此外，Istio 附加程式還會簡化 Istio 控制平面的維護，讓您可以著重於如何管理微服務。{{site.data.keyword.Bluemix_notm}} 會自動推出 {{site.data.keyword.containerlong_notm}} 所支援之最新 Istio 版本的更新項目，以保持所有 Istio 元件都是最新狀態。  
+受管理附加程式中的 Istio 版本是透過 {{site.data.keyword.Bluemix_notm}} 進行測試，並核准用於 {{site.data.keyword.containerlong_notm}}。若要將 Istio 元件更新為 {{site.data.keyword.containerlong_notm}} 所支援 Istio 的最新版本，您可以遵循[更新受管理附加程式](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)中的步驟。  
 
 如果您需要使用最新 Istio 版本或自訂 Istio 安裝，則可以遵循 [{{site.data.keyword.Bluemix_notm}} 快速入門指導教學 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/) 中的步驟，來安裝 Istio 的開放程式碼版本。
 {: tip}
 
-**有任何限制嗎？** </br>
-如果您已在叢集中安裝[容器映像檔安全強制執行程式許可控制器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)，則無法在叢集中啟用受管理 Istio 附加程式。
+**有任何限制嗎？** </br> 在下列情況下，您不能在叢集中啟用受管理 Istio 附加程式：
+* 您的叢集只連接至專用 VLAN。
+* 您已在叢集中安裝[容器映像檔安全強制執行程式許可控制器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)。
 
 <br />
 
@@ -75,7 +80,7 @@ Istio on {{site.data.keyword.containerlong_notm}} 是以受管理附加程式形
 
 <dl>
 <dt>Istio (`istio`)</dt>
-<dd>安裝 Istio 的核心元件，包括 Prometheus。如需下列任何控制平面元件的相關資訊，請參閱 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/concepts/what-is-istio)。
+<dd>安裝 Istio 的核心元件，包括 Prometheus。如需下列任何控制平面元件的相關資訊，請參閱 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/concepts/what-is-istio/)。
   <ul><li>`Envoy` 會對服務網中所有服務的入埠和出埠資料流量進行 Proxy 處理。在與應用程式容器相同的 Pod 中，會將 Envoy 部署為 Sidecar 容器。</li>
   <li>`Mixer` 提供遙測收集和原則控制。<ul>
     <li>使用 Prometheus 端點來啟用遙測 Pod，此端點會聚集應用程式 Pod 中來自 Envoy Proxy Sidecar 和服務的所有遙測資料。</li>
@@ -111,9 +116,10 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 {: shortdesc}
 
 **開始之前**</br>
-* 確定您具有 {{site.data.keyword.containerlong_notm}} 的 [**Writer** 或 **Manager** {{site.data.keyword.Bluemix_notm}}IAM 服務角色](/docs/containers?topic=containers-users#platform)。
-* [將 CLI 的目標設為現有 1.10 或更新版本的叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-* 如果您先前使用 IBM Helm 圖表或透過另一種方法在叢集中安裝 Istio，請[清除該 Istio 安裝](#istio_uninstall_other)。
+* 請確定您具有 {{site.data.keyword.containerlong_notm}} 的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* [建立或使用具有至少 3 個工作者節點的現有叢集，每個工作者節點具有 4 個核心和 16 GB 記憶體 (`b3c.4x16`) 或更多](/docs/containers?topic=containers-clusters#clusters_cli)。每個工作者節點都必須執行 Kubernetes 1.11 版或更新版本。
+* [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* 如果使用現有的叢集，而您先前使用 IBM Helm 圖表或透過另一種方法在叢集中安裝 Istio，請[清除該 Istio 安裝](#istio_uninstall_other)。
 
 ### 在 CLI 中安裝受管理 Istio 附加程式
 {: #istio_install_cli}
@@ -145,9 +151,9 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   輸出範例：
   ```
   Name                      Version
-  istio                     1.0.5
-  istio-extras              1.0.5
-  istio-sample-bookinfo     1.0.5
+  istio                     1.1.2
+  istio-extras              1.1.2
+  istio-sample-bookinfo     1.1.2
   ```
   {: screen}
 
@@ -236,7 +242,7 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 ### 在使用者介面中安裝受管理 Istio 附加程式
 {: #istio_install_ui}
 
-1. 在[叢集儀表板 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/clusters) 中，按一下 1.10 版或更新版本叢集的名稱。
+1. 在[叢集儀表板 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/clusters) 中，按一下叢集的名稱。
 
 2. 按一下**附加程式**標籤。
 
@@ -283,7 +289,7 @@ BookInfo 附加程式 (`istio-sample-bookinfo`) 會將 [Istio 的 BookInfo 範�
         {: pre}
 
       3. 設定 Ingress 埠。
-            ```
+        ```
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
             ```
         {: pre}
@@ -321,13 +327,13 @@ BookInfo 附加程式 (`istio-sample-bookinfo`) 會將 [Istio 的 BookInfo 範�
 
 3.  在瀏覽器中檢視 BookInfo 網頁。
 
-    若為 Mac OS 或 Linux：
+    Mac OS 或 Linux：
     ```
     open http://$GATEWAY_URL/productpage
     ```
     {: pre}
 
-    若為 Windows：
+    Windows：
     ```
     start http://$GATEWAY_URL/productpage
     ```
@@ -343,17 +349,17 @@ BookInfo 範例示範三種 Istio 的資料流量管理元件如何一起運作�
 
 <dl>
 <dt>`Gateway`</dt>
-<dd>`bookinfo-gateway` [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) 說明負載平衡器（`istio-system` 名稱空間中的 `istio-ingressgateway` 服務），用來作為 BookInfo HTTP/TCP 資料流量的 Ingress 進入點。Istio 會配置負載平衡器，以在閘道配置檔中定義的埠上接聽 Istio 受管理應用程式的送入要求。
+<dd>`bookinfo-gateway` [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 說明負載平衡器（`istio-system` 名稱空間中的 `istio-ingressgateway` 服務），用來作為 BookInfo HTTP/TCP 資料流量的 Ingress 進入點。Istio 會配置負載平衡器，以在閘道配置檔中定義的埠上接聽 Istio 受管理應用程式的送入要求。
 </br></br>若要查看 BookInfo 閘道的配置檔，請執行下列指令。
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
 <dt>`VirtualService`</dt>
-<dd>`bookinfo` [`VirtualService` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService) 藉由將微服務定義為 `destinations`，來定義控制如何在服務網內遞送要求的規則。在 `bookinfo` 虛擬服務中，會透過埠 `9080` 將要求的 `/productpage` URI 遞送至 `productpage` 主機。因此，所有對 BookInfo 應用程式的要求都會先遞送至 `productpage` 微服務，此微服務接著會呼叫其他 BookInfo 微服務。
+<dd>`bookinfo` [`VirtualService` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) 藉由將微服務定義為 `destinations`，來定義控制如何在服務網內遞送要求的規則。在 `bookinfo` 虛擬服務中，會透過埠 `9080` 將要求的 `/productpage` URI 遞送至 `productpage` 主機。因此，所有對 BookInfo 應用程式的要求都會先遞送至 `productpage` 微服務，此微服務接著會呼叫其他 BookInfo 微服務。
 </br></br>若要查看套用至 BookInfo 的虛擬服務規則，請執行下列指令。
 <pre class="pre"><code>kubectl get virtualservice bookinfo -o yaml</code></pre></dd>
 
 <dt>`DestinationRule`</dt>
-<dd>閘道根據虛擬服務規則來遞送要求之後，`details`、`productpage`、`ratings` 及 `reviews` [`DestinationRule` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule) 會定義在要求到達微服務時所套用的原則。例如，當您重新整理 BookInfo 產品頁面時，所看到的變更是隨機呼叫不同 `reviews` 微服務版本（`v1`、`v2` 及 `v3`）的 `productpage` 微服務結果。隨機選取版本，因為 `reviews` 目的地規則會針對微服務的 `subsets` 或具名版本提供相同的加權。將資料流量遞送至特定版本的服務時，虛擬服務規則即會使用這些子集。
+<dd>閘道根據虛擬服務規則來遞送要求之後，`details`、`productpage`、`ratings` 及 `reviews` [`DestinationRule` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/) 會定義在要求到達微服務時所套用的原則。例如，當您重新整理 BookInfo 產品頁面時，所看到的變更是隨機呼叫不同 `reviews` 微服務版本（`v1`、`v2` 及 `v3`）的 `productpage` 微服務結果。隨機選取版本，因為 `reviews` 目的地規則會針對微服務的 `subsets` 或具名版本提供相同的加權。將資料流量遞送至特定版本的服務時，虛擬服務規則即會使用這些子集。
 </br></br>若要查看套用至 BookInfo 的目的地規則，請執行下列指令。
 <pre class="pre"><code>kubectl describe destinationrules</code></pre></dd>
 </dl>
@@ -365,7 +371,7 @@ BookInfo 範例示範三種 Istio 的資料流量管理元件如何一起運作�
 <br />
 
 
-## 記載、監視、追蹤及視覺化 Istio on {{site.data.keyword.containerlong_notm}}
+## 記載、監視、追蹤及視覺化 Istio
 {: #istio_health}
 
 若要記載、監視、追蹤及視覺化 Istio on {{site.data.keyword.containerlong_notm}} 所管理的應用程式，您可以啟動 `istio-extras` 附加程式中所安裝的 Grafana、Jaeger 及 Kiali 儀表板，或將 LogDNA 及 Sysdig 以協力廠商服務形式部署至工作者節點。
@@ -389,15 +395,21 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 2. 若要開啟 Istio Grafana 儀表板，請移至下列 URL：http://localhost:3000/dashboard/db/istio-mesh-dashboard。如果您已安裝 [BookInfo 附加程式](#istio_bookinfo)，則 Istio 儀表板會顯示您在重新整理產品頁面數次後所產生的資料流量度量值。如需使用 Istio Grafana 儀表板的相關資訊，請參閱 Istio 開放程式碼文件中的[檢視 Istio 儀表板 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/)。
 
 **Jaeger**</br>
-1. 啟動 Jaeger 儀表板的 Kubernetes 埠轉遞。
+1. 依預設，Istio 會產生每 100 個要求中其中一個要求的追蹤跨距（取樣率為 1%）。在第一個追蹤可見之前，您必須至少傳送 100 個要求。若要將 100 個要求傳送至 [BookInfo 附加程式](#istio_bookinfo)的 `productpage` 服務，請執行下列指令。
+  ```
+  for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
+  ```
+  {: pre}
+
+2. 啟動 Jaeger 儀表板的 Kubernetes 埠轉遞。
   ```
   kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=jaeger -o jsonpath='{.items[0].metadata.name}') 16686:16686 &
   ```
   {: pre}
 
-2. 若要開啟 Jaeger 使用者介面，請移至下列 URL：http://localhost:16686。
+3. 若要開啟 Jaeger 使用者介面，請移至下列 URL：http://localhost:16686。
 
-3. 如果您已安裝 [BookInfo 附加程式](#istio_bookinfo)，則可以從**服務**清單中選取 `productpage`，然後按一下**尋找追蹤**。即會顯示您在重新整理產品頁面數次後所產生的資料流量追蹤資料。如需搭配使用 Jaeger 與 Istio 的相關資訊，請參閱 Istio 開放程式碼文件中的[使用 BookInfo 範例產生追蹤資料 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample)。
+4. 如果您已安裝 BookInfo 附加程式，則可以從**服務**清單中選取 `productpage`，然後按一下**尋找追蹤**。即會顯示您在重新整理產品頁面數次後所產生的資料流量追蹤資料。如需搭配使用 Jaeger 與 Istio 的相關資訊，請參閱 Istio 開放程式碼文件中的[使用 BookInfo 範例產生追蹤資料 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample)。
 
 **Kiali**</br>
 1. 啟動 Kiali 儀表板的 Kubernetes 埠轉遞。
@@ -406,9 +418,9 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
   ```
   {: pre}
 
-2. 若要開啟 Kiali 使用者介面，請移至下列 URL：http://localhost:20001。
+2. 若要開啟 Kiali 使用者介面，請移至下列 URL：http://localhost:20001/kiali/console。
 
-3. 針對使用者名稱和通行詞組，輸入 `admin`。如需使用 Kiali 視覺化 Istio 受管理微服務的相關資訊，請參閱 Istio 開放程式碼文件中的[產生服務圖形 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/tasks/telemetry/kiali/#generating-a-service-graph)。
+3. 針對使用者名稱和通行詞組，輸入 `admin`。如需使用 Kiali 視覺化 Istio 受管理微服務的相關資訊，請參閱 Istio 開放程式碼文件中的[產生服務圖形 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph)。
 
 ### 使用 {{site.data.keyword.la_full_notm}} 設定記載
 {: #istio_health_logdna}
@@ -416,7 +428,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 將 LogDNA 部署至工作者節點以將日誌轉遞給 {{site.data.keyword.loganalysislong}}，來無縫管理每個 Pod 中應用程式容器和 Envoy Proxy Sidecar 容器的日誌。
 {: shortdesc}
 
-若要使用 [{{site.data.keyword.la_full}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about)，您可以將記載代理程式部署至叢集中的每個工作者節點。此代理程式會從所有名稱空間（包括 `kube-system`）收集副檔名為 `*.log` 的日誌，以及 Pod 的 `/var/log` 目錄中所儲存的無副檔名檔案。這些日誌包括來自每個 Pod 中應用程式容器和 Envoy Proxy Sidecar 容器的日誌。代理程式接著會將日誌轉遞至 {{site.data.keyword.la_full_notm}} 服務。
+若要使用 [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about)，您可以將記載代理程式部署至叢集中的每個工作者節點。此代理程式會從所有名稱空間（包括 `kube-system`）收集副檔名為 `*.log` 的日誌，以及 Pod 的 `/var/log` 目錄中所儲存的無副檔名檔案。這些日誌包括來自每個 Pod 中應用程式容器和 Envoy Proxy Sidecar 容器的日誌。代理程式接著會將日誌轉遞至 {{site.data.keyword.la_full_notm}} 服務。
 
 若要開始，請遵循[使用 {{site.data.keyword.la_full_notm}} 管理 Kubernetes 叢集日誌](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube)中的步驟，來設定叢集的 LogDNA。
 
@@ -457,7 +469,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 ### 啟用自動 Sidecar 注入
 {: #istio_sidecar_automatic}
 
-啟用自動 Sidecar 注入時，名稱空間會接聽任何新的部署，並自動修改部署 YAML 以新增 Sidecar。當您打算將要與 Istio 整合的多個應用程式部署至名稱空間時，請針對該名稱空間啟用自動 Sidecar 注入。請注意，依預設，不會針對 Istio 受管理附加程式中的任何名稱空間啟用自動 Sidecar 注入。
+啟用自動 Sidecar 注入時，名稱空間會接聽任何新的部署，並自動修改 Pod 範本規格，以使用 Envoy Proxy Sidecar 容器來建立應用程式 Pod。當您打算將要與 Istio 整合的多個應用程式部署至名稱空間時，請針對該名稱空間啟用自動 Sidecar 注入。請注意，依預設，不會針對 Istio 受管理附加程式中的任何名稱空間啟用自動 Sidecar 注入。
 
 若要啟用名稱空間的自動 Sidecar 注入，請執行下列動作：
 
@@ -534,12 +546,12 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 
 1. 下載 `istioctl` 用戶端。
   ```
-       curl -L https://git.io/getLatestIstio | sh -
-       ```
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.2 sh -
+  ```
 
 2. 導覽至 Istio 套件目錄。
   ```
-  cd istio-1.0.6
+  cd istio-1.1.2
   ```
   {: pre}
 
@@ -598,114 +610,75 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 <br />
 
 
-## 使用 IBM 提供的 Ingress 子網域來公開 Istio 受管理應用程式
+## 使用 IBM 提供的主機名稱來公開 Istio 受管理應用程式
 {: #istio_expose}
 
-[設定 Envoy Proxy Sidecar 注入](#istio_sidecar)並將應用程式部署至 Istio 服務網之後，您可以使用 IBM 提供的 Ingress 子網域，將 Istio 受管理應用程式公開到公用要求。
+[設定 Envoy Proxy Sidecar 注入](#istio_sidecar)並將應用程式部署至 Istio 服務網之後，您可以使用 IBM 提供的主機名稱將 Istio 受管理應用程式公開至公用要求。
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}} ALB 使用 Kubernetes Ingress 資源來控制資料流量如何遞送至應用程式。不過，Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) 及 [VirtualService ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService) 來控制資料流量如何遞送至應用程式。閘道會配置負載平衡器，以用來作為 Istio 受管理應用程式的進入點。虛擬服務會定義遞送規則，以將資料流量適當地轉遞至應用程式微服務。
+Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 及 [VirtualService ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) 來控制資料流量如何遞送至應用程式。閘道會配置負載平衡器 `istio-ingressgateway`，以用來作為 Istio 受管理應用程式的進入點。在標準叢集中，您可以使用 DNS 項目和主機名稱登錄 `istio-ingressgateway` 負載平衡器的外部 IP 位址，以公開 Istio 受管理應用程式。
 
-在標準叢集中，會自動將 IBM 提供的 Ingress 子網域指派給叢集，讓您可以公然地公開應用程式。您可以運用此子網域的 DNS 項目，將預設 {{site.data.keyword.containerlong_notm}} ALB 連接至 Istio Ingress 閘道，以公開 Istio 受管理應用程式。
+您可以先試用[公開 BookInfo 的範例](#istio_expose_bookinfo)，或[公然地公開自己的 Istio 受管理應用程式](#istio_expose_link)。
 
-您可以先試用[使用 IBM 提供的 Ingress 子網域來公開 BookInfo 的範例](#istio_expose_bookinfo)，或[藉由連接 Istio 閘道和 Ingress ALB 公然地公開自己的 Istio 受管理應用程式](#istio_expose_link)。
-
-### 範例：使用 IBM 提供的 Ingress 子網域來公開 BookInfo
+### 範例：使用 IBM 提供的主機名稱來公開 BookInfo
 {: #istio_expose_bookinfo}
 
-在叢集中啟用 [BookInfo 附加程式](#istio_bookinfo)時，會為您建立 Istio 閘道 `bookinfo-gateway`。該閘道使用 Istio 虛擬服務及目的地規則來配置公然地公開 BookInfo 應用程式的負載平衡器 `istio-ingressgateway`。在下列步驟中，您會建立 Kubernetes Ingress 資源，以將 {{site.data.keyword.containerlong_notm}} Ingress ALB 的送入要求轉遞至 `istio-ingressgateway` 負載平衡器。
+在叢集中啟用 BookInfo 附加程式時，會為您建立 Istio 閘道 `bookinfo-gateway`。該閘道使用 Istio 虛擬服務及目的地規則來配置公然地公開 BookInfo 應用程式的負載平衡器 `istio-ingressgateway`。在下列步驟中，您會建立可用來公然地存取 BookInfo 之 `istio-ingressgateway` 負載平衡器 IP 位址的主機名稱。
 {: shortdesc}
 
-開始之前，請在叢集中[啟用 `istio` 及 `istio-sample-bookinfo` 受管理附加程式](#istio_install)。
+開始之前，請在叢集中[啟用 `istio-sample-bookinfo` 受管理附加程式](#istio_install)。
 
-1. 針對叢集取得 IBM 提供的 Ingress 子網域。如果您要使用 TLS，也請記下輸出中 IBM 提供的 Ingress TLS 密碼。
+1. 取得 `istio-ingressgateway` 負載平衡器的 **EXTERNAL-IP** 位址。
   ```
-  ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
+    kubectl get svc -n istio-system
+    ```
+  {: pre}
+
+  在下列輸出範例中，**EXTERNAL-IP** 是 `168.1.1.1`。
+  ```
+  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
+  ...
+  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
+                                                                            8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+  ```
+  {: screen}
+
+2. 建立 DNS 主機名稱來登錄 IP。
+  ```
+  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
+  ```
+  {: pre}
+
+3. 驗證已建立主機名稱。
+  ```
+  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: pre}
 
   輸出範例：
   ```
-  Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
-  Ingress Secret:         mycluster-12345
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
   ```
   {: screen}
 
-2. 建立 Ingress 資源。{{site.data.keyword.containerlong_notm}} ALB 會使用此資源中定義的規則，將資料流量轉遞至公開 Istio 受管理應用程式的 Istio 負載平衡器。
+4. 在 Web 瀏覽器中，開啟 BookInfo 產品頁面。
   ```
-  apiVersion: extensions/v1beta1
-  kind: Ingress
-  metadata:
-    name: myingressresource
-    namespace: istio-system
-  spec:
-    tls:
-    - hosts:
-      - bookinfo.<IBM-ingress-domain>
-      secretName: <tls_secret_name>
-    rules:
-    - host: bookinfo.<IBM-ingress-domain>
-      http:
-        paths:
-        - path: /
-          backend:
-            serviceName: istio-ingressgateway
-            servicePort: 80
+  https://<host_name>/productpage
   ```
   {: codeblock}
 
-  <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>tls.hosts</code></td>
-  <td>若要使用 TLS，請將 <em>&lt;IBM-ingress-domain&gt;</em> 取代為 IBM 提供的 Ingress 子網域。請注意，`bookinfo` 會附加到 IBM 提供的 Ingress 子網域的前面。依預設，會針對叢集登錄 IBM 提供的 Ingress 子網域萬用字元 <code>*.&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>。</td>
-  </tr>
-  <tr>
-  <td><code>tls.secretName</code></td>
-  <td>將 <em>&lt;tls_secret_name&gt;</em> 取代為 IBM 提供的 Ingress 密碼名稱。IBM 提供的 TLS 憑證是萬用字元憑證，可用於萬用字元子網域。<td>
-  </tr>
-  <tr>
-  <td><code>host</code></td>
-  <td>將 <em>&lt;IBM-ingress-domain&gt;</em> 取代為 IBM 提供的 Ingress 子網域。請注意，`bookinfo` 會附加到 IBM 提供的 Ingress 子網域的前面。</td>
-  </tr>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>請注意，服務名稱是 <code>istio-ingressgateway</code>，因此 ALB 會將來自此子網域的要求轉遞至 Istio 負載平衡器服務。</td>
-  </tr>
-  </tbody></table>
+5. 嘗試多次重新整理頁面。對 `http://<host_name>/productpage` 提出的要求會由 ALB 接收，並且轉遞至 Istio 閘道負載平衡器。仍然會隨機傳回不同的 `reviews` 微服務版本，因為 Istio 閘道會管理微服務的虛擬服務及目的地遞送規則。
 
-3. 建立 Ingress 資源。
-  ```
-  kubectl apply -f myingressresource.yaml -n istio-system
-  ```
-  {: pre}
+如需 BookInfo 應用程式的閘道、虛擬服務規則及目的地規則的相關資訊，請參閱[瞭解發生什麼情況](#istio_bookinfo_understanding)。如需在 {{site.data.keyword.containerlong_notm}} 中登錄 DNS 主機名稱的相關資訊，請參閱[登錄 NLB 主機名稱](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)。
 
-4. 在 Web 瀏覽器中，開啟 BookInfo 產品頁面。
-  - 如果您已啟用 TLS，請執行下列指令：
-    ```
-    https://bookinfo.<IBM-ingress-domain>/productpage
-    ```
-    {: codeblock}
-  - 如果您未啟用 TLS，請執行下列指令：
-    ```
-    http://bookinfo.<IBM-ingress-domain>/productpage
-    ```
-    {: codeblock}
-
-5. 嘗試多次重新整理頁面。對 `http://bookinfo.<IBM-domain>/productpage` 提出的要求會由 ALB 接收，並且轉遞至 Istio 閘道負載平衡器。仍然會隨機傳回不同的 `reviews` 微服務版本，因為 Istio 閘道會管理微服務的虛擬服務及目的地遞送規則。
-
-如需 BookInfo 應用程式的閘道、虛擬服務規則及目的地規則的相關資訊，請參閱[瞭解發生什麼情況](#istio_bookinfo_understanding)。
-
-### 藉由連接 Istio 閘道和 Ingress ALB 公然地公開自己的 Istio 受管理應用程式
+### 使用 IBM 提供的主機名稱來公然地公開自己的 Istio 受管理應用程式
 {: #istio_expose_link}
 
-連接 Istio 閘道和 {{site.data.keyword.containerlong_notm}} ALB，將 IBM 提供的 Ingress 子網域用於 Istio 受管理應用程式。下列步驟顯示如何設定 Istio 閘道、建立虛擬服務來定義 Istio 受管理服務的資料流量管理規則，以及配置 {{site.data.keyword.containerlong_notm}} Ingress ALB，以將資料流量從 IBM 提供的 Ingress 子網域導向 `istio-ingressgateway` 負載平衡器。
+公然地公開 Istio 受管理應用程式，方法是建立 Istio 閘道、虛擬服務（用來定義 Istio 受管理服務的資料流量管理規則），以及 `istio-ingressgateway` 負載平衡器之外部 IP 位址的 DNS 主機名稱。
 {: shortdesc}
 
-開始之前：
+**開始之前：**
 1. 在叢集中[安裝 `istio` 受管理附加程式](#istio_install)。
 2. 安裝 `istioctl` 用戶端。
   1. 下載 `istioctl`。
@@ -714,14 +687,15 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
        ```
   2. 導覽至 Istio 套件目錄。
     ```
-    cd istio-1.0.6
+    cd istio-1.1.2
     ```
     {: pre}
 3. [設定應用程式微服務的 Sidecar 注入、將應用程式微服務部署至名稱空間，以及建立應用程式微服務的 Kubernetes 服務，以將它們併入 Istio 服務網](#istio_sidecar)。
 
-若要連接 Istio 閘道和 {{site.data.keyword.containerlong_notm}} ALB，請執行下列動作：
+</br>
+**若要使用主機名稱來公然地公開 Istio 受管理應用程式，請執行下列動作：**
 
-1. 建立閘道。此範例閘道使用 `istio-ingressgateway` 負載平衡器服務來公開埠 80，以用於 HTTP。將 `<namespace>` 取代為在其中部署 Istio 受管理微服務的名稱空間。如果微服務接聽的不是埠 `80`，請新增該埠。如需閘道 YAML 元件的相關資訊，請參閱 [Istio 參考文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway)。
+1. 建立閘道。此範例閘道使用 `istio-ingressgateway` 負載平衡器服務來公開埠 80，以用於 HTTP。將 `<namespace>` 取代為在其中部署 Istio 受管理微服務的名稱空間。如果微服務接聽的不是埠 `80`，請新增該埠。如需閘道 YAML 元件的相關資訊，請參閱 [Istio 參考文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/)。
   ```
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
@@ -747,11 +721,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
   ```
   {: pre}
 
-3. 建立虛擬服務，以使用 `my-gateway` 閘道並定義應用程式微服務的遞送規則。如需虛擬服務 YAML 元件的相關資訊，請參閱 [Istio 參考文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService)。
-
-  如果您已使用 {{site.data.keyword.containerlong_notm}} ALB 公開微服務，則 Istio 會提供轉換器工具作為 `istioctl` 用戶端的一部分，此用戶端可協助您將 Ingress 資源定義移轉至對應的虛擬服務。[`istioctl` 轉換器工具 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/commands/istioctl/#istioctl-experimental-convert-ingress) 會根據最佳效能將 Ingress 資源轉換為虛擬服務。請注意，不會轉換 Ingress 註釋，因為 Istio 閘道不會使用 Ingress 註釋。輸出是 Istio Ingress 配置的起始點，而且可能需要進行一些修改。若要使用此工具，請執行下列指令：`istioctl experimental convert-ingress -f <existing_ingress_resource>.yaml > my-virtual-service.yaml`
-  {: tip}
-
+3. 建立虛擬服務，以使用 `my-gateway` 閘道並定義應用程式微服務的遞送規則。如需虛擬服務 YAML 元件的相關資訊，請參閱 [Istio 參考文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/)。
   ```
   apiVersion: networking.istio.io/v1alpha3
   kind: VirtualService
@@ -786,7 +756,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
   </tr>
   <tr>
   <td><code>gateways</code></td>
-  <td>請注意，已指定 <code>my-gateway</code>，讓閘道可以將這些虛擬服務遞送規則套用至 Istio 負載平衡器。<td>
+  <td>請注意，已指定 <code>my-gateway</code>，讓閘道可以將這些虛擬服務遞送規則套用至 <code>istio-ingressgateway</code> 負載平衡器。<td>
   </tr>
   <tr>
   <td><code>http.match.uri.exact</code></td>
@@ -808,56 +778,59 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
   ```
   {: pre}
 
-5. 選用項目：若要建立將資料流量遞送至每個微服務之後所套用的規則（例如，將資料流量傳送至某個微服務的不同版本的規則），您可以建立並套用 [`DestinationRule` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule)。
-
-6. 建立 Ingress 資源檔。{{site.data.keyword.containerlong_notm}} ALB 會使用此範例資源中定義的規則，將資料流量轉遞至公開 Istio 受管理微服務的 Istio 負載平衡器。
+5. 取得 `istio-ingressgateway` 負載平衡器的 **EXTERNAL-IP** 位址。
   ```
-  apiVersion: extensions/v1beta1
-  kind: Ingress
-  metadata:
-    name: my-ingress-resource
-    namespace: istio-system
-  spec:
-    rules:
-    - host: <sub-domain>.<IBM-ingress-domain>
-      http:
-        paths:
-        - path: /
-          backend:
-            serviceName: istio-ingressgateway
-            servicePort: 80
-  ```
-  {: codeblock}
+    kubectl get svc -n istio-system
+    ```
+  {: pre}
 
-  <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>host</code></td>
-  <td>將 <em>&lt;sub-domain&gt;</em> 取代為應用程式的子網域，並將 <em>&lt;IBM-ingress-domain&gt;</em> 取代為 IBM 提供的 Ingress 子網域。您可以執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt;</code>，針對叢集尋找 IBM 提供的 Ingress 子網域。自動登錄您選擇的子網域，因為依預設會針對叢集登錄 IBM 提供的 Ingress 子網域萬用字元 <code>*.&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>。</td>
-  </tr>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>請注意，已指定 <code>istio-ingressgateway</code>，因此 ALB 會將送入的要求轉遞至 Istio 負載平衡器服務。</td>
-  </tr>
-  </tbody></table>
-
-7. 在其中部署 Istio 受管理微服務的名稱空間中，套用 Ingress 資源。
+  在下列輸出範例中，**EXTERNAL-IP** 是 `168.1.1.1`。
   ```
-  kubectl apply -f my-ingress-resource.yaml -n <namespace>
+  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
+  ...
+  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
+                                                                            8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+  ```
+  {: screen}
+
+6. 建立 DNS 主機名稱來登錄 `istio-ingressgateway` 負載平衡器 IP。
+  ```
+  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
   ```
   {: pre}
 
-8. 在 Web 瀏覽器中，輸入要存取的應用程式微服務的 URL，驗證已將資料流量遞送至 Istio 受管理微服務。
+7. 驗證已建立主機名稱。
   ```
-  http://<subdomain>.<IBM-ingress-domain>/<service_path>
+  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+  ```
+  {: pre}
+
+  輸出範例：
+  ```
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+  ```
+  {: screen}
+
+7. 在 Web 瀏覽器中，輸入要存取的應用程式微服務的 URL，驗證已將資料流量遞送至 Istio 受管理微服務。
+  ```
+  http://<host_name>/<service_path>
   ```
   {: codeblock}
 
+在檢閱中，您已建立稱為 `my-gateway` 的閘道。此閘道使用現有 `istio-ingressgateway` 負載平衡器服務來公開應用程式。`istio-ingressgateway` 負載平衡器會使用您在 `my-virtual-service` 虛擬服務中所定義的規則，以將資料流量遞送至應用程式。最後，您已建立 `istio-ingressgateway` 負載平衡器的主機名稱。所有對主機名稱的使用者要求都會根據 Istio 遞送規則來轉遞給您的應用程式。如需在 {{site.data.keyword.containerlong_notm}} 中登錄 DNS 主機名稱的相關資訊（包括設定主機名稱之自訂性能檢查的相關資訊），請參閱[登錄 NLB 主機名稱](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)。
+
+要尋找更精細的遞送控制嗎？若要建立在負載平衡器將資料流量遞送至每個微服務之後所套用的規則（例如，將資料流量傳送至某個微服務的不同版本的規則），您可以建立並套用 [`DestinationRule` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/)。
+{: tip}
+
 <br />
 
+
+## 在 {{site.data.keyword.containerlong_notm}} 上更新 Istio
+{: #istio_update}
+
+受管理 Istio 附加程式中的 Istio 版本是透過 {{site.data.keyword.Bluemix_notm}} 進行測試，並核准用於 {{site.data.keyword.containerlong_notm}}。若要將 Istio 元件更新為 {{site.data.keyword.containerlong_notm}} 所支援 Istio 的最新版本，請參閱[更新受管理附加程式](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)。
+{: shortdesc}
 
 ## 解除安裝 Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_uninstall}
@@ -866,6 +839,24 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 {:shortdesc}
 
 請注意，`istio` 附加程式是 `istio-extras`、`istio-sample-bookinfo` 及 [`knative`](/docs/containers?topic=containers-knative_tutorial) 附加程式的相依項。`istio-extras` 附加程式是 `istio-sample-bookinfo` 附加程式的相依項。
+{: important}
+
+**選用**：會移除您在 `istio-system` 名稱空間中所建立或修改的任何資源，以及自訂資源定義 (CRD) 自動產生的所有 Kubernetes 資源。如果您要保留這些資源，請先儲存它們，然後再解除安裝 `istio` 附加程式。
+1. 儲存您在 `istio-system` 名稱空間中所建立或修改的任何資源（例如任何服務或應用程式的配置檔）。
+   範例指令：
+   ```
+   kubectl get pod <pod_name> -o yaml -n istio-system
+   ```
+   {: pre}
+
+2. 將 `istio-system` 中由 CRD 自動產生的 Kubernetes 資源儲存在本端機器上的 YAML 檔案。
+   1. 取得 `istio-system` 中的 CRD。
+      ```
+      kubectl get crd -n istio-system
+      ```
+      {: pre}
+
+   2. 儲存從這些 CRD 建立的所有資源。
 
 ### 在 CLI 中解除安裝受管理 Istio 附加程式
 {: #istio_uninstall_cli}
@@ -897,7 +888,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 ### 在使用者介面中解除安裝受管理 Istio 附加程式
 {: #istio_uninstall_ui}
 
-1. 在[叢集儀表板 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/clusters) 中，按一下 1.10 版或更新版本叢集的名稱。
+1. 在[叢集儀表板 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/clusters) 中，按一下叢集的名稱。
 
 2. 按一下**附加程式**標籤。
 
@@ -905,9 +896,9 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 
 4. 解除安裝個別或所有 Istio 附加程式。
   - 個別 Istio 附加程式：
-    1. 按一下**更新**。
+    1. 按一下**管理**。
     2. 清除您要停用之附加程式的勾選框。如果您清除附加程式，則可能會自動清除其他需要該附加程式作為相依項的附加程式。
-    3. 按一下**更新**。已停用 Istio 附加程式，而且會從此叢集中移除這些附加程式的資源。
+    3. 按一下**管理**。已停用 Istio 附加程式，而且會從此叢集中移除這些附加程式的資源。
   - 所有 Istio 附加程式：
     1. 按一下**解除安裝**。即會停用此叢集中的所有受管理 Istio 附加程式，而且會移除此叢集中的所有 Istio 資源。
 
@@ -939,7 +930,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 * 如果您先前在叢集中安裝了 BookInfo，請清除那些資源。
   1. 切換至 Istio 檔案位置的目錄。
        ```
-    cd <filepath>/istio-1.0.5
+    cd <filepath>/istio-1.1.2
     ```
     {: pre}
 
@@ -949,11 +940,12 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
     ```
     {: pre}
 
+<br />
+
+
 ## 下一步為何？
 {: #istio_next}
 
 * 若要進一步探索 Istio，您可以在 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/) 中找到更多手冊。
-    * [Intelligent Routing ![外部鏈結圖示 ](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/intelligent-routing.html)：此範例顯示如何使用 Istio 的資料流量管理功能，將資料流量遞送至特定版本之 BookInfo 的檢閱及評等微服務。
-    * [In-Depth Telemetry ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/telemetry.html)：此範例包括如何使用 Istio Mixer 及 Envoy Proxy 來取得 BookInfo 微服務的統一度量值、日誌及追蹤。
 * 取得[認知類別：使用 Istio 及 IBM Cloud Kubernetes Service 來開始使用微服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/)。**附註**：您可以跳過本課程的 Istio 安裝一節。
 * 請參閱此部落格文章，其描述如何使用 [Istio ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) 來視覺化您的 Istio 服務網。

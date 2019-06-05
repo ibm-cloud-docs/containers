@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-17"
 
 keywords: kubernetes, iks, node scaling
 
@@ -37,7 +37,7 @@ subcollection: containers
 叢集 autoscaler 可用於設定為具有公用網路連線功能的標準叢集。如果您的叢集無法存取公用網路，例如防火牆後面的專用叢集，或只啟用專用服務端點的叢集，則您無法在叢集中使用叢集 autoscaler。
 {: important}
 
-## 瞭解叢集 autoscaler 的運作方式
+## 瞭解擴增及縮減
 {: #ca_about}
 
 叢集 autoscaler 會定期掃描叢集來調整它管理的工作者節點儲存區內的工作者節點數目，以回應工作負載資源要求及您配置的任何自訂設定，例如掃描間隔。叢集 autoscaler 會每分鐘檢查下列狀況。
@@ -57,13 +57,24 @@ subcollection: containers
 *   您設定的每一區域工作者節點大小的下限及上限。
 *   您擱置的 Pod 資源要求和某些與工作負載相關聯的 meta 資料，例如反親緣性、只在某些機型上放置 Pod 的標籤，或是 [Pod 中斷預算 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)。
 *   叢集 autoscaler 所管理的工作者節點儲存區，可能橫跨[多區域叢集](/docs/containers?topic=containers-plan_clusters#multizone)中的不同區域。
-*   如需相關資訊，請參閱 [Kubernetes Cluster Autoscaler 常見問題 (FAQ) ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md)。
+*   所設定的[自訂 Helm 圖表值](#ca_chart_values)，例如跳過使用本端儲存空間的工作者節點不進行刪除。
 
+如需相關資訊，請參閱「Kubernetes 叢集 Autoscaler 常見問題」中的[擴增如何運作？ ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-up-work) 及[縮減如何運作？ ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work)。
+
+<br>
+
+**是否可以變更擴增及縮減運作方式？**<br>
+您可以自訂設定或使用其他 Kubernetes 資源來影響擴增及縮減的運作方式。
+*   **擴增**：[自訂叢集 Autoscaler Helm 圖表值](#ca_chart_values)，例如 `scanInterval`、`expander`、`skipNodes` 或 `maxNodeProvisionTime`。請檢閱[過度佈建工作者節點](#ca_scaleup)的方式，讓您可以在工作者節點儲存區用盡資源之前擴增工作者節點。您也可以[設定 Kubernetes Pod 預算干擾及 Pod 優先順序截斷](#scalable-practices-apps)，以影響擴增的運作方式。
+*   **縮減**：[自訂叢集 Autoscaler Helm 圖表值](#ca_chart_values)，例如 `scaleDownUnneededTime`、`scaleDownDelayAfterAdd`、`scaleDownDelayAfterDelete` 或 `scaleDownUtilizationThreshold`。
+
+<br>
 **此行為與不是由叢集 autoscaler 管理的工作者節點儲存區有何不同？**<br>
 當您[建立工作者節點儲存區](/docs/containers?topic=containers-clusters#add_pool)時，您要指定每個區域有多少個工作者節點。工作者節點儲存區會維護工作者節點數目，直到您將它[調整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新平衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)為止。工作者節點儲存區不會為您新增或移除工作者節點。如果您有超過可以排定的 Pod，則這些 Pod 會保持擱置狀態，直到您調整工作者節點儲存區的大小為止。
 
 當您針對工作者節點儲存區啟用叢集 autoscaler 後，就會擴增或縮減工作者節點，以回應您的 Pod 規格設定及資源要求。您不需要手動調整工作者節點儲存區的大小或重新平衡。
 
+<br>
 **我可以看看叢集 autoscaler 如何擴增或縮減的範例嗎？**<br>
 請看下列影像，此即叢集擴增和縮減的範例。
 
@@ -123,30 +134,57 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 6.  您不再需要其他工作負載，因此刪除部署。經過一小段時間之後，叢集 autoscaler 會偵測到您的叢集不再需要全部的運算資源，而開始一次一個地縮減工作者節點。
 7.  您的工作者節點儲存區已縮減。叢集 autoscaler 會定期掃描，檢查是否有擱置的 Pod 資源要求及未充分利用的工作者節點，以便擴增或縮減您的工作者節點儲存區。
 
-<br>
-**如何確保我的工作者節點和部署實務為可調式？**<br>
-透過組織工作者節點及應用程式工作負載策略來善用叢集 autoscaler。如需相關資訊，請參閱 [Kubernetes Cluster Autoscaler 常見問題 (FAQ) ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md)。
+## 遵循可擴充部署作法
+{: #scalable-practices}
 
-<br>
-**工作者節點儲存區和節點的一般準則有哪些？**<br>
-*   每個叢集只能執行一個 `ibm-iks-cluster-autoscaler`。
-*   叢集 autoscaler 會調整您的叢集，以回應您的工作負載[資源要求 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)。因此，您不需要將工作者節點儲存區[調整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新平衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)。
-*   請勿使用 `ibmcloud ks worker-rm` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)來移除工作者節點儲存區中的個別工作者節點，這樣會使工作者節點儲存區不平衡。
-*   因為不能在工作者節點儲存區層次上套用污染，所以請不要[污染工作者節點](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)，以避免非預期的結果。例如，當您部署受污染的工作者節點不能容忍的工作負載時，不會考量擴增工作者節點，而且即使叢集具有足夠容量，也有可能訂購更多工作者節點。不過，如果受污染的工作者節點小於其所利用資源的臨界值（依預設為 50%），則仍被認為是未充分利用的工作者節點，因而考量加以縮減。
+對於工作者節點及工作負載部署策略使用下列策略來善用叢集 Autoscaler。如需相關資訊，請參閱 [Kubernetes Cluster Autoscaler 常見問題 (FAQ) ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md)。
+{: shortdesc}
 
-<br>
-**應用程式工作負載的一般準則有哪些？**<br>
-*   請記住，自動調整是根據工作負載配置要求的運算使用量，而不考量其他因素，例如機器成本。
-*   針對所有部署指定[資源要求 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)，因為叢集 autoscaler 會使用資源要求來計算執行工作負載所需的工作者節點數目。
+使用一些測試工作負載來[試用叢集 Autoscaler](#ca_helm)，以瞭解[擴增及縮減運作方式](#ca_about)、您要配置的[自訂值](#ca_chart_values)，以及您想要的任何其他部分，例如[過度佈建](#ca_scaleup)工作者節點或[限制應用程式](#ca_limit_pool)。然後，清除測試環境，以及計劃在全新安裝的叢集 Autoscaler 中包括這些自訂值及其他設定。
+
+### 是否可以一次自動調整多個工作者節點儲存區？
+{: #scalable-practices-multiple}
+是，安裝 Helm 圖表之後，您可以選擇叢集內要[在 configmap 中](#ca_cm)自動調整的工作者節點儲存區。每個叢集只能執行一個 `ibm-iks-cluster-autoscaler` Helm 圖表。
+{: shortdesc}
+
+### 如何確定叢集 Autoscaler 會回應應用程式所需的資源？
+{: #scalable-practices-resrequests}
+
+叢集 autoscaler 會調整您的叢集，以回應您的工作負載[資源要求 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)。因此，針對所有部署指定[資源要求 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)，因為叢集 Autoscaler 會使用資源要求來計算執行工作負載所需的工作者節點數目。請記住，自動調整是根據工作負載配置要求的運算使用量，而不考量其他因素，例如機器成本。
+{: shortdesc}
+
+### 是否可以將工作者節點儲存區縮減為零 (0) 個節點？
+{: #scalable-practices-zero}
+
+否，您不可以將叢集 Autoscaler 的 `minSize` 設為 `0`。此外，除非您在叢集中[停用](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)應用程式負載平衡器 (ALB)，否則必須將每個區域的 `minSize` 變更為 `2` 個工作者節點，這樣才可以分散 ALB Pod 來達到高可用性。
+{: shortdesc}
+
+### 是否可以將部署最佳化以進行自動調整？
+{: #scalable-practices-apps}
+
+是，您可以將數個 Kubernetes 特性新增至部署，以調整叢集 Autoscaler 如何考量資源要求以進行調整。
+{: shortdesc}
 *   使用 [Pod 中斷預算 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)，來防止 Pod 突然重新排程或遭到刪除。
 *   如果您使用 Pod 優先順序，您可以[編輯優先順序截止值 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-cluster-autoscaler-work-with-pod-priority-and-preemption)，來變更會觸發擴增的優先順序類型。依預設，優先順序截止值為零 (`0`)。
 
-<br>
-**為何我的自動調整工作者節點儲存區不平衡？**<br>
-在擴增期間，叢集 autoscaler 會在區域之間平衡節點，但允許正負一個 (+/- 1) 工作者節點的差異。擱置的工作負載可能沒有要求足夠的容量使每個區域平衡。在此情況下，如果您想要手動平衡工作者節點儲存區，請[更新叢集 autoscaler configmap](#ca_cm)，以移除不平衡的工作者節點儲存區。然後，執行 `ibmcloud ks worker-pool-rebalance` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)，並將工作者節點儲存區新增回到叢集 autoscaler configmap。
+### 是否可以搭配使用污染及容錯與自動調整的工作者節點儲存區？
+{: #scalable-practices-taints}
 
-**為何我無法將我的工作者節點儲存區調整大小或重新平衡？**<br>
-對工作者節點儲存區啟用叢集 autoscaler 後，您就無法將工作者節點儲存區[調整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新平衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)。您必須[編輯 configmap](#ca_cm)，以變更工作者節點儲存區大小下限或大小上限，或停用該工作者節點儲存區的叢集自動調整大小。
+因為不能在工作者節點儲存區層次上套用污染，所以請不要[污染工作者節點](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)，以避免非預期的結果。例如，當您部署受污染的工作者節點不能容忍的工作負載時，不會考量擴增工作者節點，而且即使叢集具有足夠容量，也有可能訂購更多工作者節點。不過，如果受污染的工作者節點小於其所利用資源的臨界值（依預設為 50%），則仍被認為是未充分利用的工作者節點，因而考量加以縮減。
+{: shortdesc}
+
+### 為何我的自動調整工作者節點儲存區不平衡？
+{: #scalable-practices-unbalanced}
+
+在擴增期間，叢集 Autoscaler 會在各區域之間平衡節點，但允許正負一個 (+/- 1) 工作者節點的差異。擱置的工作負載可能沒有要求足夠的容量使每個區域平衡。在此情況下，如果您想要手動平衡工作者節點儲存區，請[更新叢集 autoscaler configmap](#ca_cm)，以移除不平衡的工作者節點儲存區。然後，執行 `ibmcloud ks worker-pool-rebalance` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)，並將工作者節點儲存區新增回到叢集 autoscaler configmap。
+{: shortdesc}
+
+
+### 為何我無法將我的工作者節點儲存區調整大小或重新平衡？
+{: #scalable-practices-resize}
+
+對工作者節點儲存區啟用叢集 autoscaler 後，您就無法將工作者節點儲存區[調整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新平衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)。您必須[編輯 configmap](#ca_cm)，以變更工作者節點儲存區大小下限或大小上限，或停用該工作者節點儲存區的叢集自動調整大小。請勿使用 `ibmcloud ks worker-rm` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)來移除工作者節點儲存區中的個別工作者節點，這樣會使工作者節點儲存區不平衡。
+{: shortdesc}
 
 此外，如果您將 `ibm-iks-cluster-autoscaler` Helm 圖表解除安裝之前未停用工作者節點儲存區，則無法手動調整工作者節點儲存區大小。請重新安裝 `ibm-iks-cluster-autoscaler` Helm 圖表，[編輯 configmap](#ca_cm) 以停用工作者節點儲存區，然後再試一次。
 
@@ -168,7 +206,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  [建立標準叢集](/docs/containers?topic=containers-clusters#clusters_ui)，其執行 **Kubernetes 1.12 版或更新版本**。
-3.   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+3.   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 4.  確認 {{site.data.keyword.Bluemix_notm}} Identity and Access Management 認證儲存在叢集中。叢集 autoscaler 使用此密碼來進行鑑別。
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
@@ -192,11 +230,11 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 <br>
 **若要在叢集中安裝 `ibm-iks-cluster-autoscaler` 外掛程式**，請執行下列動作：
 
-1.  [遵循指示](/docs/containers?topic=containers-integrations#helm)，將 **Helm 2.11 版或更新版本**用戶端安裝在本端機器上，並使用服務帳戶將 Helm 伺服器 (tiller) 安裝在您的叢集中。
+1.  [遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 **Helm 2.11 版或更新版本**用戶端安裝在本端機器上，並使用服務帳戶將 Helm 伺服器 (tiller) 安裝在您的叢集中。
 2.  驗證已使用服務帳戶安裝 tiller。
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -209,7 +247,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     {: screen}
 3.  新增及更新叢集 autoscaler Helm 圖表所在的 Helm 儲存庫。
     ```
-    helm repo add ibm https://registry.bluemix.net/helm/ibm/
+    helm repo add iks-charts https://icr.io/helm/iks-charts
     ```
     {: pre}
     ```
@@ -218,11 +256,11 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     {: pre}
 4.  在叢集的 `kube-system` 名稱空間中安裝叢集 autoscaler Helm 圖表。
 
-    您也可以[自訂叢集 autoscaler 設定](#ca_chart_values)，例如它在工作者節點擴增或縮減之前等待的時間量。
+    在安裝期間，您可以選擇進一步[自訂叢集 Autoscaler 設定](#ca_chart_values)，例如它在工作者節點擴增或縮減之前等待的時間量。
     {: tip}
 
     ```
-    helm install ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
+    helm install iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
@@ -273,15 +311,15 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     ```
     {: screen}
 
-5.  驗證安裝已順利完成。
+5.  驗證安裝已成功。
 
     1.  檢查叢集 autoscaler Pod 處於**執行中**狀態。
         ```
         kubectl get pods --namespace=kube-system | grep ibm-iks-cluster-autoscaler
         ```
         {: pre}
-        輸出範例：
-        ```
+    輸出範例：
+    ```
         ibm-iks-cluster-autoscaler-8497bfc968-dbn7w   1/1       Running   0          9m
         ```
         {: screen}
@@ -290,8 +328,8 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
         kubectl get service --namespace=kube-system | grep ibm-iks-cluster-autoscaler
         ```
         {: pre}
-        輸出範例：
-        ```
+    輸出範例：
+    ```
         ibm-iks-cluster-autoscaler   ClusterIP   172.21.xxx.xx    <none>        8085/TCP        9m
         ```
         {: screen}
@@ -314,7 +352,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 
 **開始之前**：
 *  [安裝 `ibm-iks-cluster-autoscaler` 外掛程式](#ca_helm)。
-*  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **若要更新叢集 autoscaler configmap 和值**，請執行下列動作：
 
@@ -349,8 +387,9 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     <th id="parameter-with-default">具有預設值的參數</th>
     <th id="parameter-with-description">說明</th>
     </thead>
+    <tbody>
     <tr>
-    <th id="parameter-name" headers="parameter-with-default">`"name": "default"`</th>
+    <td id="parameter-name" headers="parameter-with-default">`"name": "default"`</td>
     <td headers="parameter-name parameter-with-description">將 `"default"` 取代為您要調整的工作者節點儲存區的名稱或 ID。若要列出工作者節點儲存區，請執行 `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`。<br><br>
     若要管理多個工作者節點儲存區，請將 JSON 行複製到以逗點區隔的行，如下所示。<pre class="codeblock">[
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
@@ -359,15 +398,15 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     **附註**：叢集 autoscaler 只能調整具有 `ibm-cloud.kubernetes.io/worker-pool-id` 標籤的工作者節點儲存區。若要檢查您的工作者節點儲存區是否具有必要標籤，請執行 `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`。如果您的工作者節點儲存區沒有必要的標籤，請[新增工作者節點儲存區](/docs/containers?topic=containers-clusters#add_pool)，並將此工作者節點儲存區與叢集 autoscaler 搭配使用。</td>
     </tr>
     <tr>
-    <th id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</th>
+    <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
     <td headers="parameter-minsize parameter-with-description">指定工作者節點儲存區中每個區域隨時都含有的最少工作者節點數目。此值必須是 2 以上，這樣才可以分散您的 ALB Pod 來達到高可用性。如果[已停用](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)標準叢集中的 ALB，您可以將此值設為 `1`。</td>
     </tr>
     <tr>
-    <th id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</th>
+    <td id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</td>
     <td headers="parameter-maxsize parameter-with-description">指定工作者節點儲存區中每個區域工作者節點數目上限。這個值必須等於或大於您針對 `minSize` 設定的值。</td>
     </tr>
     <tr>
-    <th id="parameter-enabled" headers="parameter-with-default">`"enabled": false`</th>
+    <td id="parameter-enabled" headers="parameter-with-default">`"enabled": false`</td>
     <td headers="parameter-enabled parameter-with-description">將此值設為 `true`，讓叢集 autoscaler 管理對工作者節點儲存區的調整。將此值設為 `false`，以停止叢集 autoscaler 調整工作者節點儲存區。<br><br>
     稍後，如果您想要[移除叢集 autoscaler](#ca_rm)，必須先停用 configmap 中的每一個工作者節點儲存區。</td>
     </tr>
@@ -392,7 +431,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 		Namespace:          kube-system
 		...
 		Events:
-		Type     Reason         Age   From                                        Message
+    Type    Reason                 Age   From                     Message
 		----     ------         ----  ----                                        -------
 
 		Normal  ConfigUpdated  3m    ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6  {"1:3:default":"SUCCESS:"}
@@ -406,8 +445,8 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 {: shortdesc}
 
 **開始之前**：
+*  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  [安裝 `ibm-iks-cluster-autoscaler` 外掛程式](#ca_helm)。
-*  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 **若要更新叢集 autoscaler 值**，請執行下列動作：
 
@@ -453,7 +492,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     <tbody>
     <tr>
     <td>`api_route` 參數</td>
-    <td>針對您叢集所在的地區設定 [{{site.data.keyword.containerlong_notm}} API 端點](/docs/containers?topic=containers-cs_cli_reference#cs_api)。</td>
+    <td>針對您叢集所在的地區設定 [{{site.data.keyword.containerlong_notm}} API 端點](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)。</td>
     <td>沒有預設值；使用您叢集所在的目標區域。</td>
     </tr>
     <tr>
@@ -535,14 +574,15 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     </tbody>
     </table>
 2.  若要變更任何叢集 autoscaler 配置值，請使用新值更新 Helm 圖表。
+    包括 `--recreate-pods` 旗標，以重建任何現有叢集 Autoscaler Pod 來挑選自訂設定變更。
     ```
-    helm upgrade --set scanInterval=2m ibm-iks-cluster-autoscaler ibm/ibm-iks-cluster-autoscaler -i
+    helm upgrade --set scanInterval=2m ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler -i --recreate-pods
     ```
     {: pre}
 
     若要將圖表重設為預設值：
     ```
-    helm upgrade --reset-values ibm-iks-cluster-autoscaler ibm/ibm-iks-cluster-autoscaler
+    helm upgrade --reset-values ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler --recreate-pods
     ```
     {: pre}
 3.  若要驗證您的變更，請再次檢閱 Helm 圖表值。
@@ -550,6 +590,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     helm get values ibm-iks-cluster-autoscaler -a
     ```
     {: pre}
+    
 
 ## 限制應用程式只在某些自動調整的工作者節點儲存區上執行
 {: #ca_limit_pool}
@@ -559,7 +600,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 
 **開始之前**：
 *  [安裝 `ibm-iks-cluster-autoscaler` 外掛程式](#ca_helm)。
-*  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **若要限制 Pod 在某些自動調整的工作者節點儲存區上執行**，請執行下列動作：
 
@@ -601,7 +642,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 
 <dl>
   <dt><strong>暫停 Pod</strong></dt>
-  <dd>您可以建立部署，以特定的資源要求在 Pod 中部署[暫停容器![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers)，並指派此部署為低 Pod 優先順序。當較高優先順序的工作負載需要這些資源時，暫停 Pod 會被先占，而成為擱置的 Pod。此事件會觸發叢集 autoscaler 擴增。<br><br>如需設定暫停 Pod 部署的相關資訊，請參閱 [Kubernetes 常見問題 (FAQ)![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler)。<p class="note">如果您使用此方法，請確定您瞭解 [Pod 優先順序](/docs/containers?topic=containers-pod_priority#pod_priority)如何運作，以及設定部署的 Pod 優先順序。例如，如果暫停 Pod 沒有足夠的資源可用於較高優先順序的 Pod，則此 Pod 不會被先占。較高優先順序的工作負載仍處於擱置狀態，因此會觸發叢集 autoscaler 來擴增。但是，在此情況下，不會提早進行調整動作，因為您關心的實際工作負載未排定，而是排定暫停 Pod。</p></dd>
+  <dd>您可以建立部署，以特定的資源要求在 Pod 中部署[暫停容器![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers)，並指派此部署為低 Pod 優先順序。當較高優先順序的工作負載需要這些資源時，暫停 Pod 會被先占，而成為擱置的 Pod。此事件會觸發叢集 autoscaler 擴增。<br><br>如需設定暫停 Pod 部署的相關資訊，請參閱 [Kubernetes 常見問題 (FAQ)![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler)。您可以使用[此範例過度佈建配置檔 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml)，以建立優先順序類別、服務帳戶及部署。<p class="note">如果您使用此方法，請確定您瞭解 [Pod 優先順序](/docs/containers?topic=containers-pod_priority#pod_priority)如何運作，以及如何設定部署的 Pod 優先順序。例如，如果暫停 Pod 沒有足夠的資源可用於較高優先順序的 Pod，則此 Pod 不會被先占。較高優先順序的工作負載仍處於擱置狀態，因此會觸發叢集 autoscaler 來擴增。不過，在此情況下，不會提早進行擴增動作，因為因資源不足而無法排定您要執行的工作負載。</p></dd>
 
   <dt><strong>水平 Pod 自動調整 (HPA)</strong></dt>
   <dd>因為水平 Pod 自動調整大小是根據 Pod 的平均 CPU 使用率，所以在工作者節點儲存區實際用完資源之前，就會達到您設定的 CPU 使用率限制。會要求更多的 Pod，隨後會觸發叢集 autoscaler 來擴增工作者節點儲存區。<br><br>如需設定 HPA 的相關資訊，請參閱 [Kubernetes 文件![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/)。</dd>
@@ -619,17 +660,17 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 從 1.0.2 版或更舊版本更新至最新的 Helm 圖表？[請遵循這些指示](#ca_helm_up_102)。
 {: note}
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  更新 Helm 報告，以擷取此儲存庫中所有 Helm 圖表的最新版本。
     ```
-    helm repo update
-    ```
+   helm repo update
+   ```
     {: pre}
 
 2.  選用項目：將最新的 Helm 圖表下載至您的本端機器。然後，將套件解壓縮，並檢閱 `release.md` 檔案，以找到最新版本資訊。
     ```
-    helm fetch ibm/ibm-iks-cluster-autoscaler
+    helm fetch iks-charts/ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
@@ -647,7 +688,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 
 4.  將叢集 autoscaler Helm 圖表更新為最新版本。
     ```
-    helm upgrade --force --recreate-pods <helm_chart_name>  ibm/ibm-iks-cluster-autoscaler
+    helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
@@ -682,7 +723,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 叢集 autoscaler 的最新 Helm 圖表版本需要完整移除先前已安裝的叢集 autoscaler Helm 圖表版本。如果您已安裝 Helm 圖表 1.0.2 版或更舊版本，請先將該版本解除安裝，然後再安裝叢集 autoscaler 的最新 Helm 圖表。
 {: shortdesc}
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  取得叢集 autoscaler configmap。
     ```
@@ -706,12 +747,12 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
     {: pre}
 5.  更新 Helm 圖表儲存庫，以取得最新叢集 autoscaler Helm 圖表版本。
     ```
-   helm repo update
-   ```
+    helm repo update
+    ```
     {: pre}
 6.  安裝最新叢集 autoscaler Helm 圖表。套用您先前與 `--set` 旗標搭配使用的任何自訂設定，例如 `scanInterval=2m`。
     ```
-    helm install  ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
+    helm install  iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
     ```
     {: pre}
 7.  套用您先前擷取的叢集 autoscaler configmap，以啟用工作者節點儲存區的自動調整。
@@ -736,7 +777,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 		Namespace:          kube-system
 		...
 		Events:
-    Type    Reason                 Age   From                     Message
+		Type     Reason         Age   From                                        Message
 		----     ------         ----  ----                                        -------
 
 		Normal  ConfigUpdated  3m    ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6  {"1:3:default":"SUCCESS:"}
@@ -752,7 +793,7 @@ _圖：自動調整叢集大小。_![自動調整叢集大小 GIF](images/cluste
 如果您不想自動調整工作者節點儲存區，可以將叢集 autoscaler Helm 圖表解除安裝。移除之後，如果您要將工作者節點儲存區[調整大小](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)或[重新平衡](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)，必須手動進行。
 {: shortdesc}
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  在[叢集 autoscaler configmap](#ca_cm) 中，透過將 `"enabled"` 值設為 `false` 來移除工作者節點儲存區。
     ```

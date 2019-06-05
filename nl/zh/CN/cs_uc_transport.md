@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -61,13 +61,13 @@ IT 主管拥有与合作伙伴进行交互的全球运输路线和调度系统�
 2. 以数字方式与相应的港口和运输合作伙伴共享报关文书，包括访问控制
 3. 供聚集并传达装运货物到达信息的运输客户使用的应用程序，包括供运输客户在其自己的零售和企业到企业应用程序中复用装运数据的 API
 
-对于与全球合作伙伴进行合作的运输公司，需要对路线和调度系统进行本地修改，以适应每个区域的语言、法规和独特的港口物流。{{site.data.keyword.containerlong_notm}} 覆盖全球多个区域（包括北美、欧洲、亚洲和澳大利亚），以便公司的应用程序能够反映其合作伙伴在每个国家或地区的需求。
+对于与全球合作伙伴进行合作的运输公司，需要对路线和调度系统进行本地修改，以适应每个区域的语言、法规和独特的港口物流。{{site.data.keyword.containerlong_notm}} 为多个区域（包括北美、欧洲、亚洲和澳大利亚）提供了全局覆盖，以便应用程序可以反映每个国家或地区合作伙伴的需求。
 
 IoT 设备流式传输的数据由 {{site.data.keyword.messagehub_full}} 分发到区域港口应用程序以及关联的海关和集装箱载货单数据存储。{{site.data.keyword.messagehub_full}} 是 IoT 事件的着陆点。它会根据 Watson IoT Platform 提供给 {{site.data.keyword.messagehub_full}} 的受管连接来分发事件。
 
 事件位于 {{site.data.keyword.messagehub_full}} 中后，会持久存储以直接供港口运输应用程序使用，并且未来可随时使用。需要最短等待时间的应用程序直接实时使用事件流 ({{site.data.keyword.messagehub_full}}) 中的事件。其他未来应用程序（例如，分析工具）可以选择通过 {{site.data.keyword.cos_full}} 以批处理方式来使用事件存储中的事件。
 
-由于装运数据会与公司的客户共享，因此开发者应确保公司的客户可以使用 API 在其自己的应用程序中显示装运数据。例如，这些应用程序包括移动跟踪应用程序或 Web 电子商务解决方案。开发者还忙于构建和维护区域港口应用程序，以收集和分发海关记录和装运载货单。总之，他们需要专注于编码，而不是管理基础架构。因此他们选择了 {{site.data.keyword.containerlong_notm}}，因为 IBM 简化了基础架构管理：
+由于装运数据会与公司的客户共享，因此开发者应确保客户可以使用 API 在其自己的应用程序中显示装运数据。例如，这些应用程序包括移动跟踪应用程序或 Web 电子商务解决方案。开发者还忙于构建和维护区域港口应用程序，以收集和分发海关记录和装运载货单。总之，他们需要专注于编码，而不是管理基础架构。因此他们选择了 {{site.data.keyword.containerlong_notm}}，因为 IBM 简化了基础架构管理：
 * 管理 Kubernetes 主节点、IaaS 和操作组件，例如 Ingress 和存储器
 * 监视工作程序节点的运行状况和恢复
 * 提供全球计算，使开发者不必负责工作负载和数据需要位于的多个区域中的基础架构
@@ -92,7 +92,7 @@ IoT 设备流式传输的数据由 {{site.data.keyword.messagehub_full}} 分发�
 
 **步骤 1：使用微服务对应用程序容器化**
 
-* 基于应用程序的功能区域及其依赖关系，将应用程序构建成 {{site.data.keyword.containerlong_notm}} 中的一组协作微服务。
+* 基于应用程序的功能区域及其依赖关系，将应用程序集成到 {{site.data.keyword.containerlong_notm}} 中的一组协作微服务。
 * 将应用程序部署到 {{site.data.keyword.containerlong_notm}} 中的容器。
 * 通过 Kubernetes 提供标准化的 DevOps 仪表板。
 * 对不频繁运行的批处理和其他库存工作负载的计算启用按需缩放。
@@ -110,7 +110,7 @@ IoT 设备流式传输的数据由 {{site.data.keyword.messagehub_full}} 分发�
 **步骤 4：持续交付**
 * {{site.data.keyword.contdelivery_full}} 将可定制、可共享的模板与来自 IBM、第三方以及开放式源代码的工具配合使用，帮助开发者快速供应集成工具链。自动构建和测试，以通过分析控制质量。
 * 开发者在其开发和测试集群中构建并测试应用程序后，可使用 IBM CI/CD 工具链将应用程序部署到全球范围的集群中。
-* 通过 {{site.data.keyword.containerlong_notm}} 可轻松应用和回滚应用程序；定制应用程序可通过 Istio 的智能路由和负载均衡进行部署，以满足区域需求。
+* 通过 {{site.data.keyword.containerlong_notm}} 可轻松应用和回滚应用程序；部署了定制应用程序，以通过 Istio 的智能路由和负载均衡来满足区域需求。
 
 **结果**
 
@@ -159,7 +159,7 @@ IoT 设备流式传输的数据由 {{site.data.keyword.messagehub_full}} 分发�
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_full_notm}}
 
-加快开发速度是 HR 主管的制胜关键所在。首先，团队对其应用程序容器化，然后将其放入云中。通过使用现代容器，开发者可以使用 Node.js SDK 轻松进行试验，将更改推送到开发和测试系统，这些系统可在不同集群上横向扩展。这些推送通过开放式工具链和 {{site.data.keyword.contdelivery_full}} 自动执行。对 HR 站点的更新不用再受困于速度慢、易出错的构建过程。他们可以每天或更频繁地向其站点交付增量更新。此外，还可以快速集成 HR 站点的日志记录和监视，尤其是对于站点从后端福利系统中拉取个性化数据的方式。开发者不必浪费时间构建复杂的日志记录系统，只需要有能力对实时系统进行故障诊断即可。开发者不必花时间成为云安全领域的专家，他们可以使用 {{site.data.keyword.appid_full_notm}} 轻松地强制实施策略驱动的认证。
+加快开发速度是 HR 主管的制胜关键所在。首先，团队对其应用程序容器化，然后将其放入云中。通过使用现代容器，开发者可以使用 Node.js SDK 轻松进行试验，将更改推送到开发和测试系统，这些系统可在不同集群上横向扩展。这些推送通过开放式工具链和 {{site.data.keyword.contdelivery_full}} 自动执行。对 HR 站点的更新不用再受困于速度慢、易出错的构建过程。他们可以每天或更频繁地向其站点交付增量更新。此外，还可以快速集成 HR 站点的日志记录和监视，尤其是对于站点从后端福利系统中拉取个性化数据的方式。开发者不必浪费时间构建复杂的日志记录系统，只需要有能力对实时系统进行故障诊断即可。开发者无需成为云安全领域的专家，他们可以使用 {{site.data.keyword.appid_full_notm}} 轻松强制实施策略驱动的认证。
 
 通过 {{site.data.keyword.containerlong_notm}}，开发者从专用数据中心内构建过度的硬件转向可定制计算，从而减少了 IT 运营、维护和能源成本。为了托管 HR 站点，他们能够轻松设计 Kubernetes 集群，以适应自己的 CPU、RAM 和存储器需求。降低人员成本的另一个因素是由 IBM 来管理 Kubernetes，这样开发者就可以集中精力交付更好的员工福利注册体验。
 
@@ -183,7 +183,7 @@ IoT 设备流式传输的数据由 {{site.data.keyword.messagehub_full}} 分发�
 **步骤 4：在全球范围内持续交付**
 * {{site.data.keyword.contdelivery_full}} 将可定制、可共享的模板与来自 IBM、第三方以及开放式源代码的工具配合使用，帮助开发者快速供应集成工具链。自动构建和测试，以通过分析控制质量。
 * 开发者在其开发和测试集群中构建并测试应用程序后，可使用 IBM CI/CD 工具链将应用程序部署到全球范围的生产集群中。
-* {{site.data.keyword.containerlong_notm}} 可轻松应用和回滚应用程序。定制应用程序可通过 Istio 的智能路由和负载均衡进行部署，以满足区域需求。
+* {{site.data.keyword.containerlong_notm}} 可轻松应用和回滚应用程序。部署了定制应用程序，以通过 Istio 的智能路由和负载均衡来满足区域需求。
 * {{site.data.keyword.containerlong_notm}} 中的内置 HA 工具对每个地理区域内的工作负载进行均衡，包括自我复原和负载均衡。
 
 **结果**

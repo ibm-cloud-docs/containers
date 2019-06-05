@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -56,22 +56,21 @@ subcollection: containers
 添加更多工作程序节点时，可以跨多个工作程序节点分布应用程序实例。如果一个工作程序节点停止运行，可用工作程序节点上的应用程序实例会继续运行。Kubernetes 会自动重新安排不可用工作程序节点中的 pod，以确保应用程序的性能和容量。要确保 pod 均匀分布在不同工作程序节点上，请实现 [pod 亲缘关系](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
 
 **可以将单专区集群转换为多专区集群吗？**</br>
-如果集群位于某个[受支持的多专区大城市](/docs/containers?topic=containers-regions-and-zones#zones)中，那么是。请参阅[从独立工作程序节点更新到工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)。
+如果集群位于某个[受支持的多专区大城市位置](/docs/containers?topic=containers-regions-and-zones#zones)中，那么可以这样做。请参阅[从独立工作程序节点更新到工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)。
 
 
 **必须使用多专区集群吗？**</br>
 不是。您可以根据需要创建任意数量的单专区集群。实际上，为了简化管理，或者在集群必须位于特定[单专区城市](/docs/containers?topic=containers-regions-and-zones#zones)中时，您可能更愿意使用单专区集群。
 
 **在单个专区中可以有高可用性主节点吗？**</br>
-可以，运行 Kubernetes V1.10 或更高版本的集群可以有高可用性主节点。在单个专区中，主节点具有高可用性，在分别用于 Kubernetes API 服务器、etcd、调度程序和控制器管理器的不同物理主机上包含多个副本，以防止发生中断，例如在主节点更新期间。要避免受到专区故障的影响，可以执行以下操作：
+可以。在单个专区中，主节点具有高可用性，在分别用于 Kubernetes API 服务器、etcd、调度程序和控制器管理器的不同物理主机上包含多个副本，以防止发生中断，例如在主节点更新期间。要避免受到专区故障的影响，可以执行以下操作：
 * [在支持多专区的专区中创建集群](/docs/containers?topic=containers-plan_clusters#multizone)，其中主节点在各专区中分布。
 * [创建多个集群](#multiple_clusters)并使用全局负载均衡器连接这些集群。
 
 ## 多专区集群
 {: #multizone}
 
-通过 {{site.data.keyword.containerlong}}，可以创建多专区集群。使用工作程序池跨多个工作程序节点和专区分布应用程序时，用户不太可能会遇到停机时间。通过内置功能（如负载均衡），可在主机、网络或应用程序发生潜在专区故障时更快恢复。如果一个专区中的资源停止运行，集群工作负载仍会在其他专区中运行。
-**注：**只有单专区集群可用于 {{site.data.keyword.Bluemix_dedicated_notm}} 实例。
+通过 {{site.data.keyword.containerlong_notm}}，可以创建多专区集群。使用工作程序池跨多个工作程序节点和专区分布应用程序时，用户不太可能会遇到停机时间。通过内置功能（如负载均衡），可在主机、网络或应用程序发生潜在专区故障时更快恢复。如果一个专区中的资源停止运行，集群工作负载仍会在其他专区中运行。
 {: shortdesc}
 
 **什么是工作程序池？**</br>
@@ -81,7 +80,7 @@ subcollection: containers
 支持独立工作程序节点的先前集群设置，但不推荐使用。确保[向集群添加工作程序池](/docs/containers?topic=containers-clusters#add_pool)，然后[使用工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)来组织工作程序节点，以取代独立工作程序节点。
 
 **可以将单专区集群转换为多专区集群吗？**</br>
-如果集群位于某个[受支持的多专区大城市](/docs/containers?topic=containers-regions-and-zones#zones)中，那么是。请参阅[从独立工作程序节点更新到工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)。
+如果集群位于某个[受支持的多专区大城市位置](/docs/containers?topic=containers-regions-and-zones#zones)中，那么可以这样做。请参阅[从独立工作程序节点更新到工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)。
 
 
 ### 我想了解有关多专区集群设置的更多信息
@@ -91,19 +90,16 @@ subcollection: containers
 
 您可以向集群添加更多专区，以在一个区域内跨多个专区的工作程序池中复制工作程序节点。多专区集群旨在跨工作程序节点和专区均匀安排 pod，以确保可用性和故障恢复。如果工作程序节点未跨专区均匀分布，或者其中一个专区中的容量不足，那么 Kubernetes 调度程序可能无法安排所有请求的 pod。结果，pod 可能会进入**暂挂**状态，直到有足够的容量可用为止。如果要更改缺省行为，以使 Kubernetes 调度程序在多个专区中以最佳分布方式分布 pod，请使用 `preferredDuringSchedulingIgnoredDuringExecution` [pod 亲缘关系策略](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
 
-**为什么需要工作程序节点位于 3 个专区中？**</br>
-在 3 个专区中分布工作负载可确保应用程序的高可用性，以防一个或两个专区不可用的情况，同时这也使集群设置更符合成本效益。您可能会问为什么？下面是一个示例。
+**为什么需要工作程序节点位于 3 个专区中？**</br>在 3 个专区中分布工作负载可确保应用程序的高可用性，以防一个或两个专区不可用的情况，同时这也使集群设置更符合成本效益。您可能会问为什么？下面是一个示例。
 
 假设您需要具有 6 个核心的工作程序节点来处理应用程序的工作负载。要使集群的可用性更高，您具有以下选项：
 
 - **在另一个专区中复制资源：**使用此选项时，会有 2 个工作程序节点，每个节点在每个专区中有 6 个核心，总计 12 个核心。</br>
 - **在 3 个专区中分布资源：**使用此选项时，每个专区会部署 3 个核心，总容量为 9 个核心。要处理工作负载，在同一时间必须有两个专区在正常运行。如果一个专区不可用，那么其他两个专区可以处理工作负载。如果两个专区不可用，那么剩余 3 个核心将处理工作负载。每个区域部署 3 个核心意味着机器更小，从而降低了成本。</br>
 
-**如何设置我的 Kubernetes 主节点？**</br>
-如果在[精选多专区大城市](/docs/containers?topic=containers-regions-and-zones#zones)中创建多专区集群，那么会自动部署高可用性 Kubernetes 主节点，并在该大城市的各专区中分布三个副本。例如，如果集群位于 `dal10`、`dal12` 或 `dal13` 专区中，那么 Kubernetes 主节点的副本会在达拉斯多专区大城市中的各专区中进行分布。
+**如何设置我的 Kubernetes 主节点？**</br>在[多专区大城市位置](/docs/containers?topic=containers-regions-and-zones#zones)中创建集群时，会自动部署高可用性 Kubernetes 主节点，并在该大城市的各专区中分布三个副本。例如，如果集群位于 `dal10`、`dal12` 或 `dal13` 专区中，那么 Kubernetes 主节点的副本会在达拉斯多专区大城市中的各专区中进行分布。
 
-**Kubernetes 主节点变得不可用时会发生什么情况？**</br>
-[Kubernetes 主节点](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)是用于保持集群正常启动并运行的主组件。主节点将集群资源及其配置存储在充当集群单个事实点的 etcd 数据库中。Kubernetes API 服务器是从工作程序节点到主节点的所有集群管理请求或者想要与集群资源交互时的主入口点。<br><br>如果主节点发生故障，那么工作负载将继续在工作程序节点上运行，但是无法使用 `kubectl` 命令来处理集群资源或查看集群运行状况，直至主节点中的 Kubernetes API 服务器恢复运行。如果在主节点停运期间 pod 停止运行，那么在工作程序节点可再次访问 Kubernetes API 服务器之前，将无法重新调度 pod。<br><br>在主节点停运期间，您仍可以针对 {{site.data.keyword.containerlong_notm}} API 运行 `ibmcloud ks` 命令以处理基础架构资源，例如，工作程序节点或 VLAN。如果通过向集群添加或从中除去工作程序节点来更改当前集群配置，那么在主节点恢复运行前，更改不会发生。
+**Kubernetes 主节点变得不可用时会发生什么情况？**</br>[Kubernetes 主节点](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)是用于保持集群正常启动并运行的主组件。主节点将集群资源及其配置存储在充当集群单个事实点的 etcd 数据库中。Kubernetes API 服务器是从工作程序节点到主节点的所有集群管理请求或者想要与集群资源交互时的主入口点。<br><br>如果主节点发生故障，那么工作负载将继续在工作程序节点上运行，但是无法使用 `kubectl` 命令来处理集群资源或查看集群运行状况，直至主节点中的 Kubernetes API 服务器恢复运行。如果在主节点停运期间 pod 停止运行，那么在工作程序节点可再次访问 Kubernetes API 服务器之前，将无法重新调度 pod。<br><br>在主节点停运期间，您仍可以针对 {{site.data.keyword.containerlong_notm}} API 运行 `ibmcloud ks` 命令以处理基础架构资源，例如，工作程序节点或 VLAN。如果通过向集群添加或从中除去工作程序节点来更改当前集群配置，那么在主节点恢复运行前，更改不会发生。
 
 在主节点停运期间，请勿重新启动或重新引导工作程序节点。此操作会从工作程序节点中除去 pod。因为 Kubernetes API 服务器不可用，因此无法将 pod 重新调度到集群中的其他工作程序节点。
 {: important}
@@ -111,10 +107,10 @@ subcollection: containers
 
 要保护集群不受 Kubernetes 主节点故障的影响或在多专区集群不可用的区域中保护集群，可以[设置多个集群并通过全局负载均衡器连接](#multiple_clusters)。
 
-**是否必须执行任何操作从而使主节点可跨专区与工作程序进行通信？**</br>
-是。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+**是否必须执行任何操作从而使主节点可与不同专区中的工作程序进行通信？**</br>
+是。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
-**如何允许用户通过公共因特网访问应用程序？**</br>
+**如何允许用户通过公用因特网访问应用程序？**</br>
 可以使用 Ingress 应用程序负载均衡器 (ALB) 或 LoadBalancer 服务来公开应用程序。
 
 - **Ingress 应用程序负载均衡器 (ALB)：**缺省情况下，会自动在集群的每个专区中创建并启用公共 ALB。此外，还会自动创建并部署集群的 Cloudflare 多专区负载均衡器 (MZLB)，从而对于每个区域存在 1 个 MZLB。MZLB 将 ALB 的 IP 地址放在同一主机名后面，并且对这些 IP 地址启用运行状况检查，以确定它们是否可用。例如，如果工作程序节点位于美国东部区域的 3 个专区中，那么主机名 `yourcluster.us-east.containers.appdomain.cloud` 具有 3 个 ALB IP 地址。MZLB 运行状况检查会检查区域的每个专区中的公共 ALB IP，并根据这些运行状况检查使 DNS 查找结果保持更新。有关更多信息，请参阅 [Ingress 组件和体系结构](/docs/containers?topic=containers-ingress#planning)。
@@ -122,7 +118,7 @@ subcollection: containers
 - **LoadBalancer 服务：**LoadBalancer 服务只需在一个专区中设置。应用程序的入局请求会从一个专区路由到其他专区中的所有应用程序实例。如果此专区变得不可用，那么可能无法通过因特网访问应用程序。考虑到单专区故障，您可以在其他专区中设置更多 LoadBalancer 服务。有关更多信息，请参阅高可用性 [LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer#multi_zone_config)。
 
 **是否可为多专区集群设置持久性存储器？**</br>
-对于高可用性持久性存储器，请使用云服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)。您还可以尝试软件定义的存储 (SDS) 解决方案，例如使用 [SDS 机器](#sds)的 [Portworx](/docs/containers?topic=containers-portworx#portworx)。有关更多信息，请参阅[多专区集群持久性存储选项的比较](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。
+对于高可用性持久性存储器，请使用云服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)。您还可以尝试软件定义的存储 (SDS) 解决方案，例如使用 [SDS 机器](#sds)的 [Portworx](/docs/containers?topic=containers-portworx#portworx)。有关更多信息，请参阅[多专区集群持久性存储选项的比较](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。
 
 NFS 文件和块存储器不可跨专区共享。持久卷只能在实际存储设备所在的专区中使用。如果想要继续使用集群中的现有 NFS 文件或块存储器，那么必须将区域和专区标签应用于现有持久卷。这些标签可帮助 kube-scheduler 确定在何处安排使用持久卷的应用程序。运行以下命令并将 `<mycluster>` 替换为您的集群名称。
 
@@ -132,7 +128,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 {: pre}
 
 **我已创建多专区集群。为什么仍然只有一个专区？如何向集群添加专区？**</br>
-如果是[使用 CLI 创建多专区集群](/docs/containers?topic=containers-clusters#clusters_cli)的，那么会创建集群，但您必须将专区添加到工作程序池才能完成该过程。要跨多个专区，集群必须位于[多专区大城市](/docs/containers?topic=containers-regions-and-zones#zones)中。要向集群添加专区，并跨专区分布工作程序节点，请参阅[向集群添加专区](/docs/containers?topic=containers-clusters#add_zone)。
+如果是[使用 CLI 创建多专区集群](/docs/containers?topic=containers-clusters#clusters_cli)的，那么会创建集群，但您必须将专区添加到工作程序池才能完成该过程。要跨多个专区，集群必须位于[多专区大城市位置](/docs/containers?topic=containers-regions-and-zones#zones)中。要向集群添加专区，并跨专区分布工作程序节点，请参阅[向集群添加专区](/docs/containers?topic=containers-clusters#add_zone)。
 
 ### 目前管理集群的方式会有哪些变化？
 {: #mz_new_ways}
@@ -179,16 +175,14 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 
 要跨多个集群均衡工作负载，必须设置全局负载均衡器，并将应用程序负载均衡器 (ALB) 或 LoadBalancer 服务的 IP 地址添加到域。通过添加这些 IP 地址，可以在集群之间路由入局流量。要使全局负载均衡器检测其中一个集群是否不可用，请考虑向每个 IP 地址添加基于 ping 操作的运行状况检查。设置此检查后，DNS 提供程序会定期对添加到域的 IP 地址执行 ping 操作。如果一个 IP 地址变为不可用，那么不会再将流量发送到此 IP 地址。但是，Kubernetes 不会在可用集群中工作程序节点上自动重新启动不可用集群中的 pod。如果希望 Kubernetes 在可用集群中自动重新启动可用集群中的 pod，请考虑设置[多专区集群](#multizone)。
 
-**为什么需要 3 个集群位于 3 个专区中？**</br>
-类似于[在多专区集群中使用 3 个专区](#multizone)，您可以通过设置跨专区的 3 个集群，为应用程序提供更高可用性。此外，还可以通过购买更小的机器来处理工作负载，从而降低成本。
+**为什么需要 3 个集群位于 3 个专区中？**</br>类似于[在多专区集群中使用 3 个专区](#multizone)，您可以通过设置跨专区的 3 个集群，为应用程序提供更高可用性。此外，还可以通过购买更小的机器来处理工作负载，从而降低成本。
 
-**如果要跨区域设置多个集群该怎么做？**</br>
-可以在一个地理位置的不同区域（如美国南部和美国东部）或不同地理位置（如美国南部和欧洲中部）中设置多个集群。这两种设置为应用程序提供的可用性级别相同，但同时在数据共享和数据复制方面增加了复杂性。在大多数情况下，保持在同一地理位置中就足以满足需求。但是，如果您的用户分布在世界各地，那么最好设置用户所在的集群，以便用户在向应用程序发送请求时不会遇到很长的等待时间。
+**如果要跨区域设置多个集群该怎么做？**</br>可以在一个地理位置的不同区域（如美国南部和美国东部）或不同地理位置（如美国南部和欧洲中部）中设置多个集群。这两种设置为应用程序提供的可用性级别相同，但同时在数据共享和数据复制方面增加了复杂性。在大多数情况下，保持在同一地理位置中就足以满足需求。但是，如果您的用户分布在世界各地，那么最好设置用户所在的集群，以便用户在向应用程序发送请求时不会遇到很长的等待时间。
 
 **要设置用于多个集群的全局负载均衡器，请执行以下操作：**
 
 1. 在多个专区或区域中[创建集群](/docs/containers?topic=containers-clusters#clusters)。
-2. 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+2. 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 3. 在每个集群中，使用[应用程序负载均衡器 (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) 或 [LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer)来公开应用程序。
 4. 对于每个集群，列出 ALB 或 LoadBalancer 服务的公共 IP 地址。
    - 要列出集群中所有支持公共的 ALB 的 IP 地址，请运行以下命令：
@@ -199,9 +193,9 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 
    - 要列出 LoadBalancer 服务的 IP 地址，请运行以下命令：
      ```
-kubectl describe service <myservice>
-     ```
-    {: pre}
+    kubectl describe service <myservice>
+    ```
+     {: pre}
 
           **LoadBalancer Ingress** IP 地址是分配给 LoadBalancer 服务的可移植 IP 地址。
 
@@ -233,7 +227,7 @@ kubectl describe service <myservice>
 **公用和专用 VLAN 上的启用 VRF 的帐户、专用 Kubernetes 主节点和工作程序节点**</br>
 在运行 Kubernetes V1.11 或更高版本的集群中，可以将集群网络设置为使用公共和专用服务端点。启用专用服务端点后，Kubernetes 主节点与工作程序节点之间的通信始终通过该专用服务端点在专用 VLAN 上进行。即使为集群启用了公共服务端点，Kubernetes 主节点与工作程序节点之间的通信也保持在专用 VLAN 上进行。启用专用服务端点后，即无法将其禁用。您可以保留公共服务端点以用于通过因特网对 Kubernetes 主节点进行安全访问（例如，运行 `kubectl` 命令），也可以对仅专用服务端点的集群禁用公共服务端点。
 
-**仅专用 VLAN 上的非 VRF 或启用 VRF 的帐户、Kubernetes 主节点和工作程序节点**</br>
+**仅专用 VLAN 上的非 VRF 或支持 VRF 的帐户、Kubernetes 主节点和工作程序节点**</br>
 如果在仅专用 VLAN 上设置工作程序节点，那么这些工作程序节点无法在公用网络上自动公开其应用程序服务，并且在非 VRF 帐户中也无法连接到主节点。必须配置网关设备以在工作程序节点和主节点之间提供网络连接。
 
 
@@ -284,7 +278,7 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 相对于裸机，使用虚拟机 (VM) 能以更具成本效益的价格获得更高灵活性、更短供应时间以及更多自动可扩展性功能。您可以将 VM 用于最通用的用例，例如测试和开发环境、编译打包和生产环境、微服务以及业务应用程序。但是，在性能方面会有所牺牲。如果需要针对 RAM 密集型、数据密集型或 GPU 密集型工作负载进行高性能计算，请使用[裸机](#bm)。
 {: shortdesc}
 
-**是想要共享还是专用硬件？**</br>
+**是想要使用共享还是专用硬件？**</br>
 创建标准虚拟集群时，必须选择是希望底层硬件由多个 {{site.data.keyword.IBM_notm}} 客户共享（多租户）还是仅供您专用（单租户）。
 
 
@@ -293,16 +287,18 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 
 共享节点通常比专用节点更便宜，因为底层硬件的开销由多个客户分担。但是，在决定是使用共享还是专用节点时，可能需要咨询您的法律部门，以讨论应用程序环境所需的基础架构隔离和合规性级别。
 
-某些类型模板仅可用于一种类型的租户设置。例如，`m2c` VM 仅作为 `shared` 租户设置提供。
+某些类型模板仅可用于一种类型的租户设置。例如，`m3c` VM 仅作为 `shared` 租户设置提供。
 {: note}
 
 **VM 有哪些常规功能部件？**</br>
 虚拟机使用本地磁盘（而不是存储区联网 (SAN)）来实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。每个 VM 具备 1000Mbps 联网速度、用于操作系统文件系统的 25 GB 主本地磁盘存储和用于数据（例如，容器运行时和 `kubelet`）的 100 GB 辅助本地磁盘存储。工作程序节点上的本地存储器仅用于短期处理，更新或重新装入工作程序节点时将擦除主磁盘和辅助磁盘。对于持久性存储器解决方案，请参阅[规划高可用性持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)。
 
-**如果我拥有不推荐使用的 `u1c` 或 `b1c` 机器类型该怎么办？**</br>要开始使用 `u2c` 和 `b2c` 机器类型，请[通过添加工作程序节点来更新机器类型](/docs/containers?topic=containers-update#machine_type)。
+**如果我拥有旧机器类型该怎么办？**</br>
+例如，如果集群具有不推荐使用的 `x1c` 或较旧的 Ubuntu 16 `x2c` 工作程序节点类型模板，您可以[将集群更新为具有 Ubuntu 18 `x3c` 工作程序节点](/docs/containers?topic=containers-update#machine_type)。
+
 
 **哪些虚拟机类型模板可用？**</br>
-机器类型因专区而变化。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`. 例如，`m2c` VM 仅在达拉斯位置（`dal10、dal12 和 dal13`）中可用。您还可以复查可用[裸机](#bm)或 [SDS](#sds) 机器类型。
+工作程序节点类型模板因专区而变化。下表包含最新版本的类型模板，例如 `x3c` Ubuntu 18 工作程序节点类型模板，而不是较旧的 `x2c` Ubuntu 16 工作程序节点类型模板。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`。您还可以复查可用[裸机](#bm)或 [SDS](#sds) 机器类型。
 
 {: #vm-table}
 <table>
@@ -315,83 +311,83 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 </thead>
 <tbody>
 <tr>
-<td><strong>虚拟，u2c.2x4</strong>：对于快速测试、概念验证和其他轻型工作负载，请使用此最小大小的 VM。</td>
+<td><strong>虚拟，u3c.2x4</strong>：对于快速测试、概念验证和其他轻型工作负载，请使用此最小大小的 VM。</td>
 <td>2 / 4 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>虚拟，b2c.4x16</strong>：对于测试和开发以及其他轻型工作负载，请选择此均衡的 VM。</td>
+<td><strong>虚拟，b3c.4x16</strong>：对于测试和开发以及其他轻型工作负载，请选择此均衡的 VM。</td>
 <td>4 / 16 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>虚拟，b2c.16x64</strong>：对于中型工作负载，请选择此均衡的 VM。</td></td>
+<td><strong>虚拟，b3c.16x64</strong>：对于中型工作负载，请选择此均衡的 VM。</td></td>
 <td>16 / 64 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>虚拟，b2c.32x128</strong>：对于中型到大型工作负载（例如，具有大量并发用户的数据库和动态 Web 站点），请选择此均衡的 VM。</td>
+<td><strong>虚拟，b3c.32x128</strong>：对于中型到大型工作负载（例如，具有大量并发用户的数据库和动态 Web 站点），请选择此均衡的 VM。</td>
 <td>32 / 128 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>虚拟，b2c.56x242</strong>：对于大型工作负载（例如，具有大量并发用户的数据库和多个应用程序），请选择此均衡的 VM。</td>
+<td><strong>虚拟，b3c.56x242</strong>：对于大型工作负载（例如，具有大量并发用户的数据库和多个应用程序），请选择此均衡的 VM。</td>
 <td>56 / 242 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>虚拟，c2c.16x16</strong>：如果想要针对轻型工作负载完全均衡来自工作程序节点的计算资源，请使用此类型模板。</td>
+<td><strong>虚拟，c3c.16x16</strong>：如果想要针对轻型工作负载完全均衡来自工作程序节点的计算资源，请使用此类型模板。</td>
 <td>16 / 16GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，c2c.16x32</strong>：如果想要针对轻型到中型工作负载提供工作程序节点中比率为 1:2 的 CPU 和内存资源，请使用此类型模板。</td>
+<td><strong>虚拟，c3c.16x32</strong>：如果想要针对轻型到中型工作负载提供工作程序节点中比率为 1:2 的 CPU 和内存资源，请使用此类型模板。</td>
 <td>16 / 32GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，c2c.32x32</strong>：如果想要针对中型工作负载完全均衡来自工作程序节点的计算资源，请使用此类型模板。</td>
+<td><strong>虚拟，c3c.32x32</strong>：如果想要针对中型工作负载完全均衡来自工作程序节点的计算资源，请使用此类型模板。</td>
 <td>32 / 32GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，c2c.32x64</strong>：如果想要针对中型工作负载提供工作程序节点中比率为 1:2 的 CPU 和内存资源，请使用此类型模板。</td>
+<td><strong>虚拟，c3c.32x64</strong>：如果想要针对中型工作负载提供工作程序节点中比率为 1:2 的 CPU 和内存资源，请使用此类型模板。</td>
 <td>32 / 64GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>虚拟，m2c.8x64</strong>：如果想要针对需要更多内存的轻型到中型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
+<td><strong>虚拟，m3c.8x64</strong>：如果想要针对需要更多内存的轻型到中型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
 <td>8 / 64 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，m2c.16x128</strong>：如果想要针对需要更多内存的中型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
+<td><strong>虚拟，m3c.16x128</strong>：如果想要针对需要更多内存的中型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
 <td>16 / 128 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，m2c.30x240</strong>：如果想要针对需要更多内存的中型到大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
+<td><strong>虚拟，m3c.30x240</strong>：如果想要针对需要更多内存的中型到大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
 <td>30 / 240 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，m2c.48x384</strong>：如果想要针对需要更多内存的中型到大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
+<td><strong>虚拟，m3c.48x384</strong>：如果想要针对需要更多内存的中型到大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅作为 `--hardware shared` 租户提供。</td>
 <td>48 / 384 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，m2c.56x448</strong>：如果想要针对需要更多内存的大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
+<td><strong>虚拟，m3c.56x448</strong>：如果想要针对需要更多内存的大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅作为 `--hardware shared` 租户提供。</td>
 <td>56 / 448 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，m2c.64x512</strong>：如果想要针对需要更多内存的大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
+<td><strong>虚拟，m3c.64x512</strong>：如果想要针对需要更多内存的大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅作为 `--hardware shared` 租户提供。</td>
 <td>64 / 512 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
@@ -413,14 +409,14 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 
 除了可信计算外，还可以利用 {{site.data.keyword.datashield_full}} (Beta)。{{site.data.keyword.datashield_short}} 与 Intel® Software Guard Extensions (SGX) 和 Fortanix® 技术相集成，以便保护使用中的 {{site.data.keyword.Bluemix_notm}} 容器工作负载代码和数据。应用程序代码和数据在 CPU 固化的相关可调度单元组中运行，这是工作程序节点上用于保护应用程序关键方面的可信内存区域，有助于使代码和数据保持机密性且不被修改。如果您或您的公司由于内部策略、政府法规或行业合规性要求而需要数据敏感度，那么此解决方案可帮助您移至云。示例用例包括金融机构和医疗保健机构，或实施了需要内部部署云解决方案的政府政策的国家或地区。
 
-**裸机听起来很不错！现在，有什么阻止我订购？**</br>
+**裸机听起来很不错！有什么因素会影响我立即订购吗？**</br>
 裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。
 
 裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。订购或取消裸机服务器后，该过程在 IBM Cloud Infrastructure (SoftLayer) 帐户中手动完成。因此，完成此过程可能需要超过一个工作日的时间。
 {: important}
 
 **我可订购哪些裸机类型模板？**</br>
-机器类型因专区而变化。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`. 您还可以复查可用 [VM](#vm) 或 [SDS](#sds) 机器类型。
+工作程序节点类型模板因专区而变化。下表包含最新版本的类型模板，例如 `x3c` Ubuntu 18 工作程序节点类型模板，而不是较旧的 `x2c` Ubuntu 16 工作程序节点类型模板。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`。您还可以复查可用 [VM](#vm) 或 [SDS](#sds) 机器类型。
 
 裸机针对不同用例进行了优化，例如，RAM 密集型、数据密集型或 GPU 密集型工作负载。
 
@@ -443,43 +439,43 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 </thead>
 <tbody>
 <tr>
-<td><strong>RAM 密集型裸机，mr1c.28x512</strong>：最大限度提高可用于工作程序节点的 RAM。</td>
+<td><strong>RAM 密集型裸机，mr3c.28x512</strong>：最大限度提高可用于工作程序节点的 RAM。</td>
 <td>28 / 512 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU 裸机，mg1c.16x128</strong>：对于数学密集型工作负载（例如，高性能计算、机器学习或 3D 应用程序），请选择此类型。此类型模板有 1 块 Tesla K80 物理卡，每块卡有 2 个图形处理单元 (GPU)，共有 2 个 GPU。</td>
+<td><strong>GPU 裸机，mg3c.16x128</strong>：对于数学密集型工作负载（例如，高性能计算、机器学习或 3D 应用程序），请选择此类型。此类型模板有 1 块 Tesla K80 物理卡，每块卡有 2 个图形处理单元 (GPU)，共有 2 个 GPU。</td>
 <td>16 / 128 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU 裸机，mg1c.28x256</strong>：对于数学密集型工作负载（例如，高性能计算、机器学习或 3D 应用程序），请选择此类型。此类型模板有 2 块 Tesla K80 物理卡，每块卡有 2 个 GPU，共有 4 个 GPU。</td>
+<td><strong>GPU 裸机，mg3c.28x256</strong>：对于数学密集型工作负载（例如，高性能计算、机器学习或 3D 应用程序），请选择此类型。此类型模板有 2 块 Tesla K80 物理卡，每块卡有 2 个 GPU，共有 4 个 GPU。</td>
 <td>28 / 256 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>数据密集型裸机，md1c.16x64.4x4tb</strong>：要将大量本地磁盘存储（包括用于提高数据可用性的 RAID）用于分布式文件系统、大型数据库和大数据分析等工作负载，请使用此类型。</td>
+<td><strong>数据密集型裸机，md3c.16x64.4x4tb</strong>：要将大量本地磁盘存储（包括用于提高数据可用性的 RAID）用于分布式文件系统、大型数据库和大数据分析等工作负载，请使用此类型。</td>
 <td>16 / 64 GB</td>
 <td>2 个 2 TB RAID1 / 4 个 4 TB SATA RAID10</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>数据密集型裸机，md1c.28x512.4x4tb</strong>：要将大量本地磁盘存储（包括用于提高数据可用性的 RAID）用于分布式文件系统、大型数据库和大数据分析等工作负载，请使用此类型。</td>
+<td><strong>数据密集型裸机，md3c.28x512.4x4tb</strong>：要将大量本地磁盘存储（包括用于提高数据可用性的 RAID）用于分布式文件系统、大型数据库和大数据分析等工作负载，请使用此类型。</td>
 <td>28 / 512 GB</td>
 <td>2 个 2 TB RAID1 / 4 个 4 TB SATA RAID10</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>均衡裸机，mb2c.4x32</strong>：用于所需计算资源比虚拟机所提供的计算资源更多的均衡工作负载。此类型模板还可以通过 Intel® Software Guard Extensions (SGX) 启用，以便您可以使用 <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta) <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 来加密数据内存。</td>
+<td><strong>均衡裸机，mb3c.4x32</strong>：用于所需计算资源比虚拟机所提供的计算资源更多的均衡工作负载。此类型模板还可以通过 Intel® Software Guard Extensions (SGX) 启用，以便您可以使用 <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta) <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 来加密数据内存。</td>
 <td>4 / 32 GB</td>
 <td>2 TB SATA / 2 TB SATA</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>均衡裸机，mb1c.16x64</strong>：用于需要的计算资源比虚拟机所提供的计算资源更多的均衡工作负载。</td>
+<td><strong>均衡裸机，mb3c.16x64</strong>：用于所需计算资源比虚拟机所提供的计算资源更多的均衡工作负载。</td>
 <td>16 / 64 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>10000 Mbps</td>
@@ -503,7 +499,7 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 有关更多存储解决方案的信息，请参阅[规划高可用性持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)。
 
 **我可订购哪些 SDS 类型模板？**</br>
-机器类型因专区而变化。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`. 您还可以复查可用[裸机](#bm)或 [VM](#vm) 机器类型。
+工作程序节点类型模板因专区而变化。下表包含最新版本的类型模板，例如 `x3c` Ubuntu 18 工作程序节点类型模板，而不是较旧的 `x2c` Ubuntu 16 工作程序节点类型模板。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`。您还可以复查可用[裸机](#bm)或 [VM](#vm) 机器类型。
 
 选择具有正确的存储配置的机器类型以支持您的工作负载。一些类型模板具有以下磁盘和存储配置的组合。例如，一些类型模板可能具有一个 SATA 主磁盘以及一个原始 SSD 辅助磁盘。
 
@@ -525,28 +521,28 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 </thead>
 <tbody>
 <tr>
-<td><strong>具有 SDS 的裸机，ms2c.4x32.1.9tb.ssd</strong>：如果需要额外的本地存储器以获取性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
+<td><strong>具有 SDS 的裸机，ms3c.4x32.1.9tb.ssd</strong>：如果需要额外的本地存储器以提高性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
 <td>4 / 32 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>1.9 TB 原始 SSD（设备路径：`/dev/sdc`）</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>具有 SDS 的裸机，ms2c.16x64.1.9tb.ssd</strong>：如果需要额外的本地存储器以获取性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
+<td><strong>具有 SDS 的裸机，ms3c.16x64.1.9tb.ssd</strong>：如果需要额外的本地存储器以提高性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
 <td>16 / 64 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>1.9 TB 原始 SSD（设备路径：`/dev/sdc`）</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>具有 SDS 的裸机，ms2c.28x256.3.8tb.ssd</strong>：如果需要额外的本地存储器以获取性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
+<td><strong>具有 SDS 的裸机，ms3c.28x256.3.8tb.ssd</strong>：如果需要额外的本地存储器以提高性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
 <td>28 / 256 GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
 <td>3.8 TB 原始 SSD（设备路径：`/dev/sdc`）</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>具有 SDS 的裸机，ms2c.28x512.4x3.8tb.ssd</strong>：如果需要额外的本地存储器以获取性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
+<td><strong>具有 SDS 的裸机，ms3c.28x512.4x3.8tb.ssd</strong>：如果需要额外的本地存储器以提高性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
 <td>28 / 512 GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
 <td>4 个磁盘，3.8 TB 原始 SSD（设备路径：`/dev/sdc`、`/dev/sdd`、`/dev/sde` 和 `/dev/sdf`）</td>
@@ -574,16 +570,28 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 <tr>
   <th>内存层</th>
   <th>保留的 % 或保留量</th>
-  <th>`b2c.4x16` 工作程序节点 (16 GB) 示例</th>
+  <th>`b3c.4x16` 工作程序节点 (16 GB) 示例</th>
   <th>`mg1c.28x256` 工作程序节点 (256 GB) 示例</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>前 16 GB (0-16 GB)</td>
+  <td>前 4 GB (0-4 GB)</td>
+  <td>25% 的内存</td>
+  <td>1 GB</td>
+  <td>1 GB</td>
+</tr>
+<tr>
+  <td>接下来的 4 GB (5-8 GB)</td>
+  <td>20% 的内存</td>
+  <td>0.8 GB</td>
+  <td>0.8 GB</td>
+</tr>
+<tr>
+  <td>接下来的 8 GB (9-16 GB)</td>
   <td>10% 的内存</td>
-  <td>1.6 GB</td>
-  <td>1.6 GB</td>
+  <td>0.8 GB</td>
+  <td>0.8 GB</td>
 </tr>
 <tr>
   <td>接下来 112 GB (17-128 GB)</td>
@@ -606,8 +614,8 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 <tr>
   <td>**总保留量**</td>
   <td>**（变化）**</td>
-  <td>**1.7 GB，共 16 GB**</td>
-  <td>**10.96 GB，共 256 GB**</td>
+  <td>**2.7 GB，共 16 GB**</td>
+  <td>**11.96 GB，共 256 GB**</td>
 </tr>
 </tbody>
 </table>
@@ -618,7 +626,7 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 <tr>
   <th>CPU 层</th>
   <th>保留的 %</th>
-  <th>`b2c.4x16` 工作程序节点（4 个核心）示例</th>
+  <th>`b3c.4x16` 工作程序节点（4 个核心）示例</th>
   <th>`mg1c.28x256` 工作程序节点（28 个核心）示例</th>
 </tr>
 </thead>

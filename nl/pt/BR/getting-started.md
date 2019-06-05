@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -30,17 +30,6 @@ Tenha sucesso desde o início com o {{site.data.keyword.containerlong}} implemen
 {:shortdesc}
 
 Os contêineres são uma maneira padrão de empacotar apps e todas as suas dependências para que seja possível mover perfeitamente os apps entre ambientes. Ao contrário de máquinas virtuais, os contêineres não empacotam o sistema operacional. Somente o código de app, o tempo de execução, as ferramentas de sistema, as bibliotecas e as configurações são empacotados dentro de contêineres. Os contêineres são mais leves, móveis e eficientes do que máquinas virtuais.
-
-
-Clique em uma opção para começar:
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Clique em um ícone para iniciar rapidamente com o {{site.data.keyword.containerlong_notm}}. Com o {{site.data.keyword.Bluemix_dedicated_notm}}, clique nesse ícone para ver suas opções." style="width:440px;" />
-<map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="Introdução aos clusters do Kubernetes em{{site.data.keyword.Bluemix_notm}}" title="Introdução aos clusters do Kubernetes em{{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
-<area href="/docs/containers?topic=containers-cs_cli_install" alt="Instalar as CLIs." title="Instalar as CLIs." shape="rect" coords="155, -1, 289, 210" />
-<area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} ambiente de nuvem" title="{{site.data.keyword.Bluemix_notm}} ambiente de nuvem" shape="rect" coords="326, -10, 448, 218" />
-</map>
-
 
 ## Introdução aos clusters
 {: #clusters_gs}
@@ -76,7 +65,7 @@ Bom Trabalho! Você criou seu primeiro cluster do Kubernetes. Aqui estão alguns
 **O que vem a seguir?**</br>
 Experimente algumas coisas com seu cluster grátis antes de expirar.
 
-* Percorra o [primeiro tutorial do {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) para criar um cluster Kubernetes, instalar a CLI, criar um registro privado, configurar seu ambiente em cluster e incluir um serviço em seu cluster.
+* Acesse o [primeiro tutorial do {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) para criar um cluster do Kubernetes, instalando a CLI ou usando o Terminal do Kubernetes, criando um registro privado, configurando o seu ambiente de cluster e incluindo um serviço em seu cluster.
 * Mantenha seu ritmo com o [segundo tutorial do {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial) sobre a implementação de apps no cluster.
 * [Crie um cluster padrão](/docs/containers?topic=containers-clusters#clusters_ui) com múltiplos nós para disponibilidade mais alta.
 

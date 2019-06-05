@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # IBM Cloud Kubernetes Service CLI
 {: #cs_cli_reference}
 
@@ -34,10 +33,11 @@ subcollection: containers
 
 在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
 
-在查找 `ibmcloud cr` 命令吗？请参阅 [{{site.data.keyword.registryshort_notm}} CLI 参考](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)。在查找 `kubectl` 命令吗？请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/)。
+在查找 `ibmcloud cr` 命令吗？请参阅 [{{site.data.keyword.registryshort_notm}} CLI 参考](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)。在查找 `kubectl` 命令吗？请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubectl.docs.kubernetes.io/)。
 {:tip}
 
-## 使用 Beta 命令结构
+
+## 使用 Beta {{site.data.keyword.containerlong_notm}} 插件
 {: #cs_beta}
 
 重新设计的 {{site.data.keyword.containerlong_notm}} 插件版本作为 Beta 提供。重新设计的 {{site.data.keyword.containerlong_notm}} 插件将命令分组成不同类别，并将命令从连字符结构更改为空格结构。
@@ -64,7 +64,7 @@ export IKS_BETA_VERSION=<beta_version>
       <td><code>0.2</code>（缺省值）</td>
       <td>旧版：命令以连字符结构显示，并按字母顺序列出。</td>
       <td>旧版和 Beta：可以运行旧版连字符结构的命令 (`ibmcloud ks alb-cert-get`)，也可以运行 Beta 空格结构的命令 (`ibmcloud ks alb cert get`)。</td>
-  </tr>
+    </tr>
     <tr>
       <td><code>0.3</code></td>
       <td>Beta：命令以空格结构显示，并按类别列出。</td>
@@ -100,7 +100,7 @@ export IKS_BETA_VERSION=<beta_version>
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks api](#cs_api)</td>
+    <td>[ibmcloud ks api](#cs_cli_api)</td>
     <td>[ibmcloud ks api-key-info](#cs_api_key_info)</td>
     <td>[ibmcloud ks api-key-reset](#cs_api_key_reset)</td>
     <td>[ibmcloud ks apiserver-config-get](#cs_apiserver_config_get)</td>
@@ -146,25 +146,25 @@ export IKS_BETA_VERSION=<beta_version>
  </thead>
  <tbody>
   <tr>
+    <td>[ibmcloud ks addon-versions](#cs_addon_versions)</td>
     <td>[ibmcloud ks cluster-addon-disable](#cs_cluster_addon_disable)</td>
     <td>[ibmcloud ks cluster-addon-enable](#cs_cluster_addon_enable)</td>
     <td>[ibmcloud ks cluster-addons](#cs_cluster_addons)</td>
-    <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
   </tr>
   <tr>
+  <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
     <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
     <td>[ibmcloud ks cluster-feature-disable](#cs_cluster_feature_disable)</td>
     <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
-    <td>[ibmcloud ks cluster-feature-ls](#cs_cluster_feature_ls)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
+  <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
     <td>[ibmcloud ks cluster-pull-secret-apply](#cs_cluster_pull_secret_apply)</td>
     <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
+  <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
     <td> </td>
@@ -330,6 +330,40 @@ export IKS_BETA_VERSION=<beta_version>
 
 </br>
 
+<table summary="网络负载均衡器 (NLB) 命令表">
+<caption>网络负载均衡器 (NLB) 命令</caption>
+<col width = 25%>
+<col width = 25%>
+<col width = 25%>
+  <thead>
+    <tr>
+      <th colspan=4>网络负载均衡器 (NLB) 命令</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-add](#cs_nlb-dns-add)</td>
+      <td>[ibmcloud ks nlb-dns-create](#cs_nlb-dns-create)</td>
+      <td>[ibmcloud ks nlb-dnss](#cs_nlb-dns-ls)</td>
+      <td>[ibmcloud ks nlb-dns-rm](#cs_nlb-dns-rm)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-configure](#cs_nlb-dns-monitor-configure)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-get](#cs_nlb-dns-monitor-get)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-disable](#cs_nlb-dns-monitor-disable)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-enable](#cs_nlb-dns-monitor-enable)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-ls](#cs_nlb-dns-monitor-ls)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-status](#cs_nlb-dns-monitor-status)</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+</br>
+
 <table summary="区域命令表">
 <caption>区域命令</caption>
 <col width="25%">
@@ -343,7 +377,7 @@ export IKS_BETA_VERSION=<beta_version>
     <td>[ibmcloud ks region](#cs_region)</td>
     <td>[ibmcloud ks region-set](#cs_region-set)</td>
     <td>[ibmcloud ks regions](#cs_regions)</td>
-    <td>[ibmcloud ks zones](#cs_datacenters)</td>
+  <td>[ibmcloud ks zones](#cs_datacenters)</td>
   </tr>
 </tbody>
 </table>
@@ -407,18 +441,24 @@ export IKS_BETA_VERSION=<beta_version>
 
 ### ibmcloud ks api
 
-{: #cs_api}
+{: #cs_cli_api}
 
 将 {{site.data.keyword.containerlong_notm}} 的 API 端点设定为目标。如果未指定端点，那么可以查看有关设定为目标的当前端点的信息。
 {: shortdesc}
+
+支持以下端点：
+* 全球：`https://containers.cloud.ibm.com`
+* 达拉斯（美国南部，us-south）：`https://us-south.containers.cloud.ibm.com`
+* 法兰克福（欧洲中部，eu-de）：`https://eu-central.containers.cloud.ibm.com`
+* 伦敦（英国南部，eu-gb）：`https://uk-south.containers.cloud.ibm.com`
+* 悉尼（亚太地区南部，au-syd）：`https://ap-south.containers.cloud.ibm.com`
+* 东京（亚太地区北部，jp-tok）：`https://ap-north.containers.cloud.ibm.com`
+* 华盛顿（美国东部，us-east）：`https://us-east.containers.cloud.ibm.com`
 
 ```
 ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
 ```
 {: pre}
-
-要切换区域？请改为使用 `ibmcloud ks region-set` [命令](#cs_region-set)。
-{: tip}
 
 <strong>最低必需许可权</strong>：无
 
@@ -426,15 +466,7 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 
    <dl>
    <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
-   <dd>{{site.data.keyword.containerlong_notm}} API 端点。请注意，此端点不同于 {{site.data.keyword.Bluemix_notm}} 端点。需要此值来设置 API 端点。接受的值如下：<ul>
-   <li>全球端点：https://containers.cloud.ibm.com</li>
-   <li>亚太地区北部端点：https://ap-north.containers.cloud.ibm.com</li>
-   <li>亚太地区南部端点：https://ap-south.containers.cloud.ibm.com</li>
-   <li>欧洲中部端点：https://eu-central.containers.cloud.ibm.com</li>
-   <li>英国南部端点：https://uk-south.containers.cloud.ibm.com</li>
-   <li>美国东部端点：https://us-east.containers.cloud.ibm.com</li>
-   <li>美国南部端点：https://us-south.containers.cloud.ibm.com</li></ul>
-   </dd>
+   <dd>{{site.data.keyword.containerlong_notm}} API 端点。请注意，此端点不同于 {{site.data.keyword.Bluemix_notm}} 端点。需要此值来设置 API 端点。</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>允许不安全的 HTTP 连接。此标志是可选的。</dd>
@@ -716,11 +748,21 @@ ibmcloud ks help
 <strong>命令选项</strong>：无
 
 
-### ibmcloud ks init [--host HOST]
+###         ibmcloud ks init
+        
 {: #cs_init}
 
 初始化 {{site.data.keyword.containerlong_notm}} 插件或指定要在其中创建或访问 Kubernetes 集群的区域。
 {: shortdesc}
+
+支持以下端点：
+* 全球：`https://containers.cloud.ibm.com`
+* 达拉斯（美国南部，us-south）：`https://us-south.containers.cloud.ibm.com`
+* 法兰克福（欧洲中部，eu-de）：`https://eu-central.containers.cloud.ibm.com`
+* 伦敦（英国南部，eu-gb）：`https://uk-south.containers.cloud.ibm.com`
+* 悉尼（亚太地区南部，au-syd）：`https://ap-south.containers.cloud.ibm.com`
+* 东京（亚太地区北部，jp-tok）：`https://ap-north.containers.cloud.ibm.com`
+* 华盛顿（美国东部，us-east）：`https://us-east.containers.cloud.ibm.com`
 
 ```
 ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
@@ -750,10 +792,16 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
    </dl>
 
 **示例**：
-```
-ibmcloud ks init --host https://uk-south.containers.cloud.ibm.com
-```
-{: pre}
+*  将美国南部区域端点设定为目标的示例：
+  ```
+  ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
+  ```
+  {: pre}
+*  将全球端点设定为目标的示例：
+  ```
+  ibmcloud ks init --host https://containers.cloud.ibm.com
+  ```
+  {: pre}
 
 ### ibmcloud ks messages
 {: #cs_messages}
@@ -773,6 +821,39 @@ ibmcloud ks messages
 
 ## 集群命令：管理
 {: #cluster_mgmt_commands}
+
+### ibmcloud ks addon-versions
+{: #cs_addon_versions}
+
+查看 {{site.data.keyword.containerlong_notm}} 中支持的受管附加组件版本的列表。
+{: shortdesc}
+
+```
+ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--json] [-s]
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：无
+
+**命令选项**：
+
+  <dl>
+  <dt><code>--addon <em>ADD-ON_NAME</em></code></dt>
+  <dd>可选：指定附加组件名称（如 <code>istio</code> 或 <code>knative</code>）以过滤其版本。</dd>
+
+  <dt><code>--json</code></dt>
+  <dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>不显示每日消息或更新提示。此值是可选的。</dd>
+  </dl>
+
+**示例**：
+
+  ```
+  ibmcloud ks addon-versions --addon istio
+  ```
+  {: pre}
 
 ### ibmcloud ks cluster-addon-disable
 {: #cs_cluster_addon_disable}
@@ -879,18 +960,43 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
 <strong>命令选项</strong>：
-
 <dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-  <dd>集群的名称或标识。此值是必需的。</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+</dl>
+
+**示例**：
+```
+  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
+  ```
+{: pre}
+
+#### ibmcloud ks cluster-addon-disable kube-terminal
+{: #cs_cluster_addon_disable_kube-terminal}
+
+禁用 [Kubernetes 终端](/docs/containers?topic=containers-cs_cli_install#cli_web)附加组件。要在 {{site.data.keyword.containerlong_notm}} 集群控制台中使用 Kubernetes 终端，您必须首先重新启用该附加组件。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster CLUSTER
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
 </dl>
 
 **示例**：
 
-  ```
-  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addon-enable
 {: #cs_cluster_addon_enable}
@@ -901,28 +1007,31 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_enable_istio}
 
-启用受管 [Istio 附加组件](/docs/containers?topic=containers-istio)。安装 Istio V1.0.5 的核心组件，包括 Prometheus。
+启用受管 [Istio 附加组件](/docs/containers?topic=containers-istio)。安装 Istio 的核心组件，包括 Prometheus。
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
+ibmcloud ks cluster-addon-enable istio --cluster CLUSTER [--version VERSION]
 ```
 {: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
 <strong>命令选项</strong>：
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>可选：指定要安装的附加组件版本。如果未指定版本，那么将安装缺省版本。</dd>
 </dl>
 
 **示例**：
 
-  ```
+```
   ibmcloud ks cluster-addon-enable istio --cluster my_cluster
   ```
-  {: pre}
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-extras
 {: #cs_cluster_addon_enable_istio_extras}
@@ -931,28 +1040,29 @@ ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
 
 <strong>命令选项</strong>：
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>可选：指定要安装的附加组件版本。如果未指定版本，那么将安装缺省版本。</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>可选：启用 <code>istio</code> 附加组件依赖项。</dd>
+<dt><code>-y</code></dt>
+<dd>可选：启用 <code>istio</code> 附加组件依赖项。</dd>
 </dl>
 
 **示例**：
-
-  ```
+```
   ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
   ```
-  {: pre}
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-sample-bookinfo
 {: #cs_cluster_addon_enable_istio_sample_bookinfo}
@@ -961,7 +1071,7 @@ ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
@@ -970,19 +1080,21 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
 <strong>命令选项</strong>：
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>可选：启用 <code>istio</code> 和 <code>istio-extras</code> 附加组件依赖项。</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>可选：指定要安装的附加组件版本。如果未指定版本，那么将安装缺省版本。</dd>
+
+<dt><code>-y</code></dt>
+<dd>可选：启用 <code>istio</code> 和 <code>istio-extras</code> 附加组件依赖项。</dd>
 </dl>
 
 **示例**：
-
-  ```
+```
   ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
   ```
-  {: pre}
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_enable_knative}
@@ -991,7 +1103,7 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
@@ -1000,19 +1112,50 @@ ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
 <strong>命令选项</strong>：
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>可选：启用 <code>istio</code> 附加组件依赖项。</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>可选：指定要安装的附加组件版本。如果未指定版本，那么将安装缺省版本。</dd>
+
+<dt><code>-y</code></dt>
+<dd>可选：启用 <code>istio</code> 附加组件依赖项。</dd>
 </dl>
 
 **示例**：
-
-  ```
+```
   ibmcloud ks cluster-addon-enable knative --cluster my_cluster
   ```
-  {: pre}
+{: pre}
+
+#### ibmcloud ks cluster-addon-enable kube-terminal
+{: #cs_cluster_addon_enable_kube-terminal}
+
+启用 [Kubernetes 终端](/docs/containers?topic=containers-cs_cli_install#cli_web)附加组件以在 {{site.data.keyword.containerlong_notm}} 集群控制台中使用 Kubernetes 终端。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+<strong>命令选项</strong>：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>可选：指定要安装的附加组件版本。如果未指定版本，那么将安装缺省版本。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addons
 {: #cs_cluster_addons}
@@ -1028,23 +1171,21 @@ ibmcloud ks cluster-addons --cluster CLUSTER
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
 
 <strong>命令选项</strong>：
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
 </dl>
 
 **示例**：
-
-  ```
+```
   ibmcloud ks cluster-addons --cluster my_cluster
   ```
-  {: pre}
+{: pre}
 
 ### ibmcloud ks cluster-config
 {: #cs_cluster_config}
 
-登录后，下载 Kubernetes 配置数据和证书，以连接到集群并运行 `kubectl` 命令。这些文件会下载到 `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
+登录后，下载 Kubernetes 配置数据和证书，以连接到集群并运行 `kubectl` 命令。这些文件会下载到 `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`。
 {: shortdesc}
 
 ```
@@ -1058,32 +1199,30 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 
 **命令选项**：
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
 
-   <dt><code>--admin</code></dt>
-   <dd>下载超级用户角色的 TLS 证书和许可权文件。您可以使用证书来自动执行集群中的任务，而无需重新认证。这些文件会下载到 `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`。此值是可选的。</dd>
+<dt><code>--admin</code></dt>
+<dd>下载超级用户角色的 TLS 证书和许可权文件。您可以使用证书来自动执行集群中的任务，而无需重新认证。这些文件会下载到 `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`。此值是可选的。</dd>
 
-   <dt><code>--network</code></dt>
-   <dd>下载在集群中运行 <code>calicoctl</code> 命令所需的 Calico 配置文件、TLS 证书和许可权文件。此值是可选的。**注**：要获取用于已下载的 Kubernetes 配置数据和证书的 export 命令，您必须运行此命令而不指定此标志。</dd>
+<dt><code>--network</code></dt>
+<dd>下载在集群中运行 <code>calicoctl</code> 命令所需的 Calico 配置文件、TLS 证书和许可权文件。此值是可选的。**注**：要获取用于已下载的 Kubernetes 配置数据和证书的 export 命令，您必须运行此命令而不指定此标志。</dd>
 
-   <dt><code>--export</code></dt>
-   <dd>下载 Kubernetes 配置数据和证书，而不包含导出命令以外的任何消息。由于未显示任何消息，因此您可以在创建自动化脚本时使用此标志。此值是可选的。</dd>
+<dt><code>--export</code></dt>
+<dd>下载 Kubernetes 配置数据和证书，而不包含导出命令以外的任何消息。由于未显示任何消息，因此您可以在创建自动化脚本时使用此标志。此值是可选的。</dd>
 
-   <dt><code>--skip-rbac</code></dt>
-   <dd>跳过基于 {{site.data.keyword.Bluemix_notm}} IAM 服务访问角色向集群配置添加用户 Kubernetes RBAC 角色的操作。仅当您[管理自己的 Kubernetes RBAC 角色](/docs/containers?topic=containers-users#rbac)时，才包含此选项。如果是使用 [{{site.data.keyword.Bluemix_notm}} IAM 服务访问角色](/docs/containers?topic=containers-access_reference#service)来管理所有 RBAC 用户，请不要包含此选项。</dd>
+<dt><code>--skip-rbac</code></dt>
+<dd>跳过基于 {{site.data.keyword.Bluemix_notm}} IAM 服务访问角色向集群配置添加用户 Kubernetes RBAC 角色的操作。仅当您[管理自己的 Kubernetes RBAC 角色](/docs/containers?topic=containers-users#rbac)时，才包含此选项。如果是使用 [{{site.data.keyword.Bluemix_notm}} IAM 服务访问角色](/docs/containers?topic=containers-access_reference#service)来管理所有 RBAC 用户，请不要包含此选项。</dd>
 
-  <dt><code>-s</code></dt>
-  <dd>不显示每日消息或更新提示。此值是可选的。</dd>
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
 
-  <dt><code>--yaml</code></dt>
-  <dd>以 YAML 格式打印命令输出。此值是可选的。</dd>
-
-   </dl>
+<dt><code>--yaml</code></dt>
+<dd>以 YAML 格式打印命令输出。此值是可选的。</dd>
+</dl>
 
 **示例**：
-
 ```
 ibmcloud ks cluster-config --cluster my_cluster
 ```
@@ -1097,7 +1236,7 @@ ibmcloud ks cluster-config --cluster my_cluster
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 ```
 {: pre}
 
@@ -1110,11 +1249,8 @@ ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone Z
 
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-
 <dd>用于创建标准集群的 YAML 文件的路径。您可以使用 YAML 文件，而不使用此命令中提供的选项来定义集群的特征。
-此值对于标准集群是可选的，且不可用于免费集群。
-
-<p class="note">如果在命令中提供的选项与 YAML 文件中的参数相同，那么命令中的值将优先于 YAML 中的值。例如，您在 YAML 文件中定义了位置，并在命令中使用了 <code>--zone</code> 选项，那么在该命令选项中输入的值会覆盖 YAML 文件中的相应值。</p>
+此值对于标准集群是可选的，且不可用于免费集群。<p class="note">如果在命令中提供的选项与 YAML 文件中的参数相同，那么命令中的值将优先于 YAML 中的值。例如，您在 YAML 文件中定义了位置，并在命令中使用了 <code>--zone</code> 选项，那么在该命令选项中输入的值会覆盖 YAML 文件中的相应值。</p>
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
@@ -1129,66 +1265,13 @@ kube-version: <em>&lt;kube-version&gt;</em>
 diskEncryption: <em>false</em>
 trusted: <em>true</em>
 </code></pre>
-
-
-<table>
-    <caption>了解 YAML 文件的组成部分</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code><em>name</em></code></td>
-    <td>将 <code><em>&lt;cluster_name&gt;</em></code> 替换为集群的名称。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。
-</td>
-    </tr>
-    <tr>
-    <td><code><em>zone</em></code></td>
-    <td>将 <code><em>&lt;zone&gt;</em></code> 替换为要在其中创建集群的专区。可用的专区取决于您登录到的区域。要列出可用专区，请运行 <code>ibmcloud ks zones</code>。</td>
-     </tr>
-     <tr>
-     <td><code><em>no-subnet</em></code></td>
-     <td>缺省情况下，将在与集群关联的 VLAN 上创建公用和专用可移植子网。将 <code><em>&lt;no-subnet&gt;</em></code> 替换为 <code><em>true</em></code> 可避免为集群创建子网。您可以日后为集群[创建](#cs_cluster_subnet_create)或[添加](#cs_cluster_subnet_add)子网。</td>
-      </tr>
-     <tr>
-     <td><code><em>machine-type</em></code></td>
-     <td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要将工作程序节点部署到的机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-type` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)的文档。</td>
-     </tr>
-     <tr>
-     <td><code><em>private-vlan</em></code></td>
-     <td>将 <code><em>&lt;private_VLAN&gt;</em></code> 替换为要用于工作程序节点的专用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> 并查找以 <code>bcr</code>（后端路由器）开头的 VLAN 路由器。</td>
-     </tr>
-     <tr>
-     <td><code><em>public-vlan</em></code></td>
-     <td>将 <code><em>&lt;public_VLAN&gt;</em></code> 替换为要用于工作程序节点的公用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> 并查找以 <code>fcr</code>（前端路由器）开头的 VLAN 路由器。</td>
-     </tr>
-     <tr>
-     <td><code><em>hardware</em></code></td>
-     <td>对于虚拟机类型：工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 <code>shared</code>。</td>
-     </tr>
-     <tr>
-     <td><code><em>workerNum</em></code></td>
-     <td>将 <code><em>&lt;number_workers&gt;</em></code> 替换为要部署的工作程序节点数。</td>
-     </tr>
-     <tr>
-      <td><code><em>kube-version</em></code></td>
-      <td>集群主节点的 Kubernetes 版本。此值是可选的。未指定版本时，会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>ibmcloud ks kube-versions</code>。
-</td></tr>
-      <tr>
-      <td><code>diskEncryption: <em>false</em></code></td>
-      <td>工作程序节点缺省情况下具有 AES 256 位磁盘加密功能；[了解更多](/docs/containers?topic=containers-security#encrypted_disk)。要禁用加密，请包括此选项并将值设置为 <code>false</code>。</td></tr>
-      <tr>
-      <td><code>trusted: <em>true</em></code></td>
-      <td>**仅限裸机**：启用[可信计算](/docs/containers?topic=containers-security#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。</td></tr>
-     </tbody></table>
-    </p></dd>
+</dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值对于 VM 标准集群是可选的，且不可用于免费集群。对于裸机机器类型，请指定 `dedicated`。</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>要在其中创建集群的专区。可用的位置取决于您登录到的 {{site.data.keyword.Bluemix_notm}} 区域。请选择实际离您最近的区域，以获得最佳性能。
-此值对于标准集群是必需的，对于免费集群是可选的。
+<dd>此值对于标准集群是必需的。可以在使用 <code>ibmcloud ks region-set</code> 命令设定为目标的区域中创建免费集群，但不能指定专区。
 
 <p>请查看[可用专区](/docs/containers?topic=containers-regions-and-zones#zones)。</p>
 
@@ -1234,10 +1317,10 @@ trusted: <em>true</em>
   <dd>使用此选项可阻止创建公用 VLAN。仅当指定 `--private-vlan` 标志并且不包含 `--public-vlan` 标志时，此项才是必需的。<p class="note">如果工作程序节点设置为仅使用专用 VLAN，那么必须启用专用服务端点或配置网关设备。有关更多信息，请参阅[专用集群](/docs/containers?topic=containers-plan_clusters#private_clusters)。</p></dd>
 
 <dt><code>--private-service-endpoint</code></dt>
-  <dd>**在[启用 VRF 的帐户](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)中运行 Kubernetes V1.11 或更高版本的标准集群**：启用[专用服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，以便 Kubernetes 主节点和工作程序节点可通过专用 VLAN 进行通信。此外，可以选择使用 `--public-service-endpoint` 标志来启用公共服务端点，以通过因特网访问集群。如果仅启用专用服务端点，那么必须连接到专用 VLAN 才能与 Kubernetes 主节点进行通信。启用专用服务端点后，日后无法将其禁用。<br><br>创建集群后，可以通过运行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 来获取端点。</dd>
+  <dd>**在[启用 VRF 的帐户](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)中运行 Kubernetes V1.11 或更高版本的标准集群**：启用[专用服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，以便 Kubernetes 主节点和工作程序节点可通过专用 VLAN 进行通信。此外，可以选择使用 `--public-service-endpoint` 标志来启用公共服务端点，以通过因特网访问集群。如果仅启用专用服务端点，那么必须连接到专用 VLAN 才能与 Kubernetes 主节点进行通信。启用专用服务端点后，日后无法将其禁用。<br><br>创建集群后，可以通过运行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 来获取端点。</dd>
 
 <dt><code>--public-service-endpoint</code></dt>
-  <dd>**运行 Kubernetes V1.11 或更高版本的标准集群**：启用[公共服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)，以便可以通过公用网络访问 Kubernetes 主节点，例如通过终端运行 `kubectl` 命令。如果您有[启用 VRF 的帐户](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)，并且还包含了 `--private-service-endpoint` 标志，那么[主节点与工作程序节点的通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)在专用网络上执行。如果日后希望使用仅专用集群，那么可以禁用公共服务端点。<br><br>创建集群后，可以通过运行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 来获取端点。</dd>
+  <dd>**运行 Kubernetes V1.11 或更高版本的标准集群**：启用[公共服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)，以便可以通过公用网络访问 Kubernetes 主节点，例如通过终端运行 `kubectl` 命令。如果您有[启用 VRF 的帐户](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)，并且还包含了 `--private-service-endpoint` 标志，那么[主节点与工作程序节点的通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)在专用网络上执行。如果日后希望使用仅专用集群，那么可以禁用公共服务端点。<br><br>创建集群后，可以通过运行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 来获取端点。</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>要在集群中部署的工作程序节点数。如果未指定此选项，将创建具有 1 个工作程序节点的集群。此值对于标准集群是可选的，且不可用于免费集群。
@@ -1257,34 +1340,27 @@ trusted: <em>true</em>
 
 **示例**：
 
-  **创建免费集群**：仅指定集群名称；其他所有项都设置为缺省值。免费集群在 30 天后会被自动删除。一次只能有一个免费集群。要利用 Kubernetes 的全部功能，请创建标准集群。
+**创建免费集群**：仅指定集群名称；其他所有项都设置为缺省值。免费集群在 30 天后会被自动删除。一次只能有一个免费集群。要利用 Kubernetes 的全部功能，请创建标准集群。
 
-  ```
+```
   ibmcloud ks cluster-create --name my_cluster
   ```
-  {: pre}
+{: pre}
 
-  **创建第一个标准集群**：在专区中创建的第一个标准集群还会创建专用 VLAN。因此，不要包含 `--public-vlan` 标志。
-  {: #example_cluster_create}
+**创建第一个标准集群**：在专区中创建的第一个标准集群还会创建专用 VLAN。因此，不要包含 `--public-vlan` 标志。
+{: #example_cluster_create}
 
-  ```
-  ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+```
+{: pre}
 
-  **创建后续标准集群**：如果在此专区中已经创建标准集群，或者之前在 IBM Cloud Infrastructure (SoftLayer) 中已创建公用 VLAN，请使用 `--public-vlan` 标志指定该公用 VLAN。要了解您是否已具有用于特定专区的公用 VLAN，或要查找现有公用 VLAN 的名称，请运行 `ibmcloud ks vlans <zone>`.
+**创建后续标准集群**：如果在此专区中已经创建标准集群，或者之前在 IBM Cloud Infrastructure (SoftLayer) 中已创建公用 VLAN，请使用 `--public-vlan` 标志指定该公用 VLAN。要了解您是否已具有用于特定专区的公用 VLAN，或要查找现有公用 VLAN 的名称，请运行 `ibmcloud ks vlans <zone>`。
 
-  ```
-  ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
-
-  **在 {{site.data.keyword.Bluemix_dedicated_notm}} 环境中创建集群**：
-
-  ```
-  ibmcloud ks cluster-create --machine-type machine-type --workers number --name cluster_name
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+```
+{: pre}
 
 ### ibmcloud ks cluster-feature-disable public-service-endpoint
 {: #cs_cluster_feature_disable}
@@ -1342,7 +1418,7 @@ ibmcloud ks cluster-feature-enable private-service-endpoint --cluster CLUSTER [-
 
 要运行此命令，请执行以下操作：
 1. 在您的 IBM Cloud Infrastructure (SoftLayer) 帐户中启用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)。
-2. [启用 {{site.data.keyword.Bluemix_notm}} 帐户以使用服务端点](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+2. [启用 {{site.data.keyword.Bluemix_notm}} 帐户以使用服务端点](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
 3. 运行 `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>`。
 4. 遵循 CLI 中的提示来刷新 Kubernetes 主节点 API 服务器。
 5. 在集群中[重新装入所有工作程序节点](#cs_worker_reload)以选取专用端点配置。
@@ -1427,36 +1503,6 @@ ibmcloud ks cluster-feature-enable trusted --cluster CLUSTER [-s] [-f]
 
 ```
 ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
-```
-{: pre}
-
-### ibmcloud ks cluster-feature-ls
-{: #cs_cluster_feature_ls}
-
-列出集群中已启用或禁用的功能。
-{: shortdesc}
-
-```
-ibmcloud ks cluster-feature-ls --cluster CLUSTER [-s]
-```
-{: pre}
-
-<strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**查看者**平台角色
-
-<strong>命令选项</strong>：
-
-<dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
-
-  <dt><code>-s</code></dt>
-   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
-</dl>
-
-**示例**：
-
-```
-ibmcloud ks cluster-feature-ls --cluster my_cluster
 ```
 {: pre}
 
@@ -1698,8 +1744,7 @@ ibmcloud ks clusters [--json] [-s]
 
 <strong>命令选项</strong>：
 
-  <dl>
-  <dt><code>--json</code></dt>
+  <dl><dt><code>--json</code></dt>
   <dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
 
   <dt><code>-s</code></dt>
@@ -1824,7 +1869,7 @@ ibmcloud ks cluster-service-unbind --cluster CLUSTER --namespace KUBERNETES_NAME
    <dd>Kubernetes 名称空间的名称。此值是必需的。</dd>
 
    <dt><code>--service <em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>要除去的 {{site.data.keyword.Bluemix_notm}} 服务实例的标识。要查找服务实例的标识，请运行 `ibmcloud ks cluster-services <cluster_name_or_ID>`. 此值是必需的。</dd>
+   <dd>要除去的 {{site.data.keyword.Bluemix_notm}} 服务实例的标识。要查找服务实例的标识，请运行 `ibmcloud ks cluster-services <cluster_name_or_ID>`。此值是必需的。</dd>
 
    <dt><code>-s</code></dt>
    <dd>不显示每日消息或更新提示。此值是可选的。</dd>
@@ -1925,6 +1970,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 {: #cs_key_protect}
 
 通过在集群中将 [{{site.data.keyword.keymanagementservicefull}} ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) 用作[密钥管理服务 (KMS) 提供程序 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/)，对 Kubernetes 私钥进行加密。
+要使用现有密钥加密在集群中轮换密钥，请使用新的根密钥标识重新运行此命令。
 {: shortdesc}
 
 ```
@@ -1932,7 +1978,7 @@ ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url EN
 ```
 {: pre}
 
-如果删除 {{site.data.keyword.keymanagementserviceshort}} 实例中的根密钥，那么您将无法访问或除去集群中私钥的数据。
+不要删除 {{site.data.keyword.keymanagementserviceshort}} 实例中的根密钥。即使轮换使用新密钥，也不要删除密钥。如果删除根密钥，那么无法访问或除去 etcd 中的数据，也无法访问或除去集群中私钥的数据。
 {: important}
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
@@ -2020,7 +2066,7 @@ ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
 
 <p class="important">可移植公共 IP 地址按月收费。如果在供应集群后除去可移植公共 IP 地址，那么即使只使用了很短的时间，您也仍然必须支付一个月的费用。</br>
 </br>使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containerlong_notm}} 外部的其他用途。</br>
-</br>要启用同一 VLAN 的不同子网上的工作程序之间的通信，必须[启用同一 VLAN 上子网之间的路由](/docs/containers?topic=containers-subnets#subnet-routing)。</p>
+</br>要启用同一 VLAN 上不同子网上的工作程序之间的通信，必须[启用同一 VLAN 上子网之间的路由](/docs/containers?topic=containers-subnets#subnet-routing)。</p>
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -2058,7 +2104,7 @@ ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 {: pre}
 
 <p class="important">使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containerlong_notm}} 外部的其他用途。</br>
-</br>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p>
+</br>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p>
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -2071,7 +2117,7 @@ ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
    <dt><code>--size <em>SIZE</em></code></dt>
    <dd>子网 IP 地址数。此值是必需的。可能的值为 8、16、32 或 64。</dd>
 
-   <dd>要在其中创建子网的 VLAN。此值是必需的。要列出可用的 VLAN，请使用 `ibmcloud ks vlans <zone>` [命令](#cs_vlans)。子网会在 VLAN 所在的区域中进行供应。</dd>
+   <dd>要在其中创建子网的 VLAN。此值是必需的。要列出可用 VLAN，请使用 `ibmcloud ks vlans <zone>` [命令](#cs_vlans)。子网会在 VLAN 所在的区域中进行供应。</dd>
 
    <dt><code>-s</code></dt>
    <dd>不显示每日消息或更新提示。此值是可选的。</dd>
@@ -2100,7 +2146,7 @@ ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR 
 此专用子网不是 IBM Cloud Infrastructure (SoftLayer) 提供的子网。因此，您必须为子网配置任何入站和出站网络流量路由。要添加 IBM Cloud Infrastructure (SoftLayer) 子网，请使用 `ibmcloud ks cluster-subnet-add` [命令](#cs_cluster_subnet_add)。
 
 <p class="important">使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containerlong_notm}} 外部的其他用途。</br>
-</br>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p>
+</br>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p>
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**操作员**平台角色
 
@@ -2289,7 +2335,7 @@ ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NA
    <dd>更新集群中 ALB 私钥的证书。此值是可选的。</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-   <dd>ALB 私钥的名称。此值是必需的。</dd>
+   <dd>在集群中创建 ALB 私钥时，请为其指定名称。此值是必需的。确保创建的私钥与 IBM 提供的 Ingress 私钥不同名。通过运行 <code>ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress</code>，可以获取 IBM 提供的 Ingress 私钥的名称。</dd>
 
    <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
    <dd>证书 CRN。此值是必需的。</dd>
@@ -2475,13 +2521,10 @@ ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disab
     </dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
-   <dd>
-
-   <ul>
-    <li>此参数仅可用于启用专用 ALB。</li>
-    <li>专用 ALB 将使用用户提供的专用子网中的 IP 地址进行部署。如果未提供任何 IP 地址，那么该 ALB 将使用创建集群时自动供应的可移植专用子网中的专用 IP 地址进行部署。</li>
-   </ul>
-   </dd>
+   <dd><ul>
+     <li>此参数仅可用于启用专用 ALB。</li>
+     <li>专用 ALB 将使用用户提供的专用子网中的 IP 地址进行部署。如果未提供任何 IP 地址，那么该 ALB 将使用创建集群时自动供应的可移植专用子网中的专用 IP 地址进行部署。</li>
+    </ul></dd>
 
    <dt><code>-s</code></dt>
    <dd>不显示每日消息或更新提示。此值是可选的。</dd>
@@ -2662,7 +2705,8 @@ ibmcloud ks albs --cluster CLUSTER [--json] [-s]
 ## 基础架构命令
 {: #infrastructure_commands}
 
-### ibmcloud ks
+### ibmcloud ks credential-get
+
 {: #cs_credential_get}
 
 如果将 IBM Cloud 帐户设置为使用其他凭证来访问 IBM Cloud 基础架构产品服务组合，请为您当前的目标区域和资源组获取基础架构用户名。
@@ -2738,7 +2782,6 @@ ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-use
   <li>复制 API 用户名。
   </ol>
   </dd>
-
   <dt><code>-s</code></dt>
   <dd>不显示每日消息或更新提示。此值是可选的。</dd>
 
@@ -2758,14 +2801,14 @@ ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-use
 除去 {{site.data.keyword.containerlong_notm}} 区域的 IBM Cloud Infrastructure (SoftLayer) 帐户凭证。
 {: shortdesc}
 
-```
-  ibmcloud ks credential-unset
-  ```
-{: pre}
-
 除去凭证后，将使用 [{{site.data.keyword.Bluemix_notm}}IAM API 密钥](#cs_api_key_info)来订购 IBM Cloud Infrastructure (SoftLayer) 中的资源。
 
 <strong>最低必需许可权</strong>：对 {{site.data.keyword.containerlong_notm}} 中集群的**管理员**平台角色
+
+```
+ibmcloud ks credential-unset [-s]
+```
+{: pre}
 
 <strong>命令选项</strong>：
 
@@ -3540,13 +3583,429 @@ ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
 <br />
 
 
+## 网络负载均衡器命令 (`nlb-dns`)
+{: #nlb-dns}
+
+使用此组命令可创建和管理网络负载均衡器 (NLB) IP 地址的主机名以及用于这些主机名的运行状况检查监视器。有关更多信息，请参阅[注册负载均衡器主机名](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)。
+{: shortdesc}
+
+### ibmcloud ks nlb-dns-add
+{: #cs_nlb-dns-add}
+
+将网络负载均衡器 (NLB) IP 添加到使用 [`ibmcloud ks nlb-dns-create` 命令](#cs_nlb-dns-create)创建的现有主机名。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-add --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+例如，在多专区集群中，可以在每个专区中创建一个 NLB，以用于公开应用程序。您已通过运行 `ibmcloud ks nlb-dns-create`，向主机名注册了一个专区中的 NLB IP，因此现在可以将其他专区中的 NLB IP 添加到此现有主机名。用户访问应用程序主机名时，客户机会随机访问其中一个 IP，并且会向相应的 NLB 发送请求。请注意，必须对要添加的每个 IP 地址运行以下命令。
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>要添加到主机名的 NLB IP。要查看 NLB IP，请运行 <code>kubectl get svc</code>。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>要向其添加 IP 的主机名。要查看现有主机名，请运行 <code>ibmcloud ks nlb-dnss</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-create
+{: #cs_nlb-dns-create}
+
+通过创建 DNS 主机名来注册网络负载均衡器 (NLB) IP，可采用公共方式公开应用程序。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-create --cluster CLUSTER --ip IP [--json] [-s]
+```
+{: pre}
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>要注册的网络负载均衡器 IP 地址。要查看 NLB IP，请运行 <code>kubectl get svc</code>。请注意，最初只能使用一个 IP 地址来创建主机名。如果在多专区集群的每个专区中都有公开一个应用程序的 NLB，那么可以通过运行 [`ibmcloud ks nlb-dns-add` 命令](#cs_nlb-dns-add)将其他 NLB 的 IP 添加到该主机名。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dns-create --cluster mycluster --ip 1.1.1.1
+```
+{: pre}
+
+### ibmcloud ks nlb-dnss
+{: #cs_nlb-dns-ls}
+
+列出集群中注册的网络负载均衡器主机名和 IP 地址。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dnss --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dnss --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-rm
+{: #cs_nlb-dns-rm}
+
+从主机名中除去网络负载均衡器 IP 地址。如果从主机名中除去所有 IP，该主机名仍然会存在，但没有与之关联的 IP。请注意，必须对要除去的每个 IP 地址运行此命令。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>要除去的 NLB IP。要查看 NLB IP，请运行 <code>kubectl get svc</code>。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>要从中除去 IP 的主机名。要查看现有主机名，请运行 <code>ibmcloud ks nlb-dnss</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-monitor
+{: #cs_nlb-dns-monitor}
+
+创建、修改和查看用于集群中网络负载均衡器主机名的运行状况检查监视器。此命令必须与下列其中一个子命令组合在一起。
+{: shortdesc}
+
+#### ibmcloud ks nlb-dns-monitor-configure
+{: #cs_nlb-dns-monitor-configure}
+
+为集群中的现有 NLB 主机名配置运行状况检查监视器，并可选择启用该监视器。对主机名启用监视器后，监视器会对每个专区中的 NLB IP 执行运行状况检查，并根据这些运行状况检查使 DNS 查找结果保持更新。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster CLUSTER --nlb-host HOST NAME [--enable] [--desc DESCRIPTION] [--type TYPE] [--method METHOD] [--path PATH] [--timeout TIMEOUT] [--retries RETRIES] [--interval INTERVAL] [--port PORT] [--header HEADER] [--expected-body BODY STRING] [--expected-codes HTTP CODES] [--follows-redirects TRUE] [--allows-insecure TRUE] [--json] [-s]
+```
+{: pre}
+
+可以使用此命令来创建和启用新的运行状况检查监视器，或者更新现有运行状况检查监视器的设置。要创建新的监视器，请包含 `--enable` 标志以及要配置的所有设置所对应的标志。要更新现有监视器，请仅包含要更改的设置所对应的标志。
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>向其注册主机名的集群的名称或标识。</dd>
+
+<dt><code>--nlb-host <em>HOST NAME</em></code></dt>
+<dd>要为其配置运行状况检查监视器的主机名。要列出主机名，请运行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--enable</code></dt>
+<dd>包含此标志可为主机名创建并启用新的运行状况检查监视器。</dd>
+
+<dt><code>--description <em>DESCRIPTION</em></code></dt>
+<dd>运行状况监视器的描述。</dd>
+
+<dt><code>--type <em>TYPE</em></code></dt>
+<dd>要用于运行状况检查的协议：<code>HTTP</code>、<code>HTTPS</code> 或 <code>TCP</code>。缺省值：<code>HTTP</code></dd>
+
+<dt><code>--method <em>METHOD</em></code></dt>
+<dd>要用于运行状况检查的方法。<code>type</code> 为 <code>HTTP</code> 和 <code>HTTPS</code> 时，缺省值为 <code>GET</code>。<code>type</code> 为 <code>TCP</code> 时，缺省值为 <code>connection_established</code>。</dd>
+
+<dt><code>--path <em>PATH</em></code></dt>
+<dd><code>type</code> 为 <code>HTTPS</code> 时：要对其执行运行状况检查的端点路径。缺省值：<code>/</code></dd>
+
+<dt><code>--timeout <em>TIMEOUT</em></code></dt>
+<dd>超时（以秒为单位），在此时间后 IP 会被视为运行状况欠佳。缺省值：<code>5</code></dd>
+
+<dt><code>--retries <em>RETRIES</em></code></dt>
+<dd>超时发生时，在 IP 被视为运行状况欠佳之前重试的次数。重试会立即尝试执行。缺省值：<code>2</code></dd>
+
+<dt><code>--interval <em>INTERVAL</em></code></dt>
+<dd>各个运行状况检查之间的时间间隔（以秒为单位）。较短的时间间隔可能会缩短故障转移时间，但会增加 IP 上的负载。缺省值：<code>60</code></dd>
+
+<dt><code>--port <em>PORT</em></code></dt>
+<dd>进行运行状况检查时要连接到的端口号。<code>type</code> 为 <code>TCP</code>时，此参数是必需的。如果 <code>type</code> 为 <code>HTTP</code> 或 <code>HTTPS</code>，那么仅当对 HTTP 使用非 80 端口或对 HTTPS 使用非 443 端口时才需定义端口。对于 TCP，缺省值为 <code>0</code>。对于 HTTP，缺省值为 <code>80</code>。对于 HTTPS，缺省值为 <code>443</code>。</dd>
+
+<dt><code>--header <em>HEADER</em></code></dt>
+<dd><code>type</code> 为 <code>HTTP</code> 或 <code>HTTPS</code> 时：要在运行状况检查中发送的 HTTP 请求头，例如 Host 头。无法覆盖 User-Agent 头。</dd>
+
+<dt><code>--expected-body <em>BODY STRING</em></code></dt>
+<dd><code>type</code> 为 <code>HTTP</code> 或 <code>HTTPS</code> 时：运行状况检查在响应主体中查找的不区分大小写的子字符串。如果找不到此字符串，那么 IP 会被视为运行状况欠佳。</dd>
+
+<dt><code>--expected-codes <em>HTTP CODES</em></code></dt>
+<dd><code>type</code> 为 <code>HTTP</code> 或 <code>HTTPS</code> 时：运行状况检查在响应中查找的 HTTP 代码。如果找不到 HTTP 代码，那么 IP 会被视为运行状况欠佳。缺省值：<code>2xx</code></dd>
+
+<dt><code>--allows-insecure <em>TRUE</em></code></dt>
+<dd><code>type</code> 为 <code>HTTP</code> 或 <code>HTTPS</code> 时：设置为 <code>true</code> 以不验证证书。</dd>
+
+<dt><code>--follows-redirects <em>TRUE</em></code></dt>
+<dd><code>type</code> 为 <code>HTTP</code> 或 <code>HTTPS</code> 时：设置为 <code>true</code> 以执行 IP 返回的任何重定向。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-get
+{: #cs_nlb-dns-monitor-get}
+
+查看现有运行状况检查监视器的设置。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>监视器对其执行运行状况检查的主机名。要列出主机名，请运行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-disable
+{: #cs_nlb-dns-monitor-disable}
+
+对集群中的主机名禁用现有运行状况检查监视器。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>监视器对其执行运行状况检查的主机名。要列出主机名，请运行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-enable
+{: #cs_nlb-dns-monitor-enable}
+
+启用配置的运行状况检查监视器。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+请注意，首次创建运行状况检查监视器时，必须使用 `ibmcloud ks nlb-dns-monitor-configure` 命令来配置并启用该监视器。使用 `ibmcloud ks nlb-dns-monitor-enable` 命令仅可启用已配置但尚未启用的监视器，或者重新启用先前禁用的监视器。
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>监视器对其执行运行状况检查的主机名。要列出主机名，请运行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-ls
+{: #cs_nlb-dns-monitor-ls}
+
+列出集群中每个 NLB 主机名的运行状况检查监视器设置。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster mycluster
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-status
+{: #cs_nlb-dns-monitor-status}
+
+列出集群中 NLB 主机名后面的 IP 的运行状况检查状态。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**最低必需许可权**：对 {{site.data.keyword.containerlong_notm}} 中集群的**编辑者**平台角色
+
+**命令选项**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>集群的名称或标识。此值是必需的。</dd>
+
+<dt><code>-- <em></em></code></dt>
+<dd>包含此标志以仅查看一个主机名的状态。要列出主机名，请运行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不显示每日消息或更新提示。此值是可选的。</dd>
+</dl>
+
+**示例**：
+```
+ibmcloud ks nlb-dns-monitor-status --cluster mycluster
+```
+{: pre}
+
+<br />
+
+
 ## 区域命令
 {: #region_commands}
+
+使用此组命令可查看可用位置，查看当前目标区域，以及设置目标区域。
+{: shortdesc}
 
 ### ibmcloud ks region
 {: #cs_region}
 
-查找当前所在的 {{site.data.keyword.containerlong_notm}} 区域。您可以创建和管理特定于该区域的集群。使用 `ibmcloud ks region-set` 命令可更改区域。
+查找当前设定为目标的 {{site.data.keyword.containerlong_notm}} 区域。您可以创建和管理特定于该区域的集群。使用 `ibmcloud ks region-set` 命令可更改区域。
 {: shortdesc}
 
 ```
@@ -3562,14 +4021,14 @@ ibmcloud ks region
 设置 {{site.data.keyword.containerlong_notm}} 的区域。您可以创建和管理特定于该区域的集群，并且您可能希望在多个区域中创建集群以实现高可用性。
 {: shortdesc}
 
+例如，您可以登录到美国南部区域的 {{site.data.keyword.Bluemix_notm}} 并创建集群。接下来，您可以使用 `ibmcloud ks region-set eu-central` 将欧洲中部区域作为目标，并创建另一个集群。最后，您可以使用 `ibmcloud ks region-set us-south` 返回到美国南部，以管理该区域中的集群。
+
+<strong>最低必需许可权</strong>：无
+
 ```
 ibmcloud ks region-set [--region REGION]
 ```
 {: pre}
-
-例如，您可以登录到美国南部区域的 {{site.data.keyword.Bluemix_notm}} 并创建集群。接下来，您可以使用 `ibmcloud ks region-set eu-central` 将欧洲中部区域作为目标，并创建另一个集群。最后，您可以使用 `ibmcloud ks region-set us-south` 返回到美国南部，以管理该区域中的集群。
-
-<strong>最低必需许可权</strong>：无
 
 **命令选项**：
 
@@ -3648,8 +4107,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
 
 <strong>命令选项</strong>：
 
-   <dl>
-   <dt><code>--region-only</code></dt>
+   <dl><dt><code>--region-only</code></dt>
    <dd>仅列出您登录到的区域内的多专区。此值是可选的。</dd>
 
    <dt><code>--json</code></dt>
@@ -3659,12 +4117,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
    <dd>不显示每日消息或更新提示。此值是可选的。</dd>
    </dl>
 
-**示例**：
-
-  ```
-  ibmcloud ks zones
-  ```
-  {: pre}
+**最低许可权**：无
 
 <br />
 
@@ -3775,14 +4228,7 @@ diskEncryption: <em>false</em></code></pre>
 **示例**：
 
   ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --hardware shared
-  ```
-  {: pre}
-
-  {{site.data.keyword.Bluemix_dedicated_notm}} 的示例：
-
-  ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --machine-type b2c.4x16
+  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --hardware shared
   ```
   {: pre}
 
@@ -3843,6 +4289,7 @@ ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [-
 {: #cs_worker_reboot}
 
 重新引导集群中的工作程序节点。在重新引导期间，工作程序节点的状态不会更改。例如，如果 IBM Cloud Infrastructure (SoftLayer) 中的工作程序节点状态为 `Powered Off`，但您需要开启该工作程序节点，那么可以使用重新引导。重新引导将清除临时目录，但不会清除整个文件系统或重新格式化磁盘。
+在执行重新引导操作后，工作程序节点公共和专用 IP 地址保持不变。
 {: shortdesc}
 
 ```
@@ -3861,10 +4308,10 @@ ibmcloud ks worker-reboot [-f] [--hard] --cluster CLUSTER --worker WORKER [WORKE
    kubectl get nodes
    ```
    {: pre}
-   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。在运行 `ibmcloud ks workers <cluster_name_or_ID>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
+   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。运行 `ibmcloud ks workers <cluster_name_or_ID>` 命令并查找具有相同 **Private IP** 地址的工作程序节点时，可以了解有关工作程序节点的更多信息。
 2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。使用在上一步中检索到的工作程序节点的 **name**。
    ```
-kubectl cordon <worker_name>
+   kubectl cordon <worker_name>
    ```
    {: pre}
 
@@ -3880,7 +4327,7 @@ kubectl cordon <worker_name>
     ```
     {: pre}
     此过程可能需要几分钟时间。
- 5. 重新引导工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令返回的工作程序标识。
+ 5. 重新引导工作程序节点。使用从 `ibmcloud ks workers<cluster_name_or_ID>` 命令返回的工作程序标识。
     ```
     ibmcloud ks worker-reboot --cluster <cluster_name_or_ID> --workers <worker_name_or_ID>
     ```
@@ -3929,6 +4376,7 @@ kubectl cordon <worker_name>
 {: #cs_worker_reload}
 
 重新装入工作程序节点的配置。如果工作程序节点遇到问题（例如，性能降低），或者如果工作程序节点卡在非正常运行状态，那么重新装入会非常有用。请注意，在重新装入期间，工作程序节点机器将使用最新映像进行更新，并且如果数据未[存储在工作程序节点外部](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)，那么将删除数据。
+在执行重新装入操作后，工作程序节点 IP 地址保持不变。
 {: shortdesc}
 
 ```
@@ -3947,10 +4395,10 @@ ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER] [--sk
    ```
    kubectl get nodes
    ```
-   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。在运行 `ibmcloud ks workers <cluster_name_or_ID>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
+   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。运行 `ibmcloud ks workers <cluster_name_or_ID>` 命令并查找具有相同 **Private IP** 地址的工作程序节点时，可以了解有关工作程序节点的更多信息。
 2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。使用在上一步中检索到的工作程序节点的 **name**。
    ```
-kubectl cordon <worker_name>
+   kubectl cordon <worker_name>
    ```
    {: pre}
 
@@ -3966,7 +4414,7 @@ kubectl cordon <worker_name>
     ```
     {: pre}
     此过程可能需要几分钟时间。
- 5. 重新装入工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令返回的工作程序标识。
+ 5. 重新装入工作程序节点。使用从 `ibmcloud ks workers<cluster_name_or_ID>` 命令返回的工作程序标识。
     ```
     ibmcloud ks worker-reload --cluster <cluster_name_or_ID> --workers <worker_name_or_ID>
     ```
@@ -4025,10 +4473,10 @@ ibmcloud ks worker-rm [-f] --cluster CLUSTER --workers WORKER[,WORKER] [-s]
    kubectl get nodes
    ```
    {: pre}
-   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。在运行 `ibmcloud ks workers <cluster_name_or_ID>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
+   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。运行 `ibmcloud ks workers <cluster_name_or_ID>` 命令并查找具有相同 **Private IP** 地址的工作程序节点时，可以了解有关工作程序节点的更多信息。
 2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。使用在上一步中检索到的工作程序节点的 **name**。
    ```
-kubectl cordon <worker_name>
+   kubectl cordon <worker_name>
    ```
    {: pre}
 
@@ -4040,11 +4488,11 @@ kubectl cordon <worker_name>
 如果阶段状态显示为 **`SchedulingDisabled`**，说明已禁止工作程序节点用于 pod 安排。
 4. 强制从工作程序节点中除去 pod，并将其重新安排到集群中的剩余工作程序节点上。
    ```
-kubectl drain <worker_name>
-   ```
-    {: pre}
+    kubectl drain <worker_name>
+    ```
+   {: pre}
    此过程可能需要几分钟时间。
-5. 除去工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令返回的工作程序标识。
+5. 除去工作程序节点。使用从 `ibmcloud ks workers<cluster_name_or_ID>` 命令返回的工作程序标识。
    ```
    ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
    ```
@@ -4085,6 +4533,7 @@ kubectl drain <worker_name>
 {: #cs_worker_update}
 
 更新工作程序节点以将最新的安全性更新和补丁应用于操作系统，并更新 Kubernetes 版本以与 Kubernetes 主节点的版本相匹配。可以使用 `ibmcloud ks cluster-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)来更新 Kubernetes 主节点的版本。
+在执行更新操作后，工作程序节点 IP 地址保持不变。
 {: shortdesc}
 
 ```
@@ -4224,7 +4673,7 @@ ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type
 **示例**：
 
   ```
-  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
+  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b3c.4x16 --size-per-zone 6
   ```
   {: pre}
 
@@ -4273,9 +4722,9 @@ ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--
   Hardware:           shared
   Zones:              dal10,dal12
   Workers per zone:   3
-  Machine type:       b2c.4x16.encrypted
+  Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.12.6_1512
+  Version:            1.12.7_1512
   ```
   {: screen}
 
@@ -4441,12 +4890,12 @@ ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,
     <dd><p>专用 VLAN 的标识。此值是有条件的。</p>
     <p>如果专区中有专用 VLAN，那么此值必须与集群中一个或多个工作程序节点的专用 VLAN 标识相匹配。要查看可用的 VLAN，请运行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。新的工作程序节点会添加到指定的 VLAN，但不会更改任何现有工作程序节点的 VLAN。</p>
     <p>如果在该专区中没有专用或公用 VLAN，请勿指定此选项。初始向工作程序池添加新专区后，会自动创建专用和公用 VLAN。</p>
-    <p>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p></dd>
+    <p>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd><p>公用 VLAN 的标识。如果要在创建集群之后向公众公开节点上的工作负载，那么此值是必需的。此值必须与集群中该专区的一个或多个工作程序节点的公用 VLAN 标识相匹配。要查看可用的 VLAN，请运行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。新的工作程序节点会添加到指定的 VLAN，但不会更改任何现有工作程序节点的 VLAN。</p>
     <p>如果在该专区中没有专用或公用 VLAN，请勿指定此选项。初始向工作程序池添加新专区后，会自动创建专用和公用 VLAN。</p>
-    <p>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p></dd>
+    <p>如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。</p></dd>
 
   <dt><code>--private-only </code></dt>
     <dd>使用此选项可阻止创建公用 VLAN。仅当指定 `--private-vlan` 标志并且不包含 `--public-vlan` 标志时，此项才是必需的。<p class="note">如果工作程序节点设置为仅使用专用 VLAN，那么必须启用专用服务端点或配置网关设备。有关更多信息，请参阅[专用集群](/docs/containers?topic=containers-plan_clusters#private_clusters)。</p></dd>

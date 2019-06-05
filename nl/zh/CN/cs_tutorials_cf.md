@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -50,7 +50,7 @@ subcollection: containers
 ## 先决条件
 {: #cf_prereqs}
 
-- [在 {{site.data.keyword.registrylong_notm}} 中创建专用映像注册表](/docs/services/Registry?topic=registry-index)。
+- [在 {{site.data.keyword.registrylong_notm}} 中创建专用映像注册表](/docs/services/Registry?topic=registry-getting-started)。
 - [创建集群](/docs/containers?topic=containers-clusters#clusters_ui)。
 - [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 - 确保您具有用于 {{site.data.keyword.containerlong_notm}} 的以下 {{site.data.keyword.Bluemix_notm}} IAM 访问策略：
@@ -276,11 +276,11 @@ subcollection: containers
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
     ```
     {: screen}
 
-    b. 打开浏览器并通过以下 URL 检查应用程序：`http://<public_IP_address>:<NodePort>`. 使用示例值时，URL 为 `http://169.xx.xxx.xxx:30872`。您可以将此 URL 提供给同事试用，或者在您的手机浏览器中输入此 URL，从而可以查看该应用程序是否确实已公共可用。
+    b. 打开浏览器并通过以下 URL 检查应用程序：`http://<public_IP_address>:<NodePort>`。使用示例值时，URL 为 `http://169.xx.xxx.xxx:30872`。您可以将此 URL 提供给同事试用，或者在您的手机浏览器中输入此 URL，从而可以查看该应用程序是否确实已公共可用。
 
     <img src="images/python_flask.png" alt="已部署样板 Python Flask 应用程序的截屏。" />
 

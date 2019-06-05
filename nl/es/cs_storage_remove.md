@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -46,8 +46,7 @@ En los demás casos, siga las instrucciones para comprobar el estado de su PVC, 
 Depende de lo que suprima y del tipo de facturación. Si suprime la PVC y el PV, pero no la instancia de la cuenta de infraestructura de IBM Cloud (SoftLayer), dicha instancia seguirá existiendo y se le facturará por ella. Debe suprimir todo para evitar cargos. Además, cuando especifique el tipo de facturación (`billingType`) en la PVC, puede elegir por hora (`hourly`) o mensual (`monthly`). Si elige `monthly`, la instancia se facturará mensualmente. Cuando se suprime la instancia, se le facturará durante el resto del mes.
 
 
-<p class="important">Cuando se limpia el almacenamiento persistente, se suprimen todos los datos almacenados en el mismo. Si necesita una copia de los datos, realice una copia de seguridad del [almacenamiento de archivos](/docs/containers?topic=containers-file_storage#file_backup_restore) o del [almacenamiento en bloque](/docs/containers?topic=containers-block_storage#block_backup_restore).</br>
-</br>Si utiliza una cuenta de {{site.data.keyword.Bluemix_dedicated}}, debe solicitar la supresión de volúmenes [abriendo un caso de soporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
+<p class="important">Cuando se limpia el almacenamiento persistente, se suprimen todos los datos almacenados en el mismo. Si necesita una copia de los datos, realice una copia de seguridad del [almacenamiento de archivos](/docs/containers?topic=containers-file_storage#file_backup_restore) o del [almacenamiento en bloque](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
 
 Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 

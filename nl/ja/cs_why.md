@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -41,7 +41,7 @@ subcollection: containers
 |-------|-----------|
 |コンピュート、ネットワーク、およびストレージそれぞれのインフラストラクチャーを分離する、単一テナントの Kubernetes クラスター|<ul><li>組織の要件に適合する、カスタマイズされた独自のインフラストラクチャーを作成できる。</li><li>IBM Cloud インフラストラクチャー (SoftLayer) によって提供されるリソースを使用して、機密保護機能のある専用の Kubernetes マスター、ワーカー・ノード、仮想ネットワーク、そしてストレージをプロビジョンできる。</li><li>クラスターを使用可能にしておくために {{site.data.keyword.IBM_notm}} によって継続的にモニターされて更新される、完全に管理された Kubernetes マスターを利用できる。</li><li>トラステッド・コンピューティングを使用するベア・メタル・サーバーとしてワーカー・ノードをプロビジョンできるオプションがある。</li><li>統合されたセキュアなボリューム・サービスによって、永続データを保管し、Kubernetes ポッド間でデータを共有し、必要に応じてデータを復元することができる。</li><li>すべてのネイティブ Kubernetes API をフルサポートすることによる利点。</li></ul>|
 | 高可用性を高めるマルチゾーン・クラスター | <ul><li>ワーカー・プールを使用して、同じマシン・タイプ (CPU、メモリー、仮想または物理) のワーカー・ノードを容易に管理する。</li><li>選択したマルチゾーンにノードを均等に分散させ、アプリのアンチアフィニティー・ポッド・デプロイメントを使用して、ゾーン障害から保護する。</li><li>別のクラスターにリソースを重複させるのではなく、マルチゾーン・クラスターを使用して、コストを削減する。</li><li>クラスターの各ゾーンに自動的にセットアップされるマルチゾーン・ロード・バランサー (MZLB) を使用するアプリの自動ロード・バランシングによる利点。</li></ul>|
-| 高可用性のマスター | <ul>Kubernetes バージョン 1.10 以降を実行するクラスターで使用可能。<li>クラスターの作成時に自動的にプロビジョンされる高可用性マスターによって、クラスターのダウン時間 (マスターの更新時など) が削減される。</li><li>ゾーン障害からクラスターを保護するために、[複数ゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#multizone)で複数のゾーンにマスターを分散させる。</li></ul> |
+| 高可用性のマスター | <ul><li>クラスターの作成時に自動的にプロビジョンされる高可用性マスターによって、クラスターのダウン時間 (マスターの更新時など) が削減される。</li><li>ゾーン障害からクラスターを保護するために、[複数ゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#multizone)で複数のゾーンにマスターを分散させる。</li></ul> |
 |Vulnerability Advisor によるイメージ・セキュリティー・コンプライアンス|<ul><li>保護された Docker プライベート・イメージ・レジストリーに独自のリポジトリーをセットアップでき、ここにイメージが格納され、組織内のすべてのユーザーによって共有される。</li><li>プライベート {{site.data.keyword.Bluemix_notm}} レジストリー内のイメージを自動スキャンすることによる利点。</li><li>イメージ内で使用されるオペレーティング・システムに固有の推奨を確認して、潜在的な脆弱性を修正できる。</li></ul>|
 |クラスターの正常性に関する継続的なモニター|<ul><li>クラスター・ダッシュボードを使用して、クラスター、ワーカー・ノード、およびコンテナー・デプロイメントの正常性を素早く参照して管理できる。</li><li>{{site.data.keyword.monitoringlong}}を使用して詳細な使用量メトリックを確認し、ワークロードに合わせてクラスターを素早く拡張することができる。</li><li>{{site.data.keyword.loganalysislong}}を使用してロギング情報を参照して、クラスター・アクティビティーの詳細を確認できる。</li></ul>|
 |アプリにパブリック・アクセスできるよう安全に公開する|<ul><li>インターネットからクラスター内のサービスにアクセスする方法を、パブリック IP アドレス、{{site.data.keyword.IBM_notm}} 提供の経路、独自のカスタム・ドメインの中から選択できる。</li></ul>|
@@ -56,7 +56,7 @@ subcollection: containers
 ## オファーとそれらの組み合わせの比較
 {: #differentiation}
 
-{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.Bluemix_notm}} Public、Dedicated、{{site.data.keyword.Bluemix_notm}} Private、またはハイブリッド構成で実行できます。
+{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.Bluemix_notm}} Public、{{site.data.keyword.Bluemix_notm}} Private、またはハイブリッド構成で実行できます。
 {:shortdesc}
 
 
@@ -76,12 +76,6 @@ subcollection: containers
  </td>
  </tr>
  <tr>
- <td>{{site.data.keyword.Bluemix_notm}} Dedicated
- </td>
- <td>{{site.data.keyword.Bluemix_notm}} Public の専用ハードウェアでクラスターを実行する場合と同じように、{{site.data.keyword.Bluemix_notm}} Dedicated の使用可能な物理リソースはお客様のクラスター専用であり、{{site.data.keyword.IBM_notm}} の他のお客様のクラスターとは共有されません。しかし、お客様のクラスターは、IBM と一緒にお客様がセットアップおよび構成する {{site.data.keyword.Bluemix_notm}} Dedicated 環境にあります。{{site.data.keyword.Bluemix_notm}} Public とは異なり、インフラストラクチャー・リソースを所有および管理するのは IBM です。クラスターは事前構成済みの専用環境で実行されるため、{{site.data.keyword.Bluemix_notm}} Dedicated で利用できる構成オプションと機能は、{{site.data.keyword.Bluemix_notm}} Public のクラスターよりも少なくなります。
-<br><br>{{site.data.keyword.Bluemix_notm}} Public と {{site.data.keyword.Bluemix_notm}} Dedicated の違いについて詳しくは、[Dedicated クラウド環境について](/docs/containers?topic=containers-dedicated#dedicated_environment)を参照してください。</td>
- </tr>
- <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Private
  </td>
  <td>{{site.data.keyword.Bluemix_notm}} Private は、ユーザー自身のマシン上にローカルにインストールできるアプリケーション・プラットフォームです。 ファイアウォールの内側にあるユーザー独自の制御された環境で、オンプレミスのコンテナー化アプリを開発して管理する必要がある場合は、{{site.data.keyword.Bluemix_notm}} Private で Kubernetes を使用することを選択できます。 <br><br>詳しくは、[{{site.data.keyword.Bluemix_notm}} Private の製品資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html)を参照してください。
@@ -90,7 +84,7 @@ subcollection: containers
  <tr>
  <td>ハイブリッド構成
  </td>
- <td>ハイブリッドとは、{{site.data.keyword.Bluemix_notm}} Public または Dedicated で実行されるサービスと、{{site.data.keyword.Bluemix_notm}} Private 内のアプリなどのオンプレミスで実行される他のサービスを組み合わせて使用することです。 ハイブリッド構成の例を以下に示します。 <ul><li>{{site.data.keyword.Bluemix_notm}} Public で {{site.data.keyword.containerlong_notm}} を使用してクラスターをプロビジョンしながら、そのクラスターを社内データベースに接続する。</li><li>{{site.data.keyword.Bluemix_notm}} Private で {{site.data.keyword.containerlong_notm}} を使用してクラスターをプロビジョンしながら、アプリをそのクラスターにデプロイする。 ただし、そのアプリは {{site.data.keyword.Bluemix_notm}} Public の {{site.data.keyword.ibmwatson}} サービス ({{site.data.keyword.toneanalyzershort}} など) を使用する可能性がある。</li></ul><br>{{site.data.keyword.Bluemix_notm}} Public または Dedicated で実行しているサービスとオンプレミスで実行しているサービスの間の通信を有効にするには、[VPN 接続をセットアップする](/docs/containers?topic=containers-vpn)必要があります。 詳しくは、[{{site.data.keyword.Bluemix_notm}} Privateでの {{site.data.keyword.containerlong_notm}} の使用 ](/docs/containers?topic=containers-hybrid_iks_icp) を参照してください。
+ <td>ハイブリッドとは、{{site.data.keyword.Bluemix_notm}} Public で実行されるサービスと、{{site.data.keyword.Bluemix_notm}} Private 内のアプリなどのオンプレミスで実行される他のサービスを組み合わせて使用することです。 ハイブリッド構成の例を以下に示します。 <ul><li>{{site.data.keyword.Bluemix_notm}} Public で {{site.data.keyword.containerlong_notm}} を使用してクラスターをプロビジョンしながら、そのクラスターを社内データベースに接続する。</li><li>{{site.data.keyword.Bluemix_notm}} Private で {{site.data.keyword.containerlong_notm}} を使用してクラスターをプロビジョンしながら、アプリをそのクラスターにデプロイする。 ただし、そのアプリは {{site.data.keyword.Bluemix_notm}} Public の {{site.data.keyword.ibmwatson}} サービス ({{site.data.keyword.toneanalyzershort}} など) を使用する可能性がある。</li></ul><br>{{site.data.keyword.Bluemix_notm}} Public で実行しているサービスとオンプレミスで実行しているサービスの間の通信を有効にするには、[VPN 接続をセットアップする](/docs/containers?topic=containers-vpn)必要があります。 詳しくは、[{{site.data.keyword.Bluemix_notm}} Privateでの {{site.data.keyword.containerlong_notm}} の使用 ](/docs/containers?topic=containers-hybrid_iks_icp) を参照してください。
  </td>
  </tr>
  </tbody>
@@ -112,18 +106,17 @@ subcollection: containers
 |[クラスター内ネットワーキング](/docs/containers?topic=containers-security#network)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[NodePort サービスによる安定 IP アドレス以外へのパブリック・ネットワーク・アプリ・アクセス](/docs/containers?topic=containers-nodeport)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[ユーザー・アクセス管理](/docs/containers?topic=containers-users#access_policies)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-|[クラスターとアプリからの {{site.data.keyword.Bluemix_notm}} サービス・アクセス](/docs/containers?topic=containers-integrations#adding_cluster)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
+|[クラスターとアプリからの {{site.data.keyword.Bluemix_notm}} サービス・アクセス](/docs/containers?topic=containers-service-binding#bind-services)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[非永続ストレージ用のワーカー・ノードのディスク・スペース](/docs/containers?topic=containers-storage_planning#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 | [すべての {{site.data.keyword.containerlong_notm}} 地域でクラスターを作成する機能](/docs/containers?topic=containers-regions-and-zones) | | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> |
 |[アプリの高可用性を高めるマルチゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#multizone) | |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-| マスターの複製による可用性の向上 (Kubernetes 1.10 以降) | | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> |
+| マスターの複製による可用性の向上 | | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> |
 |[能力の向上のためにワーカー・ノード数を引き上げ可能](/docs/containers?topic=containers-app#app_scaling)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[NFS ファイル・ベースの永続ストレージのボリューム](/docs/containers?topic=containers-file_storage#file_storage)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-|[ロード・バランサー・サービスによる安定 IP アドレスへのパブリック・ネットワークまたはプライベート・ネットワークのアプリ・アクセス](/docs/containers?topic=containers-loadbalancer)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
+|[ネットワーク・ロード・バランサー (NLB) サービスによる安定 IP アドレスへのパブリック・ネットワークまたはプライベート・ネットワークのアプリ・アクセス](/docs/containers?topic=containers-loadbalancer)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[Ingress サービスによる安定 IP アドレスとカスタマイズ可能 URL へのパブリック・ネットワークのアプリ・アクセス](/docs/containers?topic=containers-ingress#planning)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[ポータブル・パブリック IP アドレス](/docs/containers?topic=containers-subnets#review_ip)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[ロギングとモニタリング](/docs/containers?topic=containers-health#logging)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[物理 (ベア・メタル) サーバー上にワーカー・ノードをプロビジョンするためのオプション](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[トラステッド・コンピューティングを使用するベア・メタル・ワーカーをプロビジョンするためのオプション](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-|[{{site.data.keyword.Bluemix_dedicated_notm}} で使用可能](/docs/containers?topic=containers-dedicated#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 {: caption="フリー・クラスターと標準クラスターの特性" caption-side="top"}

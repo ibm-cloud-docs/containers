@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -50,7 +50,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 ## 前提条件
 {: #cf_prereqs}
 
-- [プライベート・イメージ・レジストリーを {{site.data.keyword.registrylong_notm}} に作成します](/docs/services/Registry?topic=registry-index)。
+- [プライベート・イメージ・レジストリーを {{site.data.keyword.registrylong_notm}} に作成します](/docs/services/Registry?topic=registry-getting-started)。
 - [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
 - [CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 - {{site.data.keyword.containerlong_notm}}に対する以下の {{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシーがあることを確認します。
@@ -276,7 +276,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
     ```
     {: screen}
 
@@ -291,4 +291,4 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
 6. **「ワークロード」**タブで、作成したリソースを表示します。
 
-お疲れさまでした。アプリがコンテナーにデプロイされました。
+お疲れさまでした。 アプリがコンテナーにデプロイされました。

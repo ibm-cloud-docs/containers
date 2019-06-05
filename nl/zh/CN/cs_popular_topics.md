@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,34 @@ subcollection: containers
 
 
 
+## 2019 年 4 月的热门主题
+{: #apr19}
+
+<table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
+<caption>2019 年 4 月容器和 Kubernetes 集群的热门主题</caption>
+<thead>
+<th>日期</th>
+<th>标题</th>
+<th>描述</th>
+</thead>
+<tbody>
+<tr>
+<td>2019 年 4 月 15 日</td>
+<td>[注册网络负载均衡器 (NLB) 主机名](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>现在，设置公共网络负载均衡器 (NLB) 以向因特网公开应用程序后，可以通过创建主机名来为 NLB IP 创建 DNS 条目。{{site.data.keyword.Bluemix_notm}} 负责为主机名生成和维护通配符 SSL 证书。您还可以设置 TCP/HTTP(S) 监视器，以对每个主机名后面的 NLB IP 地址执行运行状况检查。</td>
+</tr>
+<tr>
+<td>2019 年 4 月 8 日</td>
+<td>[Web 浏览器中的 Kubernetes 终端 (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>如果在 {{site.data.keyword.Bluemix_notm}} 控制台中使用集群仪表板来管理集群，但希望快速进行更高级的配置更改，现在可以在 Kubernetes 终端的 Web 浏览器中直接运行 CLI 命令。在集群的详细信息页面上，通过单击**终端**按钮来启动 Kubernetes 终端。请注意，Kubernetes 终端作为 Beta 附加组件发布，不适合用于生产集群。</td>
+</tr>
+<tr>
+<td>2019 年 4 月 4 日</td>
+<td>[现在高可用性主节点在悉尼可用](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>在多专区大城市位置（现在包括悉尼）中[创建集群](/docs/containers?topic=containers-clusters#clusters_ui)时，Kubernetes 主节点副本会跨专区分布以实现高可用性。</td>
+</tr>
+</tbody></table>
+
 ## 2019 年 3 月的热门主题
 {: #mar19}
 
@@ -47,13 +75,13 @@ subcollection: containers
 <td>2019 年 3 月 21 日</td>
 <td>为 Kubernetes 集群主节点引入了专用服务端点</td>
 <td>缺省情况下，{{site.data.keyword.containerlong_notm}} 为集群设置了对公用 VLAN 和专用 VLAN 的访问权。先前，如果要使用[仅专用 VLAN 集群](/docs/containers?topic=containers-plan_clusters#private_clusters)，您需要设置网关设备来将集群的工作程序节点与主节点相连接。现在，您可以使用专用服务端点。启用了专用服务端点后，工作程序节点与主节点之间的所有流量都位于专用网络上，而无需网关设备。除了此增强的安全性外，专用网络上的入站和出站流量[不受限制且免费 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/bandwidth)。您仍可以保留公共服务端点，以通过因特网安全地访问 Kubernetes 主节点，例如在不位于专用网络上时运行 `kubectl` 命令。<br><br>
-要使用专用服务端点，必须启用 IBM Cloud Infrastructure (SoftLayer) 帐户的 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) 和[服务端点](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。集群必须运行 Kubernetes V1.11 或更高版本。如果集群运行的是较低的 Kubernetes 版本，请[至少更新到 1.11](/docs/containers?topic=containers-update#update)。有关更多信息，请查看以下链接：<ul>
+要使用专用服务端点，必须启用 IBM Cloud Infrastructure (SoftLayer) 帐户的 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) 和[服务端点](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。集群必须运行 Kubernetes V1.11 或更高版本。如果集群运行的是较低的 Kubernetes 版本，请[至少更新到 1.11](/docs/containers?topic=containers-update#update)。有关更多信息，请查看以下链接：<ul>
 <li>[了解通过服务端点进行的主节点与工作程序节点的通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[设置专用服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[从公共服务端点切换到专用服务端点](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>如果在专用网络上有防火墙，请[添加用于 {{site.data.keyword.containerlong_notm}}、{{site.data.keyword.registrylong_notm}} 和其他 {{site.data.keyword.Bluemix_notm}} 服务的专用 IP 地址](/docs/containers?topic=containers-firewall#firewall_outbound)。</li>
 </ul>
-<p class="important">如果切换到仅专用服务端点集群，请确保集群仍可与您使用的其他 {{site.data.keyword.Bluemix_notm}} 服务进行通信。[基于 NFS 的文件存储器](/docs/containers?topic=containers-file_storage#file_storage)、[Portworx 软件定义的存储 (SDS)](/docs/containers?topic=containers-portworx#portworx) 和[集群自动缩放器](/docs/containers?topic=containers-ca#ca)不支持仅专用服务端点。请改为使用具有公共和专用服务端点的集群。</p>
+<p class="important">如果切换到仅专用服务端点集群，请确保集群仍可与您使用的其他 {{site.data.keyword.Bluemix_notm}} 服务进行通信。[Portworx 软件定义的存储 (SDS)](/docs/containers?topic=containers-portworx#portworx) 和[集群自动缩放器](/docs/containers?topic=containers-ca#ca)不支持仅专用服务端点。请改为使用具有公共和专用服务端点的集群。如果集群运行的是 Kubernetes V1.13.4_1513、V1.12.6_1544、V1.11.8_1550、V1.10.13_1551 或更高版本，那么支持[基于 NFS 的文件存储器](/docs/containers?topic=containers-file_storage#file_storage)。</p>
 </td>
 </tr>
 <tr>
@@ -179,8 +207,8 @@ subcollection: containers
 </tr>
 <tr>
 <td>11 月 7 日</td>
-<td>LoadBalancer 2.0 (beta)</td>
-<td>现在可以选择 [LoadBalancer 1.0 或 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs)，以向公众安全地公开集群应用程序。</td>
+<td>网络负载均衡器 2.0 (beta)</td>
+<td>现在，可以选择 [NLB 1.0 或 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs)，以向公众安全地公开集群应用程序。</td>
 </tr>
 <tr>
 <td>11 月 7 日</td>
@@ -189,7 +217,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>11 月 7 日</td>
-<td>运行 Kubernetes V1.10 的集群中的高可用性主节点</td>
+<td>高可用性主节点</td>
 <td>运行 Kubernetes V1.10 的集群中提供了高可用性主节点。在前面 1.11 集群的条目中描述的所有优点也同样适用于 1.10 集群，此外必须执行的[准备步骤](/docs/containers?topic=containers-cs_versions#110_ha-masters)也一样。</td>
 </tr>
 <tr>
@@ -223,7 +251,7 @@ subcollection: containers
 <tr>
 <td>10 月 22 日</td>
 <td>[新的伦敦多专区位置 `lon05`](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>伦敦多专区大城市的 `lon02` 专区替换为新的 `lon05` 专区，新专区的基础架构资源比 `lon02` 更丰富。请使用 `lon05` 专区创建新的多专区集群。支持使用 `lon02` 的现有集群，但新的多专区集群必须改为使用 `lon05`。</td>
+<td>伦敦多专区大城市位置的 `lon02` 专区替换为新的 `lon05` 专区，新专区的基础架构资源比 `lon02` 更丰富。请使用 `lon05` 专区创建新的多专区集群。支持使用 `lon02` 的现有集群，但新的多专区集群必须改为使用 `lon05`。</td>
 </tr>
 <tr>
 <td>10 月 5 日</td>
@@ -424,7 +452,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>3 月 14 日</td>
-<td>[使用 {{site.data.keyword.appid_full}} 安全登录](/docs/containers?topic=containers-integrations#appid)</td>
+<td>[使用 {{site.data.keyword.appid_full}} 安全登录](/docs/containers?topic=containers-supported_integrations#appid)</td>
 <td>通过要求用户登录，增强了在 {{site.data.keyword.containerlong_notm}} 中运行的应用程序的功能。</td>
 </tr>
 <tr>

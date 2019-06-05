@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks 
 
@@ -92,7 +92,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 
 開始之前：
 * [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-* 確定您具有 `default` 名稱空間的 [**Writer** 或 **Manager** {{site.data.keyword.Bluemix_notm}}IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* 請確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 * [建立](/docs/containers?topic=containers-clusters#clusters_ui)或[更新](/docs/containers?topic=containers-update#update)您的叢集至 Kubernetes 1.11 版或更新版本。
 
 若要使用優先順序等級，請執行下列動作：
@@ -138,12 +138,12 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     </tr>
     <tr>
     <td><code>value</code></td>
-    <td>必要：輸入小於或等於 10 億 (1000000000) 的整數。值越高，優先順序越高。這些值相對於叢集裡其他優先順序等級的值。對於您不想先佔（移除）的系統重要 Pod 保留非常高的數字。</br></br>例如，[預設叢集重要優先順序等級](#default_priority_class)範圍是從 900000000-2000001000 的值，所以對於新優先順序等級，請輸入小於這些數字的值，這樣就不會有任何 Pod 高於這些 Pod 的優先順序。</td>
+    <td>必要：輸入小於或等於 10 億 (1000000000) 的整數。值越高，優先順序越高。這些值相對於叢集中其他優先順序等級的值。對於您不想先佔（移除）的系統重要 Pod 保留非常高的數字。</br></br>例如，[預設叢集重要優先順序等級](#default_priority_class)範圍是介於 900000000-2000001000 的值，所以對於新優先順序等級，請輸入小於這些數字的值，這樣就不會有任何 Pod 高於這些 Pod 的優先順序。</td>
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
     <td>選用項目：將欄位設為 `true`，讓此優先順序等級成為廣域預設值，其將套用至每一個未使用 `priorityClassName` 值進行排程的 Pod。您的叢集裡只有 1 個優先順序等級可以設為廣域預設值。如果沒有廣域預設值，則未指定 `priorityClassName` 的 Pod，其優先順序為零 (`0`)。</br></br>
-    [預設優先順序等級](#default_priority_class)未設定 `globalDefault`。如果您已在叢集裡建立其他優先順序等級，則可以執行 `kubectl describe priorityclass <name>`，以檢查並確定其未設定 `globalDefault`。</td>
+        [預設優先順序等級](#default_priority_class)未設定 `globalDefault`。如果您已在叢集裡建立其他優先順序等級，則可以執行 `kubectl describe priorityclass <name>`，以檢查並確定其未設定 `globalDefault`。</td>
     </tr>
     <tr>
     <td><code>description</code></td>
@@ -212,6 +212,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
       name: ibmliberty
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: ibmliberty
       template:
         metadata:
           labels:

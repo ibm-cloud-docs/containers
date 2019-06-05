@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks 
 
@@ -53,6 +53,9 @@ Você deve ter a [função de serviço IAM do **Manager** {{site.data.keyword.Bl
         tier: management
         app: kernel-optimization
     spec:
+      selector:
+        matchLabels:
+          name: kernel-optimization
       template:
         metadata:
           labels:
@@ -113,7 +116,7 @@ Para reverter os parâmetros `sysctl` de seus nós do trabalhador para os valore
     ```
     {: pre}
 
-2. [Reinicializar todos os nós do trabalhador no cluster](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). Os nós do trabalhador voltam on-line, com os valores padrão aplicados.
+2. [Reinicialize todos os nós do trabalhador no cluster](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). Os nós do trabalhador voltam on-line, com os valores padrão aplicados.
 
 <br />
 

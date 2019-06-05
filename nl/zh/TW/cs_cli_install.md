@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -39,106 +39,77 @@ subcollection: containers
 
 此作業包括安裝這些 CLI 及外掛程式的資訊：
 
--   {{site.data.keyword.Bluemix_notm}} CLI 0.8.0 版或更新版本
--   {{site.data.keyword.containerlong_notm}} 外掛程式
--   符合叢集 `major.minor` 版本的 Kubernetes CLI 版本
--   選用項目：{{site.data.keyword.registryshort_notm}} 外掛程式
+- {{site.data.keyword.Bluemix_notm}} CLI 
+- {{site.data.keyword.containerlong_notm}} 外掛程式
+- {{site.data.keyword.registryshort_notm}} 外掛程式
+- 符合叢集 `major.minor` 版本的 Kubernetes CLI 版本
 
-
+如果您要改用 {{site.data.keyword.Bluemix_notm}} 主控台，則在建立叢集之後，您可以在 [Kubernetes Terminal](#cli_web) 中從 Web 瀏覽器直接執行 CLI 指令。
+{: tip}
 
 <br>
 若要安裝 CLI，請執行下列動作：
 
 
 
-1.  安裝 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-ibmcloud-cli)，它是 {{site.data.keyword.containerlong_notm}} 外掛程式的必要條件。使用 {{site.data.keyword.Bluemix_notm}} CLI 來執行指令的字首是 `ibmcloud`。
+1. 安裝 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)。此安裝包括：
+  - 基本 {{site.data.keyword.Bluemix_notm}} CLI。使用 {{site.data.keyword.Bluemix_notm}} CLI 來執行指令的字首是 `ibmcloud`。
+  - {{site.data.keyword.containerlong_notm}} 外掛程式。使用 {{site.data.keyword.Bluemix_notm}} CLI 來執行指令的字首是 `ibmcloud ks`。
+  - {{site.data.keyword.registryshort_notm}} 外掛程式。您可以使用此外掛程式，在多方承租戶、高可用性並且由 IBM 所管理的可擴充專用映像檔登錄中設定您自己的名稱空間，以及儲存 Docker 映像檔，並將其與其他使用者共用。需要有 Docker 映像檔，才能將容器部署至叢集。執行登錄指令的字首是 `ibmcloud cr`。
 
-    計劃要使用很多 CLI 嗎？請嘗試[啟用 {{site.data.keyword.Bluemix_notm}} CLI 的 Shell 自動完成（僅限 Linux/MacOS）](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)。
+  計劃要使用很多 CLI 嗎？請嘗試[啟用 {{site.data.keyword.Bluemix_notm}} CLI 的 Shell 自動完成（僅限 Linux/MacOS）](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)。
     {: tip}
 
-2.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
+2. 登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
+  ```
+  ibmcloud login
+  ```
+  {: pre}
 
-    ```
-    ibmcloud login
-    ```
-    {: pre}
-
-    如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+  如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
     {: tip}
 
-3.  若要建立 Kubernetes 叢集，以及管理工作者節點，請安裝 {{site.data.keyword.containerlong_notm}} 外掛程式。使用 {{site.data.keyword.containerlong_notm}} 外掛程式來執行指令的字首是 `ibmcloud ks`。
+3. 驗證已正確安裝外掛程式。
+  ```
+  ibmcloud plugin list
+  ```
+  {: pre}
 
-    ```
-    ibmcloud plugin install container-service
-    ```
-    {: pre}
+  {{site.data.keyword.containerlong_notm}} 外掛程式會在結果中顯示為 **container-service**，而 {{site.data.keyword.registryshort_notm}} 外掛程式會在結果中顯示為 **container-registry**。
 
-    若要驗證已適當安裝外掛程式，請執行下列指令：
+4. {: #kubectl}若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。使用 Kubernetes CLI 來執行指令的字首是 `kubectl`。
 
-    ```
-    ibmcloud plugin list
-    ```
-    {: pre}
+  最新穩定版本的 `kubectl` 會隨著基本 {{site.data.keyword.Bluemix_notm}} CLI 一起安裝。不過，若要使用叢集，您必須改為安裝與您計劃使用之 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集和 CLI 版本保持最新。
+        {: important}
 
-    {{site.data.keyword.containerlong_notm}} 外掛程式會在結果中顯示為 **container-service**。
+  1. 下載與您計劃使用的 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.12.7。
+    - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
+    - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
+    - **Windows**：將 Kubernetes CLI 安裝在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
 
-4.  {: #kubectl}若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。使用 Kubernetes CLI 來執行指令的字首是 `kubectl`。
+  2. 如果您是使用 OS X 或 Linux，請完成下列步驟。
+    1. 將執行檔移至 `/usr/local/bin` 目錄。
+      ```
+      mv /filepath/kubectl /usr/local/bin/kubectl
+      ```
+      {: pre}
 
-    1.  下載與您計劃使用的 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.12.6。
+    2. 確定 `/usr/local/bin` 列在 `PATH` 系統變數中。`PATH` 變數包含作業系統可在其中找到執行檔的所有目錄。`PATH` 變數中所列的目錄用於不同的用途。`/usr/local/bin` 是用來儲存軟體的執行檔，該軟體不是作業系統的一部分，並且已由系統管理者手動安裝。
+      ```
+      echo $PATH
+      ```
+      {: pre}
+      CLI 輸出範例：
+      ```
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      ```
+      {: screen}
 
-        如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集和 CLI 版本保持最新。
-        {: note}
-
-        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl)
-        - **Linux**：  [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl)
-        - **Windows**：   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe)
-
-    2.  **若為 OS X 及 Linux**：請完成下列步驟。
-        1.  將執行檔移至 `/usr/local/bin` 目錄。
-
-            ```
-            mv /filepath/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-        2.  確定 `/usr/local/bin` 列在 `PATH` 系統變數中。`PATH` 變數包含作業系統可在其中找到執行檔的所有目錄。`PATH` 變數中所列的目錄用於不同的用途。`/usr/local/bin` 是用來儲存軟體的執行檔，該軟體不是作業系統的一部分，並且已由系統管理者手動安裝。
-
-            ```
-            echo $PATH
-            ```
-            {: pre}
-
-            CLI 輸出範例：
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  使檔案成為可執行檔。
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-    3.  **若為 Windows**：請將 Kubernetes CLI 安裝在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中。當您稍後執行指令時，這項設定可為您省去一些檔案路徑變更。
-
-5.  若要管理專用映像檔儲存庫，請安裝 {{site.data.keyword.registryshort_notm}} 外掛程式。您可以使用此外掛程式，在多方承租戶、高可用性並且由 IBM 所管理的可擴充專用映像檔登錄中設定您自己的名稱空間，以及儲存 Docker 映像檔，並將其與其他使用者共用。需要有 Docker 映像檔，才能將容器部署至叢集。執行登錄指令的字首是 `ibmcloud cr`。
-
-    ```
-    ibmcloud plugin install container-registry 
-    ```
-    {: pre}
-
-    若要驗證已適當安裝外掛程式，請執行下列指令：
-
-    ```
-    ibmcloud plugin list
-    ```
-    {: pre}
-
-    在結果中，外掛程式會顯示為 container-registry。
+    3. 使檔案成為可執行檔。
+      ```
+      chmod +x /usr/local/bin/kubectl
+      ```
+      {: pre}
 
 接下來，開始[使用 {{site.data.keyword.containerlong_notm}} 從 CLI 建立 Kubernetes 叢集](/docs/containers?topic=containers-clusters#clusters_cli)。
 
@@ -146,11 +117,10 @@ subcollection: containers
 
 -   [`ibmcloud` 指令](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
 -   [`ibmcloud ks` 指令](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`kubectl` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`ibmcloud cr` 指令](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
+-   [`kubectl` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubectl.docs.kubernetes.io/)
 
 <br />
-
 
 
 
@@ -188,7 +158,7 @@ subcollection: containers
 您可以使用 Kubernetes CLI 隨附的指令來管理 {{site.data.keyword.Bluemix_notm}} 中的叢集。
 {:shortdesc}
 
-支援 Kubernetes 1.12.6 中所有可用的 `kubectl` 指令與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
+支援 Kubernetes 1.12.7 中所有可用的 `kubectl` 指令與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
 
 
 在可以執行 `kkbectl` 指令之前，請執行下列動作：
@@ -254,7 +224,7 @@ subcollection: containers
         **Windows PowerShell 使用者**：不要從 `ibmcloud ks cluster-config` 的輸出中複製並貼上 `SET` 指令，例如，您必須改為執行 `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"` 來設定 `KUBECONCONFIG` 環境變數。
         {:tip}
 
-    3.  驗證已適當地設定 `KUBECONFIG` 環境變數。
+    3.  驗證 `KUBECONFIG` 環境變數已適當設定。
 
         範例：
 
@@ -279,12 +249,12 @@ subcollection: containers
     輸出範例：
 
     ```
-    Client Version: v1.12.6
-    Server Version: v1.12.6
+    Client Version: v1.12.7
+    Server Version: v1.12.7
     ```
     {: screen}
 
-您現在可以執行 `kubectl` 指令，以在 {{site.data.keyword.Bluemix_notm}} 中管理叢集。如需完整指令清單，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)。
+您現在可以執行 `kubectl` 指令，以在 {{site.data.keyword.Bluemix_notm}} 中管理叢集。如需完整指令清單，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubectl.docs.kubernetes.io/)。
 
 **提示：**如果您使用的是 Windows，但未在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI，則必須將目錄切換至 Kubernetes CLI 安裝所在的路徑，才能順利執行 `kubectl` 指令。
 
@@ -302,13 +272,11 @@ subcollection: containers
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 0.8.0 版或更新版本
 -   {{site.data.keyword.containerlong_notm}} 外掛程式
--   Kubernetes CLI 1.12.6 版或更新版本
+-   Kubernetes CLI 1.12.7 版或更新版本
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
 
 <br>
 若要更新 CLI，請執行下列動作：
-
-
 
 1.  更新 {{site.data.keyword.Bluemix_notm}} CLI。下載[最新版本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-ibmcloud-cli)，並執行安裝程式。
 
@@ -409,6 +377,33 @@ subcollection: containers
 <br />
 
 
+## 在 Web 瀏覽器中使用 Kubernetes Terminal（測試版）
+{: #cli_web}
+
+Kubernetes Terminal 容許您使用 {{site.data.keyword.Bluemix_notm}} CLI 直接從 Web 瀏覽器管理叢集。
+{: shortdesc}
+
+Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 附加程式，而且可能會因使用者意見及進一步測試而變更。請不要在正式作業叢集中使用此特性，以避免非預期的負面影響。
+{: important}
+
+如果您在 {{site.data.keyword.Bluemix_notm}} 主控台中使用叢集儀表板來管理叢集，但要快速進行更進階的配置變更，則現在可以在 Kubernetes Terminal 中從 Web 瀏覽器直接執行 CLI 指令。Kubernetes Terminal 是使用基礎 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-ibmcloud-cli)、{{site.data.keyword.containerlong_notm}} 外掛程式及 {{site.data.keyword.registryshort_notm}} 外掛程式所啟用。此外，終端機環境定義已設為您正在使用的叢集，因此，您可以執行 Kubernetes `kubectl` 指令來使用叢集。
+
+您在本端下載及編輯的所有檔案（例如 YAML 檔案）都會暫時儲存在 Kubernetes Terminal 中，而且不會在階段作業之間持續保存。
+{: note}
+
+若要安裝及啟動 Kubernetes Terminal，請執行下列動作：
+
+1.  登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/)。
+2.  從功能表列中，選取您要使用的帳戶。
+3.  從功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中，按一下 **Kubernetes**。
+4.  在**叢集**頁面上，按一下您要存取的叢集。
+5.  從叢集詳細資料頁面中，按一下**終端機**按鈕。
+6.  按一下**安裝**。這可能需要幾分鐘的時間，才能安裝終端機附加程式。
+7.  再按一下**終端機**按鈕。即會在瀏覽器中開啟終端機。
+
+下次，只要按一下**終端機**按鈕，您就可以啟動 Kubernetes Terminal。
+
+<br />
 
 
 ## 使用 API 自動化進行叢集部署
@@ -424,7 +419,7 @@ subcollection: containers
 您也可以使用 [API Swagger JSON 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api-json) 來產生可在自動化工作期間與 API 互動的用戶端。
 {: tip}
 
-<table>
+<table summary="ID 類型及選項，第 1 欄是輸入參數，而第 2 欄是值。">
 <caption>ID 類型和選項</caption>
 <thead>
 <th>{{site.data.keyword.Bluemix_notm}} ID</th>
@@ -442,27 +437,15 @@ subcollection: containers
 </tbody>
 </table>
 
-1.  建立 {{site.data.keyword.Bluemix_notm}} IAM 存取記號。要求中包含的內文資訊會根據您使用的 {{site.data.keyword.Bluemix_notm}} 鑑別方法而有所不同。請取代下列值：
-  - `<username>`：您的 {{site.data.keyword.Bluemix_notm}} 使用者名稱。
-  - `<password>`：您的 {{site.data.keyword.Bluemix_notm}} 密碼。
-  - `<api_key>`：您的 {{site.data.keyword.Bluemix_notm}} API 金鑰。
-  - `<passcode>`：您的 {{site.data.keyword.Bluemix_notm}} 一次性密碼。執行 `ibmcloud login --sso`，並遵循 CLI 輸出中的指示，使用 Web 瀏覽器來擷取一次性密碼。
+1.  建立 {{site.data.keyword.Bluemix_notm}} IAM 存取記號。要求中包含的內文資訊會根據您使用的 {{site.data.keyword.Bluemix_notm}} 鑑別方法而有所不同。
 
     ```
-    POST https://iam.<region>.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
-    範例：
-    ```
-    POST https://iam.ng.bluemix.net/oidc/token
-    ```
-    {: codeblock}
-
-    若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[檢閱 API 端點中所使用的地區縮寫](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
-
-    <table summary-"Input parameters to retrieve tokens">
-    <caption>取得記號的輸入參數</caption>
+    <table summary="擷取 IAM 記號的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+    <caption>取得 IAM 記號的輸入參數。</caption>
     <thead>
         <th>輸入參數</th>
         <th>值</th>
@@ -470,67 +453,66 @@ subcollection: containers
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>附註</strong>：<code>Yng6Yng=</code> 等於使用者名稱 <strong>bx</strong> 及密碼 <strong>bx</strong> 的 URL 編碼授權。</p></li></ul>
+    <td><ul><li>Content-Type: application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>附註</strong>：<code>Yng6Yng=</code> 等於使用者名稱 <strong>bx</strong> 及密碼 <strong>bx</strong> 的 URL 編碼授權。</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 使用者名稱和密碼的內文</td>
     <td><ul><li>`grant_type: password`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`username: <em>&lt;username&gt;</em>`</li>
-    <li>`password: <em>&lt;password&gt;</em>`</li>
-    <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:`</li></ul>
-    <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</td>
+    <li>`username`：您的 {{site.data.keyword.Bluemix_notm}} 使用者名稱。</li>
+    <li>`password`：您的 {{site.data.keyword.Bluemix_notm}} 密碼。</li>
+    <li>`uaa_client_id: cf`</li>
+    <li>`uaa_client_secret:`</br> <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</li></ul></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 金鑰的內文</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
-    <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:``</li></ul>
-    <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</td>
+    <li>`apikey`：您的 {{site.data.keyword.Bluemix_notm}} API 金鑰</li>
+    <li>`uaa_client_id: cf`</li>
+    <li>`uaa_client_secret:`</br> <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</li></ul></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 一次性密碼的內文</td>
-    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
+      <td><ul><li><code>grant_type: urn:ibm:params:oauth:grant-type:passcode</code></li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
-    <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:`</li></ul>
-    <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</td>
+    <li>`passcode`：您的 {{site.data.keyword.Bluemix_notm}} 一次性密碼。執行 `ibmcloud login --sso`，並遵循 CLI 輸出中的指示，使用 Web 瀏覽器來擷取一次性密碼。</li>
+    <li>`uaa_client_id: cf`</li>
+    <li>`uaa_client_secret:`</br> <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</li></ul>
+    </td>
     </tr>
     </tbody>
     </table>
 
-    API 輸出範例：
+    輸出範例：
 
     ```
     {
-    "access_token": "<iam_token>",
-"refresh_token": "<iam_refresh_token>",
-"uaa_token": "<uaa_token>",
-"uaa_refresh_token": "<uaa_refresh_token>",
-"token_type": "Bearer",
-"expires_in": 3600,
-"expiration": 1493747503
-}
+    "access_token": "<iam_access_token>",
+    "refresh_token": "<iam_refresh_token>",
+    "uaa_token": "<uaa_token>",
+    "uaa_refresh_token": "<uaa_refresh_token>",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "expiration": 1493747503
+    "scope": "ibm openid"
+    }
 
     ```
     {: screen}
 
     您可以在 API 輸出的 **access_token** 欄位中找到 {{site.data.keyword.Bluemix_notm}} IAM 記號。請記下 {{site.data.keyword.Bluemix_notm}} IAM 記號，以在接下來的步驟中擷取其他標頭資訊。
 
-2.  擷取建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。將 `<iam_token>` 取代為您在前一個步驟中擷取的 {{site.data.keyword.Bluemix_notm}} IAM 記號。
+2.  擷取您要使用的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。將 `<iam_access_token>` 取代為您在前一個步驟中從 API 輸出的 **access_token** 欄位中擷取的 {{site.data.keyword.Bluemix_notm}} IAM 記號。在 API 輸出中，您可以在 **resources.metadata.guid** 欄位中找到 {{site.data.keyword.Bluemix_notm}} 帳戶的 ID。
 
     ```
-    GET https://accountmanagement.<region>.bluemix.net/v1/accounts
+    GET https://accountmanagement.ng.bluemix.net/v1/accounts
     ```
     {: codeblock}
 
-    <table summary="取得 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的輸入參數">
-    <caption>取得 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的輸入參數</caption>
+    <table summary="取得 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+    <caption>取得 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的輸入參數。</caption>
     <thead>
   	<th>輸入參數</th>
   	<th>值</th>
@@ -538,14 +520,14 @@ subcollection: containers
     <tbody>
   	<tr>
   		<td>Headers</td>
-  		<td><ul><li>`Content-Type：application/json`</li>
-      <li>`Authorization: bearer &lt;iam_token&gt;`</li>
-      <li>`Accept: application/json`</li></ul></td>
+      <td><ul><li><code>Content-Type：application/json</code></li>
+        <li>`Authorization: bearer <iam_access_token>`</li>
+        <li><code>Accept: application/json</code></li></ul></td>
   	</tr>
     </tbody>
     </table>
 
-    API 輸出範例：
+    輸出範例：
 
     ```
     {
@@ -565,28 +547,18 @@ subcollection: containers
     ```
     {: screen}
 
-    您可以在 API 輸出的 **resources/metadata/guid** 欄位中找到 {{site.data.keyword.Bluemix_notm}} 帳戶的 ID。
+3.  產生包含 {{site.data.keyword.Bluemix_notm}} 認證及您要使用之帳戶 ID 的新 {{site.data.keyword.Bluemix_notm}} IAM 記號。
 
-3.  產生包含 {{site.data.keyword.Bluemix_notm}} 認證及建立叢集所在帳戶 ID 的新 {{site.data.keyword.Bluemix_notm}} IAM 記號。將 `<account_ID>` 取代為您在前一個步驟中擷取的 {{site.data.keyword.Bluemix_notm}} 帳戶的 ID。
-
-    如果您是使用 {{site.data.keyword.Bluemix_notm}} API 金鑰，則必須使用為其建立 API 金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。若要存取其他帳戶中的叢集，請登入此帳戶，並建立以此帳戶為基礎的 {{site.data.keyword.Bluemix_notm}} API 金鑰。
+    如果您使用 {{site.data.keyword.Bluemix_notm}} API 金鑰，則必須使用為其建立 API 金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。若要存取其他帳戶中的叢集，請登入此帳戶，並建立以此帳戶為基礎的 {{site.data.keyword.Bluemix_notm}} API 金鑰。
     {: note}
 
     ```
-    POST https://iam.<region>.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
-    範例：
-    ```
-    POST https://iam.ng.bluemix.net/oidc/token
-    ```
-    {: codeblock}
-
-    若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[檢閱 API 端點中所使用的地區縮寫](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
-
-    <table summary-"Input parameters to retrieve tokens">
-    <caption>取得記號的輸入參數</caption>
+    <table summary="擷取 IAM 記號的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+    <caption>取得 IAM 記號的輸入參數。</caption>
     <thead>
         <th>輸入參數</th>
         <th>值</th>
@@ -594,69 +566,133 @@ subcollection: containers
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>`Content-Type:application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`<p><strong>附註</strong>：<code>Yng6Yng=</code> 等於使用者名稱 <strong>bx</strong> 及密碼 <strong>bx</strong> 的 URL 編碼授權。</p></li></ul>
+    <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`<p><strong>附註</strong>：<code>Yng6Yng=</code> 等於使用者名稱 <strong>bx</strong> 及密碼 <strong>bx</strong> 的 URL 編碼授權。</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 使用者名稱和密碼的內文</td>
     <td><ul><li>`grant_type: password`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`username: <em>&lt;username&gt;</em>`</li>
-    <li>`password: <em>&lt;password&gt;</em>`</li>
+    <li>`username`：您的 {{site.data.keyword.Bluemix_notm}} 使用者名稱。</li>
+    <li>`password`：您的 {{site.data.keyword.Bluemix_notm}} 密碼。</li>
     <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:``</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
-    <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</td>
+    <li>`uaa_client_secret:`</br> <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</li>
+    <li>`bss_account`：您在前一個步驟中擷取的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。</li></ul>
+    </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 金鑰的內文</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`apikey`：您的 {{site.data.keyword.Bluemix_notm}} API 金鑰。</li>
     <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:``</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
-      <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</td>
+    <li>`uaa_client_secret:`</br> <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</li>
+    <li>`bss_account`：您在前一個步驟中擷取的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。</li></ul>
+      </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 一次性密碼的內文</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
+    <li>`passcode`：您的 {{site.data.keyword.Bluemix_notm}} 密碼。</li>
     <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:`</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</td>
+    <li>`uaa_client_secret:`</br> <strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</li>
+    <li>`bss_account`：您在前一個步驟中擷取的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。</li></ul></td>
     </tr>
     </tbody>
     </table>
 
-    API 輸出範例：
+    輸出範例：
 
     ```
     {
       "access_token": "<iam_token>",
-"refresh_token": "<iam_refresh_token>",
-"uaa_token": "<uaa_token>",
-"uaa_refresh_token": "<uaa_refresh_token>",
-"token_type": "Bearer",
-"expires_in": 3600,
-"expiration": 1493747503
-}
+      "refresh_token": "<iam_refresh_token>",
+      "token_type": "Bearer",
+      "expires_in": 3600,
+      "expiration": 1493747503
+    }
 
     ```
     {: screen}
 
-    您可以在 **access_token** 中找到 {{site.data.keyword.Bluemix_notm}} IAM 記號，並且在 **refresh_token** 中找到重新整理記號。
+    您可以在 API 輸出的 **access_token** 欄位中找到 {{site.data.keyword.Bluemix_notm}} IAM 記號，並在 **refresh_token** 欄位中找到重新整理記號。
 
-4.  列出帳戶中的所有 Kubernetes 叢集。使用您在先前步驟中所擷取的資訊，以建置標頭資訊。
+4.  列出可用的 {{site.data.keyword.containerlong_notm}} 地區，然後選取您要使用的地區。使用前一個步驟中的 IAM 存取記號及重新整理記號，來建置標頭資訊。
+    ```
+    GET https://containers.cloud.ibm.com/v1/regions
+    ```
+    {: codeblock}
+
+    <table summary="擷取 {{site.data.keyword.containerlong_notm}} 地區的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+    <caption>擷取 {{site.data.keyword.containerlong_notm}} 地區的輸入參數。</caption>
+    <thead>
+    <th>輸入參數</th>
+    <th>值</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Header</td>
+    <td><ul><li>`Authorization: bearer <iam_token>`</li>
+    <li>`X-Auth-Refresh-Token: <refresh_token>`</li></ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    輸出範例：
+    ```
+    {
+    "regions": [
+        {
+            "name": "ap-north",
+            "alias": "jp-tok",
+            "cfURL": "api.au-syd.bluemix.net",
+            "freeEnabled": false
+        },
+        {
+            "name": "ap-south",
+            "alias": "au-syd",
+            "cfURL": "api.au-syd.bluemix.net",
+            "freeEnabled": true
+        },
+        {
+            "name": "eu-central",
+            "alias": "eu-de",
+            "cfURL": "api.eu-de.bluemix.net",
+            "freeEnabled": true
+        },
+        {
+            "name": "uk-south",
+            "alias": "eu-gb",
+            "cfURL": "api.eu-gb.bluemix.net",
+            "freeEnabled": true
+        },
+        {
+            "name": "us-east",
+            "alias": "us-east",
+            "cfURL": "api.ng.bluemix.net",
+            "freeEnabled": false
+        },
+        {
+            "name": "us-south",
+            "alias": "us-south",
+            "cfURL": "api.ng.bluemix.net",
+            "freeEnabled": true
+        }
+    ]
+    }
+    ```
+    {: screen}
+
+5.  列出您選取的 {{site.data.keyword.containerlong_notm}} 地區中的所有叢集。如果您要[針對叢集執行 Kubernetes API 要求](#kube_api)，請務必記下叢集的 **ID** 及**地區**。
 
      ```
      GET https://containers.cloud.ibm.com/v1/clusters
      ```
      {: codeblock}
 
-     <table summary="使用 API 的輸入參數">
-         <caption>使用 API 的輸入參數</caption>
+     <table summary="使用 {{site.data.keyword.containerlong_notm}} API 的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+     <caption>使用 {{site.data.keyword.containerlong_notm}} API 的輸入參數。</caption>
      <thead>
      <th>輸入參數</th>
      <th>值</th>
@@ -664,8 +700,8 @@ subcollection: containers
      <tbody>
      <tr>
      <td>Header</td>
-     <td><ul><li>`Authorization: bearer <em>&lt;iam_token&gt;</em>`</li>
-     <li>`X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em>`</li></ul></td>
+     <td><ul><li>`Authorization: bearer <iam_token>`</li>
+       <li>`X-Auth-Refresh-Token: <refresh_token>`</li><li>`X-Region: <region>`</li></ul></td>
      </tr>
      </tbody>
      </table>
@@ -673,6 +709,186 @@ subcollection: containers
 5.  請檢閱 [{{site.data.keyword.containerlong_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api)，以尋找所支援 API 的清單。
 
 <br />
+
+
+## 使用 Kubernetes API 來使用叢集
+{: #kube_api}
+
+您可以使用 [Kubernetes API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/using-api/api-overview/)，以與 {{site.data.keyword.containerlong_notm}} 中的叢集互動。
+{: shortdesc}
+
+下列指示需要叢集中的公用網路存取，才能連接至 Kubernetes 主節點的公用服務端點。
+{: note}
+
+1. 遵循[使用 API 自動化叢集部署](#cs_api)中的步驟，來擷取 {{site.data.keyword.Bluemix_notm}} IAM 存取記號、重新整理記號、您要執行 Kubernetes API 要求的叢集 ID，以及叢集所在的 {{site.data.keyword.containerlong_notm}} 地區。
+
+2. 擷取 {{site.data.keyword.Bluemix_notm}} IAM 委派的重新整理記號。
+   ```
+   POST https://iam.bluemix.net/identity/token
+   ```
+   {: codeblock}
+
+   <table summary="取得 IAM 委派的重新整理記號的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+   <caption>取得 IAM 委派的重新整理記號的輸入參數。</caption>
+   <thead>
+   <th>輸入參數</th>
+   <th>值</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Header</td>
+   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`</br><strong>附註</strong>：<code>Yng6Yng=</code> 等於使用者名稱 <strong>bx</strong> 及密碼 <strong>bx</strong> 的 URL 編碼授權。</li><li>`cache-control: no-cache`</li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>內文</td>
+   <td><ul><li>`delegated_refresh_token_expiry: 600`</li>
+   <li>`receiver_client_ids: kube`</li>
+   <li>`response_type: delegated_refresh_token` </li>
+   <li>`refresh_token`：您的 {{site.data.keyword.Bluemix_notm}} IAM 重新整理記號。</li>
+   <li>`grant_type: refresh_token`</li></ul></td>
+   </tr>
+   </tbody>
+   </table>
+
+   輸出範例：
+   ```
+   {
+    "delegated_refresh_token": <delegated_refresh_token>
+   }
+   ```
+   {: screen}
+
+3. 使用前一個步驟中的委派重新整理記號，擷取 {{site.data.keyword.Bluemix_notm}} IAM ID、IAM 存取及 IAM 重新整理記號。在 API 輸出中，您可以在 **id_token** 欄位中找到 IAM ID 記號、在 **access_token** 欄位中找到 IAM 存取記號，以及在 **refresh_token** 欄位中找到 IAM 重新整理記號。
+   ```
+   POST https://iam.bluemix.net/identity/token
+   ```
+   {: codeblock}
+
+   <table summary="取得 IAM ID 及 IAM 存取記號的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+   <caption>取得 IAM ID 及 IAM 存取記號的輸入參數。</caption>
+   <thead>
+   <th>輸入參數</th>
+   <th>值</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Header</td>
+   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic a3ViZTprdWJl`</br> <strong>附註</strong>：<code>a3ViZTprdWJl</code> 等於使用者名稱 <strong><code>kube</code></strong> 及密碼 <strong><code>kube</code></strong> 的 URL 編碼授權。</li><li>`cache-control: no-cache`</li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>內文</td>
+   <td><ul><li>`refresh_token`：您的 {{site.data.keyword.Bluemix_notm}} IAM 委派的重新整理記號。</li>
+   <li>`grant_type: urn:ibm:params:oauth:grant-type:delegated-refresh-token`</li></ul></td>
+   </tr>
+   </tbody>
+   </table>
+
+   輸出範例：
+   ```
+   {
+    "access_token": "<iam_access_token>",
+    "id_token": "<iam_id_token>",
+    "refresh_token": "<iam_refresh_token>",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "expiration": 1553629664,
+    "scope": "ibm openid containers-kubernetes"
+   }
+   ```
+   {: screen}
+
+4. 使用 IAM 存取記號、IAM ID 記號、IAM 重新整理記號以及您叢集所在的 {{site.data.keyword.containerlong_notm}} 地區，來擷取 Kubernetes 主節點的公用 URL。您可以在 API 輸出的 **`publicServiceEndpointURL`** 中找到 URL。
+   ```
+   GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>
+   ```
+   {: codeblock}
+
+   <table summary="取得 Kubernetes 主節點的公用服務端點的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+   <caption>取得 Kubernetes 主節點的公用服務端點的輸入參數。</caption>
+   <thead>
+   <th>輸入參數</th>
+   <th>值</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Header</td>
+     <td><ul><li>`Authorization`：您的 {{site.data.keyword.Bluemix_notm}} IAM 存取記號。</li><li>`X-Auth-Refresh-Token`：您的 {{site.data.keyword.Bluemix_notm}} IAM 重新整理記號。</li><li>`X-Region`：[使用 API 自動化叢集部署](#cs_api)中使用 `GET https://containers.cloud.ibm.com/v1/clusters` API 所擷取之叢集的 {{site.data.keyword.containerlong_notm}} 地區。</li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>Path</td>
+   <td>`<cluster_ID>：`[使用 API 自動化叢集部署](#cs_api)中使用 `GET https://containers.cloud.ibm.com/v1/clusters` API 所擷取之叢集的 ID。</td>
+   </tr>
+   </tbody>
+   </table>
+
+   輸出範例：
+   ```
+   {
+    "location": "Dallas",
+    "dataCenter": "dal10",
+    "multiAzCapable": true,
+    "vlans": null,
+    "worker_vlans": null,
+    "workerZones": [
+        "dal10"
+    ],
+    "id": "1abc123b123b124ab1234a1a12a12a12",
+    "name": "mycluster",
+    "region": "us-south",
+    ...
+    "publicServiceEndpointURL": "https://c7.us-south.containers.cloud.ibm.com:27078"
+   }
+   ```
+   {: screen}
+
+5. 使用您稍早擷取的 IAM ID 記號，針對您的叢集執行 Kubernetes API 要求。例如，列出叢集中所執行的 Kubernetes 版本。
+
+   如果您已在 API 測試架構中啟用 SSL 憑證驗證，則請務必停用此特性。
+   {: tip}
+
+   ```
+   GET <publicServiceEndpointURL>/version
+   ```
+   {: codeblock}
+
+   <table summary="檢視叢集中執行的 Kubernetes 版本的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+   <caption>檢視叢集中執行的 Kubernetes 版本的輸入參數。</caption>
+   <thead>
+   <th>輸入參數</th>
+   <th>值</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Header</td>
+   <td>`Authorization: bearer <id_token>`</td>
+   </tr>
+   <tr>
+   <td>Path</td>
+   <td>`<publicServiceEndpointURL>`：您在前一個步驟中擷取的 Kubernetes 主節點的 **`publicServiceEndpointURL`**。</td>
+   </tr>
+   </tbody>
+   </table>
+
+   輸出範例：
+   ```
+   {
+    "major": "1",
+    "minor": "13",
+    "gitVersion": "v1.13.4+IKS",
+    "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
+    "gitTreeState": "clean",
+    "buildDate": "2019-03-21T10:08:03Z",
+    "goVersion": "go1.11.5",
+    "compiler": "gc",
+    "platform": "linux/amd64"
+   }
+   ```
+   {: screen}
+
+6. 檢閱 [Kubernetes API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubernetes-api/)，以尋找最新 Kubernetes 版本的受支援 API 清單。請確定使用符合叢集之 Kubernetes 版本的 API 文件。如果您未使用最新的 Kubernetes 版本，則請在 URL 結尾加上您的版本。例如，若要存取 1.12 版的 API 文件，請新增 `v1.12`。
 
 
 ## 使用 API 重新整理 {{site.data.keyword.Bluemix_notm}} IAM 存取記號，並取得新的重新整理記號
@@ -699,8 +915,8 @@ subcollection: containers
     ```
     {: codeblock}
 
-    <table summary="新 IAM 記號的輸入參數">
-     <caption>新 {{site.data.keyword.Bluemix_notm}} IAM 記號的輸入參數</caption>
+    <table summary="新 IAM 記號的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+    <caption>新 {{site.data.keyword.Bluemix_notm}} IAM 記號的輸入參數</caption>
     <thead>
     <th>輸入參數</th>
     <th>值</th>
@@ -709,22 +925,22 @@ subcollection: containers
     <tr>
     <td>Header</td>
     <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li>
-      <li>`Authorization: Basic Yng6Yng=`</br></br><strong>附註</strong>：<code>Yng6Yng=</code> 等於使用者名稱 <strong>bx</strong> 及密碼 <strong>bx</strong> 的 URL 編碼授權。</li></ul></td>
+      <li>`Authorization: Basic Yng6Yng=`</br></br><strong>附註：</strong><code>Yng6Yng=</code> 等於使用者名稱 <strong>bx</strong> 及密碼 <strong>bx</strong> 的 URL 編碼授權。</li></ul></td>
     </tr>
     <tr>
     <td>使用重新整理記號時的內文</td>
     <td><ul><li>`grant_type: refresh_token`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`refresh_token: <em>&lt;iam_refresh_token&gt;</em>`</li>
+    <li>`refresh_token:` 您的 {{site.data.keyword.Bluemix_notm}} IAM 重新整理記號。</li>
     <li>`uaa_client_ID: cf`</li>
     <li>`uaa_client_secret:`</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</td>
+    <li>`bss_account:` 您的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。</li></ul><strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</td>
     </tr>
     <tr>
       <td>使用 {{site.data.keyword.Bluemix_notm}} API 金鑰時的內文</td>
       <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`apikey:` 您的 {{site.data.keyword.Bluemix_notm}} API 金鑰。</li>
     <li>`uaa_client_ID: cf`</li>
         <li>`uaa_client_secret:`</li></ul><strong>附註</strong>：新增未指定任何值的 <code>uaa_client_secret</code> 金鑰。</td>
     </tr>
@@ -736,13 +952,13 @@ subcollection: containers
     ```
     {
       "access_token": "<iam_token>",
-"refresh_token": "<iam_refresh_token>",
-"uaa_token": "<uaa_token>",
-"uaa_refresh_token": "<uaa_refresh_token>",
-"token_type": "Bearer",
-"expires_in": 3600,
-"expiration": 1493747503
-}
+      "refresh_token": "<iam_refresh_token>",
+      "uaa_token": "<uaa_token>",
+      "uaa_refresh_token": "<uaa_refresh_token>",
+      "token_type": "Bearer",
+      "expires_in": 3600,
+      "expiration": 1493747503
+    }
 
     ```
     {: screen}

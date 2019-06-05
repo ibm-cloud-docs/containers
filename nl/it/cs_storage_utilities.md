@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -29,17 +29,17 @@ subcollection: containers
 ## Installazione del plugin IBM Cloud Block Storage Attacher (beta)
 {: #block_storage_attacher}
 
-Utilizza il plugin {{site.data.keyword.Bluemix_notm}} Block Storage Attacher per collegare l'archiviazione blocchi non elaborata, non formattata e non montata a un nodo di lavoro nel tuo cluster.
+Utilizza il plugin {{site.data.keyword.Bluemix_notm}} Block Storage Attacher per collegare l'archiviazione blocchi non elaborata, non formattata e non montata a un nodo di lavoro nel tuo cluster.  
 {: shortdesc}
 
 Ad esempio, vuoi archiviare i tuoi dati con una soluzione SDS (software-defined storage), come ad esempio [Portworx](/docs/containers?topic=containers-portworx), ma non vuoi utilizzare i nodi di lavoro bare metal che sono ottimizzati per l'utilizzo di SDS e che sono forniti con dischi locali supplementari. Per aggiungere dischi locali al tuo nodo di lavoro non SDS, devi creare manualmente i tuoi dispositivi di archiviazione blocchi nel tuo account dell'infrastruttura {{site.data.keyword.Bluemix_notm}} e utilizzare il {{site.data.keyword.Bluemix_notm}} Block Volume Attacher per collegare l'archiviazione al tuo nodo di lavoro non SDS.
 
 Il plugin {{site.data.keyword.Bluemix_notm}} Block Volume Attacher crea i pod su ogni nodo di lavoro nel tuo cluster come parte di una serie di daemon e configura una classe di archiviazione Kubernetes che utilizzi successivamente per collegare il dispositivo di archiviazione blocchi al tuo nodo di lavoro non SDS.
 
-Stai cercando le istruzioni su come aggiornare o rimuovere il plugin {{site.data.keyword.Bluemix_notm}} Block Volume Attacher? Vedi [Aggiornamento del plug-in](#update_block_attacher) e [Rimozione del plug-in](#remove_block_attacher).
+Stai cercando le istruzioni su come aggiornare o rimuovere il plugin {{site.data.keyword.Bluemix_notm}} Block Volume Attacher? Vedi [Aggiornamento del plugin](#update_block_attacher) e [Rimozione del plugin](#remove_block_attacher).
 {: tip}
 
-1.  [Attieniti alle istruzioni](/docs/containers?topic=containers-integrations#helm) per installare il client Helm sulla tua macchina locale e installare il server Helm (tiller) con un account di servizio nel tuo cluster.
+1.  [Attieniti alle istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale e installare il server Helm (tiller) con un account di servizio nel tuo cluster.
 
 2.  Verifica che tiller sia installato con un account di servizio.
 
@@ -62,9 +62,9 @@ Stai cercando le istruzioni su come aggiornare o rimuovere il plugin {{site.data
    ```
    {: pre}
 
-4. Installa il plugin {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. Quando installi il plug-in, al tuo cluster vengono aggiunte le classi di archiviazione blocchi predefinite.
+4. Installa il plugin {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. Quando installi il plugin, al tuo cluster vengono aggiunte le classi di archiviazione blocchi predefinite.
    ```
-   helm install ibm/ibm-block-storage-attacher --name block-attacher
+   helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
    {: pre}
 
@@ -144,7 +144,7 @@ Puoi eseguire un upgrade del plugin {{site.data.keyword.Bluemix_notm}} Block Sto
 
 2. Facoltativo: scarica il grafico helm più recente sulla tua macchina locale. Estrai quindi il pacchetto ed esamina il file `release.md` per trovare le informazioni di release più aggiornate.
    ```
-   helm fetch ibm/ibmcloud-block-storage-plugin
+   helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -230,13 +230,13 @@ Per aggiungere configurazioni di archiviazione blocchi differenti, aggiungere l'
     ```
     {: pre}
 
-2. Vai alla directory `block-storage-utilities`.
+3. Vai alla directory `block-storage-utilities`.
    ```
    cd ibmcloud-storage-utilities/block-storage-provisioner
    ```
    {: pre}
 
-3. Apri il file `yamlgen.yaml` e specifica la configurazione dell'archiviazione blocchi che desideri aggiungere a ogni nodo di lavoro nel cluster.
+4. Apri il file `yamlgen.yaml` e specifica la configurazione dell'archiviazione blocchi che desideri aggiungere a ogni nodo di lavoro nel cluster.
    ```
    #
    # Can only specify 'performance' OR 'endurance' and associated clause
@@ -273,27 +273,27 @@ Per aggiungere configurazioni di archiviazione blocchi differenti, aggiungere l'
    </tr>
    <tr>
    <td><code>performance.iops</code></td>
-   <td>Se desideri eseguire il provisioning di archiviazione `performance`, immetti il numero di IOPS. Per ulteriori informazioni, vedi [Decisioni relative alla tua configurazione dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).  Se desideri eseguire il provisioning di archiviazione `endurance`, rimuovi questa sezione o indicala come commento aggiungendo `#` all'inizio di ciascuna riga.
+   <td>Se desideri eseguire il provisioning di archiviazione `performance`, immetti il numero di IOPS. Per ulteriori informazioni, vedi [Decisioni relative alla tua configurazione dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). Se desideri eseguire il provisioning di archiviazione `endurance`, rimuovi questa sezione o indicala come commento aggiungendo `#` all'inizio di ciascuna riga.
    </tr>
    <tr>
    <td><code>endurance.tier</code></td>
-   <td>Se desideri eseguire il provisioning di archiviazione `endurance`, immetti il numero di IOPS per ogni gigabyte. Ad esempio, se vuoi eseguire il provisioning dell'archiviazione blocchi come è definita nella classe di archiviazione `ibmc-block-bronze`, immetti 2. Per ulteriori informazioni, vedi[Decisioni relative alla tua configurazione dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). Se vuoi eseguire il provisioning di archiviazione `performance`, rimuovi questa sezione o indicala come commento aggiungendo `#` all'inizio di ciascuna riga.</td>
+   <td>Se desideri eseguire il provisioning di archiviazione `endurance`, immetti il numero di IOPS per ogni gigabyte. Ad esempio, se vuoi eseguire il provisioning dell'archiviazione blocchi come è definita nella classe di archiviazione `ibmc-block-bronze`, immetti 2. Per ulteriori informazioni, vedi[Decisioni relative alla tua configurazione dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). Se vuoi eseguire il provisioning di archiviazione `performance`, rimuovi questa sezione o indicala come commento aggiungendo `#` all'inizio di ciascuna riga. </td>
    </tr>
    <tr>
    <td><code>size</code></td>
    <td>Immetti la dimensione della tua archiviazione in gigabyte. Vedi [Decisioni relative alla tua configurazione dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) per trovare dimensioni supportate per il tuo livello di archiviazione. </td>
    </tr>
    </tbody>
-   </table>
+   </table>  
 
-4. Richiama il tuo nome utente e la tua chiave API dell'infrastruttura IBM Cloud (SoftLayer). Il nome utente e la chiave API sono utilizzati dallo script `mkpvyaml` per accedere al cluster.
+5. Richiama il tuo nome utente e la tua chiave API dell'infrastruttura IBM Cloud (SoftLayer). Il nome utente e la chiave API sono utilizzati dallo script `mkpvyaml` per accedere al cluster.
    1. Accedi alla [console {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/).
    2. Dal menu ![Icona Menu](../icons/icon_hamburger.svg "Icona Menu"), seleziona **Infrastruttura**.
    3. Dalla barra dei menu, seleziona **Account** > **Utenti** > **Elenco utenti**.
    4. Trova il nome di cui desideri richiamare il nome utente e la chiave API.
    5. Fai clic su **Genera** per generare una chiave API o **Visualizza** per visualizzare la tua chiave API esistente. Viene aperta una finestra a comparsa che mostra il nome utente e la chiave API dell'infrastruttura.
 
-5. Memorizza le credenziali in una variabile di ambiente.
+6. Memorizza le credenziali in una variabile di ambiente.
    1. Aggiungi le variabili di ambiente.
       ```
       export SL_USERNAME=<infrastructure_username>
@@ -311,7 +311,7 @@ Per aggiungere configurazioni di archiviazione blocchi differenti, aggiungere l'
       ```
       {: pre}
 
-6.  Crea ed esegui il contenitore `mkpvyaml`. Quando esegui il contenitore dall'immagine, viene eseguito lo script `mkpvyaml.py`. Lo script aggiunge un dispositivo di archiviazione blocchi per ogni nodo di lavoro nel cluster e autorizza ciascun nodo di lavoro ad accedere al dispositivo di archiviazione blocchi. Alla fine dello script, viene generato un file YAML `pv-<cluster_name>.yaml` per te che puoi utilizzare successivamente per creare i volumi persistenti nel cluster.
+7.  Crea ed esegui il contenitore `mkpvyaml`. Quando esegui il contenitore dall'immagine, viene eseguito lo script `mkpvyaml.py`. Lo script aggiunge un dispositivo di archiviazione blocchi per ogni nodo di lavoro nel cluster e autorizza ciascun nodo di lavoro ad accedere al dispositivo di archiviazione blocchi. Alla fine dello script, viene generato un file YAML `pv-<cluster_name>.yaml` per te che puoi utilizzare successivamente per creare i volumi persistenti nel cluster.
     1.  Crea il contenitore `mkpvyaml`.
         ```
         docker build -t mkpvyaml .
@@ -344,7 +344,7 @@ Per aggiungere configurazioni di archiviazione blocchi differenti, aggiungere l'
         {: screen}
     2.  Esegui il contenitore per eseguire lo script `mkpvyaml.py`.
         ```
-        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
+        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME mkpvyaml
         ```
         {: pre}
 
@@ -412,7 +412,7 @@ Utilizza questa opzione se vuoi aggiungere configurazioni di archiviazione blocc
    ```
    {: pre}
 
-2. Ripeti i passi 3 e 4 in [Decisioni relative alla tua configurazione dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) per scegliere il tipo, la dimensione e il numero di IOPS per il dispositivo di archiviazione blocchi che vuoi aggiungere al tuo nodo di lavoro non SDS.
+2. Ripeti i passi 3 e 4 in [Decisioni relative alla tua configurazione dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) per scegliere il tipo, la dimensione e il numero di IOPS per il dispositivo di archiviazione blocchi che vuoi aggiungere al tuo nodo di lavoro non SDS.    
 
 3. Crea il dispositivo di archiviazione blocchi nella stessa zona in cui si trova il tuo nodo di lavoro non SDS.
 
@@ -437,7 +437,7 @@ Utilizza questa opzione se vuoi aggiungere configurazioni di archiviazione blocc
    Output di esempio:
    ```
    id         username          datacenter   storage_type                capacity_gb   bytes_used   ip_addr         lunId   active_transactions
-   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0
+   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0   
    ```
    {: screen}
 
@@ -463,7 +463,7 @@ Utilizza questa opzione se vuoi aggiungere configurazioni di archiviazione blocc
    ```
    {: screen}
 
-6. Autorizza il nodo di lavoro non SDS ad accedere al dispositivo di archiviazione blocchi. Sostituisci `<volume_ID>` con l'ID volume del tuo dispositivo di archiviazione blocchi che hai richiamato in precedenza e `<private_worker_IP>` con l'indirizzo IP privato del nodo di lavoro non SDS dove vuoi collegare il dispositivo.
+6. Autorizza il nodo di lavoro non SDS ad accedere al dispositivo di archiviazione blocchi. Sostituisci `<volume_ID>` con l'ID volume del tuo dispositivo di archiviazione blocchi che hai richiamato in precedenza e `<private_worker_IP>` con l'indirizzo IP privato del nodo di lavoro non SDS dove desideri collegare il dispositivo.
 
    ```
    ibmcloud sl block access-authorize <volume_ID> -p <private_worker_IP>
@@ -485,7 +485,7 @@ Utilizza questa opzione se vuoi aggiungere configurazioni di archiviazione blocc
    Output di esempio:
    ```
    ID          name                 type   private_ip_address   source_subnet   host_iqn                                      username   password           allowed_host_id
-   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581
+   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581   
    ```
    {: screen}
 
@@ -502,10 +502,10 @@ Per collegare il dispositivo di archiviazione blocchi a un nodo di lavoro non SD
 
 **Prima di iniziare**:
 - Assicurati di aver creato [automaticamente](#automatic_block) o [manualmente](#manual_block) l'archiviazione blocchi non elaborata, non formatta e non montata per i tuoi nodi di lavoro non SDS.
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Per collegare l'archiviazione blocchi non elaborata a nodi di lavoro non SDS**:
-1. Prepara la creazione del PV.
+1. Prepara la creazione del PV.  
    - **Se hai utilizzato il contenitore `mkpvyaml`:**
      1. Apri il file `pv-<cluster_name>.yaml`.
         ```
@@ -554,12 +554,12 @@ Per collegare il dispositivo di archiviazione blocchi a un nodo di lavoro non SD
         </thead>
         <tbody>
       	<tr>
-      	<td><code>metadata.name</code></td>
+          <td><code>metadata.name</code></td>
       	<td>Immetti un nome per il tuo PV.</td>
       	</tr>
         <tr>
         <td><code>ibm.io/iqn</code></td>
-        <td>Immetti il nome host IQN che hai richiamato in precedenza.</td>
+        <td>Immetti il nome host IQN che hai richiamato in precedenza. </td>
         </tr>
         <tr>
         <td><code>ibm.io/username</code></td>
@@ -582,7 +582,7 @@ Per collegare il dispositivo di archiviazione blocchi a un nodo di lavoro non SD
         <td>Immetti l'indirizzo IP privato del nodo di lavoro dove desideri collegare il dispositivo di archiviazione blocchi e che hai autorizzato in precedenza ad accedere al tuo dispositivo di archiviazione blocchi. </td>
         </tr>
         <tr>
-        <td><code>ibm.io/volID</code></td>
+          <td><code>ibm.io/volID</code></td>
         <td>Immetti l'ID del volume di archiviazione blocchi che hai richiamato in precedenza. </td>
         </tr>
         <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -81,7 +81,7 @@ Pour une solution à long terme, [mettez à jour le type de machine de votre poo
 {: #nonroot}
 
 {: tsSymptoms}
-Une fois que vous [ajoutez du stockage NFS](/docs/containers?topic=containers-file_storage#app_volume_mount) dans votre déploiement, le conteneur ne parvient pas à se déployer. Lorsque vous extrayez les journaux de votre conteneur, vous pourrez voir les messages d'erreur suivants. Il y a échec du pod qui est bloqué dans un cycle de rechargement.
+Une fois que vous [ajoutez du stockage NFS](/docs/containers?topic=containers-file_storage#file_app_volume_mount) dans votre déploiement, le conteneur ne parvient pas à se déployer. Lorsque vous extrayez les journaux de votre conteneur, vous pourrez voir les messages d'erreur suivants. Il y a échec du pod qui est bloqué dans un cycle de rechargement.
 
 ```
 write-permission
@@ -185,6 +185,9 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
       name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:
@@ -327,7 +330,7 @@ Si une erreur réseau se produit lorsqu'un pod effectue une opération d'écritu
    ```
    {: pre}
 
-2. Vérifiez que vous utilisez la [dernière version du plug-in {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). Si ce n'est pas le cas, [mettez votre plug-in à jour](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
+2. Vérifiez que vous utilisez la [dernière version du plug-in {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). Si ce n'est pas le cas, [mettez votre plug-in à jour](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
 3. Si vous avez utilisé un déploiement Kubernetes pour votre pod, redémarrez le pod en échec en le retirant et en laissant Kubernetes le recréer. Si vous n'avez pas utilisé un déploiement, extrayez le fichier YAML qui a été utilisé pour créer votre pod en exécutant la commande `kubectl get pod <pod_name> -o yaml >pod.yaml`. Ensuite, supprimez le pod et recréez-le manuellement.
     ```
     kubectl delete pod <pod_name>

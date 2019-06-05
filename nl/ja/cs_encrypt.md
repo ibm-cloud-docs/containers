@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-17"
 
 keywords: kubernetes, iks
 
@@ -30,7 +30,7 @@ subcollection: containers
 {: shortdesc}
 
 クラスター内には、さまざまなレベルの機密データが作成されます。それぞれに適切な保護が必要になります。
-- **クラスター・レベル:** クラスター構成データが、Kubernetes マスターの etcd コンポーネントに保管されます。 Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](/docs/containers?topic=containers-encryption#encryption)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。 以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。
+- **クラスター・レベル:** クラスター構成データが、Kubernetes マスターの etcd コンポーネントに保管されます。 etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。{{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](/docs/containers?topic=containers-encryption#encryption)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。 以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。
 - **アプリ・レベル:** アプリをデプロイする際に、資格情報や鍵などの機密情報を YAML 構成ファイルや構成マップ、スクリプトに保管しないでください。 代わりに、[Kubernetes シークレット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/secret/) を使用します。 [Kubernetes シークレット内でデータを暗号化して](#keyprotect)、許可されていないユーザーがクラスターの機密情報にアクセスできないようにすることもできます。
 
 クラスターの保護について詳しくは、[{{site.data.keyword.containerlong_notm}} のセキュリティー](/docs/containers?topic=containers-security#security)を参照してください。
@@ -39,11 +39,11 @@ subcollection: containers
 
 _図: クラスター内のデータ暗号化の概要_
 
-1.  **etcd**: etcd は、オブジェクト構成 `.yaml` ファイルやシークレットなどの Kubernetes リソースのデータを保管するマスターのコンポーネントです。 Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](#keyprotect)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。 以前のバージョンの Kubernetes を実行するクラスター内では、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。etcd データがポッドに送信されるときには、データの保護と保全性を確保するために、データが TLS で暗号化されます。
+1.  **etcd**: etcd は、オブジェクト構成 `.yaml` ファイルやシークレットなどの Kubernetes リソースのデータを保管するマスターのコンポーネントです。 etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。{{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](#keyprotect)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。 以前のバージョンの Kubernetes を実行するクラスター内では、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。 etcd データがポッドに送信されるときには、データの保護と保全性を確保するために、データが TLS で暗号化されます。
 2.  **ワーカー・ノードの 2 次ディスク**: ワーカー・ノードの 2 次ディスクは、コンテナー・ファイル・システムとローカルにプルしたイメージが保管される場所です。 このディスクは AES 256 ビット LUKS 暗号鍵で暗号化されます。この暗号鍵はワーカー・ノードに固有であり、IBM 管理の etcd にシークレットとして保管されます。 ワーカー・ノードを再ロードまたは更新すると、LUKS 鍵はローテーションされます。
 3.  **ストレージ**: [ファイル、ブロック、またはオブジェクトの永続ストレージをセットアップ](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)してデータを保管することができます。 IBM Cloud インフラストラクチャー (SoftLayer) ストレージ・インスタンスは、暗号化されたディスクにデータを保存するので、保存中のデータは暗号化されています。 さらに、オブジェクト・ストレージを選択した場合は、転送中のデータも暗号化されます。
-4.  **{{site.data.keyword.Bluemix_notm}} サービス**: クラスターと {{site.data.keyword.registryshort_notm}} や {{site.data.keyword.watson}} などの [{{site.data.keyword.Bluemix_notm}} サービスを統合](/docs/containers?topic=containers-integrations#adding_cluster)できます。 サービス資格情報は、etcd に保存されるシークレットに保管されます。このシークレットにアプリがアクセスするには、シークレットをボリュームとしてマウントするか、[デプロイメント](/docs/containers?topic=containers-app#secret)でシークレットを環境変数として指定します。
-5.  **{{site.data.keyword.keymanagementserviceshort}}**: クラスターで [{{site.data.keyword.keymanagementserviceshort}} を有効にする](#keyprotect)と、ラップされたデータ暗号鍵 (DEK) が etcd に保管されます。 DEK は、サービス資格情報や LUKS 鍵など、クラスター内のシークレットを暗号化します。 ルート・キーは {{site.data.keyword.keymanagementserviceshort}} インスタンス内にあるので、暗号化されたシークレットへのアクセスを制御できます。 {{site.data.keyword.keymanagementserviceshort}} キーは、情報の盗難を防止する FIPS 140-2 レベル 2 認定のクラウド・ベースのハードウェア・セキュリティー・モジュールによって保護されています。{{site.data.keyword.keymanagementserviceshort}} の暗号化の仕組みについて詳しくは、[エンベロープ暗号化](/docs/services/key-protect/concepts?topic=key-protect-envelope-encryption#envelope-encryption)を参照してください。
+4.  **{{site.data.keyword.Bluemix_notm}} サービス**: クラスターと {{site.data.keyword.registryshort_notm}} や {{site.data.keyword.watson}} などの [{{site.data.keyword.Bluemix_notm}} サービスを統合](/docs/containers?topic=containers-service-binding#bind-services)できます。 サービス資格情報は、etcd に保存されるシークレットに保管されます。このシークレットにアプリがアクセスするには、シークレットをボリュームとしてマウントするか、[デプロイメント](/docs/containers?topic=containers-app#secret)でシークレットを環境変数として指定します。
+5.  **{{site.data.keyword.keymanagementserviceshort}}**: クラスターで [{{site.data.keyword.keymanagementserviceshort}} を有効にする](#keyprotect)と、ラップされたデータ暗号鍵 (DEK) が etcd に保管されます。 DEK は、サービス資格情報や LUKS 鍵など、クラスター内のシークレットを暗号化します。 ルート・キーは {{site.data.keyword.keymanagementserviceshort}} インスタンス内にあるので、暗号化されたシークレットへのアクセスを制御できます。 {{site.data.keyword.keymanagementserviceshort}} キーは、情報の盗難を防止する FIPS 140-2 レベル 2 認定のクラウド・ベースのハードウェア・セキュリティー・モジュールによって保護されています。 {{site.data.keyword.keymanagementserviceshort}} の暗号化の仕組みについて詳しくは、[エンベロープ暗号化](/docs/services/key-protect/concepts?topic=key-protect-envelope-encryption#envelope-encryption)を参照してください。
 
 ## シークレットを使用するケースについて
 {: #secrets}
@@ -56,7 +56,7 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
 ### クラスターへのサービスの追加
 {: #secrets_service}
 
-サービスをクラスターにバインドする場合は、シークレットを作成してサービス資格情報を保管する必要はありません。 シークレットは自動的に作成されます。 詳しくは、[クラスターへの Cloud Foundry サービスの追加](/docs/containers?topic=containers-integrations#adding_cluster)を参照してください。
+サービスをクラスターにバインドする場合は、シークレットを作成してサービス資格情報を保管する必要はありません。 シークレットは自動的に作成されます。 詳しくは、[{{site.data.keyword.Bluemix_notm}} サービスをクラスターに追加する](/docs/containers?topic=containers-service-binding#bind-services)を参照してください。
 {: shortdesc}
 
 ### アプリへのトラフィックを TLS シークレットで暗号化する
@@ -73,7 +73,6 @@ ALB は、HTTP ネットワーク・トラフィックをクラスター内の�
 クラスターを作成すると、{{site.data.keyword.registrylong}} 資格情報用のシークレットが `default` Kubernetes 名前空間内に自動的に作成されます。 しかし、以下の状況でコンテナーをデプロイする場合は、[クラスター用に独自のイメージ・プル・シークレットを作成](/docs/containers?topic=containers-images#other)する必要があります。
 * {{site.data.keyword.registryshort_notm}} レジストリー内のイメージから `default` 以外の Kubernetes 名前空間へ。
 * 別の {{site.data.keyword.Bluemix_notm}} 地域または {{site.data.keyword.Bluemix_notm}} アカウントに保管されている、{{site.data.keyword.registryshort_notm}} レジストリー内のイメージから。
-* {{site.data.keyword.Bluemix_notm}} 専用アカウントに保管されているイメージから。
 * 外部のプライベート・レジストリーに保管されているイメージから。
 
 <br />
@@ -82,19 +81,19 @@ ALB は、HTTP ネットワーク・トラフィックをクラスター内の�
 ## {{site.data.keyword.keymanagementserviceshort}} (ベータ版) を使用した Kubernetes マスターのローカル・ディスクとシークレットの暗号化
 {: #keyprotect}
 
-クラスター内で Kubernetes [鍵管理サービス (KMS) プロバイダー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) として [{{site.data.keyword.keymanagementservicefull}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial) を使用することによって、Kubernetes マスター内の etcd コンポーネントと Kubernetes シークレットを保護できます。 KMS プロバイダーは、Kubernetes バージョン 1.10 と 1.11 のアルファー版の機能です。バージョン 1.11 で、{{site.data.keyword.keymanagementserviceshort}} 統合が {{site.data.keyword.containerlong_notm}} のベータ版になりました。
+クラスター内で Kubernetes [鍵管理サービス (KMS) プロバイダー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) として [{{site.data.keyword.keymanagementservicefull}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial) を使用することによって、Kubernetes マスター内の etcd コンポーネントと Kubernetes シークレットを保護できます。 KMS プロバイダーは、Kubernetes バージョン 1.11 のアルファ版の機能であり、{{site.data.keyword.keymanagementserviceshort}} 統合が {{site.data.keyword.containerlong_notm}} のベータ版になりました。
 {: shortdesc}
 
-デフォルトでは、クラスター構成と Kubernetes シークレットは、IBM 管理の Kubernetes マスターの etcd コンポーネントに保管されます。 ワーカー・ノードには 2 次ディスクもあり、これは etcd にシークレットとして保管される IBM 管理の LUKS 鍵で暗号化されます。 Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 ただし、Kubernetes マスターのローカル・ディスク上の etcd コンポーネント内のデータが自動的に暗号化されるのは、クラスターの {{site.data.keyword.keymanagementserviceshort}} 暗号化を有効にした後です。 以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。
+デフォルトでは、クラスター構成と Kubernetes シークレットは、IBM 管理の Kubernetes マスターの etcd コンポーネントに保管されます。 ワーカー・ノードには 2 次ディスクもあり、これは etcd にシークレットとして保管される IBM 管理の LUKS 鍵で暗号化されます。 etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。{{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 ただし、Kubernetes マスターのローカル・ディスク上の etcd コンポーネント内のデータが自動的に暗号化されるのは、クラスターの {{site.data.keyword.keymanagementserviceshort}} 暗号化を有効にした後です。 以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。
 
 クラスターで {{site.data.keyword.keymanagementserviceshort}} を有効にすると、お客様固有のルート・キーを使用して、LUKS シークレットなどの etcd 内のデータが暗号化されます。 このルート・キーを使用してシークレットを暗号化すると、機密データの制御を強化できます。 お客様固有の暗号化を使用して、etcd データと Kubernetes シークレットにセキュリティー層を追加し、クラスターの機密情報にアクセスできる人をさらに細かく制御することができます。 etcd またはシークレットに対するアクセス権限を不可逆的に削除する必要が生じた場合は、ルート・キーを削除します。
 
-{{site.data.keyword.keymanagementserviceshort}} インスタンス内のルート・キーを削除すると、クラスターに含まれる etcd 内のデータやシークレットのデータにアクセスすることも削除することもできなくなります。
+{{site.data.keyword.keymanagementserviceshort}} インスタンス内のルート・キーは削除しないでください。新しい鍵を使用するために交替させる場合でも、鍵は削除しないでください。ルート・キーを削除すると、クラスターに含まれる etcd 内のデータやシークレットのデータにアクセスすることも削除することもできなくなります。
 {: important}
 
 開始前に、以下のことを行います。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-* `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` を実行して **Version** フィールドを確認し、クラスターで Kubernetes バージョン 1.10.8_1524 あるいは 1.11.3_1521 以降が実行されていることを確認します。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` を実行して **Version** フィールドを確認し、クラスターで Kubernetes バージョン 1.11.3_1521 以降が実行されていることを確認します。
 * クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 * クラスターが置かれている地域を対象に設定された API キーが、Key Protect の使用を許可されていることを確認します。 その地域において資格情報が保管されている API キー所有者を調べるには、`ibmcloud ks api-key-info --cluster <cluster_name_or_ID>` を実行します。
 
@@ -132,7 +131,7 @@ ALB は、HTTP ネットワーク・トラフィックをクラスター内の�
     ```
     {: pre}
 
-8.  有効化中は、Kubernetes マスターにアクセスしてデプロイメントの YAML 構成を更新したりすることはできません。以下のコマンドの出力で、**Master Status** が **Ready** になっていることを確認してください。
+8.  有効化中は、Kubernetes マスターにアクセスしてデプロイメントの YAML 構成を更新したりすることはできません。 以下のコマンドの出力で、**Master Status** が **Ready** になっていることを確認してください。
     ```
     ibmcloud ks cluster-get <cluster_name_or_ID>
     ```
@@ -156,17 +155,22 @@ ALB は、HTTP ネットワーク・トラフィックをクラスター内の�
     ```
     {: screen}
 
-クラスターで {{site.data.keyword.keymanagementserviceshort}} を有効にすると、クラスターに含まれる `etcd` 内のデータ、既存のシークレット、新規作成されるシークレットは、{{site.data.keyword.keymanagementserviceshort}} ルート・キーを使用して自動的に暗号化されます。 新しいルート・キー ID を使用してこれらの手順を繰り返すと、いつでも鍵を循環させることができます。
+    クラスターで {{site.data.keyword.keymanagementserviceshort}} を有効にすると、クラスターに含まれる `etcd` 内のデータ、既存のシークレット、新規作成されるシークレットは、{{site.data.keyword.keymanagementserviceshort}} ルート・キーを使用して自動的に暗号化されます。
+
+9.  オプション: 鍵を交替させるには、新規ルート・キー ID を使用してこれらの手順を繰り返します。新規ルート・キーは、前のルート・キーと共にクラスター構成に追加されるため、既存の暗号化データは引き続き保護されます。
+
+{{site.data.keyword.keymanagementserviceshort}} インスタンス内のルート・キーは削除しないでください。新しい鍵を使用するために交替させる場合でも、鍵は削除しないでください。ルート・キーを削除すると、クラスターに含まれる etcd 内のデータやシークレットのデータにアクセスすることも削除することもできなくなります。
+{: important}
 
 
 ## IBM Cloud Data Shield (ベータ版) を使用したデータの暗号化
 {: #datashield}
 
-{{site.data.keyword.datashield_short}} は、インテル® Software Guard Extensions (SGX) および Fortanix® テクノロジーと統合されているため、使用中の {{site.data.keyword.Bluemix_notm}} コンテナーのワークロードのコードとデータを保護できます。アプリのコードとデータは、CPU で保護されたエンクレーブで実行されます。エンクレーブは、ワーカー・ノード上の信頼できるメモリー領域であり、ここでアプリの重要な側面を保護することで、コードとデータの機密を保ち、改ざんを防止できます。
+{{site.data.keyword.datashield_short}} は、インテル® Software Guard Extensions (SGX) および Fortanix® テクノロジーと統合されているため、使用中の {{site.data.keyword.Bluemix_notm}} コンテナーのワークロードのコードとデータを保護できます。 アプリのコードとデータは、CPU で保護されたエンクレーブで実行されます。エンクレーブは、ワーカー・ノード上の信頼できるメモリー領域であり、ここでアプリの重要な側面を保護することで、コードとデータの機密を保ち、改ざんを防止できます。
 {: shortdesc}
 
-データの保護については、暗号化が最も一般的で効果的な制御方法の 1 つです。しかし、データの暗号化はライフサイクルのすべての段階で行う必要があります。ライフサイクルの中で、データは「保存中のデータ」、「転送中のデータ」、および「使用中のデータ」という 3 段階を踏みます。「保存中のデータ」および「転送中のデータ」は、一般的には、保存されているときと転送されているときのデータを保護することを言います。その保護をさらに一歩進めると、「使用中のデータ」を暗号化することになります。
+データの保護については、暗号化が最も一般的で効果的な制御方法の 1 つです。 しかし、データの暗号化はライフサイクルのすべての段階で行う必要があります。 ライフサイクルの中で、データは「保存中のデータ」、「転送中のデータ」、および「使用中のデータ」という 3 段階を踏みます。 「保存中のデータ」および「転送中のデータ」は、一般的には、保存されているときと転送されているときのデータを保護することを言います。 その保護をさらに一歩進めると、「使用中のデータ」を暗号化することになります。
 
-社内の方針、政府規制、業界のコンプライアンス要件のためにデータの機密性を確保する必要がある場合は、このソリューションを使用すればクラウドへの移行の役に立つはずです。ソリューションの使用事例には、金融機関や医療機関、オンプレミスのクラウド・ソリューションを必要とする政策を行っている国などがあります。
+社内の方針、政府規制、業界のコンプライアンス要件のためにデータの機密性を確保する必要がある場合は、このソリューションを使用すればクラウドへの移行の役に立つはずです。 ソリューションの使用事例には、金融機関や医療機関、オンプレミスのクラウド・ソリューションを必要とする政策を行っている国などがあります。
 
 まずは、マシン・タイプ mb2c.4x32 を使用して SGX 対応ベアメタル・ワーカー・クラスターをプロビジョンし、[{{site.data.keyword.datashield_short}} の資料](/docs/services/data-shield?topic=data-shield-getting-started#getting-started)をお読みください。

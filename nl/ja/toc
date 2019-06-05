@@ -4,9 +4,6 @@
 {: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
 IBM Cloud Kubernetes Service
 
-    container_index.md
-    cs_cli_reference.md
-
     {: .navgroup id="learn"}
     getting-started.md
     
@@ -30,6 +27,7 @@ IBM Cloud Kubernetes Service
         cs_responsibilities.md
         cs_secure.md
         cs_ha.md
+        cs_kube_strategy.md
 
     {: .topicgroup}
     チュートリアル
@@ -95,14 +93,18 @@ IBM Cloud Kubernetes Service
         cs_storage_utilities.md
         cs_storage_remove.md
 
-    cs_integrations.md
+    {: .topicgroup}
+    統合を使用したクラスター機能の拡張
+        cs_integrations_addons.md
+        cs_integrations_helm.md
+        cs_integrations_service_binding.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
     cs_at_events.md
 
     {: .topicgroup}
-    専用クラウド
+    非推奨: 専用クラウド
         cs_dedicated.md
         [非推奨: 単一コンテナーとスケーラブル・コンテナーの実行](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
@@ -121,6 +123,7 @@ IBM Cloud Kubernetes Service
 
     cs_regions.md
     cs_access_reference.md
+    cs_integrations_overview.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}
@@ -157,5 +160,8 @@ IBM Cloud Kubernetes Service
     container_volumes_ov.md
     cs_classic.md
     cs_cli_devtools.md
+    cs_integrations.md
+    cs_cli_reference.md
+    cs_storage.md
     transcript_autorecovery.md
     transcript_loadbalancing.md

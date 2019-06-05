@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -64,7 +64,7 @@ subcollection: containers
 | [`Pod` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | ポッドはワークロードの最小デプロイ可能単位であり、単一または複数のコンテナーを保持できます。 コンテナーと同様、ポッドは処分できるように設計されており、アプリ機能の単体テストによく使用されます。 アプリのダウン時間を回避するために、デプロイメントなどの Kubernetes コントローラーを使用してポッドをデプロイすることを検討してください。 デプロイメントは、複数のポッド、レプリカ、ポッド・スケーリング、ロールアウトなどの管理に役立ちます。 |
 | [`ReplicaSet` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | レプリカ・セットは、ポッドの複数のレプリカが実行されるようにして、ポッドがダウンした場合にポッドをスケジュール変更します。 ポッドのスケジューリングの動作をテストするためにレプリカ・セットを作成することもできますが、アプリの更新、ロールアウト、スケーリングを管理するには、代わりにデプロイメントを作成してください。 |
 | [`Deployment` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | デプロイメントは、ポッド、またはポッド・テンプレートの[レプリカ・セット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) を管理するコントローラーです。 デプロイメントなしでポッドまたはレプリカ・セットを作成してアプリ機能をテストすることもできます。 実動レベルのセットアップでは、デプロイメントを使用して、アプリの更新、ロールアウト、スケーリングを管理してください。 |
-| [`StatefulSet` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | デプロイメントと同様、ステートフル・セットはポッドのレプリカ・セットを管理するコントローラーです。 デプロイメントと違って、ステートフル・セットでは、スケジュール変更後も状態を維持する固有のネットワーク ID がポッドに設定されます。 クラウドでワークロードを実行する場合は、ステートレスになるようにアプリを設計するようにしてください。こうすることで、サービス・インスタンスが相互に独立して実行され、障害が発生してもサービスが中断されなくなります。 ただし、データベースなど、アプリによってはステートレスでなければならないものもあります。 そのような場合は、ステートフル・セットを作成し、ステートフル・セットの永続ストレージとして[ファイル](/docs/containers?topic=containers-file_storage#file_statefulset)・ストレージ、[ブロック](/docs/containers?topic=containers-block_storage#block_statefulset)・ストレージ、または[オブジェクト](/docs/containers?topic=containers-object_storage#cos_statefulset)・ストレージを使用することを検討してください。 また、ベアメタル・ワーカー・ノード上に [Portworx](/docs/containers?topic=containers-portworx) をインストールし、高可用性のソフトウェア定義ストレージ・ソリューションとして Portworx を使用して、ステートフル・セット用の永続ストレージを管理することができます。|
+| [`StatefulSet` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | デプロイメントと同様、ステートフル・セットはポッドのレプリカ・セットを管理するコントローラーです。 デプロイメントと違って、ステートフル・セットでは、スケジュール変更後も状態を維持する固有のネットワーク ID がポッドに設定されます。 クラウドでワークロードを実行する場合は、[ステートレスになるようにアプリを設計](/docs/containers?topic=containers-strategy#cloud_workloads)するようにしてください。こうすることで、サービス・インスタンスが相互に独立して実行され、障害が発生してもサービスが中断されなくなります。ただし、データベースなど、アプリによってはステートフルでなければならないものもあります。そのような場合は、ステートフル・セットを作成し、ステートフル・セットの永続ストレージとして[ファイル](/docs/containers?topic=containers-file_storage#file_statefulset)・ストレージ、[ブロック](/docs/containers?topic=containers-block_storage#block_statefulset)・ストレージ、または[オブジェクト](/docs/containers?topic=containers-object_storage#cos_statefulset)・ストレージを使用することを検討してください。 また、ベアメタル・ワーカー・ノード上に [Portworx](/docs/containers?topic=containers-portworx) をインストールし、高可用性のソフトウェア定義ストレージ・ソリューションとして Portworx を使用して、ステートフル・セット用の永続ストレージを管理することができます。 |
 | [`DaemonSet` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | クラスター内のどのワーカー・ノードでも同じポッドを実行する必要がある場合は、デーモン・セットを使用します。 クラスターにワーカー・ノードが追加されると、デーモン・セットによって管理されるポッドが自動的にスケジュールされます。 代表的なユース・ケースとしては、`logstash` や `prometheus` などのログ・コレクターがあります。これらのログ・コレクターは、各ワーカー・ノードからログを収集して、クラスターまたはアプリの正常性に関する洞察を提供します。 |
 | [`Job` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | ジョブは、1 つ以上のポッドが完了まで正常に実行されるようにします。 キューやバッチ・ジョブのためのジョブを使用して、別々に分かれてはいても関連しているワークアイテム (例えば、レンダリングする一定数のフレーム、送信する E メール、変換するファイルなど) の並列処理をサポートすることもできます。 特定の時刻に実行されるようにジョブをスケジュールするには、[`CronJob` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) を使用します。|
 {: caption="作成できる Kubernetes ワークロード・オブジェクトのタイプ。" caption-side="top"}
@@ -78,7 +78,7 @@ subcollection: containers
 * [ポート](#port)
 * [リソースの要求と制限](#resourcereq)
 * [Liveness Probe と Readiness Probe](#probe)
-* アプリ・サービスをポートで公開するための[サービス](#service)
+* アプリ・サービスをポートで公開するための[サービス](#app-service)
 * コンテナー環境変数を設定するための[構成マップ](#configmap)
 * コンテナー環境変数を設定するための[シークレット](#secret)
 * ストレージのコンテナーにマウントされる[永続ボリューム](#pv)
@@ -96,21 +96,21 @@ YAML ファイルにデータをハードコーディングするのではなく
 <dl>
 <dt>構成マップ</dt>
 <dd>デプロイメントで指定されたワークロードに機密性の高くない構成情報を提供します。 主に 3 つの方法で構成マップを使用できます。
-<ul><li><strong>ファイル・システム</strong>: ファイル全体または変数セットをポッドにマウントできます。値に設定されたファイルのキー名の内容に基づいて、エントリーごとにファイルが作成されます。</li>
+<ul><li><strong>ファイル・システム</strong>: ファイル全体または変数セットをポッドにマウントできます。 値に設定されたファイルのキー名の内容に基づいて、エントリーごとにファイルが作成されます。</li>
 <li><strong>環境変数</strong>: コンテナー仕様の環境変数を動的に設定します。</li>
 <li><strong>コマンド・ライン引数</strong>: コンテナー仕様で使用されるコマンド・ライン引数を設定します。</li></ul></dd>
 
 <dt>秘密鍵</dt>
 <dd>以下のような機密情報をワークロードに提供します。 クラスターの他のユーザーがシークレットに対するアクセス権限を持っている可能性があるため、シークレット情報はそれらのユーザーと共有される可能性があるということを知っておいてください。
 <ul><li><strong>個人情報 (PII)</strong>: E メール・アドレスなどの機密情報や、企業コンプライアンスや政府規制に必要な他のタイプの情報をシークレットに保管します。</li>
-<li><strong>資格情報</strong>: 偶発的機密漏れのリスクを軽減するために、パスワード、鍵、トークンなどの資格情報をシークレットに入れます。 例えば、クラスターに[サービスをバインドする](/docs/containers?topic=containers-integrations#adding_cluster)と、シークレットに資格情報が保管されます。</li></ul></dd>
+<li><strong>資格情報</strong>: 偶発的機密漏れのリスクを軽減するために、パスワード、鍵、トークンなどの資格情報をシークレットに入れます。 例えば、クラスターに[サービスをバインドする](/docs/containers?topic=containers-service-binding#bind-services)と、シークレットに資格情報が保管されます。</li></ul></dd>
 </dl>
 
 シークレットをさらに保護したいですか? クラスター管理者に連絡してクラスター内の [{{site.data.keyword.keymanagementservicefull}} を有効にして](/docs/containers?topic=containers-encryption#keyprotect)もらい、新しいシークレットと既存のシークレットを暗号化します。
 {: tip}
 
 ### どうすれば Watson などの IBM サービスをアプリに追加できますか?
-[アプリへのサービスの追加](/docs/containers?topic=containers-integrations#adding_app)を参照してください。
+[アプリへのサービスの追加](/docs/containers?topic=containers-service-binding#adding_app)を参照してください。
 
 ### どうすれば正しいリソースをアプリで得られますか?
 [アプリ YAML ファイルを指定する](#app_yaml)ときに、正しいリソースをアプリが取得できるようにする Kubernetes 機能をアプリ構成に追加できます。 特に、YAML ファイルで定義されたコンテナーごとに、[リソースの制限と要求を設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) してください。
@@ -131,7 +131,7 @@ YAML ファイルにデータをハードコーディングするのではなく
 *  **プライベート VLAN 専用標準クラスター**: [NodePort サービス、ロード・バランサー・サービス、または Ingress サービス ](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)を使用することによって、アプリを公開できます。 同時に、ファイアウォールで、サービスのプライベート IP アドレス用のポートを開く必要もあります。
 
 ### アプリをデプロイした後、どうすればその正常性をモニターできますか?
-クラスターの {{site.data.keyword.Bluemix_notm}} [ロギングおよびモニタリング](/docs/containers?topic=containers-health#health)をセットアップできます。 サード・パーティーの[ロギング・サービスまたはモニタリング・サービス](/docs/containers?topic=containers-integrations#health_services)と統合することを選択することもできます。
+クラスターの {{site.data.keyword.Bluemix_notm}} [ロギングおよびモニタリング](/docs/containers?topic=containers-health#health)をセットアップできます。 サード・パーティーの[ロギング・サービスまたはモニタリング・サービス](/docs/containers?topic=containers-supported_integrations#health_services)と統合することを選択することもできます。
 {: shortdesc}
 
 ### どうすればアプリを最新の状態にしておくことができますか?
@@ -202,13 +202,13 @@ YAML ファイルにデータをハードコーディングするのではなく
   <p><strong>ヒント</strong>: 複数ゾーン・クラスターでは、ワーカー・ノードの容量をゾーン当たり 50% に保ち、ゾーン障害時にクラスターを保護するために十分な容量を確保するようにしてください。</p>
   <p><strong>アプリを複数の地域に分散させるにはどうすればよいですか?</strong></br>地域の障害からアプリを保護するには、別の地域に 2 番目のクラスターを作成し、[グローバル・ロード・バランサーをセットアップ](/docs/containers?topic=containers-plan_clusters#multiple_clusters)してクラスター同士を接続し、デプロイメント YAML を使用して、アプリ用に[ポッドのアンチアフィニティー ![外部リンク・リンク](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) を設定した複製レプリカ・セットをデプロイします。</p>
   <p><strong>アプリに永続ストレージが必要な場合はどうすればよいですか?</strong></p>
-  <p>[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)などのクラウド・サービスを使用します。</p></dd>
+  <p>[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)などのクラウド・サービスを使用します。</p></dd>
 </dl>
 
 ## YAML ファイルでのアプリ要件の指定
 {: #app_yaml}
 
-Kubernetes では、Kubernetes オブジェクトの構成を宣言する YAML ファイルにアプリを記述します。 その後 Kubernetes API サーバーは、その YAML ファイルを処理し、オブジェクトの構成と必要な状態を etcd データ・ストアに保管します。Kubernetes スケジューラーがクラスター内のワーカー・ノードにワークロードをスケジュールします。このとき、YAML ファイル内の仕様、管理者が設定するクラスター・ポリシー、使用可能なクラスター・キャパシティーが考慮されます。
+Kubernetes では、Kubernetes オブジェクトの構成を宣言する YAML ファイルにアプリを記述します。 その後 Kubernetes API サーバーは、その YAML ファイルを処理し、オブジェクトの構成と必要な状態を etcd データ・ストアに保管します。 Kubernetes スケジューラーがクラスター内のワーカー・ノードにワークロードをスケジュールします。このとき、YAML ファイル内の仕様、管理者が設定するクラスター・ポリシー、使用可能なクラスター・キャパシティーが考慮されます。
 {: shortdesc}
 
 [完全な YAML ファイル](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml)のコピーを確認してください。 その後、以下のセクションを確認して、どのようにすればアプリ・デプロイメントを拡張できるかを理解してください。
@@ -220,7 +220,7 @@ Kubernetes では、Kubernetes オブジェクトの構成を宣言する YAML �
 * [ポート](#port)
 * [リソースの要求と制限](#resourcereq)
 * [Liveness Probe と Readiness Probe](#probe)
-* アプリ・サービスをポートで公開するための[サービス](#service)
+* アプリ・サービスをポートで公開するための[サービス](#app-service)
 * コンテナー環境変数を設定するための[構成マップ](#configmap)
 * コンテナー環境変数を設定するための[シークレット](#secret)
 * ストレージのコンテナーにマウントされる[永続ボリューム](#pv)
@@ -241,7 +241,7 @@ metadata:
   replicas: 3</pre></code></p></dd>
 
 <dt id="label">ラベル</dt>
-  <dd><p>ラベルを使用すると、クラスター内のさまざまなタイプのリソースに同じ `key: value` ペアのマークを付けることができます。 その後、このラベルに突き合わせるセレクターを指定することによって、これらの他のリソースに基づいて処理を進めることができます。 アプリをパブリックに公開することを計画している場合は、サービスで指定するセレクターと一致するラベルを使用する必要があります。 例では、ラベル `app: wasliberty` と一致するテンプレートがデプロイメント仕様で使用されています。</p>
+  <dd><p>[ラベル](/docs/containers?topic=containers-strategy#deploy_organize)を使用すると、クラスター内のさまざまなタイプのリソースに同じ `key: value` ペアのマークを付けることができます。 その後、このラベルに突き合わせるセレクターを指定することによって、これらの他のリソースに基づいて処理を進めることができます。 アプリをパブリックに公開することを計画している場合は、サービスで指定するセレクターと一致するラベルを使用する必要があります。 例では、ラベル `app: wasliberty` と一致するテンプレートがデプロイメント仕様で使用されています。</p>
   <p>クラスター内のラベル付きオブジェクトを取得して、`staging` コンポーネントや `production` コンポーネントを調べるなどの作業を行うことができます。 例えば、クラスター内のすべての名前空間における `env: production` ラベルの付いたリソースをすべてリストします。 このコマンドを実行するには、すべての名前空間に対するアクセス権限が必要であることに注意してください。<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>ラベルについて詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) を参照してください。</li>
   <li>より詳しい例については、[ラベルを使用した特定のワーカー・ノードへのアプリのデプロイ](/docs/containers?topic=containers-app#node_affinity)を参照してください。</li></ul>
@@ -288,7 +288,7 @@ template:
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">アプリのサービス用のポート</dt>
-  <dd><p>アプリのサービスを開くために使用するコンテナー・ポートを選択します。 どのポートを開く必要があるかを確認するには、アプリ仕様または Dockerfile を参照してください。 プライベート・ネットワークからポートにアクセスできますが、パブリック・ネットワーク接続からはアクセスできません。 アプリをパブリックに公開するには、NodePort サービス、ロード・バランサー・サービス、または Ingress サービスを作成する必要があります。 [`Service` オブジェクトを作成する](#service)ときは、これと同じポート番号を使用します。</p>
+  <dd><p>アプリのサービスを開くために使用するコンテナー・ポートを選択します。 どのポートを開く必要があるかを確認するには、アプリ仕様または Dockerfile を参照してください。 プライベート・ネットワークからポートにアクセスできますが、パブリック・ネットワーク接続からはアクセスできません。 アプリをパブリックに公開するには、NodePort サービス、ロード・バランサー・サービス、または Ingress サービスを作成する必要があります。 [`Service` オブジェクトを作成する](#app-service)ときは、これと同じポート番号を使用します。</p>
   <p><pre class="codeblock"><code>ports:
 - containerPort: 9080</pre></code></p></dd>
 
@@ -326,7 +326,7 @@ readinessProbe:
   initialDelaySeconds: 45
   periodSeconds: 5</pre></code></p></dd>
 
-<dt id="service">アプリ・サービスの公開</dt>
+<dt id="app-service">アプリ・サービスの公開</dt>
   <dd><p>アプリを公開するサービスを作成できます。 `spec` セクションで、`port` とラベルの値を、デプロイメントで使用した値と一致させておきます。 サービスは、ラベル (次の例では `app: wasliberty`) と一致するオブジェクトを公開します。</p>
   <ul><li>デフォルトでは、サービスは [`ClusterIP ` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/) を使用します。この設定は、クラスター外ではなくクラスター内でのみサービスにアクセスできるようにします。</li>
   <li>NodePort サービス、ロード・バランサー・サービス、または Ingress サービスを作成することで、アプリをパブリックに公開できます。 これらのサービスには 2 つの IP (1 つは外部 IP、1 つは内部 IP) があります。 トラフィックが外部 IP で受信されると、内部クラスター IP に転送されます。 次に、内部クラスター IP からアプリのコンテナー IP にトラフィックがルーティングされます。</li>
@@ -483,6 +483,9 @@ metadata:
   name: wasliberty
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: wasliberty
   template:
     metadata:
       labels:
@@ -619,8 +622,8 @@ spec:
 
 開始前に、以下のことを行います。
 * Kubernetes リソースを処理できる適切な Kubernetes RBAC 役割を付与する、[サービス役割](/docs/containers?topic=containers-users#platform)が自分に割り当てられていることを確認します。
-* [コンソールから Kubernetes ダッシュボードを起動](#db_gui)するには、[プラットフォーム役割](/docs/containers?topic=containers-users#platform)が割り当てられている必要があります。サービス役割のみが割り当てられていて、プラットフォーム役割が割り当てられていない場合は、[CLI から Kubernetes ダッシュボードを起動](#db_cli)してください。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [コンソールから Kubernetes ダッシュボードを起動](#db_gui)するには、[プラットフォーム役割](/docs/containers?topic=containers-users#platform)が割り当てられている必要があります。 サービス役割のみが割り当てられていて、プラットフォーム役割が割り当てられていない場合は、[CLI から Kubernetes ダッシュボードを起動](#db_cli)してください。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 クラスターの Kubernetes ダッシュボードを起動するために、デフォルトのポートを使用するか、独自のポートを設定できます。
 
@@ -694,9 +697,9 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 開始前に、以下のことを行います。
 
 -   [必要な CLI をインストールします](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)。
--   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+-   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Kubernetes リソースを処理できる適切な Kubernetes RBAC 役割を付与する、[サービス役割](/docs/containers?topic=containers-users#platform)が自分に割り当てられていることを確認します。
--   [コンソールから Kubernetes ダッシュボードを起動](#db_gui)するには、[プラットフォーム役割](/docs/containers?topic=containers-users#platform)が割り当てられている必要があります。サービス役割のみが割り当てられていて、プラットフォーム役割が割り当てられていない場合は、[CLI から Kubernetes ダッシュボードを起動](#db_cli)してください。
+-   [コンソールから Kubernetes ダッシュボードを起動](#db_gui)するには、[プラットフォーム役割](/docs/containers?topic=containers-users#platform)が割り当てられている必要があります。 サービス役割のみが割り当てられていて、プラットフォーム役割が割り当てられていない場合は、[CLI から Kubernetes ダッシュボードを起動](#db_cli)してください。
 
 アプリをデプロイするには、以下の手順で行います。
 
@@ -724,7 +727,7 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 開始前に、以下のことを行います。
 
 -   必要な [CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install) をインストールします。
--   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+-   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   名前空間内の Kubernetes リソースを処理できる適切な Kubernetes RBAC 役割を付与する、[サービス役割](/docs/containers?topic=containers-users#platform)が自分に割り当てられていることを確認します。
 
 アプリをデプロイするには、以下の手順で行います。
@@ -758,7 +761,7 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 {:shortdesc}
 
 開始前に、以下のことを行います。
-*   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   名前空間内の Kubernetes リソースを処理できる適切な Kubernetes RBAC 役割を付与する、[サービス役割](/docs/containers?topic=containers-users#platform)が自分に割り当てられていることを確認します。
 
 特定のワーカー・ノードにアプリをデプロイするには、以下のようにします。
@@ -775,9 +778,9 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
     ```
     {: pre}
 
-3.  ワーカー・ノードの説明を表示します。**Labels** 出力で、ワーカー・プール ID ラベル `ibm-cloud.kubernetes.io/worker-pool-id` をメモします。
+3.  ワーカー・ノードの説明を表示します。 **Labels** 出力で、ワーカー・プール ID ラベル `ibm-cloud.kubernetes.io/worker-pool-id` をメモします。
 
-    <p class="tip">このトピックで示す手順では、ワーカー・プール ID を使用して、そのワーカー・プール内のワーカー・ノードにのみアプリ・ポッドをデプロイします。別のラベルを使用して特定のワーカー・ノードにアプリ・ポッドをデプロイするには、代わりにそのラベルをメモしてください。例えば、特定のプライベート VLAN 上にあるワーカー・ノードにのみアプリ・ポッドをデプロイするには、`privateVLAN=` ラベルを使用します。</p>
+    <p class="tip">このトピックで示す手順では、ワーカー・プール ID を使用して、そのワーカー・プール内のワーカー・ノードにのみアプリ・ポッドをデプロイします。 別のラベルを使用して特定のワーカー・ノードにアプリ・ポッドをデプロイするには、代わりにそのラベルをメモしてください。 例えば、特定のプライベート VLAN 上にあるワーカー・ノードにのみアプリ・ポッドをデプロイするには、`privateVLAN=` ラベルを使用します。</p>
 
     ```
     kubectl describe node <worker_node_private_IP>
@@ -790,17 +793,17 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
     Roles:              <none>
     Labels:             arch=amd64
                         beta.kubernetes.io/arch=amd64
-                        beta.kubernetes.io/instance-type=b2c.4x16.encrypted
+                        beta.kubernetes.io/instance-type=b3c.4x16.encrypted
                         beta.kubernetes.io/os=linux
                         failure-domain.beta.kubernetes.io/region=us-south
                         failure-domain.beta.kubernetes.io/zone=dal10
                         ibm-cloud.kubernetes.io/encrypted-docker-data=true
                         ibm-cloud.kubernetes.io/ha-worker=true
                         ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                        ibm-cloud.kubernetes.io/machine-type=b2c.4x16.encrypted
+                        ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.12.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.12.7_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -872,9 +875,9 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 
         ```
         ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b3c.4x16          normal   Ready   dal12   1.8.6_1504
         ```
         {: screen}
 
@@ -896,7 +899,6 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 
 開始前に、以下のことを行います。
 * [ベア・メタル GPU マシン・タイプを作成します](/docs/containers?topic=containers-clusters#clusters_cli)。 このプロセスは、完了までに 1 営業日より長くかかる場合があることに注意してください。
-* クラスター・マスターと GPU ワーカー・ノードは、Kubernetes バージョン 1.10 以降を実行する必要があります。
 * 名前空間内の Kubernetes リソースを処理できる適切な Kubernetes RBAC 役割を付与する、[サービス役割](/docs/containers?topic=containers-users#platform)が自分に割り当てられていることを確認します。
 
 GPU マシンでワークロードを実行するには、以下のようにします。
@@ -937,7 +939,7 @@ GPU マシンでワークロードを実行するには、以下のようにし�
     ```
     {: codeblock}
 
-    <table>
+    <table summary="1 列目で YAML ファイル・フィールド、2 列目でこれらのフィールドの入力方法について説明する表。">
     <caption>YAML コンポーネント</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
@@ -1062,11 +1064,11 @@ GPU マシンでワークロードを実行するには、以下のようにし�
 Kubernetes では、[ポッドの自動水平スケーリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) を有効にして、CPU に基づいてアプリのインスタンス数を自動的に増減できます。
 {:shortdesc}
 
-Cloud Foundry アプリケーションのスケーリングに関する情報をお探しですか? [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=services/Auto-Scaling-get-started) を確認してください。ポッドではなく、ワーカー・ノードのスケーリングが必要ですか? [cluster autoscaler](/docs/containers?topic=containers-ca#ca) を確認してください。
+Cloud Foundry アプリケーションのスケーリングに関する情報をお探しですか? [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started#get-started) を確認してください。 ポッドではなく、ワーカー・ノードのスケーリングが必要ですか? [cluster autoscaler](/docs/containers?topic=containers-ca#ca) を確認してください。
 {: tip}
 
 開始前に、以下のことを行います。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - 自動スケーリングするクラスターに Heapster モニターをデプロイする必要があります。
 - 名前空間内の Kubernetes リソースを処理できる適切な Kubernetes RBAC 役割を付与する、[サービス役割](/docs/containers?topic=containers-users#platform)が自分に割り当てられていることを確認します。
 
@@ -1079,7 +1081,7 @@ Cloud Foundry アプリケーションのスケーリングに関する情報を
     ```
     {: pre}
 
-    <table>
+    <table summary="1 列目で Kubectl コマンド・オプション、2 列目でこれらのオプションの入力方法について説明する表。">
     <caption>`kubectl run` のコマンド構成要素</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
@@ -1112,7 +1114,7 @@ Cloud Foundry アプリケーションのスケーリングに関する情報を
     ```
     {: pre}
 
-    <table>
+    <table summary="1 列目で Kubectl コマンド・オプション、2 列目でこれらのオプションの入力方法について説明する表。">
     <caption>`kubectl autoscale` のコマンド構成要素</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
@@ -1146,12 +1148,65 @@ Cloud Foundry アプリケーションのスケーリングに関する情報を
 {: tip}
 
 開始前に、以下のことを行います。
-*   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   [デプロイメント](#app_cli)を作成します。
 *   名前空間内の Kubernetes リソースを処理できる適切な Kubernetes RBAC 役割を付与する、[サービス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認します。
 
 アプリのローリング更新を管理するには、以下のようにします。
-1.  変更を[ロールアウト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) します。 例えば、初期デプロイメントで使用したイメージを変更することができます。
+1.  コンテナーが実行中で、かつ要求に対処する準備が整っている場合にのみ、デプロイメントに準備完了のマークが付けられるようにするには、[デプロイメントに Liveness Probe と Readiness Probe](#probe) を追加します。
+
+2.  ローリング更新中の急増ポッドと使用不可ポッドの最大数またはポッドのパーセンテージを指定するローリング更新戦略が組み込まれるように、デプロイメントを更新します。
+
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:  
+      name: nginx-test
+    spec:
+      replicas: 10
+      selector:
+        matchLabels:
+          service: http-server
+      minReadySeconds: 5
+      progressDeadlineSeconds: 600
+      strategy: 
+        type: RollingUpdate  
+        rollingUpdate:    
+          maxUnavailable: 50%
+          maxSurge: 2
+    ...
+    ```
+    {: codeblock}
+
+    <table summary="1 列目で YAML ファイル・フィールド、2 列目でこれらのフィールドの入力方法について説明する表。">
+    <caption>YAML コンポーネント</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>spec.minReadySeconds</code></td>
+    <td>デフォルトでは、デプロイメントはポッドに `ready` のマークが付くまで待機してからロールアウトを続行します。最新のポッドのアプリの準備が整っていないにもかかわらず、デプロイメントによるポッドの作成が続行する場合は、このフィールドを使用して、デプロイメントのロールアウトをスローダウンします。例えば、`5` を指定すると、デプロイメントは、ポッドが `ready` になった後 5 秒待機してから次のポッドを作成します。</td>
+    </tr>
+    <tr>
+    <td><code>spec.progressDeadlineSeconds</code></td>
+    <td>デプロイメントが失敗したと見なされてタイムアウトになるまでの秒数を設定します。例えば、タイムアウトを設定しないと、アプリの新規バージョンがバグにより即時に停止した場合、ポッドが `ready` 状態にならないため、ロールアウトを続行できません。このタイムアウトを `600` 秒に設定して、ロールアウトのいずれかの段階で 10 分間進行がない場合、デプロイメントには失敗のマークが付けられ、ロールアウトは停止します。</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.type</code></td>
+    <td>`RollingUpdate` 戦略タイプを指定します。</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxUnavailable</code></td>
+    <td>更新中に使用不可になってもよいポッドの最大数を数値 (`2`) またはパーセンテージ (`50%`) で設定します。通常、ロールアウトで一度に使用不可にできるポッドを 1 つのみに制限する場合を除き、後でレプリカの数を変更したときにこの数値を覚えていて更新しなくてもよいように、パーセンテージを使用します。100% のキャパシティーを下回らないようにする場合は、この値を `0%` に設定して、`spec.strategy.type.rollingUpdate.maxSurge` パラメーターを指定します。</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
+    <td>ロールアウト中にデプロイメントで使用できる追加のリソース数を数値 (`2`) またはパーセンテージ (`50%`) で設定します。例えば、`10` レプリカが指定されたデプロイメントで、`maxSurge` を `2` に設定した場合、ロールアウト中に 2 つの新規レプリカが作成されます。この時点で、12 のレプリカ (既存 10、新規 2) があります。2 つの新規レプリカの準備が整うと、指定された 10 レプリカに合わせて、デプロイメントがスケール・ダウンして、古いレプリカが 8 つになります。このプロセスは、ロールアウトが完了して、10 レプリカすべてが新規バージョンで実行されるまで続きます。<p class="tip">blue-green 即時切り替えスタイルの更新を実行する場合は、`maxSurge` を `100%` に設定します。デプロイメントでは、すべての新規必須レプリカを作成した後、古いバージョンのレプリカを 0 にスケール・ダウンします。</p></td>
+    </tr>
+    </tbody></table>
+
+3.  変更を[ロールアウト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) します。 例えば、初期デプロイメントで使用したイメージを変更することができます。
 
     1.  デプロイメント名を取得します。
 
@@ -1183,14 +1238,26 @@ Cloud Foundry アプリケーションのスケーリングに関する情報を
 
     コマンドを実行すると、変更がすぐに適用され、ロールアウトの履歴にログが記録されます。
 
-2.  デプロイメントの状況を確認します。
+4.  デプロイメントの状況を確認します。
 
     ```
     kubectl rollout status deployments/<deployment_name>
     ```
     {: pre}
 
-3.  変更をロールバックします。
+    状況の中に、詳しく調べるために時間が必要な個所がある場合は、以下のコマンドを使用して、ロールアウトを一時停止したり再開したりできます。
+
+    ```
+    kubectl rollout pause deployment <deployment_name>
+    ```
+    {: pre}
+
+    ```
+    kubectl rollout resume deployment <deployment_name>
+    ```
+    {: pre}
+
+5.  変更をロールバックします。
     1.  デプロイメントのロールアウト履歴を参照し、最後のデプロイメントのリビジョン番号を確認します。
 
         ```

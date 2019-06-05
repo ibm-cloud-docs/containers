@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, disaster recovery, dr, ha, hadr
 
@@ -57,7 +57,7 @@ subcollection: containers
 
 在主节点停运期间，请勿重新启动或重新引导工作程序节点。此操作会从工作程序节点中除去 pod。因为 Kubernetes API 服务器不可用，因此无法将 pod 重新调度到集群中的其他工作程序节点。
 {: important}
-集群主节点具有高可用性，包含多个副本分别用于不同主机上的 Kubernetes API 服务器、etcd、调度程序和控制器管理器，以防止发生中断，例如在主节点更新期间。</p><p>要保护集群主节点不受专区故障的影响，可以执行以下操作：<ul><li>在[多专区大城市](/docs/containers?topic=containers-regions-and-zones#zones)中创建集群，这会在各专区中分布主节点。</li><li>在另一个专区中设置第二个集群。</li></ul></p>
+集群主节点具有高可用性，包含多个副本分别用于不同主机上的 Kubernetes API 服务器、etcd、调度程序和控制器管理器，以防止发生中断，例如在主节点更新期间。</p><p>要保护集群主节点不受专区故障的影响，可以执行以下操作：<ul><li>在[多专区大城市位置](/docs/containers?topic=containers-regions-and-zones#zones)中创建集群，该集群会将主节点分布到各个专区。</li><li>在另一个专区中设置第二个集群。</li></ul></p>
   <p>请参阅[设置高可用性集群](/docs/containers?topic=containers-plan_clusters#ha_clusters)。</p></dd>
 <dt> 4. 专区故障。</dt>
   <dd><p>专区故障会影响所有物理计算主机和 NFS 存储器。故障包括电源、散热、联网或存储中断，以及洪水、地震和飓风等自然灾害。要防止发生专区故障，必须在两个不同专区中具有集群，并通过外部负载均衡器对集群进行负载均衡。</p>
@@ -66,6 +66,6 @@ subcollection: containers
   <dd><p>每个区域都设置有高可用性负载均衡器，可从特定于区域的 API 端点进行访问。负载均衡器用于将入局和出局请求路由到区域专区中的集群。整个区域发生故障的可能性较低。但是，要应对此故障，可以在不同区域中设置多个集群，并使用外部负载均衡器来连接这些集群。万一整个区域发生故障，另一个区域中的集群可以接管工作负载。</p><p class="note">多区域集群需要多种云资源，并且根据应用程序的情况，该集群可能会十分复杂且昂贵。请检查您是否需要多区域设置，或者是否可以容忍潜在的服务中断。如果要设置多区域集群，请确保应用程序和数据可以在其他区域中托管，并且应用程序可以处理全局数据复制。</p>
   <p>请参阅[设置高可用性集群](/docs/containers?topic=containers-plan_clusters#ha_clusters)。</p></dd>   
 <dt> 6a 和 6b. 存储器故障。</dt>
-  <dd><p>在有状态应用程序中，数据在保持应用程序正常启动并运行方面起着重要作用。您希望确保数据高度可用，以便可以从潜在的故障中恢复。在 {{site.data.keyword.containerlong_notm}} 中，可以从多个选项中进行选择来持久存储数据。例如，可以使用 Kubernetes 本机持久卷来供应 NFS 存储器，也可以使用 {{site.data.keyword.Bluemix_notm}} 数据库服务来存储数据。</p>
+  <dd><p>在有状态应用程序中，数据在保持应用程序正常启动并运行方面起着重要作用。请确保您的数据具有高可用性，以便可以从潜在故障中恢复。在 {{site.data.keyword.containerlong_notm}} 中，可以从多个选项中进行选择来持久存储数据。例如，可以使用 Kubernetes 本机持久卷来供应 NFS 存储器，也可以使用 {{site.data.keyword.Bluemix_notm}} 数据库服务来存储数据。</p>
   <p>请参阅[规划高可用性数据](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。</p></dd>
 </dl>

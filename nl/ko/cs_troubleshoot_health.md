@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -71,7 +71,7 @@ Kibana 대시보드에 액세스할 때 로그가 표시되지 않습니다.
   <tr>
     <td>클러스터 작성시 영역을 지정한 경우, 계정 소유자에게 해당 영역에 대한 관리자, 개발자 또는 감사자 권한이 없습니다.</td>
       <td>계정 소유자의 액세스 권한을 변경하려면 다음을 수행하십시오.
-      <ol><li>클러스터에 대한 계정 소유자를 찾으려면 <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li>
+      <ol><li>클러스터에 대한 계정 소유자를 찾으려면 <code>ibmcloud ks api-key-info</code>를 실행하십시오.</li>
       <li>계정 소유자에게 영역에 대한 관리자, 개발자 또는 감사자 {{site.data.keyword.containerlong_notm}} 액세스 권한을 부여하려면 <a href="/docs/containers?topic=containers-users">클러스터 액세스 관리</a>를 참조하십시오.</li>
       <li>권한이 변경된 후에 로깅 토큰을 새로 고치려면 <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li></ol></td>
     </tr>
@@ -84,7 +84,7 @@ Kibana 대시보드에 액세스할 때 로그가 표시되지 않습니다.
 
 문제점 해결 중에 변경한 사항을 테스트하려는 경우에는 여러 로그 이벤트를 생성하는 샘플 팟(Pod) *Noisy*를 클러스터의 작업자 노드에 배치할 수 있습니다.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. `deploy-noisy.yaml` 구성 파일을 작성하십시오.
     ```
@@ -109,10 +109,10 @@ Kibana 대시보드에 액세스할 때 로그가 표시되지 않습니다.
     {:pre}
 
 3. 몇 분 뒤에 Kibana 대시보드에 로그가 표시됩니다. Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 클러스터를 작성한 {{site.data.keyword.Bluemix_notm}} 계정을 선택하십시오. 클러스터 작성 시 영역을 지정한 경우 대신 해당 영역으로 이동하십시오.
-    - 미국 남부 및 미국 동부: https://logging.ng.bluemix.net
-    - 영국 남부: https://logging.eu-gb.bluemix.net
-    - 중앙 유럽: https://logging.eu-fra.bluemix.net
-    - AP 남부: https://logging.au-syd.bluemix.net
+    - 미국 남부 및 미국 동부: `https://logging.ng.bluemix.net`
+    - 영국 남부: `https://logging.eu-gb.bluemix.net`
+    - 중앙 유럽: `https://logging.eu-fra.bluemix.net`
+    - AP 남부: `https://logging.au-syd.bluemix.net`
 
 <br />
 

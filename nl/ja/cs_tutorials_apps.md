@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -67,8 +67,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 ## 前提条件
 {: #apps_prereqs}
 
-* [チュートリアル: Kubernetes クラスターの作成](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
-* [container-registry プラグイン](/docs/services/Registry?topic=registry-index#registry_cli_install)をインストールします。
+[チュートリアル: Kubernetes クラスターの作成](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## レッスン 1: アプリの 1 つのインスタンスを Kubernetes クラスターにデプロイする
@@ -117,7 +116,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 
 6.  `Lab 1` ディレクトリーのアプリ・ファイルを組み込んだ Docker イメージをビルドし、以前のチュートリアルで作成した {{site.data.keyword.registryshort_notm}} 名前空間にイメージをプッシュします。 後日アプリを変更しなければならなくなった場合は、この手順を繰り返して別バージョンのイメージを作成します。 **注**: コンテナー・イメージを使用する際の[個人情報の保護](/docs/containers?topic=containers-security#pi)の詳細を確認してください。
 
-    イメージ名には小文字の英数字または下線 (`_`) のみを使用してください。 コマンドの末尾にピリオド (`.`) をつけることを忘れないようにしてください。 このピリオドは、イメージをビルドするための Dockerfile とビルド成果物を、現行ディレクトリー内で探すよう Docker に指示するものです。 現在自分が属する地域の地域接頭部を取得するには、`ibmcloud api` を実行します。例えば、ダラス・ロケーションの米国南部地域の接頭部は、`ng` です。
+    イメージ名には小文字の英数字または下線 (`_`) のみを使用してください。 コマンドの末尾にピリオド (`.`) をつけることを忘れないようにしてください。 このピリオドは、イメージをビルドするための Dockerfile とビルド成果物を、現行ディレクトリー内で探すよう Docker に指示するものです。 現在自分が属する地域の地域接頭部を取得するには、`ibmcloud api` を実行します。 例えば、ダラス・ロケーションの米国南部地域の接頭部は、`ng` です。
 
     ```
     ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
@@ -243,7 +242,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 
@@ -264,7 +263,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 
 12. **「ワークロード」**タブで、作成したリソースを表示します。
 
-お疲れさまでした。最初のバージョンのアプリをデプロイできました。
+お疲れさまでした。 最初のバージョンのアプリをデプロイできました。
 
 このレッスンで実行したコマンドの数が多すぎると思うなら、一部の処理を自動化するために構成スクリプトを使用できます。 第 2 バージョンのアプリでは構成スクリプトを使用します。また、アプリのインスタンスを複数デプロイして可用性を高めます。その方法を学ぶために次のレッスンに進みましょう。
 
@@ -406,7 +405,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
        ```
        {: screen}
 
-お疲れさまでした。2 つ目のバージョンのアプリをデプロイできました。 使用するコマンドの数を減らし、ヘルス・チェックの動作を学び、デプロイメントを編集できました。 Hello World アプリは、PR 会社のテストに合格したといえます。 次の段階として、PR 会社がプレス・リリースの分析作業を開始するのに役立つアプリをデプロイしましょう。
+お疲れさまでした。 2 つ目のバージョンのアプリをデプロイできました。 使用するコマンドの数を減らし、ヘルス・チェックの動作を学び、デプロイメントを編集できました。 Hello World アプリは、PR 会社のテストに合格したといえます。 次の段階として、PR 会社がプレス・リリースの分析作業を開始するのに役立つアプリをデプロイしましょう。
 
 作業を進める前に、これまで作成したリソースを削除してもかまいません。 同じ構成スクリプトを使用して、作成した両方のリソースを削除できます。
 
@@ -535,7 +534,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: codeblock}
 
-    2.  watson デプロイメントの volumes セクションで、前の [Kubernetes クラスターの作成チュートリアル](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)で作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) の API キーを、ポッドで実行されるコンテナーから使用できるようになります。 このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用して API キーを検索するように構成されています。
+    2.  `watson-pod` デプロイメントの volumes セクションで、前の [Kubernetes クラスターの作成チュートリアル](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)で作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。 Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) の API キーを、ポッドで実行されるコンテナーから使用できるようになります。 このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用して API キーを検索するように構成されています。
 
         ```
         volumes:
@@ -661,7 +660,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 
 [クイズに答えて知識を試してみましょう!![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-お疲れさまでした。{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} アプリをデプロイできました。 この PR 会社は、このデプロイメントを使用してプレス・リリースの分析作業を開始できるようになりました。
+お疲れさまでした。 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} アプリをデプロイできました。 この PR 会社は、このデプロイメントを使用してプレス・リリースの分析作業を開始できるようになりました。
 
 これまで作成したリソースを削除してもかまいません。 構成スクリプトを使用して、作成したリソースを削除できます。
 

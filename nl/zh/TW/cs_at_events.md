@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, audit
 
@@ -518,19 +518,19 @@ subcollection: containers
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>針對 Kubernetes 1.10 版及更新版本，已建立 Pod 安全原則。</td>
+    <td>已建立 Pod 安全原則。</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>針對 Kubernetes 1.10 版及更新版本，已刪除 Pod 安全原則。</td>
+    <td>已刪除 Pod 安全原則。</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>針對 Kubernetes 1.10 版及更新版本，已修補 Pod 安全原則。</td>
+    <td>已修補 Pod 安全原則。</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>針對 Kubernetes 1.10 版及更新版本，已更新 Pod 安全原則。</td>
+    <td>已更新 Pod 安全原則。</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>

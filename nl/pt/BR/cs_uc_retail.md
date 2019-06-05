@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -31,23 +31,23 @@ Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.co
 aproveitar de analítica para insights de mercado, implementações multiregion no mundo inteiro e gerenciamento de inventário com {{site.data.keyword.messagehub_full}} e armazenamento de objeto.
 {: shortdesc}
 
-## O varejista Brick-and-mortar compartilha dados, usando APIs com parceiros globais para impulsionar as vendas de omni-channel
+## Um varejista de loja física compartilha dados, usando APIs, com parceiros de negócios globais para impulsionar as vendas de omnichannel
 {: #uc_data-share}
 
-Um Exec de Linha de Negócios (LOB) precisa aumentar os canais de vendas, mas o sistema de varejo é encerrado em um data center no local. A competição tem parceiros globais para permutações de venda cruzada e venda ampliada de suas mercadorias: no brick-and-mortar e em sites on-line.
+Um Exec de Linha de Negócios (LOB) precisa aumentar os canais de vendas, mas o sistema de varejo é encerrado em um data center no local. A concorrência tem parceiros de negócios globais para permutações de venda cruzada e ampliada de suas mercadorias em locais físico e on-line.
 {: shortdesc}
 
-Por que o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} fornece um ecossistema de nuvem pública, em que os contêineres permitem que novos parceiros e outros participantes externos desenvolvam em conjunto apps e dados por meio de APIs. Agora que o sistema de varejo está na nuvem pública, as APIs também aperfeiçoam o compartilhamento de dados e iniciam um novo desenvolvimento de aplicativo. As implementações de app aumentam quando os Desenvolvedores experimentam facilmente, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste rapidamente com cadeias de ferramentas.
+Por que escolher o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} fornece um ecossistema de nuvem pública, no qual os contêineres permitem que novos parceiros de negócios e outros agentes externos codesenvolvam aplicativos e dados por meio de APIs. Agora que o sistema de varejo está na nuvem pública, as APIs também aperfeiçoam o compartilhamento de dados e iniciam um novo desenvolvimento de aplicativo. As implementações de app aumentam quando os Desenvolvedores experimentam facilmente, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste rapidamente com cadeias de ferramentas.
 
 {{site.data.keyword.containerlong_notm}}  e tecnologias chave:
 * [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [{{site.data.keyword.cos_full}} para persistir e sincronizar dados entre os apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
-**Contexto: o varejista compartilha dados, usando APIs com parceiros globais para impulsionar as vendas de omni-channel**
+**Contexto: o varejista compartilha dados, usando APIs, com parceiros de negócios globais para impulsionar as vendas de omnichannel**
 
 * O varejista é confrontado com fortes pressões competitivas. Em primeiro lugar, eles precisam mascarar a complexidade da passagem para novos produtos e novos canais. Por exemplo, eles precisam expandir a sofisticação do produto. Ao mesmo tempo, isso precisa ser mais simples para seus clientes saltarem entre as marcas.
-* Essa capacidade de saltar a marca significa que o ecossistema de varejo requer conectividade com parceiros. Em seguida, a nuvem pode trazer um novo valor de parceiros, clientes e outros participantes externos.
+* Essa capacidade de alternar entre marcas significa que o ecossistema de varejo requer conectividade com parceiros de negócios. Em seguida, a nuvem pode fornecer um novo valor de parceiros de negócios, clientes e outros agentes externos.
 * Os eventos de usuário de burst, como o Black Friday, pressionam os sistemas on-line existentes, forçando o varejista a superprovisionar a infraestrutura de cálculo.
 * Os desenvolvedores do varejista precisavam desenvolver apps constantemente, mas as ferramentas tradicionais desaceleraram sua capacidade de implementar atualizações e recursos frequentemente, especialmente quando colaboram com as equipes de parceiros de negócios.  
 
@@ -58,13 +58,13 @@ Uma experiência de compra mais inteligente é necessária para aumentar a reten
 O varejista também deve fornecer aos clientes conteúdo útil, como informações do produto, informações alternativas do produto, avaliações e visibilidade de inventário em tempo real. E esses clientes desejam isso enquanto estão on-line e na loja por meio de dispositivos móveis pessoais e associados à loja equipados com dispositivos móveis.
 
 A solução é composta por estes componentes primários:
-* INVENTÁRIO: Aplic. para o ecossistema de parceiros de negócios que agrega e comunica inventário, especialmente novas introduções de produtos, incluindo APIs para parceiros reutilizarem em seus próprios aplicativos de varejo e B2B
+* INVENTÁRIO: um aplicativo para o ecossistema de parceiros de negócios que agrega e comunica o inventário, especialmente novas introduções de produto, incluindo APIs, para parceiros de negócios reutilizarem em seus próprios aplicativos de varejo e B2B
 * VENDAS CRUZADAS E AMPLIADAS: app que exibe as oportunidades de venda cruzada e de venda ampliada com APIs que podem ser usadas em vários apps de e-commerce e móveis
-* AMBIENTE DE DESENVOLVIMENTO: os clusters do Kubernetes para sistemas de Desenvolvimento, Teste e Produção aumentam a colaboração e o compartilhamento de dados entre o varejista e seus parceiros
+* AMBIENTE DE DESENVOLVIMENTO: clusters Kubernetes para sistemas de Desenvolvimento, Teste e Produção aumentam a colaboração e o compartilhamento de dados entre o varejista e seus parceiros de negócios
 
-Para que o varejista trabalhe com parceiros globais, as APIs de inventário exigiram mudanças para ajustar às preferências de idioma e mercado de cada região. O {{site.data.keyword.containerlong_notm}} oferece cobertura em múltiplas regiões, incluindo América do Norte, Europa, Ásia e Austrália, para que as APIs reflitam as necessidades de cada país e assegurem a baixa latência para chamadas API.
+Para que o varejista trabalhasse com parceiros de negócios globais, as APIs de inventário precisavam de mudanças de ajuste às preferências de idioma e mercado de cada região. O {{site.data.keyword.containerlong_notm}} oferece cobertura em múltiplas regiões, incluindo América do Norte, Europa, Ásia e Austrália, para que as APIs reflitam as necessidades de cada país e assegurem a baixa latência para chamadas API.
 
-Outro requisito é que os dados do inventário devem ser compartilháveis com os clientes dos parceiros e da empresa. Com as APIs de inventário, os Desenvolvedores podem obter informações em apps, como apps de inventário de dispositivo móvel ou soluções de e-commerce da web. Os Desenvolvedores também estão ocupados com a construção e a manutenção do site de e-commerce primário. Em resumo, eles precisam focar na codificação em vez de gerenciar a infraestrutura.
+Outro requisito é poder compartilhar os dados do inventário com os parceiros de negócios e clientes da empresa. Com as APIs de inventário, os Desenvolvedores podem obter informações em apps, como apps de inventário de dispositivo móvel ou soluções de e-commerce da web. Os Desenvolvedores também estão ocupados com a construção e a manutenção do site de e-commerce primário. Em resumo, eles precisam focar na codificação em vez de gerenciar a infraestrutura.
 
 Desse modo, eles escolheram o {{site.data.keyword.containerlong_notm}} porque a IBM simplifica o gerenciamento de infraestrutura:
 * Gerenciando os componentes principais, IaaS e operacionais do Kubernetes, como Ingress e armazenamento
@@ -73,7 +73,7 @@ Desse modo, eles escolheram o {{site.data.keyword.containerlong_notm}} porque a 
 
 Além disso, a criação de log e o monitoramento para os microsserviços da API, especialmente como eles puxam os dados personalizados de sistemas backend, se integram facilmente ao {{site.data.keyword.containerlong_notm}}. Os desenvolvedores não perdem tempo construindo sistemas de criação de log complexos, apenas para solucionar problemas de sistemas em tempo real.
 
-O {{site.data.keyword.messagehub_full}} age como a plataforma de eventos no momento exato para trazer as informações de rápida mudança dos sistemas de inventário dos parceiros para o {{site.data.keyword.cos_full}}.
+O {{site.data.keyword.messagehub_full}} atua como a plataforma de eventos no momento exato para fornecer as informações em constante mudança dos sistemas de inventário dos parceiros de negócios para o {{site.data.keyword.cos_full}}.
 
 ** Modelo de Solução **
 
@@ -103,18 +103,18 @@ Solução Técnica:
 * Após os usuários terem se conectado, será possível usar o {{site.data.keyword.appid_short_notm}} para criar perfis e personalizar a experiência de um usuário de seu aplicativo.
 
 ** Etapa 4: Compartilhar dados **
-* O {{site.data.keyword.cos_full}} e o {{site.data.keyword.messagehub_full}} fornecem armazenamento de dados em tempo real e histórico, de forma que as ofertas de vendas cruzadas representem o inventário disponível de parceiros.
-* As APIs permitem que os parceiros do varejista compartilhem dados em seus apps de e-commerce e B2B.
+* O {{site.data.keyword.cos_full}}, com o {{site.data.keyword.messagehub_full}}, fornece armazenamento de dados históricos e em tempo real para que as ofertas de vendas cruzadas representem o inventário disponível dos parceiros de negócios.
+* As APIs permitem que os parceiros de negócios do varejista compartilhem dados em seus aplicativos de e-commerce e B2B.
 
 ** Etapa 5: Entregar continuamente **
 * A depuração das APIs desenvolvidas em conjunto se torna mais simples quando elas incluem as ferramentas IBM Cloud Logging and Monitoring, aquelas baseadas em nuvem que estão acessíveis para os vários Desenvolvedores.
 * O {{site.data.keyword.contdelivery_full}} ajuda os desenvolvedores a provisionar rapidamente uma cadeia de ferramentas integrada usando modelos customizáveis e compartilháveis com ferramentas da IBM, de terceiros e de software livre. Automatize construções e testes, controlando a qualidade com a análise de dados.
 * Depois que os Desenvolvedores constroem e testam os apps em seus clusters de Desenvolvimento e Teste, eles usam as cadeias de ferramentas de integração e entrega contínuas da IBM (CI e CD) para implementar apps em clusters no mundo inteiro.
-* O {{site.data.keyword.containerlong_notm}} fornece fácil lançamento e retrocesso de apps; os apps customizados são implementados para testar campanhas por meio do roteamento e o balanceamento de carga inteligentes do Istio.
+* O {{site.data.keyword.containerlong_notm}} fornece fácil lançamento e recuperação de aplicativos, nos quais aplicativos customizados são implementados em campanhas de teste por meio do roteamento inteligente e do balanceamento de carga do Istio.
 
 ** Resultados **
 * Os microsserviços reduzem muito o tempo de entrega de correções, correções de bug e novos recursos. O desenvolvimento mundial inicial é rápido, e as atualizações são tão frequentes quanto 40 vezes por semana.
-* O varejista e seus parceiros têm acesso imediato à disponibilidade de inventário e aos planejamentos de entrega, usando as APIs.
+* O varejista e seus parceiros de negócios têm acesso imediato à disponibilidade do inventário e aos planejamentos de entrega por meio das APIs.
 * Com as ferramentas {{site.data.keyword.containerlong_notm}} e IBM CI e CD, as versões A-B de apps estão prontas para campanhas de teste.
 * O {{site.data.keyword.containerlong_notm}} fornece cálculo escalável, para que o inventário e as cargas de trabalho da API de vendas cruzadas possam crescer durante períodos de alto volume do ano, como os feriados de outono.
 
@@ -141,7 +141,7 @@ Tecnologias chave:
 
 ** A Solução **
 
-O merceeiro precisa de um app para aumentar a conversão e armazenar o tráfego para gerar novas vendas e construir a fidelidade do cliente em uma plataforma de análise de nuvem reutilizável. A experiência com alvo dentro da loja pode ser um evento junto com um fornecedor de serviços ou produto que atraia fidelidade e novos clientes com base na afinidade com o evento específico. A loja e o parceiro de negócios, então, oferecem incentivos para vir para o evento, bem como comprar produtos da loja ou do parceiro.  
+O merceeiro precisa de um app para aumentar a conversão e armazenar o tráfego para gerar novas vendas e construir a fidelidade do cliente em uma plataforma de análise de nuvem reutilizável. A experiência com alvo dentro da loja pode ser um evento junto com um fornecedor de serviços ou produto que atraia fidelidade e novos clientes com base na afinidade com o evento específico. Em seguida, a loja e o parceiro de negócios oferecem incentivos para o comparecimento ao evento e a possibilidade de compra de produtos da loja ou do parceiro de negócios.  
 
 Após o evento, os clientes são orientados a comprar os produtos necessários, para que eles possam repetir a atividade demonstrada sozinhos no futuro. A experiência de cliente-alvo é medida com o resgate de incentivo e as novas inscrições de clientes de fidelidade. A combinação de um evento de marketing hiperpersonalizado e uma ferramenta para rastrear compras dentro da loja pode conduzir a experiência-alvo por toda a compra do produto. Todas essas ações resultam em tráfego mais alto e conversões.
 

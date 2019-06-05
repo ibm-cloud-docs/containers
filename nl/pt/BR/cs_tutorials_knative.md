@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 ---
 
@@ -19,19 +19,18 @@ lastupdated: "2019-03-21"
 {:download: .download}
 
 
-
 # Tutorial: usando o Knative gerenciado para executar apps sem servidor em clusters do Kubernetes
 {: #knative_tutorial}
 
 Com esse tutorial, é possível aprender como instalar o Knative em um cluster Kubernetes no {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-**O que é Knative e por que devo utilizá-lo?**</br>
+**O que é o Knative e por que devo utilizá-lo?**</br>
 [Knative](https://github.com/knative/docs) é uma plataforma de software livre que foi desenvolvida pela IBM, Google, Pivotal, Red Hat, Cisco e outras com a meta de estender os recursos do Kubernetes para ajudá-lo a criar apps serveless modernos e conteinerizados centrados na origem na parte superior do cluster Kubernetes. A plataforma é projetada para atender às necessidades de desenvolvedores que hoje devem decidir qual tipo de aplicativo eles desejam executar na nuvem: apps de 12 fatores, contêineres ou funções. Cada tipo de app requer uma solução proprietária ou de software livre que seja customizada para esses apps: Cloud Foundry para apps de 12 fatores, Kubernetes para contêineres e OpenWhisk, e outros para funções. No passado, os desenvolvedores tinham que decidir qual abordagem desejavam seguir, o que levava à inflexibilidade e à complexidade quando diferentes tipos de apps tinham que ser combinados.  
 
 O Knative usa uma abordagem consistente entre linguagens de programação e estruturas para abstrair a carga operacional de construir, implementar e gerenciar cargas de trabalho no Kubernetes para que os desenvolvedores possam se concentrar no que mais importa para eles: o código-fonte. É possível usar pacotes de construção comprovados com os que você já está familiarizado, como o Cloud Foundry, Kaniko, Dockerfile, Bazel e outros. Ao se integrar com o Istio, o Knative assegura que as cargas de trabalho sem servidor e conteinerizadas possam ser facilmente expostas na Internet, monitoradas e controladas e que seus dados sejam criptografados durante o trânsito.
 
-** Como o Knative funciona? **</br>
+**Como o Knative funciona?**</br>
 O Knative é fornecido com três componentes chave ou _primitivas_, que ajudam a construir, implementar e gerenciar seus apps sem servidor no cluster Kubernetes:
 
 - **Construção:** a primitiva `Build` suporta a criação de um conjunto de etapas para construir seu app por meio do código-fonte para uma imagem de contêiner. Imagine usar um modelo de construção simples no qual você especifica o repositório de origem para localizar seu código de app e o registro do contêiner no qual você deseja hospedar a imagem. Com apenas um único comando, é possível instruir o Knative a tomar esse modelo de construção, extrair o código-fonte, criar a imagem e enviá-la por push para seu registro de contêiner para que seja possível usar a imagem em seu contêiner.
@@ -39,7 +38,7 @@ O Knative é fornecido com três componentes chave ou _primitivas_, que ajudam a
 - **Evento:** com a primitiva `Eventing`, é possível criar acionadores ou fluxos de eventos que outros serviços podem assinar. Por exemplo, você pode desejar iniciar uma nova construção de seu app sempre que o código for enviado por push para o repositório principal do GitHub. Ou você deseja executar um app sem servidor apenas se a temperatura cair abaixo do ponto de congelamento. A primitiva `Eventing` pode ser integrada em seu pipeline CI/CD para automatizar a construção e a implementação de apps no caso de um evento específico ocorrer.
 
 **O que é o complemento Knative gerenciado no {{site.data.keyword.containerlong_notm}} (experimental)?** </br>
-O Knative gerenciado no {{site.data.keyword.containerlong_notm}} é um complemento gerenciado que integra o Knative e o Istio diretamente a seu cluster Kubernetes. As versões Knative e Istio no complemento são testadas pela IBM e suportadas para uso no {{site.data.keyword.containerlong_notm}}. O {{site.data.keyword.containerlong_notm}} mantém os componentes Knative e Istio atualizados, automaticamente fazendo as atualizações contínuas para o seu complemento.
+O Knative gerenciado no {{site.data.keyword.containerlong_notm}} é um complemento gerenciado que integra o Knative e o Istio diretamente a seu cluster Kubernetes. As versões Knative e Istio no complemento são testadas pela IBM e suportadas para uso no {{site.data.keyword.containerlong_notm}}. Para obter mais informações sobre os complementos gerenciados, consulte [Incluindo serviços por meio do uso de complementos gerenciados](/docs/containers?topic=containers-managed-addons#managed-addons).
 
 **Há alguma limitação?** </br>
 Se você instalou o [controlador de admissão de imposição de segurança da imagem de contêiner](/docs/services/Registry?topic=registry-security_enforce#security_enforce) em seu cluster, não será possível ativar o complemento Knative gerenciado no cluster.
@@ -68,7 +67,7 @@ Este tutorial é projetado para desenvolvedores que estão interessados em apren
 {: #knative_prerequisites}
 
 -  [Instale a CLI do IBM Cloud, o plug-in do {{site.data.keyword.containerlong_notm}} e a CLI do Kubernetes](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Certifique-se de instalar a versão da CLI `kubectl` que corresponde à versão do Kubernetes do seu cluster.
--  [Crie um cluster com pelo menos três nós do trabalhador, cada um deles com quatro núcleos e 16 GB de memória (`b2c.4x16`) ou mais](/docs/containers?topic=containers-clusters#clusters_cli). Cada nó do trabalhador deve executar o Kubernetes versão 1.11 ou mais recente.
+-  [Crie um cluster com pelo menos 3 nós do trabalhador que contenham, cada um, 4 núcleos e 16 GB de memória (`b3c.4x16`) ou mais](/docs/containers?topic=containers-clusters#clusters_cli). Todos os nós do trabalhador devem executar o Kubernetes versão 1.12 ou mais recente.
 -  Assegure-se de que você tenha a [função de **Gravador** ou **Gerenciador** do serviço {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o {{site.data.keyword.containerlong_notm}}.
 -  [Destino a CLI para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -115,7 +114,13 @@ O Knative é construído na parte superior do Istio para assegurar que as cargas
    ```
    {: screen}
 
-3. Verifique se todos os componentes Knative foram instalados com êxito.
+3. Opcional: se desejar usar o Istio para todos os aplicativos no namespace `default`, inclua o rótulo `istio-injection=enabled` no namespace. Cada pod de aplicativo sem servidor deve executar um sidecar de proxy do Envoy para que o aplicativo possa ser incluído na malha de serviços do Istio. Esse rótulo permite que o Istio modifique automaticamente a especificação do modelo de pod em novas implementações de aplicativo para que os pods sejam criados com contêineres do sidecar de proxy do Envoy.
+  ```
+  kubectl label namespace default istio-injection=enabled
+  ```
+  {: pre}
+
+4. Verifique se todos os componentes Knative foram instalados com êxito.
    1. Verifique se todos os pods do componente Knative `Serving` estão em um estado `Em execução`.  
       ```
       kubectl get pods -- namespace knative-serving
@@ -251,7 +256,7 @@ Nesta lição, você implementa o seu primeiro app [`Hello World`](https://hub.d
     </tbody>
     </table>
 
-2. Crie o serviço Knative em seu cluster. Ao criar o serviço, a primitiva `Serving` do Knative cria uma revisão imutável, uma rota do Knative, uma regra de roteamento do Ingress, um serviço do Kubernetes, um pod do Kubernetes e um balanceador de carga para seu app. Seu app é designado a um subdomínio de seu subdomínio do Ingress no formato `<knative_service_name>.<namespace>.<ingress_subdomain>` que você pode usar para acessar o app por meio da Internet.
+2. Crie o serviço Knative em seu cluster. Ao criar o serviço, a primitiva `Serving` do Knative cria uma revisão imutável, uma rota do Knative, uma regra de roteamento do Ingress, um serviço do Kubernetes, um pod do Kubernetes e um balanceador de carga para seu app. Um subdomínio do seu subdomínio do Ingress é designado ao seu aplicativo no formato `<knative_service_name>.<namespace>.<ingress_subdomain>`, que pode ser usado para acessar o aplicativo por meio da Internet.
    ```
    kubectl apply -f service.yaml
    ```
@@ -267,6 +272,7 @@ Nesta lição, você implementa o seu primeiro app [`Hello World`](https://hub.d
    ```
    kubectl get pods
    ```
+   {: pre}
 
    Saída de exemplo:
    ```
@@ -278,14 +284,14 @@ Nesta lição, você implementa o seu primeiro app [`Hello World`](https://hub.d
 4. Experimente seu aplicativo  ` Hello World ` .
    1. Obtenha o domínio padrão que está designado ao seu serviço Knative. Se você mudou o nome de seu serviço Knative ou implementou o app em um namespace diferente, atualize esses valores em sua consulta.
       ```
-      kubectl get svc/kn-helloworld
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       Saída de exemplo:
       ```
-      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
-      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
+      NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
+      kn-helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True
       ```
       {: screen}
 

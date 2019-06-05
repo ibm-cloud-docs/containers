@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -26,10 +26,10 @@ subcollection: containers
 # IBM Cloud の IBM ファイル・ストレージへのデータの保管
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} のファイル・ストレージは、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高速で柔軟なネットワーク接続型の永続的 NFS ベース・ファイル・ストレージです。ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。{{site.data.keyword.Bluemix_notm}} のファイル・ストレージが適切なストレージ・オプションかどうかを確認するには、[ストレージ・ソリューションの選択](/docs/containers?topic=containers-storage_planning#choose_storage_solution)を参照してください。価格情報については、[課金](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing)を参照してください。
+{{site.data.keyword.Bluemix_notm}} のファイル・ストレージは、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高速で柔軟なネットワーク接続型の永続的 NFS ベース・ファイル・ストレージです。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 {{site.data.keyword.Bluemix_notm}} のファイル・ストレージが適切なストレージ・オプションかどうかを確認するには、[ストレージ・ソリューションの選択](/docs/containers?topic=containers-storage_planning#choose_storage_solution)を参照してください。 価格情報については、[課金](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing)を参照してください。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} のファイル・ストレージは、パブリック・ネットワークに接続できるようにセットアップされた標準クラスター専用です。ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、そのクラスター内でファイル・ストレージをプロビジョンできません。NFS ファイル・ストレージ・インスタンスは、単一のゾーンに固有のものです。マルチゾーン・クラスターを使用している場合は、[マルチゾーン永続ストレージ・オプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を検討してください。
+{{site.data.keyword.Bluemix_notm}} のファイル・ストレージは、パブリック・ネットワークに接続できるようにセットアップされた標準クラスター専用です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、クラスターで Kubernetes バージョン 1.13.4_1513、1.12.6_1544、1.11.8_1550、1.10.13_1551、またはそれ以降が実行されていると、ファイル・ストレージをプロビジョンできます。 NFS ファイル・ストレージ・インスタンスは、単一のゾーンに固有のものです。 マルチゾーン・クラスターを使用している場合は、[マルチゾーン永続ストレージ・オプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を検討してください。
 {: important}
 
 ## ファイル・ストレージ構成の決定
@@ -43,19 +43,19 @@ subcollection: containers
 ストレージ・クラスを使用して特定のタイプのストレージをプロビジョンした後に、ストレージ・デバイスのタイプ、または保存ポリシーを変更することはできません。 ただし、ストレージ容量とパフォーマンスを向上させたい場合に、[サイズと IOPS を変更する](#file_change_storage_configuration)ことができます。 ストレージのタイプおよび保存ポリシーを変更するには、[新しいストレージ・インスタンスを作成し、古いストレージ・インスタンスから新しいストレージ・インスタンスにデータをコピー](/docs/containers?topic=containers-kube_concepts#update_storageclass)する必要があります。
 {: important}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ストレージ構成を決定するには、以下のようにします。
 
 1. {{site.data.keyword.containerlong}} で使用可能なストレージ・クラスをリストします。
-    ```
-    kubectl get storageclasses | grep file
-    ```
-    {: pre}
+   ```
+   kubectl get storageclasses | grep file
+   ```
+   {: pre}
 
-    出力例:
-    ```
-    $ kubectl get storageclasses
+   出力例:
+   ```
+   $ kubectl get storageclasses
     NAME                         TYPE
     ibmc-file-bronze (default)   ibm.io/ibmc-file
     ibmc-file-custom             ibm.io/ibmc-file
@@ -65,14 +65,14 @@ subcollection: containers
     ibmc-file-retain-gold        ibm.io/ibmc-file
     ibmc-file-retain-silver      ibm.io/ibmc-file
     ibmc-file-silver             ibm.io/ibmc-file
-    ```
-    {: screen}
+   ```
+   {: screen}
 
 2. ストレージ・クラスの構成を確認します。
-   ```
-   kubectl describe storageclass <storageclass_name>
-   ```
-   {: pre}
+  ```
+  kubectl describe storageclass <storageclass_name>
+  ```
+  {: pre}
 
    各ストレージ・クラスについて詳しくは、[ストレージ・クラス・リファレンス](#file_storageclass_reference)を参照してください。 ニーズに合うものがない場合は、カスタマイズした独自のストレージ・クラスを作成することを検討してください。 まずは、[ストレージ・クラスのカスタマイズ例](#file_custom_storageclass)を確認してください。
    {: tip}
@@ -163,7 +163,7 @@ subcollection: containers
 
 5. クラスターまたは永続ボリューム請求 (PVC) が削除された後もデータを保持するかどうかを選択します。
    - データを保持する場合、`retain` ストレージ・クラスを選択します。 PVC を削除すると、PVC のみが削除されます。 PV と、IBM Cloud インフラストラクチャー (SoftLayer) アカウント内の物理ストレージ・デバイスと、データは残ります。 ストレージを回収し、クラスターで再使用するには、PV を削除し、[既存のファイル・ストレージを使用する](#existing_file)手順に従う必要があります。
-   - PVC を削除するときに PV、データ、物理ファイル・ストレージ・デバイスが削除されるようにするには、`retain` なしのストレージ・クラスを選択します。 **注**: 専用アカウントがある場合は、`retain` を指定せずにストレージ・クラスを選択し、IBM Cloud インフラストラクチャー (SoftLayer) 内の孤立ボリュームを防止します。
+   - PVC を削除するときに PV、データ、物理ファイル・ストレージ・デバイスが削除されるようにするには、`retain` なしのストレージ・クラスを選択します。
 
 6. 時間単位と月単位のどちらの課金方法にするかを選択します。 詳しくは、[料金設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing) を参照してください。 デフォルトでは、すべてのファイル・ストレージ・デバイスが時間単位の課金タイプでプロビジョンされます。
    月単位の課金タイプを選択した場合は、永続ストレージを短期間しか使用せずに削除しても、月額料金を支払うことになります。
@@ -274,7 +274,7 @@ subcollection: containers
        </tr>
        <tr>
        <td><code>spec.storageClassName</code></td>
-       <td>ファイル・ストレージをプロビジョンするために使用するストレージ・クラスの名前。 [IBM 提供のストレージ・クラス](#file_storageclass_reference)の 1 つを使用するのか、[独自のストレージ・クラスを作成](#file_custom_storageclass)するのかを選択できます。</br> ストレージ・クラスを指定しなかった場合は、デフォルトのストレージ・クラス <code>ibmc-file-bronze</code> を使用して PV が作成されます。 </br></br><strong>ヒント:</strong> デフォルトのストレージ・クラスを変更する場合は、<code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> を実行して、<code>&lt;storageclass&gt;</code> をストレージ・クラスの名前に置き換えます。</td>
+       <td>ファイル・ストレージをプロビジョンするために使用するストレージ・クラスの名前。 [IBM 提供のストレージ・クラス](#file_storageclass_reference)の 1 つを使用するのか、[独自のストレージ・クラスを作成](#file_custom_storageclass)するのかを選択できます。 </br> ストレージ・クラスを指定しなかった場合は、デフォルトのストレージ・クラス <code>ibmc-file-bronze</code> を使用して PV が作成されます。 </br></br><strong>ヒント:</strong> デフォルトのストレージ・クラスを変更する場合は、<code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> を実行して、<code>&lt;storageclass&gt;</code> をストレージ・クラスの名前に置き換えます。</td>
        </tr>
        </tbody></table>
 
@@ -316,7 +316,7 @@ subcollection: containers
     ```
     {: screen}
 
-4.  {: #app_volume_mount}ストレージをデプロイメントにマウントするには、構成 `.yaml` ファイルを作成し、PV をバインドする PVC を指定します。
+4.  {: #file_app_volume_mount}ストレージをデプロイメントにマウントするには、構成 `.yaml` ファイルを作成し、PV をバインドする PVC を指定します。
 
     非 root ユーザーが永続ストレージに書き込む必要があるアプリの場合、または root ユーザーがマウント・パスを所有する必要があるアプリの場合は、[NFS ファイル・ストレージに対する非 root ユーザーのアクセス権限の追加](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)または [NFS ファイル・ストレージに対する root 権限の有効化](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)を参照してください。
     {: tip}
@@ -378,7 +378,7 @@ subcollection: containers
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>コンテナー内でボリュームがマウントされるディレクトリーの絶対パス。 マウント・パスに書き込まれるデータは、物理ファイル・ストレージ・インスタンスの <code>root</code> ディレクトリーに保管されます。 複数のアプリ間で 1 つのボリュームを共有する場合は、アプリごとに[ボリューム・サブパス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) を指定できます。</td>
+    <td>コンテナー内でボリュームがマウントされるディレクトリーの絶対パス。 マウント・パスに書き込まれるデータは、物理ファイル・ストレージ・インスタンスの <code>root</code> ディレクトリーに保管されます。 複数のアプリ間で 1 つのボリュームを共有する場合は、アプリごとに[ボリューム・サブパス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) を指定できます。  </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>
@@ -433,9 +433,10 @@ subcollection: containers
 
 開始前に、以下のことを行います。
 - 少なくとも 1 つのワーカー・ノードが、既存のファイル・ストレージ・インスタンスと同じゾーンに存在することを確認してください。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### ステップ 1: 既存のストレージを準備する
+{: #existing-file-1}
 
 アプリへの既存のストレージのマウントを開始するには、その前に、PV に関する必要な情報をすべて取得し、クラスターでストレージにアクセスできるように準備する必要があります。  
 {: shortdesc}
@@ -479,9 +480,6 @@ subcollection: containers
 **クラスターの外部にプロビジョンされた永続ストレージの場合** </br>
 以前にプロビジョンして、まだクラスターで使用したことがない既存のストレージを使用するには、そのストレージをワーカー・ノードと同じサブネットで使用できるようにする必要があります。
 
-専用アカウントがある場合は、[サポート・ケースを開く](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)必要があります。
-{: note}
-
 1.  {: #external_storage}[IBM Cloud インフラストラクチャー (SoftLayer) ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/classic?) で、**「ストレージ」**をクリックします。
 2.  **「File Storage」**をクリックして、**「アクション」**メニューから**「ホストの許可」**を選択します。
 3.  **「サブネット」**を選択します。
@@ -491,6 +489,7 @@ subcollection: containers
 7.  `マウント・ポイント`、`サイズ`、`ロケーション`のフィールドをメモします。 `マウント・ポイント`のフィールドは `<nfs_server>:<file_storage_path>` として表示されます。
 
 ### ステップ 2: 永続ボリューム (PV) および対応する永続ボリューム請求 (PVC) を作成する
+{: #existing-file-2}
 
 1.  PV のストレージ構成ファイルを作成します。 先ほど取得した値を含めます。
 
@@ -611,7 +610,7 @@ subcollection: containers
     {: screen}
 
 
-PV が正常に作成され、PVC にバインドされました。 これで、クラスター・ユーザーがデプロイメントに[PVC をマウント](#app_volume_mount)して、PV オブジェクトへの読み書きを開始できるようになりました。
+PV が正常に作成され、PVC にバインドされました。 これで、クラスター・ユーザーがデプロイメントに[PVC をマウント](#file_app_volume_mount)して、PV オブジェクトへの読み書きを開始できるようになりました。
 
 <br />
 
@@ -644,7 +643,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 このオプションは、ステートフル・セットを作成するときに PVC を自動的に作成する場合に使用します。
 {: shortdesc}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. クラスターにある既存のすべてのステートフル・セットが完全にデプロイ済みであることを確認します。 デプロイ中のステートフル・セットがある場合は、ステートフル・セットの作成を開始できません。 予期しない結果が生じるのを避けるため、クラスター内のすべてのステートフル・セットが完全にデプロイされるまで待つ必要があります。
    1. クラスター内の既存のステートフル・セットをリストします。
@@ -758,7 +757,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 
   - **ファイル・ストレージの作成が遅延される、アンチアフィニティー・ルールを使用するステートフル・セットの例:**
 
-    下記の例は、3 つのレプリカを伴うステートフル・セットとして NGINX をデプロイする方法を示しています。 このステートフル・セットでは、ファイル・ストレージの作成場所である地域とゾーンは指定されません。代わりに、このステートフル・セットではアンチアフィニティー・ルールを使用して、ポッドが複数のワーカー・ノードとゾーンにまたがって分散されるようにします。ワーカー・ノードのアンチアフィニティーは、`app: nginx` ラベルを定義することで実現されます。このラベルは、これと同じラベルを持つポッドが既に実行されているワーカー・ノード上で、どのポッドもスケジュールしないように Kubernetes スケジューラーに対して指示します。`topologykey: failure-domain.beta.kubernetes.io/zone` ラベルによって、このアンチアフィニティー・ルールがさらに制限されて、このポッドが、`app: nginx` ラベルを持つポッドを既に実行しているワーカー・ノードと同じゾーンに配置されたワーカー・ノード上でスケジュールされることが防止されます。 各ステートフル・セット・ポッドについて、`volumeClaimTemplates` セクション内の定義に従って 2 つの PVC が作成されますが、ファイル・ストレージ・インスタンスの作成は、そのストレージを使用するステートフル・セット・ポッドがスケジュールされるまで遅延されます。このセットアップは、[トポロジー対応ボリューム・スケジューリング](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/)と呼ばれます。
+    下記の例は、3 つのレプリカを伴うステートフル・セットとして NGINX をデプロイする方法を示しています。 このステートフル・セットでは、ファイル・ストレージの作成場所である地域とゾーンは指定されません。 代わりに、このステートフル・セットではアンチアフィニティー・ルールを使用して、ポッドが複数のワーカー・ノードとゾーンにまたがって分散されるようにします。 ワーカー・ノードのアンチアフィニティーは、`app: nginx` ラベルを定義することで実現されます。 このラベルは、これと同じラベルを持つポッドが既に実行されているワーカー・ノード上で、どのポッドもスケジュールしないように Kubernetes スケジューラーに対して指示します。 `topologykey: failure-domain.beta.kubernetes.io/zone` ラベルによって、このアンチアフィニティー・ルールがさらに制限されて、このポッドが、`app: nginx` ラベルを持つポッドを既に実行しているワーカー・ノードと同じゾーンに配置されたワーカー・ノード上でスケジュールされることが防止されます。 各ステートフル・セット・ポッドについて、`volumeClaimTemplates` セクション内の定義に従って 2 つの PVC が作成されますが、ファイル・ストレージ・インスタンスの作成は、そのストレージを使用するステートフル・セット・ポッドがスケジュールされるまで遅延されます。 このセットアップは、[トポロジー対応ボリューム・スケジューリング](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/)と呼ばれます。
 
     ```
     apiVersion: storage.k8s.io/v1
@@ -882,7 +881,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
-    <td style="text-align:left">アンチアフィニティー・ルールを指定して、ステートフル・セット・ポッドが複数のワーカー・ノードとゾーンにまたがって分散されるようにします。この例では、`app: nginx` ラベルを持つポッドが実行されるワーカー・ノード上でステートフル・セット・ポッドがスケジュールされることが望ましくないアンチアフィニティー・ルールを示しています。`topologykey: failure-domain.beta.kubernetes.io/zone` によって、このアンチアフィニティー・ルールがさらに制限されて、このポッドが、`app: nginx` ラベルを持つポッドと同じゾーン内のワーカー・ノード上でスケジュールされることが防止されます。このアンチアフィニティー・ルールを使用すると、複数のワーカー・ノードとゾーンにまたがってアンチアフィニティーを実現できます。</td>
+    <td style="text-align:left">アンチアフィニティー・ルールを指定して、ステートフル・セット・ポッドが複数のワーカー・ノードとゾーンにまたがって分散されるようにします。 この例では、`app: nginx` ラベルを持つポッドが実行されるワーカー・ノード上でステートフル・セット・ポッドがスケジュールされることが望ましくないアンチアフィニティー・ルールを示しています。 `topologykey: failure-domain.beta.kubernetes.io/zone` によって、このアンチアフィニティー・ルールがさらに制限されて、このポッドが、`app: nginx` ラベルを持つポッドと同じゾーン内のワーカー・ノード上でスケジュールされることが防止されます。 このアンチアフィニティー・ルールを使用すると、複数のワーカー・ノードとゾーンにまたがってアンチアフィニティーを実現できます。 </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
@@ -925,19 +924,19 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 
 [ステートフル・セットの作成時に PVC を動的にプロビジョンする](#file_dynamic_statefulset)場合は、ステートフル・セット YAML ファイルで使用した値に基づいて、PVC の名前が割り当てられます。 ステートフル・セットによって既存の PVC が使用されるようにするには、PVC の名前が、動的プロビジョニングを使用する場合に自動的に作成される名前と一致していなければなりません。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. ステートフル・セットを作成する前に PVC を事前プロビジョンする場合は、[ファイル・ストレージをアプリに追加する](#add_file)のステップ 1 から 3 に従って、各ステートフル・セット・レプリカ用の PVC を作成してください。作成する PVC の名前は、必ず次のフォーマットに従ったものにしてください: `<volume_name>-<statefulset_name>-<replica_number>`。
+1. ステートフル・セットを作成する前に PVC を事前プロビジョンする場合は、[ファイル・ストレージをアプリに追加する](#add_file)のステップ 1 から 3 に従って、各ステートフル・セット・レプリカ用の PVC を作成してください。 作成する PVC の名前は、必ず次のフォーマットに従ったものにしてください: `<volume_name>-<statefulset_name>-<replica_number>`。
    - **`<volume_name>`**: ステートフル・セットの `spec.volumeClaimTemplates.metadata.name` セクションで指定する名前を使用します (例: `nginxvol`)。
    - **`<statefulset_name>`**: ステートフル・セットの `metadata.name` セクションで指定する名前を使用します (例: `nginx_statefulset`)。
    - **`<replica_number>`**: 0 から始まる、レプリカの番号を入力します。
 
    例えば、3 つのステートフル・セット・レプリカを作成する必要がある場合は、次の名前を使用して 3 つの PVC を作成します: `nginxvol-nginx_statefulset-0`、`nginxvol-nginx_statefulset-1`、`nginxvol-nginx_statefulset-2`。  
 
-   既存のファイル・ストレージ・インスタンス用の PVC と PV を作成することを検討している場合は、[静的プロビジョニング](#existing_file)を使用して PVC と PV を作成してください。
+   既存のファイル・ストレージ・インスタンス用の PVC と PV を作成することを検討している場合は、 [静的プロビジョニング](#existing_file)を使用して PVC と PV を作成してください。
    {: tip}
 
-2. [動的プロビジョニング: ステートフル・セット作成時の PVC の作成](#file_dynamic_statefulset)のステップに従って、ステートフル・セットを作成します。PVC の名前は、`<volume_name>-<statefulset_name>-<replica_number>` という形式に従います。PVC 名に含まれている次の値を必ず使用してステートフル・セットを指定してください。
+2. [動的プロビジョニング: ステートフル・セット作成時の PVC の作成](#file_dynamic_statefulset)のステップに従って、ステートフル・セットを作成します。 PVC の名前は、`<volume_name>-<statefulset_name>-<replica_number>` という形式に従います。 PVC 名に含まれている次の値を必ず使用してステートフル・セットを指定してください。
    - **`spec.volumeClaimTemplates.metadata.name`**: PVC 名の `<volume_name>` を入力します。
    - **`metadata.name`**: PVC 名の `<statefulset_name>` を入力します。
    - **`spec.replicas`**: 作成するステートフル・セット・レプリカの数を入力します。 レプリカの数は、先ほど作成した PVC の数と等しくなければなりません。
@@ -1206,18 +1205,18 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 
 <dl>
   <dt>定期的なスナップショットをセットアップする</dt>
-  <dd><p>[ファイル・ストレージの定期的なスナップショットをセットアップ](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)できます。スナップショットとは、特定の時点のインスタンスの状態をキャプチャーした読み取り専用のイメージです。 スナップショットを保管するには、ファイル・ストレージでスナップショット・スペースを要求する必要があります。 スナップショットは、同じゾーン内の既存のストレージ・インスタンスに保管されます。 ユーザーが誤って重要なデータをボリュームから削除した場合に、スナップショットからデータをリストアできます。 <p class="note">: 専用アカウントがある場合は、[サポート・ケースを開く](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)必要があります。</p></br> <strong>ボリュームのスナップショットを作成するには、以下のようにします。</strong><ol><li>[アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。</li><li>`ibmcloud sl` CLI にログインします。 <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>[ファイル・ストレージの定期的なスナップショットをセットアップ](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)できます。スナップショットとは、特定の時点のインスタンスの状態をキャプチャーした読み取り専用のイメージです。 スナップショットを保管するには、ファイル・ストレージでスナップショット・スペースを要求する必要があります。 スナップショットは、同じゾーン内の既存のストレージ・インスタンスに保管されます。 ユーザーが誤って重要なデータをボリュームから削除した場合に、スナップショットからデータをリストアできます。</br> <strong>ボリュームのスナップショットを作成するには、以下のようにします。</strong><ol><li>[アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>`ibmcloud sl` CLI にログインします。 <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>クラスター内の既存の PV をリストします。 <pre class="pre"><code>kubectl get pv</code></pre></li><li>スナップショット・スペースを作成する PV の詳細を取得し、ボリューム ID、サイズ、および IOPS をメモします。 <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> ボリューム ID、サイズ、および IOPS は CLI 出力の <strong>Labels</strong> セクションにあります。 </li><li>前のステップで取得したパラメーターを使用して、既存のボリュームのスナップショット・サイズを作成します。 <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>スナップショット・サイズが作成されるまで待ちます。 <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 出力の <strong>Snapshot Size (GB)</strong> が 0 から注文したサイズに変更されていれば、スナップショット・サイズは正常にプロビジョンされています。 </li><li>ボリュームのスナップショットを作成し、作成されたスナップショットの ID をメモします。 <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>スナップショットが正常に作成されたことを確認します。 <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>スナップショットから既存のボリュームにデータをリストアするには、以下のようにします。</strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>スナップショットを別のゾーンにレプリケーションする</dt>
- <dd><p>ゾーンの障害からデータを保護するために、別のゾーンにセットアップしたファイル・ストレージのインスタンスに[スナップショットをレプリケーション](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication)することができます。 データは、1 次ストレージからバックアップ・ストレージにのみレプリケーションできます。 レプリケーションされたファイル・ストレージのインスタンスを、クラスターにマウントすることはできません。 1 次ストレージに障害が発生した場合には、レプリケーションされたバックアップ・ストレージを 1 次ストレージに手動で設定できます。 すると、そのファイル共有をクラスターにマウントできます。 1 次ストレージがリストアされたら、バックアップ・ストレージからデータをリストアできます。 <strong>注</strong>: 専用アカウントがある場合は、スナップショットを別のゾーンに複製することはできません。</p></dd>
+ <dd><p>ゾーンの障害からデータを保護するために、別のゾーンにセットアップしたファイル・ストレージのインスタンスに[スナップショットをレプリケーション](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication)することができます。 データは、1 次ストレージからバックアップ・ストレージにのみレプリケーションできます。 レプリケーションされたファイル・ストレージのインスタンスを、クラスターにマウントすることはできません。 1 次ストレージに障害が発生した場合には、レプリケーションされたバックアップ・ストレージを 1 次ストレージに手動で設定できます。 すると、そのファイル共有をクラスターにマウントできます。 1 次ストレージがリストアされたら、バックアップ・ストレージからデータをリストアできます。</p></dd>
  <dt>ストレージを複製する</dt>
- <dd><p>元のストレージ・インスタンスと同じゾーンに、[ファイル・ストレージ・インスタンスを複製](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume)できます。 複製インスタンスのデータは、それを作成した時点の元のストレージ・インスタンスと同じです。 レプリカとは異なり、複製インスタンスは、元のインスタンスから独立したストレージ・インスタンスとして使用します。 複製するには、まず、[ボリュームのスナップショットをセットアップします](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)。 <strong>注</strong>: 専用アカウントがある場合は、<a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">サポート・ケースを開く</a>必要があります。</p></dd>
+ <dd><p>元のストレージ・インスタンスと同じゾーンに、[ファイル・ストレージ・インスタンスを複製](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume)できます。 複製インスタンスのデータは、それを作成した時点の元のストレージ・インスタンスと同じです。 レプリカとは異なり、複製インスタンスは、元のインスタンスから独立したストレージ・インスタンスとして使用します。 複製するには、まず、[ボリュームのスナップショットをセットアップします](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)。</p></dd>
   <dt>{{site.data.keyword.cos_full}} にデータをバックアップする</dt>
   <dd><p>[**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter) を使用して、クラスター内にバックアップとリストアのポッドをスピンアップできます。 このポッドには、クラスター内の任意の永続ボリューム請求 (PVC) のために 1 回限りのバックアップまたは定期バックアップを実行するスクリプトが含まれています。 データは、ゾーンにセットアップした {{site.data.keyword.cos_full}} インスタンスに保管されます。</p>
   <p>データを可用性をさらに高め、アプリをゾーン障害から保護するには、2 つ目の {{site.data.keyword.cos_full}} インスタンスをセットアップして、ゾーン間でデータを複製します。 {{site.data.keyword.cos_full}} インスタンスからデータをリストアする必要がある場合は、イメージに付属するリストア・スクリプトを使用します。</p></dd>
 <dt>ポッドおよびコンテナーとの間でデータをコピーする</dt>
 <dd><p>`kubectl cp` [コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) を使用して、クラスター内のポッドまたは特定のコンテナーとの間でファイルとディレクトリーをコピーできます。</p>
-<p>開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 <code>-c</code> を使用してコンテナーを指定しない場合、コマンドはポッド内で最初に使用可能なコンテナーを使用します。</p>
+<p>開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) <code>-c</code> を使用してコンテナーを指定しない場合、コマンドはポッド内で最初に使用可能なコンテナーを使用します。</p>
 <p>このコマンドは、以下のようにさまざまな方法で使用できます。</p>
 <ul>
 <li>ローカル・マシンからクラスター内のポッドにデータをコピーする: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -1324,7 +1323,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </table>
 
 ### ゴールド
-{: #block_gold}
+{: #file_gold}
 
 <table>
 <caption>ファイル・ストレージ・クラス: ゴールド</caption>
@@ -1425,15 +1424,15 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ### トポロジー対応ストレージの作成
 {: #file-topology}
 
-マルチゾーン・クラスターでファイル・ストレージを使用するには、ファイル・ストレージ・インスタンスと同じゾーン内でポッドがスケジュールされる必要があります。その結果として、ボリュームの読み取りと書き込みが可能になります。Kubernetes でトポロジー対応ボリューム・スケジューリングが導入される前は、ストレージの動的プロビジョニングによって、PVC の作成時にファイル・ストレージ・インスタンスが自動的に作成されていました。その当時は、ポッドを作成したときに、Kubernetes スケジューラーは、そのポッドをファイル・ストレージ・インスタンスと同じデータ・センター内のワーカー・ノードにデプロイしようとしていました。
+マルチゾーン・クラスターでファイル・ストレージを使用するには、ファイル・ストレージ・インスタンスと同じゾーン内でポッドがスケジュールされる必要があります。その結果として、ボリュームの読み取りと書き込みが可能になります。 Kubernetes でトポロジー対応ボリューム・スケジューリングが導入される前は、ストレージの動的プロビジョニングによって、PVC の作成時にファイル・ストレージ・インスタンスが自動的に作成されていました。 その当時は、ポッドを作成したときに、Kubernetes スケジューラーは、そのポッドをファイル・ストレージ・インスタンスと同じデータ・センター内のワーカー・ノードにデプロイしようとしていました。
 {: shortdesc}
 
-ポッドの制約事項を知らずにファイル・ストレージ・インスタンスを作成すると、望ましくない結果が生じる可能性があります。例えば、ご使用のストレージと同じワーカー・ノードに対してポッドをスケジュールできない場合があります。その理由は、そのワーカー・ノードのリソースが不十分であるか、そのワーカー・ノードにテイントが適用されているためそのワーカー・ノードではそのポッドのスケジューリングが許可されないからです。トポロジー対応ボリューム・スケジューリングを使用すると、該当ストレージを使用する最初のポッドが作成されるまで、ファイル・ストレージ・インスタンスが遅延されます。
+ポッドの制約事項を知らずにファイル・ストレージ・インスタンスを作成すると、望ましくない結果が生じる可能性があります。 例えば、ご使用のストレージと同じワーカー・ノードに対してポッドをスケジュールできない場合があります。その理由は、そのワーカー・ノードのリソースが不十分であるか、そのワーカー・ノードにテイントが適用されているためそのワーカー・ノードではそのポッドのスケジューリングが許可されないからです。 トポロジー対応ボリューム・スケジューリングを使用すると、該当ストレージを使用する最初のポッドが作成されるまで、ファイル・ストレージ・インスタンスが遅延されます。
 
 トポロジー対応ボリューム・スケジューリングは、Kubernetes バージョン 1.12 以降を実行しているクラスターのみでサポートされています。
 {: note}
 
-次の例では、当該ストレージを使用する最初のポッドがスケジュール可能になるまで、ファイル・ストレージ・インスタンスの作成を遅延させるストレージ・クラスを作成する方法を示しています。作成を遅延させるには、`volumeBindingMode: WaitForFirstConsumer` オプションを含める必要があります。このオプションを含めない場合は、`volumeBindingMode` は自動的に `Immediate` に設定されて、PVC の作成時にファイル・ストレージ・インスタンスが作成されます。
+次の例では、当該ストレージを使用する最初のポッドがスケジュール可能になるまで、ファイル・ストレージ・インスタンスの作成を遅延させるストレージ・クラスを作成する方法を示しています。 作成を遅延させるには、`volumeBindingMode: WaitForFirstConsumer` オプションを含める必要があります。 このオプションを含めない場合は、`volumeBindingMode` は自動的に `Immediate` に設定されて、PVC の作成時にファイル・ストレージ・インスタンスが作成されます。
 
 - **エンデュランス・ファイル・ストレージの例:**
   ```
@@ -1489,14 +1488,14 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 特定のゾーン内でファイル・ストレージを作成する場合は、カスタマイズされたストレージ・クラス内でそのゾーンと地域を指定できます。
 {: shortdesc}
 
-特定のゾーン内で[ファイル・ストレージを静的にプロビジョンする](#existing_file)場合は、カスタマイズされたストレージ・クラスを使用してください。その他の場合は、[PVC で直接ゾーンを指定してください](#add_file)。
+特定のゾーン内で[ファイル・ストレージを静的にプロビジョンする](#existing_file)場合は、カスタマイズされたストレージ・クラスを使用してください。 その他の場合は、[PVC で直接ゾーンを指定してください](#add_file)。
 {: note}
 
-カスタマイズされたストレージ・クラスを作成する際は、ご使用のクラスターとワーカー・ノードが存在しているのと同じ地域およびゾーンを指定します。クラスターの地域を取得するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` を実行して、**マスター URL** 内の地域プレフィックスを確認します (例: `https://c2.eu-de.containers.cloud.ibm.com:11111` 内の `eu-de`)。ワーカー・ノードのゾーンを取得するには、`ibmcloud ks workers --cluster <cluster_name_or_ID>` を実行します。
+カスタマイズされたストレージ・クラスを作成する際は、ご使用のクラスターとワーカー・ノードが存在しているのと同じ地域およびゾーンを指定します。 クラスターの地域を取得するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` を実行して、**マスター URL** 内の地域プレフィックスを確認します (例: `https://c2.eu-de.containers.cloud.ibm.com:11111` 内の `eu-de`)。 ワーカー・ノードのゾーンを取得するには、`ibmcloud ks workers --cluster <cluster_name_or_ID>` を実行します。
 
 - **エンデュランス・ファイル・ストレージの例:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: ibmc-file-silver-mycustom-storageclass
@@ -1551,7 +1550,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ### デフォルトの NFS バージョンの変更
 {: #nfs_version_class}
 
-次のカスタマイズされたストレージ・クラスでは、プロビジョンする NFS バージョンを指定できます。例えば、NFS バージョン 3.0 をプロビジョンする場合は、`<nfs_version>` を **3.0** に置き換えます。
+次のカスタマイズされたストレージ・クラスでは、プロビジョンする NFS バージョンを指定できます。 例えば、NFS バージョン 3.0 をプロビジョンする場合は、`<nfs_version>` を **3.0** に置き換えます。
 {: shortdesc}
 
 - **エンデュランス・ファイル・ストレージの例:**

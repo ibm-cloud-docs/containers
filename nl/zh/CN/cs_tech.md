@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, docker
 
@@ -92,11 +92,11 @@ subcollection: containers
 <dd>Kubernetes 集群由一个或多个计算主机组成，这些计算主机称为工作程序节点。工作程序节点由 Kubernetes 主节点管理，主节点用于集中控制和监视集群中的所有 Kubernetes 资源。因此，在部署容器化应用程序的资源时，Kubernetes 主节点会考虑部署需求和集群中的可用容量，然后决定将这些资源部署在哪个工作程序节点上。Kubernetes 资源包括服务、部署和 pod。</dd>
 
 <dt>服务</dt>
-<dd>服务是 Kubernetes 资源，可将一组 pod 分组在一起，并提供与这些 pod 的网络连接，而无需公开每个 pod 的实际专用 IP 地址。您可以通过服务使应用程序在集群或公共因特网中可用。</dd>
+<dd>服务是 Kubernetes 资源，可将一组 pod 分组在一起，并提供与这些 pod 的网络连接，而无需公开每个 pod 的实际专用 IP 地址。您可以通过服务使应用程序在集群或公用因特网中可用。</dd>
 
 <dt>部署</dt>
 <dd>部署是一种 Kubernetes 资源，在其中可指定运行应用程序所需的其他资源或功能的信息，例如服务、持久性存储器或注释。在配置 YAML 文件中记录部署，然后将其应用于集群。Kubernetes 主节点会配置资源，并将容器部署到具有可用容量的工作程序节点上的 pod 中。</br></br>
-定义应用程序的更新策略，包括在滚动更新期间要添加的 pod 数，以及允许同时不可用的 pod 数。执行滚动更新时，部署将检查更新是否有效，并在检测到故障时停止应用。</dd>
+为您的应用程序定义更新策略，包括在滚动更新期间要添加的 pod 数，以及可以同时不可用的 pod 数。执行滚动更新时，部署将检查更新是否有效，并在检测到故障时停止应用。</dd>
 
 <dt>Pod</dt>
 <dd>部署到集群中的每个容器化应用程序都由称为 pod 的 Kubernetes 资源进行部署、运行和管理。pod 代表 Kubernetes 集群中的小型可部署单元，用于将必须视为单个单元的容器分组在一起。在大多数情况下，每个容器都会部署到其自己的 pod 中。但是，应用程序可能需要将一个容器和其他辅助容器部署到一个 pod 中，以便可以使用相同的专用 IP 地址寻址到这些容器。</dd>
@@ -143,7 +143,7 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
 
 <dl>
   <dt>Kubernetes 主节点</dt>
-    <dd>Kubernetes 主节点负责的任务是管理集群中的所有计算资源、网络资源和存储资源。Kubernetes 主节点可确保将容器化应用程序和服务同等部署到集群中的工作程序节点。根据您配置应用程序和服务的方式，主节点会确定具有足够资源来满足应用程序需求的工作程序节点。</br></br>下表描述了 Kubernetes 主节点的组件。
+    <dd>Kubernetes 主节点负责的任务是管理集群中的所有计算资源、网络资源和存储资源。Kubernetes 主节点可确保将容器化应用程序和服务同等部署到集群中的工作程序节点。根据您配置应用程序和服务的方式，主节点确定具有足够资源来满足应用程序需求的工作程序节点。</br></br>下表描述了 Kubernetes 主节点的组件。
     <table>
     <caption>Kubernetes 主节点的组件</caption>
     <thead>
@@ -185,7 +185,7 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     <tr>
     <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
-    <td>对于运行 Kubernetes V1.10 或更高版本的集群，`ibm-master-proxy` 会将请求从工作程序节点转发到高可用性主节点副本的 IP 地址。在单专区集群中，主节点有三个副本，每个副本位于单独的主机上，使用一个主节点 IP 地址和域名。对于位于支持多专区的专区中的集群，主节点的三个副本在各专区中进行分布。因此，每个主节点都有自己的 IP 地址（已向 DNS 注册），并且整个集群主节点使用一个域名。</td>
+    <td>`ibm-master-proxy` 会将请求从工作程序节点转发到高可用性主节点副本的 IP 地址。在单专区集群中，主节点有三个副本，每个副本位于单独的主机上，使用一个主节点 IP 地址和域名。对于位于支持多专区的专区中的集群，主节点的三个副本在各专区中进行分布。因此，每个主节点都有自己的 IP 地址（已向 DNS 注册），并且整个集群主节点使用一个域名。</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
@@ -255,5 +255,5 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     </tbody></table></dd>
 </dl>
 
-想要了解如何将 {{site.data.keyword.containerlong_notm}} 与其他产品和服务配合使用？请查看一些[集成](/docs/containers?topic=containers-integrations#integrations)。
+想要了解如何将 {{site.data.keyword.containerlong_notm}} 与其他产品和服务配合使用？请查看一些[集成](/docs/containers?topic=containers-supported_integrations#supported_integrations)。
 {: tip}

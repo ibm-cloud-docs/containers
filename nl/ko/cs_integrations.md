@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, helm
 
@@ -51,7 +51,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>Grafeas</td>
-<td>[Grafeas ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://grafeas.io)는 소프트웨어 공급 체인 프로세스 동안 메타데이터를 검색, 저장 및 교환하는 일반적인 방법을 제공하는 오픈 소스 CI/CD 서비스입니다. 예를 들어 Grafeas를 앱 빌드 프로세스에 통합하는 경우 Grafeas는 앱이 프로덕션에 배포될 때 정보에 입각한 결정을 내릴 수 있도록 빌드 요청의 개시자, 취약성 스캔 결과 및 품질 보증 사인오프에 대한 정보를 저장할 수 있습니다. 감사에서 이 메타데이터를 사용하거나 소프트웨어 공급 체인에 대한 규제 준수를 증명할 수 있습니다.</td>
+<td>[Grafeas ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://grafeas.io)는 소프트웨어 공급 체인 프로세스 동안 메타데이터를 검색, 저장 및 교환하는 일반적인 방법을 제공하는 오픈 소스 CI/CD 서비스입니다. 예를 들어 Grafeas를 앱 빌드 프로세스에 통합하는 경우 Grafeas는 앱이 프로덕션에 배포될 때 정보에 입각한 결정을 내릴 수 있도록 빌드 요청의 개시자, 취약성 스캔 결과 및 품질 보증 사인오프에 대한 정보를 저장할 수 있습니다. 감사에서 이 메타데이터를 사용하거나 소프트웨어 공급 체인에 대한 규제 준수를 증명할 수 있습니다. </td>
 </tr>
 <tr>
 <td>Helm</td>
@@ -71,7 +71,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>Knative</td>
-<td>[Knative ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/knative/docs)는 Kubernetes 클러스터 맨 위에 최신의, 소스 중심으로 컨테이너화된 서버리스 앱을 작성할 수 있도록 Kubernetes의 기능을 확장한다는 목표로 IBM, Google, Pivotal, Red Hat, Cisco 등에서 개발한 오픈 소스 플랫폼입니다. 이 플랫폼은 프로그래밍 언어와 프레임워크 전반에서 일관된 접근 방식을 사용하여 개발자가 가장 중요한 것(소스 코드)에 집중할 수 있도록 Kubernetes에 워크로드를 빌드, 배치 및 관리하는 데 따르는 운영 부담을 추상화합니다. 자세한 정보는 [튜토리얼: 관리 Knative를 사용하여 Kubernetes 클러스터의 서버리스 앱 실행](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)을 참조하십시오.</td>
+<td>[Knative ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/knative/docs)는 Kubernetes 클러스터 맨 위에 최신의, 소스 중심으로 컨테이너화된 서버리스 앱을 작성할 수 있도록 Kubernetes의 기능을 확장한다는 목표로 IBM, Google, Pivotal, Red Hat, Cisco 등에서 개발한 오픈 소스 플랫폼입니다. 이 플랫폼은 프로그래밍 언어와 프레임워크 전반에서 일관된 접근 방식을 사용하여 개발자가 가장 중요한 것(소스 코드)에 집중할 수 있도록 Kubernetes에 워크로드를 빌드, 배치 및 관리하는 데 따르는 운영 부담을 추상화합니다. 자세한 정보는 [튜토리얼: 관리 Knative를 사용하여 Kubernetes 클러스터의 서버리스 앱 실행](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)을 참조하십시오. </td>
 </tr>
 </tbody>
 </table>
@@ -167,16 +167,15 @@ subcollection: containers
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td><a href="/docs/services/certificate-manager?topic=certificate-manager-gettingstarted" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 앱에 대한 SSL 인증서를 저장하고 관리할 수 있습니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">{{site.data.keyword.containerlong_notm}}에서 {{site.data.keyword.cloudcerts_long_notm}}를 사용하여 사용자 정의 도메인 TLS 인증서 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 문서"></a>를 참조하십시오. </td>
+<td><a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 앱에 대한 SSL 인증서를 저장하고 관리할 수 있습니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">{{site.data.keyword.containerlong_notm}}에서 {{site.data.keyword.cloudcerts_long_notm}}를 사용하여 사용자 정의 도메인 TLS 인증서 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 문서"></a>를 참조하십시오. </td>
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}}(베타)</td>
-  <td><a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 사용하여 데이터 메모리를 암호화할 수 있습니다. {{site.data.keyword.datashield_short}}는 Intel® Software Guard Extensions(SGX) 및 Fortanix® 기술과 통합되어 {{site.data.keyword.Bluemix_notm}} 컨테이너 워크로드 코드와 데이터가 사용 중에 보호됩니다. 앱 코드와 데이터는 앱의 중요한 부분을 보호하는 작업자 노드의 신뢰할 수 있는 메모리 영역인 CPU 강화 엔클레이브에서 실행되므로 코드와 데이터를 기밀로 유지하고 수정하지 않고 유지하는 데 도움이 됩니다.
-</td>
+  <td><a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 사용하여 데이터 메모리를 암호화할 수 있습니다. {{site.data.keyword.datashield_short}}는 Intel® Software Guard Extensions(SGX) 및 Fortanix® 기술과 통합되어 {{site.data.keyword.Bluemix_notm}} 컨테이너 워크로드 코드와 데이터가 사용 중에 보호됩니다. 앱 코드와 데이터는 앱의 중요한 부분을 보호하는 작업자 노드의 신뢰할 수 있는 메모리 영역인 CPU 강화 엔클레이브에서 실행되므로 코드와 데이터를 기밀로 유지하고 수정하지 않고 유지하는 데 도움이 됩니다.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>클러스터 사용자 간에 이미지를 안전하게 저장하고 공유할 수 있는 보안된 Docker 이미지 저장소를 설정하십시오. 자세한 정보는 <a href="/docs/services/Registry?topic=registry-index" target="_blank">{{site.data.keyword.registrylong}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
+  <td>클러스터 사용자 간에 이미지를 안전하게 저장하고 공유할 수 있는 보안된 Docker 이미지 저장소를 설정하십시오. 자세한 정보는 <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -214,7 +213,7 @@ subcollection: containers
 </tr>
 <tr>
   <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#GettingStarted)는 Kubernetes 지속적 볼륨(PV)을 사용하여 앱에 추가할 수 있는 지속적, 고성능 iSCSI 스토리지입니다. 블록 스토리지를 사용하여 단일 구역에 Stateful 앱을 배치하거나 단일 팟(Pod)에 대한 고성능 스토리지로 사용합니다. 클러스터에서 블록 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} Block Storage에 데이터 저장](/docs/containers?topic=containers-block_storage#block_storage)을 참조하십시오.,</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started)는 Kubernetes 지속적 볼륨(PV)을 사용하여 앱에 추가할 수 있는 지속적, 고성능 iSCSI 스토리지입니다. 블록 스토리지를 사용하여 단일 구역에 Stateful 앱을 배치하거나 단일 팟(Pod)에 대한 고성능 스토리지로 사용합니다. 클러스터에서 블록 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} Block Storage에 데이터 저장](/docs/containers?topic=containers-block_storage#block_storage)을 참조하십시오.,</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -222,12 +221,11 @@ subcollection: containers
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-gettingstarted#gettingstarted)는 Kubernetes 지속적 볼륨을 사용하여 앱에 추가할 수 있는 지속적이고 빠르며 유연한 네트워크 연결 NFS 기반 파일 스토리지입니다. 워크로드의 요구사항을 충족하는 GB 크기와 IOPS를 사용하여 사전정의된 스토리지 계층 중에서 선택할 수 있습니다. 클러스터에서 파일 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} File Storage에 데이터 저장](/docs/containers?topic=containers-file_storage#file_storage)을 참조하십시오.</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started)는 Kubernetes 지속적 볼륨을 사용하여 앱에 추가할 수 있는 지속적이고 빠르며 유연한 네트워크 연결 NFS 기반 파일 스토리지입니다. 워크로드의 요구사항을 충족하는 GB 크기와 IOPS를 사용하여 사전정의된 스토리지 계층 중에서 선택할 수 있습니다. 클러스터에서 파일 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} File Storage에 데이터 저장](/docs/containers?topic=containers-file_storage#file_storage)을 참조하십시오.</td>
   </tr>
   <tr>
     <td>Portworx</td>
-    <td>[Portworx ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://portworx.com/products/introduction/)는 컨테이너화된 데이터베이스와 기타 stateful 앱에 대한 지속적 스토리지를 관리하거나 다중 구역 간 팟(Pod) 사이의 데이터를 공유하는 데 사용할 수 있는 고가용성 소프트웨어 정의 스토리지 솔루션입니다.
-Helm 차트에 Portworx를 설치하고 Kubernetes 지속적 볼륨을 사용하여 앱에 스토리지를 프로비저닝할 수 있습니다. 클러스터에 Portworx를 설정하는 방법에 대한 자세한 정보는 [Portworx를 사용하는 소프트웨어 정의 스토리지(SDS)에 데이터 저장](/docs/containers?topic=containers-portworx#portworx)을 참조하십시오.</td>
+    <td>[Portworx ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://portworx.com/products/introduction/)는 컨테이너화된 데이터베이스와 기타 stateful 앱에 대한 지속적 스토리지를 관리하거나 다중 구역 간 팟(Pod) 사이의 데이터를 공유하는 데 사용할 수 있는 고가용성 소프트웨어 정의 스토리지 솔루션입니다. Helm 차트에 Portworx를 설치하고 Kubernetes 지속적 볼륨을 사용하여 앱에 스토리지를 프로비저닝할 수 있습니다. 클러스터에 Portworx를 설정하는 방법에 대한 자세한 정보는 [Portworx를 사용하는 소프트웨어 정의 스토리지(SDS)에 데이터 저장](/docs/containers?topic=containers-portworx#portworx)을 참조하십시오.</td>
   </tr>
 </tbody>
 </table>
@@ -316,8 +314,7 @@ Watson AI, 데이터, 보안 및 IoT(Internet of Things) 등의 분야에서 추
      ```
      {: pre}
 
-4.  `ibmcloud ks cluster-service-bind` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)을 사용하여 클러스터에 서비스를 추가하십시오. {{site.data.keyword.Bluemix_notm}} IAM 사용 서비스의 경우, 앞에서 작성한 Cloud Foundry 별명을 사용해야 합니다. IAM 사용 서비스의 경우, 기본 **작성자** 서비스 액세스 역할을 사용하거나 `--role` 플래그로 서비스 액세스 역할을 지정할 수 있습니다. 이 명령은 서비스 인스턴스의 서비스 키를 작성합니다. 또는 `--key` 플래그를 포함하여 기존 서비스 키 인증 정보를 사용할 수 있습니다.
-    `--key` 플래그를 사용하지 않는 경우, `--role` 플래그를 포함하지 마십시오.
+4.  `ibmcloud ks cluster-service-bind` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)을 사용하여 클러스터에 서비스를 추가하십시오. {{site.data.keyword.Bluemix_notm}} IAM 사용 서비스의 경우, 앞에서 작성한 Cloud Foundry 별명을 사용해야 합니다. IAM 사용 서비스의 경우, 기본 **작성자** 서비스 액세스 역할을 사용하거나 `--role` 플래그로 서비스 액세스 역할을 지정할 수 있습니다. 이 명령은 서비스 인스턴스의 서비스 키를 작성합니다. 또는 `--key` 플래그를 포함하여 기존 서비스 키 인증 정보를 사용할 수 있습니다. `--key` 플래그를 사용하지 않는 경우, `--role` 플래그를 포함하지 마십시오.
     ```
     ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
     ```
@@ -710,7 +707,7 @@ Helm 차트를 배치하려면 로컬 시스템에 Helm CLI를 설치하고 클�
 4.  설치가 완료되었는지 확인하십시오.
     1.  Tiller 서비스 계정이 작성되었는지 확인하십시오.
         ```
-        kubectl get serviceaccount -n kube-system | grep tiller
+        kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
 
@@ -951,7 +948,7 @@ Tiller 이미지를 로컬 시스템으로 가져오고 이를 {{site.data.keywo
 {: #helm_links}
 
 * strongSwan Helm 차트를 사용하려면 [strongSwan IPSec VPN 서비스 Helm 차트와 VPN 연결 설정](/docs/containers?topic=containers-vpn#vpn-setup)을 참조하십시오.
-* {{site.data.keyword.Bluemix_notm}}에서 사용할 수 있는 사용 가능한 Helm 차트는 콘솔의 [Helm 차트 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts)에서 확인하십시오.
+* {{site.data.keyword.Bluemix_notm}}에서 사용할 수 있는 사용 가능한 Helm 차트는 콘솔의 [Helm 차트 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/solutions/helm-charts)에서 확인하십시오.
 * <a href="https://docs.helm.sh/helm/" target="_blank">Helm 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>에서 Helm 차트를 설정하고 관리하는 데 사용되는 Helm 명령에 대해 자세히 알아보십시오.
 * [Kubernetes Helm 차트를 사용하여 배치 속도를 향상 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/)시키는 방법에 대해 자세히 알아보십시오.
 

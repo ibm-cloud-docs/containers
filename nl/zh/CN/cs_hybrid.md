@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -32,7 +32,7 @@ subcollection: containers
 如果您有 {{site.data.keyword.Bluemix}} Private 帐户，那么可以将其用于精选 {{site.data.keyword.Bluemix_notm}} 服务，包括 {{site.data.keyword.containerlong}}。有关更多信息，请参阅[跨 {{site.data.keyword.Bluemix_notm}} Private 和 IBM Public Cloud 的混合体验 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://ibm.biz/hybridJune2018)。
 {: shortdesc}
 
-您已了解了 [{{site.data.keyword.Bluemix_notm}} 产品](/docs/containers?topic=containers-cs_ov#differentiation)。现在，可以[连接公共云和私有云](#hybrid_vpn)，并可[复用公共容器的专用包](#hybrid_ppa_importer)。
+了解 [{{site.data.keyword.Bluemix_notm}} 产品](/docs/containers?topic=containers-cs_ov#differentiation)，并为[在云上运行的工作负载](/docs/containers?topic=containers-strategy#cloud_workloads)制定 Kubernetes 策略。现在，可以[连接公共云和私有云](#hybrid_vpn)，并可[复用公共容器的专用包](#hybrid_ppa_importer)。
 
 ## 使用 strongSwan VPN 连接公共云和私有云
 {: #hybrid_vpn}
@@ -94,6 +94,11 @@ subcollection: containers
 
 8.  针对要连接的每个集群，重复上述步骤。
 
+**接下来要做什么？**
+
+*   [在公共集群中运行许可软件映像](#hybrid_ppa_importer)。
+*   要管理多个云 Kubernetes 集群（如跨 {{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_notm}} Private），请查看 [IBM Multicloud Manager ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html)。
+
 
 ## 在公共 Kubernetes 容器中运行 {{site.data.keyword.Bluemix_notm}} Private 映像
 {: #hybrid_ppa_importer}
@@ -117,7 +122,7 @@ subcollection: containers
 - [安装 {{site.data.keyword.registryshort}} CLI 插件 (`ibmcloud cr`)](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install)。
 - [在 {{site.data.keyword.registryshort}} 中设置名称空间](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup)，或通过运行 `ibmcloud cr namespaces` 来检索现有名称空间。
 - [设定 `kubectl` CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-- [在集群中安装 Helm CLI 并设置 Tiller](/docs/containers?topic=containers-integrations#helm)。
+- [在集群中安装 Helm CLI 并设置 Tiller](/docs/containers?topic=containers-helm#public_helm_install)。
 
 要在 {{site.data.keyword.Bluemix_notm}} Public 的集群中部署 {{site.data.keyword.Bluemix_notm}} Private 映像，请执行以下操作：
 

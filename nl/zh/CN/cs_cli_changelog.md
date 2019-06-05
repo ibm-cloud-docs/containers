@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -45,16 +45,41 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
+<td>0.2.102</td>
+<td>2019 年 4 月 15 日</td>
+<td>添加了 [`ibmcloud ks nlb-dns` 命令组](/docs/containers?topic=containers-cs_cli_reference#nlb-dns)（用于注册和管理网络负载均衡器 (NLB) IP 地址的主机名）和 [`ibmcloud ks nlb-dns-monitor` 命令组](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_nlb-dns-monitor)（用于创建和修改 NLB 主机名的运行状况检查监视器）。有关更多信息，请参阅[向 DNS 主机名注册 NLB IP](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)。</td>
+</tr>
+<tr>
+<td>0.2.99</td>
+<td>2019 年 4 月 9 日</td>
+<td><ul>
+<li>更新了帮助文本。</li>
+<li>将 Go 版本更新为 1.12.2。</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.95</td>
+<td>2019 年 4 月 3 日</td>
+<td><ul>
+<li>添加了对受管集群附加组件的版本控制支持。</li>
+<ul><li>添加了 [<code>ibmcloud ks addon-versions</code>](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions) 命令。</li>
+<li>向 [ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable) 命令添加了 <code>--version</code> 标志。</li></ul>
+<li>更新了帮助文本的翻译。</li>
+<li>更新了帮助文本中文档的短链接。</li>
+<li>修复了以不正确的格式显示 JSON 错误消息的错误。</li>
+<li>修复了在某些命令上使用静默标志 (`-s`) 会阻止显示错误的错误。</li>
+</ul></td>
+</tr>
+<tr>
 <td>0.2.80</td>
 <td>2019 年 3 月 19 日</td>
 <td><ul>
-<li>在[启用 VRF 的帐户](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)中运行 Kubernetes V1.11 或更高版本的标准集群中，添加了对启用[通过服务端点进行的主节点与工作程序之间通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)的支持。有关如何使用以下命令的信息，请参阅[设置专用服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)和[设置公共服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)。<ul>
+<li>在[启用 VRF 的帐户](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)中运行 Kubernetes V1.11 或更高版本的标准集群中，添加了对启用[通过服务端点进行的主节点与工作程序之间通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)的支持。<ul>
 <li>向 [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) 命令添加了 `--private-service-endpoint` 和 `--public-service-endpoint` 标志。</li>
 <li>向 <code>ibmcloud ks cluster-get</code> 的输出添加了 **Public Service Endpoint URL** 和 **Private Service Endpoint URL** 字段。</li>
 <li>添加了 [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint) 命令。</li>
 <li>添加了 [<code>ibmcloud ks cluster-feature-enable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_public_service_endpoint) 命令。</li>
-<li>添加了 [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable_public_service_endpoint) 命令。</li>
-<li>添加了 [<code>ibmcloud ks cluster-feature-ls</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls) 命令。</li>
+<li>添加了 [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable) 命令。</li>
 </ul></li>
 <li>更新了文档和翻译。</li>
 <li>将 Go 版本更新为 1.11.6。</li>

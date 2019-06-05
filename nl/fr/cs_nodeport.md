@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Exposition d'applications avec des ports de noeud (NodePort)
+# Test de l'accès à des applications avec des ports de noeud (NodePort)
 {: #nodeport}
 
 Rendez votre application conteneurisée accessible sur Internet en utilisant l'adresse IP publique de n'importe quel noeud worker dans un cluster Kubernetes et en exposant un port de noeud (NodePort). Utilisez cette option pour tester {{site.data.keyword.containerlong}} et pour un accès public à court terme.
@@ -51,7 +51,7 @@ Le diagramme suivant montre comment la communication est dirigée vers une appli
 
 4. La demande est transmise à l'adresse IP privée du pod sur lequel l'application est déployée. Si plusieurs instances d'application sont déployées dans le cluster, le service NodePort achemine les demandes entre les pods d'application.
 
-L'adresse IP publique du noeud worker n'est pas permanente. Lorsqu'un noeud worker est supprimé ou recréé, une nouvelle adresse IP publique lui est affectée. Vous pouvez utiliser le service NodePort pour tester l'accès public à votre application ou lorsque l'accès public n'est nécessaire que pour un temps très bref. Si vous avez besoin d'une adresse IP publique stable et d'une plus grande disponibilité de votre service, exposez votre application en utilisant un [service LoadBalancer](/docs/containers?topic=containers-loadbalancer) ou [Ingress](/docs/containers?topic=containers-ingress).
+L'adresse IP publique du noeud worker n'est pas permanente. Lorsqu'un noeud worker est supprimé ou recréé, une nouvelle adresse IP publique lui est affectée. Vous pouvez utiliser le service NodePort pour tester l'accès public à votre application ou lorsque l'accès public n'est nécessaire que pour un temps très bref. Si vous avez besoin d'une adresse IP publique stable et d'une plus grande disponibilité de votre service, exposez votre application en utilisant un [service équilibreur de charge de réseau (NLB)](/docs/containers?topic=containers-loadbalancer) ou [Ingress](/docs/containers?topic=containers-ingress).
 {: note}
 
 <br />
@@ -137,8 +137,8 @@ Une fois l'application déployée, vous pouvez utiliser l'adresse IP publique de
 
     ```
     ID                                                Public IP   Private IP    Size     State    Status
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u3c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u3c.2x4  normal   Ready
     ```
     {: screen}
 
@@ -168,7 +168,7 @@ Une fois l'application déployée, vous pouvez utiliser l'adresse IP publique de
 
     Dans cet exemple, la valeur de NodePort est `30872`.
 
-    Si la section **Endpoints** affiche `<none>`, vérifiez la clé `<selectorkey>` et le port `<selectorvalue>` que vous avez utilisés dans la section `spec.selector` du service NodePort. Assurez-vous qu'ils sont identiques à la paire _clé/valeur_ que vous avez utilisée à la section `spec.template.metadata.labels` de votre fichier YAML de déploiement.
+    Si la section **Endpoints** affiche `<none>`, vérifiez les valeurs `<selectorkey>` et `<selectorvalue>` que vous avez utilisées dans la section `spec.selector` du service NodePort. Assurez-vous qu'elles sont identiques à la paire _clé/valeur_ que vous avez utilisée à la section `spec.template.metadata.labels` de votre fichier YAML de déploiement.
     {: note}
 
 3.  Formez l'adresse URL avec l'une des adresses IP du noeud worker et la valeur de NodePort. Exemple : `http://192.0.2.23:30872`

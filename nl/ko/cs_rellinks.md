@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -75,6 +75,7 @@ subcollection: containers
 **통합 오픈 소스 기술**
 
 - [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/)
+- [Kubernetes CLI 문서(`kubectl`) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubectl.docs.kubernetes.io/)
 - [Knative 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/knative/docs)
 - [Docker 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>(Kubernetes 패키지 관리용)
@@ -96,7 +97,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [{{site.data.keyword.registryshort_notm}} 문서](/docs/services/Registry?topic=registry-index)
+- [{{site.data.keyword.registryshort_notm}} 문서](/docs/services/Registry?topic=registry-getting-started)
 - [{{site.data.keyword.registryshort_notm}}REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://{DomainName}/apidocs/container-registry)
 - [Vulnerability Advisor REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://{DomainName}/apidocs/container-registry/va)
 

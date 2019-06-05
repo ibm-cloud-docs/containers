@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -75,6 +75,7 @@ subcollection: containers
 **集成开放式源代码技术**
 
 - [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/)
+- [Kubernetes CLI 文档 (`kubectl`) ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubectl.docs.kubernetes.io/)
 - [Knative 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/knative/docs)
 - [Docker 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>，了解 Kubernetes 软件包管理的信息
@@ -96,7 +97,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [{{site.data.keyword.registryshort_notm}} 文档](/docs/services/Registry?topic=registry-index)
+- [{{site.data.keyword.registryshort_notm}} 文档](/docs/services/Registry?topic=registry-getting-started)
 - [{{site.data.keyword.registryshort_notm}}REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://{DomainName}/apidocs/container-registry)
 - [漏洞顾问程序 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://{DomainName}/apidocs/container-registry/va)
 

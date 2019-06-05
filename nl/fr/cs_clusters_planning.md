@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -56,31 +56,31 @@ Par défaut, votre cluster à zone unique est configuré avec un pool de noeuds 
 Lorsque vous ajoutez d'autres noeuds worker, les instances d'application peuvent être réparties sur plusieurs noeuds worker. En cas de défaillance d'un noeud worker, les instances d'application sur les noeuds worker disponibles continuent à s'exécuter. Kubernetes replanifie automatiquement les pods des noeuds worker indisponibles pour que les performances et la capacité de votre application soient assurées. Pour vérifier que vos pods sont répartis uniformément sur les noeuds worker, implémentez l'[affinité des pods](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
 
 **Puis-je convertir mon cluster à zone unique en cluster à zones multiples ?**</br>
-Oui, à condition que le cluster se trouve dans l'une des [métropoles à zones multiples prises en charge](/docs/containers?topic=containers-regions-and-zones#zones). Voir [Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker](/docs/containers?topic=containers-update#standalone_to_workerpool).
+Oui, à condition que le cluster se trouve dans l'une des [agglomérations à zones multiples prises en charge](/docs/containers?topic=containers-regions-and-zones#zones). Voir [Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 **Dois-je utiliser des clusters à zones multiples ?**</br>
 Non. Vous pouvez créer autant de clusters à zone unique que vous le souhaitez. En effet, vous pouvez même préférer des clusters à zone unique pour une gestion simplifiée ou si votre cluster doit résider dans une [ville à zone unique](/docs/containers?topic=containers-regions-and-zones#zones).
 
 **Puis-je disposer d'un maître à haute disponibilité dans une zone unique ?**</br>
-Oui, avec les clusters exécutant Kubernetes version 1.10 ou ultérieure. Dans une zone unique, votre maître est hautement disponible et comprend des répliques sur des hôtes physiques distincts pour le serveur d'API Kubernetes, le composant etcd, le planificateur et le gestionnaire de contrôleurs afin de les protéger en cas d'indisponibilité due par exemple à une mise à jour du maître. Pour vous protéger en cas de défaillance d'une zone, vous pouvez :
+Oui. Dans une zone unique, votre maître est hautement disponible et comprend des répliques sur des hôtes physiques distincts pour le serveur d'API Kubernetes, le composant etcd, le planificateur et le gestionnaire de contrôleurs afin de les protéger en cas d'indisponibilité due par exemple à une mise à jour du maître. Pour vous protéger en cas de défaillance d'une zone, vous pouvez :
 * [Créer un cluster dans une zone compatible avec plusieurs zones](/docs/containers?topic=containers-plan_clusters#multizone), dans laquelle le maître est réparti entre plusieurs zones.
 * [Créer plusieurs clusters](#multiple_clusters) et les connecter avec un équilibreur de charge global.
 
 ## Cluster à zones multiples
 {: #multizone}
 
-Avec {{site.data.keyword.containerlong}}, vous avez la possibilité de créer des clusters à zones multiples. Vos utilisateurs risquent moins de rencontrer des indisponibilités lorsque vous répartissez vos applications entre plusieurs zones et noeuds worker en utilisant un pool de noeuds worker. Les fonctions intégrées, telles que l'équilibrage de charge, augmentent la résilience en cas de défaillance potentielle d'une zone avec des hôtes, des réseaux ou des applications. Si les ressources d'une zone sont indisponibles, les charges de travail de vos clusters seront opérationnelles dans les autres zones. **Remarque** : seuls les clusters à zone unique sont disponibles pour les instances {{site.data.keyword.Bluemix_dedicated_notm}}.
+Avec {{site.data.keyword.containerlong_notm}}, vous avez la possibilité de créer des clusters à zones multiples. Vos utilisateurs risquent moins de rencontrer des indisponibilités lorsque vous répartissez vos applications entre plusieurs zones et noeuds worker en utilisant un pool de noeuds worker. Les fonctions intégrées, telles que l'équilibrage de charge, augmentent la résilience en cas de défaillance potentielle d'une zone avec des hôtes, des réseaux ou des applications. Si les ressources d'une zone sont indisponibles, les charges de travail de vos clusters seront opérationnelles dans les autres zones.
 {: shortdesc}
 
-**Qu'est-ce qu'un pool de noeuds worker ?**</br>
-Un pool de noeuds worker est une collection de noeuds worker de même type, par exemple type de machine, UC et mémoire. Lorsque vous créez un cluster, un pool de noeuds worker par défaut est automatiquement créé pour vous. Pour répartir les noeuds worker de votre pool entre plusieurs zones, ajouter des noeuds worker dans le pool ou mettre à jour des noeuds worker, vous pouvez utiliser les nouvelles commandes `ibmcloud ks worker-pool`.
+**Qu'est-ce qu'un pool worker ?**</br>
+Un pool worker est une collection de noeuds worker de même type, par exemple type de machine, UC et mémoire. Lorsque vous créez un cluster, un pool worker par défaut est automatiquement créé pour vous. Pour répartir les noeuds worker de votre pool entre plusieurs zones, ajouter des noeuds worker dans le pool ou mettre à jour des noeuds worker, vous pouvez utiliser les nouvelles commandes `ibmcloud ks worker-pool`.
 
 **Puis-je continuer à utiliser des noeuds worker autonomes ?**</br>
 L'ancienne configuration de noeuds worker autonomes est prise en charge, mais elle est dépréciée. Veillez à [ajouter un pool de noeuds worker à votre cluster](/docs/containers?topic=containers-clusters#add_pool), puis [utilisez des pools de noeuds worker](/docs/containers?topic=containers-update#standalone_to_workerpool) afin d'organiser vos noeuds worker au lieu d'utiliser des noeuds worker autonomes.
 
 **Puis-je convertir mon cluster à zone unique en cluster à zones multiples ?**</br>
-Oui, à condition que le cluster se trouve dans l'une des [métropoles à zones multiples prises en charge](/docs/containers?topic=containers-regions-and-zones#zones). Voir [Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker](/docs/containers?topic=containers-update#standalone_to_workerpool).
+Oui, à condition que le cluster se trouve dans l'une des [agglomérations à zones multiples prises en charge](/docs/containers?topic=containers-regions-and-zones#zones). Voir [Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 ### Pouvez-vous m'en dire davantage sur la configuration d'un cluster à zones multiples ?
@@ -95,11 +95,11 @@ La répartition de vos charges de travail sur 3 zones permet d'assurer la haute 
 
 Supposons que vous ayez besoin d'un noeud worker à 6 coeurs pour traiter la charge de travail de votre application. Voici les options à votre disposition pour garantir une meilleure disponibilité de votre cluster :
 
-- **Dupliquer vos ressources dans une autre zone :** cette option vous laisse 2 noeuds worker, chacun avec 6 coeurs dans chaque zone, soit un total de 12 coeurs. </br>
-- **Répartir les ressources sur 3 zones :** avec cette option, vous déployez 3 coeurs par zone, ce qui vous laisse une capacité totale de 9 coeurs. Pour gérer votre charge de travail, deux zones doivent être opérationnelles en même temps. Si l'une des zones est indisponible, les deux autres zones peuvent traiter votre charge de travail. Si deux zones sont indisponibles, il reste trois coeurs opérationnels pour traiter votre charge de travail. Le déploiement de 3 coeurs par zone signifie des machines plus petites et donc une réduction de coût pour vous.</br>
+- **Dupliquer vos ressources dans une autre zone :** cette option vous laisse 2 noeuds worker, chacun avec 6 coeurs dans chaque zone, soit un total de 12 coeurs. </br> 
+- **Répartir les ressources sur 3 zones :** avec cette option, vous déployez 3 coeurs par zone, ce qui vous laisse une capacité totale de 9 coeurs. Pour gérer votre charge de travail, deux zones doivent être opérationnelles en même temps. Si l'une des zones est indisponible, les deux autres zones peuvent traiter votre charge de travail. Si deux zones sont indisponibles, il reste trois coeurs opérationnels pour traiter votre charge de travail. Le déploiement de 3 coeurs par zone signifie des machines plus petites et donc une réduction de coût pour vous. </br>
 
 **Comment est configuré le maître Kubernetes ?** </br>
-Si vous créez un cluster à zones multiples en [sélectionnant des métropoles à zones multiples](/docs/containers?topic=containers-regions-and-zones#zones), un maître à haute disponibilité est automatiquement déployé et trois répliques sont réparties entre les zones de la métropole. Par exemple, si le cluster se trouve dans les zones `dal10`, `dal12` ou `dal13`, les répliques du maître Kubernetes sont réparties dans chaque zone de la métropole à zones multiples Dallas.
+Lorsque vous créez un cluster dans une [agglomération à zones multiples](/docs/containers?topic=containers-regions-and-zones#zones), un maître à haute disponibilité Kubernetes est automatiquement déployé et trois répliques sont réparties entre les zones de l'agglomération. Par exemple, si le cluster se trouve dans les zones `dal10`, `dal12` ou `dal13`, les répliques du maître Kubernetes sont réparties dans chaque zone de la métropole à zones multiples Dallas.
 
 **Que se passe-t-il si le maître Kubernetes devient indisponible ?** </br>
 Le [maître Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) est le composant principal qui permet de garder votre cluster opérationnel. Le maître stocke les ressources du cluster et leurs configurations dans la base de données etcd qui assure le bon fonctionnement de votre cluster. Le serveur d'API Kubernetes correspond au point d'entrée principal pour toutes les demandes de gestion de cluster des noeuds worker au maître, ou lorsque vous souhaitez interagir avec les ressources de votre cluster.<br><br>En cas de défaillance du maître, vos charges de travail continuent à s'exécuter sur les noeuds worker, mais vous ne pouvez pas utiliser des commandes `kubectl` pour gérer les ressources de votre cluster ou afficher l'état de santé du cluster tant que le serveur d'API Kubernetes dans le maître n'est pas opérationnel. Si un pod tombe en panne lors d'une indisponibilité du maître, le pod ne peut pas être replanifié tant que le noeud worker n'a pas rétabli le contact avec le serveur d'API Kubernetes.<br><br>Lors d'une indisponibilité du maître, vous pouvez toujours exécuter des commandes `ibmcloud ks` pour l'API {{site.data.keyword.containerlong_notm}} pour gérer vos ressources d'infrastructure, telles que les noeuds worker ou les réseaux locaux virtuels (VLAN). Si vous modifiez la configuration actuelle du cluster en ajoutant ou en retirant des noeuds worker dans le cluster, vos modifications ne sont pas appliquées tant que le maître n'est pas opérationnel.
@@ -111,7 +111,7 @@ Ne pas redémarrer ou réamorcer un noeud worker pendant la durée d'indisponibi
 Pour protéger votre cluster en cas de défaillance du maître ou dans les régions où les clusters à zones multiples ne sont pas disponibles, vous pouvez [configurer plusieurs clusters et les connecter avec un équilibreur de charge global](#multiple_clusters).
 
 **Dois-je faire quelque chose pour que le maître puisse communiquer avec les noeuds worker entre les différentes zones ?**</br>
-Oui. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Oui. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 **Comment laisser les utilisateurs accéder à mon application à partir de l'Internet public ?**</br>
 Vous pouvez exposer vos applications en utilisant un équilibreur de charge d'application (ALB) Ingress ou le service d'équilibreur de charge.
@@ -121,7 +121,7 @@ Vous pouvez exposer vos applications en utilisant un équilibreur de charge d'ap
 - **Services d'équilibreur de charge :** les services d'équilibreur de charge sont configurés dans une seule zone uniquement. Les demandes entrantes dans votre application sont dirigées depuis cette zone vers toutes les instances d'application situées dans d'autres zones. Si cette zone devient indisponible, votre application risque d'être inaccessible sur Internet. Vous pouvez configurer des services d'équilibreur de charge supplémentaires dans d'autres zones pour tenir compte d'une défaillance de zone unique. Pour plus d'informations, voir [Services d'équilibreur de charge](/docs/containers?topic=containers-loadbalancer#multi_zone_config) à haute disponibilité.
 
 **Puis-je configurer du stockage persistant pour mon cluster à zones multiples ?**</br>
-Pour le stockage persistant à haute disponibilité, utilisez un service de cloud, tel que [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage). Vous pouvez également recourir à une solution de stockage défini par logiciel (SDS), telle que [Portworx](/docs/containers?topic=containers-portworx#portworx) qui utilise des [machines SDS](#sds). Pour plus d'informations, voir [Comparaison des options de stockage persistant pour les clusters à zones multiples](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Pour le stockage persistant à haute disponibilité, utilisez un service de cloud, tel que [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). Vous pouvez également recourir à une solution de stockage défini par logiciel (SDS), telle que [Portworx](/docs/containers?topic=containers-portworx#portworx) qui utilise des [machines SDS](#sds). Pour plus d'informations, voir [Comparaison des options de stockage persistant pour les clusters à zones multiples](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 Le stockage de fichiers NFS et le stockage par blocs ne peuvent pas être partagés entre les zones. Les volumes persistants ne peuvent être utilisés que dans la zone où est située l'unité de stockage réelle. Si vous disposez de stockage de fichiers NFS ou de stockage par blocs dans votre cluster que vous souhaitez continuer à utiliser, vous devez appliquer des libellés de région et de zone aux volumes persistants existants. Ces libellés permettent au planificateur kube-scheduler de déterminer où planifier une application qui utilise le volume persistant. Exécutez la commande suivante et remplacez `<mycluster>` par le nom de votre cluster.
 
@@ -131,7 +131,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 {: pre}
 
 **J'ai créé mon cluster à zones multiples. Pourquoi n'y a-t-il qu'une seule zone ? Comment ajouter des zones à mon cluster ?**</br>
-Si vous [créez votre cluster à zones multiples à l'aide de l'interface de ligne de commande](/docs/containers?topic=containers-clusters#clusters_cli), le cluster est créé, mais vous devez ajouter des zones au pool de noeuds worker pour finaliser le processus. Pour couvrir plusieurs zones, votre cluster doit figurer dans une [métropole à plusieurs zones](/docs/containers?topic=containers-regions-and-zones#zones). Pour ajouter une zone à votre cluster et répartir les noeuds worker sur différentes zones, voir [Ajouter une zone dans votre cluster](/docs/containers?topic=containers-clusters#add_zone).
+Si vous [créez votre cluster à zones multiples à l'aide de l'interface de ligne de commande](/docs/containers?topic=containers-clusters#clusters_cli), le cluster est créé, mais vous devez ajouter des zones au pool de noeuds worker pour finaliser le processus. Pour couvrir plusieurs zones, votre cluster doit figurer dans une [agglomération à plusieurs zones](/docs/containers?topic=containers-regions-and-zones#zones). Pour ajouter une zone à votre cluster et répartir les noeuds worker sur différentes zones, voir [Ajouter une zone dans votre cluster](/docs/containers?topic=containers-clusters#add_zone).
 
 ### Quels sont les changements par rapport à la façon dont je gère mes clusters actuellement ?
 {: #mz_new_ways}
@@ -187,7 +187,7 @@ Vous pouvez configurer plusieurs clusters dans différentes régions d'une géol
 **Pour configurer un équilibreur de charge global pour plusieurs clusters :**
 
 1. [Créez des clusters](/docs/containers?topic=containers-clusters#clusters) dans plusieurs zones ou régions.
-2. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+2. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 3. Dans chaque cluster, exposez vos applications en utilisant un [équilibreur de charge d'application (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) ou un [service d'équilibreur de charge](/docs/containers?topic=containers-loadbalancer).
 4. Pour chaque cluster, répertoriez les adresses IP publiques pour vos équilibreurs de charge d'application et vos services d'équilibreur de charge.
    - Pour répertorier l'adresse IP de tous les équilibreurs de charge d'application publics présents dans votre cluster :
@@ -230,7 +230,7 @@ Disposez-vous déjà d'un cluster que vous voulez rendre privé uniquement ? Pou
 **Compte avec VRF activé, maître Kubernetes privé, noeuds worker à la fois sur VLAN public et privé**</br>
 Dans les clusters exécutant Kubernetes version 1.11 ou ultérieure, vous pouvez configurer le réseau de votre cluster pour utiliser des noeuds finaux de service public et privé. Après avoir activé le noeud final de service privé, le maître Kubernetes et vos noeuds worker communiquent toujours sur le VLAN privé via ce noeud final de service privé. Même si vous activez le noeud final de service public pour votre cluster, la communication entre le maître Kubernetes et les noeuds worker reste sur le VLAN privé. Après avoir activé le noeud final de service privé, vous ne pourrez plus le désactiver. Vous pouvez conserver le noeud final de service public pour l'accès sécurisé de votre maître Kubernetes sur Internet, par exemple pour exécuter des commandes `kubectl`, ou désactiver le noeud final de service public dans le cadre d'un cluster à noeud final de service privé uniquement.
 
-**Compte avec ou sans VRF activé, maître Kubernetes et noeuds worker sur VLAN privé uniquement**</br>
+**Compte sans VRF ou avec VRF activé, maître et noeuds worker Kubernetes sur VLAN privé uniquement**</br>
 Si vous avez configuré vos noeuds worker sur un VLAN privé uniquement, ces noeuds ne peuvent pas exposer automatiquement leurs services d'application sur le réseau public, et dans un compte où la fonction VRF n'est pas activée, ils ne peuvent pas non plus se connecter au maître. Vous devez configurer un dispositif de passerelle pour assurer la connectivité du réseau entre les noeuds worker et le maître.
 
 Pour les comptes sans VRF : si vous créez le cluster avec des VLAN publics et privés, vous ne pourrez plus retirer les VLAN publics de ce cluster par la suite. Le retrait de tous les VLAN publics d'un cluster peut provoquer l'arrêt de plusieurs composants du cluster. Créez plutôt un nouveau cluster sans VLAN public à la place.
@@ -287,17 +287,17 @@ Lorsque vous créez un cluster virtuel standard, vous devez décider si vous sou
 
 Les noeuds partagés sont généralement moins coûteux que les noeuds dédiés, car les coûts du matériel sous-jacent sont partagés entre plusieurs clients. Toutefois, lorsque vous choisissez entre noeuds partagés et noeud dédiés, n'hésitez pas à contacter votre service juridique pour déterminer le niveau d'isolement de l'infrastructure et de conformité requis par votre environnement d'application.
 
-Certaines versions sont disponibles uniquement pour un type de configuration de service. Par exemple, les machines virtuelles `m2c` sont disponibles uniquement avec une configuration de service partagé (`shared`).
+Certaines versions sont disponibles uniquement pour un type de configuration de service. Par exemple, les machines virtuelles `m3c` sont disponibles uniquement avec une configuration de service partagé (`shared`).
 {: note}
 
 **Quelles sont les fonctions générales des machines virtuelles ?**</br>
 Les machines virtuelles utilisent le disque local à la place d'un réseau SAN (Storage Area Network) pour plus de fiabilité. Un réseau SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Toutes les machines virtuelles sont fournies avec une vitesse réseau de 1000 Mbit/s, un stockage sur disque local principal de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local secondaire pour les données d'exécution de conteneur ou le `kubelet`. Le stockage local sur le noeud worker est conçu pour un traitement à court terme uniquement et le disque principal et le disque secondaire sont effacés lorsque vous mettez à jour ou rechargez le noeud worker. Pour les solutions de stockage persistant, voir [Planification de stockage persistant à haute disponibilité](/docs/containers?topic=containers-storage_planning#storage_planning).
 
-**Que se passe-t-il si je dispose de types de machine `u1c` ou `b1c` obsolètes ?**</br>
-Pour commencer à utiliser les types de machine `u2c` et `b2c`, [mettez à jour les types de machine en ajoutant des noeuds worker](/docs/containers?topic=containers-update#machine_type).
+**Que se passe-t-il si je dispose de types de machine plus anciennes ?**</br>
+Si votre cluster a des versions de noeud worker `x1c` obsolètes ou Ubuntu 16 `x2c` plus anciennes, vous pouvez  [mettre à jour votre cluster pour qu'il dispose de noeuds worker Ubuntu 18 `x3c`](/docs/containers?topic=containers-update#machine_type).
 
 **Quelles sont les versions de machine virtuelle disponibles ?**</br>
-Les types de machine varient en fonction de la zone. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Par exemple, les machines virtuelles `m2c` sont uniquement disponible à Dallas (`dal10, dal12, dal13`). Vous pouvez également passer en revue les types de machine [bare metal](#bm) ou [SDS](#sds).
+Les versions de noeud worker varient en fonction des zones. Le tableau suivant présente les versions les plus récentes, par exemple les versions des noeuds worker Ubuntu 18 `x3c`, par opposition aux versions de noeud worker Ubuntu 16 `x2c` plus anciennes. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [bare metal](#bm) ou [SDS](#sds).
 
 {: #vm-table}
 <table>
@@ -310,83 +310,83 @@ Les types de machine varient en fonction de la zone. Pour voir les types de mach
 </thead>
 <tbody>
 <tr>
-<td><strong>Virtuel, u2c.2x4</strong> : utilisez cette machine virtuelle de petite taille à des fins de test rapide, de démonstration de faisabilité et pour d'autres charges de travail légères.</td>
+<td><strong>Virtuel, u3c.2x4</strong> : utilisez cette machine virtuelle de petite taille à des fins de test rapide, de démonstration de faisabilité et pour d'autres charges de travail légères.</td>
 <td>2 / 4 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Virtuel, b2c.4x16</strong> : sélectionnez cette machine virtuelle équilibrée à des fins de test et de développement et pour d'autres charges de travail légères.</td>
+<td><strong>Virtuel, b3c.4x16</strong> : sélectionnez cette machine virtuelle équilibrée à des fins de test et de développement et pour d'autres charges de travail légères.</td>
 <td>4 / 16 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Virtuel, b2c.16x64</strong> : sélectionnez cette machine virtuelle équilibrée pour les charges de travail de taille moyenne.</td></td>
+<td><strong>Virtuel, b3c.16x64</strong> : sélectionnez cette machine virtuelle équilibrée pour les charges de travail de taille moyenne.</td></td>
 <td>16 / 64 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Virtuel, b2c.32x128</strong> : sélectionnez cette machine virtuelle équilibrée pour les charges de travail de taille moyenne à élevée, par exemple une base de données et un site Web dynamique avec de nombreux utilisateurs simultanés.</td>
+<td><strong>Virtuel, b3c.32x128</strong> : sélectionnez cette machine virtuelle équilibrée pour les charges de travail de taille moyenne à élevée, par exemple une base de données et un site Web dynamique avec de nombreux utilisateurs simultanés.</td>
 <td>32 / 128 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Virtuel, b2c.56x242</strong> : sélectionnez cette machine virtuelle équilibrée pour des charges de travail volumineuses, par exemple une base de données et plusieurs applications avec de nombreux utilisateurs simultanés.</td>
+<td><strong>Virtuel, b3c.56x242</strong> : sélectionnez cette machine virtuelle équilibrée pour des charges de travail volumineuses, par exemple une base de données et plusieurs applications avec de nombreux utilisateurs simultanés.</td>
 <td>56 / 242 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Virtuel, c2c.16x16</strong> : utilisez cette version lorsque vous souhaitez un juste équilibre entre les ressources de calcul du noeud worker pour les charges de travail légères.</td>
+<td><strong>Virtuel, c3c.16x16</strong> : utilisez cette version lorsque vous souhaitez un juste équilibre entre les ressources de calcul du noeud worker pour les charges de travail légères.</td>
 <td>16 / 16 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, c2c.16x32</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:2 entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail légères ou de taille moyenne.</td>
+<td><strong>Virtuel, c3c.16x32</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:2 entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail légères ou de taille moyenne.</td>
 <td>16 / 32 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, c2c.32x32</strong> : utilisez cette version lorsque vous souhaitez un juste équilibre entre les ressources de calcul du noeud worker pour les charges de travail de taille moyenne.</td>
+<td><strong>Virtuel, c3c.32x32</strong> : utilisez cette version lorsque vous souhaitez un juste équilibre entre les ressources de calcul du noeud worker pour les charges de travail de taille moyenne.</td>
 <td>32 / 32 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, c2c.32x64</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:2 entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail de taille moyenne.</td>
+<td><strong>Virtuel, c3c.32x64</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:2 entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail de taille moyenne.</td>
 <td>32 / 64 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Virtuel, m2c.8x64</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail légères ou de taille moyenne qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
+<td><strong>Virtuel, m3c.8x64</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail légères ou de taille moyenne qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
 <td>8 / 64 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, m2c.16x128</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de taille moyenne qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
+<td><strong>Virtuel, m3c.16x128</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de taille moyenne qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
 <td>16 / 128 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, m2c.30x240</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de taille moyenne à élevée qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
+<td><strong>Virtuel, m3c.30x240</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de taille moyenne à élevée qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
 <td>30 / 240 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, m2c.48x384</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de taille moyenne à élevée qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
+<td><strong>Virtuel, m3c.48x384</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de taille moyenne à élevée qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement en tant que service à matériel partagé (`--hardware shared`). </td>
 <td>48 / 384 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, m2c.56x448</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de grande taille qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
+<td><strong>Virtuel, m3c.56x448</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de grande taille qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement en tant que service à matériel partagé (`--hardware shared`). </td>
 <td>56 / 448 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, m2c.64x512</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de grande taille qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
+<td><strong>Virtuel, m3c.64x512</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de grande taille qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement en tant que service à matériel partagé (`--hardware shared`). </td>
 <td>64 / 512 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
@@ -415,7 +415,7 @@ Les serveurs bare metal sont facturés au mois. Si vous annulez un serveur bare 
 {: important}
 
 **Quelles versions bare metal puis-je commander ?**</br>
-Les types de machine varient en fonction de la zone. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [VM](#vm) ou [SDS](#sds).
+Les versions de noeud worker varient en fonction des zones. Le tableau suivant présente les versions les plus récentes, par exemple les versions des noeuds worker Ubuntu 18 `x3c`, par opposition aux versions de noeud worker Ubuntu 16 `x2c` plus anciennes. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [VM](#vm) ou [SDS](#sds).
 
 Les machines bare metal sont optimisées pour différents cas d'utilisation, par exemple les charges de travail à forte consommation de mémoire RAM, de données ou de processeur graphique (GPU).
 
@@ -438,43 +438,43 @@ Choisissez un type de machine avec la configuration de stockage adaptée à votr
 </thead>
 <tbody>
 <tr>
-<td><strong>Bare metal à forte consommation de mémoire RAM, mr1c.28x512</strong> : augmentez au maximum la mémoire RAM disponible pour vos noeuds worker.</td>
+<td><strong>Bare metal à forte consommation de mémoire RAM, mr3c.28x512</strong> : augmentez au maximum la mémoire RAM disponible pour vos noeuds worker. </td>
 <td>28 / 512 Go</td>
 <td>SATA 2 To / SSD 960 Go</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal GPU, mg1c.16x128</strong> : choisissez ce type de machine pour des charges de travail nécessitant de nombreux calculs mathématiques, tels que le calcul hautes performances, l'apprentissage automatique ou les applications en 3D. Cette version comporte 1 carte physique Tesla K80 avec 2 unités de traitement graphiques (GPU) par carte pour un total de 2 GPU.</td>
+<td><strong>Bare metal GPU, mg3c.16x128</strong> : choisissez ce type de machine pour des charges de travail nécessitant de nombreux calculs mathématiques, tels que le calcul hautes performances, l'apprentissage automatique ou les applications en 3D. Cette version comporte 1 carte physique Tesla K80 avec 2 unités de traitement graphiques (GPU) par carte pour un total de 2 GPU.</td>
 <td>16 / 128 Go</td>
 <td>SATA 2 To / SSD 960 Go</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal GPU, mg1c.28x256</strong> : choisissez ce type de machine pour des charges de travail nécessitant de nombreux calculs mathématiques, tels que le calcul hautes performances, l'apprentissage automatique ou les applications en 3D. Cette version possède 2 cartes physiques Tesla K80 avec 2 unités GPU par carte pour un total de 4 unités GPU.</td>
+<td><strong>Bare metal GPU, mg3c.28x256</strong> : choisissez ce type de machine pour des charges de travail nécessitant de nombreux calculs mathématiques, tels que le calcul hautes performances, l'apprentissage automatique ou les applications en 3D. Cette version possède 2 cartes physiques Tesla K80 avec 2 unités GPU par carte pour un total de 4 unités GPU.</td>
 <td>28 / 256 Go</td>
 <td>SATA 2 To / SSD 960 Go</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal à forte consommation de données, md1c.16x64.4x4tb</strong> : utilisez ce type pour une grande quantité de stockage sur disque local, avec notamment des disques RAID pour augmenter la disponibilité des données, pour des charges de travail de type systèmes de fichiers répartis, bases de données volumineuses et analyse de mégadonnées.</td>
+<td><strong>Bare metal à forte consommation de données, md3c.16x64.4x4tb</strong> : utilisez ce type pour une grande quantité de stockage sur disque local, avec notamment des disques RAID pour augmenter la disponibilité des données, pour des charges de travail de type systèmes de fichiers répartis, bases de données volumineuses et analyse de mégadonnées.</td>
 <td>16 / 64 Go</td>
 <td>RAID1 2x2 To / RAID10 SATA 4x4 To</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal à forte consommation de données, md1c.28x512.4x4tb</strong> : utilisez ce type pour une grande quantité de stockage sur disque local, avec notamment des disques RAID pour augmenter la disponibilité des données, pour des charges de travail de type systèmes de fichiers répartis, bases de données volumineuses et analyse de mégadonnées.</td>
+<td><strong>Bare metal à forte consommation de données, md3c.28x512.4x4tb</strong> : utilisez ce type pour une grande quantité de stockage sur disque local, avec notamment des disques RAID pour augmenter la disponibilité des données, pour des charges de travail de type systèmes de fichiers répartis, bases de données volumineuses et analyse de mégadonnées.</td>
 <td>28 / 512 Go</td>
 <td>RAID1 2x2 To / RAID10 SATA 4x4 To</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal équilibré, mb2c.4x32</strong> : à utiliser pour les charges de travail équilibrées qui nécessitent plus de ressources de calcul qu'en offrent les machines virtuelles. Cette version peut également être activée avec Intel® Software Guard Extensions (SGX) pour que vous puissiez utiliser <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (bêta)<img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour chiffrer votre mémoire de données.</td>
+<td><strong>Bare metal équilibré, mb3c.4x32</strong> : à utiliser pour les charges de travail équilibrées qui nécessitent plus de ressources de calcul qu'en offrent les machines virtuelles. Cette version peut également être activée avec Intel® Software Guard Extensions (SGX) pour que vous puissiez utiliser <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (bêta)<img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour chiffrer votre mémoire de données.</td>
 <td>4 / 32 Go</td>
 <td>SATA 2 To / SATA 2 To</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal équilibré, mb1c.16x64</strong> : à utiliser pour les charges de travail équilibrées qui nécessitent plus de ressources de calcul qu'en offrent les machines virtuelles.</td>
+<td><strong>Bare metal équilibré, mb3c.16x64</strong> : à utiliser pour les charges de travail équilibrées qui nécessitent plus de ressources de calcul qu'en offrent les machines virtuelles. </td>
 <td>16 / 64 Go</td>
 <td>SATA 2 To / SSD 960 Go</td>
 <td>10000 Mbit/s</td>
@@ -498,7 +498,7 @@ En général, vous utilisez les machines SDS dans les cas suivants :
 Pour d'autres solutions de stockage, voir [Planification de stockage persistant à haute disponibilité](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **Quelles versions SDS puis-je commander ?**</br>
-Les types de machine varient en fonction de la zone. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [bare metal](#bm) ou [VM](#vm).
+Les versions de noeud worker varient en fonction des zones. Le tableau suivant présente les versions les plus récentes, par exemple les versions des noeuds worker Ubuntu 18 `x3c`, par opposition aux versions de noeud worker Ubuntu 16 `x2c` plus anciennes. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [bare metal](#bm) ou [VM](#vm).
 
 Choisissez un type de machine avec la configuration de stockage adaptée à votre charge de travail. Certaines versions comportent un mélange de configurations de stockage et de disques suivant. Par exemple, certaines versions peuvent comporter un disque principal SATA avec un disque secondaire SSD RAW.
 
@@ -520,28 +520,28 @@ Choisissez un type de machine avec la configuration de stockage adaptée à votr
 </thead>
 <tbody>
 <tr>
-<td><strong>Bare metal avec SDS, ms2c.4x32.1.9tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
+<td><strong>Bare metal avec SDS, ms3c.4x32.1.9tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
 <td>4 / 32 Go</td>
 <td>SATA 2 To / SSD 960 Go</td>
 <td>SSD RAW 1,9 To (chemin d'accès à l'unité : `/dev/sdc`)</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal avec SDS, ms2c.16x64.1.9tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
+<td><strong>Bare metal avec SDS, ms3c.16x64.1.9tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
 <td>16 / 64 Go</td>
 <td>SATA 2 To / SSD 960 Go</td>
 <td>SSD RAW 1,9 To (chemin d'accès à l'unité : `/dev/sdc`)</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal avec SDS, ms2c.28x256.3.8tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
+<td><strong>Bare metal avec SDS, ms3c.28x256.3.8tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
 <td>28 / 256 Go</td>
 <td>SATA 2 To / SSD 1,9 To</td>
 <td>SSD RAW 3,8 To (chemin d'accès à l'unité : `/dev/sdc`)</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal avec SDS, ms2c.28x512.4x3.8tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
+<td><strong>Bare metal avec SDS, ms3c.28x512.4x3.8tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
 <td>28 / 512 Go</td>
 <td>SATA 2 To / SSD 1,9 To</td>
 <td>4 disques, SSD RAW 3,8 To (chemins d'accès à ces unités : `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
@@ -569,16 +569,28 @@ Pour passer en revue la quantité de ressources de calcul actuellement utilisée
 <tr>
   <th>Niveau mémoire</th>
   <th>% ou quantité réservés</th>
-  <th>Exemple pour un noeud worker `b2c.4x16` (16 Go)</th>
+  <th>Exemple pour un noeud worker `b3c.4x16` (16 Go)</th>
   <th>Exemple pour un noeud worker `mg1c.28x256` (256 Go)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>16 premiers Go (0 à 16 Go)</td>
+  <td>4 premiers Go (0 à 4 Go)</td>
+  <td>25 % de mémoire</td>
+  <td>1 Go</td>
+  <td>1 Go</td>
+</tr>
+<tr>
+  <td>4 Go suivants (5 à 8 Go)</td>
+  <td>20 % de mémoire</td>
+  <td>0,8 Go</td>
+  <td>0,8 Go</td>
+</tr>
+<tr>
+  <td>8 Go suivants (9 à 16 Go)</td>
   <td>10 % de mémoire</td>
-  <td>1,6 Go</td>
-  <td>1,6 Go</td>
+  <td>0,8 Go</td>
+  <td>0,8 Go</td>
 </tr>
 <tr>
   <td>112 Go suivants (17 à 128 Go)</td>
@@ -601,8 +613,8 @@ Pour passer en revue la quantité de ressources de calcul actuellement utilisée
 <tr>
   <td>**Total réservé**</td>
   <td>**(variable)**</td>
-  <td>**1,7 Go sur un total de 16 Go**</td>
-  <td>**10,96 Go sur un total de 256 Go**</td>
+  <td>**2,7 Go sur un total de 16 Go**</td>
+  <td>**11,96 Go sur un total de 256 Go**</td>
 </tr>
 </tbody>
 </table>
@@ -613,7 +625,7 @@ Pour passer en revue la quantité de ressources de calcul actuellement utilisée
 <tr>
   <th>Niveau UC</th>
   <th>% réservé</th>
-  <th>Exemple pour un noeud worker `b2c.4x16` (4 coeurs)</th>
+  <th>Exemple pour un noeud worker `b3c.4x16` (4 coeurs)</th>
   <th>Exemple pour un noeud worker `mg1c.28x256` (28 coeurs)</th>
 </tr>
 </thead>

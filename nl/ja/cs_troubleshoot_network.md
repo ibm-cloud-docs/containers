@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -39,23 +39,23 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 トラブルシューティングの際に、[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) を使用して、テストを実行し、クラスターからネットワーキング、Ingress、および strongSwan の関連情報を収集することができます。
 {: tip}
 
-## ロード・バランサー・サービス経由でアプリに接続できない
+## ネットワーク・ロード・バランサー (NLB) サービス経由でアプリに接続できない
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-クラスター内にロード・バランサー・サービスを作成して、アプリをパブリックに公開しました。 ロード・バランサーのパブリック IP アドレスを使用してアプリに接続しようとしたところ、接続が失敗したか、タイムアウトになりました。
+クラスター内に NLB サービスを作成して、アプリをパブリックに公開しました。 NLB のパブリック IP アドレスを使用してアプリに接続しようとしたところ、接続が失敗したか、タイムアウトになりました。
 
 {: tsCauses}
-次のいずれかの理由で、ロード・バランサー・サービスが正しく機能していない可能性があります。
+次のいずれかの理由で、NLB サービスが正しく機能していない可能性があります。
 
 -   クラスターが、フリー・クラスターであるか、またはワーカー・ノードが 1 つしかない標準クラスターです。
 -   クラスターがまだ完全にデプロイされていません。
--   ロード・バランサー・サービスの構成スクリプトにエラーが含まれています。
+-   NLB サービスの構成スクリプトにエラーが含まれています。
 
 {: tsResolve}
-ロード・バランサー・サービスのトラブルシューティングを行うには、以下のようにします。
+NLB サービスのトラブルシューティングを行うには、以下のようにします。
 
-1.  標準クラスターをセットアップしたこと、クラスターが完全にデプロイされていること、また、ロード・バランサー・サービスの高可用性を確保するためにクラスターに 2 つ以上のワーカー・ノードがあることを確認します。
+1.  標準クラスターをセットアップしたこと、クラスターが完全にデプロイされていること、また、NLB サービスの高可用性を確保するためにクラスターに 2 つ以上のワーカー・ノードがあることを確認します。
 
   ```
   ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -64,10 +64,10 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 
     CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のマシン・タイプが表示されていることを確認します。
 
-2. バージョン 2.0 ロード・バランサーの場合: [ロード・バランサー 2.0 の前提条件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)を満たしていることを確認します。
+2. バージョン 2.0 NLB の場合: [NLB 2.0 の前提条件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)を満たしていることを確認します。
 
-3. ロード・バランサー・サービスの構成ファイルが正しいことを確認します。
-    * バージョン 2.0 ロード・バランサー:
+3. NLB サービスの構成ファイルが正しいことを確認します。
+    * バージョン 2.0 NLB:
         ```
         apiVersion: v1
         kind: Service
@@ -88,11 +88,11 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 
         1. サービスのタイプとして **LoadBalancer** を定義したことを確認します。
         2. `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"` アノテーションを指定したことを確認します。
-        3. LoadBalancer サービスの `spec.selector` セクションの `<selector_key>` と `<selector_value>` が、デプロイメント YAML の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
+        3. LoadBalancer サービスの `spec.selector` セクションの `<selector_key>` と `<selector_value>` が、デプロイメント YAML の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。 ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
         4. アプリで listen している **port** を使用していることを確認します。
         5. `externalTrafficPolicy` を `Local` に設定していることを確認します。
 
-    * バージョン 1.0 ロード・バランサー:
+    * バージョン 1.0 NLB:
         ```
         apiVersion: v1
     kind: Service
@@ -109,10 +109,10 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
         {: screen}
 
         1. サービスのタイプとして **LoadBalancer** を定義したことを確認します。
-        2. LoadBalancer サービスの `spec.selector` セクションの `<selector_key>` と `<selector_value>` が、デプロイメント YAML の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
+        2. LoadBalancer サービスの `spec.selector` セクションの `<selector_key>` と `<selector_value>` が、デプロイメント YAML の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。 ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
         3. アプリで listen している **port** を使用していることを確認します。
 
-3.  ロード・バランサー・サービスを確認し、**Events** セクションを参照して、エラーがないか探します。
+3.  NLB サービスを確認し、**Events** セクションを参照して、エラーがないか探します。
 
     ```
     kubectl describe service <myservice>
@@ -121,22 +121,22 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 
     次のようなエラー・メッセージを探します。
 
-    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>ロード・バランサー・サービスを使用するには、2 つ以上のワーカー・ノードがある標準クラスターでなければなりません。</li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>このエラー・メッセージは、ロード・バランサー・サービスに割り振れるポータブル・パブリック IP アドレスが残っていないことを示しています。 クラスター用にポータブル・パブリック IP アドレスを要求する方法については、<a href="/docs/containers?topic=containers-subnets#subnets">クラスターへのサブネットの追加</a>を参照してください。 クラスターにポータブル・パブリック IP アドレスを使用できるようになると、ロード・バランサー・サービスが自動的に作成されます。</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>**`loadBalancerIP`** セクションを使用してロード・バランサー・サービスのポータブル・パブリック IP アドレスを定義しましたが、そのポータブル・パブリック IP アドレスはポータブル・パブリック・サブネットに含まれていません。 構成スクリプトの **`loadBalancerIP`** セクションで、既存の IP アドレスを削除し、使用可能なポータブル・パブリック IP アドレスの 1 つを追加します。 スクリプトから **`loadBalancerIP`** セクションを削除して、使用可能なポータブル・パブリック IP アドレスが自動的に割り振られるようにすることもできます。</li>
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>ワーカー・ノードが不足しているため、ロード・バランサー・サービスをデプロイできません。 複数のワーカー・ノードを持つ標準クラスターをデプロイしましたが、ワーカー・ノードのプロビジョンが失敗した可能性があります。</li>
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>NLB サービスを使用するには、2 つ以上のワーカー・ノードがある標準クラスターでなければなりません。</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the NLB service request. Add a portable subnet to the cluster and try again</code></pre></br>このエラー・メッセージは、NLB サービスに割り振れるポータブル・パブリック IP アドレスが残っていないことを示しています。 クラスター用にポータブル・パブリック IP アドレスを要求する方法については、<a href="/docs/containers?topic=containers-subnets#subnets">クラスターへのサブネットの追加</a>を参照してください。 クラスターにポータブル・パブリック IP アドレスを使用できるようになると、NLB サービスが自動的に作成されます。</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>**`loadBalancerIP`** セクションを使用してロード・バランサー YAML のポータブル・パブリック IP アドレスを定義しましたが、そのポータブル・パブリック IP アドレスはポータブル・パブリック・サブネットに含まれていません。 構成スクリプトの **`loadBalancerIP`** セクションで、既存の IP アドレスを削除し、使用可能なポータブル・パブリック IP アドレスの 1 つを追加します。 スクリプトから **`loadBalancerIP`** セクションを削除して、使用可能なポータブル・パブリック IP アドレスが自動的に割り振られるようにすることもできます。</li>
+    <li><pre class="screen"><code>No available nodes for NLB services</code></pre>ワーカー・ノードが不足しているため、NLB サービスをデプロイできません。 複数のワーカー・ノードを持つ標準クラスターをデプロイしましたが、ワーカー・ノードのプロビジョンが失敗した可能性があります。</li>
     <ol><li>使用可能なワーカー・ノードのリストを表示します。</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>使用可能なワーカー・ノードが 2 つ以上ある場合は、ワーカー・ノードの詳細情報をリストします。</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li><code>kubectl get nodes</code> コマンドと <code>ibmcloud ks worker-get</code> コマンドから返されたワーカー・ノードのパブリック VLAN ID とプライベート VLAN ID が一致していることを確認します。</li></ol></li></ul>
 
-4.  カスタム・ドメインを使用してロード・バランサー・サービスに接続している場合は、カスタム・ドメインがロード・バランサー・サービスのパブリック IP アドレスにマップされていることを確認します。
-    1.  ロード・バランサー・サービスのパブリック IP アドレスを見つけます。
+4.  カスタム・ドメインを使用して NLB サービスに接続している場合は、カスタム・ドメインが NLB サービスのパブリック IP アドレスにマップされていることを確認します。
+    1.  NLB サービスのパブリック IP アドレスを見つけます。
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
-    2.  カスタム・ドメインが、ポインター・レコード (PTR) でロード・バランサー・サービスのポータブル・パブリック IP アドレスにマップされていることを確認します。
+    2.  カスタム・ドメインが、ポインター・レコード (PTR) で NLB サービスのポータブル・パブリック IP アドレスにマップされていることを確認します。
 
 <br />
 
@@ -162,7 +162,7 @@ CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示�
 <br />
 
 
-## Ingress アプリケーション・ロード・バランサーのシークレットの問題
+## Ingress アプリケーション・ロード・バランサー (ALB) のシークレットの問題
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
@@ -202,7 +202,7 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
  </tr>
  <tr>
  <td>インポートされたシークレットの名前が、IBM 提供の Ingress シークレットと同じである。</td>
- <td>シークレットの名前を変更します。IBM 提供の Ingress シークレットの名前は、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行すると確認できます。</td>
+ <td>シークレットの名前を変更します。 IBM 提供の Ingress シークレットの名前は、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行すると確認できます。</td>
  </tr>
  </tbody></table>
 
@@ -313,7 +313,7 @@ Ingress サービスによって、WebSocket を使用するアプリが公開�
 {: tsResolve}
 以下のいずれかのオプションを選択して、この問題を解決します。
 
-* **エッジ・ノードのテイント**: ロード・バランサー・ポッドとアプリ・ポッドをテイント適用エッジ・ノードに確実にデプロイするには、[アプリ・デプロイメントにエッジ・ノードのアフィニティー・ルールと耐障害性を追加します](/docs/containers?topic=containers-loadbalancer#edge_nodes)。 ロード・バランサー・ポッドと Ingress ALB ポッドには、デフォルトでこれらのアフィニティー・ルールと耐障害性があります。
+* **エッジ・ノードのテイント**: ロード・バランサー・ポッドとアプリ・ポッドをテイント適用エッジ・ノードに確実にデプロイするには、[アプリ・デプロイメントにエッジ・ノードのアフィニティー・ルールと耐障害性を追加します](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)。 ロード・バランサー・ポッドと Ingress ALB ポッドには、デフォルトでこれらのアフィニティー・ルールと耐障害性があります。
 
 * **カスタム・テイント**: `keepalived` ポッドが耐障害性を保持していないカスタム・テイントを削除します。 代わりに、[ワーカー・ノードにエッジ・ノードのラベルを付けてから、それらのエッジ・ノードにテイントを適用する](/docs/containers?topic=containers-edge)ことができます。
 
@@ -570,12 +570,12 @@ Error: release vpn failed: deployments.extensions "vpn-strongswan" already exist
 Calico ポリシーを使用するには、クラスターの Kubernetes バージョン、Calico CLI バージョン、Calico 構成ファイル構文、およびポリシーの表示コマンドの 4 つの要因すべてが正しい組み合わせになっている必要があります。 これらの要因のうち 1 つ以上が、正しいバージョンになっていません。
 
 {: tsResolve}
-[Kubernetes バージョン 1.10 以降](/docs/containers?topic=containers-cs_versions)のクラスターでは、Calico CLI v3.1、`calicoctl.cfg` v3 構成ファイル構文、および `calicoctl get GlobalNetworkPolicy` コマンドと `calicoctl get NetworkPolicy` コマンドを使用する必要があります。
+v3.3 以降の Calico CLI、`calicoctl.cfg` v3 構成ファイル構文、および `calicoctl get GlobalNetworkPolicy` コマンドと `calicoctl get NetworkPolicy` コマンドを使用する必要があります。
 
 すべての Calico 要因が正しい組み合わせになっていることを確認するには、以下のようにします。
 
-1. [バージョン 3.3.1 Calico CLI をインストールして構成します](/docs/containers?topic=containers-network_policies#cli_install)。 この構成には、Calico v3 構文を使用するように `calicoctl.cfg` ファイルを手動で更新することも含まれます。
-2. 作成してクラスターに適用するすべてのポリシーで、[Calico v3 構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) が使用されていることを確認します。 既存のポリシー `.yaml` または `.json` ファイルで Calico v2 構文が使用されている場合は、[`calicoctl convert` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert) を使用して、これらを Calico v3 構文に変換できます。
+1. [バージョン 3.3 以降の Calico CLI をインストールして構成します](/docs/containers?topic=containers-network_policies#cli_install)。
+2. 作成してクラスターに適用するすべてのポリシーで、[Calico v3 構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) が使用されていることを確認します。 既存のポリシー `.yaml` または `.json` ファイルで Calico v2 構文が使用されている場合は、[`calicoctl convert` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert) を使用して、これらを Calico v3 構文に変換できます。
 3. [ポリシーを表示](/docs/containers?topic=containers-network_policies#view_policies)するには、必ず `calicoctl get GlobalNetworkPolicy` (グローバル・ポリシーの場合) および `calicoctl get NetworkPolicy --namespace <policy_namespace>` (特定の名前空間にスコープ設定されたポリシーの場合) を使用します。
 
 <br />
@@ -601,7 +601,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 
 また、新しい VLAN をオーダーし、これらを使用してプール内に新しいワーカー・ノードを作成することによって、既存のワーカー・プールを保持することもできます。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  新しい VLAN ID を必要とする対象のゾーンを取得するには、次のコマンドの出力の **Location** をメモします。 **注**: クラスターが複数ゾーンの場合、ゾーンごとに VLAN ID が必要です。
 

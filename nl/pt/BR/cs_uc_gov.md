@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ Por que o {{site.data.keyword.Bluemix_notm}}: com o {{site.data.keyword.containe
 Tecnologias chave:    
 * [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [ Fornecer acesso a dados públicos com o  {{site.data.keyword.cos_full_notm}} ](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)
+* [ Fornecer acesso a dados públicos com o  {{site.data.keyword.cos_full_notm}} ](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
 * [ Serviços do IBM Cloud Analytics Plug-and-play ](https://www.ibm.com/cloud/analytics)
 
 **Contexto: o governo melhora a colaboração e a velocidade com os Desenvolvedores da comunidade que combinam dados públicos/privados**
@@ -118,7 +118,7 @@ Por que o {{site.data.keyword.Bluemix_notm}}: o {{site.data.keyword.containerlon
 
 Tecnologias chave:    
 * [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
-* [ Segurança e isolamento de contêiner ](/docs/containers?topic=containers-security#security)
+* [ Segurança do contêiner e isolamento ](/docs/containers?topic=containers-security#security)
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 

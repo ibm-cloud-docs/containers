@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -39,106 +39,77 @@ subcollection: containers
 
 此任务包含用于安装这些 CLI 和插件的信息：
 
--   {{site.data.keyword.Bluemix_notm}} CLI V0.8.0 或更高版本
--   {{site.data.keyword.containerlong_notm}} 插件
--   与集群的 `major.minor` 版本相匹配的 Kubernetes CLI 版本
--   可选：{{site.data.keyword.registryshort_notm}} 插件
+- {{site.data.keyword.Bluemix_notm}} CLI 
+- {{site.data.keyword.containerlong_notm}} 插件
+- {{site.data.keyword.registryshort_notm}} 插件
+- 与集群的 `major.minor` 版本相匹配的 Kubernetes CLI 版本
 
-
+如果要改为使用 {{site.data.keyword.Bluemix_notm}} 控制台，那么在创建集群后，可以在 [Kubernetes 终端](#cli_web)中直接通过 Web 浏览器来运行 CLI 命令。
+{: tip}
 
 <br>
 要安装 CLI，请执行以下操作：
 
 
 
-1.  作为 {{site.data.keyword.containerlong_notm}} 插件的必备软件，请安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-ibmcloud-cli)。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `ibmcloud`。
+1. 安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)。此安装包括：
+  - 基本 {{site.data.keyword.Bluemix_notm}} CLI。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `ibmcloud`。
+  - {{site.data.keyword.containerlong_notm}} 插件。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `ibmcloud ks`。
+  - {{site.data.keyword.registryshort_notm}} 插件。使用此插件可在 IBM 托管的具备高可用性和高可缩放性的多租户专用映像注册表中设置自己的名称空间，存储 Docker 映像并与其他用户共享这些映像。要将容器部署到集群中，Docker 映像是必需的。用于运行注册表命令的前缀是 `ibmcloud cr`。
 
-    计划大量使用 CLI 吗？尝试[针对 {{site.data.keyword.Bluemix_notm}} CLI 启动 shell 自动完成（仅限 Linux/MacOS）](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)。
+  计划大量使用 CLI 吗？尝试[针对 {{site.data.keyword.Bluemix_notm}} CLI 启动 shell 自动完成（仅限 Linux/MacOS）](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)。
     {: tip}
 
-2.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
-
-    ```
+2. 登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
+  ```
     ibmcloud login
     ```
-    {: pre}
+  {: pre}
 
-    如果您有联合标识，请使用 `ibmcloud login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
-    {: tip}
+  如果您有联合标识，请使用 `ibmcloud login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+     {: tip}
 
-3.  要创建 Kubernetes 集群以及管理工作程序节点，请安装 {{site.data.keyword.containerlong_notm}} 插件。用于通过 {{site.data.keyword.containerlong_notm}} 插件运行命令的前缀是 `ibmcloud ks`。
-
-    ```
-    ibmcloud plugin install container-service 
-    ```
-    {: pre}
-
-    要验证是否已正确安装该插件，请运行以下命令：
-
-    ```
+3. 验证各插件是否已正确安装。
+  ```
     ibmcloud plugin list
     ```
-    {: pre}
+  {: pre}
 
-    {{site.data.keyword.containerlong_notm}} 插件会在结果中显示为 **container-service**。
+  {{site.data.keyword.containerlong_notm}} 插件会在结果中显示为 **container-service**，{{site.data.keyword.registryshort_notm}} 插件会在结果中显示为 **container-registry**。
 
-4.  {: #kubectl}要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。用于通过 Kubernetes CLI 来运行命令的前缀是 `kubectl`。
+4. {: #kubectl}要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。用于通过 Kubernetes CLI 来运行命令的前缀是 `kubectl`。
 
-    1.  下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.12.6。
+  最新的稳定版本的 `kubectl` 随基本 {{site.data.keyword.Bluemix_notm}} CLI 一起安装。但是，要使用集群，必须改为安装与计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。如果使用的 `kubectl` CLI 版本与集群的 `major.minor` 版本不匹配，那么可能会遇到意外的结果。请确保 Kubernetes 集群版本和 CLI 版本保持最新。
+        {: important}
 
-        如果使用的 `kubectl` CLI 版本与集群的 `major.minor` 版本不匹配，那么可能会遇到意外的结果。请确保 Kubernetes 集群版本和 CLI 版本保持最新。
-        {: note}
+  1. 下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.12.7。
+    - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
+    - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
+    - **Windows**：将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。通过此设置，您在以后运行命令时，可减少一些文件路径更改操作。[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
 
-        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl)
-        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl)
-        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe)
-
-    2.  **对于 OS X 和 Linux**：完成以下步骤。
-        1.  将可执行文件移至 `/usr/local/bin` 目录。
-
-            ```
+  2. 如果使用的是 OS X 或 Linux，请完成以下步骤。
+    1. 将可执行文件移至 `/usr/local/bin` 目录。
+      ```
             mv /filepath/kubectl /usr/local/bin/kubectl
             ```
-            {: pre}
+      {: pre}
 
-        2.  确保 `/usr/local/bin` 列在 `PATH` 系统变量中。`PATH` 变量包含操作系统可以在其中找到可执行文件的所有目录。列在 `PATH` 变量中的目录用于不同的用途。`/usr/local/bin` 用于为不属于操作系统的一部分，而是由系统管理员手动安装的软件存储其可执行文件。
+    2. 确保 `/usr/local/bin` 列在 `PATH` 系统变量中。`PATH` 变量包含操作系统可以在其中找到可执行文件的所有目录。列在 `PATH` 变量中的目录用于不同的用途。`/usr/local/bin` 用于为不属于操作系统的一部分，而是由系统管理员手动安装的软件存储其可执行文件。
+      ```
+      echo $PATH
+      ```
+      {: pre}
+      示例 CLI 输出：
+      ```
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      ```
+      {: screen}
 
-            ```
-            echo $PATH
-            ```
-            {: pre}
-
-            示例 CLI 输出：
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  使文件可执行。
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-    3.  **对于 Windows：**将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。通过此设置，您在以后运行命令时，可减少一些文件路径更改操作。
-
-5.  要管理专用映像存储库，请安装 {{site.data.keyword.registryshort_notm}} 插件。使用此插件可在 IBM 托管的具备高可用性和高可缩放性的多租户专用映像注册表中设置自己的名称空间，存储 Docker 映像并与其他用户共享这些映像。要将容器部署到集群中，Docker 映像是必需的。用于运行注册表命令的前缀是 `ibmcloud cr`。
-
-    ```
-    ibmcloud plugin install container-registry 
-    ```
-    {: pre}
-
-    要验证是否已正确安装该插件，请运行以下命令：
-
-    ```
-    ibmcloud plugin list
-    ```
-    {: pre}
-
-    该插件会在结果中显示为 container-registry。
+    3. 使文件可执行。
+      ```
+      chmod +x /usr/local/bin/kubectl
+      ```
+      {: pre}
 
 接下来，开始[使用 {{site.data.keyword.containerlong_notm}} 通过 CLI 创建 Kubernetes 集群](/docs/containers?topic=containers-clusters#clusters_cli)。
 
@@ -146,11 +117,10 @@ subcollection: containers
 
 -   [`ibmcloud` 命令](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
 -   [`ibmcloud ks` 命令](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`kubectl` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`ibmcloud cr` 命令](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
+-   [`kubectl` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubectl.docs.kubernetes.io/)
 
 <br />
-
 
 
 
@@ -165,14 +135,14 @@ subcollection: containers
 1. 基于提供的 Dockerfile 创建映像。
 
     ```
-docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
+    docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
     ```
     {: pre}
 
 2. 将映像本地部署为容器，并安装卷以访问本地文件。
 
     ```
-docker run -it -v /local/path:/container/volume <image_name>
+    docker run -it -v /local/path:/container/volume <image_name>
     ```
     {: pre}
 
@@ -188,7 +158,7 @@ docker run -it -v /local/path:/container/volume <image_name>
 您可以使用 Kubernetes CLI 随附的命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。
 {:shortdesc}
 
-支持 Kubernetes 1.12.6 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
+支持 Kubernetes 1.12.7 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
 然后，您可以运行 Kubernetes `kubectl` 命令，以在 {{site.data.keyword.Bluemix_notm}} 中使用集群。
 
 
@@ -243,8 +213,8 @@ docker run -it -v /local/path:/container/volume <image_name>
         示例：
 
         ```
-    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-    ```
+        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        ```
         {: screen}
 
     2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
@@ -253,7 +223,7 @@ docker run -it -v /local/path:/container/volume <image_name>
         {: tip}
 
         **Windows PowerShell 用户**：不要从 `ibmcloud ks cluster-config` 的输出中复制并粘贴 `SET` 命令，您必须改为运行相关命令来设置 `KUBECONFIG` 环境变量，例如运行 `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`。
-        {:tip}
+    {:tip}
 
     3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
 
@@ -266,26 +236,26 @@ docker run -it -v /local/path:/container/volume <image_name>
 
         输出：
         ```
-                /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
         ```
         {: screen}
 
 7.  通过检查 Kubernetes CLI 服务器版本，验证 `kubectl` 命令是否针对您的集群正常运行。
 
     ```
-        kubectl version  --short
-        ```
+    kubectl version  --short
+    ```
     {: pre}
 
     输出示例：
 
     ```
-    Client Version: v1.12.6
-    Server Version: v1.12.6
+    Client Version: v1.12.7
+    Server Version: v1.12.7
     ```
     {: screen}
 
-现在，可以运行 `kubectl` 命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。有关完整的命令列表，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/)。
+现在，可以运行 `kubectl` 命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。有关完整的命令列表，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubectl.docs.kubernetes.io/)。
 
 **提示：**如果使用的是 Windows，而 Kubernetes CLI 未安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中，那么必须将目录更改为 Kubernetes CLI 的安装路径才能成功运行 `kubectl` 命令。
 
@@ -303,7 +273,7 @@ docker run -it -v /local/path:/container/volume <image_name>
 
 -   {{site.data.keyword.Bluemix_notm}} CLI V0.8.0 或更高版本
 -   {{site.data.keyword.containerlong_notm}} 插件
--   Kubernetes CLI V1.12.6 或更高版本
+-   Kubernetes CLI V1.12.7 或更高版本
 -   {{site.data.keyword.registryshort_notm}} 插件
 
 <br>
@@ -332,8 +302,8 @@ docker run -it -v /local/path:/container/volume <image_name>
     2.  通过运行以下命令并检查已安装的插件的列表来验证插件安装。
 
         ```
-    ibmcloud plugin list
-    ```
+        ibmcloud plugin list
+        ```
         {: pre}
 
         {{site.data.keyword.containerlong_notm}} 插件会在结果中显示为 container-service。
@@ -358,8 +328,8 @@ docker run -it -v /local/path:/container/volume <image_name>
     2.  通过运行以下命令并检查已安装的插件的列表来验证插件安装。
 
         ```
-    ibmcloud plugin list
-    ```
+        ibmcloud plugin list
+        ```
         {: pre}
 
         Registry 插件会在结果中显示为 container-registry。
@@ -410,6 +380,33 @@ docker run -it -v /local/path:/container/volume <image_name>
 <br />
 
 
+## 在 Web 浏览器中使用 Kubernetes 终端 (beta)
+{: #cli_web}
+
+Kubernetes 终端允许您使用 {{site.data.keyword.Bluemix_notm}} CLI 直接通过 Web 浏览器来管理集群。
+{: shortdesc}
+
+Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组件发布，可能会根据用户反馈和进一步的测试而更改。因此，不要在生产集群中使用此功能，以避免意外的副作用。
+{: important}
+
+如果在 {{site.data.keyword.Bluemix_notm}} 控制台中使用集群仪表板来管理集群，但希望快速进行更高级的配置更改，现在可以在 Kubernetes 终端的 Web 浏览器中直接运行 CLI 命令。Kubernetes 终端通过基本 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-ibmcloud-cli)、{{site.data.keyword.containerlong_notm}} 插件和 {{site.data.keyword.registryshort_notm}} 插件启用。此外，终端上下文已设置为您所使用的集群，以便您可以运行 Kubernetes `kubectl` 命令来使用集群。
+
+在本地下载和编辑的任何文件（如 YAML 文件）都会临时存储在 Kubernetes 终端中，而不会跨会话持久存储。
+{: note}
+
+要安装并启动 Kubernetes 终端，请执行以下操作：
+
+1.  登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://cloud.ibm.com/)。
+2.  在菜单栏中，选择要使用的帐户。
+3.  在菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中，单击 **Kubernetes**。
+4.  在**集群**页面上，单击要访问的集群。
+5.  在集群详细信息页面中，单击**终端**按钮。
+6.  单击**安装**。安装终端附加组件可能需要几分钟时间。
+7.  再次单击**终端**按钮。该终端会在浏览器中打开。
+
+下次，只需单击**终端**按钮就可启动 Kubernetes 终端。
+
+<br />
 
 
 ## 使用 API 自动部署集群
@@ -426,7 +423,7 @@ docker run -it -v /local/path:/container/volume <image_name>
 您还可以使用 [API Swagger JSON 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-api-json) 来生成可与 API 交互（作为自动化工作的一部分）的客户机。
 {: tip}
 
-<table>
+<table summary="标识类型和选项，其中第 1 列是输入参数，第 2 列是值。">
 <caption>标识类型和选项</caption>
 <thead>
 <th>{{site.data.keyword.Bluemix_notm}} 标识</th>
@@ -444,27 +441,15 @@ docker run -it -v /local/path:/container/volume <image_name>
 </tbody>
 </table>
 
-1.  创建 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌。包含在请求中的主体信息根据您使用的 {{site.data.keyword.Bluemix_notm}} 认证方法而有所不同。替换以下值：
-  - `<username>`：您的 {{site.data.keyword.Bluemix_notm}} 用户名。
-  - `<password>`：您的 {{site.data.keyword.Bluemix_notm}} 密码。
-  - `<api_key>`：您的 {{site.data.keyword.Bluemix_notm}} API 密钥。
-  - `<passcode>`：您的 {{site.data.keyword.Bluemix_notm}} 一次性密码。运行 `ibmcloud login --sso`，并按照 CLI 输出中的指示信息，使用 Web 浏览器来检索一次性密码。
+1.  创建 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌。包含在请求中的主体信息根据您使用的 {{site.data.keyword.Bluemix_notm}} 认证方法而有所不同。
 
     ```
-    POST https://iam.<region>.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
-    示例：
-    ```
-        POST https://iam.ng.bluemix.net/oidc/token
-    ```
-    {: codeblock}
-
-    要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[复查 API 端点中使用的区域缩写](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
-
-    <table summary-"Input parameters to retrieve tokens">
-    <caption>用于获取令牌的输入参数</caption>
+    <table summary="用于检索 IAM 令牌的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+    <caption>用于获取 IAM 令牌的输入参数。</caption>
     <thead>
         <th>输入参数</th>
         <th>值</th>
@@ -472,69 +457,66 @@ docker run -it -v /local/path:/container/volume <image_name>
     <tbody>
     <tr>
     <td>头</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>注</strong>：<code>Yng6Yng=</code> 是针对用户名 <strong>bx</strong> 和密码 <strong>bx</strong> 的 URL 编码授权。</p></li></ul>
+    <td><ul><li>Content-Type: application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>注</strong>：<code>Yng6Yng=</code> 是针对用户名 <strong>bx</strong> 和密码 <strong>bx</strong> 的 URL 编码授权。</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 用户名和密码的主体</td>
     <td><ul><li>`grant_type: password`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`username: <em>&lt;username&gt;</em>`</li>
-    <li>`password: <em>&lt;password&gt;</em>`</li>
-    <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret: `</li></ul>
-    <strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</td>
+    <li>`username`：您的 {{site.data.keyword.Bluemix_notm}} 用户名。</li>
+    <li>`password`：您的 {{site.data.keyword.Bluemix_notm}} 密码。</li>
+    <li>`uaa_client_id: cf`</li>
+    <li>`uaa_client_secret:`</br><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</li></ul></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 密钥的主体</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
-    <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:``</li></ul>
-    <strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</td>
+    <li>`apikey`：您的 {{site.data.keyword.Bluemix_notm}} API 密钥</li>
+    <li>`uaa_client_id: cf`</li>
+    <li>`uaa_client_secret:`</br><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</li></ul></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 一次性密码的主体</td>
-    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
+      <td><ul><li><code>grant_type: urn:ibm:params:oauth:grant-type:passcode</code></li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
-    <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret: `</li></ul>
-    <strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</td>
+    <li>`passcode`：您的 {{site.data.keyword.Bluemix_notm}} 一次性密码。运行 `ibmcloud login --sso`，并按照 CLI 输出中的指示信息，使用 Web 浏览器来检索一次性密码。</li>
+    <li>`uaa_client_id: cf`</li>
+    <li>`uaa_client_secret:`</br><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</li></ul>
+    </td>
     </tr>
     </tbody>
     </table>
 
-    示例 API 输出：
+    输出示例：
 
     ```
     {
-    "access_token": "<iam_token>",
-      "refresh_token": "<iam_refresh_token>",
-      "uaa_token": "<uaa_token>",
-      "uaa_refresh_token": "<uaa_refresh_token>",
-      "token_type": "Bearer",
-      "expires_in": 3600,
-      "expiration": 1493747503
+    "access_token": "<iam_access_token>",
+    "refresh_token": "<iam_refresh_token>",
+    "uaa_token": "<uaa_token>",
+    "uaa_refresh_token": "<uaa_refresh_token>",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "expiration": 1493747503
+    "scope": "ibm openid"
     }
-
-    
 
     ```
     {: screen}
 
     您可以在 API 输出的 **access_token** 字段中找到 {{site.data.keyword.Bluemix_notm}} IAM 令牌。请记下 {{site.data.keyword.Bluemix_notm}} IAM 令牌以在后续步骤中用于检索更多头信息。
 
-2.  检索创建集群的 {{site.data.keyword.Bluemix_notm}} 帐户的标识。将 `<iam_token>` 替换为在上一步中检索到的 {{site.data.keyword.Bluemix_notm}} IAM 令牌。
+2.  检索要使用的 {{site.data.keyword.Bluemix_notm}} 帐户的标识。将 `<iam_access_token>` 替换为上一步中从 API 输出的 **access_token** 字段中检索到的 {{site.data.keyword.Bluemix_notm}} IAM 令牌。在 API 输出中，可以在 **resources.metadata.guid** 字段中找到 {{site.data.keyword.Bluemix_notm}} 帐户的标识。
 
     ```
-    GET https://accountmanagement.<region>.bluemix.net/v1/accounts
+    GET https://accountmanagement.ng.bluemix.net/v1/accounts
     ```
     {: codeblock}
 
-    <table summary="用于获取 {{site.data.keyword.Bluemix_notm}} 帐户标识的输入参数">
-    <caption>用于获取 {{site.data.keyword.Bluemix_notm}} 帐户标识的输入参数</caption>
+    <table summary="用于获取 {{site.data.keyword.Bluemix_notm}} 帐户标识的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+    <caption>用于获取 {{site.data.keyword.Bluemix_notm}} 帐户标识的输入参数。</caption>
     <thead>
   	<th>输入参数</th>
   	<th>值</th>
@@ -542,15 +524,15 @@ docker run -it -v /local/path:/container/volume <image_name>
     <tbody>
   	<tr>
   		<td>头</td>
-  		<td><ul><li>`Content-Type: application/json`</li>
-      <li>`Authorization: bearer &lt;iam_token&gt;`</li>
-      <li>`Accept: application/json
-`</li></ul></td>
+      <td><ul><li><code>Content-Type: application/json</code></li>
+        <li>`Authorization: bearer <iam_access_token>`</li>
+        <li><code>Accept: application/json
+</code></li></ul></td>
   	</tr>
     </tbody>
     </table>
 
-    示例 API 输出：
+    输出示例：
 
     ```
     {
@@ -570,28 +552,18 @@ docker run -it -v /local/path:/container/volume <image_name>
     ```
     {: screen}
 
-    可以在 API 输出的 **resources/metadata/guid** 字段中找到您的 {{site.data.keyword.Bluemix_notm}} 帐户的标识。
-
-3.  生成新的 {{site.data.keyword.Bluemix_notm}} IAM 令牌，该令牌包含您的 {{site.data.keyword.Bluemix_notm}} 凭证和创建集群的帐户标识。将 `<account_ID>` 替换为在上一步中检索到的 {{site.data.keyword.Bluemix_notm}} 帐户的标识。
+3.  生成新的 {{site.data.keyword.Bluemix_notm}} IAM 令牌，该令牌包含您的 {{site.data.keyword.Bluemix_notm}} 凭证和要使用的帐户标识。
 
     如果使用的是 {{site.data.keyword.Bluemix_notm}} API 密钥，那么必须使用为其创建 API 密钥的 {{site.data.keyword.Bluemix_notm}} 帐户标识。要访问其他帐户中的集群，请登录此帐户并创建基于此帐户的 {{site.data.keyword.Bluemix_notm}} API 密钥。
     {: note}
 
     ```
-    POST https://iam.<region>.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
-    示例：
-    ```
-        POST https://iam.ng.bluemix.net/oidc/token
-    ```
-    {: codeblock}
-
-    要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[复查 API 端点中使用的区域缩写](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
-
-    <table summary-"Input parameters to retrieve tokens">
-    <caption>用于获取令牌的输入参数</caption>
+    <table summary="用于检索 IAM 令牌的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+    <caption>用于获取 IAM 令牌的输入参数。</caption>
     <thead>
         <th>输入参数</th>
         <th>值</th>
@@ -599,72 +571,133 @@ docker run -it -v /local/path:/container/volume <image_name>
     <tbody>
     <tr>
     <td>头</td>
-    <td><ul><li>`Content-Type:application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`<p><strong>注</strong>：<code>Yng6Yng=</code> 是针对用户名 <strong>bx</strong> 和密码 <strong>bx</strong> 的 URL 编码授权。</p></li></ul>
+    <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`<p><strong>注</strong>：<code>Yng6Yng=</code> 是针对用户名 <strong>bx</strong> 和密码 <strong>bx</strong> 的 URL 编码授权。</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 用户名和密码的主体</td>
     <td><ul><li>`grant_type: password`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`username: <em>&lt;username&gt;</em>`</li>
-    <li>`password: <em>&lt;password&gt;</em>`</li>
+    <li>`username`：您的 {{site.data.keyword.Bluemix_notm}} 用户名。</li>
+    <li>`password`：您的 {{site.data.keyword.Bluemix_notm}} 密码。</li>
     <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:``</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
-    <strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</td>
+    <li>`uaa_client_secret:`</br><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</li>
+    <li>`bss_account`：在上一步中检索到的 {{site.data.keyword.Bluemix_notm}} 帐户标识。</li></ul>
+    </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 密钥的主体</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`apikey`：您的 {{site.data.keyword.Bluemix_notm}} API 密钥。</li>
     <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:``</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
-      <strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</td>
+    <li>`uaa_client_secret:`</br><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</li>
+    <li>`bss_account`：在上一步中检索到的 {{site.data.keyword.Bluemix_notm}} 帐户标识。</li></ul>
+      </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 一次性密码的主体</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
+    <li>`passcode`：您的 {{site.data.keyword.Bluemix_notm}} 密码。</li>
     <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret: `</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</td>
+    <li>`uaa_client_secret:`</br><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</li>
+    <li>`bss_account`：在上一步中检索到的 {{site.data.keyword.Bluemix_notm}} 帐户标识。</li></ul></td>
     </tr>
     </tbody>
     </table>
 
-    示例 API 输出：
+    输出示例：
 
     ```
     {
       "access_token": "<iam_token>",
       "refresh_token": "<iam_refresh_token>",
-      "uaa_token": "<uaa_token>",
-      "uaa_refresh_token": "<uaa_refresh_token>",
       "token_type": "Bearer",
       "expires_in": 3600,
       "expiration": 1493747503
     }
 
-    
-
     ```
     {: screen}
 
-    您可以在 **access_token** 中找到 {{site.data.keyword.Bluemix_notm}} IAM 令牌，在 **refresh_token** 中找到刷新令牌。
+    您可以在 API 输出的 **access_token** 字段中找到 {{site.data.keyword.Bluemix_notm}} IAM 令牌，在 **refresh_token** 字段中找到刷新令牌。
 
-4.  列出您帐户中的所有 Kubernetes 集群。使用在先前步骤中检索到的信息来构建头信息。
+4.  列出可用的 {{site.data.keyword.containerlong_notm}} 区域，并选择要在其中工作的区域。使用上一步中的 IAM 访问令牌和刷新令牌来构建头信息。
+    ```
+    GET https://containers.cloud.ibm.com/v1/regions
+    ```
+    {: codeblock}
 
+    <table summary="用于检索 {{site.data.keyword.containerlong_notm}} 区域的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+    <caption>用于检索 {{site.data.keyword.containerlong_notm}} 区域的输入参数。</caption>
+    <thead>
+    <th>输入参数</th>
+    <th>值</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>头</td>
+    <td><ul><li>`Authorization: bearer <iam_token>`</li>
+    <li>`X-Auth-Refresh-Token: <refresh_token>`</li></ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    输出示例：
+    ```
+    {
+    "regions": [
+        {
+            "name": "ap-north",
+            "alias": "jp-tok",
+            "cfURL": "api.au-syd.bluemix.net",
+            "freeEnabled": false
+        },
+        {
+            "name": "ap-south",
+            "alias": "au-syd",
+            "cfURL": "api.au-syd.bluemix.net",
+            "freeEnabled": true
+        },
+        {
+            "name": "eu-central",
+            "alias": "eu-de",
+            "cfURL": "api.eu-de.bluemix.net",
+            "freeEnabled": true
+        },
+        {
+            "name": "uk-south",
+            "alias": "eu-gb",
+            "cfURL": "api.eu-gb.bluemix.net",
+            "freeEnabled": true
+        },
+        {
+            "name": "us-east",
+            "alias": "us-east",
+            "cfURL": "api.ng.bluemix.net",
+            "freeEnabled": false
+        },
+        {
+            "name": "us-south",
+            "alias": "us-south",
+            "cfURL": "api.ng.bluemix.net",
+            "freeEnabled": true
+        }
+    ]
+    }
+    ```
+    {: screen}
+
+5.  列出所选 {{site.data.keyword.containerlong_notm}} 区域中的所有集群。如果要[针对集群运行 Kubernetes API 请求](#kube_api)，请确保记下集群的 **id** 和 **region**。
 
      ```
      GET https://containers.cloud.ibm.com/v1/clusters
      ```
      {: codeblock}
 
-     <table summary="用于使用 API 的输入参数">
-         <caption>用于使用 API 的输入参数</caption>
+     <table summary="用于使用 {{site.data.keyword.containerlong_notm}} API 的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+    <caption>用于使用 {{site.data.keyword.containerlong_notm}} API 的输入参数。</caption>
      <thead>
      <th>输入参数</th>
      <th>值</th>
@@ -672,8 +705,8 @@ docker run -it -v /local/path:/container/volume <image_name>
      <tbody>
      <tr>
      <td>头</td>
-     <td><ul><li>`Authorization: bearer <em>&lt;iam_token&gt;</em>`</li>
-     <li>`X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em>`</li></ul></td>
+     <td><ul><li>`Authorization: bearer <iam_token>`</li>
+       <li>`X-Auth-Refresh-Token: <refresh_token>`</li><li>`X-Region: <region>`</li></ul></td>
      </tr>
      </tbody>
      </table>
@@ -681,6 +714,186 @@ docker run -it -v /local/path:/container/volume <image_name>
 5.  请查看 [{{site.data.keyword.containerlong_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-api)，以查找受支持 API 的列表。
 
 <br />
+
+
+## 通过 Kubernetes API 使用集群
+{: #kube_api}
+
+可以使用 [Kubernetes API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/using-api/api-overview/) 与 {{site.data.keyword.containerlong_notm}} 中的集群进行交互。
+{: shortdesc}
+
+以下指示信息需要集群中的公共网络访问权来连接到 Kubernetes 主节点的公共服务端点。
+{: note}
+
+1. 执行[使用 API 自动部署集群](#cs_api)中的步骤，以检索 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌、刷新令牌、要运行 Kubernetes API 请求的集群的标识以及集群所在的 {{site.data.keyword.containerlong_notm}} 区域。
+
+2. 检索 {{site.data.keyword.Bluemix_notm}} IAM 委派的刷新令牌。
+   ```
+    POST https://iam.bluemix.net/identity/token
+    ```
+   {: codeblock}
+
+   <table summary="用于获取 IAM 委派的刷新令牌的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+    <caption>用于获取 IAM 委派的刷新令牌的输入参数。</caption>
+   <thead>
+   <th>输入参数</th>
+   <th>值</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>头</td>
+   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`</br><strong>注</strong>：<code>Yng6Yng=</code> 是针对用户名 <strong>bx</strong> 和密码 <strong>bx</strong> 的 URL 编码授权。</li><li>`cache-control: no-cache`</li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>主体</td>
+   <td><ul><li>`delegated_refresh_token_expiry: 600`</li>
+   <li>`receiver_client_ids: kube`</li>
+   <li>`response_type: delegated_refresh_token` </li>
+   <li>`refresh_token`：{{site.data.keyword.Bluemix_notm}} IAM 刷新令牌。</li>
+   <li>`grant_type: refresh_token`</li></ul></td>
+   </tr>
+   </tbody>
+   </table>
+
+   输出示例：
+   ```
+   {
+    "delegated_refresh_token": <delegated_refresh_token>
+   }
+   ```
+   {: screen}
+
+3. 使用上一步中委派的刷新令牌来检索 {{site.data.keyword.Bluemix_notm}} IAM 标识、IAM 访问权和 IAM 刷新令牌。在 API 输出中，可以在 **id_token** 字段中找到 IAM 标识令牌，在 **access_token** 字段中找到 IAM 访问令牌，在 **refresh_token** 字段中找到 IAM 刷新令牌。
+   ```
+    POST https://iam.bluemix.net/identity/token
+    ```
+   {: codeblock}
+
+   <table summary="用于获取 IAM 标识和 IAM 访问令牌的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+   <caption>用于获取 IAM 标识和 IAM 访问令牌的输入参数。</caption>
+   <thead>
+   <th>输入参数</th>
+   <th>值</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>头</td>
+   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic a3ViZTprdWJl`</br><strong>注</strong>：<code>a3ViZTprdWJl</code> 是针对用户名 <strong><code>kube</code></strong> 和密码 <strong><code>kube</code></strong> 的 URL 编码授权。</li><li>`cache-control: no-cache`</li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>主体</td>
+   <td><ul><li>`refresh_token`：{{site.data.keyword.Bluemix_notm}} IAM 委派的刷新令牌。 </li>
+   <li>`grant_type: urn:ibm:params:oauth:grant-type:delegated-refresh-token`</li></ul></td>
+   </tr>
+   </tbody>
+   </table>
+
+   输出示例：
+   ```
+   {
+    "access_token": "<iam_access_token>",
+    "id_token": "<iam_id_token>",
+    "refresh_token": "<iam_refresh_token>",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "expiration": 1553629664,
+    "scope": "ibm openid containers-kubernetes"
+   }
+   ```
+   {: screen}
+
+4. 使用 IAM 访问令牌、IAM 标识令牌、IAM 刷新令牌和集群所在的 {{site.data.keyword.containerlong_notm}} 区域，检索 Kubernetes 主节点的公共 URL。可以在 API 输出的 **`publicServiceEndpointURL`** 中找到该 URL。
+   ```
+   GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>
+   ```
+   {: codeblock}
+
+   <table summary="用于获取 Kubernetes 主节点的公共服务端点的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+   <caption>用于获取 Kubernetes 主节点的公共服务端点的输入参数。</caption>
+   <thead>
+   <th>输入参数</th>
+   <th>值</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>头</td>
+     <td><ul><li>`Authorization`：{{site.data.keyword.Bluemix_notm}} IAM 访问令牌。</li><li>`X-Auth-Refresh-Token`：{{site.data.keyword.Bluemix_notm}} IAM 刷新令牌。</li><li>`X-Region`：通过[使用 API 自动部署集群](#cs_api)中的 `GET https://containers.cloud.ibm.com/v1/clusters` API 检索到的集群的 {{site.data.keyword.containerlong_notm}} 区域。</li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>路径</td>
+   <td>`<cluster_ID>`：通过[使用 API 自动部署集群](#cs_api)中的 `GET https://containers.cloud.ibm.com/v1/clusters` API 检索到的集群的标识。</td>
+   </tr>
+   </tbody>
+   </table>
+
+   输出示例：
+   ```
+   {
+    "location": "Dallas",
+    "dataCenter": "dal10",
+    "multiAzCapable": true,
+    "vlans": null,
+    "worker_vlans": null,
+    "workerZones": [
+        "dal10"
+    ],
+    "id": "1abc123b123b124ab1234a1a12a12a12",
+    "name": "mycluster",
+    "region": "us-south",
+    ...
+    "publicServiceEndpointURL": "https://c7.us-south.containers.cloud.ibm.com:27078"
+   }
+   ```
+   {: screen}
+
+5. 使用先前检索到的 IAM 标识令牌，针对集群运行 Kubernetes API 请求。例如，列出集群中运行的 Kubernetes 版本。
+
+   如果在 API 测试框架中启用了 SSL 证书验证，请确保禁用此功能。
+   {: tip}
+
+   ```
+   GET <publicServiceEndpointURL>/version
+   ```
+   {: codeblock}
+
+   <table summary="用于查看集群中运行的 Kubernetes 版本的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+   <caption>用于查看集群中运行的 Kubernetes 版本的输入参数。</caption>
+   <thead>
+   <th>输入参数</th>
+   <th>值</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>头</td>
+   <td>`Authorization: bearer <id_token>`</td>
+   </tr>
+   <tr>
+   <td>路径</td>
+   <td>`<publicServiceEndpointURL>`：在上一步中检索到的 Kubernetes 主节点的 **`publicServiceEndpointURL`**。</td>
+   </tr>
+   </tbody>
+   </table>
+
+   输出示例：
+   ```
+   {
+    "major": "1",
+    "minor": "13",
+    "gitVersion": "v1.13.4+IKS",
+    "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
+    "gitTreeState": "clean",
+    "buildDate": "2019-03-21T10:08:03Z",
+    "goVersion": "go1.11.5",
+    "compiler": "gc",
+    "platform": "linux/amd64"
+   }
+   ```
+   {: screen}
+
+6. 查看 [Kubernetes API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubernetes-api/)，以查找最新 Kubernetes 版本的受支持 API 的列表。确保使用与集群的 Kubernetes 版本相匹配的 API 文档。如果使用的不是最新的 Kubernetes 版本，请在 URL 末尾附加版本。例如，要访问 V1.12 的 API 文档，请添加 `v1.12`。
 
 
 ## 使用 API 刷新 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌并获取新的刷新令牌
@@ -708,8 +921,8 @@ docker run -it -v /local/path:/container/volume <image_name>
     ```
     {: codeblock}
 
-    <table summary="用于新 IAM 令牌的输入参数">
-         <caption>用于新 {{site.data.keyword.Bluemix_notm}} IAM 令牌的输入参数</caption>
+    <table summary="新 IAM 令牌的输入参数，其中第 1 列是输入参数，第 2 列是值。">
+    <caption>用于新 {{site.data.keyword.Bluemix_notm}} IAM 令牌的输入参数</caption>
     <thead>
     <th>输入参数</th>
     <th>值</th>
@@ -724,16 +937,16 @@ docker run -it -v /local/path:/container/volume <image_name>
     <td>使用刷新令牌时的主体</td>
     <td><ul><li>`grant_type: refresh_token`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`refresh_token: <em>&lt;iam_refresh_token&gt;</em>`</li>
+    <li>`refresh_token`：{{site.data.keyword.Bluemix_notm}} IAM 刷新令牌。</li>
     <li>`uaa_client_ID: cf`</li>
     <li>`uaa_client_secret: `</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</td>
+    <li>`bss_account`：您的 {{site.data.keyword.Bluemix_notm}} 帐户标识。</li></ul><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</td>
     </tr>
     <tr>
       <td>使用 {{site.data.keyword.Bluemix_notm}} API 密钥时的主体</td>
       <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`apikey`：您的 {{site.data.keyword.Bluemix_notm}} API 密钥。</li>
     <li>`uaa_client_ID: cf`</li>
         <li>`uaa_client_secret: `</li></ul><strong>注</strong>：添加不指定值的 <code>uaa_client_secret</code> 键。</td>
     </tr>
@@ -753,8 +966,6 @@ docker run -it -v /local/path:/container/volume <image_name>
       "expiration": 1493747503
     }
 
-    
-
     ```
     {: screen}
 
@@ -768,9 +979,9 @@ docker run -it -v /local/path:/container/volume <image_name>
 ## 使用 CLI 刷新 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌并获取新的刷新令牌
 {: #cs_cli_refresh}
 
-启动新的 CLI 会话时，或者如果当前 CLI 会话已超过 24 小时，那么必须通过运行 `ibmcloud ks cluster-config <cluster_name>`. 使用此命令设置集群的上下文时，将下载 Kubernetes 集群的 `kubeconfig` 文件。此外，还会发出 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 标识令牌和刷新令牌以用于提供认证。
+启动新的 CLI 会话时，或者如果当前 CLI 会话已超过 24 小时，那么必须通过运行 `ibmcloud ks cluster-config <cluster_name>` 来为集群设置上下文。使用此命令设置集群的上下文时，将下载 Kubernetes 集群的 `kubeconfig` 文件。此外，还会发出 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 标识令牌和刷新令牌以用于提供认证。
 {: shortdesc}
 
 **标识令牌**：通过 CLI 发出的每个 IAM 标识令牌都会在 1 小时后到期。标识令牌到期时，会向令牌提供程序发送刷新令牌以刷新标识令牌。这将刷新您的认证，随后您可以继续对集群运行命令。
 
-**刷新令牌**：刷新令牌每 30 天到期一次。如果刷新令牌到期，那么无法刷新标识令牌，并且您无法在 CLI 中继续运行命令。您可以通过运行 `ibmcloud ks cluster-config <cluster_name>`. 此命令还会刷新标识令牌。
+**刷新令牌**：刷新令牌每 30 天到期一次。如果刷新令牌到期，那么无法刷新标识令牌，并且您无法在 CLI 中继续运行命令。您可以通过运行 `ibmcloud ks cluster-config <cluster_name>` 来获取新的刷新令牌。此命令还会刷新标识令牌。

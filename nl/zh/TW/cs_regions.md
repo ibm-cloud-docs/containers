@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # 地區及區域
 {: #regions-and-zones}
 
@@ -34,13 +33,13 @@ subcollection: containers
 
 _{{site.data.keyword.containerlong_notm}} 地區及區域_
 
-{{site.data.keyword.Bluemix_notm}} 是在全球各地管理。{{site.data.keyword.Bluemix_notm}} 內的服務可能在全球提供，或在特定地區內提供。當您在 {{site.data.keyword.containerlong_notm}} 中建立 Kubernetes 叢集時，其資源會保留在您已部署叢集的地區。
+ {{site.data.keyword.Bluemix_notm}} 是在全球各地管理。{{site.data.keyword.Bluemix_notm}} 內的服務可能在全球提供，或在特定地區內提供。當您在 {{site.data.keyword.containerlong_notm}} 中建立 Kubernetes 叢集時，其資源會保留在您已部署叢集的地區。
 
 
-您可以在每個支援的 {{site.data.keyword.containerlong_notm}} 地區建立標準叢集。免費叢集僅適用於選取地區。
+ 您可以在每個支援的 {{site.data.keyword.containerlong_notm}} 地區建立標準叢集。免費叢集僅適用於選取地區。
 {: note}
 
-| {{site.data.keyword.containerlong_notm}} 地區 | 對應 {{site.data.keyword.Bluemix_notm}} 位置 |
+ | {{site.data.keyword.containerlong_notm}} 地區 | 對應 {{site.data.keyword.Bluemix_notm}} 位置 |
 | --- | --- |
 |亞太地區北部（僅限標準叢集）| 東京 |
 |亞太地區南部| 雪梨 |
@@ -50,7 +49,7 @@ _{{site.data.keyword.containerlong_notm}} 地區及區域_
 | 美國南部 | 達拉斯 |
 {: caption="支援的 Kubernetes 服務地區及對應的 IBM Cloud 位置。" caption-side="top"}
 
-<br />
+ <br />
 
 
 ## {{site.data.keyword.Bluemix_notm}} 中的位置
@@ -128,7 +127,7 @@ Space:
 您可以在每個支援的 {{site.data.keyword.containerlong_notm}} 地區建立標準叢集。免費叢集僅適用於選取地區。
 {: note}
 
-支援的 {{site.data.keyword.containerlong_notm}} 地區：
+ 支援的 {{site.data.keyword.containerlong_notm}} 地區：
   * 亞太地區北部（僅限標準叢集）
   * 亞太地區南部
   * 歐盟中部
@@ -161,13 +160,13 @@ Space:
 若要與 {{site.data.keyword.containerlong_notm}} API 互動，請輸入指令類型，並在廣域端點附加 `/v1/command`。
 {:shortdesc}
 
-`GET /clusters` API 的範例：
+ `GET /clusters` API 的範例：
   ```
   GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
-</br>
+ </br>
 
 若要使用 API 搭配廣域端點，請在您的所有要求中，在 `X-Region` 標頭傳遞地區名稱。若要列出可用的地區，請執行 `ibmcloud ks regions`。
 {: tip}
@@ -180,15 +179,15 @@ Space:
 區域是指 {{site.data.keyword.Bluemix_notm}} 地區內可用的實體資料中心。地區是組織區域的概念工具，可包括不同國家/地區中的區域（資料中心）。下表依地區顯示可用的區域。
 {:shortdesc}
 
-* **多區域都會城市**：如果您在多區域都會城市（**雪梨（亞太地區南部）除外**）中建立叢集，則會自動將高可用性 Kubernetes 主節點的抄本分散到各區域。您可以選擇將工作者節點分散至各區域，以保護應用程式不受區域故障影響。
-* **單一區域城市**：如果您在單一區域城市中建立叢集，則可以建立多個工作者節點，但無法將它們分散到各區域。高可用性主節點在個別主機上包括三個抄本，但不會分散在各區域之中。
+* **多區域都會位置**：如果您在多區域都會位置中建立叢集，則會自動將高可用性 Kubernetes 主節點的抄本分散到各區域。您可以選擇將工作者節點分散至各區域，以保護應用程式不受區域故障影響。
+* **單一區域位置**：如果您在單一區域位置中建立叢集，則可以建立多個工作者節點，但無法將它們分散到各區域。高可用性主節點在個別主機上包括三個抄本，但不會分散在各區域之中。
 
-<table summary="此表格顯示依地區可用的區域。列應該從左到右閱讀，第一欄為地區、第二欄為多區域都會城市，而第三欄為單一區域城市。">
-<caption>依地區可用的單一及多區域。</caption>
+<table summary="此表格顯示各地區可用的區域。列應該從左到右閱讀，第一欄為地區，第二欄為多區域都會位置，第三欄為單一區域位置。">
+<caption>各地區可用的單一及多區域。</caption>
   <thead>
   <th>地區</th>
-  <th>多區域都會城市</th>
-  <th>單一區域城市</th>
+  <th>多區域都會位置</th>
+  <th>單一區域位置</th>
   </thead>
   <tbody>
     <tr>
@@ -258,10 +257,10 @@ _瞭解單一區域叢集資源所在的位置。_
 1.  工作者節點會分散到某個地區中的多個區域，以提供叢集的更多可用性。主節點會保留在您已部署叢集的相同具有多區域功能的區域中。當您起始本端容器編排動作（例如 `kubectl` 指令）時，會透過地區端點在主節點與工作者節點之間交換資訊。
 
 2.  其他叢集資源（例如儲存空間、網路、運算或在 Pod 執行的應用程式）在部署至多區域叢集裡各區域的方式會不同。如需相關資訊，請檢閱以下主題：
-    * 在多區域叢集裡設定[檔案儲存空間](/docs/containers?topic=containers-file_storage#add_file)及[區塊儲存空間](/docs/containers?topic=containers-block_storage#add_block)
-    * [在多區域叢集裡使用 LoadBalancer 服務來啟用應用程式的公用或專用存取](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-    * [使用 Ingress 來管理網路資料流量](/docs/containers?topic=containers-ingress#planning)
-    * [增加應用程式的可用性](/docs/containers?topic=containers-app#increase_availability)
+  * 在多區域叢集裡設定[檔案儲存空間](/docs/containers?topic=containers-file_storage#add_file)及[區塊儲存空間](/docs/containers?topic=containers-block_storage#add_block)
+  * [在多區域叢集裡使用 LoadBalancer 服務來啟用應用程式的公用或專用存取](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+  * [使用 Ingress 來管理網路資料流量](/docs/containers?topic=containers-ingress#planning)
+  * [增加應用程式的可用性](/docs/containers?topic=containers-app#increase_availability)
 
 3.  當您起始叢集管理動作（例如，使用 [`ibmcloud ks` 指令](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)）時，會透過地區端點遞送叢集的基本資訊（例如名稱、ID、使用者、指令）。
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -25,46 +25,108 @@ subcollection: containers
 
 
 # Responsabilidades al utilizar {{site.data.keyword.containerlong_notm}}
+{: #responsibilities_iks}
+
 Conozca las responsabilidades de gestión del clúster y los términos y las condiciones existentes para utilizar {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 ## Responsabilidades de la gestión de clústeres
 {: #responsibilities}
 
-Revise las responsabilidades que comparte con IBM para gestionar sus clústeres.
+IBM proporciona una plataforma en la nube empresarial que le permite desplegar apps en servicios de {{site.data.keyword.Bluemix_notm}} DevOps, de inteligencia artificial, de datos y de seguridad. Puede elegir cómo configurar, integrar y operar sus apps y servicios en la nube.
 {:shortdesc}
 
-**IBM es responsable de:**
-
-- Desplegar el maestro, los nodos trabajadores y los componentes de gestión dentro del clúster, como el equilibrador de carga de aplicación de Ingress, en el momento de la creación del clúster
-- Proporcionar las actualizaciones de seguridad, la supervisión, el aislamiento y la recuperación del maestro de Kubernetes para el clúster
-- Actualizar la versión y aplicar los parches de seguridad disponibles a los nodos trabajadores del clúster
-- Supervisar la salud de los nodos trabajadores y proporcionar automatización para la actualización y recuperación de los nodos trabajadores
-- Realizar tareas de automatización sobre su cuenta de infraestructura, incluida la adición de nodos trabajadores, la eliminación de nodos trabajadores y la creación de una subred predeterminada
-- Gestionar, actualizar y recuperar los componentes operativos dentro del clúster, como por ejemplo el equilibrador de carga de aplicación de Ingress y el plugin de almacenamiento
-- Suministrar volúmenes de almacenamiento cuando lo soliciten las reclamaciones de volumen persistente
-- Proporcionar valores de seguridad en todos los nodos trabajadores
-
-</br>
-
-**El usuario es responsable de:**
-
-- [Configuración de la clave de API de {{site.data.keyword.containerlong_notm}} con los permisos adecuados para acceder al portafolio de IBM Cloud Infrastructure (SoftLayer) y a otros servicios de {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#api_key)
-- [Desplegar y gestionar los recursos de Kubernetes, como pods, servicios y despliegues, dentro del clúster](/docs/containers?topic=containers-app#app_cli)
-- [Aprovechar la capacidad del servicio y de Kubernetes para garantizar la alta disponibilidad de las apps](/docs/containers?topic=containers-app#highly_available_apps)
-- [Adición o eliminación de capacidad de clúster mediante el redimensionamiento de las agrupaciones de nodos trabajadores](/docs/containers?topic=containers-clusters#add_workers)
-- [Habilitación de la expansión de VLAN y mantenimiento del equilibrio de las agrupaciones de nodos trabajadores multizona entre zonas](/docs/containers?topic=containers-plan_clusters#ha_clusters)
-- [Crear VLAN públicas y privadas en la infraestructura de IBM Cloud (SoftLayer) para el aislamiento de la red del clúster](/docs/infrastructure/vlans?topic=vlans-getting-started-with-vlans#getting-started-with-vlans)
-- [Garantizar que todos los nodos trabajadores tienen conectividad de red con los URL de punto final del servicio Kubernetes](/docs/containers?topic=containers-firewall#firewall) <p class="note">Si un trabajador tiene VLAN tanto públicas como privadas, se configura la conectividad de red. Si los nodos trabajadores se han configurado solo con una VLAN privada, debe permitir que los nodos trabajadores y el maestro del clúster se comuniquen mediante la [habilitación del punto final de servicio privado](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) o la [configuración de un dispositivo de pasarela](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway). Si configura un cortafuegos, debe gestionar y configurar sus valores de modo que permitan el acceso a {{site.data.keyword.containerlong_notm}} y a otros servicios de {{site.data.keyword.Bluemix_notm}} que utilice con el clúster.</p>
-- [La actualización del maestro kube-apiserver cuando haya disponibles actualizaciones de versión de Kubernetes](/docs/containers?topic=containers-update#master)
-- [Mantenimiento actualizado de nodos trabajadores para versiones mayores, menores y parches](/docs/containers?topic=containers-update#worker_node) <p class="note">No puede cambiar el sistema operativo del nodo trabajador ni el registro en el nodo trabajador. IBM proporciona las actualizaciones de nodo trabajador como una imagen de nodo trabajador completo que incluye los parches de seguridad más recientes. Para aplicar las actualizaciones, se debe volver a crear una imagen del nodo trabajador y se debe volver a cargar con la nueva imagen. Las claves para el usuario root rotan automáticamente cuando se vuelve a cargar el nodo trabajador. </p>
-- [Supervisión del estado del clúster mediante la configuración del reenvío de registros para los componentes del clúster](/docs/containers?topic=containers-health#health).   
-- [Recuperar nodos trabajadores con problemas ejecutando los mandatos `kubectl`, tales como `cordon` o `drain`, y ejecutando los mandatos `ibmcloud ks`, tales como `reboot`, `reload` o `delete`](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)
-- [Añadir o eliminar subredes en la infraestructura de IBM Cloud (SoftLayer) cuando sea necesario](/docs/containers?topic=containers-subnets#subnets)
-- [Hacer copia de seguridad y restaurar datos en el almacenamiento persistente en la infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter)
-- Configuración de los servicios de [registro](/docs/containers?topic=containers-health#logging) y de [supervisión](/docs/containers?topic=containers-health#view_metrics) para dar soporte al buen estado y al rendimiento del clúster
-- [Configuración de la supervisión de estado de los nodos trabajadores con recuperación automática](/docs/containers?topic=containers-health#autorecovery)
-- Auditoría de sucesos que cambian recursos en el clúster, por ejemplo mediante el uso de [{{site.data.keyword.cloudaccesstrailfull}}](/docs/containers?topic=containers-at_events#at_events), para ver las actividades iniciadas por el usuario que cambian el estado de la instancia de {{site.data.keyword.containerlong_notm}}
+<table summary="En la tabla se muestran las responsabilidades de IBM y del usuario. Las filas se leen de izquierda a derecha, en la columna uno aparece un icono que representa cada responsabilidad y en la columna dos una descripción.">
+<caption>Responsabilidades de IBM y del usuario</caption>
+  <thead>
+  <th colspan=2>Responsabilidades por tipo</th>
+  </thead>
+  <tbody>
+    <tr>
+    <td align="center"><img src="images/icon_clouddownload.svg" alt="Icono de una nube con una flecha hacia abajo"/><br>Infraestructura de nube</td>
+    <td>
+    **Responsabilidades de IBM**:
+    <ul><li>Desplegar un maestro dedicado totalmente gestionado y altamente disponible en una cuenta de infraestructura protegida, propiedad de IBM, para cada clúster.</li>
+    <li>Suministrar nodos trabajadores en la cuenta de infraestructura de IBM Cloud (SoftLayer).</li>
+    <li>Configurar los componentes de gestión de clústeres, como por ejemplo, VLANs y equilibradores de carga.</li>
+    <li>Cumplimentar solicitudes de más infraestructura, como por ejemplo añadir y eliminar nodos de trabajo, crear subredes predeterminadas y suministrar volúmenes de almacenamiento en respuesta a las peticiones de volúmenes persistentes.</li>
+    <li>Integrar los recursos de infraestructura ordenados para trabajar de forma automática con la arquitectura del clúster y estar disponible para las apps y cargas de trabajo desplegadas.</li></ul>
+    <br><br>
+    **Responsabilidades del usuario**:
+    <ul><li>Utilizar la API, la CLI o las herramientas de consola para ajustar la capacidad de [cálculo](/docs/containers?topic=containers-clusters#clusters) y [almacenamiento](/docs/containers?topic=containers-storage_planning#storage_planning) y para ajustar la [configuración de red](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster) según las necesidades de la carga de trabajo.</li></ul><br><br>
+    </td>
+     </tr>
+     <tr>
+     <td align="center"><img src="images/icon_tools.svg" alt="Icono de una llave inglesa"/><br>Clúster gestionado</td>
+     <td>
+     **Responsabilidades de IBM**:
+     <ul><li>Proporcionar una suite de herramientas para automatizar la gestión de clústeres, como por ejemplo {{site.data.keyword.containerlong_notm}}[API ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/swagger-api/), [plugin de CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)y [consola ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/kubernetes/clusters).</li>
+     <li>Aplicar automáticamente los parches del SO, las nuevas versiones y las actualizaciones seguridad en el maestro de Kubernetes. Poner a disposición del usuario las actualizaciones mayores y menores para que las pueda aplicar.</li>
+     <li>Actualizar y recuperar los componentes operativos de {{site.data.keyword.containerlong_notm}} y de Kubernetes dentro del clúster, como por ejemplo el equilibrador de carga de aplicación de Ingress y el plugin de almacenamiento de archivos.</li>
+     <li>Realizar copia de seguridad y recuperación de datos en etcd, como por ejemplo de los archivos de configuración de carga de trabajo de Kubernetes</li>
+     <li>Configurar una conexión OpenVPN entre el nodo maestro y los nodos trabajadores cuando se crea el clúster</li>
+     <li>Supervisar e informar del estado de los nodos maestro y trabajadores en las diversas interfaces.</li>
+     <li>Proporcionar actualizaciones mayores, menores, de parches de SO, de versión y de seguridad para los nodos trabajadores</li>
+     <li>Responder a las solicitudes de automatización para actualizar y recuperar nodos de trabajo. Proporcionar la funcionalidad opcional de [Autorecovery para los nodos trabajadores](/docs/containers?topic=containers-health#autorecovery).</li>
+     <li>Proporcionar herramientas, como por ejemplo el [escalado automático de clústeres](/docs/containers?topic=containers-ca#ca), para permitir al usuario ampliar la infraestructura de clústeres.</li>
+     </ul>
+     <br><br>
+     **Responsabilidades del usuario**:
+     <ul>
+     <li>Utilizar la API, la CLI o las herramientas de consola para [aplicar](/docs/containers?topic=containers-update#update) las actualizaciones mayores y menores para el maestro de Kubernetes y las actualizaciones mayores, menores y de parches para los nodos trabajadores proporcionadas.</li>
+     <li>Utilizar la API, la CLI o las herramientas de consola para [recuperar](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot) los recursos de infraestructura o para configurar la funcionalidad opcional de [Autorecovery para los nodos trabajadores](/docs/containers?topic=containers-health#autorecovery).</li></ul>
+     <br><br></td>
+      </tr>
+    <tr>
+      <td align="center"><img src="images/icon_locked.svg" alt="Icono de candado"/><br>Entorno enriquecido con seguridad</td>
+      <td>
+      **Responsabilidades de IBM**:
+      <ul>
+      <li>Mantener controles correspondientes a [diversos estándares de conformidad del sector](/docs/containers?topic=containers-faqs#standards), como por ejemplo PCI DSS.</li>
+      <li>Supervisar, aislar y recuperar el maestro de clúster.</li>
+      <li>Proporcionar réplicas de alta disponibilidad de los componentes de servidor de API maestro de Kubernetes, etcd, planificador y gestor de controladores para protegerse frente a una interrupción del nodo maestro.</li>
+      <li>Aplicar automáticamente actualizaciones de parches de seguridad maestros y proporcionar actualizaciones de parches de seguridad de nodo trabajador.</li>
+      <li>Habilitar determinados valores de seguridad, como por ejemplo discos cifrados en nodos trabajadores</li>
+      <li>Inhabilitar determinadas acciones inseguras para los nodos trabajadores, como por ejemplo, no permitir a los usuarios acceso SSH en el host.</li>
+      <li>Cifrar la comunicación entre los nodos maestro y trabajadores con TLS.</li>
+      <li>Proporcionar imágenes Linux compatibles con CIS para los sistemas operativos de los nodos trabajadores.</li>
+      <li>Supervisar de forma continua las imágenes de los nodos maestro y trabajadores para detectar problemas vulnerabilidad y de conformidad con la seguridad.</li>
+      <li>Suministrar nodos trabajadores con dos particiones de datos cifrados SSD locales AES de 256 bits.</li>
+      <li>Proporcionar opciones para la conectividad de red de clúster, como por ejemplo puntos finales de servicio público y privado.</li>
+      <li>Proporcionar opciones para el aislamiento de cálculo, tales como máquinas virtuales dedicadas, nativas y nativas con Cálculo fiable.</li>
+      <li>Integrar el control de acceso basado en roles de Kubernetes (RBAC) con Identity and Access Management (IAM) de {{site.data.keyword.Bluemix_notm}}.</li>
+      </ul>
+      <br><br>
+      **Responsabilidades del usuario**:
+      <ul>
+      <li>Utilizar la API, la CLI o las herramientas de consola para aplicar las [actualizaciones de parches de seguridad](/docs/containers?topic=containers-changelog#changelog) a los nodos trabajadores.</li>
+      <li>Elegir cómo configurar la [red de clúster](/docs/containers?topic=containers-cs_network_ov#cs_network_ov) y configurar más [valores de seguridad](/docs/containers?topic=containers-security#security) para satisfacer las necesidades de seguridad y de conformidad de la carga de trabajo. Si procede, configurar el [cortafuegos](/docs/containers?topic=containers-firewall#firewall).</li></ul>
+      <br><br></td>
+      </tr>
+      
+      <tr>
+        <td align="center"><img src="images/icon_code.svg" alt="Icono de corchetes angulares"/><br>Orquestación de app</td>
+        <td>
+        **Responsabilidades de IBM**:
+        <ul>
+        <li>Suministrar clústeres con los componentes de Kubernetes instalados para que pueda acceder a la API de Kubernetes.</li>
+        <li>Proporcionar una serie de complementos gestionados para permitir al usuario ampliar las prestaciones de su app, como por ejemplo [Istio](/docs/containers?topic=containers-istio#istio) y [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). El mantenimiento se simplifica para el usuario porque IBM proporciona la instalación y las actualizaciones para los complementos gestionados.</li>
+        <li>Ofrecer la integración de clústeres con tecnologías asociadas seleccionadas de terceros, como por ejemplo {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} y Portworx.</li>
+        <li>Proporcionar automatización para permitir enlazar los servicios a otros servicios de {{site.data.keyword.Bluemix_notm}}.</li>
+        <li>Crear clústeres con secretos de obtención de imagen para que los despliegues en el espacio de nombres `default` de Kubernetes puedan extraer las imágenes de {{site.data.keyword.registrylong_notm}}.</li>
+        <li>Proporcionar clases de almacenamiento y plug-ins para dar soporte a volúmenes persistentes para utilizarlos con las apps.</li>
+        <li>Crear clústeres con direcciones IP de subred reservadas para utilizar para exponer las apps externamente.</li>
+        <li>Dar soporte a equilibradores de carga públicos y privados de Kubernetes y a rutas de Ingress para exponer servicios externamente.</li>
+        </ul>
+        <br><br>
+        **Responsabilidades del usuario**:
+        <ul>
+        <li>Utilizar las herramientas y las características proporcionadas para [configurar y desplegar](/docs/containers?topic=containers-app#app); [definir permisos](/docs/containers?topic=containers-users#users); [integrar con otros servicios](/docs/containers?topic=containers-supported_integrations#supported_integrations); [dar servicio externamente](/docs/containers?topic=containers-cs_network_planning#cs_network_planning); [supervisar el estado](/docs/containers?topic=containers-health#health); [guardar, hacer copia de seguridad y restaurar datos](/docs/containers?topic=containers-storage_planning#storage_planning) y gestionar las cargas de trabajo [de alta disponibilidad](/docs/containers?topic=containers-ha#ha) y resilientes.</li>
+        </ul>
+        </td>
+        </tr>
+  </tbody>
+  </table>
 
 <br />
 

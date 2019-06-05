@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -23,13 +23,16 @@ subcollection: containers
 {:download: .download}
 
 
-# 在 {{site.data.keyword.Bluemix_dedicated_notm}} 中開始使用叢集
+# 已淘汰：在 {{site.data.keyword.Bluemix_dedicated_notm}} 中開始使用叢集
 {: #dedicated}
 
-如果您具有 {{site.data.keyword.Bluemix_dedicated}} 帳戶，則可以在專用雲端環境中部署 Kubernetes 叢集 (`https://<my-dedicated-cloud-instance>.bluemix.net`)，並與也在該處執行且預先選取的 {{site.data.keyword.Bluemix_notm}} 服務連接。
+已淘汰 {{site.data.keyword.Bluemix_dedicated_notm}} 中的 {{site.data.keyword.containerlong}}。您無法在 {{site.data.keyword.Bluemix_dedicated_notm}} 環境中建立叢集。若要在 {{site.data.keyword.Bluemix_notm}} Public 中建立叢集，請參閱[開始使用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started)。
+{: deprecated}
+
+如果您具有 {{site.data.keyword.Bluemix_dedicated_notm}} 帳戶，則可以在專用雲端環境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) 中部署 Kubernetes 叢集，並與也在該處執行的預先選取 {{site.data.keyword.Bluemix_notm}} 服務連接。
 {:shortdesc}
 
-如果您沒有 {{site.data.keyword.Bluemix_dedicated_notm}} 帳戶，則可以在公用 {{site.data.keyword.Bluemix_notm}} 帳戶中[開始使用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index)。
+如果您沒有 {{site.data.keyword.Bluemix_dedicated_notm}} 帳戶，則可以在公用 {{site.data.keyword.Bluemix_notm}} 帳戶中[開始使用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started)。
 
 ## 關於專用雲端環境
 {: #dedicated_environment}
@@ -385,7 +388,7 @@ subcollection: containers
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.6      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.7      Default
     ```
     {: screen}
 
@@ -403,7 +406,7 @@ subcollection: containers
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
     ```
     {: screen}
 
@@ -464,7 +467,7 @@ http://localhost:8001/ui
         {: codeblock}
 
 ### 新增工作者節點
-{: #add_workers}
+{: #add_workers_dedicated}
 
 使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您只能建立[單一區域叢集](/docs/containers?topic=containers-plan_clusters#single_zone)。依預設，單一區域叢集已設定名為 `default` 的工作者節點儲存區。工作者節點儲存區會將具有您在建立叢集期間所定義之相同配置（例如機型）的工作者節點分組在一起。您可以藉由[調整現有工作者節點儲存區大小](/docs/containers?topic=containers-clusters#resize_pool)或[新增工作者節點儲存區](/docs/containers?topic=containers-clusters#add_pool)，來將更多工作者節點新增至叢集裡。當您新增工作者節點儲存區時，必須將可用區域新增至工作者節點儲存區，讓工作者節點可以部署至該區域。不過，您無法將其他區域新增至工作者節點儲存區。
 {: shortdesc}
@@ -521,7 +524,7 @@ http://localhost:8001/ui
     ```
     {: screen}
 
-4. **重要事項**：如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+4. **重要事項**：如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 
 5. 若要配置內部部署及內部帳戶連線功能，請從下列選項中進行選擇：
@@ -537,7 +540,6 @@ http://localhost:8001/ui
   * [更新工作者節點](/docs/containers?topic=containers-update#worker_node)
   * [配置叢集記載](/docs/containers?topic=containers-health#logging)。「專用」端點不支援「日誌」啟用。您必須登入公用 {{site.data.keyword.cloud_notm}} 端點，並將您的公用組織及空間設為目標，才能啟用日誌轉遞。
   * [配置叢集監視](/docs/containers?topic=containers-health#view_metrics)。每一個 {{site.data.keyword.Bluemix_dedicated_notm}} 帳戶內都會有 `ibm-monitoring` 叢集。此叢集會持續監視「專用」環境中的 {{site.data.keyword.containerlong_notm}} 性能，並檢查環境的穩定性及連線功能。請不要從環境移除此叢集。
-  * [視覺化 Kubernetes 叢集資源](/docs/containers?topic=containers-integrations#weavescope)
   * [移除叢集](/docs/containers?topic=containers-clusters#remove)
 
 <br />
@@ -562,7 +564,7 @@ http://localhost:8001/ui
 #### 使用負載平衡器服務類型來配置應用程式的存取
 {: #dedicated_apps_public_load_balancer}
 
-如果您要將公用 IP 位址用於負載平衡器，請確定已向 IBM 提供企業防火牆白名單，或[開立支援案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)來配置防火牆白名單。然後，遵循[使用負載平衡器公開應用程式](/docs/containers?topic=containers-loadbalancer)中的步驟。
+如果您要將公用 IP 位址用於負載平衡器，請確定已向 IBM 提供企業防火牆白名單，或[開立支援案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)來配置防火牆白名單。然後，遵循[使用網路負載平衡器 (NLB) 的基本及 DSR 負載平衡](/docs/containers?topic=containers-loadbalancer)中的步驟進行。
 {: shortdesc}
 
 #### 使用 Ingress 來配置應用程式的公用存取

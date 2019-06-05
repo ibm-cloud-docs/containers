@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -25,47 +25,108 @@ subcollection: containers
 
 
 # {{site.data.keyword.containerlong_notm}} を使用する際の責任
+{: #responsibilities_iks}
+
 {{site.data.keyword.containerlong}} を使用する際のクラスターの管理責任とご利用条件について説明します。
 {:shortdesc}
 
 ## クラスター管理の責任
 {: #responsibilities}
 
-お客様が IBM と分担する、クラスター管理の責任について確認してください。
+IBM は、{{site.data.keyword.Bluemix_notm}} DevOps、AI、データ、およびセキュリティー・サービスとともに、アプリをデプロイするためのエンタープライズ・クラウド・プラットフォームを提供します。 クラウドでのアプリおよびサービスのセットアップ、統合、および操作方法を選択します。
 {:shortdesc}
 
-**IBM は以下について責任を持ちます。**
-
-- クラスター作成時に、マスター、ワーカー・ノード、管理コンポーネント (Ingress アプリケーション・ロード・バランサーなど) をクラスター内にデプロイする
-- クラスターの Kubernetes マスターのセキュリティー更新、モニタリング、分離、リカバリーを提供する
-- バージョン更新とセキュリティー・パッチをクラスター・ワーカー・ノードに適用できるようにする
-- ワーカー・ノードの正常性をモニタリングし、それらのワーカー・ノードの更新とリカバリーの自動化を提供する
-- ワーカー・ノードの追加、ワーカー・ノードの削除、デフォルト・サブネットの作成などの、インフラストラクチャー・アカウントに対する自動化タスクを実行する
-- クラスター内の運用コンポーネント (Ingress アプリケーション・ロード・バランサーやストレージ・プラグインなど) を管理、更新、リカバリーする
-- ストレージ・ボリュームを、永続ボリューム請求で要求されたときにプロビジョンする
-- すべてのワーカー・ノードにセキュリティー設定を提供する
-
-</br>
-
-**お客様は以下について責任を持ちます。**
-
-- [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオと他の {{site.data.keyword.Bluemix_notm}} サービスにアクセスするために、適切な権限を使用して {{site.data.keyword.containerlong_notm}} API キーを構成する](/docs/containers?topic=containers-users#api_key)
-- [Kubernetes リソース (ポッド、サービス、デプロイメントなど) をクラスター内にデプロイして管理する](/docs/containers?topic=containers-app#app_cli)
-- [アプリの高可用性が確保されるように、サービスと Kubernetes の機能を活用する](/docs/containers?topic=containers-app#highly_available_apps)
-- [ワーカー・プールのサイズを変更することで、クラスターの容量を追加または削除する](/docs/containers?topic=containers-clusters#add_workers)
-- [VLAN のスパンニングを有効にし、ゾーン間で複数ゾーン・ワーカー・プールのバランスを維持する](/docs/containers?topic=containers-plan_clusters#ha_clusters)
-- [クラスターのネットワーク分離のために IBM Cloud インフラストラクチャー (SoftLayer) でパブリック VLAN とプライベート VLAN を作成する ](/docs/infrastructure/vlans?topic=vlans-getting-started-with-vlans#getting-started-with-vlans)
-- [すべてのワーカー・ノードに、Kubernetes サービス・エンドポイント URL へのネットワーク接続を設定する](/docs/containers?topic=containers-firewall#firewall)
-<p class="note">ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、[プライベート・サービス・エンドポイントを有効にする](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)か、[ゲートウェイ・デバイスを構成する](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)ことによって、ワーカー・ノードとクラスター・マスターが通信できるようにする必要があります。ファイアウォールをセットアップする場合は、クラスターと併用する {{site.data.keyword.containerlong_notm}} および他の {{site.data.keyword.Bluemix_notm}} サービスに関するアクセスを許可するように、ファイアウォールの設定を管理したり構成したりする必要があります。</p>
-- [Kubernetes バージョンの更新が利用可能になったら、マスター kube-apiserver を更新する](/docs/containers?topic=containers-update#master)
-- [ワーカー・ノードをメジャー・バージョン、マイナー・バージョン、およびパッチ・バージョンについて常に最新の状態に保持する](/docs/containers?topic=containers-update#worker_node) <p class="note">ワーカー・ノードのオペレーティング・システムを変更したり、ワーカー・ノードにログインしたりすることはできません。最新のセキュリティー・パッチが含まれる完全なワーカー・ノードのイメージとして、ワーカー・ノードの更新が IBM により提供されています。更新を適用するには、ワーカー・ノードのイメージを再作成し、新しいイメージを使ってワーカー・ノードを再ロードする必要があります。ワーカー・ノードの再ロード時に、root ユーザーの鍵は自動的に交替されます。</p>
-- [クラスター・コンポーネント用にログ転送をセットアップして、クラスターの正常性をモニターする](/docs/containers?topic=containers-health#health)。   
-- [トラブルが発生したワーカー・ノードをリカバリーする。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`ibmcloud ks` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)
-- [IBM Cloud インフラストラクチャー (SoftLayer) 内のサブネットを必要に応じて追加または解除する](/docs/containers?topic=containers-subnets#subnets)
-- [IBM Cloud インフラストラクチャー (SoftLayer) で永続ストレージのデータのバックアップとリストアを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter)
-- クラスターの正常性とパフォーマンスをサポートするために[ロギング](/docs/containers?topic=containers-health#logging)・サービスと[モニタリング](/docs/containers?topic=containers-health#view_metrics)・サービスをセットアップする
-- [Autorecovery を使用したワーカー・ノードの正常性モニタリングの構成](/docs/containers?topic=containers-health#autorecovery)
-- クラスター内のリソースを変更するイベントを監査する。例えば [{{site.data.keyword.cloudaccesstrailfull}}](/docs/containers?topic=containers-at_events#at_events) を使用して、ユーザーによって開始された {{site.data.keyword.containerlong_notm}} インスタンスの状態を変更するアクティビティーを確認したりする
+<table summary="この表は、IBM とお客様の責任を示しています。行は左から右に読みます。1 列目は各責任を表すアイコン、2 列目は説明です。">
+<caption>IBM とお客様の責任</caption>
+  <thead>
+  <th colspan=2>タイプ別の責任</th>
+  </thead>
+  <tbody>
+    <tr>
+    <td align="center"><img src="images/icon_clouddownload.svg" alt="下向き矢印の付いたクラウドのアイコン"/><br>クラウド・インフラストラクチャー</td>
+    <td>
+    **IBM の責任**:
+    <ul><li>各クラスターの保護された IBM 所有のインフラストラクチャー・アカウントに完全に管理された可用性の高い専用マスターをデプロイします。</li>
+    <li>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントでワーカー・ノードをプロビジョンします。</li>
+    <li>VLAN やロード・バランサーなどのクラスター管理コンポーネントをセットアップします。</li>
+    <li>ワーカー・ノードの追加と削除、デフォルトのサブネットの作成、永続ボリューム請求に対応するためのストレージ・ボリュームのプロビジョニングなど、インフラストラクチャーの追加要求を満たします。</li>
+    <li>注文したインフラストラクチャー・リソースを統合して、ご使用のクラスター・アーキテクチャーで自動的に機能し、デプロイしたアプリおよびワークロードで使用できるようにします。</li></ul>
+    <br><br>
+    **お客様の責任**:
+    <ul><li>提供された API、CLI、またはコンソール・ツールを使用して、[コンピュート](/docs/containers?topic=containers-clusters#clusters)および[ストレージ](/docs/containers?topic=containers-storage_planning#storage_planning)容量を調整し、ワークロードのニーズを満たすように[ネットワーク構成](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)を調整します。</li></ul><br><br>
+    </td>
+     </tr>
+     <tr>
+     <td align="center"><img src="images/icon_tools.svg" alt="レンチ・アイコン"/><br>管理対象クラスター</td>
+     <td>
+     **IBM の責任**:
+     <ul><li>{{site.data.keyword.containerlong_notm}} [API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-api/)、[CLI プラグイン](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)、[コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/clusters) など、クラスター管理を自動化するためのツールを提供します。</li>
+     <li>Kubernetes マスターに OS、バージョン、およびセキュリティーのパッチ更新を自動的に適用します。 メジャー更新とマイナー更新を適用できるようにします。</li>
+     <li>Ingress アプリケーション・ロード・バランサーやファイル・ストレージ・プラグインなど、クラスター内の運用 {{site.data.keyword.containerlong_notm}} および Kubernetes コンポーネントを更新およびリカバリーします。</li>
+     <li>Kubernetes ワークロード構成ファイルなどの etcd でデータをバックアップおよびリカバリーします</li>
+     <li>クラスターの作成時にマスター・ノードとワーカー・ノードの間の OpenVPN 接続をセットアップします。</li>
+     <li>さまざまなインターフェースでマスター・ノードとワーカー・ノードの正常性をモニターおよび報告します。</li>
+     <li>ワーカー・ノードに OS、バージョン、およびセキュリティーのメジャー、マイナー、およびパッチ更新を提供します。</li>
+     <li>ワーカー・ノードを更新およびリカバリーするための自動化要求を満たします。 オプションの[ワーカー・ノードの自動リカバリー](/docs/containers?topic=containers-health#autorecovery)を提供します。</li>
+     <li>[クラスター自動スケーリング機能](/docs/containers?topic=containers-ca#ca)などのツールを提供して、クラスター・インフラストラクチャーを拡張します。</li>
+     </ul>
+     <br><br>
+     **お客様の責任**:
+     <ul>
+     <li>API、CLI、またはコンソール・ツールを使用して、提供されたメジャーまたはマイナー Kubernetes マスター更新とワーカー・ノードのメジャー、マイナー、およびパッチ更新を[適用](/docs/containers?topic=containers-update#update)します。</li>
+     <li>API、CLI、またはコンソール・ツールを使用して、インフラストラクチャー・リソースを[リカバリー](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot)したり、オプションの[ワーカー・ノードの自動リカバリー](/docs/containers?topic=containers-health#autorecovery)をセットアップおよび構成したりします。</li></ul>
+     <br><br></td>
+      </tr>
+    <tr>
+      <td align="center"><img src="images/icon_locked.svg" alt="ロック・アイコン"/><br>セキュリティーが充実した環境</td>
+      <td>
+      **IBM の責任**:
+      <ul>
+      <li>PCI DSS など、[さまざまな業界のコンプライアンス規格](/docs/containers?topic=containers-faqs#standards)に対応した制御を維持します。</li>
+      <li>クラスターのマスターをモニター、分離、およびリカバリーします。</li>
+      <li>Kubernetes マスターの API サーバー、etcd、スケジューラー、およびコントローラー・マネージャー・コンポーネントの可用性の高いレプリカを提供して、マスターの停止を防ぎます。</li>
+      <li>マスターにセキュリティーのパッチ更新を自動的に適用し、ワーカー・ノードにセキュリティーのパッチ更新を提供します。</li>
+      <li>ワーカー・ノードの暗号化されたディスクなど、特定のセキュリティー設定を有効にします</li>
+      <li>ユーザーのホストへの SSH を許可しないなど、ワーカー・ノードの特定の非セキュアなアクションを無効にします。</li>
+      <li>マスターとワーカー・ノードの間の通信を TLS で暗号化します。</li>
+      <li>ワーカー・ノードのオペレーティング・システムに CIS 準拠の Linux イメージを提供します。</li>
+      <li>マスターおよびワーカー・ノードのイメージを継続的にモニターして、脆弱性およびセキュリティー・コンプライアンス上の問題を検出します。</li>
+      <li>ワーカー・ノードを 2 つのローカル SSD、AES 256 ビット暗号化データ・パーティションでプロビジョンします。</li>
+      <li>パブリックおよびプライベートのサービス・エンドポイントなど、クラスターのネットワークの接続に関するオプションを提供します。</li>
+      <li>専用仮想マシン、ベアメタル、トラステッド・コンピューティングを含むベアメタルなど、コンピュートの分離のためのオプションを提供します。</li>
+      <li>Kubernetes 役割ベース・アクセス制御 (RBAC) を {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) と統合します。</li>
+      </ul>
+      <br><br>
+      **お客様の責任**:
+      <ul>
+      <li>API、CLI、またはコンソール・ツールを使用して、提供された[セキュリティーのパッチ更新](/docs/containers?topic=containers-changelog#changelog)をワーカー・ノードに適用します。</li>
+      <li>[クラスター・ネットワーク](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)のセットアップ方法を選択し、追加の[セキュリティー設定](/docs/containers?topic=containers-security#security)を構成して、ワークロードのセキュリティーとコンプライアンスのニーズを満たします。 適用可能であれば、[ファイアウォール](/docs/containers?topic=containers-firewall#firewall)を構成します。</li></ul>
+      <br><br></td>
+      </tr>
+      
+      <tr>
+        <td align="center"><img src="images/icon_code.svg" alt="コードの括弧アイコン"/><br>アプリのオーケストレーション</td>
+        <td>
+        **IBM の責任**:
+        <ul>
+        <li>Kubernetes API にアクセスできるように、インストールされた Kubernetes コンポーネントでクラスターをプロビジョンします。</li>
+        <li>[Istio](/docs/containers?topic=containers-istio#istio) や [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial) など、多くの管理対象アドオンを提供して、アプリの機能を拡張します。IBM によって管理対象アドオンのインストールおよび更新が提供されるため、保守が簡素化されます。</li>
+        <li>{{site.data.keyword.la_short}}、{{site.data.keyword.mon_short}}、Portworx など、選択したサード・パーティーのパートナーシップ・テクノロジーとのクラスター統合を提供します。</li>
+        <li>他の {{site.data.keyword.Bluemix_notm}} サービスへのサービス・バインディングを可能にする自動化を提供します。</li>
+        <li>`default` Kubernetes 名前空間でのデプロイメントが {{site.data.keyword.registrylong_notm}} からイメージをプルできるように、イメージ・プル・シークレットを使用してクラスターを作成します。</li>
+        <li>ご使用のアプリで使用する永続ボリュームをサポートするストレージ・クラスおよびプラグインを提供します。</li>
+        <li>アプリを外部から公開する場合に使用するために予約されているサブネット IP アドレスを使用してクラスターを作成します。</li>
+        <li>サービスを外部から公開するためのネイティブ Kubernetes パブリックおよびプライベート・ロード・バランサーおよび Ingress ルートをサポートします。</li>
+        </ul>
+        <br><br>
+        **お客様の責任**:
+        <ul>
+        <li>提供されたツールおよび機能を使用して、[構成とデプロイ](/docs/containers?topic=containers-app#app)、[許可のセットアップ](/docs/containers?topic=containers-users#users)、[他のサービスとの統合](/docs/containers?topic=containers-supported_integrations#supported_integrations)、[外部からの処理](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)、[正常性のモニター](/docs/containers?topic=containers-health#health)、[データの保存、バックアップ、およびリストア](/docs/containers?topic=containers-storage_planning#storage_planning)を行い、それ以外の場合は[可用性が高く](/docs/containers?topic=containers-ha#ha)、回復力の高いワークロードを管理します。</li>
+        </ul>
+        </td>
+        </tr>
+  </tbody>
+  </table>
 
 <br />
 

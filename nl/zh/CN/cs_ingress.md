@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -24,7 +24,7 @@ subcollection: containers
 
 
 
-# 使用 Ingress 公开应用程序
+# 使用 Ingress 应用程序负载均衡器 (ALB) 进行 HTTPS 负载均衡
 {: #ingress}
 
 通过创建在 {{site.data.keyword.containerlong}} 中由 IBM 提供的应用程序负载均衡器管理的 Ingress 资源，公开 Kubernetes 集群中的多个应用程序。
@@ -222,14 +222,14 @@ Ingress 由三个组件组成：
 {:shortdesc}
 
 **所有 Ingress 配置的先决条件：**
-- Ingress 仅可用于标准集群，并要求至少每个专区有两个工作程序节点以确保高可用性，同时要求定期进行更新。如果专区中只有一个工作程序，那么 ALB 无法接收自动更新。自动更新应用于 ALB pod 时，会重新装入 pod。但是，ALB pod 具有反亲缘关系规则，可确保每个工作程序节点仅安排一个 pod，从而实现高可用性。由于一个工作程序上只有一个 ALB pod，因此该 pod 不会重新启动，这样流量就不会中断。仅当更新工作程序节点时，ALB pod 才会更新为最新版本。
+- Ingress 仅可用于标准集群，并要求至少每个专区有两个工作程序节点以确保高可用性，同时要求定期进行更新。如果专区中只有一个工作程序，那么 ALB 无法接收自动更新。自动更新应用于 ALB pod 时，会重新装入 pod。但是，ALB pod 具有反亲缘关系规则，可确保每个工作程序节点仅安排一个 pod，从而实现高可用性。由于一个工作程序上只有一个 ALB pod，因此该 pod 不会重新启动，这样流量就不会中断。仅当手动删除旧的 pod 时，ALB pod 才会更新为最新版本，这样才可以安排新的已更新 pod。
 - 设置 Ingress 需要以下 [{{site.data.keyword.Bluemix_notm}} IAM 角色](/docs/containers?topic=containers-users#platform)：
     - 对集群的**管理员**平台角色
     - 所有名称空间中的**管理者**服务角色
 
 **在多专区集群中使用 Ingress 的先决条件**：
  - 如果将网络流量限制为[边缘工作程序节点](/docs/containers?topic=containers-edge)，那么每个专区必须至少启用 2 个边缘工作程序节点，才可实现 Ingress pod 的高可用性。[创建边缘节点工作程序池](/docs/containers?topic=containers-clusters#add_pool)，此池跨集群中的所有专区，并且每个专区至少有 2 个工作程序节点。
- - 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+ - 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
  - 如果某个专区发生故障，那么您可能会看到对该专区中 Ingress ALB 的请求中出现间歇性故障。
 
 <br />
@@ -300,7 +300,7 @@ Ingress 由三个组件组成：
 开始之前：
 
 * 查看 Ingress [先决条件](#config_prereqs)。
-* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### 步骤 1：部署应用程序并创建应用程序服务
 {: #public_inside_1}
@@ -362,7 +362,7 @@ Ingress 由三个组件组成：
 
 **要使用 IBM 提供的 Ingress 域，请执行以下操作：**
 
-获取 IBM 提供的域。将 `<cluster_name_or_ID>` 替换为部署了应用程序的集群的名称。
+获取 IBM 提供的域。将 `<cluster_name_or_ID>` 替换为在其中部署了应用程序的集群的名称。
 ```
 ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
 ```
@@ -380,8 +380,8 @@ Ingress Secret:         <tls_secret>
       * 如果希望 Ingress 公开的应用程序位于一个集群的不同名称空间中，请将定制域注册为通配符域，例如 `*.custom_domain.net`。
 
 2.  配置域以将入局网络流量路由到 IBM 提供的 ALB。在以下选项之间进行选择：
-    -   通过将 IBM 提供的域指定为规范名称记录 (CNAME)，定义定制域的别名。要查找 IBM 提供的 Ingress 域，请运行 `ibmcloud ks cluster-get --cluster <cluster_name>` 并查找 **Ingress subdomain** 字段。使用 CNAME 为首选，因为 IBM 在 IBM 子域上提供自动运行状况检查并从 DNS 响应除去任何失败的 IP。
-    -   通过将 IBM 提供的 ALB 的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找 ALB 的可移植公共 IP 地址，请运行 `ibmcloud ks alb-get <public_alb_ID>`.
+    -   通过将 IBM 提供的域指定为规范名称记录 (CNAME)，定义定制域的别名。要查找 IBM 提供的 Ingress 域，请运行 `ibmcloud ks cluster-get --cluster <cluster_name>` 并查找 **Ingress 子域**字段。使用 CNAME 为首选，因为 IBM 在 IBM 子域上提供自动运行状况检查并从 DNS 响应除去任何失败的 IP。
+    -   通过将 IBM 提供的 ALB 的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找 ALB 的可移植公共 IP 地址，请运行 `ibmcloud ks alb-get <public_alb_ID>`。
 
 ### 步骤 3：选择 TLS 终止
 {: #public_inside_3}
@@ -459,7 +459,7 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
      kubectl create -f ssl-my-test
      ```
      {: pre}
-     确保创建的私钥与 IBM 提供的 Ingress 私钥不同名。通过运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> grep Ingress`，可以获取 IBM 提供的 Ingress 私钥的名称。
+     确保创建的私钥与 IBM 提供的 Ingress 私钥不同名。通过运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`，可以获取 IBM 提供的 Ingress 私钥的名称。
      {: note}
 
 
@@ -549,8 +549,9 @@ Ingress 资源定义 ALB 用于将流量路由到应用程序服务的路由规�
     </tr>
     <tr>
     <td><code>path</code></td>
-    <td>将 <em>&lt;app_path&gt;</em> 替换为斜杠或应用程序正在侦听的路径。该路径将附加到 IBM 提供的域或定制域，以创建应用程序的唯一路径。在 Web 浏览器中输入此路径时，网络流量会路由到 ALB。ALB 会查找关联的服务，并将网络流量发送到该服务。然后，该服务将流量转发到在运行应用程序的 pod。</br></br>
-        许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
+    <td>将 <em>&lt;app_path&gt;</em> 替换为斜杠或应用程序正在侦听的路径。该路径将附加到 IBM 提供的域或定制域，以创建应用程序的唯一路径。在 Web 浏览器中输入此路径时，网络流量会路由到 ALB。ALB 会查找关联的服务，并将网络流量发送到该服务。然后，该服务会将流量转发到应用程序在其中运行的 pod。
+    </br></br>
+            许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
                 示例：<ul><li>对于 <code>http://domain/</code>，请输入 <code>/</code> 作为路径。</li><li>对于 <code>http://domain/app1_path</code>，请输入 <code>/app1_path</code> 作为路径。</li></ul>
     </br>
     <strong>提示：</strong>要将 Ingress 配置为侦听与应用程序所侦听的路径不同的路径，可以使用 [rewrite 注释](/docs/containers?topic=containers-ingress_annotation#rewrite-path)。</td>
@@ -630,7 +631,7 @@ http://<subdomain2>.<domain>/<app1_path>
 
 * 查看 Ingress [先决条件](#config_prereqs)。
 * 确保要包含在集群负载均衡中的外部应用程序可以使用公共 IP 地址进行访问。
-* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 向公众公开集群外部应用程序：
 
@@ -887,14 +888,14 @@ kind: Endpoints
 
 1. 如果工作程序节点连接到仅专用 VLAN，那么必须配置您自己的[在专用网络上可用的 DNS 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/)。
 2. 通过 DNS 提供程序创建定制域。如果希望 Ingress 公开的应用程序位于一个集群的不同名称空间中，请将定制域注册为通配符域，例如 `*.custom_domain.net`。
-3. 使用专用 DNS 服务，通过将 IP 地址添加为 A 记录，将定制域映射到 ALB 的可移植专用 IP 地址。要查找 ALB 的可移植专用 IP 地址，请对每个 ALB 运行 `ibmcloud ks alb-get <private_alb_ID>`。
+3. 使用专用 DNS 服务，通过将 IP 地址添加为 A 记录，将定制域映射到 ALB 的可移植专用 IP 地址。要查找 ALB 的可移植专用 IP 地址，请针对每个 ALB 运行一次 `ibmcloud ks alb-get <private_alb_ID>`。
 
 **专用和公共 VLAN 集群：**
 
 1.    创建定制域。要注册定制域，请使用您的域名服务 (DNS) 提供者或 [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started-with-dns#getting-started-with-dns)。
       * 如果希望 Ingress 公开的应用程序位于一个集群的不同名称空间中，请将定制域注册为通配符域，例如 `*.custom_domain.net`。
 
-2.  通过将 IP 地址添加为 A 记录，将定制域映射到 ALB 的可移植专用 IP 地址。要查找 ALB 的可移植专用 IP 地址，请对每个 ALB 运行 `ibmcloud ks alb-get <private_alb_ID>`。
+2.  通过将 IP 地址添加为 A 记录，将定制域映射到 ALB 的可移植专用 IP 地址。要查找 ALB 的可移植专用 IP 地址，请针对每个 ALB 运行一次 `ibmcloud ks alb-get <private_alb_ID>`。
 
 ### 步骤 4：选择 TLS 终止
 {: #private_4}
@@ -1048,8 +1049,9 @@ Ingress 资源定义 ALB 用于将流量路由到应用程序服务的路由规�
     </tr>
     <tr>
     <td><code>path</code></td>
-    <td>将 <em>&lt;app_path&gt;</em> 替换为斜杠或应用程序正在侦听的路径。该路径将附加到定制域，以创建应用程序的唯一路径。在 Web 浏览器中输入此路径时，网络流量会路由到 ALB。ALB 会查找关联的服务，并将网络流量发送到该服务。然后，该服务将流量转发到在运行应用程序的 pod。</br></br>
-        许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
+    <td>将 <em>&lt;app_path&gt;</em> 替换为斜杠或应用程序正在侦听的路径。该路径将附加到定制域，以创建应用程序的唯一路径。在 Web 浏览器中输入此路径时，网络流量会路由到 ALB。ALB 会查找关联的服务，并将网络流量发送到该服务。然后，该服务会将流量转发到应用程序在其中运行的 pod。
+    </br></br>
+            许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
                 示例：<ul><li>对于 <code>http://domain/</code>，请输入 <code>/</code> 作为路径。</li><li>对于 <code>http://domain/app1_path</code>，请输入 <code>/app1_path</code> 作为路径。</li></ul>
     </br>
     <strong>提示：</strong>要将 Ingress 配置为侦听与应用程序所侦听的路径不同的路径，可以使用 [rewrite 注释](/docs/containers?topic=containers-ingress_annotation#rewrite-path)。</td>
@@ -1464,7 +1466,7 @@ kubectl get pods -n kube-system | grep alb
 
 
 ### 调整内核性能
-{: #kernel}
+{: #ingress_kernel}
 
 要优化 Ingress ALB 的性能，您还可以[更改工作程序节点上的 Linux 内核 `sysctl` 参数](/docs/containers?topic=containers-kernel)。根据优化的内核调整自动供应工作程序节点，因此仅在具有特定性能优化需求时才更改这些设置。
 {: shortdesc}
@@ -1481,6 +1483,8 @@ kubectl get pods -n kube-system | grep alb
 {: shortdesc}
 
 当您有特定 Ingress 需求时，配置自己的定制 Ingress 控制器可能非常有用。如果自带 Ingress 控制器而不是使用 IBM 提供的 Ingress ALB，那么由您负责提供控制器映像，维护控制器以及更新控制器。
+
+**注**：仅支持将自带 Ingress 控制器用于提供对您的应用程序的公用外部访问权，但不支持提供专用外部访问权。
 
 1. 获取缺省公共 ALB 的标识。公共 ALB 的格式类似于 `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`。
     ```

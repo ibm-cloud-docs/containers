@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -71,7 +71,7 @@ Le diagramme suivant illustre la procédure que vous pouvez suivre pour mettre �
 Figure 1. Diagramme de la procédure de mise à jour du maître Kubernetes
 
 {: #update_master}
-Avant de commencer, assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). 
+Avant de commencer, assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform).
 
 Pour mettre à jour la version _principale_ ou _secondaire_ du maître Kubernetes :
 
@@ -110,7 +110,7 @@ Lorsque la mappe de configuration n'est pas définie, la valeur par défaut est 
 - [Mettez à jour le maître Kubernetes](#master). La version Kubernetes du noeud worker ne peut pas être supérieure à celle du serveur d'API Kubernetes qui s'exécute sur votre maître Kubernetes.
 - Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ sur la page des [modifications de Kubernetes](/docs/containers?topic=containers-cs_versions).
 - Pour appliquer une mise à jour de module de correction, consultez le [journal des modifications de version de Kubernetes](/docs/containers?topic=containers-changelog#changelog).
-- Assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform).</br>
+- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). </br>
 
 Les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. La machine de votre noeud worker est réimagée et les données sont supprimées si elles ne sont pas [stockées hors du pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
@@ -142,7 +142,7 @@ Les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos 
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012
@@ -276,7 +276,7 @@ Avant de commencer :
 *   [Mettez à jour le maître Kubernetes](#master). La version Kubernetes du noeud worker ne peut pas être supérieure à celle du serveur d'API Kubernetes qui s'exécute sur votre maître Kubernetes.
 *   Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ sur la page des [modifications de Kubernetes](/docs/containers?topic=containers-cs_versions).
 *   Pour appliquer une mise à jour de module de correction, consultez le [journal des modifications de version de Kubernetes](/docs/containers?topic=containers-changelog#changelog).
-*   Assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform).</br>
+*   Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). </br>
 
 Les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. La machine de votre noeud worker est réimagée et les données sont supprimées si elles ne sont pas [stockées hors du pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
@@ -294,7 +294,7 @@ Pour mettre à jour les noeuds worker à partir de la console :
 ## Mise à jour des types de machine
 {: #machine_type}
 
-Vous pouvez mettre à jour les types de machine de vos noeuds worker en ajoutant de nouveaux noeuds worker et en supprimant les anciens. Par exemple, si vous disposez de noeuds worker sur des types de machine dépréciés comportant `u1c` ou `b1c` dans le nom, créez des noeuds worker ayant `u2c` ou `b2c` dans le nom.
+Vous pouvez mettre à jour les types de machine de vos noeuds worker en ajoutant de nouveaux noeuds worker et en supprimant les anciens. Par exemple, si votre cluster a des versions de noeud worker `x1c` obsolètes ou Ubuntu 16 `x2c` plus anciennes, créez des noeuds worker Ubuntu 18 qui utilisent des types de machine dont le nom comprend `x3c`.
 {: shortdesc}
 
 Avant de commencer :
@@ -413,7 +413,7 @@ Votre cluster {{site.data.keyword.containerlong_notm}} est livré avec des modul
 
 **Quels sont les modules complémentaires par défaut que je peux mettre à jour séparément du cluster ?**</br>
 Vous pouvez éventuellement désactiver les mises à jour automatiques des modules complémentaires suivants :
-* [Fluentd pour la consignation](#logging)
+* [Fluentd pour la consignation](#logging-up)
 * [Equilibreur de charge d'application (ALB) Ingress](#alb)
 
 **Existe-t-il des modules impossibles à mettre à jour séparément du cluster ?**</br>
@@ -440,10 +440,10 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **Puis-je installer d'autres modules complémentaires que ceux par défaut ?**</br>
-Oui. {{site.data.keyword.containerlong_notm}} offre d'autres modules complémentaires que vous pouvez sélectionner pour ajouter des fonctionnalités à votre cluster. Par exemple, vous envisagerez peut-être d'[utiliser des chartes Helm](/docs/containers?topic=containers-integrations#helm) pour installer le [plug-in Block Storage](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) ou le [VPN strongSwan](/docs/containers?topic=containers-vpn#vpn-setup). Vous devez mettre à jour chacun de ces modules séparément en suivant les instructions de mise à jour des chartes Helm.
+Oui. {{site.data.keyword.containerlong_notm}} offre d'autres modules complémentaires que vous pouvez sélectionner pour ajouter des fonctionnalités à votre cluster. Par exemple, vous envisagerez peut-être d'[utiliser des chartes Helm](/docs/containers?topic=containers-helm#public_helm_install) pour installer le [plug-in Block Storage](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) ou le [VPN strongSwan](/docs/containers?topic=containers-vpn#vpn-setup). Vous devez mettre à jour chacun de ces modules séparément en suivant les instructions de mise à jour des chartes Helm.
 
 ### Gestion des mises à jour automatiques pour le module complémentaire Fluentd pour la consignation
-{: #logging}
+{: #logging-up}
 
 Pour modifier vos configurations de consignation ou de filtrage, le module Fluentd doit avoir le dernier niveau de version. Par défaut, les mises à jour automatiques de ce module sont activées.
 {: shortdesc}
@@ -608,7 +608,7 @@ Pour mettre à jour les noeuds worker autonomes pour passer aux pools de noeuds 
       ```
       {: pre}
 
-   2. **Pour ajouter la zone dans plusieurs pools de noeuds worker** : ajoutez plusieurs pools de noeuds worker dans la commande `ibmcloud ks zone-add`. Pour ajouter plusieurs pools de noeuds worker dans une zone, vous devez déjà disposer de VLAN privé et public dans cette zone. Si vous ne disposez pas de VLAN public et privé dans cette zone, envisagez d'ajouter d'abord la zone à un pool de noeuds worker pour qu'un VLAN public et un VLAN privé soient créés pour vous. Ensuite, vous pouvez ajouter cette zone à d'autres pools de noeuds worker. </br></br>Il est important que les noeuds worker de tous vos pools de noeuds worker soient mis à disposition dans toutes les zones pour que votre cluster soit équilibré entre les zones. Si vous souhaitez utiliser des VLAN différents pour des pools de noeuds worker différents, répétez cette commande avec les VLAN que vous souhaitez utiliser pour votre pool de noeuds worker. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+   2. **Pour ajouter la zone dans plusieurs pools de noeuds worker** : ajoutez plusieurs pools de noeuds worker dans la commande `ibmcloud ks zone-add`. Pour ajouter plusieurs pools de noeuds worker dans une zone, vous devez déjà disposer de VLAN privé et public dans cette zone. Si vous ne disposez pas de VLAN public et privé dans cette zone, envisagez d'ajouter d'abord la zone à un pool de noeuds worker pour qu'un VLAN public et un VLAN privé soient créés pour vous. Ensuite, vous pouvez ajouter cette zone à d'autres pools de noeuds worker. </br></br>Il est important que les noeuds worker de tous vos pools de noeuds worker soient mis à disposition dans toutes les zones pour que votre cluster soit équilibré entre les zones. Si vous souhaitez utiliser des VLAN différents pour des pools de noeuds worker différents, répétez cette commande avec les VLAN que vous souhaitez utiliser pour votre pool de noeuds worker. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```

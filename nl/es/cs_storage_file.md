@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -29,7 +29,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} File Storage es un almacenamiento de archivos basado en NFS persistente, rápido, flexible y conectado a la red que puede añadir a sus apps mediante volúmenes persistentes de Kubernetes. Puede elegir los niveles de almacenamiento predefinidos con tamaños de GB e IOPS que cumplan los requisitos de sus cargas de trabajo. Para averiguar si {{site.data.keyword.Bluemix_notm}} File Storage es la opción de almacenamiento adecuada para usted, consulte [Elección de una solución de almacenamiento](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Para obtener información sobre los precios, consulte [Facturación](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage solo está disponible para los clústeres estándares configurados con conectividad de red pública. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado habilitado, no puede suministrar almacenamiento de archivos en su clúster. Las instancias de almacenamiento de archivos NFS son específicas de una sola zona. Si tiene un clúster multizona, tenga en cuenta las [opciones de almacenamiento persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.Bluemix_notm}} File Storage solo está disponible para los clústeres estándares configurados con conectividad de red pública. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado habilitado, puede suministrar almacenamiento de archivos en su clúster si éste ejecuta Kubernetes versión 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551, o posterior. Las instancias de almacenamiento de archivos NFS son específicas de una sola zona. Si tiene un clúster multizona, tenga en cuenta las [opciones de almacenamiento persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Cómo decidir la configuración del almacenamiento de archivos
@@ -43,19 +43,19 @@ Cada clase de almacenamiento especifica el tipo de almacenamiento de archivos qu
 Después de suministrar un tipo específico de almacenamiento utilizando una clase de almacenamiento, no puede cambiar el tipo ni la política de retención del dispositivo de almacenamiento. No obstante, puede [cambiar el tamaño y las IOPS](#file_change_storage_configuration) si desea aumentar el rendimiento y la capacidad de almacenamiento. Para cambiar el tipo y la política de retención del almacenamiento, debe [crear una nueva instancia de almacenamiento y copiar los datos](/docs/containers?topic=containers-kube_concepts#update_storageclass) de la instancia de almacenamiento anterior a la nueva.
 {: important}
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para elegir una configuración de almacenamiento:
 
 1. Obtenga una lista de las clases de almacenamiento disponibles en {{site.data.keyword.containerlong}}.
-    ```
-    kubectl get storageclasses | grep file
-    ```
-    {: pre}
+   ```
+   kubectl get storageclasses | grep file
+   ```
+   {: pre}
 
-    Salida de ejemplo:
-    ```
-    $ kubectl get storageclasses
+   Salida de ejemplo:
+   ```
+   $ kubectl get storageclasses
     NAME                         TYPE
     ibmc-file-bronze (default)   ibm.io/ibmc-file
     ibmc-file-custom             ibm.io/ibmc-file
@@ -65,14 +65,14 @@ Para elegir una configuración de almacenamiento:
     ibmc-file-retain-gold        ibm.io/ibmc-file
     ibmc-file-retain-silver      ibm.io/ibmc-file
     ibmc-file-silver             ibm.io/ibmc-file
-    ```
-    {: screen}
+   ```
+   {: screen}
 
 2. Revise la configuración de una clase de almacenamiento.
-   ```
-   kubectl describe storageclass <storageclass_name>
-   ```
-   {: pre}
+  ```
+  kubectl describe storageclass <storageclass_name>
+  ```
+  {: pre}
 
    Para obtener más información sobre cada clase de almacenamiento, consulte la [referencia de clases de almacenamiento](#file_storageclass_reference). Si no encuentra lo que está buscando, considere la posibilidad de crear su propia clase de almacenamiento personalizada. Para empezar, compruebe los [ejemplos de clase de almacenamiento personalizada](#file_custom_storageclass).
    {: tip}
@@ -163,7 +163,7 @@ Para elegir una configuración de almacenamiento:
 
 5. Decida si desea conservar los datos después de que se suprima el clúster o la reclamación de volumen persistente (PVC).
    - Si desea conservar los datos, seleccione la clase de almacenamiento `retain`. Cuando se suprime la PVC, únicamente ésta se suprime. El PV, el dispositivo de almacenamiento físico de la cuenta de infraestructura de IBM Cloud (SoftLayer) y los datos seguirán existiendo. Para reclamar el almacenamiento y volverlo a utilizar en el clúster, debe eliminar el PV y seguir los pasos de [utilización de almacenamiento de archivos existente](#existing_file).
-   - Si desea que el PV, los datos y el dispositivo físico de almacenamiento de archivos se supriman cuando suprima la PVC, elija una clase de almacenamiento sin la opción `retain`. **Nota**: si tiene una cuenta dedicada, seleccione una clase de almacenamiento sin la opción `retain` para evitar volúmenes huérfanos en la infraestructura de IBM Cloud (SoftLayer).
+   - Si desea que el PV, los datos y el dispositivo físico de almacenamiento de archivos se supriman cuando suprima la PVC, elija una clase de almacenamiento sin la opción `retain`.
 
 6. Decida si desea que se le facture por horas o por meses. Consulte las [tarifas ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing) para obtener más información. De forma predeterminada, todos los dispositivos de almacenamiento de archivos se suministran con un tipo de facturación por hora.
    Si selecciona el tipo de facturación mensual, cuando elimine el almacenamiento persistente seguirá pagando el cargo mensual por el mismo, aunque solo lo haya utilizado durante un breve periodo de tiempo.
@@ -317,7 +317,7 @@ Para añadir almacenamiento de archivos:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}Para montar el almacenamiento en el despliegue, cree un archivo `.yaml` de configuración y especifique la PVC que enlaza el PV.
+4.  {: #file_app_volume_mount}Para montar el almacenamiento en el despliegue, cree un archivo `.yaml` de configuración y especifique la PVC que enlaza el PV.
 
     Si tiene una app que necesita que un usuario que no sea root escriba en el almacenamiento persistente, o una app que necesita que la vía de acceso de montaje sea propiedad del usuario root, consulte los apartados [Adición de acceso de usuarios no root al almacenamiento de archivos NFS](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot) o [Habilitación del permiso root para almacenamiento de archivos NFS](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot).
     {: tip}
@@ -434,9 +434,10 @@ Si dispone de un dispositivo de almacenamiento físico existente que desea utili
 
 Antes de empezar:
 - Asegúrese de que tiene al menos un nodo trabajador en la misma zona que la instancia de almacenamiento de archivos existente.
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Paso 1: Preparación del almacenamiento existente.
+{: #existing-file-1}
 
 Antes de empezar a montar el almacenamiento existente en una app, debe recuperar toda la información necesaria para su PV y debe preparar el almacenamiento para que el clúster pueda acceder al mismo.  
 {: shortdesc}
@@ -480,9 +481,6 @@ Para utilizar el almacenamiento existente en un clúster distinto de aquel en el
 **Para el almacenamiento persistente que se ha suministrado fuera del clúster:** </br>
 Si desea utilizar el almacenamiento existente que ha suministrado anteriormente, pero nunca antes se ha utilizado en el clúster, debe hacer que el almacenamiento esté disponible en la misma subred que los nodos trabajadores.
 
-Si tiene una cuenta dedicada, debe [abrir un caso de soporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
-{: note}
-
 1.  {: #external_storage}En el [portal de la infraestructura de IBM Cloud (SoftLayer)![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/classic?), pulse **Almacenamiento**.
 2.  Pulse **Almacenamiento de archivos** y, en el menú **Acciones**, seleccione **Autorizar host**.
 3.  Seleccione **Subredes**.
@@ -492,6 +490,7 @@ Si tiene una cuenta dedicada, debe [abrir un caso de soporte](/docs/get-support?
 7.  Anote los valores de los campos `Mount Point`, `size` y `Location`. El campo `Mount Point` se muestra como `<nfs_server>:<file_storage_path>`.
 
 ### Paso 2: Creación de un volumen persistente (PV) y de una reclamación de volumen persistente (PVC) coincidente
+{: #existing-file-2}
 
 1.  Cree un archivo de configuración de almacenamiento para el PV. Incluya los valores que ha recuperado anteriormente.
 
@@ -612,7 +611,7 @@ Si tiene una cuenta dedicada, debe [abrir un caso de soporte](/docs/get-support?
     {: screen}
 
 
-Ha creado correctamente un PV y lo ha enlazado a una PVC. Ahora los usuarios del clúster pueden [montar la PVC](#app_volume_mount) en sus despliegues y empezar a leer el objeto de PV y a grabar en el mismo.
+Ha creado correctamente un PV y lo ha enlazado a una PVC. Ahora los usuarios del clúster pueden [montar la PVC](#file_app_volume_mount) en sus despliegues y empezar a leer el objeto de PV y a grabar en el mismo.
 
 <br />
 
@@ -645,7 +644,7 @@ Si desea crear automáticamente la PVC al crear el conjunto con estado, utilice 
 Utilice esta opción si desea crear automáticamente la PVC al crear el conjunto con estado.
 {: shortdesc}
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Verifique que todos los conjuntos con estado existentes del clúster estén totalmente desplegados. Si todavía se está desplegando un conjunto con estado, no puede empezar a crear su conjunto con estado. Debe esperar a que todos los conjuntos con estado del clúster se hayan desplegado por completo para evitar resultados inesperados.
    1. Obtenga una lista de los conjuntos con estado existentes en el clúster.
@@ -927,7 +926,7 @@ Puede realizar un suministro previo de las PVC antes de crear el conjunto con es
 
 Cuando [suministre dinámicamente las PVC al crear el conjunto con estado](#file_dynamic_statefulset), el nombre de la PVC se asigna en función de los valores que ha utilizado en el archivo YAML de conjunto con estado. Para que el conjunto con estado utilice las PVC existentes, el nombre de las PVC debe coincidir con el nombre que se crearía automáticamente si se utilizara el suministro dinámico.
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Si desea suministrar la PVC antes de crear el conjunto con estado, siga los pasos del 1 al 3 de la sección [Adición de almacenamiento de archivos a apps](#add_file) para crear un PVC para cada réplica del conjunto con estado. Asegúrese de crear la PVC con un nombre que siga el formato siguiente: `<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`**: utilice el nombre que desea especificar en la sección `spec.volumeClaimTemplates.metadata.name`
@@ -1215,17 +1214,17 @@ Consulte las opciones siguientes de copia de seguridad y restauración para el a
 
 <dl>
   <dt>Configurar instantáneas periódicas</dt>
-  <dd><p>Puede [configurar instantáneas periódicas para el almacenamiento de archivos](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots), que son imágenes de solo lectura que capturan el estado de la instancia en un punto en el tiempo. Para almacenar la instantánea, debe solicitar espacio de instantáneas en el almacenamiento de archivos. Las instantáneas se almacenan en la instancia de almacenamiento existente dentro de la misma zona. Puede restaurar datos desde una instantánea si un usuario elimina accidentalmente datos importantes del volumen. <p class="note">Si tiene una cuenta dedicada, debe [abrir un caso de soporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p></br> <strong>Para crear una instantánea para su volumen: </strong><ol><li>[Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).</li><li>Inicie una sesión en la CLI de `ibmcloud sl`. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>Liste los PV en su clúster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenga los detalles de los PV para los que desea crear espacio de instantáneas y anote el ID de volumen, el tamaño y las IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> Encontrará el ID de volumen, el tamaño y las IOPS en la sección <strong>Labels</strong> de la salida de la CLI. </li><li>Cree el tamaño de instantánea para el volumen existente con los parámetros que ha recuperado en el paso anterior. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Espere a que se haya creado el tamaño de la instantánea. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>El tamaño de la instantánea se suministra de forma correcta cuando el valor de <strong>Snapshot Size (GB)</strong> en la salida de la CLI pasa de 0 al tamaño solicitado. </li><li>Cree la instantánea para el volumen y anote el ID de la instantánea que se crea para usted. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verifique que la instantánea se haya creado correctamente. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Para restaurar los datos desde una instantánea en un volumen existente: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>Puede [configurar instantáneas periódicas para el almacenamiento de archivos](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots), que son imágenes de solo lectura que capturan el estado de la instancia en un punto en el tiempo. Para almacenar la instantánea, debe solicitar espacio de instantáneas en el almacenamiento de archivos. Las instantáneas se almacenan en la instancia de almacenamiento existente dentro de la misma zona. Puede restaurar datos desde una instantánea si un usuario elimina accidentalmente datos importantes del volumen. </br> <strong>Para crear una instantánea para su volumen: </strong><ol><li>[Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Inicie una sesión en la CLI de `ibmcloud sl`. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>Liste los PV en su clúster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenga los detalles de los PV para los que desea crear espacio de instantáneas y anote el ID de volumen, el tamaño y las IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> Encontrará el ID de volumen, el tamaño y las IOPS en la sección <strong>Labels</strong> de la salida de la CLI. </li><li>Cree el tamaño de instantánea para el volumen existente con los parámetros que ha recuperado en el paso anterior. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Espere a que se haya creado el tamaño de la instantánea. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>El tamaño de la instantánea se suministra de forma correcta cuando el valor de <strong>Snapshot Size (GB)</strong> en la salida de la CLI pasa de 0 al tamaño solicitado. </li><li>Cree la instantánea para el volumen y anote el ID de la instantánea que se crea para usted. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verifique que la instantánea se haya creado correctamente. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Para restaurar los datos desde una instantánea en un volumen existente: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Realice una réplica de las instantáneas en otra zona</dt>
- <dd><p>Para proteger los datos ante un error de la zona, puede [replicar instantáneas](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication) en una instancia de almacenamiento de archivos configurada en otra zona. Los datos únicamente se pueden replicar desde el almacenamiento primario al almacenamiento de copia de seguridad. No puede montar una instancia replicada de almacenamiento de archivos en un clúster. Cuando el almacenamiento primario falla, puede establecer de forma manual el almacenamiento de copia de seguridad replicado para que sea el primario. A continuación, puede montarla en el clúster. Una vez restaurado el almacenamiento primario, puede restaurar los datos del almacenamiento de copia de seguridad. <strong>Nota</strong>: si tiene una cuenta dedicada, no puede replicar instantáneas en otra zona.</p></dd>
+ <dd><p>Para proteger los datos ante un error de la zona, puede [replicar instantáneas](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication) en una instancia de almacenamiento de archivos configurada en otra zona. Los datos únicamente se pueden replicar desde el almacenamiento primario al almacenamiento de copia de seguridad. No puede montar una instancia replicada de almacenamiento de archivos en un clúster. Cuando el almacenamiento primario falla, puede establecer de forma manual el almacenamiento de copia de seguridad replicado para que sea el primario. A continuación, puede montarla en el clúster. Una vez restaurado el almacenamiento primario, puede restaurar los datos del almacenamiento de copia de seguridad.</p></dd>
  <dt>Duplicar almacenamiento</dt>
- <dd><p>Puede [duplicar la instancia de almacenamiento de archivos](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume) en la misma zona que la instancia de almacenamiento original. La instancia duplicada tiene los mismos datos que la instancia de almacenamiento original en el momento de duplicarla. A diferencia de las réplicas, utilice los duplicados como una instancia de almacenamiento independiente de la original. Para duplicar, primero [configure instantáneas para el volumen](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots). <strong>Nota</strong>: Si tiene una cuenta dedicada, debe <a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">abrir un caso de soporte</a>.</p></dd>
+ <dd><p>Puede [duplicar la instancia de almacenamiento de archivos](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume) en la misma zona que la instancia de almacenamiento original. La instancia duplicada tiene los mismos datos que la instancia de almacenamiento original en el momento de duplicarla. A diferencia de las réplicas, utilice los duplicados como una instancia de almacenamiento independiente de la original. Para duplicar, primero [configure instantáneas para el volumen](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots).</p></dd>
   <dt>Haga copia de seguridad de los datos en {{site.data.keyword.cos_full}}</dt>
   <dd><p>Puede utilizar la [**imagen ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter) para utilizar un pod de copia de seguridad y restauración en el clúster. Este pod contiene un script para ejecutar una copia de seguridad puntual o periódico para cualquier reclamación de volumen persistente (PVC) en el clúster. Los datos se almacenan en la instancia de {{site.data.keyword.cos_full}} que ha configurado en una zona.</p>
   <p>Para aumentar la alta disponibilidad de los datos y proteger la app ante un error de la zona, configure una segunda instancia de {{site.data.keyword.cos_full}} y replique los datos entre las zonas. Si necesita restaurar datos desde la instancia de {{site.data.keyword.cos_full}}, utilice el script de restauración que se proporciona con la imagen.</p></dd>
 <dt>Copiar datos a y desde pods y contenedores</dt>
 <dd><p>Utilice el [mandato ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) `kubectl cp` para copiar archivos y directorios a y desde pods o contenedores específicos en el clúster.</p>
-<p>Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Si no especifica un contenedor con <code>-c</code>, el mandato utiliza el primer contenedor disponible en el pod.</p>
+<p>Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Si no especifica un contenedor con <code>-c</code>, el mandato utiliza el primer contenedor disponible en el pod.</p>
 <p>El mandato se puede utilizar de varias maneras:</p>
 <ul>
 <li>Copiar datos desde su máquina local a un pod en su clúster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -1332,7 +1331,7 @@ Consulte las opciones siguientes de copia de seguridad y restauración para el a
 </table>
 
 ### Oro
-{: #block_gold}
+{: #file_gold}
 
 <table>
 <caption>Clase de almacenamiento de archivos: oro</caption>
@@ -1505,7 +1504,7 @@ Cuando cree la clase de almacenamiento personalizada, especifique la misma regi�
 
 - **Ejemplo para almacenamiento de archivos resistente:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: ibmc-file-silver-mycustom-storageclass

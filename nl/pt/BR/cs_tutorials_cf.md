@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -50,13 +50,13 @@ Este tutorial é destinado a desenvolvedores de apps Cloud Foundry.
 ## Pré-requisitos
 {: #cf_prereqs}
 
-- [ Crie um registro de imagem privada no  {{site.data.keyword.registrylong_notm}} ](/docs/services/Registry?topic=registry-index).
+- [Criar um registro de imagem privada no {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started).
 - [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Destinar sua CLI para o cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Assegure-se de que tenha as políticas de acesso do IAM do {{site.data.keyword.Bluemix_notm}} para o {{site.data.keyword.containerlong_notm}}:
     - [Qualquer função da plataforma](/docs/containers?topic=containers-users#platform)
     - A função de serviço  [ ** Writer **  ou  ** Manager **  ](/docs/containers?topic=containers-users#platform)
-- [ Saiba mais sobre a terminologia Docker e Kubernetes ](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
+- [Conhecer a terminologia do Docker e do Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
 
 
 <br />
@@ -82,7 +82,7 @@ Pegue seu código pronto para ir. Não tem nenhum código ainda? É possível fa
 
     a. No catálogo, em **Modelos**, clique em **Python Flask**. Esse modelo inclui um ambiente de tempo de execução para os apps Python 2 e Python 3.
 
-    b. Insira o nome do app `cf-py-<name>` e clique em **CREATE**. Para acessar o código do app para o modelo, deve-se implementar o app CF na nuvem primeiro. É possível usar qualquer nome para o app. Se você usar o nome do exemplo, substitua `<name>` por um identificador exclusivo, como `cf-py-msx`.
+    b. Insira o nome do aplicativo `cf-py-<name>` e clique em **CREATE**. Para acessar o código do app para o modelo, deve-se implementar o app CF na nuvem primeiro. É possível usar qualquer nome para o app. Ao usar o nome do exemplo, substitua `<name>` por um identificador exclusivo, como `cf-py-msx`.
 
     **Atenção**: não use informações pessoais em nenhum app, imagem de contêiner ou nomes de recursos do Kubernetes.
 
@@ -194,7 +194,7 @@ inclui o Dockerfile, insira um ponto (.). Caso contrário, use o caminho relativ
 Implemente seu app como um contêiner em um cluster do Kubernetes.
 {: shortdesc}
 
-1. Crie um arquivo YAML de configuração denominado `cf-py.yaml` e atualize `<registry_namespace>` com o nome de seu registro de imagem privada. Esse arquivo de configuração define uma implementação de contêiner da imagem criada na lição anterior e um serviço para expor o app ao público.
+1. Crie um arquivo YAML de configuração denominado `cf-py.yaml` e atualize `<registry_namespace>` com o nome de seu registro de imagem privado. Esse arquivo de configuração define uma implementação de contêiner da imagem criada na lição anterior e um serviço para expor o app ao público.
 
   ```
   apiVersion: apps/v1
@@ -242,7 +242,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
   <tbody>
   <tr>
   <td><code>imagem</code></td>
-  <td>Em `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, substitua &lt;registry_namespace&gt; pelo namespace de seu registro de imagem privada. Se você estiver inseguro sobre qual é o seu namespace, execute o comando `ibmcloud cr namespaces` para localizá-lo.</td>
+  <td>Em `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, substitua &lt;registry_namespace&gt; pelo namespace de seu registro de imagem privado. Se você estiver inseguro sobre qual é o seu namespace, execute o comando `ibmcloud cr namespaces` para localizá-lo.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -278,11 +278,11 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
     ```
     {: screen}
 
-    b. Abra um navegador e verifique o app com a URL a seguir: `http://<public_IP_address>:<NodePort>`. Com os valores de exemplo, a URL é `http://169.xx.xxx.xxx:30872`. É possível fornecer essa URL a um colega de trabalho para experimentá-la ou inseri-la no navegador do seu telefone celular, para que seja possível ver se o app está realmente disponível publicamente.
+    b. Abra um navegador e consulte o aplicativo com a URL a seguir: `http://<public_IP_address>:<NodePort>`. Com os valores de exemplo, a URL é `http://169.xx.xxx.xxx:30872`. É possível fornecer essa URL a um colega de trabalho para experimentá-la ou inseri-la no navegador do seu telefone celular, para que seja possível ver se o app está realmente disponível publicamente.
 
     <img src="images/python_flask.png" alt="Uma captura de tela do app Python Flask de modelo implementado." />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -67,8 +67,7 @@ Los desarrolladores de software y administradores de la red que despliegan apps 
 ## Requisitos previos
 {: #apps_prereqs}
 
-* [Guía de aprendizaje: Creación de clústeres de Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* Instale el [plugin container-registry](/docs/services/Registry?topic=registry-index#registry_cli_install).
+[Guía de aprendizaje: Creación de clústeres de Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## Lección 1: Despliegue de apps de una sola instancia en clústeres de Kubernetes
@@ -245,7 +244,7 @@ dentro del rango 30000-32767. En este ejemplo, el NodePort es 30872.
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 
@@ -538,7 +537,7 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
         ```
         {: codeblock}
 
-    2.  En la sección volumes del despliegue de watson, actualice el nombre del secreto de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que ha creado en la [guía de aprendizaje sobre cómo crear un clúster de Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) anterior. Al montar el secreto de Kubernetes como un volumen en el despliegue, establecerá la clave de API de
+    2.  En la sección volumes del despliegue de `watson-pod`, actualice el nombre del secreto de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que ha creado en la [guía de aprendizaje sobre cómo crear un clúster de Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) anterior. Al montar el secreto de Kubernetes como un volumen en el despliegue, establecerá la clave de API de
 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) como disponible para el contenedor que se ejecuta en el pod. Los componentes
 de la app {{site.data.keyword.watson}} de esta guía de aprendizaje están configurados para buscar la clave de API utilizando la vía de acceso de montaje del volumen.
 

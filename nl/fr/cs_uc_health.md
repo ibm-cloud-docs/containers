@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -123,7 +123,7 @@ Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_no
 
 Technologies clés :
 * [Planification intelligente pour placer les charges de travail là où c'est nécessaire](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [{{site.data.keyword.cloudant}} pour conserver et synchroniser les données sur plusieurs applications](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} pour conserver et synchroniser les données sur plusieurs applications](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [Analyse de vulnérabilité et isolement des charges de travail](/docs/services/Registry?topic=va-va_index#va_index)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [{{site.data.keyword.openwhisk}} pour assainir les données et envoyer des notifications aux chercheurs en cas de changement de structure des données](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)

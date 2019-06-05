@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -71,7 +71,7 @@ Kibana ダッシュボードにアクセスしてもログが表示されませ�
   <tr>
     <td>クラスター作成の際にスペースを指定した場合、アカウント所有者に、そのスペースに対する管理者、開発者、または監査員の権限がない。</td>
       <td>アカウント所有者のアクセス許可を変更するには、以下のようにします。
-      <ol><li>クラスターのアカウント所有者を見つけるために、<code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code> を実行します。</li>
+      <ol><li>クラスターのアカウント所有者を見つけるために、<code>ibmcloud ks api-key-info</code> を実行します。</li>
       <li>そのアカウント所有者にスペースに対する管理者、開発者、または監査員の {{site.data.keyword.containerlong_notm}} アクセス許可を付与する方法については、<a href="/docs/containers?topic=containers-users">クラスター・アクセス権限の管理</a>を参照してください。</li>
       <li>許可が変更された後にロギング・トークンをリフレッシュするには、<code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code> を実行します。</li></ol></td>
     </tr>
@@ -84,7 +84,7 @@ Kibana ダッシュボードにアクセスしてもログが表示されませ�
 
 トラブルシューティング中に行った変更をテストするために、複数のログ・イベントを生成するサンプルのポッド *Noisy* をクラスター内のワーカー・ノードにデプロイすることができます。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. `deploy-noisy.yaml` 構成ファイルを作成します。
     ```
@@ -109,10 +109,10 @@ Kibana ダッシュボードにアクセスしてもログが表示されませ�
     {:pre}
 
 3. 数分後に、Kibana ダッシュボードにログが表示されます。 Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 クラスター作成の際にスペースを指定した場合は、代わりにそのスペースに移動します。
-    - 米国南部および米国東部: https://logging.ng.bluemix.net
-    - 英国南部: https://logging.eu-gb.bluemix.net
-    - EU 中央: https://logging.eu-fra.bluemix.net
-    - 南アジア太平洋地域: https://logging.au-syd.bluemix.net
+    - 米国南部および米国東部: `https://logging.ng.bluemix.net`
+    - 英国南部: `https://logging.eu-gb.bluemix.net`
+    - EU 中央: `https://logging.eu-fra.bluemix.net`
+    - 南アジア太平洋地域: `https://logging.au-syd.bluemix.net`
 
 <br />
 
@@ -141,7 +141,7 @@ Kubernetes ダッシュボードにアクセスするとき、使用状況グラ
 {: #quota}
 
 {: tsSymptoms}
-クラスターのロギング構成をセットアップして、ログを {{site.data.keyword.loganalysisfull}} に転送します。ログを表示すると、以下のようなエラー・メッセージが表示されます。
+クラスターのロギング構成をセットアップして、ログを {{site.data.keyword.loganalysisfull}} に転送します。 ログを表示すると、以下のようなエラー・メッセージが表示されます。
 
 ```
 You have reached the daily quota that is allocated to the Bluemix space {Space GUID} for the IBM® Cloud Log Analysis instance {Instance GUID}. Your current daily allotment is XXX for Log Search storage, which is retained for a period of 3 days, during which it can be searched for in Kibana. This does not affect your log retention policy in Log Collection storage. To upgrade your plan so that you can store more data in Log Search storage per day, upgrade the Log Analysis service plan for this space. For more information about service plans and how to upgrade your plan, see Plans.
@@ -164,15 +164,15 @@ You have reached the daily quota that is allocated to the Bluemix space {Space G
  <tbody>
   <tr>
     <td>1 つ以上のポッドが大量のログを生成している。</td>
-    <td>特定のポッドからのログの転送を防止することによって、ログ・ストレージ・スペースを解放できます。これらのポッドに対して[ロギング・フィルター](/docs/containers?topic=containers-health#filter-logs)を作成します。</td>
+    <td>特定のポッドからのログの転送を防止することによって、ログ・ストレージ・スペースを解放できます。 これらのポッドに対して[ロギング・フィルター](/docs/containers?topic=containers-health#filter-logs)を作成します。</td>
   </tr>
   <tr>
     <td>ライト・プランでのログ・ストレージの毎日の割り当て 500 MB を超過した。</td>
-    <td>まず、ログ・ドメインの[検索割り当て量および日次使用量を計算](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota)します。次に、[{{site.data.keyword.loganalysisshort_notm}} サービス・プランをアップグレード](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan)することによって、ログ・ストレージ割り当て量を増やすことができます。</td>
+    <td>まず、ログ・ドメインの[検索割り当て量および日次使用量を計算](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota)します。 次に、[{{site.data.keyword.loganalysisshort_notm}} サービス・プランをアップグレード](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan)することによって、ログ・ストレージ割り当て量を増やすことができます。</td>
   </tr>
   <tr>
     <td>現行の有料プランのログ・ストレージ割り当て量を超過した。</td>
-    <td>まず、ログ・ドメインの[検索割り当て量および日次使用量を計算](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota)します。次に、[{{site.data.keyword.loganalysisshort_notm}} サービス・プランをアップグレード](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan)することによって、ログ・ストレージ割り当て量を増やすことができます。</td>
+    <td>まず、ログ・ドメインの[検索割り当て量および日次使用量を計算](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota)します。 次に、[{{site.data.keyword.loganalysisshort_notm}} サービス・プランをアップグレード](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan)することによって、ログ・ストレージ割り当て量を増やすことができます。</td>
   </tr>
   </tbody>
 </table>
@@ -184,13 +184,13 @@ You have reached the daily quota that is allocated to the Bluemix space {Space G
 {: #long_lines}
 
 {: tsSymptoms}
-クラスターのロギング構成をセットアップして、ログを {{site.data.keyword.loganalysisfull_notm}} に転送します。ログを表示すると、非常に長いログ・メッセージが表示されます。また、Kibana では、ログ・メッセージの最後の 600 から 700 文字のみが表示される可能性があります。
+クラスターのロギング構成をセットアップして、ログを {{site.data.keyword.loganalysisfull_notm}} に転送します。 ログを表示すると、非常に長いログ・メッセージが表示されます。 また、Kibana では、ログ・メッセージの最後の 600 から 700 文字のみが表示される可能性があります。
 
 {: tsCauses}
 長いログ・メッセージは、Fluentd によって収集される前に、長さのために切り捨てられる場合があるため、ログは、{{site.data.keyword.loganalysisshort_notm}} に転送される前に、Fluentd によって正しく解析されない場合があります。
 
 {: tsResolve}
-行の長さを制限するため、独自のロガーを構成して、各ログの `stack_trace` の最大長を設定できます。例えば、ロガーに Log4j を使用している場合、[`EnhancedPatternLayout` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html) を使用して、`stack_trace` を 15 KB に制限できます。
+行の長さを制限するため、独自のロガーを構成して、各ログの `stack_trace` の最大長を設定できます。 例えば、ロガーに Log4j を使用している場合、[`EnhancedPatternLayout` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html) を使用して、`stack_trace` を 15 KB に制限できます。
 
 ## ヘルプとサポートの取得
 {: #health_getting_help}

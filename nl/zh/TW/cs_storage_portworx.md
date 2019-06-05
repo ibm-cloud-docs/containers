@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -29,40 +29,32 @@ subcollection: containers
 [Portworx ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://portworx.com/products/introduction/) 是一個高可用性軟體定義儲存空間解決方案，可用來管理容器化資料庫及其他有狀態應用程式的持續性儲存空間，或在多個區域的 Pod 之間共用資料。
 {: shortdesc}
 
-**何謂軟體定義儲存空間 (SDS)？** </br>
-SDS 解決方案會將各種類型、大小或不同供應商的儲存裝置抽象化，這些裝置連接至您叢集中的工作者節點。硬碟上具有可用儲存空間的工作者節點會被當成節點新增至儲存空間叢集。在此叢集中，已虛擬化實體儲存空間，並當成虛擬儲存區呈現給使用者。儲存空間叢集由 SDS 軟體所管理。如果資料必須儲存在儲存空間叢集，則 SDS 軟體會決定資料的儲存位置，以取得最高可用性。虛擬儲存空間隨附一組共同的功能和服務，讓您可以在不需考慮實際基礎儲存空間架構的情況下加以運用。
+**何謂軟體定義儲存空間 (SDS)？** </br> SDS 解決方案會將各種類型、大小或不同供應商的儲存裝置抽象化，這些裝置連接至您叢集中的工作者節點。硬碟上具有可用儲存空間的工作者節點會被當成節點新增至儲存空間叢集。在此叢集中，已虛擬化實體儲存空間，並當成虛擬儲存區呈現給使用者。儲存空間叢集由 SDS 軟體所管理。如果資料必須儲存在儲存空間叢集，則 SDS 軟體會決定資料的儲存位置，以取得最高可用性。虛擬儲存空間隨附一組共同的功能和服務，讓您可以在不需考慮實際基礎儲存空間架構的情況下加以運用。
 
-**Portworx 如何運作？** </br>
-Portworx 會聚集用於連接至工作者節點的可用儲存空間，並為您要在叢集中執行的容器化資料庫或其他有狀態應用程式建立統一的持續性儲存空間層。透過跨多個工作者節點使用每個容器層次磁區的磁區抄寫，Portworx 可確保跨區域的資料持續性及資料可存取性。
+**Portworx 如何運作？** </br> Portworx 會聚集用於連接至工作者節點的可用儲存空間，並為您要在叢集中執行的容器化資料庫或其他有狀態應用程式建立統一的持續性儲存空間層。透過跨多個工作者節點使用每個容器層次磁區的磁區抄寫，Portworx 可確保跨區域的資料持續性及資料可存取性。
 
 Portworx 也隨附可用於有狀態應用程式的其他特性（例如，磁區 Snapshot、磁區加密、隔離及整合式 Storage Orchestrator for Kubernetes (Stork)），以確定叢集中磁區的最佳位置。如需相關資訊，請參閱 [Portworx 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/)。
 
 **{{site.data.keyword.containerlong_notm}} 中的哪個工作者節點特性適用於 Portworx？** </br>
 {{site.data.keyword.containerlong_notm}} 提供裸機工作者節點特性，這些特性已針對[軟體定義儲存空間 (SDS) 用法](/docs/containers?topic=containers-plan_clusters#sds)最佳化，並且隨附一個以上可用於 Portworx 儲存空間層的原始、未格式化及未裝載的本端磁碟。當您使用隨附 10Gbps 網路速度的 SDS 工作者節點機器時，Portworx 會提供最佳效能。
 
-**如果我要在非 SDS 工作者節點上執行 Portworx，該怎麼辨？** </br>
-您可以在非 SDS 工作者節點特性上安裝 Portworx，但可能無法取得應用程式所需的效能優點。非 SDS 工作者節點可以是虛擬或裸機的。如果您要使用虛擬機器，請使用 `b2c.16x64` 或以上的工作者節點特性。特性為 `b2c.4x16` 或 `u2c.2x4` 的虛擬機器未提供讓 Portworx 正常運作的必要資源。請記住，虛擬機器隨附 1000Mbps，這對於獲得最佳 Portworx 效能而言是不足的。裸機機器隨附 Portworx 的足夠運算資源及網路速度，但是您必須先[新增原始、未格式化及未裝載的區塊儲存空間](#create_block_storage)，才能使用這些機器。
+**如果我要在非 SDS 工作者節點上執行 Portworx，該怎麼辨？** </br> 您可以在非 SDS 工作者節點特性上安裝 Portworx，但可能無法取得應用程式所需的效能優點。非 SDS 工作者節點可以是虛擬或裸機的。如果您要使用虛擬機器，請使用 `b2c.16x64` 或以上的工作者節點特性。特性為 `b3c.4x16` 或 `u3c.2x4` 的虛擬機器未提供讓 Portworx 正常運作的必要資源。請記住，虛擬機器隨附 1000Mbps，這對於獲得最佳 Portworx 效能而言是不足的。裸機機器隨附 Portworx 的足夠運算資源及網路速度，但是您必須先[新增原始、未格式化及未裝載的區塊儲存空間](#create_block_storage)，才能使用這些機器。
 
-**如何確定以高可用性方式儲存資料？** </br>
-您的 Portworx 叢集中至少需要 3 個工作者節點，Portworx 才可以跨節點抄寫您的資料。透過跨工作者節點抄寫資料，Portworx 能夠確保可將您的有狀態應用程式重新排定為不同的工作者節點，以在失敗時不遺失資料。若要獲得更高的可用性，請使用[多區域叢集](/docs/containers?topic=containers-plan_clusters#multizone)，並且抄寫跨 3 個以上區域的 SDS 工作者節點的磁區。
+**如何確定以高可用性方式儲存資料？** </br> 您的 Portworx 叢集中至少需要 3 個工作者節點，Portworx 才可以跨節點抄寫您的資料。透過跨工作者節點抄寫資料，Portworx 能夠確保可將您的有狀態應用程式重新排定為不同的工作者節點，以在失敗時不遺失資料。若要獲得更高的可用性，請使用[多區域叢集](/docs/containers?topic=containers-plan_clusters#multizone)，並且抄寫跨 3 個以上區域的 SDS 工作者節點的磁區。
 
-**哪個磁區拓蹼提供 Pod 的最佳效能？** </br>
-在叢集中執行有狀態應用程式時，最大的挑戰之一是，在容器或整個主機失敗時，確定您的容器可以重新排定至另一個主機。在 Docker 中，必須將容器重新排定至不同的主機時，不會將磁區移至新的主機。Portworx 可以配置成執行 `hyper-converged`，以確保您的運算資源和儲存空間一律放置在相同的工作者節點上。必須重新排定應用程式時，Portworx 會將您的應用程式移至其中一個磁區抄本所在的工作者節點，以確保有狀態應用程式的本端磁碟存取速度和最佳效能。執行 `hyper-converged` 可提供 Pod 的最佳效能，但需要叢集的所有工作者節點上都可以使用儲存空間。
+**哪個磁區拓蹼提供 Pod 的最佳效能？** </br> 在叢集中執行有狀態應用程式時，最大的挑戰之一是，在容器或整個主機失敗時，確定您的容器可以重新排定至另一個主機。在 Docker 中，必須將容器重新排定至不同的主機時，不會將磁區移至新的主機。Portworx 可以配置成執行 `hyper-converged`，以確保您的運算資源和儲存空間一律放置在相同的工作者節點上。必須重新排定應用程式時，Portworx 會將您的應用程式移至其中一個磁區抄本所在的工作者節點，以確保有狀態應用程式的本端磁碟存取速度和最佳效能。執行 `hyper-converged` 可提供 Pod 的最佳效能，但需要叢集的所有工作者節點上都可以使用儲存空間。
 
 您也可以選擇只將工作者節點的一部分用於 Portworx 儲存空間層。例如，您的工作者節點儲存區可能具有隨附本端原始區塊儲存空間的 SDS 工作者節點，以及另一個工作者節點儲存區可能具有未隨附本端儲存空間的虛擬工作者節點。安裝 Portworx 時，會將 Portworx Pod 排定到叢集中的每個工作者節點，成為常駐程式集的一部分。因為 SDS 工作者節點具有本端儲存空間，所以這些工作者節點都只會併入 Portworx 儲存空間層。因為遺漏本端儲存空間，所以您的虛擬工作者節點未併入為儲存空間節點。不過，當您將應用程式 Pod 部署至虛擬工作者節點時，此 Pod 仍然可以使用 Portworx 常駐程式集 Pod 來存取實際儲存在 SDS 工作者節點上的資料。此設定稱為 `storage-heavy`，而且提供的效能比 `hyper-converged` 設定略慢，因為虛擬工作者節點必須透過專用網路與 SDS 工作者節點交談，才能存取資料。
 
-**佈建 Portworx 時需要什麼？** </br>
-{{site.data.keyword.containerlong}} 提供工作者節點特性，這些特性已針對 SDS 用法最佳化，並且隨附一個以上可用來儲存資料的原始、未格式化及未裝載的本端磁碟。當您使用隨附 10Gbps 網路速度的 [SDS 工作者節點機器](/docs/containers?topic=containers-plan_clusters#sds)時，Portworx 會提供最佳效能。不過，您可以在非 SDS 工作者節點特性上安裝 Portworx，但可能無法取得應用程式所需的效能優點。要順利執行 Portworx 的最低工作者節點需求包括：
+**佈建 Portworx 時需要什麼？** </br> {{site.data.keyword.containerlong}} 提供工作者節點特性，這些特性已針對 SDS 用法最佳化，並且隨附一個以上可用來儲存資料的原始、未格式化及未裝載的本端磁碟。當您使用隨附 10Gbps 網路速度的 [SDS 工作者節點機器](/docs/containers?topic=containers-plan_clusters#sds)時，Portworx 會提供最佳效能。不過，您可以在非 SDS 工作者節點特性上安裝 Portworx，但可能無法取得應用程式所需的效能優點。要順利執行 Portworx 的最低工作者節點需求包括：
 - 4 顆 CPU 核心
 - 4GB 記憶體
 - 128GB 的原始未格式化儲存空間
 - 10Gbps 網路速度
 
-**如何確定以高可用性方式儲存資料？** </br>
-您的 Portworx 叢集中至少需要 3 個工作者節點，Portworx 才可以跨節點抄寫您的資料。透過跨工作者節點抄寫資料，Portworx 能夠確保可將您的有狀態應用程式重新排定為不同的工作者節點，以在失敗時不遺失資料。若要獲得更高的可用性，請使用[多區域叢集](/docs/containers?topic=containers-plan_clusters#multizone)，並且抄寫跨 3 個區域的 SDS 工作者節點上的磁區。
+**如何確定以高可用性方式儲存資料？** </br> 您的 Portworx 叢集中至少需要 3 個工作者節點，Portworx 才可以跨節點抄寫您的資料。透過跨工作者節點抄寫資料，Portworx 能夠確保可將您的有狀態應用程式重新排定為不同的工作者節點，以在失敗時不遺失資料。若要獲得更高的可用性，請使用[多區域叢集](/docs/containers?topic=containers-plan_clusters#multizone)，並且抄寫跨 3 個區域的 SDS 工作者節點上的磁區。
 
-**必須規劃的限制為何？** </br>
-Portworx 適用於已設定公用網路連線功能的標準叢集。如果叢集無法存取公用網路（例如受防火牆保護的專用叢集，或只啟用專用服務端點的叢集），則除非您在 TCP 埠 443 上開啟所有 Egress 網路資料流量，或啟用公用服務端點，否則無法在叢集中使用 Portworx。
+**必須規劃的限制為何？** </br> Portworx 適用於已設定公用網路連線功能的標準叢集。如果叢集無法存取公用網路（例如受防火牆保護的專用叢集，或只啟用專用服務端點的叢集），則除非您在 TCP 埠 443 上開啟所有 Egress 網路資料流量，或啟用公用服務端點，否則無法在叢集中使用 Portworx。
 
 
 準備好了嗎？讓我們從[建立具有至少 3 個工作者節點的 SDS 工作者節點儲存區的叢集](/docs/containers?topic=containers-clusters#clusters_ui)開始。如果您要將非 SDS 工作者節點併入 Portworx 叢集，請[新增原始區塊儲存空間](#create_block_storage)至每個工作者節點。備妥叢集之後，請在叢集中[安裝 Portworx Helm 圖表](#install_portworx)，並建立第一個 hyper-converged 儲存空間叢集。  
@@ -225,12 +217,12 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 
 若要安裝 Portworx，請執行下列動作：
 
-1.  [遵循指示](/docs/containers?topic=containers-integrations#helm)，將 Helm 用戶端安裝在本端機器上，並在叢集中使用服務帳戶安裝 Helm 伺服器 (tiller)。
+1.  [遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上，並在叢集中使用服務帳戶安裝 Helm 伺服器 (tiller)。
 
 2.  驗證已使用服務帳戶安裝 tiller。
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -384,7 +376,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
    stork            3        3        3           0          1s
    stork-scheduler  3        3        3           0          1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                    PROVISIONER                    AGE
    px-sc-repl3-iodb-512blk-snap60-15snaps  kubernetes.io/portworx-volume  1s
    px-sc-repl3-iodb-snap60-15snaps         kubernetes.io/portworx-volume  1s
@@ -424,7 +416,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       ```
       {: pre}
 
-      輸出範例：
+            輸出範例：
       ```
       portworx-594rw                          1/1       Running     0          20h
       portworx-rn6wk                          1/1       Running     0          20h
@@ -489,7 +481,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       ```
       {: pre}
 
-      輸出範例：
+            輸出範例：
       ```
       NODE		NODE STATUS	POOL	POOL STATUS	IO_PRIORITY	SIZE	AVAILABLE	USED	PROVISIONED	RESERVEFACTOR	ZONE	REGION		RACK
       10.184.58.11	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal12	us-south	default
@@ -567,12 +559,12 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 {{site.data.keyword.keymanagementservicelong_notm}} 可協助您佈建「FIPS 140-2 層次 2」認證的雲端型硬體安全模組 (HSM) 所保護的加密金鑰。您可以使用這些金鑰，安全地保護資料不受未獲授權的使用者存取。您可以選擇使用一個加密金鑰來加密叢集中的所有磁區，或是為每個磁區使用一個加密金鑰。將資料傳送至不同的工作者節點時，Portworx 會使用此金鑰來加密靜態資料和傳輸期間的資料。如需相關資訊，請參閱[磁區加密 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption)。為達到更高的安全，請設定每個磁區加密。
 
 請檢閱下列資訊：
-- 使用 {{site.data.keyword.keymanagementservicelong_notm}} 進行每個磁區加密的 [Portworx 磁區加密工作流程](#encryption)概觀
+- 使用 {{site.data.keyword.keymanagementservicelong_notm}} 進行每個磁區加密的 [Portworx 磁區加密工作流程](#px_encryption)概觀
 - 使用 {{site.data.keyword.keymanagementservicelong_notm}} 進行每個磁區加密的 [Portworx 磁區解密工作流程](#decryption)概觀
 - 針對 Portworx 磁區[設定每個磁區加密](#setup_encryption)。
 
 ### Portworx 每個磁區加密工作流程
-{: #encryption}
+{: #px_encryption}
 
 下圖說明當您設定每個磁區加密時 Portworx 中使用 {{site.data.keyword.keymanagementservicelong_notm}} 的加密工作流程。
 {: shortdesc}
@@ -806,7 +798,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       ```
       {: pre}
 
-      輸出範例：
+            輸出範例：
       ```
       {
       "alertingurl": "",
@@ -869,7 +861,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 
    ```
    kind: StorageClass
-   apiVersion: storage.k8s.io/v1beta1
+   apiVersion: storage.k8s.io/v1
    metadata:
        name: <storageclass_name>
    provisioner: kubernetes.io/portworx-volume
@@ -1181,7 +1173,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       ```
       {: pre}
 
-      輸出範例：
+            輸出範例：
       ```
       blockdepl-12345-prz7b:	claim1-block-bronze  
       ```

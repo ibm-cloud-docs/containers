@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,9 @@ subcollection: containers
 * [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `calicoctl` コマンドを実行します](#firewall_calicoctl)。
 * [ワーカー・ノードに対してファイアウォールがセットアップされているとき、またはファイアウォール設定が IBM Cloud インフラストラクチャー (SoftLayer) アカウント内でカスタマイズされたときに、Kubernetes マスターとワーカー・ノード間の通信を可能にします](#firewall_outbound)。
 * [クラスターがプライベート・ネットワーク上のファイアウォールを介してリソースにアクセスすることを許可します](#firewall_private)。
+* [Calico ネットワーク・ポリシーがワーカー・ノードの発信をブロックする場合にクラスターがリソースにアクセスすることを許可します](#firewall_calico_egress)。
 * [クラスター外から NodePort サービス、ロード・バランサー・サービス、または Ingress へアクセス](#firewall_inbound)します。
+* [{{site.data.keyword.Bluemix_notm}} の内外やオンプレミスで実行されていてファイアウォールで保護されているサービスにクラスターがアクセスすることを許可します](#whitelist_workers)。
 
 <br />
 
@@ -82,7 +84,7 @@ subcollection: containers
 ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている場合、`kubectl` コマンドを実行するには、クラスターにおける TCP アクセスを許可する必要があります。
 {:shortdesc}
 
-クラスターの作成時に、サービス・エンドポイント URL のポートが、20000 から 32767 までの範囲からランダムに割り当てられます。作成される可能性のあるすべてのクラスターを対象に 20000 から 32767 までの範囲のポートを開くか、または特定の既存のクラスターを対象にアクセスを許可するかを選択できます。
+クラスターの作成時に、サービス・エンドポイント URL のポートが、20000 から 32767 までの範囲からランダムに割り当てられます。 作成される可能性のあるすべてのクラスターを対象に 20000 から 32767 までの範囲のポートを開くか、または特定の既存のクラスターを対象にアクセスを許可するかを選択できます。
 
 始めに、[`ibmcloud ks` コマンドを実行](#firewall_bx)するためのアクセスを許可します。
 
@@ -101,13 +103,6 @@ subcollection: containers
    ```
    {: pre}
 
-3. クラスターが属する地域を選択します。
-
-   ```
-   ibmcloud ks region-set
-   ```
-   {: pre}
-
 4. クラスターの名前を取得します。
 
    ```
@@ -116,9 +111,9 @@ subcollection: containers
    {: pre}
 
 5. クラスターのサービス・エンドポイント URL を取得します。
- * **パブリックのサービス・エンドポイント URL** だけが設定されている場合は、その URL を取得します。権限を持つクラスター・ユーザーは、パブリック・ネットワークでこのエンドポイントから Kubernetes マスターにアクセスできます。
- * **プライベートのサービス・エンドポイント URL** だけが設定されている場合は、その URL を取得します。権限を持つクラスター・ユーザーは、プライベート・ネットワークでこのエンドポイントから Kubernetes マスターにアクセスできます。
- * **パブリック・サービス・エンドポイント URL** と**プライベート・サービス・エンドポイント URL** の両方が設定されている場合は、両方の URL を取得します。権限を持つクラスター・ユーザーは、パブリック・ネットワークのパブリック・エンドポイントからでもプライベート・ネットワークのプライベート・エンドポイントからでも Kubernetes マスターにアクセスできます。
+ * **パブリックのサービス・エンドポイント URL** だけが設定されている場合は、その URL を取得します。 権限を持つクラスター・ユーザーは、パブリック・ネットワークでこのエンドポイントから Kubernetes マスターにアクセスできます。
+ * **プライベートのサービス・エンドポイント URL** だけが設定されている場合は、その URL を取得します。 権限を持つクラスター・ユーザーは、プライベート・ネットワークでこのエンドポイントから Kubernetes マスターにアクセスできます。
+ * **パブリック・サービス・エンドポイント URL** と**プライベート・サービス・エンドポイント URL** の両方が設定されている場合は、両方の URL を取得します。 権限を持つクラスター・ユーザーは、パブリック・ネットワークのパブリック・エンドポイントからでもプライベート・ネットワークのプライベート・エンドポイントからでも Kubernetes マスターにアクセスできます。
 
   ```
   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
@@ -134,7 +129,7 @@ subcollection: containers
   ```
   {: screen}
 
-6. 前の手順で取得したサービス・エンドポイント URL とポートへのアクセスを許可します。ファイアウォールが IP ベースの場合は、サービス・エンドポイント URL へのアクセスを許可するときに開く IP アドレスを[この表](#master_ips)で確認できます。
+6. 前の手順で取得したサービス・エンドポイント URL とポートへのアクセスを許可します。 ファイアウォールが IP ベースの場合は、サービス・エンドポイント URL へのアクセスを許可するときに開く IP アドレスを[この表](#master_ips)で確認できます。
 
 7. 接続を確認します。
   * パブリック・サービス・エンドポイントが有効な場合:
@@ -219,13 +214,13 @@ subcollection: containers
 <br />
 
 
-## クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスの許可
+## クラスターからパブリック・ファイアウォールを介したインフラストラクチャー・リソースや他のサービスへのアクセスの許可
 {: #firewall_outbound}
 
-{{site.data.keyword.containerlong_notm}} 地域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.Bluemix_notm}} ID/アクセス管理 (IAM)、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud インフラストラクチャー (SoftLayer) プライベート IP、永続ボリューム請求送信など、インフラストラクチャーのリソースとサービスをファイアウォールの内側のクラスターで利用できるようにします。
+{{site.data.keyword.containerlong_notm}} 地域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud インフラストラクチャー (SoftLayer) プライベート IP、永続ボリューム請求の発信など、インフラストラクチャーのリソースとサービスにパブリック・ファイアウォールの内側のクラスターからアクセスできるようにします。
 {:shortdesc}
 
-クラスターのセットアップに応じて、パブリックとプライベートの IP アドレスのいずれかまたは両方を使用してサービスにアクセスします。パブリック・ネットワークとプライベート・ネットワークのどちらについても、ファイアウォールの内側のパブリック VLAN とプライベート VLAN の両方にワーカー・ノードが存在するクラスターの場合は、パブリックとプライベートの両方の IP アドレスの接続を開く必要があります。ファイアウォールの内側のプライベート VLAN だけにワーカー・ノードが存在するクラスターの場合は、プライベート IP アドレスの接続だけを開きます。
+クラスターのセットアップに応じて、パブリックとプライベートの IP アドレスのいずれかまたは両方を使用してサービスにアクセスします。 パブリック・ネットワークとプライベート・ネットワークのどちらについても、ファイアウォールの内側のパブリック VLAN とプライベート VLAN の両方にワーカー・ノードが存在するクラスターの場合は、パブリックとプライベートの両方の IP アドレスの接続を開く必要があります。 ファイアウォールの内側のプライベート VLAN だけにワーカー・ノードが存在するクラスターの場合は、プライベート IP アドレスの接続だけを開きます。
 {: note}
 
 1.  クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
@@ -291,7 +286,7 @@ subcollection: containers
 
 3.  ワーカー・ノードから [{{site.data.keyword.registrylong_notm}} 地域](/docs/services/Registry?topic=registry-registry_overview#registry_regions)への発信ネットワーク・トラフィックを許可します。
   - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
-  -  <em>&lt;registry_subnet&gt;</em> は、トラフィックを許可するレジストリー・サブネットに置き換えてください。グローバル・レジストリーには IBM 提供のパブリック・イメージが保管され、地域レジストリーにはユーザー独自のプライベートまたはパブリック・イメージが保管されます。 ポート 4443 は、公証人などの機能 ([イメージの署名の確認](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)など) のために必須です。<table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
+  -  <em>&lt;registry_subnet&gt;</em> は、トラフィックを許可するレジストリー・サブネットに置き換えてください。 グローバル・レジストリーには IBM 提供のパブリック・イメージが保管され、地域レジストリーにはユーザー独自のプライベートまたはパブリック・イメージが保管されます。 ポート 4443 は、公証人などの機能 ([イメージの署名の確認](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)など) のために必須です。 <table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
   <caption>レジストリー・トラフィック用に開く IP アドレス</caption>
     <thead>
       <th>{{site.data.keyword.containerlong_notm}} 地域</th>
@@ -378,7 +373,7 @@ subcollection: containers
           <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
-
+         
         </tbody>
       </table>
 </p>
@@ -425,7 +420,7 @@ subcollection: containers
 
 5. ロード・バランサー・サービスを使用している場合は、VRRP プロトコルを使用するすべてのトラフィックが、パブリック・インターフェースおよびプライベート・インターフェースでのワーカー・ノード間で許可されることを確認します。 {{site.data.keyword.containerlong_notm}} では、パブリック・ロード・バランサーおよびプライベート・ロード・バランサーの IP アドレスを管理するために VRRP プロトコルが使用されます。
 
-6. {: #pvc}プライベート・クラスターで永続ボリュームの請求を作成するには、そのクラスターが以下のバージョンの Kubernetes または {{site.data.keyword.Bluemix_notm}} ストレージ・プラグインを使用してセットアップされたものであることを確認します。これらのバージョンは、クラスターから永続ストレージ・インスタンスへのプライベート・ネットワークによる通信が可能です。
+6. {: #pvc}プライベート・クラスターで永続ボリュームの請求を作成するには、そのクラスターが以下のバージョンの Kubernetes または {{site.data.keyword.Bluemix_notm}} ストレージ・プラグインを使用してセットアップされたものであることを確認します。 これらのバージョンは、クラスターから永続ストレージ・インスタンスへのプライベート・ネットワークによる通信が可能です。
     <table>
     <caption>プライベート・クラスターに必要な Kubernetes または {{site.data.keyword.Bluemix_notm}} ストレージ・プラグインのバージョンの概要</caption>
     <thead>
@@ -435,7 +430,7 @@ subcollection: containers
    <tbody>
      <tr>
        <td>ファイル・ストレージ</td>
-       <td>Kubernetes バージョン <code>1.13.4_1512</code>、<code>1.12.6_1543</code>、<code>1.11.8_1549</code>、<code>1.10.13_1550</code>、またはこれ以降</td>
+       <td>Kubernetes バージョン <code>1.13.4_1512</code>、<code>1.12.6_1544</code>、<code>1.11.8_1550</code>、<code>1.10.13_1551</code>、またはこれ以降</td>
      </tr>
      <tr>
        <td>ブロック・ストレージ</td>
@@ -482,6 +477,76 @@ subcollection: containers
 <br />
 
 
+## クラスターからの Calico 発信ポリシーを介したリソースへのアクセスの許可
+{: #firewall_calico_egress}
+
+すべてのパブリック・ワーカーの発信を制限するために [Calico ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies)を使用してファイアウォールとして機能するようにしている場合、ワーカーがマスター API サーバーと etcd のローカル・プロキシーにアクセスすることを許可する必要があります。
+{: shortdesc}
+
+1. [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) `ibmcloud ks cluster-config` コマンドに `--admin` オプションと `--network` オプションを指定します。 `--admin` は、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーをダウンロードします。 `--network` は、すべての Calico コマンドを実行するための Calico 構成ファイルをダウンロードします。
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+2. クラスターから API サーバー・ローカル・プロキシーの 172.20.0.1:2040 および 172.21.0.1:443 と etcd ローカル・プロキシーの 172.20.0.1:2041 へのパブリック・トラフィックを許可する Calico ネットワーク・ポリシーを作成します。
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: allow-master-local
+  spec:
+    egress:
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: TCP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: TCP
+    order: 1500
+    selector: ibm.role == 'worker_public'
+    types:
+    - Egress
+  ```
+  {: codeblock}
+
+3. ポリシーをクラスターに適用します。
+    - Linux および OS X:
+
+      ```
+      calicoctl apply -f allow-master-local.yaml
+      ```
+      {: pre}
+
+    - Windows:
+
+      ```
+      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
 ## クラスター外から NodePort、ロード・バランサー、Ingress の各サービスへのアクセス
 {: #firewall_inbound}
 
@@ -503,14 +568,14 @@ NodePort、ロード・バランサー、Ingress の各サービスへの着信�
 ## 他のサービスのファイアウォールやオンプレミスのファイアウォールのホワイトリストへのクラスターの登録
 {: #whitelist_workers}
 
-{{site.data.keyword.Bluemix_notm}} の内外やオンプレミスで実行されているサービスがファイアウォールで保護されている場合は、そうしたサービスにアクセスするには、そのファイアウォールにワーカー・ノードの IP アドレスを追加して、クラスターへのアウトバウンド・ネットワーク・トラフィックを許可します。例えば、ファイアウォールで保護されている {{site.data.keyword.Bluemix_notm}} データベースからデータを読み取る必要がある場合は、オンプレミスのファイアウォールのホワイトリストにワーカー・ノードのサブネットを登録して、クラスターからのネットワーク・トラフィックを許可します。
+{{site.data.keyword.Bluemix_notm}} の内外やオンプレミスで実行されているサービスがファイアウォールで保護されている場合は、そうしたサービスにアクセスするには、そのファイアウォールにワーカー・ノードの IP アドレスを追加して、クラスターへのアウトバウンド・ネットワーク・トラフィックを許可します。 例えば、ファイアウォールで保護されている {{site.data.keyword.Bluemix_notm}} データベースからデータを読み取る必要がある場合は、オンプレミスのファイアウォールのホワイトリストにワーカー・ノードのサブネットを登録して、クラスターからのネットワーク・トラフィックを許可します。
 {:shortdesc}
 
-1.  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+1.  [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. ワーカー・ノードのサブネットやワーカー・ノードの IP アドレスを取得します。
-  * **ワーカー・ノードのサブネット**: クラスター内のワーカー・ノード数が頻繁に変わる場合に ([クラスターの自動スケーリング機能](/docs/containers?topic=containers-ca#ca)を有効にする場合など)、新規ワーカー・ノードの追加時にその都度ファイアウォールを更新するというのは望ましくありません。その場合は、クラスターで使用している VLAN サブネットをホワイトリストに登録できます。ただし、VLAN サブネットは、他のクラスターのワーカー・ノードと共有されている可能性があることを忘れないでください。
-    <p class="note">{{site.data.keyword.containerlong_notm}} がクラスターのためにプロビジョンする**プライマリー・パブリック・サブネット**には 14 個の使用可能な IP アドレスが含まれおり、このサブネットは、同じ VLAN にある他のクラスターと共有される可能性があります。ワーカー・ノード数が 14 を超える場合は、他のサブネットを注文することになるので、ホワイトリストに登録する必要のあるサブネットが変わる可能性が出てきます。変更の頻度を下げるには、CPU とメモリー・リソースの高いワーカー・ノード・フレーバーのワーカー・プールを作成してください。そうすれば、ワーカー・ノードをそれほど頻繁に追加する必要がなくなります。</p>
+  * **ワーカー・ノードのサブネット**: クラスター内のワーカー・ノード数が頻繁に変わる場合に ([クラスターの自動スケーリング機能](/docs/containers?topic=containers-ca#ca)を有効にする場合など)、新規ワーカー・ノードの追加時にその都度ファイアウォールを更新するというのは望ましくありません。 その場合は、クラスターで使用している VLAN サブネットをホワイトリストに登録できます。 ただし、VLAN サブネットは、他のクラスターのワーカー・ノードと共有されている可能性があることを忘れないでください。
+    <p class="note">{{site.data.keyword.containerlong_notm}} がクラスターのためにプロビジョンする**プライマリー・パブリック・サブネット**には 14 個の使用可能な IP アドレスが含まれおり、このサブネットは、同じ VLAN にある他のクラスターと共有される可能性があります。 ワーカー・ノード数が 14 を超える場合は、他のサブネットを注文することになるので、ホワイトリストに登録する必要のあるサブネットが変わる可能性が出てきます。 変更の頻度を下げるには、CPU とメモリー・リソースの高いワーカー・ノード・フレーバーのワーカー・プールを作成してください。そうすれば、ワーカー・ノードをそれほど頻繁に追加する必要がなくなります。</p>
     1. クラスター内のワーカー・ノードをリストします。
       ```
       ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -519,11 +584,11 @@ NodePort、ロード・バランサー、Ingress の各サービスへの着信�
 
     2. 前の手順の出力から、クラスター内のワーカー・ノードの**パブリック IP** の固有ネットワーク ID (最初の 3 つのオクテット) をすべてメモしてください。<ステージング> プライベート専用クラスターをホワイトリストに登録する場合は、パブリック IP ではなく**プライベート IP** をメモしてください。<ステージング> 以下の出力では、固有ネットワーク ID は `169.xx.178` と `169.xx.210` です。
         ```
-        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
+        ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
         ```
         {: screen}
     3.  それぞれの固有ネットワーク ID の VLAN サブネットをリストします。
@@ -535,14 +600,14 @@ NodePort、ロード・バランサー、Ingress の各サービスへの着信�
         出力例:
         ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
-        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5
-        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6
+        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   
+        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
-    4.  サブネット・アドレスを取得します。出力中の **IP** の数を確認します。次に、IP の数と等しくなるのは `2` の `n` 乗かを計算します。例えば、IP の数が `16` であれば、`2` の `4` (`n`) 乗が `16` に等しくなります。`32` ビットから `n` の値を減算すれば、サブネットの CIDR が求まります。例えば、`n` が `4` の場合、CIDR は `28` になります (式 `32 - 4 = 28`)。**identifier** のマスクと CIDR の値を組み合わせれば、完全なサブネット・アドレスになります。前の出力では、サブネット・アドレスは次になります。
+    4.  サブネット・アドレスを取得します。 出力中の **IP** の数を確認します。 次に、IP の数と等しくなるのは `2` の `n` 乗かを計算します。 例えば、IP の数が `16` であれば、`2` の `4` (`n`) 乗が `16` に等しくなります。 `32` ビットから `n` の値を減算すれば、サブネットの CIDR が求まります。 例えば、`n` が `4` の場合、CIDR は `28` になります (式 `32 - 4 = 28`)。 **identifier** のマスクと CIDR の値を組み合わせれば、完全なサブネット・アドレスになります。 前の出力では、サブネット・アドレスは次になります。
         *   `169.xx.210.xxx/28`
         *   `169.xx.178.xxx/28`
-  * **個々のワーカー・ノードの IP アドレス**: 1 つのアプリだけを実行する少数のワーカー・ノードしかなく、スケーリングの必要がない場合や、1 つのワーカー・ノードだけをホワイトリストに登録する場合は、クラスター内のすべてのワーカー・ノードを表示して、**パブリック IP** アドレスをメモします。ワーカー・ノードをプライベート・ネットワークだけに接続し、プライベート・サービス・エンドポイントを使用して {{site.data.keyword.Bluemix_notm}} サービスに接続する場合は、**プライベート IP** アドレスをメモします。それらのワーカー・ノードだけをホワイトリストに登録します。クラスターのワーカー・ノードを削除/追加する場合は、その都度ファイアウォールを更新する必要があります。
+  * **個々のワーカー・ノードの IP アドレス**: 1 つのアプリだけを実行する少数のワーカー・ノードしかなく、スケーリングの必要がない場合や、1 つのワーカー・ノードだけをホワイトリストに登録する場合は、クラスター内のすべてのワーカー・ノードを表示して、**パブリック IP** アドレスをメモします。 ワーカー・ノードをプライベート・ネットワークだけに接続し、プライベート・サービス・エンドポイントを使用して {{site.data.keyword.Bluemix_notm}} サービスに接続する場合は、**プライベート IP** アドレスをメモします。 それらのワーカー・ノードだけをホワイトリストに登録します。 クラスターのワーカー・ノードを削除/追加する場合は、その都度ファイアウォールを更新する必要があります。
     ```
     ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -44,8 +44,8 @@ Por que o {{site.data.keyword.Bluemix_notm}}: para melhorar a análise de risco,
 * [ Escalação Horizontal ](/docs/containers?topic=containers-app#highly_available_apps)
 * [ Diversas regiões para alta disponibilidade ](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
-* [ Segurança e isolamento de contêiner ](/docs/containers?topic=containers-security#security)
-* [{{site.data.keyword.cloudant}} para persistir e sincronizar dados entre os apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [ Segurança do contêiner e isolamento ](/docs/containers?topic=containers-security#security)
+* [{{site.data.keyword.cloudant}} para persistir e sincronizar dados entre os apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 ** A Solução **
@@ -61,7 +61,7 @@ Eles também aceleraram sua análise de risco e conformidade. Suas funções de 
 * A necessidade elevada de melhor gerenciamento de risco financeiro impulsiona aumentos na supervisão regulamentar. As mesmas necessidades impulsionam a revisão associada dos processos de avaliação de risco e a divulgação de relatórios regulamentares mais granulares, integrados e abundantes.
 * Os High Performance Computing Grids são os principais componentes de infraestrutura para modelagem financeira.
 
-O problema da empresa neste momento é a escala e o tempo para a entrega.
+Nesse momento, o problema da empresa é a escala e o tempo de entrega.
 
 Seu ambiente atual é no local e tem sete anos a mais de idade, com cálculo, armazenamento e capacidade de E/S limitados.
 As atualizações do servidor são dispendiosas e levam muito tempo para serem concluídas.
@@ -89,9 +89,9 @@ Essa solução fornece o benefício imediato de escalabilidade. Usando o rico co
 
 O {{site.data.keyword.SecureGateway}} é usado para criar um pipeline seguro para bancos de dados no local e documentos para apps que são hospedados novamente para execução no {{site.data.keyword.containerlong_notm}}.
 
-O {{site.data.keyword.cos_full_notm}} é para todo documento bruto e armazenamento de dados à medida que eles avançam. Para simulações de Monte Carlo, um pipeline de fluxo de trabalho é colocado no local em que os dados de simulação estão, em arquivos de entrada estruturados que são armazenados no {{site.data.keyword.cos_full_notm}}. Um acionador para iniciar a simulação escala serviços de cálculo no {{site.data.keyword.containerlong_notm}} para dividir os dados de entrada em N buckets de eventos para processamento de simulação. O {{site.data.keyword.containerlong_notm}} escala automaticamente para N execuções de serviço associadas e grava resultados intermediários no {{site.data.keyword.cos_full_notm}}. Esses resultados são processados por outro conjunto dos serviços de cálculo do {{site.data.keyword.containerlong_notm}} para produzir os resultados finais.
+O {{site.data.keyword.cos_full_notm}} é para todo documento bruto e armazenamento de dados à medida que eles avançam. Para simulações de Monte Carlo, é adotado um pipeline de fluxo de trabalho no qual os dados de simulação estão em arquivos estruturados armazenados no {{site.data.keyword.cos_full_notm}}. Um acionador para iniciar a simulação escala serviços de cálculo no {{site.data.keyword.containerlong_notm}} para dividir os dados dos arquivos em depósitos de eventos N para o processamento da simulação. O {{site.data.keyword.containerlong_notm}} escala automaticamente para N execuções de serviço associadas e grava resultados intermediários no {{site.data.keyword.cos_full_notm}}. Esses resultados são processados por outro conjunto dos serviços de cálculo do {{site.data.keyword.containerlong_notm}} para produzir os resultados finais.
 
-O {{site.data.keyword.cloudant}} é um banco de dados NoSQL moderno que é útil para muitos casos de uso acionados por dados: de key-value a armazenamento de dados e consulta de dados orientados a documentos complexos. Para gerenciar o conjunto crescente de regras de relatório regulamentares e de gerenciamento, a empresa de hipoteca usa o {{site.data.keyword.cloudant}} para armazenar documentos que estão associados à entrada de dados regulamentares brutos na firma. Os processos de cálculo no {{site.data.keyword.containerlong_notm}} são acionados para compilar, processar e publicar os dados em vários formatos de relatório. Os resultados intermediários comuns entre os relatórios são armazenados como documentos do {{site.data.keyword.cloudant}} para que processos orientados por modelo possam ser usados para produzir os relatórios necessários.
+O {{site.data.keyword.cloudant}} é um banco de dados NoSQL moderno que é útil para muitos casos de uso acionados por dados: de key-value a armazenamento de dados e consulta de dados orientados a documentos complexos. Para gerenciar o conjunto crescente de regras de relatório regulamentares e de gerenciamento, a empresa de hipoteca usa o {{site.data.keyword.cloudant}} para armazenar documentos associados a dados regulamentares brutos que são recebidos. Os processos de cálculo no {{site.data.keyword.containerlong_notm}} são acionados para compilar, processar e publicar os dados em vários formatos de relatório. Os resultados intermediários comuns entre os relatórios são armazenados como documentos do {{site.data.keyword.cloudant}} para que processos orientados por modelo possam ser usados para produzir os relatórios necessários.
 
 ** Resultados **
 

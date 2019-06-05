@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -64,7 +64,7 @@ Le tableau suivant décrit les raisons pour lesquelles vous pourrez être amené
 | [`Pod` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | Un pod est l'unité la plus petite que vous puissiez déployer pour vos charges de travail. Elle peut héberger un ou plusieurs conteneurs. Semblables aux conteneurs, les pods sont conçus pour pouvoir être supprimés et sont souvent utilisés à des fins de test unitaire de fonctions d'application. Pour éviter que votre application soit indisponible, envisagez de déployer les pods avec un contrôleur Kubernetes, par exemple un déploiement. Un déploiement vous aide à gérer plusieurs pods, répliques, mises à l'échelle, transferts, etc. |
 | [`ReplicaSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | Un jeu de réplique (ReplicaSet) permet d'assurer que plusieurs répliques de votre pod sont en cours d'exécution et replanifie un pod s'il tombe en panne. Vous pouvez créer un jeu de répliques pour tester comment fonctionne la planification d'un pod, toutefois, pour gérer les mises à jour, les transferts et les mises à l'échelle, créez plutôt un déploiement à la place. |
 | [`Deployment` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | Un déploiement (Deployment) est un contrôleur qui gère un pod ou un [jeu de répliques ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) de modèles de pod. Vous pouvez créer des pods ou des jeux de répliques sans recourir à un déploiement pour tester des fonctions d'application. Pour une configuration au niveau production, utilisez des déploiements pour gérer les mises à jour, les transferts ou la mise à niveau des applications. |
-| [`StatefulSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Semblable aux déploiements, un ensemble avec état (Statefulset) est un contrôleur qui gère un jeu de répliques de pods. Contrairement aux déploiements, un ensemble avec état assure que votre pod a une identité unique sur le réseau et conserve son état lors d'une replanification. Lorsque vous voulez exécuter des charges de travail sur le cloud, essayez de concevoir votre application sans état pour que vos instances de service soient indépendantes les unes des autres et puissent échouer sans entraîner d'interruption de service. Cependant, certaines applications, telles que des bases de données, doivent être sans état. Dans ce cas, envisagez de créer un ensemble avec état et utilisez un stockage de [fichiers](/docs/containers?topic=containers-file_storage#file_statefulset), un stockage [par blocs](/docs/containers?topic=containers-block_storage#block_statefulset) ou un stockage d'[objets](/docs/containers?topic=containers-object_storage#cos_statefulset) comme stockage persistant pour votre ensemble avec état. Vous pouvez également installer [Portworx](/docs/containers?topic=containers-portworx) sur vos noeuds worker bare metal et utiliser Portworx comme solution de stockage défini par logiciel (SDS) à haute disponibilité pour gérer du stockage persistant pour votre ensemble avec état. |
+| [`StatefulSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Semblable aux déploiements, un ensemble avec état (Statefulset) est un contrôleur qui gère un jeu de répliques de pods. Contrairement aux déploiements, un ensemble avec état assure que votre pod a une identité unique sur le réseau et conserve son état lors d'une replanification. Lorsque vous voulez exécuter des charges de travail sur le cloud, essayez de [concevoir votre application sans état](/docs/containers?topic=containers-strategy#cloud_workloads) pour que vos instances de service soient indépendantes les unes des autres et puissent échouer sans entraîner d'interruption de service. Cependant, certaines applications, telles que des bases de données, doivent être avec état. Dans ce cas, envisagez de créer un ensemble avec état et utilisez un stockage de [fichiers](/docs/containers?topic=containers-file_storage#file_statefulset), un stockage [par blocs](/docs/containers?topic=containers-block_storage#block_statefulset) ou un stockage d'[objets](/docs/containers?topic=containers-object_storage#cos_statefulset) comme stockage persistant pour votre ensemble avec état. Vous pouvez également installer [Portworx](/docs/containers?topic=containers-portworx) sur vos noeuds worker bare metal et utiliser Portworx comme solution de stockage défini par logiciel (SDS) à haute disponibilité pour gérer du stockage persistant pour votre ensemble avec état. |
 | [`DaemonSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Utilisez un ensemble de démons (DaemonSet) lorsque vous devez exécuter le même pod sur tous les noeuds worker de votre cluster. Les pods gérés par un ensemble de démons sont automatiquement planifiés lorsqu'un noeud worker est ajouté dans un cluster. Les cas d'utilisation courants sont en principe les collecteurs de journaux, par exemple `logstash` ou `prometheus`, qui collectent les journaux à partir de tous les noeuds worker pour donner un aperçu de l'état de santé d'un cluster ou d'une application. |
 | [`Job` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | Un travail (Job) garantit que l'exécution d'un ou plusieurs pods se termine avec succès. Vous pouvez utiliser un travail pour les files d'attente ou les travaux par lots afin de prendre en charge le traitement parallèle d'éléments de travail distincts mais associés, par exemple un certain nombre de trames à restituer, de courriers électroniques à envoyer et de fichiers à convertir. Pour planifier l'exécution d'un travail à des périodes spécifiques, utilisez un travail [`CronJob` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
 {: caption="Types d'objets de charge de travail Kubernetes que vous pouvez créer." caption-side="top"}
@@ -78,7 +78,7 @@ Voir [Spécification des exigences relatives à votre application dans votre fic
 * [Ports](#port)
 * [Demandes et limites de ressources](#resourcereq)
 * [Sondes Liveness Probe et Readiness Probe](#probe)
-* [Services](#service) pour l'exposition du service d'application sur un port
+* [Services](#app-service) pour l'exposition du service d'application sur un port
 * [Objets ConfigMap](#configmap) pour définir des variables d'environnement de conteneur
 * [Objets Secret](#secret) pour définir des variables d'environnement de conteneur
 * [Volumes persistants](#pv) montés sur le conteneur à des fins de stockage
@@ -103,14 +103,14 @@ Ces deux ressources définissent des paires clé-valeur, mais vous les utilisez 
 <dt>Secret</dt>
 <dd>Fournit les informations sensibles suivantes relatives à vos charges de travail. Notez que d'autres utilisateurs du cluster peuvent avoir accès à la valeur confidentielle (secret), donc n'oubliez pas que les informations qu'elle contient peuvent être partagées avec ces utilisateurs.
 <ul><li><strong>Informations identifiant la personne (PII)</strong> : stockez les informations sensibles, telles que les adresses e-mail ou d'autres types d'informations requises pour la conformité de l'entreprise ou pour la réglementation officielle dans les valeurs confidentielles (secret).</li>
-<li><strong>Données d'identification</strong> : insérez les données d'identification, telles que les mots de passe, les clés et les jetons dans une valeur confidentielle (secret) pour réduire le risque d'exposition accidentelle. Par exemple, lorsque vous [liez un service](/docs/containers?topic=containers-integrations#adding_cluster) à votre cluster, les données d'identification sont stockées dans une valeur confidentielle (secret).</li></ul></dd>
+<li><strong>Données d'identification</strong> : insérez les données d'identification, telles que les mots de passe, les clés et les jetons dans une valeur confidentielle (secret) pour réduire le risque d'exposition accidentelle. Par exemple, lorsque vous [liez un service](/docs/containers?topic=containers-service-binding#bind-services) à votre cluster, les données d'identification sont stockées dans une valeur confidentielle (secret).</li></ul></dd>
 </dl>
 
 Vous voulez sécuriser davantage vos valeurs confidentielles ? Demandez à l'administrateur de votre cluster d'[activer {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) dans votre cluster pour chiffrer les valeurs confidentielles qu'elles soient nouvelles ou existantes.
 {: tip}
 
 ### Comment ajouter des services IBM, tels que Watson, à mon application ?
-Voir [Ajout de services à des applications](/docs/containers?topic=containers-integrations#adding_app).
+Voir [Ajout de services à des applications](/docs/containers?topic=containers-service-binding#adding_app).
 
 ### Comment m'assurer que mon application dispose des ressources adéquates ?
 Lorsque vous [spécifiez le fichier YAML de votre application](#app_yaml), vous pouvez ajouter des fonctionnalités Kubernetes à la configuration de votre application pour l'aider à acquérir les ressources appropriées. En particulier, [définissez les limites et les demandes de ressources ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) pour chaque conteneur défini dans votre fichier YAML.
@@ -131,7 +131,7 @@ Pour exposer votre application au public, vous disposez de différentes options 
 *  **Cluster standard de VLAN privé uniquement** : vous pouvez exposer votre application en utilisant un [service NodePort, LoadBalancer ou Ingress](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). Vous devez également ouvrir le port de l'adresse IP privée du service dans votre pare-feu.
 
 ### Après avoir déployé mon application, comment en surveiller l'état de santé ?
-Vous pouvez configurer la [consignation et la surveillance](/docs/containers?topic=containers-health#health) {{site.data.keyword.Bluemix_notm}} pour votre cluster. Vous pouvez également choisir d'intégrer un [service de consignation ou de surveillance](/docs/containers?topic=containers-integrations#health_services) tiers.
+Vous pouvez configurer la [consignation et la surveillance](/docs/containers?topic=containers-health#health) {{site.data.keyword.Bluemix_notm}} pour votre cluster. Vous pouvez également choisir d'intégrer un [service de consignation ou de surveillance](/docs/containers?topic=containers-supported_integrations#health_services) tiers.
 {: shortdesc}
 
 ### Comment maintenir mon application à jour ?
@@ -198,11 +198,11 @@ Tenez compte des options suivantes pour une disponibilité accrue de votre appli
   <p>Lorsque vous utilisez un jeu de répliques et spécifiez l'anti-affinité pour les pods, Kubernetes répartit les pods d'application sur les différents noeuds. Si vos noeuds se trouvent dans plusieurs zones, les pods sont répartis entre les zones, pour augmenter la disponibilité de votre application. Si vous souhaitez limiter l'exécution de vos applications à une seule zone, vous pouvez configurer l'affinité de pod pour créer et labelliser un pool de noeuds worker dans une zone. Pour plus d'informations, voir [Haute disponibilité pour les clusters à zones multiples](/docs/containers?topic=containers-plan_clusters#ha_clusters).</p>
   <p><strong>Dans le déploiement d'un cluster à zones multiples, mes pods d'application sont-ils répartis uniformément entre les noeuds ?</strong></p>
   <p>Les pods sont répartis uniformément entre les zones mais pas toujours entre les noeuds. Par exemple, si vous disposez d'un cluster avec un noeud dans chacune des trois zones et que vous déployez un jeu de répliques de 6 pods, chaque noeud obtient 2 pods. Cependant, si vous avez un cluster avec 2 noeuds dans chacune des 3 zones et que vous déployez un jeu de répliques de 6 pods, chaque zone dispose de deux pods planifiés et peut ou non planifier 1 pod par noeud. Pour avoir plus de contrôle sur la planification, vous pouvez [définir l'affinité entre les pods  ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
-  <p><strong>En cas de défaillance d'une zone, comment sont replanifiés les pods sur les noeuds restants dans les autres zones ?</strong></br>Tout dépend de la règle de planification que vous avez utilisée dans le déploiement. Si vous avez inclus l'[affinité entre pods de noeuds spécifiques ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), vos pods ne sont pas replanifiés. Si vous ne l'avez pas fait, les pods sont créés sur les noeuds worker disponibles dans d'autres zones, mais risquent de ne pas être équilibrés. Par exemple, les 2 pods peuvent être répartis sur les 2 noeuds disponibles ou peuvent être planifiés tous les deux sur 1 noeud doté de la capacité disponible. De même, lorsque la zone indisponible est restaurée, les pods ne sont pas automatiquement supprimés et rééquilibrés entre les noeuds. Pour que les pods soient rééquilibrés entre les zones une fois qu'une zone redevient opérationnelle, envisagez l'utilisation de l'[outil de déplanification de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes-incubator/descheduler).</p>
+  <p><strong>En cas de défaillance d'une zone, de quelle manière sont replanifiés les pods sur les noeuds restants dans les autres zones ?</strong></br>Tout dépend de la politique de planification que vous avez utilisée dans le déploiement. Si vous avez inclus l'[affinité entre pods de noeuds spécifiques ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), vos pods ne sont pas replanifiés. Si vous ne l'avez pas fait, les pods sont créés sur les noeuds worker disponibles dans d'autres zones, mais risquent de ne pas être équilibrés. Par exemple, les 2 pods peuvent être répartis sur les 2 noeuds disponibles ou peuvent être planifiés tous les deux sur 1 noeud doté de la capacité disponible. De même, lorsque la zone indisponible est restaurée, les pods ne sont pas automatiquement supprimés et rééquilibrés entre les noeuds. Pour que les pods soient rééquilibrés entre les zones une fois qu'une zone redevient opérationnelle, envisagez l'utilisation de l'[outil de déplanification de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes-incubator/descheduler).</p>
   <p><strong>Astuce</strong> : dans les clusters à zones multiples, tâchez de maintenir la capacité de vos noeuds worker à 50 % par zone de sorte à disposer d'une capacité disponible suffisante pour protéger votre cluster en cas de défaillance de zone.</p>
-  <p><strong>Que faire pour répartir mon application entre les différentes régions ?</strong></br>Pour protéger votre application en cas de défaillance de zone, créez un deuxième cluster dans une autre région, [configurez un équilibreur de charge global](/docs/containers?topic=containers-plan_clusters#multiple_clusters) pour connecter vos clusters, et utilisez un fichier YAML de déploiement pour déployer un jeu de répliques dupliqué avec [anti-affinité de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) pour votre application.</p>
+  <p><strong>Comment faire pour répartir mon application dans des régions ?</strong></br>Pour protéger votre application en cas de défaillance de zone, créez un deuxième cluster dans une autre région, [configurez un équilibreur de charge global](/docs/containers?topic=containers-plan_clusters#multiple_clusters) pour connecter vos clusters, et utilisez un fichier YAML de déploiement pour déployer un jeu de répliques dupliqué avec [anti-affinité de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) pour votre application. </p>
   <p><strong>Que faire si mes applications nécessitent du stockage persistant ?</strong></p>
-  <p>Utilisez un service de cloud, comme par exemple [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage).</p></dd>
+  <p>Utilisez un service de cloud, comme par exemple [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about).</p></dd>
 </dl>
 
 ## Spécification des exigences relatives à votre application dans votre fichier YAML
@@ -220,7 +220,7 @@ Passez en revue la copie d'un [fichier YAML complet](https://raw.githubuserconte
 * [Ports](#port)
 * [Demandes et limites de ressources](#resourcereq)
 * [Sondes Liveness Probe et Readiness Probe](#probe)
-* [Services](#service) pour l'exposition du service d'application sur un port
+* [Services](#app-service) pour l'exposition du service d'application sur un port
 * [Objets ConfigMap](#configmap) pour définir des variables d'environnement de conteneur
 * [Objets Secret](#secret) pour définir des variables d'environnement de conteneur
 * [Volumes persistants](#pv) montés sur le conteneur à des fins de stockage
@@ -241,7 +241,7 @@ metadata:
   replicas: 3</pre></code></p></dd>
 
 <dt id="label">Libellés</dt>
-  <dd><p>Avec les libellés (labels), vous pouvez marquer différents types de ressources dans votre cluster avec la même paire `clé: valeur`. Vous pouvez ensuite indiquer le sélecteur pour correspondre au libellé de sorte que vous puissiez créer ces autres ressources par dessus. Si vous envisagez d'exposer votre application au public, vous devez utiliser un libellé qui corresponde au sélecteur que vous spécifiez dans le service. Dans l'exemple, la spécification (spec) de déploiement utilise un modèle qui correspond au libellé `app: wasliberty`.</p>
+  <dd><p>Avec les [libellés](/docs/containers?topic=containers-strategy#deploy_organize), vous pouvez marquer différents types de ressources dans votre cluster avec la même paire clé-valeur (`key: value`). Vous pouvez ensuite indiquer le sélecteur pour correspondre au libellé de sorte que vous puissiez créer ces autres ressources par dessus. Si vous envisagez d'exposer votre application au public, vous devez utiliser un libellé qui corresponde au sélecteur que vous spécifiez dans le service. Dans l'exemple, la spécification (spec) de déploiement utilise un modèle qui correspond au libellé `app: wasliberty`.</p>
   <p>Vous pouvez extraire des objets labellisés dans votre cluster, pour voir des composants `staging` ou `production`. Par exemple, répertoriez toutes les ressources avec le libellé `env: production` sur tous les espaces de nom dans le cluster. Notez que vous devez avoir accès à tous les espaces de nom pour exécuter cette commande.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>Pour plus d'informations sur les libellés, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
   <li>Pour obtenir un exemple plus détaillé, voir [Déploiement d'applications sur des noeuds worker spécifiques à l'aide de libellés](/docs/containers?topic=containers-app#node_affinity).</li></ul>
@@ -289,7 +289,7 @@ template:
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">Port du service de l'application</dt>
-  <dd><p>Sélectionnez un port de conteneur pour ouvrir les services de l'application sur ce port. Pour voir les ports qui doivent être ouverts, reportez-vous aux spécifications de votre application ou au fichier Dockerfile. Le port est accessible depuis le réseau privé mais pas depuis une connexion de réseau public. Pour exposer l'application au public, vous devez créer un service NodePort, LoadBalancer ou Ingress. Vous utilisez ce même numéro de port lorsque vous [créez un objet `Service`](#service).</p>
+  <dd><p>Sélectionnez un port de conteneur pour ouvrir les services de l'application sur ce port. Pour voir les ports qui doivent être ouverts, reportez-vous aux spécifications de votre application ou au fichier Dockerfile. Le port est accessible depuis le réseau privé mais pas depuis une connexion de réseau public. Pour exposer l'application au public, vous devez créer un service NodePort, LoadBalancer ou Ingress. Vous utilisez ce même numéro de port lorsque vous [créez un objet `Service`](#app-service).</p>
   <p><pre class="codeblock"><code>ports:
 - containerPort: 9080</pre></code></p></dd>
 
@@ -327,7 +327,7 @@ readinessProbe:
   initialDelaySeconds: 45
   periodSeconds: 5</pre></code></p></dd>
 
-<dt id="service">Service d'exposition de l'application</dt>
+<dt id="app-service">Service d'exposition de l'application</dt>
   <dd><p>Vous pouvez créer un service pour exposer votre application. Dans la section `spec`, vérifiez que les valeurs de `port` et de libellés (labels) correspondent à celles que vous avez utilisées dans le déploiement. Le service expose des objets qui correspondent au libellé, tels que `app: wasliberty` dans l'exemple suivant.</p>
   <ul><li>Par défaut, un service utilise une [`adresse IP de cluster ` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/), qui rend le cluster accessible uniquement de l'intérieur du cluster et non en dehors du cluster.</li>
   <li>Vous pouvez créer un service NodePort, LoadBalancer ou Ingress pour exposer l'application au public. Ces services ont deux adresses IP, une externe et une interne. Lorsque le trafic est reçu sur l'adresse IP externe, il est transmis à l'adresse IP du cluster interne. Ensuite, le trafic est routé depuis l'adresse IP interne du cluster vers l'adresse IP du conteneur de l'application.</li>
@@ -484,6 +484,9 @@ metadata:
   name: wasliberty
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: wasliberty
   template:
     metadata:
       labels:
@@ -621,14 +624,14 @@ Votre cluster comporte tellement de ressources et d'utilisateurs que votre table
 Avant de commencer :
 * Vérifiez que vous disposez d'un [rôle de service](/docs/containers?topic=containers-users#platform) qui vous octroie le rôle Kubernetes RBAC approprié pour travailler avec des ressources Kubernetes.
 * Pour [lancer le tableau de bord Kubernetes à partir de la console](#db_gui), vous devez disposer d'un [rôle de plateforme](/docs/containers?topic=containers-users#platform). Si vous bénéficiez d'un rôle de service mais pas de rôle de plateforme, [lancez le tableau de bord Kubernetes dans l'interface de ligne de commande](#db_cli).
-* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Vous pouvez utiliser le port par défaut ou définir votre propre port pour lancer le tableau de bord Kubernetes d'un cluster.
 
 **Lancement du tableau de bord Kubernetes à partir de la console {{site.data.keyword.Bluemix_notm}}**
 {: #db_gui}
 
-1.  Connectez-vous à la [console{{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/). 
+1.  Connectez-vous à la [console{{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/).
 2.  Dans la barre de menu, sélectionnez le compte que vous souhaitez utiliser.
 3.  Dans le menu ![Icône de menu](../icons/icon_hamburger.svg "Icône de menu"), cliquez sur **Kubernetes**.
 4.  Sur la page **Clusters**, cliquez sur le cluster auquel vous souhaitez accéder.
@@ -695,7 +698,7 @@ Votre cluster comporte tellement de ressources et d'utilisateurs que votre table
 Avant de commencer :
 
 -   [Installez les interfaces de ligne de commande (CLI) requises](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+-   [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Vérifiez que vous disposez d'un [rôle de service](/docs/containers?topic=containers-users#platform) qui vous octroie le rôle Kubernetes RBAC approprié pour travailler avec des ressources Kubernetes.
 -   Pour [lancer le tableau de bord Kubernetes à partir de la console](#db_gui), vous devez disposer d'un [rôle de plateforme](/docs/containers?topic=containers-users#platform). Si vous bénéficiez d'un rôle de service mais pas de rôle de plateforme, [lancez le tableau de bord Kubernetes dans l'interface de ligne de commande](#db_cli).
 
@@ -725,7 +728,7 @@ Après avoir créé un cluster, vous pouvez y déployer une application à l'aid
 Avant de commencer :
 
 -   Installez les [interfaces de ligne de commande](/docs/containers?topic=containers-cs_cli_install#cs_cli_install) requises.
--   [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+-   [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Vérifiez que vous disposez d'un [rôle de service](/docs/containers?topic=containers-users#platform) qui vous octroie le rôle Kubernetes RBAC approprié pour travailler avec des ressources Kubernetes dans l'espace de nom.
 
 Pour déployer votre application :
@@ -759,7 +762,7 @@ Lorsque vous déployez une application, les pods d'application déploient plusie
 {:shortdesc}
 
 Avant de commencer :
-*   [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Vérifiez que vous disposez d'un [rôle de service](/docs/containers?topic=containers-users#platform) qui vous octroie le rôle Kubernetes RBAC approprié pour travailler avec des ressources Kubernetes dans l'espace de nom.
 
 Pour déployer des applications sur des noeuds worker spécifiques :
@@ -791,17 +794,17 @@ Pour déployer des applications sur des noeuds worker spécifiques :
     Roles:              <none>
     Labels:             arch=amd64
                         beta.kubernetes.io/arch=amd64
-                        beta.kubernetes.io/instance-type=b2c.4x16.encrypted
+                        beta.kubernetes.io/instance-type=b3c.4x16.encrypted
                         beta.kubernetes.io/os=linux
                         failure-domain.beta.kubernetes.io/region=us-south
                         failure-domain.beta.kubernetes.io/zone=dal10
                         ibm-cloud.kubernetes.io/encrypted-docker-data=true
                         ibm-cloud.kubernetes.io/ha-worker=true
                         ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                        ibm-cloud.kubernetes.io/machine-type=b2c.4x16.encrypted
+                        ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.12.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.12.7_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -835,7 +838,7 @@ Pour déployer des applications sur des noeuds worker spécifiques :
     ```
     {: codeblock}
 
-    Dans la section **affinity** du fichier YAML indiqué en exemple, `ibm-cloud.kubernetes.io/worker-pool-id` est la clé (`key`) et `<worker_pool_ID>` est la valeur (`value`).
+    Dans la section **affinity** de l'exemple de fichier YAML, `ibm-cloud.kubernetes.io/worker-pool-id` est la clé (`key`) et `<worker_pool_ID>` est la valeur (`value`).
 
 5. Appliquez le fichier de configuration de déploiement mis à jour.
     ```
@@ -873,9 +876,9 @@ Pour déployer des applications sur des noeuds worker spécifiques :
 
         ```
         ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b3c.4x16          normal   Ready   dal12   1.8.6_1504
         ```
         {: screen}
 
@@ -897,7 +900,6 @@ Dans les étapes suivantes, vous apprendrez à déployer des charges de travail 
 
 Avant de commencer :
 * [Créez un type de machine GPU bare metal](/docs/containers?topic=containers-clusters#clusters_cli). Notez que l'exécution de ce processus peut prendre plus d'1 jour ouvrable.
-* Votre maître cluster et le noeud worker du GPU doivent exécuter Kubernetes version 1.10 ou ultérieure.
 * Vérifiez que vous disposez d'un [rôle de service](/docs/containers?topic=containers-users#platform) qui vous octroie le rôle Kubernetes RBAC approprié pour travailler avec des ressources Kubernetes dans l'espace de nom.
 
 Pour exécuter une charge de travail sur une machine GPU :
@@ -938,7 +940,7 @@ Pour exécuter une charge de travail sur une machine GPU :
     ```
     {: codeblock}
 
-    <table>
+    <table summary="Tableau dont la colonne 1 décrit les zones du fichier YAML et dont la colonne 2 explique comment renseigner ces zones.">
     <caption>Composants YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
@@ -1063,11 +1065,11 @@ Pour exécuter une charge de travail sur une machine GPU :
 Avec Kubernetes, vous pouvez activer la [mise à l'échelle automatique horizontale de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) pour augmenter ou diminuer automatiquement le nombre d'instances de vos applications en fonction de l'UC.
 {:shortdesc}
 
-Vous recherchez des informations sur la mise à l'échelle des applications Cloud Foundry ? Consultez [IBM - Mise à l'échelle automatique pour {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=services/Auto-Scaling-get-started). Vous voulez plutôt mettre à l'échelle vos noeuds worker à la place de vos pods ? Découvrez le [programme de mise à l'échelle automatique de cluster (cluster autoscaler)](/docs/containers?topic=containers-ca#ca).
+Vous recherchez des informations sur la mise à l'échelle des applications Cloud Foundry ? Consultez [IBM - Mise à l'échelle automatique pour {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started#get-started). Vous voulez plutôt mettre à l'échelle vos noeuds worker à la place de vos pods ? Découvrez le [programme de mise à l'échelle automatique de cluster (cluster autoscaler)](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 Avant de commencer :
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - La surveillance avec Heapster doit être déployée dans le cluster qui doit faire l'objet de la mise à l'échelle automatique.
 - Vérifiez que vous disposez d'un [rôle de service](/docs/containers?topic=containers-users#platform) qui vous octroie le rôle Kubernetes RBAC approprié pour travailler avec des ressources Kubernetes dans l'espace de nom.
 
@@ -1080,10 +1082,10 @@ Etapes :
     ```
     {: pre}
 
-    <table>
-    <caption>Composantes de la commande `kubectl run`</caption>
+    <table summary="Tableau dont la colonne 1 décrit les options de commande Kubectl et dont la colonne 2 explique comment renseigner ces options.">
+    <caption>Options de la commande `kubectl run`</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des options de cette commande</th>
     </thead>
     <tbody>
     <tr>
@@ -1113,10 +1115,10 @@ Etapes :
     ```
     {: pre}
 
-    <table>
-    <caption>Composantes de la commande`kubectl autoscale`</caption>
+    <table summary="Tableau dont la colonne 1 décrit les options de commande Kubectl et dont la colonne 2 explique comment renseigner ces options.">
+    <caption>Options de la commande `kubectl autoscale`</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des options de cette commande</th>
     </thead>
     <tbody>
     <tr>
@@ -1147,12 +1149,65 @@ Vous voulez éviter toute indisponibilité lors de la mise à jour en continu ? 
 {: tip}
 
 Avant de commencer :
-*   [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Créez un [déploiement](#app_cli).
 *   Vérifiez que vous disposez d'un [rôle de service](/docs/containers?topic=containers-users#platform) qui vous octroie le rôle Kubernetes RBAC approprié pour travailler avec des ressources Kubernetes dans l'espace de nom.
 
 Pour gérer les mises à jour en continu de vos applications :
-1.  [Déployez ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) une modification. Par exemple, vous souhaiterez peut-être modifier l'image que vous avez utilisée dans votre déploiement initial.
+1.  Pour être certain que vos déploiements sont marqués comme étant accessibles en lecture seule lorsque le conteneur est en cours d'exécution et prêt à traiter des demandes, ajoutez des [sondes Liveness et Readiness à votre déploiement](#probe).
+
+2.  Mettez à jour votre déploiement de manière à y inclure une stratégie de mise à jour en continu dans laquelle sont spécifiés le nombre maximal de pods non disponibles ou en surcharge ou le pourcentage de pods durant la mise à jour. 
+
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:  
+      name: nginx-test
+    spec:
+      replicas: 10
+      selector:
+        matchLabels:
+          service: http-server
+      minReadySeconds: 5
+      progressDeadlineSeconds: 600
+      strategy: 
+        type: RollingUpdate  
+        rollingUpdate:    
+          maxUnavailable: 50%
+          maxSurge: 2
+    ...
+    ```
+    {: codeblock}
+
+    <table summary="Tableau dont la colonne 1 décrit les zones du fichier YAML et dont la colonne 2 explique comment renseigner ces zones.">
+    <caption>Composants YAML</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>spec.minReadySeconds</code></td>
+    <td>Par défaut, les déploiements attendent que le pod soit marqué `Prêt` pour poursuivre. Si vous constatez que le déploiement continue de créer des pods alors même que votre application située dans le pod le plus récent n'est pas encore prête, utilisez cette zone pour ralentir le déploiement. Par exemple, si vous spécifiez `5`, le déploiement attend pendant 5 secondes une fois que le pod est `prêt` avant de créer le pod suivant.</td>
+    </tr>
+    <tr>
+    <td><code>spec.progressDeadlineSeconds</code></td>
+    <td>Définissez un délai d'attente (en secondes) à observer avant de considérer qu'un déploiement a échoué. Par exemple, lorsqu'aucun délai d'attente n'est défini, si votre nouvelle version d'application présente un bogue et se bloque immédiatement, le déploiement ne peut pas se poursuivre car le pod n'atteint jamais l'état `Prêt`. Si vous définissez un délai d'attente de `600` secondes et si une phase du déploiement ne progresse plus pendant 10 minutes, le déploiement est marqué comme ayant échoué et s'arrête. </td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.type</code></td>
+    <td>Spécifiez le type de stratégie `RollingUpdate`. </td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxUnavailable</code></td>
+    <td>Définissez le nombre maximal de pods qui peuvent être non disponibles durant une mise à jour ; il peut s'agir d'un nombre (`2`) ou d'un pourcentage (`50%`). IL est recommandé d'utiliser un pourcentage. Ainsi, si vous modifiez le nombre de répliques ultérieurement, vous n'aurez pas à penser à mettre à jour le nombre ici, sauf si vous souhaitez limiter le déploiement afin d'autoriser l'arrêt d'un seul pod à la fois. Si vous ne voulez jamais passer au-dessous de 100 % capacité, affectez la valeur `0%` à ce paramètre et spécifiez le paramètre `spec.strategy.type.rollingUpdate.maxSurge`. </td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
+    <td>Définissez le nombre de ressources supplémentaires pouvant être utilisées par le déploiement. Il peut s'agir d'un nombre (`2`) ou d'un pourcentage (`50%`). Par exemple, si votre déploiement spécifie `10` répliques et que vous affectez au paramètre `maxSurge` la valeur `2`, durant le déploiement, 2 nouvelles répliques sont créées. Vous disposez à présent de 12 répliques (10 répliques existantes et 2 nouvelles répliques). Lorsque les 2 nouvelles répliques sont prêtes, le déploiement réduit le nombre d'anciennes répliques à 8 afin d'être conforme aux 10 répliques spécifiées. Ce processus se poursuit jusqu'à ce que le déploiement soit terminé et que les 10 répliques exécutent la nouvelle version. <p class="tip">Si vous souhaitez effectuer une mise à jour de basculement instantanée de type Blue-Green,  affectez au paramètre `maxSurge` la valeur `100%`. Le déploiement crée toutes les nouvelles répliques requises, puis fait passer le nombre de répliques de l'ancienne version à 0. </p></td>
+    </tr>
+    </tbody></table>
+
+3.  [Déployez ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) une modification. Par exemple, vous souhaiterez peut-être modifier l'image que vous avez utilisée dans votre déploiement initial.
 
     1.  Identifiez le nom du déploiement.
 
@@ -1184,14 +1239,26 @@ Pour gérer les mises à jour en continu de vos applications :
 
     Lorsque vous exécutez les commandes, la modification est immédiatement appliquée et consignée dans l'historique de déploiement.
 
-2.  Vérifiez le statut de votre déploiement.
+4.  Vérifiez le statut de votre déploiement.
 
     ```
     kubectl rollout status deployments/<deployment_name>
     ```
     {: pre}
 
-3.  Rétromigrez une modification.
+    Si vous constatez qu'il se passe quelque chose au niveau du statut et souhaitez prendre le temps d'effectuer des vérifications, vous pouvez simplement interrompre et reprendre votre déploiement à l'aide des commandes suivantes : 
+
+    ```
+    kubectl rollout pause deployment <deployment_name>
+    ```
+    {: pre}
+
+    ```
+    kubectl rollout resume deployment <deployment_name>
+    ```
+    {: pre}
+
+5.  Rétromigrez une modification.
     1.  Affichez l'historique des modifications en continu du déploiement et identifiez le numéro de révision de votre dernier déploiement.
 
         ```

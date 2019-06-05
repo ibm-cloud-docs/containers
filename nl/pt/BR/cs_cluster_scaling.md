@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-17"
 
 keywords: kubernetes, iks, node scaling
 
@@ -37,7 +37,7 @@ Deseja automaticamente escalar seus pods? Efetue check-out de  [ Scaling apps ](
 O escalador automático de cluster está disponível para clusters padrão que são configurados com conectividade de rede pública. Se o seu cluster não puder acessar a rede pública, como um cluster privado atrás de um firewall ou um cluster com apenas o terminal em serviço privado ativado, não será possível usar o escalador automático de cluster em seu cluster.
 {: important}
 
-## Entendendo como o Autoscaler do Cluster Funciona
+## Entendendo o dimensionamento
 {: #ca_about}
 
 O escalador automático de cluster varre periodicamente o cluster para ajustar o número de nós do trabalhador nos conjuntos de trabalhadores que ele gerencia em resposta às suas solicitações de recurso de carga de trabalho e quaisquer configurações customizadas que você configurar, como intervalos de varredura. A cada minuto, o escalador automático de cluster verifica as situações a seguir.
@@ -57,13 +57,24 @@ Em geral, o escalador automático de cluster calcula o número de nós do trabal
 *   O tamanho mínimo e máximo do nó do trabalhador por zona que você configurou.
 *   Suas solicitações de recurso de pod pendentes e determinados metadados que você associa com a carga de trabalho, como antiafinidade, rótulos para colocar os pods apenas em determinados tipos de máquina ou [orçamentos de interrupção do pod![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
 *   Os conjuntos de trabalhadores que o escalador automático de cluster gerencia, potencialmente entre as zonas em um [cluster de múltiplas zonas](/docs/containers?topic=containers-plan_clusters#multizone).
-*   Para obter mais informações, consulte as [FAQs do Kubernetes Cluster Autoscaler ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md).
+*   Os [valores customizados do gráfico do Helm](#ca_chart_values) configurados, como ignorar nós do trabalhador para a exclusão se usarem o armazenamento local.
 
+Para obter mais informações, consulte as perguntas mais frequentes do Dimensionador Automático de Cluster Kubernetes para saber [Como o dimensionamento de ampliação funciona? ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-up-work) e [Como o dimensionamento de redução funciona? ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work).
+
+<br>
+
+**Posso mudar o funcionamento da ampliação ou redução do dimensionamento?**<br>
+É possível customizar as configurações ou usar outros recursos do Kubernetes para afetar o funcionamento do dimensionamento.
+*   **Ampliação do dimensionamento**: [customize os valores do gráfico do Helm do dimensionador automático de cluster](#ca_chart_values), como `scanInterval`, `expander`, `skipNodes` ou `maxNodeProvisionTime`. Revise maneiras de [superprovisionar nós do trabalhador](#ca_scaleup) para que seja possível ampliar o dimensionamento dos nós do trabalhador antes que um conjunto do trabalhador tenha insuficiência de recursos. Também é possível [configurar interrupções de orçamento de pod do Kubernetes e cortes de prioridade de pod](#scalable-practices-apps) para afetar o funcionamento da ampliação do dimensionamento.
+*   **Redução do dimensionamento**: [customize os valores do gráfico do Helm do dimensionador automático de cluster](#ca_chart_values), como `scaleDownUnneededTime`, `scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete` ou `scaleDownUtilizationThreshold`.
+
+<br>
 **Como esse comportamento é diferente dos conjuntos de trabalhadores que não são gerenciados pelo escalador automático de cluster?**<br>
 Quando você [cria um conjunto de trabalhadores](/docs/containers?topic=containers-clusters#add_pool), você especifica quantos nós do trabalhador por zona ele terá. O conjunto de trabalhadores mantém esse número de nós do trabalhador até você [redimensionar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ou [rebalancear](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance). O conjunto de trabalhadores não inclui nem remove nós do trabalhador para você. Se você tiver mais pods do que pode ser planejado, os pods permanecerão no estado pendente até que você redimensione o conjunto de trabalhadores.
 
 Quando você ativa o escalador automático de cluster para um conjunto de trabalhadores, a capacidade dos nós do trabalhador é aumentada ou diminuída em resposta às suas configurações de especificação de pod e solicitações de recurso. Não é necessário redimensionar ou rebalancear o conjunto de trabalhadores manualmente.
 
+<br>
 **Posso ver um exemplo de como o escalador automático de cluster aumenta e diminui a capacidade?**<br>
 Considere a imagem a seguir para obter um exemplo de aumento e diminuição de capacidade do cluster.
 
@@ -124,30 +135,57 @@ _Figura: Aumentando e diminuindo automaticamente a capacidade de um cluster._
 6.  Você não precisa mais da carga de trabalho adicional, portanto, exclua a implementação. Após um curto período de tempo, o escalador automático de cluster detecta que seu cluster não precisa mais de todos os seus recursos de cálculo e começa a diminuir a capacidade dos nós do trabalhador um de cada vez.
 7.  Seus conjuntos de trabalhadores são escalados para baixo. O escalador automático de cluster varre em intervalos regulares para verificar se há solicitações de recurso de pod pendentes e nós do trabalhador subutilizados para aumentar ou diminuir a capacidade dos conjuntos de trabalhadores.
 
-<br>
-**Como posso garantir que meu nó do trabalhador e as práticas de implementação sejam escaláveis?**<br>
-Aproveite ao máximo o escalador automático de cluster organizando seu nó do trabalhador e as estratégias de cargas de trabalho do app. Para obter mais informações, consulte as [FAQs do Kubernetes Cluster Autoscaler ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md).
+## Seguindo práticas de implementações escaláveis
+{: #scalable-practices}
 
-<br>
-**O que são algumas diretrizes gerais para conjuntos de trabalhadores e nós?**<br>
-*   É possível executar somente um `ibm-iks-cluster-autoscaler` por cluster.
-*   O escalador automático de cluster escala seu cluster em resposta às [solicitações de recurso![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) de sua carga de trabalho. Como tal, você não precisa [redimensionar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ou [rebalancear](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) seus conjuntos de trabalhadores.
-*   Não use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm) `ibmcloud ks worker-rm` para remover nós do trabalhador individuais de seu conjunto de trabalhadores, pois isso pode desequilibrar o conjunto de trabalhadores.
-*   Como as contaminações não podem ser aplicadas no nível do conjunto de trabalhadores, não [contamine os nós do trabalhador](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) para evitar resultados inesperados. Por exemplo, ao implementar uma carga de trabalho que não é tolerada pelos nós do trabalhador contaminados, os nós do trabalhador não são considerados para aumento de capacidade e mais nós do trabalhador poderão ser pedidos, mesmo se o cluster tiver capacidade suficiente. No entanto, os nós do trabalhador contaminados ainda serão identificados como subutilizados se tiverem menos do que o limite (por padrão, 50%) de seus recursos utilizados e, portanto, serão considerados para redução de capacidade.
+Aproveite o dimensionador automático de cluster ao máximo usando as estratégias a seguir para seu nó do trabalhador e sua implementação de carga de trabalho. Para obter mais informações, consulte as [FAQs do Kubernetes Cluster Autoscaler ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md).
+{: shortdesc}
 
-<br>
-**O que são algumas diretrizes gerais para cargas de trabalho do app?**<br>
-*   Tenha em mente que a auto-inicialização é baseada no uso de cálculo que seu pedido de configurações de carga de trabalho e não considera outros fatores, como custos da máquina.
-*   Especifique [solicitações de recurso ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) para todas as suas implementações porque as solicitações de recurso são o que o escalador automático de cluster usa para calcular quantos nós do trabalhador são necessários para executar a carga de trabalho.
+[Experimente o dimensionador automático de cluster](#ca_helm) com algumas cargas de trabalho de teste para compreender o [funcionamento da ampliação e da redução do dimensionamento](#ca_about), quais [valores customizados](#ca_chart_values) podem ser configurados e quaisquer outros aspectos que desejar, como o [superprovisionamento](#ca_scaleup) dos nós do trabalhador ou a [limitação de aplicativos](#ca_limit_pool). Em seguida, limpe seu ambiente de teste e planeje-se para incluir esses valores customizados e configurações adicionais com uma nova instalação do dimensionador automático de cluster.
+
+### Posso dimensionar automaticamente diversos conjuntos do trabalhador ao mesmo tempo?
+{: #scalable-practices-multiple}
+Sim, depois de instalar o gráfico do Helm, é possível escolher quais conjuntos do trabalhador no cluster serão dimensionados automaticamente [no configmap](#ca_cm). Somente é possível executar um gráfico do Helm `ibm-iks-cluster-autoscaler` por cluster.
+{: shortdesc}
+
+### Como posso ter certeza de que o dimensionador automático de cluster responderá aos recursos necessários ao meu aplicativo?
+{: #scalable-practices-resrequests}
+
+O escalador automático de cluster escala seu cluster em resposta às [solicitações de recurso![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) de sua carga de trabalho. Como tal, especifique [solicitações de recurso ![Ícone de link externo](../icons/launch-glyph.svg "ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) para todas as suas implementações, pois elas são usadas pelo dimensionador automático de cluster para calcular quantos nós do trabalhador são necessários para executar a carga de trabalho. Tenha em mente que a auto-inicialização é baseada no uso de cálculo que seu pedido de configurações de carga de trabalho e não considera outros fatores, como custos da máquina.
+{: shortdesc}
+
+### Posso reduzir o dimensionamento de um conjunto do trabalhador para 0 (zero) nós?
+{: #scalable-practices-zero}
+
+Não, não é possível configurar o `minSize` do dimensionador automático de cluster como`0`. Além disso, a menos que você [desative](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) os balanceadores de carga do aplicativo (ALBs) em seu cluster, deve mudar o `minSize` para `2` nós do trabalhador por zona para que os pods do ALB possam ser difundidos para a alta disponibilidade.
+{: shortdesc}
+
+### Posso otimizar minhas implementações para o dimensionamento automático?
+{: #scalable-practices-apps}
+
+Sim, é possível incluir diversos recursos do Kubernetes em sua implementação para ajustar como o dimensionador automático de cluster considera suas solicitações de recurso para o dimensionamento.
+{: shortdesc}
 *   Use [orçamentos de interrupção do pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) para evitar reagendamento abrupto ou exclusões de seus pods.
 *   Se você estiver usando a prioridade do pod, será possível [editar o corte de prioridade ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-cluster-autoscaler-work-with-pod-priority-and-preemption) para mudar quais tipos de prioridade acionam o aumento de capacidade. Por padrão, o limite de prioridade é zero (`0`).
 
-<br>
-**Por que meus conjuntos de trabalhadores escalados automaticamente são não balanceados?**<br>
-Durante um aumento de capacidade, o escalador automático de cluster balanceia os nós entre as zonas, com uma diferença permitida de um nó do trabalhador a mais ou a menos (+/- 1). Suas cargas de trabalho pendentes podem não solicitar capacidade suficiente para tornar cada zona balanceada. Nesse caso, se você desejar balancear manualmente os conjuntos de trabalhadores, [atualize o configmap do escalador automático de cluster](#ca_cm) para remover o conjunto de trabalhadores não balanceado. Em seguida, execute o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) `ibmcloud ks worker-pool-rebalance` e inclua o conjunto de trabalhadores de volta no configmap do escalador automático de cluster.
+### Posso usar contaminações e tolerâncias com conjuntos do trabalhador com dimensionamento automático?
+{: #scalable-practices-taints}
 
-**Por que não posso redimensionar ou rebalancear meu conjunto de trabalhadores?**<br>
-Quando o escalador automático de cluster está ativado para um conjunto de trabalhadores, não é possível [redimensionar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ou [rebalancear](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) seus conjuntos de trabalhadores. Deve-se [editar o configmap](#ca_cm) para mudar o tamanho mínimo ou máximo do conjunto de trabalhadores ou desativar a escalação automática de cluster para esse conjunto de trabalhadores.
+Como as contaminações não podem ser aplicadas no nível do conjunto de trabalhadores, não [contamine os nós do trabalhador](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) para evitar resultados inesperados. Por exemplo, ao implementar uma carga de trabalho que não é tolerada pelos nós do trabalhador contaminados, eles não são considerados para a ampliação do dimensionamento e mais nós do trabalhador podem ser solicitados, mesmo que o cluster tenha capacidade suficiente. No entanto, os nós do trabalhador contaminados ainda são identificados como subutilizados se tiverem menos do que o limite (por padrão, 50%) de seus recursos utilizados e, portanto, são considerados para a redução do dimensionamento.
+{: shortdesc}
+
+### Por que meus conjuntos do trabalhador com dimensionamento automático não estão balanceados?
+{: #scalable-practices-unbalanced}
+
+Durante uma ampliação de dimensionamento, o dimensionador automático de cluster balanceia os nós nas zonas, com uma diferença permitida de um nó do trabalhador a mais ou a menos (+/-1). Suas cargas de trabalho pendentes podem não solicitar capacidade suficiente para tornar cada zona balanceada. Nesse caso, se você desejar balancear manualmente os conjuntos de trabalhadores, [atualize o configmap do escalador automático de cluster](#ca_cm) para remover o conjunto de trabalhadores não balanceado. Em seguida, execute o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) `ibmcloud ks worker-pool-rebalance` e inclua o conjunto de trabalhadores de volta no configmap do escalador automático de cluster.
+{: shortdesc}
+
+
+### Por que não consigo redimensionar nem rebalancear meu conjunto do trabalhador?
+{: #scalable-practices-resize}
+
+Quando o escalador automático de cluster está ativado para um conjunto de trabalhadores, não é possível [redimensionar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ou [rebalancear](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) seus conjuntos de trabalhadores. Deve-se [editar o configmap](#ca_cm) para mudar o tamanho mínimo ou máximo do conjunto de trabalhadores ou desativar a escalação automática de cluster para esse conjunto de trabalhadores. Não use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm) `ibmcloud ks worker-rm` para remover nós do trabalhador individuais de seu conjunto de trabalhadores, pois isso pode desequilibrar o conjunto de trabalhadores.
+{: shortdesc}
 
 Além disso, se você não desativar os conjuntos de trabalhadores antes de desinstalar o gráfico do Helm `ibm-iks-cluster-autoscaler`, os conjuntos de trabalhadores não poderão ser redimensionados manualmente. Reinstale o gráfico `ibm-iks-cluster-autoscaler` Helm, [edite o configmap](#ca_cm) para desativar o conjunto de trabalhadores e tente novamente.
 
@@ -169,7 +207,7 @@ Instale o plug-in do escalador automático de cluster do {{site.data.keyword.con
     *  Kubernetes (` kubectl `)
     *  Helm (` helm `)
 2.  [Crie um cluster padrão](/docs/containers?topic=containers-clusters#clusters_ui) que execute **Kubernetes versão 1.12 ou mais recente**.
-3.   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+3.   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 4.  Confirme se suas credenciais do {{site.data.keyword.Bluemix_notm}} Identity and Access Management estão armazenadas no cluster. O autoscaler do cluster usa esse segredo para autenticar.
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
@@ -193,11 +231,11 @@ Instale o plug-in do escalador automático de cluster do {{site.data.keyword.con
 <br>
 **Para instalar o plug-in `ibm-iks-cluster-autoscaler` em seu cluster**:
 
-1.  [Siga as instruções](/docs/containers?topic=containers-integrations#helm) para instalar o cliente **Helm versão 2.11 ou mais recente** em sua máquina local e instalar o servidor do Helm (tiller) com uma conta de serviço em seu cluster.
+1.  [Siga as instruções](/docs/containers?topic=containers-helm#public_helm_install) para instalar o cliente **Helm versão 2.11 ou mais recente** em sua máquina local e instalar o servidor do Helm (tiller) com uma conta de serviço em seu cluster.
 2.  Verifique se o tiller está instalado com uma conta do serviço.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -209,7 +247,7 @@ Instale o plug-in do escalador automático de cluster do {{site.data.keyword.con
     {: screen}
 3.  Inclua e atualize o repositório do Helm no qual está o gráfico do Helm do escalador automático de cluster.
     ```
-    helm repo incluir ibm https://registry.bluemix.net/helm/ibm/
+    helm repo add iks-charts https://icr.io/helm/iks-charts
     ```
     {: pre}
     ```
@@ -218,11 +256,11 @@ Instale o plug-in do escalador automático de cluster do {{site.data.keyword.con
     {: pre}
 4.  Instale o gráfico do Helm do escalador automático de cluster no namespace `kube-system` de seu cluster.
 
-    Também é possível [customizar as configurações do escalador automático de cluster](#ca_chart_values), como a quantia de tempo que ele aguarda antes de aumentar ou diminuir a capacidade dos nós do trabalhador.
+    Durante a instalação, você tem a opção de [customizar adicionalmente as configurações do dimensionador automático de cluster](#ca_chart_values), como a quantidade de tempo que ele aguarda antes de ampliar ou reduzir o dimensionamento dos nós do trabalhador.
     {: tip}
 
     ```
-    helm install ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
+    helm install iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
@@ -314,7 +352,7 @@ Depois de editar o configmap para ativar um conjunto de trabalhadores, o escalad
 
 ** Antes de iniciar **:
 *  [ Instale o plug-in  ` ibm-iks-cluster-cluster-autoscaler `  ](#ca_helm).
-*  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Para atualizar o configmap do escalador automático de cluster e os valores**:
 
@@ -346,25 +384,26 @@ Depois de editar o configmap para ativar um conjunto de trabalhadores, o escalad
     <th id="parameter-with-default">Parâmetro com valor padrão</th>
     <th id="parameter-with-description">Descrição</th>
     </thead>
+    <tbody>
     <tr>
-    <th id="parameter-name" headers="parameter-with-default">`"name": "default"`</th>
-    <td headers="parameter-name parameter-with-description">Substitua `"default"` pelo nome ou ID do conjunto de trabalhadores que você deseja escalar. Para listar os conjuntos de trabalhadores, execute `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`.<br><br>
+    <td id="parameter-name" headers="parameter-with-default">`"name": "default"`</td>
+    <td headers="parameter-name parameter-with-description">Substitua `"default"` pelo nome ou ID do conjunto de trabalhadores que você deseja escalar. Para listar os conjuntos do trabalhador, execute `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`.<br><br>
     Para gerenciar mais de um conjunto de trabalhadores, copie a linha JSON para uma linha separada por vírgulas, como a seguir. <pre class="codeblock">[
      {1}, "maxSize": 2, "enabled" :false },
      {2}", "minSize": 2, "maxSize": 5, "enabled" :true }
     ]</pre><br><br>
-    **Nota**: o escalador automático de cluster pode escalar apenas os conjuntos de trabalhadores que têm o rótulo `ibm-cloud.kubernetes.io/worker-pool-id`. Para verificar se o conjunto do trabalhador tem a etiqueta necessária, execute `ibmcloud ks worker-pool-get -- cluster <cluster_name_or_ID> -- worker-pool <worker_pool_name_or_ID> | grep Labels `. Se o seu conjunto de trabalhadores não tiver o rótulo necessário, [inclua um novo conjunto de trabalhadores](/docs/containers?topic=containers-clusters#add_pool) e use esse conjunto de trabalhadores com o ajustador automático de escala do cluster.</td>
+    **Nota**: o escalador automático de cluster pode escalar apenas os conjuntos de trabalhadores que têm o rótulo `ibm-cloud.kubernetes.io/worker-pool-id`. Para verificar se seu conjunto do trabalhador tem o rótulo necessário, execute `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Se o seu conjunto de trabalhadores não tiver o rótulo necessário, [inclua um novo conjunto de trabalhadores](/docs/containers?topic=containers-clusters#add_pool) e use esse conjunto de trabalhadores com o ajustador automático de escala do cluster.</td>
     </tr>
     <tr>
-    <th id="parameter-minsize" headers="parameter-with-default">` "minSize": 1 `</th>
+    <td id="parameter-minsize" headers="parameter-with-default">` "minSize": 1 `</td>
     <td headers="parameter-minsize parameter-with-description">Especifique o número mínimo de nós do trabalhador por zona para estar no conjunto de trabalhadores em todos os momentos. O valor deve ser 2 ou superior para que seus pods do ALB possam ser difundidos para alta disponibilidade. Se você [desativou](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) o ALB em seu cluster padrão, será possível configurar o valor para `1`.</td>
     </tr>
     <tr>
-    <th id="parameter-maxsize" headers="parameter-with-default">` "maxSize": 2 `</th>
+    <td id="parameter-maxsize" headers="parameter-with-default">` "maxSize": 2 `</td>
     <td headers="parameter-maxsize parameter-with-description">Especifique o número máximo de nós do trabalhador por zona para estar no conjunto de trabalhadores. O valor deve ser igual ou maior que o valor que você configurou para o `minSize`.</td>
     </tr>
     <tr>
-    <th id="parameter-enabled" headers="parameter-with-default">` "enabled": false `</th>
+    <td id="parameter-enabled" headers="parameter-with-default">` "enabled": false `</td>
     <td headers="parameter-enabled parameter-with-description">Configure o valor como `true` para o escalador automático de cluster para gerenciar o ajuste de escala para o conjunto de trabalhadores. Configure o valor como `false` para impedir que o escalador automático de cluster escale o conjunto de trabalhadores.<br><br>
     Posteriormente, se você desejar [remover o escalador automático de cluster](#ca_rm), deverá primeiro desativar cada conjunto de trabalhadores no configmap.</td>
     </tr>
@@ -376,7 +415,7 @@ Depois de editar o configmap para ativar um conjunto de trabalhadores, o escalad
     kubectl get pods -n kube-system
     ```
     {: pre}
-5.  Revise a seção **`Eventos`** do pod autoscaler do cluster para um evento **`ConfigUpdated`** para verificar se o configmap foi atualizado com êxito. A mensagem de evento para seu configmap está no formato a seguir: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message `.
+5.  Revise a seção **`Eventos`** do pod autoscaler do cluster para um evento **`ConfigUpdated`** para verificar se o configmap foi atualizado com êxito. A mensagem de evento para seu configmap está no formato a seguir: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
 
     ```
     kubectl describe pod -n kube-system <cluster_autoscaler_pod>
@@ -401,8 +440,8 @@ Customize as configurações do escalador automático de cluster, como a quantia
 {: shortdesc}
 
 ** Antes de iniciar **:
+*  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  [ Instale o plug-in  ` ibm-iks-cluster-cluster-autoscaler `  ](#ca_helm).
-*  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 **Para atualizar os valores do autocalador do cluster**:
 
@@ -448,7 +487,7 @@ Customize as configurações do escalador automático de cluster, como a quantia
     <tbody>
     <tr>
     <td>Parâmetro ` api_route `</td>
-    <td>Configure o [{{site.data.keyword.containerlong_notm}} terminal de API](/docs/containers?topic=containers-cs_cli_reference#cs_api) para a região em que está o seu cluster.</td>
+    <td>Configure o [{{site.data.keyword.containerlong_notm}} terminal de API](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api) para a região em que está o seu cluster.</td>
     <td>Nenhum padrão. Use a região de destino em que está seu cluster.</td>
     </tr>
     <tr>
@@ -529,15 +568,15 @@ Customize as configurações do escalador automático de cluster, como a quantia
     </tr>
     </tbody>
     </table>
-2.  Para mudar qualquer um dos valores de configuração do escalador automático de cluster, atualize o gráfico do Helm com os novos valores.
+2.  Para mudar qualquer um dos valores de configuração do escalador automático de cluster, atualize o gráfico do Helm com os novos valores. Inclua o sinalizador `--recreate-pods` para que quaisquer pods existentes do dimensionador automático de cluster sejam recriados para selecionar as mudanças de configuração customizada.
     ```
-    helm upgrade --set scanInterval=2m ibm-iks-cluster-autoscaler ibm/ibm-iks-cluster-autoscaler -i
+    helm upgrade --set scanInterval=2m ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler -i --recreate-pods
     ```
     {: pre}
 
     Para reconfigurar o gráfico para os valores padrão:
     ```
-    upgrade do leme -- reset-values ibm-iks-cluster-autoscaler ibm/ibm-iks-cluster-autoscaler
+    helm upgrade --reset-values ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler --recreate-pods
     ```
     {: pre}
 3.  Para verificar suas mudanças, revise os valores do gráfico do Helm novamente.
@@ -545,6 +584,7 @@ Customize as configurações do escalador automático de cluster, como a quantia
     helm get values ibm-iks-cluster-autoscaler -a
     ```
     {: pre}
+    
 
 ## Limitando apps a serem executados em apenas determinados conjuntos de trabalhadores escalados automaticamente
 {: #ca_limit_pool}
@@ -554,7 +594,7 @@ Para limitar uma implementação de pod para um conjunto de trabalhadores espec�
 
 ** Antes de iniciar **:
 *  [ Instale o plug-in  ` ibm-iks-cluster-cluster-autoscaler `  ](#ca_helm).
-*  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Para limitar os pods a serem executados em determinados conjuntos de trabalhadores escalados automaticamente**:
 
@@ -596,7 +636,7 @@ O escalador automático de cluster não suporta ajuste de escala antecipado (for
 
 <dl>
   <dt><strong> Pausar pods </strong></dt>
-  <dd>É possível criar uma implementação que implementa [contêineres de pausa ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers) em pods com solicitações de recurso específicas e designar à implementação uma prioridade baixa de pod. Quando esses recursos são necessários por cargas de trabalho de prioridade mais alta, o pod de pausa é priorizado e torna-se um pod pendente. Esse evento aciona o autoscaler de cluster para aumentar a escala.<br><br>Para obter mais informações sobre como configurar uma implementação de pod de pausa, consulte a [FAQ do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler).<p class="note">Se você usar esse método, certifique-se de entender como a [prioridade do pod](/docs/containers?topic=containers-pod_priority#pod_priority) funciona e defina a prioridade do pod para suas implementações. Por exemplo, se o pod de pausa não tiver recursos suficientes para um pod de prioridade mais alta, o pod não será priorizado. A carga de trabalho de prioridade mais alta permanece pendente, portanto, o escalador automático de cluster é acionado para aumentar a capacidade. No entanto, nesse caso, a ação de ajuste de escala não é antecipada porque a carga de trabalho real com a qual você se importa não está planejada, mas o pod de pausa sim.</p></dd>
+  <dd>É possível criar uma implementação que implementa [contêineres de pausa ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers) em pods com solicitações de recurso específicas e designar à implementação uma prioridade baixa de pod. Quando esses recursos são necessários por cargas de trabalho de prioridade mais alta, o pod de pausa é priorizado e torna-se um pod pendente. Esse evento aciona o autoscaler de cluster para aumentar a escala.<br><br>Para obter mais informações sobre como configurar uma implementação de pod de pausa, consulte a [FAQ do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler). É possível usar [esse exemplo de arquivo de configuração de superprovisionamento ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml) para criar a classe de prioridade, a conta de serviço e as implementações.<p class="note">Se usar esse método, certifique-se de entender como a [prioridade de pod](/docs/containers?topic=containers-pod_priority#pod_priority) funciona e como configurá-la para suas implementações. Por exemplo, se o pod de pausa não tiver recursos suficientes para um pod de prioridade mais alta, o pod não será priorizado. A carga de trabalho de prioridade mais alta permanece pendente, portanto, o escalador automático de cluster é acionado para aumentar a capacidade. No entanto, nesse caso, a ação de ampliação do dimensionamento não é antecipada porque a carga de trabalho que você deseja executar não pode ser planejada devido à insuficiência de recursos.</p></dd>
 
   <dt><strong>HPA (Horizontal pod autoscaling)</strong></dt>
   <dd>Como o ajuste de escala automático de pod horizontal é baseado no uso médio de CPU dos pods, o limite de uso da CPU que você configura é atingido antes que o conjunto de trabalhadores realmente fique sem recursos. Mais pods são solicitados, o que aciona o escalador automático de cluster para aumentar a capacidade do conjunto de trabalhadores.<br><br>Para obter mais informações sobre a configuração do HPA, consulte os [docs do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).</dd>
@@ -614,7 +654,7 @@ O escalador automático de cluster não suporta ajuste de escala antecipado (for
 Atualizando para o gráfico do Helm mais recente da versão 1.0.2 ou anterior? [ Siga estas instruções ](#ca_helm_up_102).
 {: note}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Atualize o repositório Helm para recuperar a versão mais recente de todos os gráficos Helm nesse repositório.
     ```
@@ -624,7 +664,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 
 2.  Opcional: faça download do gráfico Helm mais recente em sua máquina local. Em seguida, extraia o pacote e revise o arquivo `release.md` para localizar as informações de liberação mais recentes.
     ```
-    helm fetch ibm/ibm-iks-cluster-autoscaler
+    helm fetch iks-charts/ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
@@ -642,7 +682,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 
 4.  Atualize o gráfico do Helm do autocalador de cluster para a versão mais recente.
     ```
-    upgrade do leme -- force -- recreate-pods < helm_chart_name>ibm/ibm-iks-cluster-autoscaler
+    helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
@@ -677,7 +717,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 A versão mais recente do gráfico do Helm do escalador automático de cluster requer uma remoção completa de versões do gráfico do Helm do escalador automático de cluster instaladas anteriormente. Se você instalou o gráfico do Helm versão 1.0.2 ou anterior, desinstale essa versão primeiro antes de instalar o gráfico do Helm mais recente do escalador automático de cluster.
 {: shortdesc}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Obtenha o configmap do autoscaler do cluster.
     ```
@@ -706,7 +746,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
     {: pre}
 6.  Instale o gráfico do Helm do escalador automático de cluster mais recente. Aplique quaisquer configurações customizadas que você usou anteriormente com o sinalizador `--set`, como `scanInterval=2m`.
     ```
-    helm install  ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
+    helm install  iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
     ```
     {: pre}
 7.  Aplique o configmap do escalador automático de cluster que você recuperou anteriormente para ativar a escala automática para os seus conjuntos de trabalhadores.
@@ -719,7 +759,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
     kubectl get pods -n kube-system
     ```
     {: pre}
-9.  Revise a seção **`Events`** do pod do escalador automático de cluster e procure um evento **`ConfigUpdated`** para verificar se o configmap foi atualizado com êxito. A mensagem de evento para seu configmap está no formato a seguir: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message `.
+9.  Revise a seção **`Events`** do pod do escalador automático de cluster e procure um evento **`ConfigUpdated`** para verificar se o configmap foi atualizado com êxito. A mensagem de evento para seu configmap está no formato a seguir: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
     ```
     kubectl describe pod -n kube-system <cluster_autoscaler_pod>
     ```
@@ -745,7 +785,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 Se você não desejar escalar automaticamente seus conjuntos de trabalhadores, será possível desinstalar o gráfico do Helm do escalador automático de cluster. Após a remoção, você deverá [redimensionar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ou [rebalancear](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) seus conjuntos de trabalhadores manualmente.
 {: shortdesc}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  No [configmap do escalador automático de cluster](#ca_cm), remova o conjunto de trabalhadores, configurando o valor `"enabled"` como `false`.
     ```

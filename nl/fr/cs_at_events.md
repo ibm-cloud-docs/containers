@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, audit
 
@@ -44,7 +44,7 @@ Pour plus d'informations sur le fonctionnement de ce service, voir la [documenta
 ## Recherche d'informations pour les événements
 {: #kube-find}
 
-Vous pouvez surveiller les activités de votre cluster en examinant les journaux dans le tableau de bord Kibana. 
+Vous pouvez surveiller les activités de votre cluster en examinant les journaux dans le tableau de bord Kibana.
 {: shortdesc}
 
 Pour surveiller les activités d'administration :
@@ -518,19 +518,19 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>Pour Kubernetes versions 1.10 et ultérieures, une politique de sécurité de pod est créée.</td>
+    <td>Une règle de sécurité de pod est créée. </td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>Pour Kubernetes versions 1.10 et ultérieures, une politique de sécurité de pod est supprimée.</td>
+    <td>Une règle de sécurité de pod est supprimée. </td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>Pour Kubernetes versions 1.10 et ultérieures, un correctif est appliqué à une politique de sécurité de pod.</td>
+    <td>Un correctif est appliqué à une règle de sécurité de pod. </td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Pour Kubernetes versions 1.10 et ultérieures, une politique de sécurité de pod est mise à jour.</td>
+    <td>Une règle de sécurité de pod est mise à jour. </td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>

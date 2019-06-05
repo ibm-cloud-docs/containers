@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -27,9 +27,9 @@ subcollection: containers
 # IBM Cloud Object Storage へのデータの保管
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage) は、{{site.data.keyword.cos_full_notm}} プラグインを使用することで Kubernetes クラスター内で実行されているアプリにマウントできる永続的な高可用性ストレージです。このプラグインは、Cloud {{site.data.keyword.cos_short}} バケットをクラスター内のポッドに接続する Kubernetes Flex-Volume プラグインです。{{site.data.keyword.cos_full_notm}} を使用して保管される情報は、暗号化された状態で転送および保存され、複数の地理的位置にまたがって分散されて、REST API を使用して HTTP 経由でアクセスされます。
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about) は、{{site.data.keyword.cos_full_notm}} プラグインを使用することで Kubernetes クラスター内で実行されているアプリにマウントできる永続的な高可用性ストレージです。 このプラグインは、Cloud {{site.data.keyword.cos_short}} バケットをクラスター内のポッドに接続する Kubernetes Flex-Volume プラグインです。 {{site.data.keyword.cos_full_notm}} を使用して保管される情報は、暗号化された状態で転送および保存され、複数の地理的位置にまたがって分散されて、REST API を使用して HTTP 経由でアクセスされます。
 
-{{site.data.keyword.cos_full_notm}} に接続するには、ご使用のクラスターは {{site.data.keyword.Bluemix_notm}} Identity and Access Management から認証を受けるためにパブリック・ネットワークにアクセスできる必要があります。プライベート専用クラスターを使用している場合は、{{site.data.keyword.cos_full_notm}} のプライベート・サービス・エンドポイントと通信するには、プラグイン・バージョン `1.0.3` 以降をインストールして、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを HMAC 認証に対応するようにセットアップする必要があります。HMAC 認証の使用を希望しない場合は、このプラグインがプライベート・クラスター内で適切に機能するために、ポート 443 上のすべてのアウトバウンド・ネットワーク・トラフィックを開放する必要があります。
+{{site.data.keyword.cos_full_notm}} に接続するには、ご使用のクラスターは {{site.data.keyword.Bluemix_notm}} Identity and Access Management から認証を受けるためにパブリック・ネットワークにアクセスできる必要があります。 プライベート専用クラスターを使用している場合は、{{site.data.keyword.cos_full_notm}} のプライベート・サービス・エンドポイントと通信するには、プラグイン・バージョン `1.0.3` 以降をインストールして、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを HMAC 認証に対応するようにセットアップする必要があります。 HMAC 認証の使用を希望しない場合は、このプラグインがプライベート・クラスター内で適切に機能するために、ポート 443 上のすべてのアウトバウンド・ネットワーク・トラフィックを開放する必要があります。
 {: important}
 
 ## オブジェクト・ストレージ・サービス・インスタンスの作成
@@ -38,9 +38,9 @@ subcollection: containers
 クラスターでオブジェクト・ストレージの使用を開始する前に、アカウントに {{site.data.keyword.cos_full_notm}} サービス・インスタンスをプロビジョンする必要があります。
 {: shortdesc}
 
-{{site.data.keyword.cos_full_notm}} プラグインは、任意の s3 API エンドポイントで動作するように構成されています。例えば、希望に応じて、[Minio](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore) などのローカル Cloud Object Storage サーバーを使用することも、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを使用する代わりに、異なるクラウド・プロバイダーでセットアップした s3 API エンドポイントに接続することもできます。
+{{site.data.keyword.cos_full_notm}} プラグインは、任意の s3 API エンドポイントで動作するように構成されています。 例えば、希望に応じて、[Minio](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore) などのローカル Cloud Object Storage サーバーを使用することも、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを使用する代わりに、異なるクラウド・プロバイダーでセットアップした s3 API エンドポイントに接続することもできます。
 
-以下の手順に従って {{site.data.keyword.cos_full_notm}} サービス・インスタンスを作成します。ローカル Cloud Object Storage サーバーまたは異なる s3 API エンドポイントを使用する予定の場合は、プロバイダーの資料を参照して、Cloud Object Storage インスタンスをセットアップしてください。
+以下の手順に従って {{site.data.keyword.cos_full_notm}} サービス・インスタンスを作成します。 ローカル Cloud Object Storage サーバーまたは異なる s3 API エンドポイントを使用する予定の場合は、プロバイダーの資料を参照して、Cloud Object Storage インスタンスをセットアップしてください。
 
 1. {{site.data.keyword.cos_full_notm}} サービス・インスタンスをデプロイします。
    1.  [{{site.data.keyword.cos_full_notm}} カタログ・ページ](https://cloud.ibm.com/catalog/services/cloud-object-storage)を開きます。
@@ -64,9 +64,9 @@ subcollection: containers
 データの読み取りおよび書き込みを行うために {{site.data.keyword.cos_full_notm}} サービス・インスタンスにアクセスするには、サービス資格情報を Kubernetes シークレットに安全に保管する必要があります。 {{site.data.keyword.cos_full_notm}} プラグインでは、バケットに対する読み取り操作または書き込み操作ごとに、これらの資格情報が使用されます。
 {: shortdesc}
 
-以下の手順に従って、{{site.data.keyword.cos_full_notm}} サービス・インスタンスの資格情報用の Kubernetes シークレットを作成します。ローカル Cloud Object Storage サーバーまたは異なる s3 API エンドポイントを使用する予定の場合は、適切な資格情報を使用して Kubernetes シークレットを作成してください。
+以下の手順に従って、{{site.data.keyword.cos_full_notm}} サービス・インスタンスの資格情報用の Kubernetes シークレットを作成します。 ローカル Cloud Object Storage サーバーまたは異なる s3 API エンドポイントを使用する予定の場合は、適切な資格情報を使用して Kubernetes シークレットを作成してください。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. [{{site.data.keyword.cos_full_notm}} サービス資格情報](#service_credentials)の **apikey**、または **access_key_id** と **secret_access_key** を取得します。
 
@@ -75,89 +75,53 @@ subcollection: containers
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-
-3. 以前に取得した {{site.data.keyword.cos_full_notm}} の **GUID** と、**apikey**、または **access_key_id** と **secret_access_key** を base64 にエンコードして、すべての base64 エンコード値をメモします。 パラメーターごとにこのコマンドを繰り返して、base64 エンコード値を取得します。
+   
+3. サービス資格情報を保管する Kubernetes シークレットを作成します。 シークレットを作成すると、すべての値が自動的に base64 にエンコードされます。 
+   
+   **API キーの使用例:**
    ```
-   echo -n "<key_value>" | base64
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=api-key=<api_key> --from-literal=service-instance-id=<service_instance_guid>
+   ```
+   {: pre}
+   
+   **HMAC 認証の例:**
+   ```
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=access-key=<access_key_ID> --from-literal=secret-key=<secret_access_key>    
    ```
    {: pre}
 
-4. Kubernetes シークレットを定義するための構成ファイルを作成します。
-
-   **API キーの使用例:**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     api-key: <base64_apikey>
-     service-instance-id: <base64_guid>
-   ```
-   {: codeblock}
-
-   **HMAC 認証の使用例:**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     access-key: <base64_access_key_id>
-     secret-key: <base64_secret_access_key>
-   ```
-   {: codeblock}
-
    <table>
-   <caption>YAML ファイルの構成要素について</caption>
+   <caption>コマンドの構成要素について</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+   <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> コマンドの構成要素について</th>
    </thead>
    <tbody>
    <tr>
-   <td><code>metadata.name</code></td>
-   <td>{{site.data.keyword.cos_full_notm}} シークレットの名前を入力します。 </td>
+   <td><code>api-key</code></td>
+   <td>以前に {{site.data.keyword.cos_full_notm}} サービス資格情報から取得した API キーを入力します。 HMAC 認証を使用する場合は、代わりに <code>access-key</code> および <code>secret-key</code> を指定します。  </td>
    </tr>
    <tr>
-   <td><code>metadata.namespace</code></td>
-   <td>シークレットを作成する名前空間を指定します。 シークレットは、PVC と、{{site.data.keyword.cos_full_notm}} サービス・インスタンスにアクセスするポッドを作成する名前空間に作成する必要があります。  </td>
+   <td><code>access-key</code></td>
+   <td>以前に {{site.data.keyword.cos_full_notm}} サービス資格情報から取得したアクセス・キー ID を入力します。 OAuth2 認証を使用する場合は、代わりに <code>api-key</code> を指定します。  </td>
    </tr>
    <tr>
-   <td><code>data.api-key</code></td>
-   <td>以前に {{site.data.keyword.cos_full_notm}} サービス資格情報から取得した API キーを入力します。 API キーは base64 エンコードでなければなりません。 HMAC 認証を使用する場合は、代わりに <code>data/access-key</code> および <code>data/secret-key</code> を指定します。  </td>
+   <td><code>secret-key</code></td>
+   <td>以前に {{site.data.keyword.cos_full_notm}} サービス資格情報から取得したシークレット・アクセス・キーを入力します。 OAuth2 認証を使用する場合は、代わりに <code>api-key</code> を指定します。</td>
    </tr>
    <tr>
-   <td><code>data.access-key</code></td>
-   <td>以前に {{site.data.keyword.cos_full_notm}} サービス資格情報から取得したアクセス・キー ID を入力します。 アクセス・キー ID は base64 エンコードでなければなりません。 OAuth2 認証を使用する場合は、代わりに <code>data/api-key</code> を指定します。  </td>
-   </tr>
-   <tr>
-   <td><code>data.secret-key</code></td>
-   <td>以前に {{site.data.keyword.cos_full_notm}} サービス資格情報から取得したシークレット・アクセス・キーを入力します。 シークレット・アクセス・キーは base64 エンコードでなければなりません。 OAuth2 認証を使用する場合は、代わりに <code>data/api-key</code> を指定します。</td>
-   </tr>
-   <tr>
-   <td><code>data.service-instance-id</code></td>
-   <td>以前に取得した {{site.data.keyword.cos_full_notm}} サービス・インスタンスの GUID を入力します。 GUID は base64 エンコードでなければなりません。 </td>
+   <td><code>service-instance-id</code></td>
+   <td>以前に取得した {{site.data.keyword.cos_full_notm}} サービス・インスタンスの GUID を入力します。 </td>
    </tr>
    </tbody>
    </table>
 
-5. クラスター内にシークレットを作成します。
-   ```
-   kubectl apply -f filepath/secret.yaml
-   ```
-   {: pre}
-
-6. 名前空間内にシークレットが作成されたことを確認します。
+4. 名前空間内にシークレットが作成されたことを確認します。
    ```
    kubectl get secret
    ```
    {: pre}
 
-7. [{{site.data.keyword.cos_full_notm}} プラグインをインストール](#install_cos)します。プラグインをインストール済みの場合は、{{site.data.keyword.cos_full_notm}} バケットの[構成を決定]( #configure_cos)します。
+5. [{{site.data.keyword.cos_full_notm}} プラグインをインストール](#install_cos)します。プラグインをインストール済みの場合は、{{site.data.keyword.cos_full_notm}} バケットの[構成を決定]( #configure_cos)します。
 
 ## IBM Cloud Object Storage プラグインのインストール
 {: #install_cos}
@@ -168,7 +132,7 @@ subcollection: containers
 {{site.data.keyword.cos_full_notm}} プラグインを更新または削除する方法の説明をお探しですか? [IBM Cloud Object Storage プラグインの更新](#update_cos_plugin)と [IBM Cloud Object Storage プラグインの削除](#remove_cos_plugin)を参照してください。
 {: tip}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. ワーカー・ノードで、ご使用のマイナー・バージョンに対する最新パッチが適用されていることを確認します。
    1. ワーカー・ノードの現在のパッチ・バージョンをリストします。
@@ -181,7 +145,7 @@ subcollection: containers
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
       ```
       {: screen}
 
@@ -191,15 +155,15 @@ subcollection: containers
 
    3. ワーカー・ノードを再ロードして、最新のパッチ・バージョンを適用します。 [ibmcloud ks worker-reload コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)の説明に従って、ワーカー・ノード上で実行されているポッドを安全な方法でスケジュール変更した後に、ワーカー・ノードを再ロードしてください。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)していないデータは削除されることに注意してください。
 
-2.  [こちらの手順に従って](/docs/containers?topic=containers-integrations#helm)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をクラスター内にインストールします。
+2.  [こちらの手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をクラスター内にインストールします。
 
-    Helm サーバー Tiller をインストールするには、パブリック Google Container Registry へのパブリック・ネットワーク接続が必要です。ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、[Tiller イメージをローカル・マシンにプルして、そのイメージを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュする](/docs/containers?topic=containers-integrations#private_local_tiller)のか、[Tiller を使用せずに Helm チャートをインストールする](/docs/containers?topic=containers-integrations#private_install_without_tiller)のかを選択できます。
+    Helm サーバー Tiller をインストールするには、パブリック Google Container Registry へのパブリック・ネットワーク接続が必要です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、[Tiller イメージをローカル・マシンにプルして、そのイメージを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュする](/docs/containers?topic=containers-helm#private_local_tiller)のか、[Tiller を使用せずに Helm チャートをインストールする](/docs/containers?topic=containers-helm#private_install_without_tiller)のかを選択できます。
     {: note}
 
 3.  tiller がサービス・アカウントでインストールされていることを確認します。
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -213,7 +177,7 @@ subcollection: containers
 
 4. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーをクラスターに追加します。
    ```
-   helm repo add ibm  https://registry.bluemix.net/helm/ibm
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
@@ -225,7 +189,7 @@ subcollection: containers
 
 6. Helm チャートをダウンロードして、現行ディレクトリーにチャートをアンパックします。
    ```
-   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
    ```
    {: pre}
 
@@ -263,11 +227,11 @@ subcollection: containers
        -u, --update                  (Optional) Update this plugin to the latest version
 
       Example Usage:
-    helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install iks-charts/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
       ```
       {: screen}
 
-      出力で `Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission denied` というエラーが表示される場合は、`chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh` を実行します。その後、`helm ibmc --help` を再実行します。
+      出力で `Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission denied` というエラーが表示される場合は、`chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh` を実行します。 その後、`helm ibmc --help` を再実行します。
       {: tip}
 
 8. オプション: {{site.data.keyword.cos_full_notm}} サービス資格情報を保持する Kubernetes シークレットのみにアクセスするように {{site.data.keyword.cos_full_notm}} プラグインを制限します。 デフォルトでは、このプラグインは、クラスター内のすべての Kubernetes シークレットへのアクセスが許可されています。
@@ -300,7 +264,7 @@ subcollection: containers
    - **macOS および Linux の場合:**
      - 前述のステップをスキップした場合は、特定の Kubernetes シークレットに制限せずにインストールします。
        ```
-       helm ibmc install ibm/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install iks-charts/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
@@ -326,7 +290,7 @@ subcollection: containers
      3. Helm チャートをインストールします。
         - 前述のステップをスキップした場合は、特定の Kubernetes シークレットに制限せずにインストールします。
           ```
-          helm install ibm/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          helm install iks-charts/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
           ```
           {: pre}
 
@@ -353,7 +317,7 @@ subcollection: containers
    ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
    ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                  PROVISIONER       AGE
    ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
    ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
@@ -445,21 +409,21 @@ subcollection: containers
 既存の {{site.data.keyword.cos_full_notm}} プラグインを最新バージョンにアップグレードできます。
 {: shortdesc}
 
-1. macOS または Linux ディストリビューションを使用する場合は、{{site.data.keyword.cos_full_notm}}`ibmc` Helm プラグインを最新バージョンに更新します。
-   ```
-   helm ibmc --update
-   ```
-   {: pre}
-
-2. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
+1. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
    ```
    helm repo update
    ```
    {: pre}
 
+2. macOS または Linux ディストリビューションを使用する場合は、{{site.data.keyword.cos_full_notm}}`ibmc` Helm プラグインを最新バージョンに更新します。
+   ```
+   helm ibmc --update
+   ```
+   {: pre}
+
 3. 最新の {{site.data.keyword.cos_full_notm}} Helm チャートをローカル・マシンにダウンロードしてパッケージを解凍して、`release.md` ファイルを参照して最新のリリース情報を確認します。
    ```
-   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
    ```
 
 4. Helm チャートのインストール名を検索します。
@@ -476,7 +440,7 @@ subcollection: containers
 
 5. {{site.data.keyword.cos_full_notm}} Helm チャートを最新バージョンにアップグレードします。
    ```   
-   helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   helm ibmc upgrade <helm_chart_name> iks-charts/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
    ```
    {: pre}
 
@@ -809,7 +773,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
 
 4. オプション: 非 root ユーザーとしてデータにアクセスする場合、または既存の {{site.data.keyword.cos_full_notm}} バケットに追加されたファイルにコンソールまたは API を使用して直接アクセスする場合は、アプリが正常にファイルを読み取り、必要に応じて更新できるように、[ファイルに正しい権限が割り当てられている](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access)ことを確認します。
 
-4.  {: #app_volume_mount}PV をデプロイメントにマウントするには、構成 `.yaml` ファイルを作成し、PV をバインドする PVC を指定します。
+4.  {: #cos_app_volume_mount}PV をデプロイメントにマウントするには、構成 `.yaml` ファイルを作成し、PV をバインドする PVC を指定します。
 
     ```
     apiVersion: apps/v1
@@ -832,6 +796,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
             name: <container_name>
             securityContext:
               runAsUser: <non_root_user>
+              fsGroup: <non_root_user> #only applicable for clusters that run Kubernetes version 1.13 or later
             volumeMounts:
             - name: <volume_name>
               mountPath: /<file_path>
@@ -870,7 +835,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.runAsUser</code></td>
-    <td>オプション: 非 root ユーザーとしてアプリを実行するには、デプロイメント YAML で同時に `fsGroup` を設定せずに非 root ユーザーを定義して、ポッドの[セキュリティー・コンテキスト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) を指定します。 `fsGroup` を設定すると、ポッドのデプロイ時に、{{site.data.keyword.cos_full_notm}} プラグインによるバケット内のすべてのファイルのグループ権限の更新がトリガーされます。 権限の更新は書き込み操作であり、パフォーマンスに影響を与えます。 所有するファイルの数によっては、権限を更新すると、ポッドが起動しなくなり、<code>Running</code> 状態にならなくなる場合があります。 </td>
+    <td>オプション: Kubernetes バージョン 1.12 以前が実行されているクラスター内で非 root ユーザーとしてアプリを実行するには、デプロイメント YAML で同時に `fsGroup` を設定せずに非 root ユーザーを定義して、ポッドの[セキュリティー・コンテキスト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) を指定します。 `fsGroup` を設定すると、ポッドのデプロイ時に、{{site.data.keyword.cos_full_notm}} プラグインによるバケット内のすべてのファイルのグループ権限の更新がトリガーされます。 権限の更新は書き込み操作であり、パフォーマンスに影響を与えます。 所有するファイルの数によっては、権限を更新すると、ポッドが起動しなくなり、<code>Running</code> 状態にならなくなる場合があります。 </br></br>クラスターで Kubernetes バージョン 1.13 以降および {{site.data.keyword.Bluemix_notm}} Object Storage プラグインのバージョン 1.0.4 以降を実行する場合は、s3fs マウント・ポイントの所有者を変更できます。 所有者を変更するには、`runAsUser` および `fsGroup` を s3fs マウント・ポイントを所有する同じ非 root ユーザーの ID に設定して、セキュリティー・コンテキストを指定します。 これら 2 つの値が一致しない場合、マウント・ポイントは自動的に `root` ユーザーが所有します。  </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>

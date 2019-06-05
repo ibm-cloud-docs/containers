@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -23,7 +23,7 @@ subcollection: containers
 {:download: .download}
 
 
-#  Armazenando dados em armazenamento definido pelo software (SDS) com o Portworx
+# Armazenando dados em armazenamento definido pelo software (SDS) com o Portworx
 {: #portworx}
 
 [Portworx ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://portworx.com/products/introduction/) é uma solução de armazenamento definido por software altamente disponível que pode ser usada para gerenciar o armazenamento persistente para seus bancos de dados conteinerizados e outros apps stateful ou para compartilhar dados entre os pods em múltiplas zonas.
@@ -41,7 +41,7 @@ O Portworx também é fornecido com recursos adicionais que podem ser usados par
 O {{site.data.keyword.containerlong_notm}} fornece tipos de nó do trabalhador bare metal que são otimizados para o [uso de armazenamento definido pelo software (SDS)](/docs/containers?topic=containers-plan_clusters#sds) e que vêm com um ou mais discos locais brutos, não formatados e desmontados, que podem ser usados para sua camada de armazenamento do Portworx. O Portworx oferece melhor desempenho quando você usa as máquinas do nó do trabalhador SDS que vêm com a velocidade de rede de 10Gbps.
 
 **E se eu desejar executar o Portworx em nós do trabalhador não SDS?** </br>
-É possível instalar o Portworx em tipos de nó do trabalhador não SDS, mas é possível que você não obtenha os benefícios de desempenho que seu app requer. Os nós do trabalhador não SDS podem ser virtuais ou bare metal. Se você desejar usar máquinas virtuais, use um tipo de nó do trabalhador de `b2c.16x64` ou melhor. As máquinas virtuais com um tipo de `b2c.4x16` ou `u2c.2x4` não fornecem os recursos necessários para que o Portworx funcione corretamente. Tenha em mente que as máquinas virtuais vêm com 1000 Mbps que não são suficientes para o desempenho ideal do Portworx. As máquinas bare metal vêm com recursos de cálculo suficientes e velocidade de rede para o Portworx, mas deve-se [incluir armazenamento de bloco bruto, não formatado e desmontado](#create_block_storage) antes de poder usar essas máquinas.
+É possível instalar o Portworx em tipos de nó do trabalhador não SDS, mas é possível que você não obtenha os benefícios de desempenho que seu app requer. Os nós do trabalhador não SDS podem ser virtuais ou bare metal. Se você desejar usar máquinas virtuais, use um tipo de nó do trabalhador de `b2c.16x64` ou melhor. As máquinas virtuais do tipo `b3c.4x16` ou `u3c.2x4` não fornecem os recursos necessários para que o Portworx funcione corretamente. Tenha em mente que as máquinas virtuais vêm com 1000 Mbps que não são suficientes para o desempenho ideal do Portworx. As máquinas bare metal vêm com recursos de cálculo suficientes e velocidade de rede para o Portworx, mas deve-se [incluir armazenamento de bloco bruto, não formatado e desmontado](#create_block_storage) antes de poder usar essas máquinas.
 
 **Como posso ter certeza de que meus dados são armazenados altamente disponíveis?** </br>
 Você precisa de pelo menos 3 nós do trabalhador em seu cluster do Portworx para que o Portworx possa replicar seus dados entre os nós. Replicando seus dados nos nós do trabalhador, o Portworx pode assegurar que seu app stateful seja reagendado para um nó do trabalhador diferente no caso de uma falha sem perder dados. Para uma disponibilidade ainda mais alta, use um [cluster com múltiplas zonas](/docs/containers?topic=containers-plan_clusters#multizone) e replique seus volumes em nós do trabalhador SDS em 3 ou mais zonas.
@@ -226,12 +226,12 @@ Antes de iniciar:
 
 Para instalar o Portworx:
 
-1.  [Siga as instruções](/docs/containers?topic=containers-integrations#helm) para instalar o cliente Helm em sua máquina local e instale o servidor Helm (tiller) com uma conta do serviço em seu cluster.
+1.  [Siga as instruções](/docs/containers?topic=containers-helm#public_helm_install) para instalar o cliente Helm em sua máquina local e instale o servidor Helm (tiller) com uma conta do serviço em seu cluster.
 
 2.  Verifique se o tiller está instalado com uma conta do serviço.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -257,13 +257,13 @@ Para instalar o Portworx:
    {: pre}
 
 6. Atualize os valores a seguir e salve suas mudanças.
-   - **`etcdEndPoint`**: inclua o terminal de sua instância de serviço do {{site.data.keyword.composeForEtcd}} que você recuperou anteriormente no formato `"etcd:<etcd_endpoint1>; etcd:<etcd_endpoint2>"`. Se você tiver mais de um terminal, inclua todos os terminais e separe-os com um ponto-e-vírgula (`;`).
+   - **`etcdEndPoint`**: inclua o terminal de sua instância de serviço do {{site.data.keyword.composeForEtcd}} recuperado anteriormente no formato `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. Se você tiver mais de um terminal, inclua todos os terminais e separe-os com um ponto-e-vírgula (`;`).
     - **`imageVersion`**: insira a versão mais recente do gráfico do Portworx Helm. Para localizar a versão mais recente, consulte as [ notas sobre a liberação do Portworx ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.portworx.com/reference/release-notes/).
    - **`clusterName`**: insira o nome do cluster no qual você deseja instalar o Portworx.
    - **`usedrivesAndPartitions`**: insira `true` para permitir que o Portworx localize unidades de disco rígido e partições desmontadas.
    - **`usefileSystemDrive`**: Insira `true` para permitir que o Portworx localize unidades de disco rígido desmontadas, mesmo se elas estiverem formatadas.
    - **`drives`**: insira `none` para permitir que o Portworx localize unidades de disco rígido desmontadas e não formatadas.
-   - **`etcd.credentials`**: insira o nome do usuário e a senha de sua instância de serviço do {{site.data.keyword.composeForEtcd}} que você recuperou anteriormente no formato `<user_name>:<password>`.
+   - **`etcd.credentials`**: insira o nome de usuário e a senha de sua instância de serviço do {{site.data.keyword.composeForEtcd}} recuperados anteriormente no formato `<user_name>:<password>`.
    - **`etcd.certPath`**: insira o caminho no qual o certificado para sua instância de serviço de banco de dados é armazenado. Se você configurar uma instância de serviço do Databases for etcd, insira `/etc/pwx/etcdcerts`. Para  {{site.data.keyword.composeForEtcd}}, insira  ` none `.
    - **`etcd.ca`**: insira o caminho para o arquivo de autoridade de certificação (CA). Se você configurar uma instância de serviço do Databases for etcd, insira `/etc/pwx/etcdcerts/ca.pem`. Para  {{site.data.keyword.composeForEtcd}}, insira  ` none `.
 
@@ -383,7 +383,7 @@ Para instalar o Portworx:
    stork            3        3        3           0          1s
    stork-scheduler  3        3        3           0          1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                    PROVISIONER                    AGE
    px-sc-repl3-iodb-512blk-snap60-15snaps  kubernetes.io/portworx-volume  1s
    px-sc-repl3-iodb-snap60-15snaps         kubernetes.io/portworx-volume  1s
@@ -566,12 +566,12 @@ Para proteger seus dados em um volume Portworx, é possível optar por proteger 
 O {{site.data.keyword.keymanagementservicelong_notm}} ajuda você a fornecer chaves criptografadas que são protegidas por módulos de segurança de hardware (HSMs) baseados em nuvem certificados pelo FIPS 140-2 Nível 2. É possível usar essas chaves para proteger de forma segura seus dados de usuários desautorizados. É possível escolher entre usar uma chave de criptografia para criptografar todos os seus volumes em um cluster ou usando uma chave de criptografia para cada volume. O Portworx usa essa chave para criptografar dados em repouso e durante o trânsito quando os dados são enviados para um nó do trabalhador diferente. Para obter mais informações, consulte [Criptografia de volume ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption). Para maior segurança, configure a criptografia por volume.
 
 Revise as informações a seguir:
-- Visão geral do [Fluxo de trabalho de criptografia de volume do Portworx](#encryption) com {{site.data.keyword.keymanagementservicelong_notm}} para criptografia por volume
+- Visão geral do [Fluxo de trabalho de criptografia de volume do Portworx](#px_encryption) com {{site.data.keyword.keymanagementservicelong_notm}} para criptografia por volume
 - Visão geral do [Fluxo de trabalho de decriptografia de volume do Portworx](#decryption) com {{site.data.keyword.keymanagementservicelong_notm}} para criptografia por volume
 - [Configurando a criptografia por volume](#setup_encryption) para seus volumes do Portworx.
 
 ### Fluxo de trabalho de criptografia de Portworx por volume
-{: #encryption}
+{: #px_encryption}
 
 A imagem a seguir ilustra o fluxo de trabalho de criptografia no Portworx com o {{site.data.keyword.keymanagementservicelong_notm}} quando você configura a criptografia por volume.
 {: shortdesc}
@@ -867,7 +867,7 @@ Para solicitar armazenamento de seu cluster Portworx e usá-lo em seu app, deve-
 
    ```
    kind: StorageClass
-   apiVersion: storage.k8s.io/v1beta1
+   apiVersion: storage.k8s.io/v1
    metadata:
        name: <storageclass_name>
    provisioner: kubernetes.io/portworx-volume
@@ -899,7 +899,7 @@ Para solicitar armazenamento de seu cluster Portworx e usá-lo em seu app, deve-
    </tr>
    <tr>
    <td><code> parameters.priority_io </code></td>
-   <td>Insira a prioridade de E/S do Portworx que você deseja solicitar para seus dados. As opções disponíveis são `high`, `medium` e `low`. Durante a configuração de seu cluster do Portworx, cada disco é inspecionado para determinar o perfil de desempenho do dispositivo. A classificação de perfil depende da largura da banda da rede de seu nó do trabalhador e do tipo de dispositivo de armazenamento que você tem. Discos de nós do trabalhador SDS são classificados como `high`. Se você anexar discos manualmente a um nó do trabalhador virtual, esses discos serão classificados como `low` devido à velocidade de rede inferior que é fornecida com os nós do trabalhador virtual. </br><br> Quando você cria um PVC com uma classe de armazenamento, o número de réplicas que você especifica em <code>parameters/repl</code> tem precedência sobre a prioridade de E/S. Por exemplo, quando você especifica três réplicas que deseja armazenar em discos de alta velocidade, mas você tem apenas um nó do trabalhador com um disco de alta velocidade em seu cluster, a criação do PVC ainda é bem-sucedida. Seus dados são replicados em discos de alta velocidade e de baixa velocidade. </td>
+   <td>Insira a prioridade de E/S do Portworx que você deseja solicitar para seus dados. As opções disponíveis são `high`, `medium` e `low`. Durante a configuração de seu cluster do Portworx, cada disco é inspecionado para determinar o perfil de desempenho do dispositivo. A classificação de perfil depende da largura da banda da rede de seu nó do trabalhador e do tipo de dispositivo de armazenamento que você tem. Discos de nós do trabalhador SDS são classificados como `high`. Se você conectar discos manualmente a um nó do trabalhador virtual, eles serão classificados como `low` devido à velocidade de rede inferior fornecida com os nós do trabalhador virtual. </br><br> Quando você cria um PVC com uma classe de armazenamento, o número de réplicas que você especifica em <code>parameters/repl</code> tem precedência sobre a prioridade de E/S. Por exemplo, quando você especifica três réplicas que deseja armazenar em discos de alta velocidade, mas você tem apenas um nó do trabalhador com um disco de alta velocidade em seu cluster, a criação do PVC ainda é bem-sucedida. Seus dados são replicados em discos de alta velocidade e de baixa velocidade. </td>
    </tr>
    <tr>
    <td><code> parameters.shared </code></td>
@@ -1033,7 +1033,7 @@ Para acessar o armazenamento do app, deve-se montar o PVC no app.
     <td>Um rótulo para a implementação.</td>
       </tr>
       <tr>
-        <td><code>spec.selector.matchLabels.app</code> <br/> <code> spec.template.metadata.labels.app </code></td>
+        <td><code>spec.selector.matchLabels.app</code> <br/> <code>spec.template.metadata.labels.app</code></td>
         <td>Um rótulo para o seu app.</td>
       </tr>
     <tr>

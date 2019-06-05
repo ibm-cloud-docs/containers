@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -40,7 +40,7 @@ subcollection: containers
 ## {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用したテストの実行
 {: #debug_utility}
 
-トラブルシューティングの際に、{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用して、テストを実行し、クラスターから関連情報を収集することができます。このデバッグ・ツールを使用するには、[`ibmcloud-iks-debug` Helm チャート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug) をインストールします。
+トラブルシューティングの際に、{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool を使用して、テストを実行し、クラスターから関連情報を収集することができます。 このデバッグ・ツールを使用するには、[`ibmcloud-iks-debug` Helm チャート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug) をインストールします。
 {: shortdesc}
 
 
@@ -61,7 +61,7 @@ subcollection: containers
 
 4. Web ブラウザーで、デバッグ・ツール・インターフェースの URL (http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page) を開きます。
 
-5. 実行する個別のテストまたはテストのグループを選択します。潜在的な警告、エラー、または問題を検査するテストもあれば、トラブルシューティング中に参照できる情報を収集するだけのテストもあります。各テストの機能について詳しくは、テストの名前の隣にある情報アイコンをクリックしてください。
+5. 実行する個別のテストまたはテストのグループを選択します。 潜在的な警告、エラー、または問題を検査するテストもあれば、トラブルシューティング中に参照できる情報を収集するだけのテストもあります。 各テストの機能について詳しくは、テストの名前の隣にある情報アイコンをクリックしてください。
 
 6. **「実行 (Run)」**をクリックします。
 
@@ -120,7 +120,7 @@ subcollection: containers
       </tr>
       <tr>
        <td>Normal</td>
-       <td>クラスター内のすべてのワーカー・ノードが稼働中です。 クラスターにアクセスし、アプリをクラスターにデプロイできます。 この状態は正常と見なされるので、アクションは必要ありません。<p class="note">ワーカー・ノードは正常であっても、[ネットワーキング](/docs/containers?topic=containers-cs_troubleshoot_network)や[ストレージ](/docs/containers?topic=containers-cs_troubleshoot_storage)などの他のインフラストラクチャー・リソースには注意が必要な可能性もあります。</p></td>
+       <td>クラスター内のすべてのワーカー・ノードが稼働中です。 クラスターにアクセスし、アプリをクラスターにデプロイできます。 この状態は正常と見なされるので、アクションは必要ありません。<p class="note">ワーカー・ノードは正常であっても、[ネットワーキング](/docs/containers?topic=containers-cs_troubleshoot_network)や[ストレージ](/docs/containers?topic=containers-cs_troubleshoot_storage)などの他のインフラストラクチャー・リソースには注意が必要な可能性もあります。 クラスターの作成直後は、Ingress シークレットやレジストリー・イメージ・プル・シークレットなど、他のサービスによって使用されるクラスターの一部が、まだ処理中である場合があります。</p></td>
     </tr>
       <tr>
        <td>Pending</td>
@@ -180,7 +180,7 @@ subcollection: containers
       <li>数百、数千ものコンテナーを長時間実行した後、<code>containerd</code>、<code>kubelet</code>、または <code>calico</code> がリカバリー不能な状態になった。 </li>
       <li>ワーカー・ノード用にセットアップした Virtual Router Appliance が停止したために、ワーカー・ノードと Kubernetes マスターの間の通信が切断された。 </li><li> {{site.data.keyword.containerlong_notm}} または IBM Cloud インフラストラクチャー (SoftLayer) の現在のネットワーキングの問題によって、ワーカー・ノードと Kubernetes マスターが通信できなくなっている。</li>
       <li>ワーカー・ノードが容量を使い尽くした。 ワーカー・ノードの <strong>Status</strong> に <strong>Out of disk</strong> または <strong>Out of memory</strong> と表示されていないか確認します。 ワーカー・ノードが容量を使い尽くしている場合は、ワーカー・ノードのワークロードを減らすか、ワークロードの負荷を分散できるようにクラスターにワーカー・ノードを追加してください。</li>
-      <li>デバイスが [{{site.data.keyword.Bluemix_notm}} コンソールのリソース・リスト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/resources) で電源オフにされた。リソース・リストを開き、**「デバイス」**リストでワーカー・ノード ID を見つけます。アクション・メニューで、**「パワーオン」**をクリックします。</li></ul>
+      <li>デバイスが [{{site.data.keyword.Bluemix_notm}} コンソールのリソース・リスト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/resources) で電源オフにされた。 リソース・リストを開き、**「デバイス」**リストでワーカー・ノード ID を見つけます。 アクション・メニューで、**「パワーオン」**をクリックします。</li></ul>
       多くの場合、ワーカー・ノードを[再ロードする](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)と問題を解決できます。 ワーカー・ノードを再ロードすると、最新の[パッチ・バージョン](/docs/containers?topic=containers-cs_versions#version_types)がワーカー・ノードに適用されます。 メジャー・バージョンとマイナー・バージョンは変更されません。 必ず、ワーカー・ノードを再ロードする前に、ワーカー・ノードを閉鎖して排出してください。これにより、既存のポッドが正常終了し、残りのワーカー・ノードに再スケジュールされます。 </br></br> ワーカー・ノードを再ロードしても問題が解決しない場合は、次の手順に進み、ワーカー・ノードのトラブルシューティングを続けてください。 </br></br><strong>ヒント:</strong> [ワーカー・ノードのヘルス・チェックを構成し、Autorecovery を有効にする](/docs/containers?topic=containers-health#autorecovery)ことができます。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 Autorecovery の仕組みについて詳しくは、[Autorecovery のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
       </td>
      </tr>

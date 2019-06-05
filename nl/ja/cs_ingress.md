@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -24,7 +24,7 @@ subcollection: containers
 
 
 
-# Ingress を使用してアプリを公開する
+# Ingress アプリケーション・ロード・バランサー (ALB) を使用した HTTPS ロード・バランシング
 {: #ingress}
 
 {{site.data.keyword.containerlong}} で、IBM 提供のアプリケーション・ロード・バランサーで管理される Ingress リソースを作成して、Kubernetes クラスター内の複数のアプリを公開します。
@@ -162,9 +162,9 @@ Ingress は、以下の 3 つのコンポーネントで構成されています
 * デフォルトのプライベート Ingress ALB のポータブル・プライベート・サブネット範囲のポータブル・プライベート IP アドレス 1 つ。
 {: shortdesc}
 
-複数ゾーン・クラスターでは、各ゾーンにデフォルトのパブリック ALB とデフォルトのプライベート ALB が自動的に作成されます。デフォルトのパブリック ALB の IP アドレスはすべて、クラスター用に IBM から提供された同じサブドメインの背後にあります。
+複数ゾーン・クラスターでは、各ゾーンにデフォルトのパブリック ALB とデフォルトのプライベート ALB が自動的に作成されます。 デフォルトのパブリック ALB の IP アドレスはすべて、クラスター用に IBM から提供された同じサブドメインの背後にあります。
 
-ポータブル・パブリック IP アドレスとポータブル・プライベート IP アドレスは静的浮動 IP であり、ワーカー・ノードが削除されても変わりません。 ワーカー・ノードが削除されると、IP を常にモニターしている `Keepalived` デーモンが、そのワーカーに存在していた ALB ポッドのスケジュールを、そのゾーンの別のワーカー・ノードに自動的に変更します。スケジュールが変更された ALB ポッドは、同じ静的 IP アドレスをそのまま保持します。クラスターの存在期間中は、各ゾーンの ALB の IP アドレスは変わりません。クラスターからゾーンを削除すると、そのゾーンの ALB の IP アドレスは削除されます。
+ポータブル・パブリック IP アドレスとポータブル・プライベート IP アドレスは静的浮動 IP であり、ワーカー・ノードが削除されても変わりません。 ワーカー・ノードが削除されると、IP を常にモニターしている `Keepalived` デーモンが、そのワーカーに存在していた ALB ポッドのスケジュールを、そのゾーンの別のワーカー・ノードに自動的に変更します。 スケジュールが変更された ALB ポッドは、同じ静的 IP アドレスをそのまま保持します。 クラスターの存在期間中は、各ゾーンの ALB の IP アドレスは変わりません。 クラスターからゾーンを削除すると、そのゾーンの ALB の IP アドレスは削除されます。
 
 ALB に割り当てられている IP を確認するには、以下のコマンドを実行します。
 ```
@@ -222,14 +222,14 @@ Ingress の使用を開始する前に、以下の前提条件を確認してく
 {:shortdesc}
 
 **すべての Ingress 構成の前提条件:**
-- Ingress は標準クラスターでのみ使用可能です。高可用性を確保して定期的に更新を適用するために、ゾーンごとにワーカー・ノードが 2 つ以上必要です。 1 つのゾーンにワーカーが 1 つしか存在しない場合は、ALB が自動更新を受け取れません。自動更新が ALB ポッドにロールアウトされると、そのポッドは再ロードされます。しかし、高可用性のために、ALB には各ワーカー・ノードに 1 つしかポッドをスケジュールしないようにするアンチアフィニティー・ルールが設定されます。1 つのワーカーには ALB ポッドが 1 つしか存在しないので、トラフィックが中断されないようにするために、そのポッドは再始動されません。ワーカー・ノードをユーザーが更新しない限り、ALB ポッドが最新バージョンに更新されることはありません。
+- Ingress は標準クラスターでのみ使用可能です。高可用性を確保して定期的に更新を適用するために、ゾーンごとにワーカー・ノードが 2 つ以上必要です。 1 つのゾーンにワーカーが 1 つしか存在しない場合は、ALB が自動更新を受け取れません。 自動更新が ALB ポッドにロールアウトされると、そのポッドは再ロードされます。 しかし、高可用性のために、ALB には各ワーカー・ノードに 1 つしかポッドをスケジュールしないようにするアンチアフィニティー・ルールが設定されます。 1 つのワーカーには ALB ポッドが 1 つしか存在しないので、トラフィックが中断されないようにするために、そのポッドは再始動されません。 ALB ポッドが最新バージョンに更新されるのは、古いポッドを手動で削除することによって、新しい更新後のポッドがスケジュール可能になった場合のみです。
 - Ingress をセットアップするには、以下の [{{site.data.keyword.Bluemix_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)が必要です。
     - クラスターに対する**管理者**のプラットフォーム役割
     - すべての名前空間に対する**管理者**のサービス役割
 
 **複数ゾーン・クラスターで Ingress を使用するための前提条件**:
  - ネットワーク・トラフィックを[エッジ・ワーカー・ノード](/docs/containers?topic=containers-edge)に制限する場合、Ingress ポッドの高可用性を確保するために、少なくとも 2 つのエッジ・ワーカー・ノードを各ゾーンで有効にする必要があります。 クラスター内のすべてのゾーンにまたがり、ゾーンごとにワーカー・ノードを 2 つ以上持つ[エッジ・ワーカー・ノード・プールを作成します](/docs/containers?topic=containers-clusters#add_pool)。
- - 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+ - 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
  - ゾーンで障害が発生した場合、そのゾーンの Ingress ALB への要求で断続的に障害が発生する可能性があります。
 
 <br />
@@ -255,7 +255,7 @@ Ingress の使用を開始する前に、以下の前提条件を確認してく
 クラスター内のアプリを別々の名前空間に入れる場合は、そこで公開するアプリのルールを定義するために、名前空間ごとに 1 つのリソースを作成する必要があります。
 {: shortdesc}
 
-ただし、1 つのホスト名を定義できるのは 1 つのリソースだけです。複数のリソースで同じホスト名を定義することはできません。複数の Ingress リソースを同じホスト名で登録する場合は、ワイルドカード・ドメインを使用する必要があります。ワイルドカード・ドメイン (`*.domain.net` など) を登録すると、複数のサブドメインがすべて同じホストに解決されます。そうすれば、各名前空間で Ingress リソースを作成し、各 Ingress リソースで別々のサブドメインを指定できます。
+ただし、1 つのホスト名を定義できるのは 1 つのリソースだけです。 複数のリソースで同じホスト名を定義することはできません。 複数の Ingress リソースを同じホスト名で登録する場合は、ワイルドカード・ドメインを使用する必要があります。 ワイルドカード・ドメイン (`*.domain.net` など) を登録すると、複数のサブドメインがすべて同じホストに解決されます。 そうすれば、各名前空間で Ingress リソースを作成し、各 Ingress リソースで別々のサブドメインを指定できます。
 
 例えば、以下のシナリオがあるとします。
 * テスト用の同じアプリに `app1` と `app3` という 2 つのバージョンがあります。
@@ -299,7 +299,7 @@ Ingress の使用を開始する前に、以下の前提条件を確認してく
 開始前に、以下のことを行います。
 
 * Ingress の[前提条件](#config_prereqs)を確認します。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### ステップ 1: アプリをデプロイしてアプリ・サービスを作成する
 {: #public_inside_1}
@@ -307,7 +307,7 @@ Ingress の使用を開始する前に、以下の前提条件を確認してく
 まず、アプリをデプロイし、それらを公開するための Kubernetes サービスを作成します。
 {: shortdesc}
 
-1.  [アプリをクラスターにデプロイします](/docs/containers?topic=containers-app#app_cli)。構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。 このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
+1.  [アプリをクラスターにデプロイします](/docs/containers?topic=containers-app#app_cli)。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。 このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
 
 2.   公開するアプリごとに Kubernetes サービスを作成します。 アプリをクラスター ALB の Ingress ロード・バランシングに含めるには、Kubernetes サービスを介してアプリを公開する必要があります。
       1.  任意のエディターを開き、`myappservice.yaml` などの名前のサービス構成ファイルを作成します。
@@ -391,7 +391,7 @@ Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
 ALB は、HTTP ネットワーク・トラフィックをクラスター内のアプリに振り分けてロード・バランシングを行います。 着信 HTTPS 接続のロード・バランシングも行う場合は ALB でその機能を構成できます。つまり、ネットワーク・トラフィックを復号し、復号した要求をクラスター内で公開されているアプリに転送するように構成します。
 
 * IBM 提供の Ingress サブドメインを使用する場合は、IBM 提供の TLS 証明書を使用できます。 IBM 提供の TLS 証明書は、LetsEncrypt によって署名され、IBM によって完全に管理されます。 証明書の有効期間は 90 日で、有効期限が切れる 37 日前に自動的に更新されます。 ワイルドカードの TLS 証明書については、[この注記](#wildcard_tls)を参照してください。
-* カスタム・ドメインを使用する場合は、独自の TLS 証明書を使用して TLS 終端を管理できます。 ALB はまず、アプリが入っている名前空間にシークレットがあるかどうかをチェックし、次に `default`、最後に `ibm-cert-store` をチェックします。1 つの名前空間にのみアプリがある場合は、その同じ名前空間に、証明書に対する TLS シークレットをインポートまたは作成できます。 複数の名前空間にアプリがある場合は、どの名前空間でも ALB が証明書にアクセスして使用できるように、`default` 名前空間の証明書に対して TLS シークレットをインポートまたは作成します。 名前空間ごとに定義する Ingress リソースに、デフォルトの名前空間にあるシークレットの名前を指定してください。ワイルドカードの TLS 証明書については、[この注記](#wildcard_tls)を参照してください。 **注**: 事前共有鍵 (TLS-PSK) を含む TLS 証明書はサポートされていません。
+* カスタム・ドメインを使用する場合は、独自の TLS 証明書を使用して TLS 終端を管理できます。 ALB はまず、アプリが入っている名前空間にシークレットがあるかどうかをチェックし、次に `default`、最後に `ibm-cert-store` をチェックします。 1 つの名前空間にのみアプリがある場合は、その同じ名前空間に、証明書に対する TLS シークレットをインポートまたは作成できます。 複数の名前空間にアプリがある場合は、どの名前空間でも ALB が証明書にアクセスして使用できるように、`default` 名前空間の証明書に対して TLS シークレットをインポートまたは作成します。 名前空間ごとに定義する Ingress リソースに、デフォルトの名前空間にあるシークレットの名前を指定してください。 ワイルドカードの TLS 証明書については、[この注記](#wildcard_tls)を参照してください。 **注**: 事前共有鍵 (TLS-PSK) を含む TLS 証明書はサポートされていません。
 
 **IBM 提供の Ingress ドメインを使用する場合:**
 
@@ -418,10 +418,10 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 ```
 {: pre}
 
-IBM 提供の Ingress シークレットと同じ名前のシークレットは作成しないでください。IBM 提供の Ingress シークレットの名前を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行します。
+IBM 提供の Ingress シークレットと同じ名前のシークレットは作成しないでください。 IBM 提供の Ingress シークレットの名前を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行します。
 {: note}
 
-このコマンドを使用して証明書をインポートすると、`ibm-cert-store` という名前空間に証明書シークレットが作成されます。それから、このシークレットへの参照が `default` 名前空間に作成されます。これには、どの名前空間内の、どの Ingress リソースでもアクセスできます。ALB は、要求を処理するとき、この参照に従って `ibm-cert-store` 名前空間から証明書シークレットを選出して使用します。
+このコマンドを使用して証明書をインポートすると、`ibm-cert-store` という名前空間に証明書シークレットが作成されます。 それから、このシークレットへの参照が `default` 名前空間に作成されます。これには、どの名前空間内の、どの Ingress リソースでもアクセスできます。 ALB は、要求を処理するとき、この参照に従って `ibm-cert-store` 名前空間から証明書シークレットを選出して使用します。
 
 </br>
 
@@ -458,7 +458,7 @@ TLS 証明書の準備ができていない場合は、以下の手順に従っ�
      kubectl create -f ssl-my-test
      ```
      {: pre}
-     IBM 提供の Ingress シークレットと同じ名前のシークレットは作成しないでください。IBM 提供の Ingress シークレットの名前を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行します。
+     IBM 提供の Ingress シークレットと同じ名前のシークレットは作成しないでください。 IBM 提供の Ingress シークレットの名前を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行します。
      {: note}
 
 
@@ -629,7 +629,7 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 
 * Ingress の[前提条件](#config_prereqs)を確認します。
 * クラスター・ロード・バランシングに含めようとしている外部アプリに、パブリック IP アドレスを使用してアクセスできることを確認します。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 クラスター外のアプリをパブリックに公開するには、以下のようにします。
 
@@ -725,7 +725,7 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 プライベート Ingress ALB を使用して、アプリをプライベート・ネットワークに公開します。
 {:shortdesc}
 
-プライベート ALB を使用するには、まずプライベート ALB を有効にしなければなりません。プライベート VLAN だけのクラスターには IBM 提供の Ingress サブドメインが割り当てられないので、クラスターのセットアップ時に Ingress シークレットが作成されません。プライベート・ネットワークにアプリを公開するには、ALB をカスタム・サブドメインに登録する必要があります。その後、独自の TLS 証明書をインポートすることも可能です。
+プライベート ALB を使用するには、まずプライベート ALB を有効にしなければなりません。 プライベート VLAN だけのクラスターには IBM 提供の Ingress サブドメインが割り当てられないので、クラスターのセットアップ時に Ingress シークレットが作成されません。 プライベート・ネットワークにアプリを公開するには、ALB をカスタム・サブドメインに登録する必要があります。その後、独自の TLS 証明書をインポートすることも可能です。
 
 開始前に、以下のことを行います。
 * Ingress の[前提条件](#config_prereqs)を確認します。
@@ -738,7 +738,7 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 まず、アプリをデプロイし、それらを公開するための Kubernetes サービスを作成します。
 {: shortdesc}
 
-1.  [アプリをクラスターにデプロイします](/docs/containers?topic=containers-app#app_cli)。構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。 このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
+1.  [アプリをクラスターにデプロイします](/docs/containers?topic=containers-app#app_cli)。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。 このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
 
 2.   公開するアプリごとに Kubernetes サービスを作成します。 アプリをクラスター ALB の Ingress ロード・バランシングに含めるには、Kubernetes サービスを介してアプリを公開する必要があります。
       1.  任意のエディターを開き、`myappservice.yaml` などの名前のサービス構成ファイルを作成します。
@@ -878,21 +878,21 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 ### ステップ 3: カスタム・ドメインをマップする
 {: #private_3}
 
-プライベート VLAN だけのクラスターには IBM 提供の Ingress サブドメインが割り当てられません。プライベート ALB を構成する場合は、カスタム・ドメインを使用してアプリを公開してください。
+プライベート VLAN だけのクラスターには IBM 提供の Ingress サブドメインが割り当てられません。 プライベート ALB を構成する場合は、カスタム・ドメインを使用してアプリを公開してください。
 {: shortdesc}
 
 **プライベート VLAN だけのクラスター:**
 
 1. ワーカー・ノードがプライベート VLAN だけに接続されている場合は、[プライベート・ネットワークで使用できる独自の DNS サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) を構成する必要があります。
-2. DNS プロバイダー経由でカスタム・ドメインを作成します。1 つのクラスター内の複数の名前空間にあるアプリを Ingress で公開する場合は、カスタム・ドメインをワイルドカード・ドメイン (*.custom_domain.net など) として登録します。
-3. プライベート DNS サービスを使用して、ALB のポータブル・プライベート IP アドレスを A レコードとして追加して、カスタム・ドメインを IP アドレスにマップします。ALB のポータブル・プライベート IP アドレスを確認するには、ALB ごとに `ibmcloud ks alb-get <private_alb_ID>` を実行します。
+2. DNS プロバイダー経由でカスタム・ドメインを作成します。 1 つのクラスター内の複数の名前空間にあるアプリを Ingress で公開する場合は、カスタム・ドメインをワイルドカード・ドメイン (*.custom_domain.net など) として登録します。
+3. プライベート DNS サービスを使用して、ALB のポータブル・プライベート IP アドレスを A レコードとして追加して、カスタム・ドメインを IP アドレスにマップします。 ALB のポータブル・プライベート IP アドレスを確認するには、ALB ごとに `ibmcloud ks alb-get <private_alb_ID>` を実行します。
 
 **プライベートとパブリックの VLAN を使用するクラスター:**
 
 1.    カスタム・ドメインを作成します。 カスタム・ドメインを登録する時には、Domain Name Service (DNS) プロバイダーまたは [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started-with-dns#getting-started-with-dns) を使用してください。
       * Ingress で公開するアプリが 1 つのクラスター内の別々の名前空間にある場合は、カスタム・ドメインをワイルドカード・ドメイン (`*.custom_domain.net` など) として登録します。
 
-2.  ALB のポータブル・プライベート IP アドレスを A レコードとして追加して、カスタム・ドメインを IP アドレスにマップします。ALB のポータブル・プライベート IP アドレスを確認するには、ALB ごとに `ibmcloud ks alb-get <private_alb_ID>` を実行します。
+2.  ALB のポータブル・プライベート IP アドレスを A レコードとして追加して、カスタム・ドメインを IP アドレスにマップします。 ALB のポータブル・プライベート IP アドレスを確認するには、ALB ごとに `ibmcloud ks alb-get <private_alb_ID>` を実行します。
 
 ### ステップ 4: TLS 終端を選択する
 {: #private_4}
@@ -902,7 +902,7 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 
 ALB は、HTTP ネットワーク・トラフィックをクラスター内のアプリに振り分けてロード・バランシングを行います。 着信 HTTPS 接続のロード・バランシングも行う場合は ALB でその機能を構成できます。つまり、ネットワーク・トラフィックを復号し、復号した要求をクラスター内で公開されているアプリに転送するように構成します。
 
-プライベート VLAN だけのクラスターには IBM 提供の Ingress ドメインが割り当てられないので、クラスターのセットアップ時に Ingress シークレットが作成されません。独自の TLS 証明書を使用して TLS 終端を管理できます。  ALB はまず、アプリが入っている名前空間にシークレットがあるかどうかをチェックし、次に `default`、最後に `ibm-cert-store` をチェックします。1 つの名前空間にのみアプリがある場合は、その同じ名前空間に、証明書に対する TLS シークレットをインポートまたは作成できます。 複数の名前空間にアプリがある場合は、どの名前空間でも ALB が証明書にアクセスして使用できるように、`default` 名前空間の証明書に対して TLS シークレットをインポートまたは作成します。 名前空間ごとに定義する Ingress リソースに、デフォルトの名前空間にあるシークレットの名前を指定してください。ワイルドカードの TLS 証明書については、[この注記](#wildcard_tls)を参照してください。 **注**: 事前共有鍵 (TLS-PSK) を含む TLS 証明書はサポートされていません。
+プライベート VLAN だけのクラスターには IBM 提供の Ingress ドメインが割り当てられないので、クラスターのセットアップ時に Ingress シークレットが作成されません。 独自の TLS 証明書を使用して TLS 終端を管理できます。  ALB はまず、アプリが入っている名前空間にシークレットがあるかどうかをチェックし、次に `default`、最後に `ibm-cert-store` をチェックします。 1 つの名前空間にのみアプリがある場合は、その同じ名前空間に、証明書に対する TLS シークレットをインポートまたは作成できます。 複数の名前空間にアプリがある場合は、どの名前空間でも ALB が証明書にアクセスして使用できるように、`default` 名前空間の証明書に対して TLS シークレットをインポートまたは作成します。 名前空間ごとに定義する Ingress リソースに、デフォルトの名前空間にあるシークレットの名前を指定してください。 ワイルドカードの TLS 証明書については、[この注記](#wildcard_tls)を参照してください。 **注**: 事前共有鍵 (TLS-PSK) を含む TLS 証明書はサポートされていません。
 
 使用する TLS 証明書が {{site.data.keyword.cloudcerts_long_notm}} に保管されている場合は、それに関連付けられたシークレットを、以下のコマンドを実行してクラスター内にインポートできます。
 
@@ -911,10 +911,10 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 ```
 {: pre}
 
-IBM 提供の Ingress シークレットと同じ名前のシークレットは作成しないでください。IBM 提供の Ingress シークレットの名前を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行します。
+IBM 提供の Ingress シークレットと同じ名前のシークレットは作成しないでください。 IBM 提供の Ingress シークレットの名前を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行します。
 {: note}
 
-このコマンドを使用して証明書をインポートすると、`ibm-cert-store` という名前空間に証明書シークレットが作成されます。それから、このシークレットへの参照が `default` 名前空間に作成されます。これには、どの名前空間内の、どの Ingress リソースでもアクセスできます。ALB は、要求を処理するとき、この参照に従って `ibm-cert-store` 名前空間から証明書シークレットを選出して使用します。
+このコマンドを使用して証明書をインポートすると、`ibm-cert-store` という名前空間に証明書シークレットが作成されます。 それから、このシークレットへの参照が `default` 名前空間に作成されます。これには、どの名前空間内の、どの Ingress リソースでもアクセスできます。 ALB は、要求を処理するとき、この参照に従って `ibm-cert-store` 名前空間から証明書シークレットを選出して使用します。
 
 </br>
 
@@ -951,7 +951,7 @@ TLS 証明書の準備ができていない場合は、以下の手順に従っ�
      kubectl create -f ssl-my-test
      ```
      {: pre}
-     IBM 提供の Ingress シークレットと同じ名前のシークレットは作成しないでください。IBM 提供の Ingress シークレットの名前を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行します。
+     IBM 提供の Ingress シークレットと同じ名前のシークレットは作成しないでください。 IBM 提供の Ingress シークレットの名前を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress` を実行します。
      {: note}
 
 
@@ -1027,7 +1027,7 @@ Ingress リソースは、ALB がトラフィックをアプリ・サービス�
     <tbody>
     <tr>
     <td><code>ingress.bluemix.net/ALB-ID</code></td>
-    <td><em>&lt;private_ALB_ID&gt;</em> を、プライベート ALB の ID に置き換えます。 複数ゾーン・クラスターを使用していて、複数のプライベート ALB を有効にしている場合は、各 ALB の ID を指定してください。ALB ID を見つけるには、<code>ibmcloud ks albs --cluster <my_cluster></code> を実行します。 この Ingress アノテーションについて詳しくは、[プライベート・アプリケーションのロード・バランサーのルーティング](/docs/containers?topic=containers-ingress_annotation#alb-id)を参照してください。</td>
+    <td><em>&lt;private_ALB_ID&gt;</em> を、プライベート ALB の ID に置き換えます。 複数ゾーン・クラスターを使用していて、複数のプライベート ALB を有効にしている場合は、各 ALB の ID を指定してください。 ALB ID を見つけるには、<code>ibmcloud ks albs --cluster <my_cluster></code> を実行します。 この Ingress アノテーションについて詳しくは、[プライベート・アプリケーションのロード・バランサーのルーティング](/docs/containers?topic=containers-ingress_annotation#alb-id)を参照してください。</td>
     </tr>
     <tr>
     <td><code>tls.hosts</code></td>
@@ -1133,7 +1133,7 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
 * [appid-auth](/docs/containers?topic=containers-ingress_annotation#appid-auth): {{site.data.keyword.appid_full_notm}} を使用して、アプリケーションの認証を行います。
 * [client-max-body-size](/docs/containers?topic=containers-ingress_annotation#client-max-body-size): クライアントが要求の一部として送信できる本体の最大サイズを設定します。
 
-`ingress.bluemix.net/<annotation>` の形式のアノテーションだけがサポートされています。サポートされるすべてのアノテーションのリストについては、[アノテーションを使用した Ingress のカスタマイズ](/docs/containers?topic=containers-ingress_annotation)を参照してください。 `ingress.kubernetes.io/<annotation>`、`kubernetes.io/<annotation>`、`nginx.ingress.kubernetes.io/<annotation>` の形式のアノテーションはサポートされていません。
+`ingress.bluemix.net/<annotation>` の形式のアノテーションだけがサポートされています。 サポートされるすべてのアノテーションのリストについては、[アノテーションを使用した Ingress のカスタマイズ](/docs/containers?topic=containers-ingress_annotation)を参照してください。 `ingress.kubernetes.io/<annotation>`、`kubernetes.io/<annotation>`、`nginx.ingress.kubernetes.io/<annotation>` の形式のアノテーションはサポートされていません。
 {: note}
 
 <br />
@@ -1293,7 +1293,7 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
 `ibm-cloud-provider-ingress-cm` 構成マップを編集して、グローバル HTTP レベルで SSL プロトコルと暗号を有効にします。
 {:shortdesc}
 
-PCI Security Standards Council の基準に準拠するために、Ingress サービスでは、2019 年 1 月 23 日の Ingress ALB ポッドのバージョン更新によって TLS 1.0 と 1.1 がデフォルトで無効になります。この更新は、自動 ALB 更新をオプトアウトしていないすべての {{site.data.keyword.containerlong_notm}} クラスターに自動的にロールアウトされます。アプリに接続するクライアントが TLS 1.2 に対応していれば、何の対処も必要ありません。TLS 1.0 または 1.1 のサポートを必要とする既存のクライアントをまだ使用する場合は、必要な TLS バージョンを手動で有効にしなければなりません。このセクションで、TLS 1.1 または 1.0 のプロトコルを使用するためにデフォルトの設定をオーバーライドする手順を説明します。アプリへのアクセスにクライアントで使用している TLS バージョンを確認する方法について詳しくは、こちらの [{{site.data.keyword.Bluemix_notm}} のブログ投稿](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/)を参照してください。
+PCI Security Standards Council の基準に準拠するために、Ingress サービスでは、2019 年 1 月 23 日の Ingress ALB ポッドのバージョン更新によって TLS 1.0 と 1.1 がデフォルトで無効になります。 この更新は、自動 ALB 更新をオプトアウトしていないすべての {{site.data.keyword.containerlong_notm}} クラスターに自動的にロールアウトされます。 アプリに接続するクライアントが TLS 1.2 に対応していれば、何の対処も必要ありません。 TLS 1.0 または 1.1 のサポートを必要とする既存のクライアントをまだ使用する場合は、必要な TLS バージョンを手動で有効にしなければなりません。 このセクションで、TLS 1.1 または 1.0 のプロトコルを使用するためにデフォルトの設定をオーバーライドする手順を説明します。 アプリへのアクセスにクライアントで使用している TLS バージョンを確認する方法について詳しくは、こちらの [{{site.data.keyword.Bluemix_notm}} のブログ投稿](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/)を参照してください。
 {: important}
 
 すべてのホストで有効なプロトコルを指定する場合、TLSv1.1 および TLSv1.2 パラメーター (1.1.13、1.0.12) は、OpenSSL 1.0.1 以上が使用されている場合にのみ使用できます。 TLSv1.3 パラメーター (1.13.0) は、TLSv1.3 対応版の OpenSSL 1.1.1 が使用されている場合にのみ使用できます。
@@ -1386,7 +1386,7 @@ Ingress ALB のパフォーマンスを最適化するために、必要に応�
 ### キープアライブ接続の数または期間の変更
 {: #keepalive_time}
 
-キープアライブ接続によって、接続を開いたり閉じたりするのに必要な CPU とネットワークの使用量を減らせれば、パフォーマンスに大きな影響を及ぼせます。ALB のパフォーマンスを最適化するには、ALB とクライアントのキープアライブ接続の最大数と、キープアライブ接続を持続できる時間を変更します。
+キープアライブ接続によって、接続を開いたり閉じたりするのに必要な CPU とネットワークの使用量を減らせれば、パフォーマンスに大きな影響を及ぼせます。 ALB のパフォーマンスを最適化するには、ALB とクライアントのキープアライブ接続の最大数と、キープアライブ接続を持続できる時間を変更します。
 {: shortdesc}
 
 1. `ibm-cloud-provider-ingress-cm` 構成マップ・リソースに対応する構成ファイルを編集します。
@@ -1460,7 +1460,7 @@ Ingress ALB のパフォーマンスを最適化するために、必要に応�
 
 
 ### カーネルのパフォーマンスの調整
-{: #kernel}
+{: #ingress_kernel}
 
 Ingress ALB のパフォーマンスを最適化するには、[ワーカー・ノードで Linux カーネルの `sysctl` パラメーターを変更する](/docs/containers?topic=containers-kernel)こともできます。 ワーカー・ノードには、最適化されたカーネルの調整が自動的にプロビジョンされるため、特定のパフォーマンス最適化要件がある場合にのみこの設定を変更します。
 {: shortdesc}
@@ -1477,6 +1477,8 @@ Ingress ALB のパフォーマンスを最適化するには、[ワーカー・�
 {: shortdesc}
 
 特定の Ingress 要件がある場合は、独自のカスタム Ingress コントローラーを構成すると便利です。 IBM 提供の Ingress ALB を使用するのではなく、独自の Ingress コントローラーを持ち込む場合は、コントローラー・イメージの提供、コントローラーの保守、コントローラーの更新を自分で行う必要があります。
+
+**注**: 独自の Ingress コントローラーの持ち込みは、アプリへのパブリック外部アクセスを可能にするためにのみサポートされ、プライベート外部アクセスを可能にするためにはサポートされていません。
 
 1. デフォルトのパブリック ALB の ID を取得します。 パブリック ALB は、`public-cr18e61e63c6e94b658596ca93d087eed9-alb1` のような形式になります。
     ```
@@ -1599,4 +1601,4 @@ ibmcloud ks alb-configure --albID <alb ID> --enable
 ## Istio と Ingress ALB の併用
 {: #istio_ingress}
 
-{{site.data.keyword.containerlong_notm}} で [Istio マネージド・アドオン](/docs/containers?topic=containers-istio#istio_install)を有効にすると、Istio を使用してアプリのマイクロサービスをサービス・メッシュで管理できます。Istio では、ゲートウェイ・ロード・バランサーを使用してアプリのマイクロサービスを公開します。ただし、Istio のゲートウェイ・ロード・バランサーと IBM の Ingress ALB を接続すれば、IBM 提供のクラスター用の Ingress サブドメインでも Istio 管理アプリを公開できます。始めに、[IBM 提供の Ingress サブドメインを使用して Istio マネージド・アプリを公開する方法](/docs/containers?topic=containers-istio#istio_expose)を参照してください。
+{{site.data.keyword.containerlong_notm}} で [Istio マネージド・アドオン](/docs/containers?topic=containers-istio#istio_install)を有効にすると、Istio を使用してアプリのマイクロサービスをサービス・メッシュで管理できます。 Istio では、ゲートウェイ・ロード・バランサーを使用してアプリのマイクロサービスを公開します。 ただし、Istio のゲートウェイ・ロード・バランサーと IBM の Ingress ALB を接続すれば、IBM 提供のクラスター用の Ingress サブドメインでも Istio 管理アプリを公開できます。 始めに、[IBM 提供の Ingress サブドメインを使用して Istio マネージド・アプリを公開する方法](/docs/containers?topic=containers-istio#istio_expose)を参照してください。

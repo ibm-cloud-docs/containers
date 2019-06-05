@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -75,10 +75,11 @@ subcollection: containers
 **Tecnologías integradas de código abierto**
 
 - [Documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/)
+- [Documentación de la CLI de Kubernetes (`kubectl`) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubectl.docs.kubernetes.io/)
 - [Documentación de Knative ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/knative/docs)
 - [Documentación de Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Documentación de Helm <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para la gestión de paquetes de Kubernetes
-- Plataforma [Istio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/) para conectarse, gestionar y proteger microservicios
+- [Plataforma Istio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/) para conectar, gestionar y proteger microservicios
 - [Visualización de Weave Scope ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.weave.works/oss/scope/)
 
 <br />
@@ -96,7 +97,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [Documentación de {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-index)
+- [Documentación de {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)
 - [API REST de {{site.data.keyword.registryshort_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://{DomainName}/apidocs/container-registry)
 - [API REST de Vulnerability Advisor ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://{DomainName}/apidocs/container-registry/va)
 

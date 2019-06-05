@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks 
 
@@ -39,7 +39,7 @@ subcollection: containers
 
 ワーカー・ノードは、カーネル・パフォーマンスが最適になるようにして自動的にプロビジョンされますが、カスタム [Kubernetes `DaemonSet` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) オブジェクトをクラスターに適用してデフォルト設定を変更することができます。 デーモン・セットは、既存のすべてのワーカー・ノードの設定を変更し、クラスター内でプロビジョンされている新規ワーカー・ノードに設定を適用します。 ポッドは影響を受けません。
 
-この例の特権的な `initContainer` を実行するには、すべての名前空間に対して[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っている必要があります。デプロイメントのコンテナーが初期化された後、特権は除去されます。
+この例の特権的な `initContainer` を実行するには、すべての名前空間に対して[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っている必要があります。 デプロイメントのコンテナーが初期化された後、特権は除去されます。
 {: note}
 
 1. 以下のデーモン・セットを `worker-node-kernel-settings.yaml` という名前のファイルに保存します。 `spec.template.spec.initContainers` セクションで、調整する `sysctl` パラメーターのフィールドと値を追加します。 このサンプルのデーモン・セットでは、環境に許可するデフォルトの最大接続数を `net.core.somaxconn` 設定を使用して変更し、一時ポート範囲を `net.ipv4.ip_local_port_range` 設定を使用して変更しています。
@@ -53,6 +53,9 @@ subcollection: containers
         tier: management
         app: kernel-optimization
     spec:
+      selector:
+        matchLabels:
+          name: kernel-optimization
       template:
         metadata:
           labels:
@@ -126,7 +129,7 @@ subcollection: containers
 
 アプリ・ポッドのカーネル設定を最適化するには、各デプロイメントの `pod/ds/rs/deployment` YAML に [`initContainer ` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) パッチを挿入します。 パフォーマンスを最適化したいポッドのネットワーク名前空間にある各アプリ・デプロイメントに `initContainer` が追加されます。
 
-開始する前に、この例の特権的な `initContainer` を実行するために、すべての名前空間に対して[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。デプロイメントのコンテナーが初期化された後、特権は除去されます。
+開始する前に、この例の特権的な `initContainer` を実行するために、すべての名前空間に対して[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。 デプロイメントのコンテナーが初期化された後、特権は除去されます。
 
 1. 以下の `initContainer` パッチを `pod-patch.yaml` という名前のファイルに保存し、調整する `sysctl` パラメーターのフィールドと値を追加します。 このサンプルの `initContainer` は、環境に許可するデフォルトの最大接続数を `net.core.somaxconn` 設定を使用して変更し、 一時ポート範囲を `net.ipv4.ip_local_port_range` 設定を使用して変更します。
     ```

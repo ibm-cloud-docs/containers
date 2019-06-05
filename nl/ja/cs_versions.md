@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -33,9 +33,9 @@ subcollection: containers
 {:shortdesc}
 
 **サポートされる Kubernetes バージョン**:
-*   最新: 1.13.4
-*   デフォルト: 1.12.6
-*   その他: 1.11.8
+*   最新: 1.13.5
+*   デフォルト: 1.12.7
+*   その他: 1.11.9
 
 **非推奨および非サポートの Kubernetes バージョン**:
 *   非推奨: 1.10
@@ -43,11 +43,11 @@ subcollection: containers
 
 </br>
 
-**非推奨バージョン**: 非推奨 Kubernetes バージョンでクラスターを実行している場合は、そのバージョンが非サポート・バージョンになる前に、サポート対象バージョンの Kubernetes を確認して更新できるように最低 30 日の期間が設けられます。非推奨の期間中もクラスターはまだ機能しますが、セキュリティーの脆弱性を修正するために、サポートされるリリースへの更新が必要になる場合があります。 非推奨バージョンを使用する新規クラスターは作成できません。
+**非推奨バージョン**: 非推奨 Kubernetes バージョンでクラスターを実行している場合は、そのバージョンが非サポート・バージョンになる前に、サポート対象バージョンの Kubernetes を確認して更新できるように最低 30 日の期間が設けられます。 非推奨の期間中もクラスターはまだ機能しますが、セキュリティーの脆弱性を修正するために、サポートされるリリースへの更新が必要になる場合があります。 例えば、ワーカー・ノードを追加および再ロードできますが、非推奨バージョンを使用する新規クラスターは作成できません。
 
-**非サポート・バージョン**: サポートされない Kubernetes バージョンがクラスターで実行されている場合は、後述する更新の潜在的な影響を確認し、即時に[クラスターを更新](/docs/containers?topic=containers-update#update)して、重要なセキュリティー更新とサポートを継続して受けられるようにしてください。非サポートのクラスターは、既存のワーカー・ノードを追加したり再ロードしたりすることはできません。 ご使用のクラスターが**サポート対象外**かどうかは、`ibmcloud ks clusters` コマンドの出力または [{{site.data.keyword.containerlong_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/containers-kubernetes/clusters) で**「状態」**フィールドを調べることで確認できます。
+**非サポート・バージョン**: サポートされない Kubernetes バージョンがクラスターで実行されている場合は、後述する更新の潜在的な影響を確認し、即時に[クラスターを更新](/docs/containers?topic=containers-update#update)して、重要なセキュリティー更新とサポートを継続して受けられるようにしてください。 非サポートのクラスターは、既存のワーカー・ノードを追加したり再ロードしたりすることはできません。 ご使用のクラスターが**サポート対象外**かどうかは、`ibmcloud ks clusters` コマンドの出力または [{{site.data.keyword.containerlong_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/clusters) で**「状態」**フィールドを調べることで確認できます。
 
-クラスターが、サポートされるバージョンの 3 つ以上マイナーのバージョンになった場合は、強制的に更新を実行する必要があり、この場合、予期しない結果または障害が発生する可能性があります。 バージョン 1.7 または 1.8 からバージョン 1.11 以降への更新は失敗します。それ以外のバージョンでは、例えば Kubernetes バージョン 1.9 を実行しているクラスターでマスターを直接 1.12 以降に更新した場合は、ワーカー・ノードを同じバージョンに更新するまで、ほとんどのポッドが、`MatchNodeSelector`、`CrashLoopBackOff`、`ContainerCreating` などの状態になり、失敗します。この問題を回避するには、クラスターを現在のバージョンより 2 つ以内のサポート対象バージョン (1.9 から 1.11 など) に更新してから、1.12 に更新します。<br><br>サポートされるバージョンにクラスターを更新した後は、クラスターで、通常の操作を再開し、引き続きサポートを受けることができます。
+クラスターが、サポートされるバージョンの 3 つ以上マイナーのバージョンになった場合は、強制的に更新を実行する必要があり、この場合、予期しない結果または障害が発生する可能性があります。 バージョン 1.7 または 1.8 からバージョン 1.11 以降への更新は失敗します。 それ以外のバージョンでは、例えば Kubernetes バージョン 1.9 を実行しているクラスターでマスターを直接 1.12 以降に更新した場合は、ワーカー・ノードを同じバージョンに更新するまで、ほとんどのポッドが、`MatchNodeSelector`、`CrashLoopBackOff`、`ContainerCreating` などの状態になり、失敗します。 この問題を回避するには、クラスターを現在のバージョンより 2 つ以内のサポート対象バージョン (1.9 から 1.11 など) に更新してから、1.12 に更新します。<br><br>サポートされるバージョンにクラスターを更新した後は、クラスターで、通常の操作を再開し、引き続きサポートを受けることができます。
 {: important}
 
 </br>
@@ -62,7 +62,7 @@ kubectl version  --short | grep -i server
 出力例:
 
 ```
-Server Version: v1.12.6+IKS
+Server Version: v1.12.7+IKS
 ```
 {: screen}
 
@@ -81,10 +81,10 @@ Kubernetes クラスターには、メジャー、マイナー、およびパッ
 {: caption="Kubernetes 更新の影響" caption-side="top"}
 
 更新が利用可能になると、`ibmcloud ks workers --cluster <cluster>` や `ibmcloud ks worker-get --cluster <cluster> --worker <worker>` コマンドなどを使用してワーカー・ノードに関する情報を表示したときに通知されます。
--  **メジャー更新とマイナー更新 (1.x)**: まず[マスター・ノードを更新して](/docs/containers?topic=containers-update#master)、それから[ワーカー・ノードを更新します](/docs/containers?topic=containers-update#worker_node)。ワーカー・ノードは、マスターよりも大きい Kubernetes メジャー・バージョンまたはマイナー・バージョンを実行できません。
+-  **メジャー更新とマイナー更新 (1.x)**: まず[マスター・ノードを更新して](/docs/containers?topic=containers-update#master)、それから[ワーカー・ノードを更新します](/docs/containers?topic=containers-update#worker_node)。 ワーカー・ノードは、マスターよりも大きい Kubernetes メジャー・バージョンまたはマイナー・バージョンを実行できません。
    - デフォルトでは、Kubernetes マスターを更新できるのは 2 つ先のマイナー・バージョンまでです。 例えば、現在のマスターがバージョン 1.9 であり 1.12 に更新する計画の場合、まず 1.10 に更新する必要があります。 続けて更新を強制実行することは可能ですが、2 つのマイナー・バージョンを超える更新によって、予期しない結果や障害が発生するおそれがあります。
    - 少なくともクラスターの `major.minor` バージョンに一致する `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。 Kubernetes クラスターと [CLI のバージョン](/docs/containers?topic=containers-cs_cli_install#kubectl)を最新の状態に保つようにしてください。
--  **パッチ更新 (x.x.4_1510)**: 各パッチの変更内容については、[バージョンの変更ログ](/docs/containers?topic=containers-changelog)に記載しています。マスターのパッチは自動的に適用されますが、ワーカー・ノードのパッチはユーザーが更新を開始します。ワーカー・ノードはマスターよりも大きいパッチ・バージョンを実行することもできます。更新が利用可能になると、マスター・ノードやワーカー・ノードに関する情報を {{site.data.keyword.Bluemix_notm}} コンソールまたは CLI で `ibmcloud ks clusters`、`cluster-get`、`workers`、`worker-get` などのコマンドを使用して表示したときに通知されます。
+-  **パッチ更新 (x.x.4_1510)**: 各パッチの変更内容については、[バージョンの変更ログ](/docs/containers?topic=containers-changelog)に記載しています。 マスターのパッチは自動的に適用されますが、ワーカー・ノードのパッチはユーザーが更新を開始します。 ワーカー・ノードはマスターよりも大きいパッチ・バージョンを実行することもできます。 更新が利用可能になると、マスター・ノードやワーカー・ノードに関する情報を {{site.data.keyword.Bluemix_notm}} コンソールまたは CLI で `ibmcloud ks clusters`、`cluster-get`、`workers`、`worker-get` などのコマンドを使用して表示したときに通知されます。
    - **ワーカー・ノードのパッチ**: 更新が使用可能かどうかを毎月確認し、`ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)または `ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)を使用して、これらのセキュリティー・パッチおよびオペレーティング・システム・パッチを適用してください。 更新中や再ロード中にワーカー・ノード・マシンのイメージが再作成されるので、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)していないデータは削除されることに注意してください。
    - **マスターのパッチ**: マスターのパッチは、数日にわたって自動的に適用されるため、マスターに適用される前に、マスターのパッチ・バージョンが使用可能であると表示される場合があります。 また、更新の自動化では、正常な状態でないクラスターや現在進行中の操作があるクラスターはスキップされます。 必要に応じて、IBM は特定のマスターのフィックスパック (変更ログに記載されているように、マスターが 1 つ前のマイナー・バージョンから更新される場合にのみ必要なパッチなど) に対して、自動更新を無効にする場合があります。 これらのいずれかの場合、自動更新が適用されるのを待たずに、`ibmcloud ks cluster-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)を使用して手動で確実に更新することができます。
 
@@ -109,10 +109,10 @@ Kubernetes クラスターには、メジャー、マイナー、およびパッ
 ## リリース履歴
 {: #release-history}
 
-以下の表は、{{site.data.keyword.containerlong_notm}} バージョンのリリース履歴の記録です。特定のリリースが非サポート・リリースになる大まかな時間フレームを推測するなど、計画の際にはこの情報を参考にしてください。Kubernetes コミュニティーがバージョン更新をリリースすると、IBM チームは {{site.data.keyword.containerlong_notm}} 環境用にそのリリースを強化してテストするプロセスを開始します。リリース日およびサポート終了日は、これらのテストの結果、コミュニティーの更新、セキュリティー・パッチ、およびバージョン間のテクノロジーの変更に依存します。`n-2` のバージョン・サポート・ポリシーに従い、クラスター・マスターとワーカー・ノードのバージョンを最新に保つように計画してください。
+以下の表は、{{site.data.keyword.containerlong_notm}} バージョンのリリース履歴の記録です。 特定のリリースが非サポート・リリースになる大まかな時間フレームを推測するなど、計画の際にはこの情報を参考にしてください。 Kubernetes コミュニティーがバージョン更新をリリースすると、IBM チームは {{site.data.keyword.containerlong_notm}} 環境用にそのリリースを強化してテストするプロセスを開始します。 リリース日およびサポート終了日は、これらのテストの結果、コミュニティーの更新、セキュリティー・パッチ、およびバージョン間のテクノロジーの変更に依存します。 `n-2` のバージョン・サポート・ポリシーに従い、クラスター・マスターとワーカー・ノードのバージョンを最新に保つように計画してください。
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}} の一般提供が初めて開始されたときには、Kubernetes バージョン 1.5 が使用されていました。リリース予定日またはサポート終了予定日は変更されることがあります。バージョン更新の準備手順に進むには、バージョン番号をクリックしてください。
+{{site.data.keyword.containerlong_notm}} の一般提供が初めて開始されたときには、Kubernetes バージョン 1.5 が使用されていました。 リリース予定日またはサポート終了予定日は変更されることがあります。 バージョン更新の準備手順に進むには、バージョン番号をクリックしてください。
 
 剣標 (`†`) の付いた日付は暫定的な日付であり、変更されることがあります。
 {: important}
@@ -154,28 +154,28 @@ Kubernetes クラスターには、メジャー、マイナー、およびパッ
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="このバージョンは推奨されていません。"/></td>
   <td>[1.10](#cs_v110)</td>
   <td>2018 年 5 月 1 日</td>
-  <td>2019 年 4 月 30 日`†`</td>
+  <td>2019 年 5 月 15 日</td>
 </tr>
 <tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="このバージョンはサポートされなくなります。"/></td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="このバージョンはサポートされていません。"/></td>
   <td>[1.9](#cs_v19)</td>
   <td>2018 年 2 月 8 日</td>
   <td>2018 年 12 月 27 日</td>
 </tr>
 <tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="このバージョンはサポートされなくなります。"/></td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="このバージョンはサポートされていません。"/></td>
   <td>[1.8](#cs_v18)</td>
   <td>2017 年 11 月 8 日</td>
   <td>2018 年 9 月 22 日</td>
 </tr>
 <tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="このバージョンはサポートされなくなります。"/></td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="このバージョンはサポートされていません。"/></td>
   <td>[1.7](#cs_v17)</td>
   <td>2017 年 9 月 19 日</td>
   <td>2018 年 6 月 21 日</td>
 </tr>
 <tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="このバージョンはサポートされなくなります。"/></td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="このバージョンはサポートされていません。"/></td>
   <td>1.6</td>
   <td>N/A</td>
   <td>N/A</td>
@@ -196,7 +196,7 @@ Kubernetes クラスターには、メジャー、マイナー、およびパッ
 {: #cs_v113}
 
 <p><img src="images/certified_kubernetes_1x13.png" style="padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud コンテナー・サービスが Kubernetes バージョン 1.13 の認定を受けたことを示しています。"/> {{site.data.keyword.containerlong_notm}}
-は、CNCF Kubernetes Software Conformance Certification プログラムのもとで認定を受けたバージョン 1.13 の Kubernetes 製品です。__</p>
+は、CNCF Kubernetes Software Conformance Certification プログラムのもとで認定を受けたバージョン 1.13 の Kubernetes 製品です。 __</p>
 
 Kubernetes を前のバージョンから 1.13 に更新する場合に必要な可能性がある変更作業について説明します。
 {: shortdesc}
@@ -240,33 +240,33 @@ Kubernetes を前のバージョンから 1.13 に更新する場合に必要な
 <tbody>
 <tr>
 <td>クラスターの新しいデフォルトの DNS プロバイダーとして CoreDNS が使用可能に</td>
-<td>Kubernetes 1.13 以降の新しいクラスターでは、CoreDNS がクラスターのデフォルトの DNS プロバイダーになりました。KubeDNS をクラスター DNS プロバイダーとして使用している既存のクラスターを 1.13 に更新した場合は、クラスター DNS プロバイダーは KubeDNS のままです。しかし、[CoreDNS を代わりに使用する](/docs/containers?topic=containers-cluster_dns#dns_set)こともできます。
-<br><br>Kubernetes サービスの `ExternalName` フィールドにドメイン・ネームを入力できるように、CoreDNS は [クラスターの DNS 仕様 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) をサポートしています。以前のクラスター DNS プロバイダーである KubeDNS は、クラスターの DNS 仕様に準拠していないので、`ExternalName` には IP アドレスが使用されます。Kubernetes のサービスで DNS ではなく IP アドレスを使用している場合は、引き続き機能させるために `ExternalName` を DNS に更新する必要があります。</td>
+<td>Kubernetes 1.13 以降の新しいクラスターでは、CoreDNS がクラスターのデフォルトの DNS プロバイダーになりました。 KubeDNS をクラスター DNS プロバイダーとして使用している既存のクラスターを 1.13 に更新した場合は、クラスター DNS プロバイダーは KubeDNS のままです。 しかし、[CoreDNS を代わりに使用する](/docs/containers?topic=containers-cluster_dns#dns_set)こともできます。
+<br><br>Kubernetes サービスの `ExternalName` フィールドにドメイン・ネームを入力できるように、CoreDNS は [クラスターの DNS 仕様 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) をサポートしています。 以前のクラスター DNS プロバイダーである KubeDNS は、クラスターの DNS 仕様に準拠していないので、`ExternalName` には IP アドレスが使用されます。 Kubernetes のサービスで DNS ではなく IP アドレスを使用している場合は、引き続き機能させるために `ExternalName` を DNS に更新する必要があります。</td>
 </tr>
 <tr>
 <td>`Deployment` と `StatefulSet` の `kubectl` 出力</td>
-<td>`Deployment` と `StatefulSet` の `kubectl` 出力に`「Ready」`列が含まれるようになり、よりわかりやすくなりました。以前の動作に依存したスクリプトがある場合は更新してください。</td>
+<td>`Deployment` と `StatefulSet` の `kubectl` 出力に`「Ready」`列が含まれるようになり、よりわかりやすくなりました。 以前の動作に依存したスクリプトがある場合は更新してください。</td>
 </tr>
 <tr>
 <td>`PriorityClass` の `kubectl` 出力</td>
-<td>`PriorityClass` の `kubectl` 出力に`「Value」`列が含まれるようになりました。以前の動作に依存したスクリプトがある場合は更新してください。</td>
+<td>`PriorityClass` の `kubectl` 出力に`「Value」`列が含まれるようになりました。 以前の動作に依存したスクリプトがある場合は更新してください。</td>
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>`kubectl get componentstatuses` コマンドが、一部の Kubernetes マスター・コンポーネントの正常性を正しく報告しなくなりました。`localhost` のポートおよび非セキュアな (HTTP) ポートが無効になったために、これらのコンポーネントに Kubernetes API サーバーからアクセスできなくなったからです。Kubernetes バージョン 1.10 で高可用性 (HA) マスターが導入された後、各 Kubernetes マスターには、複数の `apiserver`、`controller-manager`、`scheduler`、および `etcd` インスタンスがセットアップされます。代わりに、[{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/containers-kubernetes/landing) を確認するか、`ibmcloud ks cluster-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)を使用してクラスターの正常性を確認できます。</td>
+<td>`kubectl get componentstatuses` コマンドが、一部の Kubernetes マスター・コンポーネントの正常性を正しく報告しなくなりました。`localhost` のポートおよび非セキュアな (HTTP) ポートが無効になったために、これらのコンポーネントに Kubernetes API サーバーからアクセスできなくなったからです。 Kubernetes バージョン 1.10 で高可用性 (HA) マスターが導入された後、各 Kubernetes マスターには、複数の `apiserver`、`controller-manager`、`scheduler`、および `etcd` インスタンスがセットアップされます。 代わりに、[{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/landing) を確認するか、`ibmcloud ks cluster-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)を使用してクラスターの正常性を確認できます。</td>
 </tr>
 <tr>
 <tr>
 <td>非サポート: `kubectl run-container`</td>
-<td>`kubectl run-container` コマンドが廃止されました。代わりに、`kubectl run` コマンドを使用します。</td>
+<td>`kubectl run-container` コマンドが廃止されました。 代わりに、`kubectl run` コマンドを使用します。</td>
 </tr>
 <tr>
 <td>`kubectl rollout undo`</td>
-<td>存在しないリビジョンに対して `kubectl rollout undo` を実行すると、エラーが返されます。以前の動作に依存したスクリプトがある場合は更新してください。</td>
+<td>存在しないリビジョンに対して `kubectl rollout undo` を実行すると、エラーが返されます。 以前の動作に依存したスクリプトがある場合は更新してください。</td>
 </tr>
 <tr>
 <td>非推奨: `scheduler.alpha.kubernetes.io/critical-pod` アノテーション</td>
-<td>`scheduler.alpha.kubernetes.io/critical-pod` アノテーションが非推奨になりました。このアノテーションに依存しているポッドは、代わりに[ポッドの優先度](/docs/containers?topic=containers-pod_priority#pod_priority)を使用するように変更してください。</td>
+<td>`scheduler.alpha.kubernetes.io/critical-pod` アノテーションが非推奨になりました。 このアノテーションに依存しているポッドは、代わりに[ポッドの優先度](/docs/containers?topic=containers-pod_priority#pod_priority)を使用するように変更してください。</td>
 </tr>
 </tbody>
 </table>
@@ -288,7 +288,7 @@ Kubernetes を前のバージョンから 1.13 に更新する場合に必要な
 <tbody>
 <tr>
 <td>containerd `cri` ストリーム・サーバー</td>
-<td>containerd バージョン 1.2 では、`cri` プラグイン・ストリーム・サーバーがランダム・ポート `http://localhost:0` で動作するようになりました。この変更により `kubelet` ストリーミング・プロキシーがサポートされ、コンテナーの `exec` 操作と `logs` の操作で、より安全なストリーミング・インターフェースを利用できるようになりました。以前は、`cri` ストリーム・サーバーはポート 10010 を使用してワーカー・ノードのプライベート・ネットワーク・インターフェースを listen していました。コンテナー `cri` プラグインを使用するアプリがあり、以前の動作に依存している場合は、そのアプリを更新してください。</td>
+<td>containerd バージョン 1.2 では、`cri` プラグイン・ストリーム・サーバーがランダム・ポート `http://localhost:0` で動作するようになりました。 この変更により `kubelet` ストリーミング・プロキシーがサポートされ、コンテナーの `exec` 操作と `logs` の操作で、より安全なストリーミング・インターフェースを利用できるようになりました。 以前は、`cri` ストリーム・サーバーはポート 10010 を使用してワーカー・ノードのプライベート・ネットワーク・インターフェースを listen していました。 コンテナー `cri` プラグインを使用するアプリがあり、以前の動作に依存している場合は、そのアプリを更新してください。</td>
 </tr>
 </tbody>
 </table>
@@ -325,7 +325,7 @@ Kubernetes を前のバージョンから 1.12 に更新する場合に必要な
 </tr>
 <tr>
 <td>`kube-system` `default` サービス・アカウントの役割バインディング</td>
-<td>`kube-system` `default` サービス・アカウントに、Kubernetes API への **cluster-admin** アクセス権限はなくなりました。 [Helm](/docs/containers?topic=containers-integrations#helm) などの、クラスター内のプロセスにアクセスする必要があるフィーチャーまたはアドオンをデプロイする場合は、[サービス・アカウント![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) をセットアップしてください。 該当する許可を持つサービス・アカウントを個別に作成してセットアップすると時間がかかるという場合は、クラスター役割バインディング `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default` を使用して **cluster-admin** 役割を一時的に付与することができます。</td>
+<td>`kube-system` `default` サービス・アカウントに、Kubernetes API への **cluster-admin** アクセス権限はなくなりました。 [Helm](/docs/containers?topic=containers-helm#public_helm_install) などの、クラスター内のプロセスにアクセスする必要があるフィーチャーまたはアドオンをデプロイする場合は、[サービス・アカウント![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) をセットアップしてください。 該当する許可を持つサービス・アカウントを個別に作成してセットアップすると時間がかかるという場合は、クラスター役割バインディング `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default` を使用して **cluster-admin** 役割を一時的に付与することができます。</td>
 </tr>
 </tbody>
 </table>
@@ -348,10 +348,10 @@ Kubernetes を前のバージョンから 1.12 に更新する場合に必要な
 <tr>
 <td>Kubernetes の API</td>
 <td>Kubernetes API では、非推奨の API が次のように置き換えられました。
-<ul><li><strong>apps/v1</strong>: `apps/v1` Kubernetes API によって、`apps/v1beta1` API と `apps/v1alpha` API は置き換えられました。また、`apps/v1` API によって、リソース `daemonset`、`deployment`、`replicaset`、および `statefulset` の `extensions/v1beta1` API も置き換えられました。Kubernetes プロジェクトでは、以前の Kubernetes `apiserver` と `kubectl` クライアントの API のサポートを非推奨にして段階的に終了しています。</li>
-<li><strong>networking.k8s.io/v1</strong>: `networking.k8s.io/v1` API によって、`networkpolicy` リソースの `extensions/v1beta1` API は置き換えられました。</li>
+<ul><li><strong>apps/v1</strong>: `apps/v1` Kubernetes API によって、`apps/v1beta1` API と `apps/v1alpha` API は置き換えられました。 また、`apps/v1` API によって、リソース `daemonset`、`deployment`、`replicaset`、および `statefulset` の `extensions/v1beta1` API も置き換えられました。 Kubernetes プロジェクトでは、以前の Kubernetes `apiserver` と `kubectl` クライアントの API のサポートを非推奨にして段階的に終了しています。</li>
+<li><strong>networking.k8s.io/v1</strong>: `networking.k8s.io/v1` API によって、NetworkPolicy リソースの `extensions/v1beta1` API は置き換えられました。</li>
 <li><strong>policy/v1beta1</strong>: `policy/v1beta1` API によって、`podsecuritypolicy` リソースの `extensions/v1beta1` API は置き換えられました。</li></ul>
-<br><br>非推奨 API が非サポート API になる前に、適切な Kubernetes API を使用するようにすべての YAML `apiVersion` フィールドを更新してください。また、`apps/v1` に関連する以下のような変更について、[Kubernetes 資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) を確認してください。
+<br><br>非推奨 API が非サポート API になる前に、適切な Kubernetes API を使用するようにすべての YAML `apiVersion` フィールドを更新してください。 また、`apps/v1` に関連する以下のような変更について、[Kubernetes 資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) を確認してください。
 <ul><li>デプロイメントの作成後、`.spec.selector` フィールドは変更不可能になります。</li>
 <li>`.spec.rollbackTo` フィールドは非推奨です。 代わりに、`kubectl rollout undo` コマンドを使用します。</li></ul></td>
 </tr>
@@ -365,7 +365,7 @@ Kubernetes を前のバージョンから 1.12 に更新する場合に必要な
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>`kubectl get componentstatuses` コマンドが、一部の Kubernetes マスター・コンポーネントの正常性を正しく報告しなくなりました。`localhost` のポートおよび非セキュアな (HTTP) ポートが無効になったために、これらのコンポーネントに Kubernetes API サーバーからアクセスできなくなったからです。Kubernetes バージョン 1.10 で高可用性 (HA) マスターが導入された後、各 Kubernetes マスターには、複数の `apiserver`、`controller-manager`、`scheduler`、および `etcd` インスタンスがセットアップされます。代わりに、[{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/containers-kubernetes/landing) を確認するか、`ibmcloud ks cluster-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)を使用してクラスターの正常性を確認できます。</td>
+<td>`kubectl get componentstatuses` コマンドが、一部の Kubernetes マスター・コンポーネントの正常性を正しく報告しなくなりました。`localhost` のポートおよび非セキュアな (HTTP) ポートが無効になったために、これらのコンポーネントに Kubernetes API サーバーからアクセスできなくなったからです。 Kubernetes バージョン 1.10 で高可用性 (HA) マスターが導入された後、各 Kubernetes マスターには、複数の `apiserver`、`controller-manager`、`scheduler`、および `etcd` インスタンスがセットアップされます。 代わりに、[{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/landing) を確認するか、`ibmcloud ks cluster-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)を使用してクラスターの正常性を確認できます。</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
@@ -497,6 +497,10 @@ Kubernetes バージョン 1.9 以前からバージョン 1.11 にクラスタ�
 コンテナー・ログ・ディレクトリーが `/var/lib/docker/` から `/var/log/pods/` に変更されました。 以前のディレクトリーをモニターする独自のロギング・ソリューションを使用する場合は、それに応じて更新します。</td>
 </tr>
 <tr>
+<td>{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) のサポート</td>
+<td>Kubernetes バージョン 1.11 以降を実行するクラスターでは、IAM [アクセス・グループ](/docs/iam?topic=iam-groups#groups)および[サービス ID](/docs/iam?topic=iam-serviceids#serviceids) がサポートされます。 これらの機能を使用して、[クラスターに対するアクセスを許可](/docs/containers?topic=containers-users#users)できるようになりました。</td>
+</tr>
+<tr>
 <td>Kubernetes 構成のリフレッシュ</td>
 <td>クラスターの Kubernetes API サーバーの OpenID Connect 構成が、{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) アクセス・グループをサポートするように更新されました。 そのため、`ibmcloud ks cluster-config --cluster <cluster_name_or_ID>` を実行して、マスター Kubernetes v1.11 の更新の後にクラスターの Kubernetes 構成をリフレッシュする必要があります。 このコマンドを使用することで、構成が `default` 名前空間の役割バインディングに適用されます。<br><br>構成をリフレッシュしないと、クラスター・アクションは失敗し、`You must be logged in to the server (Unauthorized).` というエラー・メッセージが表示されます。</td>
 </tr>
@@ -529,7 +533,7 @@ Kubernetes バージョン 1.9 以前からバージョン 1.11 にクラスタ�
 Kubernetes バージョン [1.10.8_1530](#110_ha-masters)、1.11.3_1531、またはそれ以降を実行するクラスターは、高可用性 (HA) を向上させるためにクラスター・マスターの構成が更新されています。 現在のクラスターは、別々の物理ホスト上にデプロイされた Kubernetes マスター・レプリカ 3 台で構成されるようになりました。 さらに、クラスターが複数ゾーン対応ゾーンにある場合は、それらのマスターがゾーン間に分散されます。
 {: shortdesc}
 
-クラスターが HA マスター構成になっているどうかを調べるには、コンソールでクラスターのマスター URL を確認するか、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID` を実行します。マスター URL が、`https://169.xx.xx.xx:xxxxx` のような IP アドレスを含むものではなく、`https://c2.us-south.containers.cloud.ibm.com:xxxxx` のようなホスト名を含むものであれば、HA マスター構成のクラスターです。マスター・パッチの自動更新または手動の更新適用によって、HA マスター構成になることもあります。どちらの場合も、次の項目を確認し、構成を最大限に活用するようにクラスター・ネットワークをセットアップする必要があります。
+クラスターが HA マスター構成になっているどうかを調べるには、コンソールでクラスターのマスター URL を確認するか、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID` を実行します。 マスター URL が、`https://169.xx.xx.xx:xxxxx` のような IP アドレスを含むものではなく、`https://c2.us-south.containers.cloud.ibm.com:xxxxx` のようなホスト名を含むものであれば、HA マスター構成のクラスターです。 マスター・パッチの自動更新または手動の更新適用によって、HA マスター構成になることもあります。 どちらの場合も、次の項目を確認し、構成を最大限に活用するようにクラスター・ネットワークをセットアップする必要があります。
 
 * ファイアウォールまたはカスタム Calico ネットワーク・ポリシーがある場合。
 * ワーカー・ノードでホスト・ポート `2040` または `2041` を使用している場合。
@@ -552,9 +556,25 @@ HA 構成のクラスター・マスターにアクセスできるようにす�
 ポッドが現在ポート `2040` または `2041` を使用しているかどうかを確認するには、クラスターをターゲットに設定して、以下のコマンドを実行します。
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
+
+HA マスター構成が既にある場合は、以下の例のように、`kube-system` 名前空間の `ibm-master-proxy-*` の結果が表示されます。 他のポッドが返された場合は、そのポートを更新します。
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
+
 
 <br>
 **マスターへのクラスター内アクセス用に `kubernetes` サービスのクラスター IP またはドメインを使用する**</br>
@@ -583,7 +603,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 以下の手順では、Kubernetes ネットワーク・ポリシーを更新する方法について説明します。 Calico ネットワーク・ポリシーを更新するには、ポリシー構文を少し変更してこれらの手順を繰り返し、`calicoctl` を使用してポリシーに影響がないか検索します。
 {: note}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  クラスター・マスター IP アドレスを取得します。
     ```
@@ -758,7 +778,7 @@ Kubernetes バージョン 1.10 からバージョン 1.11 にクラスターを
 Kubernetes を前のバージョンから 1.10 に更新する場合に必要な可能性がある変更作業について説明します。
 {: shortdesc}
 
-Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 4 月 30 日 (暫定) に非サポート・バージョンになります。各 Kubernetes バージョンの更新が[与える可能性のある影響を確認](/docs/containers?topic=containers-cs_versions#cs_versions)したうえで、少なくとも 1.11 にただちに[クラスターを更新](/docs/containers?topic=containers-update#update)してください。
+Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 5 月 15 日 に非サポート・バージョンになります。 各 Kubernetes バージョンの更新が[与える可能性のある影響を確認](/docs/containers?topic=containers-cs_versions#cs_versions)したうえで、少なくとも 1.11 にただちに[クラスターを更新](/docs/containers?topic=containers-update#update)してください。
 {: deprecated}
 
 Kubernetes 1.10 に正常に更新するには、その前に、[Calico v3 への更新の準備](#110_calicov3)に記載の手順を実行しておく必要があります。
@@ -851,7 +871,7 @@ Kubernetes 1.10 に正常に更新するには、その前に、[Calico v3 へ�
 <tr>
 <td>読み取り専用 API データ・ボリューム</td>
 <td>`secret`、`configMap`、`downwardAPI`、および投影ボリュームは、読み取り専用でマウントされるようになります。
-これまでは、システムによって自動的に元の状態に戻されることがあるこれらのボリュームに、アプリがデータを書き込めました。この変更は、セキュリティーの脆弱性[CVE-2017-1002102 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102) を修正するために必要です。
+これまでは、システムによって自動的に元の状態に戻されることがあるこれらのボリュームに、アプリがデータを書き込めました。 この変更は、セキュリティーの脆弱性[CVE-2017-1002102 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102) を修正するために必要です。
 アプリが以前の非セキュアな動作に依存している場合は、適切に変更してください。</td>
 </tr>
 <tr>
@@ -867,7 +887,7 @@ Kubernetes 1.10 に正常に更新するには、その前に、[Calico v3 へ�
 Kubernetes バージョン 1.10.8_1530、[1.11.3_1531](#ha-masters)、またはそれ以降を実行するクラスターは、高可用性 (HA) を向上させるためにクラスター・マスターの構成が更新されています。 現在のクラスターは、別々の物理ホスト上にデプロイされた Kubernetes マスター・レプリカ 3 台で構成されるようになりました。 さらに、クラスターが複数ゾーン対応ゾーンにある場合は、それらのマスターがゾーン間に分散されます。
 {: shortdesc}
 
-クラスターが HA マスター構成になっているどうかを調べるには、コンソールでクラスターのマスター URL を確認するか、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID` を実行します。マスター URL が、`https://169.xx.xx.xx:xxxxx` のような IP アドレスを含むものではなく、`https://c2.us-south.containers.cloud.ibm.com:xxxxx` のようなホスト名を含むものであれば、HA マスター構成のクラスターです。マスター・パッチの自動更新または手動の更新適用によって、HA マスター構成になることもあります。どちらの場合も、次の項目を確認し、構成を最大限に活用するようにクラスター・ネットワークをセットアップする必要があります。
+クラスターが HA マスター構成になっているどうかを調べるには、コンソールでクラスターのマスター URL を確認するか、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID` を実行します。 マスター URL が、`https://169.xx.xx.xx:xxxxx` のような IP アドレスを含むものではなく、`https://c2.us-south.containers.cloud.ibm.com:xxxxx` のようなホスト名を含むものであれば、HA マスター構成のクラスターです。 マスター・パッチの自動更新または手動の更新適用によって、HA マスター構成になることもあります。 どちらの場合も、次の項目を確認し、構成を最大限に活用するようにクラスター・ネットワークをセットアップする必要があります。
 
 * ファイアウォールまたはカスタム Calico ネットワーク・ポリシーがある場合。
 * ワーカー・ノードでホスト・ポート `2040` または `2041` を使用している場合。
@@ -890,9 +910,24 @@ HA 構成のクラスター・マスターにアクセスできるようにす�
 ポッドが現在ポート `2040` または `2041` を使用しているかどうかを確認するには、クラスターをターゲットに設定して、以下のコマンドを実行します。
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
+
+HA マスター構成が既にある場合は、以下の例のように、`kube-system` 名前空間の `ibm-master-proxy-*` の結果が表示されます。 他のポッドが返された場合は、そのポートを更新します。
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
 
 <br>
 **マスターへのクラスター内アクセス用に `kubernetes` サービスのクラスター IP またはドメインを使用する**</br>
@@ -921,7 +956,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 以下の手順では、Kubernetes ネットワーク・ポリシーを更新する方法について説明します。 Calico ネットワーク・ポリシーを更新するには、ポリシー構文を少し変更してこれらの手順を繰り返し、`calicoctl` を使用してポリシーに影響がないか検索します。
 {: note}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  クラスター・マスター IP アドレスを取得します。
     ```

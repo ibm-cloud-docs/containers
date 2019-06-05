@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -29,7 +29,7 @@ subcollection: containers
 ## IBM Cloud Block Storage Attacher 플러그인(베타) 설치
 {: #block_storage_attacher}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage Attacher 플러그인을 사용하여 클러스터의 작업자 노드에 원시, 포맷되지 않은 그리고 마운트 해제된 블록 스토리지를 연결합니다.
+{{site.data.keyword.Bluemix_notm}} Block Storage Attacher 플러그인을 사용하여 클러스터의 작업자 노드에 원시, 포맷되지 않은 그리고 마운트 해제된 블록 스토리지를 연결합니다.  
 {: shortdesc}
 
 예를 들어, [Portworx](/docs/containers?topic=containers-portworx)와 같은 소프트웨어 정의 스토리지 솔루션(SDS)를 사용하여 데이터를 저장하려고 하지만 SDS 사용에 최적화되고 추가 로컬 디스크가 있는 베어메탈 작업자 노드를 사용하려고 하지 않습니다. 비 SDS 작업자 노드에 로컬 디스크를 추가하려면 블록 스토리지 디바이스를 {{site.data.keyword.Bluemix_notm}} 인프라 계정에 수동으로 작성하고 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher를 사용하여 스토리지를 비 SDS 작업자 노드에 연결해야 합니다.
@@ -39,9 +39,9 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 플러그인의 업데이트 또는 제거 방법에 대한 지시사항을 찾으십니까? [플러그인 업데이트](#update_block_attacher) 및 [플러그인 제거](#remove_block_attacher)를 참조하십시오.
 {: tip}
 
-1.  [지시사항에 따라](/docs/containers?topic=containers-integrations#helm) 로컬 시스템에 Helm 클라이언트를 설치하고 클러스터에 서비스 계정이 있는 Helm 서버(tiller)를 설치하십시오.
+1.  [지시사항에 따라](/docs/containers?topic=containers-helm#public_helm_install) 로컬 시스템에 Helm 클라이언트를 설치하고 클러스터에 서비스 계정이 있는 Helm 서버(tiller)를 설치하십시오.
 
-2.  Tiller에 서비스 계정이 설치되어 있는지 확인하십시오.
+2.  Tiller가 서비스 계정으로 설치되어 있는지 확인하십시오.
 
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
@@ -64,7 +64,7 @@ subcollection: containers
 
 4. {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 플러그인을 설치하십시오. 플러그인을 설치하면 사전 정의된 블록 스토리지 클래스가 클러스터에 추가됩니다.
    ```
-   helm install ibm/ibm-block-storage-attacher --name block-attacher
+   helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
    {: pre}
 
@@ -144,7 +144,7 @@ subcollection: containers
 
 2. 선택사항: 최신 Helm 차트를 로컬 머신에 다운로드하십시오. 그런 다음, 패키지의 압축을 풀고 `release.md` 파일을 검토하여 최신 릴리스 정보를 찾으십시오.
    ```
-   helm fetch ibm/ibmcloud-block-storage-plugin
+   helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -230,13 +230,13 @@ subcollection: containers
     ```
     {: pre}
 
-2. `block-storage-utilities` 디렉토리로 이동하십시오.
+3. `block-storage-utilities` 디렉토리로 이동하십시오.
    ```
    cd ibmcloud-storage-utilities/block-storage-provisioner
    ```
    {: pre}
 
-3. `yamlgen.yaml` 파일을 열고 클러스터의 모든 작업자 노드에 추가할 블록 스토리지 구성을 지정하십시오.
+4. `yamlgen.yaml` 파일을 열고 클러스터의 모든 작업자 노드에 추가할 블록 스토리지 구성을 지정하십시오.
    ```
    #
    # Can only specify 'performance' OR 'endurance' and associated clause
@@ -261,7 +261,7 @@ subcollection: containers
    <tbody>
    <tr>
    <td><code>클러스터</code></td>
-   <td>원시 블록 스토리지를 추가할 클러스터의 이름을 입력하십시오.</td>
+   <td>원시 블록 스토리지를 추가할 클러스터의 이름을 입력하십시오. </td>
    </tr>
    <tr>
    <td><code>지역</code></td>
@@ -277,24 +277,23 @@ subcollection: containers
    </tr>
    <tr>
    <td><code>endurance.tier</code></td>
-   <td>`endurance` 스토리지를 프로비저닝하려면 GB당 IOPS 수를 입력하십시오. 예를 들어, `ibmc-block-bronze` 스토리지 클래스에 정의된 대로 블록 스토리지를 프로비저닝하려면 2를 입력하십시오. 자세한 정보는 [블록 스토리지 구성 결정](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)을 참조하십시오. `성능` 스토리지를 프로비저닝하려면 이 섹션을 제거하거나 각 행의 시작 부분에 `#`을 추가하여 이 섹션을 주석 처리하십시오.
-   </td>
+   <td>`endurance` 스토리지를 프로비저닝하려면 GB당 IOPS 수를 입력하십시오. 예를 들어, `ibmc-block-bronze` 스토리지 클래스에 정의된 대로 블록 스토리지를 프로비저닝하려면 2를 입력하십시오. 자세한 정보는 [블록 스토리지 구성 결정](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)을 참조하십시오. `성능` 스토리지를 프로비저닝하려면 이 섹션을 제거하거나 각 행의 시작 부분에 `#`을 추가하여 이 섹션을 주석 처리하십시오. </td>
    </tr>
    <tr>
    <td><code>size</code></td>
    <td>스토리지이 크기(GB)를 입력하십시오. 스토리지 티어에 대해 지원되는 크기를 찾으려면 [블록 스토리지 구성 결정](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)을 참조하십시오. </td>
    </tr>
    </tbody>
-   </table>
+   </table>  
 
-4. IBM Cloud 인프라(SoftLayer) 사용자 이름 및 API 키를 검색하십시오. 사용자 이름과 API 키는 클러스터에 액세스하기 위해 `mkpvyaml` 스크립트에서 사용합니다. 
+5. IBM Cloud 인프라(SoftLayer) 사용자 이름 및 API 키를 검색하십시오. 사용자 이름과 API 키는 클러스터에 액세스하기 위해 `mkpvyaml` 스크립트에서 사용합니다.
    1. [{{site.data.keyword.Bluemix_notm}} 콘솔![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/)에 로그인하십시오.
    2. 메뉴 ![메뉴 아이콘](../icons/icon_hamburger.svg "메뉴 아이콘")에서 **인프라**를 선택하십시오.
    3. 메뉴 표시줄에서 **계정** > **사용자** > **사용자 목록**을 선택하십시오.
    4. 검색할 사용자 이름 및 API 키를 찾으십시오.
    5. **생성**을 클릭하여 API 키를 생성하거나 **보기**를 클릭하여 기존 API 키를 보십시오. 인프라 사용자 이름 및 API 키를 보여주는 팝업 창이 열립니다.
 
-5. 인증 정보를 환경 변수에 저장하십시오.
+6. 인증 정보를 환경 변수에 저장하십시오.
    1. 환경 변수를 추가하십시오.
       ```
       export SL_USERNAME=<infrastructure_username>
@@ -312,7 +311,7 @@ subcollection: containers
       ```
       {: pre}
 
-6.  `mkpvyaml` 컨테이너를 빌드하고 실행하십시오. 이미지에서 컨테이너를 실행하면 `mkpvyaml.py` 스크립트가 실행됩니다. 이 스크립트는 블록 스토리지 디바이스를 클러스터의 모든 작업자 노드에 추가하고 각 작업자 노드가 블록 스토리지 디바이스에 액세스할 수 있는 권한을 부여합니다. 스크립트가 종료되면 나중에 클러스터에 지속적 볼륨을 작성하는 데 사용할 수 있는 `pv-<cluster_name>.yaml` YAML 파일이 생성됩니다.
+7.  `mkpvyaml` 컨테이너를 빌드하고 실행하십시오. 이미지에서 컨테이너를 실행하면 `mkpvyaml.py` 스크립트가 실행됩니다. 이 스크립트는 블록 스토리지 디바이스를 클러스터의 모든 작업자 노드에 추가하고 각 작업자 노드가 블록 스토리지 디바이스에 액세스할 수 있는 권한을 부여합니다. 스크립트의 끝에 클러스터에서 지속적 볼륨을 작성하기 위해 나중에 사용할 수 있는 `pv-<cluster_name>.yaml` YAML 파일이 생성됩니다. 
     1.  `mkpvyaml` 컨테이너를 빌드하십시오.
         ```
         docker build -t mkpvyaml .
@@ -345,7 +344,7 @@ subcollection: containers
         {: screen}
     2.  컨테이너를 실행하여 `mkpvyaml.py` 스크립트를 실행하십시오.
         ```
-        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
+        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME mkpvyaml
         ```
         {: pre}
 
@@ -413,7 +412,7 @@ subcollection: containers
    ```
    {: pre}
 
-2. 비 SDS 작업자 노드에 추가하려는 블록 스토리지 디바이스의 유형, 크기 및 IOPS의 수를 선택하려면 [블록 스토리지 구성 결정](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)의 3단계와 4단계를 검토하십시오.
+2. 비 SDS 작업자 노드에 추가하려는 블록 스토리지 디바이스의 유형, 크기 및 IOPS의 수를 선택하려면 [블록 스토리지 구성 결정](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)의 3단계와 4단계를 검토하십시오.    
 
 3. 비 SDS 작업자 노드가 있는 동일한 구역에 블록 스토리지 디바이스를 작성하십시오.
 
@@ -438,7 +437,7 @@ subcollection: containers
    출력 예:
    ```
    id         username          datacenter   storage_type                capacity_gb   bytes_used   ip_addr         lunId   active_transactions
-   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0
+   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0   
    ```
    {: screen}
 
@@ -464,7 +463,7 @@ subcollection: containers
    ```
    {: screen}
 
-6. 비 SDS 작업자 노드에 권한 부여하여 블록 스토리지 디바이스에 액세스하십시오. `<volume_ID>`를 이전에 검색한 블록 스토리지 디바이스의 볼륨 ID로 바꾸고 `<private_worker_IP>`는 디바이스를 연결할 비 SDS 작업자 노드의 사설 IP 주소로 바꾸십시오.
+6. 비 SDS 작업자 노드에 권한 부여하여 블록 스토리지 디바이스에 액세스하십시오. `<volume_ID>`를 이전에 검색한 블록 스토리지 디바이스의 볼륨 ID로 대체하고 `<private_worker_IP>`는 디바이스를 연결할 비 SDS 작업자 노드의 사설 IP 주소로 대체하십시오.
 
    ```
    ibmcloud sl block access-authorize <volume_ID> -p <private_worker_IP>
@@ -486,7 +485,7 @@ subcollection: containers
    출력 예:
    ```
    ID          name                 type   private_ip_address   source_subnet   host_iqn                                      username   password           allowed_host_id
-   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581
+   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581   
    ```
    {: screen}
 
@@ -503,10 +502,10 @@ subcollection: containers
 
 **시작하기 전에**:
 - 비SDS 작업자 노드에 원시, 포맷되지 않고, 마운트 해제된 블록 스토리지를 [자동](#automatic_block) 또는 [수동](#manual_block)으로 작성했는지 확인하십시오.
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **비 SDS 작업자 노드에 원시 블록 스토리지를 연결하려면 다음을 수행하십시오**.
-1. PV 작성을 준비하십시오.
+1. PV 작성을 준비하십시오.  
    - **`mkpvyaml` 컨테이너를 사용한 경우:**
      1. `pv-<cluster_name>.yaml` 파일을 여십시오.
         ```
@@ -555,12 +554,12 @@ subcollection: containers
         </thead>
         <tbody>
       	<tr>
-      	<td><code>metadata.name</code></td>
+          <td><code>metadata.name</code></td>
       	<td>PV의 이름을 입력하십시오.</td>
       	</tr>
         <tr>
         <td><code>ibm.io/iqn</code></td>
-        <td>이전에 검색한 IQN 호스트 이름을 입력하십시오.</td>
+        <td>이전에 검색한 IQN 호스트 이름을 입력하십시오. </td>
         </tr>
         <tr>
         <td><code>ibm.io/username</code></td>
@@ -572,7 +571,7 @@ subcollection: containers
         </tr>
         <tr>
         <td><code>ibm.io/targetip</code></td>
-        <td>이전에 검색한 대상 IP를 입력하십시오.</td>
+        <td>이전에 검색한 대상 IP를 입력하십시오. </td>
         </tr>
         <tr>
         <td><code>ibm.io/lunid</code></td>
@@ -583,7 +582,7 @@ subcollection: containers
         <td>블록 스토리지 디바이스를 연결할 작업자 노드의 사설 IP 주소를 입력하고 이전에 블록 스토리지 디바이스에 액세스할 수 있도록 권한 부여한 작업자 노드의 사설 IP 주소를 입력하십시오. </td>
         </tr>
         <tr>
-        <td><code>ibm.io/volID</code></td>
+          <td><code>ibm.io/volID</code></td>
         <td>이전에 검색한 블록 스토리지 볼륨의 ID를 입력하십시오. </td>
         </tr>
         <tr>

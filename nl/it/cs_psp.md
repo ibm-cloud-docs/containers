@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -28,10 +28,10 @@ subcollection: containers
 Con le [politiche di sicurezza del pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), puoi
 configurare le politiche per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.containerlong}}.
 
-**Perché devo impostare le politiche di sicurezza?**</br>
+**Come imposto le politiche di sicurezza dei pod?**</br>
 Come amministratore cluster, vuoi controllare cosa succede nel tuo cluster, specialmente le azioni che influiscono sulla sicurezza o sulla disponibilità del cluster. Le politiche di sicurezza del pod ti consentono di controllare l'uso di contenitori privilegiati, di spazi dei nomi root, di reti host e di porte, di tipi di volume, di file system host, di autorizzazioni Linux come ID di gruppo o di sola lettura e altro.
 
-Con il controller di ammissione `PodSecurityPolicy`, non potrai creare alcun pod fino a quando non [autorizzerai le politiche](#customize_psp). L'impostazione delle politiche di sicurezza del pod può avere effetti secondari involontari, assicurati quindi di eseguire il test di una distribuzione una volta modificata la politica. Per distribuire le applicazioni, tutti gli account utente e di servizio devono essere autorizzati dalle politiche di sicurezza del pod necessarie per distribuire i pod. Ad esempio, se installi le applicazioni utilizzando [Helm](/docs/containers?topic=containers-integrations#helm_links), il componente tiller di Helm crea i pod e quindi devi disporre della corretta autorizzazione della politica di sicurezza del pod.
+Con il controller di ammissione `PodSecurityPolicy`, non potrai creare alcun pod fino a quando non [autorizzerai le politiche](#customize_psp). L'impostazione delle politiche di sicurezza del pod può avere effetti secondari involontari, assicurati quindi di eseguire il test di una distribuzione una volta modificata la politica. Per distribuire le applicazioni, tutti gli account utente e di servizio devono essere autorizzati dalle politiche di sicurezza del pod necessarie per distribuire i pod. Ad esempio, se installi le applicazioni utilizzando [Helm](/docs/containers?topic=containers-helm#public_helm_install), il componente tiller di Helm crea i pod e quindi devi disporre della corretta autorizzazione della politica di sicurezza del pod.
 
 Stai provando a controllare quali utenti hanno accesso a {{site.data.keyword.containerlong_notm}}? Vedi [Assegnazione dell'accesso al cluster](/docs/containers?topic=containers-users#users) per impostare le autorizzazioni {{site.data.keyword.Bluemix_notm}} IAM e dell'infrastruttura.
 {: tip}
@@ -73,7 +73,7 @@ Puoi modificare questi ruoli RBAC per rimuovere o aggiungere gli amministratori,
 Prima di iniziare:
 *  [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 *  Comprendi l'utilizzo dei ruoli RBAC. Per ulteriori informazioni, vedi [Autorizzazione di utenti con ruoli personalizzati di RBAC Kubernetes](/docs/containers?topic=containers-users#rbac) o la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-* Assicurati di disporre del [ruolo di accesso al servizio {{site.data.keyword.Bluemix_notm}} IAM **Gestore**](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi.
+* Assicurati di disporre del [ruolo di accesso del servizio {{site.data.keyword.Bluemix_notm}} IAM **Gestore**](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi.
 
 Quando modifichi la configurazione predefinita, puoi impedire l'esecuzione di azioni cluster importanti, ad esempio le distribuzioni pod o gli aggiornamenti cluster. Verifica le tue modifiche in un cluster non di produzione che non viene utilizzato dagli altri team.
 {: important}
@@ -130,7 +130,7 @@ Quando modifichi la configurazione predefinita, puoi impedire l'esecuzione di az
 
     *   **Account di servizio**: potresti voler autorizzare gli account di servizio in modo che le distribuzioni possano verificarsi solo in specifici spazi dei nomi. Ad esempio, se dedichi la politica per consentire azioni all'interno dello spazio dei nomi `kube-system`, possono verificarsi molte azioni importanti come ad esempio gli aggiornamenti cluster. Tuttavia, le azioni negli altri spazi dei nomi non sono più autorizzate.
 
-        Per dedicare la politica per consentire azioni in uno specifico spazio dei nomi, modifica `system:serviceaccounts` in `system:serviceaccount:<namespace>`.
+        Per delimitare l'ambito della politica per consentire le azioni in uno specifico spazio dei nomi, modifica `system:serviceaccounts` in `system:serviceaccount:<namespace>`.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
           kind: Group
@@ -181,8 +181,8 @@ Quando modifichi la configurazione predefinita, puoi impedire l'esecuzione di az
     {: pre}
 
 </br>
-**Per creare la tua politica di sicurezza del pod**:</br>
-Per creare la tua risorsa della politica di sicurezza del pod e autorizzare gli utenti con RBAC, esamina la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
+**Per creare una tua politica di sicurezza del pod**:</br>
+per creare una tua risorsa di politica di sicurezza del pod e autorizzare gli utenti con RBAC, esamina la [documentazione di Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
 
 Assicurati di aver modificato le politiche esistenti in modo che la nuova politica che hai creato non vada in conflitto con quella esistente. Ad esempio, la politica esistente consente agli utenti di creare e aggiornare pod privilegiati. Se crei una politica che non consente agli utenti di creare o aggiornare pod privilegiati, il conflitto tra la nuova politica e quella esistente potrebbe causare risultati imprevisti.
 

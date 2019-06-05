@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -75,6 +75,7 @@ subcollection: containers
 **統合されたオープン・ソース・テクノロジー**
 
 - [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/)
+- [Kubernetes CLI の資料 (`kubectl`) ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubectl.docs.kubernetes.io/)
 - [Knative の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/knative/docs)
 - [Docker の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/engine/)
 - Kubernetes パッケージ管理のための <a href="https://docs.helm.sh/helm/" target="_blank">Helm の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a>
@@ -96,7 +97,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [{{site.data.keyword.registryshort_notm}} の資料](/docs/services/Registry?topic=registry-index)
+- [{{site.data.keyword.registryshort_notm}} の資料](/docs/services/Registry?topic=registry-getting-started)
 - [{{site.data.keyword.registryshort_notm}}REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://{DomainName}/apidocs/container-registry)
 - [脆弱性アドバイザー REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://{DomainName}/apidocs/container-registry/va)
 

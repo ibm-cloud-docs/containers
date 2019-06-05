@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 重要技術：    
 * [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
-* [使用 {{site.data.keyword.cos_full_notm}} 存取公用資料](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)
+* [使用 {{site.data.keyword.cos_full_notm}} 存取公用資料](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
 * [隨插即用 IBM Cloud Analytics 服務](https://www.ibm.com/cloud/analytics)
 
 **環境定義：政府改善與結合公用-專用資料之社群「開發人員」的協同作業及速度**

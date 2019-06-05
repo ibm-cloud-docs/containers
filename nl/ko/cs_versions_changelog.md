@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -47,6 +47,164 @@ subcollection: containers
 
 ## 버전 1.13 변경 로그
 {: #113_changelog}
+
+### 2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.13.5_1518에 대한 변경 로그
+{: #1135_1518}
+
+다음 표는 작업자 노드 수정팩 1.13.5_1518에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.13.5_1517 이후에 작성된 변경사항">
+<caption>버전 1.13.5_1517 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 패키지</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>[CVE-2019-3842 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html)에 대한 `systemd`를 포함하여 설치된 Ubuntu 패키지를 업데이트합니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 8일에 릴리스된 1.13.5_1517에 대한 변경 로그
+{: #1135_1517}
+
+다음 표는 패치 1.13.5_1517에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.13.4_1516 이후에 작성된 변경사항">
+<caption>버전 1.13.4_1516 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.4.0</td>
+<td>v3.4.4</td>
+<td>[Calico 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.4/releases/#v344)를 참조하십시오. 업데이트는 [CVE-2019-9946 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946)을 해결합니다.</td>
+</tr>
+<tr>
+<td>클러스터 마스터 HA 프록시</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>[HAProxy 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.haproxy.org/download/1.9/src/CHANGELOG)를 참조하십시오. 업데이트는 [CVE-2018-0732 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) 및 [CVE-2019-1559 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)를 해결합니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.4-86</td>
+<td>v1.13.5-107</td>
+<td>Kubernetes 1.13.5 및 Calico 3.4.4 릴리스를 지원하도록 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.4</td>
+<td>v1.13.5</td>
+<td>[Kubernetes 릴리스 정보![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.5)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>[CVE-2017-12447 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 커널</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>[CVE-2019-9213 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 커널</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>[CVE-2019-9213 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 1일에 릴리스된 작업자 노드 수정팩 1.13.4_1516에 대한 변경 로그
+{: #1134_1516}
+
+다음 표는 작업자 노드 수정팩 1.13.4_1516에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.13.4_1515 이후에 작성된 변경사항">
+<caption>버전 1.13.4_1515 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>작업자 노드 리소스 활용</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 3월 26일에 릴리스된 마스터 수정팩 1.13.4_1515에 대한 변경 로그
+{: #1134_1515}
+
+다음 표는 마스터 수정팩 1.13.4_1515에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.13.4_1513 이후에 작성된 변경사항">
+<caption>버전 1.13.4_1513 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 DNS 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>업데이트가 클러스터 DNS 제공자에서 CoreDNS로 전환되지 않도록 Kubernetes 버전 1.11에서 업데이트 프로세스를 수정했습니다. 업데이트 후 계속해서 [클러스터 DNS 제공자로 CoreDNS를 설정](/docs/containers?topic=containers-cluster_dns#set_coredns)할 수 있습니다. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 플러그인</td>
+<td>345</td>
+<td>346</td>
+<td>[CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>키 관리 서비스 제공자</td>
+<td>166</td>
+<td>167</td>
+<td>Kubernetes 시크릿을 관리하기 위해 중간 `context deadline exceeded` 및 `timeout` 오류를 수정합니다. 또한 기존 Kubernetes 시크릿이 암호되지 않은 상태로 유지될 수 있는 키 관리 서비스에 대한 업데이트를 수정합니다. 업데이트에는 [CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)에 대한 수정사항이 포함되어 있습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} 제공자의 로드 밸런서 및 로드 밸런서 모니터</td>
+<td>143</td>
+<td>146</td>
+<td>[CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
 
 ### 2019년 3월 20일에 릴리스된 1.13.4_1513에 대한 변경 로그
 {: #1134_1513}
@@ -117,7 +275,7 @@ subcollection: containers
 <td>신뢰할 수 있는 컴퓨팅 에이전트</td>
 <td>5f3d092</td>
 <td>a02f765</td>
-<td>[CVE-2018-10779 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![외부 링크 아이콘](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 및 [CVE-2019-7663 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)의 이미지가 업데이트되었습니다.</td>
+<td>[CVE-2018-10779 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 및 [CVE-2019-7663 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)의 이미지가 업데이트되었습니다.</td>
 </tr>
 </tbody>
 </table>
@@ -391,6 +549,159 @@ subcollection: containers
 버전 1.12 변경 로그를 검토하십시오.
 {: shortdesc}
 
+### 2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.12.7_1549에 대한 변경 로그
+{: #1127_1549}
+
+다음 표는 작업자 노드 수정팩 1.12.7_1549에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.12.7_1548 이후에 작성된 변경사항">
+<caption>버전 1.12.7_1548 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 패키지</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>[CVE-2019-3842 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html)에 대한 `systemd`를 포함하여 설치된 Ubuntu 패키지를 업데이트합니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 8일에 릴리스된 1.12.7_1548에 대한 변경 로그
+{: #1127_1548}
+
+다음 표는 패치 1.12.7_1548에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.12.6_1547 이후에 작성된 변경사항">
+<caption>버전 1.12.6_1547 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.3.1</td>
+<td>v3.3.6</td>
+<td>[Calico 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.3/releases/#v336)를 참조하십시오. 업데이트는 [CVE-2019-9946 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946)을 해결합니다.</td>
+</tr>
+<tr>
+<td>클러스터 마스터 HA 프록시</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>[HAProxy 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.haproxy.org/download/1.9/src/CHANGELOG)를 참조하십시오. 업데이트는 [CVE-2018-0732 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) 및 [CVE-2019-1559 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)를 해결합니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.6-157</td>
+<td>v1.12.7-180</td>
+<td>Kubernetes 1.12.7 및 Calico 3.3.6 릴리스를 지원하도록 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.6</td>
+<td>v1.12.7</td>
+<td>[Kubernetes 릴리스 정보![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.7)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>[CVE-2017-12447 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 커널</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>[CVE-2019-9213 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 커널</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>[CVE-2019-9213 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 1일에 릴리스된 작업자 노드 수정팩 1.12.6_154에 대한 변경 로그
+{: #1126_1547}
+
+다음 표는 작업자 노드 수정팩 1.12.6_1547에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.12.6_1546 이후에 작성된 변경사항">
+<caption>버전 1.12.6_1546 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>작업자 노드 리소스 활용</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+</tr>
+</tbody>
+</table>
+
+
+### 2019년 3월 26일에 릴리스된 마스터 수정팩 1.12.6_1546에 대한 변경 로그
+{: #1126_1546}
+
+다음 표는 마스터 수정팩 1.12.6_1546에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.12.6_1544 이후에 작성된 변경사항">
+<caption>버전 1.12.6_1544 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 플러그인</td>
+<td>345</td>
+<td>346</td>
+<td>[CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>키 관리 서비스 제공자</td>
+<td>166</td>
+<td>167</td>
+<td>Kubernetes 시크릿을 관리하기 위해 중간 `context deadline exceeded` 및 `timeout` 오류를 수정합니다. 또한 기존 Kubernetes 시크릿이 암호되지 않은 상태로 유지될 수 있는 키 관리 서비스에 대한 업데이트를 수정합니다. 업데이트에는 [CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)에 대한 수정사항이 포함되어 있습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} 제공자의 로드 밸런서 및 로드 밸런서 모니터</td>
+<td>143</td>
+<td>146</td>
+<td>[CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
 ### 2019년 3월 20일에 릴리스된 1.12.6_1544에 대한 변경 로그
 {: #1126_1544}
 
@@ -454,7 +765,7 @@ subcollection: containers
 <td>신뢰할 수 있는 컴퓨팅 에이전트</td>
 <td>5f3d092</td>
 <td>a02f765</td>
-<td>[CVE-2018-10779 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![외부 링크 아이콘](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 및 [CVE-2019-7663 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)의 이미지가 업데이트되었습니다.</td>
+<td>[CVE-2018-10779 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 및 [CVE-2019-7663 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)의 이미지가 업데이트되었습니다.</td>
 </tr>
 </tbody>
 </table>
@@ -598,7 +909,7 @@ subcollection: containers
 <td>Kubernetes `kubelet` 구성</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>중요한 정적 팟(pod) 제거를 방지하기 위해 `ExperimentalCriticalPodAnnotation` 기능 게이트가 사용으로 설정되었습니다. </td>
+<td>중요한 정적 팟(pod) 제거를 방지하기 위해 `ExperimentalCriticalPodAnnotation` 기능 게이트가 사용으로 설정되었습니다.</td>
 </tr>
 </tbody>
 </table>
@@ -1033,7 +1344,7 @@ subcollection: containers
 <td>v1.12.2-68</td>
 <td>Kubernetes 1.12 릴리스를 지원하도록 업데이트되었습니다. 추가 변경사항에는 다음이 포함됩니다.
 <ul><li>로드 밸런서 팟(Pod)(`ibm-system` 네임스페이스의 `ibm-cloud-provider-ip-*`)이 이제 CPU 및 메모리 리소스 요청을 설정합니다.</li>
-<li>로드 밸런서 서비스가 배치되는 VLAN을 지정하기 위해 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 어노테이션이 추가되었습니다. 클러스터에서 사용 가능한 VLAN을 보려면 다음을 실행하십시오. `ibmcloud ks vlans --zone <zone>`.</li>
+<li>로드 밸런서 서비스가 배치되는 VLAN을 지정하기 위해 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 어노테이션이 추가되었습니다. 클러스터에서 사용 가능한 VLAN을 보려면 `ibmcloud ks vlans --zone <zone>`을 실행하십시오.</li>
 <li>새 [로드 밸런서 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs)이 베타로서 사용 가능합니다.</li></ul></td>
 </tr>
 <tr>
@@ -1049,6 +1360,164 @@ subcollection: containers
 {: #111_changelog}
 
 버전 1.11 변경 로그를 검토하십시오.
+
+### 2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.11.9_1555에 대한 변경 로그
+{: #1119_1555}
+
+다음 표는 작업자 노드 수정팩 1.11.9_1555에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.11.9_1554 이후에 작성된 변경사항">
+<caption>1.11.9_1554 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 패키지</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>[CVE-2019-3842 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html)에 대한 `systemd`를 포함하여 설치된 Ubuntu 패키지를 업데이트합니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 8일에 릴리스된 1.11.9_1554에 대한 변경 로그
+{: #1119_1554}
+
+다음 표는 패치 1.11.9_1554에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.11.8_1553 이후에 작성된 변경사항">
+<caption>버전 1.11.8_1553 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.3.1</td>
+<td>v3.3.6</td>
+<td>[Calico 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.3/releases/#v336)를 참조하십시오. 업데이트는 [CVE-2019-9946 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946)을 해결합니다.</td>
+</tr>
+<tr>
+<td>클러스터 마스터 HA 프록시</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>[HAProxy 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.haproxy.org/download/1.9/src/CHANGELOG)를 참조하십시오. 업데이트는 [CVE-2018-0732 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) 및 [CVE-2019-1559 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)를 해결합니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.8-219</td>
+<td>v1.11.9-241</td>
+<td>Kubernetes 1.11.9 및 Calico 3.3.6 릴리스를 지원하도록 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.8</td>
+<td>v1.11.9</td>
+<td>[Kubernetes 릴리스 정보![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.9)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.10</td>
+<td>1.14.13</td>
+<td>[Kubernetes DNS 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/dns/releases/tag/1.14.13)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>[CVE-2017-12447 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 커널</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>[CVE-2019-9213 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 커널</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>[CVE-2019-9213 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 1일에 릴리스된 작업자 노드 수정팩 1.11.8_1553에 대한 변경 로그
+{: #1118_1553}
+
+다음 표는 작업자 노드 수정팩 1.11.8_1553에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.11.8_1552 이후에 작성된 변경사항">
+<caption>버전 1.11.8_1552 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>작업자 노드 리소스 활용</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 3월 26일에 릴리스된 마스터 수정팩 1.11.8_1552에 대한 변경 로그
+{: #1118_1552}
+
+다음 표는 마스터 수정팩 1.11.8_1552에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.11.8_1550 이후에 작성된 변경사항">
+<caption>버전 1.11.8_1550 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 플러그인</td>
+<td>345</td>
+<td>346</td>
+<td>[CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>키 관리 서비스 제공자</td>
+<td>166</td>
+<td>167</td>
+<td>Kubernetes 시크릿을 관리하기 위해 중간 `context deadline exceeded` 및 `timeout` 오류를 수정합니다. 또한 기존 Kubernetes 시크릿이 암호되지 않은 상태로 유지될 수 있는 키 관리 서비스에 대한 업데이트를 수정합니다. 업데이트에는 [CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)에 대한 수정사항이 포함되어 있습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} 제공자의 로드 밸런서 및 로드 밸런서 모니터</td>
+<td>143</td>
+<td>146</td>
+<td>[CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
 
 ### 2019년 3월 20일에 릴리스된 1.11.8_1550에 대한 변경 로그
 {: #1118_1550}
@@ -1101,7 +1570,7 @@ subcollection: containers
 <td>신뢰할 수 있는 컴퓨팅 에이전트</td>
 <td>5f3d092</td>
 <td>a02f765</td>
-<td>[CVE-2018-10779 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![외부 링크 아이콘](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 및 [CVE-2019-7663 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)의 이미지가 업데이트되었습니다.</td>
+<td>[CVE-2018-10779 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 및 [CVE-2019-7663 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)의 이미지가 업데이트되었습니다.</td>
 </tr>
 </tbody>
 </table>
@@ -1245,7 +1714,7 @@ subcollection: containers
 <td>Kubernetes `kubelet` 구성</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>중요한 정적 팟(pod) 제거를 방지하기 위해 `ExperimentalCriticalPodAnnotation` 기능 게이트가 사용으로 설정되었습니다. </td>
+<td>중요한 정적 팟(pod) 제거를 방지하기 위해 `ExperimentalCriticalPodAnnotation` 기능 게이트가 사용으로 설정되었습니다.</td>
 </tr>
 </tbody>
 </table>
@@ -1283,7 +1752,7 @@ subcollection: containers
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.11.6-180</td>
 <td>v1.11.7-198</td>
-<td>Kubernetes 1.11.7 릴리스를 지원하도록 업데이트되었습니다.또한 `calicoctl` 버전이 3.3.1로 업데이트되었습니다. 작업자 노드 상태 변경에 대해 버전 2.0로드 밸런서에 대한 불필요한 구성 업데이트가 해결되었습니다.</td>
+<td>Kubernetes 1.11.7 릴리스를 지원하도록 업데이트되었습니다. 또한 `calicoctl` 버전이 3.3.1로 업데이트되었습니다. 작업자 노드 상태 변경에 대해 버전 2.0로드 밸런서에 대한 불필요한 구성 업데이트가 해결되었습니다.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} File Storage 플러그인</td>
@@ -1625,7 +2094,7 @@ subcollection: containers
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.11.3-100</td>
 <td>v1.11.3-127</td>
-<td>로드 밸런서 서비스가 배치되는 VLAN을 지정하기 위해 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 어노테이션이 추가되었습니다. 클러스터에서 사용 가능한 VLAN을 보려면 다음을 실행하십시오. `ibmcloud ks vlans --zone <zone>`.</td>
+<td>로드 밸런서 서비스가 배치되는 VLAN을 지정하기 위해 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 어노테이션이 추가되었습니다. 클러스터에서 사용 가능한 VLAN을 보려면 `ibmcloud ks vlans --zone <zone>`을 실행하십시오.</td>
 </tr>
 <tr>
 <td>TPM 사용 커널</td>
@@ -1810,7 +2279,7 @@ subcollection: containers
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
 <td>IBM 파일 스토리지 클래스에서 중복 `reclaimPolicy` 매개변수가 제거되었습니다.<br><br>
-또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하면서 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오.</td>
+또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오. </td>
 </tr>
 </tbody>
 </table>
@@ -1843,7 +2312,7 @@ subcollection: containers
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
 <td>작업자 노드에서 제공하는 기본값을 사용하기 위해 IBM 파일 스토리지 클래스의 `mountOptions`가 제거되었습니다.<br><br>
-또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 `ibmc-file-bronze`로 유지됩니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하면서 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오.</td>
+또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 `ibmc-file-bronze`로 유지됩니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오. </td>
 </tr>
 <tr>
 <td>키 관리 서비스 제공자</td>
@@ -2051,8 +2520,149 @@ subcollection: containers
 버전 1.10 변경 로그를 검토하십시오.
 {: shortdesc}
 
-Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 4월 30일(임시)부터 지원되지 않습니다. 각 Kubernetes 버전 업데이트의 [잠재적인 영향을 검토](/docs/containers?topic=containers-cs_versions#cs_versions)한 후에 버전 1.11 이상으로 즉시 [클러스터를 업데이트](/docs/containers?topic=containers-update#update)하십시오.
+Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(임시)부터 지원되지 않습니다. 각 Kubernetes 버전 업데이트의 [잠재적인 영향을 검토](/docs/containers?topic=containers-cs_versions#cs_versions)한 후에 버전 1.11 이상으로 즉시 [클러스터를 업데이트](/docs/containers?topic=containers-update#update)하십시오.
 {: deprecated}
+
+### 2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.10.13_1556 대한 변경 로그
+{: #11013_1556}
+
+다음 표는 작업자 노드 수정팩 1.10.13_1556에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.10.13_1555 이후에 작성된 변경사항">
+<caption>1.10.13_1555 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 패키지</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>[CVE-2019-3842 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html)에 대한 `systemd`를 포함하여 설치된 Ubuntu 패키지를 업데이트합니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 8일에 릴리스된 1.10.13_1555에 대한 변경 로그
+{: #11013_1555}
+
+다음 표는 패치 1.10.13_155에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.10.13_1554 이후에 작성된 변경사항">
+<caption>버전 1.10.13_1554 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 마스터 HA 프록시</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>[HAProxy 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.haproxy.org/download/1.9/src/CHANGELOG)를 참조하십시오. 업데이트는 [CVE-2018-0732 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) 및 [CVE-2019-1559 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559)를 해결합니다.</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.10</td>
+<td>1.14.13</td>
+<td>[Kubernetes DNS 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/dns/releases/tag/1.14.13)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>[CVE-2017-12447 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 커널</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>[CVE-2019-9213 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 커널</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>[CVE-2019-9213 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 1일에 릴리스된 작업자 노드 수정팩 1.10.13_1554에 대한 변경 로그
+{: #11013_1554}
+
+다음 표는 작업자 노드 수정팩 1.10.13_1554에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.10.13_1553 이후에 작성된 변경사항">
+<caption>버전 1.10.13_1553 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>작업자 노드 리소스 활용</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+</tr>
+</tbody>
+</table>
+
+
+### 2019년 3월 26일에 릴리스된 마스터 수정팩 1.10.13_1553에 대한 변경 로그
+{: #11118_1553}
+
+다음 표는 마스터 수정팩 1.10.13_1553에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.10.13_1551 이후에 작성된 변경사항">
+<caption>버전 1.10.13_1551 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage 플러그인</td>
+<td>345</td>
+<td>346</td>
+<td>[CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>키 관리 서비스 제공자</td>
+<td>166</td>
+<td>167</td>
+<td>Kubernetes 시크릿을 관리하기 위해 중간 `context deadline exceeded` 및 `timeout` 오류를 수정합니다. 또한 기존 Kubernetes 시크릿이 암호되지 않은 상태로 유지될 수 있는 키 관리 서비스에 대한 업데이트를 수정합니다. 업데이트에는 [CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)에 대한 수정사항이 포함되어 있습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} 제공자의 로드 밸런서 및 로드 밸런서 모니터</td>
+<td>143</td>
+<td>146</td>
+<td>[CVE-2019-9741 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
 
 ### 2019년 3월 20일에 릴리스된 1.10.13_1551에 대한 변경 로그
 {: #11013_1551}
@@ -2105,7 +2715,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 4월 30일(�
 <td>신뢰할 수 있는 컴퓨팅 에이전트</td>
 <td>5f3d092</td>
 <td>a02f765</td>
-<td>[CVE-2018-10779 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![외부 링크 아이콘](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 및 [CVE-2019-7663 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)의 이미지가 업데이트되었습니다.</td>
+<td>[CVE-2018-10779 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128) 및 [CVE-2019-7663 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663)의 이미지가 업데이트되었습니다.</td>
 </tr>
 </tbody>
 </table>
@@ -2237,7 +2847,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 4월 30일(�
 <td>Kubernetes `kubelet` 구성</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>중요한 정적 팟(pod) 제거를 방지하기 위해 `ExperimentalCriticalPodAnnotation` 기능 게이트가 사용으로 설정되었습니다. </td>
+<td>중요한 정적 팟(pod) 제거를 방지하기 위해 `ExperimentalCriticalPodAnnotation` 기능 게이트가 사용으로 설정되었습니다.</td>
 </tr>
 </tbody>
 </table>
@@ -2596,7 +3206,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 4월 30일(�
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.10.8-172</td>
 <td>v1.10.8-197</td>
-<td>로드 밸런서 서비스가 배치되는 VLAN을 지정하기 위해 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 어노테이션이 추가되었습니다. 클러스터에서 사용 가능한 VLAN을 보려면 다음을 실행하십시오. `ibmcloud ks vlans --zone <zone>`.</td>
+<td>로드 밸런서 서비스가 배치되는 VLAN을 지정하기 위해 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 어노테이션이 추가되었습니다. 클러스터에서 사용 가능한 VLAN을 보려면 `ibmcloud ks vlans --zone <zone>`을 실행하십시오.</td>
 </tr>
 <tr>
 <td>TPM 사용 커널</td>
@@ -2744,7 +3354,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 4월 30일(�
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
 <td>작업자 노드에서 제공하는 기본값을 사용하기 위해 IBM 파일 스토리지 클래스의 `mountOptions`가 제거되었습니다. IBM 파일 스토리지 클래스에서 중복 `reclaimPolicy` 매개변수가 제거되었습니다.<br><br>
-또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하면서 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오.</td>
+또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오. </td>
 </tr>
 </tbody>
 </table>
@@ -3474,7 +4084,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 4월 30일(�
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
 <td>작업자 노드에서 제공하는 기본값을 사용하기 위해 IBM 파일 스토리지 클래스의 `mountOptions`가 제거되었습니다. IBM 파일 스토리지 클래스에서 중복 `reclaimPolicy` 매개변수가 제거되었습니다.<br><br>
-또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하면서 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오.</td>
+또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오. </td>
 </tr>
 </tbody>
 </table>

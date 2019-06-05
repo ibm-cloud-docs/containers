@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ subcollection: containers
 关键技术：    
 * [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
-* [通过 {{site.data.keyword.cos_full_notm}} 提供对公共数据的访问](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)
+* [通过 {{site.data.keyword.cos_full_notm}} 提供对公共数据的访问](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
 * [即插即用的 IBM Cloud Analytics 服务](https://www.ibm.com/cloud/analytics)
 
 **背景：政府通过组合使用公共/专用数据的社区开发者来改进协作并加快速度**

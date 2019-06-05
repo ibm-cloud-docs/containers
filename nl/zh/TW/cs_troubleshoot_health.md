@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -70,7 +70,7 @@ subcollection: containers
   </tr>
   <tr>
     <td>如果您在建立叢集時指定了空間，則帳戶擁有者對該空間沒有「管理員」、「開發人員」或「審核員」許可權。</td>
-      <td>若要變更帳戶擁有者的存取權，請執行下列動作：<ol><li>若要找出叢集的帳戶擁有者是誰，請執行 <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>。</li>
+      <td>若要變更帳戶擁有者的存取權，請執行下列動作：<ol><li>若要找出叢集的帳戶擁有者是誰，請執行 <code>ibmcloud ks api-key-info</code>。</li>
       <li>若要授與該帳戶擁有者對空間的「管理員」、「開發人員」或「審核員」等 {{site.data.keyword.containerlong_notm}} 存取許可權，請參閱<a href="/docs/containers?topic=containers-users">管理叢集存取</a>。</li>
       <li>若要在許可權變更之後重新整理記載記號，請執行 <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>。</li></ol></td>
     </tr>
@@ -83,7 +83,7 @@ subcollection: containers
 
 若要測試您在疑難排解期間所做的變更，可以將 *Noisy*（這是可以產生數個日誌事件的範例 Pod）部署至叢集裡的工作者節點。
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 建立 `deploy-noisy.yaml` 配置檔。
     ```
@@ -108,10 +108,10 @@ subcollection: containers
     {:pre}
 
 3. 幾分鐘之後，您可以在 Kibana 儀表板中檢視日誌。若要存取 Kibana 儀表板，請移至下列其中一個 URL，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集時指定了空間，請改為移至該空間。
-    - 美國南部及美國東部：https://logging.ng.bluemix.net
-    - 英國南部：https://logging.eu-gb.bluemix.net
-    - 歐盟中部：https://logging.eu-fra.bluemix.net
-    - 亞太地區南部：https://logging.au-syd.bluemix.net
+    - 美國南部及美國東部：`https://logging.ng.bluemix.net`
+    - 英國南部：`https://logging.eu-gb.bluemix.net`
+    - 歐盟中部：`https://logging.eu-fra.bluemix.net`
+    - 亞太地區南部：`https://logging.au-syd.bluemix.net`
 
 <br />
 

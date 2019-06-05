@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,9 @@ subcollection: containers
 * 在企业网络策略阻止通过代理或防火墙访问公用因特网端点时从本地系统[运行 `calicoctl` 命令](#firewall_calicoctl)。
 * 为工作程序节点设置防火墙或在 IBM Cloud infrastructure (SoftLayer) 帐户中定制防火墙设置时，[允许 Kubernetes 主节点与工作程序节点之间进行通信](#firewall_outbound)。
 * [允许集群通过专用网络上的防火墙访问资源](#firewall_private)。
+* [允许集群在 Calico 网络策略阻止工作程序节点流出流量时访问资源](#firewall_calico_egress)。
 * [从集群外部访问 NodePort 服务、LoadBalancer 服务或 Ingress](#firewall_inbound)。
+* [允许集群访问在 {{site.data.keyword.Bluemix_notm}} 内部或外部或者内部部署中运行且受防火墙保护的服务](#whitelist_workers)。
 
 <br />
 
@@ -98,13 +100,6 @@ subcollection: containers
 2. 如果集群位于非 `default` 资源组中，请将该资源组设定为目标。要查看每个集群所属的资源组，请运行 `ibmcloud ks clusters`。**注**：对于该资源组，您必须至少具有[**查看者**角色](/docs/containers?topic=containers-users#platform)。
    ```
    ibmcloud target -g <resource_group_name>
-   ```
-   {: pre}
-
-3. 选择集群所在的区域。
-
-   ```
-   ibmcloud ks region-set
    ```
    {: pre}
 
@@ -219,10 +214,10 @@ subcollection: containers
 <br />
 
 
-## 允许集群访问基础架构资源和其他服务
+## 允许集群通过公共防火墙访问基础架构资源和其他服务
 {: #firewall_outbound}
 
-支持集群从防火墙后访问基础架构资源和服务，例如 {{site.data.keyword.containerlong_notm}} 区域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud Infrastructure (SoftLayer) 专用 IP 以及用于持久卷声明的 Egress。
+支持集群从公共防火墙后访问基础架构资源和服务，例如针对 {{site.data.keyword.containerlong_notm}} 区域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud Infrastructure (SoftLayer) 专用 IP 以及用于持久卷声明的 Egress。
 {:shortdesc}
 
 根据集群设置，可以使用公共和/或专用 IP 地址来访问服务。如果集群在位于公用和专用网络的防火墙后的公用和专用 VLAN 上都有工作程序节点，那么必须同时打开公共和专用 IP 地址的连接。如果集群仅在防火墙后的专用 VLAN 上有工作程序节点，那么可以仅打开与专用 IP 地址的连接。
@@ -378,7 +373,7 @@ subcollection: containers
           <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
-
+         
         </tbody>
       </table>
 </p>
@@ -435,7 +430,7 @@ subcollection: containers
    <tbody>
      <tr>
        <td>文件存储器</td>
-       <td>Kubernetes V<code>1.13.4_1512</code>、<code>1.12.6_1543</code>、<code>1.11.8_1549</code>、<code>1.10.13_1550</code> 或更高版本</td>
+       <td>Kubernetes V<code>1.13.4_1512</code>、<code>1.12.6_1544</code>、<code>1.11.8_1550</code>、<code>1.10.13_1551</code> 或更高版本</td>
      </tr>
      <tr>
        <td>块存储器</td>
@@ -482,6 +477,76 @@ subcollection: containers
 <br />
 
 
+## 允许集群通过 Calico 流出策略访问资源
+{: #firewall_calico_egress}
+
+如果使用 [Calico 网络策略](/docs/containers?topic=containers-network_policies)充当防火墙来限制所有公共工作程序的流出流量，那么必须允许工作程序访问主 API 服务器和 etcd 的本地代理。
+{: shortdesc}
+
+1. [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+2. 创建 Calico 网络策略，以允许来自集群的公共流量流至 172.20.0.1:2040 和 172.21.0.1:443（对于 API 服务器本地代理）以及流至 172.20.0.1:2041（对于 etcd 本地代理）。
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: allow-master-local
+  spec:
+    egress:
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: TCP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: TCP
+    order: 1500
+    selector: ibm.role == 'worker_public'
+    types:
+    - Egress
+  ```
+  {: codeblock}
+
+3. 将策略应用于集群。
+    - Linux 和 OS X：
+
+      ```
+      calicoctl apply -f allow-master-local.yaml
+      ```
+      {: pre}
+
+    - Windows：
+
+      ```
+      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
 ## 从集群外部访问 NodePort、LoadBalancer 和 Ingress 服务
 {: #firewall_inbound}
 
@@ -506,7 +571,7 @@ subcollection: containers
 如果要访问在 {{site.data.keyword.Bluemix_notm}} 内部或外部或者内部部署中运行且受防火墙保护的服务，可以在该防火墙中添加工作程序节点的 IP 地址，以允许出站网络流量流至集群。例如，您可能希望从受防火墙保护的 {{site.data.keyword.Bluemix_notm}} 数据库中读取数据，或者希望在内部部署防火墙中将工作程序节点子网列入白名单，以允许来自集群的网络流量。
 {:shortdesc}
 
-1.  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+1.  [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. 获取工作程序节点子网或工作程序节点 IP 地址。
   * **工作程序节点子网**：如果您预期会频繁更改集群中的工作程序节点数，例如如果启用了[集群自动缩放器](/docs/containers?topic=containers-ca#ca)，那么您可能并不希望为每个新的工作程序节点更新防火墙。您可以改为将集群使用的 VLAN 子网列入白名单。请记住，VLAN 子网可能由其他集群中的工作程序节点共享。
@@ -519,11 +584,11 @@ subcollection: containers
 
     2. 从上一步的输出中，记下集群中工作程序节点的 **Public IP** 的所有唯一网络标识（前 3 个八位元）。<staging>如果要将仅专用集群列入白名单，请改为记下 **Private IP**。<staging>在以下输出中，唯一网络标识为 `169.xx.178` 和 `169.xx.210`。
         ```
-        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
+ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
         ```
         {: screen}
     3.  列出每个唯一网络标识的 VLAN 子网。
@@ -532,11 +597,11 @@ subcollection: containers
         ```
         {: pre}
 
-输出示例：
+        输出示例：
         ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
-        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5
-        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6
+        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   
+        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
     4.  检索子网地址。在输出中，找到 **IPs** 的数量。然后，使 `2` 的 `n` 次幂等于 IP 数。例如，如果 IP 数为 `16`，那么 `2` 的 `4` (`n`) 次幂等于 `16`。现在，从 `32` 位中减去值 `n` 可得到子网 CIDR。例如，`n` 等于 `4` 时，CIDR 为 `28`（公式为 `32 - 4 = 28`）。将 **identifier** 掩码与 CIDR 值组合在一起，即可获得完整的子网地址。在先前的输出中，子网地址为：

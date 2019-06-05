@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,7 @@ Ingress ALB のログは自動的に収集されます。 ALB ログを表示す
         ```
         {: pre}
 
-    2. その ALB ポッドのログを開きます。 ログが更新されたフォーマットに従っていることを確認します。
+    2. その ALB ポッドのログを開きます。
         ```
         kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
         ```
@@ -167,11 +167,11 @@ Ingress ALB に関して収集されるログの内容とフォーマットを�
     <tbody>
     <tr>
     <td><code>log-format</code></td>
-    <td><code>&lt;key&gt;</code> は、ログの構成要素の名前に置き換えます。<code>&lt;log_variable&gt;</code> は、ログ項目で収集するログの構成要素の変数に置き換えます。ログ項目に含めるテキストや句読点も指定できます。ストリング値を囲む引用符やログの構成要素を区切るコンマなどです。例えば、構成要素の形式を <code>request: "$request"</code> にすると、「<code>request: "GET / HTTP/1.1"</code>」というログ項目が生成されます。使用できるすべての変数のリストについては、<a href="http://nginx.org/en/docs/varindex.html">NGINX 変数の索引</a>を参照してください。<br><br>追加のヘッダー (<em>x-custom-ID</em> など) をログに記録するには、カスタム・ログ・コンテンツに以下のキー/値のペアを追加します。<br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>ハイフン (<code>-</code>) は下線 (<code>_</code>) に変換されます。カスタム・ヘッダー名の先頭に <code>$http_</code> を付ける必要があります。</td>
+    <td><code>&lt;key&gt;</code> は、ログの構成要素の名前に置き換えます。<code>&lt;log_variable&gt;</code> は、ログ項目で収集するログの構成要素の変数に置き換えます。 ログ項目に含めるテキストや句読点も指定できます。ストリング値を囲む引用符やログの構成要素を区切るコンマなどです。 例えば、構成要素の形式を <code>request: "$request"</code> にすると、「<code>request: "GET / HTTP/1.1"</code>」というログ項目が生成されます。 使用できるすべての変数のリストについては、<a href="http://nginx.org/en/docs/varindex.html">NGINX 変数の索引</a>を参照してください。<br><br>追加のヘッダー (<em>x-custom-ID</em> など) をログに記録するには、カスタム・ログ・コンテンツに以下のキー/値のペアを追加します。 <br><pre class="codeblock"><code>customID: $http_x_custom_id</code></pre> <br>ハイフン (<code>-</code>) は下線 (<code>_</code>) に変換されます。カスタム・ヘッダー名の先頭に <code>$http_</code> を付ける必要があります。</td>
     </tr>
     <tr>
     <td><code>log-format-escape-json</code></td>
-    <td>オプション: デフォルトではログはテキスト形式で生成されます。JSON 形式でログを生成するには、<code>log-format-escape-json</code> フィールドを追加して、<code>true</code> の値を使用します。</td>
+    <td>オプション: デフォルトではログはテキスト形式で生成されます。 JSON 形式でログを生成するには、<code>log-format-escape-json</code> フィールドを追加して、<code>true</code> の値を使用します。</td>
     </tr>
     </tbody></table>
 
@@ -251,58 +251,78 @@ Ingress ALB に関して収集されるログの内容とフォーマットを�
 メトリック・エクスポーターと Prometheus エージェントをクラスターにデプロイすることによって、ALB をモニターできます。
 {: shortdesc}
 
-ALB メトリック・エクスポーターは、NGINX ディレクティブ `vhost_traffic_status_zone` を使用して、各 Ingress ALB ポッドの `/status/format/json` エンドポイントからメトリック・データを収集します。このメトリック・エクスポーターは、JSON ファイルの各データ・フィールドの形式を、Prometheus で読み取り可能なメトリックに自動的に変換します。その後、エクスポーターによって生成されたメトリックを Prometheus エージェントが取り込んで、Prometheus ダッシュボードに表示します。
+ALB メトリック・エクスポーターは、NGINX ディレクティブ `vhost_traffic_status_zone` を使用して、各 Ingress ALB ポッドの `/status/format/json` エンドポイントからメトリック・データを収集します。 このメトリック・エクスポーターは、JSON ファイルの各データ・フィールドの形式を、Prometheus で読み取り可能なメトリックに自動的に変換します。 その後、エクスポーターによって生成されたメトリックを Prometheus エージェントが取り込んで、Prometheus ダッシュボードに表示します。
 
-ALB メトリック・エクスポーターのポッドは、ALB がデプロイされた同じワーカー・ノードにデプロイされる必要があります。エッジ・ワーカー・ノードで ALB を実行していて、そのエッジ・ノードに他のワークロードのデプロイを回避するテイントが適用されていると、メトリック・エクスポーターのポッドをスケジュールできません。`kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-` を実行して、そのテイントを解除する必要があります。
+### メトリック・エクスポーターの Helm チャートのインストール
+{: #metrics-exporter}
+
+メトリック・エクスポーターの Helm チャートをインストールして、クラスター内の ALB をモニターします。
+{: shortdesc}
+
+ALB メトリック・エクスポーターのポッドは、ALB がデプロイされた同じワーカー・ノードにデプロイされる必要があります。 エッジ・ワーカー・ノードで ALB を実行していて、そのエッジ・ノードに他のワークロードのデプロイを回避するテイントが適用されていると、メトリック・エクスポーターのポッドをスケジュールできません。 `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-` を実行して、そのテイントを解除する必要があります。
 {: note}
 
-ALB のメトリック・エクスポーターと Prometheus エージェントをクラスターにインストールするには、以下のようにします。
+1.  **重要**: [こちらの指示に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をインストールして、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。
 
-1.  [手順に従って](/docs/containers?topic=containers-integrations#helm)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。
+2. Helm チャート `ibmcloud-alb-metrics-exporter` をクラスターにインストールします。 この Helm チャートによって、ALB メトリック・エクスポーターがデプロイされて、`alb-metrics-service-account` サービス・アカウントが `kube-system` 名前空間内に作成されます。<alb-ID> は、メトリックを収集する ALB の ID に置き換えてください。 クラスター内の ALB の ID を表示するには、<code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code> を実行します。
+  モニターする ALB ごとに 1 つのチャートをデプロイする必要があります。
+  {: note}
+  ```
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  ```
+  {: pre}
 
-2.  tiller がサービス・アカウントでインストールされていることを確認します。
-```
-    kubectl get serviceaccount -n kube-system | grep tiller
-    ```
-    {: pre}
+3. Chart のデプロイメント状況を確認します。 Chart の準備ができている場合は、出力の先頭付近の **STATUS** フィールドに `DEPLOYED` の値があります。
+  ```
+  helm status ibmcloud-alb-metrics-exporter
+  ```
+  {: pre}
 
-    出力例:
+4. `ibmcloud-alb-metrics-exporter` ポッドが実行されていることを確認します。
+  ```
+  kubectl get pods -n kube-system -o wide
+  ```
+  {:pre}
 
-    ```
-    NAME                                 SECRETS   AGE
-    tiller                               1         2m
-    ```
-    {: screen}
+  出力例:
+  ```
+  NAME                                             READY     STATUS      RESTARTS   AGE       IP               NODE
+  ...
+  alb-metrics-exporter-868fddf777-d49l5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  alb-metrics-exporter-868fddf777-pf7x5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  ```
+  {:screen}
 
-3. Helm チャート `ibmcloud-alb-metrics-exporter` をクラスターにインストールします。この Helm チャートが、ALB メトリック・エクスポーターをデプロイし、`alb-metrics-service-account` というサービス・アカウントを `kube-system` 名前空間に作成します。<alb-ID> は、メトリックを収集する ALB の ID に置き換えてください。クラスター内の ALB の ID を表示するには、<code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code> を実行します。モニターする ALB ごとにチャートをデプロイしなければならないことに注意してください。
+5. オプション: [Prometheus エージェントをインストール](#prometheus-agent)することで、エクスポーターによって作成されたメトリックを取り込んで、これらのメトリックを Prometheus ダッシュボードに表示します。
 
-    ```
-    helm install ibm/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
-    ```
-    {: pre}
+### Prometheus エージェントの Helm チャートのインストール
+{: #prometheus-agent}
+
+[メトリック・エクスポーター](#metrics-exporter)をインストールした後に、Prometheus エージェントの Helm チャートをインストールすることで、エクスポーターによって作成されたメトリックを取り込んで、これらのメトリックを Prometheus ダッシュボードに表示できます。
+{: shortdesc}
+
+1. メトリック・エクスポーターの Helm チャートの TAR ファイルを https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz からダウンロードします。
+
+2. Prometheus サブフォルダーにナビゲートします。
+  ```
+  cd ibmcloud-alb-metrics-exporter-1.0.7.tar/ibmcloud-alb-metrics-exporter/subcharts/prometheus
+  ```
+  {: pre}
+
+3. Prometheus の Helm チャートをクラスターにインストールします。<ingress_subdomain> は、クラスターの Ingress サブドメインに置き換えてください。 Prometheus ダッシュボードの URL は、デフォルトの Prometheus サブドメイン `prom-dash` と Ingress サブドメインを組み合わせたものです (例: `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`)。クラスターの Ingress サブドメインを確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code> を実行します。
+  ```
+  helm install --name prometheus . --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
+  ```
+  {: pre}
 
 4. Chart のデプロイメント状況を確認します。 Chart の準備ができている場合は、出力の先頭付近の **STATUS** フィールドに `DEPLOYED` の値があります。
-    ```
-    helm status ibmcloud-alb-metrics-exporter
-    ```
-    {: pre}
-
-5. `ibmcloud-alb-metrics-exporter/subcharts/prometheus` サブチャートをクラスターにインストールします。このサブチャートが、ALB メトリックを収集して Prometheus ダッシュボードに表示するための Prometheus エージェントをデプロイします。<ingress_subdomain> は、クラスターの Ingress サブドメインに置き換えてください。Prometheus ダッシュボードの URL は、`prom-dash` サブドメインと Ingress サブドメインを組み合わせたものです (例: `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`)。クラスターの Ingress サブドメインを確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code> を実行します。
-
-    ```
-    helm install ibm/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
-    ```
-    {: pre}
-
-6. Chart のデプロイメント状況を確認します。 Chart の準備ができている場合は、出力の先頭付近の **STATUS** フィールドに `DEPLOYED` の値があります。
-
     ```
     helm status prometheus
     ```
     {: pre}
 
-7. `ibmcloud-alb-metrics-exporter` ポッドと `prometheus` ポッドが稼働していることを確認します。
-    ```
+5. `prometheus` ポッドが実行されていることを確認します。
+```
     kubectl get pods -n kube-system -o wide
     ```
     {:pre}
@@ -316,17 +336,17 @@ ALB のメトリック・エクスポーターと Prometheus エージェント�
     ```
     {:screen}
 
-8. ブラウザーに Prometheus ダッシュボードの URL を入力します。このホスト名は `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud` という形式です。Prometheus ダッシュボードに対象の ALB が表示されます。
+6. ブラウザーに Prometheus ダッシュボードの URL を入力します。 このホスト名は `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud` という形式です。 Prometheus ダッシュボードに対象の ALB が表示されます。
 
-9. ダッシュボードに表示される [ALB](#alb_metrics)、[サーバー](#server_metrics)、[アップストリーム](#upstream_metrics)のメトリックの詳細を確認します。
+7. ダッシュボードに表示される [ALB](#alb_metrics)、[サーバー](#server_metrics)、[アップストリーム](#upstream_metrics)のメトリックの詳細を確認します。
 
 ### ALB メトリック
 {: #alb_metrics}
 
-`alb-metrics-exporter` は、JSON ファイルの各データ・フィールドの形式を、Prometheus で読み取り可能なメトリックに自動的に変換します。ALB メトリックは、ALB が処理している接続や応答のデータを収集したものです。
+`alb-metrics-exporter` は、JSON ファイルの各データ・フィールドの形式を、Prometheus で読み取り可能なメトリックに自動的に変換します。 ALB メトリックは、ALB が処理している接続や応答のデータを収集したものです。
 {: shortdesc}
 
-ALB メトリックの形式は `kube_system_<ALB-ID>_<METRIC-NAME> <VALUE>` です。例えば、ALB が 2xx レベルの状況コードの応答を 23 個受信すると、メトリックの形式は `kube_system_public_crf02710f54fcc40889c301bfd6d5b77fe_alb1_totalHandledRequest {.. metric="2xx"} 23` のようになります (`metric` は Prometheus のラベルです)。
+ALB メトリックの形式は `kube_system_<ALB-ID>_<METRIC-NAME> <VALUE>` です。 例えば、ALB が 2xx レベルの状況コードの応答を 23 個受信すると、メトリックの形式は `kube_system_public_crf02710f54fcc40889c301bfd6d5b77fe_alb1_totalHandledRequest {.. metric="2xx"} 23` のようになります (`metric` は Prometheus のラベルです)。
 
 以下の表に、サポートされている ALB メトリック名とメトリック・ラベルを、`<ALB_metric_name>_<metric_label>` という形式で示します。
 <table>
@@ -385,19 +405,18 @@ ALB メトリックの形式は `kube_system_<ALB-ID>_<METRIC-NAME> <VALUE>` で
 <tr>
 <td><code>totalHandledRequest_total</code></td>
 <td>クライアントから受信されたクライアント要求の総数。</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### サーバー・メトリック
 {: #server_metrics}
 
-`alb-metrics-exporter` は、JSON ファイルの各データ・フィールドの形式を、Prometheus で読み取り可能なメトリックに自動的に変換します。サーバー・メトリックは、Ingress リソースに定義されているサブドメイン (`dev.demostg1.stg.us.south.containers.appdomain.cloud` など) のデータを収集したものです。
+`alb-metrics-exporter` は、JSON ファイルの各データ・フィールドの形式を、Prometheus で読み取り可能なメトリックに自動的に変換します。 サーバー・メトリックは、Ingress リソースに定義されているサブドメイン (`dev.demostg1.stg.us.south.containers.appdomain.cloud` など) のデータを収集したものです。
 {: shortdesc}
 
 サーバー・メトリックの形式は `kube_system_server_<ALB-ID>_<SUB-TYPE>_<SERVER-NAME>_<METRIC-NAME> <VALUE>` です。
 
-`<SERVER-NAME>_<METRIC-NAME>` はラベルとして形式設定されます。例えば、`albId="dev_demostg1_us-south_containers_appdomain_cloud",metric="out"` のようになります。
+`<SERVER-NAME>_<METRIC-NAME>` はラベルとして形式設定されます。 例えば、`albId="dev_demostg1_us-south_containers_appdomain_cloud",metric="out"` のようになります。
 
 例えば、サーバーからクライアントに合計 22319 バイトが送信された場合は、メトリックが以下のように形式設定されます。
 ```
@@ -416,7 +435,7 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 </tr>
 <tr>
 <td><code>&lt;SUB-TYPE&gt;</code></td>
-<td>メトリックのサブタイプ。各サブタイプは 1 つ以上のメトリック名に対応します。
+<td>メトリックのサブタイプ。 各サブタイプは 1 つ以上のメトリック名に対応します。
 <ul>
 <li><code>bytes</code> と <code>processing\_time</code> は、メトリック <code>in</code> と <code>out</code> に対応します。</li>
 <li><code>cache</code> は、メトリック <code>bypass</code>、<code>expired</code>、<code>hit</code>、<code>miss</code>、<code>revalidated</code>、<code>scare</code>、<code>stale</code>、<code>updating</code> に対応します。</li>
@@ -425,15 +444,15 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 </tr>
 <tr>
 <td><code>&lt;SERVER-NAME&gt;</code></td>
-<td>Ingress リソースに定義されているサーバーの名前。Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 <code>(\_)</code> に置き換えます。上の例では、サーバー名は <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code> です。</td>
+<td>Ingress リソースに定義されているサーバーの名前。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 <code>(\_)</code> に置き換えます。 上の例では、サーバー名は <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>収集されたメトリック・タイプの名前。メトリック名のリストについては、下記の「サポートされているサーバー・メトリック」の表を参照してください。上の例では、メトリック名は <code>out</code> です。</td>
+<td>収集されたメトリック・タイプの名前。 メトリック名のリストについては、下記の「サポートされているサーバー・メトリック」の表を参照してください。 上の例では、メトリック名は <code>out</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>収集するメトリックの値。上の例では、値は <code>22319</code> です。</td>
+<td>収集するメトリックの値。 上の例では、値は <code>22319</code> です。</td>
 </tr>
 </tbody></table>
 
@@ -511,14 +530,13 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 <tr>
 <td><code>total</code></td>
 <td>状況コードの付いた応答の総数。</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### アップストリーム・メトリック
 {: #upstream_metrics}
 
-`alb-metrics-exporter` は、JSON ファイルの各データ・フィールドの形式を、Prometheus で読み取り可能なメトリックに自動的に変換します。アップストリーム・メトリックは、Ingress リソースに定義されているバックエンド・サービスのデータを収集したものです。
+`alb-metrics-exporter` は、JSON ファイルの各データ・フィールドの形式を、Prometheus で読み取り可能なメトリックに自動的に変換します。 アップストリーム・メトリックは、Ingress リソースに定義されているバックエンド・サービスのデータを収集したものです。
 {: shortdesc}
 
 アップストリーム・メトリックには 2 とおりの形式があります。
@@ -531,7 +549,7 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 タイプ 1 のアップストリーム・メトリックの形式は、`kube_system_upstream_<ALB-ID>_<SUB-TYPE>_<UPSTREAM-NAME>_<METRIC-NAME> <VALUE>` です。
 {: shortdesc}
 
-`<UPSTREAM-NAME>_<METRIC-NAME>` はラベルとして形式設定されます。例えば、`albId="default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc",metric="in"` のようになります。
+`<UPSTREAM-NAME>_<METRIC-NAME>` はラベルとして形式設定されます。 例えば、`albId="default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc",metric="in"` のようになります。
 
 例えば、アップストリーム・サービスが ALB から合計 1227 バイトを受信した場合は、メトリックが以下のように形式設定されます。
 ```
@@ -550,19 +568,19 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 </tr>
 <tr>
 <td><code>&lt;SUB-TYPE&gt;</code></td>
-<td>メトリックのサブタイプ。サポートされている値は、<code>bytes</code>、<code>processing\_time</code>、<code>requests</code> です。上の例では、サブタイプは <code>bytes</code> です。</td>
+<td>メトリックのサブタイプ。 サポートされている値は、<code>bytes</code>、<code>processing\_time</code>、<code>requests</code> です。 上の例では、サブタイプは <code>bytes</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;UPSTREAM-NAME&gt;</code></td>
-<td>Ingress リソースに定義されているアップストリーム・サービスの名前。Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 <code>(\_)</code> に置き換えます。上の例では、アップストリーム名は <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code> です。</td>
+<td>Ingress リソースに定義されているアップストリーム・サービスの名前。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 <code>(\_)</code> に置き換えます。 上の例では、アップストリーム名は <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>収集されたメトリック・タイプの名前。メトリック名のリストについては、下記の「サポートされているタイプ 1 のアップストリーム・メトリック」の表を参照してください。上の例では、メトリック名は <code>in</code> です。</td>
+<td>収集されたメトリック・タイプの名前。 メトリック名のリストについては、下記の「サポートされているタイプ 1 のアップストリーム・メトリック」の表を参照してください。 上の例では、メトリック名は <code>in</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>収集するメトリックの値。上の例では、値は <code>1227</code> です。</td>
+<td>収集するメトリックの値。 上の例では、値は <code>1227</code> です。</td>
 </tr>
 </tbody></table>
 
@@ -604,7 +622,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 <tr>
 <td><code>total</code></td>
 <td>状況コードの付いた応答の総数。</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 #### タイプ 2 のアップストリーム・メトリック
@@ -613,7 +631,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 タイプ 2 のアップストリーム・メトリックの形式は `kube_system_upstream_<ALB-ID>_<METRIC-NAME>_<UPSTREAM-NAME>_<POD-IP> <VALUE>` です。
 {: shortdesc}
 
-`<UPSTREAM-NAME>_<POD-IP>` はラベルとして形式設定されます。例えば、`albId="default-cafe-ingress-dev_dev_demostg1_us-south_containers_appdomain_cloud-tea-svc",backend="172_30_75_6_80"` のようになります。
+`<UPSTREAM-NAME>_<POD-IP>` はラベルとして形式設定されます。 例えば、`albId="default-cafe-ingress-dev_dev_demostg1_us-south_containers_appdomain_cloud-tea-svc",backend="172_30_75_6_80"` のようになります。
 
 例えば、アップストリーム・サービスの要求処理時間 (アップストリームを含む) の平均が 40 ミリ秒の場合は、メトリックが以下のように形式設定されます。
 ```
@@ -632,19 +650,19 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 <td>ALB ID。 上の例では、ALB ID は <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code> です。</td>
 </tr>
 <td><code>&lt;UPSTREAM-NAME&gt;</code></td>
-<td>Ingress リソースに定義されているアップストリーム・サービスの名前。Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 (<code>\_</code>) に置き換えます。上の例では、アップストリーム名は <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code> です。</td>
+<td>Ingress リソースに定義されているアップストリーム・サービスの名前。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 (<code>\_</code>) に置き換えます。 上の例では、アップストリーム名は <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;POD\_IP&gt;</code></td>
-<td>特定のアップストリーム・サービス・ポッドの IP アドレスとポート。Prometheus との互換性を維持するために、ピリオド (<code>.</code>) とコロン (<code>:</code>) を下線 <code>(_)</code> に置き換えます。上の例では、アップストリーム・ポッド IP は <code>172_30_75_6_80</code> です。</td>
+<td>特定のアップストリーム・サービス・ポッドの IP アドレスとポート。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) とコロン (<code>:</code>) を下線 <code>(_)</code> に置き換えます。 上の例では、アップストリーム・ポッド IP は <code>172_30_75_6_80</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>収集されたメトリック・タイプの名前。メトリック名のリストについては、下記の「サポートされているタイプ 2 のアップストリーム・メトリック」の表を参照してください。上の例では、メトリック名は <code>requestMsec</code> です。</td>
+<td>収集されたメトリック・タイプの名前。 メトリック名のリストについては、下記の「サポートされているタイプ 2 のアップストリーム・メトリック」の表を参照してください。 上の例では、メトリック名は <code>requestMsec</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>収集するメトリックの値。上の例では、値は <code>40</code> です。</td>
+<td>収集するメトリックの値。 上の例では、値は <code>40</code> です。</td>
 </tr>
 </tbody></table>
 
@@ -662,7 +680,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 <tr>
 <td><code>responseMsec</code></td>
 <td>アップストリームだけの応答処理時間の平均 (ミリ秒)。</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 <br />

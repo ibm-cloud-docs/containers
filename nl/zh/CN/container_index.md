@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -32,19 +32,8 @@ subcollection: containers
 容器是打包应用程序及其所有依赖项的标准方法，以便您可以无缝地在环境之间移动应用程序。与虚拟机不同，容器不会捆绑操作系统。在容器中只会打包应用程序代码、运行时、系统工具、库和设置。因此容器比虚拟机更轻便、可移植性更高且更高效。
 
 
-
-单击以下选项以开始：
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="单击图标可快速开始使用 {{site.data.keyword.containerlong_notm}}。对于 {{site.data.keyword.Bluemix_dedicated_notm}}，单击此图标可查看选项。" style="width:440px;" />
-<map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="在 {{site.data.keyword.Bluemix_notm}} 中开始使用 Kubernetes 集群" title="在 {{site.data.keyword.Bluemix_notm}} 中开始使用 Kubernetes 集群" shape="rect" coords="-7, -8, 108, 211" />
-<area href="/docs/containers?topic=containers-cs_cli_install" alt="安装 CLI。" title="安装 CLI。" shape="rect" coords="155, -1, 289, 210" />
-<area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} 云环境" title="{{site.data.keyword.Bluemix_notm}} 云环境" shape="rect" coords="326, -10, 448, 218" />
-</map>
-
-
 ## 集群入门
-{: #clusters_gs}
+{: #clusters_gs_index}
 
 想在容器中部署应用程序？稍等一下！请首先创建 Kubernetes 集群。Kubernetes 是一种用于容器的编排工具。使用 Kubernetes，开发者可以通过利用集群的强大功能和灵活性，快速部署高可用性应用程序。
 {:shortdesc}
@@ -70,15 +59,15 @@ subcollection: containers
 *   **机器类型**：免费集群有一个分组到工作程序池的虚拟工作程序节点，其中有 2 个 CPU、4 GB 内存以及 1 个 100 GB 的 SAN 磁盘可供应用程序使用。创建标准集群时，可以选择物理（裸机）或虚拟机，以及各种机器大小。
 *   **受管主节点**：工作程序节点由 {{site.data.keyword.IBM_notm}} 拥有的一个专用高可用性 Kubernetes 主节点进行集中监视和管理，该主节点控制和监视集群中的所有 Kubernetes 资源。此外，您可以专注于工作程序节点以及该工作程序节点中部署的应用程序，而不必担心如何管理此主节点。
 *   **基础架构资源**：运行集群所需的资源（例如 VLAN 和 IP 地址）在 {{site.data.keyword.IBM_notm}} 拥有的 IBM Cloud Infrastructure (SoftLayer) 帐户中进行管理。创建标准集群时，可在您自己的 IBM Cloud Infrastructure (SoftLayer) 帐户中管理这些资源。创建标准集群时，可以了解有关这些资源及[所需许可权](/docs/containers?topic=containers-users#infra_access)的更多信息。
-*   **其他选项**：免费集群部署在您选择的区域内，但您无法选择部署在哪个专区。要对专区、联网和持久性存储器拥有控制权，请创建标准集群。[了解有关免费和标准集群优点的更多信息](/docs/containers?topic=containers-cs_ov#cluster_types)。
+*   **其他选项**：免费集群会部署到您所选择的地理位置中，但您却无法为其选择部署到哪个专区。要对专区、联网和持久性存储器拥有控制权，请创建标准集群。[了解有关免费和标准集群优点的更多信息](/docs/containers?topic=containers-cs_ov#cluster_types)。
 
 <br>
 
 **接下来要做什么？**</br>
 在免费集群到期之前，使用免费集群试用一些功能。
 
-* 完成[第一个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)，以创建 Kubernetes 集群，安装 CLI，创建专用注册表，设置集群环境以及向集群添加服务。
-* 一鼓作气完成有关将应用程序部署到集群的[第二个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)。
+* 浏览[第一个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)，以创建 Kubernetes 集群、安装 CLI 或使用 Kubernetes 终端、创建专用注册表、设置集群环境以及向集群添加服务。
+* 一鼓作气继续浏览有关将应用程序部署到集群的[第二个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)。
 * [创建标准集群](/docs/containers?topic=containers-clusters#clusters_ui)（具有多个节点），以实现更高的可用性。
 
 

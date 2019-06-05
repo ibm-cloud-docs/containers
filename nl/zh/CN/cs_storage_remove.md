@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -46,8 +46,7 @@ subcollection: containers
 这取决于删除的内容和计费类型。如果删除 PVC 和 PV，但未删除 IBM Cloud Infrastructure (SoftLayer) 帐户中的实例，那么该实例仍然存在，因此您仍需要为此付费。必须删除所有内容才能避免继续付费。此外，在 PVC 中指定 `billingType` 时，可以选择 `hourly` 或 `monthly`。如果选择 `monthly`，那么将按月对实例收费。删除实例后，您仍需为该月的剩余时间付费。
 
 
-<p class="important">清除持久性存储器时，将删除其中存储的所有数据。如果需要数据的副本，请备份[文件存储器](/docs/containers?topic=containers-file_storage#file_backup_restore)或[块存储器](/docs/containers?topic=containers-block_storage#block_backup_restore)。</br>
-</br>如果使用的是 {{site.data.keyword.Bluemix_dedicated}} 帐户，那么必须通过[打开一个支持案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)来请求卷删除。</p>
+<p class="important">清除持久性存储器时，将删除其中存储的所有数据。如果需要数据的副本，请备份[文件存储器](/docs/containers?topic=containers-file_storage#file_backup_restore)或[块存储器](/docs/containers?topic=containers-block_storage#block_backup_restore)。</p>
 
 开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
@@ -70,7 +69,7 @@ subcollection: containers
 
 2. 查看存储类的 **`ReclaimPolicy`** 和 **`billingType`**。
    ```
-kubectl describe storageclass <storageclass_name>
+   kubectl describe storageclass <storageclass_name>
    ```
    {: pre}
 
@@ -96,7 +95,7 @@ kubectl describe storageclass <storageclass_name>
 
    2. 除去使用该 PVC 的 pod。如果 pod 是部署的一部分，请除去该部署。
       ```
-kubectl delete pod <pod_name>
+      kubectl delete pod <pod_name>
       ```
       {: pre}
 
@@ -122,7 +121,7 @@ kubectl delete pod <pod_name>
 
 6. 如果 PV 未删除，请手动除去该 PV。
    ```
-kubectl delete pv <pv_name>
+   kubectl delete pv <pv_name>
    ```
    {: pre}
 
@@ -145,7 +144,7 @@ kubectl delete pv <pv_name>
    ```
    {: pre}
 
-   如果已除去集群，而无法检索 PV 的名称，请将 `grep <pv_name>` 替换为 `grep <cluster_id>` 以列出与集群关联的所有存储设备。
+   如果除去集群后无法检索 PV 的名称，请将 `grep <pv_name>` 替换为 `grep <cluster_id>` 以列出与该集群关联的所有存储设备。
    {: tip}
 
    输出示例：

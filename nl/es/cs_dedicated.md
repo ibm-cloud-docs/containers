@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -23,13 +23,16 @@ subcollection: containers
 {:download: .download}
 
 
-# Iniciación a los clústeres en {{site.data.keyword.Bluemix_dedicated_notm}}
+# En desuso: Iniciación a los clústeres en {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #dedicated}
 
-Si tiene una cuenta de {{site.data.keyword.Bluemix_dedicated}}, puede desplegar clústeres de Kubernetes en un entorno de nube dedicado (`https://<my-dedicated-cloud-instance>.bluemix.net`) y conectarse a servicios de {{site.data.keyword.Bluemix_notm}} preseleccionados que también se ejecuten allí.
+{{site.data.keyword.containerlong}} en {{site.data.keyword.Bluemix_dedicated_notm}} está en desuso. No se pueden crear clústeres en un entorno de {{site.data.keyword.Bluemix_dedicated_notm}}. Para crear clústeres en {{site.data.keyword.Bluemix_notm}} Público, consulte [Iniciación a {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started).
+{: deprecated}
+
+Si tiene una cuenta de {{site.data.keyword.Bluemix_dedicated_notm}}, puede desplegar clústeres de Kubernetes en un entorno de nube dedicado (`https://<my-dedicated-cloud-instance>.bluemix.net`) y conectarse a servicios de {{site.data.keyword.Bluemix_notm}} preseleccionados que también se ejecuten allí.
 {:shortdesc}
 
-Si no tiene cuenta de {{site.data.keyword.Bluemix_dedicated_notm}}, puede [empezar a trabajar con {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index) en una cuenta pública de {{site.data.keyword.Bluemix_notm}}.
+Si no tiene cuenta de {{site.data.keyword.Bluemix_dedicated_notm}}, puede [empezar a trabajar con {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started) en una cuenta pública de {{site.data.keyword.Bluemix_notm}}.
 
 ## Acerca del entorno de nube dedicada
 {: #dedicated_environment}
@@ -390,7 +393,7 @@ Diseñe la configuración de su clúster de {{site.data.keyword.Bluemix_dedicate
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.6      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.7      Default
     ```
     {: screen}
 
@@ -408,7 +411,7 @@ Diseñe la configuración de su clúster de {{site.data.keyword.Bluemix_dedicate
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
     ```
     {: screen}
 
@@ -470,7 +473,7 @@ Kubernetes como variable de entorno.
         {: codeblock}
 
 ### Adición de nodos trabajadores
-{: #add_workers}
+{: #add_workers_dedicated}
 
 Con {{site.data.keyword.Bluemix_dedicated_notm}}, solo puede crear [clústeres de una sola zona](/docs/containers?topic=containers-plan_clusters#single_zone). De forma predeterminada, un clúster de una sola zona se configura con una agrupación de nodos trabajadores denominada `default`. La agrupación de nodos trabajadores agrupa los nodos trabajadores con la misma configuración, como por ejemplo el tipo de máquina, que ha definido durante la creación del clúster. Puede añadir más nodos trabajadores a su clúster [cambiando el tamaño de una agrupación de nodos trabajadores existente](/docs/containers?topic=containers-clusters#resize_pool) o [añadiendo una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-clusters#add_pool). Cuando añada una agrupación de nodos trabajadores, debe añadir la zona disponible a la agrupación de nodos trabajadores para que los nodos trabajadores se puedan desplegar en la zona. Sin embargo, no puede añadir otras zonas a las agrupaciones de nodos trabajadores.
 {: shortdesc}
@@ -527,7 +530,7 @@ Antes de empezar: configure el direccionamiento del tráfico de red de entrada y
     ```
     {: screen}
 
-4. **Importante**: Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+4. **Importante**: Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 5. Para configurar la conectividad de cuenta interna y local, elija una de estas opciones:
   - Si ha utilizado un rango de direcciones IP privadas 10.x.x.x para la subred, utilice IP válidas de ese rango para configurar la conectividad de cuenta interna y local con Ingress y un equilibrador de carga. Para obtener más información, consulte [Planificación de redes con NodePort, equilibrador de carga o servicios Ingress](/docs/containers?topic=containers-cs_network_planning#external).
@@ -542,7 +545,6 @@ Revise las siguientes opciones de otras configuraciones de clúster:
   * [Actualización de nodos trabajadores](/docs/containers?topic=containers-update#worker_node)
   * [Configuración del registro de clúster](/docs/containers?topic=containers-health#logging). La habilitación de registro no está soportada desde el punto final dedicado. Debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
   * [Configuración de la supervisión del clúster](/docs/containers?topic=containers-health#view_metrics). Existe un clúster `ibm-monitoring` dentro de cada cuenta de {{site.data.keyword.Bluemix_dedicated_notm}}. Este clúster supervisa continuamente el estado de {{site.data.keyword.containerlong_notm}} en el entorno dedicado, comprobando la estabilidad y la conectividad del entorno. No elimine este clúster del entorno.
-  * [Visualización de recursos de un clúster de Kubernetes](/docs/containers?topic=containers-integrations#weavescope)
   * [Eliminación de clústeres](/docs/containers?topic=containers-clusters#remove)
 
 <br />
@@ -567,7 +569,7 @@ Para entornos de {{site.data.keyword.Bluemix_dedicated_notm}}, las direcciones I
 #### Configuración del acceso a una app utilizando el tipo de servicio LoadBalancer
 {: #dedicated_apps_public_load_balancer}
 
-Si desea utilizar direcciones IP públicas para el equilibrador de carga, asegúrese de que se ha proporcionado una lista blanca de cortafuegos de empresa a IBM, o [abra un caso de soporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) para configurar la lista blanca del cortafuegos. A continuación, siga los pasos de [Exposición de apps con equilibradores de carga](/docs/containers?topic=containers-loadbalancer).
+Si desea utilizar direcciones IP públicas para el equilibrador de carga, asegúrese de que se ha proporcionado una lista blanca de cortafuegos de empresa a IBM, o [abra un caso de soporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) para configurar la lista blanca del cortafuegos. A continuación, siga los pasos de [Equilibrio de carga básica y de DSR con equilibradores de carga de red (NLB - Network Load Balancers)](/docs/containers?topic=containers-loadbalancer).
 {: shortdesc}
 
 #### Configuración del acceso público a una app utilizando Ingress
@@ -624,7 +626,7 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
     </tr>
     <tr>
     <td><code>&lt;secret_name&gt;</code></td>
-    <td>Obligatorio. El nombre que desea utilizar para su secreto de extracción de imagen.</td>
+    <td>Obligatorio. El nombre que desea utilizar para su secreto de extracción de imágenes.</td>
     </tr>
     <tr>
     <td><code>--docker-server=&lt;registry_url&gt;</code></td>
@@ -644,10 +646,10 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
     </tr>
     </tbody></table>
 
-4.  Cree un pod que haga referencia al secreto de extracción de imagen.
+4.  Cree un pod que haga referencia al secreto de extracción de imágenes.
 
     1.  Abra el editor de texto que prefiera y cree un script de configuración de pod llamado `mypod.yaml`.
-    2.  Defina el pod y el secreto de extracción de imagen que desea utilizar para acceder al registro. Para utilizar una imagen privada de un espacio de nombres:
+    2.  Defina el pod y el secreto de extracción de imágenes que desea utilizar para acceder al registro. Para utilizar una imagen privada de un espacio de nombres:
 
         ```
         apiVersion: v1
@@ -690,7 +692,7 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
         </tr>
         <tr>
         <td><code>&lt;secret_name&gt;</code></td>
-        <td>El nombre del secreto de extracción de imagen que ha creado anteriormente.</td>
+        <td>El nombre del secreto de extracción de imágenes que ha creado anteriormente.</td>
         </tr>
         </tbody></table>
 

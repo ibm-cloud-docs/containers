@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -55,8 +55,14 @@ Ingress ALB アドオンのビルドごとの変更の要約については、�
 </thead>
 <tbody>
 <tr>
+<td>411 / 315</td>
+<td>2019 年 4 月 15 日</td>
+<td>{{site.data.keyword.appid_full}} Cookie の有効期限の値が、アクセス・トークンの有効期限の値と一致するように更新されました。</td>
+<td>-</td>
+</tr>
+<tr>
 <td>411 / 306</td>
-<td>2019 年 3 月 21 日</td>
+<td>2019 年 3 月 22 日</td>
 <td>Go バージョンが 1.12.1 に更新されました。</td>
 <td>-</td>
 </tr>
@@ -65,7 +71,7 @@ Ingress ALB アドオンのビルドごとの変更の要約については、�
 <td>2019 年 3 月 18 日</td>
 <td><ul>
 <li>イメージ・スキャンの脆弱性が修正されました。</li>
-<li>{{site.data.keyword.appid_full}} のロギングが改善されました。</li>
+<li>{{site.data.keyword.appid_full_notm}} のロギングが改善されました。</li>
 </ul></td>
 <td>-</td>
 </tr>
@@ -73,7 +79,7 @@ Ingress ALB アドオンのビルドごとの変更の要約については、�
 <td>408 / 304</td>
 <td>2019 年 3 月 5 日</td>
 <td>-</td>
-<td>ログアウト機能、トークンの有効期限、および `OAuth` 許可コールバックに関連する許可統合のバグが修正されました。これらの修正は、[`appid-auth`](/docs/containers?topic=containers-ingress_annotation#appid-auth) アノテーションを使用して {{site.data.keyword.appid_full_notm}} 許可を有効にした場合にのみ実装されます。これらの修正を実装するために追加ヘッダーが導入されるので、合計ヘッダー・サイズが大きくなります。独自ヘッダーのサイズと応答の合計サイズによっては、使用する[プロキシー・バッファー・アノテーション](/docs/containers?topic=containers-ingress_annotation#proxy-buffer)の調整が必要になる可能性があります。</td>
+<td>ログアウト機能、トークンの有効期限、および `OAuth` 許可コールバックに関連する許可統合のバグが修正されました。 これらの修正は、[`appid-auth`](/docs/containers?topic=containers-ingress_annotation#appid-auth) アノテーションを使用して {{site.data.keyword.appid_full_notm}} 許可を有効にした場合にのみ実装されます。 これらの修正を実装するために追加ヘッダーが導入されるので、合計ヘッダー・サイズが大きくなります。 独自ヘッダーのサイズと応答の合計サイズによっては、使用する[プロキシー・バッファー・アノテーション](/docs/containers?topic=containers-ingress_annotation#proxy-buffer)の調整が必要になる可能性があります。</td>
 </tr>
 <tr>
 <td>406 / 301</td>
@@ -101,7 +107,7 @@ Ingress ALB アドオンのビルドごとの変更の要約については、�
 <li>{{site.data.keyword.appid_short_notm}} の場所ディレクティブが更新され、`app-id` アノテーションを、`proxy-buffers`、`proxy-buffer-size`、および `proxy-busy-buffer-size` アノテーションと一緒に使用できるようになりました。</li>
 <li>バグが修正され、情報ログにエラーのラベルが付かないようになりました。</li>
 </ul></td>
-<td>TLS 1.0 と 1.1 がデフォルトで無効になります。アプリに接続するクライアントが TLS 1.2 に対応していれば、何の対処も必要ありません。TLS 1.0 または 1.1 のサポートを必要とする既存のクライアントをまだ使用する場合は、[この手順](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers)に従って必要な TLS バージョンを手動で有効にしてください。アプリへのアクセスにクライアントで使用している TLS バージョンを確認する方法について詳しくは、こちらの [{{site.data.keyword.Bluemix_notm}} のブログ投稿](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/)を参照してください。</td>
+<td>TLS 1.0 と 1.1 がデフォルトで無効になります。 アプリに接続するクライアントが TLS 1.2 に対応していれば、何の対処も必要ありません。 TLS 1.0 または 1.1 のサポートを必要とする既存のクライアントをまだ使用する場合は、[この手順](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers)に従って必要な TLS バージョンを手動で有効にしてください。 アプリへのアクセスにクライアントで使用している TLS バージョンを確認する方法について詳しくは、こちらの [{{site.data.keyword.Bluemix_notm}} のブログ投稿](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/)を参照してください。</td>
 </tr>
 <tr>
 <td>393 / 291</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -35,8 +35,10 @@ subcollection: containers
 ## {{site.data.keyword.Bluemix_notm}} IAM 平台角色
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} 已配置为使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 角色。{{site.data.keyword.Bluemix_notm}} IAM 平台角色确定用户可对集群、工作程序节点和 Ingress 应用程序负载均衡器等 {{site.data.keyword.Bluemix_notm}} 资源执行的操作。此外，{{site.data.keyword.Bluemix_notm}} IAM 平台角色还会自动为用户设置基本基础架构许可权。要设置平台角色，请参阅[分配 {{site.data.keyword.Bluemix_notm}} IAM 平台许可权](/docs/containers?topic=containers-users#platform)。
+{{site.data.keyword.containerlong_notm}} 已配置为使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 角色。{{site.data.keyword.Bluemix_notm}} IAM 平台角色确定用户可对集群、工作程序节点和 Ingress 应用程序负载均衡器 (ALB) 等 {{site.data.keyword.Bluemix_notm}} 资源执行的操作。此外，{{site.data.keyword.Bluemix_notm}} IAM 平台角色还会自动为用户设置基本基础架构许可权。要设置平台角色，请参阅[分配 {{site.data.keyword.Bluemix_notm}} IAM 平台许可权](/docs/containers?topic=containers-users#platform)。
 {: shortdesc}
+
+<p class="tip">不要在分配 {{site.data.keyword.Bluemix_notm}} IAM 平台角色的同时分配服务角色。您必须单独分配平台角色和服务角色。</p>
 
 以下每个部分中的各表显示了每个 {{site.data.keyword.Bluemix_notm}} IAM 平台角色授予的集群管理、日志记录和 Ingress 许可权。这些表按 CLI 命令名称以字母顺序进行组织。
 
@@ -61,8 +63,13 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
+<td>查看 {{site.data.keyword.containerlong_notm}} 中支持的受管附加组件版本的列表。</td>
+<td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions)</code></td>
+<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetAddons)</code></td>
+</tr>
+<tr>
 <td>查看 {{site.data.keyword.containerlong_notm}} 的 API 端点或将其设定为目标。</td>
-<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_api)</code></td>
+<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)</code></td>
 <td>-</td>
 </tr>
 <tr>
@@ -76,7 +83,8 @@ subcollection: containers
 <td>-</td>
 </tr>
 <tr>
-<td>查看 {{site.data.keyword.containerlong_notm}} 中支持的 Kubernetes 版本列表。</td><td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
+<td>查看 {{site.data.keyword.containerlong_notm}} 中支持的 Kubernetes 版本列表。</td>
+<td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
 <td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetKubeVersions)</code></td>
 </tr>
 <tr>
@@ -105,7 +113,7 @@ subcollection: containers
 <td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
 </tr>
 <tr>
-<td>查看可用于在其中创建集群的专区的列表。</td>
+<td>查看可在其中创建集群的可用专区的列表。</td>
 <td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cs_cli_reference#cs_datacenters)</code></td>
 <td><code>[GET /v1/zones](https://containers.cloud.ibm.com/swagger-api/#!/util/GetZones)</code></td>
 </tr>
@@ -116,6 +124,7 @@ subcollection: containers
 {: #view-actions}
 
 **查看者**平台角色包含[无需许可权的操作](#none-actions)以及下表中显示的许可权。
+具有**查看者**角色（例如，审计员或计费）的用户可以查看集群详细信息，但无法修改基础架构。
 {: shortdesc}
 
 <table>
@@ -177,7 +186,7 @@ subcollection: containers
 <td><code>[GET /v1/subnets/vlan-spanning](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetVlanSpanning)</code></td>
 </tr>
 <tr>
-<td>为一个集群设置时：列出该集群在一个专区中连接到的 VLAN。</br>为帐户中的所有集群设置时：列出一个专区中的所有可用 VLAN。</td>
+<td>为一个集群设置时：列出该集群在专区中连接到的 VLAN。</br>为帐户中的所有集群设置时：列出专区中的所有可用 VLAN。</td>
 <td><code>[ibmcloud ks vlans](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)</code></td>
 <td><code>[GET /v1/datacenters/{datacenter}/vlans](https://containers.cloud.ibm.com/swagger-api/#!/properties/GetDatacenterVLANs)</code></td>
 </tr>
@@ -275,7 +284,7 @@ subcollection: containers
 ### 编辑者操作
 {: #editor-actions}
 
-**编辑者**平台角色包含**查看者**授予的许可权以及以下许可权。**提示**：将此角色用于应用程序开发者，并分配 <a href="#cloud-foundry">Cloud Foundry</a> **开发者**角色。
+**编辑者**平台角色包含**查看者**授予的许可权以及以下许可权。具有**编辑者**角色（例如，开发者）的用户可以绑定服务，使用 Ingress 资源，并为其应用程序设置日志转发，但无法修改基础架构。**提示**：将此角色用于应用程序开发者，并分配 <a href="#cloud-foundry">Cloud Foundry</a> **开发者**角色。
 {: shortdesc}
 
 <table>
@@ -345,7 +354,66 @@ subcollection: containers
 </tbody>
 </table>
 
-
+<table>
+<caption>需要 {{site.data.keyword.containerlong_notm}} 中的“编辑者”平台角色的网络负载均衡器 (NLB) DNS 主机和运行状况检查监视器 CLI 命令和 API 调用概述</caption>
+<thead>
+<th id="lbdns-mgmt">网络负载均衡器 (NLB) DNS 操作</th>
+<th id="lbdns-cli">CLI 命令</th>
+<th id="lbdns-api">API 调用</th>
+</thead>
+<tbody>
+<tr>
+<td>将一个 NLB IP 添加到现有 NLB 主机名。</td>
+<td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-add)</code></td>
+<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UpdateDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>创建用于注册一个或多个 NLB IP 的 DNS 主机名。</td>
+<td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-create)</code></td>
+<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/RegisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>列出集群中注册的 NLB 主机名和 IP 地址。</td>
+<td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-ls)</code></td>
+<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+</tr>
+<tr>
+<td>从主机名中除去 NLB IP 地址。</td>
+<td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UnregisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>为集群中的现有 NLB 主机名配置运行状况检查监视器，并可选择启用该监视器。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-configure)</code></td>
+<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>查看现有运行状况检查监视器的设置。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-get)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>对集群中的主机名禁用现有运行状况检查监视器。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>启用配置的运行状况检查监视器。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>列出集群中每个 NLB 主机名的运行状况检查监视器设置。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-ls)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
+</tr>
+<tr>
+<td>列出集群中 NLB 主机名后面的 IP 的运行状况检查状态。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-status)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
+</tr>
+</tbody>
+</table>
 
 <table>
 <caption>在 {{site.data.keyword.containerlong_notm}} 中需要编辑者平台角色的日志记录 CLI 命令和 API 调用概述</caption>
@@ -417,6 +485,7 @@ subcollection: containers
 {: #operator-actions}
 
 **操作员**平台角色包含**查看者**授予的许可权以及下表中显示的许可权。
+具有**操作员**角色（例如，站点可靠性工程师、DevOps 工程师或集群管理员）的用户可以添加工作程序节点，并对基础架构进行故障诊断（如通过重新装入工作程序节点），但无法创建或删除集群，更改凭证或设置集群范围的功能，如服务端点或受管附加组件。
 {: shortdesc}
 
 <table>
@@ -533,7 +602,7 @@ subcollection: containers
 ### 管理员操作
 {: #admin-actions}
 
-**管理员**平台角色包含由**查看者**、**编辑者**和**操作员**角色授予的所有许可权以及以下许可权。要创建资源（如机器、VLAN 和子网），管理员用户需要**超级用户**<a href="#infra">基础架构角色</a>。
+**管理员**平台角色包含由**查看者**、**编辑者**和**操作员**角色授予的所有许可权以及以下许可权。具有**管理员**角色（例如，集群或帐户管理员）的用户可以创建和删除集群，或设置集群范围的功能，如服务端点或受管附加组件。要创建订单来订购工作程序节点机器、VLAN 和子网之类的基础架构资源，管理员用户需要**超级用户**<a href="#infra">基础架构角色</a>，或者区域的 API 密钥必须设置有相应的许可权。
 {: shortdesc}
 
 <table>
@@ -577,11 +646,6 @@ subcollection: containers
 <tr>
 <td>启用集群的指定功能，例如集群主节点的专用服务端点。</td>
 <td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
-<td>-</td>
-</tr>
-<tr>
-<td>列出集群中启用的功能。</td>
-<td><code>[ibmcloud ks cluster-features](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls)</code></td>
 <td>-</td>
 </tr>
 <tr>
@@ -685,10 +749,11 @@ subcollection: containers
 ## {{site.data.keyword.Bluemix_notm}} IAM 服务角色
 {: #service}
 
-分配有 {{site.data.keyword.Bluemix_notm}} IAM 服务访问角色的每个用户还会在特定名称空间中自动分配有相应的 Kubernetes 基于角色的访问控制 (RBAC) 角色。要了解有关服务访问角色的更多信息，请参阅 [{{site.data.keyword.Bluemix_notm}} IAM 服务角色](/docs/containers?topic=containers-users#platform)。要了解有关 RBAC 角色的更多信息，请参阅[分配 RBAC 许可权](/docs/containers?topic=containers-users#role-binding)。
+分配有 {{site.data.keyword.Bluemix_notm}} IAM 服务访问角色的每个用户还会在特定名称空间中自动分配有相应的 Kubernetes 基于角色的访问控制 (RBAC) 角色。要了解有关服务访问角色的更多信息，请参阅 [{{site.data.keyword.Bluemix_notm}} IAM 服务角色](/docs/containers?topic=containers-users#platform)。不要在分配 {{site.data.keyword.Bluemix_notm}} IAM 平台角色的同时分配服务角色。您必须单独分配平台角色和服务角色。
 {: shortdesc}
 
-需要了解每个服务角色通过 RBAC 授权的 Kubernetes 操作？请参阅[每个 RBAC 角色的 Kubernetes 资源许可权](#rbac)。
+需要了解每个服务角色通过 RBAC 授权的 Kubernetes 操作？请参阅[每个 RBAC 角色的 Kubernetes 资源许可权](#rbac_ref)。
+要了解有关 RBAC 角色的更多信息，请参阅[分配 RBAC 许可权](/docs/containers?topic=containers-users#role-binding)。
 {: tip}
 
 下表显示了每个服务角色及其相应的 RBAC 角色授予的 Kubernetes 资源许可权。
@@ -740,7 +805,7 @@ subcollection: containers
 
 
 ## 每个 RBAC 角色的 Kubernetes 资源许可权
-{: #rbac}
+{: #rbac_ref}
 
 分配有 {{site.data.keyword.Bluemix_notm}} IAM 服务访问角色的每个用户还会自动分配有相应的预定义 Kubernetes 基于角色的访问控制 (RBAC) 角色。如果计划管理您自己的定制 Kubernetes RBAC 角色，请参阅[为用户、组或服务帐户创建定制 RBAC 许可权](/docs/containers?topic=containers-users#rbac)。
 {: shortdesc}
@@ -760,248 +825,248 @@ subcollection: containers
  </thead>
 <tbody>
 <tr>
-  <td>bindings</td>
+  <td><code>bindings</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>configmaps</td>
+  <td><code>configmaps</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>cronjobs.batch</td>
+  <td><code>cronjobs.batch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>daemonsets.apps</td>
+  <td><code>daemonsets.apps</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>daemonsets.extensions</td>
+  <td><code>daemonsets.extensions</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>deployments.apps</td>
+  <td><code>deployments.apps</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>deployments.apps/rollback</td>
+  <td><code>deployments.apps/rollback</code></td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>deployments.apps/scale</td>
+  <td><code>deployments.apps/scale</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>deployments.extensions</td>
+  <td><code>deployments.extensions</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>deployments.extensions/rollback</td>
+  <td><code>deployments.extensions/rollback</code></td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>deployments.extensions/scale</td>
+  <td><code>deployments.extensions/scale</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>endpoints</td>
+  <td><code>endpoints</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>events</td>
+  <td><code>events</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>horizontalpodautoscalers.autoscaling</td>
+  <td><code>horizontalpodautoscalers.autoscaling</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>ingresses.extensions</td>
+  <td><code>ingresses.extensions</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>jobs.batch</td>
+  <td><code>jobs.batch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>limitranges</td>
+  <td><code>limitranges</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>localsubjectaccessreviews</td>
+  <td><code>localsubjectaccessreviews</code></td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code></td>
 </tr><tr>
-  <td>namespaces</td>
+  <td><code>namespaces</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
-  <td><code>get</code>、<code>list</code> 和 <code>watch</code></br>**仅限 cluster-admin：**<code>create</code> 和 <code>delete</code></td>
+  <td><code>get</code>、<code>list</code> 和 <code>watch</code></br>**仅限集群管理员：**<code>create</code> 和 <code>delete</code></td>
 </tr><tr>
-  <td>namespaces/status</td>
+  <td><code>namespaces/status</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>networkpolicies</td>
-  <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
-  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
-  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
-</tr><tr>
-  <td>networkpolicies.extensions</td>
+  <td><code>networkpolicies</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>persistentvolumeclaims</td>
+  <td><code>networkpolicies.extensions</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>poddisruptionbudgets.policy</td>
+  <td><code>persistentvolumeclaims</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>pods</td>
+  <td><code>poddisruptionbudgets.policy</code></td>
+  <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
+  <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
+</tr><tr>
+  <td><code>pods</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>top</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>pods/attach</td>
+  <td><code>pods/attach</code></td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>pods/exec</td>
+  <td><code>pods/exec</code></td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>pods/log</td>
+  <td><code>pods/log</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>pods/portforward</td>
+  <td><code>pods/portforward</code></td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>pods/proxy</td>
+  <td><code>pods/proxy</code></td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>pods/status</td>
+  <td><code>pods/status</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.apps</td>
+  <td><code>replicasets.apps</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.apps/scale</td>
+  <td><code>replicasets.apps/scale</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.extensions</td>
+  <td><code>replicasets.extensions</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.extensions/scale</td>
+  <td><code>replicasets.extensions/scale</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers</td>
+  <td><code>replicationcontrollers</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers/scale</td>
+  <td><code>replicationcontrollers/scale</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers/status</td>
+  <td><code>replicationcontrollers/status</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers.extensions/scale</td>
+  <td><code>replicationcontrollers.extensions/scale</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>resourcequotas</td>
+  <td><code>resourcequotas</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>resourcequotas/status</td>
+  <td><code>resourcequotas/status</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>rolebindings</td>
+  <td><code>rolebindings</code></td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>角色
-</td>
+  <td><code>角色
+</code></td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>私钥</td>
+  <td><code>私钥</code></td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td> serviceaccounts                               </td>
+  <td><code> serviceaccounts                               </code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code> 和 <code>impersonate</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code>、<code>watch</code> 和 <code>impersonate</code></td>
 </tr><tr>
-  <td>服务</td>
+  <td><code> 服务</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>services/proxy</td>
+  <td><code>services/proxy</code></td>
   <td>-</td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>statefulsets.apps</td>
+  <td><code>statefulsets.apps</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
 </tr><tr>
-  <td>statefulsets.apps/scale</td>
+  <td><code>statefulsets.apps/scale</code></td>
   <td><code>get</code>、<code>list</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>
   <td><code>create</code>、<code>delete</code>、<code>deletecollection</code>、<code>get</code>、<code>list</code>、<code>patch</code>、<code>update</code> 和 <code>watch</code></td>

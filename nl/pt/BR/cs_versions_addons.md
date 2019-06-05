@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -55,8 +55,14 @@ Consulte a tabela a seguir para obter um resumo das mudanças de cada compilaç�
 </thead>
 <tbody>
 <tr>
+<td>411 / 315</td>
+<td>15 de abril de 2019</td>
+<td>Atualiza o valor da expiração do cookie do {{site.data.keyword.appid_full}} para que corresponda ao valor da expiração do token de acesso.</td>
+<td>-</td>
+</tr>
+<tr>
 <td>411 / 306</td>
-<td>21 de março de 2019</td>
+<td>22 de março de 2019</td>
 <td>Atualiza a versão do Go para 1.12.1.</td>
 <td>-</td>
 </tr>
@@ -65,7 +71,7 @@ Consulte a tabela a seguir para obter um resumo das mudanças de cada compilaç�
 <td>18 de março de 2019</td>
 <td><ul>
 <li>Corrige vulnerabilidades para varreduras de imagem.</li>
-<li>Melhora a criação de log para o  {{site.data.keyword.appid_full}}.</li>
+<li>Melhora a criação de log para o  {{site.data.keyword.appid_full_notm}}.</li>
 </ul></td>
 <td>-</td>
 </tr>
@@ -112,13 +118,13 @@ Consulte a tabela a seguir para obter um resumo das mudanças de cada compilaç�
 <tr>
 <td>393 / 282</td>
 <td>29 de novembro de 2018</td>
-<td>Melhora o desempenho para o  {{site.data.keyword.appid_full_notm}}.</td>
+<td>Melhora o desempenho para o {{site.data.keyword.appid_full_notm}}.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>384 / 246</td>
 <td>14 de novembro de 2018</td>
-<td>Melhora os recursos de criação de log e logout para o  {{site.data.keyword.appid_full_notm}}.</td>
+<td>Melhora os recursos de criação de log e logout para o {{site.data.keyword.appid_full_notm}}.</td>
 <td>Substitui o certificado autoassinado para `*.containers.mybluemix.net` com o certificado assinado LetsEncrypt que é gerado automaticamente para o cluster e é usado por ele. O certificado autoassinado `*.containers.mybluemix.net` é removido.</td>
 </tr>
 <tr>

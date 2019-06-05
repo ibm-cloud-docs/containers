@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,9 @@ subcollection: containers
 * 當組織網路原則導致無法透過 Proxy 或防火牆存取公用網際網路端點時，從本端系統[執行 `calicoctl` 指令](#firewall_calicoctl)。
 * 當已針對工作者節點設定防火牆，或是在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中自訂防火牆設定時，[容許 Kubernetes 主節點與工作者節點之間的通訊](#firewall_outbound)。
 * [容許叢集透過專用網路上的防火牆存取資源](#firewall_private)。
+* [容許叢集在 Calico 網路原則封鎖工作者節點輸出時存取資源](#firewall_calico_egress)。
 * [從叢集外部存取 NodePort 服務、負載平衡器服務或 Ingress](#firewall_inbound)。
+* [若要容許叢集存取在 {{site.data.keyword.Bluemix_notm}} 內部或外部或者在內部部署上執行且受防火牆保護的服務](#whitelist_workers)。
 
 <br />
 
@@ -98,13 +100,6 @@ subcollection: containers
 2. 如果叢集位於 `default` 以外的資源群組中，請將目標設為該資源群組。若要查看每一個叢集所屬的資源群組，請執行 `ibmcloud ks clusters`。**附註**：您必須至少具有資源群組的[**檢視者**角色](/docs/containers?topic=containers-users#platform)。
    ```
    ibmcloud target -g <resource_group_name>
-   ```
-   {: pre}
-
-3. 選取您叢集所在的地區。
-
-   ```
-   ibmcloud ks region-set
    ```
    {: pre}
 
@@ -219,10 +214,10 @@ subcollection: containers
 <br />
 
 
-## 容許叢集存取基礎架構資源及其他服務
+## 容許叢集透過公用防火牆存取基礎架構資源及其他服務
 {: #firewall_outbound}
 
-讓您的叢集從防火牆後面存取基礎架構資源及服務，例如針對 {{site.data.keyword.containerlong_notm}} 地區、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud 基礎架構 (SoftLayer) 專用 IP，以及持續性磁區要求的 Egress。
+讓您的叢集在公用防火牆的保護下存取基礎架構資源及服務，例如針對 {{site.data.keyword.containerlong_notm}} 地區、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud 基礎架構 (SoftLayer) 專用 IP，以及持續性磁區要求的輸出。
 {:shortdesc}
 
 視您的叢集設定而定，您可以使用公用、專用或這兩個 IP 位址來存取服務。如果您叢集的工作者節點同時在公用及專用網路的防火牆後面的公用及專用網路 VLAN 上，則您必須開啟公用及專用 IP 位址兩者的連線。如果您叢集的工作者節點只在防火牆後面的專用 VLAN 上，則您只能開啟與專用 IP 位址的連線。
@@ -379,7 +374,7 @@ subcollection: containers
           <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
-
+         
         </tbody>
       </table>
 </p>
@@ -436,7 +431,7 @@ subcollection: containers
    <tbody>
      <tr>
        <td>檔案儲存空間</td>
-       <td>Kubernetes 版本 <code>1.13.4_1512</code>、<code>1.12.6_1543</code>、<code>1.11.8_1549</code>、<code>1.10.13_1550</code> 或更新版本</td>
+       <td>Kubernetes <code>1.13.4_1512</code>、<code>1.12.6_1544</code>、<code>1.11.8_1550</code>、<code>1.10.13_1551</code> 版或更新版本</td>
      </tr>
      <tr>
        <td>區塊儲存空間</td>
@@ -483,6 +478,76 @@ subcollection: containers
 <br />
 
 
+## 容許叢集透過 Calico 輸出原則存取資源
+{: #firewall_calico_egress}
+
+如果您使用 [Calico 網路原則](/docs/containers?topic=containers-network_policies)作為防火牆來限制所有公用工作者節點輸出，則必須容許工作者節點存取主要 API 伺服器及 etcd 的本端 Proxy。
+{: shortdesc}
+
+1. [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)請包括 `--admin` 及 `--network` 選項與 `ibmcloud ks cluster-config` 指令。`--admin` 會下載金鑰，以存取基礎架構組合以及在工作者節點上執行 Calico 指令。`--network` 會下載 Calico 配置檔，以執行所有 Calico 指令。
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+2. 建立 Calico 網路原則，以容許從叢集到 172.20.0.1:2040 及 172.21.0.1:443 的公用資料流量（對於 API 伺服器本端 Proxy），以及從叢集到 172.20.0.1:2041 的公用資料流量（對於 etcd 本端 Proxy）。
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: allow-master-local
+  spec:
+    egress:
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: TCP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: TCP
+    order: 1500
+    selector: ibm.role == 'worker_public'
+    types:
+    - Egress
+  ```
+  {: codeblock}
+
+3. 將原則套用至叢集。
+    - Linux 及 OS X：
+
+      ```
+      calicoctl apply -f allow-master-local.yaml
+      ```
+      {: pre}
+
+    - Windows：
+
+      ```
+      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
 ## 從叢集外部存取 NodePort、負載平衡器及 Ingress 服務
 {: #firewall_inbound}
 
@@ -507,7 +572,7 @@ subcollection: containers
 如果您要存取在 {{site.data.keyword.Bluemix_notm}} 內部或外部或在內部部署上執行且受防火牆保護的服務，您可以將工作者節點的 IP 位址新增至該防火牆，以容許針對您叢集的出埠網路資料流量。例如，您可能想要從受防火牆保護的 {{site.data.keyword.Bluemix_notm}} 資料庫讀取資料，或在內部部署的防火牆內將您的工作者節點子網路列入白名單，以接受來自您叢集的網路資料流量。
 {:shortdesc}
 
-1.  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+1.  [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. 取得工作者節點子網路或工作者節點 IP 位址。
   * **工作者節點子網路**：如果您預期經常變更叢集中的工作者節點數目，例如，如果您啟用[叢集 autoscaler](/docs/containers?topic=containers-ca#ca)，則您可能不想針對每一個新的工作者節點都更新防火牆。反之，您可以將該叢集使用的 VLAN 子網路列入白名單。請記住，VLAN 子網路可能由其他叢集中的工作者節點共用。
@@ -520,11 +585,11 @@ subcollection: containers
 
     2. 從前一個步驟的輸出中，針對您叢集中的工作者節點，記下**公用 IP** 的所有唯一網路 ID（前 3 個八位元組）。<staging> 如果您想要把僅限專用叢集列入白名單，則改為記下**專用 IP**。<staging> 在下列輸出中，唯一網路 ID 是 `169.xx.178` 和 `169.xx.210`。
         ```
-        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
+ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
         ```
         {: screen}
     3.  列出每個唯一網路 ID 的 VLAN 子網路。
@@ -533,11 +598,11 @@ subcollection: containers
         ```
         {: pre}
 
-        輸出範例：
-        ```
+    輸出範例：
+    ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
-        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5
-        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6
+        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   
+        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
     4.  擷取子網路位址。在輸出中，尋找 **IP** 數目。然後，使 `2` 的 `n` 次方等於 IP 的數目。比方說，如果 IP 的數目是 `16`，則 `2` 的 `4` (`n`) 次方就等於 `16`。現在，從 `32` 位元中減去 `n` 的值，就得出子網路 CIDR。例如，當 `n` 等於 `4` 時，CIDR 是 `28`（來自方程式 `32 - 4 = 28`）。將 **ID** 遮罩與 CIDR 值結合，即可得出完整子網路位址。在前一個輸出中，子網路位址如下：

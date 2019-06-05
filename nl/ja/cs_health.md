@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -30,54 +30,59 @@ subcollection: containers
 {{site.data.keyword.containerlong}} でロギングとモニタリングをセットアップすると、問題のトラブルシューティングや、Kubernetes クラスターとアプリの正常性とパフォーマンスの改善に役立ちます。
 {: shortdesc}
 
-継続的なモニタリングとロギングは、クラスターへの攻撃を検出し、問題が発生したときに問題をトラブルシューティングするために重要です。 クラスターを継続的にモニターすることによって、クラスターの容量、およびアプリで使用可能なリソースの可用性をよく把握することができます。 この情報があれば、アプリのダウン時間の発生を防ぐために準備できます。**注**: ロギングとモニタリングを構成するには、{{site.data.keyword.containerlong_notm}} で標準クラスターを使用する必要があります。
+継続的なモニタリングとロギングは、クラスターへの攻撃を検出し、問題が発生したときに問題をトラブルシューティングするために重要です。 クラスターを継続的にモニターすることによって、クラスターの容量、およびアプリで使用可能なリソースの可用性をよく把握することができます。 この情報があれば、アプリのダウン時間の発生を防ぐために準備できます。 **注**: ロギングとモニタリングを構成するには、{{site.data.keyword.containerlong_notm}} で標準クラスターを使用する必要があります。
+
+
 
 ## ロギング・ソリューションの選択
 {: #logging_overview}
 
-デフォルトでは、{{site.data.keyword.containerlong_notm}} クラスター・コンポーネント (ワーカー・ノード、コンテナー、アプリケーション、永続ストレージ、Ingress アプリケーション・ロード・バランサー、Kubernetes API、`kube-system` 名前空間) のすべてのログは、ローカルで生成され、書き込まれます。これらのログを収集し、転送して表示するために提供されているロギング・ソリューションが複数あります。
+デフォルトでは、{{site.data.keyword.containerlong_notm}} クラスター・コンポーネント (ワーカー・ノード、コンテナー、アプリケーション、永続ストレージ、Ingress アプリケーション・ロード・バランサー、Kubernetes API、`kube-system` 名前空間) のすべてのログは、ローカルで生成され、書き込まれます。 これらのログを収集し、転送して表示するために提供されているロギング・ソリューションが複数あります。
 {: shortdesc}
 
-ロギング・ソリューションは、ログを収集するクラスター・コンポーネントに応じて選択できます。一般的には、分析機能やインターフェース機能に基づいて好みのロギング・サービス ({{site.data.keyword.loganalysisfull}}、{{site.data.keyword.la_full}}、サード・パーティー・サービスなど) を選択します。それから、{{site.data.keyword.cloudaccesstrailfull}} を使用して、クラスター内のユーザー・アクティビティーを監査したり、クラスターのマスター・ログを {{site.data.keyword.cos_full}} にバックアップしたりします。**注**: ロギングを構成するには、標準 Kubernetes クラスターを使用する必要があります。
+ロギング・ソリューションは、ログを収集するクラスター・コンポーネントに応じて選択できます。 一般的には、分析機能やインターフェース機能に基づいて好みのロギング・サービス ({{site.data.keyword.loganalysisfull}}、{{site.data.keyword.la_full}}、サード・パーティー・サービスなど) を選択します。 それから、{{site.data.keyword.cloudaccesstrailfull}} を使用して、クラスター内のユーザー・アクティビティーを監査したり、クラスターのマスター・ログを {{site.data.keyword.cos_full}} にバックアップしたりします。 **注**: ロギングを構成するには、標準 Kubernetes クラスターを使用する必要があります。
 
 <dl>
 
+<dt>{{site.data.keyword.la_full_notm}}</dt>
+<dd>サード・パーティー・サービスとして LogDNA をクラスターにデプロイして、ポッド・コンテナーのログを管理します。 {{site.data.keyword.la_full_notm}} を使用するには、クラスター内のすべてのワーカー・ノードにロギング・エージェントをデプロイする必要があります。 このエージェントは、`kube-system` などのすべての名前空間から、ポッドの `/var/log` ディレクトリーに保管されている拡張子のないファイルと拡張子が `*.log` のログを収集します。 そして、それらのログを {{site.data.keyword.la_full_notm}} サービスに転送します。 このサービスについて詳しくは、[{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) の資料を参照してください。 始めに、[{{site.data.keyword.loganalysisfull_notm}} with LogDNA による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube)を参照してください。</dd>
+
 <dt>Fluentd と {{site.data.keyword.loganalysisfull_notm}} または syslog</dt>
-<dd>クラスター・コンポーネントのログの収集、転送、表示のために、Fluentd を使用してロギング構成を作成できます。ロギング構成を作成すると、[Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) クラスター・アドオンが、指定されたソースのパスからログを収集します。その後、Fluentd がそのログを {{site.data.keyword.loganalysisfull_notm}} または外部 syslog サーバーに転送します。
+<dd>クラスター・コンポーネントのログの収集、転送、表示のために、Fluentd を使用してロギング構成を作成できます。 ロギング構成を作成すると、[Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) クラスター・アドオンが、指定されたソースのパスからログを収集します。 その後、Fluentd がそのログを {{site.data.keyword.loganalysisfull_notm}} または外部 syslog サーバーに転送します。
 
-<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) を使用すると、ログの収集、保存、検索の機能を拡張できます。ソースのログを {{site.data.keyword.loganalysisfull_notm}} に転送するロギング構成を作成すると、Kibana ダッシュボードでログを表示できるようになります。</li>
+<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) を使用すると、ログの収集、保存、検索の機能を拡張できます。 ソースのログを {{site.data.keyword.loganalysisshort_notm}} に転送するロギング構成を作成すると、Kibana ダッシュボードでログを表示できるようになります。<p class="deprecated">{{site.data.keyword.loganalysisfull_notm}} は非推奨になりました。2019 年 4 月 30 日をもって、新しい {{site.data.keyword.loganalysisshort_notm}} インスタンスをプロビジョンできなくなり、すべてのライト・プラン・インスタンスは削除されます。既存のプレミアム・プラン・インスタンスは 2019 年 9 月 30 日までサポートされます。クラスターのログ収集を継続するには、Fluentd によって収集されたログを外部 syslog サーバーに転送するか、{{site.data.keyword.la_full_notm}} をセットアップしてください。</p></li>
 
-<li><strong>外部 syslog サーバー</strong>: syslog プロトコルを受け入れる外部サーバーをセットアップします。その後、ログをその外部サーバーに転送するロギング構成をクラスター内のソースに対して作成できます。</li></ul>
+<li><strong>外部 syslog サーバー</strong>: syslog プロトコルを受け入れる外部サーバーをセットアップします。 その後、ログをその外部サーバーに転送するロギング構成をクラスター内のソースに対して作成できます。</li></ul>
 
 始めに、[クラスターおよびアプリのログ転送について](#logging)を参照してください。
 </dd>
 
-<dt>{{site.data.keyword.la_full_notm}}</dt>
-<dd>サード・パーティー・サービスとして LogDNA をクラスターにデプロイして、ポッド・コンテナーのログを管理します。{{site.data.keyword.la_full_notm}} を使用するには、クラスター内のすべてのワーカー・ノードにロギング・エージェントをデプロイする必要があります。このエージェントは、`kube-system` などのすべての名前空間から、ポッドの `/var/log` ディレクトリーに保管されている拡張子のないファイルと拡張子が `*.log` のログを収集します。そして、それらのログを {{site.data.keyword.la_full_notm}} サービスに転送します。このサービスについて詳しくは、[{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) の資料を参照してください。 始めに、[{{site.data.keyword.loganalysisfull_notm}} with LogDNA による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube)を参照してください。</dd>
-
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
-<dd>クラスター内でユーザーによって開始された管理アクティビティーをモニターするには、監査ログを収集して {{site.data.keyword.cloudaccesstrailfull_notm}} に転送します。クラスターでは、2 種類の {{site.data.keyword.cloudaccesstrailshort}} イベントが生成されます。
+<dd>クラスター内でユーザーによって開始された管理アクティビティーをモニターするには、監査ログを収集して {{site.data.keyword.cloudaccesstrailfull_notm}} に転送します。 クラスターでは、2 種類の {{site.data.keyword.cloudaccesstrailshort}} イベントが生成されます。
 
 <ul><li>クラスター管理イベントは自動的に生成され、{{site.data.keyword.cloudaccesstrailshort}} に転送されます。</li>
 
-<li>Kubernetes API サーバー監査イベントは自動的に生成されますが、そのログを Fluentd で {{site.data.keyword.loganalysisshort}} に転送するには、[ロギング構成を作成](#api_forward)する必要があります。{{site.data.keyword.loganalysisshort}} に転送されたログを、{{site.data.keyword.cloudaccesstrailshort}} はプルします。</li></ul>
+<li>Kubernetes API サーバー監査イベントは自動的に生成されますが、そのログを Fluentd で {{site.data.keyword.cloudaccesstrailshort}} に転送するには、[ロギング構成を作成](#api_forward)する必要があります。</li></ul>
 
 追跡できる {{site.data.keyword.containerlong_notm}} イベントのタイプについて詳しくは、[Activity Tracker イベント](/docs/containers?topic=containers-at_events)を参照してください。 このサービスについて詳しくは、[Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla) の資料を参照してください。
 </dd>
 
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
-<dd>クラスターの Kubernetes マスターのログを収集し、転送して表示するために、任意の時点のマスター・ログのスナップショットを取得して {{site.data.keyword.cos_full_notm}} バケット内に収集することができます。このスナップショットには、ポッドのスケジューリング、デプロイメント、RBAC ポリシーなどの、API サーバー経由で送信されるすべてのものが含まれます。 始めに、[マスター・ログの収集](#collect_master)を参照してください。</dd>
+<dd>クラスターの Kubernetes マスターのログを収集し、転送して表示するために、任意の時点のマスター・ログのスナップショットを取得して {{site.data.keyword.cos_full_notm}} バケット内に収集することができます。 このスナップショットには、ポッドのスケジューリング、デプロイメント、RBAC ポリシーなどの、API サーバー経由で送信されるすべてのものが含まれます。 始めに、[マスター・ログの収集](#collect_master)を参照してください。</dd>
 
 <dt>サード・パーティー・サービス</dt>
-<dd>特別な要件がある場合は、独自のロギング・ソリューションをセットアップできます。 クラスターに追加できるサード・パーティー・ロギング・サービスを[ロギングとモニタリングの統合](/docs/containers?topic=containers-integrations#health_services)で確認してください。Kubernetes バージョン 1.11 以降を実行するクラスターでは、`/var/log/pods/` パスからコンテナー・ログを収集できます。 Kubernetes バージョン 1.10 以前を実行するクラスターでは、`/var/lib/docker/containers/` パスからコンテナー・ログを収集できます。</dd>
+<dd>特別な要件がある場合は、独自のロギング・ソリューションをセットアップできます。 クラスターに追加できるサード・パーティー・ロギング・サービスを[ロギングとモニタリングの統合](/docs/containers?topic=containers-supported_integrations#health_services)で確認してください。 Kubernetes バージョン 1.11 以降を実行するクラスターでは、`/var/log/pods/` パスからコンテナー・ログを収集できます。 Kubernetes バージョン 1.10 以前を実行するクラスターでは、`/var/lib/docker/containers/` パスからコンテナー・ログを収集できます。</dd>
 
 </dl>
 
-## クラスターおよびアプリのログ転送について
+## クラスターとアプリのログの syslog への転送について
 {: #logging}
 
-デフォルトでは、ログはクラスター内の [Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) アドオンによって収集されます。 クラスター内のソース (コンテナーなど) に対してロギング構成を作成すると、Fluentd によってそのソースのパスから収集されたログが、{{site.data.keyword.loganalysisshort_notm}} または外部 syslog サーバーに転送されます。ソースからロギング・サービスの取り込みポートへのトラフィックは暗号化されます。
+デフォルトでは、ログはクラスター内の [Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) アドオンによって収集されます。 クラスター内のソース (コンテナーなど) に対してロギング構成を作成すると、Fluentd によってそのソースのパスから収集されたログが、{{site.data.keyword.loganalysisshort_notm}} または外部 syslog サーバーに転送されます。 ソースからロギング・サービスの取り込みポートへのトラフィックは暗号化されます。
 {: shortdesc}
+
+{{site.data.keyword.loganalysisfull_notm}} は非推奨になりました。2019 年 4 月 30 日をもって、新しい {{site.data.keyword.loganalysisshort_notm}} インスタンスをプロビジョンできなくなり、すべてのライト・プラン・インスタンスは削除されます。既存のプレミアム・プラン・インスタンスは 2019 年 9 月 30 日までサポートされます。クラスターのログ収集を継続するには、Fluentd によって収集されたログを外部 syslog サーバーに転送するか、{{site.data.keyword.la_full_notm}} をセットアップしてください。
+{: deprecated}
 
 **ログ転送を構成できるソースは何ですか?**
 
@@ -89,7 +94,7 @@ subcollection: containers
     * `/var/log/syslog`
     * `/var/log/auth.log`
 
-2. `コンテナー`: 実行中のコンテナーによってログに記録される情報。</br>**パス**: `STDOUT` または `STDERR` に書き込まれるすべての情報。
+2. `container`: 実行中のコンテナーによってログに記録される情報。</br>**Paths**: `STDOUT` または `STDERR` に出力される任意の情報。
 
 3. `アプリケーション`: アプリケーション・レベルで発生するイベントに関する情報。 これは、ログインの成功、ストレージに関する警告、アプリ・レベルで実行できるその他の操作などのイベントが発生したという通知である可能性があります。</br>**パス**: ログの転送先にするパスを設定できます。 ただし、ログを送信するには、ロギング構成で絶対パスを使用する必要があります。そうしないとログは読み取られません。 パスがワーカー・ノードにマウントされている場合は、シンボリック・リンクが作成されている可能性があります。 例: 指定されたパスが `/usr/local/spark/work/app-0546/0/stderr` であるのに、実際にはログが `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr` に送信されている場合、ログは読み取れません。
 
@@ -111,7 +116,7 @@ subcollection: containers
 
 6. `kube-audit`: Kubernetes API サーバーに送信されるクラスター関連アクションに関する情報。時間、ユーザー、および影響を受けるリソースを含みます。
 
-7. `ingress`: Ingress アプリケーション・ロード・バランサーを介してクラスターに伝送されるネットワーク・トラフィックに関する情報。 特定の構成情報については、[Ingress の資料](/docs/containers?topic=containers-ingress_health#ingress_logs)を確認してください。</br>**パス**:
+7. `ingress`: Ingress ALB を介してクラスターに伝送されるネットワーク・トラフィックに関する情報。</br>**パス**:
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
@@ -140,7 +145,7 @@ subcollection: containers
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
-      <td>ログの転送先。 オプションは、ログを {{site.data.keyword.loganalysisshort_notm}} に転送する <code>ibm</code> と、ログを外部サーバーに転送する <code>syslog</code> です。</td>
+      <td>ログの転送先。 オプションは、ログを {{site.data.keyword.loganalysisshort_notm}} に転送する <code>ibm</code> と、ログを外部サーバーに転送する <code>syslog</code> です。 <p class="deprecated">{{site.data.keyword.loganalysisfull_notm}} は非推奨になりました。既存のプレミアム・プラン・インスタンスは 2019 年 9 月 30 日までサポートされます。<code>--type syslog</code> を使用してログを外部 syslog サーバーに転送してください。</td>
     </tr>
     <tr>
       <td><code><em>--namespace</em></code></td>
@@ -193,24 +198,27 @@ subcollection: containers
 
 **Fluentd は自分で更新し続ける必要がありますか?**
 
-ロギングまたはフィルター構成を変更するには、Fluentd ロギング・アドオンが最新バージョンである必要があります。 デフォルトでは、このアドオンに対する自動更新が有効になっています。 自動更新を使用不可にするには、[クラスターのアドオンの更新: ロギング用の Fluentd](/docs/containers?topic=containers-update#logging)を参照してください。
+ロギングまたはフィルター構成を変更するには、Fluentd ロギング・アドオンが最新バージョンである必要があります。 デフォルトでは、このアドオンに対する自動更新が有効になっています。 自動更新を使用不可にするには、[クラスターのアドオンの更新: ロギング用の Fluentd](/docs/containers?topic=containers-update#logging-up)を参照してください。
 
 **クラスター内の 1 つのソースから、一部のログだけを転送し、その他のログは転送しないようにすることは可能ですか?**
 
-はい。 例えば、特にログ量の多いポッドがある場合に、そのポッドのログでログ・ストレージ・スペースが占有されないようにして、他のポッドのログを転送したいことがあります。特定のポッドのログを転送しないようにする方法については、[ログのフィルタリング](#filter-logs)を参照してください。
+はい。 例えば、特にログ量の多いポッドがある場合に、そのポッドのログでログ・ストレージ・スペースが占有されないようにして、他のポッドのログを転送したいことがあります。 特定のポッドのログを転送しないようにする方法については、[ログのフィルタリング](#filter-logs)を参照してください。
 
-**1 つのクラスターで複数のチームが作業しています。チームごとにログを分離するにはどうしたらよいですか?**
+**1 つのクラスターで複数のチームが作業しています。 チームごとにログを分離するにはどうしたらよいですか?**
 
-名前空間ごとに別の Cloud Foundry スペースにコンテナー・ログを転送できます。名前空間ごとに、`コンテナー`・ログ・ソースに対してログ転送構成を作成してください。その構成を適用するチームの名前空間を `--namespace` フラグで指定し、ログの転送先にするチームのスペースを `--space` フラグで指定します。そのスペース内の Cloud Foundry 組織を `--org` フラグで指定することもできます。
+名前空間ごとに別の Cloud Foundry スペースにコンテナー・ログを転送できます。 名前空間ごとに、`コンテナー`・ログ・ソースに対してログ転送構成を作成してください。 その構成を適用するチームの名前空間を `--namespace` フラグで指定し、ログの転送先にするチームのスペースを `--space` フラグで指定します。 そのスペース内の Cloud Foundry 組織を `--org` フラグで指定することもできます。
 
 <br />
 
 
-## クラスターおよびアプリのログ転送の構成
+## クラスターとアプリのログの syslog への転送
 {: #configuring}
 
 コンソールまたは CLI を使用して、{{site.data.keyword.containerlong_notm}} 標準クラスターのロギングを構成できます。
 {: shortdesc}
+
+{{site.data.keyword.loganalysisfull_notm}} は非推奨になりました。2019 年 4 月 30 日をもって、新しい {{site.data.keyword.loganalysisshort_notm}} インスタンスをプロビジョンできなくなり、すべてのライト・プラン・インスタンスは削除されます。既存のプレミアム・プラン・インスタンスは 2019 年 9 月 30 日までサポートされます。クラスターのログ収集を継続するには、Fluentd によって収集されたログを外部 syslog サーバーに転送するか、{{site.data.keyword.la_full_notm}} をセットアップしてください。
+{: deprecated}
 
 ### {{site.data.keyword.Bluemix_notm}} コンソールを使用したログ転送の有効化
 {: #enable-forwarding-ui}
@@ -223,9 +231,9 @@ subcollection: containers
 
 始める前に、使用する標準クラスターを[作成](/docs/containers?topic=containers-clusters#clusters)するか、決定します。
 
-1. [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/containers-kubernetes/clusters)にログインして、**「Kubernetes」>「クラスター」**にナビゲートします。
+1. [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/kubernetes/clusters)にログインして、**「Kubernetes」>「クラスター」**にナビゲートします。
 2. 標準クラスターを選択し、**「概要」**タブの**「ログ」**フィールドで**「有効」**をクリックします。
-3. ログの転送元の **Cloud Foundry 組織**と**スペース**を選択します。ダッシュボードでログ転送を構成すると、クラスターのデフォルトの {{site.data.keyword.loganalysisshort_notm}} エンドポイントにログが送信されます。 外部サーバーまたは別の {{site.data.keyword.loganalysisshort_notm}} エンドポイントにログを転送するには、CLI を使用してロギングを構成します。
+3. ログの転送元の **Cloud Foundry 組織**と**スペース**を選択します。 ダッシュボードでログ転送を構成すると、クラスターのデフォルトの {{site.data.keyword.loganalysisshort_notm}} エンドポイントにログが送信されます。 外部サーバーまたは別の {{site.data.keyword.loganalysisshort_notm}} エンドポイントにログを転送するには、CLI を使用してロギングを構成します。
 4. ログの転送元の**ログ・ソース**を選択します。
 5. **「作成」**をクリックします。
 
@@ -240,7 +248,64 @@ subcollection: containers
 
 始める前に、使用する標準クラスターを[作成](/docs/containers?topic=containers-clusters#clusters)するか、決定します。
 
-**IBM へのログの転送**
+**`udp` または `tcp` プロトコルを介してユーザー自身のサーバーにログを転送する**
+
+1. [**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+
+2. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+3. ログを syslog に転送するには、以下の 2 つの方法のいずれかで、syslog プロトコルを受け入れるサーバーをセットアップします。
+  * 独自のサーバーをセットアップして管理するか、プロバイダーが管理するサーバーを使用します。 プロバイダーがサーバーを管理する場合は、ロギング・プロバイダーからロギング・エンドポイントを取得します。
+
+  * コンテナーから syslog を実行します。 例えば、この[デプロイメント .yaml ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) を使用して、クラスター内のコンテナーで実行されている Docker パブリック・イメージをフェッチできます。 このイメージは、パブリック・クラスター IP アドレスのポート `514` を公開し、このパブリック・クラスター IP アドレスを使用して syslog ホストを構成します。
+
+  syslog 接頭部を削除することによって、有効な JSON としてログを表示できます。 これを行うには、rsyslog サーバーが稼働している環境の <code>etc/rsyslog.conf</code> ファイルの先頭に次のコードを追加します。 <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+  {: tip}
+
+4. ログ転送構成を作成します。
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ```
+    {: pre}
+
+</br></br>
+
+**`tls` プロトコルを介してユーザー自身のサーバーにログを転送する**
+
+以下のステップは、一般的な説明です。 実稼働環境でコンテナーを使用する前に、必要なセキュリティー条件を満たしていることを確認してください。
+{: tip}
+
+1. 以下の [{{site.data.keyword.Bluemix_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
+    * クラスターに対する**エディター**または**管理者**のプラットフォーム役割
+    * `kube-system` 名前空間に対する**ライター**または**管理者**のサービス役割
+
+2. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+3. 以下の 2 つの方法のいずれかで、syslog プロトコルを受け入れるサーバーをセットアップします。
+  * 独自のサーバーをセットアップして管理するか、プロバイダーが管理するサーバーを使用します。 プロバイダーがサーバーを管理する場合は、ロギング・プロバイダーからロギング・エンドポイントを取得します。
+
+  * コンテナーから syslog を実行します。 例えば、この[デプロイメント .yaml ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) を使用して、クラスター内のコンテナーで実行されている Docker パブリック・イメージをフェッチできます。 このイメージは、パブリック・クラスター IP アドレスのポート `514` を公開し、このパブリック・クラスター IP アドレスを使用して syslog ホストを構成します。 関連する認証局証明書およびサーバー・サイド証明書を注入し、`syslog.conf` を更新して、サーバー上で `tls` を有効にする必要があります。
+
+4. 認証局証明書を `ca-cert` という名前のファイルに保存します。この名前のとおりでなければなりません。
+
+5. `ca-cert` ファイル用のシークレットを `kube-system` 名前空間に作成します。 ロギング構成を作成するときは、`--ca-cert` フラグにこのシークレット名を使用します。
+    ```
+    kubectl -n kube-system create secret generic --from-file=ca-cert
+    ```
+    {: pre}
+
+6. ログ転送構成を作成します。
+    ```
+    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
+    ```
+    {: pre}
+
+</br></br>
+
+**{{site.data.keyword.loganalysisfull_notm}} へのログの転送**
+
+{{site.data.keyword.loganalysisfull_notm}} は非推奨になりました。2019 年 4 月 30 日をもって、新しい {{site.data.keyword.loganalysisshort_notm}} インスタンスをプロビジョンできなくなり、すべてのライト・プラン・インスタンスは削除されます。既存のプレミアム・プラン・インスタンスは 2019 年 9 月 30 日までサポートされます。クラスターのログ収集を継続するには、Fluentd によって収集されたログを外部 syslog サーバーに転送するか、{{site.data.keyword.la_full_notm}} をセットアップしてください。
+{: deprecated}
 
 1. 権限を確認してください。
     1. [**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
@@ -256,10 +321,7 @@ subcollection: containers
           ```
           {: pre}
 
-2.  ログ・ソースがある標準クラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-
-    専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
-    {: tip}
+2.  ログ・ソースがある標準クラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 3. ログ転送構成を作成します。
     ```
@@ -292,67 +354,7 @@ subcollection: containers
 コンテナー内で実行するアプリを、STDOUT または STDERR にログを書き込むように構成できない場合は、アプリ・ログ・ファイルからログを転送するログ構成を作成できます。
 {: tip}
 
-</br>
-</br>
-
-
-**`udp` または `tcp` プロトコルを介してユーザー自身のサーバーにログを転送する**
-
-1. [**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
-
-2. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
-
-3. ログを syslog に転送するには、以下の 2 つの方法のいずれかで、syslog プロトコルを受け入れるサーバーをセットアップします。
-  * 独自のサーバーをセットアップして管理するか、プロバイダーが管理するサーバーを使用します。 プロバイダーがサーバーを管理する場合は、ロギング・プロバイダーからロギング・エンドポイントを取得します。
-
-  * コンテナーから syslog を実行します。 例えば、この[デプロイメント .yaml ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) を使用して、クラスター内のコンテナーで実行されている Docker パブリック・イメージをフェッチできます。 このイメージは、パブリック・クラスター IP アドレスのポート `514` を公開し、このパブリック・クラスター IP アドレスを使用して syslog ホストを構成します。
-
-  syslog 接頭部を削除することによって、有効な JSON としてログを表示できます。 これを行うには、rsyslog サーバーが稼働している環境の <code>etc/rsyslog.conf</code> ファイルの先頭に次のコードを追加します。<code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
-  {: tip}
-
-4. ログ転送構成を作成します。
-    ```
-    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
-    ```
-    {: pre}
-
-</br>
-</br>
-
-
-**`tls` プロトコルを介してユーザー自身のサーバーにログを転送する**
-
-以下のステップは、一般的な説明です。 実稼働環境でコンテナーを使用する前に、必要なセキュリティー条件を満たしていることを確認してください。
-{: tip}
-
-1. 以下の [{{site.data.keyword.Bluemix_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
-    * クラスターに対する**エディター**または**管理者**のプラットフォーム役割
-    * `kube-system` 名前空間に対する**ライター**または**管理者**のサービス役割
-
-2. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
-
-3. 以下の 2 つの方法のいずれかで、syslog プロトコルを受け入れるサーバーをセットアップします。
-  * 独自のサーバーをセットアップして管理するか、プロバイダーが管理するサーバーを使用します。 プロバイダーがサーバーを管理する場合は、ロギング・プロバイダーからロギング・エンドポイントを取得します。
-
-  * コンテナーから syslog を実行します。 例えば、この[デプロイメント .yaml ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) を使用して、クラスター内のコンテナーで実行されている Docker パブリック・イメージをフェッチできます。 このイメージは、パブリック・クラスター IP アドレスのポート `514` を公開し、このパブリック・クラスター IP アドレスを使用して syslog ホストを構成します。 関連する認証局証明書およびサーバー・サイド証明書を注入し、`syslog.conf` を更新して、サーバー上で `tls` を有効にする必要があります。
-
-4. 認証局証明書を `ca-cert` という名前のファイルに保存します。この名前のとおりでなければなりません。
-
-5. `ca-cert` ファイル用のシークレットを `kube-system` 名前空間に作成します。 ロギング構成を作成するときは、`--ca-cert` フラグにこのシークレット名を使用します。
-    ```
-    kubectl -n kube-system create secret generic --from-file=ca-cert
-    ```
-    {: pre}
-
-6. ログ転送構成を作成します。
-    ```
-    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
-    ```
-    {: pre}
-
-</br>
-</br>
-
+</br></br>
 
 ### ログ転送の確認
 {: verify-logging}
@@ -394,7 +396,7 @@ subcollection: containers
 クラスターの 1 つまたはすべてのロギング構成によるログの転送を停止できます。
 {: shortdesc}
 
-1. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+1. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. ロギング構成を削除します。
   <ul>
@@ -438,7 +440,7 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
 <br />
 
 
-## ログのフィルタリング
+## syslog に転送されるログのフィルタリング
 {: #filter-logs}
 
 一定期間における特定のログをフィルターで除外して、転送するログを選択することができます。 フラグを使用することによって、異なるフィルター操作オプションを区別できます。
@@ -523,32 +525,30 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
 
 
 
-## Kubernetes API 監査ログのログ転送の構成
+## {{site.data.keyword.cloudaccesstrailfull_notm}} または syslog への Kubernetes API 監査ログの転送
 {: #api_forward}
 
-Kubernetes は、Kubernetes API サーバーを通るすべてのイベントを自動的に監査します。 {{site.data.keyword.loganalysisshort_notm}} または外部サーバーにイベントを転送できます。
+Kubernetes は、Kubernetes API サーバーを通るすべてのイベントを自動的に監査します。 {{site.data.keyword.cloudaccesstrailfull_notm}} または外部サーバーにイベントを転送できます。
 {: shortdesc}
-
 
 Kubernetes 監査ログについて詳しくは、Kubernetes 資料の<a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">監査トピック <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。
 
 * 現在は、このロギング構成のすべてのクラスターで、デフォルトの監査ポリシーが使用されます。
 * 現在、フィルターはサポートされていません。
-* クラスターごとに 1 つの `kube-audit` 構成しか設定できませんが、ロギング構成と Webhook を作成することで、{{site.data.keyword.loganalysisshort_notm}} と外部サーバーにログを転送できます。
+* クラスターごとに 1 つの `kube-audit` 構成しか設定できませんが、ロギング構成と Webhook を作成することで、{{site.data.keyword.cloudaccesstrailshort}} と外部サーバーにログを転送できます。
 * クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
 
-
-### {{site.data.keyword.loganalysisshort_notm}} への監査ログの送信
+### {{site.data.keyword.cloudaccesstrailfull_notm}} への監査ログの転送
 {: #audit_enable_loganalysis}
 
-Kubernetes API サーバーの監査ログを {{site.data.keyword.loganalysisshort_notm}} に転送できます。
+Kubernetes API サーバーの監査ログを {{site.data.keyword.cloudaccesstrailfull_notm}} に転送できます。
 {: shortdesc}
 
 **始める前に**
 
-1. 権限を確認してください。 クラスターまたはロギング構成の作成時にスペースを指定した場合は、アカウント所有者と {{site.data.keyword.containerlong_notm}} 鍵所有者の両方に、そのスペースの管理者権限、開発者権限、または監査員権限が必要です。
+1. 権限を確認してください。 クラスターの作成時にスペースを指定した場合は、アカウント所有者と {{site.data.keyword.containerlong_notm}} 鍵所有者の両方に、そのスペース内の管理者権限、開発者権限、または監査員権限が必要です。
 
-2. API サーバー監査ログの収集元にするクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
+2. API サーバー監査ログの収集元にするクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **ログの転送**
 
@@ -618,18 +618,14 @@ Kubernetes API サーバーの監査ログを {{site.data.keyword.loganalysissho
 
 3. オプション: 監査ログの転送を停止するには、[構成を削除](#log_sources_delete)します。
 
-<br />
-
-
-
-### 外部サーバーへの監査ログの送信
+### 外部 syslog サーバーへの監査ログの転送
 {: #audit_enable}
 
 **始める前に**
 
 1. ログを転送できるリモート・ロギング・サーバーをセットアップします。 例えば、[Logstash と Kubernetes を使用して ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend)、監査イベントを収集できます。
 
-2. API サーバー監査ログの収集元にするクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。 **注**: 専用アカウントを使用している場合は、パブリックの {{site.data.keyword.cloud_notm}} エンドポイントにログインし、ログ転送を有効にするために、パブリックの組織とスペースをターゲットにする必要があります。
+2. API サーバー監査ログの収集元にするクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Kubernetes API 監査ログを転送するには、以下のようにします。
 
@@ -691,7 +687,7 @@ Kubernetes API 監査ログを転送するには、以下のようにします�
     {: pre}
 
 4. オプション: 監査ログの転送を停止するには、構成を無効にします。
-    1. API サーバー監査ログの収集を停止するクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+    1. API サーバー監査ログの収集を停止するクラスターの場合: [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
     2. クラスターの API サーバーの Web フック・バックエンド構成を無効にします。
 
         ```
@@ -709,7 +705,7 @@ Kubernetes API 監査ログを転送するには、以下のようにします�
 <br />
 
 
-## マスター・ログの収集
+## {{site.data.keyword.cos_full_notm}} バケット内のマスター・ログの収集
 {: #collect_master}
 
 {{site.data.keyword.containerlong_notm}} の使用時に、任意の時点でマスター・ログのスナップショットを取得して、{{site.data.keyword.cos_full_notm}} バケット内に収集できます。 このスナップショットには、ポッドのスケジューリング、デプロイメント、RBAC ポリシーなどの、API サーバー経由で送信されるすべてのものが含まれます。
@@ -719,12 +715,12 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
 
 **始める前に**
 
-* {{site.data.keyword.Bluemix_notm}} カタログから {{site.data.keyword.cos_short}} の[インスタンスをプロビジョンします](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-for-developers#provision-an-instance-of-ibm-cloud-object-storage)。
+* {{site.data.keyword.Bluemix_notm}} カタログから {{site.data.keyword.cos_short}} の[インスタンスをプロビジョンします](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev)。
 * クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
 **スナップショットの作成**
 
-1. [この入門チュートリアル](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started-console-#create-buckets)に従って、{{site.data.keyword.Bluemix_notm}} コンソールを使用して Object Storage バケットを作成します。
+1. [この入門チュートリアル](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets)に従って、{{site.data.keyword.Bluemix_notm}} コンソールを使用して Object Storage バケットを作成します。
 
 2. 作成したバケット内で [HMAC サービス資格情報](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials)を生成します。
   1. {{site.data.keyword.cos_short}} ダッシュボードの**「サービス資格情報」**タブで、**「新規資格情報」**をクリックします。
@@ -792,35 +788,34 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
     <dd>Kubernetes ダッシュボードは、ワーカー・ノードの正常性の確認、Kubernetes リソースの検索、コンテナー化アプリのデプロイ、ロギングとモニタリング情報を使用したアプリのトラブルシューティングを行える管理 Web インターフェースです。 Kubernetes ダッシュボードにアクセスする方法について詳しくは、[{{site.data.keyword.containerlong_notm}} での Kubernetes ダッシュボードの起動](/docs/containers?topic=containers-app#cli_dashboard)を参照してください。</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>標準クラスターのメトリックは、Kubernetes クラスターを作成したときにログインした {{site.data.keyword.Bluemix_notm}} アカウントにあります。 クラスターの作成時に {{site.data.keyword.Bluemix_notm}} スペースを指定した場合、メトリックはそのスペースに配置されます。 コンテナーのメトリックはクラスターにデプロイされたすべてのコンテナーについて自動的に収集されます。 これらのメトリックが送信され、Grafana で使用できるようになります。 メトリックについて詳しくは、[{{site.data.keyword.containerlong_notm}}　のモニター](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov)を参照してください。</p>
-    <p>Grafana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントまたはスペースを選択します。</p> <table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
-  <caption>モニター・トラフィック用に開く IP アドレス</caption>
-        <thead>
-        <th>{{site.data.keyword.containerlong_notm}} 地域</th>
-        <th>モニタリング・アドレス</th>
-        <th>モニタリング・サブネット</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>中欧</td>
-         <td><code>metrics.eu-de.bluemix.net</code></td>
-         <td><code>158.177.65.80/30</code></td>
-        </tr>
-        <tr>
-         <td>英国南部</td>
-         <td><code>metrics.eu-gb.bluemix.net</code></td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>米国東部、米国南部、北アジア太平洋地域、南アジア太平洋地域</td>
-          <td><code>metrics.ng.bluemix.net</code></td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
- </dd>
+    <p>Grafana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントまたはスペースを選択します。</p>
+    <table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
+      <caption>モニター・トラフィック用に開く IP アドレス</caption>
+            <thead>
+            <th>{{site.data.keyword.containerlong_notm}} 地域</th>
+            <th>モニタリング・アドレス</th>
+            <th>モニタリング・サブネット</th>
+            </thead>
+          <tbody>
+            <tr>
+             <td>中欧</td>
+             <td><code>metrics.eu-de.bluemix.net</code></td>
+             <td><code>158.177.65.80/30</code></td>
+            </tr>
+            <tr>
+             <td>英国南部</td>
+             <td><code>metrics.eu-gb.bluemix.net</code></td>
+             <td><code>169.50.196.136/29</code></td>
+            </tr>
+            <tr>
+              <td>米国東部、米国南部、北アジア太平洋地域、南アジア太平洋地域</td>
+              <td><code>metrics.ng.bluemix.net</code></td>
+              <td><code>169.47.204.128/29</code></td>
+             </tr>
+            </tbody>
+          </table> </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。 詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)を参照してください。 **注**: {{site.data.keyword.mon_full_notm}} は `containerd` コンテナー・ランタイムをサポートしていません。 バージョン 1.11 以降のクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、一部のコンテナー・メトリックは収集されません。</dd>
+  <dd>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。 詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)を参照してください。</dd>
 </dl>
 
 ### その他のヘルス・モニター・ツール
@@ -829,7 +824,7 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 他のツールを構成してモニター機能を追加することができます。
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus は、Kubernetes のために設計されたモニタリング、ロギング、アラートのためのオープン・ソースのツールです。 このツールは、Kubernetes のロギング情報に基づいてクラスター、ワーカー・ノード、デプロイメントの正常性に関する詳細情報を取得します。 セットアップ方法について詳しくは、[{{site.data.keyword.containerlong_notm}} とのサービスの統合](/docs/containers?topic=containers-integrations#integrations)を参照してください。</dd>
+    <dd>Prometheus は、Kubernetes のために設計されたモニタリング、ロギング、アラートのためのオープン・ソースのツールです。 このツールは、Kubernetes のロギング情報に基づいてクラスター、ワーカー・ノード、デプロイメントの正常性に関する詳細情報を取得します。 セットアップ情報については、[CoreOS の説明 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus) を参照してください。</dd>
 </dl>
 
 <br />
@@ -848,21 +843,19 @@ Autorecovery が正常に機能するためには、1 つ以上の正常なノ�
 - 以下の [{{site.data.keyword.Bluemix_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
     - クラスターに対する**管理者**のプラットフォーム役割
     - `kube-system` 名前空間に対する**ライター**または**管理者**のサービス役割
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 自動リカバリーを構成するには、以下のようにします。
 
-1.  [手順に従って](/docs/containers?topic=containers-integrations#helm)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。
+1.  [手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。
 
 2.  tiller がサービス・アカウントでインストールされていることを確認します。
-
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
     {: pre}
 
     出力例:
-
     ```
     NAME                                 SECRETS   AGE
     tiller                               1         2m
@@ -1014,36 +1007,35 @@ Autorecovery が正常に機能するためには、1 つ以上の正常なノ�
    </table>
 
 4. クラスター内に構成マップを作成します。
-
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
 5. 適切な検査を実行して、`kube-system` 名前空間内に `ibm-worker-recovery-checks` という名前の構成マップが作成されていることを確認します。
-
     ```
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
 6. `ibm-worker-recovery` Helm チャートをインストールして、クラスターに Autorecovery をデプロイします。
-
     ```
-    helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
+    helm install --name ibm-worker-recovery iks-charts/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
 7. 数分後に、次のコマンドの出力にある `Events` セクションを確認して、Autorecovery のデプロイメントのアクティビティーを確認できます。
-
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
 8. Autorecovery デプロイメントでアクティビティーが表示されない場合は、Autorecovery チャート定義に含まれているテストを実行して、Helm デプロイメントを確認することができます。
-
-    ```
+```
     helm test ibm-worker-recovery
     ```
     {: pre}
+
+
+
+

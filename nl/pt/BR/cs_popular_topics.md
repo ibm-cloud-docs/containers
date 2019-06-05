@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,34 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 
 
 
+## Tópicos populares em abril de 2019
+{: #apr19}
+
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
+<caption>Tópicos populares para contêineres e clusters Kubernetes em abril de 2019</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>15 de abril de 2019</td>
+<td>[Registrando um nome de host de balanceador de carga de rede (NLB)](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>Agora, depois de configurar balanceadores de carga de rede (NLBs) pública para expor seus aplicativos à Internet, é possível criar entradas DNS para os IPs do NLB criando nomes de host. O {{site.data.keyword.Bluemix_notm}} é responsável pela geração e manutenção do certificado SSL curinga para o nome de host. Também é possível configurar monitores TCP/HTTP(S) para verificar o funcionamento dos endereços IP do NLB atrás de cada nome do host.</td>
+</tr>
+<tr>
+<td>8 de abril de 2019</td>
+<td>[Terminal do Kubernetes em seu navegador da web (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>Se você usar o painel do cluster no console do {{site.data.keyword.Bluemix_notm}} para gerenciar os seus clusters, mas desejar fazer mudanças de configuração mais avançadas rapidamente, agora será possível executar comandos da CLI diretamente de seu navegador da web no Terminal do Kubernetes. Na página de detalhes de um cluster, inicie o Terminal do Kubernetes clicando no botão **Terminal**. Observe que o Terminal do Kubernetes é liberado como um complemento beta e não é destinado ao uso em clusters de produção.</td>
+</tr>
+<tr>
+<td>4 de abril de 2019</td>
+<td>[Principais altamente disponíveis em Sydney no momento](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>Quando você [cria um cluster](/docs/containers?topic=containers-clusters#clusters_ui) em um local metro multizona, agora incluindo Sydney, as réplicas do principal do Kubernetes são difundidas entre as zonas para fornecer alta disponibilidade.</td>
+</tr>
+</tbody></table>
+
 ## Tópicos populares em março de 2019
 {: #mar19}
 
@@ -47,13 +75,13 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 <td>21 de março de 2019</td>
 <td>Introduzindo Terminais de Serviço Privados para o Cluster do Kubernetes do Kubernetes</td>
 <td>Por padrão, o {{site.data.keyword.containerlong_notm}} configura seu cluster com acesso em uma VLAN pública e privada. Anteriormente, se você desejasse um [cluster de VLAN somente privada](/docs/containers?topic=containers-plan_clusters#private_clusters), era necessário configurar um dispositivo de gateway para conectar os nós do trabalhador do cluster ao mestre. Agora, é possível usar o terminal em serviço privado. Com o terminal em serviço privado ativado, todo o tráfego entre os nós do trabalhador e o mestre está na rede privada, sem a necessidade de um dispositivo de gateway. Além disso, o tráfego aumentado de segurança, de entrada e de saída na rede privada é [ilimitado e não cobrado ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud/bandwidth). Ainda é possível manter um terminal em serviço público para acesso seguro ao mestre do Kubernetes na Internet, por exemplo, para executar comandos `kubectl` sem estar na rede privada.<br><br>
-Para usar terminais em serviço privados, deve-se ativar o [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) e os [terminais em serviço](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) para sua conta de infraestrutura do IBM Cloud (SoftLayer). Seu cluster deve executar o Kubernetes versão 1.11 ou mais recente. Se o seu cluster executar uma versão anterior do Kubernetes, [atualize para pelo menos 1.11](/docs/containers?topic=containers-update#update). Para obter mais informações, consulte os links a seguir:<ul>
+Para usar terminais em serviço privados, deve-se ativar o [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) e os [terminais em serviço](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) para sua conta de infraestrutura do IBM Cloud (SoftLayer). Seu cluster deve executar o Kubernetes versão 1.11 ou mais recente. Se o seu cluster executar uma versão anterior do Kubernetes, [atualize para pelo menos 1.11](/docs/containers?topic=containers-update#update). Para obter mais informações, consulte os links a seguir:<ul>
 <li>[ Entendendo a Comunicação Master para o Trabalhador com Terminais de Serviço ](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[ Configurando o terminal em serviço privado ](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[Alternando de terminais em serviço públicos para privados](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>Se você tiver um firewall na rede privada, [incluindo os endereços IP privados para o {{site.data.keyword.containerlong_notm}}, o {{site.data.keyword.registrylong_notm}} e outros serviços do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
 </ul>
-<p class="important">Se você alternar para um cluster de terminal em serviço somente privado, certifique-se de que seu cluster ainda possa se comunicar com outros serviços do {{site.data.keyword.Bluemix_notm}} que você usar. [Armazenamento de arquivo baseado em NFS](/docs/containers?topic=containers-file_storage#file_storage), [SDS (armazenamento definido por software) de Portworx (SDS)](/docs/containers?topic=containers-portworx#portworx)e [cluster autoscaler](/docs/containers?topic=containers-ca#ca) não suportam terminal em serviço privado apenas. Use um cluster com os terminais em serviço público e privado no lugar.</p>
+<p class="important">Se você alternar para um cluster de terminal em serviço somente privado, certifique-se de que seu cluster ainda possa se comunicar com outros serviços do {{site.data.keyword.Bluemix_notm}} que você usar. O [armazenamento definido por software (SDS) do Portworx](/docs/containers?topic=containers-portworx#portworx) e o [dimensionador automático de cluster](/docs/containers?topic=containers-ca#ca) não suportam o terminal de serviço somente privado. Use um cluster com os terminais em serviço público e privado no lugar. O [armazenamento de arquivos baseado em NFS](/docs/containers?topic=containers-file_storage#file_storage) será suportado se seu cluster executar o Kubernetes versão 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 ou mais recente.</p>
 </td>
 </tr>
 <tr>
@@ -70,7 +98,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 ## Tópicos populares em fevereiro de 2019
 {: #feb19}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em fevereiro de 2019</caption>
 <thead>
 <th>Data</th>
@@ -103,7 +131,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 ## Tópicos populares em janeiro de 2019
 {: #jan19}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em janeiro de 2019</caption>
 <thead>
 <th>Data</th>
@@ -131,7 +159,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 ## Tópicos populares em dezembro de 2018
 {: #dec18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em dezembro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -159,7 +187,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 ## Tópicos populares em novembro de 2018
 {: #nov18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em novembro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -179,8 +207,8 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 </tr>
 <tr>
 <td>7 de novembro</td>
-<td>Balanceador de carga 2.0 (beta)</td>
-<td>Agora é possível escolher entre o [balanceador de carga 1.0 ou 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) para expor com segurança seus apps de cluster para o público.</td>
+<td>Balanceador de carga de rede 2.0 (beta)</td>
+<td>Agora, é possível escolher entre o [NLB 1.0 ou 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) para expor de forma segura seus aplicativos de cluster para o público.</td>
 </tr>
 <tr>
 <td>7 de novembro</td>
@@ -189,7 +217,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 </tr>
 <tr>
 <td>7 de novembro</td>
-<td>Mestres altamente disponíveis em clusters que executam o Kubernetes versão 1.10</td>
+<td>Mestres altamente disponíveis</td>
 <td>Os mestres altamente disponíveis estão disponíveis para clusters que executam o Kubernetes versão 1.10! Todos os benefícios descritos na entrada anterior para clusters 1.11 se aplicam aos clusters 1.10, assim como as [etapas de preparação](/docs/containers?topic=containers-cs_versions#110_ha-masters) que devem ser executadas.</td>
 </tr>
 <tr>
@@ -207,7 +235,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 ## Tópicos populares em outubro de 2018
 {: #oct18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em outubro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -223,7 +251,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 <tr>
 <td>22 de Outubro</td>
 <td>[ Nova posição de multisona de Londres,  ` lon05 ` ](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>A cidade metropolitana de múltiplas zonas de Londres substitui a zona `lon02` pela nova zona `lon05`, uma zona com mais recursos de infraestrutura do que `lon02`. Crie novos clusters multizona com  ` lon05 `. Os clusters existentes com `lon02` são suportados, mas os novos clusters de múltiplas zonas devem usar `lon05` no lugar.</td>
+<td>O local metro multizona de Londres substitui a zona `lon02` pela nova zona `lon05`, que contém mais recursos de infraestrutura do que a `lon02`. Crie novos clusters multizona com  ` lon05 `. Os clusters existentes com `lon02` são suportados, mas os novos clusters de múltiplas zonas devem usar `lon05` no lugar.</td>
 </tr>
 <tr>
 <td>05 de outubro</td>
@@ -245,7 +273,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 ## Tópicos populares em setembro de 2018
 {: #sept18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em setembro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -270,7 +298,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 ## Tópicos populares em agosto de 2018
 {: #aug18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em agosto de 2018</caption>
 <thead>
 <th>Data</th>
@@ -281,7 +309,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 <tr>
 <td>31 de agosto</td>
 <td>{{site.data.keyword.cos_full_notm}}  está agora integrado com o  {{site.data.keyword.containerlong}}</td>
-<td>Use solicitações de volume persistente (PVC) nativas do Kubernetes para provisionar o {{site.data.keyword.cos_full_notm}} para seu cluster. O {{site.data.keyword.cos_full_notm}} é melhor usado para cargas de trabalho de leitura intensiva e se você deseja armazenar dados entre múltiplas zonas em um cluster de múltiplas zonas. Inicie [criando uma instância de serviço do {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#create_cos_service) e [instalando o plug-in do {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#install_cos) em seu cluster. </br></br>Não tem certeza de qual solução de armazenamento pode ser a correta para você? Inicie [aqui](/docs/containers?topic=containers-storage_planning#choose_storage_solution) para analisar seus dados e escolher a solução de armazenamento apropriada para seus dados. </td>
+<td>Use solicitações de volume persistente (PVC) nativas do Kubernetes para provisionar o {{site.data.keyword.cos_full_notm}} para seu cluster. O {{site.data.keyword.cos_full_notm}} é melhor usado para cargas de trabalho de leitura intensiva e se você deseja armazenar dados entre múltiplas zonas em um cluster de múltiplas zonas. Comece [criando uma instância de serviço do {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#create_cos_service) e [instalando o plug-in do {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#install_cos) em seu cluster. </br></br>Não tem certeza de qual solução de armazenamento pode ser a ideal para você? Inicie [aqui](/docs/containers?topic=containers-storage_planning#choose_storage_solution) para analisar seus dados e escolher a solução de armazenamento apropriada para seus dados. </td>
 </tr>
 <tr>
 <td>14 de agosto</td>
@@ -293,7 +321,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 ## Tópicos populares em julho de 2018
 {: #july18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em julho de 2018</caption>
 <thead>
 <th>Data</th>
@@ -303,7 +331,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 <tbody>
 <tr>
 <td>30 de julho</td>
-<td>[ Trazer seu próprio controlador de Ingresso ](/docs/containers?topic=containers-ingress#user_managed)</td>
+<td>[ Traga seu próprio controlador de Ingresso ](/docs/containers?topic=containers-ingress#user_managed)</td>
 <td>Você tem segurança muito específica ou outros requisitos customizados para o controlador de ingresso do seu cluster? Se sim, você pode desejar executar seu próprio controlador de ingresso em vez do padrão.</td>
 </tr>
 <tr>
@@ -316,7 +344,7 @@ Precisa de ajuda ou tem feedback sobre o escalador automático de cluster? Se vo
 ## Tópicos populares em junho de 2018
 {: #june18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em junho de 2018</caption>
 <thead>
 <th>Data</th>
@@ -346,7 +374,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 {: #may18}
 
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em maio de 2018</caption>
 <thead>
 <th>Data</th>
@@ -382,7 +410,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 ## Tópicos populares em abril de 2018
 {: #apr18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em abril de 2018</caption>
 <thead>
 <th>Data</th>
@@ -397,7 +425,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 </tr>
 <tr>
 <td>13 de abril</td>
-<td>[Novo tutorial para migrar apps do Cloud Foundry para clusters](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)</td>
+<td>[Novo tutorial para migrar apps Cloud Foundry para clusters](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)</td>
 <td>Você tem um app Cloud Foundry? Saiba como implementar o mesmo código desse app em um contêiner executado em um cluster do Kubernetes.</td>
 </tr>
 <tr>
@@ -410,7 +438,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 ## Tópicos populares em março de 2018
 {: #mar18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em março de 2018</caption>
 <thead>
 <th>Data</th>
@@ -420,12 +448,12 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 <tbody>
 <tr>
 <td>16 de março</td>
-<td>[Fornecimento de um cluster bare metal com cálculo confiável](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)</td>
+<td>[Provisionar um cluster bare metal com Cálculo confiável](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)</td>
 <td>Crie um cluster bare metal que execute o [Kubernetes versão 1.9](/docs/containers?topic=containers-cs_versions#cs_v19) ou mais recente e ative o Cálculo confiável para verificar os nós do trabalhador com relação à violação.</td>
 </tr>
 <tr>
 <td>14 de março</td>
-<td>[Conexão segura com o {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-integrations#appid)</td>
+<td>[Conexão segura com o {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-supported_integrations#appid)</td>
 <td>Aprimore seus apps que estão em execução no {{site.data.keyword.containerlong_notm}} requerendo que os usuários se conectem.</td>
 </tr>
 <tr>
@@ -438,7 +466,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 ## Tópicos populares em fevereiro de 2018
 {: #feb18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em fevereiro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -449,7 +477,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 <tr>
 <td>27 de fevereiro</td>
 <td>Imagens de Hardware Virtual Machine (HVM) para nós do trabalhador</td>
-<td>Aumente o desempenho de E/S de suas cargas de trabalho com imagens de HVM. Ative em cada nó do trabalhador existente usando o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
+<td>Aumente o desempenho de E/S de suas cargas de trabalho com imagens de HVM. Realize a ativação em cada nó do trabalhador existente usando o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>26 de fevereiro</td>
@@ -468,7 +496,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 </tr>
 <tr>
 <td>19 de fevereiro</td>
-<td>[ Configurar o strongSwan IPSec VPN ](/docs/containers?topic=containers-vpn#vpn-setup)</td>
+<td>[Configurar a VPN IPSec do strongSwan](/docs/containers?topic=containers-vpn#vpn-setup)</td>
 <td>Implemente rapidamente o gráfico Helm da VPN IPSec strongSwan para conectar seu cluster do {{site.data.keyword.containerlong_notm}} de forma segura a seu data center no local sem um Virtual Router Appliance.</td>
 </tr>
 <tr>
@@ -486,7 +514,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 ## Tópicos populares em janeiro de 2018
 {: #jan18}
 
-<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois.">
+<table summary="A tabela mostra os serviços disponíveis que você pode incluir em seu cluster para incluir recursos extras de criação de log e monitoramento. As linhas devem ser lidas da esquerda para a direita, com o nome do serviço na coluna um, e uma descrição do serviço na coluna dois. ">
 <caption>Tópicos populares para contêineres e clusters Kubernetes em janeiro de 2018</caption>
 <thead>
 <th>Data</th>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -57,13 +57,12 @@ Suivez cette procédure pour préparer votre compte {{site.data.keyword.Bluemix_
 3.  Si votre compte utilise plusieurs groupes de ressources, envisagez la stratégie de votre compte à utiliser pour [gérer les groupes de ressources](/docs/containers?topic=containers-users#resource_groups). 
     *  Le cluster est créé dans le groupe de ressources que vous ciblez lorsque vous vous connectez à {{site.data.keyword.Bluemix_notm}}. Si vous ne ciblez pas de groupe de ressources, le groupe de ressources par défaut est automatiquement ciblé.
     *  Si vous désirez créer un cluster dans un autre groupe de ressources que le groupe par défaut, vous devez au moins disposer du rôle **Afficheur** pour le groupe de ressources. Si aucun rôle ne vous est affecté pour le groupe de ressources et que vous êtes toujours **Administrateur** du service au sein du groupe de ressources, votre cluster est créé dans le groupe de ressources par défaut.
-    *  Vous ne pouvez pas modifier le groupe de ressources d'un cluster. Le cluster ne peut s'intégrer qu'à d'autres services {{site.data.keyword.Bluemix_notm}} figurant dans le même groupe de ressources ou à des services qui ne prennent pas en charge les groupes de ressources, tels qu'{{site.data.keyword.registrylong_notm}}.
+    *  Vous ne pouvez pas modifier le groupe de ressources d'un cluster. En outre, si vous devez utiliser la [commande](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` pour [intégrer un service {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#bind-services), ce dernier doit se trouver dans le même groupe de ressources que le cluster. Les services qui n'utilisent pas de groupes de ressources, par exemple, {{site.data.keyword.registrylong_notm}}, ou qui n'ont pas besoin de liaison de service, par exemple, {{site.data.keyword.la_full_notm}}, fonctionnent même si le cluster se trouve dans un autre groupe de ressources. 
     *  Si vous envisagez d'utiliser [{{site.data.keyword.monitoringlong_notm}} pour les métriques](/docs/containers?topic=containers-health#view_metrics), pensez à donner un nom à votre cluster qui soit unique pour tous les groupes de ressources et toutes les régions de votre compte afin d'éviter des conflits de noms pour les métriques.
-    * Si vous avez un compte {{site.data.keyword.Bluemix_dedicated}}, vous devez créer des clusters dans le groupe de ressources par défaut uniquement.
 
 4.  Configurez votre réseau d'infrastructure IBM Cloud (SoftLayer). Vous pouvez choisir parmi les options suivantes :
-    *  **Avec VRF activé** : avec VRF (Virtual Routing and Forwarding) et sa technologie d'isolation à plusieurs niveaux, vous pouvez utiliser des noeuds finaux de service publics et privés pour communiquer avec votre maître Kubernetes dans les clusters exécutant Kubernetes version 1.11 ou ultérieure. En utilisant le [noeud final de service privé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private), la communication entre le maître Kubernetes et vos noeuds worker reste au niveau du VLAN privé. Si vous voulez exécuter des commandes `kubectl` à partir de votre machine locale sur votre cluster, vous devez être connecté au même VLAN privé que celui où se trouve votre maître Kubernetes. Pour exposer vos applications sur Internet, vos noeuds worker doivent être connectés à un VLAN public pour que le trafic réseau entrant puisse être transféré à vos applications. Pour exécuter des commandes `kubectl` sur votre cluster via Internet, vous pouvez utiliser le noeud final de service public. Avec le noeud final de service public, le trafic réseau est routé via le VLAN public et sécurisé à l'aide d'un tunnel OpenVPN. Pour utiliser des noeuds finaux de service privés, vous devez activer votre compte pour VRP et les noeuds finaux de service, ce qui nécessite l'ouverture d'un cas de support pour l'infrastructure IBM Cloud (SoftLayer). Pour plus d'informations, voir [Présentation de VRF sur {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) et [Activation de votre compte pour les noeuds finaux de service](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
-    *  **Sans VRF** :  si vous ne voulez pas ou ne parvenez pas à activer VRF pour votre compte, ou si vous créez un cluster exécutant Kubernetes version 1.10, vos noeuds worker peuvent se connecter automatiquement au maître Kubernetes sur le réseau public via le [noeud final de service public](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public). Pour sécuriser ces communications, {{site.data.keyword.containerlong_notm}} configure automatiquement une connexion OpenVPN entre le maître Kubernetes et les noeuds worker lors de la création du cluster. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+    *  **Avec VRF activé** : avec VRF (Virtual Routing and Forwarding) et sa technologie d'isolation à plusieurs niveaux, vous pouvez utiliser des noeuds finaux de service publics et privés pour communiquer avec votre maître Kubernetes dans les clusters exécutant Kubernetes version 1.11 ou ultérieure. En utilisant le [noeud final de service privé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private), la communication entre le maître Kubernetes et vos noeuds worker reste au niveau du VLAN privé. Si vous voulez exécuter des commandes `kubectl` à partir de votre machine locale sur votre cluster, vous devez être connecté au même VLAN privé que celui où se trouve votre maître Kubernetes. Pour exposer vos applications sur Internet, vos noeuds worker doivent être connectés à un VLAN public pour que le trafic réseau entrant puisse être transféré à vos applications. Pour exécuter des commandes `kubectl` sur votre cluster via Internet, vous pouvez utiliser le noeud final de service public. Avec le noeud final de service public, le trafic réseau est routé via le VLAN public et sécurisé à l'aide d'un tunnel OpenVPN. Pour utiliser des noeuds finaux de service privés, vous devez activer votre compte pour VRP et les noeuds finaux de service, ce qui nécessite l'ouverture d'un cas de support pour l'infrastructure IBM Cloud (SoftLayer). Pour plus d'informations, voir [Présentation de VRF sur {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) et [Activation de votre compte pour les noeuds finaux de service](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+    *  **Non VRF** : Si vous ne souhaitez ou ne pouvez pas activer VRF pour votre compte, vos noeuds worker peuvent automatiquement se connecter au maître Kubernetes sur le réseau public via le [noeud final de service public](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public). Pour sécuriser ces communications, {{site.data.keyword.containerlong_notm}} configure automatiquement une connexion OpenVPN entre le maître Kubernetes et les noeuds worker lors de la création du cluster. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 ### Au niveau du cluster
 {: #prepare_cluster_level}
@@ -71,10 +70,11 @@ Suivez cette procédure pour préparer votre compte {{site.data.keyword.Bluemix_
 Suivez cette procédure pour préparer la configuration de votre cluster.
 {: shortdesc}
 
-1.  Vérifiez que vous disposez du rôle de plateforme **Administrateur** pour {{site.data.keyword.containerlong_notm}}.
+1.  Vérifiez que vous disposez du rôle de plateforme **Administrateur** pour {{site.data.keyword.containerlong_notm}}. Pour permettre à votre cluster d'extraire des images du registre privé, vous avez également besoin du rôle de plateforme **Administrateur** pour {{site.data.keyword.registrylong_notm}}.
     1.  Dans la barre de menu de la [console {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/), cliquez sur **Gérer > Accès (IAM)**.
     2.  Cliquez sur la page **Utilisateurs**, puis dans le tableau, sélectionnez-vous.
     3.  Dans l'onglet **Règles d'accès**, confirmez que votre **Rôle** est **Administrateur**. Vous pouvez être **Administrateur** de toutes les ressources du compte ou au moins pour {{site.data.keyword.containershort_notm}}. **Remarque** : si vous disposez du rôle **Administrateur** pour {{site.data.keyword.containershort_notm}} dans un seul groupe de ressources ou une seule région plutôt que pour tout le compte, vous devez au moins disposer du rôle **Afficheur** au niveau du compte pour voir les réseaux locaux virtuels (VLAN) du compte.
+    <p class="tip">Assurez-vous que votre administrateur de compte ne vous affecte pas le rôle de plateforme **Administrateur** en même temps qu'un rôle de service. Vous devez affecter les rôles de plateforme et de service séparément. </p>
 2.  Faites votre choix entre un [cluster gratuit ou standard](/docs/containers?topic=containers-cs_ov#cluster_types). Vous pouvez créer 1 cluster gratuit pour expérimenter certaines fonctionnalités pour une durée de 30 jours ou créer des clusters standard entièrement personnalisables avec l'isolement matériel de votre choix. Créez un cluster standard pour obtenir d'autres avantages et contrôler les performances de votre cluster.
 3.  [Planifiez la configuration de votre cluster](/docs/containers?topic=containers-plan_clusters#plan_clusters).
     *  Déterminez le type de cluster à créer : [cluster à zone unique](/docs/containers?topic=containers-plan_clusters#single_zone) ou [cluster à zones multiples](/docs/containers?topic=containers-plan_clusters#multizone). Notez que les clusters à zones multiples sont disponibles uniquement à certains emplacements.
@@ -95,7 +95,7 @@ Suivez cette procédure pour préparer la configuration de votre cluster.
 L'objectif du cluster Kubernetes est de définir un ensemble de ressources, de noeuds, de réseaux et de périphériques de stockage permettant d'assurer une haute disponibilité des applications. Avant de pouvoir déployer une application, vous devez créer un cluster et spécifier les définitions des noeuds worker dans ce cluster.
 {:shortdesc}
 
-Vous désirez créer un cluster utilisant des [noeuds finaux de service](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) pour la [communication entre le maître et les noeuds worker](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) ? Vous devez créer le cluster en [utilisant l'interface de ligne de commande](#clusters_cli).
+Vous désirez créer un cluster utilisant des [noeuds finaux de service](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) pour la [communication entre le maître et les noeuds worker](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) ? Vous devez créer le cluster en [utilisant l'interface de ligne de commande](#clusters_cli).
 {: note}
 
 ### Création d'un cluster gratuit
@@ -109,14 +109,14 @@ Les clusters gratuits ont une durée de vie de 30 jours. A l'issue de cette pér
 
 1. [Préparez-vous à créer un cluster](#cluster_prepare) pour vous assurer que vous disposez d'une configuration de compte {{site.data.keyword.Bluemix_notm}} et de droits utilisateur corrects, et pour déterminer la configuration du cluster et du groupe de ressources que vous souhaitez utiliser.
 2. Dans le [catalogue ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/catalog?category=containers), sélectionnez **{{site.data.keyword.containershort_notm}}** pour créer un cluster.
-3. Sélectionnez un emplacement dans lequel déployer votre cluster. **Remarque** : vous ne pouvez pas créer de clusters gratuits dans les emplacements Washington DC (Est des Etats-Unis) ou Tokyo (Asie-Pacifique nord).
+3. Sélectionnez une région géographique dans laquelle déployer votre cluster. Votre cluster est créé dans une zone de cette région géographique. 
 4. Sélectionnez le plan de cluster **Gratuit**.
 5. Attribuez un nom à votre cluster. Le nom doit commencer par une lettre, peut contenir des lettres, des nombres et des tirets (-) et ne doit pas dépasser 35 caractères. Le nom du cluster et la région dans laquelle est déployé le cluster constituent le nom de domaine qualifié complet du sous-domaine Ingress. Pour garantir que ce sous-domaine est unique dans une région, le nom de cluster peut être tronqué et complété par une valeur aléatoire dans le nom de domaine Ingress.
 
-6. Cliquez sur **Créer un cluster**. Par défaut un pool de noeuds worker contenant un noeud worker est créé. Vous pouvez voir la progression du déploiement du noeud worker dans l'onglet **Noeuds worker**. Une fois le déploiement terminé, vous pouvez voir si le cluster est prêt dans l'onglet **Vue d'ensemble**.
+6. Cliquez sur **Créer un cluster**. Par défaut un pool de noeuds worker contenant un noeud worker est créé. Vous pouvez voir la progression du déploiement du noeud worker dans l'onglet **Noeuds worker**. Une fois le déploiement terminé, vous pouvez voir si le cluster est prêt dans l'onglet **Vue d'ensemble**. Notez que même si le cluster est prêt, certaines parties du cluster qui sont utilisées par d'autres services, telles que les secrets Ingress ou les secrets d'extraction d'image de registre, sont peut-être toujours en cours de traitement.
 
     Toute modification de l'ID unique ou du nom de domaine affecté lors de la création empêche le maître Kubernetes de gérer votre cluster.
-    {: tip}
+    {: note}
 
 </br>
 
@@ -158,19 +158,19 @@ Les clusters gratuits ont une durée de vie de 30 jours. A l'issue de cette pér
 
 8. Attribuez un nom unique à votre cluster. **Remarque** : toute modification de l'ID unique ou du nom de domaine affecté lors de la création empêche le maître Kubernetes de gérer votre cluster.
 9. Sélectionnez la version du serveur d'API Kubernetes pour le noeud du maître cluster.
-10. Cliquez sur **Créer un cluster**. Un pool de noeuds worker est créé avec le nombre de noeuds worker que vous avez spécifié. Vous pouvez voir la progression du déploiement du noeud worker dans l'onglet **Noeuds worker**. Une fois le déploiement terminé, vous pouvez voir si le cluster est prêt dans l'onglet **Vue d'ensemble**.
+10. Cliquez sur **Créer un cluster**. Un pool de noeuds worker est créé avec le nombre de noeuds worker que vous avez spécifié. Vous pouvez voir la progression du déploiement du noeud worker dans l'onglet **Noeuds worker**. Une fois le déploiement terminé, vous pouvez voir si le cluster est prêt dans l'onglet **Vue d'ensemble**. Notez que même si le cluster est prêt, certaines parties du cluster qui sont utilisées par d'autres services, telles que les secrets Ingress ou les secrets d'extraction d'image de registre, sont peut-être toujours en cours de traitement.
 
 **Etape suivante ?**
 
 Une fois le cluster opérationnel, vous pouvez réaliser les tâches suivantes :
 
 -   Si vous avez créé le cluster dans une zone compatible avec plusieurs zones, répartissez les noeuds worker en [ajoutant une zone à votre cluster](#add_zone).
--   [Installez les interfaces de ligne de commande pour commencer à utiliser votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
+-   [Installez les interfaces de ligne de commande](/docs/containers?topic=containers-cs_cli_install#cs_cli_install) ou [lancez le terminal Kubernetes afin d'utiliser les interfaces de ligne de commande directement dans votre navigateur Web](/docs/containers?topic=containers-cs_cli_install#cli_web) pour commencer à travailler avec votre cluster. 
 -   [Déployez une application dans votre cluster.](/docs/containers?topic=containers-app#app_cli)
--   [Configurez votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry?topic=registry-index)
+-   [Configurez votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry?topic=registry-getting-started)
 -   Si vous utilisez un pare-feu, vous devrez peut-être [ouvrir les ports requis](/docs/containers?topic=containers-firewall#firewall) afin d'utiliser les commandes `ibmcloud`, `kubectl` ou `calicotl` pour autoriser le trafic sortant de votre cluster ou le trafic entrant pour les services réseau.
 -   [Configurez le programme de mise à l'échelle automatique du cluster (cluster autoscaler)](/docs/containers?topic=containers-ca#ca) pour l'ajout et le retrait automatique des noeuds worker dans vos pools de noeuds worker en fonction des demandes de ressources de vos charges de travail.
--   Pour les clusters avec Kubernetes version 1.10 ou ultérieure : contrôlez qui peut créer des pods dans votre cluster avec les [politiques de sécurité de pod](/docs/containers?topic=containers-psp).
+-   Contrôlez qui peut créer des pods dans votre cluster avec les [politiques de sécurité de pod](/docs/containers?topic=containers-psp).
 
 <br />
 
@@ -181,6 +181,9 @@ Une fois le cluster opérationnel, vous pouvez réaliser les tâches suivantes :
 L'objectif du cluster Kubernetes est de définir un ensemble de ressources, de noeuds, de réseaux et de périphériques de stockage permettant d'assurer une haute disponibilité des applications. Avant de pouvoir déployer une application, vous devez créer un cluster et spécifier les définitions des noeuds worker dans ce cluster.
 {:shortdesc}
 
+### Exemple de commandes d'interface de ligne de commande `ibmcloud ks cluster-create`
+{: #clusters_cli_samples}
+
 Avez-vous déjà créé un cluster et voulez juste consulter rapidement des exemples de commandes ? Essayez de suivre ces exemples.
 *  **Cluster gratuit** :
    ```
@@ -189,7 +192,7 @@ Avez-vous déjà créé un cluster et voulez juste consulter rapidement des exem
    {: pre}
 *  **Cluster standard, machine virtuelle partagée** :
    ```
-   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b2c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
 *  **Cluster standard, bare metal** :
@@ -197,11 +200,19 @@ Avez-vous déjà créé un cluster et voulez juste consulter rapidement des exem
    ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
-*  **Cluster standard, machine virtuelle avec des [noeuds finaux de service public et privé](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) dans des comptes avec VRF activé** :
+*  **Cluster standard, machine virtuelle avec des [noeuds finaux de service public et privé](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) dans des comptes avec VRF activé** :
    ```
-   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b2c.4x16 --hardware shared --workers 3 --public-service-endpoint --private-service-endpoint --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-service-endpoint --private-service-endpoint --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
+*   **Standard cluster, private VLAN-only and private service endpoint-only**. Pour plus d'informations sur la configuration de votre réseau de cluster privé, voir [Configuration réseau avec un VLAN privé uniquement](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan).
+    ```
+    ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --private-service-endpoint --private-vlan <private_VLAN_ID> --private-only
+    ```
+    {: pre}
+
+### Création d'un cluster dans l'interface de ligne de commande
+{: #clusters_cli_steps}
 
 Avant de commencer, installez l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}} et le [plug-in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
 
@@ -233,16 +244,17 @@ Pour créer un cluster, procédez comme suit :
       ```
       {: pre}
 
-    4.  Si vous désirez créer ou accéder à des clusters Kubernetes dans une région {{site.data.keyword.Bluemix_notm}} autre que celle que vous aviez sélectionnée auparavant, exécutez la commande `ibmcloud ks region-set`.
+    4. **Clusters gratuits** : si vous souhaitez créer un cluster gratuit dans une région donnée, vous devez cibler cette région en exécutant la commande `ibmcloud ks region-set`.
 
-4.  Créez un cluster. Les clusters standard peuvent être créés dans n'importe quelle région et dans une zone disponible. Les clusters gratuits ne peuvent pas être créés dans les régions Est des Etats-Unis et Asie-Pacifique nord, ainsi que les zones correspondantes. Vous ne pouvez pas sélectionner la zone.
+4.  Créez un cluster. Les clusters standard peuvent être créés dans n'importe quelle région et dans une zone disponible. Des clusters gratuits peuvent être créés dans la région que vous avez ciblée à l'aide de la commande `ibmcloud ks region-set`, mais vous ne pouvez pas sélectionner la zone. 
 
     1.  **Clusters standard** : examinez les zones disponibles. Les zones affichées dépendent de la région {{site.data.keyword.containerlong_notm}} à laquelle vous êtes connecté. Pour étendre votre cluster à plusieurs zones, vous devez créer le cluster dans une [zone compatible avec plusieurs zones](/docs/containers?topic=containers-regions-and-zones#zones).
-
         ```
         ibmcloud ks zones
         ```
         {: pre}
+        Si vous sélectionnez une zone à l'étranger, il se peut que vous ayez besoin d'une autorisation légale pour stocker physiquement les données dans un pays étranger.
+        {: note}
 
     2.  **Clusters standard** : sélectionnez une zone et examinez les types de machine disponibles dans cette zone. Le type de machine spécifie les hôtes de calcul virtuels ou physiques disponibles pour chaque noeud worker.
 
@@ -283,7 +295,7 @@ Pour créer un cluster, procédez comme suit :
     4.  **Clusters gratuits et standard** : exécutez la commande `cluster-create`. Vous pouvez opter pour un cluster gratuit qui inclut un noeud worker configuré avec 2 UC virtuelles et 4 Go de mémoire qui sera supprimé automatiquement au bout de 30 jours. Lorsque vous créez un cluster standard, par défaut, les disques de noeud worker sont chiffrés avec AES 256 bits, son matériel est partagé par plusieurs clients IBM et il est facturé par heures d'utilisation. </br>Exemple pour un cluster standard. Indiquez les options du cluster :
 
         ```
-        ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--private-service-endpoint][--public-service-endpoint] [--disable-disk-encrypt][--trusted]
+        ibmcloud ks cluster-create --zone dal10 --machine-type b3c.4x16 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--private-service-endpoint][--public-service-endpoint] [--disable-disk-encrypt][--trusted]
         ```
         {: pre}
 
@@ -327,7 +339,8 @@ Pour créer un cluster, procédez comme suit :
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>**Clusters gratuits** : vous n'avez pas besoin de définir de VLAN privé. Votre cluster gratuit est automatiquement connecté à un VLAN privé dont IBM est propriétaire.</li><li>**Clusters standard** : si vous disposez déjà d'un VLAN privé configuré dans votre compte d'infrastructure IBM Cloud (SoftLayer) pour cette zone, entrez l'ID du VLAN privé. Si vous ne disposez pas d'un VLAN privé dans votre compte, ne spécifiez pas cette option. {{site.data.keyword.containerlong_notm}} crée automatiquement un VLAN privé pour vous.<p>Les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur de back-end) et les routeurs de VLAN public par <code>fcr</code> (routeur de front-end). Lors de la création d'un cluster et de la spécification des VLAN publics et privés, le nombre et la combinaison de lettres après ces préfixes doivent correspondre.</p></li></ul></td>
+        <td><ul><li>**Clusters gratuits** : vous n'avez pas besoin de définir de VLAN privé. Votre cluster gratuit est automatiquement connecté à un VLAN privé dont IBM est propriétaire.</li><li>**Clusters standard** : si vous disposez déjà d'un VLAN privé configuré dans votre compte d'infrastructure IBM Cloud (SoftLayer) pour cette zone, entrez l'ID du VLAN privé. Si vous ne disposez pas d'un VLAN privé dans votre compte, ne spécifiez pas cette option. {{site.data.keyword.containerlong_notm}} crée automatiquement un VLAN privé pour vous.<p>Les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur de back-end) et les routeurs de VLAN public par <code>fcr</code> (routeur de front-end). Lors de la création d'un cluster et de la spécification des VLAN publics et privés, le nombre et la combinaison de lettres après ces préfixes doivent correspondre.</p></li>
+        <li>Pour créer un [cluster avec VLAN privé uniquement](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan), ajoutez l'option `--private-vlan` et l'option `--private-only` pour confirmer votre choix. N'ajoutez **pas** les options `--public-vlan` et `--public-service-endpoint`. Notez que pour activer la connexion entre vos noeuds maître et worker, vous devez inclure l'option `--private-service-endpoint` pour configurer votre propre dispositif de passerelle. </li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -345,7 +358,7 @@ Pour créer un cluster, procédez comme suit :
         </tr>
         <tr>
         <td><code>--private-service-endpoint</code></td>
-        <td>**Clusters standard dans des [comptes avec la fonction VRF activée](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)** : activez le [noeud final de service privé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) pour que le maître Kubernetes et les noeuds worker communiquent via le VLAN privé. De plus, vous pouvez choisir d'activer le noeud final de service public en utilisant l'indicateur `--public-service-endpoint` pour accéder à votre cluster sur Internet. Si vous activez uniquement le noeud final de service privé, vous devez être connecté au VLAN privé pour communiquer avec le maître Kubernetes. Après avoir activé le noeud final de service privé, vous ne pourrez plus le désactiver par la suite.<br><br>Après avoir créé le cluster, vous pouvez obtenir le noeud final en exécutant la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.</td>
+        <td>**Clusters standard dans des [comptes avec la fonction VRF activée](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)** : activez le [noeud final de service privé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) pour que le maître Kubernetes et les noeuds worker communiquent via le VLAN privé. De plus, vous pouvez choisir d'activer le noeud final de service public en utilisant l'indicateur `--public-service-endpoint` pour accéder à votre cluster sur Internet. Si vous activez uniquement le noeud final de service privé, vous devez être connecté au VLAN privé pour communiquer avec le maître Kubernetes. Après avoir activé le noeud final de service privé, vous ne pourrez plus le désactiver par la suite.<br><br>Après avoir créé le cluster, vous pouvez obtenir le noeud final en exécutant la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.</td>
         </tr>
         <tr>
         <td><code>--public-service-endpoint</code></td>
@@ -371,8 +384,8 @@ Pour créer un cluster, procédez comme suit :
     Lorsque la mise à disposition de votre cluster est finalisée, le statut du cluster passe à **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.12.6      Default
+    Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.7      Default
     ```
     {: screen}
 
@@ -383,14 +396,14 @@ Pour créer un cluster, procédez comme suit :
     ```
     {: pre}
 
-    Lorsque les noeuds worker sont prêts, l'état passe à **normal** et le statut indique **Ready**. Lorsque le statut du noeud indique **Ready**, vous pouvez accéder au cluster.
+    Lorsque les noeuds worker sont prêts, l'état passe à **normal** et le statut indique **Ready**. Lorsque le statut du noeud indique **Ready**, vous pouvez accéder au cluster. Notez que même si le cluster est prêt, certaines parties du cluster qui sont utilisées par d'autres services, telles que les secrets Ingress ou les secrets d'extraction d'image de registre, sont peut-être toujours en cours de traitement.
 
     A chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés manuellement après la création du cluster. La modification de l'ID ou du domaine empêcherait le maître Kubernetes de gérer votre cluster.
     {: important}
 
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.12.6      Default
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.12.7      Default
     ```
     {: screen}
 
@@ -454,11 +467,11 @@ Pour créer un cluster, procédez comme suit :
 
 -   Si vous avez créé le cluster dans une zone compatible avec plusieurs zones, répartissez les noeuds worker en [ajoutant une zone à votre cluster](#add_zone).
 -   [Déployez une application dans votre cluster.](/docs/containers?topic=containers-app#app_cli)
--   [Gérez votre cluster à l'aide de la ligne de commande `kubectl`. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [Configurez votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry?topic=registry-index)
+-   [Gérez votre cluster à l'aide de la ligne de commande `kubectl`. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubectl.docs.kubernetes.io/)
+-   [Configurez votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry?topic=registry-getting-started)
 - Si vous utilisez un pare-feu, vous devrez peut-être [ouvrir les ports requis](/docs/containers?topic=containers-firewall#firewall) afin d'utiliser les commandes `ibmcloud`, `kubectl` ou `calicotl` pour autoriser le trafic sortant de votre cluster ou le trafic entrant pour les services réseau.
 -   [Configurez le programme de mise à l'échelle automatique du cluster (cluster autoscaler)](/docs/containers?topic=containers-ca#ca) pour l'ajout et le retrait automatique des noeuds worker dans vos pools de noeuds worker en fonction des demandes de ressources de vos charges de travail.
--  Pour les clusters avec Kubernetes version 1.10 ou ultérieure : contrôlez qui peut créer des pods dans votre cluster avec les [politiques de sécurité de pod](/docs/containers?topic=containers-psp).
+-  Contrôlez qui peut créer des pods dans votre cluster avec les [politiques de sécurité de pod](/docs/containers?topic=containers-psp).
 
 <br />
 
@@ -520,10 +533,10 @@ Pour redimensionner le pool de noeuds worker, modifiez le nombre de noeuds worke
     Exemple de sortie pour un pool de noeuds worker présents dans deux zones, `dal10` et `dal12` qui est redimensionné à deux noeuds worker par zone :
     ```
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal12   1.8.6_1504
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.8.6_1504
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.8.6_1504
     ```
     {: screen}
 
@@ -533,7 +546,7 @@ Pour redimensionner le pool de noeuds worker, modifiez le nombre de noeuds worke
 Vous pouvez ajouter des noeuds worker dans votre cluster en créant un nouveau pool de noeuds worker.
 {:shortdesc}
 
-1. Extrayez les zones de noeud worker (**Worker Zones**) de votre cluster et choisissez la zone dans laquelle vous souhaitez déployer les noeuds worker dans votre pool de noeuds worker. Si vous avez un cluster à zone unique, vous devez utiliser la zone que vous voyez dans la zone **Worker Zones**. Pour les clusters à zones multiples, vous pouvez choisir l'une des **zones de noeud worker** de votre cluster, ou ajouter l'une des [métropoles à zones multiples](/docs/containers?topic=containers-regions-and-zones#zones) de la région dans laquelle se trouve votre cluster. Vous pouvez obtenir la liste des zones disponibles en exécutant la commande `ibmcloud ks zones`.
+1. Extrayez les zones de noeud worker (**Worker Zones**) de votre cluster et choisissez la zone dans laquelle vous souhaitez déployer les noeuds worker dans votre pool de noeuds worker. Si vous avez un cluster à zone unique, vous devez utiliser la zone que vous voyez dans la zone **Worker Zones**. Pour les clusters à zones multiples, vous pouvez choisir l'une des **zones de noeud worker** de votre cluster, ou ajouter l'une des [agglomérations à zones multiples](/docs/containers?topic=containers-regions-and-zones#zones) de la région dans laquelle se trouve votre cluster. Vous pouvez obtenir la liste des zones disponibles en exécutant la commande `ibmcloud ks zones`.
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
@@ -586,8 +599,8 @@ Vous pouvez ajouter des noeuds worker dans votre cluster en créant un nouveau p
    Exemple de sortie :
    ```
    ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          provision_pending   Ready   dal10   1.8.6_1504
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          provision_pending   Ready   dal10   1.8.6_1504
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.8.6_1504
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.8.6_1504
    ```
    {: screen}
 
@@ -603,7 +616,7 @@ Si vous disposez de plusieurs pools de noeuds worker dans votre cluster, ajoutez
 
 Avant de commencer :
 *  Pour ajouter une zone à votre pool de noeuds worker, ce pool doit se trouver dans une [zone compatible avec plusieurs zones](/docs/containers?topic=containers-regions-and-zones#zones). Si ce n'est pas le cas, envisagez la [création d'un nouveau pool de noeuds worker](#add_pool).
-*  Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+*  Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Pour ajouter une zone avec des noeuds worker dans votre pool de noeuds worker :
 
@@ -625,7 +638,7 @@ Pour ajouter une zone avec des noeuds worker dans votre pool de noeuds worker :
    ```
    {: pre}
 
-4. Ajoutez la zone dans votre pool de noeuds worker. Si vous disposez de plusieurs pools de noeuds worker, ajoutez la zone à tous vos pools, pour que votre cluster soit équilibré dans toutes les zones. Remplacez `<pool1_id_or_name,pool2_id_or_name,...>` par les noms de tous vos pools de noeuds worker dans une liste séparée par des virgules.
+4. Ajoutez la zone dans votre pool de noeuds worker. Si vous disposez de plusieurs pools de noeuds worker, ajoutez la zone à tous vos pools, pour que votre cluster soit équilibré dans toutes les zones. Remplacez `<pool1_id_or_name,pool2_id_or_name,...>` par les noms de tous vos pools worker dans une liste séparée par des virgules. 
 
     Un VLAN privé et un VLAN public doivent exister avant d'ajouter une zone à plusieurs pools de noeuds worker. Si vous ne disposez pas de VLAN privé et public dans cette zone, ajoutez d'abord la zone à un pool de noeuds worker pour que ces VLAN soient créés pour vous. Ensuite, vous pouvez ajouter cette zone à d'autres pools de noeuds worker en spécifiant le VLAN privé et le VLAN public créés pour vous.
     {: note}
@@ -645,7 +658,7 @@ Pour ajouter une zone avec des noeuds worker dans votre pool de noeuds worker :
 
   Exemple de sortie :
   ```
-Name:                           mycluster
+  Name:                           mycluster
 ID:                             df253b6025d64944ab99ed63bb4567b6
 State:                          normal
 Created:                        2018-09-28T15:43:15+0000
@@ -664,8 +677,7 @@ Owner:                          owner@email.com
 Monitoring Dashboard:           ...
 Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
 Resource Group Name:            Default
-
-```
+  ```
   {: screen}  
 
 ### Déprécié : Ajout de noeuds worker autonomes
@@ -741,7 +753,7 @@ Vous pouvez vérifier l'état actuel du cluster en exécutant la commande `ibmcl
    </tr>
    <tr>
      <td>Deleted</td>
-     <td>Le cluster a bien été supprimé mais n'est pas encore retiré de votre tableau de bord. Si votre cluster est bloqué dans cet état depuis longtemps, ouvrez un [cas de support {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+     <td>Le cluster a bien été supprimé mais n'est pas encore retiré de votre tableau de bord. Si votre cluster est bloqué dans cet état depuis longtemps, ouvrez un [cas de support {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
    <td>Deleting</td>
@@ -757,7 +769,7 @@ Vous pouvez vérifier l'état actuel du cluster en exécutant la commande `ibmcl
       </tr>
       <tr>
        <td>Normal</td>
-       <td>Tous les noeuds worker d'un cluster sont opérationnels. Vous pouvez accéder au cluster et déployer les applications sur le cluster. Cet état est considéré comme bon et ne nécessite aucune action de votre part.<p class="note">Même si les noeuds worker peuvent être normaux, d'autres ressources d'infrastructure, telles que les [réseaux](/docs/containers?topic=containers-cs_troubleshoot_network) et le [stockage](/docs/containers?topic=containers-cs_troubleshoot_storage), peuvent continuer à exiger de l'attention.</p></td>
+       <td>Tous les noeuds worker d'un cluster sont opérationnels. Vous pouvez accéder au cluster et déployer les applications sur le cluster. Cet état est considéré comme bon et ne nécessite aucune action de votre part.<p class="note">Même si les noeuds worker peuvent être normaux, d'autres ressources d'infrastructure, telles que les [réseaux](/docs/containers?topic=containers-cs_troubleshoot_network) et le [stockage](/docs/containers?topic=containers-cs_troubleshoot_storage), peuvent continuer à exiger de l'attention. Si vous venez de créer le cluster, certaines parties du cluster qui sont utilisées par d'autres services, telles que les secrets ou les secrets d'extraction d'image Ingress, sont peut-être toujours en cours de traitement.</p></td>
     </tr>
       <tr>
        <td>Pending</td>
@@ -765,7 +777,7 @@ Vous pouvez vérifier l'état actuel du cluster en exécutant la commande `ibmcl
      </tr>
    <tr>
      <td>Requested</td>
-     <td>Une demande de création du cluster et d'organisation de l'infrastructure du maître Kubernetes et des noeuds worker est envoyée. Lorsque le déploiement du cluster commence, l'état du cluster passe à <code>Deploying</code>. Si votre cluster est bloqué à l'état <code>Requested</code> depuis longtemps, ouvrez un [cas de support {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+     <td>Une demande de création du cluster et d'organisation de l'infrastructure du maître Kubernetes et des noeuds worker est envoyée. Lorsque le déploiement du cluster commence, l'état du cluster passe à <code>Deploying</code>. Si votre cluster est bloqué à l'état <code>Requested</code> depuis longtemps, ouvrez un [cas de support {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
      <td>Updating</td>
@@ -789,8 +801,7 @@ Les clusters gratuits et standard créés avec un compte facturable doivent êtr
 {:shortdesc}
 
 <p class="important">
-Aucune sauvegarde de votre cluster ou de vos données n'est effectuée dans votre stockage persistant. Lorsque vous supprimez un cluster, vous pouvez également opter pour la suppression de votre stockage persistant. Le stockage persistant que vous avez mis à disposition en utilisant une classe de stockage `delete` est supprimé définitivement dans l'infrastructure IBM Cloud (SoftLayer) si vous choisissez de supprimer votre stockage persistant. Si vous avez mis à disposition votre stockage persistant en utilisant une classe de stockage `retain` et que vous choisissez de supprimer votre stockage, le cluster, le volume persistant et la réservation de volume persistant (PVC) sont supprimés, mais l'instance de stockage persistant dans votre compte d'infrastructure IBM Cloud (SoftLayer) est conservée.</br>
-</br>Lorsque vous supprimez un cluster, vous supprimez également les sous-réseaux éventuels qui sont automatiquement fournis lorsque vous avez créé le cluster et que vous avez créés en exécutant la commande `ibmcloud ks cluster-subnet-create`. Cependant, si vous avez ajouté manuellement des sous-réseaux existants à votre cluster avec la commande `ibmcloud ks cluster-subnet-add`, ces sous-réseaux ne sont pas retirés de votre compte d'infrastructure IBM Cloud (SoftLayer) et vous pouvez les réutiliser dans d'autres clusters.</p>
+Aucune sauvegarde de votre cluster ou de vos données n'est effectuée dans votre stockage persistant. Lorsque vous supprimez un cluster, vous pouvez également opter pour la suppression de votre stockage persistant. Le stockage persistant que vous avez mis à disposition en utilisant une classe de stockage `delete` est supprimé définitivement dans l'infrastructure IBM Cloud (SoftLayer) si vous choisissez de supprimer votre stockage persistant. Si vous avez mis à disposition votre stockage persistant en utilisant une classe de stockage `retain` et que vous choisissez de supprimer votre stockage, le cluster, le volume persistant et la réservation de volume persistant (PVC) sont supprimés, mais l'instance de stockage persistant dans votre compte d'infrastructure IBM Cloud (SoftLayer) est conservée. </br> </br>Lorsque vous supprimez un cluster, vous supprimez également les sous-réseaux éventuels qui sont automatiquement fournis lorsque vous avez créé le cluster et que vous avez créés en exécutant la commande `ibmcloud ks cluster-subnet-create`. Cependant, si vous avez ajouté manuellement des sous-réseaux existants à votre cluster avec la commande `ibmcloud ks cluster-subnet-add`, ces sous-réseaux ne sont pas retirés de votre compte d'infrastructure IBM Cloud (SoftLayer) et vous pouvez les réutiliser dans d'autres clusters.</p>
 
 Avant de commencer :
 * Notez l'ID de votre cluster. Vous en aurez besoin pour rechercher et retirer les ressources d'infrastructure IBM Cloud (SoftLayer) associées qui ne sont pas automatiquement supprimées avec votre cluster.

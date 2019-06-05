@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -42,10 +42,11 @@ subcollection: containers
 
 ** APIs de REST **
 
-- [API REST para clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-api/)
+- [API de REST para clusters
+![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-api/)
 - [JSON da API de REST para clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
 - [API de REST para criação de log em clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-logging/)
-- [API de REST para gerenciar os balanceadores de carga do aplicativo Ingress em clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-alb-api/)
+- [API de REST para gerenciar balanceadores de carga do aplicativo do Ingresso em clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-alb-api/)
 
 <br />
 
@@ -55,7 +56,7 @@ subcollection: containers
 - [Modernizar e estender um aplicativo da web Java existente (`JPetStore`) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
 - [Linha de aprendizagem do {{site.data.keyword.containerlong_notm}} Cognitive Class ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
 - [Como construir um aplicativo da web no {{site.data.keyword.containerlong_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-scalable-webapp-kubernetes#scalable-webapp-kubernetes)
-- [Clusters de múltiplas regiões seguras com o Cloud Internet Service (CIS) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+- [Clusters multiregion seguros com o Cloud Internet Service (CIS) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
 - [Aplicar segurança de ponta a ponta a um aplicativo em nuvem com o {{site.data.keyword.containerlong_notm}}, o {{site.data.keyword.keymanagementservicelong_notm}}, o {{site.data.keyword.appid_full_notm}} e o {{site.data.keyword.cos_full_notm}}](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security)
 - [Analisar logs de cluster com LogDNA ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube)
 - [Monitorar o funcionamento de seu cluster com Sysdig ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)
@@ -64,7 +65,7 @@ subcollection: containers
 - [ Migrar um app CF para a nuvem ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
 - [Executar apps sem servidor em um cluster com Knative ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
 - [Orquestrar cargas de trabalho de execução longa para apps com um serviço de sistema de mensagens baseado no Apache Kafka ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
-- [Automatize implementações em um cluster com o Terraform ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
+- [Automatizar implementações em um cluster com o Terraform ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [Organizando usuários e equipes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)
 - [Usando o Assistente de Logística com o Istio e o {{site.data.keyword.containerlong}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/logistics-wizard-kubernetes)
 - [Ativar seus microsserviços com gerenciamento de tráfego avançado e solicitar recursos de rastreio com o Istio ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/patterns/manage-microservices-traffic-using-istio/)
@@ -75,6 +76,7 @@ subcollection: containers
 **Tecnologias de software livre integradas**
 
 - [Documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/)
+- [Documentação da CLI do Kubernetes (`kubectl`) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubectl.docs.kubernetes.io/)
 - [Documentação do Knative ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/knative/docs)
 - [Documentação do Docker ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Documentação do Helm <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para gerenciamento de pacote do Kubernetes
@@ -96,8 +98,8 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [ {{site.data.keyword.registryshort_notm}}  documentação ](/docs/services/Registry?topic=registry-index)
-- [{{site.data.keyword.registryshort_notm}} API de REST ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://{DomainName}/apidocs/container-registry)
+- [Documentação do {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)
+- [API de REST do {{site.data.keyword.registryshort_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://{DomainName}/apidocs/container-registry)
 - [API de REST do Vulnerability Advisor ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://{DomainName}/apidocs/container-registry/va)
 
 <br />

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 ---
 
@@ -19,14 +19,13 @@ lastupdated: "2019-03-21"
 {:download: .download}
 
 
-
 # Esercitazione: Utilizzo di Knative gestito per eseguire le applicazioni senza server nei cluster Kubernetes
 {: #knative_tutorial}
 
 Con questa esercitazione, puoi apprendere come installare Knative in un cluster Kubernetes in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-**Cosa è Knative e perché dovrei utilizzarlo?**</br>
+**Cos'è Knative e perché dovrei utilizzarlo?**</br>
 [Knative](https://github.com/knative/docs) è una piattaforma open source che è stata sviluppata da IBM, Google, Pivotal, Red Hat, Cisco e altri con l'obiettivo di estendere le funzionalità di Kubernetes per aiutarti a creare applicazioni senza server e inserite in contenitori moderne e basate sul sorgente in aggiunta al tuo cluster Kubernetes. La piattaforma è progettata per rispondere alle esigenze degli sviluppatori che oggi devono decidere quale tipo di applicazione vogliono eseguire nel cloud: applicazioni a 12 fattori, contenitori o funzioni. Ogni tipo di applicazione richiede una soluzione open source o proprietaria adattata a tali applicazioni: Cloud Foundry per le applicazioni a 12 fattori, Kubernetes per i contenitori e OpenWhisk e altri per le funzioni. In passato, gli sviluppatori dovevano decidere quale approccio volevano seguire, il che portava a un'assenza di flessibilità e a una complessità quando dovevano essere combinati diversi tipi di applicazioni.  
 
 Knative utilizza un approccio congruente tra i linguaggi di programmazione e i framework per astrarre l'impegno operativo derivante dal creare, distribuire e gestire carichi di lavoro in Kubernetes in modo che gli sviluppatori possano concentrarsi su quello che conta di più per loro: il codice sorgente. Puoi utilizzare dei pacchetti di build collaudati con cui hai già dimestichezza, come ad esempio Cloud Foundry, Kaniko, Dockerfile, Bazel e altri. Mediante l'integrazione con Istio, Knative garantisce che i tuoi carichi di lavoro senza server e inseriti in contenitori possano essere esposti su internet, monitorati e controllati facilmente e che i tuoi dati siano crittografati durante il transito.
@@ -39,7 +38,7 @@ Knative viene fornito con 3 componenti chiave, o _primitive_, che ti aiutano a c
 - **Eventing:** con la primitiva `Eventing`, puoi creare dei trigger o dei flussi di eventi che altri servizi possono sottoscrivere. Ad esempio, potresti voler preparare una nuova build della tua applicazione ogni volta che viene eseguito il push del codice nel tuo repository master GitHub. Potresti anche volere eseguire un'applicazione senza server solo se la temperatura scende sotto il punto di congelamento. La primitiva `Eventing` può essere integrata nella tua pipeline CI/CD per automatizzare la creazione e la distribuzione di applicazioni nel caso in cui si verifichi un evento specifico.
 
 **Cos'è il componente aggiuntivo Managed Knative on {{site.data.keyword.containerlong_notm}} (sperimentale)?** </br>
-Managed Knative on {{site.data.keyword.containerlong_notm}} è un componente aggiuntivo gestito che integra Knative e Istio direttamente con il tuo cluster Kubernetes. Le versioni di Knative e Istio nel componente aggiuntivo sono testate da IBM e supportate per l'utilizzo in {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}} tiene aggiornati i componenti Knative e Istio distribuendo automaticamente gli aggiornamenti per il tuo componente aggiuntivo.
+Managed Knative on {{site.data.keyword.containerlong_notm}} è un componente aggiuntivo gestito che integra Knative e Istio direttamente con il tuo cluster Kubernetes. Le versioni di Knative e Istio nel componente aggiuntivo sono testate da IBM e supportate per l'utilizzo in {{site.data.keyword.containerlong_notm}}. Per ulteriori informazioni sui componenti aggiuntivi gestiti, vedi [Aggiunta di servizi utilizzando i componenti aggiuntivi gestiti](/docs/containers?topic=containers-managed-addons#managed-addons).
 
 **Ci sono delle limitazioni?** </br>
 Se hai installato il [controller di ammissione Container image security enforcer](/docs/services/Registry?topic=registry-security_enforce#security_enforce) nel tuo cluster, non puoi abilitare il componente aggiuntivo Knative gestito nel cluster.
@@ -67,8 +66,8 @@ Questa esercitazione è progettata per gli sviluppatori interessati a imparare c
 ## Prerequisiti
 {: #knative_prerequisites}
 
--  [Installa la CLI IBM Cloud, il plug-in {{site.data.keyword.containerlong_notm}} e la CLI Kubernetes](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Assicurati di installare la versione della CLI `kubectl` che corrisponde alla versione Kubernetes del tuo cluster.
--  [Crea un cluster con almeno 3 nodi di lavoro, ciascuno dei quali con 4 core e 16 GB di memoria (`b2c.4x16`) o più](/docs/containers?topic=containers-clusters#clusters_cli). Ogni nodo di lavoro deve eseguire Kubernetes versione 1.11 o superiore.
+-  [Installa la CLI IBM Cloud, il plugin {{site.data.keyword.containerlong_notm}} e la CLI Kubernetes](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Assicurati di installare la versione della CLI `kubectl` che corrisponde alla versione Kubernetes del tuo cluster.
+-  [Crea un cluster con almeno 3 nodi di lavoro, ciascuno dei quali con 4 core e 16 GB di memoria (`b3c.4x16`) o più](/docs/containers?topic=containers-clusters#clusters_cli). Ogni nodo di lavoro deve eseguire Kubernetes versione 1.12 o superiore.
 -  Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per {{site.data.keyword.containerlong_notm}}.
 -  [Indirizza la CLI al tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -115,7 +114,13 @@ Knative si basa su Istio per garantire che i tuoi carichi di lavoro senza server
    ```
    {: screen}
 
-3. Verifica che tutti i componenti Knative siano stati installati correttamente.
+3. Facoltativo: se desideri utilizzare Istio per tutte le applicazioni nello spazio dei nomi `default`, aggiungi l'etichetta `istio-injection=enabled` allo spazio dei nomi. Ogni pod dell'applicazione senza server deve eseguire un sidecar proxy Envoy in modo che l'applicazione possa essere inclusa nella rete di servizi Istio. Questa etichetta consente a Istio di modificare automaticamente la specifica del template del pod nelle nuove distribuzioni di applicazione in modo che i pod vengano creati con i contenitori di sidecar proxy Envoy.
+  ```
+  kubectl label namespace default istio-injection=enabled
+  ```
+  {: pre}
+
+4. Verifica che tutti i componenti Knative siano stati installati correttamente.
    1. Verifica che tutti i pod del componente `Serving` di Knative siano in uno stato `Running`.  
       ```
       kubectl get pods --namespace knative-serving
@@ -238,7 +243,7 @@ In questa lezione, distribuisci la tua prima applicazione [`Hello World`](https:
     </tr>
     <tr>
     <td><code>metadata.namespace</td>
-    <td>Lo spazio dei nomi Kubernetes in cui vuoi distribuire la tua applicazione come un servizio Knative.</td>
+    <td>Lo spazio dei nomi Kubernetes in cui vuoi distribuire la tua applicazione come un servizio Knative. </td>
     </tr>
     <tr>
     <td><code>spec.container.image</code></td>
@@ -267,6 +272,7 @@ In questa lezione, distribuisci la tua prima applicazione [`Hello World`](https:
    ```
    kubectl get pods
    ```
+   {: pre}
 
    Output di esempio:
    ```
@@ -278,14 +284,14 @@ In questa lezione, distribuisci la tua prima applicazione [`Hello World`](https:
 4. Prova la tua applicazione `Hello World`.
    1. Ottieni il dominio predefinito assegnato al tuo servizio Knative. Se hai modificato il nome del tuo servizio Knative, o distribuito l'applicazione a uno spazio dei nomi differente, aggiorna questi valori nella tua query.
       ```
-      kubectl get svc/kn-helloworld
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       Output di esempio:
       ```
-      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
-      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
+      NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
+      kn-helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True
       ```
       {: screen}
 
@@ -369,7 +375,7 @@ In questa lezione, distribuisci la tua prima applicazione [`Hello World`](https:
    ```
    {: screen}
 
-9. Verifica che Knative abbia nuovamente ampliato il tuo pod per tenere conto del traffico di rete aumentato. Al tuo pod viene assegnato un numero di revisione `00002`.Puoi utilizzare il numero di revisione per fare riferimento a una specifica versione della tua applicazione, ad esempio quando vuoi indicare a Istio di suddividere il traffico in entrata tra due revisioni.
+9. Verifica che Knative abbia nuovamente ampliato il tuo pod per tenere conto del traffico di rete aumentato. Al tuo pod viene assegnato un numero di revisione `00002`. Puoi utilizzare il numero di revisione per fare riferimento a una specifica versione della tua applicazione, ad esempio quando vuoi indicare a Istio di suddividere il traffico in entrata tra due revisioni.
    ```
    kubectl get pods
    ```

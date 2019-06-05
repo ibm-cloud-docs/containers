@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # Regiones y zonas
 {: #regions-and-zones}
 
@@ -34,12 +33,12 @@ Una región es una ubicación geográfica específica en la que puede desplegar 
 
 _Regiones y zonas de {{site.data.keyword.containerlong_notm}}_
 
-{{site.data.keyword.Bluemix_notm}} está ubicado en todo el mundo. Los servicios de {{site.data.keyword.Bluemix_notm}} pueden estar disponibles a nivel global o dentro de una región específica. Cuando se crea un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}, sus recursos permanecen en la región en la que se despliega el clúster.
+ {{site.data.keyword.Bluemix_notm}} está ubicado en todo el mundo. Los servicios de {{site.data.keyword.Bluemix_notm}} pueden estar disponibles a nivel global o dentro de una región específica. Cuando se crea un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}, sus recursos permanecen en la región en la que se despliega el clúster.
 
-Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
+ Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
 {: note}
 
-| Región de {{site.data.keyword.containerlong_notm}} | Ubicación de {{site.data.keyword.Bluemix_notm}} correspondiente |
+ | Región de {{site.data.keyword.containerlong_notm}} | Ubicación de {{site.data.keyword.Bluemix_notm}} correspondiente |
 | --- | --- |
 | AP norte (solo clústeres estándares) | Tokio |
 | AP sur | Sídney |
@@ -49,7 +48,7 @@ Puede crear clústeres estándar en cada región de {{site.data.keyword.containe
 | EE. UU. sur | Dallas |
 {: caption="Regiones admitidas del servicio de Kubernetes y ubicaciones correspondientes de IBM Cloud." caption-side="top"}
 
-<br />
+ <br />
 
 
 ## Ubicaciones en {{site.data.keyword.Bluemix_notm}}
@@ -102,7 +101,7 @@ Seleccione una región (o pulse intro para omitir):
 Escriba un número> 5
 Región de destino us-south
 
-                      
+
 Punto final de API: https://cloud.ibm.com
 Región:             us-south
 Usuario:            first.last@email.com
@@ -128,7 +127,7 @@ Mediante regiones de {{site.data.keyword.containerlong_notm}}, puede crear o acc
 Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
 {: note}
 
-Regiones de {{site.data.keyword.containerlong_notm}} soportadas:
+ Regiones de {{site.data.keyword.containerlong_notm}} soportadas:
   * AP norte (solo clústeres estándares)
   * AP sur
   * UE central
@@ -161,13 +160,13 @@ Para cambiar regiones rápidamente, ejecute [`ibmcloud ks region-set`](/docs/con
 Para interactuar con la API de {{site.data.keyword.containerlong_notm}}, especifique el tipo de mandato y añada `/v1/command` al punto final global.
 {:shortdesc}
 
-Ejemplo de API `GET /clusters`:
+ Ejemplo de API `GET /clusters`:
   ```
   GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
-</br>
+ </br>
 
 Para utilizar la API con el punto final global, en todas las solicitudes, pase el nombre de región en una cabecera `X-Region`. Para ver una lista de las regiones disponibles, ejecute `ibmcloud ks regions`.
 {: tip}
@@ -180,15 +179,15 @@ Para ver la documentación sobre los mandatos de API, consulte [https://containe
 Las zonas son centros de datos físicos que están disponibles dentro de una región de {{site.data.keyword.Bluemix_notm}}. Las regiones son una herramienta conceptual para organizar zonas y pueden incluir zonas (centros de datos) en diferentes países. La tabla siguiente muestra las zonas disponibles por región.
 {:shortdesc}
 
-* **Ciudad metropolitana multizona**: Si crea un clúster en una ciudad metropolitana multizona **excepto Sídney (AP sur)**, las réplicas del maestro de Kubernetes de alta disponibilidad se distribuyen automáticamente entre las zonas. Tiene la opción de distribuir los nodos trabajadores entre zonas para proteger las apps de una anomalía de una zona.
-* **Ciudad de una sola zona**: Si crea un clúster en una ciudad de una sola zona, puede crear varios nodos trabajadores, pero no puede distribuirlos entre zonas. El maestro de alta disponibilidad incluye tres réplicas en hosts independientes, pero no se dispersan en zonas.
+* **Ubicación metropolitana multizona**: i crea un clúster en una ubicación metropolitana multizona, las réplicas del maestro de Kubernetes de alta disponibilidad se distribuyen automáticamente entre las zonas. Tiene la opción de distribuir los nodos trabajadores entre zonas para proteger las apps de una anomalía de una zona.
+* **Ubicación de una sola zona**: Si crea un clúster en una ubicación de una sola zona, puede crear varios nodos trabajadores, pero no puede distribuirlos entre zonas. El maestro de alta disponibilidad incluye tres réplicas en hosts independientes, pero no se dispersan en zonas.
 
-<table summary="En la tabla se muestran las zonas disponibles por regiones. Las filas se leen de izquierda a derecha; la región está en la columna uno, las ciudades metropolitanas multizona en la dos y las ciudades de una sola zona en la tres.">
-<caption>Ciudades de una sola zona y multizona disponibles por región.</caption>
+<table summary="En la tabla se muestran las zonas disponibles por regiones. Las filas se leen de izquierda a derecha, con la región en la primera columna, las ubicaciones metropolitanas multizona en la segunda y las ubicaciones de una sola zona en la tercera.">
+<caption>Zonas únicas multizonas disponibles por región.</caption>
   <thead>
   <th>Región</th>
-  <th>Ciudad metropolitana multizona</th>
-  <th>Ciudad de una sola zona</th>
+  <th>Ubicación metropolitana multizona</th>
+  <th>Ubicación de una sola zona</th>
   </thead>
   <tbody>
     <tr>
@@ -258,10 +257,10 @@ En un clúster multizona, el nodo maestro se despliega en una zona con soporte m
 1.  Los nodos trabajadores se dispersan en varias zonas de una región para proporcionar más disponibilidad para el clúster. El nodo maestro permanece en la misma zona con capacidad multizona en la que ha desplegado el clúster. Al iniciar acciones de orquestación del contenedor local, como por ejemplo mandatos `kubectl`, la información se intercambia entre los nodos maestro y trabajador a través de un punto final regional.
 
 2.  Otros recursos de clúster, como almacenamiento, redes, de cálculo o apps que se ejecutan en pods, varían en su forma de desplegarse en zonas del clúster multizona. Para obtener más información, revise estos temas:
-    * Configuración de [almacenamiento de archivos](/docs/containers?topic=containers-file_storage#add_file) y [almacenamiento en bloque](/docs/containers?topic=containers-block_storage#add_block) en clústeres multizona
-    * [Habilitación de acceso público o privado a una app mediante un servicio LoadBalancer en un clúster multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-    * [Gestión de tráfico de red utilizando Ingress](/docs/containers?topic=containers-ingress#planning)
-    * [Cómo aumentar la disponibilidad de la app](/docs/containers?topic=containers-app#increase_availability)
+  * Configuración de [almacenamiento de archivos](/docs/containers?topic=containers-file_storage#add_file) y [almacenamiento en bloque](/docs/containers?topic=containers-block_storage#add_block) en clústeres multizona
+  * [Habilitación de acceso público o privado a una app mediante un servicio LoadBalancer en un clúster multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+  * [Gestión de tráfico de red utilizando Ingress](/docs/containers?topic=containers-ingress#planning)
+  * [Cómo aumentar la disponibilidad de la app](/docs/containers?topic=containers-app#increase_availability)
 
 3.  Cuando inicia acciones de gestión de clústeres, como el uso de [mandatos `ibmcloud ks`](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), se direcciona información básica sobre el clúster (como el nombre, el ID, el usuario, el mandato) a través de un punto final regional.
 

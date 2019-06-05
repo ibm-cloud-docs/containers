@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -29,40 +29,32 @@ subcollection: containers
 [Portworx ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://portworx.com/products/introduction/) 是一种高可用性软件定义的存储解决方案，可用于管理容器化数据库和其他有状态应用程序的持久存储，或者在多个专区的 pod 之间共享数据。
 {: shortdesc}
 
-**什么是软件定义的存储 (SDS)？**</br>
-SDS 解决方案对连接到集群中工作程序节点的各种类型、大小或来自不同供应商的存储设备进行抽象化。在硬盘上具有可用存储器的工作程序节点会添加为存储集群的节点。在此集群中，会对物理存储器进行虚拟化，并将其作为虚拟存储池显示给用户。存储集群由 SDS 软件进行管理。如果数据必须存储在存储集群上，那么 SDS 软件会决定在何处存储数据以实现最高可用性。虚拟存储器随附一组常用的功能和服务，您可以利用这些功能和服务，而无需关注实际底层存储体系结构。
+**什么是软件定义的存储 (SDS)？**</br>SDS 解决方案对连接到集群中工作程序节点的各种类型、大小或来自不同供应商的存储设备进行抽象化。在硬盘上具有可用存储器的工作程序节点会添加为存储集群的节点。在此集群中，会对物理存储器进行虚拟化，并将其作为虚拟存储池显示给用户。存储集群由 SDS 软件进行管理。如果数据必须存储在存储集群上，那么 SDS 软件会决定在何处存储数据以实现最高可用性。虚拟存储器随附一组常用的功能和服务，您可以利用这些功能和服务，而无需关注实际底层存储体系结构。
 
-**Portworx 是如何运作的？**</br>
-Portworx 将连接到工作程序节点的可用存储器聚集在一起，并创建统一的持久存储层，供要在集群中运行的容器化数据库或其他有状态应用程序使用。通过在多个工作程序节点上使用每个容器级别卷的卷复制，Portworx 可确保跨专区的数据持久性和数据可访问性。
+**Portworx 是如何运作的？**</br>Portworx 将连接到工作程序节点的可用存储器聚集在一起，并创建统一的持久存储层，供要在集群中运行的容器化数据库或其他有状态应用程序使用。通过在多个工作程序节点上使用每个容器级别卷的卷复制，Portworx 可确保跨专区的数据持久性和数据可访问性。
 
 此外，Portworx 还随附可用于有状态应用程序的其他功能，例如卷快照、卷加密、隔离，以及集成的 Kubernetes 存储编排器 (Stork)，用于确保以最佳方式布置集群中的卷。有关更多信息，请参阅 [Portworx 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.portworx.com/)。
 
 **{{site.data.keyword.containerlong_notm}} 中的哪种工作程序节点类型模板适用于 Portworx？**</br>
 {{site.data.keyword.containerlong_notm}} 提供了针对[软件定义的存储 (SDS) 使用情况](/docs/containers?topic=containers-plan_clusters#sds)进行优化的裸机工作程序节点类型模板，这些类型模板随附一个或多个可用于 Portworx 存储层的未格式化且未安装的原始本地磁盘。您使用随附 10 Gbps 网络速度的 SDS 工作程序节点机器时，Portworx 的性能最佳。
 
-**如果要在非 SDS 工作程序节点上运行 Portworx 该怎么做？** </br>
-您可以在非 SDS 工作程序节点类型模板上安装 Portworx，但可能无法获得应用程序所需的性能优点。非 SDS 工作程序节点可以是虚拟或裸机。如果要使用虚拟机，请使用工作程序节点类型模板 `b2c.16x64` 或更好版本。使用类型模板 `b2c.4x16` 或 `u2c.2x4` 的虚拟机不提供 Portworx 正常工作所需的资源。请记住，虚拟机随附的网速是 1000 Mbps，这不足以使 Portworx 达到理想性能。裸机机器随附的计算资源和网络速度足以满足 Portworx 的需求，但您必须先[添加未格式化且未安装的原始块存储器](#create_block_storage)，然后才能使用这些机器。
+**如果要在非 SDS 工作程序节点上运行 Portworx 该怎么做？**</br> 您可以在非 SDS 工作程序节点类型模板上安装 Portworx，但可能无法获得应用程序所需的性能优点。非 SDS 工作程序节点可以是虚拟或裸机。如果要使用虚拟机，请使用工作程序节点类型模板 `b2c.16x64` 或更好版本。类型模板为 `b3c.4x16` 或 `u3c.2x4` 的虚拟机没有提供 Portworx 正常工作所需的资源。请记住，虚拟机随附的网速是 1000 Mbps，这不足以使 Portworx 达到理想性能。裸机机器随附的计算资源和网络速度足以满足 Portworx 的需求，但您必须先[添加未格式化且未安装的原始块存储器](#create_block_storage)，然后才能使用这些机器。
 
-**如何确保数据是以高可用性方式存储的？**</br>
-在 Portworx 集群中需要至少有 3 个工作程序节点，这样 Portworx 才能跨节点复制数据。通过跨工作程序节点复制数据，Portworx 可以确保万一发生故障，有状态应用程序可以重新安排到其他工作程序节点，而不会丢失数据。要实现更高可用性，请使用[多专区集群](/docs/containers?topic=containers-plan_clusters#multizone)，并跨 3 个或更多专区中的 SDS 工作程序节点复制卷。
+**如何确保数据是以高可用性方式存储的？**</br>在 Portworx 集群中需要至少有 3 个工作程序节点，这样 Portworx 才能跨节点复制数据。通过跨工作程序节点复制数据，Portworx 可以确保万一发生故障，有状态应用程序可以重新安排到其他工作程序节点，而不会丢失数据。要实现更高可用性，请使用[多专区集群](/docs/containers?topic=containers-plan_clusters#multizone)，并跨 3 个或更多专区中的 SDS 工作程序节点复制卷。
 
-**哪种卷拓扑可为 pod 提供最佳性能？**</br>
-在集群中运行有状态应用程序时，最大挑战之一是确保在容器或整个主机出现故障时，可以将容器重新安排到其他主机上。在 Docker 中，容器必须重新安排到其他主机上时，卷不会移至新主机。可以将 Portworx 配置为以 `hyper-converged` 方式运行，以确保计算资源和存储器始终位于同一工作程序节点上。必须对应用程序进行重新安排时，Portworx 会将应用程序移至其中一个卷副本所在的工作程序节点，以确保有状态应用程序的本地磁盘访问速度和最佳性能。以 `hyper-converged` 方式运行可为 pod 提供最佳性能，但需要存储器在集群中的所有工作程序节点上可用。
+**哪种卷拓扑可为 pod 提供最佳性能？**</br>在集群中运行有状态应用程序时，最大挑战之一是确保在容器或整个主机出现故障时，可以将容器重新安排到其他主机上。在 Docker 中，容器必须重新安排到其他主机上时，卷不会移至新主机。可以将 Portworx 配置为以 `hyper-converged` 方式运行，以确保计算资源和存储器始终位于同一工作程序节点上。必须对应用程序进行重新安排时，Portworx 会将应用程序移至其中一个卷副本所在的工作程序节点，以确保有状态应用程序的本地磁盘访问速度和最佳性能。以 `hyper-converged` 方式运行可为 pod 提供最佳性能，但需要存储器在集群中的所有工作程序节点上可用。
 
 此外，还可以选择仅将一部分工作程序节点用于 Portworx 存储层。例如，您可能有两个工作程序池，一个包含随附本地原始块存储器的 SDS 工作程序节点，另一个包含未随附本地存储器的虚拟工作程序节点。安装 Portworx 时，会将 Portworx pod 安排到集群中的每个工作程序节点上，以作为守护程序集的一部分。由于 SDS 工作程序节点具有本地存储器，因此这些工作程序节点仅会包含在 Portworx 存储层中。虚拟工作程序节点因缺少本地存储器，不作为存储节点包含在内。但是，将应用程序 pod 部署到虚拟工作程序节点时，此 pod 仍可以使用 Portworx 守护程序集 pod 来访问物理存储在 SDS 工作程序节点上的数据。此设置称为 `storage-heavy`，提供的性能比 `hyper-converged` 设置略慢，因为虚拟工作程序节点必须通过专用网络与 SDS 工作程序节点进行对话来访问数据。
 
-**供应 Portworx 时需要什么？**</br>
-{{site.data.keyword.containerlong}} 提供了针对 SDS 使用情况进行优化的工作程序节点类型模板，这些类型模板随附一个或多个可用于存储数据的未格式化且未安装的原始本地磁盘。您使用随附 10 Gbps 网络速度的 [SDS 工作程序节点机器](/docs/containers?topic=containers-plan_clusters#sds)时，Portworx 的性能最佳。然而，您可以在非 SDS 工作程序节点类型模板上安装 Portworx，但可能无法获得应用程序所需的性能优点。工作程序节点成功运行 Portworx 的最低需求包括：
+**供应 Portworx 时需要什么？**</br>{{site.data.keyword.containerlong}} 提供了针对 SDS 使用情况进行优化的工作程序节点类型模板，这些类型模板随附一个或多个可用于存储数据的未格式化且未安装的原始本地磁盘。您使用随附 10 Gbps 网络速度的 [SDS 工作程序节点机器](/docs/containers?topic=containers-plan_clusters#sds)时，Portworx 的性能最佳。然而，您可以在非 SDS 工作程序节点类型模板上安装 Portworx，但可能无法获得应用程序所需的性能优点。工作程序节点成功运行 Portworx 的最低需求包括：
 - 4 个 CPU 核心
 - 4 GB 内存
 - 128 GB 未格式化的原始存储器
 - 10 Gbps 网络速度
 
-**如何确保数据是以高可用性方式存储的？**</br>
-在 Portworx 集群中需要至少有 3 个工作程序节点，这样 Portworx 才能跨节点复制数据。通过跨工作程序节点复制数据，Portworx 可以确保万一发生故障，有状态应用程序可以重新安排到其他工作程序节点，而不会丢失数据。要实现更高可用性，请使用[多专区集群](/docs/containers?topic=containers-plan_clusters#multizone)，并在跨 3 个专区的 SDS 工作程序节点上复制卷。
+**如何确保数据是以高可用性方式存储的？**</br>在 Portworx 集群中需要至少有 3 个工作程序节点，这样 Portworx 才能跨节点复制数据。通过跨工作程序节点复制数据，Portworx 可以确保万一发生故障，有状态应用程序可以重新安排到其他工作程序节点，而不会丢失数据。要实现更高可用性，请使用[多专区集群](/docs/containers?topic=containers-plan_clusters#multizone)，并在跨 3 个专区的 SDS 工作程序节点上复制卷。
 
-**必须计划哪些限制？**</br>
-Portworx 可用于设置为使用公用网络连接的标准集群。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么除非在 TCP 端口 443 上打开所有输出网络流量，或者启用公共服务端点，否则无法在集群中使用 Portworx。
+**必须计划哪些限制？**</br>Portworx 可用于设置为使用公用网络连接的标准集群。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么除非在 TCP 端口 443 上打开所有输出网络流量，或者启用公共服务端点，否则无法在集群中使用 Portworx。
 
 
 一切准备就绪？首先，[创建包含具有至少 3 个工作程序节点的 SDS 工作程序池的集群](/docs/containers?topic=containers-clusters#clusters_ui)。如果要将非 SDS 工作程序节点包含在 Portworx 集群中，请向每个工作程序节点[添加原始块存储器](#create_block_storage)。准备好集群后，在集群中[安装 Portworx Helm chart](#install_portworx)，并创建第一个超融合存储集群。  
@@ -226,12 +218,12 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 
 要安装 Portworx，请执行以下操作：
 
-1.  [遵循指示信息](/docs/containers?topic=containers-integrations#helm)在本地计算机上安装 Helm 客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
+1.  [遵循指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
 
 2.  验证 Tiller 是否已使用服务帐户进行安装。
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -258,13 +250,13 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
    {: pre}
 
 6. 更新以下值并保存更改。
-   - **`etcdEndPoint`**：添加先前检索到的 {{site.data.keyword.composeForEtcd}} 服务实例的端点，格式为 `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`。如果有多个端点，请包含所有端点，并用分号 (`;`) 来分隔各端点。
+   - **`etcdEndPoint`**：以 `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"` 格式添加先前检索到的 {{site.data.keyword.composeForEtcd}} 服务实例的端点。如果有多个端点，请包含所有端点，并用分号 (`;`) 来分隔各端点。
     - **`imageVersion`**：输入最新版本的 Portworx Helm chart。要查找最新版本，请参阅 Portworx [发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.portworx.com/reference/release-notes/)。
    - **`clusterName`**：输入要在其中安装 Portworx 的集群的名称。
    - **`usedrivesAndPartitions`**：输入 `true` 以允许 Portworx 查找未安装的硬盘驱动器和分区。
    - **`usefileSystemDrive`**：输入 `true` 以允许 Portworx 查找未安装的硬盘驱动器，包括已格式化的驱动器。
    - **`drives`**：输入 `none` 以允许 Portworx 查找未安装且未格式化的硬盘驱动器。
-   - **`etcd.credentials`**：输入先前检索到的 {{site.data.keyword.composeForEtcd}} 服务实例的用户名和密码，格式为 `<user_name>:<password>`。
+   - **`etcd.credentials`**：以 `<user_name>:<password>` 格式输入先前检索到的 {{site.data.keyword.composeForEtcd}} 服务实例的用户名和密码。
    - **`etcd.certPath`**：输入存储数据库服务实例证书的路径。如果设置的是 Databases for etcd 服务实例，请输入 `/etc/pwx/etcdcerts`。对于 {{site.data.keyword.composeForEtcd}}，请输入 `none`。
    - **`etcd.ca`**：输入认证中心 (CA) 文件的路径。如果设置的是 Databases for etcd 服务实例，请输入 `/etc/pwx/etcdcerts/ca.pem`。对于 {{site.data.keyword.composeForEtcd}}，请输入 `none`。
 
@@ -385,7 +377,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
    stork            3        3        3           0          1s
    stork-scheduler  3        3        3           0          1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                    PROVISIONER                    AGE
    px-sc-repl3-iodb-512blk-snap60-15snaps  kubernetes.io/portworx-volume  1s
    px-sc-repl3-iodb-snap60-15snaps         kubernetes.io/portworx-volume  1s
@@ -541,7 +533,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 
    输出示例：
    ```
-   <helm_chart_name>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default
+   <helm_chart_name>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default     
    ```
    {: screen}
 
@@ -568,12 +560,12 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 {{site.data.keyword.keymanagementservicelong_notm}} 可帮助您供应加密密钥，加密密钥由通过了 FIPS 140-2 二级认证的基于云的硬件安全模块 (HSM) 进行保护。可以使用这些密钥来安全地保护数据，避免未经授权的用户访问。您可以选择使用一个加密密钥来加密集群中的所有卷，或者对每个卷使用一个加密密钥。数据发送到其他工作程序节点时，Portworx 会使用此密钥对静态数据和传输期间的数据进行加密。有关更多信息，请参阅 [Volume encryption ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption)。要实现更高安全性，请设置按卷加密。
 
 查看以下信息：
-- 将使用 {{site.data.keyword.keymanagementservicelong_notm}} 的 [Portworx 卷加密工作流程](#encryption)用于按卷加密的概述
+- 将使用 {{site.data.keyword.keymanagementservicelong_notm}} 的 [Portworx 卷加密工作流程](#px_encryption)用于按卷加密的概述
 - 将使用 {{site.data.keyword.keymanagementservicelong_notm}} 的 [Portworx 卷解密工作流程](#decryption)用于按卷解密的概述
 - 为 Portworx 卷[设置按卷加密](#setup_encryption)。
 
 ### Portworx 按卷加密工作流程
-{: #encryption}
+{: #px_encryption}
 
 下图说明了在 Portworx 中设置按卷加密时，使用 {{site.data.keyword.keymanagementservicelong_notm}} 的加密工作流程。
 {: shortdesc}
@@ -657,7 +649,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 
 7. [为服务标识创建 API 密钥](/docs/iam?topic=iam-serviceidapikeys#serviceidapikeys)。此 API 密钥由 Portworx 用于访问 {{site.data.keyword.keymanagementservicelong_notm}} API。
 
-8. 针对在其中创建了服务实例的区域，[检索 {{site.data.keyword.keymanagementservicelong_notm}} API 端点](/docs/services/key-protect?topic=key-protect-regions#regions)。确保记下 API 端点，格式为 `https://<api_endpoint>`。
+8. 针对在其中创建了服务实例的区域，[检索 {{site.data.keyword.keymanagementservicelong_notm}} API 端点](/docs/services/key-protect?topic=key-protect-regions#regions)。请确保您以格式 `https://<api_endpoint>` 记下 API 端点。
 
 9. 将 {{site.data.keyword.keymanagementservicelong_notm}} GUID、API 密钥、根密钥和 {{site.data.keyword.keymanagementservicelong_notm}} API 端点编码成 Base64，并记下所有 Base64 编码值。对每个参数重复此命令，以检索 Base64 编码值。
    ```
@@ -871,7 +863,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 
    ```
    kind: StorageClass
-   apiVersion: storage.k8s.io/v1beta1
+   apiVersion: storage.k8s.io/v1
    metadata:
        name: <storageclass_name>
    provisioner: kubernetes.io/portworx-volume
@@ -903,7 +895,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>输入要为数据请求的 Porttworx I/O 优先级。可用选项为 `high`、`medium` 和 `low`。在设置 Portworx 集群期间，将检查每个磁盘以确定设备的性能概要文件。概要文件分类取决于工作程序节点的网络带宽以及您拥有的存储设备类型。SDS 工作程序节点的磁盘分类为 `high`。如果手动将磁盘连接到虚拟工作程序节点，那么这些磁盘会分类为 `low`，因为虚拟工作程序节点随附的网络速度较低。</br><br> 使用存储类创建 PVC 时，在 <code>parameters/repl</code> 中指定的副本数优先于 I/O 优先级。例如，如果指定要在高速磁盘上存储的 3 个副本，但在集群中只有一个工作程序节点具有高速磁盘，那么 PVC 创建仍会成功。数据会在高速和低速磁盘上进行复制。</td>
+   <td>输入要为数据请求的 Porttworx I/O 优先级。可用选项为 `high`、`medium` 和 `low`。在设置 Portworx 集群期间，将检查每个磁盘以确定设备的性能概要文件。概要文件分类取决于工作程序节点的网络带宽以及您拥有的存储设备类型。SDS 工作程序节点的磁盘分类为 `high`。由于虚拟工作程序节点随附的网络速度较低，所以如果您手动将磁盘连接到虚拟工作程序节点，那么这些磁盘会分类为 `low`。</br><br> 使用存储类创建 PVC 时，在 <code>parameters/repl</code> 中指定的副本数优先于 I/O 优先级。例如，如果指定要在高速磁盘上存储的 3 个副本，但在集群中只有一个工作程序节点具有高速磁盘，那么 PVC 创建仍会成功。数据会在高速和低速磁盘上进行复制。</td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>
@@ -1256,7 +1248,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 {: important}
 
 - **从 Portworx 集群中除去工作程序节点：**如果要除去运行 Portworx 并将数据存储在 Portworx 集群中的工作程序节点，那么必须将现有 pod 迁移到其余工作程序节点，然后从该节点卸载 Portworx。有关更多信息，请参阅 [Decommission a Portworx node in Kubernetes ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/)。
-- **除去整个 Portworx 集群：**可以使用 [`kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl cluster-delete` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.portworx.com/reference/cli/#pxctl-cluster-delete) 或通过[卸载 Portworx Helm chart](#remove_portworx) 来除去 Portworx 集群。
+- **除去整个 Porttworx 集群：**您可以通过使用 [`kubectl exec <portworx-pod> -it -n kube-system -- /opt/pwx/bin/pxctl cluster-delete` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.portworx.com/reference/cli/#pxctl-cluster-delete) 或[卸载 Portworx Helm chart](#remove_portworx) 来除去 Porttworx 集群。
 
 ## 获取帮助和支持
 {: #portworx_help}

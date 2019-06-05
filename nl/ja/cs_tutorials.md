@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,7 @@ subcollection: containers
 {:shortdesc}
 
 -   1 つのワーカー・ノードがある 1 つのワーカー・プールを持つクラスターを作成します。
--   [Kubernetes コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/overview/) を実行し、{{site.data.keyword.registrylong_notm}} で Docker イメージを管理するための CLI をインストールします。
+-   [Kubernetes コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubectl.docs.kubernetes.io/) を実行し、{{site.data.keyword.registrylong_notm}} で Docker イメージを管理するための CLI をインストールします。
 -   イメージを格納するためのプライベート・イメージ・リポジトリーを {{site.data.keyword.registrylong_notm}} で作成します。
 -   {{site.data.keyword.toneanalyzershort}} サービスをクラスターに追加して、そのサービスをクラスター内のすべてのアプリが使用できるようにします。
 
@@ -75,7 +75,7 @@ subcollection: containers
 
 クラスターがプロビジョンされるまでには数分かかることがあるため、CLI をインストールする前にクラスターを作成します。
 
-1.  [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/containers-kubernetes/catalog/cluster/create) で、1 つのワーカー・ノードがある 1 つのワーカー・プールを持つフリー・クラスターまたは標準クラスターを作成します。
+1.  [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") で](https://cloud.ibm.com/kubernetes/catalog/cluster/create)、1 つのワーカー・ノードがある 1 つのワーカー・プールを持つフリー・クラスターまたは標準クラスターを作成します。
 
     [CLI でクラスター](/docs/containers?topic=containers-clusters#clusters_cli)を作成することもできます。
     {: tip}
@@ -86,76 +86,69 @@ subcollection: containers
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 
-
+{{site.data.keyword.Bluemix_notm}} コンソールを代わりに使用する場合は、クラスターが作成された後、[Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) の Web ブラウザーから直接 CLI コマンドを実行できます。
+{: tip}
 
 </br>
 **CLI とその前提条件をインストールするには、以下のようにします。**
 
-1.  {{site.data.keyword.containerlong_notm}} プラグインの前提条件として、[{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli) をインストールします。 {{site.data.keyword.Bluemix_notm}} CLI コマンドを実行するには、接頭部 `ibmcloud` を使用します。
-2.  プロンプトに従ってアカウントと {{site.data.keyword.Bluemix_notm}} 組織を選択します。 クラスターはアカウントに固有のものですが、{{site.data.keyword.Bluemix_notm}} 組織またはスペースからは独立しています。
+1. [{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") をインストールします](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)。 このインストールには、以下が含まれます。
+  - 基本 {{site.data.keyword.Bluemix_notm}} CLI。 {{site.data.keyword.Bluemix_notm}} CLI を使用してコマンドを実行するための接頭部は、`ibmcloud` です。
+  - {{site.data.keyword.containerlong_notm}} プラグイン。 {{site.data.keyword.Bluemix_notm}} CLI を使用してコマンドを実行するための接頭部は、`ibmcloud ks` です。
+  - {{site.data.keyword.registryshort_notm}} プラグイン。 このプラグインを使用して、{{site.data.keyword.registryshort_notm}} でプライベート・イメージ・リポジトリーをセットアップして管理します。 レジストリー・コマンドを実行するための接頭部は、`ibmcloud cr` です。
 
-4.  Kubernetes クラスターを作成してワーカー・ノードを管理するために、{{site.data.keyword.containerlong_notm}} プラグインをインストールします。 {{site.data.keyword.containerlong_notm}} プラグイン・コマンドを実行するには、接頭部 `ibmcloud ks` を使用します。
+2. {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。
+  ```
+  ibmcloud login
+  ```
+  {: pre}
 
-    ```
-    ibmcloud plugin install container-service -r Bluemix
-    ```
-    {: pre}
+  フェデレーテッド ID がある場合、`--sso` フラグを使用してログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。
+  {: tip}
 
-5.  クラスターにアプリをデプロイするには、[Kubernetes CLI をインストールします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するには、接頭部 `kubectl` を使用します。
-    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containerlong_notm}} のデフォルト Kubernetes バージョンは 1.12.6 です。
+3. プロンプトに従ってアカウントを選択します。
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl)
+5. プラグインが正しくインストールされていることを確認します。
+  ```
+  ibmcloud plugin list
+  ```
+  {: pre}
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl)
+  {{site.data.keyword.containerlong_notm}} プラグインは **container-service** として結果に表示され、{{site.data.keyword.registryshort_notm}} プラグインは **container-registry** として結果に表示されます。
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe)
+6. クラスターにアプリをデプロイするには、[Kubernetes CLI をインストールします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するための接頭部は、`kubectl` です。
 
-          **ヒント:** Windows を使用している場合、Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
+  1. 使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containerlong_notm}} のデフォルト Kubernetes バージョンは 1.12.7 です。
+    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
+    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
+    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
 
-    2.  OS X または Linux を使用している場合、以下の手順を実行します。
-        1.  実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
+  2. OS X または Linux を使用している場合、以下の手順を実行します。
 
-            ```
-            mv filepath/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
+    1. 実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
+      ```
+      mv /filepath/kubectl /usr/local/bin/kubectl
+      ```
+      {: pre}
 
-        2.  `/usr/local/bin` が `PATH` システム変数にリストされていることを確認します。 `PATH` 変数には、オペレーティング・システムが実行可能ファイルを見つけることのできるすべてのディレクトリーが含まれています。 `PATH` 変数にリストされた複数のディレクトリーには、それぞれ異なる目的があります。 `/usr/local/bin` は実行可能ファイルを保管するために使用されますが、保管対象となるのは、オペレーティング・システムの一部ではなく、システム管理者によって手動でインストールされたソフトウェアです。
+    2. `/usr/local/bin` が `PATH` システム変数にリストされていることを確認します。 `PATH` 変数には、オペレーティング・システムが実行可能ファイルを見つけることのできるすべてのディレクトリーが含まれています。 `PATH` 変数にリストされた複数のディレクトリーには、それぞれ異なる目的があります。 `/usr/local/bin` は実行可能ファイルを保管するために使用されますが、保管対象となるのは、オペレーティング・システムの一部ではなく、システム管理者によって手動でインストールされたソフトウェアです。
+      ```
+      echo $PATH
+      ```
+      {: pre}
+      CLI 出力例:
+      ```
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      ```
+      {: screen}
 
-            ```
-            echo $PATH
-            ```
-            {: pre}
+    3. ファイルを実行可能にします。
+      ```
+      chmod +x /usr/local/bin/kubectl
+      ```
+      {: pre}
 
-            CLI 出力は、以下のようになります。
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  ファイルを実行可能にします。
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-6. {{site.data.keyword.registryshort_notm}} でプライベート・イメージ・リポジトリーをセットアップして管理するには、{{site.data.keyword.registryshort_notm}} プラグインをインストールします。 レジストリー・コマンドを実行するには、接頭部 `ibmcloud cr` を使用します。
-
-    ```
-    ibmcloud plugin install container-registry -r Bluemix
-    ```
-    {: pre}
-
-    container-service プラグインと container-registry プラグインが正常にインストールされたことを検証するには、以下のコマンドを実行します。
-
-    ```
-    ibmcloud plugin list
-    ```
-    {: pre}
-
-お疲れさまでした。CLI のインストールを正常に行うことができたので、次のレッスンとチュートリアルに進むことができます。 次に、クラスター環境をセットアップして {{site.data.keyword.toneanalyzershort}} サービスを追加します。
+お疲れさまでした。 CLI のインストールを正常に行うことができたので、次のレッスンとチュートリアルに進むことができます。 次に、クラスター環境をセットアップして {{site.data.keyword.toneanalyzershort}} サービスを追加します。
 
 
 ## レッスン 2: プライベート・レジストリーをセットアップする
@@ -164,23 +157,13 @@ subcollection: containers
 {{site.data.keyword.registryshort_notm}} でプライベート・イメージ・リポジトリーをセットアップし、シークレットを Kubernetes クラスターに追加して、アプリが {{site.data.keyword.toneanalyzershort}} サービスにアクセスできるようにします。
 {: shortdesc}
 
-1.  プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を使用して {{site.data.keyword.Bluemix_notm}} CLI にログインします。
-
-    ```
-    ibmcloud login [--sso]
-    ```
-    {: pre}
-
-    フェデレーテッド ID がある場合、`--sso` フラグを使用してログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。
-    {: tip}
-
-2.  `default` 以外のリソース・グループ内にクラスターがある場合は、そのリソース・グループをターゲットとして設定します。 各クラスターが属するリソース・グループを表示するには、`ibmcloud ks clusters` を実行します。
+1.  `default` 以外のリソース・グループ内にクラスターがある場合は、そのリソース・グループをターゲットとして設定します。 各クラスターが属するリソース・グループを表示するには、`ibmcloud ks clusters` を実行します。
    ```
    ibmcloud target -g <resource_group_name>
    ```
    {: pre}
 
-3.  独自のプライベート・イメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} にセットアップすることによって、Docker イメージを安全に保管し、すべてのクラスター・ユーザーと共有します。 {{site.data.keyword.Bluemix_notm}} 内のプライベート・イメージ・リポジトリーは、名前空間によって識別されます。 イメージ・リポジトリーの固有の URL を作成するために名前空間が使用されます。開発者はこれを使用してプライベート Dockerイメージにアクセスできます。
+2.  独自のプライベート・イメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} にセットアップすることによって、Docker イメージを安全に保管し、すべてのクラスター・ユーザーと共有します。 {{site.data.keyword.Bluemix_notm}} 内のプライベート・イメージ・リポジトリーは、名前空間によって識別されます。 イメージ・リポジトリーの固有の URL を作成するために名前空間が使用されます。開発者はこれを使用してプライベート Dockerイメージにアクセスできます。
 
     コンテナー・イメージを使用する際の[個人情報の保護](/docs/containers?topic=containers-security#pi)の詳細を確認してください。
 
@@ -191,7 +174,7 @@ subcollection: containers
     ```
     {: pre}
 
-4.  次のステップに進む前に、ワーカー・ノードのデプロイメントが完了したことを確認します。
+3.  次のステップに進む前に、ワーカー・ノードのデプロイメントが完了したことを確認します。
 
     ```
     ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -202,7 +185,7 @@ subcollection: containers
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.6
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.7
     ```
     {: screen}
 
@@ -233,7 +216,7 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
 2.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
 
     **Windows PowerShell ユーザー**: `ibmcloud ks cluster-config` の出力から `SET` コマンドをコピーして貼り付ける代わりに、次の例のように実行して `KUBECONFIG` 環境変数を設定する必要があります。`$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`。
-        {: note}
+    {: note}
 
 3.  `KUBECONFIG` 環境変数が適切に設定されたことを確認します。
 
@@ -261,8 +244,8 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
     出力例:
 
     ```
-    Client Version: v1.12.6
-    Server Version: v1.12.6
+    Client Version: v1.12.7
+    Server Version: v1.12.7
     ```
     {: screen}
 

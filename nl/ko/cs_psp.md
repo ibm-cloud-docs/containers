@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -30,7 +30,7 @@ subcollection: containers
 **팟(Pod) 보안 정책을 설정하는 이유는 무엇입니까?**</br>
 클러스터 관리자인 경우에는 클러스터에서 무슨 일이 발생하는지(특히, 클러스터의 보안 또는 준비에 영향을 주는 조치)를 제어하고자 합니다. 팟(Pod) 보안 정책은 인가된 컨테이너, 루트 네임스페이스, 호스트 네트워킹 및 포트, 볼륨 유형, 호스트 파일 시스템, Linux 권한(예: 읽기 전용) 또는 그룹 ID 등의 사용을 제어하는 데 도움을 줄 수 있습니다.
 
-`PodSecurityPolicy` 허가 제어기에서는 사용자가 [정책을 권한 부여](#customize_psp)할 때까지 팟(Pod)이 작성될 수 없습니다. 팟(Pod) 보안 정책 설정에는 의도치 않은 부작용이 있을 수 있으므로 정책을 변경한 후에는 반드시 배치를 테스트해야 합니다. 앱을 배치하려면 사용자 및 서비스 계정이 팟(Pod) 배치에 필요한 팟(Pod) 보안 정책에 의해 모두 권한 부여되어야 합니다. 예를 들어, [Helm](/docs/containers?topic=containers-integrations#helm_links)을 사용하여 앱을 설치하면 Helm Tiller 컴포넌트가 팟(Pod)을 작성하므로 사용자에게는 올바른 팟(Pod) 보안 정책 권한이 있어야 합니다.
+`PodSecurityPolicy` 허가 제어기에서는 사용자가 [정책을 권한 부여](#customize_psp)할 때까지 팟(Pod)이 작성될 수 없습니다. 팟(Pod) 보안 정책 설정에는 의도치 않은 부작용이 있을 수 있으므로 정책을 변경한 후에는 반드시 배치를 테스트해야 합니다. 앱을 배치하려면 사용자 및 서비스 계정이 팟(Pod) 배치에 필요한 팟(Pod) 보안 정책에 의해 모두 권한 부여되어야 합니다. 예를 들어, [Helm](/docs/containers?topic=containers-helm#public_helm_install)을 사용하여 앱을 설치하면 Helm Tiller 컴포넌트가 팟(Pod)을 작성하므로 사용자에게는 올바른 팟(Pod) 보안 정책 권한이 있어야 합니다.
 
 {{site.data.keyword.containerlong_notm}}에 액세스할 수 있는 사용자를 제어하고자 합니까? [클러스터 액세스 권한 지정](/docs/containers?topic=containers-users#users)을 참조하여 {{site.data.keyword.Bluemix_notm}} IAM 및 인프라 권한을 설정하십시오.
 {: tip}

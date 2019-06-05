@@ -27,5 +27,5 @@ subcollection: containers
 # 您尋找的內容已移動
 {: #container_cli_cfic_install}
 
-您尋找的內容已移動。<a href="https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip">請從新位置下載最新資訊</a>。
+您要尋找的內容已移動。<a href="https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip">請從新位置下載最新資訊</a>。
 {:shortdesc}

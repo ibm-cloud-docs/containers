@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -30,12 +30,12 @@ subcollection: containers
 **为什么要设置 pod 安全策略？**</br>
 作为集群管理员，您希望控制集群中发生的情况，尤其是影响集群安全性或就绪性的操作。pod 安全策略可以帮助控制有特权容器、根名称空间、主机联网和端口、卷类型、主机文件系统、Linux 许可权（例如，只读或组标识）等的使用。
 
-通过 `PodSecurityPolicy` 许可控制器，在[授权策略](#customize_psp)之后，才能创建 pod。设置 pod 安全策略可能会产生意外的副作用，因此请确保在更改策略后测试部署。要部署应用程序，用户和服务帐户必须全部由部署 pod 所需的 pod 安全策略授权。例如，如果是使用 [Helm](/docs/containers?topic=containers-integrations#helm_links) 安装的应用程序，那么 Helm Tiller 组件会创建 pod，因此您必须具有正确的 pod 安全策略授权。
+通过 `PodSecurityPolicy` 许可控制器，在[授权策略](#customize_psp)之后，才能创建 pod。设置 pod 安全策略可能会产生意外的副作用，因此请确保在更改策略后测试部署。要部署应用程序，用户和服务帐户必须全部由部署 pod 所需的 pod 安全策略授权。例如，如果是使用 [Helm](/docs/containers?topic=containers-helm#public_helm_install) 安装的应用程序，那么 Helm Tiller 组件会创建 pod，因此您必须具有正确的 pod 安全策略授权。
 
 要尝试控制有权访问 {{site.data.keyword.containerlong_notm}} 的用户？请参阅[分配集群访问权](/docs/containers?topic=containers-users#users)以设置 {{site.data.keyword.Bluemix_notm}} IAM 和基础架构许可权。
 {: tip}
 
-**缺省情况下设置了任何策略吗？我可以添加哪些策略？**</br>
+**缺省情况下设置了什么策略吗？我可以添加哪些策略？**</br>
 缺省情况下，{{site.data.keyword.containerlong_notm}} 将 `PodSecurityPolicy` 许可控制器配置为使用[用于 {{site.data.keyword.IBM_notm}} 集群管理的资源](#ibm_psp)，您无法删除也无法修改这些资源。您也无法禁用该许可控制器。
 
 缺省情况下，pod 操作不会锁定。取而代之的是，集群中有两个基于角色的访问控制 (RBAC) 资源，用于授权所有管理员、用户、服务和节点创建有特权 pod 和无特权 pod。用于[混合部署](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)的 {{site.data.keyword.Bluemix_notm}} Private 包随附更多支持可移植性的 RBAC 资源。
@@ -126,7 +126,7 @@ subcollection: containers
 
     *   **服务帐户**：您可能希望授权服务帐户，以便部署只能在特定名称空间中执行。例如，如果策略的作用域限定为允许在 `kube-system` 名称空间内执行操作，那么可能会执行许多重要操作，例如集群更新。但是，不会再对其他名称空间中的操作进行授权。
 
-        要将策略的作用域限定为允许在特定名称空间中执行操作，请将 `system:serviceaccounts` 更改为 `system:serviceaccount:<namespace>`.
+        要将策略的作用域限定为允许在特定名称空间中执行操作，请将 `system:serviceaccounts` 更改为 `system:serviceaccount:<namespace>`。
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
           kind: Group

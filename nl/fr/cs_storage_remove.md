@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -42,12 +42,11 @@ C'est possible. Si vous [créez le stockage persistant de manière dynamique](/d
 
 Dans tous les autres cas, suivez les instructions permettant de vérifier le statut de la réservation de volume persistant (PVC), du volume persistant (PV) et de l'unité de stockage physique et supprimez-les séparément si nécessaire.
 
-**Suis-je facturé pour le stockage après l'avoir supprimé ?**</br>
+**Suis-je facturé pour le stockage après que je l'ai supprimé ?**</br>
 Tout dépend de ce que vous supprimez et du type de facturation. Si vous supprimez la réservation de volume persistant et le volume persistant, mais pas l'instance dans votre compte d'infrastructure IBM Cloud (SoftLayer), cette instance continue à exister et vous êtes facturé pour son utilisation. Vous devez tout supprimer pour ne plus être facturé. De plus, lorsque vous spécifiez le type de facturation (`billingType`) dans la PVC, vous pouvez choisir entre une facturation à l'heure (`hourly`) ou au mois (`monthly`). Si vous avez choisi `monthly`, votre instance est facturée tous les mois. Lorsque vous supprimez l'instance, vous êtes facturé jusqu'à la fin du mois en cours.
 
 
-<p class="important">Lorsque vous nettoyez du stockage persistant, vous supprimez toutes les données qui y sont stockées. Si vous avez besoin d'une copie des données, effectuez une sauvegarde de [stockage de fichiers](/docs/containers?topic=containers-file_storage#file_backup_restore) ou de [stockage par blocs](/docs/containers?topic=containers-block_storage#block_backup_restore).</br>
-</br>Si vous utilisez un compte {{site.data.keyword.Bluemix_dedicated}}, vous devez demander la suppression du volume en [ouvrant un cas de support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
+<p class="important">Lorsque vous nettoyez du stockage persistant, vous supprimez toutes les données qui y sont stockées. Si vous avez besoin d'une copie des données, effectuez une sauvegarde de [stockage de fichiers](/docs/containers?topic=containers-file_storage#file_backup_restore) ou de [stockage par blocs](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
 
 Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 

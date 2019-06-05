@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # 配置叢集的子網路
 {: #subnets}
 
-將子網路新增至 Kubernetes 叢集，為負載平衡器服務變更可用的可攜式公用或專用 IP 位址的儲存區。
+將子網路新增至 Kubernetes 叢集，為網路負載平衡器 (NLB) 服務變更可用的可攜式公用或專用 IP 位址的儲存區。
 {:shortdesc}
 
 ## 使用自訂或現有 IBM Cloud 基礎架構 (SoftLayer) 子網路來建立叢集
@@ -36,13 +36,13 @@ subcollection: containers
 建立標準叢集時，會自動為您建立子網路。不過，您可以不要使用自動佈建的子網路，而使用 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的現有可攜式子網路，或重複使用已刪除叢集裡的子網路。
 {:shortdesc}
 
-使用此選項，可在移除及建立叢集時保留穩定的靜態 IP 位址，或訂購更大的 IP 位址區塊。如果您想要使用自己的內部部署網路子網路，取得叢集負載平衡器服務的更多可攜式專用 IP 位址，請參閱[新增使用者管理的子網路至專用 VLAN 以新增可攜式專用 IP](#user_managed)。
+使用此選項，可在移除及建立叢集時保留穩定的靜態 IP 位址，或訂購更大的 IP 位址區塊。如果您要改用自己的內部部署網路子網路來取得叢集網路負載平衡器 (NLB) 服務的其他可攜式專用 IP 位址，請參閱[新增使用者管理的子網路至專用 VLAN 以新增可攜式專用 IP](#subnet_user_managed)。
 
 可攜式公用 IP 位址是按月計費。如果您在佈建叢集之後移除可攜式公用 IP 位址，則仍須支付一個月的費用，即使您只是短時間使用也是一樣。
 {: note}
 
 開始之前：
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - 若要重複使用來自您不再需要之叢集的子網路，請刪除不需要的叢集。請立即建立新的叢集，因為如果您未重複使用子網路，這些子網路會在 24 小時內遭到刪除。
 
    ```
@@ -52,7 +52,7 @@ subcollection: containers
 
 若要使用 IBM Cloud 基礎架構 (SoftLayer) 組合中的現有子網路來搭配自訂防火牆規則或可用的 IP 位址，請執行下列動作：
 
-1. 取得您要使用之子網路的 ID，以及子網路所在 VLAN 的 ID。
+1. 取得要使用之子網路的 ID，以及子網路所在 VLAN 的 ID。
 
     ```
     ibmcloud ks subnets
@@ -72,7 +72,7 @@ subcollection: containers
 2. 使用您所識別的 VLAN ID 來[建立叢集](/docs/containers?topic=containers-clusters#clusters_cli)。包含 `--no-subnet` 旗標，以防止自動建立新的可攜式公用 IP 子網路及新的可攜式專用 IP 子網路。
 
     ```
-    ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
+    ibmcloud ks cluster-create --zone dal10 --machine-type b3c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
     對於 `--zone` 旗標，如果您不記得 VLAN 所在的區域，可以執行 `ibmcloud ks vlans --zone <zone>` 來檢查 VLAN 是否位於特定區域中。
@@ -89,7 +89,7 @@ subcollection: containers
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.12.6      Default
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.12.7      Default
     ```
     {: screen}
 
@@ -104,11 +104,11 @@ subcollection: containers
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone     Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.12.6
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.12.7
     ```
     {: screen}
 
-5.  指定子網路 ID，以將子網路新增至叢集。當您讓子網路可供叢集使用時，系統會為您建立 Kubernetes ConfigMap，其中包含您可以使用的所有可用可攜式公用 IP 位址。如果子網路 VLAN 所在的區域裡沒有 Ingress ALB 存在，則會自動使用一個可攜式公用 IP 位址及一個可攜式專用 IP 位址，來建立該區域的公用及專用 ALB。您可以使用來自該子網路的所有其他可攜式公用及專用 IP 位址，為您的應用程式建立負載平衡器服務。
+5.  指定子網路 ID，以將子網路新增至叢集。當您讓子網路可供叢集使用時，系統會為您建立 Kubernetes ConfigMap，其中包含您可以使用的所有可用可攜式公用 IP 位址。如果子網路 VLAN 所在的區域裡沒有 Ingress ALB 存在，則會自動使用一個可攜式公用 IP 位址及一個可攜式專用 IP 位址，來建立該區域的公用及專用 ALB。您可以使用來自該子網路的所有其他可攜式公用和專用 IP 位址，為您的應用程式建立 NLB 服務。
 
   ```
   ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
@@ -129,7 +129,7 @@ subcollection: containers
 ## 管理現有的可攜式 IP 位址
 {: #managing_ips}
 
-依預設，藉由[建立負載平衡器服務](/docs/containers?topic=containers-loadbalancer)，即可使用 4 個可攜式公用 IP 位址及 4 個可攜式專用 IP 位址，將單一應用程式公開至公用或專用網路。若要建立負載平衡器服務，您必須具有至少 1 個可用且類型正確的可攜式 IP 位址。您可以檢視可用的可攜式 IP 位址，或釋放已使用的可攜式 IP 位址。
+依預設，藉由[建立網路負載平衡器 (NLB) 服務](/docs/containers?topic=containers-loadbalancer)，即可使用 4 個可攜式公用 IP 位址和 4 個可攜式專用 IP 位址，將單一應用程式公開至公用或專用網路。若要建立 NLB 服務，您必須具有至少 1 個可用且類型正確的可攜式 IP 位址。您可以檢視可用的可攜式 IP 位址，或釋放已使用的可攜式 IP 位址。
 {: shortdesc}
 
 ### 檢視可用的可攜式公用 IP 位址
@@ -143,17 +143,15 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ```
 {: pre}
 
-若只要列出可用來建立負載平衡器的可攜式公用 IP 位址，您可以使用下列步驟：
+若只要列出可用來建立 NLB 的可攜式公用 IP 位址，您可以使用下列步驟：
 
 開始之前：
 -  請確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 若要列出可用的可攜式公用 IP 位址，請執行下列動作：
 
-1.  建立名為 `myservice.yaml` 的 Kubernetes 服務配置檔，並且定義類型為 `LoadBalancer` 且具有虛擬負載平衡器 IP 位址的服務。下列範例使用 IP 位址 1.1.1.1 作為負載平衡器 IP 位址。
-
-將 `<zone>` 取代為您要在其中檢查可用 IP 的區域。
+1.  建立名為 `myservice.yaml` 的 Kubernetes 服務配置檔，並且定義類型為 `LoadBalancer` 且具有虛擬 NLB IP 位址的服務。下列範例使用 IP 位址 1.1.1.1 作為 NLB IP 位址。將 `<zone>` 取代為您要在其中檢查可用 IP 的區域。
 
     ```
     apiVersion: v1
@@ -192,7 +190,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
     ```
     {: pre}
 
-    建立此服務失敗，因為 Kubernetes 主節點在 Kubernetes ConfigMap 中找不到指定的負載平衡器 IP 位址。當您執行這個指令時，可以看到錯誤訊息以及叢集的可用公用 IP 位址清單。
+    建立此服務失敗，因為 Kubernetes 主節點在 Kubernetes ConfigMap 中找不到指定的 NLB IP 位址。當您執行這個指令時，可以看到錯誤訊息以及叢集的可用公用 IP 位址清單。
 
     ```
     Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IP addresses are available: <list_of_IP_addresses>
@@ -205,14 +203,14 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ### 釋放已使用的 IP 位址
 {: #free}
 
-您可以刪除正在使用可攜式 IP 位址的負載平衡器服務，以釋放已使用的可攜式 IP 位址。
+您可以刪除正在使用可攜式 IP 位址的網路負載平衡器 (NLB) 服務，以釋放已使用的可攜式 IP 位址。
 {:shortdesc}
 
 開始之前：
 -  請確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-若要刪除負載平衡器，請執行下列動作：
+若要刪除 NLB，請執行下列動作：
 
 1.  列出叢集裡可用的服務。
 
@@ -234,7 +232,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ## 新增可攜式 IP 位址
 {: #adding_ips}
 
-依預設，藉由[建立負載平衡器服務](/docs/containers?topic=containers-loadbalancer)，即可使用 4 個可攜式公用 IP 位址及 4 個可攜式專用 IP 位址，將單一應用程式公開至公用或專用網路。若要建立超過 4 個公用或 4 個專用負載平衡器，您可以將網路子網路新增至叢集來取得更多的可攜式 IP 位址。
+依預設，藉由[建立網路負載平衡器 (NLB) 服務](/docs/containers?topic=containers-loadbalancer)，即可使用 4 個可攜式公用 IP 位址和 4 個可攜式專用 IP 位址，將單一應用程式公開至公用或專用網路。若要建立超過 4 個公用或 4 個專用 NLB，您可以將網路子網路新增至叢集來取得其他可攜式 IP 位址。
 {: shortdesc}
 
 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。
@@ -246,12 +244,12 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ### 透過訂購更多子網路來新增可攜式 IP
 {: #request}
 
-您可以在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中建立新的子網路，並讓它可供您指定的叢集使用，而為負載平衡器服務取得更多的可攜式 IP。
+您可以在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中建立新的子網路，並讓它可供您指定的叢集使用，而為 NLB 服務取得其他可攜式 IP。
 {:shortdesc}
 
 開始之前：
 -  確定您具有叢集的[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-users#platform)。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 若要訂購子網路，請執行下列動作：
 
@@ -278,7 +276,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>將 <code>&lt;subnet_size&gt;</code> 取代為您要從可攜式子網路新增的 IP 位址數目。接受值為 8、16、32 或 64。<p class="note"> 當您新增子網路的可攜式 IP 位址時，會使用三個 IP 位址來建立叢集內部網路。您無法將這三個 IP 位址用於應用程式負載平衡器，或是用它們來建立負載平衡器服務。例如，如果您要求八個可攜式公用 IP 位址，則可以使用其中的五個將您的應用程式公開給大眾使用。</p> </td>
+    <td>將 <code>&lt;subnet_size&gt;</code> 取代為您要從可攜式子網路新增的 IP 位址數目。接受值為 8、16、32 或 64。<p class="note"> 當您新增子網路的可攜式 IP 位址時，會使用三個 IP 位址來建立叢集內部網路。您無法將這三個 IP 位址用於 Ingress 應用程式負載平衡器 (ALB)，或使用它們來建立網路負載平衡器 (NLB) 服務。例如，如果您要求八個可攜式公用 IP 位址，則可以使用其中的五個將您的應用程式公開給大眾使用。</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
@@ -309,9 +307,9 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 
 
 ### 新增使用者管理的子網路至專用 VLAN 以新增可攜式專用 IP
-{: #user_managed}
+{: #subnet_user_managed}
 
-您可以讓來自內部部署網路的子網路可供您的叢集使用，為負載平衡器服務取得更多的可攜式專用 IP。
+您可以讓來自內部部署網路的子網路可供您的叢集使用，為網路負載平衡器 (NLB) 服務取得其他可攜式專用 IP。
 {:shortdesc}
 
 想要改為在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中重複使用現有的可攜式子網路嗎？請參閱[使用自訂或現有 IBM Cloud 基礎架構 (SoftLayer) 子網路來建立叢集](#subnets_custom)。
@@ -326,7 +324,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 - 配置進出外部子網路的網路資料流量遞送。
 - 確認您在內部部署資料中心網路閘道與專用網路 Virtual Router Appliance 或您叢集裡執行的 strongSwan VPN 服務之間，具有 VPN 連線功能。如需相關資訊，請參閱[設定 VPN 連線功能](/docs/containers?topic=containers-vpn)。
 -  確定您具有叢集的[**操作員**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-users#platform)。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 
 若要從內部部署網路新增子網路，請執行下列動作：
@@ -379,7 +377,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 
 4. [在相同 VLAN 上的子網路之間啟用遞送](#subnet-routing)。
 
-5. 新增[專用負載平衡器服務](/docs/containers?topic=containers-loadbalancer)或啟用[專用 Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress)，以透過專用網路存取您的應用程式。若要使用來自您新增之子網路中的專用 IP 位址，您必須指定來自子網路 CIDR 中的 IP 位址。否則，會從 IBM Cloud 基礎架構 (SoftLayer) 子網路或專用 VLAN 上使用者提供的子網路中，隨機選擇一個 IP 位址。
+5. 新增[專用網路負載平衡器 (NLB) 服務](/docs/containers?topic=containers-loadbalancer)或啟用[專用 Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress)，以透過專用網路存取應用程式。若要使用來自您新增之子網路中的專用 IP 位址，您必須指定來自子網路 CIDR 中的 IP 位址。否則，會從 IBM Cloud 基礎架構 (SoftLayer) 子網路或專用 VLAN 上使用者提供的子網路中，隨機選擇一個 IP 位址。
 
 <br />
 
@@ -387,7 +385,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ## 管理子網路遞送
 {: #subnet-routing}
 
-如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 
 檢閱下列也需要 VLAN Spanning 的情境。
@@ -408,10 +406,10 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ### 管理閘道應用裝置的子網路遞送
 {: #vra-routing}
 
-建立叢集時，會在連接叢集的 VLAN 上訂購可攜式公用及可攜式專用子網路。這些子網路會提供 Ingress 及負載平衡器網路服務的 IP 位址。
+建立叢集時，會在連接叢集的 VLAN 上訂購可攜式公用及可攜式專用子網路。這些子網路會提供 Ingress 應用程式負載平衡器 (ALB) 及網路負載平衡器 (NLB) 服務的 IP 位址。
 {: shortdesc}
 
-不過，如果您具有現有的路由器應用裝置，例如 [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra#about-the-vra)，則不會在路由器上配置剛新增的可攜式子網路，這些子網路來自叢集連接到的那些 VLAN。若要使用 Ingress 或負載平衡器網路服務，您必須藉由[啟用 VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，確保網路裝置可以在相同 VLAN 上的不同子網路之間遞送。
+不過，如果您具有現有的路由器應用裝置，例如 [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra#about-the-vra)，則不會在路由器上配置剛新增的可攜式子網路，這些子網路來自叢集連接到的那些 VLAN。若要使用 NLB 或 Ingress ALB，您必須藉由[啟用 VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，來確保網路裝置可以在相同 VLAN 上的不同子網路之間遞送。
 
 若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 {: tip}

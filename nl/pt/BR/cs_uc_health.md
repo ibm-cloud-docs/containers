@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ Por que o {{site.data.keyword.cloud_notm}}: para melhorar o atendimento ao pacie
 Tecnologias chave:
 * [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [ Escalação Horizontal ](/docs/containers?topic=containers-app#highly_available_apps)
-* [ Segurança e isolamento de contêiner ](/docs/containers?topic=containers-security#security)
+* [ Segurança do contêiner e isolamento ](/docs/containers?topic=containers-security#security)
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 * [Recurso de conexão sem mudar o código do app usando o {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
@@ -123,7 +123,7 @@ Por que o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_
 
 Tecnologias chave:
 * [ O planejamento inteligente coloca cargas de trabalho onde necessário ](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [{{site.data.keyword.cloudant}} para persistir e sincronizar dados entre os apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} para persistir e sincronizar dados entre os apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [Varredura de vulnerabilidade e isolamento para cargas de trabalho](/docs/services/Registry?topic=va-va_index#va_index)
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [{{site.data.keyword.openwhisk}} para limpar os dados e notificar pesquisadores sobre mudanças de estrutura de dados](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)

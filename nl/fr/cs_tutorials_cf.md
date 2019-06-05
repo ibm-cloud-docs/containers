@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -50,7 +50,7 @@ Ce tutoriel s'adresse aux développeurs d'applications Cloud Foundry.
 ## Prérequis
 {: #cf_prereqs}
 
-- [Créez un registre d'images privé dans {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-index).
+- [Créez un registre d'images privé dans {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started).
 - [Créez un cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Ciblez votre interface CLI sur le cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Vérifiez que vous disposez des règles d'accès {{site.data.keyword.Bluemix_notm}} IAM pour {{site.data.keyword.containerlong_notm}} :
@@ -82,7 +82,7 @@ Obtenez votre code prêt à l'emploi. Vous n'avez pas encore de code ? Vous pouv
 
     a. Dans le catalogue, à la section **Conteneurs boilerplate**, cliquez sur **Flask Python**. Ce conteneur boilerplate comprend un environnement d'exécution pour les applications Python 2 et Python 3.
 
-    b. Entrez le nom de l'application `cf-py-<name>` et cliquez sur **CREER**. Pour accéder au code d'application du conteneur boilerplate, vous devez d'abord déployer l'application CF dans le cloud. Vous pouvez utiliser n'importe quel nom pour l'application. Si vous utilisez le nom indiqué dans l'exemple, remplacez `<name>` par un identificateur unique, par exemple `cf-py-msx`.
+    b. Entrez le nom de l'application `cf-py-<name>`, puis cliquez sur **Créer**. Pour accéder au code d'application du conteneur boilerplate, vous devez d'abord déployer l'application CF dans le cloud. Vous pouvez utiliser n'importe quel nom pour l'application. Si vous utilisez le nom de l'exemple, remplacez `<name>` par un identificateur unique, tel que `cf-py-msx`.
 
     **Attention** : n'utilisez pas d'informations personnelles dans les noms d'application, d'image de conteneur ou de ressource Kubernetes.
 
@@ -276,7 +276,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
     ```
     {: screen}
 

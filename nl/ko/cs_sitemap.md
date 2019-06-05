@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -19,17 +19,18 @@ lastupdated: "2019-03-21"
 {:download: .download}
 
 
-
 # 사이트 맵
 {: #cs_sitemap}
 
 ## {{site.data.keyword.containerlong_notm}} 시작하기
+{: #sitemap-gs}
 
-[{{site.data.keyword.containerlong_notm}} 시작하기](/docs/containers?topic=containers-container_index#container_index)
+[{{site.data.keyword.containerlong_notm}} 시작하기](/docs/containers?topic=containers-getting-started#getting-started)
 
 
 
 ## 정보
+{: #sitemap-about}
 
 [{{site.data.keyword.containerlong_notm}}를 선택해야 하는 이유](/docs/containers?topic=containers-cs_ov#cs_ov)
 * [서비스 사용의 이점](/docs/containers?topic=containers-cs_ov#benefits)
@@ -43,6 +44,8 @@ lastupdated: "2019-03-21"
 * [서비스 아키텍처](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)
 
 ## 유스 케이스
+{: #sitemap-usecases}
+
 [유스 케이스의 개요](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
 [{{site.data.keyword.Bluemix_notm}}의 금융 서비스 유스 케이스](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
@@ -66,10 +69,11 @@ lastupdated: "2019-03-21"
 * [대형 공공 항만에서 공공 조직과 민간 조직을 연결하는 항만 데이터 및 선박 화물 목록의 교환을 보호함](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
 ## 클러스터 전략
+{: #sitemap-strategy}
 
-[{{site.data.keyword.containerlong_notm}} 사용 시 사용자의 책임](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
-* [클러스터 관리 책임](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#responsibilities)
-* [{{site.data.keyword.containerlong_notm}}의 오용](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#terms)
+[{{site.data.keyword.containerlong_notm}} 사용 시 사용자의 책임](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
+* [클러스터 관리 책임](/docs/containers?topic=containers-responsibilities_iks#responsibilities)
+* [{{site.data.keyword.containerlong_notm}}의 오용](/docs/containers?topic=containers-responsibilities_iks#terms)
 
 [{{site.data.keyword.containerlong_notm}}에 대한 보안](/docs/containers?topic=containers-security#security)
 * [클러스터에 대한 보안 위협 개요](/docs/containers?topic=containers-security#threats)
@@ -87,7 +91,40 @@ lastupdated: "2019-03-21"
 [{{site.data.keyword.containerlong_notm}}의 고가용성](/docs/containers?topic=containers-ha#ha)
 * [{{site.data.keyword.containerlong_notm}}의 잠재적 실패 지점에 대한 개요](/docs/containers?topic=containers-ha#fault_domains)
 
+[Kubernetes 전략 정의](/docs/containers?topic=containers-strategy#strategy)
+* [워크로드를 {{site.data.keyword.Bluemix_notm}}로 이동](/docs/containers?topic=containers-strategy#cloud_workloads)
+  * [{{site.data.keyword.Bluemix_notm}}로 이동할 수 있는 방법은 무엇입니까?](/docs/containers?topic=containers-strategy#move_to_cloud)
+  * [{{site.data.keyword.containerlong_notm}}에서 실행할 수 있는 앱의 유형은 무엇입니까?](/docs/containers?topic=containers-strategy#app_types)
+    * [Stateless인 클라우드 원시 앱을 개발하기 위한 가이드라인은 무엇입니까? ](/docs/containers?topic=containers-strategy#12factor)
+    * [앱이 이미 설치되어 있습니다. {{site.data.keyword.containerlong_notm}}으로 마이그레이션할 수 있는 방법은 무엇입니까?](/docs/containers?topic=containers-strategy#migrate_containerize)
+* [워크로드를 지원하기 위해 Kubernetes 클러스터 크기 조정](/docs/containers?topic=containers-strategy#sizing)
+  * [내 앱에 몇 개의 리소스가 필요합니까?](/docs/containers?topic=containers-strategy#sizing_resources)
+  * [내 앱을 제외하고 클러스터에서 리소스를 사용할 수 있는 앱은 무엇입니까?](/docs/containers?topic=containers-strategy#sizing_other)
+  * [내 워크로드에 필요한 가용성의 유형은 무엇입니까? ](/docs/containers?topic=containers-strategy#sizing_availability)
+  * [내 워크로드를 처리해야 하는 작업자 노드의 수는 몇 개입니까? ](/docs/containers?topic=containers-strategy#sizing_workers)
+* [Kubernetes 환경 구조화](/docs/containers?topic=containers-strategy#kube_env)
+  * [어떤 유형의 클러스터 및 머신 유형을 가져와야 합니까?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [다중 클러스터를 사용합니까? 아니면 더 많은 작업자를 기존 클러스터에 추가만 합니까?](/docs/containers?topic=containers-strategy#env_multicluster)
+  * [클러스터 내에서 내 리소스를 어떻게 설정할 수 있습니까?](/docs/containers?topic=containers-strategy#env_resources)
+* [리소스 고가용성 제공](/docs/containers?topic=containers-strategy#kube_ha)
+* [서비스 검색 설정](/docs/containers?topic=containers-strategy#service_discovery)
+  * [Kubernetes 클러스터 DNS 제공자를 사용자 정의할 수 있습니까?](/docs/containers?topic=containers-strategy#services_dns)
+  * [내 서비스가 올바른 배치에 연결되고 이동할 준비가 되었는지 확인할 수 있는 방법은 무엇입니까?](/docs/containers?topic=containers-strategy#services_connected)
+  * [내 클러스터에서 실행되는 서비스 중에서 네트워크 트래픽을 어떻게 제어합니까?](/docs/containers?topic=containers-strategy#services_network_traffic)
+  * [인터넷에 내 서비스를 노출할 수 있는 방법은 무엇입니까?](/docs/containers?topic=containers-strategy#services_expose_apps)
+* [클러스터에 앱 워크로드 배치](/docs/containers?topic=containers-strategy#deployments)
+  * [내 앱을 컨테이너에 배치해야 한다고 생각했습니다. 팟(Pod)에 대한 이 항목은 무엇입니까](/docs/containers?topic=containers-strategy#deploy_pods)
+  * [팟(Pod)만 사용할 수 있는 경우 다양한 유형의 오브젝트가 필요한 이유는 무엇입니까?](/docs/containers?topic=containers-strategy#deploy_objects)
+  * [내 배치를 좀 더 쉽게 업데이트하고 관리할 수 있도록 구성하는 방법은 무엇입니까?](/docs/containers?topic=containers-strategy#deploy_organize)
+  * [배치를 위해 앱을 준비하려면 무엇을 더 수행할 수 있습니까?](/docs/containers?topic=containers-strategy#deploy_prep)
+* [앱 압축](/docs/containers?topic=containers-strategy#packaging)
+* [앱을 최신 상태로 유지](/docs/containers?topic=containers-strategy#updating)
+  * [내 클러스터를 지원되는 상태로 유지하는 방법은 무엇입니까?](/docs/containers?topic=containers-strategy#updating_kube)
+  * [사용할 수 있는 앱 업데이트 전략은 무엇입니까?](/docs/containers?topic=containers-strategy#updating_apps)
+* [클러스터 성능 모니터링](/docs/containers?topic=containers-strategy#monitoring_health)
+
 ## 학습서
+{: #sitemap-tutorials}
 
 [튜토리얼: Kubernetes 클러스터 작성](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 * [목표](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
@@ -148,6 +185,7 @@ lastupdated: "2019-03-21"
 [튜토리얼: Kubernetes에서 실행되는 컨테이너화된 앱에 대한 Continuous Integration 및 Continuous Delivery 파이프라인 설정](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 
 ## CLI 및 API 설정
+{: #sitemap-cli-api}
 
 [CLI 및 API 설정](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
 * [CLI 설치](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)
@@ -155,11 +193,14 @@ lastupdated: "2019-03-21"
 * [`kubectl`을 실행하도록 CLI 구성](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * [CLI 업데이트](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [CLI 설치 제거](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
+* [웹 브라우저에서 Kubernetes 터미널 사용(베타)](/docs/containers?topic=containers-cs_cli_install#cli_web)
 * [API로 클러스터 배치 자동화](/docs/containers?topic=containers-cs_cli_install#cs_api)
-  * [API를 사용하여 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰을 새로 고치고 새 새로 고치기 토큰 가져오기](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
-  * [CLI를 사용하여 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰을 새로 고치고 새 새로 고치기 토큰 가져오기](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
+* [Kubernetes API를 사용하여 클러스터 관련 작업 수행](/docs/containers?topic=containers-cs_cli_install#kube_api)
+* [API를 사용하여 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰을 새로 고치고 새 새로 고치기 토큰 가져오기](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
+* [CLI를 사용하여 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰을 새로 고치고 새 새로 고치기 토큰 가져오기](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
 ## 클러스터 관리
+{: #sitemap-clusters-admin}
 
 [클러스터 및 작업자 노드 설정 계획](/docs/containers?topic=containers-plan_clusters#plan_clusters)
 * [고가용성 클러스터](/docs/containers?topic=containers-plan_clusters#ha_clusters)
@@ -209,7 +250,7 @@ lastupdated: "2019-03-21"
   * [콘솔에서 작업자 노드 업데이트](/docs/containers?topic=containers-update#worker_up_console)
 * [머신 유형 업데이트](/docs/containers?topic=containers-update#machine_type)
 * [클러스터 추가 기능 업데이트](/docs/containers?topic=containers-update#addons)
-  * [로깅을 위한 Fluentd 추가 기능에 대한 자동 업데이트 관리](/docs/containers?topic=containers-update#logging)
+  * [로깅을 위한 Fluentd 추가 기능에 대한 자동 업데이트 관리](/docs/containers?topic=containers-update#logging-up)
   * [Ingress ALB 추가 기능에 대한 자동 업데이트 관리](/docs/containers?topic=containers-update#alb)
 * [독립형 작업자 노드에서 작업자 풀로 업데이트](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
@@ -281,6 +322,7 @@ lastupdated: "2019-03-21"
 * [클러스터 메트릭 제공자 리소스 조정](/docs/containers?topic=containers-kernel#metrics)
 
 ## 클러스터 네트워킹 설정
+{: #sitemap-clusters-networking}
 
 [클러스터 네트워크 계획](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)
 * [{{site.data.keyword.containerlong_notm}} 네트워크 기본 사항 이해](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics)
@@ -307,13 +349,18 @@ lastupdated: "2019-03-21"
 * [작업자 노드 VLAN 연결 변경](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
 * [개인 서비스 엔드포인트 설정](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
 * [공용 서비스 엔드포인트 설정](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+* [공용 서비스 엔드포인트에서 개인 서비스 엔드포인트로 전환](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+* [에지 작업자 노드에 대한 네트워킹 워크로드 격리](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_edge)
+* [사설 네트워크에서 클러스터 격리](/docs/containers?topic=containers-cs_network_cluster#isolate)
 
 [방화벽에서 필수 포트와 IP 주소 열기](/docs/containers?topic=containers-firewall#firewall)
 * [방화벽 뒤에서 `kubectl` 명령 실행](/docs/containers?topic=containers-firewall#firewall_kubectl)
 * [방화벽 뒤에서 `calicoctl` 명령 실행](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 * [클러스터가 인프라 리소스 및 기타 서비스에 액세스하도록 허용](/docs/containers?topic=containers-firewall#firewall_outbound)
 * [클러스터가 사설 방화벽을 거쳐 리소스에 액세스할 수 있도록 허용](/docs/containers?topic=containers-firewall#firewall_private)
+* [클러스터가 Calico 유출 정책을 통해 액세스할 수 있도록 허용](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 * [클러스터 외부에서 NodePort, 로드 밸런서 및 Ingress 서비스에 액세스](/docs/containers?topic=containers-firewall#firewall_inbound)
+* [다른 서비스의 방화벽 또는 온프레미스 방화벽에서 클러스터를 화이트리스트로 지정](/docs/containers?topic=containers-firewall#whitelist_workers)
 
 [클러스터 DNS 제공자 구성](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 * [클러스터 DNS 제공자 Auto-Scaling](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -394,12 +441,13 @@ lastupdated: "2019-03-21"
   * [사용된 IP 주소 해제](/docs/containers?topic=containers-subnets#free)
 * [포터블 IP 주소 추가](/docs/containers?topic=containers-subnets#adding_ips)
   * [추가로 서브넷을 주문하여 포터블 IP 추가](/docs/containers?topic=containers-subnets#request)
-  * [사용자 관리 서브넷을 사용하여 포터블 사설 IP 추가](/docs/containers?topic=containers-subnets#user_managed)
+  * [사용자 관리 서브넷을 사용하여 포터블 사설 IP 추가](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [서브넷 라우팅 관리](/docs/containers?topic=containers-subnets#subnet-routing)
   * [동일한 VLAN의 기본 서브넷 간에 라우팅 사용](/docs/containers?topic=containers-subnets#vlan-spanning)
   * [게이트웨이 어플라이언스에 대한 서브넷 라우팅 관리](/docs/containers?topic=containers-subnets#vra-routing)
 
 ## 이미지에서 컨테이너 빌드
+{: #sitemap-images}
 
 [이미지에서 컨테이너 빌드](/docs/containers?topic=containers-images#images)
 * [이미지 레지스트리 계획](/docs/containers?topic=containers-images#planning_images)
@@ -414,6 +462,7 @@ lastupdated: "2019-03-21"
   * [선택한 네임스페이스의 Kubernetes 서비스 계정에 이미지 풀 시크릿 저장](/docs/containers?topic=containers-images#store_imagePullSecret)
 
 ## 클러스터에 앱 배치
+{: #sitemap-apps}
 
 [클러스터에 앱 배치](/docs/containers?topic=containers-app#app)
 * [클러스터에서의 앱 실행 계획](/docs/containers?topic=containers-app#plan_apps)
@@ -439,6 +488,7 @@ lastupdated: "2019-03-21"
 * [앱 업데이트를 위한 롤링 배치 관리](/docs/containers?topic=containers-app#app_rolling)
 
 ## 앱을 노출하기 위한 네트워킹
+{: #sitemap-apps-networking}
 
 [클러스터 내부 및 외부 네트워킹에서 앱 노출 계획](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
 * [Kubernetes 서비스를 통해 클러스터 내부 트래픽에 앱 노출](/docs/containers?topic=containers-cs_network_planning#in-cluster)
@@ -446,15 +496,12 @@ lastupdated: "2019-03-21"
 * [공용 및 사설 VLAN 설정에 대한 공용 외부 네트워킹 계획](/docs/containers?topic=containers-cs_network_planning#public_access)
 * [공용 및 사설 VLAN 설정에 대한 사설 외부 네트워킹 계획](/docs/containers?topic=containers-cs_network_planning#private_both_vlans)
 * [사설 VLAN 전용 설정을 위한 사설 외부 네트워킹 계획](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)
-* [선택사항: 에지 작업자 노드에 대한 네트워킹 워크로드 격리](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)
-* [선택사항: 사설 네트워크에서 클러스터 격리](/docs/containers?topic=containers-cs_network_planning#isolate)
 
-[NodePort를 사용한 앱 노출](/docs/containers?topic=containers-nodeport#nodeport)
+[NodePort를 사용한 액세스 테스트](/docs/containers?topic=containers-nodeport#nodeport)
 * [NodePort를 사용한 네트워크 트래픽 관리](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [NodePort 서비스를 사용하여 앱에 대한 액세스 사용](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-[로드 밸런서를 사용한 앱 노출](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-* [샘플 YAML](/docs/containers?topic=containers-loadbalancer#sample)
+[네트워크 로드 밸런서(NLB)가 사용된 기본 및 DSR 로드 밸런싱](/docs/containers?topic=containers-loadbalancer#loadbalancer)
 * [개요](/docs/containers?topic=containers-loadbalancer#lb_overview)
 * [버전 1.0 및 2.0 로드 밸런서 비교](/docs/containers?topic=containers-loadbalancer#comparison)
 * [v2.0: 컴포넌트 및 아키텍처(베타)](/docs/containers?topic=containers-loadbalancer#planning_ipvs)
@@ -472,10 +519,15 @@ lastupdated: "2019-03-21"
 * [v1.0: 다중 구역 클러스터에서 로드 밸런서 1.0 설정](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
 * [v1.0: 단일 구역 클러스터에서 로드 밸런서 1.0 설정](/docs/containers?topic=containers-loadbalancer#lb_config)
 * [v1.0: 소스 IP 보존 사용](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
-  * [에지 노드 친화성 규칙 및 결함 허용 추가](/docs/containers?topic=containers-loadbalancer#edge_nodes)
+  * [에지 노드 친화성 규칙 및 결함 허용 추가](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [여러 공용 또는 사설 VLAN에 대한 친화성 규칙 추가](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
+* [로드 밸런서 호스트 이름 등록](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)
+  * [DNS 호스트 이름으로 로드 밸런서 IP 등록](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)
+  * [호스트 이름 형식 이해](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_format)
+  * [상태 모니터를 작성하여 호스트 이름의 상태 검사를 사용으로 설정](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_monitor)
+  * [호스트 이름에서 IP와 모니터의 업데이트 및 제거](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_delete)
 
-[Ingress를 사용한 앱 노출](/docs/containers?topic=containers-ingress#ingress)
+[Ingress 애플리케이션 로드 밸런서(ALB)로 HTTPS 로드 밸런싱](/docs/containers?topic=containers-ingress#ingress)
 * [샘플 YAML](/docs/containers?topic=containers-ingress#sample_ingress)
 * [Ingress의 개념](/docs/containers?topic=containers-ingress#planning)
   * [Ingress에서 무엇이 제공됩니까?](/docs/containers?topic=containers-ingress#components)
@@ -509,7 +561,7 @@ lastupdated: "2019-03-21"
   * [로그 버퍼링 및 비우기 제한시간 사용](/docs/containers?topic=containers-ingress#access-log)
   * [keepalive 연결의 수 또는 기간 변경](/docs/containers?topic=containers-ingress#keepalive_time)
   * [보류 중인 연결 백로그 변경](/docs/containers?topic=containers-ingress#backlog)
-  * [커널 성능 튜닝](/docs/containers?topic=containers-ingress#kernel)
+  * [커널 성능 튜닝](/docs/containers?topic=containers-ingress#ingress_kernel)
 * [자체 Ingress 제어기 가져오기](/docs/containers?topic=containers-ingress#user_managed)
 
 [어노테이션으로 Ingress의 사용자 정의](/docs/containers?topic=containers-ingress_annotation#ingress_annotation)
@@ -567,6 +619,7 @@ lastupdated: "2019-03-21"
 * [Ingress 메트릭 콜렉션에 대한 공유 메모리 구역 크기 늘리기](/docs/containers?topic=containers-ingress_health#vts_zone_size)
 
 ## 지속적 스토리지에 데이터 저장
+{: #sitemap-storage}
 
 [고가용성 지속적 스토리지 계획](/docs/containers?topic=containers-storage_planning#storage_planning)
 * [스토리지 솔루션 선택](/docs/containers?topic=containers-storage_planning#choose_storage_solution)
@@ -587,8 +640,8 @@ lastupdated: "2019-03-21"
 * [파일 스토리지 구성에 대한 결정](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 * [앱에 파일 스토리지 추가](/docs/containers?topic=containers-file_storage#add_file)
 * [클러스터의 기존 파일 스토리지 사용](/docs/containers?topic=containers-file_storage#existing_file)
-  * [1단계: 기존 스토리지 준비.](/docs/containers?topic=containers-file_storage#step-1-preparing-your-existing-storage-)
-  * [2단계: 지속적 볼륨(PV) 및 일치하는 지속적 볼륨 클레임(PVC) 작성](/docs/containers?topic=containers-file_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [1단계: 기존 스토리지 준비.](/docs/containers?topic=containers-file_storage#existing-file-1)
+  * [2단계: 지속적 볼륨(PV) 및 일치하는 지속적 볼륨 클레임(PVC) 작성](/docs/containers?topic=containers-file_storage#existing-file-2)
 * [Stateful 세트에서의 파일 스토리지 사용](/docs/containers?topic=containers-file_storage#file_statefulset)
   * [Stateful 세트를 작성할 때 PVC를 동적으로 프로비저닝](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
   * [Stateful 세트를 작성하기 전에 PVC를 사전 프로비저닝](/docs/containers?topic=containers-file_storage#file_static_statefulset)
@@ -598,7 +651,7 @@ lastupdated: "2019-03-21"
 * [스토리지 클래스 참조](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
   * [브론즈](/docs/containers?topic=containers-file_storage#file_bronze)
   * [실버](/docs/containers?topic=containers-file_storage#file_silver)
-  * [골드](/docs/containers?topic=containers-file_storage#block_gold)
+  * [골드](/docs/containers?topic=containers-file_storage#file_gold)
   * [사용자 정의](/docs/containers?topic=containers-file_storage#file_custom)
 * [사용자 정의된 샘플 스토리지 클래스](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
   * [토폴로지 인식 스토리지 작성](/docs/containers?topic=containers-file_storage#file-topology)
@@ -612,8 +665,8 @@ lastupdated: "2019-03-21"
 * [블록 스토리지 구성 결정](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 * [앱에 블록 스토리지 추가](/docs/containers?topic=containers-block_storage#add_block)
 * [클러스터의 기존 블록 스토리지 사용](/docs/containers?topic=containers-block_storage#existing_block)
-  * [1단계: 기존 블록 스토리지의 정보 검색](/docs/containers?topic=containers-block_storage#step-1-retrieving-the-information-of-your-existing-block-storage)
-  * [2단계: 지속적 볼륨(PV) 및 일치하는 지속적 볼륨 클레임(PVC) 작성](/docs/containers?topic=containers-block_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [1단계: 기존 블록 스토리지의 정보 검색](/docs/containers?topic=containers-block_storage#existing-block-1)
+  * [2단계: 지속적 볼륨(PV) 및 일치하는 지속적 볼륨 클레임(PVC) 작성](/docs/containers?topic=containers-block_storage#existing-block-2)
 * [Stateful 세트에서의 블록 스토리지 사용](/docs/containers?topic=containers-block_storage#block_statefulset)
   * [Stateful 세트를 작성할 때 PVC를 동적으로 프로비저닝](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
   * [Stateful 세트를 작성하기 전에 PVC를 사전 프로비저닝](/docs/containers?topic=containers-block_storage#block_static_statefulset)
@@ -655,7 +708,7 @@ lastupdated: "2019-03-21"
   * [클러스터에서 Portworx 업데이트](/docs/containers?topic=containers-portworx#update_portworx)
   * [클러스터에서g Portworx 제거](/docs/containers?topic=containers-portworx#remove_portworx)
 * [{{site.data.keyword.keymanagementservicelong_notm}}를 사용하여 Portworx 볼륨 암호화](/docs/containers?topic=containers-portworx#encrypt_volumes)
-  * [Portworx 볼륨 암호화 워크플로우](/docs/containers?topic=containers-portworx#encryption)
+  * [Portworx 볼륨 암호화 워크플로우](/docs/containers?topic=containers-portworx#px_encryption)
   * [Portworx 볼륨 복호화 워크플로우](/docs/containers?topic=containers-portworx#decryption)
   * [Portworx 볼륨에 대한 암호화 설정](/docs/containers?topic=containers-portworx#setup_encryption)
 * [스토리지를 Portworx 클러스터에서 앱에 추가](/docs/containers?topic=containers-portworx#add_portworx_storage)
@@ -679,31 +732,36 @@ lastupdated: "2019-03-21"
 [클러스터에서 지속적 스토리지 제거](/docs/containers?topic=containers-cleanup#cleanup)
 * [지속적 스토리지 정리](/docs/containers?topic=containers-cleanup#storage_remove)
 
-## 서비스 통합
+## 통합하여 클러스터 기능 개선
+{: #sitemap-integrations}
 
 [서비스 통합](/docs/containers?topic=containers-integrations#integrations)
-* [DevOps 서비스](/docs/containers?topic=containers-integrations#devops_services)
-* [서비스 로깅 및 모니터링](/docs/containers?topic=containers-integrations#health_services)
-* [보안 서비스](/docs/containers?topic=containers-integrations#security_services)
-* [스토리지 서비스](/docs/containers?topic=containers-integrations#storage_services)
-* [클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 추가](/docs/containers?topic=containers-integrations#adding_cluster)
-* [앱에서 서비스 인증 정보에 액세스](/docs/containers?topic=containers-integrations#adding_app)
-  * [볼륨으로서 시크릿을 팟(Pod)에 마운트](/docs/containers?topic=containers-integrations#mount_secret)
-  * [환경 변수의 시크릿 참조](/docs/containers?topic=containers-integrations#reference_secret)
-* [{{site.data.keyword.containerlong_notm}}에서 Helm 설정](/docs/containers?topic=containers-integrations#helm)
+* [관리 추가 기능을 사용하여 서비스 추가](/docs/containers?topic=containers-managed-addons#managed-addons)
+  * [관리 추가 기능 추가](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
+  * [관리 추가 기능 업데이트](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
+* [Helm을 사용하여 서비스 추가](/docs/containers?topic=containers-helm#helm)
+  * [공용 액세스 권한이 있는 클러스터에 Helm 설정](/docs/containers?topic=containers-helm#public_helm_install)
+  * [사설 클러스터: {{site.data.keyword.registryshort_notm}}의 개인용 레지스트리에 Tiller 이미지 푸시](/docs/containers?topic=containers-helm#private_local_tiller)
+  * [사설 클러스터: Tiller를 사용하지 않고 Helm 차트 설치](/docs/containers?topic=containers-helm#private_install_without_tiller)
   * [관련된 Helm 링크](/docs/containers?topic=containers-integrations#helm_links)
-* [Kubernetes 클러스터 리소스 시각화](/docs/containers?topic=containers-integrations#weavescope)
+* [{{site.data.keyword.Bluemix_notm}} 서비스 바인딩을 사용하여 서비스 추가](/docs/containers?topic=containers-service-binding#service-binding)
+  * [클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 추가](/docs/containers?topic=containers-service-binding#bind-services)
+  * [앱에서 서비스 인증 정보에 액세스](/docs/containers?topic=containers-service-binding#adding_app)
+      * [볼륨으로서 시크릿을 팟(Pod)에 마운트](/docs/containers?topic=containers-service-binding#mount_secret)
+      * [환경 변수의 시크릿 참조](/docs/containers?topic=containers-service-binding#reference_secret)
 
 ## 활동 트래커 이벤트
+{: #sitemap-at}
 
 [활동 트래커 이벤트](/docs/containers?topic=containers-at_events#at_events)
 * [이벤트에 대한 정보 찾기](/docs/containers?topic=containers-at_events#kube-find)
 * [클러스터 관리 이벤트 추적](/docs/containers?topic=containers-at_events#cluster-events)
 * [Kubernetes 감사 이벤트 추적](/docs/containers?topic=containers-at_events#kube-events)
 
-## 데디케이티드 클라우드
+## 더 이상 사용되지 않음: 데디케이티드 클라우드
+{: #sitemap-dedicated}
 
-[{{site.data.keyword.Bluemix_dedicated_notm}}에서 클러스터 시작하기](/docs/containers?topic=containers-dedicated#dedicated)
+[더 이상 사용되지 않음: {{site.data.keyword.Bluemix_dedicated_notm}}에서 클러스터 시작하기](/docs/containers?topic=containers-dedicated#dedicated)
 * [ 데디케이티드 클라우드 환경 정보](/docs/containers?topic=containers-dedicated#dedicated_environment)
 * [클라우드 환경 간에 클러스터 관리의 차이점](/docs/containers?topic=containers-dedicated#dedicated_env_differences)
   * [서비스 아키텍처](/docs/containers?topic=containers-dedicated#dedicated_ov_architecture)
@@ -711,7 +769,7 @@ lastupdated: "2019-03-21"
 * [클러스터 작성](/docs/containers?topic=containers-dedicated#dedicated_administering)
   * [{{site.data.keyword.Bluemix_notm}} 콘솔을 사용하여 클러스터 작성](/docs/containers?topic=containers-dedicated#dedicated_creating_ui)
   * [CLI에서 클러스터 작성](/docs/containers?topic=containers-dedicated#dedicated_creating_cli)
-  * [작업자 노드 추가](/docs/containers?topic=containers-dedicated#add_workers)
+  * [작업자 노드 추가](/docs/containers?topic=containers-dedicated#add_workers_dedicated)
   * [개인용 및 공용 이미지 레지스트리 사용](/docs/containers?topic=containers-dedicated#dedicated_images)
   * [클러스터에 서브넷 추가](/docs/containers?topic=containers-dedicated#dedicated_cluster_subnet)
       * [Kubernetes 클러스터에 추가적인 사용자 관리 서브넷 및 IP 주소 추가](/docs/containers?topic=containers-dedicated#dedicated_byoip_subnets)
@@ -723,16 +781,19 @@ lastupdated: "2019-03-21"
   * [지속적 스토리지 작성](/docs/containers?topic=containers-dedicated#dedicated_apps_volume_claim)
 
 ## 더 이상 사용되지 않음: 단일 및 확장 가능 컨테이너 실행
+{: #sitemap-singlescalable}
 
 [더 이상 사용되지 않음: 단일 및 확장 가능 컨테이너 실행](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
 ## 하이브리드 클라우드
+{: #sitemap-hybrid}
 
 [하이브리드 클라우드](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)
 * [퍼블릭 및 프라이빗 클라우드를 strongSwan VPN과 연결](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
 * [공용 Kubernetes 컨테이너에서 {{site.data.keyword.icpfull_notm}} 이미지 실행](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
 ## {{site.data.keyword.containerlong_notm}} CLI 플러그인 참조
+{: #sitemap-cli-plugin}
 
 [명령 참조](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
 * [베타 명령 구조 사용](/docs/containers?topic=containers-cs_cli_reference#cs_beta)
@@ -751,6 +812,8 @@ lastupdated: "2019-03-21"
 [CLI 변경 로그](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 ## {{site.data.keyword.containerlong_notm}} 버전
+
+{: #sitemap-versions}
 
 [버전 정보 및 업데이트 조치](/docs/containers?topic=containers-cs_versions#cs_versions)
 * [Kubernetes 버전 유형](/docs/containers?topic=containers-cs_versions#version_types)
@@ -782,8 +845,16 @@ lastupdated: "2019-03-21"
 
 [버전 변경 로그](/docs/containers?topic=containers-changelog#changelog)
 * [버전 1.13 변경 로그](/docs/containers?topic=containers-changelog#113_changelog)
+  * [2019년 3월 20일에 릴리스된 1.13.4_1513에 대한 변경 로그](/docs/containers?topic=containers-changelog#1134_1513)
+  * [2019년 3월 4일에 릴리스된 1.13.4_1510에 대한 변경 로그](/docs/containers?topic=containers-changelog#1134_1510)
+    * [2019년 2월 27일에 릴리스된 작업자 노드 수정팩 1.13.2_1509에 대한 변경 로그](/docs/containers?topic=containers-changelog#1132_1509)
+    * [2019년 2월 15일에 릴리스된 작업자 노드 수정팩 1.13.2_1508에 대한 변경 로그](/docs/containers?topic=containers-changelog#1132_1508)
   * [2019년 2월 5일에 릴리스된 1.13.2_1507에 대한 변경 로그](/docs/containers?topic=containers-changelog#1124_1534)
 * [버전 1.12 변경 로그](/docs/containers?topic=containers-changelog#112_changelog)
+  * [2019년 3월 20일에 릴리스된 1.12.6_1544에 대한 변경 로그](/docs/containers?topic=containers-changelog#1126_1544)
+  * [2019년 3월 4일에 릴리스된 1.12.6_1541에 대한 변경 로그](/docs/containers?topic=containers-changelog#1126_1541)
+    * [2019년 2월 27일에 릴리스된 작업자 노드 수정팩 1.12.5_1540에 대한 변경 로그](/docs/containers?topic=containers-changelog#1125_1540)
+    * [2019년 2월 15일에 릴리스된 작업자 노드 수정팩 1.12.5_1538에 대한 변경 로그](/docs/containers?topic=containers-changelog#1125_1538)
   * [2019년 2월 5일에 릴리스된 1.12.5_1537에 대한 변경 로그](/docs/containers?topic=containers-changelog#1125_1537)
     * [2019년 1월 28일에 릴리스된 작업자 노드 수정팩 1.12.4_1535에 대한 변경 로그](/docs/containers?topic=containers-changelog#1124_1535)
   * [2019년 1월 21일에 릴리스된 1.12.4_1534에 대한 변경 로그](/docs/containers?topic=containers-changelog#1124_1534)
@@ -795,6 +866,10 @@ lastupdated: "2019-03-21"
     * [2018년 11월 19일에 릴리스된 작업자 노드 수정팩 1.12.2_1528에 대한 변경 로그](/docs/containers?topic=containers-changelog#1122_1528)
   * [2018년 11월 7일에 릴리스된 1.12.2_1527에 대한 변경 로그](/docs/containers?topic=containers-changelog#1122_1527)
 * [버전 1.11 변경 로그](/docs/containers?topic=containers-changelog#111_changelog)
+  * [2019년 3월 20일에 릴리스된 1.11.8_1550에 대한 변경 로그](/docs/containers?topic=containers-changelog#1118_1550)
+  * [2019년 3월 4일에 릴리스된 1.11.8_1547에 대한 변경 로그](/docs/containers?topic=containers-changelog#1118_1547)
+    * [2019년 2월 27일에 릴리스된 작업자 노드 수정팩 1.11.7_1546에 대한 변경 로그](/docs/containers?topic=containers-changelog#1117_1546)
+    * [2019년 2월 15일에 릴리스된 작업자 노드 수정팩 1.11.7_1544에 대한 변경 로그](/docs/containers?topic=containers-changelog#1117_1544)
   * [2019년 2월 5일에 릴리스된 1.11.7_1543에 대한 변경 로그](/docs/containers?topic=containers-changelog#1117_1543)
     * [2019년 1월 28일에 릴리스된 작업자 노드 수정팩 1.11.6_1541에 대한 변경 로그](/docs/containers?topic=containers-changelog#1116_1541)
   * [2019년 1월 21일에 릴리스된 1.11.6_1540에 대한 변경 로그](/docs/containers?topic=containers-changelog#1116_1540)
@@ -815,6 +890,10 @@ lastupdated: "2019-03-21"
     * [2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.11.2_1514에 대한 변경 로그](/docs/containers?topic=containers-changelog#1112_1514)
   * [2018년 8월 14일에 릴리스된 1.11.2_1513에 대한 변경 로그](/docs/containers?topic=containers-changelog#1112_1513)
 * [버전 1.10 변경 로그](/docs/containers?topic=containers-changelog#110_changelog)
+  * [2019년 3월 20일에 릴리스된 1.10.13_1551에 대한 변경 로그](/docs/containers?topic=containers-changelog#11013_1551)
+  * [2019년 3월 4일에 릴리스된 1.10.13_154에 대한 변경 로그](/docs/containers?topic=containers-changelog#11013_1548)
+    * [2019년 2월 27일에 릴리스된 작업자 노드 수정팩 1.10.12_1546에 대한 변경 로그](/docs/containers?topic=containers-changelog#11012_1546)
+    * [2019년 2월 15일에 릴리스된 작업자 노드 수정팩 1.10.12_1544에 대한 변경 로그](/docs/containers?topic=containers-changelog#11012_1544)
   * [2019년 2월 5일에 릴리스된 1.10.12_1543에 대한 변경 로그](/docs/containers?topic=containers-changelog#1117_1543)
     * [2019년 1월에 릴리스된 작업자 노드 수정팩 1.10.12_1541에 대한 변경 로그](/docs/containers?topic=containers-changelog#11012_1541)
   * [2019년 1월 21일에 릴리스된 1.10.12_1540에 대한 변경 로그](/docs/containers?topic=containers-changelog#11012_1540)
@@ -883,18 +962,8 @@ lastupdated: "2019-03-21"
 [클러스터 추가 기능 변경 로그](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 * [Ingress ALB 추가 기능 변경 로그](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 
-## 지역 및 구역
-
-[지역 및 구역](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [{{site.data.keyword.Bluemix_notm}}의 위치](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
-* [{{site.data.keyword.containerlong_notm}}의 지역](/docs/containers?topic=containers-regions-and-zones#container_regions)
-  * [다른 {{site.data.keyword.containerlong_notm}} 지역에 로그인](/docs/containers?topic=containers-regions-and-zones#container_login_endpoints)
-  * [{{site.data.keyword.containerlong_notm}} API 명령 사용](/docs/containers?topic=containers-regions-and-zones#containers_api)
-* [{{site.data.keyword.containerlong_notm}}의 구역](/docs/containers?topic=containers-regions-and-zones#zones)
-  * [단일 구역 클러스터](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
-  * [다중 구역 클러스터](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
-
 ## 사용자 액세스 권한
+{: #sitemap-user-access}
 
 [사용자 액세스 권한](/docs/containers?topic=containers-access_reference)
 * [{{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](/docs/containers?topic=containers-access_reference#iam_platform)
@@ -904,11 +973,22 @@ lastupdated: "2019-03-21"
   * [운영자 조치](/docs/containers?topic=containers-access_reference#operator-actions)
   * [관리자 조치](/docs/containers?topic=containers-access_reference#admin-actions)
 * [{{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-access_reference#service)
-* [RBAC 역할별 Kubernetes 리소스 권한](/docs/containers?topic=containers-access_reference#rbac)
+* [RBAC 역할별 Kubernetes 리소스 권한](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Cloud Foundry 역할](/docs/containers?topic=containers-access_reference#cloud-foundry)
 * [인프라 역할](/docs/containers?topic=containers-access_reference#infra)
 
+## 지원되는 통합
+{: #sitemap-supported-integrations}
+
+[지원되는 통합](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+* [DevOps 서비스](/docs/containers?topic=containers-supported_integrations#devops_services)
+* [서비스 로깅 및 모니터링](/docs/containers?topic=containers-supported_integrations#health_services)
+* [보안 서비스](/docs/containers?topic=containers-supported_integrations#security_services)
+* [스토리지 서비스](/docs/containers?topic=containers-supported_integrations#storage_services)
+* [데이터베이스 서비스](/docs/containers?topic=containers-supported_integrations#database_services)
+
 ## FAQ
+{: #sitemap-faqs}
 
 [FAQ](/docs/containers?topic=containers-faqs#faqs)
 * [Kubernetes란 무엇입니까?](/docs/containers?topic=containers-faqs#kubernetes)
@@ -931,6 +1011,7 @@ lastupdated: "2019-03-21"
 * [내 현재 사용량을 확인할 수 있습니까?](/docs/containers?topic=containers-faqs#usage)
 
 ## 클러스터 문제점 해결
+{: #sitemap-ts}
 
 [클러스터 디버깅](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot)
 * [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구를 사용하여 테스트 실행](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
@@ -1007,6 +1088,8 @@ lastupdated: "2019-03-21"
 * [도움 및 지원 받기](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
 
 ## {{site.data.keyword.containerlong_notm}}에 대한 인기 있는 주제
+{: #sitemap-poptopics}
+
 [{{site.data.keyword.containerlong_notm}}에 대한 인기 있는 주제](/docs/containers?topic=containers-cs_popular_topics)
 * [2019년 2월의 인기 있는 주제](/docs/containers?topic=containers-cs_popular_topics#feb19)
 * [2019년 1월의 인기 있는 주제](/docs/containers?topic=containers-cs_popular_topics#jan19)
@@ -1025,6 +1108,7 @@ lastupdated: "2019-03-21"
 * [Slack에서 비슷한 생각을 가진 개발자들과 대화하기](/docs/containers?topic=containers-cs_popular_topics#slack)
 
 ## 관련 링크
+{: #sitemap-rellinks}
 
 [관련 링크](/docs/containers?topic=containers-cs_rellinks#cs_rellinks)
 * [{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_rellinks#containers)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,34 @@ subcollection: containers
 
 
 
+## 2019 年 4 月的熱門主題
+{: #apr19}
+
+<table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
+<caption>2019 年 4 月關於容器及 Kubernetes 叢集的熱門主題</caption>
+<thead>
+<th>日期</th>
+<th>標題</th>
+<th>說明</th>
+</thead>
+<tbody>
+<tr>
+<td>2019 年 4 月 15 日</td>
+<td>[登錄網路負載平衡器 (NLB) 主機名稱](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>在設定公用網路負載平衡器 (NLB) 以將應用程式公開至網際網路之後，您現在可以藉由建立主機名稱來建立 NLB IP 的 DNS 項目。{{site.data.keyword.Bluemix_notm}} 還負責為您產生並維護主機名稱的萬用字元 SSL 憑證。您也可以設定 TCP/HTTP(S) 監視器，以檢查受每個主機名稱保護的 NLB IP 位址性能。</td>
+</tr>
+<tr>
+<td>2019 年 4 月 8 日</td>
+<td>[Web 瀏覽器中的 Kubernetes Terminal（測試版）](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>如果您在 {{site.data.keyword.Bluemix_notm}} 主控台中使用叢集儀表板來管理叢集，但要快速進行更進階的配置變更，則現在可以在 Kubernetes Terminal 中從 Web 瀏覽器直接執行 CLI 指令。在叢集的詳細資料頁面上，按一下**終端機**按鈕，即可啟動 Kubernetes Terminal。請注意，Kubernetes Terminal 發行為測試版附加程式，不適用於正式作業叢集。</td>
+</tr>
+<tr>
+<td>2019 年 4 月 4 日</td>
+<td>[現在雪梨的高可用性主節點](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>當您在多區域都會位置中[建立叢集](/docs/containers?topic=containers-clusters#clusters_ui)（現在包括雪梨）時，會將 Kubernetes 主節點抄本分散到各區域，以達到高可用性。</td>
+</tr>
+</tbody></table>
+
 ## 2019 年 3 月的熱門主題
 {: #mar19}
 
@@ -47,13 +75,13 @@ subcollection: containers
 <td>2019 年 3 月 21 日</td>
 <td>Kubernetes 叢集主節點的專用服務端點簡介</td>
 <td>依預設，{{site.data.keyword.containerlong_notm}} 設定叢集能夠存取公用和專用 VLAN。先前，如果您要[僅限專用 VLAN 叢集](/docs/containers?topic=containers-plan_clusters#private_clusters)，則需要設定閘道應用裝置，才能將叢集的工作者節點與主節點連接。現在，您可以使用專用服務端點。啟用專用服務端點時，工作者節點與主節點之間的所有資料流量都位於專用網路上，而不需要閘道應用裝置。除了這項增強的安全性之外，專用網路上的入埠和出埠資料流量也[無限制且不收費 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/bandwidth)。您仍然可以讓公用服務端點透過網際網路安全地存取 Kubernetes 主節點，例如，不在專用網路上執行 `kubectl` 指令。<br><br>
-若要使用專用服務端點，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) 和[服務端點](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。叢集必須執行 Kubernetes 1.11 版或更新版本。如果叢集執行較舊的 Kubernetes 版本，請[更新為至少 1.11](/docs/containers?topic=containers-update#update)。如需相關資訊，請參閱下列鏈結：<ul>
+若要使用專用服務端點，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) 和[服務端點](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。叢集必須執行 Kubernetes 1.11 版或更新版本。如果叢集執行較舊的 Kubernetes 版本，請[更新為至少 1.11](/docs/containers?topic=containers-update#update)。如需相關資訊，請參閱下列鏈結：<ul>
 <li>[瞭解使用服務端點的主節點與工作者節點通訊](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[設定專用服務端點](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[從公用服務端點切換為專用服務端點](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>如果專用網路上有防火牆，請[新增 {{site.data.keyword.containerlong_notm}}、{{site.data.keyword.registrylong_notm}} 及其他 {{site.data.keyword.Bluemix_notm}} 服務的專用 IP 位址](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
 </ul>
-<p class="important">如果您切換至僅限專用服務端點叢集，則請確定叢集仍然可以與其他使用的 {{site.data.keyword.Bluemix_notm}} 服務通訊。[NFS 型檔案儲存空間](/docs/containers?topic=containers-file_storage#file_storage)、[Portworx 軟體定義儲存空間 (SDS)](/docs/containers?topic=containers-portworx#portworx) 及 [Cluster Autoscaler](/docs/containers?topic=containers-ca#ca) 不支援僅限專用服務端點。請改用具有公用和專用服務端點的叢集。</p>
+<p class="important">如果您切換至僅限專用服務端點叢集，則請確定叢集仍然可以與其他使用的 {{site.data.keyword.Bluemix_notm}} 服務通訊。[Portworx 軟體定義儲存空間 (SDS)](/docs/containers?topic=containers-portworx#portworx) 及[叢集 Autoscaler](/docs/containers?topic=containers-ca#ca) 不支援僅限專用服務端點。請改用具有公用和專用服務端點的叢集。如果您的叢集執行 Kubernetes 1.13.4_1513、1.12.6_1544、1.11.8_1550、1.10.13_1551 版或更新版本，則支援 [NFS 型檔案儲存空間](/docs/containers?topic=containers-file_storage#file_storage)。</p>
 </td>
 </tr>
 <tr>
@@ -96,7 +124,7 @@ subcollection: containers
 <tr>
 <td>2019 年 2 月 6 日</td>
 <td>[Knative on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-knative_tutorial)</td>
-<td>Knative 是擴充 Kubernetes 功能的開放程式碼平台，協助您在 Kubernetes 叢集之上建立現代、以原始檔為主的容器化和無伺服器應用程式。受管理 Knative on {{site.data.keyword.containerlong_notm}} 是直接整合 Knative 和 Istio 與 Kubernetes 叢集的受管理附加程式。附加程式中的 Knative 和 Istio 版本是由 IBM 測試，並支援用於 {{site.data.keyword.containerlong_notm}}。</td>
+<td>Knative 是擴充 Kubernetes 功能的開放程式碼平台，協助您在 Kubernetes 叢集之上建立現代、以原始檔為主的容器化和無伺服器應用程式。Managed Knative on {{site.data.keyword.containerlong_notm}} 是受管理的附加程式，可將 Knative 及 Istio 直接與您的 Kubernetes 叢集整合。附加程式中的 Knative 和 Istio 版本是由 IBM 測試，並支援用於 {{site.data.keyword.containerlong_notm}}。</td>
 </tr>
 </tbody></table>
 
@@ -180,8 +208,8 @@ subcollection: containers
 </tr>
 <tr>
 <td>11 月 7 日</td>
-<td>負載平衡器 2.0（測試版）</td>
-<td>現在，您可以在[負載平衡器 1.0 或 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) 之間進行選擇，以安全地將叢集應用程式公開給大眾使用。</td>
+<td>網路負載平衡器 2.0（測試版）</td>
+<td>現在，您可以在 [NLB 1.0 或 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) 之間進行選擇，以安全地將叢集應用程式公開給大眾使用。</td>
 </tr>
 <tr>
 <td>11 月 7 日</td>
@@ -190,7 +218,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>11 月 7 日</td>
-<td>執行 Kubernetes 1.10 版之叢集裡的高可用性主節點</td>
+<td>高可用性主節點 </td>
 <td>高可用性主節點適用於執行 Kubernetes 1.10 版的叢集！在 1.11 叢集的先前項目中所述的所有好處都適用於 1.10 叢集，您必須採取的[準備步驟](/docs/containers?topic=containers-cs_versions#110_ha-masters)也同時適用。</td>
 </tr>
 <tr>
@@ -224,7 +252,7 @@ subcollection: containers
 <tr>
 <td>10 月 22 日</td>
 <td>[新的倫敦多區域位置 `lon05`](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>倫敦多區域都會城市會將 `lon02` 區域取代為新的 `lon05` 區域（即基礎架構資源比 `lon02` 還要多的區域）。建立具有 `lon05` 的新多區域叢集。支援具有 `lon02` 的現有叢集，但新的多區域叢集必須改用 `lon05`。</td>
+<td>倫敦多區域都會位置會將 `lon02` 區域取代為新的 `lon05` 區域（即基礎架構資源比 `lon02` 還要多的區域）。建立具有 `lon05` 的新多區域叢集。支援具有 `lon02` 的現有叢集，但新的多區域叢集必須改用 `lon05`。</td>
 </tr>
 <tr>
 <td>10 月 5 日</td>
@@ -425,7 +453,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>3 月 14 日</td>
-<td>[安全登入 {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-integrations#appid)</td>
+<td>[安全登入 {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-supported_integrations#appid)</td>
 <td>要求使用者登入，以加強在 {{site.data.keyword.containerlong_notm}} 中執行的應用程式。</td>
 </tr>
 <tr>

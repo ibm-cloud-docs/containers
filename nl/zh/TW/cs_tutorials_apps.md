@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -67,8 +67,7 @@ subcollection: containers
 ## 必要條件
 {: #apps_prereqs}
 
-* [指導教學：建立 Kubernetes 叢集](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)。
-* 安裝 [container-registry plug-in](/docs/services/Registry?topic=registry-index#registry_cli_install)。
+[指導教學：建立 Kubernetes 叢集](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## 課程 1：將單一實例應用程式部署至 Kubernetes 叢集
@@ -244,7 +243,7 @@ subcollection: containers
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 
@@ -536,7 +535,7 @@ subcollection: containers
         ```
         {: codeblock}
 
-    2.  在 watson 部署的 volumes 區段中，更新您在前一個[建立 Kubernetes 叢集指導教學](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)中建立的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 密碼名稱。將 Kubernetes 密碼當作磁區裝載至您的部署，即可讓 Pod 中執行的容器可使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 金鑰。此指導教學中的 {{site.data.keyword.watson}} 應用程式元件已配置為使用磁區裝載路徑來查閱 API 金鑰。
+    2.  在 `watson-pod` 部署的 volumes 區段中，更新您在前一個[建立 Kubernetes 叢集指導教學](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)中建立的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 密碼名稱。將 Kubernetes 密碼當作磁區裝載至您的部署，即可讓 Pod 中執行的容器可使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 金鑰。此指導教學中的 {{site.data.keyword.watson}} 應用程式元件已配置為使用磁區裝載路徑來查閱 API 金鑰。
 
         ```
         volumes:

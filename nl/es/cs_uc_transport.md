@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -61,13 +61,13 @@ La solución consta de estos componentes principales:
 2. El papeleo de aduanas se comparte digitalmente con los puertos y con los que intervienen en el transporte, incluido control de acceso
 3. App para clientes transportistas que agrega y comunica información sobre la llegada de los artículos, incluidas API para clientes transportistas para reutilizar los datos de los envíos en sus propias apps de minoristas y de empresa a empresa
 
-Para que la empresa transportista trabaje con socios globales, los sistemas de direccionamiento y planificación requerían modificaciones locales para ajustarse al idioma, la normativa y la logística de puerto de cada región. {{site.data.keyword.containerlong_notm}} ofrece cobertura global en varias regiones, que incluyen Norteamérica, Europa, Asia y Australia, de modo que las apps reflejen las necesidades de sus asociados en cada país.
+Para que la empresa transportista trabaje con socios globales, los sistemas de direccionamiento y planificación requerían modificaciones locales para ajustarse al idioma, la normativa y la logística de puerto de cada región. {{site.data.keyword.containerlong_notm}} ofrece cobertura global en varias regiones, incluyendo Norteamérica, Europa, Asia y Australia, de modo que las apps reflejen las necesidades de sus asociados en cada país.
 
 Los dispositivos IoT obtienen los datos que {{site.data.keyword.messagehub_full}} distribuye a las apps de puertos regionales y a los almacenes de datos asociados de manifiestos de contenedores y de aduanas. {{site.data.keyword.messagehub_full}} constituye el punto de partida para los sucesos de IoT. Distribuye los sucesos basándose en la conectividad gestionada que Watson IoT Platform ofrece a {{site.data.keyword.messagehub_full}}.
 
 Cuando los sucesos están en {{site.data.keyword.messagehub_full}}, se guardan de forma permanente para su uso inmediato en las apps de tránsito de los puertos y en cualquier momento futuro. Las apps que requieren la latencia más baja se consumen directamente en tiempo real en la secuencia de sucesos ({{site.data.keyword.messagehub_full}}). Otras apps futuras, como las herramientas de análisis, pueden optar por consumir en una modalidad de proceso por lotes desde el almacén de sucesos con {{site.data.keyword.cos_full}}.
 
-Puesto que los datos de los envíos se comparten con los clientes de la empresa, los desarrolladores garantizan que los clientes de la empresa pueden utilizar las API para ofrecer datos de envíos en sus propias apps. Las apps de seguimiento móvil o las soluciones de comercio electrónico en la web son ejemplos de estas apps. Los desarrolladores también están ocupados con la creación y el mantenimiento de apps de puertos regionales que captan y distribuyen los registros de aduanas y los manifiestos de los envíos. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
+Puesto que los datos de los envíos se comparten con los clientes de la empresa, los desarrolladores garantizan que los clientes pueden utilizar las API para ofrecer datos de envíos en sus propias apps. Las apps de seguimiento móvil o las soluciones de comercio electrónico en la web son ejemplos de estas apps. Los desarrolladores también están ocupados con la creación y el mantenimiento de apps de puertos regionales que captan y distribuyen los registros de aduanas y los manifiestos de los envíos. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
 * Gestión de nodo maestro de Kubernetes, IaaS y componentes operativos, como Ingress y almacenamiento
 * Supervisión del estado y la recuperación de los nodos trabajadores
 * Suministro de cálculo global, de modo que los desarrolladores no son los responsables de la infraestructura en las regiones en las que residen las cargas de trabajo y los datos
@@ -92,7 +92,7 @@ Solución técnica:
 
 **Paso 1: Contenerizar apps, mediante microservicios**
 
-* Organizar las apps en un conjunto de microservicios cooperativos que se ejecuten en {{site.data.keyword.containerlong_notm}} en función de las áreas funcionales de la app y sus dependencias.
+* Integrar las apps en un conjunto de microservicios cooperativos que se ejecuten en {{site.data.keyword.containerlong_notm}} en función de las áreas funcionales de la app y sus dependencias.
 * Desplegar apps en contenedores en {{site.data.keyword.containerlong_notm}}.
 * Proporcionar paneles de control de DevOps estandarizados a través de Kubernetes.
 * Habilitar el escalado según demanda de la capacidad de cálculo para cargas de trabajo de proceso por lotes y otras cargas de trabajo de inventario que se ejecutan con poca frecuencia.
@@ -159,7 +159,7 @@ Solución técnica:
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_full_notm}}
 
-El desarrollo acelerado constituye una victoria clave para el ejecutivo de RR.HH. El equipo comienza por contenerizar sus apps y colocarlas en la nube. Mediante el uso de contenedores modernos, los desarrolladores pueden experimentar fácilmente con SDK Node.js y enviar los cambios a los sistemas de desarrollo y prueba, escalados en clústeres separados. Esos envíos se han automatizado con cadenas de herramientas abiertas y {{site.data.keyword.contdelivery_full}}. Las actualizaciones para mantener el sitio de RR.HH. ya no pasan por procesos lentos y propensos a errores. Pueden distribuir actualizaciones incrementales a su sitio, a diario o incluso con mayor frecuencia.  Además, el registro y la supervisión del sitio de recursos humanos se integran rápidamente, especialmente en lo que respecta a la forma en que el sitio capta datos personalizados de los sistemas de beneficios de fondo. Los desarrolladores no pierdan el tiempo creando sistemas de registro complejos, solo para poder solucionar los problemas de los sistemas activos. Los desarrolladores no tienen invertir su tiempo en convertirse en expertos en seguridad en la nube; pueden imponer la autenticación controlada por políticas fácilmente mediante {{site.data.keyword.appid_full_notm}}.
+El desarrollo acelerado constituye una victoria clave para el ejecutivo de RR.HH. El equipo comienza por contenerizar sus apps y colocarlas en la nube. Mediante el uso de contenedores modernos, los desarrolladores pueden experimentar fácilmente con SDK Node.js y enviar los cambios a los sistemas de desarrollo y prueba, escalados en clústeres separados. Esos envíos se han automatizado con cadenas de herramientas abiertas y {{site.data.keyword.contdelivery_full}}. Las actualizaciones para mantener el sitio de RR.HH. ya no pasan por procesos lentos y propensos a errores. Pueden distribuir actualizaciones incrementales a su sitio, a diario o incluso con mayor frecuencia.  Además, el registro y la supervisión del sitio de recursos humanos se integran rápidamente, especialmente en lo que respecta a la forma en que el sitio capta datos personalizados de los sistemas de beneficios de fondo. Los desarrolladores no pierdan el tiempo creando sistemas de registro complejos, solo para poder solucionar los problemas de los sistemas activos. Los desarrolladores no tienen que ser expertos en seguridad en la nube; pueden imponer la autenticación controlada por políticas fácilmente utilizando {{site.data.keyword.appid_full_notm}}.
 
 Con {{site.data.keyword.containerlong_notm}}, pasaron de un hardware sobredimensionado en un centro de datos privado a un cálculo personalizable que reduce las operaciones de TI, el mantenimiento y la energía. Para alojar el sitio de recursos humanos, pudieron diseñar fácilmente clústeres de Kubernetes que se ajustaran a sus necesidades de CPU, RAM y almacenamiento. Otro factor para reducir los costes de personal es que IBM gestiona Kubernetes, de modo que los desarrolladores se pueden centrar en ofrecer a los empleados una mejor experiencia para inscribirse en los beneficios ofrecidos.
 

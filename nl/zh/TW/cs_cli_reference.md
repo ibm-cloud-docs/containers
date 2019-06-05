@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # IBM Cloud Kubernetes 服務 CLI
 {: #cs_cli_reference}
 
@@ -34,10 +33,11 @@ subcollection: containers
 
 在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
 
-要尋找 `ibmcloud cr` 指令嗎？請參閱 [{{site.data.keyword.registryshort_notm}} CLI 參考資料](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)。要尋找 `kubectl` 指令嗎？請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)。
+要尋找 `ibmcloud cr` 指令嗎？請參閱 [{{site.data.keyword.registryshort_notm}} CLI 參考資料](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)。要尋找 `kubectl` 指令嗎？請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubectl.docs.kubernetes.io/)。
 {:tip}
 
-## 使用測試版指令結構
+
+## 使用測試版 {{site.data.keyword.containerlong_notm}} 外掛程式
 {: #cs_beta}
 
 重新設計的 {{site.data.keyword.containerlong_notm}} 外掛程式版本是以測試版提供。重新設計的 {{site.data.keyword.containerlong_notm}} 外掛程式會將指令分類，並將指令從連字符號結構變更為空格結構。
@@ -64,7 +64,7 @@ export IKS_BETA_VERSION=<beta_version>
       <td><code>0.2</code>（預設值）</td>
       <td>舊版：指令會以連字號結構顯示，並按字母順序列出。</td>
       <td>舊版和測試版：您可以用舊版連字號結構 (`ibmcloud ks alb-cert-get`) 或測試版空格結構 (`ibmcloud ks alb cert get`) 執行指令。</td>
-  </tr>
+    </tr>
     <tr>
       <td><code>0.3</code></td>
       <td>測試版：指令以空格結構顯示，並依種類列出。</td>
@@ -100,7 +100,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks api](#cs_api)</td>
+    <td>[ibmcloud ks api
+](#cs_cli_api)</td>
     <td>[ibmcloud ks api-key-info](#cs_api_key_info)</td>
     <td>[ibmcloud ks api-key-reset](#cs_api_key_reset)</td>
     <td>[ibmcloud ks apiserver-config-get](#cs_apiserver_config_get)</td>
@@ -146,25 +147,25 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
+    <td>[ibmcloud ks addon-versions](#cs_addon_versions)</td>
     <td>[ibmcloud ks cluster-addon-disable](#cs_cluster_addon_disable)</td>
     <td>[ibmcloud ks cluster-addon-enable](#cs_cluster_addon_enable)</td>
     <td>[ibmcloud ks cluster-addons](#cs_cluster_addons)</td>
-    <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
   </tr>
   <tr>
+  <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
     <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
     <td>[ibmcloud ks cluster-feature-disable](#cs_cluster_feature_disable)</td>
     <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
-    <td>[ibmcloud ks cluster-feature-ls](#cs_cluster_feature_ls)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
+  <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
     <td>[ibmcloud ks cluster-pull-secret-apply](#cs_cluster_pull_secret_apply)</td>
     <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
+  <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
     <td> </td>
@@ -329,6 +330,40 @@ ibmcloud plugin list
 
 </br>
 
+<table summary="網路負載平衡器 (NLB) 指令表格">
+<caption>網路負載平衡器 (NLB) 指令</caption>
+<col width = 25%>
+<col width = 25%>
+<col width = 25%>
+  <thead>
+    <tr>
+      <th colspan=4>網路負載平衡器 (NLB) 指令</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-add](#cs_nlb-dns-add)</td>
+      <td>[ibmcloud ks nlb-dns-create](#cs_nlb-dns-create)</td>
+      <td>[ibmcloud ks nlb-dnss](#cs_nlb-dns-ls)</td>
+      <td>[ibmcloud ks nlb-dns-rm](#cs_nlb-dns-rm)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-configure](#cs_nlb-dns-monitor-configure)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-get](#cs_nlb-dns-monitor-get)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-disable](#cs_nlb-dns-monitor-disable)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-enable](#cs_nlb-dns-monitor-enable)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-ls](#cs_nlb-dns-monitor-ls)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-status](#cs_nlb-dns-monitor-status)</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+</br>
+
 <table summary="地區指令表格">
 <caption>地區指令</caption>
 <col width="25%">
@@ -342,7 +377,7 @@ ibmcloud plugin list
     <td>[ibmcloud ks region](#cs_region)</td>
     <td>[ibmcloud ks region-set](#cs_region-set)</td>
     <td>[ibmcloud ks regions](#cs_regions)</td>
-    <td>[ibmcloud ks zones](#cs_datacenters)</td>
+  <td>[ibmcloud ks zones](#cs_datacenters)</td>
   </tr>
 </tbody>
 </table>
@@ -406,18 +441,24 @@ ibmcloud plugin list
 
 ### ibmcloud ks api
 
-{: #cs_api}
+{: #cs_cli_api}
 
 將目標設為 {{site.data.keyword.containerlong_notm}} 的 API 端點。如果您未指定端點，則可以檢視已設定目標之現行端點的相關資訊。
 {: shortdesc}
+
+下列是支援的端點：
+* 全球：`https://containers.cloud.ibm.com`
+* 達拉斯（美國南部、us-south）：`https://us-south.containers.cloud.ibm.com`
+* 法蘭克福（歐盟中部、eu-de）：`https://eu-central.containers.cloud.ibm.com`
+* 倫敦（英國南部、eu-gb）：`https://uk-south.containers.cloud.ibm.com`
+* 雪梨（亞太地區南部、au-syd）：`https://ap-south.containers.cloud.ibm.com`
+* 東京（亞太地區北部、jp-tok）：`https://ap-north.containers.cloud.ibm.com`
+* 華盛頓特區（美國東部、us-east）：`https://us-east.containers.cloud.ibm.com`
 
 ```
 ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
 ```
 {: pre}
-
-要切換地區嗎？請改用 `ibmcloud ks region-set` [指令](#cs_region-set)。
-{: tip}
 
 <strong>最低必要許可權</strong>：無
 
@@ -425,15 +466,7 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 
    <dl>
    <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
-   <dd>{{site.data.keyword.containerlong_notm}} API 端點。請注意，此端點與 {{site.data.keyword.Bluemix_notm}} 端點不同。設定 API 端點需要此值。接受值如下：<ul>
-   <li>全球端點：https://containers.cloud.ibm.com</li>
-   <li>亞太地區北部端點：https://ap-north.containers.cloud.ibm.com</li>
-   <li>亞太地區南部端點：https://ap-south.containers.cloud.ibm.com</li>
-   <li>歐盟中部端點：https://eu-central.containers.cloud.ibm.com</li>
-   <li>英國南部端點：https://uk-south.containers.cloud.ibm.com</li>
-   <li>美國東部端點：https://us-east.containers.cloud.ibm.com</li>
-   <li>美國南部端點：https://us-south.containers.cloud.ibm.com</li></ul>
-   </dd>
+   <dd>{{site.data.keyword.containerlong_notm}} API 端點。請注意，此端點與 {{site.data.keyword.Bluemix_notm}} 端點不同。設定 API 端點需要此值。</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>容許不安全的 HTTP 連線。這是選用旗標。</dd>
@@ -715,11 +748,21 @@ ibmcloud ks help
 <strong>指令選項</strong>：無
 
 
-### ibmcloud ks init [--host HOST]
+###         ibmcloud ks init
+        
 {: #cs_init}
 
 起始設定 {{site.data.keyword.containerlong_notm}} 外掛程式，或指定您要建立或存取 Kubernetes 叢集的地區。
 {: shortdesc}
+
+下列是支援的端點：
+* 全球：`https://containers.cloud.ibm.com`
+* 達拉斯（美國南部、us-south）：`https://us-south.containers.cloud.ibm.com`
+* 法蘭克福（歐盟中部、eu-de）：`https://eu-central.containers.cloud.ibm.com`
+* 倫敦（英國南部、eu-gb）：`https://uk-south.containers.cloud.ibm.com`
+* 雪梨（亞太地區南部、au-syd）：`https://ap-south.containers.cloud.ibm.com`
+* 東京（亞太地區北部、jp-tok）：`https://ap-north.containers.cloud.ibm.com`
+* 華盛頓特區（美國東部、us-east）：`https://us-east.containers.cloud.ibm.com`
 
 ```
 ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
@@ -749,10 +792,16 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
    </dl>
 
 **範例**：
-```
-ibmcloud ks init --host https://uk-south.containers.cloud.ibm.com
-```
-{: pre}
+*  將美國南部地區端點設為目標的範例：
+  ```
+  ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
+  ```
+  {: pre}
+*  將全球端點設為目標的範例：
+  ```
+  ibmcloud ks init --host https://containers.cloud.ibm.com
+  ```
+  {: pre}
 
 ### ibmcloud ks messages
 {: #cs_messages}
@@ -772,6 +821,39 @@ ibmcloud ks messages
 
 ## 叢集指令：管理
 {: #cluster_mgmt_commands}
+
+### ibmcloud ks addon-versions
+{: #cs_addon_versions}
+
+檢視 {{site.data.keyword.containerlong_notm}} 中支援的受管理附加程式版本的清單。
+{: shortdesc}
+
+```
+ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--json] [-s]
+```
+{: pre}
+
+<strong>最低必要許可權</strong>：無
+
+**指令選項**：
+
+  <dl>
+  <dt><code>--addon <em>ADD-ON_NAME</em></code></dt>
+  <dd>選用項目：指定要過濾其版本的附加程式名稱，例如 <code>istio</code> 或 <code>knative</code>。</dd>
+
+  <dt><code>--json</code></dt>
+  <dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+  </dl>
+
+**範例**：
+
+  ```
+  ibmcloud ks addon-versions --addon istio
+  ```
+  {: pre}
 
 ### ibmcloud ks cluster-addon-disable
 {: #cs_cluster_addon_disable}
@@ -878,18 +960,43 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**管理者**平台角色
 
 <strong>指令選項</strong>：
-
 <dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-  <dd>叢集的名稱或 ID。這是必要值。</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+</dl>
+
+**範例**：
+```
+  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
+  ```
+{: pre}
+
+#### ibmcloud ks cluster-addon-disable kube-terminal
+{: #cs_cluster_addon_disable_kube-terminal}
+
+停用 [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) 附加程式。若要在 {{site.data.keyword.containerlong_notm}} 叢集主控台中使用 Kubernetes Terminal，您必須先重新啟用附加程式。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster CLUSTER
+```
+{: pre}
+
+<strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**管理者**平台角色
+
+<strong>指令選項</strong>：
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>叢集的名稱或 ID。這是必要值。</dd>
 </dl>
 
 **範例**：
 
-  ```
-  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addon-enable
 {: #cs_cluster_addon_enable}
@@ -900,28 +1007,31 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_enable_istio}
 
-啟用受管理的 [Istio add-on](/docs/containers?topic=containers-istio)。安裝 Istio 1.0.5 版的核心元件，包括 Prometheus。
+啟用受管理的 [Istio add-on](/docs/containers?topic=containers-istio)。安裝 Istio 的核心元件，包括 Prometheus。
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
+ibmcloud ks cluster-addon-enable istio --cluster CLUSTER [--version VERSION]
 ```
 {: pre}
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**管理者**平台角色
 
 <strong>指令選項</strong>：
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>叢集的名稱或 ID。這是必要值。</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>選用項目：指定要安裝的附加程式版本。如果未指定任何版本，則會安裝預設版本。</dd>
 </dl>
 
 **範例**：
 
-  ```
+```
   ibmcloud ks cluster-addon-enable istio --cluster my_cluster
   ```
-  {: pre}
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-extras
 {: #cs_cluster_addon_enable_istio_extras}
@@ -930,28 +1040,29 @@ ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**管理者**平台角色
 
 <strong>指令選項</strong>：
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>叢集的名稱或 ID。這是必要值。</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>選用項目：指定要安裝的附加程式版本。如果未指定任何版本，則會安裝預設版本。</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>選用項目：啟用 <code>istio</code> 附加程式相依項目。</dd>
+<dt><code>-y</code></dt>
+<dd>選用項目：啟用 <code>istio</code> 附加程式相依項目。</dd>
 </dl>
 
 **範例**：
-
-  ```
+```
   ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
   ```
-  {: pre}
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-sample-bookinfo
 {: #cs_cluster_addon_enable_istio_sample_bookinfo}
@@ -960,7 +1071,7 @@ ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
@@ -969,19 +1080,21 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
 <strong>指令選項</strong>：
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>叢集的名稱或 ID。這是必要值。</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>選用項目：啟用 <code>istio</code> 和 <code>istio-extras</code> 附加程式相依項目。</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>選用項目：指定要安裝的附加程式版本。如果未指定任何版本，則會安裝預設版本。</dd>
+
+<dt><code>-y</code></dt>
+<dd>選用項目：啟用 <code>istio</code> 和 <code>istio-extras</code> 附加程式相依項目。</dd>
 </dl>
 
 **範例**：
-
-  ```
+```
   ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
   ```
-  {: pre}
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_enable_knative}
@@ -990,7 +1103,7 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
@@ -999,19 +1112,50 @@ ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
 <strong>指令選項</strong>：
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>叢集的名稱或 ID。這是必要值。</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>選用項目：啟用 <code>istio</code> 附加程式相依項目。</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>選用項目：指定要安裝的附加程式版本。如果未指定任何版本，則會安裝預設版本。</dd>
+
+<dt><code>-y</code></dt>
+<dd>選用項目：啟用 <code>istio</code> 附加程式相依項目。</dd>
 </dl>
 
 **範例**：
-
-  ```
+```
   ibmcloud ks cluster-addon-enable knative --cluster my_cluster
   ```
-  {: pre}
+{: pre}
+
+#### ibmcloud ks cluster-addon-enable kube-terminal
+{: #cs_cluster_addon_enable_kube-terminal}
+
+啟用 [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) 附加程式，以在 {{site.data.keyword.containerlong_notm}} 叢集主控台中使用 Kubernetes Terminal。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+<strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**管理者**平台角色
+
+<strong>指令選項</strong>：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>選用項目：指定要安裝的附加程式版本。如果未指定任何版本，則會安裝預設版本。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addons
 {: #cs_cluster_addons}
@@ -1027,18 +1171,16 @@ ibmcloud ks cluster-addons --cluster CLUSTER
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**檢視者**平台角色
 
 <strong>指令選項</strong>：
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>叢集的名稱或 ID。這是必要值。</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
 </dl>
 
 **範例**：
-
-  ```
+```
   ibmcloud ks cluster-addons --cluster my_cluster
   ```
-  {: pre}
+{: pre}
 
 ### ibmcloud ks cluster-config
 {: #cs_cluster_config}
@@ -1057,32 +1199,30 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 
 **指令選項**：
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>叢集的名稱或 ID。這是必要值。</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
 
-   <dt><code>--admin</code></dt>
-   <dd>下載「超級使用者」角色的 TLS 憑證及許可權檔案。您可以使用憑證，在叢集裡自動執行作業，而無需重新鑑別。檔案會下載至 `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`。這是選用值。</dd>
+<dt><code>--admin</code></dt>
+<dd>下載「超級使用者」角色的 TLS 憑證及許可權檔案。您可以使用憑證，在叢集裡自動執行作業，而無需重新鑑別。檔案會下載至 `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`。這是選用值。</dd>
 
-   <dt><code>--network</code></dt>
-   <dd>下載在叢集裡執行 <code>calicoctl</code> 指令所需的 Calico 配置檔、TLS 憑證及許可權檔案。這是選用值。**附註**：若要取得已下載 Kubernetes 配置資料及憑證的 export 指令，您必須在沒有此旗標的情況下執行以下指令。</dd>
+<dt><code>--network</code></dt>
+<dd>下載在叢集裡執行 <code>calicoctl</code> 指令所需的 Calico 配置檔、TLS 憑證及許可權檔案。這是選用值。**附註**：若要取得已下載 Kubernetes 配置資料及憑證的 export 指令，您必須在沒有此旗標的情況下執行以下指令。</dd>
 
-   <dt><code>--export</code></dt>
-   <dd>下載 Kubernetes 配置資料及憑證，但不包含 export 指令以外的任何訊息。因為沒有顯示任何訊息，所以可以在建立自動化 Script 時使用此旗標。這是選用值。</dd>
+<dt><code>--export</code></dt>
+<dd>下載 Kubernetes 配置資料及憑證，但不包含 export 指令以外的任何訊息。因為沒有顯示任何訊息，所以可以在建立自動化 Script 時使用此旗標。這是選用值。</dd>
 
-   <dt><code>--skip-rbac</code></dt>
-   <dd>跳過根據 {{site.data.keyword.Bluemix_notm}} IAM 服務存取角色將使用者 Kubernetes RBAC 角色新增至叢集配置。唯有當您[管理自己的 Kubernetes RBAC 角色](/docs/containers?topic=containers-users#rbac)時，才要包含此選項。如果您使用 [{{site.data.keyword.Bluemix_notm}} IAM 服務存取角色](/docs/containers?topic=containers-access_reference#service)來管理所有 RBAC 使用者，請勿包含此選項。</dd>
+<dt><code>--skip-rbac</code></dt>
+<dd>跳過根據 {{site.data.keyword.Bluemix_notm}} IAM 服務存取角色將使用者 Kubernetes RBAC 角色新增至叢集配置。唯有當您[管理自己的 Kubernetes RBAC 角色](/docs/containers?topic=containers-users#rbac)時，才要包含此選項。如果您使用 [{{site.data.keyword.Bluemix_notm}} IAM 服務存取角色](/docs/containers?topic=containers-access_reference#service)來管理所有 RBAC 使用者，請勿包含此選項。</dd>
 
-  <dt><code>-s</code></dt>
-  <dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
 
-  <dt><code>--yaml</code></dt>
-  <dd>以 YAML 格式列印指令輸出。這是選用值。</dd>
-
-   </dl>
+<dt><code>--yaml</code></dt>
+<dd>以 YAML 格式列印指令輸出。這是選用值。</dd>
+</dl>
 
 **範例**：
-
 ```
 ibmcloud ks cluster-config --cluster my_cluster
 ```
@@ -1096,7 +1236,7 @@ ibmcloud ks cluster-config --cluster my_cluster
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 ```
 {: pre}
 
@@ -1109,10 +1249,7 @@ ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone Z
 
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-
-<dd>建立標準叢集之 YAML 檔案的路徑。您可以使用 YAML 檔案，而不是使用這個指令中所提供的選項來定義叢集的特徵。此值對於標準叢集是選用的，不適用於免費叢集。
-
-<p class="note">如果您在指令中提供與 YAML 檔案中的參數相同的選項，則指令中的值優先順序會高於 YAML 中的值。例如，您在 YAML 檔案中已定義位置，並在指令中使用 <code>--zone</code> 選項，則您在指令選項中輸入的值會置換 YAML 檔案中的值。</p>
+<dd>建立標準叢集之 YAML 檔案的路徑。您可以使用 YAML 檔案，而不是使用這個指令中所提供的選項來定義叢集的特徵。此值對於標準叢集是選用的，不適用於免費叢集。<p class="note">如果您在指令中提供與 YAML 檔案中的參數相同的選項，則指令中的值優先順序會高於 YAML 中的值。例如，您在 YAML 檔案中已定義位置，並在指令中使用 <code>--zone</code> 選項，則您在指令選項中輸入的值會置換 YAML 檔案中的值。</p>
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
@@ -1127,64 +1264,13 @@ kube-version: <em>&lt;kube-version&gt;</em>
 diskEncryption: <em>false</em>
 trusted: <em>true</em>
 </code></pre>
-
-
-<table>
-    <caption>瞭解 YAML 檔案元件</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code><em>name</em></code></td>
-    <td>將 <code><em>&lt;cluster_name&gt;</em></code> 取代為叢集的名稱。此名稱必須以字母開頭，可以包含字母、數字及連字號 (-)，且長度不得超過 35 個字元。叢集名稱和叢集部署所在的地區會形成 Ingress 子網域的完整網域名稱。為了確保 Ingress 子網域在地區內是唯一的，叢集名稱可能會被截斷，並在 Ingress 網域名稱內附加一個隨機值。</td>
-    </tr>
-    <tr>
-    <td><code><em>zone</em></code></td>
-    <td>將 <code><em>&lt;zone&gt;</em></code> 取代為您要建立叢集的區域。可用的區域取決於您所登入的地區。若要列出可用的區域，請執行 <code>ibmcloud ks zones</code>。</td>
-     </tr>
-     <tr>
-     <td><code><em>no-subnet</em></code></td>
-     <td>依預設，公用及專用可攜式子網路都是建立在與叢集相關聯的 VLAN 上。將 <code><em>&lt;no-subnet&gt;</em></code> 取代為 <code><em>true</em></code>，以避免建立具有叢集的子網路。稍後，您可以[建立](#cs_cluster_subnet_create)或[新增](#cs_cluster_subnet_add)子網路至叢集。</td>
-      </tr>
-     <tr>
-     <td><code><em>machine-type</em></code></td>
-     <td>將 <code><em>&lt;machine_type&gt;</em></code> 取代為您要將工作者節點部署至其中的機型。您可以將工作者節點部署為共用或專用硬體上的虛擬機器，或部署為裸機上的實體機器。可用的實體及虛擬機器類型會因您部署叢集所在的區域而不同。如需相關資訊，請參閱 `ibmcloud ks machine-type` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)的文件。</td>
-     </tr>
-     <tr>
-     <td><code><em>private-vlan</em></code></td>
-     <td>將 <code><em>&lt;private_VLAN&gt;</em></code> 取代為您要用於工作者節點的專用 VLAN ID。若要列出可用的 VLAN，請執行 <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>，並尋找開頭為 <code>bcr</code>（後端路由器）的 VLAN 路由器。</td>
-     </tr>
-     <tr>
-     <td><code><em>public-vlan</em></code></td>
-     <td>將 <code><em>&lt;public_VLAN&gt;</em></code> 取代為您要用於工作者節點的公用 VLAN ID。若要列出可用的 VLAN，請執行 <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>，並尋找開頭為 <code>fcr</code>（前端路由器）的 VLAN 路由器。</td>
-     </tr>
-     <tr>
-     <td><code><em>hardware</em></code></td>
-     <td>若為虛擬機器類型：您的工作者節點的硬體隔離層次。如果您希望可用的實體資源只供您專用，請使用 dedicated，或者，若要容許與其他 IBM 客戶共用實體資源，請使用 shared。預設值為 <code>shared</code>。</td>
-     </tr>
-     <tr>
-     <td><code><em>workerNum</em></code></td>
-     <td>將 <code><em>&lt;number_workers&gt;</em></code> 取代為您要部署的工作者節點數目。</td>
-     </tr>
-     <tr>
-      <td><code><em>kube-version</em></code></td>
-      <td>叢集主節點的 Kubernetes 版本。這是選用值。未指定版本時，會使用支援的 Kubernetes 版本的預設值來建立叢集。若要查看可用的版本，請執行 <code>ibmcloud ks kube-versions</code>。
-</td></tr>
-      <tr>
-      <td><code>diskEncryption: <em>false</em></code></td>
-      <td>依預設，工作者節點具有 AES 256 位元磁碟加密功能；[進一步瞭解](/docs/containers?topic=containers-security#encrypted_disk)。若要停用加密，請包含此選項，並將值設為 <code>false</code>。</td></tr>
-      <tr>
-      <td><code>trusted: <em>true</em></code></td>
-      <td>**僅限裸機**：啟用[授信運算](/docs/containers?topic=containers-security#trusted_compute)，以驗證裸機工作者節點是否遭到竄改。如果您未在建立叢集期間啟用信任，但後來想要啟用，則可以使用 `ibmcloud ks feature-enable` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)。啟用信任之後，以後您就無法再予以停用。</td></tr>
-     </tbody></table>
-    </p></dd>
+</dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>工作者節點的硬體隔離層次。若要讓可用的實體資源只供您專用，請使用 dedicated，或者，若要容許與其他 IBM 客戶共用實體資源，請使用 shared。預設值為 shared。對於 VM 標準叢集而言，此值是選用的，不適用於免費叢集。若為裸機機型，請指定 `dedicated`。</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>您要建立叢集的區域。可用的區域取決於您所登入的 {{site.data.keyword.Bluemix_notm}} 地區。選取實際上與您最接近的地區以獲得最佳效能。此值對於標準叢集是必要的，對於免費叢集則是選用性。
+<dd>標準叢集需要此值。可以在您使用 <code>ibmcloud ks region-set</code> 指令設為目標的地區中建立免費叢集，但無法指定區域。
 
 <p>檢閱[可用區域](/docs/containers?topic=containers-regions-and-zones#zones)。</p>
 
@@ -1229,10 +1315,10 @@ trusted: <em>true</em>
   <dd>使用此選項，以防止建立公用 VLAN。只有在您指定 `--private-vlan` 旗標時才為必要項目，並且請不要包括 `--public-vlan` 旗標。<p class="note">如果工作者節點是設定為僅限專用 VLAN，則您必須啟用專用服務端點或配置閘道裝置。如需相關資訊，請參閱[專用叢集](/docs/containers?topic=containers-plan_clusters#private_clusters)。</p></dd>
 
 <dt><code>--private-service-endpoint</code></dt>
-  <dd>**在[已啟用 VRF 的帳戶](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)中執行 Kubernetes 1.11 版或更新版本的標準叢集**：啟用[專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，讓您的 Kubernetes 主節點和工作者節點能透過專用 VLAN 進行通訊。此外，您可以選擇使用 `--public-service-endpoint` 旗標來啟用公用服務端點，以透過網際網路存取您的叢集。如果您只啟用專用服務端點，則必須連接至專用 VLAN，才能與 Kubernetes 主節點進行通訊。一旦啟用了專用服務端點，之後您將無法停用它。<br><br>建立叢集之後，您可以透過執行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 來取得端點。</dd>
+  <dd>**在[已啟用 VRF 的帳戶](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)中執行 Kubernetes 1.11 版或更新版本的標準叢集**：啟用[專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，讓您的 Kubernetes 主節點和工作者節點能透過專用 VLAN 進行通訊。此外，您可以選擇使用 `--public-service-endpoint` 旗標來啟用公用服務端點，以透過網際網路存取您的叢集。如果您只啟用專用服務端點，則必須連接至專用 VLAN，才能與 Kubernetes 主節點進行通訊。一旦啟用了專用服務端點，之後您將無法停用它。<br><br>建立叢集之後，您可以透過執行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 來取得端點。</dd>
 
 <dt><code>--public-service-endpoint</code></dt>
-  <dd>**執行 Kubernetes 1.11 版或更新版本的標準叢集**：啟用[公用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)，以便透過公用網路存取您的 Kubernetes 主節點，例如，從終端機執行 `kubectl` 指令。如果您具有[已啟用 VRF 的帳戶](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)，而且也包含 `--private-service-endpoint` 旗標，則[主節點-工作者節點通訊](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)是在專用網路上進行。如果您想要僅限專用叢集，可以稍後再停用公用服務端點。<br><br>建立叢集之後，您可以透過執行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 來取得端點。</dd>
+  <dd>**執行 Kubernetes 1.11 版或更新版本的標準叢集**：啟用[公用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)，以便透過公用網路存取您的 Kubernetes 主節點，例如，從終端機執行 `kubectl` 指令。如果您具有[已啟用 VRF 的帳戶](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)，而且也包含 `--private-service-endpoint` 旗標，則[主節點-工作者節點通訊](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)是在專用網路上進行。如果您想要僅限專用叢集，可以稍後再停用公用服務端點。<br><br>建立叢集之後，您可以透過執行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 來取得端點。</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>您要在叢集裡部署的工作者節點數目。如果您未指定此選項，則會建立具有 1 個工作者節點的叢集。此值對於標準叢集是選用的，不適用於免費叢集。
@@ -1252,34 +1338,27 @@ trusted: <em>true</em>
 
 **範例**：
 
-  **建立免費叢集**：只指定叢集名稱；其他所有項目都設為預設值。在 30 天之後，會自動刪除免費的叢集。您一次可以有一個免費叢集。若要充分運用 Kubernetes 的完整功能，請建立標準叢集。
+**建立免費叢集**：只指定叢集名稱；其他所有項目都設為預設值。在 30 天之後，會自動刪除免費的叢集。您一次可以有一個免費叢集。若要充分運用 Kubernetes 的完整功能，請建立標準叢集。
 
-  ```
+```
   ibmcloud ks cluster-create --name my_cluster
   ```
-  {: pre}
+{: pre}
 
-  **建立您的第一個標準叢集**：在區域中建立的第一個標準叢集也會建立專用 VLAN。因此，請不要包括 `--public-vlan` 旗標。
-  {: #example_cluster_create}
+**建立您的第一個標準叢集**：在區域中建立的第一個標準叢集也會建立專用 VLAN。因此，請不要包括 `--public-vlan` 旗標。
+{: #example_cluster_create}
 
-  ```
-  ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+```
+{: pre}
 
-  **建立後續標準叢集**：如果您已在此區域中建立標準叢集，或之前已在 IBM Cloud 基礎架構 (SoftLayer) 中建立公用 VLAN，請使用 `--public-vlan` 旗標來指定該公用 VLAN。若要找出您是否已有特定區域的公用 VLAN，或尋找現有公用 VLAN 的名稱，請執行 `ibmcloud ks vlans <zone>`。
+**建立後續標準叢集**：如果您已在此區域中建立標準叢集，或之前已在 IBM Cloud 基礎架構 (SoftLayer) 中建立公用 VLAN，請使用 `--public-vlan` 旗標來指定該公用 VLAN。若要找出您是否已有特定區域的公用 VLAN，或尋找現有公用 VLAN 的名稱，請執行 `ibmcloud ks vlans <zone>`。
 
-  ```
-  ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
-
-  **在 {{site.data.keyword.Bluemix_dedicated_notm}} 環境中建立叢集**：
-
-  ```
-  ibmcloud ks cluster-create --machine-type machine-type --workers number --name cluster_name
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+```
+{: pre}
 
 ### ibmcloud ks cluster-feature-disable public-service-endpoint
 {: #cs_cluster_feature_disable}
@@ -1337,7 +1416,7 @@ ibmcloud ks cluster-feature-enable private-service-endpoint --cluster CLUSTER [-
 
 若要執行此指令，請執行下列動作：
 1. 在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中啟用 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)。
-2. [啟用 {{site.data.keyword.Bluemix_notm}} 帳戶以使用服務端點](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+2. [啟用 {{site.data.keyword.Bluemix_notm}} 帳戶以使用服務端點](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
 3. 執行 `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>`。
 4. 遵循 CLI 中的提示，以重新整理 Kubernetes 主節點 API 伺服器。
 5. [重新載入叢集中的所有工作者節點](#cs_worker_reload)，以使用專用端點配置。
@@ -1425,36 +1504,6 @@ ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
 ```
 {: pre}
 
-### ibmcloud ks cluster-feature-ls
-{: #cs_cluster_feature_ls}
-
-列出叢集中已啟用或已停用的特性。
-{: shortdesc}
-
-```
-ibmcloud ks cluster-feature-ls --cluster CLUSTER [-s]
-```
-{: pre}
-
-<strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**檢視者**平台角色
-
-<strong>指令選項</strong>：
-
-<dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>叢集的名稱或 ID。這是必要值。</dd>
-
-  <dt><code>-s</code></dt>
-   <dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
-</dl>
-
-**範例**：
-
-```
-ibmcloud ks cluster-feature-ls --cluster my_cluster
-```
-{: pre}
-
 ### ibmcloud ks cluster-get
 {: #cs_cluster_get}
 
@@ -1529,7 +1578,7 @@ Subnet VLANs
 建立叢集的 {{site.data.keyword.Bluemix_notm}} IAM 服務 ID，為在 {{site.data.keyword.registrylong_notm}} 中指派**讀者**服務存取角色的服務 ID 建立一個原則，然後建立服務 ID 的 API 金鑰。然後，API 金鑰會儲存在 Kubernetes `imagePullSecret` 中，讓您可以針對 `default` Kubernetes 名稱空間中的容器，從 {{site.data.keyword.registryshort_notm}} 名稱空間中取回映像檔。當您建立叢集時，會自動發生此處理程序。如果在叢集建立程序期間發生錯誤或您已有現有的叢集，您可以使用這個指令來重新套用該程序。
 {: shortdesc}
 
-當您執行此指令時，會起始建立 IAM 認證及映像檔取回密碼，這可能需要一點時間才能完成。在建立映像檔取回密碼之前，您無法部署從 {{site.data.keyword.registrylong_notm}} `icr.io` 網域取回映像檔的容器。若要檢查映像檔取回密碼，請執行 `kubectl get secrets | grep icr`。
+當您執行此指令時，會起始建立 IAM 認證及映像檔取回密碼，而且可能需要一些時間才能完成。在建立映像檔取回密碼之前，您無法部署從 {{site.data.keyword.registrylong_notm}} `icr.io` 網域取回映像檔的容器。若要檢查映像檔取回密碼，請執行 `kubectl get secrets | grep icr`。
 {: important}
 
 ```
@@ -1692,8 +1741,7 @@ ibmcloud ks clusters [--json] [-s]
 
 <strong>指令選項</strong>：
 
-  <dl>
-  <dt><code>--json</code></dt>
+  <dl><dt><code>--json</code></dt>
   <dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
 
   <dt><code>-s</code></dt>
@@ -1917,6 +1965,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 {: #cs_key_protect}
 
 在叢集裡使用 [{{site.data.keyword.keymanagementservicefull}} ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) 作為[金鑰管理服務 (KMS) 提供者 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/)，來加密 Kubernetes 密碼。
+若要使用現有的金鑰加密來替換叢集中的金鑰，請使用新的根金鑰 ID 重新執行這個指令。
 {: shortdesc}
 
 ```
@@ -1924,7 +1973,7 @@ ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url EN
 ```
 {: pre}
 
-如果您刪除 {{site.data.keyword.keymanagementserviceshort}} 實例中的主要金鑰，則無法在叢集裡存取或移除密碼中的資料。
+請不要刪除 {{site.data.keyword.keymanagementserviceshort}} 實例中的根金鑰。即使替換使用新的金鑰，也請不要刪除金鑰。如果您刪除根金鑰，則無法在叢集中存取或移除 etcd 或密碼中的資料。
 {: important}
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**管理者**平台角色
@@ -2010,7 +2059,7 @@ ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
 ```
 {: pre}
 
-<p class="important">可攜式公用 IP 位址是按月計費。如果您在佈建叢集之後移除可攜式公用 IP 位址，則仍須支付一個月的費用，即使您只是短時間使用也是一樣。</br>
+<p class="important">可攜式公用 IP 位址是按月計費。如果您在佈建叢集之後移除可攜式公用 IP 位址，則仍須支付一個月的費用，即使您只是短時間使用。</br>
 </br>當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。</br>
 </br>若要啟用相同 VLAN 之不同子網路上的工作者節點之間的通訊，您必須[在相同 VLAN 的子網路之間啟用遞送](/docs/containers?topic=containers-subnets#subnet-routing)。</p>
 
@@ -2050,7 +2099,7 @@ ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 {: pre}
 
 <p class="important">當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。</br>
-</br>如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+</br>如果一個叢集具有多個 VLAN、相同的 VLAN 上具有多個子網路，或多區域叢集，則必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 </p>
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**操作員**平台角色
@@ -2093,7 +2142,7 @@ ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR 
 這個專用子網路不是 IBM Cloud 基礎架構 (SoftLayer) 所提供的專用子網路。因此，您必須配置子網路的任何入埠及出埠網路資料流量遞送。若要新增 IBM Cloud 基礎架構 (SoftLayer) 子網路，請使用 `ibmcloud ks cluster-subnet-add` [指令](#cs_cluster_subnet_add)。
 
 <p class="important">當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。</br>
-</br>如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+</br>如果一個叢集具有多個 VLAN、相同的 VLAN 上具有多個子網路，或多區域叢集，則必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 </p>
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**操作員**平台角色
@@ -2282,7 +2331,8 @@ ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NA
    <dd>更新叢集裡 ALB 密碼的憑證。這是選用值。</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-   <dd>ALB 密碼的名稱。這是必要值。</dd>
+   <dd>在叢集中建立 ALB 密碼時，請指定該密碼的名稱。這是必要值。請確定您未使用與 IBM 提供的 Ingress 密碼相同的名稱來建立密碼。您可以執行 <code>ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress</code>，以取得 IBM 提供的 Ingress 密碼名稱。
+</dd>
 
    <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
    <dd>憑證 CRN。這是必要值。</dd>
@@ -2467,13 +2517,10 @@ ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disab
    <dd>包括此旗標，以停用 IBM 提供的 ALB 部署。此旗標不會針對 IBM 提供的 Ingress 子網域或用來公開 Ingress 控制器的負載平衡器服務，移除 DNS 登錄。</dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
-   <dd>
-
-   <ul>
-    <li>此參數僅適用於啟用專用 ALB。</li>
-    <li>專用 ALB 是使用來自使用者提供的專用子網路的 IP 位址進行部署。如果未提供 IP 位址，則會使用您建立叢集時自動佈建的可攜式專用子網路中的專用 IP 位址進行部署。</li>
-   </ul>
-   </dd>
+   <dd><ul>
+     <li>此參數僅適用於啟用專用 ALB。</li>
+     <li>專用 ALB 是使用來自使用者提供的專用子網路的 IP 位址進行部署。如果未提供 IP 位址，則會使用您建立叢集時自動佈建的可攜式專用子網路中的專用 IP 位址進行部署。</li>
+    </ul></dd>
 
    <dt><code>-s</code></dt>
    <dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
@@ -2652,7 +2699,8 @@ ibmcloud ks albs --cluster CLUSTER [--json] [-s]
 ## 基礎架構指令
 {: #infrastructure_commands}
 
-### ibmcloud ks
+### ibmcloud ks credential-get
+
 {: #cs_credential_get}
 
 如果您將 IBM Cloud 帳戶設為使用不同的認證來存取 IBM Cloud 基礎架構組合，請取得目前設為目標之地區及資源群組的基礎架構使用者名稱。
@@ -2729,7 +2777,6 @@ ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-use
   <li>複製 API 使用者名稱。
    </ol>
   </dd>
-
   <dt><code>-s</code></dt>
   <dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
 
@@ -2749,14 +2796,14 @@ ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-use
 移除 {{site.data.keyword.containerlong_notm}} 地區的 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
 {: shortdesc}
 
-```
-ibmcloud ks credential-unset
-```
-{: pre}
-
 移除認證之後，會使用 [{{site.data.keyword.Bluemix_notm}} IAM API 金鑰](#cs_api_key_info)來訂購 IBM Cloud 基礎架構 (SoftLayer) 中的資源。
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**管理者**平台角色
+
+```
+ibmcloud ks credential-unset [-s]
+```
+{: pre}
 
 <strong>指令選項</strong>：
 
@@ -3530,13 +3577,429 @@ ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
 <br />
 
 
+## 網路負載平衡器指令 (`nlb-dns`)
+{: #nlb-dns}
+
+使用這組指令來建立及管理網路負載平衡器 (NLB) IP 位址的主機名稱，以及主機名稱的性能檢查監視器。如需相關資訊，請參閱[登錄負載平衡器主機名稱](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)。
+{: shortdesc}
+
+### ibmcloud ks nlb-dns-add
+{: #cs_nlb-dns-add}
+
+將網路負載平衡器 (NLB) IP 新增至您使用 [`ibmcloud ks nlb-dns-create` 指令](#cs_nlb-dns-create)所建立的現有主機名稱。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-add --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+例如，在多區域叢集中，您可以在每個區域中建立 NLB 以公開應用程式。您可以執行 `ibmcloud ks nlb-dns-create` 以使用主機名稱在某個區域中登錄 NLB IP，因此，您現在可以將其他區域中的 NLB IP 新增至這個現有的主機名稱。當使用者存取您的應用程式主機名稱時，用戶端會隨機存取其中一個 IP，並將要求傳送至該 NLB。請注意，您必須針對要新增的每個 IP 位址執行下列指令。
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>您要新增至主機名稱的 NLB IP。若要查看 NLB IP，請執行 <code>kubectl get svc</code>。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>您要對其新增 IP 的主機名稱。若要查看現有的主機名稱，請執行 <code>ibmcloud ks nlb-dnss</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-create
+{: #cs_nlb-dns-create}
+
+建立 DNS 主機名稱來登錄網路負載平衡器 (NLB) IP，以公然地公開應用程式。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-create --cluster CLUSTER --ip IP [--json] [-s]
+```
+{: pre}
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>您要登錄的網路負載平衡器 IP 位址。若要查看 NLB IP，請執行 <code>kubectl get svc</code>。請注意，您一開始可以建立只有一個 IP 位址的主機名稱。如果您在多區域叢集的每個區域中都有 NLB 可公開一個應用程式，則可以執行 [`ibmcloud ks nlb-dns-add` 指令](#cs_nlb-dns-add)，將其他 NLB 的 IP 新增至主機名稱。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dns-create --cluster mycluster --ip 1.1.1.1
+```
+{: pre}
+
+### ibmcloud ks nlb-dnss
+{: #cs_nlb-dns-ls}
+
+列出在叢集中登錄的網路負載平衡器主機名稱及 IP 位址。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dnss --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dnss --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-rm
+{: #cs_nlb-dns-rm}
+
+從主機名稱中移除網路負載平衡器 IP 位址。如果您移除主機名稱中的所有 IP，則主機名稱仍然存在，但沒有相關聯的 IP。請注意，您必須針對要移除的每個 IP 位址執行這個指令。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>您要移除的 NLB IP。若要查看 NLB IP，請執行 <code>kubectl get svc</code>。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>您要從中移除 IP 的主機名稱。若要查看現有的主機名稱，請執行 <code>ibmcloud ks nlb-dnss</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-monitor
+{: #cs_nlb-dns-monitor}
+
+建立、修改及檢視叢集中網路負載平衡器主機名稱的性能檢查監視器。這個指令必須與下列其中一個次指令一起使用。
+{: shortdesc}
+
+#### ibmcloud ks nlb-dns-monitor-configure
+{: #cs_nlb-dns-monitor-configure}
+
+配置及選擇性地啟用叢集中現有 NLB 主機名稱的性能檢查監視器。當您啟用主機名稱的監視器時，監視器會檢查每個區域中 NLB IP 的性能，並根據這些性能檢查來更新 DNS 查閱結果。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster CLUSTER --nlb-host HOST NAME [--enable] [--desc DESCRIPTION] [--type TYPE] [--method METHOD] [--path PATH] [--timeout TIMEOUT] [--retries RETRIES] [--interval INTERVAL] [--port PORT] [--header HEADER] [--expected-body BODY STRING] [--expected-codes HTTP CODES] [--follows-redirects TRUE] [--allows-insecure TRUE] [--json] [-s]
+```
+{: pre}
+
+您可以使用此指令來建立及啟用新的性能檢查監視器，或更新現有性能檢查監視器的設定。若要建立新的監視器，請包括 `--enable` 旗標，以及您要配置之所有設定的旗標。若要更新現有的監視器，請只包括您要變更之設定的旗標。
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>主機名稱登錄所在叢集的名稱或 ID。</dd>
+
+<dt><code>--nlb-host <em>HOST NAME</em></code></dt>
+<dd>要配置其性能檢查監視器的主機名稱。若要列出主機名稱，請執行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--enable</code></dt>
+<dd>包括此旗標，以建立並啟用主機名稱的新性能檢查監視器。</dd>
+
+<dt><code>--description <em>DESCRIPTION</em></code></dt>
+<dd>性能監視器的說明。</dd>
+
+<dt><code>--type <em>TYPE</em></code></dt>
+<dd>要用於性能檢查的通訊協定：<code>HTTP</code>、<code>HTTPS</code> 或 <code>TCP</code>。預設值：<code>HTTP</code></dd>
+
+<dt><code>--method <em>METHOD</em></code></dt>
+<dd>要用於性能檢查的方法。<code>type</code> <code>HTTP</code> 及 <code>HTTPS</code> 的預設值：<code>GET</code>。<code>type</code> <code>TCP</code> 的預設值：<code>connection_established</code>。</dd>
+
+<dt><code>--path <em>PATH</em></code></dt>
+<dd><code>type</code> 是 <code>HTTPS</code> 時：對其進行性能檢查的端點路徑。預設值：<code>/</code></dd>
+
+<dt><code>--timeout <em>TIMEOUT</em></code></dt>
+<dd>將 IP 視為性能不佳之前的逾時（以秒為單位）。預設值：<code>5</code></dd>
+
+<dt><code>--retries <em>RETRIES</em></code></dt>
+<dd>如果發生逾時，在將 IP 視為性能不佳之前會嘗試的重試次數。立即嘗試重試。預設值：<code>2</code></dd>
+
+<dt><code>--interval <em>INTERVAL</em></code></dt>
+<dd>每次性能檢查之間的間隔（以秒為單位）。短間隔可能會改善失效接手時間，但會增加 IP 的負載。預設值：<code>60</code></dd>
+
+<dt><code>--port <em>PORT</em></code></dt>
+<dd>要連接至以進行性能檢查的埠號。<code>type</code> 是 <code>TCP</code> 時，需要此參數。<code>type</code> 是 <code>HTTP</code> 或 <code>HTTPS</code> 時，只有在針對 HTTP 使用 80 以外的埠或針對 HTTPS 使用 443 以外的埠時，才會定義埠。TCP 的預設值：<code>0</code>。HTTP 的預設值：<code>80</code>。HTTPS 的預設值：<code>443</code>。</dd>
+
+<dt><code>--header <em>HEADER</em></code></dt>
+<dd><code>type</code> 是 <code>HTTPS</code> 或 <code>HTTPS</code> 時：要在性能檢查中傳送的 HTTP 要求標頭，例如 Host 標頭。無法置換 User-Agent 標頭。</dd>
+
+<dt><code>--expected-body <em>BODY STRING</em></code></dt>
+<dd><code>type</code> 是 <code>HTTP</code> 或 <code>HTTPS</code> 時：性能檢查會在回應內文中尋找的不區分大小寫子字串。如果找不到這個字串，則會將 IP 視為性能不佳。</dd>
+
+<dt><code>--expected-codes <em>HTTP CODES</em></code></dt>
+<dd><code>type</code> 是 <code>HTTP</code> 或 <code>HTTPS</code> 時：性能檢查會在回應中尋找的 HTTP 代碼。如果找不到 HTTP 代碼，則會將 IP 視為性能不佳。預設值：<code>2xx</code></dd>
+
+<dt><code>--allows-insecure <em>TRUE</em></code></dt>
+<dd><code>type</code> 是 <code>HTTP</code> 或 <code>HTTPS</code> 時：設為 <code>true</code>，不驗證憑證。</dd>
+
+<dt><code>--follows-redirects <em>TRUE</em></code></dt>
+<dd><code>type</code> 是 <code>HTTP</code> 或 <code>HTTPS</code> 時：設為 <code>true</code>，遵循 IP 所傳回的任何重新導向。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-get
+{: #cs_nlb-dns-monitor-get}
+
+檢視現有性能檢查監視器的設定。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>監視器會檢查其性能的主機名稱。若要列出主機名稱，請執行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-disable
+{: #cs_nlb-dns-monitor-disable}
+
+停用叢集中主機名稱的現有性能檢查監視器。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>監視器會檢查其性能的主機名稱。若要列出主機名稱，請執行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-enable
+{: #cs_nlb-dns-monitor-enable}
+
+啟用您已配置的性能檢查監視器。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+請注意，第一次建立性能檢查監視器時，必須使用 `ibmcloud ks nlb-dns-monitor-configure` 指令來配置及啟用它。僅使用 `ibmcloud ks nlb-dns-monitor-enable` 指令即可啟用您已配置但尚未啟用的監視器，或重新啟用您先前已停用的監視器。
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>監視器會檢查其性能的主機名稱。若要列出主機名稱，請執行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-ls
+{: #cs_nlb-dns-monitor-ls}
+
+列出叢集中每個 NLB 主機名稱的性能檢查監視器設定。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster mycluster
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-status
+{: #cs_nlb-dns-monitor-status}
+
+列出叢集中 NLB 主機名稱後面的 IP 的性能檢查狀態。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**最低必要許可權**：{{site.data.keyword.containerlong_notm}} 中叢集的**編輯者**平台角色
+
+**指令選項**：
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>叢集的名稱或 ID。這是必要值。</dd>
+
+<dt><code>-- <em></em></code></dt>
+<dd>包括此旗標，僅檢視一個主機名稱的狀態。若要列出主機名稱，請執行 <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>。</dd>
+
+<dt><code>--json</code></dt>
+<dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+<dt><code>-s</code></dt>
+<dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+</dl>
+
+**範例**：
+```
+ibmcloud ks nlb-dns-monitor-status --cluster mycluster
+```
+{: pre}
+
+<br />
+
+
 ## 地區指令
 {: #region_commands}
+
+使用這組指令來檢視可用的位置、檢視目前設為目標的地區，以及設定設為目標的地區。
+{: shortdesc}
 
 ### ibmcloud ks region
 {: #cs_region}
 
-尋找您目前所在的 {{site.data.keyword.containerlong_notm}} 地區。您可以建立及管理地區特定的叢集。使用 `ibmcloud ks region-set` 指令來變更地區。
+尋找您目前要設為目標的 {{site.data.keyword.containerlong_notm}} 地區。您可以建立及管理地區特定的叢集。使用 `ibmcloud ks region-set` 指令來變更地區。
 {: shortdesc}
 
 ```
@@ -3552,14 +4015,14 @@ ibmcloud ks region
 設定 {{site.data.keyword.containerlong_notm}} 的地區。您可以建立及管理地區特定的叢集，而且可能要多個地區中都有叢集，才能獲得高可用性。
 {: shortdesc}
 
+例如，您可以在美國南部地區登入 {{site.data.keyword.Bluemix_notm}}，並建立叢集。接下來，您可以使用 `ibmcloud ks region-set eu-central` 來將目標設為歐盟中部地區，並建立另一個叢集。最後，您可以使用 `ibmcloud ks region-set us-south` 回到美國南部，以管理該地區中的叢集。
+
+<strong>最低必要許可權</strong>：無
+
 ```
 ibmcloud ks region-set [--region REGION]
 ```
 {: pre}
-
-例如，您可以在美國南部地區登入 {{site.data.keyword.Bluemix_notm}}，並建立叢集。接下來，您可以使用 `ibmcloud ks region-set eu-central` 來將目標設為歐盟中部地區，並建立另一個叢集。最後，您可以使用 `ibmcloud ks region-set us-south` 回到美國南部，以管理該地區中的叢集。
-
-<strong>最低必要許可權</strong>：無
 
 **指令選項**：
 
@@ -3635,8 +4098,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
 
 <strong>指令選項</strong>：
 
-   <dl>
-   <dt><code>--region-only</code></dt>
+   <dl><dt><code>--region-only</code></dt>
    <dd>僅列出您所登入地區內的多區域。這是選用值。</dd>
 
    <dt><code>--json</code></dt>
@@ -3646,12 +4108,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
    <dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
    </dl>
 
-**範例**：
-
-  ```
-  ibmcloud ks zones
-  ```
-  {: pre}
+**最低許可權**：無
 
 <br />
 
@@ -3762,14 +4219,7 @@ diskEncryption: <em>false</em></code></pre>
 **範例**：
 
   ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --hardware shared
-  ```
-  {: pre}
-
-  {{site.data.keyword.Bluemix_dedicated_notm}} 的範例：
-
-  ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --machine-type b2c.4x16
+  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --hardware shared
   ```
   {: pre}
 
@@ -3830,6 +4280,7 @@ ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [-
 {: #cs_worker_reboot}
 
 重新啟動叢集裡的工作者節點。在重新啟動期間，工作者節點的狀況不會變更。例如，如果 IBM Cloud 基礎架構 (SoftLayer) 中的工作者節點狀態為 `Powered Off`，且您需要開啟工作者節點，則可以使用重新開機。A reboot clears temporary directories, but does not clear the entire file system or reformat the disks.
+在重新開機作業之後，工作者節點的公用和專用 IP 位址會保持相同。
 {: shortdesc}
 
 ```
@@ -3916,6 +4367,7 @@ ibmcloud ks worker-reboot [-f] [--hard] --cluster CLUSTER --worker WORKER [WORKE
 {: #cs_worker_reload}
 
 重新載入工作者節點的配置。如果您的工作者節點遇到問題，例如效能變慢，或工作者節點停留在不健全的狀況下，則重新載入可能會很有幫助。請注意，在重新載入期間，會使用最新的映像檔更新您的工作者節點機器，而且如果資料不是[儲存在工作者節點之外](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)即會被刪除。
+在重新載入作業之後，工作者節點的 IP 位址會保持相同。
 {: shortdesc}
 
 ```
@@ -4072,6 +4524,7 @@ ibmcloud ks worker-rm [-f] --cluster CLUSTER --workers WORKER[,WORKER] [-s]
 {: #cs_worker_update}
 
 更新工作者節點以將最新的安全更新及修補程式套用至作業系統，並更新 Kubernetes 版本以符合 Kubernetes 主節點的版本。您可以使用 `ibmcloud ks cluster-update` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)來更新 Kubernetes 主節點版本。
+在更新作業之後，工作者節點的 IP 位址會保持相同。
 {: shortdesc}
 
 ```
@@ -4211,7 +4664,7 @@ ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type
 **範例**：
 
   ```
-  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
+  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b3c.4x16 --size-per-zone 6
   ```
   {: pre}
 
@@ -4260,9 +4713,9 @@ ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--
   Hardware:           shared
   Zones:              dal10,dal12
   Workers per zone:   3
-  Machine type:       b2c.4x16.encrypted
+  Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.12.6_1512
+  Version:            1.12.7_1512
   ```
   {: screen}
 
@@ -4427,13 +4880,13 @@ ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,
     <dd><p>專用 VLAN 的 ID。此值是有條件的。</p>
     <p>如果您在區域中有專用 VLAN，則此值必須符合叢集裡一個以上的工作者節點的專用 VLAN ID。若要查看您可用的 VLAN，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</p>
     <p>如果您在該區域中沒有專用或公用 VLAN，請不要指定此選項。您一開始將新的區域新增至工作者節點儲存區時，即會自動為您建立專用及公用 VLAN。</p>
-    <p>如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+    <p>如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 </p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd><p>公用 VLAN 的 ID。如果您要在建立叢集之後將節點上的工作負載公開給大眾使用，則這是必要值。它必須符合區域之叢集裡一個以上的工作者節點的公用 VLAN ID。若要查看您可用的 VLAN，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</p>
     <p>如果您在該區域中沒有專用或公用 VLAN，請不要指定此選項。您一開始將新的區域新增至工作者節點儲存區時，即會自動為您建立專用及公用 VLAN。</p>
-    <p>如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+    <p>如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 </p></dd>
 
   <dt><code>--private-only </code></dt>

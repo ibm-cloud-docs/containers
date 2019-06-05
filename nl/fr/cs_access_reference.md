@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -35,8 +35,10 @@ Depuis le 30 janvier 2019, {{site.data.keyword.containerlong_notm}} dispose d'un
 ## Rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} est configuré pour utiliser des rôles {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). Les rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM déterminent les actions que les utilisateurs peuvent effectuer sur des ressources {{site.data.keyword.Bluemix_notm}}, telles que des clusters, des noeuds worker et des équilibreurs de charge d'application Ingress. Les rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM définissent également automatiquement les droits d'infrastructure de base des utilisateurs. Pour définir des rôles de plateforme, voir [Affectation de droits de plateforme {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
+{{site.data.keyword.containerlong_notm}} est configuré pour utiliser des rôles {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). Les rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM déterminent les actions que les utilisateurs peuvent effectuer sur des ressources {{site.data.keyword.Bluemix_notm}}, telles que des clusters, des noeuds worker et des équilibreurs de charge d'application (ALB) Ingress. Les rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM définissent également automatiquement les droits d'infrastructure de base des utilisateurs. Pour définir des rôles de plateforme, voir [Affectation de droits de plateforme {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
 {: shortdesc}
+
+<p class="tip">N'affectez pas de rôles de plateforme {{site.data.keyword.Bluemix_notm}} en même temps qu'un rôle de service. Vous devez affecter les rôles de plateforme et de service séparément. </p>
 
 Dans chacune des sections suivantes, les tableaux présentent les droits de gestion de cluster, les droits de consignation et les droits Ingress octroyés par chaque rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM. Les tableaux sont organisés par ordre alphabétique de nom de commande d'interface de ligne de commande.
 
@@ -61,8 +63,13 @@ Un utilisateur de votre compte qui exécute la commande de l'interface de ligne 
 </thead>
 <tbody>
 <tr>
+<td>Afficher la liste des versions prises en charge pour les modules complémentaires gérés dans {{site.data.keyword.containerlong_notm}}. </td>
+<td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions)</code></td>
+<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetAddons)</code></td>
+</tr>
+<tr>
 <td>Cibler ou afficher le noeud final d'API correspondant à {{site.data.keyword.containerlong_notm}}.</td>
-<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_api)</code></td>
+<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)</code></td>
 <td>-</td>
 </tr>
 <tr>
@@ -76,7 +83,8 @@ Un utilisateur de votre compte qui exécute la commande de l'interface de ligne 
 <td>-</td>
 </tr>
 <tr>
-<td>Afficher la liste des versions Kubernetes prises en charge dans {{site.data.keyword.containerlong_notm}}. </td><td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
+<td>Afficher la liste des versions Kubernetes prises en charge dans {{site.data.keyword.containerlong_notm}}. </td>
+<td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
 <td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetKubeVersions)</code></td>
 </tr>
 <tr>
@@ -105,7 +113,7 @@ Un utilisateur de votre compte qui exécute la commande de l'interface de ligne 
 <td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
 </tr>
 <tr>
-<td>Afficher la liste de toutes les zones disponibles pour créer un cluster.</td>
+<td>Afficher la liste des zones disponibles dans lesquelles vous pouvez créer un cluster.</td>
 <td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cs_cli_reference#cs_datacenters)</code></td>
 <td><code>[GET /v1/zones](https://containers.cloud.ibm.com/swagger-api/#!/util/GetZones)</code></td>
 </tr>
@@ -115,7 +123,7 @@ Un utilisateur de votre compte qui exécute la commande de l'interface de ligne 
 ### Actions de l'afficheur
 {: #view-actions}
 
-Le rôle de plateforme **Afficheur** comprend des [actions qui ne nécessitent pas de droit](#none-actions), ainsi que des droits présentés dans le tableau suivant.
+Le rôle de plateforme **Afficheur** comprend des [actions qui ne nécessitent pas de droit](#none-actions), ainsi que des droits présentés dans le tableau suivant. Lorsqu'ils possèdent le rôle **Afficheur**, les utilisateurs tels que des auditeurs ou des agents de facturation peuvent visualiser les détails d'un cluster, mais ils ne peuvent pas modifier l'infrastructure.
 {: shortdesc}
 
 <table>
@@ -275,7 +283,7 @@ Le rôle de plateforme **Afficheur** comprend des [actions qui ne nécessitent p
 ### Actions de l'éditeur
 {: #editor-actions}
 
-Le rôle de plateforme **Editeur** comprend les droits octroyés par le rôle **Afficheur**, plus les droits suivants. **Astuce** : utilisez ce rôle pour les développeurs d'applications, et affectez le rôle **Développeur** de <a href="#cloud-foundry">Cloud Foundry</a>.
+Le rôle de plateforme **Editeur** comprend les droits octroyés par le rôle **Afficheur**, plus les droits suivants. Lorsqu'ils possèdent le rôle **Editeur**, les utilisateurs tels que des développeurs peuvent lier des services, gérer des ressources Ingress et configurer l'acheminement des journaux pour leurs applications, mais ils ne peuvent pas modifier l'infrastructure. **Astuce** : utilisez ce rôle pour les développeurs d'applications, et affectez le rôle **Développeur** de <a href="#cloud-foundry">Cloud Foundry</a>.
 {: shortdesc}
 
 <table>
@@ -345,7 +353,66 @@ Le rôle de plateforme **Editeur** comprend les droits octroyés par le rôle **
 </tbody>
 </table>
 
-
+<table>
+<caption>Présentation des commandes d'interface de ligne de commande et des appels d'API de moniteur de diagnostic d'intégrité et d'hôte DNS d'équilibreur de charge de réseau (NLB) qui nécessitent le rôle de plateforme Editeur dans {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="lbdns-mgmt">Action DNS d'équilibreur de charge de réseau (NLB)</th>
+<th id="lbdns-cli">Commande de l'interface de ligne de commande</th>
+<th id="lbdns-api">Appel d'API</th>
+</thead>
+<tbody>
+<tr>
+<td>Ajouter une adresse IP NLB à un nom d'hôte NLB existant. </td>
+<td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-add)</code></td>
+<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UpdateDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>Créer un nom d'hôte DNS afin d'enregistrer une ou plusieurs adresses IP NLB. </td>
+<td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-create)</code></td>
+<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/RegisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>Répertorier les noms d'hôte et les adresses IP NLB qui sont enregistrés dans un cluster.</td>
+<td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-ls)</code></td>
+<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+</tr>
+<tr>
+<td>Retirer une adresse IP NLB d'un nom d'hôte. </td>
+<td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UnregisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>Configurer et le cas échéant activer un moniteur de diagnostic d'intégrité pour un nom d'hôte NLB existant dans un cluster.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-configure)</code></td>
+<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Afficher les paramètres d'un moniteur de diagnostic d'intégrité existant. </td>
+<td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-get)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Désactiver un moniteur de diagnostic d'intégrité existant pour un nom d'hôte dans un cluster.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Activer un moniteur de diagnostic d'intégrité que vous avez configuré. </td>
+<td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Répertorier les paramètres de moniteur de diagnostic d'intégrité pour chaque nom d'hôte NLB dans un cluster.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-ls)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
+</tr>
+<tr>
+<td>Répertorier le statut de diagnostic d'intégrité pour les adresses IP derrière les noms d'hôte NLB dans un cluster.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-status)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
+</tr>
+</tbody>
+</table>
 
 <table>
 <caption>Présentation des commandes de l'interface de ligne de commande et des appels d'API de consignation qui nécessitent le rôle de plateforme Editeur dans {{site.data.keyword.containerlong_notm}}</caption>
@@ -416,7 +483,7 @@ Le rôle de plateforme **Editeur** comprend les droits octroyés par le rôle **
 ### Actions de l'opérateur
 {: #operator-actions}
 
-Le rôle de plateforme **Opérateur** comprend les droits octroyés par le rôle **Afficheur**, ainsi que les droits présentés dans le tableau suivant.
+Le rôle de plateforme **Opérateur** comprend les droits octroyés par le rôle **Afficheur**, ainsi que les droits présentés dans le tableau suivant. Lorsqu'ils disposent du rôle **Opérateur**, les utilisateurs, tels que des ingénieurs de fiabilité, des ingénieurs DevOps ou des administrateurs de cluster, peuvent ajouter des noeuds worker et traiter les incidents liés à l'infrastructure, par exemple en rechargeant un noeud worker, mais ils ne peuvent pas créer ou supprimer le cluster, modifier les données d'identification ou configurer des fonctions au niveau du cluster, telles que des noeuds finaux de service ou des modules complémentaires gérés.
 {: shortdesc}
 
 <table>
@@ -433,7 +500,7 @@ Le rôle de plateforme **Opérateur** comprend les droits octroyés par le rôle
 <td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
-<td>Créer un ID de service {{site.data.keyword.Bluemix_notm}} IAM pour le cluster, ainsi qu'une règle pour cet ID de service pour affecter le rôle d'accès au service **Lecteur** dans {{site.data.keyword.registrylong_notm}}, puis créer une clé d'API pour l'ID de service. </td>
+<td>Créer un ID de service {{site.data.keyword.Bluemix_notm}} IAM pour le cluster, ainsi qu'une règle pour cet ID de service pour affecter le rôle d'accès au service **Lecteur** dans {{site.data.keyword.registrylong_notm}}, puis créer une clé d'API pour l'ID de service.</td>
 <td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
 </tr>
@@ -533,7 +600,8 @@ Le rôle de plateforme **Opérateur** comprend les droits octroyés par le rôle
 ### Actions de l'administrateur
 {: #admin-actions}
 
-Le rôle de plateforme **Administrateur** comprend tous les droits octroyés par les rôles **Afficheur**, **Editeur** et **Opérateur**, ainsi que les droits suivants. Pour créer des ressources, telles que des machines, des VLAN et des sous-réseaux, les administrateurs requièrent le <a href="#infra">rôle d'infrastructure</a> **Superutilisateur**.
+Le rôle de plateforme **Administrateur** comprend tous les droits octroyés par les rôles **Afficheur**, **Editeur** et **Opérateur**, ainsi que les droits suivants. Lorsqu'ils disposent du rôle **Administrateur**, les utilisateurs, tels que des administrateurs de cluster ou de compte, peuvent créer et supprimer des clusters ou configurer des fonctions au niveau du cluster, telles que des noeuds finaux de service ou des modules complémentaires gérés.
+Pour créer d'autres ressources d'infrastructure, telles que des machines, des VLAN et des sous-réseaux de noeud worker, les administrateurs requièrent le <a href="#infra">rôle d'infrastructure</a> **Superutilisateur** ou la clé d'API pour la région doit être définie avec les droits appropriés.
 {: shortdesc}
 
 <table>
@@ -577,11 +645,6 @@ Le rôle de plateforme **Administrateur** comprend tous les droits octroyés par
 <tr>
 <td>Activer la fonction indiquée d'un cluster, par exemple le noeud final de service privé pour le maître cluster.</td>
 <td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
-<td>-</td>
-</tr>
-<tr>
-<td>Répertorier les fonctions activées dans un cluster.</td>
-<td><code>[ibmcloud ks cluster-features](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls)</code></td>
 <td>-</td>
 </tr>
 <tr>
@@ -685,10 +748,10 @@ Le rôle de plateforme **Administrateur** comprend tous les droits octroyés par
 ## Rôles de service {{site.data.keyword.Bluemix_notm}} IAM
 {: #service}
 
-Tous les utilisateurs auxquels est affecté un rôle d'accès au service {{site.data.keyword.Bluemix_notm}} IAM bénéficient automatiquement d'un rôle Kubernetes RBAC (contrôle d'accès à base de rôles) dans un espace de nom spécifié. Pour en savoir plus sur les rôles d'accès au service, voir [Rôles de service {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform). Pour en savoir plus sur les rôles RBAC, voir [Affectation de droits RBAC](/docs/containers?topic=containers-users#role-binding).
+Tous les utilisateurs auxquels est affecté un rôle d'accès au service {{site.data.keyword.Bluemix_notm}} IAM bénéficient automatiquement d'un rôle Kubernetes RBAC (contrôle d'accès à base de rôles) dans un espace de nom spécifié. Pour en savoir plus sur les rôles d'accès au service, voir [Rôles de service {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform). N'affectez pas de rôles de plateforme {{site.data.keyword.Bluemix_notm}} en même temps qu'un rôle de service. Vous devez affecter les rôles de plateforme et de service séparément.
 {: shortdesc}
 
-Vous recherchez les actions Kubernetes que chaque rôle de service autorise via RBAC ? Voir [Droits d'accès aux ressources Kubernetes par rôle RBAC](#rbac).
+Vous recherchez les actions Kubernetes que chaque rôle de service autorise via RBAC ? Voir [Droits d'accès aux ressources Kubernetes par rôle RBAC](#rbac_ref). Pour en savoir plus sur les rôles RBAC, voir [Affectation de droits RBAC](/docs/containers?topic=containers-users#role-binding).
 {: tip}
 
 Le tableau suivant présente les droits d'accès aux ressources Kubernetes octroyés par chaque rôle de service et le rôle RBAC correspondant.
@@ -712,7 +775,7 @@ Le tableau suivant présente les droits d'accès aux ressources Kubernetes octro
   </tr>
   <tr>
     <td id="service-role-writer" headers="service-role">Rôle Auteur</td>
-    <td headers="service-role-writer rbac-role">Lorsque sa portée comprend un espace de nom : rôle de cluster <strong><code>edit</code></strong> appliqué par la liaison de rôle <strong><code>ibm-edit</code></strong> dans cet espace de nom</br><br>Lorsque sa portée comprend tous les espaces de nom : rôle de cluster <strong><code>edit</code></strong> appliqué par la liaison de rôle <strong><code>ibm-edit</code></strong> dans chaque espace de nom du cluster</td>
+    <td headers="service-role-writer rbac-role">Lorsque sa portée comprend un espace de nom : rôle de cluster <strong><code>edit</code></strong> appliqué par la liaison de rôle <strong><code>ibm-edit</code></strong> dans cet espace de nom </br><br>Lorsque sa portée comprend tous les espaces de nom : rôle de cluster <strong><code>edit</code></strong> appliqué par la liaison de rôle <strong><code>ibm-edit</code></strong> dans chaque espace de nom du cluster</td>
     <td headers="service-role-writer kube-perm"><ul><li>Accès en lecture et en écriture aux ressources dans cet espace de nom</li>
     <li>Aucun accès en lecture et en écriture aux rôles et aux liaisons de rôle</li>
     <li>Accès au tableau de bord pour afficher les ressources dans un espace de nom</li></ul>
@@ -740,7 +803,7 @@ Le tableau suivant présente les droits d'accès aux ressources Kubernetes octro
 
 
 ## Droits d'accès aux ressources Kubernetes par rôle RBAC
-{: #rbac}
+{: #rbac_ref}
 
 Tous les utilisateurs auxquels est affecté un rôle d'accès au service {{site.data.keyword.Bluemix_notm}} IAM bénéficient automatiquement d'un rôle Kubernetes RBAC (contrôle d'accès à base de rôles) prédéfini correspondant, dans un espace de nom spécifié. Si vous envisagez de gérer vos propres rôles Kubernetes RBAC personnalisés, voir [Création de droits RBAC personnalisés pour les utilisateurs, les groupes ou les comptes de service](/docs/containers?topic=containers-users#rbac).
 {: shortdesc}
@@ -760,247 +823,247 @@ Le tableau suivant présente les droits octroyés par chaque rôle RBAC à des r
  </thead>
 <tbody>
 <tr>
-  <td>bindings</td>
+  <td><code>bindings</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>configmaps</td>
+  <td><code>configmaps</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>cronjobs.batch</td>
+  <td><code>cronjobs.batch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>daemonsets.apps </td>
+  <td><code>daemonsets.apps </code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>daemonsets.extensions</td>
+  <td><code>daemonsets.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.apps</td>
+  <td><code>deployments.apps</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.apps/rollback</td>
+  <td><code>deployments.apps/rollback</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.apps/scale</td>
+  <td><code>deployments.apps/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.extensions</td>
+  <td><code>deployments.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.extensions/rollback</td>
+  <td><code>deployments.extensions/rollback</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.extensions/scale</td>
+  <td><code>deployments.extensions/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>endpoints</td>
+  <td><code>endpoints</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>events</td>
+  <td><code>events</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>horizontalpodautoscalers.autoscaling</td>
+  <td><code>horizontalpodautoscalers.autoscaling</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>ingresses.extensions</td>
+  <td><code>ingresses.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>jobs.batch</td>
+  <td><code>jobs.batch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>limitranges</td>
+  <td><code>limitranges</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>localsubjectaccessreviews</td>
+  <td><code>localsubjectaccessreviews</code></td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code></td>
 </tr><tr>
-  <td>namespaces</td>
+  <td><code>namespaces</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></br>**cluster-admin only:** <code>create</code>, <code>delete</code></td>
 </tr><tr>
-  <td>namespaces/status</td>
+  <td><code>namespaces/status</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>networkpolicies</td>
+  <td><code>networkpolicies</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>networkpolicies.extensions</td>
+  <td><code>networkpolicies.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>persistentvolumeclaims</td>
+  <td><code>persistentvolumeclaims</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>poddisruptionbudgets.policy</td>
+  <td><code>poddisruptionbudgets.policy</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods</td>
+  <td><code>pods</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>top</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/attach</td>
+  <td><code>pods/attach</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/exec</td>
+  <td><code>pods/exec</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/log</td>
+  <td><code>pods/log</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/portforward</td>
+  <td><code>pods/portforward</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/proxy</td>
+  <td><code>pods/proxy</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/status</td>
+  <td><code>pods/status</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.apps</td>
+  <td><code>replicasets.apps</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.apps/scale</td>
+  <td><code>replicasets.apps/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.extensions</td>
+  <td><code>replicasets.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.extensions/scale</td>
+  <td><code>replicasets.extensions/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers</td>
+  <td><code>replicationcontrollers</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers/scale</td>
+  <td><code>replicationcontrollers/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers/status</td>
+  <td><code>replicationcontrollers/status</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers.extensions/scale</td>
+  <td><code>replicationcontrollers.extensions/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>resourcequotas</td>
+  <td><code>resourcequotas</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>resourcequotas/status</td>
+  <td><code>resourcequotas/status</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>rolebindings</td>
+  <td><code>rolebindings</code></td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>roles</td>
+  <td><code>roles</code></td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>secrets</td>
+  <td><code>secrets</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>serviceaccounts</td>
+  <td><code>serviceaccounts</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code>, <code>impersonate</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code>, <code>impersonate</code></td>
 </tr><tr>
-  <td>services</td>
+  <td><code>services</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>services/proxy</td>
+  <td><code>services/proxy</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>statefulsets.apps</td>
+  <td><code>statefulsets.apps</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>statefulsets.apps/scale</td>
+  <td><code>statefulsets.apps/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>

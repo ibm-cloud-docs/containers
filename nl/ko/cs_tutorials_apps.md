@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -67,8 +67,7 @@ PR 회사의 앱 개발자가 지난 튜토리얼에서 작성된 Kubernetes 클
 ## 전제조건
 {: #apps_prereqs}
 
-* [튜토리얼: Kubernetes 클러스터 작성](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* [container-registry 플러그인](/docs/services/Registry?topic=registry-index#registry_cli_install) 설치
+[튜토리얼: Kubernetes 클러스터 작성](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## 학습 1: Kubernetes 클러스터에 단일 인스턴스 앱 배치
@@ -245,7 +244,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 
@@ -537,7 +536,7 @@ Listing images...
         ```
         {: codeblock}
 
-    2.  Watson 배치의 볼륨 섹션에서, 이전 [Kubernetes 클러스터 작성 튜토리얼](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)에서 작성한 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿의 이름을 업데이트하십시오. 배치에 볼륨으로서 Kubernetes 시크릿을 마운트하면 팟(Pod)에서 실행 중인 컨테이너가 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키를 사용할 수 있습니다. 이 튜토리얼의 {{site.data.keyword.watson}} 앱 컴포넌트는 볼륨 마운트 경로를 사용하여 API 키를 찾도록 구성되어 있습니다.
+    2.  `watson-pod` 배치의 볼륨 섹션에서, 이전 [Kubernetes 클러스터 작성 튜토리얼](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)에서 작성한 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿의 이름을 업데이트하십시오. 배치에 볼륨으로서 Kubernetes 시크릿을 마운트하면 팟(Pod)에서 실행 중인 컨테이너가 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키를 사용할 수 있습니다. 이 튜토리얼의 {{site.data.keyword.watson}} 앱 컴포넌트는 볼륨 마운트 경로를 사용하여 API 키를 찾도록 구성되어 있습니다.
 
         ```
 volumes:

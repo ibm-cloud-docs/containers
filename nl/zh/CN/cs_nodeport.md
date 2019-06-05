@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# 使用 NodePort 公开应用程序
+# 使用 NodePort 测试对应用程序的访问权
 {: #nodeport}
 
 通过使用 Kubernetes 集群中任何工作程序节点的公共 IP 地址并公开 NodePort，使容器化应用程序可通过因特网访问。此选项可用于在 {{site.data.keyword.containerlong}} 中进行测试以及用于短期公共访问权。
@@ -37,7 +37,7 @@ subcollection: containers
 在工作程序节点上公开一个公共端口，并使用该工作程序节点的公共 IP 地址通过因特网来公共访问集群中的服务。
 {:shortdesc}
 
-通过创建类型为 NodePort 的 Kubernetes 服务来公开应用程序时，将为该服务分配 30000-32767 范围内的 NodePort 以及内部集群 IP 地址。NodePort 服务充当应用程序入局请求的外部入口点。分配的 NodePort 在集群中每个工作程序节点的 `kubeproxy` 设置中公共公开。每个工作程序节点都会在分配的 NodePort 上开始侦听该服务的入局请求。要从因特网访问该服务，可以使用在集群创建期间分配的任何工作程序节点的公共 IP 地址以及 NodePort，格式为 `<IP_address>:<nodeport>`. 除了公共 IP 地址外，NodePort 服务还可用于工作程序节点的专用 IP 地址。
+通过创建类型为 NodePort 的 Kubernetes 服务来公开应用程序时，将为该服务分配 30000-32767 范围内的 NodePort 以及内部集群 IP 地址。NodePort 服务充当应用程序入局请求的外部入口点。分配的 NodePort 在集群中每个工作程序节点的 `kubeproxy` 设置中公共公开。每个工作程序节点都会在分配的 NodePort 上开始侦听该服务的入局请求。要从因特网访问该服务，可以使用在集群创建期间分配的任何工作程序节点的公共 IP 地址以及 NodePort，格式为 `<IP_address>:<nodeport>`。除了公共 IP 地址外，NodePort 服务还可用于工作程序节点的专用 IP 地址。
 
 下图显示配置 NodePort 服务后，如何将通信从因特网定向到应用程序：
 
@@ -51,7 +51,7 @@ subcollection: containers
 
 4. 该请求会转发到部署了应用程序的 pod 的专用 IP 地址。如果集群中部署了多个应用程序实例，那么 NodePort 服务会在应用程序 pod 之间路由请求。
 
-工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者仅在短时间内需要公共访问权时，可以使用 NodePort 服务。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer)或 [Ingress](/docs/containers?topic=containers-ingress) 来公开应用程序。
+工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者仅在短时间内需要公共访问权时，可以使用 NodePort 服务。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用[网络负载均衡器 (NLB) 服务](/docs/containers?topic=containers-loadbalancer)或 [Ingress](/docs/containers?topic=containers-ingress) 来公开应用程序。
 {: note}
 
 <br />
@@ -138,8 +138,8 @@ apiVersion: v1
 
     ```
     ID                                                Public IP   Private IP    Size     State    Status
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u3c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u3c.2x4  normal   Ready
     ```
     {: screen}
 
@@ -169,7 +169,7 @@ apiVersion: v1
 
     在此示例中，NodePort为 `30872`。
 
-    如果 **Endpoints** 部分显示 `<none>`，请在 NodePort 服务的 `spec.selector` 部分中检查使用的 `<selectorkey>` 和 `<selectorvalue>`。确保它与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的_键/值_对相同。
+    如果 **Endpoints** 部分显示 `<none>`，请检查 NodePort 服务的 `spec.selector` 部分中使用的 `<selectorkey>` 和 `<selectorvalue>`。确保它与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的_键/值_对相同。
     {: note}
 
 3.  使用其中一个工作程序节点 IP 地址和 NodePort 来构成 URL。示例：`http://192.0.2.23:30872`

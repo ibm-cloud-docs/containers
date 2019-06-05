@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -38,7 +38,7 @@ subcollection: containers
 Instale el plugin {{site.data.keyword.Bluemix_notm}} Block Storage con un diagrama de Helm para configurar las clases de almacenamiento predefinidas para el almacenamiento en bloque. Utilice estas clases de almacenamiento para crear una PVC para suministrar almacenamiento en bloque para sus apps.
 {: shortdesc}
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Asegúrese de que el nodo trabajador aplica el parche más reciente para su versión menor.
    1. Obtenga una lista de la versión de parche actual de los nodos trabajadores.
@@ -51,7 +51,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
       ```
       {: screen}
 
@@ -61,15 +61,15 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
 
    3. Aplique la versión de parche más reciente volviendo a cargar el nodo trabajador. Siga las instrucciones del [mandato ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) para volver a planificar correctamente cualquier pod en ejecución en el nodo trabajador antes de volver a cargar el nodo trabajador. Tenga en cuenta que, durante la recarga, la máquina del nodo trabajador se actualizará con la imagen más reciente y se suprimirán los datos si no se han [almacenado fuera del nodo trabajador](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
-2.  [Siga las instrucciones](/docs/containers?topic=containers-integrations#helm) para instalar el cliente Helm en la máquina local e instale el servidor Helm (Tiller) con una cuenta de servicio en el clúster.
+2.  [Siga las instrucciones](/docs/containers?topic=containers-helm#public_helm_install) para instalar el cliente Helm en la máquina local e instale el servidor Helm (Tiller) con una cuenta de servicio en el clúster.
 
-    La instalación del tiller del servidor Helm requiere una conexión de red pública con el registro de contenedor de Google público. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado habilitado, puede optar por [extraer la imagen de Tiller en la máquina local y enviar por push la imagen a su espacio de nombres en {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-integrations#private_local_tiller), o bien por [instalar el diagrama de Helm sin utilizar Tiller](/docs/containers?topic=containers-integrations#private_install_without_tiller).
+    La instalación del tiller del servidor Helm requiere una conexión de red pública con el registro de contenedor de Google público. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado habilitado, puede optar por [extraer la imagen de Tiller en la máquina local y enviar por push la imagen a su espacio de nombres en {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller), o bien por [instalar el diagrama de Helm sin utilizar Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
     {: note}
 
 3.  Verifique que el Tiller se ha instalado con una cuenta de servicio.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -83,7 +83,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
 
 4. Añada el repositorio de diagramas de Helm de {{site.data.keyword.Bluemix_notm}} al clúster donde desee utilizar el plugin de Almacenamiento en bloque de {{site.data.keyword.Bluemix_notm}}.
    ```
-   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
@@ -95,7 +95,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
 
 6. Instale el plugin {{site.data.keyword.Bluemix_notm}} Block Storage. Cuando instala el plugin, se añaden a su clúster las clases de almacenamiento de almacenamiento en bloque predefinidas.
    ```
-   helm install ibm/ibmcloud-block-storage-plugin
+   helm install iks-charts/ibmcloud-block-storage-plugin 
    ```
    {: pre}
 
@@ -186,7 +186,7 @@ Ahora puede seguir para [crear una PVC](#add_block) para suministrar almacenamie
 Actualice el plugin {{site.data.keyword.Bluemix_notm}} Block Storage existente a la última versión.
 {: shortdesc}
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Actualice el repositorio de Helm para recuperar la última versión de todos los diagramas de Helm de este repositorio.
    ```
@@ -197,7 +197,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
 2. Opcional: descargue el último diagrama de Helm en la máquina local. A continuación, extraiga el paquete y revise el archivo `release.md`
 para ver la información de release más reciente.
    ```
-   helm fetch ibm/ibmcloud-block-storage-plugin
+   helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -215,7 +215,7 @@ para ver la información de release más reciente.
 
 4. Actualice el plugin {{site.data.keyword.Bluemix_notm}} Block Storage a la última versión.
    ```
-   helm upgrade --force --recreate-pods <helm_chart_name>  ibm/ibmcloud-block-storage-plugin
+   helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -234,7 +234,7 @@ Al eliminar el plugin no elimina los datos, las PVC o los PV. Cuando se elimina 
 {: important}
 
 Antes de empezar:
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Asegúrese de que no haya PVC ni PV en el clúster que utilice almacenamiento en bloque.
 
 Para eliminar el plugin:
@@ -550,7 +550,7 @@ Para añadir almacenamiento en bloque:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}Para montar el PV en el despliegue, cree un archivo `.yaml` de configuración y especifique la PVC que enlaza el PV.
+4.  {: #block_app_volume_mount}Para montar el PV en el despliegue, cree un archivo `.yaml` de configuración y especifique la PVC que enlaza el PV.
 
     ```
     apiVersion: apps/v1
@@ -667,6 +667,7 @@ Si dispone de un dispositivo de almacenamiento físico existente que desea utili
 Antes de empezar a montar el almacenamiento existente en una app, debe recuperar toda la información necesaria para su PV.  
 
 ### Paso 1: Recuperación de la información del almacenamiento en bloque existente
+{: #existing-block-1}
 
 1.  Recupere o genere una clave de API para su cuenta (SoftLayer) de infraestructura de IBM Cloud.
     1. Inicie sesión en el [portal de la infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/classic?).
@@ -700,6 +701,7 @@ Antes de empezar a montar el almacenamiento existente en una app, debe recuperar
 7.  Anote los valores de `id`, `ip_addr`, `capacity_gb`, `datacenter` y `lunId` del dispositivo de almacenamiento en bloque que desea montar para el clúster. **Nota:** para montar el almacenamiento existente en un clúster, debe tener un nodo trabajador en la misma zona que el almacenamiento. Para verificar la zona del nodo trabajador, ejecute `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
 
 ### Paso 2: Creación de un volumen persistente (PV) y de una reclamación de volumen persistente (PVC) coincidente
+{: #existing-block-2}
 
 1.  Opcional: si tiene almacenamiento que ha suministrado con una clase de almacenamiento de tipo `retain`, cuando elimine la PVC, el PV y el dispositivo de almacenamiento físico no se eliminarán. Para volver a utilizar el almacenamiento en el clúster, primero debe eliminar el PV.
     1. Obtenga una lista de los PV existentes.
@@ -848,7 +850,7 @@ Antes de empezar a montar el almacenamiento existente en una app, debe recuperar
      ```
      {: screen}
 
-Ha creado correctamente un PV y lo ha enlazado a una PVC. Ahora los usuarios del clúster pueden [montar la PVC](#app_volume_mount) en sus despliegues y empezar a leer el PV y a grabar en el mismo.
+Ha creado correctamente un PV y lo ha enlazado a una PVC. Ahora los usuarios del clúster pueden [montar la PVC](#block_app_volume_mount) en sus despliegues y empezar a leer el PV y a grabar en el mismo.
 
 <br />
 
@@ -881,7 +883,7 @@ Si desea crear automáticamente la PVC al crear el conjunto con estado, utilice 
 Utilice esta opción si desea crear automáticamente la PVC al crear el conjunto con estado.
 {: shortdesc}
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Verifique que todos los conjuntos con estado existentes del clúster estén totalmente desplegados. Si todavía se está desplegando un conjunto con estado, no puede empezar a crear su conjunto con estado. Debe esperar a que todos los conjuntos con estado del clúster se hayan desplegado por completo para evitar resultados inesperados.
    1. Obtenga una lista de los conjuntos con estado existentes en el clúster.
@@ -1163,7 +1165,7 @@ Puede realizar un suministro previo de las PVC antes de crear el conjunto con es
 
 Cuando [suministre dinámicamente las PVC al crear el conjunto con estado](#block_dynamic_statefulset), el nombre de la PVC se asigna en función de los valores que ha utilizado en el archivo YAML de conjunto con estado. Para que el conjunto con estado utilice las PVC existentes, el nombre de las PVC debe coincidir con el nombre que se crearía automáticamente si se utilizara el suministro dinámico.
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Si desea suministrar la PVC del conjunto con estado antes de crear el conjunto con estado, siga los pasos del 1 al 3 de la sección [Adición de almacenamiento en bloque a apps](#add_block) para crear un PVC para cada réplica del conjunto con estado. Asegúrese de crear la PVC con un nombre que siga el formato siguiente: `<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`**: utilice el nombre que desea especificar en la sección `spec.volumeClaimTemplates.metadata.name`
@@ -1387,17 +1389,17 @@ Consulte las opciones siguientes de copia de seguridad y restauración para el a
 
 <dl>
   <dt>Configurar instantáneas periódicas</dt>
-  <dd><p>Puede [configurar instantáneas periódicas para el almacenamiento en bloque](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots), que son imágenes de solo lectura que capturan el estado de la instancia en un punto en el tiempo. Para almacenar la instantánea, debe solicitar espacio de instantáneas en el almacenamiento en bloque. Las instantáneas se almacenan en la instancia de almacenamiento existente dentro de la misma zona. Puede restaurar datos desde una instantánea si un usuario elimina accidentalmente datos importantes del volumen. <strong>Nota</strong>: Si tiene una cuenta dedicada, debe <a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">abrir un caso de soporte</a>.</br></br> <strong>Para crear una instantánea para su volumen: </strong><ol><li>[Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).</li><li>Inicie una sesión en la CLI de `ibmcloud sl`. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>Liste los PV en su clúster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenga los detalles de los PV para los que desea crear espacio de instantáneas y anote el ID de volumen, el tamaño y las IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> El tamaño y el número de IOPS se muestran en la sección <strong>Labels</strong> de la salida de la CLI. Para encontrar el ID de volumen, revise la anotación <code>ibm.io/network-storage-id</code> de la salida de la CLI. </li><li>Cree el tamaño de instantánea para el volumen existente con los parámetros que ha recuperado en el paso anterior. <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Espere a que se haya creado el tamaño de la instantánea. <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>El tamaño de la instantánea se suministra de forma correcta cuando el valor de <strong>Snapshot Size (GB)</strong> en la salida de la CLI pasa de 0 al tamaño solicitado. </li><li>Cree la instantánea para el volumen y anote el ID de la instantánea que se crea para usted. <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verifique que la instantánea se haya creado correctamente. <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Para restaurar los datos desde una instantánea en un volumen existente: </strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>Puede [configurar instantáneas periódicas para el almacenamiento en bloque](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots), que son imágenes de solo lectura que capturan el estado de la instancia en un punto en el tiempo. Para almacenar la instantánea, debe solicitar espacio de instantáneas en el almacenamiento en bloque. Las instantáneas se almacenan en la instancia de almacenamiento existente dentro de la misma zona. Puede restaurar datos desde una instantánea si un usuario elimina accidentalmente datos importantes del volumen. </br></br> <strong>Para crear una instantánea para su volumen: </strong><ol><li>[Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Inicie una sesión en la CLI de `ibmcloud sl`. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>Liste los PV en su clúster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenga los detalles de los PV para los que desea crear espacio de instantáneas y anote el ID de volumen, el tamaño y las IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> El tamaño y el número de IOPS se muestran en la sección <strong>Labels</strong> de la salida de la CLI. Para encontrar el ID de volumen, revise la anotación <code>ibm.io/network-storage-id</code> de la salida de la CLI. </li><li>Cree el tamaño de instantánea para el volumen existente con los parámetros que ha recuperado en el paso anterior. <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Espere a que se haya creado el tamaño de la instantánea. <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>El tamaño de la instantánea se suministra de forma correcta cuando el valor de <strong>Snapshot Size (GB)</strong> en la salida de la CLI pasa de 0 al tamaño solicitado. </li><li>Cree la instantánea para el volumen y anote el ID de la instantánea que se crea para usted. <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verifique que la instantánea se haya creado correctamente. <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Para restaurar los datos desde una instantánea en un volumen existente: </strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Realice una réplica de las instantáneas en otra zona</dt>
- <dd><p>Para proteger los datos ante un error de la zona, puede [replicar instantáneas](/docs/infrastructure/BlockStorage?topic=BlockStorage-replication#replication) en una instancia de almacenamiento en bloque configurada en otra zona. Los datos únicamente se pueden replicar desde el almacenamiento primario al almacenamiento de copia de seguridad. No puede montar una instancia replicada de almacenamiento en bloque en un clúster. Cuando el almacenamiento primario falla, puede establecer de forma manual el almacenamiento de copia de seguridad replicado para que sea el primario. A continuación, puede montarla en el clúster. Una vez restaurado el almacenamiento primario, puede restaurar los datos del almacenamiento de copia de seguridad. <strong>Nota</strong>: si tiene una cuenta dedicada, no puede replicar instantáneas en otra zona.</p></dd>
+ <dd><p>Para proteger los datos ante un error de la zona, puede [replicar instantáneas](/docs/infrastructure/BlockStorage?topic=BlockStorage-replication#replication) en una instancia de almacenamiento en bloque configurada en otra zona. Los datos únicamente se pueden replicar desde el almacenamiento primario al almacenamiento de copia de seguridad. No puede montar una instancia replicada de almacenamiento en bloque en un clúster. Cuando el almacenamiento primario falla, puede establecer de forma manual el almacenamiento de copia de seguridad replicado para que sea el primario. A continuación, puede montarla en el clúster. Una vez restaurado el almacenamiento primario, puede restaurar los datos del almacenamiento de copia de seguridad.</p></dd>
  <dt>Duplicar almacenamiento</dt>
- <dd><p>Puede [duplicar la instancia de almacenamiento en bloque](/docs/infrastructure/BlockStorage?topic=BlockStorage-duplicatevolume#duplicatevolume) en la misma zona que la instancia de almacenamiento original. La instancia duplicada tiene los mismos datos que la instancia de almacenamiento original en el momento de duplicarla. A diferencia de las réplicas, utilice los duplicados como una instancia de almacenamiento independiente de la original. Para duplicar, primero configure instantáneas para el volumen. <strong>Nota</strong>: Si tiene una cuenta dedicada, debe <a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">abrir un caso de soporte</a>.</p></dd>
+ <dd><p>Puede [duplicar la instancia de almacenamiento en bloque](/docs/infrastructure/BlockStorage?topic=BlockStorage-duplicatevolume#duplicatevolume) en la misma zona que la instancia de almacenamiento original. La instancia duplicada tiene los mismos datos que la instancia de almacenamiento original en el momento de duplicarla. A diferencia de las réplicas, utilice los duplicados como una instancia de almacenamiento independiente de la original. Para duplicar, primero configure instantáneas para el volumen.</p></dd>
   <dt>Haga copia de seguridad de los datos en {{site.data.keyword.cos_full}}</dt>
   <dd><p>Puede utilizar la [**imagen ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter) para utilizar un pod de copia de seguridad y restauración en el clúster. Este pod contiene un script para ejecutar una copia de seguridad puntual o periódico para cualquier reclamación de volumen persistente (PVC) en el clúster. Los datos se almacenan en la instancia de {{site.data.keyword.cos_full}} que ha configurado en una zona.</p><p class="note">El almacenamiento en bloque se monta con la modalidad de acceso RWO. Este acceso solo permite los pods en el almacenamiento en bloque de uno en uno. Para hacer una copia de seguridad de los datos, debe desmontar el pod de la app desde el almacenamiento, montarlo en el pod de copia de seguridad, realizar una copia de seguridad de los datos y volver a montar el almacenamiento en el pod de la app. </p>
 Para aumentar la alta disponibilidad de los datos y proteger la app ante un error de la zona, configure una segunda instancia de {{site.data.keyword.cos_short}} y replique los datos entre las zonas. Si necesita restaurar datos desde la instancia de {{site.data.keyword.cos_short}}, utilice el script de restauración que se proporciona con la imagen.</dd>
 <dt>Copiar datos a y desde pods y contenedores</dt>
 <dd><p>Utilice el [mandato ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) `kubectl cp` para copiar archivos y directorios a y desde pods o contenedores específicos en el clúster.</p>
-<p>Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Si no especifica un contenedor con <code>-c</code>, el mandato utiliza el primer contenedor disponible en el pod.</p>
+<p>Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Si no especifica un contenedor con <code>-c</code>, el mandato utiliza el primer contenedor disponible en el pod.</p>
 <p>El mandato se puede utilizar de varias maneras:</p>
 <ul>
 <li>Copiar datos desde su máquina local a un pod en su clúster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -1680,26 +1682,26 @@ Cree la clase de almacenamiento en la misma región y zona que el clúster y los
 
 - **Ejemplo para almacenamiento en bloque resistente:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
-kind: StorageClass
-metadata:
-  name: ibmc-block-silver-mycustom-storageclass
-  labels:
-    kubernetes.io/cluster-service: "true"
-provisioner: ibm.io/ibmc-block
-parameters:
-  zone: "dal12"
-  region: "us-south"
-  type: "Endurance"
-  iopsPerGB: "4"
-  sizeRange: "[20-12000]Gi"
-reclaimPolicy: "Delete"
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ibmc-block-silver-mycustom-storageclass
+    labels:
+      kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-block
+  parameters:
+    zone: "dal12"
+    region: "us-south"
+    type: "Endurance"
+    iopsPerGB: "4"
+    sizeRange: "[20-12000]Gi"
+  reclaimPolicy: "Delete"
   ```
   {: codeblock}
 
 - **Ejemplo para el almacenamiento en bloque de rendimiento:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: ibmc-block-performance-storageclass

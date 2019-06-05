@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -40,7 +40,7 @@ subcollection: containers
 ## 使用 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 執行測試
 {: #debug_utility}
 
-疑難排解時，您可以使用 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 來執行測試，並從叢集中收集相關資訊。若要使用除錯工具，請安裝 [`ibmcloud-iks-debug` Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
+疑難排解時，您可以使用 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 來執行測試，並從叢集中收集相關資訊。若要使用除錯工具，請安裝 [`ibmcloud-iks-debug` Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
 {: shortdesc}
 
 
@@ -121,7 +121,7 @@ subcollection: containers
       </tr>
       <tr>
        <td>Normal</td>
-       <td>叢集裡的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。此狀態被視為健全，您不需要採取動作。<p class="note">雖然工作者節點可能是正常的，但也可能需要注意其他的基礎架構資源（例如[網路](/docs/containers?topic=containers-cs_troubleshoot_network)和[儲存空間](/docs/containers?topic=containers-cs_troubleshoot_storage)）。</p></td>
+       <td>叢集裡的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。此狀態被視為健全，您不需要採取動作。<p class="note">雖然工作者節點可能是正常的，但也可能需要注意其他的基礎架構資源（例如[網路](/docs/containers?topic=containers-cs_troubleshoot_network)和[儲存空間](/docs/containers?topic=containers-cs_troubleshoot_storage)）。如果您才剛建立叢集，則其他服務所使用的一些叢集部分（例如 Ingress 密碼或登錄映像檔取回密碼）可能還在處理中。。</p></td>
     </tr>
       <tr>
        <td>Pending</td>
@@ -182,7 +182,7 @@ subcollection: containers
       <li>您為工作者節點設定 Virtual Router Appliance，而工作者節點關閉並中斷工作者節點與 Kubernetes 主節點之間的通訊。</li><li> {{site.data.keyword.containerlong_notm}} 或 IBM Cloud 基礎架構 (SoftLayer) 中的現行網路問題，導致工作者節點與 Kubernetes 主節點之間的通訊失敗。</li>
       <li>工作者節點容量不足。請檢查工作者節點的<strong>狀態</strong> (Status)，以查看它是否顯示<strong>磁碟不足</strong> (Out of disk) 或<strong>記憶體不足</strong> (Out of memory)。如果工作者節點容量不足，請考慮減少工作者節點上的工作負載，或將工作者節點新增至叢集，以協助對工作負載進行負載平衡。</li>
       <li>已從 [{{site.data.keyword.Bluemix_notm}} 主控台資源清單 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/resources) 關閉裝置電源。開啟資源清單，並在**裝置**清單中尋找您的工作者節點 ID。在動作功能表中，按一下**開啟電源**。</li></ul>
-在許多情況下，[重新載入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)工作者節點可以解決此問題。當您重新載入工作者節點時，最新的[修補程式版本](/docs/containers?topic=containers-cs_versions#version_types)會套用至您的工作者節點。主要版本和次要版本不會變更。在您重新載入工作者節點之前，請確定隔離及排除工作者節點，以確保現有 Pod 會溫和終止並重新排程其餘的工作者節點。</br></br> 如果重新載入工作者節點未解決此問題，請移至下一步，以繼續進行工作者節點的疑難排解。</br></br><strong>提示：</strong>您可以[為工作者節點配置性能檢查，並啟用自動回復](/docs/containers?topic=containers-health#autorecovery)。如果「自動回復」根據配置的檢查，偵測到性能不佳的工作者節點，則「自動回復」會觸發更正動作，如在工作者節點上重新載入 OS。如需自動回復運作方式的相關資訊，請參閱[自動回復部落格![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。</td>
+在許多情況下，[重新載入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)工作者節點可以解決此問題。當您重新載入工作者節點時，最新的[修補程式版本](/docs/containers?topic=containers-cs_versions#version_types)會套用至您的工作者節點。主要版本和次要版本不會變更。在您重新載入工作者節點之前，請確定隔離及排除工作者節點，以確保現有 Pod 會循序終止並重新排定其餘的工作者節點。</br></br>如果重新載入工作者節點未解決此問題，請移至下一步，以繼續進行工作者節點的疑難排解。</br></br><strong>提示：</strong>您可以[為工作者節點配置性能檢查，並啟用自動回復](/docs/containers?topic=containers-health#autorecovery)。如果「自動回復」根據配置的檢查，偵測到性能不佳的工作者節點，則「自動回復」會觸發更正動作，如在工作者節點上重新載入 OS。如需自動回復運作方式的相關資訊，請參閱[自動回復部落格![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。</td>
      </tr>
      <tr>
      <td>已部署</td>
@@ -271,10 +271,11 @@ subcollection: containers
         <td>您的 IBM Cloud 基礎架構 (SoftLayer) 未設定成訂購所選取資料中心內的運算資源。請與 [{{site.data.keyword.Bluemix_notm}} 支援中心](#ts_getting_help)聯絡，驗證已正確設定帳戶。</td>
        </tr>
        <tr>
-        <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：使用者沒有新增伺服器的必要 {{site.data.keyword.Bluemix_notm}} 基礎架構許可權
-</br></br>
-        {{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：必須要有許可權才能訂購「項目」。</br></br>
-        無法驗證 {{site.data.keyword.Bluemix_notm}} 基礎架構認證。</td>
+        <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：使用者沒有新增伺服器的必要「{{site.data.keyword.Bluemix_notm}} 基礎架構」許可權
+        </br></br>
+        {{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：必須要有許可權才能訂購「項目」。
+        </br></br>
+                無法驗證 {{site.data.keyword.Bluemix_notm}} 基礎架構認證。</td>
         <td>您可能沒有在 IBM Cloud 基礎架構 (SoftLayer) 組合中執行動作的必要許可權，或您使用的是錯誤的基礎架構認證。請參閱[設定 API 金鑰以啟用存取基礎架構組合](/docs/containers?topic=containers-users#api_key)。</td>
       </tr>
       <tr>
@@ -285,7 +286,8 @@ subcollection: containers
      </tr>
       <tr>
   <td>無法建立 IMS 入口網站記號，因為沒有任何 IMS 帳戶鏈結到所選取的 BSS 帳戶</br></br>找不到提供的使用者，或是提供的使用者不在作用中</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus：使用者帳戶目前為 cancel_pending。</br></br>等待使用者看見機器</td>
-  <td>用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰擁有者沒有執行此動作的必要許可權，或可能處於擱置刪除狀態。</br></br><strong>身為使用者</strong>，請遵循下列步驟：<ol><li>如果您可以存取多個帳戶，請確定您已登入想要使用 {{site.data.keyword.containerlong_notm}} 的帳戶。</li>
+  <td>用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰擁有者沒有執行此動作的必要許可權，或可能處於擱置刪除狀態。</br></br><strong>身為使用者</strong>，請遵循下列步驟：
+  <ol><li>如果您可以存取多個帳戶，請確定您已登入想要使用 {{site.data.keyword.containerlong_notm}} 的帳戶。</li>
   <li>執行 <code>ibmcloud ks api-key-info</code>，以檢視用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的現行 API 金鑰擁有者。</li>
   <li>執行 <code>ibmcloud account list</code>，以檢視您目前使用的 {{site.data.keyword.Bluemix_notm}} 帳戶的擁有者。</li>
   <li>請聯絡 {{site.data.keyword.Bluemix_notm}} 帳戶的擁有者，並報告 API 金鑰擁有者對 IBM Cloud 基礎架構 (SoftLayer) 的許可權不足，或可能處於擱置刪除狀態。</li></ol>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -61,7 +61,7 @@ lastupdated: "2019-03-21"
 <dd>在标准集群中，首次在某个专区中创建集群时，会自动在 IBM Cloud Infrastructure (SoftLayer) 帐户中供应该专区中的公用 VLAN 和专用 VLAN。对于在该专区中创建的每个后续集群，必须指定要在该专区中使用的 VLAN 对。可以复用为您创建的相同公用和专用 VLAN，因为多个集群可以共享 VLAN。</br>
 </br>可以将工作程序节点连接到公用 VLAN 和专用 VLAN，也可以仅连接到专用 VLAN。如果要将工作程序节点仅连接到专用 VLAN，那么可以在集群创建期间使用现有专用 VLAN 的标识，或者[创建专用 VLAN](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) 并使用其标识。</dd></dl>
 
-要查看在您帐户的每个专区中供应的 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`。要查看供应一个集群的 VLAN，请运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources`，并查找 **Subnet VLANs** 部分。
+要查看在您帐户的每个专区中供应的 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`。要查看供应一个集群的 VLAN，请运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources`，然后查找 **Subnet VLANs** 部分。
 
 IBM Cloud infrastructure (SoftLayer) 管理在专区中创建第一个集群时自动供应的 VLAN。如果使 VLAN 变为未使用（例如，从 VLAN 中除去所有工作程序节点），那么 IBMCloud infrastructure (SoftLayer) 将回收此 VLAN。此后，如果需要新 VLAN，[请联系 {{site.data.keyword.Bluemix_notm}} 支持](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)。
 
@@ -81,13 +81,13 @@ IBM Cloud infrastructure (SoftLayer) 管理在专区中创建第一个集群时�
 
 **公用 VLAN 子网**
 * 主公用子网用于确定在集群创建期间分配给工作程序节点的公共 IP 地址。位于同一 VLAN 中的多个集群可以共享一个主公用子网。
-* 可移植公用子网只绑定到一个集群，并为该集群提供 8 个公共 IP 地址。3 个 IP 保留用于 IBM Cloud Infrastructure (SoftLayer) 功能。1 个 IP 由缺省公共 Ingress ALB 使用，剩余 4 个 IP 可用于创建公共负载均衡器联网服务。可移植公共 IP 是永久的固定 IP 地址，可用于通过因特网访问 LoadBalancer 服务。如果需要 4 个以上的 IP 用于公共负载均衡器，请参阅[添加可移植 IP 地址](/docs/containers?topic=containers-subnets#adding_ips)。
+* 可移植公用子网只绑定到一个集群，并为该集群提供 8 个公共 IP 地址。3 个 IP 保留用于 IBM Cloud Infrastructure (SoftLayer) 功能。1 个 IP 由缺省公共 Ingress ALB 使用，剩余 4 个 IP 可用于创建公用网络负载均衡器 (NLB) 服务。可移植公共 IP 是永久的固定 IP 地址，可用于通过因特网访问 NLB。如果需要 4 个以上的 IP 用于 NLB，请参阅[添加可移植 IP 地址](/docs/containers?topic=containers-subnets#adding_ips)。
 
 **专用 VLAN 子网**
 * 主专用子网用于确定在集群创建期间分配给工作程序节点的专用 IP 地址。位于同一 VLAN 中的多个集群可以共享一个主专用子网。
-* 可移植专用子网只绑定到一个集群，并为该集群提供 8 个专用 IP 地址。3 个 IP 保留用于 IBM Cloud Infrastructure (SoftLayer) 功能。1 个 IP 由缺省专用 Ingress ALB 使用，剩余 4 个 IP 可用于创建专用负载均衡器联网服务。可移植专用 IP 是永久的固定 IP 地址，可用于通过因特网访问 LoadBalancer 服务。如果需要 4 个以上的 IP 用于专用负载均衡器，请参阅[添加可移植 IP 地址](/docs/containers?topic=containers-subnets#adding_ips)。
+* 可移植专用子网只绑定到一个集群，并为该集群提供 8 个专用 IP 地址。3 个 IP 保留用于 IBM Cloud Infrastructure (SoftLayer) 功能。1 个 IP 由缺省专用 Ingress ALB 使用，剩余 4 个 IP 可用于创建专用网络负载均衡器 (NLB) 服务。可移植专用 IP 是永久的固定 IP 地址，可用于通过专用网络访问 NLB。如果需要 4 个以上的 IP 用于专用 NLB，请参阅[添加可移植 IP 地址](/docs/containers?topic=containers-subnets#adding_ips)。
 
-要查看帐户中供应的所有子网，请运行 `ibmcloud ks subnets`。要查看绑定到一个集群的可移植公用子网和可移植专用子网，可以运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources`，并查找 **Subnet VLANs** 部分。
+要查看帐户中供应的所有子网，请运行 `ibmcloud ks subnets`。要查看绑定到一个集群的可移植公用子网和可移植专用子网，可以运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources`，然后查找 **Subnet VLANs** 部分。
 
 在 {{site.data.keyword.containerlong_notm}} 中，VLAN 限制为 40 个子网。如果达到此限制，请首先检查以了解是否可以[在 VLAN 中复用子网以创建新集群](/docs/containers?topic=containers-subnets#subnets_custom)。如果需要新的 VLAN，请通过[联系 {{site.data.keyword.Bluemix_notm}} 支持](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)进行订购。然后，[创建集群](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)以使用这一新的 VLAN。
 {: note}
@@ -103,7 +103,7 @@ IBM Cloud infrastructure (SoftLayer) 管理在专区中创建第一个集群时�
 **什么是虚拟路由器功能 (VRF) 和 VLAN 生成？**</br>
 
 <dl>
-<dt>[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)</dt>
+<dt>[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
 <dd>VRF 支持基础架构帐户中的所有 VLAN 和子网相互通信。此外，需要 VRF 来允许工作程序与主节点通过专用服务端点进行通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。请注意，VRF 会使帐户的 VLAN 生成选项失效，因为所有 VLAN 都能够进行通信，除非您配置网关设备来管理流量。</dd>
 <dt>[VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>如果无法或不想启用 VR，请启用 VLAN 生成。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。请注意，如果选择启用 VLAN 生成而不是 VRF，那么无法启用专用服务端点。</dd>
@@ -165,11 +165,13 @@ IBM Cloud infrastructure (SoftLayer) 管理在专区中创建第一个集群时�
 您可以执行[设置使用公用和专用 VLAN 的集群联网](/docs/containers?topic=containers-cs_network_cluster#both_vlans)或[设置使用仅专用 VLAN 的集群联网](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan)中的步骤。
 {: shortdesc}
 
-### 我日后可以更改 VLAN 决策吗？
+### 我日后可以更改 VLAN 决策吗？工作程序节点 IP 地址会更改吗？
 {: #cs_network_ov_worker_change}
 
 您可以通过修改集群中的工作程序池来更改 VLAN 设置。有关更多信息，请参阅[更改工作程序节点 VLAN 连接](/docs/containers?topic=containers-cs_network_cluster#change-vlans)。
 {: shortdesc}
+
+工作程序节点分配有集群使用的公用或专用 VLAN 上的 IP 地址。供应工作程序节点后，IP 地址不会更改。例如，工作程序节点 IP 地址在执行 `reload`、`reboot` 和 `update` 操作之间保持不变。此外，工作程序节点的专用 IP 地址在大多数 `kubectl` 命令中用于表示工作程序节点身份。如果更改了工作程序池使用的 VLAN，那么该池中供应的新工作程序节点会将新的 VLAN 用于其 IP 地址。现有工作程序节点 IP 地址不会更改，但您可以选择除去使用旧 VLAN 的工作程序节点。
 
 <br />
 
@@ -246,7 +248,7 @@ IBM Cloud infrastructure (SoftLayer) 管理在专区中创建第一个集群时�
 {: shortdesc}
 
 **工作程序节点与主节点之间的通信**</br>
-此通信通过专用服务端点在专用网络上建立。即使为集群启用了公共服务端点，Kubernetes 主节点与工作程序节点之间的通信也可保持在专用网络上进行。
+此通信通过专用服务端点在专用网络上建立，以及通过公共服务端点在公用网络上建立。通过将工作程序到主节点的流量一半通过公共端点路由，一半通过专用端点路由，可保护主节点到工作程序的通信不受公共或专用网络潜在中断的影响。
 
 **访问主节点**</br>
 如果授权集群用户位于 {{site.data.keyword.Bluemix_notm}} 专用网络中或通过 VPN 连接与专用网络连接，那么主节点可通过专用服务端点供专用访问。否则，主节点可供授权集群用户通过公共服务端点公开访问。
@@ -285,7 +287,7 @@ IBM Cloud infrastructure (SoftLayer) 管理在专区中创建第一个集群时�
 ### 设置 VPN 连接以用于仅专用 VLAN 设置
 {: #cs_network_ov_vpn_private}
 
-如果集群连接到仅专用 VLAN，那么必须在 VRA 或 FSA 网关设备上设置 IPSec VPN 端点。然后，可以在集群中[配置和部署 strongSwan IPSec VPN 服务](/docs/containers?topic=containers-vpn#vpn-setup)，以在网关上使用 VPN 端点。如果不想使用 strongSwan，那么可以[直接使用 VRA 设置 VPN 连接](/docs/containers?topic=containers-vpn#vyatta)。
+如果集群连接到仅专用 VLAN，那么必须在 VRA (Vyatta) 或 FSA 网关设备上设置 IPSec VPN 端点。然后，可以在集群中[配置和部署 strongSwan IPSec VPN 服务](/docs/containers?topic=containers-vpn#vpn-setup)，以在网关上使用 VPN 端点。如果不想使用 strongSwan，那么可以[直接使用 VRA 设置 VPN 连接](/docs/containers?topic=containers-vpn#vyatta)。
 {: shortdesc}
 
 <p>

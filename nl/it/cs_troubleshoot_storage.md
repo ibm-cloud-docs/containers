@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -81,7 +81,7 @@ Per una correzione a lungo termine, [aggiorna il tipo di macchina del tuo pool d
 {: #nonroot}
 
 {: tsSymptoms}
-Dopo aver [aggiunto l'archiviazione NFS](/docs/containers?topic=containers-file_storage#app_volume_mount) alla tua distribuzione, la distribuzione del tuo contenitore ha esito negativo. Quando richiami i log per il tuo contenitore, potresti vedere degli errori simili ai seguenti: Il pod genera un errore e si blocca in un ciclo di ricaricamento.
+Dopo aver [aggiunto l'archiviazione NFS](/docs/containers?topic=containers-file_storage#file_app_volume_mount) alla tua distribuzione, la distribuzione del tuo contenitore ha esito negativo. Quando richiami i log per il tuo contenitore, potresti vedere degli errori simili ai seguenti: Il pod genera un errore e si blocca in un ciclo di ricaricamento.
 
 ```
 write-permission
@@ -185,6 +185,9 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
       name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:
@@ -328,7 +331,7 @@ Se si verifica un errore di rete mentre un pod scrive su un volume, l'infrastrut
    ```
    {: pre}
 
-2. Verifica che quella che utilizzi è la [versione più recente del plugin {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). In caso contrario, [aggiorna il tuo plugin](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
+2. Verifica che quella che utilizzi è la [versione più recente del plugin {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). In caso contrario, [aggiorna il tuo plugin](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
 3. Se hai utilizzato una distribuzione Kubernetes per il tuo pod, riavvia il pod che sta riscontrando la condizione di errore rimuovendolo e lasciando che Kubernetes lo crei nuovamente. Se non hai utilizzato una distribuzione, richiama il file YAML che era stato utilizzato per creare il tuo pod eseguendo `kubectl get pod <pod_name> -o yaml >pod.yaml`. Quindi elimina e crea di nuovo manualmente il pod.
     ```
     kubectl delete pod <pod_name>
@@ -365,7 +368,7 @@ Se si verifica un errore di rete mentre un pod scrive su un volume, l'infrastrut
 {: #block_filesystem}
 
 {: tsSymptoms}
-Quando esegui `kubectl describe pod <pod_name>`, visualizzi il seguente errore:
+Quando esegui `kubectl describe pod <pod_name>`, vedi il seguente errore:
 ```
 failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32
 ```
@@ -419,21 +422,21 @@ Aggiorna il file system nel PV esistente da `ext4` a `XFS`.
 
 
 
-## Archiviazione oggetti: l'installazione del plug-in Helm {{site.data.keyword.cos_full_notm}} `ibmc` non riesce
+## Archiviazione oggetti: l'installazione del plugin Helm {{site.data.keyword.cos_full_notm}} `ibmc` non riesce
 {: #cos_helm_fails}
 
 {: tsSymptoms}
-Quando installi il plug-in Helm {{site.data.keyword.cos_full_notm}} `ibmc`, l'installazione non riesce con il seguente errore:
+Quando installi il plugin Helm {{site.data.keyword.cos_full_notm}} `ibmc`, l'installazione non riesce con il seguente errore:
 ```
 Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
 ```
 {: screen}
 
 {: tsCauses}
-Quando il plug-in Helm `ibmc` è installato, viene creato un collegamento simbolico dalla directory `./helm/plugins/helm-ibmc` alla directory dove si trova il plug-in Helm `ibmc` sul tuo sistema locale, che è di norma in `./ibmcloud-object-storage-plugin/helm-ibmc`. Quando rimuovi il plug-in Helm `ibmc` dal tuo sistema locale, o sposti la directory del plug-in Helm `ibmc` in un'altra ubicazione, il collegamento simbolico non viene rimosso.
+Quando il plugin Helm `ibmc` è installato, viene creato un collegamento simbolico dalla directory `./helm/plugins/helm-ibmc` alla directory dove si trova il plugin Helm `ibmc` sul tuo sistema locale, che è di norma in `./ibmcloud-object-storage-plugin/helm-ibmc`. Quando rimuovi il plugin Helm `ibmc` dal tuo sistema locale, o sposti la directory del plugin Helm `ibmc` in un'altra ubicazione, il collegamento simbolico non viene rimosso.
 
 {: tsResolve}
-1. Rimuovi il plug-in Helm {{site.data.keyword.cos_full_notm}}.
+1. Rimuovi il plugin Helm {{site.data.keyword.cos_full_notm}}.
    ```
    rm -rf ~/.helm/plugins/helm-ibmc
    ```
@@ -563,7 +566,7 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
 ```
 {: screen}
 
-Quando carichi un file utilizzando il plug-in {{site.data.keyword.cos_full_notm}}, le autorizzazioni per il file vengono conservate e non modificate.
+Quando carichi un file utilizzando il plugin {{site.data.keyword.cos_full_notm}}, le autorizzazioni per il file vengono conservate e non modificate.
 
 {: tsResolve}
 Per accedere al file con un utente non root, quest'ultimo deve disporre delle autorizzazioni in lettura e scrittura per il file. La modifica dell'autorizzazione di un file come parte della tua distribuzione del pod richiede un'operazione di scrittura. {{site.data.keyword.cos_full_notm}} non è progettato per i carichi di lavoro di scrittura. L'aggiornamento delle autorizzazioni durante la distribuzione del pod potrebbe impedire al tuo pod di passare a uno stato di `Running`.
@@ -695,10 +698,10 @@ Per risolvere questo problema, prima di montare la PVC nel tuo pod dell'applicaz
 
 7. Monta la PVC nell'applicazione con l'utente non root.
 
-   Definisci l'utente non root come `runAsUser` senza impostare al tempo stesso `fsGroup` nel tuo YAML di distribuzione. L'impostazione di `fsGroup` attiva il plug-in {{site.data.keyword.cos_full_notm}} per aggiornare le autorizzazioni del gruppo per tutti i file in un bucket quando viene distribuito il pod. L'aggiornamento delle autorizzazioni è un'operazione di scrittura e potrebbe impedire al tuo pod di passare a uno stato di `Running`.
+   Definisci l'utente non root come `runAsUser` senza impostare al tempo stesso `fsGroup` nel tuo YAML di distribuzione. L'impostazione di `fsGroup` attiva il plugin {{site.data.keyword.cos_full_notm}} per aggiornare le autorizzazioni del gruppo per tutti i file in un bucket quando viene distribuito il pod. L'aggiornamento delle autorizzazioni è un'operazione di scrittura e potrebbe impedire al tuo pod di passare a uno stato di `Running`.
    {: important}
 
-Dopo aver impostato le autorizzazioni file corrette nella tua istanza del servizio {{site.data.keyword.cos_full_notm}}, non caricare i file utilizzando la console o l'API REST. Utilizza il plug-in {{site.data.keyword.cos_full_notm}} per aggiungere file alla tua istanza del servizio.
+Dopo aver impostato le autorizzazioni file corrette nella tua istanza del servizio {{site.data.keyword.cos_full_notm}}, non caricare i file utilizzando la console o l'API REST. Utilizza il plugin {{site.data.keyword.cos_full_notm}} per aggiungere file alla tua istanza del servizio.
 {: tip}
 
 <br />

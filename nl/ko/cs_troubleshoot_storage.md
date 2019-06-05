@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -81,7 +81,7 @@ subcollection: containers
 {: #nonroot}
 
 {: tsSymptoms}
-배치에 [NFS 스토리지를 추가](/docs/containers?topic=containers-file_storage#app_volume_mount)한 후 컨테이너의 배치가 실패합니다. 컨테이너의 로그를 검색할 때 다음 과 같은 오류가 표시될 수 있습니다. 팟(Pod)에 장애가 발생하여 다시 로드 순환에서 벗어나지 못합니다.
+배치에 [NFS 스토리지를 추가](/docs/containers?topic=containers-file_storage#file_app_volume_mount)한 후 컨테이너의 배치가 실패합니다. 컨테이너의 로그를 검색할 때 다음 과 같은 오류가 표시될 수 있습니다. 팟(Pod)에 장애가 발생하여 다시 로드 순환에서 벗어나지 못합니다.
 
 ```
 write-permission
@@ -185,6 +185,9 @@ Helm 차트를 사용하여 이미지를 배치하는 경우 init 컨테이너�
       name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:
@@ -327,8 +330,8 @@ Helm 차트를 사용하여 이미지를 배치하는 경우 init 컨테이너�
    ```
    {: pre}
 
-2. [{{site.data.keyword.Bluemix_notm}} Block Storage 플러그인의 최신 버전](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)을 사용하는지 확인하십시오. 그렇지 않은 경우에는 [플러그인을 업데이트](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)하십시오.
-3. 팟(Pod)에 대해 Kubernetes 배치를 사용한 경우 팟(Pod)을 제거하고 Kubernetes가 이를 다시 작성하도록 하여 실패한 팟(Pod)을 다시 시작하십시오. 배치를 사용하지 않은 경우, 다음 명령을 실행하여 팟(Pod)을 작성하는 데 사용된 YAML 파일을 검색하십시오. `kubectl get pod <pod_name> -o yaml >pod.yaml`. 그런 다음, 팟(Pod)을 삭제하고 수동으로 다시 작성하십시오.
+2. [{{site.data.keyword.Bluemix_notm}} Block Storage 플러그인의 최신 버전](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin)을 사용하는지 확인하십시오. 그렇지 않은 경우에는 [플러그인을 업데이트](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)하십시오.
+3. 팟(Pod)에 대해 Kubernetes 배치를 사용한 경우 팟(Pod)을 제거하고 Kubernetes가 이를 다시 작성하도록 하여 실패한 팟(Pod)을 다시 시작하십시오. 배치를 사용하지 않은 경우, `kubectl get pod <pod_name> -o yaml >pod.yaml`을 실행하여 팟(Pod)을 작성하는 데 사용된 YAML 파일을 검색하십시오. 그런 다음, 팟(Pod)을 삭제하고 수동으로 다시 작성하십시오.
     ```
       kubectl delete pod <pod_name>
     ```

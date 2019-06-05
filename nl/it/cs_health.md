@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -32,6 +32,8 @@ Configura la registrazione e il monitoraggio in {{site.data.keyword.containerlon
 
 Il monitoraggio continuo e la registrazione costituiscono la chiave per rilevare gli attacchi al tuo cluster e per risolvere i problemi nel momento in cui si verificano. Monitorando continuamente il tuo cluster, puoi meglio comprenderne la capacità e la disponibilità delle risorse disponibili per la tua applicazione. Con queste conoscenze, puoi prepararti a proteggere le tue applicazioni dai tempi di inattività. **Nota**: per configurare la registrazione e il monitoraggio, devi utilizzare un cluster standard in {{site.data.keyword.containerlong_notm}}.
 
+
+
 ## Scelta di una soluzione di registrazione
 {: #logging_overview}
 
@@ -42,25 +44,25 @@ Puoi scegliere la tua soluzione di registrazione in base ai componenti cluster p
 
 <dl>
 
+<dt>{{site.data.keyword.la_full_notm}}</dt>
+<dd>Gestisci i log del contenitore di pod distribuendo LogDNA come servizio di terze parti al tuo cluster. Per utilizzare {{site.data.keyword.la_full_notm}}, devi distribuire un agent di registrazione a ogni nodo di lavoro presente nel tuo cluster. Questo agent raccoglie i log con l'estensione `*.log` e i file senza estensione memorizzati nella directory `/var/log` del tuo pod da tutti gli spazi dei nomi, incluso `kube-system`. L'agent inoltra quindi i log al servizio {{site.data.keyword.la_full_notm}}. Per ulteriori informazioni sul servizio, vedi la documentazione di [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about). Per iniziare, vedi [Gestione dei log di cluster Kubernetes con {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</dd>
+
 <dt>Fluentd con {{site.data.keyword.loganalysisfull_notm}} o syslog</dt>
 <dd>Per raccogliere, inoltrare e visualizzare i log per un componente cluster, puoi creare una configurazione di registrazione utilizzando Fluentd. Quando crei una configurazione di registrazione, il componente aggiuntivo del cluster [Fluentd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.fluentd.org/) raccoglie i log dai percorsi relativi a un'origine specificata. Fluentd inoltra quindi questi log a {{site.data.keyword.loganalysisfull_notm}} o a un server syslog esterno.
 
-<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) espande le tue capacità di raccolta, conservazione e ricerca dei log. Quando crei una configurazione di registrazione che inoltra i log per un'origine a {{site.data.keyword.loganalysisfull_notm}}, puoi visualizzare i tuoi log in un dashboard Kibana.</li>
+<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) espande le tue capacità di raccolta, conservazione e ricerca dei log. Quando crei una configurazione di registrazione che inoltra i log per un'origine a {{site.data.keyword.loganalysisshort_notm}}, puoi visualizzare i tuoi log in un dashboard Kibana.<p class="deprecated">{{site.data.keyword.loganalysisfull_notm}} è obsoleto. A partire dal 30 aprile 2019, non puoi eseguire il provisioning di nuove istanze {{site.data.keyword.loganalysisshort_notm}} e tutte le istanze del piano Lite vengono eliminate. Le istanze del piano Premium esistenti sono supportate fino al 30 settembre 2019. Per continuare a raccogliere i log per il tuo cluster, puoi inoltrare i log raccolti da Fluentd a un server syslog esterno o configurare{{site.data.keyword.la_full_notm}}.</p></li>
 
 <li><strong>Server syslog esterno</strong>: configura un server esterno che accetta un protocollo syslog. Quindi, puoi creare una configurazione di registrazione per un'origine nel tuo cluster per inoltrare i log a tale server esterno.</li></ul>
 
 Per iniziare, vedi [Descrizione del cluster e inoltro del log dell'applicazione](#logging).
 </dd>
 
-<dt>{{site.data.keyword.la_full_notm}}</dt>
-<dd>Gestisci i log del contenitore di pod distribuendo LogDNA come servizio di terze parti al tuo cluster. Per utilizzare {{site.data.keyword.la_full_notm}}, devi distribuire un agent di registrazione a ogni nodo di lavoro presente nel tuo cluster. Questo agent raccoglie i log con l'estensione `*.log` e i file senza estensione memorizzati nella directory `/var/log` del tuo pod da tutti gli spazi dei nomi, incluso `kube-system`. L'agent inoltra quindi i log al servizio {{site.data.keyword.la_full_notm}}. Per ulteriori informazioni sul servizio, vedi la documentazione di [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about). Per iniziare, vedi [Gestione dei log di cluster Kubernetes con {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</dd>
-
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
 <dd>Per monitorare l'attività amministrativa avviata dall'utente nel tuo cluster, puoi raccogliere e inoltrare i log di controllo a {{site.data.keyword.cloudaccesstrailfull_notm}}. I cluster generano due tipi di eventi {{site.data.keyword.cloudaccesstrailshort}}.
 
 <ul><li>Gli eventi di gestione del cluster vengono generati e inoltrati automaticamente a {{site.data.keyword.cloudaccesstrailshort}}.</li>
 
-<li>Gli eventi di controllo del server API Kubernetes vengono generati automaticamente, ma devi [creare una configurazione di registrazione](#api_forward) affinché Fluentd possa inoltrare questi log a {{site.data.keyword.loganalysisshort}}. {{site.data.keyword.cloudaccesstrailshort}} estrae quindi questi log da {{site.data.keyword.loganalysisshort}}.</li></ul>
+<li>Gli eventi di controllo del server API Kubernetes vengono generati automaticamente, ma devi [creare una configurazione di registrazione](#api_forward) affinché Fluentd possa inoltrare questi log a {{site.data.keyword.cloudaccesstrailshort}}.</li></ul>
 
 Per ulteriori informazioni sui tipi di eventi {{site.data.keyword.containerlong_notm}} che puoi tracciare, vedi [Eventi Activity Tracker](/docs/containers?topic=containers-at_events). Per ulteriori informazioni sul servizio, vedi la documentazione di [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla).
 </dd>
@@ -69,15 +71,18 @@ Per ulteriori informazioni sui tipi di eventi {{site.data.keyword.containerlong_
 <dd>Per raccogliere, inoltrare e visualizzare i log per il master Kubernetes del tuo cluster, puoi eseguire in qualsiasi momento un'istantanea dei tuoi log master per raccoglierli in un bucket {{site.data.keyword.cos_full_notm}}. L'istantanea include tutto ciò che viene inviato tramite il server API, come la pianificazione di pod, le distribuzioni o le politiche RBAC. Per iniziare, vedi [Raccolta dei log master](#collect_master).</dd>
 
 <dt>Servizi di terze parti</dt>
-<dd>Se hai esigenze speciali, puoi configurare la tua propria soluzione di registrazione. Controlla i servizi di registrazione di terze parti che puoi aggiungere al tuo cluster in [Integrazioni di registrazione e monitoraggio](/docs/containers?topic=containers-integrations#health_services). Nei cluster che eseguono Kubernetes versione 1.11 o successiva, puoi raccogliere i log del contenitore dal percorso `/var/log/pods/`. Nei cluster che eseguono Kubernetes versione 1.10 o precedenti, puoi raccogliere i log del contenitore dal percorso `/var/lib/docker/containers/`.</dd>
+<dd>Se hai esigenze speciali, puoi configurare la tua propria soluzione di registrazione. Controlla i servizi di registrazione di terze parti che puoi aggiungere al tuo cluster in [Integrazioni di registrazione e monitoraggio](/docs/containers?topic=containers-supported_integrations#health_services). Nei cluster che eseguono Kubernetes versione 1.11 o successiva, puoi raccogliere i log del contenitore dal percorso `/var/log/pods/`. Nei cluster che eseguono Kubernetes versione 1.10 o precedenti, puoi raccogliere i log del contenitore dal percorso `/var/lib/docker/containers/`.</dd>
 
 </dl>
 
-## Descrizione del cluster e inoltro del log dell'applicazione
+## Descrizione del cluster e inoltro del log dell'applicazione a syslog
 {: #logging}
 
 Per impostazione predefinita, i log vengono raccolti dal componente aggiuntivo [Fluentd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.fluentd.org/) nel tuo cluster. Quando crei una configurazione di registrazione per un'origine nel tuo cluster, ad esempio un contenitore, i log che Fluentd raccoglie dai percorsi di tale origine vengono inoltrati a {{site.data.keyword.loganalysisshort_notm}} o a un server syslog esterno. Il traffico dall'origine al servizio di registrazione sulla porta di inserimento è crittografato.
 {: shortdesc}
+
+{{site.data.keyword.loganalysisfull_notm}} è obsoleto. A partire dal 30 aprile 2019, non puoi eseguire il provisioning di nuove istanze {{site.data.keyword.loganalysisshort_notm}} e tutte le istanze del piano Lite vengono eliminate. Le istanze del piano Premium esistenti sono supportate fino al 30 settembre 2019. Per continuare a raccogliere i log per il tuo cluster, puoi inoltrare i log raccolti da Fluentd a un server syslog esterno o configurare{{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 **Quali sono le origini per cui posso configurare l'inoltro dei log?**
 
@@ -91,7 +96,7 @@ Nella seguente immagine puoi vedere l'ubicazione delle origini per cui puoi conf
 
 2. `container`: informazioni che vengono registrate da un contenitore in esecuzione.</br>**Percorsi**: qualsiasi cosa scritta in `STDOUT` o `STDERR`.
 
-3. `application`: informazioni sugli eventi che si verificano a livello dell'applicazione. Potrebbe essere una notifica indicante che si è verificato un evento, ad esempio un accesso riuscito, un'avvertenza relativa all'archiviazione o altre operazioni che possono essere eseguite a livello dell'applicazione.</br>**Percorsi**: puoi impostare i percorsi a cui vengono inoltrati i tuoi log. Tuttavia, per poter inviare i log, devi utilizzare un percorso assoluto nella tua configurazione della registrazione altrimenti i log non potranno essere letti. Se il tuo percorso viene montato nel tuo nodo di lavoro, potresti aver creato un collegamento simbolico. Esempio: se il percorso specificato è `/usr/local/spark/work/app-0546/0/stderr` ma i log in realtà vanno a `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, i log non potranno essere letti.
+3. `application`: informazioni sugli eventi che si verificano a livello dell'applicazione. Potrebbe essere una notifica indicante che si è verificato un evento, ad esempio un accesso riuscito, un'avvertenza relativa all'archiviazione o altre operazioni che possono essere eseguite a livello dell'applicazione. </br>**Percorsi**: puoi impostare i percorsi a cui vengono inoltrati i tuoi log. Tuttavia, per poter inviare i log, devi utilizzare un percorso assoluto nella tua configurazione della registrazione altrimenti i log non potranno essere letti. Se il tuo percorso viene montato nel tuo nodo di lavoro, potresti aver creato un collegamento simbolico. Esempio: se il percorso specificato è `/usr/local/spark/work/app-0546/0/stderr` ma i log in realtà vanno a `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, i log non potranno essere letti.
 
 4. `storage`: informazioni sull'archiviazione persistente configurata nel tuo cluster. I log di archiviazione possono aiutarti a configurare dashboard e avvisi di determinazione dei problemi come parte delle tue release di produzione e pipeline DevOps. **Nota**: i percorsi`/var/log/kubelet.log` e `/var/log/syslog` contengono anche log di archiviazione, ma i log di questi percorsi vengono raccolti dalle origini log `kubernetes` e `worker`.</br>**Percorsi**:
     * `/var/log/ibmc-s3fs.log`
@@ -111,7 +116,7 @@ Nella seguente immagine puoi vedere l'ubicazione delle origini per cui puoi conf
 
 6. `kube-audit`: informazioni sulle azioni relative al cluster che vengono inviate al server API Kubernetes, inclusi l'ora, l'utente e la risorsa interessata.
 
-7. `ingress`: informazioni sul traffico di rete che entra in un cluster tramite l'ALB Ingress. Per informazioni di configurazione specifiche, controlla la [documentazione Ingress](/docs/containers?topic=containers-ingress_health#ingress_logs).</br>**Percorsi**:
+7. `ingress`: informazioni sul traffico di rete che entra in un cluster tramite l'ALB Ingress.</br>**Percorsi**:
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
@@ -140,7 +145,7 @@ La tabella riportata di seguito mostra le diverse opzioni a tua disposizione qua
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
-      <td>Il luogo in cui vuoi inoltrare i tuoi log. Le opzioni sono <code>ibm</code>, che inoltra i tuoi log a {{site.data.keyword.loganalysisshort_notm}} e <code>syslog</code>, che inoltra i log a un server esterno.</td>
+      <td>Il luogo in cui vuoi inoltrare i tuoi log. Le opzioni sono <code>ibm</code>, che inoltra i tuoi log a {{site.data.keyword.loganalysisshort_notm}} e <code>syslog</code>, che inoltra i log a un server esterno. <p class="deprecated">{{site.data.keyword.loganalysisfull_notm}} è obsoleto. Le istanze del piano Premium esistenti sono supportate fino al 30 settembre 2019. Inoltra i log a un server syslog esterno utilizzando <code>-- type syslog</code>.</td>
     </tr>
     <tr>
       <td><code><em>--namespace</em></code></td>
@@ -193,7 +198,7 @@ La tabella riportata di seguito mostra le diverse opzioni a tua disposizione qua
 
 **Sono responsabile dell'aggiornamento di Fluentd?**
 
-Per apportare modifiche alle configurazioni della registrazione o del filtraggio, la versione del componente aggiuntivo per la registrazione Fluentd deve essere la più recente. Per impostazione predefinita, gli aggiornamenti automatici per il componente aggiuntivo sono abilitati. Per disabilitare gli aggiornamenti automatici, vedi [Aggiornamento dei componenti aggiuntivi del cluster: Fluentd per la registrazione](/docs/containers?topic=containers-update#logging).
+Per apportare modifiche alle configurazioni della registrazione o del filtraggio, la versione del componente aggiuntivo per la registrazione Fluentd deve essere la più recente. Per impostazione predefinita, gli aggiornamenti automatici per il componente aggiuntivo sono abilitati. Per disabilitare gli aggiornamenti automatici, vedi [Aggiornamento dei componenti aggiuntivi del cluster: Fluentd per la registrazione](/docs/containers?topic=containers-update#logging-up).
 
 **Posso inoltrare solo alcuni log da un'origine nel mio cluster?**
 
@@ -206,11 +211,14 @@ Puoi inoltrare i log del contenitore da uno spazio dei nomi a uno spazio Cloud F
 <br />
 
 
-## Configurazione dell'inoltro dei log del cluster e dell'applicazione
+## Inoltro dei log del cluster e delle applicazioni a syslog
 {: #configuring}
 
 Puoi configurare la registrazione per i cluster standard {{site.data.keyword.containerlong_notm}} tramite la console o la CLI.
 {: shortdesc}
+
+{{site.data.keyword.loganalysisfull_notm}} è obsoleto. A partire dal 30 aprile 2019, non puoi eseguire il provisioning di nuove istanze {{site.data.keyword.loganalysisshort_notm}} e tutte le istanze del piano Lite vengono eliminate. Le istanze del piano Premium esistenti sono supportate fino al 30 settembre 2019. Per continuare a raccogliere i log per il tuo cluster, puoi inoltrare i log raccolti da Fluentd a un server syslog esterno o configurare{{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 ### Abilitazione dell'inoltro dei log con la console {{site.data.keyword.Bluemix_notm}}
 {: #enable-forwarding-ui}
@@ -223,7 +231,7 @@ Per creare una configurazione a livello di account, per uno specifico spazio dei
 
 Prima di iniziare, [crea](/docs/containers?topic=containers-clusters#clusters) o identifica un cluster standard da utilizzare.
 
-1. Accedi alla [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/containers-kubernetes/clusters) e passa a **Kubernetes > Cluster**.
+1. Accedi alla [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/kubernetes/clusters) e passa a **Kubernetes > Cluster**.
 2. Seleziona il tuo cluster standard e, dal campo **Log** della scheda **Panoramica**, fai clic su **Abilita**.
 3. Seleziona l'**Organizzazione Cloud Foundry** e lo **Spazio** da cui vuoi inoltrare i log. Quando configuri l'inoltro del log nel dashboard, i log vengono inviati all'endpoint {{site.data.keyword.loganalysisshort_notm}} predefinito del tuo cluster. Per inoltrare i log a un server esterno o a un altro endpoint {{site.data.keyword.loganalysisshort_notm}}, puoi utilizzare la CLI per configurare la registrazione.
 4. Seleziona le **Origini log** dalle quali vuoi inoltrare i log.
@@ -240,7 +248,65 @@ Puoi creare una configurazione per la registrazione cluster. Puoi differenziare 
 
 Prima di iniziare, [crea](/docs/containers?topic=containers-clusters#clusters) o identifica un cluster standard da utilizzare.
 
-**Inoltro dei log a IBM**
+**Inoltro dei log al tuo server sui protocolli `udp` o `tcp`**
+
+1. Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Editor** o **Amministratore**](/docs/containers?topic=containers-users#platform).
+
+2. Per il cluster in cui si trova l'origine log: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+3. Per inoltrare i log a syslog, configura un server che accetti un protocollo syslog in uno dei due seguenti modi:
+  * Configura e gestisci il tuo proprio server o utilizza un provider per gestirlo al tuo posto. Se un provider gestisce il server al tuo posto, richiama l'endpoint di registrazione dal provider di registrazione.
+
+  * Esegui syslog da un contenitore. Ad esempio, puoi utilizzare questo [file .yaml di distribuzione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) per recuperare un'immagine pubblica Docker che esegue un contenitore nel tuo cluster. L'immagine pubblica la porta `514` sull'indirizzo IP del cluster pubblico e utilizza questo indirizzo IP per configurare l'host syslog.
+
+  Puoi vedere i tuoi log come JSON validi rimuovendo i prefissi syslog.  Per eseguire tale operazione, aggiungi il seguente codice all'inizio del tuo file <code>etc/rsyslog.conf</code> in cui è in esecuzione il tuo server rsyslog: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+  {: tip}
+
+4. Crea una configurazione di inoltro dei log.
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ```
+    {: pre}
+
+</br></br>
+
+**Inoltro dei log al tuo server sul protocollo `tls`**
+
+I passi riportati di seguito sono istruzioni generali. Prima di utilizzare il contenitore in un ambiente di produzione, assicurati che vengano soddisfatti i requisiti di sicurezza necessari.
+{: tip}
+
+1. Assicurati di avere i seguenti [ruoli {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform):
+    * Ruolo della piattaforma **Editor** o **Amministratore** per il cluster
+    * Ruolo del servizio **Scrittore** o **Gestore** per lo spazio dei nomi `kube-system`
+
+2. Per il cluster in cui si trova l'origine log: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+3. Imposta un server che accetti un protocollo syslog in uno dei due seguenti modi:
+  * Configura e gestisci il tuo proprio server o utilizza un provider per gestirlo al tuo posto. Se un provider gestisce il server al tuo posto, richiama l'endpoint di registrazione dal provider di registrazione.
+
+  * Esegui syslog da un contenitore. Ad esempio, puoi utilizzare questo [file .yaml di distribuzione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) per recuperare un'immagine pubblica Docker che esegue un contenitore nel tuo cluster. L'immagine pubblica la porta `514` sull'indirizzo IP del cluster pubblico e utilizza questo indirizzo IP per configurare l'host syslog. Devi inserire l'autorità di certificazione (CA, certificate authority) pertinente e i certificati del lato server e aggiornare il file `syslog.conf` per abilitare `tls`
+sul tuo server.
+
+4. Salva il tuo certificato dell'autorità di certificazione (CA, certificate authority) in un file denominato `ca-cert`. Deve essere esattamente questo nome.
+
+5. Crea un segreto nello spazio dei nomi `kube-system` per il file `ca-cert`. Quando crei la tua configurazione di registrazione, utilizzerai il nome del segreto per l'indicatore `--ca-cert`.
+    ```
+    kubectl -n kube-system create secret generic --from-file=ca-cert
+    ```
+    {: pre}
+
+6. Crea una configurazione di inoltro dei log.
+    ```
+    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
+    ```
+    {: pre}
+
+</br></br>
+
+**Inoltro dei log a {{site.data.keyword.loganalysisfull_notm}}**
+
+{{site.data.keyword.loganalysisfull_notm}} è obsoleto. A partire dal 30 aprile 2019, non puoi eseguire il provisioning di nuove istanze {{site.data.keyword.loganalysisshort_notm}} e tutte le istanze del piano Lite vengono eliminate. Le istanze del piano Premium esistenti sono supportate fino al 30 settembre 2019. Per continuare a raccogliere i log per il tuo cluster, puoi inoltrare i log raccolti da Fluentd a un server syslog esterno o configurare{{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 1. Verifica le autorizzazioni.
     1. Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Editor** o **Amministratore**](/docs/containers?topic=containers-users#platform).
@@ -256,10 +322,7 @@ Prima di iniziare, [crea](/docs/containers?topic=containers-clusters#clusters) o
           ```
           {: pre}
 
-2.  Per il cluster standard in cui si trova l'origine log: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-
-    Se utilizzi un account dedicato, devi accedere all'endpoint {{site.data.keyword.cloud_notm}} pubblico e specificare come destinazione la tua organizzazione e il tuo spazio pubblici per abilitare l'inoltro dei log.
-    {: tip}
+2.  Per il cluster standard in cui si trova l'origine log: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 3. Crea una configurazione di inoltro dei log.
     ```
@@ -292,67 +355,7 @@ Prima di iniziare, [crea](/docs/containers?topic=containers-clusters#clusters) o
 Se hai applicazioni eseguite nei tuoi contenitori che non possono essere configurate per scrivere i log in STDOUT o STDERR, puoi creare una configurazione di registrazione per inoltrare i log dai file di log dell'applicazione.
 {: tip}
 
-</br>
-</br>
-
-
-**Inoltro dei log al tuo server sui protocolli `udp` o `tcp`**
-
-1. Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Editor** o **Amministratore**](/docs/containers?topic=containers-users#platform).
-
-2. Per il cluster in cui si trova l'origine log: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Nota**: se utilizzi un account dedicato, devi accedere all'endpoint {{site.data.keyword.cloud_notm}} pubblico e specificare come destinazione la tua organizzazione e il tuo spazio pubblici per abilitare l'inoltro dei log.
-
-3. Per inoltrare i log a syslog, configura un server che accetti un protocollo syslog in uno dei due seguenti modi:
-  * Configura e gestisci il tuo proprio server o utilizza un provider per gestirlo al tuo posto. Se un provider gestisce il server al tuo posto, richiama l'endpoint di registrazione dal provider di registrazione.
-
-  * Esegui syslog da un contenitore. Ad esempio, puoi utilizzare questo [file .yaml di distribuzione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) per recuperare un'immagine pubblica Docker che esegue un contenitore nel tuo cluster. L'immagine pubblica la porta `514` sull'indirizzo IP del cluster pubblico e utilizza questo indirizzo IP per configurare l'host syslog.
-
-  Puoi vedere i tuoi log come JSON validi rimuovendo i prefissi syslog. Per eseguire tale operazione, aggiungi il seguente codice all'inizio del tuo file <code>etc/rsyslog.conf</code> in cui è in esecuzione il tuo server rsyslog: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
-  {: tip}
-
-4. Crea una configurazione di inoltro dei log.
-    ```
-    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
-    ```
-    {: pre}
-
-</br>
-</br>
-
-
-**Inoltro dei log al tuo server sul protocollo `tls`**
-
-I passi riportati di seguito sono istruzioni generali. Prima di utilizzare il contenitore in un ambiente di produzione, assicurati che vengano soddisfatti i requisiti di sicurezza necessari.
-{: tip}
-
-1. Assicurati di avere i seguenti [ruoli {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform):
-    * Ruolo della piattaforma **Editor** o **Amministratore** per il cluster
-    * Ruolo del servizio **Scrittore** o **Gestore** per lo spazio dei nomi `kube-system`
-
-2. Per il cluster in cui si trova l'origine log: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Nota**: se utilizzi un account dedicato, devi accedere all'endpoint {{site.data.keyword.cloud_notm}} pubblico e specificare come destinazione la tua organizzazione e il tuo spazio pubblici per abilitare l'inoltro dei log.
-
-3. Imposta un server che accetti un protocollo syslog in uno dei due seguenti modi:
-  * Configura e gestisci il tuo proprio server o utilizza un provider per gestirlo al tuo posto. Se un provider gestisce il server al tuo posto, richiama l'endpoint di registrazione dal provider di registrazione.
-
-  * Esegui syslog da un contenitore. Ad esempio, puoi utilizzare questo [file .yaml di distribuzione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) per recuperare un'immagine pubblica Docker che esegue un contenitore nel tuo cluster. L'immagine pubblica la porta `514` sull'indirizzo IP del cluster pubblico e utilizza questo indirizzo IP per configurare l'host syslog. Dovrai inserire l'autorità di certificazione (CA, certificate authority) pertinente e i certificati del lato server e aggiornare il file `syslog.conf` per abilitare `tls` sul tuo server.
-
-4. Salva il tuo certificato dell'autorità di certificazione (CA, certificate authority) in un file denominato `ca-cert`. Deve essere esattamente questo nome.
-
-5. Crea un segreto nello spazio dei nomi `kube-system` per il file `ca-cert`. Quando crei la tua configurazione di registrazione, utilizzerai il nome del segreto per l'indicatore `--ca-cert`.
-    ```
-    kubectl -n kube-system create secret generic --from-file=ca-cert
-    ```
-    {: pre}
-
-6. Crea una configurazione di inoltro dei log.
-    ```
-    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
-    ```
-    {: pre}
-
-</br>
-</br>
-
+</br></br>
 
 ### Verifica dell'inoltro dei log
 {: verify-logging}
@@ -394,14 +397,16 @@ Puoi aggiornare una configurazione di registrazione che hai già creato.
 Puoi arrestare l'inoltro dei log eliminando una o tutte le configurazioni di registrazione per un cluster.
 {: shortdesc}
 
-1. Per il cluster in cui si trova l'origine log: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+1. Per il cluster in cui si trova l'origine log: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. Elimina la configurazione di registrazione.
   <ul>
   <li>Per eliminare una configurazione di registrazione:</br>
-    <pre><code>ibmcloud ks logging-config-rm --cluster &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
+
+<pre><code>ibmcloud ks logging-config-rm --cluster &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
   <li>Per eliminare tutte le configurazioni di registrazione:</br>
-    <pre><code>ibmcloud ks logging-config-rm --cluster <my_cluster> --all</pre></code></li>
+
+<pre><code>ibmcloud ks logging-config-rm --cluster <my_cluster> --all</pre></code></li>
   </ul>
 
 </br>
@@ -439,7 +444,7 @@ STDOUT e STDERR standard. Per ulteriori informazioni, vedi [Visualizzazione dei 
 <br />
 
 
-## Filtraggio dei log
+## Filtraggio di log inoltrati al syslog
 {: #filter-logs}
 
 Puoi scegliere quali log inoltrare filtrando specifici log per un periodo di tempo. Puoi differenziare tra le diverse opzioni di filtraggio usando gli indicatori.
@@ -524,32 +529,30 @@ Puoi scegliere quali log inoltrare filtrando specifici log per un periodo di tem
 
 
 
-## Configurazione dell'inoltro del log per i log di controllo dell'API Kubernetes
+## Inoltro dei log di controllo dell'API Kubernetes a {{site.data.keyword.cloudaccesstrailfull_notm}} o syslog
 {: #api_forward}
 
-Kubernetes controlla automaticamente tutti gli eventi trasmessi tramite il tuo server API Kubernetes. Puoi inoltrare gli eventi a {{site.data.keyword.loganalysisshort_notm}} o a un server esterno.
+Kubernetes controlla automaticamente tutti gli eventi trasmessi tramite il tuo server API Kubernetes. Puoi inoltrare gli eventi a {{site.data.keyword.cloudaccesstrailfull_notm}} o a un server esterno.
 {: shortdesc}
-
 
 Per ulteriori informazioni sui log di controllo Kubernetes, consulta l'<a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">argomento di controllo <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> nella documentazione Kubernetes.
 
 * Al momento, viene utilizzata una politica di controllo predefinita per tutti i cluster con questa configurazione di registrazione.
 * Al momento, i filtri non sono supportati.
-* Può essere presente solo una configurazione `kube-audit` per cluster, ma puoi inoltrare i log a {{site.data.keyword.loganalysisshort_notm}} e a un server esterno creando una configurazione di registrazione e un webhook.
+* Può essere presente solo una configurazione `kube-audit` per cluster, ma puoi inoltrare i log a {{site.data.keyword.cloudaccesstrailshort}} e a un server esterno creando una configurazione di registrazione e un webhook.
 * Devi disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Amministratore**](/docs/containers?topic=containers-users#platform) per il cluster.
 
-
-### Invio dei log di controllo a {{site.data.keyword.loganalysisshort_notm}}
+### Inoltro dei log di controllo a {{site.data.keyword.cloudaccesstrailfull_notm}}
 {: #audit_enable_loganalysis}
 
-Puoi inoltrare i tuoi log di controllo del server API Kubernetes a {{site.data.keyword.loganalysisshort_notm}}.
+Puoi inoltrare i tuoi log di controllo del server API Kubernetes a {{site.data.keyword.cloudaccesstrailfull_notm}}.
 {: shortdesc}
 
 **Prima di iniziare**
 
-1. Verifica le autorizzazioni. Se hai specificato uno spazio quando hai creato il cluster o la configurazione di registrazione, sia il proprietario dell'account che il proprietario della chiave {{site.data.keyword.containerlong_notm}} necessitano delle autorizzazioni di Gestore, Sviluppatore o Revisore in quello spazio.
+1. Verifica le autorizzazioni. Se hai specificato uno spazio quando hai creato il cluster, sia il proprietario dell'account che il proprietario della chiave {{site.data.keyword.containerlong_notm}} necessitano delle autorizzazioni di Gestore, Sviluppatore o Revisore in quello spazio.
 
-2. Per il cluster da cui vuoi raccogliere i log di controllo del server API: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Nota**: se utilizzi un account dedicato, devi accedere all'endpoint {{site.data.keyword.cloud_notm}} pubblico e specificare come destinazione la tua organizzazione e il tuo spazio pubblici per abilitare l'inoltro dei log.
+2. Per il cluster da cui vuoi raccogliere i log di controllo del server API: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Inoltro dei log**
 
@@ -619,18 +622,14 @@ Puoi inoltrare i tuoi log di controllo del server API Kubernetes a {{site.data.k
 
 3. Facoltativo: se vuoi arrestare l'inoltro dei log di controllo, puoi [eliminare la tua configurazione](#log_sources_delete).
 
-<br />
-
-
-
-### Invio dei log di controllo a un server esterno
+### Inoltro dei log di controllo a un server syslog esterno
 {: #audit_enable}
 
 **Prima di iniziare**
 
 1. Configura un server di registrazione remoto dove puoi inoltrare i log. Ad esempio, puoi [utilizzare Logstash con Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend) per raccogliere gli eventi di controllo.
 
-2. Per il cluster da cui vuoi raccogliere i log di controllo del server API: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Nota**: se utilizzi un account dedicato, devi accedere all'endpoint {{site.data.keyword.cloud_notm}} pubblico e specificare come destinazione la tua organizzazione e il tuo spazio pubblici per abilitare l'inoltro dei log.
+2. Per il cluster da cui vuoi raccogliere i log di controllo del server API: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Per inoltrare i log di controllo dell'API Kubernetes:
 
@@ -692,7 +691,7 @@ Per inoltrare i log di controllo dell'API Kubernetes:
     {: pre}
 
 4. Facoltativo: se vuoi arrestare l'inoltro dei log di controllo, puoi disabilitare la tua configurazione.
-    1. Per il cluster da cui vuoi interrompere la raccolta dei log di controllo del server API: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+    1. Per il cluster da cui vuoi interrompere la raccolta dei log di controllo del server API: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
     2. Disabilita la configurazione back-end webhook per il server API del cluster.
 
         ```
@@ -710,7 +709,7 @@ Per inoltrare i log di controllo dell'API Kubernetes:
 <br />
 
 
-## Raccolta dei log master
+## Raccolta dei log master in un bucket di {{site.data.keyword.cos_full_notm}}
 {: #collect_master}
 
 Con {{site.data.keyword.containerlong_notm}}, puoi eseguire in qualsiasi momento un'istantanea dei tuoi log master per raccoglierli in un bucket {{site.data.keyword.cos_full_notm}}. L'istantanea include tutto ciò che viene inviato tramite il server API, come la pianificazione di pod, le distribuzioni o le politiche RBAC.
@@ -720,12 +719,12 @@ Poiché i log del server API Kubernetes vengono trasmessi automaticamente, vengo
 
 **Prima di iniziare**
 
-* [Esegui il provisioning di un'istanza](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-for-developers#provision-an-instance-of-ibm-cloud-object-storage) di {{site.data.keyword.cos_short}} dal catalogo {{site.data.keyword.Bluemix_notm}}.
+* [Esegui il provisioning di un'istanza](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) di {{site.data.keyword.cos_short}} dal catalogo {{site.data.keyword.Bluemix_notm}}.
 * Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Amministratore**](/docs/containers?topic=containers-users#platform) per il cluster.
 
 **Creazione di un'istantanea**
 
-1. Crea un bucket di Object Storage tramite la console {{site.data.keyword.Bluemix_notm}} seguendo [questa esercitazione introduttiva](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started-console-#create-buckets).
+1. Crea un bucket di Object Storage tramite la console {{site.data.keyword.Bluemix_notm}} seguendo [questa esercitazione introduttiva](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets).
 
 2. Genera le [credenziali del servizio HMAC](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials) nel bucket che hai creato.
   1. Nella scheda **Credenziali del servizio** del dashboard {{site.data.keyword.cos_short}}, fai clic su **Nuova credenziale**.
@@ -798,35 +797,34 @@ vai al tuo **Dashboard {{site.data.keyword.Bluemix_notm}}** e seleziona un clust
 accedere al tuo dashboard Kubernetes, consulta [Avvio del dashboard Kubernetes per {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>Le metriche per i cluster standard si trovano nell'account {{site.data.keyword.Bluemix_notm}} a cui è stato effettuato l'accesso quando è stato creato il cluster Kubernetes. Se quando hai creato il cluster hai specificato uno spazio {{site.data.keyword.Bluemix_notm}}, le metriche si trovano in quello spazio. Le metriche di contenitore sono raccolte automaticamente per tutti i contenitori distribuiti in un cluster. Queste metriche vengono inviate e rese disponibili tramite Grafana. Per ulteriori informazioni sulle metriche, vedi [Monitoraggio per il {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
-    <p>Per accedere al dashboard Grafana, vai a uno dei seguenti URL e seleziona l'account o lo spazio {{site.data.keyword.Bluemix_notm}} in cui hai creato il cluster.</p> <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le righe rimanenti devono essere lette da sinistra a destra, con la zona server nella colonna uno e gli indirizzi IP corrispondenti nella colonna due.">
-  <caption>Gli indirizzi IP da aprire per il traffico di monitoraggio</caption>
-        <thead>
-        <th>Regione {{site.data.keyword.containerlong_notm}}</th>
-        <th>Indirizzo di monitoraggio</th>
-        <th>Sottoreti di monitoraggio</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>Europa Centrale</td>
-         <td><code>metrics.eu-de.bluemix.net</code></td>
-         <td><code>158.177.65.80/30</code></td>
-        </tr>
-        <tr>
-         <td>Regno Unito Sud</td>
-         <td><code>metrics.eu-gb.bluemix.net</code></td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>Stati Uniti Est, Stati Uniti Sud, Asia Pacifico Nord, Asia Pacifico Sud</td>
-          <td><code>metrics.ng.bluemix.net</code></td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
- </dd>
+    <p>Per accedere al dashboard Grafana, vai a uno dei seguenti URL e seleziona l'account o lo spazio {{site.data.keyword.Bluemix_notm}} in cui hai creato il cluster.</p>
+    <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le righe rimanenti devono essere lette da sinistra a destra, con la zona server nella colonna uno e gli indirizzi IP corrispondenti nella colonna due.">
+      <caption>Gli indirizzi IP da aprire per il traffico di monitoraggio</caption>
+            <thead>
+            <th>Regione {{site.data.keyword.containerlong_notm}}</th>
+            <th>Indirizzo di monitoraggio</th>
+            <th>Sottoreti di monitoraggio</th>
+            </thead>
+          <tbody>
+            <tr>
+             <td>Europa Centrale</td>
+             <td><code>metrics.eu-de.bluemix.net</code></td>
+             <td><code>158.177.65.80/30</code></td>
+            </tr>
+            <tr>
+             <td>Regno Unito Sud</td>
+             <td><code>metrics.eu-gb.bluemix.net</code></td>
+             <td><code>169.50.196.136/29</code></td>
+            </tr>
+            <tr>
+              <td>Stati Uniti Est, Stati Uniti Sud, Asia Pacifico Nord, Asia Pacifico Sud</td>
+              <td><code>metrics.ng.bluemix.net</code></td>
+              <td><code>169.47.204.128/29</code></td>
+             </tr>
+            </tbody>
+          </table> </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Ottieni visibilità operativa sulle prestazioni e sull'integrità delle tue applicazioni distribuendo Sysdig come servizio di terze parti ai tuoi nodi di lavoro per inoltrare le metriche a {{site.data.keyword.monitoringlong}}. Per ulteriori informazioni, vedi [Analizza le metriche per un'applicazione distribuita in un cluster Kubernetes](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). **Nota**: {{site.data.keyword.mon_full_notm}} non supporta il runtime del contenitore `containerd`. Se usi {{site.data.keyword.mon_full_notm}} con i cluster della versione 1.11 o successive, non vengono raccolte tutte le metriche del contenitore.</dd>
+  <dd>Ottieni visibilità operativa sulle prestazioni e sull'integrità delle tue applicazioni distribuendo Sysdig come servizio di terze parti ai tuoi nodi di lavoro per inoltrare le metriche a {{site.data.keyword.monitoringlong}}. Per ulteriori informazioni, vedi [Analizza le metriche per un'applicazione distribuita in un cluster Kubernetes](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
 </dl>
 
 ### Altri strumenti di monitoraggio dell'integrità
@@ -835,7 +833,8 @@ accedere al tuo dashboard Kubernetes, consulta [Avvio del dashboard Kubernetes p
 Puoi configurare altri strumenti per ulteriori funzionalità di monitoraggio.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus è uno strumento di monitoraggio, registrazione e avviso open source progettato per Kubernetes. Lo strumento recupera informazioni dettagliate sul cluster, sui nodi di lavoro e sull'integrità della distribuzione in base alle informazioni di registrazione di Kubernetes. Per le informazioni di configurazione, consulta [Integrazione dei servizi con {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#integrations).</dd>
+    <dd>Prometheus è uno strumento di monitoraggio, registrazione e avviso open source progettato per Kubernetes. Lo strumento richiama informazioni dettagliate sul cluster, sui nodi di lavoro e sull'integrità della distribuzione in base alle informazioni di registrazione di Kubernetes. Per informazioni sulla configurazione, vedi le [istruzioni CoreOS
+![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus).</dd>
 </dl>
 
 <br />
@@ -854,21 +853,19 @@ Prima di iniziare:
 - Assicurati di avere i seguenti [ruoli {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform):
     - Ruolo della piattaforma **Amministratore** per il cluster
     - Ruolo del servizio **Scrittore** o **Gestore** per lo spazio dei nomi `kube-system`
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Per configurare Autorecovery:
 
-1.  [Segui le istruzioni](/docs/containers?topic=containers-integrations#helm) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) con un account di servizio e aggiungere il repository Helm {{site.data.keyword.Bluemix_notm}}.
+1.  [Segui le istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) con un account di servizio e aggiungere il repository Helm {{site.data.keyword.Bluemix_notm}}.
 
 2.  Verifica che tiller sia installato con un account di servizio.
-
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
     {: pre}
 
     Output di esempio:
-
     ```
     NAME                                 SECRETS   AGE
     tiller                               1         2m
@@ -997,7 +994,7 @@ Per configurare Autorecovery:
    <td>Immetti il numero massimo di secondi impiegati da una chiamata di controllo al database prima che Autorecovery termini l'operazione di chiamata. Il valore per <code>TimeoutSeconds</code> deve essere inferiore al valore per <code>IntervalSeconds</code>.</td>
    </tr>
    <tr>
-   <td><code>Porta</code></td>
+   <td><code>Port</code></td>
    <td>Quando il tipo di controllo è <code>HTTP</code>, immetti la porta a cui deve essere associato il server HTTP sui nodi di lavoro. Questa porta deve essere esposta sull'IP di ogni nodo di lavoro nel cluster. Autorecovery richiede un numero di porta costante tra tutti i nodi per il controllo dei server. Utilizza le [serie di daemon ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) quando distribuisci un server personalizzato in un cluster.</td>
    </tr>
    <tr>
@@ -1013,43 +1010,42 @@ Per configurare Autorecovery:
    <td>Immetti <code>true</code> per abilitare il controllo o <code>false</code> per disabilitarlo.</td>
    </tr>
    <tr>
-   <td><code>Spazio dei nomi</code></td>
+   <td><code>Namespace</code></td>
    <td> Facoltativo: per limitare <code>checkpod.json</code> al controllo dei soli pod presenti in uno spazio dei nomi, aggiungi il campo <code>Spazio dei nomi</code> e immetti lo spazio dei nomi.</td>
    </tr>
    </tbody>
    </table>
 
 4. Crea la mappa di configurazione nel tuo cluster.
-
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
 5. Verifica di aver creato la mappa di configurazione con il nome `ibm-worker-recovery-checks` nello spazio dei nomi `kube-system` con i controlli appropriati.
-
     ```
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
 6. Distribuisci Autorecovery nel tuo cluster installando il grafico Helm `ibm-worker-recovery`.
-
     ```
-    helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
+    helm install --name ibm-worker-recovery iks-charts/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
 7. Dopo alcuni minuti, puoi controllare la sezione `Events` nell'output del seguente comando per visualizzare l'attività sulla distribuzione di Autorecovery.
-
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
-8. Se non stai visualizzando dell'attività nella distribuzione di Autorecovery, puoi controllare la distribuzione Helm eseguendo i test inclusi nella definizione del grafico di Autorecovery.
-
+8. Se non visualizzi l'attività nella distribuzione di Autorecovery, puoi controllare la distribuzione Helm eseguendo i test inclusi nella definizione del grafico di Autorecovery.
     ```
     helm test ibm-worker-recovery
     ```
     {: pre}
+
+
+
+

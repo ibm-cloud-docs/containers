@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, helm
 
@@ -168,7 +168,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td>您可以使用 <a href="/docs/services/certificate-manager?topic=certificate-manager-gettingstarted" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來儲存及管理應用程式的 SSL 憑證。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">使用 {{site.data.keyword.cloudcerts_long_notm}} 與 {{site.data.keyword.containerlong_notm}} 搭配來部署自訂網域 TLS 憑證 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+<td>您可以使用 <a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來儲存及管理應用程式的 SSL 憑證。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">使用 {{site.data.keyword.cloudcerts_long_notm}} 與 {{site.data.keyword.containerlong_notm}} 搭配來部署自訂網域 TLS 憑證 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}}（測試版）</td>
@@ -176,7 +176,7 @@ subcollection: containers
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>設定您自己的安全 Docker 映像檔儲存庫，您可以在其中安全地儲存映像檔，以及在叢集使用者之間共用映像檔。如需相關資訊，請參閱 <a href="/docs/services/Registry?topic=registry-index" target="_blank">{{site.data.keyword.registrylong}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+  <td>設定您自己的安全 Docker 映像檔儲存庫，您可以在其中安全地儲存映像檔，以及在叢集使用者之間共用映像檔。如需相關資訊，請參閱 <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -214,7 +214,7 @@ subcollection: containers
 </tr>
 <tr>
   <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#GettingStarted) 是一種持續性的高效能 iSCSI 儲存空間，可以使用 Kubernetes 持續性磁區 (PV) 將其新增至應用程式。使用區塊儲存空間以在單一區域中部署有狀態應用程式，或作為單一 Pod 的高效能儲存空間。如需如何在叢集中佈建區塊儲存空間的相關資訊，請參閱[在 {{site.data.keyword.Bluemix_notm}} Block Storage 上儲存資料](/docs/containers?topic=containers-block_storage#block_storage)</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) 是一種持續性的高效能 iSCSI 儲存空間，可以使用 Kubernetes 持續性磁區 (PV) 將其新增至應用程式。使用區塊儲存空間以在單一區域中部署有狀態應用程式，或作為單一 Pod 的高效能儲存空間。如需如何在叢集中佈建區塊儲存空間的相關資訊，請參閱[在 {{site.data.keyword.Bluemix_notm}} Block Storage 上儲存資料](/docs/containers?topic=containers-block_storage#block_storage)</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -222,7 +222,7 @@ subcollection: containers
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-gettingstarted#gettingstarted) 是一種持續性、快速且具彈性的網路連結的 NFS 型檔案儲存空間，可以使用 Kubernetes 持續性磁區將其新增至應用程式。您可以選擇具有 GB 大小及 IOPS 符合工作負載需求的預先定義儲存空間層級。如需如何在叢集中佈建檔案儲存空間的相關資訊，請參閱[在 {{site.data.keyword.Bluemix_notm}} File Storage 上儲存資料](/docs/containers?topic=containers-file_storage#file_storage)。</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) 是一種持續性、快速且具彈性的網路連結的 NFS 型檔案儲存空間，可以使用 Kubernetes 持續性磁區將其新增至應用程式。您可以選擇具有 GB 大小及 IOPS 符合工作負載需求的預先定義儲存空間層級。如需如何在叢集中佈建檔案儲存空間的相關資訊，請參閱[在 {{site.data.keyword.Bluemix_notm}} File Storage 上儲存資料](/docs/containers?topic=containers-file_storage#file_storage)。</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -709,7 +709,7 @@ subcollection: containers
 4.  驗證安裝已成功。
     1.  驗證已建立 Tiller 服務帳戶。
         ```
-        kubectl get serviceaccount -n kube-system | grep tiller
+        kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
 
@@ -748,8 +748,8 @@ subcollection: containers
 
 6. 更新儲存庫，以擷取所有 Helm 圖表的最新版本。
    ```
-   helm repo update
-   ```
+    helm repo update
+    ```
    {: pre}
 
 7. 列出 {{site.data.keyword.Bluemix_notm}} 儲存庫中目前可用的 Helm 圖表。
@@ -880,8 +880,8 @@ subcollection: containers
 
 4. 更新儲存庫，以擷取所有 Helm 圖表的最新版本。
    ```
-   helm repo update
-   ```
+    helm repo update
+    ```
    {: pre}
 
 5. 列出 {{site.data.keyword.Bluemix_notm}} 儲存庫中目前可用的 Helm 圖表。
@@ -951,7 +951,7 @@ subcollection: containers
 {: #helm_links}
 
 * 若要使用 strongSwan Helm 圖表，請參閱[使用 strongSwan IPSec VPN 服務 Helm 圖表設定 VPN 連線功能](/docs/containers?topic=containers-vpn#vpn-setup)。
-* 在主控台的 [Helm 圖表型錄 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts) 中，檢視您可以與 {{site.data.keyword.Bluemix_notm}} 搭配使用的可用 Helm 圖表。
+* 在主控台的 [Helm 圖表型錄 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) 中，檢視您可以與 {{site.data.keyword.Bluemix_notm}} 搭配使用的可用 Helm 圖表。
 * 進一步瞭解 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 中有關用來設定及管理 Helm 圖表的 Helm 指令。
 * 進一步瞭解如何[使用 Kubernetes Helm 圖表來加快部署 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/)。
 

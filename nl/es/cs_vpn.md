@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,7 @@ Para conectar de forma segura sus nodos trabajadores y apps a un centro de datos
 - **Servicio VPN IPSec de strongSwan**: puede configurar un [servicio VPN IPSec de strongSwan ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.strongswan.org/about.html) que se conecte de forma segura al clúster de Kubernetes con una red local. El servicio VPN IPSec de strongSwan proporciona un canal de comunicaciones de extremo a extremo seguro sobre Internet que está basado en la suite de protocolos
 Internet Protocol Security (IPSec) estándar del sector. Para configurar una conexión segura entre el clúster y una red local, [configure y despliegue el servicio VPN IPSec strongSwan](#vpn-setup) directamente en un pod del clúster.
 
-- **Virtual Router Appliance (VRA) o Fortigate Security Appliance (FSA)**: Podría elegir entre configurar un [VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o un [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) para configurar un punto final de VPN IPSec. Esta opción es útil si tiene un clúster grande, desea acceder a varios clústeres sobre una sola VPN o necesita una VPN basada en ruta. Para configurar VRA, consulte [Configuración de la conectividad de VPN con VRA](#vyatta).
+- **Virtual Router Appliance (VRA) o Fortigate Security Appliance (FSA)**: Podría elegir entre configurar un [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o un [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) para configurar un punto final de VPN IPSec. Esta opción es útil si tiene un clúster grande, desea acceder a varios clústeres sobre una sola VPN o necesita una VPN basada en ruta. Para configurar VRA, consulte [Configuración de la conectividad de VPN con VRA](#vyatta).
 
 ## Utilización del diagrama de Helm del servicio VPN IPSec de strongSwan
 {: #vpn-setup}
@@ -45,7 +45,7 @@ Utilice un diagrama de Helm para configurar y desplegar el servicio VPN IPSec de
 
 Puesto que strongSwan está integrado en su clúster, no necesita un dispositivo de pasarela externo. Cuando se establece una conectividad de VPN, las rutas se configuran automáticamente en todos los nodos trabajadores del clúster. Estas rutas permiten la conectividad bidireccional a través del túnel VPN entre pods en cualquier nodo trabajador y el sistema remoto. Por ejemplo, en el diagrama siguiente se muestra cómo una app en {{site.data.keyword.containerlong_notm}} puede comunicarse con un servidor local a través de una conexión VPN strongSwan:
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="Exponer una app en {{site.data.keyword.containerlong_notm}} mediante un equilibrador de carga" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="Exponer una app en {{site.data.keyword.containerlong_notm}} utilizando un equilibrador de carga de red (NLB)" style="width:700px; border-style: none"/>
 
 1. Una app en el clúster, `myapp`, recibe una solicitud desde un servicio Ingress o LoadBalancer. Dicha app debe conectarse de forma segura a los datos en su red local.
 
@@ -69,7 +69,7 @@ Antes de utilizar el diagrama de Helm strongSwan, revise las siguientes consider
 * El diagrama de Helm strongSwan no permite que varios clústeres y otros recursos de IaaS compartan una sola conexión VPN.
 * El diagrama de Helm strongSwan se ejecuta como una pod de Kubernetes dentro del clúster. El rendimiento de VPN se ve afectado por el uso de memoria y de red por parte de Kubernetes y de otros pods que se ejecuten en el clúster. Si tiene un entorno en el que el rendimiento sea un factor clave, tenga en cuenta la posibilidad de utilizar una solución VPN que se ejecute fuera del clúster en hardware dedicado.
 * El diagrama de Helm strongSwan ejecuta un solo pod de VPN como punto final de túnel IPSec. Si el pod falla, el clúster reinicia el pod. Sin embargo, puede experimentar un breve periodo de tiempo mientras se inicia el nuevo pod y se restablece la conexión VPN. Si necesita una recuperación de errores más rápida o una solución de alta disponibilidad más elaborada, tenga en cuenta la posibilidad de utilizar una solución VPN que se ejecute fuera del clúster en hardware dedicado.
-* El diagrama de Helm strongSwan no proporciona métricas ni supervisión del tráfico de red que fluye a través de la conexión VPN. Para ver una lista de las herramientas de supervisión a las que se da soporte, consulte [Servicios de registro y de supervisión](/docs/containers?topic=containers-integrations#health_services).
+* El diagrama de Helm strongSwan no proporciona métricas ni supervisión del tráfico de red que fluye a través de la conexión VPN. Para ver una lista de las herramientas de supervisión a las que se da soporte, consulte [Servicios de registro y de supervisión](/docs/containers?topic=containers-supported_integrations#health_services).
 
 <br />
 
@@ -104,7 +104,7 @@ Cuando la conexión VPN es de salida del clúster multizona, solo se necesita un
 1. [Configurar un diagrama de Helm de VPN de strongSwan](/docs/containers?topic=containers-vpn#vpn_configure). Cuando siga los pasos de dicha sección, asegúrese de especificar los valores siguientes:
     - `ipsec.auto`: Cambie su valor por `start`. Las conexiones son de salida del clúster.
     - `loadBalancerIP`: No especifique una dirección IP. Deje este valor en blanco.
-    - `zoneLoadBalancer`: Especifique una dirección IP pública del equilibrador de carga para cada zona en la que tenga nodos trabajadores. [Puede comprobar las direcciones IP públicas disponibles](/docs/containers?topic=containers-subnets#review_ip) o [liberar una dirección IP usada](/docs/containers?topic=containers-subnets#free). Puesto que el pod de VPN de strongSwan se puede planificar en un nodo trabajador de cualquier zona, la lista de las IP garantiza que se puede utilizar una IP del equilibrador de carga en cualquier zona en la que se haya planificado el pod de VPN.
+    - `zoneLoadBalancer`: Especifique una dirección IP pública de equilibrador de carga para cada zona en la que tenga nodos trabajadores. [Puede comprobar las direcciones IP públicas disponibles](/docs/containers?topic=containers-subnets#review_ip) o [liberar una dirección IP usada](/docs/containers?topic=containers-subnets#free). Puesto que el pod de VPN de strongSwan se puede planificar en un nodo trabajador de cualquier zona, la lista de las IP garantiza que se puede utilizar una IP del equilibrador de carga en cualquier zona en la que se haya planificado el pod de VPN.
     - `connectUsingLoadBalancerIP`: Establezca su valor en `true`. Cuando el pod de VPN de strongSwan se planifica en un nodo trabajador, el servicio strongSwan selecciona la dirección IP del equilibrador de carga que se encuentra en la misma zona y utiliza esta dirección IP para establecer la conexión de salida.
     - `local.id`: Especifique un valor fijo que reciba soporte del punto final de VPN remota. Si el punto final de VPN remota requiere que establezca la opción `local.id` (valor `leftid` en `ipsec.conf`) en la dirección IP pública del túnel VPN IPSec, establezca `local.id` en `%loadBalancerIP`. Este valor establece automáticamente el valor de `leftid` de `ipsec.conf` en la dirección IP del equilibrador de carga que se utiliza para la conexión.
 
@@ -123,7 +123,7 @@ El punto final de VPN remota puede establecer la conexión VPN con cualquiera de
 1. [Configurar un diagrama de Helm de VPN de strongSwan](/docs/containers?topic=containers-vpn#vpn_configure). Cuando siga los pasos de dicha sección, asegúrese de especificar los valores siguientes:
     - `ipsec.auto`: Cambie su valor por `add`. Las conexiones son de entrada en el clúster.
     - `loadBalancerIP`: No especifique una dirección IP. Deje este valor en blanco.
-    - `zoneLoadBalancer`: Especifique una dirección IP pública del equilibrador de carga para cada zona en la que tenga nodos trabajadores. [Puede comprobar las direcciones IP públicas disponibles](/docs/containers?topic=containers-subnets#review_ip) o [liberar una dirección IP usada](/docs/containers?topic=containers-subnets#free).
+    - `zoneLoadBalancer`: Especifique una dirección IP pública de equilibrador de carga para cada zona en la que tenga nodos trabajadores. [Puede comprobar las direcciones IP públicas disponibles](/docs/containers?topic=containers-subnets#review_ip) o [liberar una dirección IP usada](/docs/containers?topic=containers-subnets#free).
     - `local.id`: Si el punto final de VPN remota requiere que establezca la opción `local.id` (valor `leftid` en `ipsec.conf`) en la dirección IP pública del túnel VPN IPSec, establezca `local.id` en `%loadBalancerIP`. Este valor establece automáticamente el valor de `leftid` de `ipsec.conf` en la dirección IP del equilibrador de carga que se utiliza para la conexión.
 
 2. En el cortafuegos de red remota, permita las conexiones VPN de salida de IPSec a las direcciones IP públicas que aparecen en la lista del valor `zoneLoadBalancer`.
@@ -167,7 +167,7 @@ Antes de instalar el diagrama de Helm strongSwan, debe elegir su configuración 
 Antes de empezar:
 * [Instale una pasarela de VPN IPSec en su centro de datos local](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection).
 * Asegúrese de que tiene el [rol de **Escritor** o de **Gestor** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
-* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **Nota**: todas las configuraciones de strongSwan están permitidas en clústeres estándares. Si utiliza un clúster gratuito, solo puede elegir una conexión VPN de salida en el [Paso 3](#strongswan_3). Las conexiones de VPN de entrada requieren un equilibrador de carga en el clúster y los equilibradores de carga no están disponibles para clústeres gratuitos.
 
 ### Paso 1: Obtenga el diagrama de Helm strongSwan
@@ -176,7 +176,7 @@ Antes de empezar:
 Instale Helm y obtenga el diagrama de Helm strongSwan para ver las posibles configuraciones.
 {: shortdesc}
 
-1.  [Siga las instrucciones](/docs/containers?topic=containers-integrations#helm) para instalar el cliente de Helm en la máquina local, instale el servidor Helm (tiller) con una cuenta de servicio y añada el repositorio de Helm de {{site.data.keyword.Bluemix_notm}}.
+1.  [Siga las instrucciones](/docs/containers?topic=containers-helm#public_helm_install) para instalar el cliente de Helm en la máquina local, instale el servidor Helm (tiller) con una cuenta de servicio y añada el repositorio de Helm de {{site.data.keyword.Bluemix_notm}}. Tenga en cuenta que se requiere Helm versión 2.8 o posterior.
 
 2.  Verifique que el tiller se ha instalado con una cuenta de servicio.
 
@@ -196,7 +196,7 @@ Instale Helm y obtenga el diagrama de Helm strongSwan para ver las posibles conf
 3. Guarde los valores de configuración predeterminados para el diagrama de Helm de strongSwan en un archivo YAML local.
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+    helm inspect values iks-charts/strongswan > config.yaml
     ```
     {: pre}
 
@@ -242,7 +242,7 @@ Si utiliza un clúster gratuito, solo puede elegir una conexión VPN de salida. 
 
 Para establecer una conexión VPN de entrada, modifique los valores siguientes:
 1. Verifique que `ipsec.auto` esté establecido en `add`.
-2. Opcional: establezca `loadBalancerIP` en una dirección IP pública portátil para el servicio VPN de strongSwan. Especificar una dirección IP es útil cuando necesita una dirección IP estable como, por ejemplo, cuando debe designar las direcciones IP permitidas a través de un cortafuegos local. El clúster debe tener disponible al menos una dirección IP del equilibrador de carga público. [Puede comprobar las direcciones IP públicas disponibles](/docs/containers?topic=containers-subnets#review_ip) o [liberar una dirección IP usada](/docs/containers?topic=containers-subnets#free).
+2. Opcional: establezca `loadBalancerIP` en una dirección IP pública portátil para el servicio VPN de strongSwan. Especificar una dirección IP es útil cuando necesita una dirección IP estable como, por ejemplo, cuando debe designar las direcciones IP permitidas a través de un cortafuegos local. El clúster debe tener disponible al menos una dirección IP pública de equilibrador de carga. [Puede comprobar las direcciones IP públicas disponibles](/docs/containers?topic=containers-subnets#review_ip) o [liberar una dirección IP usada](/docs/containers?topic=containers-subnets#free).
     * Si deja este valor en blanco, se utilizará una de las direcciones IP públicas portátiles disponibles.
     * También debe configurar la dirección IP pública que seleccione o la dirección IP pública que se asigna al punto final de VPN del clúster en el punto final VPN local.
 
@@ -257,7 +257,7 @@ Para establecer una conexión VPN de salida, modifique los valores siguientes:
         * Si el punto final VPN remoto no puede manejar las conexiones VPN desde varias direcciones IP públicas, limite los nodos en los que se despliega el pod de VPN strongSwan. Establezca `nodeSelector` en las direcciones IP de nodos trabajadores específicos o en una etiqueta de nodo trabajador. Por ejemplo, el valor `kubernetes.io/hostname: 10.232.xx.xx` permite que el pod de VPN se despliegue únicamente en ese nodo trabajador. El valor `strongswan: vpn` restringe la ejecución del pod de VPN a los nodos trabajadores que tengan esa etiqueta. Puede utilizar cualquier etiqueta de nodo trabajador. Para permitir el uso de distintos nodos trabajadores con distintos despliegues de diagrama de Helm, utilice `strongswan: <release_name>`. Para obtener una alta disponibilidad, seleccione al menos dos nodos trabajadores.
     * **Dirección IP pública del servicio strongSwan**: para establecer la conexión utilizando la dirección IP del servicio VPN strongSwan, establezca `connectUsingLoadBalancerIP` en `true`. La dirección IP del servicio strongSwan es una dirección IP pública portátil que puede especificar en el valor `loadBalancerIP` o bien una dirección IP pública portátil disponible que se asigna automáticamente al servicio.
         <br>
-        * Si elige seleccionar una dirección IP mediante el valor `loadBalancerIP`, el clúster debe tener al menos una dirección IP de equilibrador de carga pública disponible. [Puede comprobar las direcciones IP públicas disponibles](/docs/containers?topic=containers-subnets#review_ip) o [liberar una dirección IP usada](/docs/containers?topic=containers-subnets#free).
+        * Si elige seleccionar una dirección IP mediante el valor `loadBalancerIP`, el clúster debe tener al menos una dirección IP pública de equilibrador de carga disponible. [Puede comprobar las direcciones IP públicas disponibles](/docs/containers?topic=containers-subnets#review_ip) o [liberar una dirección IP usada](/docs/containers?topic=containers-subnets#free).
         * Todos los nodos trabajadores del clúster deben estar en la misma VLAN pública. De lo contrario, debe utilizar el valor `nodeSelector` para asegurarse de que el pod de VPN se despliega en un nodo trabajador en la misma VLAN pública que `loadBalancerIP`.
         * Si `connectUsingLoadBalancerIP` tiene el valor `true` e `ipsec.keyexchange` tiene el valor `ikev1`, debe establecer para `enableServiceSourceIP` el valor `true`.
 
@@ -351,7 +351,7 @@ Despliegue el diagrama de Helm strongSwan en el clúster con las configuraciones
     {: tip}
 
     ```
-    helm install -f config.yaml --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn iks-charts/strongswan
     ```
     {: pre}
 
@@ -540,7 +540,6 @@ Antes de utilizar esta solución, revise las siguientes consideraciones y limita
 `values.yaml`: `local.subnet: 172.30.0.0/16` y `enablePodSNAT: false`. Estos valores de configuración exponen todos los pods de Kubernetes de toda la conexión VPN en la red remota. No obstante, únicamente serán accesibles a través de la VPN aquellos pods que se encuentren en el espacio de nombres seguro especificado.
 
 Antes de empezar:
-* Cree o utilice un clúster que ejecute Kubernetes versión 1.10 o posterior.
 * [Despliegue el diagrama de Helm strongSwan](#vpn_configure) y [asegúrese de que la conectividad de VPN funciona correctamente](#vpn_test).
 * [Instale y configure la CLI de Calico](/docs/containers?topic=containers-network_policies#cli_install).
 
@@ -712,5 +711,5 @@ Para configurar un Virtual Router Appliance:
 
 3. Para habilitar una conexión VPN utilizando el VRA, [configure VRRP en el VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-working-with-high-availability-and-vrrp#high-availability-vpn-with-vrrp).
 
-Si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN mediante la [habilitación de la expansión de VLAN](/docs/containers?topic=containers-subnets#subnet-routing). Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN [habilitando la expansión de VLAN](/docs/containers?topic=containers-subnets#subnet-routing). Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 {: important}

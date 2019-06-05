@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks
 
@@ -27,5 +27,5 @@ subcollection: containers
 # 您尋找的內容已移動
 {: #cs_cli_devtools}
 
-您尋找的內容已移動。<a href="https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip">請從新位置下載最新資訊</a>。
+您尋找的內容已移動。<a href="/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference">請查看新位置中的最新資訊</a>。
 {:shortdesc}

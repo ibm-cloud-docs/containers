@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -45,7 +45,7 @@ subcollection: containers
 * [고가용성을 위한 여러 지역](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [컨테이너 보안 및 격리](/docs/containers?topic=containers-security#security)
-* [앱 간에 데이터를 지속시키고 동기화하는 데 필요한 {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [앱 간에 데이터를 지속시키고 동기화하는 데 필요한 {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **솔루션**
@@ -71,7 +71,7 @@ subcollection: containers
 
 **솔루션 모델: 필요한 경우 온프레미스 엔터프라이즈 자산에 안전하게 액세스할 수 있는, 퍼블릭 클라우드에서 실행되는 요청 시 컴퓨팅, 스토리지 및 I/O 서비스**
 
-* 구조화된 문서 조회 및 구조화되지 않은 문서 조회를 지원하는 안전하며 스케일링 가능한 문서 스토리지
+* 구조화된 문서 조회 및 구조화되지 않은 문서 조회를 지원하는 안전하며 확장 가능한 문서 스토리지
 * 기존 엔터프라이즈 자산 및 앱이 마이그레이션되지 않을 일부 온프레미스 시스템과의 통합을 가능하게 하는 상태에서 이들을 "리프트 앤 시프트(lift and shift)" 방식으로 이동
 * 솔루션 배치 소요 시간을 줄이고 보고 정확성에 영향을 주는 버그를 처리하기 위한 표준 DevOps 및 모니터링 프로세스 구현
 
@@ -83,21 +83,21 @@ subcollection: containers
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGateway}}
 
-{{site.data.keyword.containerlong_notm}}는 앱 및 서비스를 요청 시 작성, 스케일링 및 제거할 수 있도록 스케일링 가능한 컴퓨팅 리소스 및 연관 DevOps 대시보드를 제공합니다. 업계 표준 컨테이너를 사용하여, 처음에 앱을 주요 아키텍처 변경 없이 빠르게 {{site.data.keyword.containerlong_notm}}에서 다시 호스팅할 수 있습니다.
+{{site.data.keyword.containerlong_notm}}는 앱 및 서비스를 요청 시 작성, 스케일링 및 제거할 수 있도록 확장 가능한 컴퓨팅 리소스 및 연관 DevOps 대시보드를 제공합니다. 업계 표준 컨테이너를 사용하여, 처음에 앱을 주요 아키텍처 변경 없이 빠르게 {{site.data.keyword.containerlong_notm}}에서 다시 호스팅할 수 있습니다.
 
 이 솔루션은 확장성에 대해 즉각적인 이점을 제공합니다. 모기지 회사는 Kubernetes의 풍부한 배치 및 런타임 오브젝트 세트를 사용하여 앱에 대한 업그레이드를 안정적으로 모니터링하고 관리합니다. 또한 정의된 규칙 및 자동화된 Kubernetes 오케스트레이터를 사용하여 앱을 복제하고 스케일링할 수도 있습니다.
 
 {{site.data.keyword.SecureGateway}}는 {{site.data.keyword.containerlong_notm}}에서 실행되도록 다시 호스팅된 앱을 위해 온프레미스 데이터베이스 및 문서에 대한 안전한 파이프라인을 작성하는 데 사용됩니다.
 
-{{site.data.keyword.cos_full_notm}}는 모든 원시 문서 및 데이터의 저장을 위한 스토리지입니다. 몬테카를로 시뮬레이션의 경우 워크플로우 파이프라인은 {{site.data.keyword.cos_full_notm}}에 저장된 구조화된 입력 파일에서 시뮬레이션 데이터가 있는 위치에 배치됩니다. 시뮬레이션을 시작하는 트리거는 시뮬레이션 처리를 위해 입력 데이터를 N개의 이벤트 버킷으로 분할하기 위해 {{site.data.keyword.containerlong_notm}}의 컴퓨팅 서비스를 스케일링합니다. {{site.data.keyword.containerlong_notm}}는 자동으로 N개의 연관된 서비스 실행으로 스케일링되며 중간 결과를 {{site.data.keyword.cos_full_notm}}에 기록합니다. 이러한 결과는 최종 결과를 생성하기 위해 다른 {{site.data.keyword.containerlong_notm}} 컴퓨팅 서비스 세트에 의해 처리됩니다.
+{{site.data.keyword.cos_full_notm}}는 모든 원시 문서 및 데이터의 저장을 위한 스토리지입니다. 몬테카를로 시뮬레이션의 경우 워크플로우 파이프라인은 {{site.data.keyword.cos_full_notm}}에 저장된 구조화된 파일에서 시뮬레이션 데이터가 있는 위치에 배치됩니다. 시뮬레이션을 시작하는 트리거는 시뮬레이션 처리를 위해 파일의 데이터를 N개의 이벤트 버킷으로 분할하기 위해 {{site.data.keyword.containerlong_notm}}의 컴퓨팅 서비스를 스케일링합니다. {{site.data.keyword.containerlong_notm}}는 자동으로 N개의 연관된 서비스 실행으로 스케일링되며 중간 결과를 {{site.data.keyword.cos_full_notm}}에 기록합니다. 이러한 결과는 최종 결과를 생성하기 위해 다른 {{site.data.keyword.containerlong_notm}} 컴퓨팅 서비스 세트에 의해 처리됩니다.
 
-{{site.data.keyword.cloudant}}는 키-값부터 복잡한 문서 지향 데이터 저장 및 조회에 이르기까지, 많은 데이터 중심 유스 케이스에 유용한 최신 NoSQL 데이터베이스입니다. 늘어나는 규제 및 관리 보고서 규칙 세트를 관리하기 위해, 모기지 회사는 {{site.data.keyword.cloudant}}를 사용하여 회사로 들어오는 원시 규제 데이터 입력과 연관된 문서를 저장합니다. {{site.data.keyword.containerlong_notm}}의 컴퓨팅 프로세스는 다양한 보고 형식으로 데이터를 컴파일하고, 처리하고, 공개하기 위해 트리거됩니다. 보고서 간에 공통되는 중간 결과는 템플리트 중심 프로세스를 사용하여 필요한 보고서를 생성할 수 있도록 {{site.data.keyword.cloudant}} 문서에 저장됩니다.
+{{site.data.keyword.cloudant}}는 키-값부터 복잡한 문서 지향 데이터 저장 및 조회에 이르기까지, 많은 데이터 중심 유스 케이스에 유용한 최신 NoSQL 데이터베이스입니다. 늘어나는 규제 및 관리 보고서 규칙 세트를 관리하기 위해, 모기지 회사는 {{site.data.keyword.cloudant}}를 사용하여 회사로 들어오는 원시 규제 데이터와 연관된 문서를 저장합니다. {{site.data.keyword.containerlong_notm}}의 컴퓨팅 프로세스는 다양한 보고 형식으로 데이터를 컴파일하고, 처리하고, 공개하기 위해 트리거됩니다. 보고서 간에 공통되는 중간 결과는 템플리트 중심 프로세스를 사용하여 필요한 보고서를 생성할 수 있도록 {{site.data.keyword.cloudant}} 문서에 저장됩니다.
 
 **결과**
 
 * 복잡한 금융 시뮬레이션이 이전에 기존 온프레미스 시스템으로 완료할 수 있었던 시간의 25% 내에 완료됩니다.
 * 배치 소요 시간이 이전의 6 - 9개월에서 평균 1 - 3주일로 개선됩니다. 이는 {{site.data.keyword.containerlong_notm}}가 앱 컨테이너를 늘리고 새 버전으로 대체하는 데 있어서 세련되고 제어된 프로세스를 사용할 수 있도록 하기 때문입니다. 버그를 보고하면 정확성과 같은 문제를 빠르게 수정하고 해결할 수 있습니다.
-* {{site.data.keyword.containerlong_notm}} 및 {{site.data.keyword.cloudant}}에서 제공하는 지속적이며 스케일링 가능한 스토리지 및 컴퓨팅 서비스 세트를 통해 규제 준수 보고 비용이 줄어듭니다.
+* {{site.data.keyword.containerlong_notm}} 및 {{site.data.keyword.cloudant}}에서 제공하는 지속적이며 확장 가능한 스토리지 및 컴퓨팅 서비스 세트를 통해 규제 준수 보고 비용이 줄어듭니다.
 * 시간이 경과함에 따라, 처음에 "리프트 앤 시프트(lift and shift)" 방식으로 클라우드로 이동된 원래 앱은 {{site.data.keyword.containerlong_notm}}에서 실행되는 협업 마이크로서비스로 다시 구성됩니다. 이 조치는 개발 및 배치 소요 시간을 더욱 가속화하며, 실험의 상대적 용이성으로 인해 더 많은 혁신이 이뤄질 수 있도록 합니다. 또한 회사에서는 시장 및 비즈니스 상태를 활용하기 위해 새 마이크로서비스 버전을 포함하는 혁신적인 앱을 릴리스합니다(소위 상황 적응형 앱 및 마이크로서비스).
 
 ## 지불 기술 회사가 개발자 생산성을 합리화하고 해당 파트너에게 4배 빠르게 AI 사용 도구를 배치함

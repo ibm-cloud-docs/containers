@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,9 @@ Revise estas situações nas quais pode ser necessário abrir portas e endereço
 * [Para executar comandos `calicoctl` ](#firewall_calicoctl)de seu sistema local quando as políticas de rede corporativa impedem o acesso aos terminais de Internet pública por meio de proxies ou de firewalls.
 * [Para permitir a comunicação entre o mestre do Kubernetes e os nós do trabalhador](#firewall_outbound) quando um firewall for configurado para os nós do trabalhador ou as configurações de firewall forem customizadas em sua conta de infraestrutura do IBM Cloud (SoftLayer).
 * [Para permitir que o cluster acesse recursos por meio de um firewall na rede privada](#firewall_private).
+* [Para permitir que o cluster acesse recursos quando as políticas de rede do Calico bloqueiam a saída do nó do trabalhador](#firewall_calico_egress).
 * [Para acessar o serviço NodePort, o serviço de balanceador de carga ou o Ingress de fora do cluster](#firewall_inbound).
+* [Para permitir que o cluster acesse serviços que são executados dentro ou fora do {{site.data.keyword.Bluemix_notm}} ou localmente e são protegidos por um firewall](#whitelist_workers).
 
 <br />
 
@@ -95,16 +97,9 @@ Para permitir acesso para um cluster específico:
    ```
    {: pre}
 
-2. Se o cluster estiver em um grupo de recursos diferente de `default`, destine esse grupo de recursos. Para ver o grupo de recursos ao qual cada cluster pertence, execute `ibmcloud ks clusters`. **Nota**: deve-se ter pelo menos a função [**Visualizador**](/docs/containers?topic=containers-users#platform) para o grupo de recursos.
+2. Se o cluster estiver em um grupo de recursos diferente de `default`, destine esse grupo de recursos. Para ver o grupo de recursos ao qual cada cluster pertence, execute `ibmcloud ks clusters`. **Nota**: deve-se ter pelo menos a [função **Visualizador**](/docs/containers?topic=containers-users#platform) para o grupo de recursos.
    ```
    ibmcloud target -g <resource_group_name>
-   ```
-   {: pre}
-
-3. Selecione a região em que seu cluster está dentro.
-
-   ```
-   ibmcloud ks region-set
    ```
    {: pre}
 
@@ -219,10 +214,10 @@ Antes de iniciar, permita o acesso para executar [comandos `ibmcloud`](#firewall
 <br />
 
 
-## Permitindo o cluster para acessar recursos de infraestrutura e outros serviços
+## Permitindo que o cluster acesse recursos de infraestrutura e outros serviços por um firewall público
 {: #firewall_outbound}
 
-Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de um firewall, como para as regiões do {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IPs privados do IBM Cloud infrastructure (SoftLayer) e saída para solicitações de volume persistente.
+Permita que seu cluster acesse recursos e serviços de infraestrutura por trás de um firewall público, como para regiões do {{site.data.keyword.containerlong_notm}}, o {{site.data.keyword.registrylong_notm}}, o {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), o {{site.data.keyword.monitoringlong_notm}}, o {{site.data.keyword.loganalysislong_notm}}, os IPs privados da infraestrutura do IBM Cloud (SoftLayer) e a saída para solicitações de volume persistente.
 {:shortdesc}
 
 Dependendo da configuração do cluster, você acessa os serviços usando os endereços IP público, privado ou ambos. Se você tiver um cluster com nós do trabalhador em VLANs públicas e privadas atrás de um firewall para as redes públicas e privadas, deverá abrir a conexão para endereços IP públicos e privados. Se o seu cluster tiver nós do trabalhador apenas na VLAN privada atrás de um firewall, será possível abrir a conexão apenas com os endereços IP privados.
@@ -242,7 +237,7 @@ Dependendo da configuração do cluster, você acessa os serviços usando os end
 
     {: #master_ips}
     <table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
-      <caption>Endereços IP a serem abertos para o tráfego de saída</caption>
+    <caption>Endereços IP a serem abertos para o tráfego de saída</caption>
           <thead>
           <th>Região</th>
           <th>Zona</th>
@@ -289,8 +284,8 @@ Dependendo da configuração do cluster, você acessa os serviços usando os end
           </tbody>
         </table>
 
-3.  Permita o tráfego de rede de saída dos nós do trabalhador para as regiões do [{{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
-  - ` Porta TCP 443, porta 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
+3.  Permita o tráfego de rede de saída dos nós do trabalhador para [regiões do {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
+  - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
   -  Substitua <em>&lt;registry_subnet&gt;</em> pela sub-rede de registro para a qual você deseja permitir o tráfego. O registro global armazena imagens públicas fornecidas pela IBM e os registros regionais armazenam suas próprias imagens privadas ou públicas. A porta 4443 é necessária para funções de tabelião público, como [Verificando assinaturas de imagem](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent). <table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
   <caption>Endereços IP a serem abertos para o tráfego de Registro</caption>
     <thead>
@@ -301,52 +296,52 @@ Dependendo da configuração do cluster, você acessa os serviços usando os end
     </thead>
     <tbody>
       <tr>
-        <td>Registro global em <br>{{site.data.keyword.containerlong_notm}} regiões</td>
+        <td>Registro global em <br>Regiões do {{site.data.keyword.containerlong_notm}}</td>
         <td><strong> Público </strong>:  <code> icr.io </code><br>
         Descontinuado:  <code> registry.bluemix.net </code><br><br>
         <strong> Privado </strong>:  <code> z1-1.private.icr.io<br>z2-1.private.icr.io<br>z3-1.private.icr.io </code></td>
         <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
-        <td><code> 166.9.20.4 </code></br><code> 166.9.22.3 </code></br><code> 166.9.24.2 </code></td>
+        <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
       </tr>
       <tr>
         <td>AP Norte</td>
         <td><strong>Público</strong>: <code>jp.icr.io</code><br>
         Descontinuado:  <code> registry.au-syd.bluemix.net </code><br><br>
         <strong> Privado </strong>:  <code> z1-1.private.jp.icr.io<br>z2-1.private.jp.icr.io<br>z3-1.private.jp.icr.io </code></td>
-        <td><code> 161.202.146.86/ 29 </code></br><code> 128.168.71.70/ 29 </code></br><code> 165.192.71.222/ 29 </code></td>
-        <td><code> 166.9.40.3 </code></br><code> 166.9.42.3 </code></br><code> 166.9.44.3 </code></td>
+        <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
+        <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
       </tr>
       <tr>
         <td>AP Sul</td>
         <td><strong>Público</strong>: <code>au.icr.io</code><br>
         Descontinuado:  <code> registry.au-syd.bluemix.net </code><br><br>
         <strong> Privado </strong>:  <code> z1-1.private.au.icr.io<br>z2-1.private.au.icr.io<br>z3-1.private.au.icr.io </code></td>
-        <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code> 135.90.66.48/ 29 </code></td>
-        <td><code> 166.9.52.2 </code></br><code> 166.9.54.2 </code></br><code> 166.9.56.3 </code></td>
+        <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
+        <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
       </tr>
       <tr>
         <td>União Europeia Central</td>
         <td><strong> Público </strong>:  <code> de.icr.io </code><br>
         Descontinuado:  <code> registry.eu-de.bluemix.net </code><br><br>
         <strong> Privado </strong>:  <code> z1-1.private.de.icr.io<br>z2-1.private.de.icr.io<br>z3-1.private.de.icr.io </code></td>
-        <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code> 169.50.58.104/ 29 </code></br><code>161.156.93.16/29</code></br><code> 149.81.79.152/ 29 </code></td>
-        <td><code> 166.9.28.12 </code></br><code> 166.9.30.9 </code></br><code> 166.9.32.5 </code></td>
+        <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
+        <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
        </tr>
        <tr>
         <td>Sul do Reino Unido</td>
         <td><strong> Público </strong>:  <code> uk.icr.io </code><br>
         Descontinuado:  <code> registry.eu-gb.bluemix.net </code><br><br>
         <strong> Privado </strong>:  <code> z1-1.private.uk.icr.io<br>z2-1.private.uk.icr.io<br>z3-1.private.uk.icr.io </code></td>
-        <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code> 158.175.97.184/ 29 </code></br><code> 158.176.105.64/ 29 </code></br><code>141.125.71.136/29</code></td>
-        <td><code> 166.9.36.9 </code></br><code>166.9.38.5</code></br><code> 166.9.34.4 </code></td>
+        <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
+        <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
        </tr>
        <tr>
         <td>Leste dos EUA, Sul dos EUA</td>
         <td><strong> Público </strong>:  <code> us.icr.io </code><br>
         Descontinuado:  <code> registry.ng.bluemix.net </code><br><br>
         <strong> Privado </strong>:  <code> z1-1.private.us.icr.io<br>z2-1.private.us.icr.io<br>z3-1.private.us.icr.io </code></td>
-        <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code> 169.61.234.224/ 29 </code></br><code> 169.61.135.160/ 29 </code></br><code> 169.61.46.80/ 29 </code></td>
-        <td><code> 166.9.12.114 </code></br><code> 166.9.15.50 </code></br><code> 166.9.16.173 </code></td>
+        <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
+        <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
        </tr>
       </tbody>
     </table>
@@ -378,13 +373,13 @@ Dependendo da configuração do cluster, você acessa os serviços usando os end
           <td><code>Metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
-
+         
         </tbody>
       </table>
 </p>
     *   **{{site.data.keyword.mon_full_notm}}**:
         <pre class="screen">TCP port 443, port 6443 FROM &lt;each_worker_node_public_IP&gt; TO &lt;sysdig_public_IP&gt;</pre>
-        Substitua `<sysdig_public_IP>` com os [Endereços IP do Sysdig](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-network#network).
+        Substitua `<sysdig_public_IP>` pelos [Endereços IP do Sysdig](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-network#network).
     *   **{{site.data.keyword.loganalysislong_notm}}**:
         <pre class="screen">TCP port 443, port 9091 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
         Substitua <em>&lt;logging_public_IP&gt;</em> por todos os endereços das regiões de criação de log para as quais você deseja permitir o tráfego:
@@ -421,7 +416,7 @@ Dependendo da configuração do cluster, você acessa os serviços usando os end
 </p>
     *   **{{site.data.keyword.la_full_notm}}**:
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
-        Substitua `<logDNA_public_IP>`  com os  [ Endereços IP de LogDNA ](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network).
+        Substitua `<logDNA_public_IP>` pelos [endereços IP do LogDNA](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network).
 
 5. Se você usar os serviços de balanceador de carga, assegure-se de que todo o tráfego usando o protocolo VRRP seja permitido entre os nós do trabalhador nas interfaces pública e privada. O {{site.data.keyword.containerlong_notm}} usa o protocolo VRRP para gerenciar endereços IP para balanceadores de carga públicos e privados.
 
@@ -435,7 +430,7 @@ Dependendo da configuração do cluster, você acessa os serviços usando os end
    <tbody>
      <tr>
        <td>Armazenamento de arquivo</td>
-       <td>Kubernetes versão <code>1.13.4_1512</code>, <code>1.12.6_1543</code>, <code>1.11.8_1549</code>, <code>1.10.13_1550</code> ou mais recente</td>
+       <td>Kubernetes versão <code>1.13.4_1512</code>, <code>1.12.6_1544</code>, <code>1.11.8_1550</code>, <code>1.10.13_1551</code> ou mais recente</td>
      </tr>
      <tr>
        <td>Armazenamento de bloco</td>
@@ -468,7 +463,7 @@ Se você tiver um firewall na rede privada, permita a comunicação entre os nó
 
 2. Permita os intervalos de IP privado da infraestrutura do IBM Cloud (SoftLayer) para que seja possível criar nós do trabalhador em seu cluster.
     1. Permita os intervalos apropriados de IP privado de infraestrutura do IBM Cloud (SoftLayer). Consulte  [ Rede de backend (privada) ](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network).
-    2. Permita os intervalos de IP privado da infraestrutura do IBM Cloud (SoftLayer) para todas as [zonas](/docs/containers?topic=containers-regions-and-zones#zones) que você está usando. Observe que é necessário incluir IPs para as zonas `dal01` e `wdc04`. Consulte  [ Rede de Serviço (na rede de backend / privada) ](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
+    2. Permita os intervalos de IP privado da infraestrutura do IBM Cloud (SoftLayer) para todas as [zonas](/docs/containers?topic=containers-regions-and-zones#zones) que você está usando. Observe que é necessário incluir IPs para as zonas `dal01` e `wdc04`. Consulte  [ Rede de Serviço (na rede backend / privada) ](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
 
 3. Abra as portas a seguir:
     - Permita conexões TCP e UDP de saída dos trabalhadores para as portas 80 e 443 para permitir atualizações e recarregamentos do nó do trabalhador.
@@ -481,6 +476,76 @@ Se você tiver um firewall na rede privada, permita a comunicação entre os nó
 
 <br />
 
+
+## Permitindo que o cluster acesse recursos por meio de políticas de saída do Calico
+{: #firewall_calico_egress}
+
+Se você usar [políticas de rede do Calico](/docs/containers?topic=containers-network_policies) para atuar como um firewall que restringe toda a saída do trabalhador público, deverá permitir que seus trabalhadores acessem os proxies locais para o servidor e o etcd da API do principal.
+{: shortdesc}
+
+1. [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+2. Crie uma política de rede do Calico que permita o tráfego público de seu cluster para 172.20.0.1:2040 e 172.21.0.1:443, para o proxy local do servidor de API, e para 172.20.0.1:2041, para o proxy local do etcd.
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: allow-master-local
+  spec:
+    egress:
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: TCP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: TCP
+    order: 1500
+    selector: ibm.role == 'worker_public'
+    types:
+    - Egress
+  ```
+  {: codeblock}
+
+3. Aplique a política ao cluster.
+    - Linux e OS X:
+
+      ```
+      calicoctl apply -f allow-master-local.yaml
+      ```
+      {: pre}
+
+    - Windows:
+
+      ```
+      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 ## Acessando o NodePort, o balanceador de carga e os serviços do Ingress de fora do cluster
 {: #firewall_inbound}
@@ -506,7 +571,7 @@ Se você tiver um firewall na rede privada, permita a comunicação entre os nó
 Se você deseja acessar serviços que são executados dentro ou fora do {{site.data.keyword.Bluemix_notm}} ou no local e que são protegidos por um firewall, é possível incluir os endereços IP de seus nós do trabalhador nesse firewall para permitir o tráfego de rede de saída para seu cluster. Por exemplo, você pode desejar ler dados de um banco de dados do {{site.data.keyword.Bluemix_notm}} que é protegido por um firewall ou inserir suas sub-redes do nó do trabalhador na lista de desbloqueio em um firewall no local para permitir o tráfego de rede de seu cluster.
 {:shortdesc}
 
-1.  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+1.  [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. Obtenha as sub-redes do nó do trabalhador ou os endereços IP do nó do trabalhador.
   * **Sub-redes do nó do trabalhador**: se você antecipar a mudança do número de nós do trabalhador em seu cluster frequentemente, como se você ativasse o [escalador automático de cluster](/docs/containers?topic=containers-ca#ca), talvez não desejará atualizar o firewall para cada novo nó do trabalhador. Em vez disso, é possível inserir na lista de desbloqueio as sub-redes VLAN que o cluster usa. Lembre-se que a sub-rede VLAN pode ser compartilhada pelos nós do trabalhador em outros clusters.
@@ -519,11 +584,11 @@ Se você deseja acessar serviços que são executados dentro ou fora do {{site.d
 
     2. Na saída da etapa anterior, anote todos os IDs de rede exclusivos (primeiros 3 octetos) do **IP público** para os nós do trabalhador em seu cluster.<preparação> Se você desejar inserir na lista de desbloqueio um cluster somente privado, anote o **IP privado** no lugar.<preparação> Na saída a seguir, os IDs de rede exclusivos são `169.xx.178` e `169.xx.210`.
         ```
-        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
+        ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
         ```
         {: screen}
     3.  Liste as sub-redes VLAN para cada ID de rede exclusivo.
@@ -535,8 +600,8 @@ Se você deseja acessar serviços que são executados dentro ou fora do {{site.d
         Saída de exemplo:
         ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
-        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5
-        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6
+        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   
+        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
     4.  Recupere o endereço da sub-rede. Na saída, localize o número de **IPs**. Em seguida, eleve `2` à potência de `n` igual ao número de IPs. Por exemplo, se o número de IPs for `16`, então `2` será elevado para a potência de `4` (`n`) para igual a `16`. Agora, obtenha o CIDR de sub-rede subtraindo o valor de `n` de `32` bits. Por exemplo, quando `n` é igual a `4`, então, o CIDR é `28` (da equação `32 - 4 = 28`). Combine a máscara **identificador** com o valor CIDR para obter o endereço completo da sub-rede. Na saída anterior, os endereços de sub-rede são:

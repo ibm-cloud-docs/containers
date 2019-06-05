@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -64,7 +64,7 @@ subcollection: containers
 | [`Pod` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | 팟(Pod)은 워크로드의 가장 작은 배치 가능 단위이며 하나의 컨테이너 또는 여러 컨테이너를 포함할 수 있습니다. 컨테이너와 마찬가지로, 팟(Pod)은 간단히 사용하고 폐기할 수 있도록 디자인되며 앱 기능의 단위 테스트에 주로 사용됩니다. 앱에서 작동 중지 시간이 발생하지 않도록 하려면 배치와 같은 Kubernetes 제어기를 사용하여 팟(Pod)을 배치하는 것을 고려하십시오. 배치는 여러 팟(Pod), 복제본, 팟(Pod) 스케일링, 롤아웃 등을 관리하는 데 도움을 줍니다. |
 | [`ReplicaSet` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | 복제본 세트는 팟(Pod)의 여러 복제본이 실행되도록 하며 특정 팟(Pod)이 작동 중단 상태가 되면 이를 다시 스케줄합니다. 팟(Pod) 스케줄링이 어떻게 작동하는지 테스트하려는 경우에는 복제본 세트를 작성할 수 있으나 앱 업데이트, 롤아웃 및 스케일링을 관리하려는 경우에는 배치를 작성하십시오. |
 | [`Deployment` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | 배치는 팟(Pod) 또는 팟(Pod) 템플리트의 [ReplicaSet ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)을 관리하는 제어기입니다. 배치가 없는 팟(Pod) 또는 복제본 세트를 작성하여 앱 기능을 테스트할 수 있습니다. 프로덕션 레벨 설정의 경우에는 배치를 사용하여 앱 업데이트, 롤아웃 및 스케일링을 관리하십시오. |
-| [`StatefulSet` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | 배치와 마찬가지로, Stateful 세트는 팟(Pod)의 복제본 세트를 관리하는 제어기입니다. 배치와 달리, Stateful 세트는 팟(Pod)이 다시 스케줄된 후에도 유지되는 고유한 네트워크 정체성을 갖도록 합니다. 워크로드를 클라우드에서 실행하려는 경우에는 서비스 인스턴스가 독립적이며 서비스 중단 없이 실패할 수 있도록 앱을 Stateless로 디자인하십시오. 그러나 데이터베이스와 같은 일부 앱은 Stateless여야 합니다. 이러한 경우에는 Stateful 세트를 작성하고 [파일](/docs/containers?topic=containers-file_storage#file_statefulset), [블록](/docs/containers?topic=containers-block_storage#block_statefulset) 또는 [오브젝트](/docs/containers?topic=containers-object_storage#cos_statefulset) 스토리지를 Stateful 세트를 위한 지속적 스토리지로 사용하는 것을 고려하십시오. 또한 [Portworx](/docs/containers?topic=containers-portworx)를 베어메탈 작업자 노드 맨 위에 설치하고 Portworx를 고가용성 소프트웨어로 정의된 스토리지 솔루션으로 사용하여 Stateful 세트에 대한 지속적 스토리지를 관리할 수도 있습니다. |
+| [`StatefulSet` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | 배치와 마찬가지로, Stateful 세트는 팟(Pod)의 복제본 세트를 관리하는 제어기입니다. 배치와 달리, Stateful 세트는 팟(Pod)이 다시 스케줄된 후에도 유지되는 고유한 네트워크 정체성을 갖도록 합니다. 워크로드를 클라우드에서 실행하려는 경우에는 서비스 인스턴스가 독립적이며 서비스 중단 없이 실패할 수 있도록 [앱을 Stateless로 디자인](/docs/containers?topic=containers-strategy#cloud_workloads)하십시오. 그러나 데이터베이스와 같은 일부 앱은 Stateful이어야 합니다. 이러한 경우에는 Stateful 세트를 작성하고 [파일](/docs/containers?topic=containers-file_storage#file_statefulset), [블록](/docs/containers?topic=containers-block_storage#block_statefulset) 또는 [오브젝트](/docs/containers?topic=containers-object_storage#cos_statefulset) 스토리지를 Stateful 세트를 위한 지속적 스토리지로 사용하는 것을 고려하십시오. 또한 [Portworx](/docs/containers?topic=containers-portworx)를 베어메탈 작업자 노드 맨 위에 설치하고 Portworx를 고가용성 소프트웨어로 정의된 스토리지 솔루션으로 사용하여 Stateful 세트에 대한 지속적 스토리지를 관리할 수도 있습니다. |
 | [`DaemonSet` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | 클러스터에 있는 모든 작업자 노드에서 동일한 팟(Pod)을 실행해야 하는 경우에는 디먼 세트를 사용하십시오. 디먼 세트에서 관리하는 팟(Pod)은 작업자 노드가 클러스터에 추가되면 자동으로 스케줄됩니다. 일반적인 유스 케이스에는 클러스터 또는 앱의 상태에 대한 정보를 제공하기 위해 모든 작업자 노드에서 로그를 수집하는, `logstash` 또는 `prometheus`와 같은 로그 콜렉터가 있습니다. |
 | [`Job` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | 작업은 하나 이상의 팟(Pod)이 성공적으로 완료될 수 있도록 합니다. 작업은 렌더링할 특정 수의 프레임, 전송할 특정 수의 이메일, 변환할 특정 수의 파일과 같이 서로 별개이지만 관련된 작업 항목의 병렬 처리를 지원하기 위해 큐 또는 일괄처리 작업에 사용할 수 있습니다. 특정 횟수만큼 실행되도록 작업을 스케줄하려면 [`CronJob` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)을 사용하십시오.|
 {: caption="작성할 수 있는 Kubernetes 워크로드 오브젝트의 유형입니다." caption-side="top"}
@@ -78,7 +78,7 @@ subcollection: containers
 * [포트](#port)
 * [리소스 요청 및 한계](#resourcereq)
 * [활동 상태 및 준비 상태 프로브](#probe)
-* 포트에 앱 서비스를 노출하기 위한 [서비스](#service)
+* 포트에 앱 서비스를 노출하기 위한 [서비스](#app-service)
 * 컨테이너 환경 변수를 설정하기 위한 [ConfigMap](#configmap)
 * 컨테이너 환경 변수를 설정하기 위한 [Secret](#secret)
 * 스토리지를 위해 컨테이너에 마운트되는 [지속적 볼륨](#pv)
@@ -103,14 +103,14 @@ ConfigMap 또는 secret을 이용하려면 이를 팟(Pod)에 마운트해야 �
 <dt>시크릿</dt>
 <dd>워크로드에 다음과 같은 민감한 정보를 제공합니다. 클러스터의 다른 사용자에게 secret에 대한 액세스 권한이 있을 수 있으므로, secret 정보가 이러한 사용자와 공유될 수 있다는 점을 반드시 알고 있어야 합니다.
 <ul><li><strong>PII(Personally Identifiable Information)</strong>: Secret에 이메일 정보, 또는 회사나 정부의 규제 준수에 필요한 기타 정보와 같은 민감한 정보를 저장하십시오.</li>
-<li><strong>인증 정보</strong>: 비밀번호, 키 및 토큰과 같은 인증 정보를 Secret에 입력하여 실수로 노출할 위험을 줄이십시오. 예를 들어, 클러스터에 [서비스를 바인드](/docs/containers?topic=containers-integrations#adding_cluster)하는 경우에는 인증 정보가 Secret에 저장됩니다.</li></ul></dd>
+<li><strong>인증 정보</strong>: 비밀번호, 키 및 토큰과 같은 인증 정보를 Secret에 입력하여 실수로 노출할 위험을 줄이십시오. 예를 들어, 클러스터에 [서비스를 바인드](/docs/containers?topic=containers-service-binding#bind-services)하는 경우에는 인증 정보가 Secret에 저장됩니다.</li></ul></dd>
 </dl>
 
 secret을 더 안전하게 보호하려 하십니까? 기존 및 신규 시크릿을 암호화하기 위해 클러스터 관리자에게 클러스터에서 [{{site.data.keyword.keymanagementservicefull}}를 사용으로 설정](/docs/containers?topic=containers-encryption#keyprotect)하도록 요청하십시오.
 {: tip}
 
 ### 내 앱에 Watson과 같은 IBM 서비스를 추가하는 방법은 무엇입니까?
-[앱에 서비스 추가](/docs/containers?topic=containers-integrations#adding_app)를 참조하십시오.
+[앱에 서비스 추가](/docs/containers?topic=containers-service-binding#adding_app)를 참조하십시오.
 
 ### 내 앱이 올바른 리소스를 확보하도록 하는 방법은 무엇입니까?
 [앱 YAML 파일을 지정](#app_yaml)할 때. 앱이 올바른 리소스를 확보하도록 돕는 Kubernetes 기능을 앱 구성에 추가할 수 있습니다. 특히, YAML 파일에 정의된 각 컨테이너에 대해 [리소스 한계 및 요청을 설정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)하십시오.
@@ -131,7 +131,7 @@ secret을 더 안전하게 보호하려 하십니까? 기존 및 신규 시크�
 *  **사설 VLAN 전용 표준 클러스터**: [NodePort, 로드 밸런서 또는 Ingress 서비스](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)를 사용하여 앱을 노출할 수 있습니다. 또한 사용자의 방화벽에서 서비스의 사설 IP 주소의 포트를 열어야 합니다.
 
 ### 앱을 배치한 후 해당 상태를 모니터링하는 방법은 무엇입니까?
-클러스터에 대한 {{site.data.keyword.Bluemix_notm}} [로깅 및 모니터링](/docs/containers?topic=containers-health#health)을 설정할 수 있습니다. 서드파티 [로깅 및 모니터링 서비스](/docs/containers?topic=containers-integrations#health_services)와 통합하도록 선택할 수도 있습니다.
+클러스터에 대한 {{site.data.keyword.Bluemix_notm}} [로깅 및 모니터링](/docs/containers?topic=containers-health#health)을 설정할 수 있습니다. 서드파티 [로깅 및 모니터링 서비스](/docs/containers?topic=containers-supported_integrations#health_services)와 통합하도록 선택할 수도 있습니다.
 {: shortdesc}
 
 ### 내 앱을 최신 상태로 유지하는 방법은 무엇입니까?
@@ -203,7 +203,7 @@ secret을 더 안전하게 보호하려 하십니까? 기존 및 신규 시크�
   <p><strong>팁</strong>: 다중 구역 클러스터에서는 구역 장애에 대해 클러스터의 보호를 위해 충분한 용량이 남아 있도록 구역당 50% 의 작업자 노드 용량을 유지시키십시오.</p>
   <p><strong>지역 간에 내 앱을 전개하려면 어떻게 합니까?</strong></br>지역 장애로부터 앱을 보호하려면, 다른 지역에 두 번째 클러스터를 작성하고 클러스터에 연결할 [글로벌 로드 밸런서를 설정](/docs/containers?topic=containers-plan_clusters#multiple_clusters)한 후에 배치 YAML을 사용하여 앱에 대한 [팟(Pod) 반친화성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)으로 중복 복제본 세트를 배치하십시오.</p>
   <p><strong>내 앱에서 지속적 스토리지가 필요하면 어떻게 합니까?</strong></p>
-  <p>[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) 또는 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage) 등의 클라우드 서비스를 사용하십시오.</p></dd>
+  <p>[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 또는 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about) 등의 클라우드 서비스를 사용하십시오.</p></dd>
 </dl>
 
 ## YAML 파일에 앱 요구사항 지정
@@ -221,7 +221,7 @@ Kubernetes에서는 Kubernetes 오브젝트 구성을 선언하는 YAML 파일�
 * [포트](#port)
 * [리소스 요청 및 한계](#resourcereq)
 * [활동 상태 및 준비 상태 프로브](#probe)
-* 포트에 앱 서비스를 노출하기 위한 [서비스](#service)
+* 포트에 앱 서비스를 노출하기 위한 [서비스](#app-service)
 * 컨테이너 환경 변수를 설정하기 위한 [ConfigMap](#configmap)
 * 컨테이너 환경 변수를 설정하기 위한 [Secret](#secret)
 * 스토리지를 위해 컨테이너에 마운트되는 [지속적 볼륨](#pv)
@@ -230,7 +230,7 @@ Kubernetes에서는 Kubernetes 오브젝트 구성을 선언하는 YAML 파일�
 
 <dl>
 <dt>기본 배치 메타데이터</dt>
-  <dd><p>배치하는 [Kubernetes 오브젝트 유형](#object)에 대해 적절한 API 버전을 사용하십시오. API 버전은 사용자가 사용할 수 있는 Kubernetes 오브젝트에 대해 지원되는 기능을 결정합니다. 메타데이터에 지정하는 이름은 해당 레이블이 아니라 오브젝트의 이름입니다. 이 이름은 `kubectl get deployment <name>`.</p>
+  <dd><p>배치하는 [Kubernetes 오브젝트 유형](#object)에 대해 적절한 API 버전을 사용하십시오. API 버전은 사용자가 사용할 수 있는 Kubernetes 오브젝트에 대해 지원되는 기능을 결정합니다. 메타데이터에 지정하는 이름은 해당 레이블이 아니라 오브젝트의 이름입니다. 오브젝트와 상호작용할 때 이름을 사용합니다(예: `kubectl get deployment <name>`).</p>
   <p><pre class="codeblock"><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -242,7 +242,7 @@ metadata:
 replicas: 3</pre></code></p></dd>
 
 <dt id="label">레이블</dt>
-  <dd><p>레이블을 사용하면 클러스터에 있는 서로 다른 유형의 리소스를 동일한 `key: value` 쌍으로 표시할 수 있습니다. 그 후에는 해당하는 다른 리소스에 빌드할 수 있도록 하기 위해 레이블을 비교하도록 선택기를 지정할 수 있습니다. 앱을 외부에 노출하려는 경우에는 서비스에 지정하는 선택기와 일치하는 레이블을 사용해야 합니다. 다음 예에서 배치 스펙은 레이블 `app: wasliberty`와 일치하는 템플리트를 사용합니다.</p>
+  <dd><p>[레이블](/docs/containers?topic=containers-strategy#deploy_organize)을 사용하면 클러스터에 있는 서로 다른 유형의 리소스를 동일한 `key: value` 쌍으로 표시할 수 있습니다. 그 후에는 해당하는 다른 리소스에 빌드할 수 있도록 하기 위해 레이블을 비교하도록 선택기를 지정할 수 있습니다. 앱을 외부에 노출하려는 경우에는 서비스에 지정하는 선택기와 일치하는 레이블을 사용해야 합니다. 다음 예에서 배치 스펙은 레이블 `app: wasliberty`와 일치하는 템플리트를 사용합니다.</p>
   <p>`staging` 또는 `production` 컴포넌트를 보려는 경우와 같이, 클러스터에서 레이블 지정된 오브젝트를 검색할 수 있습니다. 예를 들면, 클러스터에 있는 모든 네임스페이스에서 `env: production` 레이블이 있는 모든 리소스를 나열하는 경우 있습니다. 이 명령을 실행하려면 모든 네임스페이스에 대한 액세스 권한이 필요하다는 점을 참고하십시오.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>레이블에 대한 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)를 참조하십시오.</li>
   <li>더 자세한 예는 [레이블을 사용하여 특정 작업자 노드에 앱 배치](/docs/containers?topic=containers-app#node_affinity)를 참조하십시오.</li></ul>
@@ -289,7 +289,7 @@ app: wasliberty</pre></code></p></dd>
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">앱 서비스의 포트</dt>
-  <dd><p>앱의 서비스를 열 컨테이너 포트를 선택하십시오. 어느 포트를 열어야 하는지 알아보려면 앱 스펙 또는 Dockerfile을 참조하십시오. 이 포트는 사설 네트워크에서 액세스할 수 있지만, 공용 네트워크 연결에서는 액세스할 수 없습니다. 앱을 외부에 노출하려면 NodePort, 로드 밸런서 또는 Ingress 서비스를 사용해야 합니다. [`Service` 오브젝트를 작성](#service)하는 경우에 이와 동일한 포트 번호를 사용합니다.</p>
+  <dd><p>앱의 서비스를 열 컨테이너 포트를 선택하십시오. 어느 포트를 열어야 하는지 알아보려면 앱 스펙 또는 Dockerfile을 참조하십시오. 이 포트는 사설 네트워크에서 액세스할 수 있지만, 공용 네트워크 연결에서는 액세스할 수 없습니다. 앱을 외부에 노출하려면 NodePort, 로드 밸런서 또는 Ingress 서비스를 사용해야 합니다. [`Service` 오브젝트를 작성](#app-service)하는 경우에 이와 동일한 포트 번호를 사용합니다.</p>
   <p><pre class="codeblock"><code>ports:
 - containerPort: 9080</pre></code></p></dd>
 
@@ -310,7 +310,7 @@ limits:
     cpu: "1000m"</pre></code></p></dd>
 
 <dt id="probe">활동 상태 및 준비 상태 프로브</dt>
-  <dd><p>기본적으로 Kubernetes는 팟(Pod) 내의 모든 컨테이너가 시작되면 앱 팟(Pod)에 트래픽을 전송하며, 컨테이너가 충돌하면 이를 다시 시작합니다. 사용자는 상태 확인을 설정하여 서비스 트래픽 라우팅의 내구성을 향상시킬 수 있습니다. 예를 들면, 사용자의 앱에 시작 지연 시간이 있습니다. 이 앱 프로세스가 전체 앱이 완전히 준비되기 전에 시작될 수 있으며, 이는 응답(특히 많은 인스턴스로 스케일 확장할 때)에 영향을 줄 수 있습니다. 상태 확인을 사용하면 앱이 실행 중인지, 요청을 수신할 준비가 되었는지 시스템에 알려 줄 수 있습니다. 이러한 프로브를 설정하면 앱의 [롤링 업데이트](#app_rolling)를 수행할 때 작동 중단 시간을 방지하는 데도 도움을 줄 수 있습니다. 사용자는 활동 상태 프로브와 준비 상태 프로브의 두 가지 상태 확인을 설정할 수 있습니다.</p>
+  <dd><p>기본적으로 Kubernetes는 팟(Pod) 내의 모든 컨테이너가 시작되면 앱 팟(Pod)에 트래픽을 전송하며, 컨테이너가 충돌하면 이를 다시 시작합니다. 사용자는 상태 검사를 설정하여 서비스 트래픽 라우팅의 내구성을 향상시킬 수 있습니다. 예를 들면, 사용자의 앱에 시작 지연 시간이 있습니다. 이 앱 프로세스가 전체 앱이 완전히 준비되기 전에 시작될 수 있으며, 이는 응답(특히 많은 인스턴스로 스케일 확장할 때)에 영향을 줄 수 있습니다. 상태 검사를 사용하면 앱이 실행 중인지, 요청을 수신할 준비가 되었는지 시스템에 알려 줄 수 있습니다. 이러한 프로브를 설정하면 앱의 [롤링 업데이트](#app_rolling)를 수행할 때 작동 중단 시간을 방지하는 데도 도움을 줄 수 있습니다. 사용자는 활동 상태 프로브와 준비 상태 프로브의 두 가지 상태 검사를 설정할 수 있습니다.</p>
   <p>**활동 상태 프로브**: 컨테이너가 실행 중인지 확인하는 활동 상태 프로브를 설정합니다. 이 프로브가 실패하면 컨테이너가 다시 시작됩니다. 컨테이너가 활동 상태 프로브를 지정하지 않은 경우, 이 프로브는 컨테이너가 **Running** 상태이면 컨테이너가 작동 중이라고 가정하므로 성공합니다.</p>
   <p>**준비 상태 프로브**: 컨테이너가 요청 및 외부 트래픽을 수신할 준비가 되었는지 확인하는 준비 상태 프로브를 설정합니다. 이 프로브가 실패하면 팟(Pod)의 IP 주소가 제거되며 해당 주소가 팟(Pod)과 일치하는 서비스를 위한 사용 가능한 IP 주소가 되지만, 컨테이너가 다시 시작되지는 않습니다. 앱이 시작되는 데 어느 정도 시간이 소요되는 경우에는 초기 지연 시간이 있는 준비 상태 프로브를 설정하는 것이 특히 중요합니다. 초기 지연 시간이 경과하기 전에는 프로브가 시작되지 않으며, 이는 컨테이너가 준비를 완료할 시간을 줍니다. 컨테이너가 준비 상태 프로브를 제공하지 않은 경우, 이 프로브는 컨테이너가 **Running** 상태이면 컨테이너가 작동 중이라고 가정하므로 성공합니다.</p>
   <p>명령, HTTP 요청 또는 TCP 소켓으로 프로브를 설정할 수 있습니다. 다음 예는 HTTP 요청을 사용합니다. 준비 상태 프로브보다 활동 상태 프로브에 더 많은 시간을 지정하십시오. 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)를 참조하십시오.</p>
@@ -327,7 +327,7 @@ port: 9080
   initialDelaySeconds: 45
 periodSeconds: 5</pre></code></p></dd>
 
-<dt id="service">앱 노출 서비스</dt>
+<dt id="app-service">앱 노출 서비스</dt>
   <dd><p>앱을 노출하는 서비스를 작성할 수 있습니다. `spec` 섹션에서, `port` 및 레이블 값이 배치에 사용한 것과 일치하도록 하십시오. 이 서비스는 다음 예에서 `app: wasliberty`와 같은 레이블과 일치하는 오브젝트를 노출합니다.</p>
   <ul><li>기본적으로 서비스는 서비스를 클러스터 내에서만 액세스할 수 있도록 하며 클러스터 외부에서는 액세스할 수 없도록 하는 [`ClusterIP ` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/)를 사용합니다.</li>
   <li>NodePort, 로드 밸런서 또는 Ingress 서비스를 작성하여 앱을 외부에 공개할 수 있습니다. 이러한 서비스에는 두 개의 IP 주소(하나는 외부, 하나는 내부)가 있습니다. 외부 IP 주소에 트래픽이 수신되면, 이는 내부 클러스터 IP 주소로 전달됩니다. 그 후 이 트래픽은 내부 클러스터 IP 주소에서 앱의 컨테이너 IP 주소로 라우팅됩니다.</li>
@@ -484,6 +484,9 @@ metadata:
   name: wasliberty
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: wasliberty
   template:
     metadata:
       labels:
@@ -621,7 +624,7 @@ spec:
 시작하기 전에:
 * Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 * [콘솔에서 Kubernetes 대시보드를 시작](#db_gui)하려면 [플랫폼 역할](/docs/containers?topic=containers-users#platform)이 지정되어야 합니다. 서비스 역할만 지정되었지만 플랫폼 역할이 지정되지 않은 경우에는 [CLI에서 Kubernetes 대시보드를 시작](#db_cli)하십시오.
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 기본 포트를 사용하거나 자체 포트를 설정하여 클러스터에 대한 Kubernetes 대시보드를 실행할 수 있습니다.
 
@@ -695,7 +698,7 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 시작하기 전에:
 
 -   [필수 CLI를 설치](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)하십시오.
--   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+-   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 -   [콘솔에서 Kubernetes 대시보드를 시작](#db_gui)하려면 [플랫폼 역할](/docs/containers?topic=containers-users#platform)이 지정되어야 합니다. 서비스 역할만 지정되었지만 플랫폼 역할이 지정되지 않은 경우에는 [CLI에서 Kubernetes 대시보드를 시작](#db_cli)하십시오.
 
@@ -725,7 +728,7 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 시작하기 전에:
 
 -   필수 [CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)를 설치하십시오.
--   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+-   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 
 앱을 배치하려면 다음을 수행하십시오.
@@ -759,7 +762,7 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 {:shortdesc}
 
 시작하기 전에:
-*   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 
 특정 작업자 노드에 앱을 배치하려면 다음을 수행하십시오.
@@ -791,17 +794,17 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
     Roles:              <none>
     Labels:             arch=amd64
                         beta.kubernetes.io/arch=amd64
-                        beta.kubernetes.io/instance-type=b2c.4x16.encrypted
+                        beta.kubernetes.io/instance-type=b3c.4x16.encrypted
                         beta.kubernetes.io/os=linux
                         failure-domain.beta.kubernetes.io/region=us-south
                         failure-domain.beta.kubernetes.io/zone=dal10
                         ibm-cloud.kubernetes.io/encrypted-docker-data=true
                         ibm-cloud.kubernetes.io/ha-worker=true
                         ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                        ibm-cloud.kubernetes.io/machine-type=b2c.4x16.encrypted
+                        ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.12.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.12.7_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -835,7 +838,7 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
     ```
     {: codeblock}
 
-    예제 YAML의 **affinity** 섹션에서는 `ibm-cloud.kubernetes.io/worker-pool-id`가 `key`이며 `<worker_pool_ID>`이 `value`입니다.
+    예제 YAML의 **affinity** 섹션에서는 `ibm-cloud.kubernetes.io/worker-pool-id`가 `key`이며 `<worker_pool_ID>`는 `value`입니다.
 
 5. 업데이트된 배치 구성 파일을 적용하십시오.
     ```
@@ -873,14 +876,14 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 
         ```
         ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b3c.4x16          normal   Ready   dal12   1.8.6_1504
         ```
         {: screen}
 
         다른 요인을 기반으로 친화성 규칙을 작성한 경우에는 해당 값을 대신 가져오십시오. 예를 들어, 앱 팟(Pod)이 특정 VLAN의 작업자 노드에 배치되었는지 확인하려면 `ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_ID>`를 실행하여 작업자 노드가 있는 VLAN을 보십시오.
-        {: tip}
+       {: tip}
 
     4. 출력에서, 이전 단계에서 식별한 사설 IP 주소의 작업자 노드가 이 작업자 풀에 배치되었는지 확인하십시오.
 
@@ -897,7 +900,6 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 
 시작하기 전에:
 * [베어메탈 GPU 머신 유형을 작성](/docs/containers?topic=containers-clusters#clusters_cli)하십시오. 이 프로세스를 완료하는 데 1영업일 이상이 걸릴 수 있습니다.
-* 클러스터 마스터와 GPU 작업자 노드가 Kubernetes 버전 1.10 이상에서 실행되어야 합니다.
 * 네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 
 GPU 머신에서 워크로드를 실행하려면 다음을 수행하십시오.
@@ -938,7 +940,7 @@ GPU 머신에서 워크로드를 실행하려면 다음을 수행하십시오.
     ```
     {: codeblock}
 
-    <table>
+    <table summary="1열의 YAML 파일 필드 및 2열의 해당 필드를 채우는 방법에 대해 설명하는 표입니다.">
     <caption>YAML 컴포넌트</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
@@ -1063,11 +1065,11 @@ GPU 머신에서 워크로드를 실행하려면 다음을 수행하십시오.
 Kubernetes에서는 [수평 팟(Pod) Auto-Scaling ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)을 사용하여 CPU를 기반으로 앱의 인스턴스 수를 늘리거나 줄일 수 있습니다.
 {:shortdesc}
 
-Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니까? [{{site.data.keyword.Bluemix_notm}}에 대한 IBM Auto-Scaling](/docs/services/Auto-Scaling?topic=services/Auto-Scaling-get-started)을 확인하십시오. 팟(Pod) 대신 작업자 노드를 스케일링하시겠습니까? [클러스터 오토스케일러](/docs/containers?topic=containers-ca#ca)를 확인하십시오.
+Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니까? [{{site.data.keyword.Bluemix_notm}}에 대한 IBM Auto-Scaling](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started#get-started)을 확인하십시오. 팟(Pod) 대신 작업자 노드를 스케일링하시겠습니까? [클러스터 오토스케일러](/docs/containers?topic=containers-ca#ca)를 확인하십시오.
 {: tip}
 
 시작하기 전에:
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - heapster 모니터링은 Auto-Scaling을 수행할 클러스터에 배치되어야 합니다.
 - 네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 
@@ -1080,7 +1082,7 @@ Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니�
     ```
     {: pre}
 
-    <table>
+    <table summary="1열의 Kubectl 명령 옵션 및 2열의 해당 옵션을 채우는 방법에 대해 설명하는 표입니다.">
     <caption>`kubectl run`에 대한 명령 컴포넌트</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
@@ -1113,7 +1115,7 @@ Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니�
     ```
     {: pre}
 
-    <table>
+    <table summary="1열의 Kubectl 명령 옵션 및 2열의 해당 옵션을 채우는 방법에 대해 설명하는 표입니다.">
     <caption>`kubectl autoscale`에 대한 명령 컴포넌트</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
@@ -1147,12 +1149,65 @@ Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니�
 {: tip}
 
 시작하기 전에:
-*   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   [배치](#app_cli)를 작성하십시오.
 *   네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
 
 앱에 대한 롤링 업데이트를 관리하려면 다음을 수행하십시오.
-1.  변경사항을 [롤아웃 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment)하십시오. 예를 들어, 초기 배치에 사용된 이미지를 변경할 수 있습니다.
+1.  컨테이너가 실행 중이고 요청을 대한 준비가 된 경우에만 배치가 준비로 표시되는지 확인하려면 [활동 상태 및 준비 상태 프로브를 배치](#probe)에 추가하십시오.
+
+2.  업데이트 중에 최대 갑작스러운 증가 및 사용 불가능한 팟(Pod) 또는 팟(Pod)의 백분율을 지정하는 롤링 업데이트 전략을 포함하도록 배치를 업데이트하십시오. 
+
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:  
+      name: nginx-test
+    spec:
+      replicas: 10
+      selector:
+        matchLabels:
+          service: http-server
+      minReadySeconds: 5
+      progressDeadlineSeconds: 600
+      strategy: 
+        type: RollingUpdate  
+        rollingUpdate:    
+          maxUnavailable: 50%
+          maxSurge: 2
+    ...
+    ```
+    {: codeblock}
+
+    <table summary="1열의 YAML 파일 필드 및 2열의 해당 필드를 채우는 방법에 대해 설명하는 표입니다.">
+    <caption>YAML 컴포넌트</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>spec.minReadySeconds</code></td>
+    <td>기본적으로 배치는 팟(Pod)이 롤아웃을 계속하도록 `ready`로 표시될 때까지 대기합니다. 최신 팟(Pod)의 앱이 아직 준비되지 않은 경우에도 배치가 계속해서 팟(Pod)을 작성하는 경우 이 필드를 사용하여 배치 롤아웃의 속도를 늦추십시오. 예를 들어, `5`를 지정하는 경우 배치는 팟(Pod)이 다음 팟(Pod)을 작성하기 전에 `ready`가 된 후 5초를 기다립니다. </td>
+    </tr>
+    <tr>
+    <td><code>spec.progressDeadlineSeconds</code></td>
+    <td>배치가 실패로 간주되기 전에 제한시간(초)를 설정하십시오. 예를 들어, 제한시간 없이 새 앱 버전에 버그가 있고 즉시 정지되는 경우 팟(Pod)이 `ready` 상태에 도달하지 않으므로 롤아웃을 계속할 수 없습니다. 이 제한시간을 `600`초로 설정하는 경우 롤아웃의 단계에서 10초 동안 진행하는 데 실패하는 경우 배치는 실패로 표시되고 롤아웃이 중지됩니다. </td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.type</code></td>
+    <td>`RollingUpdate` 전략 유형을 지정하십시오.</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxUnavailable</code></td>
+    <td>업데이트 중에 사용하지 못할 수 있는 팟(Pod)의 최대 수를 숫자(`2`) 또는 백분율(`50%`)로 설정하십시오. 일반적으로 하나의 팟(Pod)만 한 번에 작동 중지할 수 있도록 롤아웃을 제한하지 않는 한 복제본의 수를 나중에 변경하는 경우 여기서 숫자를 업데이트하는 것을 기억할 필요가 없도록 백분율을 사용하십시오. 100% 용량 미만이 되기를 원하지 않는 경우 이 값을 `0%`로 설정하고 `spec.strategy.type.rollingUpdate.maxSurge` 매개변수로 지정하십시오.</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
+    <td>배치가 롤아웃 중에 사용할 수 있는 추가 리소스의 최대 수를 숫자(`2`) 또는 백분율(`50%`)로 설정하십시오. 예를 들어, 배치가 `10`개의 복제본을 지정하고 `maxSurge`를 `2`로 설정하는 경우 롤아웃 중에 2개의 새 복제본이 작성됩니다. 이제 12개의 복제본(10개의 기존 복제본, 2개의 신규 복제본)을 보유하게 됩니다. 2개의 새 복제본이 이미 준비된 후에는 지정된 10개의 복제본을 총족하도록 배치가 이전 복제본을 8로 스케일링 다운합니다. 이 프로세스는 롤아웃이 완료되고 모든 10개의 복제본이 새 버전을 실행할 때까지 계속됩니다. <p class="tip">Blue-Green 간의 즉각적인 전환 스타일 업데이트를 수행하려면 `maxSurge`를 `100%`로 설정하십시오. 배치는 새 필수 복제본을 모두 작성한 후 이전 버전 복제본을 0으로 스케일링 다운합니다.</p></td>
+    </tr>
+    </tbody></table>
+
+3.  변경사항을 [롤아웃 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment)하십시오. 예를 들어, 초기 배치에 사용된 이미지를 변경할 수 있습니다.
 
     1.  배치 이름을 가져오십시오.
 
@@ -1184,14 +1239,26 @@ Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니�
 
     명령을 실행하면 변경사항이 즉시 적용되며 롤아웃 히스토리에 로깅됩니다.
 
-2.  배치의 상태를 확인하십시오.
+4.  배치의 상태를 확인하십시오.
 
     ```
     kubectl rollout status deployments/<deployment_name>
     ```
     {: pre}
 
-3.  변경사항을 롤백하십시오.
+    상태에서 추적할 시간이 필요한 항목을 발견한 경우 다음 명령을 사용하여 롤아웃을 일시정지하고 재개할 수 있습니다.
+
+    ```
+    kubectl rollout pause deployment <deployment_name>
+    ```
+    {: pre}
+
+    ```
+    kubectl rollout resume deployment <deployment_name>
+    ```
+    {: pre}
+
+5.  변경사항을 롤백하십시오.
     1.  배치의 롤아웃 히스토리를 보고 마지막 배치의 개정 번호를 식별하십시오.
 
         ```

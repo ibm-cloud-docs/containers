@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, docker
 
@@ -102,7 +102,7 @@ usar um serviço para tornar seu app disponível no cluster ou na Internet públ
 <dt>Implementação</dt>
 <dd>Uma implementação é um recurso do Kubernetes em que se pode especificar informações sobre outros recursos ou habilidades que são necessários para executar seu app, tais como serviços, armazenamento persistente ou anotações. Você documenta uma implementação em um arquivo YAML de configuração e, depois, aplica ao cluster. O mestre do Kubernetes configura os recursos e implementa os contêineres em pods nos nós do trabalhador com capacidade disponível.
 </br></br>
-Defina as estratégias de atualização para seu app, incluindo o número de pods que você deseja incluir durante uma atualização contínua e o número de pods que podem estar indisponíveis por vez. Quando você executar a uma atualização contínua, a implementação verificará se a atualização está funcionando e parará o lançamento quando falhas forem detectadas.</dd>
+Defina estratégias de atualização para seu aplicativo, incluindo o número de pods que deseja incluir durante uma atualização contínua e o número de pods que podem estar indisponíveis por vez. Quando você executar a uma atualização contínua, a implementação verificará se a atualização está funcionando e parará o lançamento quando falhas forem detectadas.</dd>
 
 <dt>Pod</dt>
 <dd>Cada app conteinerizado implementado em um cluster é implementado, executado e gerenciado por um recurso do Kubernetes que é chamado de pod. Os pods representam pequenas unidades implementáveis em um cluster do Kubernetes e são usados para agrupar os contêineres que devem ser tratados como uma unidade única. Na maioria dos casos, cada contêiner é implementado em seu próprio pod. No entanto, um app pode requerer que um contêiner e outros contêineres auxiliares sejam implementados em um pod para que esses contêineres possam ser direcionados usando o mesmo endereço IP privado.</dd>
@@ -149,7 +149,7 @@ Qual é a diferença entre o mestre do Kubernetes e um nó do trabalhador? Feliz
 
 <dl>
   <dt>Mestre do Kubernetes</dt>
-    <dd>O mestre do Kubernetes é encarregado de gerenciar todos os recursos de cálculo, rede e armazenamento no cluster. O mestre do Kubernetes assegura que seus apps e serviços conteinerizados sejam igualmente implementados nos nós do trabalhador no cluster. Dependendo de como você configura seu app e serviços, o mestre determina o nó do trabalhador que tem recursos suficientes para preencher os requisitos do app.</br></br>A tabela a seguir descreve os componentes do mestre do Kubernetes.
+    <dd>O mestre do Kubernetes é encarregado de gerenciar todos os recursos de cálculo, rede e armazenamento no cluster. O mestre do Kubernetes assegura que seus apps e serviços conteinerizados sejam igualmente implementados nos nós do trabalhador no cluster. Dependendo de como você configura seu aplicativo e serviços, o principal determina o nó do trabalhador que possui recursos suficientes para atender aos requisitos do aplicativo.</br></br>A tabela a seguir descreve os componentes do principal do Kubernetes.
     <table>
     <caption>Componentes do mestre do Kubernetes</caption>
     <thead>
@@ -180,7 +180,7 @@ no cluster.</td>
     </tr>
     </tbody></table></dd>
   <dt>Nó do trabalhador</dt>
-    <dd>Cada nó do trabalhador é uma máquina física (bare metal) ou uma máquina virtual que é executada em hardware físico no ambiente de nuvem. Ao provisionar um nó do trabalhador, você determina os recursos que estão disponíveis para os contêineres hospedados nesse nó do trabalhador. Prontos para utilização, os nós do trabalhador são configurados com um mecanismo de Docker gerenciado pela {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e um serviço de volume. Os recursos de segurança integrada fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador.</br></br><p class="note">A modificação de componentes do nó do trabalhador padrão, como `kubelet`, não é suportada e pode causar resultados inesperados.</p>A tabela a seguir descreve os componentes de um nó do trabalhador.
+    <dd>Cada nó do trabalhador é uma máquina física (bare metal) ou uma máquina virtual que é executada em hardware físico no ambiente de nuvem. Ao provisionar um nó do trabalhador, você determina os recursos que estão disponíveis para os contêineres hospedados nesse nó do trabalhador. Prontos para utilização, os nós do trabalhador são configurados com um mecanismo de Docker gerenciado pela {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e um serviço de volume. Os recursos integrados de segurança fornecem isolamento, gerenciamento de recursos e conformidade de segurança do nó do trabalhador.</br></br><p class="note">A modificação de componentes do nó do trabalhador padrão, como `kubelet`, não é suportada e pode causar resultados inesperados.</p>A tabela a seguir descreve os componentes de um nó do trabalhador.
     <table>
     <caption>Componentes de nós do trabalhador</caption>
     <thead>
@@ -192,7 +192,7 @@ no cluster.</td>
     <tr>
     <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
-    <td>Para clusters que executam o Kubernetes versão 1.10 ou mais recente, o `ibm-master-proxy` encaminha solicitações do nó do trabalhador para os endereços IP das réplicas do mestre altamente disponíveis. Em clusters de zona única, o principal tem três réplicas em hosts separados com um endereço IP principal e um nome de domínio. Para clusters que estão em uma zona com capacidade para várias zonas, o mestre tem três réplicas que são difundidas entre as zonas. Dessa forma, cada mestre tem seu próprio endereço IP que é registrado com o DNS, com um nome de domínio para o cluster mestre inteiro.</td>
+    <td>O `ibm-master-proxy` encaminha solicitações do nó do trabalhador para os endereços IP das réplicas principais altamente disponíveis. Em clusters de zona única, o principal tem três réplicas em hosts separados com um endereço IP principal e um nome de domínio. Para clusters que estão em uma zona com capacidade para várias zonas, o mestre tem três réplicas que são difundidas entre as zonas. Dessa forma, cada mestre tem seu próprio endereço IP que é registrado com o DNS, com um nome de domínio para o cluster mestre inteiro.</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
@@ -262,5 +262,5 @@ no cluster.</td>
     </tbody></table></dd>
 </dl>
 
-Quer ver como o {{site.data.keyword.containerlong_notm}} pode ser usado com outros produtos e serviços? Confira algumas das [integrações](/docs/containers?topic=containers-integrations#integrations).
+Quer ver como o {{site.data.keyword.containerlong_notm}} pode ser usado com outros produtos e serviços? Confira algumas das [integrações](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}

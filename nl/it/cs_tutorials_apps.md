@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -79,8 +79,7 @@ Gli sviluppatori software e gli amministratori di rete che stanno distribuendo u
 ## Prerequisiti
 {: #apps_prereqs}
 
-* [Esercitazione: Creazione di cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* Installa il [plug-in container-registry](/docs/services/Registry?topic=registry-index#registry_cli_install).
+[Esercitazione: Creazione dei cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## Lezione 1: Distribuzione di singole applicazioni dell'istanza ai cluster Kubernetes
@@ -257,7 +256,7 @@ dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione del
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 
@@ -554,7 +553,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: codeblock}
 
-    2.  Nella sezione relativa ai volumi della distribuzione watson, aggiorna il nome del segreto {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} che hai creato nella precedente [esercitazione Creazione dei cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). Montando il segreto Kubernetes come volume nella tua distribuzione, rendi la chiave API {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) disponibile al contenitore che è in esecuzione nel tuo pod. I componenti dell'applicazione {{site.data.keyword.watson}} in questa esercitazione sono configurati per cercare la chiave API utilizzando il percorso di montaggio del volume.
+    2.  Nella sezione relativa ai volumi della distribuzione `watson-pod`, aggiorna il nome del segreto {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} che hai creato nella precedente [esercitazione Creazione dei cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). Montando il segreto Kubernetes come volume nella tua distribuzione, rendi la chiave API {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) disponibile al contenitore che è in esecuzione nel tuo pod. I componenti dell'applicazione {{site.data.keyword.watson}} in questa esercitazione sono configurati per cercare la chiave API utilizzando il percorso di montaggio del volume.
 
         ```
         volumes:
@@ -572,7 +571,8 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: pre}
 
-    3.  Nella sezione del servizio watson-talk, prendi nota del valore impostato per la `NodePort`. Questo esempio utilizza 30080.
+    3.  Nella sezione del servizio watson-talk, prendi nota del valore impostato per la
+`NodePort`. Questo esempio utilizza 30080.
 
 7.  Esegui lo script di configurazione.
 
@@ -619,7 +619,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: codeblock}
 
-9.  Apri un browser e analizza del testo. Il formato dell'URL è `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
+9.  Apri un browser e analizza del testo. Il formato dell'URL è `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/ "<text_to_analyze>"`.
 
     Esempio:
 
@@ -635,7 +635,7 @@ un browser, puoi visualizzare la risposta JSON per il testo che hai immesso.
 
 11. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato.
 
-### Lezione 3b. Aggiornamento della distribuzione Watson Tone Analyzer in esecuzione
+### Lezione 3b. Aggiornamento ed esecuzione della distribuzione Watson Tone Analyzer
 {: #lesson3b}
 
 Mentre una distribuzione è in esecuzione, puoi modificare la distribuzione per modificare i valori nel template di pod. Questa lezione include l'aggiornamento dell'immagine utilizzata. L'agenzia di PR vuole modificare l'applicazione nella distribuzione.

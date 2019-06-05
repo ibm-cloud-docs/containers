@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -23,13 +23,16 @@ subcollection: containers
 {:download: .download}
 
 
-# {{site.data.keyword.Bluemix_dedicated_notm}}에서 클러스터 시작하기
+# 더 이상 사용되지 않음: {{site.data.keyword.Bluemix_dedicated_notm}}에서 클러스터 시작하기
 {: #dedicated}
 
-{{site.data.keyword.Bluemix_dedicated}} 계정이 있는 경우 데디케이티드 클라우드 환경(`https://<my-dedicated-cloud-instance>.bluemix.net`)에서 Kubernetes 클러스터를 배치하고 이 환경에서 실행 중인 사전 선택된 {{site.data.keyword.Bluemix_notm}} 서비스와 연결할 수 있습니다.
+{{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_dedicated_notm}}는 더 이상 사용되지 않습니다. {{site.data.keyword.Bluemix_dedicated_notm}} 환경에서는 클러스터를 작성할 수 없습니다. {{site.data.keyword.Bluemix_notm}} Public에서 클러스터를 작성하려면 [{{site.data.keyword.containerlong_notm}} 시작하기](/docs/containers?topic=containers-getting-started)를 참조하십시오.
+{: deprecated}
+
+{{site.data.keyword.Bluemix_dedicated_notm}} 계정이 있는 경우 데디케이티드 클라우드 환경(`https://<my-dedicated-cloud-instance>.bluemix.net`)에서 Kubernetes 클러스터를 배치하고 이 환경에서 실행 중인 사전 선택된 {{site.data.keyword.Bluemix_notm}} 서비스와 연결할 수 있습니다.
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_dedicated_notm}} 계정이 없으면 퍼블릭 {{site.data.keyword.Bluemix_notm}} 계정으로 [{{site.data.keyword.containerlong_notm}}를 시작](/docs/containers?topic=containers-container_index)할 수 있습니다.
+{{site.data.keyword.Bluemix_dedicated_notm}} 계정이 없으면, 퍼블릭 {{site.data.keyword.Bluemix_notm}} 계정으로 [{{site.data.keyword.containerlong_notm}}를 시작](/docs/containers?topic=containers-getting-started)할 수 있습니다.
 
 ##  데디케이티드 클라우드 환경 정보
 {: #dedicated_environment}
@@ -166,7 +169,8 @@ subcollection: containers
         ```
         {: pre}
 
-        연합 ID가 있는 경우에는 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다.
+        연합 ID가 있는 경우에는 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso`를 사용하여
+{{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다.
         {: tip}
 
     2.  사용자를 퍼블릭 계정으로 초대하십시오.
@@ -388,7 +392,7 @@ subcollection: containers
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.6      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.7      Default
     ```
     {: screen}
 
@@ -406,7 +410,7 @@ subcollection: containers
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
     ```
     {: screen}
 
@@ -467,7 +471,7 @@ subcollection: containers
         {: codeblock}
 
 ### 작업자 노드 추가
-{: #add_workers}
+{: #add_workers_dedicated}
 
 {{site.data.keyword.Bluemix_dedicated_notm}}에서는 [단일 구역 클러스터](/docs/containers?topic=containers-plan_clusters#single_zone)만 작성할 수 있습니다. 기본적으로, 단일 구역 클러스터는 이름이 `default`인 작업자 풀로 설정됩니다. 작업자 풀은 클러스터 작성 중에 정의한 것과 동일한 구성(예: 머신 유형)으로 작업자 노드를 그룹화합니다. [기존 작업자 풀의 크기를 조정](/docs/containers?topic=containers-clusters#resize_pool)하거나 [새 작업자 풀을 추가](/docs/containers?topic=containers-clusters#add_pool)하여 클러스터에 작업자 노드를 더 추가할 수 있습니다. 작업자 풀을 추가할 때는 작업자가 구역에 배치할 수 있도록 사용 가능한 구역을 작업자 풀에 추가해야 합니다. 그러나 작업자 풀에 기타 구역을 추가할 수는 없습니다.
 {: shortdesc}
@@ -524,7 +528,7 @@ subcollection: containers
     ```
     {: screen}
 
-4. **중요**: 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
+4. **중요**: 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
 
 5. 온프레미스 및 내부 계정 연결을 구성하려면 다음 옵션 중에서 선택하십시오.
   - 서브넷에 대해 10.x.x.x 사설 IP 주소 범위를 사용한 경우에는 해당 범위에서 유효한 IP를 사용하여 Ingress 및 로드 밸런서로 온프레미스 및 내부 계정 연결을 구성하십시오. 자세한 정보는 [NodePort, 로드 밸런서 또는 Ingress 서비스와의 네트워킹 계획](/docs/containers?topic=containers-cs_network_planning#external)을 참조하십시오.
@@ -539,7 +543,6 @@ subcollection: containers
   * [작업자 노드 업데이트](/docs/containers?topic=containers-update#worker_node)
   * [클러스터 로깅 구성](/docs/containers?topic=containers-health#logging). 로그 인에이블먼트는 데디케이티드 엔드포인트에서 지원되지 않습니다. 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하여 퍼블릭 조직 및 영역을 대상으로 지정해야 합니다.
   * [클러스터 모니터링 구성](/docs/containers?topic=containers-health#view_metrics). `ibm-monitoring` 클러스터는 각 {{site.data.keyword.Bluemix_dedicated_notm}} 계정 내에 존재합니다. 이 클러스터는 데디케이티드 환경에서 {{site.data.keyword.containerlong_notm}}의 상태를 계속 모니터링하고 환경의 안정성 및 연결성을 확인합니다. 환경에서 이 클러스터를 제거하지 마십시오.
-  * [Kubernetes 클러스터 리소스 시각화](/docs/containers?topic=containers-integrations#weavescope)
   * [클러스터 제거](/docs/containers?topic=containers-clusters#remove)
 
 <br />
@@ -564,7 +567,7 @@ Kubernetes 리소스에 대해 작업할 때 [개인 정보 보호](/docs/contai
 #### 로드 밸런서 서비스 유형을 사용하여 앱에 대한 액세스 구성
 {: #dedicated_apps_public_load_balancer}
 
-로드 밸런서에 대해 공인 IP 주소를 사용하려면 엔터프라이즈 방화벽 화이트리스트가 IBM에 제공되었는지 확인하거나 [지원 케이스를 열어서](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) 방화벽 화이트리스트를 구성하십시오. 그런 다음 [로드 밸런서를 사용한 앱 노출](/docs/containers?topic=containers-loadbalancer)의 단계를 따르십시오.
+로드 밸런서에 대해 공인 IP 주소를 사용하려면 엔터프라이즈 방화벽 화이트리스트가 IBM에 제공되었는지 확인하거나 [지원 케이스를 열어서](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) 방화벽 화이트리스트를 구성하십시오. 그런 다음 [네트워크 로드 밸런서(NLB)가 사용된 기본 및 DSR 로드 밸런싱](/docs/containers?topic=containers-loadbalancer)의 단계를 따르십시오.
 {: shortdesc}
 
 #### Ingress를 사용하여 앱에 대한 공용 액세스 구성

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -43,7 +43,7 @@ subcollection: containers
 * [利用多个区域实现高可用性](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [容器安全性和隔离](/docs/containers?topic=containers-security#security)
-* [用于跨应用程序持久存储和同步数据的 {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} 可以跨应用程序持久存储和同步数据](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **解决方案**
@@ -83,9 +83,9 @@ subcollection: containers
 
 {{site.data.keyword.SecureGateway}} 用于针对要重新托管以在 {{site.data.keyword.containerlong_notm}} 中运行的应用程序，创建通往内部部署数据库和文档的安全管道。
 
-{{site.data.keyword.cos_full_notm}} 在其推进过程中适用于所有原始文档和数据存储器。为了进行蒙特卡洛模拟，实施了一条工作流程管道，在其中模拟数据位于存储在 {{site.data.keyword.cos_full_notm}} 中的结构化输入文件中。用于启动模拟的触发器会缩放 {{site.data.keyword.containerlong_notm}} 中的计算服务，以将输入数据拆分成 N 个事件存储区来进行模拟处理。{{site.data.keyword.containerlong_notm}} 会自动缩放到 N 个关联的服务执行，然后将中间结果写入 {{site.data.keyword.cos_full_notm}}。这些结果由另一组 {{site.data.keyword.containerlong_notm}} 计算服务进行处理，以生成最终结果。
+{{site.data.keyword.cos_full_notm}} 在其推进过程中适用于所有原始文档和数据存储器。为了进行蒙特卡洛模拟，实施了一条工作流程管道，其中模拟数据位于在 {{site.data.keyword.cos_full_notm}} 中存储的结构化文件中。启动模拟的触发器在 {{site.data.keyword.containerlong_notm}} 中扩展计算服务，用于将文件的数据拆分成 N 个事件存储区以进行模拟处理。{{site.data.keyword.containerlong_notm}} 会自动缩放到 N 个关联的服务执行，然后将中间结果写入 {{site.data.keyword.cos_full_notm}}。这些结果由另一组 {{site.data.keyword.containerlong_notm}} 计算服务进行处理，以生成最终结果。
 
-{{site.data.keyword.cloudant}} 是一种现代 NoSQL 数据库，对于许多数据驱动的用例非常有用：从键/值到复杂的面向文档的数据存储和查询。为了管理不断增长的法规和管理报告规则集，该抵押贷款公司使用 {{site.data.keyword.cloudant}} 来存储与传入公司的原始监管数据输入关联的文档。这将触发 {{site.data.keyword.containerlong_notm}} 上的计算过程来汇集、处理和发布各种报告格式的数据。通用于各个报告的中间结果会存储为 {{site.data.keyword.cloudant}} 文档，以便可以使用模板驱动的过程来生成必要的报告。
+{{site.data.keyword.cloudant}} 是一种现代 NoSQL 数据库，对于许多数据驱动的用例非常有用：从键/值到复杂的面向文档的数据存储和查询。为了管理不断增长的监管和管理报告规则集，抵押贷款公司使用 {{site.data.keyword.cloudant}} 来存储与传入公司的原始监管数据关联的文档。这将触发 {{site.data.keyword.containerlong_notm}} 上的计算过程来汇集、处理和发布各种报告格式的数据。通用于各个报告的中间结果会存储为 {{site.data.keyword.cloudant}} 文档，以便可以使用模板驱动的过程来生成必要的报告。
 
 **结果**
 

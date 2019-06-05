@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ Pourquoi {{site.data.keyword.Bluemix_notm}} ? Avec {{site.data.keyword.container
 Technologies clés :    
 * [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Accès aux données publiques avec {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)
+* [Accès aux données publiques avec {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
 * [Services IBM Cloud Analytics prêts à l'emploi](https://www.ibm.com/cloud/analytics)
 
 **L'administration améliore la collaboration et la rapidité d'exécution avec des développeurs de la communauté qui combinent des données publiques et privées**

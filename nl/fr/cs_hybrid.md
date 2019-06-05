@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -32,7 +32,7 @@ subcollection: containers
 Si vous disposez d'un compte {{site.data.keyword.Bluemix}} Private, vous pouvez l'utiliser avec une sélection de services {{site.data.keyword.Bluemix_notm}}, notamment {{site.data.keyword.containerlong}}. Pour plus d'informations, voir le blogue concernant l'[expérience hybride sur {{site.data.keyword.Bluemix_notm}} Private et IBM Cloud Public![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://ibm.biz/hybridJune2018).
 {: shortdesc}
 
-Vous venez de découvrir les [offres {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_ov#differentiation). Vous pouvez maintenant [connecter votre cloud public et votre cloud privé](#hybrid_vpn) et [réutiliser vos packages privés pour des conteneurs publics](#hybrid_ppa_importer).
+Vous comprenez les [offres {{site.data.keyword.Bluemix_notm}} ](/docs/containers?topic=containers-cs_ov#differentiation) et avez développé votre stratégie Kubernetes en fonction des [charges de travail à exécuter sur le cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Vous pouvez maintenant [connecter votre cloud public et votre cloud privé](#hybrid_vpn) et [réutiliser vos packages privés pour des conteneurs publics](#hybrid_ppa_importer).
 
 ## Connexion de votre cloud public et de votre cloud privé au réseau privé virtuel (VPN) strongSwan
 {: #hybrid_vpn}
@@ -94,6 +94,11 @@ Etablissez une connexion VPN entre votre cluster Kubernetes public et votre inst
 
 8.  Répétez ces étapes pour chaque cluster que vous souhaitez connecter.
 
+**Etape suivante ?**
+
+*   [Exécutez vos images logicielles sous licence dans des clusters publics](#hybrid_ppa_importer).
+*   Pour gérer plusieurs clusters Kubernetes en cloud, par exemple, dans {{site.data.keyword.Bluemix_notm}} Public et {{site.data.keyword.Bluemix_notm}} Private, voir [IBM Multicloud Manager ![Icône de lien etxterne](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
+
 
 ## Exécution d'images {{site.data.keyword.Bluemix_notm}} Private dans des conteneurs Kubernetes publics
 {: #hybrid_ppa_importer}
@@ -117,7 +122,7 @@ Avant de commencer :
 - [Installez le plug-in de l'interface CLI {{site.data.keyword.registryshort}} (`ibmcloud cr`)](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install).
 - [Configurez un espace de nom dans {{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup) ou récupérez votre espace de nom existant en exécutant la commande `ibmcloud cr namespaces`.
 - [Ciblez votre interface CLI `kubectl` sur votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- [Installez l'interface CLI de Helm et configurez Tiller dans votre cluster](/docs/containers?topic=containers-integrations#helm).
+- [Installez l'interface CLI de Helm et configurez Tiller dans votre cluster](/docs/containers?topic=containers-helm#public_helm_install).
 
 Pour déployer une image {{site.data.keyword.Bluemix_notm}} Private sur un cluster dans {{site.data.keyword.Bluemix_notm}} Public :
 

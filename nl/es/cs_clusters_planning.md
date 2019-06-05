@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -56,21 +56,21 @@ De forma predeterminada, un clúster de una sola zona se configura con una agrup
 Cuando se añaden nodos trabajadores, las instancias de la app se pueden distribuir entre varios nodos trabajadores. Si un nodo trabajador queda inactivo, las instancias de la app de los nodos trabajadores disponibles continúan ejecutándose. Kubernetes vuelve a planificar automáticamente los pods de los nodos trabajadores no disponibles para garantizar el rendimiento y la capacidad de la app. Para asegurarse de que los pods están uniformemente distribuidos entre los nodos trabajadores, implemente la [afinidad de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
 
 **¿Puedo convertir un clúster de una sola zona en un clúster multizona?**</br>
-Si el clúster se encuentra en una de las [ciudades metropolitanas multizona soportadas](/docs/containers?topic=containers-regions-and-zones#zones), sí. Consulte [Actualización de nodos trabajadores autónomos a agrupaciones de nodos trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool).
+Si el clúster se encuentra en una de las [ubicaciones metropolitanas multizona soportadas](/docs/containers?topic=containers-regions-and-zones#zones), sí. Consulte [Actualización de nodos trabajadores autónomos a agrupaciones de nodos trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 **¿Tengo que utilizar clústeres multizona?**</br>
 No. Puede crear tantos clústeres de una sola zona como desee. De hecho, quizás prefiera clústeres de una sola zona para facilitar la gestión o si el clúster debe residir en una [ciudad de una sola zona](/docs/containers?topic=containers-regions-and-zones#zones) específica.
 
 **¿Puedo tener un maestro de alta disponibilidad en una sola zona?**</br>
-Sí, con clústeres que ejecuten Kubernetes versión 1.10 o posterior. En una única zona, el maestro está altamente disponible e incluye réplicas en hosts físicos independientes para que el servidor de API de Kubernetes, etcd, el planificador y el gestor de controladores puedan protegerse frente a una interrupción como, por ejemplo, la actualización del maestro. Para protegerse frente a un error zonal, puede:
+Sí. En una única zona, el maestro está altamente disponible e incluye réplicas en hosts físicos independientes para que el servidor de API de Kubernetes, etcd, el planificador y el gestor de controladores puedan protegerse frente a una interrupción como, por ejemplo, la actualización del maestro. Para protegerse frente a un error zonal, puede:
 * [Crear un clúster en una zona con capacidad multizona](/docs/containers?topic=containers-plan_clusters#multizone), donde el maestro se disperse en zonas.
 * [Crear varios clústeres](#multiple_clusters) y conectarlos con un equilibrador de carga global.
 
 ## Clúster multizona
 {: #multizone}
 
-Con {{site.data.keyword.containerlong}}, puede crear clústeres multizona. Si distribuye sus apps entre varios nodos trabajadores y zonas mediante una agrupación de nodos trabajadores, es menos probable que los usuarios experimenten un tiempo de inactividad del sistema. Características incorporadas como, por ejemplo, el equilibrio de carga, incrementan la resiliencia frente a posibles anomalías de zona con hosts, redes o apps. Si caen los recursos de una zona, las cargas de trabajo del clúster siguen funcionando en las otras zonas. **Nota**: solo están disponibles clústeres de una sola zona para las instancias de {{site.data.keyword.Bluemix_dedicated_notm}}.
+Con {{site.data.keyword.containerlong_notm}}, puede crear clústeres multizona. Si distribuye sus apps entre varios nodos trabajadores y zonas mediante una agrupación de nodos trabajadores, es menos probable que los usuarios experimenten un tiempo de inactividad del sistema. Características incorporadas como, por ejemplo, el equilibrio de carga, incrementan la resiliencia frente a posibles anomalías de zona con hosts, redes o apps. Si caen los recursos de una zona, las cargas de trabajo del clúster siguen funcionando en las otras zonas.
 {: shortdesc}
 
 **¿Qué es una agrupación de nodos trabajadores?**</br>
@@ -81,7 +81,7 @@ La configuración de clúster anterior de nodos trabajadores estándares recibe 
 [utilizar agrupaciones de trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool) para organizar los nodos trabajadores en lugar de los nodos trabajadores autónomos.
 
 **¿Puedo convertir un clúster de una sola zona en un clúster multizona?**</br>
-Si el clúster se encuentra en una de las [ciudades metropolitanas multizona soportadas](/docs/containers?topic=containers-regions-and-zones#zones), sí. Consulte [Actualización de nodos trabajadores autónomos a agrupaciones de nodos trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool).
+Si el clúster se encuentra en una de las [ubicaciones metropolitanas multizona soportadas](/docs/containers?topic=containers-regions-and-zones#zones), sí. Consulte [Actualización de nodos trabajadores autónomos a agrupaciones de nodos trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 ### Más información sobre la configuración del clúster multizona
@@ -89,7 +89,7 @@ Si el clúster se encuentra en una de las [ciudades metropolitanas multizona sop
 
 <img src="images/cs_cluster_multizone-ha.png" alt="Alta disponibilidad para clústeres multizona" width="500" style="width:500px; border-style: none"/>
 
-Puede añadir zonas adicionales al clúster para replicar los nodos trabajadores de las agrupaciones de nodos trabajadores entre varias zonas dentro de una región. Los clústeres multizona se han diseñado para planificar uniformemente los pods entre nodos trabajadores y zonas a fin de garantizar su disponibilidad y la recuperación de errores. Si los nodos trabajadores no se distribuyen uniformemente entre las zonas o si no hay suficiente capacidad en una de las zonas, es posible que el planificador de Kubernetes no planifique todos los pods solicitados. Como resultado, los pods podrían pasar a estar en estado **Pendiente** hasta que haya suficiente capacidad disponible. Si desea cambiar el comportamiento predeterminado para que el planificador de Kubernetes distribuya los pods entre zonas con una mejor distribución, utilice la [política de afinidad de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
+Puede añadir zonas adicionales al clúster para replicar los nodos trabajadores de las agrupaciones de nodos trabajadores entre varias zonas dentro de una región. Los clústeres multizona se han diseñado para planificar uniformemente los pods entre nodos trabajadores y zonas a fin de garantizar su disponibilidad y la recuperación de errores. Si los nodos trabajadores no se distribuyen uniformemente entre las zonas o si la capacidad es insuficiente en una de las zonas, es posible que el planificador de Kubernetes no planifique todos los pods solicitados. Como resultado, los pods podrían pasar a estar en estado **Pendiente** hasta que haya suficiente capacidad disponible. Si desea cambiar el comportamiento predeterminado para que el planificador de Kubernetes distribuya los pods entre zonas con una mejor distribución, utilice la [política de afinidad de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
 
 **¿Por qué necesito nodos trabajadores en 3 zonas?** </br>
 La distribución de la carga de trabajo entre 3 zonas garantiza una alta disponibilidad para la app en el caso de que una o dos zonas no estén disponibles, pero también hace que la configuración del clúster sea más rentable. ¿Por qué?, se preguntará. Este es un ejemplo.
@@ -100,7 +100,7 @@ Supongamos que necesita un nodo trabajador con 6 núcleos para manejar la carga 
 - **Distribuir los recursos en 3 zonas:** con esta opción, despliega 3 núcleos por zona, lo que le deja con una capacidad total de 9 núcleos. Para manejar la carga de trabajo, siempre debe haber dos zonas activas. Si una zona no está disponible, las otras dos zonas pueden gestionar la carga de trabajo. Si dos zonas no están disponibles, los 3 núcleos restantes están activos para gestionar la carga de trabajo. El hecho de desplegar 3 núcleos por zona significa máquinas más pequeñas y, por lo tanto, menor coste.</br>
 
 **¿Cómo se configura mi nodo maestro de Kubernetes?** </br>
-Si crea un clúster multizona en [seleccionar ciudades metropolitanas multizona](/docs/containers?topic=containers-regions-and-zones#zones), se despliega automáticamente un nodo maestro de Kubernetes altamente disponible y se distribuyen tres réplicas por las zonas de la ciudad metropolitana. Por ejemplo, si el clúster está en las zonas `dal10`, `dal12` o `dal13`, las réplicas del nodo maestro de Kubernetes se distribuyen en cada zona de la ciudad metropolitana multizona de Dallas.
+Cuando se crea un clúster en una [ubicación metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones), se despliega automáticamente un maestro de Kubernetes de alta disponibilidad y se distribuyen tres réplicas por las zonas de la ubicación metropolitana. Por ejemplo, si el clúster está en las zonas `dal10`, `dal12` o `dal13`, las réplicas del nodo maestro de Kubernetes se distribuyen en cada zona de la ciudad metropolitana multizona de Dallas.
 
 **¿Qué sucede si el nodo maestro de Kubernetes deja de estar disponible?** </br>
 El [nodo maestro de Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) es el componente principal que mantiene el clúster en funcionamiento. El nodo maestro almacena los recursos de clúster y sus configuraciones en la base de datos etcd, que sirve como único punto fiable para el clúster. El servidor de API de Kubernetes es el punto de entrada principal para todas las solicitudes de gestión del clúster procedentes de los nodos trabajadores destinadas al nodo maestro, o cuando desea interactuar con los recursos de clúster.<br><br>Si se produce un fallo del nodo maestro, las cargas de trabajo siguen ejecutándose en los nodos trabajadores, pero no se pueden utilizar mandatos `kubectl` para trabajar con los recursos del clúster o ver el estado del clúster hasta que el servidor de API de Kubernetes del nodo maestro vuelve a estar activo. Si un pod cae durante la interrupción del nodo maestro, el pod no se puede volver a planificar hasta que el nodo trabajador pueda volver a acceder al servidor de API de Kubernetes.<br><br>Durante una interrupción del nodo maestro, todavía puede ejecutar mandatos `ibmcloud ks` en la API de {{site.data.keyword.containerlong_notm}} para trabajar con los recursos de la infraestructura, como nodos trabajadores o VLAN. Si cambia la configuración actual del clúster añadiendo o eliminando nodos trabajadores en el clúster, los cambios no se producen hasta que el nodo maestro vuelve a estar activo.
@@ -112,7 +112,7 @@ No reinicie o rearranque un nodo trabajador durante una interrupción del nodo m
 Para proteger el clúster frente a un error del nodo maestro de Kubernetes o en regiones en las que no hay clústeres multizona disponibles, puede [configurar varios clústeres y conectarlos con un equilibrador de carga global](#multiple_clusters).
 
 **¿Tengo que hacer algo para que el nodo maestro se pueda comunicar con los trabajadores entre zonas?**</br>
-Sí. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Sí. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 **¿Cómo puedo permitir que mis usuarios accedan a mi app desde Internet pública?**</br>
 Puede exponer sus apps utilizando un equilibrador de carga de aplicación (ALB) de Ingress o un servicio equilibrador de carga.
@@ -122,7 +122,7 @@ Puede exponer sus apps utilizando un equilibrador de carga de aplicación (ALB) 
 - **Servicios de equilibrador de carga:** los servicios del equilibrador de carga se configuran en una sola zona. Las solicitudes de entrada a la app se direccionan desde esa zona a todas las instancias de la app de otras zonas. Si esta zona deja de estar disponible, es posible que no se pueda acceder a la app desde Internet. Puede configurar servicios de equilibrador de carga adicionales en otras zonas como ayuda frente a un error de una sola zona. Para obtener más información, consulte [servicios del equilibrador de carga](/docs/containers?topic=containers-loadbalancer#multi_zone_config) de alta disponibilidad.
 
 **¿Puedo configurar el almacenamiento persistente para mi clúster multizona?**</br>
-Para el almacenamiento persistente de alta disponibilidad, utilice un servicio de nube, como por ejemplo [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage). También puede probar una solución de almacenamiento definido por software (SDS), como por ejemplo [Portworx](/docs/containers?topic=containers-portworx#portworx), que utiliza [máquinas SDS](#sds). Para obtener más información, consulte [Comparación entre opciones de almacenamiento persistente para clústeres multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Para el almacenamiento persistente de alta disponibilidad, utilice un servicio de nube, como por ejemplo [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). También puede probar una solución de almacenamiento definido por software (SDS), como por ejemplo [Portworx](/docs/containers?topic=containers-portworx#portworx), que utiliza [máquinas SDS](#sds). Para obtener más información, consulte [Comparación entre opciones de almacenamiento persistente para clústeres multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 El archivo NFS y el almacenamiento en bloque no se puede compartir entre zonas. Los volúmenes persistentes solo se pueden utilizar en la zona en la que se encuentra el dispositivo de almacenamiento real. Si tiene un archivo NFS o un almacenamiento en bloque existente en el clúster que desea seguir utilizando, debe aplicar las etiquetas de región y zona a los volúmenes persistentes existentes. Estas etiquetas ayudan a kube-scheduler a determinar dónde se debe planificar una app que utiliza un volumen persistente. Ejecute el mandato siguiente y sustituya `<mycluster>` por el nombre del clúster.
 
@@ -132,7 +132,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 {: pre}
 
 **He creado mi clúster multizona. ¿Por qué sigue habiendo una sola zona? ¿Cómo se añaden zonas a mi clúster?**</br>
-Si [crea el clúster multizona con la CLI](/docs/containers?topic=containers-clusters#clusters_cli), el clúster se crea, pero debe añadir zonas a la agrupación de nodos trabajadores para completar el proceso. Para abarcar varias zonas, el clúster debe estar en una [ciudad metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones). Para añadir una zona al clúster y distribuir los nodos trabajadores entre las zonas, consulte [Adición de una zona a un clúster](/docs/containers?topic=containers-clusters#add_zone).
+Si [crea el clúster multizona con la CLI](/docs/containers?topic=containers-clusters#clusters_cli), el clúster se crea, pero debe añadir zonas a la agrupación de nodos trabajadores para completar el proceso. Para abarcar varias zonas, el clúster debe estar en una [ubicación metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones). Para añadir una zona al clúster y distribuir los nodos trabajadores entre las zonas, consulte [Adición de una zona a un clúster](/docs/containers?topic=containers-clusters#add_zone).
 
 ### ¿Cómo va a cambiar la forma en la que gestiono actualmente mis clústeres?
 {: #mz_new_ways}
@@ -188,7 +188,7 @@ Puede configurar varios clústeres en distintas regiones de una geolocalización
 **Para configurar un equilibrador de carga global para varios clústeres:**
 
 1. [Cree clústeres](/docs/containers?topic=containers-clusters#clusters) en varias zonas o regiones.
-2. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+2. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 3. En cada clúster, exponga la app utilizando un [equilibrador de carga de aplicación (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) o un [servicio equilibrador de carga](/docs/containers?topic=containers-loadbalancer).
 4. Para cada clúster, obtenga una lista de las direcciones IP públicas correspondientes a los ALB o a los servicios equilibradores de carga.
    - Para obtener una lista de la dirección IP de todos los ALB públicos habilitados en el clúster:
@@ -290,18 +290,18 @@ el hipervisor asegura que cada nodo trabajador recibe su parte compartida de los
 
 Los nodos compartidos suelen resultar más económicos que los nodos dedicados porque los costes del hardware subyacente se comparten entre varios clientes. Sin embargo, cuando decida entre nodos compartidos y dedicados, debe ponerse en contacto con el departamento legal y ver el nivel de aislamiento y de conformidad de la infraestructura que necesita el entorno de app.
 
-Algunos tipos solo están disponibles para un tipo de configuración de arrendamiento. Por ejemplo, las máquinas virtuales `m2c`
+Algunos tipos solo están disponibles para un tipo de configuración de arrendamiento. Por ejemplo, las máquinas virtuales `m3c`
 solo están disponibles como configuración de arrendamiento `compartido`.
 {: note}
 
 **¿Cuáles son las características generales de las máquinas virtuales?**</br>
 Las máquinas virtuales utilizan el disco local en lugar de la red de área de almacenamiento (SAN) por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Todas las máquinas virtuales se suministran con velocidad de red de 1000 Mbps, 25 GB de almacenamiento en disco local primario para el sistema de archivos del sistema operativo y 100 GB de almacenamiento en disco local secundario para datos como, por ejemplo, el tiempo de ejecución de contenedor y `kubelet`. El almacenamiento local en el nodo trabajador solo es para el proceso a corto plazo y los discos primario y secundario se limpian cuando se actualiza o se vuelve a cargar el nodo trabajador. Para ver las soluciones de almacenamiento persistente, consulte [Planificación de almacenamiento persistente altamente disponible](/docs/containers?topic=containers-storage_planning#storage_planning).
 
-**¿Qué hago si tengo tipos de máquina `u1c` o `b1c` en desuso?**</br>
-Para empezar a utilizar los tipos de máquina `u2c` y `b2c`, [actualice los tipos de máquina añadiendo nodos trabajadores](/docs/containers?topic=containers-update#machine_type).
+**¿Qué hago si tengo tipos de máquina más antiguos?**</br>
+Si en su clúster hay tipos de nodo trabajador en desuso, como `x1c` o el más antiguo `x2c` de Ubuntu 16, puede [actualizar el clúster para que tenga nodos trabajadores `x3c` de Ubuntu 18 ](/docs/containers?topic=containers-update#machine_type).
 
 **¿Qué tipos de máquina virtual están disponibles?**</br>
-Los tipos de máquina varían por zona. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. Por ejemplo, las máquinas virtuales `m2c` solo están disponibles en la ubicación de Dallas (`dal10, dal12, dal13`). También puede consultar los tipos de máquina [nativa](#bm) o [SDS](#sds) disponibles.
+Los tipos de nodos trabajadores varían según la zona. En la tabla siguiente se incluye la versión más reciente de un tipo, como por ejemplo los nodos trabajadores `x3c` de Ubuntu 18, en lugar de los tipos de nodo trabajador más antiguos, `x2c` de Ubuntu 16. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. También puede consultar los tipos de máquina [nativa](#bm) o [SDS](#sds) disponibles.
 
 {: #vm-table}
 <table>
@@ -314,83 +314,83 @@ Los tipos de máquina varían por zona. Para ver los tipos de máquinas disponib
 </thead>
 <tbody>
 <tr>
-<td><strong>Virtual, u2c.2x4</strong>: Utilice esta máquina virtual con el tamaño más reducido para realizar pruebas rápidas, pruebas de conceptos y ejecutar otras cargas ligeras.</td>
+<td><strong>Virtual, u3c.2x4</strong>: Utilice esta máquina virtual con el tamaño más reducido para realizar pruebas rápidas, pruebas de conceptos y ejecutar otras cargas ligeras.</td>
 <td>2 / 4 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.4x16</strong>: Seleccione esta máquina virtual equilibrada para realizar pruebas y desarrollo, y para otras cargas de trabajo ligeras.</td>
+<td><strong>Virtual, b3c.4x16</strong>: Seleccione esta máquina virtual equilibrada para realizar pruebas y desarrollo, y para otras cargas de trabajo ligeras.</td>
 <td>4 / 16 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.16x64</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo de tamaño medio.</td></td>
+<td><strong>Virtual, b3c.16x64</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo de tamaño medio.</td></td>
 <td>16 / 64 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.32x128</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo de tamaño medio a grande, por ejemplo, como base de datos y sitio web dinámico con muchos usuarios simultáneos.</td>
+<td><strong>Virtual, b3c.32x128</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo de tamaño medio a grande, por ejemplo, como base de datos y sitio web dinámico con muchos usuarios simultáneos.</td>
 <td>32 / 128 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.56x242</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo grandes, por ejemplo, como base de datos y para varias apps con muchos usuarios simultáneos.</td>
+<td><strong>Virtual, b3c.56x242</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo grandes, por ejemplo, como base de datos y para varias apps con muchos usuarios simultáneos.</td>
 <td>56 / 242 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, c2c.16x16</strong>: utilice este tipo cuando desee un equilibrio uniforme de recursos de cálculo del nodo trabajador para cargas de trabajo ligeras.</td>
+<td><strong>Virtual, c3c.16x16</strong>: Utilice este tipo cuando desee un equilibrio uniforme de recursos de cálculo del nodo trabajador para cargas de trabajo ligeras.</td>
 <td>16 / 16 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.16x32</strong>: utilice este tipo cuando desee una proporción de 1:2 entre recursos de CPU y de memoria del nodo trabajador para cargas de trabajo ligeras o de tamaño medio.</td>
+<td><strong>Virtual, c3c.16x32</strong>: Utilice este tipo cuando desee una proporción de 1:2 entre recursos de CPU y de memoria del nodo trabajador para cargas de trabajo de tamaño medio.</td>
 <td>16 / 32 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x32</strong>: utilice este tipo cuando desee un equilibrio uniforme de recursos de cálculo del nodo trabajador para cargas de trabajo de tamaño medio.</td>
+<td><strong>Virtual, c3c.32x32</strong>: Utilice este tipo cuando desee un equilibrio uniforme de recursos de cálculo del nodo trabajador para cargas de trabajo de tamaño medio.</td>
 <td>32 / 32 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x64</strong>: utilice este tipo cuando desee una proporción de 1:2 entre recursos de CPU y de memoria del nodo trabajador para cargas de trabajo de tamaño medio.</td>
+<td><strong>Virtual, c3c.32x64</strong>: Utilice este tipo cuando desee una proporción de 1:2 entre recursos de CPU y de memoria del nodo trabajador para cargas de trabajo de tamaño medio.</td>
 <td>32 / 64 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, m2c.8x64</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo entre ligeras y medianas que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
+<td><strong>Virtual, m3c.8x64</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo entre ligeras y medianas que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
 <td>8 / 64 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.16x128</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo medianas que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
+<td><strong>Virtual, m3c.16x128</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo medianas que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
 <td>16 / 128 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.30x240</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo entre medianas y grandes que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
+<td><strong>Virtual, m3c.30x240</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo entre medianas y grandes que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
 <td>30 / 240 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.48x384</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo entre medianas y grandes que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
+<td><strong>Virtual, m3c.48x384</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo entre medianas y grandes que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible como arrendamiento de `--hardware shared`.</td>
 <td>48 / 384 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.56x448</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo de gran tamaño que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
+<td><strong>Virtual, m3c.56x448</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo de gran tamaño que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible como arrendamiento de `--hardware shared`.</td>
 <td>56 / 448 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.64x512</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo de gran tamaño que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
+<td><strong>Virtual, m3c.64x512</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo de gran tamaño que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible como arrendamiento de `--hardware shared`.</td>
 <td>64 / 512 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
@@ -420,7 +420,7 @@ Los servidores nativos se facturan mensualmente. Si cancela un servidor nativo a
 {: important}
 
 **¿Qué tipos de servidores nativos puedo solicitar?**</br>
-Los tipos de máquina varían por zona. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. También puede consultar los tipos de máquina [virtual](#vm) o [SDS](#sds).
+Los tipos de nodos trabajadores varían según la zona. En la tabla siguiente se incluye la versión más reciente de un tipo, como por ejemplo los nodos trabajadores `x3c` de Ubuntu 18, en lugar de los tipos de nodo trabajador más antiguos, `x2c` de Ubuntu 16. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. También puede consultar los tipos de máquina [virtual](#vm) o [SDS](#sds).
 
 Las máquinas nativas están optimizadas para distintos casos de uso como, por ejemplo, las cargas de trabajo intensivas de memoria RAM, datos o GPU.
 
@@ -443,43 +443,43 @@ Elija un tipo de máquina con la configuración de almacenamiento correcta para 
 </thead>
 <tbody>
 <tr>
-<td><strong>Máquina nativa gran capacidad de memoria, mr1c.28x512</strong>: Maximice la RAM disponible para sus nodos trabajadores.</td>
+<td><strong>Máquina nativa gran capacidad de memoria, mr3c.28x512</strong>: Maximice la RAM disponible para sus nodos trabajadores.</td>
 <td>28 / 512 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Máquina nativas con GPU, mg1c.16x128</strong>: Elija este tipo para cargas de trabajo matemáticas intensivas, por ejemplo, para la computación de alto rendimiento, el aprendizaje máquina u otras aplicaciones 3D. Este tipo tiene una tarjeta física Tesla K80 con dos unidades de proceso gráfico (GPU) por tarjeta (2 GPU).</td>
+<td><strong>Máquina nativas con GPU, mg3c.16x128</strong>: Elija este tipo para cargas de trabajo matemáticas intensivas, por ejemplo, para la computación de alto rendimiento, el aprendizaje máquina u otras aplicaciones 3D. Este tipo tiene una tarjeta física Tesla K80 con dos unidades de proceso gráfico (GPU) por tarjeta (2 GPU).</td>
 <td>16 / 128 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Máquina nativas con GPU, mg1c.28x256</strong>: Elija este tipo para cargas de trabajo matemáticas intensivas, por ejemplo, para la computación de alto rendimiento, el aprendizaje máquina u otras aplicaciones 3D. Este tipo tiene 2 tarjetas físicas Tesla K80 con 2 GPU por tarjeta, para hacer un total de 4 GPU.</td>
+<td><strong>Máquina nativas con GPU, mg3c.28x256</strong>: Elija este tipo para cargas de trabajo matemáticas intensivas, por ejemplo, para la computación de alto rendimiento, el aprendizaje máquina u otras aplicaciones 3D. Este tipo tiene 2 tarjetas físicas Tesla K80 con 2 GPU por tarjeta, para hacer un total de 4 GPU.</td>
 <td>28 / 256 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Nativo con mucho uso de datos, md1c.16x64.4x4tb</strong>: utilice este tipo para una cantidad significativa de almacenamiento en disco local, incluido RAID para aumentar la disponibilidad de los datos, para cargas de trabajo como sistemas de archivos distribuidos, bases de datos grandes y analítica de big data.</td>
+<td><strong>Nativo con mucho uso de datos, md3c.16x64.4x4tb</strong>: Utilice este tipo para una cantidad significativa de almacenamiento en disco local, incluido RAID para aumentar la disponibilidad de los datos, para cargas de trabajo como sistemas de archivos distribuidos, bases de datos grandes y analítica de big data.</td>
 <td>16 / 64 GB</td>
 <td>2x2 TB RAID1 / 4x4 TB SATA RAID10</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Nativo con mucho uso de datos, md1c.28x512.4x4tb</strong>: utilice este tipo para una cantidad significativa de almacenamiento en disco local, incluido RAID para aumentar la disponibilidad de los datos, para cargas de trabajo como sistemas de archivos distribuidos, bases de datos grandes y analítica de big data.</td>
+<td><strong>Nativo con mucho uso de datos, md3c.28x512.4x4tb</strong>: utilice este tipo para una cantidad significativa de almacenamiento en disco local, incluido RAID para aumentar la disponibilidad de los datos, para cargas de trabajo como sistemas de archivos distribuidos, bases de datos grandes y analítica de big data.</td>
 <td>28 / 512 GB</td>
 <td>2x2 TB RAID1 / 4x4 TB SATA RAID10</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Máquina nativa equilibrada, mb2c.4x32</strong>: Para cargas de trabajo equilibradas que requieren más recursos de computación que los ofrecidos por las máquinas virtuales. Este tipo también se puede habilitar con Intel® Software Guard Extensions (SGX) para que pueda utilizar <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para cifrar la memoria de datos.</td>
+<td><strong>Máquina nativa equilibrada, mb3c.4x32</strong>: Utilice este tipo para cargas de trabajo equilibradas que requieran más recursos de computación que los ofrecidos por las máquinas virtuales. Este tipo también se puede habilitar con Intel® Software Guard Extensions (SGX) para que pueda utilizar <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para cifrar la memoria de datos.</td>
 <td>4 / 32 GB</td>
 <td>2 TB SATA / 2 TB SATA</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Máquina nativa equilibrada, mb1c.16x64</strong>: Para cargas de trabajo equilibradas que requieren más recursos de computación que los ofrecidos por las máquinas virtuales.</td>
+<td><strong>Máquina nativa equilibrada, mb3c.16x64</strong>: Utilice este tipo para cargas de trabajo equilibradas que requieran más recursos de computación que los ofrecidos por las máquinas virtuales.</td>
 <td>16 / 64 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>10000 Mbps</td>
@@ -503,7 +503,7 @@ Normalmente, se utilizan máquinas SDS en los casos siguientes:
 Para ver más soluciones de almacenamiento, consulte [Planificación de almacenamiento persistente altamente disponible](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **¿Qué tipos de SDS puedo solicitar?**</br>
-Los tipos de máquina varían por zona. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. También puede consultar los tipos de máquina [nativa](#bm) o [virtual](#vm) disponibles.
+Los tipos de nodos trabajadores varían según la zona. En la tabla siguiente se incluye la versión más reciente de un tipo, como por ejemplo los nodos trabajadores `x3c` de Ubuntu 18, en lugar de los tipos de nodo trabajador más antiguos, `x2c` de Ubuntu 16. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. También puede consultar los tipos de máquina [nativa](#bm) o [virtual](#vm) disponibles.
 
 Elija un tipo de máquina con la configuración de almacenamiento correcta para dar soporte a la carga de trabajo. Algunos tipos tienen una combinación de las siguientes configuraciones de disco y almacenamiento. Por ejemplo, algunos tipos tener un disco primario SATA con un disco secundario SSD sin formato.
 
@@ -525,28 +525,28 @@ Elija un tipo de máquina con la configuración de almacenamiento correcta para 
 </thead>
 <tbody>
 <tr>
-<td><strong>Nativo con SDS, ms2c.4x32.1.9tb.ssd</strong>: si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
+<td><strong>Nativo con SDS, ms3c.4x32.1.9tb.ssd</strong>: Si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
 <td>4 / 32 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>1,9 TB de SSD sin formato (vía de acceso del dispositivo: `/dev/sdc`)</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Nativo con SDS, ms2c.16x64.1.9tb.ssd</strong>: si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
+<td><strong>Nativo con SDS, ms3c.16x64.1.9tb.ssd</strong>: Si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
 <td>16 / 64 GB</td>
 <td>2 TB SATA / 960 GB SSD</td>
 <td>1,9 TB de SSD sin formato (vía de acceso del dispositivo: `/dev/sdc`)</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Nativo con SDS, ms2c.28x256.3.8tb.ssd</strong>: si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
+<td><strong>Nativo con SDS, ms3c.28x256.3.8tb.ssd</strong>: Si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
 <td>28 / 256 GB</td>
 <td>SATA de 2 TB / SSD de 1,9 TB</td>
 <td>3,8 TB de SSD sin formato (vía de acceso del dispositivo: `/dev/sdc`)</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Nativo con SDS, ms2c.28x512.4x3.8tb.ssd</strong>: si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
+<td><strong>Nativo con SDS, ms3c.28x512.4x3.8tb.ssd</strong>: Si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
 <td>28 / 512 GB</td>
 <td>SATA de 2 TB / SSD de 1,9 TB</td>
 <td>4 discos, 3,8 TB de SSD sin formato (vías de acceso de dispositivo: `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
@@ -574,16 +574,28 @@ Para revisar cuántos recursos de cálculo se utilizan actualmente en el nodo tr
 <tr>
   <th>Nivel de memoria</th>
   <th>% o cantidad reservada</th>
-  <th>Ejemplo de nodo trabajador `b2c.4x16` (16 GB)</th>
+  <th>Ejemplo de nodo trabajador `b3c.4x16` (16 GB)</th>
   <th>Ejemplo de nodo trabajador `mg1c.28x256` (256 GB)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>Primeros 16 GB (0-16 GB)</td>
+  <td>Primeros 4 GB (0-4 GB)</td>
+  <td>25% de memoria</td>
+  <td>1 GB</td>
+  <td>1 GB</td>
+</tr>
+<tr>
+  <td>Siguientes 4 GB (5-8 GB)</td>
+  <td>20% de memoria</td>
+  <td>0.8 GB</td>
+  <td>0.8 GB</td>
+</tr>
+<tr>
+  <td>Siguientes 8 GB (9-16 GB)</td>
   <td>10% de memoria</td>
-  <td>1,6 GB</td>
-  <td>1,6 GB</td>
+  <td>0.8 GB</td>
+  <td>0.8 GB</td>
 </tr>
 <tr>
   <td>Siguientes 112 GB (17-128 GB)</td>
@@ -607,8 +619,8 @@ Para revisar cuántos recursos de cálculo se utilizan actualmente en el nodo tr
 <tr>
   <td>**Total reservado**</td>
   <td>**(varía)**</td>
-  <td>**1,7 GB de 16 GB totales**</td>
-  <td>**10,96 GB de 256 GB totales**</td>
+  <td>**2,7 GB de 16 GB totales**</td>
+  <td>**11,96 GB de 256 GB totales**</td>
 </tr>
 </tbody>
 </table>
@@ -619,7 +631,7 @@ Para revisar cuántos recursos de cálculo se utilizan actualmente en el nodo tr
 <tr>
   <th>Nivel de CPU</th>
   <th>% reservado</th>
-  <th>Ejemplo de nodo trabajador `b2c.4x16` (4 núcleos)</th>
+  <th>Ejemplo de nodo trabajador `b3c.4x16` (4 núcleos)</th>
   <th>Ejemplo de nodo trabajador `mg1c.28x256` (28 núcleos)</th>
 </tr>
 </thead>

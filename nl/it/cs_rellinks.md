@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -45,7 +45,7 @@ subcollection: containers
 - [API REST per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-api/)
 - [JSON API REST per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
 - [API REST per la registrazione nei cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-logging/)
-- [API REST per la gestione dei programmi di bilanciamento del carico dell'applicazione Ingress nei cluster![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-alb-api/)
+- [API REST per la gestione degli ALB (application load balancer) Ingress nei cluster![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-alb-api/)
 
 <br />
 
@@ -75,6 +75,7 @@ subcollection: containers
 **Tecnologie open source integrate**
 
 - [Documentazione Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/)
+- [Documentazione CLI Kubernetes (`kubectl`) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubectl.docs.kubernetes.io/)
 - [Documentazione Knative ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/knative/docs)
 - [Documentazione Docker ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Documentazione Helm <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per la gestione del pacchetto Kubernetes
@@ -96,7 +97,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [Documentazione {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-index)
+- [Documentazione {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)
 - [{{site.data.keyword.registryshort_notm}}API REST ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://{DomainName}/apidocs/container-registry)
 - [API REST Vulnerability Advisor ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://{DomainName}/apidocs/container-registry/va)
 

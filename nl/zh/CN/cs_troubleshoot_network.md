@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -39,23 +39,23 @@ subcollection: containers
 进行故障诊断时，可以使用 [{{site.data.keyword.containerlong_notm}} 诊断和调试工具](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)来运行测试，并从集群收集相关的联网、Ingress 和 strongSwan 信息。
 {: tip}
 
-## 无法通过 LoadBalancer 服务连接到应用程序
+## 无法通过网络负载均衡器 (NLB) 服务连接到应用程序
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-您已通过在集群中创建 LoadBalancer 服务来向公众公开应用程序。但尝试使用负载均衡器的公共 IP 地址连接到应用程序时，连接失败或超时。
+您已通过在集群中创建 NLB 服务来以公共方式公开应用程序。但尝试使用 NLB 的公共 IP 地址连接到应用程序时，连接失败或超时。
 
 {: tsCauses}
-由于以下某种原因，LoadBalancer 服务可能未正常运行：
+由于下列其中一个原因，NLB 服务可能未正常运行：
 
 -   集群为免费集群，或者为仅具有一个工作程序节点的标准集群。
 -   集群尚未完全部署。
--   LoadBalancer 服务的配置脚本包含错误。
+-   NLB 服务的配置脚本包含错误。
 
 {: tsResolve}
-要对 LoadBalancer 服务进行故障诊断，请执行以下操作：
+要对 NLB 服务进行故障诊断，请执行以下操作：
 
-1.  检查是否设置了完全部署的标准集群，以及该集群是否至少有两个工作程序节点，以确保 LoadBalancer 服务具有高可用性。
+1.  检查是否设置了完全部署的标准集群，以及该集群是否至少有两个工作程序节点，以确保 NLB 服务具有高可用性。
 
   ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -64,10 +64,10 @@ subcollection: containers
 
     在 CLI 输出中，确保工作程序节点的 **Status** 显示 **Ready**，并且 **Machine Type** 显示除了 **free** 之外的机器类型。
 
-2. 对于 V2.0 负载均衡器：确保完成[负载均衡器 2.0 先决条件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)。
+2. 对于 V2.0 NLB：确保完成 [NLB 2.0 先决条件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)。
 
-3. 检查 LoadBalancer 服务的配置文件是否准确。
-    * V2.0 负载均衡器：
+3. 检查 NLB 服务的配置文件是否准确。
+    * V2.0 NLB：
         ```
         apiVersion: v1
         kind: Service
@@ -92,7 +92,7 @@ subcollection: containers
         4. 检查是否使用的是应用程序侦听的**端口**。
         5. 检查是否将 `externalTrafficPolicy` 设置为 `Local`。
 
-    * V1.0 负载均衡器：
+    * V1.0 NLB：
         ```
         apiVersion: v1
     kind: Service
@@ -112,7 +112,7 @@ subcollection: containers
         2. 在 LoadBalancer 服务的 `spec.selector` 部分中，确保 `<selector_key>` 和 `<selector_value>` 与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的键/值对相同。如果标签不匹配，LoadBalancer 服务中的 **Endpoints** 部分将显示 **<none>**，并且无法从因特网访问应用程序。
         3. 检查是否使用的是应用程序侦听的**端口**。
 
-3.  检查 LoadBalancer 服务，并查看 **Events** 部分以查找潜在错误。
+3.  检查 NLB 服务，并查看 **Events** 部分以查找潜在错误。
 
     ```
     kubectl describe service <myservice>
@@ -122,25 +122,23 @@ subcollection: containers
     查找以下错误消息：
     
 
-    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>要使用 LoadBalancer 服务，您必须有至少包含两个工作程序节点的标准集群。
-    </li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>此错误消息指示没有任何可移植公共 IP 地址可供分配给 LoadBalancer 服务。请参阅<a href="/docs/containers?topic=containers-subnets#subnets">向集群添加子网</a>，以了解有关如何为集群请求可移植公共 IP 地址的信息。有可移植的公共 IP 地址可供集群使用后，将自动创建 LoadBalancer 服务。
-    </li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>您使用 **`loadBalancerIP`** 部分为 LoadBalancer 服务定义了可移植公共 IP 地址，但此可移植公共 IP 地址在可移植公共子网中不可用。在配置脚本的 **`loadBalancerIP`** 部分中，除去现有 IP 地址，然后添加其中一个可用的可移植公共 IP 地址。您还可以从脚本中除去 **`loadBalancerIP`** 部分，以便可以自动分配可用的可移植公共 IP 地址。</li>
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>您没有足够的工作程序节点可部署 LoadBalancer 服务。一个原因可能是您已部署了包含多个工作程序节点的标准集群，但供应这些工作程序节点失败。
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>要使用 NLB 服务，您必须有至少包含两个工作程序节点的标准集群。</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the NLB service request. Add a portable subnet to the cluster and try again</code></pre></br>此错误消息指示没有任何可移植公共 IP 地址可供分配给 NLB 服务。请参阅<a href="/docs/containers?topic=containers-subnets#subnets">向集群添加子网</a>，以了解有关如何为集群请求可移植公共 IP 地址的信息。有可移植的公共 IP 地址可供集群使用后，将自动创建 NLB 服务。</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>您使用 **`loadBalancerIP`** 部分为负载均衡器 YAML 定义了可移植公共 IP 地址，但此可移植公共 IP 地址在可移植公共子网中不可用。在配置脚本的 **`loadBalancerIP`** 部分中，除去现有 IP 地址，然后添加其中一个可用的可移植公共 IP 地址。您还可以从脚本中除去 **`loadBalancerIP`** 部分，以便可以自动分配可用的可移植公共 IP 地址。</li>
+    <li><pre class="screen"><code>No available nodes for NLB services</code></pre>您没有足够的工作程序节点可部署 NLB 服务。一个原因可能是您已部署了包含多个工作程序节点的标准集群，但供应这些工作程序节点失败。
     </li>
     <ol><li>列出可用的工作程序节点。</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>如果找到了至少两个可用的工作程序节点，请列出工作程序节点详细信息。</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>确保分别由 <code>kubectl get nodes</code> 和 <code>ibmcloud ks worker-get</code> 命令返回的工作程序节点的公用和专用 VLAN 标识相匹配。</li></ol></li></ul>
 
-4.  如果使用定制域来连接到 LoadBalancer 服务，请确保定制域已映射到 LoadBalancer 服务的公共 IP 地址。
-    1.  找到 LoadBalancer 服务的公共 IP 地址。
+4.  如果是使用定制域来连接到 NLB 服务的，请确保定制域已映射到 NLB 服务的公共 IP 地址。
+    1.  找到 NLB 服务的公共 IP 地址。
         ```
 kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
-    2.  检查定制域是否已映射到指针记录 (PTR) 中 LoadBalancer 服务的可移植公共 IP 地址。
+    2.  检查定制域是否已映射到指针记录 (PTR) 中 NLB 服务的可移植公共 IP 地址。
 
 <br />
 
@@ -166,7 +164,7 @@ kubectl describe service <service_name> | grep "LoadBalancer Ingress"
 <br />
 
 
-## Ingress 应用程序负载均衡器私钥问题
+## Ingress 应用程序负载均衡器 (ALB) 私钥问题
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
@@ -255,7 +253,7 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: #cs_multizone_subnet_limit}
 
 {: tsSymptoms}
-具有多专区集群并运行 `ibmcloud ks albs <cluster>` 时，某个专区中未部署任何 ALB。例如，如果在 3 个专区中有工作程序节点，那么可能会看到类似以下内容的输出，其中公共 ALB 未部署到第三个专区。
+具有多专区集群并运行 `ibmcloud ks albs <cluster>` 时，专区中未部署任何 ALB。例如，如果在 3 个专区中有工作程序节点，那么可能会看到类似以下内容的输出，其中公共 ALB 未部署到第三个专区。
 ```
 ALB ID                                            Status     Type      ALB IP           Zone    Build
 private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
@@ -294,7 +292,7 @@ Ingress 服务公开使用 WebSocket 的应用程序。但是，客户机与 Web
 
 2. 要保持连接活动，您可以增大超时值或者在应用程序中设置脉动信号。
 <dl><dt>更改超时</dt>
-<dd>增大 ALB 配置中 `proxy-read-timeout` 的值。例如，要将超时从 `60s` 更改为更大的值，例如，`300s`，请将以下[注释](/docs/containers?topic=containers-ingress_annotation#connection)添加到 Ingress 资源文件：`ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`。将更改集群中所有公共 ALB 的超时。</dd>
+<dd>增大 ALB 配置中 `proxy-read-timeout` 的值。例如，要将超时从 `60s` 更改为更大的值（如 `300s`），请将以下[注释](/docs/containers?topic=containers-ingress_annotation#connection)添加到 Ingress 资源文件：`ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`。将更改集群中所有公共 ALB 的超时。</dd>
 <dt>设置脉动信号</dt>
 <dd>如果不想要更改 ALB 的缺省读取超时值，请在 WebSocket 应用程序中设置脉动信号。在使用框架（例如，[WAMP ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://wamp-proto.org/)）设置脉动信号协议时，应用程序的上游服务器按照时间间隔定期发送“ping”消息，并且客户机以“pong”消息进行响应。将脉动信号间隔设置为 58 秒或更小，从而在实施 60 秒超时前，“ping/pong”流量保持连接打开。</dd></dl>
 
@@ -317,7 +315,7 @@ Ingress 服务公开使用 WebSocket 的应用程序。但是，客户机与 Web
 {: tsResolve}
 通过选择下列其中一个选项来解决此问题：
 
-* **边缘节点污点**：要确保负载均衡器和应用程序 pod 部署到有污点的边缘节点，请[向应用程序部署添加边缘节点亲缘关系规则和容忍度](/docs/containers?topic=containers-loadbalancer#edge_nodes)。缺省情况下，负载均衡器和 Ingress ALB pod 具有这些亲缘关系规则和容忍度。
+* **边缘节点污点**：要确保负载均衡器和应用程序 pod 部署到有污点的边缘节点，请[向应用程序部署添加边缘节点亲缘关系规则和容忍度](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)。缺省情况下，负载均衡器和 Ingress ALB pod 具有这些亲缘关系规则和容忍度。
 
 * **定制污点**：除去 `keepalived` pod 没有其容忍度的定制污点。可以改为[将工作程序节点标注为边缘节点，然后污染这些边缘节点](/docs/containers?topic=containers-edge)。
 
@@ -573,13 +571,13 @@ helm install -f config.yaml --name=<release_name> ibm/strongswan
 要使用 Calico 策略，下面四个因素必须全部符合要求：集群 Kubernetes 版本、Calico CLI 版本、Calico 配置文件语法和查看策略命令。其中一个或多个因素的版本不正确。
 
 {: tsResolve}
-如果集群处于 [Kubernetes V1.10 或更高版本](/docs/containers?topic=containers-cs_versions)，那么必须使用 Calico CLI V3.1、`calicoctl.cfg` V3 配置文件语法以及 `calicoctl get GlobalNetworkPolicy` 和 `calicoctl get NetworkPolicy` 命令。
+必须使用 V3.3 或更高版本的 Calico CLI、`calicoctl.cfg` V3 配置文件语法以及`calicoctl get GlobalNetworkPolicy` 和 `calicoctl get NetworkPolicy` 命令。
 
 要确保所有 Calico 因素都符合要求，请执行以下操作：
 
-1. [安装和配置 Calico CLI V3.3.1](/docs/containers?topic=containers-network_policies#cli_install)。配置包括手动更新 `calicoctl.cfg` 文件以使用 Calico V3 语法。
-2. 确保您创建并要应用于集群的任何策略都使用 [Calico V3 语法 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy)。如果在 Calico V2 语法中具有现有策略 `.yaml` 或 `.json` 文件，那么可以使用 [`calicoctl convert` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert) 将其转换为 Calico V3 语法。
-3. 要[查看策略](/docs/containers?topic=containers-network_policies#view_policies)，请确保对于全局策略，使用 `calicoctl get GlobalNetworkPolicy`，对于作用域限定为特定名称空间的策略，使用 `calicoctl get NetworkPolicy --namespace<policy_namespace>`。
+1. [安装和配置 Calico CLI V3.3 或更高版本](/docs/containers?topic=containers-network_policies#cli_install)。
+2. 确保您创建并要应用于集群的任何策略都使用 [Calico V3 语法 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy)。如果在 Calico V2 语法中具有现有策略 `.yaml` 或 `.json` 文件，那么可以使用 [`calicoctl convert` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert) 将其转换为 Calico V3 语法。
+3. 要[查看策略](/docs/containers?topic=containers-network_policies#view_policies)，请确保对于全局策略，使用 `calicoctl get GlobalNetworkPolicy`，对于作用域限定为特定名称空间的策略，使用 `calicoctl get NetworkPolicy --namespace <policy_namespace>`。
 
 <br />
 
@@ -604,7 +602,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public)：无法获取标识为 #123456 �
 
 或者，可以通过订购新 VLAN 并使用这些 VLAN 在现有工作程序池中创建新的工作程序节点来保留现有工作程序池。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  要获取需要其新 VLAN 标识的专区，请记录以下命令输出中的 **Location**。**注**：如果集群是多专区集群，那么需要每个专区的 VLAN 标识。
 

@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -19,17 +19,18 @@ lastupdated: "2019-03-21"
 {:download: .download}
 
 
-
 # 目录
 {: #cs_sitemap}
 
 ## {{site.data.keyword.containerlong_notm}} 入门
+{: #sitemap-gs}
 
-[{{site.data.keyword.containerlong_notm}} 入门](/docs/containers?topic=containers-container_index#container_index)
+[{{site.data.keyword.containerlong_notm}} 入门](/docs/containers?topic=containers-getting-started#getting-started)
 
 
 
 ## 关于
+{: #sitemap-about}
 
 [为什么使用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)
 * [使用服务的优点](/docs/containers?topic=containers-cs_ov#benefits)
@@ -43,6 +44,8 @@ lastupdated: "2019-03-21"
 * [服务体系结构](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)
 
 ## 用例
+{: #sitemap-usecases}
+
 [用例概述](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
 [{{site.data.keyword.Bluemix_notm}} 的金融服务用例](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
@@ -66,10 +69,11 @@ lastupdated: "2019-03-21"
 * [大型公共港口确保港口数据和装运载货单交换的安全性，以此将公共和私营组织连接在一起](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
 ## 集群策略
+{: #sitemap-strategy}
 
-[使用 {{site.data.keyword.containerlong_notm}} 的责任](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
-* [集群管理责任](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#responsibilities)
-* [滥用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#terms)
+[使用 {{site.data.keyword.containerlong_notm}} 的责任](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
+* [集群管理责任](/docs/containers?topic=containers-responsibilities_iks#responsibilities)
+* [滥用 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#terms)
 
 [{{site.data.keyword.containerlong_notm}} 的安全性](/docs/containers?topic=containers-security#security)
 * [集群安全威胁概述](/docs/containers?topic=containers-security#threats)
@@ -87,7 +91,40 @@ lastupdated: "2019-03-21"
 [{{site.data.keyword.containerlong_notm}} 的高可用性](/docs/containers?topic=containers-ha#ha)
 * [{{site.data.keyword.containerlong_notm}} 中的潜在故障点概述](/docs/containers?topic=containers-ha#fault_domains)
 
+[定义 Kubernetes 策略](/docs/containers?topic=containers-strategy#strategy)
+* [将工作负载移至 {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
+  * [可以将哪些内容移至 {{site.data.keyword.Bluemix_notm}}？](/docs/containers?topic=containers-strategy#move_to_cloud)
+  * [可以在 {{site.data.keyword.containerlong_notm}} 中运行哪种应用程序？](/docs/containers?topic=containers-strategy#app_types)
+    * [开发无状态云本机应用程序的准则是什么？](/docs/containers?topic=containers-strategy#12factor)
+    * [我已有应用程序。如何将其迁移到 {{site.data.keyword.containerlong_notm}}？](/docs/containers?topic=containers-strategy#migrate_containerize)
+* [调整 Kubernetes 集群的大小以支持工作负载](/docs/containers?topic=containers-strategy#sizing)
+  * [应用程序需要多少资源？](/docs/containers?topic=containers-strategy#sizing_resources)
+  * [除了应用程序外，还有其他哪些对象可能会使用集群中的资源？](/docs/containers?topic=containers-strategy#sizing_other)
+  * [我希望工作负载具有哪种类型的可用性？](/docs/containers?topic=containers-strategy#sizing_availability)
+  * [需要多少个工作程序节点来处理工作负载？](/docs/containers?topic=containers-strategy#sizing_workers)
+* [设计 Kubernetes 环境结构](/docs/containers?topic=containers-strategy#kube_env)
+  * [应该获取哪种集群类型和机器类型？](/docs/containers?topic=containers-strategy#env_flavors)
+  * [我应该使用多个集群，还是只用向现有集群添加更多工作程序？](/docs/containers?topic=containers-strategy#env_multicluster)
+  * [如何在集群中设置资源？](/docs/containers?topic=containers-strategy#env_resources)
+* [使资源具有高可用性](/docs/containers?topic=containers-strategy#kube_ha)
+* [设置服务发现](/docs/containers?topic=containers-strategy#service_discovery)
+  * [可以定制 Kubernetes 集群 DNS 提供程序吗？](/docs/containers?topic=containers-strategy#services_dns)
+  * [如何确保服务连接到正确的部署并准备好运行？](/docs/containers?topic=containers-strategy#services_connected)
+  * [如何控制集群中运行的服务之间的网络流量？](/docs/containers?topic=containers-strategy#services_network_traffic)
+  * [如何在因特网上公开服务？](/docs/containers?topic=containers-strategy#services_expose_apps)
+* [将应用程序工作负载部署到集群](/docs/containers?topic=containers-strategy#deployments)
+  * [我认为自己需要把应用程序放入容器中。现在，pod 中都有哪些相关内容？](/docs/containers?topic=containers-strategy#deploy_pods)
+  * [那么，如果可以使用 pod，为什么还需要所有这些不同类型的对象呢？](/docs/containers?topic=containers-strategy#deploy_objects)
+  * [如何组织部署以使其更容易更新和管理？](/docs/containers?topic=containers-strategy#deploy_organize)
+  * [我还能做什么来准备应用程序进行部署？](/docs/containers?topic=containers-strategy#deploy_prep)
+* [打包应用程序](/docs/containers?topic=containers-strategy#packaging)
+* [使应用程序保持最新](/docs/containers?topic=containers-strategy#updating)
+  * [如何使集群保持受支持状态？](/docs/containers?topic=containers-strategy#updating_kube)
+  * [可以使用哪些应用程序更新策略？](/docs/containers?topic=containers-strategy#updating_apps)
+* [监视集群性能](/docs/containers?topic=containers-strategy#monitoring_health)
+
 ## 教程
+{: #sitemap-tutorials}
 
 [教程：创建 Kubernetes 集群](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 * [目标](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
@@ -148,6 +185,7 @@ lastupdated: "2019-03-21"
 [教程：为在 Kubernetes 中运行的容器化应用程序设置持续集成和交付管道](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 
 ## 设置 CLI 和 API
+{: #sitemap-cli-api}
 
 [设置 CLI 和 API](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
 * [安装 CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)
@@ -155,11 +193,14 @@ lastupdated: "2019-03-21"
 * [将 CLI 配置为运行 `kubectl`](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * [更新 CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [卸载 CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
+* [在 Web 浏览器中使用 Kubernetes Terminal (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)
 * [使用 API 自动部署集群](/docs/containers?topic=containers-cs_cli_install#cs_api)
-  * [使用 API 刷新 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌并获取新的刷新令牌](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
-  * [使用 CLI 刷新 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌并获取新的刷新令牌](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
+* [通过 Kubernetes API 使用集群](/docs/containers?topic=containers-cs_cli_install#kube_api)
+* [使用 API 刷新 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌并获取新的刷新令牌](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
+* [使用 CLI 刷新 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌并获取新的刷新令牌](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
 ## 管理集群
+{: #sitemap-clusters-admin}
 
 [规划集群和工作程序节点设置](/docs/containers?topic=containers-plan_clusters#plan_clusters)
 * [高可用性集群](/docs/containers?topic=containers-plan_clusters#ha_clusters)
@@ -209,7 +250,7 @@ lastupdated: "2019-03-21"
   * [在控制台中更新工作程序节点](/docs/containers?topic=containers-update#worker_up_console)
 * [更新机器类型](/docs/containers?topic=containers-update#machine_type)
 * [更新集群附加组件](/docs/containers?topic=containers-update#addons)
-  * [管理用于日志记录的 Fluentd 附加组件的自动更新](/docs/containers?topic=containers-update#logging)
+  * [管理用于日志记录的 Fluentd 附加组件的自动更新](/docs/containers?topic=containers-update#logging-up)
   * [管理 Ingress ALB 附加组件的自动更新](/docs/containers?topic=containers-update#alb)
 * [从独立工作程序节点更新到工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
@@ -281,6 +322,7 @@ lastupdated: "2019-03-21"
 * [调整集群度量值提供程序资源](/docs/containers?topic=containers-kernel#metrics)
 
 ## 设置集群联网
+{: #sitemap-clusters-networking}
 
 [规划集群网络](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)
 * [了解 {{site.data.keyword.containerlong_notm}} 网络基础知识](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics)
@@ -307,13 +349,18 @@ lastupdated: "2019-03-21"
 * [更改工作程序节点 VLAN 连接](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
 * [设置专用服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
 * [设置公共服务端点](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+* [从公共服务端点切换到专用服务端点](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+* [将联网工作负载隔离到边缘工作程序节点](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_edge)
+* [隔离专用网络上的集群](/docs/containers?topic=containers-cs_network_cluster#isolate)
 
 [在防火墙中打开必需的端口和 IP 地址](/docs/containers?topic=containers-firewall#firewall)
 * [从防火墙后运行 `kubectl` 命令](/docs/containers?topic=containers-firewall#firewall_kubectl)
 * [从防火墙后运行 `calicoctl` 命令](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 * [允许集群访问基础架构资源和其他服务](/docs/containers?topic=containers-firewall#firewall_outbound)
 * [允许集群通过专用防火墙访问资源](/docs/containers?topic=containers-firewall#firewall_private)
+* [允许集群通过 Calico 流出策略访问资源](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 * [从集群外部访问 NodePort、LoadBalancer 和 Ingress 服务](/docs/containers?topic=containers-firewall#firewall_inbound)
+* [在其他服务的防火墙或在内部部署防火墙中将集群列入白名单](/docs/containers?topic=containers-firewall#whitelist_workers)
 
 [配置集群 DNS 提供程序](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 * [自动缩放集群 DNS 提供程序](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -394,12 +441,13 @@ lastupdated: "2019-03-21"
   * [释放使用的 IP 地址](/docs/containers?topic=containers-subnets#free)
 * [添加可移植 IP 地址](/docs/containers?topic=containers-subnets#adding_ips)
   * [通过订购更多子网来添加可移植 IP](/docs/containers?topic=containers-subnets#request)
-  * [使用用户管理的子网添加可移植专用 IP](/docs/containers?topic=containers-subnets#user_managed)
+  * [使用用户管理的子网添加可移植专用 IP](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [管理子网路由](/docs/containers?topic=containers-subnets#subnet-routing)
   * [启用同一 VLAN 上主子网之间的路由](/docs/containers?topic=containers-subnets#vlan-spanning)
   * [管理网关设备的子网路由](/docs/containers?topic=containers-subnets#vra-routing)
 
 ## 基于映像构建容器
+{: #sitemap-images}
 
 [基于映像构建容器](/docs/containers?topic=containers-images#images)
 * [规划映像注册表](/docs/containers?topic=containers-images#planning_images)
@@ -414,6 +462,7 @@ lastupdated: "2019-03-21"
   * [将映像拉取私钥存储在所选名称空间的 Kubernetes 服务帐户中](/docs/containers?topic=containers-images#store_imagePullSecret)
 
 ## 在集群中部署应用程序
+{: #sitemap-apps}
 
 [在集群中部署应用程序](/docs/containers?topic=containers-app#app)
 * [计划在集群中运行应用程序](/docs/containers?topic=containers-app#plan_apps)
@@ -439,6 +488,7 @@ lastupdated: "2019-03-21"
 * [管理滚动部署以更新应用程序](/docs/containers?topic=containers-app#app_rolling)
 
 ## 用于公开应用程序的联网
+{: #sitemap-apps-networking}
 
 [规划利用集群内联网和外部联网来公开应用程序](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
 * [通过 Kubernetes 服务向集群内部流量公开应用程序](/docs/containers?topic=containers-cs_network_planning#in-cluster)
@@ -446,15 +496,12 @@ lastupdated: "2019-03-21"
 * [为公用和专用 VLAN 设置规划公共外部联网](/docs/containers?topic=containers-cs_network_planning#public_access)
 * [为公用和专用 VLAN 设置规划专用外部联网](/docs/containers?topic=containers-cs_network_planning#private_both_vlans)
 * [为仅专用 VLAN 设置规划专用外部联网](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)
-* [可选：将联网工作负载隔离到边缘工作程序节点](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)
-* [可选：隔离专用网络上的集群](/docs/containers?topic=containers-cs_network_planning#isolate)
 
-[使用 NodePort 公开应用程序](/docs/containers?topic=containers-nodeport#nodeport)
+[使用 NodePort 测试对应用程序的访问权](/docs/containers?topic=containers-nodeport#nodeport)
 * [使用 NodePort 管理网络流量](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [使用 NodePort 服务来启用对应用程序的访问权](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-[使用负载均衡器公开应用程序](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-* [样本 YAML](/docs/containers?topic=containers-loadbalancer#sample)
+[使用网络负载均衡器 (NLB) 进行基本负载均衡和 DSR 负载均衡](/docs/containers?topic=containers-loadbalancer#loadbalancer)
 * [概述](/docs/containers?topic=containers-loadbalancer#lb_overview)
 * [比较 V1.0 和 V2.0 负载均衡器](/docs/containers?topic=containers-loadbalancer#comparison)
 * [V2.0：组件和体系结构 (beta)](/docs/containers?topic=containers-loadbalancer#planning_ipvs)
@@ -472,10 +519,15 @@ lastupdated: "2019-03-21"
 * [V1.0：在多专区集群中设置 LoadBalancer 1.0](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
 * [V1.0：在单专区集群中设置 LoadBalancer 1.0](/docs/containers?topic=containers-loadbalancer#lb_config)
 * [V1.0：启用源 IP 保留](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
-  * [添加边缘节点亲缘关系规则和容忍度](/docs/containers?topic=containers-loadbalancer#edge_nodes)
+  * [添加边缘节点亲缘关系规则和容忍度](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [为多个公用或专用 VLAN 添加亲缘关系规则](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
+* [注册负载均衡器主机名](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)
+  * [通过 DNS 主机名注册负载均衡器 IP](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)
+  * [了解主机名格式](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_format)
+  * [通过创建运行状况监视器，启用对主机名的运行状况检查](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_monitor)
+  * [更新和除去主机名中的 IP 以及用于主机名的监视器](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_delete)
 
-[使用 Ingress 公开应用程序](/docs/containers?topic=containers-ingress#ingress)
+[使用 Ingress 应用程序负载均衡器 (ALB) 进行 HTTPS 负载均衡](/docs/containers?topic=containers-ingress#ingress)
 * [样本 YAML](/docs/containers?topic=containers-ingress#sample_ingress)
 * [什么是 Ingress？](/docs/containers?topic=containers-ingress#planning)
   * [Ingress 随附了哪些组件？](/docs/containers?topic=containers-ingress#components)
@@ -509,7 +561,7 @@ lastupdated: "2019-03-21"
   * [启用日志缓冲和清空超时](/docs/containers?topic=containers-ingress#access-log)
   * [更改保持活动连接的数量或持续时间](/docs/containers?topic=containers-ingress#keepalive_time)
   * [更改暂挂连接待办事项](/docs/containers?topic=containers-ingress#backlog)
-  * [调整内核性能](/docs/containers?topic=containers-ingress#kernel)
+  * [调整内核性能](/docs/containers?topic=containers-ingress#ingress_kernel)
 * [自带 Ingress 控制器](/docs/containers?topic=containers-ingress#user_managed)
 
 [使用注释定制 Ingress](/docs/containers?topic=containers-ingress_annotation#ingress_annotation)
@@ -567,6 +619,7 @@ lastupdated: "2019-03-21"
 * [增大用于 Ingress 度量值收集的共享内存专区大小](/docs/containers?topic=containers-ingress_health#vts_zone_size)
 
 ## 在持久性存储器上存储数据
+{: #sitemap-storage}
 
 [规划高可用性持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)
 * [选择存储解决方案](/docs/containers?topic=containers-storage_planning#choose_storage_solution)
@@ -587,8 +640,8 @@ lastupdated: "2019-03-21"
 * [决定文件存储器配置](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 * [向应用程序添加文件存储器](/docs/containers?topic=containers-file_storage#add_file)
 * [使用集群中的现有文件存储器](/docs/containers?topic=containers-file_storage#existing_file)
-  * [步骤1：准备现有存储器。](/docs/containers?topic=containers-file_storage#step-1-preparing-your-existing-storage-)
-  * [步骤 2：创建持久卷 (PV) 和匹配的持久卷声明 (PVC)](/docs/containers?topic=containers-file_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [步骤1：准备现有存储器。](/docs/containers?topic=containers-file_storage#existing-file-1)
+  * [步骤 2：创建持久卷 (PV) 和匹配的持久卷声明 (PVC)](/docs/containers?topic=containers-file_storage#existing-file-2)
 * [在有状态集内使用文件存储器](/docs/containers?topic=containers-file_storage#file_statefulset)
   * [创建有状态集时动态供应 PVC](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
   * [创建有状态集之前预先供应 PVC](/docs/containers?topic=containers-file_storage#file_static_statefulset)
@@ -598,7 +651,7 @@ lastupdated: "2019-03-21"
 * [存储类参考](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
   * [铜牌级](/docs/containers?topic=containers-file_storage#file_bronze)
   * [银牌级](/docs/containers?topic=containers-file_storage#file_silver)
-  * [金牌级](/docs/containers?topic=containers-file_storage#block_gold)
+  * [金牌级](/docs/containers?topic=containers-file_storage#file_gold)
   * [定制](/docs/containers?topic=containers-file_storage#file_custom)
 * [样本定制存储类](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
   * [创建拓扑感知存储器](/docs/containers?topic=containers-file_storage#file-topology)
@@ -612,8 +665,8 @@ lastupdated: "2019-03-21"
 * [决定块存储器配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 * [向应用程序添加块存储器](/docs/containers?topic=containers-block_storage#add_block)
 * [使用集群中的现有块存储器](/docs/containers?topic=containers-block_storage#existing_block)
-  * [步骤 1：检索现有块存储器的信息](/docs/containers?topic=containers-block_storage#step-1-retrieving-the-information-of-your-existing-block-storage)
-  * [步骤 2：创建持久卷 (PV) 和匹配的持久卷声明 (PVC)](/docs/containers?topic=containers-block_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [步骤 1：检索现有块存储器的信息](/docs/containers?topic=containers-block_storage#existing-block-1)
+  * [步骤 2：创建持久卷 (PV) 和匹配的持久卷声明 (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
 * [在有状态集内使用块存储器](/docs/containers?topic=containers-block_storage#block_statefulset)
   * [创建有状态集时动态供应 PVC](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
   * [创建有状态集之前预先供应 PVC](/docs/containers?topic=containers-block_storage#block_static_statefulset)
@@ -655,7 +708,7 @@ lastupdated: "2019-03-21"
   * [更新集群中的 Portworx](/docs/containers?topic=containers-portworx#update_portworx)
   * [从集群中除去 Portworx](/docs/containers?topic=containers-portworx#remove_portworx)
 * [使用 {{site.data.keyword.keymanagementservicelong_notm}} 加密 Portworx 卷](/docs/containers?topic=containers-portworx#encrypt_volumes)
-  * [Portworx 卷加密工作流程](/docs/containers?topic=containers-portworx#encryption)
+  * [Portworx 卷加密工作流程](/docs/containers?topic=containers-portworx#px_encryption)
   * [Portworx 卷解密工作流程](/docs/containers?topic=containers-portworx#decryption)
   * [为 Portworx 卷设置加密](/docs/containers?topic=containers-portworx#setup_encryption)
 * [将存储器从 Portworx 集群添加到应用程序](/docs/containers?topic=containers-portworx#add_portworx_storage)
@@ -679,31 +732,36 @@ lastupdated: "2019-03-21"
 [从集群中除去持久性存储器](/docs/containers?topic=containers-cleanup#cleanup)
 * [清除持久性存储器](/docs/containers?topic=containers-cleanup#storage_remove)
 
-## 集成服务
+## 通过集成增强集群功能
+{: #sitemap-integrations}
 
 [集成服务](/docs/containers?topic=containers-integrations#integrations)
-* [DevOps 服务](/docs/containers?topic=containers-integrations#devops_services)
-* [日志记录和监视服务](/docs/containers?topic=containers-integrations#health_services)
-* [安全服务](/docs/containers?topic=containers-integrations#security_services)
-* [存储服务](/docs/containers?topic=containers-integrations#storage_services)
-* [向集群添加 {{site.data.keyword.Bluemix_notm}} 服务](/docs/containers?topic=containers-integrations#adding_cluster)
-* [从应用程序访问服务凭证](/docs/containers?topic=containers-integrations#adding_app)
-  * [将私钥作为卷安装到 pod](/docs/containers?topic=containers-integrations#mount_secret)
-  * [在环境变量中引用私钥](/docs/containers?topic=containers-integrations#reference_secret)
-* [在 {{site.data.keyword.containerlong_notm}} 中设置 Helm](/docs/containers?topic=containers-integrations#helm)
+* [使用受管附加组件添加服务](/docs/containers?topic=containers-managed-addons#managed-addons)
+  * [添加受管附加组件](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
+  * [更新受管附加组件](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
+* [使用 Helm 添加服务](/docs/containers?topic=containers-helm#helm)
+  * [在具有公共访问权的集群中设置 Helm](/docs/containers?topic=containers-helm#public_helm_install)
+  * [专用集群：将 Tiller 映像推送到 {{site.data.keyword.registryshort_notm}} 中的专用注册表](/docs/containers?topic=containers-helm#private_local_tiller)
+  * [专用集群：安装不使用 Tiller 的 Helm chart](/docs/containers?topic=containers-helm#private_install_without_tiller)
   * [相关 Helm 链接](/docs/containers?topic=containers-integrations#helm_links)
-* [可视化 Kubernetes 集群资源](/docs/containers?topic=containers-integrations#weavescope)
+* [使用 {{site.data.keyword.Bluemix_notm}} 服务绑定添加服务](/docs/containers?topic=containers-service-binding#service-binding)
+  * [向集群添加 {{site.data.keyword.Bluemix_notm}} 服务](/docs/containers?topic=containers-service-binding#bind-services)
+  * [从应用程序访问服务凭证](/docs/containers?topic=containers-service-binding#adding_app)
+      * [将私钥作为卷安装到 pod](/docs/containers?topic=containers-service-binding#mount_secret)
+      * [在环境变量中引用私钥](/docs/containers?topic=containers-service-binding#reference_secret)
 
 ## Activity Tracker 事件
+{: #sitemap-at}
 
 [Activity Tracker 事件](/docs/containers?topic=containers-at_events#at_events)
 * [查找事件的信息](/docs/containers?topic=containers-at_events#kube-find)
 * [跟踪集群管理事件](/docs/containers?topic=containers-at_events#cluster-events)
 * [跟踪 Kubernetes 审计事件](/docs/containers?topic=containers-at_events#kube-events)
 
-## 专用云
+## 不推荐：专用云
+{: #sitemap-dedicated}
 
-[在 {{site.data.keyword.Bluemix_dedicated_notm}} 中开始使用集群](/docs/containers?topic=containers-dedicated#dedicated)
+[不推荐：在 {{site.data.keyword.Bluemix_dedicated_notm}} 中开始使用集群](/docs/containers?topic=containers-dedicated#dedicated)
 * [关于 Dedicated 云环境](/docs/containers?topic=containers-dedicated#dedicated_environment)
 * [云环境之间集群管理的差异](/docs/containers?topic=containers-dedicated#dedicated_env_differences)
   * [服务体系结构](/docs/containers?topic=containers-dedicated#dedicated_ov_architecture)
@@ -711,7 +769,7 @@ lastupdated: "2019-03-21"
 * [创建集群](/docs/containers?topic=containers-dedicated#dedicated_administering)
   * [使用 {{site.data.keyword.Bluemix_notm}} 控制台创建集群](/docs/containers?topic=containers-dedicated#dedicated_creating_ui)
   * [使用 CLI 创建集群](/docs/containers?topic=containers-dedicated#dedicated_creating_cli)
-  * [添加工作程序节点](/docs/containers?topic=containers-dedicated#add_workers)
+  * [添加工作程序节点](/docs/containers?topic=containers-dedicated#add_workers_dedicated)
   * [使用专用和公共映像注册表](/docs/containers?topic=containers-dedicated#dedicated_images)
   * [向集群添加子网](/docs/containers?topic=containers-dedicated#dedicated_cluster_subnet)
       * [将更多由用户管理的子网和 IP 地址添加到 Kubernetes 集群](/docs/containers?topic=containers-dedicated#dedicated_byoip_subnets)
@@ -723,16 +781,19 @@ lastupdated: "2019-03-21"
   * [创建持久性存储器](/docs/containers?topic=containers-dedicated#dedicated_apps_volume_claim)
 
 ## 不推荐：运行单个和可缩放容器
+{: #sitemap-singlescalable}
 
 [不推荐：运行单个和可缩放容器](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
 ## 混合云
+{: #sitemap-hybrid}
 
 [混合云](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)
 * [使用 strongSwan VPN 连接公共云和私有云](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
 * [在公共 Kubernetes 容器中运行 {{site.data.keyword.icpfull_notm}} 映像](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
 ## {{site.data.keyword.containerlong_notm}} CLI 插件参考
+{: #sitemap-cli-plugin}
 
 [命令参考](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
 * [使用 Beta 命令结构](/docs/containers?topic=containers-cs_cli_reference#cs_beta)
@@ -751,6 +812,8 @@ lastupdated: "2019-03-21"
 [CLI 更改日志](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 ## {{site.data.keyword.containerlong_notm}} 版本
+
+{: #sitemap-versions}
 
 [版本信息和更新操作](/docs/containers?topic=containers-cs_versions#cs_versions)
 * [Kubernetes 版本类型](/docs/containers?topic=containers-cs_versions#version_types)
@@ -782,8 +845,16 @@ lastupdated: "2019-03-21"
 
 [版本更改日志](/docs/containers?topic=containers-changelog#changelog)
 * [V1.13 更改日志](/docs/containers?topic=containers-changelog#113_changelog)
+  * [2019 年 3 月 20 日发布的 1.13.4_1513 的更改日志](/docs/containers?topic=containers-changelog#1134_1513)
+  * [2019 年 3 月 4 日发布的 1.13.4_1510 的更改日志](/docs/containers?topic=containers-changelog#1134_1510)
+    * [2019 年 2 月 27 日发布的工作程序节点 FP1.13.2_1509 的更改日志](/docs/containers?topic=containers-changelog#1132_1509)
+    * [2019 年 2 月 15 日发布的工作程序节点 FP1.13.2_1508 的更改日志](/docs/containers?topic=containers-changelog#1132_1508)
   * [2019 年 2 月 5 日发布的 1.13.2_1507 的更改日志](/docs/containers?topic=containers-changelog#1124_1534)
 * [V1.12 更改日志](/docs/containers?topic=containers-changelog#112_changelog)
+  * [2019 年 3 月 20 日发布的 1.12.6_1544 的更改日志](/docs/containers?topic=containers-changelog#1126_1544)
+  * [2019 年 3 月 4 日发布的 1.12.6_1541 的更改日志](/docs/containers?topic=containers-changelog#1126_1541)
+    * [2019 年 2 月 27 日发布的工作程序节点 FP1.12.5_1540 的更改日志](/docs/containers?topic=containers-changelog#1125_1540)
+    * [2019 年 2 月 15 日发布的工作程序节点 FP1.12.5_1538 的更改日志](/docs/containers?topic=containers-changelog#1125_1538)
   * [2019 年 2 月 5 日发布的 1.12.5_1537 的更改日志](/docs/containers?topic=containers-changelog#1125_1537)
     * [2019 年 1 月 28 日发布的工作程序节点 FP1.12.4_1535 的更改日志](/docs/containers?topic=containers-changelog#1124_1535)
   * [2019 年 1 月 21 日发布的 1.12.4_1534 的更改日志](/docs/containers?topic=containers-changelog#1124_1534)
@@ -795,6 +866,10 @@ lastupdated: "2019-03-21"
     * [2018 年 11 月 19 日发布的工作程序节点 FP1.12.2_1528 的更改日志](/docs/containers?topic=containers-changelog#1122_1528)
   * [2018 年 11 月 7 日发布的 1.12.2_1527 的更改日志](/docs/containers?topic=containers-changelog#1122_1527)
 * [V1.11 更改日志](/docs/containers?topic=containers-changelog#111_changelog)
+  * [2019 年 3 月 20 日发布的 1.11.8_1550 的更改日志](/docs/containers?topic=containers-changelog#1118_1550)
+  * [2019 年 3 月 4 日发布的 1.11.8_1547 的更改日志](/docs/containers?topic=containers-changelog#1118_1547)
+    * [2019 年 2 月 27 日发布的工作程序节点 FP1.11.7_1546 的更改日志](/docs/containers?topic=containers-changelog#1117_1546)
+    * [2019 年 2 月 15 日发布的工作程序节点 FP1.11.7_1544 的更改日志](/docs/containers?topic=containers-changelog#1117_1544)
   * [2019 年 2 月 5 日发布的 1.11.7_1543 的更改日志](/docs/containers?topic=containers-changelog#1117_1543)
     * [2019 年 1 月 28 日发布的工作程序节点 FP1.11.6_1541 的更改日志](/docs/containers?topic=containers-changelog#1116_1541)
   * [2019 年 1 月 21 日发布的 1.11.6_1540 的更改日志](/docs/containers?topic=containers-changelog#1116_1540)
@@ -815,6 +890,10 @@ lastupdated: "2019-03-21"
     * [2018 年 8 月 23 日发布的工作程序节点 FP1.11.2_1514 的更改日志](/docs/containers?topic=containers-changelog#1112_1514)
   * [2018 年 8 月 14 日发布的 1.11.2_1513 的更改日志](/docs/containers?topic=containers-changelog#1112_1513)
 * [V1.10 更改日志](/docs/containers?topic=containers-changelog#110_changelog)
+  * [2019 年 3 月 20 日发布的 1.10.13_1551 的更改日志](/docs/containers?topic=containers-changelog#11013_1551)
+  * [2019 年 3 月 4 日发布的 1.10.13_1548 的更改日志](/docs/containers?topic=containers-changelog#11013_1548)
+    * [2019 年 2 月 27 日发布的工作程序节点 FP1.10.12_1546 的更改日志](/docs/containers?topic=containers-changelog#11012_1546)
+    * [2019 年 2 月 15 日发布的工作程序节点 FP1.10.12_1544 的更改日志](/docs/containers?topic=containers-changelog#11012_1544)
   * [2019 年 2 月 5 日发布的 1.10.12_1543 的更改日志](/docs/containers?topic=containers-changelog#1117_1543)
     * [2019 年 1 月发布的工作程序节点 FP1.10.12_1541 的更改日志](/docs/containers?topic=containers-changelog#11012_1541)
   * [2019 年 1 月 21 日发布的 1.10.12_1540 的更改日志](/docs/containers?topic=containers-changelog#11012_1540)
@@ -883,18 +962,8 @@ lastupdated: "2019-03-21"
 [集群附加组件更改日志](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 * [Ingress ALB 附加组件更改日志](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 
-## 区域和专区
-
-[区域和专区](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [{{site.data.keyword.Bluemix_notm}} 中的位置](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
-* [{{site.data.keyword.containerlong_notm}} 中的区域](/docs/containers?topic=containers-regions-and-zones#container_regions)
-  * [登录到其他 {{site.data.keyword.containerlong_notm}} 区域](/docs/containers?topic=containers-regions-and-zones#container_login_endpoints)
-  * [使用 {{site.data.keyword.containerlong_notm}} API 命令](/docs/containers?topic=containers-regions-and-zones#containers_api)
-* [{{site.data.keyword.containerlong_notm}} 中的专区](/docs/containers?topic=containers-regions-and-zones#zones)
-  * [单专区集群](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
-  * [多专区集群](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
-
 ## 用户访问许可权
+{: #sitemap-user-access}
 
 [用户访问许可权](/docs/containers?topic=containers-access_reference)
 * [{{site.data.keyword.Bluemix_notm}} IAM 平台角色](/docs/containers?topic=containers-access_reference#iam_platform)
@@ -904,11 +973,22 @@ lastupdated: "2019-03-21"
   * [操作员操作](/docs/containers?topic=containers-access_reference#operator-actions)
   * [管理员操作](/docs/containers?topic=containers-access_reference#admin-actions)
 * [{{site.data.keyword.Bluemix_notm}} IAM 服务角色](/docs/containers?topic=containers-access_reference#service)
-* [每个 RBAC 角色的 Kubernetes 资源许可权](/docs/containers?topic=containers-access_reference#rbac)
+* [每个 RBAC 角色的 Kubernetes 资源许可权](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Cloud Foundry 角色](/docs/containers?topic=containers-access_reference#cloud-foundry)
 * [基础架构角色](/docs/containers?topic=containers-access_reference#infra)
 
+## 支持的集成
+{: #sitemap-supported-integrations}
+
+[支持的集成](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+* [DevOps 服务](/docs/containers?topic=containers-supported_integrations#devops_services)
+* [日志记录和监视服务](/docs/containers?topic=containers-supported_integrations#health_services)
+* [安全服务](/docs/containers?topic=containers-supported_integrations#security_services)
+* [存储服务](/docs/containers?topic=containers-supported_integrations#storage_services)
+* [数据库服务](/docs/containers?topic=containers-supported_integrations#database_services)
+
 ## 常见问题
+{: #sitemap-faqs}
 
 [常见问题](/docs/containers?topic=containers-faqs#faqs)
 * [什么是 Kubernetes？](/docs/containers?topic=containers-faqs#kubernetes)
@@ -931,6 +1011,7 @@ lastupdated: "2019-03-21"
 * [可以查看我的当前使用情况吗？](/docs/containers?topic=containers-faqs#usage)
 
 ## 集群故障诊断
+{: #sitemap-ts}
 
 [调试集群](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot)
 * [使用 {{site.data.keyword.containerlong_notm}} 诊断和调试工具运行测试](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
@@ -1007,6 +1088,8 @@ lastupdated: "2019-03-21"
 * [获取帮助和支持](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
 
 ## {{site.data.keyword.containerlong_notm}} 的热门主题
+{: #sitemap-poptopics}
+
 [{{site.data.keyword.containerlong_notm}} 的热门主题](/docs/containers?topic=containers-cs_popular_topics)
 * [2019 年 2 月的热门主题](/docs/containers?topic=containers-cs_popular_topics#feb19)
 * [2019 年 1 月的热门主题](/docs/containers?topic=containers-cs_popular_topics#jan19)
@@ -1025,6 +1108,7 @@ lastupdated: "2019-03-21"
 * [在 Slack 上与志趣相投的开发人员交谈](/docs/containers?topic=containers-cs_popular_topics#slack)
 
 ## 相关链接
+{: #sitemap-rellinks}
 
 [相关链接](/docs/containers?topic=containers-cs_rellinks#cs_rellinks)
 * [{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_rellinks#containers)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -30,17 +30,6 @@ subcollection: containers
 {:shortdesc}
 
 容器是打包应用程序及其所有依赖项的标准方法，以便您可以无缝地在环境之间移动应用程序。与虚拟机不同，容器不会捆绑操作系统。在容器中只会打包应用程序代码、运行时、系统工具、库和设置。因此容器比虚拟机更轻便、可移植性更高且更高效。
-
-
-
-单击以下选项以开始：
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="单击图标可快速开始使用 {{site.data.keyword.containerlong_notm}}。对于 {{site.data.keyword.Bluemix_dedicated_notm}}，单击此图标可查看选项。" style="width:440px;" />
-<map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="在 {{site.data.keyword.Bluemix_notm}} 中开始使用 Kubernetes 集群" title="在 {{site.data.keyword.Bluemix_notm}} 中开始使用 Kubernetes 集群" shape="rect" coords="-7, -8, 108, 211" />
-<area href="/docs/containers?topic=containers-cs_cli_install" alt="安装 CLI。" title="安装 CLI。" shape="rect" coords="155, -1, 289, 210" />
-<area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} 云环境" title="{{site.data.keyword.Bluemix_notm}} 云环境" shape="rect" coords="326, -10, 448, 218" />
-</map>
 
 
 ## 集群入门
@@ -77,8 +66,8 @@ subcollection: containers
 **接下来要做什么？**</br>
 在免费集群到期之前，使用免费集群试用一些功能。
 
-* 完成[第一个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)，以创建 Kubernetes 集群，安装 CLI，创建专用注册表，设置集群环境以及向集群添加服务。
-* 一鼓作气完成有关将应用程序部署到集群的[第二个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)。
+* 浏览[第一个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)，以创建 Kubernetes 集群、安装 CLI 或使用 Kubernetes 终端、创建专用注册表、设置集群环境以及向集群添加服务。
+* 一鼓作气继续浏览有关将应用程序部署到集群的[第二个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)。
 * [创建标准集群](/docs/containers?topic=containers-clusters#clusters_ui)（具有多个节点），以实现更高的可用性。
 
 

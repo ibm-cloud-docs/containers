@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -33,9 +33,9 @@ subcollection: containers
 {:shortdesc}
 
 **지원되는 Kubernetes 버전**:
-*   최신: 1.13.4
-*   기본: 1.12.6
-*   기타: 1.11.8
+*   최신: 1.13.5
+*   기본값: 1.12.7
+*   기타: 1.11.9
 
 **더 이상 사용되지 않거나 지원되지 않는 Kubernetes 버전**:
 *   더 이상 사용되지 않음: 1.10
@@ -43,11 +43,11 @@ subcollection: containers
 
 </br>
 
-**더 이상 사용되지 않는 버전**: 더 이상 사용되지 않는 Kubernetes에서 클러스터가 실행되는 경우, 버전 지원이 중단되기 전에 지원되는 Kubernetes 버전을 검토하고 이로 업데이트할 수 있도록 최소 30일이 제공됩니다. 폐기 기간 중에도 클러스터는 작동하지만, 보안 취약성을 수정하기 위해 지원되는 릴리스로 업데이트해야 할 수 있습니다. 더 이상 사용되지 않는 버전을 사용하는 클러스터를 새로 작성할 수는 없습니다.
+**더 이상 사용되지 않는 버전**: 더 이상 사용되지 않는 Kubernetes에서 클러스터가 실행되는 경우, 버전 지원이 중단되기 전에 지원되는 Kubernetes 버전을 검토하고 이로 업데이트할 수 있도록 최소 30일이 제공됩니다. 폐기 기간 중에도 클러스터는 작동하지만, 보안 취약성을 수정하기 위해 지원되는 릴리스로 업데이트해야 할 수 있습니다. 예를 들어, 작업자 노드를 추가하고 다시 로드할 수 있으나 더 이상 사용하지 않는 버전을 사용하는 새 클러스터를 작성할 수는 없습니다. 
 
-**지원되지 않는 버전**: 클러스터가 지원되지 않는 Kubernetes 버전을 실행하는 경우에는 다음의 잠재적인 업데이트 영향을 검토한 후에 즉시 [클러스터를 업데이트](/docs/containers?topic=containers-update#update)하여 중요한 보안 업데이트 및 지원을 계속 받으십시오. 지원되지 않는 클러스터는 기존 작업자 노드를 추가하거나 다시 로드할 수 없습니다. `ibmcloud ks clusters` 명령의 출력에 있는 **상태** 필드 또는 [{{site.data.keyword.containerlong_notm}} 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/containers-kubernetes/clusters)을 검토하여 클러스터가 **지원되지 않는**지 확인할 수 있습니다.
+**지원되지 않는 버전**: 클러스터가 지원되지 않는 Kubernetes 버전을 실행하는 경우에는 다음의 잠재적인 업데이트 영향을 검토한 후에 즉시 [클러스터를 업데이트](/docs/containers?topic=containers-update#update)하여 중요한 보안 업데이트 및 지원을 계속 받으십시오. 지원되지 않는 클러스터는 기존 작업자 노드를 추가하거나 다시 로드할 수 없습니다. `ibmcloud ks clusters` 명령의 출력에 있는 **상태** 필드 또는 [{{site.data.keyword.containerlong_notm}} 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/clusters)을 검토하여 클러스터가 **지원되지 않는**지 확인할 수 있습니다.
 
-클러스터가 지원되는 버전 이전의 3개 이상의 부 버전일 때까지 기다리면 업데이트를 강제 실행해야 하며, 이로 인해 예상치 못한 결과나 장애가 발생할 수 있습니다. 버전 1.7 또는 1.8에서 버전 1.11 이상으로의 업데이트는 실패합니다. 다른 버전의 경우(예를 들어 클러스터가 Kubernetes 버전 1.9를 실행하는 경우), 마스터를 직접 1.12 이상으로 업데이트하면 작업자 노드를 동일한 버전으로 업데이트할 때까지 대부분의 팟(Pod)은 `MatchNodeSelector`, `CrashLoopBackOff` 또는 `ContainerCreating`과 같은 상태를 입력하여 실패합니다. 이 문제를 방지하려면 클러스터를 현재 버전에 앞선 3개 미만의 지원되는 버전(예: 1.9에서 1.11)으로 업데이트한 다음 1.12로 업데이트하십시오. <br><br>지원되는 버전으로 클러스터를 업데이트한 후에는 클러스터가 정상 오퍼레이션을 재개하고 지원을 계속 받을 수 있습니다.
+클러스터가 지원되는 버전 이전의 3개 이상의 부 버전일 때까지 기다리면 업데이트를 강제 실행해야 하며, 이로 인해 예상치 못한 결과나 장애가 발생할 수 있습니다. 버전 1.7 또는 1.8에서 버전 1.11 이상으로의 업데이트는 실패합니다. 다른 버전의 경우(예를 들어 클러스터가 Kubernetes 버전 1.9를 실행하는 경우), 마스터를 직접 1.12 이상으로 업데이트하면 작업자 노드를 동일한 버전으로 업데이트할 때까지 대부분의 팟(Pod)은 `MatchNodeSelector`, `CrashLoopBackOff` 또는 `ContainerCreating`과 같은 상태를 입력하여 실패합니다. 이 문제를 방지하려면 클러스터를 현재 버전에 앞선 3개 미만의 지원되는 버전(예: 1.9에서 1.11)으로 업데이트한 다음 1.12로 업데이트하십시오.<br><br>지원되는 버전으로 클러스터를 업데이트한 후에는 클러스터가 정상 오퍼레이션을 재개하고 지원을 계속 받을 수 있습니다.
 {: important}
 
 </br>
@@ -62,7 +62,7 @@ kubectl version  --short | grep -i server
 출력 예:
 
 ```
-서버 버전: v1.12.6+IKS
+서버 버전: v1.12.7+IKS
 ```
 {: screen}
 
@@ -154,7 +154,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="이 버전은 더 이상 사용되지 않습니다."/></td>
   <td>[1.10](#cs_v110)</td>
   <td>2018년 5월 1일</td>
-  <td>2019년 4월 30일 `†`</td>
+  <td>2019년 5월 15일</td>
 </tr>
 <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="이 버전은 지원되지 않습니다."/></td>
@@ -252,7 +252,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>`kubectl get componentstatuses` 명령은 이제 `localhost`와 비보안(HTTP) 포트가 비활성화되어 Kubernetes 마스터 컴포넌트를 더 이상 Kubernetes API 서버에서 액세스할 수 없기 때문에 일부 Kubernetes 마스터 컴포넌트의 상태를 제대로 보고하지 않습니다. Kubernetes 버전 1.10에서 고가용성(HA) 마스터를 도입한 후에는 각 Kubernetes 마스터가 복수의 `apiserver`, `controller-manager`, `scheduler` 및 `etcd` 인스턴스로 설정됩니다. 대신 [{{site.data.keyword.Bluemix_notm}} 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/containers-kubernetes/landing)을 확인하거나 `ibmcloud ks cluster-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)을 사용하여 클러스터 상태를 검토하십시오.</td>
+<td>`kubectl get componentstatuses` 명령은 이제 `localhost`와 비보안(HTTP) 포트가 비활성화되어 Kubernetes 마스터 컴포넌트를 더 이상 Kubernetes API 서버에서 액세스할 수 없기 때문에 일부 Kubernetes 마스터 컴포넌트의 상태를 제대로 보고하지 않습니다. Kubernetes 버전 1.10에서 고가용성(HA) 마스터를 도입한 후에는 각 Kubernetes 마스터가 복수의 `apiserver`, `controller-manager`, `scheduler` 및 `etcd` 인스턴스로 설정됩니다. 대신 [{{site.data.keyword.Bluemix_notm}} 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/landing)을 확인하거나 `ibmcloud ks cluster-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)을 사용하여 클러스터 상태를 검토하십시오.</td>
 </tr>
 <tr>
 <tr>
@@ -324,7 +324,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 </tr>
 <tr>
 <td>`kube-system` `default` 서비스 계정에 대한 역할 바인딩</td>
-<td>`kube-system` `default` 서비스 계정은 더 이상 Kubernetes API에 **cluster-admin**으로 액세스할 수 없습니다. 클러스터의 프로세스에 액세스해야 하는 기능 또는 추가 기능(예: [Helm](/docs/containers?topic=containers-integrations#helm))을 배치하는 경우 [서비스 계정![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)을 설정하십시오. 적절한 권한을 가진 개별 서비스 계정을 작성하고 설정하는 데 시간이 필요한 경우 다음과 같은 역할 바인딩을 사용하여 **cluster-admin** 역할을 일시적으로 부여할 수 있습니다. `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
+<td>`kube-system` `default` 서비스 계정은 더 이상 Kubernetes API에 **cluster-admin**으로 액세스할 수 없습니다. 클러스터의 프로세스에 액세스해야 하는 기능 또는 추가 기능(예: [Helm](/docs/containers?topic=containers-helm#public_helm_install))을 배치하는 경우 [서비스 계정![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)을 설정하십시오. 적절한 권한을 가진 개별 서비스 계정을 작성하고 설정하는 데 시간이 필요한 경우 다음과 같은 역할 바인딩을 사용하여 **cluster-admin** 역할을 일시적으로 부여할 수 있습니다. `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
 </tr>
 </tbody>
 </table>
@@ -348,7 +348,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 <td>Kubernetes용 API</td>
 <td>Kubernetes API는 다음과 같이 더 이상 사용되지 않는 API를 대체합니다.
 <ul><li><strong>apps/v1</strong>: `apps/v1` Kubernetes API는 `apps/v1beta1` 및 `apps/v1alpha` API를 대체합니다. `apps/v1` API도 `daemonset`, `deployment`, `replicaset` 및 `statefulset` 리소스용 `extensions/v1beta1` API를 대체합니다. Kubernetes 프로젝트는 이전 API에 대한 지원을 `apiserver` 및 `kubectl` 클라이언트에서 단계적으로 제거하고 있습니다.</li>
-<li><strong>networking.k8s.io/v1</strong>: `networking.k8s.io/v1` API는 `networkpolicy` 리소스용 `extensions/v1beta1` API를 대체합니다.</li>
+<li><strong>networking.k8s.io/v1</strong>: `networking.k8s.io/v1` API는 NetworkPolicy 리소스용 `extensions/v1beta1` API를 대체합니다.</li>
 <li><strong>policy/v1beta1</strong>: `policy/v1beta1` API는 `podsecuritypolicy` 리소스용 `extensions/v1beta1` API를 대체합니다.</li></ul>
 <br><br>더 이상 사용되지 않는 API가 지원되지 않기 전에 모든 YAML `apiVersion` 필드를 업데이트하여 적절한 Kubernetes API를 사용하십시오. 또한 다음과 같은 `apps/v1` 관련 변경사항을 보려면 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)를 검토하십시오.
 <ul><li>배치를 작성한 후에는 `.spec.selector` 필드를 변경할 수 없습니다.</li>
@@ -364,7 +364,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>`kubectl get componentstatuses` 명령은 이제 `localhost`와 비보안(HTTP) 포트가 비활성화되어 Kubernetes 마스터 컴포넌트를 더 이상 Kubernetes API 서버에서 액세스할 수 없기 때문에 일부 Kubernetes 마스터 컴포넌트의 상태를 제대로 보고하지 않습니다. Kubernetes 버전 1.10에서 고가용성(HA) 마스터를 도입한 후에는 각 Kubernetes 마스터가 복수의 `apiserver`, `controller-manager`, `scheduler` 및 `etcd` 인스턴스로 설정됩니다. 대신 [{{site.data.keyword.Bluemix_notm}} 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/containers-kubernetes/landing)을 확인하거나 `ibmcloud ks cluster-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)을 사용하여 클러스터 상태를 검토하십시오.</td>
+<td>`kubectl get componentstatuses` 명령은 이제 `localhost`와 비보안(HTTP) 포트가 비활성화되어 Kubernetes 마스터 컴포넌트를 더 이상 Kubernetes API 서버에서 액세스할 수 없기 때문에 일부 Kubernetes 마스터 컴포넌트의 상태를 제대로 보고하지 않습니다. Kubernetes 버전 1.10에서 고가용성(HA) 마스터를 도입한 후에는 각 Kubernetes 마스터가 복수의 `apiserver`, `controller-manager`, `scheduler` 및 `etcd` 인스턴스로 설정됩니다. 대신 [{{site.data.keyword.Bluemix_notm}} 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/landing)을 확인하거나 `ibmcloud ks cluster-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)을 사용하여 클러스터 상태를 검토하십시오.</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
@@ -496,8 +496,12 @@ Kubernetes 버전 1.9 또는 이전 버전에서 버전 1.11로 클러스터를 
 컨테이너 로그 디렉토리가 `/var/lib/docker/`에서 `/var/log/pods/`로 변경되었습니다. 이전 디렉토리를 모니터링하는 자체 로깅 솔루션을 사용하는 경우에는 이에 맞게 업데이트하십시오.</td>
 </tr>
 <tr>
+<td>{{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) 지원</td>
+<td>Kubernetes 버전 1.11  이상을 실행하는 클러스터는 IAM [액세스 그룹](/docs/iam?topic=iam-groups#groups) 및 [서비스 ID](/docs/iam?topic=iam-serviceids#serviceids)를 지원합니다. 이제 이 기능을 사용하여 [클러스터에 액세스할 권한을 부여](/docs/containers?topic=containers-users#users)할 수 있습니다. </td>
+</tr>
+<tr>
 <td>Kubernetes 구성 새로 고치기</td>
-<td>클러스터의 Kubernetes API 서버에 대한 OpenID Connect 구성이 {{site.data.keyword.Bluemix_notm}} Identity and Access Management(IAM) 액세스 그룹을 지원하도록 업데이트되었습니다. 따라서 클러스터의 Kubernetes v1.11 업데이트 이후에는 다음을 실행하여 Kubernetes 구성을 새로 고쳐야 합니다. `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. 이 명령을 사용하면 해당 구성이 `default` 네임스페이스의 역할 바인딩에 적용됩니다. <br><br>구성을 새로 고치지 않으면 다음 오류 메시지와 함께 클러스터 조치가 실패합니다. `You must be logged in to the server (Unauthorized).`</td>
+<td>클러스터의 Kubernetes API 서버에 대한 OpenID Connect 구성이 {{site.data.keyword.Bluemix_notm}} Identity and Access Management(IAM) 액세스 그룹을 지원하도록 업데이트되었습니다. 따라서 클러스터의 Kubernetes v1.11 업데이트 이후에는 `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`를 실행하여 Kubernetes 구성을 새로 고쳐야 합니다. 이 명령을 사용하면 해당 구성이 `default` 네임스페이스의 역할 바인딩에 적용됩니다.<br><br>구성을 새로 고치지 않으면 다음 오류 메시지와 함께 클러스터 조치가 실패합니다. `You must be logged in to the server (Unauthorized).`</td>
 </tr>
 <tr>
 <td>Kubernetes 대시보드</td>
@@ -551,9 +555,25 @@ HA 구성에서 클러스터 마스터에 대한 액세스를 허용하려면 �
 팟(Pod)이 현재 `2040` 또는 `2041` 포트를 사용하고 있는지 확인하려면 사용 중인 클러스터를 대상으로 설정하고 다음 명령을 실행하십시오.
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
+
+HA 마스터 구성이 이미 있는 경우 다음 예에서와 같이 `kube-system` 네임스페이스에서 `ibm-master-proxy-*`에 대한 결과를 볼 수 있습니다. 기타 팟(Pod)이 리턴되면 포트를 업데이트하십시오. 
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
+
 
 <br>
 **마스터에 대한 클러스터 내부 액세스를 위해 `kubernetes` 서비스 클러스터 IP 또는 도메인 사용**:</br>
@@ -582,7 +602,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 다음 단계는 Kubernetes 네트워크 정책을 업데이트하는 방법에 대해 설명합니다. Calico 네트워크 정책을 업데이트하려면 정책 구문을 약간 변경하고 `calicoctl`를 통해 이 단계를 반복하여 정책에서 영향을 검색하십시오.
 {: note}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  클러스터 마스터 IP 주소를 가져오십시오.
     ```
@@ -690,7 +710,7 @@ Kubernetes 버전 1.11 이상을 실행하는 클러스터의 경우, `container
 컨테이너 런타임으로서 Docker에 의존할 수 있는 경우의 예:
 *  권한 부여된 컨테이너를 사용하여 직접 Docker 엔진 또는 API에 액세스하는 경우에는 런타임으로서 `containerd`를 지원하도록 팟(Pod)을 업데이트하십시오. 예를 들어 Docker 소켓을 직접 호출하여 컨테이너를 실행하거나 다른 Docker 조작을 수행하십시오. Docker 소켓은 `/var/run/docker.sock`에서 `/run/containerd/containerd.sock`으로 변경되었습니다. `containerd` 소켓에 사용되는 프로토콜은 Docker에 사용된 프로토콜과 약간 다릅니다. 앱을 `containerd` 소켓으로 업데이트하도록 시도하십시오. Docker 소켓을 계속 사용하려는 경우 [Docker-inside-Docker(DinD) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://hub.docker.com/_/docker/) 사용을 검토하십시오.
 *  클러스터에 설치되는 일부 서드파티 추가 기능(예: 로깅 및 모니터링 도구)은 Docker 엔진에 의존할 수 있습니다. 제공업체에 문의하여 해당 도구가 containerd와 호환 가능한지 확인하십시오. 가능한 유스 케이스는 다음과 같습니다.
-   - 로깅 도구는 컨테이너 `stderr/stdout` 디렉토리 `/var/log/pods/<pod_uuid>/<container_name>/*.log`를 사용하여 로그에 액세스합니다. Docker에서 이 디렉토리는 `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log`에 대한 symlink입니다. 반면 `containerd`에서는 symlink 없이 직접 디렉토리에 액세스할 수 있습니다.
+   - 로깅 도구는 로그에 액세스하도록 컨테이너 `stderr/stdout` 디렉토리 `/var/log/pods/<pod_uuid>/<container_name>/*.log`를 사용할 수 있습니다. Docker에서 이 디렉토리는 `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log`에 대한 symlink입니다. 반면 `containerd`에서는 symlink 없이 직접 디렉토리에 액세스할 수 있습니다.
    - 모니터링 도구는 Docker 소켓에 직접 액세스합니다. Docker 소켓은 `/var/run/docker.sock`에서 `/run/containerd/containerd.sock`으로 변경되었습니다.
 
 <br>
@@ -757,7 +777,7 @@ Kubernetes 버전 1.10 또는 이전 버전에서 버전 1.11로 클러스터를
 이전 Kubernetes 버전에서 1.10으로 업데이트할 때 변경해야 할 사항을 검토하십시오.
 {: shortdesc}
 
-Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 4월 30일(임시)부터 지원되지 않습니다. 각 Kubernetes 버전 업데이트의 [잠재적인 영향을 검토](/docs/containers?topic=containers-cs_versions#cs_versions)한 후에 버전 1.11 이상으로 즉시 [클러스터를 업데이트](/docs/containers?topic=containers-update#update)하십시오.
+Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(임시)부터 지원되지 않습니다. 각 Kubernetes 버전 업데이트의 [잠재적인 영향을 검토](/docs/containers?topic=containers-cs_versions#cs_versions)한 후에 버전 1.11 이상으로 즉시 [클러스터를 업데이트](/docs/containers?topic=containers-update#update)하십시오.
 {: deprecated}
 
 Kubernetes 1.10으로 업데이트하려면 먼저 [Calico v3으로 업데이트 준비](#110_calicov3)에 나열된 단계를 따라야 합니다.
@@ -891,9 +911,24 @@ HA 구성에서 클러스터 마스터에 대한 액세스를 허용하려면 �
 팟(Pod)이 현재 `2040` 또는 `2041` 포트를 사용하고 있는지 확인하려면 사용 중인 클러스터를 대상으로 설정하고 다음 명령을 실행하십시오.
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
+
+HA 마스터 구성이 이미 있는 경우 다음 예에서와 같이 `kube-system` 네임스페이스에서 `ibm-master-proxy-*`에 대한 결과를 볼 수 있습니다. 기타 팟(Pod)이 리턴되면 포트를 업데이트하십시오. 
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
 
 <br>
 **마스터에 대한 클러스터 내부 액세스를 위해 `kubernetes` 서비스 클러스터 IP 또는 도메인 사용**:</br>
@@ -922,7 +957,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 다음 단계는 Kubernetes 네트워크 정책을 업데이트하는 방법에 대해 설명합니다. Calico 네트워크 정책을 업데이트하려면 정책 구문을 약간 변경하여 이 단계를 반복하고 `calicoctl`을 사용하여 정책에서 영향을 검색하십시오.
 {: note}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  클러스터 마스터 IP 주소를 가져오십시오.
     ```

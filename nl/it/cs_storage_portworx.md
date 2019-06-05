@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -41,7 +41,7 @@ Portworx viene fornito anche con ulteriori funzioni che puoi utilizzare per le t
 {{site.data.keyword.containerlong_notm}} fornisce dei tipi di nodo di lavoro bare metal che sono ottimizzati per l'[utilizzo SDS (software-defined storage)](/docs/containers?topic=containers-plan_clusters#sds) e che sono forniti con uno o più dischi locali non elaborati, non formattati e non montati che puoi utilizzare per il tuo livello di archiviazione Portworx. Portworx offre delle prestazioni ottimali quando utilizzi le macchine di nodo di lavoro SDS fornite con una velocità di rete di 10Gbps.
 
 **Cosa devo fare se voglio eseguire Portworx su nodi di lavoro non SDS?** </br>
-Puoi installare Portworx su tipi di nodo di lavoro non SDS ma potresti non ottenere i vantaggi prestazionali richiesti dalla tua applicazione. I nodi di lavoro non SDS possono essere virtuali o bare metal. Se vuoi utilizzare le macchine virtuali, utilizza un tipo di nodo di lavoro `b2c.16x64` o migliore. Le macchine virtuali con un tipo `b2c.4x16` o `u2c.2x4` non forniscono le risorse necessarie perché Portworx funzioni correttamente. Tieni presente che le macchine virtuali sono fornite con 1000Mbps, che non è sufficiente per delle prestazioni ideali di Portworx. Le macchine bare metal sono fornite con risorse di calcolo e velocità di rete sufficienti per Portworx, ma devi [aggiungere dell'archiviazione blocchi non elaborata, non formattata e non montata](#create_block_storage) prima di poter utilizzare queste macchine.
+Puoi installare Portworx su tipi di nodo di lavoro non SDS ma potresti non ottenere i vantaggi prestazionali richiesti dalla tua applicazione. I nodi di lavoro non SDS possono essere virtuali o bare metal. Se vuoi utilizzare le macchine virtuali, utilizza un tipo di nodo di lavoro `b2c.16x64` o migliore. Le macchine virtuali con un tipo `b3c.4x16` o `u3c.2x4` non forniscono le risorse necessarie perché Portworx funzioni correttamente. Tieni presente che le macchine virtuali sono fornite con 1000Mbps, che non è sufficiente per delle prestazioni ideali di Portworx. Le macchine bare metal sono fornite con risorse di calcolo e velocità di rete sufficienti per Portworx, ma devi [aggiungere dell'archiviazione blocchi non elaborata, non formattata e non montata](#create_block_storage) prima di poter utilizzare queste macchine.
 
 **Come posso assicurarmi che i miei dati vengano archiviati in modo che siano altamente disponibili?** </br>
 Hai bisogno di almeno 3 nodi di lavoro nel tuo cluster Portworx per consentire a Portworx di replicare i tuoi dati tra i nodi. Replicando i tuoi dati tra i nodi di lavoro, Portworx può garantire che la tua applicazione con stato possa essere ripianificata su un nodo di lavoro differente nel caso in cui si verificasse un malfunzionamento senza che si verifichi alcuna perdita di dati. Per una disponibilità ancora più elevata, utilizza un [cluster multizona](/docs/containers?topic=containers-plan_clusters#multizone) e replica i tuoi volumi tra i nodi di lavoro SDS in 3 o più zone.
@@ -105,7 +105,7 @@ Databases for etcd è un servizio etcd gestito che archivia e replica in modo pr
 
 La seguente procedura mostra come eseguire il provisioning e come configurare un'istanza del servizio Databases for etcd per Portworx.
 
-1. Assicurati di disporre del ruolo di accesso della piattaforma [`Amministratore` in {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management)](/docs/iam?topic=iam-iammanidaccser#iammanidaccser)  per il servizio Databases for etcd.  
+1. Assicurati di disporre del ruolo di accesso della piattaforma [`Amministratore` in {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management)](/docs/iam?topic=iam-iammanidaccser#iammanidaccser) per il servizio Databases for etcd.  
 
 2. Esegui il provisioning della tua istanza del servizio Databases for etcd.
    1. Apri la [pagina del catalogo Databases for etcd](https://cloud.ibm.com/catalog/services/databases-for-etcd)
@@ -226,12 +226,12 @@ Prima di iniziare:
 
 Per installare Portworx:
 
-1.  [Attieniti alle istruzioni](/docs/containers?topic=containers-integrations#helm) per installare il client Helm sulla tua macchina locale e installare il server Helm (tiller) con un account di servizio nel tuo cluster.
+1.  [Attieniti alle istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale e installare il server Helm (tiller) con un account di servizio nel tuo cluster.
 
 2.  Verifica che tiller sia installato con un account di servizio.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -258,7 +258,7 @@ Per installare Portworx:
    {: pre}
 
 6. Aggiorna i seguenti valori e salva le tue modifiche.
-   - **`etcdEndPoint`**: aggiungi l'endpoint alla tua istanza del servizio {{site.data.keyword.composeForEtcd}} che hai richiamato in precedenza nel formato `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. Se hai più di un endpoint, includi tutti gli endpoint e separali con un carattere punto e virgola )`;`).
+   - **`etcdEndPoint`**: aggiungi l'endpoint alla tua istanza del servizio {{site.data.keyword.composeForEtcd}} che hai richiamato in precedenza nel formato `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`.:Se hai più di un endpoint, includi tutti gli endpoint e separali con un carattere punto e virgola )`;`).
     - **`imageVersion`**: immetti la versione più recente del grafico Helm di Portworx. Per trovare la versione più recente, fai riferimento alle [note sulla release![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.portworx.com/reference/release-notes/) di Portworx.
    - **`clusterName`**: immetti il nome del cluster dove vuoi installare Portworx.
    - **`usedrivesAndPartitions`**: immetti `true` per lasciare che Portworx trovi le partizioni e le unità disco rigido non montate.
@@ -385,7 +385,7 @@ Per installare Portworx:
    stork            3        3        3           0          1s
    stork-scheduler  3        3        3           0          1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                    PROVISIONER                    AGE
    px-sc-repl3-iodb-512blk-snap60-15snaps  kubernetes.io/portworx-volume  1s
    px-sc-repl3-iodb-snap60-15snaps         kubernetes.io/portworx-volume  1s
@@ -517,7 +517,7 @@ Puoi eseguire un upgrade di Portworx alla versione più recente.
 
    Output di esempio:
    ```
-   <helm_chart_name>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default
+   <helm_chart_name>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default     
    ```
    {: screen}
 
@@ -541,7 +541,7 @@ Se non vuoi utilizzare Portworx nel tuo cluster, puoi disinstallare il grafico H
 
    Output di esempio:
    ```
-   <helm_chart_name>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default
+   <helm_chart_name>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default     
    ```
    {: screen}
 
@@ -568,12 +568,12 @@ Per proteggere i tuoi dati in un volume Portworx, puoi scegliere di proteggere i
 {{site.data.keyword.keymanagementservicelong_notm}} ti aiuta ad eseguire il provisioning di chiavi crittografate che sono protette da HSM (hardware security module) basati sul cloud con certificazione FIPS 140-2 Level 2. Puoi utilizzare queste chiavi per proteggere in modo sicuro i tuoi dati da utenti non autorizzati. Puoi scegliere di utilizzare una chiave di crittografia per crittografare tutti i tuoi volumi in un cluster o di utilizzare invece una chiave di crittografia per ciascun volume. Portworx utilizza questa chiave per crittografare i dati inattivi e in fase di transito quando vengono inviati a un altro nodo di lavoro. Per ulteriori informazioni, vedi [Volume encryption ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption). Per una sicurezza maggiore, configura una crittografia per ogni singolo volume.
 
 Esamina le seguenti informazioni:
-- Panoramica del [flusso di lavoro di crittografia dei volumi Portworx](#encryption) con {{site.data.keyword.keymanagementservicelong_notm}} per la crittografia per ogni singolo volume
+- Panoramica del [flusso di lavoro di crittografia dei volumi Portworx](#px_encryption) con {{site.data.keyword.keymanagementservicelong_notm}} per la crittografia per ogni singolo volume
 - Panoramica del [flusso di lavoro di decrittografia dei volumi Portworx](#decryption) con {{site.data.keyword.keymanagementservicelong_notm}} per la crittografia per ogni singolo volume
 - [Configurazione della crittografia per ogni singolo volume](#setup_encryption) per i tuoi volumi Portworx.
 
 ### Flusso di lavoro della crittografia per ogni singolo volume di Portworx
-{: #encryption}
+{: #px_encryption}
 
 La seguente immagine illustra il flusso di lavoro di crittografia in Portworx con {{site.data.keyword.keymanagementservicelong_notm}} quando configuri la crittografia per ogni singolo volume.
 {: shortdesc}
@@ -606,7 +606,7 @@ La seguente immagine illustra il flusso di lavoro di decrittografia in Portworx 
 Attieniti alla seguente procedura per configurare la crittografia per i tuoi volumi Portworx con {{site.data.keyword.keymanagementservicelong_notm}}.
 {: shortdesc}
 
-1. Assicurati che ti sia stato [assegnato il ruolo di accesso alla piattaforma `Editor` e il ruolo di accesso al servizio di scrittore (`Writer`)](/docs/services/key-protect?topic=key-protect-manage-access#manage-access) in {{site.data.keyword.Bluemix_notm}} Identity and Access Management for {{site.data.keyword.keymanagementservicelong_notm}}.
+1. Assicurati che ti sia stato [assegnato il ruolo di accesso della piattaforma `Editor` e il ruolo di accesso del servizio di scrittore (`Writer`)](/docs/services/key-protect?topic=key-protect-manage-access#manage-access) in {{site.data.keyword.Bluemix_notm}} Identity and Access Management for {{site.data.keyword.keymanagementservicelong_notm}}.
 
 2. Crea un'istanza del servizio {{site.data.keyword.keymanagementservicelong_notm}}.
    1. Apri la [pagina del catalogo {{site.data.keyword.keymanagementservicelong_notm}}](https://cloud.ibm.com/catalog/services/key-protect).
@@ -646,7 +646,7 @@ Attieniti alla seguente procedura per configurare la crittografia per i tuoi vol
    Sub Type:
    Tags:
    Created at:            2018-10-30T20:24:54Z
-   Updated at:            2018-10-30T20:24:54Z
+   Updated at:            2018-10-30T20:24:54Z  
    ```
    {: screen}
 
@@ -724,7 +724,7 @@ Attieniti alla seguente procedura per configurare la crittografia per i tuoi vol
       <tbody>
       <tr>
       <td><code>metadata.name</code></td>
-      <td>Immetti <code>px-ibm</code> come nome per il tuo segreto Kubernetes. Se utilizzi un nome diverso, Portworx non riconosce il segreto durante l'installazione.</td>
+      <td>Immetti <code>px-ibm</code> come nome per il tuo segreto Kubernetes. Se utilizzi un nome diverso, Portworx non riconosce il segreto durante l'installazione. </td>
       </tr>
       <tr>
       <td><code>data.IBM_SERVICE_API_KEY</code></td>
@@ -869,7 +869,7 @@ Per richiedere l'archiviazione dal tuo cluster Portworx e utilizzarla nella tua 
 
    ```
    kind: StorageClass
-   apiVersion: storage.k8s.io/v1beta1
+   apiVersion: storage.k8s.io/v1
    metadata:
        name: <storageclass_name>
    provisioner: kubernetes.io/portworx-volume
@@ -889,7 +889,7 @@ Per richiedere l'archiviazione dal tuo cluster Portworx e utilizzarla nella tua 
    <tbody>
    <tr>
    <td><code>metadata.name</code></td>
-   <td>Immetti un nome per la tua classe di archiviazione.</td>
+   <td>Immetti un nome per la tua classe di archiviazione. </td>
    </tr>
    <tr>
    <td><code>parameters.repl</code></td>
@@ -897,11 +897,11 @@ Per richiedere l'archiviazione dal tuo cluster Portworx e utilizzarla nella tua 
    </tr>
    <tr>
    <td><code>parameters.secure</code></td>
-   <td>Specifica se vuoi crittografare i dati nel tuo volume con {{site.data.keyword.keymanagementservicelong_notm}}. Scegli tra le seguenti opzioni: <ul><li><strong>true</strong>: immetti <code>true</code> per abilitare la crittografia per i tuoi volumi Portworx. Per crittografare i volumi, devi disporre di un'istanza del servizio {{site.data.keyword.keymanagementservicelong_notm}} e di un segreto Kubernetes che contiene la tua CRK (customer root key). Per ulteriori informazioni su come configurare la crittografia per i volumi Portworx, vedi [Crittografia dei tuoi volumi Portworx](#encrypt_volumes). </li><li><strong>false</strong>: quando immetti <code>false</code>, i tuoi volumi Portworx non sono crittografati. </li></ul> Se non specifichi questa opzione, i tuoi volumi Portworx non sono crittografati per impostazione predefinita. <strong>Nota:</strong> puoi scegliere di abilitare la crittografia dei volumi nella tua PVC, anche se hai disabilitato la crittografia nella tua classe di archiviazione. L'impostazione che specifichi nella PVC ha la precedenza sulle impostazioni nella classe di archiviazione. </td>
+   <td>Specifica se vuoi crittografare i dati nel tuo volume con {{site.data.keyword.keymanagementservicelong_notm}}. Scegli tra le seguenti opzioni: <ul><li><strong>true</strong>: immetti <code>true</code> per abilitare la crittografia per i tuoi volumi Portworx. Per crittografare i volumi, devi disporre di un'istanza del servizio {{site.data.keyword.keymanagementservicelong_notm}} e di un segreto Kubernetes che contiene la tua CRK (customer root key). Per ulteriori informazioni su come configurare la crittografia per i volumi Portworx, vedi [Crittografia dei tuoi volumi Portworx](#encrypt_volumes). </li><li><strong>false</strong>: quando immetti <code>false</code>, i tuoi volumi Portworx non sono crittografati. </li></ul> Se non specifichi questa opzione, i tuoi volumi Portworx non sono crittografati per impostazione predefinita. <strong>Nota:</strong> puoi scegliere di abilitare la crittografia dei volumi nella tua PVC, anche se hai disabilitato la crittografia nella tua classe di archiviazione. L'impostazione che specifichi nella PVC ha la precedenza sulle impostazioni nella classe di archiviazione.  </td>
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>Immetti la priorità dell'I/O di Portworx che desideri richiedere per i tuoi dati. Le opzioni disponibili sono `high`, `medium` e `low`. Durante la configurazione del tuo cluster Portworx, ogni disco viene ispezionato per determinare il profilo delle prestazioni del dispositivo. La classificazione del profilo dipende dalla larghezza di banda di rete del tuo nodo di lavoro e dal tipo di dispositivo di archiviazione di cui disponi. I dischi dei nodi di lavoro SDS sono classificati come `high`. Se colleghi manualmente dei dischi a un nodo di lavoro virtuale, questi dischi vengono classificati come `low` a causa della minore velocità di rete fornita con i nodi di lavoro virtuali.</br><br> Quando crei una PVC con una classe di archiviazione, il numero di repliche che specifichi in <code>parameters/repl</code> ha la precedenza sulla priorità dell'I/O. Ad esempio, quando specifichi 3 repliche che vuoi archiviare su dischi ad alta velocità, ma hai solo un singolo nodo di lavoro con un disco ad alta velocità nel tuo cluster, la tua creazione della PVC riesce comunque. I tuoi dati vengono replicati sia sui dischi ad alta velocità che su quelli a bassa velocità. </td>
+   <td>Immetti la priorità dell'I/O di Portworx che desideri richiedere per i tuoi dati. Le opzioni disponibili sono `high`, `medium` e `low`. Durante la configurazione del tuo cluster Portworx, ogni disco viene ispezionato per determinare il profilo delle prestazioni del dispositivo. La classificazione del profilo dipende dalla larghezza di banda di rete del tuo nodo di lavoro e dal tipo di dispositivo di archiviazione di cui disponi. I dischi dei nodi di lavoro SDS sono classificati come `high`. Se colleghi manualmente dei dischi a un nodo di lavoro virtuale, questi dischi vengono classificati come `low` a causa della minore velocità di rete fornita con i nodi di lavoro virtuali. </br><br> Quando crei una PVC con una classe di archiviazione, il numero di repliche che specifichi in <code>parameters/repl</code> ha la precedenza sulla priorità dell'I/O. Ad esempio, quando specifichi 3 repliche che vuoi archiviare su dischi ad alta velocità, ma hai solo un singolo nodo di lavoro con un disco ad alta velocità nel tuo cluster, la tua creazione della PVC riesce comunque. I tuoi dati vengono replicati sia sui dischi ad alta velocità che su quelli a bassa velocità. </td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>

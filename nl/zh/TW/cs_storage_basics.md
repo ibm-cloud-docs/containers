@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,7 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"}
+{:table: .aria-labeledby="caption"} 
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
@@ -38,10 +38,10 @@ subcollection: containers
 <img src="images/cs_storage_pvc_pv.png" alt="叢集中的儲存空間元件" width="275" style="width: 275px; border-style: none"/>
 
 - **叢集**</br> 依預設，每個叢集都會設定一個外掛程式，以[佈建檔案儲存空間](/docs/containers?topic=containers-file_storage#add_file)。您可以選擇安裝其他附加程式，例如適用於[區塊儲存空間](/docs/containers?topic=containers-block_storage)的附加程式。若要在叢集裡使用儲存空間，您必須建立持續性磁區要求、持續性磁區及實體儲存空間實例。當您刪除叢集時，可以選擇刪除相關的儲存空間實例。
-- **應用程式**</br> 若要從您的儲存空間實例讀取，以及寫入到其中，您必須將持續性磁區要求 (PVC) 裝載至您的應用程式。不同的儲存空間類型有不同的讀寫規則。例如，您可以將多個 Pod 裝載至檔案儲存空間的同一個 PVC。區塊儲存空間具有 RWO (ReadWriteOnce) 存取模式，因此您只能將儲存空間裝載至一個 Pod。
-- **持續性磁區要求 (PVC)** </br> PVC 是利用特定類型及配置來佈建持續性儲存空間的要求。若要指定您想要的持續性儲存空間特性，請使用 [Kubernetes 儲存空間類別](#storageclasses)。叢集管理者可以定義儲存空間類別，或者您可以從 {{site.data.keyword.containerlong_notm}} 的預先定義儲存空間類別中選擇一個。當您建立 PVC 時，要求會傳送至 {{site.data.keyword.Bluemix}} 儲存空間提供者。視儲存空間類別中定義的配置而定，會訂購實體儲存裝置，並將其佈建至您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。如果所要求的配置不存在，則不會建立儲存空間。
-- **持續性磁區 (PV)** </br> PV 是以磁區形式新增至叢集的虛擬儲存空間實例。PV 指向 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實體儲存裝置，並使用來與儲存裝置通訊的 API 抽象化。若要將 PV 裝載至應用程式，您必須具有相符的 PVC。裝載的 PV 會以資料夾形式出現在容器的檔案系統內。
-- **實體儲存空間** </br> 您可以用來持續保存資料的實體儲存空間實例。{{site.data.keyword.Bluemix_notm}} 中的實體儲存空間範例包括 [File Storage](/docs/containers?topic=containers-file_storage#file_storage)、[Block Storage](/docs/containers?topic=containers-block_storage#block_storage)、[Object Storage](/docs/containers?topic=containers-object_storage#object_storage)，以及可用來作為具有 [Portworx](/docs/containers?topic=containers-portworx#portworx) 之 SDS 儲存空間的本端工作者節點儲存空間。{{site.data.keyword.Bluemix_notm}} 提供實體儲存空間實例的高可用性。不過，儲存在實體儲存空間實例上的資料不會自動備份。視您使用的儲存空間類型而定，有不同的方法存在，可設定備份及還原解決方案。
+- **應用程式**</br> 若要從您的儲存空間實例中讀取與寫入，您必須將持續性磁區要求 (PVC) 裝載至您的應用程式。不同的儲存空間類型有不同的讀寫規則。例如，您可以將多個 Pod 裝載至檔案儲存空間的同一個 PVC。區塊儲存空間具有 RWO (ReadWriteOnce) 存取模式，因此您只能將儲存空間裝載至一個 Pod。
+- **持續性磁區要求 (PVC)**</br> PVC 是使用特定類型和配置來佈建持續性儲存空間的要求。若要指定您想要的持續性儲存空間特性，請使用 [Kubernetes 儲存空間類別](#storageclasses)。叢集管理者可以定義儲存空間類別，或者您可以從 {{site.data.keyword.containerlong_notm}} 的預先定義儲存空間類別中選擇一個。當您建立 PVC 時，要求會傳送至 {{site.data.keyword.Bluemix}} 儲存空間提供者。視儲存空間類別中定義的配置而定，會訂購實體儲存裝置，並將其佈建至您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。如果所要求的配置不存在，則不會建立儲存空間。
+- **持續性磁區 (PV)**</br> PV 是以磁區形式新增至叢集的虛擬儲存空間實例。PV 指向 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實體儲存裝置，並使用來與儲存裝置通訊的 API 抽象化。若要將 PV 裝載至應用程式，您必須具有相符的 PVC。裝載的 PV 會以資料夾形式出現在容器的檔案系統內。
+- **實體儲存空間**</br> 您可以用來持續保存資料的實體儲存空間實例。{{site.data.keyword.Bluemix_notm}} 中的實體儲存空間範例包括 [File Storage](/docs/containers?topic=containers-file_storage#file_storage)、[Block Storage](/docs/containers?topic=containers-block_storage#block_storage)、[Object Storage](/docs/containers?topic=containers-object_storage#object_storage)，以及可用來作為具有 [Portworx](/docs/containers?topic=containers-portworx#portworx) 之 SDS 儲存空間的本端工作者節點儲存空間。{{site.data.keyword.Bluemix_notm}} 提供實體儲存空間實例的高可用性。不過，儲存在實體儲存空間實例上的資料不會自動備份。視您使用的儲存空間類型而定，有不同的方法存在，可設定備份及還原解決方案。
 
 如需如何建立及使用 PVC、PV 及實體儲存裝置的相關資訊，請參閱：
 - [動態佈建](#dynamic_provisioning)
@@ -211,7 +211,7 @@ subcollection: containers
 
 開始之前：
 - [將 Kubernetes CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-- 如果一個叢集具有多個 VLAN、相同的 VLAN 上具有多個子網路，或多區域叢集，則必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可在專用網路上彼此通訊。若要啟用 VRF，請[聯絡 IBM Cloud 基礎架構 (SoftLayer) 帳戶代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+- 如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 
 若要更新現有 PV，請執行下列動作：

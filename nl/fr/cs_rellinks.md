@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -75,6 +75,7 @@ subcollection: containers
 **Technologies open source intégrées**
 
 - [Documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/)
+- [Documentation CLI Kubernetes (`kubectl`) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubectl.docs.kubernetes.io/)
 - [Documentation Knative ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/knative/docs)
 - [Documentation Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Documentation Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour gestion de package Kubernetes
@@ -96,7 +97,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [Documentation {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-index)
+- [Documentation {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)
 - [API REST {{site.data.keyword.registryshort_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://{DomainName}/apidocs/container-registry)
 - [API REST Vulnerability Advisor ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://{DomainName}/apidocs/container-registry/va)
 

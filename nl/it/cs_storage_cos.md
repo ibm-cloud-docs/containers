@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Archiviazione dei dati su IBM Cloud Object Storage
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage) è un'archiviazione persistente e altamente disponibile che puoi montare sulle applicazioni eseguite in un cluster Kubernetes utilizzando il plugin {{site.data.keyword.cos_full_notm}}. Il plugin è un plugin Kubernetes Flex-Volume che connette i bucket {{site.data.keyword.cos_short}} cloud ai pod nel tuo cluster. Le informazioni archiviate con {{site.data.keyword.cos_full_notm}} sono crittografate in transito e quando sono inattive, vengono diffuse tra più ubicazioni geografiche e vi si accede su HTTP utilizzando una API REST.
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about) è un'archiviazione persistente e altamente disponibile che puoi montare sulle applicazioni eseguite in un cluster Kubernetes utilizzando il plugin {{site.data.keyword.cos_full_notm}}. Il plugin è un plugin Kubernetes Flex-Volume che connette i bucket {{site.data.keyword.cos_short}} cloud ai pod nel tuo cluster. Le informazioni archiviate con {{site.data.keyword.cos_full_notm}} sono crittografate in transito e quando sono inattive, vengono diffuse tra più ubicazioni geografiche e vi si accede su HTTP utilizzando una API REST.
 
 Per stabilire una connessione a {{site.data.keyword.cos_full_notm}}, il tuo cluster richiede l'accesso alla rete pubblica per eseguire l'autenticazione presso {{site.data.keyword.Bluemix_notm}} Identity and Access Management. Se ha un cluster solo privato, puoi comunicare con l'endpoint del servizio privato di {{site.data.keyword.cos_full_notm}} se installi il plugin versione `1.0.3` o successive e configuri la tua istanza del servizio {{site.data.keyword.cos_full_notm}} per l'autenticazione HMAC. Se non desideri utilizzare l'autenticazione HMAC, devi aprire tutto il traffico di rete in uscita sulla porta 443 perché il plugin funzioni correttamente in un cluster privato.
 {: important}
@@ -38,7 +38,7 @@ Per stabilire una connessione a {{site.data.keyword.cos_full_notm}}, il tuo clus
 Prima di poter iniziare a utilizzare l'archiviazione oggetti nel tuo cluster, devi eseguire il provisioning di un'istanza del servizio {{site.data.keyword.cos_full_notm}} nel tuo account.
 {: shortdesc}
 
-Il plugin {{site.data.keyword.cos_full_notm}} è configurato per funzionare con qualsiasi endpoint API s3. Ad esempio, potresti voler utilizzare un server Cloud Object Storage locale, come ad esempio [Minio](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore), oppure stabilire una connessione a un endpoint API s3 che configuri a un provider cloud differente invece di utilizzare un'istanza del servizio {{site.data.keyword.cos_full_notm}}.
+Il plugin {{site.data.keyword.cos_full_notm}} è configurato per funzionare con qualsiasi endpoint API s3. Ad esempio, potresti voler utilizzare un server Cloud Object Storage locale, come ad esempio [Minio](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore), oppure stabilire una connessione a un endpoint API s3 che configuri a un provider cloud differente invece di utilizzare un'istanza del servizio {{site.data.keyword.cos_full_notm}}.
 
 Attieniti alla seguente procedura per creare un'istanza del servizio {{site.data.keyword.cos_full_notm}}. Se intendi utilizzare un server Cloud Object Storage locale oppure un endpoint API s3 differente, fai riferimento alla documentazione del provider per configurare la tua istanza Cloud Object Storage.
 
@@ -61,12 +61,12 @@ Attieniti alla seguente procedura per creare un'istanza del servizio {{site.data
 ## Creazione di un segreto per le credenziali del servizio di archiviazione oggetti
 {: #create_cos_secret}
 
-Per accedere alla tua istanza del servizio {{site.data.keyword.cos_full_notm}} per leggere e scrivere dati, devi archiviare in modo protetto le credenziali del servizio in un segreto Kubernetes. Il plug-in {{site.data.keyword.cos_full_notm}} utilizza queste credenziali per ogni operazione di lettura o scrittura nel tuo bucket.
+Per accedere alla tua istanza del servizio {{site.data.keyword.cos_full_notm}} per leggere e scrivere dati, devi archiviare in modo protetto le credenziali del servizio in un segreto Kubernetes. Il plugin {{site.data.keyword.cos_full_notm}} utilizza queste credenziali per ogni operazione di lettura o scrittura nel tuo bucket.
 {: shortdesc}
 
 Attieniti alla seguente procedura per creare un segreto Kubernetes per le credenziali di un'istanza del servizio {{site.data.keyword.cos_full_notm}}. Se intendi utilizzare un server Cloud Object Storage locale su un endpoint API s3 differente, crea un segreto Kubernetes con le credenziali appropriate.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Richiama la **apikey**, oppure l'**access_key_id** e la **secret_access_key**, delle tue [credenziali del servizio {{site.data.keyword.cos_full_notm}}](#service_credentials).
 
@@ -75,100 +75,64 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-
-3. Codifica il {{site.data.keyword.cos_full_notm}} **GUID** e la **apikey**, oppure l'**access_key_id** e la **secret_access_key** che hai richiamato in precedenza, in base64 e prendi nota di tutti i valori con codifica base64. Ripetere questo comando per ciascun parametro per richiamare il valore con codifica base64.
+   
+3. Crea un segreto Kubernetes per archiviare le tue credenziali del servizio. Quando crei il tuo segreto, tutti i valori vengono automaticamente codificati in base64. 
+   
+   **Esempio per l'utilizzo della chiave API:**
    ```
-   echo -n "<key_value>" | base64
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=api-key=<api_key> --from-literal=service-instance-id=<service_instance_guid>
+   ```
+   {: pre}
+   
+   **Esempio per l'autenticazione HMAC:**
+   ```
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=access-key=<access_key_ID> --from-literal=secret-key=<secret_access_key>
    ```
    {: pre}
 
-4. Crea un file di configurazione per definire il tuo segreto Kubernetes.
-
-   **Esempio per l'utilizzo della chiave API:**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     api-key: <base64_apikey>
-     service-instance-id: <base64_guid>
-   ```
-   {: codeblock}
-
-   **Esempio per l'utilizzo dell'autenticazione HMAC:**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     access-key: <base64_access_key_id>
-     secret-key: <base64_secret_access_key>
-   ```
-   {: codeblock}
-
    <table>
-   <caption>Descrizione dei componenti del file YAML</caption>
+   <caption>Descrizione dei componenti del comando</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+   <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del comando</th>
    </thead>
    <tbody>
    <tr>
-   <td><code>metadata.name</code></td>
-   <td>Immetti un nome per il tuo segreto {{site.data.keyword.cos_full_notm}}. </td>
+   <td><code>api-key</code></td>
+   <td>Immetti la chiave API che hai richiamato dalle tue credenziali del servizio {{site.data.keyword.cos_full_notm}} precedentemente. Se vuoi utilizzare l'autenticazione HMAC, specifica invece <code>access-key</code> e <code>secret-key</code>.  </td>
    </tr>
    <tr>
-   <td><code>metadata.namespace</code></td>
-   <td>Specifica lo spazio dei nomi in cui vuoi creare il segreto. Il segreto deve essere creato nello stesso spazio dei nomi in cui vuoi creare la tua PVC e il pod che accede alla tua istanza del servizio {{site.data.keyword.cos_full_notm}}.  </td>
+   <td><code>access-key</code></td>
+   <td>Immetti l'ID chiave di accesso che hai richiamato dalle tue credenziali del servizio {{site.data.keyword.cos_full_notm}} precedentemente. Se vuoi utilizzare l'autenticazione OAuth2, specifica invece <code>api-key</code>.  </td>
    </tr>
    <tr>
-   <td><code>data.api-key</code></td>
-   <td>Immetti la chiave API che hai richiamato dalle tue credenziali del servizio {{site.data.keyword.cos_full_notm}} precedentemente. La chiave API deve avere una codifica base64. Se vuoi utilizzare l'autenticazione HMAC, specifica invece <code>data/access-key</code> e <code>data/secret-key</code>.  </td>
+   <td><code>secret-key</code></td>
+   <td>Immetti la chiave di accesso segreta che hai richiamato dalle tue credenziali del servizio {{site.data.keyword.cos_full_notm}} precedentemente. Se vuoi utilizzare l'autenticazione OAuth2, specifica invece <code>api-key</code>.  </td>
    </tr>
    <tr>
-   <td><code>data.access-key</code></td>
-   <td>Immetti l'ID chiave di accesso che hai richiamato dalle tue credenziali del servizio {{site.data.keyword.cos_full_notm}} precedentemente. L'ID chiave di accesso deve avere una codifica base64. Se vuoi utilizzare l'autenticazione OAuth2, specifica invece <code>data/api-key</code>.  </td>
-   </tr>
-   <tr>
-   <td><code>data.secret-key</code></td>
-   <td>Immetti la chiave di accesso segreta che hai richiamato dalle tue credenziali del servizio {{site.data.keyword.cos_full_notm}} precedentemente. La chiave di accesso segreta deve avere una codifica base64. Se vuoi utilizzare l'autenticazione OAuth2, specifica invece <code>data/api-key</code>.</td>
-   </tr>
-   <tr>
-   <td><code>data.service-instance-id</code></td>
-   <td>Immetti il GUID della tua istanza del servizio {{site.data.keyword.cos_full_notm}} che hai richiamato precedentemente. Il GUID deve avere una codifica base64. </td>
+   <td><code>service-instance-id</code></td>
+   <td>Immetti il GUID della tua istanza del servizio {{site.data.keyword.cos_full_notm}} che hai richiamato precedentemente. </td>
    </tr>
    </tbody>
    </table>
 
-5. Crea il segreto nel tuo cluster.
-   ```
-   kubectl apply -f filepath/secret.yaml
-   ```
-   {: pre}
-
-6. Verifica che il segreto venga creato nel tuo spazio dei nomi.
+4. Verifica che il segreto venga creato nel tuo spazio dei nomi.
    ```
    kubectl get secret
    ```
    {: pre}
 
-7. [Installa il plug-in {{site.data.keyword.cos_full_notm}}](#install_cos) o, se lo hai già installato, [decidi in merito alla configurazione ]( #configure_cos) per il tuo bucket {{site.data.keyword.cos_full_notm}}.
+5. [Installa il plugin {{site.data.keyword.cos_full_notm}}](#install_cos) o, se lo hai già installato, [decidi in merito alla configurazione ]( #configure_cos) per il tuo bucket {{site.data.keyword.cos_full_notm}}.
 
-## Installazione del plug-in IBM Cloud Object Storage
+## Installazione del plugin IBM Cloud Object Storage
 {: #install_cos}
 
-Installa il plug-in {{site.data.keyword.cos_full_notm}} con un grafico Helm per configurare le classi di archiviazione predefinite per {{site.data.keyword.cos_full_notm}}. Puoi utilizzare queste classi di archiviazione per creare una PVC per eseguire il provisioning di {{site.data.keyword.cos_full_notm}} per le tue applicazioni.
+Installa il plugin {{site.data.keyword.cos_full_notm}} con un grafico Helm per configurare le classi di archiviazione predefinite per {{site.data.keyword.cos_full_notm}}. Puoi utilizzare queste classi di archiviazione per creare una PVC per eseguire il provisioning di {{site.data.keyword.cos_full_notm}} per le tue applicazioni.
 {: shortdesc}
 
-Cerchi le istruzioni su come aggiornare o rimuovere il plug-in {{site.data.keyword.cos_full_notm}}? Vedi [Aggiornamento del plug-in](#update_cos_plugin) e [Rimozione del plug-in](#remove_cos_plugin).
+Cerchi le istruzioni su come aggiornare o rimuovere il plugin {{site.data.keyword.cos_full_notm}}? Vedi [Aggiornamento del plugin](#update_cos_plugin) e [Rimozione del plugin](#remove_cos_plugin).
 {: tip}
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Assicurati che il tuo nodo di lavoro applichi la patch più recente per la tua versione secondaria.
    1. Elenca la versione patch corrente dei tuoi nodi di lavoro.
@@ -181,7 +145,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
       ```
       {: screen}
 
@@ -191,15 +155,15 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 
    3. Applica la versione patch più recente ricaricando il tuo nodo di lavoro. Segui le istruzioni nel [comando ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) per ripianificare correttamente qualsiasi pod in esecuzione sul tuo nodo di lavoro prima di ricaricare il nodo. Nota che durante il ricaricamento, la macchina del nodo di lavoro viene aggiornata con l'immagine più recente e i dati vengono eliminati se non sono [archiviati all'esterno del nodo di lavoro](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
-2.  [Attieniti alle istruzioni](/docs/containers?topic=containers-integrations#helm) per installare il client Helm sulla tua macchina locale e installare il server Helm (tiller) con un account di servizio nel tuo cluster.
+2.  [Attieniti alle istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale e installare il server Helm (tiller) con un account di servizio nel tuo cluster.
 
-    L'installazione del server Helm Tiller richiede la connessione di rete pubblica al Google Container Registry pubblico. Se il tuo cluster non può accedere alla rete pubblica, come ad esempio un cluster privato dietro un firewall o un cluster con abilitato solo l'endpoint del servizio privato, puoi scegliere di [eseguire il pull dell'immagine Tiller sulla tua macchina locale ed eseguire il push dell'immagine nel tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-integrations#private_local_tiller) oppure di [installare il grafico Helm senza utilizzare Tiller](/docs/containers?topic=containers-integrations#private_install_without_tiller).
+    L'installazione del server Helm Tiller richiede la connessione di rete pubblica al Google Container Registry pubblico. Se il tuo cluster non può accedere alla rete pubblica, come ad esempio un cluster privato dietro un firewall o un cluster con abilitato solo l'endpoint del servizio privato, puoi scegliere di [eseguire il pull dell'immagine Tiller sulla tua macchina locale ed eseguire il push dell'immagine nel tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller) oppure di [installare il grafico Helm senza utilizzare Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
     {: note}
 
 3.  Verifica che tiller sia installato con un account di servizio.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -213,7 +177,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 
 4. Aggiungi il repository {{site.data.keyword.Bluemix_notm}} Helm al tuo cluster.
    ```
-   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
@@ -225,12 +189,12 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 
 6. Scarica i grafici Helm e decomprimi i grafici nella directory corrente.
    ```
-   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
    ```
    {: pre}
 
-7. Se utilizzi macOS o una distribuzione Linux, installa il plug-in Helm {{site.data.keyword.cos_full_notm}} `ibmc`. Il plug-in viene utilizzato per richiamare automaticamente l'ubicazione del tuo cluster e per impostare l'endpoint API per i tuoi bucket {{site.data.keyword.cos_full_notm}} nelle tue classi di archiviazione. Se utilizzi Windows come sistema operativo, vai al passo successivo.
-   1. Installa il plug-in Helm.
+7. Se utilizzi macOS o una distribuzione Linux, installa il plugin Helm {{site.data.keyword.cos_full_notm}} `ibmc`. Il plugin viene utilizzato per richiamare automaticamente l'ubicazione del tuo cluster e per impostare l'endpoint API per i tuoi bucket {{site.data.keyword.cos_full_notm}} nelle tue classi di archiviazione. Se utilizzi Windows come sistema operativo, vai al passo successivo.
+   1. Installa il plugin Helm.
       ```
       helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
       ```
@@ -242,7 +206,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
       ```
       {: screen}
 
-   2. Verifica che il plug-in `ibmc` sia installato correttamente.
+   2. Verifica che il plugin `ibmc` sia installato correttamente.
       ```
       helm ibmc --help
       ```
@@ -263,14 +227,14 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
        -u, --update                  (Optional) Update this plugin to the latest version
 
       Example Usage:
-    helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install iks-charts/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
       ```
       {: screen}
 
       Se l'output mostra l'errore `Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission denied`, esegui `chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh`. Esegui quindi nuovamente `helm ibmc --help`.
       {: tip}
 
-8. Facoltativo: limita il plug-in {{site.data.keyword.cos_full_notm}} per accedere solo ai segreti Kubernetes che detengono le tue credenziali del servizio {{site.data.keyword.cos_full_notm}}. Per impostazione predefinita, il plug-in è autorizzato ad accedere a tutti i segreti Kubernetes nel tuo cluster.
+8. Facoltativo: limita il plugin {{site.data.keyword.cos_full_notm}} per accedere solo ai segreti Kubernetes che detengono le tue credenziali del servizio {{site.data.keyword.cos_full_notm}}. Per impostazione predefinita, il plugin è autorizzato ad accedere a tutti i segreti Kubernetes nel tuo cluster.
    1. [Crea la tua istanza del servizio {{site.data.keyword.cos_full_notm}}](#create_cos_service).
    2. [Archivia le tue credenziali del servizio {{site.data.keyword.cos_full_notm}} service in un segreto Kubernetes](#create_cos_secret).
    3. Passa alla directory `templates` ed elenca i file disponibili.  
@@ -280,7 +244,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
       {: pre}
 
    4. Apri il file `provisioner-sa.yaml` e cerca la definizione di `ClusterRole` `ibmcloud-object-storage-secret-reader`.
-   6. Aggiungi il nome del segreto che hai creato in precedenza all'elenco di segreti a cui il plug-in è autorizzato ad accedere nella sezione `resourceNames`.
+   6. Aggiungi il nome del segreto che hai creato in precedenza all'elenco di segreti a cui il plugin è autorizzato ad accedere nella sezione `resourceNames`.
       ```
       kind: ClusterRole
       apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -295,12 +259,12 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
       {: codeblock}
    7. Salva le modifiche.
 
-9. Installa il plug-in {{site.data.keyword.cos_full_notm}}. Quando installi il plug-in, al tuo cluster vengono aggiunte le classi di archiviazione predefinite.
+9. Installa il plugin {{site.data.keyword.cos_full_notm}}. Quando installi il plugin, al tuo cluster vengono aggiunte le classi di archiviazione predefinite.
 
    - **Per macOS e Linux:**
      - Se hai ignorato il passo precedente, installa senza una limitazione a specifici segreti Kubernetes.
        ```
-       helm ibmc install ibm/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install iks-charts/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
@@ -326,7 +290,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
      3. Installa il grafico Helm.
         - Se hai ignorato il passo precedente, installa senza una limitazione a specifici segreti Kubernetes.
           ```
-          helm install ibm/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          helm install iks-charts/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
           ```
           {: pre}
 
@@ -353,7 +317,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
    ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
    ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                  PROVISIONER       AGE
    ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
    ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
@@ -399,7 +363,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
    ```
    {: screen}
 
-10. Verifica che il plug-in sia installato correttamente.
+10. Verifica che il plugin sia installato correttamente.
    ```
    kubectl get pod -n kube-system -o wide | grep object
    ```
@@ -412,7 +376,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
    ```
    {: screen}
 
-   L'installazione ha avuto esito positivo quando visualizzi un pod `ibmcloud-object-storage-plugin` e uno o più pod `ibmcloud-object-storage-driver`. Il numero di pod `ibmcloud-object-storage-driver` è uguale al numero di nodi di lavoro nel tuo cluster. Tutti i pod devono essere in uno stato `Running` perché il plug-in funzioni correttamente. Se si verifica un malfunzionamento dei pod, esegui `kubectl describe pod -n kube-system <pod_name>` per trovare la causa radice per il malfunzionamento.
+   L'installazione ha avuto esito positivo quando visualizzi un pod `ibmcloud-object-storage-plugin` e uno o più pod `ibmcloud-object-storage-driver`. Il numero di pod `ibmcloud-object-storage-driver` è uguale al numero di nodi di lavoro nel tuo cluster. Tutti i pod devono essere in uno stato `Running` perché il plugin funzioni correttamente. Se si verifica un malfunzionamento del pod, esegui `kubectl describe pod -n kube-system <pod_name>` per trovare la causa radica del malfunzionamento.
 
 11. Verifica che le classi di archiviazione vengano create correttamente.
     ```
@@ -439,27 +403,27 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 
 12. Ripeti i passi per tutti i cluster dove vuoi accedere ai bucket {{site.data.keyword.cos_full_notm}}.
 
-### Aggiornamento del plug-in IBM Cloud Object Storage
+### Aggiornamento del plugin IBM Cloud Object Storage
 {: #update_cos_plugin}
 
-Puoi eseguire un upgrade del plug-in {{site.data.keyword.cos_full_notm}} esistente alla versione più recente.
+Puoi eseguire un upgrade del plugin {{site.data.keyword.cos_full_notm}} esistente alla versione più recente.
 {: shortdesc}
 
-1. Se utilizzi macOS o una distribuzione Linux, aggiorna il plugin Helm {{site.data.keyword.cos_full_notm}} `ibmc` alla versione più recente.
-   ```
-   helm ibmc --update
-   ```
-   {: pre}
-
-2. Aggiorna il repository Helm di {{site.data.keyword.Bluemix_notm}} per richiamare la versione più recente di tutti i grafici Helm in questo repository.
+1. Aggiorna il repository Helm di {{site.data.keyword.Bluemix_notm}} per richiamare la versione più recente di tutti i grafici Helm in questo repository.
    ```
    helm repo update
    ```
    {: pre}
 
+2. Se utilizzi macOS o una distribuzione Linux, aggiorna il plugin Helm {{site.data.keyword.cos_full_notm}} `ibmc` alla versione più recente.
+   ```
+   helm ibmc --update
+   ```
+   {: pre}
+
 3. Scarica il grafico Helm {{site.data.keyword.cos_full_notm}} più recente sulla tua macchina locale ed estrai il pacchetto per esaminare il file `release.md` per trovare le informazioni sulla release più aggiornate.
    ```
-   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
    ```
 
 4. Trova il nome di installazione del tuo grafico Helm.
@@ -476,7 +440,7 @@ Puoi eseguire un upgrade del plug-in {{site.data.keyword.cos_full_notm}} esisten
 
 5. Esegui l'upgrade del grafico Helm {{site.data.keyword.cos_full_notm}} alla versione più recente.
    ```   
-   helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   helm ibmc upgrade <helm_chart_name> iks-charts/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
    ```
    {: pre}
 
@@ -486,7 +450,7 @@ Puoi eseguire un upgrade del plug-in {{site.data.keyword.cos_full_notm}} esisten
    ```
    {: pre}
 
-   L'upgrade del plug-in è riuscito quando vedi `deployment "ibmcloud-object-storage-plugin" successfully rolled out` nel tuo output della CLI.
+   L'upgrade del plugin è riuscito quando vedi `deployment "ibmcloud-object-storage-plugin" successfully rolled out` nel tuo output della CLI.
 
 7. Verifica che l'upgrade di `ibmcloud-object-storage-driver` venga eseguito correttamente.
    ```
@@ -503,21 +467,21 @@ Puoi eseguire un upgrade del plug-in {{site.data.keyword.cos_full_notm}} esisten
    {: pre}
 
 
-### Rimozione del plug-in IBM Cloud Object Storage
+### Rimozione del plugin IBM Cloud Object Storage
 {: #remove_cos_plugin}
 
 Se non vuoi eseguire il provisioning di {{site.data.keyword.cos_full_notm}} e farne uso nel tuo cluster, puoi disinstallare i grafici helm.
 {: shortdesc}
 
-La rimozione del plug-in non rimuove PVC, PV o dati esistenti. Quando rimuovi il plug-in, tutti i pod e le serie di daemon correlati vengono rimossi dal tuo cluster. Non puoi eseguire il provisioning di un nuovo {{site.data.keyword.cos_full_notm}} per il tuo cluster o utilizzare i PVC e i PV esistenti dopo che hai rimosso il plug-in, a meno che tu non configuri l'applicazione per utilizzare l'API {{site.data.keyword.cos_full_notm}} direttamente.
+La rimozione del plugin non rimuove PVC, PV o dati esistenti. Quando rimuovi il plugin, tutti i pod e le serie di daemon correlati vengono rimossi dal tuo cluster. Non puoi eseguire il provisioning di un nuovo {{site.data.keyword.cos_full_notm}} per il tuo cluster o utilizzare i PVC e i PV esistenti dopo che hai rimosso il plugin, a meno che tu non configuri l'applicazione per utilizzare l'API {{site.data.keyword.cos_full_notm}} direttamente.
 {: important}
 
 Prima di iniziare:
 
 - [Indirizza la tua CLI al cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- Assicurati di non avere PVC o PV nel tuo cluster che utilizzano {{site.data.keyword.cos_full_notm}}. Per elencare tutti i pod che montano uno specifico PVC, esegui `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`.
+- Assicurati di non avere PVC o PV nel tuo cluster che utilizzano {{site.data.keyword.cos_full_notm}}. Per elencare tutti i pod che montano una specifica PVC esegui `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`.
 
-Per rimuovere il plug-in:
+Per rimuovere il plugin:
 
 1. Trova il nome di installazione del tuo grafico helm.
    ```
@@ -531,7 +495,7 @@ Per rimuovere il plug-in:
    ```
    {: screen}
 
-2. Elimina il plug-in {{site.data.keyword.cos_full_notm}} rimuovendo il grafico Helm.
+2. Elimina il plugin {{site.data.keyword.cos_full_notm}} rimuovendo il grafico Helm.
    ```
    helm delete --purge <helm_chart_name>
    ```
@@ -553,14 +517,14 @@ Per rimuovere il plug-in:
 
    La rimozione delle classi di archiviazione è riuscita se nel tuo output CLI non vengono visualizzate classi di archiviazione.
 
-5. Se utilizzi macOS o una distribuzione Linux, rimuovi il plug-in Helm `ibmc`. Se utilizzi Windows, questo passo non è necessario.
-   1. Rimuovi il plug-in `ibmc`.
+5. Se utilizzi macOS o una distribuzione Linux, rimuovi il plugin Helm `ibmc`. Se utilizzi Windows, questo passo non è necessario.
+   1. Rimuovi il plugin `ibmc`.
       ```
       rm -rf ~/.helm/plugins/helm-ibmc
       ```
       {: pre}
 
-   2. Verifica che il plug-in `ibmc` venga rimosso.
+   2. Verifica che il plugin `ibmc` venga rimosso.
       ```
       helm plugin list
       ```
@@ -572,7 +536,7 @@ Per rimuovere il plug-in:
      ```
      {: screen}
 
-     Il plug-in `ibmc` viene rimosso correttamente se il plug-in `ibmc` non è elencato nel tuo output della CLI.
+     Il plugin `ibmc` viene rimosso correttamente se il plugin `ibmc` non è elencato nel tuo output della CLI.
 
 
 ## Decisioni relative alla configurazione dell'archiviazione oggetti
@@ -611,8 +575,8 @@ Per rimuovere il plug-in:
    - **Flex**: questa opzione viene utilizzata per i carichi di lavoro e i dati che non seguono uno specifico modello di utilizzo o che sono troppo grandi per determinare o prevedere un modello di utilizzo. **Suggerimento:** controlla questo [blog ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/) per capire come funziona la classe di archiviazione Flex rispetto ai livelli di archiviazione tradizionali.   
 
 3. Decidi il livello di resilienza per i dati archiviati nel tuo bucket.
-   - **Interregionale**: con questa opzione, i tuoi dati vengono archiviati tra tre regioni all'interno di una geolocalizzazione per la massima disponibilità. Se hai dei carichi di lavoro distribuiti tra le regioni, le richieste vengono instradate all'endpoint regionale più vicino. L'endpoint API per la geolocalizzazione viene impostato automaticamente dal plug-in Helm `ibmc` che hai installato in precedenza in base all'ubicazione in cui si trova il tuo cluster. Ad esempio, se il tuo cluster si trova negli `Stati Uniti Sud`, le tue classi di archiviazione sono configurate per utilizzare l'endpoint API `US GEO` per i tuoi bucket. Per ulteriori informazioni, vedi [Regioni ed endpoint](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints).  
-   - **Regionale**: con questa opzione, i tuoi dati vengono replicati in più zone all'interno di una singola regione. Se hai dei carichi di lavoro che si trovano nella stessa regione, vedi una latenza più bassa e delle prestazioni migliori rispetto a una configurazione interregionale. L'endpoint regionale viene impostato automaticamente dal plug-in Helm `ibm` che hai installato in precedenza in base all'ubicazione in cui si trova il tuo cluster. Ad esempio, se il tuo cluster si trova negli `Stati Uniti Sud`, le tue classi di archiviazione erano configurate per utilizzare `US South` come endpoint regionale per i tuoi bucket. Per ulteriori informazioni, vedi [Regioni ed endpoint](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints).
+   - **Interregionale**: con questa opzione, i tuoi dati vengono archiviati tra tre regioni all'interno di una geolocalizzazione per la massima disponibilità. Se hai dei carichi di lavoro distribuiti tra le regioni, le richieste vengono instradate all'endpoint regionale più vicino. L'endpoint API per la geolocalizzazione viene impostato automaticamente dal plugin Helm `ibmc` che hai installato in precedenza in base all'ubicazione in cui si trova il tuo cluster. Ad esempio, se il tuo cluster si trova negli `Stati Uniti Sud`, le tue classi di archiviazione sono configurate per utilizzare l'endpoint API `US GEO` per i tuoi bucket. Per ulteriori informazioni, vedi [Regioni ed endpoint](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints).  
+   - **Regionale**: con questa opzione, i tuoi dati vengono replicati in più zone all'interno di una singola regione. Se hai dei carichi di lavoro che si trovano nella stessa regione, vedi una latenza più bassa e delle prestazioni migliori rispetto a una configurazione interregionale. L'endpoint regionale viene impostato automaticamente dal plugin Helm `ibm` che hai installato in precedenza in base all'ubicazione in cui si trova il tuo cluster. Ad esempio, se il tuo cluster si trova negli `Stati Uniti Sud`, le tue classi di archiviazione erano configurate per utilizzare `US South` come endpoint regionale per i tuoi bucket. Per ulteriori informazioni, vedi [Regioni ed endpoint](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints).
 
 4. Riesamina la configurazione del bucket {{site.data.keyword.cos_full_notm}} dettagliata per una classe di archiviazione.
    ```
@@ -643,7 +607,7 @@ Per rimuovere il plug-in:
    <tbody>
    <tr>
    <td><code>ibm.io/chunk-size-mb</code></td>
-   <td>La dimensione del blocco di dati letta da o scritta in {{site.data.keyword.cos_full_notm}}, espressa in megabyte. Le classi di archiviazione con <code>perf</code> nel loro nome sono configurate con 52 megabyte. Le classi di archiviazione senza <code>perf</code> nel loro nome utilizzano blocchi di 16 megabyte. Ad esempio, se vuoi leggere un file di 1GB, il plug-in legge questo file in più blocchi di 16 o 52 megabyte. </td>
+   <td>La dimensione del blocco di dati letta da o scritta in {{site.data.keyword.cos_full_notm}}, espressa in megabyte. Le classi di archiviazione con <code>perf</code> nel loro nome sono configurate con 52 megabyte. Le classi di archiviazione senza <code>perf</code> nel loro nome utilizzano blocchi di 16 megabyte. Ad esempio, se vuoi leggere un file di 1GB, il plugin legge questo file in più blocchi di 16 o 52 megabyte. </td>
    </tr>
    <tr>
    <td><code>ibm.io/curl-debug</code></td>
@@ -651,7 +615,7 @@ Per rimuovere il plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/debug-level</code></td>
-   <td>Il livello di registrazione impostato dal plug-in {{site.data.keyword.cos_full_notm}}. Tutte le classi di archiviazione sono configurate con il livello di registrazione <strong>WARN</strong>. </td>
+   <td>Il livello di registrazione impostato dal plugin {{site.data.keyword.cos_full_notm}}. Tutte le classi di archiviazione sono configurate con il livello di registrazione <strong>WARN</strong>. </td>
    </tr>
    <tr>
    <td><code>ibm.io/iam-endpoint</code></td>
@@ -695,7 +659,7 @@ Per rimuovere il plug-in:
    Per ulteriori informazioni su ciascuna classe di archiviazione, vedi la sezione di [riferimento delle classi di archiviazione](#cos_storageclass_reference). Se vuoi modificare qualche valore preimpostato, crea una tua [classe di archiviazione personalizzata](/docs/containers?topic=containers-kube_concepts#customized_storageclass).
    {: tip}
 
-5. Decidi un nome per il tuo bucket. Il nome di un bucket deve essere univoco in {{site.data.keyword.cos_full_notm}}. Puoi anche scegliere di creare automaticamente un nome per il tuo bucket dal plug-in {{site.data.keyword.cos_full_notm}}. Per organizzare i dati in un bucket, puoi creare delle sottodirectory.
+5. Decidi un nome per il tuo bucket. Il nome di un bucket deve essere univoco in {{site.data.keyword.cos_full_notm}}. Puoi anche scegliere di creare automaticamente un nome per il tuo bucket dal plugin {{site.data.keyword.cos_full_notm}}. Per organizzare i dati in un bucket, puoi creare delle sottodirectory.
 
    La classe di archiviazione che hai scelto in precedenza determina il prezzo per l'intero bucket. Non puoi definire delle classi di archiviazione differenti per le sottodirectory. Se vuoi archiviare i dati con requisiti di accesso differenti, considera la creazione di più bucket utilizzando più PVC.
    {: note}
@@ -809,7 +773,7 @@ Per aggiungere {{site.data.keyword.cos_full_notm}} al tuo cluster:
 
 4. Facoltativo: se intendi accedere ai tuoi dati con un utente non root o se hai aggiunto dei file a un bucket {{site.data.keyword.cos_full_notm}} esistente utilizzando direttamente la console o l'API, assicurati che ai [file sia assegnata l'autorizzazione corretta](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access) in modo che la tua applicazione possa leggere e aggiornare correttamente i file secondo necessità.
 
-4.  {: #app_volume_mount}Per montare il PV nella tua distribuzione, crea un file `.yaml` di configurazione e specifica la PVC che esegue il bind del PV.
+4.  {: #cos_app_volume_mount}Per montare il PV nella tua distribuzione, crea un file `.yaml` di configurazione e specifica la PVC che esegue il bind del PV.
 
     ```
     apiVersion: apps/v1
@@ -832,6 +796,7 @@ Per aggiungere {{site.data.keyword.cos_full_notm}} al tuo cluster:
             name: <container_name>
             securityContext:
               runAsUser: <non_root_user>
+              fsGroup: <non_root_user> #only applicable for clusters that run Kubernetes version 1.13 or later
             volumeMounts:
             - name: <volume_name>
               mountPath: /<file_path>
@@ -870,7 +835,7 @@ Per aggiungere {{site.data.keyword.cos_full_notm}} al tuo cluster:
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.runAsUser</code></td>
-    <td>Facoltativo: per eseguire l'applicazione con un utente non root, specifica il [contesto di sicurezza ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) per il tuo pod definendo l'utente non root senza impostare al tempo stesso `fsGroup` nel tuo YAML di distribuzione. L'impostazione di `fsGroup` attiva il plug-in {{site.data.keyword.cos_full_notm}} per aggiornare le autorizzazioni del gruppo per tutti i file in un bucket quando viene distribuito il pod. L'aggiornamento delle autorizzazioni è un'operazione di scrittura e influisce sulle prestazioni. A seconda del numero di file che hai, l'aggiornamento delle autorizzazioni potrebbe impedire al tuo pod di avviarsi e di passare a uno stato di <code>Running</code>. </td>
+    <td>Facoltativo: per eseguire l'applicazione con un utente non root in un cluster che esegue Kubernetes versione 1.12 o antecedenti, specifica il [contesto di sicurezza ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) per il tuo pod definendo l'utente non root senza impostare al tempo stesso `fsGroup` nel tuo YAML di distribuzione. L'impostazione di `fsGroup` attiva il plugin {{site.data.keyword.cos_full_notm}} per aggiornare le autorizzazioni del gruppo per tutti i file in un bucket quando viene distribuito il pod. L'aggiornamento delle autorizzazioni è un'operazione di scrittura e influisce sulle prestazioni. A seconda del numero di file che hai, l'aggiornamento delle autorizzazioni potrebbe impedire al tuo pod di avviarsi e di passare a uno stato di <code>Running</code>. </br></br>Se hai un cluster che esegue Kubernetes versione 1.13 o successive e il plugin {{site.data.keyword.Bluemix_notm}} Object Storage versione 1.0.4 o successive, puoi modificare il proprietario del punto di montaggio s3fs. Per modificare il proprietario, specifica il contesto di sicurezza impostando `runAsUser` e `fsGroup` sullo stesso ID utente non root che desideri possieda il punto di montaggio s3fs. Se questi due valori non corrispondono, il punto di montaggio appartiene automaticamente all'utente `root`.  </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -1174,7 +1139,7 @@ Per distribuire una serie con stato che utilizza l'archiviazione oggetti:
 </tr>
 <tr>
 <td>Dimensione blocco</td>
-<td>Classi di archiviazione senza `perf`: 16 MB</br>Classi di archiviazione con `perf`: 52 MB</td>
+<td>Classe di archiviazione senza `perf`: 16 MB</br>Classe di archiviazione con `perf`: 52 MB</td>
 </tr>
 <tr>
 <td>Cache kernel</td>
@@ -1285,7 +1250,7 @@ Per distribuire una serie con stato che utilizza l'archiviazione oggetti:
 </tr>
 <tr>
 <td>Dimensione blocco</td>
-<td>Classi di archiviazione senza `perf`: 16 MB</br>Classi di archiviazione con `perf`: 52 MB</td>
+<td>Classe di archiviazione senza `perf`: 16 MB</br>Classe di archiviazione con `perf`: 52 MB</td>
 </tr>
 <tr>
 <td>Cache kernel</td>

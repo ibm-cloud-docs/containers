@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -24,7 +24,7 @@ subcollection: containers
 
 
 
-# Exposición de apps con Ingress
+# Equilibrio de carga HTTPS con equilibradores de carga de aplicación (ALB) de Ingress
 {: #ingress}
 
 Exponga varias apps en el clúster de Kubernetes creando recursos Ingress gestionados por el equilibrador de carga de aplicación proporcionado por IBM en {{site.data.keyword.containerlong}}.
@@ -222,14 +222,14 @@ Antes de empezar a trabajar con Ingress, revise los siguientes requisitos previo
 {:shortdesc}
 
 **Requisitos previos para todas las configuraciones de Ingress:**
-- Ingress únicamente está disponible para los clústeres estándares y necesita al menos dos nodos trabajadores por zona para garantizar la alta disponibilidad y que se aplican actualizaciones periódicas. Si solo tiene un nodo trabajador en una zona, el ALB no puede recibir actualizaciones automáticas. Cuando se despliegan actualizaciones automáticas en los pods de ALB, el pod se vuelve a cargar. Sin embargo, los pods de ALB tienen reglas antiafinidad para garantizar que solo hay un pod planificado para en cada nodo trabajador para alta disponibilidad. Puesto que solo hay un pod de ALB en un nodo trabajador, el pod no se reinicia para que el tráfico no se interrumpa. El pod ALB se actualiza a la última versión solo cuando se actualiza el nodo trabajador.
+- Ingress únicamente está disponible para los clústeres estándares y necesita al menos dos nodos trabajadores por zona para garantizar la alta disponibilidad y que se aplican actualizaciones periódicas. Si solo tiene un nodo trabajador en una zona, el ALB no puede recibir actualizaciones automáticas. Cuando se despliegan actualizaciones automáticas en los pods de ALB, el pod se vuelve a cargar. Sin embargo, los pods de ALB tienen reglas antiafinidad para garantizar que solo hay un pod planificado para en cada nodo trabajador para alta disponibilidad. Puesto que solo hay un pod de ALB en un nodo trabajador, el pod no se reinicia para que el tráfico no se interrumpa. El pod ALB se actualiza a la última versión solo cuando se suprime suprimir el pod anterior para que se pueda planificar el nuevo pod actualizado.
 - Para configurar Ingress se necesitan los siguientes [roles de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform):
     - Rol de plataforma de **Administrador** sobre el clúster
     - Rol de servicio de **Gestor** sobre todos los espacios de nombres
 
 **Requisitos previos para el uso de Ingress en clústeres multizona:**:
  - Si restringe el tráfico de red a los [nodos trabajadores de extremo](/docs/containers?topic=containers-edge), debe haber al menos 2 nodos trabajadores de extremo en cada zona para conseguir una alta disponibilidad de los pods Ingress. [Cree una agrupación de nodos trabajadores de extremo](/docs/containers?topic=containers-clusters#add_pool) que abarque todas las zonas del clúster y tenga como mínimo 2 nodos trabajadores por zona.
- - Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+ - Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
  - Si una zona falla, es posible que vea anomalías intermitentes en las solicitudes al ALB Ingress en dicha zona.
 
 <br />
@@ -298,7 +298,7 @@ Exponga apps que están dentro de su clúster al público utilizando el ALB de I
 Antes de empezar:
 
 * Revise los [requisitos previos](#config_prereqs) de Ingress.
-* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Paso 1: Desplegar apps y crear servicios de app
 {: #public_inside_1}
@@ -628,7 +628,7 @@ Antes de empezar:
 
 * Revise los [requisitos previos](#config_prereqs) de Ingress.
 * Asegúrese de que se pueda acceder a la app externa que desea incluir en el equilibrio de la carga del clúster mediante una dirección IP pública.
-* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para exponer apps que están fuera de su clúster al público:
 
@@ -724,7 +724,7 @@ Para exponer apps que están fuera de su clúster al público:
 Exposición de apps para una red privada utilizando el ALB de Ingress privado.
 {:shortdesc}
 
-Para utilizar un ALB privado, primero debe habilitar el ALB privado. Puesto que a los clústeres de solo VLAN privados no se les asigna un subdominio de Ingress proporcionado por IBM, no se crea ningún secreto de Ingress durante la configuración del clúster. Para exponer las apps a la red privada, debe registrar el ALB con un dominio personalizado y, opcionalmente, importar su propio certificado TLS.
+Para utilizar un ALB privado, primero debe habilitar el ALB privado. Puesto que a los clústeres de solo VLAN privada no se les asigna un subdominio de Ingress proporcionado por IBM, no se crea ningún secreto de Ingress durante la configuración del clúster. Para exponer las apps a la red privada, debe registrar el ALB con un dominio personalizado y, opcionalmente, importar su propio certificado TLS.
 
 Antes de empezar:
 * Revise los [requisitos previos](#config_prereqs) de Ingress.
@@ -877,10 +877,10 @@ Si ha utilizado el distintivo `--no-subnet` al crear el clúster, debe añadir u
 ### Paso 3: Correlacionar el dominio personalizado
 {: #private_3}
 
-A los clústeres de solo VLAN privados no se les asigna un subdominio de Ingress proporcionado por IBM. Cuando configure el ALB privado, exponga las apps utilizando un dominio personalizado.
+A los clústeres de solo VLAN privada no se les asigna un subdominio de Ingress proporcionado por IBM. Cuando configure el ALB privado, exponga las apps utilizando un dominio personalizado.
 {: shortdesc}
 
-**Clústeres de solo VLAN privados:**
+**Clústeres de solo VLAN privada:**
 
 1. Si los nodos trabajadores están conectados únicamente a una VLAN privada, debe configurar su propio [servicio DNS que esté disponible en su red privada ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 2. Cree un dominio personalizado a través del proveedor de DNS. Si las apps que desea que Ingress exponga se encuentran en distintos espacios de nombres en un clúster, registre el dominio personalizado como un dominio comodín, como por ejemplo *.custom_domain.net`.
@@ -901,7 +901,7 @@ Después de correlacionar el dominio personalizado, elija si desea utilizar o no
 
 El ALB equilibra carga de tráfico de red HTTP para las apps en su clúster. Para equilibrar también la carga de conexiones HTTPS entrantes, puede configurar el ALB para descifrar el tráfico de red y reenviar las solicitudes descifradas a las apps expuestas en su clúster.
 
-Puesto que a los clústeres de solo VLAN privados no se les asigna un dominio de Ingress proporcionado por IBM, no se crea ningún secreto de Ingress durante la configuración del clúster. Puede utilizar su propio certificado TLS para gestionar la terminación TLS.  En primer lugar, el ALB comprueba si hay un secreto en el espacio de nombres en el que se encuentra la app, luego en `default` y, finalmente, en `ibm-cert-store`. Si tiene apps en un solo espacio de nombres, puede importar o crear un secreto TLS para el certificado en ese mismo espacio de nombres. Si tiene apps en varios espacios de nombres, importe o cree un secreto TLS para el certificado en el espacio de nombres `default` de forma que el ALB pueda acceder y utilizar el certificado en cada espacio de nombres. En los recursos de Ingress que defina para cada espacio de nombres, especifique el nombre del secreto que se encuentra en el espacio de nombres predeterminado. Para obtener información sobre la certificación de TLS comodín, consulte [esta nota](#wildcard_tls). **Nota**: los certificados TLS que contienen claves precompartidas (TLS-PSK) no están soportados.
+Puesto que a los clústeres de solo VLAN privada no se les asigna un dominio de Ingress proporcionado por IBM, no se crea ningún secreto de Ingress durante la configuración del clúster. Puede utilizar su propio certificado TLS para gestionar la terminación TLS.  En primer lugar, el ALB comprueba si hay un secreto en el espacio de nombres en el que se encuentra la app, luego en `default` y, finalmente, en `ibm-cert-store`. Si tiene apps en un solo espacio de nombres, puede importar o crear un secreto TLS para el certificado en ese mismo espacio de nombres. Si tiene apps en varios espacios de nombres, importe o cree un secreto TLS para el certificado en el espacio de nombres `default` de forma que el ALB pueda acceder y utilizar el certificado en cada espacio de nombres. En los recursos de Ingress que defina para cada espacio de nombres, especifique el nombre del secreto que se encuentra en el espacio de nombres predeterminado. Para obtener información sobre la certificación de TLS comodín, consulte [esta nota](#wildcard_tls). **Nota**: los certificados TLS que contienen claves precompartidas (TLS-PSK) no están soportados.
 
 Si hay un certificado TLS almacenado en {{site.data.keyword.cloudcerts_long_notm}} que desea utilizar, puede importar su secreto asociado a su clúster ejecutando el siguiente mandato:
 
@@ -1459,7 +1459,7 @@ En el mapa de configuración de Ingress `ibm-cloud-provider-ingress-cm`, el camp
 
 
 ### Ajuste del rendimiento de kernel
-{: #kernel}
+{: #ingress_kernel}
 
 Para optimizar el rendimiento de los ALB de Ingress, también puede [cambiar los parámetros `sysctl` del kernel de Linux en los nodos trabajadores](/docs/containers?topic=containers-kernel). Los nodos trabajadores se suministran automáticamente con un ajuste de kernel optimizado, por lo que sólo cambian estos valores si tiene requisitos de optimización de rendimiento específicos.
 {: shortdesc}
@@ -1476,6 +1476,8 @@ Traiga su propio controlador de Ingress y ejecútelo en {{site.data.keyword.Blue
 {: shortdesc}
 
 La configuración de su propio controlador de Ingress personalizado puede resultar útil cuando tiene requisitos de Ingress específicos. Cuando trae su propio controlador de Ingress en lugar de utilizar el ALB de Ingress proporcionado por IBM, es responsable de suministrar la imagen del controlador, de mantener el controlador y de actualizar el controlador.
+
+**Nota**: Solo se admite traer su propio controlador Ingress para proporcionar acceso externo público a sus apps y no se admite para proporcionar acceso externo privado.
 
 1. Obtenga el ID del ALB público predeterminado. El ALB público tiene un formato parecido a `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
     ```

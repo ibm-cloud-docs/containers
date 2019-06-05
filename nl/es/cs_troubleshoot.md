@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -40,7 +40,7 @@ Puede seguir estos pasos generales para asegurarse de que los clústeres están 
 ## Ejecución de pruebas con la herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}}
 {: #debug_utility}
 
-Cuando resuelva problemas, puede utilizar la herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}} para ejecutar pruebas y recopilar información pertinente del clúster. Para utilizar la herramienta de depuración, instale el diagrama de Helm [`ibmcloud-iks-debug` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+Cuando resuelva problemas, puede utilizar la herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}} para ejecutar pruebas y recopilar información pertinente del clúster. Para utilizar la herramienta de depuración, instale el [diagrama de Helm de `ibmcloud-iks-debug` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
 {: shortdesc}
 
 
@@ -120,7 +120,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
       </tr>
       <tr>
        <td>Normal</td>
-       <td>Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster. Este estado se considera correcto y no requiere ninguna acción por su parte.<p class="note">Aunque los nodos trabajadores podrían poseer un estado normal, otros recursos de infraestructura como, por ejemplo la [red](/docs/containers?topic=containers-cs_troubleshoot_network) y el [almacenamiento](/docs/containers?topic=containers-cs_troubleshoot_storage), podrían requerir su atención.</p></td>
+       <td>Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster. Este estado se considera correcto y no requiere ninguna acción por su parte.<p class="note">Aunque los nodos trabajadores podrían poseer un estado normal, otros recursos de infraestructura como, por ejemplo la [red](/docs/containers?topic=containers-cs_troubleshoot_network) y el [almacenamiento](/docs/containers?topic=containers-cs_troubleshoot_storage), podrían requerir su atención. Si acaba de crear el clúster, algunas partes del clúster que utilizan otros servicios como, por ejemplo, secretos de Ingress o secretos de obtención de imágenes de registro, podrían estar aún en proceso.</p></td>
     </tr>
       <tr>
        <td>Pendiente</td>
@@ -186,7 +186,7 @@ Revise las opciones para depurar sus nodos trabajadores y encontrar las causas r
      </tr>
      <tr>
      <td>Desplegado</td>
-     <td>Las actualizaciones se han desplegado correctamente en el nodo trabajador. Después de desplegar las actualizaciones, {{site.data.keyword.containerlong_notm}} inicia una comprobación de estado en el nodo trabajador. Después de que la comprobación de estado sea correcta, el nodo trabajador pasa a un estado <code>Normal</code>. Los nodos de trabajador con un estado <code>Desplegado</code> normalmente están preparados para recibir cargas de trabajo, lo que puede comprobar ejecutando <code>kubectl get nodes</code> y confirmando que el estado es <code>Normal</code>. </td>
+     <td>Las actualizaciones se han desplegado correctamente en el nodo trabajador. Después de desplegar las actualizaciones, {{site.data.keyword.containerlong_notm}} inicia una comprobación de estado en el nodo trabajador. Después de que la comprobación de estado sea correcta, el nodo trabajador pasa a un estado <code>Normal</code>. Los nodos trabajadores con un estado <code>Desplegado</code> normalmente están preparados para recibir cargas de trabajo, lo que puede comprobar ejecutando <code>kubectl get nodes</code> y confirmando que el estado es <code>Normal</code>. </td>
      </tr>
       <tr>
         <td>Despliegue</td>

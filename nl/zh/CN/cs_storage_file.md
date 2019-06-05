@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -29,7 +29,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} File Storage 是一种基于 NFS 的持久、快速、灵活的网络连接文件存储器，可以使用 Kubernetes 持久卷 (PV) 添加到应用程序。您可以在具有不同 GB 大小和 IOPS 的预定义存储层之间进行选择，以满足工作负载的需求。要了解 {{site.data.keyword.Bluemix_notm}} File Storage 是否为适合您的存储选项，请参阅[选择存储解决方案](/docs/containers?topic=containers-storage_planning#choose_storage_solution)。有关定价信息，请参阅[计费](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing)。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage 仅可用于设置为使用公用网络连接的标准集群。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么无法在集群中供应文件存储器。NFS 文件存储器实例特定于单个专区。如果您有多专区集群，请考虑[多专区持久性存储选项](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。
+{{site.data.keyword.Bluemix_notm}} File Storage 仅可用于设置为使用公用网络连接的标准集群。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么可以在集群运行 Kubernetes V1.13.4_1513、1.12.6_1544、1.11.8_1550、1.10.13_1551 或更高版本时供应文件存储器。NFS 文件存储器实例特定于单个专区。如果您有多专区集群，请考虑[多专区持久性存储选项](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。
 {: important}
 
 ## 决定文件存储器配置
@@ -43,19 +43,20 @@ subcollection: containers
 使用存储类来供应特定类型的存储器后，即无法更改存储设备的类型或保留策略。但是，如果要提高存储容量和性能，那么可以[更改大小和 IOPS](#file_change_storage_configuration)。要更改存储器的类型和保留策略，必须[创建新的存储实例并复制数据](/docs/containers?topic=containers-kube_concepts#update_storageclass)（从旧存储器实例复制到新存储器实例）。
 {: important}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 要决定存储器配置，请执行以下操作：
 
 1. 列出 {{site.data.keyword.containerlong}} 中的可用存储类。
-    ```
+    
+   ```
     kubectl get storageclasses | grep file
     ```
-    {: pre}
+   {: pre}
 
-    输出示例：
-    ```
-    $ kubectl get storageclasses
+   输出示例：
+   ```
+$ kubectl get storageclasses
     NAME                         TYPE
     ibmc-file-bronze (default)   ibm.io/ibmc-file
     ibmc-file-custom             ibm.io/ibmc-file
@@ -66,13 +67,13 @@ subcollection: containers
     ibmc-file-retain-silver      ibm.io/ibmc-file
     ibmc-file-silver             ibm.io/ibmc-file
     ```
-    {: screen}
+   {: screen}
 
 2. 查看存储类的配置。
+  ```
+   kubectl describe storageclass <storageclass_name>
    ```
-kubectl describe storageclass <storageclass_name>
-   ```
-   {: pre}
+  {: pre}
 
    有关每个存储类的更多信息，请参阅[存储类参考](#file_storageclass_reference)。如果找不到要查找的内容，请考虑创建您自己的定制存储类。首先，请查看[定制存储类样本](#file_custom_storageclass)。
    {: tip}
@@ -107,7 +108,7 @@ kubectl describe storageclass <storageclass_name>
          <td>20-4000 Gi</td>
          </tr>
          </tbody></table>
-   - **定制存储类：**选择此存储类时，可以对所需大小和 IOPS 具有更多控制权。对于大小，可以在允许的大小范围内选择任意整数的千兆字节。选择的大小将确定可供您使用的 IOPS 范围。您可以选择指定范围内是 100 的倍数的 IOPS。您选择的 IOPS 是静态的，不会随存储器大小进行缩放。例如，如果选择了 40 Gi 和 100 IOPS，那么总 IOPS 仍为 100。</br></br> IOPS 与千兆字节的比率还可确定供应的硬盘类型。例如，如果对于 100 IOPS 选择了 500 Gi，那么 IOPS 与千兆字节的比率为 0.2。比率小于或等于 0.3 的存储器在 SATA 硬盘上供应。如果比率大于 0.3，那么会在 SSD 硬盘上供应存储器。  
+   - **定制存储类：**选择此存储类时，可以对所需大小和 IOPS 具有更多控制权。对于大小，可以在允许的大小范围内选择任意整数的千兆字节。选择的大小将确定可供您使用的 IOPS 范围。您可以选择指定范围内是 100 的倍数的 IOPS。您选择的 IOPS 是静态的，不会随存储器大小进行缩放。例如，如果针对 100 IOPS 选择 40 Gi，那么总 IOPS 仍为 100。</br></br>IOPS 与千兆字节的比率还可确定供应的硬盘类型。例如，如果对于 100 IOPS 选择了 500 Gi，那么 IOPS 与千兆字节的比率为 0.2。比率小于或等于 0.3 的存储器在 SATA 硬盘上供应。如果比率大于 0.3，那么会在 SSD 硬盘上供应存储器。  
      <table>
          <caption>定制存储类大小范围和 IOPS 表</caption>
          <thead>
@@ -163,7 +164,7 @@ kubectl describe storageclass <storageclass_name>
 
 5. 选择在删除集群或持久卷声明 (PVC) 后是否要保留数据。
    - 如果要保留数据，请选择 `retain` 存储类。删除 PVC 时，仅会删除 PVC。PV、IBM Cloud Infrastructure (SoftLayer) 帐户中的物理存储设备以及数据仍会存在。要回收存储器并再次在集群中使用，必须除去 PV，并执行[使用现有文件存储器](#existing_file)的步骤。
-   - 如果要在删除 PVC 时删除 PV、数据和物理文件存储设备，请选择不带 `retain` 的存储类。**注**：如果您有 Dedicated 帐户，那么选择不带 `retain` 的存储类以阻止 IBM Cloud Infrastructure (SoftLayer) 中出现孤线程卷。
+   - 如果要在删除 PVC 时删除 PV、数据和物理文件存储设备，请选择不带 `retain` 的存储类。
 
 6. 选择是要按小时还是按月计费。有关更多信息，请查看[定价 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/file-storage/pricing)。缺省情况下，所有文件存储设备都以按小时计费类型进行供应。
    如果选择“每月”计费类型，那么除去持久性存储器时，即使只用了很短的时间，您也仍需支付该持久性存储器一个月的费用。
@@ -251,7 +252,8 @@ kubectl describe storageclass <storageclass_name>
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>可选：指定要在其中供应文件存储器的区域。要连接到存储器，请在集群所在的区域中创建存储器。如果指定了区域，那么还必须指定专区。如果未指定区域，或者找不到指定的区域，那么会在集群所在的区域中创建存储器。</br></br>要获取集群的区域，请运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`，并在 **Master URL** 中查找区域前缀，如 `https://c2.eu-de.containers.cloud.ibm.com:11111` 中的 `eu-de`。</br></br><strong>提示：</strong>您还可以在[定制存储类](#file_multizone_yaml)中指定区域和专区，而不是在 PVC 中指定这些值。然后，在 PVC 的 <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> 部分中使用存储类。如果在存储类和 PVC 中都指定了区域和专区，那么 PVC 中的值优先。</td>
+       <td>可选：指定要在其中供应文件存储器的区域。要连接到存储器，请在集群所在的区域中创建存储器。如果指定了区域，那么还必须指定专区。如果未指定区域，或者找不到指定的区域，那么会在集群所在的区域中创建存储器。</br></br>要获取集群的区域，请运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` 并在 **Master URL** 中查找区域前缀，例如 `https://c2.eu-de.containers.cloud.ibm.com:11111` 中的 `eu-de`。
+       </br></br><strong>提示：</strong>您还可以在[定制存储类](#file_multizone_yaml)中指定区域和专区，而不是在 PVC 中指定这些值。然后，在 PVC 的 <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> 部分中使用存储类。如果在存储类和 PVC 中都指定了区域和专区，那么 PVC 中的值优先。</td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
@@ -272,7 +274,7 @@ kubectl describe storageclass <storageclass_name>
        </tr>
        <tr>
        <td><code>spec.storageClassName</code></td>
-       <td>要用于供应文件存储器的存储类的名称。可以选择使用其中一个 [IBM 提供的存储类](#file_storageclass_reference)，或者[创建您自己的存储类](#file_custom_storageclass)。</br> 如果未指定存储类，那么会使用缺省存储类 <code>ibmc-file-bronze</code> 来创建 PV。</br></br><strong>提示：</strong>如果要更改缺省存储类，请运行 <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code>，并将 <code>&lt;storageclass&gt;</code> 替换为存储类的名称。</td>
+       <td>要用于供应文件存储器的存储类的名称。您可以选择使用其中一个 [IBM 提供的存储类](#file_storageclass_reference)或[创建您自己的存储类](#file_custom_storageclass)。</br> 如果未指定存储类，那么会使用缺省存储类 <code>ibmc-file-bronze</code> 来创建 PV。</br></br><strong>提示：</strong>如果要更改缺省存储类，请运行 <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code>，并将 <code>&lt;storageclass&gt;</code> 替换为存储类的名称。</td>
        </tr>
        </tbody></table>
 
@@ -314,7 +316,7 @@ kubectl describe storageclass <storageclass_name>
     ```
     {: screen}
 
-4.  {: #app_volume_mount}要将存储器安装到部署，请创建配置 `.yaml` 文件，并指定绑定该 PV 的 PVC。
+4.  {: #file_app_volume_mount}要将存储器安装到部署，请创建配置 `.yaml` 文件，并指定绑定该 PV 的 PVC。
 
     如果应用程序需要非 root 用户写入持久性存储器，或者应用程序需要安装路径由 root 用户拥有，请参阅[添加对 NFS 文件存储器的非 root 用户访问权](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)或[启用对 NFS 文件存储器的 root 用户许可权](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)。
     {: tip}
@@ -394,9 +396,9 @@ kubectl describe storageclass <storageclass_name>
 
 5.  创建部署。
      ```
-kubectl apply -f <local_yaml_path>
-     ```
-    {: pre}
+    kubectl apply -f <local_yaml_path>
+    ```
+     {: pre}
 
 6.  验证 PV 是否已成功安装。
 
@@ -431,15 +433,16 @@ kubectl apply -f <local_yaml_path>
 
 开始之前：
 - 确保在现有文件存储器实例所在的专区中至少存在一个工作程序节点。
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### 步骤1：准备现有存储器。
+{: #existing-file-1}
 
 在开始将现有存储器安装到应用程序之前，必须检索 PV 的所有必要信息，并准备存储器以使其可供在集群中访问。  
 {: shortdesc}
 
 **对于使用 `retain` 存储类供应的存储器：**</br>
-如果使用 `retain` 存储类供应了存储器，那么在除去 PVC 时，不会自动除去 PV 和物理存储设备。要在集群中复用该存储器，必须首先除去剩余 PV。
+如果使用 `retain` 存储类供应了存储器，然后除去 PVC，那么 PV 和物理存储器设备也不会自动除去。要在集群中复用该存储器，必须首先除去剩余 PV。
 
 要在供应现有存储器的集群之外的其他集群中使用该存储器，请执行[在集群外部创建的存储器](#external_storage)的步骤，以将存储器添加到工作程序节点的子网。
 {: tip}
@@ -455,7 +458,7 @@ kubectl apply -f <local_yaml_path>
 
 2. 获取该 PV 的详细信息。
    ```
-kubectl describe pv <pv_name>
+   kubectl describe pv <pv_name>
    ```
    {: pre}
 
@@ -476,20 +479,18 @@ kubectl describe pv <pv_name>
 </br>
 
 **对于在集群外部供应的持久性存储器：**</br>
-如果要使用先前供应但从未在集群中使用的现有存储器，那么必须使存储器在工作程序节点所在的子网中可用。
-
-如果您有 Dedicated 帐户，那么必须[打开一个支持案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。
-{: note}
+如果要使用先前供应但从未在集群中使用过的现有存储器，那么必须使存储器在工作程序节点所在的子网中可用。
 
 1.  {: #external_storage}在 [IBM Cloud Infrastructure (SoftLayer) 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/classic?) 中，单击**存储**。
 2.  单击**文件存储器**并从**操作**菜单中，选择**授权主机**。
 3.  选择**子网**。
-4.  从下拉列表中，选择工作程序节点连接到的专用 VLAN 子网。要查找工作程序节点的子网，请运行 `ibmcloud ks workers --cluster <cluster_name>`，并将工作程序节点的`专用 IP` 与下拉列表中找到的子网进行比较。
+4.  从下拉列表中，选择工作程序节点连接到的专用 VLAN 子网。要查找工作程序节点的子网，请运行 `ibmcloud ks workers --cluster <cluster_name>` 并将工作程序节点的 `Private IP` 与在下拉列表中找到的子网相比较。
 5.  单击**提交**。
 6.  单击文件存储器的名称。
-7.  记录 `Mount Point`、`size` 和 `Location` 字段。`Mount Point` 字段显示为 `<nfs_server>:<file_storage_path>`.
+7.  记录 `Mount Point`、`size` 和 `Location` 字段。`Mount Point` 字段显示为 `<nfs_server>:<file_storage_path>`。
 
 ### 步骤 2：创建持久卷 (PV) 和匹配的持久卷声明 (PVC)
+{: #existing-file-2}
 
 1.  为 PV 创建存储器配置文件。包含先前检索到的值。
 
@@ -611,7 +612,7 @@ kubectl describe pv <pv_name>
     {: screen}
 
 
-您已成功创建 PV，并将其绑定到 PVC。现在，集群用户可以[将 PVC 安装到其部署](#app_volume_mount)，并开始对 PV 对象执行读写操作。
+您已成功创建 PV，并将其绑定到 PVC。现在，集群用户可以[将 PVC 安装到其部署](#file_app_volume_mount)，并开始对 PV 对象执行读写操作。
 
 <br />
 
@@ -623,20 +624,17 @@ kubectl describe pv <pv_name>
 如果您有一个有状态的应用程序（如数据库），那么可以创建有状态集，以使用文件存储器来存储应用程序的数据。或者，可以使用 {{site.data.keyword.Bluemix_notm}} 数据库即服务，并将数据存储在云中。
 {: shortdesc}
 
-**向有状态集添加文件存储器时需要了解哪些内容？**</br>
-要将存储器添加到有状态集，请在有状态集 YAML 的 `volumeClaimTemplates` 部分中指定存储器配置。`volumeClaimTemplates` 是 PVC 的基础，可以包含要供应的文件存储器的存储类和大小或 IOPS。但是，如果要在 `volumeClaimTemplates` 中包含标签，那么 Kubernetes 在创建 PVC 时，不会包含这些标签。您必须改为将标签直接添加到有状态集。
+**向有状态集添加文件存储器时需要了解哪些内容？**</br>要将存储器添加到有状态集，请在有状态集 YAML 的 `volumeClaimTemplates` 部分中指定存储器配置。`volumeClaimTemplates` 是 PVC 的基础，可以包含要供应的文件存储器的存储类和大小或 IOPS。但是，如果要在 `volumeClaimTemplates` 中包含标签，那么 Kubernetes 在创建 PVC 时，不会包含这些标签。您必须改为将标签直接添加到有状态集。
 
 不能同时部署两个有状态集。如果在一个有状态集完全部署之前尝试创建另一个有状态集，那么前一个有状态集的部署可能会导致意外的结果。
 {: important}
 
-**如何在特定专区中创建有状态集？**</br>
-在多专区集群中，可以在有状态集 YAML 的 `spec.selector.matchLabels` 和 `spec.template.metadata.labels` 部分中，指定要在其中创建有状态集的专区和区域。或者，可以将这些标签添加到[定制存储类](/docs/containers?topic=containers-kube_concepts#customized_storageclass)，并在有状态集的 `volumeClaimTemplates` 部分中使用此存储类。
+**如何在特定专区中创建有状态集？**</br>在多专区集群中，可以在有状态集 YAML 的 `spec.selector.matchLabels` 和 `spec.template.metadata.labels` 部分中，指定要在其中创建有状态集的专区和区域。或者，可以将这些标签添加到[定制存储类](/docs/containers?topic=containers-kube_concepts#customized_storageclass)，并在有状态集的 `volumeClaimTemplates` 部分中使用此存储类。
 
 **能否延迟 PV 与有状态 pod 的绑定，直到该 pod 准备就绪？**<br>
 可以，可以为 PVC [创建定制存储类](#file-topology)，其中包含 [`volumeBindingMode: WaitForFirstConsumer` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) 字段。
 
-**向有状态集添加文件存储器时有哪些选项可用？**</br>
-如果要在创建有状态集时自动创建 PVC，请使用[动态供应](#file_dynamic_statefulset)。您还可以选择对有状态集[预先供应 PVC 或使用现有 PVC](#file_static_statefulset)。  
+**向有状态集添加文件存储器时有哪些选项可用？**</br>如果要在创建有状态集时自动创建 PVC，请使用[动态供应](#file_dynamic_statefulset)。您还可以选择对有状态集[预先供应 PVC 或使用现有 PVC](#file_static_statefulset)。  
 
 ### 动态供应：创建有状态集时创建 PVC
 {: #file_dynamic_statefulset}
@@ -644,7 +642,7 @@ kubectl describe pv <pv_name>
 如果要在创建有状态集时自动创建 PVC，请使用此选项。
 {: shortdesc}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 验证集群中所有现有的有状态集是否已完全部署。如果某个有状态集仍在进行部署，那么无法开始创建有状态集。您必须等待集群中的所有有状态集完全部署，以避免发生意外结果。
    1. 列出集群中现有的有状态集。
@@ -667,7 +665,7 @@ kubectl describe pv <pv_name>
       {: pre}
 
       输出示例：
-      ```
+    ```
       Name:               nginx
       Namespace:          default
       CreationTimestamp:  Fri, 05 Oct 2018 13:22:41 -0400
@@ -914,7 +912,7 @@ kubectl describe pv <pv_name>
    ```
    {: pre}
 
-   要查看 PVC 的当前状态，请运行 `kubectl get pvc`。PVC 名称的格式为 `<volume_name>-<statefulset_name>-<replica_number>`.
+   要查看 PVC 的当前状态，请运行 `kubectl get pvc`。PVC 名称的格式为 `<volume_name>-<statefulset_name>-<replica_number>`。
    {: tip}
 
 ### 静态供应：将现有 PVC 用于有状态集
@@ -925,9 +923,9 @@ kubectl describe pv <pv_name>
 
 如果是在[创建有状态集时动态供应 PVC](#file_dynamic_statefulset)，那么 PVC 的名称将根据在有状态集 YAML 文件中使用的值来指定。为了使有状态集使用现有 PVC，PVC 的名称必须与使用动态供应时自动创建的名称相匹配。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. 如果要在创建有状态集之前预供应 PVC，请执行[向应用程序添加文件存储器](#add_file)中的步骤 1-3，以便为每个有状态集副本创建 PVC。确保使用以下格式的名称来创建 PVC：`<volume_name>-<statefulset_name>-<replica_number>`.
+1. 如果要在创建有状态集之前预供应 PVC，请执行[向应用程序添加文件存储器](#add_file)中的步骤 1-3，以便为每个有状态集副本创建 PVC。确保创建 PVC 时所使用的名称遵循以下格式：`<volume_name>-<statefulset_name>-<replica_number>`。
    - **`<volume_name>`**：使用要在有状态集的 `spec.volumeClaimTemplates.metadata.name` 部分中指定的名称，例如 `nginxvol`。
    - **`<statefulset_name>`**：使用要在有状态集的 `metadata.name` 部分中指定的名称，例如 `nginx_statefulset`。
    - **`<replica_number>`**：输入副本数，起始值为 0。
@@ -954,12 +952,12 @@ kubectl describe pv <pv_name>
 
    2. 验证现有 PVC 是否已安装到有状态集副本。请在 CLI 输出的 **`Volumes`** 部分中查看 **`ClaimName`**。
       ```
-kubectl describe pod <pod_name>
-      ```
-        {: pre}
+        kubectl describe pod <pod_name>
+        ```
+      {: pre}
 
       输出示例：
-      ```
+    ```
       Name:           nginx-0
       Namespace:      default
       Node:           10.xxx.xx.xxx/10.xxx.xx.xxx
@@ -998,9 +996,9 @@ kubectl describe pod <pod_name>
    ```
    {: screen}
 
-2. 通过列出 PVC 绑定到的 PV 的详细信息，检索与 PVC 关联的物理文件存储器的 **`StorageType`**、**`volumeId`** 和 **`server`**。将 `<pv_name>` 替换为在上一步中检索到的 PV 的名称。存储类型、卷标识和服务器名称会显示在 CLI 输出的 **`Labels`** 部分中。
+2. 通过列出 PVC 绑定到的 PV 的详细信息，检索与 PVC 关联的物理文件存储器的 **`StorageType`**、**`volumeId`** 和 **`server`**。将 `<pv_name>` 替换为在先前步骤中检索到的 PV 的名称。存储类型、卷标识和服务器名称会显示在 CLI 输出的 **`Labels`** 部分中。
    ```
-kubectl describe pv <pv_name>
+   kubectl describe pv <pv_name>
    ```
    {: pre}
 
@@ -1083,7 +1081,7 @@ kubectl describe pv <pv_name>
       ```
       {: pre}
 
-       将按以下格式返回 pod：`<pod_name>: <pvc_name>`.
+      将按以下格式返回 pod：`<pod_name>: <pvc_name>`。
    2. 登录到 pod。
       ```
       kubectl exec -it <pod_name> bash
@@ -1097,7 +1095,7 @@ kubectl describe pv <pv_name>
       {: pre}
 
       输出示例：
-      ```
+    ```
       Filesystem                                                      Size  Used Avail Use% Mounted on
       overlay                                                          99G  4.8G   89G   6% /
       tmpfs                                                            64M     0   64M   0% /dev
@@ -1142,7 +1140,7 @@ kubectl describe pv <pv_name>
     ```
    {: pre}
 
-2. 向 PV 添加注释。将 `<version_number>` 替换为要使用的 NFS 版本。例如，要更改为 NFS V3.0，请输入 **3**。  
+2. 向 PV 添加注释。将 `<version_number>` 替换为您要使用的 NFS 版本。例如，要更改为 NFS V3.0，请输入 **3**。  
    ```
    kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"volume.beta.kubernetes.io/mount-options":"vers=<version_number>"}}}'
    ```
@@ -1206,19 +1204,19 @@ kubectl describe pv <pv_name>
 
 <dl>
   <dt>设置定期快照</dt>
-  <dd><p>可以[为文件存储器设置定期快照](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)，这是捕获某个时间点的实例状态的只读映像。要存储快照，必须在文件存储器上请求快照空间。快照会存储在同一专区的现有存储器实例上。如果用户意外地从卷中除去了重要数据，那么可以通过快照来复原数据。<p class="note">如果您有 Dedicated 帐户，那么必须[打开一个支持案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。</p></br> <strong>要为卷创建快照，请执行以下操作：</strong><ol><li>[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。</li><li>登录到 `ibmcloud sl` CLI。<pre class="pre"><code>    ibmcloud sl init
+  <dd><p>可以[为文件存储器设置定期快照](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)，这是捕获某个时间点的实例状态的只读映像。要存储快照，必须在文件存储器上请求快照空间。快照会存储在同一专区的现有存储器实例上。如果用户不小心除去了卷中的重要数据，那么可以通过快照来复原数据。</br> <strong>要为卷创建快照，请执行以下操作：</strong><ol><li>[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>登录到 `ibmcloud sl` CLI。<pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>列出集群中的现有 PV。<pre class="pre"><code>    kubectl get pv
     </code></pre></li><li>获取要为其创建快照空间的 PV 的详细信息，并记下卷标识、大小和 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 可以在 CLI 输出的 <strong>Labels</strong> 部分中找到卷标识、大小和 IOPS。</li><li>使用您在先前步骤中检索到的参数为现有卷创建快照大小。<pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>等待快照大小创建。<pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 输出中的 <strong>Snapshot Size (GB)</strong> 从 0 更改为您所订购的大小时，说明已成功供应快照大小。</li><li>为卷创建快照，并记下创建的快照的标识。<pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>验证快照是否已成功创建。<pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>要将数据从快照复原到现有卷，请运行以下命令：</strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>将快照复制到其他专区</dt>
- <dd><p>为了保护数据不受专区故障的影响，可以[复制快照](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication)到其他专区中设置的文件存储器实例。数据只能从主存储器复制到备份存储器。不能将复制的文件存储器实例安装到集群。主存储器发生故障时，可以手动将复制的备份存储器设置为主存储器。然后，可以将其安装到集群。复原主存储器后，可以从备份存储器复原数据。<strong>注</strong>：如果您有 Dedicated 帐户，那么无法将快照复制到其他专区。</p></dd>
+ <dd><p>为了保护数据不受专区故障的影响，可以[复制快照](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication)到其他专区中设置的文件存储器实例。数据只能从主存储器复制到备份存储器。不能将复制的文件存储器实例安装到集群。主存储器发生故障时，可以手动将复制的备份存储器设置为主存储器。然后，可以将其安装到集群。复原主存储器后，可以从备份存储器复原数据。</p></dd>
  <dt>复制存储器</dt>
- <dd><p>可以在原始存储器实例所在的专区中，[复制文件存储器实例](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume)。复制项采用原始存储器实例在创建该复制项的时间点的数据。与副本不同，复制项用作独立于原始项的存储器实例。要进行复制，请首先[为卷设置快照](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)。<strong>注</strong>：如果您有 Dedicated 帐户，那么必须<a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">打开一个支持案例</a>。</p></dd>
+ <dd><p>可以在原始存储器实例所在的专区中，[复制文件存储器实例](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume)。复制项采用原始存储器实例在创建该复制项的时间点的数据。与副本不同，复制项用作独立于原始项的存储器实例。要进行复制，请首先[为卷设置快照](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)。</p></dd>
   <dt>将数据备份到 {{site.data.keyword.cos_full}}</dt>
   <dd><p>可以使用 [**ibm-backup-restore 映像**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter)来启动集群中的备份和复原 pod。此 pod 包含一个脚本，用于对集群中的任何持久卷声明 (PVC) 运行一次性或定期备份。数据存储在您在某个专区设置的 {{site.data.keyword.cos_full}} 实例中。</p>
   <p>要使数据具有更高可用性，并保护应用程序不受专区故障的影响，请设置第二个 {{site.data.keyword.cos_full}} 实例，并在各个专区之间复制数据。如果需要从 {{site.data.keyword.cos_full}} 实例复原数据，请使用随映像一起提供的复原脚本。</p></dd>
 <dt>将数据复制到 pod 和容器，以及从 pod 和容器中复制数据</dt>
 <dd><p>可以使用 `kubectl cp` [命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) 将文件和目录复制到集群中的 pod 或特定容器，或者从集群中的 pod 或特定容器中复制文件和目录。</p>
-<p>开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。如果未使用 <code>-c</code> 来指定容器，那么此命令将使用 pod 中的第一个可用容器。</p>
+<p>开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) 如果未使用 <code>-c</code> 来指定容器，那么此命令将使用 pod 中的第一个可用容器。</p>
 <p>可以通过以下各种方法来使用此命令：</p>
 <ul>
 <li>将本地机器中的数据复制到集群中的 pod：<pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -1325,7 +1323,7 @@ kubectl describe pv <pv_name>
 </table>
 
 ### 金牌级
-{: #block_gold}
+{: #file_gold}
 
 <table>
 <caption>文件存储类：金牌级</caption>
@@ -1493,11 +1491,11 @@ kubectl describe pv <pv_name>
 如果要在特定专区中[静态供应文件存储器](#existing_file)，请使用定制存储类。在其他所有情况下，请[直接在 PVC 中指定专区](#add_file)。
 {: note}
 
-创建定制存储类时，请指定集群和工作程序节点所在的区域和专区。要获取集群的区域，请运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`，并在 **Master URL** 中查找区域前缀，如 `https://c2.eu-de.containers.cloud.ibm.com:11111` 中的 `eu-de`。要获取工作程序节点的专区，请运行 `ibmcloud ks workers --cluster <cluster_name_or_ID>`。
+创建定制存储类时，请指定集群和工作程序节点所在的区域和专区。要获取集群的区域，请运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` 并在 **Master URL** 中查找区域前缀，例如 `https://c2.eu-de.containers.cloud.ibm.com:11111` 中的 `eu-de`。要获取工作程序节点的专区，请运行 `ibmcloud ks workers --cluster <cluster_name_or_ID>`。
 
 - **耐久性文件存储器的示例：**
   ```
-  apiVersion: storage.k8s.io/v1beta1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: ibmc-file-silver-mycustom-storageclass

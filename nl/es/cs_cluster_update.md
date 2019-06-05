@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -142,7 +142,7 @@ Las actualizaciones a los nodos trabajadores pueden hacer que las apps y los ser
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012
@@ -294,7 +294,7 @@ Para actualizar nodos trabajadores desde la consola:
 ## Actualización de los tipos de máquina
 {: #machine_type}
 
-Puede actualizar los tipos de máquina que utilizan los nodos trabajadores añadiendo nuevos nodos trabajadores y eliminando los antiguos. Por ejemplo, si tiene nodos trabajadores virtuales en tipos de máquina en desuso con `u1c` o `b1c` en los nombres, cree nodos trabajadores que utilicen tipos de máquina con `u2c` o `b2c` en el nombre.
+Puede actualizar los tipos de máquina que utilizan los nodos trabajadores añadiendo nuevos nodos trabajadores y eliminando los antiguos. Por ejemplo si en su clúster hay tipos de nodo trabajador `x1c` o el más antiguo Ubuntu 16 `x2c`, cree nodos trabajadores Ubuntu 18 que utilicen tipos de máquina con `x3c` en el nombre.
 {: shortdesc}
 
 Antes de empezar:
@@ -413,7 +413,7 @@ El clúster de {{site.data.keyword.containerlong_notm}} se suministra con comple
 
 **¿Qué complementos predeterminados puedo actualizar por separado del clúster?**</br>
 Opcionalmente, puede inhabilitar las actualizaciones automáticas para los complementos siguientes:
-* [Fluentd para registro](#logging)
+* [Fluentd para registro](#logging-up)
 * [Equilibrador de carga de aplicación de Ingress](#alb)
 
 **¿Existen complementos que no puedo actualizar de forma independiente al clúster?**</br>
@@ -440,10 +440,10 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **¿Puedo instalar otros complementos que no sean el predeterminado?**</br>
-Sí. {{site.data.keyword.containerlong_notm}} proporciona otros complementos entre los que puede elegir para añadir funciones al clúster. Por ejemplo, quizás desee [utilizar diagramas de Helm](/docs/containers?topic=containers-integrations#helm) para instalar el [complemento de almacenamiento en bloque](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) o [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup). Debe actualizar cada complemento por separado siguiendo las instrucciones para actualizar los diagramas de Helm.
+Sí. {{site.data.keyword.containerlong_notm}} proporciona otros complementos entre los que puede elegir para añadir funciones al clúster. Por ejemplo, quizás desee [utilizar diagramas de Helm](/docs/containers?topic=containers-helm#public_helm_install) para instalar el [complemento de almacenamiento en bloque](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) o [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup). Debe actualizar cada complemento por separado siguiendo las instrucciones para actualizar los diagramas de Helm.
 
 ### Gestión de actualizaciones automáticas para el complemento Fluentd para registro
-{: #logging}
+{: #logging-up}
 
 Para realizar cambios en las configuraciones de registro o de filtro, debe tener la versión más reciente del complemento Fluentd. De forma predeterminada, las actualizaciones automáticas del complemento están habilitadas.
 {: shortdesc}
@@ -612,7 +612,7 @@ Para actualizar los nodos trabajadores autónomos a las agrupaciones de nodos tr
       ```
       {: pre}
 
-   2. **Para añadir la zona a varias agrupaciones de nodos trabajadores**: añada varias agrupaciones de nodos trabajadores al mandato `ibmcloud ks zone-add`. Para añadir varias agrupaciones de trabajadores a una zona, debe tener una VLAN privada y pública existente en dicha zona. Si no tiene una VLAN pública y privada en dicha zona, considere la posibilidad de añadir primero la zona a una agrupación de nodos trabajadores para que se cree una VLAN pública y una VLAN privada. A continuación, puede añadir la zona a otras agrupaciones de nodos trabajadores. </br></br>Es importante que los nodos trabajadores de todas las agrupaciones de nodos trabajadores se suministran en todas las zonas para asegurarse de que el clúster está equilibrado entre zonas. Si desea utilizar distintas VLAN para distintas agrupaciones de nodos trabajadores, repita este mandato con la VLAN que desea utilizar para la agrupación de nodos trabajadores. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+   2. **Para añadir la zona a varias agrupaciones de nodos trabajadores**: añada varias agrupaciones de nodos trabajadores al mandato `ibmcloud ks zone-add`. Para añadir varias agrupaciones de trabajadores a una zona, debe tener una VLAN privada y pública existente en dicha zona. Si no tiene una VLAN pública y privada en dicha zona, considere la posibilidad de añadir primero la zona a una agrupación de nodos trabajadores para que se cree una VLAN pública y una VLAN privada. A continuación, puede añadir la zona a otras agrupaciones de nodos trabajadores. </br></br>Es importante que los nodos trabajadores de todas las agrupaciones de nodos trabajadores se suministran en todas las zonas para asegurarse de que el clúster está equilibrado entre zonas. Si desea utilizar distintas VLAN para distintas agrupaciones de nodos trabajadores, repita este mandato con la VLAN que desea utilizar para la agrupación de nodos trabajadores. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```

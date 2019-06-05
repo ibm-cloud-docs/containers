@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -94,7 +94,7 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 작업자 노드를 업데이트하라는 알림을 수신했습니다. 무슨 의미일까요? 보안 업데이트와 패치가 Kubernetes API 서버 및 기타 Kubernetes 마스터 컴포넌트에 대해 시행되었으므로 사용자는 작업자 노드가 동기화를 유지하는지 확인해야 합니다.
 {: shortdesc}
 
-**업데이트 중에 내 앱에 무슨 일이 발생합니까**?</br>
+**업데이트 중에 내 앱에 무슨 일이 발생합니까?**</br>
 업데이트 중인 작업자 노드에서 배치의 일부로서 앱을 실행하는 경우, 해당 앱은 클러스터의 기타 작업자 노드로 다시 스케줄됩니다. 이러한 작업자 노드는 다른 작업자 풀에 있을 수 있습니다. 또는 독립형 작업자 노드가 있으면 앱이 독립형 작업자 노드로 스케줄될 수 있습니다. 앱의 작동 중단 시간을 방지하려면 워크로드를 감당할 만한 충분한 용량이 클러스터에 있는지 확인해야 합니다.
 
 **업데이트 중에 주어진 시점에 작동 중지되는 작업자 노드의 수를 어떻게 제어합니까? **</br>
@@ -142,7 +142,7 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012
@@ -294,7 +294,7 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 ## 머신 유형 업데이트
 {: #machine_type}
 
-새 작업자 노드를 추가하고 이전 작업자 노드를 제거하여 작업자 노드의 머신 유형을 업데이트할 수 있습니다. 예를 들어, 이름에 `u1c` 또는 `b1c`가 있는 더 이상 사용되지 않는 머신 유형에 가상 작업자 노드가 있는 경우 이름에 `u2c` 또는 `b2c`가 있는 머신 유형을 사용하는 작업자 노드를 작성하십시오.
+새 작업자 노드를 추가하고 이전 작업자 노드를 제거하여 작업자 노드의 머신 유형을 업데이트할 수 있습니다. 예를 들어, 클러스트에 더 이상 사용되지 않는 `x1c` 또는 이전 Ubuntu 16 `x2c` 작업자 노드 특성이 있는 경우, 이름에 `x3c`가 있는 머신 유형을 사용하는 Ubuntu 18 작업자 노드를 작성하십시오.
 {: shortdesc}
 
 시작하기 전에:
@@ -413,7 +413,7 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 
 **클러스터와 별도로 업데이트할 수 있는 기본 추가 기능은 무엇입니까?**</br>
 선택적으로 다음 추가 기능에 대한 자동 업데이트를 사용 안함으로 설정할 수 있습니다.
-* [로깅을 위한 Fluentd](#logging)
+* [로깅을 위한 Fluentd](#logging-up)
 * [Ingress 애플리케이션 로드 밸런서](#alb)
 
 **클러스터와 별도로 업데이트할 수 없는 추가 기능이 있습니까?**</br>
@@ -440,10 +440,10 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **기본 기능 이외에 기타 추가 기능을 설치할 수 있습니까?**</br>
-예. {{site.data.keyword.containerlong_notm}}에서는 클러스터에 기능 추가를 위해 선택할 수 있는 기타 추가 기능을 제공합니다. 예를 들어, [Helm 차트를 사용](/docs/containers?topic=containers-integrations#helm)하여 [블록 스토리지 플러그인](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) 또는 [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup)을 설치하고자 할 수 있습니다. Helm 차트를 업데이트하는 지시사항에 따라 각각의 추가 기능을 별도로 업데이트해야 합니다.
+예. {{site.data.keyword.containerlong_notm}}에서는 클러스터에 기능 추가를 위해 선택할 수 있는 기타 추가 기능을 제공합니다. 예를 들어, [Helm 차트를 사용](/docs/containers?topic=containers-helm#public_helm_install)하여 [블록 스토리지 플러그인](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) 또는 [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup)을 설치하고자 할 수 있습니다. Helm 차트를 업데이트하는 지시사항에 따라 각각의 추가 기능을 별도로 업데이트해야 합니다.
 
 ### 로깅을 위한 Fluentd 추가 기능에 대한 자동 업데이트 관리
-{: #logging}
+{: #logging-up}
 
 로깅 또는 필터 구성을 변경하려면 Fluentd 추가 기능이 최신 버전이어야 합니다. 기본적으로는 추가 기능에 대한 자동 업데이트가 사용됩니다.
 {: shortdesc}
@@ -608,7 +608,7 @@ ngress ALB 추가 기능의 자동 업데이트는 다음과 같은 방법으로
       ```
       {: pre}
 
-   2. **다중 작업자 풀에 구역 추가**: 다중 작업자 풀을 `ibmcloud ks zone-add` 명령에 추가하십시오. 다중 작업자 풀을 구역에 추가하려면 해당 구역에 기존 사설 및 공용 VLAN이 있어야 합니다. 해당 구역에 공용 및 사설 VLAN이 없는 경우에는 공용 및 사설 VLAN이 사용자를 위해 작성되도록 우선 구역을 하나의 작업자 풀에 추가하는 것을 고려하십시오. 그리고 구역을 기타 작업자 풀에 추가할 수 있습니다. </br></br>구역 간에 클러스터의 밸런스가 유지될 수 있도록 모든 작업자 풀의 작업자 노드가 모든 구역으로 프로비저닝되는 것이 중요합니다. 서로 다른 작업자 풀에 대해 서로 다른 VLAN을 사용하려면 작업자 풀에 사용할 VLAN에서 이 명령을 반복 실행하십시오. 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
+   2. **다중 작업자 풀에 구역 추가**: 다중 작업자 풀을 `ibmcloud ks zone-add` 명령에 추가하십시오. 다중 작업자 풀을 구역에 추가하려면 해당 구역에 기존 사설 및 공용 VLAN이 있어야 합니다. 해당 구역에 공용 및 사설 VLAN이 없는 경우에는 공용 및 사설 VLAN이 사용자를 위해 작성되도록 우선 구역을 하나의 작업자 풀에 추가하는 것을 고려하십시오. 그리고 구역을 기타 작업자 풀에 추가할 수 있습니다. </br></br>구역 간에 클러스터의 밸런스가 유지될 수 있도록 모든 작업자 풀의 작업자 노드가 모든 구역으로 프로비저닝되는 것이 중요합니다. 서로 다른 작업자 풀에 대해 서로 다른 VLAN을 사용하려면 작업자 풀에 사용할 VLAN에서 이 명령을 반복 실행하십시오. 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
@@ -656,7 +656,7 @@ ngress ALB 추가 기능의 자동 업데이트는 다음과 같은 방법으로
 
 
 **다음에 수행할 작업** </br>
-이제 작업자 풀을 사용하도록 클러스터를 업데이트했으므로 클러스터에 구역을 더 추가하여 가용성을 높일 수 있습니다. 클러스터에 구역을 더 추가하면 단일 구역 클러스터에서 [다중 구역 클러스터](/docs/containers?topic=containers-plan_clusters#ha_clusters)로 클러스터가 변경됩니다. 단일 구역 클러스터를 다중 구역 클러스터를 변경하면 Ingress 도메인이 `<cluster_name>.<region>.containers.mybluemix.net`에서 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 형식의 새 Ingress 하위 도메인이 있는 클러스터에만 사용될 수 있습니다. 기존 Ingress 도메인은 여전히 유효하며 앱으로 요청을 전송하는 데 사용될 수 있습니다.
+이제 작업자 풀을 사용하도록 클러스터를 업데이트했으므로 클러스터에 구역을 더 추가하여 가용성을 높일 수 있습니다. 클러스터에 구역을 더 추가하면 단일 구역 클러스터에서 [다중 구역 클러스터](/docs/containers?topic=containers-plan_clusters#ha_clusters)로 클러스터가 변경됩니다. 단일 구역 클러스터를 다중 구역 클러스터를 변경하면 Ingress 도메인이 `<cluster_name>.<region>.containers.mybluemix.net`에서 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`로 변경됩니다. 기존 Ingress 도메인은 여전히 유효하며 앱으로 요청을 전송하는 데 사용될 수 있습니다.
 
 <br />
 

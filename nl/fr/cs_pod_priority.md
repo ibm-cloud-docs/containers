@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks 
 
@@ -56,7 +56,7 @@ _Figure : Scénarios illustrant la priorité des pods_
 **Puis-je désactiver le contrôleur d'admission de priorité de pod ?**</br>
 Non. Si vous ne souhaitez pas utiliser la priorité de pod, ne définissez pas de classe `globalDefault` ou ajoutez une classe de priorité dans les déploiements de vos pods. Tous les pods prennent la valeur zéro, sauf les pods essentiels pour le cluster qu'IBM déploie avec les [classes de priorité par défaut](#default_priority_class). Comme la priorité des pods est relative, cette configuration de base garantit que les pods essentiels pour le cluster sont prioritaires pour les ressources et planifie tous les autres pods suivant les règles de planification existantes en vigueur.
 
-**Comment les quotas de ressources affectent la priorité d'un pod ?**</br>
+**Comment les quotas de ressources affectent-ils la priorité d'un pod ?**</br>
 Vous pouvez utiliser la priorité de pod en combinaison avec les quotas de ressources, notamment des [portées de quotas (quota scopes) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) pour les clusters qui exécutent Kubernetes 1.12 ou version ultérieure. Avec les portées de quotas, vous pouvez configurer vos quotas de ressources en fonction de la priorité des pods. Ainsi, les pods de priorité plus élevée consomment des ressources système limitées par le quota de ressources avant les pods de priorité plus faible.
 
 ## Description des classes de priorité par défaut
@@ -143,7 +143,7 @@ Pour utiliser une classe de priorité :
     <tr>
     <td><code>globalDefault</code></td>
     <td>Facultatif : définissez cette zone avec la valeur `true` pour faire en sorte que cette classe de priorité soit la valeur par défaut globale appliquée à tous les pods planifiés sans valeur `priorityClassName`. 1 seule classe de priorité dans votre cluster peut être définie avec cette valeur par défaut globale. S'il n'y a aucune classe globalDefault, les pods n'ayant aucune valeur `priorityClassName` indiquée ont une priorité égale à zéro (`0`).</br></br>
-    Les [classes de priorité par défaut](#default_priority_class) ne définissent pas de classe `globalDefault`. Si vous avez créé d'autres classes de priorité dans votre cluster, vous pouvez vérifier qu'elles ne contiennent pas la classe `globalDefault` en exécutant la commande `kubectl describe priorityclass <name>`.</td>
+    Les [classes de priorité par défaut](#default_priority_class) ne définissent pas de classe `globalDefault`. Si vous avez créé d'autres classes de priorité dans votre cluster, vous pouvez vérifier qu'elles ne contiennent pas la classe `globalDefault` en exécutant la commande `kubectl describe priorityclass<name>`.</td>
     </tr>
     <tr>
     <td><code>description</code></td>
@@ -212,6 +212,9 @@ Pour affecter une priorité à vos pods :
       name: ibmliberty
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: ibmliberty
       template:
         metadata:
           labels:

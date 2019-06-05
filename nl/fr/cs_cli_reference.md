@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # Interface de ligne de commande IBM Cloud Kubernetes Service
 {: #cs_cli_reference}
 
@@ -34,10 +33,11 @@ Pour installer le plug-in de l'interface CLI, voir [Installation de l'interface 
 
 Dans le terminal, vous êtes averti des mises à jour disponibles pour l'interface de ligne de commande `ibmcloud` et les plug-ins. Veillez à maintenir votre interface de ligne de commande à jour pour pouvoir utiliser l'ensemble des commandes et des indicateurs.
 
-Vous recherchez des commandes `ibmcloud cr` ? Consultez le [guide de référence de l'interface de ligne de commande (CLI) {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference). Vous recherchez des commandes `kubectl` ? Consultez la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/kubectl/overview/).
+Vous recherchez des commandes `ibmcloud cr` ? Consultez le [guide de référence de l'interface de ligne de commande (CLI) {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference). Vous recherchez des commandes `kubectl` ? Consultez la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubectl.docs.kubernetes.io/).
 {:tip}
 
-## Utilisation de la structure de commande bêta
+
+## Utilisation du plug-in {{site.data.keyword.containerlong_notm}} bêta
 {: #cs_beta}
 
 Le plug-in {{site.data.keyword.containerlong_notm}} a fait l'objet d'une nouvelle conception disponible en version bêta. Ce plug-in {{site.data.keyword.containerlong_notm}} regroupe désormais les commandes en catégories et change leur structure pour remplacer les tirets par des espaces.
@@ -64,7 +64,7 @@ Les versions bêta suivantes du plug-in {{site.data.keyword.containerlong_notm}}
       <td><code>0.2</code> (valeur par défaut)</td>
       <td>Version existante : les commandes sont structurées avec des tirets et sont répertoriées par ordre alphabétique.</td>
       <td>Version existante et version bêta : vous pouvez exécuter les commandes structurées avec des tirets (`ibmcloud ks alb-cert-get`) ou en version bêta avec des espaces (`ibmcloud ks alb cert get`).</td>
-  </tr>
+    </tr>
     <tr>
       <td><code>0.3</code></td>
       <td>Version bêta : les commandes sont structurées avec des espaces et sont répertoriées par catégories.</td>
@@ -100,7 +100,7 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks api](#cs_api)</td>
+    <td>[ibmcloud ks api](#cs_cli_api)</td>
     <td>[ibmcloud ks api-key-info](#cs_api_key_info)</td>
     <td>[ibmcloud ks api-key-reset](#cs_api_key_reset)</td>
     <td>[ibmcloud ks apiserver-config-get](#cs_apiserver_config_get)</td>
@@ -146,25 +146,25 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
+    <td>[ibmcloud ks addon-versions](#cs_addon_versions)</td>
     <td>[ibmcloud ks cluster-addon-disable](#cs_cluster_addon_disable)</td>
     <td>[ibmcloud ks cluster-addon-enable](#cs_cluster_addon_enable)</td>
     <td>[ibmcloud ks cluster-addons](#cs_cluster_addons)</td>
-    <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
   </tr>
   <tr>
+  <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
     <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
     <td>[ibmcloud ks cluster-feature-disable](#cs_cluster_feature_disable)</td>
     <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
-    <td>[ibmcloud ks cluster-feature-ls](#cs_cluster_feature_ls)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
+  <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
     <td>[ibmcloud ks cluster-pull-secret-apply](#cs_cluster_pull_secret_apply)</td>
     <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
+  <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
     <td> </td>
@@ -330,6 +330,40 @@ ibmcloud plugin list
 
 </br>
 
+<table summary="Tableau des commandes d'équilibreur de charge de réseau (NLB)">
+<caption>Commandes d'équilibreur de charge de réseau (NLB)</caption>
+<col width = 25%>
+<col width = 25%>
+<col width = 25%>
+  <thead>
+    <tr>
+      <th colspan=4>Commandes d'équilibreur de charge de réseau (NLB)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-add](#cs_nlb-dns-add)</td>
+      <td>[ibmcloud ks nlb-dns-create](#cs_nlb-dns-create)</td>
+      <td>[ibmcloud ks nlb-dnss](#cs_nlb-dns-ls)</td>
+      <td>[ibmcloud ks nlb-dns-rm](#cs_nlb-dns-rm)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-configure](#cs_nlb-dns-monitor-configure)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-get](#cs_nlb-dns-monitor-get)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-disable](#cs_nlb-dns-monitor-disable)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-enable](#cs_nlb-dns-monitor-enable)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-ls](#cs_nlb-dns-monitor-ls)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-status](#cs_nlb-dns-monitor-status)</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+</br>
+
 <table summary="Tableau des commandes de région">
 <caption>Commandes de région</caption>
 <col width="25%">
@@ -343,7 +377,7 @@ ibmcloud plugin list
     <td>[ibmcloud ks region](#cs_region)</td>
     <td>[ibmcloud ks region-set](#cs_region-set)</td>
     <td>[ibmcloud ks regions](#cs_regions)</td>
-    <td>[ibmcloud ks zones](#cs_datacenters)</td>
+  <td>[ibmcloud ks zones](#cs_datacenters)</td>
   </tr>
 </tbody>
 </table>
@@ -406,18 +440,24 @@ ibmcloud plugin list
 {: #api_commands}
 
 ### ibmcloud ks api
-{: #cs_api}
+{: #cs_cli_api}
 
 Permet de cibler le noeud final d'API pour {{site.data.keyword.containerlong_notm}}. Si vous n'indiquez pas de noeud final, vous pourrez voir les informations sur le noeud final actuellement ciblé.
 {: shortdesc}
+
+Les noeuds finaux suivants sont pris en charge :
+* Global : `https://containers.cloud.ibm.com`
+* Dallas (Sud des Etats-Unis, us-south) : `https://us-south.containers.cloud.ibm.com`
+* Francfort (Centre de l'UE, eu-de) : `https://eu-central.containers.cloud.ibm.com`
+* Londres (Sud du Royaume-Uni, eu-gb) : `https://uk-south.containers.cloud.ibm.com`
+* Sydney (Asie-Pacifique sud, au-syd) : `https://ap-south.containers.cloud.ibm.com`
+* Tokyo (Asie-Pacifique nord, jp-tok) : `https://ap-north.containers.cloud.ibm.com`
+* Washington, D.C. (Est des Etats-Unis, us-east) : `https://us-east.containers.cloud.ibm.com`
 
 ```
 ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
 ```
 {: pre}
-
-Vous changez de région ? Utilisez la [commande](#cs_region-set) `ibmcloud ks region-set` à la place.
-{: tip}
 
 <strong>Droits minimum requis</strong> : aucun
 
@@ -425,14 +465,7 @@ Vous changez de région ? Utilisez la [commande](#cs_region-set) `ibmcloud ks re
 
    <dl>
    <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
-   <dd>Noeud final d'API {{site.data.keyword.containerlong_notm}}. Notez que ce noeud final est différent des noeuds finaux {{site.data.keyword.Bluemix_notm}}. Cette valeur est obligatoire pour définir le noeud final d'API. Valeurs admises :<ul>
-   <li>Noeud final global : https://containers.cloud.ibm.com</li>
-   <li>Noeud final d'Asie-Pacifique nord : https://ap-north.containers.cloud.ibm.com</li>
-   <li>Noeud final d'Asie-Pacifique sud : https://ap-south.containers.cloud.ibm.com</li>
-   <li>Noeud final d'Europe centrale : https://eu-central.containers.cloud.ibm.com</li>
-   <li>Noeud final du Sud du Royaume-Uni : https://uk-south.containers.cloud.ibm.com</li>
-   <li>Noeud final de l'Est des Etats-Unis : https://us-east.containers.cloud.ibm.com</li>
-   <li>Noeud final du Sud des Etats-Unis : https://us-south.containers.cloud.ibm.com</li></ul>
+   <dd>Noeud final d'API {{site.data.keyword.containerlong_notm}}. Notez que ce noeud final est différent des noeuds finaux {{site.data.keyword.Bluemix_notm}}. Cette valeur est obligatoire pour définir le noeud final d'API.
    </dd>
 
    <dt><code>--insecure</code></dt>
@@ -715,11 +748,20 @@ ibmcloud ks help
 <strong>Options de commande</strong> : aucune
 
 
-### ibmcloud ks init [--host HOST]
+### ibmcloud ks init
 {: #cs_init}
 
 Initialisez le plug-in {{site.data.keyword.containerlong_notm}} ou spécifiez la région dans laquelle vous souhaitez créer ou accéder à des clusters Kubernetes.
 {: shortdesc}
+
+Les noeuds finaux suivants sont pris en charge :
+* Global : `https://containers.cloud.ibm.com`
+* Dallas (Sud des Etats-Unis, us-south) : `https://us-south.containers.cloud.ibm.com`
+* Francfort (Centre de l'UE, eu-de) : `https://eu-central.containers.cloud.ibm.com`
+* Londres (Sud du Royaume-Uni, eu-gb) : `https://uk-south.containers.cloud.ibm.com`
+* Sydney (Asie-Pacifique sud, au-syd) : `https://ap-south.containers.cloud.ibm.com`
+* Tokyo (Asie-Pacifique nord, jp-tok) : `https://ap-north.containers.cloud.ibm.com`
+* Washington, D.C. (Est des Etats-Unis, us-east) : `https://us-east.containers.cloud.ibm.com`
 
 ```
 ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
@@ -732,7 +774,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>Noeud final d'API {{site.data.keyword.containerlong_notm}} à utiliser.  Cette valeur est facultative. [Afficher les valeurs de noeud final d'API disponibles.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
+   <dd>Noeud final d'API {{site.data.keyword.containerlong_notm}} à utiliser. Cette valeur est facultative. [Afficher les valeurs de noeud final d'API disponibles.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>Autoriser une connexion HTTP non sécurisée.</dd>
@@ -748,11 +790,17 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 
    </dl>
 
-**Exemple** :
-```
-ibmcloud ks init --host https://uk-south.containers.cloud.ibm.com
-```
-{: pre}
+**Exemples** :
+*  Exemple relatif au ciblage du noeud final régional du Sud des Etats-Unis :
+  ```
+  ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
+  ```
+  {: pre}
+*  Exemple relatif au ciblage du noeud final global :
+  ```
+  ibmcloud ks init --host https://containers.cloud.ibm.com
+  ```
+  {: pre}
 
 ### ibmcloud ks messages
 {: #cs_messages}
@@ -772,6 +820,39 @@ ibmcloud ks messages
 
 ## Commandes de cluster : Gestion
 {: #cluster_mgmt_commands}
+
+### ibmcloud ks addon-versions
+{: #cs_addon_versions}
+
+Afficher la liste des versions prises en charge pour les modules complémentaires gérés dans {{site.data.keyword.containerlong_notm}}.
+{: shortdesc}
+
+```
+ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--json] [-s]
+```
+{: pre}
+
+<strong>Droits minimum requis</strong> : aucun
+
+**Options de commande** :
+
+  <dl>
+  <dt><code>--addon <em>ADD-ON_NAME</em></code></dt>
+  <dd>Facultatif : indiquez un nom de module complémentaire, par exemple, <code>istio</code> ou <code>knative</code>, pour lequel filtrer les versions. </dd>
+
+  <dt><code>--json</code></dt>
+  <dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+  </dl>
+
+**Exemple** :
+
+  ```
+  ibmcloud ks addon-versions --addon istio
+  ```
+  {: pre}
 
 ### ibmcloud ks cluster-addon-disable
 {: #cs_cluster_addon_disable}
@@ -878,18 +959,43 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 <strong>Droits minimum requis</strong> : rôle de plateforme **Administrateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
 <strong>Options de commande</strong> :
-
 <dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-  <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks cluster-addon-disable knative --cluster my_cluster
+```
+{: pre}
+
+#### ibmcloud ks cluster-addon-disable kube-terminal
+{: #cs_cluster_addon_disable_kube-terminal}
+
+Désactivez le module complémentaire [Terminal Kubernetes](/docs/containers?topic=containers-cs_cli_install#cli_web). Pour utiliser le terminal Kubernetes dans la console de cluster {{site.data.keyword.containerlong_notm}}, vous devez d'abord réactiver le module complémentaire.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster CLUSTER
+```
+{: pre}
+
+<strong>Droits minimum requis</strong> : rôle de plateforme **Administrateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+<strong>Options de commande</strong> :
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 </dl>
 
 **Exemple** :
 
-  ```
-  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addon-enable
 {: #cs_cluster_addon_enable}
@@ -900,28 +1006,31 @@ Activez un module complémentaire géré dans un cluster existant. Cette command
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_enable_istio}
 
-Activez le [module complémentaire Istio](/docs/containers?topic=containers-istio) géré. Cette commande installe les composants de base d'Istio version 1.0.5, y compris Prometheus.
+Activez le [module complémentaire Istio](/docs/containers?topic=containers-istio) géré. Installe les composants de base d'Istio, notamment Prometheus.
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
+ibmcloud ks cluster-addon-enable istio --cluster CLUSTER [--version VERSION]
 ```
 {: pre}
 
 <strong>Droits minimum requis</strong> : rôle de plateforme **Administrateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
 <strong>Options de commande</strong> :
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Facultatif : Spécifiez la version du module complémentaire à installer. Si aucune version n'est indiquée, la version par défaut est installée.</dd>
 </dl>
 
 **Exemple** :
 
-  ```
-  ibmcloud ks cluster-addon-enable istio --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable istio --cluster my_cluster
+```
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-extras
 {: #cs_cluster_addon_enable_istio_extras}
@@ -930,28 +1039,29 @@ Activez le module complémentaire géré Istio extras. Cette commande installe G
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
 <strong>Droits minimum requis</strong> : rôle de plateforme **Administrateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
 <strong>Options de commande</strong> :
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Facultatif : Spécifiez la version du module complémentaire à installer. Si aucune version n'est indiquée, la version par défaut est installée.</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>Facultatif : active la dépendance du module complémentaire <code>istio</code>.</dd>
+<dt><code>-y</code></dt>
+<dd>Facultatif : active la dépendance du module complémentaire <code>istio</code>.</dd>
 </dl>
 
 **Exemple** :
-
-  ```
-  ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
+```
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-sample-bookinfo
 {: #cs_cluster_addon_enable_istio_sample_bookinfo}
@@ -960,7 +1070,7 @@ Activez le module complémentaire géré Istio BookInfo. Cette commande déploie
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
@@ -969,19 +1079,21 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
 <strong>Options de commande</strong> :
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>Facultatif : active toutes les dépendances des modules complémentaires <code>istio</code> et <code>istio-extras</code>.</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Facultatif : Spécifiez la version du module complémentaire à installer. Si aucune version n'est indiquée, la version par défaut est installée.</dd>
+
+<dt><code>-y</code></dt>
+<dd>Facultatif : active toutes les dépendances des modules complémentaires <code>istio</code> et <code>istio-extras</code>.</dd>
 </dl>
 
 **Exemple** :
-
-  ```
-  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
+```
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_enable_knative}
@@ -990,7 +1102,7 @@ Activez le [module complémentaire Knative](/docs/containers?topic=containers-kn
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
@@ -999,19 +1111,50 @@ ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
 <strong>Options de commande</strong> :
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>Facultatif : active la dépendance du module complémentaire <code>istio</code>.</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Facultatif : Spécifiez la version du module complémentaire à installer. Si aucune version n'est indiquée, la version par défaut est installée.</dd>
+
+<dt><code>-y</code></dt>
+<dd>Facultatif : active la dépendance du module complémentaire <code>istio</code>.</dd>
 </dl>
 
 **Exemple** :
+```
+ibmcloud ks cluster-addon-enable knative --cluster my_cluster
+```
+{: pre}
 
-  ```
-  ibmcloud ks cluster-addon-enable knative --cluster my_cluster
-  ```
-  {: pre}
+#### ibmcloud ks cluster-addon-enable kube-terminal
+{: #cs_cluster_addon_enable_kube-terminal}
+
+Activez le module complémentaire [Terminal Kubernetes](/docs/containers?topic=containers-cs_cli_install#cli_web) pour utiliser le terminal Kubernetes dans la console de cluster {{site.data.keyword.containerlong_notm}}.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+<strong>Droits minimum requis</strong> : rôle de plateforme **Administrateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+<strong>Options de commande</strong> :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Facultatif : Spécifiez la version du module complémentaire à installer. Si aucune version n'est indiquée, la version par défaut est installée.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addons
 {: #cs_cluster_addons}
@@ -1027,23 +1170,21 @@ ibmcloud ks cluster-addons --cluster CLUSTER
 <strong>Droits minimum requis</strong> : rôle de plateforme **Afficheur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
 <strong>Options de commande</strong> :
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 </dl>
 
 **Exemple** :
-
-  ```
-  ibmcloud ks cluster-addons --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addons --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-config
 {: #cs_cluster_config}
 
-Après la connexion, téléchargez les données de configuration et les certificats Kubernetes pour vous connecter à votre cluster et exécuter des commandes `kubectl`. Les fichiers sont téléchargés sous `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
+Après la connexion, téléchargez les données de configuration et les certificats Kubernetes pour vous connecter à votre cluster et exécuter des commandes `kubectl`. Les fichiers sont téléchargés dans `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
 {: shortdesc}
 
 ```
@@ -1057,32 +1198,30 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 
 **Options de commande** :
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
-   <dt><code>--admin</code></dt>
-   <dd>Télécharger les fichiers de certificat et d'autorisations TLS pour le rôle Superutilisateur. Vous pouvez utiliser les certificats pour automatiser les tâches d'un cluster sans avoir à vous authentifier à nouveau. Les fichiers sont téléchargés dans `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`. Cette valeur est facultative.</dd>
+<dt><code>--admin</code></dt>
+<dd>Télécharger les fichiers de certificat et d'autorisations TLS pour le rôle Superutilisateur. Vous pouvez utiliser les certificats pour automatiser les tâches d'un cluster sans avoir à vous authentifier à nouveau. Les fichiers sont téléchargés dans `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`. Cette valeur est facultative.</dd>
 
-   <dt><code>--network</code></dt>
-   <dd>Télécharger le fichier de configuration Calico, les certificats TLS et les fichiers d'autorisation requis pour exécuter des commandes <code>calicoctl</code> dans votre cluster. Cette valeur est facultative. **Remarque** : afin d'obtenir la commande export pour les certificats et les données de certification Kubernetes téléchargés, vous devez exécuter cette commande sans cet indicateur.</dd>
+<dt><code>--network</code></dt>
+<dd>Télécharger le fichier de configuration Calico, les certificats TLS et les fichiers d'autorisation requis pour exécuter des commandes <code>calicoctl</code> dans votre cluster. Cette valeur est facultative. **Remarque** : afin d'obtenir la commande export pour les certificats et les données de certification Kubernetes téléchargés, vous devez exécuter cette commande sans cet indicateur.</dd>
 
-   <dt><code>--export</code></dt>
-   <dd>Télécharger les certificats et les données de configuration Kubernetes sans autre message que la commande export. Comme aucun message ne s'affiche, vous pouvez utiliser cet indicateur lorsque vous créez des scripts automatisés. Cette valeur est facultative.</dd>
+<dt><code>--export</code></dt>
+<dd>Télécharger les certificats et les données de configuration Kubernetes sans autre message que la commande export. Comme aucun message ne s'affiche, vous pouvez utiliser cet indicateur lorsque vous créez des scripts automatisés. Cette valeur est facultative.</dd>
 
-   <dt><code>--skip-rbac</code></dt>
-   <dd>Ignorer l'ajout de rôles RBAC Kubernetes de l'utilisateur en fonction des rôles d'accès au service {{site.data.keyword.Bluemix_notm}} IAM dans la configuration du cluster. Incluez cette option uniquement si vous [gérez vos propres rôles RBAC Kubernetes](/docs/containers?topic=containers-users#rbac). Si vous utilisez des [rôles d'accès au service {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-access_reference#service) pour gérer tous vos utilisateurs RBAC, n'incluez pas cette option.</dd>
+<dt><code>--skip-rbac</code></dt>
+<dd>Ignorer l'ajout de rôles RBAC Kubernetes de l'utilisateur en fonction des rôles d'accès au service {{site.data.keyword.Bluemix_notm}} IAM dans la configuration du cluster. Incluez cette option uniquement si vous [gérez vos propres rôles RBAC Kubernetes](/docs/containers?topic=containers-users#rbac). Si vous utilisez des [rôles d'accès au service {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-access_reference#service) pour gérer tous vos utilisateurs RBAC, n'incluez pas cette option.</dd>
 
-  <dt><code>-s</code></dt>
-  <dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
 
-  <dt><code>--yaml</code></dt>
-  <dd>Imprime le résultat de la commande au format YAML. Cette valeur est facultative.</dd>
-
-   </dl>
+<dt><code>--yaml</code></dt>
+<dd>Imprime le résultat de la commande au format YAML. Cette valeur est facultative.</dd>
+</dl>
 
 **Exemple** :
-
 ```
 ibmcloud ks cluster-config --cluster my_cluster
 ```
@@ -1096,7 +1235,7 @@ Permet de créer un cluster dans votre organisation. Pour les clusters gratuits,
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 ```
 {: pre}
 
@@ -1109,10 +1248,7 @@ ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone Z
 
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-
-<dd>Chemin d'accès au fichier YAML pour créer votre cluster standard. Au lieu de définir les caractéristiques de votre cluster à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML. Cette valeur est facultative pour les clusters standard et n'est pas disponible pour les clusters gratuits.
-
-<p class="note">Si vous indiquez la même option dans la commande comme paramètre dans le fichier YAML, la valeur de l'option de la commande est prioritaire sur la valeur définie dans le fichier YAML. Par exemple, si vous indiquez un emplacement dans votre fichier YAML et utilisez l'option <code>--zone</code> dans la commande, la valeur que vous avez entrée dans l'option de commande se substitue à la valeur définie dans le fichier YAML.</p>
+<dd>Chemin d'accès au fichier YAML pour créer votre cluster standard. Au lieu de définir les caractéristiques de votre cluster à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML. Cette valeur est facultative pour les clusters standard et n'est pas disponible pour les clusters gratuits. <p class="note">Si vous indiquez la même option dans la commande comme paramètre dans le fichier YAML, la valeur de l'option de la commande est prioritaire sur la valeur définie dans le fichier YAML. Par exemple, si vous indiquez un emplacement dans votre fichier YAML et utilisez l'option <code>--zone</code> dans la commande, la valeur que vous avez entrée dans l'option de commande se substitue à la valeur définie dans le fichier YAML.</p>
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
@@ -1127,65 +1263,13 @@ kube-version: <em>&lt;kube-version&gt;</em>
 diskEncryption: <em>false</em>
 trusted: <em>true</em>
 </code></pre>
-
-
-<table>
-    <caption>Description des composants du fichier YAML</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code><em>name</em></code></td>
-    <td>Remplacez <code><em>&lt;cluster_name&gt;</em></code> par le nom de votre cluster. Le nom doit commencer par une lettre, peut contenir des lettres, des nombres et des tirets (-) et ne doit pas dépasser 35 caractères. Le nom du cluster et la région dans laquelle est déployé le cluster constituent le nom de domaine qualifié complet du sous-domaine Ingress. Pour garantir que ce sous-domaine est unique dans une région, le nom de cluster peut être tronqué et complété par une valeur aléatoire dans le nom de domaine Ingress.
-</td>
-    </tr>
-    <tr>
-    <td><code><em>zone</em></code></td>
-    <td>Remplacez <code><em>&lt;zone&gt;</em></code> par la zone dans laquelle vous souhaitez créer votre cluster. Les zones disponibles dépendent de la région à laquelle vous êtes connecté. Pour afficher les zones disponibles, exécutez la commande <code>ibmcloud ks zones</code>. </td>
-     </tr>
-     <tr>
-     <td><code><em>no-subnet</em></code></td>
-     <td>Par défaut, un sous-réseau public et un sous-réseau privé portables sont créés sur le réseau local virtuel (VLAN) associé au cluster. Remplacez <code><em>&lt;no-subnet&gt;</em></code> par <code><em>true</em></code> afin d'éviter de créer des sous-réseaux avec le cluster. Vous pouvez [créer](#cs_cluster_subnet_create) ou [ajouter](#cs_cluster_subnet_add) des sous-réseaux à un cluster ultérieurement.</td>
-      </tr>
-     <tr>
-     <td><code><em>machine-type</em></code></td>
-     <td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine sur lequel vous envisagez de déployer vos noeuds worker. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques sur un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de la zone de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-type`.</td>
-     </tr>
-     <tr>
-     <td><code><em>private-vlan</em></code></td>
-     <td>Remplacez <code><em>&lt;private_VLAN&gt;</em></code> par l'ID du réseau local virtuel privé que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> et recherchez les routeurs VLAN commençant par <code>bcr</code> (routeur de back-end).</td>
-     </tr>
-     <tr>
-     <td><code><em>public-vlan</em></code></td>
-     <td>Remplacez <code><em>&lt;public_VLAN&gt;</em></code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> et recherchez les routeurs VLAN commençant par <code>fcr</code> (routeur de front-end).</td>
-     </tr>
-     <tr>
-     <td><code><em>hardware</em></code></td>
-     <td>Pour les types de machine virtuelle : niveau d'isolement de votre noeud worker. Utilisez un cluster dédié si vous désirez que toutes les ressources physiques vous soient dédiées exclusivement ou un cluster partagé pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est <code>shared</code> (partagé).</td>
-     </tr>
-     <tr>
-     <td><code><em>workerNum</em></code></td>
-     <td>Remplacez <code><em>&lt;number_workers&gt;</em></code> par le nombre de noeuds worker que vous souhaitez déployer.</td>
-     </tr>
-     <tr>
-      <td><code><em>kube-version</em></code></td>
-      <td>Version Kubernetes du noeud du maître cluster. Cette valeur est facultative. Lorsque la version n'est pas spécifiée, le cluster est créé avec la valeur par défaut des versions Kubernetes prises en charge. Pour voir les versions disponibles, exécutez la commande <code>ibmcloud ks kube-versions</code>.
-</td></tr>
-      <tr>
-      <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Par défaut, les noeuds worker disposent du chiffrement de disque avec l'algorithme AES 256 bits. [En savoir plus](/docs/containers?topic=containers-security#encrypted_disk). Pour désactiver le chiffrement, incluez cette option en lui attribuant la valeur <code>false</code>.</td></tr>
-      <tr>
-      <td><code>trusted: <em>true</em></code></td>
-      <td>**Serveur bare metal uniquement** : activez la fonction [Calcul sécurisé](/docs/containers?topic=containers-security#trusted_compute) pour vérifier que vos noeuds worker bare metal ne font pas l'objet de falsification. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver par la suite.</td></tr>
-     </tbody></table>
-    </p></dd>
+</dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>Niveau d'isolation du matériel pour votre noeud worker. Utilisez dedicated pour que toutes les ressources physiques vous soient dédiées exclusivement ou shared pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est shared. Cette valeur est facultative pour les clusters standard de machine virtuelle et n'est pas disponible pour les clusters gratuits. Pour les types de machine bare metal, indiquez `dedicated`.</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>Zone dans laquelle vous désirez créer le cluster. Les zones disponibles dépendent de la région {{site.data.keyword.Bluemix_notm}} à laquelle vous êtes connecté. Pour des performances optimales, sélectionnez la région physiquement la plus proche. Cette valeur est obligatoire pour les clusters standard et facultative pour les clusters gratuits.
+<dd>Cette valeur est obligatoire pour les clusters standard. Des clusters gratuits peuvent être créés dans la région que vous avez ciblée à l'aide de la commande <code>ibmcloud ks region-set</code>, mais vous ne pouvez pas spécifier la zone. 
 
 <p>Passez en revue les [zones disponibles](/docs/containers?topic=containers-regions-and-zones#zones).</p>
 
@@ -1228,13 +1312,13 @@ trusted: <em>true</em>
 <p>Pour déterminer si vous disposez déjà d'un VLAN public pour une zone spécifique ou afin d'identifier le nom d'un VLAN public existant, exécutez la commande <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>.</p></dd>
 
 <dt><code>--private-only </code></dt>
-  <dd>Utilisez cette option pour empêcher la création d'un VLAN public. Cette valeur est obligatoire uniquement si vous spécifiez l'indicateur `--private-vlan` sans inclure l'indicateur `--public-vlan`.  <p class="note">Si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez activer le noeud final du service privé ou configurer un périphérique de passerelle. Pour plus d'informations, voir [Clusters privés](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
+  <dd>Utilisez cette option pour empêcher la création d'un VLAN public. Cette valeur est obligatoire uniquement si vous spécifiez l'indicateur `--private-vlan` sans inclure l'indicateur `--public-vlan`. <p class="note">Si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez activer le noeud final du service privé ou configurer un périphérique de passerelle. Pour plus d'informations, voir [Clusters privés](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
 
 <dt><code>--private-service-endpoint</code></dt>
-  <dd>**Clusters standard exécutant Kubernetes version 1.11 ou ultérieure dans des [comptes avec la fonction VRF activée](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)** : activez le [noeud final de service privé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) pour que le maître Kubernetes et les noeuds worker communiquent via le VLAN privé. De plus, vous pouvez choisir d'activer le noeud final de service public en utilisant l'indicateur `--public-service-endpoint` pour accéder à votre cluster sur Internet. Si vous activez uniquement le noeud final de service privé, vous devez être connecté au VLAN privé pour communiquer avec le maître Kubernetes. Après avoir activé le noeud final de service privé, vous ne pourrez plus le désactiver par la suite.<br><br>Après avoir créé le cluster, vous pouvez obtenir le noeud final en exécutant la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.</dd>
+  <dd>**Clusters standard exécutant Kubernetes version 1.11 ou ultérieure dans des [comptes avec la fonction VRF activée](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)** : activez le [noeud final de service privé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) pour que le maître Kubernetes et les noeuds worker communiquent via le VLAN privé. De plus, vous pouvez choisir d'activer le noeud final de service public en utilisant l'indicateur `--public-service-endpoint` pour accéder à votre cluster sur Internet. Si vous activez uniquement le noeud final de service privé, vous devez être connecté au VLAN privé pour communiquer avec le maître Kubernetes. Après avoir activé le noeud final de service privé, vous ne pourrez plus le désactiver par la suite.<br><br>Après avoir créé le cluster, vous pouvez obtenir le noeud final en exécutant la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.</dd>
 
 <dt><code>--public-service-endpoint</code></dt>
-  <dd>**Clusters standard exécutant Kubernetes version 1.11 ou ultérieure** : activez le [noeud final de service public](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public) pour que le maître Kubernetes soit accessible via le réseau public, par exemple pour exécuter des commandes `kubectl` depuis votre terminal. Si vous disposez d'un [compte avec la fonction VRF activée](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) et que vous incluez également l'indicateur `--private-service-endpoint`, la [communication entre le maître et les noeuds worker](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both) s'effectue sur le réseau privé. Vous pouvez désactiver par la suite le noeud final de service public si vous souhaitez un cluster privé uniquement.<br><br>Après avoir créé le cluster, vous pouvez obtenir le noeud final en exécutant la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.</dd>
+  <dd>**Clusters standard exécutant Kubernetes version 1.11 ou ultérieure** : activez le [noeud final de service public](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public) pour que le maître Kubernetes soit accessible via le réseau public, par exemple pour exécuter des commandes `kubectl` depuis votre terminal. Si vous disposez d'un [compte avec la fonction VRF activée](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) et que vous incluez également l'indicateur `--private-service-endpoint`, la [communication entre le maître et les noeuds worker](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both) s'effectue sur le réseau privé. Vous pouvez désactiver par la suite le noeud final de service public si vous souhaitez un cluster privé uniquement.<br><br>Après avoir créé le cluster, vous pouvez obtenir le noeud final en exécutant la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>Nombre de noeuds worker que vous désirez déployer dans votre cluster. Si vous ne spécifiez pas cette option, un cluster avec 1 noeud worker est créé. Cette valeur est facultative pour les clusters standard et n'est pas disponible pour les clusters gratuits.
@@ -1254,34 +1338,27 @@ trusted: <em>true</em>
 
 **Exemples** :
 
-  **Création d'un cluster gratuit** : indiquez le nom du cluster uniquement. Tout le reste est défini avec des valeurs par défaut. Un cluster gratuit est supprimé automatiquement au bout de 30 jours. Vous ne pouvez disposer que d'un cluster gratuit à la fois. Pour tirer parti de toutes les fonctions de Kubernetes, créez un cluster standard.
+**Création d'un cluster gratuit** : indiquez le nom du cluster uniquement. Tout le reste est défini avec des valeurs par défaut. Un cluster gratuit est supprimé automatiquement au bout de 30 jours. Vous ne pouvez disposer que d'un cluster gratuit à la fois. Pour tirer parti de toutes les fonctions de Kubernetes, créez un cluster standard.
 
-  ```
-  ibmcloud ks cluster-create --name my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --name my_cluster
+```
+{: pre}
 
-  **Création de votre premier cluster standard** : le premier cluster standard créé dans une zone génère également un VLAN privé. Par conséquent, n'incluez pas l'indicateur `--public-vlan`.
-  {: #example_cluster_create}
+**Création de votre premier cluster standard** : le premier cluster standard créé dans une zone génère également un VLAN privé. Par conséquent, n'incluez pas l'indicateur `--public-vlan`.
+{: #example_cluster_create}
 
-  ```
-  ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+```
+{: pre}
 
-  **Création des clusters standard suivants** : si vous avez déjà créé un cluster standard auparavant dans cette zone ou créé un VLAN public dans l'infrastructure IBM Cloud (SoftLayer), indiquez ce VLAN public avec l'indicateur `--public-vlan`. Pour déterminer si vous disposez déjà d'un VLAN public pour une zone spécifique ou pour identifier le nom d'un VLAN public existant, exécutez la commande `ibmcloud ks vlans <zone>`.
+**Création des clusters standard suivants** : si vous avez déjà créé un cluster standard auparavant dans cette zone ou créé un VLAN public dans l'infrastructure IBM Cloud (SoftLayer), indiquez ce VLAN public avec l'indicateur `--public-vlan`. Pour déterminer si vous disposez déjà d'un VLAN public pour une zone spécifique ou pour identifier le nom d'un VLAN public existant, exécutez la commande `ibmcloud ks vlans <zone>`.
 
-  ```
-  ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
-
-  **Création d'un cluster dans un environnement {{site.data.keyword.Bluemix_dedicated_notm}}** :
-
-  ```
-  ibmcloud ks cluster-create --machine-type machine-type --workers number --name cluster_name
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+```
+{: pre}
 
 ### ibmcloud ks cluster-feature-disable public-service-endpoint
 {: #cs_cluster_feature_disable}
@@ -1338,10 +1415,10 @@ ibmcloud ks cluster-feature-enable private-service-endpoint --cluster CLUSTER [-
 
 Pour exécuter cette commande :
 1. Activez [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) dans votre compte d'infrastructure IBM Cloud (SoftLayer).
-2. [Activez votre compte {{site.data.keyword.Bluemix_notm}} pour utiliser des noeuds finaux de service](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
+2. [Activez votre compte {{site.data.keyword.Bluemix_notm}} pour utiliser des noeuds finaux de service](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
 3. Exécutez la commande `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>`.
 4. Suivez les invites dans l'interface de ligne de commande pour actualiser le serveur d'API du maître Kubernetes.
-5. [Rechargez tous les noeuds worker](#cs_worker_reload) dans votre cluster pour récupérer la configuration de noeud final privé. 
+5. [Rechargez tous les noeuds worker](#cs_worker_reload) dans votre cluster pour récupérer la configuration de noeud final privé.
 
 <strong>Droits minimum requis</strong> : rôle de plateforme **Administrateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
@@ -1372,7 +1449,7 @@ ibmcloud ks cluster-feature-enable public-service-endpoint --cluster CLUSTER [-s
 ```
 {: pre}
 
-Après avoir exécuté cette commande, vous devez actualiser le serveur d'API pour utiliser le noeud final de service en suivant les invites dans l'interface de ligne de commande.
+Après avoir exécuté cette commande, vous devez actualiser le serveur d'API pour utiliser le noeud final de service en suivant l'invite dans l'interface de ligne de commande.
 
 <strong>Droits minimum requis</strong> : rôle de plateforme **Administrateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
@@ -1423,36 +1500,6 @@ Pour vérifier si le type de machine bare metal prend en charge la fonction de c
 
 ```
 ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
-```
-{: pre}
-
-### ibmcloud ks cluster-feature-ls
-{: #cs_cluster_feature_ls}
-
-Affiche la liste des fonctions activées ou désactivées dans un cluster.
-{: shortdesc}
-
-```
-ibmcloud ks cluster-feature-ls --cluster CLUSTER [-s]
-```
-{: pre}
-
-<strong>Droits minimum requis</strong> : rôle de plateforme **Afficheur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
-
-<strong>Options de commande</strong> :
-
-<dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
-
-  <dt><code>-s</code></dt>
-   <dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
-</dl>
-
-**Exemple** :
-
-```
-ibmcloud ks cluster-feature-ls --cluster my_cluster
 ```
 {: pre}
 
@@ -1693,8 +1740,7 @@ ibmcloud ks clusters [--json] [-s]
 
 <strong>Options de commande</strong> :
 
-  <dl>
-  <dt><code>--json</code></dt>
+  <dl><dt><code>--json</code></dt>
   <dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
 
   <dt><code>-s</code></dt>
@@ -1917,7 +1963,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks key-protect-enable
 {: #cs_key_protect}
 
-Chiffrez vos valeurs confidentielles (secrets) Kubernetes à l'aide d'[{{site.data.keyword.keymanagementservicefull}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) comme [fournisseur KMS (Key Management Service) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) dans votre cluster.
+Chiffrez vos valeurs confidentielles (secrets) Kubernetes à l'aide d'[{{site.data.keyword.keymanagementservicefull}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) comme [fournisseur KMS (Key Management Service) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) dans votre cluster. Pour faire pivoter une clé dans un cluster avec un chiffrement de clé existant, relancez l'exécution de cette commande avec un nouvel ID de clé racine.
 {: shortdesc}
 
 ```
@@ -1925,7 +1971,7 @@ ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url EN
 ```
 {: pre}
 
-Si vous supprimez la clé racine (root) dans votre instance {{site.data.keyword.keymanagementserviceshort}}, vous ne pourrez plus accéder ou supprimer les données des valeurs confidentielles dans votre cluster.
+Ne supprimez pas les clés racine dans votre instance {{site.data.keyword.keymanagementserviceshort}}. Ne supprimez pas les clés même si vous effectuez une rotation pour utiliser une nouvelle clé. Vous ne pouvez pas accéder ou retirer les données dans etcd ou les données des secrets dans votre cluster si vous supprimez une clé racine.
 {: important}
 
 <strong>Droits minimum requis</strong> : rôle de plateforme **Administrateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
@@ -2011,8 +2057,8 @@ ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
 ```
 {: pre}
 
-<p class="important">Les adresses IP publiques portables sont facturées au mois. Si vous retirez des adresses IP publiques portables après la mise en place de votre cluster, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement.</br>
-</br>Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containerlong_notm}}.</br>
+<p class="important">Les adresses IP publiques portables sont facturées au mois. Si vous retirez des adresses IP publiques portables après la mise en place de votre cluster, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement. </br>
+</br>Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins en dehors d'{{site.data.keyword.containerlong_notm}}.</br>
 </br>Pour activer la communication entre des noeuds worker qui se trouvent dans différents sous-réseaux d'un même VLAN, vous devez [activer le routage entre les sous-réseaux sur le même VLAN](/docs/containers?topic=containers-subnets#subnet-routing).</p>
 
 <strong>Droits minimum requis</strong> : rôle de plateforme **Opérateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
@@ -2050,8 +2096,8 @@ ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 ```
 {: pre}
 
-<p class="important">Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containerlong_notm}}.</br>
-</br>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.</p>
+<p class="important">Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins en dehors d'{{site.data.keyword.containerlong_notm}}.</br>
+</br>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.</p>
 
 <strong>Droits minimum requis</strong> : rôle de plateforme **Opérateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
@@ -2092,8 +2138,8 @@ ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR 
 
 Ce sous-réseau privé n'est pas celui qui est fourni par l'infrastructure IBM Cloud (SoftLayer). De ce fait, vous devez configurer tout routage de trafic entrant et sortant pour le sous-réseau. Pour ajouter un sous-réseau d'infrastructure IBM Cloud (SoftLayer), utilisez la [commande](#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add`.
 
-<p class="important">Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containerlong_notm}}.</br>
-</br>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.</p>
+<p class="important">Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins en dehors d'{{site.data.keyword.containerlong_notm}}.</br>
+</br>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.</p>
 
 <strong>Droits minimum requis</strong> : rôle de plateforme **Opérateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
@@ -2281,7 +2327,7 @@ Pour rester dans les [limites de débit](https://cloud.ibm.com/apidocs/certifica
    <dd>Met à jour le certificat d'une valeur confidentielle d'équilibreur de charge d'application (ALB) dans un cluster. Cette valeur est facultative.</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-   <dd>Nom de la valeur confidentielle ALB. Cette valeur est obligatoire.</dd>
+   <dd>Spécifiez un nom pour le secret ALB lorsqu'il est créé dans le cluster. Cette valeur est obligatoire. Vérifiez que vous n'avez pas créé une valeur confidentielle ayant le même nom que la valeur confidentielle d'Ingress fournie par IBM. Vous pouvez obtenir le nom du secret Ingress fourni par IBM en exécutant la commande <code>ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress</code>.</dd>
 
    <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
    <dd>CRN du certificat. Cette valeur est obligatoire.</dd>
@@ -2466,13 +2512,10 @@ ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disab
    <dd>Incluez cet indicateur pour désactiver le déploiement de l'équilibreur de charge ALB fourni par IBM. Il ne supprime pas l'enregistrement DNS du sous-domaine Ingress fourni par IBM ou le service d'équilibreur de charge utilisé pour exposer le contrôleur Ingress.</dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
-   <dd>
-
-   <ul>
-    <li>Ce paramètre n'est disponible que pour activer un équilibreur de charge d'application (ALB) privé</li>
-    <li>L'ALB privé est déployé avec une adresse IP à partir d'un sous-réseau privé fourni par l'utilisateur. Si aucune adresse IP n'est fournie, l'ALB est déployé avec une adresse IP privée issue du sous-réseau privé portable qui est mis à disposition automatiquement lorsque vous avez créé le cluster.</li>
-   </ul>
-   </dd>
+   <dd><ul>
+     <li>Ce paramètre n'est disponible que pour activer un équilibreur de charge d'application (ALB) privé</li>
+     <li>L'ALB privé est déployé avec une adresse IP à partir d'un sous-réseau privé fourni par l'utilisateur. Si aucune adresse IP n'est fournie, l'ALB est déployé avec une adresse IP privée issue du sous-réseau privé portable qui est mis à disposition automatiquement lorsque vous avez créé le cluster.</li>
+    </ul></dd>
 
    <dt><code>-s</code></dt>
    <dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
@@ -2651,7 +2694,7 @@ ibmcloud ks albs --cluster CLUSTER [--json] [-s]
 ## Commandes de l'infrastructure
 {: #infrastructure_commands}
 
-### ibmcloud ks
+### ibmcloud ks credential-get
 {: #cs_credential_get}
 
 Si vous configurez votre compte IBM Cloud pour accéder au portefeuille de l'infrastructure IBM Cloud avec d'autres données d'identification, obtenez le nom d'utilisateur de l'infrastructure pour la région et le groupe de ressources que vous ciblez actuellement.
@@ -2722,14 +2765,13 @@ Avant d'utiliser cette commande, assurez-vous que l'utilisateur dont les donnée
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
    <dd>Clé d'API du compte d'infrastructure IBM Cloud (SoftLayer). Cette valeur est obligatoire. Pour afficher ou générer une clé d'API d'infrastructure :
-   <li>Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com).
-   <li>Dans la barre de menu, sélectionnez **Gérer > Accès (IAM)**.
-   <li>Sélectionnez l'onglet **Utilisateurs** et cliquez sur votre nom d'utilisateur.
-   <li>Dans le panneau **Clés d'API**, recherchez l'entrée **Clé d'API d'infrastructure classique** et cliquez sur le **menu Action** ![Icône de menu Action](../icons/action-menu-icon.svg "Icône de menu Action") **> Détails**. Si vous ne voyez pas de clé d'API d'infrastructure classique, générez-en une en cliquant sur **Créer une clé d'API {{site.data.keyword.Bluemix_notm}}**.
-   <li>Copiez le nom d'utilisateur de l'API.
+  <li>Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com).
+  <li>Dans la barre de menu, sélectionnez **Gérer > Accès (IAM)**.
+  <li>Sélectionnez l'onglet **Utilisateurs** et cliquez sur votre nom d'utilisateur.
+  <li>Dans le panneau **Clés d'API**, recherchez l'entrée **Clé d'API d'infrastructure classique** et cliquez sur le **menu Action** ![Icône de menu Action](../icons/action-menu-icon.svg "Icône de menu Action") **> Détails**. Si vous ne voyez pas de clé d'API d'infrastructure classique, générez-en une en cliquant sur **Créer une clé d'API {{site.data.keyword.Bluemix_notm}}**.
+  <li>Copiez le nom d'utilisateur de l'API.
   </ol>
   </dd>
-
   <dt><code>-s</code></dt>
   <dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
 
@@ -2749,14 +2791,14 @@ Avant d'utiliser cette commande, assurez-vous que l'utilisateur dont les donnée
 Supprimez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) dans une région {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-```
-ibmcloud ks credential-unset
-```
-{: pre}
-
 Après avoir supprimé les données d'identification, la [clé d'API {{site.data.keyword.Bluemix_notm}} IAM](#cs_api_key_info) est utilisée pour commander des ressources dans l'infrastructure IBM Cloud (SoftLayer).
 
 <strong>Droits minimum requis</strong> : rôle de plateforme **Administrateur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+```
+ibmcloud ks credential-unset [-s]
+```
+{: pre}
 
 <strong>Options de commande</strong> :
 
@@ -3530,13 +3572,429 @@ ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
 <br />
 
 
+## Commandes d'équilibreur de charge de réseau (`nlb-dns`)
+{: #nlb-dns}
+
+Utilisez ce groupe de commandes pour créer et gérer des noms d'hôte pour les adresses IP et les moniteurs de bilan de santé d'équilibreur de charge de réseau (NLB). Pour plus d'informations, voir [Enregistrement d'un nom d'hôte d'équilibreur de charge](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
+{: shortdesc}
+
+### ibmcloud ks nlb-dns-add
+{: #cs_nlb-dns-add}
+
+Ajoutez une adresse IP d'équilibreur de charge de réseau (NLB) à un nom d'hôte existant que vous avez créé à l'aide de la [commande `ibmcloud ks nlb-dns-create`](#cs_nlb-dns-create).
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-add --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+Par exemple, dans un cluster à zones multiples, vous pouvez créer un équilibreur de charge de réseau dans chaque zone pour exposer une application. Vous enregistrez une adresse IP NLB dans une zone avec un nom d'hôte en exécutant la commande `ibmcloud ks nlb-dns-create`, par conséquent vous pouvez désormais ajouter les adresses IP NLB à partir des autres zones sur ce nom d'hôte existant. Lorsqu'un utilisateur accède à votre nom d'hôte d'application, le client accède à l'une de ces adresses IP de manière aléatoire et la demande est envoyée à cet équilibreur de charge de réseau. Notez que vous devez exécuter la commande suivante pour chaque adresse IP que vous souhaitez ajouter. 
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>Adresse IP NLB que vous souhaitez ajouter au nom d'hôte. Pour voir vos adresses IP NLB, exécutez la commande <code>kubectl get svc</code>.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>Nom d'hôte auquel vous souhaitez ajouter des adresses IP. Pour voir les noms d'hôte existants, exécutez la commande <code>ibmcloud ks nlb-dnss</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-create
+{: #cs_nlb-dns-create}
+
+Exposez au public votre application en créant un nom d'hôte DNS afin d'enregistrer une adresse IP d'équilibreur de charge de réseau (NLB).
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-create --cluster CLUSTER --ip IP [--json] [-s]
+```
+{: pre}
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>Adresse IP d'équilibreur de charge de réseau que vous souhaitez enregistrer. Pour voir vos adresses IP NLB, exécutez la commande <code>kubectl get svc</code>. Notez que vous pouvez initialement créer le nom d'hôte avec une seule adresse IP. Si vous avez des équilibreurs de charge de réseau dans chaque zone d'un cluster à zones multiples qui exposent une application, vous pouvez ajouter les adresses IP des autres équilibreurs de charge de réseau au nom d'hôte en exécutant la commande [`ibmcloud ks nlb-dns-add`](#cs_nlb-dns-add).</dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dns-create --cluster mycluster --ip 1.1.1.1
+```
+{: pre}
+
+### ibmcloud ks nlb-dnss
+{: #cs_nlb-dns-ls}
+
+Répertorier les noms d'hôte et les adresses IP d'équilibreur de charge de réseau qui sont enregistrés dans un cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dnss --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dnss --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-rm
+{: #cs_nlb-dns-rm}
+
+Retirer une adresse IP d'équilibreur de charge de réseau d'un nom d'hôte. Si vous retirez toutes les adresses IP d'un nom d'hôte, le nom d'hôte existe toujours mais aucune adresse IP ne lui est associée. Notez que vous devez exécuter cette commande pour chaque adresse IP que vous souhaitez retirer.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>Adresse IP NLB que vous souhaitez retirer. Pour voir vos adresses IP NLB, exécutez la commande <code>kubectl get svc</code>.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>Nom d'hôte dont vous souhaitez retirer une adresse IP. Pour voir les noms d'hôte existants, exécutez la commande <code>ibmcloud ks nlb-dnss</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-monitor
+{: #cs_nlb-dns-monitor}
+
+Créer, modifier et afficher les moniteurs de diagnostic d'intégrité pour les noms d'hôte d'équilibreur de charge de réseau dans un cluster. Cette commande doit être associée à l'une des sous-commandes suivantes.
+{: shortdesc}
+
+#### ibmcloud ks nlb-dns-monitor-configure
+{: #cs_nlb-dns-monitor-configure}
+
+Configurer et le cas échéant activer un moniteur de diagnostic d'intégrité pour un nom d'hôte NLB existant dans un cluster. Lorsque vous activez un moniteur pour votre nom d'hôte, le moniteur réalise un diagnostic d'intégrité de l'adresse IP NLB dans chaque zone et tient à jour les résultats de recherche DNS en fonction de ces diagnostics d'intégrité.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster CLUSTER --nlb-host HOST NAME [--enable] [--desc DESCRIPTION] [--type TYPE] [--method METHOD] [--path PATH] [--timeout TIMEOUT] [--retries RETRIES] [--interval INTERVAL] [--port PORT] [--header HEADER] [--expected-body BODY STRING] [--expected-codes HTTP CODES] [--follows-redirects TRUE] [--allows-insecure TRUE] [--json] [-s]
+```
+{: pre}
+
+Vous pouvez utiliser cette commande pour créer et activer un nouveau moniteur de diagnostic d'intégrité ou pour mettre à jour les paramètres d'un moniteur de diagnostic d'intégrité existant. Pour créer un nouveau moniteur, ajoutez l'option `--enable` et les options pour tous les paramètres que vous souhaitez configurer. Pour mettre à jour un moniteur existant, ajoutez uniquement les options des paramètres que vous souhaitez modifier. 
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster où le nom d'hôte est enregistré. </dd>
+
+<dt><code>--nlb-host <em>HOST NAME</em></code></dt>
+<dd>Nom d'hôte pour lequel configurer un moniteur de diagnostic d'intégrité. Pour répertorier des noms d'hôte, exécutez la commande <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--enable</code></dt>
+<dd>Ajoutez cette option afin de créer et d'activer un nouveau moniteur de diagnostic d'intégrité pour un nom d'hôte. </dd>
+
+<dt><code>--description <em>DESCRIPTION</em></code></dt>
+<dd>Description du moniteur de diagnostic d'intégrité. </dd>
+
+<dt><code>--type <em>TYPE</em></code></dt>
+<dd>Protocole à utiliser pour le diagnostic d'intégrité : <code>HTTP</code>, <code>HTTPS</code> ou <code>TCP</code>. Valeur par défaut : <code>HTTP</code></dd>
+
+<dt><code>--method <em>METHOD</em></code></dt>
+<dd>Méthode à utiliser pour le diagnostic d'intégrité. Valeur par défaut pour <code>type</code> <code>HTTP</code> et <code>HTTPS</code> : <code>GET</code>. Valeur par défaut pour  <code>type</code> <code>TCP</code> : <code>connection_established</code>.</dd>
+
+<dt><code>--path <em>PATH</em></code></dt>
+<dd>Lorsque <code>type</code> a pour valeur <code>HTTPS</code>, chemin de noeud final sur lequel doit porter le diagnostic d'intégrité. Valeur par défaut : <code>/</code></dd>
+
+<dt><code>--timeout <em>TIMEOUT</em></code></dt>
+<dd>Délai d'attente, en secondes avant que l'adresse IP soit considérée comme défectueuse. Valeur par défaut : <code>5</code></dd>
+
+<dt><code>--retries <em>RETRIES</em></code></dt>
+<dd>Lorsqu'un dépassement de délai d'attente se produit, nombre de tentatives avant que l'adresse IP soit considérée comme défectueuse. Les nouvelles tentatives sont effectuées immédiatement. Valeur par défaut : <code>2</code></dd>
+
+<dt><code>--interval <em>INTERVAL</em></code></dt>
+<dd>Intervalle, en secondes, entre chaque diagnostic d'intégrité. Des intervalles courts peuvent améliorer les temps de reprise, mais augmenter la charge sur les adresses IP. Valeur par défaut : <code>60</code></dd>
+
+<dt><code>--port <em>PORT</em></code></dt>
+<dd>Numéro de port auquel établir une connexion pour le diagnostic d'intégrité. Lorsque <code>type</code> a pour valeur <code>TCP</code>, ce paramètre est obligatoire. Lorsque <code>type</code> a pour valeur <code>HTTP</code> ou <code>HTTPS</code>, définissez le port uniquement si vous utilisez un port autre que 80 pour HTTP ou 443 pour HTTPS. Valeur par défaut pour TCP : <code>0</code>. Valeur par défaut pour HTTP : <code>80</code>. Valeur par défaut pour HTTPS : <code>443</code>.</dd>
+
+<dt><code>--header <em>HEADER</em></code></dt>
+<dd>Lorsque <code>type</code> a pour valeur <code>HTTPS</code> ou <code>HTTPS</code>, en-têtes de demande HTTP à envoyer dans le diagnostic d'intégrité, par exemple, un en-tête d'hôte. L'en-tête User-Agent ne peut pas être remplacé. </dd>
+
+<dt><code>--expected-body <em>BODY STRING</em></code></dt>
+<dd>Lorsque <code>type</code> a pour valeur <code>HTTP</code> ou <code>HTTPS</code>, sous-chaîne non sensible à la casse que le diagnostic d'intégrité recherche dans le corps de la réponse. Si chaîne n'est pas trouvée, l'adresse IP est considérée comme défectueuse. </dd>
+
+<dt><code>--expected-codes <em>HTTP CODES</em></code></dt>
+<dd>Lorsque <code>type</code> a pour valeur <code>HTTP</code> ou <code>HTTPS</code>, codes HTTP que le diagnostic d'intégrité recherche dans la réponse. Si le code HTTP est introuvable, l'adresse IP est considérée comme défectueuse. Valeur par défaut : <code>2xx</code></dd>
+
+<dt><code>--allows-insecure <em>TRUE</em></code></dt>
+<dd>Lorsque <code>type</code> a pour valeur <code>HTTP</code> ou <code>HTTPS</code>, affectez la valeur <code>true</code> pour ne pas valider le certificat.</dd>
+
+<dt><code>--follows-redirects <em>TRUE</em></code></dt>
+<dd>Lorsque <code>type</code> a pour valeur <code>HTTP</code> ou <code>HTTPS</code>, affectez la valeur <code>true</code> pour suivre les éventuelles redirections qui sont renvoyées par l'adresse IP. </dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-get
+{: #cs_nlb-dns-monitor-get}
+
+Afficher les paramètres d'un moniteur de diagnostic d'intégrité existant.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>Nom d'hôte sur lequel le moniteur effectue un diagnostic d'intégrité. Pour répertorier des noms d'hôte, exécutez la commande <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-disable
+{: #cs_nlb-dns-monitor-disable}
+
+Désactiver un moniteur de diagnostic d'intégrité existant pour un nom d'hôte dans un cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>Nom d'hôte sur lequel le moniteur effectue un diagnostic d'intégrité. Pour répertorier des noms d'hôte, exécutez la commande <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-enable
+{: #cs_nlb-dns-monitor-enable}
+
+Activer un moniteur de diagnostic d'intégrité que vous avez configuré.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+Notez que la première fois que vous créez un moniteur de diagnostic d'intégrité, vous devez le configurer et l'activer à l'aide de la commande `ibmcloud ks nlb-dns-monitor-configure`. Utilisez la commande `ibmcloud ks nlb-dns-monitor-enable` uniquement pour activer un moniteur que vous avez configuré mais que vous n'avez pas encore activé, ou pour réactiver un moniteur que vous avez préalablement désactivé. 
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>Nom d'hôte sur lequel le moniteur effectue un diagnostic d'intégrité. Pour répertorier des noms d'hôte, exécutez la commande <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-ls
+{: #cs_nlb-dns-monitor-ls}
+
+Répertorier les paramètres de moniteur de diagnostic d'intégrité pour chaque nom d'hôte NLB dans un cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster mycluster
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-status
+{: #cs_nlb-dns-monitor-status}
+
+Répertorier le statut de diagnostic d'intégrité pour les adresses IP derrière les noms d'hôte NLB dans un cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
+
+**Options de commande** :
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+<dt><code>-- <em></em></code></dt>
+<dd>Ajoutez cette option afin d'afficher le statut pour un seul nom d'hôte. Pour répertorier des noms d'hôte, exécutez la commande <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
+</dl>
+
+**Exemple** :
+```
+ibmcloud ks nlb-dns-monitor-status --cluster mycluster
+```
+{: pre}
+
+<br />
+
+
 ## Commandes de région
 {: #region_commands}
+
+Utilisez ce groupe de commandes pour afficher les emplacements disponibles, afficher la région ciblée et définir la région ciblée.
+{: shortdesc}
 
 ### ibmcloud ks region
 {: #cs_region}
 
-Identifiez la région {{site.data.keyword.containerlong_notm}} où vous êtes actuellement situé. Vous pouvez créer et gérer des clusters spécifiques à la région. Utilisez la commande `ibmcloud ks region-set` pour changer de région.
+Identifiez la région {{site.data.keyword.containerlong_notm}} actuellement ciblée. Vous pouvez créer et gérer des clusters spécifiques à la région. Utilisez la commande `ibmcloud ks region-set` pour changer de région.
 {: shortdesc}
 
 ```
@@ -3552,14 +4010,14 @@ ibmcloud ks region
 Définissez la région pour {{site.data.keyword.containerlong_notm}}. Vous pouvez créer et gérer des clusters spécifiques à la région, et aussi désirer disposer de clusters dans plusieurs régions en vue d'une haute disponibilité.
 {: shortdesc}
 
+Par exemple, vous pourriez vous connecter à {{site.data.keyword.Bluemix_notm}} dans la région Sud des Etats-Unis et y créer un cluster. Vous pourriez ensuite utiliser la commande `ibmcloud ks region-set eu-central` pour cibler la région Europe centrale et y créer un autre cluster. Enfin, vous pourriez utiliser la commande `ibmcloud ks region-set us-south` pour revenir à la région Sud des Etats-Unis et gérer votre cluster dans cette région.
+
+<strong>Droits minimum requis</strong> : aucun
+
 ```
 ibmcloud ks region-set [--region REGION]
 ```
 {: pre}
-
-Par exemple, vous pourriez vous connecter à {{site.data.keyword.Bluemix_notm}} dans la région Sud des Etats-Unis et y créer un cluster. Vous pourriez ensuite utiliser la commande `ibmcloud ks region-set eu-central` pour cibler la région Europe centrale et y créer un autre cluster. Enfin, vous pourriez utiliser la commande `ibmcloud ks region-set us-south` pour revenir à la région Sud des Etats-Unis et gérer votre cluster dans cette région.
-
-<strong>Droits minimum requis</strong> : aucun
 
 **Options de commande** :
 
@@ -3635,8 +4093,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
 
 <strong>Options de commande</strong> :
 
-   <dl>
-   <dt><code>--region-only</code></dt>
+   <dl><dt><code>--region-only</code></dt>
    <dd>Affiche uniquement la liste des zones multiples qui se trouvent dans la région à laquelle vous êtes connecté. Cette valeur est facultative.</dd>
 
    <dt><code>--json</code></dt>
@@ -3646,12 +4103,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
    <dd>Ne pas afficher le message du jour ni les rappels de mise à jour. Cette valeur est facultative.</dd>
    </dl>
 
-**Exemple** :
-
-  ```
-  ibmcloud ks zones
-  ```
-  {: pre}
+**Droits minimum** : aucun
 
 <br />
 
@@ -3711,7 +4163,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine sur lequel vous envisagez de déployer vos noeuds worker. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques sur un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de la zone de déploiement du cluster. Pour plus d'informations, voir la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types`. </td>
+<td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine sur lequel vous envisagez de déployer vos noeuds worker. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques sur un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de la zone de déploiement du cluster. Pour plus d'informations, voir la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types`.</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
@@ -3760,14 +4212,7 @@ diskEncryption: <em>false</em></code></pre>
 **Exemples** :
 
   ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --hardware shared
-  ```
-  {: pre}
-
-  Exemple pour {{site.data.keyword.Bluemix_dedicated_notm}} :
-
-  ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --machine-type b2c.4x16
+  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --hardware shared
   ```
   {: pre}
 
@@ -3827,7 +4272,7 @@ ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [-
 ### ibmcloud ks worker-reboot
 {: #cs_worker_reboot}
 
-Réamorcez un noeud worker dans un cluster. Lors du réamorçage, l'état de votre noeud worker reste inchangé. Par exemple, vous pouvez recourir à un réamorçage si le statut du noeud worker dans l'infrastructure IBM Cloud (SoftLayer) est `Powered Off` et qu'il vous faut mettre le noeud worker sous tension. Un réamorçage efface les répertoires temporaires mais pas le système de fichiers complet et n'entraîne ps le reformatage des disques.
+Réamorcez un noeud worker dans un cluster. Lors du réamorçage, l'état de votre noeud worker reste inchangé. Par exemple, vous pouvez recourir à un réamorçage si le statut du noeud worker dans l'infrastructure IBM Cloud (SoftLayer) est `Powered Off` et qu'il vous faut mettre le noeud worker sous tension. Un réamorçage efface les répertoires temporaires mais pas le système de fichiers complet et n'entraîne ps le reformatage des disques. L'adresse IP privée et publique du noeud worker reste la même après l'opération de redémarrage.
 {: shortdesc}
 
 ```
@@ -3865,7 +4310,7 @@ Avant de réamorcer votre noeud worker, assurez-vous que les pods sont replanifi
     ```
     {: pre}
     Ce processus peut prendre quelques minutes.
- 5. Réamorcez le noeud worker. Utilisez l'ID du noeud worker renvoyé dans la commande `ibmcloud ks workers <cluster_name_or_ID>`.
+ 5. Réamorcez le noeud worker. Utilisez l'ID du noeud worker renvoyé par la commande `ibmcloud ks workers <cluster_name_or_ID>`.
     ```
     ibmcloud ks worker-reboot --cluster <cluster_name_or_ID> --workers <worker_name_or_ID>
     ```
@@ -3913,7 +4358,7 @@ Avant de réamorcer votre noeud worker, assurez-vous que les pods sont replanifi
 ### ibmcloud ks worker-reload
 {: #cs_worker_reload}
 
-Recharge les configurations pour un noeud worker. Un rechargement peut s'avérer utile en cas de problème sur votre noeud worker, par exemple une dégradation des performances ou une immobilisation dans un mauvais état de santé. Notez que durant le rechargement, la machine de votre noeud worker est mise à jour avec l'image la plus récente et les données sont supprimées si elles ne sont pas [stockées hors du noeud worker](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Recharge les configurations pour un noeud worker. Un rechargement peut s'avérer utile en cas de problème sur votre noeud worker, par exemple une dégradation des performances ou une immobilisation dans un mauvais état de santé. Notez que durant le rechargement, la machine de votre noeud worker est mise à jour avec l'image la plus récente et les données sont supprimées si elles ne sont pas [stockées hors du noeud worker](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). L'adresse IP privée du noeud worker reste la même après l'opération de rechargement.
 {: shortdesc}
 
 ```
@@ -3951,7 +4396,7 @@ Avant de recharger le noeud worker, assurez-vous que les pods sont replanifiés 
     ```
     {: pre}
     Ce processus peut prendre quelques minutes.
- 5. Rechargez le noeud worker. Utilisez l'ID du noeud worker renvoyé dans la commande `ibmcloud ks workers <cluster_name_or_ID>`.
+ 5. Rechargez le noeud worker. Utilisez l'ID du noeud worker renvoyé par la commande `ibmcloud ks workers <cluster_name_or_ID>`.
     ```
     ibmcloud ks worker-reload --cluster <cluster_name_or_ID> --workers <worker_name_or_ID>
     ```
@@ -4029,7 +4474,8 @@ Avant de supprimer le noeud worker, assurez-vous que les pods sont replanifiés 
    ```
    {: pre}
    Ce processus peut prendre quelques minutes.
-5. Supprimez le noeud worker. Utilisez l'ID du noeud worker renvoyé dans la commande `ibmcloud ks workers <cluster_name_or_ID>`.
+5. Supprimez le noeud worker. Utilisez l'ID du noeud worker renvoyé par la commande `ibmcloud ks workers <cluster_name_or_ID>`.
+    
    ```
    ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
    ```
@@ -4069,7 +4515,7 @@ Avant de supprimer le noeud worker, assurez-vous que les pods sont replanifiés 
 ### ibmcloud ks worker-update
 {: #cs_worker_update}
 
-Mettez à jour les noeuds worker pour appliquer les correctifs et mises à jour de sécurité les plus récents sur le système d'exploitation et mettre à jour la version de Kubernetes pour qu'elle corresponde à celle du maître Kubernetes. Vous pouvez mettre à jour la version du maître Kubernetes avec la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update) `ibmcloud ks cluster-update`.
+Mettez à jour les noeuds worker pour appliquer les correctifs et mises à jour de sécurité les plus récents sur le système d'exploitation et mettre à jour la version de Kubernetes pour qu'elle corresponde à celle du maître Kubernetes. Vous pouvez mettre à jour la version du maître Kubernetes avec la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update) `ibmcloud ks cluster-update`. L'adresse IP du noeud worker reste la même après l'opération de mise à jour.
 {: shortdesc}
 
 ```
@@ -4209,7 +4655,7 @@ ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type
 **Exemple** :
 
   ```
-  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
+  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b3c.4x16 --size-per-zone 6
   ```
   {: pre}
 
@@ -4258,9 +4704,9 @@ ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--
   Hardware:           shared
   Zones:              dal10,dal12
   Workers per zone:   3
-  Machine type:       b2c.4x16.encrypted
+  Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.12.6_1512
+  Version:            1.12.7_1512
   ```
   {: screen}
 
@@ -4425,15 +4871,15 @@ ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,
     <dd><p>ID du VLAN privé. Cette valeur est conditionnelle.</p>
     <p>Si vous disposez d'un VLAN privé dans cette zone, cette valeur doit correspondre à l'ID du VLAN privé d'un ou plusieurs noeuds worker dans le cluster. Pour voir les VLAN à votre disposition, exécutez la commande <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés.</p>
     <p>Si vous ne disposez pas de VLAN public ou privé dans cette zone, n'indiquez pas cette option. Un VLAN privé et un VLAN public sont automatiquement créés pour vous la première fois que vous ajoutez une nouvelle zone dans votre pool de noeuds worker.</p>
-    <p>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.</p></dd>
+    <p>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd><p>ID du VLAN public. Cette valeur est obligatoire si vous souhaitez exposer au public des charges de travail sur les noeuds après avoir créé le cluster. Elle doit correspondre à l'ID du VLAN public d'un ou plusieurs noeuds worker dans le cluster pour la zone. Pour voir les VLAN à votre disposition, exécutez la commande <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés.</p>
     <p>Si vous ne disposez pas de VLAN public ou privé dans cette zone, n'indiquez pas cette option. Un VLAN privé et un VLAN public sont automatiquement créés pour vous la première fois que vous ajoutez une nouvelle zone dans votre pool de noeuds worker.</p>
-    <p>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.</p></dd>
+    <p>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.</p></dd>
 
   <dt><code>--private-only </code></dt>
-    <dd>Utilisez cette option pour empêcher la création d'un VLAN public. Cette valeur est obligatoire uniquement si vous spécifiez l'indicateur `--private-vlan` sans inclure l'indicateur `--public-vlan`.<p class="note">Si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez activer le noeud final du service privé ou configurer un périphérique de passerelle. Pour plus d'informations, voir [Clusters privés](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
+    <dd>Utilisez cette option pour empêcher la création d'un VLAN public. Cette valeur est obligatoire uniquement si vous spécifiez l'indicateur `--private-vlan` sans inclure l'indicateur `--public-vlan`. <p class="note">Si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez activer le noeud final du service privé ou configurer un périphérique de passerelle. Pour plus d'informations, voir [Clusters privés](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
 
   <dt><code>--json</code></dt>
     <dd>Imprime le résultat de la commande au format JSON. Cette valeur est facultative.</dd>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -41,7 +41,7 @@ Portworx también viene con características adicionales que puede utilizar para
 {{site.data.keyword.containerlong_notm}} proporciona tipos de nodos trabajadores nativos que están optimizados para el [uso de almacenamiento definido por software (SDS)](/docs/containers?topic=containers-plan_clusters#sds) y que vienen con uno o varios discos locales sin formatear que puede utilizar para la capa de almacenamiento de Portworx. Portworx ofrece el mejor rendimiento cuando se utilizan máquinas de nodo trabajador SDS con una velocidad de red de 10 Gbps.
 
 **¿Qué ocurre si quiero ejecutar Portworx en nodos trabajadores que no son SDS?** </br>
-Puede instalar Portworx en tipos de nodos trabajadores que no sean SDS, pero es posible que no obtenga las ventajas de rendimiento que requiere la app. Los nodos trabajadores que no son SDS pueden ser virtuales o nativos. Si desea utilizar máquinas virtuales, utilice el tipo de nodo trabajador `b2c.16x64` o uno mejor. Las máquinas virtuales con el tipo `b2c.4x16` o con el tipo `u2c.2x4` no proporcionan los recursos necesarios para que Portworx funcione correctamente. Tenga en cuenta que las máquinas virtuales vienen con 1000 Mbps, lo que no es suficiente para conseguir el rendimiento óptimo de Portworx. Las máquinas nativas vienen con suficientes recursos de cálculo y velocidad de red para Portworx, pero debe [añadir almacenamiento en bloque sin formato y sin montar](#create_block_storage) para poder utilizar estas máquinas.
+Puede instalar Portworx en tipos de nodos trabajadores que no sean SDS, pero es posible que no obtenga las ventajas de rendimiento que requiere la app. Los nodos trabajadores que no son SDS pueden ser virtuales o nativos. Si desea utilizar máquinas virtuales, utilice el tipo de nodo trabajador `b2c.16x64` o uno mejor. Las máquinas virtuales con el tipo `b3c.4x16` o con el tipo `u3c.2x4` no proporcionan los recursos necesarios para que Portworx funcione correctamente. Tenga en cuenta que las máquinas virtuales vienen con 1000 Mbps, lo que no es suficiente para conseguir el rendimiento óptimo de Portworx. Las máquinas nativas vienen con suficientes recursos de cálculo y velocidad de red para Portworx, pero debe [añadir almacenamiento en bloque sin formato y sin montar](#create_block_storage) para poder utilizar estas máquinas.
 
 **¿Cómo puedo asegurarme de que mis datos se almacenan con alta disponibilidad?** </br>
 Necesita al menos 3 nodos trabajadores en el clúster de Portworx para que Portworx pueda replicar los datos entre nodos. Al replicar los datos en los nodos trabajadores, Portworx le puede garantizar que la app con estado se puede volver a planificar en otro nodo trabajador en caso de que se produzca una anomalía sin que se pierdan datos. Para obtener una disponibilidad aún más mayor, utilice un [clúster multizona](/docs/containers?topic=containers-plan_clusters#multizone) y duplique los volúmenes entre nodos trabajadores SDS en 3 o más zonas.
@@ -226,12 +226,12 @@ Antes de empezar:
 
 Para instalar Portworx:
 
-1.  [Siga las instrucciones](/docs/containers?topic=containers-integrations#helm) para instalar el cliente Helm en la máquina local e instale el servidor Helm (tiller) con una cuenta de servicio en el clúster.
+1.  [Siga las instrucciones](/docs/containers?topic=containers-helm#public_helm_install) para instalar el cliente Helm en la máquina local e instale el servidor Helm (tiller) con una cuenta de servicio en el clúster.
 
 2.  Verifique que el tiller se ha instalado con una cuenta de servicio.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -385,7 +385,7 @@ Para instalar Portworx:
    stork            3        3        3           0          1s
    stork-scheduler  3        3        3           0          1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                    PROVISIONER                    AGE
    px-sc-repl3-iodb-512blk-snap60-15snaps  kubernetes.io/portworx-volume  1s
    px-sc-repl3-iodb-snap60-15snaps         kubernetes.io/portworx-volume  1s
@@ -439,7 +439,7 @@ Para instalar Portworx:
       ```
       {: screen}
 
-      La instalación se ha realizado correctamente cuando se ven uno o varios pods `portworx`, `stork` y `stork-scheduler`. El número de pods `portworx`, `stork` y `stork-scheduler` es igual al número de nodos de trabajador que se incluyen en el clúster de Portworx. Todos los pods deben estar en un estado **Running**.
+      La instalación se ha realizado correctamente cuando se ven uno o varios pods `portworx`, `stork` y `stork-scheduler`. El número de pods `portworx`, `stork` y `stork-scheduler` es igual al número de nodos trabajadores que se incluyen en el clúster de Portworx. Todos los pods deben estar en un estado **Running**.
 
 9. Verifique que el clúster de Portworx se ha configurado correctamente.      
    1. Inicie una sesión en uno de los pods de `portworx` y obtenga una lista del estado del clúster de Portworx.
@@ -568,12 +568,12 @@ Para proteger los datos de un volumen de Portworx, puede optar por proteger los 
 {{site.data.keyword.keymanagementservicelong_notm}} le ayuda a suministrar claves cifradas que están protegidas por módulos de seguridad de hardware (HSM) certificados por FIPS 140-2 Nivel 2. Puede utilizar estas claves para proteger de forma segura los datos de usuarios no autorizados. Puede elegir entre utilizar una clave de cifrado para cifrar todos los volúmenes de un clúster o utilizar una clave de cifrado para cada volumen. Portworx utiliza esta clave para cifrar los datos en reposo y en tránsito cuando se envían datos a otro nodo trabajador. Para obtener más información, consulte [Cifrado de volúmenes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption). Para obtener una mayor seguridad, configure el cifrado por volumen.
 
 Revise la información siguiente:
-- Visión general del [flujo de trabajo de cifrado de volúmenes de Portworx](#encryption) con {{site.data.keyword.keymanagementservicelong_notm}} para el cifrado por volumen
+- Visión general del [flujo de trabajo de cifrado de volúmenes de Portworx](#px_encryption) con {{site.data.keyword.keymanagementservicelong_notm}} para el cifrado por volumen
 - Visión general del [flujo de trabajo de descifrado de volúmenes de Portworx](#decryption) con {{site.data.keyword.keymanagementservicelong_notm}} para el cifrado por volumen
 - [Configuración del cifrado por volumen](#setup_encryption) para volúmenes de Portworx.
 
 ### Flujo de trabajo del cifrado por volumen de Portworx
-{: #encryption}
+{: #px_encryption}
 
 En la imagen siguiente se muestra el flujo de trabajo de cifrado de Portworx con {{site.data.keyword.keymanagementservicelong_notm}} cuando se configura el cifrado por volumen.
 {: shortdesc}
@@ -869,7 +869,7 @@ Para solicitar almacenamiento del clúster de Portworx y utilizarlo en su app, d
 
    ```
    kind: StorageClass
-   apiVersion: storage.k8s.io/v1beta1
+   apiVersion: storage.k8s.io/v1
    metadata:
        name: <storageclass_name>
    provisioner: kubernetes.io/portworx-volume
@@ -1252,7 +1252,7 @@ Puede excluir nodos trabajadores del clúster de Portworx o puede eliminar todo 
 Al eliminar el clúster de Portworx se eliminan todos los datos del clúster de Portworx. Asegúrese de que [crea una instantánea para los datos y guarda esta instantánea en la nube ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/).
 {: important}
 
-- **Elimine un nodo de trabajador del clúster de Portworx:** Si desea eliminar un nodo trabajador que ejecuta Portworx y almacena datos en el clúster de Portworx, debe migrar los pods existentes a los nodos trabajadores restantes y luego desinstalar Portworx del nodo. Para obtener más información, consulte [Colocación de un nodo de Portworx fuera de servicio en Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/).
+- **Elimine un nodo trabajador del clúster de Portworx:** Si desea eliminar un nodo trabajador que ejecuta Portworx y almacena datos en el clúster de Portworx, debe migrar los pods existentes a los nodos trabajadores restantes y luego desinstalar Portworx del nodo. Para obtener más información, consulte [Colocación de un nodo de Portworx fuera de servicio en Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/).
 - **Elimine todo el clúster de Portworx:** Puede eliminar un clúster de Portworx con el mandato [`kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl cluster-delete` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/reference/cli/#pxctl-cluster-delete) o mediante la [desinstalación del diagrama de Helm de Portworx](#remove_portworx).
 
 ## Obtención de ayuda y soporte

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks 
 
@@ -135,7 +135,7 @@ Para evitar la ejecución de otras cargas de trabajo en los nodos trabajadores d
   {: pre}
   Ahora, solo se desplegarán en los nodos trabajadores de extremo los pods con la tolerancia `dedicated=edge`.
 
-3. Si elige [habilitar la conservación de direcciones IP de origen para un servicio de equilibrio de carga 1.0 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), asegúrese de que los pods de apps están planificados en los nodos trabajadores de extremo [añadiendo afinidad de nodos de extremo a los pods de app](/docs/containers?topic=containers-loadbalancer#edge_nodes). Los pods de app se deben planificar en los nodos de extremo para recibir solicitudes entrantes.
+3. Si elige [habilitar la conservación de direcciones IP de origen para un servicio de equilibrio de carga 1.0 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), asegúrese de que los pods de apps están planificados en los nodos trabajadores de extremo [añadiendo afinidad de nodos de extremo a los pods de app](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). Los pods de app se deben planificar en los nodos de extremo para recibir solicitudes entrantes.
 
 4. Para eliminar un antagonismo, ejecute el siguiente mandato.
     ```

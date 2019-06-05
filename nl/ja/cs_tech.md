@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, docker
 
@@ -187,7 +187,7 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     <tr>
     <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
-    <td>Kubernetes バージョン 1.10 以降を実行するクラスターでは、`ibm-master-proxy` が、ワーカー・ノードからの要求を、可用性の高い複数のマスター・レプリカの各 IP アドレスに転送します。 単一ゾーン・クラスターのマスターの場合は、別々のホスト上に 3 つのレプリカが存在しますが、マスターの IP アドレスとドメイン名は 1 つです。 複数ゾーン対応ゾーンにあるクラスターの場合、マスターの 3 つのレプリカがゾーン間に分散されます。 そのため、ドメイン・ネームはクラスター・マスター全体で 1 つですが、IP アドレスはマスターごとに独自のものが登録されます。</td>
+    <td>`ibm-master-proxy` が、ワーカー・ノードからの要求を、可用性の高い複数のマスター・レプリカの各 IP アドレスに転送します。 単一ゾーン・クラスターのマスターの場合は、別々のホスト上に 3 つのレプリカが存在しますが、マスターの IP アドレスとドメイン名は 1 つです。 複数ゾーン対応ゾーンにあるクラスターの場合、マスターの 3 つのレプリカがゾーン間に分散されます。 そのため、ドメイン・ネームはクラスター・マスター全体で 1 つですが、IP アドレスはマスターごとに独自のものが登録されます。</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
@@ -202,7 +202,7 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     <tr>
     <td>`coredns`</td>
     <td>kube-system</td>
-    <td>デフォルトでは、Kubernetes は CoreDNS のポッド (またはバージョン 1.12 以前の KubeDNS ポッド) とサービスをクラスター上でスケジュールします。コンテナーは、DNS サービスの IP を自動的に使用して、そのコンテナーによる他のポッドとサービスの検索で DNS 名を解決します。</td>
+    <td>デフォルトでは、Kubernetes は CoreDNS のポッド (またはバージョン 1.12 以前の KubeDNS ポッド) とサービスをクラスター上でスケジュールします。 コンテナーは、DNS サービスの IP を自動的に使用して、そのコンテナーによる他のポッドとサービスの検索で DNS 名を解決します。</td>
     </tr>
     <tr>
     <td>`calico`</td>
@@ -257,5 +257,5 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     </tbody></table></dd>
 </dl>
 
-{{site.data.keyword.containerlong_notm}} を他の製品やサービスと一緒に使用する方法をご覧になりたいですか? こちらで[統合](/docs/containers?topic=containers-integrations#integrations)についていくつか紹介しています。
+{{site.data.keyword.containerlong_notm}} を他の製品やサービスと一緒に使用する方法をご覧になりたいですか? こちらで[統合](/docs/containers?topic=containers-supported_integrations#supported_integrations)についていくつか紹介しています。
 {: tip}

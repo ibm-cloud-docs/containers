@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -44,13 +44,13 @@ subcollection: containers
         ```
         {: pre}
 
-    2. 開啟該 ALB Pod 的日誌。驗證日誌遵循已更新格式。
+    2. 開啟該 ALB Pod 的日誌。
         ```
         kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
         ```
         {: pre}
 
-</br>預設 Ingress 日誌內容會以 JSON 格式化，並顯示一般欄位來說明用戶端與應用程式之間的連線階段作業。具有預設欄位的範例日誌如下所示：
+</br>預設 Ingress 日誌內容採用 JSON 格式化，並顯示一般欄位來說明用戶端與應用程式之間的連線階段作業。具有預設欄位的範例日誌如下所示：
 
 ```
 {"time_date": "2018-08-21T17:33:19+00:00", "client": "108.162.248.42", "host": "albhealth.multizone.us-south.containers.appdomain.cloud", "scheme": "http", "request_method": "GET", "request_uri": "/", "request_id": "c2bcce90cf2a3853694da9f52f5b72e6", "status": 200, "upstream_addr": "192.168.1.1:80", "upstream_status": 200, "request_time": 0.005, "upstream_response_time": 0.005, "upstream_connect_time": 0.000, "upstream_header_time": 0.005}
@@ -167,7 +167,7 @@ subcollection: containers
     <tbody>
     <tr>
     <td><code>log-format</code></td>
-    <td>將 <code>&lt;key&gt;</code> 取代為日誌元件的名稱，並將 <code>&lt;log_variable&gt;</code> 取代為您要在日誌項目中收集的日誌元件的變數。您可以包括想要日誌項目包含的文字和標點符號，例如，用來括住字串值的引號以及用來區隔日誌元件的逗點。例如，將元件格式化為 <code>request: "$request"</code> 會在日誌項目中產生下列內容：<code>request: "GET / HTTP/1.1"</code>。如需您可以使用的所有變數清單，請參閱 <a href="http://nginx.org/en/docs/varindex.html">NGINX 變數索引</a>。<br><br>若要記載 <em>x-custom-ID</em> 這類額外的標頭，請將下列鍵值組新增至自訂日誌內容：<br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>連字號 (<code>-</code>) 會轉換為底線 (<code>_</code>)，而且必須將 <code>$http_</code> 附加到自訂標頭名稱前面。</td>
+    <td>將 <code>&lt;key&gt;</code> 取代為日誌元件的名稱，並將 <code>&lt;log_variable&gt;</code> 取代為您要在日誌項目中收集的日誌元件的變數。您可以包括想要日誌項目包含的文字和標點符號，例如，用來括住字串值的引號以及用來區隔日誌元件的逗點。例如，將元件格式化為 <code>request: "$request"</code> 會在日誌項目中產生下列內容：<code>request: "GET / HTTP/1.1"</code>。如需您可以使用的所有變數清單，請參閱 <a href="http://nginx.org/en/docs/varindex.html">NGINX 變數索引</a>。<br><br>若要記載 <em>x-custom-ID</em> 這類額外的標頭，請將下列鍵值組新增至自訂日誌內容：<br><pre class="codeblock"><code>customID: $http_x_custom_id</code></pre> <br>連字號 (<code>-</code>) 會轉換為底線 (<code>_</code>)，而且必須將 <code>$http_</code> 附加到自訂標頭名稱前面。</td>
     </tr>
     <tr>
     <td><code>log-format-escape-json</code></td>
@@ -253,55 +253,74 @@ subcollection: containers
 
 ALB 度量值匯出程式使用 NGINX 指引 `vhost_traffic_status_zone`，來收集每個 Ingress ALB Pod 上 `/status/format/json` 端點中的度量值資料。度量值匯出程式會自動將 JSON 檔案中的每個資料欄位都重新格式化為 Prometheus 可讀取的度量值。然後，Prometheus 代理程式會反映匯出程式所產生的度量值，並在 Prometheus 儀表板上顯示度量值。
 
+### 安裝度量值匯出程式 Helm 圖表
+{: #metrics-exporter}
+
+安裝度量值匯出程式 Helm 圖表，以監視叢集中的 ALB。
+{: shortdesc}
+
 ALB 度量值匯出程式 Pod 必須部署至 ALB 部署所在的相同工作者節點。如果 ALB 是在邊緣工作者節點上執行，並且這些邊緣節點受到污染而防止其他工作負載部署，則無法排程度量值匯出程式 Pod。您必須執行 `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-` 來移除污點。
 {: note}
 
-若要在叢集中安裝 ALB 的度量值匯出程式和 Prometheus 代理程式，請執行下列動作：
+1.  **重要事項**：[遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上、使用服務帳戶安裝 Helm 伺服器 (tiller)，以及新增 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫。
 
-1.  [遵循指示](/docs/containers?topic=containers-integrations#helm)，將 Helm 用戶端安裝在本端機器上、使用服務帳戶安裝 Helm 伺服器 (tiller)，以及新增 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫。
+2. 將 `ibmcloud-alb-metrics-exporter` Helm 圖表安裝至叢集。此 Helm 圖表會部署 ALB 度量值匯出程式，並在 `kube-system` 名稱空間中建立 `alb-metrics-service-account` 服務帳戶。將 <alb-ID> 取代為您要收集其度量值之 ALB 的 ID。若要檢視叢集中 ALB 的 ID，請執行 <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>。您必須針對要監視的每個 ALB 部署圖表。
+  {: note}
+  ```
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  ```
+  {: pre}
 
-2.  驗證已使用服務帳戶安裝 tiller。
-    ```
-    kubectl get serviceaccount -n kube-system | grep tiller
-    ```
-    {: pre}
-
-    輸出範例：
-
-    ```
-    NAME                                 SECRETS   AGE
-    tiller                               1         2m
-    ```
-    {: screen}
-
-3. 將 `ibmcloud-alb-metrics-exporter` Helm 圖表安裝至叢集。此 Helm 圖表會部署 ALB 度量值匯出程式，並在 `kube-system` 名稱空間中建立稱為 `alb-metrics-service-account` 的服務帳戶。將 <alb-ID> 取代為您要收集其度量值之 ALB 的 ID。若要檢視叢集中 ALB 的 ID，請執行 <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>。請注意，您必須針對要監視的每個 ALB 部署圖表。
-
-    ```
-    helm install ibm/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
-    ```
-    {: pre}
-
-4. 檢查圖表部署狀態。圖表就緒時，輸出頂端附近的 **STATUS** 欄位會具有 `DEPLOYED` 值。
-    ```
+3. 檢查圖表部署狀態。圖表就緒時，輸出頂端附近的 **STATUS** 欄位會具有 `DEPLOYED` 值。
+  ```
     helm status ibmcloud-alb-metrics-exporter
     ```
-    {: pre}
+  {: pre}
 
-5. 將 `ibmcloud-alb-metrics-exporter/subcharts/prometheus` 子圖表安裝至叢集。此子圖表會部署 Prometheus 代理程式，以在 Prometheus 儀表板上收集及顯示 ALB 度量值。將 <ingress_subdomain> 取代為叢集的 Ingress 子網域。Prometheus 儀表板的 URL 是 `prom-dash` 子網域與 Ingress 子網域的組合，例如 `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`。若要尋找叢集的 Ingress 子網域，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>。
-
+4. 驗證 `ibmcloud-alb-metrics-exporter` Pod 在執行中。
+  ```
+    kubectl get pods -n kube-system -o wide
     ```
-    helm install ibm/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
-    ```
-    {: pre}
+  {:pre}
 
-6. 檢查圖表部署狀態。圖表就緒時，輸出頂端附近的 **STATUS** 欄位會具有 `DEPLOYED` 值。
+  輸出範例：
+  ```
+  NAME                                             READY     STATUS      RESTARTS   AGE       IP               NODE
+  ...
+  alb-metrics-exporter-868fddf777-d49l5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  alb-metrics-exporter-868fddf777-pf7x5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  ```
+  {:screen}
 
+5. 選用項目：[安裝 Prometheus 代理程式](#prometheus-agent)以反映匯出程式所產生的度量值，並在 Prometheus 儀表板上顯示度量值。
+
+### 安裝 Prometheus 代理程式 Helm 圖表
+{: #prometheus-agent}
+
+在安裝[度量值匯出程式](#metrics-exporter)之後，您可以安裝 Prometheus 代理程式 Helm 圖表以反映匯出程式所產生的度量值，並在 Prometheus 儀表板上顯示度量值。
+{: shortdesc}
+
+1. 從 https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz 下載度量值匯出程式 Helm 圖表的 TAR 檔案。
+
+2. 導覽至 Prometheus 子資料夾。
+  ```
+  cd ibmcloud-alb-metrics-exporter-1.0.7.tar/ibmcloud-alb-metrics-exporter/subcharts/prometheus
+  ```
+  {: pre}
+
+3. 將 Prometheus Helm 圖表安裝至叢集。將 <ingress_subdomain> 取代為叢集的 Ingress 子網域。Prometheus 儀表板的 URL 是預設 Prometheus 子網域 `prom-dash` 與 Ingress 子網域的組合，例如 `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`。若要尋找叢集的 Ingress 子網域，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>。
+  ```
+  helm install --name prometheus . --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
+  ```
+  {: pre}
+
+4. 檢查圖表部署狀態。圖表就緒時，輸出頂端附近的 **STATUS** 欄位會具有 `DEPLOYED` 值。
     ```
     helm status prometheus
     ```
     {: pre}
 
-7. 驗證 `ibmcloud-alb-metrics-exporter` 和 `prometheus` Pod 在執行中。
+5. 驗證 `prometheus` Pod 在執行中。
     ```
     kubectl get pods -n kube-system -o wide
     ```
@@ -316,9 +335,9 @@ ALB 度量值匯出程式 Pod 必須部署至 ALB 部署所在的相同工作者
     ```
     {:screen}
 
-8. 在瀏覽器中，輸入 Prometheus 儀表板的 URL。此主機名稱的格式為 `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`。即會開啟 ALB 的 Prometheus 儀表板。
+6. 在瀏覽器中，輸入 Prometheus 儀表板的 URL。此主機名稱的格式為 `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`。即會開啟 ALB 的 Prometheus 儀表板。
 
-9. 檢閱儀表板中所列 [ALB](#alb_metrics)、[伺服器](#server_metrics)及[上游](#upstream_metrics)度量值的相關資訊。
+7. 檢閱儀表板中所列 [ALB](#alb_metrics)、[伺服器](#server_metrics)及[上游](#upstream_metrics)度量值的相關資訊。
 
 ### ALB 度量值
 {: #alb_metrics}
@@ -385,8 +404,7 @@ ALB 度量值的格式為 `kube_system_<ALB-ID>_<METRIC-NAME> <VALUE>`。例如�
 <tr>
 <td><code>totalHandledRequest_total</code></td>
 <td>接收自用戶端的用戶端要求總數。</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### 伺服器度量值
@@ -511,8 +529,7 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 <tr>
 <td><code>total</code></td>
 <td>具有狀態碼的回應總數。</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### 上游度量值
@@ -604,7 +621,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 <tr>
 <td><code>total</code></td>
 <td>具有狀態碼的回應總數。</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 #### 類型 2 上游度量值
@@ -662,7 +679,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 <tr>
 <td><code>responseMsec</code></td>
 <td>僅限上游回應處理時間的平均值（以毫秒為單位）。</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 <br />

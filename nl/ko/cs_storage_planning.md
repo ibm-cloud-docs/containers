@@ -322,7 +322,7 @@ subcollection: containers
 <tr>
 <td style="text-align:left">성능</td>
 <td style="text-align:left">읽기 오퍼레이션의 경우 높습니다. 비 SDS 시스템을 사용하는 경우 지정된 IOPS 및 크기로 인해 예측 가능합니다.</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">SDS 시스템을 사용하는 경우 순차 읽기 및 쓰기 오퍼레이션에 해당하는 베어메탈 성능을 거의 그대로 유지합니다. </li><li style="margin:0px; padding:0px">고성능 데이터베이스를 실행하기 위한 [프로파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) 제공 </li><li style="margin:0px; padding:0px">앱에서 선택할 수 있는 서로 다른 성능 프로파일을 사용하여 스토리지 계층을 작성할 수 있습니다.</li></ul> </td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">SDS 시스템을 사용하는 경우 순차 읽기 및 쓰기 오퍼레이션에 해당하는 베어메탈 성능을 거의 그대로 유지합니다. </li><li style="margin:0px; padding:0px">고성능 데이터베이스를 실행하기 위한 [프로파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) 제공</li><li style="margin:0px; padding:0px">앱에서 선택할 수 있는 서로 다른 성능 프로파일을 사용하여 스토리지 계층을 작성할 수 있습니다.</li></ul> </td>
 <td style="text-align:left">앱과 동일한 데이터센터에 배치되는 경우 높습니다.</td>
 </tr>
 <tr>
@@ -359,7 +359,7 @@ subcollection: containers
 <tr>
 <td style="text-align:left">암호화</td>
 <td style="text-align:left">전송 중 및 저장 중</td>
-<td style="text-align:left">사용자 고유 키를 가져와 전송 중인 데이터 및 저장 데이터를 {{site.data.keyword.keymanagementservicelong_notm}}를 사용하여 보호합니다.</td>
+<td style="text-align:left">사용자 고유 키를 가져와 전송 중인 데이터 및 저장 데이터를 {{site.data.keyword.keymanagementservicelong_notm}}를 사용하여 보호합니다. </td>
 <td style="text-align:left">고정</td>
 </tr>
 <tr>

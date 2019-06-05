@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -43,7 +43,7 @@ Por qué {{site.data.keyword.Bluemix_notm}}: para mejorar el análisis de riesgo
 * [Varias regiones para alta disponibilidad](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Seguridad y aislamiento de contenedores](/docs/containers?topic=containers-security#security)
-* [{{site.data.keyword.cloudant}} para almacenar datos de forma permanente y sincronizarlos entre apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} para almacenar datos de forma permanente y sincronizarlos entre apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **La solución**
@@ -59,7 +59,7 @@ También han acelerado el proceso de conformidad y de análisis de riesgos. Sus 
 * La necesidad de mejorar la gestión de los riesgos financieros aumenta los requisitos de supervisión de normativas. Las mismas necesidades impulsan la revisión de los procesos de evaluación de riesgos y la divulgación de informes normativos más detallados, integrados y completos.
 * Las cuadrículas de cálculo de alto rendimiento constituyen los componentes clave de la infraestructura para el modelado financiero.
 
-El problema de la compañía en este momento es el escalado y el tiempo de entrega.
+El problema de la empresa en este momento es el escalado y el tiempo de entrega.
 
 Su entorno actual tiene más 7 años de antigüedad, es local y tiene una capacidad limitada de cálculo, de almacenamiento y de E/S.
 Las renovaciones del servidor resultan caras y taren bastante tiempo en completarse.
@@ -87,9 +87,9 @@ Esta solución proporciona la ventaja inmediata de la escalabilidad. Gracias al 
 
 Se utiliza {{site.data.keyword.SecureGateway}} para crear una interconexión segura con bases de datos y documentos locales para apps realojadas para que se ejecuten en {{site.data.keyword.containerlong_notm}}.
 
-{{site.data.keyword.cos_full_notm}} sirve tanto para documentos sin formato como para el almacenamiento de datos. Para las simulaciones de Monte Carlo, se utiliza un conducto de flujo de trabajo en el que los datos de simulación están en archivos de entrada estructurados que se almacenan en {{site.data.keyword.cos_full_notm}}. Un desencadenante para iniciar los servicios de cálculo escala los servicios de simulación de {{site.data.keyword.containerlong_notm}} para dividir los datos de entrada en N grupos de sucesos para el proceso de simulación. {{site.data.keyword.containerlong_notm}} escala automáticamente a N ejecuciones de servicios asociados y escribe los resultados intermedios en {{site.data.keyword.cos_full_notm}}. Estos resultados se procesan mediante otro conjunto de servicios de cálculo de {{site.data.keyword.containerlong_notm}} para generar los resultados finales.
+{{site.data.keyword.cos_full_notm}} sirve tanto para documentos sin formato como para el almacenamiento de datos. Para las simulaciones de Monte Carlo, se utiliza un conducto de flujo de trabajo en el que los datos de simulación están en archivos estructurados que se almacenan en {{site.data.keyword.cos_full_notm}}. Un desencadenante para iniciar los servicios de cálculo escala los servicios de simulación de {{site.data.keyword.containerlong_notm}} para dividir los datos de los archivos en N grupos de sucesos para el proceso de simulación. {{site.data.keyword.containerlong_notm}} escala automáticamente a N ejecuciones de servicios asociados y escribe los resultados intermedios en {{site.data.keyword.cos_full_notm}}. Estos resultados se procesan mediante otro conjunto de servicios de cálculo de {{site.data.keyword.containerlong_notm}} para generar los resultados finales.
 
-{{site.data.keyword.cloudant}} es una moderna base de datos NoSQL que resulta útil para muchos casos de uso controlados por datos: desde el par clave-valor hasta el almacenamiento y consulta complejos de datos orientados a documentos. Para gestionar el conjunto cada vez mayor de normas de informes de gestión y regulatorias, la empresa hipotecaria utiliza {{site.data.keyword.cloudant}} para almacenar los documentos asociados con la entrada de datos de regulación sin formato que llegan a la empresa. Los procesos de cálculo de {{site.data.keyword.containerlong_notm}} se desencadenan para compilar, procesar y publicar los datos en diversos formatos de informes. Los resultados intermedios comunes a los informes se almacenan como documentos de {{site.data.keyword.cloudant}} de modo que se puedan utilizar procesos controlados por plantillas para generar los informes necesarios.
+{{site.data.keyword.cloudant}} es una moderna base de datos NoSQL que resulta útil para muchos casos de uso controlados por datos: desde el par clave-valor hasta el almacenamiento y consulta complejos de datos orientados a documentos. Para gestionar el conjunto cada vez mayor de normas de informes de gestión y regulatorias, la empresa hipotecaria utiliza {{site.data.keyword.cloudant}} para almacenar los documentos asociados con los datos de regulación sin formato que llegan a la empresa. Los procesos de cálculo de {{site.data.keyword.containerlong_notm}} se desencadenan para compilar, procesar y publicar los datos en diversos formatos de informes. Los resultados intermedios comunes a los informes se almacenan como documentos de {{site.data.keyword.cloudant}} de modo que se puedan utilizar procesos controlados por plantillas para generar los informes necesarios.
 
 **Resultados**
 

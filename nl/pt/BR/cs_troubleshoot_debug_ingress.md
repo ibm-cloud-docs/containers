@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -38,13 +38,13 @@ Você expôs publicamente seu app criando um recurso de Ingresso para seu app no
 Assegure-se de definir um host em apenas um recurso do Ingress. Se um host for definido em múltiplos recursos do Ingress, o ALB poderá não encaminhar o tráfego corretamente e poderá haver erros.
 {: tip}
 
-Antes de iniciar, assegure-se de que você tenha as [políticas de acesso do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) a seguir:
+Antes de começar, certifique-se de ter as seguintes [políticas de acesso IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform):
   - A função da plataforma **Editor** ou **Administrador** para o cluster
   - Função de serviço ** Writer **  ou  ** Manager **
 
 ## Etapa 1: Executar testes do Ingress no {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 
-Enquanto você soluciona problemas, é possível usar o {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool para executar testes do Ingress e reunir informações pertinentes de seu cluster. Para usar a ferramenta de depuração, instale o [gráfico do Helm `ibmcloud-iks-debug` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+Enquanto você soluciona problemas, é possível usar o {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool para executar testes do Ingress e reunir informações pertinentes de seu cluster. Para usar a ferramenta de depuração, instale o [gráfico do Helm do `ibmcloud-iks-debug` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
 {: shortdesc}
 
 
@@ -52,7 +52,7 @@ Enquanto você soluciona problemas, é possível usar o {{site.data.keyword.cont
 
 2. Instale o gráfico Helm em seu cluster.
   ```
-  helm install ibm/ibmcloud-iks-debug -- name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
@@ -123,7 +123,7 @@ Inicie verificando se há mensagens de erro nos eventos de implementação do re
 
     2. Certifique-se de que todos os pods estejam em execução verificando a coluna **STATUS**.
 
-    3. Se um pod não for `Running`, será possível desativar e ativar novamente o ALB. Nos comandos a seguir, substitua  `<ALB_ID>` pelo ID do ALB do pod. Por exemplo, se o pod que não está em execução tiver o nome `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z`, o ID do ALB será `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1`.
+    3. Se um pod não for `Running`, será possível desativar e ativar novamente o ALB. Nos comandos a seguir, substitua `<ALB_ID>` pelo ID do ALB do pod. Por exemplo, se o pod que não está em execução tiver o nome `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z`, o ID do ALB será `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1`.
         ```
         ibmcloud ks alb-configure -- albID < ALB_ID> --disable
         ```
@@ -172,7 +172,7 @@ Verifique a disponibilidade de seu subdomínio do Ingress e endereços IP públi
     ```
     {: screen}
 
-    * Se um ALB público não tiver um endereço IP, consulte [A entrada ALB não será implementada em uma zona](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit).
+    * Se um ALB público não tiver nenhum endereço IP, consulte [O ALB do Ingress não é implementado em uma zona](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit).
 
 2. Verifique o funcionamento de seus IPs do ALB.
 
@@ -185,7 +185,7 @@ Verifique a disponibilidade de seu subdomínio do Ingress e endereços IP públi
         * Se a CLI retornar um tempo limite e você tiver um firewall customizado que esteja protegendo os nós do trabalhador, certifique-se de permitir o ICMP em seu [firewall](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).
         * Se não houver nenhum firewall que esteja bloqueando os pings e os pings ainda forem executados até o tempo limite, [verifique o status de seus pods do ALB](#check_pods).
 
-    * Somente clusters de múltiplas zonas: é possível usar a verificação de funcionamento do MZLB para determinar o status de seus IPs do ALB. Para obter mais informações sobre o MZLB, consulte [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress#planning). A verificação de funcionamento do MZLB está disponível somente para clusters que têm o novo subdomínio do Ingress no formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se seu cluster ainda usar o formato mais antigo de `<cluster_name>.<region>.containers.mybluemix.net`, [converta seu cluster de zona única para múltiplas zonas](/docs/containers?topic=containers-clusters#add_zone). Seu cluster é designado a um subdomínio com o novo formato, mas também pode continuar a usar o formato de subdomínio mais antigo. Como alternativa, é possível pedir um novo cluster que é designado automaticamente ao novo formato de subdomínio.
+    * Somente clusters de múltiplas zonas: é possível usar a verificação de funcionamento do MZLB para determinar o status de seus IPs do ALB. Para obter mais informações sobre o MZLB, consulte [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress#planning). A verificação de funcionamento MZLB está disponível apenas para clusters que possuem o novo subdomínio do Ingress no formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se seu cluster ainda usar o formato mais antigo, `<cluster_name>.<region>.containers.mybluemix.net`, [converta seu cluster de zona única para multizona](/docs/containers?topic=containers-clusters#add_zone). Seu cluster é designado a um subdomínio com o novo formato, mas também pode continuar a usar o formato de subdomínio mais antigo. Como alternativa, é possível pedir um novo cluster que é designado automaticamente ao novo formato de subdomínio.
 
     O comando HTTP cURL a seguir usa o host `albhealth`, que é configurado pelo {{site.data.keyword.containerlong_notm}} para retornar o status `healthy` ou `unhealthy` para um IP do ALB.
         ```

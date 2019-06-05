@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -43,7 +43,7 @@ subcollection: containers
 * [多個地區的高可用性](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [容器安全及隔離](/docs/containers?topic=containers-security#security)
-* [{{site.data.keyword.cloudant}} 可以跨應用程式持續保存及同步處理資料](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} 可以跨應用程式持續保存及同步處理資料](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **解決方案**
@@ -84,9 +84,9 @@ subcollection: containers
 
 {{site.data.keyword.SecureGateway}} 用來建立內部部署資料庫的安全管線，以及重新管理以在 {{site.data.keyword.containerlong_notm}} 中執行之應用程式的文件。
 
-{{site.data.keyword.cos_full_notm}} 適用於所有原始文件及資料儲存空間，因為它們會持續增加。對於 Monte Carlo 模擬，會將工作流程管線放在定位，而模擬資料位在儲存於 {{site.data.keyword.cos_full_notm}} 的結構化輸入檔中。開始模擬的觸發程式會在 {{site.data.keyword.containerlong_notm}} 中調整運算服務，以將輸入資料分割為 N 個事件儲存區來處理模擬。{{site.data.keyword.containerlong_notm}} 會自動調整為 N 個相關聯的服務執行，並將中間結果寫入 {{site.data.keyword.cos_full_notm}}。這些結果由另一組 {{site.data.keyword.containerlong_notm}} 運算服務處理，以產生最終結果。
+{{site.data.keyword.cos_full_notm}} 適用於所有原始文件及資料儲存空間，因為它們會持續增加。對於 Monte Carlo 模擬，會將工作流程管線放在定位，而模擬資料位在儲存於 {{site.data.keyword.cos_full_notm}} 的結構化檔案中。開始模擬的觸發程式會在 {{site.data.keyword.containerlong_notm}} 中調整運算服務，以將檔案資料分割為 N 個事件儲存區來處理模擬。{{site.data.keyword.containerlong_notm}} 會自動調整為 N 個相關聯的服務執行，並將中間結果寫入 {{site.data.keyword.cos_full_notm}}。這些結果由另一組 {{site.data.keyword.containerlong_notm}} 運算服務處理，以產生最終結果。
 
-{{site.data.keyword.cloudant}} 是一個適用於許多資料驅動使用案例的現代 NoSQL 資料庫：從金鑰值到複雜文件導向資料儲存空間及查詢。為了管理不斷成長的一組法規及管理報告規則，抵押貸款公司會使用 {{site.data.keyword.cloudant}} 來儲存與進入公司之原始法規資料輸入相關聯的文件。會觸發 {{site.data.keyword.containerlong_notm}} 上的運算處理程序，以編譯、處理及發佈各種報告格式的資料。報告中共用的中間結果會儲存為 {{site.data.keyword.cloudant}} 文件，因此，範本驅動處理程序可以用來產生必要的報告。
+{{site.data.keyword.cloudant}} 是一個適用於許多資料驅動使用案例的現代 NoSQL 資料庫：從金鑰值到複雜文件導向資料儲存空間及查詢。為了管理不斷成長的一組法規及管理報告規則，抵押貸款公司會使用 {{site.data.keyword.cloudant}} 來儲存與進入公司之原始法規資料相關聯的文件。會觸發 {{site.data.keyword.containerlong_notm}} 上的運算處理程序，以編譯、處理及發佈各種報告格式的資料。報告中共用的中間結果會儲存為 {{site.data.keyword.cloudant}} 文件，因此，範本驅動處理程序可以用來產生必要的報告。
 
 **結果**
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -30,23 +30,23 @@ subcollection: containers
 En estos casos de uso se muestra cómo pueden aprovechar las cargas de trabajo de {{site.data.keyword.containerlong_notm}} las analíticas para obtener información sobre el mercado, realizar despliegues en varias regiones en todo el mundo y gestionar el inventario con {{site.data.keyword.messagehub_full}} y almacenamiento de objetos.
 {: shortdesc}
 
-## Los minoristas con establecimiento físico comparten datos mediante el uso de API con asociados globales para realizar ventas a través de varios canales
+## Los minoristas con establecimiento físico comparten datos mediante el uso de API con asociados comerciales globales para realizar ventas a través de varios canales
 {: #uc_data-share}
 
-Un ejecutivo de línea de negocio (LOB) necesita aumentar los canales de ventas, pero el sistema de ventas al por menor se limita a un centro de datos local. La competencia tiene asociados globales para realizar ventas cruzadas y ascendentes de sus productos: tanto en tiendas físicas como en sitios en línea.
+Un ejecutivo de línea de negocio (LOB) necesita aumentar los canales de ventas, pero el sistema de ventas al por menor se limita a un centro de datos local. La competencia tiene asociados comerciales globales para realizar ventas cruzadas y ascendentes de sus productos: tanto en tiendas físicas como en sitios en línea.
 {: shortdesc}
 
-Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} proporciona un ecosistema de nube pública cuyos contenedores permiten a otros asociados y a participantes externos desarrollar conjuntamente apps y datos a través de las API. Ahora que el sistema minorista está en la nube pública, las API también simplifican la compartición de datos y agilizan el desarrollo de nuevas apps. Los despliegues de apps aumentan cuando los desarrolladores pueden experimentar con facilidad, enviando cambios a los sistemas de desarrollo y de prueba rápidamente con cadenas de herramientas.
+Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} proporciona un ecosistema de nube pública cuyos contenedores permiten a otros asociados comerciales y a participantes externos desarrollar conjuntamente apps y datos a través de las API. Ahora que el sistema minorista está en la nube pública, las API también simplifican la compartición de datos y agilizan el desarrollo de nuevas apps. Los despliegues de apps aumentan cuando los desarrolladores pueden experimentar con facilidad, enviando cambios a los sistemas de desarrollo y de prueba rápidamente con cadenas de herramientas.
 
 {{site.data.keyword.containerlong_notm}} y tecnologías clave:
 * [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [{{site.data.keyword.cos_full}} para almacenar datos de forma permanente y sincronizarlos entre apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
-**Contexto: un minorista comparte datos, utilizando API con asociados globales, para impulsar las ventas a través de varios canales**
+**Contexto: un minorista comparte datos, utilizando API con asociados comerciales globales, para impulsar las ventas a través de varios canales**
 
 * El minorista se enfrenta a fuertes presiones de la competencia. En primer lugar, necesita afrontar la complejidad del paso hacia nuevos productos y nuevos canales. Por ejemplo, tienen que ampliar la sofisticación de sus productos. Paralelamente, necesita más simplicidad para que sus clientes salten de marca a marca.
-* Esa habilidad de saltar de marca significa que el ecosistema minorista requiere conectividad con los asociados. En este contexto, la nube puede aportar un nuevo valor de los asociados, los clientes y otros participantes externos.
+* Esa habilidad de saltar de marca significa que el ecosistema minorista requiere conectividad con los asociados comerciales. En este contexto, la nube puede aportar un nuevo valor de los asociados comerciales, los clientes y otros participantes externos.
 * Los eventos que arrastran usuarios, como el Black Friday, presionan los sistemas en línea existentes, forzando al minorista a saturar la infraestructura de cálculo.
 * Los desarrolladores del minorista necesitaban hacer evolucionar constantemente las apps, pero las herramientas tradicionales ralentizan su capacidad para desplegar actualizaciones y funciones con frecuencia, especialmente cuando colaboran con equipos de asociados.  
 
@@ -57,13 +57,13 @@ Se necesita una experiencia de compra más inteligente para aumentar la fidelida
 El minorista también debe proporcionar a los clientes contenidos útiles, como información sobre los productos, información sobre productos alternativos, opiniones y visibilidad de inventario en tiempo real. Y estos clientes lo quieren mientras están en línea y en la tienda a través de dispositivos móviles personales y tiendas asociadas con equipos móviles.
 
 La solución consta de estos componentes principales:
-* INVENTARIO: app para el ecosistema de asociados que agrega y comunica inventario, especialmente introducciones de nuevos productos, incluidas las API para que reutilicen los asociados en sus propias apps de minorista y B2B
+* INVENTARIO: app para el ecosistema de asociados que agrega y comunica inventario, especialmente introducciones de nuevos productos, incluidas las API para que reutilicen los asociados comerciales en sus propias apps de minorista y B2B
 * VENTAS CRUZADAS Y ASCENDENTES: app que descubren oportunidades de ventas cruzadas y ascendentes con API que se pueden utilizar en diversas apps de comercio electrónico y para dispositivos móviles
-* ENTORNO DE DESARROLLO: clúster de Kubernetes para sistemas de desarrollo, prueba y producción que aumentan la colaboración y la compartición de datos entre el minorista y sus asociados
+* ENTORNO DE DESARROLLO: clúster de Kubernetes para sistemas de desarrollo, prueba y producción que aumentan la colaboración y la compartición de datos entre el minorista y sus asociados comerciales
 
-Para que el minorista trabaje con asociados globales, las API de inventario requieren cambios para que se ajusten a las preferencias de idioma y de mercado de cada región. {{site.data.keyword.containerlong_notm}} ofrece cobertura en varias regiones, que incluyen Norteamérica, Europa, Asia y Australia, de modo que las API reflejen las necesidades de cada país y se garantice una latencia baja para las llamadas de API.
+Para que el minorista trabaje con asociados comerciales globales, las API de inventario requieren cambios para que se ajusten a las preferencias de idioma y de mercado de cada región. {{site.data.keyword.containerlong_notm}} ofrece cobertura en varias regiones, que incluyen Norteamérica, Europa, Asia y Australia, de modo que las API reflejen las necesidades de cada país y se garantice una latencia baja para las llamadas de API.
 
-Otro requisito es que los datos de inventario se deben poder compartir con los clientes de los asociados y de la empresa. Con las API de inventario, los desarrolladores pueden mostrar información en apps, como apps de inventario móvil o soluciones de comercio electrónico en la web. Los desarrolladores también están ocupados con la creación y el mantenimiento del sitio de comercio electrónico primario. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura.
+Otro requisito es que los datos de inventario se deben poder compartir con los asociados comerciales y los clientes de la empresa. Con las API de inventario, los desarrolladores pueden mostrar información en apps, como apps de inventario móvil o soluciones de comercio electrónico en la web. Los desarrolladores también están ocupados con la creación y el mantenimiento del sitio de comercio electrónico primario. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura.
 
 Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
 * Gestión de nodo maestro de Kubernetes, IaaS y componentes operativos, como Ingress y almacenamiento
@@ -72,7 +72,7 @@ Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simp
 
 Además, el registro y la supervisión de los microservicios de API, especialmente el modo en que extraen datos personalizados de los sistemas de fondo, se integra fácilmente con {{site.data.keyword.containerlong_notm}}. Los desarrolladores no pierdan el tiempo creando sistemas de registro complejos, solo para poder solucionar los problemas de los sistemas activos.
 
-{{site.data.keyword.messagehub_full}} actúa como la plataforma de sucesos justo a tiempo para incorporar la información en constante cambio de los sistemas de inventario de los asociados en {{site.data.keyword.cos_full}}.
+{{site.data.keyword.messagehub_full}} actúa como la plataforma de sucesos justo a tiempo para incorporar la información en constante cambio de los sistemas de inventario de los asociados comerciales en {{site.data.keyword.cos_full}}.
 
 **Modelo de solución**
 
@@ -102,8 +102,8 @@ Solución técnica:
 * Una vez que los usuarios han iniciado la sesión, puede utilizar {{site.data.keyword.appid_short_notm}} para crear perfiles y personalizar la experiencia de un usuario de la aplicación.
 
 **Paso 4: Compartir datos**
-* {{site.data.keyword.cos_full}} más {{site.data.keyword.messagehub_full}} proporciona almacenamiento de datos históricos y en tiempo real, de modo que las ofertas de ventas cruzadas representan el inventario disponible de los asociados.
-* Las API permiten a los asociados del minorista compartir datos en sus apps de comercio electrónico y B2B.
+* {{site.data.keyword.cos_full}} más {{site.data.keyword.messagehub_full}} proporciona almacenamiento de datos históricos y en tiempo real, de modo que las ofertas de ventas cruzadas representan el inventario disponible de los asociados comerciales.
+* Las API permiten a los asociados comerciales del minorista compartir datos en sus apps de comercio electrónico y B2B.
 
 **Paso 5: Entrega continua**
 * La depuración de las API desarrolladas en cooperación se facilita cuando se añaden herramientas de registro y supervisión de IBM Cloud, basadas en la nube y a las que pueden acceder los distintos desarrolladores.
@@ -113,7 +113,7 @@ Solución técnica:
 
 **Resultados**
 * Los microservicios reducen significativamente el tiempo de entrega de parches, correcciones de errores y funciones nuevas. El desarrollo inicial en todo el mundo es rápido y se ofrecen actualizaciones frecuentes (hasta 40 veces por semana).
-* El minorista y sus asociados tienen acceso inmediato a las planificaciones de disponibilidad de inventario y de entrega, utilizando las API.
+* El minorista y sus asociados comerciales tienen acceso inmediato a las planificaciones de disponibilidad de inventario y de entrega, utilizando las API.
 * Con {{site.data.keyword.containerlong_notm}} y las herramientas CI y CD de IBM, las versiones A-B de las apps están listas para las campañas de pruebas.
 * {{site.data.keyword.containerlong_notm}} proporciona un cálculo escalable, de modo que las cargas de trabajo de API de inventario y ventas cruzadas pueden crecer durante periodos de alto volumen del año, como por ejemplo las vacaciones de otoño.
 
@@ -140,7 +140,7 @@ Tecnologías clave:
 
 **La solución**
 
-El tendero necesita una app para aumentar la conversión y el tráfico en la tienda para generar nuevas ventas y asegurarse la fidelidad del cliente en una plataforma de analítica de nube reutilizable. La experiencia destinada a la tienda física puede ser un evento, junto con un proveedor de servicios o productos que atraiga tanto la fidelidad de los clientes existentes como a nuevos clientes, en función de la afinidad con el evento específico. La tienda y los asociados ofrecen incentivos para acudir al evento, así como para comprar productos en la tienda o del asociado.  
+El tendero necesita una app para aumentar la conversión y el tráfico en la tienda para generar nuevas ventas y asegurarse la fidelidad del cliente en una plataforma de analítica de nube reutilizable. La experiencia destinada a la tienda física puede ser un evento, junto con un proveedor de servicios o productos que atraiga tanto la fidelidad de los clientes existentes como a nuevos clientes, en función de la afinidad con el evento específico. La tienda y los asociados ofrecen incentivos para acudir al evento, así como para comprar productos en la tienda o del asociado comercial.  
 
 Después del evento, se acompaña a los clientes a comprar los productos necesarios, para que puedan repetir la actividad demostrada por su cuenta en el futuro. La experiencia del cliente se mide con el canjeo de incentivos y con las nuevas inscripciones de los clientes a programas de fidelidad. La combinación de un evento de marketing altamente personalizado y una herramienta para realizar un seguimiento de las compras en la tienda puede convertir la experiencia personalizada en compras de productos. Todas estas acciones dan lugar a un mayor tráfico y a conversiones.
 

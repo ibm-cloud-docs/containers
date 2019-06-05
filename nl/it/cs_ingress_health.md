@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,7 @@ I log vengono raccolti automaticamente per i tuoi ALB Ingress Per visualizzare i
         ```
         {: pre}
 
-    2. Apri i log relativi a tale pod ALB. Verifica che tutti i log seguano il formato aggiornato.
+    2. Apri i log relativi a tale pod ALB.
         ```
         kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
         ```
@@ -167,7 +167,7 @@ Prima di iniziare, assicurati di disporre del [ruolo del servizio {{site.data.ke
     <tbody>
     <tr>
     <td><code>log-format</code></td>
-    <td>Sostituisci <code>&lt;key&gt;</code> con il nome del componente di log e <code>&lt;log_variable&gt;</code> con una variabile per il componente di cui desideri raccogliere le voci di log. Puoi includere il testo e la punteggiatura che desideri nella voce di log, ad esempio le virgolette nei valori stringa e le virgole per separare i componenti di log. Ad esempio, se formatti il componente utilizzando <code>request: "$request"</code>, generi quanto segue in una voce del log: <code>request: "GET / HTTP/1.1"</code> . Per un elenco di tutte le variabili che puoi utilizzare, vedi l'<a href="http://nginx.org/en/docs/varindex.html">indice delle variabili NGINX</a>.<br><br>Per registrare un'intestazione aggiuntiva come ad esempio <em>x-custom-ID</em>, aggiungi la seguente coppia chiave-valore al contenuto del log personalizzato: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>I trattini (<code>-</code>) vengono convertiti in caratteri di sottolineatura (<code>_</code>) e <code>$http_</code> deve essere aggiunto come prefisso al nome intestazione personalizzato.</td>
+    <td>Sostituisci <code>&lt;key&gt;</code> con il nome del componente di log e <code>&lt;log_variable&gt;</code> con una variabile per il componente di cui desideri raccogliere le voci di log. Puoi includere il testo e la punteggiatura che desideri nella voce di log, ad esempio le virgolette nei valori stringa e le virgole per separare i componenti di log. Ad esempio, se formatti il componente utilizzando <code>request: "$request"</code>, generi quanto segue in una voce del log: <code>request: "GET / HTTP/1.1"</code> . Per un elenco di tutte le variabili che puoi utilizzare, vedi l'<a href="http://nginx.org/en/docs/varindex.html">indice delle variabili NGINX</a>.<br><br>Per registrare un'intestazione aggiuntiva come ad esempio <em>x-custom-ID</em>, aggiungi la seguente coppia chiave-valore al contenuto del log personalizzato: <br><pre class="codeblock"><code>customID: $http_x_custom_id</code></pre> <br>I trattini (<code>-</code>) vengono convertiti in caratteri di sottolineatura (<code>_</code>) e <code>$http_</code> deve essere aggiunto come prefisso al nome intestazione personalizzato.</td>
     </tr>
     <tr>
     <td><code>log-format-escape-json</code></td>
@@ -253,55 +253,75 @@ Monitora i tuoi ALB distribuendo un exporter di metriche e un agent Prometheus n
 
 L'exporter di metriche ALB utilizza la direttiva NGINX, `vhost_traffic_status_zone`, per raccogliere i dati delle metriche dall'endpoint `/status/format/json` su ogni pod ALB Ingress. L'exporter di metriche riformatta automaticamente ogni campo di dati nel file JSON in una metrica leggibile da Prometheus. Quindi, un agent Prometheus recupera le metriche prodotte dall'exporter e le rende visibili su un dashboard Prometheus.
 
+### Installazione del grafico Helm per l'exporter di metriche
+{: #metrics-exporter}
+
+Installa il grafico Helm per l'exporter di metriche per monitorare un ALB nel tuo cluster.
+{: shortdesc}
+
 I pod dell'exporter di metriche ALB devono essere distribuiti sugli stessi nodi di lavoro in cui sono distribuiti i tuoi ALB. Se i tuoi ALB vengono eseguiti su nodi di lavoro edge e tali nodi edge sono corrotti per evitare altre distribuzioni del carico di lavoro, i pod dell'exporter di metriche non possono essere pianificati. Devi rimuovere le corruzioni eseguendo `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
 {: note}
 
-Per installare l'exporter di metriche e l'agent Prometheus per un ALB nel tuo cluster:
+1.  **Importante**: [segui le istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) con un account di servizio e aggiungere i repository Helm {{site.data.keyword.Bluemix_notm}}.
 
-1.  [Segui le istruzioni](/docs/containers?topic=containers-integrations#helm) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) con un account di servizio e aggiungere il repository Helm {{site.data.keyword.Bluemix_notm}}.
+2. Installa il grafico Helm `ibmcloud-alb-metrics-exporter` sul tuo cluster. Questo grafico Helm distribuisce un exporter di metriche ALB e crea un account di servizio `alb-metrics-service-account` nello spazio dei nomi `kube-system`. Sostituisci <alb-ID> con l'ID dell'ALB per il quale vuoi raccogliere le metriche. Per visualizzare gli ID per gli ALB nel tuo cluster, esegui <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>.
+  Devi distribuire un grafico per ogni ALB che vuoi monitorare.
+  {: note}
+  ```
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  ```
+  {: pre}
 
-2.  Verifica che tiller sia installato con un account di servizio.
-    ```
-    kubectl get serviceaccount -n kube-system | grep tiller
-    ```
-    {: pre}
+3. Controlla lo stato di distribuzione del grafico. Quando il grafico è pronto, il campo **STATO** vicino alla parte superiore dell'output ha un valore di `DEPLOYED`.
+  ```
+  helm status ibmcloud-alb-metrics-exporter
+  ```
+  {: pre}
 
-    Output di esempio:
+4. Verifica che i pod `ibmcloud-alb-metrics-exporter` siano in esecuzione.
+  ```
+  kubectl get pods -n kube-system -o wide
+  ```
+  {:pre}
 
-    ```
-    NAME                                 SECRETS   AGE
-    tiller                               1         2m
-    ```
-    {: screen}
+  Output di esempio:
+  ```
+  NAME                                             READY     STATUS      RESTARTS   AGE       IP               NODE
+  ...
+  alb-metrics-exporter-868fddf777-d49l5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  alb-metrics-exporter-868fddf777-pf7x5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  ```
+  {:screen}
 
-3. Installa il grafico Helm `ibmcloud-alb-metrics-exporter` sul tuo cluster. Questo grafico Helm distribuisce un exporter di metriche ALB e crea un account di servizio chiamato `alb-metrics-service-account` nello spazio dei nomi `kube-system`. Sostituisci <alb-ID> con l'ID dell'ALB per il quale vuoi raccogliere le metriche. Per visualizzare gli ID per gli ALB nel tuo cluster, esegui <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>. Nota che devi distribuire un grafico per ogni ALB che vuoi monitorare.
+5. Facoltativo: [installa l'agent Prometheus](#prometheus-agent) per raccogliere le metriche prodotte dall'exporter e rendere visibili le metriche su un dashboard Prometheus.
 
-    ```
-    helm install ibm/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
-    ```
-    {: pre}
+### Installazione del grafico Helm per l'agente Prometheus
+{: #prometheus-agent}
+
+Una volta installato l'[exporter di metriche](#metrics-exporter), puoi installare il grafico Helm per l'agente Prometheus per acquisire le metriche prodotte dall'exporter e renderle visibili su un dashboard Prometheus.
+{: shortdesc}
+
+1. Scarica il file TAR per il grafico Helm per l'exporter di metriche da https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz
+
+2. Passa alla sottocartella Prometheus.
+  ```
+  cd ibmcloud-alb-metrics-exporter-1.0.7.tar/ibmcloud-alb-metrics-exporter/subcharts/prometheus
+  ```
+  {: pre}
+
+3. Installa il grafico Helm Prometheus nel tuo cluster. Sostituisci <ingress_subdomain> con il dominio secondario Ingress per il tuo cluster. L'URL per il dashboard Prometheus è una combinazione del dominio secondario Prometheus predefinito, `prom-dash`, e del tuo dominio secondario di Ingress, ad esempio `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Per trovare il dominio secondario Ingress per il tuo cluster, esegui <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
+  ```
+  helm install --name prometheus . --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
+  ```
+  {: pre}
 
 4. Controlla lo stato di distribuzione del grafico. Quando il grafico è pronto, il campo **STATO** vicino alla parte superiore dell'output ha un valore di `DEPLOYED`.
-    ```
-    helm status ibmcloud-alb-metrics-exporter
-    ```
-    {: pre}
-
-5. Installa in grafico secondario `ibmcloud-alb-metrics-exporter/subcharts/prometheus` sul tuo cluster. Questo grafico secondario distribuisce un agent Prometheus che consente di raccogliere e visualizzare le metriche ALB sul dashboard Prometheus. Sostituisci <ingress_subdomain> con il dominio secondario Ingress per il tuo cluster. L'URL per il dashboard Prometheus è una combinazione del dominio secondario `prom-dash` e del dominio secondario di Ingress, ad esempio `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Per trovare il dominio secondario Ingress per il tuo cluster, esegui <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
-
-    ```
-    helm install ibm/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
-    ```
-    {: pre}
-
-6. Controlla lo stato di distribuzione del grafico. Quando il grafico è pronto, il campo **STATO** vicino alla parte superiore dell'output ha un valore di `DEPLOYED`.
-
     ```
     helm status prometheus
     ```
     {: pre}
 
-7. Verifica che i pod `ibmcloud-alb-metrics-exporter` e `prometheus` siano in esecuzione.
+5. Verifica che il pod `prometheus` sia in esecuzione.
     ```
     kubectl get pods -n kube-system -o wide
     ```
@@ -316,9 +336,9 @@ Per installare l'exporter di metriche e l'agent Prometheus per un ALB nel tuo cl
     ```
     {:screen}
 
-8. In un browser, immetti l'URL per il dashboard Prometheus. Questo nome host ha il formato `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Si apre il dashboard Prometheus per il tuo ALB.
+6. In un browser, immetti l'URL per il dashboard Prometheus. Questo nome host ha il formato `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Si apre il dashboard Prometheus per il tuo ALB.
 
-9. Esamina le ulteriori informazioni sulle metriche [ALB](#alb_metrics), [server](#server_metrics) e [upstream](#upstream_metrics) elencate nel dashboard.
+7. Esamina le ulteriori informazioni sulle metriche [ALB](#alb_metrics), [server](#server_metrics) e [upstream](#upstream_metrics) elencate nel dashboard.
 
 ### Metriche ALB
 {: #alb_metrics}
@@ -385,8 +405,7 @@ La seguente tabella elenca i nomi di metrica ALB supportati con le etichette del
 <tr>
 <td><code>totalHandledRequest_total</code></td>
 <td>Il numero totale di richieste client ricevute dai client.</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### Metriche del server
@@ -511,8 +530,7 @@ La seguente tabella elenca i nomi di metrica del server supportati.
 <tr>
 <td><code>total</code></td>
 <td>Il numero totale di risposte con i codici di stato.</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### Metriche di upstream
@@ -604,7 +622,7 @@ La seguente tabella elenca i nomi di metrica di upstream di tipo 1 supportati.
 <tr>
 <td><code>total</code></td>
 <td>Il numero totale di risposte con i codici di stato.</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 #### Metriche di upstream di tipo 2
@@ -662,7 +680,7 @@ La seguente tabella elenca i nomi di metrica di upstream di tipo 2 supportati.
 <tr>
 <td><code>responseMsec</code></td>
 <td>La media dei soli tempi di elaborazione delle risposte upstream in millisecondi.</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 <br />

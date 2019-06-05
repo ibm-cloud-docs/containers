@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -46,8 +46,7 @@ subcollection: containers
 何を削除したかと、課金タイプによって異なります。 PVC と PV を削除しても、IBM Cloud インフラストラクチャー (SoftLayer) アカウントのインスタンスを削除しなかった場合は、そのインスタンスがまだ存在するので課金されます。 課金されないようにするには、すべて削除する必要があります。 また、PVC で `billingType` を指定するときには、`hourly` か `monthly` を選択できます。 `monthly` を選択した場合、インスタンスは月単位で課金されます。 インスタンスを削除しても、その月の最後まで請求されます。
 
 
-<p class="important">永続ストレージをクリーンアップすると、保管されているすべてのデータが削除されます。 データのコピーが必要な場合は、[ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_backup_restore)または[ブロック・ストレージ](/docs/containers?topic=containers-block_storage#block_backup_restore)のバックアップを作成してください。</br>
-</br>{{site.data.keyword.Bluemix_dedicated}} アカウントを使用している場合は、[サポート・ケースを開いて](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)、ボリュームの削除を要求する必要があります。</p>
+<p class="important">永続ストレージをクリーンアップすると、保管されているすべてのデータが削除されます。 データのコピーが必要な場合は、[ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_backup_restore)または[ブロック・ストレージ](/docs/containers?topic=containers-block_storage#block_backup_restore)のバックアップを作成してください。</p>
 
 開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 

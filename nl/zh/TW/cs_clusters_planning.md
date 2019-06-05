@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -56,22 +56,21 @@ subcollection: containers
 當您新增更多工作者節點時，應用程式實例可以分佈到多個工作者節點。如果某個工作者節點關閉，則可用工作者節點上的應用程式實例會繼續執行。Kubernetes 會自動從無法使用的工作者節點重新排定 Pod，以確保應用程式的效能及容量。若要確定 Pod 平均分佈到工作者節點，請實作 [Pod 親緣性](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
 
 **可以將單一區域叢集轉換成多區域叢集嗎？**</br>
-如果叢集是在其中一個[受支援的多區域都會城市](/docs/containers?topic=containers-regions-and-zones#zones)，請輸入 yes。請參閱[從獨立式工作者節點更新至工作者儲存區](/docs/containers?topic=containers-update#standalone_to_workerpool)。
+如果叢集是在其中一個[受支援的多區域都會位置](/docs/containers?topic=containers-regions-and-zones#zones)，請輸入 yes。請參閱[從獨立式工作者節點更新至工作者儲存區](/docs/containers?topic=containers-update#standalone_to_workerpool)。
 
 
 **必須使用多區域叢集嗎？**</br>
 否。您可以建立所需數目的單一區域叢集。實際上，您可能偏好使用單一區域叢集來簡化管理，或者，如果您的叢集必須位於特定[單一區域城市](/docs/containers?topic=containers-regions-and-zones#zones)中。
 
 **我是否可以在單一區域中具有高可用性主節點？**</br>
-是，可以具有執行 Kubernetes 1.10 版或更新版本的叢集。在單一區域中，您的主節點具有高可用性，且會在個別實體主機上包含 Kubernetes API 伺服器、etcd、排程器及控制器管理程式的抄本，來防範在主節點更新這類期間發生運作中斷。若要防範區域失敗，您可以：
+是。在單一區域中，您的主節點具有高可用性，且會在個別實體主機上包含 Kubernetes API 伺服器、etcd、排程器及控制器管理程式的抄本，來防範在主節點更新這類期間發生運作中斷。若要防範區域失敗，您可以：
 * [在具有多區域功能的區域中建立叢集](/docs/containers?topic=containers-plan_clusters#multizone)，其中主節點會分散在各區域之中。
 * [建立多個叢集](#multiple_clusters)，並將它們與廣域負載平衡器連接。
 
 ## 多區域叢集
 {: #multizone}
 
-使用 {{site.data.keyword.containerlong}}，您可以建立多區域叢集。若使用工作者節點儲存區將應用程式分佈到多個工作者節點及區域，使用者遇到應用程式關閉的可能性就會越低。內建功能（例如負載平衡）可提高對於主機、網路或應用程式潛在區域故障的備援。如果某個區域中的資源降低，則叢集工作負載仍然可以在其他區域中運作。
-**附註**：{{site.data.keyword.Bluemix_dedicated_notm}} 實例只能使用單一區域叢集。
+使用 {{site.data.keyword.containerlong_notm}}，您可以建立多區域叢集。若使用工作者節點儲存區將應用程式分佈到多個工作者節點及區域，使用者遇到應用程式關閉的可能性就會越低。內建功能（例如負載平衡）可提高對於主機、網路或應用程式潛在區域故障的備援。如果某個區域中的資源降低，則叢集工作負載仍然可以在其他區域中運作。
 {: shortdesc}
 
 **何謂工作者節點儲存區？**</br>
@@ -81,7 +80,7 @@ subcollection: containers
 支援獨立式工作者節點的前一個叢集設定，但已遭淘汰。請務必[將工作者節點儲存區新增至叢集](/docs/containers?topic=containers-clusters#add_pool)，然後[使用工作者節點儲存區](/docs/containers?topic=containers-update#standalone_to_workerpool)來組織工作者節點，而非獨立式工作者節點。
 
 **可以將單一區域叢集轉換成多區域叢集嗎？**</br>
-如果叢集是在其中一個[受支援的多區域都會城市](/docs/containers?topic=containers-regions-and-zones#zones)，請輸入 yes。請參閱[從獨立式工作者節點更新至工作者儲存區](/docs/containers?topic=containers-update#standalone_to_workerpool)。
+如果叢集是在其中一個[受支援的多區域都會位置](/docs/containers?topic=containers-regions-and-zones#zones)，請輸入 yes。請參閱[從獨立式工作者節點更新至工作者儲存區](/docs/containers?topic=containers-update#standalone_to_workerpool)。
 
 
 ### 告訴我多區域叢集設定的相關資訊
@@ -89,21 +88,18 @@ subcollection: containers
 
 <img src="images/cs_cluster_multizone-ha.png" alt="多區域叢集的高可用性" width="500" style="width:500px; border-style: none"/>
 
-您可以將其他區域新增至叢集，以將工作者節點儲存區中的工作者節點抄寫到某個地區內的多個區域。多區域叢集的設計為將 Pod 平均排定到各工作者節點及區域，以確保可用性及失敗回復。如果工作者節點未平均分散到各區域，或其中一個區域中的容量不足，則 Kubernetes 排程器可能無法排定所有要求的 Pod。因此，Pod 可能會進入**擱置**狀態，直到有足夠的可用容量為止。如果您要變更預設行為，讓 Kubernetes 排程器以最佳效能分佈將 Pod 分佈到各區域，請使用 `preferredDuringSchedulingIgnoredDuringExecution` [Pod 親緣性原則](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
+您可以將其他區域新增至叢集，以將工作者節點儲存區中的工作者節點抄寫到某個地區內的多個區域。多區域叢集的設計為將 Pod 平均排定到各工作者節點及區域，以確保可用性及失敗回復。如果工作者節點未平均分散到各區域，或其中一個區域的容量不足，則 Kubernetes 排程器可能無法排定所有要求的 Pod。因此，Pod 可能會進入**擱置**狀態，直到有足夠的可用容量為止。如果您要變更預設行為，讓 Kubernetes 排程器以最佳效能分佈將 Pod 分佈到各區域，請使用 `preferredDuringSchedulingIgnoredDuringExecution` [Pod 親緣性原則](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
 
-**為什麼 3 個區域中需要有工作者節點？** </br>
-將工作負載分佈到 3 個區域，可確保一個或兩個區域無法使用時的應用程式高可用性，但也讓您的叢集設定更具成本效益。但為什麼是這樣？請參考以下範例。
+**為什麼 3 個區域中需要有工作者節點？** </br> 將工作負載分佈到 3 個區域，可確保一個或兩個區域無法使用時的應用程式高可用性，但也讓您的叢集設定更具成本效益。但為什麼是這樣？請參考以下範例。
 
 假設您需要具有 6 個核心的工作者節點來處理應用程式的工作負載。為了讓您的叢集更為可用，您具有下列選項：
 
-- **在另一個區域中複製資源：**此選項可讓您具有 2 個工作者節點，而每一個區域中的每一個工作者節點都有 6 個核心，因此共有 12 個核心。</br>
+- **在另一個區域中複製資源：**此選項可讓您具有 2 個工作者節點，而每個區域中的每個工作者節點都有 6 個核心，因此共有 12 個核心。</br>
 - **將資源分佈到 3 個區域：**使用此選項，每個區域都會部署 3 個核心，因此總容量為 9 個核心。若要處理工作負載，必須同時啟動兩個區域。如果有一個區域無法使用，則其他兩個區域都可以處理工作負載。如果有兩個區域無法使用，則會啟動剩下的 3 個核心來處理工作負載。每個區域都部署 3 個核心，表示機器數目較少，因而可降低成本。</br>
 
-**我的 Kubernetes 主節點的設定如何？** </br>
-如果您在[選取多區域都會城市](/docs/containers?topic=containers-regions-and-zones#zones)中建立多區域叢集，則會自動部署高可用性的 Kubernetes 主節點，且三個抄本會分散在都會的各個區域中。例如，如果叢集是在 `dal10`、`dal12` 或 `dal13` 區域中，則 Kubernetes 主節點的抄本會分散在 Dallas 多區域都會的每一個區域中。
+**我的 Kubernetes 主節點的設定如何？** </br> 當您在[多區域都會位置](/docs/containers?topic=containers-regions-and-zones#zones)中建立叢集時，會自動部署高可用性的 Kubernetes 主節點，且三個抄本會分散在都會的各個區域中。例如，如果叢集是在 `dal10`、`dal12` 或 `dal13` 區域中，則 Kubernetes 主節點的抄本會分散在 Dallas 多區域都會的每一個區域中。
 
-**如果 Kubernetes 主節點變成無法使用，會發生什麼情況？**</br>
-[Kubernetes 主節點](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)是保持叢集運作的主要元件。主節點將叢集資源及其配置儲存在 etcd 資料庫中，作為叢集的單點真實資料 (SPOT)。Kubernetes API 伺服器是從工作者節點到主節點之所有叢集管理要求的主要進入點，或您要與叢集資源互動時。<br><br>如果發生主節點失敗，則工作負載會繼續在工作者節點上執行，但無法使用 `kubectl` 指令來使用叢集資源，或檢視叢集性能，直到備份主節點中的 Kubernetes API 伺服器為止。如果 Pod 在主節點中斷期間關閉，則除非工作者節點再次到達 Kubernetes API 伺服器，否則無法重新排定 Pod。<br><br>在主節點中斷期間，您仍然可以針對 {{site.data.keyword.containerlong_notm}} API 執行 `ibmcloud ks` 指令，以使用您的基礎架構資源（例如工作者節點或 VLAN）。如果您透過在叢集裡新增或移除工作者節點來變更現行叢集配置，則除非備份主節點，否則您的變更不會發生。
+**如果 Kubernetes 主節點變成無法使用，會發生什麼情況？** </br>[Kubernetes 主節點](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)是保持叢集運作的主要元件。主節點將叢集資源及其配置儲存在 etcd 資料庫中，作為叢集的單點真實資料 (SPOT)。Kubernetes API 伺服器是從工作者節點到主節點之所有叢集管理要求的主要進入點，或您要與叢集資源互動時。<br><br>如果發生主節點失敗，則工作負載會繼續在工作者節點上執行，但無法使用 `kubectl` 指令來使用叢集資源，或檢視叢集性能，直到備份主節點中的 Kubernetes API 伺服器為止。如果 Pod 在主節點中斷期間關閉，則除非工作者節點再次到達 Kubernetes API 伺服器，否則無法重新排定 Pod。<br><br>在主節點中斷期間，您仍然可以針對 {{site.data.keyword.containerlong_notm}} API 執行 `ibmcloud ks` 指令，以使用您的基礎架構資源（例如工作者節點或 VLAN）。如果您透過在叢集裡新增或移除工作者節點來變更現行叢集配置，則除非備份主節點，否則您的變更不會發生。
 
 在主節點中斷期間，請不要將工作者節點重新啟動或重新開機。此動作會從您的工作者節點移除 Pod。因為 Kubernetes API 伺服器無法使用，所以無法將 Pod 重新排程至叢集裡的其他工作者節點。
 {: important}
@@ -112,10 +108,10 @@ subcollection: containers
 若要保護叢集不發生 Kubernetes 主節點失敗，或在多區域叢集無法使用的地區中保護叢集，您可以[設定多個叢集，並使用廣域負載平衡器進行連接](#multiple_clusters)。
 
 **我是否必須執行什麼動作才能讓主節點跨區域與工作者節點通訊？**</br>
-是。如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+是。如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，請[聯絡 IBM Cloud 基礎架構 (SoftLayer) 帳戶代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 
-**如何讓使用者從公用網際網路存取我的應用程式？**</br>
+**如何讓我的使用者從公用網際網路存取我的應用程式？**</br>
 您可以使用 Ingress 應用程式負載平衡器 (ALB) 或負載平衡器服務來公開應用程式。
 
 - **Ingress 應用程式負載平衡器 (ALB)** 依預設，會在叢集的每一個區域中自動建立及啟用公用 ALB。也會自動建立及部署叢集的 Cloudflare 多區域負載平衡器 (MZLB)，使每個地區有 1 個 MZLB。MZLB 會在相同主機名稱後面放置 ALB 的 IP 位址，並對這些 IP 位址啟用性能檢查，以判斷是否可以使用它們。例如，如果您的工作者節點是在美國東部地區的 3 個區域中，則主機名稱 `yourcluster.us-east.containers.appdomain.cloud` 有 3 個 ALB IP 位址。MZLB 性能檢查會檢查地區中每一個區域的公用 ALB IP，並根據這些性能檢查來更新 DNS 查閱結果。如需相關資訊，請參閱 [Ingress 元件和架構](/docs/containers?topic=containers-ingress#planning)。
@@ -123,7 +119,7 @@ subcollection: containers
 - **負載平衡器服務：**負載平衡器服務只會設定在某個區域中。您應用程式的送入要求會從該區域遞送至其他區域中的所有應用程式實例。如果此區域變成無法使用，則可能無法從網際網路存取您的應用程式。您可以在其他區域中設定其他負載平衡器服務來負責單一區域故障。如需相關資訊，請參閱高可用性[負載平衡器服務](/docs/containers?topic=containers-loadbalancer#multi_zone_config)。
 
 **我可以為多區域叢集設定持續性儲存空間嗎？**</br>
-對於高可用性持續性儲存空間，請使用雲端服務（例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage)）。您也可以嘗試軟體定義儲存空間 (SDS) 解決方案，例如 [Portworx](/docs/containers?topic=containers-portworx#portworx)，它使用 [SDS 機器](#sds)。如需相關資訊，請參閱[多區域叢集的持續性儲存空間選項比較](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。
+對於高可用性持續性儲存空間，請使用雲端服務（例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)）。您也可以嘗試軟體定義儲存空間 (SDS) 解決方案，例如 [Portworx](/docs/containers?topic=containers-portworx#portworx)，它使用 [SDS 機器](#sds)。如需相關資訊，請參閱[多區域叢集的持續性儲存空間選項比較](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。
 
 無法跨區域共用 NFS 檔案及區塊儲存空間。持續性磁區只能在實際儲存裝置所在的區域中使用。如果您要繼續使用叢集裡的現有 NFS 檔案或區塊儲存空間，則必須將地區及區域標籤套用至現有的持續性磁區。這些標籤可協助 kube-scheduler 判斷在何處排定使用持續性磁區的應用程式。執行下列指令，並將 `<mycluster>` 取代為您的叢集名稱。
 
@@ -133,7 +129,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 {: pre}
 
 **我已建立多區域叢集。為什麼還是只有一個區域？如何將區域新增至我的叢集？**</br>
-如果您[使用 CLI 建立多區域叢集](/docs/containers?topic=containers-clusters#clusters_cli)，會建立叢集，但必須將區域新增至工作者節點儲存區，才能完成該處理程序。若要跨越多個區域，您的叢集必須位在[多區域都會城市](/docs/containers?topic=containers-regions-and-zones#zones)中。若要將區域新增至叢集，並將工作者節點分散到各區域，請參閱[將區域新增至叢集](/docs/containers?topic=containers-clusters#add_zone)。
+如果您[使用 CLI 建立多區域叢集](/docs/containers?topic=containers-clusters#clusters_cli)，會建立叢集，但必須將區域新增至工作者節點儲存區，才能完成該處理程序。若要跨越多個區域，您的叢集必須位在[多區域都會位置](/docs/containers?topic=containers-regions-and-zones#zones)中。若要將區域新增至叢集，並將工作者節點分散到各區域，請參閱[將區域新增至叢集](/docs/containers?topic=containers-clusters#add_zone)。
 
 ### 我目前管理叢集的方式有哪些改變？
 {: #mz_new_ways}
@@ -180,16 +176,14 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 
 若要平衡多個叢集間的工作負載，您必須設定廣域負載平衡器，並將應用程式負載平衡器 (ALB) 或負載平衡器服務的 IP 位址新增至網域。新增這些 IP 位址，即可在叢集之間遞送送入資料流量。若要讓廣域負載平衡器偵測是否有一個叢集無法使用，請考慮將以 Ping 為基礎的性能檢查新增至每個 IP 位址。當您設定此檢查時，DNS 提供者會定期對您新增至網域的 IP 位址執行連線測試。如果有一個 IP 位址變成無法使用，則不會再將資料流量傳送至此 IP 位址。不過，Kubernetes 不會自動從可用叢集之工作者節點的無法使用叢集裡重新啟動 Pod。如果您要 Kubernetes 自動重新啟動可用叢集裡的 Pod，請考慮設定[多區域叢集](#multizone)。
 
-**為什麼 3 個區域中需要有 3 個叢集？** </br>
-與[在多區域叢集裡使用 3 個區域](#multizone)類似，跨區域設定 3 個叢集，您可以提供應用程式的更多可用性。您也可以購買較少的機器來處理工作量，以降低成本。
+**為什麼 3 個區域中需要有 3 個叢集？** </br> 與[在多區域叢集裡使用 3 個區域](#multizone)類似，跨區域設定 3 個叢集，您可以提供應用程式的更多可用性。您也可以購買較少的機器來處理工作量，以降低成本。
 
-**如果我要跨地區設定多個叢集，該怎麼辨？** </br>
-您可以在一個地理位置（例如美國南部和美國東部）或跨地理位置（例如美國南部和歐盟中心）的不同地區中設定多個叢集。這兩個設定都為應用程式提供相同的可用性層次，但在共用資料及抄寫資料時也增加了複雜性。在大部分情況下，停留在相同地理位置就已足夠。但是，如果您的使用者位分佈在世界各地，則最好在使用者所在位置設定叢集，這樣您的使用者在將要求傳送給應用程式時就不需要長時間等待。
+**如果我要跨地區設定多個叢集，該怎麼辨？** </br> 您可以在一個地理位置（例如美國南部和美國東部）或跨地理位置（例如美國南部和歐盟中心）的不同地區中設定多個叢集。這兩個設定都為應用程式提供相同的可用性層次，但在共用資料及抄寫資料時也增加了複雜性。在大部分情況下，停留在相同地理位置就已足夠。但是，如果您的使用者位分佈在世界各地，則最好在使用者所在位置設定叢集，這樣您的使用者在將要求傳送給應用程式時就不需要長時間等待。
 
 **若要設定多個叢集的廣域負載平衡器，請執行下列動作：**
 
 1. 在多個區域或地區中[建立叢集](/docs/containers?topic=containers-clusters#clusters)。
-2. 如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+2. 如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，請[聯絡 IBM Cloud 基礎架構 (SoftLayer) 帳戶代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 3. 在每一個叢集裡，使用[應用程式負載平衡器 (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) 或[負載平衡器服務](/docs/containers?topic=containers-loadbalancer)來公開應用程式。
 4. 針對每一個叢集，列出您 ALB 或負載平衡器服務的公用 IP 位址。
@@ -231,17 +225,17 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 您是否具有要僅作為專用的現有叢集？若要瞭解如何新增工作者節點儲存區，或修改具有新 VLAN 的現有工作者節點儲存區，請查看 [變更工作者節點 VLAN 連線](/docs/containers?topic=containers-cs_network_cluster#change-vlans)。
 {: note}
 
-**已啟用 VRF 的帳戶、專用 Kubernetes 主節點、公用及專用 VLAN 上的工作者節點**</br>
-在執行 Kubernetes 1.11 版或更新版本的叢集中，您可以設定叢集網路使用公用及專用服務端點。啟用專用服務端點之後，Kubernetes 主節點與您的工作者節點一律透過專用服務端點在專用 VLAN 上進行通訊。即使您為叢集啟用公用服務端點，Kubernetes 主節點與工作者節點的通訊仍維持在專用 VLAN 上進行。啟用專用服務端點之後，您無法停用它。您可以讓公用服務端點透過網際網路對您的 Kubernetes 主節點進行安全存取，例如，執行 `kubectl` 指令，或者，您可以對僅限專用服務端點的叢集停用公用服務端點。
+**已啟用 VRF 的帳戶、專用 Kubernetes 主節點、公用和專用 VLAN 上的工作者節點**</br>
+在執行 Kubernetes 1.11 版或更新版本的叢集中，您可以設定叢集網路來使用公用和專用服務端點。啟用專用服務端點之後，Kubernetes 主節點與您的工作者節點一律透過專用服務端點在專用 VLAN 上進行通訊。即使您為叢集啟用公用服務端點，Kubernetes 主節點與工作者節點的通訊仍維持在專用 VLAN 上進行。啟用專用服務端點之後，您無法停用它。您可以讓公用服務端點透過網際網路對您的 Kubernetes 主節點進行安全存取，例如，執行 `kubectl` 指令，或者，您可以對僅限專用服務端點的叢集停用公用服務端點。
 
-**非 VRF 或已啟用 VRF 的帳戶、僅在專用 VLAN 上的 Kubernetes 主節點與工作者節點**</br>
+**非 VRF 或已啟用 VRF 的帳戶、Kubernetes 主節點、僅在專用 VLAN 上的工作者節點**</br>
 如果您將工作者節點設定在僅限專用 VLAN 上，則工作者節點無法在公用網路上自動公開其應用程式服務，而在非 VRF 帳戶中也無法連接至主節點。您必須配置閘道應用裝置，才能提供工作者節點與主節點之間的網路連線功能。
 
 對於非 VRF 帳戶：如果您建立具有公用和專用 VLAN 的叢集，則您以後無法從該叢集中移除公用 VLAN。從叢集移除所有公用 VLAN 會導致數個叢集元件停止運作。請改為建立沒有公用 VLAN 的新叢集。
 {: note}
 
-**非 VRF 帳戶、Kubernetes 主節點、公用及專用 VLAN 上的工作者節點**</br>
-在大部分情況下，您的叢集設定可包含公用及專用 VLAN 上的工作者節點。然後，您可以透過使用 Calico 原則封鎖公用 VLAN 資料流量，並限制資料流量選取邊緣節點，來鎖定叢集。
+**非 VRF 帳戶、Kubernetes 主節點、公用和專用 VLAN 上的工作者節點**</br>
+在大部分情況下，您的叢集設定可包含公用和專用 VLAN 上的工作者節點。然後，您可以透過使用 Calico 原則封鎖公用 VLAN 資料流量，並限制資料流量選取邊緣節點，來鎖定叢集。
 
 ## 工作者節點儲存區及工作者節點
 {: #planning_worker_nodes}
@@ -292,16 +286,17 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 
 因為基礎硬體的成本是由多個客戶分攤，所以共用節點成本通常會比專用節點成本低。不過，當您決定共用或專用節點時，可能會想要與法務部門討論應用程式環境所需的基礎架構隔離及法規遵循層次。
 
-部分特性僅適用於一種類型的承租戶設定。例如，`m2c` VM 只能作為 `shared` 承租戶設定。
+部分特性僅適用於一種類型的承租戶設定。例如，`m3c` VM 只能作為 `shared` 承租戶設定。
 {: note}
 
-**哪些是 VM 的一般功能？**</br>
+**哪些是 VM 的一般特性？**</br>
 虛擬機器使用本端磁碟而非儲存區域網路 (SAN) 來達到可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。每個 VM 都配備了 1000Mbps 網路速度、OS 檔案系統的 25GB 主要本端磁碟儲存空間，以及 100GB 次要本端磁碟儲存空間（用於容器運行環境和 `kubelet` 等資料）。工作者節點上的本端儲存空間僅適用於短期處理，當您更新或重新載入工作者節點時，會清除主要及次要磁碟。如需持續性儲存空間解決方案的相關資訊，請參閱[規劃高度可用的持續性儲存空間](/docs/containers?topic=containers-storage_planning#storage_planning)。
 
-**如果我已淘汰 `u1c` 或 `b1c` 機型，怎麼辨？**</br>若要開始使用 `u2c` 及 `b2c` 機型，[請藉由新增工作者節點來更新機型](/docs/containers?topic=containers-update#machine_type)。
+**如果我有較舊的機型，該怎麼辨？**</br>
+如果您的叢集已淘汰 `x1c` 或更舊版本的 Ubuntu 16 `x2c` 工作者節點特性，您可以[更新叢集使其具有 Ubuntu 18 `x3c` 工作者節點](/docs/containers?topic=containers-update#machine_type)。
 
-**哪些虛擬機器特性可用？**</br>
-機型因區域而異。若要查看您區域中可用的機型，請執行 `ibmcloud ks machine-types <zone>`。例如，`m2c` VM 僅適用於 Dallas 位置 (`dal10, dal12, dal13`)。您也可以檢閱可用的[裸機](#bm)或 [SDS](#sds) 機型。
+**哪些虛擬機器特性可供使用？**</br>
+工作者節點特性依區域而有所不同。下表包括特性的最新版本（例如 `x3c` Ubuntu 18 工作者節點特性，相對於較舊的 `x2c` Ubuntu 16 工作者節點特性）。若要查看您區域中可用的機型，請執行 `ibmcloud ks machine-types <zone>`。您也可以檢閱可用的[裸機](#bm)或 [SDS](#sds) 機型。
 
 {: #vm-table}
 <table>
@@ -314,83 +309,83 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 </thead>
 <tbody>
 <tr>
-<td><strong>虛擬，u2c.2x4</strong>：針對快速測試、概念證明，以及其他輕型工作負載，使用這個大小最小的 VM。</td>
+<td><strong>虛擬，u3c.2x4</strong>：針對快速測試、概念證明，以及其他輕量型工作負載，使用這個大小最小的 VM。</td>
 <td>2 / 4GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>虛擬，b2c.4x16</strong>：針對測試與開發，以及其他輕型工作負載，選取這個已平衡的 VM。</td>
+<td><strong>虛擬，b3c.4x16</strong>：針對測試與開發，以及其他輕量型工作負載，選取這個平衡的 VM。</td>
 <td>4 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>虛擬，b2c.16x64</strong>：針對中型工作負載，選取這個已平衡的 VM。</td></td>
+<td><strong>虛擬，b3c.16x64</strong>：針對中型工作負載，選取這個平衡的 VM。</td></td>
 <td>16 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>虛擬，b2c.32x128</strong>：針對中型或大型工作負載（例如一個資料庫及一個具有許多並行使用者的動態網站），選取這個已平衡的 VM。</td>
+<td><strong>虛擬，b3c.32x128</strong>：針對中型或大型工作負載（例如一個資料庫及一個具有許多並行使用者的動態網站），選取這個平衡的 VM。</td>
 <td>32 / 128GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>虛擬，b2c.56x242</strong>：針對大型工作負載（例如一個資料庫及多個具有許多並行使用者的應用程式），選取這個已平衡的 VM。</td>
+<td><strong>虛擬，b3c.56x242</strong>：針對大型工作負載（例如一個資料庫及多個具有許多並行使用者的應用程式），選取這個平衡的 VM。</td>
 <td>56 / 242GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>虛擬，c2c.16x16</strong>：當您想要工作者節點的計算資源取得均等平衡以處理輕量型工作負載時，請使用此特性。</td>
+<td><strong>虛擬，c3c.16x16</strong>：當您想要工作者節點的計算資源取得均等平衡以處理輕量型工作負載時，請使用此特性。</td>
 <td>16 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，c2c.16x32</strong>：當您想要輕量型到中量型工作負載之工作者節點的 CPU 和記憶體資源比例為 1:2 時，請使用此特性。</td>
+<td><strong>虛擬，c3c.16x32</strong>：當您想要輕量型到中量型工作負載之工作者節點的 CPU 和記憶體資源比例為 1:2 時，請使用此特性。</td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，c2c.32x32</strong>：當您想要工作者節點的計算資源取得均等平衡以處理中量型工作負載時，請使用此特性。</td>
+<td><strong>虛擬，c3c.32x32</strong>：當您想要工作者節點的計算資源取得均等平衡以處理中量型工作負載時，請使用此特性。</td>
 <td>32 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，c2c.32x64</strong>：當您想要中量型工作負載之工作者節點的 CPU 和記憶體資源比例為 1:2 時，請使用此特性。</td>
+<td><strong>虛擬，c3c.32x64</strong>：當您想要中量型工作負載之工作者節點的 CPU 和記憶體資源比例為 1:2 時，請使用此特性。</td>
 <td>32 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>虛擬，m2c.8x64</strong>：當您想要輕量型到中量型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 之類的資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適用於 Dallas，並作為 `--hardware shared` 承租戶。</td>
+<td><strong>虛擬，m3c.8x64</strong>：當您想要輕量型到中量型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 這類資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適用於 Dallas，並作為 `--hardware shared` 承租戶。</td>
 <td>8 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，m2c.16x128</strong>：當您想要中量型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 之類的資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適用於 Dallas，並作為 `--hardware shared` 承租戶。</td>
+<td><strong>虛擬，m3c.16x128</strong>：當您想要中量型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 這類資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適用於 Dallas，並作為 `--hardware shared` 承租戶。</td>
 <td>16 / 128GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，m2c.30x240</strong>：當您想要中量型到大型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 之類的資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適用於 Dallas，並作為 `--hardware shared` 承租戶。</td>
+<td><strong>虛擬，m3c.30x240</strong>：當您想要中量型到大型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 這類資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適用於 Dallas，並作為 `--hardware shared` 承租戶。</td>
 <td>30 / 240GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，m2c.48x384</strong>：當您想要中量型到大型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 之類的資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適用於 Dallas，並作為 `--hardware shared` 承租戶。</td>
+<td><strong>虛擬，m3c.48x384</strong>：當您想要中量型到大型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 這類資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適合作為 `--hardware shared` 承租戶。</td>
 <td>48 / 384GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，m2c.56x448</strong>：當您想要大型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 之類的資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適用於 Dallas，並作為 `--hardware shared` 承租戶。</td>
+<td><strong>虛擬，m3c.56x448</strong>：當您想要大型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 這類資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適合作為 `--hardware shared` 承租戶。</td>
 <td>56 / 448GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，m2c.64x512</strong>：當您想要大型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 之類的資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適用於 Dallas，並作為 `--hardware shared` 承租戶。</td>
+<td><strong>虛擬，m3c.64x512</strong>：當您想要大型工作負載（其需要更多的記憶體，例如 {{site.data.keyword.Db2_on_Cloud_short}} 這類資料庫）的 CPU 和記憶體資源比例為 1:8 時，請使用此特性。僅適合作為 `--hardware shared` 承租戶。</td>
 <td>64 / 512GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
@@ -410,7 +405,7 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 **除了更好的效能規格之外，裸機還有什麼功能是 VM 所沒有的？**</br>
 是。透過裸機，您可以選擇啟用「授信運算」，以驗證工作者節點是否遭到竄改。如果您未在建立叢集期間啟用信任，但後來想要啟用，則可以使用 `ibmcloud ks feature-enable` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)。啟用信任之後，以後您就無法再予以停用。無需信任，即可建立新叢集。如需在節點啟動處理程序期間信任如何運作的相關資訊，請參閱[使用授信運算的 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#trusted_compute)。「授信運算」可用於特定裸機的機型。當您執行 `ibmcloud ks machine-types <zone>` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)時，可以檢閱 **Trustable** 欄位來查看哪些機器支援信任。例如，`mgXc` GPU 特性不支援「授信運算」。
 
-除了「授信運算」之外，您也可以利用 {{site.data.keyword.datashield_full}}（測試版）。{{site.data.keyword.datashield_short}} 與 Intel® Software Guard Extensions (SGX) 和 Fortanix® 技術整合，因此，您使用的 {{site.data.keyword.Bluemix_notm}} 容器工作負載程式碼及資料會受到保護。應用程式碼及資料是在 CPU 強化的區域中執行，這些是工作者節點上的記憶體信任區域，能保護應用程式的重要方面，有助於保持程式碼和資料的機密性，並使其不會遭到修改。如果您或貴公司因為內部政策、政府規定或產業合規性需求而需要顧及資料敏感度，本解決方案也許可協助您移至雲端。範例使用案例包括財務及醫療機構，或其政府政策需要內部部署雲端解決方案的國家。
+除了「授信運算」之外，您也可以利用 {{site.data.keyword.datashield_full}}（測試版）。{{site.data.keyword.datashield_short}} 與 Intel® Software Guard Extensions (SGX) 及 Fortanix® 技術整合，以在使用時保護 {{site.data.keyword.Bluemix_notm}} 容器工作負載程式碼和資料。應用程式碼及資料是在 CPU 強化的區域中執行，這些是工作者節點上的記憶體信任區域，能保護應用程式的重要方面，有助於保持程式碼和資料的機密性，並使其不會遭到修改。如果您或貴公司因為內部政策、政府規定或產業合規性需求而需要顧及資料敏感度，本解決方案也許可協助您移至雲端。範例使用案例包括財務及醫療機構，或其政府政策需要內部部署雲端解決方案的國家。
 
 **裸機聽起來真棒！有什麼原因阻止我立即訂購？**</br>
 裸機伺服器的成本高於虛擬伺服器，最適合需要更多資源和主機控制的高效能應用程式。
@@ -419,7 +414,7 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 {: important}
 
 **我可以訂購哪些裸機特性？**</br>
-機型因區域而異。若要查看您區域中可用的機型，請執行 `ibmcloud ks machine-types <zone>`。您也可以檢閱可用的 [VM](#vm) 或 [SDS](#sds) 機型。
+工作者節點特性依區域而有所不同。下表包括特性的最新版本（例如 `x3c` Ubuntu 18 工作者節點特性，相對於較舊的 `x2c` Ubuntu 16 工作者節點特性）。若要查看您區域中可用的機型，請執行 `ibmcloud ks machine-types <zone>`。您也可以檢閱可用的 [VM](#vm) 或 [SDS](#sds) 機型。
 
 裸機伺服器針對不同的使用案例（例如 RAM 密集型、資料密集型或 GPU 密集型工作負載）進行最佳化。
 
@@ -442,43 +437,43 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 </thead>
 <tbody>
 <tr>
-<td><strong>RAM 密集的裸機，mr1c.28x512</strong>：將工作者節點可用的 RAM 最大化。</td>
+<td><strong>RAM 密集的裸機，mr3c.28x512</strong>：將工作者節點可用的 RAM 最大化。</td>
 <td>28 / 512GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU 裸機，mg1c.16x128</strong>：針對數學運算密集的工作負載（例如高效能運算、機器學習或 3D 應用程式）選擇這種類型。此特性有 1 張 Tesla K80 實體卡，而每張卡有 2 個圖形處理裝置 (GPU)，總計 2 個 GPU。</td>
+<td><strong>GPU 裸機，mg3c.16x128</strong>：針對數學運算密集的工作負載（例如高效能運算、機器學習或 3D 應用程式）選擇這種類型。此特性有 1 張 Tesla K80 實體卡，而每張卡有 2 個圖形處理裝置 (GPU)，總計 2 個 GPU。</td>
 <td>16 / 128GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU 裸機，mg1c.28x256</strong>：針對數學運算密集的工作負載（例如高效能運算、機器學習或 3D 應用程式）選擇這種類型。此特性有 2 張 Tesla K80 實體卡，而每張卡有 2 個 GPU，總計 4 個 GPU。</td>
+<td><strong>GPU 裸機，mg3c.28x256</strong>：針對數學運算密集的工作負載（例如高效能運算、機器學習或 3D 應用程式）選擇這種類型。此特性有 2 張 Tesla K80 實體卡，而每張卡有 2 個 GPU，總計 4 個 GPU。</td>
 <td>28 / 256GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>資料密集的裸機，md1c.16x64.4x4tb</strong>：針對大量的本端磁碟儲存空間（包括 RAID 來增加資料可用性）、工作負載（例如分散式檔案系統）、大型資料庫及海量資料分析使用此類型。</td>
+<td><strong>資料密集的裸機，md3c.16x64.4x4tb</strong>：針對大量的本端磁碟儲存空間（包括 RAID 來增加資料可用性）、工作負載（例如分散式檔案系統）、大型資料庫及海量資料分析使用此類型。</td>
 <td>16 / 64GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>資料密集的裸機，md1c.28x512.4x4tb</strong>：針對大量的本端磁碟儲存空間（包括 RAID 來增加資料可用性）、工作負載（例如分散式檔案系統）、大型資料庫及海量資料分析使用此類型。</td>
+<td><strong>資料密集的裸機，md3c.28x512.4x4tb</strong>：針對大量的本端磁碟儲存空間（包括 RAID 來增加資料可用性）、工作負載（例如分散式檔案系統）、大型資料庫及海量資料分析使用此類型。</td>
 <td>28 / 512 GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>平衡的裸機，mb2c.4x32</strong>：用於平衡的工作負載，其需要的運算資源比虛擬機器提供的更多。也可以使用 Intel® Software Guard Extensions (SGX) 來啟用此特性，以便您可以使用<a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}}（測試版）<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>來加密資料記憶體。</td>
+<td><strong>平衡的裸機，mb3c.4x32</strong>：用於平衡的工作負載，其需要的運算資源比虛擬機器提供的更多。也可以使用 Intel® Software Guard Extensions (SGX) 來啟用此特性，以便您可以使用<a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}}（測試版）<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>來加密資料記憶體。</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 2TB SATA</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>平衡的裸機，mb1c.16x64</strong>：用於所需的運算資源比虛擬機器提供的還多的已平衡工作負載。</td>
+<td><strong>平衡的裸機，mb3c.16x64</strong>：用於平衡的工作負載，其需要的運算資源比虛擬機器提供的更多。</td>
 <td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
@@ -502,7 +497,7 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 如需其他儲存空間解決方案，請參閱[規劃高度可用的持續性儲存空間](/docs/containers?topic=containers-storage_planning#storage_planning)。
 
 **我可以訂購哪些 SDS 特性？**</br>
-機型因區域而異。若要查看您區域中可用的機型，請執行 `ibmcloud ks machine-types <zone>`。您也可以檢閱可用的[裸機](#bm)或 [VM](#vm) 機型。
+工作者節點特性依區域而有所不同。下表包括特性的最新版本（例如 `x3c` Ubuntu 18 工作者節點特性，相對於較舊的 `x2c` Ubuntu 16 工作者節點特性）。若要查看您區域中可用的機型，請執行 `ibmcloud ks machine-types <zone>`。您也可以檢閱可用的[裸機](#bm)或 [VM](#vm) 機型。
 
 選擇具有正確儲存空間配置的機型以支援您的工作負載。有些特性混合了下列磁碟及儲存空間配置。例如，有些特性可能具有含原始 SSD 次要磁碟的 SATA 主要磁碟。
 
@@ -524,28 +519,28 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 </thead>
 <tbody>
 <tr>
-<td><strong>具有 SDS 的裸機，ms2c.4x32.1.9tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存 (SDS) 的這個需要大量磁碟空間的特性。</td>
+<td><strong>具有 SDS 的裸機，ms3c.4x32.1.9tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存空間 (SDS) 的這個需要大量磁碟空間的特性。</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>1.9TB 原始 SSD（裝置路徑：`/dev/sdc`）</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>具有 SDS 的裸機，ms2c.16x64.1.9tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存 (SDS) 的這個需要大量磁碟空間的特性。</td>
+<td><strong>具有 SDS 的裸機，ms3c.16x64.1.9tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存空間 (SDS) 的這個需要大量磁碟空間的特性。</td>
 <td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>1.9TB 原始 SSD（裝置路徑：`/dev/sdc`）</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>具有 SDS 的裸機，ms2c.28x256.3.8tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存 (SDS) 的這個需要大量磁碟空間的特性。</td>
+<td><strong>具有 SDS 的裸機，ms3c.28x256.3.8tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存空間 (SDS) 的這個需要大量磁碟空間的特性。</td>
 <td>28 / 256GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
 <td>3.8TB 原始 SSD（裝置路徑：`/dev/sdc`）</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>具有 SDS 的裸機，ms2c.28x512.4x3.8tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存 (SDS) 的這個需要大量磁碟空間的特性。</td>
+<td><strong>具有 SDS 的裸機，ms3c.28x512.4x3.8tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存空間 (SDS) 的這個需要大量磁碟空間的特性。</td>
 <td>28 / 512GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
 <td>4 個磁碟，3.8TB 原始 SSD（裝置路徑：`/dev/sdc`、`/dev/sdd`、`/dev/sde`、`/dev/sdf`）</td>
@@ -573,16 +568,28 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 <tr>
   <th>記憶體層級</th>
   <th>% 或保留數量</th>
-  <th>`b2c.4x16` 工作者節點 (16 GB) 範例</th>
+  <th>`b3c.4x16` 工作者節點 (16 GB) 範例</th>
   <th>`mg1c.28x256` 工作者節點 (256 GB) 範例</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>第一個 16GB (0-16GB)</td>
+  <td>第一個 4GB (0-4GB)</td>
+  <td>25% 的記憶體</td>
+  <td>1 GB</td>
+  <td>1 GB</td>
+</tr>
+<tr>
+  <td>下一個 4GB (5-8GB)</td>
+  <td>20% 的記憶體</td>
+  <td>0.8 GB</td>
+  <td>0.8 GB</td>
+</tr>
+<tr>
+  <td>下一個 8GB (9-16GB)</td>
   <td>10% 的記憶體</td>
-  <td>1.6 GB</td>
-  <td>1.6 GB</td>
+  <td>0.8 GB</td>
+  <td>0.8 GB</td>
 </tr>
 <tr>
   <td>下一個 112GB (17-128GB)</td>
@@ -605,8 +612,8 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 <tr>
   <td>**保留總計**</td>
   <td>**（變化）**</td>
-  <td>**1.7 GB，總計 16 GB**</td>
-  <td>**10.96 GB，總計 256 GB**</td>
+  <td>**2.7 GB，總計 16 GB**</td>
+  <td>**11.96 GB，總計 256 GB**</td>
 </tr>
 </tbody>
 </table>
@@ -617,7 +624,7 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 <tr>
   <th>CPU 層級</th>
   <th>% 保留</th>
-  <th>`b2c.4x16` 工作者節點（4 個核心）範例</th>
+  <th>`b3c.4x16` 工作者節點（4 個核心）範例</th>
   <th>`mg1c.28x256` 工作者節點（28 個核心）範例</th>
 </tr>
 </thead>

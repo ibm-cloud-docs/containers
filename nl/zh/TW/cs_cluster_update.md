@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -142,7 +142,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012
@@ -294,7 +294,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 ## 更新機型
 {: #machine_type}
 
-您可以藉由新增工作者節點及移除舊的工作者節點，來更新工作者節點的機型。例如，假設您在專用的機型上有虛擬工作者節點，且機型的名稱中有 `u1c` 或 `b1c`，請建立使用名稱中有 `u2c` 或 `b2c` 的機型的工作者節點。
+您可以藉由新增工作者節點及移除舊的工作者節點，來更新工作者節點的機型。例如，如果您的叢集已淘汰 `x1c` 或更舊版本的 Ubuntu 16 `x2c` 工作者節點特性，請建立 Ubuntu 18 工作者節點，而這些工作者節點使用名稱有 `x3c` 的機型。
 {: shortdesc}
 
 開始之前：
@@ -413,7 +413,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 
 **我可以從叢集個別更新哪些預設附加程式？**</br>
 您可以選擇性地停用下列附加程式的自動更新：
-* [Fluentd 以進行記載](#logging)
+* [Fluentd 以進行記載](#logging-up)
 * [Ingress 應用程式負載平衡器](#alb)
 
 **是否有我無法從叢集個別更新的附加程式？**</br>
@@ -440,10 +440,10 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **是否可以安裝預設值以外的其他附加程式？**</br>
-是。{{site.data.keyword.containerlong_notm}} 提供可從中選擇的其他附加程式，以將功能新增至叢集。例如，您可能要[使用 Helm 圖表](/docs/containers?topic=containers-integrations#helm)來安裝[區塊儲存空間外掛程式](/docs/containers?topic=containers-block_storage#install_block)、[Istio](/docs/containers?topic=containers-istio) 或 [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup)。您必須遵循 Helm 圖表的更新指示，分別更新每個附加程式。
+是。{{site.data.keyword.containerlong_notm}} 提供可從中選擇的其他附加程式，以將功能新增至叢集。例如，您可能要[使用 Helm 圖表](/docs/containers?topic=containers-helm#public_helm_install)來安裝[區塊儲存空間外掛程式](/docs/containers?topic=containers-block_storage#install_block)、[Istio](/docs/containers?topic=containers-istio) 或 [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup)。您必須遵循 Helm 圖表的更新指示，分別更新每個附加程式。
 
 ### 管理用於記載附加程式之 Fluentd 的自動更新
-{: #logging}
+{: #logging-up}
 
 若要變更記載或過濾器配置，Fluentd 附加程式必須為最新版本。依預設，會啟用自動更新附加程式。
 {: shortdesc}
@@ -607,7 +607,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
       ```
       {: pre}
 
-   2. **將區域新增至多個工作者節點儲存區**：將多個工作者節點儲存區新增至 `ibmcloud ks zone-add` 指令。若要將多個工作者節點儲存區新增至區域，您在該區域中必須要有現有專用及公用 VLAN。如果您在該區域中沒有公用及專用 VLAN，請考慮先將該區域新增至一個工作者節點儲存區，以為您建立公用及專用 VLAN。然後，您可以將該區域新增至其他工作者節點儲存區。</br></br>請務必將所有工作者節點儲存區中的工作者節點佈建至所有區域，以確保您的叢集在各區域之間保持平衡。如果您要對不同的工作者節點儲存區使用不同的 VLAN，則請針對要用於工作者節點儲存區的 VLAN 重複這個指令。如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+   2. **將區域新增至多個工作者節點儲存區**：將多個工作者節點儲存區新增至 `ibmcloud ks zone-add` 指令。若要將多個工作者節點儲存區新增至區域，您在該區域中必須要有現有專用及公用 VLAN。如果您在該區域中沒有公用及專用 VLAN，請考慮先將該區域新增至一個工作者節點儲存區，以為您建立公用及專用 VLAN。然後，您可以將該區域新增至其他工作者節點儲存區。</br></br>請務必將所有工作者節點儲存區中的工作者節點佈建至所有區域，以確保您的叢集在各區域之間保持平衡。如果您要對不同的工作者節點儲存區使用不同的 VLAN，則請針對要用於工作者節點儲存區的 VLAN 重複這個指令。如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
@@ -654,8 +654,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
    6. 重複這些步驟，直到移除所有獨立式工作者節點。
 
 
-**下一步為何？**
-</br>
+**下一步為何？** </br>
 既然您已將叢集更新成使用工作者節點儲存區，則可以藉由將其他區域新增至叢集來改善可用性。將其他區域新增至叢集，即可將叢集從單一區域叢集變更為[多區域叢集](/docs/containers?topic=containers-plan_clusters#ha_clusters)。當您將單一區域叢集變更為多區域叢集時，Ingress 網域會從 `<cluster_name>.<region>.containers.mybluemix.net` 變更為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。現有 Ingress 網域仍然有效，而且可以用來將要求傳送至應用程式。
 
 <br />

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -31,17 +31,6 @@ Empiece a trabajar sin interrupción con {{site.data.keyword.containerlong}} des
 
 Los contenedores son una forma estándar de empaquetar apps y todas sus dependencias para poder moverlas entre entornos sin complicaciones. A diferencia de las máquinas virtuales, los contenedores no incorporan el sistema operativo. El contenedor solo contiene código de la app, tiempo de ejecución, herramientas del sistema, bibliotecas y valores. Los contenedores son más ligeros, portátiles y eficientes que una máquina virtual.
 
-
-Pulse en una opción para empezar:
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Pulse un icono para empezar a utilizar rápidamente {{site.data.keyword.containerlong_notm}}. Con {{site.data.keyword.Bluemix_dedicated_notm}}, pulse este icono para ver sus opciones." style="width:440px;" />
-<map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="Iniciación a clústeres de Kubernetes en {{site.data.keyword.Bluemix_notm}}" title="Iniciación a clústeres de Kubernetes en {{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
-<area href="/docs/containers?topic=containers-cs_cli_install" alt="Instale las CLI." title="Instale las CLI." shape="rect" coords="155, -1, 289, 210" />
-<area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} Entorno de nube de" title="{{site.data.keyword.Bluemix_notm}} Entorno de nube de" shape="rect" coords="326, -10, 448, 218" />
-</map>
-
-
 ## Iniciación a los clústeres
 {: #clusters_gs}
 
@@ -61,7 +50,7 @@ Para crear un clúster gratuito:
 
 2.  Dele un nombre exclusivo al clúster.
 
-3.  Pulse **Crear clúster**. Se crea una agrupación de nodos trabajadores que contiene 1 nodo trabajador. El nodo trabajador puede tardar unos minutos en ser suministrado; verá el progreso en el separador **Nodos trabajadores**. Cuando el estado sea `Listo`, podrá empezar a trabajar con el clúster.
+3.  Pulse **Crear clúster**. Se crea una agrupación de nodos trabajadores que contiene 1 nodo trabajador. El nodo trabajador puede tardar unos minutos en ser suministrado; verá el progreso en el separador **Nodos trabajadores**. Cuando el estado sea `Ready`, podrá empezar a trabajar con el clúster.
 
 <br>
 
@@ -77,7 +66,7 @@ Enhorabuena. Ha creado su primer clúster de Kubernetes. Estos son algunos detal
 **¿Qué es lo siguiente?**</br>
 Pruebe lo siguiente en su clúster gratuito antes de que caduque.
 
-* Vaya a la [primera guía de aprendizaje de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) para crear un clúster de Kubernetes, instalar la CLI, crear un registro privado, configurar el entorno de clúster y añadir un servicio al clúster.
+* Vaya a la [primera guía de aprendizaje de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) para crear un clúster de Kubernetes, instalar la CLI o utilizar el terminal de Kubernetes, crear un registro privado, configurar el entorno de clúster y añadir un servicio al clúster.
 * Dedíquele un tiempo a la [segunda guía de aprendizaje de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial), donde se explica cómo desplegar apps en el clúster.
 * [Cree un clúster estándar](/docs/containers?topic=containers-clusters#clusters_ui) con varios nodos para conseguir una mayor disponibilidad.
 

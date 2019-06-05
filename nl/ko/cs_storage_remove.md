@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -46,8 +46,7 @@ subcollection: containers
 청구 유형 및 삭제 대상에 따라 다릅니다. PVC 및 PV를 삭제하지만 IBM Cloud 인프라(SoftLayer) 계정의 인스턴스는 삭제하지 않은 경우, 해당 인스턴스는 계속 존재하게 되며 이에 대한 비용을 지불하게 됩니다. 비용 청구를 막으려면 이들을 모두 삭제해야 합니다. 또한 PVC에서 `billingType`을 지정하는 경우에는 `hourly` 또는 `monthly`를 선택할 수 있습니다. `monthly`를 선택하면 인스턴스의 비용이 매월 청구됩니다. 인스턴스를 삭제하면 해당 월의 나머지에 대해 비용이 청구됩니다.
 
 
-<p class="important">지속적 스토리지를 정리하면 그 안에 저장된 모든 데이터가 삭제됩니다. 데이터의 사본이 필요한 경우에는 [파일 스토리지](/docs/containers?topic=containers-file_storage#file_backup_restore) 또는 [블록 스토리지](/docs/containers?topic=containers-block_storage#block_backup_restore)에 대한 백업을 작성하십시오.</br>
-</br>{{site.data.keyword.Bluemix_dedicated}} 계정을 사용하는 경우에는 [지원 케이스를 열어서](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) 볼륨 삭제를 요청해야 합니다.</p>
+<p class="important">지속적 스토리지를 정리하면 그 안에 저장된 모든 데이터가 삭제됩니다. 데이터의 사본이 필요한 경우에는 [파일 스토리지](/docs/containers?topic=containers-file_storage#file_backup_restore) 또는 [블록 스토리지](/docs/containers?topic=containers-block_storage#block_backup_restore)에 대한 백업을 작성하십시오.</p>
 
 시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 

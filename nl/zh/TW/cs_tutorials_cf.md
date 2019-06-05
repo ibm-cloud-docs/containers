@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -50,7 +50,7 @@ subcollection: containers
 ## 必要條件
 {: #cf_prereqs}
 
-- [在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔登錄](/docs/services/Registry?topic=registry-index)。
+- [在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔登錄](/docs/services/Registry?topic=registry-getting-started)。
 - [建立叢集](/docs/containers?topic=containers-clusters#clusters_ui)。
 - [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 - 確定您具有 {{site.data.keyword.containerlong_notm}} 的下列 {{site.data.keyword.Bluemix_notm}} IAM 存取原則：
@@ -276,7 +276,7 @@ subcollection: containers
 
     ```
 ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
     ```
     {: screen}
 

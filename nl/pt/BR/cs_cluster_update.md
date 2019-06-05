@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -29,41 +29,41 @@ subcollection: containers
 É possível instalar atualizações para manter seus clusters do Kubernetes atualizados no {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-## Atualizando o mestre do Kubernetes
+## Atualizando o principal do Kubernetes
 {: #master}
 
 Periodicamente, o Kubernetes libera [atualizações principais, secundárias ou de correção](/docs/containers?topic=containers-cs_versions#version_types). As atualizações podem afetar a versão do servidor da API do Kubernetes ou outros componentes em seu mestre do Kubernetes. A IBM atualiza a versão da correção, mas deve-se atualizar as versões principal e secundária.
 {:shortdesc}
 
-**Como saber quando atualizar o mestre?**</br>
+**Como faço para saber que preciso atualizar o principal?**</br>
 Você é notificado no console do {{site.data.keyword.Bluemix_notm}} e na CLI quando as atualizações estão disponíveis e também é possível verificar nossa página de [versões suportadas](/docs/containers?topic=containers-cs_versions).
 
-**Quantas versões atrás da mais recente o mestre pode ser?**</br>
+**Quão anterior à versão mais recente o principal pode ser?**</br>
 A IBM geralmente suporta 3 versões do Kubernetes em um determinado momento. É possível atualizar o servidor da API do Kubernetes não mais que 2 versões à frente de sua versão atual.
 
 Por exemplo, se a versão atual do servidor da API do Kubernetes for 1.8 e você desejar atualizar para 1.11, você deverá primeiro atualizar para 1.10. É possível forçar para que ocorra a atualização, mas a atualização de três ou mais versões secundárias pode causar resultados inesperados ou falha.
 
 Se o seu cluster está executando uma versão do Kubernetes não suportada, você pode ter que forçar a atualização. Portanto, mantenha seu cluster atualizado para evitar impacto operacional.
 
-**Meus nós do trabalhador podem ser executados em uma versão mais recente do que o mestre?**</br>
+**Os meus nós do trabalhador podem ser executados em uma versão mais recente do que a do principal?**</br>
 Os nós do trabalhador não podem executar uma versão do Kubernetes `major.minor` mais recente que o mestre. Primeiro, [atualize seu principal](#update_master) para a versão mais recente do Kubernetes. Em seguida, [atualize os nós do trabalhador](#worker_node) em seu cluster.
 
 Os nós do trabalhador podem executar versões de correção mais recentes do que o mestre, como as versões de correção que são específicas para nós do trabalhador para atualizações de segurança.
 
 **Como as atualizações de correção são aplicadas?**</br>
-Por padrão, as atualizações de correção para o mestre são aplicadas automaticamente ao longo do curso de vários dias, portanto, uma versão de correção principal pode ser mostrada como disponível antes de ser aplicada ao seu mestre. A automação de atualização também ignora clusters que estão em um estado não funcional ou têm operações atualmente em andamento. Ocasionalmente, a IBM pode desativar as atualizações automáticas para um fix pack de mestre específico, como uma correção que é necessária somente se um mestre for atualizado de uma versão secundária para outra. Em qualquer um desses casos, é possível [verificar o log de mudanças de versões](/docs/containers?topic=containers-changelog) para qualquer impacto potencial e escolher usar com segurança o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update) `ibmcloud ks cluster-update` você mesmo sem esperar a aplicação da automação de atualização.
+Por padrão, as atualizações de correção para o mestre são aplicadas automaticamente ao longo do curso de vários dias, portanto, uma versão de correção principal pode ser mostrada como disponível antes de ser aplicada ao seu mestre. A automação de atualização também ignora clusters que estão em um estado não funcional ou têm operações atualmente em andamento. Ocasionalmente, a IBM pode desativar as atualizações automáticas para um fix pack de mestre específico, como uma correção que é necessária somente se um mestre for atualizado de uma versão secundária para outra. Em qualquer um desses casos, é possível [verificar o log de mudanças das versões](/docs/containers?topic=containers-changelog) em busca de possíveis impactos e escolher usar de maneira segura o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update) `ibmcloud ks cluster-update` por conta própria sem esperar a aplicação da automação da atualização.
 
 Diferentemente do mestre, deve-se atualizar seus trabalhadores para cada versão de correção.
 
-**O que acontece durante a atualização do mestre?**</br>
+**O que acontece durante a atualização do principal?**</br>
 Em clusters que executam o Kubernetes versão 1.11 ou mais recente, seu mestre está altamente disponível com três pods do mestre de réplica. Os pods principais têm uma atualização contínua, durante a qual apenas um pod está indisponível por vez. Duas instâncias estão funcionando para que seja possível acessar e mudar o cluster durante a atualização. Os nós do trabalhador, apps e recursos continuam a ser executados.
 
 Para clusters que executam versões anteriores do Kubernetes, quando você atualiza o servidor de API do Kubernetes, o servidor de API fica inativo por cerca de 5 a 10 minutos. Durante a atualização, não é possível acessar nem mudar o cluster. No entanto, os nós do trabalhador, apps e recursos que os usuários do cluster implementaram não serão modificados e continuarão a executar.
 
-** Posso retroceder a atualização? **</br>
+**Posso recuperar a atualização?**</br>
 Não, não é possível retroceder um cluster para uma versão anterior depois que o processo de atualização ocorre. Certifique-se de usar um cluster de teste e siga as instruções para direcionar problemas potenciais antes de atualizar o mestre de produção.
 
-**Qual processo posso seguir para atualizar o mestre?**</br>
+**Qual processo posso seguir para atualizar o principal?**</br>
 O diagrama a seguir mostra o processo que você pode usar para atualizar seu mestre.
 
 ![Melhor prática de atualização de mestre](/images/update-tree.png)
@@ -71,7 +71,7 @@ O diagrama a seguir mostra o processo que você pode usar para atualizar seu mes
 Figura 1. Atualizando o diagrama do processo de mestre do Kubernetes
 
 {: #update_master}
-Antes de iniciar, certifique-se de que você tenha a [função de **Operador** ou **Administrador** da plataforma {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
+Antes de iniciar, assegure-se de ter a [função da plataforma do IAM **Operador** ou **Administrador** do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform).
 
 Para atualizar a versão _principal_ ou _secundária_ do mestre do Kubernetes:
 
@@ -94,7 +94,7 @@ Quando a atualização do servidor da API do Kubernetes for concluída, será po
 Você recebeu uma notificação para atualizar seus nós do trabalhador. O que isso significa? À medida que as atualizações e correções de segurança são introduzidas para o servidor da API do Kubernetes e outros componentes principais do Kubernetes, deve-se ter certeza de que os nós do trabalhador permanecem em sincronização.
 {: shortdesc}
 
-**O que acontece com meus apps durante uma atualização?**</br>
+**O que acontece com meus aplicativos durante uma atualização?**</br>
 Se executar apps como parte de uma implementação em nós do trabalhador que você atualizar, os apps serão reprogramados em outros nós do trabalhador no cluster. Esses nós do trabalhador podem estar em um conjunto de trabalhadores diferente ou, se você tiver nós do trabalhador independentes, os apps poderão estar planejados em nós do trabalhador independentes. Para evitar tempo de inatividade para seu app, deve-se assegurar que você tenha capacidade suficiente no cluster para transportar a carga de trabalho.
 
 **Como posso controlar quantos nós do trabalhador ficam inativos em um determinado momento durante a atualização?**</br>
@@ -110,9 +110,9 @@ Quando o mapa de configuração não está definido, o padrão é usado. Por pad
 - [ Atualize o mestre do Kubernetes ](#master). A versão do Kubernetes do nó do trabalhador não pode ser maior que a versão do servidor da API do Kubernetes que é executada em seu mestre do Kubernetes.
 - Faça quaisquer mudanças marcadas com _Atualizar após o mestre_ em [Mudanças do Kubernetes](/docs/containers?topic=containers-cs_versions).
 - Se desejar aplicar uma atualização de correção, revise o [log de mudanças de versão do Kubernetes](/docs/containers?topic=containers-changelog#changelog).
-- Certifique-se de que você tenha a [função de **Operador** ou **Administrador** da plataforma {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform). </br>
+- Assegure-se de ter a [função da plataforma do IAM **Operador** ou **Administrador** do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform). </br>
 
-As atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços. Sua máquina do nó do trabalhador é reformulada e os dados são excluídos se não [armazenados fora do pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+As atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços. A máquina do nó do trabalhador tem a imagem reinstalada, e os dados são excluídos se não [armazenados fora do pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 {: #worker-up-configmap}
@@ -142,7 +142,7 @@ As atualizações para os nós do trabalhador podem causar tempo de inatividade 
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012
@@ -262,7 +262,7 @@ As atualizações para os nós do trabalhador podem causar tempo de inatividade 
 Próximas etapas:
 -   Repita o processo de atualização com outros conjuntos de trabalhadores.
 -   Informe aos desenvolvedores que trabalham no cluster para atualizar sua CLI `kubectl` para a versão do mestre do Kubernetes.
--   Se o painel do Kubernetes não exibir gráficos de utilização, [exclua o pod `kube-dashboard`](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs).
+-   Se o painel do Kubernetes não exibir os gráficos de utilização, [exclua o pod `kube-dashboard`](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs).
 
 
 ### Atualizando nós do trabalhador no console
@@ -276,9 +276,9 @@ Antes de iniciar:
 *   [ Atualize o mestre do Kubernetes ](#master). A versão do Kubernetes do nó do trabalhador não pode ser maior que a versão do servidor da API do Kubernetes que é executada em seu mestre do Kubernetes.
 *   Faça quaisquer mudanças marcadas com _Atualizar após o mestre_ em [Mudanças do Kubernetes](/docs/containers?topic=containers-cs_versions).
 *   Se desejar aplicar uma atualização de correção, revise o [log de mudanças de versão do Kubernetes](/docs/containers?topic=containers-changelog#changelog).
-*   Certifique-se de que você tenha a [função de **Operador** ou **Administrador** da plataforma {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform). </br>
+*   Assegure-se de ter a [função da plataforma do IAM **Operador** ou **Administrador** do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform). </br>
 
-As atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços. Sua máquina do nó do trabalhador é reformulada e os dados são excluídos se não [armazenados fora do pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+As atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços. A máquina do nó do trabalhador tem a imagem reinstalada, e os dados são excluídos se não [armazenados fora do pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 Para atualizar os nós do trabalhador por meio do console:
@@ -294,7 +294,7 @@ Para atualizar os nós do trabalhador por meio do console:
 ## Atualizando tipos de máquina
 {: #machine_type}
 
-É possível atualizar os tipos de máquina de seus nós do trabalhador, incluindo novos nós do trabalhador e removendo os antigos. Por exemplo, se você têm nós do trabalhador virtual em tipos de máquina descontinuada com `u1c` ou `b1c` nos nomes, crie nós do trabalhador que usam tipos de máquina com `u2c` ou `b2c` nos nomes.
+É possível atualizar os tipos de máquina de seus nós do trabalhador, incluindo novos nós do trabalhador e removendo os antigos. Por exemplo, se seu cluster tiver o tipo de nó do trabalhador descontinuado `x1c` ou outros tipos mais antigos de nós do trabalhador `x2c` do Ubuntu 16, crie nós do trabalhador do Ubuntu 18 que usem tipos de máquina com `x3c` nos nomes.
 {: shortdesc}
 
 Antes de iniciar:
@@ -413,7 +413,7 @@ O seu cluster do {{site.data.keyword.containerlong_notm}} é fornecido com compl
 
 **Quais complementos padrão posso atualizar separadamente do cluster?**</br>
 É possível, opcionalmente, desativar atualizações automáticas para os complementos a seguir:
-* [ Fluentd para criação de log ](#logging)
+* [ Fluentd para criação de log ](#logging-up)
 * [Balanceador de carga de aplicativo do Ingress](#alb)
 
 **Há complementos que eu não posso atualizar separadamente do cluster?**</br>
@@ -440,17 +440,17 @@ kubectl get deployments -- all-namespaces -l addonmanager.kubernetes.io/mode=Rec
 {: pre}
 
 **Posso instalar outros complementos além do padrão?**</br>
-Sim. O {{site.data.keyword.containerlong_notm}} fornece outros complementos dentro os quais é possível escolher para incluir recursos em seu cluster. Por exemplo, você pode desejar [usar gráficos Helm](/docs/containers?topic=containers-integrations#helm) para instalar o [plug-in de armazenamento de bloco](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio)ou [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup). Deve-se atualizar cada complemento separadamente seguindo as instruções para atualizar os gráficos Helm.
+Sim. O {{site.data.keyword.containerlong_notm}} fornece outros complementos dentro os quais é possível escolher para incluir recursos em seu cluster. Por exemplo, você pode desejar [usar gráficos Helm](/docs/containers?topic=containers-helm#public_helm_install) para instalar o [plug-in de armazenamento de bloco](/docs/containers?topic=containers-block_storage#install_block), o [Istio](/docs/containers?topic=containers-istio) ou a [VPN strongSwan](/docs/containers?topic=containers-vpn#vpn-setup). Deve-se atualizar cada complemento separadamente seguindo as instruções para atualizar os gráficos Helm.
 
 ### Gerenciando atualizações automáticas para o Fluentd para o complemento de criação de log
-{: #logging}
+{: #logging-up}
 
 Para fazer mudanças em suas configurações de criação de log ou de filtro, o complemento Fluentd deve estar na versão mais recente. Por padrão, as atualizações automáticas para o complemento são ativadas.
 {: shortdesc}
 
-É possível gerenciar atualizações automáticas do complemento Fluentd das maneiras a seguir. **Nota**: para executar os comandos a seguir, deve-se ter a [ função **Administrador** da plataforma do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
+É possível gerenciar atualizações automáticas do complemento Fluentd das maneiras a seguir. **Nota**: para executar os comandos a seguir, deve-se ter a [função da plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
 
-* Verifique se as atualizações automáticas estão ativadas executando o `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [Comando](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get).
+* Verifique se as atualizações automáticas estão ativadas executando o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get) `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>`.
 * Desative as atualizações automáticas executando o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable`.
 * Se as atualizações automáticas estiverem desativadas, mas você precisar fazer uma mudança em sua configuração, você terá duas opções:
     * Ativar as atualizações automáticas para os seus pods do Fluentd.
@@ -527,7 +527,7 @@ Antes de iniciar:
     ```
     {: screen}
 
-É possível gerenciar atualizações automáticas do complemento ALB do Ingress das maneiras a seguir. **Nota**: para executar os comandos a seguir, deve-se ter a [função da plataforma do {{site.data.keyword.Bluemix_notm}} IAM de **Editor** ou **Administrador**](/docs/containers?topic=containers-users#platform) para o cluster.
+É possível gerenciar atualizações automáticas do complemento ALB do Ingress das maneiras a seguir. **Nota**: para executar os comandos a seguir, deve-se ter a [função da plataforma **Editor** ou **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
 * Desative as atualizações automáticas.
     ```
     ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
@@ -570,7 +570,7 @@ Revise a imagem a seguir para ver como sua configuração de cluster muda quando
 <img src="images/cs_cluster_migrate.png" alt="Atualize o seu cluster de nós do trabalhador independentes para conjuntos de trabalhadores" width="600" style="width:600px; border-style: none"/>
 
 Antes de iniciar:
-- Assegure-se de que você tenha a [função de **Operador** ou **Administrador** da plataforma {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
+- Assegure-se de ter a [função da plataforma do IAM **Operador** ou **Administrador** do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para o cluster.
 - [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Para atualizar os nós do trabalhador independente para os conjuntos de trabalhadores:
@@ -587,7 +587,7 @@ Para atualizar os nós do trabalhador independente para os conjuntos de trabalha
    ```
    {: pre}
 
-3. Liste as zonas disponíveis e decida onde você deseja provisionar os nós do trabalhador em seu conjunto de trabalhadores. Para visualizar a zona em que os nós do trabalhador independente são fornecidos, execute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`. Se você desejar difundir os nós do trabalhador em múltiplas zonas, escolha uma [zona com capacidade para múltiplas zonas](/docs/containers?topic=containers-regions-and-zones#zones).
+3. Liste as zonas disponíveis e decida onde você deseja provisionar os nós do trabalhador em seu conjunto de trabalhadores. Para visualizar a zona de fornecimento de seus nós do trabalhador independentes, execute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`. Se você desejar difundir os nós do trabalhador em múltiplas zonas, escolha uma [zona com capacidade para múltiplas zonas](/docs/containers?topic=containers-regions-and-zones#zones).
    ```
    ibmcloud ks zones
    ```
@@ -600,7 +600,7 @@ Para atualizar os nós do trabalhador independente para os conjuntos de trabalha
    {: pre}
 
 5. Inclua a zona em seu conjunto de trabalhadores. Ao incluir uma zona em um conjunto de trabalhadores, os nós do trabalhador que estão definidos em seu conjunto de trabalhadores são provisionados na zona e considerados para planejamento futuro de carga de trabalho. O {{site.data.keyword.containerlong}} inclui automaticamente o rótulo `failure-domain.beta.kubernetes.io/region` para a região e o rótulo `failure-domain.beta.kubernetes.io/zone` para a zona em cada nó do trabalhador. O planejador do Kubernetes usa esses rótulos para difundir pods ao longo de zonas dentro da mesma região.
-   1. **Para incluir uma zona em um conjunto de trabalhadores**: substitua `<pool_name>` pelo nome de seu conjunto de trabalhadores e preencha o ID do cluster, a zona e as VLANs com as informações que você recuperou anteriormente. Se você não tiver uma VLAN privada e uma pública nessa zona, não especifique essa opção. Uma VLAN privada e uma pública são criadas automaticamente para você.
+   1. **Para incluir uma zona em um conjunto do trabalhador**: substitua `<pool_name>` pelo nome de seu conjunto do trabalhador e preencha o ID do cluster, a zona e as VLANs com as informações recuperadas anteriormente. Se você não tiver uma VLAN privada e uma pública nessa zona, não especifique essa opção. Uma VLAN privada e uma pública são criadas automaticamente para você.
 
       Se você desejar usar VLANs diferentes para diferentes conjuntos de trabalhadores, repita este comando para cada VLAN e os seus conjuntos de trabalhadores correspondentes. Todos os novos nós do trabalhador são incluídos nas VLANs especificadas, mas as VLANs para quaisquer nós do trabalhador existentes não mudam.
       ```
@@ -608,7 +608,7 @@ Para atualizar os nós do trabalhador independente para os conjuntos de trabalha
       ```
       {: pre}
 
-   2. **Para incluir a zona em múltiplos conjuntos de trabalhadores**: inclua múltiplos conjuntos de trabalhadores no comando `ibmcloud ks zone-add`. Para incluir múltiplos conjuntos de trabalhadores em uma zona, deve-se ter uma VLAN privada e uma pública existente nessa zona. Se não houver uma VLAN pública e privada nessa zona, considere incluir a zona em um conjunto de trabalhadores primeiro para que uma VLAN privada e uma pública sejam criadas para você. Em seguida, é possível incluir a zona em outros conjuntos de trabalhadores. </br></br>É importante que os nós do trabalhador em todos os seus conjuntos de trabalhadores sejam provisionados em todas as zonas para assegurar que o cluster esteja balanceado entre as zonas. Se deseja usar VLANs diferentes para conjuntos de trabalhadores diferentes, repita esse comando com a VLAN que você deseja usar para o seu conjunto de trabalhadores. Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster de múltiplas zonas, deve-se ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que seus nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+   2. **Para incluir a zona em múltiplos conjuntos de trabalhadores**: inclua múltiplos conjuntos de trabalhadores no comando `ibmcloud ks zone-add`. Para incluir múltiplos conjuntos de trabalhadores em uma zona, deve-se ter uma VLAN privada e uma pública existente nessa zona. Se não houver uma VLAN pública e privada nessa zona, considere incluir a zona em um conjunto de trabalhadores primeiro para que uma VLAN privada e uma pública sejam criadas para você. Em seguida, é possível incluir a zona em outros conjuntos de trabalhadores. </br></br>É importante que os nós do trabalhador em todos os seus conjuntos do trabalhador sejam provisionados em todas as zonas para garantir que o cluster seja balanceado entre elas. Se deseja usar VLANs diferentes para conjuntos de trabalhadores diferentes, repita esse comando com a VLAN que você deseja usar para o seu conjunto de trabalhadores. Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster de múltiplas zonas, deve-se ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que seus nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
@@ -647,7 +647,7 @@ Para atualizar os nós do trabalhador independente para os conjuntos de trabalha
       {: pre}
       Esse processo pode levar alguns minutos.
 
-   5. Remova seu nó do trabalhador independente. Use o ID do nó do trabalhador que você recuperou com o comando `ibmcloud ks workers <cluster_name_or_ID>`.
+   5. Remova seu nó do trabalhador independente. Use o ID do nó do trabalhador recuperado com o comando `ibmcloud ks workers <cluster_name_or_ID>`.
       ```
       ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_ID>
       ```
@@ -656,7 +656,7 @@ Para atualizar os nós do trabalhador independente para os conjuntos de trabalha
 
 
 **O que vem a seguir?** </br>
-Agora que você atualizou seu cluster para usar conjuntos de trabalhadores, é possível melhorar a disponibilidade incluindo mais zonas em seu cluster. A inclusão de mais zonas em seu cluster muda seu cluster de um cluster de zona única para um [cluster de múltiplas zonas](/docs/containers?topic=containers-plan_clusters#ha_clusters). Quando você muda seu cluster de zona única para um cluster de múltiplas zonas, seu domínio do Ingresso muda de `<cluster_name>.<region>.containers.mybluemix.net` para `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. O domínio do Ingresso existente ainda é válido e pode ser usado para enviar solicitações para seus apps.
+Agora que você atualizou seu cluster para usar conjuntos de trabalhadores, é possível melhorar a disponibilidade incluindo mais zonas em seu cluster. A inclusão de mais zonas em seu cluster muda seu cluster de um cluster de zona única para um [cluster de múltiplas zonas](/docs/containers?topic=containers-plan_clusters#ha_clusters). Quando você muda seu cluster de zona única para um cluster multizona, seu domínio do Ingress muda de `<cluster_name>.<region>.containers.mybluemix.net` para `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. O domínio do Ingresso existente ainda é válido e pode ser usado para enviar solicitações para seus apps.
 
 <br />
 

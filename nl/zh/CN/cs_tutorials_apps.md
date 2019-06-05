@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -68,8 +68,7 @@ subcollection: containers
 ## 先决条件
 {: #apps_prereqs}
 
-* [教程：创建 Kubernetes 集群](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)。
-* 安装 [container-registry 插件](/docs/services/Registry?topic=registry-index#registry_cli_install)。
+[教程：创建 Kubernetes 集群](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## 第 1 课：将单实例应用程序部署到 Kubernetes 集群
@@ -247,11 +246,11 @@ Name:                   hello-world-service
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 
-10. 打开浏览器并通过以下 URL 检查应用程序：`http://<IP_address>:<NodePort>`. 使用示例值时，URL 为 `http://169.xx.xxx.xxx:30872`。在浏览器中输入该 URL 时，可以看到以下文本。
+10. 打开浏览器并使用以下 URL 查看应用程序：`http://<IP_address>:<NodePort>`。使用示例值时，URL 为 `http://169.xx.xxx.xxx:30872`。在浏览器中输入该 URL 时，可以看到以下文本。
 
 
     ```
@@ -545,7 +544,7 @@ image: "registry.<region>.bluemix.net/namespace/watson-talk"
         ```
         {: codeblock}
 
-    2.  在 watson 部署的 volumes 部分中，更新在先前[创建 Kubernetes 集群教程](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)中创建的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 私钥的名称。通过将 Kubernetes 私钥作为卷安装到您的部署，可使 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 密钥可用于在 pod 中运行的容器。本教程中的 {{site.data.keyword.watson}} 应用程序组件配置为使用卷安装路径来查找 API 密钥。
+    2.  在 `watson-pod` 部署的 volumes 部分中，更新您在上一个[创建 Kubernetes 集群教程](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)中创建的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 私钥的名称。通过将 Kubernetes 私钥作为卷安装到您的部署，可使 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 密钥可用于在 pod 中运行的容器。本教程中的 {{site.data.keyword.watson}} 应用程序组件配置为使用卷安装路径来查找 API 密钥。
 
         ```
 volumes:
@@ -610,7 +609,7 @@ volumes:
         ```
         {: codeblock}
 
-9.  打开浏览器并分析一些文本。URL 的格式为 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
+9.  打开浏览器并分析一些文本。URL 的格式为 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`。
 
     示例：
 

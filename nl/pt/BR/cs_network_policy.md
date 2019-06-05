@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -30,14 +30,14 @@ subcollection: containers
 Cada cluster do Kubernetes é configurado com um plug-in de rede chamado Calico. As políticas de rede padrão são configuradas para assegurar a interface de rede pública de cada nó do trabalhador no {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Se você tiver requisitos de segurança exclusivos ou tiver um cluster de múltiplas zonas com o VLAN Spanning ativado, será possível usar o Calico e o Kubernetes para criar políticas de rede para um cluster. Com políticas de rede do Kubernetes, é possível especificar o tráfego de rede que você deseja permitir ou bloquear para/de um pod em um cluster. Para configurar políticas de rede mais avançadas, como bloquear o tráfego de entrada (ingresso) para serviços de balanceador de carga, use as políticas de rede do Calico.
+Se você tiver requisitos de segurança exclusivos ou tiver um cluster de múltiplas zonas com o VLAN Spanning ativado, será possível usar o Calico e o Kubernetes para criar políticas de rede para um cluster. Com políticas de rede do Kubernetes, é possível especificar o tráfego de rede que você deseja permitir ou bloquear para/de um pod em um cluster. Para configurar políticas de rede mais avançadas, como o bloqueio do tráfego de entrada (ingresso) para serviços de balanceador de carga de rede (NLB), use as políticas de rede do Calico.
 
 <ul>
   <li>
   [Políticas de rede do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): essas políticas especificam como os pods podem se comunicar com outros pods e com terminais externos. Desde o Kubernetes versão 1.8, ambos os tráfegos, recebido e de saída, podem ser permitidos ou bloqueados com base no protocolo, na porta e nos endereços IP de origem ou de destino. O tráfego também pode ser filtrado com base nos rótulos de pod e de namespace. As políticas de rede do Kubernetes são aplicadas usando comandos `kubectl` ou as APIs do Kubernetes. Quando essas políticas são aplicadas, elas são convertidas automaticamente em políticas de rede do Calico e o Calico cumpre essas políticas.
   </li>
   <li>
-  [Políticas de rede do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy): Essas políticas são um superconjunto das políticas de rede do Kubernetes e são aplicadas usando os comandos `calicoctl`. As políticas do Calico incluir os recursos a seguir.
+  [Políticas de rede do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/getting-started/bare-metal/policy/): Essas políticas são um superconjunto das políticas de rede do Kubernetes e são aplicadas usando os comandos `calicoctl`. As políticas do Calico incluir os recursos a seguir.
     <ul>
     <li>Permitir ou bloquear tráfego de rede em interfaces de rede específicas independentemente do endereço IP de origem ou destino do pod do Kubernetes ou CIDR.</li>
     <li>Permitir ou bloquear tráfego de rede para os pods em namespaces.</li>
@@ -48,7 +48,7 @@ Se você tiver requisitos de segurança exclusivos ou tiver um cluster de múlti
 
 O Calico cumpre essas políticas, incluindo quaisquer políticas de rede do Kubernetes que são convertidas automaticamente em políticas do Calico, configurando regras Iptables do Linux nos nós do trabalhador do Kubernetes. As regras de Iptables servem como um firewall para o nó do trabalhador para definir as características que o tráfego de rede deve atender para ser encaminhado para o recurso de destino.
 
-Para usar os serviços Ingress e balanceador de carga, use as políticas do Calico e do Kubernetes para gerenciar o tráfego de rede dentro e fora de seu cluster. Não use os [grupos de segurança](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) da infraestrutura do IBM Cloud (SoftLayer). Os grupos de segurança da infraestrutura do IBM Cloud (SoftLayer) são aplicados à interface de rede de um único servidor virtual para filtrar o tráfego no nível do hypervisor. No entanto, os grupos de segurança não suportam o protocolo VRRP, que o {{site.data.keyword.containerlong_notm}} usa para gerenciar o endereço IP do balanceador de carga. Se o protocolo VRRP não estiver presente para gerenciar o IP do balanceador de carga, os serviços Ingress e balanceador de carga não funcionarão corretamente.
+Para usar os serviços do balanceador de carga de rede (NLB) e do balanceador de carga do aplicativo (ALB) Ingress, use as políticas do Calico e do Kubernetes para gerenciar o tráfego de rede dentro e fora do cluster. Não use os [grupos de segurança](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) da infraestrutura do IBM Cloud (SoftLayer). Os grupos de segurança da infraestrutura do IBM Cloud (SoftLayer) são aplicados à interface de rede de um único servidor virtual para filtrar o tráfego no nível do hypervisor. No entanto, os grupos de segurança não suportam o protocolo VRRP, que é usado pelo {{site.data.keyword.containerlong_notm}} para gerenciar os endereços IP do ALB e do NLB. Se o protocolo VRRP não estiver presente para gerenciar o IP, os serviços ALB e NLB não funcionarão corretamente.
 {: tip}
 
 <br />
@@ -60,17 +60,17 @@ Para usar os serviços Ingress e balanceador de carga, use as políticas do Cali
 Quando um cluster com uma VLAN pública é criado, um recurso `HostEndpoint` com o rótulo `ibm.role: worker_public` é criado automaticamente para cada nó do trabalhador e sua interface de rede pública. Para proteger a interface de rede pública de um nó do trabalhador, as políticas padrão do Calico são aplicadas a qualquer terminal de host com o rótulo `ibm.role: worker_public`.
 {:shortdesc}
 
-Essas políticas padrão do Calico permitem todo o tráfego de rede de saída e permitem o tráfego de entrada para componentes específicos do cluster, como os serviços do Kubernetes NodePort, LoadBalancer e Ingresso. Qualquer outro tráfego de rede de entrada da Internet para os nós do trabalhador que não está especificado nas políticas padrão é bloqueado. As políticas padrão não afetam o tráfego de pod para pod.
+Essas políticas de host padrão do Calico permitem todo o tráfego de rede de saída e o tráfego de entrada para componentes específicos de cluster, como serviços NodePort, LoadBalancer e Ingress do Kubernetes. Qualquer outro tráfego de rede de entrada da Internet para os nós do trabalhador que não está especificado nas políticas padrão é bloqueado. As políticas padrão não afetam o tráfego de pod para pod.
 
-Revise as políticas de rede padrão do Calico a seguir que são aplicadas automaticamente ao seu cluster.
+Revise as políticas de host padrão do Calico a seguir que são aplicadas automaticamente ao seu cluster.
 
 Não remova políticas que são aplicadas a um terminal de host, a menos que você entenda completamente a política. Certifique-se de que você não precise do tráfego que está sendo permitido pela política.
 {: important}
 
  <table summary="A primeira linha na tabela abrange ambas as colunas. Leia o restante das linhas da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
- <caption>Padrão do Calico políticas para cada cluster</caption>
+ <caption>Políticas de host padrão do Calico para cada cluster</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Políticas padrão do Calico para cada cluster</th>
+  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Políticas de host padrão do Calico para cada cluster</th>
   </thead>
   <tbody>
     <tr>
@@ -87,7 +87,7 @@ Não remova políticas que são aplicadas a um terminal de host, a menos que voc
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>Permite o tráfego de entrada dos serviços de porta de nó, balanceador de carga e Ingress para os pods que esses serviços estão expondo. <strong>Nota</strong>: você não precisa especificar as portas expostas porque o Kubernetes usa a conversão de endereço de rede de destino (DNAT) para encaminhar as solicitações de serviço para os pods corretos. Esse redirecionamento ocorre antes que as políticas de terminal de host sejam aplicadas em Iptables.</td>
+      <td>Permite o tráfego dos serviços de balanceador de carga de rede (NLB) de entrada, de balanceador de carga do aplicativo (ALB) Ingress e NodePort para os pods expostos por eles. <strong>Nota</strong>: você não precisa especificar as portas expostas porque o Kubernetes usa a conversão de endereço de rede de destino (DNAT) para encaminhar as solicitações de serviço para os pods corretos. Esse redirecionamento ocorre antes que as políticas de terminal de host sejam aplicadas em Iptables.</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -100,7 +100,7 @@ Não remova políticas que são aplicadas a um terminal de host, a menos que voc
   </tbody>
 </table>
 
-No Kubernetes versão 1.10 e clusters mais recentes, uma política padrão do Kubernetes que limita o acesso ao painel do Kubernetes também é criada. As políticas do Kubernetes não se aplicam ao terminal de host, mas ao pod `kube-dashboard`. Essa política se aplica a clusters conectados somente a uma VLAN privada e a clusters conectados a uma VLAN pública e privada.
+Uma política padrão do Kubernetes que limita o acesso ao Painel do Kubernetes também é criada. As políticas do Kubernetes não se aplicam ao terminal de host, mas ao pod `kube-dashboard`. Essa política se aplica a clusters conectados somente a uma VLAN privada e a clusters conectados a uma VLAN pública e privada.
 
 <table>
 <caption>Políticas padrão para cada cluster do Kubernetes</caption>
@@ -110,7 +110,7 @@ No Kubernetes versão 1.10 e clusters mais recentes, uma política padrão do Ku
 <tbody>
  <tr>
   <td><code>kubernetes-painel</code></td>
-  <td>Somente no Kubernetes v1.10 ou mais recente, fornecido no namespace <code>kube-system</code>: bloqueia o acesso de todos os pods ao painel do Kubernetes. Essa política não impactará o acesso ao painel por meio do console do {{site.data.keyword.Bluemix_notm}} ou usando o <code>kubectl proxy</code>. Se um pod requer acesso ao painel, implemente o pod em um namespace que tenha o rótulo <code>kubernetes-dashboard-policy: allow</code>.</td>
+  <td>Fornecido no namespace <code>kube-system</code>: bloqueia o acesso de todos os pods ao Painel do Kubernetes. Essa política não impactará o acesso ao painel por meio do console do {{site.data.keyword.Bluemix_notm}} ou usando o <code>kubectl proxy</code>. Se um pod requer acesso ao painel, implemente o pod em um namespace que tenha o rótulo <code>kubernetes-dashboard-policy: allow</code>.</td>
  </tr>
 </tbody>
 </table>
@@ -124,7 +124,7 @@ No Kubernetes versão 1.10 e clusters mais recentes, uma política padrão do Ku
 Para visualizar, gerenciar e incluir políticas do Calico, instale e configure a CLI do Calico.
 {:shortdesc}
 
-1. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+1. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -144,7 +144,7 @@ Para visualizar, gerenciar e incluir políticas do Calico, instale e configure a
         ```
         {: pre}
 
-4. [Faça download da CLI do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/projectcalico/calicoctl/releases/tag/v3.3.1).
+4. [Faça download da CLI do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/projectcalico/calicoctl/releases).
 
     Se você estiver usando o OS X, faça download da versão `-darwin-amd64`. Se estiver usando o Windows, instale a CLI do Calico no mesmo diretório que a CLI do {{site.data.keyword.Bluemix_notm}}. Essa configuração economiza algumas mudanças de caminho de arquivo ao executar comandos posteriormente. Certifique-se de salvar o arquivo como `calicoctl.exe`.
     {: tip}
@@ -172,7 +172,7 @@ Para visualizar, gerenciar e incluir políticas do Calico, instale e configure a
         ```
         {: pre}
 
-6. Se as políticas de rede corporativa usarem proxies ou firewalls para evitar o acesso de seu sistema local a terminais públicos, [permita o acesso TCP para comandos do Calico](/docs/containers?topic=containers-firewall#firewall).
+6. Se as políticas de rede corporativa usam proxies ou firewalls para evitar o acesso de seu sistema local a terminais públicos, [permita o acesso TCP para comandos do Calico](/docs/containers?topic=containers-firewall#firewall).
 
 7. Verifique se a configuração do Calico está funcionando
 corretamente.
@@ -212,7 +212,7 @@ Visualize os detalhes para políticas padrão e quaisquer políticas de rede inc
 
 Antes de iniciar:
 1. [Instale e configure o CLI do Calico.](#cli_install)
-2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -233,13 +233,13 @@ Os usuários do Linux e Mac não precisam incluir a sinalização `--config=file
 
 2. Visualize todas as políticas de rede do Calico e do Kubernetes que foram criadas para o cluster. Essa lista inclui políticas que podem não estar aplicadas a quaisquer pods ou hosts ainda. Para que uma política de rede seja aplicada, deverá ser localizado um recurso do Kubernetes que corresponda ao seletor definido na política de rede do Calico.
 
-    [As políticas de rede ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) estão com escopo definido para namespaces específicos:
+    [As políticas de rede ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) estão com escopo definido para namespaces específicos:
     ```
     calicoctl get NetworkPolicy --all-namespaces -o wide --config=filepath/calicoctl.cfg
     ```
     {:pre}
 
-    [As políticas de rede global ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) não estão com escopo definido para namespaces específicos:
+    [As políticas de rede global ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) não estão com escopo definido para namespaces específicos:
     ```
     calicoctl get GlobalNetworkPolicy -o wide -- config=filepath/calicoctl.cfg
     ```
@@ -273,14 +273,14 @@ Para criar políticas de rede do Kubernetes, veja a [documentação de política
 Para criar políticas do Calico, use as etapas a seguir.
 
 1. [Instale e configure o CLI do Calico.](#cli_install)
-2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
   ```
   {: pre}
 
-3. Defina sua [política de rede ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) do Calico ou [política de rede global ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) criando um script de configuração (`.yaml`). Esses arquivos de configuração incluem os seletores que descrevem a quais pods, namespaces ou hosts essas políticas se aplicam. Consulte essas [Políticas de amostra do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) para ajudá-lo a criar a sua própria. Observe que os clusters do Kubernetes versão 1.10 ou mais recente devem usar a sintaxe de política do Calico v3.
+3. Defina sua [política de rede ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) ou [política de rede global ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) do Calico criando um script de configuração (`.yaml`) com a sintaxe de política do Calico v3. Esses arquivos de configuração incluem os seletores que descrevem a quais pods, namespaces ou hosts essas políticas se aplicam. Consulte essas [Políticas de amostra do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://docs.projectcalico.org/v3.3/getting-started/kubernetes/tutorials/advanced-policy) para ajudá-lo a criar a sua própria.
 
 4. Aplique as políticas ao cluster.
     - Linux e OS X:
@@ -300,7 +300,7 @@ Para criar políticas do Calico, use as etapas a seguir.
 <br />
 
 
-## Controlando o tráfego de entrada para os serviços de balanceador de carga ou de porta de nó
+## Controlando o tráfego de entrada para serviços NLB ou NodePort
 {: #block_ingress}
 
 [Por padrão](#default_policy), os serviços NodePort e LoadBalancer do Kubernetes são projetados para tornar seu app disponível em todas as interfaces de cluster público e privado. No entanto, é possível usar políticas do Calico para bloquear o tráfego recebido para os seus serviços com base na origem ou no destino do tráfego.
@@ -310,17 +310,17 @@ As políticas padrão do Kubernetes e do Calico são difíceis de aplicar para p
 
 Alguns usos comuns para políticas de rede pré-DNAT do Calico:
 
-  - Bloquear o tráfego para as portas de nó público de um serviço de balanceador de carga privado: um serviço de balanceador de carga torna seu app disponível no endereço IP e porta do balanceador de carga e torna seu app disponível nas portas de nó do serviço. As portas de nó são acessíveis em cada endereço IP (público e privado) para cada nó no cluster.
-  - Bloquear tráfego para portas de nó público em clusters que estão executando [nós do trabalhador de borda](/docs/containers?topic=containers-edge#edge): bloquear as portas do nó assegura que os nós do trabalhador de borda sejam os únicos nós do trabalhador a manipular o tráfego recebido.
+  - Bloquear o tráfego para portas de nó público de um serviço de balanceador de carga de rede (NLB) privada: um serviço NLB disponibiliza seu aplicativo pelo endereço IP e pela porta e, também, pelas portas do nó do serviço. As portas de nó são acessíveis em cada endereço IP (público e privado) para cada nó no cluster.
+  - Bloquear tráfego para portas de nó público em clusters que estão executando [nós do trabalhador de borda](/docs/containers?topic=containers-edge#edge): bloquear as portas do nó assegura que os nós do trabalhador de borda sejam os únicos nós do trabalhador que manipulam o tráfego recebido.
   - Bloquear tráfego de determinados endereços IP de origem ou CIDRs (listagem negra)
   - Permitir o tráfego somente de determinados endereços IP de origem ou CIDRs (whitelisting) e bloquear todo outro tráfego
 
-Para ver como incluir na lista de desbloqueio ou lista de bloqueio os endereços IP de origem, tente o [tutorial Usando políticas de rede do Calico para bloquear o tráfego](/docs/containers?topic=containers-policy_tutorial#policy_tutorial). Para obter mais políticas de rede do Calico de exemplo que controlam o tráfego para e por meio do seu cluster, é possível efetuar check-out da [demo de política de estrelas ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) e da [política de rede avançada ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
+Para ver como incluir na lista de desbloqueio ou lista de bloqueio os endereços IP de origem, tente o [tutorial Usando políticas de rede do Calico para bloquear o tráfego](/docs/containers?topic=containers-policy_tutorial#policy_tutorial). Para obter mais políticas de rede do Calico de exemplo que controlam o tráfego para e por meio do seu cluster, é possível efetuar check-out da [demo de política de estrelas ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/getting-started/kubernetes/tutorials/stars-policy/) e da [política de rede avançada ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/getting-started/kubernetes/tutorials/advanced-policy).
 {: tip}
 
 Antes de iniciar:
 1. [Instale e configure o CLI do Calico.](#cli_install)
-2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -330,8 +330,8 @@ Antes de iniciar:
 Para criar uma política pré-DNAT:
 
 1. Defina uma política de rede pré-DNAT do Calico para acesso de ingresso (tráfego de entrada) aos serviços do Kubernetes.
-    * Os clusters do Kubernetes versão 1.10 ou mais recente devem usar a [sintaxe de política do Calico v3 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy).
-    * Se você gerenciar o tráfego para um [serviço de balanceador de carga versão 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs), deverá incluir os campos `applyOnForward: true` e `doNotTrack: true` na seção `spec` da política.
+    * Use [a sintaxe de política do Calico v3 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy).
+    * Se você gerenciar o tráfego para um [NLB 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs), deverá incluir os campos `applyOnForward: true` e `doNotTrack: true` na seção `spec` da política.
 
         Recurso de exemplo que bloqueia todas as portas de nó:
 
@@ -359,7 +359,7 @@ Para criar uma política pré-DNAT:
         ```
         {: codeblock}
 
-        Recurso de exemplo que insere na lista de desbloqueio o tráfego de apenas um CIDR de origem especificado para um balanceador de carga 2.0:
+        Recurso de exemplo que inclui na lista de desbloqueio o tráfego de apenas um CIDR de origem especificado para um NLB 2.0:
 
         ```
         apiVersion: projectcalico.org/v3 kind: GlobalNetworkPolicy metadata: name: whitelist spec: applyOnForward: true doNotTrack: true ingress:
@@ -373,7 +373,7 @@ Para criar uma política pré-DNAT:
         ```
         {: codeblock}
 
-        Recurso de exemplo que insere na lista de desbloqueio o tráfego de apenas um CIDR de origem especificado para um balanceador de carga 1.0:
+        Recurso de exemplo que inclui na lista de desbloqueio o tráfego de apenas um CIDR de origem especificado para um NLB 1.0:
 
         ```
         apiVersion: projectcalico.org/v3
@@ -415,7 +415,7 @@ Para criar uma política pré-DNAT:
 ## Isolando clusters na rede privada
 {: #isolate_workers}
 
-Se você tem um cluster de múltiplas zonas, múltiplas VLANs para um cluster de zona única ou múltiplas sub-redes na mesma VLAN, deve-se [ativar o VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) para que seus nós do trabalhador possam se comunicar entre si na rede privada. No entanto, quando o VLAN Spanning está ativado, qualquer sistema que é conectado a qualquer uma das VLANs privadas na mesma conta do IBM Cloud pode se comunicar com os trabalhadores.
+Se você tem um cluster multizona, múltiplas VLANs para um cluster de zona única ou múltiplas sub-redes na mesma VLAN, deve-se [ativar o VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) para que seus nós do trabalhador possam se comunicar entre si na rede privada. No entanto, quando o VLAN Spanning está ativado, qualquer sistema que é conectado a qualquer uma das VLANs privadas na mesma conta do IBM Cloud pode se comunicar com os trabalhadores.
 {: shortdesc}
 
 É possível isolar seu cluster de outros sistemas na rede privada aplicando [políticas de rede privada do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). Esse conjunto de políticas e terminais de host do Calico isola o tráfego de rede privada de um cluster de outros recursos na rede privada da conta.
@@ -434,7 +434,7 @@ As políticas visam a interface privada do nó do trabalhador (eth0) e a rede de
 
 Antes de iniciar:
 1. [Instale e configure o CLI do Calico.](#cli_install)
-2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -457,12 +457,12 @@ Para isolar seu cluster na rede privada usando políticas do Calico:
 
 3. Configure uma política para o terminal de host privado.
     1. Abra a política  ` generic-privatehostendpoint.yaml ` .
-    2. Substitua `<worker_name>` com o nome de um nó do trabalhador. **Importante**: alguns nós do trabalhador devem seguir uma estrutura de nomenclatura diferente para as políticas do Calico. Deve-se usar o nome de um nó do trabalhador no formato que é retornado pelo comando a seguir.
+    2. Substitua `<worker_name>` pelo nome de um nó do trabalhador. **Importante**: alguns nós do trabalhador devem seguir uma estrutura de nomenclatura diferente para as políticas do Calico. Deve-se usar o nome de um nó do trabalhador no formato que é retornado pelo comando a seguir.
       ```
       ibmcloud ks calicoctl get nodes -- config == filepath/calicoctl.cfg
       ```
       {: pre}
-    3. Substitua `<worker-node-private-ip>` pelo endereço IP privado para o nó do trabalhador. Para ver os seus IPs privados dos nós do trabalhador, execute `ibmcloud ks workers --cluster <my_cluster>`.
+    3. Substitua `<worker-node-private-ip>` pelo endereço IP privado para o nó do trabalhador. Para ver os IPs privados de seu nó do trabalhador, execute `ibmcloud ks workers --cluster <my_cluster>`.
     4. Repita esse conjunto de etapas em uma nova seção para cada nó do trabalhador em seu cluster. **Nota**: cada vez que você inclui um nó do trabalhador em um cluster, deve-se atualizar o arquivo de terminais de host com as novas entradas.
 
 4. Aplique todas as políticas a seu cluster.
@@ -596,6 +596,9 @@ Agora, o tráfego pode fluir dos microsserviços de finanças para o back-end Sr
 
 Neste exemplo, todo o tráfego de todos os microsserviços no namespace de finanças é permitido. Não é possível permitir o tráfego de pods de app específicos em outro namespace porque `podSelector` e `namespaceSelector` não podem ser combinados.
 
+<br />
+
+
 ## Registrando o tráfego negado
 {: #log_denied}
 
@@ -604,18 +607,21 @@ Para registrar as solicitações de tráfego negado para determinados pods em se
 
 Quando você configura políticas de rede para limitar o tráfego para os pods de app, as solicitações de tráfego que não são permitidas por essas políticas são negadas e eliminadas. Em alguns cenários, você pode desejar obter mais informações sobre solicitações de tráfego negado. Por exemplo, você pode observar algum tráfego incomum que está continuamente sendo negado por uma de suas políticas de rede. Para monitorar a potencial ameaça de segurança, é possível configurar a criação de log para registrar cada vez que a política nega uma tentativa de ação em pods de app especificados.
 
+Essa seção mostra como registrar o tráfego negado por uma política de rede do Kubernetes. Para registrar o tráfego negado por uma política de rede do Calico, consulte a [Lição 5 do tutorial de política de rede do Calico](/docs/containers?topic=containers-policy_tutorial#lesson5).
+{: tip}
+
 Antes de iniciar:
 1. [Instale e configure o CLI do Calico.](#cli_install)
-2. [Destine a CLI do Kubernetes para o
-cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Inclua a opção --admin com o comando ibmcloud ks cluster-config, que é usado para fazer download dos certificados e dos arquivos de permissão. Esse download também inclui as chaves para acessar seu portfólio de infraestrutura e executar os comandos do Calico em seus nós do trabalhador.
+2. [Destine a CLI do Kubernetes para o cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Inclua a opção `--admin` com o comando `ibmcloud ks cluster-config`, que é usado para fazer download dos certificados e dos arquivos de permissão. Esse download também inclui as chaves para acessar seu portfólio de infraestrutura e executar os comandos do Calico em seus nós do trabalhador.
     ```
     ibmcloud ks cluster-config -- cluster < cluster_name>-- admin
     ```
     {: pre}
 
-Para criar uma política do Calico para registrar o tráfego negado:
+Para registrar o tráfego negado:
 
-1. Crie ou use uma política de rede do Kubernetes ou Calico existente que bloqueia ou limita o tráfego recebido. Por exemplo, para controlar o tráfego entre os pods, é possível usar a política de exemplo do Kubernetes a seguir chamada `access-nginx` que limita o acesso a um app NGINX. O tráfego recebido para os pods que são rotulados "run=nginx" é permitido somente de pods com o rótulo "run=access". Todos os outros tráfegos recebidos para os pods de app "run=nginx" são bloqueados.
+1. Crie ou use uma política de rede existente do Kubernetes que bloqueie ou limite o tráfego recebido.
+  1. Crie uma política de rede do Kubernetes. Por exemplo, para controlar o tráfego entre os pods, é possível usar a política de exemplo do Kubernetes a seguir chamada `access-nginx` que limita o acesso a um app NGINX. O tráfego recebido para os pods que são rotulados "run=nginx" é permitido somente de pods com o rótulo "run=access". Todos os outros tráfegos recebidos para os pods de app "run=nginx" são bloqueados.
     ```
     kind: NetworkPolicy
     apiVersion: networking.k8s.io/v1
@@ -633,27 +639,19 @@ Para criar uma política do Calico para registrar o tráfego negado:
     ```
     {: codeblock}
 
-2. Aplique a política.
-    * Para aplicar uma política do Kubernetes:
-        ```
-        kubectl apply -f < policy_name> .yaml
-        ```
-        {: pre}
-        A política do Kubernetes é convertida automaticamente em um Calico `NetworkPolicy` para que o Calico possa aplicá-la como regras de Iptables.
+  2. Aplique a política.
+    ```
+    kubectl apply -f < policy_name> .yaml
+    ```
+    {: pre}
 
-    * Para aplicar uma política do Calico:
-        ```
-        calicoctl apply -f <policy_name>.yaml --config=<filepath>/calicoctl.cfg
-        ```
-        {: pre}
-
-3. Se você aplicou uma política do Kubernetes, revise a sintaxe da política do Calico criada automaticamente e copie o valor do campo `spec.selector`.
+  3. A política do Kubernetes é convertida automaticamente para um Calico NetworkPolicy para que o Calico possa aplicá-lo como regras de Iptables. Revise a sintaxe da política do Calico criada automaticamente e copie o valor do campo `spec.selector`.
     ```
     calicoctl get policy -o yaml <policy_name> --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
-    Por exemplo, após ser aplicada e convertida, a política `access-nginx` tem a sintaxe do Calico v3 a seguir. O campo `spec.selector` tem o valor `projectcalico.org/orchestrator == 'k8s' && run == 'nginx'`.
+    Por exemplo, depois que a política do Kubernetes é aplicada e convertida em uma NetworkPolicy do Calico, a política `access-nginx` terá a sintaxe do Calico v3 a seguir. O campo `spec.selector` tem o valor `projectcalico.org/orchestrator == 'k8s' && run == 'nginx'`.
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy
@@ -672,53 +670,61 @@ Para criar uma política do Calico para registrar o tráfego negado:
     ```
     {: screen}
 
-4. Para registrar todo o tráfego que é negado pela política do Calico que você criou anteriormente, crie um Calico `NetworkPolicy` chamado `log-denied-packets`. Por exemplo, use a política a seguir para registrar todos os pacotes que foram negados pela política de rede que você definiu na etapa 1. A política de log usa o mesmo seletor de pod que o exemplo de política `access-nginx`, que inclui essa política na cadeia de regras do Iptables do Calico. Ao usar um número de pedido mais alto, como `3000`, é possível assegurar que essa regra seja incluída no final da cadeia de regras de Iptables. Qualquer pacote de solicitações do pod "run=access" que corresponda à regra de política `access-nginx` é aceito pelos pods "run=nginx".  No entanto, quando os pacotes de qualquer outra origem tentam corresponder à regra de política `access-nginx` de baixa ordem, eles são negados. Esses pacotes tentam, então, corresponder à regra de política `log-denied-packets` de alta ordem. O `log-denied-packets` registra quaisquer pacotes que cheguem a ele, portanto, somente os pacotes que foram negados pelos pods "run=nginx" são registrados. Após o registro das tentativas dos pacotes, os pacotes são eliminados.
-    ```
-    apiVersion: projectcalico.org/v3
-    kind: NetworkPolicy
-    metadata:
-      name: log-denied-packets
-    spec:
-      types:
-      - Ingress
-      ingress:
-      - action: Log
-        destination: {}
-        source: {}
-      selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
-      order: 3000
-    ```
-    {: codeblock}
+2. Para registrar todo o tráfego negado pela política criada na etapa anterior, crie uma NetworkPolicy do Calico denominada `log-denied-packets`. Por exemplo, a política de log a seguir usa o mesmo seletor de pod como a política de exemplo `access-nginx` do Kubernetes descrita na etapa 1, que inclui essa política na cadeia de regras Iptables do Calico. Ao usar um número de pedido mais alto, como `3000`, é possível assegurar que essa regra seja incluída no final da cadeia de regras de Iptables. Qualquer pacote de solicitações do pod rotulado por `run=access` que corresponda a regra de política `access-nginx` é aceito pelos pods rotulados por `run=nginx`. No entanto, quando os pacotes de qualquer outra origem tentam corresponder à regra de política `access-nginx` de baixa ordem, eles são negados. Esses pacotes tentam, então, corresponder à regra de política `log-denied-packets` de alta ordem. `log-denied-packets` registra quaisquer pacotes recebidos, portanto, apenas pacotes negados pelos pods rotulados por `run=nginx` serão registrados. Após o registro das tentativas dos pacotes, os pacotes são eliminados.
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: NetworkPolicy
+  metadata:
+    name: log-denied-packets
+  spec:
+    types:
+    - Ingress
+    ingress:
+    - action: Log
+      destination: {}
+      source: {}
+    selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
+    order: 3000
+  ```
+  {: codeblock}
 
-    <table>
-    <caption>Entendendo os componentes de YAML da política de log</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Ícone ideia"/> Entendendo os componentes de YAML da política de log</th>
-    </thead>
-    <tbody>
-    <tr>
-     <td><code> types </code></td>
-     <td>Esta política de <code>Ingress</code> se aplica a todas as solicitações de tráfego recebidas. O valor <code>Ingress</code> é um termo geral para todo o tráfego recebido e não se refere ao tráfego somente por meio do ALB do IBM Ingress.</td>
-    </tr>
-     <tr>
-      <td><code>ingress</code></td>
-      <td><ul><li><code>action</code>: a ação <code>Log</code> grava uma entrada de log para quaisquer solicitações que correspondam a essa política para o caminho `/var/log/syslog` no nó do trabalhador.</li><li><code>destination</code>: nenhum destino é especificado porque o <code>selector</code> aplica essa política a todos os pods com um determinado rótulo.</li><li><code>source</code>: essa política se aplica a solicitações de qualquer origem.</td>
-     </tr>
-     <tr>
-      <td><code>seletor</code></td>
-      <td>Substitua &lt;selector&gt; pelo mesmo seletor no campo `spec.selector` que você usou em sua política do Calico da etapa 1 ou que localizou na sintaxe do Calico para sua política do Kubernetes na etapa 3. Por exemplo, usando o seletor <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>, a regra dessa política é incluída na mesma cadeia do Iptables que a regra de política de rede de amostra <code>access-nginx</code> na etapa 1. Essa política se aplica somente a tráfego de rede recebido para pods que usam o mesmo rótulo de seletor de pod.</td>
-     </tr>
-     <tr>
-      <td><code> order </code></td>
-      <td>As políticas do Calico têm ordens que determinam quando elas são aplicadas a pacotes de solicitações recebidas. As políticas com ordens mais baixas, como <code>1000</code>, são aplicadas primeiro. As políticas com ordens mais altas são aplicadas após as políticas de ordem mais baixa. Por exemplo, uma política com uma ordem muito alta, como <code>3000</code>, é aplicada efetivamente por último após todas as políticas de ordem mais baixa terem sido aplicadas.</br></br>Os pacotes de solicitações de entrada passam pela cadeia de regras do Iptables e tentam corresponder regras de políticas de ordem mais baixa primeiro. Se um pacote corresponder a qualquer regra, o pacote será aceito. No entanto, se um pacote não corresponder a nenhuma regra, ele chegará à última regra na cadeia de regras de Iptables com a ordem mais alta. Para certificar-se de que essa seja a última política na cadeia, use uma ordem muito mais alta, como <code>3000</code>, do que a política criada na etapa 1.</td>
-     </tr>
-    </tbody>
-    </table>
+  <table>
+  <caption>Entendendo os componentes de YAML da política de log</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Ícone ideia"/> Entendendo os componentes de YAML da política de log</th>
+  </thead>
+  <tbody>
+  <tr>
+   <td><code> types </code></td>
+   <td>Esta política de <code>Ingress</code> se aplica a todas as solicitações de tráfego recebidas. O valor <code>Ingress</code> é um termo geral para todo o tráfego recebido e não se refere ao tráfego somente por meio do ALB do IBM Ingress.</td>
+  </tr>
+   <tr>
+    <td><code>ingress</code></td>
+    <td><ul><li><code>action</code>: a ação <code>Log</code> grava uma entrada de log para quaisquer solicitações que correspondam a essa política para o caminho `/var/log/syslog` no nó do trabalhador.</li><li><code>destination</code>: nenhum destino é especificado porque o <code>selector</code> aplica essa política a todos os pods com um determinado rótulo.</li><li><code>source</code>: essa política se aplica a solicitações de qualquer origem.</li></ul></td>
+   </tr>
+   <tr>
+    <td><code>seletor</code></td>
+    <td>Substitua &lt;selector&gt; pelo mesmo seletor no campo `spec.selector` usado em sua política da etapa 1. Por exemplo, usando o seletor <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>, a regra dessa política é incluída na mesma cadeia Iptables que a regra de política de rede de amostra do Kubernetes <code>access-nginx</code> na etapa 1. Essa política se aplica apenas ao tráfego de rede recebido para pods que usam o mesmo rótulo de seletor.</td>
+   </tr>
+   <tr>
+    <td><code> order </code></td>
+    <td>As políticas do Calico têm ordens que determinam quando elas são aplicadas a pacotes de solicitações recebidas. As políticas com ordens mais baixas, como <code>1000</code>, são aplicadas primeiro. As políticas com ordens mais altas são aplicadas após as políticas de ordem mais baixa. Por exemplo, uma política com uma ordem muito alta, como <code>3000</code>, é efetivamente aplicada por último, após a aplicação de todas as políticas de ordem inferior.</br></br>Os pacotes de solicitações recebidos passam pela cadeia de regras Iptables e tentam corresponder primeiro a regras de políticas de ordem inferior. Se um pacote corresponder a qualquer regra, o pacote será aceito. No entanto, se um pacote não corresponder a nenhuma regra, ele chegará à última regra na cadeia de regras de Iptables com a ordem mais alta. Para certificar-se de que essa seja a última política na cadeia, use uma ordem muito mais alta, como <code>3000</code>, do que a política criada na etapa 1.</td>
+   </tr>
+  </tbody>
+  </table>
 
-5. Aplique a política.
-    ```
-    calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
-    ```
-    {: pre}
+3. Aplique a política.
+  ```
+  calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
 
-6. [Encaminhe os logs](/docs/containers?topic=containers-health#configuring) de `/var/log/syslog` para o {{site.data.keyword.loganalysislong}} ou um servidor syslog externo.
+4. Gere entradas de log enviando solicitações não permitidas pela política criada na etapa 1. Por exemplo, tente executar ping do pod protegido pela política de rede por meio de um pod ou de um endereço IP não permitido.
+
+5. Verifique as entradas de log que são gravadas no caminho `/var/log/syslog`. Observe que os endereços IP de DST (destino) ou SRC (origem) na entrada de log podem ser diferentes do esperado devido a proxies, à Conversão de Endereço de Rede (NAT) e a outros processos de rede. A entrada de log é semelhante à seguinte.
+  ```
+  Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
+  ```
+  {: screen}
+
+6. Opcional: [encaminhe os logs](/docs/containers?topic=containers-health#configuring) de `/var/log/syslog` para um servidor syslog externo.

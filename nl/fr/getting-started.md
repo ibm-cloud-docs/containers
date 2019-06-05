@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -30,17 +30,6 @@ Prenez une longueur d'avance avec {{site.data.keyword.containerlong}} en déploy
 {:shortdesc}
 
 Les conteneurs sont un moyen standard pour conditionner des applications et toutes leurs dépendances afin de déplacer de façon transparente les applications entre des environnements. A la différence des machines virtuelles, les conteneurs n'incluent pas le système d'exploitation. Seuls le code d'application, l'environnement d'exécution, les outils système, les bibliothèques et les paramètres sont inclus dans les conteneurs. Les conteneurs sont plus légers, plus portables et plus efficaces que les machines virtuelles.
-
-
-Cliquez sur une option pour commencer :
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Cliquez sur une icône pour démarrer rapidement avec {{site.data.keyword.containerlong_notm}}. Avec {{site.data.keyword.Bluemix_dedicated_notm}}, cliquez sur cette icône pour voir vos options." style="width:440px;" />
-<map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="Initiation aux clusters Kubernetes dans {{site.data.keyword.Bluemix_notm}}" title="Initiation aux clusters Kubernetes dans {{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
-<area href="/docs/containers?topic=containers-cs_cli_install" alt="Installation des interfaces CLI." title="Installation des interfaces CLI." shape="rect" coords="155, -1, 289, 210" />
-<area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} environnement de cloud" title="{{site.data.keyword.Bluemix_notm}} environnement de cloud" shape="rect" coords="326, -10, 448, 218" />
-</map>
-
 
 ## Initiation aux clusters
 {: #clusters_gs}
@@ -76,7 +65,7 @@ Bien joué ! Vous avez créé votre premier cluster Kubernetes. Voici quelques d
 **Etape suivante ?**</br>
 Expérimentez certaines fonctionnalités avec votre cluster gratuit avant qu'il n'arrive à expiration.
 
-* Passez par le [premier tutoriel d'{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) pour créer un cluster Kubernetes, installer l'interface CLI, créer un registre privé, configurer l'environnement de votre cluster et ajouter un service dans votre cluster.
+* Parcourez le [premier tutoriel {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) pour créer un cluster Kubernetes, installer l'interface de ligne de commande ou utiliser le terminal Kubernetes, créer un registre privé, configurer l'environnement de votre cluster et ajouter un service dans votre cluster.
 * Continuez sur votre lancée en suivant le [deuxième tutoriel d'{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial) pour savoir comment déployer des applications dans votre cluster.
 * [Créez un cluster standard](/docs/containers?topic=containers-clusters#clusters_ui) avec plusieurs noeuds pour obtenir une plus grande disponibilité.
 

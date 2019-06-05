@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, audit
 
@@ -44,7 +44,7 @@ Per ulteriori informazioni sul funzionamento del servizio, consulta la [document
 ## Ricerca di informazioni per gli eventi
 {: #kube-find}
 
-Puoi monitorare le attività nel tuo cluster controllando i log nel dashboard Kibana. 
+Puoi monitorare le attività nel tuo cluster controllando i log nel dashboard Kibana.
 {: shortdesc}
 
 Per monitorare l'attività amministrativa:
@@ -518,19 +518,19 @@ Prima di iniziare: assicurati che il cluster sia configurato per inoltrare gli [
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>Per Kubernetes v1.10 e successive, è stata creata una politica di sicurezza del pod.</td>
+    <td>È stata creata una politica di sicurezza dei pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>Per Kubernetes v1.10 e successive, è stata eliminata una politica di sicurezza del pod.</td>
+    <td>È stata eliminata una politica di sicurezza dei pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>Per Kubernetes v1.10 e successive, è stata corretta una politica di sicurezza del pod.</td>
+    <td>È stata corretta una politica di sicurezza dei pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Per Kubernetes v1.10 e successive, è stata aggiornata una politica di sicurezza del pod.</td>
+    <td>È stata aggiornata una politica di sicurezza dei pod.</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>

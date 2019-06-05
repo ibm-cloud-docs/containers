@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -62,13 +62,13 @@ La solution est constituée des composants principaux suivants :
 2. Partage numérique des formalités douanières avec les ports et les partenaires de transit, y compris le contrôle d'accès
 3. Application destinée aux clients de la compagnie qui permet d'agréger et de communiquer les informations d'arrivée des marchandises expédiées, y compris des API pour que ces clients puissent réutiliser les données d'expédition dans leurs propres applications et leurs applications B2B
 
-Pour que la compagnie maritime soit en mesure de travailler avec des partenaires mondiaux, les systèmes de routage et de planification nécessitent des modifications locales pour s'adapter à la langue, aux réglementations de chaque région et à la logistique spécifique à chaque port. {{site.data.keyword.containerlong_notm}} offre une couverture globale dans plusieurs régions, notamment en Amérique du Nord, en Europe, en Asie et en Australie, pour que les applications de la compagnie répercutent les besoins de ses partenaires, dans chaque pays.
+Pour que la compagnie maritime soit en mesure de travailler avec des partenaires mondiaux, les systèmes de routage et de planification nécessitent des modifications locales pour s'adapter à la langue, aux réglementations de chaque région et à la logistique spécifique à chaque port. {{site.data.keyword.containerlong_notm}} offre une couverture globale dans plusieurs régions, notamment en Amérique du Nord, en Europe, en Asie et en Australie, pour que les applications répercutent les besoins de ses partenaires, dans chaque pays.
 
 Les terminaux IoT envoient les données distribuées par {{site.data.keyword.messagehub_full}} aux applications des ports régionaux et aux magasins de données contenant les manifestes de douanes et de conteneurs associés. {{site.data.keyword.messagehub_full}} est le point d'arrivée des événements IoT. Les événements sont distribués en fonction de la connectivité gérée offerte par Watson IoT Platform pour {{site.data.keyword.messagehub_full}}.
 
 Une fois que les événements sont dans {{site.data.keyword.messagehub_full}}, ils sont conservés pour être utilisés immédiatement dans les applications de transit des ports et à n'importe quel moment par la suite. Les applications qui nécessitent les temps d'attente les plus faibles bénéficient en temps réel des données du flux d'événements ({{site.data.keyword.messagehub_full}}). D'autres applications à venir, comme les outils d'analyse, peuvent choisir leur mode de consommation des données par lots à partir du magasin d'événements avec {{site.data.keyword.cos_full}}.
 
-Comme les données d'expédition sont partagées avec les clients de la compagnie, les développeurs s'assurent que ces clients peuvent utiliser des API pour faire remonter les données d'expédition dans leurs propres applications. Parmi les exemples d'applications de ce type figurent les applications mobiles de suivi ou les solutions Web d'e-commerce. Les développeurs sont également chargés de construire et gérer les applications des ports régionaux qui rassemblent et diffusent les enregistrements douaniers et les manifestes de transport maritime. En bref, ils doivent se focaliser sur le code au lieu de gérer l'infrastructure. C'est pourquoi ils ont choisi {{site.data.keyword.containerlong_notm}} car IBM simplifie la gestion de l'infrastructure :
+Comme les données d'expédition sont partagées avec les clients de la société, les développeurs s'assurent que ces clients peuvent utiliser des API pour faire remonter les données d'expédition dans leurs propres applications. Parmi les exemples d'applications de ce type figurent les applications mobiles de suivi ou les solutions Web d'e-commerce. Les développeurs sont également chargés de construire et gérer les applications des ports régionaux qui rassemblent et diffusent les enregistrements douaniers et les manifestes de transport maritime. En bref, ils doivent se focaliser sur le code au lieu de gérer l'infrastructure. C'est pourquoi ils ont choisi {{site.data.keyword.containerlong_notm}} car IBM simplifie la gestion de l'infrastructure :
 * Gestion du maître Kubernetes, de l'infrastructure sous forme de services (IaaS) et de composants fonctionnels, comme Ingress et les composants de stockage
 * Gestion de l'état de santé et de la reprise des noeuds worker
 * Calcul global, pour que les développeurs ne soient plus chargés de l'infrastructure dans les différentes régions où doivent résider leurs charges de travail et leurs données.
@@ -93,7 +93,7 @@ Solution technique :
 
 **Etape 1 : Applications conteneurisées à l'aide de microservices**
 
-* Organiser l'architecture des applications sous forme d'ensemble de microservices coopératifs dans {{site.data.keyword.containerlong_notm}} selon les zones fonctionnelles de l'application et des dépendances associées.
+* Intégrer des applications dans un ensemble de microservices coopératifs dans {{site.data.keyword.containerlong_notm}} selon les zones fonctionnelles de l'application et des dépendances associées.
 * Déployer les applications dans des conteneurs dans {{site.data.keyword.containerlong_notm}}.
 * Fournir des tableaux de bord DevOps normalisés via Kubernetes.
 * Activer la mise à l'échelle du calcul à la demande pour le traitement par lots et d'autres charges de travail d'inventaire qui s'exécutent moins fréquemment.
@@ -106,12 +106,12 @@ Solution technique :
 
 **Etape 3 : Partage de données**
 * {{site.data.keyword.cos_full}} associé à {{site.data.keyword.messagehub_full}} fournit en temps réel un stockage des données chronologique.
-* Les API permettent aux clients de la compagnie de partager des données dans leurs applications.
+* Les API permettent aux clients de la société de livraison de partager des données dans leurs applications.
 
 **Etape 4 : Distribution en continu**
 * {{site.data.keyword.contdelivery_full}} aide les développeurs à mettre en place rapidement une chaîne d'outils intégrée, en utilisant des modèles pouvant être partagés et personnalisés avec les outils d'IBM, de tiers et des outils open source. Les compilations et les tests sont automatiques et le contrôle qualité est assuré par des fonctions d'analyse.
 * Une fois que les développeurs ont construit et testé les applications dans leurs clusters de développement et de test, ils utilisent des chaînes d'outils IBM CI/CD pour déployer des applications dans des clusters à l'échelle mondiale.
-* {{site.data.keyword.containerlong_notm}} facilite le transfert et la restauration d'applications. Des applications personnalisées sont déployées pour répondre aux exigences régionales via le routage intelligent et l'équilibrage de charge d'Istio.
+* {{site.data.keyword.containerlong_notm}} facilite le transfert et la restauration d'applications. Des applications personnalisées sont déployées pour répondre aux exigences régionales via le routage intelligent et l'équilibrage de charge d'Istio. 
 
 **Résultats**
 
@@ -160,7 +160,7 @@ Solution technique :
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_full_notm}}
 
-Un développement accéléré est un atout majeur pour le responsable RH. L'équipe commence par conteneuriser les applications et à les placer dans le cloud. Avec l'utilisation de conteneurs modernes, les développeurs peuvent facilement expérimenter le kit de développement de logiciels (SDK) Node.js et intégrer les changements dans des systèmes de développement et de test, répartis sur différents clusters. Ces intégrations sont automatiques avec des chaînes d'outils ouvertes et {{site.data.keyword.contdelivery_full}}. Les mises à jour de ce site RH ne sont plus confinées dans des processus de construction lents et susceptibles de comporter des erreurs. Désormais il est possible d'effectuer des mises à jour incrémentielles du site tous les jours, voire plus fréquemment.  En outre, la consignation et la surveillance du site RH est rapidement intégrée, notamment pour le mode d'extraction de données personnalisées du site à partir de systèmes de prestations de back-end. Les développeurs ne perdent plus de temps à construire des systèmes de consignation complexes, juste pour pouvoir identifier et résoudre les incidents des systèmes de production. Les développeurs n'ont pas besoin de passer du temps à devenir des experts en matière de sécurité de cloud, ils peuvent facilement imposer l'authentification axée sur des règles en utilisant {{site.data.keyword.appid_full_notm}}.
+Un développement accéléré est un atout majeur pour le responsable RH. L'équipe commence par conteneuriser les applications et à les placer dans le cloud. Avec l'utilisation de conteneurs modernes, les développeurs peuvent facilement expérimenter le kit de développement de logiciels (SDK) Node.js et intégrer les changements dans des systèmes de développement et de test, répartis sur différents clusters. Ces intégrations sont automatiques avec des chaînes d'outils ouvertes et {{site.data.keyword.contdelivery_full}}. Les mises à jour de ce site RH ne sont plus confinées dans des processus de construction lents et susceptibles de comporter des erreurs. Désormais il est possible d'effectuer des mises à jour incrémentielles du site tous les jours, voire plus fréquemment.  En outre, la consignation et la surveillance du site RH est rapidement intégrée, notamment pour le mode d'extraction de données personnalisées du site à partir de systèmes de prestations de back-end. Les développeurs ne perdent plus de temps à construire des systèmes de consignation complexes, juste pour pouvoir identifier et résoudre les incidents des systèmes de production. Les développeurs n'ont pas besoin de devenir des experts en matière de sécurité de cloud, ils peuvent facilement imposer l'authentification axée sur des règles en utilisant {{site.data.keyword.appid_full_notm}}.
 
 Avec {{site.data.keyword.containerlong_notm}}, ils passent d'un matériel sursollicité dans un centre de données privé à un calcul personnalisé qui réduit les opérations informatiques et la maintenance, et économise l'énergie. Pour héberger le site RH, ils peuvent aisément concevoir des clusters Kubernetes afin de satisfaire leurs besoins en termes d'UC, de mémoire RAM et de stockage. Un autre facteur permettant de réduire les coûts de personnel réside dans le fait qu'IBM gère Kubernetes, de sorte que les développeurs puissent se concentrer à apporter une meilleure expérience des employés dans le cadre de l'inscription aux prestations.
 

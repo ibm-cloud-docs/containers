@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,7 +44,7 @@ subcollection: containers
 
 ## 步骤 1：在 {{site.data.keyword.containerlong_notm}} 诊断和调试工具中运行 Ingress 测试
 
-进行故障诊断时，可以使用 {{site.data.keyword.containerlong_notm}} 诊断和调试工具来运行 Ingress 测试并从集群收集相关 Ingress 信息。要使用调试工具，请安装 [`ibmcloud-iks-debug` Helm chart ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
+进行故障诊断时，可以使用 {{site.data.keyword.containerlong_notm}} 诊断和调试工具来运行 Ingress 测试并从集群收集相关 Ingress 信息。要使用调试工具，请安装 [`ibmcloud-iks-debug` Helm chart ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
 {: shortdesc}
 
 
@@ -52,7 +52,7 @@ subcollection: containers
 
 2. 将 Helm chart 安装到集群。
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
@@ -156,7 +156,7 @@ subcollection: containers
 
 1. 获取公共 ALB 正在侦听的 IP 地址。
     ```
-ibmcloud ks albs --cluster <cluster_name_or_ID>
+    ibmcloud ks albs --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -184,7 +184,7 @@ ping <ALB_IP>
         * 如果 CLI 返回超时并且您具有保护工作程序节点的定制防火墙，请确保在[防火墙](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)中允许 ICMP。
         * 如果没有防火墙阻止 ping 操作，并且 ping 操作一直运行到超时，请[检查 ALB pod 的状态](#check_pods)。
 
-    * 仅多专区集群：可以使用 MZLB 运行状况检查来确定 ALB IP 的阶段状态。有关 MZLB 的更多信息，请参阅[多专区负载均衡器 (MZLB)](/docs/containers?topic=containers-ingress#planning)。MZLB 运行状况检查仅可用于具有以下格式的新 Ingress 子域的集群：`<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。如果集群仍使用旧格式的 `<cluster_name>.<region>.containers.mybluemix.net`，请[将单专区集群转换为多专区集群](/docs/containers?topic=containers-clusters#add_zone)。将为集群分配采用新格式的子域，但也可以继续使用较旧的子域格式。或者，可以对自动分配了新的子域格式的新集群进行排序。
+    * 仅多专区集群：可以使用 MZLB 运行状况检查来确定 ALB IP 的阶段状态。有关 MZLB 的更多信息，请参阅[多专区负载均衡器 (MZLB)](/docs/containers?topic=containers-ingress#planning)。MZLB 运行状况检查仅可用于具有以下格式的新 Ingress 子域的集群：`<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。如果集群使用的仍是旧格式 `<cluster_name>.<region>.containers.mybluemix.net`，请[将单专区集群转换为多专区集群](/docs/containers?topic=containers-clusters#add_zone)。将为集群分配采用新格式的子域，但也可以继续使用较旧的子域格式。或者，可以对自动分配了新的子域格式的新集群进行排序。
     
 
     以下 HTTP cURL 命令使用 `albhealth` 主机，该主机由 {{site.data.keyword.containerlong_notm}} 配置为返回 ALB IP 的 `healthy` 或 `unhealthy` 阶段状态。
@@ -317,7 +317,7 @@ ping <ALB_IP>
         ```
         {: pre}
 
-        以下示例输出确认 ALB pod 已使用正确的运行状况检查主机名 `albhealth.<domain>`：
+        以下示例输出确认 ALB pod 已配置了正确的运行状况检查主机名 `albhealth.<domain>`：
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```

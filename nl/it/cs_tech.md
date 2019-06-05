@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, docker
 
@@ -104,7 +104,7 @@ tenendo conto dei requisiti di distribuzione e della capacità disponibile nel c
 <dd>Una distribuzione è una risorsa Kubernetes in cui puoi specificare le informazioni sulle altre risorse o sulle funzionalità necessarie per eseguire la tua applicazione,
 come i servizi, l'archiviazione persistente o le annotazioni. Dovrai documentare una distribuzione in un file YAML di configurazione e quindi applicarla al cluster. Il master Kubernetes configura le risorse e distribuisce i contenitori nei pod su nodi di lavoro con capacità disponibile.
 </br></br>
-Definisci le strategie di aggiornamento per la tua applicazione, incluso il numero di pod che vuoi aggiungere durante un aggiornamento continuo e il numero di pod che possono non essere disponibili contemporaneamente. Quando esegui un aggiornamento continuo, la distribuzione controlla se l'aggiornamento funziona e interrompe il rollout quando vengono rilevati errori.</dd>
+Definisci le strategie di aggiornamento per la tua applicazione, incluso il numero di pod che vuoi aggiungere durante un aggiornamento continuo e il numero di pod che può non essere disponibile contemporaneamente. Quando esegui un aggiornamento continuo, la distribuzione controlla se l'aggiornamento funziona e interrompe il rollout quando vengono rilevati errori.</dd>
 
 <dt>Pod</dt>
 <dd>Ogni applicazione inserita in un contenitore che viene distribuita in un cluster viene distribuita, eseguita e gestita da una risorsa Kubernetes denominata pod. I pod rappresentano piccole unità distribuibili in un cluster Kubernetes e vengono utilizzati per raggruppare i contenitori che devono essere trattati come una singola unità. Nella maggior parte dei casi, ogni contenitore viene distribuito nel suo pod. Tuttavia, un'applicazione potrebbe richiedere un contenitore e altri contenitori helper per essere distribuita
@@ -150,7 +150,7 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
 
 <dl>
   <dt>Master Kubernetes</dt>
-    <dd>Il master Kubernetes ha il compito di gestire tutte le risorse di calcolo, rete e archiviazione nel cluster. Il master Kubernetes garantisce che le applicazioni inserite in un contenitore e i servizi siano distribuiti equamente nei nodi di lavoro nel cluster. A seconda del modo in cui configuri l'applicazione e i servizi, il master determina il nodo di lavoro che dispone di risorse sufficienti per soddisfare i requisiti dell'applicazione.</br></br>La seguente tabella descrive i componenti del master Kubernetes.
+    <dd>Il master Kubernetes ha il compito di gestire tutte le risorse di calcolo, rete e archiviazione nel cluster. Il master Kubernetes garantisce che le applicazioni inserite in un contenitore e i servizi siano distribuiti equamente nei nodi di lavoro nel cluster. A seconda di come configuri la tua applicazione e i tuoi servizi, il master determina il nodo di lavoro che dispone di risorse sufficienti per soddisfare i requisiti dell'applicazione.</br></br>La seguente tabella descrive i componenti del master Kubernetes.
     <table>
     <caption>Componenti del master Kubernetes</caption>
     <thead>
@@ -192,7 +192,7 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     <tr>
     <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
-    <td>Per i cluster che eseguono Kubernetes versione 1.10 o successive, `ibm-master-proxy` inoltra le richieste dal nodo di lavoro agli indirizzi IP delle repliche dei master altamente disponibili. Nei cluster a zona singola, il master ha tre repliche su host separati con un indirizzo IP e un nome di dominio del master. Per i cluster che si trovano in una zona che supporta il multizona, il master ha tre repliche che vengono estese tra le zone. In quanto tale, ogni master ha il proprio indirizzo IP registrato con DNS, con un nome di dominio per l'intero master del cluster.</td>
+    <td>L'`ibm-master-proxy` inoltra le richieste dal nodo di lavoro agli indirizzi IP delle repliche master altamente disponibili. Nei cluster a zona singola, il master ha tre repliche su host separati con un indirizzo IP e un nome di dominio del master. Per i cluster che si trovano in una zona che supporta il multizona, il master ha tre repliche che vengono estese tra le zone. In quanto tale, ogni master ha il proprio indirizzo IP registrato con DNS, con un nome di dominio per l'intero master del cluster.</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
@@ -242,7 +242,7 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     <tr>
     <td>Provider di archiviazione</td>
     <td>kube-system</td>
-    <td>Ogni cluster è configurato con un plug-in per eseguire il provisioning dell'archiviazione file. Puoi scegliere di installare altri componenti aggiuntivi, come ad esempio l'archiviazione blocchi.</td>
+    <td>Ogni cluster è configurato con un plugin per eseguire il provisioning dell'archiviazione file. Puoi scegliere di installare altri componenti aggiuntivi, come ad esempio l'archiviazione blocchi.</td>
     </tr>
     <tr>
     <td>Registrazione e metriche</td>
@@ -262,5 +262,5 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     </tbody></table></dd>
 </dl>
 
-Vuoi vedere in che modo {{site.data.keyword.containerlong_notm}} può essere utilizzato con altri prodotti e servizi? Controlla alcune delle [integrazioni](/docs/containers?topic=containers-integrations#integrations).
+Vuoi vedere in che modo {{site.data.keyword.containerlong_notm}} può essere utilizzato con altri prodotti e servizi? Controlla alcune delle [integrazioni](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}

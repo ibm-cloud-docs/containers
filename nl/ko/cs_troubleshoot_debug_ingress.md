@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,7 +44,7 @@ subcollection: containers
 
 ## 1단계: {{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구로 Ingress 테스트 실행
 
-문제점을 해결하는 중에 {{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구를 사용하여 Ingress 테스트를 실행하여 관련 Ingress 정보를 클러스터에서 수집할 수 있습니다. 디버그 도구를 사용하려면 다음과 같이 [`ibmcloud-iks-debug` Helm 차트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)를 설치하십시오.
+문제점을 해결하는 중에 {{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구를 사용하여 Ingress 테스트를 실행하여 관련 Ingress 정보를 클러스터에서 수집할 수 있습니다. 디버그 도구를 사용하려면 다음과 같이 [`ibmcloud-iks-debug` Helm 차트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)를 설치하십시오.
 {: shortdesc}
 
 
@@ -52,7 +52,7 @@ subcollection: containers
 
 2. 클러스터에 Helm 차트를 설치하십시오.
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
@@ -185,7 +185,7 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
         * CLI가 제한시간 초과를 리턴하고 작업자 노드를 보호하는 사용자 정의 방화벽이 있는 경우, [방화벽](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)에서 ICMP가 허용되는지 확인하십시오.
         * Ping 실행을 차단하는 방화벽이 없으며 Ping 실행이 여전히 제한시간을 초과하는 경우에는 [ALB 팟(Pod)의 상태를 확인](#check_pods)하십시오.
 
-    * 다중 구역 클러스터에만 해당: MZLB 상태 검사를 사용하여 ALB IP의 상태를 판별할 수 있습니다. MZLB에 대한 자세한 정보는 [다중 구역 로드 밸런서(MZLB)](/docs/containers?topic=containers-ingress#planning)를 참조하십시오. MZLB 상태 검사는 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 형식의 새 Ingress 하위 도메인이 있는 클러스터에만 사용될 수 있습니다. 클러스터가 여전히 `<cluster_name>.<region>.containers.mybluemix.net`의 이전 형식을 사용하는 경우에는 [단일 구역 클러스터를 다중 구역으로 변환](/docs/containers?topic=containers-clusters#add_zone)하십시오. 클러스터에 새 형식의 하위 도메인이 지정되지만, 이전 하위 도메인 형식이 계속 사용될 수도 있습니다. 또는 새 하위 도메인 형식이 자동으로 지정된 새 클러스터를 주문할 수 있습니다.
+    * 다중 구역 클러스터에만 해당: MZLB 상태 검사를 사용하여 ALB IP의 상태를 판별할 수 있습니다. MZLB에 대한 자세한 정보는 [다중 구역 로드 밸런서(MZLB)](/docs/containers?topic=containers-ingress#planning)를 참조하십시오. MZLB 상태 검사는 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 형식의 새 Ingress 하위 도메인이 있는 클러스터에만 사용할 수 있습니다. 클러스터가 `<cluster_name>.<region>.containers.mybluemix.net`의 이전 형식을 계속해서 사용하는 경우 [단일 구역 클러스터를 다중 구역으로 변환](/docs/containers?topic=containers-clusters#add_zone)하십시오. 클러스터에 새 형식의 하위 도메인이 지정되지만, 이전 하위 도메인 형식이 계속 사용될 수도 있습니다. 또는 새 하위 도메인 형식이 자동으로 지정된 새 클러스터를 주문할 수 있습니다.
 
     다음의 HTTP cURL 명령에서는 ALB IP에 대해 `healthy` 또는 `unhealthy` 상태를 리턴하도록 {{site.data.keyword.containerlong_notm}}에 의해 구성된 `albhealth` 호스트를 사용합니다.
         ```
@@ -266,7 +266,7 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
 
     1. 하나의 호스트를 하나의 Ingress 리소스에서만 정의했는지 확인하십시오. 여러 Ingress 리소스에 하나의 호스트를 정의하면 ALB가 올바르게 트래픽을 전달하지 않으면서 오류가 발생할 수 있습니다.
 
-    2. 하위 도메인 및 TLS 인증서가 올바른지 확인하십시오. IBM 제공 Ingress 하위 도메인 및 TLS 인증서를 찾으려면 다음을 실행하십시오. `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
+    2. 하위 도메인 및 TLS 인증서가 올바른지 확인하십시오. IBM 제공 Ingress 하위 도메인 및 TLS 인증서를 찾으려면 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`를 실행하십시오.
 
     3.  Ingress의 **path** 섹션에 구성된 동일한 경로에서 앱이 청취하는지 확인하십시오. 루트 경로에서 청취하도록 앱이 설정된 경우에는 `/`를 경로로 사용하십시오. 이 경로에 대한 수신 트래픽을 앱이 청취하는 다른 경로로 라우팅해야 하는 경우에는 [rewrite paths](/docs/containers?topic=containers-ingress_annotation#rewrite-path) 어노테이션을 사용하십시오.
 

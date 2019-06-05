@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -102,7 +102,7 @@ Se tutti i tuoi nodi di lavoro devono essere attivi e in esecuzione, prendi in c
 
 Inoltre, puoi creare una mappa di configurazione Kubernetes che specifichi il numero massimo di nodi di lavoro non disponibili alla volta durante l'aggiornamento. I nodi di lavoro vengono identificati dalle etichette del nodo di lavoro. Puoi utilizzare le etichette fornite da IBM oppure le etichette personalizzate che hai aggiunto al nodo di lavoro.
 
-**Se scelgo di non definire una mappa di configurazione?**</br>
+**Cosa accade se scelgo di non definire una mappa di configurazione?**</br>
 Quando la mappa di configurazione non è definita, viene utilizzato il valore predefinito. Per impostazione predefinita, un massimo del 20% di tutti i nodi di lavoro in ciascun cluster può non essere disponibile durante il processo di aggiornamento.
 
 **Prima di iniziare**:
@@ -142,7 +142,7 @@ Gli aggiornamenti ai nodi di lavoro possono causare tempi di inattività per app
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012
@@ -154,7 +154,7 @@ Gli aggiornamenti ai nodi di lavoro possono causare tempi di inattività per app
    ```
    {: screen}
 
-3. Crea una mappa di configurazione e definisci le regole di non disponibilità per i tuoi nodi di lavoro. Il seguente esempio mostra 4 controlli, `zonecheck.json`, `regioncheck.json`, `defaultcheck.json` e un template di controllo. Puoi utilizzare questi controlli di esempio per definire le regole per i nodi di lavoro in una specifica zona (`zonecheck.json`), regione (`regioncheck.json`) o per tutti i nodi di lavoro che non corrispondono a nessuno dei controlli che hai definito nella mappa di configurazione (`defaultcheck.json`). Usa questo template di controllo per creare il tuo controllo. Per ogni controllo, per identificare un nodo di lavoro, devi scegliere una delle etichette del nodo di lavoro che hai recuperato nel passo precedente.  
+3. Crea una mappa di configurazione e definisci le regole di non disponibilità per i tuoi nodi di lavoro. Il seguente esempio mostra 4 controlli, `zonecheck.json`, `regioncheck.json`, `defaultcheck.json` e un template di controllo. Puoi utilizzare questi controlli di esempio per definire le regole per i nodi di lavoro in una specifica zona (`zonecheck.json`), regione (`regioncheck.json`) o per tutti i nodi di lavoro che non corrispondono a nessuno dei controlli che hai definito nella mappa di configurazione (`defaultcheck.json`). Usa questo template di controllo per creare il tuo controllo. Per ogni controllo, per identificare un nodo di lavoro, devi scegliere una delle etichette del nodo di lavoro che hai richiamato nel passo precedente.  
 
    Per ogni controllo, puoi impostare solo un valore per <code>NodeSelectorKey</code> e <code>NodeSelectorValue</code>. Se vuoi impostare le regole per più di una regione, zona o altre etichette del nodo di lavoro, crea un nuovo controllo. Definisci massimo 10 controlli in una mappa di configurazione. Se aggiungi altri controlli, verranno ignorati.
    {: note}
@@ -294,13 +294,13 @@ Per aggiornare i nodi di lavoro dalla console:
 ## Aggiornamento dei tipi di macchina
 {: #machine_type}
 
-Puoi aggiornare i tipi di macchina dei tuoi nodi di lavoro aggiungendo nuovi nodi di lavoro e rimuovendo quelli vecchi. Ad esempio, se hai nodi di lavoro virtuali su tipi di macchina obsoleti che includono `u1c` o `b1c` nei nomi, crea dei nodi di lavoro che utilizzano i tipi di macchina con `u2c` o `b2c` nei nomi.
+Puoi aggiornare i tipi di macchina dei tuoi nodi di lavoro aggiungendo nuovi nodi di lavoro e rimuovendo quelli vecchi. Ad esempio, se il tuo cluster ha tipi di nodo di lavoro `x1c` o Ubuntu 16 `x2c` precedenti obsoleti, crea nodi di lavoro Ubuntu 18 che utilizzano tipi di macchina con `x3c` nei nomi.
 {: shortdesc}
 
 Prima di iniziare:
 - [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Se archivi i dati nel tuo nodo di lavoro, i dati vengono eliminati se non [archiviati all'esterno del nodo di lavoro](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform). 
+- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform).
 
 Per aggiornare i tipi di macchina:
 
@@ -357,7 +357,7 @@ Per aggiornare i tipi di macchina:
         ```
         {: pre}
 
-     3. Aggiungi la zona al pool di nodi di lavoro che hai recuperato in precedenza. Quando aggiungi una zona, viene eseguito il provisioning dei nodi di lavoro definiti nel tuo pool di nodi di lavoro nella zona e vengono considerati per una pianificazione futura del carico di lavoro. Se vuoi estendere i tuoi nodi di lavoro tra più zone, scegli una [zona che supporta il multizona](/docs/containers?topic=containers-regions-and-zones#zones).
+     3. Aggiungi la zona al pool di nodi di lavoro che hai richiamato in precedenza. Quando aggiungi una zona, viene eseguito il provisioning dei nodi di lavoro definiti nel tuo pool di nodi di lavoro nella zona e vengono considerati per una pianificazione futura del carico di lavoro. Se vuoi estendere i tuoi nodi di lavoro tra più zone, scegli una [zona che supporta il multizona](/docs/containers?topic=containers-regions-and-zones#zones).
         ```
         ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
         ```
@@ -413,7 +413,7 @@ Il tuo cluster {{site.data.keyword.containerlong_notm}} viene fornito con dei co
 
 **Quali componenti aggiuntivi predefiniti posso aggiornare separatamente dal cluster?**</br>
 Puoi disabilitare facoltativamente gli aggiornamenti automatici per i seguenti componenti aggiuntivi:
-* [Fluentd per la registrazione](#logging)
+* [Fluentd per la registrazione](#logging-up)
 * [ALB (application load balancer) Ingress](#alb)
 
 **Ci sono componenti aggiuntivi che non posso aggiornare separatamente dal cluster?**</br>
@@ -440,10 +440,10 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **Posso installare altri componenti aggiuntivi oltre a quelli predefiniti?**</br>
-Sì. {{site.data.keyword.containerlong_notm}} fornisce altri componenti aggiuntivi tra cui puoi scegliere per aggiungere funzionalità al tuo cluster. Ad esempio, potresti voler [utilizzare i grafici Helm](/docs/containers?topic=containers-integrations#helm) per installare il [plugin dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) o [VPN strongSwan](/docs/containers?topic=containers-vpn#vpn-setup). Devi aggiornare separatamente ciascun componente aggiuntivo seguendo le istruzioni per aggiornare i grafici Helm.
+Sì. {{site.data.keyword.containerlong_notm}} fornisce altri componenti aggiuntivi tra cui puoi scegliere per aggiungere funzionalità al tuo cluster. Ad esempio, potresti voler [utilizzare i grafici Helm](/docs/containers?topic=containers-helm#public_helm_install) per installare il [plugin dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) o [VPN strongSwan](/docs/containers?topic=containers-vpn#vpn-setup). Devi aggiornare separatamente ciascun componente aggiuntivo seguendo le istruzioni per aggiornare i grafici Helm.
 
 ### Gestione degli aggiornamenti automatici per il componente aggiuntivo Fluentd per la registrazione
-{: #logging}
+{: #logging-up}
 
 Per apportare modifiche alle configurazioni della registrazione o del filtraggio, la versione del componente aggiuntivo Fluentd deve essere la più recente. Per impostazione predefinita, gli aggiornamenti automatici per il componente aggiuntivo sono abilitati.
 {: shortdesc}
@@ -600,7 +600,7 @@ Per aggiornare i nodi di lavoro autonomi ai pool di nodi di lavoro:
    {: pre}
 
 5. Aggiungi la zona al tuo pool di nodi di lavoro. Quando aggiungi una zona a un pool di nodi di lavoro, viene eseguito il provisioning dei nodi di lavoro definiti nel tuo pool di nodi di lavoro nella zona e vengono considerati per una pianificazione futura del carico di lavoro. {{site.data.keyword.containerlong}} aggiunge automaticamente l'etichetta `failure-domain.beta.kubernetes.io/region` per la regione e l'etichetta `failure-domain.beta.kubernetes.io/zone` per la zona a ciascun nodo di lavoro. Il programma di pianificazione (scheduler) Kubernetes usa queste tabelle per estendere i pod tra le zone all'interno della stessa regione.
-   1. **Per aggiungere una zona ad un pool di nodi di lavoro**: sostituisci `<pool_name>` con il nome del tuo pool di nodi di lavoro e compila l'ID cluster, la zona e le VLAN con le informazioni che hai recuperato in precedenza. Se non hai una VLAN privata e una pubblica in tale zona, non specificare questa opzione. Verranno create automaticamente per te una VLAN privata e una pubblica.
+   1. **Per aggiungere una zona a un unico pool di nodi di lavoro**: sostituisci `<pool_name>` con il nome del tuo pool di nodi di lavoro e compila l'ID cluster, la zona e le VLAN con le informazioni che hai richiamato in precedenza. Se non hai una VLAN privata e una pubblica in tale zona, non specificare questa opzione. Verranno create automaticamente per te una VLAN privata e una pubblica.
 
       Se vuoi utilizzare VLAN diverse per pool di nodi di lavoro differenti, ripeti questo comando per ciascuna VLAN e i suoi pool di nodi di lavoro corrispondenti. I nuovi nodi di lavoro vengono aggiunti alle VLAN che hai specificato, ma le VLAN per i nodi di lavoro esistenti non vengono modificate.
       ```
@@ -608,7 +608,7 @@ Per aggiornare i nodi di lavoro autonomi ai pool di nodi di lavoro:
       ```
       {: pre}
 
-   2. **Per aggiungere la zona a più pool di nodi di lavoro**: aggiungi più pool di nodi di lavoro al comando `ibmcloud ks zone-add`. Per aggiungere più pool di nodi di lavoro a una zona, devi avere una VLAN privata e una pubblica esistenti in tale zona. Se non hai una VLAN privata e una pubblica in tale zona, prendi in considerazione di aggiungere innanzitutto la zona a un pool di nodi di lavoro in modo che la VLAN privata e quella pubblica vengano create per te. Quindi, puoi aggiungere la zona agli altri pool di nodi di lavoro. </br></br>È importante che venga eseguito il provisioning dei nodi di lavoro presenti in tutti i tuoi pool di nodi di lavoro in tutte le zone per assicurarti che il tuo cluster sia bilanciato tra le zone. Se vuoi utilizzare VLAN diverse per pool di nodi di lavoro differenti, ripeti questo comando con la VLAN che vuoi utilizzare per il tuo pool di nodi di lavoro. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+   2. **Per aggiungere la zona a più pool di nodi di lavoro**: aggiungi più pool di nodi di lavoro al comando `ibmcloud ks zone-add`. Per aggiungere più pool di nodi di lavoro a una zona, devi avere una VLAN privata e una pubblica esistenti in tale zona. Se non hai una VLAN privata e una pubblica in tale zona, prendi in considerazione di aggiungere innanzitutto la zona a un pool di nodi di lavoro in modo che la VLAN privata e quella pubblica vengano create per te. Quindi, puoi aggiungere la zona agli altri pool di nodi di lavoro. </br></br>È importante che venga eseguito il provisioning dei nodi di lavoro presenti in tutti i tuoi pool di nodi di lavoro in tutte le zone per assicurarti che il tuo cluster sia bilanciato tra le zone. Se vuoi utilizzare VLAN diverse per pool di nodi di lavoro differenti, ripeti questo comando con la VLAN che vuoi utilizzare per il tuo pool di nodi di lavoro. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
@@ -624,7 +624,7 @@ Per aggiornare i nodi di lavoro autonomi ai pool di nodi di lavoro:
    Quando lo stato del nodo di lavoro diventa **Normal**, la distribuzione è terminata.
 
 7. Rimuovi i tuoi nodi di lavoro autonomi. Se hai più nodi di lavoro autonomi, rimuovine uno alla volta.
-   1. Elenca i nodi di lavoro nel tuo cluster e confronta l'indirizzo IP privato proveniente da questo comando con l'indirizzo IP privato che hai recuperato all'inizio per trovare i tuoi nodi di lavoro autonomi.
+   1. Elenca i nodi di lavoro nel tuo cluster e confronta l'indirizzo IP privato proveniente da questo comando con l'indirizzo IP privato che hai richiamato all'inizio per trovare i tuoi nodi di lavoro autonomi.
       ```
       kubectl get nodes
       ```
@@ -647,7 +647,7 @@ Per aggiornare i nodi di lavoro autonomi ai pool di nodi di lavoro:
       {: pre}
       Questo processo può richiedere qualche minuto.
 
-   5. Rimuovi il tuo nodo di lavoro autonomo. Usa l'ID del nodo di lavoro che hai recuperato con il comando `ibmcloud ks workers <cluster_name_or_ID>`.
+   5. Rimuovi il tuo nodo di lavoro autonomo. Usa l'ID del nodo di lavoro che hai richiamato con il comando `ibmcloud ks workers <cluster_name_or_ID>`.
       ```
       ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_ID>
       ```

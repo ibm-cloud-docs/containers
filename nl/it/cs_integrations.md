@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, helm
 
@@ -117,7 +117,7 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus è uno strumento di avviso, registrazione e monitoraggio open source che è stato specificatamente progettato per Kubernetes. Prometheus recupera informazioni dettagliate sul cluster, sui nodi di lavoro e sull'integrità della distribuzione in base alle informazioni di registrazione di Kubernetes. La CPU, la memoria, I/O e l'attività di rete vengono raccolti per ogni contenitore in esecuzione in un cluster. Puoi utilizzare i dati raccolti in query o avvisi personalizzati per monitorare le prestazioni e i carichi di lavoro nel tuo cluster.
+<td>Prometheus è uno strumento di avviso, registrazione e monitoraggio open source che è stato specificatamente progettato per Kubernetes. Prometheus richiama informazioni dettagliate sul cluster, sui nodi di lavoro e sull'integrità della distribuzione in base alle informazioni di registrazione di Kubernetes. La CPU, la memoria, I/O e l'attività di rete vengono raccolti per ogni contenitore in esecuzione in un cluster. Puoi utilizzare i dati raccolti in query o avvisi personalizzati per monitorare le prestazioni e i carichi di lavoro nel tuo cluster.
 
 <p>Per utilizzare Prometheus, segui le <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">istruzioni CoreOS <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</p>
 </td>
@@ -169,7 +169,7 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td>Puoi utilizzare <a href="/docs/services/certificate-manager?topic=certificate-manager-gettingstarted" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per archiviare e gestire i certificati SSL per le tue applicazioni. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+<td>Puoi utilizzare <a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per archiviare e gestire i certificati SSL per le tue applicazioni. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (Beta)</td>
@@ -177,7 +177,7 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>Imposta il tuo repository delle immagini Docker protetto in cui puoi memorizzare e condividere in modo sicuro le immagini tra gli utenti cluster. Per ulteriori informazioni, vedi la <a href="/docs/services/Registry?topic=registry-index" target="_blank">{{site.data.keyword.registrylong}} documentazione <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+  <td>Imposta il tuo repository delle immagini Docker protetto in cui puoi memorizzare e condividere in modo sicuro le immagini tra gli utenti cluster. Per ulteriori informazioni, vedi la <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} documentazione <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -215,7 +215,7 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
 </tr>
 <tr>
   <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#GettingStarted) è un'archiviazione iSCSI persistente e ad alte prestazioni che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Utilizza l'archiviazione blocchi per distribuire applicazioni con stato in una singola zona o come archiviazione ad alte prestazioni per i singoli pod. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione blocchi nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) è un'archiviazione iSCSI persistente e ad alte prestazioni che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Utilizza l'archiviazione blocchi per distribuire applicazioni con stato in una singola zona o come archiviazione ad alte prestazioni per i singoli pod. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione blocchi nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -223,7 +223,7 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-gettingstarted#gettingstarted) è un'archiviazione file basata su NFS persistente, rapida, collegata alla rete e flessibile che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Puoi scegliere tra i livelli di archiviazione predefiniti con dimensioni in GB e IOPS che soddisfano i requisiti dei tuoi carichi di lavoro. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione file nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) è un'archiviazione file basata su NFS persistente, rapida, collegata alla rete e flessibile che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Puoi scegliere tra i livelli di archiviazione predefiniti con dimensioni in GB e IOPS che soddisfano i requisiti dei tuoi carichi di lavoro. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione file nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -714,7 +714,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 4.  Verifica che l'installazione sia riuscita correttamente.
     1.  Verifica che l'account di servizio Tiller sia stato creato.
         ```
-        kubectl get serviceaccount -n kube-system | grep tiller
+        kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
 
@@ -771,7 +771,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 8. Identifica il grafico Helm che vuoi installare e segui le istruzioni nel file `README` del grafico Helm per installarlo nel tuo cluster.
 
 
-### Cluster privati: invio dell'immagine Tiller al tuo registro privato in {{site.data.keyword.registryshort_notm}}
+### Cluster privati: esecuzione del push dell'immagine Tiller per il tuo registro privato in {{site.data.keyword.registryshort_notm}}
 {: #private_local_tiller}
 
 Puoi estrarre l'immagine Tiller nella tua macchina locale, inviarla al tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}} e lasciare che Helm installi Tiller utilizzando l'immagine in {{site.data.keyword.registryshort_notm}}.
@@ -955,7 +955,7 @@ I passi in questo esempio mostrano come installare i grafici Helm dai repository
 {: #helm_links}
 
 * Per utilizzare il grafico Helm strongSwan, vedi [Configurazione della connettività VPN con il grafico Helm del servizio VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup).
-* Visualizza i grafici Helm disponibili che puoi utilizzare con {{site.data.keyword.Bluemix_notm}} nel [Catalogo dei grafici Helm ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts) della console.
+* Visualizza i grafici Helm disponibili che puoi utilizzare con {{site.data.keyword.Bluemix_notm}} nel [Catalogo dei grafici Helm ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) della console.
 * Ulteriori informazioni sui comandi Helm utilizzati per configurare e gestire i grafici Helm sono disponibili nella <a href="https://docs.helm.sh/helm/" target="_blank">documentazione Helm <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.
 * Ulteriori informazioni su come puoi [aumentare la velocità di distribuzione con i grafici Helm Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 
@@ -969,8 +969,7 @@ Prima di iniziare:
 
 -   Ricorda di non esporre le informazioni del tuo cluster pubblicamente su Internet. Completa questa procedura per distribuire in sicurezza Weave Scope e accedervi da un browser web
 localmente.
--   Se non ne hai già uno, [crea un
-cluster standard](/docs/containers?topic=containers-clusters#clusters_ui). Weave Scope può essere intensivo per la CPU, specialmente l'applicazione. Esegui Weave Scope con grandi cluster a pagamento, non con cluster gratuito.
+-   Se non ne hai già uno, [crea un cluster standard](/docs/containers?topic=containers-clusters#clusters_ui). Weave Scope può essere intensivo per la CPU, specialmente l'applicazione. Esegui Weave Scope con grandi cluster a pagamento, non con cluster gratuito.
 -  Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Gestore**](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi.
 -   [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 

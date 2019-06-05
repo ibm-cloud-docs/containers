@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -41,7 +41,7 @@ Portworx fournit également d'autres fonctions que vous pouvez utiliser pour vos
 {{site.data.keyword.containerlong_notm}} fournit des versions de noeud worker bare metal optimisées en vue d'une [utilisation avec SDS (Software-Defined Storage)](/docs/containers?topic=containers-plan_clusters#sds) et qui sont accompagnées d'un ou plusieurs disques locaux de type RAW, non formatés et non montés que vous pouvez utiliser pour votre couche de stockage Portworx. Portworx offre des performances optimales avec des machines de noeud worker SDS d'un débit réseau de 10 Gbit/s.
 
 **Et si j'envisage d'exécuter Portworx sur des noeuds worker non SDS ?** </br>
-Vous pouvez installer Portworx sur des versions non SDS de noeud worker, mais vous risquez de ne pas obtenir les performances requises par votre application. Les noeuds worker non SDS peuvent être de type virtuel ou bare metal. Si vous voulez utiliser des machines virtuelles, utilisez un modèle de noeud worker `b2c.16x64` ou supérieur. Les machines virtuelles de modèle `b2c.4x16` ou `u2c.2x4` n'offrent pas les ressources nécessaires au bon fonctionnement de Portworx. N'oubliez pas que les machines virtuelles offrent un débit de 1000 Mbit/s, ce qui n'est pas suffisant pour obtenir les performances idéales de Portworx. Les machines bare metal sont fournies avec suffisamment de ressources de calcul et de vitesse réseau pour Portworx, mais vous devez [ajouter du stockage par blocs brut, non formaté et non monté](#create_block_storage) avant d'utiliser ces machines.
+Vous pouvez installer Portworx sur des versions non SDS de noeud worker, mais vous risquez de ne pas obtenir les performances requises par votre application. Les noeuds worker non SDS peuvent être de type virtuel ou bare metal. Si vous voulez utiliser des machines virtuelles, utilisez un modèle de noeud worker `b2c.16x64` ou supérieur. Les machines virtuelles de modèle `b3c.4x16` ou `u3c.2x4` n'offrent pas les ressources nécessaires au bon fonctionnement de Portworx. N'oubliez pas que les machines virtuelles offrent un débit de 1000 Mbit/s, ce qui n'est pas suffisant pour obtenir les performances idéales de Portworx. Les machines bare metal sont fournies avec suffisamment de ressources de calcul et de vitesse réseau pour Portworx, mais vous devez [ajouter du stockage par blocs brut, non formaté et non monté](#create_block_storage) avant d'utiliser ces machines.
 
 **Comment puis-je m'assurer que le mode de stockage de mes données est à haute disponibilité ?** </br>
 Vous devez disposer d'au moins 3 noeuds worker dans votre cluster Portworx pour que Portworx puisse répliquer vos données sur plusieurs noeuds. En répliquant vos données sur plusieurs noeuds worker, Portworx peut garantir que votre application avec état peut être replanifiée sur un autre noeud worker en cas de défaillance sans perte de données. Pour une disponibilité accrue, utilisez un [cluster à zones multiples](/docs/containers?topic=containers-plan_clusters#multizone) et répliquez vos volumes sur des noeuds worker SDS dans au moins 3 zones.
@@ -226,12 +226,12 @@ Avant de commencer :
 
 Pour installer Portworx :
 
-1.  [Suivez les instructions](/docs/containers?topic=containers-integrations#helm) d'installation du client Helm sur votre machine locale, et installez le serveur Helm (Tiller) avec un compte de service dans votre cluster.
+1.  [Suivez les instructions](/docs/containers?topic=containers-helm#public_helm_install) d'installation du client Helm sur votre machine locale, et installez le serveur Helm (Tiller) avec un compte de service dans votre cluster.
 
 2.  Vérifiez que Tiller est installé avec un compte de service.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -258,13 +258,13 @@ Pour installer Portworx :
    {: pre}
 
 6. Mettez à jour les valeurs suivantes et sauvegardez vos modifications.
-   - **`etcdEndPoint`** : ajoutez le noeud final de votre instance de service {{site.data.keyword.composeForEtcd}} que vous avez récupéré précédemment au format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. Si vous avez plusieurs noeuds finaux, incluez-les tous en les séparant par un point-virgule (`;`).
+   - **`etcdEndPoint`** : ajoutez le noeud final à votre instance de service {{site.data.keyword.composeForEtcd}} que vous avez récupérée précédemment au format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. Si vous avez plusieurs noeuds finaux, incluez-les tous en les séparant par un point-virgule (`;`).
     - **`imageVersion`** : entrez la version la plus récente de la charte Helm Portworx. Pour l'obtenir, reportez-vous aux [notes sur l'édition ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.portworx.com/reference/release-notes/) de Portworx.
    - **`clusterName`** : entrez le nom du cluster dans lequel vous voulez installer Portworx.
    - **`usedrivesAndPartitions`** : entrez `true` pour laisser Portworx trouver les disques durs non montés et les partitions.
    - **`usefileSystemDrive`** : entrez `true` pour laisser Portworx trouver les disques durs non montés, même s'ils sont formatés.
    - **`drives`** : entrez `none` pour laisser Portworx trouver les disques durs non montés et non formatés.
-   - **`etcd.credentials`** : entrez le nom d'utilisateur et le mot de passe de votre instance de service {{site.data.keyword.composeForEtcd}} que vous avez récupérés précédemment, au format `<user_name>:<password>`.
+   - **`etcd.credentials`** : entrez le nom d'utilisateur et le mot de passe de votre instance de service {{site.data.keyword.composeForEtcd}} que vous avez récupérés précédemment au format `<user_name>:<password>`.
    - **`etcd.certPath`** : entrez le chemin où est stocké le certificat de votre instance de service de base de données. Si vous avez configuré une instance de service Databases for etcd, entrez `/etc/pwx/etcdcerts`. Pour {{site.data.keyword.composeForEtcd}}, entrez `none`.
    - **`etcd.ca`** : entrez le chemin d'accès au fichier de l'autorité de certification (CA). Si vous avez configuré une instance de service Databases for etcd, entrez `/etc/pwx/etcdcerts/ca.pem`. Pour {{site.data.keyword.composeForEtcd}}, entrez `none`.
 
@@ -385,7 +385,7 @@ Pour installer Portworx :
    stork            3        3        3           0          1s
    stork-scheduler  3        3        3           0          1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                    PROVISIONER                    AGE
    px-sc-repl3-iodb-512blk-snap60-15snaps  kubernetes.io/portworx-volume  1s
    px-sc-repl3-iodb-snap60-15snaps         kubernetes.io/portworx-volume  1s
@@ -568,12 +568,12 @@ Pour protéger vos données dans un volume Portworx, vous pouvez choisir de prot
 {{site.data.keyword.keymanagementservicelong_notm}} vous aide à mettre à disposition des clés chiffrées qui sont sécurisées par des modules HSM (Hardware Security Modules) certifiés FIPS 140-2 de niveau 2 et basés sur le cloud. Vous pouvez utiliser ces clés pour protéger vos données de manière sécurisée de sorte à empêcher leur accès à des utilisateurs non autorisés. Vous pouvez choisir entre l'utilisation d'une clé de chiffrement pour chiffrer tous vos volumes dans un cluster ou l'utilisation d'une clé de chiffrement pour chaque volume. Portworx utilise cette clé pour chiffrer les données au repos ou en transit lorsque les données sont envoyées à un autre noeud worker. Pour plus d'informations, voir [Volume encryption ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption). Pour renforcer la sécurité, configurez un chiffrement par volume.
 
 Examinez les informations suivantes :
-- Présentation du [flux de travail de chiffrement de volume Portworx](#encryption) avec {{site.data.keyword.keymanagementservicelong_notm}} pour le chiffrement par volume
+- Présentation du [flux de travail de chiffrement de volume Portworx](#px_encryption) avec {{site.data.keyword.keymanagementservicelong_notm}} pour le chiffrement par volume
 - Présentation du [flux de travail de déchiffrement de volume Portworx](#decryption) avec {{site.data.keyword.keymanagementservicelong_notm}} pour le chiffrement par volume
 - [Configuration du chiffrement par volume](#setup_encryption) pour vos volumes Portworx.
 
 ### Flux de travail du chiffrement par volume Portworx
-{: #encryption}
+{: #px_encryption}
 
 L'image suivante illustre le flux de travail de chiffrement dans Portworx avec {{site.data.keyword.keymanagementservicelong_notm}} lorsque vous avez configuré un chiffrement par volume.
 {: shortdesc}
@@ -590,7 +590,6 @@ L'image suivante illustre le flux de travail de chiffrement dans Portworx avec {
 {: #decryption}
 
 L'image suivante illustre le flux de travail de déchiffrement dans Portworx avec {{site.data.keyword.keymanagementservicelong_notm}} lorsque vous avez configuré un chiffrement par volume.
-
 
 <img src="images/cs_portworx_volume_decryption.png" alt="Déchiffrement de volumes Portworx en utilisant {{site.data.keyword.keymanagementservicelong_notm}}" width="600" style="width: 600px; border-style: none"/>
 
@@ -861,7 +860,7 @@ Pour solliciter du stockage de votre cluster Portworx et l'utiliser dans votre a
    ```
    {: pre}
 
-   Pour afficher les détails d'une classe de stockage, exécutez la commande `kubectl describe storageclass <storageclass_name>`.
+   Pour afficher les détails d'une classe de stockage, exécutez la commande `kubectl describe storageclass<storageclass_name>`.
    {: tip}
 
 2. Si vous n'envisagez pas d'utiliser une classe de stockage existante, créez un fichier de configuration pour votre nouvelle classe de stockage.
@@ -870,7 +869,7 @@ Pour solliciter du stockage de votre cluster Portworx et l'utiliser dans votre a
 
    ```
    kind: StorageClass
-   apiVersion: storage.k8s.io/v1beta1
+   apiVersion: storage.k8s.io/v1
    metadata:
        name: <storageclass_name>
    provisioner: kubernetes.io/portworx-volume
@@ -902,7 +901,7 @@ Pour solliciter du stockage de votre cluster Portworx et l'utiliser dans votre a
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>Entrez la priorité d'E-S de Portworx que vous souhaitez solliciter pour vos données. Les options disponibles sont `high`, `medium` et `low`. Lors de la configuration de votre cluster Portworx, tous les disques sont inspectés afin de déterminer leur profil de performance. La classification du profil dépend de la bande passante du réseau de votre noeud worker et du type d'unité de stockage dont vous disposez. Les disques des noeuds worker SDS sont classifiés avec `high`. Si vous connectez manuellement des disques sur un noeud worker virtuel, ces disques sont classifiés avec `low` car les noeuds worker virtuels ont une vitesse réseau plus lente.</br><br> Lorsque vous créez une PVC avec une classe de stockage, le nombre de répliques que vous spécifiez dans <code>parameters/repl</code> est prioritaire sur la priorité d'E-S. Par exemple, lorsque vous spécifiez 3 répliques que vous voulez stocker sur des disques à grande vitesse, mais que vous ne disposez que d'un seul noeud worker avec un disque à grande vitesse dans votre cluster, la création de votre PVC aboutira quand même. Vos données sont répliquées sur le disque à grande vitesse et sur le disque lent. </td>
+   <td>Entrez la priorité d'E-S de Portworx que vous souhaitez solliciter pour vos données. Les options disponibles sont `high`, `medium` et `low`. Lors de la configuration de votre cluster Portworx, tous les disques sont inspectés afin de déterminer leur profil de performance. La classification du profil dépend de la bande passante du réseau de votre noeud worker et du type d'unité de stockage dont vous disposez. Les disques de noeuds worker SDS sont classifiés avec `high`. Si vous connectez manuellement des disques sur un noeud worker virtuel, ces disques sont classifiés avec `low` car les noeuds worker virtuels ont une vitesse réseau plus lente. </br><br> Lorsque vous créez une PVC avec une classe de stockage, le nombre de répliques que vous spécifiez dans <code>parameters/repl</code> est prioritaire sur la priorité d'E-S. Par exemple, lorsque vous spécifiez 3 répliques que vous voulez stocker sur des disques à grande vitesse, mais que vous ne disposez que d'un seul noeud worker avec un disque à grande vitesse dans votre cluster, la création de votre PVC aboutira quand même. Vos données sont répliquées sur le disque à grande vitesse et sur le disque lent. </td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>

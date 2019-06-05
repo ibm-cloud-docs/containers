@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -49,7 +49,7 @@ lastupdated: "2019-03-21"
 {{site.data.keyword.containerlong_notm}}는 VLAN, 서브넷 및 IP 주소를 사용하여 클러스터 컴포넌트 네트워크 연결을 제공합니다.
 {: shortdesc}
 
-**VLAN은 무엇입니까? {{site.data.keyword.containerlong_notm}}에서 제공**하는 VLAN 유형은 무엇입니까?</br>
+**VLAN은 무엇입니까? {{site.data.keyword.containerlong_notm}}에서 제공**</br>하는 VLAN 유형은 무엇입니까?
 
 클러스터를 작성하면 클러스터의 작업자 노드가 VLAN에 자동으로 연결됩니다. VLAN은 동일한 실제 회선에 연결된 것처럼 작업자 노드 및 팟(Pod)의 그룹을 구성하며, 작업자 및 팟(Pod) 간의 연결을 위한 채널을 제공합니다.
 {: shortdesc}
@@ -81,13 +81,13 @@ VLAN 연결을 선택하면 앱에 대한 네트워크 연결도 판별됩니다
 
 **공용 VLAN 서브넷**
 * 기본 공용 서브넷은 클러스터 작성 중에 작업자 노드에 지정된 공인 IP 주소를 판별합니다. 동일한 VLAN의 다중 클러스터는 하나의 기본 공용 서브넷을 공유할 수 있습니다.
-* 포터블 공용 서브넷은 하나의 클러스터에만 바인드되어 있으며 8개의 공인 IP 주소를 클러스터에 제공합니다. 3개의 IP 주소는 IBM Cloud 인프라(SoftLayer) 기능을 위해 예약됩니다. 1개의 IP는 기본 공용 Ingress ALB에 의해 사용되며, 4개의 IP는 공용 로드 밸런서 네트워킹 서비스 작성에 사용될 수 있습니다. 포터블 공인 IP는 인터넷을 통해 로드 밸런서 서비스에 액세스하기 위해 사용될 수 있는 영구적인 고정 IP 주소입니다. 공용 로드 밸런서에 대해 5개 이상의 IP가 필요하면 [포터블 IP 주소 추가](/docs/containers?topic=containers-subnets#adding_ips)를 참조하십시오.
+* 포터블 공용 서브넷은 하나의 클러스터에만 바인드되어 있으며 8개의 공인 IP 주소를 클러스터에 제공합니다. 3개의 IP 주소는 IBM Cloud 인프라(SoftLayer) 기능을 위해 예약됩니다. 1개의 IP는 기본 공용 Ingress ALB에 의해 사용되며, 4개의 IP는 공용 네트워크 로드 밸런서(NLB) 서비스 작성에 사용될 수 있습니다. 포터블 공인 IP는 인터넷을 통해 NLB에 액세스하기 위해 사용될 수 있는 영구적인 고정 IP 주소입니다. NLB에 대해 5개 이상의 IP가 필요하면 [포터블 IP 주소 추가](/docs/containers?topic=containers-subnets#adding_ips)를 참조하십시오.
 
 **사설 VLAN 서브넷**
 * 기본 사설 서브넷은 클러스터 작성 중에 작업자 노드에 지정된 사설 IP 주소를 판별합니다. 동일한 VLAN의 다중 클러스터는 하나의 기본 사설 서브넷을 공유할 수 있습니다.
-* 포터블 사설 서브넷은 하나의 클러스터에만 바인드되어 있으며 8개의 사설 IP 주소를 클러스터에 제공합니다. 3개의 IP 주소는 IBM Cloud 인프라(SoftLayer) 기능을 위해 예약됩니다. 1개의 IP는 기본 사설 Ingress ALB에 의해 사용되며, 4개의 IP는 사설 로드 밸런서 네트워킹 서비스 작성에 사용될 수 있습니다. 포터블 사설 IP는 인터넷을 통해 로드 밸런서 서비스에 액세스하기 위해 사용될 수 있는 영구적인 고정 IP 주소입니다. 사설 로드 밸런서에 대해 5개 이상의 IP가 필요하면 [포터블 IP 주소 추가](/docs/containers?topic=containers-subnets#adding_ips)를 참조하십시오.
+* 포터블 사설 서브넷은 하나의 클러스터에만 바인드되어 있으며 8개의 사설 IP 주소를 클러스터에 제공합니다. 3개의 IP 주소는 IBM Cloud 인프라(SoftLayer) 기능을 위해 예약됩니다. 1개의 IP는 기본 사설 Ingress ALB에 의해 사용되며, 4개의 IP는 사설 네트워크 로드 밸런서(NLB) 서비스 작성에 사용될 수 있습니다. 포터블 사설 IP는 사설 네트워크를 통해 NLB에 액세스하기 위해 사용될 수 있는 영구적인 고정 IP 주소입니다. 사설 NLB에 대해 5개 이상의 IP가 필요하면 [포터블 IP 주소 추가](/docs/containers?topic=containers-subnets#adding_ips)를 참조하십시오.
 
-계정에서 프로비저닝된 서브넷을 모두 보려면 `ibmcloud ks subnets`를 실행하십시오. 하나의 클러스터에 바인딩된 포터블 공인 및 포터블 사설 서브넷을 보려면 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources`을 실행하고 **Subnet VLANs** 섹션을 찾을 수 있습니다.
+계정에서 프로비저닝된 서브넷을 모두 보려면 `ibmcloud ks subnets`를 실행하십시오. 하나의 클러스터에 바인드된 포터블 공인 및 포터블 사설 서브넷을 보려면 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources`를 실행하고 **Subnet VLANs** 섹션을 찾으십시오.
 
 {{site.data.keyword.containerlong_notm}}에서 VLAN에는 서브넷이 40개로 제한되어 있습니다. 이 한계에 도달하면 우선 [VLAN의 서브넷을 재사용하여 새 클러스터를 작성](/docs/containers?topic=containers-subnets#subnets_custom)할 수 있는지 여부를 확인하십시오. 새 VLAN이 필요하면 [{{site.data.keyword.Bluemix_notm}} 지원 팀에 문의](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)하여 VLAN을 주문하십시오. 그런 다음, 이 새 VLAN을 사용하는 [클러스터를 작성](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)하십시오.
 {: note}
@@ -103,7 +103,7 @@ VLAN 연결을 선택하면 앱에 대한 네트워크 연결도 판별됩니다
 **VRF(Virtual Router Functions)와 VLAN Spanning은 무엇입니까?**</br>
 
 <dl>
-<dt>[VRF(Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)</dt>
+<dt>[VRF(Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
 <dd>VRF를 사용하면 인프라 계정의 모든 VLAN과 서브넷이 서로 통신할 수 있습니다. 또한 작업자와 마스터가 개인 서비스 엔드포인트를 통해 통신할 수 있도록 하려면 VRF가 필요합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF는 트래픽을 관리하도록 게이트웨이 어플라이언스를 구성하지 않는 한 모든 VLAN이 통신할 수 있으므로 계정에 대한 VLAN Spanning 옵션을 제거합니다.</dd>
 <dt>[VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>VRF를 사용할 수 없거나 사용하지 않으려면 VLAN Spanning을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오. VRF 대신 VLAN Spanning을 사용하도록 선택한 경우에는 개인 서비스 엔드포인트를 사용할 수 없습니다.</dd>
@@ -165,11 +165,13 @@ VRF 또는 VLAN Spanning이 사용으로 설정되면 동일한 {{site.data.keyw
 [공용 및 사설 VLAN으로 클러스터 네트워킹 설정](/docs/containers?topic=containers-cs_network_cluster#both_vlans) 또는 [사설 VLAN 전용으로 클러스터 네트워킹 설정](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan)에 있는 단계를 수행하십시오.
 {: shortdesc}
 
-### VLAN 결정사항을 나중에 변경할 수 있습니까?
+### VLAN 결정사항을 나중에 변경할 수 있습니까? 내 작업자 노드 IP 주소를 변경합니까?
 {: #cs_network_ov_worker_change}
 
 클러스터에서 작업자 풀을 수정하여 VLAN 설정을 변경할 수 있습니다. 자세한 정보는 [작업자 노드 VLAN 연결 변경](/docs/containers?topic=containers-cs_network_cluster#change-vlans)을 참조하십시오.
 {: shortdesc}
+
+작업자 노드에는 클러스터가 사용하는 공용 또는 사설 VLAN의 IP 주소가 지정됩니다. 작업자 노드가 프로비저닝된 후에는 IP 주소가 변경되지 않습니다. 예를 들어, 작업자 노드 IP 주소가 `reload`, `reboot` 및 `update` 오퍼레이션에서 지속됩니다. 또한 작업자 노드의 사설 IP 주소가 대부분 `kubectl` 명령의 작업자 노드 ID에 사용됩니다. 작업자 풀이 사용하는 VLAN을 변경하는 경우 해당 풀에서 프로비저닝되는 새 작업자 노드가 IP 주소에 대해 새 VLAN을 사용합니다. 기존 작업자 노드 IP 주소가 변경되지 않지만 이전 VLAN을 사용하는 작업자 노드를 제거하도록 선택할 수 있습니다. 
 
 <br />
 
@@ -245,8 +247,8 @@ Kubernetes 마스터가 작업자 노드를 관리할 수 있도록 통신 채�
 클러스터 사용자가 마스터를 공용 또는 개인용으로 액세스할 수 있게 하려면 Kubernetes 버전 1.11 이상을 실행하는 클러스터에서 공용 및 개인 서비스 엔드포인트를 사용으로 설정할 수 있습니다. {{site.data.keyword.Bluemix_notm}} 계정에는 VRF가 필요합니다.
 {: shortdesc}
 
-**작업자 노드와 마스터 간 통신**</br>
-통신은 개인 서비스 엔드포인트를 통해 사설 네트워크를 거쳐 설정됩니다. 클러스터에 대해 공용 서비스 엔드포인트를 사용으로 설정한 경우에도 Kubernetes 마스터와 작업자 노드 간 통신은 사설 네트워크에 유지됩니다.
+**작업자 노드와 마스터 간의 통신**</br>
+통신은 사설 서비스 엔드포인트를 통한 사설 네트워크와 공용 서비스 엔드포인트를 통한 공용 네트워크 모두를 통해 설정됩니다. 공용 엔드포인트를 통한 작업자와 마스터 간의 트래픽 절반과 개인 엔드포인트를 통핸 절반을 라우팅하여 마스터와 작업자 간의 통신은 공용 또는 사설 네트워크의 잠재적인 가동 중단으로부터 보호됩니다. 
 
 **마스터에 액세스**</br>
 마스터는 권한이 있는 클러스터 사용자가 {{site.data.keyword.Bluemix_notm}} 사설 네트워크를 사용하거나 VPN 연결을 통해 사설 네트워크에 연결되어 있는 경우 개인 서비스 엔드포인트를 통해 개인용으로 액세스할 수 있습니다. 그 외의 경우, 마스터는 권한이 부여된 클러스터 사용자가 공용 서비스 엔드포인트를 통해 공용으로 액세스할 수 있습니다.
@@ -285,7 +287,7 @@ Kubernetes 마스터가 작업자 노드를 관리할 수 있도록 통신 채�
 ### 사설 VLAN 전용 설정을 위한 VPN 연결 설정
 {: #cs_network_ov_vpn_private}
 
-클러스터가 사설 VLAN에만 연결된 경우에는 VRA 또는 FSA 게이트웨이 디바이스에서 IPSec VPN 엔드포인트를 설정해야 합니다. 그러면 클러스터에서 [strongSwan IPSec VPN 서비스](/docs/containers?topic=containers-vpn#vpn-setup)를 구성하여 게이트웨이에서 VPN 엔드포인트를 배치할 수 있습니다. strongSwan을 사용하지 않으려면 [VPN 연결을 VRA와 직접 설정](/docs/containers?topic=containers-vpn#vyatta)할 수 있습니다.
+클러스터가 사설 VLAN에만 연결된 경우에는 VRA(Vyatta) 또는 FSA 게이트웨이 디바이스에서 IPSec VPN 엔드포인트를 설정해야 합니다. 그러면 클러스터에서 [strongSwan IPSec VPN 서비스](/docs/containers?topic=containers-vpn#vpn-setup)를 구성하여 게이트웨이에서 VPN 엔드포인트를 배치할 수 있습니다. strongSwan을 사용하지 않으려면 [VPN 연결을 VRA와 직접 설정](/docs/containers?topic=containers-vpn#vyatta)할 수 있습니다.
 {: shortdesc}
 
 <p>

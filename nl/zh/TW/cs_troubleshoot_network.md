@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -39,23 +39,23 @@ subcollection: containers
 疑難排解時，您可以使用 [{{site.data.keyword.containerlong_notm}}Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) 來執行測試，並從叢集中收集相關的網路、Ingress 及 strongSwan 資訊。
 {: tip}
 
-## 無法透過負載平衡器服務連接至應用程式
+## 無法透過網路負載平衡器 (NLB) 服務連接至應用程式
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-您已透過在叢集裡建立負載平衡器服務，來公開應用程式。當您嘗試使用負載平衡器的公用 IP 位址連接至應用程式時，連線失敗或逾時。
+您已透過在叢集中建立 NLB 服務，公然地公開應用程式。當您嘗試使用 NLB 的公用 IP 位址連接至應用程式時，連線失敗或逾時。
 
 {: tsCauses}
-負載平衡器服務可能因下列其中一個原因而未正常運作：
+NLB 服務可能因下列其中一個原因而未正常運作：
 
 -   叢集是免費叢集或只有一個工作者節點的標準叢集。
 -   尚未完整部署叢集。
--   負載平衡器服務的配置 Script 包含錯誤。
+-   NLB 服務的配置 Script 包含錯誤。
 
 {: tsResolve}
-若要對負載平衡器服務進行疑難排解，請執行下列動作：
+若要對 NLB 服務進行疑難排解，請執行下列動作：
 
-1.  確認您所設定的標準叢集已完整部署並且至少有兩個工作者節點，以確保負載平衡器服務的高可用性。
+1.  確認您所設定的標準叢集已完整部署並且至少有兩個工作者節點，以確保 NLB 服務的高可用性。
 
   ```
         ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -64,10 +64,10 @@ subcollection: containers
 
     在 CLI 輸出中，確定工作者節點的 **Status** 顯示 **Ready**，而且 **Machine Type** 顯示 **free** 以外的機型。
 
-2. 若為 2.0 版負載平衡器：請確定您已完成[負載平衡器 2.0 必要條件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)。
+2. 若為 2.0 版 NLB：請確定您已完成 [NLB 2.0 必要條件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)。
 
-3. 檢查負載平衡器服務配置檔的正確性。
-    * 2.0 版負載平衡器：
+3. 檢查 NLB 服務配置檔的正確性。
+    * 2.0 版 NLB：
         ```
         apiVersion: v1
         kind: Service
@@ -92,7 +92,7 @@ subcollection: containers
         4. 確認您已使用應用程式所接聽的**埠**。
         5. 確認您已將 `externalTrafficPolicy` 設為 `Local`。
 
-    * 1.0 版負載平衡器：
+    * 1.0 版 NLB：
         ```
         apiVersion: v1
     kind: Service
@@ -112,7 +112,7 @@ subcollection: containers
         2. 在 LoadBalancer 服務的 `spec.selector` 區段中，確定 `<selector_key>` 及 `<selector_value>` 與您在部署 YAML 的 `spec.template.metadata.labels` 區段中所使用的鍵值組相同。如果標籤不符，則 LoadBalancer 服務中的 **Endpoints** 區段會顯示 **<none>**，且無法從網際網路存取您的應用程式。
         3. 確認您已使用應用程式所接聽的**埠**。
 
-3.  檢查負載平衡器服務，並檢閱 **Events** 區段來尋找可能的錯誤。
+3.  檢查 NLB 服務，並檢閱 **Events** 區段來尋找可能的錯誤。
 
     ```
     kubectl describe service <myservice>
@@ -121,24 +121,23 @@ subcollection: containers
 
     尋找下列錯誤訊息：
 
-    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>若要使用負載平衡器服務，您必須有至少包含兩個工作者節點的標準叢集。</li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>此錯誤訊息指出未將可攜式公用 IP 位址配置給負載平衡器服務。請參閱<a href="/docs/containers?topic=containers-subnets#subnets">將子網路新增至叢集</a>，以尋找如何要求叢集之可攜式公用 IP 位址的相關資訊。叢集可以使用可攜式公用 IP 位址之後，會自動建立負載平衡器服務。
-    </li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>您已使用 **`loadBalancerIP`** 區段定義負載平衡器服務的可攜式公用 IP 位址，但在可攜式公用子網路中無法使用此可攜式公用 IP 位址。在配置 Script 的 **`loadBalancerIP`** 區段中，移除現有 IP 位址，並新增其中一個可用的可攜式公用 IP 位址。您也可以移除 Script 中的 **`loadBalancerIP`** 區段，以自動配置可用的可攜式公用 IP 位址。</li>
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>您沒有足夠的工作者節點可部署負載平衡器服務。其中一個原因可能是您所部署的標準叢集有多個工作者節點，但佈建工作者節點失敗。
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>若要使用 NLB 服務，您必須有至少包含兩個工作者節點的標準叢集。</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the NLB service request. Add a portable subnet to the cluster and try again</code></pre></br>此錯誤訊息指出未將可攜式公用 IP 位址配置給 NLB 服務。請參閱<a href="/docs/containers?topic=containers-subnets#subnets">將子網路新增至叢集</a>，以尋找如何要求叢集之可攜式公用 IP 位址的相關資訊。叢集可以使用可攜式公用 IP 位址之後，即會自動建立 NLB 服務。</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>您已使用 **`loadBalancerIP`** 區段定義負載平衡器 YAML 的可攜式公用 IP 位址，但在可攜式公用子網路中無法使用此可攜式公用 IP 位址。在配置 Script 的 **`loadBalancerIP`** 區段中，移除現有 IP 位址，並新增其中一個可用的可攜式公用 IP 位址。您也可以移除 Script 中的 **`loadBalancerIP`** 區段，以自動配置可用的可攜式公用 IP 位址。</li>
+    <li><pre class="screen"><code>No available nodes for NLB services</code></pre>您沒有足夠的工作者節點可部署 NLB 服務。其中一個原因可能是您所部署的標準叢集有多個工作者節點，但佈建工作者節點失敗。
     </li>
     <ol><li>列出可用的工作者節點。</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>如果找到至少兩個可用的工作者節點，則會列出工作者節點詳細資料。</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>請確定 <code>kubectlget nodes</code> 及 <code>ibmcloud ks worker-get</code> 指令所傳回工作者節點的公用及專用 VLAN ID 相符。</li></ol></li></ul>
 
-4.  如果您要使用自訂網域連接至負載平衡器服務，請確定已將自訂網域對映至負載平衡器服務的公用 IP 位址。
-    1.  尋找負載平衡器服務的公用 IP 位址。
+4.  如果您要使用自訂網域連接至 NLB 服務，請確定已將自訂網域對映至 NLB 服務的公用 IP 位址。
+    1.  尋找 NLB 服務的公用 IP 位址。
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
-    2.  確認在「指標記錄 (PTR)」中已將自訂網域對映至負載平衡器服務的可攜式公用 IP 位址。
+    2.  確認在「指標記錄 (PTR)」中已將自訂網域對映至 NLB 服務的可攜式公用 IP 位址。
 
 <br />
 
@@ -164,7 +163,7 @@ subcollection: containers
 <br />
 
 
-## Ingress 應用程式負載平衡器密碼問題
+## Ingress 應用程式負載平衡器 (ALB) 密碼問題
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
@@ -204,7 +203,7 @@ subcollection: containers
  </tr>
  <tr>
  <td>您所匯入的密碼與 IBM 所提供的 Ingress 密碼同名。</td>
- <td>重新命名您的密碼。您可以透過執行下列指令來檢查 IBM 所提供的 Ingress 密碼名稱：`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`。</td>
+ <td>重新命名您的密碼。您可以執行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`，以檢查 IBM 提供的 Ingress 密碼名稱。</td>
  </tr>
  </tbody></table>
 
@@ -215,7 +214,7 @@ subcollection: containers
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-當您執行 `ibmcloud ks cluster-get --cluster <cluster>` 時，您的叢集處於 `normal` 狀態，但沒有任何 **Ingress 子網域**可用。
+當您執行 `ibmcloud ks cluster-get --cluster <cluster>` 時，您的叢集處於 `normal` 狀況，但沒有 **Ingress 子網域**可供使用。
 
 您可能會看到類似下列內容的錯誤訊息。
 
@@ -316,7 +315,7 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xx
 {: tsResolve}
 選擇下列其中一個選項，以解決問題：
 
-* **邊緣節點污點**：若要確保您的負載平衡器及應用程式 Pod 部署至污染的邊緣節點，請[將邊緣節點親緣性規則及容忍新增至應用程式部署](/docs/containers?topic=containers-loadbalancer#edge_nodes)。依預設，負載平衡器及 Ingress ALB Pod 會具有這些親緣性規則及容忍。
+* **邊緣節點污點**：若要確保您的負載平衡器及應用程式 Pod 部署至污染的邊緣節點，請[將邊緣節點親緣性規則及容忍新增至應用程式部署](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)。依預設，負載平衡器及 Ingress ALB Pod 會具有這些親緣性規則及容忍。
 
 * **自訂污點**：移除 `keepalived` Pod 沒有其容忍的自訂污點。相反地，您可以[將工作者節點標示為邊緣節點，然後污染這些邊緣節點](/docs/containers?topic=containers-edge)。
 
@@ -573,12 +572,12 @@ Error: release vpn failed: deployments.extensions "vpn-strongswan" already exist
 若要使用 Calico 原則，則必須全部符合四個因素：您叢集的 Kubernetes 版本、Calico CLI 版本、Calico 配置檔語法，以及檢視原則指令。其中有一個以上的因素的版本不正確。
 
 {: tsResolve}
-當您的叢集是 [Kubernetes 1.10 版或更新版本](/docs/containers?topic=containers-cs_versions)時，您必須使用 Calico CLI 3.1 版、`calicoctl.cfg` 第 3 版配置檔語法，以及 `calicoctl get GlobalNetworkPolicy` 和 `calicoctl get NetworkPolicy` 指令。
+您必須使用 3.3 版或更新版本的 Calico CLI、`calicoctl.cfg` 第 3 版配置檔語法，以及 `calicoctl get GlobalNetworkPolicy` 和 `calicoctl get NetworkPolicy` 指令。
 
 若要確保符合所有 Calico 因素，請執行下列動作：
 
-1. [安裝及配置 3.3.1 版 Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)。配置包括手動更新 `calicoctl.cfg` 檔案，以使用 Calico 第 3 版語法。
-2. 確定您建立且要套用至您叢集的任何原則都會使用 [Calico 第 3 版語法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy)。如果您在 Calico 第 2 版語法中有現有原則 `.yaml` 或 `.json` 檔案，則可以使用 [`calicoctl convert` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert) 將它轉換為 Calico 第 3 版語法。
+1. [安裝及配置 3.3 版或更新版本的 Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)。
+2. 確定您建立且要套用至您叢集的任何原則都會使用 [Calico 第 3 版語法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy)。如果您在 Calico 第 2 版語法中有現有原則 `.yaml` 或 `.json` 檔案，則可以使用 [`calicoctl convert` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert) 將它轉換為 Calico 第 3 版語法。
 3. 若要[檢視原則](/docs/containers?topic=containers-network_policies#view_policies)，請確定您針對廣域原則使用 `calicoctl get GlobalNetworkPolicy`，並針對範圍設為特定名稱空間的原則使用 `calicoctl get NetworkPolicy --namespace <policy_namespace>`。
 
 <br />
@@ -604,7 +603,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 
 或者，您也可以保留現有的工作者節點儲存區，方法為訂購新的 VLAN，並使用這些 VLAN，在儲存區中建立新的工作者節點。
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  若要取得您需要其新 VLAN ID 的區域，請記下下列指令輸出中的**位置**。**附註**：如果您的叢集是多區域，則您需要每一個區域的 VLAN ID。
 

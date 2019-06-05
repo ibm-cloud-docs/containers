@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# NodePort를 사용한 앱 노출
+# NodePort를 사용한 액세스 테스트
 {: #nodeport}
 
 Kubernetes 클러스터에서 작업자 노드의 공인 IP 주소를 사용하고 NodePort를 노출하여 컨테이너화된 앱을 인터넷 액세스에 사용할 수 있도록 하십시오. {{site.data.keyword.containerlong}}의 테스트 및 단기 공용 액세스 용도로만 이 옵션을 사용하십시오.
@@ -49,9 +49,9 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 
 3. `kube-proxy`는 앱의 Kubernetes NodePort 서비스에 대한 요청을 라우팅합니다.
 
-4. 앱이 배치된 팟(Pod)의 사설 IP 주소로 요청이 전달됩니다. 다중 앱 인스턴스가 클러스터에 배치되는 경우 NodePort 서비스는 앱 팟(Pod) 간의 요청을 라우팅합니다.
+4. 앱이 배치된 팟(Pod)의 사설 IP 주소로 요청이 전달됩니다. 여러 앱 인스턴스가 클러스터에 배치되는 경우 NodePort 서비스는 앱 팟(Pod) 간의 요청을 라우팅합니다.
 
-작업자 노드의 공인 IP 주소는 영구적이지 않습니다. 작업자 노드가 제거되거나 다시 작성되면 새 공인 IP 주소가 작업자 노드에 지정됩니다. 앱에 대한 공용 액세스를 테스트하기 위해 또는 짧은 시간 동안에만 공용 액세스가 필요한 경우에 NodePort 서비스를 사용할 수 있습니다. 서비스에 대한 추가 가용성과 안정적인 공인 IP 주소가 필요한 경우에는 [LoadBalancer 서비스](/docs/containers?topic=containers-loadbalancer) 또는 [Ingress](/docs/containers?topic=containers-ingress)를 사용하여 앱을 노출하십시오.
+작업자 노드의 공인 IP 주소는 영구적이지 않습니다. 작업자 노드가 제거되거나 다시 작성되면 새 공인 IP 주소가 작업자 노드에 지정됩니다. 앱에 대한 공용 액세스를 테스트하기 위해 또는 짧은 시간 동안에만 공용 액세스가 필요한 경우에 NodePort 서비스를 사용할 수 있습니다. 서비스에 대한 추가 가용성과 안정적인 공인 IP 주소가 필요한 경우에는 [네트워크 로드 밸런서(NLB) 서비스](/docs/containers?topic=containers-loadbalancer) 또는 [Ingress](/docs/containers?topic=containers-ingress)를 사용하여 앱을 노출하십시오.
 {: note}
 
 <br />
@@ -138,8 +138,8 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 
     ```
     ID                                                Public IP   Private IP    Size     State    Status
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u3c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u3c.2x4  normal   Ready
     ```
     {: screen}
 
@@ -169,7 +169,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 
     이 예에서 NodePort는 `30872`입니다.
 
-    **엔드포인트** 섹션에서 `<none>`을 표시하면 `<selectorkey>` 및 `<selectorvalue>`(NodePort 서비스의 `spec.selector` 섹션에서 사용 중인)를 확인하십시오. 배치 YAML의 `spec.template.metadata.labels` 섹션에서 사용한 _키/값_ 쌍과 동일해야 합니다.
+    **엔드포인트** 섹션에 `<none>`이 표시되면, NodePort 서비스의 `spec.selector` 섹션에서 사용하는 `<selectorkey>` 및 `<selectorvalue>`를 확인하십시오. 배치 YAML의 `spec.template.metadata.labels` 섹션에서 사용한 _키/값_ 쌍과 동일해야 합니다.
     {: note}
 
 3.  NodePort 및 작업자 노드 IP 주소 중 하나로 URL을 구성하십시오. 예: `http://192.0.2.23:30872`

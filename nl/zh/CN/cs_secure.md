@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -61,8 +61,7 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
 
 要保护 Kubernetes API 服务器和 etcd 数据存储，必须针对个人用户和 Kubernetes 服务帐户保护并限制对 Kubernetes API 服务器的访问权。
 
-**对 Kubernetes API 服务器的访问权是如何授予的？**</br>
-缺省情况下，在授予对 API 服务器的访问权之前，Kubernetes 需要每个请求都经历几个阶段：
+**对 Kubernetes API 服务器的访问权是如何授予的？**</br>缺省情况下，在授予对 API 服务器的访问权之前，Kubernetes 需要每个请求都经历几个阶段：
 
 <ol><li><strong>认证：</strong>验证注册用户或服务帐户的身份。</li><li><strong>授权：</strong>限制已认证的用户和服务帐户的许可权，以确保他们只能访问和操作您希望他们使用的集群组件。</li><li><strong>许可控制</strong>：在 Kubernetes API 服务器处理请求之前，对请求进行验证或更改。许多 Kubernetes 功能需要许可控制器才能正常运行。</li></ol>
 
@@ -81,7 +80,7 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
     <tr>
       <td>全面管理的专用 Kubernetes 主节点</td>
       <td><p>{{site.data.keyword.containerlong_notm}} 中的每个 Kubernetes 集群都由 IBM 拥有的 IBM Cloud Infrastructure(SoftLayer) 帐户中 IBM 管理的专用 Kubernetes 主节点进行控制。Kubernetes 主节点设置有以下专用组件，这些组件不与其他 IBM 客户共享。</p>
-        <ul><li><strong>etcd 数据存储：</strong>存储集群的所有 Kubernetes 资源，例如`服务`、`部署`和 `pod`。Kubernetes `ConfigMaps` 和 `Secrets` 是存储为键值对的应用程序数据，可由 pod 中运行的应用程序使用。在运行 Kubernetes V1.10 或更高版本的集群中，etcd 中的数据将存储在 Kubernetes 主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。通过为集群[启用 {{site.data.keyword.keymanagementservicelong_notm}} 加密](/docs/containers?topic=containers-encryption#encryption)，您可以选择对 Kubernetes 主节点的本地磁盘上的 etcd 数据启用加密。运行更低版本 Kubernetes 的集群的 etcd 数据会存储在由 IBM 管理并每天备份的加密磁盘上。将 etcd 数据发送到 pod 时，这些数据会通过 TLS 加密以确保数据保护和完整性。</li>
+        <ul><li><strong>etcd 数据存储：</strong>存储集群的所有 Kubernetes 资源，例如`服务`、`部署`和 `pod`。Kubernetes `ConfigMaps` 和 `Secrets` 是存储为键值对的应用程序数据，可由 pod 中运行的应用程序使用。etcd 中的数据将存储在 Kubernetes 主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。通过为集群[启用 {{site.data.keyword.keymanagementservicelong_notm}} 加密](/docs/containers?topic=containers-encryption#encryption)，您可以选择对 Kubernetes 主节点的本地磁盘上的 etcd 数据启用加密。运行更低版本 Kubernetes 的集群的 etcd 数据会存储在由 IBM 管理并每天备份的加密磁盘上。将 etcd 数据发送到 pod 时，这些数据会通过 TLS 加密以确保数据保护和完整性。</li>
           <li><strong>kube-apiserver：</strong>充当从工作程序节点到 Kubernetes 主节点的所有集群管理请求的主入口点。kube-apiserver 会验证并处理请求，并可以对 etcd 数据存储器执行读写操作。</li>
           <li><strong>kube-scheduler：</strong>决定 pod 的部署位置，同时考虑容量和性能需求、软硬件策略约束、反亲缘关系规范和工作负载需求。如果找不到与这些需求相匹配的工作程序节点，那么不会在集群中部署 pod。</li>
           <li><strong>kube-controller-manager：</strong>负责监视副本集，并创建相应的 pod 以实现指定的状态。</li>
@@ -101,26 +100,26 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
     </tr>
     <tr>
       <td>细颗粒度访问控制</td>
-      <td>作为帐户管理员，您可以使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) [向 {{site.data.keyword.containerlong_notm}} 的其他用户授予访问权](/docs/containers?topic=containers-users#users)。{{site.data.keyword.Bluemix_notm}} IAM 提供了向 {{site.data.keyword.Bluemix_notm}} 平台、{{site.data.keyword.containerlong_notm}} 以及您帐户中的所有资源进行安全认证的功能。设置正确的用户角色和许可权是限制谁可以访问资源的关键，也是限制用户在滥用合法许可权时能够造成的破坏程度的关键。</br></br>可以从以下预定义的用户角色中进行选择，以确定用户可以执行的操作集：<ul><li><strong>平台角色：</strong>确定用户可以在 {{site.data.keyword.containerlong_notm}} 中执行的与集群和工作程序节点相关的操作。</li><li><strong>基础架构角色：</strong>确定订购、更新或除去基础架构资源（例如，工作程序节点、VLAN 或子网）的许可权。</li><li><strong>Kubernetes RBAC 角色：</strong>确定用户在有权访问集群时可以执行的 `kubectl` 命令。会自动为集群的缺省名称空间设置 RBAC 角色。要在其他名称空间中使用相同的 RBAC 角色，可以从缺省名称空间复制 RBAC 角色。</li></ul> </br> 您可以不使用预定义的用户角色，而是选择[定制基础架构许可权](/docs/containers?topic=containers-users#infra_access)或[设置您自己的 RBAC 角色](/docs/containers?topic=containers-users#rbac)，以添加更细颗粒度的访问控制。</td>
+      <td>作为帐户管理员，您可以使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) [向 {{site.data.keyword.containerlong_notm}} 的其他用户授予访问权](/docs/containers?topic=containers-users#users)。{{site.data.keyword.Bluemix_notm}} IAM 提供了向 {{site.data.keyword.Bluemix_notm}} 平台、{{site.data.keyword.containerlong_notm}} 以及您帐户中的所有资源进行安全认证的功能。设置正确的用户角色和许可权是限制谁可以访问资源的关键，也是限制用户在滥用合法许可权时能够造成的破坏程度的关键。</br></br>可以从以下预定义的用户角色中进行选择，以确定用户可以执行的操作集：<ul><li><strong>平台角色：</strong>确定用户可以在 {{site.data.keyword.containerlong_notm}} 中执行的与集群和工作程序节点相关的操作。</li><li><strong>基础架构角色：</strong>确定订购、更新或除去基础架构资源（例如，工作程序节点、VLAN 或子网）的许可权。</li><li><strong>Kubernetes RBAC 角色：</strong>确定用户在有权访问集群时可以执行的 `kubectl` 命令。会自动为集群的缺省名称空间设置 RBAC 角色。要在其他名称空间中使用相同的 RBAC 角色，可以从缺省名称空间复制 RBAC 角色。</li></ul> </br>您可以不使用预定义的用户角色，而是选择[定制基础架构许可权](/docs/containers?topic=containers-users#infra_access)或[设置您自己的 RBAC 角色](/docs/containers?topic=containers-users#rbac)，以添加更细颗粒度的访问控制。</td>
     </tr>
     <tr>
       <td>许可控制器</td>
-      <td>在 Kubernetes 和 {{site.data.keyword.containerlong_notm}} 中，实施了用于特定功能的许可控制器。通过许可控制器，可以在集群中设置策略，用于确定是否允许执行集群中的特定操作。在策略中，可以指定用户无法执行某个操作的条件，即使此操作是使用 RBAC 分配给该用户的一般许可权的一部分也不例外。因此，在 Kubernetes API 服务器处理 API 请求之前，许可控制器可以为集群提供额外的安全层。</br></br> 创建集群时，{{site.data.keyword.containerlong_notm}} 会自动在 Kubernetes 主节点中安装以下 [Kubernetes 许可控制器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/admission-controllers/)，用户无法更改这些许可控制器：<ul>
+      <td>在 Kubernetes 和 {{site.data.keyword.containerlong_notm}} 中，实施了用于特定功能的许可控制器。通过许可控制器，可以在集群中设置策略，用于确定是否允许执行集群中的特定操作。在策略中，可以指定用户无法执行某个操作的条件，即使此操作是使用 RBAC 分配给该用户的一般许可权的一部分也不例外。因此，在 Kubernetes API 服务器处理 API 请求之前，许可控制器可以为集群提供额外的安全层。</br></br>创建集群时，{{site.data.keyword.containerlong_notm}} 会自动在 Kubernetes 主节点中安装以下 [Kubernetes 许可控制器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/admission-controllers/)，用户无法更改这些许可控制器：<ul>
       <li>`DefaultTolerationSeconds`</li>
       <li>`DefaultStorageClass`</li>
-      <li>`GenericAdmissionWebhook` (Kubernetes 1.8)</li>
+      <li>`GenericAdmissionWebhook`</li>
       <li>`Initializers`</li>
       <li>`LimitRanger`</li>
-      <li>`MutatingAdmissionWebhook`（Kubernetes 1.9 和更高版本）</li>
+      <li>`MutatingAdmissionWebhook`</li>
       <li>`NamespaceLifecycle`</li>
       <li>`PersistentVolumeLabel`</li>
-      <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp)（Kubernetes 1.8.13、1.9.8 或 1.10.3 和更高版本）</li>
+      <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp)</li>
       <li>[`优先级`](/docs/containers?topic=containers-pod_priority#pod_priority)（Kubernetes 1.11.2 或更高版本）</li>
       <li>`ResourceQuota`</li>
       <li>`ServiceAccount`</li>
-      <li>`StorageObjectInUseProtection`（Kubernetes 1.10 和更高版本）</li>
-      <li>`ValidatingAdmissionWebhook`（Kubernetes 1.9 和更高版本）</li></ul></br>
-您可以[在集群中安装自己的许可控制器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks)，也可以从 {{site.data.keyword.containerlong_notm}} 提供的可选许可控制器中进行选择：<ul><li><strong>[容器映像安全性强制执行器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)：</strong>使用此许可控制器可在集群中强制执行漏洞顾问程序策略，以阻止有漏洞的映像进入部署。</li></ul></br><p class="note">如果手动安装了许可控制器，但不想再使用这些控制器，请确保完全除去这些控制器。如果许可控制器未完全除去，可能会阻止您要在集群上执行的所有操作。</p></td>
+      <li>`StorageObjectInUseProtection`</li>
+      <li>`ValidatingAdmissionWebhook`</li></ul></br>
+      您可以[在集群中安装自己的许可控制器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks)，也可以从 {{site.data.keyword.containerlong_notm}} 提供的可选许可控制器中进行选择：<ul><li><strong>[容器映像安全性强制执行器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)：</strong>使用此许可控制器可在集群中强制执行漏洞顾问程序策略，以阻止有漏洞的映像进入部署。</li></ul></br><p class="note">如果手动安装了许可控制器，但不想再使用这些控制器，请确保完全除去这些控制器。如果许可控制器未完全除去，可能会阻止您要在集群上执行的所有操作。</p></td>
     </tr>
   </tbody>
 </table>
@@ -145,13 +144,11 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
 工作程序节点具有组成应用程序的部署和服务。在公共云中托管工作负载时，您希望确保应用程序受到保护，不会被未经授权的用户或软件访问、更改或监视。
 {: shortdesc}
 
-**谁拥有工作程序节点？保护工作程序节点是我的责任吗？**</br>
-工作程序节点的所有权取决于您创建的集群类型。免费集群中的工作程序节点将供应给 IBM 拥有的 IBM Cloud Infrastructure (SoftLayer) 帐户。可以将应用程序部署到工作程序节点，但无法在工作程序节点上更改设置或安装额外软件。由于免费集群的容量有限且 {{site.data.keyword.containerlong_notm}} 功能有限，因此不要在免费集群上运行生产工作负载。请考虑将标准集群用于生产工作负载。
+**谁拥有工作程序节点？保护工作程序节点是我的责任吗？**</br>工作程序节点的所有权取决于您创建的集群类型。免费集群中的工作程序节点将供应给 IBM 拥有的 IBM Cloud Infrastructure (SoftLayer) 帐户。可以将应用程序部署到工作程序节点，但无法在工作程序节点上更改设置或安装额外软件。由于免费集群的容量有限且 {{site.data.keyword.containerlong_notm}} 功能有限，因此不要在免费集群上运行生产工作负载。请考虑将标准集群用于生产工作负载。
 
 标准集群中的工作程序节点将供应给与公共或专用 {{site.data.keyword.Bluemix_notm}} 帐户关联的 IBM Cloud Infrastructure (SoftLayer) 帐户。工作程序节点专用于您的帐户，您将负责请求及时更新工作程序节点，以确保工作程序节点操作系统和 {{site.data.keyword.containerlong_notm}} 组件应用最新的安全性更新和补丁。
 
-定期（例如，每月）使用 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)将更新和安全补丁部署到操作系统，并更新 Kubernetes 版本。更新可用时，您在 {{site.data.keyword.Bluemix_notm}} 控制台或 CLI 中查看有关主节点和工作程序节点的信息时（例如，使用 `ibmcloud ks clusters` 或 `ibmcloud ks workers --cluster <cluster_name>` 命令），会收到相应通知。
-工作程序节点更新由 IBM 以包含最新安全补丁的完整工作程序节点映像形式提供。要应用更新，必须使用新映像重新创建工作程序节点的映像并重新装入工作程序节点。重新装入工作程序节点时，会自动轮换 root 用户的密钥。
+定期（例如，每月）使用 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)将更新和安全补丁部署到操作系统，并更新 Kubernetes 版本。更新可用时，您在 {{site.data.keyword.Bluemix_notm}} 控制台或 CLI 中查看有关主节点和工作程序节点的信息时（例如，使用 `ibmcloud ks clusters` 或 `ibmcloud ks workers --cluster <cluster_name>` 命令），会收到相应通知。工作程序节点更新由 IBM 以包含最新安全补丁的完整工作程序节点映像形式提供。要应用更新，必须使用新映像重新创建工作程序节点的映像并重新装入工作程序节点。重新装入工作程序节点时，会自动轮换 root 用户的密钥。
 {: important}
 
 **工作程序节点设置看起来是怎样的？**</br>
@@ -198,7 +195,8 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
     </tr>
     <tr>
       <td>SSH 已禁用</td>
-      <td>缺省情况下，工作程序节点上禁用了 SSH 访问，以保护集群免受恶意攻击。禁用了 SSH 访问时，对集群的访问将通过 Kubernetes API 服务器来强制执行。Kubernetes API 服务器需要根据在认证、授权和许可控制模块中设置的策略检查每个请求后，才在集群中执行该请求。</br></br>  如果您有标准集群并且要在工作程序节点上安装更多功能，那么可以针对要在每个工作程序节点上运行的所有对象，选择使用 {{site.data.keyword.containerlong_notm}} 提供的附加组件，或者使用 [Kubernetes 守护程序集 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)。对于您必须执行的任何一次性操作，请使用 [Kubernetes 作业 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)。</td>
+      <td>缺省情况下，工作程序节点上禁用了 SSH 访问，以保护集群免受恶意攻击。禁用了 SSH 访问时，对集群的访问将通过 Kubernetes API 服务器来强制执行。Kubernetes API 服务器需要根据在认证、授权和许可控制模块中设置的策略检查每个请求后，才在集群中执行该请求。</br></br>
+如果您有标准集群并且要在工作程序节点上安装更多功能，那么可以针对要在每个工作程序节点上运行的所有对象，选择使用 {{site.data.keyword.containerlong_notm}} 提供的附加组件，或者使用 [Kubernetes 守护程序集 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)。对于您必须执行的任何一次性操作，请使用 [Kubernetes 作业 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)。</td>
     </tr>
   </tbody>
   </table>
@@ -216,14 +214,13 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
 **缺省情况下，集群允许哪些网络流量？**</br>
 所有容器都通过集群创建期间在每个工作程序节点上配置的[预定义 Calico 网络策略设置](/docs/containers?topic=containers-network_policies#default_policy)进行保护。缺省情况下，所有工作程序节点都允许所有出站网络流量。入站网络流量会被阻止，但有几个端口例外；打开这些端口是为了供 IBM 监视网络流量，以及供 IBM 自动为 Kubernetes 主节点安装安全性更新。从 Kubernetes 主节点到工作程序节点的 kubelet 的访问通过 OpenVPN 隧道进行保护。有关更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 体系结构](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology)。
 
-如果要允许来自因特网的入局网络流量，必须使用 [NodePort 服务、LoadBalancer 服务或 Ingress 应用程序负载均衡器](/docs/containers?topic=containers-cs_network_planning#external)来公开应用程序。  
+如果要允许来自因特网的入局网络流量，必须使用 [NodePort 服务、网络负载均衡器 (NLB) 服务或 Ingress 应用程序负载均衡器 (ALB)](/docs/containers?topic=containers-cs_network_planning#external) 来公开应用程序。  
 
 {: #network_segmentation}
-**什么是网络分段？如何为集群设置网络分段？**</br>
-网络分段描述了用于将网络划分为多个子网的方法。您可以对要由组织中特定组访问的应用程序和相关数据分组。在一个子网中运行的应用程序无法查看或访问另一个子网中的应用程序。网络分段还会限制提供给内部人员或第三方软件的访问权，并且可以限制恶意活动的范围。   
+**什么是网络分段？如何为集群设置网络分段？**</br>网络分段描述了用于将网络划分为多个子网的方法。您可以对要由组织中特定组访问的应用程序和相关数据分组。在一个子网中运行的应用程序无法查看或访问另一个子网中的应用程序。网络分段还会限制提供给内部人员或第三方软件的访问权，并且可以限制恶意活动的范围。   
 
 {{site.data.keyword.containerlong_notm}} 提供了 IBM Cloud Infrastructure (SoftLayer) VLAN，用于确保工作程序节点的高质量网络性能和网络隔离。VLAN 会将一组工作程序节点和 pod 视为连接到同一物理连线那样进行配置。
-VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IBM 客户之间共享。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IBM 客户之间共享。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 为帐户启用 VRF 或 VLAN 生成时，将除去集群的网络分段。
 
@@ -240,7 +237,7 @@ VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IB
 
 |安全功能|描述|
 |-------|----------------------------------|
-|限制公开的应用程序数|缺省情况下，在集群中运行的应用程序和服务无法通过公用因特网访问。您可以选择是要向公众公开应用程序，还是希望应用程序和服务仅可在专用网络上访问。使服务和应用程序保持专用时，可以利用内置安全功能来确保工作程序节点与 pod 之间的安全通信。要将服务和应用程序公开到公用因特网，可以利用 [Ingress 和负载均衡器支持](/docs/containers?topic=containers-cs_network_planning#external)来安全地使服务公共可用。确保仅公开必要的服务，并定期重新访问已公开应用程序的列表，以确保这些应用程序仍然有效。|
+|限制公开的应用程序数|缺省情况下，在集群中运行的应用程序和服务无法通过公用因特网访问。您可以选择是要向公众公开应用程序，还是希望应用程序和服务仅可在专用网络上访问。使服务和应用程序保持专用时，可以利用内置安全功能来确保工作程序节点与 pod 之间的安全通信。要将服务和应用程序公开到公用因特网，可以利用 [NLB 和 Ingress ALB 支持](/docs/containers?topic=containers-cs_network_planning#external)来安全地使服务公共可用。确保仅公开必要的服务，并定期重新访问已公开应用程序的列表，以确保这些应用程序仍然有效。|
 |使工作程序节点保持专用|创建集群时，每个集群会自动连接到一个专用 VLAN。专用 VLAN 用于确定分配给工作程序节点的专用 IP 地址。可以选择通过将工作程序节点仅连接到专用 VLAN 来使其保持专用。免费集群中的专用 VLAN 由 IBM 管理，标准集群中的专用 VLAN 由您在 IBM Cloud Infrastructure (SoftLayer) 帐户中管理。</br></br><strong>注意：</strong>请记住，为了与 Kubernetes 主节点进行通信，以及使 {{site.data.keyword.containerlong_notm}} 正常运行，您必须配置与[特定 URL 和 IP 地址](/docs/containers?topic=containers-firewall#firewall_outbound)的公共连接。要设置此公共连接，可以在工作程序节点前配置防火墙（例如，[虚拟路由器设备](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra)），并允许网络流量流至这些 URL 和 IP 地址。|
 |使用边缘节点限制公用因特网连接|缺省情况下，每个工作程序节点都会配置为接受应用程序 pod 及关联的负载均衡器或 Ingress pod。您可以将工作程序节点标注为[边缘节点](/docs/containers?topic=containers-edge#edge)，以强制将负载均衡器和 Ingress pod 仅部署到这些工作程序节点。此外，还可以[污染工作程序节点](/docs/containers?topic=containers-edge#edge_workloads)，使应用程序 pod 无法安排到边缘节点。利用边缘节点，可以将网络工作负载隔离在集群中更少的工作程序节点上，并使集群中的其他工作程序节点保持专用。|
 {: caption="专用服务和工作程序节点选项" caption-side="top"}
@@ -251,19 +248,16 @@ VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IB
 ### LoadBalancer 和 Ingress 服务
 {: #network_lb_ingress}
 
-可以使用 LoadBalancer 和 Ingress 联网服务将应用程序连接到公用因特网或外部专用网络。请查看负载均衡器和 Ingress ALB 的以下可选设置，您可以使用这些设置来满足后端应用程序安全需求，或者可以对流过集群的流量进行加密。
+可以使用网络负载均衡器 (NLB) 和 Ingress 应用程序负载均衡器 (ALB) 联网服务将应用程序连接到公用因特网或外部专用网络。请查看 NLB 和 ALB 的以下可选设置，您可以使用这些设置来满足后端应用程序安全需求，或者可以对流过集群的流量进行加密。
 {: shortdesc}
 
-**可以使用安全组来管理集群的网络流量吗？**</br>
-要使用 Ingress 和 LoadBalancer 服务，请采用 [Calico 和 Kubernetes 策略](/docs/containers?topic=containers-network_policies)来管理流入和流出集群的网络流量。不要使用 IBM Cloud Infrastructure (SoftLayer) [安全组](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups)。IBM Cloud Infrastructure (SoftLayer) 安全组会应用于单个虚拟服务器的网络接口，以过滤系统管理程序级别的流量。但是，安全组不支持 VRRP 协议，{{site.data.keyword.containerlong_notm}} 使用该协议来管理 LoadBalancer IP 地址。如果没有 VRRP 协议来管理 LoadBalancer IP，那么 Ingress 和 LoadBalancer 服务无法正常工作。如果未使用 Ingress 或 LoadBalancer 服务，并且希望将工作程序节点与公众完全隔离，那么可以使用安全组。
+**可以使用安全组来管理集群的网络流量吗？**</br>要使用 NLB 和 Ingress ALB 服务，请采用 [Calico 和 Kubernetes 策略](/docs/containers?topic=containers-network_policies)来管理流入和流出集群的网络流量。不要使用 IBM Cloud Infrastructure (SoftLayer) [安全组](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups)。IBM Cloud Infrastructure (SoftLayer) 安全组会应用于单个虚拟服务器的网络接口，以过滤系统管理程序级别的流量。但是，安全组不支持 VRRP 协议，{{site.data.keyword.containerlong_notm}} 使用该协议来管理 NLB IP 地址。如果没有 VRRP 协议来管理 NLB IP，那么 NLB 和 Ingress ALB 服务无法正常工作。如果未使用 INLB 和 Ingress ALB 服务，并且希望将工作程序节点与公众完全隔离，那么可以使用安全组。
 
-**如何保护集群中的源 IP？**</br>
-缺省情况下，不会保留客户机请求的源 IP 地址。对应用程序的客户机请求发送到集群时，该请求会路由到用于公开 ALB 的 LoadBalancer 服务的 pod。如果在 LoadBalancer 服务 pod 所在的工作程序节点上不存在应用程序 pod，那么负载均衡器会将该请求转发到其他工作程序节点上的应用程序 pod。软件包的源 IP 地址将更改为运行应用程序 pod 的工作程序节点的公共 IP 地址。
+**如何保护集群中的源 IP？**</br>在 V2.0 NLB 中，缺省情况下，不会保留客户机请求的源 IP 地址。但是，在 V1.0 NLB 和所有 Ingress ALB 中，不会保留客户机请求的源 IP 地址。对应用程序的客户机请求发送到集群时，该请求会路由到 NLB 1.0 或 ALB 的 pod。如果在 LoadBalancer 服务 pod 所在的工作程序节点上不存在应用程序 pod，那么 NLB 或 ALB 会将该请求转发到其他工作程序节点上的应用程序 pod。软件包的源 IP 地址将更改为运行应用程序 pod 的工作程序节点的公共 IP 地址。
 
-例如，在应用程序服务器必须应用安全性和访问控制策略的情况下，保留客户机的 IP 非常有用。要保留客户机请求的原始源 IP 地址，可以为[负载均衡器](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)或 [Ingress ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) 启用源 IP 保留。
+例如，在应用程序服务器必须应用安全性和访问控制策略的情况下，保留客户机的 IP 非常有用。要保留客户机请求的原始源 IP 地址，可以为 [V1.0 NLB](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) 或 [Ingress ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) 启用源 IP 保留。
 
-**如何使用 TLS 加密流量？**</br>
-Ingress 服务在流量流中的两个点提供 TLS 终止：
+**如何使用 TLS 加密流量？**</br>Ingress 服务在流量流中的两个点提供 TLS 终止：
 * [到达时解密包](/docs/containers?topic=containers-ingress#public_inside_2)：缺省情况下，Ingress ALB 会对流至集群中应用程序的 HTTP 网络流量进行负载均衡。要同时对入局 HTTPS 连接进行负载均衡，可以配置 ALB 来解密网络流量，然后将已解密的请求转发到集群中公开的应用程序。如果使用的是 IBM 提供的 Ingress 子域，那么可以使用 IBM 提供的 TLS 证书。如果使用的是定制域，那么可以使用您自己的 TLS 证书来管理 TLS 终止。
 * [在将包转发到上游应用程序之前重新加密包](/docs/containers?topic=containers-ingress_annotation#ssl-services)：ALB 在将流量转发到应用程序之前解密 HTTPS 请求。如果您具有需要 HTTPS 的应用程序，并且在将流量转发到这些上游应用程序之前需要对流量进行加密，那么可以使用 `ssl-services` 注释。如果上游应用程序可以处理 TLS，那么可以选择提供单向或双向认证 TLS 私钥中包含的证书。
 
@@ -282,7 +276,7 @@ Ingress 服务在流量流中的两个点提供 TLS 终止：
 - [NFS 文件存储器](/docs/infrastructure/FileStorage?topic=FileStorage-encryption#encryption)
 - [块存储器](/docs/infrastructure/BlockStorage?topic=BlockStorage-encryption#block-storage-encryption-at-rest) </br>
 
-您还可以使用 {{site.data.keyword.Bluemix_notm}} 数据库服务（如 [{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant)）在集群外部的受管数据库中持久存储数据。通过云数据库服务存储的数据可以跨集群、专区和区域进行访问。有关 IBM Cloudant NoSQL DB 的安全相关信息，请参阅[服务文档](/docs/services/Cloudant/offerings?topic=cloudant-security#security)。
+您还可以使用 {{site.data.keyword.Bluemix_notm}} 数据库服务（如 [{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)）在集群外部的受管数据库中持久存储数据。通过云数据库服务存储的数据可以跨集群、专区和区域进行访问。有关 IBM Cloudant NoSQL DB 的安全相关信息，请参阅[服务文档](/docs/services/Cloudant/offerings?topic=cloudant-security#security)。
 
 <br />
 
@@ -304,22 +298,21 @@ Ingress 服务在流量流中的两个点提供 TLS 终止：
 - **工作程序**：Ubuntu 操作系统中发送到 /var/log/syslog 和 /var/log/auth.log 的日志。
 - **Kubernetes API 服务器**：出于审计原因，将记录发送到 Kubernetes API 服务器的每个集群相关操作，包括时间、用户和受影响的资源。有关更多信息，请参阅 [Kubernetes 审计日志 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)。
 - **Kubernetes 系统组件**：`kubelet`、`kube-proxy` 和在 `kube-system` 名称空间中运行的其他组件的日志。
-- **Ingress**：用于管理进入集群的网络流量的 Ingress 应用程序负载均衡器的日志。
+- **Ingress**：用于管理进入集群的网络流量的 Ingress 应用程序负载均衡器 (ALB) 的日志。
 
 可以选择要记录集群的哪些事件以及要将日志转发到何处。要检测恶意活动并验证集群的运行状况，必须持续分析日志。
 
 **如何监视集群的运行状况和性能？**</br>
 可以通过监视集群组件和计算资源（例如，CPU 和内存使用情况）来验证集群的容量和性能。{{site.data.keyword.containerlong_notm}} 会自动将标准集群的度量值发送到 {{site.data.keyword.monitoringlong}}，以便您可以[在 Grafana 中查看和分析度量值](/docs/containers?topic=containers-health#view_metrics)。
 
-还可以使用内置工具（如 {{site.data.keyword.containerlong_notm}} 详细信息页面和 Kubernetes 仪表板），或者[设置第三方集成](/docs/containers?topic=containers-integrations#health_services)（如 Prometheus、Sysdig、LogDNA、Weave Scope 等）。
+还可以使用内置工具（如 {{site.data.keyword.containerlong_notm}} 详细信息页面和 Kubernetes 仪表板），或者[设置第三方集成](/docs/containers?topic=containers-supported_integrations#health_services)（如 Prometheus、Sysdig、LogDNA、Weave Scope 等）。
 
 要设置基于主机的入侵检测系统 (HIDS) 和安全事件日志监视 (SELM)，请安装旨在监视集群和容器化应用程序以检测入侵或滥用情况的第三方工具，例如 [Twistlock ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.twistlock.com/) 或 [Sysdig Falco 项目 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://sysdig.com/opensource/falco/)。Sysdig Falco 是一个单独的工具，如果您选择在集群中安装 IBM 提供的 [Sysdig 附加组件](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)，那么不会包含该工具。  
 
 **如何审计集群中发生的事件？**</br>
 可以[在 {{site.data.keyword.containerlong_notm}} 集群中设置 {{site.data.keyword.cloudaccesstraillong}}](/docs/containers?topic=containers-at_events#at_events)。有关更多信息，请查看 [{{site.data.keyword.cloudaccesstrailshort}} 文档](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-activity_tracker_ov#activity_tracker_ov)。
 
-**在集群中启用信任的选项是什么？**</br>
-缺省情况下，{{site.data.keyword.containerlong_notm}} 提供了许多集群组件功能，以便您可以在高度安全的环境中部署容器化应用程序。扩展集群中的信任级别，以更好地确保集群中发生的情况符合您的意图。可以通过各种方式在集群中实现信任，如下图中所示。
+**在集群中启用信任的选项是什么？**</br>缺省情况下，{{site.data.keyword.containerlong_notm}} 提供了许多集群组件功能，以便您可以在高度安全的环境中部署容器化应用程序。扩展集群中的信任级别，以更好地确保集群中发生的情况符合您的意图。可以通过各种方式在集群中实现信任，如下图中所示。
 
 
 <img src="images/trusted_story.png" width="700" alt="部署具有可信内容的容器" style="width:700px; border-style: none"/>
@@ -334,7 +327,7 @@ Ingress 服务在流量流中的两个点提供 TLS 终止：
 
 5.  **使用安全顾问程序进行网络分析（预览）**：通过 {{site.data.keyword.Bluemix_notm}} 安全顾问程序，可以从漏洞顾问程序和 {{site.data.keyword.cloudcerts_short}} 之类的 {{site.data.keyword.Bluemix_notm}} 服务集中安全性洞察。在集群中启用安全顾问程序后，可以查看有关可疑入局和出局网络流量的报告。有关更多信息，请参阅[网络分析](/docs/services/security-advisor?topic=security-advisor-setup-network#setup-network)。要进行安装，请参阅[设置对 Kubernetes 集群的可疑客户机和服务器 IP 地址的监视](/docs/services/security-advisor?topic=security-advisor-setup-network#setup-network)。
 
-6.  **{{site.data.keyword.cloudcerts_long_notm}}**：如果希望[使用定制域（带 TLS）公开应用程序](/docs/containers?topic=containers-ingress#ingress_expose_public)，那么可以将 TLS 证书存储在 {{site.data.keyword.cloudcerts_short}} 中。{{site.data.keyword.security-advisor_short}} 仪表板中还会报告到期或即将到期的证书。有关更多信息，请参阅 [{{site.data.keyword.cloudcerts_short}} 入门](/docs/services/certificate-manager?topic=certificate-manager-gettingstarted#gettingstarted)。
+6.  **{{site.data.keyword.cloudcerts_long_notm}}**：如果希望[使用定制域（带 TLS）公开应用程序](/docs/containers?topic=containers-ingress#ingress_expose_public)，那么可以将 TLS 证书存储在 {{site.data.keyword.cloudcerts_short}} 中。{{site.data.keyword.security-advisor_short}} 仪表板中还会报告到期或即将到期的证书。有关更多信息，请参阅 [{{site.data.keyword.cloudcerts_short}} 入门](/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started)。
 
 <br />
 
@@ -345,11 +338,9 @@ Ingress 服务在流量流中的两个点提供 TLS 终止：
 每个部署都基于一个映像，映像用于保存有关如何启动运行应用程序的容器的指示信息。这些指示信息包括容器内的操作系统以及要安装的额外软件。要保护应用程序，必须保护映像并建立确保映像完整性的检查。
 {: shortdesc}
 
-**应该使用公共注册表还是专用注册表来存储映像？**</br>
-开始使用 Docker 映像和 Kubernetes 在集群中创建第一个容器化应用程序时，可以使用公共注册表（如 Docker Hub）。但是，对于企业应用程序，请避免使用您不了解或不信任的注册表，以保护集群免受恶意映像的损害。将映像保留在专用注册表中，如 {{site.data.keyword.registryshort_notm}} 中提供的映像，并确保控制对注册表的访问权以及可以推送的映像内容。
+**应该使用公共注册表还是专用注册表来存储映像？**</br>开始使用 Docker 映像和 Kubernetes 在集群中创建第一个容器化应用程序时，可以使用公共注册表（如 Docker Hub）。但是，对于企业应用程序，请避免使用您不了解或不信任的注册表，以保护集群免受恶意映像的损害。将映像保留在专用注册表中，如 {{site.data.keyword.registryshort_notm}} 中提供的映像，并确保控制对注册表的访问权以及可以推送的映像内容。
 
-**为什么检查映像是否有漏洞非常重要？**</br>
-研究显示，大多数恶意攻击利用的是已知软件漏洞和薄弱的系统配置。基于映像部署容器时，容器将使用在映像中描述的操作系统和额外的二进制文件启动。就像保护虚拟机或物理机器一样，您必须消除在容器内使用的操作系统和二进制文件中的已知漏洞，以保护应用程序不被未经授权的用户访问。</br>
+**为什么检查映像是否有漏洞非常重要？**</br>研究显示，大多数恶意攻击利用的是已知软件漏洞和薄弱的系统配置。基于映像部署容器时，容器将使用在映像中描述的操作系统和额外的二进制文件启动。就像保护虚拟机或物理机器一样，您必须消除在容器内使用的操作系统和二进制文件中的已知漏洞，以保护应用程序不被未经授权的用户访问。</br>
 
 要保护应用程序，请考虑解决以下方面的问题：
 
@@ -359,7 +350,7 @@ Ingress 服务在流量流中的两个点提供 TLS 终止：
 2. **在映像部署到生产之前扫描映像：**</br>
 确保在基于每个映像部署容器之前扫描该映像。例如，如果使用 {{site.data.keyword.registryshort_notm}}，那么在将映像推送到名称空间时，会自动扫描所有映像以查找漏洞。如果发现漏洞，请考虑消除漏洞或阻止部署这些映像。在组织中查找负责监视和除去漏洞的人员或团队。根据组织结构，此人可能属于安全团队、操作团队或部署团队。使用许可控制器（例如，[Container Image Security Enforcement](/docs/services/Registry?topic=registry-security_enforce#security_enforce)）来阻止部署未通过漏洞检查的映像，并启用[内容信任](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)，以便映像必须由可信签名者核准后，才能推送到容器注册表。
 
-3. **定期扫描运行中的容器：**</br>
+3. **定期扫描正在运行的容器：**</br>
 即使基于通过漏洞检查的映像部署了容器，容器中运行的操作系统或二进制文件也可能会随时间推移而变得有漏洞。要保护应用程序，必须确保定期扫描运行中的容器，以便可以检测到漏洞并进行补救。根据应用程序的不同，要添加额外的安全性，可以建立用于在检测到有漏洞的容器后对其进行处理的过程。
 
 **{{site.data.keyword.registryshort_notm}} 如何帮助保护映像和部署过程？**  
@@ -403,8 +394,7 @@ Ingress 服务在流量流中的两个点提供 TLS 终止：
 ## 容器隔离和安全性
 {: #container}
 
-**什么是 Kubernetes 名称空间？为什么要使用 Kubernetes 名称空间？**</br>
-Kubernetes 名称空间是一种对集群进行虚拟分区，并为部署和要将其工作负载移至集群的用户组提供隔离的方法。通过名称空间，可以跨工作程序节点以及跨多专区集群中的专区组织资源。  
+**什么是 Kubernetes 名称空间？为什么要使用 Kubernetes 名称空间？**</br>Kubernetes 名称空间是一种对集群进行虚拟分区，并为部署和要将其工作负载移至集群的用户组提供隔离的方法。通过名称空间，可以跨工作程序节点以及跨多专区集群中的专区组织资源。  
 
 每个集群都设置有以下名称空间：
 - **default：**未定义特定名称空间时所有内容都会部署到其中的名称空间。将“查看者”、“编辑者”或“操作员”平台角色分配给用户时，用户可以访问 default 名称空间，但不能访问 `kube-system`、`ibm-system` 或 `ibm-cloud-cert` 名称空间。
@@ -417,8 +407,7 @@ Kubernetes 名称空间是一种对集群进行虚拟分区，并为部署和要
 对于集群中包含的每个名称空间，请确保设置正确的 [RBAC 策略](/docs/containers?topic=containers-users#rbac)，以限制对此名称空间的访问权，控制部署的内容以及设置正确的[资源配额 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 和[限制范围 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/)。
 {: important}
 
-**应该设置单租户还是多租户集群？**</br>
-在单租户集群中，将为必须在集群中运行工作负载的每组人员创建一个集群。通常，此团队负责管理集群并正确配置和保护集群。多租户集群使用多个名称空间来隔离租户及其工作负载。
+**应该设置单租户还是多租户集群？**</br>在单租户集群中，将为必须在集群中运行工作负载的每组人员创建一个集群。通常，此团队负责管理集群并正确配置和保护集群。多租户集群使用多个名称空间来隔离租户及其工作负载。
 
 <img src="images/cs_single_multitenant.png" width="600" alt="单租户与多租户集群" style="width:600px; border-style: none"/>
 
@@ -430,7 +419,7 @@ Kubernetes 名称空间是一种对集群进行虚拟分区，并为部署和要
 
 - **访问权：**设置多个名称空间时，必须为每个名称空间配置正确的 RBAC 策略，以确保资源隔离。RBAC 策略较为复杂，需要掌握深厚的 Kubernetes 知识。
 - **计算资源限制：**要确保每个团队都有必需的资源来部署服务并在集群中运行应用程序，必须为每个名称空间设置[资源配额](https://kubernetes.io/docs/concepts/policy/resource-quotas/)。资源配额确定了名称空间的部署约束，例如可以部署的 Kubernetes 资源数以及这些资源可使用的 CPU 数和内存量。设置配额后，用户必须在其部署中包含资源请求和限制。
-- **共享集群资源：**如果在一个集群中运行多个租户，那么会在租户之间共享一些集群资源，例如 Ingress 应用程序负载均衡器或可用的可移植 IP 地址。如果较小的服务必须与集群中的大型服务竞争资源，那么较小的服务要使用共享资源可能很难。
+- **共享集群资源：**如果在一个集群中运行多个租户，那么会在租户之间共享一些集群资源，例如 Ingress 应用程序负载均衡器 (ALB) 或可用的可移植 IP 地址。如果较小的服务必须与集群中的大型服务竞争资源，那么较小的服务要使用共享资源可能很难。
 - **更新：**一次只能运行一个 Kubernetes API 版本。集群中运行的所有应用程序都必须采用当前 Kubernetes API 版本，与拥有应用程序的团队无关。要更新集群时，必须确保所有团队都准备好切换到新的 Kubernetes API 版本，并且应用程序已更新为使用新的 Kubernetes API 版本。这还意味着各个团队对要运行的 Kubernetes API 版本的控制力较小。
 - **集群设置中的更改：**如果要更改集群设置或将工作负载重新安排到新工作程序节点上，必须对各租户应用此更改。相比单租户集群，这种应用需要更多的协调和测试。
 - **通信过程：**管理多个租户时，请考虑设置通信过程，以便租户知道集群中存在问题时或者需要为其服务提供更多资源时应求助于何处。此通信过程还包括向租户通知集群设置或计划更新中的所有更改。

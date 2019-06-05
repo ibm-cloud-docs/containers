@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,7 +44,7 @@ Avant de commencer, vérifiez que vous disposez des [règles d'accès {{site.dat
 
 ## Etape 1 : Exécution de tests Ingress dans l'outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}}
 
-Lorsque vous traitez les incidents, vous pouvez utiliser l'outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}} pour exécuter des tests Ingress et regrouper des informations pertinentes sur Ingress. Pour utiliser l'outil de débogage, installez la [charte Helm `ibmcloud-iks-debug` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug) :
+Lorsque vous traitez les incidents, vous pouvez utiliser l'outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}} pour exécuter des tests Ingress et regrouper des informations pertinentes sur Ingress. Pour utiliser l'outil de débogage, installez la [charte Helm `ibmcloud-iks-debug`![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
 {: shortdesc}
 
 
@@ -52,7 +52,7 @@ Lorsque vous traitez les incidents, vous pouvez utiliser l'outil de débogage et
 
 2. Installez la charte Helm dans votre cluster.
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
@@ -185,7 +185,7 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
         * Si l'interface CLI renvoie un dépassement de délai et que vous disposez d'un pare-feu personnalisé pour protéger vos noeuds worker, vérifiez que vous avez autorisé ICMP dans votre [pare-feu](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).
         * S'il n'y a aucun pare-feu bloquant les commandes ping et que ces commandes s'exécutent puis renvoient un dépassement de délai, [vérifiez le statut de vos pods d'ALB](#check_pods).
 
-    * Clusters à zones multiples uniquement : vous pouvez utiliser le diagnostic d'intégrité de l'équilibreur de charge MZLB pour déterminer le statut des adresses IP de votre ALB. Pour plus d'informations sur l'équilibreur de charge MZLB, voir [Equilibreur de charge pour zones multiples (MZLB)](/docs/containers?topic=containers-ingress#planning). Le diagnostic d'intégrité de l'équilibreur de charge MZLB est disponible uniquement pour les clusters dont le nouveau sous-domaine Ingress est au format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si votre cluster utilise encore l'ancien format `<cluster_name>.<region>.containers.mybluemix.net`, [convertissez votre cluster à zone unique en cluster à zones multiples](/docs/containers?topic=containers-clusters#add_zone). Un sous-domaine au nouveau format est affecté à votre cluster, mais celui-ci peut continuer à utiliser l'ancien format de sous-domaine. Vous pouvez aussi commander un nouveau cluster auquel le nouveau format de sous-domaine sera automatiquement affecté.
+    * Clusters à zones multiples uniquement : vous pouvez utiliser le diagnostic d'intégrité de l'équilibreur de charge MZLB pour déterminer le statut des adresses IP de votre ALB. Pour plus d'informations sur l'équilibreur de charge MZLB, voir [Equilibreur de charge pour zones multiples (MZLB)](/docs/containers?topic=containers-ingress#planning). Le diagnostic d'intégrité de l'équilibreur de charge MZLB est disponible uniquement pour les clusters dont le nouveau sous-domaine Ingress est au format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si votre cluster utilise encore l'ancien format `<cluster_name>.<region>.containers.mybluemix.net`, [convertissez votre cluster à une seule zone en un cluster à zones multiples](/docs/containers?topic=containers-clusters#add_zone). Un sous-domaine au nouveau format est affecté à votre cluster, mais celui-ci peut continuer à utiliser l'ancien format de sous-domaine. Vous pouvez aussi commander un nouveau cluster auquel le nouveau format de sous-domaine sera automatiquement affecté.
 
     La commande curl HTTP suivante utilise l'hôte `albhealth`, qui est configuré par {{site.data.keyword.containerlong_notm}} de sorte à renvoyer le statut `healthy` ou `unhealthy` pour une adresse IP d'ALB.
         ```
@@ -266,7 +266,7 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
 
     1. Veillez à définir un hôte dans une seule ressource Ingress. Si un hôte est défini dans plusieurs ressources Ingress, l'ALB risque de ne pas acheminer le trafic correctement et vous pourrez obtenir des erreurs.
 
-    2. Vérifiez que le sous-domaine et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine Ingress fournis par IBM, exécutez la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
+    2. Vérifiez que le sous-domaine et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine Ingress fournis par IBM, exécutez la commande  `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
 
     3.  Assurez-vous que votre application est en mode écoute sur le même chemin que celui qui est configuré dans la section **path** de votre ressource Ingress. Si votre application est configurée pour être en mode écoute à la racine, utilisez `/` comme chemin. Si le trafic entrant dans ce chemin doit être acheminé vers un autre chemin que celui où votre application est à l'écoute, utilisez l'annotation des [chemins de redirection (rewrite path)](/docs/containers?topic=containers-ingress_annotation#rewrite-path).
 

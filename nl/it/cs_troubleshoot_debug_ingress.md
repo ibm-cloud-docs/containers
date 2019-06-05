@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,7 +44,7 @@ Prima di iniziare, assicurati di disporre delle seguenti [politiche di accesso {
 
 ## Passo 1: Esegui i test Ingress nel {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 
-Mentre risolvi i problemi, puoi utilizzare il {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool per eseguire dei test Ingress e raccogliere informazioni Ingress pertinenti dal tuo cluster. Per utilizzare lo strumento di debug, installa il grafico Helm [`ibmcloud-iks-debug` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+Mentre risolvi i problemi, puoi utilizzare il {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool per eseguire dei test Ingress e raccogliere informazioni Ingress pertinenti dal tuo cluster. Per utilizzare lo strumento di debug, installa il grafico Helm [`ibmcloud-iks-debug` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
 {: shortdesc}
 
 
@@ -52,7 +52,7 @@ Mentre risolvi i problemi, puoi utilizzare il {{site.data.keyword.containerlong_
 
 2. Installa il grafico Helm nel tuo cluster.
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
@@ -316,7 +316,7 @@ Supponiamo ad esempio che hai un cluster multizona in 2 zone e 2 ALB pubblici ha
         ```
         {: pre}
 
-        Output di esempio che conferma che il pod ALB è configurato con il corretto nome host di controllo dell'integrità, ` albhealth.<domain>`:
+        Output di esempio che conferma che il pod ALB è configurato con il corretto nome host di controllo dell'integrità, `albhealth.<domain>`:
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```

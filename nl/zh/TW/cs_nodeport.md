@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# 使用 NodePort 公開應用程式
+# 使用 NodePort 測試對應用程式的存取
 {: #nodeport}
 
 使用 Kubernetes 叢集裡任何工作者節點的公用 IP 位址，並公開 NodePort，將容器化應用程式設為可在網際網路上進行存取。使用此選項，在 {{site.data.keyword.containerlong}} 進行測試，以及進行短期公用存取。
@@ -51,7 +51,7 @@ subcollection: containers
 
 4. 要求會轉遞至應用程式部署所在 Pod 的專用 IP 位址。如果叢集裡已部署多個應用程式實例，則 NodePort 服務會在應用程式 Pod 之間遞送要求。
 
-工作者節點的公用 IP 位址不是永久性的。移除或重建工作者節點時，會將新的公用 IP 位址指派給工作者節點。NodePort 服務可以用於測試應用程式的公用存取，也可以用於僅短時間需要公用存取時。當您需要服務有穩定的公用 IP 位址及更高可用性時，請使用 [LoadBalancer 服務](/docs/containers?topic=containers-loadbalancer)或 [Ingress](/docs/containers?topic=containers-ingress) 來公開應用程式。
+工作者節點的公用 IP 位址不是永久性的。移除或重建工作者節點時，會將新的公用 IP 位址指派給工作者節點。NodePort 服務可以用於測試應用程式的公用存取，也可以用於僅短時間需要公用存取時。當您需要服務有穩定的公用 IP 位址及更高可用性時，請使用[網路負載平衡器 (NLB) 服務](/docs/containers?topic=containers-loadbalancer)或 [Ingress](/docs/containers?topic=containers-ingress) 來公開應用程式。
 {: note}
 
 <br />
@@ -137,8 +137,8 @@ subcollection: containers
 
     ```
     ID                                                Public IP   Private IP    Size     State    Status
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u3c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u3c.2x4  normal   Ready
     ```
     {: screen}
 

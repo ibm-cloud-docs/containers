@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -71,7 +71,7 @@ Ci-dessous figurent les motifs pour lesquels les journaux de votre cluster peuve
   <tr>
     <td>Si vous avez spécifié un espace lors de la création du cluster, les droits d'accès Responsable, Développeur ou Auditeur n'ont pas été affectés au propriétaire du compte sur cet espace.</td>
       <td>Pour modifier les droits d'accès du propriétaire du compte :
-      <ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
+      <ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>ibmcloud ks api-key-info</code>.</li>
       <li>Pour attribuer au propriétaire du compte les droits d'accès Responsable, Développeur ou Auditeur dans {{site.data.keyword.containerlong_notm}} sur cet espace, voir <a href="/docs/containers?topic=containers-users">Gestion de l'accès au cluster</a>.</li>
       <li>Pour actualiser le jeton de journalisation après une modification des droits d'accès, exécutez la commande <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
@@ -84,7 +84,7 @@ Ci-dessous figurent les motifs pour lesquels les journaux de votre cluster peuve
 
 Pour tester les modifications apportées lors de la résolution des incidents, vous pouvez déployer l'exemple de pod *Noisy*, lequel génère plusieurs événements de journal sur un noeud worker dans votre cluster.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Créez le fichier de configuration `deploy-noisy.yaml`.
     ```
@@ -109,10 +109,10 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     {:pre}
 
 3. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.
-    - Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
-    - Sud du Royaume-Uni : https://logging.eu-gb.bluemix.net
-    - Europe centrale : https://logging.eu-fra.bluemix.net
-    - Asie-Pacifique sud : https://logging.au-syd.bluemix.net
+    - Sud et Est des Etats-Unis : `https://logging.ng.bluemix.net`
+    - Sud du Royaume-Uni : `https://logging.eu-gb.bluemix.net`
+    - Europe centrale : `https://logging.eu-fra.bluemix.net`
+    - Asie-Pacifique sud : `https://logging.au-syd.bluemix.net`
 
 <br />
 

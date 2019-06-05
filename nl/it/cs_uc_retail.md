@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -28,26 +28,26 @@ subcollection: containers
 {: #cs_uc_retail}
 
 Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong_notm}} possano
-sfruttare le analisi relative a conoscenze di mercato, distribuzioni multiregione in tutto il mondo e gestione degli inventari con {{site.data.keyword.messagehub_full}} e l'archiviazione oggetti.
+avvalersi delle analisi relative a conoscenze di mercato, distribuzioni multiregione in tutto il mondo e gestione degli inventari con {{site.data.keyword.messagehub_full}} e l'archiviazione oggetti.
 {: shortdesc}
 
-## Il rivenditore tradizionale condivide i dati, utilizzando le API con i partner globali per promuovere le vendite omnicanale
+## Il rivenditore tradizionale condivide i dati, utilizzando le API con i business partner globali per promuovere le vendite omnicanale
 {: #uc_data-share}
 
-Un responsabile della linea di business deve aumentare i canali di vendita, ma il sistema di vendita al dettaglio è isolato in un data center in loco. La competizione ha partner globali per la vendita incrociata e incrementale di combinazioni delle loro merci, attraverso siti fisici e online.
+Un responsabile della linea di business deve aumentare i canali di vendita, ma il sistema di vendita al dettaglio è isolato in un data center in loco. La competizione ha business partner globali per la vendita incrociata e incrementale di permutazioni delle loro merci, attraverso siti fisici e online.
 {: shortdesc}
 
-Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} fornisce un ecosistema di cloud pubblico, in cui i contenitori consentono a nuovi partner e altri partecipanti esterni di co-sviluppare applicazioni e dati, tramite le API. Ora che il sistema di vendita al dettaglio è sul cloud pubblico, le API semplificano anche la condivisione dei dati e lanciano il nuovo sviluppo di applicazioni. Le distribuzioni di applicazioni aumentano quando gli sviluppatori sperimentano facilmente, distribuendo rapidamente le modifiche ai sistemi di sviluppo e test con le toolchain.
+Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} fornisce un ecosistema di cloud pubblico, in cui i contenitori consentono a nuovi business partner e altri soggetti esterni di co-sviluppare applicazioni e dati, tramite le API. Ora che il sistema di vendita al dettaglio è sul cloud pubblico, le API semplificano anche la condivisione dei dati e lanciano il nuovo sviluppo di applicazioni. Le distribuzioni di applicazioni aumentano quando gli sviluppatori sperimentano facilmente, distribuendo rapidamente le modifiche ai sistemi di sviluppo e test con le toolchain.
 
 {{site.data.keyword.containerlong_notm}} e tecnologie chiave:
 * [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [{{site.data.keyword.cos_full}} per mantenere e sincronizzare i dati tra le applicazioni](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
-**Contesto: il rivenditore condivide i dati, utilizzando le API con i partner globali per promuovere le vendite omnicanale**
+**Contesto: il rivenditore condivide i dati, utilizzando le API con i business partner globali per promuovere le vendite omnicanale**
 
 * Il rivenditore si trova di fronte a forti pressioni competitive. In primo luogo, deve mascherare la complessità del passaggio a nuovi prodotti e nuovi canali. Ad esempio, deve espandere la sofisticazione del prodotto. Allo stesso tempo, i clienti devono riuscire a passare tra i vari marchi con facilità.
-* Questa capacità di passaggio tra i marchi significa che l'ecosistema di vendita al dettaglio richiede la connettività ai partner. Quindi, il cloud può portare nuovo valore da partner, clienti e altri partecipanti esterni.
+* Questa capacità di passaggio tra i marchi significa che l'ecosistema di vendita al dettaglio richiede la connettività ai business partner. Quindi, il cloud può portare nuovo valore da business partner, clienti e altri soggetti esterni.
 * Gli eventi utente lampo, come il Black Friday, mettono a dura prova i sistemi online esistenti, costringendo il rivenditore a sovraccaricare l'infrastruttura di calcolo.
 * Gli sviluppatori del rivenditore dovevano evolvere costantemente le applicazioni, ma gli strumenti tradizionali rallentavano la loro capacità di distribuire frequentemente aggiornamenti e funzioni, specialmente in caso di collaborazione con team di business partner.  
 
@@ -58,13 +58,13 @@ Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm
 Il rivenditore deve inoltre fornire ai clienti contenuti utili, come informazioni sui prodotti, informazioni sui prodotti alternativi, recensioni e visibilità dell'inventario in tempo reale. E i clienti vogliono tutto questo sia quando sono online che in negozio attraverso dispositivi mobili personali e dipendenti del negozio dotati di dispositivi mobili.
 
 La soluzione è composta da questi componenti principali:
-* INVENTARIO: applicazione per l'ecosistema di business partner che aggrega e comunica l'inventario, in particolare le introduzioni di nuovi prodotti, che include API per i partner da riutilizzare nelle proprie applicazioni di vendita al dettaglio e B2B
+* INVENTARIO: applicazione per l'ecosistema di business partner che aggrega e comunica l'inventario, in particolare le introduzioni di nuovi prodotti, che include API per i business partner da riutilizzare nelle proprie applicazioni di vendita al dettaglio e B2B
 * VENDITE INCROCIATE E INCREMENTALI: applicazione che rende visibili le opportunità di vendita incrociata e incrementale con le API che possono essere utilizzate in varie applicazioni di e-commerce e mobili
-* AMBIENTE DI SVILUPPO: i cluster Kubernetes per i sistemi di sviluppo, test e produzione aumentano la collaborazione e la condivisione dei dati tra il rivenditore e i suoi partner
+* AMBIENTE DI SVILUPPO: i cluster Kubernetes per i sistemi di sviluppo, test e produzione aumentano la collaborazione e la condivisione dei dati tra il rivenditore e i suoi business partner
 
-Affinché il rivenditore lavori con partner globali, le API di inventario hanno richiesto modifiche per adattarsi alle preferenze della lingua e del mercato di ciascuna regione. {{site.data.keyword.containerlong_notm}} offre copertura in più regioni, tra cui Nord America, Europa, Asia e Australia, in modo che le API riflettano le esigenze di ogni paese e garantiscano una bassa latenza per le chiamate API.
+Affinché il rivenditore lavori con business partner globali, le API di inventario hanno richiesto modifiche per adattarsi alle preferenze della lingua e del mercato di ciascuna regione. {{site.data.keyword.containerlong_notm}} offre copertura in più regioni, tra cui Nord America, Europa, Asia e Australia, in modo che le API riflettano le esigenze di ogni paese e garantiscano una bassa latenza per le chiamate API.
 
-Un altro requisito è che i dati di inventario siano condivisibili con i clienti dei partner e delle società. Con le API di inventario, gli sviluppatori possono fornire informazioni nelle applicazioni, ad esempio applicazioni di inventario per dispositivi mobili o soluzioni di e-commerce web. Gli sviluppatori sono anche impegnati nella creazione e manutenzione del sito di e-commerce principale. In sintesi, devono concentrarsi sulla codifica anziché sulla gestione dell'infrastruttura.
+Un altro requisito è che i dati di inventario siano condivisibili con i clienti dei business partner e della società. Con le API di inventario, gli sviluppatori possono fornire informazioni nelle applicazioni, ad esempio applicazioni di inventario per dispositivi mobili o soluzioni di e-commerce web. Gli sviluppatori sono anche impegnati nella creazione e manutenzione del sito di e-commerce principale. In sintesi, devono concentrarsi sulla codifica anziché sulla gestione dell'infrastruttura.
 
 Pertanto, hanno scelto {{site.data.keyword.containerlong_notm}} perché IBM semplifica la gestione dell'infrastruttura:
 * Gestione di master Kubernetes, IaaS e componenti operativi, come Ingress e archiviazione
@@ -73,7 +73,7 @@ Pertanto, hanno scelto {{site.data.keyword.containerlong_notm}} perché IBM semp
 
 Inoltre, la registrazione e il monitoraggio per i microservizi API, in particolare il modo in cui estraggono i dati personalizzati dai sistemi di back-end, si integrano facilmente con {{site.data.keyword.containerlong_notm}}. Gli sviluppatori non sprecano tempo a creare sistemi di registrazione complessi, solo per essere in grado di risolvere i problemi dei sistemi attivi.
 
-{{site.data.keyword.messagehub_full}} funge da piattaforma di eventi just-in-time per trasmettere le informazioni in rapida evoluzione dai sistemi di inventario dei partner a {{site.data.keyword.cos_full}}.
+{{site.data.keyword.messagehub_full}} funge da piattaforma di eventi just-in-time per trasmettere le informazioni in rapida evoluzione dai sistemi di inventario dei business partner a {{site.data.keyword.cos_full}}.
 
 **Modello di soluzione**
 
@@ -103,18 +103,18 @@ Soluzione tecnica:
 * Dopo che gli utenti hanno eseguito l'accesso, puoi utilizzare {{site.data.keyword.appid_short_notm}} per creare dei profili e personalizzare l'esperienza di un utente della tua applicazione.
 
 **Passo 4: condividi i dati**
-* {{site.data.keyword.cos_full}} con {{site.data.keyword.messagehub_full}} fornisce l'archiviazione di dati cronologici e in tempo reale, in modo che le offerte di vendita incrociata rappresentino l'inventario disponibile dei partner.
-* Le API consentono ai partner del rivenditore di condividere i dati nelle loro applicazioni di e-commerce e B2B.
+* {{site.data.keyword.cos_full}} con {{site.data.keyword.messagehub_full}} fornisce l'archiviazione di dati cronologici e in tempo reale, in modo che le offerte di vendita incrociata rappresentino l'inventario disponibile dei business partner.
+* Le API consentono ai business partner del rivenditore di condividere i dati nelle loro applicazioni di e-commerce e B2B.
 
 **Passo 5: consegna in modo continuo**
 * Il debug delle API co-sviluppate diventa più semplice quando si aggiungono agli strumenti di IBM Cloud Logging and Monitoring, quelli basati su cloud accessibili ai vari sviluppatori.
 * {{site.data.keyword.contdelivery_full}} aiuta gli sviluppatori a fornire rapidamente una toolchain integrata utilizzando template personalizzabili e condivisibili con gli strumenti di IBM, terze parti e open source. Automatizza i processi di build e di test, controllando la qualità con l'analisi.
 * Dopo che gli sviluppatori hanno creato e testato le applicazioni nei propri cluster di sviluppo e test, utilizzano le toolchain di integrazione e fornitura continua (CI e CD) per distribuire le applicazioni nei cluster in tutto il mondo.
-* {{site.data.keyword.containerlong_notm}} fornisce un facile roll-out e roll-back delle applicazioni; applicazioni personalizzate vengono distribuite nelle campagne di test attraverso l'instradamento e il bilanciamento del carico intelligente di Istio.
+* {{site.data.keyword.containerlong_notm}} fornisce un facile roll-out e roll-back delle applicazioni; le applicazioni personalizzate vengono distribuite nelle campagne di test attraverso l'instradamento e il bilanciamento del carico intelligenti di Istio.
 
 **Risultati**
 * I microservizi riducono notevolmente i tempi di consegna di patch, correzioni di bug e nuove funzioni. Lo sviluppo iniziale in tutto il mondo è veloce e gli aggiornamenti sono frequenti 40 volte a settimana.
-* Il rivenditore e i suoi partner hanno accesso immediato alla disponibilità di inventario e alle pianificazioni di consegna, utilizzando le API.
+* Il rivenditore e i suoi business partner hanno accesso immediato alla disponibilità di inventario e alle pianificazioni di consegna, utilizzando le API.
 * Con {{site.data.keyword.containerlong_notm}} e gli strumenti CI e CD di IBM, le versioni A-B delle applicazioni sono pronte per le campagne di test.
 * {{site.data.keyword.containerlong_notm}} fornisce calcoli scalabili, in modo che i carichi di lavoro delle API di inventario e vendite incrociate possano aumentare durante i periodi di volume elevato dell'anno, come le festività autunnali.
 
@@ -141,7 +141,7 @@ Tecnologie chiave:
 
 **Soluzione**
 
-Il negoziante ha bisogno di un'applicazione per aumentare la conversione e il traffico in negozio per generare nuove vendite e fidelizzare i clienti in una piattaforma di analisi cloud riutilizzabile. L'esperienza mirata nel negozio può essere un evento insieme a un fornitore di servizi o prodotti che attrae sia i vecchi che i nuovi clienti in base all'affinità con l'evento specifico. Il negozio e il business partner offrono quindi incentivi per partecipare all'evento e acquistare prodotti dal negozio o dal partner.  
+Il negoziante ha bisogno di un'applicazione per aumentare la conversione e il traffico in negozio per generare nuove vendite e fidelizzare i clienti in una piattaforma di analisi cloud riutilizzabile. L'esperienza mirata nel negozio può essere un evento insieme a un fornitore di servizi o prodotti che attrae sia i vecchi che i nuovi clienti in base all'affinità con l'evento specifico. Il negozio e il business partner offrono quindi incentivi per partecipare all'evento e acquistare prodotti dal negozio o dal business partner.  
 
 Dopo l'evento, i clienti vengono seguiti nell'acquisto dei prodotti necessari, in modo che in futuro possano ripetere da soli l'attività dimostrata. L'esperienza mirata al cliente viene misurata con la riscossione degli incentivi e le nuove registrazioni del cliente fidelizzato. La combinazione di un evento di marketing iper-personalizzato e uno strumento per tracciare gli acquisti in negozio può portare l'esperienza mirata fino all'acquisto del prodotto. Tutte queste azioni danno luogo a traffico e conversioni maggiori.
 

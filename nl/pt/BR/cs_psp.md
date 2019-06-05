@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -28,22 +28,22 @@ subcollection: containers
 Com as [ políticas de segurança de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), é possível
 configurar políticas para autorizar quem pode criar e atualizar os pods no {{site.data.keyword.containerlong}}.
 
-**Por que eu configuro políticas de segurança de pod?**</br>
+**Por que configuro políticas de segurança de pod?**</br>
 Como um administrador de cluster, você deseja controlar o que acontece em seu cluster, especialmente as ações que afetam a segurança ou a prontidão do cluster. As políticas de segurança de pod podem ajudá-lo a controlar o uso de contêineres privilegiados, namespaces de raiz, rede e portas do host, tipos de volume, sistemas de arquivos host, permissões do Linux como somente leitura ou IDs de grupo, etc.
 
-Com o controlador de admissão `PodSecurityPolicy`, nenhum pod pode ser criado até que você [autorize as políticas](#customize_psp). A configuração de políticas de segurança de pod pode ter efeitos colaterais indesejados, portanto, certifique-se de testar uma implementação depois de mudar a política. Para implementar apps, as contas de usuário e de serviço devem ser todas autorizadas pelas políticas de segurança de pod que são necessárias para implementar pods. Por exemplo, se você instala apps usando [Helm](/docs/containers?topic=containers-integrations#helm_links), o componente Helm tiller cria os pods e, portanto, deve-se ter a autorização de política de segurança de pod correta.
+Com o controlador de admissão `PodSecurityPolicy`, nenhum pod pode ser criado até que você [autorize as políticas](#customize_psp). A configuração de políticas de segurança de pod pode ter efeitos colaterais indesejados, portanto, certifique-se de testar uma implementação depois de mudar a política. Para implementar apps, as contas de usuário e de serviço devem ser todas autorizadas pelas políticas de segurança de pod que são necessárias para implementar pods. Por exemplo, se você instala apps usando [Helm](/docs/containers?topic=containers-helm#public_helm_install), o componente Helm tiller cria os pods e, portanto, deve-se ter a autorização de política de segurança de pod correta.
 
 Tentando controlar quais usuários têm acesso ao {{site.data.keyword.containerlong_notm}}? Consulte [Designando acesso ao cluster](/docs/containers?topic=containers-users#users) para configurar as permissões do {{site.data.keyword.Bluemix_notm}} IAM e de infraestrutura.
 {: tip}
 
-** Há alguma política definida por padrão? O que posso incluir? **</br>
+** Há alguma política definida por padrão? O que posso incluir?**</br>
 Por padrão, o {{site.data.keyword.containerlong_notm}} configura o controlador de admissão `PodSecurityPolicy` com [recursos para o gerenciamento de cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) que não é possível excluir ou modificar. Também não é possível desativar o controlador de admissão.
 
 As ações de pod não são bloqueadas por padrão. Em vez disso, dois recursos de controle de acesso baseado em função (RBAC) no cluster autorizam todos os administradores, usuários, serviços e nós para criar pods privilegiados e não privilegiados. Os recursos RBAC adicionais são incluídos para portabilidade com pacotes do {{site.data.keyword.Bluemix_notm}} Private que são usados para [implementações híbridas](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
 
 Se você deseja evitar que determinados usuários criem ou atualizem pods, é possível [modificar esses recursos RBAC ou criar o seu próprio](#customize_psp).
 
-** Como a autorização de política funciona? **</br>
+**Como a autorização de política funciona?**</br>
 Quando você, como um usuário, cria um pod diretamente e não usando um controlador como uma implementação, suas credenciais são validadas com relação às políticas de segurança de pod que você está autorizado a usar. Se nenhuma política suportar os requisitos de segurança de pod, o pod não será criado.
 
 Ao criar um pod usando um controlador de recurso, como uma implementação, o Kubernetes valida as credenciais de conta do serviço do pod com relação às políticas de segurança de pod que a conta do serviço está autorizada a usar. Se nenhuma política suportar os requisitos de segurança de pod, o controlador será bem-sucedido, mas o pod não será criado.
@@ -56,7 +56,7 @@ Para mensagens de erro comum, consulte [Os pods falham ao serem implementados de
 Para evitar ações de pod desautorizadas, é possível modificar os recursos de política de segurança de pod existentes ou criar o seu próprio. Deve-se ser um administrador de cluster para customizar políticas.
 {: shortdesc}
 
-** Quais políticas existentes eu posso modificar? **</br>
+**Quais políticas existentes posso modificar?**</br>
 Por padrão, seu cluster contém os recursos RBAC a seguir que permitem que os administradores
 de cluster, usuários autenticados, contas de serviço e nós usem as
 políticas de segurança de pod `ibm-privileged-psp` e `ibm-restricted-psp`. Essas
@@ -72,7 +72,7 @@ políticas permitem que os usuários criem e atualizem os pods privilegiados e n
 
 Antes de iniciar:
 *  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-*  Entender trabalhar com funções RBAC. Para obter mais informações, consulte [Autorizando usuários com funções customizadas de RBAC do Kubernetes](/docs/containers?topic=containers-users#rbac) ou a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
+*  Entender trabalhar com funções RBAC. Para obter mais informações, consulte [Autorizando usuários com funções RBAC customizadas do Kubernetes](/docs/containers?topic=containers-users#rbac) ou a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 * Assegure-se de que você tenha a [função de acesso de serviço do **Manager** {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para todos os namespaces.
 
 Quando você modifica a configuração padrão, é possível evitar ações de cluster importantes, como implementações de pod ou atualizações de cluster. Teste suas mudanças em um cluster não de produção do qual as outras equipes não dependem.
@@ -181,7 +181,7 @@ Quando você modifica a configuração padrão, é possível evitar ações de c
     {: pre}
 
 </br>
-**Para criar a sua própria política de segurança de pod**:</br>
+**Para criar sua própria política de segurança de pod**:</br>
 Para criar seu próprio recurso de política de segurança de pod e autorizar usuários com RBAC, revise a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
 
 Certifique-se de ter modificado as políticas existentes de modo que a nova política que você criar não entre em conflito com a política existente. Por exemplo, a política existente permite que os usuários criem e atualizem pods privilegiados. Se você criar uma política que não permita que os usuários criem ou atualizem pods privilegiados, o conflito entre a política nova e a existente poderá causar resultados inesperados.

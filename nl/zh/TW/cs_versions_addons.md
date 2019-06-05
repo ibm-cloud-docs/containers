@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -55,8 +55,14 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
+<td>411 / 315</td>
+<td>2019 年 4 月 15 日</td>
+<td>更新 {{site.data.keyword.appid_full}} Cookie 有效期限的值，讓它符合存取記號有效期限的值。</td>
+<td>-</td>
+</tr>
+<tr>
 <td>411 / 306</td>
-<td>2019 年 3 月 21 日</td>
+<td>2019 年 3 月 22 日</td>
 <td>將 Go 版本更新為 1.12.1。</td>
 <td>-</td>
 </tr>
@@ -65,7 +71,7 @@ subcollection: containers
 <td>2019 年 3 月 18 日</td>
 <td><ul>
 <li>修正映像檔掃描的漏洞。</li>
-<li>改善 {{site.data.keyword.appid_full}} 的記載。</li>
+<li>改善 {{site.data.keyword.appid_full_notm}} 的記載。</li>
 </ul></td>
 <td>-</td>
 </tr>
@@ -101,7 +107,7 @@ subcollection: containers
 <li>更新 {{site.data.keyword.appid_short_notm}} 位置指引，以便 `app-id` 註釋可以與 `proxy-buffers`、`proxy-buffer-size` 及 `proxy-busy-buffer-size` 註釋一起使用。</li>
 <li>修正錯誤，讓參考資訊日誌不會被標示為錯誤。</li>
 </ul></td>
-<td>依預設，停用 TLS 1.0 及 1.1。如果連接至您應用程式的用戶端支援 TLS 1.2，則不需要採取任何動作。如果您仍然有需要 TLS 1.0 或 1.1 支援的舊版用戶端，請遵循[下列步驟](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers)，手動啟用所需的 TLS 版本。如需如何查看您用戶端使用哪個 TLS 版本來存取您應用程式的相關資訊，請參閱此 [{{site.data.keyword.Bluemix_notm}} 部落格文章](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/)。</td>
+<td>依預設，停用 TLS 1.0 及 1.1。如果連接至應用程式的用戶端支援 TLS 1.2，則不需要執行任何動作。如果您仍然有需要 TLS 1.0 或 1.1 支援的舊版用戶端，請遵循[下列步驟](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers)，手動啟用所需的 TLS 版本。如需如何查看您用戶端使用哪個 TLS 版本來存取您應用程式的相關資訊，請參閱此 [{{site.data.keyword.Bluemix_notm}} 部落格文章](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/)。</td>
 </tr>
 <tr>
 <td>393 / 291</td>

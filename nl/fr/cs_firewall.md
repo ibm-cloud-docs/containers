@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,9 @@ Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des port
 * [Pour exécuter des commandes `calicoctl`](#firewall_calicoctl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux de l'Internet public via des proxys ou des pare-feux.
 * [Pour autoriser la communication entre le maître Kubernetes et les noeuds worker ](#firewall_outbound)lorsqu'un pare-feu a été mis en place pour les noeuds worker ou que les paramètres du pare-feu ont été personnalisés dans votre compte d'infrastructure IBM Cloud (SoftLayer).
 * [Pour autoriser le cluster à accéder aux ressources via un pare-feu sur le réseau privé](#firewall_private).
+* [Pour autoriser le cluster à accéder aux ressources lorsque les politiques de réseau Calico bloquent la sortie du noeud worker](#firewall_calico_egress).
 * [Pour accéder au service NodePort, au service d'équilibreur de charge ou au service Ingress de l'extérieur du cluster](#firewall_inbound).
+* [Pour autoriser le cluster à accéder aux services qui s'exécutent en interne ou en externe dans {{site.data.keyword.Bluemix_notm}} ou sur site, et qui sont protégés par un pare-feu](#whitelist_workers).
 
 <br />
 
@@ -98,13 +100,6 @@ Pour autoriser l'accès à un cluster spécifique :
 2. Si le cluster se trouve dans un autre groupe de ressources que `default`, ciblez ce groupe de ressources. Pour voir à quel groupe de ressources appartient chaque cluster, exécutez la commande `ibmcloud ks clusters`. **Remarque** : vous devez au moins disposer du [rôle **Afficheur**](/docs/containers?topic=containers-users#platform) pour le groupe de ressources.
    ```
    ibmcloud target -g <resource_group_name>
-   ```
-   {: pre}
-
-3. Sélectionnez la région où réside votre cluster.
-
-   ```
-   ibmcloud ks region-set
    ```
    {: pre}
 
@@ -219,10 +214,10 @@ Avant de commencer, autorisez l'accès pour exécuter des commandes [`ibmcloud`]
 <br />
 
 
-## Autorisation au cluster d'accéder aux ressources de l'infrastructure et à d'autres services
+## Autorisation accordée au cluster d'accéder aux ressources de l'infrastructure et à d'autres services via un pare-feu public
 {: #firewall_outbound}
 
-Autorisez votre cluster à accéder aux services et aux ressources d'infrastructure derrière un pare-feu, par exemple pour les régions {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, les adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) et la sortie (egress) des réservations de volume persistant.
+Autorisez votre cluster à accéder aux services et aux ressources d'infrastructure derrière un pare-feu public, par exemple pour les régions {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, les adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) et la sortie (egress) des réservations de volume persistant.
 {:shortdesc}
 
 Selon la configuration de votre cluster, vous accédez aux services en utilisant des adresses IP publiques, des adresses IP privées ou ces deux types d'adresse IP. Si vous disposez d'un cluster avec des noeuds worker figurant à la fois sur des VLAN public et privé derrière un pare-feu pour ces deux types de réseau, vous devez ouvrir la connexion pour les adresses IP publiques et privées. Si votre cluster comprend des noeuds worker uniquement sur le VLAN privé derrière un pare-feu, vous pouvez ouvrir la connexion uniquement aux adresses IP privées.
@@ -378,7 +373,7 @@ Selon la configuration de votre cluster, vous accédez aux services en utilisant
           <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
-
+         
         </tbody>
       </table>
 </p>
@@ -421,7 +416,7 @@ Selon la configuration de votre cluster, vous accédez aux services en utilisant
 </p>
     *   **{{site.data.keyword.la_full_notm}}**:
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
-        Remplacez `<logDNA_public_IP>` par les [adresses IP LogDNA](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network).
+        Remplacez `<logDNA_public_IP>` par les [adresses IP de LogDNA](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network).
 
 5. Si vous utilisez des services d'équilibreur de charge, vérifiez que tout le trafic utilisant le protocole VRRP est autorisé entre les noeuds worker sur les interfaces publiques et privées. {{site.data.keyword.containerlong_notm}} utilise le protocole VRRP pour gérer les adresses IP des équilibreurs de charge publics et privés.
 
@@ -435,7 +430,7 @@ Selon la configuration de votre cluster, vous accédez aux services en utilisant
    <tbody>
      <tr>
        <td>Stockage de fichiers</td>
-       <td>Version Kubernetes <code>1.13.4_1512</code>, <code>1.12.6_1543</code>, <code>1.11.8_1549</code>, <code>1.10.13_1550</code> ou ultérieure</td>
+       <td>Version Kubernetes <code>1.13.4_1512</code>, <code>1.12.6_1544</code>, <code>1.11.8_1550</code>, <code>1.10.13_1551</code> ou ultérieure</td>
      </tr>
      <tr>
        <td>Stockage par blocs</td>
@@ -456,7 +451,7 @@ Selon la configuration de votre cluster, vous accédez aux services en utilisant
 <br />
 
 
-## Autorisation au cluster d'accéder aux ressources via un pare-feu privé
+## Autorisation accordée au cluster d'accéder aux ressources via un pare-feu privé
 {: #firewall_private}
 
 Si vous disposez d'un pare-feu sur le réseau privé, autorisez la communication entre les noeuds worker et laissez votre cluster accéder aux ressources de l'infrastructure via le réseau privé.
@@ -477,10 +472,80 @@ Si vous disposez d'un pare-feu sur le réseau privé, autorisez la communication
     - Autorisez les connexions TCP et UDP entrantes sur le port 10250 pour le tableau de bord Kubernetes et les commandes telles que `kubectl logs` et `kubectl exec`.
     - Autorisez les connexions TCP et UDP entrantes et sortantes sur le port 53 pour l'accès DNS.
 
-4. Si vous disposez également d'un pare-feu sur le réseau public, ou d'un cluster avec uniquement un VLAN privé et que vous utilisez un dispositif de passerelle comme pare-feu, vous devez également autoriser les adresses IP et les ports spécifiés dans [Autorisation au cluster d'accéder aux ressources de l'infrastructure et à d'autres services](#firewall_outbound).
+4. Si vous disposez également d'un pare-feu sur le réseau public, ou d'un cluster avec uniquement un VLAN privé et que vous utilisez un dispositif de passerelle comme pare-feu, vous devez également autoriser les adresses IP et les ports spécifiés dans [Autorisation accordée au cluster d'accéder aux ressources de l'infrastructure et à d'autres services](#firewall_outbound).
 
 <br />
 
+
+## Autorisation accordée au cluster d'accéder aux ressources via des politiques sortantes Calico
+{: #firewall_calico_egress}
+
+Si vous utilisez des [politiques de réseau Calico](/docs/containers?topic=containers-network_policies) qui agissent en tant que pare-feu pour limiter toutes les sorties de noeud worker publiques, vous devez autoriser vos noeuds worker à accéder aux proxy locaux pour le serveur d'API maître et etcd.
+{: shortdesc}
+
+1. [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluez les options `--admin` et `--network` avec la commande `ibmcloud ks cluster-config`. L'option `--admin` permet de télécharger les clés pour accéder à votre portefeuille d'infrastructure et exécuter des commandes Calico sur vos noeuds worker. L'option `--network` permet de télécharger le fichier de configuration pour exécuter toutes les commandes Calico.
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+2. Créez une politique de réseau Calico qui autorise le trafic public à partir de votre cluster vers 172.20.0.1:2040 et 172.21.0.1:443 pour le proxy local de serveur d'API, et 172.20.0.1:2041 pour le proxy local etcd. 
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: allow-master-local
+  spec:
+    egress:
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: TCP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: TCP
+    order: 1500
+    selector: ibm.role == 'worker_public'
+    types:
+    - Egress
+  ```
+  {: codeblock}
+
+3. Appliquez la politique au cluster.
+    - Linux et OS X :
+
+      ```
+      calicoctl apply -f allow-master-local.yaml
+      ```
+      {: pre}
+
+    - Windows :
+
+      ```
+      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 ## Accès au service NodePort, au service d'équilibreur de charge et au service Ingress de l'extérieur du cluster
 {: #firewall_inbound}
@@ -506,7 +571,7 @@ Vous pouvez autoriser l'accès entrant au service NodePort, au service d'équili
 Si vous voulez accéder aux services qui s'exécutent en interne ou en externe dans {{site.data.keyword.Bluemix_notm}} ou sur site, et qui sont protégés par un pare-feu, vous pouvez ajouter les adresses IP de vos noeuds worker dans ce pare-feu pour autoriser le trafic réseau sortant vers votre cluster. Par exemple, vous envisagerez peut-être de lire des données dans une base de données {{site.data.keyword.Bluemix_notm}} qui est protégée par un pare-feu, ou de mettre les sous-réseaux de vos noeuds worker sur liste blanche dans un pare-feu local pour autoriser le trafic réseau provenant de votre cluster.
 {:shortdesc}
 
-1.  [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+1.  [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. Obtenez les sous-réseaux ou les adresses IP des noeuds worker.
   * **Sous-réseaux de noeuds worker** : si vous prévoyez de changer fréquemment le nombre de noeuds worker dans votre cluster, par exemple si vous activez le [programme de mise à l'échelle automatique de cluster (cluster autoscaler)](/docs/containers?topic=containers-ca#ca), vous souhaiterez sans doute éviter d'avoir à mettre à jour votre pare-feu pour chaque nouveau noeud worker. Vous pouvez à la place mettre sur liste blanche les sous-réseaux de VLAN utilisés par le cluster. N'oubliez pas qu'un sous-réseau de VLAN peut être partagé par des noeuds worker dans d'autres clusters.
@@ -519,11 +584,11 @@ Si vous voulez accéder aux services qui s'exécutent en interne ou en externe d
 
     2. Dans la sortie de l'étape précédente, notez les ID de réseau uniques (les 3 premiers octets) de l'**adresse IP publique** des noeuds worker dans votre cluster.<staging> Si vous souhaitez mettre sur liste blanche un cluster privé uniquement, notez l'**adresse IP privée** à la place.<staging> Dans la sortie suivante, les ID de réseau uniques sont `169.xx.178` et `169.xx.210`.
         ```
-        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
+        ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
         ```
         {: screen}
     3.  Répertoriez les sous-réseaux de VLAN correspondant à chaque ID de réseau unique.
@@ -535,8 +600,8 @@ Si vous voulez accéder aux services qui s'exécutent en interne ou en externe d
         Exemple de sortie :
         ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
-        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5
-        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6
+        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   
+        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
     4.  Récupérez l'adresse du sous-réseau. Dans la sortie, recherchez le nombre d'adresses **IP**. Puis, augmentez la puissance `2` à un nombre `n` égal au nombre d'adresses IP. Par exemple, si le nombre d'adresses IP est `16`, `2` est augmenté à la puissance `4` (`n`) pour obtenir `16`. Obtenez ensuite le CIDR du sous-réseau en soustrayant la valeur `n` de `32` bits. Par exemple, lorsque le nombre `n` est égal à `4`, le CIDR correspond à `28` (d'après l'équation `32 - 4 = 28`). Combinez le masque **identifier** avec la valeur de CIDR pour obtenir l'adresse complète du sous-réseau. Dans la sortie précédente, les adresses de sous-réseau sont :

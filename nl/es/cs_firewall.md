@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,9 @@ Revise estas situaciones en las que puede tener que abrir puertos específicos y
 * [Para ejecutar mandatos `calicoctl`](#firewall_calicoctl) desde el sistema local cuando las políticas de red corporativas impiden el acceso a los puntos finales de internet pública mediante proxies o cortafuegos.
 * [Para permitir la comunicación entre el maestro de Kubernetes y los nodos trabajadores](#firewall_outbound) cuando hay un cortafuegos configurado para los nodos trabajadores o los valores del cortafuegos están personalizados en su cuenta de infraestructura de IBM Cloud (SoftLayer).
 * [Para permitir que el clúster acceda a los recursos a través de un cortafuegos en la red privada](#firewall_private).
+* [Para permitir que el clúster acceda a los recursos cuando las políticas de red de Calico bloque la salida del nodo trabajador](#firewall_calico_egress).
 * [Para acceder al servicio NodePort, equilibrador de carga o Ingress desde fuera del clúster](#firewall_inbound).
+* [Para permitir al clúster acceder a servicios que se ejecutan dentro o fuera de {{site.data.keyword.Bluemix_notm}} o que son locales y están protegidos por un cortafuegos](#whitelist_workers).
 
 <br />
 
@@ -99,13 +101,6 @@ sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Si
 2. Si el clúster está en un grupo de recursos distinto de `default`, elija como destino dicho grupo de recursos. Para ver el grupo de recursos al que pertenece cada clúster, ejecute `ibmcloud ks clusters`. **Nota**: Debe tener al menos el [rol de **Visor**](/docs/containers?topic=containers-users#platform) sobre el grupo de recursos.
    ```
    ibmcloud target -g <resource_group_name>
-   ```
-   {: pre}
-
-3. Seleccione la región en la que está el clúster.
-
-   ```
-   ibmcloud ks region-set
    ```
    {: pre}
 
@@ -220,10 +215,10 @@ Antes de empezar, permita el acceso para ejecutar mandatos [`ibmcloud`](#firewal
 <br />
 
 
-## Cómo permitir al clúster acceder a recursos de infraestructura y otros servicios
+## Cómo permitir al clúster acceder a recursos de infraestructura y otros servicios a través de un cortafuegos público
 {: #firewall_outbound}
 
-Permita que el clúster acceda a servicios y recursos de infraestructura desde detrás de un cortafuegos, como por ejemplo para las regiones de {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IP privadas de infraestructura de IBM Cloud (SoftLayer) y de salida para reclamaciones de volumen persistente.
+Permita que el clúster acceda a servicios y recursos de infraestructura desde detrás de un cortafuegos público, como por ejemplo para las regiones de {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IP privadas de infraestructura de IBM Cloud (SoftLayer) y de salida para reclamaciones de volumen persistente.
 {:shortdesc}
 
 En función de la configuración del clúster, puede acceder a los servicios utilizando las direcciones IP públicas, privadas o ambas direcciones IP. Si tiene un clúster con nodos trabajadores en las VLAN públicas y privadas detrás de un cortafuegos para redes tanto públicas como privadas, debe abrir la conexión para direcciones IP públicas y privadas. Si el clúster solo tiene nodos trabajadores en la VLAN privada detrás de un cortafuegos, puede abrir la conexión solo a las direcciones IP privadas.
@@ -380,7 +375,7 @@ En función de la configuración del clúster, puede acceder a los servicios uti
           <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
-
+         
         </tbody>
       </table>
 </p>
@@ -437,7 +432,7 @@ En función de la configuración del clúster, puede acceder a los servicios uti
    <tbody>
      <tr>
        <td>Almacenamiento de archivos</td>
-       <td>Versión de Kubernetes <code>1.13.4_1512</code>, <code>1.12.6_1543</code>, <code>1.11.8_1549</code>, <code>1.10.13_1550</code> o posteriores</td>
+       <td>Kubernetes versión <code>1.13.4_1512</code>, <code>1.12.6_1544</code>, <code>1.11.8_1550</code>, <code>1.10.13_1551</code> o posterior</td>
      </tr>
      <tr>
        <td>Almacenamiento en bloque</td>
@@ -484,6 +479,77 @@ Si tiene un cortafuegos en la red privada, permita la comunicación entre los no
 <br />
 
 
+## Cómo permitir que el clúster acceda a recursos a través de políticas de salida de Calico
+{: #firewall_calico_egress}
+
+Si utiliza [Políticas de red de Calico](/docs/containers?topic=containers-network_policies) para actuar como un cortafuegos para restringir cualquier salida de trabajador pública, debe permitir a los trabajadores acceder a los proxies locales del servidor de API maestro y de etcd.
+{: shortdesc}
+
+1. [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
+con el mandato `ibmcloud ks cluster-config`. `--admin` descarga las claves para acceder a su portafolio de infraestructura y ejecutar mandatos de Calico en los nodos trabajadores. `--network` descarga el archivo de configuración de Calico para ejecutar todos los mandatos de Calico.
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+2. Cree una política de red Calico que permita el tráfico público de su clúster a 172.20.0.1:2040 y 172.21.0.1:443 para el proxy local del servidor de API, y 172.20.0.1:2041 para el proxy local etcd.
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: allow-master-local
+  spec:
+    egress:
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: TCP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: TCP
+    order: 1500
+    selector: ibm.role == 'worker_public'
+    types:
+    - Egress
+  ```
+  {: codeblock}
+
+3. Aplique la política al clúster.
+    - Linux y OS X:
+
+      ```
+      calicoctl apply -f allow-master-local.yaml
+      ```
+      {: pre}
+
+    - Windows:
+
+      ```
+      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
 ## Acceso a servicios NodePort, de equilibrador de carga e Ingress desde fuera del clúster
 {: #firewall_inbound}
 
@@ -508,7 +574,7 @@ Puede permitir el acceso a servicios NodePort, de equilibrador de carga e Ingres
 Si desea acceder a servicios que se ejecutan dentro o fuera de {{site.data.keyword.Bluemix_notm}} o que son locales y que están protegidos por un cortafuegos, puede añadir las direcciones IP de los nodos trabajadores en dicho cortafuegos para permitir el tráfico de red de salida dirigido al clúster. Por ejemplo, es posible que desee leer datos de una base de datos de {{site.data.keyword.Bluemix_notm}} que esté protegida por un cortafuegos o colocar sus subredes de nodos trabajadores en la lista blanca de un cortafuegos local para permitir el tráfico de red procedente del clúster.
 {:shortdesc}
 
-1.  [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+1.  [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. Obtenga las subredes de nodos trabajadores o las direcciones IP de los nodos trabajadores.
   * **Subredes de nodos trabajadores**: Si tiene previsto cambiar el número de nodos trabajadores del clúster con frecuencia, por ejemplo si habilita el [programa de escalado automático de clústeres](/docs/containers?topic=containers-ca#ca), es posible que no desee actualizar el cortafuegos para cada nuevo nodo trabajador. Puede, en su lugar, colocar las subredes de VLAN que utiliza el clúster en la lista blanca. Tenga en cuenta que es posible que la subred de VLAN se comparta con nodos trabajadores de otros clústeres.
@@ -522,11 +588,11 @@ Si desea acceder a servicios que se ejecutan dentro o fuera de {{site.data.keywo
     2. En la salida del paso anterior, anote todos los ID de red exclusivos (primeros 3 octetos) de la **IP pública** para los nodos trabajadores del clúster. <staging> Si desea colocar en la lista blanca un clúster solo privado, anote la **IP privada** en su lugar.<staging> En la salida siguiente, los ID de red exclusivos son `169.xx.178`
 y `169.xx.210`.
         ```
-        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
+        ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
         ```
         {: screen}
     3.  Obtenga una lista de las subredes VLAN para cada ID de red exclusivo.
@@ -538,14 +604,14 @@ y `169.xx.210`.
         Salida de ejemplo:
         ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
-        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5
-        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6
+        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   
+        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
     4.  Recupere la dirección de subred. En la salida, busque el número de **IP**. Luego eleve `2` a la `n` potencia, igual al número de IP. Por ejemplo, si el número de IP es `16`, se eleva `2` a la `4` potencia (`n`), lo que es igual a `16`. A continuación, obtenga el CIDR de la subred restando el valor de `n` de `32` bits. Por ejemplo, si `n` es igual a `4`, el CIDR es `28` (resultado de la ecuación `32 - 4 = 28`). Combine la máscara **identifier** con el valor de CIDR para obtener la dirección completa de la subred. En la salida anterior, las direcciones de subred son las siguientes:
         *   `169.xx.210.xxx/28`
         *   `169.xx.178.xxx/28`
-  * **Direcciones IP de nodos trabajadores individuales**: Si tiene un pequeño número de nodos de trabajador que solo ejecutan una app y no necesitan escalarse, o si solo desea colocar en la lista blanca un nodo trabajador, obtenga una lista de todos los nodos trabajadores del clúster y anote las direcciones **IP públicas**. Si los nodos trabajadores solo están conectados a una red privada y desea conectarse a servicios de {{site.data.keyword.Bluemix_notm}} utilizando el punto final de servicio privado, anote en su lugar las direcciones **IP privadas**. Tenga en cuenta que solo estos nodos trabajadores se colocan en la lista blanca. Si suprime nodos trabajadores o añade nodos trabajadores al clúster, debe actualizar el cortafuegos en consecuencia.
+  * **Direcciones IP de nodos trabajadores individuales**: Si tiene un pequeño número de nodos trabajadores que solo ejecutan una app y no necesitan escalarse, o si solo desea colocar en la lista blanca un nodo trabajador, obtenga una lista de todos los nodos trabajadores del clúster y anote las direcciones **IP públicas**. Si los nodos trabajadores solo están conectados a una red privada y desea conectarse a servicios de {{site.data.keyword.Bluemix_notm}} utilizando el punto final de servicio privado, anote en su lugar las direcciones **IP privadas**. Tenga en cuenta que solo estos nodos trabajadores se colocan en la lista blanca. Si suprime nodos trabajadores o añade nodos trabajadores al clúster, debe actualizar el cortafuegos en consecuencia.
     ```
     ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```

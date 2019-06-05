@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -24,7 +24,7 @@ subcollection: containers
 
 
 
-# 使用 Ingress 公開應用程式
+# 使用 Ingress 應用程式負載平衡器 (ALB) 的 HTTPS 負載平衡
 {: #ingress}
 
 藉由在 {{site.data.keyword.containerlong}} 中建立由 IBM 提供的應用程式負載平衡器所管理的 Ingress 資源，來公開 Kubernetes 叢集裡的多個應用程式。
@@ -222,14 +222,14 @@ Ingress 包含三個元件：
 {:shortdesc}
 
 **所有 Ingress 配置的必要條件：**
-- Ingress 僅適用於標準叢集，而且每個區域都至少需要兩個工作者節點才能確保高可用性，並且套用定期更新。如果區域中只有一個工作者節點，則 ALB 無法接收自動更新項目。將自動更新項目推出至 ALB Pod 時，會重新載入 Pod。不過，ALB Pod 具有反親緣性規則，確保僅將一個 Pod 排定至每個工作者節點，以達到高可用性。因為一個工作者節點上只有一個 ALB Pod，所以不會重新啟動 Pod，因此不會岔斷資料流量。只有在更新工作者節點時，才會將 ALB Pod 更新為最新版本。
+- Ingress 僅適用於標準叢集，而且每個區域都至少需要兩個工作者節點才能確保高可用性，並且套用定期更新。如果區域中只有一個工作者節點，則 ALB 無法接收自動更新項目。將自動更新項目推出至 ALB Pod 時，會重新載入 Pod。不過，ALB Pod 具有反親緣性規則，確保僅將一個 Pod 排定至每個工作者節點，以達到高可用性。因為一個工作者節點上只有一個 ALB Pod，所以不會重新啟動 Pod，因此不會岔斷資料流量。只有在手動刪除舊 Pod 以排定新的已更新 Pod 時，才會將 ALB Pod 更新為最新版本。
 - 設定 Ingress 需要下列 [{{site.data.keyword.Bluemix_notm}} IAM 角色](/docs/containers?topic=containers-users#platform)：
     - 叢集的 **Administrator** 平台角色
     - 所有名稱空間中的 **Manager** 服務角色
 
 **在多區域叢集裡使用 Ingress 的必要條件**：
  - 如果您將網路資料流量限制為[邊緣工作者節點](/docs/containers?topic=containers-edge)，則必須在每一個區域中至少啟用 2 個邊緣工作者節點，以取得 Ingress Pod 的高可用性。[建立邊緣節點工作者節點儲存區](/docs/containers?topic=containers-clusters#add_pool)，以跨越叢集裡的所有區域，而每個區域至少具有 2 個工作者節點。
- - 如果一個叢集具有多個 VLAN、相同的 VLAN 上具有多個子網路，或多區域叢集，則必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可在專用網路上彼此通訊。若要啟用 VRF，請[聯絡 IBM Cloud 基礎架構 (SoftLayer) 帳戶代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+ - 如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
  - 如果發生區域故障，您可能會在該區域內 Ingress ALB 的要求中看到間歇性失敗。
 
@@ -275,7 +275,7 @@ Ingress 包含三個元件：
 現在，兩個 URL 都已解析為相同網域，因此同時由相同的 ALB 服務。不過，因為暫置名稱空間中的資源是使用 `stage` 子網域進行登錄的，所以 Ingress ALB 會正確地將 `stage.domain.net/app3` URL 中的要求僅遞送至 `app3`。
 
 {: #wildcard_tls}
-IBM 提供的 Ingress 子網域萬用字元 `*.<cluster_name>.<region>.containers.appdomain.cloud`，依預設是針對您的叢集登錄的。IBM 提供的 TLS 憑證是萬用字元憑證，可用於萬用字元子網域。如果您要使用自訂網域，則必須將自訂網域登錄為萬用字元網域，例如 `*.custom_domain.net`。若要使用 TLS，您必須取得萬用字元憑證。
+IBM 提供的 Ingress 子網域萬用字元 `*.<cluster_name>.<region>.containers.appdomain.cloud`，依預設是針對您的叢集所登錄的。IBM 提供的 TLS 憑證是萬用字元憑證，可用於萬用字元子網域。如果您要使用自訂網域，則必須將自訂網域登錄為萬用字元網域，例如 `*.custom_domain.net`。若要使用 TLS，您必須取得萬用字元憑證。
 {: note}
 
 ### 名稱空間內的多個網域
@@ -286,7 +286,7 @@ IBM 提供的 Ingress 子網域萬用字元 `*.<cluster_name>.<region>.container
 
 <img src="images/cs_ingress_single_ns_multi_subs.png" width="625" alt="每個名稱空間都需要一個資源。" style="width:625px; border-style: none"/>
 
-IBM 提供的 Ingress 子網域萬用字元 `*.<cluster_name>.<region>.containers.appdomain.cloud`，依預設是針對您的叢集登錄的。IBM 提供的 TLS 憑證是萬用字元憑證，可用於萬用字元子網域。如果您要使用自訂網域，則必須將自訂網域登錄為萬用字元網域，例如 `*.custom_domain.net`。若要使用 TLS，您必須取得萬用字元憑證。
+IBM 提供的 Ingress 子網域萬用字元 `*.<cluster_name>.<region>.containers.appdomain.cloud`，依預設是針對您的叢集所登錄的。IBM 提供的 TLS 憑證是萬用字元憑證，可用於萬用字元子網域。如果您要使用自訂網域，則必須將自訂網域登錄為萬用字元網域，例如 `*.custom_domain.net`。若要使用 TLS，您必須取得萬用字元憑證。
 {: note}
 
 <br />
@@ -301,7 +301,7 @@ IBM 提供的 Ingress 子網域萬用字元 `*.<cluster_name>.<region>.container
 開始之前：
 
 * 檢閱 Ingress [必要條件](#config_prereqs)。
-* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### 步驟 1：部署應用程式並建立應用程式服務
 {: #public_inside_1}
@@ -423,7 +423,7 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 請確定您未使用與 IBM 提供的 Ingress 密碼相同的名稱來建立密碼。您可以執行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`，以取得 IBM 提供的 Ingress 密碼名稱。
 {: note}
 
-當您使用此指令來匯入憑證時，會在稱為 `ibm-cert-store` 的名稱空間中建立憑證密碼。接著會在 `default` 名稱空間中建立此密碼的參照，而任何名稱空間中的任何 Ingress 資源都可以存取該名稱空間。ALB 處理要求時，會遵循此參照來挑選及使用 `ibm-cert-store` 名稱空間中的憑證密碼。
+當您使用此指令匯入憑證時，會在名稱為 `ibm-cert-store` 的名稱空間中建立憑證密碼。然後，會在 `default` 名稱空間中建立此密碼的參照，任何名稱空間中的任何 Ingress 資源都可以存取它。當 ALB 處理要求時，會遵循此參照來挑選及使用 `ibm-cert-store` 名稱空間中的憑證密碼。
 
 </br>
 
@@ -550,8 +550,9 @@ Ingress 資源會定義 ALB 用來將資料流量遞送至應用程式服務的�
     </tr>
     <tr>
     <td><code>path</code></td>
-    <td>將 <em>&lt;app_path&gt;</em> 取代為斜線或應用程式接聽所在的路徑。此路徑會附加至 IBM 提供的網域或您的自訂網域，以建立應用程式的唯一路徑。當您在 Web 瀏覽器中輸入此路徑時，網路資料流量就會遞送至 ALB。ALB 會查閱相關聯的服務，將網路資料流量傳送至服務。然後，服務會將資料流量轉遞至應用程式執行所在的 Pod。</br></br>
-        許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。        範例：<ul><li>若為 <code>http://domain/</code>，輸入 <code>/</code> 作為路徑。</li><li>若為 <code>http://domain/app1_path</code>，輸入 <code>/app1_path</code> 作為路徑。</li></ul>
+    <td>將 <em>&lt;app_path&gt;</em> 取代為斜線或應用程式接聽所在的路徑。此路徑會附加至 IBM 提供的網域或您的自訂網域，以建立應用程式的唯一路徑。當您在 Web 瀏覽器中輸入此路徑時，網路資料流量就會遞送至 ALB。ALB 會查閱相關聯的服務，將網路資料流量傳送至服務。然後，服務會將資料流量轉遞至應用程式執行所在的 Pod。
+    </br></br>
+            許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。        範例：<ul><li>若為 <code>http://domain/</code>，輸入 <code>/</code> 作為路徑。</li><li>若為 <code>http://domain/app1_path</code>，輸入 <code>/app1_path</code> 作為路徑。</li></ul>
     </br>
     <strong>提示：</strong>若要配置 Ingress 接聽與應用程式所接聽路徑不同的路徑，您可以使用[重寫註釋](/docs/containers?topic=containers-ingress_annotation#rewrite-path)。</td>
     </tr>
@@ -630,7 +631,7 @@ http://<subdomain2>.<domain>/<app1_path>
 
 * 檢閱 Ingress [必要條件](#config_prereqs)。
 * 確定您可以使用公用 IP 位址來存取您要包含在叢集負載平衡中的外部應用程式。
-* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 若要將叢集外的應用程式公開給大眾使用，請執行下列動作：
 
@@ -915,7 +916,7 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 請確定您未使用與 IBM 提供的 Ingress 密碼相同的名稱來建立密碼。您可以執行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`，以取得 IBM 提供的 Ingress 密碼名稱。
 {: note}
 
-當您使用此指令來匯入憑證時，會在稱為 `ibm-cert-store` 的名稱空間中建立憑證密碼。接著會在 `default` 名稱空間中建立此密碼的參照，而任何名稱空間中的任何 Ingress 資源都可以存取該名稱空間。ALB 處理要求時，會遵循此參照來挑選及使用 `ibm-cert-store` 名稱空間中的憑證密碼。
+當您使用此指令匯入憑證時，會在名稱為 `ibm-cert-store` 的名稱空間中建立憑證密碼。然後，會在 `default` 名稱空間中建立此密碼的參照，任何名稱空間中的任何 Ingress 資源都可以存取它。當 ALB 處理要求時，會遵循此參照來挑選及使用 `ibm-cert-store` 名稱空間中的憑證密碼。
 
 </br>
 
@@ -1046,8 +1047,9 @@ Ingress 資源會定義 ALB 用來將資料流量遞送至應用程式服務的�
     </tr>
     <tr>
     <td><code>path</code></td>
-    <td>將 <em>&lt;app_path&gt;</em> 取代為斜線或應用程式接聽所在的路徑。此路徑會附加至您的自訂網域，以建立應用程式的唯一路徑。當您在 Web 瀏覽器中輸入此路徑時，網路資料流量就會遞送至 ALB。ALB 會查閱相關聯的服務，將網路資料流量傳送至服務。然後，服務會將資料流量轉遞至應用程式執行所在的 Pod。</br></br>
-        許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。        範例：<ul><li>若為 <code>http://domain/</code>，輸入 <code>/</code> 作為路徑。</li><li>若為 <code>http://domain/app1_path</code>，輸入 <code>/app1_path</code> 作為路徑。</li></ul>
+    <td>將 <em>&lt;app_path&gt;</em> 取代為斜線或應用程式接聽所在的路徑。此路徑會附加至您的自訂網域，以建立應用程式的唯一路徑。當您在 Web 瀏覽器中輸入此路徑時，網路資料流量就會遞送至 ALB。ALB 會查閱相關聯的服務，將網路資料流量傳送至服務。然後，服務會將資料流量轉遞至應用程式執行所在的 Pod。
+    </br></br>
+            許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。        範例：<ul><li>若為 <code>http://domain/</code>，輸入 <code>/</code> 作為路徑。</li><li>若為 <code>http://domain/app1_path</code>，輸入 <code>/app1_path</code> 作為路徑。</li></ul>
     </br>
     <strong>提示：</strong>若要配置 Ingress 接聽與應用程式所接聽路徑不同的路徑，您可以使用[重寫註釋](/docs/containers?topic=containers-ingress_annotation#rewrite-path)。</td>
     </tr>
@@ -1459,7 +1461,7 @@ http://<subdomain2>.<domain>/<app1_path>
 
 
 ### 調整核心效能
-{: #kernel}
+{: #ingress_kernel}
 
 若要將 Ingress ALB 的效能最佳化，您也可以[變更工作者節點上的 Linux Kernel `sysctl` 參數](/docs/containers?topic=containers-kernel)。會以最佳化核心調整來自動佈建工作者節點，因此唯有當您有特定的效能最佳化需求時，才要變更這些設定。
 {: shortdesc}
@@ -1476,6 +1478,8 @@ http://<subdomain2>.<domain>/<app1_path>
 {: shortdesc}
 
 當您具有特定 Ingress 需求時，配置您自己的自訂 Ingress 控制器可能十分有用。當您使用自己的 Ingress 控制器而非使用 IBM 提供的 Ingress ALB 時，您要負責提供控制器映像檔、維護控制器及更新控制器。
+
+**附註**：僅支援使用您自己的 Ingress 控制器來提供對應用程式的公用外部存取權，但不支援用來提供專用外部存取權。
 
 1. 取得預設公用 ALB 的 ID。公用 ALB 的格式類似 `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`。
     ```

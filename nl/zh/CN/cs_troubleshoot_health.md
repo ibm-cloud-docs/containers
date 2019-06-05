@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -70,7 +70,7 @@ subcollection: containers
   </tr>
   <tr>
     <td>如果您在创建集群时指定了空间，帐户所有者没有对该空间的“管理员”、“开发者”或“审计员”许可权。</td>
-      <td>要更改帐户所有者的访问许可权，请执行以下操作：<ol><li>要找出集群的帐户所有者，请运行 <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>。</li>
+      <td>要更改帐户所有者的访问许可权，请执行以下操作：<ol><li>要查找该集群的帐户所有者，请运行 <code>ibmcloud ks api-key-info</code>。</li>
       <li>要授予帐户所有者对空间的 {{site.data.keyword.containerlong_notm}}“管理者”、“开发者”或“审计员”访问许可权，请参阅<a href="/docs/containers?topic=containers-users">管理集群访问权</a>。</li>
       <li>要在更改许可权后刷新日志记录令牌，请运行 <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>。</li></ol></td>
     </tr>
@@ -83,7 +83,7 @@ subcollection: containers
 
 要测试在故障诊断期间进行的更改，可以在集群中的一个工作程序节点上部署 *Noisy*（用于生成多个日志事件的样本 pod）。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 创建 `deploy-noisy.yaml` 配置文件。
     ```
@@ -108,10 +108,10 @@ subcollection: containers
     {:pre}
 
 3. 几分钟后，可以在 Kibana 仪表板中查看日志。要访问 Kibana 仪表板，请转至以下某个 URL，然后选择在其中创建了集群的 {{site.data.keyword.Bluemix_notm}} 帐户。如果在创建集群时指定了空间，请改为转至该空间。
-    - 美国南部和美国东部：https://logging.ng.bluemix.net
-    - 英国南部：https://logging.eu-gb.bluemix.net
-    - 欧洲中部：https://logging.eu-fra.bluemix.net
-    - 亚太南部：https://logging.au-syd.bluemix.net
+    - 美国南部和美国东部：`https://logging.ng.bluemix.net`
+    - 英国南部：`https://logging.eu-gb.bluemix.net`
+    - 欧洲中部：`https://logging.eu-fra.bluemix.net`
+    - 亚太南部：`https://logging.au-syd.bluemix.net`
 
 <br />
 

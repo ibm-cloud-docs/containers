@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,35 @@ subcollection: containers
 
 
 
+## 2019년 4월의 인기 있는 주제
+{: #apr19}
+
+<table summary="이 표는 인기 있는 주제를 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니다.">
+<caption>2019년 4월의 컨테이너 및 Kubernetes 클러스터에 대한 인기 있는 주제</caption>
+<thead>
+<th>날짜</th>
+<th>제목</th>
+<th>설명</th>
+</thead>
+<tbody>
+<tr>
+<td>2019년 4월 15일</td>
+<td>[네트워크 로드 밸런서(NLB) 호스트 이름 등록](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>앱을 인터넷에 노출하도록 공용 네트워크 로드 밸런서(NLB)를 설정한 후 호스트 이름을 작성하여 NLB IP에 대한 DNS 항목을 작성할 수 있습니다. {{site.data.keyword.Bluemix_notm}}가 사용자에게 적합한 호스트 이름에 대한 와일드카드 SSL 인증서의 생성 및 유지보수를 관리합니다. TCP/HTTP(S) 모니터를 설정하여 각 호스트 이름 뒤에 있는 NLB IP 주소의 상태를 검사할 수도 있습니다.
+</td>
+</tr>
+<tr>
+<td>2019년 4월 8일</td>
+<td>[웹 브라우저의 Kubernetes 터미널(베타)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>{{site.data.keyword.Bluemix_notm}} 콘솔에서 클러스터 대시보드를 사용하여 클러스터를 관리하지만 추가 고급 구성 변경사항을 빠르게 수행할 경우 Kubernetes 터미널의 웹 브라우저에서 직접 CLI 명령을 실행할 수 있습니다. 클러스터의 세부사항 페이지에서 **터미널** 단추를 클릭하여 Kubernetes 터미널을 실행하십시오. Kubernetes 터미널이 베타 추가 기능으로 릴리스되며 프로덕션 클러스터에서 사용할 수 없습니다. </td>
+</tr>
+<tr>
+<td>2019년 4월 4일</td>
+<td>[현재 시드니에서의 고가용성 마스터](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>시드니를 포함하여 다중 구역 메트로 위치에서 [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui)하면 고가용성을 위해 구역에 Kubernetes 마스터 복제본이 분산됩니다. </td>
+</tr>
+</tbody></table>
+
 ## 2019년 3월의 인기 있는 주제
 {: #mar19}
 
@@ -47,13 +76,13 @@ subcollection: containers
 <td>2019년 3월 21일</td>
 <td>Kubernetes 클러스터 마스터용 개인 서비스 엔드포인트 소개</td>
 <td>기본적으로 {{site.data.keyword.containerlong_notm}}는 공용 및 사설 VLAN에 대한 액세스 권한으로 클러스터를 설정합니다. 이전에는 [사설 VLAN 전용 클러스터](/docs/containers?topic=containers-plan_clusters#private_clusters)를 사용하려면, 클러스터의 작업자 노드를 마스터와 연결하는 게이트웨이 어플라이언스를 설정해야 했습니다. 이제 개인 서비스 엔드포인트를 사용할 수 있습니다. 개인 서비스 엔드포인트를 사용으로 설정하면 게이트웨이 어플라이언스 디바이스를 사용할 필요없이 작업자 노드와 마스터 간의 모든 트래픽이 사설 네트워크을 사용합니다. 이러한 강화된 보안 외에도, 사설 네트워크의 인바운드 및 아웃바운드 트래픽은 [무제한이며 비용이 청구되지 않습니다 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud/bandwidth). 인터넷을 통해 Kubernetes 마스터에 안전하게 액세스하기 위해 공용 서비스 엔드포인트를 계속 유지할 수 있습니다(예를 들어, 사설 네트워크에 있지 않고 `kubectl` 명령을 실행할 수 있음).<br><br>
-개인 서비스 엔드포인트를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정에 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) 및 [서비스 엔드포인트](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)를 사용으로 설정해야 합니다. 클러스터는 Kubernetes 버전 1.11 이상을 실행해야 합니다. 클러스터가 이전 Kubernetes 버전을 실행하는 경우, [1.11 이상으로 업그레이드](/docs/containers?topic=containers-update#update)하십시오. 자세한 정보는 다음 링크를 확인하십시오.<ul>
+개인 서비스 엔드포인트를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정에 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) 및 [서비스 엔드포인트](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)를 사용으로 설정해야 합니다. 클러스터는 Kubernetes 버전 1.11 이상을 실행해야 합니다. 클러스터가 이전 Kubernetes 버전을 실행하는 경우, [1.11 이상으로 업그레이드](/docs/containers?topic=containers-update#update)하십시오. 자세한 정보는 다음 링크를 확인하십시오.<ul>
 <li>[서비스 엔드포인트를 사용한 마스터와 작업자 간 통신 이해](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[개인 서비스 엔드포인트 설정](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[공용에서 개인 서비스 엔드포인트로 전환](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>사설 네트워크에 방화벽이 있는 경우, [{{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}} 및 기타 {{site.data.keyword.Bluemix_notm}} 서비스용 사설 IP 주소 추가](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
 </ul>
-<p class="important">개인 전용 서비스 엔드포인트 클러스터로 전환하는 경우에는 클러스터가 사용 중인 다른 {{site.data.keyword.Bluemix_notm}} 서비스와 계속 통신할 수 있는지 확인하십시오. [NFS 기반 파일 스토리지](/docs/containers?topic=containers-file_storage#file_storage), [Portworx 소프트웨어 정의 스토리지(SDS)](/docs/containers?topic=containers-portworx#portworx) 및 [클러스터 오토스케일러](/docs/containers?topic=containers-ca#ca)는 개인 전용 서비스 엔드포인트를 지원하지 않습니다. 대신 공용 및 개인 서비스 엔드포인트를 사용하는 클러스터를 사용하십시오.</p>
+<p class="important">개인 전용 서비스 엔드포인트 클러스터로 전환하는 경우에는 클러스터가 사용 중인 다른 {{site.data.keyword.Bluemix_notm}} 서비스와 계속 통신할 수 있는지 확인하십시오. [Portworx 소프트웨어 정의 스토리지(SDS)](/docs/containers?topic=containers-portworx#portworx) 및 [클러스터 오토스케일러](/docs/containers?topic=containers-ca#ca)는 개인 전용 서비스 엔드포인트를 지원하지 않습니다. 대신 공용 및 개인 서비스 엔드포인트를 사용하는 클러스터를 사용하십시오. 클러스터에서 Kubernetes 버전 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 이상을 실행하는 경우 [NFS 기반 파일 스토리지](/docs/containers?topic=containers-file_storage#file_storage)가 지원됩니다. </p>
 </td>
 </tr>
 <tr>
@@ -90,14 +119,12 @@ subcollection: containers
 </tr>
 <tr><td>2019년 2월 6일</td>
 <td>[Istio on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-istio)</td>
-<td>Istio on {{site.data.keyword.containerlong_notm}}는 Istio의 완벽한 설치, Istio 제어 플레인 컴포넌트의 자동 업데이트 및 라이프사이클 관리, 플랫폼 로깅 및 모니터링 도구와의 통합을 제공합니다.
-한 번의 클릭으로 Istio 핵심 컴포넌트, 추가 추적, 모니터링 및 시각화를 모두 확보할 수 있고 BookInfo 샘플 앱을 시작하고 실행할 수 있습니다. Istio on {{site.data.keyword.containerlong_notm}}는 관리 추가 기능으로 제공되므로 {{site.data.keyword.Bluemix_notm}}는 모든 Istio 컴포넌트를 최신 상태로 유지합니다.</td>
+<td>Istio on {{site.data.keyword.containerlong_notm}}는 Istio의 완벽한 설치, Istio 제어 플레인 컴포넌트의 자동 업데이트 및 라이프사이클 관리, 플랫폼 로깅 및 모니터링 도구와의 통합을 제공합니다. 한 번의 클릭으로 Istio 핵심 컴포넌트, 추가 추적, 모니터링 및 시각화를 모두 확보할 수 있고 BookInfo 샘플 앱을 시작하고 실행할 수 있습니다. Istio on {{site.data.keyword.containerlong_notm}}는 관리 추가 기능으로 제공되므로 {{site.data.keyword.Bluemix_notm}}는 모든 Istio 컴포넌트를 최신 상태로 유지합니다.</td>
 </tr>
 <tr>
 <td>2019년 2월 6일</td>
 <td>[Knative on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-knative_tutorial)</td>
-<td>Knative는 Kubernetes 클러스터 맨 위에 최신의, 소스 중심으로 컨테이너화된 서버리스 앱을 작성할 수 있도록 Kubernetes의 기능을 확장하는 오픈 소스 플랫폼입니다. Managed Knative on {{site.data.keyword.containerlong_notm}}는 Kubernetes 클러스터와 Knative 및 Istio를 직접 통합하는 관리 추가 기능입니다.
-추가 기능의 Knative 및 Istio 버전은 IBM에서 테스트되며 {{site.data.keyword.containerlong_notm}}에서 사용할 수 있도록 지원됩니다.</td>
+<td>Knative는 Kubernetes 클러스터 맨 위에 최신의, 소스 중심으로 컨테이너화된 서버리스 앱을 작성할 수 있도록 Kubernetes의 기능을 확장하는 오픈 소스 플랫폼입니다. Managed Knative on {{site.data.keyword.containerlong_notm}}는 Kubernetes 클러스터와 Knative 및 Istio를 직접 통합하는 관리 추가 기능입니다. 추가 기능의 Knative 및 Istio 버전은 IBM에서 테스트되며 {{site.data.keyword.containerlong_notm}}에서 사용할 수 있도록 지원됩니다.</td>
 </tr>
 </tbody></table>
 
@@ -116,8 +143,7 @@ subcollection: containers
 <tr>
 <td>1월 30일</td>
 <td>{{site.data.keyword.Bluemix_notm}} IAM 서비스 액세스 역할 및 Kubernetes 네임스페이스</td>
-<td>{{site.data.keyword.containerlong_notm}}는 이제 {{site.data.keyword.Bluemix_notm}} IAM [서비스 액세스 역할](/docs/containers?topic=containers-access_reference#service)을 지원합니다. 이러한 서비스 액세스 역할은 [Kubernetes RBAC](/docs/containers?topic=containers-users#role-binding)에 맞춰 팟(Pod) 또는 배치와 같은 Kubernetes 리소스를 관리하기 위해 클러스터에서 `kubectl` 조치를 수행하도록 사용자에게 권한을 부여합니다. 또한 {{site.data.keyword.Bluemix_notm}} IAM 서비스 액세스 역할을 사용하여 클러스터의 [특정 Kubernetes 네임스페이스에 대한 사용자 액세스를 제한](/docs/containers?topic=containers-users#platform)할 수 있습니다. [플랫폼 액세스 역할](/docs/containers?topic=containers-access_reference#iam_platform)은 이제 작업자 노드와 같은 클러스터 인프라를 관리하기 위해 `ibmcloud ks` 조치를 수행하도록 사용자에게 권한을 부여하는 데 사용됩니다. <br><br>{{site.data.keyword.Bluemix_notm}} IAM 서비스 액세스 역할은 이전에 IAM 플랫폼 액세스 역할이 있었던 사용자의 권한을 기반으로 기존 {{site.data.keyword.containerlong_notm}} 계정과 클러스터에 자동으로 추가됩니다. 앞으로는 IAM을 사용하여 액세스 그룹을 작성하고 액세스 그룹에 사용자를 추가하고 그룹 플랫폼 또는 서비스 액세스 역할을 지정할 수 있습니다. 자세한 정보는 블로그, [클러스터 액세스를 보다 세밀하게 제어하기 위한 IAM의 서비스 역할 및 네임스페이스 소개 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/)를 확인하십시오.
-</td>
+<td>{{site.data.keyword.containerlong_notm}}는 이제 {{site.data.keyword.Bluemix_notm}} IAM [서비스 액세스 역할](/docs/containers?topic=containers-access_reference#service)을 지원합니다. 이러한 서비스 액세스 역할은 [Kubernetes RBAC](/docs/containers?topic=containers-users#role-binding)에 맞춰 팟(Pod) 또는 배치와 같은 Kubernetes 리소스를 관리하기 위해 클러스터에서 `kubectl` 조치를 수행하도록 사용자에게 권한을 부여합니다. 또한 {{site.data.keyword.Bluemix_notm}} IAM 서비스 액세스 역할을 사용하여 클러스터의 [특정 Kubernetes 네임스페이스에 대한 사용자 액세스를 제한](/docs/containers?topic=containers-users#platform)할 수 있습니다. [플랫폼 액세스 역할](/docs/containers?topic=containers-access_reference#iam_platform)은 이제 작업자 노드와 같은 클러스터 인프라를 관리하기 위해 `ibmcloud ks` 조치를 수행하도록 사용자에게 권한을 부여하는 데 사용됩니다.<br><br>{{site.data.keyword.Bluemix_notm}} IAM 서비스 액세스 역할은 이전에 IAM 플랫폼 액세스 역할이 있었던 사용자의 권한을 기반으로 기존 {{site.data.keyword.containerlong_notm}} 계정과 클러스터에 자동으로 추가됩니다. 앞으로는 IAM을 사용하여 액세스 그룹을 작성하고 액세스 그룹에 사용자를 추가하고 그룹 플랫폼 또는 서비스 액세스 역할을 지정할 수 있습니다. 자세한 정보는 블로그, [클러스터 액세스를 보다 세밀하게 제어하기 위한 IAM의 서비스 역할 및 네임스페이스 소개 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/)를 확인하십시오.</td>
 </tr>
 <tr>
 <td>1월 8일</td>
@@ -145,7 +171,7 @@ subcollection: containers
 <tr>
 <td>12월 11일</td>
 <td>Portworx를 사용한 SDS 지원</td>
-<td>컨테이너화된 데이터베이스와 기타 stateful 앱에 대한 지속적 스토리지를 관리하거나 다중 구역 간 팟(Pod) 사이의 데이터를 Portworx를 사용하여 공유합니다. [Portworx ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://portworx.com/products/introduction/)는 작업자 노드의 로컬 블록 스토리지를 관리하여 앱에 대한 통합된 지속적 스토리지 계층을 작성하는 고가용성 소프트웨어 정의 스토리지 솔루션(SDS)입니다. Portworx는 다중 작업자 노드에서 각 컨테이너 레벨 볼륨의 볼륨 복제를 사용하여 구역 간 데이터 지속성 및 데이터 접근성을 보장합니다. 자세한 정보는 [Portworx를 사용하는 소프트웨어 정의 스토리지(SDS)에 데이터 저장](/docs/containers?topic=containers-portworx#portworx)을 참조하십시오.</td>
+<td>컨테이너화된 데이터베이스와 기타 stateful 앱에 대한 지속적 스토리지를 관리하거나 다중 구역 간 팟(Pod) 사이의 데이터를 Portworx를 사용하여 공유합니다. [Portworx ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://portworx.com/products/introduction/)는 작업자 노드의 로컬 블록 스토리지를 관리하여 앱에 대한 통합된 지속적 스토리지 계층을 작성하는 고가용성 소프트웨어 정의 스토리지 솔루션(SDS)입니다. Portworx는 다중 작업자 노드에서 각 컨테이너 레벨 볼륨의 볼륨 복제를 사용하여 구역 간 데이터 지속성 및 데이터 접근성을 보장합니다. 자세한 정보는 [Portworx를 사용하는 소프트웨어 정의 스토리지(SDS)에 데이터 저장](/docs/containers?topic=containers-portworx#portworx)을 참조하십시오.    </td>
 </tr>
 <tr>
 <td>12월 6일</td>
@@ -182,8 +208,8 @@ subcollection: containers
 </tr>
 <tr>
 <td>11월 7일</td>
-<td>로드 밸런서 2.0(베타)</td>
-<td>클러스터 앱을 안전하게 공용으로 노출하기 위해 이제 [로드 밸런서 1.0 또는 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) 간에 선택할 수 있습니다.</td>
+<td>네트워크 로드 밸런서 2.0(베타)</td>
+<td>클러스터 앱을 안전하게 공용으로 노출하기 위해 이제 [NLB 1.0 또는 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) 간에 선택할 수 있습니다.</td>
 </tr>
 <tr>
 <td>11월 7일</td>
@@ -192,7 +218,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>11월 7일</td>
-<td>Kubernetes 버전 1.10을 실행하는 클러스터의 고가용성 마스터</td>
+<td> 고가용성 마스터</td>
 <td>고가용성 마스터를 Kubernetes 버전 1.10을 실행하는 클러스터에 사용할 수 있습니다! 취해야 하는 [준비 단계](/docs/containers?topic=containers-cs_versions#110_ha-masters)를 포함하여 1.11 클러스터의 이전 항목에서 설명한 모든 이점이 1.10 클러스터에 적용됩니다.</td>
 </tr>
 <tr>
@@ -226,7 +252,7 @@ subcollection: containers
 <tr>
 <td>10월 22일</td>
 <td>[새 런던 다중 구역 위치 `lon05`](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>런던 다중 구역 위치가 `lon02`에서 `lon02`보다 더 많은 인프라 리소스가 있는 구역인 새 `lon05` 구역으로 대체되었습니다. 새 다중 구역 클러스터는 `lon05`를 사용하여 작성하십시오. `lon02`의 기존 클러스터는 지원되지만 새 다중 구역 클러스터는 `lon05`를 대신 사용해야 합니다.</td>
+<td>런던 다중 메트로 위치가 `lon02`에서 `lon02`보다 더 많은 인프라 리소스가 있는 구역인 새 `lon05` 구역으로 대체되었습니다. 새 다중 구역 클러스터는 `lon05`를 사용하여 작성하십시오. `lon02`의 기존 클러스터는 지원되지만 새 다중 구역 클러스터는 `lon05`를 대신 사용해야 합니다.</td>
 </tr>
 <tr>
 <td>10월 5일</td>
@@ -312,14 +338,14 @@ subcollection: containers
 <tr>
 <td>7월 10일</td>
 <td>다중 구역 클러스터 도입</td>
-<td>클러스터 가용성의 개선을 원하십니까? 이제 선택된 메트로 영역의 다중 구역 간에 클러스터를 전개할 수 있습니다. 자세한 정보는 [{{site.data.keyword.containerlong_notm}}에서 다중 구역 클러스터 작성](/docs/containers?topic=containers-plan_clusters#multizone)을 참조하십시오.</td>
+<td>클러스터 가용성의 개선을 원하십니까? 이제 선택된 메트로 영역의 다중 구역 간에 클러스터를 전개할 수 있습니다. 자세한 정보는 [{{site.data.keyword.containerlong_notm}}에서 외부 링크 아이콘중 구역 클러스터 작성](/docs/containers?topic=containers-plan_clusters#multizone)을 참조하십시오.</td>
 </tr>
 </tbody></table>
 
 ## 2018년 6월의 인기 있는 주제
 {: #june18}
 
-<table summary="이 표는 인기 있는 주제를 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니다.">
+<table summary="이 표는 인기 있는 주제를 보여줍니외부 링크 아이콘. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니외부 링크 아이콘.">
 <caption>2018년 6월의 컨테이너 및 Kubernetes 클러스터에 대한 인기 있는 주제</caption>
 <thead>
 <th>날짜</th>
@@ -330,17 +356,17 @@ subcollection: containers
 <tr>
 <td>6월 13일</td>
 <td>`bx` CLI 명령어가 `ic` CLI로 변경되었음</td>
-<td>{{site.data.keyword.Bluemix_notm}} CLI의 최신 버전을 다운로드하는 경우, 이제 `bx` 대신 `ic` 접두부를 사용하여 명령을 실행합니다. 예를 들어, `ibmcloud ks clusters`를 실행하여 클러스터를 나열합니다.</td>
+<td>{{site.data.keyword.Bluemix_notm}} CLI의 최신 버전을 외부 링크 아이콘운로드하는 경우, 이제 `bx` 대신 `ic` 접두부를 사용하여 명령을 실행합니외부 링크 아이콘. 예를 들어, `ibmcloud ks clusters`를 실행하여 클러스터를 나열합니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>6월 12일</td>
 <td>[팟(Pod) 보안 정책](/docs/containers?topic=containers-psp)</td>
-<td>Kubernetes 1.10.3 이상을 실행하는 클러스터의 경우에는 {{site.data.keyword.containerlong_notm}}에서 팟(Pod)을 작성하고 업데이트할 수 있는 사용자에게 권한 부여하도록 팟(Pod) 보안 정책을 구성할 수 있습니다.</td>
+<td>Kubernetes 1.10.3 이상을 실행하는 클러스터의 경우에는 {{site.data.keyword.containerlong_notm}}에서 팟(Pod)을 작성하고 업데이트할 수 있는 사용자에게 권한 부여하도록 팟(Pod) 보안 정책을 구성할 수 있습니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>6월 6일</td>
 <td>[IBM 제공 Ingress 와일드카드 하위 도메인에 대한 TLS 지원](/docs/containers?topic=containers-ingress#wildcard_tls)</td>
-<td>2018년 6월 6일에 또는 그 이후에 작성된 클러스터의 경우, IBM 제공 Ingress 하위 도메인 TLS 인증서는 이제 와일드카드 인증서이며 등록된 와일드카드 하위 도메인에 사용될 수 있습니다. 2018년 6월 6일 이전에 작성된 클러스터의 경우, TLS 인증서는 현재 TLS 인증서가 갱신될 때 와일드카드 인증서로 업데이트됩니다.</td>
+<td>2018년 6월 6일에 또는 그 이후에 작성된 클러스터의 경우, IBM 제공 Ingress 하위 도메인 TLS 인증서는 이제 와일드카드 인증서이며 등록된 와일드카드 하위 도메인에 사용될 수 있습니외부 링크 아이콘. 2018년 6월 6일 이전에 작성된 클러스터의 경우, TLS 인증서는 현재 TLS 인증서가 갱신될 때 와일드카드 인증서로 업데이트됩니외부 링크 아이콘.</td>
 </tr>
 </tbody></table>
 
@@ -348,7 +374,7 @@ subcollection: containers
 {: #may18}
 
 
-<table summary="이 표는 인기 있는 주제를 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니다.">
+<table summary="이 표는 인기 있는 주제를 보여줍니외부 링크 아이콘. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니외부 링크 아이콘.">
 <caption>2018년 5월의 컨테이너 및 Kubernetes 클러스터에 대한 인기 있는 주제</caption>
 <thead>
 <th>날짜</th>
@@ -359,17 +385,17 @@ subcollection: containers
 <tr>
 <td>5월 24일</td>
 <td>[새 Ingress 하위 도메인 형식](/docs/containers?topic=containers-ingress)</td>
-<td>5월 24일 이후에 작성된 클러스터에는 새 형식(<code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>)의 Ingress 하위 도메인이 지정됩니다. Ingress를 사용하여 앱을 노출할 때 새 하위 도메인을 사용하여 인터넷에서 앱에 액세스할 수 있습니다.</td>
+<td>5월 24일 이후에 작성된 클러스터에는 새 형식(<code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>)의 Ingress 하위 도메인이 지정됩니외부 링크 아이콘. Ingress를 사용하여 앱을 노출할 때 새 하위 도메인을 사용하여 인터넷에서 앱에 액세스할 수 있습니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>5월 14일</td>
 <td>[업데이트: 전세계에서 GPU 베어메탈에 워크로드 배치](/docs/containers?topic=containers-app#gpu_app)</td>
-<td>클러스터에 [베어메탈 그래픽 처리 장치(GPU) 머신 유형](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)이 있는 경우 수학적으로 집약적인 앱을 스케줄할 수 있습니다. 성능 향상을 위해 GPU 작업자 노드가 CPU 및 GPU 모두에서 앱의 워크로드를 처리할 수 있습니다.</td>
+<td>클러스터에 [베어메탈 그래픽 처리 장치(GPU) 머신 유형](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)이 있는 경우 수학적으로 집약적인 앱을 스케줄할 수 있습니외부 링크 아이콘. 성능 향상을 위해 GPU 작업자 노드가 CPU 및 GPU 모두에서 앱의 워크로드를 처리할 수 있습니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>5월 3일</td>
 <td>[컨테이너 이미지 보안 적용(베타)](/docs/services/Registry?topic=registry-security_enforce#security_enforce)</td>
-<td>앱 컨테이너에서 가져올 이미지를 파악하기 위해 팀에 약간의 추가 도움이 필요합니까? 컨테이너 이미지를 배치하기 전에 확인하려면 컨테이너 이미지 보안 적용 베타를 사용해 보십시오. Kubernetes 1.9 이상을 실행하는 클러스터에 사용할 수 있습니다.</td>
+<td>앱 컨테이너에서 가져올 이미지를 파악하기 위해 팀에 약간의 추가 도움이 필요합니까? 컨테이너 이미지를 배치하기 전에 확인하려면 컨테이너 이미지 보안 적용 베타를 사용해 보십시오. Kubernetes 1.9 이상을 실행하는 클러스터에 사용할 수 있습니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>5월 1일</td>
@@ -384,7 +410,7 @@ subcollection: containers
 ## 2018년 4월의 인기 있는 주제
 {: #apr18}
 
-<table summary="이 표는 인기 있는 주제를 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니다.">
+<table summary="이 표는 인기 있는 주제를 보여줍니외부 링크 아이콘. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니외부 링크 아이콘.">
 <caption>2018년 4월의 컨테이너 및 Kubernetes 클러스터에 대한 인기 있는 주제</caption>
 <thead>
 <th>날짜</th>
@@ -395,7 +421,7 @@ subcollection: containers
 <tr>
 <td>4월 17일</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>지속적 데이터를 블록 스토리지에 저장하려면 {{site.data.keyword.Bluemix_notm}} Block Storage [플러그인](/docs/containers?topic=containers-block_storage#install_block)을 설치하십시오. 그런 다음 클러스터에 대한 블록 스토리지를 [새로 작성](/docs/containers?topic=containers-block_storage#add_block)하거나 [기존 블록 스토리지를 사용](/docs/containers?topic=containers-block_storage#existing_block)할 수 있습니다.</td>
+<td>지속적 데이터를 블록 스토리지에 저장하려면 {{site.data.keyword.Bluemix_notm}} Block Storage [플러그인](/docs/containers?topic=containers-block_storage#install_block)을 설치하십시오. 그런 외부 링크 아이콘음 클러스터에 대한 블록 스토리지를 [새로 작성](/docs/containers?topic=containers-block_storage#add_block)하거나 [기존 블록 스토리지를 사용](/docs/containers?topic=containers-block_storage#existing_block)할 수 있습니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>4월 13일</td>
@@ -405,14 +431,14 @@ subcollection: containers
 <tr>
 <td>4월 5일</td>
 <td>[로그 필터링](/docs/containers?topic=containers-health#filter-logs)</td>
-<td>특정 로그가 전달되지 않도록 필터링하십시오. 특정 네임스페이스, 컨테이너 이름, 로그 레벨 및 메시지 문자열을 사용하여 로그를 필터링할 수 있습니다.</td>
+<td>특정 로그가 전달되지 않도록 필터링하십시오. 특정 네임스페이스, 컨테이너 이름, 로그 레벨 및 메시지 문자열을 사용하여 로그를 필터링할 수 있습니외부 링크 아이콘.</td>
 </tr>
 </tbody></table>
 
 ## 2018년 3월의 인기 있는 주제
 {: #mar18}
 
-<table summary="이 표는 인기 있는 주제를 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니다.">
+<table summary="이 표는 인기 있는 주제를 보여줍니외부 링크 아이콘. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니외부 링크 아이콘.">
 <caption>2018년 3월의 컨테이너 및 Kubernetes 클러스터에 대한 인기 있는 주제</caption>
 <thead>
 <th>날짜</th>
@@ -423,24 +449,24 @@ subcollection: containers
 <tr>
 <td>3월 16일</td>
 <td>[신뢰할 수 있는 컴퓨팅을 사용하여 베어메탈 클러스터 프로비저닝](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)</td>
-<td>[Kubernetes 버전 1.9](/docs/containers?topic=containers-cs_versions#cs_v19) 이상을 실행하는 베어메탈 클러스터를 작성하고 신뢰할 수 있는 컴퓨팅을 사용하여 작업자 노드의 변조 여부를 확인합니다.</td>
+<td>[Kubernetes 버전 1.9](/docs/containers?topic=containers-cs_versions#cs_v19) 이상을 실행하는 베어메탈 클러스터를 작성하고 신뢰할 수 있는 컴퓨팅을 사용하여 작업자 노드의 변조 여부를 확인합니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>3월 14일</td>
-<td>[{{site.data.keyword.appid_full}}로 보안 로그인](/docs/containers?topic=containers-integrations#appid)</td>
-<td>사용자가 로그인하도록 하여 {{site.data.keyword.containerlong_notm}}에서 실행 중인 앱을 개선합니다.</td>
+<td>[{{site.data.keyword.appid_full}}로 보안 로그인](/docs/containers?topic=containers-supported_integrations#appid)</td>
+<td>사용자가 로그인하도록 하여 {{site.data.keyword.containerlong_notm}}에서 실행 중인 앱을 개선합니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>3월 13일</td>
 <td>[상파울루의 사용 가능한 구역](/docs/containers?topic=containers-regions-and-zones)</td>
-<td>미국 남부 지역의 새 구역으로서 브라질의 상파울루를 소개합니다. 방화벽이 있는 경우에는 이 구역 및 클러스터가 있는 지역 내의 다른 구역에 대해 반드시 [방화벽 포트를 여십시오](/docs/containers?topic=containers-firewall#firewall).</td>
+<td>미국 남부 지역의 새 구역으로서 브라질의 상파울루를 소개합니외부 링크 아이콘. 방화벽이 있는 경우에는 이 구역 및 클러스터가 있는 지역 내의 외부 링크 아이콘른 구역에 대해 반드시 [방화벽 포트를 여십시오](/docs/containers?topic=containers-firewall#firewall).</td>
 </tr>
 </tbody></table>
 
 ## 2018년 2월의 인기 있는 주제
 {: #feb18}
 
-<table summary="이 표는 인기 있는 주제를 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니다.">
+<table summary="이 표는 인기 있는 주제를 보여줍니외부 링크 아이콘. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니외부 링크 아이콘.">
 <caption>2018년 2월의 컨테이너 및 Kubernetes 클러스터에 대한 인기 있는 주제</caption>
 <thead>
 <th>날짜</th>
@@ -451,32 +477,32 @@ subcollection: containers
 <tr>
 <td>2월 27일</td>
 <td>작업자 노드용 하드웨어 가상 머신(HVM) 이미지</td>
-<td>HVM 이미지를 사용하여 워크로드의 I/O 성능을 향상시킵니다. `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)을 사용하여 기존의 각 작업자 노드에서 활성화합니다.</td>
+<td>HVM 이미지를 사용하여 워크로드의 I/O 성능을 향상시킵니외부 링크 아이콘. `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)을 사용하여 기존의 각 작업자 노드에서 활성화합니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>2월 26일</td>
 <td>[KubeDNS Auto-Scaling](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/)</td>
-<td>이제 KubeDNS는 증가함에 따라 클러스터로 스케일링합니다. `kubectl -n kube-system edit cm kube-dns-autoscaler` 명령을 사용하여 스케일링 할당을 조정할 수 있습니다.</td>
+<td>이제 KubeDNS는 증가함에 따라 클러스터로 스케일링합니외부 링크 아이콘. `kubectl -n kube-system edit cm kube-dns-autoscaler` 명령을 사용하여 스케일링 할당을 조정할 수 있습니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>2월 23일</td>
 <td>[로깅](/docs/containers?topic=containers-health#view_logs) 및 [메트릭](/docs/containers?topic=containers-health#view_metrics)에 대한 웹 콘솔 보기</td>
-<td>향상된 웹 UI를 사용하여 클러스터 및 해당 컴포넌트의 로그 및 메트릭 데이터를 쉽게 볼 수 있습니다. 액세스하려면 클러스터 세부사항 페이지를 참조하십시오.</td>
+<td>향상된 웹 UI를 사용하여 클러스터 및 해당 컴포넌트의 로그 및 메트릭 데이터를 쉽게 볼 수 있습니외부 링크 아이콘. 액세스하려면 클러스터 세부사항 페이지를 참조하십시오.</td>
 </tr>
 <tr>
 <td>2월 20일</td>
 <td>암호화된 이미지 및 [서명되고 신뢰할 수 있는 컨텐츠](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)</td>
-<td>{{site.data.keyword.registryshort_notm}}에서 이미지에 서명하고 암호화하여 저장소 네임스페이스에 저장할 때 무결성을 보장할 수 있습니다. 신뢰할 수 있는 컨텐츠만 사용하여 컨테이너 인스턴스를 실행하십시오.</td>
+<td>{{site.data.keyword.registryshort_notm}}에서 이미지에 서명하고 암호화하여 저장소 네임스페이스에 저장할 때 무결성을 보장할 수 있습니외부 링크 아이콘. 신뢰할 수 있는 컨텐츠만 사용하여 컨테이너 인스턴스를 실행하십시오.</td>
 </tr>
 <tr>
 <td>2월 19일</td>
 <td>[strongSwan IPSec VPN 설정](/docs/containers?topic=containers-vpn#vpn-setup)</td>
-<td>strongSwan IPSec VPN Helm 차트를 신속하게 배치하여 가상 라우터 어플라이언스 없이 {{site.data.keyword.containerlong_notm}} 클러스터를 안전하게 온프레미스 데이터센터에 연결합니다.</td>
+<td>strongSwan IPSec VPN Helm 차트를 신속하게 배치하여 가상 라우터 어플라이언스 없이 {{site.data.keyword.containerlong_notm}} 클러스터를 안전하게 온프레미스 데이터센터에 연결합니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>2월 14일</td>
 <td>[서울의 사용 가능한 구역](/docs/containers?topic=containers-regions-and-zones)</td>
-<td>올림픽에 맞추어 AP 북부 지역의 서울에 Kubernetes 클러스터를 배치합니다. 방화벽이 있는 경우에는 이 구역 및 클러스터가 있는 지역 내의 다른 구역에 대해 반드시 [방화벽 포트를 여십시오](/docs/containers?topic=containers-firewall#firewall).</td>
+<td>올림픽에 맞추어 AP 북부 지역의 서울에 Kubernetes 클러스터를 배치합니외부 링크 아이콘. 방화벽이 있는 경우에는 이 구역 및 클러스터가 있는 지역 내의 외부 링크 아이콘른 구역에 대해 반드시 [방화벽 포트를 여십시오](/docs/containers?topic=containers-firewall#firewall).</td>
 </tr>
 <tr>
 <td>2월 8일</td>
@@ -488,7 +514,7 @@ subcollection: containers
 ## 2018년 1월의 인기 있는 주제
 {: #jan18}
 
-<table summary="이 표는 인기 있는 주제를 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니다.">
+<table summary="이 표는 인기 있는 주제를 보여줍니외부 링크 아이콘. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 날짜, 2열에는 기능 제목, 3열에는 설명이 있습니외부 링크 아이콘.">
 <caption>2018년 1월의 컨테이너 및 Kubernetes 클러스터에 대한 인기 있는 주제</caption>
 <thead>
 <th>날짜</th>
@@ -498,24 +524,24 @@ subcollection: containers
 <tbody>
 <td>1월 25일</td>
 <td>[글로벌 레지스트리 사용 가능](/docs/services/Registry?topic=registry-registry_overview#registry_regions)</td>
-<td>{{site.data.keyword.registryshort_notm}}를 통해 글로벌 `registry.bluemix.net`을 사용하여 IBM에서 제공한 공용 이미지를 가져올 수 있습니다.</td>
+<td>{{site.data.keyword.registryshort_notm}}를 통해 글로벌 `registry.bluemix.net`을 사용하여 IBM에서 제공한 공용 이미지를 가져올 수 있습니외부 링크 아이콘.</td>
 </tr>
 <tr>
 <td>1월 23일</td>
-<td>[싱가포르 및 캐나다 몬트리올의 사용 가능한 구역](/docs/containers?topic=containers-regions-and-zones)</td>
-<td>싱가포르 및 몬트리올은 {{site.data.keyword.containerlong_notm}} AP 북부 및 미국 동부 지역에서 사용 가능한 구역입니다. 방화벽이 있는 경우에는 이러한 구역 및 클러스터가 있는 지역 내의 기타 구역에 대해 반드시 [방화벽 포트를 여십시오](/docs/containers?topic=containers-firewall#firewall).</td>
+<td>[싱가포르 및 캐나외부 링크 아이콘 몬트리올의 사용 가능한 구역](/docs/containers?topic=containers-regions-and-zones)</td>
+<td>싱가포르 및 몬트리올은 {{site.data.keyword.containerlong_notm}} AP 북부 및 미국 동부 지역에서 사용 가능한 구역입니외부 링크 아이콘. 방화벽이 있는 경우에는 이러한 구역 및 클러스터가 있는 지역 내의 기타 구역에 대해 반드시 [방화벽 포트를 여십시오](/docs/containers?topic=containers-firewall#firewall).</td>
 </tr>
 <tr>
 <td>1월 8일</td>
 <td>[향상된 특성(flavor) 사용 가능](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)</td>
-<td>시리즈 2 가상 머신 유형에는 로컬 SSD 스토리지 및 디스크 암호화가 포함됩니다. 향상된 성능 및 안전성을 위해 이러한 특성으로 [워크로드를 이동](/docs/containers?topic=containers-update#machine_type)하십시오.</td>
+<td>시리즈 2 가상 머신 유형에는 로컬 SSD 스토리지 및 디스크 암호화가 포함됩니외부 링크 아이콘. 향상된 성능 및 안전성을 위해 이러한 특성으로 [워크로드를 이동](/docs/containers?topic=containers-update#machine_type)하십시오.</td>
 </tr>
 </tbody></table>
 
 ## Slack에서 비슷한 생각을 가진 개발자들과 대화하기
 {: #slack}
 
-[{{site.data.keyword.containerlong_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에서 다른 사용자가 이야기하는 내용을 보고 직접 질문할 수 있습니다.
+[{{site.data.keyword.containerlong_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에서 외부 링크 아이콘른 사용자가 이야기하는 내용을 보고 직접 질문할 수 있습니외부 링크 아이콘.
 {:shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.

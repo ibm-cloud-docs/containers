@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, audit
 
@@ -44,7 +44,7 @@ Para obtener más información sobre cómo funciona el servicio, consulte la [do
 ## Búsqueda de información sobre sucesos
 {: #kube-find}
 
-Puede supervisar las actividades del clúster consultando los registros en el panel de control de Kibana. 
+Puede supervisar las actividades del clúster consultando los registros en el panel de control de Kibana.
 {: shortdesc}
 
 Para supervisar la actividad administrativa:
@@ -518,19 +518,19 @@ Antes de empezar: asegúrese de que el clúster está configurado para reenviar 
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>Para Kubernetes v1.10 y superior, se crea una política de seguridad de pod.</td>
+    <td>Se crea una política de seguridad de pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>Para Kubernetes v1.10 y superior, se suprime una política de seguridad de pod.</td>
+    <td>Se suprime una política de seguridad de pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>Para Kubernetes v1.10 y superior, se aplica un parche a una política de seguridad de pod.</td>
+    <td>Se aplica un parche a una política de seguridad de pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Para Kubernetes v1.10 y superior, se actualiza una política de seguridad de pod.</td>
+    <td>Se actualiza una política de seguridad de pod.</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>

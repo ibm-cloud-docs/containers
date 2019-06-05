@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -81,7 +81,7 @@ Para un arreglo a largo plazo, [actualice el tipo de máquina de la agrupación 
 {: #nonroot}
 
 {: tsSymptoms}
-Después de [añadir almacenamiento NFS](/docs/containers?topic=containers-file_storage#app_volume_mount) a su despliegue, el despliegue de su contenedor falla. Al recuperar los registros del contenedor, podría ver errores como los siguientes. El pod falla y queda atascado en un ciclo de recarga.
+Después de [añadir almacenamiento NFS](/docs/containers?topic=containers-file_storage#file_app_volume_mount) a su despliegue, el despliegue de su contenedor falla. Al recuperar los registros del contenedor, podría ver errores como los siguientes. El pod falla y queda atascado en un ciclo de recarga.
 
 ```
 write-permission
@@ -185,6 +185,9 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
       name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:
@@ -328,7 +331,7 @@ Si se produce un error de red mientras un pod escribe en un volumen, la infraest
    ```
    {: pre}
 
-2. Compruebe que utiliza la [versión más reciente del plugin {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). Si no es así, [actualice el plugin](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
+2. Compruebe que utiliza la [versión más reciente del plugin {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). Si no es así, [actualice el plugin](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
 3. Si ha utilizado un despliegue de Kubernetes para el pod, reinicie el pod que está fallando eliminando el pod y dejando que Kubernetes lo vuelva a crear. Si no ha utilizado un despliegue, recupere el archivo YAML que se ha utilizado para crear el pod con el mandato `kubectl get pod <pod_name> -o yaml >pod.yaml`. A continuación, suprima y vuelva a crear manualmente el pod.
     ```
     kubectl delete pod <pod_name>

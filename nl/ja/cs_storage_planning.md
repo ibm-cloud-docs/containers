@@ -174,7 +174,7 @@ subcollection: containers
 ## 単一ゾーン・クラスター用の永続ストレージ・オプションの比較
 {: #single_zone_persistent_storage}
 
-単一ゾーン・クラスターを使用している場合は、{{site.data.keyword.containerlong_notm}} で高速なデータ・アクセスを実現する以下のオプションの中から選択できます。より高い可用性を希望する場合は、[地理的に分散されたデータ](#persistent_storage_overview)向けに設計されたストレージ・オプションを使用し、要件と照らし合わせて可能な場合は、複数ゾーン・クラスターを作成してください。
+単一ゾーン・クラスターを使用している場合は、{{site.data.keyword.containerlong_notm}} で高速なデータ・アクセスを実現する以下のオプションの中から選択できます。 より高い可用性を希望する場合は、[地理的に分散されたデータ](#persistent_storage_overview)向けに設計されたストレージ・オプションを使用し、要件と照らし合わせて可能な場合は、複数ゾーン・クラスターを作成してください。
 {: shortdesc}
 
 永続データ・ストレージ・オプションは、標準クラスターでのみ使用可能です。
@@ -277,7 +277,7 @@ subcollection: containers
 代わりに、クラスターをオンプレミス・データベースに接続する方法をお探しですか? [クラスターへの VPN 接続のセットアップ](/docs/containers?topic=containers-vpn#vpn)を参照してください。
 {: tip}
 
-次の図は、複数ゾーン・クラスターにデータを永続的に保管してデータの高可用性を確保するために {{site.data.keyword.containerlong_notm}} で使用できるオプションを示しています。これらのオプションを単一ゾーン・クラスター内で使用することもできますが、ご使用のアプリで要求される高可用性の利点は得られない可能性があります。
+次の図は、複数ゾーン・クラスターにデータを永続的に保管してデータの高可用性を確保するために {{site.data.keyword.containerlong_notm}} で使用できるオプションを示しています。 これらのオプションを単一ゾーン・クラスター内で使用することもできますが、ご使用のアプリで要求される高可用性の利点は得られない可能性があります。
 
 <img src="images/cs_storage_options_multizone.png" alt="複数ゾーン・クラスター内の永続ストレージ用の高可用性オプション"/>
 
@@ -321,8 +321,8 @@ subcollection: containers
 </tr>
 <tr>
 <td style="text-align:left">パフォーマンス</td>
-<td style="text-align:left">読み取り操作の場合はハイ。 非 SDS マシンの使用時は、割り当てられる IOPS とサイズのために予測可能です。 </td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">SDS マシンの使用時は、順次読み取り/書き込み操作についてはベア・メタル・パフォーマンスに近い。</li><li style="margin:0px; padding:0px">高性能データベースを実行するための[プロファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) を提供</li><li style="margin:0px; padding:0px">ご使用のアプリで選択できる各種のパフォーマンス・プロファイルを使用してストレージ層を作成可能。</li></ul> </td>
+<td style="text-align:left">読み取り操作の場合はハイ。 非 SDS マシンの使用時は、割り当てられる IOPS とサイズのために予測可能です。</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">SDS マシンの使用時は、順次読み取り/書き込み操作についてはベア・メタル・パフォーマンスに近い。 </li><li style="margin:0px; padding:0px">高性能データベースを実行するための[プロファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) を提供</li><li style="margin:0px; padding:0px">ご使用のアプリで選択できる各種のパフォーマンス・プロファイルを使用してストレージ層を作成可能。</li></ul> </td>
 <td style="text-align:left">アプリと同じデータ・センターにデプロイされた場合はハイ。</td>
 </tr>
 <tr>
@@ -340,7 +340,7 @@ subcollection: containers
 <tr>
 <td style="text-align:left">回復力</td>
 <td style="text-align:left">ハイ (3 つのゾーンまたは地域にわたってデータ・スライスが分散するため)。 単一ゾーンのみにセットアップされた場合はミディアム。</td>
-<td style="text-align:left">3 つのゾーンにまたがるレプリケーションをサポートするようにセットアップされた場合はハイ。単一ゾーンのみにデータを保管する場合はミディアム。</td>
+<td style="text-align:left">3 つのゾーンにまたがるレプリケーションをサポートするようにセットアップされた場合はハイ。 単一ゾーンのみにデータを保管する場合はミディアム。</td>
 <td style="text-align:left">DBaaS およびセットアップによって異なります。 </td>
 </tr>
 <tr>
@@ -352,13 +352,13 @@ subcollection: containers
 <tr>
 <td style="text-align:left">スケーラビリティー</td>
 <td style="text-align:left">自動的にスケーリングします</td>
-<td style="text-align:left">ボリュームのサイズ変更によってボリューム容量を増やします。全体的なストレージ層容量を増やすには、ワーカー・ノードまたはリモート・ブロック・ストレージを追加する必要があります。どちらの場合でも、ユーザーによる容量の監視が必要です。</td>
+<td style="text-align:left">ボリュームのサイズ変更によってボリューム容量を増やします。 全体的なストレージ層容量を増やすには、ワーカー・ノードまたはリモート・ブロック・ストレージを追加する必要があります。 どちらの場合でも、ユーザーによる容量の監視が必要です。 </td>
 <td style="text-align:left">自動的にスケーリングします</td>
 </tr>
 <tr>
 <td style="text-align:left">暗号化</td>
 <td style="text-align:left">転送中および静止</td>
-<td style="text-align:left">{{site.data.keyword.keymanagementservicelong_notm}} を使用して転送中および保存中のデータを保護するための独自のキーを用意してください。</td>
+<td style="text-align:left">{{site.data.keyword.keymanagementservicelong_notm}} を使用して転送中および保存中のデータを保護するための独自のキーを用意してください。 </td>
 <td style="text-align:left">静止</td>
 </tr>
 <tr>

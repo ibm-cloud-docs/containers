@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -43,7 +43,7 @@ subcollection: containers
 * [高可用性を実現するために複数の地域に配備](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [コンテナーのセキュリティーと分離](/docs/containers?topic=containers-security#security)
-* [アプリ間でデータを永続化および同期化する {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [アプリ間でデータを永続化および同期化する {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **ソリューション**
@@ -87,9 +87,9 @@ subcollection: containers
 
 {{site.data.keyword.SecureGateway}} は、{{site.data.keyword.containerlong_notm}} で実行するために再ホストされたアプリ用に、オンプレミスのデータベースと文書に対する安全なパイプラインを作成する目的で使用されます。
 
-{{site.data.keyword.cos_full_notm}} は、すべてのロー文書と今後生成されるデータの保管場所として使用されます。 モンテ・カルロ・シミュレーションの場合、{{site.data.keyword.cos_full_notm}} に保管される構造化入力ファイルにシミュレーション・データを入れたワークフロー・パイプラインが配置されます。 シミュレーション開始がトリガーされると、{{site.data.keyword.containerlong_notm}} のコンピュート・サービスがスケーリングされて、シミュレーション処理のために入力データが N 個のイベント・バケットに分割されます。 {{site.data.keyword.containerlong_notm}} は自動的に N 回の関連サービスの実行に合わせてスケーリングされ、中間結果を {{site.data.keyword.cos_full_notm}} に書き込みます。 これらの結果は、{{site.data.keyword.containerlong_notm}} コンピュート・サービスの別のセットによって処理され、最終結果が生成されます。
+{{site.data.keyword.cos_full_notm}} は、すべてのロー文書と今後生成されるデータの保管場所として使用されます。 モンテ・カルロ・シミュレーションの場合、{{site.data.keyword.cos_full_notm}} に保管される構造化ファイルにシミュレーション・データを入れたワークフロー・パイプラインが配置されます。 シミュレーション開始がトリガーされると、{{site.data.keyword.containerlong_notm}} のコンピュート・サービスがスケーリングされて、シミュレーション処理のためにファイルのデータが N 個のイベント・バケットに分割されます。 {{site.data.keyword.containerlong_notm}} は自動的に N 回の関連サービスの実行に合わせてスケーリングされ、中間結果を {{site.data.keyword.cos_full_notm}} に書き込みます。 これらの結果は、{{site.data.keyword.containerlong_notm}} コンピュート・サービスの別のセットによって処理され、最終結果が生成されます。
 
-{{site.data.keyword.cloudant}} は、最新の NoSQL データベースで、キー/値のような単純な文書から複雑な文書指向のデータ・ストレージや照会に至るまで、多くのデータ駆動型ユース・ケースに役立ちます。 この住宅ローン会社は、増大する一連の規制や管理上の報告規則を管理するため、{{site.data.keyword.cloudant}} を使用して、社内に取り込まれる未加工の規制対象データの入力に関連した文書を保管しています。 さまざまな形式のレポートでデータを編集、処理、公開するために、{{site.data.keyword.containerlong_notm}} のコンピュート・プロセスがトリガーされます。 レポート全体で共通の中間結果は、{{site.data.keyword.cloudant}} 文書として保管されるため、テンプレート駆動プロセスを使用して必要なレポートを作成できます。
+{{site.data.keyword.cloudant}} は、最新の NoSQL データベースで、キー/値のような単純な文書から複雑な文書指向のデータ・ストレージや照会に至るまで、多くのデータ駆動型ユース・ケースに役立ちます。 この住宅ローン会社は、増大する一連の規制や管理上の報告規則を管理するため、{{site.data.keyword.cloudant}} を使用して、社内に取り込まれる未加工の規制対象データに関連した文書を保管しています。 さまざまな形式のレポートでデータを編集、処理、公開するために、{{site.data.keyword.containerlong_notm}} のコンピュート・プロセスがトリガーされます。 レポート全体で共通の中間結果は、{{site.data.keyword.cloudant}} 文書として保管されるため、テンプレート駆動プロセスを使用して必要なレポートを作成できます。
 
 **結果**
 
@@ -162,7 +162,7 @@ subcollection: containers
 * パブリック {{site.data.keyword.Bluemix_notm}} 内の {{site.data.keyword.containerlong_notm}} で実行されるコンテナー・イメージに仮想マシン・イメージをマイグレーションします。
 * そのコアから、脆弱性アドバイザーが既知のマルウェアを対象に、イメージ、ポリシー、コンテナー、パッケージの脆弱性スキャンを行います。
 * プライベート・データ・センターやオンプレミスの資本コストは大幅に削減され、ワークロード需要に基づいてスケーリングされるユーティリティー・コンピューティング・モデルに置き換えられます。
-* シンプルな Ingress アノテーションを使用して、サービスと API に対するポリシー駆動型の認証を一貫して実施します。宣言型セキュリティーでは、{{site.data.keyword.appid_short_notm}} を使用してユーザー認証とトークン検証を保証できます。
+* シンプルな Ingress アノテーションを使用して、サービスと API に対するポリシー駆動型の認証を一貫して実施します。 宣言型セキュリティーでは、{{site.data.keyword.appid_short_notm}} を使用してユーザー認証とトークン検証を保証できます。
 
 **ステップ 2: バックエンドの既存決済システムに接続して運用する**
 * IBM {{site.data.keyword.SecureGateway}} を使用して、オンプレミスのツール・システムへのセキュア接続を維持します。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,7 @@ Ingress의 문제점을 해결하거나 Ingress 활동을 모니터링하려는 
         ```
         {: pre}
 
-    2. 해당 ALB 팟(Pod)의 로그를 여십시오. 로그가 업데이트된 형식을 따르는지 확인하십시오.
+    2. 해당 ALB 팟(Pod)의 로그를 여십시오.
         ```
         kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
         ```
@@ -167,7 +167,7 @@ Ingress ALB에 대해 수집되는 로그의 컨텐츠 및 형식을 사용자 �
     <tbody>
     <tr>
     <td><code>log-format</code></td>
-    <td><code>&lt;key&gt;</code>를 로그 컴포넌트의 이름으로 대체하고 <code>&lt;log_variable&gt;</code>을 로그 항목으로 수집할 로그 컴포넌트의 변수로 대체합니다. 로그 항목에 포함할 텍스트 및 구두점을 포함할 수 있습니다(예: 문자열 값 앞뒤에 따옴표 및 로그 컴포넌트를 구분하는 쉼표). 예를 들어, <code>request: "$request"</code>와 같은 컴포넌트를 형식화하면 로그 항목에 다음이 생성됩니다. <code>request: "GET / HTTP/1.1"</code>. 사용할 수 있는 모든 변수 목록은 <a href="http://nginx.org/en/docs/varindex.html">NGINX 변수 색인</a>을 참조하십시오. <br><br>추가 헤더(예: <em>x-custom-ID</em>)를 로깅하려면 다음 키-값 쌍을 사용자 정의 로그 컨텐츠에 추가하십시오. <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>하이픈(<code>-</code>)은 밑줄(<code>_</code>)로 변환되고 <code>$http_</code>는 사용자 정의 헤더 이름 앞에 추가되어야 합니다.</td>
+    <td><code>&lt;key&gt;</code>를 로그 컴포넌트의 이름으로 대체하고 <code>&lt;log_variable&gt;</code>을 로그 항목으로 수집할 로그 컴포넌트의 변수로 대체합니다. 로그 항목에 포함할 텍스트 및 구두점을 포함할 수 있습니다(예: 문자열 값 앞뒤에 따옴표 및 로그 컴포넌트를 구분하는 쉼표). 예를 들어, <code>request: "$request"</code>와 같은 컴포넌트를 형식화하면 로그 항목에 다음이 생성됩니다. <code>request: "GET / HTTP/1.1"</code>. 사용할 수 있는 모든 변수 목록은 <a href="http://nginx.org/en/docs/varindex.html">NGINX 변수 색인</a>을 참조하십시오.<br><br>추가 헤더(예: <em>x-custom-ID</em>)를 로깅하려면 다음 키-값 쌍을 사용자 정의 로그 컨텐츠에 추가하십시오. <br><pre class="codeblock"><code>customID: $http_x_custom_id</code></pre> <br>하이픈(<code>-</code>)은 밑줄(<code>_</code>)로 변환되고 <code>$http_</code>는 사용자 정의 헤더 이름 앞에 추가되어야 합니다.</td>
     </tr>
     <tr>
     <td><code>log-format-escape-json</code></td>
@@ -253,55 +253,75 @@ Ingress ALB에 대해 수집되는 로그의 컨텐츠 및 형식을 사용자 �
 
 ALB 메트릭 내보내기 프로그램은 NGINX 지시문(`vhost_traffic_status_zone`)을 사용하여 각 Ingress ALB 팟(Pod)의 `/status/format/json` 엔드포인트에서 메트릭 데이터를 수집합니다. 메트릭 내보내기 프로그램에서 자동으로 JSON 파일의 각 데이터 필드를 Prometheus에서 읽을 수 있는 메트릭으로 다시 형식화합니다. 그런 다음 Prometheus 에이전트는 내보내기 프로그램에서 생성한 메트릭을 선택하여 Prometheus 대시보드에 메트릭을 표시할 수 있도록 합니다.
 
-ALB 메트릭 내보내기 프로그램 팟(Pod)은 ALB가 배치된 동일한 작업자 노드에 배치해야 합니다. ALB가 에지 작업자 노드에서 실행되고 해당 에지 노드가 다른 워크로드 배치를 방지하도록 오염된 경우, 메트릭 내보내기 프로그램 팟(Pod)을 스케줄할 수 없습니다. 다음 명령을 실행하여 오염을 제거할 수 있습니다. `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
+### 메트릭 내보내기 프로그램 Helm 차트 설치
+{: #metrics-exporter}
+
+메트릭 내보내기 프로그램 Helm 차트를 설치하여 클러스터의 ALB를 모니터합니다.
+{: shortdesc}
+
+ALB 메트릭 내보내기 프로그램 팟(Pod)은 ALB가 배치된 동일한 작업자 노드에 배치해야 합니다. ALB가 에지 작업자 노드에서 실행되고 해당 에지 노드가 다른 워크로드 배치를 방지하도록 오염된 경우, 메트릭 내보내기 프로그램 팟(Pod)을 스케줄할 수 없습니다. `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`를 실행하여 오염을 제거해야 합니다.
 {: note}
 
-클러스터에서 메트릭 내보내기 프로그램과 ALB의 Prometheus 에이전트를 설치하려면 다음을 수행하십시오.
+1.  **중요**: [지시사항에 따라](/docs/containers?topic=containers-helm#public_helm_install) 로컬 시스템에 Helm 클라이언트를 설치하고 서비스 계정이 있는 Helm 서버(tiller)를 설치한 후 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오.
 
-1.  [지시사항에 따라](/docs/containers?topic=containers-integrations#helm) 로컬 시스템에 Helm 클라이언트를 설치하고 서비스 계정이 있는 Helm 서버(tiller)를 설치한 후 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오.
+2. 클러스터에 `ibmcloud-alb-metrics-exporter` Helm 차트를 설치하십시오. 이 Helm 차트는 ALB 메트릭 내보내기 프로그램을 배치하고 `kube-system` 네임스페이스에 `alb-metrics-service-account` 서비스 계정을 작성합니다. <alb-ID>를 메트릭을 수집할 ALB로 대체하십시오. 클러스터의 ALB에 대한 ID를 보려면 <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>을 실행하십시오.
+  모니터링하려는 각 ALB를 배치해야 합니다.
+  {: note}
+  ```
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  ```
+  {: pre}
 
-2.  Tiller에 서비스 계정이 설치되어 있는지 확인하십시오.
-    ```
-    kubectl get serviceaccount -n kube-system | grep tiller
-    ```
-    {: pre}
+3. 차트 배치 상태를 확인하십시오. 차트가 준비 상태인 경우, 출력의 맨 위 근처에 있는 **STATUS** 필드의 값은 `DEPLOYED`입니다.
+  ```
+    helm status ibmcloud-alb-metrics-exporter
+  ```
+  {: pre}
 
-    출력 예:
+4. `ibmcloud-alb-metrics-exporter` 팟(Pod)이 실행 중인지 확인하십시오.
+  ```
+    kubectl get pods -n kube-system -o wide
+  ```
+  {:pre}
 
-    ```
-    NAME                                 SECRETS   AGE
-    tiller                               1         2m
-    ```
-    {: screen}
+  출력 예:
+  ```
+  NAME                                             READY     STATUS      RESTARTS   AGE       IP               NODE
+  ...
+  alb-metrics-exporter-868fddf777-d49l5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  alb-metrics-exporter-868fddf777-pf7x5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  ```
+  {:screen}
 
-3. 클러스터에 `ibmcloud-alb-metrics-exporter` Helm 차트를 설치하십시오. 이 Helm 차트는 ALB 메트릭 내보내기 프로그램을 배치하고 `alb-metrics-service-account`라는 서비스 계정을 `kube-system` 네임스페이스에 작성합니다. <alb-ID>를 메트릭을 수집할 ALB로 대체하십시오. 클러스터의 ALB에 대한 ID를 보려면 <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>을 실행하십시오. 모니터링하려는 각 ALB에 차트를 배치해야 합니다.
+5. 선택사항: [Prometheus 에이전트를 설치](#prometheus-agent)하여 내보내기 프로그램에서 생성한 메트릭을 선택하고 Prometheus 대시보드에 메트릭을 표시합니다.
 
-    ```
-    helm install ibm/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
-    ```
-    {: pre}
+### Prometheus 에이전트 Helm 차트 설치
+{: #prometheus-agent}
+
+[메트릭 내보내기 프로그램](#metrics-exporter)을 선택한 후, Prometheus 에이전트 Helm 차트를 설치하여 내보내기 프로그램에서 생성한 메트릭을 선택하고 Prometheus 대시보드에 메트릭을 표시할 수 있도록 할 수 있습니다.
+{: shortdesc}
+
+1. https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz에서 메트릭 내보내기 프로그램 Helm 차트에 대한 TAR 파일을 다운로드하십시오. 
+
+2. Prometheus 서브폴더로 이동하십시오.
+  ```
+  cd ibmcloud-alb-metrics-exporter-1.0.7.tar/ibmcloud-alb-metrics-exporter/subcharts/prometheus
+  ```
+  {: pre}
+
+3. 클러스터에 Prometheus Helm 차트를 설치하십시오. <ingress_subdomain>을 클러스터의 Ingress 하위 도메인으로 대체하십시오. Prometheus 대시보드의 URL은 기본 Prometheus 하위 도메인 `prom-dash`와 Ingress 하위 도메인의 조합입니다(예 `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`). 클러스터에 대한 Ingress 하위 도메인을 찾으려면 <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>을 실행하십시오.
+  ```
+  helm install --name prometheus . --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
+  ```
+  {: pre}
 
 4. 차트 배치 상태를 확인하십시오. 차트가 준비 상태인 경우, 출력의 맨 위 근처에 있는 **STATUS** 필드의 값은 `DEPLOYED`입니다.
-    ```
-    helm status ibmcloud-alb-metrics-exporter
-    ```
-    {: pre}
-
-5. 클러스터에 `ibmcloud-alb-metrics-exporter/subcharts/prometheus` 서브차트를 설치하십시오. 이 서브차트는 Prometheus 대시보드에 ALB 메트릭을 수집하고 표시하기 위해 Prometheus 에이전트를 배치합니다. <ingress_subdomain>을 클러스터의 Ingress 하위 도메인으로 대체하십시오. Prometheus 대시보드의 URL은 `prom-dash` 하위 도메인과 Ingress 하위 도메인의 조합입니다(예: `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`). 클러스터에 대한 Ingress 하위 도메인을 찾으려면 <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>을 실행하십시오.
-
-    ```
-    helm install ibm/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
-    ```
-    {: pre}
-
-6. 차트 배치 상태를 확인하십시오. 차트가 준비 상태인 경우, 출력의 맨 위 근처에 있는 **STATUS** 필드의 값은 `DEPLOYED`입니다.
-
     ```
     helm status prometheus
     ```
     {: pre}
 
-7. `ibmcloud-alb-metrics-exporter` 및`prometheus` 팟(Pod)이 실행 중인지 확인하십시오.
+5. `prometheus` 팟(Pod)이 실행 중인지 확인하십시오.
     ```
     kubectl get pods -n kube-system -o wide
     ```
@@ -316,9 +336,9 @@ ALB 메트릭 내보내기 프로그램 팟(Pod)은 ALB가 배치된 동일한 �
     ```
     {:screen}
 
-8. 브라우저에서 Prometheus 대시보드에 대한 URL을 입력하십시오. 이 호스트 이름의 형식은 `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`입니다. ALB에 대한 Prometheus 대시보드가 열립니다.
+6. 브라우저에서 Prometheus 대시보드에 대한 URL을 입력하십시오. 이 호스트 이름의 형식은 `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`입니다. ALB에 대한 Prometheus 대시보드가 열립니다.
 
-9. 대시보드에 나열된 [ALB](#alb_metrics), [서버](#server_metrics) 및 [업스트림](#upstream_metrics) 메트릭에 대한 추가 정보를 검토하십시오.
+7. 대시보드에 나열된 [ALB](#alb_metrics), [서버](#server_metrics) 및 [업스트림](#upstream_metrics) 메트릭에 대한 추가 정보를 검토하십시오.
 
 ### ALB 메트릭
 {: #alb_metrics}
@@ -385,8 +405,7 @@ ALB 메트릭은 `kube_system_<ALB-ID>_<METRIC-NAME> <VALUE>` 형식입니다. �
 <tr>
 <td><code>totalHandledRequest_total</code></td>
 <td>클라이언트에서 수신한 클라이언트 요청의 총 수입니다.</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### 서버 메트릭
@@ -511,8 +530,7 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 <tr>
 <td><code>total</code></td>
 <td>상태 코드가 있는 총 응답 수입니다.</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### 업스트림 메트릭
@@ -604,7 +622,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 <tr>
 <td><code>total</code></td>
 <td>상태 코드가 있는 총 응답 수입니다.</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 #### 유형 2 업스트림 메트릭
@@ -662,7 +680,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 <tr>
 <td><code>responseMsec</code></td>
 <td>업스트림 응답 처리 시간의 평균(밀리초)입니다.</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 <br />

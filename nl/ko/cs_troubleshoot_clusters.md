@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -32,11 +32,7 @@ subcollection: containers
 {{site.data.keyword.containerlong}}를 사용할 때 클러스터 및 작업자 노드 관련 문제점을 해결하려면 이러한 기술을 고려하십시오.
 {: shortdesc}
 
-더 일반적인 문제점이 있는 경우에는 [클러스터 디버깅](/docs/containers?topic=containers-cs_troubleshoot)을 시도해 보십시오.
-{: tip}
-
-문제점을 해결하는 중에 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 테스트를 수행하고 클러스터에서 관련 정보를 수집할 수 있습니다.
-{: tip}
+<p class="tip">더 일반적인 문제점이 있는 경우에는 [클러스터 디버깅](/docs/containers?topic=containers-cs_troubleshoot)을 시도해 보십시오.<br>또한 문제점을 해결하는 중에 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 테스트를 수행하고 클러스터에서 관련 정보를 수집할 수 있습니다.</p>
 
 ## 권한 오류로 인해 클러스터를 작성하거나 작업자 노드를 관리할 수 없음
 {: #cs_credentials}
@@ -82,7 +78,7 @@ The cluster could not be configured with the registry. Make sure that you have t
 
 {: tsCauses}
 클러스터를 작성할 권한이 없습니다. 클러스터를 작성하려면 다음 권한이 필요합니다.
-*  IBM Cloud 인프라(SoftLayer)에 대한 **수퍼유저** 역할.
+*  IBM Cloud 인프라(SoftLayer)에 대한 **수퍼유저** 역할 또는 최소 [이 최소한의 인프라 권한](/docs/containers?topic=containers-access_reference#infra).
 *  계정 레벨에서 {{site.data.keyword.containerlong_notm}}에 대한 **관리자** 플랫폼 관리 역할.
 *  계정 레벨에서 {{site.data.keyword.registrylong_notm}}에 대한 **관리자** 플랫폼 관리 역할. {{site.data.keyword.registryshort_notm}}의 정책을 리소스 그룹 레벨로 제한하지 마십시오. 2018년 10월 4일 이전에 {{site.data.keyword.registrylong_notm}}의 사용을 시작한 경우에는 [{{site.data.keyword.Bluemix_notm}} IAM 정책 적용을 사용으로 설정](/docs/services/Registry?topic=registry-user#existing_users)했는지 확인하십시오.
 
@@ -243,7 +239,7 @@ CLI에서 `ibmcloud`, `kubectl` 또는 `calicoctl` 명령을 실행하면 실패
                      Resource
         ```
         {: screen}
-    2. **Service Name** 값이 `containers-kubernetes`이며 **Service Instance** 값이 클러스터의 ID인 정책을 찾으십시오. 다음 명령을 실행하여 클러스터 ID를 찾을 수 있습니다. `ibmcloud ks cluster-get --cluster <cluster_name>`. 예를 들면, 다음 정책은 사용자에게 특정 클러스터에 대한 액세스 권한이 있음을 나타냅니다.
+    2. **Service Name** 값이 `containers-kubernetes`이며 **Service Instance** 값이 클러스터의 ID인 정책을 찾으십시오. `ibmcloud ks cluster-get --cluster <cluster_name>`을 실행하여 클러스터 ID를 찾을 수 있습니다. 예를 들면, 다음 정책은 사용자에게 특정 클러스터에 대한 액세스 권한이 있음을 나타냅니다.
         ```
         Policy ID:   140555ce-93ac-4fb2-b15d-6ad726795d90
         Roles:       Administrator
@@ -369,7 +365,7 @@ Instance ID inconsistent with worker records
 
 {: tsResolve}
 1.  클러스터가 현재 있는 영역이 클러스터를 프로비저닝하는 데 어느 인프라 계정을 사용하는지 확인하십시오.
-    1.  [{{site.data.keyword.containerlong_notm}} 클러스터 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/containers-kubernetes/clusters)에 로그인하십시오.
+    1.  [{{site.data.keyword.containerlong_notm}} 클러스터 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/clusters)에 로그인하십시오.
     2.  테이블에서 클러스터를 선택하십시오.
     3.  **개요** 탭에서 **인프라 사용자** 필드를 확인하십시오. 이 필드는 {{site.data.keyword.containerlong_notm}} 계정이 기본 외의 인프라 계정을 사용하고 있는지 판별하는 데 도움을 줍니다.
         * **인프라 사용자** 필드가 나타나지 않으면 사용자가 인프라 및 플랫폼 계정에 대해 동일한 인증 정보를 사용하는 연결된 종량과금제 계정을 보유 중입니다. 수정할 수 없는 클러스터는 다른 인프라 계정에 프로비저닝되었을 수 있습니다.
@@ -406,7 +402,7 @@ Instance ID inconsistent with worker records
 마스터 노드와 작업자 노드 간의 OpenVPN 연결이 제대로 작동하지 않습니다.
 
 {: tsResolve}
-1. 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
+1. 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
 2. OpenVPN 클라이언트 팟(Pod)을 다시 시작하십시오.
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -587,8 +583,8 @@ This service doesn't support creation of keys
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.12.6
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.12.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.12.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.12.7
   ```
   {: screen}
 
@@ -650,7 +646,7 @@ unable to validate against any pod security policy
 
 {{site.data.keyword.IBM_notm}} 클러스터 관리 리소스를 삭제한 경우에는 Kubernetes 마스터를 새로 고쳐서 이를 복원하십시오.
 
-1.  [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+1.  [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2.  Kubernetes 마스터를 새로 고쳐서 이를 복원하십시오.
 
     ```
@@ -679,14 +675,16 @@ unable to validate against any pod security policy
   - `ibmcloud ks clusters`를 실행하여 클러스터의 상태를 확인하십시오. 그런 다음, `ibmcloud ks workers --cluster <cluster_name>`을 실행하여 작업자 노드가 배치되었는지 확인하십시오.
   - VLAN이 올바른지 확인하십시오. 올바른 상태가 되려면 VLAN은 로컬 디스크 스토리지로 작업자를 호스팅할 수 있는 인프라와 연관되어야 합니다. `ibmcloud ks vlans --zone <zone>`을 실행하여 [VLAN을 나열](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)할 수 있으며, 해당 VLAN이 목록에 표시되지 않으면 이는 유효하지 않은 것입니다. 다른 VALN을 선택하십시오.
 
-
 <br />
+
+
 
 
 ## 레지스트리에서 이미지를 가져올 수 없음
 {: #ts_image_pull}
 
 {: tsSymptoms}
+
 {{site.data.keyword.registrylong_notm}}에서 이미지를 가져오는 워크로드를 배치할 때 팟(Pod)에 오류가 발생하며 **`ImagePullBackOff`** 상태가 됩니다.
 
 ```
@@ -720,7 +718,7 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
 {: screen}
 
 {: tsCauses}
-클러스터는 API 키 또는 [이미지 풀 시크릿](/docs/containers?topic=containers-images#cluster_registry_auth)에 저장된 토큰을 사용하여 클러스터가 {{site.data.keyword.registrylong_notm}}에서 이미지를 가져올 수 있는 권한을 부여합니다. 기본적으로 새 클러스터에는 API 키를 사용하여 클러스터가 `default` Kubernetes 네임스페이스에 배치된 컨테이너의 모든 지역 레지스트리에서 이미지를 가져올 수 있도록 하는 이미지 풀 시크릿이 있습니다. 클러스터에 토큰을 사용하는 이미지 풀 시크릿이 있는 경우 {{site.data.keyword.registrylong_notm}}에 대한 기본 액세스 권한은 특정 지역 레지스트리로만 더 제한됩니다.
+클러스터는 API 키 또는 [이미지 풀 시크릿](/docs/containers?topic=containers-images#cluster_registry_auth)에 저장된 토큰을 사용하여 클러스터가 {{site.data.keyword.registrylong_notm}}에서 이미지를 가져올 수 있는 권한을 부여합니다. 기본적으로 새 클러스터에는 API 키를 사용하여 클러스터가 `default` Kubernetes 네임스페이스에 배치된 컨테이너의 모든 지역 `icr.io` 레지스트리에서 이미지를 가져올 수 있도록 하는 이미지 풀 시크릿이 있습니다. 클러스터에 토큰을 사용하는 이미지 풀 시크릿이 있는 경우, {{site.data.keyword.registrylong_notm}}에 대한 기본 액세스 권한은 더 이상 사용되지 않는 `<region>.registry.bluemix.net` 도메인을 사용하는 특정 지역 레지스트리로만 더 제한됩니다.
 
 {: tsResolve}
 
@@ -840,7 +838,7 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
             ```
             {: pre}
         2.  `default` Kubernetes 네임스페이스에서 배치를 다시 작성하십시오. 권한 오류 메시지가 계속 표시되면 새 이미지 풀 시크릿을 사용하여 1-5단계를 반복하십시오. 여전히 로그인할 수 없으면 [Slack에서 IBM 팀에 문의하거나 {{site.data.keyword.Bluemix_notm}} 지원 케이스를 여십시오](#clusters_getting_help).
-    6.  로그인에 성공하면 로컬로 이미지를 가져오십시오. 명령이 실패하고 `access denied` 오류 메시지가 표시되는 경우 레지스트리 계정은 클러스터가 있는 계정과 다른 {{site.data.keyword.Bluemix_notm}} 계정에 있습니다. [다른 계정의 이미지에 액세스하는 이미지 풀 시크릿을 작성](/docs/containers?topic=containers-images#other_registry_accounts)하십시오. 명령이 성공하면 [Slack에서 IBM 팀에 문의하거나 {{site.data.keyword.Bluemix_notm}} 지원 케이스를 여십시오](#clusters_getting_help).
+    6.  로그인에 성공하면 로컬로 이미지를 가져오십시오. 명령이 실패하고 `access denied` 오류 메시지가 표시되는 경우 레지스트리 계정은 클러스터가 있는 계정과 다른 {{site.data.keyword.Bluemix_notm}} 계정에 있습니다. [다른 계정의 이미지에 액세스하는 이미지 풀 시크릿을 작성](/docs/containers?topic=containers-images#other_registry_accounts)하십시오. 이미지를 로컬 머신에 가져올 수 있는 경우 API 키에 올바른 권한이 제공되지만 클러스터의 API 설정은 올바르지 않습니다. 이 문제를 해결할 수 없습니다. [Slack에서 IBM 팀에 문의하거나 {{site.data.keyword.Bluemix_notm}} 지원 케이스를 여십시오](#clusters_getting_help).
         ```
         docker pull <region>icr.io/<namespace>/<image>:<tag>
         ```
@@ -1008,32 +1006,44 @@ kubectl get nodes
 팟(Pod)이 우선순위가 더 높은 팟(Pod)으로 대체되고 있는지 확인하려면 다음 작업을 수행하십시오.
 1.  팟(Pod)의 이름을 가져오십시오.
 
-  ```
+    ```
             kubectl get pods
-  ```
-  {: pre}
+    ```
+    {: pre}
 
-2.  팟(Pod) YAML 설명: `kubectl get pod <pod_name> -o yaml`
+2.  팟(Pod) YAML에 대한 설명을 출력하십시오.
+
+    ```
+        kubectl get pod <pod_name> -o yaml
+    ```
+    {: pre}
 
 3.  `priorityClassName` 필드를 확인하십시오.
 
     1.  `priorityClassName` 필드 값이 없는 경우 사용자 팟(Pod)의 우선순위 클래스는 `globalDefault`입니다. 클러스터 관리자가 `globalDefault` 우선순위 클래스를 설정하지 않은 경우 기본값은 영(0) 또는 가장 낮은 우선순위입니다. 이보다 우선순위가 더 높은 팟(Pod)은 사용자의 팟(Pod)을 대체하거나 제거할 수 있습니다.
-    2.  `priorityClassName` 필드 값이 있는 경우 다음과 같이 우선순위 클래스를 가져오십시오. `kubectl get priorityclass <priority_class_name> -o yaml`
+
+    2.  `priorityClassName` 필드 값이 있는 경우에는 우선순위 클래스를 가져오십시오.
+
+        ```
+        kubectl get priorityclass <priority_class_name> -o yaml
+        ```
+        {: pre}
+
     3.  `value` 필드를 참고하여 사용자 팟(Pod)의 우선순위를 확인하십시오.
 
 4.  클러스터 내의 기존 우선순위 클래스를 나열하십시오.
 
-  ```
+    ```
     kubectl get priorityclasses
-  ```
-  {: pre}
+    ```
+    {: pre}
 
 5.  각 우선순위 클래스에 대해 YAML 파일을 가져온 후 `value` 필드를 기록하십시오.
 
-  ```
+    ```
     kubectl get priorityclass <priority_class_name> -o yaml
-  ```
-  {: pre}
+    ```
+    {: pre}
 
 6.  사용자 팟(Pod)의 우선순위 클래스를 다른 우선순위 클래스 값과 비교하여 우선순위가 더 높은지, 또는 더 낮은지 확인하십시오.
 
@@ -1111,7 +1121,7 @@ Helm 차트의 문제점을 해결하려면 다음을 수행하십시오.
 
 {: tsSymptoms}
 
-Helm tiller를 설치하거나 공용 레지스트리(예: Docker 허브)의 이미지를 배치하려는 경우 설치에 실패하고 다음과 유사한 오류가 발생합니다.
+Helm tiller를 설치하거나 공용 레지스트리(예: DockerHub)의 이미지를 배치하려는 경우 설치에 실패하고 다음과 유사한 오류가 발생합니다.
 
 ```
 Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:
@@ -1123,7 +1133,7 @@ Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = 
 
 {: tsResolve}
 - 사용자 정의 방화벽을 사용하거나 사용자 정의 Calico 정책을 설정하는 경우, 이미지가 저장된 컨테이너 레지스트리와 작업자 노드 사이의 아웃바운드 및 인바운드 네트워크 트래픽을 허용하십시오. 이미지가 {{site.data.keyword.registryshort_notm}}에 저장되어 있으면 [클러스터가 인프라 리소스 및 기타 서비스에 액세스할 수 있도록 허용](/docs/containers?topic=containers-firewall#firewall_outbound)에서 필수 포트를 검토하십시오.
-- 개인 서비스 엔드포인트만 사용으로 설정하여 사설 클러스터를 작성한 경우 클러스터의 [공용 서비스 엔드포인트를 사용으로 설정](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)할 수 있습니다. 공용 연결을 열지 않고 사설 클러스터에 Helm 차트를 설치하려는 경우 [Tiller가 포함](/docs/containers?topic=containers-integrations#private_local_tiller)되거나 [Tiller가 포함되지 않은](/docs/containers?topic=containers-integrations#private_install_without_tiller) Helm을 설치할 수 있습니다.
+- 개인 서비스 엔드포인트만 사용으로 설정하여 사설 클러스터를 작성한 경우 클러스터의 [공용 서비스 엔드포인트를 사용으로 설정](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)할 수 있습니다. 공용 연결을 열지 않고 사설 클러스터에 Helm 차트를 설치하려는 경우 [Tiller가 포함](/docs/containers?topic=containers-helm#private_local_tiller)되거나 [Tiller가 포함되지 않은](/docs/containers?topic=containers-helm#private_install_without_tiller) Helm을 설치할 수 있습니다.
 
 <br />
 

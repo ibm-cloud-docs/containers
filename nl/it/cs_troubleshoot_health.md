@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -71,7 +71,7 @@ Controlla i seguenti motivi sul perché i tuoi log del cluster non vengono visua
   <tr>
     <td>Se hai specificato uno spazio durante la creazione del cluster, il proprietario dell'account non dispone delle autorizzazioni di Gestore, Sviluppatore o Revisore in quello spazio.</td>
       <td>Per modificare le autorizzazioni di accesso per il proprietario dell'account:
-      <ol><li>Per appurare chi è il proprietario dell'account per il cluster, esegui <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
+      <ol><li>Per appurare chi è il proprietario dell'account per il cluster, esegui <code>ibmcloud ks api-key-info</code>.</li>
       <li>Per concedere a tale proprietario dell'account le autorizzazioni di accesso allo spazio di gestore, sviluppatore o revisore {{site.data.keyword.containerlong_notm}}, consulta <a href="/docs/containers?topic=containers-users">Gestione dell'accesso al cluster</a>.</li>
       <li>Per aggiornare il token di registrazione dopo che sono state modificate le autorizzazioni, esegui <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
@@ -84,7 +84,7 @@ Controlla i seguenti motivi sul perché i tuoi log del cluster non vengono visua
 
 Per verificare le modifiche che hai apportato durante la risoluzione dei problemi, puoi distribuire *Noisy*, un pod di esempio che produce diversi eventi di log, a un nodo di lavoro nel tuo cluster.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Crea il file di configurazione `deploy-noisy.yaml`.
     ```
@@ -109,10 +109,10 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
     {:pre}
 
 3. Dopo alcuni minuti, puoi visualizzare i tuoi log nel dashboard Kibana. Per accedere al dashboard Kibana, vai a uno dei seguenti URL e seleziona l'account {{site.data.keyword.Bluemix_notm}} in cui hai creato il cluster. Se hai specificato uno spazio durante la creazione del cluster, vai a tale spazio.
-    - Stati Uniti Sud e Stati Uniti Est: https://logging.ng.bluemix.net
-    - Regno Unito-Sud: https://logging.eu-gb.bluemix.net
-    - Europa centrale: https://logging.eu-fra.bluemix.net
-    - Asia Pacifico Sud: https://logging.au-syd.bluemix.net
+    - Stati Uniti Sud e Stati Uniti Est: `https://logging.ng.bluemix.net`
+    - Regno Unito Sud: `https://logging.eu-gb.bluemix.net`
+    - Europa centrale: `https://logging.eu-fra.bluemix.net`
+    - Asia Pacifico Sud: `https://logging.au-syd.bluemix.net`
 
 <br />
 

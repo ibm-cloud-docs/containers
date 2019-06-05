@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,34 @@ subcollection: containers
 
 
 
+## 2019 年 4 月によく閲覧されたトピック
+{: #apr19}
+
+<table summary="この表には、よく閲覧されたトピックを示しています。行は左から右に読みます。1 列目は日付、2 列目は機能のタイトル、3 列目は説明です。">
+<caption>2019 年 4 月によく閲覧されたコンテナーと Kubernetes クラスターについてのトピック</caption>
+<thead>
+<th>日</th>
+<th>タイトル</th>
+<th>説明</th>
+</thead>
+<tbody>
+<tr>
+<td>2019 年 4 月 15 日</td>
+<td>[ネットワーク・ロード・バランサー (NLB) ホスト名の登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>インターネットにアプリを公開するパブリック・ネットワーク・ロード・バランサー (NLB) をセットアップした後に、ホスト名を作成して、NLB IP の DNS エントリーを作成できます。 {{site.data.keyword.Bluemix_notm}} によって、ホスト名のワイルドカード SSL 証明書の生成と保守が行われます。 また、TCP/HTTP(S) モニターをセットアップして、各ホスト名の背後にある NLB IP アドレスのヘルス・チェックを行うこともできます。</td>
+</tr>
+<tr>
+<td>2019 年 4 月 8 日</td>
+<td>[Web ブラウザーでの Kubernetes Terminal (ベータ版)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>{{site.data.keyword.Bluemix_notm}} コンソールでクラスター・ダッシュボードを使用してクラスターを管理する場合、より高度な構成変更を迅速に行うために、Kubernetes Terminal の Web ブラウザーから直接 CLI コマンドを実行できます。クラスターの詳細ページで**「Terminal」**ボタンをクリックして、Kubernetes Terminal を起動します。 Kubernetes Terminal はベータ版のアドオンとしてリリースされており、実動クラスターでの使用は想定されていません。</td>
+</tr>
+<tr>
+<td>2019 年 4 月 4 日</td>
+<td>[高可用性マスターがシドニーに](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>シドニーを含む、複数ゾーンの大都市ロケーションに[クラスターを作成した](/docs/containers?topic=containers-clusters#clusters_ui)場合は、Kubernetes 高可用性を実現するために、マスターのレプリカがゾーン間に分散されます。</td>
+</tr>
+</tbody></table>
+
 ## 2019 年 3 月によく閲覧されたトピック
 {: #mar19}
 
@@ -46,21 +74,21 @@ subcollection: containers
 <tr>
 <td>2019 年 3 月 21 日</td>
 <td>Kubernetes クラスター・マスター用のプライベート・サービス・エンドポイントの導入</td>
-<td>デフォルトでは、{{site.data.keyword.containerlong_notm}} は、パブリック VLAN およびプライベート VLAN にアクセスできるクラスターをセットアップします。以前は、[プライベート VLAN 専用クラスター](/docs/containers?topic=containers-plan_clusters#private_clusters)を使用したい場合には、クラスターのワーカー・ノードとマスターを接続するためにゲートウェイ・アプライアンスをセットアップする必要がありました。今では、プライベート・サービス・エンドポイントを使用できます。プライベート・サービス・エンドポイントが有効になっていれば、ワーカー・ノードとマスターの間のすべてのトラフィックがプライベート・ネットワーク経由で行われるので、ゲートウェイ・アプライアンス・デバイスは必要ありません。このようにセキュリティーが向上するだけでなく、プライベート・ネットワークのインバウンドとアウトバウンドのトラフィックは[無制限かつ無料です ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/bandwidth)。パブリック・サービス・エンドポイントは、インターネット経由で Kubernetes マスターに安全にアクセスできるように残しておくことができます。そうすれば、例えば、プライベート・ネットワークの中にいなくても `kubectl` コマンドを実行したりできます。<br><br>
-プライベート・サービス・エンドポイントを使用するには、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) および[サービス・エンドポイント](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)を有効にする必要があります。クラスターが Kubernetes バージョン 1.11 以降を実行している必要があります。これよりも前のバージョンの Kubernetes がクラスターで実行されている場合は、[1.11 以上のバージョンに更新](/docs/containers?topic=containers-update#update)してください。詳しくは、以下のリンクを参照してください。<ul>
+<td>デフォルトでは、{{site.data.keyword.containerlong_notm}} は、パブリック VLAN およびプライベート VLAN にアクセスできるクラスターをセットアップします。 以前は、[プライベート VLAN 専用クラスター](/docs/containers?topic=containers-plan_clusters#private_clusters)を使用したい場合には、クラスターのワーカー・ノードとマスターを接続するためにゲートウェイ・アプライアンスをセットアップする必要がありました。 今では、プライベート・サービス・エンドポイントを使用できます。 プライベート・サービス・エンドポイントが有効になっていれば、ワーカー・ノードとマスターの間のすべてのトラフィックがプライベート・ネットワーク経由で行われるので、ゲートウェイ・アプライアンス・デバイスは必要ありません。 このようにセキュリティーが向上するだけでなく、プライベート・ネットワークのインバウンドとアウトバウンドのトラフィックは[無制限かつ無料です ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/bandwidth)。 パブリック・サービス・エンドポイントは、インターネット経由で Kubernetes マスターに安全にアクセスできるように残しておくことができます。そうすれば、例えば、プライベート・ネットワークの中にいなくても `kubectl` コマンドを実行したりできます。<br><br>
+プライベート・サービス・エンドポイントを使用するには、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) および[サービス・エンドポイント](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)を有効にする必要があります。 クラスターが Kubernetes バージョン 1.11 以降を実行している必要があります。 これよりも前のバージョンの Kubernetes がクラスターで実行されている場合は、[1.11 以上のバージョンに更新](/docs/containers?topic=containers-update#update)してください。 詳しくは、以下のリンクを参照してください。<ul>
 <li>[サービス・エンドポイントを使用したマスター対ワーカーの通信について](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[プライベート・サービス・エンドポイントのセットアップ](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[パブリック・サービス・エンドポイントからプライベート・サービス・エンドポイントへの切り替え](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>プライベート・ネットワークにファイアウォールを設けている場合は、[{{site.data.keyword.containerlong_notm}}、{{site.data.keyword.registrylong_notm}}、およびその他の {{site.data.keyword.Bluemix_notm}} サービスのプライベート IP アドレスを追加](/docs/containers?topic=containers-firewall#firewall_outbound)します</li>
 </ul>
-<p class="important">プライベート・サービス・エンドポイントのみを使用するクラスターに切り替える場合は、使用している他の {{site.data.keyword.Bluemix_notm}} サービスとまだ通信できることを確認してください。[NFS ベースのファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_storage)、[Portworx ソフトウェア定義ストレージ (SDS)](/docs/containers?topic=containers-portworx#portworx)、および、[クラスターの自動スケーリング機能](/docs/containers?topic=containers-ca#ca)は、プライベート・サービス・エンドポイントのみの環境をサポートしていません。代わりに、パブリックとプライベートの両方のサービス・エンドポイントを持つクラスターを使用してください。</p>
+<p class="important">プライベート・サービス・エンドポイントのみを使用するクラスターに切り替える場合は、使用している他の {{site.data.keyword.Bluemix_notm}} サービスとまだ通信できることを確認してください。 [Portworx ソフトウェア定義ストレージ (SDS)](/docs/containers?topic=containers-portworx#portworx) および[クラスターの自動スケーリング機能](/docs/containers?topic=containers-ca#ca)は、プライベート・サービス・エンドポイントのみの環境をサポートしていません。 代わりに、パブリックとプライベートの両方のサービス・エンドポイントを持つクラスターを使用してください。 クラスターで Kubernetes のバージョン 1.13.4_1513、1.12.6_1544、1.11.8_1550、1.10.13_1551、またはそれ以降が実行されている場合は、[NFS ベースのファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_storage)がサポートされます。</p>
 </td>
 </tr>
 <tr>
 <td>2019 年 3 月 7 日</td>
 <td>[ベータ版のクラスター自動スケーリング機能の一般提供が開始](/docs/containers?topic=containers-ca#ca)</td>
-<td>クラスターの自動スケーリング機能の一般提供が開始されました。Helm プラグインをインストールすると、スケジュールされているワークロードのサイズ要件に応じて、クラスター内のワーカー・プールが自動的にスケーリングされ、ワーカー・ノード数が増減します。<br><br>
-クラスターの自動スケーリング機能についての支援が必要な場合やフィードバックを提供したい場合は、次のようにしてください。外部ユーザーの場合は、[公開されている Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/) に登録し、[#cluster-autoscaler ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/messages/CF6APMLBB) チャネルに投稿してください。IBM 登録ユーザーの場合は、[内部 Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-argonauts.slack.com/messages/C90D3KZUL) チャネルに投稿してください。</td>
+<td>クラスターの自動スケーリング機能の一般提供が開始されました。 Helm プラグインをインストールすると、スケジュールされているワークロードのサイズ要件に応じて、クラスター内のワーカー・プールが自動的にスケーリングされ、ワーカー・ノード数が増減します。<br><br>
+クラスターの自動スケーリング機能についての支援が必要な場合やフィードバックを提供したい場合は、次のようにしてください。 外部ユーザーの場合は、[公開されている Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/) に登録し、[#cluster-autoscaler ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/messages/CF6APMLBB) チャネルに投稿してください。 IBM 登録ユーザーの場合は、[内部 Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-argonauts.slack.com/messages/C90D3KZUL) チャネルに投稿してください。</td>
 </tr>
 </tbody></table>
 
@@ -81,21 +109,21 @@ subcollection: containers
 <tr>
 <td>2 月 25 日</td>
 <td>{{site.data.keyword.registrylong_notm}} からイメージをプルする処理がより細かく制御可能に</td>
-<td>{{site.data.keyword.containerlong_notm}} クラスターにワークロードをデプロイするときに、コンテナーが [{{site.data.keyword.registrylong_notm}} の新しい `icr.io` ドメイン名](/docs/services/Registry?topic=registry-registry_overview#registry_regions)からイメージをプルできるようになりました。さらに、{{site.data.keyword.Bluemix_notm}} IAM のきめの細かいアクセス・ポリシーを、イメージへのアクセスの制御に使用できます。詳しくは、[イメージをプルする権限がクラスターに与えられる仕組みについて](/docs/containers?topic=containers-images#cluster_registry_auth)を参照してください。</td>
+<td>{{site.data.keyword.containerlong_notm}} クラスターにワークロードをデプロイするときに、コンテナーが [{{site.data.keyword.registrylong_notm}} の新しい `icr.io` ドメイン名](/docs/services/Registry?topic=registry-registry_overview#registry_regions)からイメージをプルできるようになりました。 さらに、{{site.data.keyword.Bluemix_notm}} IAM のきめの細かいアクセス・ポリシーを、イメージへのアクセスの制御に使用できます。 詳しくは、[イメージをプルする権限がクラスターに与えられる仕組みについて](/docs/containers?topic=containers-images#cluster_registry_auth)を参照してください。</td>
 </tr>
 <tr>
 <td>2 月 21 日</td>
 <td>[メキシコでゾーンの提供開始](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)</td>
-<td>クラスターの新しいゾーンとして米国南部地域にメキシコ (`mex01`) が追加されました。ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のゾーンに対し、必ず[ファイアウォール・ポートを開いてください](/docs/containers?topic=containers-firewall#firewall_outbound)。</td>
+<td>クラスターの新しいゾーンとして米国南部地域にメキシコ (`mex01`) が追加されました。 ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のゾーンに対し、必ず[ファイアウォール・ポートを開いてください](/docs/containers?topic=containers-firewall#firewall_outbound)。</td>
 </tr>
 <tr><td>2019 年 2 月 6 日</td>
 <td>[{{site.data.keyword.containerlong_notm}} 上での Istio](/docs/containers?topic=containers-istio)</td>
-<td>{{site.data.keyword.containerlong_notm}} の Istio は、Istio のシームレスなインストール、Istio コントロール・プレーン・コンポーネントの自動更新とライフサイクル管理、プラットフォームのロギング・ツールやモニタリング・ツールとの統合が可能です。ワンクリックですべての Istio コア・コンポーネントを取得し、追加のトレース、モニタリング、視覚化を行い、BookInfo サンプル・アプリを稼働状態にすることができます。{{site.data.keyword.containerlong_notm}} 上の Istio は管理対象アドオンとして提供されるので、すべての Istio コンポーネントが {{site.data.keyword.Bluemix_notm}} によって自動的に最新に保たれます。</td>
+<td>{{site.data.keyword.containerlong_notm}} の Istio は、Istio のシームレスなインストール、Istio コントロール・プレーン・コンポーネントの自動更新とライフサイクル管理、プラットフォームのロギング・ツールやモニタリング・ツールとの統合が可能です。 ワンクリックですべての Istio コア・コンポーネントを取得し、追加のトレース、モニタリング、視覚化を行い、BookInfo サンプル・アプリを稼働状態にすることができます。 {{site.data.keyword.containerlong_notm}} 上の Istio は管理対象アドオンとして提供されるので、すべての Istio コンポーネントが {{site.data.keyword.Bluemix_notm}} によって自動的に最新に保たれます。</td>
 </tr>
 <tr>
 <td>2019 年 2 月 6 日</td>
 <td>[{{site.data.keyword.containerlong_notm}} の Knative](/docs/containers?topic=containers-knative_tutorial)</td>
-<td>Knative は、Kubernetes の機能を拡張するオープン・ソースのプラットフォームであり、ソース中心のモダンでサーバーレスなコンテナー化アプリを Kubernetes クラスター上に作成するのを支援します。{{site.data.keyword.containerlong_notm}} のマネージド Knative は、Kubernetes クラスターに Knative と Istio を直接統合するマネージド・アドオンです。アドオン内の Knative と Istio のバージョンは、IBM によってテストされ、{{site.data.keyword.containerlong_notm}} での使用をサポートされています。</td>
+<td>Knative は、Kubernetes の機能を拡張するオープン・ソースのプラットフォームであり、ソース中心のモダンでサーバーレスなコンテナー化アプリを Kubernetes クラスター上に作成するのを支援します。 {{site.data.keyword.containerlong_notm}} のマネージド Knative は、Kubernetes クラスターに Knative と Istio を直接統合するマネージド・アドオンです。 アドオン内の Knative と Istio のバージョンは、IBM によってテストされ、{{site.data.keyword.containerlong_notm}} での使用をサポートされています。</td>
 </tr>
 </tbody></table>
 
@@ -114,12 +142,12 @@ subcollection: containers
 <tr>
 <td>1 月 30 日</td>
 <td>{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割と Kubernetes 名前空間</td>
-<td>{{site.data.keyword.containerlong_notm}} で {{site.data.keyword.Bluemix_notm}} IAM の[サービス・アクセス役割](/docs/containers?topic=containers-access_reference#service)がサポートされるようになりました。これらのサービス・アクセス役割が [Kubernetes の RBAC](/docs/containers?topic=containers-users#role-binding) と連携して、クラスター内で `kubectl` 操作を実行することをユーザーに許可します。これにより、ポッドやデプロイメントなどの Kubernetes リソースを管理できます。さらに、{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割を使用して、クラスター内の[特定の Kubernetes 名前空間にユーザーのアクセスを制限する](/docs/containers?topic=containers-users#platform)ことができます。[プラットフォーム・アクセス役割](/docs/containers?topic=containers-access_reference#iam_platform)を使用して、`ibmcloud ks` 操作の実行をユーザーに許可できるようになりました。これにより、ワーカー・ノードなどのクラスター・インフラストラクチャーを管理できます。  <br><br>{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割は、これまでユーザーが IAM プラットフォーム・アクセス役割によって得ていた権限に基づいて、既存の {{site.data.keyword.containerlong_notm}} アカウントおよびクラスターに自動的に追加されます。将来は、IAM を使用して、アクセス・グループの作成、アクセス・グループへのユーザーの追加、プラットフォーム・アクセス役割やサービス・アクセス役割のグループへの割り当てを行えるようになります。詳しくは、ブログ [Introducing service roles and namespaces in IAM for more granular control of cluster access ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/) を参照してください。</td>
+<td>{{site.data.keyword.containerlong_notm}} で {{site.data.keyword.Bluemix_notm}} IAM の[サービス・アクセス役割](/docs/containers?topic=containers-access_reference#service)がサポートされるようになりました。 これらのサービス・アクセス役割が [Kubernetes の RBAC](/docs/containers?topic=containers-users#role-binding) と連携して、クラスター内で `kubectl` 操作を実行することをユーザーに許可します。これにより、ポッドやデプロイメントなどの Kubernetes リソースを管理できます。 さらに、{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割を使用して、クラスター内の[特定の Kubernetes 名前空間にユーザーのアクセスを制限する](/docs/containers?topic=containers-users#platform)ことができます。 [プラットフォーム・アクセス役割](/docs/containers?topic=containers-access_reference#iam_platform)を使用して、`ibmcloud ks` 操作の実行をユーザーに許可できるようになりました。これにより、ワーカー・ノードなどのクラスター・インフラストラクチャーを管理できます。<br><br>{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割は、これまでユーザーが IAM プラットフォーム・アクセス役割によって得ていた権限に基づいて、既存の {{site.data.keyword.containerlong_notm}} アカウントおよびクラスターに自動的に追加されます。 将来は、IAM を使用して、アクセス・グループの作成、アクセス・グループへのユーザーの追加、プラットフォーム・アクセス役割やサービス・アクセス役割のグループへの割り当てを行えるようになります。 詳しくは、ブログ [Introducing service roles and namespaces in IAM for more granular control of cluster access ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/) を参照してください。</td>
 </tr>
 <tr>
 <td>1 月 8 日</td>
 <td>[クラスターの自動スケーリング機能のベータ版プレビュー](/docs/containers?topic=containers-ca#ca)</td>
-<td>スケジュールされているワークロードのサイズ要件に応じて、クラスター内のワーカー・プールが自動的にスケーリングされ、ワーカー・プール内のワーカー・ノード数が増減します。このベータ版を試すには、ホワイトリストへのアクセスを要求する必要があります。</td>
+<td>スケジュールされているワークロードのサイズ要件に応じて、クラスター内のワーカー・プールが自動的にスケーリングされ、ワーカー・プール内のワーカー・ノード数が増減します。 このベータ版を試すには、ホワイトリストへのアクセスを要求する必要があります。</td>
 </tr>
 <tr>
 <td>1 月 8 日</td>
@@ -142,7 +170,7 @@ subcollection: containers
 <tr>
 <td>12 月 11 日</td>
 <td>Portworx による SDS のサポート</td>
-<td>Portworx を使用すると、コンテナー化されたデータベースやその他のステートフル・アプリのための永続ストレージを管理したり、複数のゾーンのポッド間でデータを共有したりできます。[Portworx ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://portworx.com/products/introduction/) は、複数のワーカー・ノードのローカル・ブロック・ストレージを管理して 1 つの統合永続ストレージ層をアプリのために作成する、可用性の高いソフトウェア定義ストレージ (SDS) ソリューションです。複数のワーカー・ノードの間でコンテナー・レベルの各ボリュームを複製することで、Portworx はデータの永続性とデータ・アクセシビリティーをゾーンをまたいで確保します。詳しくは、[Portworx によるソフトウェア定義ストレージ (SDS) へのデータ保管](/docs/containers?topic=containers-portworx#portworx)を参照してください。</td>
+<td>Portworx を使用すると、コンテナー化されたデータベースやその他のステートフル・アプリのための永続ストレージを管理したり、複数のゾーンのポッド間でデータを共有したりできます。 [Portworx ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://portworx.com/products/introduction/) は、複数のワーカー・ノードのローカル・ブロック・ストレージを管理して 1 つの統合永続ストレージ層をアプリのために作成する、可用性の高いソフトウェア定義ストレージ (SDS) ソリューションです。 複数のワーカー・ノードの間でコンテナー・レベルの各ボリュームを複製することで、Portworx はデータの永続性とデータ・アクセシビリティーをゾーンをまたいで確保します。 詳しくは、[Portworx によるソフトウェア定義ストレージ (SDS) へのデータ保管](/docs/containers?topic=containers-portworx#portworx)を参照してください。    </td>
 </tr>
 <tr>
 <td>12 月 6 日</td>
@@ -152,7 +180,7 @@ subcollection: containers
 <tr>
 <td>12 月 4 日</td>
 <td>[ワーカー・ノードのリソース予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)</td>
-<td>デプロイするアプリが多すぎるためにクラスターの容量を超過しないか心配していませんか? ワーカー・ノードのリソース予約と Kubernetes 強制除去機能を利用すれば、稼働を維持するためのリソースをクラスターが十分に確保できるようにクラスターのコンピューティング容量を保護することができます。少数のワーカー・ノードを追加するだけで、ポッドがそれらで実行されるように自動的に再スケジュールされます。ワーカー・ノードのリソース予約は、最新 [バージョンのパッチ変更](/docs/containers?topic=containers-changelog#changelog)で更新されています。</td>
+<td>デプロイするアプリが多すぎるためにクラスターの容量を超過しないか心配していませんか? ワーカー・ノードのリソース予約と Kubernetes 強制除去機能を利用すれば、稼働を維持するためのリソースをクラスターが十分に確保できるようにクラスターのコンピューティング容量を保護することができます。 少数のワーカー・ノードを追加するだけで、ポッドがそれらで実行されるように自動的に再スケジュールされます。 ワーカー・ノードのリソース予約は、最新 [バージョンのパッチ変更](/docs/containers?topic=containers-changelog#changelog)で更新されています。</td>
 </tr>
 </tbody></table>
 
@@ -179,8 +207,8 @@ subcollection: containers
 </tr>
 <tr>
 <td>11 月 7 日</td>
-<td>ロード・バランサー 2.0 (ベータ)</td>
-<td>クラスター・アプリをパブリックに安全に公開するために、[ロード・バランサー 1.0 と 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) の間で選択できるようになりました。</td>
+<td>ネットワーク・ロード・バランサー 2.0 (ベータ版)</td>
+<td>クラスター・アプリをパブリックに安全に公開するために、[NLB 1.0 と 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) の間で選択できるようになりました。</td>
 </tr>
 <tr>
 <td>11 月 7 日</td>
@@ -189,7 +217,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>11 月 7 日</td>
-<td>Kubernetes バージョン 1.10 を実行するクラスターの高可用性マスター</td>
+<td>高可用性のマスター</td>
 <td>Kubernetes バージョン 1.10 を実行するクラスターで高可用性マスターを使用できます。 1.11 クラスターに関する過去の情報で説明されているすべてのメリットが 1.10 クラスターに適用されます。また、実行する必要がある[準備手順](/docs/containers?topic=containers-cs_versions#110_ha-masters)も適用されます。</td>
 </tr>
 <tr>
@@ -223,7 +251,7 @@ subcollection: containers
 <tr>
 <td>10 月 22 日</td>
 <td>[新しいロンドン複数ゾーン・ロケーション `lon05`](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>複数ゾーンの大都市ロンドンは、`lon02` ゾーンから、新しい `lon05` ゾーンに置き換えられました。これは、`lon02` より多くのインフラストラクチャー・リソースを備えています。 新しい複数ゾーン・クラスターを作成するときは、`lon05` を使用してください。 `lon02` を使用した既存のクラスターもサポートされますが、新しい複数ゾーン・クラスターでは代わりに `lon05` を使用する必要があります。</td>
+<td>複数ゾーンの大都市ロケーションであるロンドンは、`lon02` ゾーンから、新しい `lon05` ゾーンに置き換えられました。これは、`lon02` より多くのインフラストラクチャー・リソースを備えています。新しい複数ゾーン・クラスターを作成するときは、`lon05` を使用してください。 `lon02` を使用した既存のクラスターもサポートされますが、新しい複数ゾーン・クラスターでは代わりに `lon05` を使用する必要があります。</td>
 </tr>
 <tr>
 <td>10 月 5 日</td>
@@ -424,7 +452,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>3 月 14 日</td>
-<td>[{{site.data.keyword.appid_full}} による安全なサインイン](/docs/containers?topic=containers-integrations#appid)</td>
+<td>[{{site.data.keyword.appid_full}} による安全なサインイン](/docs/containers?topic=containers-supported_integrations#appid)</td>
 <td>ユーザーに対してサインインを要求することにより、{{site.data.keyword.containerlong_notm}} で実行されるアプリのセキュリティーを強化します。</td>
 </tr>
 <tr>

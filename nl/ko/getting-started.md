@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -30,17 +30,6 @@ Kubernetes 클러스터에서 실행되는 Docker 컨테이너에 고가용성 �
 {:shortdesc}
 
 컨테이너는 환경 간에 앱을 원활하게 이동시킬 수 있도록 앱 및 해당 종속성을 모두 패키징하는 표준 방식입니다.  가상 머신과 달리 컨테이너는 운영 체제를 함께 제공하지 않습니다. 앱 코드, 런타임, 시스템 도구, 라이브러리 및 설정만 컨테이너 내에 패키징됩니다. 컨테이너는 가상 머신보다 경량이고 휴대하기 쉬우며 효율적입니다.
-
-
-시작하려면 옵션을 클릭하십시오.
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="빠르게 {{site.data.keyword.containerlong_notm}}를 시작하려면 아이콘을 클릭하십시오. {{site.data.keyword.Bluemix_dedicated_notm}}에서 사용자 옵션을 보려면 이 아이콘을 클릭하십시오. " style="width:440px;" />
-<map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="{{site.data.keyword.Bluemix_notm}}에서 Kubernetes 클러스터 시작하기" title="{{site.data.keyword.Bluemix_notm}}에서 Kubernetes 클러스터 시작하기" shape="rect" coords="-7, -8, 108, 211" />
-<area href="/docs/containers?topic=containers-cs_cli_install" alt="CLI를 설치하십시오." title="CLI를 설치하십시오." shape="rect" coords="155, -1, 289, 210" />
-<area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} 클라우드 환경" title="{{site.data.keyword.Bluemix_notm}} 클라우드 환경" shape="rect" coords="326, -10, 448, 218" />
-</map>
-
 
 ## 클러스터 시작하기
 {: #clusters_gs}
@@ -76,7 +65,7 @@ Kubernetes 클러스터에서 실행되는 Docker 컨테이너에 고가용성 �
 **다음에 수행할 작업**</br>
 만료되기 전에 무료 클러스터로 일부 작업을 시도해 보십시오.
 
-* Kubernetes 클러스터 작성, CLI 설치, 개인용 레지스트리 작성, 클러스터 환경 설정 및 클러스터에 서비스 추가에 대해서는 [첫 번째 {{site.data.keyword.containerlong_notm}} 튜토리얼](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)을 살펴보십시오.
+* Kubernetes 클러스터 작성, CLI 설치, Kubernetes 터미널 사용, 개인용 레지스트리 작성, 클러스터 환경 설정 및 클러스터에 서비스 추가에 대해서는 [첫 번째 {{site.data.keyword.containerlong_notm}} 튜토리얼](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)을 살펴보십시오.
 * 클러스터에 앱 배치에 대한 [두 번째 {{site.data.keyword.containerlong_notm}} 튜토리얼](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)을 계속 진행하십시오.
 * 고가용성을 위해 다중 노드의 [표준 클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui)하십시오.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -46,12 +46,12 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 |注册表|描述|优点|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-index)|使用此选项，可以在 {{site.data.keyword.registryshort_notm}} 中设置您自己的安全 Docker 映像存储库，在其中可以安全地存储映像并在集群用户之间共享这些映像。|<ul><li>管理对您帐户中映像的访问权。</li><li>将 {{site.data.keyword.IBM_notm}} 提供的映像和样本应用程序（如 {{site.data.keyword.IBM_notm}} Liberty）用作父映像，并向其添加您自己的应用程序代码。</li><li>漏洞顾问程序会自动扫描映像以确定是否有潜在漏洞，包括特定于操作系统的漏洞修复建议。</li></ul>|
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)|使用此选项，可以在 {{site.data.keyword.registryshort_notm}} 中设置您自己的安全 Docker 映像存储库，在其中可以安全地存储映像并在集群用户之间共享这些映像。|<ul><li>管理对您帐户中映像的访问权。</li><li>将 {{site.data.keyword.IBM_notm}} 提供的映像和样本应用程序（如 {{site.data.keyword.IBM_notm}} Liberty）用作父映像，并向其添加您自己的应用程序代码。</li><li>漏洞顾问程序会自动扫描映像以确定是否有潜在漏洞，包括特定于操作系统的漏洞修复建议。</li></ul>|
 |其他任何专用注册表|通过创建[映像拉取私钥 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/containers/images/)，将任何现有专用注册表连接到集群。私钥用于将注册表 URL 和凭证安全地保存在 Kubernetes 私钥中。|<ul><li>独立于源（Docker Hub、组织拥有的注册表或其他云专用注册表）使用现有专用注册表。</li></ul>|
-|[公共 Docker Hub ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://hub.docker.com/){: #dockerhub}|使用此选项可在不需要 Dockerfile 更改时，在 [Kubernetes 部署 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) 中通过 Docker Hub 直接使用现有公共映像。<p>**注**：请记住，此选项可能不满足您组织的安全需求，如访问管理、漏洞扫描或应用程序隐私。</p>|<ul><li>无需为集群进行其他设置。</li><li>包含各种开放式源代码应用程序。</li></ul>|
+|[公共 Docker Hub ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://hub.docker.com/){: #dockerhub}|使用此选项可在不需要 Dockerfile 更改时，在 [Kubernetes 部署 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) 中直接通过 Docker Hub 使用现有公共映像。<p>**注**：请记住，此选项可能不满足您组织的安全需求，如访问管理、漏洞扫描或应用程序隐私。</p>|<ul><li>无需为集群进行其他设置。</li><li>包含各种开放式源代码应用程序。</li></ul>|
 {: caption="公共和专用映像注册表选项" caption-side="top"}
 
-设置映像注册表后，集群用户可以使用映像将其应用程序部署到集群。
+设置映像注册表后，集群用户可以使用映像将应用程序部署到集群。
 
 使用容器映像时，请了解有关[确保个人信息安全](/docs/containers?topic=containers-security#pi)的更多信息。
 
@@ -73,35 +73,120 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 <br />
 
 
-## 了解如何授权集群从 {{site.data.keyword.registrylong_notm}} 中拉取映像
-{: #cluster_registry_auth}
+## 将容器从 {{site.data.keyword.registryshort_notm}} 映像部署到 `default` Kubernetes 名称空间
+{: #namespace}
 
-创建集群时，集群会具有 {{site.data.keyword.Bluemix_notm}} IAM 服务标识，此标识已被授予对 {{site.data.keyword.registrylong_notm}} 的 IAM **读取者**服务访问角色策略。在存储于集群的映像拉取私钥中的非到期 API 密钥中，会模拟服务标识凭证。映像拉取私钥会添加到 `default` Kubernetes 名称空间以及此名称空间的 `default` 服务帐户中的私钥列表。使用映像拉取私钥时，部署可以在[全局和区域注册表](/docs/services/Registry?topic=registry-registry_overview#registry_regions)中拉取（只读访问）映像，用于在 `default` Kubernetes 名称空间中构建容器。全局注册表用于安全地存储 IBM 提供的公共映像，您可以在不同部署中引用这些映像，而不用分别引用存储在各个区域注册表中的映像。区域注册表用于安全地存储您自己的专用 Docker 映像。
+可以通过 IBM 提供的公共映像将容器部署到集群，也可以通过存储在 {{site.data.keyword.registryshort_notm}} 名称空间中的专用映像来部署。有关集群如何访问注册表映像的更多信息，请参阅[了解如何授权集群从 {{site.data.keyword.registrylong_notm}} 中拉取映像](#cluster_registry_auth)。
 {:shortdesc}
 
-如果要将拉取访问权限制为只能访问特定区域注册表，那么可以[编辑服务标识的现有 IAM 策略](/docs/iam?topic=iam-serviceidpolicy#access_edit)，以将**读取者**服务访问角色限制为只能访问该区域注册表或注册表资源（例如，名称空间）。必须[启用对 {{site.data.keyword.registrylong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM 策略](/docs/services/Registry?topic=registry-user#existing_users)后，才能定制注册表 IAM 策略。
+开始之前：
+1. [在 {{site.data.keyword.registryshort_notm}} 中设置名称空间，并将映像推送到此名称空间](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
+2. [创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
+3. 如果具有在 **2019 年 2 月 25 日**之前创建的现有集群，请[更新集群以使用 API 密钥 `imagePullSecret`](#imagePullSecret_migrate_api_key)。
+4. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
-使用此初始设置时，可以通过 {{site.data.keyword.Bluemix_notm}} 帐户的名称空间中可用的任何映像，[部署容器](#namespace)至集群的 **default** Kubernetes 名称空间。要在其他 Kubernetes 名称空间或其他 {{site.data.keyword.Bluemix_notm}} 帐户中使用这些映像，请[复制或创建您自己的映像拉取私钥](#other)。
+要将容器部署到集群的 **default** 名称空间，请执行以下操作：
 
-想要使注册表凭证更安全吗？请要求集群管理员在集群中[启用 {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect)，以加密集群中的 Kubernetes 私钥，例如用于存储注册表凭证的 `imagePullSecret`。
-{: tip}
+1.  创建名为 `mydeployment.yaml` 的部署配置文件。
+2.  定义部署以及要从 {{site.data.keyword.registryshort_notm}} 中您的名称空间使用的映像。
 
-支持通过自动创建[令牌](/docs/services/Registry?topic=registry-registry_access#registry_tokens)并将令牌存储在映像拉取私钥中来授权集群访问 {{site.data.keyword.registrylong_notm}} 的先前方法，但不推荐使用此方法。对于映像拉取私钥，请[更新集群以使用 API 密钥方法](#imagePullSecret_migrate_api_key)，并更新部署以从 `icr.io` 域名中拉取映像。
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: <app_name>-deployment
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: <app_name>
+      template:
+        metadata:
+          labels:
+            app: <app_name>
+        spec:
+          containers:
+          - name: <app_name>
+            image: <region>.icr.io/<namespace>/<my_image>:<tag>
+    ```
+    {: codeblock}
+
+    将映像 URL 变量替换为映像的信息：
+    *  **`<app_name>`**：应用程序的名称。 
+    *  **`<region>`**：注册表域的区域 {{site.data.keyword.registryshort_notm}} API 端点。要列出您登录到的区域的域，请运行 `ibmcloud cr api`。
+    *  **`<namespace>`**：注册表名称空间。要获取名称空间信息，请运行 `ibmcloud cr namespace-list`。
+    *  **`<my_image>:<tag>`**：要用于构建容器的映像和标记。要获取注册表中可用的映像，请运行 `ibmcloud cr images`。
+
+3.  在集群中创建部署。
+
+    ```
+    kubectl apply -f mydeployment.yaml
+    ```
+    {: pre}
+
+<br />
+
+
+## 了解如何授权集群从注册表中拉取映像
+{: #cluster_registry_auth}
+
+为了从注册表中拉取映像，{{site.data.keyword.containerlong_notm}} 集群会使用一种特殊类型的 Kubernetes 私钥，即 `imagePullSecret`。此映像拉取私钥存储了用于访问容器注册表的凭证。容器注册表可以是 {{site.data.keyword.registrylong_notm}} 中您的名称空间、{{site.data.keyword.registrylong_notm}} 中属于其他 {{site.data.keyword.Bluemix_notm}} 帐户的名称空间，或者其他任何专用注册表（如 Docker）。您的集群设置为从 {{site.data.keyword.registrylong_notm}} 中您的名称空间中拉取映像，并将基于这些映像的容器部署到集群中的 `default` Kubernetes 名称空间。如果需要拉取其他集群 Kubernetes 名称空间中或其他注册表中的映像，那么必须设置映像拉取私钥。
+{:shortdesc}
+
+**集群如何设置为从 `default` Kubernetes 名称空间中拉取映像？**<br>
+创建集群时，集群会具有 {{site.data.keyword.Bluemix_notm}} IAM 服务标识，此标识已被授予对 {{site.data.keyword.registrylong_notm}} 的 IAM **读取者**服务访问角色策略。在存储于集群的映像拉取私钥中的非到期 API 密钥中，会模拟服务标识凭证。映像拉取私钥会添加到 `default` Kubernetes 名称空间以及此名称空间的 `default` 服务帐户中的私钥列表。使用映像拉取私钥时，部署可以在[全局和区域注册表](/docs/services/Registry?topic=registry-registry_overview#registry_regions)中拉取（只读访问）映像，用于在 `default` Kubernetes 名称空间中构建容器。全局注册表用于安全地存储 IBM 提供的公共映像，您可以在不同部署中引用这些映像，而不用分别引用存储在各个区域注册表中的映像。区域注册表用于安全地存储您自己的专用 Docker 映像。
+
+
+**可以将拉取访问权限制为只能访问特定区域注册表吗？**<br>
+可以，可以[编辑服务标识的现有 IAM 策略](/docs/iam?topic=iam-serviceidpolicy#access_edit)，以将**读取者**服务访问角色限制为只能访问该区域注册表或注册表资源（例如，名称空间）。必须[启用对 {{site.data.keyword.registrylong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM 策略](/docs/services/Registry?topic=registry-user#existing_users)后，才能定制注册表 IAM 策略。
+
+  想要使注册表凭证更安全吗？请要求集群管理员在集群中[启用 {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect)，以加密集群中的 Kubernetes 私钥，例如用于存储注册表凭证的 `imagePullSecret`。
+  {: tip}
+
+**可以拉取非 `default` Kubernetes 名称空间中的映像吗？**<br>
+缺省情况下不能。使用缺省集群设置时，可以将基于 {{site.data.keyword.registrylong_notm}} 名称空间中所存储任何映像的容器部署到集群的 `default` Kubernetes 名称空间。要在其他 Kubernetes 名称空间或其他 {{site.data.keyword.Bluemix_notm}} 帐户中使用这些映像，[可选择复制或创建您自己的映像拉取私钥](#other)。
+
+**可以从其他 {{site.data.keyword.Bluemix_notm}} 帐户拉取映像吗？**<br>
+可以，在要使用的 {{site.data.keyword.Bluemix_notm}} 帐户中创建 API 密钥。然后，在要从中拉取映像的每个集群和集群名称空间中创建一个映像拉取私钥，用于存储这些 API 密钥凭证。请[遵循使用授权服务标识 API 密钥的此示例](#other_registry_accounts)。
+
+要使用非 {{site.data.keyword.Bluemix_notm}} 注册表（如 Docker），请参阅[访问存储在其他专用注册表中的映像](#private_images)。
+
+**API 密钥是否需要对应于服务标识？如果达到帐户的服务标识数限制，会发生什么情况？**<br>
+缺省集群设置会创建服务标识，用于将 {{site.data.keyword.Bluemix_notm}} IAM API 密钥凭证存储在映像拉取私钥中。但是，您还可以为单个用户创建 API 密钥，并将这些凭证存储在一个映像拉取私钥中。如果达到[服务标识的 IAM 限制](/docs/iam?topic=iam-iam_limits#iam_limits)，那么您的集群将在不使用服务标识和映像拉取私钥的情况下进行创建，并且缺省情况下无法从 `icr.io` 注册表域中拉取映像。您必须[创建自己的映像拉取私钥](#other_registry_accounts)，但创建时须使用单个用户（例如功能标识，而不是 {{site.data.keyword.Bluemix_notm}} IAM 服务标识）的 API 密钥。
+
+**我的集群映像拉取私钥使用的是注册表令牌。令牌还仍然有效吗？**<br>
+
+支持通过自动创建[令牌](/docs/services/Registry?topic=registry-registry_access#registry_tokens)并将令牌存储在映像拉取私钥中来授权集群访问 {{site.data.keyword.registrylong_notm}} 的先前方法，但不推荐使用此方法。
 {: deprecated}
 
-### 更新现有集群以使用 API 密钥映像拉取私钥
+令牌用于授权访问不推荐使用的 `registry.bluemix.net` 注册表域，而 API 密钥用于授权访问 `icr.io` 注册表域。在从基于令牌的认证转换为基于 API 密钥的认证期间，将创建基于令牌和基于 API 密钥的映像拉取私钥一次。通过基于令牌和基于 API 密钥的映像拉取私钥，集群可以从 `registry.bluemix.net` 中拉取映像，或从 `default` Kubernetes 名称空间中的 `icr.io` 域中拉取映像。
+
+在不推荐使用的令牌和 `registry.bluemix.net` 域变为不受支持之前，请更新集群映像拉取私钥，以将 API 密钥方法用于 [`default` Kubernetes 名称空间](#imagePullSecret_migrate_api_key)以及可能使用的[其他任何名称空间或帐户](#other)。然后，将部署更新为从 `icr.io` 注册表域中进行拉取。
+
+<br />
+
+
+## 更新现有集群以使用 API 密钥映像拉取私钥
 {: #imagePullSecret_migrate_api_key}
 
-新 {{site.data.keyword.containerlong_notm}} 集群会在映像拉取私钥中存储 API 密钥，以授权访问 {{site.data.keyword.registrylong_notm}}。使用这些映像拉取私钥时，可以通过存储在 `icr.io` 注册表域中的映像来部署容器。对于在 **2019 年 2 月 25 日**之前创建的集群，必须更新集群以在映像拉取私钥中存储 API 密钥，而不存储注册表令牌。
+新 {{site.data.keyword.containerlong_notm}} 集群会[在映像拉取私钥中存储 API 密钥，以授权访问 {{site.data.keyword.registrylong_notm}}](#cluster_registry_auth)。使用这些映像拉取私钥时，可以通过存储在 `icr.io` 注册表域中的映像来部署容器。对于在 **2019 年 2 月 25 日**之前创建的集群，必须更新集群以在映像拉取私钥中存储 API 密钥，而不存储注册表令牌。
 {: shortdesc}
 
-开始之前：
+**开始之前**：
 *   [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 *   确保您具有以下许可权：
-    *   对 {{site.data.keyword.containerlong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **操作员或管理员**平台角色
-    *   对 {{site.data.keyword.registrylong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色
+    *   对 {{site.data.keyword.containerlong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **操作员或管理员**平台角色。帐户所有者可以通过运行以下命令为您授予角色：
+        ```
+        ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles Administrator,Operator
+        ```
+        {: pre}
+    *   在所有区域和资源组中，对 {{site.data.keyword.registrylong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色。帐户所有者可以通过运行以下命令为您授予角色：
+        ```
+        ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
+        ```
+        {: pre}
 
-要更新集群映像拉取私钥，请执行以下操作：
+**要更新 `default` Kubernetes 名称空间中的集群映像拉取私钥，请执行以下操作**：
 1.  获取集群标识。
     ```
     ibmcloud ks clusters
@@ -122,7 +207,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     ```
     {: pre}
 输出示例：
-        ```
+    ```
     default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
     default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
     default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
@@ -140,63 +225,13 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     1.  确保[对 {{site.data.keyword.registrylong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM 策略已启用](/docs/services/Registry?topic=registry-user#existing_users)。
     2.  针对服务标识[编辑 {{site.data.keyword.Bluemix_notm}} IAM 策略](/docs/iam?topic=iam-serviceidpolicy#access_edit)，或[创建其他映像拉取私钥](/docs/containers?topic=containers-images#other_registry_accounts)。
 
-## 将容器从 {{site.data.keyword.registryshort_notm}} 映像部署到 `default` Kubernetes 名称空间
-{: #namespace}
-
-可以通过 IBM 提供的公共映像将容器部署到集群，也可以通过存储在 {{site.data.keyword.registryshort_notm}} 名称空间中的专用映像来部署。有关访问权工作方式的更多信息，请参阅[了解如何授权集群从 {{site.data.keyword.registrylong_notm}} 拉取映像](#cluster_registry_auth)。
-{:shortdesc}
-
-开始之前：
-1. [在 {{site.data.keyword.registryshort_notm}} 中设置名称空间，并将映像推送到此名称空间](/docs/services/Registry?topic=registry-index#registry_namespace_add)。
-2. [创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
-3. 如果使用的是在 **<DATE>**之前创建的现有集群，请[更新集群以使用 API 密钥 `imagePullSecret`](#imagePullSecret_migrate_api_key)。
-4. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-
-要将容器部署到集群的**缺省**名称空间，请创建配置文件。
-
-1.  创建名为 `mydeployment.yaml` 的部署配置文件。
-2.  定义部署以及要在 {{site.data.keyword.registryshort_notm}} 的名称空间中使用的映像。
-
-    要使用 {{site.data.keyword.registryshort_notm}} 的名称空间中的专用映像，请使用以下内容：
-
-
-    ```
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: ibmliberty-deployment
-    spec:
-      replicas: 3
-      template:
-        metadata:
-          labels:
-            app: ibmliberty
-        spec:
-          containers:
-          - name: ibmliberty
-            image: <region>.icr.io/<namespace>/<my_image>:<tag>
-    ```
-    {: codeblock}
-
-    将映像 URL 变量替换为映像的信息：
-    *  **`<region>`**：要列出您所在区域的域，请运行 `ibmcloud cr api`。
-    *  **`<namespace>`**：要获取名称空间信息，请运行 `ibmcloud cr namespace-list`。
-    *  **`<my_image>:<tag>`**：要获取注册表中可用的映像，请运行 `ibmcloud cr images`。
-
-3.  在集群中创建部署。
-
-    ```
-    kubectl apply -f mydeployment.yaml
-    ```
-    {: pre}
-
 <br />
 
 
-## 使用映像拉取私钥访问其他 Kubernetes 名称空间、其他 {{site.data.keyword.Bluemix_notm}} 帐户或外部专用注册表
+## 使用映像拉取私钥访问其他集群 Kubernetes 名称空间、其他 {{site.data.keyword.Bluemix_notm}} 帐户或外部专用注册表
 {: #other}
 
-使用您自己的映像拉取私钥，以将容器部署到非 `default` Kubernetes 名称空间，使用存储在其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，或使用存储在外部专用注册表中的映像。此外，您还可以创建新的映像拉取私钥来应用 IAM 访问策略，以将许可权作用对象限制为特定注册表映像存储库、名称空间或操作（例如，`push` 或 `pull`）。
+在集群中设置您自己的映像拉取私钥，以将容器部署到非 `default` Kubernetes 名称空间，使用存储在其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，或使用存储在外部专用注册表中的映像。此外，您还可以创建自己的映像拉取私钥来应用 IAM 访问策略，以将许可权作用对象限制为特定注册表映像存储库、名称空间或操作（例如，`push` 或 `pull`）。
 {:shortdesc}
 
 映像拉取私钥仅对于创建用于的 Kubernetes 名称空间有效。对要部署容器的每个名称空间，重复这些步骤。来自 [DockerHub](#dockerhub) 的映像不需要映像拉取私钥。
@@ -204,24 +239,24 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 开始之前：
 
-1.  [在 {{site.data.keyword.registryshort_notm}} 中设置名称空间，并将映像推送到此名称空间](/docs/services/Registry?topic=registry-index#registry_namespace_add)。
+1.  [在 {{site.data.keyword.registryshort_notm}} 中设置名称空间，并将映像推送到此名称空间](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
 2.  [创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
-3.  如果使用的是在 **<DATE>**之前创建的现有集群，请[更新集群以使用 API 密钥映像拉取私钥](#imagePullSecret_migrate_api_key)。
+3.  如果具有在 **2019 年 2 月 25 日**之前创建的现有集群，请[更新集群以使用 API 密钥映像拉取私钥](#imagePullSecret_migrate_api_key)。
 4.  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 <br/>
 要使用您自己的映像拉取私钥，请从以下选项中进行选择：
-- [将映像拉取私钥从 default Kubernetes 名称空间复制到集群中的其他名称空间](#copy_imagePullSecret)。
-- [创建映像拉取私钥以访问其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，或应用 IAM 策略来限制注册表访问权](#other_registry_accounts)。
+- 从 default Kubernetes 名称空间[复制映像拉取私钥](#copy_imagePullSecret)至集群中的其他名称空间。
+- [创建新的 IAM API 密钥凭证并将其存储在映像拉取私钥中](#other_registry_accounts)，以访问其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，或应用 IAM 策略来限制对特定注册表域或名称空间的访问权。
 - [创建映像拉取私钥以访问外部专用注册表中的映像](#private_images)。
 
 <br/>
 如果已经在名称空间中创建了要在部署中使用的映像拉取私钥，请参阅[使用创建的 `imagePullSecret` 部署容器](#use_imagePullSecret)。
 
-### 将映像拉取私钥从 default 名称空间复制到集群中的其他名称空间
+### 复制现有映像拉取私钥
 {: #copy_imagePullSecret}
 
-可以将自动为 `default` Kubernetes 名称空间创建的映像拉取私钥复制到集群中的其他名称空间。如果要将其他 {{site.data.keyword.Bluemix_notm}} IAM 服务标识和 API 密钥凭证用于此名称空间，那么可以改为[创建映像拉取私钥](#other_registry_accounts)。
+可以将映像拉取私钥（例如自动为 `default` Kubernetes 名称空间创建的映像拉取私钥）复制到集群中的其他名称空间。如果要将其他 {{site.data.keyword.Bluemix_notm}} IAM API 密钥凭证用于此名称空间，例如限制对特定名称空间的访问权，或从其他 {{site.data.keyword.Bluemix_notm}} 帐户中拉取映像，请改为[创建映像拉取私钥](#other_registry_accounts)。
 {: shortdesc}
 
 1.  列出集群中可用的 Kubernetes 名称空间，或者创建要使用的名称空间。
@@ -252,7 +287,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     ```
     {: pre}
 输出示例：
-        ```
+    ```
     default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
     default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
     default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
@@ -293,13 +328,15 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     {: pre}
 5.  [可以选择向 Kubernetes 服务帐户添加映像拉取私钥，以便在部署容器时，名称空间中的任何 pod 都可以使用映像拉取私钥](#use_imagePullSecret)。
 
-### 创建映像拉取私钥以访问其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，或使用 IAM 策略来限制注册表访问权
+### 创建具有不同 IAM API 密钥凭证的映像拉取私钥，以加强对其他 {{site.data.keyword.Bluemix_notm}} 帐户中映像的控制权或访问权
 {: #other_registry_accounts}
 
-要访问其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，必须为具有对 {{site.data.keyword.registryshort_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM 服务访问策略的服务标识创建 API 密钥。然后，将 API 密钥凭证保存在映像拉取私钥中。此外，您还可以创建新的映像拉取私钥来应用 IAM 访问策略，以将许可权作用对象限制为特定注册表映像存储库、名称空间或操作（例如，`push` 或 `pull`）。可以选择将同一服务标识的 IAM 凭证存储在一个 API 密钥中，以用于在多个集群中创建多个映像拉取私钥。
+可以将 {{site.data.keyword.Bluemix_notm}} IAM 访问策略分配给用户或服务标识，以将许可权作用对象限制为特定注册表映像存储库、名称空间或操作（例如，`push` 或 `pull`）。然后，创建 API 密钥并将这些注册表凭证存储在集群的映像拉取私钥中。
 {: shortdesc}
 
-您可能希望为具有对 {{site.data.keyword.registryshort_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM 服务访问策略的用户标识创建 API 密钥，而不使用服务标识。但是，请确保用户是功能标识，或者有计划来应对用户离开的情况，以便集群始终可以访问注册表。
+例如，要访问其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，请创建 API 密钥，用于存储该帐户中用户或服务标识的 {{site.data.keyword.registryshort_notm}} 凭证。然后，在集群的帐户中，将这些 API 密钥凭证保存在每个集群和集群名称空间的映像拉取私钥中。
+
+以下步骤创建 API 密钥，用于存储 {{site.data.keyword.Bluemix_notm}} IAM 服务标识的凭证。您可能希望为具有对 {{site.data.keyword.registryshort_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM 服务访问策略的用户标识创建 API 密钥，而不使用服务标识。但是，请确保用户是功能标识，或者有计划来应对用户离开的情况，以便集群始终可以访问注册表。
 {: note}
 
 1.  列出集群中可用的 Kubernetes 名称空间，或者创建要使用的名称空间，在此名称空间中，将通过注册表映像部署容器。
@@ -361,7 +398,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     <td>可选。如果要将访问权限制为仅访问特定 [{{site.data.keyword.registrylong_notm}} 名称空间](/docs/services/Registry?topic=registry-registry_overview#registry_namespaces)中的映像，请输入 `namespace` 作为资源类型，并指定 `<registry_namespace>`。要列出注册表名称空间，请运行 `ibmcloud cr namespaces`。</td>
     </tr>
     </tbody></table>
-4.  为服务标识创建 API 密钥。将 API 密钥命名为类似于服务标识，并包含先前创建的服务标识：``<cluster_name>-<kube_namespace>-id`。请确保为 API 密钥提供描述，以帮助您日后检索该密钥。
+4.  为服务标识创建 API 密钥。将 API 密钥命名为类似于服务标识，并包含先前创建的服务标识 ``<cluster_name>-<kube_namespace>-id`。请确保为 API 密钥提供描述，以帮助您日后检索该密钥。
     ```
     ibmcloud iam service-api-key-create <cluster_name>-<kube_namespace>-key <cluster_name>-<kube_namespace>-id --description "API key for service ID <service_id> in Kubernetes cluster <cluster_name> namespace <kube_namespace>"
     ```
@@ -424,7 +461,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 7.  验证私钥是否已成功创建。将 <em>&lt;kubernetes_namespace&gt;</em> 替换为在其中创建映像拉取私钥的名称空间。
 
     ```
-        kubectl get secrets --namespace <kubernetes_namespace>
+    kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 8.  [可以选择向 Kubernetes 服务帐户添加映像拉取私钥，以便在部署容器时，名称空间中的任何 pod 都可以使用映像拉取私钥](#use_imagePullSecret)。
@@ -494,6 +531,158 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 <br />
 
 
+## 使用映像拉取私钥来部署容器
+{: #use_imagePullSecret}
+
+可以在 pod 部署中定义映像拉取私钥，或将映像拉取私钥存储在 Kubernetes 服务帐户中，使其可用于未指定服务帐户的所有部署。
+{: shortdesc}
+
+在以下选项之间进行选择：
+* [在 pod 部署中引用映像拉取私钥](#pod_imagePullSecret)：如果您不希望在缺省情况下为名称空间中的所有 pod 授予对注册表的访问权，请使用此选项。
+* [将映像拉取私钥存储在 Kubernetes 服务帐户中](#store_imagePullSecret)：使用此选项可为所选 Kubernetes 名称空间中的所有部署授予对注册表中映像的访问权。
+
+开始之前：
+* [创建映像拉取私钥](#other)以访问其他注册表或非 `default` Kubernetes 名称空间中的映像。
+* [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+
+### 在 pod 部署中引用映像拉取私钥
+{: #pod_imagePullSecret}
+
+在 pod 部署中引用映像拉取私钥时，映像拉取私钥仅对该 pod 有效，而不能在名称空间中的各 pod 之间共享。
+{:shortdesc}
+
+1.  创建名为 `mypod.yaml` 的 pod 配置文件。
+2.  定义要用于访问 {{site.data.keyword.registrylong_notm}} 中映像的 pod 和映像拉取私钥。
+
+    访问专用映像：
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mypod
+    spec:
+      containers:
+        - name: <container_name>
+          image: <region>.icr.io/<namespace_name>/<image_name>:<tag>
+      imagePullSecrets:
+        - name: <secret_name>
+    ```
+    {: codeblock}
+
+    访问 {{site.data.keyword.Bluemix_notm}} 公共映像：
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mypod
+    spec:
+      containers:
+        - name: <container_name>
+          image: icr.io/<image_name>:<tag>
+      imagePullSecrets:
+        - name: <secret_name>
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>了解 YAML 文件的组成部分</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code><em>&lt;container_name&gt;</em></code></td>
+    <td>要部署到集群的容器的名称。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;namespace_name&gt;</em></code></td>
+    <td>存储映像的名称空间。要列出可用名称空间，请运行 `ibmcloud cr namespace-list`。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;image_name&gt;</em></code></td>
+    <td>要使用的映像的名称。要列出 {{site.data.keyword.Bluemix_notm}} 帐户中的可用映像，请运行 `ibmcloud cr image-list`。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;tag&gt;</em></code></td>
+    <td>要使用的映像的版本。如果未指定标记，那么缺省情况下会使用标记为 <strong>latest</strong> 的映像。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;secret_name&gt;</em></code></td>
+    <td>先前创建的映像拉取私钥的名称。</td>
+    </tr>
+    </tbody></table>
+
+3.  保存更改。
+4.  在集群中创建部署。
+    ```
+        kubectl apply -f mypod.yaml
+        ```
+    {: pre}
+
+### 将映像拉取私钥存储在所选名称空间的 Kubernetes 服务帐户中
+{:#store_imagePullSecret}
+
+每个名称空间都具有一个名为 `default` 的 Kubernetes 服务帐户。可以将映像拉取私钥添加到此服务帐户，以授予对注册表中映像的访问权。未指定服务帐户的部署将自动对此名称空间使用 `default` 服务帐户。
+{:shortdesc}
+
+1. 检查 default 服务帐户是否已存在映像拉取私钥。
+   ```
+   kubectl describe serviceaccount default -n <namespace_name>
+   ```
+   {: pre}
+   在**映像拉取私钥**条目中显示 `<none>` 时，说明不存在任何映像拉取私钥。  
+2. 将映像拉取私钥添加到 default 服务帐户。
+   - **未定义映像拉取私钥时，添加映像拉取私钥：**
+       ```
+       kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "<image_pull_secret_name>"}]}'
+       ```
+       {: pre}
+   - **已定义映像拉取私钥时，添加映像拉取私钥：**
+       ```
+       kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"<image_pull_secret_name>"}}]'
+       ```
+       {: pre}
+3. 验证映像拉取私钥是否已添加到 default 服务帐户。
+   ```
+   kubectl describe serviceaccount default -n <namespace_name>
+   ```
+   {: pre}
+
+   输出示例：
+   ```
+   Name:                default
+   Namespace:           <namespace_name>
+   Labels:              <none>
+   Annotations:         <none>
+   Image pull secrets:  <image_pull_secret_name>
+   Mountable secrets:   default-token-sh2dx
+   Tokens:              default-token-sh2dx
+   Events:              <none>
+   ```
+   {: pre}
+
+4. 从注册表中的映像部署容器。
+   ```
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: mypod
+   spec:
+     containers:
+       - name: <container_name>
+         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
+   ```
+   {: codeblock}
+
+5. 在集群中创建部署。
+   ```
+        kubectl apply -f mypod.yaml
+        ```
+   {: pre}
+
+<br />
+
+
 ## 不推荐：使用注册表令牌通过 {{site.data.keyword.registrylong_notm}} 映像部署容器
 {: #namespace_token}
 
@@ -525,7 +714,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 {: shortdesc}
 
 开始之前：
-1. [在 {{site.data.keyword.registryshort_notm}} 中设置名称空间，并将映像推送到此名称空间](/docs/services/Registry?topic=registry-index#registry_namespace_add)。
+1. [在 {{site.data.keyword.registryshort_notm}} 中设置名称空间，并将映像推送到此名称空间](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
 2. [创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
 3. [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
@@ -541,16 +730,19 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: ibmliberty-deployment
+      name: <app_name>-deployment
     spec:
       replicas: 3
+      selector:
+        matchLabels:
+          app: <app_name>
       template:
         metadata:
           labels:
-            app: ibmliberty
+            app: <app_name>
         spec:
           containers:
-          - name: ibmliberty
+          - name: <app_name>
             image: registry.<region>.bluemix.net/<namespace>/<my_image>:<tag>
     ```
     {: codeblock}
@@ -600,7 +792,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
         ```
    {: pre}
 
-3. 将映像拉取私钥从 `default` 名称空间复制到您选择的名称空间。新映像拉取私钥的名称为 `bluemix-<namespace_name>-secret-regional` 和 `bluemix-<namespace_name>-secret-international`。
+3. 将映像拉取私钥从 `default` 名称空间复制到您选择的名称空间。新映像拉取私钥的名称为 `bluemix-<namespace_name>-secret-regional` and `bluemix-<namespace_name>-secret-international`。
    ```
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
@@ -691,158 +883,3 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     {: pre}
 
 7.  在名称空间中[使用映像拉取私钥部署容器](#use_imagePullSecret)。
-
-<br />
-
-
-## 使用创建的映像拉取私钥部署容器
-{: #use_imagePullSecret}
-
-可以在 pod 部署中定义映像拉取私钥，或将映像拉取私钥存储在 Kubernetes 服务帐户中，使其可用于未指定服务帐户的所有部署。
-{: shortdesc}
-
-在以下选项之间进行选择：
-* [在 pod 部署中引用映像拉取私钥](#pod_imagePullSecret)：如果您不希望在缺省情况下为名称空间中的所有 pod 授予对注册表的访问权，请使用此选项。
-* [将映像拉取私钥存储在 Kubernetes 服务帐户中](#store_imagePullSecret)：使用此选项可为所选 Kubernetes 名称空间中的部署授予对注册表中映像的访问权。
-
-开始之前：
-* [创建映像拉取私钥](#other)以访问其他注册表或除 `default` 以外的其他 Kubernetes 名称空间中的映像。
-* [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-
-### 在 pod 部署中引用映像拉取私钥
-{: #pod_imagePullSecret}
-
-在 pod 部署中引用映像拉取私钥时，映像拉取私钥仅对该 pod 有效，而不能在名称空间中的各 pod 之间共享。
-{:shortdesc}
-
-1.  创建名为 `mypod.yaml` 的 pod 配置文件。
-2.  定义要用于访问专用 {{site.data.keyword.registrylong_notm}} 的 pod 和映像拉取私钥。
-
-    访问专用映像：
-    ```
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: mypod
-    spec:
-      containers:
-        - name: <container_name>
-          image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
-      imagePullSecrets:
-        - name: <secret_name>
-    ```
-    {: codeblock}
-
-    访问 {{site.data.keyword.Bluemix_notm}} 公共映像：
-    ```
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: mypod
-    spec:
-      containers:
-        - name: <container_name>
-          image: registry.bluemix.net/<image_name>:<tag>
-      imagePullSecrets:
-        - name: <secret_name>
-    ```
-    {: codeblock}
-
-    <table>
-    <caption>了解 YAML 文件的组成部分</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code><em>&lt;container_name&gt;</em></code></td>
-    <td>要部署到集群的容器的名称。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>存储映像的名称空间。要列出可用名称空间，请运行 `ibmcloud cr namespace-list`。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>要使用的映像的名称。要列出 {{site.data.keyword.Bluemix_notm}} 帐户中的可用映像，请运行 `ibmcloud cr image-list`。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;tag&gt;</em></code></td>
-    <td>要使用的映像的版本。如果未指定标记，那么缺省情况下会使用标记为 <strong>latest</strong> 的映像。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>先前创建的映像拉取私钥的名称。</td>
-    </tr>
-    </tbody></table>
-
-3.  保存更改。
-4.  在集群中创建部署。
-    ```
-        kubectl apply -f mypod.yaml
-        ```
-    {: pre}
-
-### 将映像拉取私钥存储在所选名称空间的 Kubernetes 服务帐户中
-{:#store_imagePullSecret}
-
-每个名称空间都具有一个名为 `default` 的 Kubernetes 服务帐户。可以将映像拉取私钥添加到此服务帐户，以授予对注册表中映像的访问权。未指定服务帐户的部署将自动对此名称空间使用 `default` 服务帐户。
-{:shortdesc}
-
-1. 检查 default 服务帐户是否已存在映像拉取私钥。
-   ```
-   kubectl describe serviceaccount default -n <namespace_name>
-   ```
-   {: pre}
-   **Image pull secrets** 条目中显示 `<none>` 时，说明不存在任何映像拉取私钥。  
-2. 将映像拉取私钥添加到 default 服务帐户。
-   - **未定义映像拉取私钥时，添加映像拉取私钥：**
-       ```
-       kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "<image_pull_secret_name>"}]}'
-       ```
-       {: pre}
-   - **已定义映像拉取私钥时，添加映像拉取私钥：**
-       ```
-       kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"<image_pull_secret_name>"}}]'
-       ```
-       {: pre}
-3. 验证映像拉取私钥是否已添加到 default 服务帐户。
-   ```
-   kubectl describe serviceaccount default -n <namespace_name>
-   ```
-   {: pre}
-
-   输出示例：
-   ```
-   Name:                default
-   Namespace:           <namespace_name>
-   Labels:              <none>
-   Annotations:         <none>
-   Image pull secrets:  <image_pull_secret_name>
-   Mountable secrets:   default-token-sh2dx
-   Tokens:              default-token-sh2dx
-   Events:              <none>
-   ```
-   {: pre}
-
-4. 从注册表中的映像部署容器。
-   ```
-   apiVersion: v1
-   kind: Pod
-   metadata:
-     name: mypod
-   spec:
-     containers:
-       - name: <container_name>
-         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
-   ```
-   {: codeblock}
-
-5. 在集群中创建部署。
-   ```
-        kubectl apply -f mypod.yaml
-        ```
-   {: pre}
-
-<br />
-

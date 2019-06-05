@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # IBM Cloud Kubernetes Service CLI
 {: #cs_cli_reference}
 
@@ -34,13 +33,14 @@ CLI プラグインをインストールするには、[CLI のインストー�
 
 `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
 
-`ibmcloud cr` コマンドをお探しですか? [{{site.data.keyword.registryshort_notm}} CLI リファレンス](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)を参照してください。 `kubectl` コマンドをお探しですか? [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/overview/) を参照してください。
+`ibmcloud cr` コマンドをお探しですか? [{{site.data.keyword.registryshort_notm}} CLI リファレンス](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)を参照してください。 `kubectl` コマンドをお探しですか? [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubectl.docs.kubernetes.io/) を参照してください。
 {:tip}
 
-## ベータ版のコマンド構造の使用
+
+## ベータ版の {{site.data.keyword.containerlong_notm}} プラグインの使用
 {: #cs_beta}
 
-再設計されたバージョンの {{site.data.keyword.containerlong_notm}} プラグインがベータ版として提供されています。再設計された {{site.data.keyword.containerlong_notm}} プラグインでは、コマンドがカテゴリー別にグループ化されています。また、コマンドがハイフン区切り構造からスペース区切り構造に変更されています。
+再設計されたバージョンの {{site.data.keyword.containerlong_notm}} プラグインがベータ版として提供されています。 再設計された {{site.data.keyword.containerlong_notm}} プラグインでは、コマンドがカテゴリー別にグループ化されています。また、コマンドがハイフン区切り構造からスペース区切り構造に変更されています。
 {: shortdesc}
 
 再設計された {{site.data.keyword.containerlong_notm}} プラグインを使用するには、`IKS_BETA_VERSION` 環境変数を、使用するベータ版に設定します。
@@ -50,7 +50,7 @@ export IKS_BETA_VERSION=<beta_version>
 ```
 {: pre}
 
-再設計された {{site.data.keyword.containerlong_notm}} プラグインは、以下のベータ版として提供されています。なお、デフォルトの動作では `0.2` が使用されます。
+再設計された {{site.data.keyword.containerlong_notm}} プラグインは、以下のベータ版として提供されています。 なお、デフォルトの動作では `0.2` が使用されます。
 
 <table>
 <caption>再設計された {{site.data.keyword.containerlong_notm}} プラグインのベータ版</caption>
@@ -64,7 +64,7 @@ export IKS_BETA_VERSION=<beta_version>
       <td><code>0.2</code> (デフォルト)</td>
       <td>従来型: コマンドは、ハイフン区切り構造で表示され、アルファベット順にリストされます。</td>
       <td>従来型とベータ版: 従来のハイフン区切り構造 (`ibmcloud ks alb-cert-get`) とベータ版のスペース区切り構造 (`ibmcloud ks alb cert get`) のどちらでもコマンドを実行できます。</td>
-  </tr>
+    </tr>
     <tr>
       <td><code>0.3</code></td>
       <td>ベータ版: コマンドは、スペース区切り構造で表示され、カテゴリー別にリストされます。</td>
@@ -100,7 +100,7 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks api](#cs_api)</td>
+    <td>[ibmcloud ks api](#cs_cli_api)</td>
     <td>[ibmcloud ks api-key-info](#cs_api_key_info)</td>
     <td>[ibmcloud ks api-key-reset](#cs_api_key_reset)</td>
     <td>[ibmcloud ks apiserver-config-get](#cs_apiserver_config_get)</td>
@@ -146,25 +146,25 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
+    <td>[ibmcloud ks addon-versions](#cs_addon_versions)</td>
     <td>[ibmcloud ks cluster-addon-disable](#cs_cluster_addon_disable)</td>
     <td>[ibmcloud ks cluster-addon-enable](#cs_cluster_addon_enable)</td>
     <td>[ibmcloud ks cluster-addons](#cs_cluster_addons)</td>
-    <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
   </tr>
   <tr>
+  <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
     <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
     <td>[ibmcloud ks cluster-feature-disable](#cs_cluster_feature_disable)</td>
     <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
-    <td>[ibmcloud ks cluster-feature-ls](#cs_cluster_feature_ls)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
+  <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
     <td>[ibmcloud ks cluster-pull-secret-apply](#cs_cluster_pull_secret_apply)</td>
     <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
+  <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
     <td> </td>
@@ -330,6 +330,40 @@ ibmcloud plugin list
 
 </br>
 
+<table summary="ネットワーク・ロード・バランサー (NLB) コマンドの表">
+<caption>ネットワーク・ロード・バランサー (NLB) コマンド</caption>
+<col width = 25%>
+<col width = 25%>
+<col width = 25%>
+  <thead>
+    <tr>
+      <th colspan=4>ネットワーク・ロード・バランサー (NLB) コマンド</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-add](#cs_nlb-dns-add)</td>
+      <td>[ibmcloud ks nlb-dns-create](#cs_nlb-dns-create)</td>
+      <td>[ibmcloud ks nlb-dnss](#cs_nlb-dns-ls)</td>
+      <td>[ibmcloud ks nlb-dns-rm](#cs_nlb-dns-rm)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-configure](#cs_nlb-dns-monitor-configure)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-get](#cs_nlb-dns-monitor-get)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-disable](#cs_nlb-dns-monitor-disable)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-enable](#cs_nlb-dns-monitor-enable)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-ls](#cs_nlb-dns-monitor-ls)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-status](#cs_nlb-dns-monitor-status)</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+</br>
+
 <table summary="地域コマンドの表">
 <caption>地域コマンド</caption>
 <col width="25%">
@@ -343,7 +377,7 @@ ibmcloud plugin list
     <td>[ibmcloud ks region](#cs_region)</td>
     <td>[ibmcloud ks region-set](#cs_region-set)</td>
     <td>[ibmcloud ks regions](#cs_regions)</td>
-    <td>[   ibmcloud ks zones
+  <td>[   ibmcloud ks zones
    ](#cs_datacenters)</td>
   </tr>
 </tbody>
@@ -407,18 +441,24 @@ ibmcloud plugin list
 {: #api_commands}
 
 ### ibmcloud ks api
-{: #cs_api}
+{: #cs_cli_api}
 
 API エンドポイントを {{site.data.keyword.containerlong_notm}} のターゲットとして設定します。 エンドポイントを指定しない場合、ターゲットとして設定されている現行エンドポイントに関する情報を表示できます。
 {: shortdesc}
+
+以下のエンドポイントがサポートされています。
+* グローバル: `https://containers.cloud.ibm.com`
+* ダラス (米国南部、us-south): `https://us-south.containers.cloud.ibm.com`
+* フランクフルト (中欧、eu-de): `https://eu-central.containers.cloud.ibm.com`
+* ロンドン (英国南部、eu-gb): `https://uk-south.containers.cloud.ibm.com`
+* シドニー (南アジア太平洋地域、au-syd): `https://ap-south.containers.cloud.ibm.com`
+* 東京 (北アジア太平洋地域、jp-tok): `https://ap-north.containers.cloud.ibm.com`
+* ワシントン D.C. (米国東部、us-east): `https://us-east.containers.cloud.ibm.com`
 
 ```
 ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
 ```
 {: pre}
-
-地域を切り替えますか? `ibmcloud ks region-set` [コマンド](#cs_region-set)を代わりに使用します。
-{: tip}
 
 <strong>最小限必要な許可</strong>: なし
 
@@ -426,14 +466,7 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 
    <dl>
    <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
-   <dd>{{site.data.keyword.containerlong_notm}} API エンドポイント。 このエンドポイントは、{{site.data.keyword.Bluemix_notm}} エンドポイントとは異なることに注意してください。 この値は、API エンドポイントを設定するために必須です。 指定できる値は以下のとおりです。<ul>
-   <li>グローバル・エンドポイント: https://containers.cloud.ibm.com</li>
-   <li>北アジア太平洋地域エンドポイント: https://ap-north.containers.cloud.ibm.com</li>
-   <li>南アジア太平洋地域エンドポイント: https://ap-south.containers.cloud.ibm.com</li>
-   <li>中欧エンドポイント: https://eu-central.containers.cloud.ibm.com</li>
-   <li>英国南部エンドポイント: https://uk-south.containers.cloud.ibm.com</li>
-   <li>米国東部エンドポイント: https://us-east.containers.cloud.ibm.com</li>
-   <li>米国南部エンドポイント: https://us-south.containers.cloud.ibm.com</li></ul>
+   <dd>{{site.data.keyword.containerlong_notm}} API エンドポイント。 このエンドポイントは、{{site.data.keyword.Bluemix_notm}} エンドポイントとは異なることに注意してください。 この値は、API エンドポイントを設定するために必須です。
    </dd>
 
    <dt><code>--insecure</code></dt>
@@ -665,7 +698,7 @@ Web フックを無効にした後、`ibmcloud ks apiserver-refresh` コマン�
 ### ibmcloud ks apiserver-refresh
 {: #cs_apiserver_refresh}
 
-`ibmcloud ks apiserver-config-set`、`apiserver-config-unset`、`cluster-feature-enable`、または `cluster-feature-disable` のいずれかのコマンドを使用して要求された、Kubernetes マスターの構成変更を適用します。構成変更によって再始動が必要になる場合は、影響を受ける Kubernetes マスター・コンポーネントが再始動します。再始動なしで構成変更を適用可能な場合は、いずれの Kubernetes マスター・コンポーネントも再始動しません。ご使用のワーカー・ノード、アプリ、リソースは変更されず、引き続き実行されます。
+`ibmcloud ks apiserver-config-set`、`apiserver-config-unset`、`cluster-feature-enable`、または `cluster-feature-disable` のいずれかのコマンドを使用して要求された、Kubernetes マスターの構成変更を適用します。 構成変更によって再始動が必要になる場合は、影響を受ける Kubernetes マスター・コンポーネントが再始動します。 再始動なしで構成変更を適用可能な場合は、いずれの Kubernetes マスター・コンポーネントも再始動しません。 ご使用のワーカー・ノード、アプリ、リソースは変更されず、引き続き実行されます。
 {: shortdesc}
 
 ```
@@ -716,11 +749,20 @@ ibmcloud ks help
 <strong>コマンド・オプション</strong>: なし
 
 
-### ibmcloud ks init [--host HOST]
+### ibmcloud ks init
 {: #cs_init}
 
 {{site.data.keyword.containerlong_notm}} プラグインを初期化するか、Kubernetes クラスターを作成またはアクセスする地域を指定します。
 {: shortdesc}
+
+以下のエンドポイントがサポートされています。
+* グローバル: `https://containers.cloud.ibm.com`
+* ダラス (米国南部、us-south): `https://us-south.containers.cloud.ibm.com`
+* フランクフルト (中欧、eu-de): `https://eu-central.containers.cloud.ibm.com`
+* ロンドン (英国南部、eu-gb): `https://uk-south.containers.cloud.ibm.com`
+* シドニー (南アジア太平洋地域、au-syd): `https://ap-south.containers.cloud.ibm.com`
+* 東京 (北アジア太平洋地域、jp-tok): `https://ap-north.containers.cloud.ibm.com`
+* ワシントン D.C. (米国東部、us-east): `https://us-east.containers.cloud.ibm.com`
 
 ```
 ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
@@ -733,7 +775,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>使用する {{site.data.keyword.containerlong_notm}} API エンドポイント。  この値はオプションです。 [API エンドポイントの選択可能な値を表示します。](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
+   <dd>使用する {{site.data.keyword.containerlong_notm}} API エンドポイント。 この値はオプションです。 [API エンドポイントの選択可能な値を表示します。](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>非セキュアな HTTP 接続を許可します。</dd>
@@ -742,7 +784,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
    <dd>IBM Cloud のパスワード。</dd>
 
    <dt><code>-u</code></dt>
-   <dd>IBM Cloud ユーザー名。</dd>
+   <dd>IBM Cloud のユーザー名。</dd>
 
    <dt><code>-s</code></dt>
    <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
@@ -750,10 +792,16 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
    </dl>
 
 **例**:
-```
-ibmcloud ks init --host https://uk-south.containers.cloud.ibm.com
-```
-{: pre}
+*  米国南部地域エンドポイントをターゲットにする例:
+  ```
+  ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
+  ```
+  {: pre}
+*  グローバル・エンドポイントをターゲットにする例:
+  ```
+  ibmcloud ks init --host https://containers.cloud.ibm.com
+  ```
+  {: pre}
 
 ### ibmcloud ks messages
 {: #cs_messages}
@@ -774,16 +822,49 @@ ibmcloud ks messages
 ## クラスター・コマンド: 管理
 {: #cluster_mgmt_commands}
 
+### ibmcloud ks addon-versions
+{: #cs_addon_versions}
+
+{{site.data.keyword.containerlong_notm}} の管理対象アドオンのサポートされているバージョンのリストを表示します。
+{: shortdesc}
+
+```
+ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--json] [-s]
+```
+{: pre}
+
+<strong>最小限必要な許可</strong>: なし
+
+**コマンド・オプション**:
+
+  <dl>
+  <dt><code>--addon <em>ADD-ON_NAME</em></code></dt>
+  <dd>オプション: <code>istio</code> または <code>knative</code> など、バージョンでフィルターするアドオンの名前を指定します。</dd>
+
+  <dt><code>--json</code></dt>
+  <dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+  </dl>
+
+**例**:
+
+  ```
+  ibmcloud ks addon-versions --addon istio
+  ```
+  {: pre}
+
 ### ibmcloud ks cluster-addon-disable
 {: #cs_cluster_addon_disable}
 
-既存のクラスターで管理対象アドオンを無効にします。このコマンドは、無効にする管理対象アドオンに応じて、以下のいずれかのサブコマンドと組み合わせて使用する必要があります。
+既存のクラスターで管理対象アドオンを無効にします。 このコマンドは、無効にする管理対象アドオンに応じて、以下のいずれかのサブコマンドと組み合わせて使用する必要があります。
 {: shortdesc}
 
 #### ibmcloud ks cluster-addon-disable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_disable_istio}
 
-管理対象 Istio アドオンを無効にします。すべての Istio コア・コンポーネント (Prometheus を含む) をクラスターから削除します。
+管理対象 Istio アドオンを無効にします。 すべての Istio コア・コンポーネント (Prometheus を含む) をクラスターから削除します。
 {: shortdesc}
 
 ```
@@ -798,7 +879,7 @@ ibmcloud ks cluster-addon-disable istio --cluster CLUSTER [-f]
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>クラスターの名前または ID。 この値は必須です。</dd>
    <dt><code>-f</code></dt>
-   <dd>オプション: このアドオンは、管理対象アドオンである <code>istio-extras</code>、<code>istio-sample-bookinfo</code>、および <code>knative</code> に必要な依存関係です。それらのアドオンも無効にする場合は、このフラグを含めてください。</dd>
+   <dd>オプション: このアドオンは、管理対象アドオンである <code>istio-extras</code>、<code>istio-sample-bookinfo</code>、および <code>knative</code> に必要な依存関係です。 それらのアドオンも無効にする場合は、このフラグを含めてください。</dd>
 </dl>
 
 **例**:
@@ -811,7 +892,7 @@ ibmcloud ks cluster-addon-disable istio --cluster CLUSTER [-f]
 #### ibmcloud ks cluster-addon-disable istio-extras
 {: #cs_cluster_addon_disable_istio_extras}
 
-管理対象 Istio extras アドオンを無効にします。Grafana、Jeager、および Kiali をクラスターから削除します。
+管理対象 Istio extras アドオンを無効にします。 Grafana、Jeager、および Kiali をクラスターから削除します。
 {: shortdesc}
 
 ```
@@ -828,7 +909,7 @@ ibmcloud ks cluster-addon-disable istio-extras --cluster CLUSTER [-f]
    <dd>クラスターの名前または ID。 この値は必須です。</dd>
 
    <dt><code>-f</code></dt>
-   <dd>オプション: このアドオンは、<code>istio-sample-bookinfo</code> 管理対象アドオンに必要な依存関係です。そのアドオンも無効にする場合は、このフラグを含めてください。</dd>
+   <dd>オプション: このアドオンは、<code>istio-sample-bookinfo</code> 管理対象アドオンに必要な依存関係です。 そのアドオンも無効にする場合は、このフラグを含めてください。</dd>
 </dl>
 
 **例**:
@@ -841,7 +922,7 @@ ibmcloud ks cluster-addon-disable istio-extras --cluster CLUSTER [-f]
 #### ibmcloud ks cluster-addon-disable istio-sample-bookinfo
 {: #cs_cluster_addon_disable_istio_sample_bookinfo}
 
-管理対象 Istio BookInfo アドオンを無効にします。すべてのデプロイメント、ポッド、他の BookInfo アプリ・リソースをクラスターから削除します。
+管理対象 Istio BookInfo アドオンを無効にします。 すべてのデプロイメント、ポッド、他の BookInfo アプリ・リソースをクラスターから削除します。
 {: shortdesc}
 
 ```
@@ -879,89 +960,118 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**管理者**のプラットフォーム役割
 
 <strong>コマンド・オプション</strong>:
-
 <dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-  <dd>クラスターの名前または ID。 この値は必須です。</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks cluster-addon-disable knative --cluster my_cluster
+```
+{: pre}
+
+#### ibmcloud ks cluster-addon-disable kube-terminal
+{: #cs_cluster_addon_disable_kube-terminal}
+
+[Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) アドオンを無効にします。{{site.data.keyword.containerlong_notm}} クラスター・コンソールで Kubernetes Terminal を使用するには、最初にアドオンを再度有効にする必要があります。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster CLUSTER
+```
+{: pre}
+
+<strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**管理者**のプラットフォーム役割
+
+<strong>コマンド・オプション</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>クラスターの名前または ID。 この値は必須です。</dd>
 </dl>
 
 **例**:
 
-  ```
-  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addon-enable
 {: #cs_cluster_addon_enable}
 
-既存のクラスターで管理対象アドオンを有効にします。このコマンドは、有効にする管理対象アドオンに応じて、以下のいずれかのサブコマンドと組み合わせて使用する必要があります。
+既存のクラスターで管理対象アドオンを有効にします。 このコマンドは、有効にする管理対象アドオンに応じて、以下のいずれかのサブコマンドと組み合わせて使用する必要があります。
 {: shortdesc}
 
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_enable_istio}
 
-管理対象 [Istio アドオン](/docs/containers?topic=containers-istio)を有効にします。Istio バージョン 1.0.5 のコア・コンポーネント (Prometheus を含む) をインストールします。
+管理対象 [Istio アドオン](/docs/containers?topic=containers-istio)を有効にします。 Prometheus を含め、Istio のコア・コンポーネントをインストールします。
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
+ibmcloud ks cluster-addon-enable istio --cluster CLUSTER [--version VERSION]
 ```
 {: pre}
 
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**管理者**のプラットフォーム役割
 
 <strong>コマンド・オプション</strong>:
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>オプション: インストールするアドオンのバージョンを指定します。バージョンが指定されない場合は、デフォルトのバージョンがインストールされます。</dd>
 </dl>
 
 **例**:
 
-  ```
-  ibmcloud ks cluster-addon-enable istio --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable istio --cluster my_cluster
+```
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-extras
 {: #cs_cluster_addon_enable_istio_extras}
 
-管理対象 Istio extras アドオンを有効にします。Grafana、Jeager、および Kiali をインストールして、追加のモニター、トレース、視覚化を Istio で使用できるようにします。
+管理対象 Istio extras アドオンを有効にします。 Grafana、Jeager、および Kiali をインストールして、追加のモニター、トレース、視覚化を Istio で使用できるようにします。
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**管理者**のプラットフォーム役割
 
 <strong>コマンド・オプション</strong>:
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>オプション: インストールするアドオンのバージョンを指定します。バージョンが指定されない場合は、デフォルトのバージョンがインストールされます。</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>オプション: <code>istio</code> アドオン依存関係を有効にします。</dd>
+<dt><code>-y</code></dt>
+<dd>オプション: <code>istio</code> アドオン依存関係を有効にします。</dd>
 </dl>
 
 **例**:
-
-  ```
-  ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
+```
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-sample-bookinfo
 {: #cs_cluster_addon_enable_istio_sample_bookinfo}
 
-管理対象 Istio BookInfo アドオンを有効にします。[Istio 用の BookInfo サンプル・アプリケーション ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/examples/bookinfo/) を <code>default</code> 名前空間にデプロイします。
+管理対象 Istio BookInfo アドオンを有効にします。 [Istio 用の BookInfo サンプル・アプリケーション ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/examples/bookinfo/) を <code>default</code> 名前空間にデプロイします。
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
@@ -970,19 +1080,21 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
 <strong>コマンド・オプション</strong>:
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>オプション: <code>istio</code> および <code>istio-extras</code> アドオン依存関係を有効にします。</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>オプション: インストールするアドオンのバージョンを指定します。バージョンが指定されない場合は、デフォルトのバージョンがインストールされます。</dd>
+
+<dt><code>-y</code></dt>
+<dd>オプション: <code>istio</code> および <code>istio-extras</code> アドオン依存関係を有効にします。</dd>
 </dl>
 
 **例**:
-
-  ```
-  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
+```
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_enable_knative}
@@ -991,7 +1103,7 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
+ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
 
@@ -1000,19 +1112,50 @@ ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
 <strong>コマンド・オプション</strong>:
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>オプション: <code>istio</code> アドオン依存関係を有効にします。</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>オプション: インストールするアドオンのバージョンを指定します。バージョンが指定されない場合は、デフォルトのバージョンがインストールされます。</dd>
+
+<dt><code>-y</code></dt>
+<dd>オプション: <code>istio</code> アドオン依存関係を有効にします。</dd>
 </dl>
 
 **例**:
+```
+ibmcloud ks cluster-addon-enable knative --cluster my_cluster
+```
+{: pre}
 
-  ```
-  ibmcloud ks cluster-addon-enable knative --cluster my_cluster
-  ```
-  {: pre}
+#### ibmcloud ks cluster-addon-enable kube-terminal
+{: #cs_cluster_addon_enable_kube-terminal}
+
+{{site.data.keyword.containerlong_notm}} クラスター・コンソールで Kubernetes Terminal を使用するには、[Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) アドオンを有効にします。
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+<strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**管理者**のプラットフォーム役割
+
+<strong>コマンド・オプション</strong>:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>オプション: インストールするアドオンのバージョンを指定します。バージョンが指定されない場合は、デフォルトのバージョンがインストールされます。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addons
 {: #cs_cluster_addons}
@@ -1028,18 +1171,16 @@ ibmcloud ks cluster-addons --cluster CLUSTER
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**ビューアー**のプラットフォーム役割
 
 <strong>コマンド・オプション</strong>:
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
 </dl>
 
 **例**:
-
-  ```
-  ibmcloud ks cluster-addons --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addons --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-config
 {: #cs_cluster_config}
@@ -1052,38 +1193,36 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 ```
 {: pre}
 
-**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} でのクラスターに対する、**ビューアー**または**リーダー**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割。さらに、プラットフォーム役割またはサービス役割のいずれかしか持っていない場合は、追加の制約が適用されます。
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} でのクラスターに対する、**ビューアー**または**リーダー**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割。 さらに、プラットフォーム役割またはサービス役割のいずれかしか持っていない場合は、追加の制約が適用されます。
 * **プラットフォーム**: プラットフォーム役割のみがある場合、このコマンドを実行できますが、クラスターで Kubernetes アクションを実行するには[サービス役割](/docs/containers?topic=containers-users#platform)または[カスタム RBAC ポリシー](/docs/containers?topic=containers-users#role-binding)が必要です。
-* **サービス**: サービス役割のみがある場合でも、このコマンドを実行できます。ただし、`ibmcloud ks clusters` コマンドを実行するか、{{site.data.keyword.containerlong_notm}} コンソールを起動してクラスターを表示できないため、クラスター管理者からクラスター名とクラスター ID を取得する必要があります。その後、[CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)し、Kubernetes を操作できます。
+* **サービス**: サービス役割のみがある場合でも、このコマンドを実行できます。 ただし、`ibmcloud ks clusters` コマンドを実行するか、{{site.data.keyword.containerlong_notm}} コンソールを起動してクラスターを表示できないため、クラスター管理者からクラスター名とクラスター ID を取得する必要があります。 その後、[CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)し、Kubernetes を操作できます。
 
 **コマンド・オプション**:
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
 
-   <dt><code>--admin</code></dt>
-   <dd>スーパーユーザー役割の TLS 証明書と許可ファイルをダウンロードします。 それらの証明書を使用すると、再認証しなくてもクラスターでのタスクを自動化することができます。 それらのファイルは、`<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin` にダウンロードされます。 この値はオプションです。</dd>
+<dt><code>--admin</code></dt>
+<dd>スーパーユーザー役割の TLS 証明書と許可ファイルをダウンロードします。 それらの証明書を使用すると、再認証しなくてもクラスターでのタスクを自動化することができます。 それらのファイルは、`<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin` にダウンロードされます。 この値はオプションです。</dd>
 
-   <dt><code>--network</code></dt>
-   <dd>クラスター内で <code>calicoctl</code> コマンドを実行するために必要な Calico 構成ファイル、TLS 証明書、許可ファイルをダウンロードします。 この値はオプションです。 **注**: ダウンロードされる Kubernetes の構成データや証明書に関する export コマンドを取得するには、このフラグを指定せずにこのコマンドを実行する必要があります。</dd>
+<dt><code>--network</code></dt>
+<dd>クラスター内で <code>calicoctl</code> コマンドを実行するために必要な Calico 構成ファイル、TLS 証明書、許可ファイルをダウンロードします。 この値はオプションです。 **注**: ダウンロードされる Kubernetes の構成データや証明書に関する export コマンドを取得するには、このフラグを指定せずにこのコマンドを実行する必要があります。</dd>
 
-   <dt><code>--export</code></dt>
-   <dd>export コマンド以外のメッセージなしで、Kubernetes の構成データと証明書をダウンロードします。 メッセージが表示されないため、自動化スクリプトを作成するときにこのフラグを使用することができます。 この値はオプションです。</dd>
+<dt><code>--export</code></dt>
+<dd>export コマンド以外のメッセージなしで、Kubernetes の構成データと証明書をダウンロードします。 メッセージが表示されないため、自動化スクリプトを作成するときにこのフラグを使用することができます。 この値はオプションです。</dd>
 
-   <dt><code>--skip-rbac</code></dt>
-   <dd>{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割に基づくユーザー Kubernetes RBAC 役割をクラスター構成に追加する処理を省略します。[独自の Kubernetes RBAC 役割を管理](/docs/containers?topic=containers-users#rbac)する場合にのみ、このオプションを組み込んでください。[{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-access_reference#service)を使用してすべての RBAC ユーザーを管理する場合は、このオプションを組み込まないでください。</dd>
+<dt><code>--skip-rbac</code></dt>
+<dd>{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割に基づくユーザー Kubernetes RBAC 役割をクラスター構成に追加する処理を省略します。 [独自の Kubernetes RBAC 役割を管理](/docs/containers?topic=containers-users#rbac)する場合にのみ、このオプションを組み込んでください。 [{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-access_reference#service)を使用してすべての RBAC ユーザーを管理する場合は、このオプションを組み込まないでください。</dd>
 
-  <dt><code>-s</code></dt>
-  <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
 
-  <dt><code>--yaml</code></dt>
-  <dd>コマンド出力を YAML フォーマットで出力します。 この値はオプションです。</dd>
-
-   </dl>
+<dt><code>--yaml</code></dt>
+<dd>コマンド出力を YAML フォーマットで出力します。 この値はオプションです。</dd>
+</dl>
 
 **例**:
-
 ```
 ibmcloud ks cluster-config --cluster my_cluster
 ```
@@ -1097,7 +1236,7 @@ ibmcloud ks cluster-config --cluster my_cluster
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 ```
 {: pre}
 
@@ -1110,10 +1249,7 @@ ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone Z
 
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-
-<dd>標準クラスターを作成する YAML ファイルのパス。 このコマンドに用意されているオプションを使用してクラスターの特性を定義する代わりに、YAML ファイルを使用することができます。 この値は、標準クラスターではオプションで、フリー・クラスターでは使用できません。
-
-<p class="note">YAML ファイル内のパラメーターと同じオプションをコマンドで指定した場合は、コマンドの値が YAML 内の値よりも優先されます。 例えば、YAML ファイル内で場所を定義し、コマンドで <code>--zone</code> オプションを使用した場合は、コマンド・オプションに入力した値が YAML ファイル内の値をオーバーライドします。</p>
+<dd>標準クラスターを作成する YAML ファイルのパス。 このコマンドに用意されているオプションを使用してクラスターの特性を定義する代わりに、YAML ファイルを使用することができます。 この値は、標準クラスターではオプションで、フリー・クラスターでは使用できません。 <p class="note">YAML ファイル内のパラメーターと同じオプションをコマンドで指定した場合は、コマンドの値が YAML 内の値よりも優先されます。 例えば、YAML ファイル内で場所を定義し、コマンドで <code>--zone</code> オプションを使用した場合は、コマンド・オプションに入力した値が YAML ファイル内の値をオーバーライドします。</p>
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
@@ -1128,65 +1264,13 @@ kube-version: <em>&lt;kube-version&gt;</em>
 diskEncryption: <em>false</em>
 trusted: <em>true</em>
 </code></pre>
-
-
-<table>
-    <caption>YAML ファイルの構成要素について</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code><em>name</em></code></td>
-    <td><code><em>&lt;cluster_name&gt;</em></code> をクラスターの名前に置き換えます。 名前は先頭が文字でなければならず、文字、数字、およびハイフン (-) を使用できます。35 文字以内でなければなりません。 Ingress サブドメインの完全修飾ドメイン・ネームは、クラスター名と、クラスターがデプロイされる地域で形成されます。 Ingress サブドメインを地域内で固有にするために、クラスター名が切り捨てられ、Ingress ドメイン・ネームにランダムな値が付加されることがあります。
-</td>
-    </tr>
-    <tr>
-    <td><code><em>zone</em></code></td>
-    <td><code><em>&lt;zone&gt;</em></code> を、クラスターを作成するゾーンに置き換えます。 使用可能なゾーンは、ログインしている地域によって異なります。 使用可能なゾーンをリストするには、<code>ibmcloud ks zones</code> を実行します。 </td>
-     </tr>
-     <tr>
-     <td><code><em>no-subnet</em></code></td>
-     <td>デフォルトでは、パブリックとプライベートのポータブル・サブネットが、クラスターに関連付けられた VLAN 上に作成されます。 クラスターを使用してサブネットを作成することを回避するには、<code><em>&lt;no-subnet&gt;</em></code> を <code><em>true</em></code> に置き換えます。 後でサブネットを[作成](#cs_cluster_subnet_create)したり、クラスターに[追加](#cs_cluster_subnet_add)したりすることができます。</td>
-      </tr>
-     <tr>
-     <td><code><em>machine-type</em></code></td>
-     <td><code><em>&lt;machine_type&gt;</em></code> を、ワーカー・ノードをデプロイするマシンのタイプに置き換えます。 ワーカー・ノードは、共有または専用ハードウェア上に仮想マシンとしてデプロイすることも、ベア・メタル上に物理マシンとしてデプロイすることもできます。 使用可能な物理マシンと仮想マシンのタイプは、クラスターをデプロイするゾーンによって異なります。 詳しくは、`ibmcloud ks machine-type` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)についての説明を参照してください。</td>
-     </tr>
-     <tr>
-     <td><code><em>private-vlan</em></code></td>
-     <td><code><em>&lt;private_VLAN&gt;</em></code> を、ワーカー・ノードに使用するプライベート VLAN の ID に置き換えます。 使用可能な VLAN をリストするには、<code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> を実行して、<code>bcr</code> で始まる VLAN ルーター (バックエンド・ルーター) を探します。</td>
-     </tr>
-     <tr>
-     <td><code><em>public-vlan</em></code></td>
-     <td><code><em>&lt;public_VLAN&gt;</em></code> を、ワーカー・ノードに使用するパブリック VLAN の ID に置き換えます。 使用可能な VLAN をリストするには、<code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> を実行して、<code>fcr</code> で始まる VLAN ルーター (フロントエンド・ルーター) を探します。</td>
-     </tr>
-     <tr>
-     <td><code><em>hardware</em></code></td>
-     <td>仮想マシン・タイプの場合: ワーカー・ノードのハードウェア分離のレベル。 使用可能な物理リソースを自分専用にする場合には dedicated を使用し、他の IBM の顧客と物理リソースを共有することを許可する場合には shared を使用してください。 デフォルトは <code>shared</code> です。</td>
-     </tr>
-     <tr>
-     <td><code><em>workerNum</em></code></td>
-     <td><code><em>&lt;number_workers&gt;</em></code> を、デプロイするワーカー・ノードの数に置き換えます。</td>
-     </tr>
-     <tr>
-      <td><code><em>kube-version</em></code></td>
-      <td>クラスター・マスター・ノードの Kubernetes のバージョン。 この値はオプションです。 バージョンを指定しなかった場合、クラスターは、サポートされるデフォルトの Kubernetes バージョンを使用して作成されます。 使用可能なバージョンを確認するには、<code>ibmcloud ks kube-versions</code> を実行します。
-</td></tr>
-      <tr>
-      <td><code>diskEncryption: <em>false</em></code></td>
-      <td>ワーカー・ノードには、デフォルトで AES 256 ビット・ディスク暗号化の機能があります。[詳しくはこちらを参照してください](/docs/containers?topic=containers-security#encrypted_disk)。 暗号化を無効にするには、このオプションを組み込んで値を <code>false</code> に設定します。</td></tr>
-      <tr>
-      <td><code>trusted: <em>true</em></code></td>
-      <td>**ベア・メタルのみ**: [トラステッド・コンピューティング](/docs/containers?topic=containers-security#trusted_compute)を有効にして、ベア・メタル・ワーカー・ノードが改ざんされていないことを検証します。 クラスターの作成時にトラストを有効にしなかった場合に、後で有効にするには、`ibmcloud ks feature-enable` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)を使用します。 トラストを有効にした後に無効にすることはできません。</td></tr>
-     </tbody></table>
-    </p></dd>
+</dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>ワーカー・ノードのハードウェア分離のレベル。 使用可能な物理リソースを自分専用にする場合は dedicated を使用し、IBM の他のお客様と物理リソースを共有することを許可する場合は shared を使用します。 デフォルトは shared です。 この値は、VM 標準クラスターではオプションで、フリー・クラスターでは使用できません。 ベアメタル・マシン・タイプの場合、`dedicated` を指定します。</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>クラスターを作成するゾーン。 使用可能なゾーンは、ログインしている {{site.data.keyword.Bluemix_notm}} 地域によって異なります。 最高のパフォーマンスを得るために、物理的に最も近い地域を選択してください。 この値は、標準クラスターでは必須で、フリー・クラスターではオプションです。
+<dd>この値は、標準クラスターの場合には必須です。フリー・クラスターは、<code>ibmcloud ks region-set</code> コマンドでターゲットに設定した地域には作成できますが、ゾーンを指定することはできません。
 
 <p>[使用可能なゾーン](/docs/containers?topic=containers-regions-and-zones#zones)を参照してください。</p>
 
@@ -1229,13 +1313,13 @@ trusted: <em>true</em>
 <p>特定のゾーンにパブリック VLAN が既に存在するかどうかや、既存のパブリック VLAN の名前を確認するには、<code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> を実行します。</p></dd>
 
 <dt><code>--private-only </code></dt>
-  <dd>このオプションは、パブリック VLAN が作成されるのを防止するために使用します。 `--private-vlan` フラグを指定する場合にしか必要でないため、`--public-vlan` フラグは含めないでください。  <p class="note">プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、プライベート・サービス・エンドポイントを有効にするか、ゲートウェイ・デバイスを構成する必要があります。詳しくは、[プライベート・クラスター](/docs/containers?topic=containers-plan_clusters#private_clusters)を参照してください。</p></dd>
+  <dd>このオプションは、パブリック VLAN が作成されるのを防止するために使用します。 `--private-vlan` フラグを指定する場合にしか必要でないため、`--public-vlan` フラグは含めないでください。 <p class="note">プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、プライベート・サービス・エンドポイントを有効にするか、ゲートウェイ・デバイスを構成する必要があります。 詳しくは、[プライベート・クラスター](/docs/containers?topic=containers-plan_clusters#private_clusters)を参照してください。</p></dd>
 
 <dt><code>--private-service-endpoint</code></dt>
-  <dd>**[VRF 対応アカウント](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)で Kubernetes バージョン 1.11 以降を実行する標準クラスター**: [プライベート・サービス・エンドポイント](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)を有効にして、Kubernetes マスターとワーカー・ノードがプライベート VLAN を介して通信するようにします。さらに、`--public-service-endpoint` フラグを使用してパブリック・サービス・エンドポイントを有効にすることで、インターネットを介してクラスターにアクセスすることもできます。プライベート・サービス・エンドポイントのみを有効にする場合は、Kubernetes マスターと通信するためにプライベート VLAN に接続している必要があります。プライベート・サービス・エンドポイントを有効にしたら、後で無効にすることはできません。<br><br>クラスターを作成した後、`ibmcloud ks cluster-get <cluster_name_or_ID>` を実行してエンドポイントを取得できます。</dd>
+  <dd>**[VRF 対応アカウント](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)で Kubernetes バージョン 1.11 以降を実行する標準クラスター**: [プライベート・サービス・エンドポイント](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)を有効にして、Kubernetes マスターとワーカー・ノードがプライベート VLAN を介して通信するようにします。 さらに、`--public-service-endpoint` フラグを使用してパブリック・サービス・エンドポイントを有効にすることで、インターネットを介してクラスターにアクセスすることもできます。 プライベート・サービス・エンドポイントのみを有効にする場合は、Kubernetes マスターと通信するためにプライベート VLAN に接続している必要があります。 プライベート・サービス・エンドポイントを有効にしたら、後で無効にすることはできません。<br><br>クラスターを作成した後、`ibmcloud ks cluster-get <cluster_name_or_ID>` を実行してエンドポイントを取得できます。</dd>
 
 <dt><code>--public-service-endpoint</code></dt>
-  <dd>**Kubernetes バージョン 1.11 以降を実行する標準クラスター**: [パブリック・サービス・エンドポイント](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)を有効にして、Kubernetes マスターにパブリック・ネットワークを介してアクセスできるようにします (例えば、端末から `kubectl` コマンドを実行するため)。[VRF 対応アカウント](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)を持っており、`--private-service-endpoint` フラグを含めた場合、[マスターとワーカー・ノード間の通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)はプライベート・ネットワーク上で行われます。後で、プライベート専用クラスターにする場合は、パブリック・サービス・エンドポイントを無効にすることができます。<br><br>クラスターを作成した後、`ibmcloud ks cluster-get <cluster_name_or_ID>` を実行してエンドポイントを取得できます。</dd>
+  <dd>**Kubernetes バージョン 1.11 以降を実行する標準クラスター**: [パブリック・サービス・エンドポイント](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)を有効にして、Kubernetes マスターにパブリック・ネットワークを介してアクセスできるようにします (例えば、端末から `kubectl` コマンドを実行するため)。 [VRF 対応アカウント](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)を持っており、`--private-service-endpoint` フラグを含めた場合、[マスターとワーカー・ノード間の通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)はプライベート・ネットワーク上で行われます。 後で、プライベート専用クラスターにする場合は、パブリック・サービス・エンドポイントを無効にすることができます。<br><br>クラスターを作成した後、`ibmcloud ks cluster-get <cluster_name_or_ID>` を実行してエンドポイントを取得できます。</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>クラスターにデプロイするワーカー・ノードの数。 このオプションを指定しない場合、1 つのワーカー・ノードを持つクラスターが作成されます。 この値は、標準クラスターではオプションで、フリー・クラスターでは使用できません。
@@ -1255,34 +1339,27 @@ trusted: <em>true</em>
 
 **例**:
 
-  **フリー・クラスターを作成する**: クラスター名のみ指定します。それ以外の値はすべてデフォルト値に設定されます。 フリー・クラスターは 30 日後に自動的に削除されます。 フリー・クラスターは一度に 1 つしか作成できません。 Kubernetes のすべての機能を利用するには、標準クラスターを作成してください。
+**フリー・クラスターを作成する**: クラスター名のみ指定します。それ以外の値はすべてデフォルト値に設定されます。 フリー・クラスターは 30 日後に自動的に削除されます。 フリー・クラスターは一度に 1 つしか作成できません。 Kubernetes のすべての機能を利用するには、標準クラスターを作成してください。
 
-  ```
-  ibmcloud ks cluster-create --name my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --name my_cluster
+```
+{: pre}
 
-  **最初の標準クラスターを作成する**: あるゾーンに最初の標準クラスターを作成すると、プライベート VLAN も作成されます。 そのため、`--public-vlan` フラグを含めないようにしてください。
-  {: #example_cluster_create}
+**最初の標準クラスターを作成する**: あるゾーンに最初の標準クラスターを作成すると、プライベート VLAN も作成されます。 そのため、`--public-vlan` フラグを含めないようにしてください。
+{: #example_cluster_create}
 
-  ```
-  ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+```
+{: pre}
 
-  **2 番目以降の標準クラスターを作成する**: 既に標準クラスターをこのゾーンに作成してある場合、または以前にパブリック VLAN を IBM Cloud インフラストラクチャー (SoftLayer) に作成した場合は、`--public-vlan` フラグを使用してそのパブリック VLAN を指定します。 特定のゾーンにパブリック VLAN が既に存在するかどうかや、既存のパブリック VLAN の名前を確認するには、`ibmcloud ks vlans<zone>` を実行します。
+**2 番目以降の標準クラスターを作成する**: 既に標準クラスターをこのゾーンに作成してある場合、または以前にパブリック VLAN を IBM Cloud インフラストラクチャー (SoftLayer) に作成した場合は、`--public-vlan` フラグを使用してそのパブリック VLAN を指定します。 特定のゾーンにパブリック VLAN が既に存在するかどうかや、既存のパブリック VLAN の名前を確認するには、`ibmcloud ks vlans<zone>` を実行します。
 
-  ```
-  ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
-
-  **{{site.data.keyword.Bluemix_dedicated_notm}} 環境でクラスターを作成する**:
-
-  ```
-  ibmcloud ks cluster-create --machine-type machine-type --workers number --name cluster_name
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+```
+{: pre}
 
 ### ibmcloud ks cluster-feature-disable public-service-endpoint
 {: #cs_cluster_feature_disable}
@@ -1339,7 +1416,7 @@ ibmcloud ks cluster-feature-enable private-service-endpoint --cluster CLUSTER [-
 
 このコマンドを実行するには、以下のようにします。
 1. ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。
-2. [{{site.data.keyword.Bluemix_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
+2. [{{site.data.keyword.Bluemix_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
 3. `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>` を実行します。
 4. CLI に表示されたプロンプトに従って、Kubernetes マスター API サーバーをリフレッシュします。
 5. クラスター内の[すべてのワーカー・ノードを再ロード](#cs_worker_reload)して、プライベート・エンドポイント構成を適用させます。
@@ -1396,7 +1473,7 @@ ibmcloud ks cluster-feature-enable public-service-endpoint --cluster my_cluster
 #### ibmcloud ks cluster-feature-enable trusted
 {: #cs_cluster_feature_enable_trusted}
 
-クラスター内にあるすべてのサポート対象ベアメタル・ワーカー・ノードで、[トラステッド・コンピューティング](/docs/containers?topic=containers-security#trusted_compute)を有効にします。トラストを有効にした後に、そのクラスターのトラストを無効にすることはできません。
+クラスター内にあるすべてのサポート対象ベアメタル・ワーカー・ノードで、[トラステッド・コンピューティング](/docs/containers?topic=containers-security#trusted_compute)を有効にします。 トラストを有効にした後に、そのクラスターのトラストを無効にすることはできません。
 {: shortdesc}
 
 ```
@@ -1424,36 +1501,6 @@ ibmcloud ks cluster-feature-enable trusted --cluster CLUSTER [-s] [-f]
 
 ```
 ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
-```
-{: pre}
-
-### ibmcloud ks cluster-feature-ls
-{: #cs_cluster_feature_ls}
-
-クラスター内で有効または無効になっているフィーチャーをリストします。
-{: shortdesc}
-
-```
-ibmcloud ks cluster-feature-ls --cluster CLUSTER [-s]
-```
-{: pre}
-
-<strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**ビューアー**のプラットフォーム役割
-
-<strong>コマンド・オプション</strong>:
-
-<dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>クラスターの名前または ID。 この値は必須です。</dd>
-
-  <dt><code>-s</code></dt>
-   <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
-</dl>
-
-**例**:
-
-```
-ibmcloud ks cluster-feature-ls --cluster my_cluster
 ```
 {: pre}
 
@@ -1528,10 +1575,10 @@ Subnet VLANs
 ### ibmcloud ks cluster-pull-secret-apply
 {: #cs_cluster_pull_secret_apply}
 
-クラスターの {{site.data.keyword.Bluemix_notm}} IAM サービス ID を作成し、{{site.data.keyword.registrylong_notm}} で**リーダー**・サービス・アクセス役割を割り当てるサービス ID のポリシーを作成してから、サービス ID の API キーを作成します。そして、その API キーは Kubernetes `imagePullSecret` に格納されます。こうして、`default` Kubernetes 名前空間にあるコンテナーのために、{{site.data.keyword.registryshort_notm}} 名前空間からイメージをプルできるようになります。このプロセスは、クラスターを作成するときに自動的に実行されます。クラスター作成プロセス中にエラーが発生するか、または既存のクラスターがある場合は、このコマンドを使用してプロセスを再び適用することができます。
+クラスターの {{site.data.keyword.Bluemix_notm}} IAM サービス ID を作成し、{{site.data.keyword.registrylong_notm}} で**リーダー**・サービス・アクセス役割を割り当てるサービス ID のポリシーを作成してから、サービス ID の API キーを作成します。 そして、その API キーは Kubernetes `imagePullSecret` に格納されます。こうして、`default` Kubernetes 名前空間にあるコンテナーのために、{{site.data.keyword.registryshort_notm}} 名前空間からイメージをプルできるようになります。 このプロセスは、クラスターを作成するときに自動的に実行されます。 クラスター作成プロセス中にエラーが発生するか、または既存のクラスターがある場合は、このコマンドを使用してプロセスを再び適用することができます。
 {: shortdesc}
 
-このコマンドを実行すると、IAM 資格情報とイメージ・プル・シークレットの作成が開始されます。これが完了するまで、しばらく時間がかかる場合があります。イメージ・プル・シークレットが作成されるまでは、{{site.data.keyword.registrylong_notm}} `icr.io` ドメインからイメージをプルするコンテナーをデプロイできません。イメージ・プル・シークレットを確認するには、`kubectl get secrets | grep icr` を実行します。
+このコマンドを実行すると、IAM 資格情報とイメージ・プル・シークレットの作成が開始されます。これが完了するまで、しばらく時間がかかる場合があります。 イメージ・プル・シークレットが作成されるまでは、{{site.data.keyword.registrylong_notm}} `icr.io` ドメインからイメージをプルするコンテナーをデプロイできません。 イメージ・プル・シークレットを確認するには、`kubectl get secrets | grep icr` を実行します。
 {: important}
 
 ```
@@ -1539,7 +1586,7 @@ ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
 ```
 {: pre}
 
-この API キーの方式は、自動的に[トークン](/docs/services/Registry?topic=registry-registry_access#registry_tokens)を作成し、イメージ・プル・シークレットにそのトークンを格納することで {{site.data.keyword.registrylong_notm}} へのアクセスをクラスターに許可していた、以前の方式に取って代わるものです。今後は、{{site.data.keyword.registrylong_notm}} へのアクセスのために IAM API キーを使用することで、サービス ID に対する IAM ポリシーをカスタマイズして、名前空間または特定のイメージへのアクセスを制限することが可能になります。例えば、特定のレジストリーの地域または名前空間のみからイメージをプルするために、クラスターのイメージ・プル・シークレット内のサービス ID ポリシーを変更することができます。IAM ポリシーをカスタマイズするには、その前に [{{site.data.keyword.registrylong_notm}} で {{site.data.keyword.Bluemix_notm}} IAM ポリシーを有効にする](/docs/services/Registry?topic=registry-user#existing_users)必要があります。
+この API キーの方式は、自動的に[トークン](/docs/services/Registry?topic=registry-registry_access#registry_tokens)を作成し、イメージ・プル・シークレットにそのトークンを格納することで {{site.data.keyword.registrylong_notm}} へのアクセスをクラスターに許可していた、以前の方式に取って代わるものです。 今後は、{{site.data.keyword.registrylong_notm}} へのアクセスのために IAM API キーを使用することで、サービス ID に対する IAM ポリシーをカスタマイズして、名前空間または特定のイメージへのアクセスを制限することが可能になります。 例えば、特定のレジストリーの地域または名前空間のみからイメージをプルするために、クラスターのイメージ・プル・シークレット内のサービス ID ポリシーを変更することができます。 IAM ポリシーをカスタマイズするには、その前に [{{site.data.keyword.registrylong_notm}} で {{site.data.keyword.Bluemix_notm}} IAM ポリシーを有効にする](/docs/services/Registry?topic=registry-user#existing_users)必要があります。
 
 詳しくは、[{{site.data.keyword.registrylong_notm}} からのイメージのプルをクラスターに許可する方法](/docs/containers?topic=containers-images#cluster_registry_auth)を参照してください。
 
@@ -1694,8 +1741,7 @@ ibmcloud ks clusters [--json] [-s]
 
 <strong>コマンド・オプション</strong>:
 
-  <dl>
-  <dt><code>--json</code></dt>
+  <dl><dt><code>--json</code></dt>
   <dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
 
   <dt><code>-s</code></dt>
@@ -1768,7 +1814,7 @@ ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
    <dd>クラスターの名前または ID。 この値は必須です。</dd>
 
    <dt><code>--key <em>SERVICE_INSTANCE_KEY</em></code></dt>
-   <dd>サービス・キーの名前または GUID。この値はオプションです。 新規サービス・キーを作成するのではなく、既存のサービス・キーを使用する場合に、この値を含めます。</dd>
+   <dd>サービス・キーの名前または GUID。 この値はオプションです。 新規サービス・キーを作成するのではなく、既存のサービス・キーを使用する場合に、この値を含めます。</dd>
 
    <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>Kubernetes 名前空間の名前。 この値は必須です。</dd>
@@ -1777,8 +1823,8 @@ ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
    <dd>バインドする {{site.data.keyword.Bluemix_notm}} サービス・インスタンスの ID。 ID を調べるには、<code>ibmcloud service show <service_instance_name> --guid</code> を実行します。 この値は必須です。 </dd>
 
    <dt><code>--role <em>IAM_ROLE</em></code></dt>
-   <dd>サービス・キーに付与する {{site.data.keyword.Bluemix_notm}} IAM 役割。デフォルト値は IAM サービス役割 `Writer` です。既存のサービス・キーを使用している場合や、IAM 対応でないサービス (Cloud Foundry サービスなど) の場合は、この値を含めないでください。<br><br>
-   サービスで使用可能な役割をリストするには、`ibmcloud iam roles --service <service_name>` を実行します。この service_name は、`ibmcloud catalog search` を実行して取得できるカタログ内のサービスの名前です。</dd>
+   <dd>サービス・キーに付与する {{site.data.keyword.Bluemix_notm}} IAM 役割。 デフォルト値は IAM サービス役割 `Writer` です。 既存のサービス・キーを使用している場合や、IAM 対応でないサービス (Cloud Foundry サービスなど) の場合は、この値を含めないでください。<br><br>
+   サービスで使用可能な役割をリストするには、`ibmcloud iam roles --service <service_name>` を実行します。 この service_name は、`ibmcloud catalog search` を実行して取得できるカタログ内のサービスの名前です。</dd>
 
    <dt><code>-s</code></dt>
    <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
@@ -1919,7 +1965,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks key-protect-enable
 {: #cs_key_protect}
 
-クラスター内で[鍵管理サービス (KMS) プロバイダー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) として [{{site.data.keyword.keymanagementservicefull}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) を使用して、Kubernetes シークレットを暗号化します。
+クラスター内で[鍵管理サービス (KMS) プロバイダー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) として [{{site.data.keyword.keymanagementservicefull}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) を使用して、Kubernetes シークレットを暗号化します。 既存の鍵の暗号化でクラスターの鍵を交替させるには、新規ルート・キー ID を使用してこのコマンドを再実行します。
 {: shortdesc}
 
 ```
@@ -1927,7 +1973,7 @@ ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url EN
 ```
 {: pre}
 
-{{site.data.keyword.keymanagementserviceshort}} インスタンス内でルート・キーを削除すると、クラスター内でシークレットからデータにアクセスしたりデータを削除したりすることはできません。
+{{site.data.keyword.keymanagementserviceshort}} インスタンス内のルート・キーは削除しないでください。新しい鍵を使用するために交替させる場合でも、鍵は削除しないでください。ルート・キーを削除すると、クラスターに含まれる etcd 内のデータやシークレットのデータにアクセスすることも削除することもできなくなります。
 {: important}
 
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**管理者**のプラットフォーム役割
@@ -2014,7 +2060,7 @@ ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
 {: pre}
 
 <p class="important">ポータブル・パブリック IP アドレスは、月単位で課金されます。 クラスターをプロビジョンした後にポータブル・パブリック IP アドレスを削除した場合、短時間しか使用していなくても月額料金を支払う必要があります。</br>
-</br>クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containerlong_notm}}の外部で使用したりしないでください。</br>
+</br>クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containerlong_notm}} の外部で使用したりしないでください。</br>
 </br>同じ VLAN の別々のサブネットにあるワーカーが通信できるようにするには、[同じ VLAN 上のサブネット間のルーティングを有効にする](/docs/containers?topic=containers-subnets#subnet-routing)必要があります。</p>
 
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**オペレーター**のプラットフォーム役割
@@ -2052,8 +2098,8 @@ ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 ```
 {: pre}
 
-<p class="important">クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containerlong_notm}}の外部で使用したりしないでください。</br>
-</br>1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。</p>
+<p class="important">クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containerlong_notm}} の外部で使用したりしないでください。</br>
+</br>1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。</p>
 
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**オペレーター**のプラットフォーム役割
 
@@ -2094,8 +2140,8 @@ ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR 
 
 このプライベート・サブネットは、IBM Cloud インフラストラクチャー (SoftLayer) から提供されたプライベート・サブネットではありません。 このため、そのサブネットに対してインバウンドおよびアウトバウンドのネットワーク・トラフィックのルーティングをすべて構成する必要があります。 IBM Cloud インフラストラクチャー (SoftLayer) のサブネットを追加する場合は、`ibmcloud ks cluster-subnet-add` [コマンド](#cs_cluster_subnet_add)を使用します。
 
-<p class="important">クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containerlong_notm}}の外部で使用したりしないでください。</br>
-</br>1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。</p>
+<p class="important">クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containerlong_notm}} の外部で使用したりしないでください。</br>
+</br>1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。</p>
 
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**オペレーター**のプラットフォーム役割
 
@@ -2266,7 +2312,7 @@ ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NA
 ```
 {: pre}
 
-このコマンドを使用して証明書をインポートすると、`ibm-cert-store` という名前空間に証明書シークレットが作成されます。それから、このシークレットへの参照が `default` 名前空間に作成されます。これには、どの名前空間内の、どの Ingress リソースでもアクセスできます。ALB は、要求を処理するとき、この参照に従って `ibm-cert-store` 名前空間から証明書シークレットを選出して使用します。
+このコマンドを使用して証明書をインポートすると、`ibm-cert-store` という名前空間に証明書シークレットが作成されます。 それから、このシークレットへの参照が `default` 名前空間に作成されます。これには、どの名前空間内の、どの Ingress リソースでもアクセスできます。 ALB は、要求を処理するとき、この参照に従って `ibm-cert-store` 名前空間から証明書シークレットを選出して使用します。
 
 {{site.data.keyword.cloudcerts_short}} で設定されている[速度制限](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting)内に収まるように、連続する `alb-cert-deploy` コマンドと `alb-cert-deploy --update` コマンドとの間で、少なくとも 45 秒待機してください。
 {: note}
@@ -2283,7 +2329,7 @@ ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NA
    <dd>クラスター内の ALB シークレットの証明書を更新します。 この値はオプションです。</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-   <dd>ALB シークレットの名前。 この値は必須です。</dd>
+   <dd>ALB シークレットがクラスター内で作成されている場合は、その名前を指定します。この値は必須です。 IBM 提供の Ingress シークレットと同じ名前のシークレットは作成しないでください。 IBM 提供の Ingress シークレットの名前を確認するには、<code>ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress</code> を実行します。</dd>
 
    <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
    <dd>証明書 CRN。 この値は必須です。</dd>
@@ -2468,13 +2514,10 @@ ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disab
    <dd>IBM 提供の ALB デプロイメントを無効にするには、このフラグを指定します。 このフラグは、IBM 提供の Ingress サブドメインの DNS 登録も、Ingress コントローラーを公開するために使用されるロード・バランサー・サービスも削除しません。</dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
-   <dd>
-
-   <ul>
-    <li>このパラメーターは、プライベート ALB のみを有効にする場合に使用できます。</li>
-    <li>プライベート ALB は、ユーザー提供のプライベート・サブネットからの IP アドレスとともにデプロイされます。 IP アドレスが提供されない場合、ALB は、クラスターの作成時に自動的にプロビジョンされたポータブル・プライベート・サブネットのプライベート IP アドレスを使用してデプロイされます。</li>
-   </ul>
-   </dd>
+   <dd><ul>
+     <li>このパラメーターは、プライベート ALB のみを有効にする場合に使用できます。</li>
+     <li>プライベート ALB は、ユーザー提供のプライベート・サブネットからの IP アドレスとともにデプロイされます。 IP アドレスが提供されない場合、ALB は、クラスターの作成時に自動的にプロビジョンされたポータブル・プライベート・サブネットのプライベート IP アドレスを使用してデプロイされます。</li>
+    </ul></dd>
 
    <dt><code>-s</code></dt>
    <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
@@ -2653,7 +2696,7 @@ ibmcloud ks albs --cluster CLUSTER [--json] [-s]
 ## インフラストラクチャー・コマンド
 {: #infrastructure_commands}
 
-### ibmcloud ks
+### ibmcloud ks credential-get
 {: #cs_credential_get}
 
 複数の異なる資格情報を使用して IBM Cloud インフラストラクチャー・ポートフォリオにアクセスするように IBM Cloud アカウントをセットアップした場合に、現在ターゲットになっている地域とリソース・グループのインフラストラクチャー・ユーザー名を取得します。
@@ -2727,11 +2770,10 @@ ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-use
   <li>[{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com) にログインします。
   <li>メニュー・バーから、**「管理」 > 「アクセス (IAM)」**を選択します。
   <li>**「ユーザー」**タブを選択し、自分のユーザー名をクリックします。
-   <li>**「API キー」**ペインで**「クラシック・インフラストラクチャー API キー」**という項目を見つけ、**「アクション」メニュー ** ![「アクション」メニュー・アイコン](../icons/action-menu-icon.svg "「アクション」メニュー・アイコン") **>「詳細」**をクリックします。クラシック・インフラストラクチャー API キーが表示されていない場合は、**「{{site.data.keyword.Bluemix_notm}} API キーの作成」**をクリックして生成します。
+  <li>**「API キー」**ペインで**「クラシック・インフラストラクチャー API キー」**という項目を見つけ、**「アクション」メニュー ** ![「アクション」メニュー・アイコン](../icons/action-menu-icon.svg "「アクション」メニュー・アイコン") **>「詳細」**をクリックします。 クラシック・インフラストラクチャー API キーが表示されていない場合は、**「{{site.data.keyword.Bluemix_notm}} API キーの作成」**をクリックして生成します。
   <li>API ユーザー名をコピーします。
-   </ol>
+  </ol>
   </dd>
-
   <dt><code>-s</code></dt>
   <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
 
@@ -2751,14 +2793,14 @@ ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-use
 {{site.data.keyword.containerlong_notm}} 地域から IBM Cloud インフラストラクチャー (SoftLayer) アカウントの資格情報を削除します。
 {: shortdesc}
 
-```
-ibmcloud ks credential-unset
-```
-{: pre}
-
 資格情報を削除すると、[{{site.data.keyword.Bluemix_notm}}IAM API キー](#cs_api_key_info)が、IBM Cloud インフラストラクチャー (SoftLayer) のリソースの注文に使用されます。
 
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**管理者**のプラットフォーム役割
+
+```
+ibmcloud ks credential-unset [-s]
+```
+{: pre}
 
 <strong>コマンド・オプション</strong>:
 
@@ -3532,13 +3574,429 @@ ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
 <br />
 
 
+## ネットワーク・ロード・バランサー・コマンド (`nlb-dns`)
+{: #nlb-dns}
+
+このコマンド・グループを使用して、ネットワーク・ロード・バランサー (NLB) IP アドレスのホスト名や、ホスト名に対するヘルス・チェック・モニターを作成および管理します。詳しくは、[ロード・バランサーのホスト名の登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)を参照してください。
+{: shortdesc}
+
+### ibmcloud ks nlb-dns-add
+{: #cs_nlb-dns-add}
+
+[`ibmcloud ks nlb-dns-create` コマンド](#cs_nlb-dns-create)で作成した既存のホスト名にネットワーク・ロード・バランサー (NLB) IP を追加します。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-add --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+例えば、複数ゾーン・クラスターでは、アプリを公開する各ゾーンに NLB を作成する場合があります。`ibmcloud ks nlb-dns-create` を実行することによって、ホスト名を使用して 1 つのゾーンの NLB IP を登録すると、その他のゾーンからこの既存のホスト名に NLB IP を追加できます。ユーザーがアプリのホスト名にアクセスすると、クライアントがこれらの IP のいずれかにランダムにアクセスし、要求が NLB に送信されます。追加する各 IP アドレスに対して以下のコマンドを実行する必要があります。
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>ホスト名に追加する NLB IP。NLB IP を表示するには、<code>kubectl get svc</code> を実行します。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>IP を追加するホスト名。既存のホスト名を表示するには、<code>ibmcloud ks nlb-dnss</code> を実行します。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-create
+{: #cs_nlb-dns-create}
+
+ネットワーク・ロード・バランサー (NLB) IP を登録する DNS ホスト名を作成することによって、アプリをパブリックに公開します。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-create --cluster CLUSTER --ip IP [--json] [-s]
+```
+{: pre}
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>登録するネットワーク・ロード・バランサー IP アドレス。NLB IP を表示するには、<code>kubectl get svc</code> を実行します。最初にホスト名を作成するときには、1 つの IP アドレスのみを使用できます。アプリを公開する複数ゾーン・クラスターの各ゾーンに NLB がある場合、[`ibmcloud ks nlb-dns-add` コマンド](#cs_nlb-dns-add)を実行することによって、ホスト名にその他の NLB の IP を追加できます。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dns-create --cluster mycluster --ip 1.1.1.1
+```
+{: pre}
+
+### ibmcloud ks nlb-dnss
+{: #cs_nlb-dns-ls}
+
+クラスターに登録されているネットワーク・ロード・バランサーのホスト名および IP アドレスをリストします。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dnss --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dnss --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-rm
+{: #cs_nlb-dns-rm}
+
+ホスト名からネットワーク・ロード・バランサーの IP アドレスを削除します。ホスト名からすべての IP を削除してもホスト名は引き続き存在しますが、そのホスト名に関連付けられている IP はなくなります。削除する IP アドレスごとに、以下のコマンドを実行する必要があることに注意してください。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>削除する NLB IP。NLB IP を表示するには、<code>kubectl get svc</code> を実行します。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>IP を削除するホスト名。既存のホスト名を表示するには、<code>ibmcloud ks nlb-dnss</code> を実行します。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-monitor
+{: #cs_nlb-dns-monitor}
+
+クラスター内のネットワーク・ロード・バランサーのホスト名に対するヘルス・チェック・モニターを作成、変更、および表示します。このコマンドは、以下のいずれかのサブコマンドと組み合わせて使用する必要があります。
+{: shortdesc}
+
+#### ibmcloud ks nlb-dns-monitor-configure
+{: #cs_nlb-dns-monitor-configure}
+
+クラスター内の既存の NLB ホスト名に対するヘルス・チェック・モニターを構成し、オプションとして有効にします。ホスト名に対するモニターを有効にすると、モニターによって各ゾーンの NLB IP のヘルス・チェックが行われ、それらのヘルス・チェックに基づいて DNS 参照の結果が最新の状態に保たれます。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster CLUSTER --nlb-host HOST NAME [--enable] [--desc DESCRIPTION] [--type TYPE] [--method METHOD] [--path PATH] [--timeout TIMEOUT] [--retries RETRIES] [--interval INTERVAL] [--port PORT] [--header HEADER] [--expected-body BODY STRING] [--expected-codes HTTP CODES] [--follows-redirects TRUE] [--allows-insecure TRUE] [--json] [-s]
+```
+{: pre}
+
+このコマンドを使用すると、新規ヘルス・チェック・モニターを作成して有効にしたり、既存のヘルス・チェック・モニターの設定を更新したりできます。新規モニターを作成するには、`--enable` フラグおよび構成するすべての設定のフラグを含めます。既存のモニターを更新するには、変更する設定のフラグのみを含めます。
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>ホスト名が登録されているクラスターの名前または ID。</dd>
+
+<dt><code>--nlb-host <em>HOST NAME</em></code></dt>
+<dd>ヘルス・チェック・モニターの構成対象のホスト名。ホスト名をリストするには、<code>ibmcloud ks nlb-dns list --cluster CLUSTER</code> を実行します。</dd>
+
+<dt><code>--enable</code></dt>
+<dd>ホスト名に対する新規ヘルス・チェック・モニターを作成して有効にするには、このフラグを含めます。</dd>
+
+<dt><code>--description <em>DESCRIPTION</em></code></dt>
+<dd>ヘルス・モニターの説明。</dd>
+
+<dt><code>--type <em>TYPE</em></code></dt>
+<dd>ヘルス・チェックに使用するプロトコル: <code>HTTP</code>、<code>HTTPS</code>、または <code>TCP</code>。デフォルト: <code>HTTP</code></dd>
+
+<dt><code>--method <em>METHOD</em></code></dt>
+<dd>ヘルス・チェックに使用するメソッド。<code>type</code> <code>HTTP</code> および <code>HTTPS</code> のデフォルト: <code>GET</code>。<code>type</code> <code>TCP</code> のデフォルト: <code>connection_established</code>。</dd>
+
+<dt><code>--path <em>PATH</em></code></dt>
+<dd><code>type</code> が <code>HTTPS</code> の場合: ヘルス・チェック対象のエンドポイント・パス。デフォルト: <code>/</code></dd>
+
+<dt><code>--timeout <em>TIMEOUT</em></code></dt>
+<dd>IP が正常でないと見なされるまでのタイムアウト (秒)。デフォルト: <code>5</code></dd>
+
+<dt><code>--retries <em>RETRIES</em></code></dt>
+<dd>タイムアウトが発生したときに、IP が正常でないと見なされるまでに再試行する回数。再試行は即時に実行されます。デフォルト: <code>2</code></dd>
+
+<dt><code>--interval <em>INTERVAL</em></code></dt>
+<dd>各ヘルス・チェックの間隔 (秒)。間隔を短くすると、フェイルオーバーの時間が改善される場合がありますが、IP の負荷が増える場合があります。デフォルト: <code>60</code></dd>
+
+<dt><code>--port <em>PORT</em></code></dt>
+<dd>ヘルス・チェックのために接続するポート番号。<code>type</code> が <code>TCP</code> の場合、このパラメーターは必須です。<code>type</code> が <code>HTTP</code> または <code>HTTPS</code> の場合、80 (HTTP の場合) または 443 (HTTPS の場合) 以外のポートを使用する場合にのみポートを定義します。 TCP のデフォルト: <code>0</code>。HTTP のデフォルト: <code>80</code>。 HTTPS のデフォルト: <code>443</code>。</dd>
+
+<dt><code>--header <em>HEADER</em></code></dt>
+<dd><code>type</code> が <code>HTTPS</code> または <code>HTTPS</code> の場合: ヘルス・チェックで送信する HTTP 要求ヘッダー (ホスト・ヘッダーなど)。User-Agent ヘッダーは、オーバーライドできません。</dd>
+
+<dt><code>--expected-body <em>BODY STRING</em></code></dt>
+<dd><code>type</code> が <code>HTTP</code> または <code>HTTPS</code> の場合: 応答本体でヘルス・チェックが検索する大/小文字を区別しないサブストリング。このストリングが検出されない場合、IP が正常でないと見なされます。</dd>
+
+<dt><code>--expected-codes <em>HTTP CODES</em></code></dt>
+<dd><code>type</code> が <code>HTTP</code> または <code>HTTPS</code> の場合: 応答内でヘルス・チェックが検索する HTTP コード。HTTP コードが検出されない場合、IP が正常でないと見なされます。デフォルト: <code>2xx</code></dd>
+
+<dt><code>--allows-insecure <em>TRUE</em></code></dt>
+<dd><code>type</code> が <code>HTTP</code> または <code>HTTPS</code> の場合: 証明書を検証しない場合は <code>true</code> に設定します。</dd>
+
+<dt><code>--follows-redirects <em>TRUE</em></code></dt>
+<dd><code>type</code> が <code>HTTP</code> または <code>HTTPS</code> の場合: IP によって返されたリダイレクトに従う場合は <code>true</code> に設定します。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-get
+{: #cs_nlb-dns-monitor-get}
+
+既存のヘルス・チェック・モニターの設定を表示します。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>モニターによるヘルス・チェック対象のホスト名。ホスト名をリストするには、<code>ibmcloud ks nlb-dns list --cluster CLUSTER</code> を実行します。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-disable
+{: #cs_nlb-dns-monitor-disable}
+
+クラスター内のホスト名に対する既存のヘルス・チェック・モニターを無効にします。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>モニターによるヘルス・チェック対象のホスト名。ホスト名をリストするには、<code>ibmcloud ks nlb-dns list --cluster CLUSTER</code> を実行します。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-enable
+{: #cs_nlb-dns-monitor-enable}
+
+構成した既存のヘルス・チェック・モニターを有効にします。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+ヘルス・チェック・モニターを初めて作成するとき、それを構成して有効化するために、`ibmcloud ks nlb-dns-monitor-configure` コマンドを使用する必要があることに注意してください。`ibmcloud ks nlb-dns-monitor-enable` コマンドは、構成済みだがまだ有効にしていないモニターを有効にする場合や、前に無効にしたモニターを再度有効にする場合にのみ使用してください。
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>モニターによるヘルス・チェック対象のホスト名。ホスト名をリストするには、<code>ibmcloud ks nlb-dns list --cluster CLUSTER</code> を実行します。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-ls
+{: #cs_nlb-dns-monitor-ls}
+
+クラスター内の NLB ホスト名ごとのヘルス・チェック・モニターの設定をリストします。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster mycluster
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-status
+{: #cs_nlb-dns-monitor-status}
+
+クラスター内の NLB ホスト名の背後にある IP のヘルス・チェック状況をリストします。
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+<dt><code>-- <em></em></code></dt>
+<dd>1 つのホスト名の状況のみを表示するには、このフラグを含めます。ホスト名をリストするには、<code>ibmcloud ks nlb-dns list --cluster CLUSTER</code> を実行します。</dd>
+
+<dt><code>--json</code></dt>
+<dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
+
+<dt><code>-s</code></dt>
+<dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
+</dl>
+
+**例**:
+```
+ibmcloud ks nlb-dns-monitor-status --cluster mycluster
+```
+{: pre}
+
+<br />
+
+
 ## 地域コマンド
 {: #region_commands}
+
+このコマンド・グループを使用して、使用可能なロケーションを表示したり、現在ターゲットになっている地域を表示したり、ターゲットにする地域を設定したりします。
+{: shortdesc}
 
 ### ibmcloud ks region
 {: #cs_region}
 
-現在自分が属している {{site.data.keyword.containerlong_notm}} 地域を見つけます。 その地域に固有のクラスターを作成して管理します。 地域を変更するには、`ibmcloud ks region-set` コマンドを使用します。
+現在ターゲットになっている {{site.data.keyword.containerlong_notm}} 地域を見つけます。その地域に固有のクラスターを作成して管理します。 地域を変更するには、`ibmcloud ks region-set` コマンドを使用します。
 {: shortdesc}
 
 ```
@@ -3554,14 +4012,14 @@ ibmcloud ks region
 {{site.data.keyword.containerlong_notm}} の地域を設定します。 その地域に固有のクラスターを作成して管理します。高可用性を確保するために、複数の地域にクラスターを作成することもできます。
 {: shortdesc}
 
+例えば、米国南部地域の {{site.data.keyword.Bluemix_notm}} にログインしてクラスターを作成できます。 次に `ibmcloud ks region-set eu-central` を使用して中欧地域をターゲットにし、別のクラスターを作成できます。 最後に、`ibmcloud ks region-set us-south` を使用して米国南部地域に戻り、その地域のクラスターを管理できます。
+
+<strong>最小限必要な許可</strong>: なし
+
 ```
 ibmcloud ks region-set [--region REGION]
 ```
 {: pre}
-
-例えば、米国南部地域の {{site.data.keyword.Bluemix_notm}} にログインしてクラスターを作成できます。 次に `ibmcloud ks region-set eu-central` を使用して中欧地域をターゲットにし、別のクラスターを作成できます。 最後に、`ibmcloud ks region-set us-south` を使用して米国南部地域に戻り、その地域のクラスターを管理できます。
-
-<strong>最小限必要な許可</strong>: なし
 
 **コマンド・オプション**:
 
@@ -3637,8 +4095,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
 
 <strong>コマンド・オプション</strong>:
 
-   <dl>
-   <dt><code>--region-only</code></dt>
+   <dl><dt><code>--region-only</code></dt>
    <dd>ログインしている地域内の複数ゾーンのみリストします。 この値はオプションです。</dd>
 
    <dt><code>--json</code></dt>
@@ -3648,12 +4105,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
    <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
    </dl>
 
-**例**:
-
-  ```
-  ibmcloud ks zones
-  ```
-  {: pre}
+**最小許可**: なし
 
 <br />
 
@@ -3762,14 +4214,7 @@ diskEncryption: <em>false</em></code></pre>
 **例**:
 
   ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --hardware shared
-  ```
-  {: pre}
-
-  {{site.data.keyword.Bluemix_dedicated_notm}} の場合の例:
-
-  ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --machine-type b2c.4x16
+  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --hardware shared
   ```
   {: pre}
 
@@ -3829,7 +4274,7 @@ ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [-
 ### ibmcloud ks worker-reboot
 {: #cs_worker_reboot}
 
-クラスター内のワーカー・ノードをリブートします。 リブート中は、ワーカー・ノードの状態は変わりません。 例えば、IBM Cloud インフラストラクチャー (SoftLayer) のワーカー・ノードの状況が `Powered Off` のときに、ワーカー・ノードをオンにする必要がある場合、リブートを使用できます。 リブートすると、一時ディレクトリーが消去されますが、ファイル・システム全体が消去されたり、ディスクが再フォーマットされたりすることはありません。
+クラスター内のワーカー・ノードをリブートします。 リブート中は、ワーカー・ノードの状態は変わりません。 例えば、IBM Cloud インフラストラクチャー (SoftLayer) のワーカー・ノードの状況が `Powered Off` のときに、ワーカー・ノードをオンにする必要がある場合、リブートを使用できます。 リブートすると、一時ディレクトリーが消去されますが、ファイル・システム全体が消去されたり、ディスクが再フォーマットされたりすることはありません。 リブート操作の後も、ワーカー・ノードのパブリック IP アドレスおよびプライベート IP アドレスは同じままです。
 {: shortdesc}
 
 ```
@@ -3915,7 +4360,7 @@ ibmcloud ks worker-reboot [-f] [--hard] --cluster CLUSTER --worker WORKER [WORKE
 ### ibmcloud ks worker-reload
 {: #cs_worker_reload}
 
-ワーカー・ノードの構成を再ロードします。 再ロードは、ワーカー・ノードでパフォーマンスの低下などの問題が発生した場合や、ワーカー・ノードが正常でない状態に陥った場合に役立ちます。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)していないデータは削除されることに注意してください。
+ワーカー・ノードの構成を再ロードします。 再ロードは、ワーカー・ノードでパフォーマンスの低下などの問題が発生した場合や、ワーカー・ノードが正常でない状態に陥った場合に役立ちます。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)していないデータは削除されることに注意してください。 再ロード操作の後も、ワーカー・ノードの IP アドレスは同じままです。
 {: shortdesc}
 
 ```
@@ -4071,7 +4516,7 @@ ibmcloud ks worker-rm [-f] --cluster CLUSTER --workers WORKER[,WORKER] [-s]
 ### ibmcloud ks worker-update
 {: #cs_worker_update}
 
-ワーカー・ノードを更新して最新のセキュリティー更新とパッチをオペレーティング・システムに適用し、Kubernetes のバージョンを Kubernetes マスターのバージョンと一致するように更新します。 `ibmcloud ks cluster-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)を使用して、マスターの Kubernetes バージョンを更新できます。
+ワーカー・ノードを更新して最新のセキュリティー更新とパッチをオペレーティング・システムに適用し、Kubernetes のバージョンを Kubernetes マスターのバージョンと一致するように更新します。 `ibmcloud ks cluster-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)を使用して、マスターの Kubernetes バージョンを更新できます。 更新操作の後も、ワーカー・ノードの IP アドレスは同じままです。
 {: shortdesc}
 
 ```
@@ -4211,7 +4656,7 @@ ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type
 **例**:
 
   ```
-  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
+  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b3c.4x16 --size-per-zone 6
   ```
   {: pre}
 
@@ -4260,9 +4705,9 @@ ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--
   Hardware:           shared
   Zones:              dal10,dal12
   Workers per zone:   3
-  Machine type:       b2c.4x16.encrypted
+  Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.12.6_1512
+  Version:            1.12.7_1512
   ```
   {: screen}
 
@@ -4427,15 +4872,15 @@ ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,
     <dd><p>プライベート VLAN の ID。 この値は条件付きです。</p>
     <p>ゾーンにプライベート VLAN がある場合、この値は、クラスターのワーカー・ノードが 1 つ以上存在するプライベート VLAN ID と一致していなければなりません。 使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。 指定した VLAN に新しいワーカー・ノードが追加されますが、既存のワーカー・ノードの VLAN は変更されません。</p>
     <p>このゾーン内にプライベート VLAN もパブリック VLAN もない場合は、このオプションを指定しないでください。 新規ゾーンをワーカー・プールに初めて追加するときに、プライベート VLAN とパブリック VLAN が自動的に作成されます。</p>
-    <p>1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。</p></dd>
+    <p>1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd><p>パブリック VLAN の ID。 クラスターの作成後にノード上のワークロードをパブリックに公開する場合は、この値が必要です。 この値は、このゾーンでクラスターのワーカー・ノードが 1 つ以上存在するパブリック VLAN ID と一致していなければなりません。 使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。 指定した VLAN に新しいワーカー・ノードが追加されますが、既存のワーカー・ノードの VLAN は変更されません。</p>
     <p>このゾーン内にプライベート VLAN もパブリック VLAN もない場合は、このオプションを指定しないでください。 新規ゾーンをワーカー・プールに初めて追加するときに、プライベート VLAN とパブリック VLAN が自動的に作成されます。</p>
-    <p>1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。</p></dd>
+    <p>1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。</p></dd>
 
   <dt><code>--private-only </code></dt>
-    <dd>このオプションは、パブリック VLAN が作成されるのを防止するために使用します。 `--private-vlan` フラグを指定する場合にしか必要でないため、`--public-vlan` フラグは含めないでください。<p class="note">プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、プライベート・サービス・エンドポイントを有効にするか、ゲートウェイ・デバイスを構成する必要があります。詳しくは、[プライベート・クラスター](/docs/containers?topic=containers-plan_clusters#private_clusters)を参照してください。</p></dd>
+    <dd>このオプションは、パブリック VLAN が作成されるのを防止するために使用します。 `--private-vlan` フラグを指定する場合にしか必要でないため、`--public-vlan` フラグは含めないでください。 <p class="note">プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、プライベート・サービス・エンドポイントを有効にするか、ゲートウェイ・デバイスを構成する必要があります。 詳しくは、[プライベート・クラスター](/docs/containers?topic=containers-plan_clusters#private_clusters)を参照してください。</p></dd>
 
   <dt><code>--json</code></dt>
     <dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>

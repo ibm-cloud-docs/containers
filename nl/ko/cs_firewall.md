@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,9 @@ subcollection: containers
 * 회사 네트워크 정책으로 인해 프록시 또는 방화벽을 통해 공용 인터넷 엔드포인트에 액세스하지 못할 때 로컬 시스템에서 [`calicoctl` 명령을 실행](#firewall_calicoctl)하려는 경우
 * 작업자 노드에 대한 방화벽이 설정되었거나 IBM Cloud 인프라(SoftLayer) 계정에서 방화벽 설정이 사용자 정의되었을 때 [Kubernetes 마스터와 작업자 노드 간의 통신을 허용](#firewall_outbound)하려는 경우
 * [클러스터가 사설 네트워크의 방화벽을 통해 리소스에 액세스할 수 있도록 허용](#firewall_private)하려는 경우
+* [클러스터가 Calico 네트워크 정책이 작업자 노드 유출을 차단할 때 리소스에 액세스할 수 있도록 허용](#firewall_calico_egress)하려는 경우
 * [클러스터의 외부에서 NodePort 서비스, 로드 밸런서 서비스 또는 Ingress에 액세스](#firewall_inbound)하려는 경우
+* [방화벽으로 보호되는 {{site.data.keyword.Bluemix_notm}} 또는 온프레미스 내부 또는 외부에서 실행하는 서비스에 액세스할 수 있도록 허용하는 경우](#whitelist_workers)
 
 <br />
 
@@ -99,13 +101,6 @@ subcollection: containers
 2. 클러스터가 `default` 외의 리소스 그룹에 속해 있는 경우에는 해당 리소스 그룹을 대상으로 지정하십시오. 각 클러스터가 속하는 리소스 그룹을 보려면 `ibmcloud ks clusters`를 실행하십시오. **참고**: 해당 리소스 그룹에 대해 [**Viewer** 역할](/docs/containers?topic=containers-users#platform) 이상의 역할을 갖고 있어야 합니다.
    ```
    ibmcloud target -g <resource_group_name>
-   ```
-   {: pre}
-
-3. 클러스터가 있는 지역을 선택하십시오.
-
-   ```
-   ibmcloud ks region-set
    ```
    {: pre}
 
@@ -220,10 +215,10 @@ subcollection: containers
 <br />
 
 
-## 클러스터가 인프라 리소스 및 기타 서비스에 액세스하도록 허용
+## 클러스터가 공용 방화벽을 통해 인프라 리소스 및 기타 서비스에 액세스하도록 허용
 {: #firewall_outbound}
 
-클러스터가 방화벽 뒤에서 인프라 리소스와 서비스(예: {{site.data.keyword.containerlong_notm}} 지역, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management(IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud 인프라(SoftLayer) 사설 IP 및 지속적 볼륨 클레임을 위한 egress에 액세스할 수 있게 하십시오.
+클러스터가 공용 방화벽 뒤에서 인프라 리소스와 서비스(예: {{site.data.keyword.containerlong_notm}} 지역, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management(IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud 인프라(SoftLayer) 사설 IP 및 지속적 볼륨 클레임을 위한 egress에 액세스할 수 있게 하십시오.
 {:shortdesc}
 
 클러스터 설정에 따라 공용, 개인 또는 IP 주소 둘 다 사용하여 서비스에 액세스합니다. 공용 및 사설 네트워크 모두에 대해 방화벽으로 보호되는 공용 및 사설 VLAN 모두에 작업자 노드가 있는 클러스터가 있는 경우 공인과 사설 IP 주소 모두에 대한 연결을 열어야 합니다. 클러스터에 방화벽으로 보호되는 사설 VLAN에만 작업자 노드가 있는 경우에는 사설 IP 주소에만 연결을 열 수 있습니다.
@@ -361,7 +356,7 @@ subcollection: containers
         <thead>
         <th>{{site.data.keyword.containerlong_notm}} 지역</th>
         <th>모니터링 주소</th>
-        <th>모니터링 서브넷</th>
+        <th>서브넷 모니터링</th>
         </thead>
       <tbody>
         <tr>
@@ -379,13 +374,13 @@ subcollection: containers
           <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
-
+         
         </tbody>
       </table>
 </p>
     *   **{{site.data.keyword.mon_full_notm}}**:
         <pre class="screen">TCP port 443, port 6443 FROM &lt;each_worker_node_public_IP&gt; TO &lt;sysdig_public_IP&gt;</pre>
-`<sysdig_public_IP>`를 [Sysdig IP 주소](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-network#network)로 대체하십시오.
+        `<sysdig_public_IP>`를 [Sysdig IP 주소](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-network#network)로 대체하십시오.
     *   **{{site.data.keyword.loganalysislong_notm}}**:
         <pre class="screen">TCP port 443, port 9091 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
 <em>&lt;logging_public_IP&gt;</em>를 트래픽을 허용할 로깅 지역에 대한 모든 주소로 대체하십시오.
@@ -422,7 +417,7 @@ subcollection: containers
 </p>
     *   **{{site.data.keyword.la_full_notm}}**:
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
-`<logDNA_public_IP>`를 [LogDNA IP 주소](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network)로 대체하십시오.
+        `<logDNA_public_IP>`를 [LogDNA IP 주소](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network)로 대체하십시오.
 
 5. 로드 밸런서 서비스를 사용하는 경우에는 VRRP 프로토콜을 사용하는 모든 트래픽이 공용 및 사설 인터페이스의 작업자 노드 간에 허용되는지 확인하십시오. {{site.data.keyword.containerlong_notm}}는 VRRP 프로토콜을 사용하여 공용 및 사설 로드 밸런서의 IP 주소를 관리합니다.
 
@@ -436,7 +431,7 @@ subcollection: containers
    <tbody>
      <tr>
        <td>파일 스토리지</td>
-       <td>Kubernetes 버전 <code>1.13.4_1512</code>, <code>1.12.6_1543</code>, <code>1.11.8_1549</code>, <code>1.10.13_1550</code> 이상</td>
+       <td>Kubernetes 버전 <code>1.13.4_1512</code>, <code>1.12.6_1544</code>, <code>1.11.8_1550</code>, <code>1.10.13_1551</code> 이상</td>
      </tr>
      <tr>
        <td>블록 스토리지</td>
@@ -444,7 +439,7 @@ subcollection: containers
      </tr>
      <tr>
        <td>오브젝트 스토리지</td>
-       <td><ul><li>{{site.data.keyword.cos_full_notm}} 플러그인 버전 1.0.3 이상 </li><li>HMAC 인증을 사용하여 {{site.data.keyword.cos_full_notm}} 서비스 설정</li></ul></td>
+       <td><ul><li>{{site.data.keyword.cos_full_notm}} 플러그인 버전 1.0.3 이상</li><li>HMAC 인증을 사용하여 {{site.data.keyword.cos_full_notm}} 서비스 설정</li></ul></td>
      </tr>
    </tbody>
    </table>
@@ -483,6 +478,76 @@ subcollection: containers
 <br />
 
 
+## 클러스터가 Calico 유출 정책을 통해 액세스할 수 있도록 허용
+{: #firewall_calico_egress}
+
+모든 공용 작업자 유출을 제한하기 위해 방화벽의 역할을 수행하도록 [Calico 네트워크 정책](/docs/containers?topic=containers-network_policies)을 사용하는 경우 작업자가 마스터 API 서버 및 etcd에 대한 로컬 프록시에 액세스하도록 허용해야 합니다.
+{: shortdesc}
+
+1. [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) `--admin` 및 `--network` 옵션을 `ibmcloud ks cluster-config` 명령에 포함하십시오. `--admin`은 인프라 포트폴리오에 액세스하고 작업자 노드에서 Calico 명령을 실행하기 위한 키를 다운로드합니다. `--network`는 모든 Calico 명령을 실행하기 위한 Calico 구성 파일을 다운로드합니다.
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+2. 클러스터에서 172.20.0.1:2040 및 172.21.0.1:443(API 서버용)과 172.20.0.1:2041(etcd 로컬 프록시용)로 공용 트래픽을 허용하는 Calico 네트워크 정책을 작성하십시오. 
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: allow-master-local
+  spec:
+    egress:
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: TCP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: TCP
+    order: 1500
+    selector: ibm.role == 'worker_public'
+    types:
+    - Egress
+  ```
+  {: codeblock}
+
+3. 클러스터에 정책을 적용하십시오.
+    - Linux 및 OS X:
+
+      ```
+      calicoctl apply -f allow-master-local.yaml
+      ```
+      {: pre}
+
+    - Windows:
+
+      ```
+      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
 ## 클러스터 외부에서 NodePort, 로드 밸런서 및 Ingress 서비스에 액세스
 {: #firewall_inbound}
 
@@ -507,7 +572,7 @@ NodePort, 로드 밸런서 및 Ingress 서비스에 대한 수신 액세스를 �
 방화벽으로 보호되는 {{site.data.keyword.Bluemix_notm}} 또는 온프레미스 내부 또는 외부에서 실행하는 서비스에 액세스하려는 경우, 해당 방화벽에서 작업자 노드의 IP 주소를 추가하여 클러스터에 대한 아웃바운드 네트워크 트래픽을 허용할 수 있습니다. 예를 들어, 방화벽으로 보호되는 {{site.data.keyword.Bluemix_notm}} 데이터베이스에서 데이터를 읽거나 온프레미스 방화벽에서 작업자 노드 서브넷을 화이트리스트로 지정하여 클러스터에서 네트워크 트래픽을 허용할 수 있습니다.
 {:shortdesc}
 
-1.  [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+1.  [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. 작업자 노드 서브넷 또는 작업자 노드 IP 주소를 가져오십시오.
   * **작업자 노드 서브넷**: 클러스터의 작업자 노드 수를 자주 변경하려는 경우(예: [클러스터 오토스케일러](/docs/containers?topic=containers-ca#ca) 사용), 새 작업자 노드마다 방화벽을 업데이트하지 않을 수 있습니다. 대신 클러스터에서 사용하는 VLAN 서브넷을 화이트리스트로 지정할 수 있습니다. 다른 클러스터의 작업자 노드에 의해 VLAN 서브넷이 공유될 수 있다는 점에 유의하십시오.
@@ -520,11 +585,11 @@ NodePort, 로드 밸런서 및 Ingress 서비스에 대한 수신 액세스를 �
 
     2. 이전 단계의 출력에서 클러스터의 작업자 노드에 대한 **공인 IP**의 고유 네트워크 ID(처음 세 옥텟)를 모두 기록해 두십시오.<staging> 사설 전용 클러스터를 화이트리스트로 지정하려면 대신 **사설 IP**를 기록해 두십시오.<staging> 다음 출력에서 고유 네트워크 ID는 `169.xx.178` 및 `169.xx.210`입니다.
         ```
-        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
+ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
         ```
         {: screen}
     3.  각 고유 네트워크 ID에 대한 VLAN 서브넷을 나열하십시오.
@@ -536,8 +601,8 @@ NodePort, 로드 밸런서 및 Ingress 서비스에 대한 수신 액세스를 �
 출력 예:
         ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
-        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5
-        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6
+        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   
+        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
     4.  서브넷 주소를 검색하십시오. 출력에서 **IPs**의 수를 찾으십시오. 그런 다음 `2`를 IPs와 같은 `n`의 거듭제곱으로 올리십시오. 예를 들어 IPs의 수가 `16`이면 `16`과 같도록 `2`를 `4`(`n`)의 거듭제곱으로 올립니다. 이제 `32`비트에서 `n`의 값을 빼서 서브넷 CIDR을 얻으십시오. 예를 들어, `n`이 `4`인 경우 CIDR은 `28`(`32 - 4 = 28` 방정식에서)입니다. **ID** 표시를 CIDR 값과 결합하여 전체 서브넷 주소를 얻으십시오. 이전 출력에서 서브넷 주소는 다음과 같습니다.

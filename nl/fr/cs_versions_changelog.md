@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -47,6 +47,164 @@ Certains journaux de modifications concernent les _groupes de correctifs de noeu
 
 ## Journal des modifications - Version 1.13
 {: #113_changelog}
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.13.5_1518, publié le 15 avril 2019
+{: #1135_1518}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.13.5_1518.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.13.5_1517">
+<caption>Modifications effectuées depuis la version 1.13.5_1517</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour pour les packages Ubuntu installés, notamment `systemd` pour traiter les vulnérabilités [CVE-2019-3842 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.13.5_1517, publié le 8 avril 2019
+{: #1135_1517}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.13.5_1517.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.13.4_1516">
+<caption>Modifications depuis la version 1.13.4_1516</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.4.0</td>
+<td>v3.4.4</td>
+<td>Voir les [notes sur l'édition de Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.4/releases/#v344). La mise à jour résout la vulnérabilité [CVE-2019-9946 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946).</td>
+</tr>
+<tr>
+<td>Proxy du maître cluster HA</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>Voir les [notes sur l'édition de HAProxy ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.haproxy.org/download/1.9/src/CHANGELOG). La mise à jour résout les vulnérabilités [CVE-2018-0732 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) et [CVE-2019-1559 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.4-86</td>
+<td>v1.13.5-107</td>
+<td>Mise à jour pour prendre en charge les éditions Kubernetes 1.13.5 et Calico 3.4.4.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.4</td>
+<td>v1.13.5</td>
+<td>Voir les [notes sur l'édition de Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.5). </td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2017-12447 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447).</td>
+</tr>
+<tr>
+<td>Noyau Ubuntu 16.04</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>Images de noeud worker mises à jour avec une mise à jour du noyau pour [CVE-2019-9213 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+</tr>
+<tr>
+<td>Noyau Ubuntu 18.04</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>Images de noeud worker mises à jour avec une mise à jour du noyau pour [CVE-2019-9213 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.13.4_1516, publié le 1er avril 2019
+{: #1134_1516}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.13.4_1516.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.13.4_1515">
+<caption>Modifications depuis la version 1.13.4_1515</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Utilisation des ressources de noeud worker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Augmentation des réserves de mémoire pour kubelet et containerd afin d'empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications du maître - Groupe de correctifs 1.13.4_1515, publié le 26 mars 2019
+{: #1134_1515}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.13.4_1515.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.13.4_1513">
+<caption>Modifications depuis la version 1.13.4_1513</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuration du DNS de cluster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Processus de mise à jour corrigé à partir de Kubernetes version 1.11 afin d'empêcher la mise à jour de faire passer le fournisseur DNS de cluster à CoreDNS. Vous pourrez toujours [configurer CoreDNS comme fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#set_coredns) après la mise à jour. </td>
+</tr>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>345</td>
+<td>346</td>
+<td>Image mise à jour pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>166</td>
+<td>167</td>
+<td>Résout les erreurs de type `context deadline exceeded` et `timeout` sporadiques lors de la gestion des secrets Kubernetes. De plus, résout les mises à jour apportées au service de gestion de clés susceptibles de laisser les secrets Kubernetes existants non chiffrés. La mise à jour comprend un correctif pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Equilibreur de charge et moniteur d'équilibrage de charge pour {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>143</td>
+<td>146</td>
+<td>Image mise à jour pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+</tbody>
+</table>
 
 ### Journal des modifications pour la version 1.13.4_1513, publié le 20 mars 2019
 {: #1134_1513}
@@ -311,7 +469,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.13.2
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus). </td>
+<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus).</td>
 </tr>
 <tr>
 <td>Plug-in et programme d'installation d'unité GPU</td>
@@ -371,7 +529,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.13.2
 <td>Serveur OpenVPN</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). </td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -390,6 +548,159 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.13.2
 
 Passez en revue le journal des modifications de la version 1.12.
 {: shortdesc}
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.12.7_1549, publié le 15 avril 2019
+{: #1127_1549}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.7_1549.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.7_1548">
+<caption>Modifications depuis la version 1.12.7_1548</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour pour les packages Ubuntu installés, notamment `systemd` pour traiter les vulnérabilités [CVE-2019-3842 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.12.7_1548, publié le 8 avril 2019
+{: #1127_1548}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.12.7_1548.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.6_1547">
+<caption>Modifications depuis la version 1.12.6_1547</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.3.1</td>
+<td>v3.3.6</td>
+<td>Voir les [notes sur l'édition de Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/releases/#v336). La mise à jour résout la vulnérabilité [CVE-2019-9946 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946).</td>
+</tr>
+<tr>
+<td>Proxy du maître cluster HA</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>Voir les [notes sur l'édition de HAProxy ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.haproxy.org/download/1.9/src/CHANGELOG). La mise à jour résout les vulnérabilités [CVE-2018-0732 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) et [CVE-2019-1559 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.6-157</td>
+<td>v1.12.7-180</td>
+<td>Mise à jour pour prendre en charge les éditions Kubernetes 1.12.7 et Calico 3.3.6.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.6</td>
+<td>v1.12.7</td>
+<td>Voir les [notes sur l'édition de Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.7). </td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2017-12447 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447).</td>
+</tr>
+<tr>
+<td>Noyau Ubuntu 16.04</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>Images de noeud worker mises à jour avec une mise à jour du noyau pour [CVE-2019-9213 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+</tr>
+<tr>
+<td>Noyau Ubuntu 18.04</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>Images de noeud worker mises à jour avec une mise à jour du noyau pour [CVE-2019-9213 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.12.6_1547, publié le 1er avril 2019
+{: #1126_1547}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.6_1547.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.6_1546">
+<caption>Modifications depuis la version 1.12.6_1546</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Utilisation des ressources de noeud worker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Augmentation des réserves de mémoire pour kubelet et containerd afin d'empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
+
+
+### Journal des modifications du maître - Groupe de correctifs 1.12.6_1546, publié le 26 mars 2019
+{: #1126_1546}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.12.6_1546.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.12.6_1544">
+<caption>Modifications depuis la version 1.12.6_1544</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>345</td>
+<td>346</td>
+<td>Image mise à jour pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>166</td>
+<td>167</td>
+<td>Résout les erreurs de type `context deadline exceeded` et `timeout` sporadiques lors de la gestion des secrets Kubernetes. De plus, résout les mises à jour apportées au service de gestion de clés susceptibles de laisser les secrets Kubernetes existants non chiffrés. La mise à jour comprend un correctif pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Equilibreur de charge et moniteur d'équilibrage de charge pour {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>143</td>
+<td>146</td>
+<td>Image mise à jour pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+</tbody>
+</table>
 
 ### Journal des modifications pour la version 1.12.6_1544, publié le 20 mars 2019
 {: #1126_1544}
@@ -598,7 +909,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Configuration du `kubelet` de Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique. </td>
+<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique.</td>
 </tr>
 </tbody>
 </table>
@@ -624,7 +935,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.12.5
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus). </td>
+<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus).</td>
 </tr>
 <tr>
 <td>Plug-in et programme d'installation d'unité GPU</td>
@@ -677,7 +988,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.12.5
 <td>Serveur OpenVPN</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). </td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -736,7 +1047,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.12.3
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.12.3-91</td>
 <td>v1.12.4-118</td>
-<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.12.4. </td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.12.4.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1050,6 +1361,164 @@ Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur 
 
 Passez en revue le journal des modifications de la version 1.11.
 
+### Journal des modifications de noeud worker - Groupe de correctifs 1.11.9_1555, publié le 15 avril 2019
+{: #1119_1555}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.9_1555.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.9_1544">
+<caption>Modifications depuis la 1.11.9_1554</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour pour les packages Ubuntu installés, notamment `systemd` pour traiter les vulnérabilités [CVE-2019-3842 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.11.9_1554, publié le 8 avril 2019
+{: #1119_1554}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.9_1554.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.8_1553">
+<caption>Modifications depuis la version 1.11.8_1553</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.3.1</td>
+<td>v3.3.6</td>
+<td>Voir les [notes sur l'édition de Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/releases/#v336). La mise à jour résout la vulnérabilité [CVE-2019-9946 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946).</td>
+</tr>
+<tr>
+<td>Proxy du maître cluster HA</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>Voir les [notes sur l'édition de HAProxy ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.haproxy.org/download/1.9/src/CHANGELOG). La mise à jour résout les vulnérabilités [CVE-2018-0732 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) et [CVE-2019-1559 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.8-219</td>
+<td>v1.11.9-241</td>
+<td>Mise à jour pour prendre en charge les éditions Kubernetes 1.11.9 et Calico 3.3.6.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.8</td>
+<td>v1.11.9</td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.9).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.10</td>
+<td>1.14.13</td>
+<td>Voir les [notes sur l'édition de Kubernetes DNS![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dns/releases/tag/1.14.13).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2017-12447 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447).</td>
+</tr>
+<tr>
+<td>Noyau Ubuntu 16.04</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>Images de noeud worker mises à jour avec une mise à jour du noyau pour [CVE-2019-9213 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+</tr>
+<tr>
+<td>Noyau Ubuntu 18.04</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>Images de noeud worker mises à jour avec une mise à jour du noyau pour [CVE-2019-9213 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.11.8_1553, publié le 1er avril 2019
+{: #1118_1553}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.8_1553.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.8_1552">
+<caption>Modifications depuis la version 1.11.8_1552</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Utilisation des ressources de noeud worker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Augmentation des réserves de mémoire pour kubelet et containerd afin d'empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications du maître - Groupe de correctifs 1.11.8_1552, publié le 26 mars 2019
+{: #1118_1552}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.11.8_1552.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.11.8_1550">
+<caption>Modifications depuis la version 1.11.8_1550</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>345</td>
+<td>346</td>
+<td>Image mise à jour pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>166</td>
+<td>167</td>
+<td>Résout les erreurs de type `context deadline exceeded` et `timeout` sporadiques lors de la gestion des secrets Kubernetes. De plus, résout les mises à jour apportées au service de gestion de clés susceptibles de laisser les secrets Kubernetes existants non chiffrés. La mise à jour comprend un correctif pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Equilibreur de charge et moniteur d'équilibrage de charge pour {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>143</td>
+<td>146</td>
+<td>Image mise à jour pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+</tbody>
+</table>
+
 ### Journal des modifications pour la version 1.11.8_1550, publié le 20 mars 2019
 {: #1118_1550}
 
@@ -1245,7 +1714,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Configuration du `kubelet` de Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique. </td>
+<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique.</td>
 </tr>
 </tbody>
 </table>
@@ -1271,7 +1740,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.7
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus). </td>
+<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus).</td>
 </tr>
 <tr>
 <td>Plug-in et programme d'installation d'unité GPU</td>
@@ -1306,7 +1775,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.7
 <td>Kubernetes</td>
 <td>v1.11.6</td>
 <td>v1.11.7</td>
-<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7). </td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7).</td>
 </tr>
 <tr>
 <td>Configuration de Kubernetes</td>
@@ -1324,7 +1793,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.7
 <td>Serveur OpenVPN</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). </td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -1382,13 +1851,13 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.6
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.11.5-152</td>
 <td>v1.11.6-180</td>
-<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11.6. </td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11.6.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.11.5</td>
 <td>v1.11.6</td>
-<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6). </td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6).</td>
 </tr>
 <tr>
 <td>Image Kubernetes add-on resizer</td>
@@ -1400,7 +1869,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.6
 <td>Tableau de bord Kubernetes</td>
 <td>v1.8.3</td>
 <td>v1.10.1</td>
-<td>Voir les [notes sur l'édition sur le tableau de bord Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). La mise à jour résout la vulnérabilité [CVE-2018-18264 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place. </td>
+<td>Voir les [notes sur l'édition sur le tableau de bord Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). La mise à jour résout la vulnérabilité [CVE-2018-18264 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place.</td>
 </tr>
 <tr>
 <td>Programme d'installation de GPU</td>
@@ -1592,7 +2061,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Noyau</td>
 <td>4.4.0-137</td>
 <td>4.4.0-139</td>
-<td>Mise à jour des images de noeud worker avec la mise à jour du noyau pour [CVE-2018-7755 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour [CVE-2018-7755 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
 </tr>
 </tbody>
 </table>
@@ -1810,7 +2279,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.3
 <td>N/A</td>
 <td>N/A</td>
 <td>Suppression du paramètre `reclaimPolicy` en double dans les classes de stockage de fichiers d'IBM.<br><br>
-Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
+Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage. </td>
 </tr>
 </tbody>
 </table>
@@ -1843,7 +2312,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.3
 <td>N/A</td>
 <td>N/A</td>
 <td>Suppression de `mountOptions` dans les classes de stockage de fichiers d'IBM afin d'utiliser la valeur par défaut fournie par le noeud worker.<br><br>
-Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste `ibmc-file-bronze`. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
+Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste `ibmc-file-bronze`. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage. </td>
 </tr>
 <tr>
 <td>Fournisseur de service de gestion des clés (KMS)</td>
@@ -2051,8 +2520,149 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.2
 Passez en revue le journal des modifications de la version 1.10.
 {: shortdesc}
 
-La version 1.10 de Kubernetes est dépréciée et n'est plus prise en charge à compter du 30 avril 2019 (date hypothétique). [Consultez l'impact potentiel](/docs/containers?topic=containers-cs_versions#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](/docs/containers?topic=containers-update#update) pour passer immédiatement à la version 1.11 ou ultérieure.
+La version 1.10 de Kubernetes est dépréciée et n'est plus prise en charge à compter du 15 mai 2019. [Consultez l'impact potentiel](/docs/containers?topic=containers-cs_versions#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](/docs/containers?topic=containers-update#update) pour passer immédiatement à la version 1.11 ou ultérieure.
 {: deprecated}
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.10.13_1556, publié le 15 avril 2019
+{: #11013_1556}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.13_1556.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.13_1555">
+<caption>Modifications depuis la 1.10.13_1555</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packages Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Mises à jour pour les packages Ubuntu installés, notamment `systemd` pour traiter les vulnérabilités [CVE-2019-3842 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications pour la version 1.10.13_1555, publié le 8 avril 2019
+{: #11013_1555}
+
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.13_1555.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.13_1554">
+<caption>Modifications depuis la version 1.10.13_1554</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy du maître cluster HA</td>
+<td>1.8.12-alpine</td>
+<td>1.9.6-alpine</td>
+<td>Voir les [notes sur l'édition de HAProxy ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.haproxy.org/download/1.9/src/CHANGELOG). La mise à jour résout les vulnérabilités [CVE-2018-0732 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) et [CVE-2019-1559 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.10</td>
+<td>1.14.13</td>
+<td>Voir les [notes sur l'édition de Kubernetes DNS![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dns/releases/tag/1.14.13).</td>
+</tr>
+<tr>
+<td>Agent de calcul sécurisé</td>
+<td>a02f765</td>
+<td>e132aa4</td>
+<td>Image mise à jour pour traiter la vulnérabilité [CVE-2017-12447 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447).</td>
+</tr>
+<tr>
+<td>Noyau Ubuntu 16.04</td>
+<td>4.4.0-143-generic</td>
+<td>4.4.0-145-generic</td>
+<td>Images de noeud worker mises à jour avec une mise à jour du noyau pour [CVE-2019-9213 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+</tr>
+<tr>
+<td>Noyau Ubuntu 18.04</td>
+<td>4.15.0-46-generic</td>
+<td>4.15.0-47-generic</td>
+<td>Images de noeud worker mises à jour avec une mise à jour du noyau pour [CVE-2019-9213 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Journal des modifications de noeud worker - Groupe de correctifs 1.10.13_1554, publié le 1er avril 2019
+{: #11013_1554}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.13_1554.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.13_1553">
+<caption>Modifications depuis la version 1.10.13_1553</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Utilisation des ressources de noeud worker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Augmentation des réserves de mémoire pour kubelet et containerd afin d'empêcher ces composants d'être à court de ressources. Pour plus d'informations, voir [Réserves de ressources de noeud worker](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
+
+
+### Journal des modifications du maître - Groupe de correctifs 1.10.13_1553, publié le 26 mars 2019
+{: #11118_1553}
+
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.10.13_1553.
+{: shortdesc}
+
+<table summary="Modifications effectuées depuis la version 1.10.13_1551">
+<caption>Modifications depuis la version 1.10.13_1551</caption>
+<thead>
+<tr>
+<th>Composant</th>
+<th>V. précédente</th>
+<th>V. en cours</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plug-in {{site.data.keyword.Bluemix_notm}} File Storage</td>
+<td>345</td>
+<td>346</td>
+<td>Image mise à jour pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Fournisseur de service de gestion des clés (KMS)</td>
+<td>166</td>
+<td>167</td>
+<td>Résout les erreurs de type `context deadline exceeded` et `timeout` sporadiques lors de la gestion des secrets Kubernetes. De plus, résout les mises à jour apportées au service de gestion de clés susceptibles de laisser les secrets Kubernetes existants non chiffrés. La mise à jour comprend un correctif pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Equilibreur de charge et moniteur d'équilibrage de charge pour {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>143</td>
+<td>146</td>
+<td>Image mise à jour pour la vulnérabilité [CVE-2019-9741 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+</tbody>
+</table>
 
 ### Journal des modifications pour la version 1.10.13_1551, publié le 20 mars 2019
 {: #11013_1551}
@@ -2155,7 +2765,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.1
 <td>Kubernetes</td>
 <td>v1.10.12</td>
 <td>v1.10.13</td>
-<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13). </td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13).</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
@@ -2237,7 +2847,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Configuration du `kubelet` de Kubernetes</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique. </td>
+<td>Activation de l'indicateur feature gate `ExperimentalCriticalPodAnnotation` pour éviter l'expulsion critique de pod statique.</td>
 </tr>
 </tbody>
 </table>
@@ -2263,7 +2873,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.1
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus). </td>
+<td>Voir les [notes sur l'édition d'etcd ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/coreos/etcd/releases/v3.3.11). Par ailleurs, les suites de chiffrement prises en charge sur etcd sont désormais limitées à un sous-ensemble avec un niveau de chiffrement élevé (128 bits ou plus).</td>
 </tr>
 <tr>
 <td>Plug-in et programme d'installation d'unité GPU</td>
@@ -2304,7 +2914,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.1
 <td>Serveur OpenVPN</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). </td>
+<td>Mise à jour d'une image pour traiter les vulnérabilités [CVE-2018-0734 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) et [CVE-2018-5407 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -2362,13 +2972,13 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.1
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.10.11-219</td>
 <td>v1.10.12-252</td>
-<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.10.12. </td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.10.12.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.10.11</td>
 <td>v1.10.12</td>
-<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.12). </td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.12).</td>
 </tr>
 <tr>
 <td>Image Kubernetes add-on resizer</td>
@@ -2380,7 +2990,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.1
 <td>Tableau de bord Kubernetes</td>
 <td>v1.8.3</td>
 <td>v1.10.1</td>
-<td>Voir les [notes sur l'édition sur le tableau de bord Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). La mise à jour résout la vulnérabilité [CVE-2018-18264 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place. </td>
+<td>Voir les [notes sur l'édition sur le tableau de bord Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). La mise à jour résout la vulnérabilité [CVE-2018-18264 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>Si vous accédez au tableau de bord via `kubectl proxy`, le bouton **SKIP** sur la page de connexion a été retiré. [Utilisez un **jeton** pour vous connecter](/docs/containers?topic=containers-app#cli_dashboard) à la place.</td>
 </tr>
 <tr>
 <td>Programme d'installation de GPU</td>
@@ -2541,7 +3151,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Noyau</td>
 <td>4.4.0-137</td>
 <td>4.4.0-139</td>
-<td>Mise à jour des images de noeud worker avec la mise à jour du noyau pour [CVE-2018-7755 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour [CVE-2018-7755 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
 </tr>
 </tbody>
 </table>
@@ -2744,7 +3354,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.8
 <td>N/A</td>
 <td>N/A</td>
 <td>Suppression de `mountOptions` dans les classes de stockage de fichiers d'IBM afin d'utiliser la valeur par défaut fournie par le noeud worker. Suppression du paramètre `reclaimPolicy` en double dans les classes de stockage de fichiers d'IBM.<br><br>
-Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
+Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage. </td>
 </tr>
 </tbody>
 </table>
@@ -3312,7 +3922,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.11
 <td>Noyau</td>
 <td>4.4.0-137</td>
 <td>4.4.0-139</td>
-<td>Mise à jour des images de noeud worker avec la mise à jour du noyau pour [CVE-2018-7755 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+<td>Mise à jour des images de noeud worker avec une mise à jour du noyau pour [CVE-2018-7755 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -3474,7 +4084,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.10
 <td>N/A</td>
 <td>N/A</td>
 <td>Suppression de `mountOptions` dans les classes de stockage de fichiers d'IBM afin d'utiliser la valeur par défaut fournie par le noeud worker. Suppression du paramètre `reclaimPolicy` en double dans les classes de stockage de fichiers d'IBM.<br><br>
-Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.</td>
+Désormais, lorsque vous mettez à jour le noeud du maître cluster, la classe de stockage de fichiers d'IBM reste inchangée. Si vous souhaitez modifier la classe de stockage par défaut, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage. </td>
 </tr>
 </tbody>
 </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,34 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 
 
 
+## Temas populares en abril de 2019
+{: #apr19}
+
+<table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
+<caption>Temas populares para contenedores y clústeres de Kubernetes en abril de 2019</caption>
+<thead>
+<th>Fecha</th>
+<th>Título</th>
+<th>Descripción</th>
+</thead>
+<tbody>
+<tr>
+<td>15 de abril de 2019</td>
+<td>[Registro de un nombre de host de equilibrador de carga de red (NLB)](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>Una vez haya configurado los equilibradores de carga de red pública (NLB) para exponer sus apps a Internet, puede crear entradas de DNS para las IP de NLB creando nombres de host. {{site.data.keyword.Bluemix_notm}} se ocupa de la generación y mantenimiento del certificado SSL de comodín para el nombre de host. También puede configurar los supervisores de TCP/HTTP (S) para comprobar el estado de las direcciones IP de NLB detrás de cada nombre de host.</td>
+</tr>
+<tr>
+<td>8 de abril de 2019</td>
+<td>[Kubernetes Terminal en su navegador web (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>Si utiliza el panel de control del clúster de la consola de {{site.data.keyword.Bluemix_notm}} para gestionar los clústeres pero desea hacer más cambios de configuración avanzados de forma rápida, ahora puede ejecutar mandatos de CLI directamente desde el navegador web en Kubernetes Terminal. En la página de detalles del clúster, inicie Kubernetes Terminal pulsando el botón **Terminal**. Tenga en cuenta que Kubernetes Terminal se publica como un complemento beta y no está pensado para su uso en clústeres de producción.</td>
+</tr>
+<tr>
+<td>4 de abril de 2019</td>
+<td>[Maestros de alta disponibilidad ahora en Sídney](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>Cuando se [crea un clúster](/docs/containers?topic=containers-clusters#clusters_ui) en una ubicación metropolitana multizona, incluyendo ahora Sídney, las réplicas del maestro de Kubernetes se distribuyen entre las zonas para ofrecer una alta disponibilidad.</td>
+</tr>
+</tbody></table>
+
 ## Temas populares en marzo de 2019
 {: #mar19}
 
@@ -46,15 +74,15 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 <tr>
 <td>21 de marzo de 2019</td>
 <td>Introducción de puntos finales de servicio privados para el maestro de clúster de Kubernetes</td>
-<td>De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el clúster con acceso a una VLAN pública y a una VLAN privada. Anteriormente, si deseaba un [clúster privado de solo VLAN](/docs/containers?topic=containers-plan_clusters#private_clusters), tenía que configurar un dispositivo de pasarela para conectar los nodos trabajadores del clúster con el maestro. Ahora puede utilizar el punto final de servicio privado. Con el punto final de servicio privado habilitado, todo el tráfico entre los nodos trabajadores y el maestro se encuentra en la red privada, sin necesidad de disponer de un dispositivo de pasarela. Además de este aumento en la seguridad, el tráfico de entrada y de salida de la red privada es [ilimitado y no se factura ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/bandwidth). Todavía puede mantener un punto final de servicio público para el acceso seguro a su maestro de Kubernetes a través de Internet, por ejemplo para ejecutar mandatos `kubectl` sin estar en la red privada.<br><br>
-Para utilizar puntos finales de servicio privados, debe habilitar [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)
-y [puntos finales de servicio](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) para la cuenta de la infraestructura de IBM Cloud (SoftLayer). El clúster debe ejecutar Kubernetes versión 1.11 o posterior. Si el clúster ejecuta una versión anterior de Kubernetes, [actualice al menos a la versión 1.11](/docs/containers?topic=containers-update#update). Para obtener más información, consulte los siguientes enlaces:<ul>
+<td>De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el clúster con acceso a una VLAN pública y a una VLAN privada. Anteriormente, si deseaba un [clúster de solo VLAN privada](/docs/containers?topic=containers-plan_clusters#private_clusters), tenía que configurar un dispositivo de pasarela para conectar los nodos trabajadores del clúster con el maestro. Ahora puede utilizar el punto final de servicio privado. Con el punto final de servicio privado habilitado, todo el tráfico entre los nodos trabajadores y el maestro se encuentra en la red privada, sin necesidad de disponer de un dispositivo de pasarela. Además de este aumento en la seguridad, el tráfico de entrada y de salida de la red privada es [ilimitado y no se factura ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/bandwidth). Todavía puede mantener un punto final de servicio público para el acceso seguro a su maestro de Kubernetes a través de Internet, por ejemplo para ejecutar mandatos `kubectl` sin estar en la red privada.<br><br>
+Para utilizar puntos finales de servicio privados, debe habilitar [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)
+y [puntos finales de servicio](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) para la cuenta de la infraestructura de IBM Cloud (SoftLayer). El clúster debe ejecutar Kubernetes versión 1.11 o posterior. Si el clúster ejecuta una versión anterior de Kubernetes, [actualice al menos a la versión 1.11](/docs/containers?topic=containers-update#update). Para obtener más información, consulte los siguientes enlaces:<ul>
 <li>[Visión general de la comunicación entre maestro y trabajador con puntos finales de servicio](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[Configuración del punto final de servicio privado](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[Conmutación entre puntos finales de servicio públicos y privados](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>Si tiene un cortafuegos en la red privada, [adición de direcciones IP privadas para {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}} y otros servicios de {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
 </ul>
-<p class="important">Si cambia a un clúster de punto final de servicio solo privado, asegúrese de que el clúster todavía se puede comunicar con los otros servicios de {{site.data.keyword.Bluemix_notm}} que utilice. El [almacenamiento de archivos basado en NFS](/docs/containers?topic=containers-file_storage#file_storage), el [almacenamiento definido por software Portworx](/docs/containers?topic=containers-portworx#portworx) y el [programa de escalado automático de clúster](/docs/containers?topic=containers-ca#ca) no admiten el punto final de servicio solo privado. Utilice en su lugar un clúster con puntos finales de servicio tanto públicos como privados.</p>
+<p class="important">Si cambia a un clúster de punto final de servicio solo privado, asegúrese de que el clúster todavía se puede comunicar con los otros servicios de {{site.data.keyword.Bluemix_notm}} que utilice. El [almacenamiento definido por software Portworx (SDS)](/docs/containers?topic=containers-portworx#portworx) y el [programa de escalado automático de clúster](/docs/containers?topic=containers-ca#ca) no admiten el punto final de servicio solo privado. Utilice en su lugar un clúster con puntos finales de servicio tanto públicos como privados. El [Almacenamiento de archivos basado en NFS](/docs/containers?topic=containers-file_storage#file_storage) está soportado si su clúster ejecuta Kubernetes versión 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 o posterior.</p>
 </td>
 </tr>
 <tr>
@@ -183,8 +211,8 @@ de roles de servicio y de espacios de nombres en IAM para obtener un control má
 </tr>
 <tr>
 <td>7 de noviembre</td>
-<td>Equilibrador de carga 2.0 (beta)</td>
-<td>Ahora puede elegir entre el [equilibrador de carga 1.0 o 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) para exponer de forma segura sus apps de clúster al público.</td>
+<td>Equilibrador de carga de red (NLB) 2.0 (beta)</td>
+<td>Ahora puede elegir entre [NLB 1.0 o 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) para exponer de forma segura sus apps de clúster al público.</td>
 </tr>
 <tr>
 <td>7 de noviembre</td>
@@ -193,7 +221,7 @@ de roles de servicio y de espacios de nombres en IAM para obtener un control má
 </tr>
 <tr>
 <td>7 de noviembre</td>
-<td>Maestros de alta disponibilidad en clústeres que ejecutan Kubernetes versión 1.10</td>
+<td>Maestros de alta disponibilidad</td>
 <td>Los maestros de alta disponibilidad están disponibles en clústeres que ejecutan Kubernetes versión 1.10. Todas las ventajas descritas en la entrada anterior para los clústeres 1.11 se aplican a los clústeres 1.10, así como los [pasos de preparación](/docs/containers?topic=containers-cs_versions#110_ha-masters) que debe llevar a cabo.</td>
 </tr>
 <tr>
@@ -228,7 +256,7 @@ de roles de servicio y de espacios de nombres en IAM para obtener un control má
 <tr>
 <td>22 de octubre</td>
 <td>[Nueva ubicación multizona en Londres, `lon05`](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>La ciudad metropolitana de Londres multizona sustituye la zona `lon02` por la nueva zona `lon05`, una zona con más recursos de infraestructura que `lon02`. Cree nuevos clústeres multizona con `lon05`. Los clústeres existentes con `lon02` reciben soporte, pero los nuevos clústeres multizona deben utilizar `lon05` en su lugar.</td>
+<td>En la ubicación metropolitana de Londres multizona se ha sustituido la zona `lon02` por la nueva zona `lon05`, una zona con más recursos de infraestructura que `lon02`. Cree nuevos clústeres multizona con `lon05`. Los clústeres existentes con `lon02` reciben soporte, pero los nuevos clústeres multizona deben utilizar `lon05` en su lugar.</td>
 </tr>
 <tr>
 <td>5 de octubre</td>
@@ -308,8 +336,8 @@ de roles de servicio y de espacios de nombres en IAM para obtener un control má
 <tbody>
 <tr>
 <td>30 de julio</td>
-<td>[Traiga su propio controlador Ingress](/docs/containers?topic=containers-ingress#user_managed)</td>
-<td>¿Tiene requisitos de seguridad específicos u otros requisitos personalizados para el controlador Ingress del clúster? Si es así, es posible que desee ejecutar su propio controlador de Ingress en lugar de utilizar el controlador predeterminado.</td>
+<td>[Traiga su propio controlador de Ingress](/docs/containers?topic=containers-ingress#user_managed)</td>
+<td>¿Tiene requisitos de seguridad específicos u otros requisitos personalizados para el controlador de Ingress del clúster? Si es así, es posible que desee ejecutar su propio controlador de Ingress en lugar de utilizar el controlador predeterminado.</td>
 </tr>
 <tr>
 <td>10 de julio</td>
@@ -429,7 +457,7 @@ de roles de servicio y de espacios de nombres en IAM para obtener un control má
 </tr>
 <tr>
 <td>14 de marzo</td>
-<td>[Inicio de sesión seguro con {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-integrations#appid)</td>
+<td>[Inicio de sesión seguro con {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-supported_integrations#appid)</td>
 <td>Mejore las apps que se ejecutan en {{site.data.keyword.containerlong_notm}} requiriendo a los usuarios que inicien sesión.</td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -55,8 +55,14 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
+<td>411 / 315</td>
+<td>2019 年 4 月 15 日</td>
+<td>更新了 {{site.data.keyword.appid_full}} cookie 到期时间的值，使其与访问令牌到期时间的值相匹配。</td>
+<td>-</td>
+</tr>
+<tr>
 <td>411 / 306</td>
-<td>2019 年 3 月 21 日</td>
+<td>2019 年 3 月 22 日</td>
 <td>将 Go 版本更新为 1.12.1。</td>
 <td>-</td>
 </tr>
@@ -65,7 +71,7 @@ subcollection: containers
 <td>2019 年 3 月 18 日</td>
 <td><ul>
 <li>修复了映像扫描的漏洞。</li>
-<li>改进了 {{site.data.keyword.appid_full}} 的日志记录功能。</li>
+<li>改进了 {{site.data.keyword.appid_full_notm}} 的日志记录功能。</li>
 </ul></td>
 <td>-</td>
 </tr>

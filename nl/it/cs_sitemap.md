@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -19,17 +19,18 @@ lastupdated: "2019-03-21"
 {:download: .download}
 
 
-
 # Mappa del sito
 {: #cs_sitemap}
 
 ## Introduzione a {{site.data.keyword.containerlong_notm}}
+{: #sitemap-gs}
 
-[Introduzione a {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index#container_index)
+[Introduzione a {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
 
 
 
 ## Informazioni su
+{: #sitemap-about}
 
 [Perché {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)
 * [Vantaggi dell'utilizzo del servizio](/docs/containers?topic=containers-cs_ov#benefits)
@@ -43,6 +44,8 @@ lastupdated: "2019-03-21"
 * [Architettura del servizio](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)
 
 ## Casi di utilizzo
+{: #sitemap-usecases}
+
 [Panoramica dei casi di utilizzo](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
 [Casi di utilizzo dei servizi finanziari per {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
@@ -66,10 +69,11 @@ lastupdated: "2019-03-21"
 * [Il grande porto pubblico protegge lo scambio di dati portuali e manifesti di spedizione che collegano organizzazioni pubbliche e private](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
 ## La tua strategia cluster
+{: #sitemap-strategy}
 
-[Le tue responsabilità nell'utilizzo di {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
-* [Responsabilità di gestione del cluster](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#responsibilities)
-* [Abuso di {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#terms)
+[Le tue responsabilità nell'utilizzo di {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
+* [Responsabilità di gestione del cluster](/docs/containers?topic=containers-responsibilities_iks#responsibilities)
+* [Abuso di {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#terms)
 
 [Sicurezza per {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
 * [Panoramica delle minacce alla sicurezza per il tuo cluster](/docs/containers?topic=containers-security#threats)
@@ -87,7 +91,40 @@ lastupdated: "2019-03-21"
 [Alta disponibilità per {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#ha)
 * [Panoramica dei potenziali punti di errore in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
 
+[Definizione della tua strategia Kubernetes](/docs/containers?topic=containers-strategy#strategy)
+* [Spostamento dei tuoi carichi di lavoro in {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
+  * [Cosa posso spostare in {{site.data.keyword.Bluemix_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
+  * [Che tipo di applicazioni posso eseguire in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#app_types)
+    * [Quali sono alcune linee guida per lo sviluppo di applicazioni native del cloud e senza stato?](/docs/containers?topic=containers-strategy#12factor)
+    * [Ho già un'applicazione. Come posso migrarla a {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#migrate_containerize)
+* [Dimensionamento del tuo cluster Kubernetes per supportare il tuo carico di lavoro](/docs/containers?topic=containers-strategy#sizing)
+  * [Quante risorse richiede la mia applicazione?](/docs/containers?topic=containers-strategy#sizing_resources)
+  * [Cos'altro oltre alla mia applicazione potrebbe utilizzare le risorse nel cluster?](/docs/containers?topic=containers-strategy#sizing_other)
+  * [Che tipo di disponibilità voglio che il mio carico di lavoro abbia?](/docs/containers?topic=containers-strategy#sizing_availability)
+  * [Di quanti nodi di lavoro ho bisogno per gestire il mio carico di lavoro?](/docs/containers?topic=containers-strategy#sizing_workers)
+* [Strutturazione del tuo ambiente Kubernetes](/docs/containers?topic=containers-strategy#kube_env)
+  * [Che tipo di cluster e tipi di macchina dovrei ottenere?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [Utilizzo più cluster o aggiungo solo più nodi di lavoro a un cluster esistente?](/docs/containers?topic=containers-strategy#env_multicluster)
+  * [Come configuro le mie risorse all'interno del cluster?](/docs/containers?topic=containers-strategy#env_resources)
+* [Come rendere le tue risorse altamente disponibili](/docs/containers?topic=containers-strategy#kube_ha)
+* [Configurazione del rilevamento del servizio](/docs/containers?topic=containers-strategy#service_discovery)
+  * [Posso personalizzare il provider DNS del cluster Kubernetes?](/docs/containers?topic=containers-strategy#services_dns)
+  * [Come posso assicurarmi che i miei servizi siano connessi alle distribuzioni corrette e siano pronti per l'uso?](/docs/containers?topic=containers-strategy#services_connected)
+  * [Come controllo il traffico di rete tra i servizi eseguiti nel mio cluster?](/docs/containers?topic=containers-strategy#services_network_traffic)
+  * [Come posso esporre i miei servizi su Internet?](/docs/containers?topic=containers-strategy#services_expose_apps)
+* [Distribuzione dei carichi di lavoro delle applicazioni ai cluster](/docs/containers?topic=containers-strategy#deployments)
+  * [Pensavo di dover mettere la mia applicazione in un contenitore. Ora però non si parla che di pod; di che si tratta?](/docs/containers?topic=containers-strategy#deploy_pods)
+  * [Quindi, se posso utilizzare semplicemente un pod, perché ho bisogno di tutti questi tipi differenti di oggetti?](/docs/containers?topic=containers-strategy#deploy_objects)
+  * [Come posso organizzare le mie distribuzioni per renderle più facili da aggiornare e gestire?](/docs/containers?topic=containers-strategy#deploy_organize)
+  * [Cos'altro posso fare per preparare la mia applicazione per la distribuzione?](/docs/containers?topic=containers-strategy#deploy_prep)
+* [Assemblaggio della tua applicazione](/docs/containers?topic=containers-strategy#packaging)
+* [Come mantenere aggiornata la tua applicazione](/docs/containers?topic=containers-strategy#updating)
+  * [Come posso mantenere il mio cluster in uno stato supportato?](/docs/containers?topic=containers-strategy#updating_kube)
+  * [Quali strategie di aggiornamento delle applicazioni posso utilizzare?](/docs/containers?topic=containers-strategy#updating_apps)
+* [Monitoraggio delle prestazioni del tuo cluster](/docs/containers?topic=containers-strategy#monitoring_health)
+
 ## Esercitazioni
+{: #sitemap-tutorials}
 
 [Esercitazione: Creazione dei cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 * [Obiettivi](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
@@ -129,7 +166,7 @@ lastupdated: "2019-03-21"
 * [Lezione 1: Distribuisci un'applicazione ed esponila utilizzando un programma di bilanciamento del carico](/docs/containers?topic=containers-policy_tutorial#lesson1)
 * [Lezione 2: Blocca tutto il traffico in entrata verso tutte le porte del nodo](/docs/containers?topic=containers-policy_tutorial#lesson2)
 * [Lezione 3: Consenti il traffico in entrata da un IP inserito in whitelist al programma di bilanciamento del carico](/docs/containers?topic=containers-policy_tutorial#lesson3)
-* [Lezione 4: Nega il traffico in entrata da IP inseriti nella blacklist al programma di bilanciamento del carico](/docs/containers?topic=containers-policy_tutorial#lesson4)
+* [Lezione 4: Nega il traffico in entrata da IP inseriti in blacklist al programma di bilanciamento del carico](/docs/containers?topic=containers-policy_tutorial#lesson4)
 * [Operazioni successive](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
 [Esercitazione: Migrazione di un'applicazione da Cloud Foundry a un cluster](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
@@ -148,6 +185,7 @@ lastupdated: "2019-03-21"
 [Esercitazione: Configurazione di una pipeline di fornitura e integrazione continue per le applicazioni inserite nei contenitori eseguite in Kubernetes](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 
 ## Configurazione della CLI e dell'API
+{: #sitemap-cli-api}
 
 [Configurazione della CLI e dell'API](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
 * [Installazione della CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)
@@ -155,11 +193,14 @@ lastupdated: "2019-03-21"
 * [Configurazione della CLI per eseguire `kubectl`](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * [Aggiornamento della CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [Disinstallazione della CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
+* [Utilizzo del terminale Kubernetes nel tuo browser web (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)
 * [Automazione delle distribuzioni dei cluster con l'API](/docs/containers?topic=containers-cs_cli_install#cs_api)
-  * [Aggiornamento dei token di accesso {{site.data.keyword.Bluemix_notm}} IAM e ottenimento di nuovi token di aggiornamento con la API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
-  * [Aggiornamento dei token di accesso {{site.data.keyword.Bluemix_notm}} IAM e ottenimento di nuovi token di aggiornamento con la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
+* [Utilizzo del tuo cluster attraverso l'API Kubernetes](/docs/containers?topic=containers-cs_cli_install#kube_api)
+* [Aggiornamento dei token di accesso {{site.data.keyword.Bluemix_notm}} IAM e ottenimento di nuovi token di aggiornamento con la API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
+* [Aggiornamento dei token di accesso {{site.data.keyword.Bluemix_notm}} IAM e ottenimento di nuovi token di aggiornamento con la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
 ## Amministrazione dei cluster
+{: #sitemap-clusters-admin}
 
 [Pianificazione della tua impostazione di cluster e nodi di lavoro](/docs/containers?topic=containers-plan_clusters#plan_clusters)
 * [Cluster altamente disponibili](/docs/containers?topic=containers-plan_clusters#ha_clusters)
@@ -209,7 +250,7 @@ lastupdated: "2019-03-21"
   * [Aggiornamento dei nodi di lavoro nella console](/docs/containers?topic=containers-update#worker_up_console)
 * [Aggiornamento dei tipi di macchina](/docs/containers?topic=containers-update#machine_type)
 * [Aggiornamento dei componenti aggiuntivi del cluster](/docs/containers?topic=containers-update#addons)
-  * [Gestione degli aggiornamenti automatici per il componente aggiuntivo Fluentd per la registrazione](/docs/containers?topic=containers-update#logging)
+  * [Gestione degli aggiornamenti automatici per il componente aggiuntivo Fluentd per la registrazione](/docs/containers?topic=containers-update#logging-up)
   * [Gestione degli aggiornamenti automatici per il componente aggiuntivo ALB Ingress](/docs/containers?topic=containers-update#alb)
 * [Aggiornamento dai nodi di lavoro autonomi ai pool di nodi di lavoro](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
@@ -281,6 +322,7 @@ lastupdated: "2019-03-21"
 * [Regolazione delle risorse del provider di metriche del cluster](/docs/containers?topic=containers-kernel#metrics)
 
 ## Configurazione della rete del cluster
+{: #sitemap-clusters-networking}
 
 [Pianificazione della rete del tuo cluster](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)
 * [Descrizione dei principi di base della rete {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics)
@@ -307,13 +349,18 @@ lastupdated: "2019-03-21"
 * [Modifica delle connessioni VLAN dei tuoi nodi di lavoro](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
 * [Configurazione dell'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
 * [Configurazione dell'endpoint del servizio pubblico](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+* [Passaggio dall'endpoint del servizio pubblico all'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+* [Isolamento dei carichi di lavoro di rete nei nodi di lavoro edge](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_edge)
+* [Isolamento del tuo cluster sulla rete privata](/docs/containers?topic=containers-cs_network_cluster#isolate)
 
 [Apertura delle porte e degli indirizzi IP necessari nel tuo firewall](/docs/containers?topic=containers-firewall#firewall)
 * [Esecuzione dei comandi `kubectl` da dietro un firewall](/docs/containers?topic=containers-firewall#firewall_kubectl)
 * [Esecuzione dei comandi `calicoctl` da dietro un firewall](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 * [Concessione al cluster dell'accesso alle risorse dell'infrastruttura e ad altri servizi](/docs/containers?topic=containers-firewall#firewall_outbound)
 * [Concessione al cluster dell'accesso alle risorse su un firewall privato](/docs/containers?topic=containers-firewall#firewall_private)
+* [Concessione al cluster dell'accesso alle risorse attraverso le politiche in uscita Calico](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 * [Accesso ai servizi NodePort, programma di bilanciamento del carico e Ingress dall'esterno del cluster](/docs/containers?topic=containers-firewall#firewall_inbound)
+* [Inserimento in whitelist del tuo cluster nei firewall di altri servizi o nei firewall in loco](/docs/containers?topic=containers-firewall#whitelist_workers)
 
 [Configura il provider DNS del cluster](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 * [Ridimensionamento automatico del provider DNS del cluster](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -394,12 +441,13 @@ lastupdated: "2019-03-21"
   * [Liberazione degli indirizzi IP utilizzati](/docs/containers?topic=containers-subnets#free)
 * [Aggiunta di indirizzi IP portatili](/docs/containers?topic=containers-subnets#adding_ips)
   * [Aggiunta di IP portatili ordinando più sottoreti](/docs/containers?topic=containers-subnets#request)
-  * [Aggiunta di IP privati portatili utilizzando le sottoreti gestite dall'utente](/docs/containers?topic=containers-subnets#user_managed)
+  * [Aggiunta di IP privati portatili utilizzando le sottoreti gestite dall'utente](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [Gestione dell'instradamento di sottorete](/docs/containers?topic=containers-subnets#subnet-routing)
   * [Abilitazione dell'instradamento tra sottoreti primarie sulla stessa VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
   * [Gestione dell'instradamento di sottorete per le applicazioni gateway](/docs/containers?topic=containers-subnets#vra-routing)
 
 ## Creazione dei contenitori dalle immagini
+{: #sitemap-images}
 
 [Creazione dei contenitori dalle immagini](/docs/containers?topic=containers-images#images)
 * [Pianificazione dei registri di immagini](/docs/containers?topic=containers-images#planning_images)
@@ -414,6 +462,7 @@ lastupdated: "2019-03-21"
   * [Memorizzazione del segreto di pull dell'immagine nell'account di servizio Kubernetes per lo spazio dei nomi selezionato](/docs/containers?topic=containers-images#store_imagePullSecret)
 
 ## Distribuzione di applicazioni nei cluster
+{: #sitemap-apps}
 
 [Distribuzione di applicazioni nei cluster](/docs/containers?topic=containers-app#app)
 * [Pianificazione per l'esecuzione di applicazioni nei cluster](/docs/containers?topic=containers-app#plan_apps)
@@ -439,6 +488,7 @@ lastupdated: "2019-03-21"
 * [Gestione delle distribuzioni graduali per aggiornare le tue applicazioni](/docs/containers?topic=containers-app#app_rolling)
 
 ## Rete per esporre le applicazioni
+{: #sitemap-apps-networking}
 
 [Pianificazione per esporre le tue applicazioni con reti in cluster e reti esterne](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
 * [Esposizione delle applicazioni al traffico all'interno del cluster attraverso i servizi Kubernetes](/docs/containers?topic=containers-cs_network_planning#in-cluster)
@@ -446,15 +496,12 @@ lastupdated: "2019-03-21"
 * [Pianificazione della rete esterna pubblica per la configurazione di una VLAN pubblica e privata](/docs/containers?topic=containers-cs_network_planning#public_access)
 * [Pianificazione di una rete esterna privata per la configurazione di una VLAN pubblica e privata](/docs/containers?topic=containers-cs_network_planning#private_both_vlans)
 * [Pianificazione di una rete esterna privata per la configurazione di solo una VLAN privata](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)
-* [Facoltativo: isolamento dei carichi di lavoro di rete nei nodi di lavoro edge](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)
-* [Facoltativo: isolamento del tuo cluster sulla rete privata](/docs/containers?topic=containers-cs_network_planning#isolate)
 
-[Esposizione delle applicazioni con le NodePort](/docs/containers?topic=containers-nodeport#nodeport)
+[Verifica dell'accesso alle applicazioni con le NodePort](/docs/containers?topic=containers-nodeport#nodeport)
 * [Gestione del traffico di rete utilizzando le NodePort](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [Abilitazione dell'accesso a un'applicazione utilizzando un servizio NodePort](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-[Esposizione di applicazioni con i programmi di bilanciamento del carico](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-* [YAML di esempio](/docs/containers?topic=containers-loadbalancer#sample)
+[Bilanciamento del carico DSR e di base con gli NLB (network load balancer)](/docs/containers?topic=containers-loadbalancer#loadbalancer)
 * [Panoramica](/docs/containers?topic=containers-loadbalancer#lb_overview)
 * [Confronto tra i programmi di bilanciamento del carico versione 1.0 e 2.0](/docs/containers?topic=containers-loadbalancer#comparison)
 * [v2.0: Componenti e architettura (beta)](/docs/containers?topic=containers-loadbalancer#planning_ipvs)
@@ -472,10 +519,15 @@ lastupdated: "2019-03-21"
 * [v1.0: Configurazione di un programma di bilanciamento del carico 1.0 in un cluster multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
 * [v1.0: Configurazione di un programma di bilanciamento del carico 1.0 in un cluster a zona singola](/docs/containers?topic=containers-loadbalancer#lb_config)
 * [v1.0: Abilitazione della conservazione dell'IP di origine](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
-  * [Aggiunta delle regole di affinità e delle tolleranze del nodo edge](/docs/containers?topic=containers-loadbalancer#edge_nodes)
+  * [Aggiunta delle regole di affinità e delle tolleranze del nodo edge](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [Aggiunta di regole di affinità per più VLAN pubbliche o private](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
+* [Registrazione di un nome host del programma di bilanciamento del carico](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)
+  * [Registrazione degli IP del programma di bilanciamento del carico con un nome host DNS](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)
+  * [Descrizione del formato del nome host](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_format)
+  * [Abilita i controlli dell'integrità su un nome host creando un monitoraggio dell'integrità](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_monitor)
+  * [Aggiornamento e rimozione di IP e monitoraggi dai nomi host](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_delete)
 
-[Esposizione delle applicazioni con Ingress](/docs/containers?topic=containers-ingress#ingress)
+[Bilanciamento del carico HTTPS con gli ALB (application load balancer) Ingress](/docs/containers?topic=containers-ingress#ingress)
 * [YAML di esempio](/docs/containers?topic=containers-ingress#sample_ingress)
 * [Cos'è Ingress?](/docs/containers?topic=containers-ingress#planning)
   * [Cosa viene fornito con Ingress?](/docs/containers?topic=containers-ingress#components)
@@ -509,7 +561,7 @@ lastupdated: "2019-03-21"
   * [Abilitazione del buffering di log e del timeout di scarico](/docs/containers?topic=containers-ingress#access-log)
   * [Modifica del numero o della durata delle connessioni keepalive](/docs/containers?topic=containers-ingress#keepalive_time)
   * [Modifica del backlog di connessioni in sospeso](/docs/containers?topic=containers-ingress#backlog)
-  * [Ottimizzazione delle prestazioni del kernel](/docs/containers?topic=containers-ingress#kernel)
+  * [Ottimizzazione delle prestazioni del kernel](/docs/containers?topic=containers-ingress#ingress_kernel)
 * [Utilizzo di un tuo controller Ingress](/docs/containers?topic=containers-ingress#user_managed)
 
 [Personalizzazione di Ingress con le annotazioni](/docs/containers?topic=containers-ingress_annotation#ingress_annotation)
@@ -567,6 +619,7 @@ lastupdated: "2019-03-21"
 * [Aumento della dimensione della zona di memoria condivisa per la raccolta di metriche Ingress](/docs/containers?topic=containers-ingress_health#vts_zone_size)
 
 ## Archiviazione dei dati sull'archiviazione persistente
+{: #sitemap-storage}
 
 [Pianificazione di archiviazione persistente altamente disponibile](/docs/containers?topic=containers-storage_planning#storage_planning)
 * [Scelta di una soluzione di archiviazione](/docs/containers?topic=containers-storage_planning#choose_storage_solution)
@@ -587,8 +640,8 @@ lastupdated: "2019-03-21"
 * [Decisioni relative alla configurazione dell'archiviazione file](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 * [Aggiunta di archiviazione file alle applicazioni](/docs/containers?topic=containers-file_storage#add_file)
 * [Utilizzo dell'archiviazione file esistente nel tuo cluster](/docs/containers?topic=containers-file_storage#existing_file)
-  * [Passo 1: Preparazione della tua archiviazione esistente.](/docs/containers?topic=containers-file_storage#step-1-preparing-your-existing-storage-)
-  * [Passo 2: Creazione di un volume persistente (o PV, persistent volume) e di un'attestazione del volume persistente (o PVC, persistent volume claim) corrispondente](/docs/containers?topic=containers-file_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [Passo 1: Preparazione della tua archiviazione esistente.](/docs/containers?topic=containers-file_storage#existing-file-1)
+  * [Passo 2: Creazione di un volume persistente (o PV, persistent volume) e di un'attestazione del volume persistente (o PVC, persistent volume claim) corrispondente](/docs/containers?topic=containers-file_storage#existing-file-2)
 * [Utilizzo dell'archiviazione file in una serie con stato](/docs/containers?topic=containers-file_storage#file_statefulset)
   * [Provisioning dinamico della PVC quando crei una serie con stato](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
   * [Pre-provisioning della PVC prima di creare la serie con stato](/docs/containers?topic=containers-file_storage#file_static_statefulset)
@@ -598,7 +651,7 @@ lastupdated: "2019-03-21"
 * [Riferimento delle classi di archiviazione](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
   * [Bronze](/docs/containers?topic=containers-file_storage#file_bronze)
   * [Silver](/docs/containers?topic=containers-file_storage#file_silver)
-  * [Gold](/docs/containers?topic=containers-file_storage#block_gold)
+  * [Gold](/docs/containers?topic=containers-file_storage#file_gold)
   * [Personalizzata](/docs/containers?topic=containers-file_storage#file_custom)
 * [Classi di archiviazione personalizzate di esempio](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
   * [Creazione di un'archiviazione che rileva la topologia](/docs/containers?topic=containers-file_storage#file-topology)
@@ -612,8 +665,8 @@ lastupdated: "2019-03-21"
 * [Decisioni relative alla configurazione dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 * [Aggiunta di archiviazione blocchi alle applicazioni](/docs/containers?topic=containers-block_storage#add_block)
 * [Utilizzo dell'archiviazione blocchi esistente nel tuo cluster](/docs/containers?topic=containers-block_storage#existing_block)
-  * [Passo 1: Richiamo delle informazioni della tua archiviazione blocchi esistente](/docs/containers?topic=containers-block_storage#step-1-retrieving-the-information-of-your-existing-block-storage)
-  * [Passo 2: Creazione di un volume persistente (o PV, persistent volume) e di un'attestazione del volume persistente (o PVC, persistent volume claim) corrispondente](/docs/containers?topic=containers-block_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [Passo 1: Richiamo delle informazioni della tua archiviazione blocchi esistente](/docs/containers?topic=containers-block_storage#existing-block-1)
+  * [Passo 2: Creazione di un volume persistente (o PV, persistent volume) e di un'attestazione del volume persistente (o PVC, persistent volume claim) corrispondente](/docs/containers?topic=containers-block_storage#existing-block-2)
 * [Utilizzo dell'archiviazione blocchi in una serie con stato](/docs/containers?topic=containers-block_storage#block_statefulset)
   * [Provisioning dinamico della PVC quando crei una serie con stato](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
   * [Pre-provisioning della PVC prima di creare la serie con stato](/docs/containers?topic=containers-block_storage#block_static_statefulset)
@@ -655,7 +708,7 @@ lastupdated: "2019-03-21"
   * [Aggiornamento di Portworx nel tuo cluster](/docs/containers?topic=containers-portworx#update_portworx)
   * [Rimozione di Portworx dal tuo cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Crittografia dei volumi Portworx con {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-portworx#encrypt_volumes)
-  * [Flusso di lavoro della crittografia dei volumi Portworx](/docs/containers?topic=containers-portworx#encryption)
+  * [Flusso di lavoro della crittografia dei volumi Portworx](/docs/containers?topic=containers-portworx#px_encryption)
   * [Flusso di lavoro della decrittografia dei volumi Portworx](/docs/containers?topic=containers-portworx#decryption)
   * [Configurazione della crittografia per i tuoi volumi Portworx](/docs/containers?topic=containers-portworx#setup_encryption)
 * [Aggiunta di archiviazione dal tuo cluster Portworx alle applicazioni](/docs/containers?topic=containers-portworx#add_portworx_storage)
@@ -679,31 +732,36 @@ lastupdated: "2019-03-21"
 [Rimozione dell'archiviazione persistente da un cluster](/docs/containers?topic=containers-cleanup#cleanup)
 * [Ripulitura dell'archiviazione persistente](/docs/containers?topic=containers-cleanup#storage_remove)
 
-## Integrazione dei servizi
+## Miglioramento delle funzionalità del cluster con le integrazioni
+{: #sitemap-integrations}
 
 [Integrazione dei servizi](/docs/containers?topic=containers-integrations#integrations)
-* [Servizi DevOps](/docs/containers?topic=containers-integrations#devops_services)
-* [Servizi di registrazione e monitoraggio](/docs/containers?topic=containers-integrations#health_services)
-* [Servizi di sicurezza](/docs/containers?topic=containers-integrations#security_services)
-* [Servizi di archiviazione](/docs/containers?topic=containers-integrations#storage_services)
-* [Aggiunta di servizi di {{site.data.keyword.Bluemix_notm}} ai cluster](/docs/containers?topic=containers-integrations#adding_cluster)
-* [Accesso alle credenziali del servizio dalle tue applicazioni](/docs/containers?topic=containers-integrations#adding_app)
-  * [Montaggio del segreto come un volume al tuo pod](/docs/containers?topic=containers-integrations#mount_secret)
-  * [Riferimento al segreto nelle variabili di ambiente](/docs/containers?topic=containers-integrations#reference_secret)
-* [Configurazione di Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#helm)
+* [Aggiunta di servizi utilizzando i componenti aggiuntivi gestiti](/docs/containers?topic=containers-managed-addons#managed-addons)
+  * [Aggiunta di componenti aggiuntivi gestiti](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
+  * [Aggiornamento dei componenti aggiuntivi gestiti](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
+* [Aggiunta di servizi utilizzando Helm](/docs/containers?topic=containers-helm#helm)
+  * [Configurazione di Helm in un cluster con accesso pubblico](/docs/containers?topic=containers-helm#public_helm_install)
+  * [Cluster privati: esecuzione del push dell'immagine Tiller al tuo registro privato in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
+  * [Cluster privati: installazione dei grafici Helm senza utilizzare Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)
   * [Link Helm correlati](/docs/containers?topic=containers-integrations#helm_links)
-* [Visualizzazione delle risorse del cluster Kubernetes](/docs/containers?topic=containers-integrations#weavescope)
+* [Aggiunta di servizi utilizzando i bind del servizio {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#service-binding)
+  * [Aggiunta di servizi di {{site.data.keyword.Bluemix_notm}} ai cluster](/docs/containers?topic=containers-service-binding#bind-services)
+  * [Accesso alle credenziali del servizio dalle tue applicazioni](/docs/containers?topic=containers-service-binding#adding_app)
+      * [Montaggio del segreto come un volume al tuo pod](/docs/containers?topic=containers-service-binding#mount_secret)
+      * [Riferimento al segreto nelle variabili di ambiente](/docs/containers?topic=containers-service-binding#reference_secret)
 
 ## Eventi di Activity Tracker
+{: #sitemap-at}
 
 [Eventi di Activity Tracker](/docs/containers?topic=containers-at_events#at_events)
 * [Ricerca di informazioni per gli eventi](/docs/containers?topic=containers-at_events#kube-find)
 * [Traccia degli eventi di gestione del cluster](/docs/containers?topic=containers-at_events#cluster-events)
 * [Traccia degli eventi di controllo Kubernetes](/docs/containers?topic=containers-at_events#kube-events)
 
-## Cloud dedicato
+## Obsoleto: Cloud dedicato
+{: #sitemap-dedicated}
 
-[Introduzione ai cluster in {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated)
+[Obsoleto: Introduzione ai cluster in {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated)
 * [Informazioni sull'ambiente cloud dedicato](/docs/containers?topic=containers-dedicated#dedicated_environment)
 * [Differenze nella gestione dei cluster tra gli ambienti cloud](/docs/containers?topic=containers-dedicated#dedicated_env_differences)
   * [Architettura del servizio](/docs/containers?topic=containers-dedicated#dedicated_ov_architecture)
@@ -711,7 +769,7 @@ lastupdated: "2019-03-21"
 * [Creazione dei cluster](/docs/containers?topic=containers-dedicated#dedicated_administering)
   * [Creazione dei cluster con la console {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-dedicated#dedicated_creating_ui)
   * [Creazione dei cluster con la CLI](/docs/containers?topic=containers-dedicated#dedicated_creating_cli)
-  * [Aggiunta di nodi di lavoro](/docs/containers?topic=containers-dedicated#add_workers)
+  * [Aggiunta di nodi di lavoro](/docs/containers?topic=containers-dedicated#add_workers_dedicated)
   * [Utilizzo dei registri di immagini pubblici e privati](/docs/containers?topic=containers-dedicated#dedicated_images)
   * [Aggiunta di sottoreti ai cluster](/docs/containers?topic=containers-dedicated#dedicated_cluster_subnet)
       * [Aggiunta di ulteriori sottoreti gestite dall'utente e degli indirizzi IP ai tuoi cluster Kubernetes](/docs/containers?topic=containers-dedicated#dedicated_byoip_subnets)
@@ -723,16 +781,19 @@ lastupdated: "2019-03-21"
   * [Creazione di archiviazione persistente](/docs/containers?topic=containers-dedicated#dedicated_apps_volume_claim)
 
 ## Obsoleto: esecuzione di contenitori singoli e scalabili
+{: #sitemap-singlescalable}
 
 [Obsoleto: esecuzione di contenitori singoli e scalabili](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
 ## Cloud ibrido
+{: #sitemap-hybrid}
 
 [Cloud ibrido](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)
 * [Connessione del tuo cloud pubblico e privato con la VPN strongSwan](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
 * [Esecuzione delle immagini di {{site.data.keyword.icpfull_notm}} in contenitori Kubernetes pubblici](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
 ## Guida di riferimento al plugin CLI {{site.data.keyword.containerlong_notm}}
+{: #sitemap-cli-plugin}
 
 [Guida di riferimento ai comandi](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
 * [Utilizzo della struttura dei comandi beta](/docs/containers?topic=containers-cs_cli_reference#cs_beta)
@@ -741,7 +802,7 @@ lastupdated: "2019-03-21"
 * [Comandi cluster: gestione](/docs/containers?topic=containers-cs_cli_reference#cluster_mgmt_commands)
 * [Comandi cluster: servizi e integrazioni](/docs/containers?topic=containers-cs_cli_reference#cluster_services_commands)
 * [Comandi cluster: sottoreti](/docs/containers?topic=containers-cs_cli_reference#cluster_subnets_commands)
-* [Comandi del programma di bilanciamento del carico dell'applicazione (ALB) Ingress](/docs/containers?topic=containers-cs_cli_reference#alb_commands)
+* [Comandi dell'ALB (application load balancer) (ALB) Ingress](/docs/containers?topic=containers-cs_cli_reference#alb_commands)
 * [Comandi infrastruttura](/docs/containers?topic=containers-cs_cli_reference#infrastructure_commands)
 * [Comandi registrazione](/docs/containers?topic=containers-cs_cli_reference#logging_commands)
 * [Comandi regione](/docs/containers?topic=containers-cs_cli_reference#region_commands)
@@ -751,6 +812,8 @@ lastupdated: "2019-03-21"
 [Changelog della CLI](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 ## {{site.data.keyword.containerlong_notm}} versioni
+
+{: #sitemap-versions}
 
 [Informazioni sulla versione e azioni di aggiornamento](/docs/containers?topic=containers-cs_versions#cs_versions)
 * [Tipi di versione Kubernetes](/docs/containers?topic=containers-cs_versions#version_types)
@@ -782,8 +845,16 @@ lastupdated: "2019-03-21"
 
 [Changelog versione](/docs/containers?topic=containers-changelog#changelog)
 * [Changelog versione 1.13](/docs/containers?topic=containers-changelog#113_changelog)
+  * [Changelog per 1.13.4_1513, rilasciato il 20 marzo 2019](/docs/containers?topic=containers-changelog#1134_1513)
+  * [Changelog per 1.13.4_1510, rilasciato il 4 marzo 2019](/docs/containers?topic=containers-changelog#1134_1510)
+    * [Changelog per il fix pack del nodo di lavoro 1.13.2_1509, rilasciato il 27 febbraio 2019](/docs/containers?topic=containers-changelog#1132_1509)
+    * [Changelog per il fix pack del nodo di lavoro 1.13.2_1508, rilasciato il 15 febbraio 2019](/docs/containers?topic=containers-changelog#1132_1508)
   * [Changelog per 1.13.2_1507, rilasciato il 5 febbraio 2019](/docs/containers?topic=containers-changelog#1124_1534)
 * [Changelog versione 1.12](/docs/containers?topic=containers-changelog#112_changelog)
+  * [Changelog per 1.12.6_1544, rilasciato il 20 marzo 2019](/docs/containers?topic=containers-changelog#1126_1544)
+  * [Changelog per 1.12.6_1541, rilasciato il 4 marzo 2019](/docs/containers?topic=containers-changelog#1126_1541)
+    * [Changelog per il fix pack del nodo di lavoro 1.12.5_1540, rilasciato il 27 febbraio 2019](/docs/containers?topic=containers-changelog#1125_1540)
+    * [Changelog per il fix pack del nodo di lavoro 1.12.5_1538, rilasciato il 15 febbraio 2019](/docs/containers?topic=containers-changelog#1125_1538)
   * [Changelog per 1.12.5_1537, rilasciato il 5 febbraio 2019](/docs/containers?topic=containers-changelog#1125_1537)
     * [Changelog per il fix pack del nodo di lavoro 1.12.4_1535, rilasciato il 28 gennaio 2019](/docs/containers?topic=containers-changelog#1124_1535)
   * [Changelog per 1.12.4_1534, rilasciato il 21 gennaio 2019](/docs/containers?topic=containers-changelog#1124_1534)
@@ -795,6 +866,10 @@ lastupdated: "2019-03-21"
     * [Changelog per il fix pack del nodo di lavoro 1.12.2_1528, rilasciato il 19 novembre 2018](/docs/containers?topic=containers-changelog#1122_1528)
   * [Changelog per 1.12.2_1527, rilasciato il 7 novembre 2018](/docs/containers?topic=containers-changelog#1122_1527)
 * [Changelog versione 1.11](/docs/containers?topic=containers-changelog#111_changelog)
+  * [Changelog per 1.11.8_1550, rilasciato il 20 marzo 2019](/docs/containers?topic=containers-changelog#1118_1550)
+  * [Changelog per 1.11.8_1547, rilasciato il 4 marzo 2019](/docs/containers?topic=containers-changelog#1118_1547)
+    * [Changelog per il fix pack del nodo di lavoro 1.11.7_1546, rilasciato il 27 febbraio 2019](/docs/containers?topic=containers-changelog#1117_1546)
+    * [Changelog per il fix pack del nodo di lavoro 1.11.7_1544, rilasciato il 15 febbraio 2019](/docs/containers?topic=containers-changelog#1117_1544)
   * [Changelog per 1.11.7_1543, rilasciato il 5 febbraio 2019](/docs/containers?topic=containers-changelog#1117_1543)
     * [Changelog per il fix pack del nodo di lavoro 1.11.6_1541, rilasciato il 28 gennaio 2019](/docs/containers?topic=containers-changelog#1116_1541)
   * [Changelog per 1.11.6_1540, rilasciato il 21 gennaio 2019](/docs/containers?topic=containers-changelog#1116_1540)
@@ -815,6 +890,10 @@ lastupdated: "2019-03-21"
     * [Changelog per il fix pack del nodo di lavoro 1.11.2_1514, rilasciato il 23 agosto 2018](/docs/containers?topic=containers-changelog#1112_1514)
   * [Changelog per 1.11.2_1513, rilasciato il 14 agosto 2018](/docs/containers?topic=containers-changelog#1112_1513)
 * [Changelog versione 1.10](/docs/containers?topic=containers-changelog#110_changelog)
+  * [Changelog per 1.10.13_1551, rilasciato il 20 marzo 2019](/docs/containers?topic=containers-changelog#11013_1551)
+  * [Changelog per 1.10.13_1548, rilasciato il 4 marzo 2019](/docs/containers?topic=containers-changelog#11013_1548)
+    * [Changelog per il fix pack del nodo di lavoro 1.10.12_1546, rilasciato il 27 febbraio 2019](/docs/containers?topic=containers-changelog#11012_1546)
+    * [Changelog per il fix pack del nodo di lavoro 1.10.12_1544, rilasciato il 15 febbraio 2019](/docs/containers?topic=containers-changelog#11012_1544)
   * [Changelog per 1.10.12_1543, rilasciato il 5 febbraio 2019](/docs/containers?topic=containers-changelog#1117_1543)
     * [Changelog per il fix pack del nodo di lavoro 1.10.12_1541, rilasciato a gennaio 2019](/docs/containers?topic=containers-changelog#11012_1541)
   * [Changelog per 1.10.12_1540, rilasciato il 21 gennaio 2019](/docs/containers?topic=containers-changelog#11012_1540)
@@ -883,18 +962,8 @@ lastupdated: "2019-03-21"
 [Changelog per i componenti aggiuntivi del cluster](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 * [Changelog per il componente aggiuntivo ALB Ingress](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 
-## Regioni e zone
-
-[Regioni e zone](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [Ubicazioni in {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
-* [Regioni in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#container_regions)
-  * [Accesso a una regione {{site.data.keyword.containerlong_notm}} differente](/docs/containers?topic=containers-regions-and-zones#container_login_endpoints)
-  * [Utilizzo dei comandi API {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#containers_api)
-* [Zone in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
-  * [Cluster a zona singola](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
-  * [Cluster multizona](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
-
 ## Autorizzazioni di accesso utente
+{: #sitemap-user-access}
 
 [Autorizzazioni di accesso utente](/docs/containers?topic=containers-access_reference)
 * [Ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-access_reference#iam_platform)
@@ -904,11 +973,22 @@ lastupdated: "2019-03-21"
   * [Azioni dell'operatore](/docs/containers?topic=containers-access_reference#operator-actions)
   * [Azioni dell'amministratore](/docs/containers?topic=containers-access_reference#admin-actions)
 * [Ruoli del servizio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-access_reference#service)
-* [Autorizzazioni delle risorse Kubernetes per ruolo RBAC](/docs/containers?topic=containers-access_reference#rbac)
+* [Autorizzazioni delle risorse Kubernetes per ogni ruolo RBAC](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Ruoli Cloud Foundry](/docs/containers?topic=containers-access_reference#cloud-foundry)
 * [Ruoli dell'infrastruttura](/docs/containers?topic=containers-access_reference#infra)
 
+## Integrazioni supportate
+{: #sitemap-supported-integrations}
+
+[Integrazioni supportate](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+* [Servizi DevOps](/docs/containers?topic=containers-supported_integrations#devops_services)
+* [Servizi di registrazione e monitoraggio](/docs/containers?topic=containers-supported_integrations#health_services)
+* [Servizi di sicurezza](/docs/containers?topic=containers-supported_integrations#security_services)
+* [Servizi di archiviazione](/docs/containers?topic=containers-supported_integrations#storage_services)
+* [Servizi di database](/docs/containers?topic=containers-supported_integrations#database_services)
+
 ## Domande frequenti (FAQ)
+{: #sitemap-faqs}
 
 [Domande frequenti (FAQ)](/docs/containers?topic=containers-faqs#faqs)
 * [Cos'è Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
@@ -931,6 +1011,7 @@ lastupdated: "2019-03-21"
 * [Posso visualizzare il mio utilizzo corrente?](/docs/containers?topic=containers-faqs#usage)
 
 ## Risoluzione dei problemi dei cluster
+{: #sitemap-ts}
 
 [Debug del tuo cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot)
 * [Esecuzione di test con {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
@@ -969,7 +1050,7 @@ lastupdated: "2019-03-21"
 * [Archiviazione file: l'aggiunta di accesso utente non root all'archiviazione persistente non riesce](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot)
 * [Archiviazione blocchi: l'archiviazione blocchi è modificata a sola lettura](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_block)
 * [Archiviazione blocchi: impossibile montare l'archiviazione blocchi esistente in un pod a causa del file system errato](/docs/containers?topic=containers-cs_troubleshoot_storage#block_filesystem)
-* [Archiviazione oggetti: l'installazione del plug-in Helm {{site.data.keyword.cos_full_notm}} ibmcloud non riesce](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails)
+* [Archiviazione oggetti: l'installazione del plugin Helm {{site.data.keyword.cos_full_notm}} ibmcloud non riesce](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails)
 * [Archiviazione oggetti: la creazione del pod o della PVC non riesce perché non è possibile trovare il segreto Kubernetes](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_secret_access_fails)
 * [Archiviazione oggetti: la creazione della PVC non riesce a causa di credenziali errate o di accesso rifiutato](/docs/containers?topic=containers-cs_troubleshoot_storage#cred_failure)
 * [Archiviazione oggetti: impossibile accedere a un bucket esistente](/docs/containers?topic=containers-cs_troubleshoot_storage#object-storage-cannot-access-an-existing-bucket)
@@ -992,9 +1073,9 @@ lastupdated: "2019-03-21"
 * [Come ottenere aiuto e supporto](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_getting_help)
 
 [Risoluzione dei problemi di rete del cluster](/docs/containers?topic=containers-cs_troubleshoot_network#cs_troubleshoot_network)
-* [Impossibile collegarsi a un'applicazione tramite un servizio di programma di bilanciamento del carico](/docs/containers?topic=containers-cs_troubleshoot_network#cs_loadbalancer_fails)
-* [Impossibile collegarsi a un'applicazione tramite Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_ingress_fails)
-* [Problemi con il segreto del programma di bilanciamento del carico dell'applicazione Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_albsecret_fails)
+* [Impossibile connettersi a un'applicazione tramite un servizio di programma di bilanciamento del carico](/docs/containers?topic=containers-cs_troubleshoot_network#cs_loadbalancer_fails)
+* [Impossibile connettersi a un'applicazione tramite Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_ingress_fails)
+* [Problemi con il segreto dell'ALB (application load balancer) Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_albsecret_fails)
 * [Impossibile ottenere un dominio secondario per l'ALB Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)
 * [L'ALB Ingress non viene distribuito in una zona](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit)
 * [La connessione tramite WebSocket si chiude dopo 60 secondi](/docs/containers?topic=containers-cs_troubleshoot_network#cs_ingress_websocket)
@@ -1007,6 +1088,8 @@ lastupdated: "2019-03-21"
 * [Come ottenere aiuto e supporto](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
 
 ## Argomenti popolari di {{site.data.keyword.containerlong_notm}}
+{: #sitemap-poptopics}
+
 [Argomenti popolari per {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_popular_topics)
 * [Argomenti popolari nel febbraio 2019](/docs/containers?topic=containers-cs_popular_topics#feb19)
 * [Argomenti popolari nel gennaio 2019](/docs/containers?topic=containers-cs_popular_topics#jan19)
@@ -1025,6 +1108,7 @@ lastupdated: "2019-03-21"
 * [Utilizza la chat per parlare con sviluppatori con interessi simili su Slack](/docs/containers?topic=containers-cs_popular_topics#slack)
 
 ## Link correlati
+{: #sitemap-rellinks}
 
 [Link correlati](/docs/containers?topic=containers-cs_rellinks#cs_rellinks)
 * [{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_rellinks#containers)

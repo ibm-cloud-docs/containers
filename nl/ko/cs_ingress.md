@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -24,10 +24,10 @@ subcollection: containers
 
 
 
-# Ingress를 사용한 앱 노출
+# Ingress 애플리케이션 로드 밸런서(ALB)로 HTTPS 로드 밸런싱
 {: #ingress}
 
-{{site.data.keyword.containerlong}}에서 IBM 제공 애플리케이션 로드 밸런서에서 관리하는 Ingress 리소스를 작성하여 Kubernetes 클러스터에서 다중 앱을 노출합니다.
+{{site.data.keyword.containerlong}}에서 IBM 제공 애플리케이션 로드 밸런서에서 관리하는 Ingress 리소스를 작성하여 Kubernetes 클러스터에서 여러 앱을 노출합니다.
 {:shortdesc}
 
 <img src="images/cs_ingress_imagemap.png" usemap="#image-map" alt="이 이미지 맵은 이 페이지의 구성 주제에 대한 빠른 링크를 제공합니다.">
@@ -193,7 +193,7 @@ ALB에 지정된 IP를 보려면 다음 명령을 실행할 수 있습니다.
 
 4. 로드 밸런서 서비스는 해당 요청을 ALB로 라우팅합니다.
 
-5. ALB는 클러스터에서 `myapp` 경로에 대한 라우팅 규칙이 존재하는지 여부를 확인합니다. 일치하는 규칙이 발견된 경우에는 Ingress 리소스에서 정의한 규칙에 따라 요청이 앱이 배치된 팟(Pod)에 전달됩니다. 패키지의 소스 IP 주소는 앱 팟(Pod)이 실행 중인 작업자 노드의 공인 IP 주소의 IP 주소로 변경됩니다. 다중 앱 인스턴스가 클러스터에 배치되는 경우 ALB는 앱 팟(Pod) 간의 요청을 로드 밸런싱합니다.
+5. ALB는 클러스터에서 `myapp` 경로에 대한 라우팅 규칙이 존재하는지 여부를 확인합니다. 일치하는 규칙이 발견된 경우에는 Ingress 리소스에서 정의한 규칙에 따라 요청이 앱이 배치된 팟(Pod)에 전달됩니다. 패키지의 소스 IP 주소는 앱 팟(Pod)이 실행 중인 작업자 노드의 공인 IP 주소의 IP 주소로 변경됩니다. 여러 앱 인스턴스가 클러스터에 배치되는 경우 ALB는 앱 팟(Pod) 간의 요청을 로드 밸런싱합니다.
 
 ### 다중 구역 클러스터에서 Ingress를 사용하여 요청이 내 앱에 도달하는 방법은 무엇입니까?
 {: #architecture-multi}
@@ -210,7 +210,7 @@ ALB에 지정된 IP를 보려면 다음 명령을 실행할 수 있습니다.
 
 4. 로드 밸런서 서비스는 해당 요청을 ALB로 라우팅합니다.
 
-5. ALB는 클러스터에서 `myapp` 경로에 대한 라우팅 규칙이 존재하는지 여부를 확인합니다. 일치하는 규칙이 발견된 경우에는 Ingress 리소스에서 정의한 규칙에 따라 요청이 앱이 배치된 팟(Pod)에 전달됩니다. 패키지의 소스 IP 주소는 앱 팟(Pod)이 실행 중인 작업자 노드의 공인 IP 주소로 변경됩니다. 다중 앱 인스턴스가 클러스터에 배치되는 경우, ALB는 모든 구역에서 앱 팟(Pod) 간의 요청을 로드 밸런싱합니다.
+5. ALB는 클러스터에서 `myapp` 경로에 대한 라우팅 규칙이 존재하는지 여부를 확인합니다. 일치하는 규칙이 발견된 경우에는 Ingress 리소스에서 정의한 규칙에 따라 요청이 앱이 배치된 팟(Pod)에 전달됩니다. 패키지의 소스 IP 주소는 앱 팟(Pod)이 실행 중인 작업자 노드의 공인 IP 주소로 변경됩니다. 여러 앱 인스턴스가 클러스터에 배치되는 경우, ALB는 모든 구역에서 앱 팟(Pod) 간의 요청을 로드 밸런싱합니다.
 
 <br />
 
@@ -222,14 +222,14 @@ Ingress를 시작하기 전에 다음 전제조건을 검토하십시오.
 {:shortdesc}
 
 **모든 Ingress 구성에 대한 전제조건:**
-- Ingress는 표준 클러스터에만 사용 가능하고 고가용성을 보장할 수 있도록 구역당 최소한 2개의 작업자 노드를 요구하며 해당 주기적 업데이트가 적용됩니다. 한 구역에 한 명의 작업자만 있는 경우, ALB는 자동 업데이트를 수신할 수 없습니다. 자동 업데이트가 ALB 팟(Pod)에 롤아웃되면 팟(Pod)이 다시 로드됩니다. 그러나, ALB 팟(Pod)에는 고가용성을 위해 각 작업자 노드에 하나의 팟(Pod)만 스케줄되도록 하는 반친화성 규칙이 있습니다. 하나의 작업자에 하나의 ALB 팟(Pod)만 있으므로 트래픽이 인터럽트되지 않도록 팟(Pod)이 다시 시작되지 않습니다. 작업자 노드를 업데이트할 때에만 ALB 팟(Pod)이 최신 버전으로 업데이트됩니다.
+- Ingress는 표준 클러스터에만 사용 가능하고 고가용성을 보장할 수 있도록 구역당 최소한 2개의 작업자 노드를 요구하며 해당 주기적 업데이트가 적용됩니다. 한 구역에 한 명의 작업자만 있는 경우, ALB는 자동 업데이트를 수신할 수 없습니다. 자동 업데이트가 ALB 팟(Pod)에 롤아웃되면 팟(Pod)이 다시 로드됩니다. 그러나, ALB 팟(Pod)에는 고가용성을 위해 각 작업자 노드에 하나의 팟(Pod)만 스케줄되도록 하는 반친화성 규칙이 있습니다. 하나의 작업자에 하나의 ALB 팟(Pod)만 있으므로 트래픽이 인터럽트되지 않도록 팟(Pod)이 다시 시작되지 않습니다. ALB 팟(Pod)은 업데이트된 새 팟(Pod)을 스케줄할 수 있도록 이전 팟(Pod)을 수동으로 삭제하는 경우에만 최신 버전으로 업데이트됩니다.
 - Ingress를 설정하려면 다음 [{{site.data.keyword.Bluemix_notm}} IAM 역할](/docs/containers?topic=containers-users#platform)이 필요합니다.
     - 클러스터에 대한 **관리자** 플랫폼 역할
     - 모든 네임스페이스에서 **관리자** 서비스 역할
 
 **다중 구역 클러스터에서 Ingress 사용을 위한 전제조건**:
  - [에지 작업자 노드](/docs/containers?topic=containers-edge)로 네트워크 트래픽을 제한하는 경우에는 Ingress 팟(Pod)의 고가용성을 위해 각 구역에서 최소한 2개의 에지 작업자 노드를 사용하도록 설정해야 합니다. 구역당 최소한 2개의 작업자 노드가 있으며 클러스터의 모든 구역에 전개된 [에지 노드 작업자 풀을 작성](/docs/containers?topic=containers-clusters#add_pool)하십시오.
- - 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
+ - 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
  - 구역에서 장애가 발생하는 경우, 해당 구역의 Ingress ALB에 대한 요청에서 간헐적인 장애가 나타날 수 있습니다.
 
 <br />
@@ -299,7 +299,7 @@ IBM 제공 Ingress 하위 도메인 와일드카드, `*.<cluster_name>.<region>.
 시작하기 전에:
 
 * Ingress [전제조건](#config_prereqs)을 검토하십시오.
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### 1단계: 앱 배치 및 앱 서비스 작성
 {: #public_inside_1}
@@ -361,7 +361,7 @@ IBM 제공 도메인(예: `mycluster-12345.us-south.containers.appdomain.cloud/m
 
 **IBM 제공 Ingress 도메인을 사용하려면 다음을 수행하십시오.**
 
-IBM 제공 도메인을 가져오십시오. `<cluster_name_or_ID>`를 앱이 배치되는 클러스터의 이름으로 대체하십시오.
+IBM 제공 도메인을 가져오십시오. `<cluster_name_or_ID>`를 앱이 배치된 클러스터의 이름으로 대체하십시오.
 ```
 ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
 ```
@@ -418,7 +418,7 @@ TLS 인증서가 사용하려는 {{site.data.keyword.cloudcerts_long_notm}}에 �
 ```
 {: pre}
 
-IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지 않았는지 확인하십시오. 다음 명령을 실행하여 IBM 제공 Ingress 시크릿 이름을 가져올 수 있습니다. `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지 않았는지 확인하십시오. `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`를 실행하여 IBM 제공 Ingress 시크릿 이름을 가져올 수 있습니다.
 {: note}
 
 이 명령으로 사용하여 인증서를 가져오면 인증서 시크릿이 `ibm-cert-store`라는 네임스페이스에 작성됩니다. 그런 다음 이 시크릿에 대한 참조는 네임스페이스의 모든 Ingress 리소스가 액세스할 수 있는 `default` 네임스페이스에 작성됩니다. ALB에서 요청을 처리하는 동안 이 참조를 따라 `ibm-cert-store` 네임스페이스에서 인증서 시크릿을 선택하여 사용합니다.
@@ -458,7 +458,7 @@ IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지
      kubectl create -f ssl-my-test
      ```
      {: pre}
-     IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지 않았는지 확인하십시오. 다음 명령을 실행하여 IBM 제공 Ingress 시크릿 이름을 가져올 수 있습니다. `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+     IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지 않았는지 확인하십시오. `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`를 실행하여 IBM 제공 Ingress 시크릿 이름을 가져올 수 있습니다.
      {: note}
 
 
@@ -550,7 +550,7 @@ Ingress 리소스는 ALB에서 트래픽을 앱 서비스에 라우팅하는 데
     <td><code>path</code></td>
     <td><em>&lt;app_path&gt;</em>를 슬래시 또는 앱이 청취 중인 경로로 대체하십시오. 앱에 대한 고유 라우트를 작성하기 위해 경로가 IBM 제공 또는 사용자 정의 도메인에 추가됩니다. 이 라우트를 웹 브라우저에 입력하면 네트워크 트래픽이 애플리케이션 ALB로 라우팅됩니다. ALB는 연관된 서비스를 찾고 네트워크 트래픽을 이 서비스에 전송합니다. 그 후 이 서비스는 트래픽을 앱이 실행 중인 팟(Pod)에 전달합니다.
     </br></br>
-         많은 앱은 특정 경로에서 청취하지는 않지만 루트 경로와 특정 포트를 사용합니다. 이 경우에는 루트 경로를 <code>/</code>로 정의하고 앱에 대한 개별 경로를 지정하지 마십시오.         예: <ul><li><code>http://domain/</code>의 경우 <code>/</code>를 경로로 입력하십시오.</li><li><code>http://domain/app1_path</code>의 경우 <code>/app1_path</code>를 경로로 입력하십시오.</li></ul>
+             많은 앱은 특정 경로에서 청취하지는 않지만 루트 경로와 특정 포트를 사용합니다. 이 경우에는 루트 경로를 <code>/</code>로 정의하고 앱에 대한 개별 경로를 지정하지 마십시오.         예: <ul><li><code>http://domain/</code>의 경우 <code>/</code>를 경로로 입력하십시오.</li><li><code>http://domain/app1_path</code>의 경우 <code>/app1_path</code>를 경로로 입력하십시오.</li></ul>
     </br>
     <strong>팁:</strong> [재작성 어노테이션](/docs/containers?topic=containers-ingress_annotation#rewrite-path)을 사용하여 앱이 청취하는 경로와 다른 경로에서 청취하도록 Ingress를 구성할 수 있습니다.</td>
     </tr>
@@ -593,7 +593,7 @@ https://<domain>/<app1_path>
 ```
 {: codeblock}
 
-다중 앱을 노출한 경우 URL에 추가되는 경로를 변경하여 해당 앱에 액세스하십시오.
+여러 앱을 노출한 경우 URL에 추가되는 경로를 변경하여 해당 앱에 액세스하십시오.
 
 ```
 https://<domain>/<app2_path>
@@ -629,7 +629,7 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
 
 * Ingress [전제조건](#config_prereqs)을 검토하십시오.
 * 클러스터 로드 밸런싱에 포함시키고자 하는 외부 앱에 공인 IP 주소를 사용하여 액세스할 수 있는지 확인하십시오.
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 클러스터 외부에 있는 앱을 공용으로 노출하려면 다음 작업을 수행하십시오.
 
@@ -911,7 +911,7 @@ TLS 인증서가 사용하려는 {{site.data.keyword.cloudcerts_long_notm}}에 �
 ```
 {: pre}
 
-IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지 않았는지 확인하십시오. 다음 명령을 실행하여 IBM 제공 Ingress 시크릿 이름을 가져올 수 있습니다. `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지 않았는지 확인하십시오. `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`를 실행하여 IBM 제공 Ingress 시크릿 이름을 가져올 수 있습니다.
 {: note}
 
 이 명령으로 사용하여 인증서를 가져오면 인증서 시크릿이 `ibm-cert-store`라는 네임스페이스에 작성됩니다. 그런 다음 이 시크릿에 대한 참조는 네임스페이스의 모든 Ingress 리소스가 액세스할 수 있는 `default` 네임스페이스에 작성됩니다. ALB에서 요청을 처리하는 동안 이 참조를 따라 `ibm-cert-store` 네임스페이스에서 인증서 시크릿을 선택하여 사용합니다.
@@ -951,7 +951,7 @@ IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지
      kubectl create -f ssl-my-test
      ```
      {: pre}
-     IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지 않았는지 확인하십시오. 다음 명령을 실행하여 IBM 제공 Ingress 시크릿 이름을 가져올 수 있습니다. `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+     IBM 제공 Ingress 시크릿과 동일한 이름으로 시크릿을 작성하지 않았는지 확인하십시오. `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`를 실행하여 IBM 제공 Ingress 시크릿 이름을 가져올 수 있습니다.
      {: note}
 
 
@@ -1048,7 +1048,7 @@ Ingress 리소스는 ALB에서 트래픽을 앱 서비스에 라우팅하는 데
     <td><code>path</code></td>
     <td><em>&lt;app_path&gt;</em>를 슬래시 또는 앱이 청취 중인 경로로 대체하십시오. 앱에 대한 고유 라우트를 작성하기 위해 경로가 사용자 정의 도메인에 추가됩니다. 이 라우트를 웹 브라우저에 입력하면 네트워크 트래픽이 애플리케이션 ALB로 라우팅됩니다. ALB는 연관된 서비스를 찾고 네트워크 트래픽을 이 서비스에 전송합니다. 그 후 이 서비스는 트래픽을 앱이 실행 중인 팟(Pod)에 전달합니다.
     </br></br>
-         많은 앱은 특정 경로에서 청취하지는 않지만 루트 경로와 특정 포트를 사용합니다. 이 경우에는 루트 경로를 <code>/</code>로 정의하고 앱에 대한 개별 경로를 지정하지 마십시오.         예: <ul><li><code>http://domain/</code>의 경우 <code>/</code>를 경로로 입력하십시오.</li><li><code>http://domain/app1_path</code>의 경우 <code>/app1_path</code>를 경로로 입력하십시오.</li></ul>
+             많은 앱은 특정 경로에서 청취하지는 않지만 루트 경로와 특정 포트를 사용합니다. 이 경우에는 루트 경로를 <code>/</code>로 정의하고 앱에 대한 개별 경로를 지정하지 마십시오.         예: <ul><li><code>http://domain/</code>의 경우 <code>/</code>를 경로로 입력하십시오.</li><li><code>http://domain/app1_path</code>의 경우 <code>/app1_path</code>를 경로로 입력하십시오.</li></ul>
     </br>
     <strong>팁:</strong> [재작성 어노테이션](/docs/containers?topic=containers-ingress_annotation#rewrite-path)을 사용하여 앱이 청취하는 경로와 다른 경로에서 청취하도록 Ingress를 구성할 수 있습니다.</td>
     </tr>
@@ -1094,7 +1094,7 @@ https://<domain>/<app1_path>
 ```
 {: codeblock}
 
-다중 앱을 노출한 경우 URL에 추가되는 경로를 변경하여 해당 앱에 액세스하십시오.
+여러 앱을 노출한 경우 URL에 추가되는 경로를 변경하여 해당 앱에 액세스하십시오.
 
 ```
 https://<domain>/<app2_path>
@@ -1460,7 +1460,7 @@ Keepalive 연결은 연결을 열고 닫는 데 필요한 CPU 및 네트워크 �
 
 
 ### 커널 성능 튜닝
-{: #kernel}
+{: #ingress_kernel}
 
 Ingress ALB의 성능을 최적화하기 위해 [작업자 노드의 Linux 커널 `sysctl` 매개변수를 변경](/docs/containers?topic=containers-kernel)할 수도 있습니다. 작업자 노드가 최적화된 커널 튜닝으로 자동 프로비저닝되므로, 특정 성능 최적화 요구사항이 있는 경우에만 이러한 설정을 변경하십시오.
 {: shortdesc}
@@ -1477,6 +1477,8 @@ Ingress ALB의 성능을 최적화하기 위해 [작업자 노드의 Linux 커�
 {: shortdesc}
 
 자체 사용자 정의 Ingress 제어기의 구성은 특정 Ingress 요구사항이 있는 경우에 유용할 수 있습니다. IBM 제공 Ingress ALB를 사용하는 대신에 자체 Ingress 제어기를 가져오는 경우에는 제어기 이미지를 제공하고 제어기를 유지보수하며 제어기를 업데이트할 책임이 사용자에게 있습니다.
+
+**참고**: 자체 Ingress 제어기 가져오기는 앱에 대한 공용 외부 액세스를 제공하는 경우에만 지원되며 개인용 외부 액세스를 제공하는 경우에는 지원되지 않습니다. 
 
 1. 기본 공용 ALB의 ID를 가져오십시오. 공용 ALB의 형식은 `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`과 유사합니다.
     ```

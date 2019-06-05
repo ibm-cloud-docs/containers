@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,7 @@ subcollection: containers
 {:shortdesc}
 
 -   建立一個叢集，其包含一個具有 1 個工作者節點的工作者節點儲存區。
--   安裝 CLI 來執行 [Kubernetes 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)，以及管理 {{site.data.keyword.registrylong_notm}} 中的 Docker 映像檔。
+-   安裝 CLI 來執行 [Kubernetes 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubectl.docs.kubernetes.io/)，以及管理 {{site.data.keyword.registrylong_notm}} 中的 Docker 映像檔。
 -   在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔儲存庫，以儲存您的映像檔。
 -   將 {{site.data.keyword.toneanalyzershort}} 服務新增至叢集，讓叢集裡的任何應用程式都可以使用該服務。
 
@@ -75,7 +75,7 @@ subcollection: containers
 
 因為需要幾分鐘的時間進行佈建，所以請先建立叢集，再安裝 CLI。
 
-1.  [在 {{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/containers-kubernetes/catalog/cluster/create) 中，建立一個免費或標準叢集，其包含一個具有 1 個工作者節點的工作者節點儲存區。
+1.  [在 {{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/catalog/cluster/create) 中，建立一個免費或標準叢集，其包含一個具有 1 個工作者節點的工作者節點儲存區。
 
     您也可以[在 CLI 中建立叢集](/docs/containers?topic=containers-clusters#clusters_cli)。
     {: tip}
@@ -86,74 +86,67 @@ subcollection: containers
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
 
-
+如果您要改用 {{site.data.keyword.Bluemix_notm}} 主控台，則在建立叢集之後，您可以在 [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) 中從 Web 瀏覽器直接執行 CLI 指令。
+{: tip}
 
 </br>
 **安裝 CLI 及其必備項目**
 
-1.  安裝 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli)，它是 {{site.data.keyword.containerlong_notm}} 外掛程式的必要條件。若要執行 {{site.data.keyword.Bluemix_notm}} CLI 指令，請使用字首 `ibmcloud`。
-2.  遵循提示來選取帳戶及 {{site.data.keyword.Bluemix_notm}} 組織。叢集是帳戶特有的，但與 {{site.data.keyword.Bluemix_notm}} 組織或空間無關。
+1. 安裝 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)。此安裝包括：
+  - 基本 {{site.data.keyword.Bluemix_notm}} CLI。使用 {{site.data.keyword.Bluemix_notm}} CLI 來執行指令的字首是 `ibmcloud`。
+  - {{site.data.keyword.containerlong_notm}} 外掛程式。使用 {{site.data.keyword.Bluemix_notm}} CLI 來執行指令的字首是 `ibmcloud ks`。
+  - {{site.data.keyword.registryshort_notm}} 外掛程式。使用此外掛程式，在 {{site.data.keyword.registryshort_notm}} 中設定及管理專用映像檔儲存庫。執行登錄指令的字首是 `ibmcloud cr`。
 
-4.  安裝 {{site.data.keyword.containerlong_notm}} 外掛程式以建立 Kubernetes 叢集，以及管理工作者節點。若要執行 {{site.data.keyword.containerlong_notm}} 外掛程式指令，請使用字首 `ibmcloud ks`。
+2. 登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
+  ```
+  ibmcloud login
+  ```
+  {: pre}
 
-    ```
-    ibmcloud plugin install container-service -r Bluemix
-    ```
-    {: pre}
+  如果您具有聯合 ID，請使用 `--sso` 旗標來登入。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。
+    {: tip}
 
-5.  若要將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。若要使用 Kubernetes CLI 來執行指令，請使用字首 `kubectl`。
-    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.12.6。
+3. 遵循提示來選取帳戶。
 
-        OS X：   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl)
+5. 驗證已正確安裝外掛程式。
+  ```
+  ibmcloud plugin list
+  ```
+  {: pre}
 
-        Linux：   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl)
+  {{site.data.keyword.containerlong_notm}} 外掛程式會在結果中顯示為 **container-service**，而 {{site.data.keyword.registryshort_notm}} 外掛程式會在結果中顯示為 **container-registry**。
 
-        Windows：   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe)
+6. 若要將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。使用 Kubernetes CLI 來執行指令的字首是 `kubectl`。
 
-          **提示：**如果您使用的是 Windows，請在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。
+  1. 下載與您計劃使用的 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.12.7。
+    - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
+    - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
+    - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
 
-    2.  如果您是使用 OS X 或 Linux，請完成下列步驟。
-        1.  將執行檔移至 `/usr/local/bin` 目錄。
+  2. 如果您是使用 OS X 或 Linux，請完成下列步驟。
 
-            ```
-            mv filepath/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
+    1. 將執行檔移至 `/usr/local/bin` 目錄。
+      ```
+      mv /filepath/kubectl /usr/local/bin/kubectl
+      ```
+      {: pre}
 
-        2.  確定 `/usr/local/bin` 列在 `PATH` 系統變數中。`PATH` 變數包含作業系統可在其中找到執行檔的所有目錄。`PATH` 變數中所列的目錄用於不同的用途。`/usr/local/bin` 是用來儲存軟體的執行檔，該軟體不是作業系統的一部分，並且已由系統管理者手動安裝。
+    2. 確定 `/usr/local/bin` 列在 `PATH` 系統變數中。`PATH` 變數包含作業系統可在其中找到執行檔的所有目錄。`PATH` 變數中所列的目錄用於不同的用途。`/usr/local/bin` 是用來儲存軟體的執行檔，該軟體不是作業系統的一部分，並且已由系統管理者手動安裝。
+      ```
+      echo $PATH
+      ```
+      {: pre}
+      CLI 輸出範例：
+      ```
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      ```
+      {: screen}
 
-            ```
-            echo $PATH
-            ```
-            {: pre}
-
-            CLI 輸出會與下列內容類似。
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  使檔案成為可執行檔。
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-6. 若要在 {{site.data.keyword.registryshort_notm}} 中設定及管理專用映像檔儲存庫，請安裝 {{site.data.keyword.registryshort_notm}} 外掛程式。若要執行登錄指令，請使用字首 `ibmcloud cr`。
-
-    ```
-    ibmcloud plugin install container-registry -r Bluemix
-    ```
-    {: pre}
-
-    若要驗證已適當安裝 container-service 及 container-registry 外掛程式，請執行下列指令：
-
-    ```
-    ibmcloud plugin list
-    ```
-    {: pre}
+    3. 使檔案成為可執行檔。
+      ```
+      chmod +x /usr/local/bin/kubectl
+      ```
+      {: pre}
 
 做得好！您已順利安裝用於下列課程及指導教學的 CLI。接下來，請設定叢集環境並新增 {{site.data.keyword.toneanalyzershort}} 服務。
 
@@ -164,23 +157,13 @@ subcollection: containers
 在 {{site.data.keyword.registryshort_notm}} 中設定專用映像檔儲存庫，並且將密碼新增至 Kubernetes 叢集，讓應用程式可以存取 {{site.data.keyword.toneanalyzershort}} 服務。
 {: shortdesc}
 
-1.  當出現提示時，使用 {{site.data.keyword.Bluemix_notm}} 認證登入 {{site.data.keyword.Bluemix_notm}} CLI。
-
-    ```
-    ibmcloud login [--sso]
-    ```
-    {: pre}
-
-    如果您具有聯合 ID，請使用 `--sso` 旗標來登入。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。
-    {: tip}
-
-2.  如果叢集位於 `default` 以外的資源群組中，請將目標設為該資源群組。若要查看每一個叢集所屬的資源群組，請執行 `ibmcloud ks clusters`。
+1.  如果叢集位於 `default` 以外的資源群組中，請將目標設為該資源群組。若要查看每一個叢集所屬的資源群組，請執行 `ibmcloud ks clusters`。
    ```
    ibmcloud target -g <resource_group_name>
    ```
    {: pre}
 
-3.  在 {{site.data.keyword.registryshort_notm}} 中設定您自己的專用映像檔儲存庫，以安全地儲存 Docker 映像檔，並將其與所有叢集使用者共用。{{site.data.keyword.Bluemix_notm}} 中的專用映像檔儲存庫是透過名稱空間識別。名稱空間是用來建立映像檔儲存庫的唯一 URL，而開發人員可以使用映像檔儲存庫來存取專用 Docker 映像檔。
+2.  在 {{site.data.keyword.registryshort_notm}} 中設定您自己的專用映像檔儲存庫，以安全地儲存 Docker 映像檔，並將其與所有叢集使用者共用。{{site.data.keyword.Bluemix_notm}} 中的專用映像檔儲存庫是透過名稱空間識別。名稱空間是用來建立映像檔儲存庫的唯一 URL，而開發人員可以使用映像檔儲存庫來存取專用 Docker 映像檔。
 
     進一步瞭解使用容器映像檔時如何[保護個人資訊安全](/docs/containers?topic=containers-security#pi)。
 
@@ -191,7 +174,7 @@ subcollection: containers
     ```
     {: pre}
 
-4.  繼續下一步之前，請驗證工作者節點的部署已完成。
+3.  繼續下一步之前，請驗證工作者節點的部署已完成。
 
     ```
         ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -202,7 +185,7 @@ subcollection: containers
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.6
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.7
     ```
     {: screen}
 
@@ -232,8 +215,8 @@ subcollection: containers
 
 2.  複製並貼上終端機中顯示的指令，以設定 `KUBECONFIG` 環境變數。
 
-    **Windows PowerShell 使用者**：不要從 `ibmcloud ks cluster-config` 的輸出複製並貼上 `SET` 指令，而是必須透過執行下列指令來設定 `KUBECONFIG` 環境變數，例如，`$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`。
-    {: note}
+    **Windows PowerShell 使用者**：不要從 `ibmcloud ks cluster-config` 的輸出中複製並貼上 `SET` 指令，例如，您必須改為執行 `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"` 來設定 `KUBECONCONFIG` 環境變數。
+        {: note}
 
 3.  驗證已適當地設定 `KUBECONFIG` 環境變數。
 
@@ -261,8 +244,8 @@ subcollection: containers
     輸出範例：
 
     ```
-    Client Version: v1.12.6
-    Server Version: v1.12.6
+    Client Version: v1.12.7
+    Server Version: v1.12.7
     ```
     {: screen}
 

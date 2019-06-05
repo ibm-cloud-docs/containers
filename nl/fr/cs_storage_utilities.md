@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -29,7 +29,7 @@ subcollection: containers
 ## Installation du plug-in IBM Cloud Block Storage Attacher (bêta)
 {: #block_storage_attacher}
 
-Utilisez le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage Attacher pour connecter du stockage par blocs brut, non formaté et non monté sur un noeud worker dans votre cluster.
+Utilisez le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage Attacher pour connecter du stockage par blocs brut, non formaté et non monté sur un noeud worker dans votre cluster.  
 {: shortdesc}
 
 Par exemple, vous envisagez de stocker vos données avec une solution de stockage défini par logiciel (SDS), telle que [Portworx](/docs/containers?topic=containers-portworx), mais vous ne voulez pas utiliser des noeuds worker bare metal optimisés pour l'utilisation de SDS et fournis avec des disques locaux supplémentaires. Pour ajouter des disques locaux à votre noeud worker non SDS, vous devez créer manuellement vos unités de stockage par blocs dans votre compte d'infrastructure {{site.data.keyword.Bluemix_notm}} et utilisez le plug-in {{site.data.keyword.Bluemix_notm}} Block Volume Attacher pour connecter le stockage à votre noeud worker non SDS.
@@ -39,7 +39,7 @@ Le plug-in {{site.data.keyword.Bluemix_notm}} Block Volume Attacher crée des po
 Vous recherchez des instructions pour mettre à jour ou supprimer le plug-in {{site.data.keyword.Bluemix_notm}} Block Volume Attacher ? Voir [Mise à jour du plug-in](#update_block_attacher) et [Retrait du plug-in](#remove_block_attacher).
 {: tip}
 
-1.  [Suivez les instructions](/docs/containers?topic=containers-integrations#helm) d'installation du client Helm sur votre machine locale, et installez le serveur Helm (Tiller) avec un compte de service dans votre cluster.
+1.  [Suivez les instructions](/docs/containers?topic=containers-helm#public_helm_install) d'installation du client Helm sur votre machine locale, et installez le serveur Helm (Tiller) avec un compte de service dans votre cluster.
 
 2.  Vérifiez que Tiller est installé avec un compte de service.
 
@@ -64,7 +64,7 @@ Vous recherchez des instructions pour mettre à jour ou supprimer le plug-in {{s
 
 4. Installez le plug-in {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. Lors de l'installation de ce plug-in, des classes de stockage par blocs prédéfinies sont ajoutées dans votre cluster.
    ```
-   helm install ibm/ibm-block-storage-attacher --name block-attacher
+   helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
    {: pre}
 
@@ -142,9 +142,9 @@ Vous pouvez mettre à niveau votre plug-in {{site.data.keyword.Bluemix_notm}} Bl
    ```
    {: pre}
 
-2. Facultatif : téléchargez la charte Helm la plus récente sur votre machine locale. Ensuite, extrayez le package et consultez le fichier `release.md` pour trouver les informations relatives à la dernière édition. 
+2. Facultatif : téléchargez la charte Helm la plus récente sur votre machine locale. Ensuite, extrayez le package et consultez le fichier `release.md` pour trouver les informations relatives à la dernière édition.
    ```
-   helm fetch ibm/ibmcloud-block-storage-plugin
+   helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -230,13 +230,13 @@ Pour ajouter d'autres configurations de stockage par blocs, ajouter du stockage 
     ```
     {: pre}
 
-2. Accédez au répertoire `block-storage-utilities`.
+3. Accédez au répertoire `block-storage-utilities`.
    ```
    cd ibmcloud-storage-utilities/block-storage-provisioner
    ```
    {: pre}
 
-3. Ouvrez le fichier `yamlgen.yaml` et spécifiez la configuration de stockage par blocs que vous voulez ajouter à tous les noeuds worker dans le cluster.
+4. Ouvrez le fichier `yamlgen.yaml` et spécifiez la configuration de stockage par blocs que vous voulez ajouter à tous les noeuds worker dans le cluster.
    ```
    #
    # Can only specify 'performance' OR 'endurance' and associated clause
@@ -277,24 +277,23 @@ Pour ajouter d'autres configurations de stockage par blocs, ajouter du stockage 
    </tr>
    <tr>
    <td><code>endurance.tier</code></td>
-   <td>Si vous souhaitez mettre à disposition du stockage de type `endurance`, entrez le nombre d'IOPS par gigaoctet. Par exemple, pour mettre à disposition du stockage par blocs tel qu'il est défini dans la classe de stockage `ibmc-block-bronze`, entrez 2. Pour plus d'informations, voir [Détermination de la configuration de votre stockage par blocs](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). Si vous souhaitez mettre à disposition du stockage de type `performance`, supprimez cette section ou mettez-la en commentaire en ajoutant `#` au début de chaque ligne.
-   </td>
+   <td>Si vous souhaitez mettre à disposition du stockage de type `endurance`, entrez le nombre d'IOPS par gigaoctet. Par exemple, pour mettre à disposition du stockage par blocs tel qu'il est défini dans la classe de stockage `ibmc-block-bronze`, entrez 2. Pour plus d'informations, voir [Détermination de la configuration de votre stockage par blocs](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). Si vous souhaitez mettre à disposition du stockage de type `performance`, supprimez cette section ou mettez-la en commentaire en ajoutant `#` au début de chaque ligne. </td>
    </tr>
    <tr>
    <td><code>size</code></td>
    <td>Entrez la taille de votre stockage en gigaoctets. Voir [Détermination de la configuration de votre stockage par blocs](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) pour connaître les tailles prises en charge pour votre niveau de stockage. </td>
    </tr>
    </tbody>
-   </table>
+   </table>  
 
-4. Récupérez votre nom d'utilisateur pour l'infrastructure IBM Cloud (SoftLayer), ainsi que la clé d'API. Le nom d'utilisateur et la clé d'API sont utilisés par le script `mkpvyaml` pour accéder au cluster.
-   1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/). 
+5. Récupérez votre nom d'utilisateur pour l'infrastructure IBM Cloud (SoftLayer), ainsi que la clé d'API. Le nom d'utilisateur et la clé d'API sont utilisés par le script `mkpvyaml` pour accéder au cluster.
+   1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/).
    2. Dans le menu ![Icône de menu](../icons/icon_hamburger.svg "Icône de menu"), sélectionnez **Infrastructure**.
    3. Dans la barre de menu, sélectionnez **Compte** > **Utilisateurs** > **Liste d'utilisateurs**.
    4. Recherchez l'utilisateur dont vous voulez récupérer le nom d'utilisateur et la clé d'API.
    5. Cliquez sur **Générer** pour générer la clé d'API ou sur **Afficher** pour visualiser votre clé d'API. Une fenêtre en incrustation s'ouvre indiquant le nom d'utilisateur de l'infrastructure et la clé d'API.
 
-5. Stockez les données d'identification dans une variable d'environnement.
+6. Stockez les données d'identification dans une variable d'environnement.
    1. Ajoutez les variables d'environnement.
       ```
       export SL_USERNAME=<infrastructure_username>
@@ -312,7 +311,7 @@ Pour ajouter d'autres configurations de stockage par blocs, ajouter du stockage 
       ```
       {: pre}
 
-6.  Générez et exécutez le conteneur `mkpvyaml`. Lorsque vous exécutez le conteneur à partir de l'image, le script `mkpvyaml.py` est exécuté. Ce script ajoute une unité de stockage par blocs à tous les noeuds worker du cluster et autorise chaque noeud worker à accéder à cette unité. A la fin du script, un fichier YAML nommé `pv-<cluster_name>.yaml` est généré pour vous pour que vous puissiez l'utiliser par la suite pour créer les volumes persistants dans le cluster.
+7.  Générez et exécutez le conteneur `mkpvyaml`. Lorsque vous exécutez le conteneur à partir de l'image, le script `mkpvyaml.py` est exécuté. Ce script ajoute une unité de stockage par blocs à tous les noeuds worker du cluster et autorise chaque noeud worker à accéder à cette unité. A la fin du script, un fichier YAML nommé `pv-<cluster_name>.yaml` est généré pour vous pour que vous puissiez l'utiliser par la suite pour créer les volumes persistants dans le cluster.
     1.  Générez le conteneur `mkpvyaml`.
         ```
         docker build -t mkpvyaml .
@@ -345,7 +344,7 @@ Pour ajouter d'autres configurations de stockage par blocs, ajouter du stockage 
         {: screen}
     2.  Exécutez le conteneur pour lancer l'exécution du script `mkpvyaml.py`.
         ```
-        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
+        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME mkpvyaml
         ```
         {: pre}
 
@@ -413,7 +412,7 @@ Utilisez cette option pour ajouter différentes configurations de stockage par b
    ```
    {: pre}
 
-2. Examinez les étapes 3 et 4 dans la rubrique [Détermination de la configuration de votre stockage par blocs](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) pour choisir le type, la taille et le nombre d'opérations d'entrée-sortie par seconde (IOPS) de l'unité de stockage par blocs que vous souhaitez ajouter à votre noeud worker non SDS.
+2. Examinez les étapes 3 et 4 dans la rubrique [Détermination de la configuration de votre stockage par blocs](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) pour choisir le type, la taille et le nombre d'opérations d'entrée-sortie par seconde (IOPS) de l'unité de stockage par blocs que vous souhaitez ajouter à votre noeud worker non SDS.    
 
 3. Créez l'unité de stockage par blocs dans la même zone que votre noeud worker non SDS.
 
@@ -438,7 +437,7 @@ Utilisez cette option pour ajouter différentes configurations de stockage par b
    Exemple de sortie :
    ```
    id         username          datacenter   storage_type                capacity_gb   bytes_used   ip_addr         lunId   active_transactions
-   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0
+   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0   
    ```
    {: screen}
 
@@ -464,7 +463,7 @@ Utilisez cette option pour ajouter différentes configurations de stockage par b
    ```
    {: screen}
 
-6. Autorisez l'accès du noeud worker non SDS à l'unité de stockage par blocs. Remplacez `<volume_ID>` par l'ID du volume de votre unité de stockage par blocs que vous avez récupéré précédemment, et  `<private_worker_IP>` par l'adresse IP privée du noeud worker non SDS que vous souhaitez utiliser pour connecter l'unité.
+6. Autorisez l'accès du noeud worker non SDS à l'unité de stockage par blocs. Remplacez `<volume_ID>` par l'ID du volume de votre unité de stockage par blocs que vous avez récupéré précédemment, et `<private_worker_IP>` par l'adresse IP privée du noeud worker non SDS que vous souhaitez utiliser pour connecter l'unité. 
 
    ```
    ibmcloud sl block access-authorize <volume_ID> -p <private_worker_IP>
@@ -486,7 +485,7 @@ Utilisez cette option pour ajouter différentes configurations de stockage par b
    Exemple de sortie :
    ```
    ID          name                 type   private_ip_address   source_subnet   host_iqn                                      username   password           allowed_host_id
-   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581
+   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581   
    ```
    {: screen}
 
@@ -503,10 +502,10 @@ Pour connecter l'unité de stockage par blocs à un noeud worker non SDS, vous d
 
 **Avant de commencer** :
 - Vérifiez que vous avez créé [automatiquement](#automatic_block) ou [manuellement](#manual_block) du stockage par blocs brut, non formaté et non monté dans vos noeuds worker non SDS.
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Pour connecter du stockage par blocs brut à des noeuds worker non SDS** :
-1. Préparez la création du volume persistant.
+1. Préparez la création du volume persistant.  
    - **Si vous avez utilisé le conteneur `mkpvyaml` :**
      1. Ouvrez le fichier `pv-<cluster_name>.yaml`.
         ```
@@ -555,7 +554,7 @@ Pour connecter l'unité de stockage par blocs à un noeud worker non SDS, vous d
         </thead>
         <tbody>
       	<tr>
-      	<td><code>metadata.name</code></td>
+          <td><code>metadata.name</code></td>
       	<td>Entrez un nom pour votre volume persistant.</td>
       	</tr>
         <tr>
@@ -583,7 +582,7 @@ Pour connecter l'unité de stockage par blocs à un noeud worker non SDS, vous d
         <td>Entrez l'adresse IP privée du noeud worker à laquelle connecter l'unité de stockage par blocs et que vous avez autorisée auparavant à accéder à cette unité. </td>
         </tr>
         <tr>
-        <td><code>ibm.io/volID</code></td>
+          <td><code>ibm.io/volID</code></td>
         <td>Entrez l'ID du volume de stockage par blocs que vous avez récupéré précédemment. </td>
         </tr>
         <tr>

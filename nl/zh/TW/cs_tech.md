@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, docker
 
@@ -97,8 +97,7 @@ subcollection: containers
 
 <dt>部署</dt>
 <dd>部署是一種 Kubernetes 資源，您可在其中指定執行應用程式所需的其他資源或功能的相關資訊（例如服務、持續性儲存空間或註釋）。將部署記載在配置 YAML 檔案中，然後再將其套用至叢集。Kubernetes 主節點會配置資源，並將容器部署至具有可用容量之工作者節點上的 Pod。
-</br></br>
-定義應用程式的更新策略，包括您要在漸進式更新期間新增的 Pod 數目，以及每次更新時可能無法使用的 Pod 數目。當您執行漸進式更新時，部署會檢查更新是否正常運作，並且在偵測到失敗時停止推出。</dd>
+</br></br>定義應用程式的更新策略，包括您要在漸進式更新期間新增的 Pod 數目，以及每次更新時可能無法使用的 Pod 數目。當您執行漸進式更新時，部署會檢查更新是否正常運作，並且在偵測到失敗時停止推出。</dd>
 
 <dt>Pod</dt>
 <dd>稱為 Pod 的 Kubernetes 資源會部署、執行及管理每個部署至叢集的容器化應用程式。Pod 代表 Kubernetes 叢集裡的小型可部署單元，並且用來將必須視為單一單元的容器分組在一起。在大部分情況下，每一個容器都會部署至其專屬 Pod。不過，應用程式可能會要求將一個容器及其他協助容器部署至某個 Pod，以便使用相同的專用 IP 位址來為那些容器定址。</dd>
@@ -174,7 +173,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     </tr>
     </tbody></table></dd>
   <dt>工作者節點</dt>
-    <dd>每一個工作者節點都是雲端環境中，實體機器（裸機）或是在實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、個別的運算資源、網路及磁區服務。內建的安全特性提供了隔離、資源管理功能及工作者節點安全規範。</br></br><p class="note">不支援修改預設工作者節點元件，例如，`kubelet`，可能導致非預期的結果。</p>下表說明工作者節點的元件。
+    <dd>每一個工作者節點都是雲端環境中，實體機器（裸機）或是在實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、個別的運算資源、網路及磁區服務。內建安全特性提供隔離、資源管理功能及工作者節點安全法規遵循。</br></br><p class="note">不支援修改預設工作者節點元件，例如，`kubelet`，可能導致非預期的結果。</p>下表說明工作者節點的元件。
     <table>
     <caption>工作者節點的元件</caption>
     <thead>
@@ -186,7 +185,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <tr>
     <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
-    <td>對於執行 Kubernetes 1.10 版或更新版本的叢集，`ibm-master-proxy` 會將工作者節點中的要求轉遞至高可用性主節點抄本的 IP 位址。在單一區域叢集裡，主節點在個別主機上具有三個抄本，搭配一個主節點 IP 位址及網域名稱。對於具有多區域功能之區域中的叢集，主節點具有三個分散在各區域之中的抄本。因此，每一個主節點都有向 DNS 登錄的專屬 IP 位址，搭配一個用於整個叢集主節點的網域名稱。</td>
+    <td>`ibm-master-proxy` 會將工作者節點中的要求轉遞至高可用性主節點抄本的 IP 位址。在單一區域叢集裡，主節點在個別主機上具有三個抄本，搭配一個主節點 IP 位址及網域名稱。對於具有多區域功能之區域中的叢集，主節點具有三個分散在各區域之中的抄本。因此，每一個主節點都有向 DNS 登錄的專屬 IP 位址，搭配一個用於整個叢集主節點的網域名稱。</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
@@ -256,5 +255,5 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     </tbody></table></dd>
 </dl>
 
-想要查看 {{site.data.keyword.containerlong_notm}} 如何與其他產品及服務搭配使用嗎？請參閱部分[整合](/docs/containers?topic=containers-integrations#integrations)。
+想要查看 {{site.data.keyword.containerlong_notm}} 如何與其他產品及服務搭配使用嗎？請參閱部分[整合](/docs/containers?topic=containers-supported_integrations#supported_integrations)。
 {: tip}

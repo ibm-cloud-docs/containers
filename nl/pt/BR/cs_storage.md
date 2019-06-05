@@ -26,7 +26,7 @@ subcollection: containers
 # Esse conteúdo foi movido
 Use a navegação reduzível **Armazenando dados em armazenamento persistente** ou clique em um dos links a seguir para acessar o conteúdo.
 
-- [ Planejando o armazenamento altamente disponível ](/docs/containers?topic=containers-storage_planning#storage_planning)
+- [Planejando armazenamento altamente disponível](/docs/containers?topic=containers-storage_planning#storage_planning)
 - [Entendendo as informações básicas de armazenamento do Kubernetes](/docs/containers?topic=containers-kube_concepts#kube_concepts)
 - [Armazenando dados no IBM File Storage for IBM Cloud](/docs/containers?topic=containers-file_storage#file_storage)
 - [Armazenando dados no IBM Block Storage for IBM Cloud](/docs/containers?topic=containers-block_storage#block_storage)

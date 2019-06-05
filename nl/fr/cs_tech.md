@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, docker
 
@@ -145,8 +145,8 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
 
 <dl>
   <dt>Maître Kubernetes</dt>
-    <dd>Le maître Kubernetes est chargé de gérer toutes les ressources de calcul, de réseau et de stockage dans le cluster. Il assure que vos applications et services conteneurisés sont déployés de manière égale sur les noeuds worker dans le cluster. En fonction de la configuration de vos applications et de vos services, le maître détermine le noeud worker qui dispose des ressources suffisantes pour répondre aux besoins de l'application.</br></br>Le tableau suivant présente les composants du maître Kubernetes.
-    <table>
+    <dd>Le maître Kubernetes est chargé de gérer toutes les ressources de calcul, de réseau et de stockage dans le cluster. Il assure que vos applications et services conteneurisés sont déployés de manière égale sur les noeuds worker dans le cluster. En fonction de la configuration de vos applications et de vos services, le maître détermine le noeud worker qui dispose des ressources suffisantes pour répondre aux besoins de l'application.</br></br>Sont décrits dans le tableau suivant les composants du maître Kubernetes :
+<table>
     <caption>Composants du maître Kubernetes</caption>
     <thead>
     <th>Composant du maître</th>
@@ -175,7 +175,7 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     </tr>
     </tbody></table></dd>
   <dt>Noeud worker</dt>
-    <dd>Chaque noeud worker correspond à une machine physique (bare metal) ou à une machine virtuelle qui s'exécute sur du matériel physique dans l'environnement de cloud. Lorsque vous mettez à disposition un noeud worker, vous déterminez les ressources disponibles dans les conteneurs qui sont hébergés sur ce noeud worker. Prêts à l'emploi, vos noeuds worker sont configurés avec un moteur Docker Engine géré par {{site.data.keyword.IBM_notm}}, ainsi que des ressources de calcul, un réseau et un service de volumes distincts. Les fonctions de sécurité intégrées assurent l'isolement, offrent des capacités de gestion des ressources et garantissent la conformité des noeuds worker en matière de sécurité.</br></br><p class="note">La modification des composants de noeud worker par défaut, tels que le `kubelet` n'est pas prise en charge et peut entraîner des résultats imprévisibles.</p>Le tableau suivant présente les composants d'un noeud worker.
+    <dd>Chaque noeud worker correspond à une machine physique (bare metal) ou à une machine virtuelle qui s'exécute sur du matériel physique dans l'environnement de cloud. Lorsque vous mettez à disposition un noeud worker, vous déterminez les ressources disponibles dans les conteneurs qui sont hébergés sur ce noeud worker. Prêts à l'emploi, vos noeuds worker sont configurés avec un moteur Docker Engine géré par {{site.data.keyword.IBM_notm}}, ainsi que des ressources de calcul, un réseau et un service de volumes distincts. Les fonctions de sécurité intégrées assurent l'isolement, offrent des capacités de gestion des ressources et garantissent la conformité des noeuds worker en matière de sécurité. </br></br><p class="note">La modification des composants de noeud worker par défaut, tels que le `kubelet` n'est pas prise en charge et peut entraîner des résultats imprévisibles.</p>Le tableau suivant présente les composants d'un noeud worker.
     <table>
     <caption>Composants des noeuds worker</caption>
     <thead>
@@ -187,7 +187,7 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     <tr>
     <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
-    <td>Pour les clusters qui exécutent Kubernetes version 1.10 ou ultérieure, `ibm-master-proxy` transfère les demandes du noeud worker aux adresses IP des répliques du maître à haute disponibilité. Dans les clusters à zone unique, le maître comporte trois répliques sur des hôtes distincts avec une adresse IP du maître et un nom de domaine. Pour les clusters qui se trouvent dans une zone compatible avec plusieurs zones, le maître comporte trois répliques réparties sur les différentes zones. Par conséquent, chaque maître dispose de sa propre adresse IP enregistrée avec DNS, avec un nom de domaine pour le maître cluster complet.</td>
+    <td>`ibm-master-proxy` transfère les demandes du noeud worker aux adresses IP des répliques du maître à haute disponibilité. Dans les clusters à zone unique, le maître comporte trois répliques sur des hôtes distincts avec une adresse IP du maître et un nom de domaine. Pour les clusters qui se trouvent dans une zone compatible avec plusieurs zones, le maître comporte trois répliques réparties sur les différentes zones. Par conséquent, chaque maître dispose de sa propre adresse IP enregistrée avec DNS, avec un nom de domaine pour le maître cluster complet.</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
@@ -257,5 +257,5 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     </tbody></table></dd>
 </dl>
 
-Vous souhaitez voir comment utiliser {{site.data.keyword.containerlong_notm}} avec d'autres produits et services ? Consultez quelques exemples d'[intégrations](/docs/containers?topic=containers-integrations#integrations).
+Vous souhaitez voir comment utiliser {{site.data.keyword.containerlong_notm}} avec d'autres produits et services ? Consultez quelques exemples d'[intégrations](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}

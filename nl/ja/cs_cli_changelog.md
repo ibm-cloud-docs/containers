@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -45,16 +45,42 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
+<td>0.2.102</td>
+<td>2019 年 4 月 15 日</td>
+<td>ネットワーク・ロード・バランサー (NLB) IP アドレスのホスト名を登録および管理する [`ibmcloud ks nlb-dns` コマンド・グループ](/docs/containers?topic=containers-cs_cli_reference#nlb-dns)と NLB ホスト名のヘルス・チェック・モニターを作成および変更する [`ibmcloud ks nlb-dns-monitor` コマンド・グループ](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_nlb-dns-monitor)が追加されました。詳しくは、[DNS ホスト名への NLB IP の登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)を参照してください。
+</td>
+</tr>
+<tr>
+<td>0.2.99</td>
+<td>2019 年 4 月 9 日</td>
+<td><ul>
+<li>ヘルプ・テキストを更新しました。</li>
+<li>Go バージョンを 1.12.2 に更新しました。</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.95</td>
+<td>2019 年 4 月 3 日</td>
+<td><ul>
+<li>管理対象クラスター・アドオンのバージョン管理サポートが追加されました。</li>
+<ul><li>[<code>ibmcloud ks addon-versions</code>](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions) コマンドを追加します。</li>
+<li>[ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable) コマンドに <code>--version</code> フラグを追加します。</li></ul>
+<li>ヘルプ・テキストの翻訳を更新しました。</li>
+<li>ヘルプ・テキスト内の資料への短縮リンクを更新しました。</li>
+<li>JSON エラー・メッセージが正しくない形式で出力されるバグを修正しました。</li>
+<li>一部のコマンドでサイレント・フラグ (`-s`) を使用するとエラーが出力されないバグを修正しました。</li>
+</ul></td>
+</tr>
+<tr>
 <td>0.2.80</td>
 <td>2019 年 3 月 19 日</td>
 <td><ul>
-<li>[VRF 対応アカウント](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)で Kubernetes バージョン 1.11 以降を実行する標準クラスターで、[サービス・エンドポイントを使用したマスターからワーカーへの通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)を有効にするためのサポートが追加されました。以下のコマンドの使用方法については、[プライベート・サービス・エンドポイントの設定](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)および[パブリック・サービス・エンドポイントの設定](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)を参照してください。<ul>
+<li>[VRF 対応アカウント](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)で Kubernetes バージョン 1.11 以降を実行する標準クラスターで、[サービス・エンドポイントを使用したマスターからワーカーへの通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)を有効にするためのサポートが追加されました。<ul>
 <li>`--private-service-endpoint` フラグと `--public-service-endpoint` フラグを [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) コマンドに追加。</li>
 <li>**Public Service Endpoint URL** フィールドと **Private Service Endpoint URL** フィールドを <code>ibmcloud ks cluster-get</code> の出力に追加。</li>
 <li>[<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint) コマンドを追加します。</li>
 <li>[<code>ibmcloud ks cluster-feature-enable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_public_service_endpoint) コマンドを追加します。</li>
-<li>[<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable_public_service_endpoint) コマンドを追加します。</li>
-<li>[<code>ibmcloud ks cluster-feature-ls</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls) コマンドを追加します。</li>
+<li>[<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable) コマンドを追加します。</li>
 </ul></li>
 <li>資料および翻訳を更新。</li>
 <li>Go バージョンを 1.11.6 に更新しました。</li>
@@ -73,7 +99,7 @@ subcollection: containers
 <td>0.2.61</td>
 <td>2019 年 2 月 26 日</td>
 <td><ul>
-<li>`cluster-pull-secret-apply` コマンドが追加されました。このコマンドは、クラスターの IAM サービス ID、ポリシー、API キー、イメージ・プル・シークレットを作成して、`default` Kubernetes 名前空間で実行されるコンテナーが IBM Cloud Container Registry からイメージをプルできるようにします。新規クラスターの場合、デフォルトで、IAM 資格情報を使用するイメージ・プル・シークレットが作成されます。既存のクラスターを更新する際、またはクラスターで作成時にイメージ・プル・シークレット・エラーが発生した場合に、このコマンドを使用してください。詳しくは、[資料](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth)を参照してください。</li>
+<li>`cluster-pull-secret-apply` コマンドが追加されました。このコマンドは、クラスターの IAM サービス ID、ポリシー、API キー、イメージ・プル・シークレットを作成して、`default` Kubernetes 名前空間で実行されるコンテナーが IBM Cloud Container Registry からイメージをプルできるようにします。 新規クラスターの場合、デフォルトで、IAM 資格情報を使用するイメージ・プル・シークレットが作成されます。 既存のクラスターを更新する際、またはクラスターで作成時にイメージ・プル・シークレット・エラーが発生した場合に、このコマンドを使用してください。 詳しくは、[資料](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth)を参照してください。</li>
 <li>`ibmcloud ks init` の失敗によってヘルプ出力が表示されるバグを修正しました。</li>
 </ul></td>
 </tr>
@@ -89,7 +115,7 @@ subcollection: containers
 <td>0.2.44</td>
 <td>2019 年 2 月 8 日</td>
 <td><ul>
-<li>`--skip-rbac` オプションが `ibmcloud ks cluster-config` コマンドに追加されました。このオプションにより、{{site.data.keyword.Bluemix_notm}}IAM サービス・アクセス役割に基づくユーザー Kubernetes RBAC 役割をクラスター構成に追加する処理が省略されます。[独自の Kubernetes RBAC 役割を管理](/docs/containers?topic=containers-users#rbac)する場合にのみ、このオプションを組み込んでください。[{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-access_reference#service)を使用してすべての RBAC ユーザーを管理する場合は、このオプションを組み込まないでください。</li>
+<li>`--skip-rbac` オプションが `ibmcloud ks cluster-config` コマンドに追加されました。このオプションにより、{{site.data.keyword.Bluemix_notm}}IAM サービス・アクセス役割に基づくユーザー Kubernetes RBAC 役割をクラスター構成に追加する処理が省略されます。 [独自の Kubernetes RBAC 役割を管理](/docs/containers?topic=containers-users#rbac)する場合にのみ、このオプションを組み込んでください。 [{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-access_reference#service)を使用してすべての RBAC ユーザーを管理する場合は、このオプションを組み込まないでください。</li>
 <li>Go バージョンを 1.11.5 に更新しました。</li>
 </ul></td>
 </tr>
@@ -108,7 +134,7 @@ subcollection: containers
 <tr>
 <td>0.2.19</td>
 <td>2019 年 1 月 16 日</td>
-<td><ul><li>再設計されたベータ版の {{site.data.keyword.containerlong_notm}} プラグイン CLI を有効にする、`IKS_BETA_VERSION` 環境変数が追加されました。再設計されたこのバージョンを試用するには、[ベータ版のコマンド構造の使用](/docs/containers?topic=containers-cs_cli_reference#cs_beta)を参照してください。</li>
+<td><ul><li>再設計されたベータ版の {{site.data.keyword.containerlong_notm}} プラグイン CLI を有効にする、`IKS_BETA_VERSION` 環境変数が追加されました。 再設計されたこのバージョンを試用するには、[ベータ版のコマンド構造の使用](/docs/containers?topic=containers-cs_cli_reference#cs_beta)を参照してください。</li>
 <li>`ibmcloud ks subnets` のデフォルトのタイムアウト値を `60s` に引き上げました。</li>
 <li>軽微なバグと翻訳を修正しました。</li></ul></td>
 </tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -64,7 +64,7 @@ A tabela a seguir descreve por que é possível criar diferentes tipos de objeto
 | [`Pod` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | Um pod é a menor unidade implementável para suas cargas de trabalho e pode conter um ou mais contêineres. Semelhante a contêineres, os pods são projetados para serem descartáveis e são frequentemente usados para teste de unidade de recursos de app. Para evitar tempo de inatividade para seu app, considere a implementação de pods com um controlador do Kubernetes, como uma implementação. Uma implementação ajuda a gerenciar múltiplos pods, réplicas, ajuste de escala de pod, lançamentos e mais. |
 | [`ReplicaSet` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | Um conjunto de réplicas assegura que múltiplas réplicas de seu pod estejam em execução e reagenda um pod se ele fica inativo. Você pode criar um conjunto de réplicas para testar como o planejamento de pod funciona, mas para gerenciar atualizações de aplicativo, lançamentos e ajuste de escala, crie uma implementação em seu lugar. |
 | [`Deployment` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | Uma implementação é um controlador que gerencia um pod ou um [conjunto de réplicas ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) de modelos de pod. É possível criar pods ou conjuntos de réplicas sem uma implementação para testar recursos de app. Para uma configuração de nível de produção, use implementações para gerenciar atualizações de app, lançamentos e ajuste de escala. |
-| [`StatefulSet` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Semelhante a implementações, um conjunto stateful é um controlador que gerencia um conjunto de réplicas de pods. Diferentemente de implementações, um conjunto stateful assegura que seu pod tenha uma identidade de rede exclusiva que mantém seu estado no reagendamento. Quando você desejar executar as cargas de trabalho na nuvem, tente projetar seu app para ser stateless para que suas instâncias de serviço sejam independentes umas das outras e possam falhar sem uma interrupção de serviço. No entanto, alguns apps, como bancos de dados, devem ser stateless. Para esses casos, considere criar um conjunto stateful e usar o armazenamento de [arquivo](/docs/containers?topic=containers-file_storage#file_statefulset), [bloco](/docs/containers?topic=containers-block_storage#block_statefulset) ou [objeto](/docs/containers?topic=containers-object_storage#cos_statefulset) como o armazenamento persistente para seu conjunto stateful. Também é possível instalar o [Portworx](/docs/containers?topic=containers-portworx) na parte superior de seus nós do trabalhador bare metal e usar o Portworx como uma solução de armazenamento definida para software altamente disponível para gerenciar o armazenamento persistente para seu conjunto stateful. |
+| [`StatefulSet` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Semelhante a implementações, um conjunto stateful é um controlador que gerencia um conjunto de réplicas de pods. Diferentemente de implementações, um conjunto stateful assegura que seu pod tenha uma identidade de rede exclusiva que mantém seu estado no reagendamento. Quando desejar executar as cargas de trabalho na nuvem, tente [projetar seu aplicativo para ser stateless](/docs/containers?topic=containers-strategy#cloud_workloads), para que suas instâncias de serviço sejam independentes umas das outras e possam falhar sem uma interrupção de serviço. No entanto, alguns aplicativos, como bancos de dados, devem ser stateful. Para esses casos, considere criar um conjunto stateful e usar o armazenamento de [arquivo](/docs/containers?topic=containers-file_storage#file_statefulset), [bloco](/docs/containers?topic=containers-block_storage#block_statefulset) ou [objeto](/docs/containers?topic=containers-object_storage#cos_statefulset) como o armazenamento persistente para seu conjunto stateful. Também é possível instalar o [Portworx](/docs/containers?topic=containers-portworx) na parte superior de seus nós do trabalhador bare metal e usar o Portworx como uma solução de armazenamento definida para software altamente disponível para gerenciar o armazenamento persistente para seu conjunto stateful. |
 | [`DaemonSet` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Use um conjunto de daemons quando tiver que executar o mesmo pod em cada nó do trabalhador em seu cluster. Os pods gerenciados por um conjunto de daemons são planejados automaticamente quando um nó do trabalhador é incluído em um cluster. Os casos de uso típicos incluem coletores de log, como `logstash` ou `prometheus`, que coletam logs de cada nó do trabalhador para fornecer insight sobre o funcionamento de um cluster ou um app. |
 | [`Job` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | Uma tarefa assegura que um ou mais pods sejam executados com êxito até a conclusão. Você pode usar uma tarefa para filas ou tarefas em lote para suportar o processamento paralelo de itens de trabalho separados, porém relacionados, como um determinado número de quadros a serem renderizados, e-mails a serem enviados e arquivos a serem convertidos. Para planejar uma tarefa para ser executada em determinados momentos, use um [`CronJob` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
 {: caption="Tipos de objetos de carga de trabalho do Kubernetes que podem ser criados." caption-side="top"}
@@ -78,7 +78,7 @@ Veja [Especificando seus requisitos de app em seu arquivo YAML](#app_yaml) para 
 * [Portas](#port)
 * [ Solicitações de recurso e limites ](#resourcereq)
 * [ Análises de prontidão e prontidão ](#probe)
-* [Serviços](#service) para expor o serviço de app em uma porta
+* [Serviços](#app-service) para expor o serviço de app em uma porta
 * [ Configmaps ](#configmap)  para configurar variáveis de ambiente de contêiner
 * [ Secrets ](#secret)  para configurar variáveis de ambiente de contêiner
 * [Volumes persistentes](#pv) que são montados para o contêiner para armazenamento
@@ -103,14 +103,14 @@ Ambos os recursos definem os pares chave-valor, mas são usados para diferentes 
 <dt>Segredo</dt>
 <dd>Forneça informações confidenciais para suas cargas de trabalho, como a seguir. Observe que outros usuários do cluster podem ter acesso ao segredo, portanto, certifique-se de que saiba que as informações secretas podem ser compartilhadas com esses usuários.
 <ul><li><strong>Informações pessoalmente identificáveis (PII)</strong>: armazene informações confidenciais, como endereços de e-mail ou outros tipos de informações que são necessárias para conformidade de empresa ou regulamentação governamental em segredos.</li>
-<li><strong>Credenciais</strong>: coloque credenciais, como senhas, chaves e tokens, em um segredo para reduzir o risco de exposição acidental. Por exemplo, quando você [liga um serviço](/docs/containers?topic=containers-integrations#adding_cluster) a seu cluster, as credenciais são armazenadas em um segredo.</li></ul></dd>
+<li><strong>Credenciais</strong>: coloque credenciais, como senhas, chaves e tokens, em um segredo para reduzir o risco de exposição acidental. Por exemplo, quando você [liga um serviço](/docs/containers?topic=containers-service-binding#bind-services) a seu cluster, as credenciais são armazenadas em um segredo.</li></ul></dd>
 </dl>
 
 Deseja tornar seus segredos ainda mais seguros? Peça ao administrador do cluster para [ativar o {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) em seu cluster para criptografar segredos novos e existentes.
 {: tip}
 
 ### Como posso incluir serviços da IBM em meu app, como o Watson?
-Consulte  [ Incluindo serviços em apps ](/docs/containers?topic=containers-integrations#adding_app).
+Consulte  [ Incluindo serviços em apps ](/docs/containers?topic=containers-service-binding#adding_app).
 
 ### Como posso ter certeza de que meu app tem os recursos certos?
 Quando você [especifica seu arquivo YAML do app](#app_yaml), é possível incluir funcionalidades do Kubernetes em sua configuração do aplicativo que ajudam seu app a obter os recursos certos. Em particular, [configure limites de recurso e solicitações ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) para cada contêiner que está definido em seu arquivo YAML.
@@ -121,7 +121,7 @@ Além disso, seu administrador de cluster pode configurar controles de recurso q
 *  [ Prioridade de Pod ](/docs/containers?topic=containers-pod_priority#pod_priority)
 
 ### Como posso acessar meu app?
-É possível acessar seu aplicativo privadamente dentro do cluster [usando um serviço `clusterIP`](/docs/containers?topic=containers-cs_network_planning#in-cluster).
+É possível acessar seu aplicativo de forma privada, dentro do cluster, [usando um serviço `clusterIP`](/docs/containers?topic=containers-cs_network_planning#in-cluster).
 {: shortdesc}
 
 Se desejar expor publicamente seu app, você terá opções diferentes que dependem do tipo de cluster.
@@ -131,7 +131,7 @@ Se desejar expor publicamente seu app, você terá opções diferentes que depen
 *  **Cluster padrão somente de VLAN privada**: é possível expor seu app usando um [serviço NodePort, balanceador de carga ou Ingress](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). Deve-se também abrir a porta para o endereço IP privado do serviço em seu firewall.
 
 ### Depois de implementar meu app, como posso monitorar seu funcionamento?
-É possível configurar a [criação de log e monitoramento](/docs/containers?topic=containers-health#health) do {{site.data.keyword.Bluemix_notm}} para seu cluster. Também é possível escolher integrar a um [serviço de criação de log ou de monitoramento](/docs/containers?topic=containers-integrations#health_services) de terceiros.
+É possível configurar a [criação de log e o monitoramento](/docs/containers?topic=containers-health#health) do {{site.data.keyword.Bluemix_notm}} para seu cluster. Também é possível escolher integrar a um [serviço de criação de log ou de monitoramento](/docs/containers?topic=containers-supported_integrations#health_services) de terceiros.
 {: shortdesc}
 
 ### Como posso manter meu app atualizado?
@@ -159,8 +159,7 @@ Deseja controlar o acesso no nível do aplicativo? Para criar um fluxo de conex�
 ## Planejando implementações altamente disponíveis
 {: #highly_available_apps}
 
-Quanto mais amplamente você distribui a configuração entre múltiplos nós do trabalhador e clusters,
-menos provável que os usuários tenham que experimentar tempo de inatividade com seu app.
+Quanto mais amplamente você distribui a configuração entre múltiplos nós do trabalhador e clusters, menos provável que os usuários tenham que experimentar tempo de inatividade com seu app.
 {: shortdesc}
 
 Revise as potenciais configurações de app a seguir que são ordenadas com graus crescentes de disponibilidade.
@@ -173,7 +172,7 @@ Revise as potenciais configurações de app a seguir que são ordenadas com grau
 
 Também é possível [conectar múltiplos clusters em regiões diferentes com um balanceador de carga global](/docs/containers?topic=containers-plan_clusters#multiple_clusters) para aumentar a alta disponibilidade.
 
-### Aumentando a disponibilidade de seu app
+### Aumentando a disponibilidade de seu aplicativo
 {: #increase_availability}
 
 Considere as opções a seguir para aumentar a disponibilidade de seu app.
@@ -183,17 +182,11 @@ Considere as opções a seguir para aumentar a disponibilidade de seu app.
   <dt>Usar implementações e conjuntos de réplicas para implementar seu app e suas dependências</dt>
     <dd><p>Uma implementação é um recurso do Kubernetes que pode ser usado para declarar todos os componentes de seu app e suas dependências. Com as implementações, não é necessário anotar todas as etapas e, em vez disso, é possível se concentrar no app.</p>
     <p>Ao implementar mais de um pod, um conjunto de réplicas é criado automaticamente para as suas implementações que monitora os pods e assegura que o número especificado de pods esteja em funcionamento em todos os momentos. Quando um pod fica inativo, o conjunto de réplicas substitui o pod não responsivo por um novo.</p>
-    <p>É possível usar uma implementação para definir estratégias de atualização para seu app incluindo o número de
-módulos que você deseja incluir durante uma atualização contínua e o número de pods que podem estar indisponíveis
-por vez. Ao executar uma atualização contínua, a implementação verifica se a revisão está ou não
-funcionando e para o lançamento quando falhas são detectadas.</p>
+    <p>É possível usar uma implementação para definir estratégias de atualização para seu app incluindo o número de módulos que você deseja incluir durante uma atualização contínua e o número de pods que podem estar indisponíveis por vez. Ao executar uma atualização contínua, a implementação verifica se a revisão está ou não funcionando e para o lançamento quando falhas são detectadas.</p>
     <p>Com as implementações, é possível implementar simultaneamente múltiplas revisões com diferentes sinalizações. Por exemplo, é possível testar uma implementação primeiro antes de decidir enviá-la por push para a produção.</p>
     <p>As implementações permitem manter o controle de qualquer revisão implementada. Será possível usar esse histórico para recuperar uma versão anterior se você descobrir que as suas atualizações não estão funcionando conforme o esperado.</p></dd>
   <dt>Incluir réplicas suficientes para a carga de trabalho de seu app, mais duas</dt>
-    <dd>Para tornar seu app ainda mais altamente disponível e mais resiliente à falha, considere a inclusão
-de réplicas extras, além do mínimo, para manipular a carga de trabalho esperada. As réplicas extras podem manipular a
-carga de trabalho no caso de um pod travar e o conjunto de réplicas ainda não tiver recuperado o pod travado. Para
-proteção contra duas falhas simultâneas, inclua duas réplicas extras. Essa configuração é um padrão N + 2, em que N é o número de réplicas para manipular a carga de trabalho recebida e + 2 são duas réplicas extras. Desde que seu cluster tenha espaço suficiente, será possível ter tantos pods quantos você quiser.</dd>
+    <dd>Para tornar seu app ainda mais altamente disponível e mais resiliente à falha, considere a inclusão de réplicas extras, além do mínimo, para manipular a carga de trabalho esperada. As réplicas extras podem manipular a carga de trabalho no caso de um pod travar e o conjunto de réplicas ainda não tiver recuperado o pod travado. Para proteção contra duas falhas simultâneas, inclua duas réplicas extras. Essa configuração é um padrão N + 2, em que N é o número de réplicas para manipular a carga de trabalho recebida e + 2 são duas réplicas extras. Desde que seu cluster tenha espaço suficiente, será possível ter tantos pods quantos você quiser.</dd>
   <dt>Difundir pods em múltiplos nós (antiafinidade)</dt>
     <dd><p>Quando você cria a sua implementação, cada pod pode ser implementado no mesmo nó do trabalhador. Isso é conhecido como afinidade ou colocação. Para proteger seu app contra falha do nó do trabalhador, será possível configurar sua implementação para difundir os pods em múltiplos nós do trabalhador usando a opção <code>podAntiAffinity</code> com seus clusters padrão. É possível definir dois tipos de antiafinidade do pod: preferencial ou necessário.
       <p>Para obter mais informações, veja a documentação do Kubernetes no <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Abre em uma nova guia ou janela)">Designando pods aos nós</a>.</p>
@@ -205,11 +198,11 @@ proteção contra duas falhas simultâneas, inclua duas réplicas extras. Essa c
   <p>Ao usar um conjunto de réplicas e especificar a antiafinidade do pod, o Kubernetes difunde seus pods de app entre os nós. Se os seus nós estiverem em múltiplas zonas, os pods serão difundidos pelas zonas, aumentando a disponibilidade do seu app. Se você desejar limitar seus apps para serem executados somente em uma zona, será possível configurar a afinidade de pod ou criar e rotular um conjunto de trabalhadores em uma zona. Para obter mais informações, consulte [Alta disponibilidade para clusters de múltiplas zonas](/docs/containers?topic=containers-plan_clusters#ha_clusters).</p>
   <p><strong>Em uma implementação de cluster de múltiplas zonas, meus pods de app são distribuídos uniformemente entre os nós?</strong></p>
   <p>Os pods são distribuídos uniformemente entre as zonas, mas nem sempre entre os nós. Por exemplo, se você tiver um cluster com 1 nó em cada uma das 3 zonas e implementar um conjunto de réplicas de 6 pods, cada nó obterá dois pods. No entanto, se você tiver um cluster com 2 nós em cada uma das 3 zonas e implementar um conjunto de réplicas de 6 pods, cada zona terá 2 pods planejados e poderá ou não planejar 1 pod por nó. Para obter mais controle sobre o planejamento, é possível [configurar a afinidade de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
-  <p><strong> Se uma zona ficar inativa, como os pods serão reprogramados para os nós restantes nas outras zonas?</strong></br>Isso depende da política de planejamento que você usou na implementação. Se você incluiu a [afinidade de pod específica do nó ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), seus pods não serão reprogramados. Se você não tiver feito isso, os pods serão criados em nós do trabalhador disponíveis em outras zonas, mas eles podem não ser balanceados. Por exemplo, os 2 pods podem ser difundidos entre os 2 nós disponíveis ou ambos podem ser planejados para 1 nó com capacidade disponível. Da mesma forma, quando a zona indisponível retornar, os pods não serão excluídos e rebalanceados automaticamente entre os nós. Se desejar que os pods sejam rebalanceados entre as zonas depois que a zona estiver de volta, considere usar o [Desplanejador do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes-incubator/descheduler).</p>
+  <p><strong>Se uma zona ficar inativa, como os pods serão reprogramados para os nós restantes em outras zonas?</strong></br>Isso dependerá de sua política de planejamento usada na implementação. Se você incluiu a [afinidade de pod específica do nó ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), seus pods não serão reprogramados. Se você não tiver feito isso, os pods serão criados em nós do trabalhador disponíveis em outras zonas, mas eles podem não ser balanceados. Por exemplo, os 2 pods podem ser difundidos entre os 2 nós disponíveis ou ambos podem ser planejados para 1 nó com capacidade disponível. Da mesma forma, quando a zona indisponível retornar, os pods não serão excluídos e rebalanceados automaticamente entre os nós. Se desejar que os pods sejam rebalanceados entre as zonas depois que a zona estiver de volta, considere usar o [Desplanejador do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes-incubator/descheduler).</p>
   <p><strong>Dica</strong>: em clusters de múltiplas zonas, tente manter a capacidade do seu nó do trabalhador em 50% por zona, para que você tenha capacidade suficiente para proteger o seu cluster com relação a uma falha zonal.</p>
-  <p><strong>E se eu desejar difundir meu app entre regiões?</strong></br>Para proteger seu app de uma falha de região, crie um segundo cluster em outra região, [configure um balanceador de carga global](/docs/containers?topic=containers-plan_clusters#multiple_clusters) para conectar seus clusters e use um YAML de implementação para implementar um conjunto de réplicas duplicadas com [pod antiafinidade ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para seu app.</p>
+  <p><strong>E se eu desejar difundir meu aplicativo entre regiões?</strong></br>Para proteger seu aplicativo contra uma falha de região, crie um segundo cluster em outra região, [configure um balanceador de carga global](/docs/containers?topic=containers-plan_clusters#multiple_clusters) para conectar seus clusters e use um YAML de implementação para implementar um conjunto de réplicas duplicado com [antiafinidade de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para seu aplicativo.</p>
   <p><strong>E se meus apps precisarem de armazenamento persistente?</strong></p>
-  <p>Use um serviço de nuvem como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) ou o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage).</p></dd>
+  <p>Use um serviço de nuvem como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about).</p></dd>
 </dl>
 
 ## Especificando os requisitos de app em seu arquivo YAML
@@ -227,7 +220,7 @@ Revise uma cópia do [arquivo YAML completo](https://raw.githubusercontent.com/I
 * [Portas](#port)
 * [ Solicitações de recurso e limites ](#resourcereq)
 * [ Análises de prontidão e prontidão ](#probe)
-* [Serviços](#service) para expor o serviço de app em uma porta
+* [Serviços](#app-service) para expor o serviço de app em uma porta
 * [ Configmaps ](#configmap)  para configurar variáveis de ambiente de contêiner
 * [ Secrets ](#secret)  para configurar variáveis de ambiente de contêiner
 * [Volumes persistentes](#pv) que são montados para o contêiner para armazenamento
@@ -237,10 +230,10 @@ Revise uma cópia do [arquivo YAML completo](https://raw.githubusercontent.com/I
 <dl>
 <dt>Metadados de implementação básica</dt>
   <dd><p>Use a versão apropriada da API para o [tipo de objeto do Kubernetes](#object) que você implementa. A versão da API determina os recursos suportados para o objeto do Kubernetes que estão disponíveis para você. O nome fornecido nos metadados é o nome do objeto, não seu rótulo. Você usa o nome ao interagir com seu objeto, como `kubectl get deployment <name>`.</p>
-  <p><pre class="codeblock"><code> apiVersion: apps / v1
+  <p><pre class="codeblock"><code>apiVersion: apps/v1
 Tipo: implementação
 metadados:
-  name: wasliberty </code></pre></p></dd>
+  name: wasliberty</code></pre></p></dd>
 
 <dt id="replicaset">Conjunto de réplicas</dt>
   <dd><p>Para aumentar a disponibilidade de seu app, é possível especificar um conjunto de réplicas em sua implementação. Em um conjunto de réplicas, são definidas quantas instâncias de seu app você deseja implementar. Os conjuntos de réplicas são gerenciados e monitorados por sua implementação do Kubernetes. Se uma instância do app fica inativa, o Kubernetes acelera automaticamente uma nova instância de seu app para manter o número especificado de instâncias do app.</p>
@@ -248,7 +241,7 @@ metadados:
   replicas: 3</pre></code></p></dd>
 
 <dt id="label">Identificadores</dt>
-  <dd><p>Com rótulos, é possível marcar diferentes tipos de recursos em seu cluster com o mesmo par `key: value`. Em seguida, é possível especificar o seletor para corresponder ao rótulo para que seja possível construir sobre esses outros recursos. Se você planeja expor seu app publicamente, deve-se usar um rótulo que corresponda ao seletor especificado no serviço. No exemplo, a especificação de implementação usa o modelo que corresponde ao rótulo `app: wasliberty`.</p>
+  <dd><p>Com [rótulos](/docs/containers?topic=containers-strategy#deploy_organize), é possível marcar diferentes tipos de recursos em seu cluster com o mesmo par `key: value`. Em seguida, é possível especificar o seletor para corresponder ao rótulo para que seja possível construir sobre esses outros recursos. Se você planeja expor seu app publicamente, deve-se usar um rótulo que corresponda ao seletor especificado no serviço. No exemplo, a especificação de implementação usa o modelo que corresponde ao rótulo `app: wasliberty`.</p>
   <p>É possível recuperar objetos que são rotulados em seu cluster, como para ver os componentes `staging` ou `production`. Por exemplo, liste todos os recursos com um rótulo `env: production` em todos os namespaces no cluster. Observe que você precisa de acesso a todos os namespaces para executar esse comando.<pre class="pre"><code> kubectl get all -l env=production -- all-namespaces </code></pre></p>
   <ul><li>Para obter mais informações sobre rótulos, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
   <li>Para obter um exemplo mais detalhado, veja [Implementando apps em nós do trabalhador específicos usando rótulos](/docs/containers?topic=containers-app#node_affinity).</li></ul>
@@ -296,7 +289,7 @@ metadados:
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">Porta para o serviço do app</dt>
-  <dd><p>Selecione uma porta de contêiner na qual abrir os serviços do app. Para ver qual porta precisa ser aberta, consulte suas especificações de app ou o Dockerfile. A porta é acessível por meio da rede privada, mas não de uma conexão de rede pública. Para expor o app publicamente, deve-se criar um serviço NodePort, balanceador de carga ou Ingress. Use esse mesmo número da porta ao [criar um objeto `Service`](#service).</p>
+  <dd><p>Selecione uma porta de contêiner na qual abrir os serviços do app. Para ver qual porta precisa ser aberta, consulte suas especificações de app ou o Dockerfile. A porta é acessível por meio da rede privada, mas não de uma conexão de rede pública. Para expor o app publicamente, deve-se criar um serviço NodePort, balanceador de carga ou Ingress. Você usa esse mesmo número de porta quando [cria um objeto `Service`](#app-service).</p>
   <p><pre class="codeblock"><code> portas:
 - containerPort: 9080</pre></code></p></dd>
 
@@ -334,7 +327,7 @@ readinessProbe:
   initialDelaySeconds: 45
   periodSeconds: 5</pre></code></p></dd>
 
-<dt id="service">Expondo o serviço de app</dt>
+<dt id="app-service">Expondo o serviço de app</dt>
   <dd><p>É possível criar um serviço que exponha seu app. Na seção `spec`, certifique-se de corresponder os valores de `port` e de rótulo aos que você usou na implementação. O serviço expõe objetos que correspondem ao rótulo, tal como `app: wasliberty` no exemplo a seguir.</p>
   <ul><li>Por padrão, um serviço usa [`ClusterIP ` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/), que torna o serviço acessível somente dentro do cluster, mas não fora do cluster.</li>
   <li>É possível criar um serviço NodePort, balanceador de carga ou Ingress para expor o app publicamente. Esses serviços têm dois IPs, um externo e um interno. Quando o tráfego é recebido no IP externo, ele é encaminhado para o IP do cluster interno. Em seguida, por meio do IP do cluster interno, o tráfego é roteado para o IP do contêiner do app.</li>
@@ -470,8 +463,8 @@ spec:
 
 <dt id="nextsteps">Pronto para implementar um app?</dt>
 <dd><ul><li>[Use uma cópia do YAML completo como um modelo para iniciar](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).</li>
-<li>[Implementar um app por meio do painel do Kubernetes](/docs/containers?topic=containers-app#app_ui).</li>
-<li>[ Implementar um app por meio da CLI ](/docs/containers?topic=containers-app#app_cli).</li></ul></dd>
+<li>[Implemente um app por meio do painel do Kubernetes](/docs/containers?topic=containers-app#app_ui).</li>
+<li>[ Implementar um app a partir da CLI ](/docs/containers?topic=containers-app#app_cli).</li></ul></dd>
 
 </dl>
 
@@ -488,6 +481,9 @@ metadata:
   name: wasliberty
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: wasliberty
   template:
     metadata:
       labels:
@@ -625,7 +621,7 @@ Você tem tantos recursos e usuários em seu cluster que o painel do Kubernetes 
 Antes de iniciar:
 * Certifique-se de que você esteja designado a uma [função de serviço](/docs/containers?topic=containers-users#platform) que conceda a função RBAC apropriada do Kubernetes para que seja possível trabalhar com recursos do Kubernetes.
 * Para [ativar o painel do Kubernetes por meio do console](#db_gui), deve-se ter uma [função da plataforma](/docs/containers?topic=containers-users#platform) designada. Se você estiver designado somente a uma função de serviço, mas nenhuma função da plataforma, [ative o painel do Kubernetes por meio da CLI](#db_cli).
-* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 É possível usar a porta padrão ou configurar sua própria porta para ativar o painel do Kubernetes para um cluster.
 
@@ -699,7 +695,7 @@ Você tem tantos recursos e usuários em seu cluster que o painel do Kubernetes 
 Antes de iniciar:
 
 -   [ Instale as CLIs necessárias ](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+-   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Certifique-se de que você esteja designado a uma [função de serviço](/docs/containers?topic=containers-users#platform) que conceda a função RBAC apropriada do Kubernetes para que seja possível trabalhar com recursos do Kubernetes.
 -   Para [ativar o painel do Kubernetes por meio do console](#db_gui), deve-se ter uma [função da plataforma](/docs/containers?topic=containers-users#platform) designada. Se você estiver designado somente a uma função de serviço, mas nenhuma função da plataforma, [ative o painel do Kubernetes por meio da CLI](#db_cli).
 
@@ -729,7 +725,7 @@ Após um cluster ser criado, é possível implementar um app nesse cluster usand
 Antes de iniciar:
 
 -   Instale as [CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install) necessárias.
--   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+-   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Certifique-se de que você esteja designado a uma [função de serviço](/docs/containers?topic=containers-users#platform) que conceda a função RBAC apropriada do Kubernetes para que seja possível trabalhar com recursos do Kubernetes no namespace.
 
 Para implementar seu app:
@@ -763,7 +759,7 @@ Ao implementar um app, os pods de app são implementados indiscriminadamente em 
 {:shortdesc}
 
 Antes de iniciar:
-*   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Certifique-se de que você esteja designado a uma [função de serviço](/docs/containers?topic=containers-users#platform) que conceda a função RBAC apropriada do Kubernetes para que seja possível trabalhar com recursos do Kubernetes no namespace.
 
 Para implementar apps em nós do trabalhador específicos:
@@ -795,17 +791,17 @@ Para implementar apps em nós do trabalhador específicos:
     Roles:              <none>
     Labels:             arch=amd64
                         beta.kubernetes.io/arch=amd64
-                        beta.kubernetes.io/instance-type=b2c.4x16.encrypted
+                        beta.kubernetes.io/instance-type=b3c.4x16.encrypted
                         beta.kubernetes.io/os=linux
                         failure-domain.beta.kubernetes.io/region=us-south
                         failure-domain.beta.kubernetes.io/zone=dal10
                         ibm-cloud.kubernetes.io/encrypted-docker-data=true
                         ibm-cloud.kubernetes.io/ha-worker=true
                         ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                        ibm-cloud.kubernetes.io/machine-type=b2c.4x16.encrypted
+                        ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.12.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.12.7_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -866,13 +862,13 @@ Para implementar apps em nós do trabalhador específicos:
 
         ```
         ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b3c.4x16          normal   Ready   dal12   1.8.6_1504
         ```
         {: screen}
 
-        Se você criou uma regra de afinidade de app baseada em outro fator, obtenha esse valor no lugar. Por exemplo, para verificar se o pod de app foi implementado em um nó do trabalhador em uma VLAN específica, visualize a VLAN na qual o nó do trabalhador está executando `ibmcloud ks worker-get --cluster <cluster_name_or_ID> -- worker <worker_ID>`.
+        Se você criou uma regra de afinidade de app baseada em outro fator, obtenha esse valor no lugar. Por exemplo, para verificar se o pod do aplicativo foi implementado em um nó do trabalhador em uma VLAN específica, visualize a VLAN na qual ele está por meio da execução de `ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_ID>`.
         {: tip}
 
     4. Na saída, verifique se o nó do trabalhador com o endereço IP privado que você identificou na etapa anterior está implementado nesse conjunto de trabalhadores.
@@ -890,7 +886,6 @@ Nas etapas a seguir, você aprenderá como implementar cargas de trabalho que re
 
 Antes de iniciar:
 * [Crie um tipo de máquina de GPU bare metal](/docs/containers?topic=containers-clusters#clusters_cli). Observe que esse processo pode levar mais de 1 dia útil para ser concluído.
-* Seu cluster mestre e o nó do trabalhador de GPU devem executar o Kubernetes versão 1.10 ou mais recente.
 * Certifique-se de que você esteja designado a uma [função de serviço](/docs/containers?topic=containers-users#platform) que conceda a função RBAC apropriada do Kubernetes para que seja possível trabalhar com recursos do Kubernetes no namespace.
 
 Para executar uma carga de trabalho em uma máquina de GPU:
@@ -931,7 +926,7 @@ Para executar uma carga de trabalho em uma máquina de GPU:
     ```
     {: codeblock}
 
-    <table>
+    <table summary="Uma tabela que descreve na Coluna 1 os campos do arquivo do YAML e na Coluna 2 como preencher esses campos.">
     <caption>Componentes do YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
@@ -1056,11 +1051,11 @@ Para executar uma carga de trabalho em uma máquina de GPU:
 Com o Kubernetes, é possível ativar o [ajuste automático de escala de pod horizontal ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para aumentar ou diminuir automaticamente o número de instâncias de seus apps com base na CPU.
 {:shortdesc}
 
-Procurando informações sobre ajuste de escala de aplicativos Cloud Foundry? Confira [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=services/Auto-Scaling-get-started). Deseja escalar seus nós do trabalhador em vez de seus pods? Efetue check-out do  [ cluster autoscaler ](/docs/containers?topic=containers-ca#ca).
+Procurando informações sobre ajuste de escala de aplicativos Cloud Foundry? Confira [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started#get-started). Deseja escalar seus nós do trabalhador em vez de seus pods? Efetue check-out do  [ cluster autoscaler ](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 Antes de iniciar:
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - O monitoramento Heapster deve ser implementado no cluster em que você deseja ajustar a escala automaticamente.
 - Certifique-se de que você esteja designado a uma [função de serviço](/docs/containers?topic=containers-users#platform) que conceda a função RBAC apropriada do Kubernetes para que seja possível trabalhar com recursos do Kubernetes no namespace.
 
@@ -1073,7 +1068,7 @@ Etapas:
     ```
     {: pre}
 
-    <table>
+    <table summary="Uma tabela que descreve na Coluna 1 as opções de comando do Kubectl e na Coluna 2 como preencher essas opções.">
     <caption>Componentes de comando para  ` kubectl run `</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
@@ -1106,7 +1101,7 @@ Etapas:
     ```
     {: pre}
 
-    <table>
+    <table summary="Uma tabela que descreve na Coluna 1 as opções de comando do Kubectl e na Coluna 2 como preencher essas opções.">
     <caption>Componentes de comando para  ` kubectl autoscale `</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
@@ -1140,12 +1135,65 @@ Deseja evitar o tempo de inatividade durante a atualização contínua? Certifiq
 {: tip}
 
 Antes de iniciar:
-*   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Crie uma  [ implementação ](#app_cli).
 *   Certifique-se de ter uma [função de serviço](/docs/containers?topic=containers-users#platform) que conceda a função de Kubernetes RBAC apropriada para que você possa trabalhar com recursos Kubernetes no espaço de nomes.
 
 Para gerenciar atualizações contínuas para seus apps:
-1.  [Apresente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) uma mudança. Por exemplo, talvez você queira mudar a imagem usada na implementação inicial.
+1.  Para certificar-se de que suas implementações sejam marcadas como prontas apenas quando o contêiner estiver em execução e pronto para solicitações de serviço, inclua [análises de atividade e prontidão em sua implementação](#probe).
+
+2.  Atualize sua implementação para incluir uma estratégia de atualização contínua que especifique o aumento máximo e os pods indisponíveis ou a porcentagem de pods durante a atualização.
+
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:  
+      name: nginx-test
+    spec:
+      replicas: 10
+      selector:
+        matchLabels:
+          service: http-server
+      minReadySeconds: 5
+      progressDeadlineSeconds: 600
+      strategy: 
+        type: RollingUpdate  
+        rollingUpdate:    
+          maxUnavailable: 50%
+          maxSurge: 2
+    ...
+    ```
+    {: codeblock}
+
+    <table summary="Uma tabela que descreve na Coluna 1 os campos do arquivo do YAML e na Coluna 2 como preencher esses campos.">
+    <caption>Componentes do YAML</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>spec.minReadySeconds</code></td>
+    <td>Por padrão, as implementações aguardam até que o pod seja marcado como `ready` para continuar com o lançamento. Se perceber que a implementação continua criando pods mesmo que seu aplicativo no pod mais recente ainda não esteja pronto, use esse campo para desacelerar o lançamento da implementação. Por exemplo, se você especificar `5`, a implementação aguardará por 5 segundos após o pod estar `ready` antes de criar o próximo pod.</td>
+    </tr>
+    <tr>
+    <td><code>spec.progressDeadlineSeconds</code></td>
+    <td>Configure um tempo limite, em segundos, antes de considerar que uma implementação falhou. Por exemplo, sem um tempo limite, se a sua nova versão do aplicativo tiver um erro e for interrompida imediatamente, o lançamento não poderá continuar porque o pod nunca atingirá um estado `ready`. Se você configurar esse tempo limite para `600` segundos e ocorrer uma falha na continuação de qualquer fase do lançamento por 10 minutos, a implementação será marcada como com falha e o lançamento será interrompido.</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.type</code></td>
+    <td>Especifique o tipo de estratégia `RollingUpdate`.</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxUnavailable</code></td>
+    <td>Configure o número máximo de pods que podem ficar indisponíveis durante uma atualização, como um número (`2`) ou uma porcentagem (`50%`). Use, de maneira geral, uma porcentagem para que não seja preciso se lembrar de atualizar o número caso você mude o número de réplicas posteriormente, a menos que queira limitar o lançamento para permitir que apenas um pod fique inativo por vez. Se não desejar ficar nunca abaixo de 100% de capacidade, configure esse valor para `0%` e especifique o parâmetro `spec.estrategy.type.rollingUpdate.maxSurge`.</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
+    <td>Configure quantos recursos adicionais a implementação pode usar durante o lançamento, como um número (`2`) ou uma porcentagem (`50%`). Por exemplo, se sua implementação especificar `10` réplicas e você configurar o `maxSurge` para `2`, duas novas réplicas serão criadas durante o lançamento. Agora, você tem 12 réplicas (10 existentes, duas novas). Depois que as duas novas réplicas estiverem prontas, a implementação reduzirá o dimensionamento das réplicas antigas para 8 para atender às 10 réplicas especificadas. Esse processo continua até a conclusão do lançamento e até que todas as 10 réplicas executem a nova versão.<p class="tip">Se desejar executar uma atualização de estilo de alternância instantânea azul-verde, configure o `maxSurge` para `100%`. A implementação cria todas as novas réplicas necessárias e, em seguida, reduz o dimensionamento das réplicas da versão antiga para 0.</p></td>
+    </tr>
+    </tbody></table>
+
+3.  [Apresente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) uma mudança. Por exemplo, talvez você queira mudar a imagem usada na implementação inicial.
 
     1.  Obtenha o nome da implementação.
 
@@ -1177,14 +1225,26 @@ Para gerenciar atualizações contínuas para seus apps:
 
     Ao executar os comandos, a mudança é imediatamente aplicada e registrada no histórico de apresentação.
 
-2.  Verifique o status de sua implementação.
+4.  Verifique o status de sua implementação.
 
     ```
     kubectl rollout status deployments/<deployment_name>
     ```
     {: pre}
 
-3.  Recupere uma mudança.
+    Se observar algo no status que queira acompanhar por um tempo, será possível pausar e continuar o lançamento com os comandos a seguir.
+
+    ```
+    kubectl rollout pause deployment <deployment_name>
+    ```
+    {: pre}
+
+    ```
+    kubectl rollout resume deployment <deployment_name>
+    ```
+    {: pre}
+
+5.  Recupere uma mudança.
     1.  Visualize o histórico de apresentação da implementação e identifique o número da revisão de sua última implementação.
 
         ```

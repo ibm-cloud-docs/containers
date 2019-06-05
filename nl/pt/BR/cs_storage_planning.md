@@ -274,7 +274,7 @@ Se você tiver um cluster com múltiplas zonas, escolha entre as opções de arm
 
 As opções de armazenamento de dados persistentes estão disponíveis somente para clusters padrão.
 
-Procurando conectar seu cluster a um banco de dados no local? Consulte [Configurando conectividade VPN para seu cluster](/docs/containers?topic=containers-vpn#vpn).
+Procurando conectar seu cluster a um banco de dados no local? Consulte [Configurando a conectividade de VPN para o cluster](/docs/containers?topic=containers-vpn#vpn).
 {: tip}
 
 A imagem a seguir mostra as opções que você tem no {{site.data.keyword.containerlong_notm}} para armazenar permanentemente seus dados em um cluster com múltiplas zonas e tornar seus dados altamente disponíveis. É possível usar essas opções em um cluster de zona única, mas é possível que não obtenha os benefícios de alta disponibilidade que seu app requer.

@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # 지역 및 구역
 {: #regions-and-zones}
 
@@ -34,12 +33,12 @@ subcollection: containers
 
 _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 
-{{site.data.keyword.Bluemix_notm}}는 전세계적으로 호스팅됩니다. {{site.data.keyword.Bluemix_notm}} 내의 서비스는 글로벌로 사용 가능하거나 특정 지역 내에서 사용 가능할 수 있습니다. {{site.data.keyword.containerlong_notm}}에서 Kubernetes 클러스터를 작성할 때 리소스는 클러스터를 배치하는 지역에 남아 있습니다.
+ {{site.data.keyword.Bluemix_notm}}는 전세계적으로 호스팅됩니다. {{site.data.keyword.Bluemix_notm}} 내의 서비스는 글로벌로 사용 가능하거나 특정 지역 내에서 사용 가능할 수 있습니다. {{site.data.keyword.containerlong_notm}}에서 Kubernetes 클러스터를 작성할 때 리소스는 클러스터를 배치하는 지역에 남아 있습니다.
 
-지원되는 모든 {{site.data.keyword.containerlong_notm}} 지역에서 표준 클러스터를 작성할 수 있습니다. 무료 클러스터는 선택된 지역에서만 사용 가능합니다.
+ 지원되는 모든 {{site.data.keyword.containerlong_notm}} 지역에서 표준 클러스터를 작성할 수 있습니다. 무료 클러스터는 선택된 지역에서만 사용 가능합니다.
 {: note}
 
-| {{site.data.keyword.containerlong_notm}} 지역 | 해당되는 {{site.data.keyword.Bluemix_notm}} 위치 |
+ | {{site.data.keyword.containerlong_notm}} 지역 | 해당되는 {{site.data.keyword.Bluemix_notm}} 위치 |
 | --- | --- |
 |AP 북부(표준 클러스터만 해당) | 도쿄 |
 |AP 남부 | 시드니 |
@@ -49,7 +48,7 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 |미국 남부 | 댈러스 |
 {: caption="지원되는 Kubernetes 서비스 지역 및 해당되는 IBM Cloud 위치" caption-side="top"}
 
-<br />
+ <br />
 
 
 ## {{site.data.keyword.Bluemix_notm}}의 위치
@@ -58,8 +57,7 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 지역이라고도 하는 {{site.data.keyword.Bluemix_notm}} 위치를 사용하여 {{site.data.keyword.Bluemix_notm}} 서비스 간에 리소스를 구성할 수 있습니다. 예를 들어, 동일한 위치의 {{site.data.keyword.registryshort_notm}}에 저장된 개인용 Docker 이미지를 사용하여 Kubernetes 클러스터를 작성할 수 있습니다.
 {:shortdesc}
 
-글로벌 API 엔드포인트에 로그인할 때 {{site.data.keyword.Bluemix_notm}} 지역을 지정할 수 있습니다. 사용 가능한 지역을 나열하려면 `ibmcloud regions`를 실행하십시오.
-현재 자신이 있는 {{site.data.keyword.Bluemix_notm}} 위치를 확인하려면 `ibmcloud target`를 실행하고 **지역** 필드를 검토하십시오. 지역을 지정하지 않으면 지역을 선택하라는 프롬프트가 표시됩니다.
+글로벌 API 엔드포인트에 로그인할 때 {{site.data.keyword.Bluemix_notm}} 지역을 지정할 수 있습니다. 사용 가능한 지역을 나열하려면 `ibmcloud regions`를 실행하십시오. 현재 자신이 있는 {{site.data.keyword.Bluemix_notm}} 위치를 확인하려면 `ibmcloud target`를 실행하고 **지역** 필드를 검토하십시오. 지역을 지정하지 않으면 지역을 선택하라는 프롬프트가 표시됩니다.
 
 예를 들어, 댈러스(`us-south`) 지역의 글로벌 API 엔드포인트에 로그인하려면 다음을 수행하십시오.
 ```
@@ -102,7 +100,7 @@ Select a region (or press enter to skip):
 Enter a number> 5
 Targeted region us-south
 
-                      
+
 API endpoint:      https://cloud.ibm.com   
 Region:            us-south   
 User:              first.last@email.com   
@@ -128,7 +126,7 @@ Space:
 지원되는 모든 {{site.data.keyword.containerlong_notm}} 지역에서 표준 클러스터를 작성할 수 있습니다. 무료 클러스터는 선택된 지역에서만 사용 가능합니다.
 {: note}
 
-지원되는 {{site.data.keyword.containerlong_notm}} 지역:
+ 지원되는 {{site.data.keyword.containerlong_notm}} 지역:
   * AP 북부(표준 클러스터만 해당)
   * AP 남부
   * 중앙 유럽
@@ -161,13 +159,13 @@ Space:
 {{site.data.keyword.containerlong_notm}} API와 상호작용하려면 명령 유형을 입력하고 `/v1/command`를 글로벌 엔드포인트에 추가하십시오.
 {:shortdesc}
 
-`GET /clusters` API 예제:
+ `GET /clusters` API 예제:
   ```
   GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
-</br>
+ </br>
 
 글로벌 엔드포인트가 있는 API를 사용하려면 모든 요청에서 `X-Region` 헤더에 지역 이름을 전달하십시오. 사용 가능한 지역을 나열하려면 `ibmcloud ks regions`를 실행하십시오.
 {: tip}
@@ -180,15 +178,15 @@ API 명령에 대한 문서는 [https://containers.cloud.ibm.com/swagger-api/](h
 구역(zone)은 {{site.data.keyword.Bluemix_notm}} 지역 내에서 사용 가능한 실제 데이터센터입니다. 지역은 구역을 구성하기 위한 개념적인 도구이며, 이에는 다른 나라의 구역(데이터센터)이 포함될 수 있습니다. 다음 표에는 지역별로 사용 가능한 구역이 표시되어 있습니다.
 {:shortdesc}
 
-* **다중 구역 메트로 시티**: **시드니(AP 남부)를 제외**한 다중 구역 메트로 시티에서 클러스터를 작성하는 경우, 고가용성 Kubernetes 마스터의 복제본이 자동으로 구역 간에 전개됩니다. 구역 간 작업자 노드를 분산하여 구역 장애로부터 앱을 보호할 수 있는 옵션이 있습니다.
-* **단일 구역 시티**: 단일 구역 시티에서 클러스터를 작성하는 경우 여러 개의 작업자 노드를 작성할 수 있지만 구역 간에 전개할 수는 없습니다. 고가용성 마스터에는 별도의 호스트에 3개의 복제본이 포함되지만, 이는 구역 간에 전개되어 있지 않습니다.
+* **다중 구역 메트로 위치**: 다중 구역 메트로 위치에서 클러스터를 작성하는 경우, 고가용성 Kubernetes 마스터의 복제본이 자동으로 구역 간에 전개됩니다. 구역 간 작업자 노드를 분산하여 구역 장애로부터 앱을 보호할 수 있는 옵션이 있습니다.
+* **단일 구역 위치**: 단일 구역 위치에서 클러스터를 작성하는 경우, 여러 개의 작업자 노드를 작성할 수 있지만 구역 간에 전개할 수는 없습니다. 고가용성 마스터에는 별도의 호스트에 3개의 복제본이 포함되지만, 이는 구역 간에 전개되어 있지 않습니다.
 
-<table summary="표에서는 지역별로 사용 가능한 구역을 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 지역은 1열에 있고 다중 구역 메트로 시티는 2열에 있으며 단일 구역 시티는 3열에 있습니다. ">
+<table summary="표에서는 지역별로 사용 가능한 구역을 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 지역은 1열에 있고 다중 구역 메트로 위치는 2열에 있으며 단일 구역 위치는 3열에 있습니다e.">
 <caption>지역별로 사용 가능한 단일 및 다중 구역.</caption>
   <thead>
   <th>지역</th>
-  <th>다중 구역 메트로 시티</th>
-  <th>단일 구역 시티</th>
+  <th>다중 구역 메트로 위치</th>
+  <th>단일 구역 위치</th>
   </thead>
   <tbody>
     <tr>
@@ -258,10 +256,10 @@ _단일 구역 클러스터 리소스가 있는 위치를 파악합니다._
 1.  작업자 노드는 클러스터에 대한 추가 가용성을 제공하기 위해 한 지역의 다중 구역 간에 전개됩니다. 마스터는 클러스터가 배치된 동일한 다중 구역 가능 구역에서 그대로 유지됩니다. `kubectl` 명령과 같은 로컬 컨테이너 오케스트레이션 조치를 시작하면 지역 엔드포인트를 통해 마스터와 작업자 노드 간에 정보가 교환됩니다.
 
 2.  기타 클러스터 리소스(예: 스토리지, 네트워킹, 컴퓨팅 또는 팟(Pod)에서 실행되는 앱)는 해당 리소스가 다중 구역 클러스터에서 구역에 배치되는 방법에 따라 다릅니다. 자세한 정보를 보려면 다음 주제를 검토하십시오.
-    * 다중 구역 클러스터에서 [파일 스토리지](/docs/containers?topic=containers-file_storage#add_file) 및 [블록 스토리지](/docs/containers?topic=containers-block_storage#add_block) 설정
-    * [다중 구역 클러스터에서 LoadBalancer 서비스를 사용하여 앱에 대한 공용 또는 개인용 액세스 사용](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-    * [Ingress를 사용한 네트워크 트래픽 관리](/docs/containers?topic=containers-ingress#planning)
-    * [앱의 가용성 향상](/docs/containers?topic=containers-app#increase_availability)
+  * 다중 구역 클러스터에서 [파일 스토리지](/docs/containers?topic=containers-file_storage#add_file) 및 [블록 스토리지](/docs/containers?topic=containers-block_storage#add_block) 설정
+  * [다중 구역 클러스터에서 LoadBalancer 서비스를 사용하여 앱에 대한 공용 또는 개인용 액세스 사용](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+  * [Ingress를 사용한 네트워크 트래픽 관리](/docs/containers?topic=containers-ingress#planning)
+  * [앱의 가용성 향상](/docs/containers?topic=containers-app#increase_availability)
 
 3.  [`ibmcloud ks` 명령](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) 사용과 같은 클러스터 관리 조치를 시작하는 경우, 클러스터에 대한 기본 정보(예: 이름, ID, 사용자, 명령)는 지역 엔드포인트를 통해 라우팅됩니다.
 

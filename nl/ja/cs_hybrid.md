@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -32,7 +32,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix}} Private アカウントがある場合は、そのアカウントを使用して {{site.data.keyword.containerlong}} を含む上質な {{site.data.keyword.Bluemix_notm}} サービスをご利用いただけます。 詳しくは、[{{site.data.keyword.Bluemix_notm}} Private および IBM Public Cloud![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") でのハイブリッド・エクスペリエンス](http://ibm.biz/hybridJune2018)に関するブログを参照してください。
 {: shortdesc}
 
-[{{site.data.keyword.Bluemix_notm}} オファリング](/docs/containers?topic=containers-cs_ov#differentiation)については、このリンクをご覧ください。 すぐにでも、[パブリック・クラウドとプライベート・クラウドを接続](#hybrid_vpn)したり、[パブリック・コンテナーにプライベート・パッケージを再利用](#hybrid_ppa_importer)したりすることができます。
+ここまでに、[{{site.data.keyword.Bluemix_notm}}オファリング](/docs/containers?topic=containers-cs_ov#differentiation)について理解して、[クラウド上でどのようなワークロードを実行するか](/docs/containers?topic=containers-strategy#cloud_workloads)に関する Kubernetes 戦略を策定しました。すぐにでも、[パブリック・クラウドとプライベート・クラウドを接続](#hybrid_vpn)したり、[パブリック・コンテナーにプライベート・パッケージを再利用](#hybrid_ppa_importer)したりすることができます。
 
 ## strongSwan VPN でのパブリック・クラウドとプライベート・クラウドの接続
 {: #hybrid_vpn}
@@ -94,6 +94,11 @@ subcollection: containers
 
 8.  接続するクラスターごとに上記の手順を繰り返します。
 
+**次の作業**
+
+*   [ライセンス交付を受けたソフトウェア・イメージをパブリック・クラスター内で実行します](#hybrid_ppa_importer)。
+*   複数のクラウド Kubernetes クラスターを管理するには ({{site.data.keyword.Bluemix_notm}} Public と {{site.data.keyword.Bluemix_notm}} Private にまたがる場合など)、[IBM Multicloud Manager ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html) を確認してください。
+
 
 ## パブリック Kubernetes コンテナーでの {{site.data.keyword.Bluemix_notm}} Private イメージの実行
 {: #hybrid_ppa_importer}
@@ -117,7 +122,7 @@ subcollection: containers
 - [{{site.data.keyword.registryshort}}CLI プラグイン (`ibmcloud cr`) をインストールします](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install)。
 - [{{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup)に名前空間をセットアップするか、`ibmcloud cr namespaces` を実行して既存の名前空間を取得します。
 - [`kubectl` CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-- [Helm CLI をインストールして、クラスターに tiller をセットアップします](/docs/containers?topic=containers-integrations#helm)。
+- [Helm CLI をインストールして、クラスターに tiller をセットアップします](/docs/containers?topic=containers-helm#public_helm_install)。
 
 次のようにして、{{site.data.keyword.Bluemix_notm}} Public のクラスターに {{site.data.keyword.Bluemix_notm}} Private イメージをデプロイします。
 

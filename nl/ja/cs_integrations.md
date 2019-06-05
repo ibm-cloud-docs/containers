@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, helm
 
@@ -43,7 +43,7 @@ subcollection: containers
 <tbody>
 <tr>
 <td>{{site.data.keyword.cfee_full_notm}}</td>
-<td>Kubernetes クラスターの上に独自の Cloud Foundry プラットフォームをデプロイして管理できます。これにより、クラウド・ネイティブ・アプリを開発、パッケージ、デプロイ、管理し、{{site.data.keyword.Bluemix_notm}} エコシステムを活用して追加のサービスをアプリにバインドできるようになります。{{site.data.keyword.cfee_full_notm}} インスタンスを作成するときは、ワーカー・ノードのマシン・タイプと VLAN を選択して Kubernetes クラスターを構成する必要があります。こうすることで、クラスターに {{site.data.keyword.containerlong_notm}} がプロビジョンされ、{{site.data.keyword.cfee_full_notm}} が自動的にクラスターにデプロイされます。 {{site.data.keyword.cfee_full_notm}} のセットアップ方法について詳しくは、[入門チュートリアル](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started)を参照してください。</td>
+<td>Kubernetes クラスターの上に独自の Cloud Foundry プラットフォームをデプロイして管理できます。これにより、クラウド・ネイティブ・アプリを開発、パッケージ、デプロイ、管理し、{{site.data.keyword.Bluemix_notm}} エコシステムを活用して追加のサービスをアプリにバインドできるようになります。 {{site.data.keyword.cfee_full_notm}} インスタンスを作成するときは、ワーカー・ノードのマシン・タイプと VLAN を選択して Kubernetes クラスターを構成する必要があります。 こうすることで、クラスターに {{site.data.keyword.containerlong_notm}} がプロビジョンされ、{{site.data.keyword.cfee_full_notm}} が自動的にクラスターにデプロイされます。 {{site.data.keyword.cfee_full_notm}} のセットアップ方法について詳しくは、[入門チュートリアル](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started)を参照してください。 </td>
 </tr>
 <tr>
 <td>Codeship</td>
@@ -51,7 +51,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>Grafeas</td>
-<td>[Grafeas ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://grafeas.io) は、ソフトウェア・サプライ・チェーンの過程でメタデータを取得、保管、交換する方法のための一般的な手段を提供するオープン・ソースの CI/CD サービスです。例えば、Grafeas をアプリ・ビルド・プロセスに組み込むと、ビルド要求のイニシエーター、脆弱点スキャン結果、品質保証サインオフに関する情報を Grafeas が保管できるので、アプリを実動にデプロイできるかどうかを情報に基づいて決定できるようになります。このメタデータを監査で使用したり、このメタデータを使用してソフトウェア・サプライ・チェーンのコンプライアンスを実証したりすることができます。</td>
+<td>[Grafeas ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://grafeas.io) は、ソフトウェア・サプライ・チェーンの過程でメタデータを取得、保管、交換する方法のための一般的な手段を提供するオープン・ソースの CI/CD サービスです。 例えば、Grafeas をアプリ・ビルド・プロセスに組み込むと、ビルド要求のイニシエーター、脆弱点スキャン結果、品質保証サインオフに関する情報を Grafeas が保管できるので、アプリを実動にデプロイできるかどうかを情報に基づいて決定できるようになります。 このメタデータを監査で使用したり、このメタデータを使用してソフトウェア・サプライ・チェーンのコンプライアンスを実証したりすることができます。 </td>
 </tr>
 <tr>
 <td>Helm</td>
@@ -63,15 +63,15 @@ subcollection: containers
 </tr>
 <tr>
 <td>{{site.data.keyword.containerlong_notm}} 上での Istio</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は 、クラウド・オーケストレーション・プラットフォームでマイクロサービス・ネットワーク (別名、サービス・メッシュ) の接続、保護、管理、モニターを行うための方法を開発者に提供するオープン・ソース・サービスです。 {{site.data.keyword.containerlong}} 上の Istio は、管理対象アドオンを介したクラスターへの Istio のワンステップ・インストールを提供します。ワンクリックですべての Istio コア・コンポーネントを取得し、追加のトレース、モニタリング、視覚化を行い、BookInfo サンプル・アプリを稼働状態にすることができます。開始するには、[管理対象 Istio アドオン (ベータ版) の使用](/docs/containers?topic=containers-istio) を参照してください。</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は 、クラウド・オーケストレーション・プラットフォームでマイクロサービス・ネットワーク (別名、サービス・メッシュ) の接続、保護、管理、モニターを行うための方法を開発者に提供するオープン・ソース・サービスです。 {{site.data.keyword.containerlong}} 上の Istio は、管理対象アドオンを介したクラスターへの Istio のワンステップ・インストールを提供します。 ワンクリックですべての Istio コア・コンポーネントを取得し、追加のトレース、モニタリング、視覚化を行い、BookInfo サンプル・アプリを稼働状態にすることができます。 開始するには、[管理対象 Istio アドオン (ベータ版) の使用](/docs/containers?topic=containers-istio) を参照してください。</td>
 </tr>
 <tr>
 <td>Jenkins X</td>
-<td>Jenkins X は Kubernetes ネイティブの継続的統合と継続的デリバリーのプラットフォームであり、これを使用してビルド・プロセスを自動化できます。{{site.data.keyword.containerlong_notm}} へのインストール方法について詳しくは、[Introducing the Jenkins X open source project ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2018/08/installing-jenkins-x-on-ibm-cloud-kubernetes-service/) を参照してください。</td>
+<td>Jenkins X は Kubernetes ネイティブの継続的統合と継続的デリバリーのプラットフォームであり、これを使用してビルド・プロセスを自動化できます。 {{site.data.keyword.containerlong_notm}} へのインストール方法について詳しくは、[Introducing the Jenkins X open source project ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2018/08/installing-jenkins-x-on-ibm-cloud-kubernetes-service/) を参照してください。</td>
 </tr>
 <tr>
 <td>Knative</td>
-<td>[Knative ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/knative/docs) は IBM、Google、Pivotal、Red Hat、Cisco などによって開発されたオープン・ソースのプラットフォームであり、Kubernetes の機能を拡張して Kubernetes クラスター上にソース中心の最新のコンテナー化サーバーレス・アプリを作成できるようにすることを目的としています。このプラットフォームは、Kubernetes におけるビルドの操作負担およびワークロードのデプロイと管理の抽象化に関して、さまざまなプログラミング言語とフレームワークに対して一貫性のあるアプローチを取っているので、開発者は最も重要なもの、つまりソース・コードに集中することができます。詳しくは、[チュートリアル: 管理対象の Knative を使用して、Kubernetes クラスターでサーバーレス・アプリを実行する](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)を参照してください。</td>
+<td>[Knative ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/knative/docs) は IBM、Google、Pivotal、Red Hat、Cisco などによって開発されたオープン・ソースのプラットフォームであり、Kubernetes の機能を拡張して Kubernetes クラスター上にソース中心の最新のコンテナー化サーバーレス・アプリを作成できるようにすることを目的としています。 このプラットフォームは、Kubernetes におけるビルドの操作負担およびワークロードのデプロイと管理の抽象化に関して、さまざまなプログラミング言語とフレームワークに対して一貫性のあるアプローチを取っているので、開発者は最も重要なもの、つまりソース・コードに集中することができます。 詳しくは、[チュートリアル: 管理対象の Knative を使用して、Kubernetes クラスターでサーバーレス・アプリを実行する](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)を参照してください。 </td>
 </tr>
 </tbody>
 </table>
@@ -128,7 +128,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>Splunk</td>
-<td>Splunk Connect for Kubernetes を使用することにより、Splunk で Kubernetes のロギング・データ、オブジェクト・データ、メトリック・データをインポートおよび検索できます。Splunk Connect for Kubernetes は、Splunk でサポートされる Fluentd のデプロイメントを Kubernetes クラスターにデプロイする Helm チャート、ログとメタデータを送信するための Splunk 組み込み Fluentd HTTP Event Collector (HEC) プラグイン、クラスター・メトリックを収集するするメトリック・デプロイメントのコレクションです。詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2019/02/solving-business-problems-with-splunk-on-ibm-cloud-kubernetes-service/" target="_blank">Solving Business Problems with Splunk on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+<td>Splunk Connect for Kubernetes を使用することにより、Splunk で Kubernetes のロギング・データ、オブジェクト・データ、メトリック・データをインポートおよび検索できます。 Splunk Connect for Kubernetes は、Splunk でサポートされる Fluentd のデプロイメントを Kubernetes クラスターにデプロイする Helm チャート、ログとメタデータを送信するための Splunk 組み込み Fluentd HTTP Event Collector (HEC) プラグイン、クラスター・メトリックを収集するするメトリック・デプロイメントのコレクションです。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2019/02/solving-business-problems-with-splunk-on-ibm-cloud-kubernetes-service/" target="_blank">Solving Business Problems with Splunk on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
 <td>Weave Scope</td>
@@ -167,16 +167,15 @@ subcollection: containers
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td><a href="/docs/services/certificate-manager?topic=certificate-manager-gettingstarted" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、アプリの SSL 証明書を保管および管理できます。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td><a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、アプリの SSL 証明書を保管および管理できます。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (ベータ版)</td>
-  <td><a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、データ・メモリーを暗号化できます。{{site.data.keyword.datashield_short}} は、インテル® Software Guard Extensions (SGX) および Fortanix® テクノロジーと統合されているため、使用中の {{site.data.keyword.Bluemix_notm}} コンテナーのワークロードのコードとデータを保護できます。アプリのコードとデータは、CPU で保護されたエンクレーブで実行されます。エンクレーブは、ワーカー・ノード上の信頼できるメモリー領域であり、ここでアプリの重要な側面を保護することで、コードとデータの機密を保ち、改ざんを防止できます。
-</td>
+  <td><a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、データ・メモリーを暗号化できます。 {{site.data.keyword.datashield_short}} は、インテル® Software Guard Extensions (SGX) および Fortanix® テクノロジーと統合されているため、使用中の {{site.data.keyword.Bluemix_notm}} コンテナーのワークロードのコードとデータを保護できます。 アプリのコードとデータは、CPU で保護されたエンクレーブで実行されます。エンクレーブは、ワーカー・ノード上の信頼できるメモリー領域であり、ここでアプリの重要な側面を保護することで、コードとデータの機密を保ち、改ざんを防止できます。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>保護された独自の Docker イメージ・リポジトリーをセットアップします。そこでイメージを安全に保管し、クラスター・ユーザー間で共有することができます。 詳しくは、<a href="/docs/services/Registry?topic=registry-index" target="_blank">{{site.data.keyword.registrylong}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+  <td>保護された独自の Docker イメージ・リポジトリーをセットアップします。そこでイメージを安全に保管し、クラスター・ユーザー間で共有することができます。 詳しくは、<a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -214,7 +213,7 @@ subcollection: containers
 </tr>
 <tr>
   <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#GettingStarted) は、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高性能永続 iSCSI ストレージです。ブロック・ストレージは、単一ゾーンにステートフル・アプリをデプロイする場合に使用したり、単一ポッド用の高性能ストレージとして使用したりします。クラスターにブロック・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.Bluemix_notm}} Block Storage にデータを格納する](/docs/containers?topic=containers-block_storage#block_storage) を参照してください。</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) は、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高性能永続 iSCSI ストレージです。 ブロック・ストレージは、単一ゾーンにステートフル・アプリをデプロイする場合に使用したり、単一ポッド用の高性能ストレージとして使用したりします。 クラスターにブロック・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.Bluemix_notm}} Block Storage にデータを格納する](/docs/containers?topic=containers-block_storage#block_storage) を参照してください。</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -222,11 +221,11 @@ subcollection: containers
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-gettingstarted#gettingstarted) は、NFS ベースの高速で柔軟なネットワーク接続型永続ファイル・ストレージであり、Kubernetes 永続ボリュームを使用してアプリに追加することができます。ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。クラスターにファイル・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.Bluemix_notm}} File Storage にデータを格納する](/docs/containers?topic=containers-file_storage#file_storage) を参照してください。</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) は、NFS ベースの高速で柔軟なネットワーク接続型永続ファイル・ストレージであり、Kubernetes 永続ボリュームを使用してアプリに追加することができます。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 クラスターにファイル・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.Bluemix_notm}} File Storage にデータを格納する](/docs/containers?topic=containers-file_storage#file_storage) を参照してください。</td>
   </tr>
   <tr>
     <td>Portworx</td>
-    <td>[Portworx ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://portworx.com/products/introduction/) は、可用性の高いソフトウェア定義のストレージ・ソリューションです。これを使用して、コンテナー化データベースなどのステートフル・アプリ用の永続ストレージを管理したり、複数のゾーンにわたってポッド間でデータを共有したりすることができます。Helm チャートを使用して Portworx をインストールし、Kubernetes 永続ボリュームを使用してアプリ用ストレージをプロビジョンできます。クラスターに Portworx をセットアップする方法について詳しくは、[Portworx を使ってソフトウェア定義のストレージ (SDS) にデータを格納する](/docs/containers?topic=containers-portworx#portworx) を参照してください。</td>
+    <td>[Portworx ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://portworx.com/products/introduction/) は、可用性の高いソフトウェア定義のストレージ・ソリューションです。これを使用して、コンテナー化データベースなどのステートフル・アプリ用の永続ストレージを管理したり、複数のゾーンにわたってポッド間でデータを共有したりすることができます。 Helm チャートを使用して Portworx をインストールし、Kubernetes 永続ボリュームを使用してアプリ用ストレージをプロビジョンできます。 クラスターに Portworx をセットアップする方法について詳しくは、[Portworx を使ってソフトウェア定義のストレージ (SDS) にデータを格納する](/docs/containers?topic=containers-portworx#portworx) を参照してください。</td>
   </tr>
 </tbody>
 </table>
@@ -248,11 +247,11 @@ subcollection: containers
 <tbody>
   <tr>
     <td>{{site.data.keyword.blockchainfull_notm}} Platform 2.0 ベータ版</td>
-    <td>独自の {{site.data.keyword.blockchainfull_notm}} Platform を {{site.data.keyword.containerlong_notm}} にデプロイして管理できます。 {{site.data.keyword.blockchainfull_notm}} Platform 2.0 では、{{site.data.keyword.blockchainfull_notm}} ネットワークをホストしたり、他の {{site.data.keyword.blockchainfull_notm}} 2.0 ネットワークに参加できる組織を作成したりすることができます。{{site.data.keyword.containerlong_notm}} に {{site.data.keyword.blockchainfull_notm}} をセットアップする方法について詳しくは、[{{site.data.keyword.blockchainfull_notm}} Platform 2.0 無料ベータ版について](/docs/services/blockchain?topic=blockchain-ibp-console-overview#ibp-console-overview)を参照してください。</td>
+    <td>独自の {{site.data.keyword.blockchainfull_notm}} Platform を {{site.data.keyword.containerlong_notm}} にデプロイして管理できます。 {{site.data.keyword.blockchainfull_notm}} Platform 2.0 では、{{site.data.keyword.blockchainfull_notm}} ネットワークをホストしたり、他の {{site.data.keyword.blockchainfull_notm}} 2.0 ネットワークに参加できる組織を作成したりすることができます。 {{site.data.keyword.containerlong_notm}} に {{site.data.keyword.blockchainfull_notm}} をセットアップする方法について詳しくは、[{{site.data.keyword.blockchainfull_notm}} Platform 2.0 無料ベータ版について](/docs/services/blockchain?topic=blockchain-ibp-console-overview#ibp-console-overview)を参照してください。</td>
   </tr>
 <tr>
   <td>クラウド・データベース</td>
-  <td>{{site.data.keyword.composeForMongoDB_full}} や {{site.data.keyword.cloudantfull}} などのさまざまな {{site.data.keyword.Bluemix_notm}} データベース・サービスの中から選択して、可用性の高いスケーラブルなデータベース・ソリューションをクラスターにデプロイできます。使用可能なクラウド・データベースのリストについては、[{{site.data.keyword.Bluemix_notm}} カタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/catalog?category=databases) を参照してください。</td>
+  <td>{{site.data.keyword.composeForMongoDB_full}} や {{site.data.keyword.cloudantfull}} などのさまざまな {{site.data.keyword.Bluemix_notm}} データベース・サービスの中から選択して、可用性の高いスケーラブルなデータベース・ソリューションをクラスターにデプロイできます。 使用可能なクラウド・データベースのリストについては、[{{site.data.keyword.Bluemix_notm}} カタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/catalog?category=databases) を参照してください。  </td>
   </tr>
   </tbody>
   </table>
@@ -315,8 +314,7 @@ subcollection: containers
      ```
      {: pre}
 
-4.  `ibmcloud ks cluster-service-bind` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)を使用して、クラスターにサービスを追加します。{{site.data.keyword.Bluemix_notm}} IAM 対応サービスの場合は、前に作成した Cloud Foundry 別名を使用します。 IAM 対応サービスの場合は、デフォルトの**ライター**のサービス・アクセス役割を使用することも、`--role` フラグを使用してサービス・アクセス役割を指定することもできます。このコマンドによって、サービス・インスタンスのサービス・キーが作成されます。または、`--key` フラグを含めて、既存のサービス・キー資格情報を使用することができます。
-    `--key` フラグを使用する場合は、`--role` フラグを組み込まないでください。
+4.  `ibmcloud ks cluster-service-bind` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)を使用して、クラスターにサービスを追加します。 {{site.data.keyword.Bluemix_notm}} IAM 対応サービスの場合は、前に作成した Cloud Foundry 別名を使用します。 IAM 対応サービスの場合は、デフォルトの**ライター**のサービス・アクセス役割を使用することも、`--role` フラグを使用してサービス・アクセス役割を指定することもできます。 このコマンドによって、サービス・インスタンスのサービス・キーが作成されます。または、`--key` フラグを含めて、既存のサービス・キー資格情報を使用することができます。 `--key` フラグを使用する場合は、`--role` フラグを組み込まないでください。
     ```
     ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
     ```
@@ -680,7 +678,7 @@ Kubernetes シークレットのサービス資格情報およびその他のキ
 [Helm ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://helm.sh) は Kubernetes パッケージ・マネージャーです。 Helm チャートを作成するか、既存の Helm チャートを使用して、{{site.data.keyword.containerlong_notm}} クラスターで実行される複雑な Kubernetes アプリケーションの定義、インストール、アップグレードを行うことができます。
 {:shortdesc}
 
-Helm チャートをデプロイするためには、ローカル・マシンに Helm CLI をインストールし、クラスターに Helm サーバー Tiller をインストールする必要があります。Tiller のイメージはパブリック Google Container Registry に保管されます。Tiller のインストール時にイメージにアクセスするためには、パブリック Google Container Registry へのパブリック・ネットワーク接続がクラスターで許可されていなければなりません。パブリック・サービス・エンドポイントが有効になっているクラスターは、自動的にイメージにアクセスできます。カスタム・ファイアウォールで保護されているプライベート・クラスターや、プライベート・サービス・エンドポイントのみを有効にしているクラスターは、Tiller イメージへのアクセスを許可しません。代わりに、[イメージをローカル・マシンにプルしてそれを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュする](#private_local_tiller)か、[Tiller を使用せずに Helm チャートをインストールする](#private_install_without_tiller)ことができます。
+Helm チャートをデプロイするためには、ローカル・マシンに Helm CLI をインストールし、クラスターに Helm サーバー Tiller をインストールする必要があります。 Tiller のイメージはパブリック Google Container Registry に保管されます。 Tiller のインストール時にイメージにアクセスするためには、パブリック Google Container Registry へのパブリック・ネットワーク接続がクラスターで許可されていなければなりません。 パブリック・サービス・エンドポイントが有効になっているクラスターは、自動的にイメージにアクセスできます。 カスタム・ファイアウォールで保護されているプライベート・クラスターや、プライベート・サービス・エンドポイントのみを有効にしているクラスターは、Tiller イメージへのアクセスを許可しません。 代わりに、[イメージをローカル・マシンにプルしてそれを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュする](#private_local_tiller)か、[Tiller を使用せずに Helm チャートをインストールする](#private_install_without_tiller)ことができます。
 {: note}
 
 ### パブリック・アクセスが可能なクラスターでの Helm のセットアップ
@@ -709,7 +707,7 @@ Helm チャートをデプロイするためには、ローカル・マシンに
 4.  インストールが成功したことを確認します。
     1.  Tiller サービス・アカウントが作成されたことを確認します。
         ```
-        kubectl get serviceaccount -n kube-system | grep tiller
+        kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
 
@@ -794,7 +792,7 @@ Tiller イメージをローカル・マシンにプルしてそれを {{site.da
        ```
        {: pre}
 
-4. クラスターにインストールする[バージョンの Tiller を見つけます ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30)。特定のバージョンを必要としない場合は、最新のものを使用してください。
+4. クラスターにインストールする[バージョンの Tiller を見つけます ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30)。 特定のバージョンを必要としない場合は、最新のものを使用してください。
 
 5. ローカル・マシンに Tiller イメージをプルします。
    ```
@@ -861,7 +859,7 @@ Tiller イメージをローカル・マシンにプルしてそれを {{site.da
 プライベート・クラスターに Tiller をインストールしない場合は、Helm チャートの YAML ファイルを手動で作成し、`kubectl` コマンドを使用してそれらの YAML ファイルを適用できます。
 {: shortdesc}
 
-この例のステップは、{{site.data.keyword.Bluemix_notm}} Helm チャート・リポジトリーからプライベート・クラスターに Helm チャートをインストールする方法を示しています。{{site.data.keyword.Bluemix_notm}} Helm チャート・リポジトリーのいずれにも保管されていない Helm チャートをインストールする場合は、このトピックの手順に従って Helm チャート用の YAML ファイルを作成する必要があります。さらに、パブリック・コンテナー・リポジトリーから Helm チャート・イメージをダウンロードし、それを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュして、{{site.data.keyword.registryshort_notm}} 内のイメージを使用するように `values.yaml` ファイルを更新する必要があります。
+この例のステップは、{{site.data.keyword.Bluemix_notm}} Helm チャート・リポジトリーからプライベート・クラスターに Helm チャートをインストールする方法を示しています。 {{site.data.keyword.Bluemix_notm}} Helm チャート・リポジトリーのいずれにも保管されていない Helm チャートをインストールする場合は、このトピックの手順に従って Helm チャート用の YAML ファイルを作成する必要があります。 さらに、パブリック・コンテナー・リポジトリーから Helm チャート・イメージをダウンロードし、それを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュして、{{site.data.keyword.registryshort_notm}} 内のイメージを使用するように `values.yaml` ファイルを更新する必要があります。
 {: note}
 
 1. ローカル・マシンに <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> をインストールします。
@@ -894,7 +892,7 @@ Tiller イメージをローカル・マシンにプルしてそれを {{site.da
    ```
    {: pre}
 
-6. インストールする Helm チャートを特定し、その Helm チャートをローカル・マシンにダウンロードして、Helm チャートのファイルをアンパックします。次の例は、cluster autoscaler バージョン 1.0.3 用の Helm チャートをダウンロードして、`cluster-autoscaler` ディレクトリーにファイルをアンパックする方法を示しています。
+6. インストールする Helm チャートを特定し、その Helm チャートをローカル・マシンにダウンロードして、Helm チャートのファイルをアンパックします。 次の例は、cluster autoscaler バージョン 1.0.3 用の Helm チャートをダウンロードして、`cluster-autoscaler` ディレクトリーにファイルをアンパックする方法を示しています。
    ```
    helm fetch ibm/ibm-iks-cluster-autoscaler --untar --untardir ./cluster-autoscaler --version 1.0.3
    ```
@@ -918,8 +916,8 @@ Tiller イメージをローカル・マシンにプルしてそれを {{site.da
    ```
    {: pre}
 
-10. ローカルにインストールされている Helm を使用して、Helm チャート用のすべての Kubernetes YAML ファイルを作成します。既に作成した `output` ディレクトリーに YAML ファイルが保管されます。
-```
+10. ローカルにインストールされている Helm を使用して、Helm チャート用のすべての Kubernetes YAML ファイルを作成します。 既に作成した `output` ディレクトリーに YAML ファイルが保管されます。
+    ```
     helm template --values ./ibm-iks-cluster-autoscaler/values.yaml --output-dir ./output ./ibm-iks-cluster-autoscaler
     ```
     {: pre}
@@ -934,7 +932,7 @@ Tiller イメージをローカル・マシンにプルしてそれを {{site.da
     {: screen}
 
 11. すべての YAML ファイルをプライベート・クラスターにデプロイします。
-```
+    ```
     kubectl apply --recursive --filename ./output
     ```
    {: pre}
@@ -950,7 +948,7 @@ Tiller イメージをローカル・マシンにプルしてそれを {{site.da
 {: #helm_links}
 
 * strongSwan Helm チャートを使用するには、[strongSwan IPSec VPN サービスの Helm Chart を使用した VPN 接続のセットアップ](/docs/containers?topic=containers-vpn#vpn-setup)を参照してください。
-* コンソールの [Helm チャートのカタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts) で、{{site.data.keyword.Bluemix_notm}} で使用可能な Helm チャートを確認します。
+* コンソールの [Helm チャートのカタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) で、{{site.data.keyword.Bluemix_notm}} で使用可能な Helm チャートを確認します。
 * Helm チャートのセットアップと管理に使用する Helm コマンドについて詳しくは、<a href="https://docs.helm.sh/helm/" target="_blank">Helm の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。
 * Kubernetes Helm チャートを使用して開発速度を上げる方法について詳しくは、[こちら ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/) を参照してください。
 
@@ -963,7 +961,7 @@ Weave Scope は、Kubernetes クラスター内のリソース (サービス、�
 開始前に、以下のことを行います。
 
 -   クラスター情報を公共のインターネットに公開しないようにしてください。 安全に Weave Scope をデプロイして Web ブラウザーからローカル・アクセスするには、以下の手順を実行します。
--   標準クラスターがまだない場合は、[標準クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。Weave Scope は、アプリでは特に、CPU の負荷が大きくなります。 フリー・クラスターではなく、比較的大規模な標準クラスターで Weave Scope を実行してください。
+-   標準クラスターがまだない場合は、[標準クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。 Weave Scope は、アプリでは特に、CPU の負荷が大きくなります。 フリー・クラスターではなく、比較的大規模な標準クラスターで Weave Scope を実行してください。
 -  すべての名前空間に対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 -   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 

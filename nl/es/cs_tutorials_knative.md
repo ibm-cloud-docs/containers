@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 ---
 
@@ -17,7 +17,6 @@ lastupdated: "2019-03-21"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Guía de aprendizaje: Utilización de Knative gestionado para ejecutar apps sin servidor en clústeres de Kubernetes
@@ -39,7 +38,7 @@ Knative viene con 3 componentes clave, o _primitivas_, que le ayudan a crear, de
 - **Eventing:** Con la primitiva de gestión de sucesos, `Eventing`, puede crear activadores o corrientes de sucesos a los que se pueden suscribir otros servicios. Por ejemplo, supongamos que desea iniciar una nueva compilación de la app cada vez que se envía por push código a su repositorio maestro de GitHub. O que desea ejecutar una app sin servidor solo si la temperatura cae por debajo del punto de congelación. La primitiva `Eventing` se puede integrar en la interconexión CI/CD para automatizar la compilación y el despliegue de apps en caso de que se produzca un suceso específico.
 
 **¿Qué es el complemento Managed Knative on {{site.data.keyword.containerlong_notm}} (experimental)?** </br>
-Managed Knative on {{site.data.keyword.containerlong_notm}} es un complemento gestionado que integra Knative e Istio directamente con el clúster de Kubernetes. IBM prueba la versión de Knative e Istio en el complemento, que se puede utilizar en {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}} mantiene actualizados los componentes Knative e Istio mediante la actualización continua automática del complemento.
+Managed Knative on {{site.data.keyword.containerlong_notm}} es un complemento gestionado que integra Knative e Istio directamente con el clúster de Kubernetes. IBM prueba la versión de Knative e Istio en el complemento, que se puede utilizar en {{site.data.keyword.containerlong_notm}}. Para obtener más información sobre los complementos gestionados, consulte [Adición de servicios utilizando complementos gestionados](/docs/containers?topic=containers-managed-addons#managed-addons).
 
 **¿Existe alguna limitación?** </br>
 Si ha instalado el [controlador de admisiones del gestor de seguridad de imágenes de contenedor](/docs/services/Registry?topic=registry-security_enforce#security_enforce) en el clúster, no puede habilitar el complemento Knative gestionado en el clúster.
@@ -69,7 +68,7 @@ Esta guía de aprendizaje está pensada para los desarrolladores que están inte
 {: #knative_prerequisites}
 
 -  [Instale la CLI de IBM Cloud, el plugin de {{site.data.keyword.containerlong_notm}} y la CLI de Kubernetes](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Asegúrese de instalar una versión de la CLI de `kubectl` que coincida con la versión de Kubernetes de su clúster.
--  [Cree un clúster con al menos 3 nodos trabajadores con 4 núcleos y 16 GB de memoria (`b2c.4x16`) o más cada uno](/docs/containers?topic=containers-clusters#clusters_cli). Todos los nodos trabajadores deben ejecutar Kubernetes versión 1.11 o superior.
+-  [Cree un clúster con al menos 3 nodos trabajadores con 4 núcleos y 16 GB de memoria (`b3c.4x16`) o más cada uno](/docs/containers?topic=containers-clusters#clusters_cli). Todos los nodos trabajadores deben ejecutar Kubernetes versión 1.12 o superior.
 -  Asegúrese de que tiene el [rol de **Escritor** o de **Gestor** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre {{site.data.keyword.containerlong_notm}}.
 -  [Defina su clúster como destino de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -116,7 +115,13 @@ Knative se compila sobre Istio para asegurar que las cargas de trabajo sin servi
    ```
    {: screen}
 
-3. Verifique que todos los componentes de Knative se han instalado correctamente.
+3. Opcional: si desea utilizar Istio para todas las apps en el espacio de nombres `default` , añada la etiqueta `istio-injection=enabled` al espacio de nombres. Cada pod de app sin servidor debe ejecutar un complemento de proxy de Envoy para que la app se pueda incluir en la red de servicios de Istio. Esta etiqueta permite a Istio modificar automáticamente la especificación de la plantilla de pod en los nuevos despliegues de apps para que los pods se creen con contenedores de complementos de proxy de Envoy.
+  ```
+  kubectl label namespace default istio-injection=enabled
+  ```
+  {: pre}
+
+4. Verifique que todos los componentes de Knative se han instalado correctamente.
    1. Verifique que todos los pods del componente `Serving` de Knative están en el estado `Running`.  
       ```
       kubectl get pods --namespace knative-serving
@@ -268,6 +273,7 @@ En esta lección, desplegará la primera app [`Hello World`](https://hub.docker.
    ```
    kubectl get pods
    ```
+   {: pre}
 
    Salida de ejemplo:
    ```
@@ -279,14 +285,14 @@ En esta lección, desplegará la primera app [`Hello World`](https://hub.docker.
 4. Pruebe la app `Hello World`.
    1. Obtenga el dominio predeterminado que se ha asignado a su servicio Knative. Si ha cambiado el nombre del servicio Knative, o si ha desplegado la app en otro espacio de nombres, actualice estos valores en la consulta.
       ```
-      kubectl get svc/kn-helloworld
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       Salida de ejemplo:
       ```
-      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
-      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
+      NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
+      kn-helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True
       ```
       {: screen}
 

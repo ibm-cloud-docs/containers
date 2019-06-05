@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -123,7 +123,7 @@ subcollection: containers
 
 重要技術：
 * [智慧型排程會視需要放置工作負載](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [{{site.data.keyword.cloudant}} 可以跨應用程式持續保存及同步處理資料](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} 可以跨應用程式持續保存及同步處理資料](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [工作負載的漏洞掃描及隔離](/docs/services/Registry?topic=va-va_index#va_index)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
 * [{{site.data.keyword.openwhisk}} 會將資料消毒，並通知研究人員資料結構發生變更](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)

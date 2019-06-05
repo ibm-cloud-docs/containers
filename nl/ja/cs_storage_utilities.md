@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -29,17 +29,17 @@ subcollection: containers
 ## IBM Cloud Block Storage Attacher プラグイン (ベータ) のインストール
 {: #block_storage_attacher}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインを使用して、未フォーマットおよび未マウントのロー・ブロック・ストレージをクラスター内のワーカー・ノードに接続します。
+{{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインを使用して、未フォーマットおよび未マウントのロー・ブロック・ストレージをクラスター内のワーカー・ノードに接続します。  
 {: shortdesc}
 
-例えば、[Portworx](/docs/containers?topic=containers-portworx) などのソフトウェア定義ストレージ・ソリューション (SDS) を使用してデータを保管することを希望しているが、SDS の使用向けに最適化されている、追加のローカル・ディスクを備えたベア・メタル・ワーカー・ノードの使用を希望していない場合があります。非 SDS ワーカー・ノードにローカル・ディスクを追加するには、{{site.data.keyword.Bluemix_notm}} インフラストラクチャー・アカウント内でブロック・ストレージ・デバイスを手動で作成して、{{site.data.keyword.Bluemix_notm}} Block Volume Attacher を使用してそのストレージを非 SDS ワーカー・ノードに接続する必要があります。
+例えば、[Portworx](/docs/containers?topic=containers-portworx) などのソフトウェア定義ストレージ・ソリューション (SDS) を使用してデータを保管することを希望しているが、SDS の使用向けに最適化されている、追加のローカル・ディスクを備えたベア・メタル・ワーカー・ノードの使用を希望していない場合があります。 非 SDS ワーカー・ノードにローカル・ディスクを追加するには、{{site.data.keyword.Bluemix_notm}} インフラストラクチャー・アカウント内でブロック・ストレージ・デバイスを手動で作成して、{{site.data.keyword.Bluemix_notm}} Block Volume Attacher を使用してそのストレージを非 SDS ワーカー・ノードに接続する必要があります。
 
 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインは、デーモン・セットの一部としてクラスター内のすべてのワーカー・ノード上にポッドを作成して、後でブロック・ストレージ・デバイスを非 SDS ワーカー・ノードに接続するために使用する Kubernetes ストレージ・クラスをセットアップします。
 
-{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインの更新方法と削除方法については、[IBM Cloud Object Storage プラグインの更新](#update_block_attacher)と [IBM Cloud Object Storage プラグインの削除](#remove_block_attacher)を参照してください。
+{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインの更新方法と削除方法については、 [IBM Cloud Object Storage プラグインの更新](#update_block_attacher)と [IBM Cloud Object Storage プラグインの削除](#remove_block_attacher)を参照してください。
 {: tip}
 
-1.  [こちらの手順に従って](/docs/containers?topic=containers-integrations#helm)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をクラスター内にインストールします。
+1.  [こちらの手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をクラスター内にインストールします。
 
 2.  tiller がサービス・アカウントでインストールされていることを確認します。
 
@@ -62,9 +62,9 @@ subcollection: containers
    ```
    {: pre}
 
-4. {{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインをインストールします。このプラグインをインストールすると、事前定義されたブロック・ストレージ・クラスがクラスターに追加されます。
+4. {{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインをインストールします。 このプラグインをインストールすると、事前定義されたブロック・ストレージ・クラスがクラスターに追加されます。
    ```
-   helm install ibm/ibm-block-storage-attacher --name block-attacher
+   helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
    {: pre}
 
@@ -116,7 +116,7 @@ subcollection: containers
    ```
    {: screen}
 
-   正常にインストールされている場合は、1 つ以上の **ibmcloud-block-storage-attacher** ポッドが表示されます。ポッドの数は、クラスター内のワーカー・ノードの数と等しくなります。 すべてのポッドが **Running** 状態である必要があります。
+   正常にインストールされている場合は、1 つ以上の **ibmcloud-block-storage-attacher** ポッドが表示されます。 ポッドの数は、クラスター内のワーカー・ノードの数と等しくなります。 すべてのポッドが **Running** 状態である必要があります。
 
 6. {{site.data.keyword.Bluemix_notm}} Block Volume Attacher のストレージ・クラスが正常に作成されていることを確認します。
    ```
@@ -144,7 +144,7 @@ subcollection: containers
 
 2. オプション: 最新の Helm チャートをローカル・マシンにダウンロードします。 そして、パッケージを解凍し、`release.md` ファイルを参照して最新リリース情報を確認します。
    ```
-   helm fetch ibm/ibmcloud-block-storage-plugin
+   helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -225,18 +225,18 @@ subcollection: containers
    {: pre}
 
 2.  {{site.data.keyword.Bluemix_notm}} ストレージ・ユーティリティーのリポジトリーを複製します。
-```
+    ```
     git clone https://github.com/IBM/ibmcloud-storage-utilities.git
     ```
     {: pre}
 
-2. `block-storage-utilities` ディレクトリーに移動します。
+3. `block-storage-utilities` ディレクトリーに移動します。
    ```
    cd ibmcloud-storage-utilities/block-storage-provisioner
    ```
    {: pre}
 
-3. `yamlgen.yaml` ファイルを開いて、クラスター内のすべてのワーカー・ノードに追加するブロック・ストレージ構成を指定します。
+4. `yamlgen.yaml` ファイルを開いて、クラスター内のすべてのワーカー・ノードに追加するブロック・ストレージ構成を指定します。
    ```
    #
    # Can only specify 'performance' OR 'endurance' and associated clause
@@ -261,39 +261,39 @@ subcollection: containers
    <tbody>
    <tr>
    <td><code>クラスター</code></td>
-   <td>ロー・ブロック・ストレージを追加するクラスターの名前を入力します。</td>
+   <td>ロー・ブロック・ストレージを追加するクラスターの名前を入力します。 </td>
    </tr>
    <tr>
    <td><code>地域 (region)</code></td>
-   <td>クラスターを作成した {{site.data.keyword.containerlong_notm}} の地域を入力します。<code>[bxcs] cluster-get --cluster &lt;cluster_name_or_ID&gt;</code> を実行して、クラスターの地域を確認します。</td>
+   <td>クラスターを作成した {{site.data.keyword.containerlong_notm}} の地域を入力します。 <code>[bxcs] cluster-get --cluster &lt;cluster_name_or_ID&gt;</code> を実行して、クラスターの地域を確認します。  </td>
    </tr>
    <tr>
    <td><code>type</code></td>
-   <td>プロビジョンするストレージのタイプを入力します。 <code>performance</code> または <code>endurance</code> のいずれかを選択します。詳しくは、[ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)を参照してください。  </td>
+   <td>プロビジョンするストレージのタイプを入力します。 <code>performance</code> または <code>endurance</code> のいずれかを選択します。 詳しくは、[ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)を参照してください。  </td>
    </tr>
    <tr>
    <td><code>performance.iops</code></td>
-   <td>`performance` ストレージをプロビジョンする場合は、IOPS の数を入力します。詳しくは、[ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)を参照してください。 `endurance` ストレージをプロビジョンする場合は、このセクションを削除するか、各行頭に `#` を追加してこのセクションをコメント化します。
-</tr>
+   <td>`performance` ストレージをプロビジョンする場合は、IOPS の数を入力します。 詳しくは、[ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)を参照してください。 `endurance` ストレージをプロビジョンする場合は、このセクションを削除するか、各行頭に `#` を追加してこのセクションをコメント化します。
+   </tr>
    <tr>
    <td><code>endurance.tier</code></td>
-   <td>`endurance` ストレージをプロビジョンする場合は、ギガバイトあたりの IOPS の数を入力します。例えば、`ibmc-block-bronze` ストレージ・クラス内の定義に従ってブロック・ストレージをプロビジョンする場合は、2 を入力します。詳しくは、[ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)を参照してください。`performance` ストレージをプロビジョンする場合は、このセクションを削除するか、各行頭に `#` を追加してこのセクションをコメント化します。</td>
+   <td>`endurance` ストレージをプロビジョンする場合は、ギガバイトあたりの IOPS の数を入力します。 例えば、`ibmc-block-bronze` ストレージ・クラス内の定義に従ってブロック・ストレージをプロビジョンする場合は、2 を入力します。詳しくは、[ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)を参照してください。 `performance` ストレージをプロビジョンする場合は、このセクションを削除するか、各行頭に `#` を追加してこのセクションをコメント化します。 </td>
    </tr>
    <tr>
    <td><code>size</code></td>
-   <td>ストレージのサイズをギガバイト単位で入力します。サポートされているストレージ層サイズについては、[ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)を参照してください。</td>
+   <td>ストレージのサイズをギガバイト単位で入力します。 サポートされているストレージ層サイズについては、[ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)を参照してください。 </td>
    </tr>
    </tbody>
-   </table>
+   </table>  
 
-4. IBM Cloud インフラストラクチャー (SoftLayer) のユーザー名と API キーを取得します。このユーザー名と API キーは、`mkpvyaml` スクリプトによってクラスターにアクセスするために使用されます。
+5. IBM Cloud インフラストラクチャー (SoftLayer) のユーザー名と API キーを取得します。 このユーザー名と API キーは、`mkpvyaml` スクリプトによってクラスターにアクセスするために使用されます。
    1. [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/) にログインします。
    2. メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン") から、**「インフラストラクチャー」**を選択します。
    3. メニュー・バーから、**「アカウント」** > **「ユーザー」** > **「ユーザー・リスト」**を選択します。
    4. 取得するユーザー名と API キーを持つユーザーを確認します。
-   5. **「生成」**をクリックして API キーを生成するか、**「表示」**をクリックして既存の API キーを表示します。ポップアップ・ウィンドウが開いて、インフラストラクチャーのユーザー名と API キーが表示されます。
+   5. **「生成」**をクリックして API キーを生成するか、**「表示」**をクリックして既存の API キーを表示します。 ポップアップ・ウィンドウが開いて、インフラストラクチャーのユーザー名と API キーが表示されます。
 
-5. 資格情報を環境変数に保管します。
+6. 資格情報を環境変数に保管します。
    1. 環境変数を追加します。
       ```
       export SL_USERNAME=<infrastructure_username>
@@ -311,7 +311,7 @@ subcollection: containers
       ```
       {: pre}
 
-6.  `mkpvyaml` コンテナーをビルドして実行します。このコンテナーをイメージから実行すると、`mkpvyaml.py` スクリプトが実行されます。このスクリプトによって、クラスター内のすべてのワーカー・ノードにブロック・ストレージ・デバイスが追加されて、各ワーカー・ノードがこのブロック・ストレージ・デバイスにアクセスすることが許可されます。このスクリプトの終了時に生成される `pv-<cluster_name>.yaml` という YAML ファイルは、後でクラスター内に永続ボリュームを作成するために使用できます。
+7.  `mkpvyaml` コンテナーをビルドして実行します。 このコンテナーをイメージから実行すると、`mkpvyaml.py` スクリプトが実行されます。 このスクリプトによって、クラスター内のすべてのワーカー・ノードにブロック・ストレージ・デバイスが追加されて、各ワーカー・ノードがこのブロック・ストレージ・デバイスにアクセスすることが許可されます。 このスクリプトの終了時に生成される `pv-<cluster_name>.yaml` という YAML ファイルは、後でクラスター内に永続ボリュームを作成するために使用できます。
     1.  `mkpvyaml` コンテナーをビルドします。
         ```
         docker build -t mkpvyaml .
@@ -344,7 +344,7 @@ subcollection: containers
         {: screen}
     2.  このコンテナーを実行して、`mkpvyaml.py` スクリプトを実行します。
         ```
-        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
+        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME mkpvyaml
         ```
         {: pre}
 
@@ -412,7 +412,7 @@ subcollection: containers
    ```
    {: pre}
 
-2. [ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)のステップ 3 と 4 を参照して、非 SDS ワーカー・ノードに追加するブロック・ストレージ・デバイスのタイプ、サイズ、および IOPS 数を選択します。
+2. [ブロック・ストレージ構成の決定](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)のステップ 3 と 4 を参照して、非 SDS ワーカー・ノードに追加するブロック・ストレージ・デバイスのタイプ、サイズ、および IOPS 数を選択します。    
 
 3. 非 SDS ワーカー・ノードと同じゾーン内にブロック・ストレージ・デバイスを作成します。
 
@@ -428,7 +428,7 @@ subcollection: containers
    ```
    {: pre}
 
-4. ブロック・ストレージ・デバイスが作成されたことを確認して、ボリュームの **`id`** を書き留めます。**注:** ブロック・ストレージ・デバイスがすぐに表示されない場合は、数分間お待ちください。その後、このコマンドを再実行してください。
+4. ブロック・ストレージ・デバイスが作成されたことを確認して、ボリュームの **`id`** を書き留めます。 **注:** ブロック・ストレージ・デバイスがすぐに表示されない場合は、数分間お待ちください。 その後、このコマンドを再実行してください。
    ```
    ibmcloud sl block volume-list
    ```
@@ -437,7 +437,7 @@ subcollection: containers
    出力例:
    ```
    id         username          datacenter   storage_type                capacity_gb   bytes_used   ip_addr         lunId   active_transactions
-   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0
+   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0   
    ```
    {: screen}
 
@@ -463,7 +463,7 @@ subcollection: containers
    ```
    {: screen}
 
-6. 非 SDS ワーカー・ノードがブロック・ストレージ・デバイスにアクセスすることを許可します。`<volume_ID>` を、既に取得したブロック・ストレージ・デバイスのボリューム ID に置き換えて、`<private_worker_IP>` を、このデバイスを接続する非 SDS ワーカー・ノードのプライベート IP アドレスに置き換えてください。
+6. 非 SDS ワーカー・ノードがブロック・ストレージ・デバイスにアクセスすることを許可します。 `<volume_ID>` を、既に取得したブロック・ストレージ・デバイスのボリューム ID に置き換えて、`<private_worker_IP>` を、このデバイスを接続する非 SDS ワーカー・ノードのプライベート IP アドレスに置き換えてください。
 
    ```
    ibmcloud sl block access-authorize <volume_ID> -p <private_worker_IP>
@@ -485,7 +485,7 @@ subcollection: containers
    出力例:
    ```
    ID          name                 type   private_ip_address   source_subnet   host_iqn                                      username   password           allowed_host_id
-   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581
+   123456789   <private_worker_IP>  IP     <private_worker_IP>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581   
    ```
    {: screen}
 
@@ -502,10 +502,10 @@ subcollection: containers
 
 **始める前に**:
 - 未フォーマットおよび未マウントのロー・ブロック・ストレージを非 SDS ワーカー・ノードに対して[自動的に](#automatic_block)または[手動で](#manual_block)作成済みであることを確認します。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **ロー・ブロック・ストレージを非 SDS ワーカー・ノードに接続するには、以下のようにします**。
-1. PV の作成を準備します。
+1. PV の作成を準備します。  
    - **`mkpvyaml` コンテナーを使用した場合:**
      1. `pv-<cluster_name>.yaml` ファイルを開きます。
         ```
@@ -523,7 +523,7 @@ subcollection: containers
         {: pre}
 
      2. ブロック・ストレージ・デバイスの詳細を PV に追加します。
-```
+        ```
         apiVersion: v1
         kind: PersistentVolume
         metadata:
@@ -554,7 +554,7 @@ subcollection: containers
         </thead>
         <tbody>
       	<tr>
-      	<td><code>metadata.name</code></td>
+          <td><code>metadata.name</code></td>
       	<td>PV の名前を入力します。</td>
       	</tr>
         <tr>
@@ -563,31 +563,31 @@ subcollection: containers
         </tr>
         <tr>
         <td><code>ibm.io/username</code></td>
-        <td>既に取得した IBM Cloud インフラストラクチャー (SoftLayer) のユーザー名を入力します。</td>
+        <td>既に取得した IBM Cloud インフラストラクチャー (SoftLayer) のユーザー名を入力します。 </td>
         </tr>
         <tr>
         <td><code>ibm.io/password</code></td>
-        <td>既に取得した IBM Cloud インフラストラクチャー (SoftLayer) のパスワードを入力します。</td>
+        <td>既に取得した IBM Cloud インフラストラクチャー (SoftLayer) のパスワードを入力します。 </td>
         </tr>
         <tr>
         <td><code>ibm.io/targetip</code></td>
-        <td>既に取得したターゲット IP を入力します。</td>
+        <td>既に取得したターゲット IP を入力します。 </td>
         </tr>
         <tr>
         <td><code>ibm.io/lunid</code></td>
-        <td>既に取得したブロック・ストレージ・デバイスの lun ID を入力します。</td>
+        <td>既に取得したブロック・ストレージ・デバイスの lun ID を入力します。 </td>
         </tr>
         <tr>
         <td><code>ibm.io/nodeip</code></td>
-        <td>ブロック・ストレージ・デバイスへのアクセスを既に許可した、ブロック・ストレージ・デバイスを接続するワーカー・ノードのプライベート IP アドレスを入力します。</td>
+        <td>ブロック・ストレージ・デバイスへのアクセスを既に許可した、ブロック・ストレージ・デバイスを接続するワーカー・ノードのプライベート IP アドレスを入力します。 </td>
         </tr>
         <tr>
-        <td><code>ibm.io/volID</code></td>
-        <td>既に取得したブロック・ストレージ・ボリュームの ID を入力します。</td>
+          <td><code>ibm.io/volID</code></td>
+        <td>既に取得したブロック・ストレージ・ボリュームの ID を入力します。 </td>
         </tr>
         <tr>
         <td><code>storage</code></td>
-        <td>既に作成したブロック・ストレージ・デバイスのサイズを入力します。例えば、ブロック・ストレージ・デバイスが 20 ギガバイトの場合は、<code>20Gi</code> と入力します。</td>
+        <td>既に作成したブロック・ストレージ・デバイスのサイズを入力します。 例えば、ブロック・ストレージ・デバイスが 20 ギガバイトの場合は、<code>20Gi</code> と入力します。  </td>
         </tr>
         </tbody>
         </table>
@@ -643,5 +643,5 @@ subcollection: containers
 
    ブロック・ストレージ・デバイスが正常に接続された場合は、**ibm.io/dm** がデバイス ID (`/dev/dm/1` など) に設定され、CLI 出力の **Annotations** セクションに **ibm.io/attachstatus=attached** と表示されます。
 
-ボリュームを切り離す場合は、PV を削除します。切り離されたボリュームは、特定のワーカー・ノードによるアクセスが引き続き許可されて、異なるボリュームを同じワーカー・ノードに接続するために {{site.data.keyword.Bluemix_notm}} Block Volume Attacher のストレージ・クラスを使用して新しい PV を作成したときに再接続されます。元の切り離されたボリュームが再接続されることを回避するには、`ibmcloud sl block access-revoke` コマンドを使用して、ワーカー・ノードが切り離されたボリュームにアクセスすることを禁止してください。ボリュームを切り離しても、そのボリュームは IBM Cloud インフラストラクチャー (SoftLayer) アカウントから削除されません。ボリュームの課金をキャンセルするには、[該当ストレージを IBM Cloud インフラストラクチャー (SoftLayer) アカウントから手動で削除する必要があります](/docs/containers?topic=containers-cleanup)。
+ボリュームを切り離す場合は、PV を削除します。 切り離されたボリュームは、特定のワーカー・ノードによるアクセスが引き続き許可されて、異なるボリュームを同じワーカー・ノードに接続するために {{site.data.keyword.Bluemix_notm}} Block Volume Attacher のストレージ・クラスを使用して新しい PV を作成したときに再接続されます。 元の切り離されたボリュームが再接続されることを回避するには、`ibmcloud sl block access-revoke` コマンドを使用して、ワーカー・ノードが切り離されたボリュームにアクセスすることを禁止してください。 ボリュームを切り離しても、そのボリュームは IBM Cloud インフラストラクチャー (SoftLayer) アカウントから削除されません。 ボリュームの課金をキャンセルするには、[該当ストレージを IBM Cloud インフラストラクチャー (SoftLayer) アカウントから手動で削除する必要があります](/docs/containers?topic=containers-cleanup)。
 {: note}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -82,11 +82,11 @@ Las subredes siguientes se suministran automáticamente en las VLAN públicas y 
 
 **Subredes VLAN públicas**
 * La subred pública primaria determina las direcciones IP públicas que se asignan a los nodos trabajadores durante la creación del clúster. Varios clústeres en la misma VLAN pueden compartir una subred pública primaria.
-* La subred pública portátil está enlazada a un solo clúster y proporciona al clúster 8 direcciones IP públicas. 3 IP están reservadas para las funciones de la infraestructura IBM Cloud (SoftLayer). 1 IP la utiliza el ALB de Ingress público predeterminado y 4 IP se pueden utilizar para crear servicios públicos de red de equilibrio de carga. Las IP públicas portátiles son permanentes, direcciones IP fijas que se pueden utilizar para acceder a los servicios de equilibrador de carga a través de Internet. Si necesita más de 4 IP para los equilibradores de carga públicos, consulte [Adición de direcciones IP portátiles](/docs/containers?topic=containers-subnets#adding_ips).
+* La subred pública portátil está enlazada a un solo clúster y proporciona al clúster 8 direcciones IP públicas. 3 IP están reservadas para las funciones de la infraestructura IBM Cloud (SoftLayer). El ALB de Ingress público predeterminado utiliza 1 IP y se pueden utilizar 4 IPs para crear servicios de equilibrador de carga de red pública (NLB). Las IP públicas portátiles son direcciones IP fijas y permanentes, que se pueden utilizar para acceder a los NLB por internet. Si necesita más de 4 IP para los NLB, consulte [Adición de direcciones IP portátiles](/docs/containers?topic=containers-subnets#adding_ips).
 
 **Subredes VLAN privadas**
 * La subred privada primaria determina las direcciones IP privadas que se asignan a los nodos trabajadores durante la creación del clúster. Varios clústeres en la misma VLAN pueden compartir una subred privada primaria.
-* La subred privada portátil está enlazada a un solo clúster y proporciona al clúster 8 direcciones IP privadas. 3 IP están reservadas para las funciones de la infraestructura IBM Cloud (SoftLayer). 1 IP la utiliza el ALB de Ingress privado predeterminado y 4 IP se pueden utilizar para crear servicios privados de red de equilibrio de carga. Las IP privadas portátiles son permanentes, direcciones IP fijas que se pueden utilizar para acceder a los servicios de equilibrador de carga a través de Internet. Si necesita más de 4 IP para los equilibradores de carga privados, consulte [Adición de direcciones IP portátiles](/docs/containers?topic=containers-subnets#adding_ips).
+* La subred privada portátil está enlazada a un solo clúster y proporciona al clúster 8 direcciones IP privadas. 3 IP están reservadas para las funciones de la infraestructura IBM Cloud (SoftLayer). El ALB de Ingress privado predeterminado utiliza 1 IP y se pueden utilizar 4 IPs para crear servicios de equilibrador de carga de red privada (NLB). Las IP privadas portátiles son direcciones IP fijas y permanentes, que se pueden utilizar para acceder a los NLB por una red privada. Si necesita más de 4 IP para los NLB privados, consulte [Adición de direcciones IP portátiles](/docs/containers?topic=containers-subnets#adding_ips).
 
 Para ver todas las subredes que se suministran en su cuenta, ejecute `ibmcloud ks subnets`. Para ver las subredes privadas portátiles y públicas portátiles que están enlazadas a un clúster, ejecute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` y busque la sección **Subnet VLANs**.
 
@@ -104,7 +104,7 @@ Sin embargo, en varias situaciones, los componentes del clúster deben poder com
 **¿Qué son las funciones de direccionador virtual (VRF) y la expansión de VLAN?**</br>
 
 <dl>
-<dt>[Función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)</dt>
+<dt>[Función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
 <dd>Una VRF permite que todas las VLAN y subredes de la cuenta de la infraestructura se comuniquen entre sí. Además, se necesita una VRF para permitir que los trabajadores y el maestro se comuniquen a través del punto final de servicio privado. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Tenga en cuenta que VRF elimina la opción de expansión de VLAN para la cuenta, ya que todas las VLAN pueden comunicarse a menos que configure un dispositivo de pasarela para gestionar el tráfico.</dd>
 <dt>[Expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>Si no puede o no desea habilitar VRF, habilite la expansión de VLAN. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Tenga en cuenta que no puede habilitar el punto final de servicio privado si elige habilitar la expansión de VLAN en lugar de una VRF.</dd>
@@ -159,14 +159,16 @@ Si desea crear un clúster multizona, si tiene varias VLAN para un clúster o si
 ### Ya he realizado mi elección en cuanto a conexiones de VLAN. ¿Cómo las configuro?
 {: #cs_network_ov_worker_setup}
 
-Puede seguir los pasos del apartado sobre [Configuración de red de clúster con una VLAN pública y una VLAN privada](/docs/containers?topic=containers-cs_network_cluster#both_vlans) o [Configuración de red de clúster con una VLAN privada](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan).
+Puede seguir los pasos del apartado sobre [Configuración de red de clúster con una VLAN pública y una VLAN privada](/docs/containers?topic=containers-cs_network_cluster#both_vlans) o [Configuración de red de clúster solo con una VLAN privada](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan).
 {: shortdesc}
 
-### ¿Puedo cambiar mi decisión sobre VLAN más adelante?
+### ¿Puedo cambiar mi decisión sobre VLAN más adelante? ¿Las direcciones IP de mi nodo trabajador cambian?
 {: #cs_network_ov_worker_change}
 
 Puede cambiar la configuración de la VLAN modificando las agrupaciones de nodos trabajadores del clúster. Para obtener más información, consulte [Cambio de las conexiones de VLAN de nodo trabajador](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
 {: shortdesc}
+
+A su nodo trabajador se le asigna una dirección IP en las VLAN públicas o privadas que utiliza el clúster. Una vez que se ha suministrado el nodo trabajador, las direcciones IP no cambian. Por ejemplo, las direcciones IP de nodo trabajador persisten en las operaciones `reload`, `reboot` y `update` . Además, la dirección IP privada del nodo trabajador se utiliza para la identidad del nodo trabajador en la mayoría de los mandatos `kubectl` . Si cambia las VLAN que utiliza la agrupación de trabajadores, los nuevos nodos trabajadores que se suministran en esa agrupación utilizan las nuevas VLAN para sus direcciones IP. Las direcciones IP de los nodos trabajadores existentes no cambian, pero, si lo desea, puede eliminar los nodos trabajadores que utilizan las VLAN antiguas.
 
 <br />
 
@@ -243,7 +245,7 @@ Para que los usuarios del clúster puedan acceder al maestro de forma pública o
 {: shortdesc}
 
 **Comunicación entre nodos trabajadores y maestro**</br>
-La comunicación se establece sobre la red privada a través del punto final de servicio privado. Aunque habilite el punto final de servicio público para el clúster, la comunicación entre el maestro de Kubernetes y los nodos trabajadores permanece en la red privada.
+La comunicación se establece tanto sobre la red privada a través del punto final de servicio privado como sobre la red pública a través del punto final de servicio público. Direccionando la mitad del tráfico de trabajador a maestro por el punto final público y la otra mitad por el punto final privado, la comunicación de maestro a trabajador está protegida de posibles interrupciones en la red pública o privada.
 
 **Acceso al nodo maestro**</br>
 Se puede acceder al maestro de forma privada a través del punto final de servicio privado si los usuarios autorizados del clúster están en la red privada de {{site.data.keyword.Bluemix_notm}} o están conectados a la red privada a través de una conexión VPN. Si no es así, los usuarios autorizados del clúster pueden acceder de forma pública al nodo maestro a través del punto final de servicio público.
@@ -256,7 +258,7 @@ Para configurar los puntos finales de servicio público y privado durante la cre
 Si los nodos trabajadores solo están configurados con una VLAN privada y VRF no está habilitada en la cuenta de {{site.data.keyword.Bluemix_notm}}, debe configurar una solución alternativa para la conectividad de red entre los nodos trabajadores y el maestro. Puede configurar un cortafuegos con políticas de red personalizadas para proporcionar seguridad de red dedicada para el clúster estándar y para detectar y solucionar problemas de intrusión en la red. Por ejemplo, puede configurar un [dispositivo direccionador virtual](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o un [dispositivo de seguridad Fortigate](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) para que actúe como cortafuegos y bloquee el tráfico no deseado. Si configura un cortafuegos, también debe [abrir los puertos y direcciones IP necesarios](/docs/containers?topic=containers-firewall#firewall_outbound) para cada región para que los nodos maestro y trabajador se puedan comunicar.
 {: shortdesc}
 
-Si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN mediante la [habilitación de la expansión de VLAN](/docs/containers?topic=containers-subnets#vra-routing).
+Si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN [habilitando la expansión de VLAN](/docs/containers?topic=containers-subnets#vra-routing).
 {: important}
 
 ## Planificación del clúster en la red local o con comunicación de {{site.data.keyword.icpfull_notm}}
@@ -279,10 +281,10 @@ Internet Protocol Security (IPSec) estándar del sector.
 * Para configurar una conexión segura entre el clúster y una red local, [configure y despliegue el servicio VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) directamente en un pod del clúster.
 * Para configurar una conexión segura entre el clúster y una instancia de {{site.data.keyword.icpfull_notm}}, consulte [Conexión de la nube pública y privada con la VPN de strongSwan](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn).
 
-### Configuración de una conexión VPN para una configuración solo de VLAN privada
+### Configuración de una conexión VPN para una configuración de VLAN solo privada
 {: #cs_network_ov_vpn_private}
 
-Si el clúster está conectado únicamente a una VLAN privada, debe configurar un punto final de VPN IPSec en un VRA o un dispositivo de pasarela FSA. A continuación, puede [configurar y desplegar el servicio VPN de IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) en el clúster para que utilice el punto final de VPN en la pasarela. Si no desea utilizar strongSwan, puede [configurar la conectividad de VPN directamente con VRA](/docs/containers?topic=containers-vpn#vyatta).
+Si el clúster solo está conectado a una VLAN privada, debe configurar un punto final de VPN IPSec Ven un dispositivo de pasarela VRA (Vyatta) o FSA. A continuación, puede [configurar y desplegar el servicio VPN de IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) en el clúster para que utilice el punto final de VPN en la pasarela. Si no desea utilizar strongSwan, puede [configurar la conectividad de VPN directamente con VRA](/docs/containers?topic=containers-vpn#vyatta).
 {: shortdesc}
 
 <p>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -55,8 +55,14 @@ Consultez le tableau suivant pour obtenir un récapitulatif des modifications de
 </thead>
 <tbody>
 <tr>
+<td>411 / 315</td>
+<td>15 avril 2019</td>
+<td>Mise à jour de la valeur de l'expiration du cookie {{site.data.keyword.appid_full}} de sorte qu'elle corresponde à la valeur de l'expiration du jeton d'accès. </td>
+<td>-</td>
+</tr>
+<tr>
 <td>411 / 306</td>
-<td>21 mars 2019</td>
+<td>22 mars 2019</td>
 <td>Mise à jour de la version Go à 1.12.1.</td>
 <td>-</td>
 </tr>
@@ -65,7 +71,7 @@ Consultez le tableau suivant pour obtenir un récapitulatif des modifications de
 <td>18 mars 2019</td>
 <td><ul>
 <li>Correction de vulnérabilités pour les analyses d'image.</li>
-<li>Amélioration de la fonction de consignation pour {{site.data.keyword.appid_full}}.</li>
+<li>Amélioration de la fonction de consignation pour {{site.data.keyword.appid_full_notm}}.</li>
 </ul></td>
 <td>-</td>
 </tr>

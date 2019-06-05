@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -57,13 +57,12 @@ subcollection: containers
 3.  如果您的帳戶使用多個資源群組，請瞭解您帳戶的[管理資源群組](/docs/containers?topic=containers-users#resource_groups)策略。 
     *  在您登入 {{site.data.keyword.Bluemix_notm}} 時，會在您設為目標的資源群組中建立叢集。如果您未將目標設為資源群組，則會自動將目標設為 default 資源群組。
     *  如果您要在非 default 資源群組中建立叢集，則至少需要是資源群組的**檢視者**角色。如果您沒有任何資源群組角色，但仍是資源群組內服務的**管理者**，則會在 default 資源群組中建立您的叢集。
-    *  您無法變更叢集的資源群組。叢集只能與位於相同資源群組中的其他 {{site.data.keyword.Bluemix_notm}} 服務，或不支援資源群組的服務（例如 {{site.data.keyword.registrylong_notm}}）整合。
+    *  您無法變更叢集的資源群組。此外，如果您需要使用 `ibmcloud ks cluster-service-bind` [指令](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind)來進行[與 {{site.data.keyword.Bluemix_notm}} 服務的整合](/docs/containers?topic=containers-service-binding#bind-services)，則該服務必須與叢集位於相同的資源群組中。未使用 {{site.data.keyword.registrylong_notm}} 這類資源群組或不需要 {{site.data.keyword.la_full_notm}} 這類服務連結的服務都會運作，即使叢集位於不同的資源群組中。
     *  如果您計劃使用 [{{site.data.keyword.monitoringlong_notm}} 進行度量](/docs/containers?topic=containers-health#view_metrics)，請計劃提供一個叢集名稱，該名稱在帳戶的所有資源群組和地區中必須是唯一的，以避免發生度量命名衝突。
-    * 如果您有 {{site.data.keyword.Bluemix_dedicated}} 帳戶，則只能在 default 資源群組中建立叢集。
 
 4.  設定 IBM Cloud 基礎架構 (SoftLayer) 網路。有下列選項可選擇：
-    *  **已啟用 VRF**：透過虛擬遞送和轉遞 (VRF) 及其多重隔離分隔技術，您可以使用公用和專用服務端點，與執行 Kubernetes 1.11 或更新版本的叢集中的 Kubernetes 主節點進行通訊。利用[專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，Kubernetes 主節點與工作者節點之間的通訊可維持在專用 VLAN 上進行。如果您要從本端機器上對叢集執行 `kubectl` 指令，則必須連接至 Kubernetes 主節點所在的相同專用 VLAN。若要在網際網路上公開您的應用程式，您的工作者節點必須連接至公用 VLAN，這樣送入的網路資料流量才能轉遞至您的應用程式。如果要透過網際網路對叢集執行 `kubectl` 指令，您可以使用公用服務端點。透過公用服務端點，網路資料流量會透過公用 VLAN 遞送，並使用 OpenVPN 通道保護其安全。若要使用專用服務端點，您必須針對 VRF 及服務端點啟用您的帳戶，它需要開立 IBM Cloud 基礎架構 (SoftLayer) 支援案例。如需相關資訊，請參閱 [{{site.data.keyword.Bluemix_notm}}上的 VRF 概觀](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，以及[針對服務端點啟用帳戶](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)。
-    *  **非 VRF**：如果您不要或無法啟用帳戶的 VRF，或者，如果您建立的叢集是執行 Kubernetes 1.10 版，則工作者節點可以透過[公用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)，自動透過公用網路連接至 Kubernetes 主節點。為了保護此通訊，{{site.data.keyword.containerlong_notm}} 會在建立叢集時自動設定 Kubernetes 主節點與工作者節點之間的 OpenVPN 連線。如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+    *  **已啟用 VRF**：透過虛擬遞送和轉遞 (VRF) 及其多重隔離分隔技術，您可以使用公用和專用服務端點，與執行 Kubernetes 1.11 或更新版本的叢集中的 Kubernetes 主節點進行通訊。利用[專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，Kubernetes 主節點與工作者節點之間的通訊可維持在專用 VLAN 上進行。如果您要從本端機器上對叢集執行 `kubectl` 指令，則必須連接至 Kubernetes 主節點所在的相同專用 VLAN。若要在網際網路上公開您的應用程式，您的工作者節點必須連接至公用 VLAN，這樣送入的網路資料流量才能轉遞至您的應用程式。如果要透過網際網路對叢集執行 `kubectl` 指令，您可以使用公用服務端點。透過公用服務端點，網路資料流量會透過公用 VLAN 遞送，並使用 OpenVPN 通道保護其安全。若要使用專用服務端點，您必須針對 VRF 及服務端點啟用您的帳戶，它需要開立 IBM Cloud 基礎架構 (SoftLayer) 支援案例。如需相關資訊，請參閱 [{{site.data.keyword.Bluemix_notm}} 上的 VRF 概觀](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)及[針對服務端點啟用帳戶](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
+    *  **非 VRF**：如果您不要或無法啟用帳戶的 VRF，則工作者節點可以透過[公用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)，自動透過公用網路連接至 Kubernetes 主節點。為了保護此通訊，{{site.data.keyword.containerlong_notm}} 會在建立叢集時自動設定 Kubernetes 主節點與工作者節點之間的 OpenVPN 連線。如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 
 ### 叢集層次
@@ -72,10 +71,10 @@ subcollection: containers
 請遵循步驟來準備叢集的設定。
 {: shortdesc}
 
-1.  驗證您具有 {{site.data.keyword.containerlong_notm}} 的**管理者**平台角色。
+1.  驗證您具有 {{site.data.keyword.containerlong_notm}} 的**管理者**平台角色。若要容許叢集從專用登錄取回映像檔，您還需要 {{site.data.keyword.registrylong_notm}} 的**管理者**平台角色。
     1.  從 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/) 功能表列中，按一下**管理 > 存取權 (IAM)**。
     2.  按一下**使用者**頁面，然後從表格中選取您自己。
-    3.  從**存取原則**標籤中，確認您的**角色**為**管理者**。您可以是帳戶中所有資源的**管理者**，或至少是 {{site.data.keyword.containershort_notm}} 的管理者。**附註**：如果您只在一個資源群組或地區（而非整個帳戶）中，具有 {{site.data.keyword.containershort_notm}} 的**管理者**角色，則必須在帳戶層次至少具有**檢視者**角色，才能看到帳戶的 VLAN。
+    3.  從**存取原則**標籤中，確認您的**角色**為**管理者**。您可以是帳戶中所有資源的**管理者**，或至少是 {{site.data.keyword.containershort_notm}} 的管理者。**附註**：如果您只在一個資源群組或地區（而非整個帳戶）中，具有 {{site.data.keyword.containershort_notm}} 的**管理者**角色，則必須在帳戶層次至少具有**檢視者**角色，才能看到帳戶的 VLAN。<p class="tip">請確定您的帳戶管理者未同時將**管理者**平台角色與服務角色指派給您。您必須個別指派平台角色及服務角色。</p>
 2.  決定[免費或標準叢集](/docs/containers?topic=containers-cs_ov#cluster_types)。您可以建立 1 個免費叢集來試用部分功能 30 天，或建立完全可自訂的標準叢集，並選擇硬體隔離。請建立標準叢集，以獲得更多好處及對您叢集效能的控制。
 3.  [計劃您的叢集設定](/docs/containers?topic=containers-plan_clusters#plan_clusters)。
     *  判定是要建立[單一區域](/docs/containers?topic=containers-plan_clusters#single_zone)還是[多區域](/docs/containers?topic=containers-plan_clusters#multizone)叢集。請注意，多區域叢集僅適用於選取位置。
@@ -96,7 +95,7 @@ subcollection: containers
 Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝置，讓應用程式保持高可用性。您必須先建立叢集並設定該叢集裡工作者節點的定義，才能部署應用程式。
 {:shortdesc}
 
-想要建立使用[服務端點](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)的叢集來進行[主節點到工作者節點的通訊](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)？您必須[使用 CLI](#clusters_cli) 來建立該叢集。
+想要建立使用[服務端點](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)的叢集來進行[主節點到工作者節點的通訊](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)？您必須[使用 CLI](#clusters_cli) 來建立該叢集。
 {: note}
 
 ### 建立免費叢集
@@ -110,14 +109,14 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 
 1. [準備建立叢集](#cluster_prepare)，以確保您具有正確的 {{site.data.keyword.Bluemix_notm}} 帳戶設定及使用者許可權，並決定要使用的叢集設定及資源群組。
 2. 在[型錄 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/catalog?category=containers) 中，選取 **{{site.data.keyword.containershort_notm}}** 來建立叢集。
-3. 選取要部署叢集的位置。**附註**：您不能在華盛頓特區（美國東部）或東京（亞太地區北部）位置建立免費叢集。
+3. 選取要部署叢集的地理位置。您的叢集建立在這個地理位置的某個區域中。
 4. 選取**免費**叢集方案。
 5. 提供叢集名稱。此名稱必須以字母開頭，可以包含字母、數字及連字號 (-)，且長度不得超過 35 個字元。叢集名稱和叢集部署所在的地區會形成 Ingress 子網域的完整網域名稱。為了確保 Ingress 子網域在地區內是唯一的，叢集名稱可能會被截斷，並在 Ingress 網域名稱內附加一個隨機值。
 
-6. 按一下**建立叢集**。依預設，會建立具有一個工作者節點的工作者節點儲存區。您可以在**工作者節點**標籤中查看工作者節點部署的進度。部署完成時，您可以在**概觀**標籤中看到叢集已就緒。
+6. 按一下**建立叢集**。依預設，會建立具有一個工作者節點的工作者節點儲存區。您可以在**工作者節點**標籤中查看工作者節點部署的進度。部署完成時，您可以在**概觀**標籤中看到叢集已備妥。請注意，即使叢集已備妥，其他服務所使用的一些叢集部分（例如 Ingress 密碼或登錄映像檔取回密碼）可能還是在處理中。
 
     變更在建立期間指派的唯一 ID 或網域名稱會封鎖 Kubernetes 主節點，使其無法管理叢集。
-    {: tip}
+    {: note}
 
 </br>
 
@@ -158,19 +157,19 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 
 8. 為叢集提供唯一名稱。**附註**：變更在建立期間指派的唯一 ID 或網域名稱會封鎖 Kubernetes 主節點，使其無法管理叢集。
 9. 選擇叢集主節點的 Kubernetes API 伺服器版本。
-10. 按一下**建立叢集**。即會建立具有所指定工作者數目的工作者節點儲存區。您可以在**工作者節點**標籤中查看工作者節點部署的進度。部署完成時，您可以在**概觀**標籤中看到叢集已就緒。
+10. 按一下**建立叢集**。即會建立具有所指定工作者數目的工作者節點儲存區。您可以在**工作者節點**標籤中查看工作者節點部署的進度。部署完成時，您可以在**概觀**標籤中看到叢集已備妥。請注意，即使叢集已備妥，其他服務所使用的一些叢集部分（例如 Ingress 密碼或登錄映像檔取回密碼）可能還是在處理中。
 
 **下一步為何？**
 
 當叢集開始執行時，您可以查看下列作業：
 
 -   如果您已在具有多區域功能的區域中建立叢集，請藉由[將區域新增至叢集](#add_zone)來展開工作者節點。
--   [安裝 CLI 以開始使用您的叢集。](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
+-   [安裝 CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install) 或[啟動 Kubernetes Terminal 以在 Web 瀏覽器中直接使用 CLI](/docs/containers?topic=containers-cs_cli_install#cli_web)，以開始使用叢集。
 -   [在叢集裡部署應用程式。](/docs/containers?topic=containers-app#app_cli)
--   [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry?topic=registry-index)
+-   [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry?topic=registry-getting-started)
 -   如果您有防火牆，則可能需要[開啟必要埠](/docs/containers?topic=containers-firewall#firewall)，才能使用 `ibmcloud`、`kubectl` 或 `calicotl` 指令，以容許來自叢集的出埠資料流量，或容許網路服務的入埠資料流量。
 -   [設定叢集 autoscaler](/docs/containers?topic=containers-ca#ca)，以根據工作負載資源要求來自動新增或移除工作者節點儲存區中的工作者節點。
--   具有 Kubernetes 1.10 版或更新版本的叢集：控制誰可以使用 [Pod 安全原則](/docs/containers?topic=containers-psp)在您的叢集裡建立 Pod。
+-   控制誰可以使用 [Pod 安全原則](/docs/containers?topic=containers-psp)在您的叢集中建立 Pod。
 
 <br />
 
@@ -181,6 +180,9 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝置，讓應用程式保持高可用性。您必須先建立叢集並設定該叢集裡工作者節點的定義，才能部署應用程式。
 {:shortdesc}
 
+### 範例 CLI `ibmcloud ks cluster-create` 指令
+{: #clusters_cli_samples}
+
 您之前是否已建立叢集，只是想要尋找快速範例指令？可試試這些範例。
 *  **免費叢集**：
    ```
@@ -189,7 +191,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
    {: pre}
 *  **標準叢集、共用虛擬機器**：
    ```
-   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b2c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
 *  **標準叢集、裸機伺服器**：
@@ -197,11 +199,19 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
    ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
-*  **標準叢集、具有[公用及專用服務端點](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)的虛擬機器，使用已啟用 VRF 的帳戶**：
+*  **標準叢集、具有[公用及專用服務端點](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)的虛擬機器，使用已啟用 VRF 的帳戶**：
    ```
-   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b2c.4x16 --hardware shared --workers 3 --public-service-endpoint --private-service-endpoint --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-service-endpoint --private-service-endpoint --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
+*   **標準叢集、僅限專用 VLAN 及僅限專用服務端點**。如需配置專用叢集網路的相關資訊，請參閱[設定具有僅限專用 VLAN 的叢集網路](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan)。
+    ```
+    ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --private-service-endpoint --private-vlan <private_VLAN_ID> --private-only
+    ```
+    {: pre}
+
+### 在 CLI 中建立叢集的步驟
+{: #clusters_cli_steps}
 
 開始之前，請安裝 {{site.data.keyword.Bluemix_notm}} CLI 及 [{{site.data.keyword.containerlong_notm}} 外掛程式](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)。
 
@@ -233,16 +243,17 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
       ```
       {: pre}
 
-    4.  如果您要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請執行 `ibmcloud ks region-set`。
+    4. **免費叢集**：如果您要在特定地區中建立免費叢集，則必須執行 `ibmcloud ks region-set` 以將該地區設為目標。
 
-4.  建立叢集。可以在任何地區及可用區域中建立標準叢集。不能在美國東部或北太平洋地區及對應區域建立免費叢集，而且您不能選取區域。
+4.  建立叢集。可以在任何地區及可用區域中建立標準叢集。可以在您使用 `ibmcloud ks region-set` 指令設為目標的地區中建立免費叢集，但無法選取區域。
 
     1.  **標準叢集**：檢閱可用的區域。顯示的區域取決於您所登入的 {{site.data.keyword.containerlong_notm}} 地區。若要跨越區域間的叢集，您必須在[具有多區域功能的區域](/docs/containers?topic=containers-regions-and-zones#zones)中建立叢集。
-
         ```
         ibmcloud ks zones
         ```
         {: pre}
+        若您選取的區域不在您的國家/地區境內，請謹記，您可能需要合法授權，才能實際將資料儲存在其他國家/地區。
+        {: note}
 
     2.  **標準叢集**：選擇區域，並檢閱該區域中可用的機型。機型指定每一個工作者節點可用的虛擬或實體運算主機。
 
@@ -283,7 +294,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
     4.  **免費及標準叢集**：執行 `cluster-create` 指令。您可以選擇免費叢集（包括一個已設定 2vCPU 及 4GB 記憶體的工作者節點），且會在 30 天後自動刪除。當您建立標準叢集時，依預設，工作者節點磁碟為 AES 256 位元加密，其硬體由多個 IBM 客戶共用，並依使用時數計費。</br>標準叢集的範例。指定叢集的選項：
 
         ```
-        ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--private-service-endpoint][--public-service-endpoint] [--disable-disk-encrypt][--trusted]
+        ibmcloud ks cluster-create --zone dal10 --machine-type b3c.4x16 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--private-service-endpoint][--public-service-endpoint] [--disable-disk-encrypt][--trusted]
         ```
         {: pre}
 
@@ -326,7 +337,8 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>**免費叢集**：您不需要定義專用 VLAN。免費叢集會自動連接至 IBM 所擁有的專用 VLAN。</li><li>**標準叢集**：如果您在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中已設定用於該區域的專用 VLAN，請輸入專用 VLAN 的 ID。如果您的帳戶中沒有專用 VLAN，請不要指定此選項。{{site.data.keyword.containerlong_notm}} 會自動為您建立一個專用 VLAN。<p>專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。</p></li></ul></td>
+        <td><ul><li>**免費叢集**：您不需要定義專用 VLAN。免費叢集會自動連接至 IBM 所擁有的專用 VLAN。</li><li>**標準叢集**：如果您在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中已設定用於該區域的專用 VLAN，請輸入專用 VLAN 的 ID。如果您的帳戶中沒有專用 VLAN，請不要指定此選項。{{site.data.keyword.containerlong_notm}} 會自動為您建立一個專用 VLAN。<p>專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。</p></li>
+        <li>若要建立[僅限專用 VLAN 叢集](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan)，請包括此 `--private-vlan` 旗標及 `--private-only` 旗標來確認您的選擇。**不要**包括 `--public-vlan` 及 `--public-service-endpoint` 旗標。請注意，若要啟用主節點與工作者節點之間的連線，您必須包括 `--private-service-endpoint` 旗標，或設定自己的閘道應用裝置。</li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -344,7 +356,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
         </tr>
         <tr>
         <td><code>--private-service-endpoint</code></td>
-        <td>**在[已啟用 VRF 的帳戶](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)中的標準叢集**：啟用[專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，讓您的 Kubernetes 主節點和工作者節點能透過專用 VLAN 進行通訊。此外，您可以選擇使用 `--public-service-endpoint` 旗標來啟用公用服務端點，以透過網際網路存取您的叢集。如果您只啟用專用服務端點，則必須連接至專用 VLAN，才能與 Kubernetes 主節點進行通訊。一旦啟用了專用服務端點，之後您將無法停用它。<br><br>建立叢集之後，您可以透過執行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 來取得端點。</td>
+        <td>**在[已啟用 VRF 的帳戶](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)中的標準叢集**：啟用[專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)，讓您的 Kubernetes 主節點和工作者節點能透過專用 VLAN 進行通訊。此外，您可以選擇使用 `--public-service-endpoint` 旗標來啟用公用服務端點，以透過網際網路存取您的叢集。如果您只啟用專用服務端點，則必須連接至專用 VLAN，才能與 Kubernetes 主節點進行通訊。一旦啟用了專用服務端點，之後您將無法停用它。<br><br>建立叢集之後，您可以透過執行 `ibmcloud ks cluster-get <cluster_name_or_ID>` 來取得端點。</td>
         </tr>
         <tr>
         <td><code>--public-service-endpoint</code></td>
@@ -371,7 +383,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 
     ```
     Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.12.6      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.12.7      Default
     ```
     {: screen}
 
@@ -382,14 +394,14 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
         ```
     {: pre}
 
-    工作者節點就緒後，狀況會變更為 **Normal**，並且處於 **Ready** 狀態。當節點狀態為 **Ready** 時，您就可以存取叢集。
+    工作者節點就緒後，狀況會變更為 **Normal**，並且處於 **Ready** 狀態。當節點狀態為 **Ready** 時，您就可以存取叢集。請注意，即使叢集已備妥，其他服務所使用的一些叢集部分（例如 Ingress 密碼或登錄映像檔取回密碼）可能還是在處理中。
 
     每個工作者節點都會獲指派唯一的工作者節點 ID 及網域名稱，而在建立叢集之後不得手動變更。變更 ID 或網域名稱會讓 Kubernetes 主節點無法管理叢集。
     {: important}
 
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.12.6      Default
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.12.7      Default
     ```
     {: screen}
 
@@ -453,11 +465,11 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 
 -   如果您已在具有多區域功能的區域中建立叢集，請藉由[將區域新增至叢集](#add_zone)來展開工作者節點。
 -   [在叢集裡部署應用程式。](/docs/containers?topic=containers-app#app_cli)
--   [使用 `kubectl` 指令行管理叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")。](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry?topic=registry-index)
+-   [使用 `kubectl` 指令行管理叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")。](https://kubectl.docs.kubernetes.io/)
+-   [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry?topic=registry-getting-started)
 - 如果您有防火牆，則可能需要[開啟必要埠](/docs/containers?topic=containers-firewall#firewall)，才能使用 `ibmcloud`、`kubectl` 或 `calicotl` 指令，以容許來自叢集的出埠資料流量，或容許網路服務的入埠資料流量。
 -   [設定叢集 autoscaler](/docs/containers?topic=containers-ca#ca)，以根據工作負載資源要求來自動新增或移除工作者節點儲存區中的工作者節點。
--  具有 Kubernetes 1.10 版或更新版本的叢集：控制誰可以使用 [Pod 安全原則](/docs/containers?topic=containers-psp)在您的叢集裡建立 Pod。
+-  控制誰可以使用 [Pod 安全原則](/docs/containers?topic=containers-psp)在您的叢集中建立 Pod。
 
 <br />
 
@@ -519,10 +531,10 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
     位於兩個區域（`dal10` 及 `dal12`）中且調整大小為每個區域有兩個工作者節點之工作者節點儲存區的輸出範例：
     ```
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal12   1.8.6_1504
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.8.6_1504
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.8.6_1504
     ```
     {: screen}
 
@@ -532,7 +544,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 您可以建立新的工作者節點儲存區，以將工作者節點新增至叢集。
 {:shortdesc}
 
-1. 擷取叢集的**工作者節點區域**，並選擇要在工作者節點儲存區中部署工作者節點的區域。如果您具有單一區域叢集，則必須使用您在**工作者節點區域**欄位中看到的區域。對於多區域叢集，您可以選擇叢集的任何現有**工作者節點區域**，或為叢集所在的地區新增其中一個[多區域都會城市](/docs/containers?topic=containers-regions-and-zones#zones)。您可以藉由執行 `ibmcloud s zones` 來列出可用的區域。
+1. 擷取叢集的**工作者節點區域**，並選擇要在工作者節點儲存區中部署工作者節點的區域。如果您具有單一區域叢集，則必須使用您在**工作者節點區域**欄位中看到的區域。對於多區域叢集，您可以選擇叢集的任何現有**工作者節點區域**，或為叢集所在的地區新增其中一個[多區域都會位置](/docs/containers?topic=containers-regions-and-zones#zones)。您可以藉由執行 `ibmcloud s zones` 來列出可用的區域。
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
@@ -585,8 +597,8 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
    輸出範例：
    ```
    ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          provision_pending   Ready   dal10   1.8.6_1504
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          provision_pending   Ready   dal10   1.8.6_1504
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.8.6_1504
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.8.6_1504
    ```
    {: screen}
 
@@ -602,7 +614,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 
 開始之前：
 *  若要將區域新增至工作者節點儲存區，該工作者節點儲存區必須位於[具有多區域功能的區域](/docs/containers?topic=containers-regions-and-zones#zones)中。如果您的工作者節點儲存區不在具有多區域功能的區域中，請考慮[建立新工作者節點儲存區](#add_pool)。
-*  如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+*  如果您的叢集具有多個 VLAN，同一個 VLAN 上有多個子網路，或者有多個區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，讓工作者節點可以在專用網路上彼此通訊。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 
 
 若要將具有工作者節點的區域新增至工作者節點儲存區，請執行下列動作：
@@ -625,7 +637,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
    ```
    {: pre}
 
-4. 將區域新增至工作者節點儲存區。如果您有多個工作者節點儲存區，請將區域新增至所有工作者節點儲存區，以平衡所有區域中的叢集。將 `<pool1_id_or_name,pool2_id_or_name,...>` 取代為所有工作者節點儲存區的名稱（以逗點區隔的清單）。
+4. 將區域新增至工作者節點儲存區。如果您有多個工作者節點儲存區，請將區域新增至所有工作者節點儲存區，以平衡所有區域中的叢集。請將 `<pool1_id_or_name,pool2_id_or_name,...>` 取代為所有工作者節點儲存區的名稱（以逗點區隔的清單）。
 
     必須要有專用及公用 VLAN，才能將區域新增至多個工作者節點儲存區。如果您在該區域中沒有專用及公用 VLAN，請先將該區域新增至一個工作者節點儲存區，以為您建立專用及公用 VLAN。然後，您可以指定為您所建立的專用及公用 VLAN，以將該區域新增至其他工作者節點儲存區。
     {: note}
@@ -756,7 +768,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
       </tr>
       <tr>
        <td>Normal</td>
-       <td>叢集裡的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。此狀態被視為健全，您不需要採取動作。<p class="note">雖然工作者節點可能是正常的，但也可能需要注意其他的基礎架構資源（例如[網路](/docs/containers?topic=containers-cs_troubleshoot_network)和[儲存空間](/docs/containers?topic=containers-cs_troubleshoot_storage)）。</p></td>
+       <td>叢集裡的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。此狀態被視為健全，您不需要採取動作。<p class="note">雖然工作者節點可能是正常的，但也可能需要注意其他的基礎架構資源（例如[網路](/docs/containers?topic=containers-cs_troubleshoot_network)和[儲存空間](/docs/containers?topic=containers-cs_troubleshoot_storage)）。如果您才剛建立叢集，則其他服務所使用的一些叢集部分（例如 Ingress 密碼或登錄映像檔取回密碼）可能還在處理中。。</p></td>
     </tr>
       <tr>
        <td>Pending</td>
@@ -788,7 +800,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 {:shortdesc}
 
 <p class="important">
-不會在持續性儲存空間中建立叢集或資料的備份。當您刪除叢集時，您可以選擇刪除持續性儲存空間。如果您選擇刪除持續性儲存空間，則在 IBM Cloud 基礎架構 (SoftLayer) 中，會永久刪除您使用 `delete` 儲存空間類別所佈建的持續性儲存空間。如果您是使用 `retain` 儲存空間類別來佈建持續性儲存空間，且您選擇要刪除該儲存空間，則也會刪除叢集、PV 及 PVC，但是 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的持續性儲存空間實例仍會保留下來。</br>
+不會在持續性儲存空間中建立叢集或資料的備份。當您刪除叢集時，您可以選擇刪除持續性儲存空間。如果您選擇刪除持續性儲存空間，則在 IBM Cloud 基礎架構 (SoftLayer) 中，會永久刪除您使用 `delete` 儲存空間類別所佈建的持續性儲存空間。如果您是使用 `retain` 儲存空間類別來佈建持續性儲存空間，且您選擇要刪除該儲存空間，則也會刪除叢集、PV 及 PVC，但是 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的持續性儲存空間實例會保留下來。</br>
 </br>移除叢集時，您也會移除在建立叢集時自動佈建的所有子網路，以及您使用 `ibmcloud ks cluster-subnet-create` 指令所建立的所有子網路。不過，如果您使用 `ibmcloud ks cluster-subnet-add` 指令手動將現有子網路新增至叢集，則不會從 IBM Cloud 基礎架構 (SoftLayer) 帳戶移除這些子網路，並且可以在其他叢集裡重複使用它們。</p>
 
 開始之前：

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ VPN 接続を使用すると、{{site.data.keyword.containerlong}} 上の Kubern
 
 - **strongSwan IPSec VPN サービス**: Kubernetes クラスターをオンプレミス・ネットワークとセキュアに接続する [strongSwan IPSec VPN サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.strongswan.org/about.html) をセットアップできます。 strongSwan IPSec VPN サービスは、業界標準の Internet Protocol Security (IPSec) プロトコル・スイートに基づき、インターネット上にセキュアなエンドツーエンドの通信チャネルを確立します。 クラスターとオンプレミス・ネットワークの間にセキュアな接続をセットアップするためには、クラスター内のポッドに直接、[strongSwan IPSec VPN サービスを構成してデプロイします](#vpn-setup)。
 
-- **Virtual Router Appliance (VRA) または Fortigate Security Appliance (FSA)**: [VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) または [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) をセットアップして、IPSec VPN エンドポイントを構成することもできます。 このオプションは、クラスターが大きい場合、単一の VPN で複数のクラスターにアクセスする場合、ルート・ベース VPN が必要な場合に役立ちます。 VRA を構成するには、[Vyatta を使用した VRA 接続のセットアップ](#vyatta)を参照してください。
+- **Virtual Router Appliance (VRA) または Fortigate Security Appliance (FSA)**: [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) または [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) をセットアップして、IPSec VPN エンドポイントを構成することもできます。 このオプションは、クラスターが大きい場合、単一の VPN で複数のクラスターにアクセスする場合、ルート・ベース VPN が必要な場合に役立ちます。 VRA を構成するには、[Vyatta を使用した VRA 接続のセットアップ](#vyatta)を参照してください。
 
 ## strongSwan IPSec VPN サービスの Helm チャートの使用
 {: #vpn-setup}
@@ -44,7 +44,7 @@ Helm チャートを使用して、Kubernetes ポッド内に strongSwan IPSec V
 
 strongSwan はクラスターに組み込まれているので、外部ゲートウェイ・デバイスは必要ありません。 VPN 接続が確立されると、クラスター内のすべてのワーカー・ノードにルートが自動的に構成されます。 これらのルートにより、任意のワーカー・ノード上のポッドとリモート・システムの間で、VPN トンネルを介した両方向の接続が可能になります。 例えば、以下の図は、{{site.data.keyword.containerlong_notm}} 内のアプリがオンプレミス・サーバーと strongSwan VPN 接続を介して通信する方法を示しています。
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="ロード・バランサーを使用して {{site.data.keyword.containerlong_notm}} のアプリを公開する" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="ネットワーク・ロード・バランサー (NLB) を使用した {{site.data.keyword.containerlong_notm}} でのアプリの公開" style="width:700px; border-style: none"/>
 
 1. クラスター内のアプリ `myapp` は、Ingress または LoadBalancer サービスから要求を受け取ると、オンプレミス・ネットワーク内のデータにセキュアに接続する必要があります。
 
@@ -68,7 +68,7 @@ strongSwan Helm チャートを使用する前に、以下の考慮事項や制�
 * strongSwan Helm チャートでは、複数のクラスターとその他の IaaS リソースで単一の VPN 接続を共有することは許可されません。
 * strongSwan Helm チャートは、クラスター内で Kubernetes ポッドとして実行されます。 VPN のパフォーマンスは、クラスター内で実行されている Kubernetes やその他のポッドのメモリーおよびネットワークの使用量の影響を受けます。 パフォーマンスが重要な環境の場合は、クラスター外部の専用ハードウェアで実行される VPN ソリューションを使用することを考慮してください。
 * strongSwan Helm チャートでは、IPSec トンネル・エンドポイントとして単一の VPN ポッドが実行されます。 ポッドに障害が発生すると、クラスターはポッドを再始動します。 ただし、新しいポッドが開始され、VPN 接続が再確立されるまで、わずかなダウン時間が発生する場合があります。 より迅速なエラー・リカバリーやより精緻な高可用性ソリューションが必要な場合は、クラスター外部の専用ハードウェアで実行される VPN ソリューションを使用することを考慮してください。
-* strongSwan Helm チャートでは、VPN 接続を介して流れるネットワーク・トラフィックのメトリックまたはモニターは提供されません。 サポートされるモニター・ツールのリストについては、[サービスのロギングとモニタリング](/docs/containers?topic=containers-integrations#health_services)を参照してください。
+* strongSwan Helm チャートでは、VPN 接続を介して流れるネットワーク・トラフィックのメトリックまたはモニターは提供されません。 サポートされるモニター・ツールのリストについては、[サービスのロギングとモニタリング](/docs/containers?topic=containers-supported_integrations#health_services)を参照してください。
 
 <br />
 
@@ -76,20 +76,20 @@ strongSwan Helm チャートを使用する前に、以下の考慮事項や制�
 ## マルチゾーン・クラスターでの strongSwan VPN の構成
 {: #vpn_multizone}
 
-マルチゾーン・クラスターにしてアプリ・インスタンスをマルチゾーンのワーカー・ノードで提供すれば、障害が発生した場合のアプリの高可用性を確保できます。ただし、マルチゾーン・クラスターに strongSwan VPN サービスを構成する作業は、単一ゾーン・クラスターに strongSwan を構成する作業よりも複雑です。
+マルチゾーン・クラスターにしてアプリ・インスタンスをマルチゾーンのワーカー・ノードで提供すれば、障害が発生した場合のアプリの高可用性を確保できます。 ただし、マルチゾーン・クラスターに strongSwan VPN サービスを構成する作業は、単一ゾーン・クラスターに strongSwan を構成する作業よりも複雑です。
 {: shortdesc}
 
-マルチゾーン・クラスターの strongSwan を構成する前に、まず、単一ゾーン・クラスターに strongSwan の Helm チャートをデプロイしてみてください。先に単一ゾーン・クラスターとオンプレミス・ネットワークの間に VPN 接続を確立しておけば、マルチゾーンの strongSwan 構成にとって重要なリモート・ネットワーク・ファイアウォールの設定を決定する作業が簡単になります。
-* 一部のリモート VPN エンドポイントには、`ipsec.conf` ファイルに `leftid` や `rightid` などの設定があります。このような設定がある場合は、その `leftid` に VPN IPSec トンネルの IP アドレスを設定する必要があるかどうかを確認してください。
+マルチゾーン・クラスターの strongSwan を構成する前に、まず、単一ゾーン・クラスターに strongSwan の Helm チャートをデプロイしてみてください。 先に単一ゾーン・クラスターとオンプレミス・ネットワークの間に VPN 接続を確立しておけば、マルチゾーンの strongSwan 構成にとって重要なリモート・ネットワーク・ファイアウォールの設定を決定する作業が簡単になります。
+* 一部のリモート VPN エンドポイントには、`ipsec.conf` ファイルに `leftid` や `rightid` などの設定があります。 このような設定がある場合は、その `leftid` に VPN IPSec トンネルの IP アドレスを設定する必要があるかどうかを確認してください。
 *	リモート・ネットワークからクラスターへのインバウンド接続を行う場合は、1 つのゾーンでロード・バランサー障害が発生したときにリモートの VPN エンドポイントが別の IP アドレスに VPN 接続を再確立できるかどうかを確認してください。
 
 マルチゾーン・クラスターで strongSwan を使用するには、まず次の選択肢の中からいずれかを選択してください。
-* アウトバウンド VPN 接続を使用できる場合は、strongSwan VPN デプロイメントを 1 つのみ構成することを選択できます。[マルチゾーン・クラスターからのアウトバウンド VPN 接続を 1 つ構成する](#multizone_one_outbound)を参照してください。
+* アウトバウンド VPN 接続を使用できる場合は、strongSwan VPN デプロイメントを 1 つのみ構成することを選択できます。 [マルチゾーン・クラスターからのアウトバウンド VPN 接続を 1 つ構成する](#multizone_one_outbound)を参照してください。
 * インバウンド VPN 接続が必要な場合は、障害検出時に別のパブリック・ロード・バランサー IP に VPN 接続を再確立するようにリモートの VPN エンドポイントを構成できるかどうかによって、使用できる構成設定が異なります。
-  * リモートの VPN エンドポイントが自動で別の IP に VPN 接続を再確立できる場合は、strongSwan VPN デプロイメントを 1 つのみ構成することを選択できます。[マルチゾーン・クラスターへのインバウンド VPN 接続を 1 つ構成する](#multizone_one_inbound)を参照してください。
-  * リモートの VPN エンドポイントが自動で別の IP に VPN 接続を再確立できない場合は、すべてのゾーンに個々にインバウンド strongSwan VPN サービスをデプロイする必要があります。[マルチゾーン・クラスターの各ゾーンに VPN 接続を構成する](#multizone_multiple)を参照してください。
+  * リモートの VPN エンドポイントが自動で別の IP に VPN 接続を再確立できる場合は、strongSwan VPN デプロイメントを 1 つのみ構成することを選択できます。 [マルチゾーン・クラスターへのインバウンド VPN 接続を 1 つ構成する](#multizone_one_inbound)を参照してください。
+  * リモートの VPN エンドポイントが自動で別の IP に VPN 接続を再確立できない場合は、すべてのゾーンに個々にインバウンド strongSwan VPN サービスをデプロイする必要があります。 [マルチゾーン・クラスターの各ゾーンに VPN 接続を構成する](#multizone_multiple)を参照してください。
 
-1 つの strongSwan VPN デプロイメントだけでマルチゾーン・クラスターのアウトバウンドまたはインバウンド VPN 接続を行える環境をセットアップするように努めてください。すべてのゾーンに個々に strongSwan VPN をセットアップする必要がある場合は、複雑さが増し、リソース使用量も増加する点にどのように対処するかを確実に計画してください。
+1 つの strongSwan VPN デプロイメントだけでマルチゾーン・クラスターのアウトバウンドまたはインバウンド VPN 接続を行える環境をセットアップするように努めてください。 すべてのゾーンに個々に strongSwan VPN をセットアップする必要がある場合は、複雑さが増し、リソース使用量も増加する点にどのように対処するかを確実に計画してください。
 {: note}
 
 ### マルチゾーン・クラスターからのアウトバウンド VPN 接続を 1 つ構成する
@@ -98,14 +98,14 @@ strongSwan Helm チャートを使用する前に、以下の考慮事項や制�
 マルチゾーン・クラスターに strongSwan VPN サービスを構成する最もシンプルな方法は、クラスター内のすべてのアベイラビリティー・ゾーンのさまざまなワーカー・ノード間をフローティングする単一のアウトバウンド VPN 接続を使用する方法です。
 {: shortdesc}
 
-VPN 接続がマルチゾーン・クラスターからのアウトバウンド接続である場合、必要な strongSwan デプロイメントは 1 つのみです。ワーカー・ノードが削除されたりワーカー・ノードでダウン時間が発生したりすると、`kubelet` は VPN ポッドを新しいワーカー・ノードにスケジュールし直します。アベイラビリティー・ゾーンで障害が発生した場合、`kubelet` は、VPN ポッドを別のゾーンの新しいワーカー・ノードにスケジュールを変更します。
+VPN 接続がマルチゾーン・クラスターからのアウトバウンド接続である場合、必要な strongSwan デプロイメントは 1 つのみです。 ワーカー・ノードが削除されたりワーカー・ノードでダウン時間が発生したりすると、`kubelet` は VPN ポッドを新しいワーカー・ノードにスケジュールし直します。 アベイラビリティー・ゾーンで障害が発生した場合、`kubelet` は、VPN ポッドを別のゾーンの新しいワーカー・ノードにスケジュールを変更します。
 
-1. [strongSwan VPN の Helm チャートを 1 つ構成](/docs/containers?topic=containers-vpn#vpn_configure)します。このセクションの手順に従う場合は、必ず次の設定を指定してください。
-    - `ipsec.auto`: `start` に変更します。クラスターからのアウトバウンド接続になります。
-    - `loadBalancerIP`: IP アドレスを指定しないでください。この設定は空白にしておきます。
-    - `zoneLoadBalancer`: ワーカー・ノードがある各ゾーンのパブリック・ロード・バランサーの IP アドレスを指定します。[使用可能なパブリック IP アドレスを確認](/docs/containers?topic=containers-subnets#review_ip)したり、[使用されている IP アドレスを解放](/docs/containers?topic=containers-subnets#free)したりすることができます。 strongSwan VPN ポッドはどのゾーンのワーカー・ノードにもスケジュールされる可能性があるので、この IP のリストを指定することで、どのゾーンに VPN ポッドがスケジュールされてもロード・バランサー IP を使用できるようにします。
-    - `connectUsingLoadBalancerIP`: `true` に設定します。strongSwan VPN ポッドがワーカー・ノードにスケジュールされると、strongSwan サービスは同じゾーンのロード・バランサーの IP アドレスを選択し、その IP を使用してアウトバウンド接続を確立します。
-    - `local.id`: リモート VPN エンドポイントが対応できる固定値を指定します。`local.id` オプション (`ipsec.conf` の `leftid` 値) に VPN IPSec トンネルのパブリック IP アドレスを設定する必要があるリモート VPN エンドポイントの場合は、`local.id` に `%loadBalancerIP` を設定してください。この値にすると、`ipsec.conf` の `leftid` 値に、接続に使用されたロード・バランサーの IP アドレスが自動的に構成されます。
+1. [strongSwan VPN の Helm チャートを 1 つ構成](/docs/containers?topic=containers-vpn#vpn_configure)します。 このセクションの手順に従う場合は、必ず次の設定を指定してください。
+    - `ipsec.auto`: `start` に変更します。 クラスターからのアウトバウンド接続になります。
+    - `loadBalancerIP`: IP アドレスを指定しないでください。 この設定は空白にしておきます。
+    - `zoneLoadBalancer`: ワーカー・ノードがある各ゾーンのパブリック・ロード・バランサーの IP アドレスを指定します。 [使用可能なパブリック IP アドレスを確認](/docs/containers?topic=containers-subnets#review_ip)したり、[使用されている IP アドレスを解放](/docs/containers?topic=containers-subnets#free)したりすることができます。 strongSwan VPN ポッドはどのゾーンのワーカー・ノードにもスケジュールされる可能性があるので、この IP のリストを指定することで、どのゾーンに VPN ポッドがスケジュールされてもロード・バランサー IP を使用できるようにします。
+    - `connectUsingLoadBalancerIP`: `true` に設定します。 strongSwan VPN ポッドがワーカー・ノードにスケジュールされると、strongSwan サービスは同じゾーンのロード・バランサーの IP アドレスを選択し、その IP を使用してアウトバウンド接続を確立します。
+    - `local.id`: リモート VPN エンドポイントが対応できる固定値を指定します。 `local.id` オプション (`ipsec.conf` の `leftid` 値) に VPN IPSec トンネルのパブリック IP アドレスを設定する必要があるリモート VPN エンドポイントの場合は、`local.id` に `%loadBalancerIP` を設定してください。この値にすると、`ipsec.conf` の `leftid` 値に、接続に使用されたロード・バランサーの IP アドレスが自動的に構成されます。
 
 2. リモートのネットワーク・ファイアウォールで、`zoneLoadBalancer` 設定に指定したパブリック IP アドレスからの着信 IPSec VPN接続を許可します。
 
@@ -117,12 +117,12 @@ VPN 接続がマルチゾーン・クラスターからのアウトバウンド�
 着信 VPN 接続が必要で、障害検出時にはリモートの VPN エンドポイントが自動で別の IP に VPN 接続を再確立できる場合は、クラスター内のすべてのアベイラビリティー・ゾーンのさまざまなワーカー・ノード間をフローティングする単一のインバウンド VPN 接続を使用できます。
 {: shortdesc}
 
-リモートの VPN エンドポイントは、すべてのゾーンのすべての strongSwan ロード・バランサーに VPN 接続を確立できます。着信要求は、VPN ポッドがどのゾーンに存在していようと、特定の VPN ポッドに送信されます。VPN ポッドからの応答は、元のロード・バランサーを介してリモートの VPN エンドポイントに送り返されます。この方法では、ワーカー・ノードが削除されたりワーカー・ノードでダウン時間が発生したりすると `kubelet` が VPN ポッドを新しいワーカー・ノードにスケジュールし直すので、高可用性が保証されます。また、アベイラビリティー・ゾーンで障害が発生した場合でも、リモートの VPN エンドポイントが別のゾーンのロード・バランサーの IP アドレスに VPN 接続を再確立するので、VPN ポッドにアクセスすることができます。
+リモートの VPN エンドポイントは、すべてのゾーンのすべての strongSwan ロード・バランサーに VPN 接続を確立できます。 着信要求は、VPN ポッドがどのゾーンに存在していようと、特定の VPN ポッドに送信されます。 VPN ポッドからの応答は、元のロード・バランサーを介してリモートの VPN エンドポイントに送り返されます。 この方法では、ワーカー・ノードが削除されたりワーカー・ノードでダウン時間が発生したりすると `kubelet` が VPN ポッドを新しいワーカー・ノードにスケジュールし直すので、高可用性が保証されます。 また、アベイラビリティー・ゾーンで障害が発生した場合でも、リモートの VPN エンドポイントが別のゾーンのロード・バランサーの IP アドレスに VPN 接続を再確立するので、VPN ポッドにアクセスすることができます。
 
-1. [strongSwan VPN の Helm チャートを 1 つ構成](/docs/containers?topic=containers-vpn#vpn_configure)します。このセクションの手順に従う場合は、必ず次の設定を指定してください。
-    - `ipsec.auto`: `add` に変更します。クラスターへのインバウンド接続になります。
-    - `loadBalancerIP`: IP アドレスを指定しないでください。この設定は空白にしておきます。
-    - `zoneLoadBalancer`: ワーカー・ノードがある各ゾーンのパブリック・ロード・バランサーの IP アドレスを指定します。[使用可能なパブリック IP アドレスを確認](/docs/containers?topic=containers-subnets#review_ip)したり、[使用されている IP アドレスを解放](/docs/containers?topic=containers-subnets#free)したりすることができます。
+1. [strongSwan VPN の Helm チャートを 1 つ構成](/docs/containers?topic=containers-vpn#vpn_configure)します。 このセクションの手順に従う場合は、必ず次の設定を指定してください。
+    - `ipsec.auto`: `add` に変更します。 クラスターへのインバウンド接続になります。
+    - `loadBalancerIP`: IP アドレスを指定しないでください。 この設定は空白にしておきます。
+    - `zoneLoadBalancer`: ワーカー・ノードがある各ゾーンのパブリック・ロード・バランサーの IP アドレスを指定します。 [使用可能なパブリック IP アドレスを確認](/docs/containers?topic=containers-subnets#review_ip)したり、[使用されている IP アドレスを解放](/docs/containers?topic=containers-subnets#free)したりすることができます。
     - `local.id`: `local.id` オプション (`ipsec.conf` の `leftid` 値) に VPN IPSec トンネルのパブリック IP アドレスを設定する必要があるリモート VPN エンドポイントの場合は、`local.id` に `%loadBalancerIP` を設定してください。この値にすると、`ipsec.conf` の `leftid` 値に、接続に使用されたロード・バランサーの IP アドレスが自動的に構成されます。
 
 2. リモートのネットワーク・ファイアウォールで、`zoneLoadBalancer` 設定で指定したパブリック IP アドレスへの発信 IPSec VPN 接続を許可します。
@@ -133,22 +133,22 @@ VPN 接続がマルチゾーン・クラスターからのアウトバウンド�
 着信 VPN 接続が必要で、リモートの VPN エンドポイントが別の IP に VPN 接続を再確立できない場合は、すべてのゾーンに個々に strongSwan VPN サービスをデプロイする必要があります。
 {: shortdesc}
 
-すべてのゾーンのロード・バランサーに個々に VPN 接続を確立するようにリモートの VPN エンドポイントを更新する必要があります。さらに、それらの VPN 接続がどれも固有になるように、リモートの VPN エンドポイントにゾーン別の設定を構成する必要があります。この複数の着信 VPN 接続を、常にアクティブな状態に維持してください。
+すべてのゾーンのロード・バランサーに個々に VPN 接続を確立するようにリモートの VPN エンドポイントを更新する必要があります。 さらに、それらの VPN 接続がどれも固有になるように、リモートの VPN エンドポイントにゾーン別の設定を構成する必要があります。 この複数の着信 VPN 接続を、常にアクティブな状態に維持してください。
 
-各 Helm チャートをデプロイすると、それぞれの strongSwan VPN デプロイメントが、適切なゾーンの Kubernetes ロード・バランサー・サービスとして始動します。そのパブリック IP への着信要求は、同じゾーンに割り振られている VPN ポッドに転送されます。ゾーンで障害が発生した場合、他のゾーンで確立されている VPN 接続は影響を受けません。
+各 Helm チャートをデプロイすると、それぞれの strongSwan VPN デプロイメントが、適切なゾーンの Kubernetes ロード・バランサー・サービスとして始動します。 そのパブリック IP への着信要求は、同じゾーンに割り振られている VPN ポッドに転送されます。 ゾーンで障害が発生した場合、他のゾーンで確立されている VPN 接続は影響を受けません。
 
-1. 各ゾーンに [strongSwan VPN の Helm チャートを構成](/docs/containers?topic=containers-vpn#vpn_configure)します。このセクションの手順に従う場合は、必ず次の設定を指定してください。
-    - `loadBalancerIP`: この strongSwan サービスをデプロイするゾーンのパブリック・ロード・バランサーの IP アドレスを指定します。[使用可能なパブリック IP アドレスを確認](/docs/containers?topic=containers-subnets#review_ip)したり、[使用されている IP アドレスを解放](/docs/containers?topic=containers-subnets#free)したりすることができます。
+1. 各ゾーンに [strongSwan VPN の Helm チャートを構成](/docs/containers?topic=containers-vpn#vpn_configure)します。 このセクションの手順に従う場合は、必ず次の設定を指定してください。
+    - `loadBalancerIP`: この strongSwan サービスをデプロイするゾーンのパブリック・ロード・バランサーの IP アドレスを指定します。 [使用可能なパブリック IP アドレスを確認](/docs/containers?topic=containers-subnets#review_ip)したり、[使用されている IP アドレスを解放](/docs/containers?topic=containers-subnets#free)したりすることができます。
     - `zoneSelector`: VPN ポッドをスケジュールするゾーンを指定します。
-    - VPN 経由でアクセス可能にするリソースによっては、`zoneSpecificRoutes`、`remoteSubnetNAT`、`localSubnetNAT`、`enableSingleSourceIP` などの追加設定が必要になる場合があります。詳しくは、次の手順を参照してください。
+    - VPN 経由でアクセス可能にするリソースによっては、`zoneSpecificRoutes`、`remoteSubnetNAT`、`localSubnetNAT`、`enableSingleSourceIP` などの追加設定が必要になる場合があります。 詳しくは、次の手順を参照してください。
 
-2. 各 VPN 接続が固有になるように、VPN トンネルの両側にゾーン別の設定を構成します。VPN 経由でアクセス可能にするリソースに応じて、接続を区別するための方法には次の 2 つがあります。
+2. 各 VPN 接続が固有になるように、VPN トンネルの両側にゾーン別の設定を構成します。 VPN 経由でアクセス可能にするリソースに応じて、接続を区別するための方法には次の 2 つがあります。
     * クラスター内のポッドがリモートのオンプレミス・ネットワーク上のサービスにアクセスする必要がある場合
-      - `zoneSpecificRoutes`: `true` に設定します。この設定は、VPN 接続をクラスター内の単一のゾーンに制限します。特定のゾーン内のポッドは、その特定のゾーン用にセットアップされた VPN 接続のみを使用します。この方法では、マルチゾーン・クラスターで複数の VPN をサポートするために必要になる strongSwan ポッドの数が減ります。また、VPN トラフィックが現在のゾーンのワーカー・ノードにしか転送されないので、VPN のパフォーマンスが向上します。さらに、各ゾーンの VPN 接続が、他のゾーンの VPN 接続、ポッドのクラッシュ、ゾーン障害の影響を受けなくなります。`remoteSubnetNAT` は構成する必要がないことに注意してください。`zoneSpecificRoutes` 設定を使用する場合は、ルーティングがゾーンごとにセットアップされるので、複数の VPN に同じ `remote.subnet` を指定できます。
-      - `enableSingleSourceIP`: `true` に設定し、`local.subnet` に単一の /32 IP アドレスを設定します。この組み合わせの設定により、単一の /32 IP アドレスの背後にあるクラスターのすべてのプライベート IP アドレスが隠されます。この固有の /32 IP アドレスにより、リモートのオンプレミス・ネットワークは、要求を開始したクラスター内の正しいポッドに正しい VPN 接続を介して応答を送り返すことができます。`local.subnet` オプションに設定する単一の /32 IP アドレスは、各 strongSwan VPN 構成内で固有でなければならないことに注意してください。
+      - `zoneSpecificRoutes`: `true` に設定します。 この設定は、VPN 接続をクラスター内の単一のゾーンに制限します。 特定のゾーン内のポッドは、その特定のゾーン用にセットアップされた VPN 接続のみを使用します。 この方法では、マルチゾーン・クラスターで複数の VPN をサポートするために必要になる strongSwan ポッドの数が減ります。また、VPN トラフィックが現在のゾーンのワーカー・ノードにしか転送されないので、VPN のパフォーマンスが向上します。さらに、各ゾーンの VPN 接続が、他のゾーンの VPN 接続、ポッドのクラッシュ、ゾーン障害の影響を受けなくなります。 `remoteSubnetNAT` は構成する必要がないことに注意してください。 `zoneSpecificRoutes` 設定を使用する場合は、ルーティングがゾーンごとにセットアップされるので、複数の VPN に同じ `remote.subnet` を指定できます。
+      - `enableSingleSourceIP`: `true` に設定し、`local.subnet` に単一の /32 IP アドレスを設定します。 この組み合わせの設定により、単一の /32 IP アドレスの背後にあるクラスターのすべてのプライベート IP アドレスが隠されます。 この固有の /32 IP アドレスにより、リモートのオンプレミス・ネットワークは、要求を開始したクラスター内の正しいポッドに正しい VPN 接続を介して応答を送り返すことができます。 `local.subnet` オプションに設定する単一の /32 IP アドレスは、各 strongSwan VPN 構成内で固有でなければならないことに注意してください。
     * リモートのオンプレミス・ネットワーク内のアプリケーションがクラスター内のサービスにアクセスする必要がある場合    
-      - `localSubnetNAT`: オンプレミスのリモート・ネットワーク内のアプリケーションが、クラスターとの間でトラフィックを送受信するために特定の VPN 接続を選択できることを確認します。各 strongSwan Helm 構成で、リモートのオンプレミス・アプリケーションからアクセスできるクラスター・リソースを、`localSubnetNAT` を使用して一意に識別します。リモートのオンプレミス・ネットワークからクラスターには複数の VPN が確立されるので、オンプレミス・ネットワーク上のアプリケーションに、クラスター内のサービスにアクセスするときに使用すべき VPN を選択できるようにするロジックを追加する必要があります。各 strongSwan VPN 構成の `localSubetNAT` に構成した内容に応じて、クラスター内のサービスに複数の異なるサブネットからアクセスできることに注意してください。
-      - `remoteSubnetNAT`: クラスター内のポッドが同じ VPN 接続を使用してトラフィックをリモート・ネットワークに返すようにします。各 strongSwan デプロイメント・ファイルで、`remoteSubetNAT` 設定を使用して、リモートのオンプレミス・サブネットを固有のサブネットにマップします。クラスター内のポッドによって VPN 固有の `remoteSubetNAT` から受信されたトラフィックは、その同じ VPN 固有の `remoteSubnetNAT` に送信され、その後、同じ VPN 接続を介して送り返されます。
+      - `localSubnetNAT`: オンプレミスのリモート・ネットワーク内のアプリケーションが、クラスターとの間でトラフィックを送受信するために特定の VPN 接続を選択できることを確認します。 各 strongSwan Helm 構成で、リモートのオンプレミス・アプリケーションからアクセスできるクラスター・リソースを、`localSubnetNAT` を使用して一意に識別します。 リモートのオンプレミス・ネットワークからクラスターには複数の VPN が確立されるので、オンプレミス・ネットワーク上のアプリケーションに、クラスター内のサービスにアクセスするときに使用すべき VPN を選択できるようにするロジックを追加する必要があります。 各 strongSwan VPN 構成の `localSubetNAT` に構成した内容に応じて、クラスター内のサービスに複数の異なるサブネットからアクセスできることに注意してください。
+      - `remoteSubnetNAT`: クラスター内のポッドが同じ VPN 接続を使用してトラフィックをリモート・ネットワークに返すようにします。 各 strongSwan デプロイメント・ファイルで、`remoteSubetNAT` 設定を使用して、リモートのオンプレミス・サブネットを固有のサブネットにマップします。 クラスター内のポッドによって VPN 固有の `remoteSubetNAT` から受信されたトラフィックは、その同じ VPN 固有の `remoteSubnetNAT` に送信され、その後、同じ VPN 接続を介して送り返されます。
 
 3. リモートの VPN エンドポイント・ソフトウェアを、すべてのゾーンのロード・バランサー IP に個々に VPN 接続を確立するように構成します。
 
@@ -164,8 +164,8 @@ strongSwan Helm チャートをインストールする前に、strongSwan 構�
 開始前に、以下のことを行います。
 * [オンプレミス・データ・センターに IPSec VPN ゲートウェイをインストールします](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection)。
 * `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-  * **注意**: 標準クラスターでは、すべての strongSwan 構成を使用できます。フリー・クラスターを使用する場合は、[ステップ 3](#strongswan_3) のアウトバウンド VPN 接続のみを選択できます。インバウンド VPN 接続のためには、クラスター内にロード・バランサーが必要ですが、フリー・クラスターではロード・バランサーは利用できません。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+  * **注意**: 標準クラスターでは、すべての strongSwan 構成を使用できます。 フリー・クラスターを使用する場合は、[ステップ 3](#strongswan_3) のアウトバウンド VPN 接続のみを選択できます。インバウンド VPN 接続のためには、クラスター内にロード・バランサーが必要ですが、フリー・クラスターではロード・バランサーは利用できません。
 
 ### ステップ 1: strongSwan Helm チャートの取得
 {: #strongswan_1}
@@ -173,7 +173,7 @@ strongSwan Helm チャートをインストールする前に、strongSwan 構�
 Helm をインストールし、strongSwan Helm チャートを取得して、設定可能な構成を確認します。
 {: shortdesc}
 
-1.  [手順に従って](/docs/containers?topic=containers-integrations#helm)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。
+1.  [手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。 Helm バージョン 2.8 以降が必要です。
 
 2.  tiller がサービス・アカウントでインストールされていることを確認します。
 
@@ -193,7 +193,7 @@ Helm をインストールし、strongSwan Helm チャートを取得して、�
 3. ローカル YAML ファイル内に strongSwan Helm chart のデフォルトの構成設定を保存します。
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+    helm inspect values iks-charts/strongswan > config.yaml
     ```
     {: pre}
 
@@ -235,7 +235,7 @@ strongSwan VPN 接続を構成する場合、VPN 接続をクラスターへの�
 <dd>クラスターが VPN 接続を開始し、リモート・ネットワークからのオンプレミス VPN エンドポイントが接続を listen します。</dd>
 </dl>
 
-フリー・クラスターを使用する場合は、アウトバウンド VPN 接続のみを選択できます。インバウンド VPN 接続のためは、クラスター内にロード・バランサーが必要ですが、フリー・クラスターではロード・バランサーは利用できません。
+フリー・クラスターを使用する場合は、アウトバウンド VPN 接続のみを選択できます。 インバウンド VPN 接続のためは、クラスター内にロード・バランサーが必要ですが、フリー・クラスターではロード・バランサーは利用できません。
 
 インバウンド VPN 接続を確立するには、以下の設定を変更します。
 1. `ipsec.auto` が `add` に設定されていることを確認します。
@@ -346,7 +346,7 @@ strongSwan VPN の状況をモニターするには、VPN 接続メッセージ�
     {: tip}
 
     ```
-    helm install -f config.yaml --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn iks-charts/strongswan
     ```
     {: pre}
 
@@ -397,14 +397,14 @@ Helm チャートをデプロイしたら、VPN 接続をテストします。
     {: screen}
 
     * strongSwan Helm チャートを使用して VPN 接続を確立しようとしても、最初は VPN の状況が `ESTABLISHED` にならない可能性があります。 オンプレミスの VPN エンドポイント設定を確認して構成ファイルを何度か変更しないと、接続できない可能性があります。
-        1. `helm delete --purge <release_name> を実行します。`
+        1. `helm delete --purge <release_name>` を実行します。
         2. 構成ファイル内の誤った値を修正します。
         3. `helm install -f config.yaml --name=<release_name> ibm/strongswan` を実行します。
       次の手順でさらに検査することもできます。
 
     * VPN ポッドが `ERROR` 状態である場合や、クラッシュと再始動が繰り返される場合は、チャートの構成マップ内の `ipsec.conf` 設定のパラメーターの検証が原因である可能性があります。
         1. `kubectl logs $STRONGSWAN_POD` を実行して、strongSwan ポッドのログに検証エラーがないか確認してください。
-        2. 検証エラーがある場合は、`helm delete --purge <release_name> を実行します。`
+        2. 検証エラーがある場合は、`helm delete --purge <release_name>` を実行します。
         3. 構成ファイル内の誤った値を修正します。
         4. `helm install -f config.yaml --name=<release_name> ibm/strongswan` を実行します。
 
@@ -526,12 +526,11 @@ Helm チャートをデプロイしたら、VPN 接続をテストします。
 例えば、特定の名前空間 `my-secure-namespace` のポッドにのみ、VPN 経由でデータを送受信させるとします。 他の名前空間 (`kube-system`、`ibm-system`、`default` など) にあるポッドには、オンプレミス・ネットワークにアクセスさせません。 VPN トラフィックを `my-secure-namespace` のみに制限するには、Calico グローバル・ネットワーク・ポリシーを作成します。
 
 このソリューションを利用する前に、以下の考慮事項と制限事項を確認してください。
-* 指定した名前空間に strongSwan Helm チャートをデプロイする必要はありません。 strongSwan VPN ポッドと routes デーモン・セットは `kube-system` または他の任意の名前空間にデプロイできます。 指定した名前空間に strongSwan VPN をデプロイしていない場合、`vpn-strongswan-ping-remote-ip-1` Helm テストには失格します。 この失格は予期されるものであり、許容できます。 このテストでは、リモート・サブネットに直接アクセスできる名前空間にないポッドから、オンプレミス VPN ゲートウェイの `remote.privateIPtoPing` プライベート IP アドレスを ping します。しかし、VPN ポッドは、リモート・サブネットへの経路を持つ名前空間のポッドにトラフィックを転送できるので、トラフィックは正常に流されます。 VPN の状態が `ESTABLISHED` のままであれば、指定した名前空間のポッドは VPN 経由で接続できます。
+* 指定した名前空間に strongSwan Helm チャートをデプロイする必要はありません。 strongSwan VPN ポッドと routes デーモン・セットは `kube-system` または他の任意の名前空間にデプロイできます。 指定した名前空間に strongSwan VPN をデプロイしていない場合、`vpn-strongswan-ping-remote-ip-1` Helm テストには失格します。 この失格は予期されるものであり、許容できます。 このテストでは、リモート・サブネットに直接アクセスできる名前空間にないポッドから、オンプレミス VPN ゲートウェイの `remote.privateIPtoPing` プライベート IP アドレスを ping します。 しかし、VPN ポッドは、リモート・サブネットへの経路を持つ名前空間のポッドにトラフィックを転送できるので、トラフィックは正常に流されます。 VPN の状態が `ESTABLISHED` のままであれば、指定した名前空間のポッドは VPN 経由で接続できます。
 
 * 次の手順の Calico グローバル・ネットワーク・ポリシーでは、ホスト・ネットワーキングを使用する Kubernetes ポッドに対して、VPN 経由のデータの送受信を禁止しません。 ポッドにホスト・ネットワーキングが構成されている場合、そのポッドで実行されるアプリは、そのポッドが存在するワーカー・ノードのネットワーク・インターフェースで listen できます。 このようなホスト・ネットワーキング・ポッドは、どの名前空間にも存在する可能性があります。 ホスト・ネットワーキングを使用するポッドを特定するには、`kubectl get pods --all-namespaces -o wide` を実行し、`172.30.0.0/16` ポッド IP アドレスを持たないポッドを探します。 ホスト・ネットワーキング・ポッドに VPN 経由のデータの送受信を行わせないためには、`values.yaml` デプロイメント・ファイルにオプション `local.subnet: 172.30.0.0/16` および `enablePodSNAT: false` を設定します。 これらの構成設定により、VPN 接続を使用するすべての Kubernetes ポッドがリモート・ネットワークに公開されます。 ただし、指定した安全な名前空間に配置されたポッドにのみ、VPN 経由で到達できます。
 
 開始前に、以下のことを行います。
-* Kubernetes バージョン 1.10 以降を実行するクラスターを、作成または使用します。
 * [strongSwan Helm チャートをデプロイし](#vpn_configure)、[VPN 接続が正しく機能していることを確認します](#vpn_test)。
 * [Calico CLI をインストールして構成します](/docs/containers?topic=containers-network_policies#cli_install)。
 

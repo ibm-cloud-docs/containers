@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -45,16 +45,42 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
+<td>0.2.102</td>
+<td>2019년 4월 15일</td>
+<td>네트워크 로드 밸런서(NLB) IP 주소에 대한 호스트 이름을 등록하고 관리하기 위해 [명령의 `ibmcloud ks nlb-dns` 그룹](/docs/containers?topic=containers-cs_cli_reference#nlb-dns)을 추가하고, NLB 호스트 이름에 대한 상태 검사 모니터를 작성하고 수정하기 위해 [명령의 `ibmcloud ks nlb-dns-monitor` 그룹](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_nlb-dns-monitor)을 추가합니다. 자세한 정보는 [DNS 호스트 이름으로 NLB IP 등록](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)을 참조하십시오.
+</td>
+</tr>
+<tr>
+<td>0.2.99</td>
+<td>2019년 4월 9일</td>
+<td><ul>
+<li>도움말 텍스트를 업데이트합니다.</li>
+<li>Go 버전을 1.12.2로 업데이트합니다.</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.95</td>
+<td>2019년 4월 3일</td>
+<td><ul>
+<li>관리 클러스터 추가 기능에 대한 버전화 지원을 추가합니다.</li>
+<ul><li>[<code>ibmcloud ks addon-versions</code>](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions) 명령이 추가되었습니다.</li>
+<li><code>--version</code> 플래그를 [ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable) 명령에 추가합니다.</li></ul>
+<li>도움말 텍스트의 번역을 업데이트합니다.</li>
+<li>도움말 텍스트의 문서에 대한 짧은 링크를 업데이트합니다.</li>
+<li>JSON 오류 메시지가 올바르지 않은 형식으로 인쇄된 버그를 수정합니다. </li>
+<li>일부 명령에서 자동 플래그(`-s`)를 사용하여 인쇄 오류를 방지한 버그를 수정합니다. </li>
+</ul></td>
+</tr>
+<tr>
 <td>0.2.80</td>
 <td>2019년 3월 19일</td>
 <td><ul>
-<li>[VRF 사용 계정](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)에서 Kubernetes 버전 1.11 이상을 실행하는 표준 클러스터에 [서비스 엔드포인트를 사용하여 마스터와 작업자 간 통신](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)을 사용으로 설정하기 위한 지원이 추가되었습니다. 다음 명령을 사용하는 방법에 대한 정보는 [개인 서비스 엔드포인트 설정](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) 및 [공용 서비스 엔드포인트 설정](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)을 참조하십시오.<ul>
+<li>[VRF 사용 계정](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)에서 Kubernetes 버전 1.11 이상을 실행하는 표준 클러스터에 [서비스 엔드포인트를 사용하여 마스터와 작업자 간 통신](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)을 사용으로 설정하기 위한 지원이 추가되었습니다.<ul>
 <li>`--private-service-endpoint` 및 `--public-service-endpoint` 플래그가 [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) 명령에 추가되었습니다.</li>
 <li>**공용 서비스 엔드포인트 URL** 및 **개인 서비스 엔드포인트 URL** 필드가 <code>ibmcloud ks cluster-get</code>의 출력에 추가되었습니다.</li>
 <li>[<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint) 명령이 추가되었습니다.</li>
 <li>[<code>ibmcloud ks cluster-feature-enable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_public_service_endpoint) 명령이 추가되었습니다.</li>
-<li>[<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable_public_service_endpoint) 명령이 추가되었습니다.</li>
-<li>[<code>ibmcloud ks cluster-feature-ls</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls) 명령이 추가되었습니다.</li>
+<li>[<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable) 명령이 추가되었습니다.</li>
 </ul></li>
 <li>문서 및 번역본이 업데이트되었습니다.</li>
 <li>Go 버전을 1.11.6으로 업데이트합니다.</li>
@@ -170,7 +196,7 @@ subcollection: containers
 <td><ul>
 <li>클러스터의 API 서버 로그를 수집하기 위한 [<code>ibmcloud ks logging-collect</code>](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect) 및 [<code>ibmcloud ks logging-collect-status</code>](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect_status) 명령이 추가되었습니다.</li>
 <li>{{site.data.keyword.keymanagementserviceshort}}를 클러스터의 키 관리 서비스(KMS) 제공자로 사용할 수 있도록 하는 [<code>ibmcloud ks key-protect-enable</code> 명령](/docs/containers?topic=containers-cs_cli_reference#cs_key_protect)이 추가되었습니다.</li>
-<li>다시 부팅 또는 다시 로드를 시작하기 전에 마스터 상태 확인을 건너뛸 수 있도록 [ibmcloud ks worker-reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot) 및 [ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot) 명령에 <code>--skip-master-health</code> 플래그가 추가되었습니다.</li>
+<li>다시 부팅 또는 다시 로드를 시작하기 전에 마스터 상태 검사를 건너뛸 수 있도록 [ibmcloud ks worker-reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot) 및 [ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot) 명령에 <code>--skip-master-health</code> 플래그가 추가되었습니다.</li>
 <li><code>ibmcloud ks cluster-get</code>의 출력에서 <code>Owner Email</code>이 <code>Owner</code>로 바뀌었습니다.</li></ul></td>
 </tr>
 </tbody>

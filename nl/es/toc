@@ -4,9 +4,6 @@
 {: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
 Servicio Kubernetes de IBM Cloud
 
-    container_index.md
-    cs_cli_reference.md
-
     {: .navgroup id="learn"}
     getting-started.md
     
@@ -30,6 +27,7 @@ Servicio Kubernetes de IBM Cloud
         cs_responsibilities.md
         cs_secure.md
         cs_ha.md
+        cs_kube_strategy.md
 
     {: .topicgroup}
     Guías de aprendizaje
@@ -41,7 +39,7 @@ Servicio Kubernetes de IBM Cloud
         cs_tutorials_cf.md
         [Guía de aprendizaje: Cómo trasladar una aplicación basada en VM a Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
         [Guía de aprendizaje: Cómo crear un clúster multiregión mediante Cloud Internet Services](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
-        [Guía de aprendizaje: Configuración de una integración continua y de un conducto de entrega para apps contenerizadas que se ejecutan en Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+        [Guía de aprendizaje: Configuración de un conducto de integración y entrega continuas para apps contenerizadas que se ejecutan en Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -95,16 +93,20 @@ Servicio Kubernetes de IBM Cloud
         cs_storage_utilities.md
         cs_storage_remove.md
 
-    cs_integrations.md
+    {: .topicgroup}
+    Mejora de las posibilidades del clúster con integraciones
+        cs_integrations_addons.md
+        cs_integrations_helm.md
+        cs_integrations_service_binding.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
     cs_at_events.md
 
     {: .topicgroup}
-    Cloud dedicado
+    En desuso: Nube dedicada
         cs_dedicated.md
-        [En desuso: ejecución de contenedores únicos y escalables](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
+        [En desuso: Ejecución de contenedores únicos y escalables](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
     cs_hybrid.md
 
@@ -121,6 +123,7 @@ Servicio Kubernetes de IBM Cloud
 
     cs_regions.md
     cs_access_reference.md
+    cs_integrations_overview.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}
@@ -157,5 +160,8 @@ Servicio Kubernetes de IBM Cloud
     container_volumes_ov.md
     cs_classic.md
     cs_cli_devtools.md
+    cs_integrations.md
+    cs_cli_reference.md
+    cs_storage.md
     transcript_autorecovery.md
     transcript_loadbalancing.md

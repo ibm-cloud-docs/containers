@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -45,16 +45,42 @@ Consulte a tabela a seguir para obter um resumo das mudanças para cada versão 
 </thead>
 <tbody>
 <tr>
+<td>0.2.102</td>
+<td>15 de abril de 2019</td>
+<td>Inclui o [grupo de comandos `ibmcloud ks nlb-dns`](/docs/containers?topic=containers-cs_cli_reference#nlb-dns) para registro e gerenciamento de um nome de host para endereços IP do balanceador de carga de rede (NLB) e o [grupo de comandos `ibmcloud ks nlb-dns-monitor`](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_nlb-dns-monitor) para a criação e a modificação de monitores de verificação de funcionamento para nomes de host do NLB. Para obter mais informações, consulte [Registrando IPs do NLB com um nome de host DNS](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns).
+</td>
+</tr>
+<tr>
+<td>0.2.99</td>
+<td>09 de abril de 2019</td>
+<td><ul>
+<li>Atualiza o texto de ajuda.</li>
+<li>Atualiza a versão do Go para 1.12.2.</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.95</td>
+<td>03 de abril de 2019</td>
+<td><ul>
+<li>Inclui o suporte de versionamento para complementos de cluster gerenciados.</li>
+<ul><li>Inclui o comando [<code>ibmcloud ks addon-versions</code>](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions).</li>
+<li>Inclui o sinalizador <code>--version</code> em comandos [ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable).</li></ul>
+<li>Atualiza as traduções do texto de ajuda.</li>
+<li>Atualiza os links curtos para a documentação no texto de ajuda.</li>
+<li>Corrige um erro que imprimia as mensagens de erro JSON em um formato incorreto.</li>
+<li>Corrige um erro que, por meio do uso do sinalizador silencioso (`-s`) em alguns comandos, evitava a impressão de erros.</li>
+</ul></td>
+</tr>
+<tr>
 <td>0,2,80</td>
 <td>19 de março de 2019</td>
 <td><ul>
-<li>Inclui suporte para ativar a [comunicação mestre-para-trabalhador com os terminais em serviço](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) em clusters padrão que executam o Kubernetes versão 1.11 ou mais recente em [Contas ativadas para VRF](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started). Para obter informações sobre como usar os comandos a seguir, consulte [Configurando o terminal em serviço privado](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) e [Configurando o terminal em serviço público](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).<ul>
+<li>Inclui suporte para ativar a [comunicação mestre-para-trabalhador com os terminais em serviço](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) em clusters padrão que executam o Kubernetes versão 1.11 ou mais recente em [Contas ativadas para VRF](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).<ul>
 <li>Inclui os sinalizadores `--private-service-endpoint` e `--public-service-endpoint` no comando [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create).</li>
 <li>Inclui os campos **URL de terminal em serviço público** e **URL de terminal em serviço privado** para a saída de <code>ibmcloud ks cluster-get</code>.</li>
 <li>Inclui o comando [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint).</li>
 <li>Inclui o comando [<code>ibmcloud ks cluster-feature-enable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_public_service_endpoint).</li>
-<li>Inclui o comando [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable_public_service_endpoint).</li>
-<li>Inclui o comando  [ <code> ibmcloud ks cluster-feature-ls </code> ](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls) .</li>
+<li>Inclui o comando [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable).</li>
 </ul></li>
 <li>Atualiza a documentação e a tradução.</li>
 <li>Atualiza a versão do Go para 1.11.6.</li>
@@ -128,7 +154,7 @@ Consulte a tabela a seguir para obter um resumo das mudanças para cada versão 
 <td>0.1.638</td>
 <td>15 de novembro de 2018</td>
 <td>
-<ul><li>Adiciita o comando  [ <code> ibmcloud ks cluster-refresh </code> ](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh) .</li>
+<ul><li>Inclui o comando [<code>ibmcloud ks cluster-refresh</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh).</li>
 <li>Inclui o nome do grupo de recursos na saída de <code>ibmcloud ks cluster-get</code> e <code>ibmcloud ks clusters</code>.</li></ul>
 </td>
 </tr>
@@ -147,9 +173,9 @@ Consulte a tabela a seguir para obter um resumo das mudanças para cada versão 
 <td>0.1.621</td>
 <td>30 de outubro de 2018</td>
 <td><ul>
-<li>Inclui o comando  [ <code> ibmcloud ks credential-get </code>  ](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get).</li>
+<li>Inclui o [comando <code>ibmcloud ks credential-get</code>](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get).</li>
 <li>Inclui suporte para a origem de log de <code>armazenamento</code> em todos os comandos de criação de log do cluster. Para obter mais informações, veja <a href="/docs/containers?topic=containers-health#logging">Entendendo o cluster e o encaminhamento de log do app</a>.</li>
-<li>Inclui o sinalizador `--network` no [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) <code>ibmcloud ks cluster-config</code>, que faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.</li>
+<li>Inclui o sinalizador `--network` no [comando <code>ibmcloud ks cluster-config</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config), que faz download do arquivo de configuração do Calico para a execução de todos os comandos do Calico.</li>
 <li>Correções de bug secundário e refatoração</li></ul>
 </td>
 </tr>
@@ -169,7 +195,7 @@ Consulte a tabela a seguir para obter um resumo das mudanças para cada versão 
 <td>01 de outubro de 2018</td>
 <td><ul>
 <li>Inclui os comandos [<code>ibmcloud ks logging-collect</code>](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect) e [<code>ibmcloud ks logging-collect-status</code>](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect_status) para coletar logs do servidor de API em seu cluster.</li>
-<li>Inclui o [comando <code>ibmcloud ks key-protect-enable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_key_protect) para ativar o {{site.data.keyword.keymanagementserviceshort}} como um provedor de serviço de gerenciamento de chave (KMS) em seu cluster.</li>
+<li>Inclui o [comando <code>ibmcloud ks key-protect-enable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_key_protect) para permitir o {{site.data.keyword.keymanagementserviceshort}} como o provedor de serviço de gerenciamento de chaves (KMS) em seu cluster.</li>
 <li>Inclui a sinalização <code>--skip-master-health</code> nos comandos [ibmcloud ks worker-reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot) e [ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot) para ignorar a verificação de funcionamento principal antes de iniciar a reinicialização ou o recarregamento.</li>
 <li>Renomeia <code>Owner Email</code> para <code>Owner</code> na saída de <code>ibmcloud ks cluster-get</code>.</li></ul></td>
 </tr>

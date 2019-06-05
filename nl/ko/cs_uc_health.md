@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -98,7 +98,7 @@ subcollection: containers
 
 가장 민감한 워크로드의 경우에는 클러스터를 베어메탈의 {{site.data.keyword.containerlong_notm}}에서 호스팅할 수 있습니다.  이는 하드웨어 및 런타임 코드에서 취약성을 자동으로 스캔하는 신뢰할 수 있는 컴퓨팅 플랫폼을 제공합니다. 업계 표준 컨테이너 기술을 사용하여, 처음에 앱을 주요 아키텍처 변경 없이 빠르게 {{site.data.keyword.containerlong_notm}}에서 다시 호스팅할 수 있습니다. 이 변경은 확장성에 대해 즉각적인 이점을 제공합니다.
 
-정의된 규칙 및 자동화된 Kubernetes 오케스트레이터를 사용하여 앱을 복제하고 스케일링할 수도 있습니다. {{site.data.keyword.containerlong_notm}}는 앱 및 서비스를 요청 시 작성, 스케일링 및 제거할 수 있도록 스케일링 가능한 컴퓨팅 리소스 및 연관 DevOps 대시보드를 제공합니다. 제공업체는 Kubernetes의 배치 및 런타임 오브젝트를 사용하여 앱에 대한 업그레이드를 안정적으로 모니터링하고 관리할 수 있습니다.
+정의된 규칙 및 자동화된 Kubernetes 오케스트레이터를 사용하여 앱을 복제하고 스케일링할 수도 있습니다. {{site.data.keyword.containerlong_notm}}는 앱 및 서비스를 요청 시 작성, 스케일링 및 제거할 수 있도록 확장 가능한 컴퓨팅 리소스 및 연관 DevOps 대시보드를 제공합니다. 제공업체는 Kubernetes의 배치 및 런타임 오브젝트를 사용하여 앱에 대한 업그레이드를 안정적으로 모니터링하고 관리할 수 있습니다.
 
 {{site.data.keyword.SecureGatewayfull}}는 {{site.data.keyword.containerlong_notm}}에서 실행되도록 다시 호스팅된 앱을 위해 온프레미스 데이터베이스 및 문서에 대한 안전한 파이프라인을 작성하는 데 사용됩니다.
 
@@ -123,7 +123,7 @@ subcollection: containers
 
 주요 기술:
 * [필요한 위치에 워크로드를 배치하는 지능형 스케줄링](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [앱 간에 데이터를 지속시키고 동기화하는 데 필요한 {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [앱 간에 데이터를 지속시키고 동기화하는 데 필요한 {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [워크로드에 대한 취약성 스캔 및 격리](/docs/services/Registry?topic=va-va_index#va_index)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
 * [데이터에서 민감한 부분을 제거하고 연구자에게 데이터 구조 변경에 대해 알리는 {{site.data.keyword.openwhisk}}](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)

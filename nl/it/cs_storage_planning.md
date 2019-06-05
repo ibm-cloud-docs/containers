@@ -354,13 +354,13 @@ di archiviazione. Ogni nodo memorizza solo una parte dei dati. </td>
 <tr>
 <td style="text-align:left">Scalabilità</td>
 <td style="text-align:left">Esegue il ridimensionamento in modo automatico</td>
-<td style="text-align:left">Aumenta la capacità del volume ridimensionandolo. Per aumentare la capacità del livello di archiviazione globale, devi aggiungere dei nodi di lavoro o dell'archiviazione blocchi remota  Entrambi gli scenari richiedono il monitoraggio della capacità da parte dell'utente. </td>
+<td style="text-align:left">Aumenta la capacità del volume ridimensionandolo. Per aumentare la capacità del livello di archiviazione globale, devi aggiungere dei nodi di lavoro o dell'archiviazione blocchi remota Entrambi gli scenari richiedono il monitoraggio della capacità da parte dell'utente. </td>
 <td style="text-align:left">Esegue il ridimensionamento in modo automatico</td>
 </tr>
 <tr>
 <td style="text-align:left">Crittografia</td>
 <td style="text-align:left">In transito e inattivi</td>
-<td style="text-align:left">Porta la tua chiave personale per proteggere i tuoi dati in transito e inattivi con {{site.data.keyword.keymanagementservicelong_notm}}.</td>
+<td style="text-align:left">Porta la tua chiave personale per proteggere i tuoi dati in transito e inattivi con {{site.data.keyword.keymanagementservicelong_notm}}. </td>
 <td style="text-align:left">Dati inattivi</td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 ---
 
@@ -17,7 +17,6 @@ lastupdated: "2019-03-21"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # 튜토리얼: 관리 Knative를 사용하여 Kubernetes 클러스터의 서버리스 앱 실행
@@ -39,7 +38,7 @@ Knative는 Kuberbetes 클러스터에서 서버리스 앱을 빌드, 배치 및 
 - **Eventing:** `Eventing` 기본요소를 사용하면 다른 서비스에서 구독할 수 있는 트리거 또는 이벤트 스트림을 작성할 수 있습니다. 예를 들어, 코드가 GitHub 마스터 저장소에 푸시될 때마다 앱의 새로운 빌드를 시작하고자 할 수 있습니다. 또는 온도가 빙점 이하로 떨어지는 경우에만 서버리스 앱을 실행하려고 합니다. `Eventing` 기본요소는 CI/CD 파이프라인에 통합되어 특정 이벤트가 발생하는 경우에 앱의 빌드 및 배치를 자동화할 수 있습니다.
 
 **Managed Knative on {{site.data.keyword.containerlong_notm}}(시범) 추가 기능은 무엇입니까?** </br>
-Managed Knative on {{site.data.keyword.containerlong_notm}}는 Kubernetes 클러스터와 Knative 및 Istio를 직접 통합하는 관리 추가 기능입니다. 추가 기능의 Knative 및 Istio 버전은 IBM에서 테스트되며 {{site.data.keyword.containerlong_notm}}에서 사용할 수 있도록 지원됩니다.{{site.data.keyword.containerlong_notm}}는 추가 기능에 대한 업데이트를 자동으로 롤아웃하여 Knative 및 Istio 컴포넌트를 최신 상태로 유지합니다.
+Managed Knative on {{site.data.keyword.containerlong_notm}}는 Kubernetes 클러스터와 Knative 및 Istio를 직접 통합하는 관리 추가 기능입니다. 추가 기능의 Knative 및 Istio 버전은 IBM에서 테스트되며 {{site.data.keyword.containerlong_notm}}에서 사용할 수 있도록 지원됩니다. 관리 추가 기능에 대한 자세한 정보는 [관리 추가 기능을 사용하여 서비스 추가](/docs/containers?topic=containers-managed-addons#managed-addons)를 참조하십시오.
 
 **제한사항이 있습니까?** </br>
 클러스터에 [컨테이너 이미지 보안 적용기 허가 제어기](/docs/services/Registry?topic=registry-security_enforce#security_enforce)가 설치되어 있으면 클러스터에서 관리 Knative 추가 기능을 사용할 수 없습니다.
@@ -68,7 +67,7 @@ Managed Knative on {{site.data.keyword.containerlong_notm}}는 Kubernetes 클러
 {: #knative_prerequisites}
 
 -  [IBM Cloud CLI, {{site.data.keyword.containerlong_notm}} 플러그인 및 Kubernetes CLI를 설치](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)하십시오. 클러스터의 Kubernetes 버전과 일치하는 `kubectl` CLI 버전을 설치해야 합니다.
--  [코어가 4개이고 메모리가 16GB(`b2c.4x16`) 이상인 작업자 노드가 3개 이상 있는 클러스터를 작성하십시오](/docs/containers?topic=containers-clusters#clusters_cli). 모든 작업자 노드는 Kubernetes 버전 1.11 이상을 실행해야 합니다.
+-  [코어가 4개이고 메모리가 16GB(`b3c.4x16`) 이상인 작업자 노드가 3개 이상 있는 클러스터를 작성하십시오](/docs/containers?topic=containers-clusters#clusters_cli). 모든 작업자 노드는 Kubernetes 버전 1.12 이상을 실행해야 합니다.
 -  {{site.data.keyword.containerlong_notm}}에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
 -  [CLI를 클러스터에 대상으로 지정](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)하십시오.
 
@@ -115,7 +114,13 @@ Knative는 Istio 맨 위에 빌드되어 서버리스 및 컨테이너화된 워
    ```
    {: screen}
 
-3. 모든 Knative 컴포넌트가 설치되었는지 확인하십시오.
+3. 선택사항: `default` 네임스페이스어 모든 앱에 적합한 Istio를 사용할 경우 `istio-injection=enabled` 레이블을 네임스페이스에 추가하십시오. 앱이 Istio 서비스 메시에 포함될 수 있도록 각 서버리스 앱 팟(Pod)이 Envoy 프록시 사이드카로 실행되어야 합니다. 이 레이블은 앱 팟(Pod)이 Envoy 프록시 사이드카 컨테이너로 작성되도록 Istio에서 팟(Pod) 템플리트 스펙을 자동으로 수정하도록 허용합니다. 
+  ```
+    kubectl label namespace default istio-injection=enabled
+  ```
+  {: pre}
+
+4. 모든 Knative 컴포넌트가 설치되었는지 확인하십시오.
    1. Knative `Serving` 컴포넌트의 모든 팟(Pod)이 `Running` 상태인지 확인하십시오.  
       ```
       kubectl get pods --namespace knative-serving
@@ -246,7 +251,7 @@ Knative는 Istio 맨 위에 빌드되어 서버리스 및 컨테이너화된 워
     </tr>
     <tr>
     <td><code>spec.container.env</code></td>
-    <td>Knative 서비스에서 사용할 환경 변수 목록입니다. 이 예제에서, 환경 변수 <code>TARGET</code> 값은 샘플 앱에서 읽고 앱에 <code>"Hello ${TARGET}!"</code> 형식으로 요청을 보내면 리턴됩니다. 값이 제공되지 않으면 샘플 앱은 <code>"Hello World!"</code>를 리턴합니다. </td>
+    <td>Knative 서비스에서 사용할 환경 변수 목록입니다. 이 예제에서, 환경 변수 <code>TARGET</code> 값은 샘플 앱에서 읽고 앱에 <code>"Hello ${TARGET}!"</code> 형식으로 요청을 보내면 리턴됩니다. 값이 제공되지 않으면 샘플 앱은 <code>"Hello World!"</code>를 리턴합니다.  </td>
     </tr>
     </tbody>
     </table>
@@ -267,6 +272,7 @@ Knative는 Istio 맨 위에 빌드되어 서버리스 및 컨테이너화된 워
    ```
    kubectl get pods
    ```
+   {: pre}
 
    출력 예:
    ```
@@ -278,14 +284,14 @@ Knative는 Istio 맨 위에 빌드되어 서버리스 및 컨테이너화된 워
 4. `Hello World` 앱을 사용해 보십시오.
    1. Knative 서비스에 지정된 기본 도메인을 가져오십시오. Knative 서비스의 이름을 변경하거나 앱을 다른 네임스페이스에 배치한 경우, 조회에 해당 값을 업데이트하십시오.
       ```
-      kubectl get svc/kn-helloworld
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       출력 예:
       ```
-      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
-      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
+      NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
+      kn-helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True
       ```
       {: screen}
 

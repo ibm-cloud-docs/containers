@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -29,7 +29,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} File Storage는 Kubernetes 지속적 볼륨(PV)을 사용하여 앱에 추가할 수 있는 지속적이고 빠르며 유연한 네트워크 연결 NFS 기반 파일 스토리지입니다. 워크로드의 요구사항을 충족하는 GB 크기와 IOPS를 사용하여 사전정의된 스토리지 계층 중에서 선택할 수 있습니다. {{site.data.keyword.Bluemix_notm}} File Storage가 사용자에게 적합한 올바른 스토리지 옵션인지 확인하려면 [스토리지 솔루션 선택](/docs/containers?topic=containers-storage_planning#choose_storage_solution)을 참조하십시오. 가격 정보는 [비용 청구](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing)를 참조하십시오.
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage는 공용 네트워크 연결로 설정되는 표준 클러스터에만 사용 가능합니다. 클러스터가 방화벽으로 보호되는 사설 클러스터 또는 개인 서비스 엔드포인트가 사용으로 설정된 클러스터와 같이 공용 네트워크에 액세스할 수 없는 경우, 클러스터에 파일 스토리지를 프로비저닝할 수 없습니다. NFS 파일 스토리지 인스턴스는 단일 구역에 한정됩니다. 다중 구역 클러스터가 있는 경우에는 [다중 구역 지속적 스토리지 옵션](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)을 고려하십시오.
+{{site.data.keyword.Bluemix_notm}} File Storage는 공용 네트워크 연결로 설정되는 표준 클러스터에만 사용 가능합니다. 클러스터가 방화벽으로 보호되는 사설 클러스터 또는 개인 서비스 엔드포인트가 사용으로 설정된 클러스터와 같이 공용 네트워크에 액세스할 수 없는 경우, 클러스터가 Kubernetes 버전 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 이상을 실행하면 파일 스토리지를 프로비저닝할 수 있습니다. NFS 파일 스토리지 인스턴스는 단일 구역에 한정됩니다. 다중 구역 클러스터가 있는 경우에는 [다중 구역 지속적 스토리지 옵션](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)을 고려하십시오.
 {: important}
 
 ## 파일 스토리지 구성에 대한 결정
@@ -43,19 +43,19 @@ subcollection: containers
 스토리지 클래스를 사용하여 특정 유형의 스토리지를 프로비저닝한 후에는 스토리지 디바이스에 대한 유형 또는 보유 정책을 변경할 수 없습니다. 그러나 스토리지 용량과 성능을 늘리려는 경우에는 [크기 및 IOPS를 변경](#file_change_storage_configuration)할 수 있습니다. 스토리지의 유형 및 보유 정책을 변경하려면 [새 스토리지 인스턴스를 작성하고 이전 스토리지 인스턴스의 데이터를 새 스토리지 인스턴스로 복사](/docs/containers?topic=containers-kube_concepts#update_storageclass)해야 합니다.
 {: important}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 스토리지 구성을 결정하려면 다음을 수행하십시오.
 
 1. {{site.data.keyword.containerlong}}에서 사용 가능한 스토리지 클래스를 나열하십시오.
-    ```
+   ```
     kubectl get storageclasses | grep file
-    ```
-    {: pre}
+   ```
+   {: pre}
 
-    출력 예:
-    ```
-    $ kubectl get storageclasses
+   출력 예:
+   ```
+$ kubectl get storageclasses
     NAME                         TYPE
     ibmc-file-bronze (default)   ibm.io/ibmc-file
     ibmc-file-custom             ibm.io/ibmc-file
@@ -65,14 +65,14 @@ subcollection: containers
     ibmc-file-retain-gold        ibm.io/ibmc-file
     ibmc-file-retain-silver      ibm.io/ibmc-file
     ibmc-file-silver             ibm.io/ibmc-file
-    ```
-    {: screen}
+   ```
+   {: screen}
 
 2. 스토리지 클래스의 구성을 검토하십시오.
-   ```
+  ```
    kubectl describe storageclass <storageclass_name>
-   ```
-   {: pre}
+  ```
+  {: pre}
 
    각 스토리지 클래스에 대한 자세한 정보는 [스토리지 클래스 참조](#file_storageclass_reference)를 참조하십시오. 원하는 항목을 찾지 못한 경우에는 사용자 정의된 스토리지 클래스의 작성을 고려하십시오. 시작하려면 [사용자 정의된 스토리지 클래스 샘플](#file_custom_storageclass)을 체크아웃하십시오.
    {: tip}
@@ -107,7 +107,7 @@ subcollection: containers
          <td>20 - 4000Gi</td>
          </tr>
          </tbody></table>
-   - **사용자 정의 스토리지 클래스:** 이 스토리지 클래스를 선택하면 원하는 IOPS와 크기에 대해 추가적인 제어가 가능합니다. 크기의 경우, 허용된 크기 범위 내에서 GB 단위의 정수를 선택할 수 있습니다. 사용자가 선택하는 크기에 따라 사용 가능한 IOPS 범위가 결정됩니다. 지정된 범위 내에 있는 100의 배수인 IOPS를 선택할 수 있습니다. 선택하는 IOPS는 정적이며 스토리지의 크기에 따라 스케일링되지 않습니다. 예를 들어, 100 IOPS와 함께 40Gi를 선택하면 총 IOPS는 100을 유지합니다. </br></br> IOPS 대 기가바이트 비율은 사용자를 위해 프로비저닝되는 하드 디스크의 유형도 결정합니다. 예를 들어, 100 IOPS의 500Gi를 보유 중이면 IOPS 대 기가바이트 비율은 0.2입니다. 비율이 0.3 이하인 스토리지는 SATA 하드 디스크에서 프로비저닝됩니다. 비율이 0.3을 초과하는 스토리지는 SSD 하드 디스크에서 프로비저닝됩니다.  
+   - **사용자 정의 스토리지 클래스:** 이 스토리지 클래스를 선택하면 원하는 IOPS와 크기에 대해 추가적인 제어가 가능합니다. 크기의 경우, 허용된 크기 범위 내에서 GB 단위의 정수를 선택할 수 있습니다. 사용자가 선택하는 크기에 따라 사용 가능한 IOPS 범위가 결정됩니다. 지정된 범위 내에 있는 100의 배수인 IOPS를 선택할 수 있습니다. 선택하는 IOPS는 정적이며 스토리지의 크기에 따라 스케일링되지 않습니다. 예를 들어, 100 IOPS와 함께 40Gi를 선택하면 총 IOPS는 100을 유지합니다.</br></br> IOPS 대 기가바이트 비율은 사용자를 위해 프로비저닝되는 하드 디스크의 유형도 결정합니다. 예를 들어, 100 IOPS의 500Gi를 보유 중이면 IOPS 대 기가바이트 비율은 0.2입니다. 비율이 0.3 이하인 스토리지는 SATA 하드 디스크에서 프로비저닝됩니다. 비율이 0.3을 초과하는 스토리지는 SSD 하드 디스크에서 프로비저닝됩니다.  
      <table>
          <caption>스토리지 클래스 크기 범위 및 IOPS의 표</caption>
          <thead>
@@ -163,7 +163,7 @@ subcollection: containers
 
 5. 클러스터 또는 지속적 볼륨 클레임(PVC)이 삭제된 후에 데이터를 보존하고자 하는지를 선택하십시오.
    - 데이터를 보존하려면 `retain` 스토리지 클래스를 선택하십시오. PVC를 삭제하면 PVC만 삭제됩니다. PV, IBM Cloud 인프라(SoftLayer) 계정의 실제 스토리지 디바이스 및 데이터는 여전히 존재합니다. 스토리지를 재확보하고 이를 클러스터에서 다시 사용하려면 PV를 제거하고 [기존 파일 스토리지 사용](#existing_file)의 단계를 따라야 합니다.
-   - PVC를 삭제할 때 PV, 데이터 및 실제 파일 스토리지 디바이스가 삭제되도록 하려면 `retain` 없이 스토리지 클래스를 선택하십시오. **참고**: Dedicated 계정이 있는 경우에는 IBM Cloud 인프라(SoftLayer)의 고아 볼륨을 방지할 수 있도록 `retain` 없이 스토리지 클래스를 선택하십시오.
+   - PVC를 삭제할 때 PV, 데이터 및 실제 파일 스토리지 디바이스가 삭제되도록 하려면 `retain` 없이 스토리지 클래스를 선택하십시오.
 
 6. 시간별 또는 월별로 청구되기를 원하는지 선택하십시오. 자세한 정보는 [가격 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud/file-storage/pricing)을 확인하십시오. 기본적으로, 모든 파일 스토리지 디바이스는 시간별 비용 청구 유형으로 프로비저닝됩니다.
    월별 비용 청구 유형을 선택하는 경우, 지속적 스토리지를 제거하면 짧은 기간만 사용해도 이에 대해 여전히 월별 비용을 지불하게 됩니다.
@@ -253,7 +253,7 @@ subcollection: containers
        <td><code>metadata.labels.region</code></td>
        <td>선택사항: 파일 스토리지를 프로비저닝할 지역을 지정하십시오. 스토리지에 연결하려면 클러스터가 있는 동일한 지역에서 스토리지를 작성하십시오. 지역을 지정하는 경우에는 구역도 지정해야 합니다. 지역을 지정하지 않거나 지정된 지역을 찾을 수 없는 경우, 스토리지는 클러스터와 동일한 지역에 작성됩니다.
        </br></br>클러스터의 지역을 가져오려면 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`를 실행하여 **마스터 URL**에서 지역 접두부를 찾으십시오(예: `https://c2.eu-de.containers.cloud.ibm.com:11111`에서 `eu-de`).
-       </br></br><strong>팁:</strong> PVC의 지역과 구역을 지정하는 대신, [사용자 정의된 스토리지 클래스](#file_multizone_yaml)에서 이러한 값을 지정할 수도 있습니다. 그리고 PVC의 <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> 섹션의 스토리지 클래스를 사용하십시오. 지역과 구역이 스토리지 클래스 및 PVC에서 지정된 경우에는 PVC의 값이 우선합니다. </td>
+</br></br><strong>팁:</strong> PVC의 지역과 구역을 지정하는 대신, [사용자 정의된 스토리지 클래스](#file_multizone_yaml)에서 이러한 값을 지정할 수도 있습니다. 그리고 PVC의 <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> 섹션의 스토리지 클래스를 사용하십시오. 지역과 구역이 스토리지 클래스 및 PVC에서 지정된 경우에는 PVC의 값이 우선합니다. </td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
@@ -316,7 +316,7 @@ subcollection: containers
     ```
     {: screen}
 
-4.  {: #app_volume_mount}스토리지를 배치에 마운트하려면 구성 `.yaml` 파일을 작성하고 PV를 바인드하는 PVC를 지정하십시오.
+4.  {: #file_app_volume_mount}스토리지를 배치에 마운트하려면 구성 `.yaml` 파일을 작성하고 PV를 바인드하는 PVC를 지정하십시오.
 
     루트 이외의 사용자가 지속적 스토리지에 쓰도록 요구하는 앱이나 루트 사용자가 마운트 경로를 소유하도록 요구하는 앱이 있는 경우에는 [NFS 파일 스토리지에 비루트 사용자 액세스 추가](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot) 또는 [NFS 파일 스토리지에 대한 루트 권한 사용](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)을 참조하십시오.
     {: tip}
@@ -378,7 +378,7 @@ subcollection: containers
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>컨테이너 내에서 볼륨이 마운트되는 디렉토리의 절대 경로입니다. 마운트 경로에 쓰여진 데이터는 실제 파일 스토리지 인스턴스의 <code>root</code> 디렉토리 아래에 저장됩니다. 다른 앱 간에 볼륨을 공유하려는 경우 각각의 앱에 대해 [볼륨 하위 경로![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath)를 지정할 수 있습니다.</td>
+    <td>컨테이너 내에서 볼륨이 마운트되는 디렉토리의 절대 경로입니다. 마운트 경로에 쓰여진 데이터는 실제 파일 스토리지 인스턴스의 <code>root</code> 디렉토리 아래에 저장됩니다. 다른 앱 간에 볼륨을 공유하려는 경우 각각의 앱에 대해 [볼륨 하위 경로![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath)를 지정할 수 있습니다.  </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>
@@ -433,9 +433,10 @@ subcollection: containers
 
 시작하기 전에:
 - 기존 파일 스토리지 인스턴스와 동일한 구역에 존재하는 최소한 하나의 작업자 노드를 보유 중인지 확인하십시오.
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### 1단계: 기존 스토리지 준비.
+{: #existing-file-1}
 
 기존 스토리지를 앱에 마운트하려면 우선 PV에 대한 모든 필수 정보를 검색하고 클러스터에서 액세스 가능하도록 스토리지를 준비해야 합니다.  
 {: shortdesc}
@@ -479,18 +480,16 @@ subcollection: containers
 **클러스터 외부에서 프로비저닝된 지속적 스토리지의 경우:** </br>
 이전에 프로비저닝했지만 이전에 클러스터에서 사용된 적이 없는 기존 스토리지를 사용하려면, 작업자 노드와 동일한 서브넷에서 해당 스토리지가 사용 가능하도록 해야 합니다.
 
-Dedicated 계정이 있는 경우에는 [지원 케이스를 열어야](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) 합니다.
-{: note}
-
 1.  {: #external_storage}[IBM Cloud 인프라(SoftLayer) 포털 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/classic?)에서 **스토리지**를 클릭하십시오.
 2.  **조치** 메뉴에서 **File Storage**를 클릭하고 **호스트에 권한 부여**를 선택하십시오.
 3.  **서브넷**을 선택하십시오.
 4.  드롭 다운 목록에서 작업자 노드가 연결된 사설 VLAN 서브넷을 선택하십시오. 작업자 노드의 서브넷을 찾으려면 `ibmcloud ks workers --cluster <cluster_name>`을 실행하고 작업자 노드의 `Private IP`를 드롭 다운 목록에서 찾은 서브넷과 비교하십시오.
 5.  **제출**을 클릭하십시오.
 6.  파일 스토리지의 이름을 클릭하십시오.
-7.  `Mount Point`, `size` 및 `Location` 필드를 기록해 두십시오. `Mount Point` 필드는 다음으로 표시됩니다. `<nfs_server>:<file_storage_path>`.
+7.  `Mount Point`, `size` 및 `Location` 필드를 기록해 두십시오. `Mount Point` 필드는 `<nfs_server>:<file_storage_path>`로 표시됩니다.
 
 ### 2단계: 지속적 볼륨(PV) 및 일치하는 지속적 볼륨 클레임(PVC) 작성
+{: #existing-file-2}
 
 1.  PV에 대한 스토리지 구성 파일을 작성하십시오. 이전에 검색한 값을 포함하십시오.
 
@@ -611,7 +610,7 @@ Dedicated 계정이 있는 경우에는 [지원 케이스를 열어야](/docs/ge
     {: screen}
 
 
-PV를 작성하여 PVC에 바인딩했습니다. 이제 클러스터 사용자는 자신의 배치에 [PVC를 마운트](#app_volume_mount)하고 PV 오브젝트에서 읽거나 쓰기를 시작할 수 있습니다.
+PV를 작성하여 PVC에 바인딩했습니다. 이제 클러스터 사용자는 자신의 배치에 [PVC를 마운트](#file_app_volume_mount)하고 PV 오브젝트에서 읽거나 쓰기를 시작할 수 있습니다.
 
 <br />
 
@@ -644,7 +643,7 @@ Stateful 세트를 작성할 때 자동으로 PVC를 작성하려는 경우에�
 Stateful 세트를 작성할 때 PVC를 자동으로 작성하려면 이 선택사항을 사용하십시오.
 {: shortdesc}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 클러스터 내의 모든 기존 Stateful 세트가 완전히 배치되었는지 확인하십시오. 특정 Stateful 세트가 여전히 배치 중인 경우에는 Stateful 세트 작성을 시작할 수 없습니다. 예기치 않은 결과를 방지하려면 클러스터 내의 모든 Stateful 세트가 완전히 배치될 때까지 기다려야 합니다.
    1. 클러스터에 있는 기존 Stateful 세트를 나열하십시오.
@@ -758,7 +757,7 @@ Stateful 세트를 작성할 때 PVC를 자동으로 작성하려면 이 선택�
 
   - **반친화성 규칙이 있고 파일 스토리지 작성을 지연하는 Stateful 세트 예제:**
 
-    다음 예는 NGINX를 3개의 복제본을 포함하는 Stateful 세트로 배치하는 방법을 보여줍니다. Stateful 세트는 파일 스토리지가 작성된 지역 및 구역을 영역을 지정하지 않습니다. 대신, Stateful 세트는 반친화성 규칙을 사용하여 팟(Pod)이 작업자 노드와 구역에 걸쳐 분산되도록 합니다. 작업자 노드 반친화성은 `app: nginx` 레이블을 정의하여 구현됩니다. 이 레이블은 동일한 레이블의 팟(Pod)이 이 작업자 노드에서 이미 실행되는 경우 작업자 노드에서 팟(Pod)을 스케줄하지 않도록 Kubernetes에 지시합니다. `topologykey: failure-domain.beta.kubernetes.io/zone` 레이블은 이 반친화성 규칙을 더 제한하며 `app: nginx` 레이블의 팟(Pod)을 이미 실행 중인 작업자 노드와 동일한 구역에 있는 작업자 노드에서 스케줄되지 않도록 합니다. 각 Stateful 세트 팟(Pod)에 대해 두 개의 PVC가 `volumeClaimTemplates` 섹션에 정의된 대로 작성되지만 파일 스토리지 인스턴스의 작성은 스토리지를 사용하는 Stateful 세트 팟(Pod)이 스케줄될 때까지 지연됩니다. 이 설정을 [토폴로지 인식 볼륨 스케줄링](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/)이라고 합니다. 
+    다음 예는 NGINX를 3개의 복제본을 포함하는 Stateful 세트로 배치하는 방법을 보여줍니다. Stateful 세트는 파일 스토리지가 작성된 지역 및 구역을 영역을 지정하지 않습니다. 대신, Stateful 세트는 반친화성 규칙을 사용하여 팟(Pod)이 작업자 노드와 구역에 걸쳐 분산되도록 합니다. 작업자 노드 반친화성은 `app: nginx` 레이블을 정의하여 구현됩니다. 이 레이블은 동일한 레이블의 팟(Pod)이 이 작업자 노드에서 이미 실행되는 경우 작업자 노드에서 팟(Pod)을 스케줄하지 않도록 Kubernetes에 지시합니다. `topologykey: failure-domain.beta.kubernetes.io/zone` 레이블은 이 반친화성 규칙을 더 제한하며 `app: nginx` 레이블의 팟(Pod)을 이미 실행 중인 작업자 노드와 동일한 구역에 있는 작업자 노드에서 스케줄되지 않도록 합니다. 각 Stateful 세트 팟(Pod)에 대해 두 개의 PVC가 `volumeClaimTemplates` 섹션에 정의된 대로 작성되지만 파일 스토리지 인스턴스의 작성은 스토리지를 사용하는 Stateful 세트 팟(Pod)이 스케줄될 때까지 지연됩니다. 이 설정을 [토폴로지 인식 볼륨 스케줄링](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/)이라고 합니다.
 
     ```
     apiVersion: storage.k8s.io/v1
@@ -882,7 +881,7 @@ Stateful 세트를 작성할 때 PVC를 자동으로 작성하려면 이 선택�
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
-    <td style="text-align:left">Stateful 세트 팟(Pod)이 작업자 노드 및 구역에 분산되도록 반친화성 규칙을 지정합니다. 이 예는 Stateful 세트 팟(Pod)이 `app: nginx` 레이블이 있는 팟(Pod)이 실행되는 작업자 노드에서 스케줄되지 않는 것을 선호하는 반친화성 규칙을 보여줍니다. `topologykey: failure-domain.beta.kubernetes.io/zone`은 이 반친화성 규칙을 더 제한하며 작업자 노드가 `app: nginx` 레이블이 있는 팟(Pod)과 동일한 구역에 있는 경우 팟(Pod)이 작업자 노드에서 스케줄되지 않도록 합니다. 이 반친화성 규칙을 사용하면 작업자 노드 및 구역에 대해 반친화성을 구현할 수 있습니다.</td>
+    <td style="text-align:left">Stateful 세트 팟(Pod)이 작업자 노드 및 구역에 분산되도록 반친화성 규칙을 지정합니다. 이 예는 Stateful 세트 팟(Pod)이 `app: nginx` 레이블이 있는 팟(Pod)이 실행되는 작업자 노드에서 스케줄되지 않는 것을 선호하는 반친화성 규칙을 보여줍니다. `topologykey: failure-domain.beta.kubernetes.io/zone`은 이 반친화성 규칙을 더 제한하며 작업자 노드가 `app: nginx` 레이블이 있는 팟(Pod)과 동일한 구역에 있는 경우 팟(Pod)이 작업자 노드에서 스케줄되지 않도록 합니다. 이 반친화성 규칙을 사용하면 작업자 노드 및 구역에 대해 반친화성을 구현할 수 있습니다. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
@@ -914,7 +913,7 @@ Stateful 세트를 작성할 때 PVC를 자동으로 작성하려면 이 선택�
    ```
    {: pre}
 
-   PVC의 현재 상태를 보려면 `kubectl get pvc`를 실행하십시오. PVC 이름은 `<volume_name>-<statefulset_name>-<replica_number>`.
+   PVC의 현재 상태를 보려면 `kubectl get pvc`를 실행하십시오. PVC의 이름은 `<volume_name>-<statefulset_name>-<replica_number>`로 형식화됩니다.
    {: tip}
 
 ### 정적 프로비저닝: Stateful 세트와 함께 기존 PVC 사용
@@ -925,9 +924,9 @@ Stateful 세트를 작성하기 전에 PVC를 사전 프로비저닝하거나 �
 
 [Stateful 세트를 작성할 때 동적으로 PVC를 프로비저닝](#file_dynamic_statefulset)하는 경우, PVC의 이름은 Stateful 세트 YAML 파일에 사용한 값에 따라 지정됩니다. Stateful 세트가 기존 PVC를 사용하기 위해서는 PVC의 이름이 동적 프로비저닝을 사용할 때 자동으로 작성되는 이름과 일치해야 합니다.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. Stateful 세트를 작성하기 전에 사전 프로비저닝하려는 경우, [앱에 파일 스토리지 추가](#add_file)의 1 - 3단계를 따라 각 Stateful 세트 복제본에 대한 PVC를 작성하십시오. 반드시 다음 형식을 따르는 이름을 사용하여 PVC를 작성해야 합니다: `<volume_name>-<statefulset_name>-<replica_number>`.
+1. Stateful 세트를 작성하기 전에 사전 프로비저닝하려는 경우, [앱에 파일 스토리지 추가](#add_file)의 1 - 3단계를 따라 각 Stateful 세트 복제본에 대한 PVC를 작성하십시오. 반드시 다음 형식을 따르는 이름을 사용하여 PVC를 작성해야 합니다. `<volume_name>-<statefulset_name>-<replica_number>`
    - **`<volume_name>`**: Stateful 세트의 `spec.volumeClaimTemplates.metadata.name` 섹션에 지정할 이름을 사용하십시오(예: `nginxvol`).
    - **`<statefulset_name>`**: Stateful 세트의 `metadata.name` 섹션에 지정할 이름을 사용하십시오(예: `nginx_statefulset`).
    - **`<replica_number>`**: 복제본의 번호(0부터 시작)를 입력하십시오.
@@ -937,7 +936,7 @@ Stateful 세트를 작성하기 전에 PVC를 사전 프로비저닝하거나 �
    기존 파일 스토리지 인스턴스에 대한 PVC 및 PV를 작성하시겠습니까? [정적 프로비저닝](#existing_file)을 사용하여 PVC 및 PV를 작성하십시오.
    {: tip}
 
-2. [동적 프로비저닝: Stateful 세트를 작성할 때 PVC 작성](#file_dynamic_statefulset)의 단계에 따라 Stateful 세트를 작성하십시오. PVC 이름은 다음 형식을 따릅니다. `<volume_name>-<statefulset_name>-<replica_number>`. Stateful 세트 스펙에는 자신이 사용하는 PVC 이름의 다음 값을 사용해야 합니다.
+2. [동적 프로비저닝: Stateful 세트를 작성할 때 PVC 작성](#file_dynamic_statefulset)의 단계에 따라 Stateful 세트를 작성하십시오. PVC의 이름은 `<volume_name>-<statefulset_name>-<replica_number>` 형식을 따릅니다. Stateful 세트 스펙에는 자신이 사용하는 PVC 이름의 다음 값을 사용해야 합니다.
    - **`spec.volumeClaimTemplates.metadata.name`**: PVC 이름의 `<volume_name>`을 입력하십시오.
    - **`metadata.name`**: PVC 이름의 `<statefulset_name>`을 입력하십시오.
    - **`spec.replicas`**: Stateful 세트에 대해 작성할 복제본의 수를 입력하십시오. 복제본의 수는 이전에 작성한 PVC의 수와 동일해야 합니다.
@@ -1083,7 +1082,7 @@ kubectl get pvc
       ```
       {: pre}
 
-      팟(Pod)은 다음 형식으로 리턴됩니다. `<pod_name>: <pvc_name>`.
+      팟(Pod)은 다음 형식으로 리턴됩니다. `<pod_name>: <pvc_name>`
    2. 팟(Pod)에 로그인하십시오.
       ```
       kubectl exec -it <pod_name> bash
@@ -1206,17 +1205,17 @@ kubectl get pvc
 
 <dl>
   <dt>주기적 스냅샷 설정</dt>
-  <dd><p>특정 시점에 인스턴스 상태를 캡처하는 읽기 전용 이미지인 [파일 스토리지에 대한 주기적 스냅샷을 설정](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)할 수 있습니다. 스냅샷을 저장하려면 파일 스토리지의 스냅샷 영역을 요청해야 합니다. 스냅샷은 동일한 구역 내의 기본 스토리지 인스턴스에 저장됩니다. 사용자가 실수로 볼륨에서 중요한 데이터를 제거한 경우 스냅샷에서 데이터를 복원할 수 있습니다. <p class="note">: Dedicated 계정이 있는 경우에는 [지원 케이스를 열어야](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) 합니다.</p></br> <strong>볼륨에 대한 스냅샷을 작성하려면 다음을 수행하십시오. </strong><ol><li>[계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).</li><li>`ibmcloud sl` CLI에 로그인하십시오. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>클러스터에 있는 기존 PV를 나열하십시오. <pre class="pre"><code>kubectl get pv</code></pre></li><li>스냅샷 영역을 작성할 PV에 대한 세부사항을 가져오고 볼륨 ID, 크기 및 IOPS를 기록해 두십시오. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 볼륨 ID, 크기 및 IOPS는 CLI 출력의 <strong>Labels</strong> 섹션에서 찾을 수 있습니다. </li><li>이전 단계에서 검색한 매개변수를 사용하여 기존 볼륨의 스냅샷 크기를 작성하십시오. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>스냅샷 크기가 작성될 때까지 기다리십시오. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 출력의 <strong>Snapshot Size (GB)</strong>가 0에서 주문한 크기로 변경된 경우 스냅샷 크기가 성공적으로 프로비저닝된 것입니다. </li><li>볼륨에 대한 스냅샷을 작성하고 작성된 스냅샷의 ID를 기록해 두십시오. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>스냅샷이 작성되었는지 확인하십시오. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>스냅샷의 데이터를 기본 볼륨에 복원하려면 다음을 수행하십시오. </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>특정 시점에 인스턴스 상태를 캡처하는 읽기 전용 이미지인 [파일 스토리지에 대한 주기적 스냅샷을 설정](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)할 수 있습니다. 스냅샷을 저장하려면 파일 스토리지의 스냅샷 영역을 요청해야 합니다. 스냅샷은 동일한 구역 내의 기본 스토리지 인스턴스에 저장됩니다. 사용자가 실수로 볼륨에서 중요한 데이터를 제거한 경우 스냅샷에서 데이터를 복원할 수 있습니다.</br> <strong>볼륨에 대한 스냅샷을 작성하려면 다음을 수행하십시오. </strong><ol><li>[계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>`ibmcloud sl` CLI에 로그인하십시오. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>클러스터에 있는 기존 PV를 나열하십시오. <pre class="pre"><code>kubectl get pv</code></pre></li><li>스냅샷 영역을 작성할 PV에 대한 세부사항을 가져오고 볼륨 ID, 크기 및 IOPS를 기록해 두십시오. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 볼륨 ID, 크기 및 IOPS는 CLI 출력의 <strong>Labels</strong> 섹션에서 찾을 수 있습니다. </li><li>이전 단계에서 검색한 매개변수를 사용하여 기존 볼륨의 스냅샷 크기를 작성하십시오. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>스냅샷 크기가 작성될 때까지 기다리십시오. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 출력의 <strong>Snapshot Size (GB)</strong>가 0에서 주문한 크기로 변경된 경우 스냅샷 크기가 성공적으로 프로비저닝된 것입니다. </li><li>볼륨에 대한 스냅샷을 작성하고 작성된 스냅샷의 ID를 기록해 두십시오. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>스냅샷이 작성되었는지 확인하십시오. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>스냅샷의 데이터를 기본 볼륨에 복원하려면 다음을 수행하십시오. </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>다른 구역으로 스냅샷 복제</dt>
- <dd><p>구역 장애로부터 데이터를 보호하기 위해 다른 구역에서 설정된 파일 스토리지 인스턴스로 [스냅샷을 복제](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication)할 수 있습니다. 데이터는 기본 스토리지에서 백업 스토리지로만 복제할 수 있습니다. 복제된 파일 스토리지 인스턴스를 클러스터에 마운트할 수는 없습니다. 기본 스토리지에서 장애가 발생하는 경우에는 복제된 백업 스토리지가 기본 스토리지가 되도록 수동으로 설정할 수 있습니다. 그런 다음 클러스터에 이를 추가할 수 있습니다. 기본 스토리지가 복원되고 나면 백업 스토리지로부터 데이터를 복원할 수 있습니다. <strong>참고</strong>: Dedicated 계정이 있는 경우에는 스냅샷을 다른 구역으로 복제할 수 없습니다.</p></dd>
+ <dd><p>구역 장애로부터 데이터를 보호하기 위해 다른 구역에서 설정된 파일 스토리지 인스턴스로 [스냅샷을 복제](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication)할 수 있습니다. 데이터는 기본 스토리지에서 백업 스토리지로만 복제할 수 있습니다. 복제된 파일 스토리지 인스턴스를 클러스터에 마운트할 수는 없습니다. 기본 스토리지에서 장애가 발생하는 경우에는 복제된 백업 스토리지가 기본 스토리지가 되도록 수동으로 설정할 수 있습니다. 그런 다음 클러스터에 이를 추가할 수 있습니다. 기본 스토리지가 복원되고 나면 백업 스토리지로부터 데이터를 복원할 수 있습니다.</p></dd>
  <dt>스토리지 복제(duplicate)</dt>
- <dd><p>원본 스토리지 인스턴스와 동일한 구역에서 [파일 스토리지 인스턴스를 복제](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume)할 수 있습니다. 복제본(duplicate)에는 복제본(duplicate)을 작성한 시점의 원본 스토리지 인스턴스와 동일한 데이터가 저장되어 있습니다. 복제본(replica)과 다르게 복제본(duplicate)은 원본과 별개인 스토리지 인스턴스로 사용하십시오. 복제하려면 우선 [볼륨에 대한 스냅샷을 설정](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)하십시오. <strong>참고</strong>: Dedicated 계정이 있는 경우에는 <a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">지원 케이스를 열어야</a> 합니다.</p></dd>
+ <dd><p>원본 스토리지 인스턴스와 동일한 구역에서 [파일 스토리지 인스턴스를 복제](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume)할 수 있습니다. 복제본(duplicate)에는 복제본(duplicate)을 작성한 시점의 원본 스토리지 인스턴스와 동일한 데이터가 저장되어 있습니다. 복제본(replica)과 다르게 복제본(duplicate)은 원본과 별개인 스토리지 인스턴스로 사용하십시오. 복제하려면 우선 [볼륨에 대한 스냅샷을 설정](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)하십시오.</p></dd>
   <dt>{{site.data.keyword.cos_full}}로 데이터 백업</dt>
   <dd><p>[**ibm-backup-restore 이미지**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter)를 사용하여 클러스터에서 백업을 회전하고 팟(Pod)을 복원할 수 있습니다. 이 팟(Pod)에는 클러스터의 지속적 볼륨 클레임(PVC)에 대한 일회성 또는 주기적 백업을 실행하는 스크립트가 포함되어 있습니다. 데이터는 구역에 설정된 {{site.data.keyword.cos_full}} 인스턴스에 저장됩니다.</p>
   <p>데이터의 고가용성을 개선하고 구역 장애로부터 앱을 보호하려면 두 번째 {{site.data.keyword.cos_full}} 인스턴스를 설정하고 구역 간에 데이터를 복제하십시오. {{site.data.keyword.cos_full}} 인스턴스에서 데이터를 복원해야 하는 경우 이미지와 함께 제공된 복원 스크립트를 사용하십시오.</p></dd>
 <dt>팟(Pod) 및 컨테이너에서 데이터 복사</dt>
 <dd><p>`kubectl cp` [명령 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/kubectl/overview/#cp)을 사용하여 클러스터의 팟(Pod) 또는 특정 컨테이너에서 파일 및 디렉토리를 복사할 수 있습니다.</p>
-<p>시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). <code>-c</code>를 사용하여 컨테이너를 지정하지 않는 경우 이 명령은 팟(Pod)의 사용 가능한 첫 번째 컨테이너를 사용합니다.</p>
+<p>시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) <code>-c</code>를 사용하여 컨테이너를 지정하지 않는 경우 이 명령은 팟(Pod)의 사용 가능한 첫 번째 컨테이너를 사용합니다.</p>
 <p>이 명령은 다양한 방식으로 사용할 수 있습니다.</p>
 <ul>
 <li>로컬 머신에서 클러스터의 팟(Pod)으로 데이터 복사: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -1323,7 +1322,7 @@ kubectl get pvc
 </table>
 
 ### 골드
-{: #block_gold}
+{: #file_gold}
 
 <table>
 <caption>파일 스토리지 클래스: 골드</caption>
@@ -1495,7 +1494,7 @@ kubectl get pvc
 
 - **Endurance 파일 스토리지의 예:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: ibmc-file-silver-mycustom-storageclass

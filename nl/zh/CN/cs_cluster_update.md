@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -142,7 +142,7 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012
@@ -294,7 +294,7 @@ kubectl get nodes
 ## 更新机器类型
 {: #machine_type}
 
-可以通过添加新工作程序节点并除去旧工作程序节点来更新工作程序节点的机器类型。例如，如果在其名称中含有 `u1c` 或 `b1c` 的不推荐机器类型上具有虚拟工作程序节点，请创建使用其名称中含有 `u2c` 或 `b2c` 的机器类型的工作程序节点。
+可以通过添加新工作程序节点并除去旧工作程序节点来更新工作程序节点的机器类型。例如，如果集群具有不推荐使用的 `x1c` 或较旧的 Ubuntu 16 `x2c` 工作程序节点类型模板，请创建使用其名称中含有 `x3c` 的机器类型的 Ubuntu 18 工作程序节点。
 {: shortdesc}
 
 开始之前：
@@ -412,12 +412,12 @@ kubectl get nodes
 {{site.data.keyword.containerlong_notm}} 集群随附在供应集群时自动安装的附加组件，例如用于日志记录的 Fluentd。缺省情况下，IBM 会自动更新这些附加组件。但是，您可以禁用某些附加组件的自动更新，而单独从主节点和工作程序节点手动更新这些附加组件。
 {: shortdesc}
 
-**可以单独更新集群中的哪些缺省附加组件？**</br>
+**可以独立于集群更新哪些缺省附加组件？**</br>
 您可以选择禁用以下附加组件的自动更新：
-* [用于日志记录的 Fluentd](#logging)
+* [用于日志记录的 Fluentd](#logging-up)
 * [Ingress 应用程序负载均衡器](#alb)
 
-**集群中有无法单独更新的附加组件吗？**</br>
+**有无法独立于集群更新的附加组件吗？**</br>
 
 有。集群部署的以下受管附加组件和关联的资源不能更改，但为了获得特定性能优点而缩放 pod 或编辑配置映射时除外。如果尝试更改下列其中一个部署附加组件，其原始设置会定期复原。
 
@@ -441,17 +441,17 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **可以安装其他非缺省附加组件吗？**</br>
-可以。{{site.data.keyword.containerlong_notm}} 提供了其他附加组件，您可以选择这些附加组件以向集群添加功能。例如，您可能希望[使用 Helm chart](/docs/containers?topic=containers-integrations#helm) 来安装[块存储器插件](/docs/containers?topic=containers-block_storage#install_block)、[Istio](/docs/containers?topic=containers-istio) 或 [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup)。您必须通过遵循指示信息来更新 Helm 图表，从而分别更新每个附加组件。
+可以。{{site.data.keyword.containerlong_notm}} 提供了其他附加组件，您可以选择这些附加组件以向集群添加功能。例如，您可能希望[使用 Helm chart](/docs/containers?topic=containers-helm#public_helm_install) 来安装[块存储器插件](/docs/containers?topic=containers-block_storage#install_block)、[Istio](/docs/containers?topic=containers-istio) 或 [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup)。您必须通过遵循指示信息来更新 Helm 图表，从而分别更新每个附加组件。
 
 ### 管理用于日志记录的 Fluentd 附加组件的自动更新
-{: #logging}
+{: #logging-up}
 
 为了对日志记录或过滤器配置进行更改，Fluentd 附加组件必须为最新版本。缺省情况下，会启用附加组件的自动更新。
 {: shortdesc}
 
 您可以通过以下方式来管理 Fluentd 附加组件的自动更新。**注**：要运行以下命令，您必须具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](/docs/containers?topic=containers-users#platform)。
 
-* 通过运行 `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)来检查是否启用了自动更新。
+* 通过运行 `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)，检查是否启用了自动更新。
 * 通过运行 `ibmcloud ks logging-autoupdate-disable` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable)来禁用自动更新。
 * 如果禁用了自动更新，但您需要对配置进行更改，那么有两个选项：
     * 启用 Fluentd pod 的自动更新。
@@ -548,8 +548,8 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
     {: pre}
 * 重新启用自动更新。这样，每当下一个构建可用时，ALB pod 都会自动更新为最新构建。
         ```
-        ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
-        ```
+    ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
+    ```
     {: pre}
 
 <br />
@@ -584,9 +584,9 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 
 2. 创建工作程序池，并确定要添加到该池的机器类型和工作程序节点数。
    ```
-ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
-   ```
-        {: pre}
+        ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+        ```
+   {: pre}
 
 3. 列出可用专区，并确定要供应工作程序池中工作程序节点的位置。要查看供应独立工作程序节点的专区，请运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`。如果要跨多个专区分布工作程序节点，请选择[支持多专区的专区](/docs/containers?topic=containers-regions-and-zones#zones)。
    ```
@@ -601,7 +601,7 @@ ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID>
    {: pre}
 
 5. 将专区添加到工作程序池。将专区添加到工作程序池时，工作程序池中定义的工作程序节点将在专区中供应，并考虑用于未来的工作负载安排。{{site.data.keyword.containerlong}} 会自动将区域的 `failure-domain.beta.kubernetes.io/region` 标签和专区的 `failure-domain.beta.kubernetes.io/zone` 标签添加到每个工作程序节点。Kubernetes 调度程序使用这些标签在同一区域内的各个专区之间分布 pod。
-   1. **将一个专区添加到一个工作程序池**：将 `<pool_name>` 替换为工作程序池的名称，并使用先前检索到的信息来填写集群标识、专区和 VLAN。如果在该专区中没有专用和公用 VLAN，请勿指定此选项。系统将自动创建专用和公用 VLAN。
+   1. **将专区添加到一个工作程序池**：将 `<pool_name>` 替换为工作程序池的名称，并使用先前检索到的信息来填写集群标识、专区和 VLAN。如果在该专区中没有专用和公用 VLAN，请勿指定此选项。系统将自动创建专用和公用 VLAN。
 
       如果要对不同工作程序池使用不同的 VLAN，请对每个 VLAN 及其相应的工作程序池重复此命令。任何新的工作程序节点都会添加到指定的 VLAN，但不会更改任何现有工作程序节点的 VLAN。
       ```
@@ -609,7 +609,7 @@ ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID>
       ```
       {: pre}
 
-   2. **将该专区添加到多个工作程序池**：将多个工作程序池添加到 `ibmcloud ks zone-add` 命令。要将一个专区添加到多个工作程序池，必须在该专区中具有现有专用和公用 VLAN。如果在该专区中没有公用和专用 VLAN，请考虑首先将该专区添加到一个工作程序池，以便创建公用和专用 VLAN。然后，可以将该专区添加到其他工作程序池。</br></br>务必将所有工作程序池中的工作程序节点供应到所有专区中，以确保集群可跨专区均衡。如果要对不同工作程序池使用不同的 VLAN，请对要用于工作程序池的 VLAN 重复此命令。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+   2. **将该专区添加到多个工作程序池**：将多个工作程序池添加到 `ibmcloud ks zone-add` 命令。要将一个专区添加到多个工作程序池，必须在该专区中具有现有专用和公用 VLAN。如果在该专区中没有公用和专用 VLAN，请考虑首先将该专区添加到一个工作程序池，以便创建公用和专用 VLAN。然后，可以将该专区添加到其他工作程序池。</br></br>务必将所有工作程序池中的工作程序节点供应到所有专区中，以确保集群可跨专区均衡。如果要对不同工作程序池使用不同的 VLAN，请对要用于工作程序池的 VLAN 重复此命令。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
 ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
@@ -657,8 +657,7 @@ kubectl get nodes
    6. 重复这些步骤，直到除去所有独立工作程序节点。
 
 
-**接下来要做什么？**
-</br>
+**接下来要做什么？**</br>
 现在，您已将集群更新为使用工作程序池，因此可以通过向集群添加更多专区来提高可用性。通过向集群添加更多专区，可将集群从单专区集群更改为[多专区集群](/docs/containers?topic=containers-plan_clusters#ha_clusters)。将单专区集群更改为多专区集群时，Ingress 域会从 `<cluster_name>.<region>.containers.mybluemix.net` 更改为 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。现有 Ingress 域仍然有效，可用于向应用程序发送请求。
 
 <br />

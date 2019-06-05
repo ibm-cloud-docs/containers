@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -45,12 +45,12 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
 
 |登錄|說明|優點|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-index)|使用此選項，您可以在 {{site.data.keyword.registryshort_notm}} 中設定您自己的安全 Docker 映像檔儲存庫，您可以在其中放心地儲存映像檔並且在叢集使用者之間進行共用。|<ul><li>管理帳戶中的映像檔存取。</li><li>使用 {{site.data.keyword.IBM_notm}} 所提供的映像檔及範例應用程式（例如 {{site.data.keyword.IBM_notm}} Liberty）作為主映像檔，並在其中新增您自己的應用程式碼。</li><li>「漏洞警告器」會自動掃描映像檔的潛在漏洞（包括修正它們的 OS 特定建議）。</li></ul>|
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)|使用此選項，您可以在 {{site.data.keyword.registryshort_notm}} 中設定您自己的安全 Docker 映像檔儲存庫，您可以在其中放心地儲存映像檔並且在叢集使用者之間進行共用。|<ul><li>管理帳戶中的映像檔存取。</li><li>使用 {{site.data.keyword.IBM_notm}} 所提供的映像檔及範例應用程式（例如 {{site.data.keyword.IBM_notm}} Liberty）作為主映像檔，並在其中新增您自己的應用程式碼。</li><li>「漏洞警告器」會自動掃描映像檔的潛在漏洞（包括修正它們的 OS 特定建議）。</li></ul>|
 |任何其他專用登錄|建立[映像檔取回密碼 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/containers/images/)，以將任何現有專用登錄連接至叢集。密碼是用來將登錄 URL 及認證安全地儲存在 Kubernetes 密碼中。|<ul><li>使用現有專用登錄，而不管其來源（Docker Hub、組織所擁有的登錄或其他專用 Cloud 登錄）。</li></ul>|
-|[公用 Docker Hub![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://hub.docker.com/){: #dockerhub}|使用此選項，在不需要 Dockerfile 變更時，即可在 [Kubernetes 部署 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) 直接使用 Docker Hub 中的現有公用映像檔。<p>**附註：**請記住，此選項可能不符合組織的安全需求（例如存取管理、漏洞掃描或應用程式保密）。</p>|<ul><li>您的叢集不需要其他設定。</li><li>包括各種開放程式碼應用程式。</li></ul>|
+|[公用 Docker Hub![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://hub.docker.com/){: #dockerhub}|使用此選項，即可在不需要 Dockerfile 變更時，於 [Kubernetes 部署 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) 直接使用 Docker Hub 中的現有公用映像檔。<p>**附註：**請記住，此選項可能不符合組織的安全需求（例如存取管理、漏洞掃描或應用程式保密）。</p>|<ul><li>您的叢集不需要其他設定。</li><li>包括各種開放程式碼應用程式。</li></ul>|
 {: caption="公用及專用映像檔登錄選項" caption-side="top"}
 
-在您設定映像檔登錄之後，叢集使用者可以使用映像檔，以將其應用程式部署至叢集。
+在您設定映像檔登錄之後，叢集使用者可以使用映像檔，以將應用程式部署至叢集。
 
 進一步瞭解使用容器映像檔時如何[保護個人資訊安全](/docs/containers?topic=containers-security#pi)。
 
@@ -72,35 +72,120 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
 <br />
 
 
-## 瞭解如何授權叢集以從 {{site.data.keyword.registrylong_notm}} 取回映像檔
-{: #cluster_registry_auth}
+## 將容器從 {{site.data.keyword.registryshort_notm}} 映像檔部署至 `default` Kubernetes 名稱空間
+{: #namespace}
 
-當您建立叢集時，叢集具有 {{site.data.keyword.Bluemix_notm}} IAM 服務 ID，而此服務 ID 獲提供 {{site.data.keyword.registrylong_notm}} 的 IAM **Reader** 服務存取角色原則。在叢集的映像檔取回密碼所儲存的未到期 API 金鑰中，模擬服務 ID 認證。映像檔取回密碼會新增至 `default` Kubernetes 名稱空間，以及此名稱空間的 `default` 服務帳戶中的密碼清單。透過使用映像檔取回密碼，部署可以取回（唯讀存取）[廣域及地區登錄](/docs/services/Registry?topic=registry-registry_overview#registry_regions)中的映像檔，以在 `default` Kubernetes 名稱空間中建置容器。全球登錄會安全地儲存公用、IBM 提供的映像檔，您可以在各部署之間參照它們，而不必針對每個地區登錄中儲存的映像檔有不同的參照。地區登錄會安全地儲存您自己的專用 Docker 映像檔。
+您可以將容器從 IBM 提供的公用映像檔或 {{site.data.keyword.registryshort_notm}} 名稱空間中所儲存的專用映像檔部署至叢集中。如需叢集如何存取登錄映像檔的相關資訊，請參閱[瞭解如何授權叢集以從 {{site.data.keyword.registrylong_notm}} 取回映像檔](#cluster_registry_auth)。
 {:shortdesc}
 
-如果您要限制對特定地區登錄的取回存取權，則可以[編輯服務 ID 的現有 IAM 原則](/docs/iam?topic=iam-serviceidpolicy#access_edit)，以將 **Reader** 服務存取角色限制為該地區登錄或登錄資源（例如名稱空間）。您必須先[針對 {{site.data.keyword.registrylong_notm}} 啟用 {{site.data.keyword.Bluemix_notm}} IAM 原則](/docs/services/Registry?topic=registry-user#existing_users)，才能自訂登錄 IAM 原則。
+開始之前：
+1. [在 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
+2. [建立叢集](/docs/containers?topic=containers-clusters#clusters_cli)。
+3. 如果您的現有叢集是在 **2019 年 2 月 25 日**之前建立的，請[更新叢集以使用 API 金鑰 `imagePullSecret`](#imagePullSecret_migrate_api_key)。
+4. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
-使用此起始設定，即可從 {{site.data.keyword.Bluemix_notm}} 帳戶之名稱空間中可用的任何映像檔[將容器部署](#namespace)至叢集的 **default** Kubernetes 名稱空間。若要在其他 Kubernetes 名稱空間或其他 {{site.data.keyword.Bluemix_notm}} 帳戶中使用這些映像檔，請[複製或建立自己的映像檔取回密碼](#other)。
+若要將容器部署至叢集的 **default** 名稱空間，請執行下列動作：
 
-想要讓您的登錄認證更加安全嗎？請要求叢集管理者在您的叢集裡[啟用 {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect)，以加密叢集裡的 Kubernetes 密碼，例如儲存登錄認證的 `imagePullSecret`。
-{: tip}
+1.  建立名稱為 `mydeployment.yaml` 的部署配置檔。
+2.  從 {{site.data.keyword.registryshort_notm}} 中的名稱空間，定義要使用的部署及映像檔。
 
-支援但已淘汰先前授權叢集存取 {{site.data.keyword.registrylong_notm}} 的方法，先前的方法是自動建立[記號](/docs/services/Registry?topic=registry-registry_access#registry_tokens)，並將記號儲存在映像檔取回密碼中。針對映像檔取回密碼，[更新叢集以使用 API 金鑰方法](#imagePullSecret_migrate_api_key)，並更新部署以從 `icr.io` 網域名稱取回映像檔。
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: <app_name>-deployment
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: <app_name>
+      template:
+        metadata:
+          labels:
+            app: <app_name>
+        spec:
+          containers:
+          - name: <app_name>
+            image: <region>.icr.io/<namespace>/<my_image>:<tag>
+    ```
+    {: codeblock}
+
+    將映像檔 URL 變數取代為映像檔的資訊：
+    *  **`<app_name>`**：應用程式的名稱。 
+    *  **`<region>`**：登錄網域的地區 {{site.data.keyword.registryshort_notm}} API 端點。若要列出您所登入之地區的網域，請執行 `ibmcloud cr api`。
+    *  **`<namespace>`**：登錄名稱空間。若要取得名稱空間資訊，請執行 `ibmcloud cr namespace-list`。
+    *  **`<my_image>:<tag>`**：您要用來建置容器的映像檔及標籤。若要取得登錄中可用的映像檔，請執行 `ibmcloud cr images`。
+
+3.  在叢集裡建立部署。
+
+    ```
+    kubectl apply -f mydeployment.yaml
+    ```
+    {: pre}
+
+<br />
+
+
+## 瞭解如何授權叢集以從登錄中取回映像檔
+{: #cluster_registry_auth}
+
+若要從登錄中取回映像檔，您的 {{site.data.keyword.containerlong_notm}} 叢集會使用特殊類型的 Kubernetes 密碼 `imagePullSecret`。此映像檔取回密碼會儲存用來存取容器登錄的認證。容器登錄可以是您在 {{site.data.keyword.registrylong_notm}} 中的名稱空間、{{site.data.keyword.registrylong_notm}} 中屬於不同 {{site.data.keyword.Bluemix_notm}} 帳戶的名稱空間，或任何其他專用登錄（例如 Docker）。您的叢集設定成從 {{site.data.keyword.registrylong_notm}} 中的名稱空間取回映像檔，並將容器從這些映像檔部署至叢集中的 `default` Kubernetes 名稱空間。如果您需要取回其他叢集 Kubernetes 名稱空間或其他登錄中的映像檔，則必須設定映像檔取回密碼。
+{:shortdesc}
+
+**如何設定我的叢集以從 `default` Kubernetes 名稱空間中取回映像檔？**<br>
+當您建立叢集時，叢集具有 {{site.data.keyword.Bluemix_notm}} IAM 服務 ID，而此服務 ID 獲提供 {{site.data.keyword.registrylong_notm}} 的 IAM **Reader** 服務存取角色原則。在叢集的映像檔取回密碼所儲存的未到期 API 金鑰中，模擬服務 ID 認證。映像檔取回密碼會新增至 `default` Kubernetes 名稱空間，以及此名稱空間的 `default` 服務帳戶中的密碼清單。透過使用映像檔取回密碼，部署可以取回（唯讀存取）[廣域及地區登錄](/docs/services/Registry?topic=registry-registry_overview#registry_regions)中的映像檔，以在 `default` Kubernetes 名稱空間中建置容器。全球登錄會安全地儲存公用、IBM 提供的映像檔，您可以在各部署之間參照它們，而不必針對每個地區登錄中儲存的映像檔有不同的參照。地區登錄會安全地儲存您自己的專用 Docker 映像檔。
+
+
+**是否可以限制對特定地區登錄的取回存取？**<br>
+是，您可以[編輯服務 ID 的現有 IAM 原則](/docs/iam?topic=iam-serviceidpolicy#access_edit)，以將 **Reader** 服務存取角色限制為該地區登錄或登錄資源（例如名稱空間）。您必須先[針對 {{site.data.keyword.registrylong_notm}} 啟用 {{site.data.keyword.Bluemix_notm}} IAM 原則](/docs/services/Registry?topic=registry-user#existing_users)，才能自訂登錄 IAM 原則。
+
+  想要讓您的登錄認證更加安全嗎？請要求叢集管理者在您的叢集裡[啟用 {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect)，以加密叢集裡的 Kubernetes 密碼，例如儲存登錄認證的 `imagePullSecret`。
+  {: tip}
+
+**是否可以取回 `default` 以外的 Kubernetes 名稱空間中的映像檔？**<br>
+依預設，不可以。使用預設叢集設定，您可以將容器從儲存在 {{site.data.keyword.registrylong_notm}} 名稱空間的任何映像檔中部署至叢集的 `default` Kubernetes 名稱空間。若要在其他 Kubernetes 名稱空間或其他 {{site.data.keyword.Bluemix_notm}} 帳戶中使用這些映像檔，[您可以選擇複製或建立自己的映像檔取回密碼](#other)。
+
+**是否可以從不同的 {{site.data.keyword.Bluemix_notm}} 帳戶中取回映像檔？**<br>
+是，在您要使用的 {{site.data.keyword.Bluemix_notm}} 帳戶中建立 API 金鑰。然後，在您要從中取回的每個叢集和叢集名稱空間中，建立映像檔取回密碼，用來儲存那些 API 金鑰認證。[請遵循這個使用授權服務 ID API 金鑰的範例](#other_registry_accounts)。
+
+若要使用 Docker 這類非 {{site.data.keyword.Bluemix_notm}} 登錄，請參閱[存取儲存在其他專用登錄中的映像檔](#private_images)。
+
+**服務 ID 需要有 API 金鑰嗎？如果我達到帳戶的服務 ID 限制，會發生什麼情況？**<br>
+預設叢集設定會建立一個服務 ID，以將 {{site.data.keyword.Bluemix_notm}} IAM API 金鑰認證儲存在映像檔取回密碼中。不過，您也可以建立個別使用者的 API 金鑰，並將那些認證儲存在映像檔取回密碼中。如果您達到[服務 ID 的 IAM 限制](/docs/iam?topic=iam-iam_limits#iam_limits)，則會建立不含服務 ID 和映像檔取回密碼的叢集，而且依預設無法從 `icr.io` 登錄網域中取回映像檔。您必須[建立自己的映像檔取回密碼](#other_registry_accounts)，但使用個別使用者的 API 金鑰（例如功能 ID），而非 {{site.data.keyword.Bluemix_notm}} IAM 服務 ID。
+
+**我的叢集映像檔取回密碼使用登錄記號。記號是否仍然有效？**<br>
+
+支援但已淘汰先前授權叢集存取 {{site.data.keyword.registrylong_notm}} 的方法，先前的方法是自動建立[記號](/docs/services/Registry?topic=registry-registry_access#registry_tokens)，並將記號儲存在映像檔取回密碼中。
 {: deprecated}
 
-### 更新現有叢集以使用 API 金鑰映像檔取回密碼
+記號會授權對已淘汰 `registry.bluemix.net` 登錄網域的存取，而 API 金鑰會授權對 `icr.io` 登錄網域的存取。在從記號到 API 金鑰型鑑別的轉移期間，會建立某個時間的記號和 API 金鑰型映像檔取回密碼。使用記號及 API 金鑰型映像檔取回密碼時，您的叢集可以從 `default` Kubernetes 名稱空間的 `registry.bluemix.net` 或 `icr.io` 網域中取回映像檔。
+
+已淘汰的記號和 `registry.bluemix.net` 網域變成不受支援之前，請更新叢集映像檔取回密碼，以使用 [`default` Kubernetes 名稱空間](#imagePullSecret_migrate_api_key)和您可能使用之[任何其他名稱空間或帳戶](#other)的 API 金鑰方法。然後，更新部署以從 `icr.io` 登錄網域中取回。
+
+<br />
+
+
+## 更新現有叢集以使用 API 金鑰映像檔取回密碼
 {: #imagePullSecret_migrate_api_key}
 
-新的 {{site.data.keyword.containerlong_notm}} 叢集會將 API 金鑰儲存在映像檔取回密碼中，以授權存取 {{site.data.keyword.registrylong_notm}}。使用這些映像檔取回密碼，您可以從 `icr.io` 登錄網域中所儲存的映像檔部署容器。對於在 **2019 年 2 月 25 日**之前建立的叢集，您必須更新叢集以儲存 API 金鑰，而非映像檔取回密碼中的登錄記號。
+新的 {{site.data.keyword.containerlong_notm}} 叢集會將 API 金鑰儲存在[映像檔取回密碼中，以授權存取 {{site.data.keyword.registrylong_notm}}](#cluster_registry_auth)。使用這些映像檔取回密碼，您可以從 `icr.io` 登錄網域中所儲存的映像檔部署容器。對於在 **2019 年 2 月 25 日**之前建立的叢集，您必須更新叢集以儲存 API 金鑰，而非映像檔取回密碼中的登錄記號。
 {: shortdesc}
 
-開始之前：
+**開始之前**：
 *   [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 *   確定您具有下列許可權：
-    *   {{site.data.keyword.containerlong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **操作員或管理者**平台角色
-    *   {{site.data.keyword.registrylong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **管理者**平台角色
+    *   {{site.data.keyword.containerlong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **操作員或管理者**平台角色。帳戶擁有者可以執行下列指令來提供角色：
+        ```
+        ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles Administrator,Operator
+        ```
+        {: pre}
+    *   {{site.data.keyword.registrylong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **Administrator** 平台角色，跨所有地區及資源群組。帳戶擁有者可以執行下列指令來提供角色：
+        ```
+        ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
+        ```
+        {: pre}
 
-若要更新叢集映像檔取回密碼，請執行下列動作：
+**若要更新 `default` Kubernetes 名稱空間中的叢集映像檔取回密碼**，請執行下列動作：
 1.  取得叢集 ID。
     ```
     ibmcloud ks clusters
@@ -139,62 +224,13 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
     1.  確定[已啟用 {{site.data.keyword.registrylong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM 原則](/docs/services/Registry?topic=registry-user#existing_users)。
     2.  [編輯 {{site.data.keyword.Bluemix_notm}} IAM 原則](/docs/iam?topic=iam-serviceidpolicy#access_edit)（針對服務 ID），或[建立另一個映像檔取回密碼](/docs/containers?topic=containers-images#other_registry_accounts)。
 
-## 將容器從 {{site.data.keyword.registryshort_notm}} 映像檔部署至 `default` Kubernetes 名稱空間
-{: #namespace}
-
-您可以將容器從 IBM 提供的公用映像檔或 {{site.data.keyword.registryshort_notm}} 名稱空間中所儲存的專用映像檔部署至叢集中。如需存取工作的相關資訊，請參閱[瞭解如何授權叢集以從 {{site.data.keyword.registrylong_notm}} 取回映像檔](#cluster_registry_auth)。
-{:shortdesc}
-
-開始之前：
-1. [在 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry?topic=registry-index#registry_namespace_add)。
-2. [建立叢集](/docs/containers?topic=containers-clusters#clusters_cli)。
-3. 如果您使用在 **<DATE>** 之前建立的現有叢集，請[更新叢集以使用 API 金鑰 `imagePullSecret`](#imagePullSecret_migrate_api_key)。
-4. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-
-若要將容器部署至叢集的 **default** 名稱空間，請建立配置檔。
-
-1.  建立名稱為 `mydeployment.yaml` 的部署配置檔。
-2.  從 {{site.data.keyword.registryshort_notm}} 中的名稱空間，定義您要使用的部署及映像檔。
-
-    若要使用 {{site.data.keyword.registryshort_notm}} 的名稱空間中的專用映像檔：
-
-    ```
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: ibmliberty-deployment
-    spec:
-      replicas: 3
-      template:
-        metadata:
-          labels:
-            app: ibmliberty
-        spec:
-          containers:
-          - name: ibmliberty
-            image: <region>.icr.io/<namespace>/<my_image>:<tag>
-    ```
-    {: codeblock}
-
-    將映像檔 URL 變數取代為映像檔的資訊：
-    *  **`<region>`**：若要列出所在地區的網域，請執行 `ibmcloud cr api`。
-    *  **`<namespace>`**：若要取得名稱空間資訊，請執行 `ibmcloud cr namespace-list`。
-    *  **`<my_image>:<tag>`**：若要取得登錄中可用的映像檔，請執行 `ibmcloud cr images`。
-
-3.  在叢集裡建立部署。
-
-    ```
-    kubectl apply -f mydeployment.yaml
-    ```
-    {: pre}
-
 <br />
 
 
-## 使用映像檔取回密碼來存取其他 Kubernetes 名稱空間、其他 {{site.data.keyword.Bluemix_notm}} 帳戶或外部專用登錄
+## 使用映像檔取回密碼來存取其他叢集 Kubernetes 名稱空間、其他 {{site.data.keyword.Bluemix_notm}} 帳戶或外部專用登錄
 {: #other}
 
-使用您自己的映像檔取回密碼，以將容器部署至 `default` 以外的 Kubernetes 名稱空間、使用其他 {{site.data.keyword.Bluemix_notm}} 帳戶中所儲存的映像檔，或使用外部專用登錄中所儲存的映像檔。此外，您還可以建立新的映像檔取回密碼來套用 IAM 存取原則，以限制對特定登錄映像檔儲存庫、名稱空間或動作（例如 `push` 或 `pull`）的許可權。
+在叢集中設定您自己的映像檔取回密碼，以將容器部署至 `default` 以外的 Kubernetes 名稱空間、使用其他 {{site.data.keyword.Bluemix_notm}} 帳戶中所儲存的映像檔，或使用外部專用登錄中所儲存的映像檔。此外，您還可以建立自己的映像檔取回密碼來套用 IAM 存取原則，以限制對特定登錄映像檔儲存庫、名稱空間或動作（例如 `push` 或 `pull`）的許可權。
 {:shortdesc}
 
 映像檔取回密碼僅適用於建立它們的 Kubernetes 名稱空間。請針對您要部署容器的每個名稱空間，重複這些步驟。來自 [DockerHub](#dockerhub) 的映像檔不需要映像檔取回密碼。
@@ -202,24 +238,24 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
 
 開始之前：
 
-1.  [在 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry?topic=registry-index#registry_namespace_add)。
+1.  [在 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
 2.  [建立叢集](/docs/containers?topic=containers-clusters#clusters_cli)。
-3.  如果您使用在 **<DATE>** 之前建立的現有叢集，請[更新叢集以使用 API 金鑰映像檔取回密碼](#imagePullSecret_migrate_api_key)。
+3.  如果您的現有叢集是在 **2019 年 2 月 25 日**之前建立的，請[更新叢集以使用 API 金鑰映像檔取回密碼](#imagePullSecret_migrate_api_key)。
 4.  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 <br/>
 若要使用自己的映像檔取回密碼，請在下列選項之間進行選擇：
-- [將映像檔取回密碼從 default Kubernetes 名稱空間複製到叢集中的其他名稱空間](#copy_imagePullSecret)。
-- [建立映像檔取回密碼以存取其他 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，或是套用 IAM 原則來限制登錄存取權](#other_registry_accounts)。
+- 從 default Kubernetes 名稱空間中[將映像檔取回密碼複製](#copy_imagePullSecret)到叢集中的其他名稱空間。
+- [建立新的 IAM API 金鑰認證，並將其儲存在映像檔取回密碼中](#other_registry_accounts)，以存取其他 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，或是套用 IAM 原則來限制對特定登錄網域或名稱空間的存取權。
 - [建立映像檔取回密碼，以存取外部專用登錄中的映像檔](#private_images)。
 
 <br/>
 如果您已在名稱空間中建立要在部署中使用的映像檔取回密碼，請參閱[使用已建立的 `imagePullSecret` 來部署容器](#use_imagePullSecret)。
 
-### 將映像檔取回密碼從 default 名稱空間複製到叢集中的其他名稱空間
+### 複製現有的映像檔取回密碼
 {: #copy_imagePullSecret}
 
-您可以將自動針對 `default` Kubernetes 名稱空間建立的映像檔取回密碼複製到叢集中的其他名稱空間。如果您要針對此名稱空間使用不同的 {{site.data.keyword.Bluemix_notm}} IAM 服務 ID 和 API 金鑰認證，則可以改為[建立映像檔取回密碼](#other_registry_accounts)。
+您可以將映像檔取回密碼（例如針對 `default` Kubernetes 名稱空間自動建立的映像檔取回密碼）複製到叢集中的其他名稱空間。如果您要針對此名稱空間使用不同的 {{site.data.keyword.Bluemix_notm}} IAM API 金鑰認證（例如限制對特定名稱空間的存取），或要從其他 {{site.data.keyword.Bluemix_notm}} 帳戶取回映像檔，請改為[建立映像檔取回密碼](#other_registry_accounts)。
 {: shortdesc}
 
 1.  列出叢集中可用的 Kubernetes 名稱空間，或建立要使用的名稱空間。
@@ -291,14 +327,15 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
     {: pre}
 5.  [您可以選擇將映像檔取回密碼新增至 Kubernetes 服務帳戶，讓名稱空間中的任何 Pod 在部署容器時都可以使用映像檔取回密碼](#use_imagePullSecret)。
 
-### 建立映像檔取回密碼以存取其他 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，或是使用 IAM 原則來限制登錄存取權
+### 建立具有不同 IAM API 金鑰認證的映像檔取回密碼，進一步控制或存取其他 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔
 {: #other_registry_accounts}
 
-若要存取其他 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，您必須使用對 {{site.data.keyword.registryshort_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM 服務存取原則來建立服務 ID 的 API 金鑰。然後，將 API 金鑰認證儲存在映像檔取回密碼中。此外，您還可以建立新的映像檔取回密碼來套用 IAM 存取原則，以限制對特定登錄映像檔儲存庫、名稱空間或動作（例如 `push` 或 `pull`）的許可權。
-您可以選擇將相同服務 ID 的 IAM 認證儲存在 API 金鑰中，而此 API 金鑰用來在多個叢集中建立多個映像檔取回密碼。
+您可以將 {{site.data.keyword.Bluemix_notm}} IAM 存取原則指派給使用者或服務 ID，以限制對特定登錄映像檔儲存庫、名稱空間或動作（例如 `push` 或 `pull`）的許可權。然後，建立 API 金鑰，並將這些登錄認證儲存在叢集的映像檔取回密碼中。
 {: shortdesc}
 
-建議您針對具有 {{site.data.keyword.registryshort_notm}} 之 {{site.data.keyword.Bluemix_notm}} IAM 服務存取原則的使用者 ID 建立 API 金鑰，而不是使用服務 ID。不過，請確定使用者是一個功能 ID，或具有可在使用者離開時讓叢集仍可存取登錄的方案。
+例如，若要存取其他 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，請建立 API 金鑰，以將使用者或服務 ID 的 {{site.data.keyword.registryshort_notm}} 認證儲存在該帳戶中。然後，在叢集帳戶中，將 API 金鑰認證儲存在每個叢集和叢集名稱空間的映像檔取回密碼中。
+
+下列步驟會建立 API 金鑰，用來儲存 {{site.data.keyword.Bluemix_notm}} IAM 服務 ID 的認證。建議您針對具有 {{site.data.keyword.registryshort_notm}} 之 {{site.data.keyword.Bluemix_notm}} IAM 服務存取原則的使用者 ID 建立 API 金鑰，而不是使用服務 ID。不過，請確定使用者是一個功能 ID，或具有可在使用者離開時讓叢集仍可存取登錄的方案。
 {: note}
 
 1.  列出叢集中可用的 Kubernetes 名稱空間，或建立要使用的名稱空間，而您要在其中從登錄映像檔部署容器。
@@ -485,11 +522,163 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
     將 <em>&lt;kubernetes_namespace&gt;</em> 取代為已在其中建立 `imagePullSecret` 的名稱空間名稱。
 
     ```
-    kubectl get secrets --namespace <kubernetes_namespace>
+kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
 3.  [建立一個參照映像檔取回密碼的 Pod](#use_imagePullSecret)。
+
+<br />
+
+
+## 使用映像檔取回密碼部署容器
+{: #use_imagePullSecret}
+
+您可以在 Pod 部署中定義映像檔取回密碼，或將映像檔取回密碼儲存在 Kubernet 服務帳戶中，使其可用於未指定服務帳戶的所有部署。
+{: shortdesc}
+
+請選擇下列選項：
+* [在 Pod 部署中參照映像檔取回密碼](#pod_imagePullSecret)：如果您不想要依預設對名稱空間中的所有 Pod 授與登錄存取權，請使用此選項。
+* [在 Kubernetes 服務帳戶中儲存映像檔取回密碼](#store_imagePullSecret)：使用此選項，可以為所選取 Kubernetes 名稱空間中的所有部署授與對您登錄中映像檔的存取權。
+
+開始之前：
+* [建立映像檔取回密碼](#other)，以存取其他登錄或 `default` 以外之 Kubernetes 名稱空間中的映像檔。
+* [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+
+### 在 Pod 部署中參照映像檔取回密碼
+{: #pod_imagePullSecret}
+
+當您在 Pod 部署中參照映像檔取回密碼時，映像檔取回密碼僅適用於此 Pod，且無法跨名稱空間中的 Pod 共用。
+{:shortdesc}
+
+1.  建立名稱為 `mypod.yaml` 的 Pod 配置檔。
+2.  定義 Pod 及映像檔取回密碼，以存取 {{site.data.keyword.registrylong_notm}} 中的映像檔。
+
+    若要存取專用映像檔，請執行下列程式碼：
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mypod
+    spec:
+      containers:
+        - name: <container_name>
+          image: <region>.icr.io/<namespace_name>/<image_name>:<tag>
+      imagePullSecrets:
+        - name: <secret_name>
+    ```
+    {: codeblock}
+
+    若要存取 {{site.data.keyword.Bluemix_notm}} 公用映像檔，請執行下列程式碼︰
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mypod
+    spec:
+      containers:
+        - name: <container_name>
+          image: icr.io/<image_name>:<tag>
+      imagePullSecrets:
+        - name: <secret_name>
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>瞭解 YAML 檔案元件</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code><em>&lt;container_name&gt;</em></code></td>
+    <td>要部署至叢集的容器名稱。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;namespace_name&gt;</em></code></td>
+    <td>在其中儲存映像檔的名稱空間。若要列出可用的名稱空間，請執行 `ibmcloud cr namespace-list`。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;image_name&gt;</em></code></td>
+    <td>要使用的映像檔名稱。若要列出 {{site.data.keyword.Bluemix_notm}} 帳戶中的可用映像檔，請執行 `ibmcloud cr image-list`。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;tag&gt;</em></code></td>
+    <td>您要使用的映像檔的版本。如果未指定任何標籤，預設會使用標記為<strong>最新</strong>的映像檔。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;secret_name&gt;</em></code></td>
+    <td>您先前建立的映像檔取回密碼的名稱。</td>
+    </tr>
+    </tbody></table>
+
+3.  儲存變更。
+4.  在叢集裡建立部署。
+    ```
+   kubectl apply -f mypod.yaml
+   ```
+    {: pre}
+
+### 在所選取名稱空間的 Kubernetes 服務帳戶中儲存映像檔取回密碼
+{:#store_imagePullSecret}
+
+每個名稱空間都有一個稱為 `default` 的服務帳戶。您可以將映像檔取回密碼新增至此服務帳戶，以授與對登錄中映像檔的存取權。未指定服務帳戶的部署會自動對此名稱空間使用 `default` 服務帳戶。
+{:shortdesc}
+
+1. 檢查預設服務帳戶是否已有映像檔取回密碼。
+   ```
+   kubectl describe serviceaccount default -n <namespace_name>
+   ```
+   {: pre}
+   **Image pull secrets** 項目中顯示 `<none>` 時，則沒有映像檔取回密碼。  
+2. 將映像檔取回密碼新增至預設服務帳戶。
+   - **若要在未定義任何映像檔取回密碼時新增映像檔取回密碼，請執行下列指令：**
+       ```
+       kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "<image_pull_secret_name>"}]}'
+       ```
+       {: pre}
+   - **若要在已定義映像檔取回密碼時新增映像檔取回密碼，請執行下列指令：**
+       ```
+       kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"<image_pull_secret_name>"}}]'
+       ```
+       {: pre}
+3. 驗證映像檔取回密碼已新增至預設服務帳戶。
+   ```
+   kubectl describe serviceaccount default -n <namespace_name>
+   ```
+   {: pre}
+
+   輸出範例：
+   ```
+   Name:                default
+   Namespace:           <namespace_name>
+   Labels:              <none>
+   Annotations:         <none>
+   Image pull secrets:  <image_pull_secret_name>
+   Mountable secrets:   default-token-sh2dx
+   Tokens:              default-token-sh2dx
+   Events:              <none>
+   ```
+   {: pre}
+
+4. 從登錄中的映像檔部署容器。
+   ```
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: mypod
+   spec:
+     containers:
+       - name: <container_name>
+         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
+   ```
+   {: codeblock}
+
+5. 在叢集裡建立部署。
+   ```
+   kubectl apply -f mypod.yaml
+   ```
+   {: pre}
 
 <br />
 
@@ -504,7 +693,7 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
 
 當您部署容器化應用程式時，每個記號必須儲存在 Kubernetes `imagePullSecret` 中，才能供 Kubernetes 叢集存取。建立叢集時，{{site.data.keyword.containerlong_notm}} 會自動將全球（IBM 提供之公用映像檔）與地區登錄的記號儲存在 Kubernetes 映像檔取回密碼中。映像檔取回密碼會新增至 `default` Kubernetes 名稱空間、`kube-system` 名稱空間，以及這些名稱空間的 `default` 服務帳戶中的密碼清單。
 
-針對 `registry.bluemix.net` 網域名稱，支援但已淘汰這種使用記號來授權對 {{site.data.keyword.registrylong_notm}} 之叢集存取的方法。相反地，請[使用 API 金鑰方法](#cluster_registry_auth)來授權對新 `icr.io` 登錄網域名稱的叢集存取。
+`registry.bluemix.net` 網域名稱支援使用記號來授權叢集對 {{site.data.keyword.registrylong_notm}} 的存取權，但是這個方法已淘汰。相反地，請[使用 API 金鑰方法](#cluster_registry_auth)來授權對新 `icr.io` 登錄網域名稱的叢集存取。
 {: deprecated}
 
 根據映像檔所在位置及容器所在位置，您必須遵循不同的步驟來部署容器。
@@ -523,7 +712,7 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
 {: shortdesc}
 
 開始之前：
-1. [在 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry?topic=registry-index#registry_namespace_add)。
+1. [在 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
 2. [建立叢集](/docs/containers?topic=containers-clusters#clusters_cli)。
 3. [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
@@ -538,16 +727,19 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: ibmliberty-deployment
+      name: <app_name>-deployment
     spec:
       replicas: 3
+      selector:
+        matchLabels:
+          app: <app_name>
       template:
         metadata:
           labels:
-            app: ibmliberty
+            app: <app_name>
         spec:
           containers:
-          - name: ibmliberty
+          - name: <app_name>
             image: registry.<region>.bluemix.net/<namespace>/<my_image>:<tag>
     ```
     {: codeblock}
@@ -684,163 +876,8 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
     將 <em>&lt;kubernetes_namespace&gt;</em> 取代為已在其中建立映像檔取回密碼的名稱空間。
 
     ```
-    kubectl get secrets --namespace <kubernetes_namespace>
+kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
 7.  在名稱空間中[使用映像檔取回密碼來部署容器](#use_imagePullSecret)。
-
-<br />
-
-
-## 使用已建立的映像檔取回密碼來部署容器
-{: #use_imagePullSecret}
-
-您可以在 Pod 部署中定義映像檔取回密碼，或將映像檔取回密碼儲存在 Kubernet 服務帳戶中，使其可用於未指定服務帳戶的所有部署。
-{: shortdesc}
-
-請選擇下列選項：
-* [在 Pod 部署中參照映像檔取回密碼](#pod_imagePullSecret)：如果您不想要依預設對名稱空間中的所有 Pod 授與登錄存取權，請使用此選項。
-* [在 Kubernets 服務帳戶中儲存映像檔取回密碼](#store_imagePullSecret)：使用此選項，可以為所選取 Kubernetes 名稱空間中的部署，授與對您登錄中映像檔的存取權 。
-
-開始之前：
-* [建立映像檔取回密碼](#other)，以存取其他登錄或 `default` 以外之 Kubernetes 名稱空間中的映像檔。
-* [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-
-### 在 Pod 部署中參照映像檔取回密碼
-{: #pod_imagePullSecret}
-
-當您在 Pod 部署中參照映像檔取回密碼時，映像檔取回密碼僅適用於此 Pod，且無法跨名稱空間中的 Pod 共用。
-{:shortdesc}
-
-1.  建立名稱為 `mypod.yaml` 的 Pod 配置檔。
-2.  定義 Pod 和映像檔取回密碼，以存取專用 {{site.data.keyword.registrylong_notm}}。
-
-    若要存取專用映像檔，請執行下列程式碼：
-    ```
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: mypod
-    spec:
-      containers:
-        - name: <container_name>
-          image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
-      imagePullSecrets:
-        - name: <secret_name>
-    ```
-    {: codeblock}
-
-    若要存取 {{site.data.keyword.Bluemix_notm}} 公用映像檔，請執行下列程式碼︰
-    ```
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: mypod
-    spec:
-      containers:
-        - name: <container_name>
-          image: registry.bluemix.net/<image_name>:<tag>
-      imagePullSecrets:
-        - name: <secret_name>
-    ```
-    {: codeblock}
-
-    <table>
-    <caption>瞭解 YAML 檔案元件</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code><em>&lt;container_name&gt;</em></code></td>
-    <td>要部署至叢集的容器名稱。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>在其中儲存映像檔的名稱空間。若要列出可用的名稱空間，請執行 `ibmcloud cr namespace-list`。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>您要使用的映像檔的名稱。若要列出 {{site.data.keyword.Bluemix_notm}} 帳戶中的可用映像檔，請執行 `ibmcloud cr image-list`。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;tag&gt;</em></code></td>
-    <td>您要使用的映像檔的版本。如果未指定任何標籤，預設會使用標記為<strong>最新</strong>的映像檔。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>您先前建立的映像檔取回密碼的名稱。</td>
-    </tr>
-    </tbody></table>
-
-3.  儲存變更。
-4.  在叢集裡建立部署。
-    ```
-    kubectl apply -f mypod.yaml
-    ```
-    {: pre}
-
-### 在所選取名稱空間的 Kubernetes 服務帳戶中儲存映像檔取回密碼
-{:#store_imagePullSecret}
-
-每個名稱空間都有一個稱為 `default` 的服務帳戶。您可以將映像檔取回密碼新增至此服務帳戶，以授與對登錄中映像檔的存取權。未指定服務帳戶的部署會自動對此名稱空間使用 `default` 服務帳戶。
-{:shortdesc}
-
-1. 檢查預設服務帳戶是否已有映像檔取回密碼。
-   ```
-   kubectl describe serviceaccount default -n <namespace_name>
-   ```
-   {: pre}
-   **Image pull secrets** 項目中顯示 `<none>` 時，則沒有映像檔取回密碼。  
-2. 將映像檔取回密碼新增至預設服務帳戶。
-   - **若要在未定義任何映像檔取回密碼時新增映像檔取回密碼，請執行下列指令：**
-       ```
-       kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "<image_pull_secret_name>"}]}'
-       ```
-       {: pre}
-   - **若要在已定義映像檔取回密碼時新增映像檔取回密碼，請執行下列指令：**
-       ```
-       kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"<image_pull_secret_name>"}}]'
-       ```
-       {: pre}
-3. 驗證映像檔取回密碼已新增至預設服務帳戶。
-   ```
-   kubectl describe serviceaccount default -n <namespace_name>
-   ```
-   {: pre}
-
-   輸出範例：
-   ```
-   Name:                default
-   Namespace:           <namespace_name>
-   Labels:              <none>
-   Annotations:         <none>
-   Image pull secrets:  <image_pull_secret_name>
-   Mountable secrets:   default-token-sh2dx
-   Tokens:              default-token-sh2dx
-   Events:              <none>
-   ```
-   {: pre}
-
-4. 從登錄中的映像檔部署容器。
-   ```
-   apiVersion: v1
-   kind: Pod
-   metadata:
-     name: mypod
-   spec:
-     containers:
-       - name: <container_name>
-         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
-   ```
-   {: codeblock}
-
-5. 在叢集裡建立部署。
-   ```
-   kubectl apply -f mypod.yaml
-   ```
-   {: pre}
-
-<br />
-

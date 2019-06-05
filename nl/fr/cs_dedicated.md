@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -23,13 +23,16 @@ subcollection: containers
 {:download: .download}
 
 
-# Initiation aux clusters dans {{site.data.keyword.Bluemix_dedicated_notm}}
+# Déprécié : Initiation aux clusters dans {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #dedicated}
 
-Si vous disposez d'un compte {{site.data.keyword.Bluemix_dedicated}}, vous pouvez déployer des clusters Kubernetes dans un environnement de cloud dédié (`https://<my-dedicated-cloud-instance>.bluemix.net`) et vous connecter aux services {{site.data.keyword.Bluemix_notm}} présélectionnés qui s'exécutent également à cet emplacement.
+{{site.data.keyword.containerlong}} dans {{site.data.keyword.Bluemix_dedicated_notm}} est déprécié. Vous ne pouvez créer de clusters dans un environnement {{site.data.keyword.Bluemix_dedicated_notm}}. Pour créer des clusters dans {{site.data.keyword.Bluemix_notm}} Public, voir [Initiation à {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started).
+{: deprecated}
+
+Si vous disposez d'un compte {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez déployer des clusters Kubernetes dans un environnement de cloud dédié (`https://<my-dedicated-cloud-instance>.bluemix.net`) et vous connecter aux services {{site.data.keyword.Bluemix_notm}} présélectionnés qui s'exécutent également à cet emplacement.
 {:shortdesc}
 
-Si vous ne disposez pas d'un compte {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez vous [initier à {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index) dans un compte {{site.data.keyword.Bluemix_notm}} public.
+Si vous ne disposez pas d'un compte {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez vous [initier à {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started) dans un compte {{site.data.keyword.Bluemix_notm}} public.
 
 ## A propos de l'environnement de cloud Dedicated
 {: #dedicated_environment}
@@ -388,7 +391,7 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.6      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.7      Default
     ```
     {: screen}
 
@@ -406,7 +409,7 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
     ```
     {: screen}
 
@@ -467,7 +470,7 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
         {: codeblock}
 
 ### Ajout de noeuds worker
-{: #add_workers}
+{: #add_workers_dedicated}
 
 Avec {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez uniquement créer des [clusters à zone unique](/docs/containers?topic=containers-plan_clusters#single_zone). Par défaut, un cluster à zone unique est configuré avec un pool de noeuds worker nommé `default`. Ce pool regroupe des noeuds worker ayant la même configuration, par exemple le type de machine, que vous avez définie lors de la création du cluster. Vous pouvez ajouter d'autres noeuds worker à votre cluster en [redimensionnant un pool de noeuds worker existant](/docs/containers?topic=containers-clusters#resize_pool) ou en [ajoutant un nouveau pool de noeuds worker](/docs/containers?topic=containers-clusters#add_pool). Lorsque vous ajoutez un pool de noeuds worker, vous devez ajouter la zone disponible pour ce pool de sorte que les noeuds worker puissent se déployer dans cette zone. En revanche, vous ne pouvez pas ajouter d'autres zones à vos pools de noeuds worker.
 {: shortdesc}
@@ -524,7 +527,7 @@ Avant de commencer : Configurez le routage entrant et sortant du trafic réseau 
     ```
     {: screen}
 
-4. **Important** : si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+4. **Important** : si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 5. Pour configurer une connectivité sur site et de compte interne, sélectionnez entre les options suivantes :
   - Si vous avez sélectionné une plage d'adresses IP privées 10.x.x.x pour le sous-réseau, utilisez des adresses IP valides sur cette plage pour configurer la connectivité sur site et du compte interne avec Ingress et un équilibreur de charge. Pour plus d'informations, voir [Planification réseau avec des services NodePort, LoadBalancer ou Ingress](/docs/containers?topic=containers-cs_network_planning#external).
@@ -539,7 +542,6 @@ Examinez les options suivantes pour d'autres configurations de cluster :
   * [Mise à jour des noeuds worker](/docs/containers?topic=containers-update#worker_node)
   * [Configuration de la consignation de cluster](/docs/containers?topic=containers-health#logging). L'activation des journaux n'est pas prise en charge à partir du noeud final Dedicated. Vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace de nom publics pour activer l'acheminement des journaux.
   * [Configuration de la surveillance de cluster](/docs/containers?topic=containers-health#view_metrics). Un cluster `ibm-monitoring` existe dans chaque compte {{site.data.keyword.Bluemix_dedicated_notm}}. Cet environnement de cluster surveille en continu la santé du service {{site.data.keyword.containerlong_notm}} dans l'environnement Dedicated, en vérifiant la stabilité et la connectivité de l'environnement. Ne retirez-pas ce cluster de l'environnement.
-  * [Visualisation de ressources de cluster Kubernetes](/docs/containers?topic=containers-integrations#weavescope)
   * [Suppression de clusters](/docs/containers?topic=containers-clusters#remove)
 
 <br />
@@ -564,7 +566,7 @@ Pour les environnements {{site.data.keyword.Bluemix_dedicated_notm}}, les adress
 #### Configuration de l'accès public à une application à l'aide du type de service LoadBalancer
 {: #dedicated_apps_public_load_balancer}
 
-Si vous désirez utiliser des adresses IP publiques pour l'équilibreur de charge, vérifiez qu'une liste blanche de pare-feu d'entreprise a été fournie à IBM ou [ouvrez un cas de support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) pour configurer la liste blanche de pare-feu. Suivez ensuite les étapes de la rubrique [Exposition d'applications avec des services d'équilibreur de charge](/docs/containers?topic=containers-loadbalancer).
+Si vous désirez utiliser des adresses IP publiques pour l'équilibreur de charge, vérifiez qu'une liste blanche de pare-feu d'entreprise a été fournie à IBM ou [ouvrez un cas de support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) pour configurer la liste blanche de pare-feu. Suivez ensuite les étapes décrites dans [Equilibrage de charge de base et DSR à l'aide d'équilibreurs de charge de réseau (NLB)](/docs/containers?topic=containers-loadbalancer).
 {: shortdesc}
 
 #### Configuration de l'accès public à une application à l'aide d'Ingress

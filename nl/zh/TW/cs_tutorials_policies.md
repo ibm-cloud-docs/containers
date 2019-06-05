@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -26,19 +26,19 @@ subcollection: containers
 # 指導教學：使用 Calico 網路原則來封鎖資料流量
 {: #policy_tutorial}
 
-依預設，Kubernetes NodePort、LoadBalancer 及 Ingress 服務可讓您的應用程式能夠在所有公用及專用叢集網路介面上使用。`allow-node-port-dnat` 預設 Calico 原則允許將送入的資料流量從節點埠、負載平衡器及 Ingress 服務傳送至那些服務所公開的應用程式 Pod。Kubernetes 會使用目的地網址轉譯 (DNAT) 將服務要求轉遞至正確的 Pod。
+依預設，Kubernetes NodePort、LoadBalancer 及 Ingress 服務可讓您的應用程式能夠在所有公用及專用叢集網路介面上使用。`allow-node-port-dnat` 預設 Calico 原則允許從 NodePort、網路負載平衡器 (NLB) 及 Ingress 應用程式負載平衡器 (ALB) 服務送入那些服務所公開之應用程式 Pod 的資料流量。Kubernetes 會使用目的地網址轉譯 (DNAT) 將服務要求轉遞至正確的 Pod。
 {: shortdesc}
 
 不過，基於安全理由，您可能需要只容許從特定來源 IP 位址到網路服務的資料流量。您可以使用 [Calico DNAT 前原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat)，將來自或送至特定 IP 位址的資料流量列入白名單或黑名單。DNAT 前原則可防止指定的資料流量到達您的應用程式，因為在 Kubernetes 使用一般 DNAT 將資料流量轉遞至 Pod 之前，已套用這些原則。建立 Calico DNAT 前原則時，您可以選擇是否要將來源 IP 位址列入白名單或黑名單。對於大部分情境，白名單提供最安全的配置，因為除了來自已知允許之來源 IP 位址的資料流量外，所有資料流量都會遭到封鎖。黑名單通常只用於如下的情境：防止來自小型 IP 位址集的攻擊。
 
-在此情境中，您扮演公關公司網路管理者的角色，並注意到一些不尋常的資料流量正在攻擊您的應用程式。本指導教學中的課程將逐步引導您建立範例 Web 伺服器應用程式、使用負載平衡器服務公開應用程式，以及同時使用白名單及黑名單 Calico 原則來保護應用程式避開不需要且不尋常的資料流量。
+在此情境中，您扮演公關公司網路管理者的角色，並注意到一些不尋常的資料流量正在攻擊您的應用程式。本指導教學中的課程將逐步引導您建立範例 Web 伺服器應用程式、使用網路負載平衡器 (NLB) 服務公開應用程式，以及同時使用白名單和黑名單 Calico 原則來保護應用程式避開不需要且不尋常的資料流量。
 
 ## 目標
 {: #policies_objectives}
 
 - 學習藉由建立高階 DNAT 前原則，以封鎖送入所有節點埠的所有資料流量。
-- 學習藉由建立低階 DNAT 前原則，以容許列入白名單的來源 IP 位址存取負載平衡器公用 IP 及埠。低階原則會置換高階原則。
-- 學習藉由建立低階 DNAT 前原則，以封鎖列入黑名單的來源 IP 位址，讓它們無法存取負載平衡器公用 IP 及埠。
+- 學習藉由建立低階 DNAT 前原則，以容許列入白名單的來源 IP 位址存取 NLB 公用 IP 及埠。低階原則會置換高階原則。
+- 學習藉由建立低階 DNAT 前原則，以封鎖列入黑名單的來源 IP 位址，讓它們無法存取 NLB 公用 IP 及埠。
 
 ## 所需時間
 {: #policies_time}
@@ -53,7 +53,7 @@ subcollection: containers
 ## 必要條件
 {: #policies_prereqs}
 
-- [建立 1.10 版或更新版本的叢集](/docs/containers?topic=containers-clusters#clusters_ui)或[將現有叢集更新為 1.10 版](/docs/containers?topic=containers-cs_versions#cs_v110)。若要在本指導教學中使用 3.3.1 Calico CLI 及 Calico 第 3 版原則語法，則需要有 Kubernetes 1.10 版或更新版本的叢集。
+- [建立叢集](/docs/containers?topic=containers-clusters#clusters_ui)。
 - [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 - [安裝並配置 Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)。
 - 確定您具有 {{site.data.keyword.containerlong_notm}} 的下列 {{site.data.keyword.Bluemix_notm}} IAM 存取原則：
@@ -63,20 +63,20 @@ subcollection: containers
 <br />
 
 
-## 第 1 課：使用負載平衡器來部署應用程式並將它公開
+## 第 1 課：使用 NLB 來部署應用程式並將它公開
 {: #lesson1}
 
 第一課告訴您如何從多個 IP 位址及埠公開您的應用程式，以及公用資料流量是從哪裡進入您的叢集。
 {: shortdesc}
 
-開始部署要在整個指導教學中使用的範例 Web 伺服器應用程式。`echoserver` Web 伺服器會顯示有關建立用戶端與叢集之連線的資料，並讓您測試對公關公司叢集的存取。然後，透過建立負載平衡器 1.0 服務來公開應用程式。負載平衡器 1.0 服務可讓您的應用程式透過負載平衡器服務 IP 位址及工作者節點的節點埠來使用。
+開始部署要在整個指導教學中使用的範例 Web 伺服器應用程式。`echoserver` Web 伺服器會顯示有關建立用戶端與叢集之連線的資料，並讓您測試對公關公司叢集的存取。然後，藉由建立網路負載平衡器 (NLB) 1.0 服務來公開應用程式。NLB 1.0 服務可讓您的應用程式透過 NLB 服務 IP 位址及工作者節點的節點埠來使用。
 
-想要使用 Ingress 應用程式負載平衡器 (ALB) 嗎？[建立 Web 伺服器應用程式的服務](/docs/containers?topic=containers-ingress#public_inside_1)以及[建立 Web 伺服器應用程式的 Ingress 資源](/docs/containers?topic=containers-ingress#public_inside_4)，而非在步驟 3 及 4 中的建立負載平衡器。然後，執行下列指令來取得 ALB 的公用 IP：`ibmcloud ks albs --cluster <cluster_name>`，並在整個指導教學中使用這些 IP 來取代 `<loadbalancer_IP>.`
+想要使用 Ingress 應用程式負載平衡器 (ALB) 嗎？[建立 Web 伺服器應用程式的服務](/docs/containers?topic=containers-ingress#public_inside_1)以及[建立 Web 伺服器應用程式的 Ingress 資源](/docs/containers?topic=containers-ingress#public_inside_4)，而非在步驟 3 及 4 中建立的 NLB。然後，執行 `ibmcloud ks albs --cluster <cluster_name>` 以取得 ALB 的公用 IP，並在整個指導教學中使用這些 IP 來取代 `<loadbalancer_IP>。`
 {: tip}
 
-下圖顯示在課程 1 結束時如何藉由公用節點埠及公用負載平衡器，在網際網路上公開 Web 伺服器應用程式：
+下圖顯示在第 1 課結束時如何藉由公用節點埠及公用 NLB，在網際網路上公開 Web 伺服器應用程式：
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="在課程 1 結束時，藉由公用節點埠及公用負載平衡器，在網際網路上公開 Web 伺服器應用程式。" style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="在第 1 課結束時，藉由公用節點埠及公用 NLB，在網際網路上公開 Web 伺服器應用程式。" style="width:450px; border-style: none"/>
 
 1. 部署範例 Web 伺服器應用程式。與 Web 伺服器應用程式建立連線時，應用程式會以其在連線中收到的 HTTP 標頭回應。
     ```
@@ -99,7 +99,7 @@ subcollection: containers
     ```
     {: screen}
 
-3. 若要在公用網際網路上公開應用程式，請在文字編輯器中建立一個稱為 `webserver-lb.yaml` 的負載平衡器 1.0 服務配置檔。
+3. 若要在公用網際網路上公開應用程式，請在文字編輯器中建立一個稱為 `webserver-lb.yaml` 的 NLB 1.0 服務配置檔。
     ```
     apiVersion: v1
     kind: Service
@@ -119,36 +119,36 @@ subcollection: containers
     ```
     {: codeblock}
 
-4. 部署負載平衡器。
+4. 部署 NLB。
     ```
     kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-5. 驗證您可以從電腦公開存取負載平衡器所公開的應用程式。
+5. 驗證您可以從電腦公然地存取 NLB 所公開的應用程式。
 
-    1. 取得負載平衡器的公用 **EXTERNAL-IP** 位址。
+    1. 取得 NLB 的公用 **EXTERNAL-IP** 位址。
         ```
         kubectl get svc -o wide
         ```
         {: pre}
 
-          輸出範例：
-  ```
+        輸出範例：
+    ```
         NAME           CLUSTER-IP       EXTERNAL-IP        PORT(S)        AGE       SELECTOR
         webserver-lb   172.21.xxx.xxx   169.xx.xxx.xxx     80:31024/TCP   2m        run=webserver
         ```
         {: screen}
 
-    2. 建立提要文字檔，並將負載平衡器 IP 複製到文字檔。提要將協助您在稍後的課程中更快速地使用這些值。
+    2. 建立提要文字檔，並將 NLB IP 複製到文字檔。提要將協助您在稍後的課程中更快速地使用這些值。
 
-    3. 驗證您可以公開存取負載平衡器的外部 IP。
+    3. 驗證您可以公然地存取 NLB 的外部 IP。
         ```
         curl --connect-timeout 10 <loadbalancer_IP>:80
         ```
         {: pre}
 
-        下列輸出範例確認負載平衡器會在 `169.1.1.1` 公用負載平衡器 IP 位址上公開您的應用程式。`webserver-855556f688-76rkp` 應用程式 Pod 收到 Curl 要求：
+        下列輸出範例確認 NLB 會在 `169.1.1.1` 公用 NLB IP 位址上公開您的應用程式。`webserver-855556f688-76rkp` 應用程式 Pod 收到 Curl 要求：
         ```
         Hostname: webserver-855556f688-76rkp
         Pod Information:
@@ -172,9 +172,9 @@ subcollection: containers
         ```
         {: screen}
 
-6. 驗證您可以從電腦公開存取節點埠所公開的應用程式。負載平衡器服務可讓您的應用程式透過負載平衡器服務 IP 位址及工作者節點的節點埠提供使用。
+6. 驗證您可以從電腦公開存取節點埠所公開的應用程式。NLB 服務可讓您的應用程式透過 NLB 服務 IP 位址及工作者節點的節點埠來使用。
 
-    1. 取得負載平衡器指派給工作者節點的節點埠。節點埠位於 30000 到 32767 範圍內。
+    1. 取得 NLB 指派給工作者節點的節點埠。節點埠位於 30000 到 32767 範圍內。
         ```
         kubectl get svc -o wide
         ```
@@ -193,12 +193,12 @@ subcollection: containers
         ```
         {: pre}
 
-          輸出範例：
-  ```
+        輸出範例：
+    ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
         ```
         {: screen}
 
@@ -234,19 +234,19 @@ subcollection: containers
         ```
         {: screen}
 
-此時，會從多個 IP 位址及埠公開您的應用程式。其中大部分 IP 都在叢集的內部，而且只能透過專用網路存取。只有公用節點埠及公用負載平衡器埠，才會在公用網際網路公開。
+此時，會從多個 IP 位址及埠公開您的應用程式。其中大部分 IP 都在叢集的內部，而且只能透過專用網路存取。只有公用節點埠及公用 NLB 埠，才會在公用網際網路公開。
 
 接下來，您可以開始建立並套用 Calico 原則來封鎖公用資料流量。
 
 ## 第 2 課：封鎖送入所有節點埠的所有資料流量
 {: #lesson2}
 
-若要保護公關公司的叢集，您必須封鎖對公開您應用程式之負載平衡器服務及節點埠兩者的公開存取。首先，封鎖對節點埠的存取。
+若要保護公關公司的叢集，您必須封鎖對公開您應用程式之 NLB 服務及節點埠兩者的公開存取。首先，封鎖對節點埠的存取。
 {: shortdesc}
 
-下圖顯示在第 2 課結束時如何允許資料流量傳送至負載平衡器，但不傳送至節點埠：
+下圖顯示在第 2 課結束時如何允許資料流量傳送至 NLB，但不傳送至節點埠：
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="在第 2 課結束時，僅會透過公用負載平衡器將 Web 伺服器應用程式公開至網際網路。" style="width:425px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="在第 2 課結束時，僅會透過公用 NLB 在網際網路上公開 Web 伺服器應用程式。" style="width:425px; border-style: none"/>
 
 1. 在文字編輯器中，建立一個稱為 `deny-nodeports.yaml` 的高階 DNAT 前原則，來拒絕將 TCP 及 UDP 資料流量從任何來源 IP 送入所有節點埠。
     ```
@@ -309,7 +309,7 @@ subcollection: containers
     ```
     {: screen}
 
-4. 使用來自提要的值，驗證您仍然可以公開存取負載平衡器外部 IP 位址。
+4. 使用來自提要的值，驗證您仍然可以公然地存取 NLB 外部 IP 位址。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -338,25 +338,25 @@ subcollection: containers
         -no body in request-
     ```
     {: screen}
-    在輸出的 `Request Information` 區段中，注意來源 IP 位址為：例如，`client_address=1.1.1.1`。來源 IP 位址是您要用來執行 Curl 之系統的公用 IP。否則，如果您是透過 Proxy 或 VPN 連接至網際網路，則 Proxy 或 VPN 可能會遮蔽系統的實際 IP 位址。在任一情況下，負載平衡器會將您系統的來源 IP 位址看成用戶端 IP 位址。
+    在輸出的 `Request Information` 區段中，注意來源 IP 位址為：例如，`client_address=1.1.1.1`。來源 IP 位址是您要用來執行 Curl 之系統的公用 IP。否則，如果您是透過 Proxy 或 VPN 連接至網際網路，則 Proxy 或 VPN 可能會遮蔽系統的實際 IP 位址。在任一情況下，NLB 會將您系統的來源 IP 位址看成用戶端 IP 位址。
 
 5. 將您系統的來源 IP 位址（前一個步驟輸出中的 `client_address=1.1.1.1`）複製到您的提要，以在稍後課桯中使用。
 
-太棒了！此時，只會從公用負載平衡器埠，在公用網際網路公開您的應用程式。送入公用節點埠的資料流量會遭到封鎖。您已局部鎖定叢集，不准不需要的資料流量送入其中。
+太棒了！此時，只會從公用 NLB 埠，在公用網際網路上公開您的應用程式。送入公用節點埠的資料流量會遭到封鎖。您已局部鎖定叢集，不准不需要的資料流量送入其中。
 
 接下檢，您可以建立並套用 Calico 原則，將來自特定來源 IP 的資料流量列入白名單。
 
-## 第 3 課：容許將資料流量從列入白名單的 IP 送入負載平衡器
+## 第 3 課：容許從列入白名單的 IP 送入 NLB 的資料流量 
 {: #lesson3}
 
 您現在決定將資料流量完全鎖定至 PR 公司的叢集，並按白名單僅選取自己的電腦的 IP 位址，以進行測試存取。
 {: shortdesc}
 
-首先，除了節點埠之外，您必須封鎖所有資料流量送入公開應用程式的負載平衡器。然後，您可以建立一個原則，將系統的 IP 位址列入白名單。在第 3 課結束時，將封鎖所有送至公用節點埠及負載平衡器的資料流量，而且僅容許來自列入白名單之系統 IP 的資料流量：
+首先，除了節點埠之外，您還必須封鎖送入公開應用程式之 NLB 的所有資料流量。然後，您可以建立一個原則，將系統的 IP 位址列入白名單。在第 3 課結束時，將封鎖送入公用節點埠及 NLB 的所有資料流量，而且僅容許來自列入白名單之系統 IP 的資料流量：
 
-<img src="images/cs_tutorial_policies_L3.png" width="550" alt="Web 伺服器應用程式僅由公用負載平衡器在您的系統 IP 公開。" style="width:500px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="550" alt="Web 伺服器應用程式僅由公用 NLB 在您的系統 IP 公開。" style="width:500px; border-style: none"/>
 
-1. 在文字編輯器中，建立一個稱為 `deny-lb-port-80.yaml` 的高階 DNAT 前原則，來拒絕將 TCP 及 UDP 資料流量從任何來源 IP 送入負載平衡器 IP 位址及埠。將 `<loadbalancer_IP>` 取代為來自提要的負載平衡器公用 IP 位址。
+1. 在文字編輯器中，建立一個稱為 `deny-lb-port-80.yaml` 的高階 DNAT 前原則，來拒絕從任何來源 IP 送入 NLB IP 位址及埠的所有 TCP 及 UDP 資料流量。將 `<loadbalancer_IP>` 取代為來自提要的 NLB 公用 IP 位址。
 
     ```
     apiVersion: projectcalico.org/v3
@@ -405,13 +405,13 @@ subcollection: containers
       ```
       {: pre}
 
-3. 使用來自提要的值，驗證您現在無法存取公用負載平衡器 IP 位址。連線逾時，因為您建立的 Calico 原則封鎖資料流量送入負載平衡器。
+3. 使用來自提要的值，驗證您現在無法存取公用 NLB IP 位址。連線逾時，因為您建立的 Calico 原則封鎖送入 NLB 的資料流量。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
-4. 在文字編輯器中，建立一個稱為 `whitelist.yaml` 的低階 DNAT 前原則，來容許資料流量從系統的 IP 送至負載平衡器 IP 位址及埠。使用來自提要的值，將 `<loadbalancer_IP>` 取代為負載平衡器的公用 IP 位址，並將 `<client_address>` 取代為系統來源 IP 的公用 IP 位址。
+4. 在文字編輯器中，建立一個稱為 `whitelist.yaml` 的低階 DNAT 前原則，來容許從系統的 IP 送入 NLB IP 位址及埠的資料流量。使用來自提要的值，將 `<loadbalancer_IP>` 取代為 NLB 的公用 IP 位址，並將 `<client_address>` 取代為系統來源 IP 的公用 IP 位址。
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -454,30 +454,30 @@ subcollection: containers
       {: pre}
   您系統的 IP 位址現在已列入白名單。
 
-6. 使用來自提要的值，驗證您現在可以存取公用負載平衡器 IP 位址。
+6. 使用來自提要的值，驗證您現在可以存取公用 NLB IP 位址。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
-7. 如果您可以存取另一個具有不同 IP 位址的系統，請嘗試從該系統存取負載平衡器。
+7. 如果您可以存取另一個具有不同 IP 位址的系統，請嘗試從該系統存取 NLB。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
     連線逾時，因為該系統的 IP 位址未列入白名單。
 
-此時，所有送至公用節點埠及負載平衡器的資料流量都會遭到封鎖。只容許來自已列入白名單之系統 IP 的資料流量。
+此時，所有送入公用節點埠及 NLB 的資料流量都會遭到封鎖。只容許來自已列入白名單之系統 IP 的資料流量。
 
-## 第 4 課：拒絕資料流量從列入黑名單的 IP 送入負載平衡器
+## 第 4 課：拒絕從列入黑名單的 IP 送入 NLB 的資料流量
 {: #lesson4}
 
 在前一課中，您已封鎖所有資料流量，並只將少數 IP 列入白名單。當您想要限制只存取少數受管制的來源 IP 位址時，該情境適用於測試目的。不過，公關公司具有需要大眾可以廣泛使用的應用程式。您需要確定允許所有資料流量，但您從少數 IP 位址看到的不尋常資料流量除外。黑名單有助於這類情境，因為它可以協助您防止來自小型 IP 位址集的攻擊。
 {: shortdesc}
 
-在本課程中，您將藉由封鎖來自您自己系統之來源 IP 位址的資料流量，來測試黑名單。在第 4 課結束時，將封鎖所有送至公用節點埠的資料流量，而且將容許所有送至公用負載平衡器的資料流量。只會封鎖從列入黑名單之系統 IP 送至負載平衡器的資料流量：
+在本課程中，您將藉由封鎖來自您自己系統之來源 IP 位址的資料流量，來測試黑名單。在第 4 課結束時，將封鎖所有送入公用節點埠的資料流量，而且將容許所有送入公用 NLB 的資料流量。只會封鎖從列入黑名單之系統 IP 送入 NLB 的資料流量：
 
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web 伺服器應用程式是由公用負載平衡器在網際網路公開。只封鎖來自您系統 IP 的資料流量。" style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web 伺服器應用程式是由公用 NLB 在網際網路上公開。只封鎖來自您系統 IP 的資料流量。" style="width:550px; border-style: none"/>
 
 1. 清除您在前一課中建立的白名單原則。
     
@@ -501,44 +501,45 @@ subcollection: containers
       ```
       {: pre}
 
-    現有，再次允許將所有 TCP 及 UDP 資料流量從任何來源 IP 送入負載平衡器 IP 位址及埠。
+    現在，再次允許從任何來源 IP 送入 NLB IP 位址及埠的所有 TCP 及 UDP 資料流量。
 
-2. 若要拒絕將所有 TCP 及 UDP 資料流量從您系統的來源 IP 位址送入負載平衡器 IP 位址及埠，請在文字編輯器中建立一個稱為 `blacklist.yaml` 的低階 DNAT 前原則。使用來自提要的值，將 `<loadbalancer_IP>` 取代為負載平衡器的公用 IP 位址，並將 `<client_address>` 取代為系統來源 IP 的公用 IP 位址。
-    ```
-    apiVersion: projectcalico.org/v3
-    kind: GlobalNetworkPolicy
-    metadata:
-      name: blacklist
-    spec:
-      applyOnForward: true
-      preDNAT: true
-      ingress:
-      - action: Deny
-        destination:
-          nets:
-          - <loadbalancer_IP>/32
-          ports:
-          - 80
-        protocol: TCP
-        source:
-          nets:
-          - <client_address>/32
-      - action: Deny
-        destination:
-          nets:
-          - <loadbalancer_IP>/32
-          ports:
-          - 80
-        protocol: UDP
-        source:
-          nets:
-          - <client_address>/32
-      selector: ibm.role=='worker_public'
-      order: 500
-      types:
-      - Ingress
-    ```
-    {: codeblock}
+2. 若要拒絕將從您系統的來源 IP 位址送入 NLB IP 位址及埠的所有 TCP 及 UDP 資料流量，請在文字編輯器中建立一個稱為 `blacklist.yaml` 的低階 DNAT 前原則。使用來自提要的值，將 `<loadbalancer_IP>` 取代為 NLB 的公用 IP 位址，並將 `<client_address>` 取代為系統來源 IP 的公用 IP 位址。
+    
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: blacklist
+  spec:
+    applyOnForward: true
+    preDNAT: true
+    ingress:
+    - action: Deny
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: TCP
+      source:
+        nets:
+        - <client_address>/32
+    - action: Deny
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: UDP
+      source:
+        nets:
+        - <client_address>/32
+    selector: ibm.role=='worker_public'
+    order: 500
+    types:
+    - Ingress
+  ```
+  {: codeblock}
 
 3. 套用原則。
     - Linux：
@@ -556,15 +557,82 @@ subcollection: containers
       {: pre}
   您系統的 IP 位址現在已列入黑名單。
 
-4. 使用來自提要的值，從您的系統驗證您無法存取負載平衡器 IP，因為您系統的 IP 已列入黑名單。
+4. 使用來自提要的值，從您的系統驗證您無法存取 NLB IP，因為您系統的 IP 已被列入黑名單。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
-    此時，會封鎖所有送至公用節點埠的資料流量，而且容許所有送至公用負載平衡器的資料流量。只會封鎖從列入黑名單之系統 IP 送至負載平衡器的資料流量。
+    此時，會封鎖所有送入公用節點埠的資料流量，而且容許所有送入公用 NLB 的資料流量。只會封鎖從列入黑名單之系統 IP 送入 NLB 的資料流量。
 
-5. 若要清除此黑名單原則，請執行下列指令：
+做得好！您已順利控制送入應用程式的資料流量，方法為使用 Calico DNAT 前原則將來源 IP 列入黑名單。
 
+## 第 5 課：記載從列入黑名單的 IP 送入 NLB 的遭封鎖資料流量
+{: #lesson5}
+
+在前一課中，您已將從系統 IP 送入 NLB 的資料流量列入黑名單。在本課程中，您可以學習如何記載拒絕的資料流量要求。
+{: shortdesc}
+
+在我們的範例情境中，您工作的公關公司想要您設定記載追蹤來記載不斷遭到其中一個網路原則拒絕的任何異常資料流量。若要監視潛在的安全威脅，請設定記載，在每次黑名單原則拒絕對 NLB IP 的嘗試動作時進行記錄。
+
+1. 建立名為 `log-denied-packets` 的 Calico NetworkPolicy。此日誌原則會使用與 `blacklist` 原則相同的選取器，以將此原則新增至 Calico Iptables 規則鏈。使用較低的順序號碼（例如 `300`），您可以確保將此規則新增至 blacklist 原則前面的 Iptables 規則鏈。此原則會先記載來自您 IP 的封包，再嘗試符合 `blacklist` 原則規則，但遭拒絕。
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: log-denied-packets
+  spec:
+    applyOnForward: true
+    preDNAT: true
+    ingress:
+    - action: Log
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: TCP
+      source:
+        nets:
+        - <client_address>/32
+    - action: Deny
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: UDP
+      source:
+        nets:
+        - <client_address>/32
+    selector: ibm.role=='worker_public'
+    order: 500
+    types:
+    - Ingress
+  ```
+  {: codeblock}
+
+2. 套用原則。
+  ```
+    calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
+    ```
+  {: pre}
+
+3. 將要求從系統 IP 傳送至 NLB IP，以產生日誌項目。在拒絕這些要求封包之前，會先行記載。
+  ```
+    curl --connect-timeout 10 <loadbalancer_IP>:80
+    ```
+  {: pre}
+
+4. 檢查寫入 `/var/log/syslog` 路徑的日誌項目。日誌項目會與下列內容類似。
+  ```
+  Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
+  ```
+  {: screen}
+
+太棒了！您已設定記載，因此可以更輕鬆地監視列入黑名單的資料流量。
+
+如果您要清除黑名單及日誌原則，請執行下列動作：
+1. 清除黑名單原則。
     - Linux：
       ```
       calicoctl delete GlobalNetworkPolicy blacklist
@@ -577,7 +645,18 @@ subcollection: containers
       ```
       {: pre}
 
-做得好！您已順利控制進入應用程式的資料流量，方法為使用 Calico DNAT 前原則，將來源 IP 列入白名單及黑名單。
+2. 清除日誌原則。
+    - Linux：
+      ```
+      calicoctl delete GlobalNetworkPolicy log-denied-packets
+      ```
+      {: pre}
+
+    - Windows 及 OS X：
+      ```
+      calicoctl delete GlobalNetworkPolicy log-denied-packets --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 ## 下一步為何？
 {: #whats_next}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -58,12 +58,12 @@ Quando você cria um cluster, os nós do trabalhador do cluster são conectados 
 <dt>VLANs para clusters grátis</dt>
 <dd>Em clusters grátis, os nós do trabalhador do cluster são conectados a uma VLAN pública e uma VLAN privada de propriedade da IBM por padrão. Como a IBM controla as VLANs, as sub-redes e os endereços IP, não é possível criar clusters de múltiplas zonas ou incluir sub-redes em seu cluster e é possível usar somente serviços NodePort para expor seu app.</dd>
 <dt>VLANs para clusters padrão</dt>
-<dd>Em clusters padrão, na primeira vez que você criar um cluster em uma zona, uma VLAN pública e uma VLAN privada nessa zona serão provisionadas automaticamente para você em sua conta de infraestrutura do IBM Cloud (SoftLayer). Para cada cluster subsequente que você criar nessa zona, deverá ser especificado o par de VLAN que você deseja usar nessa zona. É possível reutilizar as mesmas VLANs públicas e privadas que foram criadas para você porque múltiplos clusters podem compartilhar VLANs.</br>
-</br>É possível conectar seus nós do trabalhador a uma VLAN pública e à VLAN privada ou somente à VLAN privada. Se você desejar conectar seus nós do trabalhador a uma VLAN somente privada, será possível usar o ID de uma VLAN privada existente ou [criar uma VLAN privada](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) e usar o ID durante a criação do cluster.</dd></dl>
+<dd>Em clusters padrão, na primeira vez que você criar um cluster em uma zona, uma VLAN pública e uma VLAN privada nessa zona serão provisionadas automaticamente para você em sua conta de infraestrutura do IBM Cloud (SoftLayer). Para cada cluster subsequente que você criar nessa zona, deverá ser especificado o par de VLAN que você deseja usar nessa zona. É possível reutilizar as mesmas VLANs públicas e privadas que foram criadas para você porque diversos clusters podem compartilhar VLANs.</br>
+</br>É possível conectar seus nós do trabalhador a uma VLAN pública e à VLAN privada ou somente à VLAN privada. Se você deseja conectar seus nós do trabalhador somente a uma VLAN privada, é possível usar o ID de uma VLAN privada existente ou [criar uma VLAN privada](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) e usar o ID durante a criação do cluster.</dd></dl>
 
-Para ver as VLANs que são fornecidas em cada zona para sua conta, execute `ibmcloud ks vlans --zone <zone>.` Para ver as VLANs em que um cluster é fornecido, execute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` e procure a seção **VLANs da sub-rede**.
+Para ver as VLANs provisionadas em cada zona para sua conta, execute `ibmcloud ks vlans --zone <zone>.` Para ver as VLANs nas quais um cluster está provisionado, execute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` e procure a seção **VLANs de sub-rede**.
 
-A infraestrutura do IBM Cloud (SoftLayer) gerencia as VLANs que são provisionadas automaticamente quando você cria seu primeiro cluster em uma zona. Se você deixar que uma VLAN se torne inutilizável, como removendo todos os nós do trabalhador de uma VLAN, a infraestrutura do IBM Cloud (SoftLayer) recuperará a VLAN. Depois, se você precisar de uma nova VLAN, [entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
+A infraestrutura do IBM Cloud (SoftLayer) gerencia as VLANs que são provisionadas automaticamente quando você cria seu primeiro cluster em uma zona. Se você deixar que uma VLAN se torne inutilizável, como removendo todos os nós do trabalhador de uma VLAN, a infraestrutura do IBM Cloud (SoftLayer) recuperará a VLAN. Em seguida, se precisar de uma nova VLAN, [entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
 **Como a minha escolha de VLANs afeta meu cluster?**</br>
 
@@ -81,15 +81,15 @@ As sub-redes a seguir são provisionadas automaticamente nas VLANs públicas e p
 
 ** Sub-redes Public VLAN **
 * A sub-rede pública primária determina os endereços IP públicos que são designados aos nós do trabalhador durante a criação do cluster. Vários clusters na mesma VLAN podem compartilhar uma sub-rede pública primária.
-* A sub-rede pública móvel é ligada a somente um cluster e fornece o cluster com 8 endereços IP públicos. 3 IPs são reservados para as funções de infraestrutura do IBM Cloud (SoftLayer). 1 IP é usado pelo ALB do Ingresso público padrão e 4 IPs podem ser usados para criar serviços de rede do balanceador de carga público. Os IPs públicos móveis são endereços IP fixos permanentes que podem ser usados para acessar serviços de balanceador de carga na Internet. Se você precisar de mais de 4 IPs para balanceadores de carga públicos, consulte [Incluindo endereços IP móveis](/docs/containers?topic=containers-subnets#adding_ips).
+* A sub-rede pública móvel é ligada a somente um cluster e fornece o cluster com 8 endereços IP públicos. 3 IPs são reservados para as funções de infraestrutura do IBM Cloud (SoftLayer). Um IP é usado pelo ALB padrão público do Ingress e 4 IPs podem ser usados para criar serviços de balanceador de carga de rede (NLB) pública. IPs públicos móveis são endereços IP fixos e permanentes que podem ser usados para acessar NLBs pela Internet. Se precisar de mais de 4 IPs para os NLBs, consulte [Incluindo endereços IP móveis](/docs/containers?topic=containers-subnets#adding_ips).
 
 ** Sub-redes de VLAN privada **
 * A sub-rede privada primária determina os endereços IP privados que são designados aos nós do trabalhador durante a criação do cluster. Múltiplos clusters na mesma VLAN podem compartilhar uma sub-rede privada primária.
-* A sub-rede privada móvel é ligada a somente um cluster e fornece o cluster com 8 endereços IP privados. 3 IPs são reservados para as funções de infraestrutura do IBM Cloud (SoftLayer). 1 IP é usado pelo ALB do Ingresso privado padrão e 4 IPs podem ser usados para criar serviços de rede do balanceador de carga privado. Os IPs privados móveis são endereços IP fixos permanentes que podem ser usados para acessar serviços de balanceador de carga na Internet. Se você precisar de mais de 4 IPs para balanceadores de carga privados, consulte [Incluindo endereços IP móveis](/docs/containers?topic=containers-subnets#adding_ips).
+* A sub-rede privada móvel é ligada a somente um cluster e fornece o cluster com 8 endereços IP privados. 3 IPs são reservados para as funções de infraestrutura do IBM Cloud (SoftLayer). Um IP é usado pelo ALB padrão privado do Ingress e 4 IPs podem ser usados para criar serviços de balanceador de carga de rede (NLB) privada. IPs privados móveis são endereços IP fixos e permanentes que podem ser usados para acessar NLBs por uma rede privada. Se precisar de mais de 4 IPs para os NLBs privados, consulte [Incluindo endereços IP móveis](/docs/containers?topic=containers-subnets#adding_ips).
 
-Para ver todas as sub-redes provisionadas em sua conta, execute `ibmcloud ks subnets`. Para ver as sub-redes privadas móveis e públicas móveis que são ligadas a um cluster, é possível executar o `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` e procure a seção **VLANs da sub-rede**.
+Para ver todas as sub-redes provisionadas em sua conta, execute `ibmcloud ks subnets`. Para ver as sub-redes públicas e privadas móveis que estão ligadas a um cluster, é possível executar `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` e procurar a seção **VLANs de sub-rede**.
 
-No {{site.data.keyword.containerlong_notm}}, as VLANs têm um limite de 40 sub-redes. Se você atingir esse limite, primeiro verifique se é possível [reutilizar sub-redes na VLAN para criar novos clusters](/docs/containers?topic=containers-subnets#subnets_custom). Se você precisar de uma nova VLAN, peça uma [entrando em contato com o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Em seguida, [crie um cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) que usa essa nova VLAN.
+No {{site.data.keyword.containerlong_notm}}, as VLANs têm um limite de 40 sub-redes. Se você atingir esse limite, primeiro verifique se é possível [reutilizar sub-redes na VLAN para criar novos clusters](/docs/containers?topic=containers-subnets#subnets_custom). Se você precisar de uma nova VLAN, peça uma [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Em seguida, [crie um cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) que usa essa nova VLAN.
 {: note}
 
 ### Como as VLANs e as sub-redes são configuradas para assegurar a segmentação de rede?
@@ -103,7 +103,7 @@ No entanto, em várias situações, os componentes em seu cluster devem ter perm
 **O que são Virtual Router Functions (VRF) e a ampliação de VLAN?**</br>
 
 <dl>
-<dt>[ Virtual Router Function (VRF) ](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)</dt>
+<dt>[ Virtual Router Function (VRF) ](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
 <dd>Um VRF permite que todas as VLANs e sub-redes em sua conta de infraestrutura se comuniquem umas com as outras. Além disso, um VRF é necessário para permitir que seus trabalhadores e o mestre se comuniquem por meio do terminal em serviço privado. Para ativar o VRF, [entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Observe que o VRF elimina a opção Ampliação de VLAN para a sua conta porque todas as VLANs são capazes de se comunicar, a menos que você configure um dispositivo de gateway para gerenciar o tráfego.</dd>
 <dt>[ VLAN Spanning ](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>Se não for possível ou você não desejar ativar o VRF, ative o VLAN Spanning. Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Observe que não é possível ativar o terminal em serviço privado se você optar por ativar a ampliação de VLAN em vez de um VRF.</dd>
@@ -165,11 +165,13 @@ Se você desejar criar um cluster de múltiplas zonas, se tiver múltiplas VLANs
 É possível seguir as etapas em [Configurando a rede de cluster com uma VLAN pública e uma privada](/docs/containers?topic=containers-cs_network_cluster#both_vlans) ou [Configurando a rede de cluster com uma VLAN privada apenas](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan).
 {: shortdesc}
 
-### Posso mudar minha decisão da VLAN mais tarde?
+### Posso mudar minha decisão da VLAN mais tarde? Os endereços IP do meu nó do trabalhador mudam?
 {: #cs_network_ov_worker_change}
 
 É possível alterar a configuração de VLAN modificando os conjuntos de trabalhadores em seu cluster. Para obter mais informações, consulte [Mudando as conexões VLAN do nó do trabalhador](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
 {: shortdesc}
+
+Um endereço IP é designado ao seu nó do trabalhador nas VLANs públicas ou privadas que são usadas por seu cluster. Depois que o nó do trabalhador é provisionado, os endereços IP não mudam. Por exemplo, os endereços IP do nó do trabalhador persistem nas operações `reload`, `reboot` e `update`. Além disso, o endereço IP privado do nó do trabalhador é usado para sua identidade na maioria dos comandos `kubectl`. Se você mudar as VLANs que o conjunto do trabalhador usa, novos nós do trabalhador provisionados nesse conjunto usarão as novas VLANs para seus endereços IP. Os endereços IP do nó do trabalhador existente não são mudados, mas é possível optar por remover os nós do trabalhador que usam VLANs antigas.
 
 <br />
 
@@ -208,11 +210,11 @@ A imagem a seguir mostra a comunicação entre os nós de trabalhadores e o mest
 </figure>
 </p>
 
-** Comunicação entre os nós do trabalhador e o mestre **</br>
-A comunicação é estabelecida de forma segura sobre a rede pública por meio do terminal em serviço público. Os trabalhadores conversam com segurança com o principal por meio de certificados TLS, e as conversas principais com os trabalhadores por meio de uma conexão OpenVPN.
+**Comunicação entre o principal e os nós do trabalhador**</br>
+A comunicação é estabelecida com segurança pela rede pública por meio do terminal de serviço público. Os trabalhadores conversam com segurança com o principal por meio de certificados TLS, e as conversas principais com os trabalhadores por meio de uma conexão OpenVPN.
 
-** Acesso ao mestre **</br>
-O mestre é publicamente acessível aos usuários de cluster autorizados por meio do terminal em serviço público. Os usuários do cluster podem acessar com segurança seu mestre do Kubernetes na Internet para executar os comandos `kubectl`, por exemplo.
+**Acesso ao principal**</br>
+O principal é acessível publicamente aos usuários de cluster autorizados por meio do terminal de serviço público. Os usuários do cluster podem acessar com segurança seu mestre do Kubernetes na Internet para executar os comandos `kubectl`, por exemplo.
 
 Para configurar o terminal em serviço somente público durante ou após a criação do cluster, siga as etapas em [Configurando o terminal em serviço público](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).
 
@@ -231,11 +233,11 @@ A imagem a seguir mostra a comunicação entre os nós de trabalhadores e o mest
 </figure>
 </p>
 
-**Comunicação entre os nós do trabalhador e o mestre**</br>
-A comunicação é estabelecida na rede privada por meio do terminal em serviço privado.
+**Comunicação entre o principal e os nós do trabalhador**</br>
+A comunicação é estabelecida pela rede privada por meio do terminal de serviço privado.
 
-** Acesso ao mestre **</br>
-Seus usuários do cluster devem estar em sua rede privada do {{site.data.keyword.Bluemix_notm}} ou conectar-se à rede privada por meio de uma conexão VPN para acessar o principal.
+**Acesso ao principal**</br>
+Os usuários do seu cluster devem estar em sua rede privada do {{site.data.keyword.Bluemix_notm}} ou se conectar à rede privada por meio de uma conexão VPN para acessar o principal.
 
 Para configurar o terminal em serviço somente privado durante ou após a criação do cluster, siga as etapas em [Configurando o terminal em serviço privado](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).
 
@@ -245,11 +247,11 @@ Para configurar o terminal em serviço somente privado durante ou após a criaç
 Para tornar seu mestre acessível de maneira pública ou privada aos usuários do cluster, é possível ativar os terminais em serviço público e privado em clusters que executam o Kubernetes versão 1.11 ou mais recente. Um VRF é necessário em sua conta do {{site.data.keyword.Bluemix_notm}}.
 {: shortdesc}
 
-** Comunicação entre os nós do trabalhador e o mestre **</br>
-A comunicação é estabelecida na rede privada por meio do terminal em serviço privado. Mesmo se você ativar o terminal em serviço público para seu cluster, a comunicação do mestre do Kubernetes com o nó do trabalhador permanecerá na rede privada.
+**Comunicação entre o principal e os nós do trabalhador**</br>
+A comunicação é estabelecida pela rede privada por meio do terminal de serviço privado e pela rede pública por meio do terminal de serviço público. Ao rotear metade do tráfego do trabalhador para o principal pelo terminal público e metade pelo terminal privado, a comunicação entre eles é protegida contra possíveis indisponibilidades da rede pública ou da rede privada.
 
-** Acesso ao mestre **</br>
-O mestre será acessível privadamente por meio do terminal em serviço privado se os usuários de cluster autorizados estiverem em sua rede privada do {{site.data.keyword.Bluemix_notm}} ou conectados à rede privada por meio de uma conexão VPN. Caso contrário, o mestre será publicamente acessível aos usuários de cluster autorizados por meio do terminal em serviço público.
+**Acesso ao principal**</br>
+O principal será acessível privadamente por meio do terminal de serviço privado se os usuários autorizados do cluster estiverem em sua rede privada do {{site.data.keyword.Bluemix_notm}} ou conectados à rede privada por meio de uma conexão VPN. Caso contrário, o mestre será publicamente acessível aos usuários de cluster autorizados por meio do terminal em serviço público.
 
 Para configurar os terminais em serviço público e privado durante a criação do cluster, siga as etapas em [Configurando o terminal em serviço privado](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se). Após a criação do cluster, é possível ativar o terminal em serviço [público](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) ou [privado](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) individualmente.
 
@@ -285,7 +287,7 @@ Para conectar de forma segura seus nós do trabalhador e apps a uma rede no loca
 ### Configurando uma conexão VPN para uma configuração de VLAN somente privada
 {: #cs_network_ov_vpn_private}
 
-Se o seu cluster estiver conectado a uma VLAN somente privada, você deverá configurar um terminal VPN IPSec em um dispositivo de gateway VRA ou FSA. Em seguida, é possível [configurar e implementar o serviço de VPN IPSec do strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) em seu cluster para usar o terminal VPN em seu gateway. Se você não desejar usar o strongSwan, será possível [configurar a conectividade VPN diretamente com o VRA](/docs/containers?topic=containers-vpn#vyatta).
+Se seu cluster estiver conectado somente a uma VLAN privada, você deverá configurar um terminal de VPN do IPSec em um dispositivo de gateway VRA (Vyatta) ou FSA. Em seguida, é possível [configurar e implementar o serviço de VPN IPSec do strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) em seu cluster para usar o terminal VPN em seu gateway. Se você não desejar usar o strongSwan, será possível [configurar a conectividade VPN diretamente com o VRA](/docs/containers?topic=containers-vpn#vyatta).
 {: shortdesc}
 
 <p>

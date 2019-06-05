@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -123,7 +123,7 @@ CI/CD 过程本身的大部分内容通过云中的 IBM Continuous Delivery 服�
 
 关键技术：
 * [智能安排按需放置工作负载](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [用于跨应用程序持久存储和同步数据的 {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} 可以跨应用程序持久存储和同步数据](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [工作负载漏洞扫描和隔离](/docs/services/Registry?topic=va-va_index#va_index)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
 * [{{site.data.keyword.openwhisk}}，用于清理数据并通知研究人员关于数据结构更改](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
