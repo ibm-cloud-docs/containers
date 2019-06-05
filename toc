@@ -168,7 +168,7 @@ IBM Cloud Kubernetes Service
     cs_classic.md
     cs_cli_devtools.md
     kubernetes-service-cli.md
-    /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
+    /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
     cs_storage.md
     transcript_autorecovery.md
     transcript_loadbalancing.md
