@@ -382,7 +382,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
     ```
     {: codeblock}
 5.  Verify that the sample {{site.data.keyword.watson}} app components are created.
-    1.  Check for the **watson** and **watson-talk** images in the cluster's built-in Docker registry by accessing the registry console in your browser.
+    1.  Check for the **watson** and **watson-talk** images in the cluster's built-in Docker registry by accessing the registry console in your browser. Make sure that you updated the registry console provider URL with `-e` as described in the previous lesson.
         ```
         https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud/
         ```
