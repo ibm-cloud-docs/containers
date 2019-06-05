@@ -311,96 +311,38 @@ Now you're in the built-in OpenShift app! For example, if you're in Grafana, you
 ## Lesson 3: Deploying an app to your OpenShift cluster
 {: #openshift_deploy_app}
 
-With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of already developed functionality in your apps. Any {{site.data.keyword.Bluemix_notm}} service that is bound to the OpenShift cluster can be used by any app that is deployed in that cluster. In this lesson, you bind a {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service to your cluster, deploy two components of an app that uses the {{site.data.keyword.toneanalyzershort}} service, and expose your service via an OpenShift router for external users to use.
+With Red Hat OpenShift on IBM Cloud, you can create a new app and expose your app service via an OpenShift router for external users to use.
 {: shortdesc}
 
-1.  Create a project for your Watson app. A project is an OpenShift version of a Kubernetes namespace with additional annotations.
+1.  Create a project for your Hello World app. A project is an OpenShift version of a Kubernetes namespace with additional annotations.
     ```
-    oc new-project watson
-    ```
-    {: pre}
-2.  Add the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service to your cluster.
-    1.  Create the [{{site.data.keyword.toneanalyzershort}} service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog/services/tone-analyzer) in your account. Replace `<service_name>` with a name for your service instance, such as `mytoneanalyzer`. Choose a `<region>` to deploy the service instance in, such as `us-east` or `eu-gb` where your cluster is located.
-        ```
-        ibmcloud resource service-instance-create <service_name> tone-analyzer standard <region>
-        ```
-        {: pre}
-    2.  Bind the {{site.data.keyword.toneanalyzershort}} instance to the `watson` project.
-        ```
-        ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace watson --service <service_name>
-        ```
-        {: pre}
-
-        Example output:
-        ```
-        Binding service instance to namespace...
-        OK
-        Namespace:	watson
-        Secret name:	binding-mytoneanalyzer
-        ```
-        {: screen}
-    3.  Note the name of the Kubernetes secret was created in your cluster project. When you [bind an {{site.data.keyword.Bluemix_notm}} service to your cluster](/docs/containers?topic=containers-service-binding), a JSON file is generated that includes confidential information such as the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key and the URL that the container uses to gain access to the service. To securely store this information, the JSON file is stored in a Kubernetes secret.
-        ```
-        oc get secrets -n watson
-        ```
-        {: pre}
-
-        Example output:
-        ```
-        NAME                       TYPE                                  DATA      AGE
-        binding-mytoneanalyzer     Opaque                                1         1m
-        ```
-        {: screen}
-3.  Build the sample {{site.data.keyword.watson}} app [from the source code ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt). The sample app consists of two separate components that you build separately. With the OpenShift `new-app` command, you can refer to a directory in a remote repository that contains the Dockerfile and app code to build your image. The command builds the image, stores the image in the local Docker registry, and creates the app deployment configurations (`dc`) and services (`svc`). For more information on creating new apps, [see the OpenShift docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/dev_guide/application_lifecycle/new_app.html).
-    ```
-    oc new-app --name watson https://github.com/IBM/container-service-getting-started-wt --context-dir="Lab 3/watson"
+    oc new-project hello-world
     ```
     {: pre}
+2.  Build the sample app [from the source code ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt). With the OpenShift `new-app` command, you can refer to a directory in a remote repository that contains the Dockerfile and app code to build your image. The command builds the image, stores the image in the local Docker registry, and creates the app deployment configurations (`dc`) and services (`svc`). For more information on creating new apps, [see the OpenShift docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/dev_guide/application_lifecycle/new_app.html).
     ```
-    oc new-app --name watson-talk https://github.com/IBM/container-service-getting-started-wt --context-dir="Lab 3/watson-talk"
-    ```
-    {: pre}
-4.  Edit the **watson** deployment configuration to include the secret that the service binding created so that the {{site.data.keyword.watson}} can access the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service.
-    ```
-    oc edit dc watson -n watson
+    oc new-app --name hello-world https://github.com/IBM/container-service-getting-started-wt --context-dir="Lab 1"
     ```
     {: pre}
-    Include the following configuration details. The `volumeMounts` section is in the `spec.template.spec.containers` section, and the `volumes` section is in the `spec.template.spec` section of the deployment configuration file.
-    ```
-    spec:
-      containers:
-      - image: 172.21.xxx.xxx:5000/watson/watson@sha256:2f8b5562bcf2f7f82116189db6100832cdfaadaf5188b5267ed4772bf6909ecc
-        ...
-        volumeMounts:
-          - mountPath: /opt/service-bind
-            name: service-bind-volume
-      volumes:
-      - name: service-bind-volume
-        secret:
-          defaultMode: 420
-          secretName: binding-mytoneanalyzer
-    ```
-    {: codeblock}
-5.  Verify that the sample {{site.data.keyword.watson}} app components are created.
-    1.  Check for the **watson** and **watson-talk** images in the cluster's built-in Docker registry by accessing the registry console in your browser. Make sure that you updated the registry console provider URL with `-e` as described in the previous lesson.
+3.  Verify that the sample Hello World app components are created.
+    1.  Check for the **hello-world** images in the cluster's built-in Docker registry by accessing the registry console in your browser. Make sure that you updated the registry console provider URL with `-e` as described in the previous lesson.
         ```
         https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud/
         ```
         {: codeblock}
-    2.  List the **watson** and **watson-talk** services and note the **watson-talk** service name. Your app listens for traffic on these internal cluster IP addresses unless you create a route for the service so that the router can forward external traffic requests to the app.
+    2.  List the **hello-world** services and note the service name. Your app listens for traffic on these internal cluster IP addresses unless you create a route for the service so that the router can forward external traffic requests to the app.
         ```
-        oc get svc -n watson
+        oc get svc -n hello-world
         ```
         {: pre}
 
         Example output:
         ```
         NAME          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-        watson        ClusterIP   172.21.xxx.xxx   <nones>       8080/TCP   31m
-        watson-talk   ClusterIP   172.21.xxx.xxx   <none>        8080/TCP   30m
+        hello-world   ClusterIP   172.21.xxx.xxx   <nones>       8080/TCP   31m
         ```
         {: screen}
-    3.  List the pods. Pods with `build` in the name are jobs that **Completed** as part of the new app build process. Make sure that the **watson** and **watson-talk** pods status are **Running**.
+    3.  List the pods. Pods with `build` in the name are jobs that **Completed** as part of the new app build process. Make sure that the **hello-world** pod status is **Running**.
         ```
         oc get pods -n watson
         ```
@@ -408,100 +350,65 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
 
         Example output:
         ```
-        NAME                  READY     STATUS             RESTARTS   AGE
-        watson-1-build        0/1       Completed          0          32m
-        watson-2-4qd7b        1/1       Running            8          5m
-        watson-talk-1-9cv7d   1/1       Running            0          30m
-        watson-talk-1-build   0/1       Completed          0          31m
+        NAME                READY     STATUS             RESTARTS   AGE
+        hello-world-9cv7d   1/1       Running            0          30m
+        hello-world-build   0/1       Completed          0          31m
         ```
         {: screen}
-6.  Set up a route so that you can publicly access the {{site.data.keyword.toneanalyzershort}} service. By default, the host name is in the format of `<service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. If you want to customize the host name, include the `--hostname=<hostname>` flag.
-    1.  Create a route for the **watson-talk** service.
+4.  Set up a route so that you can publicly access the {{site.data.keyword.toneanalyzershort}} service. By default, the host name is in the format of `<service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. If you want to customize the host name, include the `--hostname=<hostname>` flag.
+    1.  Create a route for the **hello-world** service.
         ```
-        oc create route edge --service=watson-talk -n watson
+        oc create route edge --service=hello-world -n hello-world
         ```
         {: pre}
     2.  Get the route host name address from the **Host/Port** output.
         ```
-        oc get route -n watson
+        oc get route -n hello-world
         ```
         {: pre}
         Example output:
         ```
         NAME          HOST/PORT                         PATH                                        SERVICES      PORT       TERMINATION   WILDCARD
-        watson-talk   watson-talk.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud             watson-talk   8080-tcp   edge/Allow    None
+        hello-world   hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud             hello-world   8080-tcp   edge/Allow    None
         ```
         {: screen}
-7.  Analyze some text with the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app.
-    1.  Open your browser to the route host name.
+5.  Access your app.
+    ```
+    curl https://hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud
+    ```
+    {: pre}
+    
+    Example output:
+    ```
+    Hello world from hello-world-9cv7d! Your app is up and running in a cluster!
+    ```
+    {: screen}
+6.  **Optional** To clean up the resources that you created in this lesson, you can use the labels that are assigned to each app.
+    1.  List all the resources for each app in the `hello-world` project.
         ```
-        http://watson-talk.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud
-        ```
-        {: codeblock}
-        Example output:
-        ```
-        Ready to take requests and get them analyzed with Watson Tone Analyzer Service!
-        ```
-        {: screen}
-    2.  Analyze some text by adding `/analyze/"<text_to_analyze>"` to the URL, such as shown in the following example.
-        ```
-        http://watson-talk.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud/analyze/"This is a beautiful day!"
-        ```
-        {: codeblock}
-
-        In the browser, you can see the JSON response for the analysis of the text that you entered.
-        ```
-        {
-          "document_tone": {
-            "tone_categories": [
-              {
-                "tones": [
-                  {
-                    "score": 0.011593,
-                    "tone_id": "anger",
-                    "tone_name": "Anger"
-                  },
-                  ...
-                "category_id": "social_tone",
-                "category_name": "Social Tone"
-              }
-            ]
-          }
-        }
-        ```
-        {: screen}
-8.  **Optional** To clean up the resources that you created in this lesson, you can use the labels that are assigned to each app.
-    1.  List all the resources for each app in the `watson` project.
-        ```
-        oc get all -l 'app in (watson, watson-talk)' -o name -n watson
+        oc get all -l app=hello-world -o name -n hello-world
         ```
         {: pre}
         Example output:
         ```
-        pod/watson-2-28655
-        pod/watson-talk-1-9cv7d
-        replicationcontroller/watson-1
-        replicationcontroller/watson-2
-        replicationcontroller/watson-talk-1
-        service/watson
-        service/watson-talk
-        deploymentconfig.apps.openshift.io/watson
-        deploymentconfig.apps.openshift.io/watson-talk
-        buildconfig.build.openshift.io/watson
-        buildconfig.build.openshift.io/watson-talk
-        build.build.openshift.io/watson-1
-        build.build.openshift.io/watson-talk-1
+        pod/hello-world-1-dh2ff
+        replicationcontroller/hello-world-1
+        service/hello-world
+        deploymentconfig.apps.openshift.io/hello-world
+        buildconfig.build.openshift.io/hello-world
+        build.build.openshift.io/hello-world-1
+        imagestream.image.openshift.io/hello-world
         imagestream.image.openshift.io/node
-        imagestream.image.openshift.io/watson
-        imagestream.image.openshift.io/watson-talk
-        route.route.openshift.io/watson-talk
+        route.route.openshift.io/hello-world
         ```
         {: screen}
     2.  Delete all the resources that you created.
         ```
-        oc delete all -l 'app in (watson, watson-talk)' -n watson
+        oc delete all -l app=hello-world -n hello-world
         ```
         {: pre}
+
+
 
 <br />
 
