@@ -119,7 +119,7 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     IBM Cloud Kubernetes Service CLI plug-in reference
-        /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
+        /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
 
     {: .topicgroup}
