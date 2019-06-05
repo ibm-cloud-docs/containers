@@ -279,7 +279,7 @@ Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to 
     {: screen}
 3.  In your web browser, open the route, for example: `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.
 4.  To open the registry console, you must update the provider URL so that you can access it externally.
-    1.  Edit the deployment to change the domain name to include the external `-e` so that the URL can be accessed externally.
+    1.  Edit the deployment to change the provider URL environment variable to include the external `-e` so that the URL can be accessed externally.
         ```
         oc edit deploy registry-console -n default
         ```
