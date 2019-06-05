@@ -325,7 +325,7 @@ With Red Hat OpenShift on IBM Cloud, you can create a new app and expose your ap
     ```
     {: pre}
 3.  Verify that the sample Hello World app components are created.
-    1.  Check for the **hello-world** images in the cluster's built-in Docker registry by accessing the registry console in your browser. Make sure that you updated the registry console provider URL with `-e` as described in the previous lesson.
+    1.  Check for the **hello-world** image in the cluster's built-in Docker registry by accessing the registry console in your browser. Make sure that you updated the registry console provider URL with `-e` as described in the previous lesson.
         ```
         https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud/
         ```
