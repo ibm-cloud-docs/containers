@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -118,7 +118,7 @@ To revert your worker nodes' `sysctl` parameters to the default values set by {{
     ```
     {: pre}
 
-2. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). The worker nodes come back online with the default values applied.
+2. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot). The worker nodes come back online with the default values applied.
 
 <br />
 

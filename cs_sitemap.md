@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-05"
 
 ---
 
@@ -792,19 +792,19 @@ lastupdated: "2019-05-31"
 ## {{site.data.keyword.containerlong_notm}} CLI plug-in reference
 {: #sitemap-cli-plugin}
 
-[Command reference](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
-* [Using the beta command structure](/docs/containers?topic=containers-cs_cli_reference#cs_beta)
-* [API commands](/docs/containers?topic=containers-cs_cli_reference#api_commands)
-* [CLI plug-in usage commands](/docs/containers?topic=containers-cs_cli_reference#cli_plug-in_commands)
-* [Cluster commands: Management](/docs/containers?topic=containers-cs_cli_reference#cluster_mgmt_commands)
-* [Cluster commands: Services and integrations](/docs/containers?topic=containers-cs_cli_reference#cluster_services_commands)
-* [Cluster commands: Subnets](/docs/containers?topic=containers-cs_cli_reference#cluster_subnets_commands)
-* [Ingress application load balancer (ALB) commands](/docs/containers?topic=containers-cs_cli_reference#alb_commands)
-* [Infrastructure commands](/docs/containers?topic=containers-cs_cli_reference#infrastructure_commands)
-* [Logging commands](/docs/containers?topic=containers-cs_cli_reference#logging_commands)
-* [Region commands](/docs/containers?topic=containers-cs_cli_reference#region_commands)
-* [Worker node commands](/docs/containers?topic=containers-cs_cli_reference#worker-node-commands)
-* [Worker pool commands](/docs/containers?topic=containers-cs_cli_reference#worker-pool)
+[Command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#kubernetes-service-cli)
+* [Using the beta command structure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta)
+* [API commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#api_commands)
+* [CLI plug-in usage commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_plug-in_commands)
+* [Cluster commands: Management](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_mgmt_commands)
+* [Cluster commands: Services and integrations](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_services_commands)
+* [Cluster commands: Subnets](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_subnets_commands)
+* [Ingress application load balancer (ALB) commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#alb_commands)
+* [Infrastructure commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infrastructure_commands)
+* [Logging commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#logging_commands)
+* [Region commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#region_commands)
+* [Worker node commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-node-commands)
+* [Worker pool commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-pool)
 
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 

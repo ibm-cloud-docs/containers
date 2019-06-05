@@ -32,6 +32,7 @@ IBM Cloud Kubernetes Service
     {: .topicgroup}
     Tutorials
         cs_tutorials.md
+        cs_tutorial_rhos.md
         cs_tutorials_apps.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
@@ -119,7 +120,7 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     IBM Cloud Kubernetes Service CLI plug-in reference
-        /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
+        /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
 
     {: .topicgroup}
@@ -168,6 +169,7 @@ IBM Cloud Kubernetes Service
     cs_classic.md
     cs_cli_devtools.md
     cs_cli_reference.md
+    /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
     cs_storage.md
     transcript_autorecovery.md
     transcript_loadbalancing.md

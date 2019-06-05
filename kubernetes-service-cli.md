@@ -25,12 +25,10 @@ subcollection: containers
 
 
 # {{site.data.keyword.containerlong_notm}} CLI
-{: #cs_cli_reference}
+{: #kubernetes-service-cli}
 
 Refer to these commands to create and manage Kubernetes clusters in {{site.data.keyword.containerlong}}.
 {:shortdesc}
-
-
 
 To install the CLI plug-in, see [Installing the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
 
@@ -1635,7 +1633,7 @@ ibmcloud ks clusters --locations ams03,wdc,ap
 View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to the default version for the latest, stable capabilities.
 {: shortdesc}
 
-This command is deprecated. Use the [`ibmcloud ks versions` command](#cs_versions) instead.
+This command is deprecated. Use the [ibmcloud ks versions command](#cs_versions) instead.
 {: deprecated}
 
 ```

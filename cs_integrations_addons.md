@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, helm
 
@@ -43,7 +43,7 @@ If you installed the [container image security enforcer admission controller](/d
 ## Adding managed add-ons
 {: #adding-managed-add-ons}
 
-To enable a managed add-on in your cluster, you use the [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>` command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable). When you enable the managed add-on, a supported version of the tool, including all Kubernetes resources are automatically installed in your cluster. Refer to the documentation of each managed add-on to find the prerequisites that your cluster must meet to install the managed add-on.
+To enable a managed add-on in your cluster, you use the [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable). When you enable the managed add-on, a supported version of the tool, including all Kubernetes resources are automatically installed in your cluster. Refer to the documentation of each managed add-on to find the prerequisites that your cluster must meet to install the managed add-on.
 
 For more information about the prerequisites for each add-on, see:
 
