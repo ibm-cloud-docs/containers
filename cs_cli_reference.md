@@ -1635,7 +1635,7 @@ ibmcloud ks clusters --locations ams03,wdc,ap
 View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) to the default version for the latest, stable capabilities.
 {: shortdesc}
 
-This command is deprecated. Use the [ibmcloud ks versions command](#cs_versions) instead.
+This command is deprecated. Use the [`ibmcloud ks versions` command](#cs_versions) instead.
 {: deprecated}
 
 ```
