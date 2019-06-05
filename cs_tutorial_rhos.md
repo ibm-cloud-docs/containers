@@ -241,6 +241,9 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     If you cannot perform operations that require Administrator permissions, such as listing all the worker nodes or pods in a cluster, download the TLS certificates and permission files for the cluster administrator by running the `ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin` command.
     {: tip}
 
+<br />
+
+
 ## Lesson 2: Accessing built-in OpenShift services
 {: #openshift_access_oc_services}
 
