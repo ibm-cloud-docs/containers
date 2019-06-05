@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -40,6 +40,13 @@ Use these release notes to learn about the latest changes to the {{site.data.key
 </thead>
 <tbody>
 <tr>
+  <td>5 June 2019</td>
+  <td><ul>
+  <li><strong>CLI reference</strong>: Updated the [CLI reference page](/docs/containers?topic=containers-cs_cli_reference) to reflect multiple changes for the [release of version 0.3.34](/docs/containers?topic=containers-cs_cli_changelog) of the {{site.data.keyword.containerlong_notm}} CLI plug-in.</li>
+  <li><strong>New! Red Hat OpenShift on IBM Cloud clusters</strong>: With the **Red Hat OpenShift on IBM Cloud beta**, you can create {{site.data.keyword.containerlong_notm}} clusters with worker nodes that come installed with the OpenShift container orchestration platform software. You get all the advantages of managed {{site.data.keyword.containerlong_notm}} for your cluster infrastructure environment, while using the [OpenShift tooling and catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/welcome/index.html) that runs on Red Hat Enterprise Linux for your app deployments. To get started, see [Tutorial: Creating a Red Hat OpenShift on IBM Cloud (IRO) cluster (beta)](/docs/containers?topic=containers-rhos_iks_tutorial).</li>
+  </ul></td>
+</tr>
+<tr>
   <td>4 June 2019</td>
   <td><ul>
   <li><strong>Version changelogs</strong>: Updated the changelogs for the [1.14.2_1521](/docs/containers?topic=containers-changelog#1142_1521), [1.13.6_1524](/docs/containers?topic=containers-changelog#1136_1524), [1.12.9_1555](/docs/containers?topic=containers-changelog#1129_1555), and [1.11.10_1561](/docs/containers?topic=containers-changelog#11110_1561) patch releases.</li>
@@ -48,9 +55,9 @@ Use these release notes to learn about the latest changes to the {{site.data.key
 <tr>
   <td>3 June 2019</td>
   <td><ul>
-  <li><strong>{{site.data.keyword.cos_full_notm}}</strong>: Updated the [steps](/docs/containers?topic=containers-object_storage#install_cos) to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller.</li>
-  <li><strong>Cluster add-ons changelog</strong>: Updated the [ALB `nginx-ingress` image to build 467](/docs/containers?topic=containers-cluster-add-ons-changelog).</li>
   <li><strong>Bringing your own Ingress controller</strong>: Updated the [steps](/docs/containers?topic=containers-ingress#user_managed) to reflect changes to the default community controller and to require a health check for controller IP addresses in multizone clusters.</li>
+  <li><strong>Cluster add-ons changelog</strong>: Updated the [ALB `nginx-ingress` image to build 467](/docs/containers?topic=containers-cluster-add-ons-changelog).</li>
+  <li><strong>{{site.data.keyword.cos_full_notm}}</strong>: Updated the [steps](/docs/containers?topic=containers-object_storage#install_cos) to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller.</li>
   <li><strong>Kustomize</strong>: Added an example of [reusing Kubernetes configuration files across multiple environments with Kustomize](/docs/containers?topic=containers-app#kustomize).</li>
   <li><strong>Razee</strong>: Added [Razee ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/razee-io/Razee) to the supported integrations to visualize deployment information in the cluster and to automate the deployment of Kubernetes resources. </li>
   </td>

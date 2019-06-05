@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -179,7 +179,8 @@ ibmcloud plugin list
   </tr>
   <tr>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
-    <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
+    <td>Deprecated: [ibmcloud ks kube-versions](#cs_kube_versions)</td>
+    <td>[ibmcloud ks versions](#cs_versions)</td>
     <td> </td>
   </tr>
 </tbody>
@@ -202,8 +203,8 @@ ibmcloud plugin list
     <td>[ibmcloud ks cluster-services](#cs_cluster_services)</td>
     <td>[ibmcloud ks va](#cs_va)</td>
   </tr>
+    <td>Beta: [ibmcloud ks key-protect-enable](#cs_key_protect)</td>
     <td>[ibmcloud ks webhook-create](#cs_webhook_create)</td>
-    <td> </td>
     <td> </td>
     <td> </td>
   <tr>
@@ -280,11 +281,11 @@ ibmcloud plugin list
       <td>[ibmcloud ks alb-autoupdate-disable](#cs_alb_autoupdate_disable)</td>
       <td>[ibmcloud ks alb-autoupdate-enable](#cs_alb_autoupdate_enable)</td>
       <td>[ibmcloud ks alb-autoupdate-get](#cs_alb_autoupdate_get)</td>
-      <td>[ibmcloud ks alb-cert-deploy](#cs_alb_cert_deploy)</td>
+      <td>Beta: [ibmcloud ks alb-cert-deploy](#cs_alb_cert_deploy)</td>
     </tr>
     <tr>
-      <td>[ibmcloud ks alb-cert-get](#cs_alb_cert_get)</td>
-      <td>[ibmcloud ks alb-cert-rm](#cs_alb_cert_rm)</td>
+      <td>Beta: [ibmcloud ks alb-cert-get](#cs_alb_cert_get)</td>
+      <td>Beta: [ibmcloud ks alb-cert-rm](#cs_alb_cert_rm)</td>
       <td>[ibmcloud ks alb-certs](#cs_alb_certs)</td>
       <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
     </tr>
@@ -389,9 +390,9 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[Deprecated: ibmcloud ks region-get](#cs_region)</td>
-    <td>[Deprecated: ibmcloud ks region-set](#cs_region-set)</td>
-    <td>[Deprecated: ibmcloud ks regions](#cs_regions)</td>
+    <td>Deprecated: [ibmcloud ks region-get](#cs_region)</td>
+    <td>Deprecated: [ibmcloud ks region-set](#cs_region-set)</td>
+    <td>Deprecated: [ibmcloud ks regions](#cs_regions)</td>
     <td>[ibmcloud ks supported-locations](#cs_supported-locations)</td>
   </tr>
   <tr>
@@ -1203,7 +1204,7 @@ trusted: <em>true</em>
 </dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks kube-versions</code>.
+<dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks versions</code>.
 </dd>
 
 <dt><code>--no-subnet</code></dt>
@@ -1626,11 +1627,14 @@ ibmcloud ks clusters --locations ams03,wdc,ap
 {: pre}
 
 </br>
-### ibmcloud ks kube-versions
+### Deprecated: ibmcloud ks kube-versions
 {: #cs_kube_versions}
 
 View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) to the default version for the latest, stable capabilities.
 {: shortdesc}
+
+This command is deprecated. Use the [ibmcloud ks versions command](#cs_versions) instead.
+{: deprecated}
 
 ```
 ibmcloud ks kube-versions [--json] [-s]
@@ -1651,6 +1655,39 @@ ibmcloud ks kube-versions [--json] [-s]
 **Example**:
 ```
 ibmcloud ks kube-versions
+```
+{: pre}
+
+</br>
+
+### ibmcloud ks versions
+{: #cs_versions}
+
+List all the container platform versions that are available for {{site.data.keyword.containerlong_notm}} clusters. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) to the default version for the latest, stable capabilities.
+{: shortdesc}
+
+```
+ibmcloud ks versions [--show-version PLATFORM][--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: None
+
+**Command options**:
+<dl>
+<dt><code>--show-version</code> <em>PLATFORM</em></dt>
+<dd>Show only the versions for the specified container platform. Supported values are <code>kubernetes</code> or <code>openshift</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks versions
 ```
 {: pre}
 
@@ -1821,7 +1858,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 {: pre}
 
 </br>
-### ibmcloud ks key-protect-enable
+### Beta: ibmcloud ks key-protect-enable
 {: #cs_key_protect}
 
 Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. To rotate a key in a cluster with existing key encryption, re-run this command with a new root key ID.
@@ -2137,7 +2174,7 @@ ibmcloud ks alb-autoupdate-get --cluster CLUSTER
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 </br>
-### ibmcloud ks alb-cert-deploy
+### Beta: ibmcloud ks alb-cert-deploy
 {: #cs_alb_cert_deploy}
 
 Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to the ALB in a cluster. You can only update certificates that are imported from the same {{site.data.keyword.cloudcerts_long_notm}} instance.
@@ -2189,7 +2226,7 @@ ibmcloud ks alb-cert-deploy --update --secret-name my_alb_secret --cluster my_cl
 {: pre}
 
 </br>
-### ibmcloud ks alb-cert-get
+### Beta: ibmcloud ks alb-cert-get
 {: #cs_alb_cert_get}
 
 If you imported a certificate from {{site.data.keyword.cloudcerts_short}} to the ALB in a cluster, view information about the TLS certificate, such as the secrets that are associated with it.
@@ -2236,7 +2273,7 @@ ibmcloud ks alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:
 {: pre}
 
 </br>
-### ibmcloud ks alb-cert-rm
+### Beta: ibmcloud ks alb-cert-rm
 {: #cs_alb_cert_rm}
 
 If you imported a certificate from {{site.data.keyword.cloudcerts_short}} to the ALB in a cluster, remove the secret from the cluster.

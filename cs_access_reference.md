@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -67,7 +67,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <tr>
 <td>View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}.</td>
 <td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions)</code></td>
-<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/global/swagger-global-api/#!/util/GetAddons)</code></td>
+<td><code>[GET /v1/addon](https://containers.cloud.ibm.com/global/swagger-global-api/#!/util/GetAddons)</code></td>
 </tr>
 <tr>
 <td>Target or view the API endpoint for {{site.data.keyword.containerlong_notm}}.</td>
@@ -85,7 +85,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td>-</td>
 </tr>
 <tr>
-<td>View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}.</td>
+<td>Deprecated: View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}.</td>
 <td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
 <td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/global/swagger-global-api/#!/util/GetKubeVersions)</code></td>
 </tr>
@@ -100,17 +100,17 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td><code>[GET /v1/messages](https://containers.cloud.ibm.com/global/swagger-global-api/#!/util/GetMessages)</code></td>
 </tr>
 <tr>
-<td>Find the {{site.data.keyword.containerlong_notm}} region that you are currently in.</td>
+<td>Deprecated: Find the {{site.data.keyword.containerlong_notm}} region that you are currently in.</td>
 <td><code>[ibmcloud ks region](/docs/containers?topic=containers-cs_cli_reference#cs_region)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>Set the region for {{site.data.keyword.containerlong_notm}}.</td>
+<td>Deprecated: Set the region for {{site.data.keyword.containerlong_notm}}.</td>
 <td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cs_cli_reference#cs_region-set)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>Lists the available regions.</td>
+<td>Deprecated: List the available regions.</td>
 <td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cs_cli_reference#cs_regions)</code></td>
 <td><code>[GET /v1/regions](https://containers.cloud.ibm.com/global/swagger-global-api/#!/util/GetRegions)</code></td>
 </tr>
@@ -118,6 +118,11 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td>View a list of supported locations in {{site.data.keyword.containerlong_notm}}.</td>
 <td><code>[ibmcloud ks supported-locations](/docs/containers?topic=containers-cs_cli_reference#cs_supported-locations)</code></td>
 <td><code>[GET /v1/locations](https://containers.cloud.ibm.com/global/swagger-global-api/#!/util/ListLocations)</code></td>
+</tr>
+<tr>
+<td>View a list of supported versions in {{site.data.keyword.containerlong_notm}}.</td>
+<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cs_cli_reference#cs_versions)</code></td>
+<td>-</td>
 </tr>
 <tr>
 <td>View a list of available zones that you can create a cluster in.</td>
@@ -567,17 +572,17 @@ The **Administrator** platform role includes all permissions that are granted by
 </thead>
 <tbody>
 <tr>
-<td>Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to an ALB.</td>
+<td>Beta: Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to an ALB.</td>
 <td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_deploy)</code></td>
 <td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#!/alb/CreateALBSecret) or [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#!/alb/UpdateALBSecret)</code></td>
 </tr>
 <tr>
-<td>View details for an ALB secret in a cluster.</td>
+<td>Beta: View details for an ALB secret in a cluster.</td>
 <td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_get)</code></td>
 <td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#!/alb/ViewClusterALBSecrets)</code></td>
 </tr>
 <tr>
-<td>Remove an ALB secret from a cluster.</td>
+<td>Beta: Remove an ALB secret from a cluster.</td>
 <td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_rm)</code></td>
 <td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#!/alb/DeleteClusterALBSecrets)</code></td>
 </tr>
@@ -637,7 +642,7 @@ The **Administrator** platform role includes all permissions that are granted by
 <td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#!/clusters/accounts/RemoveUserCredentials)</code></td>
 </tr>
 <tr>
-<td>Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}.</td>
+<td>Beta: Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}.</td>
 <td><code>[ibmcloud ks key-protect-enable](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
 <td><code>[POST /v1/clusters/{idOrName}/kms](https://containers.cloud.ibm.com/global/swagger-global-api/#!/clusters/CreateKMSConfig)</code></td>
 </tr>

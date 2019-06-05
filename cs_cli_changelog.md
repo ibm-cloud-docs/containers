@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,15 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.3.34</td>
+<td>31 May 2019</td>
+<td>Adds support for creating Red Hat OpenShift on IBM Cloud clusters.<ul>
+<li>Adds support for OpenShift versions in the `--kube-version` flag of the `cluster-create` command. For example, to create a standard OpenShift cluster, you can pass in `--kube-version 3.11_openshift` in your `cluster-create` command.</li>
+<li>Adds the `versions` command to list all supported Kubernetes and OpenShift versions.</li>
+<li>Deprecates the `kube-versions` command.</li>
+</ul></td>
+</tr>
 <tr>
 <td>0.3.33</td>
 <td>30 May 2019</td>
