@@ -20,7 +20,7 @@ lastupdated: "2019-06-05"
 {:preview: .preview}
 
 # Tutorial: Creating a Red Hat OpenShift on IBM Cloud cluster (beta)
-{: #rhos_iks_tutorial}
+{: #openshift_tutorial}
 
 Red Hat OpenShift on IBM Cloud is available as a beta to test out OpenShift clusters. Not all the features of {{site.data.keyword.containerlong}} are available during the beta. Also, any OpenShift beta clusters that you create remain for only 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available.
 {: preview}
@@ -29,7 +29,7 @@ With the **Red Hat OpenShift on IBM Cloud beta**, you can create {{site.data.key
 {: shortdesc}
 
 ## Objectives
-{: #rhos_iks_objectives}
+{: #openshift_objectives}
 
 In the tutorial lessons, you create a standard Red Hat OpenShift on IBM Cloud cluster, open the OpenShift console, access built-in OpenShift components, deploy an app that uses {{site.data.keyword.Bluemix_notm}} services in an OpenShift project, and expose the app on an OpenShift route so that external users can access the service.
 {: shortdesc}
@@ -37,17 +37,17 @@ In the tutorial lessons, you create a standard Red Hat OpenShift on IBM Cloud cl
 This page also includes information on the OpenShift cluster architecture, beta limitations, and how to give feedback and get support.
 
 ## Time required
-{: #rhos_iks_time}
+{: #openshift_time}
 45 minutes
 
 ## Audience
-{: #rhos_iks_audience}
+{: #openshift_audience}
 
 This tutorial is for cluster administrators who want to learn how to create a Red Hat OpenShift on IBM Cloud cluster for the first time.
 {: shortdesc}
 
 ## Prerequisites
-{: #rhos_iks_prereqs}
+{: #openshift_prereqs}
 
 *   Ensure that you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies.
     *   The [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
@@ -62,7 +62,7 @@ This tutorial is for cluster administrators who want to learn how to create a Re
 
 
 ## Architectural overview
-{: #rhos_iks_architecture}
+{: #openshift_architecture}
 
 The following diagram and table describe the default components that are set up in a Red Hat OpenShift on IBM Cloud architecture.
 {: shortdesc}
@@ -102,21 +102,21 @@ The following diagram and table describe the default components that are set up 
 
 
 ## Lesson 1: Creating a Red Hat OpenShift on IBM Cloud cluster
-{: #rhos_iks_create_cluster}
+{: #openshift_create_cluster}
 
-You can create a Red Hat OpenShift on IBM Cloud cluster in {{site.data.keyword.containerlong_notm}} by using the [console](#rhos_iks_create_cluster_console) or [CLI](#rhos_iks_create_cluster_cli). To learn about what components are set up when you create a cluster, see the [Architecture overview](#rhos_iks_architecture). OpenShift is available for only standard clusters. You can learn more about the price of standard clusters in the [frequently asked questions](/docs/containers?topic=containers-faqs#charges).
+You can create a Red Hat OpenShift on IBM Cloud cluster in {{site.data.keyword.containerlong_notm}} by using the [console](#openshift_create_cluster_console) or [CLI](#openshift_create_cluster_cli). To learn about what components are set up when you create a cluster, see the [Architecture overview](#openshift_architecture). OpenShift is available for only standard clusters. You can learn more about the price of standard clusters in the [frequently asked questions](/docs/containers?topic=containers-faqs#charges).
 {:shortdesc}
 
 Any OpenShift clusters that you create during the beta remain for 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available.
 {: important}
 
 ### Creating a cluster with the console
-{: #rhos_iks_create_cluster_console}
+{: #openshift_create_cluster_console}
 
 Create a standard OpenShift cluster in the {{site.data.keyword.containerlong_notm}} console.
 {: shortdesc}
 
-Before you begin, [complete the prerequisites](#rhos_iks_prereqs) to make sure that you have the appropriate permissions to create a cluster.
+Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure that you have the appropriate permissions to create a cluster.
 
 1.  Create a cluster.
     1.  Log in to your [{{site.data.keyword.Bluemix_notm}} account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
@@ -133,12 +133,12 @@ Before you begin, [complete the prerequisites](#rhos_iks_prereqs) to make sure t
 4.  To complete the next lesson by working in the terminal, click your profile **IAM#user.name@email.com > Copy Login Command**. Paste the copied `oc` login command into your terminal to authenticate via the CLI.
 
 ### Creating a cluster with the CLI
-{: #rhos_iks_create_cluster_cli}
+{: #openshift_create_cluster_cli}
 
 Create a standard OpenShift cluster by using the {{site.data.keyword.Bluemix_notm}} CLI.
 {: shortdesc}
 
-Before you begin, [complete the prerequisites](#rhos_iks_prereqs) to make sure that you have the appropriate permissions to create a cluster, the `ibmcloud` CLI and plug-ins, and the `oc` and `kubectl` CLIs.
+Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure that you have the appropriate permissions to create a cluster, the `ibmcloud` CLI and plug-ins, and the `oc` and `kubectl` CLIs.
 
 1.  Log in to the account that you set up to create OpenShift clusters. Target the **us-east** or **eu-gb** region. If you have a federated account, include the `--sso` flag.
     ```
@@ -242,7 +242,7 @@ Before you begin, [complete the prerequisites](#rhos_iks_prereqs) to make sure t
     {: tip}
 
 ## Lesson 2: Accessing built-in OpenShift services
-{: #rhos_iks_access_oc_services}
+{: #openshift_access_oc_services}
 
 Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to help operate your cluster, such as the OpenShift console, Prometheus, and Grafana. For the beta, to access these services, you can use the local host of a [route ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html).
 {:shortdesc}
@@ -309,7 +309,7 @@ Now you're in the built-in OpenShift app! For example, if you're in Grafana, you
 
 
 ## Lesson 3: Deploying an app to your OpenShift cluster
-{: #rhos_iks_deploy_app}
+{: #openshift_deploy_app}
 
 With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of already developed functionality in your apps. Any {{site.data.keyword.Bluemix_notm}} service that is bound to the OpenShift cluster can be used by any app that is deployed in that cluster. In this lesson, you bind a {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service to your cluster, deploy two components of an app that uses the {{site.data.keyword.toneanalyzershort}} service, and expose your service via an OpenShift router for external users to use.
 {: shortdesc}
@@ -507,7 +507,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
 
 
 ## Limitations
-{: #rhos_iks_limitations}
+{: #openshift_limitations}
 
 The Red Hat OpenShift on IBM Cloud beta is released with the following limitations.
 {: shortdesc}
@@ -542,7 +542,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
 
 
 ## What's next?
-{: #rhos_iks_next}
+{: #openshift_next}
 
 For more information about working with your apps and routing services, see the [OpenShift Developer Guide](https://docs.openshift.com/container-platform/3.11/dev_guide/index.html).
 
@@ -550,7 +550,7 @@ For more information about working with your apps and routing services, see the 
 
 
 ## Feedback and questions
-{: #rhos_iks_support}
+{: #openshift_support}
 
 During the beta, Red Hat OpenShift on IBM Cloud clusters are not covered by IBM Support nor Red Hat Support. Any support that is provided is to help you evaluate the product in preparation for its general availability.
 {: important}

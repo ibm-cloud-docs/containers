@@ -140,7 +140,7 @@ For more information about the Kubernetes CLI, see the [`kubectl` reference docs
 ## Installing the OpenShift Origin CLI (`oc`) preview beta
 {: #cli_oc}
 
-[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-rhos_iks_tutorial) is available as a beta to test out OpenShift clusters. 
+[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) is available as a beta to test out OpenShift clusters. 
 {: preview}
 
 To view a local version of the OpenShift dashboard and to deploy apps into your Red Hat OpenShift on IBM Cloud clusters, install the OpenShift Origin CLI (`oc`). The `oc` CLI includes a matching version of the Kubernetes CLI (`kubectl`). For more information, see the [OpenShift docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli.html).
@@ -170,7 +170,7 @@ Using both Red Hat OpenShift on IBM Cloud and Ubuntu native {{site.data.keyword.
         {: screen}
 3.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use. You can repeat the steps to enable autocompletion for `oc` commands. For example in bash on Linux, instead of `kubectl completion bash >/etc/bash_completion.d/kubectl`, you can run `oc completion bash >/etc/bash_completion.d/oc_completion`.
 
-Next, start [Creating a Red Hat OpenShift on IBM Cloud cluster (preview)](/docs/containers?topic=containers-rhos_iks_tutorial).
+Next, start [Creating a Red Hat OpenShift on IBM Cloud cluster (preview)](/docs/containers?topic=containers-openshift_tutorial).
 
 For more information about the OpenShift Origin CLI, see the [`oc` commands docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/cli_reference/basic_cli_operations.html).
 {: note}
