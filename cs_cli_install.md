@@ -87,7 +87,7 @@ To install the CLIs:
 For reference information about these CLIs, see the documentation for those tools.
 
 -   [`ibmcloud` commands](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
--   [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#kubernetes-service-cli)
+-   [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
 -   [`ibmcloud cr` commands](/docs/services/Registry?topic=container-registry-cli-plugin-containerregcli)
 
 ## Installing the Kubernetes CLI (`kubectl`)

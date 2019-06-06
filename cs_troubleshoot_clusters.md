@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-06"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
@@ -98,13 +98,13 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
         ```
         {: pre}
-        
+
         Example output:
         ```
         Getting information about the API key owner for cluster <cluster_name>...
         OK
         Name                Email   
-        <user_name>         <name@email.com> 
+        <user_name>         <name@email.com>
         ```
         {: screen}
     2.  Check if the infrastructure account for the region and resource group is manually set to use a different IBM Cloud infrastructure (SoftLayer) account.
@@ -112,14 +112,14 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ibmcloud ks credential-get --region <us-south>
         ```
         {: pre}
-        
+
         **Example output if credentials are set to use a different account**. In this case, the user's infrastructure credentials are used for the region and resource group that you targeted, even if a different user's credentials are stored in the API key that you retrieved in the previous step.
         ```
         OK
         Infrastructure credentials for user name <1234567_name@email.com> set for resource group <resource_group_name>.
         ```
         {: screen}
-        
+
         **Example output if credentials are not set to use a different account**. In this case, the API key owner that you retrieved in the previous step has the infrastructure credentials that are used for the region and resource group.
         ```
         FAILED
@@ -132,9 +132,9 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ibmcloud ks infra-permissions-get --region <region>
         ```
         {: pre}
-    2.  Make sure that the [infrastructure credentials owner for the API key or the manually-set account has the correct permissions](/docs/containers?topic=containers-users#owner_permissions). 
+    2.  Make sure that the [infrastructure credentials owner for the API key or the manually-set account has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
     3.  If necessary, you can change the [API key](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) or [manually-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) infrastructure credentials owner for the region and resource group.
-3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster. 
+3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster.
     1.  For example, you might try to a delete a worker node.
         ```
         ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_node_ID>
@@ -145,14 +145,14 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_node_ID>
         ```
         {: pre}
-        
+
         Example output if the worker node removal is successful. The `worker-get` operation fails because the worker node is deleted. The infrastructure permissions are correctly set up.
         ```
         FAILED
         The specified worker node could not be found. (E0011)
         ```
         {: screen}
-        
+
     3.  If the worker node is not removed, review that [**State** and **Status** fields](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes) and the [common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot#common_worker_nodes_issues) to continue debugging.
     4.  If you manually set credentials and still cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](#orphaned).
 
@@ -752,7 +752,7 @@ Steps:
     ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
     ```
     {: pre}
-2.  [Use the `ibmcloud ks cluster-pull-secret-apply` command](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#kubernetes-service-cli) to re-create an image pull secret with the appropriate registry credentials.
+2.  [Use the `ibmcloud ks cluster-pull-secret-apply` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply) to re-create an image pull secret with the appropriate registry credentials.
 
 <br />
 

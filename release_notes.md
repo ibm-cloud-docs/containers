@@ -44,8 +44,6 @@ Use these release notes to learn about the latest changes to the {{site.data.key
   <td><ul>
   <li><strong>Fluentd changelog</strong>: Added a [Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog).</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to build 470](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-  <li></li>
-  <li></li>
   </ul></td>
 </tr>
 <tr>

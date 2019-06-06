@@ -221,25 +221,25 @@ Refer to the following table for a summary of changes for each build of the Flue
 </tr>
 <tr>
 <td>d9af69e286986a05ed4a50469585b1cf978ddb1d</td>
-<td>11 April 2019</td>
+<td>11 Apr 2019</td>
 <td>Updates the cAdvisor plug-in to use TLS 1.2.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>3100ddb62580a9f46ffdff7bab2ebec40b164de6</td>
-<td>01 April 2019</td>
+<td>01 Apr 2019</td>
 <td>Updates the Fluentd service account.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>c85567b75bd7ad1c9428794cd63a8e239c3fd8f5</td>
-<td>18 March 2019</td>
+<td>18 Mar 2019</td>
 <td>Removes the dependency on cURL for [CVE-2019-8323 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8323).</td>
 <td>-</td>
 </tr>
 <tr>
 <td>320ffdf87de068ee2f7f34c0e7a47a111e8d457b</td>
-<td>18 February 2019</td>
+<td>18 Feb 2019</td>
 <td><ul>
 <li>Updates Fluend to version 1.3.</li>
 <li>Removes Git from the Fluentd image for [CVE-2018-19486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19486).</li>
@@ -248,7 +248,7 @@ Refer to the following table for a summary of changes for each build of the Flue
 </tr>
 <tr>
 <td>972865196aefd3324105087878de12c518ed579f</td>
-<td>01 January 2019</td>
+<td>01 Jan 2019</td>
 <td><ul>
 <li>Enables UTF-8 encoding for the Fluentd `in_tail` plug-in.</li>
 <li>Minor bug fixes.</li>

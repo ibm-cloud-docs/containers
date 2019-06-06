@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-06"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1598,7 +1598,7 @@ List all clusters in your {{site.data.keyword.Bluemix_notm}} account.
 
 Clusters in all locations are returned. To filter clusters by a specific location, include the `--locations` flag. For example, if you filter clusters for the `dal` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `dal10` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned. Note that you can pass one location or a comma-separated list of locations.
 
-If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, only clusters that are in the region that you are currently targeted to are returned. To switch regions, run `ibmcloud ks region set`.
+If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, only clusters that are in the region that you are currently targeted to are returned. To switch regions, run `ibmcloud ks region-set`.
 {: deprecated}
 
 ```
@@ -3933,7 +3933,7 @@ Find the {{site.data.keyword.containerlong_notm}} region that you are currently 
 
 You can work with resources that you have access to in any location, even if you set a region by running `ibmcloud ks region-set` and the resource that you want to work with is in another region. If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region-set` command and use the cluster name when you run commands.
 
-<p class="deprecated">Legacy behavior:<ul><li>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.</li><li>If you [set the <code>IKS_BETA_VERSION</code> environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to <code>0.2</code>](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region set</code> command to change regions.</li></ul></p>
+<p class="deprecated">Legacy behavior:<ul><li>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.</li><li>If you [set the <code>IKS_BETA_VERSION</code> environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to <code>0.2</code>](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region-set</code> command to change regions.</li></ul></p>
 
 ```
 ibmcloud ks region-get
@@ -3970,7 +3970,7 @@ For a list of available regions, review [Locations](/docs/containers?topic=conta
 
 **Example**:
 ```
-ibmcloud ks region set --region eu-central
+ibmcloud ks region-set --region eu-central
 ```
 {: pre}
 
@@ -4024,7 +4024,7 @@ View a list of available zones that you can create a cluster in.
 
 Zones in all locations are returned. To filter zones by a specific location, include the `--locations` flag.
 
-If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, the available zones vary by the region that you are logged in to. To switch regions, run `ibmcloud ks region set`.
+If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, the available zones vary by the region that you are logged in to. To switch regions, run `ibmcloud ks region-set`.
 {: deprecated}
 
 ```
