@@ -2,7 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-06"
+
+keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
 ---
 
@@ -107,7 +109,7 @@ The following diagram and table describe the default components that are set up 
 You can create a Red Hat OpenShift on IBM Cloud cluster in {{site.data.keyword.containerlong_notm}} by using the [console](#openshift_create_cluster_console) or [CLI](#openshift_create_cluster_cli). To learn about what components are set up when you create a cluster, see the [Architecture overview](#openshift_architecture). OpenShift is available for only standard clusters. You can learn more about the price of standard clusters in the [frequently asked questions](/docs/containers?topic=containers-faqs#charges).
 {:shortdesc}
 
-Any OpenShift clusters that you create during the beta remain for 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available. You can create clusters in only the **default** resource group.
+Any OpenShift clusters that you create during the beta remain for 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available.
 {: important}
 
 ### Creating a cluster with the console
@@ -123,7 +125,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     2.  From the hamburger menu ![hamburger menu icon](../icons/icon_hamburger.svg "hamburger menu icon"), select **Kubernetes** and then click **Create cluster**.
     3.  Choose your cluster setup details and name. For the beta, OpenShift clusters are available only as standard clusters that are located in Washington, DC and London data centers.
         *   For **Select a plan**, choose **Standard**.
-        *   For **Resource Group**, you must use the **default**.
+        *   For **Select an environment**, choose **Classic infrastructure**.
         *   For the **Location**, set the geography to **North America** or **Europe**, select either a **Single zone** or **Multizone** availability, and then select **Washington, DC** or **London** worker zones.
         *   For **Default worker pool**, select the **OpenShift** cluster version. Choose an available flavor for your worker nodes ideally with at least 4 Cores 16 GB RAM.
         *   Set a number of worker nodes to create per zone, such as 3.
@@ -140,9 +142,9 @@ Create a standard OpenShift cluster by using the {{site.data.keyword.Bluemix_not
 
 Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure that you have the appropriate permissions to create a cluster, the `ibmcloud` CLI and plug-ins, and the `oc` and `kubectl` CLIs.
 
-1.  Log in to the account that you set up to create OpenShift clusters. Target the **us-east** or **eu-gb** region and **default** resource group. If you have a federated account, include the `--sso` flag.
+1.  Log in to the account that you set up to create OpenShift clusters. Target the **us-east** or **eu-gb** region. If you have a federated account, include the `--sso` flag.
     ```
-    ibmcloud login -r (us-east|eu-gb) -g default [--sso]
+    ibmcloud login -r (us-east|eu-gb) [--sso]
     ```
     {: pre}
 2.  Create a cluster.
@@ -347,7 +349,7 @@ With Red Hat OpenShift on IBM Cloud, you can create a new app and expose your ap
         {: screen}
     3.  List the pods. Pods with `build` in the name are jobs that **Completed** as part of the new app build process. Make sure that the **hello-world** pod status is **Running**.
         ```
-        oc get pods -n hello-world
+        oc get pods -n watson
         ```
         {: pre}
 
