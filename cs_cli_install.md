@@ -53,7 +53,7 @@ To install the CLIs:
     -   The base {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`).
     -   The {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`).
     -   {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster.
-    -   The Kubernetes CLI (`kubectl`) that matches the default version: 1.13.6. If you plan to use a cluster that runs a different version, you might need to [install that version of Kubernetes separately](#kubectl). If you have an (OpenShift) cluster, you [install `oc` and `kubectl` together](#cli_oc).
+    -   The Kubernetes CLI (`kubectl`) that matches the default version: 1.13.6.<p class="note">If you plan to use a cluster that runs a different version, you might need to [install that version of the Kubernetes CLI separately](#kubectl). If you have an (OpenShift) cluster, you [install the `oc` and `kubectl` CLIs together](#cli_oc).</p>
     -   The Helm CLI (`helm`). You might use Helm as a package manager to install {{site.data.keyword.Bluemix_notm}} services and complex apps to your cluster via Helm charts. You must still [set up Helm](/docs/containers?topic=containers-helm) in each cluster where you want to use Helm.
 
     Plan to use the CLI a lot? Try [Enabling shell autocompletion for {{site.data.keyword.Bluemix_notm}} CLI (Linux/MacOS only)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux).
@@ -93,18 +93,25 @@ For reference information about these CLIs, see the documentation for those tool
 ## Installing the Kubernetes CLI (`kubectl`)
 {: #kubectl}
 
-To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI (`kubectl`). The latest stable version of `kubectl` is installed with the base {{site.data.keyword.Bluemix_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
+To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, install the Kubernetes CLI (`kubectl`). The latest stable version of `kubectl` is installed with the base {{site.data.keyword.Bluemix_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. For example, Kubernetes does not support `kubectl` client versions that are 2 or more behind the cluster server version (n-2). Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
 {: shortdesc}
 
 Using an OpenShift cluster? Install the OpenShift Origin CLI (`oc`) instead, which comes with `kubectl`. If you have both Red Hat OpenShift on IBM Cloud and Ubuntu native {{site.data.keyword.containershort_notm}} clusters, make sure to use the `kubectl` binary file that matches your cluster `major.minor` Kubernetes version.
 {: tip}
 
-1.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.13.6.
+1.  If you already have a cluster, check that the version of your client `kubectl` CLI matches the version of the cluster API server.
+    1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    2.  Compare the client and server versions. If the client does not match the server, continue to the next step. If the versions match, you already installed the appropriate version of `kubectl`.
+        ```
+        kubectl version --short
+        ```
+        {: pre}
+2.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.13.6.
     -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
     -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
     -   **Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some file path changes when you run commands later. [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
 
-2.  If you use OS X or Linux, complete the following steps.
+3.  If you use OS X or Linux, complete the following steps.
     1.  Move the executable file to the `/usr/local/bin` directory.
         ```
         mv /<filepath>/kubectl /usr/local/bin/kubectl
@@ -127,7 +134,7 @@ Using an OpenShift cluster? Install the OpenShift Origin CLI (`oc`) instead, whi
         chmod +x /usr/local/bin/kubectl
         ```
         {: pre}
-3.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use.
+4.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use.
 
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 

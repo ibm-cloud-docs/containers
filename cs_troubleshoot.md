@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-06"
 
 keywords: kubernetes, iks
 
@@ -36,7 +36,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for ge
 
 You can take these general steps to ensure that your clusters are up-to-date:
 - Check monthly for available security and operating system patches to [update your worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update).
-- [Update your cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) to the latest default [version of Kubernetes](/docs/containers?topic=containers-cs_versions) for {{site.data.keyword.containerlong_notm}}
+- [Update your cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) to the latest default [version of Kubernetes](/docs/containers?topic=containers-cs_versions) for {{site.data.keyword.containerlong_notm}}<p class="important">Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. Kubernetes does not support `kubectl` client versions that are 2 or more behind the cluster server version (n-2).</p>
 
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}

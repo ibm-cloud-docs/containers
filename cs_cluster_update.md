@@ -83,7 +83,7 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} clusters dashboard or run `ibmcloud ks clusters`.
 
-4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master.
+4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master. Kubernetes does not support `kubectl` client versions that are 2 or more behind the server version (n-2).
 
 When the Kubernetes API server update is complete, you can update your worker nodes.
 
