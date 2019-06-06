@@ -2,7 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-06"
+
+keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
 ---
 
@@ -25,8 +27,11 @@ lastupdated: "2019-06-05"
 Red Hat OpenShift on IBM Cloud is available as a beta to test out OpenShift clusters. Not all the features of {{site.data.keyword.containerlong}} are available during the beta. Also, any OpenShift beta clusters that you create remain for only 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available.
 {: preview}
 
-With the **Red Hat OpenShift on IBM Cloud beta**, you can create {{site.data.keyword.containerlong_notm}} clusters with worker nodes that come installed with the OpenShift container orchestration platform software. You get all the [advantages of managed {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks) for your cluster infrastructure environment, while using the [OpenShift tooling and catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/welcome/index.html) that runs on Red Hat Enterprise Linux for your app deployments. OpenShift worker nodes are available for standard clusters only.
+With the **Red Hat OpenShift on IBM Cloud beta**, you can create {{site.data.keyword.containerlong_notm}} clusters with worker nodes that come installed with the OpenShift container orchestration platform software. You get all the [advantages of managed {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks) for your cluster infrastructure environment, while using the [OpenShift tooling and catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/welcome/index.html) that runs on Red Hat Enterprise Linux for your app deployments.
 {: shortdesc}
+
+OpenShift worker nodes are available for standard clusters only. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11.
+{: note}
 
 ## Objectives
 {: #openshift_objectives}
@@ -107,7 +112,7 @@ The following diagram and table describe the default components that are set up 
 You can create a Red Hat OpenShift on IBM Cloud cluster in {{site.data.keyword.containerlong_notm}} by using the [console](#openshift_create_cluster_console) or [CLI](#openshift_create_cluster_cli). To learn about what components are set up when you create a cluster, see the [Architecture overview](#openshift_architecture). OpenShift is available for only standard clusters. You can learn more about the price of standard clusters in the [frequently asked questions](/docs/containers?topic=containers-faqs#charges).
 {:shortdesc}
 
-Any OpenShift clusters that you create during the beta remain for 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available. You can create clusters in only the **default** resource group.
+You can create clusters in only the **default** resource group. Any OpenShift clusters that you create during the beta remain for 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available.
 {: important}
 
 ### Creating a cluster with the console
@@ -125,7 +130,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
         *   For **Select a plan**, choose **Standard**.
         *   For **Resource Group**, you must use the **default**.
         *   For the **Location**, set the geography to **North America** or **Europe**, select either a **Single zone** or **Multizone** availability, and then select **Washington, DC** or **London** worker zones.
-        *   For **Default worker pool**, select the **OpenShift** cluster version. Choose an available flavor for your worker nodes ideally with at least 4 Cores 16 GB RAM.
+        *   For **Default worker pool**, select the **OpenShift** cluster version. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. Choose an available flavor for your worker nodes ideally with at least 4 Cores 16 GB RAM.
         *   Set a number of worker nodes to create per zone, such as 3.
     4.  To finish, click **Create cluster**.<p class="note">Your cluster creation might take some time to complete. After the cluster state shows **Normal**, the cluster network and load balancing components take about 10 more minutes to deploy and update the cluster domain that you use for the OpenShift web console and other routes. Wait until the cluster is ready before continuing to the next step by checking that the **Ingress subdomain** follows a pattern of `<cluster_name>.<region>.containers.appdomain.cloud`.</p>
 2.  From the cluster details page, click **OpenShift web console**.
@@ -140,7 +145,7 @@ Create a standard OpenShift cluster by using the {{site.data.keyword.Bluemix_not
 
 Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure that you have the appropriate permissions to create a cluster, the `ibmcloud` CLI and plug-ins, and the `oc` and `kubectl` CLIs.
 
-1.  Log in to the account that you set up to create OpenShift clusters. Target the **us-east** or **eu-gb** region and **default** resource group. If you have a federated account, include the `--sso` flag.
+1.  Log in to the account that you set up to create OpenShift clusters. Target the **us-east** or **eu-gb** region and the **default** resource group. If you have a federated account, include the `--sso` flag.
     ```
     ibmcloud login -r (us-east|eu-gb) -g default [--sso]
     ```
@@ -178,7 +183,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     </tr>
     <tr>
       <td><code>--kube-version <em>&lt;openshift_version&gt;</em></code></td>
-      <td>You must choose a supported OpenShift version. OpenShift versions include a Kubernetes version that differs from the Kubernetes versions that are available on native Kubernetes Ubuntu clusters. To list available OpenShift versions, run `ibmcloud ks versions`. To create a cluster with the latest the patch version, you can specify just the major and minor version, such as ` 3.11_openshift`.</td>
+      <td>You must choose a supported OpenShift version. OpenShift versions include a Kubernetes version that differs from the Kubernetes versions that are available on native Kubernetes Ubuntu clusters. To list available OpenShift versions, run `ibmcloud ks versions`. To create a cluster with the latest the patch version, you can specify just the major and minor version, such as ` 3.11_openshift`.<br><br>Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11.</td>
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;worker_node_flavor&gt;</em></code></td>
@@ -247,66 +252,22 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
 ## Lesson 2: Accessing built-in OpenShift services
 {: #openshift_access_oc_services}
 
-Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to help operate your cluster, such as the OpenShift console, Prometheus, and Grafana. For the beta, to access these services, you can use the local host of a [route ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html).
+Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to help operate your cluster, such as the OpenShift console, Prometheus, and Grafana. For the beta, to access these services, you can use the local host of a [route ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html). The default route domain names follow a cluster-specific pattern of `<router_service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
 {:shortdesc}
 
-1.  After logging in to your cluster through your terminal, verify that your router is deployed. The router functions as the ingress point for external traffic to make the services in your cluster publicly available on its external IP address through a route. The router listens on the host network interface, unlike your app pods that listen only on private IPs. The router proxies external requests for route host names to the IPs of the app pods that are identified by the service that you associated with the route host name.
-    ```
-    oc get svc router -n default
-    ```
-    {: pre}
+1.  From the OpenShift web console, in the dropdown menu in the OpenShift container platform menu bar, click **Application Console**.
+2.  Select the **default** project, then in the navigation pane, click **Applications > Pods**.
+3.  Verify that the **router** pods are in a **Running** status. The router functions as the ingress point for external network traffic. You can use the router to publicly expose the services in your cluster on the router's external IP address by using a route. The router listens on the public host network interface, unlike your app pods that listen only on private IPs. The router proxies external requests for route host names to the IPs of the app pods that are identified by the service that you associated with the route host name.
+4.  From the **default** project navigation pane, click **Applications > Deployments** and then click the **registry-console** deployment. To open the internal registry console, you must update the provider URL so that you can access it externally.
+    1.  In the **Environment** tab of the **registry-console** details page, find the **OPENSHIFT_OAUTH_PROVIDER_URL** field. 
+    2. In the value field, add `-e` after the `c1` such as in `https://c1-e.eu-gb.containers.cloud.ibm.com:20399`. 
+    3. Click **Save**. Now, the registry console deployment can be accessed through the public API endpoint of the cluster master.
+    4.  From the **default** project navigation pane, click **Applications > Routes**. To open the registry console, click the **Hostname** value, such as `https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.<p class="note">For the beta, the registry console uses self-signed TLS certificates, so you must choose to proceed to get to the registry console. In Google Chrome, click **Advanced > Proceed to <cluster_master_URL>**. Other browsers have similar options. If you cannot proceed with this setting, try opening the URL in a private browser.</p>
+5.   In the OpenShift container platform menu bar, from the dropdown menu, click **Cluster Console**.
+6.  From the navigation pane, expand **Monitoring**.
+7.  Click the built-in monitoring tool that you want to access, such as **Dashboards**. The Grafana route opens, `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.<p class="note">The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.</p>
 
-    Example output:
-    ```
-    NAME      TYPE           CLUSTER-IP               EXTERNAL-IP     PORT(S)                      AGE
-    router    LoadBalancer   172.21.xxx.xxx   169.xx.xxx.xxx   80:30399/TCP,443:32651/TCP                      5h
-    ```
-    {: screen}
-2.  Get the **Host/Port** host name of the service route that you want to access. For example, you might want to access your Grafana dashboard to check metrics on your cluster's resource usage. The default route domain names follow a cluster-specific pattern of `<router_service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
-    ```
-    oc get route --all-namespaces
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    NAMESPACE                          NAME                HOST/PORT                                                                    PATH                  SERVICES            PORT               TERMINATION          WILDCARD
-    default                            registry-console    registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                              registry-console    registry-console   passthrough          None
-    kube-service-catalog               apiserver           apiserver-kube-service-catalog.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                        apiserver           secure             passthrough          None
-    openshift-ansible-service-broker   asb-1338            asb-1338-openshift-ansible-service-broker.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud            asb                 1338               reencrypt            None
-    openshift-console                  console             console.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                                              console             https              reencrypt/Redirect   None
-    openshift-monitoring               alertmanager-main   alertmanager-main-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                alertmanager-main   web                reencrypt            None
-    openshift-monitoring               grafana             grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                          grafana             https              reencrypt            None
-    openshift-monitoring               prometheus-k8s      prometheus-k8s-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                   prometheus-k8s      web                reencrypt
-    ```
-    {: screen}
-3.  In your web browser, open the route, for example: `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.
-4.  To open the internal registry console, you must update the provider URL so that you can access it externally.
-    1.  Edit the `registry-console` deployment to be accessible through the public API endpoint of the cluster master URL by adding `-e` to the master URL.
-        ```
-        oc edit deploy registry-console -n default
-        ```
-        {: pre}
-        
-        In the `Pod Template.Containers.registry-console.Environment. OPENSHIFT_OAUTH_PROVIDER_URL` field, add `-e` after the `c1` such as in `https://c1-e.eu-gb.containers.cloud.ibm.com:20399`.
-        ```
-        Name:                   registry-console
-        Namespace:              default
-        ...
-        Pod Template:
-          Labels:  name=registry-console
-          Containers:
-           registry-console:
-            Image:      registry.eu-gb.bluemix.net/armada-master/iksorigin-registry-console:v3.11.98-6
-            ...
-            Environment:
-              OPENSHIFT_OAUTH_PROVIDER_URL:  https://c1-e.eu-gb.containers.cloud.ibm.com:20399
-              ...
-        ```
-        {: screen}
-    2.  In your web browser, open the registry console route that you retrieved in the previous step, for example: `https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
-
-Now you're in the built-in OpenShift app! For example, if you're in Grafana, you might check out your namespace CPU usage or other graphs.
+Now you're in the built-in OpenShift app! For example, if you're in Grafana, you might check out your namespace CPU usage or other graphs. To access other built-in tools, open their route host names.
 
 <br />
 
@@ -316,6 +277,9 @@ Now you're in the built-in OpenShift app! For example, if you're in Grafana, you
 
 With Red Hat OpenShift on IBM Cloud, you can create a new app and expose your app service via an OpenShift router for external users to use.
 {: shortdesc}
+
+If you took a break from the last lesson and started a new terminal, make sure that you log back in to your cluster. Open your OpenShift console at `https://<master_URL>/console`. For example, `https://c0.containers.cloud.ibm.com:23652/console`. Then click your profile **IAM#user.name@email.com > Copy Login Command** and paste the copied `oc` login command into your terminal to authenticate via the CLI.
+{: tip}
 
 1.  Create a project for your Hello World app. A project is an OpenShift version of a Kubernetes namespace with additional annotations.
     ```

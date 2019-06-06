@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-06"
 
 keywords: kubernetes, iks
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Updating clusters, worker nodes, and add-ons
+# Updating clusters, worker nodes, and cluster components
 {: #update}
 
 You can install updates to keep your Kubernetes clusters up-to-date in {{site.data.keyword.containerlong}}.
@@ -83,7 +83,7 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} clusters dashboard or run `ibmcloud ks clusters`.
 
-4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master.
+4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
 
 When the Kubernetes API server update is complete, you can update your worker nodes.
 
@@ -407,20 +407,20 @@ To update machine types:
 
 7. Repeat these steps to update other worker pools or stand-alone worker nodes to different machine types.
 
-## Updating cluster add-ons
-{: #addons}
+## Updating cluster components
+{: #components}
 
-Your {{site.data.keyword.containerlong_notm}} cluster comes with add-ons, such as Fluentd for logging, that are installed automatically when you provision the cluster. By default, these add-ons are updated automatically by IBM. However, you can disable automatic updates for some add-ons and manually update them separately from the master and worker nodes.
+Your {{site.data.keyword.containerlong_notm}} cluster comes with components, such as Fluentd for logging, that are installed automatically when you provision the cluster. By default, these components are updated automatically by IBM. However, you can disable automatic updates for some components and manually update them separately from the master and worker nodes.
 {: shortdesc}
 
-**What default add-ons can I update separately from the cluster?**</br>
-You can optionally disable automatic updates for the following add-ons:
+**What default components can I update separately from the cluster?**</br>
+You can optionally disable automatic updates for the following components:
 * [Fluentd for logging](#logging-up)
-* [Ingress application load balancer](#alb)
+* [Ingress application load balancer (ALB)](#alb)
 
-**Are there add-ons that I can't update separately from the cluster?**</br>
+**Are there components that I can't update separately from the cluster?**</br>
 
-Yes. Your cluster is deployed with the following managed add-ons and associated resources that cannot be changed, except to scale pods or edit configmaps for certain performance benefits. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval.
+Yes. Your cluster is deployed with the following managed components and associated resources that cannot be changed, except to scale pods or edit configmaps for certain performance benefits. If you try to change one of these deployment components, their original settings are restored on a regular interval.
 
 * `coredns`
 * `coredns-autoscaler`
@@ -441,16 +441,16 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 ```
 {: pre}
 
-**Can I install other add-ons than the default?**</br>
-Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](/docs/containers?topic=containers-helm#public_helm_install) to install the [block storage plug-in](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio), or [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
+**Can I install other plug-ins or add-ons than the default components?**</br>
+Yes. {{site.data.keyword.containerlong_notm}} provides other plugin-ins and add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](/docs/containers?topic=containers-helm#public_helm_install) to install the [block storage plug-in](/docs/containers?topic=containers-block_storage#install_block) or [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup). Or, you might want to enable IBM-managed add-ons in your cluster, such as [Istio](/docs/containers?topic=containers-istio) or [Knative](/docs/containers?topic=containers-serverless-apps-knative). You must update these Helm charts and add-ons separately by following the instructions in the Helm chart readmes or by following the steps to [update managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 
-### Managing automatic updates for the Fluentd for logging add-on
+### Managing automatic updates for Fluentd
 {: #logging-up}
 
-In order to make changes to your logging or filter configurations, the Fluentd add-on must be at the latest version. By default, automatic updates to the add-on are enabled.
+In order to make changes to your logging or filter configurations, the Fluentd component must be at the latest version. By default, automatic updates to the component are enabled.
 {: shortdesc}
 
-You can manage automatic updates of the Fluentd add-on in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 * Check whether automatic updates are enabled by running the `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get).
 * Disable automatic updates by running the `ibmcloud ks logging-autoupdate-disable` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable).
@@ -460,7 +460,7 @@ You can manage automatic updates of the Fluentd add-on in the following ways. **
         ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    * Force a one-time update when you use a logging command that includes the `--force-update` option. **Note**: Your pods update to the latest version of the Fluentd add-on, but Fluentd does not update automatically going forward.
+    * Force a one-time update when you use a logging command that includes the `--force-update` option. **Note**: Your pods update to the latest version of the Fluentd component, but Fluentd does not update automatically going forward.
         Example command:
 
         ```
@@ -468,17 +468,17 @@ You can manage automatic updates of the Fluentd add-on in the following ways. **
         ```
         {: pre}
 
-### Managing automatic updates for the Ingress ALB add-on
+### Managing automatic updates for Ingress ALBs
 {: #alb}
 
-Control when the Ingress application load balancer (ALB) add-on is updated.
+Control when the Ingress application load balancer (ALB) component is updated.
 {: shortdesc}
 
-When the ALB add-on is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest build version. By default, automatic updates to the add-on are enabled. Updates are performed on a rolling basis so that your Ingress ALBs don't experience any downtime.
+When the Ingress ALB component is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest build version. By default, automatic updates to ALBs are enabled. Updates are performed on a rolling basis so that your Ingress ALBs don't experience any downtime.
 
-If you disable automatic updates, you are responsible for updating the add-on. As updates become available, you are notified in the CLI when you run the `ibmcloud ks albs` or `alb-autoupdate-get` commands.
+If you disable automatic updates, you are responsible for updating your ALBs. As updates become available, you are notified in the CLI when you run the `ibmcloud ks albs` or `alb-autoupdate-get` commands.
 
-When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatability of the latest Kubernetes versions and your Ingress ALB add-on images.
+When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALBs. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALBs' images.
 {: note}
 
 Before you begin:
@@ -489,7 +489,7 @@ Before you begin:
     ```
     {: pre}
 
-2. Check the status of automatic updates for the Ingress ALB add-on.
+2. Check the status of automatic updates for the Ingress ALB component.
     ```
     ibmcloud ks alb-autoupdate-get --cluster <cluster_name_or_ID>
     ```
@@ -529,15 +529,15 @@ Before you begin:
     ```
     {: screen}
 
-You can manage automatic updates of the Ingress ALB add-on in the following ways. **Note**: To run the following commands, you must have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+You can manage automatic updates of the Ingress ALB component in the following ways. **Note**: To run the following commands, you must have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 * Disable automatic updates.
     ```
     ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
     ```
     {: pre}
-* Manually update your Ingress ALB add-on.
-    1. If an update is available and you want to update the add-on, first check the [changelog for the latest version of the Ingress ALB add-on](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) to verify any potentially disruptive changes.
-    2. Force a one-time update of your ALB pods. All ALB pods in the cluster are updated to the latest build version. You cannot update an individual ALB or choose which build to update the add-on to. Automatic updates remain disabled.
+* Manually update your Ingress ALBs.
+    1. If an update is available and you want to update your ALBs, first check the [changelog for the latest version of the Ingress ALB component](/docs/containers?topic=containers-cluster-components-changelog#alb_changelog) to verify any potentially disruptive changes.
+    2. Force a one-time update of your ALB pods. All ALB pods in the cluster are updated to the latest build version. You cannot update an individual ALB or choose which build to update ALBs to. Automatic updates remain disabled.
         ```
         ibmcloud ks alb-update --cluster <cluster_name_or_ID>
         ```
@@ -555,6 +555,11 @@ You can manage automatic updates of the Ingress ALB add-on in the following ways
 
 <br />
 
+
+## Updating managed add-ons
+{: #addons}
+
+Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enhance your cluster with open-source capabilities, such as Istio or Knative. The version of the open-source tool that you add to your cluster is tested by IBM and approved to be used in {{site.data.keyword.containerlong_notm}}. To update managed add-ons that you enabled in your cluster to the latest versions, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 
 ## Updating from stand-alone worker nodes to worker pools
 {: #standalone_to_workerpool}

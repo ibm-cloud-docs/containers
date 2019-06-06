@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-06"
 
 keywords: kubernetes, iks
 
@@ -344,7 +344,7 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
     *   [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress#planning).
     *   [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability).
 
-3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#kubernetes-service-cli), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
+3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
 
 ### Free clusters
 {: #regions_free}

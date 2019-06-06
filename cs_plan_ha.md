@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-06"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -131,7 +131,7 @@ If you [create your multizone cluster with the CLI](/docs/containers?topic=conta
 ### What are some changes from how I currently manage my clusters?
 {: #mz_new_ways}
 
-With the introduction of worker pools, you can use a new set of APIs and commands to manage your cluster. You can see these new commands in the [CLI documentation page](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#kubernetes-service-cli), or in your terminal by running `ibmcloud ks help`.
+With the introduction of worker pools, you can use a new set of APIs and commands to manage your cluster. You can see these new commands in the [CLI documentation page](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), or in your terminal by running `ibmcloud ks help`.
 {: shortdesc}
 
 The following table compares the old and new methods for a few common cluster management actions.
