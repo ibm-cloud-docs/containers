@@ -59,7 +59,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tbody>
 <tr>
 <td>470 / 329</td>
-<td>03 June 2019</td>
+<td>06 June 2019</td>
 <td>Fixes Berkeley DB vulnerabilities for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457).
 </td>
 <td>-</td>

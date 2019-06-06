@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-06"
 
 ---
 
@@ -264,9 +264,10 @@ lastupdated: "2019-06-05"
 * [Updating worker nodes](/docs/containers?topic=containers-update#worker_node)
   * [Updating worker nodes in the console](/docs/containers?topic=containers-update#worker_up_console)
 * [Updating machine types](/docs/containers?topic=containers-update#machine_type)
-* [Updating cluster add-ons](/docs/containers?topic=containers-update#addons)
+* [Updating cluster components](/docs/containers?topic=containers-update#components)
   * [Managing automatic updates for the Fluentd for logging add-on](/docs/containers?topic=containers-update#logging-up)
   * [Managing automatic updates for the Ingress ALB add-on](/docs/containers?topic=containers-update#alb)
+* [Updating cluster add-ons](/docs/containers?topic=containers-update#addons)
 * [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
 [Assigning cluster access](/docs/containers?topic=containers-users#users)
