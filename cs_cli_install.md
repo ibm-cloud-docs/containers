@@ -312,6 +312,8 @@ Now, you can run `kubectl` commands to manage your clusters in {{site.data.keywo
 <br />
 
 
+
+
 ## Updating the CLI
 {: #cs_cli_upgrade}
 
