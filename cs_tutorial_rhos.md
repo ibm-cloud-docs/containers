@@ -347,7 +347,7 @@ With Red Hat OpenShift on IBM Cloud, you can create a new app and expose your ap
         {: screen}
     3.  List the pods. Pods with `build` in the name are jobs that **Completed** as part of the new app build process. Make sure that the **hello-world** pod status is **Running**.
         ```
-        oc get pods -n watson
+        oc get pods -n hello-world
         ```
         {: pre}
 
