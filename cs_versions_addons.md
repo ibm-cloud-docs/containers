@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -57,6 +57,13 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>470 / 330</td>
+<td>07 June 2019</td>
+<td>Fixes Berkeley DB vulnerabilities for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457).
+</td>
+<td>-</td>
+</tr>
 <tr>
 <td>470 / 329</td>
 <td>06 June 2019</td>
