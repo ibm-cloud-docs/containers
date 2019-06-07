@@ -48,7 +48,7 @@ You can use various external services and catalog services with a standard Kuber
 <td>Cluster activity logs</td>
 <td>Monitor the administrative activity made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</td>
 </tr>
-<tr id="appid">
+<tr>
 <td>{{site.data.keyword.appid_full}}</td>
 <td>Authentication</td>
 <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
