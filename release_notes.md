@@ -40,11 +40,18 @@ Use these release notes to learn about the latest changes to the {{site.data.key
 </thead>
 <tbody>
 <tr>
+  <td>7 June 2019</td>
+  <td><ul>
+  <li><strong>Access to the Kubernetes master trough the private service endpoint</strong>: Added [steps](/docs/containers?topic=containers-clusters#access_on_prem) to expose the private service endpoint through a private load balancer. After you complete these steps, your authorized cluster users can access the Kubernetes master from a VPN or {{site.data.keyword.Bluemix_notm}} Direct Link connection.</li>
+  <li><strong>{{site.data.keyword.BluDirectLink}}</strong>: Added {{site.data.keyword.Bluemix_notm}} Direct Link to the [VPN connectivity](/docs/containers?topic=containers-vpn) and [hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp) pages as a way to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.</li>
+  <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `ingress-auth` image to build 330](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
+  </ul></td>
+</tr>
+<tr>
   <td>6 June 2019</td>
   <td><ul>
   <li><strong>Fluentd changelog</strong>: Added a [Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog).</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to build 470](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-  <li><strong>{{site.data.keyword.BluDirectLink}}</strong>: Added {{site.data.keyword.Bluemix_notm}} Direct Link}} to the [VPN connectivity](/docs/containers?topic=containers-vpn) and [hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp) pages as a way to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.</li>
   </ul></td>
 </tr>
 <tr>
