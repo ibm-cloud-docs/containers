@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -378,6 +378,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
 
 
 <br />
+
 
 
 ## Limitations
