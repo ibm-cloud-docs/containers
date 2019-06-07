@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Deprecated: Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}
+# Deprecated: Dedicated cloud
 {: #dedicated}
 
 {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_dedicated_notm}} is deprecated. You cannot create clusters in an {{site.data.keyword.Bluemix_dedicated_notm}} environment. To create clusters in {{site.data.keyword.Bluemix_notm}} Public, see [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started).
@@ -592,7 +592,7 @@ If you want to use public IP addresses for the Ingress ALB, ensure that an enter
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see Persistent data storage options for high availability](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support?topic=get-support-getting-customer-support).
+To review options for creating persistent storage, see [Persistent data storage options for high availability](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support?topic=get-support-getting-customer-support).
 {: shortdesc}
 
 If you choose to provision [file storage](/docs/containers?topic=containers-file_storage#file_predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support case.
