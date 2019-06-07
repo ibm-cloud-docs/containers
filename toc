@@ -110,12 +110,7 @@ IBM Cloud Kubernetes Service
 
     {: .navgroup id="reference"}
     cs_at_events.md
-
-    {: .topicgroup}
-    Deprecated: Dedicated cloud
-        cs_dedicated.md
-        [Deprecated: Running single and scalable containers](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
-
+    cs_dedicated.md
     cs_hybrid.md
 
     {: .topicgroup}

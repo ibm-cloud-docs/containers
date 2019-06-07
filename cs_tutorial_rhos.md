@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -255,6 +255,10 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
 Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to help operate your cluster, such as the OpenShift console, Prometheus, and Grafana. For the beta, to access these services, you can use the local host of a [route ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html). The default route domain names follow a cluster-specific pattern of `<router_service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
 {:shortdesc}
 
+You can access the built-in OpenShift service routes from the [console](#openshift_services_console) or [CLI](#openshift_services_cli). You might want to use the console to navigate through Kubernetes resources in one project. By using the CLI, you can list resources such as routes across projects.
+
+### Accessing built-in OpenShift services from the console
+{: #openshift_services_console}
 1.  From the OpenShift web console, in the dropdown menu in the OpenShift container platform menu bar, click **Application Console**.
 2.  Select the **default** project, then in the navigation pane, click **Applications > Pods**.
 3.  Verify that the **router** pods are in a **Running** status. The router functions as the ingress point for external network traffic. You can use the router to publicly expose the services in your cluster on the router's external IP address by using a route. The router listens on the public host network interface, unlike your app pods that listen only on private IPs. The router proxies external requests for route host names to the IPs of the app pods that are identified by the service that you associated with the route host name.
@@ -267,6 +271,69 @@ Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to 
 6.  From the navigation pane, expand **Monitoring**.
 7.  Click the built-in monitoring tool that you want to access, such as **Dashboards**. The Grafana route opens, `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.<p class="note">The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.</p>
 
+### Accessing built-in OpenShift services from the CLI
+{: #openshift_services_cli}
+
+1.  From the OpenShift web console, click your profile **IAM#user.name@email.com > Copy Login Command** and paste the login command into your terminal to authenticate.
+    ```
+    oc login https://c1-e.<region>.containers.cloud.ibm.com:<port> --token=<access_token>
+    ```
+    {: pre}
+2.  Verify that your router is deployed. The router functions as the ingress point for external network traffic. You can use the router to publicly expose the services in your cluster on the router's external IP address by using a route. The router listens on the public host network interface, unlike your app pods that listen only on private IPs. The router proxies external requests for route host names to the IPs of the app pods that are identified by the service that you associated with the route host name.
+    ```
+    oc get svc router -n default
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    NAME      TYPE           CLUSTER-IP               EXTERNAL-IP     PORT(S)                      AGE
+    router    LoadBalancer   172.21.xxx.xxx   169.xx.xxx.xxx   80:30399/TCP,443:32651/TCP                      5h
+    ```
+    {: screen}
+2.  Get the **Host/Port** host name of the service route that you want to access. For example, you might want to access your Grafana dashboard to check metrics on your cluster's resource usage. The default route domain names follow a cluster-specific pattern of `<router_service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
+    ```
+    oc get route --all-namespaces
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    NAMESPACE                          NAME                HOST/PORT                                                                    PATH                  SERVICES            PORT               TERMINATION          WILDCARD
+    default                            registry-console    registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                              registry-console    registry-console   passthrough          None
+    kube-service-catalog               apiserver           apiserver-kube-service-catalog.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                        apiserver           secure             passthrough          None
+    openshift-ansible-service-broker   asb-1338            asb-1338-openshift-ansible-service-broker.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud            asb                 1338               reencrypt            None
+    openshift-console                  console             console.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                                              console             https              reencrypt/Redirect   None
+    openshift-monitoring               alertmanager-main   alertmanager-main-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                alertmanager-main   web                reencrypt            None
+    openshift-monitoring               grafana             grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                          grafana             https              reencrypt            None
+    openshift-monitoring               prometheus-k8s      prometheus-k8s-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                   prometheus-k8s      web                reencrypt
+    ```
+    {: screen}
+3.  **Registry one-time update**: To make your internal registry console accessible from the internet, edit the `registry-console` deployment to use the public API endpoint of your cluster master as the OpenShift provider URL. The public API endpoint has the same format as the private API endpoint, but includes an additional `-e` in the URL.
+    ```
+    oc edit deploy registry-console -n default
+    ```
+    {: pre}
+    
+    In the `Pod Template.Containers.registry-console.Environment.OPENSHIFT_OAUTH_PROVIDER_URL` field, add `-e` after the `c1` such as in `https://ce.eu-gb.containers.cloud.ibm.com:20399`.
+    ```
+    Name:                   registry-console
+    Namespace:              default
+    ...
+    Pod Template:
+      Labels:  name=registry-console
+      Containers:
+       registry-console:
+        Image:      registry.eu-gb.bluemix.net/armada-master/iksorigin-registrconsole:v3.11.98-6
+        ...
+        Environment:
+          OPENSHIFT_OAUTH_PROVIDER_URL:  https://c1-e.eu-gb.containers.cloud.ibm.com:20399
+          ...
+    ```
+    {: screen}
+4.  In your web browser, open the route that you want to access, for example: `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.
+
+<br>
 Now you're in the built-in OpenShift app! For example, if you're in Grafana, you might check out your namespace CPU usage or other graphs. To access other built-in tools, open their route host names.
 
 <br />
@@ -376,6 +443,287 @@ If you took a break from the last lesson and started a new terminal, make sure t
         {: pre}
 
 
+
+<br />
+
+
+## Lesson 4: Setting up LogDNA and Sysdig add-ons to monitor cluster health
+{: #openshift_logdna_sysdig}
+
+Because OpenShift sets up stricter [Security Context Constraints (SCC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html) by default than native Kubernetes, you might find that some apps or cluster add-ons that you use on native Kubernetes cannot be deployed on OpenShift in the same way. In particular, many images require to run as a `root` user or as a privileged container, which is prevented in OpenShift by default. In this lesson, you learn how to modify the default SCCs by creating privileged security accounts and updating the `securityContext` in the pod specification to use two popular {{site.data.keyword.containerlong_notm}} add-ons: {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}}.
+{: shortdesc}
+
+Before you begin, log in to your cluster as an administrator.
+1.  Open your OpenShift console at `https://<master_URL>/console`. For example, `https://c0.containers.cloud.ibm.com:23652/console`.
+2.  Click your profile **IAM#user.name@email.com > Copy Login Command** and paste the copied `oc` login command into your terminal to authenticate via the CLI.
+3.  Download the admin configuration files for your cluster.
+    ```
+    ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin
+    ```
+    {: pre}
+    
+    When the download of the configuration files is finished, a command is displayed that you can copy and paste to set the path to the local Kubernetes configuration file as an environment variable.
+
+    Example for OS X:
+
+    ```
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-<datacenter>-<cluster_name>.yml
+    ```
+    {: screen}
+4.  Continue the lesson to set up [{{site.data.keyword.la_short}}](#openshift_logdna) and [{{site.data.keyword.mon_short}}](#openshift_sysdig).
+
+### Lesson 4a: Setting up LogDNA
+{: #openshift_logdna}
+
+Set up a project and privileged service account for {{site.data.keyword.la_full_notm}}. Then, create a {{site.data.keyword.la_short}} instance in your {{site.data.keyword.Bluemix_notm}} account. To integrate your {{site.data.keyword.la_short}} instance with your OpenShift cluster, you must modify the daemon set that is deployed to use the privileged service account to run as root.
+{: shortdesc}
+
+1.  Set up the project and privileged service account for LogDNA.
+    1.  As a cluster administrator, create a `logdna` project.
+        ```
+        oc adm new-project logdna
+        ```
+        {: pre}
+    2.  Target the project so that the subsequent resources that you create are in the `logdna` project namespace.
+        ```
+        oc project logdna
+        ```
+        {: pre}
+    3.  Create a service account for the `logdna` project.
+        ```
+        oc create serviceaccount logdna
+        ```
+        {: pre}
+    4.  Add a privileged security context constraint to the service account for the `logdna` project.<p class="note">If you want to check what authorization the `privileged` SCC policy gives the service account, run `oc describe scc privileged`. For more information about SCCs, see the [OpenShift docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).</p>
+        ```
+        oc adm policy add-scc-to-user privileged -n logdna -z logdna
+        ```
+        {: pre}
+2.  Create your {{site.data.keyword.la_full_notm}} instance in the same resource group as your cluster. Select a pricing plan that determines the retention period for your logs, such as `lite` which retains logs for 0 days. The region does not have to match the region of your cluster. For more information, see [Provisioning an instance](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-provision) and [Pricing plans](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about#overview_pricing_plans).
+    ```
+    ibmcloud resource service-instance-create <service_instance_name> logdna (lite|7-days|14-days|30-days) <region> [-g <resource_group>]
+    ```
+    {: pre}
+    
+    Example command:
+    ```
+    ibmcloud resource service-instance-create logdna-openshift logdna lite us-south
+    ```
+    {: pre}
+    
+    In the output, note the service instance **ID**, which is in the format `crn:v1:bluemix:public:logdna:<region>:<ID_string>::`.
+    ```
+    Service instance <name> was created.
+                 
+    Name:         <name>   
+    ID:           crn:v1:bluemix:public:logdna:<region>:<ID_string>::   
+    GUID:         <guid>   
+    Location:     <region>   
+    ...
+    ```
+    {: screen}    
+3.  Get your {{site.data.keyword.la_short}} instance ingestion key. The LogDNA ingestion key is used to open a secure web socket to the LogDNA ingestion server and to authenticate the logging agent with the {{site.data.keyword.la_short}} service.
+    1.  Create a service key for your LogDNA instance.
+        ```
+        ibmcloud resource service-key-create <key_name> Administrator --instance-id <logdna_instance_ID>
+        ```
+        {: pre}
+    2.  Note the **ingestion_key** of your service key.
+        ```
+        ibmcloud resource service-key <key_name>
+        ```
+        {: pre}
+        
+        Example output:
+        ```
+        Name:          <key_name>  
+        ID:            crn:v1:bluemix:public:logdna:<region>:<ID_string>::    
+        Created At:    Thu Jun  6 21:31:25 UTC 2019   
+        State:         active   
+        Credentials:                                   
+                       apikey:                   <api_key_value>      
+                       iam_apikey_description:   Auto-generated for key <ID>     
+                       iam_apikey_name:          <key_name>       
+                       iam_role_crn:             crn:v1:bluemix:public:iam::::role:Administrator      
+                       iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::<ID_string>     
+                       ingestion_key:            111a11aa1a1a11a1a11a1111aa1a1a11    
+        ```
+        {: screen}
+4.  Create a Kubernetes secret to store your LogDNA ingestion key for your service instance.
+    ```
+     oc create secret generic logdna-agent-key --from-literal=logdna-agent-key=<logDNA_ingestion_key>
+    ```
+    {: pre}
+5.  Create a Kubernetes daemon set to deploy the LogDNA agent on every worker node of your Kubernetes cluster. The LogDNA agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod. By default, logs are collected from all namespaces, including `kube-system`, and automatically forwarded to the {{site.data.keyword.la_short}} service.
+    ```
+    oc create -f https://assets.us-south.logging.cloud.ibm.com/clients/logdna-agent-ds.yaml
+    ```
+    {: pre}
+6.  Edit the LogDNA agent daemon set configuration to refer to the service account that you previously created and to set the security context to privileged.
+    ```
+    oc edit ds logdna-agent
+    ```
+    {: pre}
+    
+    In the configuration file, add the following specifications.
+    *   In `spec.template.spec`, add `serviceAccount: logdna`.
+    *   In `spec.template.spec.containers`, add `securityContext: privileged: true`.
+
+    Example output:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: DaemonSet
+    spec:
+      ...
+      template:
+        ...
+        spec:
+          containers:
+            image: logdna/logdna-agent:latest
+            imagePullPolicy: Always
+            name: logdna-agent
+            securityContext:
+              privileged: true
+          serviceAccount: logdna
+          ...
+    ```
+    {: screen}
+7.  Verify that the `logdna-agent` pod on each node is in a **Running** status.
+    ```
+    oc get pods
+    ```
+    {: pre}
+8.  From the [{{site.data.keyword.Bluemix_notm}} Observability > Logging console](https://cloud.ibm.com/observe/logging), in the row for your {{site.data.keyword.la_short}} instance, click **View LogDNA**. The LogDNA dashboard opens, and you can begin to analyze your logs.
+
+For more information about how to use {{site.data.keyword.la_short}}, see the [Next steps docs](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube_next_steps).
+
+### Lesson 4b: Setting up Sysdig
+{: #openshift_sysdig}
+
+Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keyword.Bluemix_notm}} account. To integrate your {{site.data.keyword.mon_short}} instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.
+{: shortdesc}
+
+1.  Create your {{site.data.keyword.mon_full_notm}} instance in the same resource group as your cluster. Select a pricing plan that determines the retention period for your logs, such as `lite`. The region does not have to match the region of your cluster. For more information, see [Provisioning an instance](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-provision).
+    ```
+    ibmcloud resource service-instance-create <service_instance_name> sysdig-monitor (lite|graduated-tier) <region> [-g <resource_group>]
+    ```
+    {: pre}
+    
+    Example command:
+    ```
+    ibmcloud resource service-instance-create sysdig-openshift sysdig-monitor lite us-south
+    ```
+    {: pre}
+    
+    In the output, note the service instance **ID**, which is in the format `crn:v1:bluemix:public:logdna:<region>:<ID_string>::`.
+    ```
+    Service instance <name> was created.
+                 
+    Name:         <name>   
+    ID:           crn:v1:bluemix:public:sysdig-monitor:<region>:<ID_string>::   
+    GUID:         <guid>   
+    Location:     <region>   
+    ...
+    ```
+    {: screen}    
+2.  Get your {{site.data.keyword.mon_short}} instance access key. The Sysdig access key is used to open a secure web socket to the Sysdig ingestion server and to authenticate the monitoring agent with the {{site.data.keyword.mon_short}} service.
+    1.  Create a service key for your Sysdig instance.
+        ```
+        ibmcloud resource service-key-create <key_name> Administrator --instance-id <sysdig_instance_ID>
+        ```
+        {: pre}
+    2.  Note the **Sysdig Access Key** and **Sysdig Collector Endpoint** of your service key.
+        ```
+        ibmcloud resource service-key <key_name>
+        ```
+        {: pre}
+        
+        Example output:
+        ```
+        Name:          <key_name>  
+        ID:            crn:v1:bluemix:public:sysdig-monitor:<region>:<ID_string>::    
+        Created At:    Thu Jun  6 21:31:25 UTC 2019   
+        State:         active   
+        Credentials:                                   
+                       Sysdig Access Key:           11a1aa11-aa1a-1a1a-a111-11a11aa1aa11      
+                       Sysdig Collector Endpoint:   ingest.<region>.monitoring.cloud.ibm.com      
+                       Sysdig Customer Id:          11111      
+                       Sysdig Endpoint:             https://<region>.monitoring.cloud.ibm.com  
+                       apikey:                   <api_key_value>      
+                       iam_apikey_description:   Auto-generated for key <ID>     
+                       iam_apikey_name:          <key_name>       
+                       iam_role_crn:             crn:v1:bluemix:public:iam::::role:Administrator      
+                       iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::<ID_string>       
+        ```
+        {: screen}
+3.  Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster. The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components. 
+
+    In the following command, replace *SYSDIG_ACCESS_KEY* and *COLLECTOR_ENDPOINT* with the values from the service key that you created earlier. For *TAG_DATA*, you can associate tags with your Sysdig agent, such as *role:service,location:us-south* to help you identify the environment that the metrics come from.
+
+    ```
+    curl -sL https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/oks/install-agent-k8s.sh | bash -s -- -a SYSDIG_ACCESS_KEY -c COLLECTOR_ENDPOINT -t TAG_DATA -ac 'sysdig_capture_enabled: false' --openshift
+    ```
+    {: pre}
+    
+    Example output: 
+    ```
+    * Detecting operating system
+    * Downloading Sysdig cluster role yaml
+    * Downloading Sysdig config map yaml
+    * Downloading Sysdig daemonset v2 yaml
+    * Creating project: ibm-observe
+    * Creating sysdig-agent serviceaccount in project: ibm-observe
+    * Creating sysdig-agent access policies
+    * Creating sysdig-agent secret using the ACCESS_KEY provided
+    * Retreiving the IKS Cluster ID and Cluster Name
+    * Setting cluster name as openshift
+    * Setting ibm.containers-kubernetes.cluster.id 1fbd0c2ab7dd4c9bb1f2c2f7b36f5c47
+    * Updating agent configmap and applying to cluster
+    * Setting tags
+    * Setting collector endpoint
+    * Adding additional configuration to dragent.yaml
+    * Enabling Prometheus
+    configmap/sysdig-agent created
+    * Deploying the sysdig agent
+    daemonset.extensions/sysdig-agent created
+    ```
+    {: screen}
+        
+4.  Verify that the `sydig-agent` pods on each node show that **1/1** pods are ready and that each pod has a **Running** status.
+    ```
+    oc get pods
+    ```
+    {: pre}
+    
+    Example output:
+    ```
+    NAME                 READY     STATUS    RESTARTS   AGE
+    sysdig-agent-qrbcq   1/1       Running   0          1m
+    sysdig-agent-rhrgz   1/1       Running   0          1m
+    ```
+    {: screen}
+5.  From the [{{site.data.keyword.Bluemix_notm}} Observability > Monitoring console](https://cloud.ibm.com/observe/logging), in the row for your {{site.data.keyword.mon_short}} instance, click **View Sysdig**. The Sysdig dashboard opens, and you can begin to analyze your cluster metrics.
+
+For more information about how to use {{site.data.keyword.mon_short}}, see the [Next steps docs](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster_next_steps).
+
+### Optional: Cleaning up
+{: #openshift_logdna_sysdig_cleanup}
+
+Remove the {{site.data.keyword.la_short}} and {{site.data.keyword.mon_short}} instances from your cluster and {{site.data.keyword.Bluemix_notm}} account. Note that unless you store the logs and metrics in [persistent storage](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-archiving), you cannot access this information after you delete the instances from your account.
+{: shortdesc}
+
+1.  Clean up the {{site.data.keyword.la_short}} and {{site.data.keyword.mon_short}} instances in your cluster by removing the projects that you created for them. When you delete a project, its resources such as service accounts and daemon sets are also removed.
+    ```
+    oc delete project logdna
+    ```
+    {: pre}
+    ```
+    oc delete project ibm-observe
+    ```
+    {: pre}
+2.  Remove the instances from your {{site.data.keyword.Bluemix_notm}} account.
+    *   [Removing a {{site.data.keyword.la_short}} instance](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-remove).
+    *   [Removing a {{site.data.keyword.mon_short}} instance](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-remove).
 
 <br />
 
