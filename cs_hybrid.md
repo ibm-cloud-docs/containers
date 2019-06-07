@@ -31,13 +31,13 @@ subcollection: containers
 # Hybrid cloud
 {: #hybrid_iks_icp}
 
-If you have an {{site.data.keyword.Bluemix}} Private account, you can use it with select {{site.data.keyword.Bluemix_notm}} services, including {{site.data.keyword.containerlong}}. For more information, see the blog on [Hybrid experience across {{site.data.keyword.Bluemix_notm}} Private and IBM Public Cloud![External link icon](../icons/launch-glyph.svg "External link icon")](http://ibm.biz/hybridJune2018).
+If you have an {{site.data.keyword.Bluemix}} Private account, you can use it with select {{site.data.keyword.Bluemix_notm}} services, including {{site.data.keyword.containerlong}}. For more information, see the blog on [Hybrid experience across {{site.data.keyword.Bluemix_notm}} Private and IBM Public Cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](http://ibm.biz/hybridJune2018).
 {: shortdesc}
 
 You understand the [{{site.data.keyword.Bluemix_notm}} offerings](/docs/containers?topic=containers-cs_ov#differentiation) and developed your Kubernetes strategy for what [workloads to run on the cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Now, you can connect your public and private cloud by using the strongSwan VPN service or {{site.data.keyword.BluDirectLink}}.
 
 * The [strongSwan VPN service](#hybrid_vpn) securely connects your Kubernetes cluster with an on-premises network through a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite.
-* With [{{site.data.keyword.Bluemix_notm}} Direct Link}}](#vpn_dl), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
+* With [{{site.data.keyword.Bluemix_notm}} Direct Link](#vpn_dl), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
 
 After you connect your public and private cloud, you can [reuse your private packages for public containers](#hybrid_ppa_importer).
 
@@ -49,7 +49,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 
 1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_notm}} Public or use an existing one. To create a cluster, choose between the following options:
     - [Create a standard cluster from the console or CLI](/docs/containers?topic=containers-clusters#clusters_ui).
-    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
+    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
 
 2.  In your {{site.data.keyword.containerlong_notm}} cluster, [follow the instructions to set up the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn_configure).
 
@@ -74,13 +74,13 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
     ```
     {: pre}
 
-4.  [Create a cluster in {{site.data.keyword.Bluemix_notm}} Private![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html).
+4.  [Create a cluster in {{site.data.keyword.Bluemix_notm}} Private ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html).
 
 5.  In your {{site.data.keyword.Bluemix_notm}} Private cluster, deploy the strongSwan IPSec VPN service.
 
     1.  [Complete the strongSwan IPSec VPN workarounds ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html).
 
-    2.  [Set up the strongSwan VPN Helm chart![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html) in your private cluster.
+    2.  [Set up the strongSwan VPN Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html) in your private cluster.
 
         *  In the configuration parameters, set the **Remote gateway** field to the value of the portable public IP address that you set as the `loadbalancerIP` of your {{site.data.keyword.containerlong_notm}} cluster.
 
@@ -118,7 +118,7 @@ To connect your public cloud and your on-premises {{site.data.keyword.Bluemix}} 
 * {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated
 * {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated Hosting
 
-To choose a {{site.data.keyword.Bluemix_notm}} Direct Link offering and set up a {{site.data.keyword.Bluemix_notm}} Direct Link connection, see [Get Started with IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-#directlink) in the {{site.data.keyword.Bluemix_notm}} Direct Link documentation.
+To choose a {{site.data.keyword.Bluemix_notm}} Direct Link offering and set up a {{site.data.keyword.Bluemix_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-#directlink) in the {{site.data.keyword.Bluemix_notm}} Direct Link documentation.
 
 **What's next?**</br>
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).
@@ -157,9 +157,9 @@ To deploy an {{site.data.keyword.Bluemix_notm}} Private image in a cluster in {{
 
     **For IBM WebSphere Application Server Liberty**:
 
-    1.  Instead of obtaining the image from IBM Passport Advantage, use the [Docker Hub image ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/websphere-liberty/). For instructions on getting a production license, see [Upgrading the image from Docker Hub to a production image![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade).
+    1.  Instead of obtaining the image from IBM Passport Advantage, use the [Docker Hub image ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/websphere-liberty/). For instructions on getting a production license, see [Upgrading the image from Docker Hub to a production image ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade).
 
-    2.  Follow the [Liberty Helm chart instructions![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html).
+    2.  Follow the [Liberty Helm chart instructions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html).
 
 2.  Verify that the **STATUS** of the Helm chart shows `DEPLOYED`. If not, wait a few minutes, and then try again.
     ```
