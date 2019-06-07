@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks, helm
 
@@ -109,7 +109,7 @@ You can use various external services and catalog services with a standard Kuber
 <td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms. Istio on {{site.data.keyword.containerlong}} provides a one-step installation of Istio into your cluster through a managed add-on. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. To get started, see [Using the managed Istio add-on (beta)](/docs/containers?topic=containers-istio).</td>
 </tr>
 <tr>
-<td>Knative</td> 
+<td>Knative</td>
 <td>Serverless apps</td>
 <td>[Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others with the goal of extending the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. The platform uses a consistent approach across programming languages and frameworks to abstract the operational burden of building, deploying and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. For more information, see [Deploying serverless apps with Knative](/docs/containers?topic=containers-serverless-apps-knative). </td>
 </tr>
@@ -125,6 +125,34 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 </tbody>
 </table>
+
+<br />
+
+
+## Database services
+{: #database_services}
+
+<table summary="The table shows available services that you can add to your cluster to add database capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
+<caption>Database services</caption>
+<thead>
+<tr>
+<th>Service</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+  <tr>
+    <td>{{site.data.keyword.blockchainfull_notm}} Platform 2.0 beta</td>
+    <td>Deploy and manage your own {{site.data.keyword.blockchainfull_notm}} Platform on {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.blockchainfull_notm}} Platform 2.0, you can host {{site.data.keyword.blockchainfull_notm}} networks or create organizations that can join other {{site.data.keyword.blockchainfull_notm}} 2.0 networks. For more information about how to set up {{site.data.keyword.blockchainfull_notm}} in {{site.data.keyword.containerlong_notm}}, see [About {{site.data.keyword.blockchainfull_notm}} Platform free 2.0 beta](/docs/services/blockchain?topic=blockchain-ibp-console-overview#ibp-console-overview).</td>
+  </tr>
+<tr>
+  <td>Cloud databases</td>
+  <td>You can choose between a variety of {{site.data.keyword.Bluemix_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.Bluemix_notm}} catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=databases).  </td>
+  </tr>
+  </tbody>
+  </table>
+
+<br />
 
 
 ## DevOps services
@@ -180,6 +208,31 @@ You can use various external services and catalog services with a standard Kuber
 
 <br />
 
+
+## Hybrid cloud services
+{: #hybrid_cloud_services}
+
+<table summary="The table shows available services that you can use to connect your cluster to on-premises data centers. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
+<caption>Hybrid cloud services</caption>
+<thead>
+<tr>
+<th>Service</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+  <tr>
+    <td>{{site.data.keyword.BluDirectLink}}</td>
+    <td>[{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) allows you to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.Bluemix_notm}} Direct Link offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose a {{site.data.keyword.Bluemix_notm}} Direct Link offering and set up a {{site.data.keyword.Bluemix_notm}} Direct Link connection, see [Get Started with IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-#directlink) in the {{site.data.keyword.Bluemix_notm}} Direct Link documentation.</td>
+  </tr>
+<tr>
+  <td>strongSwan IPSec VPN Service</td>
+  <td>Set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html) that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.</td>
+  </tr>
+  </tbody>
+  </table>
+
+<br />
 
 
 ## Logging and monitoring services
@@ -331,29 +384,3 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
   </tr>
 </tbody>
 </table>
-
-<br />
-
-
-## Database services
-{: #database_services}
-
-<table summary="The table shows available services that you can add to your cluster to add database capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
-<caption>Database services</caption>
-<thead>
-<tr>
-<th>Service</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-  <tr>
-    <td>{{site.data.keyword.blockchainfull_notm}} Platform 2.0 beta</td>
-    <td>Deploy and manage your own {{site.data.keyword.blockchainfull_notm}} Platform on {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.blockchainfull_notm}} Platform 2.0, you can host {{site.data.keyword.blockchainfull_notm}} networks or create organizations that can join other {{site.data.keyword.blockchainfull_notm}} 2.0 networks. For more information about how to set up {{site.data.keyword.blockchainfull_notm}} in {{site.data.keyword.containerlong_notm}}, see [About {{site.data.keyword.blockchainfull_notm}} Platform free 2.0 beta](/docs/services/blockchain?topic=blockchain-ibp-console-overview#ibp-console-overview).</td>
-  </tr>
-<tr>
-  <td>Cloud databases</td>
-  <td>You can choose between a variety of {{site.data.keyword.Bluemix_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.Bluemix_notm}} catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=databases).  </td>
-  </tr>
-  </tbody>
-  </table>

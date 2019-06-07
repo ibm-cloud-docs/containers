@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-06-07"
 
 ---
 
@@ -793,7 +793,7 @@ lastupdated: "2019-06-06"
 ## {{site.data.keyword.containerlong_notm}} CLI plug-in reference
 {: #sitemap-cli-plugin}
 
-[Command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#kubernetes-service-cli)
+[Command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
 * [Using the beta command structure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta)
 * [API commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#api_commands)
 * [CLI plug-in usage commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_plug-in_commands)
@@ -952,7 +952,8 @@ lastupdated: "2019-06-06"
     * [Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018](/docs/containers?topic=containers-changelog#1716_1512)
     * [Changelog for 1.7.16_1511, released 19 April 2018](/docs/containers?topic=containers-changelog#1716_1511)
 
-[Cluster add-ons changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
+[Fluentd and Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
+* [Fluentd add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 * [Ingress ALB add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 
 ## Locations
@@ -988,11 +989,12 @@ lastupdated: "2019-06-06"
 {: #sitemap-supported-integrations}
 
 [Supported integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+* [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
 * [DevOps services](/docs/containers?topic=containers-supported_integrations#devops_services)
+* [Hybrid cloud services](/docs/containers?topic=containers-supported_integrations#hybrid_cloud_services)
 * [Logging and monitoring services](/docs/containers?topic=containers-supported_integrations#health_services)
 * [Security services](/docs/containers?topic=containers-supported_integrations#security_services)
 * [Storage services](/docs/containers?topic=containers-supported_integrations#storage_services)
-* [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
 
 ## FAQs
 {: #sitemap-faqs}

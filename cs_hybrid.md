@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,12 @@ subcollection: containers
 If you have an {{site.data.keyword.Bluemix}} Private account, you can use it with select {{site.data.keyword.Bluemix_notm}} services, including {{site.data.keyword.containerlong}}. For more information, see the blog on [Hybrid experience across {{site.data.keyword.Bluemix_notm}} Private and IBM Public Cloud![External link icon](../icons/launch-glyph.svg "External link icon")](http://ibm.biz/hybridJune2018).
 {: shortdesc}
 
-You understand the [{{site.data.keyword.Bluemix_notm}} offerings](/docs/containers?topic=containers-cs_ov#differentiation) and developed your Kubernetes strategy for what [workloads to run on the cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Now, you can [connect your public and private cloud](#hybrid_vpn) and [reuse your private packages for public containers](#hybrid_ppa_importer).
+You understand the [{{site.data.keyword.Bluemix_notm}} offerings](/docs/containers?topic=containers-cs_ov#differentiation) and developed your Kubernetes strategy for what [workloads to run on the cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Now, you can connect your public and private cloud by using the strongSwan VPN service or {{site.data.keyword.BluDirectLink}}.
+
+* The [strongSwan VPN service](#hybrid_vpn) securely connects your Kubernetes cluster with an on-premises network through a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite.
+* With [{{site.data.keyword.Bluemix_notm}} Direct Link}}](#vpn_dl), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
+
+After you connect your public and private cloud, you can [reuse your private packages for public containers](#hybrid_ppa_importer).
 
 ## Connecting your public and private cloud with the strongSwan VPN
 {: #hybrid_vpn}
@@ -99,6 +104,27 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 
 *   [Run your licensed software images in public clusters](#hybrid_ppa_importer).
 *   To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.Bluemix_notm}} Public and {{site.data.keyword.Bluemix_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
+
+
+## Connecting your public and private cloud with {{site.data.keyword.Bluemix_notm}} Direct Link
+{: #hybrid_dl}
+
+With [{{site.data.keyword.BluDirectLink}}](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
+{: shortdesc}
+
+To connect your public cloud and your on-premises {{site.data.keyword.Bluemix}} Private instance, you can use one of the four offerings:
+* {{site.data.keyword.Bluemix_notm}} Direct Link Connect
+* {{site.data.keyword.Bluemix_notm}} Direct Link Exchange
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated Hosting
+
+To choose a {{site.data.keyword.Bluemix_notm}} Direct Link offering and set up a {{site.data.keyword.Bluemix_notm}} Direct Link connection, see [Get Started with IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-#directlink) in the {{site.data.keyword.Bluemix_notm}} Direct Link documentation.
+
+**What's next?**</br>
+* [Run your licensed software images in public clusters](#hybrid_ppa_importer).
+* To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.Bluemix_notm}} Public and {{site.data.keyword.Bluemix_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
+
+<br />
 
 
 ## Running {{site.data.keyword.Bluemix_notm}} Private images in public Kubernetes containers

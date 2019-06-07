@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,7 @@ Use these release notes to learn about the latest changes to the {{site.data.key
   <td><ul>
   <li><strong>Fluentd changelog</strong>: Added a [Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog).</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to build 470](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
+  <li><strong>{{site.data.keyword.BluDirectLink}}</strong>: Added {{site.data.keyword.Bluemix_notm}} Direct Link}} to the [VPN connectivity](/docs/containers?topic=containers-vpn) and [hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp) pages as a way to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.</li>
   </ul></td>
 </tr>
 <tr>

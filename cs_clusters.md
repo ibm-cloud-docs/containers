@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -97,7 +97,7 @@ Prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.
   * To use the private service endpoint only or the public and private service endpoints (run internet-facing workloads or extend your on-premises data center):
     1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure (SoftLayer) account.
     2. [Enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
-    3. To run `kubectl` commands against your cluster over an IPSec VPN connection or through DirectLink, you must access the master through the private service endpoint. However, communication with the Kubernetes master must go through the `166.X.X.X` IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal `10.X.X.X` IP address range to the Kubernetes master.
+    <p class="note">The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a [VPN connection](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) or [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.Bluemix_notm}} Direct Link. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.Bluemix_notm}} Direct Link connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB. For more information, see [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem).</p>
 
   * To use the public service endpoint only (run internet-facing workloads):
     1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
@@ -254,7 +254,7 @@ Use the {{site.data.keyword.Bluemix_notm}} CLI or the {{site.data.keyword.Bluemi
   * To create a cluster in which you can run internet-facing workloads:
     * If VRF and service endpoints are enabled in your {{site.data.keyword.Bluemix_notm}} account, select **Both private & public endpoints**.
     * If you cannot or do not want to enable VRF, select **Public endpoint only**.
-  * To create a cluster that extends your on-premises data center only, or a cluster that extends your on-premises data center and provides limited public access with edge worker nodes, select **Both private & public endpoints** or **Private endpoint only**. Ensure that you have enabled VRF and service endpoints in your {{site.data.keyword.Bluemix_notm}} account.
+  * To create a cluster that extends your on-premises data center only, or a cluster that extends your on-premises data center and provides limited public access with edge worker nodes, select **Both private & public endpoints** or **Private endpoint only**. Ensure that you have enabled VRF and service endpoints in your {{site.data.keyword.Bluemix_notm}} account. Note that if you enable the private service endpoint only, you must [expose the master endpoint through a private network load balancer](#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
   * To create a cluster that extends your on-premises data center and provides limited public access with a gateway device, select **Public endpoint only**.
 
 9. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
@@ -465,72 +465,18 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
 After your cluster is created, you can begin working with your cluster by configuring your CLI session.
 {: shortdesc}
 
-
-
-### Accessing clusters that run internet-facing workloads
+### Accessing clusters through the public service endpoint
 {: #access_internet}
 
-1. Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
+To work with your cluster, set the cluster you created as the context for a CLI session to run `kubectl` commands.
+{: shortdesc}
 
-  If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
-  {: tip}
-  1. Get the command to set the environment variable and download the Kubernetes configuration files.
-      ```
-      ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
-      ```
-      {: pre}
-      When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
-
-      Example for OS X:
-      ```
-      export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-      ```
-      {: screen}
-  2. Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
-  3. Verify that the `KUBECONFIG` environment variable is set properly.
-      Example for OS X:
-      ```
-      echo $KUBECONFIG
-      ```
-      {: pre}
-
-      Output:
-      ```
-      /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-      ```
-      {: screen}
-
-5. Launch your Kubernetes dashboard with the default port `8001`.
-  1. Set the proxy with the default port number.
-      ```
-      kubectl proxy
-      ```
-      {: pre}
-
-      ```
-      Starting to serve on 127.0.0.1:8001
-      ```
-      {: screen}
-
-  2.  Open the following URL in a web browser to see the Kubernetes dashboard.
-      ```
-      http://localhost:8001/ui
-      ```
-      {: codeblock}
-
-### Accessing clusters that extend your on-premises datacenter
-{: #access_on_prem}
-
-1. If you enabled the private service endpoint only, verify that you are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a VPN connection.
-
-2. If your network access is protected by a company firewall:
+1. If your network is protected by a company firewall, allow access to the {{site.data.keyword.Bluemix_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports.
   1. [Allow access to the public endpoints for the `ibmcloud` API and the `ibmcloud ks` API in your firewall](/docs/containers?topic=containers-firewall#firewall_bx).
-  2. [Allow your authorized cluster users to run `kubectl` commands](/docs/containers?topic=containers-firewall#firewall_kubectl) to access the master through the public only, private only, or public and private service endpoints. If you enabled the private service endpoint only, your cluster users must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to run `kubectl` commands.
+  2. [Allow your authorized cluster users to run `kubectl` commands](/docs/containers?topic=containers-firewall#firewall_kubectl) to access the master through the public only, private only, or public and private service endpoints.
   3. [Allow your authorized cluster users to run `calicotl` commands](/docs/containers?topic=containers-firewall#firewall_calicoctl) to manage Calico network policies in your cluster.
 
-3. If you have a firewall on the private network, [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
-
-4. Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
+2. Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
 
   If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
   {: tip}
@@ -560,7 +506,7 @@ After your cluster is created, you can begin working with your cluster by config
       ```
       {: screen}
 
-5. Launch your Kubernetes dashboard with the default port `8001`.
+3. Launch your Kubernetes dashboard with the default port `8001`.
   1. Set the proxy with the default port number.
       ```
       kubectl proxy
@@ -578,7 +524,133 @@ After your cluster is created, you can begin working with your cluster by config
       ```
       {: codeblock}
 
+### Accessing clusters through the private service endpoint
+{: #access_on_prem}
 
+The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a [VPN connection](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) or [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.Bluemix_notm}} Direct Link. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.Bluemix_notm}} Direct Link connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB.
+{: shortdesc}
+
+1. If your network is protected by a company firewall, allow access to the {{site.data.keyword.Bluemix_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports.
+  1. [Allow access to the public endpoints for the `ibmcloud` API and the `ibmcloud ks` API in your firewall](/docs/containers?topic=containers-firewall#firewall_bx).
+  2. [Allow your authorized cluster users to run `kubectl` commands](/docs/containers?topic=containers-firewall#firewall_kubectl). Note that you cannot test the connection to your cluster in step 6 until you expose the private service endpoint of the master to the cluster by using a private NLB.
+
+2. Get the private service endpoint URL and port for your cluster.
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  In this example output, the **Private Service Endpoint URL** is `https://c1.private.us-east.containers.cloud.ibm.com:25073`.
+  ```
+  Name:                           setest
+  ID:                             b8dcc56743394fd19c9f3db7b990e5e3
+  State:                          normal
+  Created:                        2019-04-25T16:03:34+0000
+  Location:                       wdc04
+  Master URL:                     https://c1.private.us-east.containers.cloud.ibm.com:25073
+  Public Service Endpoint URL:    -
+  Private Service Endpoint URL:   https://c1.private.us-east.containers.cloud.ibm.com:25073
+  Master Location:                Washington D.C.
+  ...
+  ```
+  {: screen}
+
+3. Create a YAML file that is named `kube-api-via-nlb.yaml`. This YAML creates a private `LoadBalancer` service and exposes the private service endpoint through that NLB. Replace `<private_service_endpoint_port>` with the port you found in the previous step.
+  ```
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: kube-api-via-nlb
+    annotations:
+      service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: private
+    namespace: default
+  spec:
+    type: LoadBalancer
+    ports:
+    - protocol: TCP
+      port: <private_service_endpoint_port>
+      targetPort: <private_service_endpoint_port>
+  ---
+  kind: Endpoints
+  apiVersion: v1
+  metadata:
+    name: kube-api-via-nlb
+  subsets:
+    - addresses:
+        - ip: 172.20.0.1
+      ports:
+        - port: 2040
+  ```
+  {: codeblock}
+
+4. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private service endpoint from a VPN or {{site.data.keyword.Bluemix_notm}} Direct Link, you must connect to the cluster master and create the NLB by using the public service endpoint or Kubernetes dashboard.
+  * If you enabled the private service endpoint only, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private service endpoint of the master.
+    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/).
+    2.  From the menu bar, select the account that you want to use.
+    3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
+    4.  On the **Clusters** page, click the cluster that you want to access.
+    5.  From the cluster detail page, click the **Kubernetes Dashboard**.
+    6.  Click **+ Create**.
+    7.  Select **Create from file**, upload the `kube-api-via-nlb.yaml` file, and click **Upload**.
+    8.  In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, note the `10.x.x.x` address. This IP address exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+
+  * If you also enabled the public service endpoint, you already have access to the master.
+    1. Create the NLB and endpoint.
+      ```
+      kubectl apply -f kube-api-via-nlb.yaml
+      ```
+      {: pre}
+    2. Verify that the `kube-api-via-nlb` NLB is created. In the output, note the `10.x.x.x` **EXTERNAL-IP** address. This IP address exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+      ```
+      kubectl get svc -o wide
+      ```
+      {: pre}
+
+      In this example output, the IP address for the private service endpoint of the Kubernetes master is `10.186.92.42`.
+      ```
+      NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE   SELECTOR
+      kube-api-via-nlb         LoadBalancer   172.21.150.118   10.186.92.42     443:32235/TCP    10m   <none>
+      ...
+      ```
+      {: screen}
+
+  <p class="note">If you want to connect to the master by using the [strongSwan VPN service](/docs/containers?topic=containers-vpn#vpn-setup), note the `172.21.x.x` **Cluster IP** to use in the next step instead. Because the strongSwan VPN pod runs inside your cluster, it can access the NLB by using the IP address of the internal cluster IP service. In your `config.yaml` file for the strongSwan Helm chart, ensure that the Kubernetes service subnet CIDR, `172.21.0.0/16`, is listed in the `local.subnet` setting.</p>
+
+5. On the client machines where you or your users run `kubectl` commands, add the NLB IP address and the private service endpoint URL to the `/etc/hosts` file. Do not include any ports in the IP address and URL and do not include `https://` in the URL.
+  * For OSX and Linux users:
+    ```
+    sudo nano /etc/hosts
+    ```
+    {: pre}
+  * For Windows users:
+    ```
+    notepad C:\Windows\System32\drivers\etc\hosts
+    ```
+    {: pre}
+
+    Depending on your local machine permissions, you might need to run Notepad as an administrator to edit the hosts file.
+    {: tip}
+
+  Example text to add:
+  ```
+  10.186.92.42      c1.private.us-east.containers.cloud.ibm.com
+  ```
+  {: codeblock}
+
+6. Verify that you are connected to the private network through a VPN or {{site.data.keyword.Bluemix_notm}} Direct Link connection.
+
+7. Verify that the `kubectl` commands run properly with your cluster through the private service endpoint by checking the Kubernetes CLI server version.
+  ```
+  kubectl version --short
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Client Version: v1.13.6
+  Server Version: v1.13.6
+  ```
+  {: screen}
 
 <br />
 
@@ -607,7 +679,7 @@ Then, you can check out the following network configuration steps for your clust
 ### Extend your on-premises data center to a cluster and allow limited public access using edge nodes and Calico network policies
 {: #next_steps_calico}
 
-* Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up [DirectLink](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) or the [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn). DirectLink allows communication between apps and services in your cluster and an on-premises network over the private network, while strongSwan allows communication through an encrypted VPN tunnel over the public network.
+* Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) or the [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup). {{site.data.keyword.Bluemix_notm}} Direct Link allows communication between apps and services in your cluster and an on-premises network over the private network, while strongSwan allows communication through an encrypted VPN tunnel over the public network.
 * Isolate public networking workloads by creating an [edge worker pool](/docs/containers?topic=containers-edge) of worker nodes that are connected to public and private VLANs.
 * Expose your apps with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
 * [Create Calico host network policies](/docs/containers?topic=containers-network_policies#isolate_workers) to block public access to pods, isolate your cluster on the private network, and allow access to other {{site.data.keyword.Bluemix_notm}} services.
@@ -624,5 +696,5 @@ Then, you can check out the following network configuration steps for your clust
 {: #next_steps_extend}
 
 * If you have a firewall on the private network, [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
-* Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up [DirectLink](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link).
+* Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link).
 * Expose your apps on the private network with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
