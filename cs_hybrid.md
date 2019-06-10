@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-07"
+lastupdated: "2019-06-10"
 
 keywords: kubernetes, iks
 
@@ -118,7 +118,7 @@ To connect your public cloud and your on-premises {{site.data.keyword.Bluemix}} 
 * {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated
 * {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated Hosting
 
-To choose a {{site.data.keyword.Bluemix_notm}} Direct Link offering and set up a {{site.data.keyword.Bluemix_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-#directlink) in the {{site.data.keyword.Bluemix_notm}} Direct Link documentation.
+To choose a {{site.data.keyword.Bluemix_notm}} Direct Link offering and set up a {{site.data.keyword.Bluemix_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.Bluemix_notm}} Direct Link documentation.
 
 **What's next?**</br>
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).
