@@ -252,7 +252,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
 ## Lesson 2: Accessing built-in OpenShift services
 {: #openshift_access_oc_services}
 
-Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to help operate your cluster, such as the OpenShift console, Prometheus, and Grafana. For the beta, to access these services, you can use the local host of a [route ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html). The default route domain names follow a cluster-specific pattern of `<router_service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
+Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to help operate your cluster, such as the OpenShift console, Prometheus, and Grafana. For the beta, to access these services, you can use the local host of a [route ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html). The default route domain names follow a cluster-specific pattern of `<service_name>-<namespace>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
 {:shortdesc}
 
 You can access the built-in OpenShift service routes from the [console](#openshift_services_console) or [CLI](#openshift_services_cli). You might want to use the console to navigate through Kubernetes resources in one project. By using the CLI, you can list resources such as routes across projects.
@@ -291,7 +291,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
     router    LoadBalancer   172.21.xxx.xxx   169.xx.xxx.xxx   80:30399/TCP,443:32651/TCP                      5h
     ```
     {: screen}
-2.  Get the **Host/Port** host name of the service route that you want to access. For example, you might want to access your Grafana dashboard to check metrics on your cluster's resource usage. The default route domain names follow a cluster-specific pattern of `<router_service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
+2.  Get the **Host/Port** host name of the service route that you want to access. For example, you might want to access your Grafana dashboard to check metrics on your cluster's resource usage. The default route domain names follow a cluster-specific pattern of `<service_name>-<namespace>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
     ```
     oc get route --all-namespaces
     ```
@@ -389,7 +389,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
         hello-world-build   0/1       Completed          0          31m
         ```
         {: screen}
-4.  Set up a route so that you can publicly access the {{site.data.keyword.toneanalyzershort}} service. By default, the host name is in the format of `<service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. If you want to customize the host name, include the `--hostname=<hostname>` flag.
+4.  Set up a route so that you can publicly access the {{site.data.keyword.toneanalyzershort}} service. By default, the host name is in the format of `<service_name>-<namespace>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. If you want to customize the host name, include the `--hostname=<hostname>` flag.
     1.  Create a route for the **hello-world** service.
         ```
         oc create route edge --service=hello-world -n hello-world
@@ -403,12 +403,12 @@ If you took a break from the last lesson and started a new terminal, make sure t
         Example output:
         ```
         NAME          HOST/PORT                         PATH                                        SERVICES      PORT       TERMINATION   WILDCARD
-        hello-world   hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud    hello-world   8080-tcp   edge/Allow    None
+        hello-world   hello-world-hello.world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud    hello-world   8080-tcp   edge/Allow    None
         ```
         {: screen}
 5.  Access your app.
     ```
-    curl https://hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud
+    curl https://hello-world-hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud
     ```
     {: pre}
     
