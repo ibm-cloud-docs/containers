@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Overview of use cases
 {: #cs_uc_intro}
 
-A variety of use cases show the strengths of {{site.data.keyword.containerlong_notm}} and  {{site.data.keyword.Bluemix_notm}} services when used together. These stories highlight several industries as well as types of workloads. Even though each use case is presented through the lens of a particular industry, the workloads are typical across a variety of industries. You'll see workload themes, such as: 
+Various use cases show the strengths of {{site.data.keyword.containerlong_notm}} and  {{site.data.keyword.Bluemix_notm}} services when used together. These stories highlight several industries as well as types of workloads. Even though each use case is presented through the lens of a particular industry, these workloads are typical across various industries. You see workload themes, such as: 
 * AI and machine learning
 * Data and storage
 * DevOps
@@ -58,13 +58,13 @@ A variety of use cases show the strengths of {{site.data.keyword.containerlong_n
       <td align="center"><img src="images/health.svg" alt="Icon of medical bag"/><br>Healthcare</td>
       <td><ul>
      <li>[Migrate workloads from inefficient VMs to easily operated containers for patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)</li>
-      <li>[Securely host sensitive data while growing research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)</li>
+      <li>[Securely host sensitive data while you grow research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)</li>
       </ul></td>
       </tr>
       <tr>
          <td align="center"><img src="images/retail.svg" alt="Icon of shopping cart with currency symbol"/><br>Retail</td>
          <td><ul>
-        <li>[Share data via APIs with global partners to drive omni-channel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
+        <li>[Share data via APIs with global business partners to drive omni-channel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
          <li>[Optimize inventory expenses with digital insights to sales behavior](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
               </ul></td>
           </tr>
@@ -72,7 +72,7 @@ A variety of use cases show the strengths of {{site.data.keyword.containerlong_n
        <td align="center"><img src="images/transport.svg" alt="Icon of railroad car with containers"/><br>Transportation</td>
            <td><ul>
           <li>[Build and deploy HR site with AI in less than 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline)</li>
-           <li>[Increase availability of worldwide systems for partners](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
+           <li>[Increase availability of worldwide systems for business partners](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
       </tr>
   </tbody>
   </table>

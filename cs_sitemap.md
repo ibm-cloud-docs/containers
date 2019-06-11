@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-06-07"
+lastupdated: "2019-06-11"
 
 ---
 
@@ -119,7 +119,7 @@ lastupdated: "2019-06-07"
   * [How can I organize my deployments to make them easier to update and manage?](/docs/containers?topic=containers-strategy#deploy_organize)
   * [What else can I do to prepare my app for deployment?](/docs/containers?topic=containers-strategy#deploy_prep)
 * [Packing your app](/docs/containers?topic=containers-strategy#packaging)
-* [Keeping your app up to date](/docs/containers?topic=containers-strategy#updating)
+* [Keeping your app up-to-date](/docs/containers?topic=containers-strategy#updating)
   * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
   * [What app update strategies can I use?](/docs/containers?topic=containers-strategy#updating_apps)
 * [Monitoring your cluster performance](/docs/containers?topic=containers-strategy#monitoring_health)
@@ -230,8 +230,8 @@ lastupdated: "2019-06-07"
   * [Creating a standard cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
   * [Creating a standard cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
 * [Accessing your cluster](/docs/containers?topic=containers-clusters#access_cluster)
-  * [Accessing clusters that run internet-facing workloads](/docs/containers?topic=containers-clusters#access_internet)
-  * [Accessing clusters that extend your on-premises datacenter](/docs/containers?topic=containers-clusters#access_on_prem)
+  * [Accessing clusters through the public service endpoint](/docs/containers?topic=containers-clusters#access_internet)
+  * [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem)
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
   * [Run internet-facing app workloads in a cluster](/docs/containers?topic=containers-clusters#next_steps_internet)
   * [Extend your on-premises datacenter to a cluster and allow limited public access using edge nodes and Calico network policies](/docs/containers?topic=containers-clusters#next_steps_calico)

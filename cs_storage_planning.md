@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ subcollection: containers
 Before you can decide what type of storage is the right solution for you, you must understand your app requirements, the type of data that you want to store, and how often you want to access this data.
 {: shortdesc}
 
-1. Decide if your data must be permanently stored, or if your data can be removed at any given time.
+1. Decide whether your data must be permanently stored, or if your data can be removed at any time.
    - **Persistent storage:** Your data must still be available, even if the container, the worker node, or the cluster is removed. Use persistent storage in the following scenarios:
        - Stateful apps
        - Core business data
@@ -65,11 +65,11 @@ Before you can decide what type of storage is the right solution for you, you mu
    - **Cold data:** Data that is rarely accessed, if at all. Common use cases are archives, long-term backups, historical data.
    - **Frozen data:** Data that is not accessed and that you need to keep due to legal reasons.
 
-   If you cannot predict the frequency or the frequency does not follow a strict pattern, determine if your workloads are read-heavy, write-heavy, or balanced. Then, look at the storage option that fits your workload and investigate what storage tier gives you the flexibility that you need. For example, {{site.data.keyword.cos_full_notm}} provides a `flex` storage class that considers how frequent data is accessed in a month and takes this measurement into account to optimize your monthly billing.
+   If you cannot predict the frequency or the frequency does not follow a strict pattern, determine whether your workloads are read-heavy, write-heavy, or balanced. Then, look at the storage option that fits your workload and investigate what storage tier gives you the flexibility that you need. For example, {{site.data.keyword.cos_full_notm}} provides a `flex` storage class that considers how frequent data is accessed in a month and takes into account this measurement to optimize your monthly billing.
    {: tip}
 
 5. Investigate if your data must be shared across multiple app instances, zones, or regions.
-   - **Access across pods:** When you use Kubernetes persistent volumes to access your storage, you can determine the number of pods that can mount the volume at the same time. Some storage solutions, such as block storage, can be accessed by one pod at a time only. Other storage solutions allow you to share the same volume across multiple pods.
+   - **Access across pods:** When you use Kubernetes persistent volumes to access your storage, you can determine the number of pods that can mount the volume at the same time. Some storage solutions, such as block storage, can be accessed by one pod at a time only. With other storage solutions, you can share volume across multiple pods.
    - **Access across zones and regions:** You might require your data to be accessible across zones or regions. Some storage solutions, such as file and block storage, are data center-specific and cannot be shared across zones in a multizone cluster setup.
 
    If you want to make your data accessible across zones or regions, make sure to consult your legal department to verify that your data can be stored in multiple zones or a different country.
@@ -77,7 +77,7 @@ Before you can decide what type of storage is the right solution for you, you mu
 
 6. Understand other storage characteristics that impact your choice.
    - **Consistency:** The guarantee that a read operation returns the latest version of a file. Storage solutions can provide `strong consistency` when you are guaranteed to always receive the latest version of a file, or `eventual consistency` when the read operation might not return the latest version. You often find eventual consistency in geographically distributed systems where a write operation first must be replicated across all instances.
-   - **Performance:** The time it takes to complete a read or write operation.
+   - **Performance:** The time that it takes to complete a read or write operation.
    - **Durability:** The guarantee that a write operation that is committed to your storage survives permanently and does not get corrupted or lost, even if gigabytes or terabytes of data are written to your storage at the same time.
    - **Resiliency:** The ability to recover from an outage and continue operations, even if a hardware or software component failed. For example, your physical storage experiences a power outage, a network outage, or is destroyed during a natural disaster.
    - **Availability:** The ability to provide access to your data, even if a data center or a region is unavailable. Availability for your data is usually achieved by adding redundancy and setting up failover mechanisms.
@@ -131,7 +131,7 @@ The following image shows available non-persistent data storage options in {{sit
 <tr>
 <td style="text-align:left">Performance</td>
 <td style="text-align:left">High</td>
-<td style="text-align:left">High with lower latency when using SSD</td>
+<td style="text-align:left">High with lower latency when you use SSD</td>
 </tr>
 <tr>
 <td style="text-align:left">Consistency</td>
@@ -161,7 +161,7 @@ The following image shows available non-persistent data storage options in {{sit
 <tr>
 <td style="text-align:left">Common use cases</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Local image cache</li><li style="margin:0px; padding:0px">Container logs</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">High performance local cache</li><li style="margin:0px; padding:0px">Access files from the worker node file system</li><li style="margin:0px; padding:0px">Unit tests</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">High-performance local cache</li><li style="margin:0px; padding:0px">Access files from the worker node file system</li><li style="margin:0px; padding:0px">Unit tests</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Non-ideal use cases</td>
@@ -255,7 +255,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <tr>
 <td style="text-align:left">Common use cases</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Mass or single file storage</li><li style="margin:0px; padding:0px">File sharing across a single zone cluster</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stateful sets</li><li style="margin:0px; padding:0px">Backing storage when you run your own database</li><li style="margin:0px; padding:0px">High performance access for single pods</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stateful sets</li><li style="margin:0px; padding:0px">Backing storage when you run your own database</li><li style="margin:0px; padding:0px">High-performance access for single pods</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Non-ideal use cases</td>
@@ -322,8 +322,8 @@ The following image shows the options that you have in {{site.data.keyword.conta
 </tr>
 <tr>
 <td style="text-align:left">Performance</td>
-<td style="text-align:left">High for read operations. Predictable due to assigned IOPS and size when using non-SDS machines.</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Close to bare metal performance for sequential read and write operations when using SDS machines. </li><li style="margin:0px; padding:0px">Provides [profiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) to run high performance databases</li><li style="margin:0px; padding:0px">Possibility to create a storage layer with different performance profiles that your app can choose from.</li></ul> </td>
+<td style="text-align:left">High for read operations. Predictable due to assigned IOPS and size when you use non-SDS machines.</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Close to bare metal performance for sequential read and write operations when you use SDS machines. </li><li style="margin:0px; padding:0px">Provides [profiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) to run high-performance databases</li><li style="margin:0px; padding:0px">Possibility to create a storage layer with different performance profiles that your app can choose from.</li></ul> </td>
 <td style="text-align:left">High if deployed to the same data center as your app.</td>
 </tr>
 <tr>
@@ -336,19 +336,19 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <td style="text-align:left">Durability</td>
 <td style="text-align:left">Very high as data slices are dispersed across a cluster of storage
 nodes. Every node stores only a part of the data. </td>
-<td style="text-align:left">Very high as three copies of your data is maintained at all times.</td>
+<td style="text-align:left">Very high as three copies of your data are maintained at all times.</td>
 <td style="text-align:left">High</td>
 </tr>
 <tr>
 <td style="text-align:left">Resiliency</td>
-<td style="text-align:left">High as data slices are dispersed across 3 zones or regions. Medium, when set up in a single zone only.</td>
-<td style="text-align:left">High when set up with replication across 3 zones. Medium, when storing data in a single zone only.</td>
+<td style="text-align:left">High as data slices are dispersed across three zones or regions. Medium, when set up in a single zone only.</td>
+<td style="text-align:left">High when set up with replication across three zones. Medium, when you store data in a single zone only.</td>
 <td style="text-align:left">Depends on the DBaaS and your setup. </td>
 </tr>
 <tr>
 <td style="text-align:left">Availability</td>
 <td style="text-align:left">High due to the distribution across zones or regions. </td>
-<td style="text-align:left">High when replicating data across 3 worker nodes in different zones.</td>
+<td style="text-align:left">High when you replicate data across three worker nodes in different zones.</td>
 <td style="text-align:left">High if you set up multiple instances. </td>
 </tr>
 <tr>
@@ -366,7 +366,7 @@ nodes. Every node stores only a part of the data. </td>
 <tr>
 <td style="text-align:left">Common use cases</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Static big data</li><li style="margin:0px; padding:0px">Static multimedia content</li><li style="margin:0px; padding:0px">Web apps</li><li style="margin:0px; padding:0px">Backups</li><li style="margin:0px; padding:0px">Archives</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stateful sets</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Common storage solution when running apps across multiple cloud providers</li><li style="margin:0px; padding:0px">Backing storage when you run your own database</li><li style="margin:0px; padding:0px">High performance access for single pods</li><li style="margin:0px; padding:0px">Shared storage access across multiple pods and worker nodes</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stateful sets</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Common storage solution when you run apps across multiple cloud providers</li><li style="margin:0px; padding:0px">Backing storage when you run your own database</li><li style="margin:0px; padding:0px">High-performance access for single pods</li><li style="margin:0px; padding:0px">Shared storage access across multiple pods and worker nodes</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Relational and non-relational databases</li><li style="margin:0px; padding:0px">Geographically distributed data</li></ul></td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-11"
 
 ---
 
@@ -27,7 +27,7 @@ lastupdated: "2019-05-31"
 Istio on {{site.data.keyword.containerlong}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools.
 {: shortdesc}
 
-With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.Bluemix_notm}} automatically keeps all your Istio components up to date.
+With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.Bluemix_notm}} automatically keeps all your Istio components up-to-date.
 
 ## Understanding Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_ov}
@@ -38,10 +38,10 @@ With one click, you can get all Istio core components, additional tracing, monit
 [Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/info/istio) is an open service mesh platform to connect, secure, control, and observe microservices on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
-When you shift monolith applications to a distributed microservice architecture, a set of new challenges arise such as how to control the traffic of your microservices, do dark launches and canary rollouts of your services, handle failures, secure the service communication, observe the services, and enforce consistent access policies across the fleet of services. To address these difficulties, you can leverage a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by allowing you to manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
+When you shift monolith applications to a distributed microservice architecture, a set of new challenges arises such as how to control the traffic of your microservices, do dark launches and canary rollouts of your services, handle failures, secure the service communication, observe the services, and enforce consistent access policies across the fleet of services. To address these difficulties, you can leverage a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by so that you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 
-For example, using Istio in your microservice mesh can help you:
-- Achieve better visibility into the apps running in your cluster
+For example, by using Istio in your microservice mesh can help you:
+- Achieve better visibility into the apps that run in your cluster
 - Deploy canary versions of apps and control the traffic that is sent to them
 - Enable automatic encryption of data that is transferred between microservices
 - Enforce rate limiting and attribute-based whitelist and blacklist policies
@@ -58,7 +58,7 @@ The managed Istio add-on is classified as beta and might be unstable or change f
 {: note}
 
 **What does this look like in my cluster?**</br>
-When you install the Istio add-on, the Istio control and data planes use the VLANs that your cluster is already connected to. Configuration traffic flows over the private network within your cluster, and does not require you to open any additional ports or IP addresses in your firewall. If you expose your Istio-managed apps with an Istio Gateway, external traffic requests to the apps flows over the public VLAN.
+When you install the Istio add-on, the Istio control and data planes use the VLANs that your cluster is already connected to. Configuration traffic flows over the private network within your cluster, and does not require you to open any additional ports or IP addresses in your firewall. If you expose your Istio-managed apps with an Istio Gateway, external traffic requests to the apps flow over the public VLAN.
 
 **How does the update process work?**</br>
 The Istio version in the managed add-on is tested by {{site.data.keyword.Bluemix_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. To update your Istio components to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}, you can follow the steps in [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).  
@@ -113,10 +113,10 @@ Install Istio managed add-ons in an existing cluster.
 {: shortdesc}
 
 **Before you begin**</br>
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [Create or use an existing standard cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). Additionally, the cluster and worker nodes must run at least the minimum supported version of Kubernetes, which you can review by running `ibmcloud ks addon-versions --addon istio`.
 * [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-* If are using an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
+* If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 
 ### Installing managed Istio add-ons in the CLI
 {: #istio_install_cli}
@@ -273,7 +273,7 @@ The `reviews` microservice has multiple versions:
 * `v2` calls the `ratings` microservice and displays ratings as 1 to 5 black stars.
 * `v3` calls the `ratings` microservice and displays ratings as 1 to 5 red stars.
 
-The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/). The BookInfo app is also already exposed on a public IP ingress address by an Istio Gateway. Note that although the BookInfo app can help you get started, the app is not meant for production use.
+The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/). The BookInfo app is also already exposed on a public IP ingress address by an Istio Gateway. Although the BookInfo app can help you get started, the app is not meant for production use.
 
 Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookinfo` managed add-ons](#istio_install) in a cluster.
 
@@ -316,7 +316,7 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
     ```
     {: pre}
 
-4. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
+4. Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
 
 ### Understanding what happened
 {: #istio_bookinfo_understanding}
@@ -326,7 +326,7 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 
 <dl>
 <dt>`Gateway`</dt>
-<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace, that acts as the ingress entry point for HTTP/TCP traffic for BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
+<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace that acts as the ingress entry point for HTTP/TCP traffic for BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
 </br></br>To see the configuration file for the BookInfo gateway, run the following command.
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
@@ -351,7 +351,7 @@ Next, you can [expose BookInfo by using the IBM-provided Ingress subdomain](#ist
 ## Logging, monitoring, tracing, and visualizing Istio
 {: #istio_health}
 
-To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kiali dashboards that are installed in the `istio-extras` add-on or deploy LogDNA and Sysdig as a third-party services to your worker nodes.
+To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kiali dashboards that are installed in the `istio-extras` add-on or deploy LogDNA and Sysdig as third-party services to your worker nodes.
 {: shortdesc}
 
 ### Launching the Grafana, Jaeger, and Kiali dashboards
@@ -418,7 +418,7 @@ To get started, set up LogDNA for your cluster by following the steps in [Managi
 Gain operational visibility into the performance and health of your Istio-managed apps by deploying Sysdig to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}.
 {: shortdesc}
 
-With Istio on {{site.data.keyword.containerlong_notm}}, the managed `istio` add-on installs Prometheus into your cluster. The `istio-mixer-telemetry` pods in your cluster are annotated with a Prometheus endpoint so that Prometheus can aggregates all telemetry data for your pods. When you deploy a Sysdig agent to every worker node in your cluster, Sysdig is already automatically enabled to detect and scrape the data from these Prometheus endpoints to display them in your {{site.data.keyword.Bluemix_notm}} monitoring dashboard.
+With Istio on {{site.data.keyword.containerlong_notm}}, the managed `istio` add-on installs Prometheus into your cluster. The `istio-mixer-telemetry` pods in your cluster are annotated with a Prometheus endpoint so that Prometheus can aggregate all telemetry data for your pods. When you deploy a Sysdig agent to every worker node in your cluster, Sysdig is already automatically enabled to detect and scrape the data from these Prometheus endpoints to display them in your {{site.data.keyword.Bluemix_notm}} monitoring dashboard.
 
 Since all of the Prometheus work is done, all that is left for you is to deploy Sysdig in your cluster.
 
@@ -430,7 +430,7 @@ Since all of the Prometheus work is done, all that is left for you is to deploy 
 
 4. Search for `Istio` and select one of Sysdig's predefined Istio dashboards.
 
-For more information on referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out the Sysdig blog post [How to monitor Istio, the Kubernetes service mesh ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/blog/monitor-istio/). Look for the section called "Monitoring Istio: reference metrics and dashboards".
+For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out the [How to monitor Istio, the Kubernetes service mesh ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/blog/monitor-istio/). Look for the section called "Monitoring Istio: reference metrics and dashboards" blog post.
 
 <br />
 
@@ -441,12 +441,12 @@ For more information on referencing metrics and dashboards, monitoring Istio int
 Ready to manage your own apps by using Istio? Before you deploy your app, you must first decide how you want to inject the Envoy proxy sidecars into app pods.
 {: shortdesc}
 
-Each app pod must be running an Envoy proxy sidecar so that the microservices can be included in the service mesh. You can make sure sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/).
+Each app pod must be running an Envoy proxy sidecar so that the microservices can be included in the service mesh. You can make sure that sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/).
 
 ### Enabling automatic sidecar injection
 {: #istio_sidecar_automatic}
 
-When automatic sidecar injection is enabled, a namespace listens for any new deployments and automatically modifies the pod template specification so that app pods are created with Envoy proxy sidecar containers. Enable automatic sidecar injection for a namespace when you plan to deploy multiple apps that you want to integrate with Istio into that namespace. Note that automatic sidecar injection is not enabled for any namespaces by default in the Istio managed add-on.
+When automatic sidecar injection is enabled, a namespace listens for any new deployments and automatically modifies the pod template specification so that app pods are created with Envoy proxy sidecar containers. Enable automatic sidecar injection for a namespace when you plan to deploy multiple apps that you want to integrate with Istio into that namespace. Automatic sidecar injection is not enabled for any namespaces by default in the Istio managed add-on.
 
 To enable automatic sidecar injection for a namespace:
 
@@ -462,7 +462,7 @@ To enable automatic sidecar injection for a namespace:
   ```
   {: pre}
 
-3. Deploy apps into the labeled namespace, or re-deploy apps that are already in the namespace.
+3. Deploy apps into the labeled namespace, or redeploy apps that are already in the namespace.
   * To deploy an app into the labeled namespace:
     ```
     kubectl apply <myapp>.yaml --namespace <namespace>
@@ -474,7 +474,7 @@ To enable automatic sidecar injection for a namespace:
     ```
     {: pre}
 
-5. If you have not created a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
+5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
 
   1. Define a service for the app.
     ```
@@ -512,7 +512,7 @@ To enable automatic sidecar injection for a namespace:
     ```
     {: pre}
 
-The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container running alongside your app container.
+The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container that runs alongside your app container.
 
 ### Manually injecting sidecars
 {: #istio_sidecar_manual}
@@ -532,7 +532,7 @@ To manually inject sidecars into a deployment:
   ```
   {: pre}
 
-3. Inject the Envoy sidecar into you app deployment YAML.
+3. Inject the Envoy sidecar into your app deployment YAML.
   ```
   istioctl kube-inject -f <myapp>.yaml | kubectl apply -f -
   ```
@@ -544,7 +544,7 @@ To manually inject sidecars into a deployment:
   ```
   {: pre}
 
-5. If you have not created a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
+5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
 
   1. Define a service for the app.
     ```
@@ -582,7 +582,7 @@ To manually inject sidecars into a deployment:
     ```
     {: pre}
 
-The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container running alongside your app container.
+The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container that runs alongside your app container.
 
 <br />
 
@@ -733,7 +733,7 @@ Publicly expose your Istio-managed apps by creating an Istio gateway, a virtual 
   </tr>
   <tr>
   <td><code>gateways</code></td>
-  <td>Note that <code>my-gateway</code> is specified so that the gateway can apply these virtual service routing rules to the <code>istio-ingressgateway</code> load balancer.<td>
+  <td>The <code>my-gateway</code> is specified so that the gateway can apply these virtual service routing rules to the <code>istio-ingressgateway</code> load balancer.<td>
   </tr>
   <tr>
   <td><code>http.match.uri.exact</code></td>
@@ -795,7 +795,7 @@ Publicly expose your Istio-managed apps by creating an Istio gateway, a virtual 
   ```
   {: codeblock}
 
-In review, you created a gateway called `my-gateway`. This gateway uses the existing `istio-ingressgateway` load balancer service to expose your app. The `istio-ingressgateway` load balancer uses the rules that you defined in the `my-virtual-service` virtual service to route traffic to your app. Finally, you created a host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your Istio routing rules. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
+In review, you created a gateway that is called `my-gateway`. This gateway uses the existing `istio-ingressgateway` load balancer service to expose your app. The `istio-ingressgateway` load balancer uses the rules that you defined in the `my-virtual-service` virtual service to route traffic to your app. Finally, you created a host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your Istio routing rules. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
 
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/).
 {: tip}
@@ -815,7 +815,7 @@ The Istio version in the managed Istio add-on is tested by {{site.data.keyword.B
 If you're finished working with Istio, you can clean up the Istio resources in your cluster by uninstalling Istio add-ons.
 {:shortdesc}
 
-Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinfo`, and [`knative`](/docs/containers?topic=containers-serverless-apps-knative) add-ons. The `istio-extras` add-on is a dependency for the `istio-sample-bookinfo` add-on.
+The `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinfo`, and [`knative`](/docs/containers?topic=containers-serverless-apps-knative) add-ons. The `istio-extras` add-on is a dependency for the `istio-sample-bookinfo` add-on.
 {: important}
 
 **Optional**: Any resources that you created or modified in the `istio-system` namespace and all Kubernetes resources that were automatically generated by custom resource definitions (CRDs) are removed. If you want to keep these resources, save them before you uninstall the `istio` add-ons.
@@ -887,7 +887,7 @@ Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-samp
 ### Uninstalling other Istio installations in your cluster
 {: #istio_uninstall_other}
 
-If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, clean up that Istio installation before enabling the managed Istio add-ons in the cluster. To check whether Istio is already in a cluster, run `kubectl get namespaces` and look for the `istio-system` namespace in the output.
+If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, clean up that Istio installation before you enable the managed Istio add-ons in the cluster. To check whether Istio is already in a cluster, run `kubectl get namespaces` and look for the `istio-system` namespace in the output.
 {: shortdesc}
 
 - If you installed Istio by using the {{site.data.keyword.Bluemix_notm}} Istio Helm chart:

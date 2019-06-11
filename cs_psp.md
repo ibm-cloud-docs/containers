@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -33,7 +33,7 @@ configure policies to authorize who can create and update pods in {{site.data.ke
 **Why do I set pod security policies?**</br>
 As a cluster admin, you want to control what happens in your cluster, especially actions that affect the cluster's security or readiness. Pod security policies can help you control usage of privileged containers, root namespaces, host networking and ports, volume types, host file systems, Linux permissions such as read-only or group IDs, and more.
 
-With the the `PodSecurityPolicy` admission controller, no pods can be created until after you [authorize policies](#customize_psp). Setting up pod security policies can have unintended side-effects, so make sure to test out a deployment after you change the policy. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods. For example, if you install apps by using [Helm](/docs/containers?topic=containers-helm#public_helm_install), the Helm tiller component creates pods, and so you must have the correct pod security policy authorization.
+With the `PodSecurityPolicy` admission controller, no pods can be created until after you [authorize policies](#customize_psp). Setting up pod security policies can have unintended side-effects, so make sure to test out a deployment after you change the policy. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods. For example, if you install apps by using [Helm](/docs/containers?topic=containers-helm#public_helm_install), the Helm tiller component creates pods, and so you must have the correct pod security policy authorization.
 
 Trying to control which users have access to the {{site.data.keyword.containerlong_notm}}? See [Assigning cluster access](/docs/containers?topic=containers-users#users) to set {{site.data.keyword.Bluemix_notm}} IAM and infrastructure permissions.
 {: tip}
@@ -69,8 +69,8 @@ policies allow the users to create and update privileged and unprivileged (restr
 
 | Name | Namespace | Type | Purpose |
 |---|---|---|---|
-| `privileged-psp-user` | cluster-wide | `ClusterRoleBinding` | Enables cluster administrators, authenticated users, service accounts, and nodes to use `ibm-privileged-psp` pod security policy. |
-| `restricted-psp-user` | cluster-wide | `ClusterRoleBinding` | Enables cluster administrators, authenticated users, service accounts, and nodes to use `ibm-restricted-psp` pod security policy. |
+| `privileged-psp-user` | All | `ClusterRoleBinding` | Enables cluster administrators, authenticated users, service accounts, and nodes to use `ibm-privileged-psp` pod security policy. |
+| `restricted-psp-user` | All | `ClusterRoleBinding` | Enables cluster administrators, authenticated users, service accounts, and nodes to use `ibm-restricted-psp` pod security policy. |
 {: caption="Default RBAC resources that you can modify" caption-side="top"}
 
 You can modify these RBAC roles to remove or add administrators, users, services, or nodes to the policy.
@@ -204,17 +204,17 @@ The default `PodSecurityPolicy` resources refer to the pod security policies tha
 
 | Name | Namespace | Type | Purpose |
 |---|---|---|---|
-| `ibm-anyuid-hostaccess-psp` | cluster-wide | `PodSecurityPolicy` | Policy for full host access pod creation. |
-| `ibm-anyuid-hostaccess-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-hostaccess-psp` pod security policy. |
-| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | Policy for host path access pod creation. |
-| `ibm-anyuid-hostpath-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-hostpath-psp` pod security policy. |
-| `ibm-anyuid-psp` | cluster-wide | `PodSecurityPolicy` | Policy for any UID/GID executable pod creation. |
-| `ibm-anyuid-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-psp` pod security policy. |
-| `ibm-privileged-psp` | cluster-wide | `PodSecurityPolicy` | Policy for privileged pod creation. |
-| `ibm-privileged-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-privileged-psp` pod security policy. |
+| `ibm-anyuid-hostaccess-psp` | All | `PodSecurityPolicy` | Policy for full host access pod creation. |
+| `ibm-anyuid-hostaccess-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-hostaccess-psp` pod security policy. |
+| `ibm-anyuid-hostpath-psp` | All | `PodSecurityPolicy` | Policy for host path access pod creation. |
+| `ibm-anyuid-hostpath-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-hostpath-psp` pod security policy. |
+| `ibm-anyuid-psp` | All | `PodSecurityPolicy` | Policy for any UID/GID executable pod creation. |
+| `ibm-anyuid-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-psp` pod security policy. |
+| `ibm-privileged-psp` | All | `PodSecurityPolicy` | Policy for privileged pod creation. |
+| `ibm-privileged-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-privileged-psp` pod security policy. |
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | Enables cluster administrators, service accounts, and nodes to use `ibm-privileged-psp` pod security policy in the `kube-system` namespace. |
 | `ibm-privileged-psp-user` | `ibm-system` | `RoleBinding` | Enables cluster administrators, service accounts, and nodes to use `ibm-privileged-psp` pod security policy in the `ibm-system` namespace. |
 | `ibm-privileged-psp-user` | `kubx-cit` | `RoleBinding` | Enables cluster administrators, service accounts, and nodes to use `ibm-privileged-psp` pod security policy in the `kubx-cit` namespace. |
-| `ibm-restricted-psp` | cluster-wide | `PodSecurityPolicy` | Policy for unprivileged, or restricted, pod creation. |
-| `ibm-restricted-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-restricted-psp` pod security policy. |
+| `ibm-restricted-psp` | All | `PodSecurityPolicy` | Policy for unprivileged, or restricted, pod creation. |
+| `ibm-restricted-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-restricted-psp` pod security policy. |
 {: caption="IBM pod security policies resources that you must not modify" caption-side="top"}

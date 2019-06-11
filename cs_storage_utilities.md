@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -418,13 +418,13 @@ Use this option if you want to add different block storage configurations, add b
 
 3. Create the block storage device in the same zone that your non-SDS worker node is in.
 
-   **Example for provisioning 20GB endurance block storage with 2 IOPS per GB:**
+   **Example for provisioning 20 GB endurance block storage with two IOPS per GB:**
    ```
    ibmcloud sl block volume-order --storage-type endurance --size 20 --tier 2 --os-type LINUX --datacenter dal10
    ```
    {: pre}
 
-   **Example for provisioning 20GB performance block storage with 100 IOPS:**
+   **Example for provisioning 20 GB performance block storage with 100 IOPS:**
    ```
    ibmcloud sl block volume-order --storage-type performance --size 20 --iops 100 --os-type LINUX --datacenter dal10
    ```
@@ -499,11 +499,11 @@ Use this option if you want to add different block storage configurations, add b
 ## Attaching raw block storage to non-SDS worker nodes
 {: #attach_block}
 
-To attach the block storage device to a non-SDS worker node you must create a persistent volume (PV) with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher storage class and the details of your block storage device.
+To attach the block storage device to a non-SDS worker node, you must create a persistent volume (PV) with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher storage class and the details of your block storage device.
 {: shortdesc}
 
 **Before you begin**:
-- Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted and unmounted block storage to your non-SDS worker nodes.
+- Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted, and unmounted block storage to your non-SDS worker nodes.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **To attach raw block storage to non-SDS worker nodes**:

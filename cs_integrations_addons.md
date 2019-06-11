@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, helm
 
@@ -87,7 +87,7 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
 
    2. Save any resources created from these CRDs.
 
-4. Optional for Knative: If you modified any of the following resources, get the YAML file and save them to your local machine. Note that if you modified any of these resources but want use the installed default instead, you can delete the resource. After a few minutes, the resource is re-created with the installed default values.
+4. Optional for Knative: If you modified any of the following resources, get the YAML file and save them to your local machine. If you modified any of these resources, but you want use the installed default instead, you can delete the resource. After a few minutes, the resource is re-created with the installed default values.
   <table summary="Knative resources table">
   <caption>Knative resources</caption>
   <thead><tr><th>Resource name</th><th>Resource type</th><th>Namespace</th></tr></thead>
@@ -129,13 +129,13 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
    ```
    {: pre}
 
-7. Before continuing to the next step, verify that either resources from the add-on within the add-on namespaces or the add-on namespaces themselves are removed.
+7. Before you continue to the next step, verify that either resources from the add-on within the add-on namespaces or the add-on namespaces themselves are removed.
    * For example, if you update the `istio-extras` add-on, you might verify that the `grafana`, `kiali`, and `jaeger-*` services are removed from the `istio-system` namespace.
      ```
      kubectl get svc -n istio-system
      ```
      {: pre}
-   * For example, if you update the `knative` add-on, you might verify that the `knative-serving`, `knative-monitoring`, `knative-eventing`, `knative-build`, and `istio-system` namespaces are deleted. The namespaces might have a **STATUS** of `Terminating` for a few minutes before they are completely deleted.
+   * For example, if you update the `knative` add-on, you might verify that the `knative-serving`, `knative-monitoring`, `knative-eventing`, `knative-build`, and `istio-system` namespaces are deleted. The namespaces might have a **STATUS** of `Terminating` for a few minutes before they are deleted.
      ```
      kubectl get namespaces -w
      ```
@@ -159,7 +159,7 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
     ```
     {: pre}
 
-11. Optional for Knative: If you saved any of the resources in step 3, re-apply them.
+11. Optional for Knative: If you saved any of the resources in step 3, reapply them.
     Example command:
     ```
     kubectl apply -f config-autoscaler.yaml -n knative-serving

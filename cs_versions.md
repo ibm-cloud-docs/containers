@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -45,7 +45,7 @@ subcollection: containers
 
 **Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have a minimum of 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes, but you cannot create new clusters that use the deprecated version when the unsupported date is 30 or less days away.
 
-**Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out if your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
+**Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
 
 If you wait until your cluster is three or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than three ahead of the current version, such as 1.11 to 1.12 and then update to the latest version, 1.14. If the worker nodes run a version three or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff` or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.
 {: important}
@@ -83,7 +83,7 @@ As updates become available, you are notified when you view information about th
    - You cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.11 and you want to update to 1.14, you must update to 1.12 first.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cs_cli_install#kubectl) up-to-date.
 -  **Patch updates (x.x.4_1510)**: Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
-   - **Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) or the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to apply these security and operating system patches. Note that during an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+   - **Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) or the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to apply these security and operating system patches. During an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
    - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) yourself without waiting for the update automation to apply.
 
 </br>
@@ -107,7 +107,7 @@ For a complete list of changes, review the following information:
 ## Release history
 {: #release-history}
 
-The following table records {{site.data.keyword.containerlong_notm}} version release history. You can use this information for planning purposes, such as to estimate general time frames when a certain release might become unsupported. After the Kubernetes community releases a version update, the IBM team begins a process of hardening and testing the release for {{site.data.keyword.containerlong_notm}} environments. Availability and unsupported release dates depend on the results of these tests, community updates, security patches, and technology changes between versions. Plan to keep your cluster master and worker node version up to date according to the `n-2` version support policy.
+The following table records {{site.data.keyword.containerlong_notm}} version release history. You can use this information for planning purposes, such as to estimate general time frames when a certain release might become unsupported. After the Kubernetes community releases a version update, the IBM team begins a process of hardening and testing the release for {{site.data.keyword.containerlong_notm}} environments. Availability and unsupported release dates depend on the results of these tests, community updates, security patches, and technology changes between versions. Plan to keep your cluster master and worker node version up-to-date according to the `n-2` version support policy.
 {: shortdesc}
 
 {{site.data.keyword.containerlong_notm}} was first generally available with Kubernetes version 1.5. Projected release or unsupported dates are subject to change. To go to the version update preparation steps, click the version number.
@@ -244,7 +244,7 @@ The following table shows the actions that you must take before you update the K
 </tr>
 <tr>
 <td>Unsupported: The Kubernetes API swagger documents</td>
-<td>The `swagger/*`, `/swagger.json` and `/swagger-2.0.0.pb-v1` schema API docs are now removed in favor of the `/openapi/v2` schema API docs. The swagger docs were deprecated when the OpenAPI docs became available in Kubernetes version 1.10. Additionally, the Kubernetes API server now only aggregates OpenAPI schemas from `/openapi/v2` endpoints of aggregated API servers. The fallback to aggregate from `/swagger.json` is removed. If you installed apps that provide Kubernetes API extensions, ensure that your apps supports the `/openapi/v2` schema API docs.</td>
+<td>The `swagger/*`, `/swagger.json` and `/swagger-2.0.0.pb-v1` schema API docs are now removed in favor of the `/openapi/v2` schema API docs. The swagger docs were deprecated when the OpenAPI docs became available in Kubernetes version 1.10. Additionally, the Kubernetes API server now only aggregates OpenAPI schemas from `/openapi/v2` endpoints of aggregated API servers. The fallback to aggregate from `/swagger.json` is removed. If you installed apps that provide Kubernetes API extensions, ensure that your apps support the `/openapi/v2` schema API docs.</td>
 </tr>
 <tr>
 <td>Unsupported and deprecated: Select metrics</td>
@@ -444,7 +444,7 @@ The following table shows the actions that you must take after you update the Ku
 <ul><li><strong>apps/v1</strong>: The `apps/v1` Kubernetes API replaces the `apps/v1beta1` and `apps/v1alpha` APIs. The `apps/v1` API also replaces the `extensions/v1beta1` API for `daemonset`, `deployment`, `replicaset`, and `statefulset` resources. The Kubernetes project is deprecating and phasing out support for the previous APIs from the Kubernetes `apiserver` and the `kubectl` client.</li>
 <li><strong>networking.k8s.io/v1</strong>: The `networking.k8s.io/v1` API replaces the `extensions/v1beta1` API for NetworkPolicy resources.</li>
 <li><strong>policy/v1beta1</strong>: The `policy/v1beta1` API replaces the `extensions/v1beta1` API for `podsecuritypolicy` resources.</li></ul>
-<br><br>Update all your YAML `apiVersion` fields to use the appropriate Kubernetes API before the deprecated APIs become unsupported. Also, review the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for changes related to `apps/v1`, such as the following.
+<br><br>Update all your YAML `apiVersion` fields to use the appropriate Kubernetes API before the deprecated APIs become unsupported. Also, review the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for changes that are related to `apps/v1`, such as the following.
 <ul><li>After creating a deployment, the `.spec.selector` field is immutable.</li>
 <li>The `.spec.rollbackTo` field is deprecated. Instead, use the `kubectl rollout undo` command.</li></ul></td>
 </tr>
@@ -478,7 +478,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>kubelet cAdvisor port</td>
-<td>The [Container Advisor (cAdvisor) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/google/cadvisor) web UI that the kubelet used by starting the `--cadvisor-port` is removed from Kubernetes 1.12. If you still need to run cAdvisor, [deploy cAdvisor as a daemon set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/google/cadvisor/tree/master/deploy/kubernetes).<br><br>In the daemon set, specify the ports section so that cAdvisor can be reached via `http://node-ip:4194`, such as follows. Note that the cAdvisor pods fail until the worker nodes are updated to 1.12, because earlier versions of kubelet use host port 4194 for cAdvisor.
+<td>The [Container Advisor (cAdvisor) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/google/cadvisor) web UI that the kubelet used by starting the `--cadvisor-port` is removed from Kubernetes 1.12. If you still need to run cAdvisor, [deploy cAdvisor as a daemon set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/google/cadvisor/tree/master/deploy/kubernetes).<br><br>In the daemon set, specify the ports section so that cAdvisor can be reached via `http://node-ip:4194`, such as follows. The cAdvisor pods fail until the worker nodes are updated to 1.12 because earlier versions of kubelet use host port 4194 for cAdvisor.
 <pre class="screen"><code>ports:
           - name: http
             containerPort: 8080
@@ -629,7 +629,7 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 For clusters that run Kubernetes version 1.10.8_1530, 1.11.3_1531, or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
 {: shortdesc}
 
-You can check if your cluster has an HA master configuration by checking the cluster's master URL in the console or by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID`. If the master URL has a host name such as ` https://c2.us-south.containers.cloud.ibm.com:xxxxx` and not an IP address such as ` https://169.xx.xx.xx:xxxxx`, the cluster has an HA master configuration. You might get an HA master configuration because of an automatic master patch update or by applying an update manually. In either case, you still must review the following items to ensure that your cluster network is set up to take full advantage of the configuration.
+You can check whether your cluster has an HA master configuration by checking the cluster's master URL in the console or by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID`. If the master URL has a host name such as ` https://c2.us-south.containers.cloud.ibm.com:xxxxx` and not an IP address such as ` https://169.xx.xx.xx:xxxxx`, the cluster has an HA master configuration. You might get an HA master configuration because of an automatic master patch update or by applying an update manually. In either case, you still must review the following items to ensure that your cluster network is set up to take full advantage of the configuration.
 
 * If you have a firewall or custom Calico network policies.
 * If you are using host ports `2040` or `2041` on your worker nodes.
@@ -649,7 +649,7 @@ To allow access to the cluster master in an HA configuration, you must leave hos
 * Update any pods with `hostPort` set to `2040` or `2041` to use different ports.
 * Update any pods with `hostNetwork` set to `true` that listen on ports `2040` or `2041` to use different ports.
 
-To check if your pods are currently using ports `2040` or `2041`, target your cluster and run the following command.
+To check whether your pods are currently using ports `2040` or `2041`, target your cluster and run the following command.
 
 ```
 kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
@@ -803,10 +803,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 For clusters that run Kubernetes version 1.11 or later, `containerd` replaces Docker as the new container runtime for Kubernetes to enhance performance. If your pods rely on Docker as the Kubernetes container runtime, you must update them to handle `containerd` as the container runtime. For more information, see the [Kubernetes containerd announcement ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/).
 {: shortdesc}
 
-**How do I know if my apps rely on `docker` instead of `containerd`?**<br>
+**How do I know whether my apps rely on `docker` instead of `containerd`?**<br>
 Examples of times that you might rely on Docker as the container runtime:
 *  If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime. For example, you might call the Docker socket directly to launch containers or perform other Docker operations. The Docker socket changed from `/var/run/docker.sock` to `/run/containerd/containerd.sock`. The protocol that is used in the `containerd` socket is slightly different to the one in Docker. Try to update your app to the `containerd` socket. If you want to continue using the Docker socket, look into using [Docker-inside-Docker (DinD) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/docker/).
-*  Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check with your provider to make sure the tools are compatible with containerd. Possible use cases include:
+*  Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check with your provider to make sure that the tools are compatible with containerd. Possible use cases include:
    - Your logging tool might use the container `stderr/stdout` directory `/var/log/pods/<pod_uuid>/<container_name>/*.log` to access logs. In Docker, this directory is a symlink to `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log` whereas in `containerd` you access the directory directly without a symlink.
    - Your monitoring tool accesses the Docker socket directly. The Docker socket changed from `/var/run/docker.sock` to `/run/containerd/containerd.sock`.
 

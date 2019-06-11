@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -221,7 +221,7 @@ The **Viewer** platform role includes the [actions that require no permissions](
 <td><code>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/FetchFilterConfigs)</code></td>
 </tr>
 <tr>
-<td>List all services bound to a specific namespace.</td>
+<td>List all services that are bound to a specific namespace.</td>
 <td>-</td>
 <td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesInNamespace)</code></td>
 </tr>
@@ -298,7 +298,7 @@ The **Editor** platform role includes the permissions that are granted by **View
 <td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
-<td>Check if automatic updates for the Ingress ALB add-on are enabled.</td>
+<td>Check whether automatic updates for the Ingress ALB add-on are enabled.</td>
 <td><code>[ibmcloud ks alb-autoupdate-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_get)</code></td>
 <td><code>[GET /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetUpdatePolicy)</code></td>
 </tr>
@@ -313,7 +313,7 @@ The **Editor** platform role includes the permissions that are granted by **View
 <td><code>[POST /clusters/{idOrName}/zone/{zoneId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALB)</code></td>
 </tr>
 <tr>
-<td>Roll back the an Ingress ALB add-on update to the build that your ALB pods were previously running.</td>
+<td>Roll back the Ingress ALB add-on update to the build that your ALB pods were previously running.</td>
 <td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_rollback)</code></td>
 <td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/RollbackUpdate)</code></td>
 </tr>
@@ -540,7 +540,7 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 <td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
-<td>Add a zones to a worker pool.</td>
+<td>Add a zone to a worker pool.</td>
 <td><code>[ibmcloud ks zone-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_add)</code></td>
 <td><code>[POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddWorkerPoolZone)</code></td>
 </tr>
@@ -607,7 +607,7 @@ The **Administrator** platform role includes all permissions that are granted by
 <td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons)</code></td>
 </tr>
 <tr>
-<td>List managed add-on, such Istio or Knative, that are enabled in a cluster.</td>
+<td>List managed add-on, such as Istio or Knative that are enabled in a cluster.</td>
 <td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons)</code></td>
 <td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterAddons)</code></td>
 </tr>
@@ -691,7 +691,7 @@ Every user who is assigned an {{site.data.keyword.Bluemix_notm}} IAM service acc
 Looking for which Kubernetes actions each service role grants through RBAC? See [Kubernetes resource permissions per RBAC role](#rbac_ref). To learn more about RBAC roles, see [Assigning RBAC permissions](/docs/containers?topic=containers-users#role-binding).
 {: tip}
 
-The following table shows the Kubernetes resource permissions granted by each service role and its corresponding RBAC role.
+The following table shows the Kubernetes resource permissions that are granted by each service role and its corresponding RBAC role.
 
 <table>
 <caption>Kubernetes resource permissions by service and corresponding RBAC roles</caption>
@@ -1017,7 +1017,7 @@ The following table shows the permissions that are granted by each RBAC role to 
 Cloud Foundry roles grant access to organizations and spaces within the account. To see the list of Cloud Foundry-based services in {{site.data.keyword.Bluemix_notm}}, run `ibmcloud service list`. To learn more, see all available [org and space roles](/docs/iam?topic=iam-cfaccess) or the steps for [managing Cloud Foundry access](/docs/iam?topic=iam-mngcf) in the {{site.data.keyword.Bluemix_notm}} IAM documentation.
 {: shortdesc}
 
-The following table shows the Cloud Foundry roles required for cluster action permissions.
+The following table shows the Cloud Foundry roles that are required for cluster action permissions.
 
 <table>
   <caption>Cluster management permissions by Cloud Foundry role</caption>
@@ -1044,12 +1044,12 @@ The following table shows the Cloud Foundry roles required for cluster action pe
 ## Infrastructure roles
 {: #infra}
 
-A user with the **Super User** infrastructure access role [sets the API key for a region and resource group](/docs/containers?topic=containers-users#api_key) so that infrastructure actions can be performed (or, more rarely, [manually sets different account credentials](/docs/containers?topic=containers-users#credentials)). Then, the infrastructure actions that other users in the account can perform is authorized through {{site.data.keyword.Bluemix_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For instructions to assign permissions, see [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
+A user with the **Super User** infrastructure access role [sets the API key for a region and resource group](/docs/containers?topic=containers-users#api_key) so that infrastructure actions can be performed (or more rarely, [manually sets different account credentials](/docs/containers?topic=containers-users#credentials)). Then, the infrastructure actions that other users in the account can perform is authorized through {{site.data.keyword.Bluemix_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions only when you can't assign **Super User** to the user who sets the API key. For instructions to assign permissions, see [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
 {: shortdesc}
 
 
 
-The following table shows the infrastructure permissions required to complete groups of common tasks.
+The following table shows the infrastructure permissions that are required to complete groups of common tasks.
 
 <table>
 <caption>Commonly required infrastructure permissions for {{site.data.keyword.containerlong_notm}}</caption>
