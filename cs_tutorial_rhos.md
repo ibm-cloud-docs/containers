@@ -661,7 +661,7 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     In the following command, replace *SYSDIG_ACCESS_KEY* and *COLLECTOR_ENDPOINT* with the values from the service key that you created earlier. For *TAG_DATA*, you can associate tags with your Sysdig agent, such as *role:service,location:us-south* to help you identify the environment that the metrics come from.
 
     ```
-    curl -sL https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/oks/install-agent-k8s.sh | bash -s -- -a SYSDIG_ACCESS_KEY -c COLLECTOR_ENDPOINT -t TAG_DATA -ac 'sysdig_capture_enabled: false' --openshift
+    curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a SYSDIG_ACCESS_KEY -c COLLECTOR_ENDPOINT -t TAG_DATA -ac 'sysdig_capture_enabled: false' --openshift
     ```
     {: pre}
     
