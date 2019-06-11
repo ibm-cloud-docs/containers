@@ -288,7 +288,7 @@ The following steps are general instructions. Prior to using the container in a 
 ### Forwarding Kubernetes API audit logs
 {: #audit_enable}
 
-Kubernetes automatically audits any events that are passed through your Kubernetes API server. You can forward the events to your external server.
+To audit any events that are passed through your Kubernetes API server, you can create a configuration to forward events to your external server.
 {: shortdesc}
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
