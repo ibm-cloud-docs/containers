@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-10"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -658,10 +658,10 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
         {: screen}
 3.  Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster. The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components. 
 
-    In the following command, replace *SYSDIG_ACCESS_KEY* and *COLLECTOR_ENDPOINT* with the values from the service key that you created earlier. For *TAG_DATA*, you can associate tags with your Sysdig agent, such as *role:service,location:us-south* to help you identify the environment that the metrics come from.
+    In the following command, replace <sysdig_access_key> and <sysdig_collector_endpoint> with the values from the service key that you created earlier. For <tag>, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
 
     ```
-    curl -sL https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/oks/install-agent-k8s.sh | bash -s -- -a SYSDIG_ACCESS_KEY -c COLLECTOR_ENDPOINT -t TAG_DATA -ac 'sysdig_capture_enabled: false' --openshift
+    curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t <tag> -ac 'sysdig_capture_enabled: false' --openshift
     ```
     {: pre}
     
@@ -676,7 +676,7 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     * Creating sysdig-agent access policies
     * Creating sysdig-agent secret using the ACCESS_KEY provided
     * Retreiving the IKS Cluster ID and Cluster Name
-    * Setting cluster name as openshift
+    * Setting cluster name as <cluster_name>
     * Setting ibm.containers-kubernetes.cluster.id 1fbd0c2ab7dd4c9bb1f2c2f7b36f5c47
     * Updating agent configmap and applying to cluster
     * Setting tags
