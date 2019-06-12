@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, docker
 
@@ -307,7 +307,7 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
   <tr>
     <td>Storage volumes</td>
-    <td>250 combined total of volumes of IBM Cloud infrastructure (SoftLayer) file and block storage instances per account.<br><br>If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes and need to contact your IBM Cloud infrastructure (SoftLayer) representative. For more FAQs, see the [file](/docs/infrastructure/FileStorage?topic=FileStorage-faqs#how-many-volumes-can-i-provision-) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-) storage docs.</td>
+    <td>250 combined total of volumes of IBM Cloud infrastructure (SoftLayer) file and block storage instances per account.<br><br>If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes and need to contact your IBM Cloud infrastructure (SoftLayer) representative. For more FAQs, see the [file](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-) storage docs.</td>
   </tr>
 </tbody>
 </table>

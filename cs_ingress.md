@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -34,7 +34,7 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 <img src="images/cs_ingress_imagemap.png" usemap="#image-map" alt="This imagemap provides quick links to configuration topics on this page.">
 
 <map name="image-map">
-    <area target="" alt="Ingress components" title="Ingress components" href="#components" coords="28,42,172,69" shape="rect">
+    <area target="" alt="Ingress components" title="Ingress components" href="#ingress_components" coords="28,42,172,69" shape="rect">
     <area target="" alt="ALB IPs" title="ALB IPs" href="#ips" coords="27,79,171,104" shape="rect">
     <area target="" alt="Architecture" title="Architecture" href="#architecture-single" coords="31,114,171,140" shape="rect">
     <area target="" alt="Prerequisites" title="Prerequisites" href="#config_prereqs" coords="28,151,171,176" shape="rect">
@@ -139,7 +139,7 @@ Ingress is a Kubernetes service that balances network traffic workloads in your 
 {:shortdesc}
 
 ### What comes with Ingress?
-{: #components}
+{: #ingress_components}
 
 Ingress consists of three components:
 <dl>
@@ -171,7 +171,7 @@ ibmcloud ks albs --cluster <cluster_name_or_id>
 ```
 {: pre}
 
-For more information about what happens to ALB IPs in the event of a zone failure, see the definition for the [multizone load balancer component](#components).
+For more information about what happens to ALB IPs in the event of a zone failure, see the definition for the [multizone load balancer component](#ingress_components).
 
 
 

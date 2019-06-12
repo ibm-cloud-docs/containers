@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -32,13 +32,13 @@ By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your ap
 
 However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) to whitelist or blacklist traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to whitelist or blacklist source IP addresses. For most scenarios, whitelisting provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. Blacklisting is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
 
-In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic hitting your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a network load balancer (NLB) service, and protecting the app from unwanted unusual traffic with both whitelist and blacklist Calico policies.
+In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic that hits your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a network load balancer (NLB) service, and protecting the app from unwanted unusual traffic with both whitelist and blacklist Calico policies.
 
 ## Objectives
 {: #policies_objectives}
 
 - Learn to block all incoming traffic to all node ports by creating a high-order Pre-DNAT policy.
-- Learn to allow whitelisted source IP addresses to access the NLB public IP and port by creating a low-order Pre-DNAT policy. Lower order policies override higher-order policies.
+- Learn to allow whitelisted source IP addresses to access the NLB public IP and port by creating a low-order Pre-DNAT policy. Lower-order policies override higher-order policies.
 - Learn to block blacklisted source IP addresses from accessing the NLB public IP and port by creating a low-order Pre-DNAT policy.
 
 ## Time required
@@ -57,7 +57,7 @@ This tutorial is intended for software developers and network administrators who
 - [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
-- Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
+- Ensure that you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
     - [Any platform role](/docs/containers?topic=containers-users#platform)
     - [The **Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform)
 
@@ -70,7 +70,7 @@ This tutorial is intended for software developers and network administrators who
 The first lesson shows you how your app is exposed from multiple IP addresses and ports, and where public traffic is coming into your cluster.
 {: shortdesc}
 
-Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection being made to the cluster from the client, and lets you test access to the PR firm's cluster. Then, expose the app by creating a network load balancer (NLB) 1.0 service. An NLB 1.0 service makes your app available over both the NLB service IP address and the worker nodes' node ports.
+Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection that are made to the cluster from the client, and you can test access to the PR firm's cluster. Then, expose the app by creating a network load balancer (NLB) 1.0 service. An NLB 1.0 service makes your app available over both the NLB service IP address and the worker nodes' node ports.
 
 Want to use an Ingress application load balancer (ALB)? Instead of creating an NLB in steps 3 and 4, [create a service for the web server app](/docs/containers?topic=containers-ingress#public_inside_1) and [create an Ingress resource for the web server app](/docs/containers?topic=containers-ingress#public_inside_4). Then get the public IPs of your ALBs by running `ibmcloud ks albs --cluster <cluster_name>` and use these IPs throughout the tutorial in place of the `<loadbalancer_IP>.`
 {: tip}
@@ -126,7 +126,7 @@ The following image shows how the web server app is exposed to the internet by t
     ```
     {: pre}
 
-5. Verify that you can publicly access the app exposed by the NLB from your computer.
+5. Verify that you can publicly access the app that is exposed by the NLB from your computer.
 
     1. Get the public **EXTERNAL-IP** address of the NLB.
         ```
@@ -141,7 +141,7 @@ The following image shows how the web server app is exposed to the internet by t
         ```
         {: screen}
 
-    2. Create a cheat sheet text file, and copy the NLB IP into the text file. The cheat sheet will help you more quickly use values in later lessons.
+    2. Create a cheat sheet text file, and copy the NLB IP into the text file. The cheat sheet helps you more quickly use values in later lessons.
 
     3. Verify that you can publicly access the external IP for the NLB.
         ```
@@ -173,7 +173,7 @@ The following image shows how the web server app is exposed to the internet by t
         ```
         {: screen}
 
-6. Verify that you can publicly access the app exposed by the node port from your computer. An NLB service makes your app available over both the NLB service IP address and the worker nodes' node ports.
+6. Verify that you can publicly access the app that is exposed by the node port from your computer. An NLB service makes your app available over both the NLB service IP address and the worker nodes' node ports.
 
     1. Get the node port that the NLB assigned to the worker nodes. The node port is in the 30000 - 32767 range.
         ```
@@ -245,7 +245,7 @@ Next, you can start creating and applying Calico policies to block public traffi
 To secure the PR firm's cluster, you must block public access to both the NLB service and node ports that are exposing your app. Start by blocking access to node ports.
 {: shortdesc}
 
-The following image shows how traffic will be permitted to the NLB but not to node ports at the end of Lesson 2:
+The following image shows how traffic is permitted to the NLB but not to node ports at the end of Lesson 2:
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="At the end of Lesson 2, the webserver app is exposed to the internet by public NLB only." style="width:425px; border-style: none"/>
 
@@ -345,11 +345,11 @@ The following image shows how traffic will be permitted to the NLB but not to no
         -no body in request-
     ```
     {: screen}
-    In the `Request Information` section of the output, note that the source IP address is, for example, `client_address=1.1.1.1`. The source IP address is the public IP of the system that you're using to run curl. Otherwise, if you are connecting to the internet through a proxy or VPN, the proxy or VPN might be obscuring your system's actual IP address. In either case, the NLB sees your system's source IP address as the client IP address.
+    In the `Request Information` section of the output, the source IP address is, for example, `client_address=1.1.1.1`. The source IP address is the public IP of the system that you're using to run curl. Otherwise, if you are connecting to the internet through a proxy or VPN, the proxy or VPN might be obscuring your system's actual IP address. In either case, the NLB sees your system's source IP address as the client IP address.
 
 6. Copy your system's source IP address (`client_address=1.1.1.1` in the previous step output) into your cheat sheet to use in later lessons.
 
-Great! At this point, your app is exposed to the public internet from the public NLB port only. Traffic to the public node ports is blocked. You've partially locked down your cluster from unwanted traffic.
+Great! At this point, your app is exposed to the public internet from the public NLB port only. Traffic to the public node ports is blocked. Your cluster is partially locked down from unwanted traffic.
 
 Next, you can create and apply Calico policies to whitelist traffic from certain source IPs.
 
@@ -484,7 +484,7 @@ In the previous lesson, you blocked all traffic and whitelisted only a few IPs. 
 
 In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports will be blocked, and all traffic to the public NLB will be allowed. Only traffic from your blacklisted system IP to the NLB will be blocked:
 
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="The webserver app is exposed by public NLB to the internet. Traffic from your system IP only is blocked." style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="The webserver app is exposed by public NLB to the internet. Only traffic from your system IP is blocked." style="width:550px; border-style: none"/>
 
 1. Clean up the whitelist policies you created in the previous lesson.
     - Linux:
@@ -569,7 +569,7 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
     {: pre}
     At this point, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your blacklisted system IP to the NLB is blocked.
 
-Great work! You've successfully controlled traffic into your app by using Calico Pre-DNAT policies to blacklist source IPs.
+Great work! You successfully controlled traffic into your app by using Calico Pre-DNAT policies to blacklist source IPs.
 
 ## Lesson 5: Logging blocked traffic from blacklisted IPs to the NLB
 {: #lesson5}
@@ -579,7 +579,7 @@ In the previous lesson, you blacklisted traffic from your system IP to the NLB. 
 
 In our example scenario, the PR firm you work for wants you to set up a logging trail for any unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you set up logging to record every time that your blacklist policy denies an attempted action on the NLB IP.
 
-1. Create a Calico NetworkPolicy named `log-denied-packets`. This log policy uses the same selector as the `blacklist` policy, which adds this policy to the Calico Iptables rule chain. By using a lower order number, such as `300`, you can ensure that this rule is added to the Iptables rule chain before the blacklist policy. Packets from your IP are logged by this policy before they try to match the `blacklist` policy rule and are denied.
+1. Create a Calico NetworkPolicy named `log-denied-packets`. This log policy uses the same selector as the `blacklist` policy, which adds this policy to the Calico Iptables rule chain. By using a lower-order number, such as `300`, you can ensure that this rule is added to the Iptables rule chain before the blacklist policy. Packets from your IP are logged by this policy before they try to match the `blacklist` policy rule and are denied.
   ```
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
@@ -634,7 +634,7 @@ In our example scenario, the PR firm you work for wants you to set up a logging 
   ```
   {: screen}
 
-Nice! You've set up logging so that blacklisted traffic can be monitored more easily.
+Nice! You set up logging so that blacklisted traffic can be monitored more easily.
 
 If you want to clean up the blacklist and the log policies:
 1. Clean up the blacklist policy.

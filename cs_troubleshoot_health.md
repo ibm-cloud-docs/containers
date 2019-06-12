@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -65,7 +65,7 @@ Review the following reasons why your cluster logs are not appearing and the cor
     <td>To check the state of your cluster, see <a href="/docs/containers?topic=containers-cs_troubleshoot#debug_clusters">Debugging clusters</a>.</td>
   </tr>
   <tr>
-    <td>The log storage quota has been met.</td>
+    <td>The log storage quota was met.</td>
     <td>To increase your log storage limits, see the <a href="/docs/services/CloudLogAnalysis/troubleshooting?topic=cloudloganalysis-error_msgs">{{site.data.keyword.loganalysislong_notm}} documentation</a>.</td>
   </tr>
   <tr>
@@ -76,8 +76,8 @@ Review the following reasons why your cluster logs are not appearing and the cor
       <li>To refresh the logging token after permissions are changed, run <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
-      <td>You have an application logging configuration with a symlink in your app path.</td>
-      <td><p>In order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink.</p> <p>Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></td>
+      <td>You have a logging configuration for your app with a symlink in your app path.</td>
+      <td><p>In order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might create a symlink.</p> <p>Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></td>
     </tr>
   </tbody>
 </table>
@@ -124,7 +124,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 When you access the Kubernetes dashboard, utilization graphs do not display.
 
 {: tsCauses}
-Sometimes after a cluster update or worker node reboot the `kube-dashboard` pod does not update.
+Sometimes after a cluster update or worker node reboot, the `kube-dashboard` pod does not update.
 
 {: tsResolve}
 Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access `heapster` for utilization information.
@@ -141,7 +141,7 @@ Delete the `kube-dashboard` pod to force a restart. The pod is re-created with R
 {: #quota}
 
 {: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to {{site.data.keyword.loganalysisfull}}. When you view logs, you see this or a similar error message:
+You set up a logging configuration in your cluster to forward logs to {{site.data.keyword.loganalysisfull}}. When you view logs, you see an error message that is similar to the following:
 
 ```
 You have reached the daily quota that is allocated to the Bluemix space {Space GUID} for the IBM® Cloud Log Analysis instance {Instance GUID}. Your current daily allotment is XXX for Log Search storage, which is retained for a period of 3 days, during which it can be searched for in Kibana. This does not affect your log retention policy in Log Collection storage. To upgrade your plan so that you can store more data in Log Search storage per day, upgrade the Log Analysis service plan for this space. For more information about service plans and how to upgrade your plan, see Plans.
@@ -163,11 +163,11 @@ Review the following reasons why you are hitting your log quota and the correspo
  </thead>
  <tbody>
   <tr>
-    <td>One or more pods is producing a very high amount of logs.</td>
+    <td>One or more pods produces a high number of logs.</td>
     <td>You can free up log storage space by preventing the logs from specific pods from being forwarded. Create a [logging filter](/docs/containers?topic=containers-health#filter-logs) for these pods.</td>
   </tr>
   <tr>
-    <td>You are exceeding the 500MB daily allotment for log storage for the Lite plan.</td>
+    <td>You exceed the 500 MB daily allotment for log storage for the Lite plan.</td>
     <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan).</td>
   </tr>
   <tr>
@@ -184,7 +184,7 @@ Review the following reasons why you are hitting your log quota and the correspo
 {: #long_lines}
 
 {: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to {{site.data.keyword.loganalysisfull_notm}}. When you view logs, you see a very long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
+You set up a logging configuration in your cluster to forward logs to {{site.data.keyword.loganalysisfull_notm}}. When you view logs, you see a long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
 
 {: tsCauses}
 A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to {{site.data.keyword.loganalysisshort_notm}}.

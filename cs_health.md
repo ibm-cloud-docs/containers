@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -94,7 +94,7 @@ To continue collecting logs for your cluster, you have the following options:
 * Set up {{site.data.keyword.la_full_notm}}. For more information, see [Transitioning to {{site.data.keyword.la_full_notm}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-transition).
 * [Change your configuration to forward logs to an external server](#configuring).
 
-For information about existing {{site.data.keyword.loganalysisshort_notm}} instances, see the [{{site.data.keyword.loganalysisshort_notm}} documentation](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-containers_kube_other_logs).
+For more information about existing {{site.data.keyword.loganalysisshort_notm}} instances, see the [{{site.data.keyword.loganalysisshort_notm}} documentation](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-containers_kube_other_logs).
 
 <br />
 
@@ -113,7 +113,7 @@ By default, logs are collected by the [Fluentd ![External link icon](../icons/la
 
 **What are the sources that I can configure log forwarding for?**
 
-In the following image you can see the location of the sources that you can configure logging for.
+In the following image, you can see the location of the sources that you can configure logging for.
 
 <img src="images/log_sources.png" width="600" alt="Log sources in your cluster" style="width:600px; border-style: none"/>
 
@@ -121,9 +121,9 @@ In the following image you can see the location of the sources that you can conf
     * `/var/log/syslog`
     * `/var/log/auth.log`
 
-2. `container`: Information that is logged by a running container.</br>**Paths**: Anything written to `STDOUT` or `STDERR`.
+2. `container`: Information that is logged by a running container.</br>**Paths**: Anything that is written to `STDOUT` or `STDERR`.
 
-3. `application`: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</br>**Paths**: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/spark/work/app-0546/0/stderr` but the logs actually go to `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, then the logs cannot be read.
+3. `application`: Information about events that occur at the application level. This could be a notification that an event took place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</br>**Paths**: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/spark/work/app-0546/0/stderr` but the logs actually go to `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, then the logs cannot be read.
 
 4. `storage`: Information about persistent storage that is set up in your cluster. Storage logs can help you set up problem determination dashboards and alerts as part of your DevOps pipeline and production releases. **Note**: The paths `/var/log/kubelet.log` and `/var/log/syslog` also contain storage logs, but logs from these paths are collected by the `kubernetes` and `worker` log sources.</br>**Paths**:
     * `/var/log/ibmc-s3fs.log`
@@ -153,7 +153,7 @@ In the following image you can see the location of the sources that you can conf
 
 **What configuration options do I have?**
 
-The following table shows the different options that you have when configuring logging and their descriptions.
+The following table shows the different options that you have when you configure logging and their descriptions.
 
 <table>
 <caption> Understanding logging configuration options</caption>
@@ -168,7 +168,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--log_source</em></code></td>
-      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, <code>storage</code>, and <code>kube-audit</code>. This argument supports a comma separated list of log sources to apply the configuration for. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
+      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, <code>storage</code>, and <code>kube-audit</code>. This argument supports a comma-separated list of log sources to apply to the configuration. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
     </tr>
     <tr>
       <td><code><em>--type syslog</em></code></td>
@@ -218,7 +218,7 @@ The following table shows the different options that you have when configuring l
 
 **Am I responsible for keeping Fluentd updated?**
 
-In order to make changes to your logging or filter configurations, the Fluentd logging add-on must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster add-ons: Fluentd for logging](/docs/containers?topic=containers-update#logging-up).
+In order to change your logging or filter configurations, the Fluentd logging add-on must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster add-ons: Fluentd for logging](/docs/containers?topic=containers-update#logging-up).
 
 **Can I forward some logs, but not others, from one source in my cluster?**
 
@@ -235,11 +235,11 @@ Create a configuration for cluster and app logging. You can differentiate betwee
 
 **Forwarding logs to your own server over the `udp` or `tcp` protocols**
 
-1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+1. Ensure that you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-3. Set up a server that accepts a syslog protocol in one of two ways:
+3. Set up a server that accepts a syslog protocol in 1 of 2 ways:
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
   * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
@@ -260,20 +260,20 @@ Create a configuration for cluster and app logging. You can differentiate betwee
 The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
 {: tip}
 
-1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+1. Ensure that you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     * **Editor** or **Administrator** platform role for the cluster
     * **Writer** or **Manager** service role for the `kube-system` namespace
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-3. Set up a server that accepts a syslog protocol in one of two ways:
+3. Set up a server that accepts a syslog protocol in 1 of 2 ways:
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
-  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You will need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
+  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
 
 4. Save your Certificate Authority certificate to a file named `ca-cert`. It must be that exact name.
 
-5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, you will use the secret name for the `--ca-cert` flag.
+5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, use the secret name for the `--ca-cert` flag.
     ```
     kubectl -n kube-system create secret generic --from-file=ca-cert
     ```
@@ -288,7 +288,7 @@ The following steps are general instructions. Prior to using the container in a 
 ### Forwarding Kubernetes API audit logs
 {: #audit_enable}
 
-Kubernetes automatically audits any events that are passed through your Kubernetes API server. You can forward the events to your external server.
+To audit any events that are passed through your Kubernetes API server, you can create a configuration to forward events to your external server.
 {: shortdesc}
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
@@ -464,7 +464,7 @@ You can choose which logs to forward to your external server by filtering out sp
 {: #verifying-log-forwarding}
 
 **Verifying**</br>
-You can verify that your configuration is set up correctly in one of two ways:
+You can verify that your configuration is set up correctly in 1 of 2 ways:
 
 * To list all of the logging configurations in a cluster:
   ```
@@ -618,7 +618,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 **Before you begin**
 
 * [Provision an instance](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
-* Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+* Ensure that you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 **Creating a snapshot**
 
@@ -721,7 +721,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 
   <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.Bluemix_notm}} console and output of <code>ibmcloud ks cluster-get</code></dt>
     <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view metrics, go to the **Kubernetes** > **Clusters** dashboard, select a cluster, and click the **Metrics** link.
-  <p class="deprecated">The link to the metrics dashboard in the cluster overview page of the {{site.data.keyword.Bluemix_notm}} console and in the output of `ibmcloud ks cluster-get` is deprecated. Clusters created after 03 May 2019 are not created with the metrics dashboard link. Clusters created on or before 03 May 2019 continue to have the link to the metrics dashboard.</p></dd>
+  <p class="deprecated">The link to the metrics dashboard in the cluster overview page of the {{site.data.keyword.Bluemix_notm}} console and in the output of `ibmcloud ks cluster-get` is deprecated. Clusters that are created after 03 May 2019 are not created with the metrics dashboard link. Clusters that are created on or before 03 May 2019 continue to have the link to the metrics dashboard.</p></dd>
 
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
@@ -759,7 +759,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 You can configure other tools for more monitoring capabilities.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For setup information, see the [CoreOS instructions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus).</dd>
+    <dd>Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For more information about the setup, see the [CoreOS instructions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus).</dd>
 </dl>
 
 <br />
@@ -770,7 +770,7 @@ You can configure other tools for more monitoring capabilities.
 ## Viewing cluster states
 {: #states}
 
-Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might have occurred.
+Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might occur.
 {:shortdesc}
 
 To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, and owner, use the `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
@@ -982,7 +982,7 @@ Autorecovery requires at least one healthy node to function properly. Configure 
 {: note}
 
 Before you begin:
-- Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+- Ensure that you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     - **Administrator** platform role for the cluster
     - **Writer** or **Manager** service role for the `kube-system` namespace
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -1080,7 +1080,7 @@ To configure Autorecovery:
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
-   <td>Defines an HTTP check that checks if an HTTP server that runs on your worker node is healthy. To use this check you must deploy an HTTP server on every worker node in your cluster by using a [daemon set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). You must implement a health check that is available at the <code>/myhealth</code> path and that can verify if your HTTP server is healthy. You can define other paths by changing the <code>Route</code> parameter. If the HTTP server is healthy, you must return the HTTP response code that is defined in <code>ExpectedStatus</code>. The HTTP server must be configured to listen on the private IP address of the worker node. You can find the private IP address by running <code>kubectl get nodes</code>.<br></br>
+   <td>Defines an HTTP check that checks if an HTTP server that runs on your worker node is healthy. To use this check, you must deploy an HTTP server on every worker node in your cluster by using a [daemon set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). You must implement a health check that is available at the <code>/myhealth</code> path and that can verify whether your HTTP server is healthy. You can define other paths by changing the <code>Route</code> parameter. If the HTTP server is healthy, you must return the HTTP response code that is defined in <code>ExpectedStatus</code>. The HTTP server must be configured to listen on the private IP address of the worker node. You can find the private IP address by running <code>kubectl get nodes</code>.<br></br>
    For example, consider two nodes in a cluster that have the private IP addresses 10.10.10.1 and 10.10.10.2. In this example, two routes are checked for a 200 HTTP response: <code>http://10.10.10.1:80/myhealth</code> and <code>http://10.10.10.2:80/myhealth</code>.
    The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running <code>ibmcloud ks worker-reboot</code>.<br></br>The HTTP check is disabled until you set the <b>Enabled</b> field to <code>true</code>.</td>
    </tr>

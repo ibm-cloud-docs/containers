@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -970,6 +970,85 @@ To prevent breaking changes, do not change the predefined `view`, `edit`, `admin
         {: pre}
 
 Now that you created and bound a custom Kubernetes RBAC role or cluster role, follow up with users. Ask them to test an action that they have permission to complete due to the role, such as deleting a pod.
+
+### Extending existing permissions by aggregating cluster roles 
+{: #rbac_aggregate}
+
+You can extend your users' existing permissions by aggregating, or combining, cluster roles with other cluster roles. When you assign a user an {{site.data.keyword.Bluemix_notm}} service role, the user is added to a [corresponding Kubernetes RBAC cluster role](/docs/containers?topic=containers-access_reference#service). However, you might want to allow certain users to perform additional operations. 
+{: shortdesc}
+
+For example, a user with the namespace-scoped `admin` cluster role cannot use the `kubectl top pods` command to view pod metrics for all the pods in the namespace. You might aggregate a cluster role so that users in the `admin` cluster role are authorized to run the `top pods` command. For more information, [see the Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles).
+
+**What are some common operations that I might want to extend permissions for a default cluster role?**<br>
+Review [the operations that each default RBAC cluster role permits](/docs/containers?topic=containers-access_reference#rbac_ref) to get a good idea of what your users can do, and then compare the permitted operations to what you want them to be able to do.
+
+If your users in the same cluster role encounter errors similar to the following for the same type of operation, you might want to extend the cluster role to include this operation.
+
+```
+Error from server (Forbidden): pods.metrics.k8s.io is forbidden: User "IAM#myname@example.com" cannot list resource "pods" in API group "metrics.k8s.io" in the namespace "mynamespace"
+```
+{: screen}
+
+**To aggregate cluster roles**:
+
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  Create a cluster role YAML file. In the `labels` section, specify the existing cluster role that you want to aggregate permissions to. The following example extends the predefined `admin` cluster role to allow users to run `kubectl top pods`. For more examples, [see the Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles).
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: view-pod-metrics
+      labels:
+        rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rules:
+    - apiGroups:
+      - "metrics.k8s.io"
+      resources:
+      - pods
+      verbs:
+      - list
+    ```
+    {: codeblock}
+    
+    <table>
+    <caption>Understanding the YAML components</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML components</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>metadata.name</code></td>
+          <td>Enter a name for the cluster role. **Do not** use the predefined cluster role names: `view`, `edit`, `admin` and `cluster-admin`.</td>
+        </tr>
+        <tr>
+          <td><code>metadata.labels</code></td>
+          <td>Add a label that matches the cluster role that you want to aggregate to in the format `rbac.authorization.k8s.io/aggregate-to-<cluster_role>: "true"`. The labels for the predefined cluster roles are as follows.<ul>
+          <li>IAM **Manager** service role, scoped to a namespace: `rbac.authorization.k8s.io/aggregate-to-admin: "true"`</li>
+          <li>IAM **Writer** service role: `rbac.authorization.k8s.io/aggregate-to-edit: "true"`</li>
+          <li>IAM **Reader** service role: `rbac.authorization.k8s.io/aggregate-to-view: "true"`</li></ul></td>
+        </tr>
+        <tr>
+          <td><code>rules.apiGroups</code></td>
+          <td>Specify the Kubernetes [API groups ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/using-api/api-overview/#api-groups) that you want users to be able to interact with, such as `"apps"`, `"batch"`, or `"extensions"`. For access to the core API group at REST path `api/v1`, leave the group blank: `[""]`.</td>
+        </tr>
+        <tr>
+          <td><code>rules.resources</code></td>
+          <td>Specify the Kubernetes [resource types ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) to which you want to grant access, such as `"daemonsets"`, `"deployments"`, `"events"`, or `"ingresses"`.</td>
+        </tr>
+        <tr>
+          <td><code>rules.verbs</code></td>
+          <td>Specify the types of [actions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/) that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`.</td>
+        </tr>
+      </tbody>
+    </table>
+2.  Create the cluster role in your cluster. Any users that have a role binding to the `admin` cluster role now have the additional permissions from the `view-pod-metrics` cluster role.
+    ```
+    kubectl apply -f <cluster_role_file.yaml>
+    ```
+    {: pre}
+3.  Follow up with users that have the `admin` cluster role. Ask them to [refresh their cluster configuration](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) and test the action, such as `kubectl top pods`.
+
 
 <br />
 

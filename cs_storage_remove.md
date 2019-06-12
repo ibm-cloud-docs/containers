@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Removing persistent storage from a cluster
 {: #cleanup}
 
-When you set up persistent storage in your cluster, you have three main components: the Kubernetes persistent volume claim (PVC) that requests storage, the Kubernetes persistent volume (PV) that is mounted to a pod and described in the PVC, and the IBM Cloud infrastructure (SoftLayer) instance, such as NFS file or block storage. Depending on how you created these, you might need to delete all three separately.
+When you set up persistent storage in your cluster, you have three main components: the Kubernetes persistent volume claim (PVC) that requests storage, the Kubernetes persistent volume (PV) that is mounted to a pod and described in the PVC, and the IBM Cloud infrastructure (SoftLayer) instance, such as NFS file or block storage. Depending on how you created your storage, you might need to delete all three separately.
 {:shortdesc}
 
 ## Cleaning up persistent storage
@@ -77,7 +77,7 @@ To clean up persistent data:
 
    If the reclaim policy says `Delete`, your PV and the physical storage are removed when you remove the PVC. If the reclaim policy says `Retain`, or if you provisioned your storage without a storage class, then your PV and physical storage are not removed when you remove the PVC. You must remove the PVC, PV, and the physical storage separately.
 
-   If your storage is charged on a monthly basis, you still get charged for the entire month, even if you remove the storage before the end of the billing cycle.
+   If your storage is charged monthly, you still get charged for the entire month, even if you remove the storage before the end of the billing cycle.
    {: important}
 
 3. Remove any pods that mount the PVC.
@@ -119,7 +119,7 @@ To clean up persistent data:
    ```
    {: pre}
 
-   When you remove the PVC, the PV that is bound to the PVC is released. Depending on how you provisioned your storage, your PV goes into a `Deleting` state if the PV is deleted automatically, or into a `Released` state, if you must manually delete the PV. **Note**: For PVs that are automatically deleted, the status might briefly say `Released` before it is deleted. Rerun the command after a few minutes to see if the PV is removed.
+   When you remove the PVC, the PV that is bound to the PVC is released. Depending on how you provisioned your storage, your PV goes into a `Deleting` state if the PV is deleted automatically, or into a `Released` state, if you must manually delete the PV. **Note**: For PVs that are automatically deleted, the status might briefly say `Released` before it is deleted. Rerun the command after a few minutes to see whether the PV is removed.
 
 6. If your PV is not deleted, manually remove the PV.
    ```
@@ -180,7 +180,7 @@ To clean up persistent data:
    ```
    {: pre}
 
-9. Verify that the physical storage instance is removed. Note that the deletion process might take up to a few days to complete.
+9. Verify that the physical storage instance is removed. The deletion process might take up to a few days to complete.
 
    **File storage:**
    ```

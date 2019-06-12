@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-07"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -58,8 +58,8 @@ This tutorial is for cluster administrators who want to learn how to create a Re
     *   The [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
     *   The [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
     *   The [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}}
-*    Make sure that the [API key](/docs/containers?topic=containers-users#api_key) for the {{site.data.keyword.Bluemix_notm}} region and resource group is set up with the correct infrastructure permissions, **Super User** or the [minimum roles](/docs/containers?topic=containers-access_reference#infra) to create a cluster.
-*   Install the command line tools.
+*    Make sure that the [API key](/docs/containers?topic=containers-users#api_key) for the {{site.data.keyword.Bluemix_notm}} region and resource group is set up with the correct infrastructure permissions, **Super User**, or the [minimum roles](/docs/containers?topic=containers-access_reference#infra) to create a cluster.
+*   Install the command-line tools.
     *   [Install the {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`), {{site.data.keyword.containershort_notm}} plug-in (`ibmcloud ks`), and {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
     *   [Install the OpenShift Origin (`oc`) and Kubernetes (`kubectl`) CLIs](/docs/containers?topic=containers-cs_cli_install#cli_oc).
 
@@ -76,12 +76,12 @@ The following diagram and table describe the default components that are set up 
 
 | Master components| Description |
 |:-----------------|:-----------------|
-| Replicas | Master components including the OpenShift Kubernetes API server and etcd data store have 3 replicas and, if located in a multizone metro, are spread across zones for even higher availability. The master components are backed up every 8 hours.|
-| rhos-api | The OpenShift Kubernetes API server serves as the main entry point for all cluster management requests from the worker node to the master. The API server validates and processes requests that change the state of Kubernetes resources, such as pods or services, and stores this state in the etcd data store.|
-| openvpn-server | The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.|
-| etcd | etcd is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.|
-| rhos-controller | The OpenShift controller manager watches for newly created pods and decides where to deploy them based on capacity, performance needs, policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster. The controller also watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state. The `rhos-controller` functions as both the scheduler and controller manager in a native Kubernetes configuration. |
-| cloud-controller-manager | The cloud controller manager manages cloud provider-specific components such as the {{site.data.keyword.Bluemix_notm}} load balancer.|
+| Replicas | Master components, including the OpenShift Kubernetes API server and etcd data store have three replicas and, if located in a multizone metro, are spread across zones for even higher availability. The master components are backed up every 8 hours.|
+| `rhos-api` | The OpenShift Kubernetes API server serves as the main entry point for all cluster management requests from the worker node to the master. The API server validates and processes requests that change the state of Kubernetes resources, such as pods or services, and stores this state in the etcd data store.|
+| `openvpn-server` | The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.|
+| `etcd` | etcd is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.|
+| `rhos-controller` | The OpenShift controller manager watches for newly created pods and decides where to deploy them based on capacity, performance needs, policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster. The controller also watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state. The `rhos-controller` functions as both the scheduler and controller manager in a native Kubernetes configuration. |
+| `cloud-controller-manager` | The cloud controller manager manages cloud provider-specific components such as the {{site.data.keyword.Bluemix_notm}} load balancer.|
 {: caption="Table 1. OpenShift master components." caption-side="top"}
 {: #rhos-components-1}
 {: tab-title="Master"}
@@ -92,11 +92,11 @@ The following diagram and table describe the default components that are set up 
 |:-----------------|:-----------------|
 | Operating System | Red Hat OpenShift on IBM Cloud worker nodes run on the Red Hat Enterprise Linux 7 (RHEL 7) operating system. |
 | Projects | OpenShift organizes your resources into projects, which are Kubernetes namespaces with annotations, and includes many more components than native Kubernetes clusters to run OpenShift features such as the catalog. Select components of projects are described in the following rows. For more information, see [Projects and users ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/core_concepts/projects_and_users.html).|
-| kube-system | This namespace includes many components that are used to run Kubernetes on the worker node.<ul><li>**`ibm-master-proxy`**: The `ibm-master-proxy` is a daemon set that forwards requests from the worker node to the IP addresses of the highly available master replicas. In single zone clusters, the master has three replicas on separate hosts. For clusters that are in a multizone-capable zone, the master has three replicas that are spread across zones. A highly available load balancer forwards requests to the master domain name to the master replicas.</li><li>**`openvpn-client`**: The OpenVPN client works with the OpenVPN server to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</li><li>**`kubelet`**: The kubelet is a worker node agent that runs on every worker node and is responsible for monitoring the health of pods that run on the worker node and for watching the events that the Kubernetes API server sends. Based on the events, the kubelet creates or removes pods, ensures liveness and readiness probes, and reports back the status of the pods to the Kubernetes API server.</li><li>**`calico`**: Calico manages network policies for your cluster, and includes a few components to manage container network connectivity, IP address assignment, and network traffic control.</li><li>**Other components**: The `kube-system` namespace also includes components to manage IBM-provided resources such as storage plug-ins for file and block storage, ingress application load balancer (ALB), `fluentd` logging, and `keepalived`.</li></ul>|
-| ibm-system | This namespace includes the `ibm-cloud-provider-ip` deployment that works with `keepalived` to provide health checking and Layer 4 load balancing for requests to app pods.|
-| kube-proxy-and-dns| This namespace includes the components to validate incoming network traffic against the `iptables` rules that are set up on the worker node, and proxies requests that are allowed to enter or leave the cluster.|
-| default | This namespace is used if you do not specify a namespace or create a project for your Kubernetes resources. In addition, the default namespace includes the following components to support your OpenShift clusters.<ul><li>**`router`**: OpenShift uses [routes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html) to expose an app's service on a host name so that external clients can reach the service. The router maps the service to the host name.</li><li>**`docker-registry`** and **`registry-console`**: OpenShift provides an internal [container image registry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/install_config/registry/index.html) that you can use to locally manage and view images through the console. Alternatively, you can set up the private {{site.data.keyword.registrylong_notm}}.</li></ul>|
-| Other projects | Other components are installed in various namespaces by default to enable functionality such as logging, monitoring, and the OpenShift console.<ul><li>ibm-cert-store</li><li>kube-public</li><li>kube-service-catalog</li><li>openshift</li><li>openshift-ansible-service-broker</li><li>openshift-console</li><li>openshift-infra</li><li>openshift-monitoring</li><li>openshift-node</li><li>openshift-template-service-broker</li><li>openshift-web-console</li></ul>|
+| `kube-system` | This namespace includes many components that are used to run Kubernetes on the worker node.<ul><li>**`ibm-master-proxy`**: The `ibm-master-proxy` is a daemon set that forwards requests from the worker node to the IP addresses of the highly available master replicas. In single zone clusters, the master has three replicas on separate hosts. For clusters that are in a multizone-capable zone, the master has three replicas that are spread across zones. A highly available load balancer forwards requests to the master domain name to the master replicas.</li><li>**`openvpn-client`**: The OpenVPN client works with the OpenVPN server to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</li><li>**`kubelet`**: The kubelet is a worker node agent that runs on every worker node and is responsible for monitoring the health of pods that run on the worker node and for watching the events that the Kubernetes API server sends. Based on the events, the kubelet creates or removes pods, ensures liveness and readiness probes, and reports back the status of the pods to the Kubernetes API server.</li><li>**`calico`**: Calico manages network policies for your cluster, and includes a few components to manage container network connectivity, IP address assignment, and network traffic control.</li><li>**Other components**: The `kube-system` namespace also includes components to manage IBM-provided resources such as storage plug-ins for file and block storage, ingress application load balancer (ALB), `fluentd` logging, and `keepalived`.</li></ul>|
+| `ibm-system` | This namespace includes the `ibm-cloud-provider-ip` deployment that works with `keepalived` to provide health checking and Layer 4 load balancing for requests to app pods.|
+| `kube-proxy-and-dns`| This namespace includes the components to validate incoming network traffic against the `iptables` rules that are set up on the worker node, and proxies requests that are allowed to enter or leave the cluster.|
+| `default` | This namespace is used if you do not specify a namespace or create a project for your Kubernetes resources. In addition, the default namespace includes the following components to support your OpenShift clusters.<ul><li>**`router`**: OpenShift uses [routes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html) to expose an app's service on a host name so that external clients can reach the service. The router maps the service to the host name.</li><li>**`docker-registry`** and **`registry-console`**: OpenShift provides an internal [container image registry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/install_config/registry/index.html) that you can use to locally manage and view images through the console. Alternatively, you can set up the private {{site.data.keyword.registrylong_notm}}.</li></ul>|
+| Other projects | Other components are installed in various namespaces by default to enable functionality such as logging, monitoring, and the OpenShift console.<ul><li><code>ibm-cert-store</code></li><li><code>kube-public</code></li><li><code>kube-service-catalog</code></li><li><code>openshift</code></li><li><code>openshift-ansible-service-broker</code></li><li><code>openshift-console</code></li><li><code>openshift-infra</code></li><li><code>openshift-monitoring</code></li><li><code>openshift-node</code></li><li><code>openshift-template-service-broker</code></li><li><code>openshift-web-console</code></li></ul>|
 {: caption="Table 2. OpenShift worker node components." caption-side="top"}
 {: #rhos-components-2}
 {: tab-title="Worker nodes"}
@@ -130,9 +130,9 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
         *   For **Select a plan**, choose **Standard**.
         *   For **Resource Group**, you must use the **default**.
         *   For the **Location**, set the geography to **North America** or **Europe**, select either a **Single zone** or **Multizone** availability, and then select **Washington, DC** or **London** worker zones.
-        *   For **Default worker pool**, select the **OpenShift** cluster version. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. Choose an available flavor for your worker nodes ideally with at least 4 Cores 16 GB RAM.
+        *   For **Default worker pool**, select the **OpenShift** cluster version. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. Choose an available flavor for your worker nodes ideally with at least four Cores 16 GB RAM.
         *   Set a number of worker nodes to create per zone, such as 3.
-    4.  To finish, click **Create cluster**.<p class="note">Your cluster creation might take some time to complete. After the cluster state shows **Normal**, the cluster network and load balancing components take about 10 more minutes to deploy and update the cluster domain that you use for the OpenShift web console and other routes. Wait until the cluster is ready before continuing to the next step by checking that the **Ingress subdomain** follows a pattern of `<cluster_name>.<region>.containers.appdomain.cloud`.</p>
+    4.  To finish, click **Create cluster**.<p class="note">Your cluster creation might take some time to complete. After the cluster state shows **Normal**, the cluster network and load-balancing components take about 10 more minutes to deploy and update the cluster domain that you use for the OpenShift web console and other routes. Wait until the cluster is ready before continuing to the next step by checking that the **Ingress subdomain** follows a pattern of `<cluster_name>.<region>.containers.appdomain.cloud`.</p>
 2.  From the cluster details page, click **OpenShift web console**.
 3.  From the dropdown menu in the OpenShift container platform menu bar, click **Application Console**. The Application Console lists all project namespaces in your cluster. You can navigate to a namespace to view your applications, builds, and other Kubernetes resources.
 4.  To complete the next lesson by working in the terminal, click your profile **IAM#user.name@email.com > Copy Login Command**. Paste the copied `oc` login command into your terminal to authenticate via the CLI.
@@ -156,7 +156,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     ```
     {: pre}
 
-    Example command to create a cluster with 3 workers nodes that have 4 cores and 16 GB memory in Washington, DC.
+    Example command to create a cluster with three workers nodes that have four cores and 16 GB memory in Washington, DC.
 
     ```
     ibmcloud ks cluster-create --name my_openshift --location wdc04 --kube-version 3.11_openshift --machine-type b3c.4x16.encrypted  --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
@@ -191,7 +191,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number_of_worker_nodes_per_zone&gt;</em></code></td>
-    <td>The number of worker nodes to include in the cluster. You might want to specify at least 3 worker nodes so that your cluster has enough resources to run the default components and for high availability. If the <code>--workers</code> option is not specified, 1 worker node is created.</td>
+    <td>The number of worker nodes to include in the cluster. You might want to specify at least three worker nodes so that your cluster has enough resources to run the default components and for high availability. If the <code>--workers</code> option is not specified, one worker node is created.</td>
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
@@ -202,7 +202,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     <td>If you already have a private VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the private VLAN. To check available VLANs, run `ibmcloud ks vlans --zone <zone>`. <br><br>If you do not have a private VLAN in your account, do not specify this option. {{site.data.keyword.containerlong_notm}} automatically creates a private VLAN for you.</td>
     </tr>
     </tbody></table>
-3.  List your cluster details. Review the cluster **State**, check the **Ingress Subdomain**, and note the **Master URL**.<p class="note">Your cluster creation might take some time to complete. After the cluster state shows **Normal**, the cluster network and load balancing components take about 10 more minutes to deploy and update the cluster domain that you use for the OpenShift web console and other routes. Wait until the cluster is ready before continuing to the next step by checking that the **Ingress Subdomain** follows a pattern of `<cluster_name>.<region>.containers.appdomain.cloud`.</p>
+3.  List your cluster details. Review the cluster **State**, check the **Ingress Subdomain**, and note the **Master URL**.<p class="note">Your cluster creation might take some time to complete. After the cluster state shows **Normal**, the cluster network and load-balancing components take about 10 more minutes to deploy and update the cluster domain that you use for the OpenShift web console and other routes. Wait until the cluster is ready before continuing to the next step by checking that the **Ingress Subdomain** follows a pattern of `<cluster_name>.<region>.containers.appdomain.cloud`.</p>
     ```
     ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
     ```
@@ -252,7 +252,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
 ## Lesson 2: Accessing built-in OpenShift services
 {: #openshift_access_oc_services}
 
-Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to help operate your cluster, such as the OpenShift console, Prometheus, and Grafana. For the beta, to access these services, you can use the local host of a [route ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html). The default route domain names follow a cluster-specific pattern of `<router_service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
+Red Hat OpenShift on IBM Cloud comes with built-in services that you can use to help operate your cluster, such as the OpenShift console, Prometheus, and Grafana. For the beta, to access these services, you can use the local host of a [route ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html). The default route domain names follow a cluster-specific pattern of `<service_name>-<namespace>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
 {:shortdesc}
 
 You can access the built-in OpenShift service routes from the [console](#openshift_services_console) or [CLI](#openshift_services_cli). You might want to use the console to navigate through Kubernetes resources in one project. By using the CLI, you can list resources such as routes across projects.
@@ -267,7 +267,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
     2. In the value field, add `-e` after the `c1` such as in `https://c1-e.eu-gb.containers.cloud.ibm.com:20399`. 
     3. Click **Save**. Now, the registry console deployment can be accessed through the public API endpoint of the cluster master.
     4.  From the **default** project navigation pane, click **Applications > Routes**. To open the registry console, click the **Hostname** value, such as `https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.<p class="note">For the beta, the registry console uses self-signed TLS certificates, so you must choose to proceed to get to the registry console. In Google Chrome, click **Advanced > Proceed to <cluster_master_URL>**. Other browsers have similar options. If you cannot proceed with this setting, try opening the URL in a private browser.</p>
-5.   In the OpenShift container platform menu bar, from the dropdown menu, click **Cluster Console**.
+5.  In the OpenShift container platform menu bar, from the dropdown menu, click **Cluster Console**.
 6.  From the navigation pane, expand **Monitoring**.
 7.  Click the built-in monitoring tool that you want to access, such as **Dashboards**. The Grafana route opens, `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.<p class="note">The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.</p>
 
@@ -291,7 +291,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
     router    LoadBalancer   172.21.xxx.xxx   169.xx.xxx.xxx   80:30399/TCP,443:32651/TCP                      5h
     ```
     {: screen}
-2.  Get the **Host/Port** host name of the service route that you want to access. For example, you might want to access your Grafana dashboard to check metrics on your cluster's resource usage. The default route domain names follow a cluster-specific pattern of `<router_service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
+2.  Get the **Host/Port** host name of the service route that you want to access. For example, you might want to access your Grafana dashboard to check metrics on your cluster's resource usage. The default route domain names follow a cluster-specific pattern of `<service_name>-<namespace>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
     ```
     oc get route --all-namespaces
     ```
@@ -353,7 +353,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
     oc new-project hello-world
     ```
     {: pre}
-2.  Build the sample app [from the source code ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt). With the OpenShift `new-app` command, you can refer to a directory in a remote repository that contains the Dockerfile and app code to build your image. The command builds the image, stores the image in the local Docker registry, and creates the app deployment configurations (`dc`) and services (`svc`). For more information on creating new apps, [see the OpenShift docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/dev_guide/application_lifecycle/new_app.html).
+2.  Build the sample app [from the source code ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt). With the OpenShift `new-app` command, you can refer to a directory in a remote repository that contains the Dockerfile and app code to build your image. The command builds the image, stores the image in the local Docker registry, and creates the app deployment configurations (`dc`) and services (`svc`). For more information about creating new apps, [see the OpenShift docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/dev_guide/application_lifecycle/new_app.html).
     ```
     oc new-app --name hello-world https://github.com/IBM/container-service-getting-started-wt --context-dir="Lab 1"
     ```
@@ -389,7 +389,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
         hello-world-build   0/1       Completed          0          31m
         ```
         {: screen}
-4.  Set up a route so that you can publicly access the {{site.data.keyword.toneanalyzershort}} service. By default, the host name is in the format of `<service_name>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. If you want to customize the host name, include the `--hostname=<hostname>` flag.
+4.  Set up a route so that you can publicly access the {{site.data.keyword.toneanalyzershort}} service. By default, the host name is in the format of `<service_name>-<namespace>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. If you want to customize the host name, include the `--hostname=<hostname>` flag.
     1.  Create a route for the **hello-world** service.
         ```
         oc create route edge --service=hello-world -n hello-world
@@ -403,12 +403,12 @@ If you took a break from the last lesson and started a new terminal, make sure t
         Example output:
         ```
         NAME          HOST/PORT                         PATH                                        SERVICES      PORT       TERMINATION   WILDCARD
-        hello-world   hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud    hello-world   8080-tcp   edge/Allow    None
+        hello-world   hello-world-hello.world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud    hello-world   8080-tcp   edge/Allow    None
         ```
         {: screen}
 5.  Access your app.
     ```
-    curl https://hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud
+    curl https://hello-world-hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud
     ```
     {: pre}
     
@@ -568,6 +568,7 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
     In the configuration file, add the following specifications.
     *   In `spec.template.spec`, add `serviceAccount: logdna`.
     *   In `spec.template.spec.containers`, add `securityContext: privileged: true`.
+    *   If you created your {{site.data.keyword.la_short}} instance in a region other than `us-south`, update the `spec.template.spec.containers.env` environment variable values for the `LDAPIHOST` and `LDLOGHOST` with the `<region>`.
 
     Example output:
     ```
@@ -578,13 +579,21 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
       template:
         ...
         spec:
-          containers:
-            image: logdna/logdna-agent:latest
-            imagePullPolicy: Always
-            name: logdna-agent
-            securityContext:
-              privileged: true
           serviceAccount: logdna
+          containers:
+          - securityContext:
+              privileged: true
+            ...
+            env:
+            - name: LOGDNA_AGENT_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: logdna-agent-key
+                  name: logdna-agent-key
+            - name: LDAPIHOST
+              value: api.<region>.logging.cloud.ibm.com
+            - name: LDLOGHOST
+              value: logs.<region>.logging.cloud.ibm.com
           ...
     ```
     {: screen}
@@ -658,10 +667,10 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
         {: screen}
 3.  Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster. The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components. 
 
-    In the following command, replace *SYSDIG_ACCESS_KEY* and *COLLECTOR_ENDPOINT* with the values from the service key that you created earlier. For *TAG_DATA*, you can associate tags with your Sysdig agent, such as *role:service,location:us-south* to help you identify the environment that the metrics come from.
+    In the following command, replace <sysdig_access_key> and <sysdig_collector_endpoint> with the values from the service key that you created earlier. For <tag>, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
 
     ```
-    curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a SYSDIG_ACCESS_KEY -c COLLECTOR_ENDPOINT -t TAG_DATA -ac 'sysdig_capture_enabled: false' --openshift
+    curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t <tag> -ac 'sysdig_capture_enabled: false' --openshift
     ```
     {: pre}
     
@@ -676,7 +685,7 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     * Creating sysdig-agent access policies
     * Creating sysdig-agent secret using the ACCESS_KEY provided
     * Retreiving the IKS Cluster ID and Cluster Name
-    * Setting cluster name as openshift
+    * Setting cluster name as <cluster_name>
     * Setting ibm.containers-kubernetes.cluster.id 1fbd0c2ab7dd4c9bb1f2c2f7b36f5c47
     * Updating agent configmap and applying to cluster
     * Setting tags
@@ -757,7 +766,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
 **Apps**:
 *   OpenShift sets up stricter security settings by default than native Kubernetes. For more information, see the OpenShift docs for [Managing Security Context Contraints (SCC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
 *   For example, apps that are configured to run as root might fail, with the pods in a `CrashLoopBackOff` status. To resolve this issue, you can either modify the default security context constraints or use an image that does not run as root.
-*   OpenShift are set up by default with a local Docker registry. If you want to use images that are stored in your remote private {{site.data.keyword.registrylong_notm}} `icr.io` domain names, you must create the secrets for each global and regional registry yourself. You can use the `ibmcloud ks cluster-pull-secret-apply` command to [create the secret in the `default` namespace](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key), and then [copy this secret](/docs/containers?topic=containers-images#copy_imagePullSecret) or [create your own secret](/docs/containers?topic=containers-images#other_registry_accounts) for each namespace that you want to build containers from images that are stored in `icr.io` registries.
+*   OpenShift are set up by default with a local Docker registry. If you want to use images that are stored in your remote private {{site.data.keyword.registrylong_notm}} `icr.io` domain names, you must create the secrets for each global and regional registry yourself. You can use [copy the `default-<region>-icr-io` secrets](/docs/containers?topic=containers-images#copy_imagePullSecret) from the `default` namespace to the namespace that you want to pull images from, or [create your own secret](/docs/containers?topic=containers-images#other_registry_accounts). Then, [add the image pull secret](/docs/containers?topic=containers-images#use_imagePullSecret) to your deployment configuration or to the namespace service account.
 *   The OpenShift console is used instead of the Kubernetes dashboard.
 
 <br />

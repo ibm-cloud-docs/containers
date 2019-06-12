@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -60,14 +60,14 @@ Select one of the following options to decide what type of worker pool you want.
 ## Virtual machines
 {: #vm}
 
-With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use [bare metal](#bm).
+With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general-purpose use cases such as testing and development environments, staging, and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high-performance computing for RAM-, data-, or GPU-intensive workloads, use [bare metal](#bm).
 {: shortdesc}
 
 **Do I want to use shared or dedicated hardware?**</br>
 When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).
 
 * **In a multi-tenant, shared hardware setup**: Physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).
-* **In a single-tenant, dedicated hardware setup**: All physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant set up, the hypervisor assures that every worker node gets its share of the available physical resources.
+* **In a single-tenant, dedicated hardware setup**: All physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant setup, the hypervisor assures that every worker node gets its share of the available physical resources.
 
 Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.
 
@@ -75,7 +75,7 @@ Some flavors are available for only one type of tenancy setup. For example, the 
 {: note}
 
 **What are the general features of VMs?**</br>
-Virtual machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. Every VM comes with 1000Mbps networking speed, 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for data such as the container runtime and the `kubelet`. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
+Virtual machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. Every VM comes with 1000 Mbps networking speed, 25 GB primary local disk storage for the OS file system, and 100 GB secondary local disk storage for data such as the container runtime and the `kubelet`. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **What if I have older machine types?**</br>
 If your cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, you can [update your cluster to have Ubuntu 18 `x3c` worker nodes](/docs/containers?topic=containers-update#machine_type).
@@ -95,70 +95,70 @@ Worker node flavors vary by zone. The following table includes the most recent v
 <tbody>
 <tr>
 <td><strong>Virtual, u3c.2x4</strong>: Use this smallest size VM for quick testing, proofs of concept, and other light workloads.</td>
-<td>2 / 4GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td>2 / 4 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Virtual, b3c.4x16</strong>: Select this balanced VM for testing and development, and other light workloads.</td>
-<td>4 / 16GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td>4 / 16 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Virtual, b3c.16x64</strong>: Select this balanced VM for mid-sized workloads.</td></td>
-<td>16 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td>16 / 64 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Virtual, b3c.32x128</strong>: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users.</td>
-<td>32 / 128GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td>32 / 128 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Virtual, c3c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node for light workloads.</td>
-<td>16 / 16GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td>16 / 16 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr><tr>
 <td><strong>Virtual, c3c.16x32</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light to mid-sized workloads.</td>
-<td>16 / 32GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td>16 / 32 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr><tr>
 <td><strong>Virtual, c3c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node for mid-sized workloads.</td>
-<td>32 / 32GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td>32 / 32 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr><tr>
 <td><strong>Virtual, c3c.32x64</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads.</td>
-<td>32 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td>32 / 64 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, m3c.8x64</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for light to mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
-<td>8 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td><strong>Virtual, m3c.8x64</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for light to mid-sized workloads that require more memory, similar to databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td>8 / 64 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m3c.16x128</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
-<td>16 / 128GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td><strong>Virtual, m3c.16x128</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid-sized workloads that require more memory, similar to databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td>16 / 128 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m3c.30x240</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
-<td>30 / 240GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td><strong>Virtual, m3c.30x240</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory, similar to databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td>30 / 240 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Virtual, z1.2x4</strong>: Use this flavor when you want a worker node to be created on Hyper Protect Containers on IBM Z Systems.</td>
-<td>2 / 4GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
+<td>2 / 4 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
 </tr>
 </tbody>
 </table>
@@ -173,7 +173,7 @@ You can provision your worker node as a single-tenant physical server, also refe
 Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to increase data availability. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **Besides better specs for performance, can I do something with bare metal that I can't with VMs?**</br>
-Yes. With bare metal, you have the option to enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containerlong_notm}} with Trusted Compute](/docs/containers?topic=containers-security#trusted_compute). Trusted Compute is available for certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.
+Yes. With bare metal, you have the option to enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation, but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containerlong_notm}} with Trusted Compute](/docs/containers?topic=containers-security#trusted_compute). Trusted Compute is available for certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.
 
 In addition to Trusted Compute, you can also take advantage of {{site.data.keyword.datashield_full}} (Beta). {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified. If you or your company require data sensitivity due to internal policies, government regulations, or industry compliance requirements, this solution might help you to move to the cloud. Example use cases include financial and healthcare institutions, or countries with government policies that require on-premises cloud solutions.
 
@@ -208,45 +208,45 @@ Choose a machine type with the right storage configuration to support your workl
 <tbody>
 <tr>
 <td><strong>RAM-intensive bare metal, mr3c.28x512</strong>: Maximize the RAM available to your worker nodes.</td>
-<td>28 / 512GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
+<td>28 / 512 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU bare metal, mg3c.16x128</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 1 Tesla K80 physical card that has 2 graphics processing units (GPUs) per card for a total of 2 GPUs.</td>
-<td>16 / 128GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
+<td><strong>GPU bare metal, mg3c.16x128</strong>: Choose this type for mathematically intensive workloads such as high-performance computing, machine learning, or 3D applications. This flavor has one Tesla K80 physical card that has two graphics processing units (GPUs) per card for a total of two GPUs.</td>
+<td>16 / 128 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU bare metal, mg3c.28x256</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 2 Tesla K80 physical cards that have 2 GPUs per card for a total of 4 GPUs.</td>
-<td>28 / 256GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
+<td><strong>GPU bare metal, mg3c.28x256</strong>: Choose this type for mathematically intensive workloads such as high-performance computing, machine learning, or 3D applications. This flavor has two Tesla K80 physical cards that have two GPUs per card for a total of four GPUs.</td>
+<td>28 / 256 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Data-intensive bare metal, md3c.16x64.4x4tb</strong>: Use this type for a significant amount of local disk storage, including RAID to increase data availability, for workloads such as distributed file systems, large databases, and big data analytics.</td>
-<td>16 / 64GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
+<td>16 / 64 GB</td>
+<td>2x2 TB RAID1 / 4x4 TB SATA RAID10</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Data-intensive bare metal, md3c.28x512.4x4tb</strong>: Use this type for a significant amount of local disk storage, including RAID to increase data availability, for workloads such as distributed file systems, large databases, and big data analytics..</td>
 <td>28 / 512 GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
+<td>2x2 TB RAID1 / 4x4 TB SATA RAID10</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Balanced bare metal, mb3c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer. This flavor can also be enabled with Intel® Software Guard Extensions (SGX) so that you can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory.</td>
-<td>4 / 32GB</td>
-<td>2TB SATA / 2TB SATA</td>
-<td>10000Mbps</td>
+<td>4 / 32 GB</td>
+<td>2 TB SATA / 2 TB SATA</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Balanced bare metal, mb3c.16x64</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
-<td>16 / 64GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
+<td>16 / 64 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
 </tbody>
@@ -255,7 +255,7 @@ Choose a machine type with the right storage configuration to support your workl
 ## Software-defined storage (SDS) machines
 {: #sds}
 
-Software-defined storage (SDS) flavors are physical machines that are provisioned with additional raw disks for physical local storage. Unlike the primary and secondary local disk, these raw disks are not wiped during a worker node update or reload. Because data is co-located with the compute node, SDS machines are suited for high performance workloads.
+Software-defined storage (SDS) flavors are physical machines that are provisioned with additional raw disks for physical local storage. Unlike the primary and secondary local disk, these raw disks are not wiped during a worker node update or reload. Because data is co-located with the compute node, SDS machines are suited for high-performance workloads.
 {: shortdesc}
 
 **When do I use SDS flavors?**</br>
@@ -290,31 +290,31 @@ Choose a machine type with the right storage configuration to support your workl
 <tbody>
 <tr>
 <td><strong>Bare metal with SDS, ms3c.4x32.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
-<td>4 / 32GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>1.9TB Raw SSD (device path: `/dev/sdc`)</td>
-<td>10000Mbps</td>
+<td>4 / 32 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>1.9 TB Raw SSD (device path: `/dev/sdc`)</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Bare metal with SDS, ms3c.16x64.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
-<td>16 / 64GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>1.9TB Raw SSD (device path: `/dev/sdc`)</td>
-<td>10000Mbps</td>
+<td>16 / 64 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>1.9 TB Raw SSD (device path: `/dev/sdc`)</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Bare metal with SDS, ms3c.28x256.3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
-<td>28 / 256GB</td>
-<td>2TB SATA / 1.9TB SSD</td>
-<td>3.8TB Raw SSD (device path: `/dev/sdc`)</td>
-<td>10000Mbps</td>
+<td>28 / 256 GB</td>
+<td>2 TB SATA / 1.9 TB SSD</td>
+<td>3.8 TB Raw SSD (device path: `/dev/sdc`)</td>
+<td>10000 Mbps</td>
 </tr>
 <tr>
 <td><strong>Bare metal with SDS, ms3c.28x512.4x3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
-<td>28 / 512GB</td>
-<td>2TB SATA / 1.9TB SSD</td>
-<td>4 disks, 3.8TB Raw SSD (device paths: `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
-<td>10000Mbps</td>
+<td>28 / 512 GB</td>
+<td>2 TB SATA / 1.9 TB SSD</td>
+<td>4 disks, 3.8 TB Raw SSD (device paths: `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
+<td>10000 Mbps</td>
 </tr>
 </tbody>
 </table>
@@ -344,40 +344,40 @@ To review how much compute resources are currently used on your worker node, run
 </thead>
 <tbody>
 <tr>
-  <td>First 4GB (0-4GB)</td>
+  <td>First 4 GB (0-4 GB)</td>
   <td>25% of memory</td>
   <td>1 GB</td>
   <td>1 GB</td>
 </tr>
 <tr>
-  <td>Next 4GB (5-8GB)</td>
+  <td>Next 4 GB (5-8 GB)</td>
   <td>20% of memory</td>
   <td>0.8 GB</td>
   <td>0.8 GB</td>
 </tr>
 <tr>
-  <td>Next 8GB (9-16GB)</td>
+  <td>Next 8 GB (9-16 GB)</td>
   <td>10% of memory</td>
   <td>0.8 GB</td>
   <td>0.8 GB</td>
 </tr>
 <tr>
-  <td>Next 112GB (17-128GB)</td>
+  <td>Next 112 GB (17-128 GB)</td>
   <td>6% of memory</td>
   <td>N/A</td>
   <td>6.72 GB</td>
 </tr>
 <tr>
-  <td>Remaining GBs (129GB+)</td>
+  <td>Remaining GBs (129 GB+)</td>
   <td>2% of memory</td>
   <td>N/A</td>
   <td>2.54 GB</td>
 </tr>
 <tr>
   <td>Additional reserve for [`kubelet` eviction ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
-  <td>100MB</td>
-  <td>100MB (flat amount)</td>
-  <td>100MB (flat amount)</td>
+  <td>100 MB</td>
+  <td>100 MB (flat amount)</td>
+  <td>100 MB (flat amount)</td>
 </tr>
 <tr>
   <td>**Total reserved**</td>

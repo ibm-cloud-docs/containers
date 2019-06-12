@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -32,12 +32,12 @@ You can add complex Kubernetes apps to your cluster by using Helm charts.
 {: shortdesc}
 
 **What is Helm and how do I use it?** </br>
-[Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh) is a Kubernetes package manager that uses Helm charts to define, install, and upgrade complex Kubernetes apps in your cluster. Helm charts package the specifications to generate YAML files for Kubernetes resources that build your app. These Kubernetes resources are automatically applied in your cluster and versioned by Helm. You can also use Helm to specify and package your own app and let Helm generate the YAML files for your Kubernetes resources.  
+[Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh) is a Kubernetes package manager that uses Helm charts to define, install, and upgrade complex Kubernetes apps in your cluster. Helm charts package the specifications to generate YAML files for Kubernetes resources that build your app. These Kubernetes resources are automatically applied in your cluster and assigned a version by Helm. You can also use Helm to specify and package your own app and let Helm generate the YAML files for your Kubernetes resources.  
 
 To use Helm in your cluster, you must install the Helm CLI on your local machine and the Helm server Tiller in every cluster where you want to use Helm.
 
 **What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?** </br>
-For an overview of available Helm charts, see the [Helm charts catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts). The Helm charts listed in this catalog are grouped as follows:
+For an overview of available Helm charts, see the [Helm charts catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts). The Helm charts that are listed in this catalog are grouped as follows:
 
 - **iks-charts**: Helm charts that are approved for {{site.data.keyword.containerlong_notm}}. The name of this repo was changed from `ibm` to `iks-charts`.
 - **ibm-charts**: Helm charts that are approved for {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.Bluemix_notm}} Private clusters.
@@ -47,13 +47,13 @@ For an overview of available Helm charts, see the [Helm charts catalog ![Externa
 Helm charts from the **iks-charts** and **ibm-charts** repositories are fully integrated into the {{site.data.keyword.Bluemix_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
 **What are the prerequisites to use Helm and can I use Helm in a private cluster?** </br>
-To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Clusters that have the public service endpoint enabled can automatically access the image. Private clusters that are protected with a custom firewall, or clusters that have enabled the private service endpoint only, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller), or [install Helm charts without using Tiller](#private_install_without_tiller).
+To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Clusters that enable the public service endpoint can automatically access the image. Private clusters that are protected with a custom firewall, or clusters that enabled the private service endpoint only, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller), or [install Helm charts without using Tiller](#private_install_without_tiller).
 
 
 ## Setting up Helm in a cluster with public access
 {: #public_helm_install}
 
-If your cluster has enabled the public service endpoint, you can install the Helm server Tiller by using the public image in the Google Container Registry.
+If your cluster enabled the public service endpoint, you can install the Helm server Tiller by using the public image in the Google Container Registry.
 {: shortdesc}
 
 Before you begin:
@@ -64,7 +64,7 @@ To install Helm in a cluster with public access:
 
 1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
 
-2. Check if you already installed Tiller with a Kubernetes service account in your cluster.
+2. Check whether you already installed Tiller with a Kubernetes service account in your cluster.
    ```
    kubectl get serviceaccount --all-namespaces | grep tiller
    ```
@@ -191,7 +191,7 @@ If you want to install a Helm chart without using Tiller, see [Private clusters:
 {: tip}
 
 Before you begin:
-- Install Docker on your local machine. If you installed the [{{site.data.keyword.Bluemix_notm}} CLI](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli), Docker is already installed.
+- Install Docker on your local machine. If you installed the [{{site.data.keyword.Bluemix_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started), Docker is already installed.
 - [Install the {{site.data.keyword.registryshort_notm}} CLI plug-in and set up a namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install).
 - To install Tiller with a Kubernetes service account and cluster role binding in the `kube-system` namespace, make sure that you have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
 

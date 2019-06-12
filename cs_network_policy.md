@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -444,7 +444,7 @@ policy changes to be applied throughout the cluster.
 If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must enable a VRF or VLAN spanning so that your worker nodes can communicate with each other on the private network. However, when VRF or VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.Bluemix_notm}} account can communicate with workers.
 {: shortdesc}
 
-You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). This set of Calico policies and host endpoints isolate the private network traffic of a cluster from other resources in the account's private network.
+You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). This set of Calico policies and host endpoints isolates the private network traffic of a cluster from other resources in the account's private network.
 
 The policies target the worker node private interface (eth0) and the pod network of a cluster.
 
@@ -696,7 +696,7 @@ To log denied traffic:
     ```
     {: screen}
 
-2. To log all the traffic that is denied by the policy you created in the previous step, create a Calico NetworkPolicy named `log-denied-packets`. For example, the following log policy uses the same pod selector as the example `access-nginx` Kubernetes policy described in step 1, which adds this policy to the Calico Iptables rule chain. By using a higher order number, such as `3000`, you can ensure that this rule is added to the end of the Iptables rule chain. Any request packet from the `run=access`-labeled pod that matches the `access-nginx` policy rule is accepted by the `run=nginx`-labeled pods. However, when packets from any other source try to match the low-order `access-nginx` policy rule, they are denied. Those packets then try to match the high-order `log-denied-packets` policy rule. `log-denied-packets` logs any packets that arrive to it, so only packets that were denied by the `run=nginx`-labeled pods are logged. After the packets' attempts are logged, the packets are dropped.
+2. To log all the traffic that is denied by the policy you created in the previous step, create a Calico NetworkPolicy named `log-denied-packets`. For example, the following log policy uses the same pod selector as the example `access-nginx` Kubernetes policy described in step 1, which adds this policy to the Calico Iptables rule chain. By using a higher-order number, such as `3000`, you can ensure that this rule is added to the end of the Iptables rule chain. Any request packet from the `run=access`-labeled pod that matches the `access-nginx` policy rule is accepted by the `run=nginx`-labeled pods. However, when packets from any other source try to match the low-order `access-nginx` policy rule, they are denied. Those packets then try to match the high-order `log-denied-packets` policy rule. `log-denied-packets` logs any packets that arrive to it, so only packets that were denied by the `run=nginx`-labeled pods are logged. After the packets' attempts are logged, the packets are dropped.
   ```
   apiVersion: projectcalico.org/v3
   kind: NetworkPolicy
