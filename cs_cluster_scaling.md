@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, node scaling
 
@@ -205,7 +205,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
 
 **Before you begin**:
 
-1.  [Install the required CLI and plug-ins](/docs/cli?topic=cloud-cli-ibmcloud-cli):
+1.  [Install the required CLI and plug-ins](/docs/cli?topic=cloud-cli-getting-started):
     *  {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)
     *  {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`)
     *  {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
