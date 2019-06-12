@@ -28,7 +28,7 @@ subcollection: containers
 
 
 
-# Troubleshooting cluster storage
+# Troubleshooting cluster storage 
 {: #cs_troubleshoot_storage}
 
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting cluster storage.
