@@ -27,7 +27,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 
-# Troubleshooting cluster networking
+# Troubleshooting cluster networking 
 {: #cs_troubleshoot_network}
 
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting cluster networking.
