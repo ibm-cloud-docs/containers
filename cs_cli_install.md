@@ -137,7 +137,7 @@ Using an OpenShift cluster? [Install the OpenShift Origin CLI (`oc`)](#cli_oc). 
 4.  If you have clusters that run different versions of Kubernetes, such as 1.14.2 and 1.12.9, download each `kubectl` version binary to a separate directory. Then, you can set up an alias in your local terminal profile to point to the `kubectl` binary directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
 5.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use.
 
-Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps).
+Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps). 
 
 For more information about the Kubernetes CLI, see the [`kubectl` reference docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
 {: note}
