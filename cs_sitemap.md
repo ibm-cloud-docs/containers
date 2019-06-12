@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 ---
 
@@ -527,7 +527,7 @@ lastupdated: "2019-06-11"
 [HTTPS load balancing with Ingress application load balancers (ALB)](/docs/containers?topic=containers-ingress#ingress)
 * [Sample YAMLs](/docs/containers?topic=containers-ingress#sample_ingress)
 * [What is Ingress?](/docs/containers?topic=containers-ingress#planning)
-  * [What comes with Ingress?](/docs/containers?topic=containers-ingress#components)
+  * [What comes with Ingress?](/docs/containers?topic=containers-ingress#ingress_components)
   * [How are IPs assigned to Ingress ALBs?](/docs/containers?topic=containers-ingress#ips)
     * [How does a request get to my app with Ingress in a single zone cluster?](/docs/containers?topic=containers-ingress#architecture-single)
     * [How does a request get to my app with Ingress in a multizone cluster?](/docs/containers?topic=containers-ingress#architecture-multi)

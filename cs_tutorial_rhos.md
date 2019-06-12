@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -568,6 +568,7 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
     In the configuration file, add the following specifications.
     *   In `spec.template.spec`, add `serviceAccount: logdna`.
     *   In `spec.template.spec.containers`, add `securityContext: privileged: true`.
+    *   If you created your {{site.data.keyword.la_short}} instance in a region other than `us-south`, update the `spec.template.spec.containers.env` environment variable values for the `LDAPIHOST` and `LDLOGHOST` with the `<region>`.
 
     Example output:
     ```
@@ -578,13 +579,21 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
       template:
         ...
         spec:
-          containers:
-            image: logdna/logdna-agent:latest
-            imagePullPolicy: Always
-            name: logdna-agent
-            securityContext:
-              privileged: true
           serviceAccount: logdna
+          containers:
+          - securityContext:
+              privileged: true
+            ...
+            env:
+            - name: LOGDNA_AGENT_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: logdna-agent-key
+                  name: logdna-agent-key
+            - name: LDAPIHOST
+              value: api.<region>.logging.cloud.ibm.com
+            - name: LDLOGHOST
+              value: logs.<region>.logging.cloud.ibm.com
           ...
     ```
     {: screen}

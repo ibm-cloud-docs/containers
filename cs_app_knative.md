@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 ---
 
@@ -26,15 +26,15 @@ lastupdated: "2019-06-11"
 Learn how to install and use Knative in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-**What is Knative and why should I use it?**</br>
-[Knative](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others with the goal to extend the capabilities of Kubernetes to help you create modern, source-centric containerized, and serverless apps on top of your Kubernetes cluster. The platform is designed to address the needs of developers who today must decide what type of app they want to run in the cloud: 12-factor apps, containers, or functions. Each type of app requires an open source or proprietary solution that is tailored to these apps: Cloud Foundry for 12-factor apps, Kubernetes for containers, and OpenWhisk and others for functions. In the past, developers had to decide what approach they wanted to follow, which led to inflexibility and complexity when different types of apps had to be combined.  
+**What is Knative and why I want use it?**</br>
+[Knative](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others. The goal is to extend the capabilities of Kubernetes to help you create modern, source-centric containerized, and serverless apps on top of your Kubernetes cluster. The platform is designed to address the needs of developers who today must decide what type of app they want to run in the cloud: 12-factor apps, containers, or functions. Each type of app requires an open source or proprietary solution that is tailored to these apps: Cloud Foundry for 12-factor apps, Kubernetes for containers, and OpenWhisk and others for functions. In the past, developers had to decide what approach they wanted to follow, which led to inflexibility and complexity when different types of apps had to be combined.  
 
 Knative uses a consistent approach across programming languages and frameworks to abstract the operational burden of building, deploying, and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. You can use proven build packs that you are already familiar with, such as Cloud Foundry, Kaniko, Dockerfile, Bazel, and others. By integrating with Istio, Knative ensures that your serverless and containerized workloads can be easily exposed on the internet, monitored, and controlled, and that your data is encrypted during transit.
 
 **How does Knative work?**</br>
 Knative comes with three key components, or _primitives_, that help you to build, deploy, and manage your serverless apps in your Kubernetes cluster:
 
-- **Build:** The `Build` primitive supports creating a set of steps to build your app from source code to a container image. Imagine using a simple build template where you specify the source repo to find your app code and the container registry where you want to host the image. With just a single command, you can instruct Knative to take this build template, pull the source code, create the image, and push the image to your container registry so that you can use the image in your container.
+- **Build:** The `Build` primitive supports creating a set of steps to build your app from source code to a container image. Imagine you use a simple build template where you specify the source repo to find your app code and the container registry where you want to host the image. With just a single command, you can instruct Knative to take this build template, pull the source code, create the image, and push the image to your container registry so that you can use the image in your container.
 - **Serving:** The `Serving` primitive helps to deploy serverless apps as Knative services and to automatically scale them, even down to zero instances. To expose your serverless and containerized workloads, Knative uses Istio. When you install the managed Knative add-on, the managed Istio add-on is automatically installed as well. By using the traffic management and intelligent routing capabilities of Istio, you can control what traffic is routed to a specific version of your service, which makes it easy for a developer to test and roll out a new app version or do A-B testing.
 - **Eventing:** With the `Eventing` primitive, you can create triggers or event streams that other services can subscribe to. For example, you might want to kick off a new build of your app every time code is pushed to your GitHub master repo. Or you want to run a serverless app only if the temperature drops below freezing point. For example, the `Eventing` primitive can be integrated into your CI/CD pipeline to automate the build and deployment of apps in case a specific event occurs.
 
@@ -134,7 +134,7 @@ When you create a Knative service, your app is automatically deployed as a Kuber
 When you update your Knative service, a new version of your serverless app is created. This version is assigned the same public and private host names as your previous version. By default, all incoming network traffic is routed to the latest version of your app. However, you can also specify the percentage of incoming network traffic that you want to route to a specific app version so that you can do A-B testing. You can split incoming network traffic between two app versions at a time, the current version of your app and the new version that you want to roll over to.  
 
 **Can I bring my own custom domain and TLS certificate?** </br>
-You can change the configmap of your Istio Ingress gateway and the Ingress routing rules to use your custom domain name and TLS certificate when assigning a host name to your serverless app. For more information, see [Setting up custom domain names and certificates](#knative-custom-domain-tls).
+You can change the configmap of your Istio Ingress gateway and the Ingress routing rules to use your custom domain name and TLS certificate when you assign a host name to your serverless app. For more information, see [Setting up custom domain names and certificates](#knative-custom-domain-tls).
 
 To deploy your serverless app as a Knative service:
 
@@ -237,7 +237,7 @@ To deploy your serverless app as a Knative service:
    ```
    {: screen}
 
-5. List the number of pods that were created for your Knative service. When you follow the example in this topic, one pod is deployed that consists of two containers. One container runs your `Hello World` app and the other container is a side car that runs Istio and Knative monitoring and logging tools.
+5. List the number of pods that were created for your Knative service. In the example in this topic, one pod is deployed that consists of two containers. One container runs your `Hello World` app and the other container is a side car that runs Istio and Knative monitoring and logging tools.
    ```
    kubectl get pods
    ```
@@ -504,7 +504,7 @@ Review common Knative service settings that you might find useful as you develop
 - [Setting minimum and maximum number of pods](#knative-min-max-pods)
 - [Specifying the maximum number of requests per pod](#max-request-per-pod)
 - [Creating private-only serverless apps](#knative-private-only)
-- [Forcing the Knative service to re-pull a container image](#knative-repull-image)
+- [Forcing the Knative service to repull a container image](#knative-repull-image)
 
 ### Setting minimum and maximum number of pods
 {: #knative-min-max-pods}
@@ -621,12 +621,12 @@ spec:
 </tbody>
 </table>
 
-### Forcing the Knative service to re-pull a container image
+### Forcing the Knative service to repull a container image
 {: #knative-repull-image}
 
-The current implementation of Knative does not provide a standard way to force your Knative `Serving` component to re-pull a container image. To re-pull an image from your registry, choose between the following options:
+The current implementation of Knative does not provide a standard way to force your Knative `Serving` component to repull a container image. To repull an image from your registry, choose between the following options:
 
-- **Modify the Knative service `revisionTemplate`**: The `revisionTemplate` of a Knative service is used to create a revision of your Knative service. If you modify this revision template and, for example, add the `repullFlag` annotation, Knative must create a new revision for your app. As part of creating the revision, Knative must check for container image updates. When you set `imagePullPolicy: Always`, Knative cannot use the image cache in the cluster, but instead must pull the image from your container registry.
+- **Modify the Knative service `revisionTemplate`**: The `revisionTemplate` of a Knative service is used to create a revision of your Knative service. If you modify this revision template and for example, add the `repullFlag` annotation, Knative must create a new revision for your app. As part of creating the revision, Knative must check for container image updates. When you set `imagePullPolicy: Always`, Knative cannot use the image cache in the cluster, but instead must pull the image from your container registry.
    ```
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service

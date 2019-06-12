@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Release notes
 {: #iks-release}
 
-Use these release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
+Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
 
 ## June 2019
@@ -59,7 +59,7 @@ Use these release notes to learn about the latest changes to the {{site.data.key
   <td>5 June 2019</td>
   <td><ul>
   <li><strong>CLI reference</strong>: Updated the [CLI reference page](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) to reflect multiple changes for the [release of version 0.3.34](/docs/containers?topic=containers-cs_cli_changelog) of the {{site.data.keyword.containerlong_notm}} CLI plug-in.</li>
-  <li><strong>New! Red Hat OpenShift on IBM Cloud clusters (beta)</strong>: With the Red Hat OpenShift on IBM Cloud beta, you can create {{site.data.keyword.containerlong_notm}} clusters with worker nodes that come installed with the OpenShift container orchestration platform software. You get all the advantages of managed {{site.data.keyword.containerlong_notm}} for your cluster infrastructure environment, while using the [OpenShift tooling and catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/welcome/index.html) that runs on Red Hat Enterprise Linux for your app deployments. To get started, see [Tutorial: Creating a Red Hat OpenShift on IBM Cloud cluster (beta)](/docs/containers?topic=containers-openshift_tutorial).</li>
+  <li><strong>New! Red Hat OpenShift on IBM Cloud clusters (beta)</strong>: With the Red Hat OpenShift on IBM Cloud beta, you can create {{site.data.keyword.containerlong_notm}} clusters with worker nodes that come installed with the OpenShift container orchestration platform software. You get all the advantages of managed {{site.data.keyword.containerlong_notm}} for your cluster infrastructure environment, along with the [OpenShift tooling and catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/welcome/index.html) that runs on Red Hat Enterprise Linux for your app deployments. To get started, see [Tutorial: Creating a Red Hat OpenShift on IBM Cloud cluster (beta)](/docs/containers?topic=containers-openshift_tutorial).</li>
   </ul></td>
 </tr>
 <tr>
@@ -128,7 +128,7 @@ Use these release notes to learn about the latest changes to the {{site.data.key
     <li>[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)</li></ul>
   </li>
   <li><strong>Cluster version updates</strong>: Updated the [unsupported versions policy](/docs/containers?topic=containers-cs_versions) to note that you cannot update clusters if the master version is three or more versions behind the oldest supported version. You can view if the cluster is **unsupported** by reviewing the **State** field when you list clusters.</li>
-  <li><strong>Istio</strong>: Updated the [Istio page](/docs/containers?topic=containers-istio) to remove the limitation that Istio does not work in clusters that are connected to a private VLAN only. Added a step to the [Updating managed add-ons topic](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons) to re-create Istio gateways that use TLS sections after the update of an Istio managed add-on is complete.</li>
+  <li><strong>Istio</strong>: Updated the [Istio page](/docs/containers?topic=containers-istio) to remove the limitation that Istio does not work in clusters that are connected to a private VLAN only. Added a step to the [Updating managed add-ons topic](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons) to re-create Istio gateways that use TLS sections after the update of the Istio managed add-on is complete.</li>
   <li><strong>Popular topics</strong>: Replaced the popular topics with this release notes page for new features and updates that are specific to {{site.data.keyword.containershort_notm}}. For the latest information on {{site.data.keyword.Bluemix_notm}} products, check out the [Announcements](https://www.ibm.com/cloud/blog/announcements).</li>
   </ul></td>
 </tr>

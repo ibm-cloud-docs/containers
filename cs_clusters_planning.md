@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -176,7 +176,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 In this scenario, you want to run workloads in a cluster that are accessible to services, databases, or other resources in your on-premises data center. However, you might need to provide limited public access to your cluster, and want to ensure that any public access is controlled and isolated in your cluster. For example, you might need your workers to access an {{site.data.keyword.Bluemix_notm}} service that does not support private service endpoints, and must be accessed over the public network. Or, you might need to provide limited public access to an app that runs in your cluster.
 {: shortdesc}
 
-To achieve this cluster setup, you can create a firewall by [using edge nodes and Calico network policies](#calico-pc) or [using a gateway device](#vyatta).
+To achieve this cluster setup, you can create a firewall by [using edge nodes and Calico network policies](#calico-pc) or [using a gateway device](#vyatta-gateway).
 
 ### Using edge nodes and Calico network policies
 {: #calico-pc}
@@ -208,7 +208,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 </br>
 
 ### Using a gateway device
-{: #vyatta}
+{: #vyatta-gateway}
 
 Allow limited public connectivity to your cluster by configuring a gateway device, such as a Virtual Router Appliance (Vyatta), as a public gateway and firewall.
 {: shortdesc}

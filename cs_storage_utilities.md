@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -577,7 +577,7 @@ To attach the block storage device to a non-SDS worker node, you must create a p
         </tr>
         <tr>
         <td><code>ibm.io/lunid</code></td>
-        <td>Enter the lun ID of your block storage device that you retrieved earlier. </td>
+        <td>Enter the LUN ID of your block storage device that you retrieved earlier. </td>
         </tr>
         <tr>
         <td><code>ibm.io/nodeip</code></td>

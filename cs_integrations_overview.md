@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -125,32 +125,6 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 </tbody>
 </table>
-
-<br />
-
-
-## Database services
-{: #database_services}
-
-<table summary="The table shows available services that you can add to your cluster to add database capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
-<caption>Database services</caption>
-<thead>
-<tr>
-<th>Service</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-  <tr>
-    <td>{{site.data.keyword.blockchainfull_notm}} Platform 2.0 beta</td>
-    <td>Deploy and manage your own {{site.data.keyword.blockchainfull_notm}} Platform on {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.blockchainfull_notm}} Platform 2.0, you can host {{site.data.keyword.blockchainfull_notm}} networks or create organizations that can join other {{site.data.keyword.blockchainfull_notm}} 2.0 networks. For more information about how to set up {{site.data.keyword.blockchainfull_notm}} in {{site.data.keyword.containerlong_notm}}, see [About {{site.data.keyword.blockchainfull_notm}} Platform free 2.0 beta](/docs/services/blockchain?topic=blockchain-ibp-console-overview#ibp-console-overview).</td>
-  </tr>
-<tr>
-  <td>Cloud databases</td>
-  <td>You can choose between a variety of {{site.data.keyword.Bluemix_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.Bluemix_notm}} catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=databases).  </td>
-  </tr>
-  </tbody>
-  </table>
 
 <br />
 

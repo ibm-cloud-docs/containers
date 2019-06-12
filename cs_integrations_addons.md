@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -87,7 +87,7 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
 
    2. Save any resources created from these CRDs.
 
-4. Optional for Knative: If you modified any of the following resources, get the YAML file and save them to your local machine. If you modified any of these resources, but you want use the installed default instead, you can delete the resource. After a few minutes, the resource is re-created with the installed default values.
+4. Optional for Knative: If you modified any of the following resources, get the YAML file and save them to your local machine. If you modified any of these resources, but you want to use the installed default instead, you can delete the resource. After a few minutes, the resource is re-created with the installed default values.
   <table summary="Knative resources table">
   <caption>Knative resources</caption>
   <thead><tr><th>Resource name</th><th>Resource type</th><th>Namespace</th></tr></thead>

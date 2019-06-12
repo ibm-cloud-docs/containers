@@ -147,4 +147,4 @@ Misuse includes:
 *   Unauthorized modification of any service or system
 *   Violation of the rights of others
 
-See [Cloud Services terms](/docs/overview/terms-of-use/notices.html#terms) for overall terms of use.
+See [Cloud Services terms](/docs/overview/terms-of-use?topic=overview-terms#terms) for overall terms of use.

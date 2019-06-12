@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-07"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -180,7 +180,7 @@ ibmcloud plugin list
   <tr>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
     <td>Deprecated: [ibmcloud ks kube-versions](#cs_kube_versions)</td>
-    <td>[ibmcloud ks versions](#cs_versions)</td>
+    <td>[ibmcloud ks versions](#cs_versions_command)</td>
     <td> </td>
   </tr>
 </tbody>
@@ -1633,7 +1633,7 @@ ibmcloud ks clusters --locations ams03,wdc,ap
 View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to the default version for the latest, stable capabilities.
 {: shortdesc}
 
-This command is deprecated. Use the [ibmcloud ks versions command](#cs_versions) instead.
+This command is deprecated. Use the [ibmcloud ks versions command](#cs_versions_command) instead.
 {: deprecated}
 
 ```
@@ -1661,7 +1661,7 @@ ibmcloud ks kube-versions
 </br>
 
 ### ibmcloud ks versions
-{: #cs_versions}
+{: #cs_versions_command}
 
 List all the container platform versions that are available for {{site.data.keyword.containerlong_notm}} clusters. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to the default version for the latest, stable capabilities.
 {: shortdesc}
