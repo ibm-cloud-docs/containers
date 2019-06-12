@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -95,7 +95,7 @@ If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after
 </br>
 **To install the CLIs and their prerequisites**
 
-1. Install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq). This installation includes:
+1. Install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started). This installation includes:
   - The base {{site.data.keyword.Bluemix_notm}} CLI. The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
   - The {{site.data.keyword.containerlong_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud ks`.
   - {{site.data.keyword.registryshort_notm}} plug-in. Use this plug-in to set up and manage a private image repository in {{site.data.keyword.registryshort_notm}}. The prefix for running registry commands is `ibmcloud cr`.
