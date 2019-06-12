@@ -96,7 +96,7 @@ For reference information about these CLIs, see the documentation for those tool
 To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, install the Kubernetes CLI (`kubectl`). The latest stable version of `kubectl` is installed with the base {{site.data.keyword.Bluemix_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. For example, [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
 {: shortdesc}
 
-Using an OpenShift cluster? Install the OpenShift Origin CLI (`oc`) instead, which comes with `kubectl`. If you have both Red Hat OpenShift on IBM Cloud and Ubuntu native {{site.data.keyword.containershort_notm}} clusters, make sure to use the `kubectl` binary file that matches your cluster `major.minor` Kubernetes version.
+Using an OpenShift cluster? [Install the OpenShift Origin CLI (`oc`)](#cli_oc). If you have both Red Hat OpenShift on IBM Cloud and Ubuntu {{site.data.keyword.containershort_notm}} clusters, make sure to use the `kubectl` binary file that matches your cluster `major.minor` Kubernetes version. You might want to set up multiple directories on your local machine to organize different `kubectl` versions and then create aliases in your terminal for these directories.
 {: tip}
 
 1.  If you already have a cluster, check that the version of your client `kubectl` CLI matches the version of the cluster API server.
@@ -134,7 +134,8 @@ Using an OpenShift cluster? Install the OpenShift Origin CLI (`oc`) instead, whi
         chmod +x /usr/local/bin/kubectl
         ```
         {: pre}
-4.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use.
+4.  If you have clusters that run different versions of Kubernetes, such as 1.14.2 and 1.12.9, download each `kubectl` version binary to a separate directory. Then, you can set up an alias in your local terminal profile to point to the `kubectl` binary directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
+5.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use.
 
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 
@@ -175,7 +176,15 @@ Using both Red Hat OpenShift on IBM Cloud and Ubuntu native {{site.data.keyword.
         /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
         ```
         {: screen}
-3.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use. You can repeat the steps to enable autocompletion for `oc` commands. For example in bash on Linux, instead of `kubectl completion bash >/etc/bash_completion.d/kubectl`, you can run `oc completion bash >/etc/bash_completion.d/oc_completion`.
+3.  If you have clusters that run different versions of Kubernetes, such as an OpenShift cluster with version 1.11 and a native Kubernetes cluster with version 1.14.2, download each `kubectl` version binary file to a separate directory. 
+    1.  Delete the `kubectl` binary file that comes with the `oc` installation, because this `kubectl` version does not work with native Kubernetes clusters.
+        ```
+        rm /usr/local/bin/kubectl
+        ```
+        {: pre}
+    2.  [Download separate `kubectl` binary files](#kubectl) that match the versions of your OpenShift and native Kubernetes clusters.
+    3.  **Optional**: Set up an alias in your local terminal profile to point to separate binaries that match the version of `kubectl` your cluster needs.
+4.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use. You can repeat the steps to enable autocompletion for `oc` commands. For example in bash on Linux, instead of `kubectl completion bash >/etc/bash_completion.d/kubectl`, you can run `oc completion bash >/etc/bash_completion.d/oc_completion`.
 
 Next, start [Creating a Red Hat OpenShift on IBM Cloud cluster (preview)](/docs/containers?topic=containers-openshift_tutorial).
 
