@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -33,13 +33,13 @@ You can deploy {{site.data.keyword.containerlong}} clusters worldwide. When you 
 
 _{{site.data.keyword.containerlong_notm}} locations_
 
-{{site.data.keyword.Bluemix_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). Use the [global endpoint](#endpoint) instead.
+{{site.data.keyword.cloud_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). Use the [global endpoint](#endpoint) instead.
 {: deprecated}
 
 ## {{site.data.keyword.containerlong_notm}} locations
 {: #locations}
 
-{{site.data.keyword.Bluemix_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions. Free clusters are available in only select locations. Other {{site.data.keyword.Bluemix_notm}} services might be available globally, or within a specific location.
+{{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions. Free clusters are available in only select locations. Other {{site.data.keyword.cloud_notm}} services might be available globally, or within a specific location.
 {: shortdesc}
 
 ### Available locations
@@ -96,7 +96,7 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 {: tip}
 
 
-{{site.data.keyword.Bluemix_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.
+{{site.data.keyword.cloud_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.
 {: deprecated}
 
 **Multizone metro locations**
@@ -354,7 +354,7 @@ Free clusters are limited to specific locations.
 
 **Creating a free cluster in the CLI**: Before you create a free cluster, you must target a region by running `ibmcloud ks region-set`. Your cluster is created in a metro within the region that you target: the Sydney metro in `ap-south`, the Frankfurt metro in `eu-central`, the London metro in `uk-south`, or the Dallas matro in `us-south`. Note that you cannot specify a zone within the metro.
 
-**Creating a free cluster in the {{site.data.keyword.Bluemix_notm}} console**: When you use the console, you can select a geography and a metro location in the geography. You can select the Dallas metro in North America, the Frankfurt or London metros in Europe, or the Sydney metro in Asia Pacific. Your cluster is created in a zone within the metro you choose.
+**Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you can select a geography and a metro location in the geography. You can select the Dallas metro in North America, the Frankfurt or London metros in Europe, or the Sydney metro in Asia Pacific. Your cluster is created in a zone within the metro you choose.
 
 <br />
 
@@ -362,16 +362,16 @@ Free clusters are limited to specific locations.
 ## Accessing the global endpoint
 {: #endpoint}
 
-You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} locations (formerly called regions). For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location. To access these resources, you can use the global endpoints and filter by location.
+You can organize your resources across {{site.data.keyword.cloud_notm}} services by using {{site.data.keyword.cloud_notm}} locations (formerly called regions). For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location. To access these resources, you can use the global endpoints and filter by location.
 {:shortdesc}
 
-### Logging in to {{site.data.keyword.Bluemix_notm}}
+### Logging in to {{site.data.keyword.cloud_notm}}
 {: #login-ic}
 
-When you log in to the {{site.data.keyword.Bluemix_notm}} (`ibmcloud`) command line, you are prompted to select a region. However, this region does not affect the {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`) endpoint, which still uses the global endpoint. Note that you do still need to target the resource group that your cluster is in if it is not in the default resource group.
+When you log in to the {{site.data.keyword.cloud_notm}} (`ibmcloud`) command line, you are prompted to select a region. However, this region does not affect the {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`) endpoint, which still uses the global endpoint. Note that you do still need to target the resource group that your cluster is in if it is not in the default resource group.
 {: shortdesc}
 
-To log in to the {{site.data.keyword.Bluemix_notm}} global API endpoint and target the resource group that your cluster is in:
+To log in to the {{site.data.keyword.cloud_notm}} global API endpoint and target the resource group that your cluster is in:
 ```
 ibmcloud login -a https://cloud.ibm.com -g <nondefault_resource_group_name>
 ```
@@ -380,7 +380,7 @@ ibmcloud login -a https://cloud.ibm.com -g <nondefault_resource_group_name>
 ### Logging in to {{site.data.keyword.containerlong_notm}}
 {: #login-iks}
 
-When you log in to {{site.data.keyword.Bluemix_notm}}, you can access the {{site.data.keyword.containershort_notm}}. To help you get started, check out the following resources for using the {{site.data.keyword.containerlong_notm}} CLI and API.
+When you log in to {{site.data.keyword.cloud_notm}}, you can access the {{site.data.keyword.containershort_notm}}. To help you get started, check out the following resources for using the {{site.data.keyword.containerlong_notm}} CLI and API.
 {: shortdesc}
 
 **{{site.data.keyword.containerlong_notm}} CLI**:
@@ -439,16 +439,16 @@ If you need to specify a region in an API call, remove the `/global` parameter f
 
 
 
-## Deprecated: Previous {{site.data.keyword.Bluemix_notm}} region and zone structure
+## Deprecated: Previous {{site.data.keyword.cloud_notm}} region and zone structure
 {: #bluemix_regions}
 
-Previously, your {{site.data.keyword.Bluemix_notm}} resources were organized into regions. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries and geographies. The following table maps the previous {{site.data.keyword.Bluemix_notm}} regions, {{site.data.keyword.containerlong_notm}} regions, and {{site.data.keyword.containerlong_notm}} zones. Multizone-capable zones are in bold.
+Previously, your {{site.data.keyword.cloud_notm}} resources were organized into regions. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries and geographies. The following table maps the previous {{site.data.keyword.cloud_notm}} regions, {{site.data.keyword.containerlong_notm}} regions, and {{site.data.keyword.containerlong_notm}} zones. Multizone-capable zones are in bold.
 {: shortdesc}
 
 Region-specific endpoints are deprecated. Use the [global endpoint](#endpoint) instead. If you must use regional endpoints, [set the `IKS_BETA_VERSION` environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to `0.2`](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).
 {: deprecated}
 
-| {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.Bluemix_notm}} regions | Available zones in the region |
+| {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.cloud_notm}} regions | Available zones in the region |
 | --- | --- | --- |
 | AP North (standard clusters only) | Tokyo | che01, hkg02, seo01, sng01, **tok02, tok04, tok05** |
 | AP South | Sydney | mel01, **syd01, syd04, syd05** |
@@ -456,12 +456,12 @@ Region-specific endpoints are deprecated. Use the [global endpoint](#endpoint) i
 | UK South | London | lon02, **lon04, lon05, lon06** |
 | US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
 | US South | Dallas | **dal10, dal12, dal13**, mex01, sjc03, sjc04, sao01 |
-{: caption="Corresponding {{site.data.keyword.containershort_notm}} and {{site.data.keyword.Bluemix_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="top"}
+{: caption="Corresponding {{site.data.keyword.containershort_notm}} and {{site.data.keyword.cloud_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="top"}
 
-By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.Bluemix_notm}} as a whole.
+By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.cloud_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.cloud_notm}} as a whole.
 
 You might want to log in to another {{site.data.keyword.containerlong_notm}} region for the following reasons:
-  * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
-  * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region that you are logged in to.
+  * You created {{site.data.keyword.cloud_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
+  * You want to access a cluster in a region that is different from the default {{site.data.keyword.cloud_notm}} region that you are logged in to.
 
 To quickly switch regions, use the `ibmcloud ks region-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set).

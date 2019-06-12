@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -38,7 +38,7 @@ If you want to troubleshoot your Ingress or monitor Ingress activity, you can re
 
 Logs are automatically collected for your Ingress ALBs. To view the ALB logs, choose between two options.
 * [Create a logging configuration for the Ingress service](/docs/containers?topic=containers-health#configuring) in your cluster.
-* Check the logs from the CLI. **Note**: You must have at least the [**Reader** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+* Check the logs from the CLI. **Note**: You must have at least the [**Reader** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
     1. Get the ID of a pod for an ALB.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -137,7 +137,7 @@ You can customize the content and format of logs that are collected for the Ingr
 
 By default, Ingress logs are formatted in JSON and display common log fields. However, you can also create a custom log format by choosing which log components are forwarded and how the components are arranged in the log output
 
-Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
 1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
@@ -263,7 +263,7 @@ Install the metrics exporter Helm chart to monitor an ALB in your cluster.
 The ALB metrics exporter pods must deploy to the same worker nodes that your ALBs are deployed to. If your ALBs run on edge worker nodes, and those edge nodes are tainted to prevent other workload deployments, the metrics exporter pods cannot be scheduled. You must remove the taints by running `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
 {: note}
 
-1.  **Important**: [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repositories.
+1.  **Important**: [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.cloud_notm}} Helm repositories.
 
 2. Install the `ibmcloud-alb-metrics-exporter` Helm chart to your cluster. This Helm chart deploys an ALB metrics exporter and creates an `alb-metrics-service-account` service account in the `kube-system` namespace. Replace <alb-ID> with the ID of the ALB that you want to collect metrics for. To view the IDs for the ALBs in your cluster, run <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>.
   You must deploy a chart for each ALB that you want to monitor.
@@ -695,7 +695,7 @@ Shared memory zones are defined so that worker processes can share information s
 
 In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-size` field sets the size of the shared memory zone for metrics data collection. By default, `vts-status-zone-size` is set to `10m`. If you have a large environment that requires more memory for metrics collection, you can override the default to instead use a larger value by following these steps.
 
-Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
 1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 

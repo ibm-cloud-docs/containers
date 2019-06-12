@@ -496,7 +496,7 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 **Command options**:
 <dl>
 <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
-<dd>The {{site.data.keyword.containerlong_notm}} API endpoint. Note that this endpoint is different than the {{site.data.keyword.Bluemix_notm}} endpoints. This value is required to set the API endpoint.
+<dd>The {{site.data.keyword.containerlong_notm}} API endpoint. Note that this endpoint is different than the {{site.data.keyword.cloud_notm}} endpoints. This value is required to set the API endpoint.
    </dd>
 
 <dt><code>--insecure</code></dt>
@@ -531,10 +531,10 @@ Region:                us-south
 ### ibmcloud ks api-key-info
 {: #cs_api_key_info}
 
-View the name and email address for the owner of the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key in an {{site.data.keyword.containerlong_notm}} resource group.
+View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key in an {{site.data.keyword.containerlong_notm}} resource group.
 {: shortdesc}
 
-The {{site.data.keyword.Bluemix_notm}} API key is automatically set for a resource group and region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. By doing that, the {{site.data.keyword.Bluemix_notm}} IAM API key for this user is stored in the account for this resource group and region. The API key is used to order resources in IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs. A different API key can be set for each region within a resource group.
+The {{site.data.keyword.cloud_notm}} API key is automatically set for a resource group and region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. By doing that, the {{site.data.keyword.cloud_notm}} IAM API key for this user is stored in the account for this resource group and region. The API key is used to order resources in IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs. A different API key can be set for each region within a resource group.
 
 When a different user performs an action in this resource group and region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](/docs/containers?topic=containers-users#infra_access).
 
@@ -572,10 +572,10 @@ ibmcloud ks api-key-info --cluster my_cluster
 ### ibmcloud ks api-key-reset
 {: #cs_api_key_reset}
 
-Replace the current {{site.data.keyword.Bluemix_notm}} IAM API key in an {{site.data.keyword.Bluemix_notm}} resource group and {{site.data.keyword.containershort_notm}} region.
+Replace the current {{site.data.keyword.cloud_notm}} IAM API key in an {{site.data.keyword.cloud_notm}} resource group and {{site.data.keyword.containershort_notm}} region.
 {: shortdesc}
 
-This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.Bluemix_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.Bluemix_notm}} IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
+This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.cloud_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.cloud_notm}} IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
 
 Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users). Target the resource group and region that you want to set the API key for.
 {: important}
@@ -1108,7 +1108,7 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 ```
 {: pre}
 
-**Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.Bluemix_notm}} IAM service role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform role or only a service role, additional constraints apply.
+**Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.cloud_notm}} IAM service role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform role or only a service role, additional constraints apply.
 * **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers?topic=containers-users#platform) or a [custom RBAC policy](/docs/containers?topic=containers-users#role-binding) to perform Kubernetes actions in the cluster.
 * **Service**: If you have only a service role, you can perform this command. However, your cluster admin must give you the cluster name and ID, because you cannot run the `ibmcloud ks clusters` command or launch the {{site.data.keyword.containerlong_notm}} console to view clusters. After, you can [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) and work with Kubernetes.
 
@@ -1130,7 +1130,7 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 <dd>Retrieve environment variables in Windows PowerShell format.</dd>
 
 <dt><code>--skip-rbac</code></dt>
-<dd>Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.Bluemix_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.Bluemix_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option.</dd>
+<dd>Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1328,7 +1328,7 @@ Enable the [private service endpoint](/docs/containers?topic=containers-plan_clu
 
 To run this command:
 1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure (SoftLayer) account.
-2. [Enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
 3. Run `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>`.
 4. Follow the prompt in the CLI to refresh the Kubernetes master API server.
 5. [Reload all the worker nodes](#cs_worker_reload) in your cluster to pick up the private endpoint configuration.
@@ -1487,13 +1487,13 @@ VLAN ID   Subnet CIDR         Public   User-managed
 ### ibmcloud ks cluster-pull-secret-apply
 {: #cs_cluster_pull_secret_apply}
 
-Make an {{site.data.keyword.Bluemix_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID. The API key is then stored in a Kubernetes `imagePullSecret` so that you can pull images from your {{site.data.keyword.registryshort_notm}} namespaces for containers that are in the `default` Kubernetes namespace. This process happens automatically when you create a cluster. If you got an error during the cluster creation process or have an existing cluster, you can use this command to apply the process again.
+Make an {{site.data.keyword.cloud_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID. The API key is then stored in a Kubernetes `imagePullSecret` so that you can pull images from your {{site.data.keyword.registryshort_notm}} namespaces for containers that are in the `default` Kubernetes namespace. This process happens automatically when you create a cluster. If you got an error during the cluster creation process or have an existing cluster, you can use this command to apply the process again.
 {: shortdesc}
 
 When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} `icr.io` domains until the image pull secrets are created. To check the image pull secrets, run `kubectl get secrets | grep icr`.
 {: important}
 
-This API key method replaces the previous method of authorizing a cluster to access {{site.data.keyword.registrylong_notm}} by automatically creating a [token](/docs/services/Registry?topic=registry-registry_access#registry_tokens) and storing the token in an image pull secret. Now, by using IAM API keys to access {{site.data.keyword.registrylong_notm}}, you can customize IAM policies for the service ID to restrict access to your namespaces or specific images. For example, you can change the service ID policies in the cluster's image pull secret to pull images from only a certain registry region or namespace. Before you can customize IAM policies, you must [enable {{site.data.keyword.Bluemix_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
+This API key method replaces the previous method of authorizing a cluster to access {{site.data.keyword.registrylong_notm}} by automatically creating a [token](/docs/services/Registry?topic=registry-registry_access#registry_tokens) and storing the token in an image pull secret. Now, by using IAM API keys to access {{site.data.keyword.registrylong_notm}}, you can customize IAM policies for the service ID to restrict access to your namespaces or specific images. For example, you can change the service ID policies in the cluster's image pull secret to pull images from only a certain registry region or namespace. Before you can customize IAM policies, you must [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
 
 For more information, see [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-images#cluster_registry_auth).
 
@@ -1593,7 +1593,7 @@ ibmcloud ks cluster-update --cluster my_cluster
 ### ibmcloud ks clusters
 {: #cs_clusters}
 
-List all clusters in your {{site.data.keyword.Bluemix_notm}} account.
+List all clusters in your {{site.data.keyword.cloud_notm}} account.
 {: shortdesc}
 
 Clusters in all locations are returned. To filter clusters by a specific location, include the `--locations` flag. For example, if you filter clusters for the `dal` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `dal10` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned. Note that you can pass one location or a comma-separated list of locations.
@@ -1701,7 +1701,7 @@ ibmcloud ks versions
 ### ibmcloud ks cluster-service-bind
 {: #cs_cluster_service_bind}
 
-Create service credentials of an {{site.data.keyword.Bluemix_notm}} service and store these credentials in a Kubernetes secret in your cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
+Create service credentials of an {{site.data.keyword.cloud_notm}} service and store these credentials in a Kubernetes secret in your cluster. To view available {{site.data.keyword.cloud_notm}} services from the {{site.data.keyword.cloud_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can only add {{site.data.keyword.cloud_notm}} services that support service keys.
 {: shortdesc}
 
 For more information about service binding and what services you can add to your cluster, see [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding).
@@ -1725,10 +1725,10 @@ ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
 <dd>The name of the Kubernetes namespace where you want to create the Kubernetes secret for your service credentials. This value is required.</dd>
 
 <dt><code>--service <em>SERVICE_INSTANCE</em></code></dt>
-<dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name, run <code>ibmcloud service list</code> for Cloud Foundry services, and <code>ibmcloud resource service-instances</code> for IAM-enabled services. This value is required. </dd>
+<dd>The name of the {{site.data.keyword.cloud_notm}} service instance that you want to bind. To find the name, run <code>ibmcloud service list</code> for Cloud Foundry services, and <code>ibmcloud resource service-instances</code> for IAM-enabled services. This value is required. </dd>
 
 <dt><code>--role <em>IAM_SERVICE_ROLE</em></code></dt>
-<dd>The {{site.data.keyword.Bluemix_notm}} IAM role that you want the service key to have. This value is optional and can be used for IAM-enabled services only. If you do not set this option, your service credentials are automatically created and assigned the IAM **Writer** service access role. If you want to use existing service keys by specifying the `--key` option, do not include this option.<br><br>
+<dd>The {{site.data.keyword.cloud_notm}} IAM role that you want the service key to have. This value is optional and can be used for IAM-enabled services only. If you do not set this option, your service credentials are automatically created and assigned the IAM **Writer** service access role. If you want to use existing service keys by specifying the `--key` option, do not include this option.<br><br>
 To list available roles for the service, run `ibmcloud iam roles --service <service_name>`. The service name is the name of the service in the catalog which you can get by running `ibmcloud catalog search`.  </dd>
 
 <dt><code>-s</code></dt>
@@ -1745,10 +1745,10 @@ ibmcloud ks cluster-service-bind --cluster my_cluster --namespace my_namespace -
 ### ibmcloud ks cluster-service-unbind
 {: #cs_cluster_service_unbind}
 
-Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster by unbinding it from a Kubernetes namespace.
+Remove an {{site.data.keyword.cloud_notm}} service from a cluster by unbinding it from a Kubernetes namespace.
 {: shortdesc}
 
-When you remove an {{site.data.keyword.Bluemix_notm}} service, the service credentials are removed from the cluster. If a pod is still using the service, it fails because the service credentials cannot be found.
+When you remove an {{site.data.keyword.cloud_notm}} service, the service credentials are removed from the cluster. If a pod is still using the service, it fails because the service credentials cannot be found.
 {: note}
 
 ```
@@ -1767,7 +1767,7 @@ ibmcloud ks cluster-service-unbind --cluster CLUSTER --namespace KUBERNETES_NAME
 <dd>The name of the Kubernetes namespace. This value is required.</dd>
 
 <dt><code>--service <em>SERVICE_INSTANCE</em></code></dt>
-<dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to remove. To find the name of the service instance, run `ibmcloud ks cluster-services --cluster <cluster_name_or_ID>`. This value is required.</dd>
+<dd>The name of the {{site.data.keyword.cloud_notm}} service instance that you want to remove. To find the name of the service instance, run `ibmcloud ks cluster-services --cluster <cluster_name_or_ID>`. This value is required.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2591,7 +2591,7 @@ ibmcloud ks albs --cluster my_cluster
 ### ibmcloud ks credential-get
 {: #cs_credential_get}
 
-If you set up your {{site.data.keyword.Bluemix_notm}} account to use different credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio, get the infrastructure user name for the region and resource group that you are currently targeted to.
+If you set up your {{site.data.keyword.cloud_notm}} account to use different credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio, get the infrastructure user name for the region and resource group that you are currently targeted to.
 {: shortdesc}
 
 ```
@@ -2623,12 +2623,12 @@ ibmcloud ks credential-get --region us-south
 ### ibmcloud ks credential-set
 {: #cs_credentials_set}
 
-Set credentials for a resource group and region that allow you to access the IBM Cloud infrastructure (SoftLayer) portfolio through your {{site.data.keyword.Bluemix_notm}} account.
+Set credentials for a resource group and region that allow you to access the IBM Cloud infrastructure (SoftLayer) portfolio through your {{site.data.keyword.cloud_notm}} account.
 {: shortdesc}
 
-If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using this command.
+If you have an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.cloud_notm}} account by using this command.
 
-If IBM Cloud infrastructure (SoftLayer) credentials are manually set for a region and a resource group, these credentials are used to order infrastructure for all clusters within that region in the resource group. These credentials are used to determine infrastructure permissions, even if an [{{site.data.keyword.Bluemix_notm}} IAM API key](#cs_api_key_info) already exists for the resource group and region. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.
+If IBM Cloud infrastructure (SoftLayer) credentials are manually set for a region and a resource group, these credentials are used to order infrastructure for all clusters within that region in the resource group. These credentials are used to determine infrastructure permissions, even if an [{{site.data.keyword.cloud_notm}} IAM API key](#cs_api_key_info) already exists for the resource group and region. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.
 
 You cannot set multiple credentials for the same {{site.data.keyword.containerlong_notm}} resource group and region.
 
@@ -2667,10 +2667,10 @@ ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-u
 ### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
-Remove the credentials for a resource group and region that allow you to access the IBM Cloud infrastructure (SoftLayer) portfolio through your {{site.data.keyword.Bluemix_notm}} account.
+Remove the credentials for a resource group and region that allow you to access the IBM Cloud infrastructure (SoftLayer) portfolio through your {{site.data.keyword.cloud_notm}} account.
 {: shortdesc}
 
-After you remove the credentials, the [{{site.data.keyword.Bluemix_notm}} IAM API key](#cs_api_key_info) is used to order resources in IBM Cloud infrastructure (SoftLayer).
+After you remove the credentials, the [{{site.data.keyword.cloud_notm}} IAM API key](#cs_api_key_info) is used to order resources in IBM Cloud infrastructure (SoftLayer).
 
 ```
 ibmcloud ks credential-unset --region REGION [-s]
@@ -2718,7 +2718,7 @@ If your company's policies for permissions are very strict, you might need to li
 For most use cases, [set up the API key](/docs/containers?topic=containers-users#api_key) for the region and resource group with the appropriate infrastructure permissions. If you need to use another infrastructure account that differs from your current account, [set up manual credentials](/docs/containers?topic=containers-users#credentials).
 
 **How do I control what actions the users can perform?**<br>
-After infrastructure credentials are set up, you can control what actions your users can perform by assigning them [{{site.data.keyword.Bluemix_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform).
+After infrastructure credentials are set up, you can control what actions your users can perform by assigning them [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform).
 
 ```
 ibmcloud ks infra-permissions-get --region REGION [--json] [-s]
@@ -3956,7 +3956,7 @@ ibmcloud ks region-set --region REGION
 
 You can work with resources that you have access to in any location, even if you set a region by running `ibmcloud ks region-set` and the resource that you want to work with is in another region. If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region-set` command and use the cluster name when you run commands.
 
-If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, you create and manage clusters specific to the region. For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud ks region-set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud ks region-set us-south` to return to US South to manage your cluster in that region.
+If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, you create and manage clusters specific to the region. For example, you can log in to {{site.data.keyword.cloud_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud ks region-set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud ks region-set us-south` to return to US South to manage your cluster in that region.
 {: deprecated}
 
 **Minimum required permissions**: None
@@ -3978,7 +3978,7 @@ ibmcloud ks region-set --region eu-central
 ### Deprecated: ibmcloud ks regions
 {: #cs_regions}
 
-List the available regions. The `Region Name` is the {{site.data.keyword.containerlong_notm}} name, and the `Region Alias` is the general {{site.data.keyword.Bluemix_notm}} name for the region.
+List the available regions. The `Region Name` is the {{site.data.keyword.containerlong_notm}} name, and the `Region Alias` is the general {{site.data.keyword.cloud_notm}} name for the region.
 {: shortdesc}
 
 **Minimum required permissions**: None

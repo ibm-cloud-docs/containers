@@ -38,7 +38,7 @@ Periodically, Kubernetes releases [major, minor, or patch updates](/docs/contain
 {:shortdesc}
 
 **How do I know when to update the master?**</br>
-You are notified in the {{site.data.keyword.Bluemix_notm}} console and CLI when updates are available, and can also check our [supported versions](/docs/containers?topic=containers-cs_versions) page.
+You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check our [supported versions](/docs/containers?topic=containers-cs_versions) page.
 
 **How many versions behind the latest can the master be?**</br>
 IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server no more than two versions ahead of its current version.
@@ -73,15 +73,15 @@ The following diagram shows the process that you can take to update your master.
 Figure 1. Updating Kubernetes master process diagram
 
 {: #update_master}
-Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
 To update the Kubernetes master _major_ or _minor_ version:
 
 1.  Review the [Kubernetes changes](/docs/containers?topic=containers-cs_versions) and make any updates marked _Update before master_.
 
-2.  Update your Kubernetes API server and associated Kubernetes master components by using the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).
+2.  Update your Kubernetes API server and associated Kubernetes master components by using the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).
 
-3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} clusters dashboard or run `ibmcloud ks clusters`.
+3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.cloud_notm}} clusters dashboard or run `ibmcloud ks clusters`.
 
 4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
 
@@ -112,7 +112,7 @@ When the config map is not defined, the default is used. By default, a maximum o
 - [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes changes](/docs/containers?topic=containers-cs_versions).
 - If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers?topic=containers-changelog#changelog).
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). </br>
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). </br>
 
 Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
@@ -270,7 +270,7 @@ Next steps:
 ### Updating worker nodes in the console
 {: #worker_up_console}
 
-After you set up the config map for the first time, you can then update worker nodes by using the {{site.data.keyword.Bluemix_notm}} console.
+After you set up the config map for the first time, you can then update worker nodes by using the {{site.data.keyword.cloud_notm}} console.
 {: shortdesc}
 
 Before you begin:
@@ -278,13 +278,13 @@ Before you begin:
 *   [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
 *   Make any changes that are marked with _Update after master_ in the [Kubernetes changes](/docs/containers?topic=containers-cs_versions).
 *   If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers?topic=containers-changelog#changelog).
-*   Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). </br>
+*   Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). </br>
 
 Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 To update worker nodes from the console:
-1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/) menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
+1.  From the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/) menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
 2.  From the **Clusters** page, click your cluster.
 3.  From the **Worker Nodes** tab, select the check box for each worker node that you want to update. An action bar is displayed over the table header row.
 4.  From the action bar, click **Update Kubernetes**.
@@ -302,7 +302,7 @@ You can update the machine types of your worker nodes by adding new worker nodes
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
 To update machine types:
 
@@ -450,7 +450,7 @@ Yes. {{site.data.keyword.containerlong_notm}} provides other plugin-ins and add-
 In order to change your logging or filter configurations, the Fluentd component must be at the latest version. By default, automatic updates to the component are enabled.
 {: shortdesc}
 
-You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 * Check whether automatic updates are enabled by running the `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get).
 * Disable automatic updates by running the `ibmcloud ks logging-autoupdate-disable` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable).
@@ -529,7 +529,7 @@ Before you begin:
     ```
     {: screen}
 
-You can manage automatic updates of the Ingress ALB component in the following ways. **Note**: To run the following commands, you must have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+You can manage automatic updates of the Ingress ALB component in the following ways. **Note**: To run the following commands, you must have the [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 * Disable automatic updates.
     ```
     ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
@@ -577,7 +577,7 @@ Review the following image to see how your cluster setup changes when you move f
 <img src="images/cs_cluster_migrate.png" alt="Update your cluster from stand-alone worker nodes to worker pools" width="600" style="width:600px; border-style: none"/>
 
 Before you begin:
-- Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+- Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To update stand-alone worker nodes to worker pools:

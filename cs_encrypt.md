@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,7 @@ _Figure: Overview of data encryption in a cluster_
 1.  **etcd**: etcd is the component of the master that stores the data of your Kubernetes resources, such as object configuration `.yaml` files and secrets. Data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](#keyprotect) for your cluster. The etcd data in clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.
 2.  **Secondary disk of the worker node**: Your worker node's secondary disk is where the container file system and locally pulled images are stored. The disk is AES 256-bit encrypted with a LUKS encryption key that is unique to the worker node and stored as a secret in etcd, managed by IBM. When you reload or update your worker nodes, the LUKS keys are rotated.
 3.  **Storage**: You can choose to store data by [setting up file, block, or object persistent storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). The IBM Cloud infrastructure (SoftLayer) storage instances save the data on encrypted disks, so your data at rest is encrypted. Further, if you choose object storage, your data in transit is also encrypted.
-4.  **{{site.data.keyword.Bluemix_notm}} services**: You can [integrate {{site.data.keyword.Bluemix_notm}} services](/docs/containers?topic=containers-service-binding#bind-services), such as {{site.data.keyword.registryshort_notm}} or {{site.data.keyword.watson}}, with your cluster. The service credentials are stored in a secret that is saved in etcd, that your app can access by mounting the secret as a volume or specifying the secret as an environment variable in [your deployment](/docs/containers?topic=containers-app#secret).
+4.  **{{site.data.keyword.cloud_notm}} services**: You can [integrate {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-service-binding#bind-services), such as {{site.data.keyword.registryshort_notm}} or {{site.data.keyword.watson}}, with your cluster. The service credentials are stored in a secret that is saved in etcd, that your app can access by mounting the secret as a volume or specifying the secret as an environment variable in [your deployment](/docs/containers?topic=containers-app#secret).
 5.  **{{site.data.keyword.keymanagementserviceshort}}**: When you [enable {{site.data.keyword.keymanagementserviceshort}}](#keyprotect) in your cluster, a wrapped data encryption key (DEK) is stored in etcd. The DEK encrypts the secrets in your cluster, including service credentials and LUKS key. Because the root key is in your {{site.data.keyword.keymanagementserviceshort}} instance, you control access to your encrypted secrets. The {{site.data.keyword.keymanagementserviceshort}} keys are secured by FIPS 140-2 Level 2 certified cloud-based hardware security modules that protect against the theft of information. For more information on how {{site.data.keyword.keymanagementserviceshort}} encryption works, see [Envelope encryption](/docs/services/key-protect/concepts?topic=key-protect-envelope-encryption#envelope-encryption).
 
 ## Understanding when to use secrets
@@ -58,7 +58,7 @@ Review the following tasks that require secrets.
 ### Adding a service to a cluster
 {: #secrets_service}
 
-When you bind a service to a cluster, you don't have to create a secret to store your service credentials. A secret is automatically created for you. For more information, see [Adding {{site.data.keyword.Bluemix_notm}} services to clusters](/docs/containers?topic=containers-service-binding#bind-services).
+When you bind a service to a cluster, you don't have to create a secret to store your service credentials. A secret is automatically created for you. For more information, see [Adding {{site.data.keyword.cloud_notm}} services to clusters](/docs/containers?topic=containers-service-binding#bind-services).
 {: shortdesc}
 
 ### Encrypting traffic to your apps with TLS secrets
@@ -74,7 +74,7 @@ Additionally, if you have apps that require the HTTPS protocol and need traffic 
 
 When you create a cluster, secrets for your {{site.data.keyword.registrylong}} credentials are automatically created for you in the `default` Kubernetes namespace. However, you must [create your own image pull secret for your cluster](/docs/containers?topic=containers-images#other) if you want to deploy a container in the following situations.
 * From an image in your {{site.data.keyword.registryshort_notm}} registry to a Kubernetes namespace other than `default`.
-* From an image in your {{site.data.keyword.registryshort_notm}} registry that is stored in a different {{site.data.keyword.Bluemix_notm}} region or {{site.data.keyword.Bluemix_notm}} account.
+* From an image in your {{site.data.keyword.registryshort_notm}} registry that is stored in a different {{site.data.keyword.cloud_notm}} region or {{site.data.keyword.cloud_notm}} account.
 * From an image that is stored in an external, private registry.
 
 <br />
@@ -96,7 +96,7 @@ Do not delete root keys in your {{site.data.keyword.keymanagementserviceshort}} 
 Before you begin:
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Check that your cluster runs Kubernetes version 1.11.3_1521 or later by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and checking the **Version** field.
-* Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+* Ensure you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 * Make sure that the API key that is set for the region that your cluster is in is authorized to use Key Protect. To check the API key owner whose credentials are stored for the region, run `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
 
 To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the instance or root key that encrypts secrets in the cluster:
@@ -168,7 +168,7 @@ Do not delete root keys in your {{site.data.keyword.keymanagementserviceshort}} 
 ## Encrypting data by using IBM Cloud Data Shield (Beta)
 {: #datashield}
 
-{{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.
+{{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.
 {: shortdesc}
 
 When it comes to protecting your data, encryption is one of the most popular and effective controls. But the data must be encrypted at each step of its lifecycle. Data goes through three phases during its lifecycle: data at rest, data in motion, and data in use. Data at rest and in motion are commonly used to protect data when it is stored and when it is transported. Taking that protection one step further, you can now encrypt data in use.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-07"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -38,7 +38,7 @@ Review these situations in which you might need to open specific ports and IP ad
 * [To allow the cluster to access resources over a firewall on the private network](#firewall_private).
 * [To allow the cluster to access resources when Calico network policies block worker node egress](#firewall_calico_egress).
 * [To access the NodePort service, load balancer service, or Ingress from outside of the cluster](#firewall_inbound).
-* [To allow the cluster to access services that run inside or outside {{site.data.keyword.Bluemix_notm}} or on-premises and that are protected by a firewall](#whitelist_workers).
+* [To allow the cluster to access services that run inside or outside {{site.data.keyword.cloud_notm}} or on-premises and that are protected by a firewall](#whitelist_workers).
 
 <br />
 
@@ -46,11 +46,11 @@ Review these situations in which you might need to open specific ports and IP ad
 ## Running `ibmcloud` and `ibmcloud ks` commands from behind a firewall
 {: #firewall_bx}
 
-If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `ibmcloud` and `ibmcloud ks` commands, you must allow TCP access for {{site.data.keyword.Bluemix_notm}} and {{site.data.keyword.containerlong_notm}}.
+If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `ibmcloud` and `ibmcloud ks` commands, you must allow TCP access for {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 1. Allow access to `cloud.ibm.com` on port 443 in your firewall.
-2. Verify your connection by logging in to {{site.data.keyword.Bluemix_notm}} through this API endpoint.
+2. Verify your connection by logging in to {{site.data.keyword.cloud_notm}} through this API endpoint.
   ```
   ibmcloud login -a https://cloud.ibm.com/
   ```
@@ -91,7 +91,7 @@ Before you begin, allow access to [run `ibmcloud ks` commands](#firewall_bx).
 
 To allow access for a specific cluster:
 
-1. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. If you have a federated account, include the `--sso` option.
+1. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated account, include the `--sso` option.
 
    ```
    ibmcloud login [--sso]
@@ -160,7 +160,7 @@ To allow access for a specific cluster:
     }
     ```
     {: screen}
-  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. Note that you must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-clusters#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
+  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.cloud_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. Note that you must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-clusters#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -218,7 +218,7 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 ## Allowing the cluster to access infrastructure resources and other services over a public firewall
 {: #firewall_outbound}
 
-Let your cluster access infrastructure resources and services from behind a public firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
+Let your cluster access infrastructure resources and services from behind a public firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
 {:shortdesc}
 
 Depending on your cluster setup, you access the services by using the public, private, or both IP addresses. If you have a cluster with worker nodes on both public and private VLANs behind a firewall for both public and private networks, you must open the connection for both public and private IP addresses. If your cluster has worker nodes on only the private VLAN behind a firewall, you can open the connection to only the private IP addresses.
@@ -415,9 +415,9 @@ Depending on your cluster setup, you access the services by using the public, pr
 
 5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
-6. {: #pvc}To create persistent volume claims in a private cluster, make sure that your cluster is set up with the following Kubernetes version or {{site.data.keyword.Bluemix_notm}} storage plug-in versions. These versions enable private network communication from your cluster to your persistent storage instances.
+6. {: #pvc}To create persistent volume claims in a private cluster, make sure that your cluster is set up with the following Kubernetes version or {{site.data.keyword.cloud_notm}} storage plug-in versions. These versions enable private network communication from your cluster to your persistent storage instances.
     <table>
-    <caption>Overview of required Kubernetes or {{site.data.keyword.Bluemix_notm}} storage plug-in versions for private clusters</caption>
+    <caption>Overview of required Kubernetes or {{site.data.keyword.cloud_notm}} storage plug-in versions for private clusters</caption>
     <thead>
       <th>Type of storage</th>
       <th>Required version</th>
@@ -429,7 +429,7 @@ Depending on your cluster setup, you access the services by using the public, pr
      </tr>
      <tr>
        <td>Block storage</td>
-       <td>{{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.3.0 or later</td>
+       <td>{{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.3.0 or later</td>
      </tr>
      <tr>
        <td>Object storage</td>
@@ -438,7 +438,7 @@ Depending on your cluster setup, you access the services by using the public, pr
    </tbody>
    </table>
 
-   If you must use a Kubernetes version or {{site.data.keyword.Bluemix_notm}} storage plug-in version that does not support network communication over the private network, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer) and {{site.data.keyword.Bluemix_notm}} Identity and Access Management:
+   If you must use a Kubernetes version or {{site.data.keyword.cloud_notm}} storage plug-in version that does not support network communication over the private network, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer) and {{site.data.keyword.cloud_notm}} Identity and Access Management:
    - Allow all egress network traffic on TCP port 443.
    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
 
@@ -563,7 +563,7 @@ You can allow incoming access to NodePort, load balancer, and Ingress services.
 ## Whitelisting your cluster in other services' firewalls or in on-premises firewalls
 {: #whitelist_workers}
 
-If you want to access services that run inside or outside {{site.data.keyword.Bluemix_notm}} or on-premises and that are protected by a firewall, you can add the IP addresses of your worker nodes in that firewall to allow outbound network traffic to your cluster. For example, you might want to read data from an {{site.data.keyword.Bluemix_notm}} database that is protected by a firewall, or whitelist your worker node subnets in an on-premises firewall to allow network traffic from your cluster.
+If you want to access services that run inside or outside {{site.data.keyword.cloud_notm}} or on-premises and that are protected by a firewall, you can add the IP addresses of your worker nodes in that firewall to allow outbound network traffic to your cluster. For example, you might want to read data from an {{site.data.keyword.cloud_notm}} database that is protected by a firewall, or whitelist your worker node subnets in an on-premises firewall to allow network traffic from your cluster.
 {:shortdesc}
 
 1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -602,7 +602,7 @@ If you want to access services that run inside or outside {{site.data.keyword.Bl
     4.  Retrieve the subnet address. In the output, find the number of **IPs**. Then, raise `2` to the power of `n` equal to the number of IPs. For example, if the number of IPs is `16`, then `2` is raised to the power of `4` (`n`) to equal `16`. Now get the subnet CIDR by subtracting the value of `n` from `32` bits. For example, when `n` equals `4`, then the CIDR is `28` (from the equation `32 - 4 = 28`). Combine the **identifier** mask with the CIDR value to get the full subnet address. In the previous output, the subnet addresses are:
         *   `169.xx.210.xxx/28`
         *   `169.xx.178.xxx/28`
-  * **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and do not need to scale, or if you only want to whitelist one worker node, list all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.Bluemix_notm}} services by using the private service endpoint, note the **Private IP** addresses instead. Note that only these worker nodes are whitelisted. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
+  * **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and do not need to scale, or if you only want to whitelist one worker node, list all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.cloud_notm}} services by using the private service endpoint, note the **Private IP** addresses instead. Note that only these worker nodes are whitelisted. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
     ```
     ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```

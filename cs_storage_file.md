@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -28,10 +28,10 @@ subcollection: containers
 # Storing data on IBM File Storage for IBM Cloud
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} File Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
+{{site.data.keyword.cloud_notm}} File Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.cloud_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage is available for standard clusters only that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you can provision file storage if your cluster runs Kubernetes version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, or later. NFS file storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} File Storage is available for standard clusters only that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you can provision file storage if your cluster runs Kubernetes version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, or later. NFS file storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Deciding on the file storage configuration
@@ -621,7 +621,7 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 ## Using file storage in a stateful set
 {: #file_statefulset}
 
-If you have a stateful app such as a database, you can create stateful sets that use file storage to store your app's data. Alternatively, you can use an {{site.data.keyword.Bluemix_notm}} database-as-a-service and store your data in the cloud.
+If you have a stateful app such as a database, you can create stateful sets that use file storage to store your app's data. Alternatively, you can use an {{site.data.keyword.cloud_notm}} database-as-a-service and store your data in the cloud.
 {: shortdesc}
 
 **What do I need to be aware of when adding file storage to a stateful set?** </br>
@@ -983,7 +983,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 If you want to increase storage capacity or performance, you can modify your existing volume.
 {: shortdesc}
 
-For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding File Share capacity](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
+For questions about billing and to find the steps for how to use the {{site.data.keyword.cloud_notm}} console to modify your storage, see [Expanding File Share capacity](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
 {: tip}
 
 1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column.
@@ -1111,7 +1111,7 @@ For questions about billing and to find the steps for how to use the {{site.data
 ## Changing the default NFS version
 {: #nfs_version}
 
-The version of the file storage determines the protocol that is used to communicate with the {{site.data.keyword.Bluemix_notm}} file storage server. By default, all file storage instances are set up with NFS version 4. You can change your existing PV to an older NFS version if your app requires a specific version to properly function.
+The version of the file storage determines the protocol that is used to communicate with the {{site.data.keyword.cloud_notm}} file storage server. By default, all file storage instances are set up with NFS version 4. You can change your existing PV to an older NFS version if your app requires a specific version to properly function.
 {: shortdesc}
 
 To change the default NFS version, you can either create a new storage class to dynamically provision file storage in your cluster, or choose to change an existing PV that is mounted to your pod.

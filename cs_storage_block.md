@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -28,16 +28,16 @@ subcollection: containers
 # Storing data on IBM Block Storage for IBM Cloud
 {: #block_storage}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
+{{site.data.keyword.cloud_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.cloud_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage is available for standard clusters only. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.3.0 or later to connect to your block storage instance over the private network. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} Block Storage is available for standard clusters only. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.3.0 or later to connect to your block storage instance over the private network. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
-## Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in in your cluster
+## Installing the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster
 {: #install_block}
 
-Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in with a Helm chart to set up pre-defined storage classes for block storage. You can use these storage classes to create a PVC to provision block storage for your apps.
+Install the {{site.data.keyword.cloud_notm}} Block Storage plug-in with a Helm chart to set up pre-defined storage classes for block storage. You can use these storage classes to create a PVC to provision block storage for your apps.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -61,7 +61,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
    2. Review the [version changelog](/docs/containers?topic=containers-changelog#changelog) to find the changes that are included in the latest patch version.
 
-   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 2.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, and install the Helm server (Tiller) with a service account in your cluster.
 
@@ -83,7 +83,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-4. Add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
+4. Add the {{site.data.keyword.cloud_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cloud_notm}} Block Storage plug-in.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
@@ -95,7 +95,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ```
    {: pre}
 
-6. Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+6. Install the {{site.data.keyword.cloud_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
    ```
    helm install iks-charts/ibmcloud-block-storage-plugin
    ```
@@ -184,8 +184,8 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 You can now continue to [create a PVC](#add_block) to provision block storage for your app.
 
 
-### Updating the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in
-You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage plug-in to the latest version.
+### Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in
+You can upgrade the existing {{site.data.keyword.cloud_notm}} Block Storage plug-in to the latest version.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -214,7 +214,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ```
    {: screen}
 
-4. Upgrade the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in to the latest version.
+4. Upgrade the {{site.data.keyword.cloud_notm}} Block Storage plug-in to the latest version.
    ```
    helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibmcloud-block-storage-plugin
    ```
@@ -227,8 +227,8 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    {: pre}
 
 
-### Removing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in
-If you do not want to provision and use {{site.data.keyword.Bluemix_notm}} Block Storage in your cluster, you can uninstall the Helm chart.
+### Removing the {{site.data.keyword.cloud_notm}} Block Storage plug-in
+If you do not want to provision and use {{site.data.keyword.cloud_notm}} Block Storage in your cluster, you can uninstall the Helm chart.
 {: shortdesc}
 
 Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new block storage for your cluster or use existing block storage PVCs and PVs after you remove the plug-in.
@@ -252,7 +252,7 @@ To remove the plug-in:
    ```
    {: screen}
 
-2. Delete the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
+2. Delete the {{site.data.keyword.cloud_notm}} Block Storage plug-in.
    ```
    helm delete <helm_chart_name>
    ```
@@ -422,7 +422,7 @@ Block storage comes with a `ReadWriteOnce` access mode. You can mount it to only
 
 Before you begin:
 - If you have a firewall, [allow egress access](/docs/containers?topic=containers-firewall#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
-- Install the [{{site.data.keyword.Bluemix_notm}} block storage plug-in](#install_block).
+- Install the [{{site.data.keyword.cloud_notm}} block storage plug-in](#install_block).
 - [Decide on a pre-defined storage class](#block_predefined_storageclass) or create a [customized storage class](#block_custom_storageclass).
 
 Looking to deploy block storage in a stateful set? See [Using block storage in a stateful set](#block_statefulset) for more information.
@@ -860,7 +860,7 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 ## Using block storage in a stateful set
 {: #block_statefulset}
 
-If you have a stateful app such as a database, you can create stateful sets that use block storage to store your app's data. Alternatively, you can use an {{site.data.keyword.Bluemix_notm}} database-as-a-service and store your data in the cloud.
+If you have a stateful app such as a database, you can create stateful sets that use block storage to store your app's data. Alternatively, you can use an {{site.data.keyword.cloud_notm}} database-as-a-service and store your data in the cloud.
 {: shortdesc}
 
 **What do I need to be aware of when adding block storage to a stateful set?** </br>
@@ -1222,7 +1222,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 If you want to increase storage capacity or performance, you can modify your existing volume.
 {: shortdesc}
 
-For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding Block Storage capacity](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity) and [Adjusting IOPS](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS). Updates that you make from the console are not reflected in the persistent volume (PV). To add this information to the PV, run `kubectl patch pv <pv_name>` and manually update the size and IOPS in the **Labels** and **Annotation** section of your PV.
+For questions about billing and to find the steps for how to use the {{site.data.keyword.cloud_notm}} console to modify your storage, see [Expanding Block Storage capacity](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity) and [Adjusting IOPS](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS). Updates that you make from the console are not reflected in the persistent volume (PV). To add this information to the PV, run `kubectl patch pv <pv_name>` and manually update the size and IOPS in the **Labels** and **Annotation** section of your PV.
 {: tip}
 
 1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column.
@@ -1378,7 +1378,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Billing</td>
-<td>The default billing type depends on the version of your {{site.data.keyword.Bluemix_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul></td>
+<td>The default billing type depends on the version of your {{site.data.keyword.cloud_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -1424,7 +1424,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Billing</td>
-<td>The default billing type depends on the version of your {{site.data.keyword.Bluemix_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul></td>
+<td>The default billing type depends on the version of your {{site.data.keyword.cloud_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -1469,7 +1469,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Billing</td>
-<td>The default billing type depends on the version of your {{site.data.keyword.Bluemix_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul></td>
+<td>The default billing type depends on the version of your {{site.data.keyword.cloud_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -1510,7 +1510,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Billing</td>
-<td>The default billing type depends on the version of your {{site.data.keyword.Bluemix_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul></td>
+<td>The default billing type depends on the version of your {{site.data.keyword.cloud_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -1540,7 +1540,7 @@ To use block storage in a multizone cluster, your pod must be scheduled in the s
 
 Creating the block storage instance without knowing the constraints of the pod can lead to unwanted results. For example, your pod might not be able to be scheduled to the same worker node as your storage because the worker node has insufficient resources or the worker node is tainted and does not allow the pod to be scheduled. With topology-aware volume scheduling, the block storage instance is delayed until the first pod that uses the storage is created.
 
-Topology-aware volume scheduling is supported on clusters that run Kubernetes version 1.12 or later only. To use this feature, make sure that you installed the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.2.0 or later.
+Topology-aware volume scheduling is supported on clusters that run Kubernetes version 1.12 or later only. To use this feature, make sure that you installed the {{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.2.0 or later.
 {: note}
 
 The following examples show how to create storage classes that delay the creation of the block storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the block storage instance is created when you create the PVC.
@@ -1600,7 +1600,7 @@ The following examples show how to create storage classes that delay the creatio
 If you want to create your block storage in a specific zone, you can specify the zone and region in a customized storage class.
 {: shortdesc}
 
-Use the customized storage class if you use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.0.0 or if you want to [statically provision block storage](#existing_block) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_block).
+Use the customized storage class if you use the {{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.0.0 or if you want to [statically provision block storage](#existing_block) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_block).
 {: note}
 
 The following `.yaml` file customizes a storage class that is based on the `ibm-block-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. To use a different storage class as your base, see the [storage class reference](#block_storageclass_reference).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-07"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -67,44 +67,44 @@ Have you created a cluster before and are just looking for quick example command
 ## Prepare to create clusters at the account level
 {: #cluster_prepare}
 
-Prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.containerlong_notm}}. These are preparations that, after the account administrator makes them, you might not need to change each time that you create a cluster. However, each time that you create a cluster, you still want to verify that the current account-level state is what you need it to be.
+Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.containerlong_notm}}. These are preparations that, after the account administrator makes them, you might not need to change each time that you create a cluster. However, each time that you create a cluster, you still want to verify that the current account-level state is what you need it to be.
 {: shortdesc}
 
-1. [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
+1. [Create or upgrade your account to a billable account ({{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
 
 2. [Set up an {{site.data.keyword.containerlong_notm}} API key](/docs/containers?topic=containers-users#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
   * **Super User** role for IBM Cloud infrastructure (SoftLayer).
   * **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
-  * **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. If your account predates 4 October 2018, you need to [enable {{site.data.keyword.Bluemix_notm}} IAM policies for {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-user#existing_users). With IAM policies, you can control access to resources such as registry namespaces.
+  * **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. If your account predates 4 October 2018, you need to [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-user#existing_users). With IAM policies, you can control access to resources such as registry namespaces.
 
   Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
   {: tip}
 
 3. Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}. To allow your cluster to pull images from the private registry, you also need the **Administrator** platform role for {{site.data.keyword.registrylong_notm}}.
-  1. From the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) menu bar, click **Manage > Access (IAM)**.
+  1. From the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) menu bar, click **Manage > Access (IAM)**.
   2. Click the **Users** page, and then from the table, select yourself.
   3. From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. **Note**: If you have the **Administrator** role for {{site.data.keyword.containershort_notm}} in only one resource group or region instead of the entire account, you must have at least the **Viewer** role at the account level to see the account's VLANs.
   <p class="tip">Make sure that your account administrator does not assign you the **Administrator** platform role at the same time as a service role. You must assign platform and service roles separately.</p>
 
 4. If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](/docs/containers?topic=containers-users#resource_groups).
-  * The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the default resource group is automatically targeted.
+  * The cluster is created in the resource group that you target when you log in to {{site.data.keyword.cloud_notm}}. If you do not target a resource group, the default resource group is automatically targeted.
   * If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
-  * You cannot change a cluster's resource group. Furthermore, if you need to use the `ibmcloud ks cluster-service-bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.Bluemix_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.
+  * You cannot change a cluster's resource group. Furthermore, if you need to use the `ibmcloud ks cluster-service-bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.cloud_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.
   * If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers?topic=containers-health#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
   * Free clusters are created in the `default` resource group.
 
 5. **Standard clusters**: Plan your cluster [network setup](/docs/containers?topic=containers-plan_clusters) so that your cluster meets the needs of your workloads and environment. Then set up your IBM Cloud infrastructure (SoftLayer) networking to allow worker-to-master and user-to-master communication:
   * To use the private service endpoint only or the public and private service endpoints (run internet-facing workloads or extend your on-premises data center):
     1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure (SoftLayer) account.
-    2. [Enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
-    <p class="note">The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a [VPN connection](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) or [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.Bluemix_notm}} Direct Link. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.Bluemix_notm}} Direct Link connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB. For more information, see [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem).</p>
+    2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+    <p class="note">The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a [VPN connection](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) or [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.cloud_notm}} Direct Link. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.cloud_notm}} Direct Link connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB. For more information, see [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem).</p>
 
   * To use the public service endpoint only (run internet-facing workloads):
     1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
   * To use a gateway device (extend your on-premises data center):
     1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
     2. Configure a gateway device. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall to allow necessary traffic and block unwanted traffic.
-    3. [Open up the required private IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate and for the {{site.data.keyword.Bluemix_notm}} services that you plan to use.
+    3. [Open up the required private IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
 <br />
 
@@ -121,9 +121,9 @@ After you set up your account to create clusters, prepare the setup of your clus
   * Decide whether to create a [single zone](/docs/containers?topic=containers-ha_clusters#single_zone) or [multizone](/docs/containers?topic=containers-ha_clusters#multizone) cluster. Note that multizone clusters are available in select locations only.
   * Choose what type of [hardware and isolation](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
 
-3. For standard clusters, you can [estimate the cost](/docs/billing-usage?topic=billing-usage-cost#cost) in the {{site.data.keyword.Bluemix_notm}} console. For more information on charges that might not be included in the estimator, see [Pricing and billing](/docs/containers?topic=containers-faqs#charges).
+3. For standard clusters, you can [estimate the cost](/docs/billing-usage?topic=billing-usage-cost#cost) in the {{site.data.keyword.cloud_notm}} console. For more information on charges that might not be included in the estimator, see [Pricing and billing](/docs/containers?topic=containers-faqs#charges).
 
-4. If you create the cluster in an environment behind a firewall, such as for clusters that extend your on-premises data center, [allow outbound network traffic to the public and private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for the {{site.data.keyword.Bluemix_notm}} services that you plan to use.
+4. If you create the cluster in an environment behind a firewall, such as for clusters that extend your on-premises data center, [allow outbound network traffic to the public and private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
 <br />
 
@@ -134,7 +134,7 @@ After you set up your account to create clusters, prepare the setup of your clus
 You can use your 1 free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster even if you have a billable account.
 {: shortdesc}
 
-Free clusters include one worker node set up with 2vCPU and 4GB memory and have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
+Free clusters include one worker node set up with 2vCPU and 4GB memory and have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.cloud_notm}} and cannot be restored. Be sure to back up any important data.
 {: note}
 
 ### Creating a free cluster in the console
@@ -154,19 +154,19 @@ Free clusters include one worker node set up with 2vCPU and 4GB memory and have 
 ### Creating a free cluster in the CLI
 {: #clusters_cli_free}
 
-Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
+Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
 
-1. Log in to the {{site.data.keyword.Bluemix_notm}} CLI.
-  1. Log in and enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
+1. Log in to the {{site.data.keyword.cloud_notm}} CLI.
+  1. Log in and enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
      ```
      ibmcloud login
      ```
      {: pre}
 
-     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
      {: tip}
 
-  2. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
+  2. If you have multiple {{site.data.keyword.cloud_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
   3. To create the free cluster in a specific region, you must target that region. You can create a free cluster in `ap-south`, `eu-central`, `uk-south`, or `us-south`. The cluster is created in a zone within that region.
      ```
@@ -217,7 +217,7 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
 ## Creating a standard cluster
 {: #clusters_standard}
 
-Use the {{site.data.keyword.Bluemix_notm}} CLI or the {{site.data.keyword.Bluemix_notm}} console to create a fully-customizable standard cluster with your choice of hardware isolation and access to features like multiple worker nodes for a highly available environment.
+Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a fully-customizable standard cluster with your choice of hardware isolation and access to features like multiple worker nodes for a highly available environment.
 {: shortdesc}
 
 ### Creating a standard cluster in the console
@@ -252,9 +252,9 @@ Use the {{site.data.keyword.Bluemix_notm}} CLI or the {{site.data.keyword.Bluemi
 
 8. For **Master service endpoint**, choose how your Kubernetes master and worker nodes communicate.
   * To create a cluster in which you can run internet-facing workloads:
-    * If VRF and service endpoints are enabled in your {{site.data.keyword.Bluemix_notm}} account, select **Both private & public endpoints**.
+    * If VRF and service endpoints are enabled in your {{site.data.keyword.cloud_notm}} account, select **Both private & public endpoints**.
     * If you cannot or do not want to enable VRF, select **Public endpoint only**.
-  * To create a cluster that extends your on-premises data center only, or a cluster that extends your on-premises data center and provides limited public access with edge worker nodes, select **Both private & public endpoints** or **Private endpoint only**. Ensure that you have enabled VRF and service endpoints in your {{site.data.keyword.Bluemix_notm}} account. Note that if you enable the private service endpoint only, you must [expose the master endpoint through a private network load balancer](#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
+  * To create a cluster that extends your on-premises data center only, or a cluster that extends your on-premises data center and provides limited public access with edge worker nodes, select **Both private & public endpoints** or **Private endpoint only**. Ensure that you have enabled VRF and service endpoints in your {{site.data.keyword.cloud_notm}} account. Note that if you enable the private service endpoint only, you must [expose the master endpoint through a private network load balancer](#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
   * To create a cluster that extends your on-premises data center and provides limited public access with a gateway device, select **Public endpoint only**.
 
 9. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
@@ -278,19 +278,19 @@ Use the {{site.data.keyword.Bluemix_notm}} CLI or the {{site.data.keyword.Bluemi
 ### Creating a standard cluster in the CLI
 {: #clusters_cli_steps}
 
-Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
+Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
 
-1. Log in to the {{site.data.keyword.Bluemix_notm}} CLI.
-  1. Log in and enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
+1. Log in to the {{site.data.keyword.cloud_notm}} CLI.
+  1. Log in and enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
      ```
      ibmcloud login
      ```
      {: pre}
 
-     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
      {: tip}
 
-  2. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
+  2. If you have multiple {{site.data.keyword.cloud_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
   3. To create clusters in a resource group other than default, target that resource group. **Note**:
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
@@ -366,11 +366,11 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
     <tbody>
     <tr>
     <td><code>cluster-create</code></td>
-    <td>The command to create a cluster in your {{site.data.keyword.Bluemix_notm}} organization.</td>
+    <td>The command to create a cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
     </tr>
     <tr>
     <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-    <td>Specify the {{site.data.keyword.Bluemix_notm}} zone ID where you want to create your cluster that you chose in step 4.</td>
+    <td>Specify the {{site.data.keyword.cloud_notm}} zone ID where you want to create your cluster that you chose in step 4.</td>
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
@@ -471,14 +471,14 @@ After your cluster is created, you can begin working with your cluster by config
 To work with your cluster, set the cluster you created as the context for a CLI session to run `kubectl` commands.
 {: shortdesc}
 
-1. If your network is protected by a company firewall, allow access to the {{site.data.keyword.Bluemix_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports.
+1. If your network is protected by a company firewall, allow access to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports.
   1. [Allow access to the public endpoints for the `ibmcloud` API and the `ibmcloud ks` API in your firewall](/docs/containers?topic=containers-firewall#firewall_bx).
   2. [Allow your authorized cluster users to run `kubectl` commands](/docs/containers?topic=containers-firewall#firewall_kubectl) to access the master through the public only, private only, or public and private service endpoints.
   3. [Allow your authorized cluster users to run `calicotl` commands](/docs/containers?topic=containers-firewall#firewall_calicoctl) to manage Calico network policies in your cluster.
 
 2. Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
 
-  If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
+  If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
   {: tip}
   1. Get the command to set the environment variable and download the Kubernetes configuration files.
       ```
@@ -527,10 +527,10 @@ To work with your cluster, set the cluster you created as the context for a CLI 
 ### Accessing clusters through the private service endpoint
 {: #access_on_prem}
 
-The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a [VPN connection](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) or [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.Bluemix_notm}} Direct Link. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.Bluemix_notm}} Direct Link connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB.
+The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a [VPN connection](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) or [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.cloud_notm}} Direct Link. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.cloud_notm}} Direct Link connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB.
 {: shortdesc}
 
-1. If your network is protected by a company firewall, allow access to the {{site.data.keyword.Bluemix_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports.
+1. If your network is protected by a company firewall, allow access to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports.
   1. [Allow access to the public endpoints for the `ibmcloud` API and the `ibmcloud ks` API in your firewall](/docs/containers?topic=containers-firewall#firewall_bx).
   2. [Allow your authorized cluster users to run `kubectl` commands](/docs/containers?topic=containers-firewall#firewall_kubectl). Note that you cannot test the connection to your cluster in step 6 until you expose the private service endpoint of the master to the cluster by using a private NLB.
 
@@ -583,9 +583,9 @@ The Kubernetes master is accessible through the private service endpoint if auth
   ```
   {: codeblock}
 
-4. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private service endpoint from a VPN or {{site.data.keyword.Bluemix_notm}} Direct Link, you must connect to the cluster master and create the NLB by using the public service endpoint or Kubernetes dashboard.
+4. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private service endpoint from a VPN or {{site.data.keyword.cloud_notm}} Direct Link, you must connect to the cluster master and create the NLB by using the public service endpoint or Kubernetes dashboard.
   * If you enabled the private service endpoint only, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private service endpoint of the master.
-    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/).
+    1.  Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
     2.  From the menu bar, select the account that you want to use.
     3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
     4.  On the **Clusters** page, click the cluster that you want to access.
@@ -637,7 +637,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   ```
   {: codeblock}
 
-6. Verify that you are connected to the private network through a VPN or {{site.data.keyword.Bluemix_notm}} Direct Link connection.
+6. Verify that you are connected to the private network through a VPN or {{site.data.keyword.cloud_notm}} Direct Link connection.
 
 7. Verify that the `kubectl` commands run properly with your cluster through the private service endpoint by checking the Kubernetes CLI server version.
   ```
@@ -661,7 +661,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
 When the cluster is up and running, you can check out the following tasks:
 - If you created the cluster in a multizone capable zone, [spread worker nodes by adding a zone to your cluster](/docs/containers?topic=containers-add_workers).
 - [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
-- [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-getting-started)
+- [Set up your own private registry in {{site.data.keyword.cloud_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-getting-started)
 - [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 - Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
 - Enable the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons to extend your cluster capabilities.
@@ -674,21 +674,21 @@ Then, you can check out the following network configuration steps for your clust
 * Isolate networking workloads to [edge worker nodes](/docs/containers?topic=containers-edge).
 * Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access).
 * Control public traffic to the network services that expose your apps by creating [Calico pre-DNAT policies](/docs/containers?topic=containers-network_policies#block_ingress), such as whitelist and blacklist policies.
-* Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up a [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn).
+* Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account by setting up a [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn).
 
 ### Extend your on-premises data center to a cluster and allow limited public access using edge nodes and Calico network policies
 {: #next_steps_calico}
 
-* Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) or the [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup). {{site.data.keyword.Bluemix_notm}} Direct Link allows communication between apps and services in your cluster and an on-premises network over the private network, while strongSwan allows communication through an encrypted VPN tunnel over the public network.
+* Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account by setting up [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) or the [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup). {{site.data.keyword.cloud_notm}} Direct Link allows communication between apps and services in your cluster and an on-premises network over the private network, while strongSwan allows communication through an encrypted VPN tunnel over the public network.
 * Isolate public networking workloads by creating an [edge worker pool](/docs/containers?topic=containers-edge) of worker nodes that are connected to public and private VLANs.
 * Expose your apps with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
-* [Create Calico host network policies](/docs/containers?topic=containers-network_policies#isolate_workers) to block public access to pods, isolate your cluster on the private network, and allow access to other {{site.data.keyword.Bluemix_notm}} services.
+* [Create Calico host network policies](/docs/containers?topic=containers-network_policies#isolate_workers) to block public access to pods, isolate your cluster on the private network, and allow access to other {{site.data.keyword.cloud_notm}} services.
 
 ### Extend your on-premises data center to a cluster and allow limited public access using a gateway device
 {: #next_steps_gateway}
 
 * If you also configure your gateway firewall for the private network, you must [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
-* To securely connect your worker nodes and apps to private networks outside of your {{site.data.keyword.Bluemix_notm}} account, set up an IPSec VPN endpoint on your gateway device. Then, [configure the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) in your cluster to use the VPN endpoint on your gateway or [set up VPN connectivity directly with VRA](/docs/containers?topic=containers-vpn#vyatta).
+* To securely connect your worker nodes and apps to private networks outside of your {{site.data.keyword.cloud_notm}} account, set up an IPSec VPN endpoint on your gateway device. Then, [configure the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) in your cluster to use the VPN endpoint on your gateway or [set up VPN connectivity directly with VRA](/docs/containers?topic=containers-vpn#vyatta).
 * Expose your apps with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
 * [Open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_inbound) in your gateway device firewall to permit inbound traffic to networking services.
 
@@ -696,5 +696,5 @@ Then, you can check out the following network configuration steps for your clust
 {: #next_steps_extend}
 
 * If you have a firewall on the private network, [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
-* Connect your cluster with services in private networks outside of your {{site.data.keyword.Bluemix_notm}} account by setting up [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link).
+* Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account by setting up [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link).
 * Expose your apps on the private network with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).

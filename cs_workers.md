@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -37,7 +37,7 @@ When you create a cluster, the worker nodes are provisioned in a worker pool. Af
 If you have a multizone cluster, keep its worker node resources balanced. Make sure that all the worker pools are spread across the same zones, and add or remove workers by resizing the pools instead of adding individual nodes.
 {: tip}
 
-Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). Then, choose one of the following sections:
+Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). Then, choose one of the following sections:
   * [Add worker nodes by resizing an existing worker pool in your cluster](#resize_pool)
   * [Add worker nodes by adding a worker pool to your cluster](#add_pool)
   * [Add a zone to your cluster and replicate the worker nodes in your worker pools across multiple zones](#add_zone)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -132,7 +132,7 @@ By default, each NLB 1.0 is set up in one zone only. To achieve high availabilit
 * To create public network load balancers (NLBs) in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private NLBs in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
 * If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
 * Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 
 To set up an NLB 1.0 service in a multizone cluster:
@@ -282,7 +282,7 @@ Next, you can [register an NLB host name](#loadbalancer_hostname).
 
 **Before you begin**:
 * You must have an available portable public or private IP address to assign to the network load balancer (NLB) service. For more information, see [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 To create an NLB 1.0 service in a single-zone cluster:
 
@@ -653,7 +653,7 @@ Before you create an NLB 2.0, you must complete the following prerequisite steps
 1. [Update your cluster's master and worker nodes](/docs/containers?topic=containers-update) to Kubernetes version 1.12 or later.
 
 2. To allow your NLB 2.0 to forward requests to app pods in multiple zones, open a support case to request capacity aggregation for your VLANs. This configuration setting does not cause any network disruptions or outages.
-    1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/).
+    1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
     2. From the menu bar, click **Support**, click the **Manage cases** tab, and click **Create new case**.
     3. In the case fields, enter the following:
        * For type of support, select **Technical**.
@@ -704,7 +704,7 @@ Next, you can follow the steps in [Setting up an NLB 2.0 in a multizone cluster]
 * **Important**: Complete the [NLB 2.0 prerequisites](#ipvs_provision).
 * To create public NLBs in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private NLBs in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
 * If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 
 To set up an NLB 2.0 in a multizone cluster:
@@ -869,7 +869,7 @@ Next, you can [register an NLB host name](#loadbalancer_hostname).
 
 * **Important**: Complete the [NLB 2.0 prerequisites](#ipvs_provision).
 * You must have an available portable public or private IP address to assign to the NLB service. For more information, see [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 To create an NLB 2.0 service in a single-zone cluster:
 
@@ -1059,7 +1059,7 @@ After you set up network load balancers (NLBs), you can create DNS entries for t
 
 <dl>
 <dt>Host name</dt>
-<dd>When you create a public NLB in a single- or multizone cluster, you can expose your app to the internet by creating a host name for the NLB IP address. Additionally, {{site.data.keyword.Bluemix_notm}} takes care of generating and maintaining the wildcard SSL certificate for the host name for you.
+<dd>When you create a public NLB in a single- or multizone cluster, you can expose your app to the internet by creating a host name for the NLB IP address. Additionally, {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the host name for you.
 <p>In multizone clusters, you can create a host name and add the NLB IP address in each zone to that host name DNS entry. For example, if you deployed NLBs for your app in 3 zones in US-South, you can create the host name `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` for the 3 NLB IP addresses. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB.</p>
 Note that you currently cannot create host names for private NLBs.</dd>
 <dt>Health check monitor</dt>
@@ -1171,7 +1171,7 @@ For example, a host name that you create for an NLB might look like `mycluster-a
 </tr>
 <tr>
 <td><code>&lt;globally_unique_account_HASH&gt;</code></td>
-<td>A globally unique HASH is created for your {{site.data.keyword.Bluemix_notm}} account. All host names that you create for NLBs in clusters in your account use this globally unique HASH.</td>
+<td>A globally unique HASH is created for your {{site.data.keyword.cloud_notm}} account. All host names that you create for NLBs in clusters in your account use this globally unique HASH.</td>
 </tr>
 <tr>
 <td><code>0001</code></td>

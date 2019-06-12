@@ -31,7 +31,7 @@ subcollection: containers
 With this tutorial, you can deploy and manage a Kubernetes cluster in {{site.data.keyword.containerlong}}. Learn how to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster.
 {:shortdesc}
 
-In this tutorial series, you can see how a fictional public relations firm uses Kubernetes capabilities to deploy a containerized app in {{site.data.keyword.Bluemix_notm}}. Leveraging {{site.data.keyword.toneanalyzerfull}}, the PR firm analyzes their press releases and receives feedback.
+In this tutorial series, you can see how a fictional public relations firm uses Kubernetes capabilities to deploy a containerized app in {{site.data.keyword.cloud_notm}}. Leveraging {{site.data.keyword.toneanalyzerfull}}, the PR firm analyzes their press releases and receives feedback.
 
 
 ## Objectives
@@ -63,44 +63,44 @@ This tutorial is intended for software developers and network administrators who
 
 -  Check out the steps you need to take to [prepare to create a cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
 -  Ensure you have the following access policies:
-    - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
-    - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}}
-    - The [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
+    - The [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
+    - The [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}}
+    - The [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
 
 
 ## Lesson 1: Creating a cluster and setting up the CLI
 {: #cs_cluster_tutorial_lesson1}
 
-Create your Kubernetes cluster in the {{site.data.keyword.Bluemix_notm}} console and install the required CLIs.
+Create your Kubernetes cluster in the {{site.data.keyword.cloud_notm}} console and install the required CLIs.
 {: shortdesc}
 
 **To create your cluster**
 
 Because it can take a few minutes to provision, create your cluster before you install the CLIs.
 
-1.  [In the {{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), create a free or standard cluster with 1 worker pool that has 1 worker node in it.
+1.  [In the {{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), create a free or standard cluster with 1 worker pool that has 1 worker node in it.
 
     You can also create a [cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps).
     {: tip}
 
 As your cluster provisions, install the following CLIs that are used to manage clusters:
--   {{site.data.keyword.Bluemix_notm}} CLI
+-   {{site.data.keyword.cloud_notm}} CLI
 -   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} plug-in
 
-If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
+If you want to use the {{site.data.keyword.cloud_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
 {: tip}
 
 </br>
 **To install the CLIs and their prerequisites**
 
-1. Install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started). This installation includes:
-  - The base {{site.data.keyword.Bluemix_notm}} CLI. The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
-  - The {{site.data.keyword.containerlong_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud ks`.
+1. Install the [{{site.data.keyword.cloud_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started). This installation includes:
+  - The base {{site.data.keyword.cloud_notm}} CLI. The prefix for running commands by using the {{site.data.keyword.cloud_notm}} CLI is `ibmcloud`.
+  - The {{site.data.keyword.containerlong_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.cloud_notm}} CLI is `ibmcloud ks`.
   - {{site.data.keyword.registryshort_notm}} plug-in. Use this plug-in to set up and manage a private image repository in {{site.data.keyword.registryshort_notm}}. The prefix for running registry commands is `ibmcloud cr`.
 
-2. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
+2. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
   ```
   ibmcloud login
   ```
@@ -166,7 +166,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
    ```
    {: pre}
 
-2.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.Bluemix_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
+2.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.cloud_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
 
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
@@ -184,7 +184,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
     ```
     {: pre}
 
-    When your worker node is finished provisioning, the status changes to **Ready** and you can start binding {{site.data.keyword.Bluemix_notm}} services.
+    When your worker node is finished provisioning, the status changes to **Ready** and you can start binding {{site.data.keyword.cloud_notm}} services.
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
@@ -198,7 +198,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
 Set the context for your Kubernetes cluster in your CLI.
 {: shortdesc}
 
-Every time you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.Bluemix_notm}}.
+Every time you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.cloud_notm}}.
 
 1.  Get the command to set the environment variable and download the Kubernetes configuration files.
     ```
@@ -252,10 +252,10 @@ Every time you log in to the {{site.data.keyword.containerlong}} CLI to work wit
 ## Lesson 4: Adding a service to your cluster
 {: #cs_cluster_tutorial_lesson4}
 
-With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of already developed functionality in your apps. Any {{site.data.keyword.Bluemix_notm}} service that is bound to the Kubernetes cluster can be used by any app that is deployed in that cluster. Repeat the following steps for every {{site.data.keyword.Bluemix_notm}} service that you want to use with your apps.
+With {{site.data.keyword.cloud_notm}} services, you can take advantage of already developed functionality in your apps. Any {{site.data.keyword.cloud_notm}} service that is bound to the Kubernetes cluster can be used by any app that is deployed in that cluster. Repeat the following steps for every {{site.data.keyword.cloud_notm}} service that you want to use with your apps.
 {: shortdesc}
 
-1.  Add the {{site.data.keyword.toneanalyzershort}} service to your {{site.data.keyword.Bluemix_notm}} account. Replace <service_name> with a name for your service instance.
+1.  Add the {{site.data.keyword.toneanalyzershort}} service to your {{site.data.keyword.cloud_notm}} account. Replace <service_name> with a name for your service instance.
 
     When you add the {{site.data.keyword.toneanalyzershort}} service to your account, a message is displayed that the service is not free. If you limit your API call, this tutorial does not incur charges from the {{site.data.keyword.watson}} service. [Review the pricing information for the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog/services/tone-analyzer).
     {: note}
@@ -283,7 +283,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
     ```
     {: screen}
 
-3.  Verify that the Kubernetes secret was created in your cluster namespace. Every {{site.data.keyword.Bluemix_notm}} service is defined by a JSON file that includes confidential information such as the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key and the URL that the container uses to gain access. To securely store this information, Kubernetes secrets are used. In this example, the secret includes the API key for accessing the instance of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} that is provisioned in your account.
+3.  Verify that the Kubernetes secret was created in your cluster namespace. Every {{site.data.keyword.cloud_notm}} service is defined by a JSON file that includes confidential information such as the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key and the URL that the container uses to gain access. To securely store this information, Kubernetes secrets are used. In this example, the secret includes the API key for accessing the instance of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} that is provisioned in your account.
 
     ```
     kubectl get secrets --namespace=default

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -38,7 +38,7 @@ No backups are created of your cluster or your data in your persistent storage. 
 Before you begin:
 * Note your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure (SoftLayer) resources that are not automatically deleted with your cluster.
 * If you want to delete the data in your persistent storage, [understand the delete options](/docs/containers?topic=containers-cleanup#cleanup).
-* Make sure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+* Make sure you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
 To remove a cluster:
 
@@ -49,10 +49,10 @@ To remove a cluster:
   {: pre}
 
 2. Remove the cluster.
-  - From the {{site.data.keyword.Bluemix_notm}} console
+  - From the {{site.data.keyword.cloud_notm}} console
     1.  Select your cluster and click **Delete** from the **More actions...** menu.
 
-  - From the {{site.data.keyword.Bluemix_notm}} CLI
+  - From the {{site.data.keyword.cloud_notm}} CLI
     1.  List the available clusters.
 
         ```
@@ -76,4 +76,4 @@ To remove a cluster:
 Next steps:
 - After it is no longer listed in the available clusters list when you run the `ibmcloud ks clusters` command, you can reuse the name of a removed cluster.
 - If you kept the subnets, you can [reuse them in a new cluster](/docs/containers?topic=containers-subnets#subnets_custom) or manually delete them later from your IBM Cloud infrastructure (SoftLayer) portfolio.
-- If you kept the persistent storage, you can [delete your storage](/docs/containers?topic=containers-cleanup#cleanup) later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} console.
+- If you kept the persistent storage, you can [delete your storage](/docs/containers?topic=containers-cleanup#cleanup) later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.cloud_notm}} console.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -156,7 +156,7 @@ The following image shows available non-persistent data storage options in {{sit
 <tr>
 <td style="text-align:left">Durability</td>
 <td style="text-align:left">Data is lost when the container crashes or is removed. </td>
-<td style="text-align:left">Data in <code>hostPath</code> or <code>emptyDir</code> volumes is lost when: <ul><li>The worker node is deleted.</li><li>The worker node is reloaded or updated.</li><li>The cluster is deleted.</li><li>The {{site.data.keyword.Bluemix_notm}} account reaches a suspended state. </li></ul></p><p>In addition, data in an <code>emptyDir</code> volume is removed when: <ul><li>The assigned pod is permanently deleted from the worker node.</li><li>The assigned pod is scheduled on another worker node.</li></ul>
+<td style="text-align:left">Data in <code>hostPath</code> or <code>emptyDir</code> volumes is lost when: <ul><li>The worker node is deleted.</li><li>The worker node is reloaded or updated.</li><li>The cluster is deleted.</li><li>The {{site.data.keyword.cloud_notm}} account reaches a suspended state. </li></ul></p><p>In addition, data in an <code>emptyDir</code> volume is removed when: <ul><li>The assigned pod is permanently deleted from the worker node.</li><li>The assigned pod is scheduled on another worker node.</li></ul>
 </tr>
 <tr>
 <td style="text-align:left">Common use cases</td>
@@ -287,7 +287,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <th style="text-align:left">Characteristics</th>
 <th style="text-align:left">Object</th>
 <th style="text-align:left">SDS (Portworx)</th>
-<th style="text-align:left">{{site.data.keyword.Bluemix_notm}} Databases</th>
+<th style="text-align:left">{{site.data.keyword.cloud_notm}} Databases</th>
 </thead>
 <tbody>
 <tr>

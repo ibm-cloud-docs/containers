@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -75,14 +75,14 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 |-----|-----|-----|-----|
 |Major|1.x.x|You|Operation changes for clusters, including scripts or deployments.|
 |Minor|x.9.x|You|Operation changes for clusters, including scripts or deployments.|
-|Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.Bluemix_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. See more about patches in the following section.|
+|Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.cloud_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. See more about patches in the following section.|
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud ks workers --cluster <cluster>` or `ibmcloud ks worker-get --cluster <cluster> --worker <worker>` commands.
 -  **Major and minor updates (1.x)**: First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node). Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters.
    - You cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.11 and you want to update to 1.14, you must update to 1.12 first.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cs_cli_install#kubectl) up-to-date.
--  **Patch updates (x.x.4_1510)**: Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
+-  **Patch updates (x.x.4_1510)**: Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
    - **Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) or the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to apply these security and operating system patches. During an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
    - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) yourself without waiting for the update automation to apply.
 
@@ -346,7 +346,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).</td>
+<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).</td>
 </tr>
 <tr>
 <tr>
@@ -458,7 +458,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).</td>
+<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
@@ -593,12 +593,12 @@ The following table shows the actions that you must take after you update the Ku
 The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`. If you use your own logging solution that monitors the previous directory, update accordingly.</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) support</td>
+<td>{{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) support</td>
 <td>Clusters that run Kubernetes version 1.11 or later support IAM [access groups](/docs/iam?topic=iam-groups#groups) and [service IDs](/docs/iam?topic=iam-serviceids#serviceids). You can now use these features to [authorize access to your cluster](/docs/containers?topic=containers-users#users).</td>
 </tr>
 <tr>
 <td>Refresh Kubernetes configuration</td>
-<td>The OpenID Connect configuration for the cluster's Kubernetes API server is updated to support {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) access groups. As a result, you must refresh your cluster's Kubernetes configuration after the master Kubernetes v1.11 update by running `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. With this command, the configuration is applied to role bindings in the `default` namespace.<br><br>If you do not refresh the configuration, cluster actions fail with the following error message: `You must be logged in to the server (Unauthorized).`</td>
+<td>The OpenID Connect configuration for the cluster's Kubernetes API server is updated to support {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) access groups. As a result, you must refresh your cluster's Kubernetes configuration after the master Kubernetes v1.11 update by running `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. With this command, the configuration is applied to role bindings in the `default` namespace.<br><br>If you do not refresh the configuration, cluster actions fail with the following error message: `You must be logged in to the server (Unauthorized).`</td>
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>

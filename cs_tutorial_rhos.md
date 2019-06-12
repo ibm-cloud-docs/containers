@@ -36,7 +36,7 @@ OpenShift worker nodes are available for standard clusters only. Red Hat OpenShi
 ## Objectives
 {: #openshift_objectives}
 
-In the tutorial lessons, you create a standard Red Hat OpenShift on IBM Cloud cluster, open the OpenShift console, access built-in OpenShift components, deploy an app that uses {{site.data.keyword.Bluemix_notm}} services in an OpenShift project, and expose the app on an OpenShift route so that external users can access the service.
+In the tutorial lessons, you create a standard Red Hat OpenShift on IBM Cloud cluster, open the OpenShift console, access built-in OpenShift components, deploy an app that uses {{site.data.keyword.cloud_notm}} services in an OpenShift project, and expose the app on an OpenShift route so that external users can access the service.
 {: shortdesc}
 
 This page also includes information on the OpenShift cluster architecture, beta limitations, and how to give feedback and get support.
@@ -54,13 +54,13 @@ This tutorial is for cluster administrators who want to learn how to create a Re
 ## Prerequisites
 {: #openshift_prereqs}
 
-*   Ensure that you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies.
+*   Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies.
     *   The [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
     *   The [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
     *   The [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}}
-*    Make sure that the [API key](/docs/containers?topic=containers-users#api_key) for the {{site.data.keyword.Bluemix_notm}} region and resource group is set up with the correct infrastructure permissions, **Super User**, or the [minimum roles](/docs/containers?topic=containers-access_reference#infra) to create a cluster.
+*    Make sure that the [API key](/docs/containers?topic=containers-users#api_key) for the {{site.data.keyword.cloud_notm}} region and resource group is set up with the correct infrastructure permissions, **Super User**, or the [minimum roles](/docs/containers?topic=containers-access_reference#infra) to create a cluster.
 *   Install the command-line tools.
-    *   [Install the {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`), {{site.data.keyword.containershort_notm}} plug-in (`ibmcloud ks`), and {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
+    *   [Install the {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`), {{site.data.keyword.containershort_notm}} plug-in (`ibmcloud ks`), and {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
     *   [Install the OpenShift Origin (`oc`) and Kubernetes (`kubectl`) CLIs](/docs/containers?topic=containers-cs_cli_install#cli_oc).
 
 <br />
@@ -81,7 +81,7 @@ The following diagram and table describe the default components that are set up 
 | `openvpn-server` | The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.|
 | `etcd` | etcd is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.|
 | `rhos-controller` | The OpenShift controller manager watches for newly created pods and decides where to deploy them based on capacity, performance needs, policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster. The controller also watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state. The `rhos-controller` functions as both the scheduler and controller manager in a native Kubernetes configuration. |
-| `cloud-controller-manager` | The cloud controller manager manages cloud provider-specific components such as the {{site.data.keyword.Bluemix_notm}} load balancer.|
+| `cloud-controller-manager` | The cloud controller manager manages cloud provider-specific components such as the {{site.data.keyword.cloud_notm}} load balancer.|
 {: caption="Table 1. OpenShift master components." caption-side="top"}
 {: #rhos-components-1}
 {: tab-title="Master"}
@@ -124,7 +124,7 @@ Create a standard OpenShift cluster in the {{site.data.keyword.containerlong_not
 Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure that you have the appropriate permissions to create a cluster.
 
 1.  Create a cluster.
-    1.  Log in to your [{{site.data.keyword.Bluemix_notm}} account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
+    1.  Log in to your [{{site.data.keyword.cloud_notm}} account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
     2.  From the hamburger menu ![hamburger menu icon](../icons/icon_hamburger.svg "hamburger menu icon"), select **Kubernetes** and then click **Create cluster**.
     3.  Choose your cluster setup details and name. For the beta, OpenShift clusters are available only as standard clusters that are located in Washington, DC and London data centers.
         *   For **Select a plan**, choose **Standard**.
@@ -140,7 +140,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
 ### Creating a cluster with the CLI
 {: #openshift_create_cluster_cli}
 
-Create a standard OpenShift cluster by using the {{site.data.keyword.Bluemix_notm}} CLI.
+Create a standard OpenShift cluster by using the {{site.data.keyword.cloud_notm}} CLI.
 {: shortdesc}
 
 Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure that you have the appropriate permissions to create a cluster, the `ibmcloud` CLI and plug-ins, and the `oc` and `kubectl` CLIs.
@@ -171,11 +171,11 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     <tbody>
     <tr>
     <td><code>cluster-create</code></td>
-    <td>The command to create a classic infrastructure cluster in your {{site.data.keyword.Bluemix_notm}} account.</td>
+    <td>The command to create a classic infrastructure cluster in your {{site.data.keyword.cloud_notm}} account.</td>
     </tr>
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>Enter a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across {{site.data.keyword.Bluemix_notm}} regions.</td>
+    <td>Enter a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across {{site.data.keyword.cloud_notm}} regions.</td>
     </tr>
     <tr>
     <td><code>--location <em>&lt;zone&gt;</em></code></td>
@@ -475,7 +475,7 @@ Before you begin, log in to your cluster as an administrator.
 ### Lesson 4a: Setting up LogDNA
 {: #openshift_logdna}
 
-Set up a project and privileged service account for {{site.data.keyword.la_full_notm}}. Then, create a {{site.data.keyword.la_short}} instance in your {{site.data.keyword.Bluemix_notm}} account. To integrate your {{site.data.keyword.la_short}} instance with your OpenShift cluster, you must modify the daemon set that is deployed to use the privileged service account to run as root.
+Set up a project and privileged service account for {{site.data.keyword.la_full_notm}}. Then, create a {{site.data.keyword.la_short}} instance in your {{site.data.keyword.cloud_notm}} account. To integrate your {{site.data.keyword.la_short}} instance with your OpenShift cluster, you must modify the daemon set that is deployed to use the privileged service account to run as root.
 {: shortdesc}
 
 1.  Set up the project and privileged service account for LogDNA.
@@ -602,14 +602,14 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
     oc get pods
     ```
     {: pre}
-8.  From the [{{site.data.keyword.Bluemix_notm}} Observability > Logging console](https://cloud.ibm.com/observe/logging), in the row for your {{site.data.keyword.la_short}} instance, click **View LogDNA**. The LogDNA dashboard opens, and you can begin to analyze your logs.
+8.  From the [{{site.data.keyword.cloud_notm}} Observability > Logging console](https://cloud.ibm.com/observe/logging), in the row for your {{site.data.keyword.la_short}} instance, click **View LogDNA**. The LogDNA dashboard opens, and you can begin to analyze your logs.
 
 For more information about how to use {{site.data.keyword.la_short}}, see the [Next steps docs](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube_next_steps).
 
 ### Lesson 4b: Setting up Sysdig
 {: #openshift_sysdig}
 
-Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keyword.Bluemix_notm}} account. To integrate your {{site.data.keyword.mon_short}} instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.
+Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keyword.cloud_notm}} account. To integrate your {{site.data.keyword.mon_short}} instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.
 {: shortdesc}
 
 1.  Create your {{site.data.keyword.mon_full_notm}} instance in the same resource group as your cluster. Select a pricing plan that determines the retention period for your logs, such as `lite`. The region does not have to match the region of your cluster. For more information, see [Provisioning an instance](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-provision).
@@ -711,14 +711,14 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     sysdig-agent-rhrgz   1/1       Running   0          1m
     ```
     {: screen}
-5.  From the [{{site.data.keyword.Bluemix_notm}} Observability > Monitoring console](https://cloud.ibm.com/observe/logging), in the row for your {{site.data.keyword.mon_short}} instance, click **View Sysdig**. The Sysdig dashboard opens, and you can begin to analyze your cluster metrics.
+5.  From the [{{site.data.keyword.cloud_notm}} Observability > Monitoring console](https://cloud.ibm.com/observe/logging), in the row for your {{site.data.keyword.mon_short}} instance, click **View Sysdig**. The Sysdig dashboard opens, and you can begin to analyze your cluster metrics.
 
 For more information about how to use {{site.data.keyword.mon_short}}, see the [Next steps docs](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster_next_steps).
 
 ### Optional: Cleaning up
 {: #openshift_logdna_sysdig_cleanup}
 
-Remove the {{site.data.keyword.la_short}} and {{site.data.keyword.mon_short}} instances from your cluster and {{site.data.keyword.Bluemix_notm}} account. Note that unless you store the logs and metrics in [persistent storage](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-archiving), you cannot access this information after you delete the instances from your account.
+Remove the {{site.data.keyword.la_short}} and {{site.data.keyword.mon_short}} instances from your cluster and {{site.data.keyword.cloud_notm}} account. Note that unless you store the logs and metrics in [persistent storage](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-archiving), you cannot access this information after you delete the instances from your account.
 {: shortdesc}
 
 1.  Clean up the {{site.data.keyword.la_short}} and {{site.data.keyword.mon_short}} instances in your cluster by removing the projects that you created for them. When you delete a project, its resources such as service accounts and daemon sets are also removed.
@@ -730,7 +730,7 @@ Remove the {{site.data.keyword.la_short}} and {{site.data.keyword.mon_short}} in
     oc delete project ibm-observe
     ```
     {: pre}
-2.  Remove the instances from your {{site.data.keyword.Bluemix_notm}} account.
+2.  Remove the instances from your {{site.data.keyword.cloud_notm}} account.
     *   [Removing a {{site.data.keyword.la_short}} instance](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-remove).
     *   [Removing a {{site.data.keyword.mon_short}} instance](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-remove).
 
@@ -752,15 +752,15 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
 
 
 **Storage**:
-*   {{site.data.keyword.Bluemix_notm}} file, block, and cloud object storage are supported. Portworx software-defined storage (SDS) is not supported.
-*   Because of the way that {{site.data.keyword.Bluemix_notm}} NFS file storage configures Linux user permissions, you might encounter errors when you use file storage. If so, you might need to configure [OpenShift Security Context Contraints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html) or use a different storage type.
+*   {{site.data.keyword.cloud_notm}} file, block, and cloud object storage are supported. Portworx software-defined storage (SDS) is not supported.
+*   Because of the way that {{site.data.keyword.cloud_notm}} NFS file storage configures Linux user permissions, you might encounter errors when you use file storage. If so, you might need to configure [OpenShift Security Context Contraints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html) or use a different storage type.
 
 **Networking**:
 *   Calico is used as the networking policy provider instead of OpenShift SDN.
 
 **Add-ons, integrations, and other services**:
 *   {{site.data.keyword.containerlong_notm}} add-ons such as Istio, Knative, and the Kubernetes terminal are not available.
-*   Helm charts are not certified to work in OpenShift clusters, except {{site.data.keyword.Bluemix_notm}} Object Storage.
+*   Helm charts are not certified to work in OpenShift clusters, except {{site.data.keyword.cloud_notm}} Object Storage.
 *   Clusters are not deployed with image pull secrets for {{site.data.keyword.registryshort_notm}} `icr.io` domains. You can [create your own image pull secrets](/docs/containers?topic=containers-images#other_registry_accounts), or instead use the built-in Docker registry for OpenShift clusters.
 
 **Apps**:
@@ -790,5 +790,5 @@ For any questions or feedback, post in Slack.
 *   If you are an external user, post in the [#openshift ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CKCJLJCH4) channel. 
 *   If you are an IBMer, use the [#iks-openshift-users ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/CJH0UPN2D) channel.
 
-If you do not use an IBMid for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
+If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
 {: tip}

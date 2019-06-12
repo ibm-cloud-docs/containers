@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -46,7 +46,7 @@ Learn the general steps for deploying apps by clicking an area of the following 
 ## Planning to run apps in clusters
 {: #plan_apps}
 
-Before you deploy an app to an {{site.data.keyword.containerlong_notm}} cluster, decide how you want to set up your app so that your app can be accessed properly and be integrated with other services in {{site.data.keyword.Bluemix_notm}}.
+Before you deploy an app to an {{site.data.keyword.containerlong_notm}} cluster, decide how you want to set up your app so that your app can be accessed properly and be integrated with other services in {{site.data.keyword.cloud_notm}}.
 {:shortdesc}
 
 ### What type of Kubernetes objects can I make for my app?
@@ -131,7 +131,7 @@ If you want to expose your app publicly, you have different options that depend 
 *  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). You also must open the port for the service's private IP address in your firewall.
 
 ### After I deploy my app, how can I monitor its health?
-You can set up {{site.data.keyword.Bluemix_notm}} [logging and monitoring](/docs/containers?topic=containers-health#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](/docs/containers?topic=containers-supported_integrations#health_services).
+You can set up {{site.data.keyword.cloud_notm}} [logging and monitoring](/docs/containers?topic=containers-health#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](/docs/containers?topic=containers-supported_integrations#health_services).
 {: shortdesc}
 
 ### How can I keep my app up-to-date?
@@ -144,7 +144,7 @@ If you want to manage updates to your app, see [Managing rolling deployments](/d
 The account and cluster administrators can control access on many different levels: the cluster, Kubernetes namespace, pod, and container.
 {: shortdesc}
 
-With {{site.data.keyword.Bluemix_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers?topic=containers-users#users).
+With {{site.data.keyword.cloud_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers?topic=containers-users#users).
 
 To control access at the pod level, you can [configure pod security policies with Kubernetes RBAC](/docs/containers?topic=containers-psp#psp).
 
@@ -842,7 +842,7 @@ To set up configuration files with Kustomize:
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}
 
-Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes. [In the {{site.data.keyword.Bluemix_notm}} console](#db_gui), you can access the dashboard with a convenient one-click button. [With the CLI](#db_cli), you can access the dashboard or use the steps in an automation process such as for a CI/CD pipeline.
+Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes. [In the {{site.data.keyword.cloud_notm}} console](#db_gui), you can access the dashboard with a convenient one-click button. [With the CLI](#db_cli), you can access the dashboard or use the steps in an automation process such as for a CI/CD pipeline.
 {:shortdesc}
 
 Do you have so many resources and users in your cluster that the Kubernetes dashboard is a little slow? For clusters that run Kubernetes version 1.12 or later, your cluster admin can scale the `kubernetes-dashboard` deployment by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
@@ -855,10 +855,10 @@ Before you begin:
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
 
-**Launching the Kubernetes dashboard from the {{site.data.keyword.Bluemix_notm}} console**
+**Launching the Kubernetes dashboard from the {{site.data.keyword.cloud_notm}} console**
 {: #db_gui}
 
-1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/).
+1.  Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
 2.  From the menu bar, select the account that you want to use.
 3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
 4.  On the **Clusters** page, click the cluster that you want to access.
@@ -1292,7 +1292,7 @@ To execute a workload on a GPU machine:
 With Kubernetes, you can enable [horizontal pod autoscaling ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) to automatically increase or decrease the number of instances of your apps based on CPU.
 {:shortdesc}
 
-Looking for information about scaling Cloud Foundry applications? Check out [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started). Want to scale your worker nodes instead of your pods? Check out the [cluster autoscaler](/docs/containers?topic=containers-ca#ca).
+Looking for information about scaling Cloud Foundry applications? Check out [IBM Auto-Scaling for {{site.data.keyword.cloud_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started). Want to scale your worker nodes instead of your pods? Check out the [cluster autoscaler](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 Before you begin:

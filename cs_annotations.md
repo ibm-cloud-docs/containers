@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, ingress
 
@@ -183,7 +183,7 @@ Before you use annotations, make sure you have properly set up your Ingress serv
 <tr>
 <td><a href="#proxy-external-service">External services</a></td>
 <td><code>proxy-external-service</code></td>
-<td>Add path definitions to external services, such as a service hosted in {{site.data.keyword.Bluemix_notm}}.</td>
+<td>Add path definitions to external services, such as a service hosted in {{site.data.keyword.cloud_notm}}.</td>
 </tr>
 <tr>
 <td><a href="#location-modifier">Location modifier</a></td>
@@ -1619,7 +1619,7 @@ The Ingress ALB routes traffic to the paths that back-end apps listen on. With p
 ### External services (`proxy-external-service`)
 {: #proxy-external-service}
 
-Add path definitions to external services, such as services hosted in {{site.data.keyword.Bluemix_notm}}.
+Add path definitions to external services, such as services hosted in {{site.data.keyword.cloud_notm}}.
 {:shortdesc}
 
 **Description**</br>

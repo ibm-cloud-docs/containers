@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-07"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -27,26 +27,26 @@ subcollection: containers
 # Deprecated: Dedicated cloud
 {: #dedicated}
 
-{{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_dedicated_notm}} is deprecated. You cannot create clusters in an {{site.data.keyword.Bluemix_dedicated_notm}} environment. To create clusters in {{site.data.keyword.Bluemix_notm}} Public, see [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started).
+{{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_dedicated_notm}} is deprecated. You cannot create clusters in an {{site.data.keyword.Bluemix_dedicated_notm}} environment. To create clusters in {{site.data.keyword.cloud_notm}} Public, see [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started).
 {: deprecated}
 
-If you have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can deploy Kubernetes clusters in a dedicated cloud environment (`https://<my-dedicated-cloud-instance>.bluemix.net`) and connect with the preselected {{site.data.keyword.Bluemix_notm}} services that are also running there.
+If you have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can deploy Kubernetes clusters in a dedicated cloud environment (`https://<my-dedicated-cloud-instance>.bluemix.net`) and connect with the preselected {{site.data.keyword.cloud_notm}} services that are also running there.
 {:shortdesc}
 
-If you do not have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can [get started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started) in a public {{site.data.keyword.Bluemix_notm}} account.
+If you do not have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can [get started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started) in a public {{site.data.keyword.cloud_notm}} account.
 
 ## About the Dedicated cloud environment
 {: #dedicated_environment}
 
-With an {{site.data.keyword.Bluemix_dedicated_notm}} account, available physical resources are dedicated to your cluster only and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. You might choose to set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment when you want isolation for your cluster and you require isolation for the other {{site.data.keyword.Bluemix_notm}} services that you use. If you do not have a Dedicated account, you can [create clusters with dedicated hardware in {{site.data.keyword.Bluemix_notm}} public](/docs/containers?topic=containers-clusters#clusters_ui).
+With an {{site.data.keyword.Bluemix_dedicated_notm}} account, available physical resources are dedicated to your cluster only and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. You might choose to set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment when you want isolation for your cluster and you require isolation for the other {{site.data.keyword.cloud_notm}} services that you use. If you do not have a Dedicated account, you can [create clusters with dedicated hardware in {{site.data.keyword.cloud_notm}} public](/docs/containers?topic=containers-clusters#clusters_ui).
 {: shortdesc}
 
 With {{site.data.keyword.Bluemix_dedicated_notm}}, you can create clusters from the catalog in the Dedicated console or by using the {{site.data.keyword.containerlong_notm}} CLI. To use the Dedicated console, you log in to both your Dedicated and public accounts simultaneously by using your IBMid. You can use the dual login to access your public clusters by using your Dedicated console. To use the CLI, you log in by using your Dedicated endpoint (`api.<my-dedicated-cloud-instance>.bluemix.net.`). You then target the {{site.data.keyword.containerlong_notm}} API endpoint of the public region that is associated with the Dedicated environment.
 
-The most significant differences between {{site.data.keyword.Bluemix_notm}} public and Dedicated are as follows.
+The most significant differences between {{site.data.keyword.cloud_notm}} public and Dedicated are as follows.
 
-*   In {{site.data.keyword.Bluemix_dedicated_notm}}, {{site.data.keyword.IBM_notm}} owns and manages the IBM Cloud infrastructure (SoftLayer) account that the worker nodes, VLANs, and subnets are deployed into. In {{site.data.keyword.Bluemix_notm}} public, you own the IBM Cloud infrastructure (SoftLayer) account.
-*   In {{site.data.keyword.Bluemix_dedicated_notm}}, specifications for the VLANs and subnets in the {{site.data.keyword.IBM_notm}}-managed IBM Cloud infrastructure (SoftLayer) account are determined when the Dedicated environment is enabled. In {{site.data.keyword.Bluemix_notm}} public, specifications for VLANs and subnets are determined when the cluster is created.
+*   In {{site.data.keyword.Bluemix_dedicated_notm}}, {{site.data.keyword.IBM_notm}} owns and manages the IBM Cloud infrastructure (SoftLayer) account that the worker nodes, VLANs, and subnets are deployed into. In {{site.data.keyword.cloud_notm}} public, you own the IBM Cloud infrastructure (SoftLayer) account.
+*   In {{site.data.keyword.Bluemix_dedicated_notm}}, specifications for the VLANs and subnets in the {{site.data.keyword.IBM_notm}}-managed IBM Cloud infrastructure (SoftLayer) account are determined when the Dedicated environment is enabled. In {{site.data.keyword.cloud_notm}} public, specifications for VLANs and subnets are determined when the cluster is created.
 
 ### Differences in cluster management between the cloud environments
 {: #dedicated_env_differences}
@@ -58,7 +58,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
 <col width="40%">
  <thead>
  <th>Area</th>
- <th>{{site.data.keyword.Bluemix_notm}} public</th>
+ <th>{{site.data.keyword.cloud_notm}} public</th>
  <th>{{site.data.keyword.Bluemix_dedicated_notm}}</th>
  </thead>
  <tbody>
@@ -70,7 +70,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Cluster hardware and ownership</td>
  <td>In standard clusters, the hardware can be shared by other {{site.data.keyword.IBM_notm}} customers or dedicated to you only. The public and private VLANs are owned and managed by you in your IBM Cloud infrastructure (SoftLayer) account.</td>
- <td>In clusters on {{site.data.keyword.Bluemix_dedicated_notm}}, the hardware is always dedicated. The public and private VLANs that are available for cluster creation are pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment is set up, and are owned and managed by IBM for you. The zone that is available during cluster creation is also pre-defined for the {{site.data.keyword.Bluemix_notm}} environment.</td>
+ <td>In clusters on {{site.data.keyword.Bluemix_dedicated_notm}}, the hardware is always dedicated. The public and private VLANs that are available for cluster creation are pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment is set up, and are owned and managed by IBM for you. The zone that is available during cluster creation is also pre-defined for the {{site.data.keyword.cloud_notm}} environment.</td>
  </tr>
  <tr>
  <td>Load balancer and Ingress networking</td>
@@ -80,7 +80,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>NodePort networking</td>
  <td>Expose a public port on your worker node and use the public IP address of the worker node to publicly access your service in the cluster.</td>
- <td>All public IP addresses of the workers nodes are blocked by a firewall. However, for {{site.data.keyword.Bluemix_notm}} services that are added to the cluster, the NodePort can be accessed through a public IP address or a private IP address.</td>
+ <td>All public IP addresses of the workers nodes are blocked by a firewall. However, for {{site.data.keyword.cloud_notm}} services that are added to the cluster, the NodePort can be accessed through a public IP address or a private IP address.</td>
  </tr>
  <tr>
  <td>Persistent storage</td>
@@ -90,7 +90,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Image registry URL in {{site.data.keyword.registryshort_notm}}</td>
  <td><ul><li>US-South and US-East: <code>registry.ng bluemix.net</code></li><li>UK-South: <code>registry.eu-gb.bluemix.net</code></li><li>EU-Central (Frankfurt): <code>registry.eu-de.bluemix.net</code></li><li>Australia (Sydney): <code>registry.au-syd.bluemix.net</code></li></ul></td>
- <td><ul><li>For new namespaces, use the same region-based registries that are defined for {{site.data.keyword.Bluemix_notm}} public.</li><li>For namespaces that were set up for single and scalable containers in {{site.data.keyword.Bluemix_dedicated_notm}}, use <code>registry.&lt;dedicated_domain&gt;</code></li></ul></td>
+ <td><ul><li>For new namespaces, use the same region-based registries that are defined for {{site.data.keyword.cloud_notm}} public.</li><li>For namespaces that were set up for single and scalable containers in {{site.data.keyword.Bluemix_dedicated_notm}}, use <code>registry.&lt;dedicated_domain&gt;</code></li></ul></td>
  </tr>
  <tr>
  <td>Accessing the registry</td>
@@ -103,7 +103,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <td>Create [single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-add_workers#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
  </tr>
 </tbody></table>
-{: caption="Feature differences between {{site.data.keyword.Bluemix_notm}} public and {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
+{: caption="Feature differences between {{site.data.keyword.cloud_notm}} public and {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
 
 <br />
 
@@ -128,7 +128,7 @@ Built-in security features provide isolation, resource management capabilities, 
 ## Setting up {{site.data.keyword.containerlong_notm}} on Dedicated
 {: #dedicated_setup}
 
-Each {{site.data.keyword.Bluemix_dedicated_notm}} environment has a public, client-owned, corporate account in {{site.data.keyword.Bluemix_notm}}. For users in the Dedicated environment to create clusters, the administrator must add the users to a public corporate account.
+Each {{site.data.keyword.Bluemix_dedicated_notm}} environment has a public, client-owned, corporate account in {{site.data.keyword.cloud_notm}}. For users in the Dedicated environment to create clusters, the administrator must add the users to a public corporate account.
 {:shortdesc}
 
 Before you begin:
@@ -138,15 +138,15 @@ Before you begin:
 
 To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 
-1.  The owner of your public {{site.data.keyword.Bluemix_notm}} account must generate an API key.
-    1.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter the {{site.data.keyword.Bluemix_notm}} credentials for the public account owner and select your account when prompted.
+1.  The owner of your public {{site.data.keyword.cloud_notm}} account must generate an API key.
+    1.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter the {{site.data.keyword.cloud_notm}} credentials for the public account owner and select your account when prompted.
 
         ```
         ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
         ```
         {: pre}
 
-        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
         {: tip}
 
     2.  Generate an API key for inviting users to the public account. Note the API key value, which the Dedicated account administrator must use in the next step.
@@ -164,14 +164,14 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         {: pre}
 
 2.  The owner of your {{site.data.keyword.Bluemix_dedicated_notm}} account can invite single or multiple users to your Public account.
-    1.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter the {{site.data.keyword.Bluemix_notm}} credentials for the Dedicated account owner and select your account when prompted.
+    1.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter the {{site.data.keyword.cloud_notm}} credentials for the Dedicated account owner and select your account when prompted.
 
         ```
         ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
         ```
         {: pre}
 
-        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
         {: tip}
 
     2.  Invite the users to the public account.
@@ -228,7 +228,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         ```
         {: pre}
 
-        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
         {: tip}
 
     2.  If you are logging in for the first time, provide your Dedicated user ID and password when prompted. Your Dedicated account is authenticated, and the Dedicated and public accounts are linked together. Every time you log in after this first time, you use only your IBMid to log in. For more information, see [Connecting a dedicated ID to your public IBMid](/docs/iam?topic=iam-connect_dedicated_id#connect_dedicated_id).
@@ -259,12 +259,12 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maximum availability and capacity.
 {:shortdesc}
 
-### Creating clusters with the {{site.data.keyword.Bluemix_notm}} console
+### Creating clusters with the {{site.data.keyword.cloud_notm}} console
 {: #dedicated_creating_ui}
 
 1. Open your Dedicated console: `https://<my-dedicated-cloud-instance>.bluemix.net`.
 
-2. Select the **Also log in to {{site.data.keyword.Bluemix_notm}} Public** check box and click **Log in**.
+2. Select the **Also log in to {{site.data.keyword.cloud_notm}} Public** check box and click **Log in**.
 
 3. Follow the prompts to log in with your IBMid. If you are logging in to your Dedicated account for the first time, then follow the prompts to log in to {{site.data.keyword.Bluemix_dedicated_notm}}.
 
@@ -304,15 +304,15 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 ### Creating clusters with the CLI
 {: #dedicated_creating_cli}
 
-1.  Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
-2.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter your {{site.data.keyword.Bluemix_notm}} credentials and select your account when prompted.
+1.  Install the {{site.data.keyword.cloud_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
+2.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter your {{site.data.keyword.cloud_notm}} credentials and select your account when prompted.
 
     ```
     ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
     ```
     {: pre}
 
-    If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
 
 3.  Target a regional endpoint. The following regional endpoints are supported:
@@ -346,11 +346,11 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     <tbody>
     <tr>
     <td><code>cluster-create</code></td>
-    <td>The command to create a cluster in your {{site.data.keyword.Bluemix_notm}} organization.</td>
+    <td>The command to create a cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
     </tr>
     <tr>
     <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-    <td>Enter the {{site.data.keyword.Bluemix_notm}} zone ID that your Dedicated environment is configured to use.</td>
+    <td>Enter the {{site.data.keyword.cloud_notm}} zone ID that your Dedicated environment is configured to use.</td>
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
@@ -398,7 +398,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     * For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
     * If you see the following error message, [open a support case](/docs/get-support?topic=get-support-getting-customer-support).
         ```
-        {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.
+        {{site.data.keyword.cloud_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.
         ```
 
     When the provisioning of your cluster is complete, the status of your cluster changes to **deployed**.
@@ -567,7 +567,7 @@ Review the following options for other cluster configurations:
 You can use Kubernetes techniques to deploy apps in {{site.data.keyword.Bluemix_dedicated_notm}} clusters and to ensure that your apps are always up and running.
 {:shortdesc}
 
-To deploy apps in clusters, you can follow the instructions for [deploying apps in {{site.data.keyword.Bluemix_notm}} public clusters](/docs/containers?topic=containers-app#app). Review the following differences for {{site.data.keyword.Bluemix_dedicated_notm}} clusters.
+To deploy apps in clusters, you can follow the instructions for [deploying apps in {{site.data.keyword.cloud_notm}} public clusters](/docs/containers?topic=containers-app#app). Review the following differences for {{site.data.keyword.Bluemix_dedicated_notm}} clusters.
 
 Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 
@@ -695,7 +695,7 @@ Create a non-expiring token for an image registry that you used for single and s
         <td>The namespace where your image is stored. To list available namespaces, run `ibmcloud cr namespace-list`.</td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>The name of the image that you want to use. To list available images in an {{site.data.keyword.Bluemix_notm}} account, run <code>ibmcloud cr image-list</code>.</td>
+        <td>The name of the image that you want to use. To list available images in an {{site.data.keyword.cloud_notm}} account, run <code>ibmcloud cr image-list</code>.</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>

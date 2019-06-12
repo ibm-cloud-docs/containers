@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -28,42 +28,42 @@ subcollection: containers
 # Adding services by using IBM Cloud service binding
 {: #service-binding}
 
-Add {{site.data.keyword.Bluemix_notm}} services to enhance your Kubernetes cluster with extra capabilities in areas such as Watson AI, data, security, and Internet of Things (IoT).
+Add {{site.data.keyword.cloud_notm}} services to enhance your Kubernetes cluster with extra capabilities in areas such as Watson AI, data, security, and Internet of Things (IoT).
 {:shortdesc}
 
 **What types of services can I bind to my cluster?** </br>
-When you add {{site.data.keyword.Bluemix_notm}} services to your cluster, you can choose between services that are enabled for {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) and services that are based on Cloud Foundry. IAM-enabled services offer more granular access control and can be managed in an {{site.data.keyword.Bluemix_notm}} resource group. Cloud Foundry services must be added to a Cloud Foundry organization and space, and cannot be added to a resource group. To control access to your Cloud Foundry service instance, you use Cloud Foundry roles. For more information about IAM-enabled services and Cloud Foundry services, see [What is a resource?](/docs/resources?topic=resources-resource#resource).
+When you add {{site.data.keyword.cloud_notm}} services to your cluster, you can choose between services that are enabled for {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) and services that are based on Cloud Foundry. IAM-enabled services offer more granular access control and can be managed in an {{site.data.keyword.cloud_notm}} resource group. Cloud Foundry services must be added to a Cloud Foundry organization and space, and cannot be added to a resource group. To control access to your Cloud Foundry service instance, you use Cloud Foundry roles. For more information about IAM-enabled services and Cloud Foundry services, see [What is a resource?](/docs/resources?topic=resources-resource#resource).
 
-To find a list of supported {{site.data.keyword.Bluemix_notm}} services, see the [{{site.data.keyword.Bluemix_notm}} catalog](https://cloud.ibm.com/catalog).
+To find a list of supported {{site.data.keyword.cloud_notm}} services, see the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog).
 
-**What is {{site.data.keyword.Bluemix_notm}} service binding?**</br>
-Service binding is a quick way to create service credentials for an {{site.data.keyword.Bluemix_notm}} service and store these credentials in a Kubernetes secret in your cluster. To bind a service to your cluster, you must provision an instance of the service first. Then, you use the `ibmcloud ks cluster-service-bind` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) to create the service credentials and the Kubernetes secret. The Kubernetes secret is automatically encrypted in etcd to protect your data.
+**What is {{site.data.keyword.cloud_notm}} service binding?**</br>
+Service binding is a quick way to create service credentials for an {{site.data.keyword.cloud_notm}} service and store these credentials in a Kubernetes secret in your cluster. To bind a service to your cluster, you must provision an instance of the service first. Then, you use the `ibmcloud ks cluster-service-bind` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) to create the service credentials and the Kubernetes secret. The Kubernetes secret is automatically encrypted in etcd to protect your data.
 
-Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt new and existing secrets, such as the secret that stores the credentials of your {{site.data.keyword.Bluemix_notm}} service instances.
+Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt new and existing secrets, such as the secret that stores the credentials of your {{site.data.keyword.cloud_notm}} service instances.
 {: tip}
 
-**Can I use all {{site.data.keyword.Bluemix_notm}} services in my cluster?**</br>
-You can use service binding only for services that support service keys so that the service credentials can automatically be created and stored in a Kubernetes secret. To find a list of services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/resources?topic=resources-externalapp#externalapp).
+**Can I use all {{site.data.keyword.cloud_notm}} services in my cluster?**</br>
+You can use service binding only for services that support service keys so that the service credentials can automatically be created and stored in a Kubernetes secret. To find a list of services that support service keys, see [Enabling external apps to use {{site.data.keyword.cloud_notm}} services](/docs/resources?topic=resources-externalapp#externalapp).
 
 Services that do not support service keys usually provide an API that you can use in your app. The service binding method does not automatically set up API access for your app. Make sure to review the API documentation of your service and implement the API interface in your app.
 
 ## Adding IBM Cloud services to clusters
 {: #bind-services}
 
-Use {{site.data.keyword.Bluemix_notm}} service binding to automatically create service credentials for your {{site.data.keyword.Bluemix_notm}} services and store these credentials in a Kubernetes secret.
+Use {{site.data.keyword.cloud_notm}} service binding to automatically create service credentials for your {{site.data.keyword.cloud_notm}} services and store these credentials in a Kubernetes secret.
 {: shortdesc}
 
 Before you begin:
 - Ensure you have the following roles:
-    - [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform) for the cluster where you want to bind a service
-    - [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the Kubernetes namespace where you want to bind the service
+    - [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform) for the cluster where you want to bind a service
+    - [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the Kubernetes namespace where you want to bind the service
     - For Cloud Foundry services: [**Developer** Cloud Foundry role](/docs/iam?topic=iam-mngcf#mngcf) for the space where you want to provision the service
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
+To add an {{site.data.keyword.cloud_notm}} service to your cluster:
 
-1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/resources?topic=resources-externalapp#externalapp).
-    * Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
+1. [Create an instance of the {{site.data.keyword.cloud_notm}} service](/docs/resources?topic=resources-externalapp#externalapp).
+    * Some {{site.data.keyword.cloud_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
     * **For IAM-enabled services**: You must create the service instance in the same resource group as your cluster. A service can be created in only one resource group that you can't change afterward.
 
 2. Check the type of service that you created and make note of the service instance **Name**.
@@ -80,7 +80,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      {: screen}
 
-  - **{{site.data.keyword.Bluemix_notm}} IAM-enabled services:**
+  - **{{site.data.keyword.cloud_notm}} IAM-enabled services:**
      ```
      ibmcloud resource service-instances
      ```
@@ -93,7 +93,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      {: screen}
 
-   You can also see the different service types in your {{site.data.keyword.Bluemix_notm}} dashboard as **Cloud Foundry Services** and **Services**.
+   You can also see the different service types in your {{site.data.keyword.cloud_notm}} dashboard as **Cloud Foundry Services** and **Services**.
 
 3. Identify the cluster namespace that you want to use to add your service.
    ```
@@ -158,7 +158,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
       ```
       {: screen}
 
-   3. Optional: Compare the service credentials that you decoded in the previous step with the service credentials that you find for your service instance in the {{site.data.keyword.Bluemix_notm}} dashboard.
+   3. Optional: Compare the service credentials that you decoded in the previous step with the service credentials that you find for your service instance in the {{site.data.keyword.cloud_notm}} dashboard.
 
 6. Now that your service is bound to your cluster, you must configure your app to [access the service credentials in the Kubernetes secret](#adding_app).
 
@@ -166,7 +166,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 ## Accessing service credentials from your apps
 {: #adding_app}
 
-To access an {{site.data.keyword.Bluemix_notm}} service instance from your app, you must make the service credentials that are stored in the Kubernetes secret available to your app.
+To access an {{site.data.keyword.cloud_notm}} service instance from your app, you must make the service credentials that are stored in the Kubernetes secret available to your app.
 {: shortdesc}
 
 The credentials of a service instance are base64 encoded and stored inside your secret in JSON format. To access the data in your secret, choose among the following options:
@@ -175,14 +175,14 @@ The credentials of a service instance are base64 encoded and stored inside your 
 <br>
 
 Before you begin:
--  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+-  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- [Add an {{site.data.keyword.Bluemix_notm}} service to your cluster](#bind-services).
+- [Add an {{site.data.keyword.cloud_notm}} service to your cluster](#bind-services).
 
 ### Mounting the secret as a volume to your pod
 {: #mount_secret}
 
-When you mount the secret as a volume to your pod, a file that is named `binding` is stored in the volume mount directory. The `binding` file in JSON format includes all the information and credentials that you need to access the {{site.data.keyword.Bluemix_notm}} service.
+When you mount the secret as a volume to your pod, a file that is named `binding` is stored in the volume mount directory. The `binding` file in JSON format includes all the information and credentials that you need to access the {{site.data.keyword.cloud_notm}} service.
 {: shortdesc}
 
 1.  List available secrets in your cluster and note the **name** of your secret. Look for a secret of type **Opaque**. If multiple secrets exist, contact your cluster administrator to identify the correct service secret.

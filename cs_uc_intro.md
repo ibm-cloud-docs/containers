@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Overview of use cases
 {: #cs_uc_intro}
 
-Various use cases show the strengths of {{site.data.keyword.containerlong_notm}} and  {{site.data.keyword.Bluemix_notm}} services when used together. These stories highlight several industries as well as types of workloads. Even though each use case is presented through the lens of a particular industry, these workloads are typical across various industries. You see workload themes, such as: 
+Various use cases show the strengths of {{site.data.keyword.containerlong_notm}} and  {{site.data.keyword.cloud_notm}} services when used together. These stories highlight several industries as well as types of workloads. Even though each use case is presented through the lens of a particular industry, these workloads are typical across various industries. You see workload themes, such as: 
 * AI and machine learning
 * Data and storage
 * DevOps

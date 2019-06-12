@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Government use cases for {{site.data.keyword.Bluemix_notm}}
+# Government use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_gov}
 
 These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} benefit from the public cloud. These workloads have isolation with Trusted Compute, are in global regions for data sovereignty, use Watson machine learning instead of net-new code, and connect to on-premises databases.
@@ -36,7 +36,7 @@ These use cases highlight how workloads on {{site.data.keyword.containerlong_not
 An Open-Government Data Program Executive needs to share public data with the community and private sector, but the data is locked in an on-premises monolithic system.
 {: shortdesc}
 
-Why {{site.data.keyword.Bluemix_notm}}: With {{site.data.keyword.containerlong_notm}}, the Exec delivers the transformative value of combined public-private data. Likewise, the service provides the public cloud platform to refactor and expose microservices from monolithic on-premises apps. Also, the public cloud allows government and the public partnerships to use external cloud services and collaboration-friendly open-source tools.
+Why {{site.data.keyword.cloud_notm}}: With {{site.data.keyword.containerlong_notm}}, the Exec delivers the transformative value of combined public-private data. Likewise, the service provides the public cloud platform to refactor and expose microservices from monolithic on-premises apps. Also, the public cloud allows government and the public partnerships to use external cloud services and collaboration-friendly open-source tools.
 
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
@@ -69,7 +69,7 @@ Finally, apps based on those shared APIs are hosted in {{site.data.keyword.conta
 * Monitoring health and recovery for worker nodes
 * Providing global compute, so Developers don’t have to stand up infrastructure in worldwide regions where they need workloads and data to be located
 
-Moving compute workloads into the {{site.data.keyword.Bluemix_notm}} isn't enough though. The government needs to go through a process and methods transformation as well. By adopting the practices of the IBM Garage Method, the provider can implement an agile and iterative delivery process that supports modern DevOps practices like Continuous Integration and Delivery (CI/CD).
+Moving compute workloads into the {{site.data.keyword.cloud_notm}} isn't enough though. The government needs to go through a process and methods transformation as well. By adopting the practices of the IBM Garage Method, the provider can implement an agile and iterative delivery process that supports modern DevOps practices like Continuous Integration and Delivery (CI/CD).
 
 Much of the CI/CD process itself is automated with {{site.data.keyword.contdelivery_full}} in the cloud. The provider can define workflow toolchains to prepare container images, check for vulnerabilities, and deploy them to the Kubernetes cluster.
 
@@ -100,7 +100,7 @@ Technical solution:
 * Adopt the agile and iterative development practices from the IBM Garage Method to enable frequent releases of features, patches, and fixes without downtime.
 * Whether developers are in the public or private sector, {{site.data.keyword.contdelivery_full}} helps them to quickly provision an integrated toolchain, by using customizable, shareable templates.
 * After Developers build and test the apps in their Dev and Test clusters, they use the {{site.data.keyword.contdelivery_full}} toolchains to deploy apps into production clusters.
-* With Watson AI, machine learning, and deep learning tools available from the {{site.data.keyword.Bluemix_notm}} catalog, Developers focus on domain problems. Instead of custom unique ML code, ML logic is snapped into apps with service bindings.
+* With Watson AI, machine learning, and deep learning tools available from the {{site.data.keyword.cloud_notm}} catalog, Developers focus on domain problems. Instead of custom unique ML code, ML logic is snapped into apps with service bindings.
 
 **Results**
 * Normally slow public-private partnerships now quickly spin up apps in weeks instead of months. These development partnerships now deliver features and bug fixes up to 10 times per week.
@@ -114,7 +114,7 @@ Technical solution:
 IT Execs for a private shipping company and the government-operated port need to connect, provide visibility, and securely exchange port information. But no unified system existed to connect public port information and private shipping manifests.
 {: shortdesc}
 
-Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} allows government and the public partnerships to use external cloud services and collaboration-friendly open-source tools. The containers provided a shareable platform where both the port and shipping company felt assured that the shared information was hosted on a secure platform. And that platform scales as they went from small Dev-Test systems to production-sized systems. Open toolchains further accelerated development by automating build, test, and deployments.
+Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} allows government and the public partnerships to use external cloud services and collaboration-friendly open-source tools. The containers provided a shareable platform where both the port and shipping company felt assured that the shared information was hosted on a secure platform. And that platform scales as they went from small Dev-Test systems to production-sized systems. Open toolchains further accelerated development by automating build, test, and deployments.
 
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
@@ -150,7 +150,7 @@ Because the shipping company also wants to work with other ports, app security i
 
 At the same time, {{site.data.keyword.iamlong}} helps to control who has which level of access to the resources.
 
-Developers focus on domain problems, by using existing tools: Instead of Developers that write unique logging and monitoring code, they snap it into apps, by binding {{site.data.keyword.Bluemix_notm}} services to clusters. Developers are also freed up from infrastructure management tasks because IBM takes care of Kubernetes and infrastructure upgrades, security, and more.
+Developers focus on domain problems, by using existing tools: Instead of Developers that write unique logging and monitoring code, they snap it into apps, by binding {{site.data.keyword.cloud_notm}} services to clusters. Developers are also freed up from infrastructure management tasks because IBM takes care of Kubernetes and infrastructure upgrades, security, and more.
 
 **Solution model**
 

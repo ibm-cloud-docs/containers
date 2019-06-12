@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,7 @@ If you have a more general issue, try out [cluster debugging](/docs/containers?t
 Review the options to debug persistent storage and find the root causes for failures.
 {: shortdesc}
 
-1. Verify that you use the latest {{site.data.keyword.Bluemix_notm}} and {{site.data.keyword.containerlong_notm}} plug-in version. 
+1. Verify that you use the latest {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} plug-in version. 
    ```
    ibmcloud update
    ```
@@ -106,7 +106,7 @@ Review the options to debug persistent storage and find the root causes for fail
       ```
       {: pre}
       
-   4. If a more recent version is available, install this version. For instructions, see [Updating the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in) and [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin). 
+   4. If a more recent version is available, install this version. For instructions, see [Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in) and [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin). 
    
    **Portworx**: 
    
@@ -215,8 +215,8 @@ During the PVC creation and binding, many different tasks are executed by the fi
     </tr>
     <tr>
       <td><code>Your order will exceed the maximum number of storage volumes allowed. Please contact Sales</code></td>
-      <td>Every {{site.data.keyword.Bluemix_notm}} account is set up with a maximum number of storage instances that can be created. By creating the PVC, you exceed the maximum number of storage instances. </td>
-      <td>To create a PVC, choose from the following options. <ul><li>Remove any unused PVCs.</li><li>Ask the {{site.data.keyword.Bluemix_notm}} account owner to increase your storage quota by [opening a support case](/docs/get-support?topic=get-support-getting-customer-support).</li></ul> </td>
+      <td>Every {{site.data.keyword.cloud_notm}} account is set up with a maximum number of storage instances that can be created. By creating the PVC, you exceed the maximum number of storage instances. </td>
+      <td>To create a PVC, choose from the following options. <ul><li>Remove any unused PVCs.</li><li>Ask the {{site.data.keyword.cloud_notm}} account owner to increase your storage quota by [opening a support case](/docs/get-support?topic=get-support-getting-customer-support).</li></ul> </td>
     </tr>
     <tr>
       <td><code>Unable to find the exact ItemPriceIds(type|size|iops) for the specified storage</code> </br></br><code>Failed to place storage order with the storage provider</code></td>
@@ -230,7 +230,7 @@ During the PVC creation and binding, many different tasks are executed by the fi
     </tr>
     <tr>
   <td><code>Failed to place storage order with the storage provider</code></br></br><code>Storage with the order ID 12345 could not be created after retrying for xx seconds. </code></br></br><code>Failed to do subnet authorizations for the storage 12345.</code><code>Storage 12345 has ongoing active transactions and could not be completed after retrying for xx seconds.</code></td>
-  <td>The storage size, IOPS, and storage type might be incompatible with the storage class that you chose, or the {{site.data.keyword.Bluemix_notm}} infrastructure API endpoint is currently unavailable. </td>
+  <td>The storage size, IOPS, and storage type might be incompatible with the storage class that you chose, or the {{site.data.keyword.cloud_notm}} infrastructure API endpoint is currently unavailable. </td>
   <td>Review [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass) and [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to find supported storage sizes and IOPS for the storage class and storage type that you want to use. Then, delete the PVC and recreate the PVC. </td>
   </tr>
   <tr>
@@ -279,7 +279,7 @@ When you mount a PVC to your pod, you might experience errors when accessing or 
   <tbody>
     <tr>
       <td>Your pod is stuck in a <strong>ContainerCreating</strong> state. </br></br><code>MountVolume.SetUp failed for volume ... read-only file system</code></td>
-      <td>The {{site.data.keyword.Bluemix_notm}} infrastructure back end experienced network problems. To protect your data and to avoid data corruption, {{site.data.keyword.Bluemix_notm}} automatically disconnected the file storage server to prevent write operations on NFS file shares.  </td>
+      <td>The {{site.data.keyword.cloud_notm}} infrastructure back end experienced network problems. To protect your data and to avoid data corruption, {{site.data.keyword.cloud_notm}} automatically disconnected the file storage server to prevent write operations on NFS file shares.  </td>
       <td>See [File storage: File systems for worker nodes change to read-only](#readonly_nodes)</td>
       </tr>
       <tr>
@@ -586,7 +586,7 @@ When you mount a PVC to your pod, you might experience errors when accessing or 
   <tbody>
     <tr>
       <td>Your pod is stuck in a <strong>ContainerCreating</strong> or <strong>CrashLoopBackOff</strong> state. </br></br><code>MountVolume.SetUp failed for volume ... read-only.</code></td>
-      <td>The {{site.data.keyword.Bluemix_notm}} infrastructure back end experienced network problems. To protect your data and to avoid data corruption, {{site.data.keyword.Bluemix_notm}} automatically disconnected the block storage server to prevent write operations on block storage instances.  </td>
+      <td>The {{site.data.keyword.cloud_notm}} infrastructure back end experienced network problems. To protect your data and to avoid data corruption, {{site.data.keyword.cloud_notm}} automatically disconnected the block storage server to prevent write operations on block storage instances.  </td>
       <td>See [Block storage: Block storage changes to read-only](#readonly_block)</td>
       </tr>
       <tr>
@@ -609,13 +609,13 @@ You might see the following symptoms:
 If a network error occurs while a pod writes to a volume, IBM Cloud infrastructure (SoftLayer) protects the data on the volume from getting corrupted by changing the volume to a read-only mode. Pods that use this volume cannot continue to write to the volume and fail.
 
 {: tsResolve}
-1. Check the version of the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in that is installed in your cluster.
+1. Check the version of the {{site.data.keyword.cloud_notm}} Block Storage plug-in that is installed in your cluster.
    ```
    helm ls
    ```
    {: pre}
 
-2. Verify that you use the [latest version of the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). If not, [update your plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
+2. Verify that you use the [latest version of the {{site.data.keyword.cloud_notm}} Block Storage plug-in](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). If not, [update your plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
 3. If you used a Kubernetes deployment for your pod, restart the pod that is failing by removing the pod and letting Kubernetes re-create it. If you did not use a deployment, retrieve the YAML file that was used to create your pod by running `kubectl get pod <pod_name> -o yaml >pod.yaml`. Then, delete and manually re-create the pod.
     ```
     kubectl delete pod <pod_name>
@@ -900,7 +900,7 @@ When you create your PVC or deploy a pod that mounts the PVC, the creation or de
 The Kubernetes secret where you store your {{site.data.keyword.cos_full_notm}} service credentials, the PVC, and the pod are not all in the same Kubernetes namespace. When the secret is deployed to a different namespace than your PVC or pod, the secret cannot be accessed.
 
 {: tsResolve}
-This task requires [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for all namespaces.
+This task requires [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for all namespaces.
 
 1. List the secrets in your cluster and review the Kubernetes namespace where the Kubernetes secret for your {{site.data.keyword.cos_full_notm}} service instance is created. The secret must show `ibm/ibmc-s3fs` as the **Type**.
    ```
@@ -987,7 +987,7 @@ The s3fs API endpoint for the bucket that you want to use might have the wrong f
    ```
    {: pre}
 
-   If the command returns `ibm.io/object-store-endpoint: NA`, your cluster is deployed in a location that is supported in {{site.data.keyword.containerlong_notm}} but is not yet supported by the {{site.data.keyword.cos_full_notm}} plug-in. To add the location to the {{site.data.keyword.containerlong_notm}}, post a question in our public Slack or open an {{site.data.keyword.Bluemix_notm}} support case. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). 
+   If the command returns `ibm.io/object-store-endpoint: NA`, your cluster is deployed in a location that is supported in {{site.data.keyword.containerlong_notm}} but is not yet supported by the {{site.data.keyword.cos_full_notm}} plug-in. To add the location to the {{site.data.keyword.containerlong_notm}}, post a question in our public Slack or open an {{site.data.keyword.cloud_notm}} support case. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). 
    
 2. If you manually added the s3fs API endpoint with the `ibm.io/endpoint` annotation or the IAM API endpoint with the `ibm.io/iam-endpoint` annotaion in your PVC, make sure that you added the endpoints in the format `https://<s3fs_api_endpoint>` and `https://<iam_api_endpoint>`. The annotation overwrites the API endpoints that are automatically set by the `ibmc` plug-in in the {{site.data.keyword.cos_full_notm}} storage classes. 
    ```
@@ -1013,7 +1013,7 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 You might have used the wrong storage class to access your existing bucket, or you tried to access a bucket that you did not create. You cannot access a bucket that you did not create. 
 
 {: tsResolve}
-1. From the [{{site.data.keyword.Bluemix_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/), select your {{site.data.keyword.cos_full_notm}} service instance.
+1. From the [{{site.data.keyword.cloud_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/), select your {{site.data.keyword.cos_full_notm}} service instance.
 2. Select **Buckets**.
 3. Review the **Class** and **Location** information for your existing bucket.
 4. Choose the appropriate [storage class](/docs/containers?topic=containers-object_storage#cos_storageclass_reference).
@@ -1232,7 +1232,7 @@ The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stor
    
 3. If the API key is correct, verify that the key has the correct permission to provision persistent storage.
    1. Contact the account owner to verify the permission of the API key. 
-   2. As the account owner, select **Manage** > **Access (IAM)** from the navigation in the {{site.data.keyword.Bluemix_notm}} console.
+   2. As the account owner, select **Manage** > **Access (IAM)** from the navigation in the {{site.data.keyword.cloud_notm}} console.
    3. Select **Users** and find the user whose API key you want to use. 
    4. From the actions menu, select **Manage user details**. 
    5. Go to the **Classic infrastructure** tab. 
@@ -1258,11 +1258,11 @@ Still having issues with your cluster?
 {: shortdesc}
 
 -  In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
--   To see whether {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/status?selected=status).
+-   To see whether {{site.data.keyword.cloud_notm}} is available, [check the {{site.data.keyword.cloud_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/status?selected=status).
 -   Post a question in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
-    If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
+    If you are not using an IBM ID for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack) to this Slack.
     {: tip}
--   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
+-   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.cloud_notm}} development teams.
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
