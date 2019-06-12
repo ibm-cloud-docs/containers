@@ -39,7 +39,7 @@ You can take these general steps to ensure that your clusters are up-to-date:
 - [Update your cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) to the latest default [version of Kubernetes](/docs/containers?topic=containers-cs_versions) for {{site.data.keyword.containerlong_notm}}<p class="important">Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).</p>
 
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
-{: #debug_utility}
+{: #debug_utility} 
 
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug):
 {: shortdesc}

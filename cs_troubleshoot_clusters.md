@@ -27,7 +27,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 
-# Troubleshooting clusters and worker nodes
+# Troubleshooting clusters and worker nodes 
 {: #cs_troubleshoot_clusters}
 
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting your clusters and worker nodes.
