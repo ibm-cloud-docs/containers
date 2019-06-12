@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -536,7 +536,7 @@ You can manage automatic updates of the Ingress ALB component in the following w
     ```
     {: pre}
 * Manually update your Ingress ALBs.
-    1. If an update is available and you want to update your ALBs, first check the [changelog for the latest version of the Ingress ALB component](/docs/containers?topic=containers-cluster-components-changelog#alb_changelog) to verify any potentially disruptive changes.
+    1. If an update is available and you want to update your ALBs, first check the [changelog for the latest version of the Ingress ALB component](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) to verify any potentially disruptive changes.
     2. Force a one-time update of your ALB pods. All ALB pods in the cluster are updated to the latest build version. You cannot update an individual ALB or choose which build to update ALBs to. Automatic updates remain disabled.
         ```
         ibmcloud ks alb-update --cluster <cluster_name_or_ID>
