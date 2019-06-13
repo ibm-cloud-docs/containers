@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks
 
@@ -30,8 +30,6 @@ subcollection: containers
 
 Change the pool of available portable public or private IP addresses for network load balancer (NLB) services by adding subnets to your Kubernetes cluster.
 {:shortdesc}
-
-
 
 ## Overview of networking in {{site.data.keyword.containerlong_notm}}
 {: #basics}
@@ -116,13 +114,14 @@ When you create a standard cluster, subnets are automatically created for you. H
 
 Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. If instead you want to get more portable private IP addresses for your cluster's network load balancer (NLB) services by using your own on-premises network subnet, see [Adding portable private IPs by adding user-managed subnets to private VLANs](#subnet_user_managed).
 
+All subnets that were automatically ordered during cluster creation are immediately deleted after you delete a cluster, and you cannot reuse the subnets to create a new cluster. However, if you [manually added your own subnets to the cluster](#subnet_user_managed), the subnets are not deleted when you delete the cluster. You can reuse the subnets to create a new cluster.
+
 Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 {: note}
 
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- To reuse subnets from a cluster that you no longer need, delete the unneeded cluster. Create the new cluster immediately because the subnets are deleted within 24 hours if you do not reuse them.
-
+- To reuse user-managed subnets from a cluster that you no longer need, delete the unneeded cluster.
    ```
    ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
    ```
@@ -187,19 +186,39 @@ Before you begin:
     {: screen}
 
 5.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes configmap is created for you that includes all available portable public IP addresses that you can use. If no Ingress ALBs exist in the zone where the subnet's VLAN is located, one portable public and one portable private IP address is automatically used to create the public and private ALBs for that zone. You can use all other portable public and private IP addresses from the subnet to create NLB services for your apps.
+  * To add a subnet that exists in your IBM Cloud infrastructure (SoftLayer) account:
+      ```
+      ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
+      ```
+      {: pre}
 
-  ```
-  ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
-  ```
-  {: pre}
+      Example command:
+      ```
+      ibmcloud ks cluster-subnet-add --cluster mycluster --subnet-id 807861
+      ```
+      {: screen}
 
-  Example command:
-  ```
-  ibmcloud ks cluster-subnet-add --cluster mycluster --subnet-id 807861
-  ```
-  {: screen}
+  * To add a user-managed private subnet from an on-premises network:
+      ```
+      ibmcloud ks cluster-user-subnet-add --cluster <cluster_name> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN>
+      ```
+      {: pre}
 
-6. **Important**: To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](#subnet-routing).
+      Example command:
+
+      ```
+      ibmcloud ks cluster-user-subnet-add --cluster mycluster --subnet-cidr 10.xxx.xx.xxx/24 --private-vlan 2234947
+      ```
+      {: pre}
+
+6. Verify that the subnet is added to your cluster.
+
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name>
+    ```
+    {: pre}
+
+7. **Important**: To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](#subnet-routing).
 
 <br />
 
