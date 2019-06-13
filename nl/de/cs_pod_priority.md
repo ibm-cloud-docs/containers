@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks 
 
@@ -138,11 +138,11 @@ Gehen Sie wie folgt vor, um eine Prioritätsklasse zu verwenden:
     </tr>
     <tr>
     <td><code>value</code></td>
-    <td>Erforderlich: Geben Sie eine ganze Zahl kleiner-gleich 1 Milliarde (1000000000) ein. Je höher der Wert, umso höher ist die Priorität. Die Werte sind relativ zu den Werten anderer Prioritätsklassen im Cluster. Reservieren Sie sehr hohe Zahlen für systemkritische Pods, die nicht zurückgestellt (entfernt) werden sollen. </br></br>Beispiel: Die [clusterkritischen Standardprioritätsklassen](#default_priority_class) liegen im Wertebereich 900000000 - 2000001000. Geben Sie daher einen Wert, der kleiner als diese Zahlen ist, für neue Prioritätsklassen ein, sodass nichts eine höhere Priorität erhält als diese Pods.</td>
+    <td>Erforderlich: Geben Sie eine ganze Zahl kleiner-gleich 1 Milliarde (1000000000) ein. Je höher der Wert, umso höher ist die Priorität. Die Werte sind relativ zu den Werten anderer Prioritätsklassen im Cluster. Reservieren Sie sehr hohe Zahlen für systemkritische Pods, die nicht zurückgestellt (entfernt) werden sollen. </br></br>Beispiel: Die [clusterkritischen Standardprioritätsklasse](#default_priority_class) liegen im Wertebereich zwischen 900000000 bis 2000001000. Geben Sie daher für neue Prioritätsklassen einen Wert kleiner als diese Zahlen ein, sodass diese Pods immer die höchste Priorität behalten.</td>
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
-    <td>Optional: Setzen Sie das Feld auf `true`, um diese Prioritätsklasse zum globalen Standard zu machen, der auf jeden Pod angewendet wird, der ohne den Wert `priorityClassName` geplant wird. Nur eine Prioritätsklasse in Ihrem Cluster kann als globaler Standardwert festgelegt werden. Wenn kein globaler Standardwert festgelegt ist, haben Pods, für die kein `priorityClassName` angegeben ist, die Priorität null (`0`).</br></br>
+    <td>Optional: Setzen Sie das Feld auf `true`, um diese Prioritätsklasse zum globalen Standard zu machen, der auf jeden Pod angewendet wird, der ohne den Wert `priorityClassName` geplant wird. Nur eine Prioritätsklasse in Ihrem Cluster kann als globaler Standardwert festgelegt werden. Wenn kein globaler Standardwert festgelegt ist, haben Pods ohne angegebenen `priorityClassName` die Priorität Null (`0`).</br></br>
     Die [Standardprioritätsklassen](#default_priority_class) legen keinen Wert für `globalDefault` fest. Wenn Sie andere Prioritätsklassen in Ihrem Cluster erstellt haben, können Sie sicherstellen, dass diese keinen Wert für `globalDefault` festgelegt haben, indem sie `kubectl describe priorityclass <name>` ausführen.</td>
     </tr>
     <tr>
@@ -212,6 +212,9 @@ Gehen Sie wie folgt vor, um Ihren Pods eine Priorität zuzuweisen:
       name: ibmliberty
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: ibmliberty
       template:
         metadata:
           labels:

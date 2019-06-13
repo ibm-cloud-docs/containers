@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -41,7 +41,7 @@ Darüber hinaus wird Portworx mit zusätzlichen Funktionen bereitgestellt, die S
 {{site.data.keyword.containerlong_notm}} stellt Typen von Bare-Metal-Workerknoten bereit, die zur [Verwendung für softwaredefinierten Speicher (SDS)](/docs/containers?topic=containers-plan_clusters#sds) optimiert sind und mit einem oder mehreren unaufbereiteten, unformatierten und nicht angehängten lokalen Platten zur Verfügung gestellt werden, die Sie für Ihre Portworx-Speicherebene verwenden können. Portworx bietet die beste Leistung, wenn Sie SDS-Workerknotenmaschinen mit einer Netzgeschwindigkeit von 10 Gb/s einsetzen.
 
 **Lässt sich Portworx auch auf anderen Workerknoten als SDS-Workerknoten verwenden?** </br>
-Sie können Portworx auf anderen Workerknotentypen als SDS-Typen installieren, allerdings werden möglicherweise nicht die Leistungsvorteile erzielt, die für Ihre App erforderlich sind. Nicht-SDS-Workerknoten können virtuelle Workerknoten oder Bare-Metal-Workerknoten sein. Wenn Sie virtuelle Maschinen verwenden, verwenden Sie mindestens den Workerknotentyp `b2c.16x64` oder einen besseren. Virtuelle Maschinen der Typen `b2c.4x16` oder `u2c.2x4` stellen nicht die für eine ordnungsgemäße Funktion von Portworx erforderlichen Ressourcen bereit. Beachten Sie, dass virtuelle Maschinen mit einer Geschwindigkeit von 1000 Mb/s bereitgestellt werden, die für eine ideale Leistung von Portworx nicht ausreicht. Bare-Metal-Maschinen verfügen über ausreichend Rechenressourcen und Netzgeschwindigkeit für Portworx, jedoch müssen Sie [unaufbereiteten, unformatierten und nicht angehängten Blockspeicher hinzufügen](#create_block_storage), bevor Sie solche Maschinen verwenden können.
+Sie können Portworx auf anderen Workerknotentypen als SDS-Typen installieren, allerdings werden möglicherweise nicht die Leistungsvorteile erzielt, die für Ihre App erforderlich sind. Nicht-SDS-Workerknoten können virtuelle Workerknoten oder Bare-Metal-Workerknoten sein. Wenn Sie virtuelle Maschinen verwenden, verwenden Sie mindestens den Workerknotentyp `b2c.16x64` oder einen besseren. Virtuelle Maschinen der Typen `b3c.4x16` oder `u3c.2x4` stellen nicht die für eine ordnungsgemäße Funktion von Portworx erforderlichen Ressourcen bereit. Beachten Sie, dass virtuelle Maschinen mit einer Geschwindigkeit von 1000 Mb/s bereitgestellt werden, die für eine ideale Leistung von Portworx nicht ausreicht. Bare-Metal-Maschinen verfügen über ausreichend Rechenressourcen und Netzgeschwindigkeit für Portworx, jedoch müssen Sie [unaufbereiteten, unformatierten und nicht angehängten Blockspeicher hinzufügen](#create_block_storage), bevor Sie solche Maschinen verwenden können.
 
 **Wie lässt sich sicherstellen, dass die Daten hoch verfügbar gespeichert werden?** </br>
 Sie benötigen mindestens drei Workerknoten in Ihrem Portworx-Cluster, sodass Portworx Ihre Daten über Knoten hinweg replizieren kann. Durch die Replikation Ihrer Daten auf andere Workerknoten kann Portworx im Fall eines Fehlers sicherstellen, dass Ihre statusabhängige App ohne Datenverlust zur erneuten Ausführung auf einem anderen Workerknoten geplant werden kann. Noch höhere Verfügbarkeit kann durch die Verwendung eines [Mehrzonenclusters](/docs/containers?topic=containers-plan_clusters#multizone) und durch Replikation der Datenträger auf SDS-Workerknoten in drei oder mehr Zonen realisiert werden.
@@ -226,12 +226,12 @@ Vorbereitende Schritte:
 
 Gehen Sie wie folgt vor, um Portworx zu installieren:
 
-1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-integrations#helm) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine und installieren Sie den Helm-Server (tiller) mit einem Servicekonto in Ihrem Cluster.
+1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine und installieren Sie den Helm-Server (tiller) mit einem Servicekonto in Ihrem Cluster.
 
 2.  Überprüfen Sie, ob 'tiller' mit einem Servicekonto installiert ist.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -385,7 +385,7 @@ Gehen Sie wie folgt vor, um Portworx zu installieren:
    stork            3        3        3           0          1s
    stork-scheduler  3        3        3           0          1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                    PROVISIONER                    AGE
    px-sc-repl3-iodb-512blk-snap60-15snaps  kubernetes.io/portworx-volume  1s
    px-sc-repl3-iodb-snap60-15snaps         kubernetes.io/portworx-volume  1s
@@ -517,7 +517,7 @@ Sie können ein Upgrade von Portworx auf die neueste Version durchführen.
 
    Beispielausgabe:
    ```
-   <helm-diagrammname>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default
+   <helm-diagrammname>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default     
    ```
    {: screen}
 
@@ -541,7 +541,7 @@ Wenn Sie Portworx in Ihrem Cluster nicht verwenden wollen, können Sie das Helm-
 
    Beispielausgabe:
    ```
-   <helm-diagrammname>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default
+   <helm-diagrammname>            1       	Mon Sep 17 16:33:01 2018	DEPLOYED	portworx-1.0.0     default     
    ```
    {: screen}
 
@@ -568,12 +568,12 @@ Zum Schutz Ihrer Daten auf einem Portworx-Datenträger haben Sie die Möglichkei
 {{site.data.keyword.keymanagementservicelong_notm}} unterstützt Sie bei der Bereitstellung verschlüsselter Schlüssel, die durch cloudbasierte, mit FIPS 140-2 Level 2 zertifizierte Hardwaresicherheitsmodule (HSM) gesichert werden. Mit diesen Schlüsseln können Sie Ihre Daten vor nicht berechtigten Benutzern sicher schützen. Sie können zwischen nur einem Verschlüsselungsschlüssel zur Verschlüsselung aller Datenträger in einem Cluster oder je einem Verschlüsselungsschlüssel für jeden Datenträger wählen. Portworx verwendet diesen Schlüssel, um ruhende Daten und Daten bei der Übertragung zu verschlüsseln, wenn sie an einen anderen Workerknoten gesendet werden. Weitere Informationen finden Sie im Abschnitt zur [Datenträgerverschlüsselung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption). Höhere Sicherheit erreichen Sie durch die Verschlüsselung der einzelnen Datenträger.
 
 Prüfen Sie die folgenden Informationen:
-- Übersicht über den [Ablauf der Portworx-Datenträgerverschlüsselung](#encryption) mit {{site.data.keyword.keymanagementservicelong_notm}} zur Verschlüsselung einzelner Datenträger
+- Übersicht über den [Ablauf der Portworx-Datenträgerverschlüsselung](#px_encryption) mit {{site.data.keyword.keymanagementservicelong_notm}} zur Verschlüsselung einzelner Datenträger
 - Übersicht über den [Ablauf der Portworx-Datenträgerentschlüsselung](#decryption) mit {{site.data.keyword.keymanagementservicelong_notm}} bei Verschlüsslung einzelner Datenträger
 - [Verschlüsslung einzelner Datenträger](#setup_encryption) für Portworx-Datenträger einrichten
 
 ### Ablauf der Portworx-Datenträgerverschlüsselung einzelner Datenträger
-{: #encryption}
+{: #px_encryption}
 
 Die folgende Abbildung veranschaulicht den Ablauf der Verschlüsselung in Portworx mit {{site.data.keyword.keymanagementservicelong_notm}}, wenn Sie eine Verschlüsselung der einzelnen Datenträger eingerichtet haben.
 {: shortdesc}
@@ -724,7 +724,7 @@ Führen Sie die folgenden Schritte aus, um die Verschlüsselung für Ihre Portwo
       <tbody>
       <tr>
       <td><code>metadata.name</code></td>
-      <td>Geben Sie <code>px-ibm</code> als Namen für Ihren geheimen Kubernetes-Schlüssel ein. Wenn Sie einen anderen Namen verwenden, erkennt Portworx den geheimen Schlüssel während der Installation nicht.</td>
+      <td>Geben Sie <code>px-ibm</code> als Namen für Ihren geheimen Kubernetes-Schlüssel ein. Wenn Sie einen anderen Namen verwenden, erkennt Portworx den geheimen Schlüssel während der Installation nicht. </td>
       </tr>
       <tr>
       <td><code>data.IBM_SERVICE_API_KEY</code></td>
@@ -732,7 +732,7 @@ Führen Sie die folgenden Schritte aus, um die Verschlüsselung für Ihre Portwo
       </tr>
       <tr>
       <td><code>data.IBM_INSTANCE_ID</code></td>
-      <td>Geben Sie die base64-codierte {{site.data.keyword.keymanagementservicelong_notm}}-GUID ein, die Sie zuvor abgerufen haben.</td>
+      <td>Geben Sie die base64-codierte {{site.data.keyword.keymanagementservicelong_notm}}-GUID ein, die Sie zuvor abgerufen haben. </td>
       </tr>
       <tr>
       <td><code>data.IBM_CUSTOMER_ROOT_KEY</code></td>
@@ -869,15 +869,15 @@ Zur Anforderung von Speicher aus Ihrem Portworx-Cluster und zur Verwendung diese
 
    ```
    kind: StorageClass
-   apiVersion: storage.k8s.io/v1beta1
+   apiVersion: storage.k8s.io/v1
    metadata:
-       name: <speicherklassenname>
+       name: <storageclass_name>
    provisioner: kubernetes.io/portworx-volume
    parameters:
-      repl: "<replikationsfaktor>"
-      secure: "<true_oder_false>"
-      priority_io: "<e/a-priorität>"
-      shared: "<true_oder_false>"
+      repl: "<replication_factor>"
+      secure: "<true_or_false>"
+      priority_io: "<io_priority>"
+      shared: "<true_or_false>"
    ```
    {: codeblock}
 
@@ -897,11 +897,11 @@ Zur Anforderung von Speicher aus Ihrem Portworx-Cluster und zur Verwendung diese
    </tr>
    <tr>
    <td><code>parameters.secure</code></td>
-   <td>Geben Sie an, ob die Daten auf Ihrem Datenträger mit {{site.data.keyword.keymanagementservicelong_notm}} verschlüsselt werden sollen. Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>true</strong>: Geben Sie <code>true</code> ein, um die Verschlüsselung für Ihre Portworx-Datenträger zu aktivieren. Zur Verschlüsselung von Datenträgern müssen Sie eine {{site.data.keyword.keymanagementservicelong_notm}}-Serviceinstanz und einen geheimen Schlüssel für Kubernetes haben, in dem Ihr Kundenrootschlüssel (CRK) gespeichert ist. Weitere Informationen zur Einrichtung der Verschlüsselung für Portworx-Datenträger finden Sie unter [Portworx-Datenträger verschlüsseln](#encrypt_volumes). </li><li><strong>false</strong>: Wenn Sie <code>false</code> eingeben, werden Ihre Portworx-Datenträger nicht verschlüsselt. </li></ul> Wenn Sie diese Option nicht angeben, werden Ihre Portworx-Datenträger standardmäßig nicht verschlüsselt. <strong>Hinweis:</strong> Sie haben die Möglichkeit, die Datenträgerverschlüsselung in Ihrem PVC zu aktivieren, auch wenn Sie die Verschlüsselung in Ihrer Speicherklasse inaktiviert haben. Die Einstellung, die Sie im PVC angeben, hat Vorrang vor den Einstellungen in der Speicherklasse. </td>
+   <td>Geben Sie an, ob die Daten auf Ihrem Datenträger mit {{site.data.keyword.keymanagementservicelong_notm}} verschlüsselt werden sollen. Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>true</strong>: Geben Sie <code>true</code> ein, um die Verschlüsselung für Ihre Portworx-Datenträger zu aktivieren. Zur Verschlüsselung von Datenträgern müssen Sie eine {{site.data.keyword.keymanagementservicelong_notm}}-Serviceinstanz und einen geheimen Schlüssel für Kubernetes haben, in dem Ihr Kundenrootschlüssel (CRK) gespeichert ist. Weitere Informationen zur Einrichtung der Verschlüsselung für Portworx-Datenträger finden Sie unter [Portworx-Datenträger verschlüsseln](#encrypt_volumes). </li><li><strong>false</strong>: Wenn Sie <code>false</code> eingeben, werden Ihre Portworx-Datenträger nicht verschlüsselt. </li></ul> Wenn Sie diese Option nicht angeben, werden Ihre Portworx-Datenträger standardmäßig nicht verschlüsselt. <strong>Hinweis:</strong> Sie haben die Möglichkeit, die Datenträgerverschlüsselung in Ihrem PVC zu aktivieren, auch wenn Sie die Verschlüsselung in Ihrer Speicherklasse inaktiviert haben. Die Einstellung, die Sie im PVC angeben, hat Vorrang vor den Einstellungen in der Speicherklasse.  </td>
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>Geben Sie die Portworx-E/A-Priorität ein, die Sie für Ihre Daten anfordern wollen. Verfügbare Optionen: `high`, `medium` und `low`. Während der Einrichtung Ihres Portworx-Clusters wird jede Platte untersucht, um das Leistungsprofil der Einheit zu bestimmen. Die Profilklassifikation hängt von der Netzbandbreite Ihres Workerknotens sowie vom Typ der verwendeten Speichereinheit ab. Platten von SDS-Workerknoten werden mit `high` (hoch) klassifiziert. Wenn Sie Platten manuell einem virtuellen Workerknoten zuordnen, werden diese Platten aufgrund der niedrigeren Netzgeschwindigkeit bei virtuellen Workerknoten mit `low` (niedrig) klassifiziert.</br><br> Wenn Sie einen PVC mit einer Speicherklasse erstellen, hat die Anzahl Replikate, die Sie in <code>parameters/repl</code> angeben, Vorrang vor der E/A-Priorität. Wenn Sie zum Beispiel 3 Replikate angeben, die Sie auf Hochgeschwindigkeitsplatten speichern möchten, jedoch nur einen Workerknoten mit einer Hochgeschwindigkeitsplatte in Ihrem Cluster haben, wird der PVC trotzdem erfolgreich erstellt. Ihre Daten werden sowohl auf Hochgeschwindigkeitsplatten als auch auf Niedergeschwindigkeitsplatten repliziert. </td>
+   <td>Geben Sie die Portworx-E/A-Priorität ein, die Sie für Ihre Daten anfordern wollen. Verfügbare Optionen: `high`, `medium` und `low`. Während der Einrichtung Ihres Portworx-Clusters wird jede Platte untersucht, um das Leistungsprofil der Einheit zu bestimmen. Die Profilklassifikation hängt von der Netzbandbreite Ihres Workerknotens sowie vom Typ der verwendeten Speichereinheit ab. Platten von SDS-Workerknoten werden mit `high` (hoch) klassifiziert. Wenn Sie Platten manuell einem virtuellen Workerknoten zuordnen, werden diese Platten aufgrund der niedrigeren Netzgeschwindigkeit von virtuellen Workerknoten mit `low` (niedrig) klassifiziert. </br><br> Wenn Sie einen PVC mit einer Speicherklasse erstellen, hat die Anzahl Replikate, die Sie in <code>parameters/repl</code> angeben, Vorrang vor der E/A-Priorität. Wenn Sie zum Beispiel 3 Replikate angeben, die Sie auf Hochgeschwindigkeitsplatten speichern möchten, jedoch nur einen Workerknoten mit einer Hochgeschwindigkeitsplatte in Ihrem Cluster haben, wird der PVC trotzdem erfolgreich erstellt. Ihre Daten werden sowohl auf Hochgeschwindigkeitsplatten als auch auf Niedergeschwindigkeitsplatten repliziert. </td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>
@@ -960,7 +960,7 @@ Wenn Sie den PersistentVolumeClaim (PVC - Anforderung eines persistenten Datentr
     </tr>
     <tr>
     <td><code>resources.requests.storage</code></td>
-    <td>Geben Sie die Speicherkapazität in Gigabyte an, die Sie aus Ihrem Portworx-Cluster zuordnen wollen. Beispiel: Zur Zuordnung von 2 Gigabyte aus Ihrem Portworx-Cluster geben Sie `2Gi` ein. Die Speicherkapazität, die Sie angeben, wird durch die Speicherkapazität begrenzt, die in Ihrem Portworx-Cluster verfügbar ist. Wenn Sie einen Replikationsfaktor in Ihrer [Speicherklasse](#create_storageclass) größer 1 angegeben haben, wird die Speicherkapazität, die Sie in Ihrem PVC angeben, auf mehreren Workerknoten reserviert. </td>
+    <td>Geben Sie die Speicherkapazität in Gigabyte an, die Sie aus Ihrem Portworx-Cluster zuordnen wollen. Beispiel: Zur Zuordnung von 2 Gigabyte aus Ihrem Portworx-Cluster geben Sie `2Gi` ein. Die Speicherkapazität, die Sie angeben, wird durch die Speicherkapazität begrenzt, die in Ihrem Portworx-Cluster verfügbar ist. Wenn Sie einen Replikationsfaktor in Ihrer [Speicherklasse](#create_storageclass) größer 1 angegeben haben, wird die Speicherkapazität, die Sie in Ihrem PVC angeben, auf mehreren Workerknoten reserviert.   </td>
     </tr>
     <tr>
     <td><code>spec.storageClassName</code></td>

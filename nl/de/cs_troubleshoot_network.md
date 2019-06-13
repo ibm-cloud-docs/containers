@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -39,35 +39,35 @@ Haben Sie Schwierigkeiten, über Ingress eine Verbindung zu Ihrer App herzustell
 Bei der Fehlerbehebung können Sie [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) verwenden, um Tests durchzuführen und relevante Informationen zum Netzbetrieb sowie StrongSwan-Informationen aus Ihrem Cluster zu erfassen.
 {: tip}
 
-## Verbindung mit einer App über einen Lastausgleichsservice kann nicht hergestellt werden
+## Verbindung mit einer App über einen Netzausgleichsfunktions- (NLB-) Service kann nicht hergestellt werden
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie einen Lastausgleichsservice in Ihrem Cluster erstellt haben. Als Sie versuchten, eine Verbindung mit Ihrer App über die öffentliche IP-Adresse der Lastausgleichsfunktion herzustellen, ist die Verbindung fehlgeschlagen oder sie hat das zulässige Zeitlimit überschritten.
+Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie einen NLB-Service in Ihrem Cluster erstellt haben. Als Sie versuchten, eine Verbindung mit Ihrer App über die öffentliche IP-Adresse der NLB herzustellen, ist die Verbindung fehlgeschlagen oder sie hat das zulässige Zeitlimit überschritten.
 
 {: tsCauses}
-Ihr Lastausgleichsservice funktioniert aus einem der folgenden Gründe möglicherweise nicht ordnungsgemäß:
+Ihr NLB-Service funktioniert möglicherweise aus einem der folgenden Gründe nicht ordnungsgemäß:
 
 -   Der Cluster ist ein kostenloser Cluster oder Standardcluster mit nur einem Workerknoten.
 -   Der Cluster ist noch nicht vollständig bereitgestellt.
--   Das Konfigurationsscript für Ihren Lastausgleichsservice enthält Fehler.
+-   Das Konfigurationsscript für Ihren NLB-Service enthält Fehler.
 
 {: tsResolve}
-Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
+Gehen Sie wie folgt vor, um Fehler in Ihrem NLB-Service zu beheben:
 
-1.  Prüfen Sie, ob Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihren Lastausgleichsservice sicherzustellen.
+1.  Prüfen Sie, ob Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihren NLB-Service sicherzustellen.
 
   ```
   ibmcloud ks workers --cluster <clustername_oder_-id>
   ```
   {: pre}
 
-    Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für **Machine Type** (Maschinentyp) etwas anderes als **free** (frei) anzeigt wird.
+    Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (bereit) lautet und dass für **Machine Type** (Maschinentyp) etwas anderes als **free** (frei) anzeigt wird.
 
-2. Für Lastausgleichsfunktionen der Version 2.0: Stellen Sie sicher, dass Sie die [Voraussetzungen für die Lastausgleichsfunktion der Version 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision) erfüllen.
+2. Für NLBs der Version 2.0: Stellen Sie sicher, dass Sie die [Voraussetzungen für die NLB der Version 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision) erfüllen.
 
-3. Prüfen Sie die Richtigkeit der Konfigurationsdatei für Ihren Lastausgleichsservice.
-    * Lastausgleichsfunktionen der Version 2.0:
+3. Prüfen Sie die Richtigkeit der Konfigurationsdatei für Ihren NLB-Service.
+    * NLBs der Version 2.0:
         ```
         apiVersion: v1
         kind: Service
@@ -92,7 +92,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
         4. Überprüfen Sie, ob Sie den **Port** verwendet haben, den Ihre App überwacht.
         5. Überprüfen Sie, dass `externalTrafficPolicy` auf `Local` gesetzt ist.
 
-    * Lastausgleichsfunktionen der Version 1.0:
+    * NLBs der Version 1.0:
         ```
         apiVersion: v1
     kind: Service
@@ -112,7 +112,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
         2. Stellen Sie im Abschnitt `spec.selector` des LoadBalancer-Service sicher, dass `<selektorschlüssel>` und `<selektorwert>` mit dem Schlüssel/Wert-Paar übereinstimmen, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer YAML-Bereitstellungsdatei verwendet haben. Wenn die Bezeichnungen nicht übereinstimmen, zeigt der Abschnitt zu den Endpunkten (**Endpoints**) in Ihrem LoadBalancer-Service **<none>** an und Ihre App ist über das Internet nicht zugänglich.
         3. Überprüfen Sie, ob Sie den **Port** verwendet haben, den Ihre App überwacht.
 
-3.  Prüfen Sie Ihren Lastausgleichsservice und suchen Sie im Abschnitt zu den Ereignissen (**Events**) nach potenziellen Fehlern.
+3.  Prüfen Sie Ihren NLB-Service und suchen Sie im Abschnitt zu den Ereignissen (**Events**) nach möglichen Fehlern.
 
     ```
     kubectl describe service <mein_service>
@@ -121,22 +121,22 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
 
     Suchen Sie nach den folgenden Fehlernachrichten:
 
-    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Um den Lastausgleichsservice verwenden zu können, müssen Sie über ein Standardcluster mit mindestens zwei Workerknoten verfügen.</li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Diese Fehlernachricht weist darauf hin, dass keine portierbaren öffentlichen IP-Adressen mehr verfügbar sind, die Ihrem Lastausgleichsservice zugeordnet werden können. Informationen zum Anfordern portierbarer IP-Adressen für Ihren Cluster finden Sie unter <a href="/docs/containers?topic=containers-subnets#subnets">Clustern Teilnetze hinzufügen</a>. Nachdem portierbare öffentliche IP-Adressen im Cluster verfügbar gemacht wurden, wird der Lastausgleichsservice automatisch erstellt.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Sie haben eine portierbare öffentliche IP-Adresse für Ihren Lastausgleichsservice mithilfe des Abschnitts **`loadBalancerIP`** definiert, aber diese portierbare öffentliche IP-Adresse ist in Ihrem portierbaren öffentlichen Teilnetz nicht verfügbar. Entfernen Sie im Abschnitt **`loadBalancerIP`** des Konfigurationsscripts die vorhandene IP-Adresse und fügen Sie eine der vorhandenen portierbaren öffentlichen IP-Adressen hinzu. Sie können auch den Abschnitt **`loadBalancerIP`** aus Ihrem Script entfernen, damit eine verfügbare portierbare öffentliche IP-Adresse automatisch zugeordnet werden kann.</li>
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Sie verfügen nicht über ausreichend Workerknoten, um einen Lastausgleichsservice bereitzustellen. Ein Grund kann sein, dass Sie einen Standardcluster mit mehr als einem Workerknoten bereitgestellt haben, aber die Bereitstellung der Workerknoten ist fehlgeschlagen.</li>
-    <ol><li>Listen Sie verfügbare Workerknoten auf.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Um den NLB-Service verwenden zu können, müssen Sie über einen Standardcluster mit mindestens zwei Workerknoten verfügen.</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the NLB service request. Add a portable subnet to the cluster and try again</code></pre></br>Diese Fehlernachricht weist darauf hin, dass keine portierbaren öffentlichen IP-Adressen mehr verfügbar sind, die Ihrem NLB-Service zugeordnet werden können. Informationen zum Anfordern portierbarer IP-Adressen für Ihren Cluster finden Sie unter <a href="/docs/containers?topic=containers-subnets#subnets">Clustern Teilnetze hinzufügen</a>. Nachdem portierbare öffentliche IP-Adressen im Cluster verfügbar gemacht wurden, wird der NLB-Service automatisch erstellt.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Sie haben eine portierbare öffentliche IP-Adresse für Ihre Lastausgleichsfunktions-YAML mithilfe des Abschnitts **`loadBalancerIP`** definiert, aber diese portierbare öffentliche IP-Adresse ist in Ihrem portierbaren öffentlichen Teilnetz nicht verfügbar. Entfernen Sie im Abschnitt **`loadBalancerIP`** des Konfigurationsscripts die vorhandene IP-Adresse und fügen Sie eine der vorhandenen portierbaren öffentlichen IP-Adressen hinzu. Sie können auch den Abschnitt **`loadBalancerIP`** aus Ihrem Script entfernen, damit eine verfügbare portierbare öffentliche IP-Adresse automatisch zugeordnet werden kann.</li>
+    <li><pre class="screen"><code>No available nodes for NLB services</code></pre>Sie verfügen nicht über ausreichend Workerknoten, um einen NLB-Service bereitzustellen. Ein Grund kann sein, dass Sie einen Standardcluster mit mehr als einem Workerknoten bereitgestellt haben, aber die Bereitstellung der Workerknoten ist fehlgeschlagen.</li>
+    <ol><li>Verfügbare Workerknoten auflisten.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>Werden mindestens zwei verfügbare Workerknoten gefunden, listen Sie die Details der Workerknoten auf.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;clustername_oder_-id&gt; --worker &lt;worker-id&gt;</code></pre></li>
     <li>Stellen Sie sicher, dass die öffentlichen und privaten VLAN-IDs für die Workerknoten, die von den Befehlen <code>kubectl get nodes</code> und <code>ibmcloud ks worker-get</code> zurückgegeben wurden, übereinstimmen.</li></ol></li></ul>
 
-4.  Wenn Sie eine angepasste Domäne verwenden, um Ihren Lastausgleichsservice zu verbinden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse Ihres Lastausgleichsservice zugeordnet ist.
-    1.  Suchen Sie nach der öffentlichen IP-Adresse Ihres Lastausgleichsservice.
+4.  Wenn Sie eine angepasste Domäne verwenden, um Ihren NLB-Service zu verbinden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse Ihres NLB-Service zugeordnet ist.
+    1.  Suchen Sie nach der öffentlichen IP-Adresse Ihres NLB-Service.
         ```
         kubectl describe service <servicename> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
-    2.  Prüfen Sie, ob Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse Ihres Lastausgleichsservice im Zeigerdatensatz (PTR) zugeordnet ist.
+    2.  Prüfen Sie, ob Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse Ihres NLB-Service im Zeigerdatensatz (PTR) zugeordnet ist.
 
 <br />
 
@@ -154,7 +154,7 @@ ibmcloud ks workers --cluster <clustername_oder_-id>
 ```
 {: pre}
 
-Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für **Machine Type** (Maschinentyp) etwas anderes als **free** (frei) anzeigt wird.
+Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (bereit) lautet und dass für **Machine Type** (Maschinentyp) etwas anderes als **free** (frei) anzeigt wird.
 
 * Wenn Ihr Standardcluster vollständig bereitgestellt ist und mindestens 2 Workerknoten pro Zone aufweist, aber keine **Ingress-Unterdomäne** verfügbar ist, finden Sie weitere Informationen hierzu im Abschnitt [Es kann keine Unterdomäne für die Ingress-ALB abgerufen werden](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
 * Bei anderen Problemen können Sie die Ingress-Konfigurationsfehler beheben, indem Sie die Schritte im Abschnitt [Debugging für Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress) befolgen.
@@ -162,7 +162,7 @@ Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten 
 <br />
 
 
-## Probleme mit geheimen Schlüsseln der Ingress-Lastausgleichsfunktion für Anwendungen
+## Fehler beim geheimen Schlüssel für die Ingress-Lastausgleichsfunktion für Anwendungen (ALB)
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
@@ -313,7 +313,7 @@ Wenn Sie die Beibehaltung der Quellen-IP für den Lastausgleichsservice oder fü
 {: tsResolve}
 Beheben Sie das Problem unter Verwendung einer der beiden Optionen:
 
-* **Edge-Knoten-Taints:** Wenn Sie sicherstellen möchten, dass die Pods für die Lastausgleichsfunktion und die App auf mit Taints versehenen Edge-Knoten bereitgestellt werden, [fügen Sie Affinitätsregeln und Tolerierungen für den Edge-Knoten zur App-Bereitstellung hinzu](/docs/containers?topic=containers-loadbalancer#edge_nodes). Pods für die Lastausgleichsfunktion und Ingress-ALBs weisen diese Affinitätsregeln und Tolerierungen standardmäßig auf.
+* **Edge-Knoten-Taints:** Wenn Sie sicherstellen möchten, dass die Pods für die Lastausgleichsfunktion und die App auf mit Taints versehenen Edge-Knoten bereitgestellt werden, [fügen Sie Affinitätsregeln und Tolerierungen für den Edge-Knoten zur App-Bereitstellung hinzu](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). Pods für die Lastausgleichsfunktion und Ingress-ALBs weisen diese Affinitätsregeln und Tolerierungen standardmäßig auf.
 
 * **Angepasste Taints:** Entfernen Sie angepasste Taints, für die die `keepalived`-Pods nicht über Tolerierungen verfügen. Stattdessen können Sie [Workerknoten als Edge-Knoten bezeichnen und anschließend Taints auf diese Edge-Knoten anwenden](/docs/containers?topic=containers-edge).
 
@@ -570,12 +570,12 @@ Wenn Sie versuchen, Calico-Netzrichtlinien im Cluster durch Ausführen des Befeh
 Bei der Verwendung von Calico-Richtlinien müssen vier Faktoren aufeinander abgestimmt werden: Die Version des Kubernetes-Cluster, die Version der Calico-CLI, die Syntax der Calico-Konfigurationsdatei und Befehle zum Anzeigen von Richtlinien (view policy). Einer oder mehrere dieser Faktoren entsprechen nicht den Vorgaben.
 
 {: tsResolve}
-Wenn der Cluster [Kubernetes Version 1.10 oder höher](/docs/containers?topic=containers-cs_versions) verwendet, müssen Sie die Calico-CLI der Version 3.1, die Version 3-Syntax für die Konfigurationsdatei `calicoctl.cfg` und die Befehle `calicoctl get GlobalNetworkPolicy` und `calicoctl get NetworkPolicy` verwenden.
+Sie müssen die Calico-CLI Version 3.3 oder höher, die Version 3-Syntax für die Konfigurationsdatei `calicoctl.cfg` sowie die Befehle `calicoctl get GlobalNetworkPolicy` und `calicoctl get NetworkPolicy` verwenden.
 
 Gehen Sie wie folgt vor, um sicherzustellen, dass alle Calico-Faktoren aufeinander abgestimmt sind:
 
-1. [Installieren und konfigurieren Sie die Calico-CLI der Version 3.3.1](/docs/containers?topic=containers-network_policies#cli_install). Die Konfiguration umfasst die manuelle Aktualisierung der Datei `calicoctl.cfg` für die Verwendung der Calico Version 3-Syntax.
-2. Stellen Sie sicher, dass alle Richtlinien, die Sie erstellen und auf den Cluster anwenden möchten, die [Calico Version 3-Syntax ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) verwenden. Wenn eine bestehende `.yaml`- oder `.json`-Richtliniendatei mit der Calico Version 2-Syntax vorliegt, können Sie sie mithilfe des Befehls [`calicoctl convert` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert) in die Calico Version 3-Syntax konvertieren.
+1. [Installieren und konfigurieren Sie die Calico-CLI der Version 3.3 oder höher](/docs/containers?topic=containers-network_policies#cli_install).
+2. Stellen Sie sicher, dass alle Richtlinien, die Sie erstellen und auf den Cluster anwenden möchten, die [Calico Version 3-Syntax ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) verwenden. Wenn eine bestehende `.yaml`- oder `.json`-Richtliniendatei mit der Calicao Version 2-Syntax vorliegt, können Sie sie mithilfe des Befehls [`calicoctl convert` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert) in die Calico Version 3-Syntax konvertieren.
 3. Stellen Sie zum [Anzeigen von Richtlinien](/docs/containers?topic=containers-network_policies#view_policies) sicher, dass Sie den Befehl `calicoctl get GlobalNetworkPolicy` für globale Richtlinien und den Befehl `calicoctl get NetworkPolicy --namespace <policy_namespace>` für Richtlinien verwenden, die sich auf bestimmte Namensbereiche beziehen.
 
 <br />

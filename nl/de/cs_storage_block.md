@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -51,7 +51,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
       ```
       {: screen}
 
@@ -61,15 +61,15 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 
    3. Wenden Sie die neueste Patchversion durch erneutes Laden des Workerknotens an. Gehen Sie gemäß den Anweisungen für den Befehl [ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) vor, um sorgfältig alle aktiven Pods auf dem Workerknoten erneut zu planen, bevor der Workerknoten erneut geladen wird. Beachten Sie, dass Ihre Workerknotenmaschine während eines Neuladens mit dem neuen Image aktualisiert wird und dass dabei Daten gelöscht werden, die nicht [außerhalb des Workerknotens gespeichert sind](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
-2.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-integrations#helm) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine und installieren Sie den Helm-Server (Tiller) mit einem Servicekonto in Ihrem Cluster.
+2.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine und installieren Sie den Helm-Server (Tiller) mit einem Servicekonto in Ihrem Cluster.
 
-    Die Installation des Helm-Servers Tiller erfordert eine öffentliche Netzverbindung zur öffentlichen Google-Container-Registry. Wenn Ihr Cluster auf das öffentliche Netz nicht zugreifen kann, wie dies zum Beispiel bei einem privaten Cluster hinter einer Firewall oder bei einem Cluster mit nur einem aktivierten privaten Serviceendpunkt der Fall ist, haben Sie die Wahl, [das Tiller-Image auf Ihre lokale Maschine zu extrahieren und durch eine Push-Operation in Ihren Namensbereich in {{site.data.keyword.registryshort_notm}} zu übertragen](/docs/containers?topic=containers-integrations#private_local_tiller) oder [das Helm-Diagramm ohne Verwendung von Tiller zu installieren](/docs/containers?topic=containers-integrations#private_install_without_tiller).
+    Die Installation des Helm-Servers Tiller erfordert eine öffentliche Netzverbindung zur öffentlichen Google-Container-Registry. Wenn Ihr Cluster auf das öffentliche Netz nicht zugreifen kann, wie dies zum Beispiel bei einem privaten Cluster hinter einer Firewall oder bei einem Cluster mit nur einem aktivierten privaten Serviceendpunkt der Fall ist, haben Sie die Wahl, [">das Tiller-Image auf Ihre lokale Maschine zu extrahieren und durch eine Push-Operation in Ihren Namensbereich in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller) zu übertragen oder [das Helm-Diagramm ohne Verwendung von Tiller zu installieren](/docs/containers?topic=containers-helm#private_install_without_tiller).
     {: note}
 
 3.  Überprüfen Sie, ob Tiller mit einem Servicekonto installiert ist.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
@@ -83,7 +83,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 
 4. Fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Diagramm-Repository zu dem Cluster hinzu, in dem Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in verwenden möchten.
    ```
-   helm repo add ibm  https://registry.bluemix.net/helm/ibm
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
@@ -95,7 +95,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 
 6. Installieren Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in. Wenn Sie das Plug-in installieren, werden vordefinierte Blockspeicherklassen zu Ihrem Cluster hinzugefügt.
    ```
-   helm install ibm/ibmcloud-block-storage-plugin
+   helm install iks-charts/ibmcloud-block-storage-plugin 
    ```
    {: pre}
 
@@ -196,7 +196,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 
 2. Optional: Laden Sie das aktuellste Helm-Diagramm auf Ihre lokale Maschine herunter. Extrahieren Sie anschließend das Paket und überprüfen Sie die Datei `release.md` auf die neuesten Releaseinformationen.
    ```
-   helm fetch ibm/ibmcloud-block-storage-plugin
+   helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -214,7 +214,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 
 4. Führen Sie ein Upgrade des {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-ins auf die aktuelle Version durch.
    ```
-   helm upgrade --force --recreate-pods <name_des_helm-diagramms>  ibm/ibmcloud-block-storage-plugin
+   helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -549,7 +549,7 @@ Gegen Sie wie folgt vor, um Blockspeicher hinzuzufügen:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}Erstellen Sie zum Anhängen des persistenten Datenträgers an Ihre Bereitstellung eine `.yaml`-Konfigurationsdatei und geben Sie den Persistent Volume Claim (PVC) an, der den persistenten Datenträger bindet.
+4.  {: #block_app_volume_mount}Erstellen Sie zum Anhängen des persistenten Datenträgers an Ihre Bereitstellung eine `.yaml`-Konfigurationsdatei und geben Sie den Persistent Volume Claim (PVC) an, der den persistenten Datenträger bindet.
 
     ```
     apiVersion: apps/v1
@@ -608,7 +608,7 @@ Gegen Sie wie folgt vor, um Blockspeicher hinzuzufügen:
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird. Daten, die in den Mountpfad geschrieben werden, werden unter dem Stammverzeichnis in der physischen Blockspeicherinstanz gespeichert. Wenn Sie einen Datenträger zwischen verschiedenen Apps gemeinsam nutzen möchten, können Sie [Unterpfade für Datenträger  ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) für jede Ihrer Apps angeben.</td>
+    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird. Daten, die in den Mountpfad geschrieben werden, werden unter dem Stammverzeichnis in der physischen Blockspeicherinstanz gespeichert. Wenn Sie einen Datenträger zwischen verschiedenen Apps gemeinsam nutzen möchten, können Sie [Unterpfade für Datenträger  ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) für jede Ihrer Apps angeben. </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>
@@ -666,6 +666,7 @@ Wenn Sie bereits über eine physische Speichereinheit verfügen, die Sie in Ihre
 Bevor Sie mit dem Anhängen Ihres vorhandenen Speichers an eine App beginnen können, müssen Sie alle erforderlichen Informationen für Ihren persistenten Datenträger abrufen.  
 
 ### Schritt 1: Informationen zu Ihrem vorhandenen Blockspeicher abrufen
+{: #existing-block-1}
 
 1.  Rufen Sie einen API-Schlüssel für Ihr Konto der IBM Cloud-Infrastruktur (SoftLayer) ab oder generieren Sie einen API-Schlüssel.
     1. Melden Sie sich beim [Portal der IBM Cloud-Infrastruktur (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/classic?) an.
@@ -699,6 +700,7 @@ Bevor Sie mit dem Anhängen Ihres vorhandenen Speichers an eine App beginnen kö
 7.  Notieren Sie sich die Angaben `id`, `ip_addr`, `capacity_gb`, das Rechenzentrum (`datacenter`) und `lunId` der Blockspeichereinheit, die Sie an Ihren Cluster anhängen möchten. **Hinweis:** Wenn Sie einen vorhandenen Speicher an einen Cluster anhängen möchten, müssen Sie in derselben Zone, in der sich auch der Speicher befindet, einen Workerknoten haben. Zum Überprüfen der Zone Ihres Workerknotens führen Sie den Befehl `ibmcloud ks workers --cluster <clustername_oder_-id>` aus.
 
 ### Schritt 2: Persistenten Datenträger (PV) und übereinstimmenden Persistent Volume Claim (PVC) erstellen
+{: #existing-block-2}
 
 1.  Optional: Wenn Sie über Speicher verfügen, den Sie mit einer Speicherklasse des Typs `retain` bereitgestellt haben, werden der persistente Datenträger und die physische Speichereinheit beim Entfernen des Persistent Volume Claim (PVC) nicht entfernt. Zum Wiederverwenden des Speichers in Ihrem Cluster müssen Sie zuerst den persistenten Datenträger entfernen.
     1. Listen Sie vorhandene persistente Datenträger auf.
@@ -847,7 +849,7 @@ Bevor Sie mit dem Anhängen Ihres vorhandenen Speichers an eine App beginnen kö
      ```
      {: screen}
 
-Sie haben erfolgreich ein PV (Persistent Volume) erstellt und an einen PVC (Persistent Volume Claim) gebunden. Clusterbenutzer können jetzt den [PVC (Persistent Volume Claim) an ihre Bereitstellungen anhängen](#app_volume_mount) und mit dem Lesen und Schreiben in dem PV (Persistent Volume) beginnen.
+Sie haben erfolgreich ein PV (Persistent Volume) erstellt und an einen PVC (Persistent Volume Claim) gebunden. Clusterbenutzer können jetzt den [PVC (Persistent Volume Claim) an ihre Bereitstellungen anhängen](#block_app_volume_mount) und mit dem Lesen und Schreiben in dem PV (Persistent Volume) beginnen.
 
 <br />
 
@@ -1234,7 +1236,7 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    ```
    {: screen}
 
-2. Rufen Sie die Datenträger-ID (**`VolumeID`**) und den Speichertyp (**`StorageType`**) des physischen Dateispeichers ab, die Ihrem PVC zugeordnet sind, indem Sie die Details des persistenten Datenträgers auflisten, an den Ihr PVC gebunden ist. Ersetzen Sie `<pv_name>` durch den Namen des persistenten Datenträgers, den Sie im vorherigen Schritt abgerufen haben. Der Speichertyp wird im Abschnitt mit **Labels** (Bezeichnungen) angezeigt und die Datenträger-ID wird im Abschnitt **Source** (Quelle) > **Options** (Optionen) Ihrer CLI-Ausgabe angezeigt.
+2. Rufen Sie die Datenträger-ID (**`VolumeID`**) und den Speichertyp (**`StorageType`**) des physischen Dateispeichers ab, die Ihrem PVC zugeordnet sind, indem Sie die Details des persistenten Datenträgers auflisten, an den Ihr PVC gebunden ist. Ersetzen Sie `<pv-name>` durch den Namen des persistenten Datenträgers (PV), den Sie im vorherigen Schritt abgerufen haben. Der Speichertyp wird im Abschnitt mit **Labels** (Bezeichnungen) angezeigt und die Datenträger-ID wird im Abschnitt **Source** (Quelle) > **Options** (Optionen) Ihrer CLI-Ausgabe angezeigt.
    ```
    kubectl describe pv <pv-name>
    ```
@@ -1329,10 +1331,11 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    ```
    {: pre}
 
-   Pods werden im folgenden Format zurückgegeben: `<pod_name>: <pvc_name>`.
+         Pods werden im folgenden Format zurückgegeben: `<pod_name>: <pvc_name>`.
+
 
 6. Wenn Sie über einen Pod verfügen, der den PVC verwendet, starten Sie den Pod erneut, indem Sie den Pod entfernen und ihn von Kubernetes erneut erstellen lassen. Wenn Sie einen Pod erstellt haben, ohne eine Kubernetes-Bereitstellung oder eine Replikatgruppe zu verwenden, müssen Sie Ihren Pod erneut erstellen, nachdem Sie ihn entfernt haben.
-   Zum Abrufen der YAML-Datei, die zum Erstellen Ihres Pods verwendet wurde, führen Sie `kubectl get pod <pod_name> -o yaml >pod.yaml` aus.
+   Um die YAML-Datei abzurufen, mit der zuvor Ihr Pod erstellt wurde, führen Sie den Befehl `kubectl get pod <pod_name> -o yaml >pod.yaml` aus.
    {: tip}
    ```
    kubectl delete pod <podname>
@@ -1380,12 +1383,12 @@ Der Blockspeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 
 <dl>
   <dt>Regelmäßige Snapshots konfigurieren</dt>
-  <dd><p>Sie können [für Ihren Blockspeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Blockspeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, falls ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt. <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie <a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">ein Supportfall öffnen</a>.</br></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>[Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Melden Sie sich an der Befehlszeilenschnittstelle `ibmcloud sl` an. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Sie können [für Ihren Blockspeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Blockspeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, wenn ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt hat.</br></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>[Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Melden Sie sich an der Befehlszeilenschnittstelle `ibmcloud sl` an. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Listen Sie alle vorhandenen PVs in Ihrem Cluster auf. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Rufen Sie die Details für das PV ab, für das Snapshotspeicherplatz angefordert werden soll, und notieren Sie sich die Datenträger-ID, die Größe und die E/A-Operationen pro Sekunde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv-name&gt;</code></pre> Die Größe und die Anzahl der E/A-Operationen pro Sekunde werden im Abschnitt <strong>Labels</strong> der CLI-Ausgabe angezeigt. Um die Datenträger-ID zu finden, überprüfen Sie die Annotation <code>ibm.io/network-storage-id</code> der CLI-Ausgabe. </li><li>Erstellen Sie die Snapshotgröße für den vorhandenen Datenträger mit den Parametern, die Sie im vorherigen Schritt abgerufen haben. <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Warten Sie, bis die Snapshotgröße erstellt wurde. <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>Die Snapshotgröße wird erfolgreich bereitgestellt, wenn der Wert für <strong>Snapshot Size (GB)</strong> (Snapshotgröße (GB)) in der CLI-Ausgabe von '0' in die von Ihnen angeforderte Größe geändert wird. </li><li>Erstellen Sie einen Snapshot für den Datenträger und notieren Sie die ID des von Sie erstellten Snapshots. <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Überprüfen Sie, dass der Snapshot erfolgreich erstellt wurde. <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Gehen Sie wie folgt vor, um Daten aus einem Snapshot auf einem vorhandenen Datenträger wiederherzustellen: </strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Snapshots in eine andere Zone replizieren</dt>
- <dd><p>Um Daten vor einem Zonenausfall zu schützen, können Sie in einer Blockspeicherinstanz, die in einer anderen Zone konfiguriert ist, [Snapshots replizieren](/docs/infrastructure/BlockStorage?topic=BlockStorage-replication#replication). Daten können nur aus dem primären Speicher an den Sicherungsspeicher repliziert werden. Sie können eine replizierte Blockspeicherinstanz nicht an einen Cluster anhängen. Wenn Ihr primärer Speicher fehlschlägt, können Sie Ihren replizierten Sicherungsspeicher manuell als primären Speicher festlegen. Anschließend können Sie ihn an den Cluster anhängen. Nachdem Ihr primärer Speicher wiederhergestellt wurde, können Sie die Daten aus dem Sicherungsspeicher wiederherstellen. <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, können Sie keine Snapshots in eine andere Zone replizieren.</p></dd>
+ <dd><p>Um Daten vor einem Zonenausfall zu schützen, können Sie in einer Blockspeicherinstanz, die in einer anderen Zone konfiguriert ist, [Snapshots replizieren](/docs/infrastructure/BlockStorage?topic=BlockStorage-replication#replication). Daten können nur aus dem primären Speicher an den Sicherungsspeicher repliziert werden. Sie können eine replizierte Blockspeicherinstanz nicht an einen Cluster anhängen. Wenn Ihr primärer Speicher fehlschlägt, können Sie Ihren replizierten Sicherungsspeicher manuell als primären Speicher festlegen. Anschließend können Sie ihn an den Cluster anhängen. Nachdem Ihr primärer Speicher wiederhergestellt wurde, können Sie die Daten aus dem Sicherungsspeicher wiederherstellen.</p></dd>
  <dt>Speicher duplizieren</dt>
- <dd><p>Sie können Ihre [Blockspeicherinstanz in derselben Zone duplizieren](/docs/infrastructure/BlockStorage?topic=BlockStorage-duplicatevolume#duplicatevolume), in der sich auch die ursprüngliche Speicherinstanz befindet. Ein Duplikat hat dieselben Daten wie die Originalspeicherinstanz zu dem Zeitpunkt, an dem das Duplikat erstellt wurde. Verwenden Sie das Duplikat - im Gegensatz zu den Replikaten - als unabhängige Speicherinstanz. Erstellen Sie zur Vorbereitung einer Duplizierung zunächst Snapshots für den Datenträger. <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie <a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">ein Supportfall öffnen</a>.</p></dd>
+ <dd><p>Sie können Ihre [Blockspeicherinstanz in derselben Zone duplizieren](/docs/infrastructure/BlockStorage?topic=BlockStorage-duplicatevolume#duplicatevolume), in der sich auch die ursprüngliche Speicherinstanz befindet. Ein Duplikat hat dieselben Daten wie die Originalspeicherinstanz zu dem Zeitpunkt, an dem das Duplikat erstellt wurde. Verwenden Sie das Duplikat - im Gegensatz zu den Replikaten - als unabhängige Speicherinstanz. Erstellen Sie zur Vorbereitung einer Duplizierung zunächst Snapshots für den Datenträger.</p></dd>
   <dt>Daten in {{site.data.keyword.cos_full}} sichern</dt>
   <dd><p>Sie können den Befehl [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter) verwenden, damit ein Pod für Sicherung und Wiederherstellung in Ihrem Cluster den Betrieb aufnimmt. Dieser Pod enthält ein Script zur Ausführung einer einmaligen oder regelmäßigen Sicherung für alle PVCs (Persistent Volume Claims) in Ihrem Cluster. Die Daten werden in Ihrer {{site.data.keyword.cos_full}}-Instanz gespeichert, die Sie in einer Zone konfiguriert haben.</p><p class="note">Blockspeicher wird mit dem RWO-Zugriffsmodus (ReadWriteOnce) angehängt. Dieser Zugriff ermöglicht, dass gleichzeitig nur ein einziger Pod an den Blockspeicher angehängt werden kann. Zum Sichern Ihrer Daten müssen Sie den Speicher von Ihrem App-Pod abhängen, ihn an Ihren Sicherungspod anhängen, die Daten sichern und den Speicher wieder an Ihren App-Pod anhängen. </p>
 Damit Ihre Daten noch besser hoch verfügbar sind und um Ihre App vor einem Zonenausfall zu schützen, konfigurieren Sie eine zweite {{site.data.keyword.cos_short}}-Instanz und replizieren Sie die Daten zonenübergreifend. Falls Sie Daten von Ihrer {{site.data.keyword.cos_short}}-Instanz wiederherstellen müssen, verwenden Sie das Wiederherstellungsscript, das mit dem Image bereitgestellt wird.</dd>
@@ -1673,26 +1676,26 @@ Erstellen Sie die Speicherklasse in derselben Region und Zone wie Ihren Cluster 
 
 - **Beispiel für Endurance-Blockspeicher:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
-kind: StorageClass
-metadata:
-  name: ibmc-block-silver-mycustom-storageclass
-  labels:
-    kubernetes.io/cluster-service: "true"
-provisioner: ibm.io/ibmc-block
-parameters:
-  zone: "dal12"
-  region: "us-south"
-  type: "Endurance"
-  iopsPerGB: "4"
-  sizeRange: "[20-12000]Gi"
-reclaimPolicy: "Delete"
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ibmc-block-silver-mycustom-storageclass
+    labels:
+      kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-block
+  parameters:
+    zone: "dal12"
+    region: "us-south"
+    type: "Endurance"
+    iopsPerGB: "4"
+    sizeRange: "[20-12000]Gi"
+  reclaimPolicy: "Delete"
   ```
   {: codeblock}
 
 - **Beispiel für Performance-Blockspeicher:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: ibmc-block-performance-storageclass

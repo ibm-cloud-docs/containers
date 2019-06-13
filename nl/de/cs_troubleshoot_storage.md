@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -81,7 +81,7 @@ Für eine langfristige Programmkorrektur müssen Sie [den Maschinentyp Ihres Wor
 {: #nonroot}
 
 {: tsSymptoms}
-Nach dem [Hinzufügen von NFS-Speicher](/docs/containers?topic=containers-file_storage#app_volume_mount) zu Ihrer Bereitstellung schlägt die Bereitstellung Ihres Containers fehl. Wenn Sie die Protokolle für Ihren Container abrufen, werden möglicherweise Fehler wie die folgenden angezeigt. Der Pod schlägt fehl und bleibt in einer Neuladeschleife stecken.
+Nach dem [Hinzufügen von NFS-Speicher](/docs/containers?topic=containers-file_storage#file_app_volume_mount) zu Ihrer Bereitstellung schlägt die Bereitstellung Ihres Containers fehl. Wenn Sie die Protokolle für Ihren Container abrufen, werden möglicherweise Fehler wie die folgenden angezeigt. Der Pod schlägt fehl und bleibt in einer Neuladeschleife stecken.
 
 ```
 write-permission
@@ -182,9 +182,12 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: mein_pod
+      name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:
@@ -327,7 +330,7 @@ Wenn ein Netzfehler auftritt, während ein Pod auf einen Datenträger schreibt, 
    ```
    {: pre}
 
-2. Überprüfen Sie, ob Sie die [neueste Version des {{site.data.keyword.Bluemix_notm}} Block Storage-Plug-ins](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin) verwenden. Ist dies nicht der Fall, [aktualisieren Sie Ihr Plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
+2. Überprüfen Sie, ob Sie die [neueste Version des {{site.data.keyword.Bluemix_notm}} Block Storage-Plug-ins](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin) verwenden. Ist dies nicht der Fall, [aktualisieren Sie Ihr Plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
 3. Wenn Sie eine Kubernetes-Bereitstellung für Ihren Pod verwendet haben, starten Sie den fehlgeschlagenen Pod erneut, indem Sie den Pod entfernen und Kubernetes den Pod erneut erstellen lassen. Wenn Sie keine Bereitstellung verwendet haben, rufen Sie die YAML-Datei ab, die zum Erstellen Ihres Pods verwendet wurde, indem Sie den Befehl `kubectl get pod <podname> -o yaml >pod.yaml` ausführen. Löschen Sie anschließend den Pod und erstellen Sie ihn neu.
     ```
     kubectl delete pod <podname>

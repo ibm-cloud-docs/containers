@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -102,7 +102,7 @@ Wenn alle Workerknoten betriebsbereit sein müssen, sollten Sie in Betracht zieh
 
 Darüber hinaus können Sie eine Kubernetes-Konfigurationszuordnung erstellen, die die maximale Anzahl der Workerknoten angibt, die während der Aktualisierung nicht verfügbar sein können. Workerknoten werden durch eine entsprechende Bezeichnung identifiziert. Sie können von IBM bereitgestellte Bezeichnungen oder angepasste Bezeichnungen verwenden, die Sie dem Workerknoten hinzugefügt haben.
 
-**Wie sieht es aus, wenn keine Konfigurationszuordnung definiert wurde?**</br>
+**Was geschieht, wenn keine Konfigurationszuordnung definiert wurde?**</br>
 Wenn die Konfigurationszuordnung nicht definiert wurde, wird die Standardeinstellung verwendet. Standardmäßig können maximal 20 % aller Workerknoten in den einzelnen Clustern während des Aktualisierungsprozesses nicht verfügbar sein.
 
 **Vorbereitende Schritte**:
@@ -110,9 +110,9 @@ Wenn die Konfigurationszuordnung nicht definiert wurde, wird die Standardeinstel
 - [Aktualisieren Sie den Kubernetes-Master](#master). Die Kubernetes-Version der Workerknoten darf nicht höher als die Version des API-Servers von Kubernetes sein.
 - Führen Sie alle Änderungen durch, die mit der Markierung _Nach Master aktualisieren_ in [Kubernetes-Änderungen](/docs/containers?topic=containers-cs_versions) versehen sind.
 - Wenn Sie eine Patchaktualisierung anwenden möchten, lesen Sie sich die Informationen im [Kubernetes-Änderungsprotokoll](/docs/containers?topic=containers-changelog#changelog) durch.
-- Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Operator** oder **Administrator**](/docs/containers?topic=containers-users#platform) innehaben. </br>
+- Stellen Sie sicher, dass Sie über die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** verfügen. </br>
 
-Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Von Ihrer Workerknotenmaschine wird ein neues Image erstellt wird und dabei werden Daten gelöscht, die nicht [außerhalb des Pods gespeichert sind](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Von Ihrer Workerknotenmaschine wird ein neues Image erstellt wird und dabei werden Daten gelöscht, die nicht [außerhalb des Pods gespeichert sind](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)(/docs/containers?topic=containers-users#platform)].
 {: important}
 
 {: #worker-up-configmap}
@@ -142,7 +142,7 @@ Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Ser
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012
@@ -276,9 +276,9 @@ Vorbereitende Schritte:
 *   [Aktualisieren Sie den Kubernetes-Master](#master). Die Kubernetes-Version der Workerknoten darf nicht höher als die Version des API-Servers von Kubernetes sein.
 *   Führen Sie alle Änderungen durch, die mit der Markierung _Nach Master aktualisieren_ in [Kubernetes-Änderungen](/docs/containers?topic=containers-cs_versions) versehen sind.
 *   Wenn Sie eine Patchaktualisierung anwenden möchten, lesen Sie sich die Informationen im [Kubernetes-Änderungsprotokoll](/docs/containers?topic=containers-changelog#changelog) durch.
-*   Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Operator** oder **Administrator**](/docs/containers?topic=containers-users#platform) innehaben. </br>
+*   Stellen Sie sicher, dass Sie über die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** verfügen. </br>
 
-Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Von Ihrer Workerknotenmaschine wird ein neues Image erstellt wird und dabei werden Daten gelöscht, die nicht [außerhalb des Pods gespeichert sind](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Von Ihrer Workerknotenmaschine wird ein neues Image erstellt wird und dabei werden Daten gelöscht, die nicht [außerhalb des Pods gespeichert sind](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)(/docs/containers?topic=containers-users#platform)].
 {: important}
 
 Gehen Sie wie folgt vor, um Workerknoten über die Konsole zu aktualisieren:
@@ -294,13 +294,13 @@ Gehen Sie wie folgt vor, um Workerknoten über die Konsole zu aktualisieren:
 ## Maschinentypen aktualisieren
 {: #machine_type}
 
-Sie können die Maschinentypen der Workerknoten aktualisieren, indem Sie neue Workerknoten hinzufügen und alte entfernen. Wenn Sie zum Beispiel über virtuelle Workerknoten auf nicht mehr verwendeten Maschinen mit `u1c` oder `b1c` in den jeweiligen Namen verfügen, erstellen Sie Workerknoten, die Maschinentypen mit `u2c` oder `b2c` in den Namen verwenden.
+Sie können die Maschinentypen der Workerknoten aktualisieren, indem Sie neue Workerknoten hinzufügen und alte entfernen. Wenn Ihr Cluster beispielsweise über die veralteten `x1c`- oder ältere Ubuntu 16 `x2c`-Workerknoten-Typen verfügt, erstellen Sie Ubuntu 18-Workerknoten, die Maschinentypen mit `x3c` in den Namen verwenden.
 {: shortdesc}
 
 Vorbereitende Schritte:
 - [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Wenn Sie Daten auf dem Workerknoten speichern, werden die Daten gelöscht, wenn sie nicht [außerhalb des Workerknotens gespeichert sind](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-- Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Operator** oder **Administrator**](/docs/containers?topic=containers-users#platform) innehaben. 
+- Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Operator** oder **Administrator**](/docs/containers?topic=containers-users#platform) innehaben.
 
 Gehen Sie wie folgt vor, um Maschinentypen zu aktualisieren:
 
@@ -413,7 +413,7 @@ Ihr {{site.data.keyword.containerlong_notm}}-Cluster wird mit Add-ons geliefert,
 
 **Welche Standard-Add-ons kann ich separat vom Cluster aktualisieren?**</br>
 Optional können Sie automatische Aktualisierungen für die folgenden Add-ons inaktivieren:
-* [Fluentd für Protokollierung](#logging)
+* [Fluentd für Protokollierung](#logging-up)
 * [Lastausgleichsfunktion für Ingress-Anwendungen](#alb)
 
 **Gibt es Add-ons, die ich nicht separat vom Cluster aktualisieren kann?**</br>
@@ -439,11 +439,11 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 ```
 {: pre}
 
-**Kann ich andere Add-Ons als den Standard installieren?**</br>
-Ja. {{site.data.keyword.containerlong_notm}} stellt weitere Add-ons zur Verfügung, die Sie auswählen können, um Ihrem Cluster Funktionen hinzuzufügen. Sie können z. B. [Helm-Diagramme verwenden](/docs/containers?topic=containers-integrations#helm) , um das [Blockspeicher-Plug-in](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) oder das [strongSwan-VPN](/docs/containers?topic=containers-vpn#vpn-setup) zu installieren. Sie müssen jedes Add-on separat aktualisieren, indem Sie die Anweisungen zum Aktualisieren der Helm-Diagramme befolgen.
+**Kann ich andere Add-ons als den Standard installieren?**</br>
+Ja. {{site.data.keyword.containerlong_notm}} stellt weitere Add-ons zur Verfügung, die Sie auswählen können, um Ihrem Cluster Funktionen hinzuzufügen. Sie können z. B. [Helm-Diagramme verwenden](/docs/containers?topic=containers-helm#public_helm_install) , um das [Blockspeicher-Plug-in](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio) oder das [strongSwan-VPN](/docs/containers?topic=containers-vpn#vpn-setup) zu installieren. Sie müssen jedes Add-on separat aktualisieren, indem Sie die Anweisungen zum Aktualisieren der Helm-Diagramme befolgen.
 
 ### Automatische Aktualisierungen für Fluentd zum Protokollieren von Add-ons verwalten
-{: #logging}
+{: #logging-up}
 
 Um Änderungen an Ihren Protokollierungs- oder Filterkonfigurationen vornehmen zu können, muss das Fluentd-Add-on die aktuelle Version aufweisen. Standardmäßig sind automatische Aktualisierungen für das Add-on aktiviert.
 {: shortdesc}
@@ -608,7 +608,7 @@ Gehen Sie wie folgt vor, um eigenständige Workerknoten in Worker-Pools zu aktua
       ```
       {: pre}
 
-   2. **So fügen Sie die Zone mehreren Worker-Pools hinzu**: Fügen Sie mehrere Worker-Pools dem Befehl `ibmcloud ks zone-add` hinzu. Wenn Sie mehrere Worker-Pools zu einer Zone hinzufügen möchten, müssen Sie über ein vorhandenes privates und öffentliches VLAN in dieser Zone verfügen. Wenn Sie kein öffentliches und privates VLAN in dieser Zone haben, sollten Sie die Zone zuerst einem Worker-Pool hinzufügen, damit ein öffentliches und ein privates VLAN für Sie erstellt werden. Anschließend können Sie die Zone anderen Worker-Pools hinzufügen. </br></br>Es ist wichtig, dass die Workerknoten in allen Worker-Pools in allen Zonen bereitgestellt werden, um sicherzustellen, dass Ihr Cluster auf alle Zonen gleichmäßig verteilt wird. Wenn Sie verschiedene VLANs für verschiedene Worker-Pools verwenden möchten, wiederholen Sie diesen Befehl mit dem VLAN, das Sie für Ihren Worker-Pool verwenden wollen. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie eine [VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten über das private Netz miteinander kommunizieren können. Zur Aktivierung von VRF [wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+   2. **So fügen Sie die Zone mehreren Worker-Pools hinzu**: Fügen Sie mehrere Worker-Pools dem Befehl `ibmcloud ks zone-add` hinzu. Wenn Sie mehrere Worker-Pools zu einer Zone hinzufügen möchten, müssen Sie über ein vorhandenes privates und öffentliches VLAN in dieser Zone verfügen. Wenn Sie kein öffentliches und privates VLAN in dieser Zone haben, sollten Sie die Zone zuerst einem Worker-Pool hinzufügen, damit ein öffentliches und ein privates VLAN für Sie erstellt werden. Anschließend können Sie die Zone anderen Worker-Pools hinzufügen. </br></br>Es ist wichtig, dass die Workerknoten in allen Worker-Pools in allen Zonen bereitgestellt werden, um sicherzustellen, dass Ihr Cluster auf alle Zonen gleichmäßig verteilt wird. Wenn Sie verschiedene VLANs für verschiedene Worker-Pools verwenden möchten, wiederholen Sie diesen Befehl mit dem VLAN, das Sie für Ihren Worker-Pool verwenden wollen. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie eine [VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten über das private Netz miteinander kommunizieren können. Zur Aktivierung von VRF [wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <clustername_oder_-id> --worker-pools <poolname1,poolname2,poolname3> --private-vlan <private_vlan-id> --public-vlan <öffentliche_vlan-id>
       ```
@@ -647,7 +647,7 @@ Gehen Sie wie folgt vor, um eigenständige Workerknoten in Worker-Pools zu aktua
       {: pre}
       Dieser Prozess kann einige Minuten dauern.
 
-   5. Entfernen Sie den eigenständigen Workerknoten. Verwenden Sie die ID des Workerknotens, den Sie im vorherigen Schritt mit dem Befehl `ibmcloud ks workers <cluster_name_or_ID>` abgerufen haben.
+   5. Entfernen Sie den eigenständigen Workerknoten. Verwenden Sie die ID des Workerknotens, den Sie mit dem Befehl `ibmcloud ks workers <clustername_oder_-id>` abgerufen haben.
       ```
       ibmcloud ks worker-rm --cluster <clustername_oder_-id> --worker <worker-id>
       ```

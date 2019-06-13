@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -39,8 +39,7 @@ Vor Beginn der Einrichtung eines Clusternetzes ist es wichtig, die Basiskonzepte
 Wenn Sie Ihren Cluster erstellen, müssen Sie die Netzeinrichtung auswählen, damit Clusterkomponenten miteinander kommunizieren können.
 {: shortdesc}
 
-* Alle Workerknoten müssen mit einem VLAN verbunden sein, damit sie miteinander und mit dem Kubernetes-Master kommunizieren können. 
-Informationen zur Auswahl von VLANs finden Sie unter [Kommunikation zwischen Workerknoten planen](#cs_network_ov_worker).
+* Alle Workerknoten müssen mit einem VLAN verbunden sein, damit sie miteinander und mit dem Kubernetes-Master kommunizieren können. Informationen zur Auswahl von VLANs finden Sie unter [Kommunikation zwischen Workerknoten planen](#cs_network_ov_worker).
 * Die Kommunikation muss über mehrere private VLANs hinweg zugelassen werden, damit Worker Verbindungen zueinander und zum Master herstellen können. Informationen zur Aktivierung einer VRF-Funktion (Virtual Router Function) oder des VLAN-Spannings finden Sie unter [Wie werden VLANs und Teilnetze zur Sicherstellung der Netzsegmentierung konfiguriert?](#cs_network_ov_basics_segmentation).
 * Ihre Worker können mit dem Kubernetes-Master sicher über das öffentliche Netz oder über das private Netz kommunizieren. Informationen zur Auswahl des Kommunikationskanals zwischen Workern und Master finden Sie unter [Kommunikation zwischen Master und Workern planen](#cs_network_ov_master).
 
@@ -60,7 +59,7 @@ Beim Erstellen eines Clusters werden die Workerknoten des Clusters automatisch m
 <dd>Bei kostenlosen Clustern werden die Workerknoten des Clusters standardmäßig mit einem öffentlichen und einem privaten VLAN verbunden, deren Eigner IBM ist. Da IBM die VLANs, Teilnetze und IP-Adressen steuert, können Sie keine Mehrzonencluster erstellen oder Ihrem Cluster Teilnetze hinzufügen; darüber hinaus können Sie zum Verfügbarmachen Ihrer App nur NodePort-Services verwenden.</dd>
 <dt>VLANs für Standardcluster</dt>
 <dd>Wenn Sie bei Standardclustern in einer Zone zum ersten Mal einen Cluster erstellen, werden in dieser Zone automatisch ein öffentliches und ein privates VLAN für Sie in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. Für jeden weiteren Cluster, den Sie in dieser Zone erstellen, müssen Sie das VLAN-Paar angeben, das Sie in dieser Zone verwenden möchten. Sie können dasselbe öffentliche und private VLAN wiederverwenden, die für Sie erstellt wurden, da ein VLAN von mehreren Clustern gemeinsam genutzt werden kann.</br>
-</br>Sie können Ihre Workerknoten entweder mit einem öffentlichen und einem privaten VLAN verbinden oder nur mit einem privaten VLAN. Wenn Ihre Workerknoten nur mit einem privaten VLAN verbunden werden sollen, können Sie die ID eines vorhandenen privaten VLANs verwenden oder [ein privates VLAN erstellen](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) und die ID während der Clustererstellung verwenden.</dd></dl>
+</br>Sie können Ihre Workerknoten entweder mit einem öffentlichen und dem privaten VLAN verbinden oder nur mit dem privaten VLAN. Wenn Ihre Workerknoten nur mit einem privaten VLAN verbunden werden sollen, können Sie die ID eines vorhandenen privaten VLANs verwenden oder [ein privates VLAN erstellen](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) und die ID während der Clustererstellung verwenden.</dd></dl>
 
 Um die VLANs anzuzeigen, die in den einzelnen Zonen für Ihr Konto bereitgestellt sind, führen Sie den Befehl `ibmcloud ks vlans --zone <zone>` aus. Um die VLANs anzuzeigen, in denen ein Cluster bereitgestellt ist, führen Sie den Befehl `ibmcloud ks cluster-get --cluster <clustername_oder_-id> --showResources` aus und suchen nach dem Abschnitt für VLANs von Teilnetzen (**Subnet VLANs**).
 
@@ -82,11 +81,11 @@ Folgende Teilnetze werden in den standardmäßigen öffentlichen und privaten VL
 
 **Öffentliche VLAN-Teilnetze**
 * Durch das primäre öffentliche Teilnetz werden die öffentlichen IP-Adressen festgelegt, die während der Clustererstellung den Workerknoten zugeordnet werden. Mehrere im selben VLAN vorhandene Cluster können ein einzelnes primäres öffentliches Teilnetz gemeinsam nutzen.
-* Das portierbare öffentliche Teilnetz ist nur an einen einzigen Cluster gebunden und stellt dem Cluster acht öffentliche IP-Adressen zur Verfügung. 3 IP-Adressen sind für Funktionen der IBM Cloud-Infrastruktur (SoftLayer) reserviert. Eine IP wird von der standardmäßigen öffentlichen Ingress-ALB (ALB – Application Load Balancer, Lastausgleichsfunktion für Anwendungen) verwendet und vier IPs können verwendet werden, um Netzservices für öffentliche Lastausgleichsfunktionen zu erstellen. Portierbare öffentliche IPs sind permanente, feste IP-Adressen, die verwendet werden können, um über das Internet auf Services für Lastausgleichsfunktionen zuzugreifen. Wenn Sie für öffentliche Lastausgleichsfunktionen mehr als vier IPs benötigen, finden Sie Informationen dazu in [Portierbare IP-Adressen hinzufügen](/docs/containers?topic=containers-subnets#adding_ips).
+* Das portierbare öffentliche Teilnetz ist nur an einen einzigen Cluster gebunden und stellt dem Cluster acht öffentliche IP-Adressen zur Verfügung. 3 IP-Adressen sind für Funktionen der IBM Cloud-Infrastruktur (SoftLayer) reserviert. Eine IP wird von der standardmäßigen öffentlichen Ingress-ALB verwendet; vier IPs können verwendet werden, um öffentliche NLB-Services (NLB = Netzausgleichsfunktion) zu erstellen. Portierbare öffentliche IPs sind permanente, feste IP-Adressen, die für den Zugriff auf NLBs über das Internet verwendet werden können. Wenn Sie für NLBs mehr als 4 IPs benötigen, lesen Sie die Informationen unter [Portierbare IP-Adressen hinzufügen](/docs/containers?topic=containers-subnets#adding_ips).
 
 **Private VLAN-Teilnetze**
 * Durch das primäre private Teilnetz werden die privaten IP-Adressen festgelegt, die während der Clustererstellung den Workerknoten zugeordnet werden. Mehrere im selben VLAN vorhandene Cluster können ein einzelnes primäres privates Teilnetz gemeinsam nutzen.
-* Das portierbare private Teilnetz ist nur an einen einzigen Cluster gebunden und stellt dem Cluster acht private IP-Adressen zur Verfügung. 3 IP-Adressen sind für Funktionen der IBM Cloud-Infrastruktur (SoftLayer) reserviert. Eine IP wird von der standardmäßigen privaten Ingress-ALB (ALB – Application Load Balancer, Lastausgleichsfunktion für Anwendungen) verwendet und vier IPs können verwendet werden, um Netzservices für private Lastausgleichsfunktionen zu erstellen. Portierbare private IPs sind permanente, feste IP-Adressen, die verwendet werden können, um über das Internet auf Services für Lastausgleichsfunktionen zuzugreifen. Wenn Sie für private Lastausgleichsfunktionen mehr als vier IPs benötigen, finden Sie Informationen dazu in [Portierbare IP-Adressen hinzufügen](/docs/containers?topic=containers-subnets#adding_ips).
+* Das portierbare private Teilnetz ist nur an einen einzigen Cluster gebunden und stellt dem Cluster acht private IP-Adressen zur Verfügung. 3 IP-Adressen sind für Funktionen der IBM Cloud-Infrastruktur (SoftLayer) reserviert. Eine IP wird von der standardmäßigen privaten Ingress-ALB verwendet; vier IPs können verwendet werden, um private NLB-Services (NLB = Netzausgleichsfunktion) zu erstellen. Portierbare private IPs sind permanente, feste IP-Adressen, die für den Zugriff auf NLBs über ein privates Netz verwendet werden können. Wenn Sie für private NLBs mehr als 4 IPs benötigen, lesen Sie die Informationen unter [Portierbare IP-Adressen hinzufügen](/docs/containers?topic=containers-subnets#adding_ips).
 
 Führen Sie `ibmcloud ks subnets` aus, um alle in Ihrem Konto bereitgestellten Teilnetze anzuzeigen. Um die portierbaren öffentlichen und die portierbaren privaten Teilnetze anzuzeigen, die an einen einzigen Cluster gebunden sind, können Sie den Befehl `ibmcloud ks cluster-get --cluster <clustername_oder_-id> --showResources` ausführen und nach dem Abschnitt für VLANs von Teilnetzen (**Subnet VLANs**) suchen.
 
@@ -104,7 +103,7 @@ In verschiedenen Situationen müssen Komponenten in Ihrem Cluster jedoch berecht
 **Was sind VRF-Funktionen und VLAN-Spanning?**</br>
 
 <dl>
-<dt>[Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview)</dt>
+<dt>[Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
 <dd>Eine VRF-Funktion ermöglicht allen VLANs und Teilnetzen in Ihrem Infrastrukturkonto die Kommunikation miteinander. Darüber hinaus ist eine VRF-Funktion erforderlich, um die Kommunikation Ihrer Worker und Ihres Masters über den privaten Serviceendpunkt zu ermöglichen. Zur Aktivierung von VRF [wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Beachten Sie, dass VRF die Option des VLAN-Spannings für Ihr Konto ausschließt, da alle VLANs kommunizieren können, sofern Sie keine Gateway-Appliance zur Verwaltung des Datenverkehrs konfigurieren.</dd>
 <dt>[VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das VLAN-Spanning. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Beachten Sie, dass Sie den privaten Serviceendpunkt nicht aktivieren können, wenn Sie das VLAN-Spanning anstatt einer VRF-Funktion aktivieren.</dd>
@@ -143,7 +142,7 @@ Die folgende Abbildung zeigt die Netzkonnektivität für Workerknoten, die mit e
 </figure>
 </p>
 
-Wenn Sie einen Mehrzonencluster erstellen wollen, wenn Sie mehrere VLANs für einen Cluster haben oder wenn Sie mehrere Teilnetze im selben VLAN haben, können die Workerknoten in verschiedenen Teilnetzen desselben VLAN oder in verschiedenen VLANs nicht automatisch miteinander kommunizieren. Sie müssen entweder eine [VRF-Funktion oder das VLAN-Spanning](#cs_network_ov_basics_segmentation) für Ihr IBM Cloud-Infrastrukturkonto (SoftLayer) aktivieren. Wählen Sie VRF aus, um den [privaten Serviceendpunkt für die Kommunikation zwischen Master und Workerknoten](#cs_network_ov_master_private) zu aktivieren. Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das VLAN-Spanning.
+Wenn Sie einen Mehrzonencluster erstellen wollen, wenn Sie mehrere VLANs für einen Cluster haben oder wenn Sie mehrere Teilnetze im selben VLAN haben, können die Workerknoten in verschiedenen Teilnetzen desselben VLAN oder in verschiedenen VLANs nicht automatisch miteinander kommunizieren. Sie müssen entweder eine [VRF-Funktion oder das VLAN-Spanning](#cs_network_ov_basics_segmentation) für Ihr IBM Cloud-Infrastrukturkonto (SoftLayer) aktivieren. Wählen Sie VRF aus, um den [privaten Serviceendpunkt für die Kommunikation zwischen Master- und Workerknoten](#cs_network_ov_master_private) zu aktivieren. Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das VLAN-Spanning.
 
 **Warum sollte ich meinen Cluster nur mit einem privaten VLAN verbinden?**</br>
 
@@ -158,7 +157,7 @@ Die folgende Abbildung zeigt die Netzkonnektivität für Workerknoten, die nur m
 </figure>
 </p>
 
-Wenn Sie einen Mehrzonencluster erstellen wollen, wenn Sie mehrere VLANs für einen Cluster haben oder wenn Sie mehrere Teilnetze im selben VLAN haben, können die Workerknoten in verschiedenen Teilnetzen desselben VLAN oder in verschiedenen VLANs nicht automatisch miteinander kommunizieren. Sie müssen entweder eine [VRF-Funktion oder das VLAN-Spanning](#cs_network_ov_basics_segmentation) für Ihr IBM Cloud-Infrastrukturkonto (SoftLayer) aktivieren. Wählen Sie VRF aus, um den [privaten Serviceendpunkt für die Kommunikation zwischen Master und Workerknoten](#cs_network_ov_master_private) zu aktivieren. Wenn Sie VRF nicht aktivieren können oder wollen, müssen Sie für die Kommunikation zwischen Master und Workerknoten das VLAN-Spanning aktivieren und außerdem eine Gateway-Einheit konfigurieren.
+Wenn Sie einen Mehrzonencluster erstellen wollen, wenn Sie mehrere VLANs für einen Cluster haben oder wenn Sie mehrere Teilnetze im selben VLAN haben, können die Workerknoten in verschiedenen Teilnetzen desselben VLAN oder in verschiedenen VLANs nicht automatisch miteinander kommunizieren. Sie müssen entweder eine [VRF-Funktion oder das VLAN-Spanning](#cs_network_ov_basics_segmentation) für Ihr IBM Cloud-Infrastrukturkonto (SoftLayer) aktivieren. Wählen Sie VRF aus, um den [privaten Serviceendpunkt für die Kommunikation zwischen Master- und Workerknoten](#cs_network_ov_master_private) zu aktivieren. Wenn Sie VRF nicht aktivieren können oder wollen, müssen Sie für die Kommunikation zwischen Master- und Workerknoten das VLAN-Spanning aktivieren und außerdem eine Gateway-Einheit konfigurieren.
 
 ### Ich habe meine Wahl für VLAN-Verbindungen getroffen. Wie richte ich diese nun ein?
 {: #cs_network_ov_worker_setup}
@@ -166,17 +165,19 @@ Wenn Sie einen Mehrzonencluster erstellen wollen, wenn Sie mehrere VLANs für ei
 Sie können die Schritte unter [Clusternetz mit einem öffentlichen und einem privaten VLAN einrichten](/docs/containers?topic=containers-cs_network_cluster#both_vlans) oder [Clusternetz nur mit einem privaten VLAN einrichten](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan) ausführen.
 {: shortdesc}
 
-### Kann ich meine VLAN-Entscheidung später ändern?
+### Kann ich meine VLAN-Entscheidung später ändern? Ändern sich die IP-Adressen meines Workerknotens?
 {: #cs_network_ov_worker_change}
 
 Sie können Ihre VLAN-Konfiguration ändern, indem Sie die Worker-Pools in Ihrem Cluster modifizieren. Weitere Informationen finden Sie unter [VLAN-Verbindungen für Workerknoten ändern](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
 {: shortdesc}
 
+Ihrem Workerknoten wird eine IP-Adresse für die öffentlichen oder privaten VLANs zugewiesen, die vom Cluster verwendet werden. Nach der Bereitstellung des Workerknotens ändern sich die IP-Adressen nicht mehr. Die IP-Adressen des Workerknotens bleiben beispielsweise bei den Operationen `reload`, `reboot` und `update` bestehen. Darüber hinaus wird die private IP-Adresse des Workerknotens in den meisten `kubectl`-Befehlen für die Identität des Workerknotens verwendet. Wenn Sie die vom Worker-Pool verwendeten VLANs ändern, verwenden neue Workerknoten, die in diesem Pool bereitgestellt werden, die neuen VLANs für ihre IP-Adressen. Bestehende IP-Adressen von Workerknoten ändern sich nicht, Sie können jedoch entscheiden, die Workerknoten, die die alten VLANs verwenden, zu entfernen.
+
 <br />
 
 
 
-## Kommunikation zwischen Master und Workerknoten planen
+## Kommunikation zwischen Master- und Workerknoten planen
 {: #cs_network_ov_master}
 
 Wenn Sie Ihren Cluster erstellen, müssen Sie wählen, wie Ihre Workerknoten und der Kubernetes-Master kommunizieren, um Ihre Clusterkonfigurationen zu koordinieren.
@@ -233,7 +234,7 @@ Die folgende Abbildung zeigt die Kommunikation zwischen Workerknoten und dem Kub
 </p>
 
 **Kommunikation zwischen Workerknoten und Master**</br>
-Die Kommunikation wird über das private Netz und den privaten Serviceendpunkt eingerichtet.
+Die Kommunikation wird über das private Netz und den privaten Serviceendpunkt hergestellt.
 
 **Zugriff auf den Master**</br>
 Ihre Clusterbenutzer müssen sich in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden oder eine Verbindung zu dem privaten Netz durch eine VPN-Verbindung herstellen, um auf den Master zuzugreifen.
@@ -247,7 +248,7 @@ Wenn Sie Ihren Master öffentlich oder privat für Clusterbenutzer zugänglich m
 {: shortdesc}
 
 **Kommunikation zwischen Workerknoten und Master**</br>
-Die Kommunikation wird über das private Netz und den privaten Serviceendpunkt eingerichtet. Auch wenn Sie den öffentlichen Serviceendpunkt für Ihren Cluster aktivieren, verbleibt die Kommunikation zwischen dem Kubernetes-Master und den Workerknoten im privaten Netz.
+Die Kommunikation wird sowohl über das private Netz durch den privaten Serviceendpunkt als auch über das öffentliche Netz durch den öffentlichen Serviceendpunkt hergestellt. Dadurch, dass die Hälfte des Worker-zu-Master-Datenverkehrs über den öffentlichen Endpunkt und die andere Hälfte über den privaten Endpunkt geleitet wird, ist Ihre Master-zu-Worker-Kommunikation vor potenziellen Ausfällen des öffentlichen oder privaten Netzes geschützt.
 
 **Zugriff auf den Master**</br>
 Der Master ist privat über den privaten Serviceendpunkt zugänglich, wenn sich berechtigte Clusterbenutzer in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden oder durch eine VPN-Verbindung mit dem privaten Netz verbunden sind. Ansonsten ist der Master für berechtigte Clusterbenutzer öffentlich über den öffentlichen Serviceendpunkt zugänglich.
@@ -286,7 +287,7 @@ Um eine sichere Verbindung Ihrer Workerknoten und Apps zu einem lokalen Netz her
 ### VPN-Verbindung nur für eine private VLAN-Konfiguration einrichten
 {: #cs_network_ov_vpn_private}
 
-Wenn Ihr Cluster nur mit einem privaten VLAN verbunden ist, müssen Sie einen IPSec-VPN-Endpunkt auf einer VRA- oder FSA-Gateway-Einheit einrichten. Anschließend können Sie [den strongSwan-IPSec-VPN-Service einrichten](/docs/containers?topic=containers-vpn#vpn-setup) und in Ihrem Cluster bereitstellen, um den VPN-Endpunkt auf Ihrem Gateway zu verwenden. Wenn Sie strongSwan nicht verwenden wollen, können Sie die [VPN-Konnektivität direkt mit VRA einrichten](/docs/containers?topic=containers-vpn#vyatta).
+Wenn Ihr Cluster nur mit einem privaten VLAN verbunden ist, müssen Sie einen IPSec-VPN-Endpunkt auf einer VRA- (Vyatta) oder FSA-Gateway-Einheit einrichten. Anschließend können Sie [den strongSwan-IPSec-VPN-Service einrichten](/docs/containers?topic=containers-vpn#vpn-setup) und in Ihrem Cluster bereitstellen, um den VPN-Endpunkt auf Ihrem Gateway zu verwenden. Wenn Sie strongSwan nicht verwenden wollen, können Sie die [VPN-Konnektivität direkt mit VRA einrichten](/docs/containers?topic=containers-vpn#vyatta).
 {: shortdesc}
 
 <p>

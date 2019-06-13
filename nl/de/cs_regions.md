@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # Regionen und Zonen
 {: #regions-and-zones}
 
@@ -34,12 +33,12 @@ Eine Region ist ein bestimmter Standort, an dem Sie Apps, Services und andere {{
 
 _{{site.data.keyword.containerlong_notm}}-Regionen und -Zonen_
 
-{{site.data.keyword.Bluemix_notm}} wird weltweit gehostet. Die Services in {{site.data.keyword.Bluemix_notm}} sind möglicherweise global verfügbar, oder aber nur innerhalb einer bestimmten Region. Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} erstellen, verbleiben seine Ressourcen in der Region, in der Sie den Cluster bereitgestellt haben.
+ {{site.data.keyword.Bluemix_notm}} wird weltweit gehostet. Die Services in {{site.data.keyword.Bluemix_notm}} sind möglicherweise global verfügbar, oder aber nur innerhalb einer bestimmten Region. Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} erstellen, verbleiben seine Ressourcen in der Region, in der Sie den Cluster bereitgestellt haben.
 
-Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
+ Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
 {: note}
 
-| {{site.data.keyword.containerlong_notm}}-Region | Entspricht {{site.data.keyword.Bluemix_notm}}-Standort |
+ | {{site.data.keyword.containerlong_notm}}-Region | Entspricht {{site.data.keyword.Bluemix_notm}}-Standort |
 | --- | --- |
 | Asien-Pazifik (nur Standardcluster) | Tokio |
 | Asien-Pazifik (Süden) | Sydney |
@@ -49,7 +48,7 @@ Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containe
 | Vereinigte Staaten (Süden) | Dallas |
 {: caption="Unterstützte Kubernetes-Serviceregionen und entsprechende IBM Cloud-Standorte." caption-side="top"}
 
-<br />
+ <br />
 
 
 ## Standorte in {{site.data.keyword.Bluemix_notm}}
@@ -101,7 +100,7 @@ Select a region (or press enter to skip):
 Enter a number> 5
 Targeted region us-south
 
-                      
+
 API endpoint:      https://cloud.ibm.com   
 Region:            us-south   
 User:              first.last@email.com   
@@ -127,7 +126,7 @@ Mithilfe von {{site.data.keyword.containerlong_notm}}-Regionen können Sie Kuber
 Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
 {: note}
 
-Unterstützte {{site.data.keyword.containerlong_notm}}-Regionen:
+ Unterstützte {{site.data.keyword.containerlong_notm}}-Regionen:
   * Asien-Pazifik (nur Standardcluster)
   * Asien-Pazifik (Süden)
   * Mitteleuropa
@@ -160,13 +159,13 @@ Um schnell zwischen Regionen zu wechseln, führen Sie den Befehl [`ibmcloud ks r
 Um mit der {{site.data.keyword.containerlong_notm}}-API interagieren zu können, müssen Sie den Befehlstyp eingeben und an den globalen Endpunkt die Zeichenfolge `/v1/command` anfügen.
 {:shortdesc}
 
-Beispiel für die API `GET /clusters`:
+ Beispiel für die API `GET /clusters`:
   ```
   GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
-</br>
+ </br>
 
 Um die API mit dem globalen Endpunkt zu verwenden, übergeben Sie in allen Ihren Anforderungen den Regionsnamen im Header vom Typ `X-Region`. Führen Sie den Befehl `ibmcloud ks regions` aus, um die verfügbaren Regionen aufzuführen.
 {: tip}
@@ -179,15 +178,15 @@ Die Dokumentation zu den API-Befehlen finden Sie unter [https://containers.cloud
 Zonen sind physische Rechenzentren, die in einer {{site.data.keyword.Bluemix_notm}}-Region verfügbar sind. Regionen sind ein konzeptionelles Hilfsmittel, um Zonen zu organisieren. Sie können Zonen (Rechenzentren) in verschiedenen Ländern umfassen. Die folgende Tabelle zeigt die pro Region verfügbaren Zonen.
 {:shortdesc}
 
-* **Metropole mit mehreren Zonen:** Wenn Sie einen Cluster in einer Metropole mit mehreren Zonen **mit Ausnahme von Sydney (Asien-Pazifik - Süden)** erstellen, werden die Replikate Ihres hoch verfügbaren Kubernetes-Masters automatisch auf Zonen verteilt. Sie haben die Option, Ihre Workerknoten auf Zonen zu verteilen, um Ihre App gegen Zonenausfall zu schützen.
-* **Stadt mit einzelner Zone:** Wenn Sie einen Cluster in einer Stadt mit nur einer Zone erstellen, können Sie mehrere Workerknoten erstellen, diese jedoch nicht auf mehrere Zonen verteilen. Der hoch verfügbare Master enthält drei Replikate auf separaten Hosts, ist jedoch nicht über mehrere Zonen verteilt.
+* **Standort in einer Mehrzonen-Metropole**: Wenn Sie einen Cluster in einer Mehrzonen-Metropole erstellen, werden die Replikate Ihres hoch verfügbaren Kubernetes-Masters automatisch auf Zonen verteilt. Sie haben die Option, Ihre Workerknoten auf Zonen zu verteilen, um Ihre App gegen Zonenausfall zu schützen.
+* **Standort mit nur einer Zone**: Wenn Sie einen Cluster an einem Standort mit nur einer Zone erstellen, können Sie mehrere Workerknoten erstellen, diese jedoch nicht auf mehrere Zonen verteilen. Der hoch verfügbare Master enthält drei Replikate auf separaten Hosts, ist jedoch nicht über mehrere Zonen verteilt.
 
-<table summary="Die Tabelle zeigt die nach Regionen verfügbaren Zonen. Die Tabellenzeilen enthalten von links nach rechts die Region in der ersten Spalte, die Metropolen mit mehreren Zonen in der zweiten Spalte und die Einzelzonenstädte in der dritten Spalte.">
+<table summary="Die Tabelle zeigt die nach Regionen verfügbaren Zonen. Die Tabellenzeilen enthalten von links nach rechts die Region in der ersten Spalte, die Metropolen mit mehreren Zonen in der zweiten Spalte und die Standorte mit nur einer Zone in der dritten Spalte.">
 <caption>Verfügbare Städte mit einer und mehreren Zonen nach Region.</caption>
   <thead>
   <th>Region</th>
-  <th>Metropole mit mehreren Zonen</th>
-  <th>Stadt mit einzelner Zone</th>
+  <th>Standort in einer Mehrzonen-Metropole</th>
+  <th>Standort mit nur einer Zone</th>
   </thead>
   <tbody>
     <tr>
@@ -257,10 +256,10 @@ In einem Mehrzonencluster wird der Masterknoten in einer auf mehrere Zonen ausge
 1.  Die Workerknoten verteilen sich auf mehrere Zonen in einer Region, um mehr Verfügbarkeit für Ihren Cluster bereitzustellen. Der Master verbleibt in derselben mehrzonenfähigen Zone, in der Sie den Cluster bereitgestellt haben. Wenn Sie lokale Container-Orchestrierungsaktionen (z. B. `kubectl`-Befehle) einleiten, werden die Informationen zwischen Ihrem Master- und Workerknoten über einen regionalen Endpunkt ausgetauscht.
 
 2.  Andere Clusterressourcen, z. B. Speicher-, Netz- und Rechenressourcen oder Apps, die in Pods ausgeführt werden, variieren in der Art und Weise, wie sie in den Zonen in Ihrem Mehrzonencluster bereitgestellt werden. Weitere Informationen finden Sie in den folgenden Abschnitten:
-    * [Dateispeicher](/docs/containers?topic=containers-file_storage#add_file) und [Blockspeicher](/docs/containers?topic=containers-block_storage#add_block) in Mehrzonenclustern einrichten
-    * [Öffentlichen oder privaten Zugriff auf eine App mithilfe eines LoadBalancer-Service in einem Mehrzonencluster aktivieren](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-    * [Netzverkehr mithilfe von Ingress verwalten](/docs/containers?topic=containers-ingress#planning)
-    * [Verfügbarkeit Ihrer App erhöhen](/docs/containers?topic=containers-app#increase_availability)
+  * [Dateispeicher](/docs/containers?topic=containers-file_storage#add_file) und [Blockspeicher](/docs/containers?topic=containers-block_storage#add_block) in Mehrzonenclustern einrichten
+  * [Öffentlichen oder privaten Zugriff auf eine App mithilfe eines LoadBalancer-Service in einem Mehrzonencluster aktivieren](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+  * [Netzverkehr mithilfe von Ingress verwalten](/docs/containers?topic=containers-ingress#planning)
+  * [Verfügbarkeit Ihrer App erhöhen](/docs/containers?topic=containers-app#increase_availability)
 
 3.  Wenn Sie Clusterverwaltungsaktionen initiieren, wie z. B. die Verwendung von [`ibmcloud ks`-Befehlen](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), werden grundlegende Informationen (wie Name, ID, Benutzer, Befehl) über einen regionalen Endpunkt weitergeleitet.
 

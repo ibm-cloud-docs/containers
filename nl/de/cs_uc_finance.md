@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -43,7 +43,7 @@ Warum {{site.data.keyword.Bluemix_notm}}: Zum Verbessern der Risikoanalyse setzt
 * [Mehrere Regionen für Hochverfügbarkeit](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Containersicherheit und -isolierung](/docs/containers?topic=containers-security#security)
-* [{{site.data.keyword.cloudant}} zum Beibehalten und Synchronisieren von Daten für Apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} zum Beibehalten und Synchronisieren von Daten für Apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK für Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **Die Lösung**
@@ -87,16 +87,16 @@ Diese Lösung bietet den unmittelbaren Vorteil der Skalierbarkeit. Mithilfe der 
 
 {{site.data.keyword.SecureGateway}} wird zum Erstellen einer sicheren Pipeline zu lokalen Datenbanken und Dokumenten für Apps verwendet, die zur Ausführung in {{site.data.keyword.containerlong_notm}} erneut gehostet werden.
 
-{{site.data.keyword.cos_full_notm}} ist für die Speicherung aller unformatiertes Dokumente und Daten vorgesehen, die weitergeleitet werden. Bei Monte-Carlo-Simulationen wird eine Workflow-Pipeline an die Position versetzt, an der Simulationsdaten in strukturierten Eingabedateien enthalten sind, die in {{site.data.keyword.cos_full_notm}} gespeichert sind. Ein Auslöser zum Starten der Simulation skaliert die Rechenservices in {{site.data.keyword.containerlong_notm}}, um die Eingabedaten für die Simulationsverarbeitung in N Ereignisbuckets aufzuteilen. Von {{site.data.keyword.containerlong_notm}} werden automatisch die N zugehörigen Serviceausführungen skaliert, die Zwischenergebnisse werden in {{site.data.keyword.cos_full_notm}} geschrieben. Diese Ergebnisse werden von weiteren {{site.data.keyword.containerlong_notm}}-Rechenservices zur Erstellung der endgültigen Ergebnisse verarbeitet.
+{{site.data.keyword.cos_full_notm}} ist für die Speicherung aller unformatiertes Dokumente und Daten vorgesehen, die weitergeleitet werden. Bei Monte-Carlo-Simulationen wird eine Workflow-Pipeline an die Position versetzt, an der Simulationsdaten in Strukturdateien enthalten sind, die in {{site.data.keyword.cos_full_notm}} gespeichert sind. Ein Auslöser zum Starten der Simulation skaliert die Rechenservices in {{site.data.keyword.containerlong_notm}}, um die Daten der Daten für die Simulationsverarbeitung in N Ereignisbuckets aufzuteilen. Von {{site.data.keyword.containerlong_notm}} werden automatisch die N zugehörigen Serviceausführungen skaliert, die Zwischenergebnisse werden in {{site.data.keyword.cos_full_notm}} geschrieben. Diese Ergebnisse werden von weiteren {{site.data.keyword.containerlong_notm}}-Rechenservices zur Erstellung der endgültigen Ergebnisse verarbeitet.
 
-{{site.data.keyword.cloudant}} ist eine moderne NoSQL-Datenbank, die für viele datengesteuerte Anwendungsfälle genutzt werden kann: von Schlüsselwerten bis zu komplexen dokumentorientierten Datenspeichern und Abfragen. Um die zunehmenden Regeln für Berichte zur Einhaltung gesetzlicher Bestimmungen und die Regeln für Berichte zur Unternehmensführung zu verwalten, verwendet das Hypothekenunternehmen {{site.data.keyword.cloudant}} zum Speichern von Dokumenten, die unbearbeiteten Dateneingaben mit gesetzlichen Bestimmungen zugeordnet sind, die vom Unternehmen empfangen werden. In {{site.data.keyword.containerlong_notm}} werden Rechenprozesse zum Kompilieren, Verarbeiten und Veröffentlichen der Daten in unterschiedlichen Berichtsformaten ausgelöst. Zwischenergebnisse für die Berichte werden als {{site.data.keyword.cloudant}}-Dokumente gespeichert, sodass vorlagengesteuerte Prozesse zum Erstellen der erforderlichen Berichte verwendet werden können.
+{{site.data.keyword.cloudant}} ist eine moderne NoSQL-Datenbank, die für viele datengesteuerte Anwendungsfälle genutzt werden kann: von Schlüsselwerten bis zu komplexen dokumentorientierten Datenspeichern und Abfragen. Um die zunehmenden Regeln für Berichte zur Einhaltung gesetzlicher Bestimmungen und die Regeln für Berichte zur Unternehmensführung zu verwalten, verwendet das Hypothekenunternehmen {{site.data.keyword.cloudant}} zum Speichern von Dokumenten, die unbearbeiteten Daten mit gesetzlichen Bestimmungen zugeordnet sind, die vom Unternehmen empfangen werden. In {{site.data.keyword.containerlong_notm}} werden Rechenprozesse zum Kompilieren, Verarbeiten und Veröffentlichen der Daten in unterschiedlichen Berichtsformaten ausgelöst. Zwischenergebnisse für die Berichte werden als {{site.data.keyword.cloudant}}-Dokumente gespeichert, sodass vorlagengesteuerte Prozesse zum Erstellen der erforderlichen Berichte verwendet werden können.
 
 **Ergebnisse**
 
 * Komplexe Finanzsimulationen werden jetzt 25 % schneller durchgeführt, als dies vorher mit den vorhandenen lokalen Systemen möglich war.
 * Die Zeit für die Bereitstellung verbesserte sich von vorher sechs bis neun Monate auf durchschnittlich ein bis drei Wochen. Ausschlaggebend für diese Verbesserung ist der durch {{site.data.keyword.containerlong_notm}} mögliche strukturiert gesteuerte Prozess für die Lastverlaufssteuerung der App-Container sowie ihre Ersetzung durch neuere Versionen. Wenn Fehler berichtet werden, können die Probleme - wie zum Beispiel die Genauigkeit - schnell behoben werden.
 * Die Kosten für die Berichterstellung zur Einhaltung gesetzlicher Vorschriften werden durch eine konsistente, skalierbare Menge an Speicher- und Rechenservices reduziert werden, die mit {{site.data.keyword.containerlong_notm}} und {{site.data.keyword.cloudant}} bereitgestellt werden.
-* Nach und nach wurde die Architektur der ursprünglichen Apps, die anfangs mit Lift-and-shift in der Cloud bereitgestellt wurden, in kooperative Microservices geändert, die mithilfe von {{site.data.keyword.containerlong_notm}} ausgeführt werden. Hierdurch wurden die Entwicklung beschleunigt, die Bereitstellungszeit verkürzt und mehr Innovation ermöglicht, weil das Experimentieren einfach geworden war. Außerdem wurden innovative Apps mit neueren Versionen der Mikroservices freigegeben, um die Vorteile der Markt- und Geschäftsbedingungen (sogenannte situationsbezogene Apps und Mikroservices) zu nutzen.
+* Nach und nach wurde die Architektur der ursprünglichen Apps, die anfangs mit Lift-and-shift in der Cloud bereitgestellt wurden, in kooperative Microservices geändert, die mithilfe von {{site.data.keyword.containerlong_notm}} ausgeführt werden. Hierdurch wurden die Entwicklung beschleunigt, die Bereitstellungszeit verkürzt und mehr Innovation ermöglicht, weil das Experimentieren einfach geworden war. Außerdem wurden innovative Apps mit neueren Versionen der Microservices freigegeben, um die Vorteile der Markt- und Geschäftsbedingungen (sogenannte situationsbezogene Apps und Microservices) zu nutzen.
 
 ## Payment-Technology-Unternehmen vervierfacht Entwicklerproduktivität durch Bereitstellung KI-fähiger Tools für Partner
 {: #uc_payment_tech}

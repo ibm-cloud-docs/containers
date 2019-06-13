@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -33,9 +33,9 @@ subcollection: containers
 {:shortdesc}
 
 **Unterstützte Kubernetes-Versionen**:
-*   Aktuelle: 1.13.4
-*   Standard: 1.12.6
-*   Sonstige: 1.11.8
+*   Aktuelle: 1.13.5
+*   Standard: 1.12.7
+*   Sonstige: 1.11.9
 
 **Veraltete und nicht unterstützte Kubernetes-Versionen:**
 *   Veraltet: 1.10
@@ -43,9 +43,9 @@ subcollection: containers
 
 </br>
 
-**Veraltete Versionen:** Wenn Cluster unter einer veralteten Kubernetes-Version ausgeführt werden, haben Sie mindestens 30 Tage Zeit, um eine unterstützte Kubernetes-Version zu überprüfen und auf diese neuere Version zu aktualisieren, bevor die veraltete Version nicht mehr unterstützt wird. Während des Zeitraums der Einstellung der Unterstützung ist Ihr Cluster noch funktionstüchtig, muss jedoch möglicherweise auf ein unterstütztes Release aktualisiert werden, um Sicherheitslücken zu schließen. Sie können keine neuen Cluster erstellen, die die veraltete Version verwenden.
+**Veraltete Versionen:** Wenn Cluster unter einer veralteten Kubernetes-Version ausgeführt werden, haben Sie mindestens 30 Tage Zeit, um eine unterstützte Kubernetes-Version zu überprüfen und auf diese neuere Version zu aktualisieren, bevor die veraltete Version nicht mehr unterstützt wird. Während des Zeitraums der Einstellung der Unterstützung ist Ihr Cluster noch funktionstüchtig, muss jedoch möglicherweise auf ein unterstütztes Release aktualisiert werden, um Sicherheitslücken zu schließen. Sie können z. B. Workerknoten hinzufügen und neu laden, aber keine neuen Cluster erstellen, die die veraltete Version verwenden.
 
-**Nicht unterstützte Versionen:** Wenn Ihre Cluster eine Kubernetes-Version ausführen, die nicht unterstützt wird, prüfen Sie die folgenden potenziellen Auswirkungen von Aktualisierungen und [aktualisieren Sie dann den Cluster](/docs/containers?topic=containers-update#update) sofort, damit Sie weiterhin wichtige Sicherheitsupdates und Support erhalten. Nicht unterstützte Cluster können keine Workerknoten hinzufügen oder vorhandene Workerknoten erneut laden. Sie können ermitteln, ob Ihr Cluster **nicht unterstützt wird**, indem Sie das Statusfeld (**State**) in der Ausgabe des Befehls `ibmcloud ks clusters` oder in der [{{site.data.keyword.containerlong_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/containers-kubernetes/clusters) prüfen.
+**Nicht unterstützte Versionen:** Wenn Ihre Cluster eine Kubernetes-Version ausführen, die nicht unterstützt wird, prüfen Sie die folgenden potenziellen Auswirkungen von Aktualisierungen und [aktualisieren Sie dann den Cluster](/docs/containers?topic=containers-update#update) sofort, damit Sie weiterhin wichtige Sicherheitsupdates und Support erhalten. Nicht unterstützte Cluster können keine Workerknoten hinzufügen oder vorhandene Workerknoten erneut laden. Sie können ermitteln, ob Ihr Cluster **nicht unterstützt wird**, indem Sie das Statusfeld (**State**) in der Ausgabe des Befehls `ibmcloud ks clusters` oder in der [{{site.data.keyword.containerlong_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/clusters) prüfen.
 
 Wenn Sie warten, bis Ihr Cluster gegenüber der unterstützten Version drei oder mehr Nebenversionen zurückliegt, müssen Sie die Aktualisierung erzwingen. Dies kann zu unerwarteten Ergebnissen oder Fehlern führen. Das Aktualisieren von Version 1.7 oder 1.8 auf Version 1.11 oder höher schlägt fehl. Für andere Versionen, zum Beispiel wenn Ihr Cluster Kubernetes Version 1.9 ausführt, gilt, dass bei einer Aktualisierung des Masters direkt auf Version 1.12 oder höher für die meisten Pods ein Fehler auftritt, wobei die Pods in einen Status wie `MatchNodeSelector`, `CrashLoopBackOff` oder `ContainerCreating` wechseln, bis Sie die Workerknoten auf dieselbe Version aktualisieren. Zur Vermeidung dieses Problems aktualisieren Sie den Cluster zunächst auf eine unterstützte Version, die der aktuellen Version weniger als drei Nebenversionen voraus ist, wie zum Beispiel die Versionen 1.9 bis 1.11, und aktualisieren anschließend auf Version 1.12.<br><br>Nachdem Sie den Cluster auf eine unterstützte Version aktualisiert haben, kann Ihr Cluster den normalen Betrieb wieder aufnehmen und weiterhin Unterstützung erhalten.
 {: important}
@@ -62,7 +62,7 @@ kubectl version  --short | grep -i server
 Beispielausgabe:
 
 ```
-Server Version: v1.12.6+IKS
+Serverversion: V1.12.7+IKS
 ```
 {: screen}
 
@@ -154,7 +154,7 @@ Datumsangaben mit einem Kreuzzeichen (`†`) sind vorläufig und können sich ä
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="Diese Version ist veraltet."/></td>
   <td>[1.10](#cs_v110)</td>
   <td>01. Mai 2018</td>
-  <td>30. April 2019 `†`</td>
+  <td>15. Mai 2019</td>
 </tr>
 <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Diese Version wird nicht unterstützt."/></td>
@@ -252,7 +252,7 @@ In der folgenden Tabelle sind die Aktionen aufgeführt, die Sie ausführen müss
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>Der Befehl `kubectl get componentstatuses` meldet den Status einiger Kubernetes-Masterkomponenten nicht korrekt, weil diese Komponenten vom Kubernetes-API-Server aus nicht mehr zugänglich sind, da jetzt `localhost` und die unsicheren Ports (HTTP-Ports) inaktiviert sind. Seit der Einführung hoch verfügbarer Master (HA-Master) in Kubernetes Version 1.10 wird jeder Kubernetes-Master mit mehreren Instanzen von `apiserver`, `controller-manager`, `scheduler` und `etcd` eingerichtet. Prüfen Sie den Clusterstatus stattdessen über die [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/containers-kubernetes/landing) oder mithilfe des [Befehls](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get) `ibmcloud ks cluster-get`.</td>
+<td>Der Befehl `kubectl get componentstatuses` meldet den Status einiger Kubernetes-Masterkomponenten nicht korrekt, weil diese Komponenten vom Kubernetes-API-Server aus nicht mehr zugänglich sind, da jetzt `localhost` und die unsicheren Ports (HTTP-Ports) inaktiviert sind. Seit der Einführung hoch verfügbarer Master (HA-Master) in Kubernetes Version 1.10 wird jeder Kubernetes-Master mit mehreren Instanzen von `apiserver`, `controller-manager`, `scheduler` und `etcd` eingerichtet. Prüfen Sie den Clusterstatus stattdessen über die [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/landing) oder mit dem [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get) `ibmcloud ks cluster-get`.</td>
 </tr>
 <tr>
 <tr>
@@ -324,7 +324,7 @@ In der folgenden Tabelle sind die Aktionen aufgeführt, die Sie ausführen müss
 </tr>
 <tr>
 <td>Rollenbindungen für das Standardservicekonto (`default`) der `kube-system`-Instanz</td>
-<td>Das Standardservicekonto (`default`) der `kube-system`-Instanz hat keinen Clusteradministratorzugriff (**cluster-admin**) mehr auf die Kubernetes API. Wenn Sie Features oder Add-ons wie [Helm](/docs/containers?topic=containers-integrations#helm) bereitstellen, die Zugriff benötigen, um in Ihrem Cluster arbeiten zu können, richten Sie ein [Servicekonto ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) ein. Wenn Sie mehr Zeit für die Erstellung und Konfiguration einzelner Servicekonten mit den entsprechenden Berechtigungen benötigen, können Sie der Rolle **cluster-admin** die folgende Clusterrollenbindung temporär zuordnen: `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
+<td>Das Standardservicekonto (`default`) der `kube-system`-Instanz hat keinen Clusteradministratorzugriff (**cluster-admin**) mehr auf die Kubernetes API. Wenn Sie Features oder Add-ons wie [Helm](/docs/containers?topic=containers-helm#public_helm_install) bereitstellen, die Zugriff benötigen, um in Ihrem Cluster arbeiten zu können, richten Sie ein [Servicekonto ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) ein. Wenn Sie mehr Zeit für die Erstellung und Konfiguration einzelner Servicekonten mit den entsprechenden Berechtigungen benötigen, können Sie der Rolle **cluster-admin** die folgende Clusterrollenbindung temporär zuordnen: `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
 </tr>
 </tbody>
 </table>
@@ -348,7 +348,7 @@ In der folgenden Tabelle sind die Aktionen aufgeführt, die Sie ausführen müss
 <td>APIs für Kubernetes</td>
 <td>Die Kubernetes-API ersetzt veraltete APIs wie folgt:
 <ul><li><strong>apps/v1</strong>: Die Kubernetes-API `apps/v1` ersetzt die APIs `apps/v1beta1` und `apps/v1alpha`. Die API `apps/v1` ersetzt außderm die API `extensions/v1beta1` für die Ressourcen `daemonset`, `deployment`, `replicaset` und `statefulset`. Das Kubernetes-Projekt wird nicht mehr verwendet und die Unterstützung für frühere APIs aus dem Kubernetes-API-Server `apiserver` und dem Kubernetes-Client `kubectl` wird ausgephast.</li>
-<li><strong>networking.k8s.io/v1</strong>: Die API `networking.k8s.io/v1` ersetzt die API `extensions/v1beta1` für Ressourcen `networkpolicy`.</li>
+<li><strong>networking.k8s.io/v1</strong>: Die API `networking.k8s.io/v1` ersetzt die API `extensions/v1beta1` für Netzrichtlinien-Ressourcen.</li>
 <li><strong>policy/v1beta1</strong>: Die API `policy/v1beta1` ersetzt die API `extensions/v1beta1` für Ressourcen `podsecuritypolicy`.</li></ul>
 <br><br>Aktualisieren Sie alle YAML-Felder `apiVersion` zur Verwendung der entsprechenden Kubernetes-API, bevor die veralteten APIs nicht mehr unterstützt werden. Überprüfen Sie außerdem die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) auf Änderungen im Zusammenhang mit `apps/v1` wie beispielsweise die folgenden.
 <ul><li>Nach dem Erstellen einer Bereitstellung ist das Feld `.spec.selector` nicht veränderbar.</li>
@@ -364,7 +364,7 @@ In der folgenden Tabelle sind die Aktionen aufgeführt, die Sie ausführen müss
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>Der Befehl `kubectl get componentstatuses` meldet den Status einiger Kubernetes-Masterkomponenten nicht korrekt, weil diese Komponenten vom Kubernetes-API-Server aus nicht mehr zugänglich sind, da jetzt `localhost` und die unsicheren Ports (HTTP-Ports) inaktiviert sind. Seit der Einführung hoch verfügbarer Master (HA-Master) in Kubernetes Version 1.10 wird jeder Kubernetes-Master mit mehreren Instanzen von `apiserver`, `controller-manager`, `scheduler` und `etcd` eingerichtet. Prüfen Sie den Clusterstatus stattdessen über die [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/containers-kubernetes/landing) oder mithilfe des [Befehls](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get) `ibmcloud ks cluster-get`.</td>
+<td>Der Befehl `kubectl get componentstatuses` meldet den Status einiger Kubernetes-Masterkomponenten nicht korrekt, weil diese Komponenten vom Kubernetes-API-Server aus nicht mehr zugänglich sind, da jetzt `localhost` und die unsicheren Ports (HTTP-Ports) inaktiviert sind. Seit der Einführung hoch verfügbarer Master (HA-Master) in Kubernetes Version 1.10 wird jeder Kubernetes-Master mit mehreren Instanzen von `apiserver`, `controller-manager`, `scheduler` und `etcd` eingerichtet. Prüfen Sie den Clusterstatus stattdessen über die [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/landing) oder mit dem [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get) `ibmcloud ks cluster-get`.</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
@@ -496,6 +496,10 @@ In der folgenden Tabelle sind die Aktionen aufgeführt, die Sie ausführen müss
 Das Containerprotokollverzeichnis wurde von `/var/lib/docker/` in `/var/log/pods/` geändert. Wenn Sie eine eigene Lösung für die Protokollierung verwenden, die das zuvor angegebene Verzeichnis überwacht, ändern Sie es entsprechend.</td>
 </tr>
 <tr>
+<td>Unterstützung für {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)</td>
+<td>Cluster, die Kubernetes Version 1.11 oder höher ausführen, unterstützen IAM-[Zugriffsgruppen](/docs/iam?topic=iam-groups#groups) und -[Service-IDs](/docs/iam?topic=iam-serviceids#serviceids). Sie können diese Funktionen nun verwenden, um den [Zugriff auf Ihre Cluster zu autorisieren](/docs/containers?topic=containers-users#users).</td>
+</tr>
+<tr>
 <td>Aktualisierung der Kubernetes-Konfiguration</td>
 <td>Die OpenID Connect-Konfiguration für den Kubernetes-API-Server des Clusters wurde zur Unterstützung von {{site.data.keyword.Bluemix_notm}} Identity and Access Management-Zugriffsgruppen aktualisiert. Folglich müssen Sie die Kubernetes-Konfiguration Ihres Clusters nach der Masteraktualisierung auf Kubernetes Version 1.11 aktualisieren, indem Sie folgenden Befehl ausführen: `ibmcloud ks cluster-config --cluster <clustername_oder_-id>`. Mit diesem Befehl wird die Konfiguration auf die Rollenbindungen im Namensbereich `default` angewendet.<br><br>Wenn Sie die Konfiguration nicht aktualisieren, schlagen die Clusteraktionen mit der folgenden Fehlernachricht fehl: `You must be logged in to the server (Unauthorized).`</td>
 </tr>
@@ -542,7 +546,7 @@ Sie können prüfen, ob Ihr Cluster eine Masterkonfiguration mit hoher Verfügba
 Wenn Sie eine Firewall oder angepasste Calico-Host-Netzrichtlinien verwenden, um den ausgehenden Netzverkehr (Egress) von Ihren Workerknoten zu steuern, lassen Sie ausgehenden Datenverkehr zu den Ports und IP-Adressen für alle Zonen in der Region zu, in der sich Ihr Cluster befindet. Siehe [Zugriff des Clusters auf Infrastrukturressourcen und andere Services ermöglichen](/docs/containers?topic=containers-firewall#firewall_outbound).
 
 <br>
-**Reservieren von Host-Ports `2040` und `2041` auf Ihren Workerknoten**:</br>
+**Reservieren der Host-Ports `2040` und `2041` für Ihre Workerknoten**:</br>
 {: #ha-ports}
 Um Zugriff auf den Cluster-Master in einer Hochverfügbarkeitskonfiguration zuzulassen, müssen die Host-Ports `2040` und `2041` auf allen Workerknoten verfügbar bleiben.
 * Aktualisieren Sie alle Pods, für die `hostPort` auf `2040` oder auf `2041` gesetzt ist, um andere Ports zu verwenden.
@@ -551,9 +555,25 @@ Um Zugriff auf den Cluster-Master in einer Hochverfügbarkeitskonfiguration zuzu
 Wenn Sie prüfen möchten, ob Ihre Pods derzeit den Port `2040` oder `2041` verwenden, wählen Sie Ihren Cluster als Ziel aus und setzen Sie den folgenden Befehl ab.
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
+
+Wenn Sie bereits über eine HA-Masterkonfiguration verfügen, werden Ihnen die Ergebnisse für `ibm-master-proxy-*` im Namensbereich `kube-system` angezeigt, wie im folgenden Beispiel zu sehen. Wenn andere Pods zurückgegeben werden, aktualisieren Sie deren Ports.
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
+
 
 <br>
 **Verwenden der `kubernetes`-Service-Cluster-IP oder -Domäne für den clusterinternen Zugriff auf den Master**:</br>
@@ -690,7 +710,7 @@ Für Cluster, auf denen Kubernetes Version 1.11 oder höher ausgeführt wird, wi
 Beispiele für Situationen, in denen Sie Docker als Containerlaufzeit verwenden:
 *  Wenn Sie direkt über privilegierte Container auf die Docker-Engine oder -API zugreifen, aktualisieren Sie Ihre Pods, um `containerd` als Laufzeit zu unterstützen. Sie können beispielsweise das Docker-Socket direkt aufrufen, um Container zu starten oder andere Docker-Operationen auszuführen. Das Docker-Socket hat sich von `/var/run/docker.sock` in `/run/containerd/containerd.sock` geändert. Das Protokoll, das im Socket `containerd` verwendet wird, unterscheidet sich leicht von dem in Docker. Versuchen Sie, Ihre App auf das Socket `containerd` zu aktualisieren. Wenn Sie das Docker-Socket weiterhin verwenden möchten, finden Sie weitere Informationen unter [Docker-inside-Docker (DinD) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://hub.docker.com/_/docker/).
 *  Einige Add-ons von Drittanbietern (wie z. B. Protokollierungs- und Überwachungstools), die Sie in Ihrem Cluster installieren, verwenden möglicherweise die Docker-Engine. Klären Sie mit Ihrem Provider, ob die Tools mit 'containerd' kompatibel sind. Mögliche Anwendungsfälle sind:
-   - Ihr Protokollierungstool verwendet unter Umständen das Verzeichnis `/var/log/pods/<pod_uuid>/<container_name>/*.log` des Containers `stderr/stdout`, um auf Protokolle zuzugreifen. In Docker ist dieses Verzeichnis eine symbolische Verbindung zu `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log`, während Sie in `containerd` direkt, ohne eine symbolische Verbindung, auf das Verzeichnis zugreifen.
+   - Ihr Protokollierungstool verwendet unter Umständen das Verzeichnis `/var/log/pods/<pod_uuid>/<container_name>/*.log` des Containers `stderr/stdout` für den Zugriff auf Protokolle. In Docker ist dieses Verzeichnis eine symbolische Verbindung zu `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log`, wohingegen Sie in `containerd` direkt, ohne symbolische Verbindung, auf das Verzeichnis zugreifen.
    - Ihr Überwachungstool greift direkt auf das Docker-Socket zu. Das Docker-Socket hat sich von `/var/run/docker.sock` in `/run/containerd/containerd.sock` geändert.
 
 <br>
@@ -757,7 +777,7 @@ Sie müssen zunächst sicherstellen, dass vom Cluster-Master und auf allen Worke
 Überprüfen Sie Änderungen, die Sie möglicherweise bei einer Aktualisierung von der vorherigen Version auf die Kubernetes-Version 1.10 vornehmen müssen.
 {: shortdesc}
 
-Kubernetes Version 1.10 ist veraltet und wird ab dem 30. April 2019 nicht mehr unterstützt (vorläufig). [Überprüfen Sie die mögliche Auswirkung](/docs/containers?topic=containers-cs_versions#cs_versions) jeder einzelnen Aktualisierung einer Kubernetes-Version und [aktualisieren Sie Ihre Cluster](/docs/containers?topic=containers-update#update) dann sofort mindestens auf Version 1.11.
+Kubernetes Version 1.10 ist veraltet und wird ab dem 15. Mai 2019 nicht mehr unterstützt. [Überprüfen Sie die mögliche Auswirkung](/docs/containers?topic=containers-cs_versions#cs_versions) jeder einzelnen Aktualisierung einer Kubernetes-Version und [aktualisieren Sie Ihre Cluster](/docs/containers?topic=containers-update#update) dann sofort mindestens auf Version 1.11.
 {: deprecated}
 
 Bevor Sie eine erfolgreiche Aktualisierung auf Kubernetes 1.10 vornehmen können, müssen Sie zunächst die im Abschnitt mit den [Vorbereitungen zur Aktualisierung auf Calico Version 3](#110_calicov3) aufgeführten Schritte durchführen.
@@ -881,7 +901,7 @@ Sie können prüfen, ob Ihr Cluster eine Masterkonfiguration mit hoher Verfügba
 Wenn Sie eine Firewall oder angepasste Calico-Host-Netzrichtlinien verwenden, um den ausgehenden Netzverkehr (Egress) von Ihren Workerknoten zu steuern, lassen Sie ausgehenden Datenverkehr zu den Ports und IP-Adressen für alle Zonen in der Region zu, in der sich Ihr Cluster befindet. Siehe [Zugriff des Clusters auf Infrastrukturressourcen und andere Services ermöglichen](/docs/containers?topic=containers-firewall#firewall_outbound).
 
 <br>
-**Reservieren von Host-Ports `2040` und `2041` auf Ihren Workerknoten**:</br>
+**Reservieren der Host-Ports `2040` und `2041` für Ihre Workerknoten**:</br>
 {: #110_ha-ports}
 Um Zugriff auf den Cluster-Master in einer Hochverfügbarkeitskonfiguration zuzulassen, müssen die Host-Ports `2040` und `2041` auf allen Workerknoten verfügbar bleiben.
 * Aktualisieren Sie alle Pods, für die `hostPort` auf `2040` oder auf `2041` gesetzt ist, um andere Ports zu verwenden.
@@ -890,9 +910,24 @@ Um Zugriff auf den Cluster-Master in einer Hochverfügbarkeitskonfiguration zuzu
 Wenn Sie prüfen möchten, ob Ihre Pods derzeit den Port `2040` oder `2041` verwenden, wählen Sie Ihren Cluster als Ziel aus und setzen Sie den folgenden Befehl ab.
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
+
+Wenn Sie bereits über eine HA-Masterkonfiguration verfügen, werden Ihnen die Ergebnisse für `ibm-master-proxy-*` im Namensbereich `kube-system` angezeigt, wie im folgenden Beispiel zu sehen. Wenn andere Pods zurückgegeben werden, aktualisieren Sie deren Ports.
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
 
 <br>
 **Verwenden der `kubernetes`-Service-Cluster-IP oder -Domäne für den clusterinternen Zugriff auf den Master**:</br>

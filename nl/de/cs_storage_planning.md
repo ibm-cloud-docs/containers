@@ -352,7 +352,7 @@ Die folgende Abbildung zeigt die Optionen, die Sie in {{site.data.keyword.contai
 <tr>
 <td style="text-align:left">Skalierbarkeit</td>
 <td style="text-align:left">Wird automatisch skaliert.</td>
-<td style="text-align:left">Erhöhen Sie die Datenträgerkapazität durch Ändern der Größe des Datenträgers. Zum Erhöhen der Gesamtkapazität der Speicherebene müssen Sie Workerknoten oder fernen Blockspeicher hinzufügen. Beide Szenarios erfordern eine Kapazitätsüberwachung durch den Benutzer.</td>
+<td style="text-align:left">Erhöhen Sie die Datenträgerkapazität durch Ändern der Größe des Datenträgers. Zum Erhöhen der Gesamtkapazität der Speicherebene müssen Sie Workerknoten oder fernen Blockspeicher hinzufügen. Beide Szenarios erfordern eine Kapazitätsüberwachung durch den Benutzer. </td>
 <td style="text-align:left">Wird automatisch skaliert.</td>
 </tr>
 <tr>

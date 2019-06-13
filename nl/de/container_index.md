@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -31,19 +31,8 @@ Mit {{site.data.keyword.containerlong}} sind Sie im Handumdrehen einsatzbereit, 
 
 Ein Container ist ein Standardverfahren zum Packen von Apps mit allen zugehörigen Abhängigkeiten, sodass sich die Apps nahtlos zwischen Umgebungen verlagern lassen. Im Unterschied zu virtuellen Maschinen ist in Containern das Betriebssystem nicht enthalten. Nur App-Code, Laufzeit, Systemtools, Bibliotheken und Einstellungen werden in Container gepackt. Container sind schlanker, leichter portierbar und effizienter als virtuelle Maschinen.
 
-
-Klicken Sie auf eine Option für den Start:
-
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Klicken Sie auf ein Symbol, um schnell Ihre ersten Schritte mit {{site.data.keyword.containerlong_notm}} auszuführen. Klicken Sie in {{site.data.keyword.Bluemix_dedicated_notm}} dieses Symbol, um Ihre Optionen anzuzeigen." style="width:440px;" />
-<map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="Einführung zu Kubernetes-Clustern in {{site.data.keyword.Bluemix_notm}}" title="Einführung zu Kubernetes-Clustern in {{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
-<area href="/docs/containers?topic=containers-cs_cli_install" alt="Installieren Sie die CLIs." title="Installieren Sie die CLIs." shape="rect" coords="155, -1, 289, 210" />
-<area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}}-Cloudumgebung" title="{{site.data.keyword.Bluemix_notm}}-Cloudumgebung" shape="rect" coords="326, -10, 448, 218" />
-</map>
-
-
 ## Einführung in Cluster
-{: #clusters_gs}
+{: #clusters_gs_index}
 
 Sie möchten also eine App in einem Container bereitstellen? Dann müssen Sie als Erstes einen Kubernetes-Cluster erstellen. Kubernetes ist ein Orchestrierungstool für Container. Mit Kubernetes können Entwickler hoch verfügbare Apps im Handumdrehen bereitstellen, indem sie sich die Leistungsstärke und Flexibilität von Clustern zunutze machen.
 {:shortdesc}
@@ -69,14 +58,14 @@ Hervorragend! Sie haben Ihren ersten Kubernetes-Cluster erstellt. Im Folgenden f
 *   **Maschinentyp**: Der kostenlose Cluster verfügt über einen in einem Worker-Pool gruppierten virtuellen Workerknoten mit zwei CPUs, 4 GB Speicher und einer einzelnen 100-GB-SAN-Platte, die für die Apps zur Verfügung steht. Wenn Sie einen Standardcluster erstellen, können Sie zwischen physischen (Bare-Metal-Maschinen) oder virtuellen Maschinen sowie verschiedenen Maschinengrößen wählen.
 *   **Verwalteter Master**: Der Workerknoten wird durch einen dedizierten und hoch verfügbaren {{site.data.keyword.IBM_notm}}-eigenen Kubernetes-Master zentral überwacht und verwaltet, der alle Kubernetes-Ressourcen im Cluster steuert und überwacht. Sie können sich auf Ihren Workerknoten und die darin bereitgestellten Apps konzentrieren, ohne sich Gedanken über die Verwaltung des Masters zu machen.
 *   **Infrastrukturressourcen**: Die für die Ausführung des Clusters erforderlichen Ressourcen, z. B. VLANs und IP-Adressen, werden in einem {{site.data.keyword.IBM_notm}}-eigenen Konto der IBM Cloud-Infrastruktur (SoftLayer) verwaltet. Wenn Sie einen Standardcluster erstellen, verwalten Sie diese Ressourcen in Ihrem eigenen Konto der IBM Cloud-Infrastruktur (SoftLayer). Weitere Informationen zu diesen Ressourcen und den [erforderlichen Berechtigungen](/docs/containers?topic=containers-users#infra_access) erhalten Sie, wenn Sie einen Standardcluster erstellen.
-*   **Weitere Optionen**: Kostenlose Cluster werden innerhalb der von Ihnen ausgewählten Region bereitgestellt. Die Zone können Sie jedoch nicht auswählen. Erstellen Sie einen Standardcluster, um Kontrolle über Zone, Vernetzung und persistenten Speicher zu haben. [Weitere Informationen zu den Vorteilen von kostenlosen und Standardclustern](/docs/containers?topic=containers-cs_ov#cluster_types).
+*   **Weitere Optionen:** Kostenlose Cluster werden innerhalb der von Ihnen ausgewählten Region bereitgestellt, die Zone können Sie allerdings nicht wählen. Erstellen Sie einen Standardcluster, um Kontrolle über Zone, Vernetzung und persistenten Speicher zu haben. [Weitere Informationen zu den Vorteilen von kostenlosen und Standardclustern](/docs/containers?topic=containers-cs_ov#cluster_types).
 
 <br>
 
-**Womit möchten Sie fortfahren? **</br>
+**Womit möchten Sie fortfahren?**</br>
 Probieren Sie verschiedene Dinge mit dem kostenlosen Cluster aus, bevor dieser abläuft.
 
-* Arbeiten Sie das [erste {{site.data.keyword.containerlong_notm}}-Lernprogramm](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) durch, um einen Kubernetes-Cluster zu erstellen, die CLI zu installieren, eine private Registry zu erstellen, die Clusterumgebung einzurichten und einen Service zu Ihrem Cluster hinzuzufügen.
+* Arbeiten Sie das [erste {{site.data.keyword.containerlong_notm}}-Lernprogramm](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) durch, um einen Kubernetes-Cluster zu erstellen, die CLI zu installieren oder das Kubernetes-Terminal zu verwenden, eine private Registry zu erstellen, Ihre Clusterumgebung einzurichten oder Ihrem Cluster einen Service hinzuzufügen.
 * Behalten Sie Ihren Schwung mit dem [zweiten {{site.data.keyword.containerlong_notm}}-Lernprogramm](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial) über die Bereitstellung von Apps im Cluster bei.
 * [Erstellen Sie einen Standardcluster](/docs/containers?topic=containers-clusters#clusters_ui) mit mehreren Knoten für eine höhere Verfügbarkeit.
 

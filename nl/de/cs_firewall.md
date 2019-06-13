@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,9 @@ subcollection: containers
 * [Ausführen von `calicoctl`-Befehlen](#firewall_calicoctl) aus Ihrem lokalen System, wenn die Netzrichtlinien des Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
 * [Zulassen der Kommunikation zwischen dem Kubernetes-Master und den Workerknoten](#firewall_outbound), wenn entweder eine Firewall für die Workerknoten eingerichtet wurde oder wenn die Firewalleinstellungen in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) angepasst wurden.
 * [Zulassen, dass der Cluster über eine Firewall im privaten Netz auf die Ressourcen zugreift](#firewall_private).
+* [Zulassen, dass der Cluster auf Ressourcen zugreift, wenn Calico-Netzrichtlinien den Workerknoten-Egress blockieren](#firewall_calico_egress).
 * [Zugreifen auf den NodePort-Service, Lastausgleichsservice oder Ingress-Service von außerhalb des Clusters](#firewall_inbound).
+* [Zulassen, dass der Cluster auf Services zugreift, die innerhalb oder außerhalb von {{site.data.keyword.Bluemix_notm}} oder lokal ausgeführt werden und durch eine Firewall geschützt sind](#whitelist_workers).
 
 <br />
 
@@ -98,13 +100,6 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
 2. Wenn sich der Cluster in einer anderen Ressourcengruppe als `default` befindet, geben Sie diese Ressourcengruppe als Ziel an. Um die Ressourcengruppen anzuzeigen, zu denen die einzelnen Cluster gehören, führen Sie `ibmcloud ks clusters` aus. **Hinweis:** Sie müssen mindestens über die [Plattformrolle **Anzeigeberechtigter**](/docs/containers?topic=containers-users#platform) für die Ressourcengruppe verfügen.
    ```
    ibmcloud target -g <ressourcengruppenname>
-   ```
-   {: pre}
-
-3. Wählen Sie die Region aus, in der sich Ihr Cluster befindet.
-
-   ```
-   ibmcloud ks region-set
    ```
    {: pre}
 
@@ -219,10 +214,10 @@ Vorab müssen Sie zulassen, dass [`ibmcloud`-Befehle](#firewall_bx) und [`kubect
 <br />
 
 
-## Zugriff des Clusters auf Infrastrukturressourcen und andere Services ermöglichen
+## Zugriff des Clusters auf Infrastrukturressourcen und andere Services über eine öffentliche Firewall ermöglichen
 {: #firewall_outbound}
 
-Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von hinter einer Firewall zuzugreifen, wie beispielsweise für {{site.data.keyword.containerlong_notm}}-Regionen, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, private IP-Adressen der IBM Cloud-Infrastruktur (SoftLayer) und Egress für Persistent Volume Claims (PVCs).
+Ermöglichen Sie Ihrem Cluster den Zugriff auf Infrastrukturressourcen und Services von hinter einer öffentlichen Firewall, z. B. für {{site.data.keyword.containerlong_notm}}-Regionen, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, private IP-Adressen der IBM Cloud-Infrastruktur (SoftLayer) und Egress für Persistent Volume Claims (PVCs).
 {:shortdesc}
 
 Abhängig von Ihrem Cluster-Setup greifen Sie auf die Services über die öffentlichen IP-Adressen, über die privaten IP-Adressen oder über beide Typen von IP-Adressen zu. Wenn Sie einen Cluster mit Workerknoten im öffentlichen VLAN und im privaten VLAN hinter einer Firewall für das öffentliche und das private Netz haben, müssen Sie die Verbindung sowohl für öffentliche als auch für private IP-Adressen öffnen. Wenn Ihr Cluster nur Workerknoten im privaten VLAN hinter einer Firewall hat, können Sie die Verbindung nur zu den privaten IP-Adressen öffnen.
@@ -290,7 +285,7 @@ Abhängig von Ihrem Cluster-Setup greifen Sie auf die Services über die öffent
         </table>
 
 3.  Lassen Sie ausgehenden Netzverkehr von den Workerknoten an [{{site.data.keyword.registrylong_notm}}-Regionen](/docs/services/Registry?topic=registry-registry_overview#registry_regions) zu:
-  - `TCP-Port 443, Port 4443 VON <jeder_öffentlichen_workerknoten-ip> ZUM <registry-teilnetz>`
+  - `TCP-Port 443, Port 4443 VON <each_worker_node_publicIP> ZU <registry_subnet>`
   -  Ersetzen <em>&lt;registry-teilnetz&gt;</em> durch das Registry-Teilnetz, zu dem Sie Datenverkehr zulassen wollen. In der globalen Registry werden von IBM bereitgestellte öffentliche Images gespeichert. Ihre eigenen privaten oder öffentlichen Images werden in regionalen Registrys gespeichert. Port 4443 ist für notarielle Funktionen erforderlich, wie zum Beispiel die [Überprüfung von Imagesignaturen](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent). <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
   <caption>Zu öffnende IP-Adressen für Registry-Datenverkehr</caption>
     <thead>
@@ -378,7 +373,7 @@ Abhängig von Ihrem Cluster-Setup greifen Sie auf die Services über die öffent
           <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
-
+         
         </tbody>
       </table>
 </p>
@@ -435,7 +430,7 @@ Abhängig von Ihrem Cluster-Setup greifen Sie auf die Services über die öffent
    <tbody>
      <tr>
        <td>Dateispeicher</td>
-       <td>Kubernetes Version <code>1.13.4_1512</code>, <code>1.12.6_1543</code>, <code>1.11.8_1549</code>, <code>1.10.13_1550</code> oder höher</td>
+       <td>Kubernetes Version <code>1.13.4_1512</code>, <code>1.12.6_1544</code>, <code>1.11.8_1550</code>, <code>1.10.13_1551</code> oder höher</td>
      </tr>
      <tr>
        <td>Blockspeicher</td>
@@ -482,6 +477,76 @@ Wenn Sie über eine Firewall im privaten Netz verfügen, lassen Sie die Kommunik
 <br />
 
 
+## Zugriff des Clusters auf Ressourcen über Calico-Richtlinien für ausgehenden Netzverkehr zulassen
+{: #firewall_calico_egress}
+
+Wenn Sie [Calico-Netzrichtlinien](/docs/containers?topic=containers-network_policies) als Firewall verwenden, um den gesamten öffentlichen Worker-Egress einzuschränken, müssen Sie Ihren Workern den Zugriff auf die lokalen Proxys für den Master-API-Server und etcd ermöglichen.
+{: shortdesc}
+
+1. [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Schließen Sie die Optionen `--admin` und `--network` in den Befehl `ibmcloud ks cluster-config` ein. Durch `--admin` werden die Schlüssel für den Zugriff auf Ihr Infrastrukturportfolio und zum Ausführen von Calico-Befehlen auf Ihren Workerknoten heruntergeladen. Durch `--network` wird die Calico-Konfigurationsdatei für die Ausführung aller Calico-Befehle heruntergeladen.
+  ```
+  ibmcloud ks cluster-config --cluster <clustername_oder_-id> --admin --network
+  ```
+  {: pre}
+
+2. Erstellen Sie eine Calico-Netzrichtlinie, die den öffentlichen Datenverkehr von Ihrem Cluster an 172.20.0.1:2040 und 172.21.0.1:443 für den lokalen Proxy des API-Servers bzw. 172.20.0.1:2041 für den lokalen etcd-Proxy zulässt.
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: allow-master-local
+  spec:
+    egress:
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: TCP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: TCP
+    order: 1500
+    selector: ibm.role == 'worker_public'
+    types:
+    - Egress
+  ```
+  {: codeblock}
+
+3. Wenden Sie die Richtlinie auf den Cluster an.
+    - Linux und OS X:
+
+      ```
+      calicoctl apply -f allow-master-local.yaml
+      ```
+      {: pre}
+
+    - Windows:
+
+      ```
+      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
 ## Auf NodePort-, LoadBalancer- und Ingress-Services von außerhalb des Clusters zugreifen
 {: #firewall_inbound}
 
@@ -506,7 +571,7 @@ Sie können eingehenden Zugriff auf NodePort-, LoadBalancer- und Ingress-Service
 Wenn Sie auf Services zugreifen wollen, die innerhalb oder außerhalb von {{site.data.keyword.Bluemix_notm}} oder lokal am Standort ausgeführt und durch eine Firewall geschützt werden, können Sie die IP-Adressen Ihrer Workerknoten in dieser Firewall hinzufügen, um ausgehenden Netzverkehr zu Ihrem Cluster zu ermöglichen. Beispiel: Sie wollen möglicherweise Daten aus einer {{site.data.keyword.Bluemix_notm}}-Datenbank lesen, die durch eine Firewall geschützt wird, oder die Teilnetze Ihrer Workerknoten in einer Whitelist der lokalen Firewall angeben, um Netzverkehr aus Ihrem Cluster zuzulassen.
 {:shortdesc}
 
-1.  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1.  [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. Rufen Sie die Teilnetze oder IP-Adressen der Workerknoten ab.
   * **Workerknotenteilnetze:** Wenn Sie davon ausgehen, dass sich die Anzahl der Workerknoten in Ihrem Cluster häufig ändert, zum Beispiel wenn Sie den [Cluster-Autoscaler](/docs/containers?topic=containers-ca#ca) aktivieren, ist es vielleicht nicht sinnvoll, die Firewall für jeden neuen Workerknoten zu aktualisieren. Stattdessen können Sie die VLAN-Teilnetze, die der Cluster verwendet, in einer Whilelist angeben. Beachten Sie dabei, dass das VLAN-Teilnetz möglicherweise mit Workerknoten in anderen Clustern gemeinsam genutzt wird.
@@ -519,11 +584,11 @@ Wenn Sie auf Services zugreifen wollen, die innerhalb oder außerhalb von {{site
 
     2. Notieren Sie in der Ausgabe des Befehls im vorherigen Schritt alle eindeutigen Netz-IDs (erste 3 Oktette) der Spalte **Public IP** für die Workerknoten in Ihrem Cluster.<staging> Wenn Sie einen nur privaten Cluster in einer Whitelist angeben wollen, notieren Sie stattdessen die Netz-IDs der Spalte **Private IP**.<staging> In der folgenden Ausgabe sind die öffentlichen Netz-IDs `169.xx.178` und `169.xx.210`.
         ```
-        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6
+        ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
         ```
         {: screen}
     3.  Listen Sie die VLAN-Teilnetze für jede eindeutige Netz-ID auf.
@@ -535,8 +600,8 @@ Wenn Sie auf Services zugreifen wollen, die innerhalb oder außerhalb von {{site
         Beispielausgabe:
         ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
-        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5
-        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6
+        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   
+        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
     4.  Ermitteln Sie die Teilnetzadresse. Suchen Sie in der Ausgabe die Anzahl von **IPs**. Bilden Sie die Potenz `2` hoch `n`, die gleich der Anzahl IPs ist. Beispiel: Wenn die Anzahl der IPs `16` ist, dann entspricht dies der Potenz `2` hoch `4` (`n`) gleich `16`. Ermitteln Sie jetzt das Teilnetz-CIDR, indem Sie den Wert `n` von `32` Bit subtrahieren. Beispiel: Wenn `n` gleich `4` ist, dann ist der CIDR-Wert gleich `28` (nach der Gleichung: `32 - 4 = 28`). Kombinieren Sie die **Netz-ID-Maske** mit dem CIDR-Wert, um die vollständige Teilnetzadresse zu erhalten. In der vorherigen Ausgabe werden die folgenden Teilnetzadressen angegeben:

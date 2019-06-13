@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -71,7 +71,7 @@ Beim Zugriff auf das Kibana-Dashboard werden Ihre Protokolle nicht angezeigt.
   <tr>
     <td>Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.</td>
       <td>Gehen Sie wie folgt vor, um die Zugriffsberechtigungen für den Kontoeigner zu ändern:
-      <ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner des Clusters zu ermitteln: <code>ibmcloud ks api-key-info --cluster &lt;clustername_oder_-id&gt;</code>.</li>
+      <ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner des Clusters zu ermitteln: <code>ibmcloud ks api-key-info</code>.</li>
       <li>Informationen darüber, wie dem betreffenden Kontoeigner die {{site.data.keyword.containerlong_notm}}-Zugriffsberechtigung eines Managers, Entwicklers oder Prüfers für den Bereich zugeordnet werden kann, finden Sie unter <a href="/docs/containers?topic=containers-users">Clusterzugriff verwalten</a>.</li>
       <li>Führen Sie den folgenden Befehl aus, um das Protokollierungstoken nach Änderung der Berechtigungen zu aktualisieren: <code>ibmcloud ks logging-config-refresh --cluster &lt;clustername_oder_-id&gt;</code>.</li></ol></td>
     </tr>
@@ -109,10 +109,10 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
     {:pre}
 
 3. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.
-    - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
-    - Vereinigtes Königreich (Süden): https://logging.eu-gb.bluemix.net
-    - Mitteleuropa: https://logging.eu-fra.bluemix.net
-    - Asiatisch-pazifischer Raum (Süden): https://logging.au-syd.bluemix.net
+    - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): `https://logging.ng.bluemix.net`
+    - Vereinigtes Königreich (Süden): `https://logging.eu-gb.bluemix.net`
+    - Mitteleuropa: `https://logging.eu-fra.bluemix.net`
+    - Asiatisch-pazifischer Raum (Süden): `https://logging.au-syd.bluemix.net`
 
 <br />
 

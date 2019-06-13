@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -45,16 +45,42 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 </thead>
 <tbody>
 <tr>
+<td>0.2.102</td>
+<td>15. April 2019</td>
+<td>Fügt die Befehlsgruppe [`ibmcloud ks nlb-dns`](/docs/containers?topic=containers-cs_cli_reference#nlb-dns) zum Registrieren und Verwalten eines Hostnamens für IP-Adressen der Netzlastausgleichsfunktion (NLB) und die Befehlsgruppe [`ibmcloud ks nlb-dns-monitor`](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_nlb-dns-monitor) zum Erstellen und Ändern von Statusprüfmonitoren für NLB-Hostnamen hinzu. Weitere Informationen finden Sie unter [NLB-IPs mit einem DNS-Hostnamen registrieren](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns).
+</td>
+</tr>
+<tr>
+<td>0.2.99</td>
+<td>9. April 2019</td>
+<td><ul>
+<li>Aktualisiert Hilfetext.</li>
+<li>Aktualisiert die Go-Version auf 1.12.2.</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.95</td>
+<td>3. April 2019</td>
+<td><ul>
+<li>Fügt Unterstützung für die Versionssteuerung für verwaltete Cluster-Add-ons hinzu.</li>
+<ul><li>Fügt den Befehl [<code>ibmcloud ks addon-versions</code>](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions) hinzu.</li>
+<li>Fügt das Flag <code>--version</code> zu [ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable)-Befehlen hinzu.</li></ul>
+<li>Aktualisiert Übersetzungen des Hilfetextes.</li>
+<li>Aktualisiert Direktverbindungen zur Dokumentation im Hilfetext.</li>
+<li>Korrigiert einen Programmfehler, bei dem JSON-Fehlernachrichten in falschem Format ausgegeben werden.</li>
+<li>Korrigiert einen Programmfehler, bei dem die Verwendung eines unbeaufsichtigten Flags (`-s`) bei einigen Befehlen die Ausgabe von Fehlermeldungen verhinderte.</li>
+</ul></td>
+</tr>
+<tr>
 <td>0.2.80</td>
 <td>19. März 2019</td>
 <td><ul>
-<li>Hinzufügen von Unterstützung zur Einrichtung der [Master-zu-Worker-Kommunikation mit Serviceendpunkten](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) in Standardclustern, die Kubernetes Version 1.11 oder höher in [VRF-aktivierten Konten](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) ausführen. Informationen zur Verwendung der folgenden Befehle finden Sie in [Privaten Serviceendpunkt einrichten](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) und [Öffentlichen Servicepunkt einrichten](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).<ul>
+<li>Hinzufügen von Unterstützung zur Einrichtung der [Master-zu-Worker-Kommunikation mit Serviceendpunkten](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) in Standardclustern, die Kubernetes Version 1.11 oder höher in [VRF-aktivierten Konten](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) ausführen.<ul>
 <li>Hinzufügen der Flags `--private-service-endpoint` und `--public-service-endpoint` zum Befehl [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create).</li>
 <li>Hinzufügen der Felder **Public Service Endpoint URL** und **Private Service Endpoint URL** zur Ausgabe des Befehls <code>ibmcloud ks cluster-get</code>.</li>
 <li>Hinzufügen des Befehls [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint).</li>
 <li>Hinzufügen des Befehls [<code>ibmcloud ks cluster-feature-enable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_public_service_endpoint).</li>
-<li>Hinzufügen des Befehls [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable_public_service_endpoint).</li>
-<li>Hinzufügen des Befehls [<code>ibmcloud ks cluster-feature-ls</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls).</li>
+<li>Hinzufügen des Befehls [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable).</li>
 </ul></li>
 <li>Aktualisieren der Dokumentation und Übersetzung.</li>
 <li>Aktualisieren von Go auf Version 1.11.6.</li>

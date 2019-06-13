@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks 
 
@@ -135,7 +135,7 @@ Gehen Sie wie folgt vor, um zu verhindern, dass andere Workloads auf Edge-Worker
   {: pre}
   Nun werden nur Pods mit der Tolerierung `dedicated=edge` auf Ihren Edge-Workerknoten bereitgestellt.
 
-3. Wenn Sie die [Beibehaltung der Quellen-IP für einen Lastausgleichsservice der Version 1.0 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") aktivieren](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), stellen Sie sicher, dass App-Pods auf den Edge-Workerknoten geplant werden, indem Sie [Edge-Knoten-Affinität zu App-Pods hinzufügen](/docs/containers?topic=containers-loadbalancer#edge_nodes). App-Pods müssen auf Edge-Knoten geplant werden, um eingehende Anforderungen empfangen zu können.
+3. Wenn Sie die [Beibehaltung der Quellen-IP für einen Lastausgleichsservice der Version 1.0 aktivieren![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), stellen Sie sicher, dass App-Pods auf den Edge-Workerknoten geplant werden, indem Sie [Edge-Knoten-Affinität zu App-Pods hinzufügen](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). App-Pods müssen auf Edge-Knoten geplant werden, um eingehende Anforderungen empfangen zu können.
 
 4. Zum Entfernen eines Taints führen Sie den folgenden Befehl aus.
     ```

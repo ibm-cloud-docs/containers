@@ -27,5 +27,5 @@ subcollection: containers
 # Der gesuchte Inhalt wurde verschoben
 {: #container_cli_cfic_install}
 
-Der gesuchte Inhalt wurde verschoben. <a href="https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip">Laden Sie die neuesten Informationen von der neuen Position herunter</a>.
+Der Inhalt, den Sie suchen, wurde verschoben. <a href="https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip">Laden Sie die neuesten Informationen von der neuen Position herunter</a>.
 {:shortdesc}

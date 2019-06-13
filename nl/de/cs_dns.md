@@ -105,7 +105,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
         ```
         {: pre}
     
-        **CoreDNS-Beispielausgabe:**
+        **CoreDNS-Beispielausgabe:** 
           ```
           apiVersion: v1
           kind: ConfigMap

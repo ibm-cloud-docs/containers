@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,7 +44,7 @@ Stellen Sie zunächst sicher, dass Sie über die folgenden [{{site.data.keyword.
 
 ## Schritt 1: Ingress-Tests in {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool durchführen
 
-Bei der Fehlerbehebung können Sie {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool verwenden, um Ingress-Tests durchzuführen und relevante Ingress-Informationen aus Ihrem Cluster zu erfassen. Zur Verwendung des Debug-Tools installieren Sie das [Helm-Diagramm `ibmcloud-iks-debug` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+Bei der Fehlerbehebung können Sie {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool verwenden, um Ingress-Tests durchzuführen und relevante Ingress-Informationen aus Ihrem Cluster zu erfassen. Zur Verwendung des Debug-Tools installieren Sie das [Helm-Diagramm `ibmcloud-iks-debug` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
 {: shortdesc}
 
 
@@ -52,7 +52,7 @@ Bei der Fehlerbehebung können Sie {{site.data.keyword.containerlong_notm}} Diag
 
 2. Installieren Sie das Helm-Diagramm in Ihrem Cluster.
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
@@ -185,7 +185,7 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
         * Wenn die CLI ein Zeitlimit zurückgibt und Sie über eine angepasste Firewall verfügen, die Ihre Workerknoten schützt, stellen Sie sicher, dass Ihre [Firewall](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall) ICMP zulässt.
         * Wenn keine Firewall vorhanden ist, die die Pingsignale blockiert, und die Pingsignale weiterhin das Zeitlimit überschreiten, müssen Sie den [Status der ALB-Pods überprüfen](#check_pods).
 
-    * Nur bei Mehrzonenclustern: Sie können die MZLB-Zustandsprüfung verwenden, um den Status Ihrer ALB-IPs zu ermitteln. Weitere Informationen zur MZLB finden Sie unter [Lastausgleichsfunktion für mehrere Zonen (MZLB)](/docs/containers?topic=containers-ingress#planning). Die MZLB-Zustandsprüfung ist nur für Cluster verfügbar, die über die neue Ingress-Unterdomäne im Format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` verfügen. Wenn Ihr Cluster noch das ältere Format von `<cluster_name>.<region>.containers.mybluemix.net` verwendet, müssen Sie Ihren [Einzelzonencluster in einen Mehrzonencluster konvertieren](/docs/containers?topic=containers-clusters#add_zone). Ihrem Cluster wird eine Unterdomäne mit dem neuen Format zugewiesen, er kann aber auch weiterhin das ältere Unterdomänenformat verwenden. Alternativ können Sie einen neuen Cluster bestellen, dem automatisch das neue Unterdomänenformat zugeordnet wird.
+    * Nur bei Mehrzonenclustern: Sie können die MZLB-Zustandsprüfung verwenden, um den Status Ihrer ALB-IPs zu ermitteln. Weitere Informationen zur MZLB finden Sie unter [Lastausgleichsfunktion für mehrere Zonen (MZLB)](/docs/containers?topic=containers-ingress#planning). Der MZLB-Statusmonitor ist nur für Cluster verfügbar, die über die neue Ingress-Unterdomäne im Format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` verfügen. Wenn Ihr Cluster noch das ältere Format von `<cluster_name>.<region>.containers.mybluemix.net` verwendet, müssen Sie Ihren [Einzelzonencluster in einen Mehrzonencluster konvertieren](/docs/containers?topic=containers-clusters#add_zone). Ihrem Cluster wird eine Unterdomäne mit dem neuen Format zugewiesen, er kann aber auch weiterhin das ältere Unterdomänenformat verwenden. Alternativ können Sie einen neuen Cluster bestellen, dem automatisch das neue Unterdomänenformat zugeordnet wird.
 
     Der folgende HTTP-cURL-Befehl verwendet den Host `albhealth`, der von {{site.data.keyword.containerlong_notm}} so konfiguriert wird, dass er entweder den Status `healthy` oder den Status `unhealthy` für eine ALB-IP zurückgibt.
         ```
@@ -266,7 +266,7 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
 
     1. Stellen Sie sicher, dass Sie einen Host in nur einer Ingress-Ressource definieren. Wenn ein Host in mehreren Ingress-Ressourcen definiert ist, leitet die Lastausgleichsfunktion für Anwendungen den Datenverkehr möglicherweise nicht ordnungsgemäß weiter und es können Fehler auftreten.
 
-    2. Prüfen Sie, ob die Unterdomäne und das TLS-Zertifikat korrekt sind. Um die von IBM bereitgestellte Ingress-Unterdomäne und das TLS-Zertifikat zu ermitteln, führen Sie den Befehl `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` aus.
+    2. Prüfen Sie, ob die Unterdomäne und das TLS-Zertifikat korrekt sind. Um die von IBM bereitgestellte Ingress-Unterdomäne und das TLS-Zertifikat zu ermitteln, führen Sie den Befehl `ibmcloud ks cluster-get --cluster <clustername_oder_-id>` aus.
 
     3.  Stellen Sie sicher, dass Ihre App denselben Pfad überwacht, der im Abschnitt **path** von Ingress konfiguriert ist. Wenn Ihre App so eingerichtet ist, dass sie den Rootpfad überwacht, verwenden Sie `/` als Pfad. Wenn der für diesen Pfad eingehende Datenverkehr an einen anderen Pfad weitergeleitet werden muss, an dem Ihre App empfangsbereit ist, verwenden Sie die Annotation [rewrite-path](/docs/containers?topic=containers-ingress_annotation#rewrite-path).
 

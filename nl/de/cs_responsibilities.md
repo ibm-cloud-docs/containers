@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -25,46 +25,108 @@ subcollection: containers
 
 
 # Zuständigkeiten bei der Verwendung von {{site.data.keyword.containerlong_notm}}
+{: #responsibilities_iks}
+
 Erfahren Sie mehr über die Zuständigkeiten und Nutzungsbedingungen bei der Clusterverwaltung, wenn Sie {{site.data.keyword.containerlong}} verwenden.
 {:shortdesc}
 
 ## Zuständigkeiten bei der Clusterverwaltung
 {: #responsibilities}
 
-Informieren Sie sich über die Zuständigkeiten, die Sie gemeinsam mit IBM bei der Verwaltung von Clustern haben.
+IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps zusammen mit {{site.data.keyword.Bluemix_notm}} DevOps-, AI-, Daten- und Sicherheitsservices bereitstellen können. Sie selbst entscheiden, wie Sie Ihre Apps und Services in der Cloud einrichten, integrieren und betreiben.
 {:shortdesc}
 
-**IBM ist für Folgendes verantwortlich:**
-
-- Bereitstellen des Masters, der Workerknoten und Managementkomponenten im Cluster (z. B. Ingress-Lastausgleichsfunktion für Anwendungen) bei der Clustererstellung
-- Bereitstellen der Sicherheitsupdates, Überwachen, Isolieren und Wiederherstellen des Kubernetes-Masters für den Cluster
-- Durchführen von Versionsaktualisierungen und Sicherheitspatches für Sie zur Anwendung auf Ihre Cluster-Workerknoten
-- Überwachen des Zustands der Workerknoten und Bereitstellen der Automatisierung für Aktualisierung und Wiederherstellung dieser Workerknoten
-- Ausführen von Automatisierungstasks für das Infrastrukturkonto einschließlich Hinzufügen von Workerknoten, Entfernen von Workerknoten und Erstellen eines Standardteilnetzes
-- Verwalten, Aktualisieren und Wiederherstellen der aktiven Komponenten im Cluster (z. B. Ingress-Lastausgleichsfunktion für Anwendungen und Speicher-Plug-in)
-- Bereitstellen der Speicherdatenträger auf Anforderung von PVCs (Persistant Volume Claims)
-- Bereitstellen der Sicherheitseinstellungen auf allen Workerknoten
-
-</br>
-
-**Sie sind für Folgendes verantwortlich:**
-
-- [Konfigurieren des {{site.data.keyword.containerlong_notm}}-API-Schlüssels mit den geeigneten Berechtigungen für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) und anderer {{site.data.keyword.Bluemix_notm}}-Services](/docs/containers?topic=containers-users#api_key)
-- [Bereitstellen und Verwalten der Kubernetes-Ressourcen (z. B. Pods, Services und Bereitstellungen) im Cluster](/docs/containers?topic=containers-app#app_cli)
-- [Nutzen der Funktionalität des Service und von Kubernetes zur Sicherstellung einer hohen Verfügbarkeit der Apps](/docs/containers?topic=containers-app#highly_available_apps)
-- [Hinzufügen oder Entfernen von Clusterkapazitäten durch Ändern der Größe von Worker-Pools](/docs/containers?topic=containers-clusters#add_workers)
-- [Aktivieren des VLAN-Spannings und Beibehalten des zonenübergreifenden Ausgleichs bei Mehrzonen-Worker-Pools](/docs/containers?topic=containers-plan_clusters#ha_clusters)
-- [Erstellen öffentlicher und privater VLANs in der IBM Cloud-Infrastruktur (SoftLayer) zur Netzisolation Ihres Clusters](/docs/infrastructure/vlans?topic=vlans-getting-started-with-vlans#getting-started-with-vlans)
-- [Sicherstellen der Netzkonnektivität zu den Kubernetes-Serviceendpunkt-URLs für alle Workerknoten](/docs/containers?topic=containers-firewall#firewall) <p class="note">Wenn ein Workerknoten sowohl über öffentliche als auch private VLANs verfügt, dann ist die Netzkonnektivität konfiguriert. Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie die Kommunikation zwischen Workerknoten und Cluster-Master zulassen, indem Sie den [privaten Serviceendpunkt aktivieren](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) oder eine [Gateway-Einheit konfigurieren](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway). Wenn Sie eine Firewall einrichten, müssen Sie die Einstellungen der Firewall so verwalten und konfigurieren, dass der Zugriff auf {{site.data.keyword.containerlong_notm}}- und andere {{site.data.keyword.Bluemix_notm}}-Services zugelassen wird, die Sie mit dem Cluster verwenden.</p>
-- [Aktualisieren des Master-'kube-apiserver', wenn Kubernetes-Versionsaktualisierungen verfügbar sind](/docs/containers?topic=containers-update#master)
-- [Aktualisieren der Workerknoten auf Haupt-, Neben- und Patchversionen](/docs/containers?topic=containers-update#worker_node) <p class="note">Sie können das Betriebssystem Ihres Workerknotens nicht ändern oder sich bei dem Workerknoten anmelden. Die Workerknotenaktualisierungen werden von IBM als vollständiges Workerknoten-Image bereitgestellt, das die neuesten Sicherheitspatches enthält. Zum Anwenden der Aktualisierungen muss das Image des Workerknotens erneut erstellt und der Workerknoten mit dem neuen Image erneut geladen werden. Schlüssel für den Rootbenutzer werden automatisch gewechselt, wenn der Workerknoten erneut geladen wird. </p>
-- [Überwachen des Zustands Ihres Clusters durch Einrichten der Protokollweiterleitung für Ihre Clusterkomponenten](/docs/containers?topic=containers-health#health).   
-- [Wiederherstellen von fehlerhaften Workerknoten durch Ausführen der geeigneten `kubectl`-Befehle (z. B. `cordon` oder `drain`) und durch Ausführen der geeigneten `ibmcloud ks`-Befehle (z. B. `reboot`, `reload` oder `delete`](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot))
-- [Hinzufügen oder Entfernen von Teilnetzen in der IBM Cloud-Infrastruktur (SoftLayer) nach Bedarf](/docs/containers?topic=containers-subnets#subnets)
-- [Sichern und Wiederherstellen von Daten im persistenten Speicher in der IBM Cloud-Infrastruktur (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter)
-- Einrichten der [Protokollierungs-](/docs/containers?topic=containers-health#logging) und [Überwachungsservices](/docs/containers?topic=containers-health#view_metrics) zum Unterstützen des Zustands und der Leistung Ihres Clusters
-- [Zustandsüberwachung für Workerknoten mit automatischer Wiederherstellung konfigurieren](/docs/containers?topic=containers-health#autorecovery)
-- Audit für Ereignisse durchführen, die Ressourcen in Ihrem Cluster ändern, wie beispielsweise durch Verwenden von [{{site.data.keyword.cloudaccesstrailfull}}](/docs/containers?topic=containers-at_events#at_events) zum Anzeigen von benutzerinitiierten Aktivitäten, die den Status Ihrer {{site.data.keyword.containerlong_notm}}-Instanz ändern
+<table summary="Die Tabelle zeigt die Verantwortlichkeiten von IBM und von Ihnen. Die Zeilen enthalten von links nach rechts gesehen Symbole für die jeweilige Verantwortlichkeit in Spalte eins und eine Beschreibung in Spalte zwei.">
+<caption>Verantwortlichkeiten von IBM und von Ihnen</caption>
+  <thead>
+  <th colspan=2>Verantwortlichkeiten nach Typ</th>
+  </thead>
+  <tbody>
+    <tr>
+    <td align="center"><img src="images/icon_clouddownload.svg" alt="Symbol einer Wolke mit nach unten zeigendem Pfeil"/><br>Cloud-Infrastruktur</td>
+    <td>
+    **Leistungsumfang**:
+    <ul><li>Bereitstellung eines vollständig verwalteten, dedizierten Hochverfügbarkeits-Masters in einem sicheren Infrastrukturkonto, dessen Eigner IBM ist, für jeden Cluster.</li>
+    <li>Bereitstellung von Workerknoten in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer).</li>
+    <li>Einrichtung von Clusterverwaltungskomponenten wie VLANS und Lastausgleichsfunktionen.</li>
+    <li>Erfüllen von Anforderungen nach weiterer Infrastruktur, wie z. B. zum Hinzufügen und Entfernen von Workerknoten, Erstellen von Standardteilnetzen und Bereitstellung von Speicherdatenträgern als Antwort auf Anforderungen für persistente Datenträger.</li>
+    <li>Integration von bestellten Infrastrukturressourcen für die automatische Arbeit mit Ihrer Clusterarchitektur und Verfügbarkeit für Ihre bereitgestellten Apps und Workloads.</li></ul>
+    <br><br>
+    **Verantwortlichkeiten des Kunden**:
+    <ul><li>Verwendung der bereitgestellten API-, CLI- und Konsolentools zum Anpassen der [Rechen](/docs/containers?topic=containers-clusters#clusters)- und [Speicher](/docs/containers?topic=containers-storage_planning#storage_planning)-Kapazität und der [Netzkonfiguration](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster) entsprechend den Anforderungen Ihrer Workloads.</li></ul><br><br>
+    </td>
+     </tr>
+     <tr>
+     <td align="center"><img src="images/icon_tools.svg" alt="Symbol eines Schraubenschlüssels"/><br>Verwalteter Cluster</td>
+     <td>
+     **Leistungsumfang**:
+    <ul><li>Bereitstellung einer Tool-Suite zur Automatisierung der Clusterverwaltung, wie z. B. {{site.data.keyword.containerlong_notm}}-[API ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.cloud.ibm.com/swagger-api/), -[CLI-Plug-in](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) oder -[Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/clusters).</li>
+     <li>Automatische Anwendung von Betriebssystem, Version und Sicherheit des Kubernetes Master-Patches. Verfügbarmachen von Haupt- und Nebenversionen, die Sie anwenden können.</li>
+     <li>Verwalten und Wiederherstellen aktiver {{site.data.keyword.containerlong_notm}}- und Kubernetes-Komponenten im Cluster, z. B. Ingress-Lastausgleichsfunktion für Anwendungen oder Dateispeicher-Plug-in.</li>
+     <li>Sicherung und Wiederherstellung von Daten in 'etcd', z. B. Ihre Konfigurationsdateien für Kubernetes-Workloads</li>
+     <li>Einrichten einer OpenVPN-Verbindung zwischen Master- und Workerknoten bei der Erstellung des Clusters.</li>
+     <li>Überwachen und Berichten des Status der Master- und Workerknoten in den verschiedenen Schnittstellen.</li>
+     <li>Bereitstellung von Haupt-, Neben und Patchversionen für Betriebssystem, Version und Sicherheit des Workerknotens.</li>
+     <li>Erfüllen von Automatisierungsanforderungen für die Aktualisierung und Wiederherstellung von Workerknoten. Bereitstellung der optionalen [automatischen Workerknoten-Wiederherstellung](/docs/containers?topic=containers-health#autorecovery).</li>
+     <li>Bereitstellung von Tools wie z. B. [Cluster-Autoscaler](/docs/containers?topic=containers-ca#ca) zur Erweiterung Ihrer Clusterinfrastruktur.</li>
+     </ul>
+     <br><br>
+     **Verantwortlichkeiten des Kunden**:
+    <ul>
+     <li>Verwendung der API-, CLI- oder Konsolentools für die [Anwendung](/docs/containers?topic=containers-update#update) der bereitgestellten Haupt- und Nebenversionen des Kubernetes-Masters sowie Haupt-, Neben- und Patchversionen für Workerknoten.</li>
+     <li>Verwendung der API-, CLI- oder Konsolentools für die [Wiederherstellung](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot) Ihrer Infrastrukturressourcen oder Einrichtung und Konfiguration der optionalen [automatischen Workerknoten-Wiederherstellung](/docs/containers?topic=containers-health#autorecovery).</li></ul>
+     <br><br></td>
+      </tr>
+    <tr>
+      <td align="center"><img src="images/icon_locked.svg" alt="Schloss-Symbol"/><br>Umgebung mit umfassender Sicherheit</td>
+      <td>
+      **Leistungsumfang**:
+    <ul>
+      <li>Verwalten von Kontrollmechanismen entsprechend [verschiedenen Konformitätsstandards der Branche](/docs/containers?topic=containers-faqs#standards), z. B. PCI DSS.</li>
+      <li>Überwachen, Isolieren und Wiederherstellen des Cluster-Masters.</li>
+      <li>Bereitstellung hoch verfügbarer Replikate der Komponenten Kubernetes-Master-API-Server, 'etcd', Scheduler und Controller-Manager zum Schutz vor einem Masterausfall.</li>
+      <li>Automatische Anwendung von Patchversionen für die Mastersicherheit sowie Bereitstellung von Patchversionen für die Workerknotensicherheit.</li>
+      <li>Aktivierung bestimmter Sicherheitseinstellungen wie z. B. verschlüsselte Datenträger auf Workerknoten.</li>
+      <li>Inaktivieren bestimmter unsicherer Aktionen für Workerknoten, z. B. Verhindern, dass Benutzer über eine SSH-Verbindung auf den Host zugreifen.</li>
+      <li>Verschlüsseln der Kommunikation zwischen Master- und Worker-Knoten mit TLS.</li>
+      <li>Bereitstellung von CIS-kompatiblen Linux-Images für Workerknoten-Betriebssysteme.</li>
+      <li>Kontinuierliche Überwachung von Master- und Workerknoten-Images zur Erkennung von Sicherheitslücken und Fehlern bei der Einhaltung von Sicherheitsbestimmungen.</li>
+      <li>Bereitstellung von Workerknoten mit zwei lokalen SSD-Datenpartitionen mit 256-Bit-AES-Verschlüsselung.</li>
+      <li>Bereitstellung von Optionen für die Cluster-Netzkonnektivität, z. B. öffentliche und private Serviceendpunkte.</li>
+      <li>Bereitstellung von Optionen für die Berechnung der Isolation, z. B. dedizierte virtuelle Maschinen, Bare-Metal und Bare-Metal mit Trusted Compute.</li>
+      <li>Integration der rollenbasierten Zugriffssteuerung (RBAC) von Kubernetes mit {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).</li>
+      </ul>
+      <br><br>
+      **Verantwortlichkeiten des Kunden**:
+    <ul>
+      <li>Verwendung der API-, CLI- oder Konsolentools für die Anwendung der bereitgestellten [Sicherheitspatchversionen](/docs/containers?topic=containers-changelog#changelog) auf Ihre Workerknoten.</li>
+      <li>Auswahl der Konfiguration für Ihr [Clusternetz](/docs/containers?topic=containers-cs_network_ov#cs_network_ov) und Konfiguration weiterer [Sicherheitseinstellungen](/docs/containers?topic=containers-security#security) entsprechend den Sicherheits- und Complianceanforderungen Ihrer Workloads. Gegebenenfalls Konfiguration Ihrer [Firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
+      <br><br></td>
+      </tr>
+      
+      <tr>
+        <td align="center"><img src="images/icon_code.svg" alt="Symbol mit Codeklammern"/><br>App-Orchestrierung</td>
+        <td>
+        **Leistungsumfang**:
+    <ul>
+        <li>Bereitstellung von Clustern mit installierten Kubernetes-Komponenten, sodass Sie auf die Kubernetes-API zugreifen können.</li>
+        <li>Bereitstellung einer Anzahl verwalteter Add-ons zur Erweiterung der Fähigkeiten Ihrer App, z. B. [Istio](/docs/containers?topic=containers-istio#istio) oder [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). Die Wartung wird für Sie vereinfacht, da IBM die Installation und Aktualisierungen für die verwalteten Add-ons bereitstellt.</li>
+        <li>Bereitstellung der Clusterintegration mit ausgewählten Partnerschaftstechnologien von Drittanbietern, z. B. {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} oder Portworx.</li>
+        <li>Bereitstellung von Automatisierung, um die Servicebindung für andere {{site.data.keyword.Bluemix_notm}}-Services zu aktivieren</li>
+        <li>Erstellung von Clustern mit geheimen Schlüsseln für Image-Pull-Operationen, sodass Ihre Bereitstellungen im Kubernetes-Namensbereich `default` Images aus {{site.data.keyword.registrylong_notm}} extrahieren können.</li>
+        <li>Bereitstellung von Speicherklassen und Plug-ins, um persistente Datenträger für die Verwendung mit Ihren Apps zu unterstützen.</li>
+        <li>Erstellung von Clustern mit IP-Teilnetzadressen, die dafür reserviert sind, Anwendungen extern zugänglich zu machen.</li>
+        <li>Unterstützung nativer öffentlicher und privater Kubernetes-Lastausgleichsfunktionen und Ingress-Routen, um Services extern zugänglich zu machen.</li>
+        </ul>
+        <br><br>
+        **Verantwortlichkeiten des Kunden**:
+    <ul>
+        <li>Verwendung der bereitgestellten Tools und Funktionen für die [Konfiguration und Bereitstellung](/docs/containers?topic=containers-app#app), [Einrichtung von Berechtigungen](/docs/containers?topic=containers-users#users), [Integration mit anderen Services](/docs/containers?topic=containers-supported_integrations#supported_integrations), für [externen Service](/docs/containers?topic=containers-cs_network_planning#cs_network_planning), die [Statusüberwachung](/docs/containers?topic=containers-health#health), [Speicherung, Sicherung und Wiederherstellung von Daten](/docs/containers?topic=containers-storage_planning#storage_planning) und sonstige Verwaltung Ihrer [hoch verfügbaren](/docs/containers?topic=containers-ha#ha) und widerstandsfähigen Workloads.</li>
+        </ul>
+        </td>
+        </tr>
+  </tbody>
+  </table>
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -50,7 +50,7 @@ Dieses Lernprogramm richtet sich an Entwickler von Cloud Foundry-Apps.
 ## Voraussetzungen
 {: #cf_prereqs}
 
-- [Erstellen Sie eine private Image-Registry in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-index).
+- [Erstellen Sie eine private Image-Registry in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started).
 - [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Geben Sie als Ziel Ihrer CLI den Cluster an](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen:
@@ -82,7 +82,7 @@ Bereiten Sie Ihren Code vor. Sie haben noch keinen Code? Sie können den in dies
 
     a. Klicken Sie im Katalog unter **Boilerplates** auf **Python Flask**. Diese Boilerplate enthält eine Laufzeitumgebung für Python 2- und Python 3-Anwendungen.
 
-    b. Geben Sie den App-Namen `cf-py-<name>` ein und klicken Sie auf **ERSTELLEN**. Um auf den App-Code für die Boilerplate zuzugreifen, müssen Sie die CF-App zunächst in der Cloud bereitstellen. Sie können einen beliebigen Namen für die App verwenden. Wenn Sie den Namen aus dem Beispiel verwenden, ersetzen Sie `.<name>` durch eine eindeutige ID wie `cf-py-msx`.
+    b. Geben Sie den App-Namen `cf-py-<name>` ein und klicken Sie auf **CREATE**. Um auf den App-Code für die Boilerplate zuzugreifen, müssen Sie die CF-App zunächst in der Cloud bereitstellen. Sie können einen beliebigen Namen für die App verwenden. Wenn Sie den Namen aus dem Beispiel verwenden, ersetzen Sie `<name>` durch eine eindeutige ID wie z. B. `cf-py-msx`.
 
     **Achtung**: Verwenden Sie keine persönlichen Informationen in Namen von Apps, Container-Images oder Kubernetes-Ressourcen.
 
@@ -240,7 +240,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>Ersetzen Sie in `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` den Eintrag &lt;registry-namensbereich&gt; durch den Namensbereich Ihrer privaten Image-Registry. Wenn Sie nicht sicher sind, wie Ihr Namensbereich lautet, führen Sie den Befehl `ibmcloud cr namespaces` aus, um ihn abzurufen.</td>
+  <td>Ersetzen Sie in `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` &lt;registry_namespace&gt; durch den Namensbereich Ihrer privaten Image-Registry. Wenn Sie nicht sicher sind, wie Ihr Namensbereich lautet, führen Sie den Befehl `ibmcloud cr namespaces` aus, um ihn abzurufen.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -276,7 +276,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
     ```
     {: screen}
 

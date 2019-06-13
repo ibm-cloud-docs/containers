@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -67,7 +67,7 @@ subcollection: containers
 - [Bereitstellungen in einem Cluster mit Terraform automatisieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [Benutzer und Teams organisieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)
 - [Logistics Wizard mit Istio und {{site.data.keyword.containerlong}} verwenden ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/logistics-wizard-kubernetes)
-- [Mikroservices mit erweiterter Datenverkehrsverwaltung aktivieren und Tracefunktionen mit Istio anfordern ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/patterns/manage-microservices-traffic-using-istio/)
+- [Microservices mit erweiterter Datenverkehrsverwaltung aktivieren und Tracefunktionen mit Istio anfordern ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/patterns/manage-microservices-traffic-using-istio/)
 
 <br />
 
@@ -75,10 +75,11 @@ subcollection: containers
 **Integrierte Open-Source-Technologien**
 
 - [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/)
+- [Kubernetes-CLI-Dokumentation (`kubectl`) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubectl.docs.kubernetes.io/)
 - [Knative-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/knative/docs)
 - [Docker-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> für Kubernetes-Paketmanagement
-- [Istio ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/) - Plattform zum Verbinden, Verwalten und Sichern von Mikroservices
+- [Istio ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/) - Plattform zum Verbinden, Verwalten und Sichern von Microservices
 - [Weave Scope ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.weave.works/oss/scope/) - Visualisierung
 
 <br />
@@ -96,7 +97,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [{{site.data.keyword.registryshort_notm}}-Dokumentation](/docs/services/Registry?topic=registry-index)
+- [{{site.data.keyword.registryshort_notm}}-Dokumentation](/docs/services/Registry?topic=registry-getting-started)
 - [{{site.data.keyword.registryshort_notm}}REST-API ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://{DomainName}/apidocs/container-registry)
 - [Vulnerability Advisor-REST-API ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://{DomainName}/apidocs/container-registry/va)
 

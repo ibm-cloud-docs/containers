@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, audit
 
@@ -44,7 +44,7 @@ Weitere Informationen zur Arbeitsweise des Service finden Sie in der [{{site.dat
 ## Informationen zu Ereignissen suchen
 {: #kube-find}
 
-Sie können die Aktivitäten in Ihrem Cluster überwachen, indem Sie sich die Protokolle im Kibana-Dashboard ansehen. 
+Sie können die Aktivitäten in Ihrem Cluster überwachen, indem Sie sich die Protokolle im Kibana-Dashboard ansehen.
 {: shortdesc}
 
 So überwachen Sie die Verwaltungsaktivität:
@@ -518,19 +518,19 @@ Vorbereitende Schritte: Stellen Sie sicher, dass der Cluster für die Weiterleit
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>Für Kubernetes v1.10 und höher wird eine Pod-Sicherheitsrichtlinie erstellt.</td>
+    <td>Es wird eine Pod-Sicherheitsrichtlinie erstellt.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>Für Kubernetes v1.10 und höher wird eine Pod-Sicherheitsrichtlinie gelöscht.</td>
+    <td>Es wird eine Pod-Sicherheitsrichtlinie gelöscht.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>Für Kubernetes v1.10 und höher wird eine Pod-Sicherheitsrichtlinie korrigiert.</td>
+    <td>Es wird eine Pod-Sicherheitsrichtlinie gepatcht.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Für Kubernetes v1.10 und höher wird eine Pod-Sicherheitsrichtlinie aktualisiert.</td>
+    <td>Es wird eine Pod-Sicherheitsrichtlinie aktualisiert.</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>

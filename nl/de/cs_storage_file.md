@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -29,7 +29,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} File Storage ist ein persistenter, schneller und flexibler, über ein Netz angeschlossener NFS-basierter Dateispeicher, den Sie Ihren Apps durch persistente Kubernetes-Datenträger (PVs) hinzufügen können. Sie können unter vordefinierten Speichertiers mit GB-Größen und E/A-Operationen pro Sekunde (IOPS) wählen, die die Anforderungen Ihrer Workloads erfüllen. Informationen zur Ermittlung, ob {{site.data.keyword.Bluemix_notm}} File Storage die richtige Speicheroption für Sie ist, finden Sie unter [Speicherlösung wählen](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Preisinformationen finden Sie unter [Abrechnung](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage für nur Standardcluster verfügbar, die mit öffentlicher Netzkonnektivität eingerichtet sind. Wenn Ihr Cluster auf das öffentliche Netz nicht zugreifen kann, wie dies zum Beispiel bei einem privaten Cluster hinter einer Firewall oder bei einem Cluster mit nur einem aktivierten privaten Serviceendpunkt der Fall ist, können Sie Dateispeicher (File Storage) in Ihrem Cluster nicht bereitstellen. NFS-Dateispeicherinstanzen sind für eine einzelne Zone spezifisch. Wenn Sie einen Mehrzonencluster haben, ziehen Sie [Optionen für persistenten Speicher in mehreren Zonen](/docs/containers?topic=containers-storage_planning#persistent_storage_overview) in Betracht.
+{{site.data.keyword.Bluemix_notm}} File Storage für nur Standardcluster verfügbar, die mit öffentlicher Netzkonnektivität eingerichtet sind. Wenn Ihr Cluster auf das öffentliche Netz nicht zugreifen kann, wie dies zum Beispiel bei einem privaten Cluster hinter einer Firewall oder bei einem Cluster mit nur einem aktivierten privaten Serviceendpunkt der Fall ist, können Sie Dateispeicher (File Storage) bereitstellen, sofern auf Ihrem Cluster Kubernetes Version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 oder höher ausgeführt wird. NFS-Dateispeicherinstanzen sind für eine einzelne Zone spezifisch. Wenn Sie einen Mehrzonencluster haben, ziehen Sie [Optionen für persistenten Speicher in mehreren Zonen](/docs/containers?topic=containers-storage_planning#persistent_storage_overview) in Betracht.
 {: important}
 
 ## Dateispeicherkonfiguration festlegen
@@ -48,14 +48,14 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 Gehen Sie wie folgt vor, um sich für eine Speicherkonfiguration zu entscheiden:
 
 1. Listen Sie die in {{site.data.keyword.containerlong}} verfügbaren Speicherklassen auf.
-    ```
-    kubectl get storageclasses | grep file
-    ```
-    {: pre}
+   ```
+   kubectl get storageclasses | grep file
+   ```
+   {: pre}
 
-    Beispielausgabe:
-    ```
-    $ kubectl get storageclasses
+   Beispielausgabe:
+   ```
+   $ kubectl get storageclasses
     NAME                         TYPE
     ibmc-file-bronze (default)   ibm.io/ibmc-file
     ibmc-file-custom             ibm.io/ibmc-file
@@ -65,14 +65,14 @@ Gehen Sie wie folgt vor, um sich für eine Speicherkonfiguration zu entscheiden:
     ibmc-file-retain-gold        ibm.io/ibmc-file
     ibmc-file-retain-silver      ibm.io/ibmc-file
     ibmc-file-silver             ibm.io/ibmc-file
-    ```
-    {: screen}
+   ```
+   {: screen}
 
 2. Überprüfen Sie die Konfiguration einer Speicherklasse.
-   ```
-   kubectl describe storageclass <name_der_speicherklasse>
-   ```
-   {: pre}
+  ```
+  kubectl describe storageclass <name_der_speicherklasse>
+  ```
+  {: pre}
 
    Weitere Informationen zu den einzelnen Speicherklassen finden Sie in der [Speicherklassenreferenz](#file_storageclass_reference). Wenn Sie nichts Entsprechendes finden, können Sie eine eigene angepasste Speicherklasse erstellen. Prüfen Sie zunächst die [Beispiele für angepasste Speicherklassen](#file_custom_storageclass).
    {: tip}
@@ -163,7 +163,7 @@ Gehen Sie wie folgt vor, um sich für eine Speicherkonfiguration zu entscheiden:
 
 5. Wählen Sie diese Option aus, wenn die Daten nach dem Löschen des Clusters oder des Persistent Volume Claim (PVC) beibehalten werden sollen.
    - Wenn Sie die Daten aufbewahren möchten, dann wählen Sie eine Speicherklasse vom Typ `retain` aus. Beim Löschen des PVC wird nur der PVC gelöscht. Der persistente Datenträger, die physische Speichereinheit im Konto der IBM Cloud-Infrastruktur (SoftLayer) und Ihre Daten sind weiterhin vorhanden. Um den Speicher zurückzufordern und in Ihrem Cluster erneut zu verwenden, müssen Sie den persistenten Datenträger entfernen und die Schritte zum [Verwenden von vorhandenem Dateispeicher](#existing_file) ausführen.
-   - Wenn Sie möchten, dass der persistente Datenträger, die Daten und Ihre physische Dateispeichereinheit beim Löschen des Persistent Volume Claim (PVC) gelöscht werden, müssen Sie eine Speicherklasse ohne `retain` auswählen. **Hinweis**: Wenn Sie über ein Dedicated-Konto verfügen, wählen Sie eine Speicherklasse ohne `retain` aus, um zu verhindern, dass es verwaiste Datenträger in der IBM Cloud-Infrastruktur (SoftLayer) gibt.
+   - Wenn Sie möchten, dass der persistente Datenträger, die Daten und Ihre physische Dateispeichereinheit beim Löschen des Persistent Volume Claim (PVC) gelöscht werden, müssen Sie eine Speicherklasse ohne `retain` auswählen.
 
 6. Wählen Sie aus, ob Sie die Abrechnung auf Stundenbasis oder monatlich erhalten möchten. Weitere Informationen finden Sie unter [Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing). Standardmäßig werden alle Dateispeichereinheiten mit dem Abrechnungstyp 'Stündlich' (hourly) bereitgestellt.
    Wenn Sie als Abrechnungstyp 'Monatlich' wählen, zahlen Sie beim Entfernen des persistenten Speichers immer noch eine monatliche Gebühr für ihn, selbst dann, wenn Sie den Speicher nur für eine kurze Zeit genutzt haben.
@@ -252,7 +252,7 @@ Gehen Sie wie folgt vor, um Dateispeicher hinzuzufügen:
        <tr>
        <td><code>metadata.labels.region</code></td>
        <td>Optional: Geben Sie die Region an, in der der Dateispeicher bereitgestellt werden soll. Um eine Verbindung mit Ihrem Speicher herzustellen, erstellen Sie den Speicher in derselben Region, in der sich Ihr Cluster befindet. Bei Angabe der Region müssen Sie auch eine Zone angeben. Wenn Sie keine Region angeben oder die angegebene Region nicht gefunden wird, wird der Speicher in derselben Region wie Ihr Cluster erstellt.
-       </br></br>Zum Abrufen der Region für Ihren Cluster führen Sie den Befehl `ibmcloud ks cluster-get --cluster <clustername_oder_-id>` aus und suchen nach dem Regionspräfix in der Master-URL (**Master URL**), wie zum Beispiel `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`.
+       </br></br>Zum Abrufen der Region für Ihren Cluster führen Sie den Befehl `ibmcloud ks cluster-get --cluster <clustername_oder_-id>` aus und suchen Sie nach dem Regionspräfix in der **Master-URL**, z. B. `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`.
        </br></br><strong>Tipp: </strong>Statt die Region und die Zone im PVC anzugeben, können Sie diese Werte auch in einer [angepassten Speicherklasse](#file_multizone_yaml) angeben. Verwenden Sie dann Ihre Speicherklasse im Abschnitt <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> Ihres PVC. Wenn die Region und die Zone in der Speicherklasse und im PVC angegeben sind, haben die Werte im PVC Vorrang. </td>
        </tr>
        <tr>
@@ -316,7 +316,7 @@ Gehen Sie wie folgt vor, um Dateispeicher hinzuzufügen:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}Erstellen Sie zum Anhängen des Speichers an Ihre Bereitstellung eine `.yaml`-Konfigurationsdatei und geben Sie den Persistent Volume Claim (PVC) an, der den persistenten Datenträger bindet.
+4.  {: #file_app_volume_mount}Erstellen Sie zum Anhängen des Speichers an Ihre Bereitstellung eine `.yaml`-Konfigurationsdatei und geben Sie den Persistent Volume Claim (PVC) an, der den persistenten Datenträger bindet.
 
     Wenn Sie über eine App verfügen, für die erforderlich ist, dass ein Benutzer ohne Rootberechtigung in den persistenten Speicher schreibt, oder eine App, für die erforderlich ist, dass der Rootbenutzer Eigner des Mountpfads ist, finden Sie weitere Informationen unter [Zugriff für Benutzer ohne Rootberechtigung auf NFS-Dateispeicher hinzufügen](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot) oder [Rootberechtigung für NFS-Dateispeicher aktivieren](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot).
     {: tip}
@@ -378,7 +378,7 @@ Gehen Sie wie folgt vor, um Dateispeicher hinzuzufügen:
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird. Daten, die in den Mountpfad geschrieben werden, werden im Verzeichnis <code>root</code> in der physischen Dateispeicherinstanz gespeichert. Wenn Sie einen Datenträger zwischen verschiedenen Apps gemeinsam nutzen möchten, können Sie [Unterpfade für Datenträger  ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) für jede Ihrer Apps angeben.</td>
+    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird. Daten, die in den Mountpfad geschrieben werden, werden im Verzeichnis <code>root</code> in der physischen Dateispeicherinstanz gespeichert. Wenn Sie einen Datenträger zwischen verschiedenen Apps gemeinsam nutzen möchten, können Sie [Unterpfade für Datenträger  ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) für jede Ihrer Apps angeben.  </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>
@@ -436,12 +436,13 @@ Vorbereitende Schritte:
 - [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Schritt 1: Vorhandenen Speicher vorbereiten
+{: #existing-file-1}
 
 Bevor Sie mit dem Anhängen Ihres vorhandenen Speichers an eine App beginnen können, müssen Sie alle erforderlichen Informationen für Ihren persistenten Datenträger abrufen und den Speicher vorbereiten, sodass in Ihrem Cluster auf den Speicher zugegriffen werden kann.  
 {: shortdesc}
 
 **Für Speicher, der mit einer `retain`-Speicherklasse bereitgestellt wurde:** </br>
-Wenn Sie Speicher mit einer `retain`-Speicherklasse bereitgestellt haben und Sie den Persistent Volume Claim entfernen, werden der persistente Datenträger und die physische Speichereinheit nicht automatisch entfernt. Zum Wiederverwenden des Speichers in Ihrem Cluster müssen Sie zuerst den beibehaltenen persistenten Datenträger entfernen.
+Wenn Sie Speicher mit einer `retain`-Speicherklasse bereitgestellt haben und Sie den Persistent Volume Claim entfernen, werden der persistente Datenträger und die physischer Speichereinheit nicht automatisch entfernt. Zum Wiederverwenden des Speichers in Ihrem Cluster müssen Sie zuerst den beibehaltenen persistenten Datenträger entfernen.
 
 Wenn Sie den in einem Cluster bereitgestellten Speicher auch in einem anderen Cluster verwenden möchten, führen Sie die Schritte für [außerhalb des Clusters erstellten Speicher](#external_storage) aus, um den Speicher dem Teilnetz Ihres Workerknotens hinzuzufügen.
 {: tip}
@@ -479,9 +480,6 @@ Wenn Sie den in einem Cluster bereitgestellten Speicher auch in einem anderen Cl
 **Für persistenten Speicher, der außerhalb des Clusters bereitgestellt wurde:** </br>
 Wenn Sie bereits vorhandenen Speicher verwenden möchten, den Sie zuvor bereitgestellt, aber noch nie zuvor in Ihrem Cluster verwendet haben, müssen Sie den Speicher in demselben Teilnetz wie Ihre Workerknoten verfügbar machen.
 
-Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [einen Supportfall öffnen](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
-{: note}
-
 1.  {: #external_storage}Klicken Sie im [Portal der IBM Cloud-Infrastruktur (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/classic?) auf **Speicher**.
 2.  Klicken Sie auf **Dateispeicher** und wählen Sie im Menü **Aktionen** die Option zum Autorisieren des Hosts**** aus.
 3.  Wählen Sie **Teilnetze** aus.
@@ -491,6 +489,7 @@ Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [einen Supportfall öf
 7.  Notieren Sie die Werte in den Feldern `Mountpunkt`, `Größe` und `Standort`. Das Feld `Mountpunkt` wird als `<nfs_server>:<file_storage_path>` angezeigt.
 
 ### Schritt 2: Persistenten Datenträger (PV) und übereinstimmenden Persistent Volume Claim (PVC) erstellen
+{: #existing-file-2}
 
 1.  Erstellen Sie eine Speicherkonfigurationsdatei für Ihr PV (Persistent Volume). Schließen Sie die Werte ein, die Sie zuvor abgerufen haben.
 
@@ -611,7 +610,7 @@ Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [einen Supportfall öf
     {: screen}
 
 
-Sie haben erfolgreich ein PV (Persistent Volume) erstellt und an einen PVC (Persistent Volume Claim) gebunden. Clusterbenutzer können jetzt den [PVC (Persistent Volume Claim) an ihre Bereitstellungen anhängen](#app_volume_mount) und mit dem Lesen und Schreiben in dem PV-Objekt (Persistent Volume-Objekt) beginnen.
+Sie haben erfolgreich ein PV (Persistent Volume) erstellt und an einen PVC (Persistent Volume Claim) gebunden. Clusterbenutzer können jetzt den [PVC (Persistent Volume Claim) an ihre Bereitstellungen anhängen](#file_app_volume_mount) und mit dem Lesen und Schreiben in dem PV-Objekt (Persistent Volume-Objekt) beginnen.
 
 <br />
 
@@ -1206,13 +1205,13 @@ Der Dateispeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 
 <dl>
   <dt>Regelmäßige Snapshots konfigurieren</dt>
-  <dd><p>Sie können [für Ihren Dateispeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Dateispeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, falls ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt. <p class="note">: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [einen Supportfall öffnen](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>[Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Melden Sie sich an der Befehlszeilenschnittstelle `ibmcloud sl` an. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Sie können [für Ihren Dateispeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Dateispeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, wenn ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt hat.</br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>[Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Melden Sie sich an der Befehlszeilenschnittstelle `ibmcloud sl` an. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Listen Sie alle vorhandenen PVs in Ihrem Cluster auf. <pre class="pre"><code>    kubectl get pv
     </code></pre></li><li>Rufen Sie die Details für das PV ab, für das Snapshotspeicherplatz angefordert werden soll, und notieren Sie sich die Datenträger-ID, die Größe und die E/A-Operationen pro Sekunde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv-name&gt;</code></pre> Die Datenträger-ID, die Größe und den Wert für die Anzahl E/A-Operationen pro Sekunde finden Sie im Abschnitt <strong>Labels</strong> der CLI-Ausgabe. </li><li>Erstellen Sie die Snapshotgröße für den vorhandenen Datenträger mit den Parametern, die Sie im vorherigen Schritt abgerufen haben. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;datenträger-id&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Warten Sie, bis die Snapshotgröße erstellt wurde. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;datenträger-id&gt;</code></pre>Die Snapshotgröße wird erfolgreich bereitgestellt, wenn der Wert für <strong>Snapshot Size (GB)</strong> (Snapshotgröße (GB)) in der CLI-Ausgabe von '0' in die von Ihnen angeforderte Größe geändert wird. </li><li>Erstellen Sie einen Snapshot für den Datenträger und notieren Sie die ID des von Sie erstellten Snapshots. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;datenträger-id&gt;</code></pre></li><li>Überprüfen Sie, dass der Snapshot erfolgreich erstellt wurde. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;datenträger-id&gt;</code></pre></li></ol></br><strong>Gehen Sie wie folgt vor, um Daten aus einem Snapshot auf einem vorhandenen Datenträger wiederherzustellen: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot-id&gt;</code></pre></p></dd>
   <dt>Snapshots in eine andere Zone replizieren</dt>
- <dd><p>Um Daten vor einem Zonenausfall zu schützen, können Sie in einer Dateispeicherinstanz, die in einer anderen Zone konfiguriert ist, [Snapshots replizieren](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication). Daten können nur aus dem primären Speicher an den Sicherungsspeicher repliziert werden. Sie können eine replizierte Dateispeicherinstanz nicht an einen Cluster anhängen. Wenn Ihr primärer Speicher fehlschlägt, können Sie Ihren replizierten Sicherungsspeicher manuell als primären Speicher festlegen. Anschließend können Sie ihn an den Cluster anhängen. Nachdem Ihr primärer Speicher wiederhergestellt wurde, können Sie die Daten aus dem Sicherungsspeicher wiederherstellen. <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, können Sie keine Snapshots in eine andere Zone replizieren.</p></dd>
+ <dd><p>Um Daten vor einem Zonenausfall zu schützen, können Sie in einer Dateispeicherinstanz, die in einer anderen Zone konfiguriert ist, [Snapshots replizieren](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication). Daten können nur aus dem primären Speicher an den Sicherungsspeicher repliziert werden. Sie können eine replizierte Dateispeicherinstanz nicht an einen Cluster anhängen. Wenn Ihr primärer Speicher fehlschlägt, können Sie Ihren replizierten Sicherungsspeicher manuell als primären Speicher festlegen. Anschließend können Sie ihn an den Cluster anhängen. Nachdem Ihr primärer Speicher wiederhergestellt wurde, können Sie die Daten aus dem Sicherungsspeicher wiederherstellen.</p></dd>
  <dt>Speicher duplizieren</dt>
- <dd><p>Sie können Ihre [Dateispeicherinstanz in derselben Zone duplizieren](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume), in der sich auch die ursprüngliche Speicherinstanz befindet. Ein Duplikat hat dieselben Daten wie die Originalspeicherinstanz zu dem Zeitpunkt, an dem das Duplikat erstellt wurde. Verwenden Sie das Duplikat - im Gegensatz zu den Replikaten - als unabhängige Speicherinstanz. Zur Vorbereitung einer Duplizierung müssen Sie zunächst [Snapshots für den Datenträger erstellen](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots). <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie <a href="/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support">ein Supportfall öffnen</a>.</p></dd>
+ <dd><p>Sie können Ihre [Dateispeicherinstanz in derselben Zone duplizieren](/docs/infrastructure/FileStorage?topic=FileStorage-duplicatevolume#duplicatevolume), in der sich auch die ursprüngliche Speicherinstanz befindet. Ein Duplikat hat dieselben Daten wie die Originalspeicherinstanz zu dem Zeitpunkt, an dem das Duplikat erstellt wurde. Verwenden Sie das Duplikat - im Gegensatz zu den Replikaten - als unabhängige Speicherinstanz. Zur Vorbereitung einer Duplizierung müssen Sie zunächst [Snapshots für den Datenträger erstellen](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots).</p></dd>
   <dt>Daten in {{site.data.keyword.cos_full}} sichern</dt>
   <dd><p>Sie können den Befehl [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter) verwenden, damit ein Pod für Sicherung und Wiederherstellung in Ihrem Cluster den Betrieb aufnimmt. Dieser Pod enthält ein Script zur Ausführung einer einmaligen oder regelmäßigen Sicherung für alle PVCs (Persistent Volume Claims) in Ihrem Cluster. Die Daten werden in Ihrer {{site.data.keyword.cos_full}}-Instanz gespeichert, die Sie in einer Zone konfiguriert haben.</p>
   <p>Damit Ihre Daten noch besser hoch verfügbar sind und um Ihre App vor einem Zonenausfall zu schützen, konfigurieren Sie eine zweite {{site.data.keyword.cos_full}}-Instanz und replizieren Sie die Daten zonenübergreifend. Falls Sie Daten von Ihrer {{site.data.keyword.cos_full}}-Instanz wiederherstellen müssen, verwenden Sie das Wiederherstellungsscript, das mit dem Image bereitgestellt wird.</p></dd>
@@ -1325,7 +1324,7 @@ Der Dateispeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 </table>
 
 ### Gold
-{: #block_gold}
+{: #file_gold}
 
 <table>
 <caption>Dateispeicherklasse: gold</caption>
@@ -1497,7 +1496,7 @@ Wenn Sie die angepasste Speicherklasse erstellen, geben Sie dieselbe Region und 
 
 - **Beispiel für Endurance-Dateispeicher:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: ibmc-file-silver-mycustom-storageclass

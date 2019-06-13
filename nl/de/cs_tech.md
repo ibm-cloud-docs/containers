@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, docker
 
@@ -65,7 +65,7 @@ Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
   </ul>
   </dd>
 
-<p>Erfahren Sie mehr über das [Sichern der persönliche Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Container-Images.</p>
+<p>Erfahren Sie mehr über das [Sichern der persönlichen Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Container-Images.</p>
 
 <p>Sind Sie bereit, mehr über Docker zu erfahren? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">Erfahren Sie, wie Docker und {{site.data.keyword.containerlong_notm}} zusammenarbeiten, indem Sie diesen Kurs absolvieren.</a></p>
 
@@ -98,7 +98,7 @@ Im folgenden Diagramm sind einige grundlegende Kubernetes-Konzepte veranschaulic
 <dt>Bereitstellung</dt>
 <dd>Eine Bereitstellung ist eine Kubernetes-Ressource, in der Sie Informationen zu anderen Ressourcen oder Funktionalitäten angeben, die für die Ausführung Ihrer App erforderlich sind, z. B. Services, persistenter Speicher oder Annotationen. Sie dokumentieren eine Bereitstellung in einer YAML-Konfigurationsdatei und wenden diese dann auf den Cluster an. Der Kubernetes-Master konfiguriert die Ressourcen und stellt Container in Pods auf den Workerknoten mit verfügbarer Kapazität bereit.
 </br></br>
-Definieren Sie Aktualisierungsstrategien für Ihre App. Dabei können Sie unter anderem die Anzahl von Pods angeben, die Sie bei einer rollierenden Aktualisierung hinzufügen wollen, und festlegen, wie viele Pods zur gleichen Zeit nicht verfügbar sein dürfen. Wenn Sie eine rollierende Aktualisierung durchführen, prüft die Bereitstellung, ob die Aktualisierung funktioniert, und stoppt den Rollout, wenn Fehler erkannt werden.</dd>
+Definieren Sie Aktualisierungsstrategien für Ihre App. Dabei können Sie unter anderem die Anzahl von Pods angeben, die Sie bei einer rollierenden Aktualisierung hinzufügen wollen, und festlegen, wie viele Pods zur gleichen Zeit unverfügbar sein dürfen. Wenn Sie eine rollierende Aktualisierung durchführen, prüft die Bereitstellung, ob die Aktualisierung funktioniert, und stoppt den Rollout, wenn Fehler erkannt werden.</dd>
 
 <dt>Pod</dt>
 <dd>Jede containerisierte App, die in einem Cluster bereitgestellt wird, wird von einer Kubernetes-Ressource namens Pod bereitgestellt, ausgeführt und verwaltet. Pods stellen kleine bereitstellbare Einheiten in einem Kubernetes-Cluster dar und werden verwendet, um Container zu gruppieren, die als einzelne Einheit verarbeitet werden müssen. In den meisten Fällen wird ein Container in einem eigenen Pod bereitgestellt. Es kann jedoch erforderlich sein, dass für eine App ein Container und weitere Hilfscontainer in einem Pod bereitgestellt werden, damit diese Container mit derselben privaten IP-Adresse referenziert werden können.</dd>
@@ -106,7 +106,7 @@ Definieren Sie Aktualisierungsstrategien für Ihre App. Dabei können Sie unter 
 <dt>App</dt>
 <dd>Eine App kann sich auf eine gesamte App oder eine Komponente einer App beziehen. Sie können Komponenten einer App in verschiedenen Pods oder Workerknoten bereitstellen.</dd>
 
-<p>Erfahren Sie mehr über das [Sichern der persönliche Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Kubernetes-Ressourcen.</p>
+<p>Erfahren Sie mehr über das [Sichern der persönlichen Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Kubernetes-Ressourcen.</p>
 
 <p>Sind Sie bereit, mehr über Kubernetes zu erfahren?</p>
 <ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">Erweitern Sie Ihr terminologisches Wissen mithilfe des Lernprogramms "Cluster erstellen"</a>.</li>
@@ -145,7 +145,7 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
 
 <dl>
   <dt>Kubernetes-Master</dt>
-    <dd>Der Kubernetes-Master hat die Aufgabe, alle Rechen-, Netz- und Speicherressourcen im Cluster zu verwalten. Der Kubernetes-Master stellt sicher, dass Ihre containerisierten Apps und Services auf den Workerknoten im Cluster gleichmäßig bereitgestellt werden. Abhängig davon, wie Sie Ihre App und Services konfigurieren, bestimmt der Master den Workerknoten, der über ausreichend Ressourcen verfügt, um die Anforderungen einer App zu erfüllen.</br></br>In der folgenden Tabelle werden die Komponenten des Kubernetes-Masters beschrieben.
+    <dd>Der Kubernetes-Master hat die Aufgabe, alle Rechen-, Netz- und Speicherressourcen im Cluster zu verwalten. Der Kubernetes-Master stellt sicher, dass Ihre containerisierten Apps und Services auf den Workerknoten im Cluster gleichmäßig bereitgestellt werden. Abhängig davon, wie Sie Ihre App und Services konfigurieren, bestimmt der Master den Workerknoten, der über ausreichend Ressourcen verfügt, um die Anforderungen einer App zu erfüllen.</br></br>Die folgende Tabelle beschreibt die Komponenten des Kubernetes-Masters.
     <table>
     <caption>Komponenten des Kubernetes-Masters</caption>
     <thead>
@@ -187,7 +187,7 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     <tr>
     <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
-    <td>Für Cluster, auf denen Kubernetes Version 1.10 oder höher ausgeführt wird, leitet `ibm-master-proxy` Anforderungen vom Workerknoten an die IP-Adressen der hoch verfügbaren Master-Replikate weiter. In Einzelzonenclustern verfügt der Master über drei Replikate auf separaten Hosts mit einer Master-IP-Adresse und einem Domänennamen. Für Cluster in einer mehrzonenfähigen Zone verfügt der Master über drei Replikate, die über Zonen verteilt sind. Jeder Master hat hier seine eigene IP-Adresse, die bei DNS registriert ist, und einen Domänennamen für den gesamten Cluster-Master.</td>
+    <td>`ibm-master-proxy` leitet Anforderungen vom Workerknoten an die IP-Adressen der hoch verfügbaren Master-Replikate weiter. In Einzelzonenclustern verfügt der Master über drei Replikate auf separaten Hosts mit einer Master-IP-Adresse und einem Domänennamen. Für Cluster in einer mehrzonenfähigen Zone verfügt der Master über drei Replikate, die über Zonen verteilt sind. Jeder Master hat hier seine eigene IP-Adresse, die bei DNS registriert ist, und einen Domänennamen für den gesamten Cluster-Master.</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
@@ -257,5 +257,5 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     </tbody></table></dd>
 </dl>
 
-Möchten Sie sehen, wie {{site.data.keyword.containerlong_notm}} mit anderen Produkten und Services verwendet werden kann? Werfen Sie einen Blick auf einige [Integrationen](/docs/containers?topic=containers-integrations#integrations).
+Möchten Sie sehen, wie {{site.data.keyword.containerlong_notm}} mit anderen Produkten und Services verwendet werden kann? Werfen Sie einen Blick auf einige [Integrationen](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,7 @@ Im ersten Lernprogramm fungieren Sie als Netzadministrator der PR-Firma. Sie kon
 {:shortdesc}
 
 -   Erstellen Sie einen Cluster mit einem Worker-Pool, der einen (1) Workerknoten hat.
--   Installieren Sie die Befehlszeilenschnittstellen zum Ausführen von [Kubernetes-Befehlen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/kubectl/overview/) und zum Verwalten von Docker-Images in {{site.data.keyword.registrylong_notm}}.
+-   Installieren Sie die Befehlszeilenschnittstellen zum Ausführen von [Kubernetes-Befehlen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubectl.docs.kubernetes.io/) und zum Verwalten von Docker-Images in {{site.data.keyword.registrylong_notm}}.
 -   Erstellen Sie ein privates Image-Repository in {{site.data.keyword.registrylong_notm}} zum Speichern der Images.
 -   Fügen Sie den {{site.data.keyword.toneanalyzershort}}-Service zum Cluster hinzu, sodass alle Apps im Cluster diesen Service verwenden können.
 
@@ -75,7 +75,7 @@ Erstellen Sie Ihren Cluster in der {{site.data.keyword.Bluemix_notm}}-Konsole un
 
 Da die Bereitstellung des Clusters einige Minuten dauern kann, erstellen Sie den Cluster, bevor Sie die CLIs installieren.
 
-1.  [Erstellen Sie in der {{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/containers-kubernetes/catalog/cluster/create) einen kostenlosen oder einen Standardcluster mit einem (1) Worker-Pool, in dem sich ein (1) Workerknoten befindet.
+1.  [Erstellen Sie in der {{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/catalog/cluster/create) einen kostenlosen oder einen Standardcluster mit einem (1) Worker-Pool, in dem sich ein (1) Workerknoten befindet.
 
     Sie können auch einen [Cluster in der CLI](/docs/containers?topic=containers-clusters#clusters_cli) erstellen.
     {: tip}
@@ -86,74 +86,69 @@ Installieren Sie bei der Bereitstellung des Clusters die folgenden CLIs, die fü
 -   Kubernetes-CLI
 -   {{site.data.keyword.registryshort_notm}}-Plug-in
 
-
+Wenn Sie stattdessen nach der Erstellung des Clusters die {{site.data.keyword.Bluemix_notm}}-Konsole verwenden möchten, können Sie CLI-Befehle direkt über Ihren Web-Browser im [Kubernetes-Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) ausführen.
+{: tip}
 
 </br>
 **Gehen Sie wie folgt vor, um die CLIs (Befehlszeilenschnittstellen) und die zugehörigen Voraussetzungen zu installieren:**
 
-1.  Als Voraussetzung für das {{site.data.keyword.containerlong_notm}}-Plug-in müssen Sie die [{{site.data.keyword.Bluemix_notm}}-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli) installieren. Verwenden Sie zur Ausführung von {{site.data.keyword.Bluemix_notm}}-CLI-Befehlen das Präfix `ibmcloud`.
-2.  Folgen Sie den Eingabeaufforderungen, um ein Konto und eine {{site.data.keyword.Bluemix_notm}}-Organisation auszuwählen. Cluster sind zwar kontospezifisch, besitzen jedoch keine Abhängigkeit zu einer {{site.data.keyword.Bluemix_notm}}-Organisation oder einem Bluemix-Bereich.
+1. Installieren Sie die [{{site.data.keyword.Bluemix_notm}}-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq). Zu dieser Installation gehören:
+  - Die {{site.data.keyword.Bluemix_notm}}-Basis-CLI. Das Präfix zum Ausführen von Befehlen über die {{site.data.keyword.Bluemix_notm}}-CLI lautet `ibmcloud`.
+  - Das {{site.data.keyword.containerlong_notm}}-Plug-in. Das Präfix zum Ausführen von Befehlen über die {{site.data.keyword.Bluemix_notm}}-CLI lautet `ibmcloud ks`.
+  - Das {{site.data.keyword.registryshort_notm}}-Plug-in. Mit diesem Plug-in können Sie ein privates Image-Repository in {{site.data.keyword.registryshort_notm}} einrichten und verwalten. Das Präfix für die Ausführung von Registry-Befehlen ist `ibmcloud cr`.
 
-4.  Installieren Sie das {{site.data.keyword.containerlong_notm}}-Plug-in, um Kubernetes-Cluster zu erstellen und Workerknoten zu verwalten. Verwenden Sie zur Ausführung von {{site.data.keyword.containerlong_notm}}-Plug-in-Befehlen das Präfix `ibmcloud ks`.
+2. Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre
+{{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn
+Sie dazu aufgefordert werden.
+  ```
+  ibmcloud login
+  ```
+  {: pre}
 
-    ```
-    ibmcloud plugin install container-service -r Bluemix
-    ```
-    {: pre}
+  Wenn Sie über eine eingebundene ID verfügen, dann geben Sie das Flag `--sso` an, um sich anzumelden. Geben Sie Ihren Benutzernamen ein und verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen Kenncode abzurufen.
+  {: tip}
 
-5.  Um die Apps in Ihren Clustern bereitzustellen, müssen Sie die [Kubernetes-CLI installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Um Befehle über die Kubernetes-CLI auszuführen, müssen Sie das Präfix `kubectl` verwenden.
-    1.  Zur Erreichung der vollständigen funktionalen Kompatibilität müssen Sie die Kubernetes-CLI-Version herunterladen, die mit der Version des Kubernetes-Clusters übereinstimmt, die verwendet werden soll. Die aktuelle Kubernetes-Standardversion für {{site.data.keyword.containerlong_notm}} ist Version 1.12.6.
+3. Folgen Sie den Eingabeaufforderungen, um ein Konto auszuwählen.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl)
+5. Stellen Sie sicher, dass die Plug-ins ordnungsgemäß installiert wurden.
+  ```
+  ibmcloud plugin list
+  ```
+  {: pre}
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl)
+  Das {{site.data.keyword.containerlong_notm}}-Plug-in wird in den Ergebnissen mit **container-service**, das {{site.data.keyword.registryshort_notm}}-Plug-in mit **container-registry** angezeigt.
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe)
+6. Um die Apps in Ihren Clustern bereitzustellen, müssen Sie die [Kubernetes-CLI installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Das Präfix zum Ausführen von Befehlen über die Kubernetes-CLI lautet `kubectl`.
 
-          **Tipp:** Wenn Sie Windows verwenden, installieren Sie die Kubernetes-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konfiguration erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen. 
+  1. Laden Sie die Kubernetes-CLI-Version `major.minor` herunter, die mit der Version des Kubernetes-Clusters `major.minor` übereinstimmt, die Sie verwenden möchten. Die aktuelle Kubernetes-Standardversion für {{site.data.keyword.containerlong_notm}} ist Version 1.12.7.
+    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
+    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
+    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
 
-    2.  Wenn Sie mit OS X oder Linux arbeiten, dann führen Sie die folgenden Schritte aus.
-        1.  Verschieben Sie die ausführbare Datei in das Verzeichnis `/usr/local/bin`.
+  2. Wenn Sie mit OS X oder Linux arbeiten, dann führen Sie die folgenden Schritte aus.
 
-            ```
-            mv filepath/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
+    1. Verschieben Sie die ausführbare Datei in das Verzeichnis `/usr/local/bin`.
+      ```
+      mv /filepath/kubectl /usr/local/bin/kubectl
+      ```
+      {: pre}
 
-        2.  Stellen Sie sicher, dass `/usr/local/bin` in der Variablen `PATH` Ihres Systems aufgelistet wird. Die Variable `PATH` enthält alle Verzeichnisse, in denen Ihr Betriebssystem ausführbare Dateien finden kann. Die Verzeichnisse, die in der Variablen `PATH` aufgelistet sind, erfüllen jedoch eine andere Funktion. Im Verzeichnis `/usr/local/bin` werden ausführbare Dateien für Software gespeichert, die nicht Bestandteil des Betriebssystem ist und vom Systemadministrator manuell installiert wurde.
+    2. Stellen Sie sicher, dass `/usr/local/bin` in der Variablen `PATH` Ihres Systems aufgelistet wird. Die Variable `PATH` enthält alle Verzeichnisse, in denen Ihr Betriebssystem ausführbare Dateien finden kann. Die Verzeichnisse, die in der Variablen `PATH` aufgelistet sind, erfüllen jedoch eine andere Funktion. Im Verzeichnis `/usr/local/bin` werden ausführbare Dateien für Software gespeichert, die nicht Bestandteil des Betriebssystem ist und vom Systemadministrator manuell installiert wurde.
+      ```
+      echo $PATH
+      ```
+      {: pre}
+      CLI-Beispielausgabe:
+      ```
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      ```
+      {: screen}
 
-            ```
-            echo $PATH
-            ```
-            {: pre}
-
-            Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  Konvertieren Sie die Datei in eine ausführbare Datei.
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-6. Installieren Sie zum Einrichten und Verwalten eines privaten Image-Repositorys in {{site.data.keyword.registryshort_notm}} das {{site.data.keyword.registryshort_notm}}-Plug-in. Verwenden Sie zur Ausführung von Registry-Befehlen das Präfix `ibmcloud cr`.
-
-    ```
-    ibmcloud plugin install container-registry -r Bluemix
-    ```
-    {: pre}
-
-    Überprüfen Sie durch Ausführen des folgenden Befehls, ob die Plug-ins 'container-service' und 'container-registry' ordnungsgemäß installiert wurden:
-
-    ```
-    ibmcloud plugin list
-    ```
-    {: pre}
+    3. Konvertieren Sie die Datei in eine ausführbare Datei.
+      ```
+      chmod +x /usr/local/bin/kubectl
+      ```
+      {: pre}
 
 Gute Arbeit! Sie haben die CLIs für die folgenden Lerneinheiten und Lernprogramme erfolgreich installiert. Als Nächstes werden Sie die Clusterumgebung einrichten und den {{site.data.keyword.toneanalyzershort}}-Service hinzufügen.
 
@@ -164,25 +159,15 @@ Gute Arbeit! Sie haben die CLIs für die folgenden Lerneinheiten und Lernprogram
 Richten Sie in {{site.data.keyword.registryshort_notm}} ein privates Image-Repository ein und fügen Sie Ihrem Cluster geheime Schlüssel hinzu, sodass die App auf den {{site.data.keyword.toneanalyzershort}}-Service zugreifen kann.
 {: shortdesc}
 
-1.  Melden Sie sich bei der {{site.data.keyword.Bluemix_notm}}-CLI mithilfe Ihrer {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise an, wenn Sie dazu aufgefordert werden.
-
-    ```
-    ibmcloud login [--sso]
-    ```
-    {: pre}
-
-    Wenn Sie über eine eingebundene ID verfügen, dann geben Sie das Flag `--sso` an, um sich anzumelden. Geben Sie Ihren Benutzernamen ein und verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen Kenncode abzurufen.
-    {: tip}
-
-2.  Wenn sich der Cluster in einer anderen Ressourcengruppe als `default` befindet, geben Sie diese Ressourcengruppe als Ziel an. Um die Ressourcengruppen anzuzeigen, zu denen die einzelnen Cluster gehören, führen Sie `ibmcloud ks clusters` aus.
+1.  Wenn sich Ihr Cluster in einer anderen Ressourcengruppe als `default` befindet, geben Sie diese Ressourcengruppe als Ziel an. Um die Ressourcengruppen anzuzeigen, zu denen die einzelnen Cluster gehören, führen Sie `ibmcloud ks clusters` aus.
    ```
    ibmcloud target -g <ressourcengruppenname>
    ```
    {: pre}
 
-3.  Richten Sie Ihr eigenes privates Image-Repository in {{site.data.keyword.registryshort_notm}} ein, um Docker-Images sicher zu speichern und mit allen Benutzern des Clusters gemeinsam nutzen zu können. In {{site.data.keyword.Bluemix_notm}} ist ein privates Image-Repository durch einen Namensbereich gekennzeichnet. Der Namensbereich dient der Erstellung einer eindeutigen URL zu Ihrem Image-Repository, das Entwickler für den Zugriff auf private Docker-Images verwenden können.
+2.  Richten Sie Ihr eigenes privates Image-Repository in {{site.data.keyword.registryshort_notm}} ein, um Docker-Images sicher zu speichern und mit allen Benutzern des Clusters gemeinsam nutzen zu können. In {{site.data.keyword.Bluemix_notm}} ist ein privates Image-Repository durch einen Namensbereich gekennzeichnet. Der Namensbereich dient der Erstellung einer eindeutigen URL zu Ihrem Image-Repository, das Entwickler für den Zugriff auf private Docker-Images verwenden können.
 
-    Erfahren Sie mehr über das [Sichern der persönliche Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Container-Images.
+    Erfahren Sie mehr über das [Sichern der persönlichen Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Container-Images.
 
     Im vorliegenden Beispiel will das PR-Unternehmen lediglich ein Image-Repository in {{site.data.keyword.registryshort_notm}} erstellen und wählt daher `pr-unternehmen` als Namensbereich aus, um alle Images im Konto zu gruppieren. Ersetzen Sie &lt;namensbereich&gt; durch einen Namensbereich Ihrer Wahl, der sich nicht auf das Lernprogramm bezieht.
 
@@ -191,7 +176,7 @@ Richten Sie in {{site.data.keyword.registryshort_notm}} ein privates Image-Repos
     ```
     {: pre}
 
-4.  Vergewissern Sie sich zuerst, dass die Bereitstellung Ihres Workerknotens abgeschlossen ist, bevor Sie mit dem nächsten Schritt fortfahren.
+3.  Vergewissern Sie sich zuerst, dass die Bereitstellung Ihres Workerknotens abgeschlossen ist, bevor Sie mit dem nächsten Schritt fortfahren.
 
     ```
     ibmcloud ks workers --cluster <clustername_oder_-id>
@@ -202,7 +187,7 @@ Richten Sie in {{site.data.keyword.registryshort_notm}} ein privates Image-Repos
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.6
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.7
     ```
     {: screen}
 
@@ -261,8 +246,8 @@ Jedes Mal, wenn Sie sich an der {{site.data.keyword.containerlong}}-CLI anmelden
     Beispielausgabe:
 
     ```
-    Client Version: v1.12.6
-    Server Version: v1.12.6
+    Client Version: v1.12.7
+    Server Version: v1.12.7
     ```
     {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -32,11 +32,7 @@ subcollection: containers
 Ziehen Sie bei der Verwendung von {{site.data.keyword.containerlong}} die folgenden Verfahren für die Fehlerbehebung Ihrer Cluster und Workerknoten in Betracht.
 {: shortdesc}
 
-Wenn Sie ein allgemeineres Problem haben, testen Sie das [Cluster-Debugging](/docs/containers?topic=containers-cs_troubleshoot).
-{: tip}
-
-Bei der Fehlerbehebung können Sie [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) verwenden, um Tests durchzuführen und relevante Informationen aus Ihrem Cluster zu erfassen.
-{: tip}
+<p class="tip">Wenn Sie ein allgemeineres Problem haben, testen Sie das [Cluster-Debugging](/docs/containers?topic=containers-cs_troubleshoot).<br>Zudem können Sie bei der Fehlerbehebung [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) verwenden, um Tests durchzuführen und relevante Informationen aus Ihrem Cluster zu erfassen.</p>
 
 ## Erstellen eines Clusters oder Verwalten von Workerknoten aufgrund von Berechtigungsfehlern nicht möglich
 {: #cs_credentials}
@@ -84,7 +80,7 @@ Der Cluster konnte nicht mit der Registry konfiguriert werden. Stellen Sie siche
 
 {: tsCauses}
 Sie verfügen nicht über die korrekten Berechtigungen zum Erstellen eines Clusters. Zum Erstellen eines Clusters benötigen Sie die folgenden Berechtigungen:
-*  Die Rolle **Superuser** für die IBM Cloud-Infrastruktur (SoftLayer).
+*  Die Rolle **Superuser** für die IBM Cloud-Infrastruktur (SoftLayer) oder mindestens [diese Infrastruktur-Mindestberechtigungen](/docs/containers?topic=containers-access_reference#infra).
 *  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.containerlong_notm}} auf Kontoebene.
 *  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.registrylong_notm}} auf Kontoebene. Schränken Sie Richtlinien für {{site.data.keyword.registryshort_notm}} nicht auf Ressourcengruppenebene ein. Wenn Sie vor dem 4. Oktober 2018 mit der Verwendung von {{site.data.keyword.registrylong_notm}} begonnen haben, stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Richtliniendurchsetzung aktivieren](/docs/services/Registry?topic=registry-user#existing_users).
 
@@ -371,7 +367,7 @@ Im folgenden Szenario wird veranschaulicht, wie es dazu kommen kann, dass ein Cl
 
 {: tsResolve}
 1.  Überprüfen Sie, welches Infrastrukturkonto von der Region, in der sich der Cluster befindet, derzeit zum Bereitstellen der Cluster verwendet wird.
-    1.  Melden Sie sich bei der [{{site.data.keyword.containerlong_notm}}-Clusterkonsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/containers-kubernetes/clusters) an.
+    1.  Melden Sie sich bei der [{{site.data.keyword.containerlong_notm}}-Clusterkonsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/clusters) an.
     2.  Wählen Sie Ihren Cluster in der Tabelle aus.
     3.  Suchen Sie auf der Registerkarte **Übersicht** nach dem Feld **Infrastrukturbenutzer**. Mithilfe dieses Felds können Sie feststellen, ob vom {{site.data.keyword.containerlong_notm}}-Konto ein anderes Infrastrukturkonto als das Standardkonto verwendet wird.
         * Wenn das Feld **Infrastrukturbenutzer** nicht angezeigt wird, verfügen Sie über ein verlinktes nutzungsabhängiges Konto, das für Ihre Infrastruktur- und Plattformkonten dieselben Berechtigungsnachweise verwendet. Der Cluster, der nicht geändert werden kann, kann in einem anderen Infrastrukturkonto bereitgestellt werden.
@@ -408,7 +404,7 @@ Wenn Sie Befehle wie `kubectl exec`, `kubectl attach`, `kubectl proxy`, `kubectl
 Die OpenVPN-Verbindung zwischen dem Masterknoten und dem Workerknoten funktioniert möglicherweise nicht ordnungsgemäß.
 
 {: tsResolve}
-1. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie eine [VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten über das private Netz miteinander kommunizieren können. Zur Aktivierung von VRF [wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+1. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie eine [VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten über das private Netz miteinander kommunizieren können. Zur Aktivierung von VRF [wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 2. Starten Sie den OpenVPN-Client-Pod erneut.
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -589,8 +585,8 @@ Aktualisieren Sie die Referenz der privaten IP-Adresse manuell, um auf den korre
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.12.6
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.12.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.12.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.12.7
   ```
   {: screen}
 
@@ -681,14 +677,16 @@ Sie können eine der folgenden Lösungen ausprobieren:
   - Überprüfen Sie den Status Ihres Clusters, indem Sie den Befehl `ibmcloud ks clusters` ausführen. Überprüfen Sie anschließend durch Ausführen des Befehls `ibmcloud ks workers --cluster <clustername>`, ob Ihre Workerknoten bereitgestellt wurden.
   - Überprüfen Sie, ob Ihr VLAN gültig ist. Damit ein VLAN gültig ist, muss es einer Infrastruktur zugeordnet sein, die einen Worker mit lokalem Plattenspeicher hosten kann. Sie können [Ihre VLANs auflisten](/docs/containers?topic=containers-cs_cli_reference#cs_vlans), indem Sie den Befehl `ibmcloud ks vlans --zone <zone>` ausführen. Wenn das VLAN nicht in der Liste aufgeführt wird, ist es nicht gültig. Wählen Sie ein anderes VLAN aus.
 
-
 <br />
+
+
 
 
 ## Image kann nicht aus der Registry extrahiert werden
 {: #ts_image_pull}
 
 {: tsSymptoms}
+
 Wenn Sie eine Workload bereitstellen, die ein Image aus {{site.data.keyword.registrylong_notm}} extrahiert, tritt für Ihren Pod ein Fehler mit dem Status **`ImagePullBackOff`** auf.
 
 ```
@@ -722,7 +720,7 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
 {: screen}
 
 {: tsCauses}
-Ihr Cluster verwendet einen API-Schlüssel oder ein Token, der bzw. das in einem [geheimen Schlüssel für Image-Pull-Operationen (Image Pull Secret)](/docs/containers?topic=containers-images#cluster_registry_auth) gespeichert ist, um den Cluster zum Extrahieren von Images aus {{site.data.keyword.registrylong_notm}} zu berechtigen. Standardmäßig haben neue Cluster geheime Schlüssel für Image-Pull-Operationen, die API-Schlüsseln verwenden, sodass der Cluster Images aus einer beliebigen regionalen Registry für Container extrahieren kann, die im Kubernetes-Namensbereich `default` bereitgestellt wurden. Wenn der Cluster einen geheimen Schlüssel für Image-Pull-Operationen hat, der ein Token verwendet, ist der Standardzugriff auf {{site.data.keyword.registrylong_notm}} dagegen auf nur bestimmte regionale Registrys eingeschränkt.
+Ihr Cluster verwendet einen API-Schlüssel oder ein Token, der bzw. das in einem [geheimen Schlüssel für Image-Pull-Operationen (Image Pull Secret)](/docs/containers?topic=containers-images#cluster_registry_auth) gespeichert ist, um den Cluster zum Extrahieren von Images aus {{site.data.keyword.registrylong_notm}} zu berechtigen. Standardmäßig haben neue Cluster geheime Schlüssel für Image-Pull-Operationen, die API-Schlüssel verwenden, sodass der Cluster Images aus einer beliebigen regionalen `icr.io`-Registry für Container extrahieren kann, die im Kubernetes-Namensbereich `default` bereitgestellt wurden. Wenn der Cluster einen geheimen Schlüssel für Image-Pull-Operationen hat, der ein Token verwendet, ist der Standardzugriff auf {{site.data.keyword.registrylong_notm}} auf bestimmte regionale Registrys eingeschränkt, die die veralteten `<region>.registry.bluemix.net`-Domänen verwenden.
 
 {: tsResolve}
 
@@ -842,7 +840,7 @@ In den folgenden Schritten wird davon ausgegangen, dass der API-Schlüssel die B
             ```
             {: pre}
         2.  Erstellen Sie Ihre Bereitstellung im Kubernetes-Namensbereich `default` neu. Wenn weiterhin eine Berechtigungsfehlernachricht angezeigt wird, wiederholen Sie die Schritte 1 bis 5 mit den neuen geheimen Schlüsseln für Image-Pull-Operationen. Wenn Sie sich auch weiterhin nicht anmelden können, [wenden Sie sich an das IBM Team auf Slack oder öffnen Sie einen {{site.data.keyword.Bluemix_notm}}-Supportfall](#clusters_getting_help).
-    6.  Wenn die Anmeldung erfolgreich ist, extrahieren Sie ein Image auf Ihre lokale Maschine. Schlägt der Befehl mit einem Fehler 'Zugriff verweigert' (`access denied`) fehl, handelt es sich bei dem Registry-Konto um ein anderes {{site.data.keyword.Bluemix_notm}}-Konto als das, in dem sich Ihr Cluster befindet. [Erstellen Sie einen geheimen Schlüssel für Image-Pull-Operationen (imagePullSecret), um auf Images in dem anderen Konto zuzugreifen](/docs/containers?topic=containers-images#other_registry_accounts). Wenn der Befehl ein Image erfolgreich auf Ihre lokale Maschine extrahiert, [wenden Sie sich an das IBM Team auf Slack oder öffnen Sie einen {{site.data.keyword.Bluemix_notm}}-Supportfall](#clusters_getting_help).
+    6.  Wenn die Anmeldung erfolgreich ist, extrahieren Sie ein Image auf Ihre lokale Maschine. Schlägt der Befehl mit einem Fehler 'Zugriff verweigert' (`access denied`) fehl, handelt es sich bei dem Registry-Konto um ein anderes {{site.data.keyword.Bluemix_notm}}-Konto als das, in dem sich Ihr Cluster befindet. [Erstellen Sie einen geheimen Schlüssel für Image-Pull-Operationen (imagePullSecret), um auf Images in dem anderen Konto zuzugreifen](/docs/containers?topic=containers-images#other_registry_accounts). Wenn Sie ein Image auf Ihre lokale Maschine extrahieren können, verfügt Ihr API-Schlüssel zwar über die entsprechenden Berechtigungen, aber die API-Konfiguration in Ihrem Cluster ist nicht korrekt. Sie können dieses Problem nicht lösen. [Wenden Sie sich an das IBM Team auf Slack oder öffnen Sie einen {{site.data.keyword.Bluemix_notm}}-Supportfall](#clusters_getting_help).
         ```
         docker pull <region>icr.io/<namensbereich>/<image>:<tag>
         ```
@@ -892,7 +890,7 @@ Diese Methode der Verwendung eines Tokens für die Autorisierung des Clusterzugr
     ```
     {: pre}
 6.  Wenn die Anmeldung erfolgreich ist, extrahieren Sie ein Image auf Ihre lokale Maschine. Schlägt der Befehl mit einem Fehler 'Zugriff verweigert' (`access denied`) fehl, handelt es sich bei dem Registry-Konto um ein anderes {{site.data.keyword.Bluemix_notm}}-Konto als das, in dem sich Ihr Cluster befindet. [Erstellen Sie einen geheimen Schlüssel für Image-Pull-Operationen (imagePullSecret), um auf Images in dem anderen Konto zuzugreifen](/docs/containers?topic=containers-images#token_other_regions_accounts). Wenn der Befehl ein Image erfolgreich auf Ihre lokale Maschine extrahiert, [wenden Sie sich an das IBM Team auf Slack oder öffnen Sie einen {{site.data.keyword.Bluemix_notm}}-Supportfall](#clusters_getting_help).
-        ```
+    ```
     docker pull registry.<region>.bluemix.net/<namensbereich>/<image>:<tag>
     ```
     {: pre}
@@ -1010,32 +1008,44 @@ Gehen Sie wie folgt vor, um festzustellen, ob ein Container aufgrund einer Über
 Gehen Sie wie folgt vor, um festzustellen, ob der Pod durch Pods mit höherer Priorität ersetzt wurde:
 1.  Rufen Sie den Namen des Pods ab.
 
-  ```
-  kubectl get pods
-  ```
-  {: pre}
+    ```
+    kubectl get pods
+    ```
+    {: pre}
 
-2.  Rufen Sie die Beschreibung in der YAML-Datei für den Pod ab: `kubectl get pod <podname> -o yaml`
+2.  Beschreiben Sie Ihre Pod-YAML.
+
+    ```
+    kubectl get pod <podname> -o yaml
+    ```
+    {: pre}
 
 3.  Überprüfen Sie das Feld `priorityClassName`.
 
     1.  Wenn für das Feld `priorityClassName` kein Wert angegeben ist, weist der Pod die Prioritätsklasse `globalDefault` auf. Wenn der Clusteradministrator nicht die Prioritätsklasse `globalDefault` festgelegt hat, ist der Standardwert null (0) oder die niedrigste Priorität. Der Pod kann von jedem Pod mit einer höheren Priorität zurückgestellt oder entfernt werden.
-    2.  Wenn für das Feld `priorityClassName` ein Wert angegeben ist, rufen Sie die Prioritätsklasse ab: `kubectl get priorityclass <name_der_prioritätsklasse> -o yaml`
+
+    2.  Wenn für das Feld `priorityClassName` ein Wert angegeben ist, rufen Sie die Prioritätsklasse ab.
+
+        ```
+        kubectl get priorityclass <name_der_prioritätsklasse> -o yaml
+        ```
+        {: pre}
+
     3.  Notieren Sie den Wert für das Feld `Value`, um die Priorität des Pods zu überprüfen.
 
 4.  Listen Sie vorhandene Prioritätsklassen im Cluster auf.
 
-  ```
-  kubectl get priorityclasses
-  ```
-  {: pre}
+    ```
+    kubectl get priorityclasses
+    ```
+    {: pre}
 
 5.  Rufen Sie für jede Prioritätsklasse die YAML-Datei ab und notieren Sie den Wert im Feld `Value`.
 
-  ```
-  kubectl get priorityclass <name_der_prioritätsklasse> -o yaml
-  ```
-  {: pre}
+    ```
+    kubectl get priorityclass <name_der_prioritätsklasse> -o yaml
+    ```
+    {: pre}
 
 6.  Vergleichen Sie den Prioritätsklassenwert des Pos mit den anderen Prioritätsklassenwerten, um festzustellen, ob seine Priorität höher oder niedriger ist.
 
@@ -1050,7 +1060,7 @@ Gehen Sie wie folgt vor, um festzustellen, ob der Pod durch Pods mit höherer Pr
 {: #cs_helm_install}
 
 {: tsSymptoms}
-Wenn Sie versuchen, ein aktualisiertes Helm-Diagramm zu installieren, indem Sie den Befehl `helm install -f config.yaml --namespace=kube-system --name=<releasename> ibm/<diagrammname>` ausführen, erhalten Sie die Fehlernachricht `Error: failed to download "ibm/<chart_name>"`.
+Wenn Sie versuchen, ein aktualisiertes Helm-Diagramm zu installieren, indem Sie den Befehl `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/<chart_name>` ausführen, erhalten Sie die Fehlernachricht `Error: failed to download "ibm/<chart_name>"`.
 
 {: tsCauses}
 Die URL für das {{site.data.keyword.Bluemix_notm}}-Repository in Ihrer Helm-Instanz ist möglicherweise nicht korrekt.
@@ -1113,7 +1123,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Helm-Diagramm zu beheben:
 
 {: tsSymptoms}
 
-Wenn Sie versuchen, Tiller von Helm zu installieren oder Images aus öffentlichen Registrys, wie zum Beispiel Dockerhub, bereitzustellen, schlägt die Installation mit einem Fehler ähnlich dem folgenden fehl:
+Wenn Sie versuchen, Tiller von Helm zu installieren oder Images aus öffentlichen Registrys, wie zum Beispiel DockerHub, bereitzustellen, schlägt die Installation mit einem Fehler ähnlich dem folgenden fehl:
 
 ```
 Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:
@@ -1125,7 +1135,7 @@ Sie haben möglicherweise eine angepasste Firewall eingerichtet, angepasste Cali
 
 {: tsResolve}
 - Wenn Sie eine angepasste Firewall haben oder angepasste Calico-Richtlinien festgelegt haben, lassen Sie aus- und eingehenden Netzdatenverkehr zwischen Ihren Workerknoten und der Container-Registry zu, in der das Image gespeichert ist. Wenn das Image in {{site.data.keyword.registryshort_notm}} gespeichert ist, prüfen Sie die Informationen zu den erforderlichen Ports unter [Zugriff des Clusters auf Infrastrukturressourcen und andere Services ermöglichen](/docs/containers?topic=containers-firewall#firewall_outbound).
-- Wenn Sie einen privaten Cluster erstellt haben, indem Sie nur den privaten Serviceendpunkt aktiviert haben, können Sie [den öffentlichen Serviceendpunkt für Ihren Cluster aktivieren](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable). Wenn Sie Helm-Diagramme in einem privaten Cluster installieren wollen, ohne eine öffentliche Verbindung zu öffnen, können Sie Helm [mit Tiller](/docs/containers?topic=containers-integrations#private_local_tiller) oder [ohne Tiller](/docs/containers?topic=containers-integrations#private_install_without_tiller) installieren.
+- Wenn Sie einen privaten Cluster erstellt haben, indem Sie nur den privaten Serviceendpunkt aktiviert haben, können Sie [den öffentlichen Serviceendpunkt für Ihren Cluster aktivieren](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable). Wenn Sie Helm-Diagramme in einem privaten Cluster installieren wollen, ohne eine öffentliche Verbindung zu öffnen, können Sie Helm [mit Tiller](/docs/containers?topic=containers-helm#private_local_tiller) oder [ohne Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller) installieren.
 
 <br />
 

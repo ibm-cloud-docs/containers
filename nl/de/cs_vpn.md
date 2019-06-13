@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ Um eine Verbindung Ihrer Workerknoten und Apps mit einem lokalen Rechenzentrum e
 
 - **StrongSwan-IPSec-VPN-Service**: Sie können einen [StrongSwan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/about.html) konfigurieren, der Ihren Kubernetes-Cluster sicher mit einem lokalen Netz verbindet. Der StrongSwan-IPSec-VPN-Service stellt einen sicheren End-to-End-Kommunikationskanal über das Internet bereit, der auf der standardisierten IPSec-Protokollsuite (IPSec – Internet Protocol Security) basiert. Um eine sichere Verbindung zwischen Ihrem Cluster und einem lokalen Netz einzurichten, [konfigurieren und implementieren Sie den StrongSwan-IPSec-VPN-Service](#vpn-setup) direkt in einem Pod in Ihrem Cluster.
 
-- **Virtual Router Appliance (VRA) oder Fortigate Security Appliance (FSA)**: Sie können zum Konfigurieren eines IPSec-VPN-Endpunkts entweder eine [VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) oder eine [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) einrichten. Diese Option ist hilfreich, wenn der Cluster größer ist, Sie über ein einzelnes VPN auf mehrere Cluster zugreifen möchten oder Sie ein routenbasiertes VPN benötigen. Informationen zum Konfigurieren einer VRA finden Sie unter [VPN-Konnektivität mit VRA konfigurieren](#vyatta).
+- **Virtual Router Appliance (VRA) oder Fortigate Security Appliance (FSA)**: Sie können eine [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) oder [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) einrichten, um einen IPSec-VPN-Endpunkt zu konfigurieren. Diese Option ist hilfreich, wenn der Cluster größer ist, Sie über ein einzelnes VPN auf mehrere Cluster zugreifen möchten oder Sie ein routenbasiertes VPN benötigen. Informationen zum Konfigurieren einer VRA finden Sie unter [VPN-Konnektivität mit VRA konfigurieren](#vyatta).
 
 ## Helm-Diagramm für StrongSwan-IPSec-VPN-Service
 {: #vpn-setup}
@@ -44,7 +44,7 @@ Verwenden Sie ein Helm-Diagramm, um den StrongSwan-IPSec-VPN-Service innerhalb e
 
 Da strongSwan in Ihren Cluster integriert ist, benötigen Sie keine externe Gateway-Einheit. Beim Einrichten der VPN-Konnektivität werden automatisch Routen auf allen Workerknoten im Cluster konfiguriert. Diese Routen ermöglichen eine bidirektionale Konnektivität über den VPN-Tunnel zwischen Pods auf allen Workerknoten und dem fernen System. Das folgende Diagramm zeigt beispielsweise, wie eine App in {{site.data.keyword.containerlong_notm}} mit einem lokalen Server über eine strongSwan-VPN-Verbindung kommunizieren kann:
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="App in {{site.data.keyword.containerlong_notm}} mithilfe einer Lastausgleichsfunktion zugänglich machen" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="Machen Sie eine App in {{site.data.keyword.containerlong_notm}} zugänglich, indem Sie einen Netzlastausgleichsfunktion (NLB) verwenden" style="width:700px; border-style: none"/>
 
 1. Eine App in Ihrem Cluster, `myapp`, empfängt eine Anforderung von einem Ingress- oder LoadBalancer-Service und muss eine sichere Verbindung mit Daten in Ihrem lokalen Netz herstellen.
 
@@ -68,7 +68,7 @@ Prüfen Sie folgende Überlegungen und Einschränkungen, bevor Sie das StrongSwa
 * Das StrongSwan-Helm-Diagramm lässt nicht zu, dass mehrere Cluster und andere IaaS-Ressourcen eine einzige VPN-Verbindung gemeinsam nutzen.
 * Das StrongSwan-Helm-Diagramm wird innerhalb des Clusters als Kubernetes-Pod ausgeführt. Die Speicher- und Netzverwendung von Kubernetes und anderen Pods, die im Cluster ausgeführt werden, wirkt sich auf die VPN-Leistung aus. Wenn Sie eine leistungskritische Umgebung haben, sollten Sie in Betracht ziehen, eine VPN-Lösung zu verwenden, die außerhalb des Clusters auf dedizierter Hardware ausgeführt wird.
 * Das StrongSwan-Helm-Diagramm führt einen einzelnen VPN-Pod als IPSec-Tunnel-Endpunkt aus. Wenn der Pod fehlschlägt, startet der Cluster den Pod erneut. Es kann jedoch sein, dass eine kurze Ausfallzeit auftritt, während der neue Pod gestartet wird und die VPN-Verbindung neu eingerichtet wird. Wenn für Sie eine schnellere Fehlerbehebung oder eine ausgefeiltere Hochverfügbarkeitslösung erforderlich ist, sollten Sie in Betracht ziehen, eine VPN-Lösung zu verwenden, die außerhalb des Clusters auf dedizierter Hardware ausgeführt wird.
-* Das StrongSwan-Helm-Diagramm stellt keine Messwerte oder eine Überwachung des Netzwerkverkehrs bereit, der über die VPN-Verbindung fließt. Eine Liste der unterstützten Überwachungstools finden Sie im Abschnitt [Protokollierungs- und Überwachungsservices](/docs/containers?topic=containers-integrations#health_services).
+* Das StrongSwan-Helm-Diagramm stellt keine Messwerte oder eine Überwachung des Netzwerkverkehrs bereit, der über die VPN-Verbindung fließt. Eine Liste der unterstützten Überwachungstools finden Sie im Abschnitt [Protokollierungs- und Überwachungsservices](/docs/containers?topic=containers-supported_integrations#health_services).
 
 <br />
 
@@ -173,7 +173,7 @@ Vorbereitende Schritte:
 Installieren Sie Helm und holen Sie sich das StrongSwan-Helm-Diagramm, um mögliche Konfigurationen anzuzeigen.
 {: shortdesc}
 
-1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-integrations#helm) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine, installieren Sie den Helm-Server (tiller) mit einem Servicekonto und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Repository hinzu.
+1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine, installieren Sie den Helm-Server (tiller) mit einem Servicekonto und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Repository hinzu. Beachten Sie, dass Helm version 2.8 oder höher erforderlich ist.
 
 2.  Überprüfen Sie, ob 'tiller' mit einem Servicekonto installiert ist.
 
@@ -193,7 +193,7 @@ Installieren Sie Helm und holen Sie sich das StrongSwan-Helm-Diagramm, um mögli
 3. Speichern Sie die Standardkonfigurationseinstellungseinstellungen für das StrongSwan-Helm-Diagramm in einer lokalen YAML-Datei.
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+    helm inspect values iks-charts/strongswan > config.yaml
     ```
     {: pre}
 
@@ -239,7 +239,7 @@ Wenn Sie einen kostenlosen Cluster verwenden, können Sie nur eine ausgehende VP
 
 Ändern Sie zum Einrichten einer eingehenden VPN-Verbindung folgende Einstellungen:
 1. Überprüfen Sie, dass für `ipsec.auto` die Einstellung `add` festgelegt ist.
-2. Optional: Legen Sie für `loadBalancerIP` eine portierbare öffentliche IP-Adresse fest, die für den StrongSwan-VPN-Service gilt. Die Angabe einer IP-Adresse ist nützlich, wenn Sie eine fixe IP-Adresse benötigen, z. B. wenn Sie festlegen müssen, welche IP-Adressen von einer lokalen Firewall zugelassen werden. Das Cluster muss mindestens eine verfügbare öffentliche Load Balancer-IP-Adresse haben. [Sie können Ihre verfügbaren öffentlichen IP-Adressen zur Überprüfung anzeigen](/docs/containers?topic=containers-subnets#review_ip) oder [eine bereits verwendete IP-Adresse freigeben](/docs/containers?topic=containers-subnets#free).
+2. Optional: Legen Sie für `loadBalancerIP` eine portierbare öffentliche IP-Adresse fest, die für den StrongSwan-VPN-Service gilt. Die Angabe einer IP-Adresse ist nützlich, wenn Sie eine fixe IP-Adresse benötigen, z. B. wenn Sie festlegen müssen, welche IP-Adressen von einer lokalen Firewall zugelassen werden. Der Cluster muss über mindestens eine verfügbare öffentliche IP-Adresse der Lastausgleichsfunktion verfügen. [Sie können Ihre verfügbaren öffentlichen IP-Adressen zur Überprüfung anzeigen](/docs/containers?topic=containers-subnets#review_ip) oder [eine bereits verwendete IP-Adresse freigeben](/docs/containers?topic=containers-subnets#free).
     * Wenn Sie diese Einstellung leer lassen, wird eine der verfügbaren und portierbaren öffentlichen IP-Adressen verwendet.
     * Sie müssen auch die öffentliche IP-Adresse konfigurieren, die Sie für den VPN-Endpunkt des Clusters im lokalen VPN-Endpunkt auswählen oder die diesem VPN-Endpunkt des Clusters im lokalen VPN-Endpunkt zugewiesen ist.
 
@@ -346,7 +346,7 @@ Stellen Sie das StrongSwan-Helm-Diagramm in Ihrem Cluster mit den Konfiguratione
     {: tip}
 
     ```
-    helm install -f config.yaml --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn iks-charts/strongswan
     ```
     {: pre}
 
@@ -397,16 +397,16 @@ Nachdem Sie Ihr Helm-Diagramm bereitgestellt haben, testen Sie die VPN-Konnektiv
     {: screen}
 
     * Wenn Sie versuchen, die VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erstellen, ist es wahrscheinlich, dass das VPN beim ersten Mal nicht den Status `ESTABLISHED` aufweist. Unter Umständen müssen Sie die Einstellungen des lokalen VPN-Endpunkts prüfen und die Konfigurationsdatei mehrmals ändern, bevor die Verbindung erfolgreich ist:
-        1. Führen Sie folgenden Befehl aus: `helm delete --purge <release_name>`
+        1. Führen Sie den folgenden Befehl aus: `helm delete --purge <release_name>`
         2. Korrigieren Sie die falschen Werte in der Konfigurationsdatei.
-        3. Führen Sie `helm install -f config.yaml --name=<release_name> ibm/strongswan` aus.
+        3. Führen Sie folgenden Befehl aus: `helm install -f config.yaml --name=<release_name> ibm/strongswan`
       Sie können im nächsten Schritt noch weitere Prüfungen vornehmen.
 
     * Falls der VPN-Pod den Status `ERROR` aufweist oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationszuordnung des Diagramms liegen.
         1. Prüfen Sie, ob dies der Fall ist, indem Sie mithilfe des Befehls `kubectl logs $STRONGSWAN_POD` in den Protokollen des StrongSwan-Pods nach Validierungsfehlern suchen.
-        2. Wenn Gültigkeitsfehler vorhanden sind, führen Sie den folgenden Befehl aus: `helm delete --purge <release_name>`
+        2. Wenn Gültigkeitsfehler vorhanden sind, führen Sie folgenden Befehl aus: `helm delete --purge <release_name>`
         3. Korrigieren Sie die falschen Werte in der Konfigurationsdatei.
-        4. Führen Sie `helm install -f config.yaml --name=<release_name> ibm/strongswan`
+        4. Führen Sie folgenden Befehl aus: `helm install -f config.yaml --name=<release_name> ibm/strongswan`
 
 4. Sie können die VPN-Konnektivität weiter testen, indem Sie die fünf Helm-Tests ausführen, die in der StrongSwan-Diagrammdefinition enthalten sind.
 
@@ -531,13 +531,12 @@ Prüfen Sie die folgenden Überlegungen und Einschränkungen, bevor Sie diese L�
 * Die globalen Netzrichtlinien von Calico in den folgenden Schritten verhindern nicht, dass Kubernetes-Pods, die Hostnetzbetrieb verwenden, Daten über das VPN senden und empfangen. Wenn ein Pod mit Hostnetzbetrieb konfiguriert wird, kann die in dem Pod ausgeführte App an den Netzschnittstellen des Workerknotens, auf dem sie sich befindet, empfangsbereit sein. Diese Hostnetzbetrieb-Pods können in allen Namensbereichen vorhanden sein. Um zu bestimmen, welche Pods Hostnetzbetrieb haben, führen Sie `kubectl get pods --all-namespaces -o wide` aus und suchen Sie nach Pods, die nicht die Pod-IP-Adresse `172.30.0.0/16` aufweisen. Wenn Sie ausschließen möchten, dass Hostnetzbetrieb-Pods Daten über das VPN senden und empfangen, können Sie die folgenden Optionen in Ihrer Bereitstellungsdatei `values.yaml` festlegen: `local.subnet: 172.30.0.0/16` und `enablePodSNAT: false`. Diese Konfigurationseinstellungen machen alle Kubernetes-Pods über die VPN-Verbindung zum fernen Netz zugänglich. Es sind jedoch nur die Pods über das VPN erreichbar, die sich im angegebenen sicheren Namensbereich befinden.
 
 Vorbereitende Schritte:
-* Erstellen oder verwenden Sie einen Cluster mit Kubernetes Version 1.10 oder höher.
 * [Stellen Sie das StrongSwan-Helm-Diagramm bereit](#vpn_configure) und [stellen Sie sicher, dass die VPN-Konnektivität ordnungsgemäß funktioniert](#vpn_test).
 * [Installieren und konfigurieren Sie die Calico-CLI](/docs/containers?topic=containers-network_policies#cli_install).
 
 Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf einen bestimmten Namensbereich zu beschränken:
 
-1. Erstellen Sie eine globale Calico-Netzrichtlinie namens `allow-non-vpn-outbound.yaml`. Diese Richtlinie ermöglicht es allen Namensbereichen, weiterhin ausgehenden Datenverkehr an alle Ziele zu senden, mit Ausnahme des fernen Teilnetzes, auf das das StrongSwan-VPN zugreift. Ersetzen Sie `<remote.subnet>` durch die `remote.subnet`-Instanz, die Sie in der Helm-Konfigurationsdatei `values.yaml` angegeben haben. Informationen zum Angeben mehrerer ferner Teilnetze finden Sie in der [Calico-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
+1. Erstellen Sie eine globale Calico-Netzrichtlinie namens `allow-non-vpn-outbound.yaml`. Diese Richtlinie ermöglicht es allen Namensbereichen, weiterhin ausgehenden Datenverkehr an alle Ziele zu senden, mit Ausnahme des fernen Teilnetzes, auf das das StrongSwan-VPN zugreift. Ersetzen Sie `<remote.subnet>` durch das fernes Teilnetz `remote.subnet`, das Sie in der Helm-Konfigurationsdatei `values.yaml` angegeben haben. Informationen zum Angeben mehrerer ferner Teilnetze finden Sie in der [Calico-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -563,7 +562,7 @@ Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf einen bestimmten Namensbere
     ```
     {: pre}
 
-3. Erstellen Sie eine weitere globale Calico-Netzrichtlinie namens `allow-vpn-from-namespace.yaml`. Diese Richtlinie ermöglicht es nur einem bestimmten Namensbereich, ausgehenden Datenverkehr an das ferne Teilnetz zu senden, auf das das StrongSwan-VPN zugreift. Ersetzen Sie `<namespace>` durch den Namensbereich, der auf das VPN zugreifen kann, und `<remote.subnet>` durch die `remote.subnet`-Instanz, die Sie in der Helm-Konfigurationsdatei `values.yaml` angegeben haben. Informationen zum Angeben mehrerer Namensbereiche oder ferner Teilnetze finden Sie in der [Calico-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
+3. Erstellen Sie eine weitere globale Calico-Netzrichtlinie namens `allow-vpn-from-namespace.yaml`. Diese Richtlinie ermöglicht es nur einem bestimmten Namensbereich, ausgehenden Datenverkehr an das ferne Teilnetz zu senden, auf das das StrongSwan-VPN zugreift. Ersetzen Sie `<namespace>` durch den Namensbereich, der auf das VPN zugreifen kann, und `<remote.subnet>` durch das ferne Teilnetz `remote.subnet`, das Sie in der Helm-Konfigurationsdatei `values.yaml` angegeben haben. Informationen zum Angeben mehrerer Namensbereiche oder ferner Teilnetze finden Sie in der [Calico-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy

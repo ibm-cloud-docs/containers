@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,34 @@ Bleiben Sie auf dem neuesten Stand bei den Entwicklungen für {{site.data.keywor
 
 
 
+## Beliebte Themen im April 2019
+{: #apr19}
+
+<table summary="Die Tabelle zeigt beliebte Themen. Die Zeilen sind von links nach rechts zu lesen. In Spalte 1 finden Sie das Datum, den Titel der Funktion in Zeile 2 und eine Beschreibung in Zeile 3.">
+<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im April 2019</caption>
+<thead>
+<th>Datum</th>
+<th>Titel</th>
+<th>Beschreibung</th>
+</thead>
+<tbody>
+<tr>
+<td>15. April 2019</td>
+<td>[Hostnamen für Netzlastausgleichsfunktion (NLB) registrieren](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>Nachdem Sie öffentliche Netzlastausgleichsfunktionen (NLBs) eingerichtet haben, um Ihre Apps dem Internet zugänglich zu machen, können Sie jetzt DNS-Einträge für die NLB-IPs erstellen, indem Sie Hostnamen erstellen. {{site.data.keyword.Bluemix_notm}} übernimmt für Sie die Generierung und Pflege des Platzhalter-SSL-Zertifikats für den Hostnamen. Sie können auch TCP/HTTP(S)-Monitore einrichten, die den Status der NLB-IP-Adressen hinter den einzelnen Hostnamen überprüfen.</td>
+</tr>
+<tr>
+<td>8. April 2019</td>
+<td>[Kubernetes-Terminal in Ihrem Web-Browser (Beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>Wenn Sie Ihre Cluster mit dem Cluster-Dashboard in der {{site.data.keyword.Bluemix_notm}}-Konsole verwalten, aber recht bald zu fortgeschritteneren Konfigurationsänderungen übergehen möchten, können Sie CLI-Befehle jetzt direkt über Ihren Webbrowser im Kubernetes-Terminal ausführen. Starten Sie auf der Detailseite für einen Cluster das Kubernetes-Terminal, indem Sie auf die Schaltfläche **Terminal** klicken. Beachten Sie, dass das Kubernetes-Terminal als Beta-Add-on freigegeben wird und nicht für die Verwendung in Produktionsclustern vorgesehen ist.</td>
+</tr>
+<tr>
+<td>4. April 2019</td>
+<td>[Hoch verfügbare Master jetzt in Sydney](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>Wenn Sie an einem Standort in einer Mehrzonen-Metropole, jetzt auch einschließlich Sydney, [einen Cluster erstellen](/docs/containers?topic=containers-clusters#clusters_ui), werden die Replikate des Kubernetes-Masters zwecks Hochverfügbarkeit über mehrere Zonen verteilt.</td>
+</tr>
+</tbody></table>
+
 ## Beliebte Themen im März 2019
 {: #mar19}
 
@@ -47,13 +75,13 @@ Bleiben Sie auf dem neuesten Stand bei den Entwicklungen für {{site.data.keywor
 <td>21. März 2019</td>
 <td>Einführung privater Serviceendpunkte für Ihren Kubernetes-Cluster-Master</td>
 <td>{{site.data.keyword.containerlong_notm}} richtet Ihren Cluster standardmäßig mit Zugriff auf ein öffentliches VLAN und ein privates VLAN ein. Zuvor mussten Sie, wenn Sie einen [Cluster nur mit einem privaten VLAN](/docs/containers?topic=containers-plan_clusters#private_clusters) haben wollten, eine Gateway-Appliance einrichten, um die Verbindung der Workerknoten des Clusters mit dem Master herzustellen. Jetzt können Sie den privaten Serviceendpunkt verwenden. Wenn der private Serviceendpunkt aktiviert ist, fließt der gesamte Datenverkehr zwischen den Workerknoten und dem Master über das private Netz, ohne dass eine Gateway-Appliance erforderlich ist. Neben dieser zusätzlichen Sicherheit ist ein- und ausgehender Datenverkehr im privaten Netz außerdem [unbegrenzt und gebührenfrei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/bandwidth). Sie können trotzdem einen öffentlichen Serviceendpunkt für den sicheren Zugriff auf Ihren Kubernetes-Master über das Internet behalten, um zum Beispiel `kubectl`-Befehle ausführen zu können, ohne sich dabei im privaten Netz zu befinden.<br><br>
-Zur Verwendung privater Serviceendpunkte müssen Sie die [VRF-Funktion](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) und [Serviceendpunkte](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren. Ihr Cluster muss Kubernetes Version 1.11 oder höher ausführen. Wenn Ihr Cluster eine frühere Kubernetes-Version ausführt, [führen Sie eine Aktualisierung auf mindestens Version 1.11 durch](/docs/containers?topic=containers-update#update). Weitere Informationen finden Sie über die folgenden Links:<ul>
+Zur Verwendung privater Serviceendpunkte müssen Sie die [VRF-Funktion](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) und [Serviceendpunkte](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren. Ihr Cluster muss Kubernetes Version 1.11 oder höher ausführen. Wenn Ihr Cluster eine frühere Kubernetes-Version ausführt, [führen Sie eine Aktualisierung auf mindestens Version 1.11 durch](/docs/containers?topic=containers-update#update). Weitere Informationen finden Sie über die folgenden Links:<ul>
 <li>[Kommunikation zwischen Workerknoten und Master mit Serviceendpunkten](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
 <li>[Privaten Serviceendpunkt einrichten](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
 <li>[Von öffentlichem zu privatem Serviceendpunkt wechseln](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>Wenn Sie eine Firewall im privaten Netz haben: [Private IP-Adressen für {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}} und andere {{site.data.keyword.Bluemix_notm}}-Services hinzufügen](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
 </ul>
-<p class="important">Wenn Sie zu einem Cluster nur mit einem privaten Serviceendpunkt wechseln, stellen Sie sicher, dass Ihr Cluster weiterhin mit anderen {{site.data.keyword.Bluemix_notm}}-Services, die Sie verwenden, kommunizieren kann. [NFS-basierter Dateispeicher](/docs/containers?topic=containers-file_storage#file_storage), [Portworx-SDS-Speicher](/docs/containers?topic=containers-portworx#portworx) und [Cluster-Autoscaler](/docs/containers?topic=containers-ca#ca) unterstützen nur einen privaten Serviceendpunkt nicht. Verwenden Sie stattdessen einen Cluster mit öffentlichen und privaten Serviceendpunkten.</p>
+<p class="important">Wenn Sie zu einem Cluster nur mit einem privaten Serviceendpunkt wechseln, stellen Sie sicher, dass Ihr Cluster weiterhin mit anderen {{site.data.keyword.Bluemix_notm}}-Services, die Sie verwenden, kommunizieren kann. [Portworx-SDS-Speicher](/docs/containers?topic=containers-portworx#portworx) und [Cluster-Autoscaler](/docs/containers?topic=containers-ca#ca) unterstützen ausschließlich private Serviceendpunkte nicht. Verwenden Sie stattdessen einen Cluster mit öffentlichen und privaten Serviceendpunkten. [NFS-basierter Dateispeicher](/docs/containers?topic=containers-file_storage#file_storage) wird unterstützt, wenn auf Ihrem Cluster Kubernetes Version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 oder höher ausgeführt wird.</p>
 </td>
 </tr>
 <tr>
@@ -142,7 +170,7 @@ Benötigen Sie Hilfe oder wünschen Sie Feedback zum Cluster-Autoscaler? Wenn Si
 <tr>
 <td>11. Dezember</td>
 <td>SDS-Unterstützung mit Portworx</td>
-<td>Mit Portworx können Sie persistenten Speicher für containerisierten Datenbanken und andere statusabhängigen Apps verwalten oder Daten zwischen Pods über mehrere Zonen hinweg nutzen. [Portworx ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://portworx.com/products/introduction/) ist eine hoch verfügbare SDS-Lösung (Software-Defined Storage), die den lokalen Blockspeicher Ihrer Workerknoten verwaltet, um eine einheitliche persistente Speicherebene für Ihre Apps zu erstellen. Portworx stellt durch eine workerknotenübergreifende Datenträgerreplikation für jeden Datenträger auf Containerebene eine zonenübergreifende Datenpersistenz und Datenverfügbarkeit sicher. Weitere Informationen finden Sie unter [Daten in softwaredefiniertem Speicher (SDS) mit Portworx speichern](/docs/containers?topic=containers-portworx#portworx). </td>
+<td>Mit Portworx können Sie persistenten Speicher für containerisierten Datenbanken und andere statusabhängigen Apps verwalten oder Daten zwischen Pods über mehrere Zonen hinweg nutzen. [Portworx ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://portworx.com/products/introduction/) ist eine hoch verfügbare SDS-Lösung (Software-Defined Storage), die den lokalen Blockspeicher Ihrer Workerknoten verwaltet, um eine einheitliche persistente Speicherebene für Ihre Apps zu erstellen. Portworx stellt durch eine workerknotenübergreifende Datenträgerreplikation für jeden Datenträger auf Containerebene eine zonenübergreifende Datenpersistenz und Datenverfügbarkeit sicher. Weitere Informationen finden Sie unter [Daten in softwaredefiniertem Speicher (SDS) mit Portworx speichern](/docs/containers?topic=containers-portworx#portworx).    </td>
 </tr>
 <tr>
 <td>6. Dezember</td>
@@ -179,8 +207,8 @@ Benötigen Sie Hilfe oder wünschen Sie Feedback zum Cluster-Autoscaler? Wenn Si
 </tr>
 <tr>
 <td>7. November</td>
-<td>Lastausgleichsfunktion der Version 2.0 (Beta)</td>
-<td>Sie können jetzt zwischen einer [Lastausgleichsfunktion der Version 1.0 oder 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) wählen, um Ihre Cluster-Apps sicher öffentlich zugänglich zu machen.</td>
+<td>Netzlastausgleichsfunktion 2.0 (Beta)</td>
+<td>Sie haben jetzt die Wahl zwischen [NLB 1.0 oder 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs), um Ihre Cluster-Apps sicher öffentlich zugänglich zu machen.</td>
 </tr>
 <tr>
 <td>7. November</td>
@@ -189,7 +217,7 @@ Benötigen Sie Hilfe oder wünschen Sie Feedback zum Cluster-Autoscaler? Wenn Si
 </tr>
 <tr>
 <td>7. November</td>
-<td>Hoch verfügbare Master in Clustern, die Kubernetes Version 1.10 ausführen</td>
+<td>Hoch verfügbare Master</td>
 <td>Hoch verfügbare Master sind für Cluster verfügbar, die Kubernetes Version 1.10 ausführen! Alle im vorherigen Eintrag für Cluster der Version 1.11 beschriebenen Vorteile gelten auch für Cluster der Version 1.10. Dies gilt auch für die [Vorbereitungsschritte](/docs/containers?topic=containers-cs_versions#110_ha-masters), die Sie ausführen müssen.</td>
 </tr>
 <tr>
@@ -223,7 +251,7 @@ Benötigen Sie Hilfe oder wünschen Sie Feedback zum Cluster-Autoscaler? Wenn Si
 <tr>
 <td>22. Oktober</td>
 <td>[Neuer Mehrzonenstandort `lon05` in London](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>In der Metropolzone London mit mehreren Zonen wird die Zone `lon02` durch die neue Zone `lon05` ersetzt, eine Zone mit mehr Infrastrukturressourcen als `lon02`. Erstellen Sie neue Mehrzonencluster mit `lon05`. Vorhandene Cluster mit `lon02` werden unterstützt, aber von neuen Mehrzonenclustern muss stattdessen `lon05` verwendet werden.</td>
+<td>Der Standort London in einer Mehrzonen-Metropole ersetzt die Zone `lon02` durch die neue Zone `lon05`, die mehr Infrastrukturressource bietet als `lon02`. Erstellen Sie neue Mehrzonencluster mit `lon05`. Vorhandene Cluster mit `lon02` werden unterstützt, aber von neuen Mehrzonenclustern muss stattdessen `lon05` verwendet werden.</td>
 </tr>
 <tr>
 <td>05. Oktober</td>
@@ -425,7 +453,7 @@ Pod-Sicherheitsrichtlinien konfigurieren, um zu festzulegen, wer Pods in {{site.
 </tr>
 <tr>
 <td>14. März</td>
-<td>[Sichere Anmeldung bei {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-integrations#appid)</td>
+<td>[Sichere Anmeldung bei {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-supported_integrations#appid)</td>
 <td>Verbessern Sie Ihre Apps, die in {{site.data.keyword.containerlong_notm}} ausgeführt werden, in dem Sie verlangen, dass Benutzer sich anmelden.</td>
 </tr>
 <tr>

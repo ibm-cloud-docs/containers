@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -29,7 +29,7 @@ subcollection: containers
 ## IBM Cloud Block Storage Attacher-Plug-in installieren (Beta)
 {: #block_storage_attacher}
 
-Mithilfe des Plug-ins für {{site.data.keyword.Bluemix_notm}} Block Storage Attacher können Sie unaufbereiteten, unformatierten und nicht angehängten Blockspeicher einem Workerknoten in Ihrem Cluster zuordnen.
+Mithilfe des Plug-ins für {{site.data.keyword.Bluemix_notm}} Block Storage Attacher können Sie unaufbereiteten, unformatierten und nicht angehängten Blockspeicher einem Workerknoten in Ihrem Cluster zuordnen.  
 {: shortdesc}
 
 Sie wollen zum Beispiel Ihre Daten mit einer SDS-Lösung (SDS - Software Defined Storage, softwaredefinierter Speicher) wie [Portworx](/docs/containers?topic=containers-portworx) speichern, dazu jedoch keine Bare-Metal-Workerknoten verwenden, die für die SDS-Nutzung optimiert sind und mit zusätzlichen lokalen Platten bereitgestellt werden. Wenn Sie Ihrem Nicht-SDS-Workerknoten lokale Platten hinzufügen wollen, müssen Sie Ihre Blockspeichereinheiten manuell in Ihrem {{site.data.keyword.Bluemix_notm}}-Infrastrukturkonto erstellen und den Speicher mithilfe von {{site.data.keyword.Bluemix_notm}} Block Volume Attacher Ihrem Nicht-SDS-Workerknoten zuordnen.
@@ -39,7 +39,7 @@ Das {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Plug-in erstellt Po
 Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Plug-ins? Weitere Informationen hierzu finden Sie in den Abschnitten [Plug-in aktualisieren](#update_block_attacher) und [Plug-in entfernen](#remove_block_attacher).
 {: tip}
 
-1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-integrations#helm) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine und installieren Sie den Helm-Server (tiller) mit einem Servicekonto in Ihrem Cluster.
+1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine und installieren Sie den Helm-Server (tiller) mit einem Servicekonto in Ihrem Cluster.
 
 2.  Überprüfen Sie, ob 'tiller' mit einem Servicekonto installiert ist.
 
@@ -64,7 +64,7 @@ Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.key
 
 4. Installieren Sie das {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Plug-in. Wenn Sie das Plug-in installieren, werden Ihrem Cluster vordefinierte Blockspeicherklassen hinzugefügt.
    ```
-   helm install ibm/ibm-block-storage-attacher --name block-attacher
+   helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
    {: pre}
 
@@ -144,7 +144,7 @@ Sie können ein Upgrade des vorhandenen {{site.data.keyword.Bluemix_notm}} Block
 
 2. Optional: Laden Sie das aktuellste Helm-Diagramm auf Ihre lokale Maschine herunter. Extrahieren Sie anschließend das Paket und überprüfen Sie die Datei `release.md` auf die neuesten Releaseinformationen.
    ```
-   helm fetch ibm/ibmcloud-block-storage-plugin
+   helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -230,13 +230,13 @@ Wenn Sie unterschiedliche Blockspeicherkonfigurationen hinzufügen möchten, fü
     ```
     {: pre}
 
-2. Navigieren Sie in das Verzeichnis `block-storage-utilities`.
+3. Navigieren Sie in das Verzeichnis `block-storage-utilities`.
    ```
    cd ibmcloud-storage-utilities/block-storage-provisioner
    ```
    {: pre}
 
-3. Öffnen Sie die Datei `yamlgen.yaml` und geben Sie die Blockspeicherkonfiguration an, die Sie jedem Workerknoten im Cluster hinzufügen möchten.
+4. Öffnen Sie die Datei `yamlgen.yaml` und geben Sie die Blockspeicherkonfiguration an, die Sie jedem Workerknoten im Cluster hinzufügen möchten.
    ```
    #
    # Can only specify 'performance' OR 'endurance' and associated clause
@@ -277,23 +277,23 @@ Wenn Sie unterschiedliche Blockspeicherkonfigurationen hinzufügen möchten, fü
    </tr>
    <tr>
    <td><code>endurance.tier</code></td>
-   <td>Wenn Sie Speicher vom Typ `endurance` bereitstellen wollen, geben Sie die Anzahl von E/A-Operationen pro Sekunde (IOPS) pro Gigabyte ein. Wenn Sie zum Beispiel Blockspeicher wie in der Speicherklasse `ibmc-block-bronze` definiert bereitstellen wollen, geben Sie 2 ein. Weitere Informationen finden Sie im Abschnitt zum [Festlegen der Blockspeicherkonfiguration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). Wenn Sie Speicher vom Typ `performance` bereitstellen wollen, entfernen Sie diesen Abschnitt oder setzen ihn auf Kommentar, indem Sie das Zeichen `#` am Anfang jeder Zeile hinzufügen.</td>
+   <td>Wenn Sie Speicher vom Typ `endurance` bereitstellen wollen, geben Sie die Anzahl von E/A-Operationen pro Sekunde (IOPS) pro Gigabyte ein. Wenn Sie zum Beispiel Blockspeicher wie in der Speicherklasse `ibmc-block-bronze` definiert bereitstellen wollen, geben Sie 2 ein. Weitere Informationen finden Sie im Abschnitt zum [Festlegen der Blockspeicherkonfiguration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). Wenn Sie Speicher vom Typ `performance` bereitstellen wollen, entfernen Sie diesen Abschnitt oder setzen ihn auf Kommentar, indem Sie das Zeichen `#` am Anfang jeder Zeile hinzufügen. </td>
    </tr>
    <tr>
    <td><code>size</code></td>
-   <td>Geben Sie die Größe Ihres Speichers in Gigabyte ein. Im Abschnitt zum [Festlegen der Blockspeicherkonfiguration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) finden Sie Informationen zu unterstützten Größen für Ihr Speichertier.</td>
+   <td>Geben Sie die Größe Ihres Speichers in Gigabyte ein. Im Abschnitt zum [Festlegen der Blockspeicherkonfiguration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) finden Sie Informationen zu unterstützten Größen für Ihr Speichertier. </td>
    </tr>
    </tbody>
-   </table>
+   </table>  
 
-4. Rufen Sie den Benutzernamen und den API-Schlüssel für Ihre IBM Cloud-Infrastruktur (SoftLayer) ab. Der Benutzername und der API-Schlüssel werden vom Script `mkpvyaml` für den Zugriff auf den Cluster verwendet.
+5. Rufen Sie den Benutzernamen und den API-Schlüssel für Ihre IBM Cloud-Infrastruktur (SoftLayer) ab. Der Benutzername und der API-Schlüssel werden vom Script `mkpvyaml` für den Zugriff auf den Cluster verwendet.
    1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an.
    2. Wählen Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") die Option **Infrastruktur** aus.
    3. Wählen Sie in der Menüleiste **Konto** > **Benutzer** > **Benutzerliste** aus.
    4. Suchen Sie den Benutzer, dessen Benutzernamen und API-Schlüssel Sie abrufen wollen.
    5. Klicken Sie auf **Generieren**, um einen API-Schlüssel zu generieren, oder auf **Anzeigen**, um Ihren vorhandenen API-Schlüssel anzuzeigen. Es wird ein Popup-Fenster geöffnet, das den Benutzernamen und den API-Schlüssel für die Infrastruktur anzeigt.
 
-5. Speichern Sie die Berechtigungsnachweise in einer Umgebungsvariablen.
+6. Speichern Sie die Berechtigungsnachweise in einer Umgebungsvariablen.
    1. Fügen Sie Umgebungsvariablen hinzu.
       ```
       export SL_USERNAME=<benutzername_der_infrastruktur>
@@ -311,7 +311,7 @@ Wenn Sie unterschiedliche Blockspeicherkonfigurationen hinzufügen möchten, fü
       ```
       {: pre}
 
-6.  Erstellen Sie den Container `mkpvyaml` und führen Sie ihn aus. Wenn Sie den Container aus dem Image ausführen, wird das Script `mkpvyaml.py` ausgeführt. Das Script fügt jedem Workerknoten im Cluster eine Blockspeichereinheit hinzu und berechtigt jeden Workerknoten zum Zugriff auf die Blockspeichereinheit. Am Ende des Scripts wird eine YAML-Datei mit dem Namen `pv-<cluster_name>.yaml` für Sie generiert, die Sie später zum Erstellen persistenter Datenträger im Cluster verwenden können.
+7.  Erstellen Sie den Container `mkpvyaml` und führen Sie ihn aus. Wenn Sie den Container aus dem Image ausführen, wird das Script `mkpvyaml.py` ausgeführt. Das Script fügt jedem Workerknoten im Cluster eine Blockspeichereinheit hinzu und berechtigt jeden Workerknoten zum Zugriff auf die Blockspeichereinheit. Am Ende des Scripts wird eine YAML-Datei mit dem Namen `pv-<cluster_name>.yaml` für Sie generiert, die Sie später zum Erstellen persistenter Datenträger im Cluster verwenden können.
     1.  Erstellen Sie den Container `mkpvyaml` (Build).
         ```
         docker build -t mkpvyaml .
@@ -344,7 +344,7 @@ Wenn Sie unterschiedliche Blockspeicherkonfigurationen hinzufügen möchten, fü
         {: screen}
     2.  Führen Sie den Container aus, um das Script `mkpvyaml.py` auszuführen.
         ```
-        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
+        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME mkpvyaml
         ```
         {: pre}
 
@@ -412,7 +412,7 @@ Verwenden Sie diese Option, wenn Sie unterschiedliche Blockspeicherkonfiguration
    ```
    {: pre}
 
-2. Prüfen Sie Schritt 3 und 4 im Abschnitt zum [Festlegen der Blockspeicherkonfiguration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass), um den Typ, die Größe und die Anzahl E/A-Operationen pro Sekunde (IOPS) für die Blockspeichereinheit auszuwählen, die Sie Ihrem Nicht-SDS-Workerknoten hinzufügen wollen.
+2. Prüfen Sie Schritt 3 und 4 im Abschnitt zum [Festlegen der Blockspeicherkonfiguration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass), um den Typ, die Größe und die Anzahl E/A-Operationen pro Sekunde (IOPS) für die Blockspeichereinheit auszuwählen, die Sie Ihrem Nicht-SDS-Workerknoten hinzufügen wollen.    
 
 3. Erstellen Sie die Blockspeichereinheit in derselben Zone, in der sich auch Ihr Nicht-SDS-Workerknoten befindet.
 
@@ -437,7 +437,7 @@ Verwenden Sie diese Option, wenn Sie unterschiedliche Blockspeicherkonfiguration
    Beispielausgabe:
    ```
    id         username          datacenter   storage_type                capacity_gb   bytes_used   ip_addr         lunId   active_transactions
-   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0
+   123456789  IBM02SL1234567-8  dal10        performance_block_storage   20            -            161.12.34.123   0       0   
    ```
    {: screen}
 
@@ -485,7 +485,7 @@ Verwenden Sie diese Option, wenn Sie unterschiedliche Blockspeicherkonfiguration
    Beispielausgabe:
    ```
    ID          name                 type   private_ip_address   source_subnet   host_iqn                                      username   password           allowed_host_id
-   123456789   <private_worker-ip>  IP     <private_worker-ip>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581
+   123456789   <private_worker-ip>  IP     <private_worker-ip>  -               iqn.2018-09.com.ibm:ibm02su1543159-i106288771   IBM02SU1543159-I106288771   R6lqLBj9al6e2lbp   1146581   
    ```
    {: screen}
 
@@ -505,7 +505,7 @@ Für die Zuordnung der Blockspeichereinheit zu einem Nicht-SDS-Workerknoten müs
 - [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Gehen Sie wie folgt vor, unaufbereiteten Blockspeicher Nicht-SDS-Workerknoten zuzuordnen:**
-1. Bereiten Sie die Erstellung des persistenten Datenträgers (PV) vor.
+1. Bereiten Sie die Erstellung des persistenten Datenträgers (PV) vor.  
    - **Wenn Sie den Container `mkpvyaml` verwendet haben:**
      1. Öffnen Sie die Datei `pv-<clustername>.yaml`.
         ```
@@ -554,7 +554,7 @@ Für die Zuordnung der Blockspeichereinheit zu einem Nicht-SDS-Workerknoten müs
         </thead>
         <tbody>
       	<tr>
-      	<td><code>metadata.name</code></td>
+          <td><code>metadata.name</code></td>
       	<td>Geben Sie einen Namen für Ihren persistenten Datenträger (PV) ein.</td>
       	</tr>
         <tr>
@@ -582,7 +582,7 @@ Für die Zuordnung der Blockspeichereinheit zu einem Nicht-SDS-Workerknoten müs
         <td>Geben Sie die private IP-Adresse des Workerknotens ein, dem Sie die Blockspeichereinheit zuordnen wollen und den Sie zuvor zum Zugriff auf Ihre Blockspeichereinheit berechtigt haben. </td>
         </tr>
         <tr>
-        <td><code>ibm.io/volID</code></td>
+          <td><code>ibm.io/volID</code></td>
         <td>Geben Sie die ID des Blockspeicherdatenträgers ein, die Sie zuvor abgerufen haben. </td>
         </tr>
         <tr>

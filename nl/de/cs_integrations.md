@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, helm
 
@@ -51,7 +51,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>Grafeas</td>
-<td>[Grafeas ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://grafeas.io) ist ein Open-Source-CI/CD-Service, der eine einheitliche Verfahrensweise zum Abrufen, Speichern und Austauschen von Metadaten während des Software-Supply-Chain-Prozesses zur Verfügung stellt. Wenn Sie Grafeas zum Beispiel in Ihren Buildprozess für Apps integrieren, kann Grafeas Informationen zum Initiator der Buildanforderung, zu Ergebnissen von Schwachstellenprüfungen und zur Qualitätssicherungsgenehmigung speichern, sodass Sie eine fundierte Entscheidung treffen können, ob eine App für den Produktionseinsatz bereitgestellt werden kann. Sie können diese Metadaten in Audits oder zum Nachweis der Einhaltung von Vorschriften für Ihre Software-Supply-Chain verwenden.</td>
+<td>[Grafeas ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://grafeas.io) ist ein Open-Source-CI/CD-Service, der eine einheitliche Verfahrensweise zum Abrufen, Speichern und Austauschen von Metadaten während des Software-Supply-Chain-Prozesses zur Verfügung stellt. Wenn Sie Grafeas zum Beispiel in Ihren Buildprozess für Apps integrieren, kann Grafeas Informationen zum Initiator der Buildanforderung, zu Ergebnissen von Schwachstellenprüfungen und zur Qualitätssicherungsgenehmigung speichern, sodass Sie eine fundierte Entscheidung treffen können, ob eine App für den Produktionseinsatz bereitgestellt werden kann. Sie können diese Metadaten in Audits oder zum Nachweis der Einhaltung von Vorschriften für Ihre Software-Supply-Chain verwenden. </td>
 </tr>
 <tr>
 <td>Helm</td>
@@ -63,7 +63,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>Istio on {{site.data.keyword.containerlong_notm}}</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ist ein Open-Source-Service, der Entwicklern eine Möglichkeit zum Verbinden, Sichern, Verwalten und Überwachen eines Netzes von Mikroservices (auch als Servicenetz bezeichnet) auf Cloudorchestrierungsplattformen bietet. Istio on {{site.data.keyword.containerlong}} ermöglicht eine Installation von Istio durch ein verwaltetes Add-on in Ihrem Cluster in nur einem Schritt. Durch einen Klick können Sie alle Istio-Kernkomponenten, zusätzliche Trace-, Überwachungs- und Visualisierungsfunktionen sowie die betriebsbereite Beispielapp 'BookInfo' abrufen. Informationen zum Einstieg finden Sie unter [Verwaltetes Istio-Add-on verwenden (Beta)](/docs/containers?topic=containers-istio).</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ist ein Open-Source-Service, der Entwicklern eine Möglichkeit zum Verbinden, Sichern, Verwalten und Überwachen eines Netzes von Microservices (auch als Servicenetz bezeichnet) auf Cloudorchestrierungsplattformen bietet. Istio on {{site.data.keyword.containerlong}} ermöglicht eine Installation von Istio durch ein verwaltetes Add-on in Ihrem Cluster in nur einem Schritt. Durch einen Klick können Sie alle Istio-Kernkomponenten, zusätzliche Trace-, Überwachungs- und Visualisierungsfunktionen sowie die betriebsbereite Beispielapp 'BookInfo' abrufen. Informationen zum Einstieg finden Sie unter [Verwaltetes Istio-Add-on verwenden (Beta)](/docs/containers?topic=containers-istio).</td>
 </tr>
 <tr>
 <td>Jenkins X</td>
@@ -167,7 +167,7 @@ Möchten Sie einen umfassenden Überblick über die Integration von {{site.data.
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td>Sie können <a href="/docs/services/certificate-manager?topic=certificate-manager-gettingstarted" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> verwenden, um SSL-Zertifikate für Ihre Apps zu speichern und zu verwalten. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Sie können <a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> verwenden, um SSL-Zertifikate für Ihre Apps zu speichern und zu verwalten. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (Beta)</td>
@@ -175,7 +175,7 @@ Möchten Sie einen umfassenden Überblick über die Integration von {{site.data.
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>Richten Sie Ihr eigenes gesichertes Docker-Image-Repository ein, in dem Sie Images sicher speichern und mit Clusterbenutzern teilen können. Weitere Informationen finden Sie in der <a href="/docs/services/Registry?topic=registry-index" target="_blank">{{site.data.keyword.registrylong}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
+  <td>Richten Sie Ihr eigenes gesichertes Docker-Image-Repository ein, in dem Sie Images sicher speichern und mit Clusterbenutzern teilen können. Weitere Informationen finden Sie in der <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -213,7 +213,7 @@ Möchten Sie einen umfassenden Überblick über die Integration von {{site.data.
 </tr>
 <tr>
   <td>{{site.data.keyword.Bluemix_notm}}-Blockspeicher</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#GettingStarted) ist ein persistenter, hochleistungsfähiger iSCSI-Speicher, den Sie Ihren Apps durch persistente Kubernetes-Datenträger (PVs) hinzufügen können. Verwenden Sie Blockspeicher, um statusabhängige Apps in einer einzelnen Zone bereitzustellen, oder als Hochleistungsspeicher für einzelne Pods. Weitere Informationen zur Bereitstellung von Blockspeicher in einem Cluster finden Sie unter [Daten in {{site.data.keyword.Bluemix_notm}}-Blockspeicher speichern](/docs/containers?topic=containers-block_storage#block_storage).</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) ist ein persistenter, hochleistungsfähiger iSCSI-Speicher, den Sie Ihren Apps durch persistente Kubernetes-Datenträger (PVs) hinzufügen können. Verwenden Sie Blockspeicher, um statusabhängige Apps in einer einzelnen Zone bereitzustellen, oder als Hochleistungsspeicher für einzelne Pods. Weitere Informationen zur Bereitstellung von Blockspeicher in einem Cluster finden Sie unter [Daten in {{site.data.keyword.Bluemix_notm}}-Blockspeicher speichern](/docs/containers?topic=containers-block_storage#block_storage).</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -221,7 +221,7 @@ Möchten Sie einen umfassenden Überblick über die Integration von {{site.data.
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-gettingstarted#gettingstarted) ist ein persistenter, schneller und flexibler, über ein Netz angeschlossener NFS-basierter Dateispeicher, den Sie Ihren Apps durch persistente Kubernetes-Datenträger hinzufügen können. Sie können unter vordefinierten Speichertiers mit GB-Größen und E/A-Operationen pro Sekunde (IOPS) wählen, die die Anforderungen Ihrer Workloads erfüllen. Weitere Informationen zur Bereitstellung von Dateispeicher in einem Cluster finden Sie unter [Daten in {{site.data.keyword.Bluemix_notm}}-Dateispeicher speichern](/docs/containers?topic=containers-file_storage#file_storage).</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) ist ein persistenter, schneller und flexibler, über ein Netz angeschlossener NFS-basierter Dateispeicher, den Sie Ihren Apps durch persistente Kubernetes-Datenträger hinzufügen können. Sie können unter vordefinierten Speichertiers mit GB-Größen und E/A-Operationen pro Sekunde (IOPS) wählen, die die Anforderungen Ihrer Workloads erfüllen. Weitere Informationen zur Bereitstellung von Dateispeicher in einem Cluster finden Sie unter [Daten in {{site.data.keyword.Bluemix_notm}}-Dateispeicher speichern](/docs/containers?topic=containers-file_storage#file_storage).</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -707,7 +707,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 4.  Überprüfen Sie, ob die Installation erfolgreich war.
     1.  Überprüfen Sie, ob das Tiller-Servicekonto erstellt wurde.
         ```
-        kubectl get serviceaccount -n kube-system | grep tiller
+        kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
 
@@ -733,7 +733,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
         ```
         {: screen}
 
-5. Fügen Sie die {{site.data.keyword.Bluemix_notm}}-Helm-Repositorys zur Helm-Instanz hinzu.
+5. Fügen Sie Ihrer Helm-Instanz die {{site.data.keyword.Bluemix_notm}}-Helm-Repositorys hinzu.
    ```
    helm repo add ibm  https://registry.bluemix.net/helm/ibm
    ```
@@ -823,7 +823,7 @@ Gehen Sie wie folgt vor, um Tiller mithilfe von {{site.data.keyword.registryshor
    ```
    {: pre}
 
-9. Fügen Sie die {{site.data.keyword.Bluemix_notm}}-Helm-Repositorys zur Helm-Instanz hinzu.
+9. Fügen Sie Ihrer Helm-Instanz die {{site.data.keyword.Bluemix_notm}}-Helm-Repositorys hinzu.
    ```
    helm repo add ibm  https://registry.bluemix.net/helm/ibm
    ```
@@ -948,7 +948,7 @@ Die Schritte in diesem Beispiel demonstrieren, wie Helm-Diagramme aus den Reposi
 {: #helm_links}
 
 * Informationen zur Verwendung von StrongSwan finden Sie unter [Einrichtung von VPN-Konnektivität mit dem Helm-Diagramm des StrongSwan-IPSec-VPN-Service](/docs/containers?topic=containers-vpn#vpn-setup).
-* Zeigen Sie verfügbare Helm-Diagramme an, die Sie mit {{site.data.keyword.Bluemix_notm}} im [Helm-Diagrammkatalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts) in der Konsole verwenden können.
+* Zeigen Sie verfügbare Helm-Diagramme an, die Sie mit {{site.data.keyword.Bluemix_notm}} im [Helm-Diagrammkatalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) in der Konsole verwenden können.
 * Weitere Informationen zu den Helm-Befehlen zum Konfigurieren und Verwalten von Helm-Diagrammen finden Sie in der <a href="https://docs.helm.sh/helm/" target="_blank">Helm-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.
 * Über den folgenden Link finden Sie weitere Informationen zur Vorgehensweise bei der [Erhöhung der Bereitstellungsgeschwindigkeit mit Kubernetes-Helm-Diagrammen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 

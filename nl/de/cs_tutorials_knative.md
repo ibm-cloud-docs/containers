@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-11"
 
 ---
 
@@ -19,15 +19,14 @@ lastupdated: "2019-03-21"
 {:download: .download}
 
 
-
 # Lernprogramm: Verwaltetes Knative-Add-on zum Ausführen serverunabhängiger Apps in Kubernetes-Clustern verwenden
 {: #knative_tutorial}
 
 Mithilfe dieses Lernprogramms können Sie sich mit der Installation von Knative in einem Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} vertraut machen.
 {: shortdesc}
 
-**Was ist Knative und warum sollte ich es verwenden?**</br>
-[Knative](https://github.com/knative/docs) ist eine Open-Source-Plattform, die von IBM, Google, Pivotal, Red Hat, Cisco und anderen dazu entwickelt wurde, die Funktionalität von Kubernetes zu erweitern, um Sie bei der Erstellung moderner, quellenzentrierter, containerisierter und serverunabhängiger Apps auf der Basis eines Kubernetes-Clusters zu unterstützen. Die Plattform ist auf die Anforderungen von Entwicklern ausgerichtet, die heute entscheiden müssen, welchen Typ von App sie in der Cloud ausführen wollen: 12-Faktoren-Apps, Container oder Funktionen. Jeder Typ von App erfordert eine Open-Source-Lösung oder eine proprietäre Lösung, die auf diese Apps zugeschnitten ist: Cloud Foundry für 12-Faktoren-Apps, Kubernetes für Container sowie OpenWhisk und andere für Funktionen. In der Vergangenheit mussten Entwickler entscheiden, welchem Ansatz sie folgen wollten, was sich als unflexibel und komplex erwies, wenn unterschiedliche Typen von Apps kombiniert werden mussten.   
+**Was ist Knative und wozu wird es verwendet?**</br>
+[Knative](https://github.com/knative/docs) ist eine Open-Source-Plattform, die von IBM, Google, Pivotal, Red Hat, Cisco und anderen dazu entwickelt wurde, die Funktionalität von Kubernetes zu erweitern, um Sie bei der Erstellung moderner, quellenzentrierter, containerisierter und serverunabhängiger Apps auf der Basis eines Kubernetes-Clusters zu unterstützen. Die Plattform ist auf die Anforderungen von Entwicklern ausgerichtet, die heute entscheiden müssen, welchen Typ von App sie in der Cloud ausführen wollen: 12-Faktoren-Apps, Container oder Funktionen. Jeder Typ von App erfordert eine Open-Source-Lösung oder eine proprietäre Lösung, die auf diese Apps zugeschnitten ist: Cloud Foundry für 12-Faktoren-Apps, Kubernetes für Container sowie OpenWhisk und andere für Funktionen. In der Vergangenheit mussten Entwickler entscheiden, welchem Ansatz sie folgen wollten, was sich als unflexibel und komplex erwies, wenn unterschiedliche Typen von Apps kombiniert werden mussten.  
 
 Knative nutzt ein konsistentes, Programmiersprachen und Frameworks übergreifendes Konzept, um den Betriebsaufwand für die Builderstellung, Bereitstellung und Verwaltung von Workloads in Kubernetes zusammenzufassen, sodass Entwickler sich auf das Wichtigste konzentrieren können: den Quellcode. Sie können bewährte Build-Packs verwenden, mit denen Sie bereits vertraut sind, wie zum Beispiel Cloud Foundry, Kaniko, Dockerfile, Bazel und andere. Durch die Integration in Istio stellt Knative sicher, dass sich Ihre serverunabhängigen und containerisierten Workloads problemlos über das Internet zugänglich machen, überwachen und steuern lassen und dass Ihre Daten bei der Übertragung verschlüsselt werden.
 
@@ -39,7 +38,7 @@ Knative wird mit drei Hauptkomponenten oder _Basiskomponenten_ ('Primitives') be
 - **Eventing:** Mit der Basiskomponente `Eventing` können Sie Auslöser (Trigger) oder Ereignisströme erstellen, die andere Services abonnieren können. Sie wollen zum Beispiel immer dann einen neuen Build Ihrer App starten, wenn Code durch eine Push-Operation in Ihr GitHub-Master-Repository übertragen wird. Oder Sie möchten eine serverunabhängige App nur ausführen, wenn die Temperatur unter den Gefrierpunkt fällt. Die Basiskomponente `Eventing` kann in Ihre CI/CD-Pipeline integriert werden, um den Build und die Bereitstellung von Apps zu automatisieren, wenn ein bestimmtes Ereignis auftritt.
 
 **Was ist das (experimentelle) Managed Knative on {{site.data.keyword.containerlong_notm}}-Add-on?** </br>
-Managed Knative on {{site.data.keyword.containerlong_notm}} ist ein verwaltetes Add-on, das Knative und Istio direkt in Ihren Kubernetes-Cluster integriert. Die Knative- und die Istio-Version in dem Add-on werden von IBM getestet und für die Verwendung in {{site.data.keyword.containerlong_notm}} unterstützt. {{site.data.keyword.containerlong_notm}} hält die Knative- und Istio-Komponenten auf dem aktuellen Stand, indem Aktualisierungen für Ihr Add-on durch automatische Rollouts implementiert werden.
+Managed Knative on {{site.data.keyword.containerlong_notm}} ist ein verwaltetes Add-on, das Knative und Istio direkt in Ihren Kubernetes-Cluster integriert. Die Knative- und die Istio-Version in dem Add-on werden von IBM getestet und für die Verwendung in {{site.data.keyword.containerlong_notm}} unterstützt. Weitere Informationen zu verwalteten Add-ons finden Sie unter [Services unter Verwendung verwalteter Add-ons hinzufügen](/docs/containers?topic=containers-managed-addons#managed-addons).
 
 **Gibt es Einschränkungen?** </br>
 Wenn Sie den [Zugangscontroller zur Durchsetzung der Sicherheit von Container-Images](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in Ihrem Cluster installiert haben, können Sie das verwaltete Knative-Add-on in Ihrem Cluster nicht aktivieren.
@@ -68,7 +67,7 @@ Dieses Lernprogramm wurde für Entwickler konzipiert, die sich informieren möch
 {: #knative_prerequisites}
 
 -  [Installieren Sie die IBM Cloud-CLI, das {{site.data.keyword.containerlong_notm}}-Plug-in und die Kubernetes-CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Stellen Sie sicher, dass Sie die CLI-Version von `kubectl` installieren, die der Kubernetes-Version Ihres Clusters entspricht.
--  [Erstellen Sie einen Cluster mit mindestens drei Workerknoten, die jeweils vier Cores und 16 GB Hauptspeicher (`b2c.4x16`) oder mehr haben](/docs/containers?topic=containers-clusters#clusters_cli). Auf jedem Workerknoten muss Kubernetes Version 1.11 oder höher ausgeführt werden.
+-  [Erstellen Sie einen Cluster mit mindestens drei Workerknoten, die jeweils vier Cores und 16 GB Hauptspeicher (`b3c.4x16`) oder mehr haben](/docs/containers?topic=containers-clusters#clusters_cli). Auf jedem Workerknoten muss Kubernetes Version 1.12 oder höher ausgeführt werden.
 -  Stellen Sie sicher, dass Sie über die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für {{site.data.keyword.containerlong_notm}} verfügen.
 -  [Definieren Sie Ihren Cluster als Ziel der CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -115,7 +114,13 @@ Knative baut auf Istio auf, um sicherzustellen, dass Ihre serverunabhängigen un
    ```
    {: screen}
 
-3. Überprüfen Sie, ob alle Knative-Komponenten erfolgreich installiert wurden.
+3. Optional: Wenn Sie Istio für alle Apps im Standardnamensbereich (`default`) verwenden möchten, fügen Sie dem Namensbereich die Bezeichnung `istio-injection=enabled` hinzu. Jeder serverunabhängige App-Pod muss einen Envoy-Prox-Sidecar ausführen, sodass die App in das Istio-Servicenetz eingeschlossen werden kann. Diese Bezeichnung ermöglicht Istio das automatische Ändern der Pod-Vorlagenspezifikation bei neuen App-Bereitstellungen, sodass Pods mit Envoy-Proxy-Sidecar-Containern erstellt werden.
+  ```
+  kubectl label namespace default istio-injection=enabled
+  ```
+  {: pre}
+
+4. Überprüfen Sie, ob alle Knative-Komponenten erfolgreich installiert wurden.
    1. Überprüfen Sie, ob alle Pods der Knative-Komponente `Serving` den Status `Running` (Aktiv) haben.  
       ```
       kubectl get pods --namespace knative-serving
@@ -246,7 +251,7 @@ In dieser Lerneinheit stellen Sie Ihre erste serverunabhängige App [`Hello Worl
     </tr>
     <tr>
     <td><code>spec.container.env</code></td>
-    <td>Eine Liste der Umgebungsvariablen, die Ihr Knative-Service haben soll. In diesem Beispiel wird der Wert der Umgebungsvariablen <code>TARGET</code> von der Beispielapp gelesen und zurückgegeben, wenn Sie eine Anforderung an Ihre App im Format <code>"Hello ${TARGET}!"</code> senden. Wenn kein Wert angegeben ist, gibt die Beispielapp den Wert <code>"Hello World!"</code> zurück. </td>
+    <td>Eine Liste der Umgebungsvariablen, die Ihr Knative-Service haben soll. In diesem Beispiel wird der Wert der Umgebungsvariablen <code>TARGET</code> von der Beispielapp gelesen und zurückgegeben, wenn Sie eine Anforderung an Ihre App im Format <code>"Hello ${TARGET}!"</code> senden. Wenn kein Wert angegeben ist, gibt die Beispielapp den Wert <code>"Hello World!"</code> zurück.  </td>
     </tr>
     </tbody>
     </table>
@@ -267,6 +272,7 @@ In dieser Lerneinheit stellen Sie Ihre erste serverunabhängige App [`Hello Worl
    ```
    kubectl get pods
    ```
+   {: pre}
 
    Beispielausgabe:
    ```
@@ -278,14 +284,14 @@ In dieser Lerneinheit stellen Sie Ihre erste serverunabhängige App [`Hello Worl
 4. Probieren Sie Ihre App `Hello World` aus.
    1. Rufen Sie die Standarddomäne ab, die Ihrem Knative-Service zugeordnet ist. Wenn Sie den Namen Ihres Knative-Service geändert oder die App in einem anderen Namensbereich bereitgestellt haben, aktualisieren Sie diese Werte in Ihrer Abfrage.
       ```
-      kubectl get svc/kn-helloworld
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       Beispielausgabe:
       ```
-      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
-      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
+      NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
+      kn-helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True
       ```
       {: screen}
 

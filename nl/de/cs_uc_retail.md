@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -30,23 +30,23 @@ subcollection: containers
 Anhand der folgenden Anwendungsfälle wird hervorgehoben, wie Workloads in {{site.data.keyword.containerlong_notm}} von einer Analyse für Markterkenntnisse, Bereitstellungen in mehreren Regionen auf der Welt und einem Bestandsmanagement mit {{site.data.keyword.messagehub_full}} und Objektspeicher profitieren.
 {: shortdesc}
 
-## Traditionelles Einzelhandelsunternehmen nutzt Daten mithilfe von APIs gemeinsam mit globalen Partnern zur Stärkung des Omni-Channel-Vertriebs
+## Traditionelles Einzelhandelsunternehmen nutzt Daten mithilfe von APIs gemeinsam mit globalen Geschäftspartnern zur Stärkung des Omni-Channel-Vertriebs
 {: #uc_data-share}
 
-Der Leiter eines Geschäftsbereichs muss die Anzahl der Vertriebskanäle erhöhen, das Einzelhandelssystem ist jedoch in einem lokalen Rechenzentrum isoliert. Die Konkurrenz verfügt über globale Partner für das Cross-Selling und Up-Selling ihrer Produkte: traditionell und online.
+Der Leiter eines Geschäftsbereichs muss die Anzahl der Vertriebskanäle erhöhen, das Einzelhandelssystem ist jedoch in einem lokalen Rechenzentrum isoliert. Die Konkurrenz verfügt über globale Geschäftspartner für das Cross-Selling und Up-Selling ihrer Produkte: traditionell und online.
 {: shortdesc}
 
-Warum {{site.data.keyword.cloud_notm}}: Von {{site.data.keyword.containerlong_notm}} wird ein Ökosystem in der öffentlichen Cloud bereitgestellt, in dem neue Partner und weitere externe Player über Container mithilfe von APIs gemeinsam Apps und Daten entwickeln können. Sobald sich das Einzelhandelssystem in der öffentlichen Cloud befindet, wird die gemeinsame Datennutzung optimiert und Entwicklung neuer Apps beschleunigt. Die Bereitstellungen der Apps nehmen zu, wenn die Entwickler ohne großen Aufwand experimentieren und mit Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen.
+Warum {{site.data.keyword.cloud_notm}}: Von {{site.data.keyword.containerlong_notm}} wird ein Ökosystem in der öffentlichen Cloud bereitgestellt, in dem neue Geschäftspartner und weitere externe Player über Container mithilfe von APIs gemeinsam Apps und Daten entwickeln können. Sobald sich das Einzelhandelssystem in der öffentlichen Cloud befindet, wird die gemeinsame Datennutzung optimiert und Entwicklung neuer Apps beschleunigt. Die Bereitstellungen der Apps nehmen zu, wenn die Entwickler ohne großen Aufwand experimentieren und mit Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen.
 
 {{site.data.keyword.containerlong_notm}} und Schlüsseltechnologien:
 * [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [{{site.data.keyword.cos_full}} zum Beibehalten und Synchronisieren von Daten für Apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
-**Einzelhandelsunternehmen nutzt Daten mithilfe von APIs gemeinsam mit globalen Partnern zur Stärkung des Omni-Channel-Vertriebs**
+**Kontext: Ein Einzelhandelsunternehmen nutzt Daten mithilfe von APIs gemeinsam mit globalen Geschäftspartnern zur Stärkung des Omni-Channel-Vertriebs**
 
 * Der Einzelhändler unterliegt einem sehr starken Wettbewerbsdruck. Zum einen muss der Einzelhändler dafür sorgen, dass die Übergänge zu neuen Produkten und Vertriebswegen für den Kunden nicht allzu komplex erscheinen. So muss zum Beispiel die Differenzierung der Produkte verbessert werden. Zum anderen muss es für die Kunden einfacher sein, zwischen den Marken hin- und herzuwechseln.
-* Diese Möglichkeit zum Wechseln zwischen den Marken bedeutet, dass für das gesamte Einzelhandelssystem Verbindungen zu den jeweiligen Partnern erforderlich sind. Außerdem kann die Cloud einen zusätzlichen Wert durch den Kontakt zu Partnern, Kunden und anderen externen Playern mit sich bringen.
+* Diese Möglichkeit zum Wechseln zwischen den Marken bedeutet, dass für das gesamte Einzelhandelssystem Verbindungen zu den jeweiligen Geschäftspartnern erforderlich sind. Außerdem kann die Cloud einen zusätzlichen Wert durch den Kontakt zu Geschäftspartnern, Kunden und anderen externen Playern mit sich bringen.
 * Extrem umsatzstarke Benutzertermine wie der schwarze Freitag (Black Friday) sind eine enorme Belastung für Onlinesysteme und zwingen das Einzelhandelsunternehmen zur Bereitstellung zusätzlicher Recheninfrastruktur.
 * Die Entwickler des Einzelhandelsunternehmens mussten ständig Apps weiterentwickeln, aber die traditionellen Tools verlangsamten ihre Fähigkeit, Aktualisierungen und Funktionen häufig bereitzustellen, besonders dann, wenn sie mit Geschäftspartnerteams zusammenarbeiten.  
 
@@ -57,13 +57,13 @@ Zur Steigerung der Kundenbindung und der Bruttogewinnspanne muss das Einkaufserl
 Das Einzelhandelsunternehmen muss den Kunden auch nützliche Inhalte wie Produktinformationen, alternative Produktinformationen, Rezensionen und eine Anzeige des Echtzeitbestands zur Verfügung stellen. Und die Kunden möchten all diese Informationen sowohl online als auch im Laden vor Ort über eigene persönliche Mobilgeräte sowie vom Verkaufspersonal erhalten, das mit Mobilgeräten ausgestattet ist.
 
 Die Lösung besteht aus den folgenden wichtigen Bestandteilen:
-* Lagerbestand: Eine App für das direkte Geschäftsumfeld der Partner, von der der Lagerbestand zusammengefasst und übertragen wird, besonders die Einführungen neuer Produkte, einschließlich APIs für Partner zur erneuten Verwendung in ihren eigenen Einzelhandels- und B2B-Apps
+* Lagerbestand: Eine App für das direkte Geschäftsumfeld der Partner, von der der Lagerbestand zusammengefasst und übertragen wird, besonders die Einführungen neuer Produkte, einschließlich APIs für Geschäftspartner zur erneuten Verwendung in ihren eigenen Einzelhandels- und B2B-Apps
 * Cross-Selling und Up-Selling: Eine App, von der Gelegenheiten für Cross-Selling und Up-Selling mit APIs bereitgestellt werden, die in unterschiedlichen E-Commerce-Apps und mobilen Apps verwendet werden kann
-* Entwicklungsumgebung: Kubernetes-Cluster für Entwicklungs-, Test- und Produktionssysteme verbessern die Zusammenarbeit und gemeinsame Datennutzung zwischen dem Einzelhandelsunternehmen und seinen Partnern
+* Entwicklungsumgebung: Kubernetes-Cluster für Entwicklungs-, Test- und Produktionssysteme verbessern die Zusammenarbeit und gemeinsame Datennutzung zwischen dem Einzelhandelsunternehmen und seinen Geschäftspartnern
 
-Damit das Einzelhandelsunternehmen mit globalen Partnern zusammenarbeiten kann, müssen an den APIs für den Lagerbestand Änderungen vorgenommen werden, damit die Sprache und die Marktvorgaben für jede einzelne Region angepasst werden können. {{site.data.keyword.containerlong_notm}} bietet eine Abdeckung in mehreren Regionen, darunter Nordamerika, Europa, Asien und Australien; hierbei spiegeln die APIs die Bedürfnisse der einzelnen Länder wieder und stellen eine kurze Latenzzeit für API-Aufrufe sicher.
+Damit das Einzelhandelsunternehmen mit globalen Geschäftspartnern zusammenarbeiten kann, müssen an den APIs für den Lagerbestand Änderungen vorgenommen werden, damit die Sprache und die Marktvorgaben für jede einzelne Region angepasst werden können. {{site.data.keyword.containerlong_notm}} bietet eine Abdeckung in mehreren Regionen, darunter Nordamerika, Europa, Asien und Australien; hierbei spiegeln die APIs die Bedürfnisse der einzelnen Länder wieder und stellen eine kurze Latenzzeit für API-Aufrufe sicher.
 
-Eine weitere Voraussetzung ist, dass die gemeinsame Nutzung der Bestandsdaten mit den Kunden der Partner und des Unternehmens möglich ist. Mit den APIs für die Bestandsdaten können die Entwickler Informationen in Apps bereitstellen, zum Beispiel als mobile Bestandsdaten-Apps oder E-Commerce-Lösungen für das World Wide Web. Die Entwickler sind auch mit dem Aufbau und der Pflege der primären E-Commerce-Site beschäftigt. Somit müssen sie sich auf die Codierung und nicht auf die Verwaltung der Infrastruktur konzentrieren.
+Eine weitere Voraussetzung ist, dass die gemeinsame Nutzung der Bestandsdaten mit den Kunden der Geschäftspartner und den Unternehmen möglich ist. Mit den APIs für die Bestandsdaten können die Entwickler Informationen in Apps bereitstellen, zum Beispiel als mobile Bestandsdaten-Apps oder E-Commerce-Lösungen für das World Wide Web. Die Entwickler sind auch mit dem Aufbau und der Pflege der primären E-Commerce-Site beschäftigt. Somit müssen sie sich auf die Codierung und nicht auf die Verwaltung der Infrastruktur konzentrieren.
 
 Und schließlich wurde {{site.data.keyword.containerlong_notm}} ausgewählt, weil IBM die Verwaltung der Infrastruktur vereinfacht:
 * Verwaltung des Kubernetes-Masters, von Infrastructure as a Service (IaaS) und der Betriebskomponenten, wie zum Beispiel Ingress und Speicher
@@ -72,7 +72,7 @@ Und schließlich wurde {{site.data.keyword.containerlong_notm}} ausgewählt, wei
 
 Darüber hinaus wird die Protokollierung und Überwachung der API-Microservices, besonders das Extrahieren personalisierter Daten aus Back-End-Systemen, ohne großen Aufwand in {{site.data.keyword.containerlong_notm}} integriert. Die Entwickler verschwenden ihre Zeit nicht mit dem Erstellen komplexer Protokollierungssysteme, nur um in der Lage zu sein, Fehler in den aktiven Systemen zu beheben.
 
-{{site.data.keyword.messagehub_full}} dient als Plattform für Just-in-time-Ereignisse zum Integrieren der sich schnell ändernden Informationen von den Bestandssystemen der Partner in {{site.data.keyword.cos_full}}.
+{{site.data.keyword.messagehub_full}} dient als Plattform für Just-in-time-Ereignisse zum Integrieren der sich schnell ändernden Informationen von den Bestandssystemen der Geschäftspartner in {{site.data.keyword.cos_full}}.
 
 **Lösungsmodell**
 
@@ -102,8 +102,8 @@ Technische Lösung:
 * Nachdem sich Benutzer angemeldet haben, können Sie mit {{site.data.keyword.appid_short_notm}} Profile erstellen und das Benutzererlebnis Ihrer Anwendung personalisieren.
 
 **Schritt 4: Daten gemeinsam nutzen**
-* Von {{site.data.keyword.cos_full}} und {{site.data.keyword.messagehub_full}} wird ein echtzeitorientierter Protokolldatenspeicher bereitgestellt, sodass für Cross-Selling-Angebote der verfügbare Lagerbestand der Partner dargestellt wird.
-* APIs ermöglichen es den Partnern des Einzelhandelsunternehmens, Daten in ihren E-Commerce-Apps und B2B-Apps gemeinsam zu nutzen.
+* Von {{site.data.keyword.cos_full}} und {{site.data.keyword.messagehub_full}} wird ein echtzeitorientierter Protokolldatenspeicher bereitgestellt, sodass für Cross-Selling-Angebote der verfügbare Lagerbestand der Geschäftspartner dargestellt wird.
+* APIs ermöglichen es den Geschäftspartnern des Einzelhandelsunternehmens, Daten in ihren E-Commerce-Apps und B2B-Apps gemeinsam zu nutzen.
 
 **Schritt 5: Kontinuierlich bereitstellen**
 * Das Debugging der gemeinsam entwickelten APIs wird einfacher, wenn sie zu den IBM Cloud Logging and Monitoring-Tools hinzugefügt werden, auf die verschiedene Entwickler zugreifen können, weil sie cloudbasiert sind.
@@ -113,7 +113,7 @@ Technische Lösung:
 
 **Ergebnisse**
 * Mit Microservices wird die Bereitstellungszeit für Patches, Fehlerkorrekturen und neue Funktionen erheblich reduziert. Die erstmalige weltweite Entwicklung verläuft schnell und Aktualisierungen werden bis zu 40 Mal pro Woche bereitgestellt.
-* Der Einzelhändler und seine Partner verfügen mithilfe von APIs über direkten Zugriff auf die Bestandsverfügbarkeit und Bereitstellungszeitpläne.
+* Der Einzelhändler und seine Geschäftspartner verfügen mithilfe von APIs über direkten Zugriff auf die Bestandsverfügbarkeit und Bereitstellungszeitpläne.
 * Mit {{site.data.keyword.containerlong_notm}} und den IBM CI/CD-Tools können Kampagnen mit A-B-Versionen der Apps getestet werden.
 * {{site.data.keyword.containerlong_notm}} bietet eine skalierbare Rechenleistung, sodass die Workloads für Lagerbestand und Cross-Selling in Zeiträumen mit hohem Umsatz zunehmen können, zum Beispiel in den Herbstferien.
 
@@ -140,7 +140,7 @@ Schlüsseltechnologien:
 
 **Die Lösung**
 
-Der Lebensmittelhändler benötigt eine App zum Steigern der Konversion und des Filialverkehrs, um neue Umsätze zu generieren und in einer Plattform für wiederverwendbare Cloud-Analysen für den Aufbau der Kundenloyalität zu sorgen. Das im Geschäft geplante Einkaufserlebnis kann ein Ereignis mit einem Dienstleistungs- oder Produktanbieter sein, das basierend auf der Affinität für das spezielle Ereignis sowohl für Stammkunden als auch neue Kunden attraktiv ist. Das Geschäft und der Geschäftspartner bieten dann Anreize für die Teilnahme an dem Ereignis und für den Kauf der Produkte vom Geschäft oder vom Partner.  
+Der Lebensmittelhändler benötigt eine App zum Steigern der Konversion und des Filialverkehrs, um neue Umsätze zu generieren und in einer Plattform für wiederverwendbare Cloud-Analysen für den Aufbau der Kundenloyalität zu sorgen. Das im Geschäft geplante Einkaufserlebnis kann ein Ereignis mit einem Dienstleistungs- oder Produktanbieter sein, das basierend auf der Affinität für das spezielle Ereignis sowohl für Stammkunden als auch neue Kunden attraktiv ist. Das Geschäft und der Geschäftspartner bieten dann Anreize für die Teilnahme an dem Ereignis und für den Kauf der Produkte vom Geschäft oder vom Geschäftspartner.  
 
 Nach der Veranstaltung wird bei den Kunden um den Kauf der notwendigen Produkte geworben, sodass sie die vorgeführte Aktivität in Zukunft selbst wiederholen können. Die anvisierte Kundenzufriedenheit wird anhand der Einlösung der Anreize und der Neuanmeldung der Stammkunden gemessen. Mit einer Kombination aus einem individuell abgestimmten Marketingereignis und einem Tool zum Verfolgen der Einkäufe im Geschäft kann festgestellt werden, ob die beabsichtigte Kundenerfahrung zum Kauf des Produkts geführt hat. Alle diese Aktionen führen zu mehr Datenverkehr und Konversionen.
 
@@ -178,7 +178,7 @@ Technische Lösung:
 
 **Schritt 1: Containerisierte Apps mithilfe von Microservices**
 
-* Strukturieren Sie die Bestandsanalyse und die mobilen Apps in Mikroservices und stellen Sie diese in Containern in {{site.data.keyword.containerlong_notm}} bereit.
+* Strukturieren Sie die Bestandsanalyse und die mobilen Apps in Microservices und stellen Sie diese in Containern in {{site.data.keyword.containerlong_notm}} bereit.
 * Stellen Sie standardisierte DevOps-Dashboards über Kubernetes bereit.
 * Skalieren Sie die bedarfsgesteuerte Rechenleistung für Batch-Workloads und weitere Lagerbestands-Workloads, die weniger häufig ausgeführt werden.
 
@@ -192,7 +192,7 @@ Technische Lösung:
 * Das Speichern von Werberezepten auf mobilen Geräten und Konversionen (eingelöste Kassencoupons) werden zur weiteren Analyse in die ERP-Systeme eingespeist.
 
 **Ergebnisse**
-* Mit {{site.data.keyword.containerlong_notm}} wird die Bereitstellungszeit für Patches, Fehlerkorrekturen und neue Funktionen durch die Mikroservices erheblich reduziert. Erstmalige Entwicklungen verlaufen schnell und Aktualisierungen sind häufig.
+* Mit {{site.data.keyword.containerlong_notm}} wird die Bereitstellungszeit für Patches, Fehlerkorrekturen und neue Funktionen durch die Microservices erheblich reduziert. Erstmalige Entwicklungen verlaufen schnell und Aktualisierungen sind häufig.
 * Da das Kundenaufkommen und der Umsatz in den Geschäften steigen, werden die Geschäften selbst zu einem Unterscheidungsmerkmal.
 * Gleichzeitig führten neue Erkenntnisse aus der sozialen und kognitiven Analyse zu einer Senkung der Betriebsausgaben für den Lagerbestand.
 * Die soziale Teilhabe in der mobilen App trägt auch dazu bei, dass sich neue Kunden mit dem Geschäft identifizieren; sie helfen dem Geschäft auch beim Marketing gegenüber neuen Kunden.

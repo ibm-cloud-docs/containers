@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -46,8 +46,7 @@ Führen Sie in allen anderen Fällen die Anweisungen zum Überprüfen des Status
 Dies hängt vom Abrechnungstyp sowie davon ab, welche Elemente Sie löschen. Wenn Sie den PVC und den persistenten Datenträger, aber nicht die Instanz in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) löschen, ist diese Instanz weiterhin vorhanden und Ihnen werden dafür Gebühren berechnet. Damit Ihnen keine Gebühren mehr berechnet werden, müssen Sie alles löschen. Wenn Sie außerdem im Persistent Volume Claim den Abrechnungstyp (`billingType`) angeben, können Sie zwischen einer Abrechnung auf Stundenbasis (`hourly`) und der monatlichen Abrechnung (`monthly`) wählen. Wenn Sie `monthly` auswählen, wird monatlich eine Abrechnung für Ihre Instanz erstellt. Wenn Sie die Instanz löschen, wird Ihnen der Rest des Monats in Rechnung gestellt.
 
 
-<p class="important">Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](/docs/containers?topic=containers-file_storage#file_backup_restore) oder den [Blockspeicher](/docs/containers?topic=containers-block_storage#block_backup_restore) eine Sicherung ausführen.</br>
-</br>Wenn Sie ein {{site.data.keyword.Bluemix_dedicated}}-Konto verwenden, müssen Sie die Datenträgerlöschung anfordern, indem Sie [einen Supportfall öffnen](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
+<p class="important">Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](/docs/containers?topic=containers-file_storage#file_backup_restore) oder den [Blockspeicher](/docs/containers?topic=containers-block_storage#block_backup_restore) eine Sicherung ausführen.</p>
 
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 

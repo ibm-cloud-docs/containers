@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -31,7 +31,7 @@ Richtlinien konfigurieren, um anzugeben, wer Pods in {{site.data.keyword.contain
 **Warum lege ich Pod-Sicherheitsrichtlinien fest?**</br>
 Als Clusteradministrator möchten Sie steuern, was in Ihrem Cluster passiert, insbesondere Aktionen, die sich auf die Sicherheit oder Bereitschaft des Clusters auswirken. Pod-Sicherheitsrichtlinien können Ihnen dabei helfen, die Verwendung von berechtigten Containern, Stammnamensbereichen, Host-Netzbetrieb und -Ports, Datenträgertypen, Hostdateisystemen, Linux-Berechtigungen wie z. B. Nur-Lese-Berechtigung oder Gruppen-IDs und vieles mehr zu steuern.
 
-Mit dem Zugangscontroller `PodSecurityPolicy` können Pods erst nach der [Autorisierung von Richtlinien](#customize_psp) erstellt werden. Die Konfiguration von Pod-Sicherheitsrichtlinien kann unbeabsichtigte Nebeneffekte haben. Deshalb sollten Sie eine Implementierung nach dem Ändern der Richtlinie testen. Um Apps bereitstellen zu können, müssen die entsprechenden Benutzer- und Servicekonten alle durch die Pod-Sicherheitsrichtlinien autorisiert sein, die für die Bereitstellung von Pods erforderlich sind. Wenn Sie beispielsweise Apps mithilfe von [Helm](/docs/containers?topic=containers-integrations#helm_links) installieren, werden durch die Tiller-Komponente von Helm Pods erstellt. Sie müssen daher über die Autorisierung der richtigen Pod-Sicherheitsrichtlinie verfügen.
+Mit dem Zugangscontroller `PodSecurityPolicy` können Pods erst nach der [Autorisierung von Richtlinien](#customize_psp) erstellt werden. Die Konfiguration von Pod-Sicherheitsrichtlinien kann unbeabsichtigte Nebeneffekte haben. Deshalb sollten Sie eine Implementierung nach dem Ändern der Richtlinie testen. Um Apps bereitstellen zu können, müssen die entsprechenden Benutzer- und Servicekonten alle durch die Pod-Sicherheitsrichtlinien autorisiert sein, die für die Bereitstellung von Pods erforderlich sind. Wenn Sie beispielsweise Apps mithilfe von [Helm](/docs/containers?topic=containers-helm#public_helm_install) installieren, werden durch die Tiller-Komponente von Helm Pods erstellt. Sie müssen daher über die Autorisierung der richtigen Pod-Sicherheitsrichtlinie verfügen.
 
 Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerlong_notm}} haben? Informationen zum Festlegen von {{site.data.keyword.Bluemix_notm}} IAM- und Infrastrukturberechtigungen finden Sie im Abschnitt [Clusterzugriff zuweisen](/docs/containers?topic=containers-users#users).
 {: tip}
@@ -181,7 +181,7 @@ Wenn Sie die Standardkonfiguration ändern, können Sie wichtige Clusteraktionen
     {: pre}
 
 </br>
-**Gehen Sie wie folgt vor, um Ihre eigene Pod-Sicherheitsrichtlinie zu erstellen**:</br>
+**Vorgehensweise zur Erstellung einer eigenen Pod-Sicherheitsrichtlinie**:</br>
 Informationen darüber, wie Sie Ihre eigene Ressource für die Pod-Sicherheitsrichtlinie erstellen und Benutzer mit RBAC berechtigen, finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
 
 Stellen Sie sicher, dass Sie die vorhandenen Richtlinien so geändert haben, dass die neue Richtlinie, die Sie erstellen, nicht mit der vorhandenen Richtlinie in Konflikt steht. Die vorhandene Richtlinie ermöglicht es Benutzern beispielsweise, privilegierte Pods zu erstellen und zu aktualisieren. Wenn Sie eine Richtlinie erstellen, die es Benutzern nicht erlaubt, privilegierte Pods zu erstellen oder zu aktualisieren, kann der Konflikt zwischen der vorhandenen und der neuen Richtlinie zu unerwarteten Ergebnissen führen.

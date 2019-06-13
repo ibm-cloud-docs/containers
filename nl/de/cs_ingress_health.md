@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,7 @@ Für Ihre Ingress-ALBs werden automatisch Protokolle erfasst. Um die ALB-Protoko
         ```
         {: pre}
 
-    2. Öffnen Sie die Protokolle für diesen ALB-Pod. Stellen Sie sicher, dass die Protokolle dem aktualisierten Format entsprechen.
+    2. Öffnen Sie die Protokolle für diesen ALB-Pod.
         ```
         kubectl logs <id_des_alb-pods> nginx-ingress -n kube-system
         ```
@@ -167,7 +167,7 @@ Stellen Sie zunächst sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} I
     <tbody>
     <tr>
     <td><code>log-format</code></td>
-    <td>Ersetzen Sie <code>&lt;schlüssel&gt;</code> durch den Namen für die Protokollkomponente und <code>&lt;protokollvariable&gt;</code> durch eine Variable für die Protokollkomponente, die Sie in Protokolleinträgen erfassen wollen. Sie können Text und Interpunktion einschließen, die in dem Protokolleintrag enthalten sein sollen, wie zum Beispiel Anführungszeichen um Zeichenfolgewerte und Kommas zum Trennen von Protokollkomponenten. Beispiel: Eine Formatierung einer Komponente wie <code>request: "$request"</code> generiert den folgenden Inhalt in einen Protokolleintrag: <code>request: "GET / HTTP/1.1"</code>. Eine Liste aller verwendbaren Variablen finden Sie im <a href="http://nginx.org/en/docs/varindex.html">NGINX-Variablenindex</a>.<br><br>Zum Protokollieren eines zusätzlichen Headers wie <em>x-custom-ID</em> fügen Sie dem angepassten Protokollinhalt das folgende Schlüssel/Wert-Paar hinzu: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>Bindestriche (<code>-</code>) werden in Unterstreichungszeichen (<code>_</code>) konvertiert und <code>_$http_</code> muss dem angepassten Headernamen vorangestellt werden.</td>
+    <td>Ersetzen Sie <code>&lt;schlüssel&gt;</code> durch den Namen für die Protokollkomponente und <code>&lt;protokollvariable&gt;</code> durch eine Variable für die Protokollkomponente, die Sie in Protokolleinträgen erfassen wollen. Sie können Text und Interpunktion einschließen, die in dem Protokolleintrag enthalten sein sollen, wie zum Beispiel Anführungszeichen um Zeichenfolgewerte und Kommas zum Trennen von Protokollkomponenten. Beispiel: Eine Formatierung einer Komponente wie <code>request: "$request"</code> generiert den folgenden Inhalt in einen Protokolleintrag: <code>request: "GET / HTTP/1.1"</code>. Eine Liste aller verwendbaren Variablen finden Sie im <a href="http://nginx.org/en/docs/varindex.html">NGINX-Variablenindex</a>.<br><br>Zum Protokollieren eines zusätzlichen Headers wie <em>x-custom-ID</em> fügen Sie dem angepassten Protokollinhalt das folgende Schlüssel/Wert-Paar hinzu: <br><pre class="codeblock"><code>customID: $http_x_custom_id</code></pre> <br>Bindestriche (<code>-</code>) werden in Unterstreichungszeichen (<code>_</code>) konvertiert und <code>_$http_</code> muss dem angepassten Headernamen vorangestellt werden.</td>
     </tr>
     <tr>
     <td><code>log-format-escape-json</code></td>
@@ -253,55 +253,75 @@ Sie können Ihre ALBs überwachen, indem Sie eine Exportfunktion für Metriken u
 
 Die Exportfunktion für ALB-Metriken verwendet die NGINX-Anweisung `vhost_traffic_status_zone`, um Metrikdaten aus dem Endpunkt `/status/format/json` in jedem Ingress-ALB-Pod zu erfassen. Die Exportfunktion für Metriken formatiert jedes Datenfeld in der JSON-Datei automatisch in eine Metrik um, die von Prometheus gelesen werden kann. Anschließend nimmt ein Prometheus-Agent die von der Exportfunktion generierten Metriken auf und stellt sie auf einem Prometheus-Dashboard dar.
 
+### Helm-Diagramm für Metriken-Exportfunktion installieren
+{: #metrics-exporter}
+
+Installieren Sie das Helm-Diagramm für Metriken-Exportfunktionen, um eine ALB in Ihrem Cluster zu überwachen.
+{: shortdesc}
+
 Die Pods mit der Exportfunktion für ALB-Metriken müssen in denselben Workerknoten bereitgestellt werden, in denen auch Ihre ALBs bereitgestellt sind. Wenn Ihre ALBs in Edge-Workerknoten ausgeführt werden und diese Edge-Workerknoten mit Taints versehen sind, um andere Workloadbereitstellungen zu verhindern, können die Pods mit den Exportfunktionen für Metriken nicht geplant werden. Sie müssen die Taints entfernen, indem Sie den Befehl `kubectl taint node <knotenname> dedicated:NoSchedule- dedicated:NoExecute-` ausführen.
 {: note}
 
-Gehen Sie wie folgt vor, um die Exportfunktion für Metriken und den Prometheus-Agenten für eine ALB in Ihrem Cluster zu installieren:
+1.  **Wichtig:** [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zur Installation des Helm-Clients auf Ihrer lokalen Maschine, installieren Sie den Helm-Server (Tiller) mit einem Servicekonto und fügen Sie die {{site.data.keyword.Bluemix_notm}} Helm-Repositorys hinzu.
 
-1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-integrations#helm) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine, installieren Sie den Helm-Server (tiller) mit einem Servicekonto und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Repository hinzu.
+2. Installieren Sie das Helm-Diagramm `ibmcloud-alb-metrics-exporter` in Ihrem Cluster. Dieses Helm-Diagramm stellt eine Exportfunktion für ALB-Metriken bereit und erstellt das Servicekonto `alb-metrics-service-account` im Namensbereich `kube-system`. Ersetzen Sie <alb-id> durch die ID der ALB, für die Sie Metriken erfassen wollen. Zum Anzeigen der IDs für die ALBs in Ihrem Cluster führen Sie den Befehl <code>ibmcloud ks albs --cluster &lt;clustername&gt;</code> aus.
+  Sie müssen für jede zu überwachende ALB ein Diagramm bereitstellen.
+  {: note}
+  ```
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  ```
+  {: pre}
 
-2.  Überprüfen Sie, ob 'tiller' mit einem Servicekonto installiert ist.
-    ```
-    kubectl get serviceaccount -n kube-system | grep tiller
-    ```
-    {: pre}
+3. Prüfen Sie den Status der Diagrammbereitstellung. Sobald das Diagramm bereit ist, hat das Feld **STATUS** oben in der Ausgabe den Wert `DEPLOYED`.
+  ```
+  helm status ibmcloud-alb-metrics-exporter
+  ```
+  {: pre}
 
-    Beispielausgabe:
+4. Überprüfen Sie, ob die `ibmcloud-alb-metrics-exporter`-Pods ausgeführt werden.
+  ```
+  kubectl get pods -n kube-system -o wide
+  ```
+  {:pre}
 
-    ```
-    NAME                                 SECRETS   AGE
-    tiller                               1         2m
-    ```
-    {: screen}
+  Beispielausgabe:
+  ```
+  NAME                                             READY     STATUS      RESTARTS   AGE       IP               NODE
+  ...
+  alb-metrics-exporter-868fddf777-d49l5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  alb-metrics-exporter-868fddf777-pf7x5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  ```
+  {:screen}
 
-3. Installieren Sie das Helm-Diagramm `ibmcloud-alb-metrics-exporter` in Ihrem Cluster. Dieses Helm-Diagramm stellt eine Exportfunktion für ALB-Metriken bereit und erstellt ein Servicekonto mit dem Namen `alb-metrics-service-account` im Namensbereich `kube-system`. Ersetzen Sie <alb-id> durch die ID der ALB, für die Sie Metriken erfassen wollen. Zum Anzeigen der IDs für die ALBs in Ihrem Cluster führen Sie den Befehl <code>ibmcloud ks albs --cluster &lt;clustername&gt;</code> aus. Beachten Sie, dass Sie ein Diagramm für jede ALB bereitstellen müssen, die überwacht werden soll.
+5. Optional: [Installieren Sie den Prometheus-Agenten](#prometheus-agent), der die von der Exportfunktion generierten Metriken aufnimmt und in einem Prometheus-Dashboard darstellt.
 
-    ```
-    helm install ibm/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-id>
-    ```
-    {: pre}
+### Helm-Diagramm für Prometheus-Agenten installieren
+{: #prometheus-agent}
+
+Nach der Installation der [Metriken-Exportfunktion](#metrics-exporter) können Sie das Helm-Diagramm für den Prometheus-Agenten installieren, der die von der Exportfunktion generierten Metriken aufnimmt und in einem Prometheus-Dashboard darstellt.
+{: shortdesc}
+
+1. Laden Sie die TAR-Datei für das Helm-Diagramm für die Metriken-Exportfunktion von https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz herunter.
+
+2. Navigieren Sie zum Prometheus-Unterordner.
+  ```
+  cd ibmcloud-alb-metrics-exporter-1.0.7.tar/ibmcloud-alb-metrics-exporter/subcharts/prometheus
+  ```
+  {: pre}
+
+3. Installieren Sie das Prometheus-Helm-Diagramm in Ihrem Cluster. Ersetzen Sie <ingress-unterdomäne> durch die Ingress-Unterdomäne für Ihren Cluster. Die URL für das Prometheus-Dashboard ist eine Kombination aus der Prometheus-Standard-Unterdomäne `prom-dash` und Ihrer Ingress-Unterdomäne, z. B. `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Zum Ermitteln der Ingress-Unterdomäne für Ihren Cluster führen Sie den Befehl <code>ibmcloud ks cluster-get --cluster &lt;clustername&gt;</code> aus.
+  ```
+  helm install --name prometheus . --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
+  ```
+  {: pre}
 
 4. Prüfen Sie den Status der Diagrammbereitstellung. Sobald das Diagramm bereit ist, hat das Feld **STATUS** oben in der Ausgabe den Wert `DEPLOYED`.
-    ```
-    helm status ibmcloud-alb-metrics-exporter
-    ```
-    {: pre}
-
-5. Installieren Sie das Unterdiagramm `ibmcloud-alb-metrics-exporter/subcharts/prometheus` in Ihrem Cluster. Dieses Unterdiagramm stellt einen Prometheus-Agenten bereit, der ALB-Metriken erfasst und auf dem Prometheus-Dashboard anzeigt. Ersetzen Sie <ingress-unterdomäne> durch die Ingress-Unterdomäne für Ihren Cluster. Die URL für das Prometheus-Dashboard ist eine Kombination aus der Unterdomäne `prom-dash` und Ihrer Ingress-Unterdomäne. Beispiel: `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Zum Ermitteln der Ingress-Unterdomäne für Ihren Cluster führen Sie den Befehl <code>ibmcloud ks cluster-get --cluster &lt;clustername&gt;</code> aus.
-
-    ```
-    helm install ibm/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress-unterdomäne>
-    ```
-    {: pre}
-
-6. Prüfen Sie den Status der Diagrammbereitstellung. Sobald das Diagramm bereit ist, hat das Feld **STATUS** oben in der Ausgabe den Wert `DEPLOYED`.
-
     ```
     helm status prometheus
     ```
     {: pre}
 
-7. Überprüfen Sie, ob die Pods `ibmcloud-alb-metrics-exporter` und `prometheus` ausgeführt werden (STATUS: Running).
+5. Überprüfen Sie, ob der `prometheus`-Pod ausgeführt wird.
     ```
     kubectl get pods -n kube-system -o wide
     ```
@@ -316,9 +336,9 @@ Gehen Sie wie folgt vor, um die Exportfunktion für Metriken und den Prometheus-
     ```
     {:screen}
 
-8. Geben Sie in einem Browser die URL für das Prometheus-Dashboard ein. Dieser Hostname hat das Format `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Das Prometheus-Dashboard für Ihre ALB wird geöffnet.
+6. Geben Sie in einem Browser die URL für das Prometheus-Dashboard ein. Dieser Hostname hat das Format `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. Das Prometheus-Dashboard für Ihre ALB wird geöffnet.
 
-9. Lesen Sie die weiteren Informationen zu den Metriken für [ALB](#alb_metrics), [server](#server_metrics) und [upstream](#upstream_metrics), die im Dashboard aufgelistet werden.
+7. Lesen Sie die weiteren Informationen zu den Metriken für [ALB](#alb_metrics), [server](#server_metrics) und [upstream](#upstream_metrics), die im Dashboard aufgelistet werden.
 
 ### ALB-Metriken
 {: #alb_metrics}
@@ -385,8 +405,7 @@ In der folgenden Tabelle sind die unterstützten ALB-Metriknamen mit den Metrikb
 <tr>
 <td><code>totalHandledRequest_total</code></td>
 <td>Die Gesamtzahl von Clientanforderungen, die von Clients empfangen wurden.</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### Servermetriken
@@ -511,8 +530,7 @@ In der folgenden Tabelle sind die unterstützten Servermetriknamen aufgelistet.
 <tr>
 <td><code>total</code></td>
 <td>Die Gesamtzahl von Antworten mit Statuscodes.</td>
-</tr>
-</tbody>
+  </tr></tbody>
 </table>
 
 ### Upstream-Metriken
@@ -604,7 +622,7 @@ In der folgenden Tabelle sind die unterstützten Upstream-Metriknamen vom Typ 1 
 <tr>
 <td><code>total</code></td>
 <td>Die Gesamtzahl von Antworten mit Statuscodes.</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 #### Upstream-Metriken vom Typ 2
@@ -662,7 +680,7 @@ In der folgenden Tabelle sind die unterstützten Upstream-Metriknamen vom Typ 2 
 <tr>
 <td><code>responseMsec</code></td>
 <td>Die durchschnittliche Antwortverarbeitungszeiten nur für Upstream in Millisekunden.</td>
-</tr></tbody>
+  </tr></tbody>
 </table>
 
 <br />

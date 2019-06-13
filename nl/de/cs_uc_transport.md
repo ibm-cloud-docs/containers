@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -61,13 +61,13 @@ Die Lösung besteht aus den folgenden wichtigen Bestandteilen:
 2. Zollpapiere, die digital mit den jeweiligen Häfen und Transitpartnern gemeinsam genutzt werden (einschließlich Zugriffskontrolle)
 3. Eine App für Reedereikunden, die Ankunftsdaten für Transportgut zusammenfasst und überträgt, einschließlich APIs für Reedereikunden zum erneuten Verwenden der Sendungsdaten in ihren eigenen Einzelhandels- und Business-to-Business-Apps
 
-Damit die Reederei mit globalen Partnern zusammenarbeiten konnte, mussten am System für Routenwahl und Terminplanung lokale Änderungen vorgenommen werden, um Sprache, Regulierungen und eindeutige Hafenlogistikdaten jeder einzelnen Region einzufügen. {{site.data.keyword.containerlong_notm}} bietet eine globale Abdeckung in mehreren Regionen, darunter Nordamerika, Europa, Asien und Australien; hierbei spiegelten die Unternehmens-Apps die Bedürfnisse der Partner in jedem Land wieder.
+Damit die Reederei mit globalen Partnern zusammenarbeiten konnte, mussten am System für Routenwahl und Terminplanung lokale Änderungen vorgenommen werden, um Sprache, Regulierungen und eindeutige Hafenlogistikdaten jeder einzelnen Region einzufügen. {{site.data.keyword.containerlong_notm}} bietet eine globale Abdeckung in mehreren Regionen, darunter Nordamerika, Europa, Asien und Australien, sodass die Apps den Bedarf seiner Partner im jeweiligen Land widerspiegeln.
 
 Von den IoT-Geräten werden Daten gestreamt, die von {{site.data.keyword.messagehub_full}} an die Apps für die regionalen Häfen und jeweiligen Datenspeicher für Zollabfertigung und Containerfrachtlisten verteilt werden. {{site.data.keyword.messagehub_full}} ist der Eintrittspunkt für IoT-Ereignisse. Von ihm werden die Ereignisse abhängig von der verwalteten Konnektivität, die von der Watson IoT-Plattform angeboten wird, an {{site.data.keyword.messagehub_full}} weitergegeben.
 
 Sobald sich die Ereignisse in {{site.data.keyword.messagehub_full}} befinden, werden sie dauerhaft für die sofortige Verwendung in den Apps für den Hafentransit und für weitere Verwendungen in der Zukunft gespeichert. Von den Apps mit der niedrigsten Latenzzeit werden die Daten aus dem Ereignisstrom direkt in Echtzeit verarbeitet ({{site.data.keyword.messagehub_full}}). Von anderen zukünftigen Apps, wie zum Beispiel den Analysetools, können die Daten aus dem Ereignisspeicher mit {{site.data.keyword.cos_full}} im Stapelbetrieb verarbeitet werden.
 
-Da die Sendungsdaten mit den Kunden des Unternehmens gemeinsam genutzt werden, stellen die Entwickler sicher, dass die Kunden des Unternehmens APIs zum Darstellen der Sendungsdaten in ihren eigenen Apps verwenden können. Beispiele für solche Apps sind Apps für mobile Ortung oder E-Commerce-Lösungen. Die Entwickler arbeiten auch daran, Apps für die regionalen Häfen zu erstellen und zu pflegen, von denen Zolldatensätze und Frachtlisten der Sendungen erfasst und verbreitet werden. Somit müssen sie sich auf die Codierung und nicht auf die Verwaltung der Infrastruktur konzentrieren. Und schließlich wurde {{site.data.keyword.containerlong_notm}} ausgewählt, weil IBM die Verwaltung der Infrastruktur vereinfacht:
+Da die Sendungsdaten mit den Kunden des Unternehmens gemeinsam genutzt werden, stellen die Entwickler sicher, dass die Kunden APIs zum Darstellen der Sendungsdaten in ihren eigenen Apps verwenden können. Beispiele für solche Apps sind Apps für mobile Ortung oder E-Commerce-Lösungen. Die Entwickler arbeiten auch daran, Apps für die regionalen Häfen zu erstellen und zu pflegen, von denen Zolldatensätze und Frachtlisten der Sendungen erfasst und verbreitet werden. Somit müssen sie sich auf die Codierung und nicht auf die Verwaltung der Infrastruktur konzentrieren. Und schließlich wurde {{site.data.keyword.containerlong_notm}} ausgewählt, weil IBM die Verwaltung der Infrastruktur vereinfacht:
 * Verwaltung des Kubernetes-Masters, von Infrastructure as a Service (IaaS) und der Betriebskomponenten, wie zum Beispiel Ingress und Speicher
 * Überwachen von Status und Wiederherstellung für Workerknoten
 * Bereitstellung globaler Rechenleistung, damit Entwickler nicht für die Infrastruktur in den mehreren Regionen verantwortlich sind, in denen sich Workloads und Daten befinden müssen
@@ -92,7 +92,7 @@ Technische Lösung:
 
 **Schritt 1: Containerisierte Apps mithilfe von Microservices**
 
-* Organisieren Sie die Apps in einer Gruppe aus kooperativen Microservices in {{site.data.keyword.containerlong_notm}}; Basis hierfür sind die Funktionsbereiche der App und ihre Abhängigkeiten.
+* Integrieren Sie Apps in einer Gruppe aus kooperativen Microservices in {{site.data.keyword.containerlong_notm}} auf Grundlage von Funktionsbereichen der App und deren Abhängigkeiten.
 * Stellen Sie die Apps in den Containern in {{site.data.keyword.containerlong_notm}} bereit.
 * Stellen Sie standardisierte DevOps-Dashboards über Kubernetes bereit.
 * Aktivieren Sie die bedarfsgerechte Skalierung der Rechenleistung für Batch-Workloads und Lagerbestands-Workloads, die nicht häufig ausgeführt werden.
@@ -105,12 +105,12 @@ Technische Lösung:
 
 **Schritt 3: Daten gemeinsam nutzen**
 * Von {{site.data.keyword.cos_full}} und {{site.data.keyword.messagehub_full}} wird ein echtzeitorientierter Protokolldatenspeicher bereitgestellt.
-* Die Kunden der Reederei können die Daten in ihren Apps gemeinsam nutzen.
+* APIs ermöglichen den Kunden des versendenden Unternehmens die gemeinsame Nutzung von Daten in ihren Apps.
 
 **Schritt 4: Kontinuierlich bereitstellen**
 * {{site.data.keyword.contdelivery_full}} dient Entwicklern als Unterstützung bei der schnellen Bereitstellung einer integrierten Toolchain mithilfe anpassbarer und gemeinsam nutzbarer Vorlagen unter Verwendung von IBM Tools, Tools von Drittanbietern und Open-Source-Tools. Automatisieren Sie Erstellungen und Tests und kontrollieren Sie die Qualität durch Analysen.
 * Nachdem die Entwickler die Apps in den Entwicklungs- und Testclustern erstellt und getestet haben, verwenden Sie die IBM CI/CD-Toolchains zum Bereitstellen von Apps in Clustern auf der ganzen Welt.
-* {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps; angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio bereitgestellt, damit regionale Anforderungen erfüllt werden können.
+* {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps; angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio zwecks Einhaltung regionaler Anforderungen bereitgestellt.
 
 **Ergebnisse**
 
@@ -159,7 +159,7 @@ Technische Lösung:
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_full_notm}}
 
-Für CHRO ist die beschleunigte Entwicklung eine bedeutende Verbesserung. Das Team beginnt zunächst damit, die Apps zu containerisieren und in die Cloud zu stellen. Durch die Verwendung moderner Container können die Entwickler ohne großen Aufwand mit dem Node.js-SDK experimentieren und Änderungen zu Bereitstellungs- und Testsystemen mit Push-Operationen hinzufügen, die mit separaten Clustern horizontal skaliert werden. Diese Push-Operationen wurden mit offenen Toolchains und {{site.data.keyword.contdelivery_full}} automatisiert. Die Aktualisierung der Human Resources-Site zieht sich nicht mehr in langsamen, fehlerträchtigen Erstellungsprozessen hin. Schrittweise Aktualisierungen können für die Site täglich oder sogar noch häufiger bereitgestellt werden.  Darüber hinaus ist die Protokollierung und Überwachung der Human Resources-Site schnell integriert, insbesondere in Bezug auf die Art und Weise, wie von der Site personalisierte Daten aus Back-End-Leistungssystemen extrahiert werden. Die Entwickler verschwenden ihre Zeit nicht mit dem Erstellen komplexer Protokollierungssysteme, nur um in der Lage zu sein, Fehler in den aktiven Systemen zu beheben. Entwickler müssen keine Zeit darauf verwenden, sich zu Experten für Cloudsicherheit weiterzubilden. Mithilfe von {{site.data.keyword.appid_full_notm}} können sie ohne großen Aufwand eine richtliniengesteuerte Authentifizierung umsetzen.
+Für CHRO ist die beschleunigte Entwicklung eine bedeutende Verbesserung. Das Team beginnt zunächst damit, die Apps zu containerisieren und in die Cloud zu stellen. Durch die Verwendung moderner Container können die Entwickler ohne großen Aufwand mit dem Node.js-SDK experimentieren und Änderungen zu Bereitstellungs- und Testsystemen mit Push-Operationen hinzufügen, die mit separaten Clustern horizontal skaliert werden. Diese Push-Operationen wurden mit offenen Toolchains und {{site.data.keyword.contdelivery_full}} automatisiert. Die Aktualisierung der Human Resources-Site zieht sich nicht mehr in langsamen, fehlerträchtigen Erstellungsprozessen hin. Schrittweise Aktualisierungen können für die Site täglich oder sogar noch häufiger bereitgestellt werden.  Darüber hinaus ist die Protokollierung und Überwachung der Human Resources-Site schnell integriert, insbesondere in Bezug auf die Art und Weise, wie von der Site personalisierte Daten aus Back-End-Leistungssystemen extrahiert werden. Die Entwickler verschwenden ihre Zeit nicht mit dem Erstellen komplexer Protokollierungssysteme, nur um in der Lage zu sein, Fehler in den aktiven Systemen zu beheben. Entwickler müssen nicht zu Experten in der Cloudsicherheit werden; mithilfe von {{site.data.keyword.appid_full_notm}} können Sie ohne großen Aufwand eine richtliniengesteuerte Authentifizierung erzwingen.
 
 Mit {{site.data.keyword.containerlong_notm}} wurde die überdimensionierte Hardware in einem privaten Rechenzentrum durch anpassbare Rechenleistung ersetzt, wodurch der IT-Betrieb, die Wartung und die Energiekosten reduziert wurden. Zum Hosten der Human Resources-Site konnten ohne großen Aufwand Kubernetes-Cluster entworfen werden, die an die Anforderungen an CPU, RAM und Speicher angepasst wurden. Ein weiterer Faktor für niedrigere Personalkosten ist die Tatsache, dass Kubernetes von IBM verwaltet wird, sodass sich die Entwickler auf die Bereitstellung einer besseren Mitarbeitererfahrung für die Antragsverarbeitung konzentrieren kann.
 
@@ -183,7 +183,7 @@ Mit {{site.data.keyword.containerlong_notm}} wurde die überdimensionierte Hardw
 **Schritt 4: Kontinuierlich weltweit bereitstellen**
 * {{site.data.keyword.contdelivery_full}} dient Entwicklern als Unterstützung bei der schnellen Bereitstellung einer integrierten Toolchain mithilfe anpassbarer und gemeinsam nutzbarer Vorlagen unter Verwendung von IBM Tools, Tools von Drittanbietern und Open-Source-Tools. Automatisieren Sie Erstellungen und Tests und kontrollieren Sie die Qualität durch Analysen.
 * Nachdem die Entwickler die Apps in den Entwicklungs- und Testclustern erstellt und getestet haben, verwenden Sie die IBM CI/CD-Toolchains zum Bereitstellen von Apps in Produktionsclustern auf der ganzen Welt.
-* {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps. Angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio bereitgestellt, damit regionale Anforderungen erfüllt werden können.
+* {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps. Angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio bereitgestellt, um regionale Anforderungen zu erfüllen.
 * Die in {{site.data.keyword.containerlong_notm}} integrierten Hochverfügbarkeitstools gleichen die Workload in jeder geografischen Region aus; hierbei sind auch automatische Fehlerbehebung und Lastverteilung eingeschlossen.
 
 **Ergebnisse**

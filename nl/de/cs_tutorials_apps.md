@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -67,8 +67,7 @@ Softwareentwickler und Netzadministratoren, die erstmalig eine App in einem Kube
 ## Voraussetzungen
 {: #apps_prereqs}
 
-* [Lernprogramm: Kubernetes-Cluster erstellen](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* Installieren Sie das [Plug-in 'container-registry'](/docs/services/Registry?topic=registry-index#registry_cli_install).
+[Lernprogramm: Kubernetes-Cluster erstellen](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## Lerneinheit 1: Einzelinstanz-Apps auf Kubernetes-Clustern bereitstellen
@@ -154,7 +153,7 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     ```
     {: screen}
 
-    Erfahren Sie mehr über das [Sichern der persönliche Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Kubernetes-Ressourcen.
+    Erfahren Sie mehr über das [Sichern der persönlichen Daten](/docs/containers?topic=containers-security#pi) bei der Arbeit mit Kubernetes-Ressourcen.
 
 8.  Machen Sie die App zugänglich, indem Sie die Bereitstellung als Service vom Typ 'NodePort' zur Verfügung stellen. Genau wie beim Zugänglichmachen eines Ports für eine Cloud Foundry-App machen Sie als Knotenport (NodePort) den Port zugänglich, an dem der Workerknoten für Datenverkehr empfangsbereit ist.
 
@@ -243,7 +242,7 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 
@@ -539,7 +538,7 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         ```
         {: codeblock}
 
-    2.  Aktualisieren Sie im Datenträgerabschnitt ('volumes') der Watson-Bereitstellung den Namen des geheimen Schlüssels für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen [Lernprogramm: Kubernetes-Cluster erstellen](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie den {{site.data.keyword.Bluemix_notm}} IAM-API-Schüssel (Identity and Access Management) dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie den API-Schlüssel unter Verwendung des Datenträgermountpfads suchen.
+    2.  Aktualisieren Sie im Datenträgerabschnitt ('volumes') der `watson-pod`-Bereitstellung den Namen des geheimen Schlüssels für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen [Lernprogramm: Kubernetes-Cluster erstellen](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie den {{site.data.keyword.Bluemix_notm}} IAM-API-Schüssel (Identity and Access Management) dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie den API-Schlüssel unter Verwendung des Datenträgermountpfads suchen.
 
         ```
         volumes:
