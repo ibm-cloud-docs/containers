@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -135,7 +135,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     4.  To finish, click **Create cluster**.<p class="note">Your cluster creation might take some time to complete. After the cluster state shows **Normal**, the cluster network and load-balancing components take about 10 more minutes to deploy and update the cluster domain that you use for the OpenShift web console and other routes. Wait until the cluster is ready before continuing to the next step by checking that the **Ingress subdomain** follows a pattern of `<cluster_name>.<region>.containers.appdomain.cloud`.</p>
 2.  From the cluster details page, click **OpenShift web console**.
 3.  From the dropdown menu in the OpenShift container platform menu bar, click **Application Console**. The Application Console lists all project namespaces in your cluster. You can navigate to a namespace to view your applications, builds, and other Kubernetes resources.
-4.  To complete the next lesson by working in the terminal, click your profile **IAM#user.name@email.com > Copy Login Command**. Paste the copied `oc` login command into your terminal to authenticate via the CLI.
+4.  To complete the next lesson by working in the terminal: From the OpenShift web console menu bar, click your profile **IAM#user.name@email.com > Copy Login Command**. Paste the copied `oc` login command into your terminal to authenticate via the CLI.
 
 ### Creating a cluster with the CLI
 {: #openshift_create_cluster_cli}
@@ -222,7 +222,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     ```
     {: screen}
 5.  In your browser, navigate to the address of your **Master URL** and append `/console`. For example, `https://c0.containers.cloud.ibm.com:23652/console`.
-6.  Click your profile **IAM#user.name@email.com > Copy Login Command**. Paste the copied `oc` login command into your terminal to authenticate via the CLI.<p class="tip">Save your cluster master URL to access the OpenShift console later. In future sessions, you can skip the `cluster-config` step and copy the login command from the console instead.</p>
+6.  From the OpenShift web console menu bar, click your profile **IAM#user.name@email.com > Copy Login Command**. Paste the copied `oc` login command into your terminal to authenticate via the CLI.<p class="tip">Save your cluster master URL to access the OpenShift console later. In future sessions, you can skip the `cluster-config` step and copy the login command from the console instead.</p>
 7.  Verify that the `oc` commands run properly with your cluster by checking the version.
 
     ```
@@ -274,7 +274,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
 ### Accessing built-in OpenShift services from the CLI
 {: #openshift_services_cli}
 
-1.  From the OpenShift web console, click your profile **IAM#user.name@email.com > Copy Login Command** and paste the login command into your terminal to authenticate.
+1.  From the OpenShift web console menu bar, click your profile **IAM#user.name@email.com > Copy Login Command** and paste the login command into your terminal to authenticate.
     ```
     oc login https://c1-e.<region>.containers.cloud.ibm.com:<port> --token=<access_token>
     ```
@@ -345,7 +345,7 @@ Now you're in the built-in OpenShift app! For example, if you're in Grafana, you
 With Red Hat OpenShift on IBM Cloud, you can create a new app and expose your app service via an OpenShift router for external users to use.
 {: shortdesc}
 
-If you took a break from the last lesson and started a new terminal, make sure that you log back in to your cluster. Open your OpenShift console at `https://<master_URL>/console`. For example, `https://c0.containers.cloud.ibm.com:23652/console`. Then click your profile **IAM#user.name@email.com > Copy Login Command** and paste the copied `oc` login command into your terminal to authenticate via the CLI.
+If you took a break from the last lesson and started a new terminal, make sure that you log back in to your cluster. Open your OpenShift web console at `https://<master_URL>/console`. For example, `https://c0.containers.cloud.ibm.com:23652/console`. Then from the menu bar, click your profile **IAM#user.name@email.com > Copy Login Command** and paste the copied `oc` login command into your terminal to authenticate via the CLI.
 {: tip}
 
 1.  Create a project for your Hello World app. A project is an OpenShift version of a Kubernetes namespace with additional annotations.
@@ -455,7 +455,7 @@ Because OpenShift sets up stricter [Security Context Constraints (SCC) ![Externa
 
 Before you begin, log in to your cluster as an administrator.
 1.  Open your OpenShift console at `https://<master_URL>/console`. For example, `https://c0.containers.cloud.ibm.com:23652/console`.
-2.  Click your profile **IAM#user.name@email.com > Copy Login Command** and paste the copied `oc` login command into your terminal to authenticate via the CLI.
+2.  From the OpenShift web console menu bar, click your profile **IAM#user.name@email.com > Copy Login Command** and paste the copied `oc` login command into your terminal to authenticate via the CLI.
 3.  Download the admin configuration files for your cluster.
     ```
     ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin
