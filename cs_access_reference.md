@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks
 
@@ -1063,13 +1063,13 @@ The following table shows the infrastructure permissions that are required to co
   <strong>Minimum permissions</strong>: <ul>
   <li>Create a cluster.</li></ul></td>
 <td>
-</ul><strong>Account</strong>: <ul>
+<strong>Account</strong>: <ul>
 <li>Add Server</li></ul>
   <strong>Devices</strong>:<ul>
   <li>For bare metal worker nodes: View Hardware Details</li>
   <li>IPMI Remote Management</li>
   <li>OS Reloads and Rescue Kernel</li>
-  <li>For VM worker nodes: View Virtual Server Details</li></td>
+  <li>For VM worker nodes: View Virtual Server Details</li></ul></td>
 </tr>
 <tr>
 <td>
