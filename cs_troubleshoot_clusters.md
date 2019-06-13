@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
@@ -862,9 +862,14 @@ Your cluster uses an API key or token that is stored in an [image pull secret](/
     ```
     {: screen}
 3.  If no image pull secrets are listed, set up the image pull secret in your namespace.
-    1.  [Copy the image pull secrets from the `default` Kubernetes namespace to the namespace where you want to deploy your workload](/docs/containers?topic=containers-images#copy_imagePullSecret).
-    2.  [Add the image pull secret to the service account for this Kubernetes namespace](/docs/containers?topic=containers-images#store_imagePullSecret) so that all pods in the namespace can use the image pull secret credentials.
-4.  If image pull secrets are listed, determine what type of credentials you use to access the container registry.
+    1.  Verify that the `default` namespace has `icr-io` image pull secrets for each regional registry that you want to use. If no `icr-io` secrets are listed in the namespace, [use the `ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>` command](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key) to create the image pull secrets in the `default` namespace.
+        ```
+        kubectl get secrets -n default | grep "icr-io"
+        ```
+        {: pre}
+    2.  [Copy the image pull secrets from the `default` Kubernetes namespace to the namespace where you want to deploy your workload](/docs/containers?topic=containers-images#copy_imagePullSecret).
+    3.  [Add the image pull secret to the service account for this Kubernetes namespace](/docs/containers?topic=containers-images#store_imagePullSecret) so that all pods in the namespace can use the image pull secret credentials.
+4.  If image pull secrets are listed in the pod, determine what type of credentials you use to access {{site.data.keyword.registrylong_notm}}.
     *   **Deprecated**: If the secret has `bluemix` in the name, you use a registry token to authenticate with the deprecated `registry.<region>.bluemix.net` domain names. Continue with [Troubleshooting image pull secrets that use tokens](#ts_image_pull_token).
     *   If the secret has `icr` in the name, you use an API key to authenticate with the `icr.io` domain names. Continue with [Troubleshooting image pull secrets that use API keys](#ts_image_pull_apikey).
     *   If you have both types of secrets, then you use both authentication methods. Going forward, use the `icr.io` domain names in your deployment YAMLs for the container image. Continue with [Troubleshooting image pull secrets that use API keys](#ts_image_pull_apikey).
