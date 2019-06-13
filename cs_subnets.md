@@ -112,24 +112,22 @@ When VRF or VLAN spanning is enabled, any system that is connected to any of the
 When you create a standard cluster, subnets are automatically created for you. However, instead of using the automatically provisioned subnets, you can use existing portable subnets from your IBM Cloud infrastructure (SoftLayer) account or reuse subnets from a deleted cluster.
 {:shortdesc}
 
-Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. If instead you want to get more portable private IP addresses for your cluster's network load balancer (NLB) services by using your own on-premises network subnet, see [Adding portable private IPs by adding user-managed subnets to private VLANs](#subnet_user_managed).
+Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. If instead you want to get more portable public or private IP addresses to create network load balancer (NLB) or Ingress application load balancer (ALB) services, see [Adding portable IP addresses](#adding_ips).
 
 All subnets that were automatically ordered during cluster creation are immediately deleted after you delete a cluster, and you cannot reuse the subnets to create a new cluster. However, if you [manually added your own subnets to the cluster](#subnet_user_managed), the subnets are not deleted when you delete the cluster. You can reuse the subnets to create a new cluster.
-
-Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 {: note}
 
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- To reuse user-managed subnets from a cluster that you no longer need, delete the unneeded cluster.
+- To reuse user-managed private subnets from a cluster that you no longer need, delete the unneeded cluster.
    ```
    ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-</br>To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio:
+</br>To create a cluster by using existing subnets:
 
-1. Get the ID of the subnet to use and the ID of the VLAN that the subnet is on.
+1. Get the subnet ID and the ID of the VLAN that the subnet is on.
 
     ```
     ibmcloud ks subnets
@@ -419,7 +417,7 @@ Requirements:
 
 Before you begin:
 - Configure the routing of network traffic into and out of the external subnet.
-- Confirm that you have VPN connectivity between the on-premises data center network gateway and either the private network Virtual Router Appliance or the strongSwan VPN service that runs in your cluster. For more information, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
+- Confirm that you have VPN connectivity between the on-premises data center network gateway and either the private network Virtual Router Appliance or the strongSwan VPN service that runs in your cluster. Alternatively, ensure that you have a DirectLink connection set up between your cluster and the on-premises data center network. For more information, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
 -  Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
