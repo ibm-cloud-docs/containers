@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks, ingress
 
@@ -574,7 +574,7 @@ spec:
 <tbody>
 <tr>
 <td>Server snippet</td>
-<td>Provide the configuration snippet that you want to use. This sample snippet specifies a location block to handle <code>&#47;health</code> requests. The location block is configured to return a healthy response and add a header when it forwards a request.</td>
+<td>Provide the configuration snippet that you want to use. This sample snippet specifies a location block to handle <code>/health</code> requests. The location block is configured to return a healthy response and add a header when it forwards a request.</td>
 </tr>
 </tbody>
 </table>
