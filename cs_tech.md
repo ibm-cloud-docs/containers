@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks, docker
 
@@ -33,7 +33,7 @@ Learn more about the technology behind {{site.data.keyword.containerlong}}.
 ## Docker containers
 {: #docker_containers}
 
-Built on existing Linux container technology (LXC), the open source project named Docker defined templates for how to package software into standardized units, called containers, that include all of the elements that an app needs to run. {{site.data.keyword.containerlong_notm}} uses `containerd` as the container runtime to deploy containers from Docker container images into your cluster.
+Built on existing Linux container technology (LXC), the open source project that is named Docker defined templates for how to package software into standardized units, called containers, that include all of the elements that an app needs to run. {{site.data.keyword.containerlong_notm}} uses `containerd` as the container runtime to deploy containers from Docker container images into your cluster.
 {:shortdesc}
 
 Learn about some basic Docker concepts:
@@ -79,7 +79,7 @@ Learn about some basic Docker concepts:
 ## Kubernetes clusters
 {: #kubernetes_basics}
 
-<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes certification for IBM Cloud Container Service."/>The open source project named Kubernetes combines running a containerized infrastructure with production work loads, open source contributions, and Docker container management tools. The Kubernetes infrastructure provides an isolated and secure app platform for managing containers that is portable, extensible, and self-healing in case of failovers.
+<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes certification for IBM Cloud Container Service."/>The open source project that is named Kubernetes combines running a containerized infrastructure with production work loads, open source contributions, and Docker container management tools. The Kubernetes infrastructure provides an isolated and secure app platform for managing containers that is portable, extensible, and self-healing in case of failovers.
 {:shortdesc}
 
 Learn about some basic Kubernetes concepts as shown in the following diagram.
@@ -91,7 +91,7 @@ Learn about some basic Kubernetes concepts as shown in the following diagram.
 <dd>Your account refers to your {{site.data.keyword.cloud_notm}} account.</dd>
 
 <dt>Cluster</dt>
-<dd>A Kubernetes cluster consists of one or more compute hosts that are called worker nodes. Worker nodes are managed by a Kubernetes master that centrally controls and monitors all Kubernetes resources in the cluster. So when you deploy the resources for a containerized app, the Kubernetes master decides which worker node to deploy those resources on, taking into account the deployment requirements and available capacity in the cluster. Kubernetes resources include services, deployments, and pods.</dd>
+<dd>A Kubernetes cluster consists of one or more compute hosts that are called worker nodes. Worker nodes are managed by a Kubernetes master that centrally controls and monitors all Kubernetes resources in the cluster. So when you deploy the resources for a containerized app, the Kubernetes master decides which worker node to deploy those resources on, accounting for the deployment requirements and available capacity in the cluster. Kubernetes resources include services, deployments, and pods.</dd>
 
 <dt>Service</dt>
 <dd>A service is a Kubernetes resource that groups a set of pods and provides network connectivity to these pods without exposing the actual private IP address of each pod. You can use a service to make your app available within your cluster or to the public internet.
@@ -160,24 +160,24 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     <td>The Kubernetes API server serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The Kubernetes API server validates and processes requests that change the state of Kubernetes resources, such as pods or services, and stores this state in etcd.</td>
     </tr>
     <tr>
-    <td>openvpn-server</td>
+    <td>`openvpn-server`</td>
     <td>The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
     </tr>
     <tr>
-    <td>etcd</td>
-    <td>etcd is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.</td>
+    <td>`etcd`</td>
+    <td>`etcd` is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.</td>
     </tr>
     <tr>
-    <td>kube-scheduler</td>
+    <td>`kube-scheduler`</td>
     <td>The Kubernetes scheduler watches for newly created pods and decides where to deploy them based on capacity, performance needs, policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</td>
     </tr>
     <tr>
-    <td>kube-controller-manager</td>
+    <td>`kube-controller-manager`</td>
     <td>The Kubernetes controller manager is a daemon that watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state.</td>
     </tr>
     </tbody></table></dd>
   <dt>Worker node</dt>
-    <dd>Each worker node is a physical machine (bare metal) or a virtual machine that runs on physical hardware in the cloud environment. When you provision a worker node, you determine the resources that are available to the containers that are hosted on that worker node. Out of the box, your worker nodes are set up with an {{site.data.keyword.IBM_notm}} managed Docker Engine, separate compute resources, networking, and a volume service. The built-in security features provide isolation, resource management capabilities, and worker node security compliance.</br></br><p class="note">Modifying default worker node components such as `kubelet` is not supported and might cause unexpected results.</p>The following table describes the components of a worker node.
+    <dd>Each worker node is a physical machine (bare metal) or a virtual machine that runs on physical hardware in the cloud environment. When you provision a worker node, you determine the resources that are available to the containers that are hosted on that worker node. Out of the box, your worker nodes are set up with an {{site.data.keyword.IBM_notm}}-managed Docker Engine, separate compute resources, networking, and a volume service. The built-in security features provide isolation, resource management capabilities, and worker node security compliance.</br></br><p class="note">Modifying default worker node components such as `kubelet` is not supported and might cause unexpected results.</p>The following table describes the components of a worker node.
     <table>
     <caption>Components of worker nodes</caption>
     <thead>
@@ -188,72 +188,72 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     <tbody>
     <tr>
     <td>`ibm-master-proxy`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>The `ibm-master-proxy` forwards requests from the worker node to the IP addresses of the highly available master replicas. In single zone clusters, the master has three replicas on separate hosts with one master IP address and domain name. For clusters that are in a multizone-capable zone, the master has three replicas that are spread across zones. As such, each master has its own IP address that is registered with DNS, with one domain name for the entire cluster master.</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>The OpenVPN client works with the OpenVPN server to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
     </tr>
     <tr>
     <td>`kubelet`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>The kubelet is a pod that runs on every worker node and is responsible for monitoring the health of pods that run on the worker node and for watching the events that the Kubernetes API server sends. Based on the events, the kubelet creates or removes pods, ensures liveness and readiness probes, and reports back the status of the pods to the Kubernetes API server.</td>
     </tr>
     <tr>
     <td>`coredns`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>By default, Kubernetes schedules a CoreDNS pod (or KubeDNS pod in version 1.12 and earlier) and service on the cluster. Containers automatically use the DNS service's IP to resolve DNS names in their searches for other pods and services.</td>
     </tr>
     <tr>
     <td>`calico`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Calico manages network policies for your cluster, and comprises a few components as follows.
     <ul>
     <li>**`calico-cni`**: The Calico container network interface (CNI) manages the network connectivity of containers and removes allocated resources when a container is deleted.</li>
     <li>**`calico-ipam`**: The Calico IPAM manages IP address assignment for containers.</li>
-    <li>**`calico-node`**: The Calico node is a container that bundles together the various components required for networking containers with Calico.</li>
+    <li>**`calico-node`**: The Calico node is a container that bundles together the various components that are required for networking containers with Calico.</li>
     <li>**`calico-policy-controller`**: The Calico policy controller watches inbound and outbound network traffic for compliance with set network policies. If the traffic is not allowed in the cluster, access to the cluster is blocked. The Calico policy controller is also used to create and set network policies for a cluster.</li></ul></td>
     </tr>
     <tr>
     <td>`kube-proxy`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>The Kubernetes network proxy is a daemon that runs on every worker node and that forwards or load balances TCP and UDP network traffic for services that run in the cluster.</td>
     </tr>
     <tr>
     <td>`kube-dashboard`</td>
-    <td>kube-system</td>
-    <td>The Kubernetes dashboard is a web-based GUI that allows users to manage and troubleshoot the cluster and applications running in the cluster.</td>
+    <td>`kube-system`</td>
+    <td>The Kubernetes dashboard is a web-based GUI that allows users to manage and troubleshoot the cluster and applications that run in the cluster.</td>
     </tr>
     <tr>
     <td>`heapster`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Heapster is a cluster-wide aggregator of monitoring and event data. The Heapster pod discovers all nodes in the cluster and queries usage information from each node's kubelet. You can find utilization graphs in the Kubernetes dashboard.</td>
     </tr>
     <tr>
     <td>Ingress ALB</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Ingress is a Kubernetes service that you can use to balance network traffic workloads in your cluster by forwarding public or private requests to multiple apps in your cluster. To expose your apps over the public or private network, you must create an Ingress resource to register your apps with the Ingress application load balancer (ALB). Multiple apps can then be accessed by using a single URL or IP address.</td>
     </tr>
     <tr>
     <td>Storage provider</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Every cluster is set up with a plug-in to provision file storage. You can choose to install other add-ons, such as block storage.</td>
     </tr>
     <tr>
     <td>Logging and metrics</td>
-    <td>ibm-system</td>
+    <td>`ibm-system`</td>
     <td>You can use the integrated {{site.data.keyword.loganalysislong_notm}} and {{site.data.keyword.monitoringlong_notm}} services to expand your collection and retention capabilities when working with logs and metrics.</td>
     </tr>
     <tr>
     <td>Load balancer</td>
-    <td>ibm-system</td>
-    <td>A load balancer is a Kubernetes services that can be used to balance network traffic workloads in your cluster by forwarding public or private requests to an app.</td>
+    <td>`ibm-system`</td>
+    <td>A load balancer is a Kubernetes service that can be used to balance network traffic workloads in your cluster by forwarding public or private requests to an app.</td>
     </tr>
     <tr>
     <td>App pods and services</td>
-    <td>default</td>
+    <td>`default`</td>
     <td>In the <code>default</code> namespace or in namespaces that you create, you can deploy apps in pods and services to communicate with those pods.</td>
     </tr>
     </tbody></table></dd>

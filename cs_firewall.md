@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks
 
@@ -85,7 +85,7 @@ If corporate network policies prevent access from your local system to public en
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `kubectl` commands, you must allow TCP access for the cluster.
 {:shortdesc}
 
-When a cluster is created, the port in the service endpoint URLs are randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
+When a cluster is created, the port in the service endpoint URLs is randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
 
 Before you begin, allow access to [run `ibmcloud ks` commands](#firewall_bx).
 
@@ -160,7 +160,7 @@ To allow access for a specific cluster:
     }
     ```
     {: screen}
-  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.cloud_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. Note that you must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-clusters#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
+  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.cloud_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: You must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-clusters#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -233,7 +233,7 @@ Depending on your cluster setup, you access the services by using the public, pr
 
 2.  Allow outgoing network traffic from the source <em>&lt;each_worker_node_publicIP&gt;</em> to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. These IP addresses permit worker nodes to communicate with the cluster master. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for your local machine too so that you can access the cluster master.
 
-    You must allow outgoing traffic to port 443 for all of the zones within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones.
+    You must allow outgoing traffic to port 443 for all of the zones within the region to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones.
     {: important}
 
     {: #master_ips}
@@ -413,7 +413,7 @@ Depending on your cluster setup, you access the services by using the public, pr
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
         Replace `<logDNA_public_IP>` with the [LogDNA IP addresses](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network).
 
-5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
+5. If you use load balancer services, ensure that all traffic that uses the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
 6. {: #pvc}To create persistent volume claims in a private cluster, make sure that your cluster is set up with the following Kubernetes version or {{site.data.keyword.cloud_notm}} storage plug-in versions. These versions enable private network communication from your cluster to your persistent storage instances.
     <table>
@@ -453,12 +453,12 @@ If you have a firewall on the private network, allow communication between worke
 {:shortdesc}
 
 1. Allow all traffic between worker nodes.
-    1. Allow all TCP, UDP, VRRP and IPEncap traffic between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for private load balancers and the IPEncap protocol to permit pod to pod traffic across subnets.
+    1. Allow all TCP, UDP, VRRP, and IPEncap traffic between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for private load balancers and the IPEncap protocol to permit pod to pod traffic across subnets.
     2. If you use Calico policies, or if you have firewalls in each zone of a multizone cluster, a firewall might block communication between worker nodes. You must open all worker nodes in the cluster to each other by using the workers' ports, workers' private IP addresses, or the Calico worker node label.
 
 2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges so that you can create worker nodes in your cluster.
     1. Allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. See [Backend (private) Network](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network).
-    2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](/docs/containers?topic=containers-regions-and-zones#zones) that you are using. Note that you must add IPs for the `dal01`, `dal10`, `wdc04` zones, and if your cluster is in the Europe geography, the `ams01` zone. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
+    2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](/docs/containers?topic=containers-regions-and-zones#zones) that you are using. **Note**: You must add IPs for the `dal01`, `dal10`, `wdc04` zones, and if your cluster is in the Europe geography, the `ams01` zone. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
 
 3. Open the following ports:
     - Allow outbound TCP and UDP connections from the workers to ports 80 and 443 to allow worker node updates and reloads.
@@ -467,7 +467,7 @@ If you have a firewall on the private network, allow communication between worke
     - Allow inbound TCP and UDP connections to port 10250 for the Kubernetes dashboard and commands such as `kubectl logs` and `kubectl exec`.
     - Allow inbound and outbound connections to TCP and UDP port 53 for DNS access.
 
-4. If you also have a firewall on the public network, or if you have a private-VLAN only cluster and are using a gateway device as a firewall, you must also allow the IPs and ports specified in [Allowing the cluster to access infrastructure resources and other services](#firewall_outbound).
+4. If you also have a firewall on the public network, or if you have a private-VLAN only cluster and are using a gateway device as a firewall, you must also allow the IPs and ports that are specified in [Allowing the cluster to access infrastructure resources and other services](#firewall_outbound).
 
 <br />
 
@@ -577,7 +577,7 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
       ```
       {: pre}
 
-    2. From the output of the previous step, note all the unique network IDs (first 3 octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
+    2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
         kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6   
@@ -602,7 +602,7 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
     4.  Retrieve the subnet address. In the output, find the number of **IPs**. Then, raise `2` to the power of `n` equal to the number of IPs. For example, if the number of IPs is `16`, then `2` is raised to the power of `4` (`n`) to equal `16`. Now get the subnet CIDR by subtracting the value of `n` from `32` bits. For example, when `n` equals `4`, then the CIDR is `28` (from the equation `32 - 4 = 28`). Combine the **identifier** mask with the CIDR value to get the full subnet address. In the previous output, the subnet addresses are:
         *   `169.xx.210.xxx/28`
         *   `169.xx.178.xxx/28`
-  * **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and do not need to scale, or if you only want to whitelist one worker node, list all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.cloud_notm}} services by using the private service endpoint, note the **Private IP** addresses instead. Note that only these worker nodes are whitelisted. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
+  * **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and do not need to scale, or if you want to whitelist only one worker node, list all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.cloud_notm}} services by using the private service endpoint, note the **Private IP** addresses instead. Only these worker nodes are whitelisted. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
     ```
     ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
