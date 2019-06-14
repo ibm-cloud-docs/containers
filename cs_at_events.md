@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-14"
 
 keywords: kubernetes, iks, audit
 
@@ -93,7 +93,7 @@ Check out the following list of the cluster management events that are sent to {
 <td><code>containers-kubernetes.cluster.delete</code></td>
 <td>A cluster is deleted.</td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
-<td>A feature, such as Trusted Compute for bare metal worker nodes, is enabled on a cluster.</td></tr><tr>
+<td>A feature, such as the public or private service endpoint, is enabled on a cluster.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
 <td>Cluster information is viewed.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.create</code></td>
