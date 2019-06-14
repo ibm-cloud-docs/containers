@@ -36,9 +36,24 @@
         </div>
     </div>
     </a>
+    <a href = "/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Asynchronous data processing for apps
+          <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br> <p>Use an Apache Kafka-based messaging service to orchestrate long running workloads to apps that run in a Kubernetes cluster. </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src = "https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution25/Architecture.png" alt="Asynchronous data processing architecture" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
 </div>
 
-## Set up high availability and network security
+## Set up high availability and security
 {: #tutorials-ov-ha-network-security}
 
 <div class = "solutionBoxContainer">
@@ -112,6 +127,21 @@
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src = "https://github.com/IBM-Bluemix-Docs/tutorials/blob/master/images/solution34-cloud-e2e-security/Architecture.png?raw=true" alt="Architecture diagram for applying end-to-end security to a cloud app" /></br>
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+    <a href = "/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Organizing users and teams with {{site.data.keyword.cloud_notm}} Identity and Access Management
+          <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br> <p>Set up cluster access for users and teams and learn how to replicate this setup across environments. </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src = "https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution20-users-teams-applications/architecture.png" alt="Architecture diagram for organizing users and teams" /></br>
                 </div>
             </div>
         </div>
