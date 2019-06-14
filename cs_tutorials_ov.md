@@ -87,7 +87,7 @@
         </div>
     </div>
     </a>
-    <a href = "/docs/containers?topic=containers-serverless-apps-knative">
+    <a href = "/docs/containers?topic=containers-istio">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Secure, manage, and monitor a network of microservices with Istio
