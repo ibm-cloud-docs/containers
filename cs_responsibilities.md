@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-06-14"
 
 keywords: kubernetes, iks
 
@@ -93,8 +93,8 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
       <li>Continuously monitor master and worker node images to detect vulnerability and security compliance issues.</li>
       <li>Provision worker nodes with two local SSD, AES 256-bit encrypted data partitions.</li>
       <li>Provide options for cluster network connectivity, such as public and private service endpoints.</li>
-      <li>Provide options for compute isolation, such as dedicated virtual machines, bare metal, and bare metal with Trusted Compute.</li>
-      <li>Integrate Kubernetes role-based access control (RBAC) with {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM).</li>
+      <li>Provide options for compute isolation, such as dedicated virtual machines or bare metal.</li>
+      <li>Integrate Kubernetes role-based access control (RBAC) with {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).</li>
       </ul>
       <br><br>
       **Your responsibilities**:
