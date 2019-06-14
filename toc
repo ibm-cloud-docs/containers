@@ -31,6 +31,7 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Tutorials
+        cs_tutorials_ov.md
         cs_tutorials.md
         cs_tutorial_rhos.md
         cs_tutorials_apps.md
@@ -145,4 +146,3 @@ IBM Cloud Kubernetes Service
     cs_rellinks.md
     cs_sitemap.md
     {: .navgroup-end}
-
