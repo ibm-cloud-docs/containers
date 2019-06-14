@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1153,7 +1153,7 @@ Create a cluster in your organization. For free clusters, you specify the cluste
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [-s]
 ```
 {: pre}
 
@@ -1181,7 +1181,6 @@ hardware: <em>&lt;shared_or_dedicated&gt;</em>
 workerNum: <em>&lt;number_workers&gt;</em>
 kube-version: <em>&lt;kube-version&gt;</em>
 diskEncryption: <em>false</em>
-trusted: <em>true</em>
 </code></pre>
 </dd>
 
@@ -1247,9 +1246,7 @@ trusted: <em>true</em>
 <dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option.</dd>
 </dl>
 
-**<code>--trusted</code>**</br>
-<p>**Bare metal only**: Enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
-<p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker-get` [command](#cs_worker_get).</p>
+
 
 **<code>-s</code>**</br>
 Do not show the message of the day or update reminders. This value is optional.
@@ -1382,40 +1379,6 @@ ibmcloud ks cluster-feature-enable public-service-endpoint --cluster CLUSTER [-s
 **Example**:
 ```
 ibmcloud ks cluster-feature-enable public-service-endpoint --cluster my_cluster
-```
-{: pre}
-
-
-#### ibmcloud ks cluster-feature-enable trusted
-{: #cs_cluster_feature_enable_trusted}
-
-Enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.
-{: shortdesc}
-
-To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster-get` [command](#cs_cluster_get). To verify that a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker-get` [command](#cs_worker_get).
-
-```
-ibmcloud ks cluster-feature-enable trusted --cluster CLUSTER [-s] [-f]
-```
-{: pre}
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>-f</code></dt>
-<dd>Use this option to force the <code>--trusted</code> option without user prompts. This value is optional.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
 ```
 {: pre}
 
