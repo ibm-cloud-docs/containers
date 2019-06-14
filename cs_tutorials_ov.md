@@ -24,7 +24,7 @@
     <a href = "https://github.com/IBM-Cloud/logistics-wizard-kubernetes">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-                Combine Kubernetes and Cloud Foundry apps
+                RUn Kubernetes and Cloud Foundry apps
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Create a Logistics Wizard deployment where the ERP and Controller services are deployed in Kubernetes, and the web user interface stays deployed as a Cloud Foundry app. </p></br>
@@ -75,7 +75,7 @@
     <a href = "/docs/tutorials?topic=solution-tutorials-strategies-for-resilient-applications">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-                Strategies for resilient applications
+                Strategies for resilient applications in the cloud
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Learn what to consider when creating resilient apps in the cloud and what {{site.data.keyword.cloud_notm}} services you can use. </p></br>
