@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-14"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Government use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_gov}
 
-These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} benefit from the public cloud. These workloads have isolation with Trusted Compute, are in global regions for data sovereignty, use Watson machine learning instead of net-new code, and connect to on-premises databases.
+These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} benefit from the public cloud. These workloads are isolated in global regions for data sovereignty, use Watson machine learning instead of net-new code, and connect to on-premises databases.
 {: shortdesc}
 
 ## Regional government improves collaboration and velocity with community Developers who combine public-private data
@@ -140,7 +140,7 @@ So they create a partnership that is dedicated to solutions for the trade system
 
 Developers started by deploying their apps in containers with {{site.data.keyword.containerlong_notm}}. They created clusters for a shared Dev environment that allow worldwide Developers to collaboratively deploy app improvements quickly. Containers allow each development team to use the language of their choice.
 
-Security first: The IT Execs chose Trusted Compute for bare metal to host the clusters. With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive customs workloads now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute, which can verify the underlying hardware against tampering.
+Security first: The IT Execs chose bare metal clusters. With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive customs workloads now have familiar isolation but within the flexibility of public cloud.
 
 Because the shipping company also wants to work with other ports, app security is crucial. Shipping manifests and customs information are highly confidential. From that secure core, Vulnerability Advisor provides these scans:
 * Image vulnerability scans
@@ -157,7 +157,7 @@ Developers focus on domain problems, by using existing tools: Instead of Develop
 On-demand compute, storage, and Node starter kits that run in the public cloud with secure access to shipping data across the globe, as needed. Compute in clusters is tamper-proof and isolated to bare metal.  
 
 Technical solution:
-* {{site.data.keyword.containerlong_notm}} with Trusted Compute
+* {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.openwhisk}}
 * {{site.data.keyword.cloudant}}
 * IBM {{site.data.keyword.SecureGateway}}
