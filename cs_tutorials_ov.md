@@ -1,64 +1,36 @@
----
 
-copyright:
-  years: 2014, 2019
-lastupdated: "2019-06-14"
+</div>
 
-keywords: kubernetes, iks
 
-subcollection: containers
-
----
-
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
-{:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
-{:deprecated: .deprecated}
-{:download: .download}
-{:preview: .preview}
-
-# Tutorial overview
-{: #tutorials-ov}
-
-<style>
-
-</style>
-
-## Create a cluster and deploy your first app
-{: #tutorials-create-cluster-deploy-app}
+## Deploy apps to a clusters 
+{: #tutorials-deploy-app}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/containers?topic=containers-cs_cluster_tutorial">
+    <a href = "/docs/tutorials?topic=solution-tutorials-scalable-webapp-kubernetes#create_application">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-          Kubernetes-native cluster on Ubuntu
+                Scalable web application on Kubernetes
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br><p>Create a Kubernetes cluster on managed {{site.data.keyword.containerlong_notm}} with Classic infrastructure worker nodes that run an Ubuntu operating system. </p></br>
+                  </br> <p>Scaffold a web app, deploy it to a cluster, and learn how to scale your app and monitor its health. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src = "images/cs_org_ov_public_se.png" alt="Architecture diagram for the solution Create a Kubernetes cluster" />
+                    <img class="architectureDiagram" src = "https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution2/Architecture.png" alt="Architecture diagram for deploying web apps with {{site.data.keyword.containerlong_notm}}" />
                 </div>
             </div>
         </div>
     </div>
     </a>
-  <a href = "/docs/containers?topic=containers-openshift_tutorial">
+    <a href = "https://github.com/IBM-Cloud/logistics-wizard-kubernetes">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-          Red Hat OpenShift cluster
-            <div class="solutionBoxDescription">
+                Combine Kubernetes and Cloud Foundry apps
+          <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br><p>Create an {{site.data.keyword.containerlong_notm}} cluster with worker nodes that come installed with the OpenShift container orchestration platform software. </p></br>
+                  </br> <p>Create a Logistics Wizard deployment where the ERP and Controller services are deployed in Kubernetes, and the web user interface stays deployed as a Cloud Foundry app. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src = "images/cs_org_ov_both_ses_rhos.png" alt="Architecture RHOS" /></br>
+                    <img class="architectureDiagram" src = "https://raw.githubusercontent.com/IBM-Cloud/logistics-wizard-kubernetes/master/lw_kube_architecture.png" alt="Logistics Wizard architecture overview" />
                 </div>
             </div>
         </div>
@@ -80,6 +52,21 @@ subcollection: containers
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src = "https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution32-multi-region-k8s-cis/Architecture.png" alt="Architecture diagram for using Cloud Internet Service with {{site.data.keyword.containerlong_notm}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+    <a href = "/docs/tutorials?topic=solution-tutorials-strategies-for-resilient-applications">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Strategies for resilient applications
+          <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br> <p>Learn what to consider when creating resilient apps in the cloud and what {{site.data.keyword.cloud_notm}} services you can use. </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src = "https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution39/Architecture.png" alt="Architecture diagram for creating resilient applications" />
                 </div>
             </div>
         </div>
@@ -110,6 +97,21 @@ subcollection: containers
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src = "images/istio_ov.png" alt="Overview of Istio components and dependencies" /></br>
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+    <a href = "/docs/tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Apply end to end security to a cloud app
+          <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br> <p>Learn how to use authentication and encryption to protect your app, and how to monitor and audit cluster activities. </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src = "https://github.com/IBM-Bluemix-Docs/tutorials/blob/master/images/solution34-cloud-e2e-security/Architecture.png?raw=true" alt="Architecture diagram for applying end-to-end security to a cloud app" /></br>
                 </div>
             </div>
         </div>
@@ -169,6 +171,42 @@ subcollection: containers
     </a>
 </div>
 
+## Monitor and log cluster activity
+{: #tutorials-ov-monitor-log}
+
+<div class = "solutionBoxContainer">
+    <a href = "/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}
+          <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br> <p>Configure a logging agent in your cluster and monitor different log sources with  {{site.data.keyword.la_full_notm}}. </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src = "https://raw.githubusercontent.com/IBM-Bluemix-Docs/Log-Analysis-with-LogDNA/master/images/kube.png" alt="LogDNA architecture overview" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+  <a href = "/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Analyze cluster metrics with Sysdig
+            <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br><p>Set up a Sysdig metrics agent in your cluster and explore how you can monitor your cluster's health.  </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src = "https://raw.githubusercontent.com/IBM-Bluemix-Docs/Monitoring-with-Sysdig/master/images/kube.png" alt="Sysdig architecture overview" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+</div>
+
 ## Migrate apps to the cloud 
 {: #tutorials-ov-migrate-apps}
 
@@ -203,5 +241,21 @@ subcollection: containers
         </div>
     </div>
     </a>
+    <a href = "https://github.com/IBM-Cloud/jpetstore-kubernetes">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Modernize a Java web app
+            <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br><p>Containerize the JPetStore app and extend it with Watson Visual Recognition and Twilio text messaging.</p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src = "https://raw.githubusercontent.com/IBM-Cloud/jpetstore-kubernetes/master/readme_images/architecture.png" alt="Modernize and extend a Java web app" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
 </div>
 
+</staging>
