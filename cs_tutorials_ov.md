@@ -1,4 +1,69 @@
+---
 
+copyright:
+  years: 2014, 2019
+lastupdated: "2019-06-14"
+
+keywords: kubernetes, iks
+
+subcollection: containers
+
+---
+
+{:new_window: target="_blank"}
+{:shortdesc: .shortdesc}
+{:screen: .screen}
+{:pre: .pre}
+{:table: .aria-labeledby="caption"}
+{:codeblock: .codeblock}
+{:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
+{:download: .download}
+{:preview: .preview}
+
+# Tutorial overview
+{: #tutorials-ov}
+
+<style>
+
+</style>
+
+## Create a cluster and deploy your first app
+{: #tutorials-create-cluster-deploy-app}
+
+<div class = "solutionBoxContainer">
+    <a href = "/docs/containers?topic=containers-cs_cluster_tutorial">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+          Kubernetes-native cluster on Ubuntu
+          <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br><p>Create a Kubernetes cluster on managed {{site.data.keyword.containerlong_notm}} with Classic infrastructure worker nodes that run an Ubuntu operating system. </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src = "images/tutorial_ov.png" alt="Architecture diagram for the solution Create a Kubernetes cluster" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+  <a href = "/docs/containers?topic=containers-openshift_tutorial">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+          Red Hat OpenShift cluster
+            <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br><p>Create an {{site.data.keyword.containerlong_notm}} cluster with worker nodes that come installed with the OpenShift container orchestration platform software. </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src = "images/cs_org_ov_both_ses_rhos.png" alt="Architecture RHOS" /></br>
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
 </div>
 
 
@@ -6,7 +71,7 @@
 {: #tutorials-deploy-app}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/tutorials?topic=solution-tutorials-scalable-webapp-kubernetes#create_application">
+    <a href = "/docs/tutorials?topic=solution-tutorials-scalable-webapp-kubernetes">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Scalable web application on Kubernetes
@@ -24,7 +89,7 @@
     <a href = "https://github.com/IBM-Cloud/logistics-wizard-kubernetes">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-                RUn Kubernetes and Cloud Foundry apps
+                Run Kubernetes and Cloud Foundry apps
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Create a Logistics Wizard deployment where the ERP and Controller services are deployed in Kubernetes, and the web user interface stays deployed as a Cloud Foundry app. </p></br>
@@ -120,7 +185,7 @@
     <a href = "/docs/tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-                Apply end to end security to a cloud app
+                Apply end to end security to an {{site.data.keyword.cloud_notm}} app
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Learn how to use authentication and encryption to protect your app, and how to monitor and audit cluster activities. </p></br>
@@ -223,7 +288,7 @@
   <a href = "/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-                Analyze cluster metrics with Sysdig
+                Analyze cluster metrics with {{site.data.keyword.mon_full_notm}} 
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br><p>Set up a Sysdig metrics agent in your cluster and explore how you can monitor your cluster's health.  </p></br>
@@ -288,4 +353,3 @@
     </a>
 </div>
 
-</staging>
