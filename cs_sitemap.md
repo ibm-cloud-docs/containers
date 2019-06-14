@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-14"
 
 ---
 
@@ -127,28 +127,26 @@ lastupdated: "2019-06-12"
 ## Tutorials
 {: #sitemap-tutorials}
 
+[Tutorial overview](/docs/containers?topic=containers-tutorials-ov)
+* [Create a cluster and deploy your first app](/docs/containers?topic=containers-tutorials-ov#tutorials-create-cluster-deploy-app)
+* [Deploy apps to clusters](/docs/containers?topic=containers-tutorials-ov#tutorials-deploy-app)
+* [Set up high availability and security](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-ha-network-security)
+* [Automate app and cluster deployments](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-app-cluster-deployments)
+* [Monitor and log cluster activity](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-monitor-log)
+* [Migrate apps to the cloud](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-migrate-apps)
 [Tutorial: Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 * [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
 * [Time required](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_time)
 * [Audience](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
 * [Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
-* [Lesson 1: Creating a cluster and setting up the CLI](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
-* [Lesson 2: Setting up your private registry](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
-* [Lesson 3: Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
-* [Lesson 4: Adding a service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+* [Lesson 1: Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
+* [Lesson 2: Adding an IBM Cloud service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
+* [Lesson 3: Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
+* [Lesson 4: Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+* [Lesson 5: Deploying and updating the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
+  * [Lesson 5a: Deploying the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
+  * [Lesson 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
-
-[Tutorial: Deploying apps into Kubernetes clusters](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)
-* [Objectives](/docs/containers?topic=containers-cs_apps_tutorial#apps_objectives)
-* [Time required](/docs/containers?topic=containers-cs_apps_tutorial#apps_time)
-* [Audiences](/docs/containers?topic=containers-cs_apps_tutorial#apps_audience)
-* [Prerequisites](/docs/containers?topic=containers-cs_apps_tutorial#apps_prereqs)
-* [Lesson 1: Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial_lesson1)
-* [Lesson 2: Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial_lesson2)
-* [Lesson 3: Deploying and updating the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial_lesson3)
-  * [Lesson 3a: Deploying the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_apps_tutorial#lesson3a)
-  * [Lesson 3b. Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_apps_tutorial#lesson3b)
-* [What's next?](/docs/containers?topic=containers-cs_apps_tutorial#apps_next)
 
 [Tutorial: Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
 * [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
