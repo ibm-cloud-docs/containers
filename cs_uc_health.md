@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-14"
 
 keywords: kubernetes, iks
 
@@ -50,7 +50,7 @@ They started by containerizing their SaaS systems and putting them in the cloud.
 
 Accelerated development is a key win for the IT Exec. With the move to public cloud, Developers can experiment easily with Node.js SDK, pushing changes to Development and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. Updates to the SaaS system no longer languished in slow, error-prone build processes. The Developers can deliver incremental updates to their users, daily or even more frequently.  Also, logging and monitoring for the SaaS systems, especially how the patient front-end and back-end reports interact, rapidly integrate into the system. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems.
 
-Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive patient workloads now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute, which can verify the underlying hardware against tampering. From that core, Vulnerability Advisor provides scanning:
+Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive patient workloads now have familiar isolation but within the flexibility of public cloud. From that core, Vulnerability Advisor provides scanning:
 * Image vulnerability scanning
 * Policy scanning based on ISO 27k
 * Live container scanning
@@ -72,8 +72,6 @@ Secure patient data leads to happier patients.
 On-demand compute, storage, and I/O services run in the public cloud with secure access to on-premises enterprise assets. Implement a CI/CD process and other parts of the IBM Garage Method to dramatically shorten delivery cycles.
 
 **Step 1: Secure the compute platform**
-* Apps that manage highly sensitive patient data can be rehosted on {{site.data.keyword.containerlong_notm}} that runs on Bare Metal for Trusted Compute.
-* Trusted Compute can verify the underlying hardware against tampering.
 * From that core, Vulnerability Advisor provides image, policy, container, and packaging scanning vulnerability scanning, for known malware.
 * Consistently enforce policy-driven authentication to your services and APIs with a simple Ingress annotation. With declarative security you can ensure user authentication and token validation by using {{site.data.keyword.appid_short_notm}}.
 
@@ -96,7 +94,7 @@ On-demand compute, storage, and I/O services run in the public cloud with secure
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_short_notm}}
 
-For the most sensitive workloads, the clusters can be hosted in {{site.data.keyword.containerlong_notm}} for Bare Metal.  It provides a trusted compute platform that automatically scans hardware and runtime code for vulnerabilities. By using industry-standard containers technology, apps can initially be rehosted on {{site.data.keyword.containerlong_notm}} quickly without major architectural changes. This change provides the immediate benefit of scalability.
+For the most sensitive workloads, the clusters can be hosted in {{site.data.keyword.containerlong_notm}} for Bare Metal. By using industry-standard containers technology, apps can initially be rehosted on {{site.data.keyword.containerlong_notm}} quickly without major architectural changes. This change provides the immediate benefit of scalability.
 
 They can replicate and scale the apps by using defined rules and the automated Kubernetes orchestrator. {{site.data.keyword.containerlong_notm}} provides scalable compute resources and the associated DevOps dashboards to create, scale, and tear down apps and services on demand. By using Kubernetes's deployment and runtime objects, the provider can monitor and manage upgrades to apps reliably.
 
@@ -164,7 +162,7 @@ The nonprofit also provides apps that run on non-bare metal nodes of the global 
 
 Developers started by deploying their research-sharing SaaS apps in containers with {{site.data.keyword.containerlong_notm}}. They created clusters for a Development environment that allow worldwide Developers to collaboratively deploy app improvements quickly.
 
-Security first: The Development Exec chose Trusted Compute for bare metal to host the research clusters. With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive research workloads now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute that can verify the underlying hardware against tampering. Because this nonprofit also has a partnership with pharmaceutical companies, app security is crucial. Competition is fierce, and corporate espionage is possible. From that secure core, Vulnerability Advisor provides scanning:
+Security first: The Development Exec chose bare metal to host the research clusters. With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive research workloads now have familiar isolation but within the flexibility of public cloud. Because this nonprofit also has a partnership with pharmaceutical companies, app security is crucial. Competition is fierce, and corporate espionage is possible. From that secure core, Vulnerability Advisor provides scanning:
 * Image vulnerability scanning
 * Policy scanning based on ISO 27k
 * Live container scanning
@@ -181,7 +179,7 @@ Developers focus on domain problems, by using existing tools: Instead of writing
 On-demand compute, storage, and Node starter kits run in public cloud with secure access to research data across the globe, as warranted. Compute in clusters is tamper-proof and isolated to bare metal.
 
 Technical solution:
-* {{site.data.keyword.containerlong_notm}} with Trusted Compute
+* {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.openwhisk}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
@@ -196,8 +194,7 @@ Technical solution:
 
 **Step 2: Use secure and performant compute**
 * ML apps that require higher-performing compute are hosted on {{site.data.keyword.containerlong_notm}} on Bare Metal. This ML cluster is centralized, so each regional cluster doesn't have the expense of bare metal workers; Kubernetes deployments are easier too.
-* Apps that process highly sensitive clinical data can be hosted on {{site.data.keyword.containerlong_notm}} on Bare Metal for Trusted Compute.
-* Trusted Compute can verify the underlying hardware against tampering. From that core, Vulnerability Advisor provides image, policy, container, and packaging scanning vulnerability scanning, for known malware.
+* Vulnerability Advisor provides image, policy, container, and packaging scanning vulnerability scanning, for known malware.
 
 **Step 3: Ensure global availability**
 * After Developers build and test the apps in their Development and Test clusters, they use the IBM CI/CD toolchains to deploy apps into clusters across the globe.
