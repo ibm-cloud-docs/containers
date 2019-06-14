@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -30,7 +30,7 @@ subcollection: containers
 You can learn how to use {{site.data.keyword.containerlong}} to deploy a containerized app that leverages {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {: shortdesc}
 
-In this scenario, a fictional PR firm uses the {{site.data.keyword.Bluemix_notm}} service to analyze their press releases and receive feedback on the tone of their messages.
+In this scenario, a fictional PR firm uses the {{site.data.keyword.cloud_notm}} service to analyze their press releases and receive feedback on the tone of their messages.
 
 Using the Kubernetes cluster that is created in the last tutorial, the PR firm's app developer deploys a Hello World version of the app. Building on each lesson in this tutorial, the app developer deploys progressively more complicated versions of the same app. The following diagram shows the components of each deployment by lesson.
 
@@ -42,7 +42,7 @@ Services group a set of pods and provide network connection to these pods for ot
 
 To make your app even more highly available, in standard clusters, you can create a worker pool that spans multiple zones with worker nodes in each zone to run even more replicas of your app. This task is not covered in this tutorial, but keep this concept in mind for future improvements to an app's availability.
 
-Only one of the lessons includes the integration of an {{site.data.keyword.Bluemix_notm}} service into an app, but you can use them with as simple or complex of an app as you can imagine.
+Only one of the lessons includes the integration of an {{site.data.keyword.cloud_notm}} service into an app, but you can use them with as simple or complex of an app as you can imagine.
 
 ## Objectives
 {: #apps_objectives}
@@ -52,7 +52,7 @@ Only one of the lessons includes the integration of an {{site.data.keyword.Bluem
 * Make an app publicly accessible
 * Deploy a single instance of an app in a cluster by using a Kubernetes command and a script
 * Deploy multiple instances of an app in containers that are re-created during health checks
-* Deploy an app that uses functionality from an {{site.data.keyword.Bluemix_notm}} service
+* Deploy an app that uses functionality from an {{site.data.keyword.cloud_notm}} service
 
 ## Time required
 {: #apps_time}
@@ -258,7 +258,7 @@ To deploy the app:
 
 11. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
-    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
+    If you select your cluster in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
 
 12. In the **Workloads** tab, you can see the resources that you created.
@@ -435,7 +435,7 @@ Separating components into different containers ensures that you can update one 
 
 ![Deployment setup](images/cs_app_tutorial_mz-components3.png)
 
-From the previous tutorial, you have your account and a cluster with one worker node. In this lesson, you create an instance of {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service in your {{site.data.keyword.Bluemix_notm}} account and configure two deployments, one deployment for each component of the app. Each component is deployed in a Kubernetes pod in the worker node. To make both of those components publicly available, you also create a Kubernetes service for each component.
+From the previous tutorial, you have your account and a cluster with one worker node. In this lesson, you create an instance of {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service in your {{site.data.keyword.cloud_notm}} account and configure two deployments, one deployment for each component of the app. Each component is deployed in a Kubernetes pod in the worker node. To make both of those components publicly available, you also create a Kubernetes service for each component.
 
 
 ### Lesson 3a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app
@@ -534,7 +534,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
         ```
         {: codeblock}
 
-    2.  In the volumes section of the `watson-pod` deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in the previous [Creating Kubernetes cluster tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key available to the container that is running in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the API key by using the volume mount path.
+    2.  In the volumes section of the `watson-pod` deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in the previous [Creating Kubernetes cluster tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key available to the container that is running in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the API key by using the volume mount path.
 
         ```
         volumes:

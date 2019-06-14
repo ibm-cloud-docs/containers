@@ -222,7 +222,7 @@ Before you get started with Ingress, review the following prerequisites.
 
 **Prerequisites for all Ingress configurations:**
 - Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied. If you have only one worker in a zone, the ALB cannot receive automatic updates. When automatic updates are rolled out to ALB pods, the pod is reloaded. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. Because there is only one ALB pod on one worker, the pod is not restarted so that traffic is not interrupted. The ALB pod is updated to the latest version only when you delete the old pod manually so that the new, updated pod can be scheduled.
-- Setting up Ingress requires the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+- Setting up Ingress requires the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     - **Administrator** platform role for the cluster
     - **Manager** service role in all namespaces
 
@@ -373,7 +373,7 @@ Ingress Secret:         <tls_secret>
 {: screen}
 
 **To use a custom domain:**
-1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started).
+1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
@@ -885,7 +885,7 @@ Private VLAN-only clusters are not assigned an IBM-provided Ingress subdomain. W
 
 **Private and public VLAN clusters:**
 
-1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started).
+1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb-get --albID  <private_alb_ID>` for each ALB.
@@ -1247,7 +1247,7 @@ To enable source IP preservation, edit the load balancer service that exposes an
 Enable SSL protocols and ciphers at the global HTTP level by editing the `ibm-cloud-provider-ingress-cm` configmap.
 {:shortdesc}
 
-To comply with the PCI Security Standards Council mandate, the Ingress service disables TLS 1.0 and 1.1 by default with the upcoming version update of the Ingress ALB pods on 23 January 2019. The update rolls out automatically to all {{site.data.keyword.containerlong_notm}} clusters that have not opted out from automatic ALB updates. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, you must manually enable the required TLS versions. You can override the default setting to use TLS 1.1 or 1.0 protocols by following the steps in this section. For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).
+To comply with the PCI Security Standards Council mandate, the Ingress service disables TLS 1.0 and 1.1 by default with the upcoming version update of the Ingress ALB pods on 23 January 2019. The update rolls out automatically to all {{site.data.keyword.containerlong_notm}} clusters that have not opted out from automatic ALB updates. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, you must manually enable the required TLS versions. You can override the default setting to use TLS 1.1 or 1.0 protocols by following the steps in this section. For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.cloud_notm}} blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).
 {: important}
 
 When you specify the enabled protocols for all hosts, the TLSv1.1 and TLSv1.2 parameters (1.1.13, 1.0.12) work only when OpenSSL 1.0.1 or higher is used. The TLSv1.3 parameter (1.13.0) works only when OpenSSL 1.1.1 built with TLSv1.3 support is used.
@@ -1636,13 +1636,13 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
 ## Bringing your own Ingress controller
 {: #user_managed}
 
-Bring your own Ingress controller to run on {{site.data.keyword.Bluemix_notm}} and leverage an IBM-provided host name and TLS certificate.
+Bring your own Ingress controller to run on {{site.data.keyword.cloud_notm}} and leverage an IBM-provided host name and TLS certificate.
 {: shortdesc}
 
-The IBM-provided Ingress application load balancers (ALBs) are based on NGINX controllers that you can configure by using [custom {{site.data.keyword.Bluemix_notm}} annotations](/docs/containers?topic=containers-ingress_annotation). Depending on what your app requires, you might want to configure your own custom Ingress controller. When you bring your own Ingress controller instead of using the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, updating the controller, and any security-related updates to keep your Ingress controller free from vulnerabilities. **Note**: Bringing your own Ingress controller is supported only for providing public external access to your apps and is not supported for providing private external access.
+The IBM-provided Ingress application load balancers (ALBs) are based on NGINX controllers that you can configure by using [custom {{site.data.keyword.cloud_notm}} annotations](/docs/containers?topic=containers-ingress_annotation). Depending on what your app requires, you might want to configure your own custom Ingress controller. When you bring your own Ingress controller instead of using the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, updating the controller, and any security-related updates to keep your Ingress controller free from vulnerabilities. **Note**: Bringing your own Ingress controller is supported only for providing public external access to your apps and is not supported for providing private external access.
 
 You have 2 options for bringing your own Ingress controller:
-* [Create a network load balancer (NLB) to expose your custom Ingress controller deployment, and then create a host name for the NLB IP address](#user_managed_nlb). {{site.data.keyword.Bluemix_notm}} provides the host name and takes care of generating and maintaining a wildcard SSL certificate for the host name for you. For more information about IBM-provided NLB DNS host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
+* [Create a network load balancer (NLB) to expose your custom Ingress controller deployment, and then create a host name for the NLB IP address](#user_managed_nlb). {{site.data.keyword.cloud_notm}} provides the host name and takes care of generating and maintaining a wildcard SSL certificate for the host name for you. For more information about IBM-provided NLB DNS host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
 * [Disable the IBM-provided ALB deployment and use the load balancer service that exposed the ALB and the DNS registration for the IBM-provided Ingress subdomain](#user_managed_alb). This option permits you to leverage the Ingress subdomain and TLS certificate that are already assigned to your cluster.
 
 ### Expose your Ingress controller by creating an NLB and a host name

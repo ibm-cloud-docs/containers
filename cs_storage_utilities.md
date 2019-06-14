@@ -31,14 +31,14 @@ subcollection: containers
 ## Installing the IBM Cloud Block Storage Attacher plug-in (beta)
 {: #block_storage_attacher}
 
-Use the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in to attach raw, unformatted, and unmounted block storage to a worker node in your cluster.  
+Use the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in to attach raw, unformatted, and unmounted block storage to a worker node in your cluster.  
 {: shortdesc}
 
-For example, you want to store your data with a software-defined storage solution (SDS), such as [Portworx](/docs/containers?topic=containers-portworx), but you do not want to use bare metal worker nodes that are optimized for SDS usage and that come with extra local disks. To add local disks to your non-SDS worker node, you must manually create your block storage devices in your {{site.data.keyword.Bluemix_notm}} infrastructure account and use the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher to attach the storage to your non-SDS worker node.
+For example, you want to store your data with a software-defined storage solution (SDS), such as [Portworx](/docs/containers?topic=containers-portworx), but you do not want to use bare metal worker nodes that are optimized for SDS usage and that come with extra local disks. To add local disks to your non-SDS worker node, you must manually create your block storage devices in your {{site.data.keyword.cloud_notm}} infrastructure account and use the {{site.data.keyword.cloud_notm}} Block Volume Attacher to attach the storage to your non-SDS worker node.
 
-The {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in creates pods on every worker node in your cluster as part of a daemon set and sets up a Kubernetes storage class that you later use to attach the block storage device to your non-SDS worker node.
+The {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in creates pods on every worker node in your cluster as part of a daemon set and sets up a Kubernetes storage class that you later use to attach the block storage device to your non-SDS worker node.
 
-Looking for instructions for how to update or remove the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in? See [Updating the plug-in](#update_block_attacher) and [Removing the plug-in](#remove_block_attacher).
+Looking for instructions for how to update or remove the {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in? See [Updating the plug-in](#update_block_attacher) and [Removing the plug-in](#remove_block_attacher).
 {: tip}
 
 1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
@@ -64,7 +64,7 @@ Looking for instructions for how to update or remove the {{site.data.keyword.Blu
    ```
    {: pre}
 
-4. Install the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+4. Install the {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
    ```
    helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
@@ -106,7 +106,7 @@ Looking for instructions for how to update or remove the {{site.data.keyword.Blu
    ```
    {: screen}
 
-5. Verify that the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher daemon set is installed successfully.
+5. Verify that the {{site.data.keyword.cloud_notm}} Block Volume Attacher daemon set is installed successfully.
    ```
    kubectl get pod -n kube-system -o wide | grep attacher
    ```
@@ -120,7 +120,7 @@ Looking for instructions for how to update or remove the {{site.data.keyword.Blu
 
    The installation is successful when you see one or more **ibmcloud-block-storage-attacher** pods. The number of pods equals the number of worker nodes in your cluster. All pods must be in a **Running** state.
 
-6. Verify that the storage class for the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher is created successfully.
+6. Verify that the storage class for the {{site.data.keyword.cloud_notm}} Block Volume Attacher is created successfully.
    ```
    kubectl get storageclasses | grep attacher
    ```
@@ -135,7 +135,7 @@ Looking for instructions for how to update or remove the {{site.data.keyword.Blu
 ### Updating the IBM Cloud Block Storage Attacher plug-in
 {: #update_block_attacher}
 
-You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in to the latest version.
+You can upgrade the existing {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in to the latest version.
 {: shortdesc}
 
 1. Update the Helm repo to retrieve the latest version of all helm charts in this repo.
@@ -150,7 +150,7 @@ You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage At
    ```
    {: pre}
 
-3. Find the name of the Helm chart for the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in.
+3. Find the name of the Helm chart for the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in.
    ```
    helm ls | grep ibm-block-storage-attacher
    ```
@@ -162,7 +162,7 @@ You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage At
    ```
    {: screen}
 
-4. Upgrade the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher to latest.
+4. Upgrade the {{site.data.keyword.cloud_notm}} Block Storage Attacher to latest.
    ```
    helm upgrade --force --recreate-pods <helm_chart_name> ibm-block-storage-attacher
    ```
@@ -171,10 +171,10 @@ You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage At
 ### Removing the IBM Cloud Block Volume Attacher plug-in
 {: #remove_block_attacher}
 
-If you do not want to provision and use the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in in your cluster, you can uninstall the Helm chart.
+If you do not want to provision and use the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in in your cluster, you can uninstall the Helm chart.
 {: shortdesc}
 
-1. Find the name of the Helm chart for the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in.
+1. Find the name of the Helm chart for the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in.
    ```
    helm ls | grep ibm-block-storage-attacher
    ```
@@ -186,13 +186,13 @@ If you do not want to provision and use the {{site.data.keyword.Bluemix_notm}} B
    ```
    {: screen}
 
-2. Delete the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in by removing the Helm chart.
+2. Delete the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in by removing the Helm chart.
    ```
    helm delete <helm_chart_name> --purge
    ```
    {: pre}
 
-3. Verify that the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in pods are removed.
+3. Verify that the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in pods are removed.
    ```
    kubectl get pod -n kube-system -o wide | grep attacher
    ```
@@ -200,7 +200,7 @@ If you do not want to provision and use the {{site.data.keyword.Bluemix_notm}} B
 
    The removal of the pods is successful if no pods are displayed in your CLI output.
 
-4. Verify that the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher storage class is removed.
+4. Verify that the {{site.data.keyword.cloud_notm}} Block Storage Attacher storage class is removed.
    ```
    kubectl get storageclasses | grep attacher
    ```
@@ -211,22 +211,22 @@ If you do not want to provision and use the {{site.data.keyword.Bluemix_notm}} B
 ## Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage
 {: #automatic_block}
 
-You can use the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in to automatically add raw, unformatted, and unmounted block storage with the same configuration to all worker nodes in your cluster.
+You can use the {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in to automatically add raw, unformatted, and unmounted block storage with the same configuration to all worker nodes in your cluster.
 {: shortdesc}
 
-The `mkpvyaml` container that is included in the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in is configured to run a script that finds all worker nodes in your cluster, creates raw block storage in the {{site.data.keyword.Bluemix_notm}} infrastructure portal, and then authorizes the worker nodes to access the storage.
+The `mkpvyaml` container that is included in the {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in is configured to run a script that finds all worker nodes in your cluster, creates raw block storage in the {{site.data.keyword.cloud_notm}} infrastructure portal, and then authorizes the worker nodes to access the storage.
 
 To add different block storage configurations, add block storage to a subset of worker nodes only, or to have more control over the provisioning process, choose to [manually add block storage](#manual_block).
 {: tip}
 
 
-1. Log in to {{site.data.keyword.Bluemix_notm}} and target the resource group that your cluster is in.
+1. Log in to {{site.data.keyword.cloud_notm}} and target the resource group that your cluster is in.
    ```
    ibmcloud login
    ```
    {: pre}
 
-2.  Clone the {{site.data.keyword.Bluemix_notm}} Storage Utilities repo.
+2.  Clone the {{site.data.keyword.cloud_notm}} Storage Utilities repo.
     ```
     git clone https://github.com/IBM/ibmcloud-storage-utilities.git
     ```
@@ -289,7 +289,7 @@ To add different block storage configurations, add block storage to a subset of 
    </table>  
 
 5. Retrieve your IBM Cloud infrastructure (SoftLayer) user name and API key. The user name and API key are used by the `mkpvyaml` script to access the cluster.
-   1. Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
+   1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
    2. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), select **Infrastructure**.
    3. From the menu bar, select **Account** > **Users** > **User List**.
    4. Find the user whose user name and API key you want to retrieve.
@@ -499,7 +499,7 @@ Use this option if you want to add different block storage configurations, add b
 ## Attaching raw block storage to non-SDS worker nodes
 {: #attach_block}
 
-To attach the block storage device to a non-SDS worker node, you must create a persistent volume (PV) with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher storage class and the details of your block storage device.
+To attach the block storage device to a non-SDS worker node, you must create a persistent volume (PV) with the {{site.data.keyword.cloud_notm}} Block Volume Attacher storage class and the details of your block storage device.
 {: shortdesc}
 
 **Before you begin**:
@@ -645,7 +645,7 @@ To attach the block storage device to a non-SDS worker node, you must create a p
 
    The block storage device is successfully attached when the **ibm.io/dm** is set to a device ID, such as `/dev/dm/1`, and you can see **ibm.io/attachstatus=attached** in the **Annotations** section of your CLI output.
 
-If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure (SoftLayer) account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure (SoftLayer) account](/docs/containers?topic=containers-cleanup).
+If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.cloud_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure (SoftLayer) account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure (SoftLayer) account](/docs/containers?topic=containers-cleanup).
 {: note}
 
 

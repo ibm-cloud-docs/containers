@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -30,10 +30,10 @@ subcollection: containers
 With {{site.data.keyword.containerlong}}, you can quickly and securely deploy container workloads for your apps in production. Learn more so that when you plan your cluster strategy, you optimize your setup to make the most of [Kubernetes![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/) automated deploying, scaling, and orchestration management capabilities.
 {:shortdesc}
 
-## Moving your workloads to the {{site.data.keyword.Bluemix_notm}}
+## Moving your workloads to the {{site.data.keyword.cloud_notm}}
 {: #cloud_workloads}
 
-You have lots of reasons to move your workloads to {{site.data.keyword.Bluemix_notm}}: reducing total cost of ownership, increasing high availability for your apps in a secure and compliant environment, scaling up and down in respond to your user demand, and many more. {{site.data.keyword.containerlong_notm}} combines container technology with open source tools, such as Kubernetes so that you can build a cloud-native app that can migrate across different cloud environments, avoiding vendor lock-in.
+You have lots of reasons to move your workloads to {{site.data.keyword.cloud_notm}}: reducing total cost of ownership, increasing high availability for your apps in a secure and compliant environment, scaling up and down in respond to your user demand, and many more. {{site.data.keyword.containerlong_notm}} combines container technology with open source tools, such as Kubernetes so that you can build a cloud-native app that can migrate across different cloud environments, avoiding vendor lock-in.
 {:shortdesc}
 
 But how do you get to the cloud? What are your options along the way? And how do you manage your workloads after you get there?
@@ -43,10 +43,10 @@ Use this page to learn some strategies for your Kubernetes deployments on {{site
 Not on slack yet? [Request an invite!](https://bxcs-slack-invite.mybluemix.net/)
 {: tip}
 
-### What can I move to the {{site.data.keyword.Bluemix_notm}}?
+### What can I move to the {{site.data.keyword.cloud_notm}}?
 {: #move_to_cloud}
 
-With {{site.data.keyword.Bluemix_notm}}, you have flexibility to create Kubernetes clusters in [off-premises, on-premises, or hybrid cloud environments](/docs/containers?topic=containers-cs_ov#differentiation). The following table provides some examples of what types of workloads that users typically move to the various types of clouds. You might also choose a hybrid approach where you have clusters running in both environments.
+With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes clusters in [off-premises, on-premises, or hybrid cloud environments](/docs/containers?topic=containers-cs_ov#differentiation). The following table provides some examples of what types of workloads that users typically move to the various types of clouds. You might also choose a hybrid approach where you have clusters running in both environments.
 {: shortdesc}
 
 | Workload | {{site.data.keyword.containershort_notm}} off-prem | on-prem |
@@ -62,16 +62,16 @@ With {{site.data.keyword.Bluemix_notm}}, you have flexibility to create Kubernet
 | Legacy apps with platform and infrastructure constraints and dependencies | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 | Proprietary apps with strict designs, licensing, or heavy regulations | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 | Scaling apps in the public cloud and syncing the data to an on-site private database | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />  | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
-{: caption="{{site.data.keyword.Bluemix_notm}} implementations support your workloads" caption-side="top"}
+{: caption="{{site.data.keyword.cloud_notm}} implementations support your workloads" caption-side="top"}
 
 **Ready to run workloads off-premises in {{site.data.keyword.containerlong_notm}}?**</br>
 Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
 
 **Interested in an on-premises cloud?**</br>
-Explore the [{{site.data.keyword.Bluemix_notm}} Private documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html). If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.Bluemix_notm}} Private modernization strategy with various tools.
+Explore the [{{site.data.keyword.cloud_notm}} Private documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html). If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.cloud_notm}} Private modernization strategy with various tools.
 
 **Want to run workloads in both on-premises and off-premises clouds?**</br>
-Start with setting up an {{site.data.keyword.Bluemix_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.Bluemix_notm}} Private environment with a cluster in {{site.data.keyword.Bluemix_notm}} Public. To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.Bluemix_notm}} Public and {{site.data.keyword.Bluemix_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
+Start with setting up an {{site.data.keyword.cloud_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.cloud_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.cloud_notm}} Private environment with a cluster in {{site.data.keyword.cloud_notm}} Public. To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
 
 ### What kind of apps can I run in {{site.data.keyword.containerlong_notm}}?
 {: #app_types}
@@ -136,7 +136,7 @@ Kubernetes is designed to provide capabilities to two main personas, the cluster
 {: shortdesc}
 
 **What are a cluster admin's main tasks and technical knowledge?** </br>
-As a cluster admin, you are responsible to set up, operate, secure, and manage the {{site.data.keyword.Bluemix_notm}} infrastructure of your cluster. Typical tasks include:
+As a cluster admin, you are responsible to set up, operate, secure, and manage the {{site.data.keyword.cloud_notm}} infrastructure of your cluster. Typical tasks include:
 - Size the cluster to provide enough capacity for your workloads.
 - Design a cluster to meet the high availability, disaster recovery, and compliance standards of your company.
 - Secure the cluster by setting up user permissions and limiting actions within the cluster to protect your compute resources, your network, and data.
@@ -214,7 +214,7 @@ Your {{site.data.keyword.containerlong_notm}} is linked to one IBM Cloud infrast
 ### What type of cluster and machine types should I get?
 {: #env_flavors}
 
-**Types of clusters**: Decide whether you want a [single zone, multizone, or multiple cluster setup](/docs/containers?topic=containers-ha_clusters#ha_clusters). Multizone clusters are available in [all six worldwide {{site.data.keyword.Bluemix_notm}} metro regions](/docs/containers?topic=containers-regions-and-zones#zones). Also keep in mind that worker nodes vary by zone.
+**Types of clusters**: Decide whether you want a [single zone, multizone, or multiple cluster setup](/docs/containers?topic=containers-ha_clusters#ha_clusters). Multizone clusters are available in [all six worldwide {{site.data.keyword.cloud_notm}} metro regions](/docs/containers?topic=containers-regions-and-zones#zones). Also keep in mind that worker nodes vary by zone.
 
 **Types of worker nodes**: In general, your intensive workloads are more suited to run on bare metal physical machines, whereas for cost-effective testing and development work, you might choose virtual machines on shared or dedicated shared hardware. With bare metal worker nodes, your cluster has a network speed of 10Gbps and hyper-threaded cores that offer higher throughput. Virtual machines come with a network speed of 1 Gbps and regular cores that do not offer hyper-threading. [Check out the machine isolation and flavors that are available](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
@@ -435,16 +435,16 @@ Many things! See [Preparing your containerized app to run in clusters](/docs/con
 ## Packaging your application
 {: #packaging}
 
-If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, you might wonder how you can make your deployment strategy work across these environments. With {{site.data.keyword.Bluemix_notm}} and other open source tools, you can package your application to help automate deployments.
+If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, you might wonder how you can make your deployment strategy work across these environments. With {{site.data.keyword.cloud_notm}} and other open source tools, you can package your application to help automate deployments.
 {: shortdesc}
 
 <dl>
 <dt>Automate your infrastructure</dt>
-  <dd>You can use the open source [Terraform](/docs/terraform?topic=terraform-getting-started#getting-started) tool to automate the provisioning of {{site.data.keyword.Bluemix_notm}} infrastructure, including Kubernetes clusters. Follow along with this tutorial to [plan, create, and update deployment environments](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments). After you create a cluster, you can also set up the [{{site.data.keyword.containerlong_notm}} cluster autoscaler](/docs/containers?topic=containers-ca) so that your worker pool scales up and down worker nodes in response to your workload's resource requests.</dd>
+  <dd>You can use the open source [Terraform](/docs/terraform?topic=terraform-getting-started#getting-started) tool to automate the provisioning of {{site.data.keyword.cloud_notm}} infrastructure, including Kubernetes clusters. Follow along with this tutorial to [plan, create, and update deployment environments](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments). After you create a cluster, you can also set up the [{{site.data.keyword.containerlong_notm}} cluster autoscaler](/docs/containers?topic=containers-ca) so that your worker pool scales up and down worker nodes in response to your workload's resource requests.</dd>
 <dt>Set up a continuous integration and delivery (CI/CD) pipeline</dt>
   <dd>With your app configuration files organized in a source control management system such as Git, you can build your pipeline to test and deploy code to different environments, such as `test` and `prod`. Check out [this tutorial on Continuous Deployment to Kubernetes](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes).</dd>
 <dt>Package your app configuration files</dt>
-  <dd>With the [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/) Kubernetes package manager, you can specify all Kubernetes resources that your app requires in a Helm chart. Then, you can use Helm to create the YAML configuration files and deploy these files in your cluster. You can also [integrate {{site.data.keyword.Bluemix_notm}}-provided Helm charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) to extend your cluster's capabilities, such as with a block storage plug-in.<p class="tip">Are you just looking for an easy way to create YAML file templates? Some people use Helm to do just that, or you might try out other community tools such as [`ytt` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://get-ytt.io/).</p></dd>
+  <dd>With the [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/) Kubernetes package manager, you can specify all Kubernetes resources that your app requires in a Helm chart. Then, you can use Helm to create the YAML configuration files and deploy these files in your cluster. You can also [integrate {{site.data.keyword.cloud_notm}}-provided Helm charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) to extend your cluster's capabilities, such as with a block storage plug-in.<p class="tip">Are you just looking for an easy way to create YAML file templates? Some people use Helm to do just that, or you might try out other community tools such as [`ytt` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://get-ytt.io/).</p></dd>
 </dl>
 
 <br />
@@ -453,7 +453,7 @@ If you want to run your app in multiple clusters, public and private environment
 ## Keeping your app up to date
 {: #updating}
 
-You put in a lot of effort preparing for the next version of your app. You can use {{site.data.keyword.Bluemix_notm}} and Kubernetes update tools to make sure that your app is running in a secured cluster environment, as well as to roll out different versions of your app.
+You put in a lot of effort preparing for the next version of your app. You can use {{site.data.keyword.cloud_notm}} and Kubernetes update tools to make sure that your app is running in a secured cluster environment, as well as to roll out different versions of your app.
 {: shortdesc}
 
 ### How can I keep my cluster in a supported state?

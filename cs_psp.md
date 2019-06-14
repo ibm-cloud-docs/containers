@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -35,13 +35,13 @@ As a cluster admin, you want to control what happens in your cluster, especially
 
 With the `PodSecurityPolicy` admission controller, no pods can be created until after you [authorize policies](#customize_psp). Setting up pod security policies can have unintended side-effects, so make sure to test out a deployment after you change the policy. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods. For example, if you install apps by using [Helm](/docs/containers?topic=containers-helm#public_helm_install), the Helm tiller component creates pods, and so you must have the correct pod security policy authorization.
 
-Trying to control which users have access to the {{site.data.keyword.containerlong_notm}}? See [Assigning cluster access](/docs/containers?topic=containers-users#users) to set {{site.data.keyword.Bluemix_notm}} IAM and infrastructure permissions.
+Trying to control which users have access to the {{site.data.keyword.containerlong_notm}}? See [Assigning cluster access](/docs/containers?topic=containers-users#users) to set {{site.data.keyword.cloud_notm}} IAM and infrastructure permissions.
 {: tip}
 
 **Are any policies set by default? What can I add?**</br>
 By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller.
 
-Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all administrators, users, services, and nodes to create privileged and unprivileged pods. Additional RBAC resources are included for portability with {{site.data.keyword.Bluemix_notm}} Private packages that are used for [hybrid deployments](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
+Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all administrators, users, services, and nodes to create privileged and unprivileged pods. Additional RBAC resources are included for portability with {{site.data.keyword.cloud_notm}} Private packages that are used for [hybrid deployments](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
 
 If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources or create your own](#customize_psp).
 
@@ -78,7 +78,7 @@ You can modify these RBAC roles to remove or add administrators, users, services
 Before you begin:
 *  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac) or the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-* Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for all namespaces.
+* Ensure you have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for all namespaces.
 
 When you modify the default configuration, you can prevent important cluster actions, such as pod deployments or cluster updates. Test your changes in a non-production cluster that other teams do not rely on.
 {: important}

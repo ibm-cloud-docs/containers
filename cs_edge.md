@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -46,7 +46,7 @@ In Kubernetes 1.14 and later, both public and private NLBs and ALBs can deploy t
 
 Before you begin:
 
-* Ensure that you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+* Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
   * Any platform role for the cluster
   * **Writer** or **Manager** service role for all namespaces
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -189,7 +189,7 @@ A benefit of edge worker nodes is that they can be specified to run networking s
 Using the `dedicated=edge` toleration means that all network load balancer (NLB) and Ingress application load balancer (ALB) services are deployed to the labeled worker nodes only. However, to prevent other workloads from running on edge worker nodes and consuming worker node resources, you must use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 Before you begin:
-- Ensure you that have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role for all namespaces](/docs/containers?topic=containers-users#platform).
+- Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role for all namespaces](/docs/containers?topic=containers-users#platform).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>To prevent other workloads from running on edge worker nodes:

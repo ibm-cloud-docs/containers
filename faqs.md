@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -39,7 +39,7 @@ For more information about Kubernetes, see the [Kubernetes documentation ![Exter
 {: #kubernetes_service}
 {: faq}
 
-With {{site.data.keyword.containerlong_notm}}, you can create your own Kubernetes cluster to deploy and manage containerized apps on {{site.data.keyword.Bluemix_notm}}. Your containerized apps are hosted on IBM Cloud infrastructure (SoftLayer) compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm) with shared or dedicated resources, or as [bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#bm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the {{site.data.keyword.containerlong_notm}} API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.
+With {{site.data.keyword.containerlong_notm}}, you can create your own Kubernetes cluster to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. Your containerized apps are hosted on IBM Cloud infrastructure (SoftLayer) compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm) with shared or dedicated resources, or as [bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#bm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the {{site.data.keyword.containerlong_notm}} API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.
 
 For more information on how your cluster resources are set up, see the [Service architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture). To find a list of capabilities and benefits, see [Why {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov).
 
@@ -55,11 +55,11 @@ For a detailed overview of capabilities and benefits, see [Why {{site.data.keywo
 {: #managed_master_worker}
 {: faq}
 
-Every Kubernetes cluster in {{site.data.keyword.containerlong_notm}} is controlled by a dedicated Kubernetes master that is managed by IBM in an IBM-owned {{site.data.keyword.Bluemix_notm}} infrastructure account. The Kubernetes master, including all the master components, compute, networking, and storage resources, is continuously monitored by IBM Site Reliability Engineers (SREs). The SREs apply the latest security standards, detect and remediate malicious activities, and work to ensure reliability and availability of {{site.data.keyword.containerlong_notm}}. Add-ons, such as Fluentd for logging, that are installed automatically when you provision the cluster are automatically updated by IBM. However, you can choose to disable automatic updates for some add-ons and manually update them separately from the master and worker nodes. For more information, see [Updating cluster add-ons](/docs/containers?topic=containers-update#addons).
+Every Kubernetes cluster in {{site.data.keyword.containerlong_notm}} is controlled by a dedicated Kubernetes master that is managed by IBM in an IBM-owned {{site.data.keyword.cloud_notm}} infrastructure account. The Kubernetes master, including all the master components, compute, networking, and storage resources, is continuously monitored by IBM Site Reliability Engineers (SREs). The SREs apply the latest security standards, detect and remediate malicious activities, and work to ensure reliability and availability of {{site.data.keyword.containerlong_notm}}. Add-ons, such as Fluentd for logging, that are installed automatically when you provision the cluster are automatically updated by IBM. However, you can choose to disable automatic updates for some add-ons and manually update them separately from the master and worker nodes. For more information, see [Updating cluster add-ons](/docs/containers?topic=containers-update#addons).
 
 Periodically, Kubernetes releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#version_types). These updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM automatically updates the patch version, but you must update the master major and minor versions. For more information, see [Updating the Kubernetes master](/docs/containers?topic=containers-update#master).
 
-Worker nodes in standard clusters are provisioned in to your {{site.data.keyword.Bluemix_notm}} infrastructure account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches. Security updates and patches are made available by IBM Site Reliability Engineers (SREs) who continuously monitor the Linux image that is installed on your worker nodes to detect vulnerabilities and security compliance issues. For more information, see [Updating worker nodes](/docs/containers?topic=containers-update#worker_node).
+Worker nodes in standard clusters are provisioned in to your {{site.data.keyword.cloud_notm}} infrastructure account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches. Security updates and patches are made available by IBM Site Reliability Engineers (SREs) who continuously monitor the Linux image that is installed on your worker nodes to detect vulnerabilities and security compliance issues. For more information, see [Updating worker nodes](/docs/containers?topic=containers-update#worker_node).
 
 ## Are the Kubernetes master and worker nodes highly available?
 {: #faq_ha}
@@ -90,7 +90,7 @@ For more information about the components of your cluster and how you can secure
 {{site.data.keyword.containerlong_notm}} uses {{site.data.keyword.iamshort}} (IAM) to grant access to cluster resources through IAM platform roles and Kubernetes role-based access control (RBAC) policies through IAM service roles. For more information on types of access policies, see [Pick the right access policy and role for your users](/docs/containers?topic=containers-users#access_roles).
 {: shortdesc}
 
-The access policies that you assign users vary depending on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the [User access reference page](/docs/containers?topic=containers-access_reference) or in the following table's links. For steps to assign policies, see [Granting users access to your cluster through {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
+The access policies that you assign users vary depending on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the [User access reference page](/docs/containers?topic=containers-access_reference) or in the following table's links. For steps to assign policies, see [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform).
 
 | Use case | Example roles and scope |
 | --- | --- |
@@ -107,7 +107,7 @@ The access policies that you assign users vary depending on what you want your u
 {: #faq_security_bulletins}
 {: faq}
 
-If vulnerabilities are found in Kubernetes, Kubernetes releases CVEs in security bulletins to inform users and to describe the actions that users must take to remediate the vulnerability. Kubernetes security bulletins that affect {{site.data.keyword.containerlong_notm}} users or the {{site.data.keyword.Bluemix_notm}} platform are published in the [{{site.data.keyword.Bluemix_notm}} security bulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security).
+If vulnerabilities are found in Kubernetes, Kubernetes releases CVEs in security bulletins to inform users and to describe the actions that users must take to remediate the vulnerability. Kubernetes security bulletins that affect {{site.data.keyword.containerlong_notm}} users or the {{site.data.keyword.cloud_notm}} platform are published in the [{{site.data.keyword.cloud_notm}} security bulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security).
 
 Some CVEs require the latest patch update for a Kubernetes version that you can install as part of the regular [cluster update process](/docs/containers?topic=containers-update#update) in {{site.data.keyword.containerlong_notm}}. Make sure to apply security patches in time to protect your cluster from malicious attacks. For information about what is included in a security patch, refer to the [version changelog](/docs/containers?topic=containers-changelog#changelog).
 
@@ -155,7 +155,7 @@ For more information about supported regions, see [Locations](/docs/containers?t
 {: #faq_integrations}
 {: faq}
 
-You can add {{site.data.keyword.Bluemix_notm}} platform and infrastructure services as well as services from third-party vendors to your {{site.data.keyword.containerlong_notm}} cluster to enable automation, improve security, or enhance your monitoring and logging capabilities in the cluster.
+You can add {{site.data.keyword.cloud_notm}} platform and infrastructure services as well as services from third-party vendors to your {{site.data.keyword.containerlong_notm}} cluster to enable automation, improve security, or enhance your monitoring and logging capabilities in the cluster.
 
 For a list of supported services, see [Integrating services](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 
@@ -163,11 +163,11 @@ For a list of supported services, see [Integrating services](/docs/containers?to
 {: #hybrid}
 {: faq}
 
-You can connect services in {{site.data.keyword.Bluemix_notm}} Public with your on-prem data center to create your own hybrid cloud setup. Examples for how you can leverage {{site.data.keyword.Bluemix_notm}} Public and Private with apps that run in your on-prem data center include:
-- You create a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Public, but you want to connect your cluster with an on-prem database.
-- You create a Kubernetes cluster in {{site.data.keyword.Bluemix_notm}} Private in your own data center and deploy apps to your cluster. However, your app might use an {{site.data.keyword.ibmwatson_notm}} service, such as Tone Analyzer, in {{site.data.keyword.Bluemix_notm}} Public.
+You can connect services in {{site.data.keyword.cloud_notm}} Public with your on-prem data center to create your own hybrid cloud setup. Examples for how you can leverage {{site.data.keyword.cloud_notm}} Public and Private with apps that run in your on-prem data center include:
+- You create a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.cloud_notm}} Public, but you want to connect your cluster with an on-prem database.
+- You create a Kubernetes cluster in {{site.data.keyword.cloud_notm}} Private in your own data center and deploy apps to your cluster. However, your app might use an {{site.data.keyword.ibmwatson_notm}} service, such as Tone Analyzer, in {{site.data.keyword.cloud_notm}} Public.
 
-To enable communication between services that run in {{site.data.keyword.Bluemix_notm}} Public and services that run on-prem, you must [set up a VPN connection](/docs/containers?topic=containers-vpn#vpn). To connect your {{site.data.keyword.Bluemix_notm}} Public or Dedicated environment with an {{site.data.keyword.Bluemix_notm}} Private environment, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
+To enable communication between services that run in {{site.data.keyword.cloud_notm}} Public and services that run on-prem, you must [set up a VPN connection](/docs/containers?topic=containers-vpn#vpn). To connect your {{site.data.keyword.cloud_notm}} Public or Dedicated environment with an {{site.data.keyword.cloud_notm}} Private environment, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.cloud_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
 
 For an overview of supported {{site.data.keyword.containerlong_notm}} offerings, see [Comparison of offerings and their combinations](/docs/containers?topic=containers-cs_ov#differentiation).
 
@@ -175,9 +175,9 @@ For an overview of supported {{site.data.keyword.containerlong_notm}} offerings,
 {: #private}
 {: faq}
 
-If you do not want to move your apps into {{site.data.keyword.Bluemix_notm}} Public but you still want to leverage the features of {{site.data.keyword.containerlong_notm}}, you can install {{site.data.keyword.Bluemix_notm}} Private. {{site.data.keyword.Bluemix_notm}} Private is an application platform that can be installed locally on your own machines and that you can use for developing and managing on-prem, containerized apps in your own controlled environment behind a firewall.
+If you do not want to move your apps into {{site.data.keyword.cloud_notm}} Public but you still want to leverage the features of {{site.data.keyword.containerlong_notm}}, you can install {{site.data.keyword.cloud_notm}} Private. {{site.data.keyword.cloud_notm}} Private is an application platform that can be installed locally on your own machines and that you can use for developing and managing on-prem, containerized apps in your own controlled environment behind a firewall.
 
-For more information, see the [{{site.data.keyword.Bluemix_notm}} Private product documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
 
 ## What am I charged for when I use IBM Cloud Kubernetes Service?
 {: #charges}
@@ -188,7 +188,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 * [Outbound networking](#bandwidth)
 * [Subnet IP addresses](#subnet_ips)
 * [Storage](#persistent_storage)
-* [{{site.data.keyword.Bluemix_notm}} services](#services)
+* [{{site.data.keyword.cloud_notm}} services](#services)
 * [Red Hat OpenShift on IBM Cloud](#rhos_charges)
 
 <dl>
@@ -204,7 +204,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).</p></dd>
 
 <dt id="bandwidth">Public bandwidth</dt>
-  <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.Bluemix_notm}} resources in data centers around the globe. Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.
+  <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.cloud_notm}} resources in data centers around the globe. Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.
   <p>Review the following factors that impact public bandwidth charges:</p>
   <ul><li><strong>Location</strong>: As with worker nodes, charges vary depending on the zone that your resources are deployed in.</li>
   <li><strong>Included bandwidth or Pay-As-You-Go</strong>: Your worker node machines might come with a certain allocation of outbound networking per month, such as 250GB for VMs or 500GB for bare metal. Or, the allocation might be Pay-As-You-Go, based on GB usage.</li>
@@ -221,8 +221,8 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <li>[Block storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</li>
   <li>[Object storage plans![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
 
-<dt id="services">{{site.data.keyword.Bluemix_notm}} services</dt>
-  <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.Bluemix_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
+<dt id="services">{{site.data.keyword.cloud_notm}} services</dt>
+  <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.cloud_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
 
 <dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
   <dd>
@@ -238,8 +238,8 @@ Monthly resources are billed based upon the first of the month for usage in the 
 {: #bill}
 {: faq}
 
-When you use a billable {{site.data.keyword.Bluemix_notm}} account, platform and infrastructure resources are summarized in one bill.
-If you linked your {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) accounts, you receive a [consolidated bill](/docs/customer-portal?topic=customer-portal-unifybillaccounts#unifybillaccounts) for your {{site.data.keyword.Bluemix_notm}} platform and infrastructure resources.
+When you use a billable {{site.data.keyword.cloud_notm}} account, platform and infrastructure resources are summarized in one bill.
+If you linked your {{site.data.keyword.cloud_notm}} and IBM Cloud infrastructure (SoftLayer) accounts, you receive a [consolidated bill](/docs/customer-portal?topic=customer-portal-unifybillaccounts#unifybillaccounts) for your {{site.data.keyword.cloud_notm}} platform and infrastructure resources.
 
 ## Can I estimate my costs?
 {: #cost_estimate}
@@ -251,4 +251,4 @@ Yes, see [Estimating your costs](/docs/billing-usage?topic=billing-usage-cost#co
 {: #usage}
 {: faq}
 
-You can check your current usage and estimated monthly totals for your {{site.data.keyword.Bluemix_notm}} platform and infrastructure resources. For more information, see [Viewing your usage](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage). To organize your billing, you can group your resources with [resource groups](/docs/resources?topic=resources-bp_resourcegroups#bp_resourcegroups).
+You can check your current usage and estimated monthly totals for your {{site.data.keyword.cloud_notm}} platform and infrastructure resources. For more information, see [Viewing your usage](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage). To organize your billing, you can group your resources with [resource groups](/docs/resources?topic=resources-bp_resourcegroups#bp_resourcegroups).

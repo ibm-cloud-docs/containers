@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -235,7 +235,7 @@ Create a configuration for cluster and app logging. You can differentiate betwee
 
 **Forwarding logs to your own server over the `udp` or `tcp` protocols**
 
-1. Ensure that you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+1. Ensure that you have the [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -260,7 +260,7 @@ Create a configuration for cluster and app logging. You can differentiate betwee
 The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
 {: tip}
 
-1. Ensure that you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+1. Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     * **Editor** or **Administrator** platform role for the cluster
     * **Writer** or **Manager** service role for the `kube-system` namespace
 
@@ -296,7 +296,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * Currently, a default audit policy is used for all clusters with this logging configuration.
 * Currently, filters are not supported.
 * There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.cloudaccesstrailshort}} and an external server by creating a logging configuration and a webhook.
-* You must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+* You must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 **Before you begin**
 
@@ -514,7 +514,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * Currently, a default audit policy is used for all clusters with this logging configuration.
 * Currently, filters are not supported.
 * There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.cloudaccesstrailshort}} and an external server by creating a logging configuration and a webhook.
-* You must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+* You must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 {{site.data.keyword.containerlong_notm}} is currently not configured to use {{site.data.keyword.at_full}}. To manage Kubernetes API audit logs, continue to use {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis.
 {: note}
@@ -592,10 +592,10 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
     {: screen}
 
 3. To view the Kubernetes API audit events that you forward:
-  1. Log in to your {{site.data.keyword.Bluemix_notm}} account.
+  1. Log in to your {{site.data.keyword.cloud_notm}} account.
   2. From the catalog, provision an instance of the {{site.data.keyword.cloudaccesstrailshort}} service in the same account as your instance of {{site.data.keyword.containerlong_notm}}.
   3. On the **Manage** tab of the {{site.data.keyword.cloudaccesstrailshort}} dashboard, select the account or space domain.
-    * **Account logs**: Cluster management events and Kubernetes API server audit events are available in the **account domain** for the {{site.data.keyword.Bluemix_notm}} region where the events are generated.
+    * **Account logs**: Cluster management events and Kubernetes API server audit events are available in the **account domain** for the {{site.data.keyword.cloud_notm}} region where the events are generated.
     * **Space logs**: If you specified a space when you configured your logging configuration in step 2, these events are available in the **space domain** that is associated with the Cloud Foundry space where the {{site.data.keyword.cloudaccesstrailshort}} service is provisioned.
   4. Click **View in Kibana**.
   5. Set the time frame that you want to view logs for. The default is 24 hours.
@@ -617,12 +617,12 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 **Before you begin**
 
-* [Provision an instance](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
-* Ensure that you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+* [Provision an instance](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.cloud_notm}} catalog.
+* Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 **Creating a snapshot**
 
-1. Create an Object Storage bucket through the {{site.data.keyword.Bluemix_notm}} console by following [this getting started tutorial](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets).
+1. Create an Object Storage bucket through the {{site.data.keyword.cloud_notm}} console by following [this getting started tutorial](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets).
 
 2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials) in the bucket that you created.
   1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.
@@ -676,7 +676,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
   ```
   {: screen}
 
-4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. You can find the name of the file that contains your master logs in the response and use the {{site.data.keyword.Bluemix_notm}} console to download the file.
+4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. You can find the name of the file that contains your master logs in the response and use the {{site.data.keyword.cloud_notm}} console to download the file.
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
@@ -719,13 +719,13 @@ To avoid conflicts when using metrics services, be sure that clusters across res
   <dt>Kubernetes dashboard</dt>
     <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>
 
-  <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.Bluemix_notm}} console and output of <code>ibmcloud ks cluster-get</code></dt>
-    <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view metrics, go to the **Kubernetes** > **Clusters** dashboard, select a cluster, and click the **Metrics** link.
-  <p class="deprecated">The link to the metrics dashboard in the cluster overview page of the {{site.data.keyword.Bluemix_notm}} console and in the output of `ibmcloud ks cluster-get` is deprecated. Clusters that are created after 03 May 2019 are not created with the metrics dashboard link. Clusters that are created on or before 03 May 2019 continue to have the link to the metrics dashboard.</p></dd>
+  <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.cloud_notm}} console and output of <code>ibmcloud ks cluster-get</code></dt>
+    <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.cloud_notm}} service binding. To view metrics, go to the **Kubernetes** > **Clusters** dashboard, select a cluster, and click the **Metrics** link.
+  <p class="deprecated">The link to the metrics dashboard in the cluster overview page of the {{site.data.keyword.cloud_notm}} console and in the output of `ibmcloud ks cluster-get` is deprecated. Clusters that are created after 03 May 2019 are not created with the metrics dashboard link. Clusters that are created on or before 03 May 2019 continue to have the link to the metrics dashboard.</p></dd>
 
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
-    <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.</p>
+    <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.cloud_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.cloud_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
+    <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.cloud_notm}} account or space where you created the cluster.</p>
     <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
       <caption>IP addresses to open for monitoring traffic</caption>
             <thead>
@@ -792,7 +792,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    <tbody>
 <tr>
    <td>`Aborted`</td>
-   <td>The deletion of the cluster is requested by the user before the Kubernetes master is deployed. After the deletion of the cluster is completed, the cluster is removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+   <td>The deletion of the cluster is requested by the user before the Kubernetes master is deployed. After the deletion of the cluster is completed, the cluster is removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
  <tr>
      <td>`Critical`</td>
@@ -804,7 +804,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    </tr>
    <tr>
      <td>`Deleted`</td>
-     <td>The cluster is deleted but not yet removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>The cluster is deleted but not yet removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
    <td>`Deleting`</td>
@@ -812,7 +812,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    </tr>
    <tr>
      <td>`Deploy failed`</td>
-     <td>The deployment of the Kubernetes master could not be completed. You cannot resolve this state. Contact IBM Cloud support by opening an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+     <td>The deployment of the Kubernetes master could not be completed. You cannot resolve this state. Contact IBM Cloud support by opening an [{{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
      <tr>
        <td>`Deploying`</td>
@@ -828,7 +828,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
      </tr>
    <tr>
      <td>`Requested`</td>
-     <td>A request to create the cluster and order the infrastructure for the Kubernetes master and worker nodes is sent. When the deployment of the cluster starts, the cluster state changes to <code>Deploying</code>. If your cluster is stuck in the <code>Requested</code> state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>A request to create the cluster and order the infrastructure for the Kubernetes master and worker nodes is sent. When the deployment of the cluster starts, the cluster state changes to <code>Deploying</code>. If your cluster is stuck in the <code>Requested</code> state for a long time, open an [{{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
      <td>`Updating`</td>
@@ -922,7 +922,7 @@ You can view the current worker node state by running the `ibmcloud ks workers -
     <li><code>containerd</code>, <code>kubelet</code>, or <code>calico</code> went into an unrecoverable state after it ran hundreds or thousands of containers over time. </li>
     <li>You set up a Virtual Router Appliance for your worker node that went down and cut off the communication between your worker node and the Kubernetes master. </li><li> Current networking issues in {{site.data.keyword.containerlong_notm}} or IBM Cloud infrastructure (SoftLayer) that causes the communication between your worker node and the Kubernetes master to fail.</li>
     <li>Your worker node ran out of capacity. Check the <strong>Status</strong> of the worker node to see whether it shows <strong>Out of disk</strong> or <strong>Out of memory</strong>. If your worker node is out of capacity, consider to either reduce the workload on your worker node or add a worker node to your cluster to help load balance the workload.</li>
-    <li>The device was powered off from the [{{site.data.keyword.Bluemix_notm}} console resource list ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/resources). Open the resource list and find your worker node ID in the **Devices** list. In the action menu, click **Power On**.</li></ul>
+    <li>The device was powered off from the [{{site.data.keyword.cloud_notm}} console resource list ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/resources). Open the resource list and find your worker node ID in the **Devices** list. In the action menu, click **Power On**.</li></ul>
     In many cases, [reloading](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) your worker node can solve the problem. When you reload your worker node, the latest [patch version](/docs/containers?topic=containers-cs_versions#version_types) is applied to your worker node. The major and minor version is not changed. Before you reload your worker node, make sure to cordon and drain your worker node to ensure that the existing pods are terminated gracefully and rescheduled onto remaining worker nodes. </br></br> If reloading the worker node does not resolve the issue, go to the next step to continue troubleshooting your worker node. </br></br><strong>Tip:</strong> You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
     </td>
    </tr>
@@ -960,7 +960,7 @@ You can view the current worker node state by running the `ibmcloud ks workers -
     </tr>
     <tr>
      <td>`Unknown`</td>
-     <td>The Kubernetes master is not reachable for one of the following reasons:<ul><li>You requested an update of your Kubernetes master. The state of the worker node cannot be retrieved during the update. If the worker node remains in this state for an extended period of time even after the Kubernetes master is successfully updated, try to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) the worker node.</li><li>You might have another firewall that is protecting your worker nodes, or changed firewall settings recently. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. For more information, see [Firewall prevents worker nodes from connecting](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>The Kubernetes master is down. Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</li></ul></td>
+     <td>The Kubernetes master is not reachable for one of the following reasons:<ul><li>You requested an update of your Kubernetes master. The state of the worker node cannot be retrieved during the update. If the worker node remains in this state for an extended period of time even after the Kubernetes master is successfully updated, try to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) the worker node.</li><li>You might have another firewall that is protecting your worker nodes, or changed firewall settings recently. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. For more information, see [Firewall prevents worker nodes from connecting](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>The Kubernetes master is down. Contact {{site.data.keyword.cloud_notm}} support by opening an [{{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</li></ul></td>
 </tr>
    <tr>
       <td>`Warning`</td>
@@ -982,14 +982,14 @@ Autorecovery requires at least one healthy node to function properly. Configure 
 {: note}
 
 Before you begin:
-- Ensure that you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+- Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     - **Administrator** platform role for the cluster
     - **Writer** or **Manager** service role for the `kube-system` namespace
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To configure Autorecovery:
 
-1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.cloud_notm}} Helm repository.
 
 2.  Verify that tiller is installed with a service account.
     ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -30,7 +30,7 @@ subcollection: containers
 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) is persistent, highly available storage that you can mount to apps that run in a Kubernetes cluster by using the {{site.data.keyword.cos_full_notm}} plug-in. The plug-in is a Kubernetes Flex-Volume plug-in that connects Cloud {{site.data.keyword.cos_short}} buckets to pods in your cluster. Information that is stored with {{site.data.keyword.cos_full_notm}} is encrypted in transit and at rest, dispersed across multiple geographic locations, and accessed over HTTP by using a REST API.
 {: shortdesc}
 
-To connect to {{site.data.keyword.cos_full_notm}}, your cluster requires public network access to authenticate with {{site.data.keyword.Bluemix_notm}} Identity and Access Management. If you have a private-only cluster, you can communicate with the {{site.data.keyword.cos_full_notm}} private service endpoint if you install the plug-in version `1.0.3` or later, and set up your {{site.data.keyword.cos_full_notm}} service instance for HMAC authentication. If you don't want to use HMAC authentication, you must open up all outbound network traffic on port 443 for the plug-in to work properly in a private cluster.
+To connect to {{site.data.keyword.cos_full_notm}}, your cluster requires public network access to authenticate with {{site.data.keyword.cloud_notm}} Identity and Access Management. If you have a private-only cluster, you can communicate with the {{site.data.keyword.cos_full_notm}} private service endpoint if you install the plug-in version `1.0.3` or later, and set up your {{site.data.keyword.cos_full_notm}} service instance for HMAC authentication. If you don't want to use HMAC authentication, you must open up all outbound network traffic on port 443 for the plug-in to work properly in a private cluster.
 {: important}
 
 With version 1.0.5, the {{site.data.keyword.cos_full_notm}} plug-in is renamed from `ibmcloud-object-storage-plugin` to `ibm-object-storage-plugin`. To install the new version of the plug-in, you must [uninstall the old Helm chart installation](#remove_cos_plugin) and [re-install the Helm chart with the new {{site.data.keyword.cos_full_notm}} plug-in version](#install_cos).
@@ -157,7 +157,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
    2. Review the [version changelog](/docs/containers?topic=containers-changelog#changelog) to find the changes that are included in the latest patch version.
 
-   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 2.  Choose if you want to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller. Then, [follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, and, if you want to use Tiller, to install Tiller with a service account in your cluster.
 
@@ -174,7 +174,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ```
    {: screen}
 
-4. Add the {{site.data.keyword.Bluemix_notm}} Helm repo to your cluster.
+4. Add the {{site.data.keyword.cloud_notm}} Helm repo to your cluster.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
@@ -457,7 +457,7 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
 
    3. Follow the steps in [Installing the {{site.data.keyword.cos_full_notm}} plug-in](#install_cos) to install the latest version of the {{site.data.keyword.cos_full_notm}} plug-in.
 
-2. Update the {{site.data.keyword.Bluemix_notm}} Helm repo to retrieve the latest version of all Helm charts in this repo.
+2. Update the {{site.data.keyword.cloud_notm}} Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
@@ -684,7 +684,7 @@ To remove the plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/iam-endpoint</code></td>
-   <td>The API endpoint for {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). </td>
+   <td>The API endpoint for {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM). </td>
    </tr>
    <tr>
    <td><code>ibm.io/kernel-cache</code></td>
@@ -905,7 +905,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.runAsUser</code></td>
-    <td>Optional: To run the app with a non-root user in a cluster that runs Kubernetes version 1.12 or earlier, specify the [security context ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for your pod by defining the non-root user without setting the `fsGroup` in your deployment YAML at the same time. Setting `fsGroup` triggers the {{site.data.keyword.cos_full_notm}} plug-in to update the group permissions for all files in a bucket when the pod is deployed. Updating the permissions is a write operation and impacts performance. Depending on how many files you have, updating the permissions might prevent your pod from coming up and getting into a <code>Running</code> state. </br></br>If you have a cluster that runs Kubernetes version 1.13 or later and the {{site.data.keyword.Bluemix_notm}} Object Storage plug-in version 1.0.4 or later, you can change the owner of the s3fs mount point. To change the owner, specify the security context by setting `runAsUser` and `fsGroup` to the same non-root user ID that you want to own the s3fs mount point. If these two values do not match, the mount point is automatically owned by the `root` user.  </td>
+    <td>Optional: To run the app with a non-root user in a cluster that runs Kubernetes version 1.12 or earlier, specify the [security context ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for your pod by defining the non-root user without setting the `fsGroup` in your deployment YAML at the same time. Setting `fsGroup` triggers the {{site.data.keyword.cos_full_notm}} plug-in to update the group permissions for all files in a bucket when the pod is deployed. Updating the permissions is a write operation and impacts performance. Depending on how many files you have, updating the permissions might prevent your pod from coming up and getting into a <code>Running</code> state. </br></br>If you have a cluster that runs Kubernetes version 1.13 or later and the {{site.data.keyword.cloud_notm}} Object Storage plug-in version 1.0.4 or later, you can change the owner of the s3fs mount point. To change the owner, specify the security context by setting `runAsUser` and `fsGroup` to the same non-root user ID that you want to own the s3fs mount point. If these two values do not match, the mount point is automatically owned by the `root` user.  </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -975,7 +975,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
 ## Using object storage in a stateful set
 {: #cos_statefulset}
 
-If you have a stateful app such as a database, you can create stateful sets that use {{site.data.keyword.cos_full_notm}} to store your app's data. Alternatively, you can use an {{site.data.keyword.Bluemix_notm}} database-as-a-service, such as {{site.data.keyword.cloudant_short_notm}} and store your data in the cloud.
+If you have a stateful app such as a database, you can create stateful sets that use {{site.data.keyword.cos_full_notm}} to store your app's data. Alternatively, you can use an {{site.data.keyword.cloud_notm}} database-as-a-service, such as {{site.data.keyword.cloudant_short_notm}} and store your data in the cloud.
 {: shortdesc}
 
 Before you begin:

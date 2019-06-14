@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-14"
 
 keywords: kubernetes, iks
 
@@ -37,7 +37,7 @@ take advantage of high availability, high-performance compute, easy spin-up of c
 A Risk Management VP for a residential mortgage company processes 70 million records a day, but the on-premises system was slow and also inaccurate. IT expenses soared because hardware quickly went out of date and wasn't utilized fully. While they waited for hardware provisioning, their regulatory compliance slowed.
 {: shortdesc}
 
-Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company looked to {{site.data.keyword.containerlong_notm}} and IBM Cloud Analytic services to reduce costs, increase worldwide availability, and ultimately accelerate regulatory compliance. With {{site.data.keyword.containerlong_notm}} in multiple regions, their analysis apps can be containerized and deployed across the globe, improving availability and addressing local regulations. Those deployments are accelerated with familiar open source tools, already part of {{site.data.keyword.containerlong_notm}}.
+Why {{site.data.keyword.cloud_notm}}: To improve risk analysis, the company looked to {{site.data.keyword.containerlong_notm}} and IBM Cloud Analytic services to reduce costs, increase worldwide availability, and ultimately accelerate regulatory compliance. With {{site.data.keyword.containerlong_notm}} in multiple regions, their analysis apps can be containerized and deployed across the globe, improving availability and addressing local regulations. Those deployments are accelerated with familiar open source tools, already part of {{site.data.keyword.containerlong_notm}}.
 
 {{site.data.keyword.containerlong_notm}} and key technologies:
 * [Horizontal scaling](/docs/containers?topic=containers-app#highly_available_apps)
@@ -105,7 +105,7 @@ This solution provides the immediate benefit of scalability. By using Kubernetes
 A Development Exec has Developers that use on-premises traditional tools that slow down prototyping while they wait for hardware procurement.
 {: shortdesc}
 
-Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} provides spin-up of compute by using open-source standard technology. After the company moved to {{site.data.keyword.containerlong_notm}}, Developers have access to DevOps friendly tools, such as portable and easily shared containers.
+Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides spin-up of compute by using open-source standard technology. After the company moved to {{site.data.keyword.containerlong_notm}}, Developers have access to DevOps friendly tools, such as portable and easily shared containers.
 
 Then, Developers can experiment easily, pushing changes to Development and Test systems quickly with open toolchains. Their traditional software development tools get a new face when they add on AI cloud services to apps with a click.
 
@@ -156,10 +156,9 @@ Accelerated development is a key win for the Exec. With the use of modern contai
 
 Also, logging and monitoring for the tools, especially where they used {{site.data.keyword.watson}} AI, rapidly integrate into the system. Developers don’t waste time building complex logging systems, just to be able to troubleshoot their live systems. A key factor for less staffing costs is that IBM manages Kubernetes, so the Developers can focus on better payment tools.
 
-Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive payment tools now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute that can verify the underlying hardware against tampering. Scans for vulnerabilities and malware are run continuously.
+Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive payment tools now have familiar isolation but within the flexibility of public cloud. Scans for vulnerabilities and malware are run continuously.
 
 **Step 1: Lift and shift to secure compute**
-* Apps that manage highly sensitive data can be rehosted on {{site.data.keyword.containerlong_notm}} running on Bare Metal for Trusted Compute. Trusted Compute can verify the underlying hardware against tampering.
 * Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public {{site.data.keyword.Bluemix_notm}}.
 * From that core, Vulnerability Advisor provides image, policy, container, and packaging vulnerability scanning, for known malware.
 * Private data center / on-premises capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks, helm
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}f
+{:preview: .preview}
 
 
-# Supported IBM Cloud and third party integrations
+# Supported IBM Cloud and third-party integrations
 {: #supported_integrations}
 
 You can use various external services and catalog services with a standard Kubernetes cluster in {{site.data.keyword.containerlong}}.
@@ -56,7 +56,7 @@ You can use various external services and catalog services with a standard Kuber
 <tr>
 <td>{{site.data.keyword.Bluemix}} Block Storage</td>
 <td>Block storage</td>
-<td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+<td>[{{site.data.keyword.cloud_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -76,12 +76,12 @@ You can use various external services and catalog services with a standard Kuber
 <tr>
 <td>{{site.data.keyword.datashield_full}} (Beta)</td>
 <td>Memory encryption</td>
-<td>You can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
+<td>You can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix}} File Storage</td>
 <td>File storage</td>
-<td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+<td>[{{site.data.keyword.cloud_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -143,7 +143,7 @@ You can use various external services and catalog services with a standard Kuber
 <tbody>
 <tr>
 <td>{{site.data.keyword.cfee_full_notm}}</td>
-<td>Deploy and manage your own Cloud Foundry platform on top of a Kubernetes cluster to develop, package, deploy, and manage cloud-native apps, and leverage the {{site.data.keyword.Bluemix_notm}} ecosystem to bind additional services to your apps. When you create an {{site.data.keyword.cfee_full_notm}} instance, you must configure your Kubernetes cluster by choosing the machine type and VLANs for your worker nodes. Your cluster is then provisioned with {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.cfee_full_notm}} is automatically deployed to your cluster. For more information about how to set up {{site.data.keyword.cfee_full_notm}}, see the [Getting started tutorial](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started). </td>
+<td>Deploy and manage your own Cloud Foundry platform on top of a Kubernetes cluster to develop, package, deploy, and manage cloud-native apps, and leverage the {{site.data.keyword.cloud_notm}} ecosystem to bind additional services to your apps. When you create an {{site.data.keyword.cfee_full_notm}} instance, you must configure your Kubernetes cluster by choosing the machine type and VLANs for your worker nodes. Your cluster is then provisioned with {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.cfee_full_notm}} is automatically deployed to your cluster. For more information about how to set up {{site.data.keyword.cfee_full_notm}}, see the [Getting started tutorial](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started). </td>
 </tr>
 <tr>
 <td>Codeship</td>
@@ -197,7 +197,7 @@ You can use various external services and catalog services with a standard Kuber
 <tbody>
   <tr>
     <td>{{site.data.keyword.BluDirectLink}}</td>
-    <td>[{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) allows you to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.Bluemix_notm}} Direct Link offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose a {{site.data.keyword.Bluemix_notm}} Direct Link offering and set up a {{site.data.keyword.Bluemix_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.Bluemix_notm}} Direct Link documentation.</td>
+    <td>With [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.cloud_notm}} Direct Link offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.</td>
   </tr>
 <tr>
   <td>strongSwan IPSec VPN Service</td>
@@ -274,7 +274,7 @@ You can use various external services and catalog services with a standard Kuber
 ## Security services
 {: #security_services}
 
-Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security).
+Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security).
 {: shortdesc}
 
 <table summary="The table shows available services that you can add to your cluster to add extra security capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
@@ -292,7 +292,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td>As a supplement to <a href="/docs/services/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to improve the security of container deployments by reducing what your app is allowed to do. For more information, see <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+  <td>As a supplement to <a href="/docs/services/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to improve the security of container deployments by reducing what your app is allowed to do. For more information, see <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.cloud_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -300,7 +300,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (Beta)</td>
-  <td>You can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
+  <td>You can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
@@ -341,16 +341,16 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
   <td>You can use <a href="https://github.com/heptio/velero" target="_blank">Heptio Velero <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to back up and restore cluster resources and persistent volumes. For more information, see the Heptio Velero <a href="https://github.com/heptio/velero/blob/release-0.9/docs/use-cases.md" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
-  <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+  <td>{{site.data.keyword.cloud_notm}} Block Storage</td>
+  <td>[{{site.data.keyword.cloud_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
   <td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For more information about the service, see the <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
   <tr>
-  <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+  <td>{{site.data.keyword.cloud_notm}} File Storage</td>
+  <td>[{{site.data.keyword.cloud_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -380,7 +380,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
   </tr>
 <tr>
   <td>Cloud databases</td>
-  <td>You can choose between various {{site.data.keyword.Bluemix_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.Bluemix_notm}} catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=databases).  </td>
+  <td>You can choose between various {{site.data.keyword.cloud_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.cloud_notm}} catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=databases).  </td>
   </tr>
   </tbody>
   </table>

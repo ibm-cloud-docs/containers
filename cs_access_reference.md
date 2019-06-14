@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks
 
@@ -31,18 +31,18 @@ subcollection: containers
 When you [assign cluster permissions](/docs/containers?topic=containers-users), it can be hard to judge which role you need to assign to a user. Use the tables in the following sections to determine the minimum level of permissions that are required to perform common tasks in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of authorizing users with {{site.data.keyword.Bluemix_notm}} IAM: [service access roles](#service). These service roles are used to grant access to resources within the cluster, such as Kubernetes namespaces. For more information, check out the blog, [Introducing service roles and namespaces in IAM for more granular control of cluster access ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
+As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of authorizing users with {{site.data.keyword.cloud_notm}} IAM: [service access roles](#service). These service roles are used to grant access to resources within the cluster, such as Kubernetes namespaces. For more information, check out the blog, [Introducing service roles and namespaces in IAM for more granular control of cluster access ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
 {: note}
 
-## {{site.data.keyword.Bluemix_notm}} IAM platform roles
+## {{site.data.keyword.cloud_notm}} IAM platform roles
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.Bluemix_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.Bluemix_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.Bluemix_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.Bluemix_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform).
+{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.cloud_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.cloud_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.cloud_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.cloud_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform).
 {: shortdesc}
 
-<p class="tip">Do not assign {{site.data.keyword.Bluemix_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
+<p class="tip">Do not assign {{site.data.keyword.cloud_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
 
-In each of the following sections, the tables show cluster management, logging, and Ingress permissions granted by each {{site.data.keyword.Bluemix_notm}} IAM platform role. The tables are organized alphabetically by CLI command name.
+In each of the following sections, the tables show cluster management, logging, and Ingress permissions granted by each {{site.data.keyword.cloud_notm}} IAM platform role. The tables are organized alphabetically by CLI command name.
 
 * [Actions requiring no permissions](#none-actions)
 * [Viewer actions](#view-actions)
@@ -162,7 +162,7 @@ The **Viewer** platform role includes the [actions that require no permissions](
 <td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALBs)</code></td>
 </tr>
 <tr>
-<td>View the name and email address for the owner of the {{site.data.keyword.Bluemix_notm}} IAM API key for a resource group and region.</td>
+<td>View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} IAM API key for a resource group and region.</td>
 <td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info)</code></td>
 <td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetClusterKeyOwner)</code></td>
 </tr>
@@ -187,7 +187,7 @@ The **Viewer** platform role includes the [actions that require no permissions](
 <td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusters)</code></td>
 </tr>
 <tr>
-<td>Get the infrastructure credentials that are set for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+<td>Get the infrastructure credentials that are set for the {{site.data.keyword.cloud_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.</td>
 <td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials)</code></td>
 </tr>
 <tr>
@@ -465,7 +465,7 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 <td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
-<td>Make an {{site.data.keyword.Bluemix_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID.</td>
+<td>Make an {{site.data.keyword.cloud_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID.</td>
 <td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
 </tr>
@@ -592,7 +592,7 @@ The **Administrator** platform role includes all permissions that are granted by
 <td>-</td>
 </tr>
 <tr>
-<td>Set the API key for the {{site.data.keyword.Bluemix_notm}} account to access the linked IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+<td>Set the API key for the {{site.data.keyword.cloud_notm}} account to access the linked IBM Cloud infrastructure (SoftLayer) portfolio.</td>
 <td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)</code></td>
 <td><code>[POST /v1/keys](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey)</code></td>
 </tr>
@@ -632,12 +632,12 @@ The **Administrator** platform role includes all permissions that are granted by
 <td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveCluster)</code></td>
 </tr>
 <tr>
-<td>Set infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+<td>Set infrastructure credentials for the {{site.data.keyword.cloud_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.</td>
 <td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)</code></td>
 <td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/StoreUserCredentials)</code></td>
 </tr>
 <tr>
-<td>Remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+<td>Remove infrastructure credentials for the {{site.data.keyword.cloud_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.</td>
 <td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)</code></td>
 <td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/RemoveUserCredentials)</code></td>
 </tr>
@@ -682,10 +682,10 @@ The **Administrator** platform role includes all permissions that are granted by
 <br />
 
 
-## {{site.data.keyword.Bluemix_notm}} IAM service roles
+## {{site.data.keyword.cloud_notm}} IAM service roles
 {: #service}
 
-Every user who is assigned an {{site.data.keyword.Bluemix_notm}} IAM service access role is also automatically assigned a corresponding Kubernetes role-based access control (RBAC) role in a specific namespace. To learn more about service access roles, see [{{site.data.keyword.Bluemix_notm}} IAM service roles](/docs/containers?topic=containers-users#platform). Do not assign {{site.data.keyword.Bluemix_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.
+Every user who is assigned an {{site.data.keyword.cloud_notm}} IAM service access role is also automatically assigned a corresponding Kubernetes role-based access control (RBAC) role in a specific namespace. To learn more about service access roles, see [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-users#platform). Do not assign {{site.data.keyword.cloud_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.
 {: shortdesc}
 
 Looking for which Kubernetes actions each service role grants through RBAC? See [Kubernetes resource permissions per RBAC role](#rbac_ref). To learn more about RBAC roles, see [Assigning RBAC permissions](/docs/containers?topic=containers-users#role-binding) and [Extending existing permissions by aggregating cluster roles](https://cloud.ibm.com/docs/containers?topic=containers-users#rbac_aggregate)
@@ -742,7 +742,7 @@ The following table shows the Kubernetes resource permissions that are granted b
 ## Kubernetes resource permissions per RBAC role
 {: #rbac_ref}
 
-Every user who is assigned an {{site.data.keyword.Bluemix_notm}} IAM service access role is also automatically assigned a corresponding, predefined Kubernetes role-based access control (RBAC) role. If you plan to manage your own custom Kubernetes RBAC roles, see [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac).
+Every user who is assigned an {{site.data.keyword.cloud_notm}} IAM service access role is also automatically assigned a corresponding, predefined Kubernetes role-based access control (RBAC) role. If you plan to manage your own custom Kubernetes RBAC roles, see [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac).
 {: shortdesc}
 
 Wondering if you have the correct permissions to run a certain `kubectl` command on a resource in a namespace? Try the [`kubectl auth can-i` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-can-i-em-).
@@ -1014,7 +1014,7 @@ The following table shows the permissions that are granted by each RBAC role to 
 ## Cloud Foundry roles
 {: #cloud-foundry}
 
-Cloud Foundry roles grant access to organizations and spaces within the account. To see the list of Cloud Foundry-based services in {{site.data.keyword.Bluemix_notm}}, run `ibmcloud service list`. To learn more, see all available [org and space roles](/docs/iam?topic=iam-cfaccess) or the steps for [managing Cloud Foundry access](/docs/iam?topic=iam-mngcf) in the {{site.data.keyword.Bluemix_notm}} IAM documentation.
+Cloud Foundry roles grant access to organizations and spaces within the account. To see the list of Cloud Foundry-based services in {{site.data.keyword.cloud_notm}}, run `ibmcloud service list`. To learn more, see all available [org and space roles](/docs/iam?topic=iam-cfaccess) or the steps for [managing Cloud Foundry access](/docs/iam?topic=iam-mngcf) in the {{site.data.keyword.cloud_notm}} IAM documentation.
 {: shortdesc}
 
 The following table shows the Cloud Foundry roles that are required for cluster action permissions.
@@ -1028,13 +1028,13 @@ The following table shows the Cloud Foundry roles that are required for cluster 
   <tbody>
   <tr>
     <td>Space role: Manager</td>
-    <td>Manage user access to an {{site.data.keyword.Bluemix_notm}} space</td>
+    <td>Manage user access to an {{site.data.keyword.cloud_notm}} space</td>
   </tr>
   <tr>
     <td>Space role: Developer</td>
     <td>
-      <ul><li>Create {{site.data.keyword.Bluemix_notm}} service instances</li>
-      <li>Bind {{site.data.keyword.Bluemix_notm}} service instances to clusters</li>
+      <ul><li>Create {{site.data.keyword.cloud_notm}} service instances</li>
+      <li>Bind {{site.data.keyword.cloud_notm}} service instances to clusters</li>
       <li>View logs from a cluster's log forwarding configuration at the space level</li></ul>
     </td>
   </tr>
@@ -1044,7 +1044,7 @@ The following table shows the Cloud Foundry roles that are required for cluster 
 ## Infrastructure roles
 {: #infra}
 
-A user with the **Super User** infrastructure access role [sets the API key for a region and resource group](/docs/containers?topic=containers-users#api_key) so that infrastructure actions can be performed (or more rarely, [manually sets different account credentials](/docs/containers?topic=containers-users#credentials)). Then, the infrastructure actions that other users in the account can perform is authorized through {{site.data.keyword.Bluemix_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions only when you can't assign **Super User** to the user who sets the API key. For instructions to assign permissions, see [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
+A user with the **Super User** infrastructure access role [sets the API key for a region and resource group](/docs/containers?topic=containers-users#api_key) so that infrastructure actions can be performed (or more rarely, [manually sets different account credentials](/docs/containers?topic=containers-users#credentials)). Then, the infrastructure actions that other users in the account can perform is authorized through {{site.data.keyword.cloud_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions only when you can't assign **Super User** to the user who sets the API key. For instructions to assign permissions, see [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
 {: shortdesc}
 
 
@@ -1063,13 +1063,13 @@ The following table shows the infrastructure permissions that are required to co
   <strong>Minimum permissions</strong>: <ul>
   <li>Create a cluster.</li></ul></td>
 <td>
-</ul><strong>Account</strong>: <ul>
+<strong>Account</strong>: <ul>
 <li>Add Server</li></ul>
   <strong>Devices</strong>:<ul>
   <li>For bare metal worker nodes: View Hardware Details</li>
   <li>IPMI Remote Management</li>
   <li>OS Reloads and Rescue Kernel</li>
-  <li>For VM worker nodes: View Virtual Server Details</li></td>
+  <li>For VM worker nodes: View Virtual Server Details</li></ul></td>
 </tr>
 <tr>
 <td>

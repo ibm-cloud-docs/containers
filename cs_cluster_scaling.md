@@ -206,14 +206,14 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
 **Before you begin**:
 
 1.  [Install the required CLI and plug-ins](/docs/cli?topic=cloud-cli-getting-started):
-    *  {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)
+    *  {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`)
     *  {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`)
     *  {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  [Create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui) that runs **Kubernetes version 1.12 or later**.
 3.   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-4.  Confirm that your {{site.data.keyword.Bluemix_notm}} Identity and Access Management credentials are stored in the cluster. The cluster autoscaler uses this secret to authenticate credentials. If the secret is missing, [create it by resetting credentials](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
+4.  Confirm that your {{site.data.keyword.cloud_notm}} Identity and Access Management credentials are stored in the cluster. The cluster autoscaler uses this secret to authenticate credentials. If the secret is missing, [create it by resetting credentials](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```

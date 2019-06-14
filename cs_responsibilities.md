@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-14"
 
 keywords: kubernetes, iks
 
@@ -33,7 +33,7 @@ Learn about cluster management responsibilities and terms and conditions that yo
 ## Cluster management responsibilities
 {: #responsibilities}
 
-IBM provides you with an enterprise cloud platform for you to deploy apps alongside {{site.data.keyword.Bluemix_notm}} DevOps, AI, data, and security services. You choose how you set up, integrate, and operate your apps and services in the cloud.
+IBM provides you with an enterprise cloud platform for you to deploy apps alongside {{site.data.keyword.cloud_notm}} DevOps, AI, data, and security services. You choose how you set up, integrate, and operate your apps and services in the cloud.
 {:shortdesc}
 
 <table summary="The table shows the responsibilities of IBM and you. Rows are to be read from the left to right, with icons representing each responsibility in column one the description in column two.">
@@ -93,7 +93,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
       <li>Continuously monitor master and worker node images to detect vulnerability and security compliance issues.</li>
       <li>Provision worker nodes with two local SSD, AES 256-bit encrypted data partitions.</li>
       <li>Provide options for cluster network connectivity, such as public and private service endpoints.</li>
-      <li>Provide options for compute isolation, such as dedicated virtual machines, bare metal, and bare metal with Trusted Compute.</li>
+      <li>Provide options for compute isolation, such as dedicated virtual machines or bare metal.</li>
       <li>Integrate Kubernetes role-based access control (RBAC) with {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).</li>
       </ul>
       <br><br>
@@ -111,8 +111,8 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         <ul>
         <li>Provision clusters with Kubernetes components installed so that you can access the Kubernetes API.</li>
         <li>Provide a number of managed add-ons to extend your app's capabilities, such as [Istio](/docs/containers?topic=containers-istio#istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative). Maintenance is simplified for you because IBM provides the installation and updates for the managed add-ons.</li>
-        <li>Provide cluster integration with select third party partnership technologies, such as {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}}, and Portworx.</li>
-        <li>Provide automation to enable service binding to other {{site.data.keyword.Bluemix_notm}} services.</li>
+        <li>Provide cluster integration with select third-party partnership technologies, such as {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}}, and Portworx.</li>
+        <li>Provide automation to enable service binding to other {{site.data.keyword.cloud_notm}} services.</li>
         <li>Create clusters with image pull secrets so that your deployments in the `default` Kubernetes namespace can pull images from {{site.data.keyword.registrylong_notm}}.</li>
         <li>Provide storage classes and plug-ins to support persistent volumes for use with your apps.</li>
         <li>Create clusters with subnet IP addresses reserved to use to expose apps externally.</li>

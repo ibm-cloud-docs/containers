@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-04"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -68,7 +68,7 @@ You can build containers from trusted images that are signed and stored in {{sit
 2.  To enforce a policy that only signed images can be used to build containers in your cluster, [add Container Image Security Enforcement (beta)](/docs/services/Registry?topic=registry-security_enforce#security_enforce).
 3.  Deploy your app.
     1. [Deploy to the `default` Kubernetes namespace](#namespace).
-    2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.Bluemix_notm}} region or account](#other).
+    2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.cloud_notm}} region or account](#other).
 
 <br />
 
@@ -130,28 +130,28 @@ To deploy a container into the **default** namespace of your cluster:
 ## Understanding how to authorize your cluster to pull images from a registry
 {: #cluster_registry_auth}
 
-To pull images from a registry, your {{site.data.keyword.containerlong_notm}} cluster uses a special type of Kubernetes secret, an `imagePullSecret`. This image pull secret stores the credentials to access a container registry. The container registry can be your namespace in {{site.data.keyword.registrylong_notm}}, a namespace in {{site.data.keyword.registrylong_notm}} that belongs to a different {{site.data.keyword.Bluemix_notm}} account, or any other private registry such as Docker. Your cluster is set up to pull images from your namespace in {{site.data.keyword.registrylong_notm}} and deploy containers from these images to the `default` Kubernetes namespace in your cluster. If you need to pull images in other cluster Kubernetes namespaces or other registries, you must set up the image pull secret.
+To pull images from a registry, your {{site.data.keyword.containerlong_notm}} cluster uses a special type of Kubernetes secret, an `imagePullSecret`. This image pull secret stores the credentials to access a container registry. The container registry can be your namespace in {{site.data.keyword.registrylong_notm}}, a namespace in {{site.data.keyword.registrylong_notm}} that belongs to a different {{site.data.keyword.cloud_notm}} account, or any other private registry such as Docker. Your cluster is set up to pull images from your namespace in {{site.data.keyword.registrylong_notm}} and deploy containers from these images to the `default` Kubernetes namespace in your cluster. If you need to pull images in other cluster Kubernetes namespaces or other registries, you must set up the image pull secret.
 {:shortdesc}
 
 **How is my cluster set up to pull images from the `default` Kubernetes namespace?**<br>
-When you create a cluster, the cluster has an {{site.data.keyword.Bluemix_notm}} IAM service ID that is given an IAM **Reader** service access role policy to {{site.data.keyword.registrylong_notm}}. The service ID credentials are impersonated in a non-expiring API key that is stored in image pull secrets in your cluster. The image pull secrets are added to the `default` Kubernetes namespace and the list of secrets in the `default` service account for this namespace. By using image pull secrets, your deployments can pull (read-only access) images in your [global and regional registry](/docs/services/Registry?topic=registry-registry_overview#registry_regions) to build containers in the `default` Kubernetes namespace. The global registry securely stores public, IBM-provided images that you can refer to across your deployments instead of having different references for images that are stored in each regional registry. The regional registry securely stores your own private Docker images.
+When you create a cluster, the cluster has an {{site.data.keyword.cloud_notm}} IAM service ID that is given an IAM **Reader** service access role policy to {{site.data.keyword.registrylong_notm}}. The service ID credentials are impersonated in a non-expiring API key that is stored in image pull secrets in your cluster. The image pull secrets are added to the `default` Kubernetes namespace and the list of secrets in the `default` service account for this namespace. By using image pull secrets, your deployments can pull (read-only access) images in your [global and regional registry](/docs/services/Registry?topic=registry-registry_overview#registry_regions) to build containers in the `default` Kubernetes namespace. The global registry securely stores public, IBM-provided images that you can refer to across your deployments instead of having different references for images that are stored in each regional registry. The regional registry securely stores your own private Docker images.
 
 **Can I restrict pull access to a certain regional registry?**<br>
-Yes, you can [edit the existing IAM policy of the service ID](/docs/iam?topic=iam-serviceidpolicy#access_edit) that restricts the **Reader** service access role to that regional registry or a registry resource such as a namespace. Before you can customize registry IAM policies, you must [enable {{site.data.keyword.Bluemix_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
+Yes, you can [edit the existing IAM policy of the service ID](/docs/iam?topic=iam-serviceidpolicy#access_edit) that restricts the **Reader** service access role to that regional registry or a registry resource such as a namespace. Before you can customize registry IAM policies, you must [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
 
   Want to make your registry credentials even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt Kubernetes secrets in your cluster, such as the `imagePullSecret` that stores your registry credentials.
   {: tip}
 
 **Can I pull images in Kubernetes namespaces other than `default`?**<br>
-Not by default. By using the default cluster setup, you can deploy containers from any image that is stored in your {{site.data.keyword.registrylong_notm}} namespace into the `default` Kubernetes namespace of your cluster. To use these images in other Kubernetes namespaces or other {{site.data.keyword.Bluemix_notm}} accounts, [you have the option to copy or create your own image pull secret](#other).
+Not by default. By using the default cluster setup, you can deploy containers from any image that is stored in your {{site.data.keyword.registrylong_notm}} namespace into the `default` Kubernetes namespace of your cluster. To use these images in other Kubernetes namespaces or other {{site.data.keyword.cloud_notm}} accounts, [you have the option to copy or create your own image pull secret](#other).
 
-**Can I pull images from a different {{site.data.keyword.Bluemix_notm}} account?**<br>
-Yes, create an API key in the {{site.data.keyword.Bluemix_notm}} account that you want to use. Then, create an image pull secret that stores those API key credentials in each cluster and cluster namespace that you want to pull from. [Follow along with this example that uses an authorized service ID API key](#other_registry_accounts).
+**Can I pull images from a different {{site.data.keyword.cloud_notm}} account?**<br>
+Yes, create an API key in the {{site.data.keyword.cloud_notm}} account that you want to use. Then, create an image pull secret that stores those API key credentials in each cluster and cluster namespace that you want to pull from. [Follow along with this example that uses an authorized service ID API key](#other_registry_accounts).
 
-To use a non-{{site.data.keyword.Bluemix_notm}} registry such as Docker, see [Accessing images that are stored in other private registries](#private_images).
+To use a non-{{site.data.keyword.cloud_notm}} registry such as Docker, see [Accessing images that are stored in other private registries](#private_images).
 
 **Does the API key need to be for a service ID? What happens if I reach the limit of service IDs for my account?**<br>
-The default cluster setup creates a service ID to store {{site.data.keyword.Bluemix_notm}} IAM API key credentials in the image pull secret. However, you can also create an API key for an individual user and store those credentials in an image pull secret. If you reach the [IAM limit for service IDs](/docs/iam?topic=iam-iam_limits#iam_limits), your cluster is created without the service ID and image pull secret and cannot pull images from the `icr.io` registry domains by default. You must [create your own image pull secret](#other_registry_accounts), but by using an API key for an individual user such as a functional ID, not a {{site.data.keyword.Bluemix_notm}} IAM service ID.
+The default cluster setup creates a service ID to store {{site.data.keyword.cloud_notm}} IAM API key credentials in the image pull secret. However, you can also create an API key for an individual user and store those credentials in an image pull secret. If you reach the [IAM limit for service IDs](/docs/iam?topic=iam-iam_limits#iam_limits), your cluster is created without the service ID and image pull secret and cannot pull images from the `icr.io` registry domains by default. You must [create your own image pull secret](#other_registry_accounts), but by using an API key for an individual user such as a functional ID, not a {{site.data.keyword.cloud_notm}} IAM service ID.
 
 **My cluster image pull secret uses a registry token. Does a token still work?**<br>
 
@@ -177,12 +177,12 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
 **Before you begin**:
 *   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Make sure that you have the following permissions:
-    *   {{site.data.keyword.Bluemix_notm}} IAM **Operator or Administrator** platform role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running:
+    *   {{site.data.keyword.cloud_notm}} IAM **Operator or Administrator** platform role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles Administrator,Operator
         ```
         {: pre}
-    *   {{site.data.keyword.Bluemix_notm}} IAM **Administrator** platform role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The account owner can give you the role by running:
+    *   {{site.data.keyword.cloud_notm}} IAM **Administrator** platform role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The account owner can give you the role by running:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
         ```
@@ -222,18 +222,18 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
 5.  Optional: If you have a firewall, make sure you [allow outbound network traffic to the registry subnets](/docs/containers?topic=containers-firewall#firewall_outbound) for the domains that you use.
 
 **What's next?**
-*   To pull images in Kubernetes namespaces other than `default` or from other {{site.data.keyword.Bluemix_notm}} accounts, [copy or create another image pull secret](/docs/containers?topic=containers-images#other).
+*   To pull images in Kubernetes namespaces other than `default` or from other {{site.data.keyword.cloud_notm}} accounts, [copy or create another image pull secret](/docs/containers?topic=containers-images#other).
 *   To restrict the image pull secret access to particular registry resources such as namespaces or regions:
-    1.  Make sure that [{{site.data.keyword.Bluemix_notm}} IAM policies for {{site.data.keyword.registrylong_notm}} are enabled](/docs/services/Registry?topic=registry-user#existing_users).
-    2.  [Edit the {{site.data.keyword.Bluemix_notm}} IAM policies](/docs/iam?topic=iam-serviceidpolicy#access_edit) for the service ID, or [create another image pull secret](/docs/containers?topic=containers-images#other_registry_accounts).
+    1.  Make sure that [{{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}} are enabled](/docs/services/Registry?topic=registry-user#existing_users).
+    2.  [Edit the {{site.data.keyword.cloud_notm}} IAM policies](/docs/iam?topic=iam-serviceidpolicy#access_edit) for the service ID, or [create another image pull secret](/docs/containers?topic=containers-images#other_registry_accounts).
 
 <br />
 
 
-## Using an image pull secret to access other cluster Kubernetes namespaces, other {{site.data.keyword.Bluemix_notm}} accounts, or external private registries
+## Using an image pull secret to access other cluster Kubernetes namespaces, other {{site.data.keyword.cloud_notm}} accounts, or external private registries
 {: #other}
 
-Set up your own image pull secret in your cluster to deploy containers to Kubernetes namespaces other than `default`, use images that are stored in other {{site.data.keyword.Bluemix_notm}} accounts, or use images that are stored in external private registries. Further, you might create your own image pull secret to apply IAM access policies that restrict permissions to specific registry image namespaces, or actions (such as `push` or `pull`).
+Set up your own image pull secret in your cluster to deploy containers to Kubernetes namespaces other than `default`, use images that are stored in other {{site.data.keyword.cloud_notm}} accounts, or use images that are stored in external private registries. Further, you might create your own image pull secret to apply IAM access policies that restrict permissions to specific registry image namespaces, or actions (such as `push` or `pull`).
 {:shortdesc}
 
 After you create the image pull secret, your containers your containers must use the secret to be authorized to pull an image from the registry. You can add the image pull secret to the service account for the namespace, or refer to the secret in each deployment. For instructions, see [Using the image pull secret to deploy containers](/docs/containers?topic=containers-images#use_imagePullSecret).
@@ -251,7 +251,7 @@ Before you begin:
 <br/>
 To use your own image pull secret, choose among the following options:
 - [Copy the image pull secret](#copy_imagePullSecret) from the default Kubernetes namespace to other namespaces in your cluster.
-- [Create new IAM API key credentials and store them in an image pull secret](#other_registry_accounts) to access images in other {{site.data.keyword.Bluemix_notm}} accounts or to apply IAM policies that restrict access to certain registry domains or namespaces.
+- [Create new IAM API key credentials and store them in an image pull secret](#other_registry_accounts) to access images in other {{site.data.keyword.cloud_notm}} accounts or to apply IAM policies that restrict access to certain registry domains or namespaces.
 - [Create an image pull secret to access images in external private registries](#private_images).
 
 <br/>
@@ -260,7 +260,7 @@ If you already created an image pull secret in your namespace that you want to u
 ### Copying an existing image pull secret
 {: #copy_imagePullSecret}
 
-You can copy an image pull secret, such as the one that is automatically created for the `default` Kubernetes namespace, to other namespaces in your cluster. If you want to use different {{site.data.keyword.Bluemix_notm}} IAM API key credentials for this namespace such as to restrict access to specific namespaces, or to pull images from other {{site.data.keyword.Bluemix_notm}} accounts, [create an image pull secret](#other_registry_accounts) instead.
+You can copy an image pull secret, such as the one that is automatically created for the `default` Kubernetes namespace, to other namespaces in your cluster. If you want to use different {{site.data.keyword.cloud_notm}} IAM API key credentials for this namespace such as to restrict access to specific namespaces, or to pull images from other {{site.data.keyword.cloud_notm}} accounts, [create an image pull secret](#other_registry_accounts) instead.
 {: shortdesc}
 
 1.  List available Kubernetes namespaces in your cluster, or create a namespace to use.
@@ -332,15 +332,15 @@ You can copy an image pull secret, such as the one that is automatically created
     {: pre}
 5.  [Add the image pull secret to a Kubernetes service account so that any pod in the namespace can use the image pull secret when you deploy a container](#use_imagePullSecret).
 
-### Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.Bluemix_notm}} accounts
+### Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.cloud_notm}} accounts
 {: #other_registry_accounts}
 
-You can assign {{site.data.keyword.Bluemix_notm}} IAM access policies to users or a service ID to restrict permissions to specific registry image namespaces or actions (such as `push` or `pull`). Then, create an API key and store these registry credentials in an image pull secret for your cluster.
+You can assign {{site.data.keyword.cloud_notm}} IAM access policies to users or a service ID to restrict permissions to specific registry image namespaces or actions (such as `push` or `pull`). Then, create an API key and store these registry credentials in an image pull secret for your cluster.
 {: shortdesc}
 
-For example, to access images in other {{site.data.keyword.Bluemix_notm}} accounts, create an API key that stores the {{site.data.keyword.registryshort_notm}} credentials of a user or service ID in that account. Then, in your cluster's account, save the API key credentials in an image pull secret for each cluster and cluster namespace.
+For example, to access images in other {{site.data.keyword.cloud_notm}} accounts, create an API key that stores the {{site.data.keyword.registryshort_notm}} credentials of a user or service ID in that account. Then, in your cluster's account, save the API key credentials in an image pull secret for each cluster and cluster namespace.
 
-The following steps create an API key that stores the credentials of an {{site.data.keyword.Bluemix_notm}} IAM service ID. Instead of using a service ID, you might want to create an API key for a user ID that has an {{site.data.keyword.Bluemix_notm}} IAM service access policy to {{site.data.keyword.registryshort_notm}}. However, make sure that the user is a functional ID or have a plan in case the user leaves so that the cluster can still access the registry.
+The following steps create an API key that stores the credentials of an {{site.data.keyword.cloud_notm}} IAM service ID. Instead of using a service ID, you might want to create an API key for a user ID that has an {{site.data.keyword.cloud_notm}} IAM service access policy to {{site.data.keyword.registryshort_notm}}. However, make sure that the user is a functional ID or have a plan in case the user leaves so that the cluster can still access the registry.
 {: note}
 
 1.  List available Kubernetes namespaces in your cluster, or create a namespace to use where you want to deploy containers from your registry images.
@@ -365,12 +365,12 @@ The following steps create an API key that stores the credentials of an {{site.d
     kubectl create namespace <namespace_name>
     ```
     {: pre}
-2.  Create an {{site.data.keyword.Bluemix_notm}} IAM service ID for your cluster that is used for the IAM policies and API key credentials in the image pull secret. Be sure to give the service ID a description that helps you retrieve the service ID later, such as including both the cluster and namespace name.
+2.  Create an {{site.data.keyword.cloud_notm}} IAM service ID for your cluster that is used for the IAM policies and API key credentials in the image pull secret. Be sure to give the service ID a description that helps you retrieve the service ID later, such as including both the cluster and namespace name.
     ```
     ibmcloud iam service-id-create <cluster_name>-<kube_namespace>-id --description "Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>"
     ```
     {: pre}
-3.  Create a custom {{site.data.keyword.Bluemix_notm}} IAM policy for your cluster service ID that grants access to {{site.data.keyword.registryshort_notm}}.
+3.  Create a custom {{site.data.keyword.cloud_notm}} IAM policy for your cluster service ID that grants access to {{site.data.keyword.registryshort_notm}}.
     ```
     ibmcloud iam service-policy-create <cluster_service_ID> --roles <service_access_role> --service-name container-registry [--region <IAM_region>] [--resource-type namespace --resource <registry_namespace>]
     ```
@@ -572,7 +572,7 @@ When you refer to the image pull secret in a pod deployment, the image pull secr
     ```
     {: codeblock}
 
-    To access an {{site.data.keyword.Bluemix_notm}} public image:
+    To access an {{site.data.keyword.cloud_notm}} public image:
     ```
     apiVersion: v1
     kind: Pod
@@ -603,7 +603,7 @@ When you refer to the image pull secret in a pod deployment, the image pull secr
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>The name of the image to use. To list available images in an {{site.data.keyword.Bluemix_notm}} account, run `ibmcloud cr image-list`.</td>
+    <td>The name of the image to use. To list available images in an {{site.data.keyword.cloud_notm}} account, run `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -702,10 +702,10 @@ This method of using a token to authorize cluster access to {{site.data.keyword.
 Depending on where the image is and where the container is, you must deploy containers by following different steps.
 *   [Deploy a container to the `default` Kubernetes namespace with an image that is in the same region as your cluster](#token_default_namespace)
 *   [Deploy a container to a different Kubernetes namespace than `default`](#token_copy_imagePullSecret)
-*   [Deploy a container with an image that is in a different region or {{site.data.keyword.Bluemix_notm}} account than your cluster](#token_other_regions_accounts)
+*   [Deploy a container with an image that is in a different region or {{site.data.keyword.cloud_notm}} account than your cluster](#token_other_regions_accounts)
 *   [Deploy a container with an image that is from a private, non-IBM registry](#private_images)
 
-By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.Bluemix_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.Bluemix_notm}} region or in another {{site.data.keyword.Bluemix_notm}} account, you must [create your own image pull secret for your cluster](#other).
+By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.cloud_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.cloud_notm}} region or in another {{site.data.keyword.cloud_notm}} account, you must [create your own image pull secret for your cluster](#other).
 {: note}
 
 ### Deprecated: Deploying images to the `default` Kubernetes namespace with a registry token
@@ -812,14 +812,14 @@ You can copy the image pull secret with registry token credentials that is autom
 5. [Deploy a container by using the `imagePullSecret`](#use_imagePullSecret) in your namespace.
 
 
-### Deprecated: Creating a token-based image pull secret to access images in other {{site.data.keyword.Bluemix_notm}} regions and accounts
+### Deprecated: Creating a token-based image pull secret to access images in other {{site.data.keyword.cloud_notm}} regions and accounts
 {: #token_other_regions_accounts}
 
-To access images in other {{site.data.keyword.Bluemix_notm}} regions or accounts, you must create a registry token and save your credentials in an image pull secret.
+To access images in other {{site.data.keyword.cloud_notm}} regions or accounts, you must create a registry token and save your credentials in an image pull secret.
 {: shortdesc}
 
 1.  If you do not have a token, [create a token for the registry that you want to access.](/docs/services/Registry?topic=registry-registry_access#registry_tokens_create)
-2.  List tokens in your {{site.data.keyword.Bluemix_notm}} account.
+2.  List tokens in your {{site.data.keyword.cloud_notm}} account.
 
     ```
     ibmcloud cr token-list

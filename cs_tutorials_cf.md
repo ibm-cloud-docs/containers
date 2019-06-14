@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -54,7 +54,7 @@ This tutorial is intended for Cloud Foundry app developers.
 - [Create a private image registry in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started).
 - [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
+- Ensure you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
     - [Any platform role](/docs/containers?topic=containers-users#platform)
     - The [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform)
 - [Learn about Docker and Kubernetes terminology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
@@ -287,7 +287,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
 5.  [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
-    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
+    If you select your cluster in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
 
 6. In the **Workloads** tab, you can see the resources that you created.

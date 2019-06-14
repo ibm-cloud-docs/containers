@@ -31,9 +31,9 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Tutorials
+        cs_tutorials_ov.md
         cs_tutorials.md
         cs_tutorial_rhos.md
-        cs_tutorials_apps.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
         [Tutorial: Move a VM-based application to Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
@@ -114,15 +114,22 @@ IBM Cloud Kubernetes Service
     cs_hybrid.md
 
     {: .topicgroup}
-    IBM Cloud Kubernetes Service CLI plug-in reference
+    CLI plug-in reference
         /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
 
     {: .topicgroup}
-    IBM Cloud Kubernetes Service versions
+    Version history
         cs_versions.md
         cs_versions_changelog.md
         cs_versions_addons.md
+
+    {: .topicgroup}
+    API reference
+        [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/)
+        [IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
+        [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
+        [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
 
     cs_regions.md
     cs_integrations_overview.md
@@ -142,7 +149,8 @@ IBM Cloud Kubernetes Service
         cs_troubleshoot_network.md
 
     release_notes.md
-    cs_rellinks.md
     cs_sitemap.md
     {: .navgroup-end}
 
+    cs_tutorials_apps.md
+    cs_rellinks.md

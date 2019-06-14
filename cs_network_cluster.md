@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -42,7 +42,7 @@ Did you create a cluster with only a private service endpoint before you enabled
 {: tip}
 
 1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure (SoftLayer) account.
-2. [Enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
 3. Enable the private service endpoint.
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -65,7 +65,7 @@ Did you create a cluster with only a private service endpoint before you enabled
 
 8. If the cluster is in an environment behind a firewall:
   * [Allow your authorized cluster users to run `kubectl` commands to access the master through the private service endpoint.](/docs/containers?topic=containers-firewall#firewall_kubectl)
-  * [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.Bluemix_notm}} services that you plan to use.
+  * [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
 9. Optional: To use the private service endpoint only, disable the public service endpoint.
    ```
@@ -139,7 +139,7 @@ All clusters that are connected to a public and a private VLAN use the public se
 Note that you cannot disable the private service endpoint after you enable it.
 
 1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure (SoftLayer) account.
-2. [Enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
 3. Enable the private service endpoint.
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -216,7 +216,7 @@ To change the VLANs that a worker pool uses to provision worker nodes:
      ```
      {: screen}
 
-  3. If you need to order a new public or private VLAN for the zone, you can order in the [{{site.data.keyword.Bluemix_notm}} console](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans), or use the following command. Remember that the VLANs must be compatible, with matching **Router** pod IDs as in the previous step. If you are creating a pair of new public and private VLANs, they must be compatible with each other.
+  3. If you need to order a new public or private VLAN for the zone, you can order in the [{{site.data.keyword.cloud_notm}} console](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans), or use the following command. Remember that the VLANs must be compatible, with matching **Router** pod IDs as in the previous step. If you are creating a pair of new public and private VLANs, they must be compatible with each other.
      ```
      ibmcloud sl vlan create -t [public|private] -d <zone> -r <compatible_router>
      ```

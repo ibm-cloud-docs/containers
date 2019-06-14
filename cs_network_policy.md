@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-13"
 
 keywords: kubernetes, iks
 
@@ -101,7 +101,7 @@ Do not remove policies that are applied to a host endpoint unless you fully unde
   </tbody>
 </table>
 
-A default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to clusters connected only to a private VLAN and clusters connected to a public and private VLAN.
+A default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to clusters that are connected only to a private VLAN and clusters that are connected to a public and private VLAN.
 
 <table>
 <caption>Default Kubernetes policies for each cluster</caption>
@@ -111,7 +111,7 @@ A default Kubernetes policy that limits access to the Kubernetes Dashboard is al
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td>Provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} console or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
+  <td>Provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.cloud_notm}} console or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
  </tr>
 </tbody>
 </table>
@@ -147,7 +147,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
 
 4. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases).
 
-    If you are using OS X, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some file path changes when you run commands later. Make sure to save the file as `calicoctl.exe`.
+    If you are using OS X, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later. Make sure to save the file as `calicoctl.exe`.
     {: tip}
 
 5. For OS X and Linux users, complete the following steps.
@@ -441,7 +441,7 @@ policy changes to be applied throughout the cluster.
 ## Isolating clusters on the private network
 {: #isolate_workers}
 
-If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must enable a VRF or VLAN spanning so that your worker nodes can communicate with each other on the private network. However, when VRF or VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.Bluemix_notm}} account can communicate with workers.
+If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must enable a VRF or VLAN spanning so that your worker nodes can communicate with each other on the private network. However, when VRF or VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with workers.
 {: shortdesc}
 
 You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). This set of Calico policies and host endpoints isolates the private network traffic of a cluster from other resources in the account's private network.
@@ -489,7 +489,7 @@ To isolate your cluster on the private network using Calico policies:
       ```
       {: pre}
     3. Replace `<worker-node-private-ip>` with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`.
-    4. Repeat this set of steps in a new section for each worker node in your cluster. **Note**: Each time you add a worker node to a cluster, you must update the host endpoints file with the new entries.
+    4. Repeat this set of steps in a new section for each worker node in your cluster. **Note**: Each time that you add a worker node to a cluster, you must update the host endpoints file with the new entries.
 
 4. Apply all of the policies to your cluster.
     - Linux and OS X:
@@ -589,7 +589,7 @@ Traffic can now flow from the front end to the back end, and from the back end t
 
 The following scenario demonstrates how to manage traffic between app microservices across multiple namespaces.
 
-Services owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Accounts team deploys front end, back end, and database services for the app Srv1 in the accounts namespace. The Finance team deploys front end, back end, and database services for the app Srv2 in the finance namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: accounts` or `usage: finance` label.
+Services that are owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Accounts team deploys front end, back end, and database services for the app Srv1 in the accounts namespace. The Finance team deploys front end, back end, and database services for the app Srv2 in the finance namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: accounts` or `usage: finance` label.
 
 <img src="images/cs_network_policy_multi_ns.png" width="475" alt="Use a network policy to manage cross-namepsace traffic." style="width:475px; border-style: none"/>
 
@@ -647,7 +647,7 @@ Before you begin:
 To log denied traffic:
 
 1. Create or use an existing Kubernetes network policy that blocks or limits incoming traffic.
-  1. Create a Kubernetes network policy. For example, to control traffic between pods, you might use the following example Kubernetes policy named `access-nginx` that limits access to an NGINX app. Incoming traffic to pods that are labeled "run=nginx" is allowed only from pods with the "run=access" label. All other incoming traffic to the "run=nginx" app pods is blocked.
+  1. Create a Kubernetes network policy. For example, to control traffic between pods, you might use the following example Kubernetes policy that is named `access-nginx` that limits access to an NGINX app. Incoming traffic to pods that are labeled "run=nginx" is allowed only from pods with the "run=access" label. All other incoming traffic to the "run=nginx" app pods is blocked.
     ```
     kind: NetworkPolicy
     apiVersion: networking.k8s.io/v1
@@ -734,7 +734,7 @@ To log denied traffic:
    </tr>
    <tr>
     <td><code>order</code></td>
-    <td>Calico policies have orders that determine when they are applied to incoming request packets. Policies with lower orders, such as <code>1000</code>, are applied first. Policies with higher orders are applied after the lower-order policies. For example, a policy with a very high order, such as <code>3000</code>, is effectively applied last after all the lower-order policies have been applied.</br></br>Incoming request packets go through the Iptables rules chain and try to match rules from lower-order policies first. If a packet matches any rule, the packet is accepted. However, if a packet doesn't match any rule, it arrives at the last rule in the Iptables rules chain with the highest order. To make sure this is the last policy in the chain, use a much higher order, such as <code>3000</code>, than the policy you created in step 1.</td>
+    <td>Calico policies have orders that determine when they are applied to incoming request packets. Policies with lower orders, such as <code>1000</code>, are applied first. Policies with higher orders are applied after the lower-order policies. For example, a policy with a very high order, such as <code>3000</code>, is effectively applied last after all the lower-order policies have been applied.</br></br>Incoming request packets go through the Iptables rules chain and try to match rules from lower-order policies first. If a packet matches any rule, the packet is accepted. However, if a packet doesn't match any rule, it arrives at the last rule in the Iptables rules chain with the highest order. To make sure that this policy is the last policy in the chain, use a much higher order, such as <code>3000</code>, than the policy you created in step 1.</td>
    </tr>
   </tbody>
   </table>
@@ -747,7 +747,7 @@ To log denied traffic:
 
 4. Generate log entries by sending requests that are not allowed by the policy that you created in step 1. For example, try to ping the pod that is protected by the network policy from a pod or an IP address that is not permitted.
 
-5. Check for log entries that are written to the `/var/log/syslog` path. Note that the DST (destination) or SRC (source) IP addresses in the log entry might be different than expected due to proxies, Network Address Translation (NAT), and other networking processes. The log entry looks similar to the following.
+5. Check for log entries that are written to the `/var/log/syslog` path. The DST (destination) or SRC (source) IP addresses in the log entry might be different than expected due to proxies, Network Address Translation (NAT), and other networking processes. The log entry looks similar to the following.
   ```
   Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
   ```
