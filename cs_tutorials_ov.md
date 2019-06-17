@@ -27,7 +27,85 @@ subcollection: containers
 {: #tutorials-ov}
 
 <style>
-
+<!--
+    #tutorials { /* hide the page header */
+        display: none !important
+    }
+    .allCategories {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+    }
+    .solutionBoxContainer {}
+    .solutionBoxContainer a {
+        text-decoration: none !important;
+        border: none !important;
+    }
+    .solutionBox {
+        display: inline-block !important;
+        width: 600px !important;
+        margin: 0 10px 20px 0 !important;
+        padding: 10px !important;
+        border: 1px #dfe6eb solid !important;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
+    }
+    @media screen and (min-width: 960px) {
+        .solutionBox {
+        width: 27% !important;
+        }
+        .solutionBoxContent {
+        height: 320px !important;
+        }
+    }
+    @media screen and (min-width: 1298px) {
+        .solutionBox {
+        width: calc(33% - 2%) !important;
+        }
+        .solutionBoxContent {
+        min-height: 320px !important;
+        }
+    }
+    .solutionBox:hover {
+        border-color: rgb(136, 151, 162) !important;
+    }
+    .solutionBoxContent {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .solutionBoxDescription {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .descriptionContainer {
+    }
+    .descriptionContainer p {
+        margin: 2px !important;
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 4 !important;
+        -webkit-box-orient: vertical !important;
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        letter-spacing: 0 !important;
+        max-height: 70px !important;
+    }
+    .architectureDiagramContainer {
+        flex-grow: 1 !important;
+        min-width: 200px !important;
+        padding: 0 10px !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+    .architectureDiagram {
+        max-height: 170px !important;
+        padding: 5px !important;
+        margin: 0 auto !important;
+    }
+-->
 </style>
 
 
@@ -304,6 +382,7 @@ subcollection: containers
     </div>
     </a>
 </div>
+
 
 ## Migrate apps to the cloud 
 {: #tutorials-ov-migrate-apps}
