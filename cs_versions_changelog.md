@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-17"
 
 keywords: kubernetes, iks
 
@@ -49,6 +49,74 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for 1.14.3_1523, released 17 June 2019
+{: #1143_1523}
+
+The following table shows the changes that are included in the patch 1.14.3_1523.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.2_1521">
+<caption>Changes since version 1.14.2_1521</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>32257d3</td>
+<td>5d34347</td>
+<td>Updated image for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457). Updated the GPU drivers to [430.14 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/147582/).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>346</td>
+<td>347</td>
+<td>Updated so that the IAM API key can be either encrypted or unencrypted.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.14.2-100</td>
+<td>v1.14.3-113</td>
+<td>Updated to support the Kubernetes 1.14.3 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.2</td>
+<td>v1.14.3</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3).</td>
+</tr>
+<tr>
+<td>Kubernetes feature gates configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added the `SupportNodePidsLimit=true` configuration to reserve process IDs (PIDs) for use by the operating system and Kubernetes components. Added the `CustomCPUCFSQuotaPeriod=true` configuration to mitigate CPU throttling problems.</td>
+</tr>
+<tr>
+<td>Public service endpoint for Kubernetes master</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed an issue to [enable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-148-generic</td>
+<td>4.4.0-150-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-50-generic</td>
+<td>4.15.0-51-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.14.2_1521, released 4 June 2019
 {: #1142_1521}
@@ -289,6 +357,67 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+### Changelog for 1.13.7_1526, released 17 June 2019
+{: #1137_1526}
+
+The following table shows the changes that are included in the patch 1.13.7_1526.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.6_1524">
+<caption>Changes since version 1.13.6_1524</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>32257d3</td>
+<td>5d34347</td>
+<td>Updated image for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457). Updated the GPU drivers to [430.14 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/147582/).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>346</td>
+<td>347</td>
+<td>Updated so that the IAM API key can be either encrypted or unencrypted.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.13.6-139</td>
+<td>v1.13.7-162</td>
+<td>Updated to support the Kubernetes 1.13.7 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.6</td>
+<td>v1.13.7</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.7).</td>
+</tr>
+<td>Public service endpoint for Kubernetes master</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed an issue to [enable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-148-generic</td>
+<td>4.4.0-150-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-50-generic</td>
+<td>4.15.0-51-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.13.6_1524, released 4 June 2019
 {: #1136_1524}
@@ -972,6 +1101,55 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for 1.12.9_1557, released 17 June 2019
+{: #1129_1557}
+
+The following table shows the changes that are included in the patch 1.12.9_1557.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.9_1555">
+<caption>Changes since version 1.12.9_1555</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>32257d3</td>
+<td>5d34347</td>
+<td>Updated image for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457). Updated the GPU drivers to [430.14 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/147582/).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>346</td>
+<td>347</td>
+<td>Updated so that the IAM API key can be either encrypted or unencrypted.</td>
+</tr>
+<td>Public service endpoint for Kubernetes master</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed an issue to [enable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-148-generic</td>
+<td>4.4.0-150-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-50-generic</td>
+<td>4.15.0-51-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.12.9_1555, released 4 June 2019
 {: #1129_1555}
@@ -1983,6 +2161,38 @@ Review the version 1.11 changelog.
 
 Kubernetes version 1.11 is deprecated and becomes unsupported on 27 June 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019
+{: #11110_1562}
+
+The following table shows the changes that are included in the worker node patch 1.11.10_1562.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.10_1561">
+<caption>Changes since version 1.11.10_1561</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-148-generic</td>
+<td>4.4.0-150-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-50-generic</td>
+<td>4.15.0-51-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.10_1561, released 4 June 2019
 {: #11110_1561}
