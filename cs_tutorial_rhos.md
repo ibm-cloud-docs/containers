@@ -784,7 +784,6 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
 **Add-ons, integrations, and other services**:
 *   {{site.data.keyword.containerlong_notm}} add-ons such as Istio, Knative, and the Kubernetes terminal are not available.
 *   Helm charts are not certified to work in OpenShift clusters, except {{site.data.keyword.cloud_notm}} Object Storage.
-*   Clusters are not deployed with image pull secrets for {{site.data.keyword.registryshort_notm}} `icr.io` domains. You can [create your own image pull secrets](/docs/containers?topic=containers-images#other_registry_accounts), or instead use the built-in Docker registry for OpenShift clusters.
 
 **Apps**:
 *   OpenShift sets up stricter security settings by default than native Kubernetes. For more information, see the OpenShift docs for [Managing Security Context Contraints (SCC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
