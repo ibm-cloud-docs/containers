@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-06-17"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -756,7 +756,30 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
 *   Because of the way that {{site.data.keyword.cloud_notm}} NFS file storage configures Linux user permissions, you might encounter errors when you use file storage. If so, you might need to configure [OpenShift Security Context Contraints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html) or use a different storage type.
 
 **Networking**:
-*   Calico is used as the networking policy provider instead of OpenShift SDN.
+*   Calico is used as the networking policy provider instead of OpenShift SDN. To use Calico, you must download and edit the configuration file to use the master endpoint.
+    1.  Download the Calico configuration file for your cluster. Note the file path in the output.
+        ```
+        ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --network
+        ```
+        {: pre}
+        
+        Example output:
+        ```
+        The configuration for <cluster_name> was downloaded successfully.
+
+        Network Config:
+
+        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/calicoctl.cfg
+        ```
+        {: screen}
+    2.  Open the `calicoctl.cfg` file. In the `etcdEndpoints` field, remove the `-e` in the endpoint URL. For example, change `https://c1-e.<region>.containers.cloud.ibm.com:20357` to `https://c1.<region>.containers.cloud.ibm.com:20357`.
+    3.  Save the `calicoctl.cfg` file.
+    4.  Verify that Calico can connect to the cluster by listing the worker nodes. Depending on how Calico is set up on your operating system, you might need to include the file path to your `calicoctl.cfg` file in the `--config` flag.
+        ```
+        calicoctl get nodes --config <filepath_to_calicoctl.cfg>
+        ```
+        {: pre}
+    5.  Repeat these steps each time that you need to download the Calico configuration file.
 
 **Add-ons, integrations, and other services**:
 *   {{site.data.keyword.containerlong_notm}} add-ons such as Istio, Knative, and the Kubernetes terminal are not available.
