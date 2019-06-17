@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-17"
 
 keywords: kubernetes, iks
 
@@ -47,8 +47,14 @@ In all other cases, follow the instructions to check the status of your PVC, PV,
 **Am I still charged for storage after I delete it?**</br>
 It depends on what you delete and the billing type. If you delete the PVC and PV, but not the instance in your IBM Cloud infrastructure (SoftLayer) account, that instance still exists and you are charged for it. You must delete everything to avoid charges. Further, when you specify the `billingType` in the PVC, you can choose `hourly` or `monthly`. If you chose `monthly`, your instance is billed monthly. When you delete the instance, you are charged for the remainder of the month.
 
+When you cancel the persistent storage instance from the IBM Cloud infrastructure (SoftLayer) console or the `ibmcloud sl` CLI, billing is stopped as follows: 
+- **Hourly storage**: Billing is stopped immediately. After your storage is canceled, you might still see your storage instance in the console for up to 72 hours.  
+- **Monthly storage**: You can choose between **immediate cancellation** or **cancellation on the anniversary date**. If you choose immediate cancellation, your storage is immediately removed and you cannot use your storage anymore. If you choose to cancel your storage on the next anniversary date, your storage instances remain active until the next anniversary date and you can continue to use them until this date. In both cases, billing is stopped for the next billing cycle, but you are still billed until the end of the current billing cycle. After your storage is canceled, you might still see your storage instance in the console for up to 72 hours.  
 
-<p class="important">When you clean up persistent storage, you delete all the data that is stored in it. If you need a copy of the data, make a backup for [file storage](/docs/containers?topic=containers-file_storage#file_backup_restore) or [block storage](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
+<p class="important">When you clean up persistent storage, you delete all the data that is stored in it. If you need a copy of the data, make a backup for [file storage](/docs/containers?topic=containers-file_storage#file_backup_restore) or [block storage](/docs/containers?topic=containers-block_storage#block_backup_restore).  </p>
+
+**I deleted my storage. Why can I still see my instances?** </br>
+After you remove persistent storage, it can take up to 72 hours for the removal to be fully processed and for the storage to disappear from your IBM Cloud infrastructure (SoftLayer) console or CLI. 
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -180,7 +186,10 @@ To clean up persistent data:
    ```
    {: pre}
 
-9. Verify that the physical storage instance is removed. The deletion process might take up to a few days to complete.
+9. Verify that the physical storage instance is removed. 
+   
+   The deletion process might take up to 72 hours to complete.
+   {: important}
 
    **File storage:**
    ```
