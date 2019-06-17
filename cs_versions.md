@@ -152,7 +152,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.11](#cs_v111)</td>
   <td>14 Aug 2018</td>
-  <td>17 Jul 2019 `†`</td>
+  <td>18 Jul 2019 `†`</td>
 </tr>
 <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -523,7 +523,7 @@ The following table shows the actions that you must take after you update the Ku
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.11.
 {: shortdesc}
 
-Kubernetes version 1.11 is deprecated and becomes unsupported on 17 July 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
+Kubernetes version 1.11 is deprecated and becomes unsupported on 18 July 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
 {: deprecated}
 
 Before you can successfully update a cluster from Kubernetes version 1.9 or earlier to version 1.11, you must follow the steps listed in [Preparing to update to Calico v3](#111_calicov3).
