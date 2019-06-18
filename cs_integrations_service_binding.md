@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-17"
+lastupdated: "2019-06-18"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -48,7 +48,7 @@ Yes. To use your existing service credentials, specify the `--key` flag in the `
 **What if I want to use service credentials that use the private service endpoint?**</br>
 By default, the `ibmcloud ks cluster-service-bind` command creates service credentials with the public service endpoint. To use the private service endpoint, you must manually create service credentials for your service that use the private service endpoint, and then use the `--key` option to specify the name of the existing service credentials.  
 
-Your service might not yet support private service endpoints. If you have a private-only cluster, you must use service credentials that use the private service endpoint, or open up the IP address and port to connect to your service. 
+Your service might not yet support private service endpoints. If you have a private-only cluster, you must use service credentials that use the private service endpoint, or open up the public IP address and port to connect to your service. 
 
 **Can I use all {{site.data.keyword.cloud_notm}} services in my cluster?**</br>
 You can use service binding only for services that support service keys so that the service credentials can automatically be created and stored in a Kubernetes secret. To find a list of services that support service keys, see [Enabling external apps to use {{site.data.keyword.cloud_notm}} services](/docs/resources?topic=resources-externalapp#externalapp).
