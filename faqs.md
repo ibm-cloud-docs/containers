@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-17"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -125,8 +125,8 @@ For more information about available bare metal flavors and how bare metal is di
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
-*   Latest: 1.14.2
-*   Default: 1.13.6
+*   Latest: 1.14.3
+*   Default: 1.13.7
 *   Other: 1.12.9
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
@@ -231,7 +231,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 </dl>
 <br><br>
 
-Monthly resources are billed based upon the first of the month for usage in the preceding month. If you order a monthly resource in the middle of the month, you are charged a prorated amount for that month. However, if you cancel a resource in the middle of the month, you are still charged the full amount for the monthly resource.
+Monthly resources are billed based upon the first of the month for usage in the preceding month. If you order a monthly resource in the middle of the month, you are charged a prorated amount for that month. However, if you cancel a resource in the middle of the month, you are still charged the full amount for the monthly resource. 
 {: note}
 
 ## Are my platform and infrastructure resources consolidated in one bill?

@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-06-17"
 
 ---
 
@@ -134,6 +134,7 @@ lastupdated: "2019-06-14"
 * [Automate app and cluster deployments](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-app-cluster-deployments)
 * [Monitor and log cluster activity](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-monitor-log)
 * [Migrate apps to the cloud](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-migrate-apps)
+
 [Tutorial: Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 * [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
 * [Time required](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_time)
@@ -147,6 +148,27 @@ lastupdated: "2019-06-14"
   * [Lesson 5a: Deploying the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
   * [Lesson 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
+
+[Tutorial: Creating a Red Hat OpenShift on IBM Cloud cluster (beta)](/docs/containers?topic=containers-openshift_tutorial)
+* [Objectives](/docs/containers?topic=containers-openshift_tutorial#openshift_objectives)
+* [Time required](/docs/containers?topic=containers-openshift_tutorial#openshift_time)
+* [Audience](/docs/containers?topic=containers-openshift_tutorial#openshift_audience)
+* [Prerequisites](/docs/containers?topic=containers-openshift_tutorial#openshift_prereqs)
+* [Architectural overview](/docs/containers?topic=containers-openshift_tutorial#openshift_architecture)
+* [Lesson 1: Creating a Red Hat OpenShift on IBM Cloud cluster](/docs/containers?topic=containers-openshift_tutorial#openshift_create_cluster)
+  * [Creating a cluster with the console](/docs/containers?topic=containers-openshift_tutorial#openshift_create_cluster_console)
+  * [Creating a cluster with the CLI](/docs/containers?topic=containers-openshift_tutorial#openshift_create_cluster_cli)
+* [Lesson 2: Accessing built-in OpenShift services](/docs/containers?topic=containers-openshift_tutorial#openshift_access_oc_services)
+  * [Accessing built-in OpenShift services from the console](/docs/containers?topic=containers-openshift_tutorial#openshift_services_console)
+  * [Accessing built-in OpenShift services from the CLI](/docs/containers?topic=containers-openshift_tutorial#openshift_services_cli)
+* [Lesson 3: Deploying an app to your OpenShift cluster](/docs/containers?topic=containers-openshift_tutorial#openshift_deploy_app)
+* [Lesson 4: Setting up LogDNA and Sysdig add-ons to monitor cluster health](/docs/containers?topic=containers-openshift_tutorial#openshift_logdna_sysdig)
+  * [Lesson 4a: Setting up LogDNA](/docs/containers?topic=containers-openshift_tutorial#openshift_logdna)
+  * [Lesson 4b: Setting up Sysdig](/docs/containers?topic=containers-openshift_tutorial#openshift_sysdig)
+  * [Optional: Cleaning up](/docs/containers?topic=containers-openshift_tutorial#openshift_logdna_sysdig_cleanup)
+* [Limitations](/docs/containers?topic=containers-openshift_tutorial#openshift_limitations)
+* [What's next?](/docs/containers?topic=containers-openshift_tutorial#openshift_next)
+* [Feedback and questions](/docs/containers?topic=containers-openshift_tutorial#openshift_support)
 
 [Tutorial: Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
 * [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
@@ -776,11 +798,6 @@ lastupdated: "2019-06-14"
       * [Configuring public access to an app by using Ingress](/docs/containers?topic=containers-dedicated#dedicated_apps_public_ingress)
   * [Creating persistent storage](/docs/containers?topic=containers-dedicated#dedicated_apps_volume_claim)
 
-## Deprecated: Running single and scalable containers
-{: #sitemap-singlescalable}
-
-[Deprecated: Running single and scalable containers](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
-
 ## Hybrid cloud
 {: #sitemap-hybrid}
 
@@ -788,7 +805,7 @@ lastupdated: "2019-06-14"
 * [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
 * [Running {{site.data.keyword.icpfull_notm}} images in public Kubernetes containers](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
-## {{site.data.keyword.containerlong_notm}} CLI plug-in reference
+## CLI plug-in reference
 {: #sitemap-cli-plugin}
 
 [Command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
@@ -807,7 +824,7 @@ lastupdated: "2019-06-14"
 
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
-## {{site.data.keyword.containerlong_notm}} versions
+## Version history
 {: #sitemap-versions}
 
 [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions)
@@ -954,6 +971,14 @@ lastupdated: "2019-06-14"
 * [Fluentd add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 * [Ingress ALB add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 
+## API reference
+{: #sitemap-apis}
+
+* [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/)
+* [IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
+* [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
+* [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
+
 ## Locations
 {: #sitemap-locations}
 
@@ -1095,10 +1120,3 @@ lastupdated: "2019-06-14"
 * [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_network#suspended)
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
 
-## Related links
-{: #sitemap-rellinks}
-
-[Related links](/docs/containers?topic=containers-cs_rellinks#cs_rellinks)
-* [{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_rellinks#containers)
-* [{{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-cs_rellinks#registry)
-* [Follow us](/docs/containers?topic=containers-cs_rellinks#follow)

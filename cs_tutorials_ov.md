@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-06-17"
 
 keywords: kubernetes, iks
 
@@ -108,6 +108,7 @@ subcollection: containers
 -->
 </style>
 
+
 ## Create a cluster and deploy your first app
 {: #tutorials-create-cluster-deploy-app}
 
@@ -195,6 +196,7 @@ subcollection: containers
     </div>
     </a>
 </div>
+
 
 ## Set up high availability and security
 {: #tutorials-ov-ha-network-security}
@@ -293,6 +295,7 @@ subcollection: containers
 </div>
 
 
+
 ## Automate app and cluster deployments
 {: #tutorials-ov-app-cluster-deployments}
 
@@ -344,6 +347,7 @@ subcollection: containers
     </a>
 </div>
 
+
 ## Monitor and log cluster activity
 {: #tutorials-ov-monitor-log}
 
@@ -379,6 +383,7 @@ subcollection: containers
     </div>
     </a>
 </div>
+
 
 ## Migrate apps to the cloud 
 {: #tutorials-ov-migrate-apps}

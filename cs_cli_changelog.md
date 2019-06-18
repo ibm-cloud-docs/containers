@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-18"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,20 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.3.49</td>
+<td>18 Jun 2019</td>
+<td>Updates the Go version to 1.12.6.</td>
+</tr>
+<tr>
+<td>0.3.47</td>
+<td>15 Jun 2019</td>
+<td><ul>
+<li>Fixes a bug so that empty tables are not returned in the output of `ibmcloud ks kube-versions`.</li>
+<li>Updates the NLB DNS model so that an array of NLB IP addresses are returned by `ibmcloud ks nlb-dnss`.</li>
+<li>Changes the description text for the {{site.data.keyword.containerlong_notm}} CLI plug-in.</li>
+</ul></td>
+</tr>
 <tr>
 <td>0.3.34</td>
 <td>31 May 2019</td>
