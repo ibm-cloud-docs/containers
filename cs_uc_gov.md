@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-06-18"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ Why {{site.data.keyword.cloud_notm}}: With {{site.data.keyword.containerlong_not
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Provide access to public data with {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
+* [Provide access to public data with {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage)
 * [Plug-and-play IBM Cloud Analytics services](https://www.ibm.com/cloud/analytics)
 
 **Context: Government improves collaboration and velocity with community Developers who combine public-private data**

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-17"
+lastupdated: "2019-06-18"
 
 keywords: kubernetes, iks
 
@@ -121,7 +121,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 </tr>
 <tr>
 <td>View a list of supported versions in {{site.data.keyword.containerlong_notm}}.</td>
-<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions)</code></td>
+<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command)</code></td>
 <td>-</td>
 </tr>
 <tr>
