@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-17"
+lastupdated: "2019-06-18"
 
 keywords: kubernetes, iks
 
@@ -40,7 +40,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 </thead>
 <tbody>
 <tr>
-  <td>17 June 2019</td>
+  <td>18 June 2019</td>
   <td><ul>
   <li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.3.47](/docs/containers?topic=containers-cs_cli_changelog).</li>
   <li><strong>Managed add-on versions</strong>: Updated the version of the Istio managed add-on to 1.1.7 and the Knative managed add-on to 0.6.0.</li>
