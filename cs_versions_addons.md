@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-06-18"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -58,6 +58,14 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
+<td>473 / 331</td>
+<td>18 June 2019</td>
+<td><ul>
+<li>Fixes Vim vulnerabilities for [CVE-2019-5953 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5953) and [CVE-2019-12735 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12735).</li>
+<li>Updates the NGINX version of ALBs to 1.15.12.</li></ul>
+</td>
+<td>-</td>
+</tr>
 <tr>
 <td>470 / 330</td>
 <td>07 June 2019</td>
