@@ -20,6 +20,9 @@ keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+{:tsSymptoms: .tsSymptoms}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
 
 # Tutorial: Creating a Red Hat OpenShift on IBM Cloud cluster (beta)
 {: #openshift_tutorial}
