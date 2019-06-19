@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-06-19"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -96,7 +96,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td>457 / 329</td>
 <td>23 May 2019</td>
-<td>Fixes Go vulnerabilities for image scans.</td>
+<td>Fixes Go vulnerabilities for [CVE-2019-11841 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11841).</td>
 <td>-</td>
 </tr>
 <tr>
