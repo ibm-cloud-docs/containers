@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-19"
 
 keywords: kubernetes, iks
 
@@ -825,9 +825,9 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             - containerPort: 80
               name: web
             volumeMounts:
-            - name: www
+            - name: myvol1
               mountPath: /usr/share/nginx/html
-            - name: wwwww
+            - name: myvol2
               mountPath: /tmp1
       volumeClaimTemplates:
       - metadata:
