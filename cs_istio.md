@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-19"
 
 ---
 
@@ -148,9 +148,9 @@ Install Istio managed add-ons in an existing cluster.
   Example output:
   ```
   Name                      Version
-  istio                     1.1.5
-  istio-extras              1.1.5
-  istio-sample-bookinfo     1.1.5
+  istio                     1.1.7
+  istio-extras              1.1.7
+  istio-sample-bookinfo     1.1.7
   ```
   {: screen}
 
@@ -523,12 +523,12 @@ To manually inject sidecars into a deployment:
 
 1. Download the `istioctl` client.
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.5 sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.7 sh -
   ```
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.1.5
+  cd istio-1.1.7
   ```
   {: pre}
 
@@ -641,7 +641,7 @@ Before you begin, [enable the `istio-sample-bookinfo` managed add-on](#istio_ins
 
 4. In a web browser, open the BookInfo product page.
   ```
-  https://<host_name>/productpage
+  http://<host_name>/productpage
   ```
   {: codeblock}
 
@@ -664,7 +664,7 @@ Publicly expose your Istio-managed apps by creating an Istio gateway, a virtual 
     ```
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.1.5
+    cd istio-1.1.7
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
@@ -907,7 +907,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.1.5
+    cd <filepath>/istio-1.1.7
     ```
     {: pre}
 
