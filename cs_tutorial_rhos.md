@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-17"
+lastupdated: "2019-06-19"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -262,11 +262,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
 1.  From the OpenShift web console, in the dropdown menu in the OpenShift container platform menu bar, click **Application Console**.
 2.  Select the **default** project, then in the navigation pane, click **Applications > Pods**.
 3.  Verify that the **router** pods are in a **Running** status. The router functions as the ingress point for external network traffic. You can use the router to publicly expose the services in your cluster on the router's external IP address by using a route. The router listens on the public host network interface, unlike your app pods that listen only on private IPs. The router proxies external requests for route host names to the IPs of the app pods that are identified by the service that you associated with the route host name.
-4.  From the **default** project navigation pane, click **Applications > Deployments** and then click the **registry-console** deployment. To open the internal registry console, you must update the provider URL so that you can access it externally.
-    1.  In the **Environment** tab of the **registry-console** details page, find the **OPENSHIFT_OAUTH_PROVIDER_URL** field. 
-    2. In the value field, add `-e` after the `c1` such as in `https://c1-e.eu-gb.containers.cloud.ibm.com:20399`. 
-    3. Click **Save**. Now, the registry console deployment can be accessed through the public API endpoint of the cluster master.
-    4.  From the **default** project navigation pane, click **Applications > Routes**. To open the registry console, click the **Hostname** value, such as `https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.<p class="note">For the beta, the registry console uses self-signed TLS certificates, so you must choose to proceed to get to the registry console. In Google Chrome, click **Advanced > Proceed to <cluster_master_URL>**. Other browsers have similar options. If you cannot proceed with this setting, try opening the URL in a private browser.</p>
+4.  From the **default** project navigation pane, click **Applications > Deployments** and then click the **registry-console** deployment. Your OpenShift cluster comes with an internal registry that you can use to manage local images for your deployments. To view your images, click **Applications > Routes** and open the registry console **Hostname** URL.
 5.  In the OpenShift container platform menu bar, from the dropdown menu, click **Cluster Console**.
 6.  From the navigation pane, expand **Monitoring**.
 7.  Click the built-in monitoring tool that you want to access, such as **Dashboards**. The Grafana route opens, `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.<p class="note">The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.</p>
@@ -309,29 +305,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
     openshift-monitoring               prometheus-k8s      prometheus-k8s-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                   prometheus-k8s      web                reencrypt
     ```
     {: screen}
-3.  **Registry one-time update**: To make your internal registry console accessible from the internet, edit the `registry-console` deployment to use the public API endpoint of your cluster master as the OpenShift provider URL. The public API endpoint has the same format as the private API endpoint, but includes an additional `-e` in the URL.
-    ```
-    oc edit deploy registry-console -n default
-    ```
-    {: pre}
-    
-    In the `Pod Template.Containers.registry-console.Environment.OPENSHIFT_OAUTH_PROVIDER_URL` field, add `-e` after the `c1` such as in `https://ce.eu-gb.containers.cloud.ibm.com:20399`.
-    ```
-    Name:                   registry-console
-    Namespace:              default
-    ...
-    Pod Template:
-      Labels:  name=registry-console
-      Containers:
-       registry-console:
-        Image:      registry.eu-gb.bluemix.net/armada-master/iksorigin-registrconsole:v3.11.98-6
-        ...
-        Environment:
-          OPENSHIFT_OAUTH_PROVIDER_URL:  https://c1-e.eu-gb.containers.cloud.ibm.com:20399
-          ...
-    ```
-    {: screen}
-4.  In your web browser, open the route that you want to access, for example: `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.
+3.  In your web browser, open the route that you want to access, for example: `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.
 
 <br>
 Now you're in the built-in OpenShift app! For example, if you're in Grafana, you might check out your namespace CPU usage or other graphs. To access other built-in tools, open their route host names.
@@ -814,3 +788,5 @@ For any questions or feedback, post in Slack.
 
 If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
 {: tip}
+
+
