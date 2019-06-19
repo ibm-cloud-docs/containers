@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-19"
 
 keywords: kubernetes, iks
 
@@ -67,11 +67,14 @@ Did you create a cluster with only a private service endpoint before you enabled
   * [Allow your authorized cluster users to run `kubectl` commands to access the master through the private service endpoint.](/docs/containers?topic=containers-firewall#firewall_kubectl)
   * [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
-9. Optional: To use the private service endpoint only, disable the public service endpoint.
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+9.  Optional: To use the private service endpoint only:
+    1.  Disable the public service endpoint.
+        ```
+        ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem).
+
 
 <br />
 
@@ -160,11 +163,13 @@ Note that you cannot disable the private service endpoint after you enable it.
     ```
     {: pre}
 
-7. Optional: Disable the public service endpoint.
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+7.  Optional: To use the private service endpoint only:
+    1.  Disable the public service endpoint.
+        ```
+        ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem).
 
 <br />
 
