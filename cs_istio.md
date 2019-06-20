@@ -403,8 +403,10 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
   {: pre}
 
 2. To open the Istio Grafana dashboard, go to the following URL: http://localhost:3000/dashboard/db/istio-mesh-dashboard. If you installed the [BookInfo add-on](#istio_bookinfo), the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/) in the Istio open source documentation.
+
 </br>
 **Jaeger**</br>
+
 1. By default, Istio generates trace spans for 1 out of every 100 requests, which is a sampling rate of 1%. You must send at least 100 requests before the first trace is visible. To send 100 requests to the `productpage` service of the [BookInfo add-on](#istio_bookinfo), run the following command.
   ```
   for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
@@ -420,8 +422,10 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 3. To open the Jaeger UI, go to the following URL: http://localhost:16686.
 
 4. If you installed the BookInfo add-on, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) in the Istio open source documentation.
+
 </br>
 **Kiali**</br>
+
 1. Start Kubernetes port forwarding for the Kiali dashboard.
   ```
   kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=kiali -o jsonpath='{.items[0].metadata.name}') 20001:20001 &
