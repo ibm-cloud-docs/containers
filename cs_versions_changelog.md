@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-17"
+lastupdated: "2019-06-20"
 
 keywords: kubernetes, iks
 
@@ -2159,7 +2159,7 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 Review the version 1.11 changelog.
 {: shortdesc}
 
-Kubernetes version 1.11 is deprecated and becomes unsupported on 18 July 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
+Kubernetes version 1.11 is deprecated and becomes unsupported on 20 July 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
 {: deprecated}
 
 ### Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019
