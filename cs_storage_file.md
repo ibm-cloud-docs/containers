@@ -1438,6 +1438,8 @@ Topology-aware volume scheduling is supported on clusters that run Kubernetes ve
 
 The following examples show how to create storage classes that delay the creation of the file storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the file storage instance is created when you create the PVC.
 
+
+
 - **Example for Endurance file storage:**
   ```
   apiVersion: storage.k8s.io/v1
