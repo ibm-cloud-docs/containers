@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-19"
+lastupdated: "2019-06-20"
 
 keywords: kubernetes, iks
 
@@ -1231,6 +1231,9 @@ Review the following backup and restore options for your file storage:
 
 ## Storage class reference
 {: #file_storageclass_reference}
+
+
+
 
 ### Bronze
 {: #file_bronze}
