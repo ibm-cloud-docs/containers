@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-20"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks
 
@@ -1038,7 +1038,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    {: pre}
 
    <table>
-   <caption>Understanding the command's components</caption>
+   <caption>Understanding the command components</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
    </thead>
