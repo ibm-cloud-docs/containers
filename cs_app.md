@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -636,7 +636,7 @@ Before you begin:
 
 To set up configuration files with Kustomize:
 1.  [Install the `kustomize` tool ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md).
-    *   For MacOS, you can use the `brew` package manager.
+    *   For macOS, you can use the `brew` package manager.
         ```
         brew install kustomize
         ```
