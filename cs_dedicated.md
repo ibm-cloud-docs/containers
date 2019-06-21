@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks
 
@@ -233,7 +233,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 
     2.  If you are logging in for the first time, provide your Dedicated user ID and password when prompted. Your Dedicated account is authenticated, and the Dedicated and public accounts are linked together. Every time you log in after this first time, you use only your IBMid to log in. For more information, see [Connecting a dedicated ID to your public IBMid](/docs/iam?topic=iam-connect_dedicated_id#connect_dedicated_id).
 
-        You must log in to both your Dedicated account and your public account to create clusters. If you only want to log in to your Dedicated account, use the `--no-iam` flag when you log in to the Dedicated endpoint.
+        You must log in to both your Dedicated account and your public account to create clusters. If you want to log in to only your Dedicated account, use the `--no-iam` flag when you log in to the Dedicated endpoint.
         {: note}
 
     3.  To create or access clusters in the dedicated environment, you must set the region that is associated with that environment. **Note**: You cannot create clusters in resource groups other than `default`.
@@ -401,7 +401,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.13.6      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.13.7      Default
     ```
     {: screen}
 
@@ -419,7 +419,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.7
     ```
     {: screen}
 
@@ -482,7 +482,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 ### Adding worker nodes
 {: #add_workers_dedicated}
 
-With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-add_workers#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
+With an {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-add_workers#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
 {: shortdesc}
 
 ### Using private and public image registries
@@ -501,7 +501,7 @@ Change the pool of available portable public IP addresses by adding subnets to y
 #### Adding more user-managed subnets and IP addresses to your Kubernetes clusters
 {: #dedicated_byoip_subnets}
 
-Provide more of your own subnets from an on-premises network that you want to use to access {{site.data.keyword.containerlong_notm}}. You can add private IP addresses from those subnets to Ingress and load balancer services in your Kubernetes cluster. User-managed subnets are configured in one of two ways depending on the format of the subnet that you want to use.
+Provide more of your own subnets from an on-premises network that you want to use to access {{site.data.keyword.containerlong_notm}}. You can add private IP addresses from those subnets to Ingress and load balancer services in your Kubernetes cluster. User-managed subnets are configured in 1 of 2 ways, depending on the format of the subnet that you want to use.
 {: shortdesc}
 
 Requirements:
@@ -509,7 +509,7 @@ Requirements:
 - The subnet prefix length limit is /24 to /30. For example, `203.0.113.0/24` specifies 253 usable private IP addresses, while `203.0.113.0/30` specifies 1 usable private IP address.
 - The first IP address in the subnet must be used as the gateway for the subnet.
 
-Before you begin: Configure the routing of network traffic into and out of your enterprise network to the {{site.data.keyword.Bluemix_dedicated_notm}} network that will use the user-managed subnet.
+Before you begin, follow these steps to configure the routing of network traffic into and out of your enterprise network to the {{site.data.keyword.Bluemix_dedicated_notm}} network that will use the user-managed subnet.
 
 1. To use your own subnet, [open a support case](/docs/get-support?topic=get-support-getting-customer-support) and provide the list of subnet CIDRs that you want to use. **Note**: The way that the ALB and load balancers are managed for on-premises and internal account connectivity differs depending on the format of the subnet CIDR. See the final step for configuration differences.
 
