@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-19"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks
 
@@ -70,7 +70,7 @@ Create your Kubernetes cluster in the {{site.data.keyword.Bluemix_notm}} console
 
 Because it can take a few minutes to provision, create your cluster before you set up the rest of your cluster environment.
 
-1.  [In the {{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), create a free or standard cluster with 1 worker pool that has 1 worker node in it.
+1.  [In the {{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), create a free or standard cluster with one worker pool that has one worker node in it.
 
     You can also create a [cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps).
     {: tip}
