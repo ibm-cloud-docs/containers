@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-20"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -260,7 +260,7 @@ Software-defined storage (SDS) flavors are physical machines that are provisione
 You typically use SDS machines in the following cases:
 *  If you use an SDS add-on such as [Portworx](/docs/containers?topic=containers-portworx#portworx) to the cluster, use an SDS machine.
 *  If your app is a [StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) that requires local storage, you can use SDS machines and provision [Kubernetes local persistent volumes (beta) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
-*  You might have custom apps that require additional raw local storage.
+*  If you have custom apps that require additional raw local storage.
 
 For more storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
