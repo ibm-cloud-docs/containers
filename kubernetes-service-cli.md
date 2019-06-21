@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -3316,7 +3316,7 @@ ibmcloud ks logging-filter-create --cluster example-cluster --type container --n
 ```
 {: pre}
 
-This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
+This example filters out all of the logs that are forwarded, at an <code>info</code> level or less, from a specific cluster. The output is returned as JSON.
 ```
 ibmcloud ks logging-filter-create --cluster example-cluster --type all --level info --json
 ```
@@ -3462,7 +3462,7 @@ ibmcloud ks logging-filter-update --cluster example-cluster --id 885274 --type c
 ```
 {: pre}
 
-This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
+This example filters out all of the logs that are forwarded, at an <code>info</code> level or less, from a specific cluster. The output is returned as JSON.
 ```
 ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type all --level info --json
 ```
@@ -4605,7 +4605,7 @@ ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
   Workers per zone:   3
   Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.13.6_1512
+  Version:            1.13.7_1512
   ```
   {: screen}
 
