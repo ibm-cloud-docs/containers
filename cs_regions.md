@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks
 
@@ -352,7 +352,7 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
 Free clusters are limited to specific locations.
 {: shortdesc}
 
-**Creating a free cluster in the CLI**: Before you create a free cluster, you must target a region by running `ibmcloud ks region-set`. Your cluster is created in a metro within the region that you target: the Sydney metro in `ap-south`, the Frankfurt metro in `eu-central`, the London metro in `uk-south`, or the Dallas matro in `us-south`. Note that you cannot specify a zone within the metro.
+**Creating a free cluster in the CLI**: Before you create a free cluster, you must target a region by running `ibmcloud ks region-set`. Your cluster is created in a metro within the region that you target: the Sydney metro in `ap-south`, the Frankfurt metro in `eu-central`, the London metro in `uk-south`, or the Dallas metro in `us-south`. Note that you cannot specify a zone within the metro.
 
 **Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you can select a geography and a metro location in the geography. You can select the Dallas metro in North America, the Frankfurt or London metros in Europe, or the Sydney metro in Asia Pacific. Your cluster is created in a zone within the metro you choose.
 

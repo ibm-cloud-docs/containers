@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -260,7 +260,7 @@ Software-defined storage (SDS) flavors are physical machines that are provisione
 You typically use SDS machines in the following cases:
 *  If you use an SDS add-on such as [Portworx](/docs/containers?topic=containers-portworx#portworx) to the cluster, use an SDS machine.
 *  If your app is a [StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) that requires local storage, you can use SDS machines and provision [Kubernetes local persistent volumes (beta) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
-*  You might have custom apps that require additional raw local storage.
+*  If you have custom apps that require additional raw local storage.
 
 For more storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
@@ -330,102 +330,30 @@ The resources that are reserved on your worker node depend on the amount of CPU 
 To review how much compute resources are currently used on your worker node, run [`kubectl top node` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
 {: tip}
 
-<table summary="This table shows worker node memory reserves by tier.">
-<caption>Worker node memory reserves by tier.</caption>
-<thead>
-<tr>
-  <th>Memory tier</th>
-  <th>% or amount reserved</th>
-  <th>`b3c.4x16` worker node (16 GB) example</th>
-  <th>`mg1c.28x256` worker node (256 GB) example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>First 4 GB (0-4 GB)</td>
-  <td>25% of memory</td>
-  <td>1 GB</td>
-  <td>1 GB</td>
-</tr>
-<tr>
-  <td>Next 4 GB (5-8 GB)</td>
-  <td>20% of memory</td>
-  <td>0.8 GB</td>
-  <td>0.8 GB</td>
-</tr>
-<tr>
-  <td>Next 8 GB (9-16 GB)</td>
-  <td>10% of memory</td>
-  <td>0.8 GB</td>
-  <td>0.8 GB</td>
-</tr>
-<tr>
-  <td>Next 112 GB (17-128 GB)</td>
-  <td>6% of memory</td>
-  <td>N/A</td>
-  <td>6.72 GB</td>
-</tr>
-<tr>
-  <td>Remaining GBs (129 GB+)</td>
-  <td>2% of memory</td>
-  <td>N/A</td>
-  <td>2.54 GB</td>
-</tr>
-<tr>
-  <td>Additional reserve for [`kubelet` eviction ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
-  <td>100 MB</td>
-  <td>100 MB (flat amount)</td>
-  <td>100 MB (flat amount)</td>
-</tr>
-<tr>
-  <td>**Total reserved**</td>
-  <td>**(varies)**</td>
-  <td>**2.7 GB of 16 GB total**</td>
-  <td>**11.96 GB of 256 GB total**</td>
-</tr>
-</tbody>
-</table>
+| Memory tier | % or amount reserved | <code>b3c.4x16</code> worker node (16 GB) example | <code>mg1c.28x256</code> worker node (256 GB) example|
+|:-----------------|:-----------------|:-----------------|:-----------------|
+| First 4 GB (0-4 GB) | 25% of memory | 1 GB | 1 GB|
+| Next 4 GB (5-8 GB) | 20% of memory | 0.8 GB | 0.8 GB|
+| Next 8 GB (9-16 GB) | 10% of memory | 0.8 GB | 0.8 GB|
+| Next 112 GB (17-128 GB) | 6% of memory | N/A | 6.72 GB|
+| Remaining GBs (129 GB+) | 2% of memory | N/A | 2.54 GB|
+| Additional reserve for [`kubelet` eviction ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/) | 100 MB | 100 MB (flat amount) | 100 MB (flat amount)|
+| **Total reserved** | **(varies)** | **2.7 GB of 16 GB total** | **11.96 GB of 256 GB total**|
+{: class="simple-tab-table"}
+{: caption="Worker node memory reserves by tier" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Worker node memory reserves by tier"}
+{: tab-group="Worker Node"}
 
-<table summary="This table shows worker node CPU reserves by tier.">
-<caption>Worker node CPU reserves by tier.</caption>
-<thead>
-<tr>
-  <th>CPU tier</th>
-  <th>% reserved</th>
-  <th>`b3c.4x16` worker node (4 cores) example</th>
-  <th>`mg1c.28x256` worker node (28 cores) example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>First core (Core 1)</td>
-  <td>6% cores</td>
-  <td>0.06 cores</td>
-  <td>0.06 cores</td>
-</tr>
-<tr>
-  <td>Next 2 cores (Cores 2-3)</td>
-  <td>1% cores</td>
-  <td>0.02 cores</td>
-  <td>0.02 cores</td>
-</tr>
-<tr>
-  <td>Next 2 cores (Cores 4-5)</td>
-  <td>0.5% cores</td>
-  <td>0.005 cores</td>
-  <td>0.01 cores</td>
-</tr>
-<tr>
-  <td>Remaining cores (Cores 6+)</td>
-  <td>0.25% cores</td>
-  <td>N/A</td>
-  <td>0.0575 cores</td>
-</tr>
-<tr>
-  <td>**Total reserved**</td>
-  <td>**(varies)**</td>
-  <td>**0.085 cores of 4 cores total**</td>
-  <td>**0.1475 cores of 28 cores total**</td>
-</tr>
-</tbody>
-</table>
+| CPU tier | % or amount reserved | <code>b3c.4x16</code> worker node (4 cores) example | <code>mg1c.28x256</code> worker node (28 cores) example|
+|:-----------------|:-----------------|:-----------------|:-----------------|
+| First core (Core 1) | 6% cores | 0.06 cores | 0.06 cores|
+| Next 2 cores (Cores 2-3) | 1% cores | 0.02 cores | 0.02 cores|
+| Next 2 cores (Cores 4-5) | 0.5% cores | 0.005 cores | 0.01 cores|
+| Remaining cores (Cores 6+) | 0.25% cores | N/A | 0.0575 cores|
+| **Total reserved** | **(varies)** | **0.085 cores of 4 cores total** | **0.1475 cores of 28 cores total**|
+{: class="simple-tab-table"}
+{: caption="Worker node CPU reserves by tier" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Worker node CPU reserves by tier"}
+{: tab-group="Worker Node"}

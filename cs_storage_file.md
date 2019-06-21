@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks
 
@@ -825,9 +825,9 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             - containerPort: 80
               name: web
             volumeMounts:
-            - name: www
+            - name: myvol1
               mountPath: /usr/share/nginx/html
-            - name: wwwww
+            - name: myvol2
               mountPath: /tmp1
       volumeClaimTemplates:
       - metadata:
@@ -1038,7 +1038,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    {: pre}
 
    <table>
-   <caption>Understanding the command's components</caption>
+   <caption>Understanding the command components</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
    </thead>
@@ -1231,6 +1231,9 @@ Review the following backup and restore options for your file storage:
 
 ## Storage class reference
 {: #file_storageclass_reference}
+
+
+
 
 ### Bronze
 {: #file_bronze}
@@ -1434,6 +1437,8 @@ Topology-aware volume scheduling is supported on clusters that run Kubernetes ve
 {: note}
 
 The following examples show how to create storage classes that delay the creation of the file storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the file storage instance is created when you create the PVC.
+
+
 
 - **Example for Endurance file storage:**
   ```

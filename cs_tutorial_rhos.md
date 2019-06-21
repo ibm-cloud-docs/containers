@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-17"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -20,6 +20,9 @@ keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+{:tsSymptoms: .tsSymptoms}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
 
 # Tutorial: Creating a Red Hat OpenShift on IBM Cloud cluster (beta)
 {: #openshift_tutorial}
@@ -39,7 +42,7 @@ OpenShift worker nodes are available for standard clusters only. Red Hat OpenShi
 In the tutorial lessons, you create a standard Red Hat OpenShift on IBM Cloud cluster, open the OpenShift console, access built-in OpenShift components, deploy an app that uses {{site.data.keyword.cloud_notm}} services in an OpenShift project, and expose the app on an OpenShift route so that external users can access the service.
 {: shortdesc}
 
-This page also includes information on the OpenShift cluster architecture, beta limitations, and how to give feedback and get support.
+This page also includes information about the OpenShift cluster architecture, beta limitations, and how to give feedback and get support.
 
 ## Time required
 {: #openshift_time}
@@ -262,11 +265,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
 1.  From the OpenShift web console, in the dropdown menu in the OpenShift container platform menu bar, click **Application Console**.
 2.  Select the **default** project, then in the navigation pane, click **Applications > Pods**.
 3.  Verify that the **router** pods are in a **Running** status. The router functions as the ingress point for external network traffic. You can use the router to publicly expose the services in your cluster on the router's external IP address by using a route. The router listens on the public host network interface, unlike your app pods that listen only on private IPs. The router proxies external requests for route host names to the IPs of the app pods that are identified by the service that you associated with the route host name.
-4.  From the **default** project navigation pane, click **Applications > Deployments** and then click the **registry-console** deployment. To open the internal registry console, you must update the provider URL so that you can access it externally.
-    1.  In the **Environment** tab of the **registry-console** details page, find the **OPENSHIFT_OAUTH_PROVIDER_URL** field. 
-    2. In the value field, add `-e` after the `c1` such as in `https://c1-e.eu-gb.containers.cloud.ibm.com:20399`. 
-    3. Click **Save**. Now, the registry console deployment can be accessed through the public API endpoint of the cluster master.
-    4.  From the **default** project navigation pane, click **Applications > Routes**. To open the registry console, click the **Hostname** value, such as `https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.<p class="note">For the beta, the registry console uses self-signed TLS certificates, so you must choose to proceed to get to the registry console. In Google Chrome, click **Advanced > Proceed to <cluster_master_URL>**. Other browsers have similar options. If you cannot proceed with this setting, try opening the URL in a private browser.</p>
+4.  From the **default** project navigation pane, click **Applications > Deployments** and then click the **registry-console** deployment. Your OpenShift cluster comes with an internal registry that you can use to manage local images for your deployments. To view your images, click **Applications > Routes** and open the registry console **Hostname** URL.
 5.  In the OpenShift container platform menu bar, from the dropdown menu, click **Cluster Console**.
 6.  From the navigation pane, expand **Monitoring**.
 7.  Click the built-in monitoring tool that you want to access, such as **Dashboards**. The Grafana route opens, `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.<p class="note">The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.</p>
@@ -309,29 +308,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
     openshift-monitoring               prometheus-k8s      prometheus-k8s-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud                   prometheus-k8s      web                reencrypt
     ```
     {: screen}
-3.  **Registry one-time update**: To make your internal registry console accessible from the internet, edit the `registry-console` deployment to use the public API endpoint of your cluster master as the OpenShift provider URL. The public API endpoint has the same format as the private API endpoint, but includes an additional `-e` in the URL.
-    ```
-    oc edit deploy registry-console -n default
-    ```
-    {: pre}
-    
-    In the `Pod Template.Containers.registry-console.Environment.OPENSHIFT_OAUTH_PROVIDER_URL` field, add `-e` after the `c1` such as in `https://ce.eu-gb.containers.cloud.ibm.com:20399`.
-    ```
-    Name:                   registry-console
-    Namespace:              default
-    ...
-    Pod Template:
-      Labels:  name=registry-console
-      Containers:
-       registry-console:
-        Image:      registry.eu-gb.bluemix.net/armada-master/iksorigin-registrconsole:v3.11.98-6
-        ...
-        Environment:
-          OPENSHIFT_OAUTH_PROVIDER_URL:  https://c1-e.eu-gb.containers.cloud.ibm.com:20399
-          ...
-    ```
-    {: screen}
-4.  In your web browser, open the route that you want to access, for example: `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.
+3.  In your web browser, open the route that you want to access, for example: `https://grafana-openshift-monitoring.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. The first time that you access the host name, you might need to authenticate, such as by clicking **Log in with OpenShift** and authorizing access to your IAM identity.
 
 <br>
 Now you're in the built-in OpenShift app! For example, if you're in Grafana, you might check out your namespace CPU usage or other graphs. To access other built-in tools, open their route host names.
@@ -667,7 +644,7 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
         {: screen}
 3.  Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster. The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components. 
 
-    In the following command, replace <sysdig_access_key> and <sysdig_collector_endpoint> with the values from the service key that you created earlier. For <tag>, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
+    In the following command, replace <code><sysdig_access_key></code> and <code><sysdig_collector_endpoint></code> with the values from the service key that you created earlier. For <code>&lt;tag&gt;</code>, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
 
     ```
     curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t <tag> -ac 'sysdig_capture_enabled: false' --openshift
@@ -753,7 +730,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
 
 **Storage**:
 *   {{site.data.keyword.cloud_notm}} file, block, and cloud object storage are supported. Portworx software-defined storage (SDS) is not supported.
-*   Because of the way that {{site.data.keyword.cloud_notm}} NFS file storage configures Linux user permissions, you might encounter errors when you use file storage. If so, you might need to configure [OpenShift Security Context Contraints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html) or use a different storage type.
+*   Because of the way that {{site.data.keyword.cloud_notm}} NFS file storage configures Linux user permissions, you might encounter errors when you use file storage. If so, you might need to configure [OpenShift Security Context Constraints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html) or use a different storage type.
 
 **Networking**:
 *   Calico is used as the networking policy provider instead of OpenShift SDN. To use Calico, you must download and edit the configuration file to use the master endpoint.
@@ -786,7 +763,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
 *   Helm charts are not certified to work in OpenShift clusters, except {{site.data.keyword.cloud_notm}} Object Storage.
 
 **Apps**:
-*   OpenShift sets up stricter security settings by default than native Kubernetes. For more information, see the OpenShift docs for [Managing Security Context Contraints (SCC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
+*   OpenShift sets up stricter security settings by default than native Kubernetes. For more information, see the OpenShift docs for [Managing Security Context Constraints (SCC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
 *   For example, apps that are configured to run as root might fail, with the pods in a `CrashLoopBackOff` status. To resolve this issue, you can either modify the default security context constraints or use an image that does not run as root.
 *   OpenShift are set up by default with a local Docker registry. If you want to use images that are stored in your remote private {{site.data.keyword.registrylong_notm}} `icr.io` domain names, you must create the secrets for each global and regional registry yourself. You can use [copy the `default-<region>-icr-io` secrets](/docs/containers?topic=containers-images#copy_imagePullSecret) from the `default` namespace to the namespace that you want to pull images from, or [create your own secret](/docs/containers?topic=containers-images#other_registry_accounts). Then, [add the image pull secret](/docs/containers?topic=containers-images#use_imagePullSecret) to your deployment configuration or to the namespace service account.
 *   The OpenShift console is used instead of the Kubernetes dashboard.
@@ -814,3 +791,204 @@ For any questions or feedback, post in Slack.
 
 If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
 {: tip}
+
+## Troubleshooting
+{: #openshift_troubleshoot}
+
+Review some known issues or common error messages that you might encounter when trying out the Red Hat OpenShift on IBM Cloud beta.
+{: shortdesc}
+
+### Missing permissions to create clusters
+{: #rhoks_ts_cluster_permissions}
+
+{: tsSymptoms}
+You do not have permissions to create a cluster.
+
+{: tsCauses}
+To create an OpenShift cluster, you must have the same permissions as you need to create a native Kubernetes cluster. The required permissions include infrastructure credentials for the region and resource group and {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) **Administrator** permissions.
+
+{: tsResolve}
+Review [Assigning cluster access](https://cloud.ibm.com/docs/containers?topic=containers-users) to learn how to set up infrastructure credentials for a region and resource group and how to assign users access through IAM.
+
+<br />
+
+### OpenVPN server error due to ingress IP address for NLB
+{: #rhoks_ts_openvpn_subnet}
+
+{: tsSymptoms}
+You see the following error message.
+```
+CAE003: Unable to determine the ingress IP address for the network load balancer.
+```
+{: screen}
+
+{: tsCauses}
+The OpenVPN server could not be configured because the router IP address that is created for the network load balancer (NLB) could not be found. The router might not have been assigned an IP address because your cluster does not have a subnet with available portable IP addresses, or the Ingress setup did not complete.
+
+{: tsResolve}
+
+**Verify that your cluster has available subnets.**
+1.  Check that your cluster has a **Subnet CIDR** for public and private subnets. If you set up a private VLAN-only cluster, you might only have a private subnet.
+    ```
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources
+    ```
+    {: pre}
+    
+    Example output:
+    ```
+    Name:                           <cluster_name>   
+    ...
+
+    Subnet VLANs
+    VLAN ID   Subnet CIDR        Public   User-managed   
+    2345678   10.xxx.xx.xxx/29   false    false   
+    2876543   169.xx.xxx.xxx/29  true     false
+    ```
+    {: screen}
+2.  If the cluster does not have a subnet, [create a subnet for the cluster](/docs/containers?topic=containers-subnets#request) or [add an existing subnet from your account to the cluster](/docs/containers?topic=containers-subnets#add-existing).
+3.  If the cluster does have a subnet, [check for available portable IP addresses](/docs/containers?topic=containers-subnets#review_ip) and if necessary, [add more portable IP address by adding a subnet](/docs/containers?topic=containers-subnets#adding_ips).
+4.  Refresh the master to restart the OpenVPN setup so that it uses the available subnet.
+    ```
+    ibmcloud ks cluster-refresh --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+**Verify that the Ingress setup completed successfully.**
+1.  Check that the `ibm-cloud-provider-ip-*` pods for Ingress are in a **Running** status.
+    ```
+    oc get pods -n kube-system | grep alb
+    ```
+    {: pre}
+2.  If a pod is not running, review the **Events** in the pod details to troubleshoot the issue further.
+    ```
+    oc describe pod -n kube-system <pod_name>
+    ```
+    {: pre}
+3.  After you resolve the Ingress pod issue, refresh the master to restart the Ingress setup.
+    ```
+    ibmcloud ks cluster-refresh --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+<br />
+
+### OpenVPN server error due to NLB DNS
+{: #rhoks_ts_openvpn_dns}
+
+{: tsSymptoms}
+Could not create a domain name service for the network load balancer ('ibmcloud ks nlb-dns-create') with the following error message:<ul>
+<li><code>This action requires the Editor role for the cluster in IBM Cloud Container Service. Contact the IBM Cloud account administrator and request the required Identity and Access user role. (A0008)</code></li>
+<li><code>The specified cluster could not be found. (A0006)</code></li>
+<li><code>The input parameters in the request body are either incomplete or in the wrong format. Be sure to include all required parameters in your request in JSON format. (E0011)</code></li><ul>
+
+{: tsCauses}
+The OpenVPN server could not be configured because a domain name service (DNS) was not created for the network load balancer (NLB).
+
+{: tsResolve}
+1.  Check that you have the correct permissions in {{site.data.keyword.cloud_notm}} IAM. If not, contact your account administrator to [assign you the appropriate IAM platform or service access role](/docs/containers?topic=containers-users#platform).
+    ```
+    ibmcloud iam user-policies <my_user_name@example.com>
+    ```
+    {: pre}
+2.  For cluster not found or incorrect input parameter errors, continue to the next step.
+3.  Refresh the master so that NLB DNS creation operation is retried.
+    ```
+    ibmcloud ks cluster-refresh --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+<br />
+
+### Cannot access registry console
+{: #rhoks_ts_registry_console}
+
+{: tsSymptoms}
+Cannot access the local Docker registry console with the following error.
+```
+An authentication error occurred.
+```
+{: screen}
+
+{: tsCauses}
+OpenShift clusters that were created before 18 June 2019 did not set the registry console provider URL to the external cluster endpoint.
+
+{: tsResolve}
+Modify the registry console deployment so that you can access it externally.
+1.  From the OpenShift **Application Console**, open the **default** namespace and then click **Applications > Deployments > registry-console**.
+2.  In the **Environment** tab of the **registry-console** details page, find the **OPENSHIFT_OAUTH_PROVIDER_URL** field.
+3.  In the **Value** field, add `-e` after the `c1` such as in `https://c1-e.eu-gb.containers.cloud.ibm.com:20399`.
+4.  Click **Save**. Now, the registry console deployment can be accessed through the public API endpoint of the cluster master.
+5.  From the **default** project navigation pane, click **Applications > Routes**. To open the registry console, click the **Hostname** value, such as `https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`.
+
+    For the beta, the registry console uses self-signed TLS certificates, so you must choose to proceed to get to the registry console. In Google Chrome, click **Advanced > Proceed to <cluster_master_URL>**. Other browsers have similar options. If you cannot proceed with this setting, try opening the URL in a private browser.
+    {: note}
+
+<br />
+
+### `oc` or `kubectl` commands fail
+{: #rhoks_ts_admin_config}
+
+{: tsSymptoms}
+When you try to run `oc` or `kubectl` commands, you see an error similar to the following.
+```
+No resources found.
+Error from server (Forbidden): <resource> is forbidden: User "IAM#user@email.com" cannot list <resources> at the cluster scope: no RBAC policy matched
+```
+{: screen}
+
+{: tsCauses}
+You need to download the `admin` configuration files for your cluster in order to run commands that require the `cluster-admin` cluster role.
+
+{: tsResolve}
+Run `ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin` and try again.
+
+<br />
+
+### Cannot use `calicoctl`
+{: #rhoks_ts_calicoctl}
+
+{: tsSymptoms}
+When you try to use `calicoctl`, you get the following error.
+```
+Failed to create Calico API client: context deadline exceeded
+```
+{: screen}
+
+{: tsCauses}
+The Calico configuration file must be modified to update the `etcdEndpoint` field.
+
+{: tsResolve}
+Follow the instructions in the [Limitations topic](#openshift_limitations).
+
+<br />
+
+### Pods in `CrashLoopBackOff` status
+{: #rhoks_ts_pods_crashloop}
+
+{: tsSymptoms}
+Your pods are in a `CrashLoopBackOff` status.
+
+{: tsCauses}
+When you try to deploy an app that works on native Kubernetes platforms, you might see this status or a related error message because OpenShift sets up stricter security settings by default than native Kubernetes.
+
+{: tsResolve}
+Make sure that you followed the docs that are linked in the [Limitations topic](#openshift_limitations).
+
+<br />
+
+### Cannot push or pull images from local machine to Docker registry
+{: #rhoks_ts_docker_local}
+
+{: tsSymptoms}
+You cannot push or pull Docker images from your local machine to the cluster's built-in Docker registry.
+
+{: tsCauses}
+By default, the Docker registry is available internally within the cluster. You can build apps from remote directories such as GitHub or DockerHub by using the `oc new-app` command. Or, you can expose your Docker registry such as with a route or load balancer so that you can push and pull images from your local machine.
+
+{: tsResolve}
+Create a route for the `docker-registry` service in the `default` project. Include the `--hostname` flag so that you can give the registry a shorter domain name.
+
+```
+oc create route edge --service=docker-registry -n default --hostname <registry_domain_name>
+```
+{: pre}

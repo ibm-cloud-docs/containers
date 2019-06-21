@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-20"
 
 ---
 
@@ -106,7 +106,7 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 <br />
 
 
-## Installing Istio on {{site.data.keyword.containerlong_notm}}
+## Installing the Istio add-ons
 {: #istio_install}
 
 Install Istio managed add-ons in an existing cluster.
@@ -115,31 +115,46 @@ Install Istio managed add-ons in an existing cluster.
 **Before you begin**</br>
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [Create or use an existing standard cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). Additionally, the cluster and worker nodes must run at least the minimum supported version of Kubernetes, which you can review by running `ibmcloud ks addon-versions --addon istio`.
-* [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 * If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 
-### Installing managed Istio add-ons in the CLI
+### Installing managed Istio add-ons from the console
+{: #istio_install_ui}
+
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the Istio add-ons.
+
+2. Click the **Add-ons** tab.
+
+3. On the Managed Istio card, click **Install**.
+
+4. Select the **Istio** check box, and optionally the **Istio Extras** and the **Istio Sample** check boxes.
+
+5. Click **Install**.
+
+6. On the Managed Istio card, verify that the add-ons you enabled are listed.
+
+### Installing managed Istio add-ons from the CLI
 {: #istio_install_cli}
 
-1. Enable the `istio` add-on.
-  ```
-  ibmcloud ks cluster-addon-enable istio --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Optional: Enable the `istio-extras` add-on.
-  ```
-  ibmcloud ks cluster-addon-enable istio-extras --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+2. Enable the `istio` add-on and optionally the `istio-extras` and `istio-sample-bookinfo` add-ons.
+  * `istio`:
+    ```
+    ibmcloud ks cluster-addon-enable istio --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+  * `istio-extras`:
+    ```
+    ibmcloud ks cluster-addon-enable istio-extras --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+  * `istio-sample-bookinfo`:
+    ```
+    ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-3. Optional: Enable the `istio-sample-bookinfo` add-on.
-  ```
-  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
-
-4. Verify that the managed Istio add-ons that you installed are enabled in this cluster.
+3. Verify that the managed Istio add-ons that you installed are enabled in this cluster.
   ```
   ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   ```
@@ -148,13 +163,13 @@ Install Istio managed add-ons in an existing cluster.
   Example output:
   ```
   Name                      Version
-  istio                     1.1.5
-  istio-extras              1.1.5
-  istio-sample-bookinfo     1.1.5
+  istio                     1.1.7
+  istio-extras              1.1.7
+  istio-sample-bookinfo     1.1.7
   ```
   {: screen}
 
-5. You can also check out the individual components of each add-on in your cluster.
+4. You can also check out the individual components of each add-on in your cluster.
   - Components of `istio` and `istio-extras`: Ensure that the Istio services and their corresponding pods are deployed.
     ```
     kubectl get svc -n istio-system
@@ -236,23 +251,6 @@ Install Istio managed add-ons in an existing cluster.
     ```
     {: screen}
 
-### Installing managed Istio add-ons in the UI
-{: #istio_install_ui}
-
-1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of a cluster.
-
-2. Click the **Add-ons** tab.
-
-3. On the Istio card, click **Install**.
-
-4. The **Istio** check box is already selected. To also install the Istio extras and BookInfo sample app, select the **Istio Extras** and the **Istio Sample** check boxes.
-
-5. Click **Install**.
-
-6. On the Istio card, verify that the add-ons you enabled are listed.
-
-Next, you can try out Istio's capabilities by checking out the [BookInfo sample app](#istio_bookinfo).
-
 <br />
 
 
@@ -274,6 +272,9 @@ The `reviews` microservice has multiple versions:
 * `v3` calls the `ratings` microservice and displays ratings as 1 to 5 red stars.
 
 The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/). The BookInfo app is also already exposed on a public IP ingress address by an Istio Gateway. Although the BookInfo app can help you get started, the app is not meant for production use.
+
+### Publicly accessing BookInfo
+{: #istio_access_bookinfo}
 
 Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookinfo` managed add-ons](#istio_install) in a cluster.
 
@@ -318,6 +319,40 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
 
 4. Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
 
+### Exposing BookInfo by using an IBM-provided host name
+{: #istio_expose_bookinfo}
+
+When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo-gateway` is created for you. The gateway uses Istio virtual service and destination rules to configure a load balancer, `istio-ingressgateway`, that publicly exposes the BookInfo app. In the following steps, you create a host name for the `istio-ingressgateway` load balancer IP address through which you can publicly access BookInfo.
+{: shortdesc}
+
+1. Register the IP address for the `istio-ingressgateway` load balancer by creating a DNS host name.
+  ```
+  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip $INGRESS_HOST
+  ```
+  {: pre}
+
+2. Verify that the host name is created.
+  ```
+  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+  ```
+  {: screen}
+
+3. In a web browser, open the BookInfo product page.
+  ```
+  http://<host_name>/productpage
+  ```
+  {: codeblock}
+
+4. Try refreshing the page several times. The requests to `http://<host_name>/productpage` are received by the ALB and are forwarded to the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
+
+
 ### Understanding what happened
 {: #istio_bookinfo_understanding}
 
@@ -342,8 +377,6 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 </dl>
 
 </br>
-
-Next, you can [expose BookInfo by using the IBM-provided Ingress subdomain](#istio_expose_bookinfo) or [log, monitor, trace, and visualize](#istio_health) the service mesh for the BookInfo app.
 
 <br />
 
@@ -371,7 +404,9 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 
 2. To open the Istio Grafana dashboard, go to the following URL: http://localhost:3000/dashboard/db/istio-mesh-dashboard. If you installed the [BookInfo add-on](#istio_bookinfo), the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/) in the Istio open source documentation.
 
+</br>
 **Jaeger**</br>
+
 1. By default, Istio generates trace spans for 1 out of every 100 requests, which is a sampling rate of 1%. You must send at least 100 requests before the first trace is visible. To send 100 requests to the `productpage` service of the [BookInfo add-on](#istio_bookinfo), run the following command.
   ```
   for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
@@ -388,7 +423,9 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 
 4. If you installed the BookInfo add-on, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) in the Istio open source documentation.
 
+</br>
 **Kiali**</br>
+
 1. Start Kubernetes port forwarding for the Kiali dashboard.
   ```
   kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=kiali -o jsonpath='{.items[0].metadata.name}') 20001:20001 &
@@ -435,7 +472,7 @@ For more information about referencing metrics and dashboards, monitoring Istio 
 <br />
 
 
-## Setting up sidecar injection for your apps
+## Including apps in the Istio service mesh by setting up sidecar injection
 {: #istio_sidecar}
 
 Ready to manage your own apps by using Istio? Before you deploy your app, you must first decide how you want to inject the Envoy proxy sidecars into app pods.
@@ -523,12 +560,12 @@ To manually inject sidecars into a deployment:
 
 1. Download the `istioctl` client.
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.5 sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.7 sh -
   ```
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.1.5
+  cd istio-1.1.7
   ```
   {: pre}
 
@@ -590,70 +627,13 @@ The app pods are now integrated into your Istio service mesh because they have t
 ## Exposing Istio-managed apps by using an IBM-provided host name
 {: #istio_expose}
 
-After you [set up Envoy proxy sidecar injection](#istio_sidecar) and deploy your apps into the Istio service mesh, you can expose your Istio-managed apps to public requests by using an IBM-provided host name.
+Publicly expose your Istio-managed apps by creating a DNS entry for the `istio-ingressgateway` load balancer and configuring the load balancer to forward traffic to your app.
 {: shortdesc}
 
-Istio uses [Gateways ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) and [VirtualServices ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) to control how traffic is routed to your apps. A gateway configures a load balancer, `istio-ingressgateway`, that acts as the entry point for your Istio-managed apps. You can expose your Istio-managed apps by registering the external IP address of the `istio-ingressgateway` load balancer with a DNS entry and host name.
-
-You can try out the [example to expose BookInfo](#istio_expose_bookinfo) first, or [publicly expose your own Istio-managed apps](#istio_expose_link).
-
-### Example: Exposing BookInfo by using an IBM-provided host name
-{: #istio_expose_bookinfo}
-
-When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo-gateway` is created for you. The gateway uses Istio virtual service and destination rules to configure a load balancer, `istio-ingressgateway`, that publicly exposes the BookInfo app. In the following steps, you create a host name for the `istio-ingressgateway` load balancer IP address through which you can publicly access BookInfo.
-{: shortdesc}
-
-Before you begin, [enable the `istio-sample-bookinfo` managed add-on](#istio_install) in a cluster.
-
-1. Get the **EXTERNAL-IP** address for the `istio-ingressgateway` load balancer.
-  ```
-  kubectl get svc -n istio-system
-  ```
-  {: pre}
-
-  In the following example output, the **EXTERNAL-IP** is `168.1.1.1`.
-  ```
-  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
-  ...
-  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
-                                                                            8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-  ```
-  {: screen}
-
-2. Register the IP by creating a DNS host name.
-  ```
-  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
-  ```
-  {: pre}
-
-3. Verify that the host name is created.
-  ```
-  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
-  ```
-  {: pre}
-
-  Example output:
-  ```
-  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-  ```
-  {: screen}
-
-4. In a web browser, open the BookInfo product page.
-  ```
-  https://<host_name>/productpage
-  ```
-  {: codeblock}
-
-5. Try refreshing the page several times. The requests to `http://<host_name>/productpage` are received by the ALB and are forwarded to the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
-
-For more information about the gateway, virtual service rules, and destination rules for the BookInfo app, see [Understanding what happened](#istio_bookinfo_understanding). For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
-
-### Publicly exposing your own Istio-managed apps by using an IBM-provided host name
-{: #istio_expose_link}
-
-Publicly expose your Istio-managed apps by creating an Istio gateway, a virtual service that defines traffic management rules for your Istio-managed services, and a DNS host name for the external IP address of the `istio-ingressgateway` load balancer.
-{: shortdesc}
+In the following steps, you set up a host name through which your users can access your app by creating the following resources:
+* A gateway that is called `my-gateway`. This gateway acts as the public entry point to your apps and uses the existing `istio-ingressgateway` load balancer service to expose your app.
+* A virtual service that is called `my-virtual-service`. `my-gateway` uses the rules that you define in `my-virtual-service` to route traffic to your app.
+* A host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your `my-virtual-service` routing rules. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
 
 **Before you begin:**
 1. [Install the `istio` managed add-on](#istio_install) in a cluster.
@@ -664,7 +644,7 @@ Publicly expose your Istio-managed apps by creating an Istio gateway, a virtual 
     ```
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.1.5
+    cd istio-1.1.7
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
@@ -789,13 +769,11 @@ Publicly expose your Istio-managed apps by creating an Istio gateway, a virtual 
   ```
   {: screen}
 
-7. In a web browser, verify that traffic is being routed to your Istio-managed microservices by entering the URL of the app microservice to access.
+8. In a web browser, verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
   ```
   http://<host_name>/<service_path>
   ```
   {: codeblock}
-
-In review, you created a gateway that is called `my-gateway`. This gateway uses the existing `istio-ingressgateway` load balancer service to expose your app. The `istio-ingressgateway` load balancer uses the rules that you defined in the `my-virtual-service` virtual service to route traffic to your app. Finally, you created a host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your Istio routing rules. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
 
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/).
 {: tip}
@@ -803,13 +781,13 @@ Looking for even more fine-grained control over routing? To create rules that ar
 <br />
 
 
-## Updating Istio on {{site.data.keyword.containerlong_notm}}
+## Updating the Istio add-ons
 {: #istio_update}
 
 The Istio version in the managed Istio add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. To update your Istio components to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 {: shortdesc}
 
-## Uninstalling Istio on {{site.data.keyword.containerlong_notm}}
+## Uninstalling Istio
 {: #istio_uninstall}
 
 If you're finished working with Istio, you can clean up the Istio resources in your cluster by uninstalling Istio add-ons.
@@ -835,7 +813,20 @@ The `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinf
 
    2. Save any resources created from these CRDs.
 
-### Uninstalling managed Istio add-ons in the CLI
+ ### Uninstalling managed Istio add-ons from the console
+ {: #istio_uninstall_ui}
+
+ 1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to remove the Istio add-ons.
+
+ 2. Click the **Add-ons** tab.
+
+ 3. On the Managed Istio card, click the Action menu icon.
+
+ 4. Click **Uninstall**. All managed Istio add-ons are disabled in this cluster and all Istio resources in this cluster are removed.
+
+ 5. On the Managed Istio card, verify that the add-ons you uninstalled are no longer listed.
+
+### Uninstalling managed Istio add-ons from the CLI
 {: #istio_uninstall_cli}
 
 1. Disable the `istio-sample-bookinfo` add-on.
@@ -861,25 +852,6 @@ The `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinf
   ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   ```
   {: pre}
-
-### Uninstalling managed Istio add-ons in the UI
-{: #istio_uninstall_ui}
-
-1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of a cluster.
-
-2. Click the **Add-ons** tab.
-
-3. On the Istio card, click the menu icon.
-
-4. Uninstall individual or all Istio add-ons.
-  - Individual Istio add-ons:
-    1. Click **Manage**.
-    2. Clear the check boxes for the add-ons you want to disable. If you clear an add-on, other add-ons that require that add-on as a dependency might be automatically cleared.
-    3. Click **Manage**. The Istio add-ons are disabled and the resources for those add-ons are removed from this cluster.
-  - All Istio add-ons:
-    1. Click **Uninstall**. All managed Istio add-ons are disabled in this cluster and all Istio resources in this cluster are removed.
-
-5. On the Istio card, verify that the add-ons you uninstalled are no longer listed.
 
 <br />
 
@@ -907,7 +879,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.1.5
+    cd <filepath>/istio-1.1.7
     ```
     {: pre}
 

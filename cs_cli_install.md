@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -134,7 +134,7 @@ Using an OpenShift cluster? [Install the OpenShift Origin CLI (`oc`)](#cli_oc). 
         chmod +x /usr/local/bin/kubectl
         ```
         {: pre}
-4.  If you have clusters that run different versions of Kubernetes, such as 1.14.3 and 1.12.9, download each `kubectl` version binary to a separate directory. Then, you can set up an alias in your local terminal profile to point to the `kubectl` binary directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
+4.  If you have clusters that run different versions of Kubernetes, such as 1.14.3 and 1.12.9, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local terminal profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
 5.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use.
 
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps).
@@ -321,6 +321,40 @@ Now, you can run `kubectl` commands to manage your clusters in {{site.data.keywo
 <br />
 
 
+## Accessing an OpenShift cluster from the terminal or automation tools
+{: #openshift_cluster_login}
+
+Red Hat OpenShift on IBM Cloud is integrated with {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) so that you can authenticate users and services by using their IAM identities and authorize actions with access roles and policies. When you authenticate as a user through the OpenShift console, your IAM identity is used to generate an OpenShift login token that you can use to log in to the terminal. If you want to automate logging in to your cluster, you can create an IAM API key to use for the `oc login` command.
+{:shortdesc}
+
+**Before you begin**:
+* [Install the `oc` CLI](#cli_oc).
+* [Create an OpenShift cluster](/docs/containers?topic=containers-openshift_tutorial).
+
+<br>
+**To automate access to your cluster with an API key**:
+1.  Create an {{site.data.keyword.cloud_notm}} API key.<p class="important">Save your API key in a secure location. You cannot retrieve the API key again. If you want to export the output to a file on your local machine, include the `--file <path>/<file_name>` flag.</p>
+    ```
+    ibmcloud iam api-key-create <name>
+    ```
+    {: pre}
+2.  Get the **Master URL** of the cluster that you want to access. 
+    ```
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+3.  Use the API key and cluster URL to log in to your OpenShift cluster. The user name (`-u`) is `apikey`, the password (`-p`) is your API key value, and the `--server` is the service endpoint URL of the cluster master.
+    ```
+    oc login -u apikey -p <API_key> --server=<master_URL>
+    ```
+    {: pre}
+
+<br>
+**To log in to your cluster as a user through the terminal**:
+1.  In the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the cluster that you want to access.
+2.  Click the **Access** tab and follow the instructions.
+
+<br />
 
 
 ## Updating the CLI

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks
 
@@ -70,7 +70,7 @@ Create your Kubernetes cluster in the {{site.data.keyword.Bluemix_notm}} console
 
 Because it can take a few minutes to provision, create your cluster before you set up the rest of your cluster environment.
 
-1.  [In the {{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), create a free or standard cluster with 1 worker pool that has 1 worker node in it.
+1.  [In the {{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), create a free or standard cluster with one worker pool that has one worker node in it.
 
     You can also create a [cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps).
     {: tip}
@@ -113,7 +113,7 @@ Because it can take a few minutes to provision, create your cluster before you s
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.13.6
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.13.7
     ```
     {: screen}
 8.  Set the context for your Kubernetes cluster in your CLI. 
@@ -155,8 +155,8 @@ Because it can take a few minutes to provision, create your cluster before you s
         Example output:
 
         ```
-        Client Version: v1.13.6
-        Server Version: v1.13.6
+        Client Version: v1.13.7
+        Server Version: v1.13.7
         ```
         {: screen}
 
@@ -237,10 +237,12 @@ To deploy the app:
     *   `Dockerfile`: The build definitions for the image.
     *   `app.js`: The Hello world app.
     *   `package.json`: Metadata about the app.
+    
     ```
     git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
+    
 2.  Navigate to the `Lab 1` directory.
     ```
     cd 'container-service-getting-started-wt/Lab 1'
@@ -373,7 +375,7 @@ To deploy the app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.7
         ```
         {: screen}
 8. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
