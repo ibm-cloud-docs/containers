@@ -29,6 +29,7 @@ subcollection: containers
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
 
+
 ## June 2019
 {: #jun19}
 
