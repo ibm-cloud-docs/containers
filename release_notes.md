@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks
 
@@ -39,6 +39,15 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>21 June 2019</td>
+  <td><ul>
+  <li><strong>Accessing OpenShift clusters</strong>: Added steps for [automating access to an OpenShift cluster by using an OpenShift login token](/docs/containers?topic=containers-cs_cli_install#openshift_cluster_login).</li>
+  <li><strong>Accessing the Kubernetes master through the private service endpoint</strong>: Added steps for [editing the local Kubernetes configuration file](/docs/containers?topic=containers-clusters#access_on_prem) when both the public and private service endpoints are enabled, but you want to access the Kubernetes master through the private service endpoint only.</li>
+  <li><strong>Troubleshooting OpenShift clusters</strong>: Added a [troubleshooting section](/docs/containers?topic=containers-openshift_tutorial#openshift_troubleshoot) to the
+  Creating a Red Hat OpenShift on IBM Cloud cluster (beta) tutorial.</li>
+  </ul></td>
+</tr>
 <tr>
   <td>18 June 2019</td>
   <td><ul>
