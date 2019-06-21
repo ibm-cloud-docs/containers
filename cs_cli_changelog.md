@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks
 
@@ -61,7 +61,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.3.34</td>
 <td>31 May 2019</td>
-<td>Adds support for creating Red Hat OpenShift on IBM Cloud clusters.<ul>
+<td>Adds support for creating Red Hat OpenShift on IBM Cloud clusters:<ul>
 <li>Adds support for OpenShift versions in the `--kube-version` flag of the `cluster-create` command. For example, to create a standard OpenShift cluster, you can pass in `--kube-version 3.11_openshift` in your `cluster-create` command.</li>
 <li>Adds the `versions` command to list all supported Kubernetes and OpenShift versions.</li>
 <li>Deprecates the `kube-versions` command.</li>
@@ -80,7 +80,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>23 May 2019</td>
 <td><ul><li>Adds the [<code>ibmcloud ks alb-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create) command to create Ingress ALBs. For more information, see [Scaling ALBs](/docs/containers?topic=containers-ingress#scale_albs).</li>
 <li>Adds the [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure (SoftLayer) portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.</li>
-<li>Adds the <code>--private-only</code> flag to the `zone-network-set` command to unset the public VLAN for the worker pool metadata so that subsequent worker nodes in that worker pool zone are connected to a private VLAN only.</li>
+<li>Adds the <code>--private-only</code> flag to the `zone-network-set` command to unset the public VLAN for the worker pool metadata. Subsequent worker nodes in that worker pool zone are connected to a private VLAN only.</li>
 <li>Removes the <code>--force-update</code> flag from the `worker-update` command.</li>
 <li>Adds the **VLAN ID** column to the output of the `albs` and `alb-get` commands.</li>
 <li>Adds the **Multizone Metro** column to the output of the `supported-locations` command to designate zones that are multizone-capable.</li>
