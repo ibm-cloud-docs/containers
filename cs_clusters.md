@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-20"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -115,7 +115,7 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 After you set up your account to create clusters, prepare the setup of your cluster. These are preparations that impact your cluster each time that you create a cluster.
 {: shortdesc}
 
-1. Decide between a [free or standard cluster](/docs/containers?topic=containers-cs_ov#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
+1. Decide between a [free or standard cluster](/docs/containers?topic=containers-cs_ov#cluster_types). You can create one free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
 
 2. For standard clusters, plan your cluster setup.
   * Decide whether to create a [single zone](/docs/containers?topic=containers-ha_clusters#single_zone) or [multizone](/docs/containers?topic=containers-ha_clusters#multizone) cluster. Note that multizone clusters are available in select locations only.
@@ -131,10 +131,10 @@ After you set up your account to create clusters, prepare the setup of your clus
 ## Creating a free cluster
 {: #clusters_free}
 
-You can use your 1 free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster even if you have a billable account.
+You can use your one free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster even if you have a billable account.
 {: shortdesc}
 
-Free clusters include one worker node set up with 2vCPU and 4GB memory and have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.cloud_notm}} and cannot be restored. Be sure to back up any important data.
+Free clusters include one worker node set up with 2 vCPU and 4 GB memory and have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.cloud_notm}} and cannot be restored. Be sure to back up any important data.
 {: note}
 
 ### Creating a free cluster in the console
@@ -226,7 +226,6 @@ Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_no
 1. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
 
 2. Select a resource group in which to create your cluster.
-  **Note**:
     * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
     * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
 
@@ -240,7 +239,7 @@ Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_no
 6. Enter your metro and zone details.
   * Multizone clusters:
     1. Select a metro location. For the best performance, select the metro location that is physically closest to you. Your choices might be limited by geography.
-    2. Select the specific zones in which you want to host your cluster. You must select at least 1 zone but you can select as many as you would like. If you select more than 1 zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only 1 zone, you can [add zones to your cluster](/docs/containers?topic=containers-add_workers#add_zone) after it is created.
+    2. Select the specific zones in which you want to host your cluster. You must select at least one zone but you can select as many as you would like. If you select more than one zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only one zone, you can [add zones to your cluster](/docs/containers?topic=containers-add_workers#add_zone) after it is created.
   * Single zone clusters: Select a zone in which you want to host your cluster. For the best performance, select the zone that is physically closest to you. Your choices might be limited by geography.
 
 7. For each zone, choose VLANs.
@@ -264,7 +263,7 @@ Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_no
     - **Virtual - shared**: Infrastructure resources, such as the hypervisor and physical hardware, are shared across you and other IBM customers, but each worker node is accessible only by you. Although this option is less expensive and sufficient in most cases, you might want to verify your performance and infrastructure requirements with your company policies.
     - **Virtual - dedicated**: Your worker nodes are hosted on infrastructure that is devoted to your account. Your physical resources are completely isolated.
   3. Select a flavor. The flavor defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the zone in which you deploy the cluster. After you create your cluster, you can add different machine types by adding a worker or pool to the cluster.
-  4. Specify the number of worker nodes that you need in the cluster. The number of workers that you enter is replicated across the number of zones that you selected. This means that if you have 2 zones and select 3 worker nodes, 6 nodes are provisioned, and 3 nodes live in each zone.
+  4. Specify the number of worker nodes that you need in the cluster. The number of workers that you enter is replicated across the number of zones that you selected. This means that if you have two zones and select three worker nodes, six nodes are provisioned, and three nodes live in each zone.
 
 10. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
 
@@ -290,7 +289,8 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
 
   2. If you have multiple {{site.data.keyword.cloud_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
-  3. To create clusters in a resource group other than default, target that resource group. **Note**:
+  3. To create clusters in a resource group other than default, target that resource group. 
+
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
       * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
 
@@ -396,7 +396,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>
-    <td>Specify the number of worker nodes to include in the cluster. If the <code>--workers</code> option is not specified, 1 worker node is created.</td>
+    <td>Specify the number of worker nodes to include in the cluster. If the <code>--workers</code> option is not specified, one worker node is created.</td>
     </tr>
     <tr>
     <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
