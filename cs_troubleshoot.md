@@ -53,7 +53,6 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
   ```
   {: pre}
 
-
 3. Start a proxy server to display the debug tool interface.
   ```
   kubectl proxy --port 8080
@@ -230,7 +229,7 @@ Review the options to debug your worker nodes and find the root causes for failu
   </tbody>
 </table>
 </p></li>
-<li>List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></li>
+<li>List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></p></li>
 </ol>
 
 <br />
