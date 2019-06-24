@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-06-24"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -712,7 +712,7 @@ Then, you can check out the following network configuration steps for your clust
 * Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account by setting up [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) or the [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup). {{site.data.keyword.cloud_notm}} Direct Link allows communication between apps and services in your cluster and an on-premises network over the private network, while strongSwan allows communication through an encrypted VPN tunnel over the public network.
 * Isolate public networking workloads by creating an [edge worker pool](/docs/containers?topic=containers-edge) of worker nodes that are connected to public and private VLANs.
 * Expose your apps with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
-* [Create Calico host network policies](/docs/containers?topic=containers-network_policies#isolate_workers) to block public access to pods, isolate your cluster on the private network, and allow access to other {{site.data.keyword.cloud_notm}} services.
+* Create Calico host network policies to isolate your cluster on the [public network](/docs/containers?topic=containers-network_policies#isolate_workers_public) and on the [private network](/docs/containers?topic=containers-network_policies#isolate_workers).
 
 ### Extend your on-premises data center to a cluster and allow limited public access using a gateway device
 {: #next_steps_gateway}

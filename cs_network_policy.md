@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-06-24"
 
 keywords: kubernetes, iks
 
@@ -187,7 +187,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
     - Windows: Use the `--config` flag to point to the network configuration file that you got in step 1. Include this flag each time you run a `calicoctl` command.
 
       ```
-      calicoctl get nodes --config=filepath/calicoctl.cfg
+      calicoctl get nodes --config=<filepath>/calicoctl.cfg
       ```
       {: pre}
 
@@ -221,13 +221,13 @@ Before you begin:
 
 **To view network policies in clusters**:
 
-Linux and Mac users don't need to include the `--config=filepath/calicoctl.cfg` flag in `calicoctl` commands.
+Linux and Mac users don't need to include the `--config=<filepath>/calicoctl.cfg` flag in `calicoctl` commands.
 {: tip}
 
 1. View the Calico host endpoint.
 
     ```
-    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get hostendpoint -o yaml --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
@@ -235,27 +235,27 @@ Linux and Mac users don't need to include the `--config=filepath/calicoctl.cfg` 
 
     [Network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) are scoped to specific namespaces:
     ```
-    calicoctl get NetworkPolicy --all-namespaces -o wide --config=filepath/calicoctl.cfg
+    calicoctl get NetworkPolicy --all-namespaces -o wide --config=<filepath>/calicoctl.cfg
     ```
     {:pre}
 
     [Global network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) are not scoped to specific namespaces:
     ```
-    calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
+    calicoctl get GlobalNetworkPolicy -o wide --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
 3. View details for a network policy.
 
     ```
-    calicoctl get NetworkPolicy -o yaml <policy_name> --namespace <policy_namespace> --config=filepath/calicoctl.cfg
+    calicoctl get NetworkPolicy -o yaml <policy_name> --namespace <policy_namespace> --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
 4. View the details of all global network policies for the cluster.
 
     ```
-    calicoctl get GlobalNetworkPolicy -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get GlobalNetworkPolicy -o yaml --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
@@ -293,7 +293,7 @@ To create Calico policies, use the following steps.
     - Windows:
 
       ```
-      calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f filepath/policy.yaml --config=<filepath>/calicoctl.cfg
       ```
       {: pre}
 
@@ -432,31 +432,160 @@ policy changes to be applied throughout the cluster.
   - Windows:
 
     ```
-    calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
+    calicoctl apply -f filepath/deny-nodeports.yaml --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
 3. Optional: In multizone clusters, a multizone load balancer (MZLB) health checks the Ingress application load balancers (ALBs) in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. If you use pre-DNAT policies to block all incoming traffic to Ingress services, you must also whitelist [Cloudflare's IPv4 IPs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/) that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the [Calico network policy tutorial](/docs/containers?topic=containers-policy_tutorial#lesson3).
 
-## Isolating clusters on the private network
-{: #isolate_workers}
+## Isolating clusters on the public network
+{: #isolate_workers_public}
 
-If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must enable a VRF or VLAN spanning so that your worker nodes can communicate with each other on the private network. However, when VRF or VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with workers.
+You can isolate your cluster on the public network by applying [Calico public network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/public-network-isolation). This set of Calico policies work in conjunction with the [default Calico policies](#default_policy) to block most public network traffic of a cluster while allowing communication that is necessary for the cluster to function to specific subnets.
 {: shortdesc}
 
-You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). This set of Calico policies and host endpoints isolates the private network traffic of a cluster from other resources in the account's private network.
-
-The policies target the worker node private interface (eth0) and the pod network of a cluster.
+Along with the default Calico policies that are applied to the public interface of worker nodes, the Calico policies in this section configure the public network for worker node and pods as follows:
 
 **Worker nodes**
 
-* Private interface egress is permitted only to pod IPs, workers in this cluster, and the UPD/TCP port 53 for DNS access, port 2049 for communication with NFS file servers, and ports 443 and 3260 for communication to block storage.
-* Private interface ingress is permitted only from workers in the cluster and only to DNS, kubelet, ICMP, and VRRP.
+* Egress network traffic on the public network interface for worker nodes is permitted to the following ports:
+  * TCP/UDP 53 for DNS
+  * TCP/UDP 2049 for communication with NFS file servers
+  * TCP/UDP 443 and 3260 for communication to block storage
+  * TCP/UDP 443 on 172.21.0.1 for the Kubernetes master API server local proxy
+  * TCP/UDP 2040 and 2041 on 172.20.0.0 for the etcd local proxy
+  * Specified ports for other {{site.data.keyword.Bluemix_notm}} services
+* Ingress network traffic on the public network interface for worker nodes is permitted only from subnets for IBM Cloud infrastructure (SoftLayer) to manage worker nodes through the following ports:
+  * TCP/UDP 53 for DNS
+  * TCP/UDP 52311 for Big Fix
+  * ICMP to allow infrastructure health monitoring
+  * VRRP to use load balancer services
 
 **Pods**
 
-* All ingress to pods is permitted from workers in the cluster.
-* Egress from pods is restricted only to public IPs, DNS, kubelet, and other pods in the cluster.
+* Egress network traffic on the public network interface for pods is permitted to the following ports:
+  * TCP/UDP 53 for DNS
+  * TCP/UDP 2049 for communication with NFS file servers
+  * TCP/UDP 443 and 3260 for communication to block storage
+  * TCP/UDP 443 on 172.21.0.1 for the Kubernetes master API server local proxy
+  * TCP/UDP 2040 and 2041 on 172.20.0.0 for the etcd local proxy
+  * TCP/UDP 20000:32767 and 443 for communication with the Kubernetes master
+  * Specified ports for other {{site.data.keyword.Bluemix_notm}} services
+* Ingress network traffic on the public network interface for pods is permitted from network load balancer (NLB), Ingress application load balancer (ALB), and NodePort services.
+When you apply the egress pod policies that are included in this policy set, only network traffic to the subnets and ports that are specified in the pod policies is permitted. All traffic to any subnets or ports that are not specified in the policies is blocked for all pods in all namespaces. Because only the ports and subnets that are necessary for the pods to function in {{site.data.keyword.containerlong_notm}} are specified in these policies, your pods cannot send network traffic over the internet until you add or change the Calico policy to allow them to.
+{: important}
+
+The following policies are included:
+
+|Policy name|Description|
+|-----------|-----------|
+| `allow-egress-pods-public` | Opens ports that are necessary for pods to function properly and allows pods to communicate with other pods in the cluster. |
+| `allow-ibm-ports-public` | Opens ports that are necessary for worker nodes to function properly. |
+| `allow-public-service-endpoint` | Allows worker nodes to communicate with the cluster master through the public service endpoint. |
+| `allow-public-services` | Optional: Allows worker nodes to access specified IBM Cloud services over the public network, such as {{site.data.keyword.registryshort_notm}}, {{site.data.keyword.mon_full_notm}}, and {{site.data.keyword.la_full_notm}}. |
+| `allow-public-services-pods` | Optional: Allows pods to access other IBM Cloud services over the public network, such as {{site.data.keyword.registryshort_notm}}, {{site.data.keyword.mon_full_notm}}, and {{site.data.keyword.la_full_notm}}. |
+| `deny-all-outbound-public` | Denies all egress network from worker nodes. Because this policy has a high order, `1850`, its rule is applied last in the chain of Iptables rules that an outgoing packet from a worker node matches against. Other policies in this set have lower orders, so if an outgoing packet matches one of those rules, the packet is permitted. The `deny-all-outbound` policy ensures that if an outgoing packet does not match any policies as it moves through the Iptables rules chain, the packet is denied by this policy. |
+
+Before you begin:
+1. [Install and configure the Calico CLI.](#cli_install)
+2. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+To protect your cluster on the public network by using Calico policies:
+
+1. Clone the `IBM-Cloud/kube-samples` repository.
+  ```
+  git clone https://github.com/IBM-Cloud/kube-samples.git
+  ```
+  {: pre}
+
+2. Navigate to the public policy directory for the region that your cluster is in. Example command for a cluster in US South:
+  ```
+  cd <filepath>/IBM-Cloud/kube-samples/calico-policies/public-network-isolation/us-south
+  ```
+  {: pre}
+
+3. Apply the policies.
+  ```
+  calicoctl apply -f allow-egress-pods-public.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-ibm-ports-public.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-public-service-endpoint.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f deny-all-outbound.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+4. Optional: To allow your worker nodes to access other {{site.data.keyword.Bluemix_notm}} services over the public network, apply the `allow-public-services.yaml` and `allow-public-services-pods.yaml` policies. The policy allows access to the IP addresses for {{site.data.keyword.registryshort_notm}}, and if the services are available in the region, {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}}. To access other IBM Cloud services, you must manually add the subnets for those services to this policy.
+  ```
+  calicoctl apply -f allow-public-services.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-public-services-pods.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+5. Verify that the policies are applied.
+  ```
+  calicoctl get GlobalNetworkPolicies -o yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+<br />
+
+
+## Isolating clusters on the private network
+{: #isolate_workers}
+
+You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation/calico-v3). This set of Calico policies and host endpoints can isolate the private network traffic of a cluster from other resources in the account's private network, while allowing communication on the private network that is necessary for the cluster to function.
+{: shortdesc}
+
+For example, when you enable [VRF or VLAN spanning](/docs/containers?topic=containers-plan_clusters#worker-worker) to allow worker nodes to communicate with each other on the private network, any instance that is connected to any of the private VLANs in the same {{site.data.keyword.Bluemix_notm}} account can communicate with your worker nodes.
+
+The Calico policies in this section configure the private network for worker node and pods as follows:
+
+**Worker nodes**
+* Egress network traffic on the private network interface for worker nodes is permitted to the following ports:
+  * TCP/UDP 53 for DNS
+  * TCP/UDP 2049 for communication with NFS file servers
+  * TCP/UDP 443 and 3260 for communication to block storage
+  * TCP/UDP 443 on 172.21.0.1 for the Kubernetes master API server local proxy
+  * TCP/UDP 2040 and 2041 on 172.20.0.0 for the etcd local proxy
+  * Specified ports for other {{site.data.keyword.Bluemix_notm}} services
+* Ingress network traffic on the private network interface for worker nodes is permitted only from subnets for IBM Cloud infrastructure (SoftLayer) to manage worker nodes through the following ports:
+  * TCP/UDP 53 for DNS
+  * TCP/UDP 52311 for Big Fix
+  * 10250 for VPN communication between the Kubernetes master and worker nodes
+  * ICMP to allow infrastructure health monitoring
+  * VRRP to use load balancer services
+
+**Pods**
+
+* Egress network traffic on the private network interface for pods to private networks is denied. If worker nodes are connected to a public VLAN, pod egress is permitted to public networks. All other pod egress on the private network interface is permitted to the following ports:
+  * TCP/UDP 53 for DNS
+  * TCP/UDP 2049 for communication with NFS file servers
+  * TCP/UDP 443 and 3260 for communication to block storage
+  * TCP/UDP 443 on 172.21.0.1 for the Kubernetes master API server local proxy
+  * TCP/UDP 2040 and 2041 on 172.20.0.0 for the etcd local proxy
+  * TCP/UDP 20000:32767 and 443 for communication with the Kubernetes master
+  * Specified ports for other {{site.data.keyword.Bluemix_notm}} services
+* Ingress network traffic on the private network interface for pods is permitted from workers in the cluster.
+When you apply the egress pod policies that are included in this policy set, only network traffic to the subnets and ports that are specified in the pod policies is permitted. All traffic to any subnets or ports that are not specified in the policies is blocked for all pods in all namespaces. Because only the ports and subnets that are necessary for the pods to function in {{site.data.keyword.containerlong_notm}} are specified in these policies, your pods cannot send network traffic over the internet until you add or change the Calico policy to allow them to.
+{: important}
+
+The following policies are included:
+
+|Policy name|Description|
+|-----------|-----------|
+| `allow-all-workers-private` | Limits worker node communication on the private network to other worker nodes and pods within the cluster. |
+| `allow-egress-pods-private` | Opens ports that are necessary for pods to function properly and allows pods to communicate with other pods in the cluster. Also blocks pod egress to the `10.0.0.0/8`, `172.16.0.0/12`, and `192.168.0.0/16` private networks. If worker nodes are connected to a public VLAN, pod egress is permitted to public networks. |
+| `allow-ibm-ports-private` | Opens ports that are necessary for worker nodes to function properly. |
+| `allow-icmp-private`| Opens the ICMP protocol to allow infrastructure health monitoring. |
+| `allow-private-service-endpoint` | Allows worker nodes to communicate with the cluster master through the private service endpoint. |
+| `allow-private-services` | Optional: Allows workers to access other IBM Cloud services that support communication over the private network through private service endpoints, such as {{site.data.keyword.registryshort_notm}}. |
+| `allow-private-services-pods` | Optional: Allows pods to access other IBM Cloud services that support communication over the private network through private service endpoints, such as {{site.data.keyword.registryshort_notm}}. |
+| `allow-sys-mgmt-private` | Allows egress to IBM Cloud Classic infrastructure private subnets so that you can create worker nodes in your cluster. |
+| `allow-vrrp-private` | Optional: Opens the VRRP protocol to use Kubernetes load balancer services. |
+| `generic-privatehostendpoint` | Sets up private host endpoints for your worker nodes so that the other policies in this set can target the worker node private interface (eth0) of worker nodes. **Note:** Each time you add a worker node to a cluster, you must update the host endpoints file with the new entries. |
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
@@ -467,54 +596,64 @@ Before you begin:
   ```
   {: pre}
 
-To isolate your cluster on the private network using Calico policies:
+To isolate your cluster on the private network by using Calico policies:
 
 1. Clone the `IBM-Cloud/kube-samples` repository.
-    ```
-    git clone https://github.com/IBM-Cloud/kube-samples.git
-    ```
-    {: pre}
+  ```
+  git clone https://github.com/IBM-Cloud/kube-samples.git
+  ```
+  {: pre}
 
-2. Navigate to the private policy directory for the Calico version that your cluster version is compatible with.
-   ```
-   cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
-   ```
-   {: pre}
+2. Navigate to the `calico-v3` private policy directory for the region that your cluster is in. Example command for a cluster in US South:
+  ```
+  cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3/us-south
+  ```
+  {: pre}
 
-3. Set up a policy for the private host endpoint.
-    1. Open the `generic-privatehostendpoint.yaml` policy.
-    2. Replace `<worker_name>` with the name of a worker node. **Important**: Some worker nodes must follow a different naming structure for Calico policies. You must use the name of a worker node in the format that is returned by the following command.
-      ```
-      calicoctl get nodes --config==filepath/calicoctl.cfg
-      ```
-      {: pre}
-    3. Replace `<worker-node-private-ip>` with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`.
-    4. Repeat this set of steps in a new section for each worker node in your cluster. **Note**: Each time that you add a worker node to a cluster, you must update the host endpoints file with the new entries.
+3. Set up private host endpoints for your worker nodes. When your worker nodes have private host endpoints, the policies that you apply in the next several steps can target the worker node private interface (eth0) and the pod network of a cluster.
+  1. Open the `generic-privatehostendpoint.yaml` policy.
+  2. Replace `<worker_name>` with the name of a worker node.
+    <p class="important">Some worker nodes must follow a different naming structure for Calico policies. You must use the name that is returned when you run `calicoctl get nodes --config=<filepath>/calicoctl.cfg`.</p>
+  3. Replace `<worker-node-private-ip>` with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`.
+  4. For each worker node in your cluster, repeat these steps in a separate entry in the file.
+    <p class="important">Each time you add a worker node to a cluster, you must update the host endpoints file with the new entries.</p>
+  5. Save the policy.
 
-4. Apply all of the policies to your cluster.
-    - Linux and OS X:
+4. Apply the policies.
+  ```
+  calicoctl apply -f generic-privatehostendpoint.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-all-workers-private.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-egress-pods-private.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-ibm-ports-private.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-icmp-private.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-private-service-endpoint.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-sys-mgmt-private.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
 
-      ```
-      calicoctl apply -f allow-all-workers-private.yaml
-      calicoctl apply -f allow-ibm-ports-private.yaml
-      calicoctl apply -f allow-egress-pods.yaml
-      calicoctl apply -f allow-icmp-private.yaml
-      calicoctl apply -f allow-vrrp-private.yaml
-      calicoctl apply -f generic-privatehostendpoint.yaml
-      ```
-      {: pre}
+5. Optional: To allow your workers and pods to access {{site.data.keyword.registryshort_notm}} over the private network, apply the `allow-private-services.yaml` and `allow-private-services-pods.yaml` policies. To access other IBM Cloud services that support private service endpoints, you must manually add the subnets for those services to this policy.
+  ```
+  calicoctl apply -f allow-private-services.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-private-services-pods.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
 
-    - Windows:
+6. Optional: To expose your apps with private network load balancers (NLBs) or Ingress application load balancers (ALBs), you must open the VRRP protocol by applying the `allow-vrrp-private` policy.
+  ```
+  calicoctl apply -f allow-vrrp-private.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+  You can further control access to networking services by creating [Calico pre-DNAT policies](/docs/containers?topic=containers-network_policies#block_ingress). In the pre-DNAT policy, ensure that you use `selector: ibm.role=='worker_private'` to apply the policy to the workers' private host endpoints.
+  {: tip}
 
-      ```
-      calicoctl apply -f allow-all-workers-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-ibm-ports-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-egress-pods.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-icmp-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-vrrp-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f generic-privatehostendpoint.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
+7. Verify that the policies are applied.
+  ```
+  calicoctl get GlobalNetworkPolicies -o yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+<br />
+
 
 ## Controlling traffic between pods
 {: #isolate_services}
