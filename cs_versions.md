@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-20"
+lastupdated: "2019-06-24"
 
 keywords: kubernetes, iks
 
@@ -232,7 +232,7 @@ The following table shows the actions that you must take before you update the K
 </tr>
 <tr>
 <td>Unsupported: KubeDNS cluster DNS provider</td>
-<td>CoreDNS is now the only supported cluster DNS provider for clusters that run Kubernetes version 1.14 and later. If you update an existing cluster that uses KubeDNS as the cluster DNS provider to version 1.14, KubeDNS is automatically migrated to CoreDNS during the update. Thus before you update the cluster, consider [setting up CoreDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_coredns) and testing it.<br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services are using IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
+<td>CoreDNS is now the only supported cluster DNS provider for clusters that run Kubernetes version 1.14 and later. If you update an existing cluster that uses KubeDNS as the cluster DNS provider to version 1.14, KubeDNS is automatically migrated to CoreDNS during the update. Thus before you update the cluster, consider [setting up CoreDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_coredns) and testing it. For example, if your app relies on an older DNS client, you might need to to [update the app or customize CoreDNS](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_issues).<br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services use IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
 </tr>
 <tr>
 <td>Unsupported: Kubernetes `Initializers` alpha feature</td>
@@ -333,8 +333,8 @@ The following table shows the actions that you must take after you update the Ku
 <tbody>
 <tr>
 <td>CoreDNS available as the new default cluster DNS provider</td>
-<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers?topic=containers-cluster_dns#dns_set).
-<br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services are using IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
+<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers?topic=containers-cluster_dns#dns_set). For example, you might test your apps on CoreDNS in preparation for the next Kubernetes version update, to make sure that you do not need to [update the app or customize CoreDNS](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_issues).
+<br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services use IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
 </tr>
 <tr>
 <td>`kubectl` output for `Deployment` and `StatefulSet`</td>
@@ -548,7 +548,7 @@ The following table shows the actions that you must take before you update the K
 <td>Cluster master high availability (HA) configuration</td>
 <td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br><br>For actions that you must take, see [Updating to highly available cluster masters](#ha-masters). These preparation actions apply:<ul>
 <li>If you have a firewall or custom Calico network policies.</li>
-<li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
+<li>If you use host ports `2040` or `2041` on your worker nodes.</li>
 <li>If you used the cluster master IP address for in-cluster access to the master.</li>
 <li>If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.</li>
 <li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></ul></td>
@@ -632,7 +632,7 @@ For clusters that run Kubernetes version 1.10.8_1530, 1.11.3_1531, or later, the
 You can check whether your cluster has an HA master configuration by checking the cluster's master URL in the console or by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID`. If the master URL has a host name such as ` https://c2.us-south.containers.cloud.ibm.com:xxxxx` and not an IP address such as ` https://169.xx.xx.xx:xxxxx`, the cluster has an HA master configuration. You might get an HA master configuration because of an automatic master patch update or by applying an update manually. In either case, you still must review the following items to ensure that your cluster network is set up to take full advantage of the configuration.
 
 * If you have a firewall or custom Calico network policies.
-* If you are using host ports `2040` or `2041` on your worker nodes.
+* If you use host ports `2040` or `2041` on your worker nodes.
 * If you used the cluster master IP address for in-cluster access to the master.
 * If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.
 * If you use Kubernetes or Calico network policies to control pod egress access to the master.
