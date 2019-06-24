@@ -311,5 +311,9 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
     <td>Storage volumes</td>
     <td>250 combined total of volumes of IBM Cloud infrastructure (SoftLayer) file and block storage instances per account.<br><br>If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes and need to contact your IBM Cloud infrastructure (SoftLayer) representative. For more FAQs, see the [file](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-) storage docs.</td>
   </tr>
+  <tr>
+    <td>Kubernetes pod logs</td>
+    <td>To check the logs for individual app pods, you can use the terminal to run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard.</td>
+  </tr>
 </tbody>
 </table>
