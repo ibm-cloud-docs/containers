@@ -491,6 +491,24 @@ To use Calico policies to act as your cluster firewall on the private network, y
 <br />
 
 
+## Accessing NodePort, load balancer, and Ingress services from outside the cluster
+{: #firewall_inbound}
+
+You can allow incoming access to NodePort, load balancer, and Ingress services.
+{:shortdesc}
+
+<dl>
+  <dt>NodePort service</dt>
+  <dd>Open the port that you configured when you deployed the service to the public IP addresses for all of the worker nodes to allow traffic to. To find the port, run `kubectl get svc`. The port is in the 20000-32000 range.<dd>
+  <dt>Load balancer service</dt>
+  <dd>Open the port that you configured when you deployed the service to the load balancer service's public IP address.</dd>
+  <dt>Ingress</dt>
+  <dd>Open port 80 for HTTP or port 443 for HTTPS to the IP address for the Ingress application load balancer.</dd>
+</dl>
+
+<br />
+
+
 ## Whitelisting your cluster in other services' firewalls or in on-premises firewalls
 {: #whitelist_workers}
 
