@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-06-24"
 
 keywords: kubernetes, iks, docker
 
@@ -295,7 +295,9 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
   <tr>
     <td>Maximum number of pods</td>
-    <td>110 per worker node.<br><br>The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you do not overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity.</td>
+    <td>110 per worker node.<br><br>
+    **For worker nodes that run Kubernetes 1.13.7_1527, 1.14.3_1524, or later**: Worker nodes with more than 11 CPU cores can support 10 pods per core, up to a limit of 250 pods per worker node.
+    <br><br>The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you do not overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity.</td>
   </tr>
   <tr>
     <td>Maximum number of Kubernetes services</td>
