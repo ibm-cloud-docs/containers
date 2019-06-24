@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-06-24"
 
 keywords: kubernetes, iks
 
@@ -36,7 +36,7 @@ Review these situations in which you might need to open specific ports and IP ad
 * [To run `calicoctl` commands](#firewall_calicoctl) from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls.
 * [To allow communication between the Kubernetes master and the worker nodes](#firewall_outbound) when either a firewall is set up for the worker nodes or the firewall settings are customized in your IBM Cloud infrastructure (SoftLayer) account.
 * [To allow the cluster to access resources over a firewall on the private network](#firewall_private).
-* [To allow the cluster to access resources when Calico network policies block worker node egress](#firewall_calico_egress).
+* [To allow the cluster to access resources when Calico network policies block public or private worker node egress](#firewall_calico_egress).
 * [To access the NodePort service, load balancer service, or Ingress from outside of the cluster](#firewall_inbound).
 * [To allow the cluster to access services that run inside or outside {{site.data.keyword.cloud_notm}} or on-premises and that are protected by a firewall](#whitelist_workers).
 
@@ -220,6 +220,9 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 
 Let your cluster access infrastructure resources and services from behind a public firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
 {:shortdesc}
+
+Want to use Calico policies to act as your cluster firewall instead of a gateway device firewall? See [Isolating clusters on the public network](/docs/containers?topic=containers-network_policies#isolate_workers_public).
+{: tip}
 
 Depending on your cluster setup, you access the services by using the public, private, or both IP addresses. If you have a cluster with worker nodes on both public and private VLANs behind a firewall for both public and private networks, you must open the connection for both public and private IP addresses. If your cluster has worker nodes on only the private VLAN behind a firewall, you can open the connection to only the private IP addresses.
 {: note}
@@ -452,6 +455,9 @@ Depending on your cluster setup, you access the services by using the public, pr
 If you have a firewall on the private network, allow communication between worker nodes and let your cluster access infrastructure resources over the private network.
 {:shortdesc}
 
+Want to use Calico policies to act as your cluster firewall instead of a gateway device firewall? See [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers).
+{: tip}
+
 1. Allow all traffic between worker nodes.
     1. Allow all TCP, UDP, VRRP, and IPEncap traffic between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for private load balancers and the IPEncap protocol to permit pod to pod traffic across subnets.
     2. If you use Calico policies, or if you have firewalls in each zone of a multizone cluster, a firewall might block communication between worker nodes. You must open all worker nodes in the cluster to each other by using the workers' ports, workers' private IP addresses, or the Calico worker node label.
@@ -475,72 +481,15 @@ If you have a firewall on the private network, allow communication between worke
 ## Allowing the cluster to access resources through Calico egress policies
 {: #firewall_calico_egress}
 
-If you use [Calico network policies](/docs/containers?topic=containers-network_policies) to act as a firewall to restrict all public worker egress, you must allow your workers to access the local proxies for the master API server and etcd.
+If you use [Calico network policies](/docs/containers?topic=containers-network_policies) to act as a firewall to restrict all public worker node egress, you must allow your worker nodes to access the subnets that are required for the cluster to function.
 {: shortdesc}
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
-  ```
-  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
-  ```
-  {: pre}
+To use Calico policies to act as your cluster firewall on the public network, you must apply the policies in [Isolating clusters on the public network](/docs/containers?topic=containers-network_policies#isolate_workers_public).
 
-2. Create a Calico network policy that allows public traffic from your cluster to 172.20.0.1:2040 and 172.21.0.1:443 for the API server local proxy, and 172.20.0.1:2041 for the etcd local proxy.
-  ```
-  apiVersion: projectcalico.org/v3
-  kind: GlobalNetworkPolicy
-  metadata:
-    name: allow-master-local
-  spec:
-    egress:
-    - action: Allow
-      destination:
-        ports:
-        - 2040:2041
-        nets:
-        - 172.20.0.1/32
-        protocol: UDP
-    - action: Allow
-      destination:
-        ports:
-        - 2040:2041
-        nets:
-        - 172.20.0.1/32
-        protocol: TCP
-    - action: Allow
-      destination:
-        ports:
-        - 443
-        nets:
-        - 172.21.0.1/32
-        protocol: UDP
-    - action: Allow
-      destination:
-        ports:
-        - 443
-        nets:
-        - 172.21.0.1/32
-        protocol: TCP
-    order: 1500
-    selector: ibm.role == 'worker_public'
-    types:
-    - Egress
-  ```
-  {: codeblock}
+To use Calico policies to act as your cluster firewall on the private network, you must apply the policies in [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers).
 
-3. Apply the policy to the cluster.
-    - Linux and OS X:
+<br />
 
-      ```
-      calicoctl apply -f allow-master-local.yaml
-      ```
-      {: pre}
-
-    - Windows:
-
-      ```
-      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
 
 ## Accessing NodePort, load balancer, and Ingress services from outside the cluster
 {: #firewall_inbound}
@@ -580,10 +529,10 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
     2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6  
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.7  
         ```
         {: screen}
     3.  List the VLAN subnets for each unique network ID.

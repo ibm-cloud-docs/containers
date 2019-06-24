@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-06-24"
 
 keywords: kubernetes, iks, docker
 
@@ -295,7 +295,9 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
   <tr>
     <td>Maximum number of pods</td>
-    <td>110 per worker node.<br><br>The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you do not overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity.</td>
+    <td>110 per worker node.<br><br>
+    **For worker nodes that run Kubernetes 1.13.7_1527, 1.14.3_1524, or later**: Worker nodes with more than 11 CPU cores can support 10 pods per core, up to a limit of 250 pods per worker node.
+    <br><br>The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you do not overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity.</td>
   </tr>
   <tr>
     <td>Maximum number of Kubernetes services</td>
@@ -308,6 +310,10 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   <tr>
     <td>Storage volumes</td>
     <td>250 combined total of volumes of IBM Cloud infrastructure (SoftLayer) file and block storage instances per account.<br><br>If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes and need to contact your IBM Cloud infrastructure (SoftLayer) representative. For more FAQs, see the [file](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-) storage docs.</td>
+  </tr>
+  <tr>
+    <td>Kubernetes pod logs</td>
+    <td>To check the logs for individual app pods, you can use the terminal to run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard.</td>
   </tr>
 </tbody>
 </table>

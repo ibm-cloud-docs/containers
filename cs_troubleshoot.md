@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-21"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,7 @@ You can take these general steps to ensure that your clusters are up-to-date:
 - [Update your cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) to the latest default [version of Kubernetes](/docs/containers?topic=containers-cs_versions) for {{site.data.keyword.containerlong_notm}}<p class="important">Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).</p>
 
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
-{: #debug_utility} 
+{: #debug_utility}
 
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug):
 {: shortdesc}
@@ -52,7 +52,6 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
   helm install ibm/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
-
 
 3. Start a proxy server to display the debug tool interface.
   ```
@@ -100,7 +99,7 @@ Review the options to debug your clusters and find the root causes for failures.
    </tr>
  <tr>
      <td>`Critical`</td>
-     <td>The Kubernetes master cannot be reached or all worker nodes in the cluster are down. </td>
+     <td>The Kubernetes master cannot be reached or all worker nodes in the cluster are down. If you enabled {{site.data.keyword.keymanagementservicelong_notm}} in your cluster, the {{site.data.keyword.keymanagementserviceshort}} container might fail to encrypt or decrypt your cluster secrets. If so, you can view an error with more information when you run `kubectl get secrets`.</td>
     </tr>
    <tr>
      <td>`Delete failed`</td>
@@ -144,7 +143,8 @@ Review the options to debug your clusters and find the root causes for failures.
    </tr>
     <tr>
        <td>`Warning`</td>
-       <td>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. </td>
+       <td><ul><li>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. Try to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) the unavailable worker nodes.</li>
+       <li>Your cluster has zero worker nodes, such as if you created a cluster without any worker nodes or manually removed all the worker nodes from the cluster. [Resize your worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to add worker nodes to recover from a `Warning` state.</li></ul></td>
     </tr>
    </tbody>
  </table>
@@ -229,7 +229,7 @@ Review the options to debug your worker nodes and find the root causes for failu
   </tbody>
 </table>
 </p></li>
-<li>List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></li>
+<li>List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></p></li>
 </ol>
 
 <br />
@@ -280,7 +280,7 @@ Review common error messages and learn how to resolve them.
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containerlong_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
        <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
-       <li>Check whether your cluster does not have a public IP by running `ibmcloud ks workers --cluster &lt;mycluster&gt;`. If no public IP is listed, then your cluster has only private VLANs.
+       <li>Check whether your cluster does not have a public IP by running `ibmcloud ks workers --cluster <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.
        <ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](/docs/containers?topic=containers-plan_clusters#private_clusters) and your [firewall](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
        <li>If you created the cluster with only the private service endpoint before you enabled your account for [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started), your workers cannot connect to the master. Try [setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account. If you still want a private service endpoint only cluster after your account is updated, you can then disable the public service endpoint.</li>
        <li>If you want the cluster to have a public IP, [add new worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>

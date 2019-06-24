@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-20"
+lastupdated: "2019-06-24"
 
 keywords: kubernetes, iks
 
@@ -49,6 +49,50 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for worker node fix pack 1.14.3_1524, released 24 June 2019
+{: #1143_1524}
+
+The following table shows the changes that are included in the worker node patch 1.14.3_1524.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.3_1523">
+<caption>Changes since version 1.14.3_1523</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-150-generic</td>
+<td>4.4.0-151-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-51-generic</td>
+<td>4.15.0-52-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.6</td>
+<td>1.2.7</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.7).</td>
+</tr>
+<tr>
+<td>Max pods</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased the limit of maximum number of pods for worker nodes with more than 11 CPU cores to be 10 pods per core, up to a maximum of 250 pods per worker node.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.14.3_1523, released 17 June 2019
 {: #1143_1523}
@@ -357,6 +401,50 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+### Changelog for worker node fix pack 1.13.7_1527, released 24 June 2019
+{: #1137_1527}
+
+The following table shows the changes that are included in the worker node patch 1.13.7_1527.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.7_1526">
+<caption>Changes since version 1.13.7_1526</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-150-generic</td>
+<td>4.4.0-151-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-51-generic</td>
+<td>4.15.0-52-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.6</td>
+<td>1.2.7</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.7).</td>
+</tr>
+<tr>
+<td>Max pods</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased the limit of maximum number of pods for worker nodes with more than 11 CPU cores to be 10 pods per core, up to a maximum of 250 pods per worker node.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.13.7_1526, released 17 June 2019
 {: #1137_1526}
@@ -1101,6 +1189,44 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.9_1558, released 24 June 2019
+{: #1129_1558}
+
+The following table shows the changes that are included in the worker node patch 1.12.9_1558.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.9_1557">
+<caption>Changes since version 1.12.9_1557</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-150-generic</td>
+<td>4.4.0-151-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-51-generic</td>
+<td>4.15.0-52-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.6</td>
+<td>1.2.7</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.7).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.12.9_1557, released 17 June 2019
 {: #1129_1557}
@@ -2161,6 +2287,38 @@ Review the version 1.11 changelog.
 
 Kubernetes version 1.11 is deprecated and becomes unsupported on 20 July 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019
+{: #11110_1563}
+
+The following table shows the changes that are included in the worker node patch 1.11.10_1563.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.10_1562">
+<caption>Changes since version 1.11.10_1562</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-150-generic</td>
+<td>4.4.0-151-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-51-generic</td>
+<td>4.15.0-52-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019
 {: #11110_1562}

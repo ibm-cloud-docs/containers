@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-24"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -65,8 +65,8 @@ For more information about the types of {{site.data.keyword.containerlong_notm}}
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
 <dd>To collect, forward, and view logs for your cluster's Kubernetes master, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies. To get started, see [Collecting master logs](#collect_master).</dd>
 
-<dt>Third-party services</dt>
-<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). You can collect container logs from the `/var/log/pods/` path.</dd>
+<dt>Third-party services or configure your own logging</dt>
+<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). To check the logs of an individual Kubernetes pod or other resource, you can run `kubectl logs <resource_name>`. By default, logs are stored in `/var/log` for the namespace. For example, you can collect container logs from the `/var/log/pods/` path. You might write a script to export logs to a persistent storage device that you can use to analyze with your own logging solution.<p class="important">To check the logs for individual app pods, run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard.</p></dd>
 
 </dl>
 
@@ -796,7 +796,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    </tr>
  <tr>
      <td>`Critical`</td>
-     <td>The Kubernetes master cannot be reached or all worker nodes in the cluster are down. </td>
+     <td>The Kubernetes master cannot be reached or all worker nodes in the cluster are down. If you enabled {{site.data.keyword.keymanagementservicelong_notm}} in your cluster, the {{site.data.keyword.keymanagementserviceshort}} container might fail to encrypt or decrypt your cluster secrets. If so, you can view an error with more information when you run `kubectl get secrets`.</td>
     </tr>
    <tr>
      <td>`Delete failed`</td>
@@ -840,7 +840,8 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    </tr>
     <tr>
        <td>`Warning`</td>
-       <td>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. </td>
+       <td><ul><li>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. Try to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) the unavailable worker nodes.</li>
+       <li>Your cluster has zero worker nodes, such as if you created a cluster without any worker nodes or manually removed all the worker nodes from the cluster. [Resize your worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to add worker nodes to recover from a `Warning` state.</li></ul></td>
     </tr>
    </tbody>
  </table>

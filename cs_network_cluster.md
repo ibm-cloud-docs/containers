@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-06-24"
 
 keywords: kubernetes, iks
 
@@ -68,11 +68,7 @@ Did you create a cluster with only a private service endpoint before you enabled
   * [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
 9.  Optional: To use the private service endpoint only:
-    1.  Disable the public service endpoint.
-        ```
-        ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+    1.  [Disable the public service endpoint](#disable-public-se).
     2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem).
 
 
@@ -99,35 +95,34 @@ If you previously disabled the public endpoint, you can re-enable it.
    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
    ```
    {: pre}
-
-   </br>
-
-**Steps to disable**</br>
-To disable the public service endpoint, you must first enable the private service endpoint so that your worker nodes can communicate with the Kubernetes master.
-1. Enable the private service endpoint.
-   ```
-   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-2. Refresh the Kubernetes master API server to use the private service endpoint by following the CLI prompt or by manually running the following command.
-   ```
-   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
 3. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
-
-4. Update all the worker nodes in your cluster to pick up the private service endpoint configuration.
-
-   <p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must [reload the worker nodes manually](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
+4. Update all the worker nodes in your cluster to remove the public service endpoint configuration.<p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
    ```
    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
    ```
   {: pre}
-5. Disable the public service endpoint.
+   </br>
+
+{: #disable-public-se}
+**Steps to disable**</br>
+To disable the public service endpoint, you must first enable the private service endpoint so that your worker nodes can communicate with the Kubernetes master.
+1. [Enable the private service endpoint](#set-up-private-se).
+2. Disable the public service endpoint.
    ```
    ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
    ```
    {: pre}
+3. Refresh the Kubernetes master API server to remove the public service endpoint by following the CLI prompt or by manually running the following command.
+   ```
+   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+4. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+5. Update all the worker nodes in your cluster to remove the public service endpoint configuration.<p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
+   ```
+   ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+   ```
+  {: pre}
 
 ## Switching from the public service endpoint to the private service endpoint
 {: #migrate-to-private-se}
