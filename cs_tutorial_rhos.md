@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-06-25"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -273,7 +273,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
 ### Accessing built-in OpenShift services from the CLI
 {: #openshift_services_cli}
 
-1.  From the OpenShift web console menu bar, click your profile **IAM#user.name@email.com > Copy Login Command** and paste the login command into your terminal to authenticate.
+1.  From the **Application Console** or **Service Console** view in the OpenShift  web console, click your profile **IAM#user.name@email.com > Copy Login Command** and paste the login command into your terminal to authenticate.
     ```
     oc login https://c1-e.<region>.containers.cloud.ibm.com:<port> --token=<access_token>
     ```
@@ -388,7 +388,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
     curl https://hello-world-hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud
     ```
     {: pre}
-    
+
     Example output:
     ```
     Hello world from hello-world-9cv7d! Your app is up and running in a cluster!
@@ -438,7 +438,7 @@ Before you begin, log in to your cluster as an administrator.
     ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin
     ```
     {: pre}
-    
+
     When the download of the configuration files is finished, a command is displayed that you can copy and paste to set the path to the local Kubernetes configuration file as an environment variable.
 
     Example for OS X:
@@ -481,17 +481,17 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
     ibmcloud resource service-instance-create <service_instance_name> logdna (lite|7-days|14-days|30-days) <region> [-g <resource_group>]
     ```
     {: pre}
-    
+
     Example command:
     ```
     ibmcloud resource service-instance-create logdna-openshift logdna lite us-south
     ```
     {: pre}
-    
+
     In the output, note the service instance **ID**, which is in the format `crn:v1:bluemix:public:logdna:<region>:<ID_string>::`.
     ```
     Service instance <name> was created.
-                 
+
     Name:         <name>   
     ID:           crn:v1:bluemix:public:logdna:<region>:<ID_string>::   
     GUID:         <guid>   
@@ -510,7 +510,7 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
         ibmcloud resource service-key <key_name>
         ```
         {: pre}
-        
+
         Example output:
         ```
         Name:          <key_name>  
@@ -541,7 +541,7 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
     oc edit ds logdna-agent
     ```
     {: pre}
-    
+
     In the configuration file, add the following specifications.
     *   In `spec.template.spec`, add `serviceAccount: logdna`.
     *   In `spec.template.spec.containers`, add `securityContext: privileged: true`.
@@ -574,6 +574,10 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
           ...
     ```
     {: screen}
+    
+    Having trouble editing the configuration in the terminal? You can download the configuration locally by running `oc get ds logdna-agent -n logdna -o yaml > logdna-ds.yaml`. Then, make your changes and run `oc apply -f logdna-ds.yaml`.
+    {: tip}
+    
 7.  Verify that the `logdna-agent` pod on each node is in a **Running** status.
     ```
     oc get pods
@@ -594,17 +598,17 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     ibmcloud resource service-instance-create <service_instance_name> sysdig-monitor (lite|graduated-tier) <region> [-g <resource_group>]
     ```
     {: pre}
-    
+
     Example command:
     ```
     ibmcloud resource service-instance-create sysdig-openshift sysdig-monitor lite us-south
     ```
     {: pre}
-    
+
     In the output, note the service instance **ID**, which is in the format `crn:v1:bluemix:public:logdna:<region>:<ID_string>::`.
     ```
     Service instance <name> was created.
-                 
+
     Name:         <name>   
     ID:           crn:v1:bluemix:public:sysdig-monitor:<region>:<ID_string>::   
     GUID:         <guid>   
@@ -623,7 +627,7 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
         ibmcloud resource service-key <key_name>
         ```
         {: pre}
-        
+
         Example output:
         ```
         Name:          <key_name>  
@@ -642,7 +646,7 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
                        iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::<ID_string>       
         ```
         {: screen}
-3.  Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster. The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components. 
+3.  Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster. The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components.
 
     In the following command, replace <code><sysdig_access_key></code> and <code><sysdig_collector_endpoint></code> with the values from the service key that you created earlier. For <code>&lt;tag&gt;</code>, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
 
@@ -650,8 +654,8 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t <tag> -ac 'sysdig_capture_enabled: false' --openshift
     ```
     {: pre}
-    
-    Example output: 
+
+    Example output:
     ```
     * Detecting operating system
     * Downloading Sysdig cluster role yaml
@@ -674,13 +678,13 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     daemonset.extensions/sysdig-agent created
     ```
     {: screen}
-        
+
 4.  Verify that the `sydig-agent` pods on each node show that **1/1** pods are ready and that each pod has a **Running** status.
     ```
     oc get pods
     ```
     {: pre}
-    
+
     Example output:
     ```
     NAME                 READY     STATUS    RESTARTS   AGE
@@ -739,7 +743,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
         ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --network
         ```
         {: pre}
-        
+
         Example output:
         ```
         The configuration for <cluster_name> was downloaded successfully.
@@ -757,6 +761,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
         ```
         {: pre}
     5.  Repeat these steps each time that you need to download the Calico configuration file.
+*   To deploy the [strongSwan VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn_configure), you must run the strongSwan VPN pod with privileged authority. When you configure the `values.yaml` file, set `privilegedVpnPod` to `true`.
 
 **Add-ons, integrations, and other services**:
 *   {{site.data.keyword.containerlong_notm}} add-ons such as Istio, Knative, and the Kubernetes terminal are not available.
@@ -785,8 +790,8 @@ For more information about working with your apps and routing services, see the 
 During the beta, Red Hat OpenShift on IBM Cloud clusters are not covered by IBM Support nor Red Hat Support. Any support that is provided is to help you evaluate the product in preparation for its general availability.
 {: important}
 
-For any questions or feedback, post in Slack. 
-*   If you are an external user, post in the [#openshift ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CKCJLJCH4) channel. 
+For any questions or feedback, post in Slack.
+*   If you are an external user, post in the [#openshift ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CKCJLJCH4) channel.
 *   If you are an IBMer, use the [#iks-openshift-users ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/CJH0UPN2D) channel.
 
 If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
@@ -833,7 +838,7 @@ The OpenVPN server could not be configured because the router IP address that is
     ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources
     ```
     {: pre}
-    
+
     Example output:
     ```
     Name:                           <cluster_name>   
