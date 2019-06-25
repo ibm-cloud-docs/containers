@@ -1068,28 +1068,20 @@ For example, if your account is not VRF-enabled, your IBM Cloud infrastructure (
 Before you begin, make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
 
 1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com). From the menu bar, select **Manage > Access (IAM)**.
-
 2. Click the **Users** page, and then click the name of the user that you want to set permissions for.
-
 3. Click the **Classic infrastructure** tab, and then click the **Permissions** tab.
-
 4. Customize the user's access. The permissions that users need depend on what infrastructure resources they need to use. You have two options for assigning access:
     * Use the **Permission sets** drop-down list to assign one of the following predefined roles. After selecting a role, click **Set**.
         * **View Only** gives the user permissions to view infrastructure details only.
         * **Basic User** gives the user some, but not all, infrastructure permissions.
         * **Super User** gives the user all infrastructure permissions.
     * Select individual permissions for each category. To review permissions that are needed to perform common tasks in {{site.data.keyword.containerlong_notm}}, see [User access permissions](/docs/containers?topic=containers-access_reference#infra).
-
 5.  Click **Save**.
-
 6.  In the **Device** tab, select the devices to grant access to.
-
     * In the **Select type** group, you can grant access to all bare metal, dedicated, and virtual servers so that users can work with all [machine types for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
     * In the **Enable future access** group, you can grant the user access to all future bare metal, dedicated, and virtual servers.
     * In the table of devices, make sure that the appropriate devices are selected.
-
 7. To save your changes, click **Set**.
-
 8. **Important**: If you are assigning permissions so that a user can manage clusters and worker nodes, you must assign the user access for working with support cases.
   1. Click the **Access policies** tab, and then click **Assign access**.
   2. Click the **Assign access to account management services** card.
