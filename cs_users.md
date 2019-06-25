@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-25"
 
 keywords: kubernetes, iks
 
@@ -1099,6 +1099,8 @@ Before you begin, make sure that you are the account owner or have **Super User*
 
 Downgrading permissions? The action can take a few minutes to complete.
 {: tip}
+
+
 
 <br />
 

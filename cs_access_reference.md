@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-06-25"
 
 keywords: kubernetes, iks
 
@@ -1047,9 +1047,13 @@ The following table shows the Cloud Foundry roles that are required for cluster 
 A user with the **Super User** infrastructure access role [sets the API key for a region and resource group](/docs/containers?topic=containers-users#api_key) so that infrastructure actions can be performed (or more rarely, [manually sets different account credentials](/docs/containers?topic=containers-users#credentials)). Then, the infrastructure actions that other users in the account can perform is authorized through {{site.data.keyword.cloud_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions only when you can't assign **Super User** to the user who sets the API key. For instructions to assign permissions, see [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
 {: shortdesc}
 
-
+Need to check that the API key or manually-set credentials have the required and suggested infrastructure permissions? Use the `ibmcloud ks infra-permissions-get` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get).
+{: tip}
 
 The following table shows the infrastructure permissions that are required to complete groups of common tasks.
+
+
+
 
 <table>
 <caption>Commonly required infrastructure permissions for {{site.data.keyword.containerlong_notm}}</caption>
@@ -1132,3 +1136,6 @@ The following table shows the infrastructure permissions that are required to co
 </tr>
 </tbody>
 </table>
+
+
+
