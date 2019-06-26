@@ -130,6 +130,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 </tr>
 </tbody></table>
 
+
 ## May 2019
 {: #may19}
 
