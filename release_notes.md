@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-24"
+lastupdated: "2019-06-26"
 
 keywords: kubernetes, iks
 
@@ -40,6 +40,13 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>2X June 2019</td>
+  <td><ul>
+  <li></li>
+  <li><strong>strongSwan VPN service</strong>: If you install strongSwan in a multizone cluster and use the `enableSingleSourceIP=true` setting, you can now [set `local.subnet` to the `%zoneSubnet` variable and use the `local.zoneSubnet` to specify an IP address as a /32 subnet for each zone of the cluster](/docs/containers?topic=containers-vpn#strongswan_4).</li>
+  </ul></td>
+</tr>
 <tr>
   <td>24 June 2019</td>
   <td><ul>
