@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-26"
 
 keywords: kubernetes, iks
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Getting started tutorial
+# Getting started with {{site.data.keyword.containerlong}}
 {: #getting-started}
 
 Hit the ground running with {{site.data.keyword.containerlong}} by deploying highly available apps in Docker containers that run in Kubernetes clusters.
