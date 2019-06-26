@@ -37,6 +37,7 @@ Change the pool of available portable public or private IP addresses for network
 Understand the basic concepts of networking in {{site.data.keyword.containerlong_notm}} clusters. {{site.data.keyword.containerlong_notm}} uses VLANs, subnets, and IP addresses to give cluster components network connectivity.
 {: shortdesc}
 
+
 ### VLANs
 {: #basics_vlans}
 
