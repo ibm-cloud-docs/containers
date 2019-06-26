@@ -183,10 +183,10 @@ When it comes to exposing an app with a network service, you have several choice
 <td>Implement custom routing rules and SSL termination for multiple apps.</td>
 <td><ol><li>Create an [Ingress service](/docs/containers?topic=containers-ingress#ingress_expose_public) for the public ALB.</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol></td>
 </tr><tr>
-<td>Bring your own Ingress controller + ALB host name</td>
+<td>Bring your own Ingress controller + ALB or NLB host name</td>
 <td>HTTPS load balancing with a custom Ingress controller that exposes the app with the IBM-provided ALB host name and uses custom routing rules</td>
 <td>Implement custom routing rules or other specific requirements for custom tuning for multiple apps.</td>
-<td>[Deploy your Ingress controller and leverage the IBM-provided ALB host name](/docs/containers?topic=containers-ingress#user_managed).</td>
+<td>[Deploy your Ingress controller and leverage an IBM-provided host name](/docs/containers?topic=containers-ingress#user_managed).</td>
 </tr>
 </tbody>
 </table>

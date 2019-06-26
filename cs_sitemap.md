@@ -541,7 +541,7 @@ lastupdated: "2019-06-26"
 * [Managing network traffic by using NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-[Configuring optional Ingress settings](/docs/containers?topic=containers-ingress-settings)
+[Modifying default Ingress behavior](/docs/containers?topic=containers-ingress-settings)
 * [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)
 * [Preserving the source IP address](/docs/containers?topic=containers-ingress-settings#preserve_source_ip)
 * [Configuring SSL protocols and SSL ciphers at the HTTP level](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers)
@@ -560,7 +560,11 @@ lastupdated: "2019-06-26"
   * [Upstream metrics](/docs/containers?topic=containers-ingress_health#upstream_metrics)
       * [Type 1 upstream metrics](/docs/containers?topic=containers-ingress_health#type_one)
       * [Type 2 upstream metrics](/docs/containers?topic=containers-ingress_health#type_two)
-* [Increasing the shared memory zone size for Ingress metrics collection](/docs/containers?topic=containers-ingress_health#vts_zone_size)</staging>
+* [Increasing the shared memory zone size for Ingress metrics collection](/docs/containers?topic=containers-ingress_health#vts_zone_size
+
+[Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
+* [Expose your Ingress controller by creating an NLB and a host name](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+* [Expose your Ingress controller by using the existing load balancer and Ingress subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_alb)</staging>
 
 ## Storing data on persistent storage
 {: #sitemap-storage}

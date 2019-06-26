@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Customizing Ingress with annotations
+# Customizing Ingress routing with annotations
 {: #ingress_annotation}
 
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
