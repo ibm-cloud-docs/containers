@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-06-26"
 
 keywords: kubernetes, iks
 
@@ -311,7 +311,7 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
   </tbody>
   </table>
 
-`*` lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.
+`*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
 {: note}
 
 ### Single zone clusters
@@ -341,7 +341,7 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
 2.  Other cluster resources, such as storage, networking, compute, or apps running in pods, vary in how they deploy to the zones in your multizone cluster. For more information, review these topics:
     *   Setting up [file storage](/docs/containers?topic=containers-file_storage#add_file) and [block storage](/docs/containers?topic=containers-block_storage#add_block) in multizone clusters, or [choosing a multizone persistent storage solution](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
     *   [Enabling public or private access to an app by using a network load balancer (NLB) service in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
-    *   [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress#planning).
+    *   [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress).
     *   [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability).
 
 3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
