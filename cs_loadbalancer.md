@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-26"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Basic and DSR load balancing with network load balancers (NLB)
@@ -1362,3 +1363,5 @@ To re-enable a monitor for a host name, run the following command:
 ibmcloud ks nlb-dns-monitor-enable --cluster <cluster_name_or_id> --nlb-host <host_name>
 ```
 {: pre}
+
+
