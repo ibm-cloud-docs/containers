@@ -2005,7 +2005,9 @@ ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR 
 <dd>The subnet Classless InterDomain Routing (CIDR). This value is required, and must not conflict with any subnet that is used by IBM Cloud infrastructure (SoftLayer). Supported prefixes range from `/30` (1 IP address) to `/24` (253 IP addresses). If you set the CIDR at one prefix length and later need to change it, first add the new CIDR, then [remove the old CIDR](#cs_cluster_user_subnet_rm).</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-<dd>The ID of the private VLAN. This value is required. It must match the private VLAN ID of one or more of the worker nodes in the cluster.</dd>
+<dd>The ID of the private VLAN. This value is required. The ID must be for a private VLAN in the cluster that one or more of the worker nodes are on. To see private VLANs in your cluster, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources`. In the **Subnet VLANs** section of the output, look for VLANs that have a **Public** value of `false`.
+
+workers --cluster</dd>
 </dl>
 
 **Example**:
