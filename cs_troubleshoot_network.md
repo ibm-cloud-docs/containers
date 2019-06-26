@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-24"
+lastupdated: "2019-06-26"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 
-# Troubleshooting cluster networking 
+# Troubleshooting cluster networking
 {: #cs_troubleshoot_network}
 
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting cluster networking.
