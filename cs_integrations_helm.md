@@ -41,6 +41,7 @@ For an overview of available Helm charts, see the [Helm charts catalog ![Externa
 
 - **iks-charts**: Helm charts that are approved for {{site.data.keyword.containerlong_notm}}. The name of this repo was changed from `ibm` to `iks-charts`.
 - **ibm-charts**: Helm charts that are approved for {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.cloud_notm}} Private clusters.
+- **ibm-community**: Helm charts that originated outside IBM, such as from [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners). These charts are supported and maintained by the community partners.
 - **kubernetes**: Helm charts that are provided by the Kubernetes community and considered `stable` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.cloud_notm}} Private clusters.
 - **kubernetes-incubator**: Helm charts that are provided by the Kubernetes community and considered `incubator` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.cloud_notm}} Private clusters.
 
@@ -157,7 +158,12 @@ To install Helm in a cluster with public access:
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -175,6 +181,11 @@ To install Helm in a cluster with public access:
 
    ```
    helm search ibm-charts
+   ```
+   {: pre}
+   
+   ```
+   helm search ibm-community
    ```
    {: pre}
 
@@ -251,7 +262,12 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -269,6 +285,11 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 
     ```
     helm search ibm-charts
+    ```
+    {: pre}
+    
+    ```
+    helm search ibm-community
     ```
     {: pre}
 
@@ -293,7 +314,12 @@ The steps in this example show how to install Helm charts from the {{site.data.k
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -311,6 +337,11 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 
    ```
    helm search ibm-charts
+   ```
+   {: pre}
+   
+   ```
+   helm search ibm-community
    ```
    {: pre}
 
