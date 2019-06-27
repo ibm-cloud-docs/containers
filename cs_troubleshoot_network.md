@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-06-27"
 
 keywords: kubernetes, iks
 
@@ -158,7 +158,6 @@ In your CLI output, make sure that the **Status** of your worker nodes displays 
 
 * If your standard cluster is fully deployed and has at least 2 worker nodes per zone, but no **Ingress Subdomain** is available, see [Cannot get a subdomain for Ingress ALB](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
 * For other issues, troubleshoot your Ingress setup by following the steps in [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress).
-
 <br />
 
 
