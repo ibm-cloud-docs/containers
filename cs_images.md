@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-27"
 
 keywords: kubernetes, iks
 
@@ -684,6 +684,8 @@ Every namespace has a Kubernetes service account that is named `default`. You ca
    {: pre}
 
 <br />
+
+
 
 
 ## Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image
