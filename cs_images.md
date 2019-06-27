@@ -686,8 +686,6 @@ Every namespace has a Kubernetes service account that is named `default`. You ca
 <br />
 
 
-
-
 ## Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image
 {: #namespace_token}
 
