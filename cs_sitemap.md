@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-06-27"
 
 ---
 
@@ -540,31 +540,6 @@ lastupdated: "2019-06-26"
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 * [Managing network traffic by using NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
-
-[Modifying default Ingress behavior](/docs/containers?topic=containers-ingress-settings)
-* [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)
-* [Preserving the source IP address](/docs/containers?topic=containers-ingress-settings#preserve_source_ip)
-* [Configuring SSL protocols and SSL ciphers at the HTTP level](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers)
-* [Tuning ALB performance](/docs/containers?topic=containers-ingress-settings#perf_tuning)
-* [Enabling log buffering and flush timeout](/docs/containers?topic=containers-ingress-settings#access-log)
-* [Changing the number or duration of keepalive connections](/docs/containers?topic=containers-ingress-settings#keepalive_time)
-* [Changing the pending connections backlog](/docs/containers?topic=containers-ingress-settings#backlog)
-* [Tuning kernel performance](/docs/containers?topic=containers-ingress-settings#ingress_kernel)
-
-[Logging and monitoring Ingress](/docs/containers?topic=containers-ingress_health)
-* [Viewing Ingress logs](/docs/containers?topic=containers-ingress_health#ingress_logs)
-* [Customizing Ingress log content and format](/docs/containers?topic=containers-ingress_health#ingress_log_format)
-* [Monitoring the Ingress ALB](/docs/containers?topic=containers-ingress_health#ingress_monitoring)
-  * [ALB metrics](/docs/containers?topic=containers-ingress_health#alb_metrics)
-  * [Server metrics](/docs/containers?topic=containers-ingress_health#server_metrics)
-  * [Upstream metrics](/docs/containers?topic=containers-ingress_health#upstream_metrics)
-      * [Type 1 upstream metrics](/docs/containers?topic=containers-ingress_health#type_one)
-      * [Type 2 upstream metrics](/docs/containers?topic=containers-ingress_health#type_two)
-* [Increasing the shared memory zone size for Ingress metrics collection](/docs/containers?topic=containers-ingress_health#vts_zone_size
-
-[Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
-* [Expose your Ingress controller by creating an NLB and a host name](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
-* [Expose your Ingress controller by using the existing load balancer and Ingress subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_alb)</staging>
 
 ## Storing data on persistent storage
 {: #sitemap-storage}

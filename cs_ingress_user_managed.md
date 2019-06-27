@@ -144,7 +144,7 @@ Disable the IBM-provided ALB deployment and use the load balancer service that e
     ```
     {: codeblock}
 
-13. Create Ingress resources for your apps by following the steps in [Exposing apps that are inside your cluster to the public](#ingress_expose_public).
+13. Create Ingress resources for your apps by following the steps in [Exposing apps that are inside your cluster to the public](/docs/containers?topic=containers-ingress#ingress_expose_public).
 
 Your apps are now exposed by your custom Ingress controller. To restore the IBM-provided ALB deployment, re-enable the ALB. The ALB is redeployed, and the load balancer service is automatically reconfigured to point to the ALB.
 
