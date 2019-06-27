@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-27"
 
 keywords: kubernetes, iks
 
@@ -314,7 +314,7 @@ To update machine types:
         ```
         {: pre}
 
-     2. List the worker nodes in the worker pool.
+     2. List the worker nodes in the worker pool. Note the **ID** and **Private IP**.
         ```
         ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
         ```
@@ -327,13 +327,13 @@ To update machine types:
         {: pre}
 
    - **Deprecated: For stand-alone worker nodes**:
-     1. List available worker nodes.
+     1. List available worker nodes. Note the **ID** and **Private IP**.
         ```
         ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
-     2. Get the details for a worker node and note the zone, the private and the public VLAN ID.
+     2. Get the details for a worker node and note the zone, the private VLAN ID, and the public VLAN ID.
         ```
         ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_ID>
         ```
@@ -371,15 +371,28 @@ To update machine types:
        ```
        {: pre}
 
-4. Wait for the worker nodes to be deployed.
+4. Wait for the worker nodes to be deployed. When the worker node state changes to **Normal**, the deployment is finished.
    ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
-
-   When the worker node state changes to **Normal**, the deployment is finished.
-
-5. Remove the old worker node. **Note**: If you are removing a machine type that is billed monthly (such as bare metal), you are charged for the entire the month.
+5.  To prevent downtime, reschedule the apps from the old worker nodes before you delete the old worker nodes.
+    1.  Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the **Private IP** of the worker node that you retrieved earlier, which is the worker node name in Kubernetes.
+        ```
+        kubectl cordon <private_IP_address_of_worker_node>
+        ```
+        {: pre}
+    2.  Verify that pod scheduling is disabled for the worker node by checking that the status is **SchedulingDisabled**.
+        ```
+        kubectl get nodes
+        ```
+        {: pre}
+    3.  Force pods to be removed from your worker node and rescheduled onto remaining worker nodes in the cluster. This process can take a few minutes.
+        ```
+        kubectl drain <worker_name>
+        ```
+        {: pre}
+6. Remove the old worker node. **Note**: If you are removing a machine type that is billed monthly (such as bare metal), you are charged for the entire the month.
    - **For worker nodes in a worker pool**:
      1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
         ```
@@ -399,13 +412,13 @@ To update machine types:
       ```
       {: pre}
 
-6. Verify that the worker nodes are removed from your cluster.
+7. Verify that the worker nodes are removed from your cluster.
    ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-7. Repeat these steps to update other worker pools or stand-alone worker nodes to different machine types.
+8. Repeat these steps to update other worker pools or stand-alone worker nodes to different machine types.
 
 ## Updating cluster components
 {: #components}
