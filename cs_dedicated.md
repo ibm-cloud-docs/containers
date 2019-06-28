@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-06-28"
 
 keywords: kubernetes, iks
 
@@ -201,7 +201,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         ```
         {: pre}
 
-        Invited users that have an existing IBMid have the `ACTIVE` status. Invited users that did not have an existing IBMid have the `PENDING` status before they accept the invitation the `ACTIVE` status after they accept the invitation.
+        Invited users that have an existing IBMid have the `ACTIVE` status. Invited users that did not have an existing IBMid have the `PENDING` status before they accept the invitation and the `ACTIVE` status after they accept the invitation.
 
 3.  If any user needs cluster create privileges, you must grant the Administrator role to that user.
 
