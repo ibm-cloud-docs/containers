@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-06-28"
 
 keywords: kubernetes, iks
 
@@ -1066,6 +1066,12 @@ For example, if your account is not VRF-enabled, your IBM Cloud infrastructure (
 
 Before you begin:
 *   Make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
+*   Review the [required and suggested classic infrastructure permissions](/docs/containers?topic=containers-access_reference#infra). 
+
+You can grant classic infrastructure access through the [console](#infra_console) or [CLI](#infra_cli).
+
+### Assigning infrastructure access through the console
+{: #infra_console}
 
 1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com). From the menu bar, select **Manage > Access (IAM)**.
 2. Click the **Users** page, and then click the name of the user that you want to set permissions for.
@@ -1092,7 +1098,61 @@ Before you begin:
 Downgrading permissions? The action can take a few minutes to complete.
 {: tip}
 
+### Assigning infrastructure access through the CLI
+{: #infra_cli}
 
+1.  Check if the credentials for classic infrastructure access for {{site.data.keyword.containerlong_notm}} in the region and resource group have any missing required or suggested permissions.
+    ```
+    ibmcloud ks infra-permissions-get --region <region>
+    ```
+    {: pre}
+    
+    Example output if classic infrastructure acccess is based on an API key.
+    ```
+    ...with infrastructure access set up by linked account API key.
+    ```
+    {: screen}
+    
+    Example output if classic infrastructure access is based on manually-set credentials.
+    ```
+    ...with infrastructure access set up by manually-set IaaS credentials.
+    ```
+    {: screen}
+    
+2.  Get the user whose classic infrastructure credentials are used.
+    *   **API key**: Check the API key that is used for the region and resource group of the cluster. Note the **Name** and **Email** of the API key owner in the output of the following command.
+        ```
+        ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    *  **Manually-set credentials**: Get the user name in the output of the following command.    
+        ```
+        ibmcloud ks credential-get --region <region>
+        ```
+        {: pre}
+3.  List the users in your classic infrastructure account and note the **id** of the user whose credentials are set manually or by the API key.
+    ```
+    ibmcloud sl user list
+    ```
+    {: pre}
+4.  List the current classic infrastructure permissions that the user has. Note the **KeyName** of the permission that you want to change.
+    ```
+    ibmcloud sl user permissions <user_id>
+    ```
+    {: pre}
+5.  Edit the permission of the user. For the `--enable` flag, enter `true` to assign the permission or `false` to remove the permission.
+    ```
+    ibmcloud sl user permission-edit <user_id> --permission <permission_keyname> --enable (true|false)
+    ```
+    {: pre}
+
+    To assign or remove user access to all permissions:
+    ```
+    ibmcloud sl user permission-edit <user_id> --permission ALL --enable (true|false)
+    ```
+    {: pre}
+    
+6.  For individual required or suggested permissions, see the [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra) table.
 
 <br />
 
