@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-17"
+lastupdated: "2019-06-28"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 {:faq: data-hd-content-type='faq'}
+
 
 
 # FAQs
@@ -50,6 +51,27 @@ For more information on how your cluster resources are set up, see the [Service 
 {{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering that delivers powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services related to IBM Watson®, AI, IoT, DevOps, security, and data analytics. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. The service also has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.
 
 For a detailed overview of capabilities and benefits, see [Why {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov).
+
+## What container platforms are available for my cluster?
+{: #container_platforms}
+{: faq}
+
+With {{site.data.keyword.containerlong_notm}}, you can select from two container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud (beta). The container platform that you select is installed on your cluster master and worker nodes. Later, you can [update the version](/docs/containers?topic=containers-update#update) but cannot roll back to a previous version or switch to a different container platform. If you want to use multiple container platforms, create a separate cluster for each.
+
+<dl>
+  <dt>Kubernetes</dt>
+    <dd>[Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/) is a production-grade, open source container orchestration platform that you can use to automate, scale, and manage your containerized apps that run on an Ubuntu operating system. With the [{{site.data.keyword.containerlong_notm}} version](/docs/containers?topic=containers-cs_versions#cs_versions), you get access to native Kubernetes API features that are considered **beta** or higher by the community. Kubernetes **alpha** features, which are subject to change, are generally not enabled by default. With Kubernetes, you can combine a variety of resources such as secrets, deployments, and services to securely create and manage highly available, containerized apps.<br><br>
+    To get started, [create a Kubernetes cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).</dd>
+  <dt>Red Hat OpenShift on IBM Cloud</dt>
+    <dd>Red Hat OpenShift on IBM Cloud is a Kubernetes-based platform that is designed especially to accelerate your containerized app delivery processes that run on a Red Hat Enterprise Linux 7 operating system. You can orchestrate and scale your existing OpenShift workloads across on-prem and off-prem clouds for a portable, hybrid solution that works the same in multicloud scenarios. <br><br>
+    To get started, try out the [Red Hat OpenShift on IBM Cloud tutorial](/docs/containers?topic=containers-openshift_tutorial).</dd>
+</dl>
+
+## Can I have a free OpenShift cluster?
+{: #openshift_free}
+{: faq}
+
+You can create only standard OpenShift clusters. If you want to test out the capabilities of Kubernetes, [create a free Kubernetes cluster](/docs/containers?topic=containers-clusters#clusters_free) and [deploy some apps](/docs/containers?topic=containers-app). Then, re-deploy the apps you try out in the Kubernetes cluster to your [OpenShift cluster](/docs/containers?topic=containers-openshift_tutorial#openshift_deploy_app).
 
 ## Does the service come with a managed Kubernetes master and worker nodes?
 {: #managed_master_worker}
@@ -130,6 +152,9 @@ For more information about available bare metal flavors and how bare metal is di
 *   Other: 1.12.9
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
+
+Have an [OpenShift cluster](/docs/containers?topic=containers-openshift_tutorial)? The supported OpenShift version is 3.11, which includes Kubernetes 1.11.
+{: note}
 
 ## Where is the service available?
 {: #supported_regions}
