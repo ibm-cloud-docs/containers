@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-06-27"
+lastupdated: "2019-07-01"
 
 ---
 
@@ -572,10 +572,6 @@ lastupdated: "2019-06-27"
 * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
 * [Backing up and restoring data](/docs/containers?topic=containers-file_storage#file_backup_restore)
 * [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
-  * [Bronze](/docs/containers?topic=containers-file_storage#file_bronze)
-  * [Silver](/docs/containers?topic=containers-file_storage#file_silver)
-  * [Gold](/docs/containers?topic=containers-file_storage#file_gold)
-  * [Custom](/docs/containers?topic=containers-file_storage#file_custom)
 * [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
   * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
   * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
