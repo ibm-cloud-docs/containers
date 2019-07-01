@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-20"
+lastupdated: "2019-06-26"
 
 keywords: kubernetes, iks, ingress
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Customizing Ingress with annotations
+# Customizing Ingress routing with annotations
 {: #ingress_annotation}
 
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-06-28"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -33,7 +33,7 @@ Red Hat OpenShift on IBM Cloud is available as a beta to test out OpenShift clus
 With the **Red Hat OpenShift on IBM Cloud beta**, you can create {{site.data.keyword.containerlong_notm}} clusters with worker nodes that come installed with the OpenShift container orchestration platform software. You get all the [advantages of managed {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks) for your cluster infrastructure environment, while using the [OpenShift tooling and catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/welcome/index.html) that runs on Red Hat Enterprise Linux for your app deployments.
 {: shortdesc}
 
-OpenShift worker nodes are available for standard clusters only. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11.
+OpenShift worker nodes are available for standard clusters only. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. The operating system is Red Hat Enterprise Linux 7.
 {: note}
 
 ## Objectives
@@ -93,7 +93,7 @@ The following diagram and table describe the default components that are set up 
 
 | Worker node components| Description |
 |:-----------------|:-----------------|
-| Operating System | Red Hat OpenShift on IBM Cloud worker nodes run on the Red Hat Enterprise Linux 7 (RHEL 7) operating system. |
+| Operating System | Red Hat OpenShift on IBM Cloud worker nodes run on the Red Hat Enterprise Linux 7 operating system. |
 | Projects | OpenShift organizes your resources into projects, which are Kubernetes namespaces with annotations, and includes many more components than native Kubernetes clusters to run OpenShift features such as the catalog. Select components of projects are described in the following rows. For more information, see [Projects and users ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/architecture/core_concepts/projects_and_users.html).|
 | `kube-system` | This namespace includes many components that are used to run Kubernetes on the worker node.<ul><li>**`ibm-master-proxy`**: The `ibm-master-proxy` is a daemon set that forwards requests from the worker node to the IP addresses of the highly available master replicas. In single zone clusters, the master has three replicas on separate hosts. For clusters that are in a multizone-capable zone, the master has three replicas that are spread across zones. A highly available load balancer forwards requests to the master domain name to the master replicas.</li><li>**`openvpn-client`**: The OpenVPN client works with the OpenVPN server to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</li><li>**`kubelet`**: The kubelet is a worker node agent that runs on every worker node and is responsible for monitoring the health of pods that run on the worker node and for watching the events that the Kubernetes API server sends. Based on the events, the kubelet creates or removes pods, ensures liveness and readiness probes, and reports back the status of the pods to the Kubernetes API server.</li><li>**`calico`**: Calico manages network policies for your cluster, and includes a few components to manage container network connectivity, IP address assignment, and network traffic control.</li><li>**Other components**: The `kube-system` namespace also includes components to manage IBM-provided resources such as storage plug-ins for file and block storage, ingress application load balancer (ALB), `fluentd` logging, and `keepalived`.</li></ul>|
 | `ibm-system` | This namespace includes the `ibm-cloud-provider-ip` deployment that works with `keepalived` to provide health checking and Layer 4 load balancing for requests to app pods.|
@@ -115,7 +115,7 @@ The following diagram and table describe the default components that are set up 
 You can create a Red Hat OpenShift on IBM Cloud cluster in {{site.data.keyword.containerlong_notm}} by using the [console](#openshift_create_cluster_console) or [CLI](#openshift_create_cluster_cli). To learn about what components are set up when you create a cluster, see the [Architecture overview](#openshift_architecture). OpenShift is available for only standard clusters. You can learn more about the price of standard clusters in the [frequently asked questions](/docs/containers?topic=containers-faqs#charges).
 {:shortdesc}
 
-You can create clusters in only the **default** resource group. Any OpenShift clusters that you create during the beta remain for 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available.
+Any OpenShift clusters that you create during the beta remain for 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available.
 {: important}
 
 ### Creating a cluster with the console
@@ -130,10 +130,11 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     1.  Log in to your [{{site.data.keyword.cloud_notm}} account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
     2.  From the hamburger menu ![hamburger menu icon](../icons/icon_hamburger.svg "hamburger menu icon"), select **Kubernetes** and then click **Create cluster**.
     3.  Choose your cluster setup details and name. For the beta, OpenShift clusters are available only as standard clusters that are located in Washington, DC and London data centers.
-        *   For **Select a plan**, choose **Standard**.
-        *   For **Resource Group**, you must use the **default**.
+        *   For **Select a plan**, choose **Standard**. 
+        *   For the **Cluster type and version**, choose **OpenShift**. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. The operating system is Red Hat Enterprise Linux 7.
+        *   Fill out your cluster name, resource group, and tags.
         *   For the **Location**, set the geography to **North America** or **Europe**, select either a **Single zone** or **Multizone** availability, and then select **Washington, DC** or **London** worker zones.
-        *   For **Default worker pool**, select the **OpenShift** cluster version. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. Choose an available flavor for your worker nodes ideally with at least four Cores 16 GB RAM.
+        *   For **Default worker pool**, choose an available flavor for your worker nodes, ideally with at least 4 cores and 16 GB RAM.
         *   Set a number of worker nodes to create per zone, such as 3.
     4.  To finish, click **Create cluster**.<p class="note">Your cluster creation might take some time to complete. After the cluster state shows **Normal**, the cluster network and load-balancing components take about 10 more minutes to deploy and update the cluster domain that you use for the OpenShift web console and other routes. Wait until the cluster is ready before continuing to the next step by checking that the **Ingress subdomain** follows a pattern of `<cluster_name>.<region>.containers.appdomain.cloud`.</p>
 2.  From the cluster details page, click **OpenShift web console**.
@@ -148,9 +149,9 @@ Create a standard OpenShift cluster by using the {{site.data.keyword.cloud_notm}
 
 Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure that you have the appropriate permissions to create a cluster, the `ibmcloud` CLI and plug-ins, and the `oc` and `kubectl` CLIs.
 
-1.  Log in to the account that you set up to create OpenShift clusters. Target the **us-east** or **eu-gb** region and the **default** resource group. If you have a federated account, include the `--sso` flag.
+1.  Log in to the account that you set up to create OpenShift clusters. Target the **us-east** or **eu-gb** region and the resource group. If you have a federated account, include the `--sso` flag.
     ```
-    ibmcloud login -r (us-east|eu-gb) -g default [--sso]
+    ibmcloud login -r (us-east|eu-gb) [-g default] [--sso]
     ```
     {: pre}
 2.  Create a cluster.
@@ -186,7 +187,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     </tr>
     <tr>
       <td><code>--kube-version <em>&lt;openshift_version&gt;</em></code></td>
-      <td>You must choose a supported OpenShift version. OpenShift versions include a Kubernetes version that differs from the Kubernetes versions that are available on native Kubernetes Ubuntu clusters. To list available OpenShift versions, run `ibmcloud ks versions`. To create a cluster with the latest the patch version, you can specify just the major and minor version, such as ` 3.11_openshift`.<br><br>Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11.</td>
+      <td>You must choose a supported OpenShift version. OpenShift versions include a Kubernetes version that differs from the Kubernetes versions that are available on native Kubernetes Ubuntu clusters. To list available OpenShift versions, run `ibmcloud ks versions`. To create a cluster with the latest the patch version, you can specify just the major and minor version, such as ` 3.11_openshift`.<br><br>Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. The operating system is Red Hat Enterprise Linux 7.</td>
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;worker_node_flavor&gt;</em></code></td>
@@ -273,7 +274,7 @@ You can access the built-in OpenShift service routes from the [console](#openshi
 ### Accessing built-in OpenShift services from the CLI
 {: #openshift_services_cli}
 
-1.  From the OpenShift web console menu bar, click your profile **IAM#user.name@email.com > Copy Login Command** and paste the login command into your terminal to authenticate.
+1.  From the **Application Console** or **Service Console** view in the OpenShift  web console, click your profile **IAM#user.name@email.com > Copy Login Command** and paste the login command into your terminal to authenticate.
     ```
     oc login https://c1-e.<region>.containers.cloud.ibm.com:<port> --token=<access_token>
     ```
@@ -388,7 +389,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
     curl https://hello-world-hello-world.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud
     ```
     {: pre}
-    
+
     Example output:
     ```
     Hello world from hello-world-9cv7d! Your app is up and running in a cluster!
@@ -438,7 +439,7 @@ Before you begin, log in to your cluster as an administrator.
     ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin
     ```
     {: pre}
-    
+
     When the download of the configuration files is finished, a command is displayed that you can copy and paste to set the path to the local Kubernetes configuration file as an environment variable.
 
     Example for OS X:
@@ -481,17 +482,17 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
     ibmcloud resource service-instance-create <service_instance_name> logdna (lite|7-days|14-days|30-days) <region> [-g <resource_group>]
     ```
     {: pre}
-    
+
     Example command:
     ```
     ibmcloud resource service-instance-create logdna-openshift logdna lite us-south
     ```
     {: pre}
-    
+
     In the output, note the service instance **ID**, which is in the format `crn:v1:bluemix:public:logdna:<region>:<ID_string>::`.
     ```
     Service instance <name> was created.
-                 
+
     Name:         <name>   
     ID:           crn:v1:bluemix:public:logdna:<region>:<ID_string>::   
     GUID:         <guid>   
@@ -510,7 +511,7 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
         ibmcloud resource service-key <key_name>
         ```
         {: pre}
-        
+
         Example output:
         ```
         Name:          <key_name>  
@@ -541,7 +542,7 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
     oc edit ds logdna-agent
     ```
     {: pre}
-    
+
     In the configuration file, add the following specifications.
     *   In `spec.template.spec`, add `serviceAccount: logdna`.
     *   In `spec.template.spec.containers`, add `securityContext: privileged: true`.
@@ -574,6 +575,10 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
           ...
     ```
     {: screen}
+    
+    Having trouble editing the configuration in the terminal? You can download the configuration locally by running `oc get ds logdna-agent -n logdna -o yaml > logdna-ds.yaml`. Then, make your changes and run `oc apply -f logdna-ds.yaml`.
+    {: tip}
+    
 7.  Verify that the `logdna-agent` pod on each node is in a **Running** status.
     ```
     oc get pods
@@ -594,17 +599,17 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     ibmcloud resource service-instance-create <service_instance_name> sysdig-monitor (lite|graduated-tier) <region> [-g <resource_group>]
     ```
     {: pre}
-    
+
     Example command:
     ```
     ibmcloud resource service-instance-create sysdig-openshift sysdig-monitor lite us-south
     ```
     {: pre}
-    
+
     In the output, note the service instance **ID**, which is in the format `crn:v1:bluemix:public:logdna:<region>:<ID_string>::`.
     ```
     Service instance <name> was created.
-                 
+
     Name:         <name>   
     ID:           crn:v1:bluemix:public:sysdig-monitor:<region>:<ID_string>::   
     GUID:         <guid>   
@@ -623,7 +628,7 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
         ibmcloud resource service-key <key_name>
         ```
         {: pre}
-        
+
         Example output:
         ```
         Name:          <key_name>  
@@ -642,7 +647,7 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
                        iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::<ID_string>       
         ```
         {: screen}
-3.  Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster. The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components. 
+3.  Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster. The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components.
 
     In the following command, replace <code><sysdig_access_key></code> and <code><sysdig_collector_endpoint></code> with the values from the service key that you created earlier. For <code>&lt;tag&gt;</code>, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
 
@@ -650,8 +655,8 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t <tag> -ac 'sysdig_capture_enabled: false' --openshift
     ```
     {: pre}
-    
-    Example output: 
+
+    Example output:
     ```
     * Detecting operating system
     * Downloading Sysdig cluster role yaml
@@ -674,13 +679,13 @@ Create an {{site.data.keyword.mon_full_notm}} instance in your {{site.data.keywo
     daemonset.extensions/sysdig-agent created
     ```
     {: screen}
-        
+
 4.  Verify that the `sydig-agent` pods on each node show that **1/1** pods are ready and that each pod has a **Running** status.
     ```
     oc get pods
     ```
     {: pre}
-    
+
     Example output:
     ```
     NAME                 READY     STATUS    RESTARTS   AGE
@@ -721,7 +726,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
 {: shortdesc}
 
 **Cluster**:
-*   You can create only standard clusters, not free clusters.
+*   You can create only standard clusters, not free clusters. Instead, you can create a free Kubernetes cluster, and then re-deploy the apps you try out in the Kubernetes cluster to your OpenShift cluster.
 *   Locations are available in two multizone metro areas, Washington, DC and London. Supported zones are `wdc04, wdc06, wdc07, lon04, lon05,` and `lon06`.
 *   You cannot create a cluster with worker nodes that run multiple operating systems, such as OpenShift on Red Hat Enterprise Linux and native Kubernetes on Ubuntu.
 *   The [cluster autoscaler](/docs/containers?topic=containers-ca) is not supported because it requires Kubernetes version 1.12 or later. OpenShift 3.11 includes only Kubernetes version 1.11.
@@ -739,7 +744,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
         ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --network
         ```
         {: pre}
-        
+
         Example output:
         ```
         The configuration for <cluster_name> was downloaded successfully.
@@ -757,6 +762,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
         ```
         {: pre}
     5.  Repeat these steps each time that you need to download the Calico configuration file.
+*   To deploy the [strongSwan VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn_configure), you must run the strongSwan VPN pod with privileged authority. When you configure the `values.yaml` file, set `privilegedVpnPod` to `true`.
 
 **Add-ons, integrations, and other services**:
 *   {{site.data.keyword.containerlong_notm}} add-ons such as Istio, Knative, and the Kubernetes terminal are not available.
@@ -765,7 +771,7 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
 **Apps**:
 *   OpenShift sets up stricter security settings by default than native Kubernetes. For more information, see the OpenShift docs for [Managing Security Context Constraints (SCC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
 *   For example, apps that are configured to run as root might fail, with the pods in a `CrashLoopBackOff` status. To resolve this issue, you can either modify the default security context constraints or use an image that does not run as root.
-*   OpenShift are set up by default with a local Docker registry. If you want to use images that are stored in your remote private {{site.data.keyword.registrylong_notm}} `icr.io` domain names, you must create the secrets for each global and regional registry yourself. You can use [copy the `default-<region>-icr-io` secrets](/docs/containers?topic=containers-images#copy_imagePullSecret) from the `default` namespace to the namespace that you want to pull images from, or [create your own secret](/docs/containers?topic=containers-images#other_registry_accounts). Then, [add the image pull secret](/docs/containers?topic=containers-images#use_imagePullSecret) to your deployment configuration or to the namespace service account.
+*   OpenShift are set up by default with a local Docker registry. If you want to use images that are stored in your remote private {{site.data.keyword.registrylong_notm}} `icr.io` domain names, you must create the secrets for each global and regional registry yourself. You can [copy the `default-<region>-icr-io` secrets](/docs/containers?topic=containers-images#copy_imagePullSecret) from the `default` namespace to the namespace that you want to pull images from, or [create your own secret](/docs/containers?topic=containers-images#other_registry_accounts). Then, [add the image pull secret](/docs/containers?topic=containers-images#use_imagePullSecret) to your deployment configuration or to the namespace service account.
 *   The OpenShift console is used instead of the Kubernetes dashboard.
 
 <br />
@@ -785,8 +791,8 @@ For more information about working with your apps and routing services, see the 
 During the beta, Red Hat OpenShift on IBM Cloud clusters are not covered by IBM Support nor Red Hat Support. Any support that is provided is to help you evaluate the product in preparation for its general availability.
 {: important}
 
-For any questions or feedback, post in Slack. 
-*   If you are an external user, post in the [#openshift ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CKCJLJCH4) channel. 
+For any questions or feedback, post in Slack.
+*   If you are an external user, post in the [#openshift ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CKCJLJCH4) channel.
 *   If you are an IBMer, use the [#iks-openshift-users ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/CJH0UPN2D) channel.
 
 If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
@@ -833,7 +839,7 @@ The OpenVPN server could not be configured because the router IP address that is
     ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources
     ```
     {: pre}
-    
+
     Example output:
     ```
     Name:                           <cluster_name>   

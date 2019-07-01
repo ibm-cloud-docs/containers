@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-07-01"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
@@ -132,6 +132,10 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ibmcloud ks infra-permissions-get --region <region>
         ```
         {: pre}
+        
+        For console and CLI commands to assign these permissions, see [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra).
+        {: tip}
+        
     2.  Make sure that the [infrastructure credentials owner for the API key or the manually-set account has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
     3.  If necessary, you can change the [API key](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) or [manually-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) infrastructure credentials owner for the region and resource group.
 3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster.
@@ -667,8 +671,8 @@ Manually update the reference of the private IP address to point to the correct 
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.13.6
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.13.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.13.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.13.7
   ```
   {: screen}
 
@@ -830,7 +834,9 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
 {: screen}
 
 {: tsCauses}
-Your cluster uses an API key or token that is stored in an [image pull secret](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize the cluster to pull images from {{site.data.keyword.registrylong_notm}}. By default, new clusters have image pull secrets that use API keys so that the cluster can pull images from any regional `icr.io` registry for containers that are deployed to the `default` Kubernetes namespace. If the cluster has an image pull secret that uses a token, the default access to {{site.data.keyword.registrylong_notm}} is further restricted to only certain regional registries that use the deprecated `<region>.registry.bluemix.net` domains.
+Your cluster uses an API key or token that is stored in an [image pull secret](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize the cluster to pull images from {{site.data.keyword.registrylong_notm}}. By default, new clusters have image pull secrets that use API keys so that the cluster can pull images from any regional `icr.io` registry for containers that are deployed to the `default` Kubernetes namespace. 
+
+For clusters that were created before **1 July 2019**, the cluster might have an image pull secret that uses a token. Tokens grant access to {{site.data.keyword.registrylong_notm}} for only certain regional registries that use the deprecated `<region>.registry.bluemix.net` domains.
 
 {: tsResolve}
 
@@ -970,7 +976,7 @@ The following steps assume that the API key stores the credentials of a service 
 If your pod configuration has an image pull secret that uses a token, check that the token credentials are valid.
 {: shortdesc}
 
-This method of using a token to authorize cluster access to {{site.data.keyword.registrylong_notm}} is supported for the `registry.bluemix.net` domain names but deprecated. Instead, [use the API key method](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize cluster access to the new `icr.io` registry domain names.
+This method of using a token to authorize cluster access to {{site.data.keyword.registrylong_notm}} for the `registry.bluemix.net` domain names is deprecated. Before tokens become unsupported, update your deployments to [use the API key method](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize cluster access to the new `icr.io` registry domain names.
 {: deprecated}
 
 1.  Get the image pull secret configuration. If the pod is not in the `default` namespace, include the `-n` flag.

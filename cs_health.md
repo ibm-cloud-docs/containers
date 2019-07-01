@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-24"
+lastupdated: "2019-06-28"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -486,7 +486,7 @@ ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_confi
 {: pre}
 
 **Deleting**</br>
-You can stop forwarding logs one or all of the logging configurations for a cluster:
+You can stop forwarding logs by deleting one or all of the logging configurations for a cluster:
 
 * To delete one logging configuration:
   ```

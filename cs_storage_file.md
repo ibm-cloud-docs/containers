@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-06-25"
 
 keywords: kubernetes, iks
 
@@ -1232,185 +1232,68 @@ Review the following backup and restore options for your file storage:
 ## Storage class reference
 {: #file_storageclass_reference}
 
+| Characteristics | Setting|
+|:-----------------|:-----------------|
+| Name | <code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code>|
+| Type | [Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| File system | NFS|
+| IOPS per gigabyte | 2|
+| Size range in gigabytes | 20-12000 Gi|
+| Hard disk | SSD|
+| Billing | Hourly|
+| Pricing | [Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="File storage class: bronze" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Bronze"}
+{: tab-group="File storage class"}
 
+| Characteristics | Setting|
+|:-----------------|:-----------------|
+| Name | <code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code>|
+| Type | [Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| File system | NFS|
+| IOPS per gigabyte | 4|
+| Size range in gigabytes | 20-12000 Gi|
+| Hard disk | SSD|
+| Billing | Hourly|
+| Pricing | [Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="File storage class: silver" caption-side="top"}
+{: #simpletabtable2}
+{: tab-title="Silver"}
+{: tab-group="File storage class"}
 
+| Characteristics | Setting|
+|:-----------------|:-----------------|
+| Name | <code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code>|
+| Type | [Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| File system | NFS|
+| IOPS per gigabyte | 10|
+| Size range in gigabytes | 20-4000 Gi|
+| Hard disk | SSD|
+| Billing | Hourly|
+| Pricing | [Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="File storage class: gold" caption-side="top"}
+{: #simpletabtable3}
+{: tab-title="Gold"}
+{: tab-group="File storage class"}
 
-### Bronze
-{: #file_bronze}
-
-<table>
-<caption>File storage class: bronze</caption>
-<thead>
-<th>Characteristics</th>
-<th>Setting</th>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td><code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code></td>
-</tr>
-<tr>
-<td>Type</td>
-<td>[Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>File system</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS per gigabyte</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Size range in gigabytes</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Hard disk</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Billing</td>
-<td>Hourly</td>
-</tr>
-<tr>
-<td>Pricing</td>
-<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-
-### Silver
-{: #file_silver}
-
-<table>
-<caption>File storage class: silver</caption>
-<thead>
-<th>Characteristics</th>
-<th>Setting</th>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td><code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code></td>
-</tr>
-<tr>
-<td>Type</td>
-<td>[Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>File system</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS per gigabyte</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Size range in gigabytes</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Hard disk</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Billing</td>
-<td>Hourly</li></ul></td>
-</tr>
-<tr>
-<td>Pricing</td>
-<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Gold
-{: #file_gold}
-
-<table>
-<caption>File storage class: gold</caption>
-<thead>
-<th>Characteristics</th>
-<th>Setting</th>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td><code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code></td>
-</tr>
-<tr>
-<td>Type</td>
-<td>[Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>File system</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS per gigabyte</td>
-<td>10</td>
-</tr>
-<tr>
-<td>Size range in gigabytes</td>
-<td>20-4000 Gi</td>
-</tr>
-<tr>
-<td>Hard disk</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Billing</td>
-<td>Hourly</li></ul></td>
-</tr>
-<tr>
-<td>Pricing</td>
-<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Custom
-{: #file_custom}
-
-<table>
-<caption>File storage class: custom</caption>
-<thead>
-<th>Characteristics</th>
-<th>Setting</th>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td><code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code></td>
-</tr>
-<tr>
-<td>Type</td>
-<td>[Performance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)</td>
-</tr>
-<tr>
-<td>File system</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS and size</td>
-<td><p><strong>Size range in gigabytes / IOPS range in multiples of 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul></td>
-</tr>
-<tr>
-<td>Hard disk</td>
-<td>The IOPS to gigabyte ratio determines the type of hard disk that is provisioned. To determine your IOPS to gigabyte ratio, you divide the IOPS by the size of your storage. </br></br>Example: </br>You chose 500Gi of storage with 100 IOPS. Your ratio is 0.2 (100 IOPS/500Gi). </br></br><strong>Overview of hard disk types per ratio:</strong><ul><li>Less than or equal to 0.3: SATA</li><li>Greater than 0.3: SSD</li></ul></td>
-</tr>
-<tr>
-<td>Billing</td>
-<td>Hourly</li></ul></td>
-</tr>
-<tr>
-<td>Pricing</td>
-<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| Characteristics | Setting|
+|:-----------------|:-----------------|
+| Name | <code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code>|
+| Type | [Performance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)|
+| File system | NFS|
+| IOPS and size | <p><strong>Size range in gigabytes / IOPS range in multiples of 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul>|
+| Hard disk | The IOPS to gigabyte ratio determines the type of hard disk that is provisioned. To determine your IOPS to gigabyte ratio, you divide the IOPS by the size of your storage. </br></br>Example: </br>You chose 500Gi of storage with 100 IOPS. Your ratio is 0.2 (100 IOPS/500Gi). </br></br><strong>Overview of hard disk types per ratio:</strong><ul><li>Less than or equal to 0.3: SATA</li><li>Greater than 0.3: SSD</li></ul>|
+| Billing | Hourly|
+| Pricing | [Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="File storage class: custom" caption-side="top"}
+{: #simpletabtable4}
+{: tab-title="Custom"}
+{: tab-group="File storage class"}
 
 <br />
 
@@ -1437,8 +1320,6 @@ Topology-aware volume scheduling is supported on clusters that run Kubernetes ve
 {: note}
 
 The following examples show how to create storage classes that delay the creation of the file storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the file storage instance is created when you create the PVC.
-
-
 
 - **Example for Endurance file storage:**
   ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-06-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -2005,7 +2005,9 @@ ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR 
 <dd>The subnet Classless InterDomain Routing (CIDR). This value is required, and must not conflict with any subnet that is used by IBM Cloud infrastructure (SoftLayer). Supported prefixes range from `/30` (1 IP address) to `/24` (253 IP addresses). If you set the CIDR at one prefix length and later need to change it, first add the new CIDR, then [remove the old CIDR](#cs_cluster_user_subnet_rm).</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-<dd>The ID of the private VLAN. This value is required. It must match the private VLAN ID of one or more of the worker nodes in the cluster.</dd>
+<dd>The ID of the private VLAN. This value is required. The ID must be for a private VLAN in the cluster that one or more of the worker nodes are on. To see private VLANs in your cluster, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources`. In the **Subnet VLANs** section of the output, look for VLANs that have a **Public** value of `false`.
+
+workers --cluster</dd>
 </dl>
 
 **Example**:
@@ -2776,6 +2778,9 @@ ibmcloud ks machine-types --zone dal10
 
 View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) account. VLAN spanning enables all devices on an account to communicate with each other through the private network, regardless of its assigned VLAN.
 {: shortdesc}
+
+The VLAN spanning option is disabled for clusters that are created in a VRF-enabled account. When VRF is enabled, all VLANs in the account can automatically communicate with each other over the private network. For more information, see [Planning your cluster network setup: Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker).
+{: note}
 
 ```
 ibmcloud ks vlan-spanning-get --region REGION [--json] [-s]
@@ -3622,13 +3627,6 @@ ibmcloud ks nlb-dnss --cluster mycluster
 {: pre}
 
 </br>
-### ibmcloud ks nlb-dns-monitor
-{: #cs_nlb-dns-monitor}
-
-Create, modify, and view health check monitors for network load balancer host names in a cluster. This command must be combined with one of the following subcommands.
-{: shortdesc}
-
-</br>
 ### ibmcloud ks nlb-dns-monitor-configure
 {: #cs_nlb-dns-monitor-configure}
 
@@ -3668,13 +3666,13 @@ ibmcloud ks nlb-dns-monitor-configure --cluster CLUSTER --nlb-host HOST NAME [--
 <dd>When <code>type</code> is <code>HTTPS</code>: The endpoint path to health check against. Default: <code>/</code></dd>
 
 <dt><code>--timeout <em>TIMEOUT</em></code></dt>
-<dd>The timeout, in seconds, before the IP is considered unhealthy. Default: <code>5</code></dd>
+<dd>The timeout, in seconds, before the IP is considered unreachable. The health check waits the number of seconds specified in the `interval` parameter before trying to reach the IP again. The value must be an integer from 1 to 15. Default: <code>5</code></dd>
 
 <dt><code>--retries <em>RETRIES</em></code></dt>
-<dd>When a timeout occurs, the number of retries to attempt before the IP is considered unhealthy. Retries are attempted immediately. Default: <code>2</code></dd>
+<dd>When a timeout occurs, the number of retries to attempt before the unreachable IP is considered unhealthy. Retries are attempted immediately. The value must be an integer from 1 to 5. Default: <code>2</code></dd>
 
 <dt><code>--interval <em>INTERVAL</em></code></dt>
-<dd>The interval, in seconds, between each health check. Short intervals might improve failover time, but increase load on the IPs. Default: <code>60</code></dd>
+<dd>The interval, in seconds, between each health check. Short intervals might improve failover time, but increase load on the IPs. The value must be an integer from 10 to 3600 and must be greater than `(RETRIES + 1) * TIMEOUT`. Default: <code>60</code></dd>
 
 <dt><code>--port <em>PORT</em></code></dt>
 <dd>The port number to connect to for the health check. When <code>type</code> is <code>TCP</code>, this parameter is required. When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>, define the port only if you use a port other than 80 for HTTP or 443 for HTTPS. Default for TCP: <code>0</code>. Default for HTTP: <code>80</code>. Default for HTTPS: <code>443</code>.</dd>

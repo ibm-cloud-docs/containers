@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-06-28"
 
 keywords: kubernetes, iks
 
@@ -33,6 +33,7 @@ When you [assign cluster permissions](/docs/containers?topic=containers-users), 
 
 As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of authorizing users with {{site.data.keyword.cloud_notm}} IAM: [service access roles](#service). These service roles are used to grant access to resources within the cluster, such as Kubernetes namespaces. For more information, check out the blog, [Introducing service roles and namespaces in IAM for more granular control of cluster access ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
 {: note}
+
 
 ## {{site.data.keyword.cloud_notm}} IAM platform roles
 {: #iam_platform}
@@ -1041,94 +1042,52 @@ The following table shows the Cloud Foundry roles that are required for cluster 
   </tbody>
 </table>
 
-## Infrastructure roles
+## Classic infrastructure roles
 {: #infra}
 
-A user with the **Super User** infrastructure access role [sets the API key for a region and resource group](/docs/containers?topic=containers-users#api_key) so that infrastructure actions can be performed (or more rarely, [manually sets different account credentials](/docs/containers?topic=containers-users#credentials)). Then, the infrastructure actions that other users in the account can perform is authorized through {{site.data.keyword.cloud_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions only when you can't assign **Super User** to the user who sets the API key. For instructions to assign permissions, see [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
+A user with the **Super User** infrastructure access role [sets the API key for a region and resource group](/docs/containers?topic=containers-users#api_key) so that infrastructure actions can be performed (or more rarely, [manually sets different account credentials](/docs/containers?topic=containers-users#credentials)). Then, the infrastructure actions that other users in the account can perform is authorized through {{site.data.keyword.cloud_notm}} IAM platform roles. You do not need to edit the other users' classic infrastructure permissions. Use the following table to customize users' classic infrastructure permissions only when you can't assign **Super User** to the user who sets the API key. For instructions to assign permissions, see [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
 {: shortdesc}
 
+Need to check that the API key or manually-set credentials have the required and suggested infrastructure permissions? Use the `ibmcloud ks infra-permissions-get` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get).
+{: tip}
 
+The following table shows the classic infrastructure permissions that the credentials for a region and resource group can have for creating clusters and other common use cases. The description includes how you can assign the permission in the {{site.data.keyword.cloud_notm}} IAM Classic infrastructure console or the `ibmcloud sl` command. For more information, see the instructions for the [console](/docs/containers?topic=containers-users#infra_console) or [CLI](/docs/containers?topic=containers-users#infra_cli). 
+*   **Create clusters**: Classic infrastructure permissions that you must have to create a cluster. When you run `ibmcloud ks infra-permissions-get`, these permissions are listed as **Required**.
+*   **Other common use cases**: Classic infrastructure permissions that you must have for other common scenarios. Even if you have permission to create a cluster, some limitations might apply. For example, you might not be able to create or work with a cluster with bare metal worker nodes or a public IP address. After cluster creation, further steps to add networking or storage resources might fail. When you run `ibmcloud ks infra-permissions-get`, these permissions are listed as **Suggested**.
 
-The following table shows the infrastructure permissions that are required to complete groups of common tasks.
+| Permission | Description | IAM Assign Policy Console | CLI |
+|:-----------------|:-----------------|:---------------|:----|
+| IPMI Remote Management | Manage worker nodes.|Classic infrastructure > Permissions > Devices|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission REMOTE_MANAGEMENT --enable true</code></pre> |
+| Add Server | Add worker nodes. For worker nodes that have public IP addresses, you also need the **Add Compute with Public Network Port** permission. | Classic infrastructure > Permissions > Account|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission SERVER_ADD --enable true</code></pre>  |
+| Cancel Server | Delete worker nodes. | Classic infrastructure > Permissions > Account|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission SERVER_CANCEL --enable true</code></pre>  |
+| OS Reloads and Rescue Kernel | Update, reboot, and reload worker nodes. | Classic infrastructure > Permissions > Devices|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission SERVER_RELOAD --enable true</code></pre>  |
+| View Virtual Server Details | Required if the cluster has VM worker nodes. List and get details of VM worker nodes. | Classic infrastructure > Permissions > Devices|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission VIRTUAL_GUEST_VIEW --enable true</code></pre>  |
+| View Hardware Details | Required if the cluster has bare metal worker nodes. List and get details of bare metal worker nodes. | Classic infrastructure > Permissions > Devices|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission HARDWARE_VIEW --enable true</code></pre>  |
+| Add Support Case | As part of the cluster creation automation, support cases are opened to provision the cluster infrastructure. | Assign access to account management services > Support Center > Administrator|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission TICKET_ADD --enable true</code></pre>  | 
+| Edit Support Case | As part of the cluster creation automation, support cases are updated to provision the cluster infrastructure. | Assign access to account management services > Support Center > Administrator|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission TICKET_EDIT --enable true</code></pre>  |
+| View Support Case | As part of the cluster creation automation, support cases are used to provision the cluster infrastructure. | Assign access to account management services > Support Center > Administrator|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission TICKET_VIEW --enable true</code></pre>  |
+{: class="simple-tab-table"}
+{: caption="Required classic infrastructure permissions" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Create clusters"}
+{: tab-group="Classic infrastructure permissions"}
 
-<table>
-<caption>Commonly required infrastructure permissions for {{site.data.keyword.containerlong_notm}}</caption>
-<thead>
-  <th>Common tasks in {{site.data.keyword.containerlong_notm}}</th>
-  <th>Required infrastructure permissions by category</th>
-</thead>
-<tbody>
-<tr>
-<td>
-  <strong>Minimum permissions</strong>: <ul>
-  <li>Create a cluster.</li></ul></td>
-<td>
-<strong>Account</strong>: <ul>
-<li>Add Server</li></ul>
-  <strong>Devices</strong>:<ul>
-  <li>For bare metal worker nodes: View Hardware Details</li>
-  <li>IPMI Remote Management</li>
-  <li>OS Reloads and Rescue Kernel</li>
-  <li>For VM worker nodes: View Virtual Server Details</li></ul></td>
-</tr>
-<tr>
-<td>
-<strong>Cluster Administration</strong>:<ul>
-  <li>Create, update, and delete clusters.</li>
-  <li>Add, reload, and reboot worker nodes.</li>
-  <li>View VLANs.</li>
-  <li>Create subnets.</li>
-  <li>Deploy pods and load balancer services.</li></ul>
-  </td><td>
-<strong>Account</strong>:<ul>
-  <li>Add Server</li>
-  <li>Cancel Server</li></ul>
-<strong>Devices</strong>:<ul>
-  <li>For bare metal worker nodes: View Hardware Details</li>
-  <li>IPMI Remote Management</li>
-  <li>OS Reloads and Rescue Kernel</li>
-  <li>For VM worker nodes: View Virtual Server Details</li></ul>
-<strong>Network</strong>:<ul>
-  <li>Add Compute with Public Network Port</li></ul>
-<p class="important">You must also assign the user the ability to manage support cases. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).</p>
-</td>
-</tr>
-<tr>
-<td>
-  <strong>Storage</strong>: <ul>
-  <li>Create persistent volume claims to provision persistent volumes.</li>
-  <li>Create and manage storage infrastructure resources.</li></ul></td>
-<td>
-<strong>Account</strong>:<ul>
-  <li>Add/Upgrade Storage (StorageLayer)</li></ul>
-<strong>Services</strong>:<ul>
-  <li>Storage Manage</li></ul></td>
-</tr>
-<tr>
-<td>
-  <strong>Private Networking</strong>: <ul>
-  <li>Manage private VLANs for in-cluster networking.</li>
-  <li>Set up VPN connectivity to private networks.</li></ul></td>
-<td>
-  <strong>Network</strong>:<ul>
-  <li>Manage Network Subnet Routes</li></ul></td>
-</tr>
-<tr>
-<td>
-  <strong>Public Networking</strong>:<ul>
-  <li>Set up public load balancer or Ingress networking to expose apps.</li></ul></td>
-<td>
-<strong>Devices</strong>:<ul>
-<li>Manage Port Control</li>
-  <li>Edit Hostname/Domain</li></ul>
-<strong>Network</strong>:<ul>
-  <li>Add IP Addresses</li>
-  <li>Manage Network Subnet Routes</li>
-  <li>Add Compute with Public Network Port</li></ul>
-<strong>Services</strong>:<ul>
-  <li>Manage DNS</li>
-  <li>View Certificates (SSL)</li>
-  <li>Manage Certificates (SSL)</li></ul></td>
-</tr>
-</tbody>
-</table>
+| Permission | Description | IAM Assign Policy Console | CLI |
+|:-----------------|:-----------------|:---------------|:----|
+| Access All Virtual | Designate access to all VM worker nodes. Without this permission, a user who creates one cluster might not be able to view the VM worker nodes of another cluster even if the user has IAM access to both clusters. | Classic infrastructure > Devices > Check All virtual servers and Auto virtual server access|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission ACCESS_ALL_GUEST --enable true</code></pre> |
+| Access All Hardware | Designate access to all bare metal worker nodes.  Without this permission, a user who creates one cluster might not be able to view the bare metal worker nodes of another cluster even if the user has IAM access to both clusters. | Classic infrastructure > Devices > Check All virtual servers and Auto virtual server access|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission ACCESS_ALL_HARDWARE --enable true</code></pre> |
+| Add Compute with Public Network Port | Let worker nodes have a port that can be accessible on the public network. | Classic infrastructure > Permissions > Network|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission PUBLIC_NETWORK_COMPUTE --enable true</code></pre> |
+| Manage DNS | Set up public load balancer or Ingress networking to expose apps. | Classic infrastructure > Permissions > Services|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission DNS_MANAGE --enable true</code></pre> |
+| Edit Hostname/Domain | Set up public load balancer or Ingress networking to expose apps. | Classic infrastructure > Permissions > Devices|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission HOSTNAME_EDIT --enable true</code></pre> | 
+| Add IP Addresses | Add IP addresses to public or private subnets that are used for cluster load balancing. | Classic infrastructure > Permissions > Network|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission IP_ADD --enable true</code></pre> |
+| Manage Network Subnet Routes | Manage public and private VLANs and subnets that are used for cluster load balancing. | Classic infrastructure > Permissions > Network|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission NETWORK_ROUTE_MANAGE --enable true</code></pre> |
+| Manage Port Control | Manage ports that are used for app load balancing. | Classic infrastructure > Permissions > Devices|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission PORT_CONTROL --enable true</code></pre> |
+| Manage Certificates (SSL) | Set up certificates that are used for cluster load balancing. | Classic infrastructure > Permissions > Services|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission SECURITY_CERTIFICATE_MANAGE --enable true</code></pre>  |
+| View Certificates (SSL) | Set up certificates that are used for cluster load balancing. | Classic infrastructure > Permissions > Services|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission SECURITY_CERTIFICATE_MANAGE --enable true</code></pre> |
+| Add/Upgrade Storage (StorageLayer) | Create {{site.data.keyword.cloud_notm}} File or Block storage instances to attach as volumes to your apps for persistent storage of data. | Classic infrastructure > Permissions > Account|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission ADD_SERVICE_STORAGE --enable true</code></pre>  |
+| Storage Manage | Manage {{site.data.keyword.cloud_notm}} File or Block storage instances that are attached as volumes to your apps for persistent storage of data. | Classic infrastructure > Permissions > Services|<pre class="pre"><code>{[bx}} sl user permission-edit &lt;user_id&gt; --permission NAS_MANAGE --enable true</code></pre> |
+{: class="simple-tab-table"}
+{: caption="Suggested classic infrastructure permissions" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Other common use cases"}
+{: tab-group="Classic infrastructure permissions"}

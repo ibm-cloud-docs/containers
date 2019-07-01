@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-06-26"
 
 keywords: kubernetes, iks
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Configuring subnets for clusters
+# Configuring subnets and IP addresses for clusters
 {: #subnets}
 
 Change the pool of available portable public or private IP addresses for network load balancer (NLB) services by adding subnets to your Kubernetes cluster.
@@ -36,6 +36,7 @@ Change the pool of available portable public or private IP addresses for network
 
 Understand the basic concepts of networking in {{site.data.keyword.containerlong_notm}} clusters. {{site.data.keyword.containerlong_notm}} uses VLANs, subnets, and IP addresses to give cluster components network connectivity.
 {: shortdesc}
+
 
 ### VLANs
 {: #basics_vlans}
@@ -164,7 +165,7 @@ Before you begin:
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.13.6      Default
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.13.7      Default
     ```
     {: screen}
 
@@ -179,7 +180,7 @@ Before you begin:
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone     Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.13.6
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.13.7
     ```
     {: screen}
 
@@ -483,6 +484,9 @@ To add a subnet from an on-premises network:
 If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 Review the following scenarios in which VLAN spanning is also required.
+
+The VLAN spanning option is disabled for clusters that are created in a VRF-enabled account. When VRF is enabled, all VLANs in the account can automatically communicate with each other over the private network. For more information, see [Planning your cluster network setup: Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker).
+{: note}
 
 ### Enabling routing between primary subnets on the same VLAN
 {: #vlan-spanning}

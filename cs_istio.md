@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-20"
+lastupdated: "2019-06-28"
 
 ---
 
@@ -777,6 +777,14 @@ In the following steps, you set up a host name through which your users can acce
 
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/).
 {: tip}
+
+<br />
+
+
+## Securing Istio-managed apps with {{site.data.keyword.appid_short_notm}}
+{: #app-id}
+
+By using the App Identity and Access adapter, you can centralize all of your identity management with a single instance of {{site.data.keyword.appid_full}}. The adapter can be configured to work with any OIDC compliant identity provider, which enables the adapter to control authentication and authorization policies in all environments including frontend and backend applications. To use this feature, you do not need to make changes to your code or redeploy your app. To get started, see [Securing multicloud apps with Istio](/docs/services/appid?topic=appid-istio-adapter) in the {{site.data.keyword.appid_short_notm}} documentation.
 
 <br />
 

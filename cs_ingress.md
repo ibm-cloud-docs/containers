@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1870,3 +1870,5 @@ Your apps are now exposed by your custom Ingress controller. To restore the IBM-
 ibmcloud ks alb-configure --albID <alb ID> --enable
 ```
 {: pre}
+
+

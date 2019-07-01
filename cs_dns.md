@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-27"
 
 ---
 
@@ -163,7 +163,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
           namespace: kube-system
         data:
           stubDomains: |
-          {"abc.com": ["1.2.3.4"]}
+            {"abc.com": ["1.2.3.4"]}
         ```
         {: screen}
 

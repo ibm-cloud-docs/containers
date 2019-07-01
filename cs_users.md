@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-06-28"
 
 keywords: kubernetes, iks
 
@@ -46,6 +46,7 @@ As you develop your plan to manage user access, consider the following general s
 3.  [Scope user access to cluster instances, Kubernetes namespaces, or resource groups](#resource_groups)
 
 After you understand how roles, users, and resources in your account can be managed, check out [Setting up access to your cluster](#access-checklist) for a checklist of how to configure access.
+
 
 ### Pick the right access policy and role for your users
 {: #access_roles}
@@ -1063,33 +1064,30 @@ For compliance, security, or billing reasons, you might not want to give the **S
 
 For example, if your account is not VRF-enabled, your IBM Cloud infrastructure (SoftLayer) account owner must turn on VLAN spanning. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. For more information, see [VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-subnets#basics_segmentation).
 
-<p class="tip">Already set infrastructure credentials by using the `ibmcloud ks credential-set` command? You can check whether the credentials are missing suggested or required infrastructure permissions by running the [`ibmcloud ks infra-permissions-get --region <region>` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get). In the output, if any suggested or required permissions are missing, you can use the steps in this section to assign the required access.</p>
+Before you begin:
+*   Make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
+*   Review the [required and suggested classic infrastructure permissions](/docs/containers?topic=containers-access_reference#infra). 
 
-Before you begin, make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
+You can grant classic infrastructure access through the [console](#infra_console) or [CLI](#infra_cli).
+
+### Assigning infrastructure access through the console
+{: #infra_console}
 
 1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com). From the menu bar, select **Manage > Access (IAM)**.
-
 2. Click the **Users** page, and then click the name of the user that you want to set permissions for.
-
 3. Click the **Classic infrastructure** tab, and then click the **Permissions** tab.
-
 4. Customize the user's access. The permissions that users need depend on what infrastructure resources they need to use. You have two options for assigning access:
     * Use the **Permission sets** drop-down list to assign one of the following predefined roles. After selecting a role, click **Set**.
         * **View Only** gives the user permissions to view infrastructure details only.
         * **Basic User** gives the user some, but not all, infrastructure permissions.
         * **Super User** gives the user all infrastructure permissions.
     * Select individual permissions for each category. To review permissions that are needed to perform common tasks in {{site.data.keyword.containerlong_notm}}, see [User access permissions](/docs/containers?topic=containers-access_reference#infra).
-
 5.  Click **Save**.
-
 6.  In the **Device** tab, select the devices to grant access to.
-
     * In the **Select type** group, you can grant access to all bare metal, dedicated, and virtual servers so that users can work with all [machine types for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
     * In the **Enable future access** group, you can grant the user access to all future bare metal, dedicated, and virtual servers.
     * In the table of devices, make sure that the appropriate devices are selected.
-
 7. To save your changes, click **Set**.
-
 8. **Important**: If you are assigning permissions so that a user can manage clusters and worker nodes, you must assign the user access for working with support cases.
   1. Click the **Access policies** tab, and then click **Assign access**.
   2. Click the **Assign access to account management services** card.
@@ -1099,6 +1097,62 @@ Before you begin, make sure that you are the account owner or have **Super User*
 
 Downgrading permissions? The action can take a few minutes to complete.
 {: tip}
+
+### Assigning infrastructure access through the CLI
+{: #infra_cli}
+
+1.  Check if the credentials for classic infrastructure access for {{site.data.keyword.containerlong_notm}} in the region and resource group have any missing required or suggested permissions.
+    ```
+    ibmcloud ks infra-permissions-get --region <region>
+    ```
+    {: pre}
+    
+    Example output if classic infrastructure acccess is based on an API key.
+    ```
+    ...with infrastructure access set up by linked account API key.
+    ```
+    {: screen}
+    
+    Example output if classic infrastructure access is based on manually-set credentials.
+    ```
+    ...with infrastructure access set up by manually-set IaaS credentials.
+    ```
+    {: screen}
+    
+2.  Get the user whose classic infrastructure credentials are used.
+    *   **API key**: Check the API key that is used for the region and resource group of the cluster. Note the **Name** and **Email** of the API key owner in the output of the following command.
+        ```
+        ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    *  **Manually-set credentials**: Get the user name in the output of the following command.    
+        ```
+        ibmcloud ks credential-get --region <region>
+        ```
+        {: pre}
+3.  List the users in your classic infrastructure account and note the **id** of the user whose credentials are set manually or by the API key.
+    ```
+    ibmcloud sl user list
+    ```
+    {: pre}
+4.  List the current classic infrastructure permissions that the user has. Note the **KeyName** of the permission that you want to change.
+    ```
+    ibmcloud sl user permissions <user_id>
+    ```
+    {: pre}
+5.  Edit the permission of the user. For the `--enable` flag, enter `true` to assign the permission or `false` to remove the permission.
+    ```
+    ibmcloud sl user permission-edit <user_id> --permission <permission_keyname> --enable (true|false)
+    ```
+    {: pre}
+
+    To assign or remove user access to all permissions:
+    ```
+    ibmcloud sl user permission-edit <user_id> --permission ALL --enable (true|false)
+    ```
+    {: pre}
+    
+6.  For individual required or suggested permissions, see the [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra) table.
 
 <br />
 
