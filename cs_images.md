@@ -814,22 +814,24 @@ You can copy the image pull secret with registry token credentials that is autom
 5. [Deploy a container by using the `imagePullSecret`](#use_imagePullSecret) in your namespace.
 
 
-### Deprecated: Creating a token-based image pull secret to access images in other {{site.data.keyword.cloud_notm}} regions and accounts
+### Deprecated: Accessing token-authorized images in other {{site.data.keyword.cloud_notm}} regions and accounts
 {: #token_other_regions_accounts}
 
 To access images in other {{site.data.keyword.cloud_notm}} regions or accounts, you must create a registry token and save your credentials in an image pull secret.
 {: shortdesc}
 
-1.  If you do not have a token, [create a token for the registry that you want to access.](/docs/services/Registry?topic=registry-registry_access#registry_tokens_create)
-2.  List tokens in your {{site.data.keyword.cloud_notm}} account.
+Tokens that authorize access to `registry.<region>.bluemix.net` domains are deprecated. You can no longer create new tokens. Instead, create cluster image pull secrets that use [API key credentials](#imagePullSecret_migrate_api_key) to pull images from the `icr.io` registry domains.
+{: deprecated}
+
+1.  List tokens in your {{site.data.keyword.cloud_notm}} account.
 
     ```
     ibmcloud cr token-list
     ```
     {: pre}
 
-3.  Note the token ID that you want to use.
-4.  Retrieve the value for your token. Replace <em>&lt;token_ID&gt;</em> with the ID of the token that you retrieved in the previous step.
+2.  Note the token ID that you want to use.
+3.  Retrieve the value for your token. Replace <em>&lt;token_ID&gt;</em> with the ID of the token that you retrieved in the previous step.
 
     ```
     ibmcloud cr token-get <token_id>
@@ -838,7 +840,7 @@ To access images in other {{site.data.keyword.cloud_notm}} regions or accounts, 
 
     Your token value is displayed in the **Token** field of your CLI output.
 
-5.  Create the Kubernetes secret to store your token information.
+4.  Create the Kubernetes secret to store your token information.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -877,11 +879,11 @@ To access images in other {{site.data.keyword.cloud_notm}} regions or accounts, 
     </tr>
     </tbody></table>
 
-6.  Verify that the secret was created successfully. Replace <em>&lt;kubernetes_namespace&gt;</em> with the namespace where you created the image pull secret.
+5.  Verify that the secret was created successfully. Replace <em>&lt;kubernetes_namespace&gt;</em> with the namespace where you created the image pull secret.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
-7.  [Deploy a container by using the image pull secret](#use_imagePullSecret) in your namespace.
+6.  [Deploy a container by using the image pull secret](#use_imagePullSecret) in your namespace.
