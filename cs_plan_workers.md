@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-07-02"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -57,6 +57,8 @@ Select one of the following options to decide what type of worker pool you want.
 * [Physical machines (bare metal)](#bm)
 * [Software-defined storage (SDS) machines](#sds)
 
+
+
 ## Virtual machines
 {: #vm}
 
@@ -82,6 +84,8 @@ If your cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavor
 
 **What virtual machine flavors are available?**</br>
 Worker node flavors vary by zone. The following table includes the most recent version of a flavor, such as `x3c` Ubuntu 18 worker nodes flavors, as opposed to the older `x2c` Ubuntu 16 worker node flavors. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [bare metal](#bm) or [SDS](#sds) machine types.
+
+
 
 {: #vm-table}
 <table>
